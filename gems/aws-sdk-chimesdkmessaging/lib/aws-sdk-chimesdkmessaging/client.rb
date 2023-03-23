@@ -374,8 +374,8 @@ module Aws::ChimeSDKMessaging
     #
     # <note markdown="1"> Only administrators or channel moderators can associate a channel
     # flow. The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API
+    # call as the value in the header.
     #
     #  </note>
     #
@@ -407,10 +407,10 @@ module Aws::ChimeSDKMessaging
       req.send_request(options)
     end
 
-    # Adds a specified number of users to a channel.
+    # Adds a specified number of users and bots to a channel.
     #
     # @option params [required, String] :channel_arn
-    #   The ARN of the channel to which you're adding users.
+    #   The ARN of the channel to which you're adding users or bots.
     #
     # @option params [String] :type
     #   The membership type of a user, `DEFAULT` or `HIDDEN`. Default members
@@ -420,11 +420,13 @@ module Aws::ChimeSDKMessaging
     #   not returned. This is only supported by moderators.
     #
     # @option params [required, Array<String>] :member_arns
-    #   The `AppInstanceUserArn`s of the members you want to add to the
-    #   channel.
+    #   The ARNs of the members you want to add to the channel. Only
+    #   `AppInstanceUsers` and `AppInstanceBots` can be added as a channel
+    #   member.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @option params [String] :sub_channel_id
     #   The ID of the SubChannel in the request.
@@ -528,6 +530,7 @@ module Aws::ChimeSDKMessaging
     #         },
     #       },
     #       sub_channel_id: "SubChannelId",
+    #       content_type: "ContentType",
     #     },
     #   })
     #
@@ -549,9 +552,9 @@ module Aws::ChimeSDKMessaging
     #
     # **Restriction**: You can't change a channel's privacy.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     #  </note>
     #
@@ -585,7 +588,8 @@ module Aws::ChimeSDKMessaging
     #   The tags for the creation request.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @option params [String] :channel_id
     #   The ID of the channel in the request.
@@ -600,6 +604,10 @@ module Aws::ChimeSDKMessaging
     #   The attributes required to configure and create an elastic channel. An
     #   elastic channel can support a maximum of 1-million users, excluding
     #   moderators.
+    #
+    # @option params [Types::ExpirationSettings] :expiration_settings
+    #   Settings that control the interval after which the channel is
+    #   automatically deleted.
     #
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -629,6 +637,10 @@ module Aws::ChimeSDKMessaging
     #       target_memberships_per_sub_channel: 1, # required
     #       minimum_membership_percentage: 1, # required
     #     },
+    #     expiration_settings: {
+    #       expiration_days: 1, # required
+    #       expiration_criterion: "CREATED_TIMESTAMP", # required, accepts CREATED_TIMESTAMP, LAST_MESSAGE_TIMESTAMP
+    #     },
     #   })
     #
     # @example Response structure
@@ -652,9 +664,9 @@ module Aws::ChimeSDKMessaging
     # If you ban a user who is already part of a channel, that user is
     # automatically kicked from the channel.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     #  </note>
     #
@@ -665,7 +677,8 @@ module Aws::ChimeSDKMessaging
     #   The `AppInstanceUserArn` of the member being banned.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @return [Types::CreateChannelBanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -778,8 +791,9 @@ module Aws::ChimeSDKMessaging
       req.send_request(options)
     end
 
-    # Adds a user to a channel. The `InvitedBy` field in `ChannelMembership`
-    # is derived from the request header. A channel member can:
+    # Adds a member to a channel. The `InvitedBy` field in
+    # `ChannelMembership` is derived from the request header. A channel
+    # member can:
     #
     # * List messages
     #
@@ -798,9 +812,9 @@ module Aws::ChimeSDKMessaging
     #
     # * Private Channels: You must be a member to list or send messages.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUserArn` or `AppInstanceBot` that makes the API call
+    # as the value in the header.
     #
     #  </note>
     #
@@ -818,7 +832,8 @@ module Aws::ChimeSDKMessaging
     #   not returned. This is only supported by moderators.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @option params [String] :sub_channel_id
     #   The ID of the SubChannel in the request.
@@ -872,9 +887,9 @@ module Aws::ChimeSDKMessaging
     #
     # * List messages in the channel.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot`of the user that makes the
+    # API call as the value in the header.
     #
     #  </note>
     #
@@ -885,7 +900,8 @@ module Aws::ChimeSDKMessaging
     #   The `AppInstanceUserArn` of the moderator.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @return [Types::CreateChannelModeratorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -918,9 +934,9 @@ module Aws::ChimeSDKMessaging
     # Immediately makes a channel and its memberships inaccessible and marks
     # them for deletion. This is an irreversible process.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUserArn` or `AppInstanceBot` that makes the API call
+    # as the value in the header.
     #
     #  </note>
     #
@@ -928,7 +944,8 @@ module Aws::ChimeSDKMessaging
     #   The ARN of the channel being deleted.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @option params [String] :sub_channel_id
     #   The ID of the SubChannel in the request.
@@ -952,11 +969,11 @@ module Aws::ChimeSDKMessaging
       req.send_request(options)
     end
 
-    # Removes a user from a channel's ban list.
+    # Removes a member from a channel's ban list.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     #  </note>
     #
@@ -967,7 +984,8 @@ module Aws::ChimeSDKMessaging
     #   The ARN of the `AppInstanceUser` that you want to reinstate.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1035,7 +1053,8 @@ module Aws::ChimeSDKMessaging
     #   channel.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @option params [String] :sub_channel_id
     #   The ID of the SubChannel in the request.
@@ -1068,9 +1087,9 @@ module Aws::ChimeSDKMessaging
     # Deletion makes messages inaccessible immediately. A background process
     # deletes any revisions created by `UpdateChannelMessage`.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     #  </note>
     #
@@ -1081,7 +1100,8 @@ module Aws::ChimeSDKMessaging
     #   The ID of the message being deleted.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @option params [String] :sub_channel_id
     #   The ID of the SubChannel in the request.
@@ -1113,9 +1133,9 @@ module Aws::ChimeSDKMessaging
 
     # Deletes a channel moderator.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     #  </note>
     #
@@ -1126,7 +1146,8 @@ module Aws::ChimeSDKMessaging
     #   The `AppInstanceUserArn` of the moderator being deleted.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1178,9 +1199,9 @@ module Aws::ChimeSDKMessaging
     # Returns the full details of a channel in an Amazon Chime
     # `AppInstance`.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     #  </note>
     #
@@ -1188,7 +1209,8 @@ module Aws::ChimeSDKMessaging
     #   The ARN of the channel.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @return [Types::DescribeChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1217,6 +1239,8 @@ module Aws::ChimeSDKMessaging
     #   resp.channel.elastic_channel_configuration.maximum_sub_channels #=> Integer
     #   resp.channel.elastic_channel_configuration.target_memberships_per_sub_channel #=> Integer
     #   resp.channel.elastic_channel_configuration.minimum_membership_percentage #=> Integer
+    #   resp.channel.expiration_settings.expiration_days #=> Integer
+    #   resp.channel.expiration_settings.expiration_criterion #=> String, one of "CREATED_TIMESTAMP", "LAST_MESSAGE_TIMESTAMP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/DescribeChannel AWS API Documentation
     #
@@ -1229,9 +1253,9 @@ module Aws::ChimeSDKMessaging
 
     # Returns the full details of a channel ban.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     #  </note>
     #
@@ -1242,7 +1266,8 @@ module Aws::ChimeSDKMessaging
     #   The `AppInstanceUserArn` of the member being banned.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @return [Types::DescribeChannelBanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1314,9 +1339,9 @@ module Aws::ChimeSDKMessaging
 
     # Returns the full details of a user's channel membership.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     #  </note>
     #
@@ -1327,7 +1352,8 @@ module Aws::ChimeSDKMessaging
     #   The `AppInstanceUserArn` of the member.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @option params [String] :sub_channel_id
     #   The ID of the SubChannel in the request. The response contains an
@@ -1372,11 +1398,11 @@ module Aws::ChimeSDKMessaging
     end
 
     # Returns the details of a channel based on the membership of the
-    # specified `AppInstanceUser`.
+    # specified `AppInstanceUser` or `AppInstanceBot`.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     #  </note>
     #
@@ -1384,10 +1410,11 @@ module Aws::ChimeSDKMessaging
     #   The ARN of the channel to which the user belongs.
     #
     # @option params [required, String] :app_instance_user_arn
-    #   The ARN of the user in a channel.
+    #   The ARN of the user or bot in a channel.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @return [Types::DescribeChannelMembershipForAppInstanceUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1423,11 +1450,11 @@ module Aws::ChimeSDKMessaging
     end
 
     # Returns the full details of a channel moderated by the specified
-    # `AppInstanceUser`.
+    # `AppInstanceUser` or `AppInstanceBot`.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     #  </note>
     #
@@ -1435,10 +1462,11 @@ module Aws::ChimeSDKMessaging
     #   The ARN of the moderated channel.
     #
     # @option params [required, String] :app_instance_user_arn
-    #   The ARN of the `AppInstanceUser` in the moderated channel.
+    #   The ARN of the user or bot in the moderated channel.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @return [Types::DescribeChannelModeratedByAppInstanceUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1485,7 +1513,8 @@ module Aws::ChimeSDKMessaging
     #   The `AppInstanceUserArn` of the channel moderator.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @return [Types::DescribeChannelModeratorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1522,9 +1551,11 @@ module Aws::ChimeSDKMessaging
     # channel flow processor.
     #
     # <note markdown="1"> Only administrators or channel moderators can disassociate a channel
-    # flow. The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # flow.
+    #
+    #  The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     #  </note>
     #
@@ -1556,13 +1587,19 @@ module Aws::ChimeSDKMessaging
       req.send_request(options)
     end
 
-    # Gets the membership preferences of an `AppInstanceUser` for the
-    # specified channel. The `AppInstanceUser` must be a member of the
-    # channel. Only the `AppInstanceUser` who owns the membership can
-    # retrieve preferences. Users in the `AppInstanceAdmin` and channel
-    # moderator roles can't retrieve preferences for other users. Banned
-    # users can't retrieve membership preferences for the channel from
-    # which they are banned.
+    # Gets the membership preferences of an `AppInstanceUser` or
+    # `AppInstanceBot` for the specified channel. A user or a bot must be a
+    # member of the channel and own the membership to be able to retrieve
+    # membership preferences. Users or bots in the `AppInstanceAdmin` and
+    # channel moderator roles can't retrieve preferences for other users or
+    # bots. Banned users or bots can't retrieve membership preferences for
+    # the channel from which they are banned.
+    #
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
+    #
+    #  </note>
     #
     # @option params [required, String] :channel_arn
     #   The ARN of the channel.
@@ -1571,7 +1608,8 @@ module Aws::ChimeSDKMessaging
     #   The `AppInstanceUserArn` of the member retrieving the preferences.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserARN` of the user making the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @return [Types::GetChannelMembershipPreferencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1606,9 +1644,9 @@ module Aws::ChimeSDKMessaging
 
     # Gets the full details of a channel message.
     #
-    # <note markdown="1"> The x-amz-chime-bearer request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     #  </note>
     #
@@ -1619,7 +1657,8 @@ module Aws::ChimeSDKMessaging
     #   The ID of the message.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @option params [String] :sub_channel_id
     #   The ID of the SubChannel in the request.
@@ -1662,6 +1701,7 @@ module Aws::ChimeSDKMessaging
     #   resp.channel_message.message_attributes["MessageAttributeName"].string_values #=> Array
     #   resp.channel_message.message_attributes["MessageAttributeName"].string_values[0] #=> String
     #   resp.channel_message.sub_channel_id #=> String
+    #   resp.channel_message.content_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/GetChannelMessage AWS API Documentation
     #
@@ -1701,9 +1741,9 @@ module Aws::ChimeSDKMessaging
     #
     # * Only the message sender can invoke this API.
     #
-    # * The `x-amz-chime-bearer` request header is mandatory. Use the
-    #   `AppInstanceUserArn` of the user that makes the API call as the
-    #   value in the header
+    # * The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    #   the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    #   the value in the header.
     #
     #  </note>
     #
@@ -1806,11 +1846,11 @@ module Aws::ChimeSDKMessaging
       req.send_request(options)
     end
 
-    # Lists all the users banned from a particular channel.
+    # Lists all the users and bots banned from a particular channel.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     #  </note>
     #
@@ -1825,7 +1865,8 @@ module Aws::ChimeSDKMessaging
     #   returned.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @return [Types::ListChannelBansResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1913,9 +1954,9 @@ module Aws::ChimeSDKMessaging
 
     # Lists all channel memberships in a channel.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     #  </note>
     #
@@ -1943,7 +1984,8 @@ module Aws::ChimeSDKMessaging
     #   memberships are returned.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @option params [String] :sub_channel_id
     #   The ID of the SubChannel in the request.
@@ -1989,18 +2031,18 @@ module Aws::ChimeSDKMessaging
       req.send_request(options)
     end
 
-    # Lists all channels that a particular `AppInstanceUser` is a part of.
-    # Only an `AppInstanceAdmin` can call the API with a user ARN that is
-    # not their own.
+    # Lists all channels that anr `AppInstanceUser` or `AppInstanceBot` is a
+    # part of. Only an `AppInstanceAdmin` can call the API with a user ARN
+    # that is not their own.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     #  </note>
     #
     # @option params [String] :app_instance_user_arn
-    #   The ARN of the `AppInstanceUser`s
+    #   The ARN of the user or bot.
     #
     # @option params [Integer] :max_results
     #   The maximum number of users that you want returned.
@@ -2010,7 +2052,8 @@ module Aws::ChimeSDKMessaging
     #   channel memberships is reached.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @return [Types::ListChannelMembershipsForAppInstanceUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2059,9 +2102,9 @@ module Aws::ChimeSDKMessaging
     # redacted, not deleted. Deleted messages do not appear in the results.
     # This action always returns the latest version of an edited message.
     #
-    #  Also, the x-amz-chime-bearer request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    #  Also, the `x-amz-chime-bearer` request header is mandatory. Use the
+    # ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API
+    # call as the value in the header.
     #
     #  </note>
     #
@@ -2086,7 +2129,8 @@ module Aws::ChimeSDKMessaging
     #   are returned.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @option params [String] :sub_channel_id
     #   The ID of the SubChannel in the request.
@@ -2138,6 +2182,7 @@ module Aws::ChimeSDKMessaging
     #   resp.channel_messages[0].message_attributes #=> Hash
     #   resp.channel_messages[0].message_attributes["MessageAttributeName"].string_values #=> Array
     #   resp.channel_messages[0].message_attributes["MessageAttributeName"].string_values[0] #=> String
+    #   resp.channel_messages[0].content_type #=> String
     #   resp.sub_channel_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ListChannelMessages AWS API Documentation
@@ -2151,9 +2196,9 @@ module Aws::ChimeSDKMessaging
 
     # Lists all the moderators for a channel.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     #  </note>
     #
@@ -2168,7 +2213,8 @@ module Aws::ChimeSDKMessaging
     #   are returned.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @return [Types::ListChannelModeratorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2215,9 +2261,9 @@ module Aws::ChimeSDKMessaging
     # * Only an `AppInstanceAdmin` can set privacy = `PRIVATE` to list the
     #   private channels in an account.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     #  </note>
     #
@@ -2237,7 +2283,8 @@ module Aws::ChimeSDKMessaging
     #   are returned.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @return [Types::ListChannelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2326,14 +2373,14 @@ module Aws::ChimeSDKMessaging
 
     # A list of the channels moderated by an `AppInstanceUser`.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     #  </note>
     #
     # @option params [String] :app_instance_user_arn
-    #   The ARN of the user in the moderated channel.
+    #   The ARN of the user or bot in the moderated channel.
     #
     # @option params [Integer] :max_results
     #   The maximum number of channels in the request.
@@ -2343,7 +2390,8 @@ module Aws::ChimeSDKMessaging
     #   channels moderated by the user is reached.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @return [Types::ListChannelsModeratedByAppInstanceUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2462,21 +2510,85 @@ module Aws::ChimeSDKMessaging
       req.send_request(options)
     end
 
-    # Sets the membership preferences of an `AppInstanceUser` for the
-    # specified channel. The `AppInstanceUser` must be a member of the
-    # channel. Only the `AppInstanceUser` who owns the membership can set
-    # preferences. Users in the `AppInstanceAdmin` and channel moderator
-    # roles can't set preferences for other users. Banned users can't set
-    # membership preferences for the channel from which they are banned.
+    # Sets the number of days before the channel is automatically deleted.
+    #
+    # <note markdown="1"> * A background process deletes expired channels within 6 hours of
+    #   expiration. Actual deletion times may vary.
+    #
+    # * Expired channels that have not yet been deleted appear as active,
+    #   and you can update their expiration settings. The system honors the
+    #   new settings.
+    #
+    # * The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    #   the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    #   the value in the header.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel.
+    #
+    # @option params [String] :chime_bearer
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
+    #
+    # @option params [Types::ExpirationSettings] :expiration_settings
+    #   Settings that control the interval after which a channel is deleted.
+    #
+    # @return [Types::PutChannelExpirationSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutChannelExpirationSettingsResponse#channel_arn #channel_arn} => String
+    #   * {Types::PutChannelExpirationSettingsResponse#expiration_settings #expiration_settings} => Types::ExpirationSettings
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_channel_expiration_settings({
+    #     channel_arn: "ChimeArn", # required
+    #     chime_bearer: "ChimeArn",
+    #     expiration_settings: {
+    #       expiration_days: 1, # required
+    #       expiration_criterion: "CREATED_TIMESTAMP", # required, accepts CREATED_TIMESTAMP, LAST_MESSAGE_TIMESTAMP
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_arn #=> String
+    #   resp.expiration_settings.expiration_days #=> Integer
+    #   resp.expiration_settings.expiration_criterion #=> String, one of "CREATED_TIMESTAMP", "LAST_MESSAGE_TIMESTAMP"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/PutChannelExpirationSettings AWS API Documentation
+    #
+    # @overload put_channel_expiration_settings(params = {})
+    # @param [Hash] params ({})
+    def put_channel_expiration_settings(params = {}, options = {})
+      req = build_request(:put_channel_expiration_settings, params)
+      req.send_request(options)
+    end
+
+    # Sets the membership preferences of an `AppInstanceUser` or
+    # `AppIntanceBot` for the specified channel. The user or bot must be a
+    # member of the channel. Only the user or bot who owns the membership
+    # can set preferences. Users or bots in the `AppInstanceAdmin` and
+    # channel moderator roles can't set preferences for other users or
+    # users. Banned users or bots can't set membership preferences for the
+    # channel from which they are banned.
+    #
+    # <note markdown="1"> The x-amz-chime-bearer request header is mandatory. Use the ARN of an
+    # `AppInstanceUser` or `AppInstanceBot` that makes the API call as the
+    # value in the header.
+    #
+    #  </note>
     #
     # @option params [required, String] :channel_arn
     #   The ARN of the channel.
     #
     # @option params [required, String] :member_arn
-    #   The `AppInstanceUserArn` of the member setting the preferences.
+    #   The ARN of the member setting the preferences.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserARN` of the user making the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @option params [required, Types::ChannelMembershipPreferences] :preferences
     #   The channel membership preferences of an `AppInstanceUser` .
@@ -2567,9 +2679,9 @@ module Aws::ChimeSDKMessaging
     # back end, but the action returns null content, and the state shows as
     # redacted.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     #  </note>
     #
@@ -2581,7 +2693,8 @@ module Aws::ChimeSDKMessaging
     #   The ID of the message being redacted.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @option params [String] :sub_channel_id
     #   The ID of the SubChannel in the request.
@@ -2616,9 +2729,13 @@ module Aws::ChimeSDKMessaging
       req.send_request(options)
     end
 
-    # Allows `ChimeBearer` to search channels by channel members.
-    # AppInstanceUsers can search across the channels that they belong to.
-    # AppInstanceAdmins can search across all channels.
+    # Allows the `ChimeBearer` to search channels by channel members. Users
+    # or bots can search across the channels that they belong to. Users in
+    # the `AppInstanceAdmin` role can search across all channels.
+    #
+    # The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     # @option params [String] :chime_bearer
     #   The `AppInstanceUserArn` of the user making the API call.
@@ -2677,9 +2794,9 @@ module Aws::ChimeSDKMessaging
 
     # Sends a message to a particular channel that the member is a part of.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     #  Also, `STANDARD` messages can contain 4KB of data and the 1KB of
     # metadata. `CONTROL` messages can contain 30 bytes of data and no
@@ -2710,7 +2827,8 @@ module Aws::ChimeSDKMessaging
     #   not need to pass this option.**
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @option params [Types::PushNotificationConfiguration] :push_notification
     #   The push notification configuration of the message.
@@ -2721,6 +2839,9 @@ module Aws::ChimeSDKMessaging
     #
     # @option params [String] :sub_channel_id
     #   The ID of the SubChannel in the request.
+    #
+    # @option params [String] :content_type
+    #   The content type of the channel message.
     #
     # @return [Types::SendChannelMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2750,6 +2871,7 @@ module Aws::ChimeSDKMessaging
     #       },
     #     },
     #     sub_channel_id: "SubChannelId",
+    #     content_type: "ContentType",
     #   })
     #
     # @example Response structure
@@ -2832,9 +2954,9 @@ module Aws::ChimeSDKMessaging
     #
     # **Restriction**: You can't change a channel's privacy.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     #  </note>
     #
@@ -2851,7 +2973,8 @@ module Aws::ChimeSDKMessaging
     #   The metadata for the update request.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2930,9 +3053,9 @@ module Aws::ChimeSDKMessaging
 
     # Updates the content of a message.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     #  </note>
     #
@@ -2942,14 +3065,15 @@ module Aws::ChimeSDKMessaging
     # @option params [required, String] :message_id
     #   The ID string of the message being updated.
     #
-    # @option params [String] :content
+    # @option params [required, String] :content
     #   The content of the message being updated.
     #
     # @option params [String] :metadata
     #   The metadata of the message being updated.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @option params [String] :sub_channel_id
     #   The ID of the SubChannel in the request.
@@ -2958,6 +3082,9 @@ module Aws::ChimeSDKMessaging
     #   belongs to.
     #
     #    </note>
+    #
+    # @option params [String] :content_type
+    #   The content type of the channel message.
     #
     # @return [Types::UpdateChannelMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2971,10 +3098,11 @@ module Aws::ChimeSDKMessaging
     #   resp = client.update_channel_message({
     #     channel_arn: "ChimeArn", # required
     #     message_id: "MessageId", # required
-    #     content: "Content",
+    #     content: "NonEmptyContent", # required
     #     metadata: "Metadata",
     #     chime_bearer: "ChimeArn", # required
     #     sub_channel_id: "SubChannelId",
+    #     content_type: "ContentType",
     #   })
     #
     # @example Response structure
@@ -2996,9 +3124,9 @@ module Aws::ChimeSDKMessaging
 
     # The details of the time when a user last read messages in a channel.
     #
-    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
-    # `AppInstanceUserArn` of the user that makes the API call as the value
-    # in the header.
+    # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the ARN of
+    # the `AppInstanceUser` or `AppInstanceBot` that makes the API call as
+    # the value in the header.
     #
     #  </note>
     #
@@ -3006,7 +3134,8 @@ module Aws::ChimeSDKMessaging
     #   The ARN of the channel.
     #
     # @option params [required, String] :chime_bearer
-    #   The `AppInstanceUserArn` of the user that makes the API call.
+    #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
+    #   API call.
     #
     # @option params [String] :sub_channel_id
     #   The ID of the SubChannel in the request.
@@ -3051,7 +3180,7 @@ module Aws::ChimeSDKMessaging
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmessaging'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

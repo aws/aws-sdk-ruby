@@ -382,13 +382,14 @@ module Aws::ChimeSDKIdentity
     #   The metadata of the `AppInstance`. Limited to a 1KB string in UTF-8.
     #
     # @option params [required, String] :client_request_token
-    #   The `ClientRequestToken` of the `AppInstance`.
+    #   The unique ID of the request. Use different tokens to create different
+    #   `AppInstances`.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Tags assigned to the `AppInstanceUser`.
+    #   Tags assigned to the `AppInstance`.
     #
     # @return [Types::CreateAppInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -421,15 +422,16 @@ module Aws::ChimeSDKIdentity
       req.send_request(options)
     end
 
-    # Promotes an `AppInstanceUser` to an `AppInstanceAdmin`. The promoted
-    # user can perform the following actions.
+    # Promotes an `AppInstanceUser` or `AppInstanceBot` to an
+    # `AppInstanceAdmin`. The promoted entity can perform the following
+    # actions.
     #
     # * `ChannelModerator` actions across all channels in the `AppInstance`.
     #
     # * `DeleteChannelMessage` actions.
     #
-    # Only an `AppInstanceUser` can be promoted to an `AppInstanceAdmin`
-    # role.
+    # Only an `AppInstanceUser` and `AppInstanceBot` can be promoted to an
+    # `AppInstanceAdmin` role.
     #
     # @option params [required, String] :app_instance_admin_arn
     #   The ARN of the administrator of the current `AppInstance`.
@@ -464,6 +466,71 @@ module Aws::ChimeSDKIdentity
       req.send_request(options)
     end
 
+    # Creates a bot under an Amazon Chime `AppInstance`. The request
+    # consists of a unique `Configuration` and `Name` for that bot.
+    #
+    # @option params [required, String] :app_instance_arn
+    #   The ARN of the `AppInstance` request.
+    #
+    # @option params [String] :name
+    #   The user's name.
+    #
+    # @option params [String] :metadata
+    #   The request metadata. Limited to a 1KB string in UTF-8.
+    #
+    # @option params [required, String] :client_request_token
+    #   The unique ID for the client making the request. Use different tokens
+    #   for different `AppInstanceBots`.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags assigned to the `AppInstanceBot`.
+    #
+    # @option params [required, Types::Configuration] :configuration
+    #   Configuration information about the Amazon Lex V2 V2 bot.
+    #
+    # @return [Types::CreateAppInstanceBotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAppInstanceBotResponse#app_instance_bot_arn #app_instance_bot_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_app_instance_bot({
+    #     app_instance_arn: "ChimeArn", # required
+    #     name: "ResourceName",
+    #     metadata: "Metadata",
+    #     client_request_token: "ClientRequestToken", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     configuration: { # required
+    #       lex: { # required
+    #         responds_to: "STANDARD_MESSAGES", # required, accepts STANDARD_MESSAGES
+    #         lex_bot_alias_arn: "LexBotAliasArn", # required
+    #         locale_id: "String", # required
+    #         welcome_intent: "LexIntentName",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instance_bot_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/CreateAppInstanceBot AWS API Documentation
+    #
+    # @overload create_app_instance_bot(params = {})
+    # @param [Hash] params ({})
+    def create_app_instance_bot(params = {}, options = {})
+      req = build_request(:create_app_instance_bot, params)
+      req.send_request(options)
+    end
+
     # Creates a user under an Amazon Chime `AppInstance`. The request
     # consists of a unique `appInstanceUserId` and `Name` for that user.
     #
@@ -480,13 +547,18 @@ module Aws::ChimeSDKIdentity
     #   The request's metadata. Limited to a 1KB string in UTF-8.
     #
     # @option params [required, String] :client_request_token
-    #   The token assigned to the user requesting an `AppInstance`.
+    #   The unique ID of the request. Use different tokens to request
+    #   additional `AppInstances`.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [Array<Types::Tag>] :tags
     #   Tags assigned to the `AppInstanceUser`.
+    #
+    # @option params [Types::ExpirationSettings] :expiration_settings
+    #   Settings that control the interval after which the `AppInstanceUser`
+    #   is automatically deleted.
     #
     # @return [Types::CreateAppInstanceUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -506,6 +578,10 @@ module Aws::ChimeSDKIdentity
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     expiration_settings: {
+    #       expiration_days: 1, # required
+    #       expiration_criterion: "CREATED_TIMESTAMP", # required, accepts CREATED_TIMESTAMP
+    #     },
     #   })
     #
     # @example Response structure
@@ -543,8 +619,8 @@ module Aws::ChimeSDKIdentity
       req.send_request(options)
     end
 
-    # Demotes an `AppInstanceAdmin` to an `AppInstanceUser`. This action
-    # does not delete the user.
+    # Demotes an `AppInstanceAdmin` to an `AppInstanceUser` or
+    # `AppInstanceBot`. This action does not delete the user.
     #
     # @option params [required, String] :app_instance_admin_arn
     #   The ARN of the `AppInstance`'s administrator.
@@ -567,6 +643,28 @@ module Aws::ChimeSDKIdentity
     # @param [Hash] params ({})
     def delete_app_instance_admin(params = {}, options = {})
       req = build_request(:delete_app_instance_admin, params)
+      req.send_request(options)
+    end
+
+    # Deletes an `AppInstanceBot`.
+    #
+    # @option params [required, String] :app_instance_bot_arn
+    #   The ARN of the `AppInstanceBot` being deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_app_instance_bot({
+    #     app_instance_bot_arn: "ChimeArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/DeleteAppInstanceBot AWS API Documentation
+    #
+    # @overload delete_app_instance_bot(params = {})
+    # @param [Hash] params ({})
+    def delete_app_instance_bot(params = {}, options = {})
+      req = build_request(:delete_app_instance_bot, params)
       req.send_request(options)
     end
 
@@ -685,6 +783,42 @@ module Aws::ChimeSDKIdentity
       req.send_request(options)
     end
 
+    # The `AppInstanceBot's` information.
+    #
+    # @option params [required, String] :app_instance_bot_arn
+    #   The ARN of the `AppInstanceBot`.
+    #
+    # @return [Types::DescribeAppInstanceBotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAppInstanceBotResponse#app_instance_bot #app_instance_bot} => Types::AppInstanceBot
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_app_instance_bot({
+    #     app_instance_bot_arn: "ChimeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instance_bot.app_instance_bot_arn #=> String
+    #   resp.app_instance_bot.name #=> String
+    #   resp.app_instance_bot.configuration.lex.responds_to #=> String, one of "STANDARD_MESSAGES"
+    #   resp.app_instance_bot.configuration.lex.lex_bot_alias_arn #=> String
+    #   resp.app_instance_bot.configuration.lex.locale_id #=> String
+    #   resp.app_instance_bot.configuration.lex.welcome_intent #=> String
+    #   resp.app_instance_bot.created_timestamp #=> Time
+    #   resp.app_instance_bot.last_updated_timestamp #=> Time
+    #   resp.app_instance_bot.metadata #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/DescribeAppInstanceBot AWS API Documentation
+    #
+    # @overload describe_app_instance_bot(params = {})
+    # @param [Hash] params ({})
+    def describe_app_instance_bot(params = {}, options = {})
+      req = build_request(:describe_app_instance_bot, params)
+      req.send_request(options)
+    end
+
     # Returns the full details of an `AppInstanceUser`.
     #
     # @option params [required, String] :app_instance_user_arn
@@ -707,6 +841,8 @@ module Aws::ChimeSDKIdentity
     #   resp.app_instance_user.metadata #=> String
     #   resp.app_instance_user.created_timestamp #=> Time
     #   resp.app_instance_user.last_updated_timestamp #=> Time
+    #   resp.app_instance_user.expiration_settings.expiration_days #=> Integer
+    #   resp.app_instance_user.expiration_settings.expiration_criterion #=> String, one of "CREATED_TIMESTAMP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/DescribeAppInstanceUser AWS API Documentation
     #
@@ -832,6 +968,52 @@ module Aws::ChimeSDKIdentity
     # @param [Hash] params ({})
     def list_app_instance_admins(params = {}, options = {})
       req = build_request(:list_app_instance_admins, params)
+      req.send_request(options)
+    end
+
+    # Lists all `AppInstanceBots` created under a single `AppInstance`.
+    #
+    # @option params [required, String] :app_instance_arn
+    #   The ARN of the `AppInstance`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of requests to return.
+    #
+    # @option params [String] :next_token
+    #   The token passed by previous API calls until all requested bots are
+    #   returned.
+    #
+    # @return [Types::ListAppInstanceBotsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAppInstanceBotsResponse#app_instance_arn #app_instance_arn} => String
+    #   * {Types::ListAppInstanceBotsResponse#app_instance_bots #app_instance_bots} => Array&lt;Types::AppInstanceBotSummary&gt;
+    #   * {Types::ListAppInstanceBotsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_app_instance_bots({
+    #     app_instance_arn: "ChimeArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instance_arn #=> String
+    #   resp.app_instance_bots #=> Array
+    #   resp.app_instance_bots[0].app_instance_bot_arn #=> String
+    #   resp.app_instance_bots[0].name #=> String
+    #   resp.app_instance_bots[0].metadata #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/ListAppInstanceBots AWS API Documentation
+    #
+    # @overload list_app_instance_bots(params = {})
+    # @param [Hash] params ({})
+    def list_app_instance_bots(params = {}, options = {})
+      req = build_request(:list_app_instance_bots, params)
       req.send_request(options)
     end
 
@@ -1040,6 +1222,55 @@ module Aws::ChimeSDKIdentity
       req.send_request(options)
     end
 
+    # Sets the number of days before the `AppInstanceUser` is automatically
+    # deleted.
+    #
+    # <note markdown="1"> A background process deletes expired `AppInstanceUsers` within 6 hours
+    # of expiration. Actual deletion times may vary.
+    #
+    #  Expired `AppInstanceUsers` that have not yet been deleted appear as
+    # active, and you can update their expiration settings. The system
+    # honors the new settings.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :app_instance_user_arn
+    #   The ARN of the `AppInstanceUser`.
+    #
+    # @option params [Types::ExpirationSettings] :expiration_settings
+    #   Settings that control the interval after which an `AppInstanceUser` is
+    #   automatically deleted.
+    #
+    # @return [Types::PutAppInstanceUserExpirationSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutAppInstanceUserExpirationSettingsResponse#app_instance_user_arn #app_instance_user_arn} => String
+    #   * {Types::PutAppInstanceUserExpirationSettingsResponse#expiration_settings #expiration_settings} => Types::ExpirationSettings
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_app_instance_user_expiration_settings({
+    #     app_instance_user_arn: "ChimeArn", # required
+    #     expiration_settings: {
+    #       expiration_days: 1, # required
+    #       expiration_criterion: "CREATED_TIMESTAMP", # required, accepts CREATED_TIMESTAMP
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instance_user_arn #=> String
+    #   resp.expiration_settings.expiration_days #=> Integer
+    #   resp.expiration_settings.expiration_criterion #=> String, one of "CREATED_TIMESTAMP"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/PutAppInstanceUserExpirationSettings AWS API Documentation
+    #
+    # @overload put_app_instance_user_expiration_settings(params = {})
+    # @param [Hash] params ({})
+    def put_app_instance_user_expiration_settings(params = {}, options = {})
+      req = build_request(:put_app_instance_user_expiration_settings, params)
+      req.send_request(options)
+    end
+
     # Registers an endpoint under an Amazon Chime `AppInstanceUser`. The
     # endpoint receives messages for a user. For push notifications, the
     # endpoint is a mobile device used to receive mobile push notifications
@@ -1070,7 +1301,8 @@ module Aws::ChimeSDKIdentity
     #   The attributes of an `Endpoint`.
     #
     # @option params [required, String] :client_request_token
-    #   The idempotency token for each client request.
+    #   The unique ID assigned to the request. Use different tokens to
+    #   register other endpoints.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1091,7 +1323,7 @@ module Aws::ChimeSDKIdentity
     #     app_instance_user_arn: "SensitiveChimeArn", # required
     #     name: "SensitiveString1600",
     #     type: "APNS", # required, accepts APNS, APNS_SANDBOX, GCM
-    #     resource_arn: "SensitiveChimeArn", # required
+    #     resource_arn: "ChimeArn", # required
     #     endpoint_attributes: { # required
     #       device_token: "NonEmptySensitiveString1600", # required
     #       voip_device_token: "NonEmptySensitiveString1600",
@@ -1209,6 +1441,42 @@ module Aws::ChimeSDKIdentity
       req.send_request(options)
     end
 
+    # Updates the name and metadata of an `AppInstanceBot`.
+    #
+    # @option params [required, String] :app_instance_bot_arn
+    #   The ARN of the `AppInstanceBot`.
+    #
+    # @option params [required, String] :name
+    #   The name of the `AppInstanceBot`.
+    #
+    # @option params [required, String] :metadata
+    #   The metadata of the `AppInstanceBot`.
+    #
+    # @return [Types::UpdateAppInstanceBotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAppInstanceBotResponse#app_instance_bot_arn #app_instance_bot_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_app_instance_bot({
+    #     app_instance_bot_arn: "ChimeArn", # required
+    #     name: "ResourceName", # required
+    #     metadata: "Metadata", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instance_bot_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/UpdateAppInstanceBot AWS API Documentation
+    #
+    # @overload update_app_instance_bot(params = {})
+    # @param [Hash] params ({})
+    def update_app_instance_bot(params = {}, options = {})
+      req = build_request(:update_app_instance_bot, params)
+      req.send_request(options)
+    end
+
     # Updates the details of an `AppInstanceUser`. You can update names and
     # metadata.
     #
@@ -1304,7 +1572,7 @@ module Aws::ChimeSDKIdentity
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkidentity'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

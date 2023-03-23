@@ -368,11 +368,15 @@ module Aws::Batch
 
     # @!group API Operations
 
-    # Cancels a job in an Batch job queue. Jobs that are in the `SUBMITTED`,
-    # `PENDING`, or `RUNNABLE` state are canceled. Jobs that progressed to
-    # the `STARTING` or `RUNNING` state aren't canceled. However, the API
-    # operation still succeeds, even if no job is canceled. These jobs must
-    # be terminated with the TerminateJob operation.
+    # Cancels a job in an Batch job queue. Jobs that are in the `SUBMITTED`
+    # or `PENDING` are canceled. A job in`RUNNABLE` remains in `RUNNABLE`
+    # until it reaches the head of the job queue. Then the job status is
+    # updated to `FAILED`.
+    #
+    # Jobs that progressed to the `STARTING` or `RUNNING` state aren't
+    # canceled. However, the API operation still succeeds, even if no job is
+    # canceled. These jobs must be terminated with the TerminateJob
+    # operation.
     #
     # @option params [required, String] :job_id
     #   The Batch job ID of the job to cancel.
@@ -544,8 +548,24 @@ module Aws::Batch
     #   If the state is `DISABLED`, then the Batch scheduler doesn't attempt
     #   to place jobs within the environment. Jobs in a `STARTING` or
     #   `RUNNING` state continue to progress normally. Managed compute
-    #   environments in the `DISABLED` state don't scale out. However, they
-    #   scale in to `minvCpus` value after instances become idle.
+    #   environments in the `DISABLED` state don't scale out.
+    #
+    #   <note markdown="1"> Compute environments in a `DISABLED` state may continue to incur
+    #   billing charges. To prevent additional charges, turn off and then
+    #   delete the compute environment. For more information, see [State][1]
+    #   in the *Batch User Guide*.
+    #
+    #    </note>
+    #
+    #   When an instance is idle, the instance scales down to the `minvCpus`
+    #   value. However, the instance size doesn't change. For example,
+    #   consider a `c5.8xlarge` instance with a `minvCpus` value of `4` and a
+    #   `desiredvCpus` value of `36`. This instance doesn't scale down to a
+    #   `c5.large` instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state
     #
     # @option params [Integer] :unmanagedv_cpus
     #   The maximum number of vCPUs for an unmanaged compute environment. This
@@ -1474,6 +1494,7 @@ module Aws::Batch
     #   resp.job_definitions[0].container_properties.secrets[0].value_from #=> String
     #   resp.job_definitions[0].container_properties.network_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_definitions[0].container_properties.fargate_platform_configuration.platform_version #=> String
+    #   resp.job_definitions[0].container_properties.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.job_definitions[0].timeout.attempt_duration_seconds #=> Integer
     #   resp.job_definitions[0].node_properties.num_nodes #=> Integer
     #   resp.job_definitions[0].node_properties.main_node #=> Integer
@@ -1538,6 +1559,7 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.secrets[0].value_from #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.network_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.fargate_platform_configuration.platform_version #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.job_definitions[0].tags #=> Hash
     #   resp.job_definitions[0].tags["TagKey"] #=> String
     #   resp.job_definitions[0].propagate_tags #=> Boolean
@@ -1577,6 +1599,8 @@ module Aws::Batch
     #   resp.job_definitions[0].eks_properties.pod_properties.volumes[0].empty_dir.size_limit #=> String
     #   resp.job_definitions[0].eks_properties.pod_properties.volumes[0].secret.secret_name #=> String
     #   resp.job_definitions[0].eks_properties.pod_properties.volumes[0].secret.optional #=> Boolean
+    #   resp.job_definitions[0].eks_properties.pod_properties.metadata.labels #=> Hash
+    #   resp.job_definitions[0].eks_properties.pod_properties.metadata.labels["String"] #=> String
     #   resp.job_definitions[0].container_orchestration_type #=> String, one of "ECS", "EKS"
     #   resp.next_token #=> String
     #
@@ -1861,6 +1885,7 @@ module Aws::Batch
     #   resp.jobs[0].container.secrets[0].value_from #=> String
     #   resp.jobs[0].container.network_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].container.fargate_platform_configuration.platform_version #=> String
+    #   resp.jobs[0].container.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.jobs[0].node_details.node_index #=> Integer
     #   resp.jobs[0].node_details.is_main_node #=> Boolean
     #   resp.jobs[0].node_properties.num_nodes #=> Integer
@@ -1926,6 +1951,7 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].container.secrets[0].value_from #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].container.network_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].node_properties.node_range_properties[0].container.fargate_platform_configuration.platform_version #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.jobs[0].array_properties.status_summary #=> Hash
     #   resp.jobs[0].array_properties.status_summary["String"] #=> Integer
     #   resp.jobs[0].array_properties.size #=> Integer
@@ -2649,6 +2675,9 @@ module Aws::Batch
     #       fargate_platform_configuration: {
     #         platform_version: "String",
     #       },
+    #       ephemeral_storage: {
+    #         size_in_gi_b: 1, # required
+    #       },
     #     },
     #     node_properties: {
     #       num_nodes: 1, # required
@@ -2755,6 +2784,9 @@ module Aws::Batch
     #             fargate_platform_configuration: {
     #               platform_version: "String",
     #             },
+    #             ephemeral_storage: {
+    #               size_in_gi_b: 1, # required
+    #             },
     #           },
     #         },
     #       ],
@@ -2836,6 +2868,11 @@ module Aws::Batch
     #             },
     #           },
     #         ],
+    #         metadata: {
+    #           labels: {
+    #             "String" => "String",
+    #           },
+    #         },
     #       },
     #     },
     #   })
@@ -2917,10 +2954,14 @@ module Aws::Batch
     #   child of each dependency to complete before it can begin.
     #
     # @option params [required, String] :job_definition
-    #   The job definition used by this job. This value can be one of `name`,
-    #   `name:revision`, or the Amazon Resource Name (ARN) for the job
-    #   definition. If `name` is specified without a revision then the latest
-    #   active revision is used.
+    #   The job definition used by this job. This value can be one of
+    #   `definition-name`, `definition-name:revision`, or the Amazon Resource
+    #   Name (ARN) for the job definition, with or without the revision
+    #   (`arn:aws:batch:region:account:job-definition/definition-name:revision
+    #   `, or `arn:aws:batch:region:account:job-definition/definition-name `).
+    #
+    #   If the revision is not specified, then the latest active revision is
+    #   used.
     #
     # @option params [Hash<String,String>] :parameters
     #   Additional parameters passed to the job that replace parameter
@@ -3120,6 +3161,11 @@ module Aws::Batch
     #             },
     #           },
     #         ],
+    #         metadata: {
+    #           labels: {
+    #             "String" => "String",
+    #           },
+    #         },
     #       },
     #     },
     #   })
@@ -3310,8 +3356,24 @@ module Aws::Batch
     #   If the state is `DISABLED`, then the Batch scheduler doesn't attempt
     #   to place jobs within the environment. Jobs in a `STARTING` or
     #   `RUNNING` state continue to progress normally. Managed compute
-    #   environments in the `DISABLED` state don't scale out. However, they
-    #   scale in to `minvCpus` value after instances become idle.
+    #   environments in the `DISABLED` state don't scale out.
+    #
+    #   <note markdown="1"> Compute environments in a `DISABLED` state may continue to incur
+    #   billing charges. To prevent additional charges, turn off and then
+    #   delete the compute environment. For more information, see [State][1]
+    #   in the *Batch User Guide*.
+    #
+    #    </note>
+    #
+    #   When an instance is idle, the instance scales down to the `minvCpus`
+    #   value. However, the instance size doesn't change. For example,
+    #   consider a `c5.8xlarge` instance with a `minvCpus` value of `4` and a
+    #   `desiredvCpus` value of `36`. This instance doesn't scale down to a
+    #   `c5.large` instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state
     #
     # @option params [Integer] :unmanagedv_cpus
     #   The maximum number of vCPUs expected to be used for an unmanaged
@@ -3594,7 +3656,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

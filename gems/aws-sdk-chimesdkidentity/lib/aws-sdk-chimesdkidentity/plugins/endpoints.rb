@@ -60,12 +60,16 @@ module Aws::ChimeSDKIdentity
             Aws::ChimeSDKIdentity::Endpoints::CreateAppInstance.build(context)
           when :create_app_instance_admin
             Aws::ChimeSDKIdentity::Endpoints::CreateAppInstanceAdmin.build(context)
+          when :create_app_instance_bot
+            Aws::ChimeSDKIdentity::Endpoints::CreateAppInstanceBot.build(context)
           when :create_app_instance_user
             Aws::ChimeSDKIdentity::Endpoints::CreateAppInstanceUser.build(context)
           when :delete_app_instance
             Aws::ChimeSDKIdentity::Endpoints::DeleteAppInstance.build(context)
           when :delete_app_instance_admin
             Aws::ChimeSDKIdentity::Endpoints::DeleteAppInstanceAdmin.build(context)
+          when :delete_app_instance_bot
+            Aws::ChimeSDKIdentity::Endpoints::DeleteAppInstanceBot.build(context)
           when :delete_app_instance_user
             Aws::ChimeSDKIdentity::Endpoints::DeleteAppInstanceUser.build(context)
           when :deregister_app_instance_user_endpoint
@@ -74,6 +78,8 @@ module Aws::ChimeSDKIdentity
             Aws::ChimeSDKIdentity::Endpoints::DescribeAppInstance.build(context)
           when :describe_app_instance_admin
             Aws::ChimeSDKIdentity::Endpoints::DescribeAppInstanceAdmin.build(context)
+          when :describe_app_instance_bot
+            Aws::ChimeSDKIdentity::Endpoints::DescribeAppInstanceBot.build(context)
           when :describe_app_instance_user
             Aws::ChimeSDKIdentity::Endpoints::DescribeAppInstanceUser.build(context)
           when :describe_app_instance_user_endpoint
@@ -82,6 +88,8 @@ module Aws::ChimeSDKIdentity
             Aws::ChimeSDKIdentity::Endpoints::GetAppInstanceRetentionSettings.build(context)
           when :list_app_instance_admins
             Aws::ChimeSDKIdentity::Endpoints::ListAppInstanceAdmins.build(context)
+          when :list_app_instance_bots
+            Aws::ChimeSDKIdentity::Endpoints::ListAppInstanceBots.build(context)
           when :list_app_instance_user_endpoints
             Aws::ChimeSDKIdentity::Endpoints::ListAppInstanceUserEndpoints.build(context)
           when :list_app_instance_users
@@ -92,6 +100,8 @@ module Aws::ChimeSDKIdentity
             Aws::ChimeSDKIdentity::Endpoints::ListTagsForResource.build(context)
           when :put_app_instance_retention_settings
             Aws::ChimeSDKIdentity::Endpoints::PutAppInstanceRetentionSettings.build(context)
+          when :put_app_instance_user_expiration_settings
+            Aws::ChimeSDKIdentity::Endpoints::PutAppInstanceUserExpirationSettings.build(context)
           when :register_app_instance_user_endpoint
             Aws::ChimeSDKIdentity::Endpoints::RegisterAppInstanceUserEndpoint.build(context)
           when :tag_resource
@@ -100,6 +110,8 @@ module Aws::ChimeSDKIdentity
             Aws::ChimeSDKIdentity::Endpoints::UntagResource.build(context)
           when :update_app_instance
             Aws::ChimeSDKIdentity::Endpoints::UpdateAppInstance.build(context)
+          when :update_app_instance_bot
+            Aws::ChimeSDKIdentity::Endpoints::UpdateAppInstanceBot.build(context)
           when :update_app_instance_user
             Aws::ChimeSDKIdentity::Endpoints::UpdateAppInstanceUser.build(context)
           when :update_app_instance_user_endpoint

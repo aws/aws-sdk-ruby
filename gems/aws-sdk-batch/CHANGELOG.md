@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2023-03-23)
+------------------
+
+* Feature - This feature allows Batch to support configuration of ephemeral storage size for jobs running on FARGATE
+
 1.67.0 (2023-01-18)
 ------------------
 

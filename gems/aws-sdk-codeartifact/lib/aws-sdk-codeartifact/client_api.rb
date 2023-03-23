@@ -710,6 +710,7 @@ module Aws::CodeArtifact
     RepositoryDescription.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     RepositoryDescription.add_member(:upstreams, Shapes::ShapeRef.new(shape: UpstreamRepositoryInfoList, location_name: "upstreams"))
     RepositoryDescription.add_member(:external_connections, Shapes::ShapeRef.new(shape: RepositoryExternalConnectionInfoList, location_name: "externalConnections"))
+    RepositoryDescription.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTime"))
     RepositoryDescription.struct_class = Types::RepositoryDescription
 
     RepositoryExternalConnectionInfo.add_member(:external_connection_name, Shapes::ShapeRef.new(shape: ExternalConnectionName, location_name: "externalConnectionName"))
@@ -725,6 +726,7 @@ module Aws::CodeArtifact
     RepositorySummary.add_member(:domain_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "domainOwner"))
     RepositorySummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     RepositorySummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    RepositorySummary.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTime"))
     RepositorySummary.struct_class = Types::RepositorySummary
 
     RepositorySummaryList.member = Shapes::ShapeRef.new(shape: RepositorySummary)

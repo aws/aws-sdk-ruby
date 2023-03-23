@@ -18,6 +18,9 @@ module Aws::ChimeSDKIdentity
     AppInstanceAdmin = Shapes::StructureShape.new(name: 'AppInstanceAdmin')
     AppInstanceAdminList = Shapes::ListShape.new(name: 'AppInstanceAdminList')
     AppInstanceAdminSummary = Shapes::StructureShape.new(name: 'AppInstanceAdminSummary')
+    AppInstanceBot = Shapes::StructureShape.new(name: 'AppInstanceBot')
+    AppInstanceBotList = Shapes::ListShape.new(name: 'AppInstanceBotList')
+    AppInstanceBotSummary = Shapes::StructureShape.new(name: 'AppInstanceBotSummary')
     AppInstanceList = Shapes::ListShape.new(name: 'AppInstanceList')
     AppInstanceRetentionSettings = Shapes::StructureShape.new(name: 'AppInstanceRetentionSettings')
     AppInstanceSummary = Shapes::StructureShape.new(name: 'AppInstanceSummary')
@@ -32,19 +35,25 @@ module Aws::ChimeSDKIdentity
     ChannelRetentionSettings = Shapes::StructureShape.new(name: 'ChannelRetentionSettings')
     ChimeArn = Shapes::StringShape.new(name: 'ChimeArn')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
+    Configuration = Shapes::StructureShape.new(name: 'Configuration')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateAppInstanceAdminRequest = Shapes::StructureShape.new(name: 'CreateAppInstanceAdminRequest')
     CreateAppInstanceAdminResponse = Shapes::StructureShape.new(name: 'CreateAppInstanceAdminResponse')
+    CreateAppInstanceBotRequest = Shapes::StructureShape.new(name: 'CreateAppInstanceBotRequest')
+    CreateAppInstanceBotResponse = Shapes::StructureShape.new(name: 'CreateAppInstanceBotResponse')
     CreateAppInstanceRequest = Shapes::StructureShape.new(name: 'CreateAppInstanceRequest')
     CreateAppInstanceResponse = Shapes::StructureShape.new(name: 'CreateAppInstanceResponse')
     CreateAppInstanceUserRequest = Shapes::StructureShape.new(name: 'CreateAppInstanceUserRequest')
     CreateAppInstanceUserResponse = Shapes::StructureShape.new(name: 'CreateAppInstanceUserResponse')
     DeleteAppInstanceAdminRequest = Shapes::StructureShape.new(name: 'DeleteAppInstanceAdminRequest')
+    DeleteAppInstanceBotRequest = Shapes::StructureShape.new(name: 'DeleteAppInstanceBotRequest')
     DeleteAppInstanceRequest = Shapes::StructureShape.new(name: 'DeleteAppInstanceRequest')
     DeleteAppInstanceUserRequest = Shapes::StructureShape.new(name: 'DeleteAppInstanceUserRequest')
     DeregisterAppInstanceUserEndpointRequest = Shapes::StructureShape.new(name: 'DeregisterAppInstanceUserEndpointRequest')
     DescribeAppInstanceAdminRequest = Shapes::StructureShape.new(name: 'DescribeAppInstanceAdminRequest')
     DescribeAppInstanceAdminResponse = Shapes::StructureShape.new(name: 'DescribeAppInstanceAdminResponse')
+    DescribeAppInstanceBotRequest = Shapes::StructureShape.new(name: 'DescribeAppInstanceBotRequest')
+    DescribeAppInstanceBotResponse = Shapes::StructureShape.new(name: 'DescribeAppInstanceBotResponse')
     DescribeAppInstanceRequest = Shapes::StructureShape.new(name: 'DescribeAppInstanceRequest')
     DescribeAppInstanceResponse = Shapes::StructureShape.new(name: 'DescribeAppInstanceResponse')
     DescribeAppInstanceUserEndpointRequest = Shapes::StructureShape.new(name: 'DescribeAppInstanceUserEndpointRequest')
@@ -56,12 +65,20 @@ module Aws::ChimeSDKIdentity
     EndpointStatus = Shapes::StringShape.new(name: 'EndpointStatus')
     EndpointStatusReason = Shapes::StringShape.new(name: 'EndpointStatusReason')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
+    ExpirationCriterion = Shapes::StringShape.new(name: 'ExpirationCriterion')
+    ExpirationDays = Shapes::IntegerShape.new(name: 'ExpirationDays')
+    ExpirationSettings = Shapes::StructureShape.new(name: 'ExpirationSettings')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     GetAppInstanceRetentionSettingsRequest = Shapes::StructureShape.new(name: 'GetAppInstanceRetentionSettingsRequest')
     GetAppInstanceRetentionSettingsResponse = Shapes::StructureShape.new(name: 'GetAppInstanceRetentionSettingsResponse')
     Identity = Shapes::StructureShape.new(name: 'Identity')
+    LexBotAliasArn = Shapes::StringShape.new(name: 'LexBotAliasArn')
+    LexConfiguration = Shapes::StructureShape.new(name: 'LexConfiguration')
+    LexIntentName = Shapes::StringShape.new(name: 'LexIntentName')
     ListAppInstanceAdminsRequest = Shapes::StructureShape.new(name: 'ListAppInstanceAdminsRequest')
     ListAppInstanceAdminsResponse = Shapes::StructureShape.new(name: 'ListAppInstanceAdminsResponse')
+    ListAppInstanceBotsRequest = Shapes::StructureShape.new(name: 'ListAppInstanceBotsRequest')
+    ListAppInstanceBotsResponse = Shapes::StructureShape.new(name: 'ListAppInstanceBotsResponse')
     ListAppInstanceUserEndpointsRequest = Shapes::StructureShape.new(name: 'ListAppInstanceUserEndpointsRequest')
     ListAppInstanceUserEndpointsResponse = Shapes::StructureShape.new(name: 'ListAppInstanceUserEndpointsResponse')
     ListAppInstanceUsersRequest = Shapes::StructureShape.new(name: 'ListAppInstanceUsersRequest')
@@ -75,12 +92,16 @@ module Aws::ChimeSDKIdentity
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonEmptyResourceName = Shapes::StringShape.new(name: 'NonEmptyResourceName')
     NonEmptySensitiveString1600 = Shapes::StringShape.new(name: 'NonEmptySensitiveString1600')
+    NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     PutAppInstanceRetentionSettingsRequest = Shapes::StructureShape.new(name: 'PutAppInstanceRetentionSettingsRequest')
     PutAppInstanceRetentionSettingsResponse = Shapes::StructureShape.new(name: 'PutAppInstanceRetentionSettingsResponse')
+    PutAppInstanceUserExpirationSettingsRequest = Shapes::StructureShape.new(name: 'PutAppInstanceUserExpirationSettingsRequest')
+    PutAppInstanceUserExpirationSettingsResponse = Shapes::StructureShape.new(name: 'PutAppInstanceUserExpirationSettingsResponse')
     RegisterAppInstanceUserEndpointRequest = Shapes::StructureShape.new(name: 'RegisterAppInstanceUserEndpointRequest')
     RegisterAppInstanceUserEndpointResponse = Shapes::StructureShape.new(name: 'RegisterAppInstanceUserEndpointResponse')
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
+    RespondsTo = Shapes::StringShape.new(name: 'RespondsTo')
     RetentionDays = Shapes::IntegerShape.new(name: 'RetentionDays')
     SensitiveChimeArn = Shapes::StringShape.new(name: 'SensitiveChimeArn')
     SensitiveString1600 = Shapes::StringShape.new(name: 'SensitiveString1600')
@@ -98,6 +119,8 @@ module Aws::ChimeSDKIdentity
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UnauthorizedClientException = Shapes::StructureShape.new(name: 'UnauthorizedClientException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UpdateAppInstanceBotRequest = Shapes::StructureShape.new(name: 'UpdateAppInstanceBotRequest')
+    UpdateAppInstanceBotResponse = Shapes::StructureShape.new(name: 'UpdateAppInstanceBotResponse')
     UpdateAppInstanceRequest = Shapes::StructureShape.new(name: 'UpdateAppInstanceRequest')
     UpdateAppInstanceResponse = Shapes::StructureShape.new(name: 'UpdateAppInstanceResponse')
     UpdateAppInstanceUserEndpointRequest = Shapes::StructureShape.new(name: 'UpdateAppInstanceUserEndpointRequest')
@@ -124,6 +147,21 @@ module Aws::ChimeSDKIdentity
     AppInstanceAdminSummary.add_member(:admin, Shapes::ShapeRef.new(shape: Identity, location_name: "Admin"))
     AppInstanceAdminSummary.struct_class = Types::AppInstanceAdminSummary
 
+    AppInstanceBot.add_member(:app_instance_bot_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceBotArn"))
+    AppInstanceBot.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    AppInstanceBot.add_member(:configuration, Shapes::ShapeRef.new(shape: Configuration, location_name: "Configuration"))
+    AppInstanceBot.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
+    AppInstanceBot.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTimestamp"))
+    AppInstanceBot.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    AppInstanceBot.struct_class = Types::AppInstanceBot
+
+    AppInstanceBotList.member = Shapes::ShapeRef.new(shape: AppInstanceBotSummary)
+
+    AppInstanceBotSummary.add_member(:app_instance_bot_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceBotArn"))
+    AppInstanceBotSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    AppInstanceBotSummary.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    AppInstanceBotSummary.struct_class = Types::AppInstanceBotSummary
+
     AppInstanceList.member = Shapes::ShapeRef.new(shape: AppInstanceSummary)
 
     AppInstanceRetentionSettings.add_member(:channel_retention_settings, Shapes::ShapeRef.new(shape: ChannelRetentionSettings, location_name: "ChannelRetentionSettings"))
@@ -139,13 +177,14 @@ module Aws::ChimeSDKIdentity
     AppInstanceUser.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
     AppInstanceUser.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
     AppInstanceUser.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTimestamp"))
+    AppInstanceUser.add_member(:expiration_settings, Shapes::ShapeRef.new(shape: ExpirationSettings, location_name: "ExpirationSettings"))
     AppInstanceUser.struct_class = Types::AppInstanceUser
 
     AppInstanceUserEndpoint.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: SensitiveChimeArn, location_name: "AppInstanceUserArn"))
     AppInstanceUserEndpoint.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: SensitiveString64, location_name: "EndpointId"))
     AppInstanceUserEndpoint.add_member(:name, Shapes::ShapeRef.new(shape: SensitiveString1600, location_name: "Name"))
     AppInstanceUserEndpoint.add_member(:type, Shapes::ShapeRef.new(shape: AppInstanceUserEndpointType, location_name: "Type"))
-    AppInstanceUserEndpoint.add_member(:resource_arn, Shapes::ShapeRef.new(shape: SensitiveChimeArn, location_name: "ResourceArn"))
+    AppInstanceUserEndpoint.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ResourceArn"))
     AppInstanceUserEndpoint.add_member(:endpoint_attributes, Shapes::ShapeRef.new(shape: EndpointAttributes, location_name: "EndpointAttributes"))
     AppInstanceUserEndpoint.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
     AppInstanceUserEndpoint.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTimestamp"))
@@ -177,6 +216,9 @@ module Aws::ChimeSDKIdentity
     ChannelRetentionSettings.add_member(:retention_days, Shapes::ShapeRef.new(shape: RetentionDays, location_name: "RetentionDays"))
     ChannelRetentionSettings.struct_class = Types::ChannelRetentionSettings
 
+    Configuration.add_member(:lex, Shapes::ShapeRef.new(shape: LexConfiguration, required: true, location_name: "Lex"))
+    Configuration.struct_class = Types::Configuration
+
     ConflictException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
@@ -188,6 +230,17 @@ module Aws::ChimeSDKIdentity
     CreateAppInstanceAdminResponse.add_member(:app_instance_admin, Shapes::ShapeRef.new(shape: Identity, location_name: "AppInstanceAdmin"))
     CreateAppInstanceAdminResponse.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn"))
     CreateAppInstanceAdminResponse.struct_class = Types::CreateAppInstanceAdminResponse
+
+    CreateAppInstanceBotRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location_name: "AppInstanceArn"))
+    CreateAppInstanceBotRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    CreateAppInstanceBotRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    CreateAppInstanceBotRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateAppInstanceBotRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateAppInstanceBotRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: Configuration, required: true, location_name: "Configuration"))
+    CreateAppInstanceBotRequest.struct_class = Types::CreateAppInstanceBotRequest
+
+    CreateAppInstanceBotResponse.add_member(:app_instance_bot_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceBotArn"))
+    CreateAppInstanceBotResponse.struct_class = Types::CreateAppInstanceBotResponse
 
     CreateAppInstanceRequest.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyResourceName, required: true, location_name: "Name"))
     CreateAppInstanceRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
@@ -204,6 +257,7 @@ module Aws::ChimeSDKIdentity
     CreateAppInstanceUserRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
     CreateAppInstanceUserRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateAppInstanceUserRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateAppInstanceUserRequest.add_member(:expiration_settings, Shapes::ShapeRef.new(shape: ExpirationSettings, location_name: "ExpirationSettings"))
     CreateAppInstanceUserRequest.struct_class = Types::CreateAppInstanceUserRequest
 
     CreateAppInstanceUserResponse.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn"))
@@ -212,6 +266,9 @@ module Aws::ChimeSDKIdentity
     DeleteAppInstanceAdminRequest.add_member(:app_instance_admin_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceAdminArn"))
     DeleteAppInstanceAdminRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceArn"))
     DeleteAppInstanceAdminRequest.struct_class = Types::DeleteAppInstanceAdminRequest
+
+    DeleteAppInstanceBotRequest.add_member(:app_instance_bot_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceBotArn"))
+    DeleteAppInstanceBotRequest.struct_class = Types::DeleteAppInstanceBotRequest
 
     DeleteAppInstanceRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceArn"))
     DeleteAppInstanceRequest.struct_class = Types::DeleteAppInstanceRequest
@@ -229,6 +286,12 @@ module Aws::ChimeSDKIdentity
 
     DescribeAppInstanceAdminResponse.add_member(:app_instance_admin, Shapes::ShapeRef.new(shape: AppInstanceAdmin, location_name: "AppInstanceAdmin"))
     DescribeAppInstanceAdminResponse.struct_class = Types::DescribeAppInstanceAdminResponse
+
+    DescribeAppInstanceBotRequest.add_member(:app_instance_bot_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceBotArn"))
+    DescribeAppInstanceBotRequest.struct_class = Types::DescribeAppInstanceBotRequest
+
+    DescribeAppInstanceBotResponse.add_member(:app_instance_bot, Shapes::ShapeRef.new(shape: AppInstanceBot, location_name: "AppInstanceBot"))
+    DescribeAppInstanceBotResponse.struct_class = Types::DescribeAppInstanceBotResponse
 
     DescribeAppInstanceRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceArn"))
     DescribeAppInstanceRequest.struct_class = Types::DescribeAppInstanceRequest
@@ -257,6 +320,10 @@ module Aws::ChimeSDKIdentity
     EndpointState.add_member(:status_reason, Shapes::ShapeRef.new(shape: EndpointStatusReason, location_name: "StatusReason"))
     EndpointState.struct_class = Types::EndpointState
 
+    ExpirationSettings.add_member(:expiration_days, Shapes::ShapeRef.new(shape: ExpirationDays, required: true, location_name: "ExpirationDays"))
+    ExpirationSettings.add_member(:expiration_criterion, Shapes::ShapeRef.new(shape: ExpirationCriterion, required: true, location_name: "ExpirationCriterion"))
+    ExpirationSettings.struct_class = Types::ExpirationSettings
+
     ForbiddenException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ForbiddenException.struct_class = Types::ForbiddenException
@@ -272,6 +339,12 @@ module Aws::ChimeSDKIdentity
     Identity.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
     Identity.struct_class = Types::Identity
 
+    LexConfiguration.add_member(:responds_to, Shapes::ShapeRef.new(shape: RespondsTo, required: true, location_name: "RespondsTo"))
+    LexConfiguration.add_member(:lex_bot_alias_arn, Shapes::ShapeRef.new(shape: LexBotAliasArn, required: true, location_name: "LexBotAliasArn"))
+    LexConfiguration.add_member(:locale_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "LocaleId"))
+    LexConfiguration.add_member(:welcome_intent, Shapes::ShapeRef.new(shape: LexIntentName, location_name: "WelcomeIntent"))
+    LexConfiguration.struct_class = Types::LexConfiguration
+
     ListAppInstanceAdminsRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceArn"))
     ListAppInstanceAdminsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results"))
     ListAppInstanceAdminsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next-token"))
@@ -281,6 +354,16 @@ module Aws::ChimeSDKIdentity
     ListAppInstanceAdminsResponse.add_member(:app_instance_admins, Shapes::ShapeRef.new(shape: AppInstanceAdminList, location_name: "AppInstanceAdmins"))
     ListAppInstanceAdminsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListAppInstanceAdminsResponse.struct_class = Types::ListAppInstanceAdminsResponse
+
+    ListAppInstanceBotsRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "querystring", location_name: "app-instance-arn"))
+    ListAppInstanceBotsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results"))
+    ListAppInstanceBotsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next-token"))
+    ListAppInstanceBotsRequest.struct_class = Types::ListAppInstanceBotsRequest
+
+    ListAppInstanceBotsResponse.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceArn"))
+    ListAppInstanceBotsResponse.add_member(:app_instance_bots, Shapes::ShapeRef.new(shape: AppInstanceBotList, location_name: "AppInstanceBots"))
+    ListAppInstanceBotsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAppInstanceBotsResponse.struct_class = Types::ListAppInstanceBotsResponse
 
     ListAppInstanceUserEndpointsRequest.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: SensitiveChimeArn, required: true, location: "uri", location_name: "appInstanceUserArn"))
     ListAppInstanceUserEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results"))
@@ -315,6 +398,10 @@ module Aws::ChimeSDKIdentity
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    NotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    NotFoundException.struct_class = Types::NotFoundException
+
     PutAppInstanceRetentionSettingsRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceArn"))
     PutAppInstanceRetentionSettingsRequest.add_member(:app_instance_retention_settings, Shapes::ShapeRef.new(shape: AppInstanceRetentionSettings, required: true, location_name: "AppInstanceRetentionSettings"))
     PutAppInstanceRetentionSettingsRequest.struct_class = Types::PutAppInstanceRetentionSettingsRequest
@@ -323,10 +410,18 @@ module Aws::ChimeSDKIdentity
     PutAppInstanceRetentionSettingsResponse.add_member(:initiate_deletion_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "InitiateDeletionTimestamp"))
     PutAppInstanceRetentionSettingsResponse.struct_class = Types::PutAppInstanceRetentionSettingsResponse
 
+    PutAppInstanceUserExpirationSettingsRequest.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceUserArn"))
+    PutAppInstanceUserExpirationSettingsRequest.add_member(:expiration_settings, Shapes::ShapeRef.new(shape: ExpirationSettings, location_name: "ExpirationSettings"))
+    PutAppInstanceUserExpirationSettingsRequest.struct_class = Types::PutAppInstanceUserExpirationSettingsRequest
+
+    PutAppInstanceUserExpirationSettingsResponse.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceUserArn"))
+    PutAppInstanceUserExpirationSettingsResponse.add_member(:expiration_settings, Shapes::ShapeRef.new(shape: ExpirationSettings, location_name: "ExpirationSettings"))
+    PutAppInstanceUserExpirationSettingsResponse.struct_class = Types::PutAppInstanceUserExpirationSettingsResponse
+
     RegisterAppInstanceUserEndpointRequest.add_member(:app_instance_user_arn, Shapes::ShapeRef.new(shape: SensitiveChimeArn, required: true, location: "uri", location_name: "appInstanceUserArn"))
     RegisterAppInstanceUserEndpointRequest.add_member(:name, Shapes::ShapeRef.new(shape: SensitiveString1600, location_name: "Name"))
     RegisterAppInstanceUserEndpointRequest.add_member(:type, Shapes::ShapeRef.new(shape: AppInstanceUserEndpointType, required: true, location_name: "Type"))
-    RegisterAppInstanceUserEndpointRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: SensitiveChimeArn, required: true, location_name: "ResourceArn"))
+    RegisterAppInstanceUserEndpointRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location_name: "ResourceArn"))
     RegisterAppInstanceUserEndpointRequest.add_member(:endpoint_attributes, Shapes::ShapeRef.new(shape: EndpointAttributes, required: true, location_name: "EndpointAttributes"))
     RegisterAppInstanceUserEndpointRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     RegisterAppInstanceUserEndpointRequest.add_member(:allow_messages, Shapes::ShapeRef.new(shape: AllowMessages, location_name: "AllowMessages"))
@@ -371,6 +466,14 @@ module Aws::ChimeSDKIdentity
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location_name: "ResourceARN"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UpdateAppInstanceBotRequest.add_member(:app_instance_bot_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceBotArn"))
+    UpdateAppInstanceBotRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
+    UpdateAppInstanceBotRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, required: true, location_name: "Metadata"))
+    UpdateAppInstanceBotRequest.struct_class = Types::UpdateAppInstanceBotRequest
+
+    UpdateAppInstanceBotResponse.add_member(:app_instance_bot_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "AppInstanceBotArn"))
+    UpdateAppInstanceBotResponse.struct_class = Types::UpdateAppInstanceBotResponse
 
     UpdateAppInstanceRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceArn"))
     UpdateAppInstanceRequest.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyResourceName, required: true, location_name: "Name"))
@@ -447,6 +550,22 @@ module Aws::ChimeSDKIdentity
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:create_app_instance_bot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAppInstanceBot"
+        o.http_method = "POST"
+        o.http_request_uri = "/app-instance-bots"
+        o.input = Shapes::ShapeRef.new(shape: CreateAppInstanceBotRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAppInstanceBotResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:create_app_instance_user, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateAppInstanceUser"
         o.http_method = "POST"
@@ -483,6 +602,22 @@ module Aws::ChimeSDKIdentity
         o.http_method = "DELETE"
         o.http_request_uri = "/app-instances/{appInstanceArn}/admins/{appInstanceAdminArn}"
         o.input = Shapes::ShapeRef.new(shape: DeleteAppInstanceAdminRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:delete_app_instance_bot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAppInstanceBot"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/app-instance-bots/{appInstanceBotArn}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAppInstanceBotRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -552,6 +687,21 @@ module Aws::ChimeSDKIdentity
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:describe_app_instance_bot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAppInstanceBot"
+        o.http_method = "GET"
+        o.http_request_uri = "/app-instance-bots/{appInstanceBotArn}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAppInstanceBotRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAppInstanceBotResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:describe_app_instance_user, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeAppInstanceUser"
         o.http_method = "GET"
@@ -600,6 +750,27 @@ module Aws::ChimeSDKIdentity
         o.http_request_uri = "/app-instances/{appInstanceArn}/admins"
         o.input = Shapes::ShapeRef.new(shape: ListAppInstanceAdminsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAppInstanceAdminsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_app_instance_bots, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAppInstanceBots"
+        o.http_method = "GET"
+        o.http_request_uri = "/app-instance-bots"
+        o.input = Shapes::ShapeRef.new(shape: ListAppInstanceBotsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAppInstanceBotsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
@@ -703,6 +874,21 @@ module Aws::ChimeSDKIdentity
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:put_app_instance_user_expiration_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAppInstanceUserExpirationSettings"
+        o.http_method = "PUT"
+        o.http_request_uri = "/app-instance-users/{appInstanceUserArn}/expiration-settings"
+        o.input = Shapes::ShapeRef.new(shape: PutAppInstanceUserExpirationSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutAppInstanceUserExpirationSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:register_app_instance_user_endpoint, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RegisterAppInstanceUserEndpoint"
         o.http_method = "POST"
@@ -757,6 +943,22 @@ module Aws::ChimeSDKIdentity
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:update_app_instance_bot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAppInstanceBot"
+        o.http_method = "PUT"
+        o.http_request_uri = "/app-instance-bots/{appInstanceBotArn}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAppInstanceBotRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAppInstanceBotResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)

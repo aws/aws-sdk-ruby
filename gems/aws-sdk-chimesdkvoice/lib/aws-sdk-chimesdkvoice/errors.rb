@@ -31,12 +31,14 @@ module Aws::ChimeSDKVoice
   # * {BadRequestException}
   # * {ConflictException}
   # * {ForbiddenException}
+  # * {GoneException}
   # * {NotFoundException}
   # * {ResourceLimitExceededException}
   # * {ServiceFailureException}
   # * {ServiceUnavailableException}
   # * {ThrottledClientException}
   # * {UnauthorizedClientException}
+  # * {UnprocessableEntityException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -79,6 +81,16 @@ module Aws::ChimeSDKVoice
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ChimeSDKVoice::Types::ForbiddenException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class GoneException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ChimeSDKVoice::Types::GoneException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -139,6 +151,16 @@ module Aws::ChimeSDKVoice
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ChimeSDKVoice::Types::UnauthorizedClientException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class UnprocessableEntityException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ChimeSDKVoice::Types::UnprocessableEntityException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

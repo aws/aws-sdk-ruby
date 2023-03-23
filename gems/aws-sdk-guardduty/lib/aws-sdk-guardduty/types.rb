@@ -1585,6 +1585,21 @@ module Aws::GuardDuty
     #   retrieve more items.
     #   @return [String]
     #
+    # @!attribute [rw] auto_enable_organization_members
+    #   Indicates the auto-enablement configuration of GuardDuty for the
+    #   member accounts in the organization.
+    #
+    #   * `NEW`: Indicates that new accounts joining the organization are
+    #     configured to have GuardDuty enabled automatically.
+    #
+    #   * `ALL`: Indicates that all accounts (new and existing members) in
+    #     the organization are configured to have GuardDuty enabled
+    #     automatically.
+    #
+    #   * `NONE`: Indicates that no account in the organization will be
+    #     configured to have GuardDuty enabled automatically.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeOrganizationConfigurationResponse AWS API Documentation
     #
     class DescribeOrganizationConfigurationResponse < Struct.new(
@@ -1592,7 +1607,8 @@ module Aws::GuardDuty
       :member_account_limit_reached,
       :data_sources,
       :features,
-      :next_token)
+      :next_token,
+      :auto_enable_organization_members)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6070,7 +6086,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] detector_id
-    #   The ID of the detector to update the delegated administrator for.
+    #   The ID of the detector that configures the delegated administrator.
     #   @return [String]
     #
     # @!attribute [rw] auto_enable
@@ -6086,13 +6102,29 @@ module Aws::GuardDuty
     #   A list of features that will be configured for the organization.
     #   @return [Array<Types::OrganizationFeatureConfiguration>]
     #
+    # @!attribute [rw] auto_enable_organization_members
+    #   Indicates the auto-enablement configuration of GuardDuty for the
+    #   member accounts in the organization.
+    #
+    #   * `NEW`: Indicates that new accounts joining the organization are
+    #     configured to have GuardDuty enabled automatically.
+    #
+    #   * `ALL`: Indicates that all accounts (new and existing members) in
+    #     the organization are configured to have GuardDuty enabled
+    #     automatically.
+    #
+    #   * `NONE`: Indicates that no account in the organization will be
+    #     configured to have GuardDuty enabled automatically.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateOrganizationConfigurationRequest AWS API Documentation
     #
     class UpdateOrganizationConfigurationRequest < Struct.new(
       :detector_id,
       :auto_enable,
       :data_sources,
-      :features)
+      :features,
+      :auto_enable_organization_members)
       SENSITIVE = []
       include Aws::Structure
     end

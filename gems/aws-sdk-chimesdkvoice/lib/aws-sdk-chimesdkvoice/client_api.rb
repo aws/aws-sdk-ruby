@@ -20,6 +20,7 @@ module Aws::ChimeSDKVoice
     AlexaSkillStatus = Shapes::StringShape.new(name: 'AlexaSkillStatus')
     Alpha2CountryCode = Shapes::StringShape.new(name: 'Alpha2CountryCode')
     AreaCode = Shapes::StringShape.new(name: 'AreaCode')
+    Arn = Shapes::StringShape.new(name: 'Arn')
     AssociatePhoneNumbersWithVoiceConnectorGroupRequest = Shapes::StructureShape.new(name: 'AssociatePhoneNumbersWithVoiceConnectorGroupRequest')
     AssociatePhoneNumbersWithVoiceConnectorGroupResponse = Shapes::StructureShape.new(name: 'AssociatePhoneNumbersWithVoiceConnectorGroupResponse')
     AssociatePhoneNumbersWithVoiceConnectorRequest = Shapes::StructureShape.new(name: 'AssociatePhoneNumbersWithVoiceConnectorRequest')
@@ -30,6 +31,7 @@ module Aws::ChimeSDKVoice
     BatchUpdatePhoneNumberRequest = Shapes::StructureShape.new(name: 'BatchUpdatePhoneNumberRequest')
     BatchUpdatePhoneNumberResponse = Shapes::StructureShape.new(name: 'BatchUpdatePhoneNumberResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CallDetails = Shapes::StructureShape.new(name: 'CallDetails')
     CallingName = Shapes::StringShape.new(name: 'CallingName')
     CallingNameStatus = Shapes::StringShape.new(name: 'CallingNameStatus')
     CallingRegion = Shapes::StringShape.new(name: 'CallingRegion')
@@ -38,6 +40,8 @@ module Aws::ChimeSDKVoice
     CandidateAddressList = Shapes::ListShape.new(name: 'CandidateAddressList')
     Capability = Shapes::StringShape.new(name: 'Capability')
     CapabilityList = Shapes::ListShape.new(name: 'CapabilityList')
+    ClientRequestId = Shapes::StringShape.new(name: 'ClientRequestId')
+    ConfidenceScore = Shapes::FloatShape.new(name: 'ConfidenceScore')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     Country = Shapes::StringShape.new(name: 'Country')
     CountryList = Shapes::ListShape.new(name: 'CountryList')
@@ -56,6 +60,10 @@ module Aws::ChimeSDKVoice
     CreateVoiceConnectorGroupResponse = Shapes::StructureShape.new(name: 'CreateVoiceConnectorGroupResponse')
     CreateVoiceConnectorRequest = Shapes::StructureShape.new(name: 'CreateVoiceConnectorRequest')
     CreateVoiceConnectorResponse = Shapes::StructureShape.new(name: 'CreateVoiceConnectorResponse')
+    CreateVoiceProfileDomainRequest = Shapes::StructureShape.new(name: 'CreateVoiceProfileDomainRequest')
+    CreateVoiceProfileDomainResponse = Shapes::StructureShape.new(name: 'CreateVoiceProfileDomainResponse')
+    CreateVoiceProfileRequest = Shapes::StructureShape.new(name: 'CreateVoiceProfileRequest')
+    CreateVoiceProfileResponse = Shapes::StructureShape.new(name: 'CreateVoiceProfileResponse')
     Credential = Shapes::StructureShape.new(name: 'Credential')
     CredentialList = Shapes::ListShape.new(name: 'CredentialList')
     DNISEmergencyCallingConfiguration = Shapes::StructureShape.new(name: 'DNISEmergencyCallingConfiguration')
@@ -73,6 +81,8 @@ module Aws::ChimeSDKVoice
     DeleteVoiceConnectorStreamingConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteVoiceConnectorStreamingConfigurationRequest')
     DeleteVoiceConnectorTerminationCredentialsRequest = Shapes::StructureShape.new(name: 'DeleteVoiceConnectorTerminationCredentialsRequest')
     DeleteVoiceConnectorTerminationRequest = Shapes::StructureShape.new(name: 'DeleteVoiceConnectorTerminationRequest')
+    DeleteVoiceProfileDomainRequest = Shapes::StructureShape.new(name: 'DeleteVoiceProfileDomainRequest')
+    DeleteVoiceProfileRequest = Shapes::StructureShape.new(name: 'DeleteVoiceProfileRequest')
     DisassociatePhoneNumbersFromVoiceConnectorGroupRequest = Shapes::StructureShape.new(name: 'DisassociatePhoneNumbersFromVoiceConnectorGroupRequest')
     DisassociatePhoneNumbersFromVoiceConnectorGroupResponse = Shapes::StructureShape.new(name: 'DisassociatePhoneNumbersFromVoiceConnectorGroupResponse')
     DisassociatePhoneNumbersFromVoiceConnectorRequest = Shapes::StructureShape.new(name: 'DisassociatePhoneNumbersFromVoiceConnectorRequest')
@@ -101,6 +111,8 @@ module Aws::ChimeSDKVoice
     GetSipMediaApplicationResponse = Shapes::StructureShape.new(name: 'GetSipMediaApplicationResponse')
     GetSipRuleRequest = Shapes::StructureShape.new(name: 'GetSipRuleRequest')
     GetSipRuleResponse = Shapes::StructureShape.new(name: 'GetSipRuleResponse')
+    GetSpeakerSearchTaskRequest = Shapes::StructureShape.new(name: 'GetSpeakerSearchTaskRequest')
+    GetSpeakerSearchTaskResponse = Shapes::StructureShape.new(name: 'GetSpeakerSearchTaskResponse')
     GetVoiceConnectorEmergencyCallingConfigurationRequest = Shapes::StructureShape.new(name: 'GetVoiceConnectorEmergencyCallingConfigurationRequest')
     GetVoiceConnectorEmergencyCallingConfigurationResponse = Shapes::StructureShape.new(name: 'GetVoiceConnectorEmergencyCallingConfigurationResponse')
     GetVoiceConnectorGroupRequest = Shapes::StructureShape.new(name: 'GetVoiceConnectorGroupRequest')
@@ -119,9 +131,17 @@ module Aws::ChimeSDKVoice
     GetVoiceConnectorTerminationHealthResponse = Shapes::StructureShape.new(name: 'GetVoiceConnectorTerminationHealthResponse')
     GetVoiceConnectorTerminationRequest = Shapes::StructureShape.new(name: 'GetVoiceConnectorTerminationRequest')
     GetVoiceConnectorTerminationResponse = Shapes::StructureShape.new(name: 'GetVoiceConnectorTerminationResponse')
+    GetVoiceProfileDomainRequest = Shapes::StructureShape.new(name: 'GetVoiceProfileDomainRequest')
+    GetVoiceProfileDomainResponse = Shapes::StructureShape.new(name: 'GetVoiceProfileDomainResponse')
+    GetVoiceProfileRequest = Shapes::StructureShape.new(name: 'GetVoiceProfileRequest')
+    GetVoiceProfileResponse = Shapes::StructureShape.new(name: 'GetVoiceProfileResponse')
+    GetVoiceToneAnalysisTaskRequest = Shapes::StructureShape.new(name: 'GetVoiceToneAnalysisTaskRequest')
+    GetVoiceToneAnalysisTaskResponse = Shapes::StructureShape.new(name: 'GetVoiceToneAnalysisTaskResponse')
+    GoneException = Shapes::StructureShape.new(name: 'GoneException')
     GuidString = Shapes::StringShape.new(name: 'GuidString')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     Iso8601Timestamp = Shapes::TimestampShape.new(name: 'Iso8601Timestamp', timestampFormat: "iso8601")
+    LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
     ListAvailableVoiceConnectorRegionsResponse = Shapes::StructureShape.new(name: 'ListAvailableVoiceConnectorRegionsResponse')
     ListPhoneNumberOrdersRequest = Shapes::StructureShape.new(name: 'ListPhoneNumberOrdersRequest')
     ListPhoneNumberOrdersResponse = Shapes::StructureShape.new(name: 'ListPhoneNumberOrdersResponse')
@@ -135,16 +155,24 @@ module Aws::ChimeSDKVoice
     ListSipRulesResponse = Shapes::StructureShape.new(name: 'ListSipRulesResponse')
     ListSupportedPhoneNumberCountriesRequest = Shapes::StructureShape.new(name: 'ListSupportedPhoneNumberCountriesRequest')
     ListSupportedPhoneNumberCountriesResponse = Shapes::StructureShape.new(name: 'ListSupportedPhoneNumberCountriesResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListVoiceConnectorGroupsRequest = Shapes::StructureShape.new(name: 'ListVoiceConnectorGroupsRequest')
     ListVoiceConnectorGroupsResponse = Shapes::StructureShape.new(name: 'ListVoiceConnectorGroupsResponse')
     ListVoiceConnectorTerminationCredentialsRequest = Shapes::StructureShape.new(name: 'ListVoiceConnectorTerminationCredentialsRequest')
     ListVoiceConnectorTerminationCredentialsResponse = Shapes::StructureShape.new(name: 'ListVoiceConnectorTerminationCredentialsResponse')
     ListVoiceConnectorsRequest = Shapes::StructureShape.new(name: 'ListVoiceConnectorsRequest')
     ListVoiceConnectorsResponse = Shapes::StructureShape.new(name: 'ListVoiceConnectorsResponse')
+    ListVoiceProfileDomainsRequest = Shapes::StructureShape.new(name: 'ListVoiceProfileDomainsRequest')
+    ListVoiceProfileDomainsResponse = Shapes::StructureShape.new(name: 'ListVoiceProfileDomainsResponse')
+    ListVoiceProfilesRequest = Shapes::StructureShape.new(name: 'ListVoiceProfilesRequest')
+    ListVoiceProfilesResponse = Shapes::StructureShape.new(name: 'ListVoiceProfilesResponse')
     LoggingConfiguration = Shapes::StructureShape.new(name: 'LoggingConfiguration')
+    MediaInsightsConfiguration = Shapes::StructureShape.new(name: 'MediaInsightsConfiguration')
     NextTokenString = Shapes::StringShape.new(name: 'NextTokenString')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NonEmptyString128 = Shapes::StringShape.new(name: 'NonEmptyString128')
+    NonEmptyString256 = Shapes::StringShape.new(name: 'NonEmptyString256')
     NonEmptyStringList = Shapes::ListShape.new(name: 'NonEmptyStringList')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     NotificationTarget = Shapes::StringShape.new(name: 'NotificationTarget')
@@ -216,6 +244,7 @@ module Aws::ChimeSDKVoice
     SensitiveNonEmptyString = Shapes::StringShape.new(name: 'SensitiveNonEmptyString')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     SensitiveStringList = Shapes::ListShape.new(name: 'SensitiveStringList')
+    ServerSideEncryptionConfiguration = Shapes::StructureShape.new(name: 'ServerSideEncryptionConfiguration')
     ServiceFailureException = Shapes::StructureShape.new(name: 'ServiceFailureException')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SipApplicationPriority = Shapes::IntegerShape.new(name: 'SipApplicationPriority')
@@ -234,17 +263,35 @@ module Aws::ChimeSDKVoice
     SipRuleTargetApplication = Shapes::StructureShape.new(name: 'SipRuleTargetApplication')
     SipRuleTargetApplicationList = Shapes::ListShape.new(name: 'SipRuleTargetApplicationList')
     SipRuleTriggerType = Shapes::StringShape.new(name: 'SipRuleTriggerType')
+    SpeakerSearchDetails = Shapes::StructureShape.new(name: 'SpeakerSearchDetails')
+    SpeakerSearchResult = Shapes::StructureShape.new(name: 'SpeakerSearchResult')
+    SpeakerSearchResultList = Shapes::ListShape.new(name: 'SpeakerSearchResultList')
+    SpeakerSearchTask = Shapes::StructureShape.new(name: 'SpeakerSearchTask')
+    StartSpeakerSearchTaskRequest = Shapes::StructureShape.new(name: 'StartSpeakerSearchTaskRequest')
+    StartSpeakerSearchTaskResponse = Shapes::StructureShape.new(name: 'StartSpeakerSearchTaskResponse')
+    StartVoiceToneAnalysisTaskRequest = Shapes::StructureShape.new(name: 'StartVoiceToneAnalysisTaskRequest')
+    StartVoiceToneAnalysisTaskResponse = Shapes::StructureShape.new(name: 'StartVoiceToneAnalysisTaskResponse')
+    StopSpeakerSearchTaskRequest = Shapes::StructureShape.new(name: 'StopSpeakerSearchTaskRequest')
+    StopVoiceToneAnalysisTaskRequest = Shapes::StructureShape.new(name: 'StopVoiceToneAnalysisTaskRequest')
     StreamingConfiguration = Shapes::StructureShape.new(name: 'StreamingConfiguration')
     StreamingNotificationTarget = Shapes::StructureShape.new(name: 'StreamingNotificationTarget')
     StreamingNotificationTargetList = Shapes::ListShape.new(name: 'StreamingNotificationTargetList')
     String = Shapes::StringShape.new(name: 'String')
     String128 = Shapes::StringShape.new(name: 'String128')
     StringList = Shapes::ListShape.new(name: 'StringList')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     Termination = Shapes::StructureShape.new(name: 'Termination')
     TerminationHealth = Shapes::StructureShape.new(name: 'TerminationHealth')
     ThrottledClientException = Shapes::StructureShape.new(name: 'ThrottledClientException')
     TollFreePrefix = Shapes::StringShape.new(name: 'TollFreePrefix')
     UnauthorizedClientException = Shapes::StructureShape.new(name: 'UnauthorizedClientException')
+    UnprocessableEntityException = Shapes::StructureShape.new(name: 'UnprocessableEntityException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateGlobalSettingsRequest = Shapes::StructureShape.new(name: 'UpdateGlobalSettingsRequest')
     UpdatePhoneNumberRequest = Shapes::StructureShape.new(name: 'UpdatePhoneNumberRequest')
     UpdatePhoneNumberRequestItem = Shapes::StructureShape.new(name: 'UpdatePhoneNumberRequestItem')
@@ -263,6 +310,10 @@ module Aws::ChimeSDKVoice
     UpdateVoiceConnectorGroupResponse = Shapes::StructureShape.new(name: 'UpdateVoiceConnectorGroupResponse')
     UpdateVoiceConnectorRequest = Shapes::StructureShape.new(name: 'UpdateVoiceConnectorRequest')
     UpdateVoiceConnectorResponse = Shapes::StructureShape.new(name: 'UpdateVoiceConnectorResponse')
+    UpdateVoiceProfileDomainRequest = Shapes::StructureShape.new(name: 'UpdateVoiceProfileDomainRequest')
+    UpdateVoiceProfileDomainResponse = Shapes::StructureShape.new(name: 'UpdateVoiceProfileDomainResponse')
+    UpdateVoiceProfileRequest = Shapes::StructureShape.new(name: 'UpdateVoiceProfileRequest')
+    UpdateVoiceProfileResponse = Shapes::StructureShape.new(name: 'UpdateVoiceProfileResponse')
     ValidateE911AddressRequest = Shapes::StructureShape.new(name: 'ValidateE911AddressRequest')
     ValidateE911AddressResponse = Shapes::StructureShape.new(name: 'ValidateE911AddressResponse')
     ValidationResult = Shapes::IntegerShape.new(name: 'ValidationResult')
@@ -278,6 +329,15 @@ module Aws::ChimeSDKVoice
     VoiceConnectorList = Shapes::ListShape.new(name: 'VoiceConnectorList')
     VoiceConnectorName = Shapes::StringShape.new(name: 'VoiceConnectorName')
     VoiceConnectorSettings = Shapes::StructureShape.new(name: 'VoiceConnectorSettings')
+    VoiceProfile = Shapes::StructureShape.new(name: 'VoiceProfile')
+    VoiceProfileDomain = Shapes::StructureShape.new(name: 'VoiceProfileDomain')
+    VoiceProfileDomainDescription = Shapes::StringShape.new(name: 'VoiceProfileDomainDescription')
+    VoiceProfileDomainName = Shapes::StringShape.new(name: 'VoiceProfileDomainName')
+    VoiceProfileDomainSummary = Shapes::StructureShape.new(name: 'VoiceProfileDomainSummary')
+    VoiceProfileDomainSummaryList = Shapes::ListShape.new(name: 'VoiceProfileDomainSummaryList')
+    VoiceProfileSummary = Shapes::StructureShape.new(name: 'VoiceProfileSummary')
+    VoiceProfileSummaryList = Shapes::ListShape.new(name: 'VoiceProfileSummaryList')
+    VoiceToneAnalysisTask = Shapes::StructureShape.new(name: 'VoiceToneAnalysisTask')
 
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
@@ -324,6 +384,11 @@ module Aws::ChimeSDKVoice
 
     BatchUpdatePhoneNumberResponse.add_member(:phone_number_errors, Shapes::ShapeRef.new(shape: PhoneNumberErrorList, location_name: "PhoneNumberErrors"))
     BatchUpdatePhoneNumberResponse.struct_class = Types::BatchUpdatePhoneNumberResponse
+
+    CallDetails.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, location_name: "VoiceConnectorId"))
+    CallDetails.add_member(:transaction_id, Shapes::ShapeRef.new(shape: NonEmptyString256, location_name: "TransactionId"))
+    CallDetails.add_member(:is_caller, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsCaller"))
+    CallDetails.struct_class = Types::CallDetails
 
     CallingRegionList.member = Shapes::ShapeRef.new(shape: CallingRegion)
 
@@ -407,6 +472,22 @@ module Aws::ChimeSDKVoice
     CreateVoiceConnectorResponse.add_member(:voice_connector, Shapes::ShapeRef.new(shape: VoiceConnector, location_name: "VoiceConnector"))
     CreateVoiceConnectorResponse.struct_class = Types::CreateVoiceConnectorResponse
 
+    CreateVoiceProfileDomainRequest.add_member(:name, Shapes::ShapeRef.new(shape: VoiceProfileDomainName, required: true, location_name: "Name"))
+    CreateVoiceProfileDomainRequest.add_member(:description, Shapes::ShapeRef.new(shape: VoiceProfileDomainDescription, location_name: "Description"))
+    CreateVoiceProfileDomainRequest.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, required: true, location_name: "ServerSideEncryptionConfiguration"))
+    CreateVoiceProfileDomainRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestId, location_name: "ClientRequestToken"))
+    CreateVoiceProfileDomainRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateVoiceProfileDomainRequest.struct_class = Types::CreateVoiceProfileDomainRequest
+
+    CreateVoiceProfileDomainResponse.add_member(:voice_profile_domain, Shapes::ShapeRef.new(shape: VoiceProfileDomain, location_name: "VoiceProfileDomain"))
+    CreateVoiceProfileDomainResponse.struct_class = Types::CreateVoiceProfileDomainResponse
+
+    CreateVoiceProfileRequest.add_member(:speaker_search_task_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location_name: "SpeakerSearchTaskId"))
+    CreateVoiceProfileRequest.struct_class = Types::CreateVoiceProfileRequest
+
+    CreateVoiceProfileResponse.add_member(:voice_profile, Shapes::ShapeRef.new(shape: VoiceProfile, location_name: "VoiceProfile"))
+    CreateVoiceProfileResponse.struct_class = Types::CreateVoiceProfileResponse
+
     Credential.add_member(:username, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Username"))
     Credential.add_member(:password, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Password"))
     Credential.struct_class = Types::Credential
@@ -457,6 +538,12 @@ module Aws::ChimeSDKVoice
 
     DeleteVoiceConnectorTerminationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
     DeleteVoiceConnectorTerminationRequest.struct_class = Types::DeleteVoiceConnectorTerminationRequest
+
+    DeleteVoiceProfileDomainRequest.add_member(:voice_profile_domain_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location: "uri", location_name: "VoiceProfileDomainId"))
+    DeleteVoiceProfileDomainRequest.struct_class = Types::DeleteVoiceProfileDomainRequest
+
+    DeleteVoiceProfileRequest.add_member(:voice_profile_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location: "uri", location_name: "VoiceProfileId"))
+    DeleteVoiceProfileRequest.struct_class = Types::DeleteVoiceProfileRequest
 
     DisassociatePhoneNumbersFromVoiceConnectorGroupRequest.add_member(:voice_connector_group_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorGroupId"))
     DisassociatePhoneNumbersFromVoiceConnectorGroupRequest.add_member(:e164_phone_numbers, Shapes::ShapeRef.new(shape: E164PhoneNumberList, required: true, location_name: "E164PhoneNumbers"))
@@ -533,6 +620,13 @@ module Aws::ChimeSDKVoice
     GetSipRuleResponse.add_member(:sip_rule, Shapes::ShapeRef.new(shape: SipRule, location_name: "SipRule"))
     GetSipRuleResponse.struct_class = Types::GetSipRuleResponse
 
+    GetSpeakerSearchTaskRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "VoiceConnectorId"))
+    GetSpeakerSearchTaskRequest.add_member(:speaker_search_task_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location: "uri", location_name: "SpeakerSearchTaskId"))
+    GetSpeakerSearchTaskRequest.struct_class = Types::GetSpeakerSearchTaskRequest
+
+    GetSpeakerSearchTaskResponse.add_member(:speaker_search_task, Shapes::ShapeRef.new(shape: SpeakerSearchTask, location_name: "SpeakerSearchTask"))
+    GetSpeakerSearchTaskResponse.struct_class = Types::GetSpeakerSearchTaskResponse
+
     GetVoiceConnectorEmergencyCallingConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
     GetVoiceConnectorEmergencyCallingConfigurationRequest.struct_class = Types::GetVoiceConnectorEmergencyCallingConfigurationRequest
 
@@ -586,6 +680,28 @@ module Aws::ChimeSDKVoice
 
     GetVoiceConnectorTerminationResponse.add_member(:termination, Shapes::ShapeRef.new(shape: Termination, location_name: "Termination"))
     GetVoiceConnectorTerminationResponse.struct_class = Types::GetVoiceConnectorTerminationResponse
+
+    GetVoiceProfileDomainRequest.add_member(:voice_profile_domain_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location: "uri", location_name: "VoiceProfileDomainId"))
+    GetVoiceProfileDomainRequest.struct_class = Types::GetVoiceProfileDomainRequest
+
+    GetVoiceProfileDomainResponse.add_member(:voice_profile_domain, Shapes::ShapeRef.new(shape: VoiceProfileDomain, location_name: "VoiceProfileDomain"))
+    GetVoiceProfileDomainResponse.struct_class = Types::GetVoiceProfileDomainResponse
+
+    GetVoiceProfileRequest.add_member(:voice_profile_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location: "uri", location_name: "VoiceProfileId"))
+    GetVoiceProfileRequest.struct_class = Types::GetVoiceProfileRequest
+
+    GetVoiceProfileResponse.add_member(:voice_profile, Shapes::ShapeRef.new(shape: VoiceProfile, location_name: "VoiceProfile"))
+    GetVoiceProfileResponse.struct_class = Types::GetVoiceProfileResponse
+
+    GetVoiceToneAnalysisTaskRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "VoiceConnectorId"))
+    GetVoiceToneAnalysisTaskRequest.add_member(:voice_tone_analysis_task_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location: "uri", location_name: "VoiceToneAnalysisTaskId"))
+    GetVoiceToneAnalysisTaskRequest.add_member(:is_caller, Shapes::ShapeRef.new(shape: Boolean, required: true, location: "querystring", location_name: "isCaller"))
+    GetVoiceToneAnalysisTaskRequest.struct_class = Types::GetVoiceToneAnalysisTaskRequest
+
+    GetVoiceToneAnalysisTaskResponse.add_member(:voice_tone_analysis_task, Shapes::ShapeRef.new(shape: VoiceToneAnalysisTask, location_name: "VoiceToneAnalysisTask"))
+    GetVoiceToneAnalysisTaskResponse.struct_class = Types::GetVoiceToneAnalysisTaskResponse
+
+    GoneException.struct_class = Types::GoneException
 
     ListAvailableVoiceConnectorRegionsResponse.add_member(:voice_connector_regions, Shapes::ShapeRef.new(shape: VoiceConnectorAwsRegionList, location_name: "VoiceConnectorRegions"))
     ListAvailableVoiceConnectorRegionsResponse.struct_class = Types::ListAvailableVoiceConnectorRegionsResponse
@@ -643,6 +759,12 @@ module Aws::ChimeSDKVoice
     ListSupportedPhoneNumberCountriesResponse.add_member(:phone_number_countries, Shapes::ShapeRef.new(shape: PhoneNumberCountriesList, location_name: "PhoneNumberCountries"))
     ListSupportedPhoneNumberCountriesResponse.struct_class = Types::ListSupportedPhoneNumberCountriesResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "arn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     ListVoiceConnectorGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     ListVoiceConnectorGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultMax, location: "querystring", location_name: "max-results"))
     ListVoiceConnectorGroupsRequest.struct_class = Types::ListVoiceConnectorGroupsRequest
@@ -665,9 +787,30 @@ module Aws::ChimeSDKVoice
     ListVoiceConnectorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListVoiceConnectorsResponse.struct_class = Types::ListVoiceConnectorsResponse
 
+    ListVoiceProfileDomainsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListVoiceProfileDomainsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultMax, location: "querystring", location_name: "max-results"))
+    ListVoiceProfileDomainsRequest.struct_class = Types::ListVoiceProfileDomainsRequest
+
+    ListVoiceProfileDomainsResponse.add_member(:voice_profile_domains, Shapes::ShapeRef.new(shape: VoiceProfileDomainSummaryList, location_name: "VoiceProfileDomains"))
+    ListVoiceProfileDomainsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListVoiceProfileDomainsResponse.struct_class = Types::ListVoiceProfileDomainsResponse
+
+    ListVoiceProfilesRequest.add_member(:voice_profile_domain_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location: "querystring", location_name: "voice-profile-domain-id"))
+    ListVoiceProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListVoiceProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultMax, location: "querystring", location_name: "max-results"))
+    ListVoiceProfilesRequest.struct_class = Types::ListVoiceProfilesRequest
+
+    ListVoiceProfilesResponse.add_member(:voice_profiles, Shapes::ShapeRef.new(shape: VoiceProfileSummaryList, location_name: "VoiceProfiles"))
+    ListVoiceProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListVoiceProfilesResponse.struct_class = Types::ListVoiceProfilesResponse
+
     LoggingConfiguration.add_member(:enable_sip_logs, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableSIPLogs"))
     LoggingConfiguration.add_member(:enable_media_metric_logs, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableMediaMetricLogs"))
     LoggingConfiguration.struct_class = Types::LoggingConfiguration
+
+    MediaInsightsConfiguration.add_member(:disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Disabled"))
+    MediaInsightsConfiguration.add_member(:configuration_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ConfigurationArn"))
+    MediaInsightsConfiguration.struct_class = Types::MediaInsightsConfiguration
 
     NonEmptyStringList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -875,6 +1018,9 @@ module Aws::ChimeSDKVoice
 
     SensitiveStringList.member = Shapes::ShapeRef.new(shape: SensitiveString)
 
+    ServerSideEncryptionConfiguration.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "KmsKeyArn"))
+    ServerSideEncryptionConfiguration.struct_class = Types::ServerSideEncryptionConfiguration
+
     ServiceFailureException.struct_class = Types::ServiceFailureException
 
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
@@ -926,9 +1072,56 @@ module Aws::ChimeSDKVoice
 
     SipRuleTargetApplicationList.member = Shapes::ShapeRef.new(shape: SipRuleTargetApplication)
 
+    SpeakerSearchDetails.add_member(:results, Shapes::ShapeRef.new(shape: SpeakerSearchResultList, location_name: "Results"))
+    SpeakerSearchDetails.add_member(:voiceprint_generation_status, Shapes::ShapeRef.new(shape: NonEmptyString256, location_name: "VoiceprintGenerationStatus"))
+    SpeakerSearchDetails.struct_class = Types::SpeakerSearchDetails
+
+    SpeakerSearchResult.add_member(:confidence_score, Shapes::ShapeRef.new(shape: ConfidenceScore, location_name: "ConfidenceScore"))
+    SpeakerSearchResult.add_member(:voice_profile_id, Shapes::ShapeRef.new(shape: NonEmptyString256, location_name: "VoiceProfileId"))
+    SpeakerSearchResult.struct_class = Types::SpeakerSearchResult
+
+    SpeakerSearchResultList.member = Shapes::ShapeRef.new(shape: SpeakerSearchResult)
+
+    SpeakerSearchTask.add_member(:speaker_search_task_id, Shapes::ShapeRef.new(shape: NonEmptyString256, location_name: "SpeakerSearchTaskId"))
+    SpeakerSearchTask.add_member(:speaker_search_task_status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SpeakerSearchTaskStatus"))
+    SpeakerSearchTask.add_member(:call_details, Shapes::ShapeRef.new(shape: CallDetails, location_name: "CallDetails"))
+    SpeakerSearchTask.add_member(:speaker_search_details, Shapes::ShapeRef.new(shape: SpeakerSearchDetails, location_name: "SpeakerSearchDetails"))
+    SpeakerSearchTask.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
+    SpeakerSearchTask.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
+    SpeakerSearchTask.add_member(:started_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "StartedTimestamp"))
+    SpeakerSearchTask.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
+    SpeakerSearchTask.struct_class = Types::SpeakerSearchTask
+
+    StartSpeakerSearchTaskRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "VoiceConnectorId"))
+    StartSpeakerSearchTaskRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location_name: "TransactionId"))
+    StartSpeakerSearchTaskRequest.add_member(:voice_profile_domain_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location_name: "VoiceProfileDomainId"))
+    StartSpeakerSearchTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestId, location_name: "ClientRequestToken"))
+    StartSpeakerSearchTaskRequest.struct_class = Types::StartSpeakerSearchTaskRequest
+
+    StartSpeakerSearchTaskResponse.add_member(:speaker_search_task, Shapes::ShapeRef.new(shape: SpeakerSearchTask, location_name: "SpeakerSearchTask"))
+    StartSpeakerSearchTaskResponse.struct_class = Types::StartSpeakerSearchTaskResponse
+
+    StartVoiceToneAnalysisTaskRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "VoiceConnectorId"))
+    StartVoiceToneAnalysisTaskRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location_name: "TransactionId"))
+    StartVoiceToneAnalysisTaskRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
+    StartVoiceToneAnalysisTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestId, location_name: "ClientRequestToken"))
+    StartVoiceToneAnalysisTaskRequest.struct_class = Types::StartVoiceToneAnalysisTaskRequest
+
+    StartVoiceToneAnalysisTaskResponse.add_member(:voice_tone_analysis_task, Shapes::ShapeRef.new(shape: VoiceToneAnalysisTask, location_name: "VoiceToneAnalysisTask"))
+    StartVoiceToneAnalysisTaskResponse.struct_class = Types::StartVoiceToneAnalysisTaskResponse
+
+    StopSpeakerSearchTaskRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "VoiceConnectorId"))
+    StopSpeakerSearchTaskRequest.add_member(:speaker_search_task_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location: "uri", location_name: "SpeakerSearchTaskId"))
+    StopSpeakerSearchTaskRequest.struct_class = Types::StopSpeakerSearchTaskRequest
+
+    StopVoiceToneAnalysisTaskRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString128, required: true, location: "uri", location_name: "VoiceConnectorId"))
+    StopVoiceToneAnalysisTaskRequest.add_member(:voice_tone_analysis_task_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location: "uri", location_name: "VoiceToneAnalysisTaskId"))
+    StopVoiceToneAnalysisTaskRequest.struct_class = Types::StopVoiceToneAnalysisTaskRequest
+
     StreamingConfiguration.add_member(:data_retention_in_hours, Shapes::ShapeRef.new(shape: DataRetentionInHours, required: true, location_name: "DataRetentionInHours"))
     StreamingConfiguration.add_member(:disabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Disabled"))
     StreamingConfiguration.add_member(:streaming_notification_targets, Shapes::ShapeRef.new(shape: StreamingNotificationTargetList, location_name: "StreamingNotificationTargets"))
+    StreamingConfiguration.add_member(:media_insights_configuration, Shapes::ShapeRef.new(shape: MediaInsightsConfiguration, location_name: "MediaInsightsConfiguration"))
     StreamingConfiguration.struct_class = Types::StreamingConfiguration
 
     StreamingNotificationTarget.add_member(:notification_target, Shapes::ShapeRef.new(shape: NotificationTarget, location_name: "NotificationTarget"))
@@ -937,6 +1130,18 @@ module Aws::ChimeSDKVoice
     StreamingNotificationTargetList.member = Shapes::ShapeRef.new(shape: StreamingNotificationTarget)
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
+
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceARN"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
 
     Termination.add_member(:cps_limit, Shapes::ShapeRef.new(shape: CpsLimit, location_name: "CpsLimit"))
     Termination.add_member(:default_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, location_name: "DefaultPhoneNumber"))
@@ -952,6 +1157,12 @@ module Aws::ChimeSDKVoice
     ThrottledClientException.struct_class = Types::ThrottledClientException
 
     UnauthorizedClientException.struct_class = Types::UnauthorizedClientException
+
+    UnprocessableEntityException.struct_class = Types::UnprocessableEntityException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceARN"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UpdateGlobalSettingsRequest.add_member(:voice_connector, Shapes::ShapeRef.new(shape: VoiceConnectorSettings, location_name: "VoiceConnector"))
     UpdateGlobalSettingsRequest.struct_class = Types::UpdateGlobalSettingsRequest
@@ -1024,6 +1235,21 @@ module Aws::ChimeSDKVoice
     UpdateVoiceConnectorResponse.add_member(:voice_connector, Shapes::ShapeRef.new(shape: VoiceConnector, location_name: "VoiceConnector"))
     UpdateVoiceConnectorResponse.struct_class = Types::UpdateVoiceConnectorResponse
 
+    UpdateVoiceProfileDomainRequest.add_member(:voice_profile_domain_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location: "uri", location_name: "VoiceProfileDomainId"))
+    UpdateVoiceProfileDomainRequest.add_member(:name, Shapes::ShapeRef.new(shape: VoiceProfileDomainName, location_name: "Name"))
+    UpdateVoiceProfileDomainRequest.add_member(:description, Shapes::ShapeRef.new(shape: VoiceProfileDomainDescription, location_name: "Description"))
+    UpdateVoiceProfileDomainRequest.struct_class = Types::UpdateVoiceProfileDomainRequest
+
+    UpdateVoiceProfileDomainResponse.add_member(:voice_profile_domain, Shapes::ShapeRef.new(shape: VoiceProfileDomain, location_name: "VoiceProfileDomain"))
+    UpdateVoiceProfileDomainResponse.struct_class = Types::UpdateVoiceProfileDomainResponse
+
+    UpdateVoiceProfileRequest.add_member(:voice_profile_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location: "uri", location_name: "VoiceProfileId"))
+    UpdateVoiceProfileRequest.add_member(:speaker_search_task_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location_name: "SpeakerSearchTaskId"))
+    UpdateVoiceProfileRequest.struct_class = Types::UpdateVoiceProfileRequest
+
+    UpdateVoiceProfileResponse.add_member(:voice_profile, Shapes::ShapeRef.new(shape: VoiceProfile, location_name: "VoiceProfile"))
+    UpdateVoiceProfileResponse.struct_class = Types::UpdateVoiceProfileResponse
+
     ValidateE911AddressRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "AwsAccountId"))
     ValidateE911AddressRequest.add_member(:street_number, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, required: true, location_name: "StreetNumber"))
     ValidateE911AddressRequest.add_member(:street_info, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, required: true, location_name: "StreetInfo"))
@@ -1071,6 +1297,52 @@ module Aws::ChimeSDKVoice
 
     VoiceConnectorSettings.add_member(:cdr_bucket, Shapes::ShapeRef.new(shape: String, location_name: "CdrBucket"))
     VoiceConnectorSettings.struct_class = Types::VoiceConnectorSettings
+
+    VoiceProfile.add_member(:voice_profile_id, Shapes::ShapeRef.new(shape: NonEmptyString256, location_name: "VoiceProfileId"))
+    VoiceProfile.add_member(:voice_profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "VoiceProfileArn"))
+    VoiceProfile.add_member(:voice_profile_domain_id, Shapes::ShapeRef.new(shape: NonEmptyString256, location_name: "VoiceProfileDomainId"))
+    VoiceProfile.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
+    VoiceProfile.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
+    VoiceProfile.add_member(:expiration_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "ExpirationTimestamp"))
+    VoiceProfile.struct_class = Types::VoiceProfile
+
+    VoiceProfileDomain.add_member(:voice_profile_domain_id, Shapes::ShapeRef.new(shape: NonEmptyString256, location_name: "VoiceProfileDomainId"))
+    VoiceProfileDomain.add_member(:voice_profile_domain_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "VoiceProfileDomainArn"))
+    VoiceProfileDomain.add_member(:name, Shapes::ShapeRef.new(shape: VoiceProfileDomainName, location_name: "Name"))
+    VoiceProfileDomain.add_member(:description, Shapes::ShapeRef.new(shape: VoiceProfileDomainDescription, location_name: "Description"))
+    VoiceProfileDomain.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "ServerSideEncryptionConfiguration"))
+    VoiceProfileDomain.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
+    VoiceProfileDomain.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
+    VoiceProfileDomain.struct_class = Types::VoiceProfileDomain
+
+    VoiceProfileDomainSummary.add_member(:voice_profile_domain_id, Shapes::ShapeRef.new(shape: NonEmptyString256, location_name: "VoiceProfileDomainId"))
+    VoiceProfileDomainSummary.add_member(:voice_profile_domain_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "VoiceProfileDomainArn"))
+    VoiceProfileDomainSummary.add_member(:name, Shapes::ShapeRef.new(shape: VoiceProfileDomainName, location_name: "Name"))
+    VoiceProfileDomainSummary.add_member(:description, Shapes::ShapeRef.new(shape: VoiceProfileDomainDescription, location_name: "Description"))
+    VoiceProfileDomainSummary.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
+    VoiceProfileDomainSummary.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
+    VoiceProfileDomainSummary.struct_class = Types::VoiceProfileDomainSummary
+
+    VoiceProfileDomainSummaryList.member = Shapes::ShapeRef.new(shape: VoiceProfileDomainSummary)
+
+    VoiceProfileSummary.add_member(:voice_profile_id, Shapes::ShapeRef.new(shape: NonEmptyString256, location_name: "VoiceProfileId"))
+    VoiceProfileSummary.add_member(:voice_profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "VoiceProfileArn"))
+    VoiceProfileSummary.add_member(:voice_profile_domain_id, Shapes::ShapeRef.new(shape: NonEmptyString256, location_name: "VoiceProfileDomainId"))
+    VoiceProfileSummary.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
+    VoiceProfileSummary.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
+    VoiceProfileSummary.add_member(:expiration_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "ExpirationTimestamp"))
+    VoiceProfileSummary.struct_class = Types::VoiceProfileSummary
+
+    VoiceProfileSummaryList.member = Shapes::ShapeRef.new(shape: VoiceProfileSummary)
+
+    VoiceToneAnalysisTask.add_member(:voice_tone_analysis_task_id, Shapes::ShapeRef.new(shape: NonEmptyString256, location_name: "VoiceToneAnalysisTaskId"))
+    VoiceToneAnalysisTask.add_member(:voice_tone_analysis_task_status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VoiceToneAnalysisTaskStatus"))
+    VoiceToneAnalysisTask.add_member(:call_details, Shapes::ShapeRef.new(shape: CallDetails, location_name: "CallDetails"))
+    VoiceToneAnalysisTask.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
+    VoiceToneAnalysisTask.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
+    VoiceToneAnalysisTask.add_member(:started_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "StartedTimestamp"))
+    VoiceToneAnalysisTask.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
+    VoiceToneAnalysisTask.struct_class = Types::VoiceToneAnalysisTask
 
 
     # @api private
@@ -1264,6 +1536,42 @@ module Aws::ChimeSDKVoice
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:create_voice_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateVoiceProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/voice-profiles"
+        o.input = Shapes::ShapeRef.new(shape: CreateVoiceProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateVoiceProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: GoneException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:create_voice_profile_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateVoiceProfileDomain"
+        o.http_method = "POST"
+        o.http_request_uri = "/voice-profile-domains"
+        o.input = Shapes::ShapeRef.new(shape: CreateVoiceProfileDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateVoiceProfileDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:delete_phone_number, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeletePhoneNumber"
         o.http_method = "DELETE"
@@ -1448,6 +1756,40 @@ module Aws::ChimeSDKVoice
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:delete_voice_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteVoiceProfile"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/voice-profiles/{VoiceProfileId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteVoiceProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:delete_voice_profile_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteVoiceProfileDomain"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/voice-profile-domains/{VoiceProfileDomainId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteVoiceProfileDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:disassociate_phone_numbers_from_voice_connector, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociatePhoneNumbersFromVoiceConnector"
         o.http_method = "POST"
@@ -1611,6 +1953,23 @@ module Aws::ChimeSDKVoice
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:get_speaker_search_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSpeakerSearchTask"
+        o.http_method = "GET"
+        o.http_request_uri = "/voice-connectors/{VoiceConnectorId}/speaker-search-tasks/{SpeakerSearchTaskId}"
+        o.input = Shapes::ShapeRef.new(shape: GetSpeakerSearchTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSpeakerSearchTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:get_voice_connector, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetVoiceConnector"
         o.http_method = "GET"
@@ -1746,6 +2105,55 @@ module Aws::ChimeSDKVoice
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:get_voice_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetVoiceProfile"
+        o.http_method = "GET"
+        o.http_request_uri = "/voice-profiles/{VoiceProfileId}"
+        o.input = Shapes::ShapeRef.new(shape: GetVoiceProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetVoiceProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:get_voice_profile_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetVoiceProfileDomain"
+        o.http_method = "GET"
+        o.http_request_uri = "/voice-profile-domains/{VoiceProfileDomainId}"
+        o.input = Shapes::ShapeRef.new(shape: GetVoiceProfileDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetVoiceProfileDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:get_voice_tone_analysis_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetVoiceToneAnalysisTask"
+        o.http_method = "GET"
+        o.http_request_uri = "/voice-connectors/{VoiceConnectorId}/voice-tone-analysis-tasks/{VoiceToneAnalysisTaskId}"
+        o.input = Shapes::ShapeRef.new(shape: GetVoiceToneAnalysisTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetVoiceToneAnalysisTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:list_available_voice_connector_regions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAvailableVoiceConnectorRegions"
         o.http_method = "GET"
@@ -1877,6 +2285,20 @@ module Aws::ChimeSDKVoice
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:list_voice_connector_groups, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListVoiceConnectorGroups"
         o.http_method = "GET"
@@ -1918,6 +2340,48 @@ module Aws::ChimeSDKVoice
         o.http_request_uri = "/voice-connectors"
         o.input = Shapes::ShapeRef.new(shape: ListVoiceConnectorsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListVoiceConnectorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_voice_profile_domains, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListVoiceProfileDomains"
+        o.http_method = "GET"
+        o.http_request_uri = "/voice-profile-domains"
+        o.input = Shapes::ShapeRef.new(shape: ListVoiceProfileDomainsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListVoiceProfileDomainsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_voice_profiles, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListVoiceProfiles"
+        o.http_method = "GET"
+        o.http_request_uri = "/voice-profiles"
+        o.input = Shapes::ShapeRef.new(shape: ListVoiceProfilesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListVoiceProfilesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -2106,6 +2570,111 @@ module Aws::ChimeSDKVoice
         )
       end)
 
+      api.add_operation(:start_speaker_search_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartSpeakerSearchTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/voice-connectors/{VoiceConnectorId}/speaker-search-tasks"
+        o.input = Shapes::ShapeRef.new(shape: StartSpeakerSearchTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartSpeakerSearchTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: GoneException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:start_voice_tone_analysis_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartVoiceToneAnalysisTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/voice-connectors/{VoiceConnectorId}/voice-tone-analysis-tasks"
+        o.input = Shapes::ShapeRef.new(shape: StartVoiceToneAnalysisTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartVoiceToneAnalysisTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: GoneException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:stop_speaker_search_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopSpeakerSearchTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/voice-connectors/{VoiceConnectorId}/speaker-search-tasks/{SpeakerSearchTaskId}?operation=stop"
+        o.input = Shapes::ShapeRef.new(shape: StopSpeakerSearchTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:stop_voice_tone_analysis_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopVoiceToneAnalysisTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/voice-connectors/{VoiceConnectorId}/voice-tone-analysis-tasks/{VoiceToneAnalysisTaskId}?operation=stop"
+        o.input = Shapes::ShapeRef.new(shape: StopVoiceToneAnalysisTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags?operation=tag-resource"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags?operation=untag-resource"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:update_global_settings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateGlobalSettings"
         o.http_method = "PUT"
@@ -2240,6 +2809,40 @@ module Aws::ChimeSDKVoice
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:update_voice_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateVoiceProfile"
+        o.http_method = "PUT"
+        o.http_request_uri = "/voice-profiles/{VoiceProfileId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateVoiceProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateVoiceProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: GoneException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:update_voice_profile_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateVoiceProfileDomain"
+        o.http_method = "PUT"
+        o.http_request_uri = "/voice-profile-domains/{VoiceProfileDomainId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateVoiceProfileDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateVoiceProfileDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)

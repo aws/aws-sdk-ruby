@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2023-03-23)
+------------------
+
+* Feature - The AnalyzeDocument - Tables feature adds support for new elements in the API: table titles, footers, section titles, summary cells/tables, and table type.
+
 1.44.0 (2023-01-18)
 ------------------
 

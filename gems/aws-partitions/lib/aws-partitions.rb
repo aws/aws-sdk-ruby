@@ -390,6 +390,7 @@ module Aws
             'Honeycode' => 'honeycode',
             'IAM' => 'iam',
             'IVS' => 'ivs',
+            'IVSRealTime' => 'ivsrealtime',
             'IdentityStore' => 'identitystore',
             'Imagebuilder' => 'imagebuilder',
             'ImportExport' => 'importexport',

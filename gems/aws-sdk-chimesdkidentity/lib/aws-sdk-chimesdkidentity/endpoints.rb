@@ -39,6 +39,20 @@ module Aws::ChimeSDKIdentity
       end
     end
 
+    class CreateAppInstanceBot
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ChimeSDKIdentity::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateAppInstanceUser
       def self.build(context)
         unless context.config.regional_endpoint
@@ -68,6 +82,20 @@ module Aws::ChimeSDKIdentity
     end
 
     class DeleteAppInstanceAdmin
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ChimeSDKIdentity::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DeleteAppInstanceBot
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -137,6 +165,20 @@ module Aws::ChimeSDKIdentity
       end
     end
 
+    class DescribeAppInstanceBot
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ChimeSDKIdentity::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DescribeAppInstanceUser
       def self.build(context)
         unless context.config.regional_endpoint
@@ -180,6 +222,20 @@ module Aws::ChimeSDKIdentity
     end
 
     class ListAppInstanceAdmins
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ChimeSDKIdentity::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListAppInstanceBots
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -263,6 +319,20 @@ module Aws::ChimeSDKIdentity
       end
     end
 
+    class PutAppInstanceUserExpirationSettings
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ChimeSDKIdentity::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class RegisterAppInstanceUserEndpoint
       def self.build(context)
         unless context.config.regional_endpoint
@@ -306,6 +376,20 @@ module Aws::ChimeSDKIdentity
     end
 
     class UpdateAppInstance
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ChimeSDKIdentity::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdateAppInstanceBot
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

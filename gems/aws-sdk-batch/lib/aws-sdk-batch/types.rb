@@ -245,8 +245,24 @@ module Aws::Batch
     #   If the state is `DISABLED`, then the Batch scheduler doesn't
     #   attempt to place jobs within the environment. Jobs in a `STARTING`
     #   or `RUNNING` state continue to progress normally. Managed compute
-    #   environments in the `DISABLED` state don't scale out. However, they
-    #   scale in to `minvCpus` value after instances become idle.
+    #   environments in the `DISABLED` state don't scale out.
+    #
+    #   <note markdown="1"> Compute environments in a `DISABLED` state may continue to incur
+    #   billing charges. To prevent additional charges, turn off and then
+    #   delete the compute environment. For more information, see [State][1]
+    #   in the *Batch User Guide*.
+    #
+    #    </note>
+    #
+    #   When an instance is idle, the instance scales down to the `minvCpus`
+    #   value. However, the instance size doesn't change. For example,
+    #   consider a `c5.8xlarge` instance with a `minvCpus` value of `4` and
+    #   a `desiredvCpus` value of `36`. This instance doesn't scale down to
+    #   a `c5.large` instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -786,6 +802,19 @@ module Aws::Batch
     #   compute environments using Amazon EKS clusters.
     #
     #    </note>
+    #
+    #   <note markdown="1"> When you update the `desiredvCpus` setting, the value must be
+    #   between the `minvCpus` and `maxvCpus` values.
+    #
+    #    Additionally, the updated `desiredvCpus` value must be greater than
+    #   or equal to the current `desiredvCpus` value. For more information,
+    #   see [Troubleshooting Batch][1] in the *Batch User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#error-desired-vcpus-update
     #   @return [Integer]
     #
     # @!attribute [rw] subnets
@@ -1450,6 +1479,12 @@ module Aws::Batch
     #   this parameter.
     #   @return [Types::FargatePlatformConfiguration]
     #
+    # @!attribute [rw] ephemeral_storage
+    #   The amount of ephemeral storage to allocate for the task. This
+    #   parameter is used to expand the total amount of ephemeral storage
+    #   available, beyond the default amount, for tasks hosted on Fargate.
+    #   @return [Types::EphemeralStorage]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerDetail AWS API Documentation
     #
     class ContainerDetail < Struct.new(
@@ -1478,7 +1513,8 @@ module Aws::Batch
       :log_configuration,
       :secrets,
       :network_configuration,
-      :fargate_platform_configuration)
+      :fargate_platform_configuration,
+      :ephemeral_storage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1865,6 +1901,12 @@ module Aws::Batch
     #   this parameter.
     #   @return [Types::FargatePlatformConfiguration]
     #
+    # @!attribute [rw] ephemeral_storage
+    #   The amount of ephemeral storage to allocate for the task. This
+    #   parameter is used to expand the total amount of ephemeral storage
+    #   available, beyond the default amount, for tasks hosted on Fargate.
+    #   @return [Types::EphemeralStorage]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerProperties AWS API Documentation
     #
     class ContainerProperties < Struct.new(
@@ -1887,7 +1929,8 @@ module Aws::Batch
       :log_configuration,
       :secrets,
       :network_configuration,
-      :fargate_platform_configuration)
+      :fargate_platform_configuration,
+      :ephemeral_storage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1944,8 +1987,24 @@ module Aws::Batch
     #   If the state is `DISABLED`, then the Batch scheduler doesn't
     #   attempt to place jobs within the environment. Jobs in a `STARTING`
     #   or `RUNNING` state continue to progress normally. Managed compute
-    #   environments in the `DISABLED` state don't scale out. However, they
-    #   scale in to `minvCpus` value after instances become idle.
+    #   environments in the `DISABLED` state don't scale out.
+    #
+    #   <note markdown="1"> Compute environments in a `DISABLED` state may continue to incur
+    #   billing charges. To prevent additional charges, turn off and then
+    #   delete the compute environment. For more information, see [State][1]
+    #   in the *Batch User Guide*.
+    #
+    #    </note>
+    #
+    #   When an instance is idle, the instance scales down to the `minvCpus`
+    #   value. However, the instance size doesn't change. For example,
+    #   consider a `c5.8xlarge` instance with a `minvCpus` value of `4` and
+    #   a `desiredvCpus` value of `36`. This instance doesn't scale down to
+    #   a `c5.large` instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state
     #   @return [String]
     #
     # @!attribute [rw] unmanagedv_cpus
@@ -3528,6 +3587,17 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # @!attribute [rw] labels
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EksMetadata AWS API Documentation
+    #
+    class EksMetadata < Struct.new(
+      :labels)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The properties for the pod.
     #
     # @!attribute [rw] service_account_name
@@ -3585,6 +3655,9 @@ module Aws::Batch
     #   resources.
     #   @return [Array<Types::EksVolume>]
     #
+    # @!attribute [rw] metadata
+    #   @return [Types::EksMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EksPodProperties AWS API Documentation
     #
     class EksPodProperties < Struct.new(
@@ -3592,7 +3665,8 @@ module Aws::Batch
       :host_network,
       :dns_policy,
       :containers,
-      :volumes)
+      :volumes,
+      :metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3691,10 +3765,14 @@ module Aws::Batch
     #   The overrides for the container that's used on the Amazon EKS pod.
     #   @return [Array<Types::EksContainerOverride>]
     #
+    # @!attribute [rw] metadata
+    #   @return [Types::EksMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EksPodPropertiesOverride AWS API Documentation
     #
     class EksPodPropertiesOverride < Struct.new(
-      :containers)
+      :containers,
+      :metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3822,6 +3900,24 @@ module Aws::Batch
       :host_path,
       :empty_dir,
       :secret)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The amount of ephemeral storage to allocate for the task. This
+    # parameter is used to expand the total amount of ephemeral storage
+    # available, beyond the default amount, for tasks hosted on Fargate.
+    #
+    # @!attribute [rw] size_in_gi_b
+    #   The total amount, in GiB, of ephemeral storage to set for the task.
+    #   The minimum supported value is `21` GiB and the maximum supported
+    #   value is `200` GiB.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EphemeralStorage AWS API Documentation
+    #
+    class EphemeralStorage < Struct.new(
+      :size_in_gi_b)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5605,7 +5701,7 @@ module Aws::Batch
     #
     #     value = 8192
     #
-    #     : `VCPU` = 1, 2, 4, or 8
+    #     : `VCPU` = 1, 2, or 4
     #
     #     value = 9216, 10240, 11264, 12288, 13312, 14336, or 15360
     #
@@ -5944,9 +6040,15 @@ module Aws::Batch
     #
     # @!attribute [rw] job_definition
     #   The job definition used by this job. This value can be one of
-    #   `name`, `name:revision`, or the Amazon Resource Name (ARN) for the
-    #   job definition. If `name` is specified without a revision then the
-    #   latest active revision is used.
+    #   `definition-name`, `definition-name:revision`, or the Amazon
+    #   Resource Name (ARN) for the job definition, with or without the
+    #   revision
+    #   (`arn:aws:batch:region:account:job-definition/definition-name:revision
+    #   `, or `arn:aws:batch:region:account:job-definition/definition-name
+    #   `).
+    #
+    #   If the revision is not specified, then the latest active revision is
+    #   used.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -6249,8 +6351,24 @@ module Aws::Batch
     #   If the state is `DISABLED`, then the Batch scheduler doesn't
     #   attempt to place jobs within the environment. Jobs in a `STARTING`
     #   or `RUNNING` state continue to progress normally. Managed compute
-    #   environments in the `DISABLED` state don't scale out. However, they
-    #   scale in to `minvCpus` value after instances become idle.
+    #   environments in the `DISABLED` state don't scale out.
+    #
+    #   <note markdown="1"> Compute environments in a `DISABLED` state may continue to incur
+    #   billing charges. To prevent additional charges, turn off and then
+    #   delete the compute environment. For more information, see [State][1]
+    #   in the *Batch User Guide*.
+    #
+    #    </note>
+    #
+    #   When an instance is idle, the instance scales down to the `minvCpus`
+    #   value. However, the instance size doesn't change. For example,
+    #   consider a `c5.8xlarge` instance with a `minvCpus` value of `4` and
+    #   a `desiredvCpus` value of `36`. This instance doesn't scale down to
+    #   a `c5.large` instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state
     #   @return [String]
     #
     # @!attribute [rw] unmanagedv_cpus

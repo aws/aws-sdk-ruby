@@ -456,7 +456,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_capture_pipeline.media_pipeline_arn #=> String
     #   resp.media_capture_pipeline.source_type #=> String, one of "ChimeSdkMeeting"
     #   resp.media_capture_pipeline.source_arn #=> String
-    #   resp.media_capture_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped"
+    #   resp.media_capture_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused"
     #   resp.media_capture_pipeline.sink_type #=> String, one of "S3Bucket"
     #   resp.media_capture_pipeline.sink_arn #=> String
     #   resp.media_capture_pipeline.created_timestamp #=> Time
@@ -579,7 +579,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_concatenation_pipeline.sinks #=> Array
     #   resp.media_concatenation_pipeline.sinks[0].type #=> String, one of "S3Bucket"
     #   resp.media_concatenation_pipeline.sinks[0].s3_bucket_sink_configuration.destination #=> String
-    #   resp.media_concatenation_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped"
+    #   resp.media_concatenation_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused"
     #   resp.media_concatenation_pipeline.created_timestamp #=> Time
     #   resp.media_concatenation_pipeline.updated_timestamp #=> Time
     #
@@ -592,13 +592,328 @@ module Aws::ChimeSDKMediaPipelines
       req.send_request(options)
     end
 
-    # Creates a streaming media pipeline in an Amazon Chime SDK meeting.
+    # Creates a media insights pipeline.
+    #
+    # @option params [required, String] :media_insights_pipeline_configuration_arn
+    #   The ARN of the pipeline's configuration.
+    #
+    # @option params [Types::KinesisVideoStreamSourceRuntimeConfiguration] :kinesis_video_stream_source_runtime_configuration
+    #   The runtime configuration for the Kinesis video stream source of the
+    #   media insights pipeline.
+    #
+    # @option params [Hash<String,String>] :media_insights_runtime_metadata
+    #   The runtime metadata for the media insights pipeline. Consists of a
+    #   key-value map of strings.
+    #
+    # @option params [Types::KinesisVideoStreamRecordingSourceRuntimeConfiguration] :kinesis_video_stream_recording_source_runtime_configuration
+    #   The runtime configuration for the Kinesis video recording stream
+    #   source.
+    #
+    # @option params [Types::S3RecordingSinkRuntimeConfiguration] :s3_recording_sink_runtime_configuration
+    #   The runtime configuration for the S3 recording sink.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags assigned to the media insights pipeline.
+    #
+    # @option params [String] :client_request_token
+    #   The unique identifier for the media insights pipeline request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateMediaInsightsPipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMediaInsightsPipelineResponse#media_insights_pipeline #media_insights_pipeline} => Types::MediaInsightsPipeline
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_media_insights_pipeline({
+    #     media_insights_pipeline_configuration_arn: "Arn", # required
+    #     kinesis_video_stream_source_runtime_configuration: {
+    #       streams: [ # required
+    #         {
+    #           stream_arn: "KinesisVideoStreamArn", # required
+    #           fragment_number: "FragmentNumberString",
+    #           stream_channel_definition: { # required
+    #             number_of_channels: 1, # required
+    #             channel_definitions: [
+    #               {
+    #                 channel_id: 1, # required
+    #                 participant_role: "AGENT", # accepts AGENT, CUSTOMER
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       ],
+    #       media_encoding: "pcm", # required, accepts pcm
+    #       media_sample_rate: 1, # required
+    #     },
+    #     media_insights_runtime_metadata: {
+    #       "NonEmptyString" => "String",
+    #     },
+    #     kinesis_video_stream_recording_source_runtime_configuration: {
+    #       streams: [ # required
+    #         {
+    #           stream_arn: "KinesisVideoStreamArn",
+    #         },
+    #       ],
+    #       fragment_selector: { # required
+    #         fragment_selector_type: "ProducerTimestamp", # required, accepts ProducerTimestamp, ServerTimestamp
+    #         timestamp_range: { # required
+    #           start_timestamp: Time.now, # required
+    #           end_timestamp: Time.now, # required
+    #         },
+    #       },
+    #     },
+    #     s3_recording_sink_runtime_configuration: {
+    #       destination: "Arn", # required
+    #       recording_file_format: "Wav", # required, accepts Wav, Opus
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.media_insights_pipeline.media_pipeline_id #=> String
+    #   resp.media_insights_pipeline.media_pipeline_arn #=> String
+    #   resp.media_insights_pipeline.media_insights_pipeline_configuration_arn #=> String
+    #   resp.media_insights_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused"
+    #   resp.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.streams #=> Array
+    #   resp.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.streams[0].stream_arn #=> String
+    #   resp.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.streams[0].fragment_number #=> String
+    #   resp.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.streams[0].stream_channel_definition.number_of_channels #=> Integer
+    #   resp.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.streams[0].stream_channel_definition.channel_definitions #=> Array
+    #   resp.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.streams[0].stream_channel_definition.channel_definitions[0].channel_id #=> Integer
+    #   resp.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.streams[0].stream_channel_definition.channel_definitions[0].participant_role #=> String, one of "AGENT", "CUSTOMER"
+    #   resp.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.media_encoding #=> String, one of "pcm"
+    #   resp.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.media_sample_rate #=> Integer
+    #   resp.media_insights_pipeline.media_insights_runtime_metadata #=> Hash
+    #   resp.media_insights_pipeline.media_insights_runtime_metadata["NonEmptyString"] #=> String
+    #   resp.media_insights_pipeline.kinesis_video_stream_recording_source_runtime_configuration.streams #=> Array
+    #   resp.media_insights_pipeline.kinesis_video_stream_recording_source_runtime_configuration.streams[0].stream_arn #=> String
+    #   resp.media_insights_pipeline.kinesis_video_stream_recording_source_runtime_configuration.fragment_selector.fragment_selector_type #=> String, one of "ProducerTimestamp", "ServerTimestamp"
+    #   resp.media_insights_pipeline.kinesis_video_stream_recording_source_runtime_configuration.fragment_selector.timestamp_range.start_timestamp #=> Time
+    #   resp.media_insights_pipeline.kinesis_video_stream_recording_source_runtime_configuration.fragment_selector.timestamp_range.end_timestamp #=> Time
+    #   resp.media_insights_pipeline.s3_recording_sink_runtime_configuration.destination #=> String
+    #   resp.media_insights_pipeline.s3_recording_sink_runtime_configuration.recording_file_format #=> String, one of "Wav", "Opus"
+    #   resp.media_insights_pipeline.created_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/CreateMediaInsightsPipeline AWS API Documentation
+    #
+    # @overload create_media_insights_pipeline(params = {})
+    # @param [Hash] params ({})
+    def create_media_insights_pipeline(params = {}, options = {})
+      req = build_request(:create_media_insights_pipeline, params)
+      req.send_request(options)
+    end
+
+    # A structure that contains the static configurations for a media
+    # insights pipeline.
+    #
+    # @option params [required, String] :media_insights_pipeline_configuration_name
+    #   The name of the media insights pipeline configuration.
+    #
+    # @option params [required, String] :resource_access_role_arn
+    #   The ARN of the role used by the service to access Amazon Web Services
+    #   resources, including `Transcribe` and `Transcribe Call Analytics`, on
+    #   the caller’s behalf.
+    #
+    # @option params [Types::RealTimeAlertConfiguration] :real_time_alert_configuration
+    #   The configuration settings for the real-time alerts in a media
+    #   insights pipeline configuration.
+    #
+    # @option params [required, Array<Types::MediaInsightsPipelineConfigurationElement>] :elements
+    #   The elements in the request, such as a processor for Amazon Transcribe
+    #   or a sink for a Kinesis Data Stream.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags assigned to the media insights pipeline configuration.
+    #
+    # @option params [String] :client_request_token
+    #   The unique identifier for the media insights pipeline configuration
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateMediaInsightsPipelineConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMediaInsightsPipelineConfigurationResponse#media_insights_pipeline_configuration #media_insights_pipeline_configuration} => Types::MediaInsightsPipelineConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_media_insights_pipeline_configuration({
+    #     media_insights_pipeline_configuration_name: "MediaInsightsPipelineConfigurationNameString", # required
+    #     resource_access_role_arn: "Arn", # required
+    #     real_time_alert_configuration: {
+    #       disabled: false,
+    #       rules: [
+    #         {
+    #           type: "KeywordMatch", # required, accepts KeywordMatch, Sentiment, IssueDetection
+    #           keyword_match_configuration: {
+    #             rule_name: "RuleName", # required
+    #             keywords: ["Keyword"], # required
+    #             negate: false,
+    #           },
+    #           sentiment_configuration: {
+    #             rule_name: "RuleName", # required
+    #             sentiment_type: "NEGATIVE", # required, accepts NEGATIVE
+    #             time_period: 1, # required
+    #           },
+    #           issue_detection_configuration: {
+    #             rule_name: "RuleName", # required
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     elements: [ # required
+    #       {
+    #         type: "AmazonTranscribeCallAnalyticsProcessor", # required, accepts AmazonTranscribeCallAnalyticsProcessor, VoiceAnalyticsProcessor, AmazonTranscribeProcessor, KinesisDataStreamSink, LambdaFunctionSink, SqsQueueSink, SnsTopicSink, S3RecordingSink
+    #         amazon_transcribe_call_analytics_processor_configuration: {
+    #           language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR
+    #           vocabulary_name: "VocabularyName",
+    #           vocabulary_filter_name: "VocabularyFilterName",
+    #           vocabulary_filter_method: "remove", # accepts remove, mask, tag
+    #           language_model_name: "ModelName",
+    #           enable_partial_results_stabilization: false,
+    #           partial_results_stability: "high", # accepts high, medium, low
+    #           content_identification_type: "PII", # accepts PII
+    #           content_redaction_type: "PII", # accepts PII
+    #           pii_entity_types: "PiiEntityTypes",
+    #           filter_partial_results: false,
+    #           post_call_analytics_settings: {
+    #             output_location: "String", # required
+    #             data_access_role_arn: "String", # required
+    #             content_redaction_output: "redacted", # accepts redacted, redacted_and_unredacted
+    #             output_encryption_kms_key_id: "String",
+    #           },
+    #           call_analytics_stream_categories: ["CategoryName"],
+    #         },
+    #         amazon_transcribe_processor_configuration: {
+    #           language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR
+    #           vocabulary_name: "VocabularyName",
+    #           vocabulary_filter_name: "VocabularyFilterName",
+    #           vocabulary_filter_method: "remove", # accepts remove, mask, tag
+    #           show_speaker_label: false,
+    #           enable_partial_results_stabilization: false,
+    #           partial_results_stability: "high", # accepts high, medium, low
+    #           content_identification_type: "PII", # accepts PII
+    #           content_redaction_type: "PII", # accepts PII
+    #           pii_entity_types: "PiiEntityTypes",
+    #           language_model_name: "ModelName",
+    #           filter_partial_results: false,
+    #         },
+    #         kinesis_data_stream_sink_configuration: {
+    #           insights_target: "Arn",
+    #         },
+    #         s3_recording_sink_configuration: {
+    #           destination: "Arn",
+    #         },
+    #         voice_analytics_processor_configuration: {
+    #           speaker_search_status: "Enabled", # accepts Enabled, Disabled
+    #           voice_tone_analysis_status: "Enabled", # accepts Enabled, Disabled
+    #         },
+    #         lambda_function_sink_configuration: {
+    #           insights_target: "Arn",
+    #         },
+    #         sqs_queue_sink_configuration: {
+    #           insights_target: "Arn",
+    #         },
+    #         sns_topic_sink_configuration: {
+    #           insights_target: "Arn",
+    #         },
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.media_insights_pipeline_configuration.media_insights_pipeline_configuration_name #=> String
+    #   resp.media_insights_pipeline_configuration.media_insights_pipeline_configuration_arn #=> String
+    #   resp.media_insights_pipeline_configuration.resource_access_role_arn #=> String
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.disabled #=> Boolean
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules #=> Array
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].type #=> String, one of "KeywordMatch", "Sentiment", "IssueDetection"
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].keyword_match_configuration.rule_name #=> String
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].keyword_match_configuration.keywords #=> Array
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].keyword_match_configuration.keywords[0] #=> String
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].keyword_match_configuration.negate #=> Boolean
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].sentiment_configuration.rule_name #=> String
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].sentiment_configuration.sentiment_type #=> String, one of "NEGATIVE"
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].sentiment_configuration.time_period #=> Integer
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].issue_detection_configuration.rule_name #=> String
+    #   resp.media_insights_pipeline_configuration.elements #=> Array
+    #   resp.media_insights_pipeline_configuration.elements[0].type #=> String, one of "AmazonTranscribeCallAnalyticsProcessor", "VoiceAnalyticsProcessor", "AmazonTranscribeProcessor", "KinesisDataStreamSink", "LambdaFunctionSink", "SqsQueueSink", "SnsTopicSink", "S3RecordingSink"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.vocabulary_name #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.vocabulary_filter_name #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.language_model_name #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.enable_partial_results_stabilization #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.partial_results_stability #=> String, one of "high", "medium", "low"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.content_identification_type #=> String, one of "PII"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.content_redaction_type #=> String, one of "PII"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.pii_entity_types #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.filter_partial_results #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.post_call_analytics_settings.output_location #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.post_call_analytics_settings.data_access_role_arn #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.post_call_analytics_settings.content_redaction_output #=> String, one of "redacted", "redacted_and_unredacted"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.post_call_analytics_settings.output_encryption_kms_key_id #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.call_analytics_stream_categories #=> Array
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.call_analytics_stream_categories[0] #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.vocabulary_name #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.vocabulary_filter_name #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.show_speaker_label #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.enable_partial_results_stabilization #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.partial_results_stability #=> String, one of "high", "medium", "low"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.content_identification_type #=> String, one of "PII"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.content_redaction_type #=> String, one of "PII"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.pii_entity_types #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.language_model_name #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.filter_partial_results #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].kinesis_data_stream_sink_configuration.insights_target #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].s3_recording_sink_configuration.destination #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].voice_analytics_processor_configuration.speaker_search_status #=> String, one of "Enabled", "Disabled"
+    #   resp.media_insights_pipeline_configuration.elements[0].voice_analytics_processor_configuration.voice_tone_analysis_status #=> String, one of "Enabled", "Disabled"
+    #   resp.media_insights_pipeline_configuration.elements[0].lambda_function_sink_configuration.insights_target #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].sqs_queue_sink_configuration.insights_target #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].sns_topic_sink_configuration.insights_target #=> String
+    #   resp.media_insights_pipeline_configuration.media_insights_pipeline_configuration_id #=> String
+    #   resp.media_insights_pipeline_configuration.created_timestamp #=> Time
+    #   resp.media_insights_pipeline_configuration.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/CreateMediaInsightsPipelineConfiguration AWS API Documentation
+    #
+    # @overload create_media_insights_pipeline_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_media_insights_pipeline_configuration(params = {}, options = {})
+      req = build_request(:create_media_insights_pipeline_configuration, params)
+      req.send_request(options)
+    end
+
+    # Creates a media live connector pipeline in an Amazon Chime SDK
+    # meeting.
     #
     # @option params [required, Array<Types::LiveConnectorSourceConfiguration>] :sources
-    #   The media pipeline's data sources.
+    #   The media live connector pipeline's data sources.
     #
     # @option params [required, Array<Types::LiveConnectorSinkConfiguration>] :sinks
-    #   The media pipeline's data sinks.
+    #   The media live connector pipeline's data sinks.
     #
     # @option params [String] :client_request_token
     #   The token assigned to the client making the request.
@@ -607,7 +922,7 @@ module Aws::ChimeSDKMediaPipelines
     #   not need to pass this option.**
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags associated with the media pipeline.
+    #   The tags associated with the media live connector pipeline.
     #
     # @return [Types::CreateMediaLiveConnectorPipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -681,7 +996,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_live_connector_pipeline.sinks[0].rtmp_configuration.audio_sample_rate #=> String
     #   resp.media_live_connector_pipeline.media_pipeline_id #=> String
     #   resp.media_live_connector_pipeline.media_pipeline_arn #=> String
-    #   resp.media_live_connector_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped"
+    #   resp.media_live_connector_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused"
     #   resp.media_live_connector_pipeline.created_timestamp #=> Time
     #   resp.media_live_connector_pipeline.updated_timestamp #=> Time
     #
@@ -713,6 +1028,29 @@ module Aws::ChimeSDKMediaPipelines
     # @param [Hash] params ({})
     def delete_media_capture_pipeline(params = {}, options = {})
       req = build_request(:delete_media_capture_pipeline, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified configuration settings.
+    #
+    # @option params [required, String] :identifier
+    #   The unique identifier of the resource to be deleted. Valid values
+    #   include the name and ARN of the media insights pipeline configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_media_insights_pipeline_configuration({
+    #     identifier: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/DeleteMediaInsightsPipelineConfiguration AWS API Documentation
+    #
+    # @overload delete_media_insights_pipeline_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_media_insights_pipeline_configuration(params = {}, options = {})
+      req = build_request(:delete_media_insights_pipeline_configuration, params)
       req.send_request(options)
     end
 
@@ -759,7 +1097,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_capture_pipeline.media_pipeline_arn #=> String
     #   resp.media_capture_pipeline.source_type #=> String, one of "ChimeSdkMeeting"
     #   resp.media_capture_pipeline.source_arn #=> String
-    #   resp.media_capture_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped"
+    #   resp.media_capture_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused"
     #   resp.media_capture_pipeline.sink_type #=> String, one of "S3Bucket"
     #   resp.media_capture_pipeline.sink_arn #=> String
     #   resp.media_capture_pipeline.created_timestamp #=> Time
@@ -787,6 +1125,89 @@ module Aws::ChimeSDKMediaPipelines
       req.send_request(options)
     end
 
+    # Gets the configuration settings for a media insights pipeline.
+    #
+    # @option params [required, String] :identifier
+    #   The unique identifier of the requested resource. Valid values include
+    #   the name and ARN of the media insights pipeline configuration.
+    #
+    # @return [Types::GetMediaInsightsPipelineConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMediaInsightsPipelineConfigurationResponse#media_insights_pipeline_configuration #media_insights_pipeline_configuration} => Types::MediaInsightsPipelineConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_media_insights_pipeline_configuration({
+    #     identifier: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.media_insights_pipeline_configuration.media_insights_pipeline_configuration_name #=> String
+    #   resp.media_insights_pipeline_configuration.media_insights_pipeline_configuration_arn #=> String
+    #   resp.media_insights_pipeline_configuration.resource_access_role_arn #=> String
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.disabled #=> Boolean
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules #=> Array
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].type #=> String, one of "KeywordMatch", "Sentiment", "IssueDetection"
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].keyword_match_configuration.rule_name #=> String
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].keyword_match_configuration.keywords #=> Array
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].keyword_match_configuration.keywords[0] #=> String
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].keyword_match_configuration.negate #=> Boolean
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].sentiment_configuration.rule_name #=> String
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].sentiment_configuration.sentiment_type #=> String, one of "NEGATIVE"
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].sentiment_configuration.time_period #=> Integer
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].issue_detection_configuration.rule_name #=> String
+    #   resp.media_insights_pipeline_configuration.elements #=> Array
+    #   resp.media_insights_pipeline_configuration.elements[0].type #=> String, one of "AmazonTranscribeCallAnalyticsProcessor", "VoiceAnalyticsProcessor", "AmazonTranscribeProcessor", "KinesisDataStreamSink", "LambdaFunctionSink", "SqsQueueSink", "SnsTopicSink", "S3RecordingSink"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.vocabulary_name #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.vocabulary_filter_name #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.language_model_name #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.enable_partial_results_stabilization #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.partial_results_stability #=> String, one of "high", "medium", "low"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.content_identification_type #=> String, one of "PII"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.content_redaction_type #=> String, one of "PII"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.pii_entity_types #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.filter_partial_results #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.post_call_analytics_settings.output_location #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.post_call_analytics_settings.data_access_role_arn #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.post_call_analytics_settings.content_redaction_output #=> String, one of "redacted", "redacted_and_unredacted"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.post_call_analytics_settings.output_encryption_kms_key_id #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.call_analytics_stream_categories #=> Array
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.call_analytics_stream_categories[0] #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.vocabulary_name #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.vocabulary_filter_name #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.show_speaker_label #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.enable_partial_results_stabilization #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.partial_results_stability #=> String, one of "high", "medium", "low"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.content_identification_type #=> String, one of "PII"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.content_redaction_type #=> String, one of "PII"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.pii_entity_types #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.language_model_name #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.filter_partial_results #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].kinesis_data_stream_sink_configuration.insights_target #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].s3_recording_sink_configuration.destination #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].voice_analytics_processor_configuration.speaker_search_status #=> String, one of "Enabled", "Disabled"
+    #   resp.media_insights_pipeline_configuration.elements[0].voice_analytics_processor_configuration.voice_tone_analysis_status #=> String, one of "Enabled", "Disabled"
+    #   resp.media_insights_pipeline_configuration.elements[0].lambda_function_sink_configuration.insights_target #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].sqs_queue_sink_configuration.insights_target #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].sns_topic_sink_configuration.insights_target #=> String
+    #   resp.media_insights_pipeline_configuration.media_insights_pipeline_configuration_id #=> String
+    #   resp.media_insights_pipeline_configuration.created_timestamp #=> Time
+    #   resp.media_insights_pipeline_configuration.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/GetMediaInsightsPipelineConfiguration AWS API Documentation
+    #
+    # @overload get_media_insights_pipeline_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_media_insights_pipeline_configuration(params = {}, options = {})
+      req = build_request(:get_media_insights_pipeline_configuration, params)
+      req.send_request(options)
+    end
+
     # Gets an existing media pipeline.
     #
     # @option params [required, String] :media_pipeline_id
@@ -808,7 +1229,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_pipeline.media_capture_pipeline.media_pipeline_arn #=> String
     #   resp.media_pipeline.media_capture_pipeline.source_type #=> String, one of "ChimeSdkMeeting"
     #   resp.media_pipeline.media_capture_pipeline.source_arn #=> String
-    #   resp.media_pipeline.media_capture_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped"
+    #   resp.media_pipeline.media_capture_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused"
     #   resp.media_pipeline.media_capture_pipeline.sink_type #=> String, one of "S3Bucket"
     #   resp.media_pipeline.media_capture_pipeline.sink_arn #=> String
     #   resp.media_pipeline.media_capture_pipeline.created_timestamp #=> Time
@@ -845,7 +1266,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_pipeline.media_live_connector_pipeline.sinks[0].rtmp_configuration.audio_sample_rate #=> String
     #   resp.media_pipeline.media_live_connector_pipeline.media_pipeline_id #=> String
     #   resp.media_pipeline.media_live_connector_pipeline.media_pipeline_arn #=> String
-    #   resp.media_pipeline.media_live_connector_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped"
+    #   resp.media_pipeline.media_live_connector_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused"
     #   resp.media_pipeline.media_live_connector_pipeline.created_timestamp #=> Time
     #   resp.media_pipeline.media_live_connector_pipeline.updated_timestamp #=> Time
     #   resp.media_pipeline.media_concatenation_pipeline.media_pipeline_id #=> String
@@ -863,9 +1284,32 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_pipeline.media_concatenation_pipeline.sinks #=> Array
     #   resp.media_pipeline.media_concatenation_pipeline.sinks[0].type #=> String, one of "S3Bucket"
     #   resp.media_pipeline.media_concatenation_pipeline.sinks[0].s3_bucket_sink_configuration.destination #=> String
-    #   resp.media_pipeline.media_concatenation_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped"
+    #   resp.media_pipeline.media_concatenation_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused"
     #   resp.media_pipeline.media_concatenation_pipeline.created_timestamp #=> Time
     #   resp.media_pipeline.media_concatenation_pipeline.updated_timestamp #=> Time
+    #   resp.media_pipeline.media_insights_pipeline.media_pipeline_id #=> String
+    #   resp.media_pipeline.media_insights_pipeline.media_pipeline_arn #=> String
+    #   resp.media_pipeline.media_insights_pipeline.media_insights_pipeline_configuration_arn #=> String
+    #   resp.media_pipeline.media_insights_pipeline.status #=> String, one of "Initializing", "InProgress", "Failed", "Stopping", "Stopped", "Paused"
+    #   resp.media_pipeline.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.streams #=> Array
+    #   resp.media_pipeline.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.streams[0].stream_arn #=> String
+    #   resp.media_pipeline.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.streams[0].fragment_number #=> String
+    #   resp.media_pipeline.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.streams[0].stream_channel_definition.number_of_channels #=> Integer
+    #   resp.media_pipeline.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.streams[0].stream_channel_definition.channel_definitions #=> Array
+    #   resp.media_pipeline.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.streams[0].stream_channel_definition.channel_definitions[0].channel_id #=> Integer
+    #   resp.media_pipeline.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.streams[0].stream_channel_definition.channel_definitions[0].participant_role #=> String, one of "AGENT", "CUSTOMER"
+    #   resp.media_pipeline.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.media_encoding #=> String, one of "pcm"
+    #   resp.media_pipeline.media_insights_pipeline.kinesis_video_stream_source_runtime_configuration.media_sample_rate #=> Integer
+    #   resp.media_pipeline.media_insights_pipeline.media_insights_runtime_metadata #=> Hash
+    #   resp.media_pipeline.media_insights_pipeline.media_insights_runtime_metadata["NonEmptyString"] #=> String
+    #   resp.media_pipeline.media_insights_pipeline.kinesis_video_stream_recording_source_runtime_configuration.streams #=> Array
+    #   resp.media_pipeline.media_insights_pipeline.kinesis_video_stream_recording_source_runtime_configuration.streams[0].stream_arn #=> String
+    #   resp.media_pipeline.media_insights_pipeline.kinesis_video_stream_recording_source_runtime_configuration.fragment_selector.fragment_selector_type #=> String, one of "ProducerTimestamp", "ServerTimestamp"
+    #   resp.media_pipeline.media_insights_pipeline.kinesis_video_stream_recording_source_runtime_configuration.fragment_selector.timestamp_range.start_timestamp #=> Time
+    #   resp.media_pipeline.media_insights_pipeline.kinesis_video_stream_recording_source_runtime_configuration.fragment_selector.timestamp_range.end_timestamp #=> Time
+    #   resp.media_pipeline.media_insights_pipeline.s3_recording_sink_runtime_configuration.destination #=> String
+    #   resp.media_pipeline.media_insights_pipeline.s3_recording_sink_runtime_configuration.recording_file_format #=> String, one of "Wav", "Opus"
+    #   resp.media_pipeline.media_insights_pipeline.created_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/GetMediaPipeline AWS API Documentation
     #
@@ -912,6 +1356,45 @@ module Aws::ChimeSDKMediaPipelines
     # @param [Hash] params ({})
     def list_media_capture_pipelines(params = {}, options = {})
       req = build_request(:list_media_capture_pipelines, params)
+      req.send_request(options)
+    end
+
+    # Lists the available media insights pipeline configurations.
+    #
+    # @option params [String] :next_token
+    #   The token used to return the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @return [Types::ListMediaInsightsPipelineConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMediaInsightsPipelineConfigurationsResponse#media_insights_pipeline_configurations #media_insights_pipeline_configurations} => Array&lt;Types::MediaInsightsPipelineConfigurationSummary&gt;
+    #   * {Types::ListMediaInsightsPipelineConfigurationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_media_insights_pipeline_configurations({
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.media_insights_pipeline_configurations #=> Array
+    #   resp.media_insights_pipeline_configurations[0].media_insights_pipeline_configuration_name #=> String
+    #   resp.media_insights_pipeline_configurations[0].media_insights_pipeline_configuration_id #=> String
+    #   resp.media_insights_pipeline_configurations[0].media_insights_pipeline_configuration_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/ListMediaInsightsPipelineConfigurations AWS API Documentation
+    #
+    # @overload list_media_insights_pipeline_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_media_insights_pipeline_configurations(params = {}, options = {})
+      req = build_request(:list_media_insights_pipeline_configurations, params)
       req.send_request(options)
     end
 
@@ -985,7 +1468,7 @@ module Aws::ChimeSDKMediaPipelines
       req.send_request(options)
     end
 
-    # The ARN of the media pipeline that you want to tag. Consists of he
+    # The ARN of the media pipeline that you want to tag. Consists of the
     # pipeline's endpoint region, resource ID, and pipeline ID.
     #
     # @option params [required, String] :resource_arn
@@ -1045,6 +1528,208 @@ module Aws::ChimeSDKMediaPipelines
       req.send_request(options)
     end
 
+    # Updates the media insights pipeline's configuration settings.
+    #
+    # @option params [required, String] :identifier
+    #   The unique identifier for the resource to be updated. Valid values
+    #   include the name and ARN of the media insights pipeline configuration.
+    #
+    # @option params [required, String] :resource_access_role_arn
+    #   The ARN of the role used by the service to access Amazon Web Services
+    #   resources.
+    #
+    # @option params [Types::RealTimeAlertConfiguration] :real_time_alert_configuration
+    #   The configuration settings for real-time alerts for the media insights
+    #   pipeline.
+    #
+    # @option params [required, Array<Types::MediaInsightsPipelineConfigurationElement>] :elements
+    #   The elements in the request, such as a processor for Amazon Transcribe
+    #   or a sink for a Kinesis Data Stream..
+    #
+    # @return [Types::UpdateMediaInsightsPipelineConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateMediaInsightsPipelineConfigurationResponse#media_insights_pipeline_configuration #media_insights_pipeline_configuration} => Types::MediaInsightsPipelineConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_media_insights_pipeline_configuration({
+    #     identifier: "NonEmptyString", # required
+    #     resource_access_role_arn: "Arn", # required
+    #     real_time_alert_configuration: {
+    #       disabled: false,
+    #       rules: [
+    #         {
+    #           type: "KeywordMatch", # required, accepts KeywordMatch, Sentiment, IssueDetection
+    #           keyword_match_configuration: {
+    #             rule_name: "RuleName", # required
+    #             keywords: ["Keyword"], # required
+    #             negate: false,
+    #           },
+    #           sentiment_configuration: {
+    #             rule_name: "RuleName", # required
+    #             sentiment_type: "NEGATIVE", # required, accepts NEGATIVE
+    #             time_period: 1, # required
+    #           },
+    #           issue_detection_configuration: {
+    #             rule_name: "RuleName", # required
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     elements: [ # required
+    #       {
+    #         type: "AmazonTranscribeCallAnalyticsProcessor", # required, accepts AmazonTranscribeCallAnalyticsProcessor, VoiceAnalyticsProcessor, AmazonTranscribeProcessor, KinesisDataStreamSink, LambdaFunctionSink, SqsQueueSink, SnsTopicSink, S3RecordingSink
+    #         amazon_transcribe_call_analytics_processor_configuration: {
+    #           language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR
+    #           vocabulary_name: "VocabularyName",
+    #           vocabulary_filter_name: "VocabularyFilterName",
+    #           vocabulary_filter_method: "remove", # accepts remove, mask, tag
+    #           language_model_name: "ModelName",
+    #           enable_partial_results_stabilization: false,
+    #           partial_results_stability: "high", # accepts high, medium, low
+    #           content_identification_type: "PII", # accepts PII
+    #           content_redaction_type: "PII", # accepts PII
+    #           pii_entity_types: "PiiEntityTypes",
+    #           filter_partial_results: false,
+    #           post_call_analytics_settings: {
+    #             output_location: "String", # required
+    #             data_access_role_arn: "String", # required
+    #             content_redaction_output: "redacted", # accepts redacted, redacted_and_unredacted
+    #             output_encryption_kms_key_id: "String",
+    #           },
+    #           call_analytics_stream_categories: ["CategoryName"],
+    #         },
+    #         amazon_transcribe_processor_configuration: {
+    #           language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR
+    #           vocabulary_name: "VocabularyName",
+    #           vocabulary_filter_name: "VocabularyFilterName",
+    #           vocabulary_filter_method: "remove", # accepts remove, mask, tag
+    #           show_speaker_label: false,
+    #           enable_partial_results_stabilization: false,
+    #           partial_results_stability: "high", # accepts high, medium, low
+    #           content_identification_type: "PII", # accepts PII
+    #           content_redaction_type: "PII", # accepts PII
+    #           pii_entity_types: "PiiEntityTypes",
+    #           language_model_name: "ModelName",
+    #           filter_partial_results: false,
+    #         },
+    #         kinesis_data_stream_sink_configuration: {
+    #           insights_target: "Arn",
+    #         },
+    #         s3_recording_sink_configuration: {
+    #           destination: "Arn",
+    #         },
+    #         voice_analytics_processor_configuration: {
+    #           speaker_search_status: "Enabled", # accepts Enabled, Disabled
+    #           voice_tone_analysis_status: "Enabled", # accepts Enabled, Disabled
+    #         },
+    #         lambda_function_sink_configuration: {
+    #           insights_target: "Arn",
+    #         },
+    #         sqs_queue_sink_configuration: {
+    #           insights_target: "Arn",
+    #         },
+    #         sns_topic_sink_configuration: {
+    #           insights_target: "Arn",
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.media_insights_pipeline_configuration.media_insights_pipeline_configuration_name #=> String
+    #   resp.media_insights_pipeline_configuration.media_insights_pipeline_configuration_arn #=> String
+    #   resp.media_insights_pipeline_configuration.resource_access_role_arn #=> String
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.disabled #=> Boolean
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules #=> Array
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].type #=> String, one of "KeywordMatch", "Sentiment", "IssueDetection"
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].keyword_match_configuration.rule_name #=> String
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].keyword_match_configuration.keywords #=> Array
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].keyword_match_configuration.keywords[0] #=> String
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].keyword_match_configuration.negate #=> Boolean
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].sentiment_configuration.rule_name #=> String
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].sentiment_configuration.sentiment_type #=> String, one of "NEGATIVE"
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].sentiment_configuration.time_period #=> Integer
+    #   resp.media_insights_pipeline_configuration.real_time_alert_configuration.rules[0].issue_detection_configuration.rule_name #=> String
+    #   resp.media_insights_pipeline_configuration.elements #=> Array
+    #   resp.media_insights_pipeline_configuration.elements[0].type #=> String, one of "AmazonTranscribeCallAnalyticsProcessor", "VoiceAnalyticsProcessor", "AmazonTranscribeProcessor", "KinesisDataStreamSink", "LambdaFunctionSink", "SqsQueueSink", "SnsTopicSink", "S3RecordingSink"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.vocabulary_name #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.vocabulary_filter_name #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.language_model_name #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.enable_partial_results_stabilization #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.partial_results_stability #=> String, one of "high", "medium", "low"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.content_identification_type #=> String, one of "PII"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.content_redaction_type #=> String, one of "PII"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.pii_entity_types #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.filter_partial_results #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.post_call_analytics_settings.output_location #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.post_call_analytics_settings.data_access_role_arn #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.post_call_analytics_settings.content_redaction_output #=> String, one of "redacted", "redacted_and_unredacted"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.post_call_analytics_settings.output_encryption_kms_key_id #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.call_analytics_stream_categories #=> Array
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_call_analytics_processor_configuration.call_analytics_stream_categories[0] #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.vocabulary_name #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.vocabulary_filter_name #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.show_speaker_label #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.enable_partial_results_stabilization #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.partial_results_stability #=> String, one of "high", "medium", "low"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.content_identification_type #=> String, one of "PII"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.content_redaction_type #=> String, one of "PII"
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.pii_entity_types #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.language_model_name #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.filter_partial_results #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].kinesis_data_stream_sink_configuration.insights_target #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].s3_recording_sink_configuration.destination #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].voice_analytics_processor_configuration.speaker_search_status #=> String, one of "Enabled", "Disabled"
+    #   resp.media_insights_pipeline_configuration.elements[0].voice_analytics_processor_configuration.voice_tone_analysis_status #=> String, one of "Enabled", "Disabled"
+    #   resp.media_insights_pipeline_configuration.elements[0].lambda_function_sink_configuration.insights_target #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].sqs_queue_sink_configuration.insights_target #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].sns_topic_sink_configuration.insights_target #=> String
+    #   resp.media_insights_pipeline_configuration.media_insights_pipeline_configuration_id #=> String
+    #   resp.media_insights_pipeline_configuration.created_timestamp #=> Time
+    #   resp.media_insights_pipeline_configuration.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/UpdateMediaInsightsPipelineConfiguration AWS API Documentation
+    #
+    # @overload update_media_insights_pipeline_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_media_insights_pipeline_configuration(params = {}, options = {})
+      req = build_request(:update_media_insights_pipeline_configuration, params)
+      req.send_request(options)
+    end
+
+    # Updates the status of a media insights pipeline.
+    #
+    # @option params [required, String] :identifier
+    #   The unique identifier of the resource to be updated. Valid values
+    #   include the ID and ARN of the media insights pipeline.
+    #
+    # @option params [required, String] :update_status
+    #   The requested status of the media insights pipeline.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_media_insights_pipeline_status({
+    #     identifier: "NonEmptyString", # required
+    #     update_status: "Pause", # required, accepts Pause, Resume
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/UpdateMediaInsightsPipelineStatus AWS API Documentation
+    #
+    # @overload update_media_insights_pipeline_status(params = {})
+    # @param [Hash] params ({})
+    def update_media_insights_pipeline_status(params = {}, options = {})
+      req = build_request(:update_media_insights_pipeline_status, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1058,7 +1743,7 @@ module Aws::ChimeSDKMediaPipelines
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmediapipelines'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.161.0 (2023-03-23)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-ivsrealtime` gem.
+
 3.160.0 (2023-02-27)
 ------------------
 

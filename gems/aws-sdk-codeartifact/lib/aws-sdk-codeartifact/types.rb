@@ -80,6 +80,8 @@ module Aws::CodeArtifact
     #
     #   * `public:maven-commonsware` - for the CommonsWare Android
     #     repository.
+    #
+    #   * `public:maven-clojars` - for the Clojars repository.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/AssociateExternalConnectionRequest AWS API Documentation
@@ -166,7 +168,7 @@ module Aws::CodeArtifact
     #     component, package versions of those formats do not have a
     #     namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -477,6 +479,8 @@ module Aws::CodeArtifact
     #
     #   * Python and NuGet packages do not contain corresponding components,
     #     packages of those formats do not have a namespace.
+    #
+    #   * The namespace of a generic package is its `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -540,7 +544,7 @@ module Aws::CodeArtifact
     #     component, package versions of those formats do not have a
     #     namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -745,7 +749,7 @@ module Aws::CodeArtifact
     #   * Python and NuGet packages do not contain a corresponding
     #     component, packages of those formats do not have a namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -813,7 +817,7 @@ module Aws::CodeArtifact
     #     component, package versions of those formats do not have a
     #     namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -967,7 +971,7 @@ module Aws::CodeArtifact
     #     component, package versions of those formats do not have a
     #     namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -1274,7 +1278,7 @@ module Aws::CodeArtifact
     #     component, package versions of those formats do not have a
     #     namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -1362,8 +1366,6 @@ module Aws::CodeArtifact
     #   The namespace of the package version with the requested readme file.
     #   The package version component that specifies its namespace depends
     #   on its type. For example:
-    #
-    #   * The namespace of a Maven package version is its `groupId`.
     #
     #   * The namespace of an npm package version is its `scope`.
     #
@@ -1629,7 +1631,7 @@ module Aws::CodeArtifact
     #     component, package versions of those formats do not have a
     #     namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -1758,7 +1760,7 @@ module Aws::CodeArtifact
     #     component, package versions of those formats do not have a
     #     namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -1881,7 +1883,7 @@ module Aws::CodeArtifact
     #   * Python and NuGet packages do not contain a corresponding
     #     component, packages of those formats do not have a namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -2023,7 +2025,7 @@ module Aws::CodeArtifact
     #   * Python and NuGet packages do not contain a corresponding
     #     component, packages of those formats do not have a namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package_prefix
@@ -2309,7 +2311,7 @@ module Aws::CodeArtifact
     #   * Python and NuGet packages do not contain a corresponding
     #     component, packages of those formats do not have a namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2388,7 +2390,7 @@ module Aws::CodeArtifact
     #   * Python and NuGet packages do not contain a corresponding
     #     component, packages of those formats do not have a namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -2435,7 +2437,7 @@ module Aws::CodeArtifact
     #     component, package versions of those formats do not have a
     #     namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package_name
@@ -2659,10 +2661,15 @@ module Aws::CodeArtifact
     #
     # @!attribute [rw] asset_sha256
     #   The SHA256 hash of the `assetContent` to publish. This value must be
-    #   calculated by the caller and provided with the request.
+    #   calculated by the caller and provided with the request (see
+    #   [Publishing a generic package][1] in the *CodeArtifact User Guide*).
     #
     #   This value is used as an integrity check to verify that the
     #   `assetContent` has not changed after it was originally sent.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeartifact/latest/ug/using-generic.html#publishing-generic-packages
     #   @return [String]
     #
     # @!attribute [rw] unfinished
@@ -2675,7 +2682,7 @@ module Aws::CodeArtifact
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status.html#package-version-status
+    #   [1]: https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/PublishPackageVersionRequest AWS API Documentation
@@ -2820,7 +2827,7 @@ module Aws::CodeArtifact
     #   * Python and NuGet packages do not contain a corresponding
     #     component, packages of those formats do not have a namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -2978,6 +2985,11 @@ module Aws::CodeArtifact
     #   An array of external connections associated with the repository.
     #   @return [Array<Types::RepositoryExternalConnectionInfo>]
     #
+    # @!attribute [rw] created_time
+    #   A timestamp that represents the date and time the repository was
+    #   created.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/RepositoryDescription AWS API Documentation
     #
     class RepositoryDescription < Struct.new(
@@ -2988,7 +3000,8 @@ module Aws::CodeArtifact
       :arn,
       :description,
       :upstreams,
-      :external_connections)
+      :external_connections,
+      :created_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3061,6 +3074,11 @@ module Aws::CodeArtifact
     #   The description of the repository.
     #   @return [String]
     #
+    # @!attribute [rw] created_time
+    #   A timestamp that represents the date and time the repository was
+    #   created.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/RepositorySummary AWS API Documentation
     #
     class RepositorySummary < Struct.new(
@@ -3069,7 +3087,8 @@ module Aws::CodeArtifact
       :domain_name,
       :domain_owner,
       :arn,
-      :description)
+      :description,
+      :created_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3282,7 +3301,7 @@ module Aws::CodeArtifact
     #     component, package versions of those formats do not have a
     #     namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #   @return [String]
     #
     # @!attribute [rw] package

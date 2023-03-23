@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2023-03-23)
+------------------
+
+* Feature - ExpirationSettings provides automatic resource deletion for Channels.
+
 1.16.0 (2023-03-21)
 ------------------
 

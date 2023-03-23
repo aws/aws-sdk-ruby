@@ -14,6 +14,8 @@ module Aws::ChimeSDKMediaPipelines
     include Seahorse::Model
 
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
+    AmazonTranscribeCallAnalyticsProcessorConfiguration = Shapes::StructureShape.new(name: 'AmazonTranscribeCallAnalyticsProcessorConfiguration')
+    AmazonTranscribeProcessorConfiguration = Shapes::StructureShape.new(name: 'AmazonTranscribeProcessorConfiguration')
     Arn = Shapes::StringShape.new(name: 'Arn')
     ArtifactsConcatenationConfiguration = Shapes::StructureShape.new(name: 'ArtifactsConcatenationConfiguration')
     ArtifactsConcatenationState = Shapes::StringShape.new(name: 'ArtifactsConcatenationState')
@@ -27,6 +29,13 @@ module Aws::ChimeSDKMediaPipelines
     AudioMuxType = Shapes::StringShape.new(name: 'AudioMuxType')
     AudioSampleRateOption = Shapes::StringShape.new(name: 'AudioSampleRateOption')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CallAnalyticsLanguageCode = Shapes::StringShape.new(name: 'CallAnalyticsLanguageCode')
+    CategoryName = Shapes::StringShape.new(name: 'CategoryName')
+    CategoryNameList = Shapes::ListShape.new(name: 'CategoryNameList')
+    ChannelDefinition = Shapes::StructureShape.new(name: 'ChannelDefinition')
+    ChannelDefinitions = Shapes::ListShape.new(name: 'ChannelDefinitions')
+    ChannelId = Shapes::IntegerShape.new(name: 'ChannelId')
     ChimeSdkMeetingConcatenationConfiguration = Shapes::StructureShape.new(name: 'ChimeSdkMeetingConcatenationConfiguration')
     ChimeSdkMeetingConfiguration = Shapes::StructureShape.new(name: 'ChimeSdkMeetingConfiguration')
     ChimeSdkMeetingLiveConnectorConfiguration = Shapes::StructureShape.new(name: 'ChimeSdkMeetingLiveConnectorConfiguration')
@@ -39,33 +48,57 @@ module Aws::ChimeSDKMediaPipelines
     ConcatenationSource = Shapes::StructureShape.new(name: 'ConcatenationSource')
     ConcatenationSourceList = Shapes::ListShape.new(name: 'ConcatenationSourceList')
     ConcatenationSourceType = Shapes::StringShape.new(name: 'ConcatenationSourceType')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentArtifactsConfiguration = Shapes::StructureShape.new(name: 'ContentArtifactsConfiguration')
     ContentConcatenationConfiguration = Shapes::StructureShape.new(name: 'ContentConcatenationConfiguration')
     ContentMuxType = Shapes::StringShape.new(name: 'ContentMuxType')
+    ContentRedactionOutput = Shapes::StringShape.new(name: 'ContentRedactionOutput')
     ContentShareLayoutOption = Shapes::StringShape.new(name: 'ContentShareLayoutOption')
+    ContentType = Shapes::StringShape.new(name: 'ContentType')
     CreateMediaCapturePipelineRequest = Shapes::StructureShape.new(name: 'CreateMediaCapturePipelineRequest')
     CreateMediaCapturePipelineResponse = Shapes::StructureShape.new(name: 'CreateMediaCapturePipelineResponse')
     CreateMediaConcatenationPipelineRequest = Shapes::StructureShape.new(name: 'CreateMediaConcatenationPipelineRequest')
     CreateMediaConcatenationPipelineResponse = Shapes::StructureShape.new(name: 'CreateMediaConcatenationPipelineResponse')
+    CreateMediaInsightsPipelineConfigurationRequest = Shapes::StructureShape.new(name: 'CreateMediaInsightsPipelineConfigurationRequest')
+    CreateMediaInsightsPipelineConfigurationResponse = Shapes::StructureShape.new(name: 'CreateMediaInsightsPipelineConfigurationResponse')
+    CreateMediaInsightsPipelineRequest = Shapes::StructureShape.new(name: 'CreateMediaInsightsPipelineRequest')
+    CreateMediaInsightsPipelineResponse = Shapes::StructureShape.new(name: 'CreateMediaInsightsPipelineResponse')
     CreateMediaLiveConnectorPipelineRequest = Shapes::StructureShape.new(name: 'CreateMediaLiveConnectorPipelineRequest')
     CreateMediaLiveConnectorPipelineResponse = Shapes::StructureShape.new(name: 'CreateMediaLiveConnectorPipelineResponse')
     DataChannelConcatenationConfiguration = Shapes::StructureShape.new(name: 'DataChannelConcatenationConfiguration')
     DeleteMediaCapturePipelineRequest = Shapes::StructureShape.new(name: 'DeleteMediaCapturePipelineRequest')
+    DeleteMediaInsightsPipelineConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteMediaInsightsPipelineConfigurationRequest')
     DeleteMediaPipelineRequest = Shapes::StructureShape.new(name: 'DeleteMediaPipelineRequest')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ExternalUserIdList = Shapes::ListShape.new(name: 'ExternalUserIdList')
     ExternalUserIdType = Shapes::StringShape.new(name: 'ExternalUserIdType')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
+    FragmentNumberString = Shapes::StringShape.new(name: 'FragmentNumberString')
+    FragmentSelector = Shapes::StructureShape.new(name: 'FragmentSelector')
+    FragmentSelectorType = Shapes::StringShape.new(name: 'FragmentSelectorType')
     GetMediaCapturePipelineRequest = Shapes::StructureShape.new(name: 'GetMediaCapturePipelineRequest')
     GetMediaCapturePipelineResponse = Shapes::StructureShape.new(name: 'GetMediaCapturePipelineResponse')
+    GetMediaInsightsPipelineConfigurationRequest = Shapes::StructureShape.new(name: 'GetMediaInsightsPipelineConfigurationRequest')
+    GetMediaInsightsPipelineConfigurationResponse = Shapes::StructureShape.new(name: 'GetMediaInsightsPipelineConfigurationResponse')
     GetMediaPipelineRequest = Shapes::StructureShape.new(name: 'GetMediaPipelineRequest')
     GetMediaPipelineResponse = Shapes::StructureShape.new(name: 'GetMediaPipelineResponse')
     GridViewConfiguration = Shapes::StructureShape.new(name: 'GridViewConfiguration')
     GuidString = Shapes::StringShape.new(name: 'GuidString')
     Iso8601Timestamp = Shapes::TimestampShape.new(name: 'Iso8601Timestamp', timestampFormat: "iso8601")
+    IssueDetectionConfiguration = Shapes::StructureShape.new(name: 'IssueDetectionConfiguration')
+    Keyword = Shapes::StringShape.new(name: 'Keyword')
+    KeywordMatchConfiguration = Shapes::StructureShape.new(name: 'KeywordMatchConfiguration')
+    KeywordMatchWordList = Shapes::ListShape.new(name: 'KeywordMatchWordList')
+    KinesisDataStreamSinkConfiguration = Shapes::StructureShape.new(name: 'KinesisDataStreamSinkConfiguration')
+    KinesisVideoStreamArn = Shapes::StringShape.new(name: 'KinesisVideoStreamArn')
+    KinesisVideoStreamRecordingSourceRuntimeConfiguration = Shapes::StructureShape.new(name: 'KinesisVideoStreamRecordingSourceRuntimeConfiguration')
+    KinesisVideoStreamSourceRuntimeConfiguration = Shapes::StructureShape.new(name: 'KinesisVideoStreamSourceRuntimeConfiguration')
+    LambdaFunctionSinkConfiguration = Shapes::StructureShape.new(name: 'LambdaFunctionSinkConfiguration')
     LayoutOption = Shapes::StringShape.new(name: 'LayoutOption')
     ListMediaCapturePipelinesRequest = Shapes::StructureShape.new(name: 'ListMediaCapturePipelinesRequest')
     ListMediaCapturePipelinesResponse = Shapes::StructureShape.new(name: 'ListMediaCapturePipelinesResponse')
+    ListMediaInsightsPipelineConfigurationsRequest = Shapes::StructureShape.new(name: 'ListMediaInsightsPipelineConfigurationsRequest')
+    ListMediaInsightsPipelineConfigurationsResponse = Shapes::StructureShape.new(name: 'ListMediaInsightsPipelineConfigurationsResponse')
     ListMediaPipelinesRequest = Shapes::StructureShape.new(name: 'ListMediaPipelinesRequest')
     ListMediaPipelinesResponse = Shapes::StructureShape.new(name: 'ListMediaPipelinesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -83,26 +116,63 @@ module Aws::ChimeSDKMediaPipelines
     MediaCapturePipelineSummary = Shapes::StructureShape.new(name: 'MediaCapturePipelineSummary')
     MediaCapturePipelineSummaryList = Shapes::ListShape.new(name: 'MediaCapturePipelineSummaryList')
     MediaConcatenationPipeline = Shapes::StructureShape.new(name: 'MediaConcatenationPipeline')
+    MediaEncoding = Shapes::StringShape.new(name: 'MediaEncoding')
+    MediaInsightsPipeline = Shapes::StructureShape.new(name: 'MediaInsightsPipeline')
+    MediaInsightsPipelineConfiguration = Shapes::StructureShape.new(name: 'MediaInsightsPipelineConfiguration')
+    MediaInsightsPipelineConfigurationElement = Shapes::StructureShape.new(name: 'MediaInsightsPipelineConfigurationElement')
+    MediaInsightsPipelineConfigurationElementType = Shapes::StringShape.new(name: 'MediaInsightsPipelineConfigurationElementType')
+    MediaInsightsPipelineConfigurationElements = Shapes::ListShape.new(name: 'MediaInsightsPipelineConfigurationElements')
+    MediaInsightsPipelineConfigurationNameString = Shapes::StringShape.new(name: 'MediaInsightsPipelineConfigurationNameString')
+    MediaInsightsPipelineConfigurationSummary = Shapes::StructureShape.new(name: 'MediaInsightsPipelineConfigurationSummary')
+    MediaInsightsPipelineConfigurationSummaryList = Shapes::ListShape.new(name: 'MediaInsightsPipelineConfigurationSummaryList')
+    MediaInsightsRuntimeMetadata = Shapes::MapShape.new(name: 'MediaInsightsRuntimeMetadata')
     MediaLiveConnectorPipeline = Shapes::StructureShape.new(name: 'MediaLiveConnectorPipeline')
     MediaPipeline = Shapes::StructureShape.new(name: 'MediaPipeline')
     MediaPipelineList = Shapes::ListShape.new(name: 'MediaPipelineList')
     MediaPipelineSinkType = Shapes::StringShape.new(name: 'MediaPipelineSinkType')
     MediaPipelineSourceType = Shapes::StringShape.new(name: 'MediaPipelineSourceType')
     MediaPipelineStatus = Shapes::StringShape.new(name: 'MediaPipelineStatus')
+    MediaPipelineStatusUpdate = Shapes::StringShape.new(name: 'MediaPipelineStatusUpdate')
     MediaPipelineSummary = Shapes::StructureShape.new(name: 'MediaPipelineSummary')
+    MediaSampleRateHertz = Shapes::IntegerShape.new(name: 'MediaSampleRateHertz')
     MeetingEventsConcatenationConfiguration = Shapes::StructureShape.new(name: 'MeetingEventsConcatenationConfiguration')
+    ModelName = Shapes::StringShape.new(name: 'ModelName')
+    NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    NumberOfChannels = Shapes::IntegerShape.new(name: 'NumberOfChannels')
+    PartialResultsStability = Shapes::StringShape.new(name: 'PartialResultsStability')
+    ParticipantRole = Shapes::StringShape.new(name: 'ParticipantRole')
+    PiiEntityTypes = Shapes::StringShape.new(name: 'PiiEntityTypes')
+    PostCallAnalyticsSettings = Shapes::StructureShape.new(name: 'PostCallAnalyticsSettings')
     PresenterOnlyConfiguration = Shapes::StructureShape.new(name: 'PresenterOnlyConfiguration')
     PresenterPosition = Shapes::StringShape.new(name: 'PresenterPosition')
+    RealTimeAlertConfiguration = Shapes::StructureShape.new(name: 'RealTimeAlertConfiguration')
+    RealTimeAlertRule = Shapes::StructureShape.new(name: 'RealTimeAlertRule')
+    RealTimeAlertRuleList = Shapes::ListShape.new(name: 'RealTimeAlertRuleList')
+    RealTimeAlertRuleType = Shapes::StringShape.new(name: 'RealTimeAlertRuleType')
+    RecordingFileFormat = Shapes::StringShape.new(name: 'RecordingFileFormat')
+    RecordingStreamConfiguration = Shapes::StructureShape.new(name: 'RecordingStreamConfiguration')
+    RecordingStreamList = Shapes::ListShape.new(name: 'RecordingStreamList')
     ResolutionOption = Shapes::StringShape.new(name: 'ResolutionOption')
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
     ResultMax = Shapes::IntegerShape.new(name: 'ResultMax')
+    RuleName = Shapes::StringShape.new(name: 'RuleName')
     S3BucketSinkConfiguration = Shapes::StructureShape.new(name: 'S3BucketSinkConfiguration')
+    S3RecordingSinkConfiguration = Shapes::StructureShape.new(name: 'S3RecordingSinkConfiguration')
+    S3RecordingSinkRuntimeConfiguration = Shapes::StructureShape.new(name: 'S3RecordingSinkRuntimeConfiguration')
     SelectedVideoStreams = Shapes::StructureShape.new(name: 'SelectedVideoStreams')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
+    SentimentConfiguration = Shapes::StructureShape.new(name: 'SentimentConfiguration')
+    SentimentTimePeriodInSeconds = Shapes::IntegerShape.new(name: 'SentimentTimePeriodInSeconds')
+    SentimentType = Shapes::StringShape.new(name: 'SentimentType')
     ServiceFailureException = Shapes::StructureShape.new(name: 'ServiceFailureException')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
+    SnsTopicSinkConfiguration = Shapes::StructureShape.new(name: 'SnsTopicSinkConfiguration')
     SourceConfiguration = Shapes::StructureShape.new(name: 'SourceConfiguration')
+    SqsQueueSinkConfiguration = Shapes::StructureShape.new(name: 'SqsQueueSinkConfiguration')
+    StreamChannelDefinition = Shapes::StructureShape.new(name: 'StreamChannelDefinition')
+    StreamConfiguration = Shapes::StructureShape.new(name: 'StreamConfiguration')
+    Streams = Shapes::ListShape.new(name: 'Streams')
     String = Shapes::StringShape.new(name: 'String')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -112,13 +182,52 @@ module Aws::ChimeSDKMediaPipelines
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottledClientException = Shapes::StructureShape.new(name: 'ThrottledClientException')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TimestampRange = Shapes::StructureShape.new(name: 'TimestampRange')
     TranscriptionMessagesConcatenationConfiguration = Shapes::StructureShape.new(name: 'TranscriptionMessagesConcatenationConfiguration')
     UnauthorizedClientException = Shapes::StructureShape.new(name: 'UnauthorizedClientException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateMediaInsightsPipelineConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateMediaInsightsPipelineConfigurationRequest')
+    UpdateMediaInsightsPipelineConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateMediaInsightsPipelineConfigurationResponse')
+    UpdateMediaInsightsPipelineStatusRequest = Shapes::StructureShape.new(name: 'UpdateMediaInsightsPipelineStatusRequest')
     VideoArtifactsConfiguration = Shapes::StructureShape.new(name: 'VideoArtifactsConfiguration')
     VideoConcatenationConfiguration = Shapes::StructureShape.new(name: 'VideoConcatenationConfiguration')
     VideoMuxType = Shapes::StringShape.new(name: 'VideoMuxType')
+    VocabularyFilterMethod = Shapes::StringShape.new(name: 'VocabularyFilterMethod')
+    VocabularyFilterName = Shapes::StringShape.new(name: 'VocabularyFilterName')
+    VocabularyName = Shapes::StringShape.new(name: 'VocabularyName')
+    VoiceAnalyticsConfigurationStatus = Shapes::StringShape.new(name: 'VoiceAnalyticsConfigurationStatus')
+    VoiceAnalyticsProcessorConfiguration = Shapes::StructureShape.new(name: 'VoiceAnalyticsProcessorConfiguration')
+
+    AmazonTranscribeCallAnalyticsProcessorConfiguration.add_member(:language_code, Shapes::ShapeRef.new(shape: CallAnalyticsLanguageCode, required: true, location_name: "LanguageCode"))
+    AmazonTranscribeCallAnalyticsProcessorConfiguration.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, location_name: "VocabularyName"))
+    AmazonTranscribeCallAnalyticsProcessorConfiguration.add_member(:vocabulary_filter_name, Shapes::ShapeRef.new(shape: VocabularyFilterName, location_name: "VocabularyFilterName"))
+    AmazonTranscribeCallAnalyticsProcessorConfiguration.add_member(:vocabulary_filter_method, Shapes::ShapeRef.new(shape: VocabularyFilterMethod, location_name: "VocabularyFilterMethod"))
+    AmazonTranscribeCallAnalyticsProcessorConfiguration.add_member(:language_model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "LanguageModelName"))
+    AmazonTranscribeCallAnalyticsProcessorConfiguration.add_member(:enable_partial_results_stabilization, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnablePartialResultsStabilization"))
+    AmazonTranscribeCallAnalyticsProcessorConfiguration.add_member(:partial_results_stability, Shapes::ShapeRef.new(shape: PartialResultsStability, location_name: "PartialResultsStability"))
+    AmazonTranscribeCallAnalyticsProcessorConfiguration.add_member(:content_identification_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentIdentificationType"))
+    AmazonTranscribeCallAnalyticsProcessorConfiguration.add_member(:content_redaction_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentRedactionType"))
+    AmazonTranscribeCallAnalyticsProcessorConfiguration.add_member(:pii_entity_types, Shapes::ShapeRef.new(shape: PiiEntityTypes, location_name: "PiiEntityTypes"))
+    AmazonTranscribeCallAnalyticsProcessorConfiguration.add_member(:filter_partial_results, Shapes::ShapeRef.new(shape: Boolean, location_name: "FilterPartialResults"))
+    AmazonTranscribeCallAnalyticsProcessorConfiguration.add_member(:post_call_analytics_settings, Shapes::ShapeRef.new(shape: PostCallAnalyticsSettings, location_name: "PostCallAnalyticsSettings"))
+    AmazonTranscribeCallAnalyticsProcessorConfiguration.add_member(:call_analytics_stream_categories, Shapes::ShapeRef.new(shape: CategoryNameList, location_name: "CallAnalyticsStreamCategories"))
+    AmazonTranscribeCallAnalyticsProcessorConfiguration.struct_class = Types::AmazonTranscribeCallAnalyticsProcessorConfiguration
+
+    AmazonTranscribeProcessorConfiguration.add_member(:language_code, Shapes::ShapeRef.new(shape: CallAnalyticsLanguageCode, required: true, location_name: "LanguageCode"))
+    AmazonTranscribeProcessorConfiguration.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, location_name: "VocabularyName"))
+    AmazonTranscribeProcessorConfiguration.add_member(:vocabulary_filter_name, Shapes::ShapeRef.new(shape: VocabularyFilterName, location_name: "VocabularyFilterName"))
+    AmazonTranscribeProcessorConfiguration.add_member(:vocabulary_filter_method, Shapes::ShapeRef.new(shape: VocabularyFilterMethod, location_name: "VocabularyFilterMethod"))
+    AmazonTranscribeProcessorConfiguration.add_member(:show_speaker_label, Shapes::ShapeRef.new(shape: Boolean, location_name: "ShowSpeakerLabel"))
+    AmazonTranscribeProcessorConfiguration.add_member(:enable_partial_results_stabilization, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnablePartialResultsStabilization"))
+    AmazonTranscribeProcessorConfiguration.add_member(:partial_results_stability, Shapes::ShapeRef.new(shape: PartialResultsStability, location_name: "PartialResultsStability"))
+    AmazonTranscribeProcessorConfiguration.add_member(:content_identification_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentIdentificationType"))
+    AmazonTranscribeProcessorConfiguration.add_member(:content_redaction_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentRedactionType"))
+    AmazonTranscribeProcessorConfiguration.add_member(:pii_entity_types, Shapes::ShapeRef.new(shape: PiiEntityTypes, location_name: "PiiEntityTypes"))
+    AmazonTranscribeProcessorConfiguration.add_member(:language_model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "LanguageModelName"))
+    AmazonTranscribeProcessorConfiguration.add_member(:filter_partial_results, Shapes::ShapeRef.new(shape: Boolean, location_name: "FilterPartialResults"))
+    AmazonTranscribeProcessorConfiguration.struct_class = Types::AmazonTranscribeProcessorConfiguration
 
     ArtifactsConcatenationConfiguration.add_member(:audio, Shapes::ShapeRef.new(shape: AudioConcatenationConfiguration, required: true, location_name: "Audio"))
     ArtifactsConcatenationConfiguration.add_member(:video, Shapes::ShapeRef.new(shape: VideoConcatenationConfiguration, required: true, location_name: "Video"))
@@ -147,6 +256,14 @@ module Aws::ChimeSDKMediaPipelines
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     BadRequestException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     BadRequestException.struct_class = Types::BadRequestException
+
+    CategoryNameList.member = Shapes::ShapeRef.new(shape: CategoryName)
+
+    ChannelDefinition.add_member(:channel_id, Shapes::ShapeRef.new(shape: ChannelId, required: true, location_name: "ChannelId"))
+    ChannelDefinition.add_member(:participant_role, Shapes::ShapeRef.new(shape: ParticipantRole, location_name: "ParticipantRole"))
+    ChannelDefinition.struct_class = Types::ChannelDefinition
+
+    ChannelDefinitions.member = Shapes::ShapeRef.new(shape: ChannelDefinition)
 
     ChimeSdkMeetingConcatenationConfiguration.add_member(:artifacts_configuration, Shapes::ShapeRef.new(shape: ArtifactsConcatenationConfiguration, required: true, location_name: "ArtifactsConfiguration"))
     ChimeSdkMeetingConcatenationConfiguration.struct_class = Types::ChimeSdkMeetingConcatenationConfiguration
@@ -181,6 +298,11 @@ module Aws::ChimeSDKMediaPipelines
 
     ConcatenationSourceList.member = Shapes::ShapeRef.new(shape: ConcatenationSource)
 
+    ConflictException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ConflictException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    ConflictException.struct_class = Types::ConflictException
+
     ContentArtifactsConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: ArtifactsState, required: true, location_name: "State"))
     ContentArtifactsConfiguration.add_member(:mux_type, Shapes::ShapeRef.new(shape: ContentMuxType, location_name: "MuxType"))
     ContentArtifactsConfiguration.struct_class = Types::ContentArtifactsConfiguration
@@ -209,6 +331,29 @@ module Aws::ChimeSDKMediaPipelines
     CreateMediaConcatenationPipelineResponse.add_member(:media_concatenation_pipeline, Shapes::ShapeRef.new(shape: MediaConcatenationPipeline, location_name: "MediaConcatenationPipeline"))
     CreateMediaConcatenationPipelineResponse.struct_class = Types::CreateMediaConcatenationPipelineResponse
 
+    CreateMediaInsightsPipelineConfigurationRequest.add_member(:media_insights_pipeline_configuration_name, Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfigurationNameString, required: true, location_name: "MediaInsightsPipelineConfigurationName"))
+    CreateMediaInsightsPipelineConfigurationRequest.add_member(:resource_access_role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceAccessRoleArn"))
+    CreateMediaInsightsPipelineConfigurationRequest.add_member(:real_time_alert_configuration, Shapes::ShapeRef.new(shape: RealTimeAlertConfiguration, location_name: "RealTimeAlertConfiguration"))
+    CreateMediaInsightsPipelineConfigurationRequest.add_member(:elements, Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfigurationElements, required: true, location_name: "Elements"))
+    CreateMediaInsightsPipelineConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateMediaInsightsPipelineConfigurationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateMediaInsightsPipelineConfigurationRequest.struct_class = Types::CreateMediaInsightsPipelineConfigurationRequest
+
+    CreateMediaInsightsPipelineConfigurationResponse.add_member(:media_insights_pipeline_configuration, Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfiguration, location_name: "MediaInsightsPipelineConfiguration"))
+    CreateMediaInsightsPipelineConfigurationResponse.struct_class = Types::CreateMediaInsightsPipelineConfigurationResponse
+
+    CreateMediaInsightsPipelineRequest.add_member(:media_insights_pipeline_configuration_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "MediaInsightsPipelineConfigurationArn"))
+    CreateMediaInsightsPipelineRequest.add_member(:kinesis_video_stream_source_runtime_configuration, Shapes::ShapeRef.new(shape: KinesisVideoStreamSourceRuntimeConfiguration, location_name: "KinesisVideoStreamSourceRuntimeConfiguration"))
+    CreateMediaInsightsPipelineRequest.add_member(:media_insights_runtime_metadata, Shapes::ShapeRef.new(shape: MediaInsightsRuntimeMetadata, location_name: "MediaInsightsRuntimeMetadata"))
+    CreateMediaInsightsPipelineRequest.add_member(:kinesis_video_stream_recording_source_runtime_configuration, Shapes::ShapeRef.new(shape: KinesisVideoStreamRecordingSourceRuntimeConfiguration, location_name: "KinesisVideoStreamRecordingSourceRuntimeConfiguration"))
+    CreateMediaInsightsPipelineRequest.add_member(:s3_recording_sink_runtime_configuration, Shapes::ShapeRef.new(shape: S3RecordingSinkRuntimeConfiguration, location_name: "S3RecordingSinkRuntimeConfiguration"))
+    CreateMediaInsightsPipelineRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateMediaInsightsPipelineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateMediaInsightsPipelineRequest.struct_class = Types::CreateMediaInsightsPipelineRequest
+
+    CreateMediaInsightsPipelineResponse.add_member(:media_insights_pipeline, Shapes::ShapeRef.new(shape: MediaInsightsPipeline, required: true, location_name: "MediaInsightsPipeline"))
+    CreateMediaInsightsPipelineResponse.struct_class = Types::CreateMediaInsightsPipelineResponse
+
     CreateMediaLiveConnectorPipelineRequest.add_member(:sources, Shapes::ShapeRef.new(shape: LiveConnectorSourceList, required: true, location_name: "Sources"))
     CreateMediaLiveConnectorPipelineRequest.add_member(:sinks, Shapes::ShapeRef.new(shape: LiveConnectorSinkList, required: true, location_name: "Sinks"))
     CreateMediaLiveConnectorPipelineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
@@ -224,6 +369,9 @@ module Aws::ChimeSDKMediaPipelines
     DeleteMediaCapturePipelineRequest.add_member(:media_pipeline_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "mediaPipelineId"))
     DeleteMediaCapturePipelineRequest.struct_class = Types::DeleteMediaCapturePipelineRequest
 
+    DeleteMediaInsightsPipelineConfigurationRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "identifier"))
+    DeleteMediaInsightsPipelineConfigurationRequest.struct_class = Types::DeleteMediaInsightsPipelineConfigurationRequest
+
     DeleteMediaPipelineRequest.add_member(:media_pipeline_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "mediaPipelineId"))
     DeleteMediaPipelineRequest.struct_class = Types::DeleteMediaPipelineRequest
 
@@ -234,11 +382,21 @@ module Aws::ChimeSDKMediaPipelines
     ForbiddenException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     ForbiddenException.struct_class = Types::ForbiddenException
 
+    FragmentSelector.add_member(:fragment_selector_type, Shapes::ShapeRef.new(shape: FragmentSelectorType, required: true, location_name: "FragmentSelectorType"))
+    FragmentSelector.add_member(:timestamp_range, Shapes::ShapeRef.new(shape: TimestampRange, required: true, location_name: "TimestampRange"))
+    FragmentSelector.struct_class = Types::FragmentSelector
+
     GetMediaCapturePipelineRequest.add_member(:media_pipeline_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "mediaPipelineId"))
     GetMediaCapturePipelineRequest.struct_class = Types::GetMediaCapturePipelineRequest
 
     GetMediaCapturePipelineResponse.add_member(:media_capture_pipeline, Shapes::ShapeRef.new(shape: MediaCapturePipeline, location_name: "MediaCapturePipeline"))
     GetMediaCapturePipelineResponse.struct_class = Types::GetMediaCapturePipelineResponse
+
+    GetMediaInsightsPipelineConfigurationRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "identifier"))
+    GetMediaInsightsPipelineConfigurationRequest.struct_class = Types::GetMediaInsightsPipelineConfigurationRequest
+
+    GetMediaInsightsPipelineConfigurationResponse.add_member(:media_insights_pipeline_configuration, Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfiguration, location_name: "MediaInsightsPipelineConfiguration"))
+    GetMediaInsightsPipelineConfigurationResponse.struct_class = Types::GetMediaInsightsPipelineConfigurationResponse
 
     GetMediaPipelineRequest.add_member(:media_pipeline_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "mediaPipelineId"))
     GetMediaPipelineRequest.struct_class = Types::GetMediaPipelineRequest
@@ -250,6 +408,31 @@ module Aws::ChimeSDKMediaPipelines
     GridViewConfiguration.add_member(:presenter_only_configuration, Shapes::ShapeRef.new(shape: PresenterOnlyConfiguration, location_name: "PresenterOnlyConfiguration"))
     GridViewConfiguration.struct_class = Types::GridViewConfiguration
 
+    IssueDetectionConfiguration.add_member(:rule_name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "RuleName"))
+    IssueDetectionConfiguration.struct_class = Types::IssueDetectionConfiguration
+
+    KeywordMatchConfiguration.add_member(:rule_name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "RuleName"))
+    KeywordMatchConfiguration.add_member(:keywords, Shapes::ShapeRef.new(shape: KeywordMatchWordList, required: true, location_name: "Keywords"))
+    KeywordMatchConfiguration.add_member(:negate, Shapes::ShapeRef.new(shape: Boolean, location_name: "Negate"))
+    KeywordMatchConfiguration.struct_class = Types::KeywordMatchConfiguration
+
+    KeywordMatchWordList.member = Shapes::ShapeRef.new(shape: Keyword)
+
+    KinesisDataStreamSinkConfiguration.add_member(:insights_target, Shapes::ShapeRef.new(shape: Arn, location_name: "InsightsTarget"))
+    KinesisDataStreamSinkConfiguration.struct_class = Types::KinesisDataStreamSinkConfiguration
+
+    KinesisVideoStreamRecordingSourceRuntimeConfiguration.add_member(:streams, Shapes::ShapeRef.new(shape: RecordingStreamList, required: true, location_name: "Streams"))
+    KinesisVideoStreamRecordingSourceRuntimeConfiguration.add_member(:fragment_selector, Shapes::ShapeRef.new(shape: FragmentSelector, required: true, location_name: "FragmentSelector"))
+    KinesisVideoStreamRecordingSourceRuntimeConfiguration.struct_class = Types::KinesisVideoStreamRecordingSourceRuntimeConfiguration
+
+    KinesisVideoStreamSourceRuntimeConfiguration.add_member(:streams, Shapes::ShapeRef.new(shape: Streams, required: true, location_name: "Streams"))
+    KinesisVideoStreamSourceRuntimeConfiguration.add_member(:media_encoding, Shapes::ShapeRef.new(shape: MediaEncoding, required: true, location_name: "MediaEncoding"))
+    KinesisVideoStreamSourceRuntimeConfiguration.add_member(:media_sample_rate, Shapes::ShapeRef.new(shape: MediaSampleRateHertz, required: true, location_name: "MediaSampleRate"))
+    KinesisVideoStreamSourceRuntimeConfiguration.struct_class = Types::KinesisVideoStreamSourceRuntimeConfiguration
+
+    LambdaFunctionSinkConfiguration.add_member(:insights_target, Shapes::ShapeRef.new(shape: Arn, location_name: "InsightsTarget"))
+    LambdaFunctionSinkConfiguration.struct_class = Types::LambdaFunctionSinkConfiguration
+
     ListMediaCapturePipelinesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     ListMediaCapturePipelinesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultMax, location: "querystring", location_name: "max-results"))
     ListMediaCapturePipelinesRequest.struct_class = Types::ListMediaCapturePipelinesRequest
@@ -257,6 +440,14 @@ module Aws::ChimeSDKMediaPipelines
     ListMediaCapturePipelinesResponse.add_member(:media_capture_pipelines, Shapes::ShapeRef.new(shape: MediaCapturePipelineSummaryList, location_name: "MediaCapturePipelines"))
     ListMediaCapturePipelinesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListMediaCapturePipelinesResponse.struct_class = Types::ListMediaCapturePipelinesResponse
+
+    ListMediaInsightsPipelineConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListMediaInsightsPipelineConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultMax, location: "querystring", location_name: "max-results"))
+    ListMediaInsightsPipelineConfigurationsRequest.struct_class = Types::ListMediaInsightsPipelineConfigurationsRequest
+
+    ListMediaInsightsPipelineConfigurationsResponse.add_member(:media_insights_pipeline_configurations, Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfigurationSummaryList, location_name: "MediaInsightsPipelineConfigurations"))
+    ListMediaInsightsPipelineConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListMediaInsightsPipelineConfigurationsResponse.struct_class = Types::ListMediaInsightsPipelineConfigurationsResponse
 
     ListMediaPipelinesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     ListMediaPipelinesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultMax, location: "querystring", location_name: "max-results"))
@@ -320,6 +511,50 @@ module Aws::ChimeSDKMediaPipelines
     MediaConcatenationPipeline.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
     MediaConcatenationPipeline.struct_class = Types::MediaConcatenationPipeline
 
+    MediaInsightsPipeline.add_member(:media_pipeline_id, Shapes::ShapeRef.new(shape: GuidString, location_name: "MediaPipelineId"))
+    MediaInsightsPipeline.add_member(:media_pipeline_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "MediaPipelineArn"))
+    MediaInsightsPipeline.add_member(:media_insights_pipeline_configuration_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "MediaInsightsPipelineConfigurationArn"))
+    MediaInsightsPipeline.add_member(:status, Shapes::ShapeRef.new(shape: MediaPipelineStatus, location_name: "Status"))
+    MediaInsightsPipeline.add_member(:kinesis_video_stream_source_runtime_configuration, Shapes::ShapeRef.new(shape: KinesisVideoStreamSourceRuntimeConfiguration, location_name: "KinesisVideoStreamSourceRuntimeConfiguration"))
+    MediaInsightsPipeline.add_member(:media_insights_runtime_metadata, Shapes::ShapeRef.new(shape: MediaInsightsRuntimeMetadata, location_name: "MediaInsightsRuntimeMetadata"))
+    MediaInsightsPipeline.add_member(:kinesis_video_stream_recording_source_runtime_configuration, Shapes::ShapeRef.new(shape: KinesisVideoStreamRecordingSourceRuntimeConfiguration, location_name: "KinesisVideoStreamRecordingSourceRuntimeConfiguration"))
+    MediaInsightsPipeline.add_member(:s3_recording_sink_runtime_configuration, Shapes::ShapeRef.new(shape: S3RecordingSinkRuntimeConfiguration, location_name: "S3RecordingSinkRuntimeConfiguration"))
+    MediaInsightsPipeline.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
+    MediaInsightsPipeline.struct_class = Types::MediaInsightsPipeline
+
+    MediaInsightsPipelineConfiguration.add_member(:media_insights_pipeline_configuration_name, Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfigurationNameString, location_name: "MediaInsightsPipelineConfigurationName"))
+    MediaInsightsPipelineConfiguration.add_member(:media_insights_pipeline_configuration_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "MediaInsightsPipelineConfigurationArn"))
+    MediaInsightsPipelineConfiguration.add_member(:resource_access_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ResourceAccessRoleArn"))
+    MediaInsightsPipelineConfiguration.add_member(:real_time_alert_configuration, Shapes::ShapeRef.new(shape: RealTimeAlertConfiguration, location_name: "RealTimeAlertConfiguration"))
+    MediaInsightsPipelineConfiguration.add_member(:elements, Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfigurationElements, location_name: "Elements"))
+    MediaInsightsPipelineConfiguration.add_member(:media_insights_pipeline_configuration_id, Shapes::ShapeRef.new(shape: GuidString, location_name: "MediaInsightsPipelineConfigurationId"))
+    MediaInsightsPipelineConfiguration.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
+    MediaInsightsPipelineConfiguration.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
+    MediaInsightsPipelineConfiguration.struct_class = Types::MediaInsightsPipelineConfiguration
+
+    MediaInsightsPipelineConfigurationElement.add_member(:type, Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfigurationElementType, required: true, location_name: "Type"))
+    MediaInsightsPipelineConfigurationElement.add_member(:amazon_transcribe_call_analytics_processor_configuration, Shapes::ShapeRef.new(shape: AmazonTranscribeCallAnalyticsProcessorConfiguration, location_name: "AmazonTranscribeCallAnalyticsProcessorConfiguration"))
+    MediaInsightsPipelineConfigurationElement.add_member(:amazon_transcribe_processor_configuration, Shapes::ShapeRef.new(shape: AmazonTranscribeProcessorConfiguration, location_name: "AmazonTranscribeProcessorConfiguration"))
+    MediaInsightsPipelineConfigurationElement.add_member(:kinesis_data_stream_sink_configuration, Shapes::ShapeRef.new(shape: KinesisDataStreamSinkConfiguration, location_name: "KinesisDataStreamSinkConfiguration"))
+    MediaInsightsPipelineConfigurationElement.add_member(:s3_recording_sink_configuration, Shapes::ShapeRef.new(shape: S3RecordingSinkConfiguration, location_name: "S3RecordingSinkConfiguration"))
+    MediaInsightsPipelineConfigurationElement.add_member(:voice_analytics_processor_configuration, Shapes::ShapeRef.new(shape: VoiceAnalyticsProcessorConfiguration, location_name: "VoiceAnalyticsProcessorConfiguration"))
+    MediaInsightsPipelineConfigurationElement.add_member(:lambda_function_sink_configuration, Shapes::ShapeRef.new(shape: LambdaFunctionSinkConfiguration, location_name: "LambdaFunctionSinkConfiguration"))
+    MediaInsightsPipelineConfigurationElement.add_member(:sqs_queue_sink_configuration, Shapes::ShapeRef.new(shape: SqsQueueSinkConfiguration, location_name: "SqsQueueSinkConfiguration"))
+    MediaInsightsPipelineConfigurationElement.add_member(:sns_topic_sink_configuration, Shapes::ShapeRef.new(shape: SnsTopicSinkConfiguration, location_name: "SnsTopicSinkConfiguration"))
+    MediaInsightsPipelineConfigurationElement.struct_class = Types::MediaInsightsPipelineConfigurationElement
+
+    MediaInsightsPipelineConfigurationElements.member = Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfigurationElement)
+
+    MediaInsightsPipelineConfigurationSummary.add_member(:media_insights_pipeline_configuration_name, Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfigurationNameString, location_name: "MediaInsightsPipelineConfigurationName"))
+    MediaInsightsPipelineConfigurationSummary.add_member(:media_insights_pipeline_configuration_id, Shapes::ShapeRef.new(shape: GuidString, location_name: "MediaInsightsPipelineConfigurationId"))
+    MediaInsightsPipelineConfigurationSummary.add_member(:media_insights_pipeline_configuration_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "MediaInsightsPipelineConfigurationArn"))
+    MediaInsightsPipelineConfigurationSummary.struct_class = Types::MediaInsightsPipelineConfigurationSummary
+
+    MediaInsightsPipelineConfigurationSummaryList.member = Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfigurationSummary)
+
+    MediaInsightsRuntimeMetadata.key = Shapes::ShapeRef.new(shape: NonEmptyString)
+    MediaInsightsRuntimeMetadata.value = Shapes::ShapeRef.new(shape: String)
+
     MediaLiveConnectorPipeline.add_member(:sources, Shapes::ShapeRef.new(shape: LiveConnectorSourceList, location_name: "Sources"))
     MediaLiveConnectorPipeline.add_member(:sinks, Shapes::ShapeRef.new(shape: LiveConnectorSinkList, location_name: "Sinks"))
     MediaLiveConnectorPipeline.add_member(:media_pipeline_id, Shapes::ShapeRef.new(shape: GuidString, location_name: "MediaPipelineId"))
@@ -332,6 +567,7 @@ module Aws::ChimeSDKMediaPipelines
     MediaPipeline.add_member(:media_capture_pipeline, Shapes::ShapeRef.new(shape: MediaCapturePipeline, location_name: "MediaCapturePipeline"))
     MediaPipeline.add_member(:media_live_connector_pipeline, Shapes::ShapeRef.new(shape: MediaLiveConnectorPipeline, location_name: "MediaLiveConnectorPipeline"))
     MediaPipeline.add_member(:media_concatenation_pipeline, Shapes::ShapeRef.new(shape: MediaConcatenationPipeline, location_name: "MediaConcatenationPipeline"))
+    MediaPipeline.add_member(:media_insights_pipeline, Shapes::ShapeRef.new(shape: MediaInsightsPipeline, location_name: "MediaInsightsPipeline"))
     MediaPipeline.struct_class = Types::MediaPipeline
 
     MediaPipelineList.member = Shapes::ShapeRef.new(shape: MediaPipelineSummary)
@@ -348,8 +584,31 @@ module Aws::ChimeSDKMediaPipelines
     NotFoundException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     NotFoundException.struct_class = Types::NotFoundException
 
+    PostCallAnalyticsSettings.add_member(:output_location, Shapes::ShapeRef.new(shape: String, required: true, location_name: "OutputLocation"))
+    PostCallAnalyticsSettings.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataAccessRoleArn"))
+    PostCallAnalyticsSettings.add_member(:content_redaction_output, Shapes::ShapeRef.new(shape: ContentRedactionOutput, location_name: "ContentRedactionOutput"))
+    PostCallAnalyticsSettings.add_member(:output_encryption_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "OutputEncryptionKMSKeyId"))
+    PostCallAnalyticsSettings.struct_class = Types::PostCallAnalyticsSettings
+
     PresenterOnlyConfiguration.add_member(:presenter_position, Shapes::ShapeRef.new(shape: PresenterPosition, location_name: "PresenterPosition"))
     PresenterOnlyConfiguration.struct_class = Types::PresenterOnlyConfiguration
+
+    RealTimeAlertConfiguration.add_member(:disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Disabled"))
+    RealTimeAlertConfiguration.add_member(:rules, Shapes::ShapeRef.new(shape: RealTimeAlertRuleList, location_name: "Rules"))
+    RealTimeAlertConfiguration.struct_class = Types::RealTimeAlertConfiguration
+
+    RealTimeAlertRule.add_member(:type, Shapes::ShapeRef.new(shape: RealTimeAlertRuleType, required: true, location_name: "Type"))
+    RealTimeAlertRule.add_member(:keyword_match_configuration, Shapes::ShapeRef.new(shape: KeywordMatchConfiguration, location_name: "KeywordMatchConfiguration"))
+    RealTimeAlertRule.add_member(:sentiment_configuration, Shapes::ShapeRef.new(shape: SentimentConfiguration, location_name: "SentimentConfiguration"))
+    RealTimeAlertRule.add_member(:issue_detection_configuration, Shapes::ShapeRef.new(shape: IssueDetectionConfiguration, location_name: "IssueDetectionConfiguration"))
+    RealTimeAlertRule.struct_class = Types::RealTimeAlertRule
+
+    RealTimeAlertRuleList.member = Shapes::ShapeRef.new(shape: RealTimeAlertRule)
+
+    RecordingStreamConfiguration.add_member(:stream_arn, Shapes::ShapeRef.new(shape: KinesisVideoStreamArn, location_name: "StreamArn"))
+    RecordingStreamConfiguration.struct_class = Types::RecordingStreamConfiguration
+
+    RecordingStreamList.member = Shapes::ShapeRef.new(shape: RecordingStreamConfiguration)
 
     ResourceLimitExceededException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
     ResourceLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -359,9 +618,21 @@ module Aws::ChimeSDKMediaPipelines
     S3BucketSinkConfiguration.add_member(:destination, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Destination"))
     S3BucketSinkConfiguration.struct_class = Types::S3BucketSinkConfiguration
 
+    S3RecordingSinkConfiguration.add_member(:destination, Shapes::ShapeRef.new(shape: Arn, location_name: "Destination"))
+    S3RecordingSinkConfiguration.struct_class = Types::S3RecordingSinkConfiguration
+
+    S3RecordingSinkRuntimeConfiguration.add_member(:destination, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Destination"))
+    S3RecordingSinkRuntimeConfiguration.add_member(:recording_file_format, Shapes::ShapeRef.new(shape: RecordingFileFormat, required: true, location_name: "RecordingFileFormat"))
+    S3RecordingSinkRuntimeConfiguration.struct_class = Types::S3RecordingSinkRuntimeConfiguration
+
     SelectedVideoStreams.add_member(:attendee_ids, Shapes::ShapeRef.new(shape: AttendeeIdList, location_name: "AttendeeIds"))
     SelectedVideoStreams.add_member(:external_user_ids, Shapes::ShapeRef.new(shape: ExternalUserIdList, location_name: "ExternalUserIds"))
     SelectedVideoStreams.struct_class = Types::SelectedVideoStreams
+
+    SentimentConfiguration.add_member(:rule_name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "RuleName"))
+    SentimentConfiguration.add_member(:sentiment_type, Shapes::ShapeRef.new(shape: SentimentType, required: true, location_name: "SentimentType"))
+    SentimentConfiguration.add_member(:time_period, Shapes::ShapeRef.new(shape: SentimentTimePeriodInSeconds, required: true, location_name: "TimePeriod"))
+    SentimentConfiguration.struct_class = Types::SentimentConfiguration
 
     ServiceFailureException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
     ServiceFailureException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -373,8 +644,25 @@ module Aws::ChimeSDKMediaPipelines
     ServiceUnavailableException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
+    SnsTopicSinkConfiguration.add_member(:insights_target, Shapes::ShapeRef.new(shape: Arn, location_name: "InsightsTarget"))
+    SnsTopicSinkConfiguration.struct_class = Types::SnsTopicSinkConfiguration
+
     SourceConfiguration.add_member(:selected_video_streams, Shapes::ShapeRef.new(shape: SelectedVideoStreams, location_name: "SelectedVideoStreams"))
     SourceConfiguration.struct_class = Types::SourceConfiguration
+
+    SqsQueueSinkConfiguration.add_member(:insights_target, Shapes::ShapeRef.new(shape: Arn, location_name: "InsightsTarget"))
+    SqsQueueSinkConfiguration.struct_class = Types::SqsQueueSinkConfiguration
+
+    StreamChannelDefinition.add_member(:number_of_channels, Shapes::ShapeRef.new(shape: NumberOfChannels, required: true, location_name: "NumberOfChannels"))
+    StreamChannelDefinition.add_member(:channel_definitions, Shapes::ShapeRef.new(shape: ChannelDefinitions, location_name: "ChannelDefinitions"))
+    StreamChannelDefinition.struct_class = Types::StreamChannelDefinition
+
+    StreamConfiguration.add_member(:stream_arn, Shapes::ShapeRef.new(shape: KinesisVideoStreamArn, required: true, location_name: "StreamArn"))
+    StreamConfiguration.add_member(:fragment_number, Shapes::ShapeRef.new(shape: FragmentNumberString, location_name: "FragmentNumber"))
+    StreamConfiguration.add_member(:stream_channel_definition, Shapes::ShapeRef.new(shape: StreamChannelDefinition, required: true, location_name: "StreamChannelDefinition"))
+    StreamConfiguration.struct_class = Types::StreamConfiguration
+
+    Streams.member = Shapes::ShapeRef.new(shape: StreamConfiguration)
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
@@ -395,6 +683,10 @@ module Aws::ChimeSDKMediaPipelines
     ThrottledClientException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     ThrottledClientException.struct_class = Types::ThrottledClientException
 
+    TimestampRange.add_member(:start_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTimestamp"))
+    TimestampRange.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTimestamp"))
+    TimestampRange.struct_class = Types::TimestampRange
+
     TranscriptionMessagesConcatenationConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: ArtifactsConcatenationState, required: true, location_name: "State"))
     TranscriptionMessagesConcatenationConfiguration.struct_class = Types::TranscriptionMessagesConcatenationConfiguration
 
@@ -409,12 +701,29 @@ module Aws::ChimeSDKMediaPipelines
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateMediaInsightsPipelineConfigurationRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "identifier"))
+    UpdateMediaInsightsPipelineConfigurationRequest.add_member(:resource_access_role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceAccessRoleArn"))
+    UpdateMediaInsightsPipelineConfigurationRequest.add_member(:real_time_alert_configuration, Shapes::ShapeRef.new(shape: RealTimeAlertConfiguration, location_name: "RealTimeAlertConfiguration"))
+    UpdateMediaInsightsPipelineConfigurationRequest.add_member(:elements, Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfigurationElements, required: true, location_name: "Elements"))
+    UpdateMediaInsightsPipelineConfigurationRequest.struct_class = Types::UpdateMediaInsightsPipelineConfigurationRequest
+
+    UpdateMediaInsightsPipelineConfigurationResponse.add_member(:media_insights_pipeline_configuration, Shapes::ShapeRef.new(shape: MediaInsightsPipelineConfiguration, location_name: "MediaInsightsPipelineConfiguration"))
+    UpdateMediaInsightsPipelineConfigurationResponse.struct_class = Types::UpdateMediaInsightsPipelineConfigurationResponse
+
+    UpdateMediaInsightsPipelineStatusRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "identifier"))
+    UpdateMediaInsightsPipelineStatusRequest.add_member(:update_status, Shapes::ShapeRef.new(shape: MediaPipelineStatusUpdate, required: true, location_name: "UpdateStatus"))
+    UpdateMediaInsightsPipelineStatusRequest.struct_class = Types::UpdateMediaInsightsPipelineStatusRequest
+
     VideoArtifactsConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: ArtifactsState, required: true, location_name: "State"))
     VideoArtifactsConfiguration.add_member(:mux_type, Shapes::ShapeRef.new(shape: VideoMuxType, location_name: "MuxType"))
     VideoArtifactsConfiguration.struct_class = Types::VideoArtifactsConfiguration
 
     VideoConcatenationConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: ArtifactsConcatenationState, required: true, location_name: "State"))
     VideoConcatenationConfiguration.struct_class = Types::VideoConcatenationConfiguration
+
+    VoiceAnalyticsProcessorConfiguration.add_member(:speaker_search_status, Shapes::ShapeRef.new(shape: VoiceAnalyticsConfigurationStatus, location_name: "SpeakerSearchStatus"))
+    VoiceAnalyticsProcessorConfiguration.add_member(:voice_tone_analysis_status, Shapes::ShapeRef.new(shape: VoiceAnalyticsConfigurationStatus, location_name: "VoiceToneAnalysisStatus"))
+    VoiceAnalyticsProcessorConfiguration.struct_class = Types::VoiceAnalyticsProcessorConfiguration
 
 
     # @api private
@@ -463,6 +772,38 @@ module Aws::ChimeSDKMediaPipelines
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:create_media_insights_pipeline, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateMediaInsightsPipeline"
+        o.http_method = "POST"
+        o.http_request_uri = "/media-insights-pipelines"
+        o.input = Shapes::ShapeRef.new(shape: CreateMediaInsightsPipelineRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateMediaInsightsPipelineResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:create_media_insights_pipeline_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateMediaInsightsPipelineConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/media-insights-pipeline-configurations"
+        o.input = Shapes::ShapeRef.new(shape: CreateMediaInsightsPipelineConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateMediaInsightsPipelineConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:create_media_live_connector_pipeline, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateMediaLiveConnectorPipeline"
         o.http_method = "POST"
@@ -489,6 +830,22 @@ module Aws::ChimeSDKMediaPipelines
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:delete_media_insights_pipeline_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteMediaInsightsPipelineConfiguration"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/media-insights-pipeline-configurations/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteMediaInsightsPipelineConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
@@ -523,6 +880,21 @@ module Aws::ChimeSDKMediaPipelines
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:get_media_insights_pipeline_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMediaInsightsPipelineConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/media-insights-pipeline-configurations/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetMediaInsightsPipelineConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMediaInsightsPipelineConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:get_media_pipeline, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetMediaPipeline"
         o.http_method = "GET"
@@ -544,6 +916,27 @@ module Aws::ChimeSDKMediaPipelines
         o.http_request_uri = "/sdk-media-capture-pipelines"
         o.input = Shapes::ShapeRef.new(shape: ListMediaCapturePipelinesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListMediaCapturePipelinesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_media_insights_pipeline_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMediaInsightsPipelineConfigurations"
+        o.http_method = "GET"
+        o.http_request_uri = "/media-insights-pipeline-configurations"
+        o.input = Shapes::ShapeRef.new(shape: ListMediaInsightsPipelineConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMediaInsightsPipelineConfigurationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
@@ -621,6 +1014,38 @@ module Aws::ChimeSDKMediaPipelines
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:update_media_insights_pipeline_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMediaInsightsPipelineConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/media-insights-pipeline-configurations/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMediaInsightsPipelineConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateMediaInsightsPipelineConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:update_media_insights_pipeline_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMediaInsightsPipelineStatus"
+        o.http_method = "PUT"
+        o.http_request_uri = "/media-insights-pipeline-status/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMediaInsightsPipelineStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)

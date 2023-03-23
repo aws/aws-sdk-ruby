@@ -95,7 +95,9 @@ module Aws::Batch
     EksContainers = Shapes::ListShape.new(name: 'EksContainers')
     EksEmptyDir = Shapes::StructureShape.new(name: 'EksEmptyDir')
     EksHostPath = Shapes::StructureShape.new(name: 'EksHostPath')
+    EksLabelsMap = Shapes::MapShape.new(name: 'EksLabelsMap')
     EksLimits = Shapes::MapShape.new(name: 'EksLimits')
+    EksMetadata = Shapes::StructureShape.new(name: 'EksMetadata')
     EksPodProperties = Shapes::StructureShape.new(name: 'EksPodProperties')
     EksPodPropertiesDetail = Shapes::StructureShape.new(name: 'EksPodPropertiesDetail')
     EksPodPropertiesOverride = Shapes::StructureShape.new(name: 'EksPodPropertiesOverride')
@@ -107,6 +109,7 @@ module Aws::Batch
     EksVolume = Shapes::StructureShape.new(name: 'EksVolume')
     EksVolumes = Shapes::ListShape.new(name: 'EksVolumes')
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
+    EphemeralStorage = Shapes::StructureShape.new(name: 'EphemeralStorage')
     EvaluateOnExit = Shapes::StructureShape.new(name: 'EvaluateOnExit')
     EvaluateOnExitList = Shapes::ListShape.new(name: 'EvaluateOnExitList')
     FairsharePolicy = Shapes::StructureShape.new(name: 'FairsharePolicy')
@@ -340,6 +343,7 @@ module Aws::Batch
     ContainerDetail.add_member(:secrets, Shapes::ShapeRef.new(shape: SecretList, location_name: "secrets"))
     ContainerDetail.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     ContainerDetail.add_member(:fargate_platform_configuration, Shapes::ShapeRef.new(shape: FargatePlatformConfiguration, location_name: "fargatePlatformConfiguration"))
+    ContainerDetail.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "ephemeralStorage"))
     ContainerDetail.struct_class = Types::ContainerDetail
 
     ContainerOverrides.add_member(:vcpus, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "vcpus", metadata: {"deprecatedMessage"=>"This field is deprecated, use resourceRequirements instead."}))
@@ -370,6 +374,7 @@ module Aws::Batch
     ContainerProperties.add_member(:secrets, Shapes::ShapeRef.new(shape: SecretList, location_name: "secrets"))
     ContainerProperties.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     ContainerProperties.add_member(:fargate_platform_configuration, Shapes::ShapeRef.new(shape: FargatePlatformConfiguration, location_name: "fargatePlatformConfiguration"))
+    ContainerProperties.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "ephemeralStorage"))
     ContainerProperties.struct_class = Types::ContainerProperties
 
     ContainerSummary.add_member(:exit_code, Shapes::ShapeRef.new(shape: Integer, location_name: "exitCode"))
@@ -587,14 +592,21 @@ module Aws::Batch
     EksHostPath.add_member(:path, Shapes::ShapeRef.new(shape: String, location_name: "path"))
     EksHostPath.struct_class = Types::EksHostPath
 
+    EksLabelsMap.key = Shapes::ShapeRef.new(shape: String)
+    EksLabelsMap.value = Shapes::ShapeRef.new(shape: String)
+
     EksLimits.key = Shapes::ShapeRef.new(shape: String)
     EksLimits.value = Shapes::ShapeRef.new(shape: Quantity)
+
+    EksMetadata.add_member(:labels, Shapes::ShapeRef.new(shape: EksLabelsMap, location_name: "labels"))
+    EksMetadata.struct_class = Types::EksMetadata
 
     EksPodProperties.add_member(:service_account_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceAccountName"))
     EksPodProperties.add_member(:host_network, Shapes::ShapeRef.new(shape: Boolean, location_name: "hostNetwork"))
     EksPodProperties.add_member(:dns_policy, Shapes::ShapeRef.new(shape: String, location_name: "dnsPolicy"))
     EksPodProperties.add_member(:containers, Shapes::ShapeRef.new(shape: EksContainers, location_name: "containers"))
     EksPodProperties.add_member(:volumes, Shapes::ShapeRef.new(shape: EksVolumes, location_name: "volumes"))
+    EksPodProperties.add_member(:metadata, Shapes::ShapeRef.new(shape: EksMetadata, location_name: "metadata"))
     EksPodProperties.struct_class = Types::EksPodProperties
 
     EksPodPropertiesDetail.add_member(:service_account_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceAccountName"))
@@ -607,6 +619,7 @@ module Aws::Batch
     EksPodPropertiesDetail.struct_class = Types::EksPodPropertiesDetail
 
     EksPodPropertiesOverride.add_member(:containers, Shapes::ShapeRef.new(shape: EksContainerOverrideList, location_name: "containers"))
+    EksPodPropertiesOverride.add_member(:metadata, Shapes::ShapeRef.new(shape: EksMetadata, location_name: "metadata"))
     EksPodPropertiesOverride.struct_class = Types::EksPodPropertiesOverride
 
     EksProperties.add_member(:pod_properties, Shapes::ShapeRef.new(shape: EksPodProperties, location_name: "podProperties"))
@@ -634,6 +647,9 @@ module Aws::Batch
     EksVolumes.member = Shapes::ShapeRef.new(shape: EksVolume)
 
     EnvironmentVariables.member = Shapes::ShapeRef.new(shape: KeyValuePair)
+
+    EphemeralStorage.add_member(:size_in_gi_b, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "sizeInGiB"))
+    EphemeralStorage.struct_class = Types::EphemeralStorage
 
     EvaluateOnExit.add_member(:on_status_reason, Shapes::ShapeRef.new(shape: String, location_name: "onStatusReason"))
     EvaluateOnExit.add_member(:on_reason, Shapes::ShapeRef.new(shape: String, location_name: "onReason"))

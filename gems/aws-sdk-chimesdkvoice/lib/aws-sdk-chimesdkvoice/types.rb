@@ -169,6 +169,25 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
+    # @!attribute [rw] voice_connector_id
+    #   @return [String]
+    #
+    # @!attribute [rw] transaction_id
+    #   @return [String]
+    #
+    # @!attribute [rw] is_caller
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/CallDetails AWS API Documentation
+    #
+    class CallDetails < Struct.new(
+      :voice_connector_id,
+      :transaction_id,
+      :is_caller)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] street_info
     #   @return [String]
     #
@@ -446,6 +465,66 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] server_side_encryption_configuration
+    #   @return [Types::ServerSideEncryptionConfiguration]
+    #
+    # @!attribute [rw] client_request_token
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/CreateVoiceProfileDomainRequest AWS API Documentation
+    #
+    class CreateVoiceProfileDomainRequest < Struct.new(
+      :name,
+      :description,
+      :server_side_encryption_configuration,
+      :client_request_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_profile_domain
+    #   @return [Types::VoiceProfileDomain]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/CreateVoiceProfileDomainResponse AWS API Documentation
+    #
+    class CreateVoiceProfileDomainResponse < Struct.new(
+      :voice_profile_domain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] speaker_search_task_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/CreateVoiceProfileRequest AWS API Documentation
+    #
+    class CreateVoiceProfileRequest < Struct.new(
+      :speaker_search_task_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_profile
+    #   @return [Types::VoiceProfile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/CreateVoiceProfileResponse AWS API Documentation
+    #
+    class CreateVoiceProfileResponse < Struct.new(
+      :voice_profile)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] username
     #   @return [String]
     #
@@ -616,6 +695,28 @@ module Aws::ChimeSDKVoice
     #
     class DeleteVoiceConnectorTerminationRequest < Struct.new(
       :voice_connector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_profile_domain_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/DeleteVoiceProfileDomainRequest AWS API Documentation
+    #
+    class DeleteVoiceProfileDomainRequest < Struct.new(
+      :voice_profile_domain_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_profile_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/DeleteVoiceProfileRequest AWS API Documentation
+    #
+    class DeleteVoiceProfileRequest < Struct.new(
+      :voice_profile_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -889,6 +990,32 @@ module Aws::ChimeSDKVoice
     # @!attribute [rw] voice_connector_id
     #   @return [String]
     #
+    # @!attribute [rw] speaker_search_task_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/GetSpeakerSearchTaskRequest AWS API Documentation
+    #
+    class GetSpeakerSearchTaskRequest < Struct.new(
+      :voice_connector_id,
+      :speaker_search_task_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] speaker_search_task
+    #   @return [Types::SpeakerSearchTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/GetSpeakerSearchTaskResponse AWS API Documentation
+    #
+    class GetSpeakerSearchTaskResponse < Struct.new(
+      :speaker_search_task)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_connector_id
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/GetVoiceConnectorEmergencyCallingConfigurationRequest AWS API Documentation
     #
     class GetVoiceConnectorEmergencyCallingConfigurationRequest < Struct.new(
@@ -1083,6 +1210,84 @@ module Aws::ChimeSDKVoice
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] voice_profile_domain_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/GetVoiceProfileDomainRequest AWS API Documentation
+    #
+    class GetVoiceProfileDomainRequest < Struct.new(
+      :voice_profile_domain_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_profile_domain
+    #   @return [Types::VoiceProfileDomain]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/GetVoiceProfileDomainResponse AWS API Documentation
+    #
+    class GetVoiceProfileDomainResponse < Struct.new(
+      :voice_profile_domain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_profile_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/GetVoiceProfileRequest AWS API Documentation
+    #
+    class GetVoiceProfileRequest < Struct.new(
+      :voice_profile_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_profile
+    #   @return [Types::VoiceProfile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/GetVoiceProfileResponse AWS API Documentation
+    #
+    class GetVoiceProfileResponse < Struct.new(
+      :voice_profile)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_connector_id
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_tone_analysis_task_id
+    #   @return [String]
+    #
+    # @!attribute [rw] is_caller
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/GetVoiceToneAnalysisTaskRequest AWS API Documentation
+    #
+    class GetVoiceToneAnalysisTaskRequest < Struct.new(
+      :voice_connector_id,
+      :voice_tone_analysis_task_id,
+      :is_caller)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_tone_analysis_task
+    #   @return [Types::VoiceToneAnalysisTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/GetVoiceToneAnalysisTaskResponse AWS API Documentation
+    #
+    class GetVoiceToneAnalysisTaskResponse < Struct.new(
+      :voice_tone_analysis_task)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/GoneException AWS API Documentation
+    #
+    class GoneException < Aws::EmptyStructure; end
 
     # @!attribute [rw] voice_connector_regions
     #   @return [Array<String>]
@@ -1295,6 +1500,28 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = [:resource_arn]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   @return [String]
     #
@@ -1377,6 +1604,70 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/ListVoiceProfileDomainsRequest AWS API Documentation
+    #
+    class ListVoiceProfileDomainsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_profile_domains
+    #   @return [Array<Types::VoiceProfileDomainSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/ListVoiceProfileDomainsResponse AWS API Documentation
+    #
+    class ListVoiceProfileDomainsResponse < Struct.new(
+      :voice_profile_domains,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_profile_domain_id
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/ListVoiceProfilesRequest AWS API Documentation
+    #
+    class ListVoiceProfilesRequest < Struct.new(
+      :voice_profile_domain_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_profiles
+    #   @return [Array<Types::VoiceProfileSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/ListVoiceProfilesResponse AWS API Documentation
+    #
+    class ListVoiceProfilesResponse < Struct.new(
+      :voice_profiles,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] enable_sip_logs
     #   @return [Boolean]
     #
@@ -1389,6 +1680,21 @@ module Aws::ChimeSDKVoice
       :enable_sip_logs,
       :enable_media_metric_logs)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] disabled
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] configuration_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/MediaInsightsConfiguration AWS API Documentation
+    #
+    class MediaInsightsConfiguration < Struct.new(
+      :disabled,
+      :configuration_arn)
+      SENSITIVE = [:configuration_arn]
       include Aws::Structure
     end
 
@@ -2047,6 +2353,17 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
+    # @!attribute [rw] kms_key_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/ServerSideEncryptionConfiguration AWS API Documentation
+    #
+    class ServerSideEncryptionConfiguration < Struct.new(
+      :kms_key_arn)
+      SENSITIVE = [:kms_key_arn]
+      include Aws::Structure
+    end
+
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/ServiceFailureException AWS API Documentation
     #
     class ServiceFailureException < Aws::EmptyStructure; end
@@ -2192,6 +2509,173 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
+    # @!attribute [rw] results
+    #   @return [Array<Types::SpeakerSearchResult>]
+    #
+    # @!attribute [rw] voiceprint_generation_status
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/SpeakerSearchDetails AWS API Documentation
+    #
+    class SpeakerSearchDetails < Struct.new(
+      :results,
+      :voiceprint_generation_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] confidence_score
+    #   @return [Float]
+    #
+    # @!attribute [rw] voice_profile_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/SpeakerSearchResult AWS API Documentation
+    #
+    class SpeakerSearchResult < Struct.new(
+      :confidence_score,
+      :voice_profile_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] speaker_search_task_id
+    #   @return [String]
+    #
+    # @!attribute [rw] speaker_search_task_status
+    #   @return [String]
+    #
+    # @!attribute [rw] call_details
+    #   @return [Types::CallDetails]
+    #
+    # @!attribute [rw] speaker_search_details
+    #   @return [Types::SpeakerSearchDetails]
+    #
+    # @!attribute [rw] created_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] started_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] status_message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/SpeakerSearchTask AWS API Documentation
+    #
+    class SpeakerSearchTask < Struct.new(
+      :speaker_search_task_id,
+      :speaker_search_task_status,
+      :call_details,
+      :speaker_search_details,
+      :created_timestamp,
+      :updated_timestamp,
+      :started_timestamp,
+      :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_connector_id
+    #   @return [String]
+    #
+    # @!attribute [rw] transaction_id
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_profile_domain_id
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/StartSpeakerSearchTaskRequest AWS API Documentation
+    #
+    class StartSpeakerSearchTaskRequest < Struct.new(
+      :voice_connector_id,
+      :transaction_id,
+      :voice_profile_domain_id,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] speaker_search_task
+    #   @return [Types::SpeakerSearchTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/StartSpeakerSearchTaskResponse AWS API Documentation
+    #
+    class StartSpeakerSearchTaskResponse < Struct.new(
+      :speaker_search_task)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_connector_id
+    #   @return [String]
+    #
+    # @!attribute [rw] transaction_id
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/StartVoiceToneAnalysisTaskRequest AWS API Documentation
+    #
+    class StartVoiceToneAnalysisTaskRequest < Struct.new(
+      :voice_connector_id,
+      :transaction_id,
+      :language_code,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_tone_analysis_task
+    #   @return [Types::VoiceToneAnalysisTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/StartVoiceToneAnalysisTaskResponse AWS API Documentation
+    #
+    class StartVoiceToneAnalysisTaskResponse < Struct.new(
+      :voice_tone_analysis_task)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_connector_id
+    #   @return [String]
+    #
+    # @!attribute [rw] speaker_search_task_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/StopSpeakerSearchTaskRequest AWS API Documentation
+    #
+    class StopSpeakerSearchTaskRequest < Struct.new(
+      :voice_connector_id,
+      :speaker_search_task_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_connector_id
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_tone_analysis_task_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/StopVoiceToneAnalysisTaskRequest AWS API Documentation
+    #
+    class StopVoiceToneAnalysisTaskRequest < Struct.new(
+      :voice_connector_id,
+      :voice_tone_analysis_task_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] data_retention_in_hours
     #   @return [Integer]
     #
@@ -2201,12 +2685,16 @@ module Aws::ChimeSDKVoice
     # @!attribute [rw] streaming_notification_targets
     #   @return [Array<Types::StreamingNotificationTarget>]
     #
+    # @!attribute [rw] media_insights_configuration
+    #   @return [Types::MediaInsightsConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/StreamingConfiguration AWS API Documentation
     #
     class StreamingConfiguration < Struct.new(
       :data_retention_in_hours,
       :disabled,
-      :streaming_notification_targets)
+      :streaming_notification_targets,
+      :media_insights_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2219,6 +2707,36 @@ module Aws::ChimeSDKVoice
     class StreamingNotificationTarget < Struct.new(
       :notification_target)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = [:key, :value]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = [:resource_arn]
       include Aws::Structure
     end
 
@@ -2271,6 +2789,25 @@ module Aws::ChimeSDKVoice
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/UnauthorizedClientException AWS API Documentation
     #
     class UnauthorizedClientException < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/UnprocessableEntityException AWS API Documentation
+    #
+    class UnprocessableEntityException < Aws::EmptyStructure; end
+
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = [:resource_arn]
+      include Aws::Structure
+    end
 
     # @!attribute [rw] voice_connector
     #   @return [Types::VoiceConnectorSettings]
@@ -2531,6 +3068,62 @@ module Aws::ChimeSDKVoice
       include Aws::Structure
     end
 
+    # @!attribute [rw] voice_profile_domain_id
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/UpdateVoiceProfileDomainRequest AWS API Documentation
+    #
+    class UpdateVoiceProfileDomainRequest < Struct.new(
+      :voice_profile_domain_id,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_profile_domain
+    #   @return [Types::VoiceProfileDomain]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/UpdateVoiceProfileDomainResponse AWS API Documentation
+    #
+    class UpdateVoiceProfileDomainResponse < Struct.new(
+      :voice_profile_domain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_profile_id
+    #   @return [String]
+    #
+    # @!attribute [rw] speaker_search_task_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/UpdateVoiceProfileRequest AWS API Documentation
+    #
+    class UpdateVoiceProfileRequest < Struct.new(
+      :voice_profile_id,
+      :speaker_search_task_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_profile
+    #   @return [Types::VoiceProfile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/UpdateVoiceProfileResponse AWS API Documentation
+    #
+    class UpdateVoiceProfileResponse < Struct.new(
+      :voice_profile)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] aws_account_id
     #   @return [String]
     #
@@ -2681,6 +3274,169 @@ module Aws::ChimeSDKVoice
     #
     class VoiceConnectorSettings < Struct.new(
       :cdr_bucket)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_profile_id
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_profile_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_profile_domain_id
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] expiration_timestamp
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/VoiceProfile AWS API Documentation
+    #
+    class VoiceProfile < Struct.new(
+      :voice_profile_id,
+      :voice_profile_arn,
+      :voice_profile_domain_id,
+      :created_timestamp,
+      :updated_timestamp,
+      :expiration_timestamp)
+      SENSITIVE = [:voice_profile_arn]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_profile_domain_id
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_profile_domain_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] server_side_encryption_configuration
+    #   @return [Types::ServerSideEncryptionConfiguration]
+    #
+    # @!attribute [rw] created_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/VoiceProfileDomain AWS API Documentation
+    #
+    class VoiceProfileDomain < Struct.new(
+      :voice_profile_domain_id,
+      :voice_profile_domain_arn,
+      :name,
+      :description,
+      :server_side_encryption_configuration,
+      :created_timestamp,
+      :updated_timestamp)
+      SENSITIVE = [:voice_profile_domain_arn]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_profile_domain_id
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_profile_domain_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/VoiceProfileDomainSummary AWS API Documentation
+    #
+    class VoiceProfileDomainSummary < Struct.new(
+      :voice_profile_domain_id,
+      :voice_profile_domain_arn,
+      :name,
+      :description,
+      :created_timestamp,
+      :updated_timestamp)
+      SENSITIVE = [:voice_profile_domain_arn]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_profile_id
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_profile_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_profile_domain_id
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] expiration_timestamp
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/VoiceProfileSummary AWS API Documentation
+    #
+    class VoiceProfileSummary < Struct.new(
+      :voice_profile_id,
+      :voice_profile_arn,
+      :voice_profile_domain_id,
+      :created_timestamp,
+      :updated_timestamp,
+      :expiration_timestamp)
+      SENSITIVE = [:voice_profile_arn]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_tone_analysis_task_id
+    #   @return [String]
+    #
+    # @!attribute [rw] voice_tone_analysis_task_status
+    #   @return [String]
+    #
+    # @!attribute [rw] call_details
+    #   @return [Types::CallDetails]
+    #
+    # @!attribute [rw] created_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] started_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] status_message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/VoiceToneAnalysisTask AWS API Documentation
+    #
+    class VoiceToneAnalysisTask < Struct.new(
+      :voice_tone_analysis_task_id,
+      :voice_tone_analysis_task_status,
+      :call_details,
+      :created_timestamp,
+      :updated_timestamp,
+      :started_timestamp,
+      :status_message)
       SENSITIVE = []
       include Aws::Structure
     end

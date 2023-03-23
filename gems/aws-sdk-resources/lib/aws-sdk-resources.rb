@@ -152,6 +152,7 @@ module Aws
   autoload :Honeycode, 'aws-sdk-honeycode'
   autoload :IAM, 'aws-sdk-iam'
   autoload :IVS, 'aws-sdk-ivs'
+  autoload :IVSRealTime, 'aws-sdk-ivsrealtime'
   autoload :IdentityStore, 'aws-sdk-identitystore'
   autoload :Imagebuilder, 'aws-sdk-imagebuilder'
   autoload :ImportExport, 'aws-sdk-importexport'

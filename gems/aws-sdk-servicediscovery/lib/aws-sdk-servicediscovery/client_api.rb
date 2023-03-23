@@ -666,7 +666,6 @@ module Aws::ServiceDiscovery
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRequest)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
       end)
 
       api.add_operation(:create_private_dns_namespace, Seahorse::Model::Operation.new.tap do |o|
@@ -680,7 +679,6 @@ module Aws::ServiceDiscovery
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRequest)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
       end)
 
       api.add_operation(:create_public_dns_namespace, Seahorse::Model::Operation.new.tap do |o|
@@ -694,7 +692,6 @@ module Aws::ServiceDiscovery
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRequest)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
       end)
 
       api.add_operation(:create_service, Seahorse::Model::Operation.new.tap do |o|
@@ -708,7 +705,6 @@ module Aws::ServiceDiscovery
         o.errors << Shapes::ShapeRef.new(shape: NamespaceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: ServiceAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
       end)
 
       api.add_operation(:delete_namespace, Seahorse::Model::Operation.new.tap do |o|
@@ -721,7 +717,6 @@ module Aws::ServiceDiscovery
         o.errors << Shapes::ShapeRef.new(shape: NamespaceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRequest)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
       end)
 
       api.add_operation(:delete_service, Seahorse::Model::Operation.new.tap do |o|
@@ -733,7 +728,6 @@ module Aws::ServiceDiscovery
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
       end)
 
       api.add_operation(:deregister_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -747,7 +741,6 @@ module Aws::ServiceDiscovery
         o.errors << Shapes::ShapeRef.new(shape: InstanceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotFound)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
       end)
 
       api.add_operation(:discover_instances, Seahorse::Model::Operation.new.tap do |o|
@@ -774,7 +767,6 @@ module Aws::ServiceDiscovery
         o.errors << Shapes::ShapeRef.new(shape: InstanceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotFound)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
       end)
 
       api.add_operation(:get_instances_health_status, Seahorse::Model::Operation.new.tap do |o|
@@ -786,7 +778,6 @@ module Aws::ServiceDiscovery
         o.errors << Shapes::ShapeRef.new(shape: InstanceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotFound)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -813,7 +804,6 @@ module Aws::ServiceDiscovery
         o.output = Shapes::ShapeRef.new(shape: GetOperationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotFound)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
       end)
 
       api.add_operation(:get_service, Seahorse::Model::Operation.new.tap do |o|
@@ -824,7 +814,6 @@ module Aws::ServiceDiscovery
         o.output = Shapes::ShapeRef.new(shape: GetServiceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotFound)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
       end)
 
       api.add_operation(:list_instances, Seahorse::Model::Operation.new.tap do |o|
@@ -835,7 +824,6 @@ module Aws::ServiceDiscovery
         o.output = Shapes::ShapeRef.new(shape: ListInstancesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -851,7 +839,6 @@ module Aws::ServiceDiscovery
         o.input = Shapes::ShapeRef.new(shape: ListNamespacesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListNamespacesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -867,7 +854,6 @@ module Aws::ServiceDiscovery
         o.input = Shapes::ShapeRef.new(shape: ListOperationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListOperationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -883,7 +869,6 @@ module Aws::ServiceDiscovery
         o.input = Shapes::ShapeRef.new(shape: ListServicesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListServicesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -900,7 +885,6 @@ module Aws::ServiceDiscovery
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
       end)
 
       api.add_operation(:register_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -914,7 +898,6 @@ module Aws::ServiceDiscovery
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotFound)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -926,7 +909,6 @@ module Aws::ServiceDiscovery
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -937,7 +919,6 @@ module Aws::ServiceDiscovery
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
       end)
 
       api.add_operation(:update_http_namespace, Seahorse::Model::Operation.new.tap do |o|
@@ -950,7 +931,6 @@ module Aws::ServiceDiscovery
         o.errors << Shapes::ShapeRef.new(shape: NamespaceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRequest)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
       end)
 
       api.add_operation(:update_instance_custom_health_status, Seahorse::Model::Operation.new.tap do |o|
@@ -963,7 +943,6 @@ module Aws::ServiceDiscovery
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: CustomHealthNotFound)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
       end)
 
       api.add_operation(:update_private_dns_namespace, Seahorse::Model::Operation.new.tap do |o|
@@ -976,7 +955,6 @@ module Aws::ServiceDiscovery
         o.errors << Shapes::ShapeRef.new(shape: NamespaceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRequest)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
       end)
 
       api.add_operation(:update_public_dns_namespace, Seahorse::Model::Operation.new.tap do |o|
@@ -989,7 +967,6 @@ module Aws::ServiceDiscovery
         o.errors << Shapes::ShapeRef.new(shape: NamespaceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRequest)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
       end)
 
       api.add_operation(:update_service, Seahorse::Model::Operation.new.tap do |o|
@@ -1001,7 +978,6 @@ module Aws::ServiceDiscovery
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRequest)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotFound)
-        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
       end)
     end
 

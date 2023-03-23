@@ -404,6 +404,8 @@ module Aws::CodeArtifact
     #
     #   * `public:maven-commonsware` - for the CommonsWare Android repository.
     #
+    #   * `public:maven-clojars` - for the Clojars repository.
+    #
     # @return [Types::AssociateExternalConnectionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AssociateExternalConnectionResult#repository #repository} => Types::RepositoryDescription
@@ -431,6 +433,7 @@ module Aws::CodeArtifact
     #   resp.repository.external_connections[0].external_connection_name #=> String
     #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget", "generic"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
+    #   resp.repository.created_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/AssociateExternalConnection AWS API Documentation
     #
@@ -481,7 +484,7 @@ module Aws::CodeArtifact
     #     component, package versions of those formats do not have a
     #     namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #
     # @option params [required, String] :package
     #   The name of the package that contains the versions to be copied.
@@ -711,6 +714,7 @@ module Aws::CodeArtifact
     #   resp.repository.external_connections[0].external_connection_name #=> String
     #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget", "generic"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
+    #   resp.repository.created_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/CreateRepository AWS API Documentation
     #
@@ -839,6 +843,8 @@ module Aws::CodeArtifact
     #   * Python and NuGet packages do not contain corresponding components,
     #     packages of those formats do not have a namespace.
     #
+    #   * The namespace of a generic package is its `namespace`.
+    #
     # @option params [required, String] :package
     #   The name of the package to delete.
     #
@@ -915,7 +921,7 @@ module Aws::CodeArtifact
     #     component, package versions of those formats do not have a
     #     namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #
     # @option params [required, String] :package
     #   The name of the package with the versions to delete.
@@ -1001,6 +1007,7 @@ module Aws::CodeArtifact
     #   resp.repository.external_connections[0].external_connection_name #=> String
     #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget", "generic"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
+    #   resp.repository.created_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DeleteRepository AWS API Documentation
     #
@@ -1146,7 +1153,7 @@ module Aws::CodeArtifact
     #   * Python and NuGet packages do not contain a corresponding component,
     #     packages of those formats do not have a namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #
     # @option params [required, String] :package
     #   The name of the requested package.
@@ -1217,7 +1224,7 @@ module Aws::CodeArtifact
     #     component, package versions of those formats do not have a
     #     namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #
     # @option params [required, String] :package
     #   The name of the requested package version.
@@ -1309,6 +1316,7 @@ module Aws::CodeArtifact
     #   resp.repository.external_connections[0].external_connection_name #=> String
     #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget", "generic"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
+    #   resp.repository.created_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DescribeRepository AWS API Documentation
     #
@@ -1363,6 +1371,7 @@ module Aws::CodeArtifact
     #   resp.repository.external_connections[0].external_connection_name #=> String
     #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget", "generic"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
+    #   resp.repository.created_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DisassociateExternalConnection AWS API Documentation
     #
@@ -1419,7 +1428,7 @@ module Aws::CodeArtifact
     #     component, package versions of those formats do not have a
     #     namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #
     # @option params [required, String] :package
     #   The name of the package with the versions you want to dispose.
@@ -1624,7 +1633,7 @@ module Aws::CodeArtifact
     #     component, package versions of those formats do not have a
     #     namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #
     # @option params [required, String] :package
     #   The name of the package that contains the requested asset.
@@ -1701,8 +1710,6 @@ module Aws::CodeArtifact
     #   The namespace of the package version with the requested readme file.
     #   The package version component that specifies its namespace depends on
     #   its type. For example:
-    #
-    #   * The namespace of a Maven package version is its `groupId`.
     #
     #   * The namespace of an npm package version is its `scope`.
     #
@@ -1935,7 +1942,7 @@ module Aws::CodeArtifact
     #     component, package versions of those formats do not have a
     #     namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #
     # @option params [required, String] :package
     #   The name of the package that contains the requested package version
@@ -2041,7 +2048,7 @@ module Aws::CodeArtifact
     #     component, package versions of those formats do not have a
     #     namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #
     # @option params [required, String] :package
     #   The name of the package versions' package.
@@ -2136,7 +2143,7 @@ module Aws::CodeArtifact
     #   * Python and NuGet packages do not contain a corresponding component,
     #     packages of those formats do not have a namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #
     # @option params [required, String] :package
     #   The name of the package for which you want to request package
@@ -2248,7 +2255,7 @@ module Aws::CodeArtifact
     #   * Python and NuGet packages do not contain a corresponding component,
     #     packages of those formats do not have a namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #
     # @option params [String] :package_prefix
     #   A prefix used to filter requested packages. Only packages with names
@@ -2368,6 +2375,7 @@ module Aws::CodeArtifact
     #   resp.repositories[0].domain_owner #=> String
     #   resp.repositories[0].arn #=> String
     #   resp.repositories[0].description #=> String
+    #   resp.repositories[0].created_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/ListRepositories AWS API Documentation
@@ -2438,6 +2446,7 @@ module Aws::CodeArtifact
     #   resp.repositories[0].domain_owner #=> String
     #   resp.repositories[0].arn #=> String
     #   resp.repositories[0].description #=> String
+    #   resp.repositories[0].created_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/ListRepositoriesInDomain AWS API Documentation
@@ -2484,14 +2493,16 @@ module Aws::CodeArtifact
     # files).
     #
     # The `unfinished` flag can be used to keep the package version in the
-    # `Unfinished` state until all of it’s assets have been uploaded (see
+    # `Unfinished` state until all of its assets have been uploaded (see
     # [Package version status][1] in the *CodeArtifact user guide*). To set
     # the package version’s status to `Published`, omit the `unfinished`
     # flag when uploading the final asset, or set the status using
     # [UpdatePackageVersionStatus][2]. Once a package version’s status is
     # set to `Published`, it cannot change back to `Unfinished`.
     #
-    # <note markdown="1"> Only generic packages can be published using this API.
+    # <note markdown="1"> Only generic packages can be published using this API. For more
+    # information, see [Using generic packages][3] in the *CodeArtifact User
+    # Guide*.
     #
     #  </note>
     #
@@ -2499,6 +2510,7 @@ module Aws::CodeArtifact
     #
     # [1]: https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status.html#package-version-status
     # [2]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdatePackageVersionsStatus.html
+    # [3]: https://docs.aws.amazon.com/codeartifact/latest/ug/using-generic.html
     #
     # @option params [required, String] :domain
     #   The name of the domain that contains the repository that contains the
@@ -2535,10 +2547,15 @@ module Aws::CodeArtifact
     #
     # @option params [required, String] :asset_sha256
     #   The SHA256 hash of the `assetContent` to publish. This value must be
-    #   calculated by the caller and provided with the request.
+    #   calculated by the caller and provided with the request (see
+    #   [Publishing a generic package][1] in the *CodeArtifact User Guide*).
     #
     #   This value is used as an integrity check to verify that the
     #   `assetContent` has not changed after it was originally sent.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codeartifact/latest/ug/using-generic.html#publishing-generic-packages
     #
     # @option params [Boolean] :unfinished
     #   Specifies whether the package version should remain in the
@@ -2550,7 +2567,7 @@ module Aws::CodeArtifact
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status.html#package-version-status
+    #   [1]: https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status
     #
     # @return [Types::PublishPackageVersionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2699,7 +2716,7 @@ module Aws::CodeArtifact
     #   * Python and NuGet packages do not contain a corresponding component,
     #     packages of those formats do not have a namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #
     # @option params [required, String] :package
     #   The name of the package to be updated.
@@ -2908,7 +2925,7 @@ module Aws::CodeArtifact
     #     component, package versions of those formats do not have a
     #     namespace.
     #
-    #   * The namespace of a generic package is it’s `namespace`.
+    #   * The namespace of a generic package is its `namespace`.
     #
     # @option params [required, String] :package
     #   The name of the package with the version statuses to update.
@@ -3029,6 +3046,7 @@ module Aws::CodeArtifact
     #   resp.repository.external_connections[0].external_connection_name #=> String
     #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget", "generic"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
+    #   resp.repository.created_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/UpdateRepository AWS API Documentation
     #
@@ -3052,7 +3070,7 @@ module Aws::CodeArtifact
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codeartifact'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

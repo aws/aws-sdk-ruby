@@ -1188,6 +1188,10 @@ module Aws::GuardDuty
     # Deletes GuardDuty member accounts (to the current GuardDuty
     # administrator account) specified by the account IDs.
     #
+    # With `autoEnableOrganizationMembers` configuration for your
+    # organization set to `ALL`, you'll receive an error if you attempt to
+    # disable GuardDuty for a member account in your organization.
+    #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account whose members
     #   you want to delete.
@@ -1417,6 +1421,7 @@ module Aws::GuardDuty
     #   * {Types::DescribeOrganizationConfigurationResponse#data_sources #data_sources} => Types::OrganizationDataSourceConfigurationsResult
     #   * {Types::DescribeOrganizationConfigurationResponse#features #features} => Array&lt;Types::OrganizationFeatureConfigurationResult&gt;
     #   * {Types::DescribeOrganizationConfigurationResponse#next_token #next_token} => String
+    #   * {Types::DescribeOrganizationConfigurationResponse#auto_enable_organization_members #auto_enable_organization_members} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1439,6 +1444,7 @@ module Aws::GuardDuty
     #   resp.features[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS"
     #   resp.features[0].auto_enable #=> String, one of "NEW", "NONE"
     #   resp.next_token #=> String
+    #   resp.auto_enable_organization_members #=> String, one of "NEW", "ALL", "NONE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeOrganizationConfiguration AWS API Documentation
     #
@@ -1519,6 +1525,10 @@ module Aws::GuardDuty
     # Disassociates the current GuardDuty member account from its
     # administrator account.
     #
+    # With `autoEnableOrganizationMembers` configuration for your
+    # organization set to `ALL`, you'll receive an error if you attempt to
+    # disable GuardDuty in a member account.
+    #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty member account.
     #
@@ -1564,6 +1574,11 @@ module Aws::GuardDuty
 
     # Disassociates GuardDuty member accounts (to the current administrator
     # account) specified by the account IDs.
+    #
+    # With `autoEnableOrganizationMembers` configuration for your
+    # organization set to `ALL`, you'll receive an error if you attempt to
+    # disassociate a member account before removing them from your Amazon
+    # Web Services organization.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account whose members
@@ -3264,7 +3279,11 @@ module Aws::GuardDuty
 
     # Turns on GuardDuty monitoring of the specified member accounts. Use
     # this operation to restart monitoring of accounts that you stopped
-    # monitoring with the `StopMonitoringMembers` operation.
+    # monitoring with the [StopMonitoringMembers][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_StopMonitoringMembers.html
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty administrator account
@@ -3303,6 +3322,10 @@ module Aws::GuardDuty
     # Stops GuardDuty monitoring for the specified member accounts. Use the
     # `StartMonitoringMembers` operation to restart monitoring for those
     # accounts.
+    #
+    # With `autoEnableOrganizationMembers` configuration for your
+    # organization set to `ALL`, you'll receive an error if you attempt to
+    # stop monitoring the member accounts in your organization.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector associated with the GuardDuty
@@ -3776,7 +3799,9 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Updates the delegated administrator account with the values provided.
+    # Configures the delegated administrator account with the provided
+    # values. You must provide the value for either
+    # `autoEnableOrganizationMembers` or `autoEnable`.
     #
     # There might be regional differences because some data sources might
     # not be available in all the Amazon Web Services Regions where
@@ -3788,9 +3813,9 @@ module Aws::GuardDuty
     # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
     #
     # @option params [required, String] :detector_id
-    #   The ID of the detector to update the delegated administrator for.
+    #   The ID of the detector that configures the delegated administrator.
     #
-    # @option params [required, Boolean] :auto_enable
+    # @option params [Boolean] :auto_enable
     #   Indicates whether to automatically enable member accounts in the
     #   organization.
     #
@@ -3800,13 +3825,26 @@ module Aws::GuardDuty
     # @option params [Array<Types::OrganizationFeatureConfiguration>] :features
     #   A list of features that will be configured for the organization.
     #
+    # @option params [String] :auto_enable_organization_members
+    #   Indicates the auto-enablement configuration of GuardDuty for the
+    #   member accounts in the organization.
+    #
+    #   * `NEW`: Indicates that new accounts joining the organization are
+    #     configured to have GuardDuty enabled automatically.
+    #
+    #   * `ALL`: Indicates that all accounts (new and existing members) in the
+    #     organization are configured to have GuardDuty enabled automatically.
+    #
+    #   * `NONE`: Indicates that no account in the organization will be
+    #     configured to have GuardDuty enabled automatically.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_organization_configuration({
     #     detector_id: "DetectorId", # required
-    #     auto_enable: false, # required
+    #     auto_enable: false,
     #     data_sources: {
     #       s3_logs: {
     #         auto_enable: false, # required
@@ -3830,6 +3868,7 @@ module Aws::GuardDuty
     #         auto_enable: "NEW", # accepts NEW, NONE
     #       },
     #     ],
+    #     auto_enable_organization_members: "NEW", # accepts NEW, ALL, NONE
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateOrganizationConfiguration AWS API Documentation
@@ -3932,7 +3971,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

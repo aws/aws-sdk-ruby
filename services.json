@@ -484,6 +484,9 @@
   "IVS": {
     "models": "ivs/2020-07-14"
   },
+  "IVSRealTime": {
+    "models": "ivs-realtime/2020-07-14"
+  },
   "IdentityStore": {
     "models": "identitystore/2020-06-15"
   },

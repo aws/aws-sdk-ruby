@@ -66,6 +66,7 @@ module Aws::ChimeSDKMessaging
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     Content = Shapes::StringShape.new(name: 'Content')
+    ContentType = Shapes::StringShape.new(name: 'ContentType')
     CreateChannelBanRequest = Shapes::StructureShape.new(name: 'CreateChannelBanRequest')
     CreateChannelBanResponse = Shapes::StructureShape.new(name: 'CreateChannelBanResponse')
     CreateChannelFlowRequest = Shapes::StructureShape.new(name: 'CreateChannelFlowRequest')
@@ -100,6 +101,9 @@ module Aws::ChimeSDKMessaging
     DisassociateChannelFlowRequest = Shapes::StructureShape.new(name: 'DisassociateChannelFlowRequest')
     ElasticChannelConfiguration = Shapes::StructureShape.new(name: 'ElasticChannelConfiguration')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
+    ExpirationCriterion = Shapes::StringShape.new(name: 'ExpirationCriterion')
+    ExpirationDays = Shapes::IntegerShape.new(name: 'ExpirationDays')
+    ExpirationSettings = Shapes::StructureShape.new(name: 'ExpirationSettings')
     FallbackAction = Shapes::StringShape.new(name: 'FallbackAction')
     FilterRule = Shapes::StringShape.new(name: 'FilterRule')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
@@ -167,6 +171,8 @@ module Aws::ChimeSDKMessaging
     PushNotificationPreferences = Shapes::StructureShape.new(name: 'PushNotificationPreferences')
     PushNotificationTitle = Shapes::StringShape.new(name: 'PushNotificationTitle')
     PushNotificationType = Shapes::StringShape.new(name: 'PushNotificationType')
+    PutChannelExpirationSettingsRequest = Shapes::StructureShape.new(name: 'PutChannelExpirationSettingsRequest')
+    PutChannelExpirationSettingsResponse = Shapes::StructureShape.new(name: 'PutChannelExpirationSettingsResponse')
     PutChannelMembershipPreferencesRequest = Shapes::StructureShape.new(name: 'PutChannelMembershipPreferencesRequest')
     PutChannelMembershipPreferencesResponse = Shapes::StructureShape.new(name: 'PutChannelMembershipPreferencesResponse')
     PutMessagingStreamingConfigurationsRequest = Shapes::StructureShape.new(name: 'PutMessagingStreamingConfigurationsRequest')
@@ -266,6 +272,7 @@ module Aws::ChimeSDKMessaging
     Channel.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTimestamp"))
     Channel.add_member(:channel_flow_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelFlowArn"))
     Channel.add_member(:elastic_channel_configuration, Shapes::ShapeRef.new(shape: ElasticChannelConfiguration, location_name: "ElasticChannelConfiguration"))
+    Channel.add_member(:expiration_settings, Shapes::ShapeRef.new(shape: ExpirationSettings, location_name: "ExpirationSettings"))
     Channel.struct_class = Types::Channel
 
     ChannelAssociatedWithFlowSummary.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyResourceName, location_name: "Name"))
@@ -351,6 +358,7 @@ module Aws::ChimeSDKMessaging
     ChannelMessage.add_member(:status, Shapes::ShapeRef.new(shape: ChannelMessageStatusStructure, location_name: "Status"))
     ChannelMessage.add_member(:message_attributes, Shapes::ShapeRef.new(shape: MessageAttributeMap, location_name: "MessageAttributes"))
     ChannelMessage.add_member(:sub_channel_id, Shapes::ShapeRef.new(shape: SubChannelId, location_name: "SubChannelId"))
+    ChannelMessage.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType"))
     ChannelMessage.struct_class = Types::ChannelMessage
 
     ChannelMessageCallback.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, required: true, location_name: "MessageId"))
@@ -359,6 +367,7 @@ module Aws::ChimeSDKMessaging
     ChannelMessageCallback.add_member(:push_notification, Shapes::ShapeRef.new(shape: PushNotificationConfiguration, location_name: "PushNotification"))
     ChannelMessageCallback.add_member(:message_attributes, Shapes::ShapeRef.new(shape: MessageAttributeMap, location_name: "MessageAttributes"))
     ChannelMessageCallback.add_member(:sub_channel_id, Shapes::ShapeRef.new(shape: SubChannelId, location_name: "SubChannelId"))
+    ChannelMessageCallback.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType"))
     ChannelMessageCallback.struct_class = Types::ChannelMessageCallback
 
     ChannelMessageStatusStructure.add_member(:value, Shapes::ShapeRef.new(shape: ChannelMessageStatus, location_name: "Value"))
@@ -376,6 +385,7 @@ module Aws::ChimeSDKMessaging
     ChannelMessageSummary.add_member(:redacted, Shapes::ShapeRef.new(shape: NonNullableBoolean, location_name: "Redacted"))
     ChannelMessageSummary.add_member(:status, Shapes::ShapeRef.new(shape: ChannelMessageStatusStructure, location_name: "Status"))
     ChannelMessageSummary.add_member(:message_attributes, Shapes::ShapeRef.new(shape: MessageAttributeMap, location_name: "MessageAttributes"))
+    ChannelMessageSummary.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType"))
     ChannelMessageSummary.struct_class = Types::ChannelMessageSummary
 
     ChannelMessageSummaryList.member = Shapes::ShapeRef.new(shape: ChannelMessageSummary)
@@ -464,6 +474,7 @@ module Aws::ChimeSDKMessaging
     CreateChannelRequest.add_member(:member_arns, Shapes::ShapeRef.new(shape: ChannelMemberArns, location_name: "MemberArns"))
     CreateChannelRequest.add_member(:moderator_arns, Shapes::ShapeRef.new(shape: ChannelModeratorArns, location_name: "ModeratorArns"))
     CreateChannelRequest.add_member(:elastic_channel_configuration, Shapes::ShapeRef.new(shape: ElasticChannelConfiguration, location_name: "ElasticChannelConfiguration"))
+    CreateChannelRequest.add_member(:expiration_settings, Shapes::ShapeRef.new(shape: ExpirationSettings, location_name: "ExpirationSettings"))
     CreateChannelRequest.struct_class = Types::CreateChannelRequest
 
     CreateChannelResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
@@ -565,6 +576,10 @@ module Aws::ChimeSDKMessaging
     ElasticChannelConfiguration.add_member(:target_memberships_per_sub_channel, Shapes::ShapeRef.new(shape: TargetMembershipsPerSubChannel, required: true, location_name: "TargetMembershipsPerSubChannel"))
     ElasticChannelConfiguration.add_member(:minimum_membership_percentage, Shapes::ShapeRef.new(shape: MinimumMembershipPercentage, required: true, location_name: "MinimumMembershipPercentage"))
     ElasticChannelConfiguration.struct_class = Types::ElasticChannelConfiguration
+
+    ExpirationSettings.add_member(:expiration_days, Shapes::ShapeRef.new(shape: ExpirationDays, required: true, location_name: "ExpirationDays"))
+    ExpirationSettings.add_member(:expiration_criterion, Shapes::ShapeRef.new(shape: ExpirationCriterion, required: true, location_name: "ExpirationCriterion"))
+    ExpirationSettings.struct_class = Types::ExpirationSettings
 
     ForbiddenException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -773,6 +788,15 @@ module Aws::ChimeSDKMessaging
     PushNotificationPreferences.add_member(:filter_rule, Shapes::ShapeRef.new(shape: FilterRule, location_name: "FilterRule"))
     PushNotificationPreferences.struct_class = Types::PushNotificationPreferences
 
+    PutChannelExpirationSettingsRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
+    PutChannelExpirationSettingsRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    PutChannelExpirationSettingsRequest.add_member(:expiration_settings, Shapes::ShapeRef.new(shape: ExpirationSettings, location_name: "ExpirationSettings"))
+    PutChannelExpirationSettingsRequest.struct_class = Types::PutChannelExpirationSettingsRequest
+
+    PutChannelExpirationSettingsResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
+    PutChannelExpirationSettingsResponse.add_member(:expiration_settings, Shapes::ShapeRef.new(shape: ExpirationSettings, location_name: "ExpirationSettings"))
+    PutChannelExpirationSettingsResponse.struct_class = Types::PutChannelExpirationSettingsResponse
+
     PutChannelMembershipPreferencesRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
     PutChannelMembershipPreferencesRequest.add_member(:member_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "memberArn"))
     PutChannelMembershipPreferencesRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "header", location_name: "x-amz-chime-bearer"))
@@ -835,6 +859,7 @@ module Aws::ChimeSDKMessaging
     SendChannelMessageRequest.add_member(:push_notification, Shapes::ShapeRef.new(shape: PushNotificationConfiguration, location_name: "PushNotification"))
     SendChannelMessageRequest.add_member(:message_attributes, Shapes::ShapeRef.new(shape: MessageAttributeMap, location_name: "MessageAttributes"))
     SendChannelMessageRequest.add_member(:sub_channel_id, Shapes::ShapeRef.new(shape: SubChannelId, location_name: "SubChannelId"))
+    SendChannelMessageRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType"))
     SendChannelMessageRequest.struct_class = Types::SendChannelMessageRequest
 
     SendChannelMessageResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
@@ -897,10 +922,11 @@ module Aws::ChimeSDKMessaging
 
     UpdateChannelMessageRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
     UpdateChannelMessageRequest.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, required: true, location: "uri", location_name: "messageId"))
-    UpdateChannelMessageRequest.add_member(:content, Shapes::ShapeRef.new(shape: Content, location_name: "Content"))
+    UpdateChannelMessageRequest.add_member(:content, Shapes::ShapeRef.new(shape: NonEmptyContent, required: true, location_name: "Content"))
     UpdateChannelMessageRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
     UpdateChannelMessageRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "header", location_name: "x-amz-chime-bearer"))
     UpdateChannelMessageRequest.add_member(:sub_channel_id, Shapes::ShapeRef.new(shape: SubChannelId, location_name: "SubChannelId"))
+    UpdateChannelMessageRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType"))
     UpdateChannelMessageRequest.struct_class = Types::UpdateChannelMessageRequest
 
     UpdateChannelMessageResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
@@ -1568,6 +1594,21 @@ module Aws::ChimeSDKMessaging
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:put_channel_expiration_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutChannelExpirationSettings"
+        o.http_method = "PUT"
+        o.http_request_uri = "/channels/{channelArn}/expiration-settings"
+        o.input = Shapes::ShapeRef.new(shape: PutChannelExpirationSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutChannelExpirationSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)

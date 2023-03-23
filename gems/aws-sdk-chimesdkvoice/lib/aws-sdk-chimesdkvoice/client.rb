@@ -812,6 +812,86 @@ module Aws::ChimeSDKVoice
       req.send_request(options)
     end
 
+    # @option params [required, String] :speaker_search_task_id
+    #
+    # @return [Types::CreateVoiceProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVoiceProfileResponse#voice_profile #voice_profile} => Types::VoiceProfile
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_voice_profile({
+    #     speaker_search_task_id: "NonEmptyString256", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.voice_profile.voice_profile_id #=> String
+    #   resp.voice_profile.voice_profile_arn #=> String
+    #   resp.voice_profile.voice_profile_domain_id #=> String
+    #   resp.voice_profile.created_timestamp #=> Time
+    #   resp.voice_profile.updated_timestamp #=> Time
+    #   resp.voice_profile.expiration_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/CreateVoiceProfile AWS API Documentation
+    #
+    # @overload create_voice_profile(params = {})
+    # @param [Hash] params ({})
+    def create_voice_profile(params = {}, options = {})
+      req = build_request(:create_voice_profile, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :name
+    #
+    # @option params [String] :description
+    #
+    # @option params [required, Types::ServerSideEncryptionConfiguration] :server_side_encryption_configuration
+    #
+    # @option params [String] :client_request_token
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #
+    # @return [Types::CreateVoiceProfileDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVoiceProfileDomainResponse#voice_profile_domain #voice_profile_domain} => Types::VoiceProfileDomain
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_voice_profile_domain({
+    #     name: "VoiceProfileDomainName", # required
+    #     description: "VoiceProfileDomainDescription",
+    #     server_side_encryption_configuration: { # required
+    #       kms_key_arn: "Arn", # required
+    #     },
+    #     client_request_token: "ClientRequestId",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.voice_profile_domain.voice_profile_domain_id #=> String
+    #   resp.voice_profile_domain.voice_profile_domain_arn #=> String
+    #   resp.voice_profile_domain.name #=> String
+    #   resp.voice_profile_domain.description #=> String
+    #   resp.voice_profile_domain.server_side_encryption_configuration.kms_key_arn #=> String
+    #   resp.voice_profile_domain.created_timestamp #=> Time
+    #   resp.voice_profile_domain.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/CreateVoiceProfileDomain AWS API Documentation
+    #
+    # @overload create_voice_profile_domain(params = {})
+    # @param [Hash] params ({})
+    def create_voice_profile_domain(params = {}, options = {})
+      req = build_request(:create_voice_profile_domain, params)
+      req.send_request(options)
+    end
+
     # @option params [required, String] :phone_number_id
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1043,6 +1123,44 @@ module Aws::ChimeSDKVoice
     # @param [Hash] params ({})
     def delete_voice_connector_termination_credentials(params = {}, options = {})
       req = build_request(:delete_voice_connector_termination_credentials, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :voice_profile_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_voice_profile({
+    #     voice_profile_id: "NonEmptyString256", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/DeleteVoiceProfile AWS API Documentation
+    #
+    # @overload delete_voice_profile(params = {})
+    # @param [Hash] params ({})
+    def delete_voice_profile(params = {}, options = {})
+      req = build_request(:delete_voice_profile, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :voice_profile_domain_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_voice_profile_domain({
+    #     voice_profile_domain_id: "NonEmptyString256", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/DeleteVoiceProfileDomain AWS API Documentation
+    #
+    # @overload delete_voice_profile_domain(params = {})
+    # @param [Hash] params ({})
+    def delete_voice_profile_domain(params = {}, options = {})
+      req = build_request(:delete_voice_profile_domain, params)
       req.send_request(options)
     end
 
@@ -1387,6 +1505,46 @@ module Aws::ChimeSDKVoice
 
     # @option params [required, String] :voice_connector_id
     #
+    # @option params [required, String] :speaker_search_task_id
+    #
+    # @return [Types::GetSpeakerSearchTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSpeakerSearchTaskResponse#speaker_search_task #speaker_search_task} => Types::SpeakerSearchTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_speaker_search_task({
+    #     voice_connector_id: "NonEmptyString128", # required
+    #     speaker_search_task_id: "NonEmptyString256", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.speaker_search_task.speaker_search_task_id #=> String
+    #   resp.speaker_search_task.speaker_search_task_status #=> String
+    #   resp.speaker_search_task.call_details.voice_connector_id #=> String
+    #   resp.speaker_search_task.call_details.transaction_id #=> String
+    #   resp.speaker_search_task.call_details.is_caller #=> Boolean
+    #   resp.speaker_search_task.speaker_search_details.results #=> Array
+    #   resp.speaker_search_task.speaker_search_details.results[0].confidence_score #=> Float
+    #   resp.speaker_search_task.speaker_search_details.results[0].voice_profile_id #=> String
+    #   resp.speaker_search_task.speaker_search_details.voiceprint_generation_status #=> String
+    #   resp.speaker_search_task.created_timestamp #=> Time
+    #   resp.speaker_search_task.updated_timestamp #=> Time
+    #   resp.speaker_search_task.started_timestamp #=> Time
+    #   resp.speaker_search_task.status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/GetSpeakerSearchTask AWS API Documentation
+    #
+    # @overload get_speaker_search_task(params = {})
+    # @param [Hash] params ({})
+    def get_speaker_search_task(params = {}, options = {})
+      req = build_request(:get_speaker_search_task, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :voice_connector_id
+    #
     # @return [Types::GetVoiceConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetVoiceConnectorResponse#voice_connector #voice_connector} => Types::VoiceConnector
@@ -1581,6 +1739,8 @@ module Aws::ChimeSDKVoice
     #   resp.streaming_configuration.disabled #=> Boolean
     #   resp.streaming_configuration.streaming_notification_targets #=> Array
     #   resp.streaming_configuration.streaming_notification_targets[0].notification_target #=> String, one of "EventBridge", "SNS", "SQS"
+    #   resp.streaming_configuration.media_insights_configuration.disabled #=> Boolean
+    #   resp.streaming_configuration.media_insights_configuration.configuration_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/GetVoiceConnectorStreamingConfiguration AWS API Documentation
     #
@@ -1645,6 +1805,106 @@ module Aws::ChimeSDKVoice
     # @param [Hash] params ({})
     def get_voice_connector_termination_health(params = {}, options = {})
       req = build_request(:get_voice_connector_termination_health, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :voice_profile_id
+    #
+    # @return [Types::GetVoiceProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVoiceProfileResponse#voice_profile #voice_profile} => Types::VoiceProfile
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_voice_profile({
+    #     voice_profile_id: "NonEmptyString256", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.voice_profile.voice_profile_id #=> String
+    #   resp.voice_profile.voice_profile_arn #=> String
+    #   resp.voice_profile.voice_profile_domain_id #=> String
+    #   resp.voice_profile.created_timestamp #=> Time
+    #   resp.voice_profile.updated_timestamp #=> Time
+    #   resp.voice_profile.expiration_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/GetVoiceProfile AWS API Documentation
+    #
+    # @overload get_voice_profile(params = {})
+    # @param [Hash] params ({})
+    def get_voice_profile(params = {}, options = {})
+      req = build_request(:get_voice_profile, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :voice_profile_domain_id
+    #
+    # @return [Types::GetVoiceProfileDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVoiceProfileDomainResponse#voice_profile_domain #voice_profile_domain} => Types::VoiceProfileDomain
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_voice_profile_domain({
+    #     voice_profile_domain_id: "NonEmptyString256", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.voice_profile_domain.voice_profile_domain_id #=> String
+    #   resp.voice_profile_domain.voice_profile_domain_arn #=> String
+    #   resp.voice_profile_domain.name #=> String
+    #   resp.voice_profile_domain.description #=> String
+    #   resp.voice_profile_domain.server_side_encryption_configuration.kms_key_arn #=> String
+    #   resp.voice_profile_domain.created_timestamp #=> Time
+    #   resp.voice_profile_domain.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/GetVoiceProfileDomain AWS API Documentation
+    #
+    # @overload get_voice_profile_domain(params = {})
+    # @param [Hash] params ({})
+    def get_voice_profile_domain(params = {}, options = {})
+      req = build_request(:get_voice_profile_domain, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :voice_connector_id
+    #
+    # @option params [required, String] :voice_tone_analysis_task_id
+    #
+    # @option params [required, Boolean] :is_caller
+    #
+    # @return [Types::GetVoiceToneAnalysisTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVoiceToneAnalysisTaskResponse#voice_tone_analysis_task #voice_tone_analysis_task} => Types::VoiceToneAnalysisTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_voice_tone_analysis_task({
+    #     voice_connector_id: "NonEmptyString128", # required
+    #     voice_tone_analysis_task_id: "NonEmptyString256", # required
+    #     is_caller: false, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.voice_tone_analysis_task.voice_tone_analysis_task_id #=> String
+    #   resp.voice_tone_analysis_task.voice_tone_analysis_task_status #=> String
+    #   resp.voice_tone_analysis_task.call_details.voice_connector_id #=> String
+    #   resp.voice_tone_analysis_task.call_details.transaction_id #=> String
+    #   resp.voice_tone_analysis_task.call_details.is_caller #=> Boolean
+    #   resp.voice_tone_analysis_task.created_timestamp #=> Time
+    #   resp.voice_tone_analysis_task.updated_timestamp #=> Time
+    #   resp.voice_tone_analysis_task.started_timestamp #=> Time
+    #   resp.voice_tone_analysis_task.status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/GetVoiceToneAnalysisTask AWS API Documentation
+    #
+    # @overload get_voice_tone_analysis_task(params = {})
+    # @param [Hash] params ({})
+    def get_voice_tone_analysis_task(params = {}, options = {})
+      req = build_request(:get_voice_tone_analysis_task, params)
       req.send_request(options)
     end
 
@@ -1941,6 +2201,33 @@ module Aws::ChimeSDKVoice
       req.send_request(options)
     end
 
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # @option params [String] :next_token
     #
     # @option params [Integer] :max_results
@@ -2044,6 +2331,85 @@ module Aws::ChimeSDKVoice
     # @param [Hash] params ({})
     def list_voice_connectors(params = {}, options = {})
       req = build_request(:list_voice_connectors, params)
+      req.send_request(options)
+    end
+
+    # @option params [String] :next_token
+    #
+    # @option params [Integer] :max_results
+    #
+    # @return [Types::ListVoiceProfileDomainsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVoiceProfileDomainsResponse#voice_profile_domains #voice_profile_domains} => Array&lt;Types::VoiceProfileDomainSummary&gt;
+    #   * {Types::ListVoiceProfileDomainsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_voice_profile_domains({
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.voice_profile_domains #=> Array
+    #   resp.voice_profile_domains[0].voice_profile_domain_id #=> String
+    #   resp.voice_profile_domains[0].voice_profile_domain_arn #=> String
+    #   resp.voice_profile_domains[0].name #=> String
+    #   resp.voice_profile_domains[0].description #=> String
+    #   resp.voice_profile_domains[0].created_timestamp #=> Time
+    #   resp.voice_profile_domains[0].updated_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/ListVoiceProfileDomains AWS API Documentation
+    #
+    # @overload list_voice_profile_domains(params = {})
+    # @param [Hash] params ({})
+    def list_voice_profile_domains(params = {}, options = {})
+      req = build_request(:list_voice_profile_domains, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :voice_profile_domain_id
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [Integer] :max_results
+    #
+    # @return [Types::ListVoiceProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVoiceProfilesResponse#voice_profiles #voice_profiles} => Array&lt;Types::VoiceProfileSummary&gt;
+    #   * {Types::ListVoiceProfilesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_voice_profiles({
+    #     voice_profile_domain_id: "NonEmptyString256", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.voice_profiles #=> Array
+    #   resp.voice_profiles[0].voice_profile_id #=> String
+    #   resp.voice_profiles[0].voice_profile_arn #=> String
+    #   resp.voice_profiles[0].voice_profile_domain_id #=> String
+    #   resp.voice_profiles[0].created_timestamp #=> Time
+    #   resp.voice_profiles[0].updated_timestamp #=> Time
+    #   resp.voice_profiles[0].expiration_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/ListVoiceProfiles AWS API Documentation
+    #
+    # @overload list_voice_profiles(params = {})
+    # @param [Hash] params ({})
+    def list_voice_profiles(params = {}, options = {})
+      req = build_request(:list_voice_profiles, params)
       req.send_request(options)
     end
 
@@ -2287,6 +2653,10 @@ module Aws::ChimeSDKVoice
     #           notification_target: "EventBridge", # accepts EventBridge, SNS, SQS
     #         },
     #       ],
+    #       media_insights_configuration: {
+    #         disabled: false,
+    #         configuration_arn: "Arn",
+    #       },
     #     },
     #   })
     #
@@ -2296,6 +2666,8 @@ module Aws::ChimeSDKVoice
     #   resp.streaming_configuration.disabled #=> Boolean
     #   resp.streaming_configuration.streaming_notification_targets #=> Array
     #   resp.streaming_configuration.streaming_notification_targets[0].notification_target #=> String, one of "EventBridge", "SNS", "SQS"
+    #   resp.streaming_configuration.media_insights_configuration.disabled #=> Boolean
+    #   resp.streaming_configuration.media_insights_configuration.configuration_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/PutVoiceConnectorStreamingConfiguration AWS API Documentation
     #
@@ -2467,6 +2839,187 @@ module Aws::ChimeSDKVoice
     # @param [Hash] params ({})
     def search_available_phone_numbers(params = {}, options = {})
       req = build_request(:search_available_phone_numbers, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :voice_connector_id
+    #
+    # @option params [required, String] :transaction_id
+    #
+    # @option params [required, String] :voice_profile_domain_id
+    #
+    # @option params [String] :client_request_token
+    #
+    # @return [Types::StartSpeakerSearchTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartSpeakerSearchTaskResponse#speaker_search_task #speaker_search_task} => Types::SpeakerSearchTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_speaker_search_task({
+    #     voice_connector_id: "NonEmptyString128", # required
+    #     transaction_id: "NonEmptyString256", # required
+    #     voice_profile_domain_id: "NonEmptyString256", # required
+    #     client_request_token: "ClientRequestId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.speaker_search_task.speaker_search_task_id #=> String
+    #   resp.speaker_search_task.speaker_search_task_status #=> String
+    #   resp.speaker_search_task.call_details.voice_connector_id #=> String
+    #   resp.speaker_search_task.call_details.transaction_id #=> String
+    #   resp.speaker_search_task.call_details.is_caller #=> Boolean
+    #   resp.speaker_search_task.speaker_search_details.results #=> Array
+    #   resp.speaker_search_task.speaker_search_details.results[0].confidence_score #=> Float
+    #   resp.speaker_search_task.speaker_search_details.results[0].voice_profile_id #=> String
+    #   resp.speaker_search_task.speaker_search_details.voiceprint_generation_status #=> String
+    #   resp.speaker_search_task.created_timestamp #=> Time
+    #   resp.speaker_search_task.updated_timestamp #=> Time
+    #   resp.speaker_search_task.started_timestamp #=> Time
+    #   resp.speaker_search_task.status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/StartSpeakerSearchTask AWS API Documentation
+    #
+    # @overload start_speaker_search_task(params = {})
+    # @param [Hash] params ({})
+    def start_speaker_search_task(params = {}, options = {})
+      req = build_request(:start_speaker_search_task, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :voice_connector_id
+    #
+    # @option params [required, String] :transaction_id
+    #
+    # @option params [required, String] :language_code
+    #
+    # @option params [String] :client_request_token
+    #
+    # @return [Types::StartVoiceToneAnalysisTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartVoiceToneAnalysisTaskResponse#voice_tone_analysis_task #voice_tone_analysis_task} => Types::VoiceToneAnalysisTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_voice_tone_analysis_task({
+    #     voice_connector_id: "NonEmptyString128", # required
+    #     transaction_id: "NonEmptyString256", # required
+    #     language_code: "en-US", # required, accepts en-US
+    #     client_request_token: "ClientRequestId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.voice_tone_analysis_task.voice_tone_analysis_task_id #=> String
+    #   resp.voice_tone_analysis_task.voice_tone_analysis_task_status #=> String
+    #   resp.voice_tone_analysis_task.call_details.voice_connector_id #=> String
+    #   resp.voice_tone_analysis_task.call_details.transaction_id #=> String
+    #   resp.voice_tone_analysis_task.call_details.is_caller #=> Boolean
+    #   resp.voice_tone_analysis_task.created_timestamp #=> Time
+    #   resp.voice_tone_analysis_task.updated_timestamp #=> Time
+    #   resp.voice_tone_analysis_task.started_timestamp #=> Time
+    #   resp.voice_tone_analysis_task.status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/StartVoiceToneAnalysisTask AWS API Documentation
+    #
+    # @overload start_voice_tone_analysis_task(params = {})
+    # @param [Hash] params ({})
+    def start_voice_tone_analysis_task(params = {}, options = {})
+      req = build_request(:start_voice_tone_analysis_task, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :voice_connector_id
+    #
+    # @option params [required, String] :speaker_search_task_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_speaker_search_task({
+    #     voice_connector_id: "NonEmptyString128", # required
+    #     speaker_search_task_id: "NonEmptyString256", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/StopSpeakerSearchTask AWS API Documentation
+    #
+    # @overload stop_speaker_search_task(params = {})
+    # @param [Hash] params ({})
+    def stop_speaker_search_task(params = {}, options = {})
+      req = build_request(:stop_speaker_search_task, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :voice_connector_id
+    #
+    # @option params [required, String] :voice_tone_analysis_task_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_voice_tone_analysis_task({
+    #     voice_connector_id: "NonEmptyString128", # required
+    #     voice_tone_analysis_task_id: "NonEmptyString256", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/StopVoiceToneAnalysisTask AWS API Documentation
+    #
+    # @overload stop_voice_tone_analysis_task(params = {})
+    # @param [Hash] params ({})
+    def stop_voice_tone_analysis_task(params = {}, options = {})
+      req = build_request(:stop_voice_tone_analysis_task, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "Arn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "Arn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -2817,6 +3370,76 @@ module Aws::ChimeSDKVoice
       req.send_request(options)
     end
 
+    # @option params [required, String] :voice_profile_id
+    #
+    # @option params [required, String] :speaker_search_task_id
+    #
+    # @return [Types::UpdateVoiceProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateVoiceProfileResponse#voice_profile #voice_profile} => Types::VoiceProfile
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_voice_profile({
+    #     voice_profile_id: "NonEmptyString256", # required
+    #     speaker_search_task_id: "NonEmptyString256", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.voice_profile.voice_profile_id #=> String
+    #   resp.voice_profile.voice_profile_arn #=> String
+    #   resp.voice_profile.voice_profile_domain_id #=> String
+    #   resp.voice_profile.created_timestamp #=> Time
+    #   resp.voice_profile.updated_timestamp #=> Time
+    #   resp.voice_profile.expiration_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/UpdateVoiceProfile AWS API Documentation
+    #
+    # @overload update_voice_profile(params = {})
+    # @param [Hash] params ({})
+    def update_voice_profile(params = {}, options = {})
+      req = build_request(:update_voice_profile, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :voice_profile_domain_id
+    #
+    # @option params [String] :name
+    #
+    # @option params [String] :description
+    #
+    # @return [Types::UpdateVoiceProfileDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateVoiceProfileDomainResponse#voice_profile_domain #voice_profile_domain} => Types::VoiceProfileDomain
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_voice_profile_domain({
+    #     voice_profile_domain_id: "NonEmptyString256", # required
+    #     name: "VoiceProfileDomainName",
+    #     description: "VoiceProfileDomainDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.voice_profile_domain.voice_profile_domain_id #=> String
+    #   resp.voice_profile_domain.voice_profile_domain_arn #=> String
+    #   resp.voice_profile_domain.name #=> String
+    #   resp.voice_profile_domain.description #=> String
+    #   resp.voice_profile_domain.server_side_encryption_configuration.kms_key_arn #=> String
+    #   resp.voice_profile_domain.created_timestamp #=> Time
+    #   resp.voice_profile_domain.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/UpdateVoiceProfileDomain AWS API Documentation
+    #
+    # @overload update_voice_profile_domain(params = {})
+    # @param [Hash] params ({})
+    def update_voice_profile_domain(params = {}, options = {})
+      req = build_request(:update_voice_profile_domain, params)
+      req.send_request(options)
+    end
+
     # @option params [required, String] :aws_account_id
     #
     # @option params [required, String] :street_number
@@ -2895,7 +3518,7 @@ module Aws::ChimeSDKVoice
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkvoice'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

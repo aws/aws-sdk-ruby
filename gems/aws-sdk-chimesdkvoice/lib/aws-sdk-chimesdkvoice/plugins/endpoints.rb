@@ -78,6 +78,10 @@ module Aws::ChimeSDKVoice
             Aws::ChimeSDKVoice::Endpoints::CreateVoiceConnector.build(context)
           when :create_voice_connector_group
             Aws::ChimeSDKVoice::Endpoints::CreateVoiceConnectorGroup.build(context)
+          when :create_voice_profile
+            Aws::ChimeSDKVoice::Endpoints::CreateVoiceProfile.build(context)
+          when :create_voice_profile_domain
+            Aws::ChimeSDKVoice::Endpoints::CreateVoiceProfileDomain.build(context)
           when :delete_phone_number
             Aws::ChimeSDKVoice::Endpoints::DeletePhoneNumber.build(context)
           when :delete_proxy_session
@@ -102,6 +106,10 @@ module Aws::ChimeSDKVoice
             Aws::ChimeSDKVoice::Endpoints::DeleteVoiceConnectorTermination.build(context)
           when :delete_voice_connector_termination_credentials
             Aws::ChimeSDKVoice::Endpoints::DeleteVoiceConnectorTerminationCredentials.build(context)
+          when :delete_voice_profile
+            Aws::ChimeSDKVoice::Endpoints::DeleteVoiceProfile.build(context)
+          when :delete_voice_profile_domain
+            Aws::ChimeSDKVoice::Endpoints::DeleteVoiceProfileDomain.build(context)
           when :disassociate_phone_numbers_from_voice_connector
             Aws::ChimeSDKVoice::Endpoints::DisassociatePhoneNumbersFromVoiceConnector.build(context)
           when :disassociate_phone_numbers_from_voice_connector_group
@@ -124,6 +132,8 @@ module Aws::ChimeSDKVoice
             Aws::ChimeSDKVoice::Endpoints::GetSipMediaApplicationLoggingConfiguration.build(context)
           when :get_sip_rule
             Aws::ChimeSDKVoice::Endpoints::GetSipRule.build(context)
+          when :get_speaker_search_task
+            Aws::ChimeSDKVoice::Endpoints::GetSpeakerSearchTask.build(context)
           when :get_voice_connector
             Aws::ChimeSDKVoice::Endpoints::GetVoiceConnector.build(context)
           when :get_voice_connector_emergency_calling_configuration
@@ -142,6 +152,12 @@ module Aws::ChimeSDKVoice
             Aws::ChimeSDKVoice::Endpoints::GetVoiceConnectorTermination.build(context)
           when :get_voice_connector_termination_health
             Aws::ChimeSDKVoice::Endpoints::GetVoiceConnectorTerminationHealth.build(context)
+          when :get_voice_profile
+            Aws::ChimeSDKVoice::Endpoints::GetVoiceProfile.build(context)
+          when :get_voice_profile_domain
+            Aws::ChimeSDKVoice::Endpoints::GetVoiceProfileDomain.build(context)
+          when :get_voice_tone_analysis_task
+            Aws::ChimeSDKVoice::Endpoints::GetVoiceToneAnalysisTask.build(context)
           when :list_available_voice_connector_regions
             Aws::ChimeSDKVoice::Endpoints::ListAvailableVoiceConnectorRegions.build(context)
           when :list_phone_number_orders
@@ -156,12 +172,18 @@ module Aws::ChimeSDKVoice
             Aws::ChimeSDKVoice::Endpoints::ListSipRules.build(context)
           when :list_supported_phone_number_countries
             Aws::ChimeSDKVoice::Endpoints::ListSupportedPhoneNumberCountries.build(context)
+          when :list_tags_for_resource
+            Aws::ChimeSDKVoice::Endpoints::ListTagsForResource.build(context)
           when :list_voice_connector_groups
             Aws::ChimeSDKVoice::Endpoints::ListVoiceConnectorGroups.build(context)
           when :list_voice_connector_termination_credentials
             Aws::ChimeSDKVoice::Endpoints::ListVoiceConnectorTerminationCredentials.build(context)
           when :list_voice_connectors
             Aws::ChimeSDKVoice::Endpoints::ListVoiceConnectors.build(context)
+          when :list_voice_profile_domains
+            Aws::ChimeSDKVoice::Endpoints::ListVoiceProfileDomains.build(context)
+          when :list_voice_profiles
+            Aws::ChimeSDKVoice::Endpoints::ListVoiceProfiles.build(context)
           when :put_sip_media_application_alexa_skill_configuration
             Aws::ChimeSDKVoice::Endpoints::PutSipMediaApplicationAlexaSkillConfiguration.build(context)
           when :put_sip_media_application_logging_configuration
@@ -184,6 +206,18 @@ module Aws::ChimeSDKVoice
             Aws::ChimeSDKVoice::Endpoints::RestorePhoneNumber.build(context)
           when :search_available_phone_numbers
             Aws::ChimeSDKVoice::Endpoints::SearchAvailablePhoneNumbers.build(context)
+          when :start_speaker_search_task
+            Aws::ChimeSDKVoice::Endpoints::StartSpeakerSearchTask.build(context)
+          when :start_voice_tone_analysis_task
+            Aws::ChimeSDKVoice::Endpoints::StartVoiceToneAnalysisTask.build(context)
+          when :stop_speaker_search_task
+            Aws::ChimeSDKVoice::Endpoints::StopSpeakerSearchTask.build(context)
+          when :stop_voice_tone_analysis_task
+            Aws::ChimeSDKVoice::Endpoints::StopVoiceToneAnalysisTask.build(context)
+          when :tag_resource
+            Aws::ChimeSDKVoice::Endpoints::TagResource.build(context)
+          when :untag_resource
+            Aws::ChimeSDKVoice::Endpoints::UntagResource.build(context)
           when :update_global_settings
             Aws::ChimeSDKVoice::Endpoints::UpdateGlobalSettings.build(context)
           when :update_phone_number
@@ -202,6 +236,10 @@ module Aws::ChimeSDKVoice
             Aws::ChimeSDKVoice::Endpoints::UpdateVoiceConnector.build(context)
           when :update_voice_connector_group
             Aws::ChimeSDKVoice::Endpoints::UpdateVoiceConnectorGroup.build(context)
+          when :update_voice_profile
+            Aws::ChimeSDKVoice::Endpoints::UpdateVoiceProfile.build(context)
+          when :update_voice_profile_domain
+            Aws::ChimeSDKVoice::Endpoints::UpdateVoiceProfileDomain.build(context)
           when :validate_e911_address
             Aws::ChimeSDKVoice::Endpoints::ValidateE911Address.build(context)
           end

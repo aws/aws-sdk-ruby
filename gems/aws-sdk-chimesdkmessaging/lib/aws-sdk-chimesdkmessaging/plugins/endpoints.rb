@@ -134,6 +134,8 @@ module Aws::ChimeSDKMessaging
             Aws::ChimeSDKMessaging::Endpoints::ListSubChannels.build(context)
           when :list_tags_for_resource
             Aws::ChimeSDKMessaging::Endpoints::ListTagsForResource.build(context)
+          when :put_channel_expiration_settings
+            Aws::ChimeSDKMessaging::Endpoints::PutChannelExpirationSettings.build(context)
           when :put_channel_membership_preferences
             Aws::ChimeSDKMessaging::Endpoints::PutChannelMembershipPreferences.build(context)
           when :put_messaging_streaming_configurations

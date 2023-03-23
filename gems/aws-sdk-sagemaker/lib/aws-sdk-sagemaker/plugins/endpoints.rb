@@ -76,6 +76,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::CreateArtifact.build(context)
           when :create_auto_ml_job
             Aws::SageMaker::Endpoints::CreateAutoMLJob.build(context)
+          when :create_auto_ml_job_v2
+            Aws::SageMaker::Endpoints::CreateAutoMLJobV2.build(context)
           when :create_code_repository
             Aws::SageMaker::Endpoints::CreateCodeRepository.build(context)
           when :create_compilation_job
@@ -274,6 +276,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::DescribeArtifact.build(context)
           when :describe_auto_ml_job
             Aws::SageMaker::Endpoints::DescribeAutoMLJob.build(context)
+          when :describe_auto_ml_job_v2
+            Aws::SageMaker::Endpoints::DescribeAutoMLJobV2.build(context)
           when :describe_code_repository
             Aws::SageMaker::Endpoints::DescribeCodeRepository.build(context)
           when :describe_compilation_job
