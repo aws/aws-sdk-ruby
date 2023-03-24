@@ -586,13 +586,9 @@ module Aws::RDS
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [String] :engine_version
-    #   The version of the database engine to use for the new DB cluster.
-    #
-    #   To list all of the available engine versions for MySQL 5.6-compatible
-    #   Aurora, use the following command:
-    #
-    #   `aws rds describe-db-engine-versions --engine aurora --query
-    #   "DBEngineVersions[].EngineVersion"`
+    #   The version of the database engine to use for the new DB cluster. If
+    #   you don't specify an engine version, the default version for the
+    #   database engine in the Amazon Web Services Region is used.
     #
     #   To list all of the available engine versions for MySQL 5.7-compatible
     #   and MySQL 8.0-compatible Aurora, use the following command:
@@ -620,8 +616,8 @@ module Aws::RDS
     #
     #   **Aurora MySQL**
     #
-    #   See [MySQL on Amazon RDS Versions][1] in the *Amazon Aurora User
-    #   Guide*.
+    #   See [Database engine updates for Amazon Aurora MySQL][1] in the
+    #   *Amazon Aurora User Guide*.
     #
     #   **Aurora PostgreSQL**
     #
@@ -630,7 +626,7 @@ module Aws::RDS
     #
     #   **MySQL**
     #
-    #   See [MySQL on Amazon RDS Versions][3] in the *Amazon RDS User Guide.*
+    #   See [Amazon RDS for MySQL][3] in the *Amazon RDS User Guide.*
     #
     #   **PostgreSQL**
     #

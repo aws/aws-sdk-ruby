@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2023-03-24)
+------------------
+
+* Feature - This release adds a new field (FlywheelArn) to the EntitiesDetectionJobProperties object. The FlywheelArn field is returned in the DescribeEntitiesDetectionJob and ListEntitiesDetectionJobs responses when the EntitiesDetection job is started with a FlywheelArn instead of an EntityRecognizerArn .
+
 1.66.0 (2023-02-28)
 ------------------
 

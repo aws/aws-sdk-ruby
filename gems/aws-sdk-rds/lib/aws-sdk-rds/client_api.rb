@@ -85,6 +85,7 @@ module Aws::RDS
     CopyOptionGroupResult = Shapes::StructureShape.new(name: 'CopyOptionGroupResult')
     CreateBlueGreenDeploymentRequest = Shapes::StructureShape.new(name: 'CreateBlueGreenDeploymentRequest')
     CreateBlueGreenDeploymentResponse = Shapes::StructureShape.new(name: 'CreateBlueGreenDeploymentResponse')
+    CreateCustomDBEngineVersionFault = Shapes::StructureShape.new(name: 'CreateCustomDBEngineVersionFault')
     CreateCustomDBEngineVersionMessage = Shapes::StructureShape.new(name: 'CreateCustomDBEngineVersionMessage')
     CreateDBClusterEndpointMessage = Shapes::StructureShape.new(name: 'CreateDBClusterEndpointMessage')
     CreateDBClusterMessage = Shapes::StructureShape.new(name: 'CreateDBClusterMessage')
@@ -876,6 +877,8 @@ module Aws::RDS
 
     CreateBlueGreenDeploymentResponse.add_member(:blue_green_deployment, Shapes::ShapeRef.new(shape: BlueGreenDeployment, location_name: "BlueGreenDeployment"))
     CreateBlueGreenDeploymentResponse.struct_class = Types::CreateBlueGreenDeploymentResponse
+
+    CreateCustomDBEngineVersionFault.struct_class = Types::CreateCustomDBEngineVersionFault
 
     CreateCustomDBEngineVersionMessage.add_member(:engine, Shapes::ShapeRef.new(shape: CustomEngineName, required: true, location_name: "Engine"))
     CreateCustomDBEngineVersionMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: CustomEngineVersion, required: true, location_name: "EngineVersion"))
@@ -3852,6 +3855,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: CustomDBEngineVersionQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: Ec2ImagePropertiesNotSupportedFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: CreateCustomDBEngineVersionFault)
       end)
 
       api.add_operation(:create_db_cluster, Seahorse::Model::Operation.new.tap do |o|

@@ -365,6 +365,9 @@ module Aws::CloudWatch
     # @param [Hash] options ({})
     # @option options [required, String] :alarm_name
     #   The name for the alarm. This name must be unique within the Region.
+    #
+    #   The name must contain only UTF-8 characters, and can't contain ASCII
+    #   control characters
     # @option options [String] :alarm_description
     #   The description for the alarm.
     # @option options [Boolean] :actions_enabled
@@ -373,65 +376,132 @@ module Aws::CloudWatch
     # @option options [Array<String>] :ok_actions
     #   The actions to execute when this alarm transitions to an `OK` state
     #   from any other state. Each action is specified as an Amazon Resource
-    #   Name (ARN).
+    #   Name (ARN). Valid values:
     #
-    #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
-    #   `arn:aws:automate:region:ec2:terminate` \|
-    #   `arn:aws:automate:region:ec2:recover` \|
-    #   `arn:aws:automate:region:ec2:reboot` \|
-    #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
-    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
-    #   `
+    #   **EC2 actions:**
     #
-    #   Valid Values (for use with IAM roles):
-    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
-    #   \|
-    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
-    #   \|
-    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
-    #   \|
-    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Recover/1.0`
+    #   * `arn:aws:automate:region:ec2:stop`
+    #
+    #   * `arn:aws:automate:region:ec2:terminate`
+    #
+    #   * `arn:aws:automate:region:ec2:reboot`
+    #
+    #   * `arn:aws:automate:region:ec2:recover`
+    #
+    #   * `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
+    #
+    #   * `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
+    #
+    #   * `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
+    #
+    #   * `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Recover/1.0`
+    #
+    #   **Autoscaling action:**
+    #
+    #   * `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #     `
+    #
+    #   ^
+    #
+    #   **SSN notification action:**
+    #
+    #   * `arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #     `
+    #
+    #   ^
+    #
+    #   **SSM integration actions:**
+    #
+    #   * `arn:aws:ssm:region:account-id:opsitem:severity#CATEGORY=category-name
+    #     `
+    #
+    #   * `arn:aws:ssm-incidents::account-id:responseplan/response-plan-name `
     # @option options [Array<String>] :alarm_actions
     #   The actions to execute when this alarm transitions to the `ALARM`
     #   state from any other state. Each action is specified as an Amazon
-    #   Resource Name (ARN).
+    #   Resource Name (ARN). Valid values:
     #
-    #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
-    #   `arn:aws:automate:region:ec2:terminate` \|
-    #   `arn:aws:automate:region:ec2:recover` \|
-    #   `arn:aws:automate:region:ec2:reboot` \|
-    #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
-    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
-    #   ` \| `arn:aws:ssm:region:account-id:opsitem:severity ` \|
-    #   `arn:aws:ssm-incidents::account-id:response-plan:response-plan-name `
+    #   **EC2 actions:**
     #
-    #   Valid Values (for use with IAM roles):
-    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
-    #   \|
-    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
-    #   \|
-    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
-    #   \|
-    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Recover/1.0`
+    #   * `arn:aws:automate:region:ec2:stop`
+    #
+    #   * `arn:aws:automate:region:ec2:terminate`
+    #
+    #   * `arn:aws:automate:region:ec2:reboot`
+    #
+    #   * `arn:aws:automate:region:ec2:recover`
+    #
+    #   * `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
+    #
+    #   * `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
+    #
+    #   * `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
+    #
+    #   * `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Recover/1.0`
+    #
+    #   **Autoscaling action:**
+    #
+    #   * `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #     `
+    #
+    #   ^
+    #
+    #   **SSN notification action:**
+    #
+    #   * `arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #     `
+    #
+    #   ^
+    #
+    #   **SSM integration actions:**
+    #
+    #   * `arn:aws:ssm:region:account-id:opsitem:severity#CATEGORY=category-name
+    #     `
+    #
+    #   * `arn:aws:ssm-incidents::account-id:responseplan/response-plan-name `
     # @option options [Array<String>] :insufficient_data_actions
     #   The actions to execute when this alarm transitions to the
     #   `INSUFFICIENT_DATA` state from any other state. Each action is
-    #   specified as an Amazon Resource Name (ARN).
+    #   specified as an Amazon Resource Name (ARN). Valid values:
     #
-    #   Valid Values: `arn:aws:automate:region:ec2:stop` \|
-    #   `arn:aws:automate:region:ec2:terminate` \|
-    #   `arn:aws:automate:region:ec2:recover` \|
-    #   `arn:aws:automate:region:ec2:reboot` \|
-    #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
-    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
-    #   `
+    #   **EC2 actions:**
     #
-    #   Valid Values (for use with IAM roles):
-    #   `>arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
-    #   \|
-    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
-    #   \|
-    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
+    #   * `arn:aws:automate:region:ec2:stop`
+    #
+    #   * `arn:aws:automate:region:ec2:terminate`
+    #
+    #   * `arn:aws:automate:region:ec2:reboot`
+    #
+    #   * `arn:aws:automate:region:ec2:recover`
+    #
+    #   * `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
+    #
+    #   * `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
+    #
+    #   * `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
+    #
+    #   * `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Recover/1.0`
+    #
+    #   **Autoscaling action:**
+    #
+    #   * `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #     `
+    #
+    #   ^
+    #
+    #   **SSN notification action:**
+    #
+    #   * `arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #     `
+    #
+    #   ^
+    #
+    #   **SSM integration actions:**
+    #
+    #   * `arn:aws:ssm:region:account-id:opsitem:severity#CATEGORY=category-name
+    #     `
+    #
+    #   * `arn:aws:ssm-incidents::account-id:responseplan/response-plan-name `
     # @option options [String] :statistic
     #   The statistic for the metric specified in `MetricName`, other than
     #   percentile. For percentile statistics, use `ExtendedStatistic`. When

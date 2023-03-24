@@ -542,12 +542,6 @@ module Aws::Comprehend
     #   list can contain a maximum of 25 documents. The maximum size of each
     #   document is 5 KB.
     #
-    #   <note markdown="1"> Amazon Comprehend performs real-time sentiment analysis on the first
-    #   500 characters of the input text and ignores any additional text in
-    #   the input.
-    #
-    #    </note>
-    #
     # @option params [required, String] :language_code
     #   The language of the input documents. You can specify any of the
     #   primary languages supported by Amazon Comprehend. All documents must
@@ -969,13 +963,12 @@ module Aws::Comprehend
     #   The version name given to the newly created classifier. Version names
     #   can have a maximum of 256 characters. Alphanumeric characters, hyphens
     #   (-) and underscores (\_) are allowed. The version name must be unique
-    #   among all models with the same classifier name in the account/AWS
-    #   Region.
+    #   among all models with the same classifier name in the Amazon Web
+    #   Services account/Amazon Web Services Region.
     #
     # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Tags to associate with the document classifier. A tag is a key-value
@@ -1003,10 +996,10 @@ module Aws::Comprehend
     #   same language.
     #
     # @option params [String] :volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
-    #   uses to encrypt data on the storage volume attached to the ML compute
-    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
-    #   either of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt data on the storage volume attached
+    #   to the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -1031,9 +1024,9 @@ module Aws::Comprehend
     #   delimiter. The default delimiter between labels is a pipe (\|).
     #
     # @option params [String] :model_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
-    #   uses to encrypt trained custom models. The ModelKmsKeyId can be either
-    #   of the following formats:
+    #   ID for the KMS key that Amazon Comprehend uses to encrypt trained
+    #   custom models. The ModelKmsKeyId can be either of the following
+    #   formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -1042,8 +1035,8 @@ module Aws::Comprehend
     #
     # @option params [String] :model_policy
     #   The resource-based policy to attach to your custom document classifier
-    #   model. You can use this policy to allow another AWS account to import
-    #   your custom model.
+    #   model. You can use this policy to allow another Amazon Web Services
+    #   account to import your custom model.
     #
     #   Provide your policy as a JSON body that you enter as a UTF-8 encoded
     #   string without line breaks. To provide valid JSON, enclose the
@@ -1156,10 +1149,9 @@ module Aws::Comprehend
     #   department.
     #
     # @option params [String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   trained custom models encrypted with a customer managed key
-    #   (ModelKmsKeyId).
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to trained custom models encrypted with a
+    #   customer managed key (ModelKmsKeyId).
     #
     # @option params [String] :flywheel_arn
     #   The Amazon Resource Number (ARN) of the flywheel to which the endpoint
@@ -1209,19 +1201,17 @@ module Aws::Comprehend
     #   The name given to the newly created recognizer. Recognizer names can
     #   be a maximum of 256 characters. Alphanumeric characters, hyphens (-)
     #   and underscores (\_) are allowed. The name must be unique in the
-    #   account/region.
+    #   account/Region.
     #
     # @option params [String] :version_name
     #   The version name given to the newly created recognizer. Version names
     #   can be a maximum of 256 characters. Alphanumeric characters, hyphens
     #   (-) and underscores (\_) are allowed. The version name must be unique
-    #   among all models with the same recognizer name in the account/ AWS
-    #   Region.
+    #   among all models with the same recognizer name in the account/Region.
     #
     # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Tags to associate with the entity recognizer. A tag is a key-value
@@ -1231,7 +1221,7 @@ module Aws::Comprehend
     #
     # @option params [required, Types::EntityRecognizerInputDataConfig] :input_data_config
     #   Specifies the format and location of the input data. The S3 bucket
-    #   containing the input data must be located in the same region as the
+    #   containing the input data must be located in the same Region as the
     #   entity recognizer being created.
     #
     # @option params [String] :client_request_token
@@ -1249,10 +1239,10 @@ module Aws::Comprehend
     #   language. All training documents must be in the same language.
     #
     # @option params [String] :volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
-    #   uses to encrypt data on the storage volume attached to the ML compute
-    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
-    #   either of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt data on the storage volume attached
+    #   to the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -1269,9 +1259,9 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #
     # @option params [String] :model_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
-    #   uses to encrypt trained custom models. The ModelKmsKeyId can be either
-    #   of the following formats:
+    #   ID for the KMS key that Amazon Comprehend uses to encrypt trained
+    #   custom models. The ModelKmsKeyId can be either of the following
+    #   formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -1280,8 +1270,8 @@ module Aws::Comprehend
     #
     # @option params [String] :model_policy
     #   The JSON resource-based policy to attach to your custom entity
-    #   recognizer model. You can use this policy to allow another AWS account
-    #   to import your custom model.
+    #   recognizer model. You can use this policy to allow another Amazon Web
+    #   Services account to import your custom model.
     #
     #   Provide your JSON as a UTF-8 encoded string without line breaks. To
     #   provide valid JSON for your policy, enclose the attribute names and
@@ -1366,10 +1356,10 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
-    # A flywheel is an AWS resource that orchestrates the ongoing training
-    # of a model for custom classification or custom entity recognition. You
-    # can create a flywheel to start with an existing trained model, or
-    # Comprehend can create and train a new model.
+    # A flywheel is an Amazon Web Services resource that orchestrates the
+    # ongoing training of a model for custom classification or custom entity
+    # recognition. You can create a flywheel to start with an existing
+    # trained model, or Comprehend can create and train a new model.
     #
     # When you create the flywheel, Comprehend creates a data lake in your
     # account. The data lake holds the training data and test data for all
@@ -1398,9 +1388,9 @@ module Aws::Comprehend
     #   Resource Number (ARN) of the model version.
     #
     # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend the permissions
-    #   required to access the flywheel data in the data lake.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend the permissions required to access the flywheel data in the
+    #   data lake.
     #
     # @option params [Types::TaskConfig] :task_config
     #   Configuration about the custom classifier associated with the
@@ -1752,7 +1742,7 @@ module Aws::Comprehend
     #
     #   resp.document_classifier_properties.document_classifier_arn #=> String
     #   resp.document_classifier_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
-    #   resp.document_classifier_properties.status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED"
+    #   resp.document_classifier_properties.status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED", "TRAINED_WITH_WARNING"
     #   resp.document_classifier_properties.message #=> String
     #   resp.document_classifier_properties.submit_time #=> Time
     #   resp.document_classifier_properties.end_time #=> Time
@@ -1944,6 +1934,7 @@ module Aws::Comprehend
     #   resp.entities_detection_job_properties.vpc_config.security_group_ids[0] #=> String
     #   resp.entities_detection_job_properties.vpc_config.subnets #=> Array
     #   resp.entities_detection_job_properties.vpc_config.subnets[0] #=> String
+    #   resp.entities_detection_job_properties.flywheel_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEntitiesDetectionJob AWS API Documentation
     #
@@ -1975,7 +1966,7 @@ module Aws::Comprehend
     #
     #   resp.entity_recognizer_properties.entity_recognizer_arn #=> String
     #   resp.entity_recognizer_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
-    #   resp.entity_recognizer_properties.status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED"
+    #   resp.entity_recognizer_properties.status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED", "TRAINED_WITH_WARNING"
     #   resp.entity_recognizer_properties.message #=> String
     #   resp.entity_recognizer_properties.submit_time #=> Time
     #   resp.entity_recognizer_properties.end_time #=> Time
@@ -2757,12 +2748,6 @@ module Aws::Comprehend
     # @option params [required, String] :text
     #   A UTF-8 text string. The maximum string size is 5 KB.
     #
-    #   <note markdown="1"> Amazon Comprehend performs real-time sentiment analysis on the first
-    #   500 characters of the input text and ignores any additional text in
-    #   the input.
-    #
-    #    </note>
-    #
     # @option params [required, String] :language_code
     #   The language of the input documents. You can specify any of the
     #   primary languages supported by Amazon Comprehend. All documents must
@@ -2900,15 +2885,15 @@ module Aws::Comprehend
     end
 
     # Creates a new custom model that replicates a source custom model that
-    # you import. The source model can be in your AWS account or another
-    # one.
+    # you import. The source model can be in your Amazon Web Services
+    # account or another one.
     #
-    # If the source model is in another AWS account, then it must have a
-    # resource-based policy that authorizes you to import it.
+    # If the source model is in another Amazon Web Services account, then it
+    # must have a resource-based policy that authorizes you to import it.
     #
-    # The source model must be in the same AWS region that you're using
-    # when you import. You can't import a model that's in a different
-    # region.
+    # The source model must be in the same Amazon Web Services Region that
+    # you're using when you import. You can't import a model that's in a
+    # different Region.
     #
     # @option params [required, String] :source_model_arn
     #   The Amazon Resource Name (ARN) of the custom model to import.
@@ -2922,12 +2907,12 @@ module Aws::Comprehend
     #   import. Version names can have a maximum of 256 characters.
     #   Alphanumeric characters, hyphens (-) and underscores (\_) are allowed.
     #   The version name must be unique among all models with the same
-    #   classifier name in the account/AWS Region.
+    #   classifier name in the account/Region.
     #
     # @option params [String] :model_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
-    #   uses to encrypt trained custom models. The ModelKmsKeyId can be either
-    #   of the following formats:
+    #   ID for the KMS key that Amazon Comprehend uses to encrypt trained
+    #   custom models. The ModelKmsKeyId can be either of the following
+    #   formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -2935,10 +2920,9 @@ module Aws::Comprehend
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
     # @option params [String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend permission to use
-    #   Amazon Key Management Service (KMS) to encrypt or decrypt the custom
-    #   model.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend permission to use Amazon Key Management Service (KMS) to
+    #   encrypt or decrypt the custom model.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Tags to associate with the custom model that is created by this
@@ -2980,7 +2964,7 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
-    # List the datasets that you have configured in this region. For more
+    # List the datasets that you have configured in this Region. For more
     # information about datasets, see [ Flywheel overview][1] in the *Amazon
     # Comprehend Developer Guide*.
     #
@@ -3148,7 +3132,7 @@ module Aws::Comprehend
     #   resp.document_classifier_summaries_list[0].number_of_versions #=> Integer
     #   resp.document_classifier_summaries_list[0].latest_version_created_at #=> Time
     #   resp.document_classifier_summaries_list[0].latest_version_name #=> String
-    #   resp.document_classifier_summaries_list[0].latest_version_status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED"
+    #   resp.document_classifier_summaries_list[0].latest_version_status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED", "TRAINED_WITH_WARNING"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassifierSummaries AWS API Documentation
@@ -3185,7 +3169,7 @@ module Aws::Comprehend
     #
     #   resp = client.list_document_classifiers({
     #     filter: {
-    #       status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED
+    #       status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED, TRAINED_WITH_WARNING
     #       document_classifier_name: "ComprehendArnName",
     #       submit_time_before: Time.now,
     #       submit_time_after: Time.now,
@@ -3199,7 +3183,7 @@ module Aws::Comprehend
     #   resp.document_classifier_properties_list #=> Array
     #   resp.document_classifier_properties_list[0].document_classifier_arn #=> String
     #   resp.document_classifier_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
-    #   resp.document_classifier_properties_list[0].status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED"
+    #   resp.document_classifier_properties_list[0].status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED", "TRAINED_WITH_WARNING"
     #   resp.document_classifier_properties_list[0].message #=> String
     #   resp.document_classifier_properties_list[0].submit_time #=> Time
     #   resp.document_classifier_properties_list[0].end_time #=> Time
@@ -3448,6 +3432,7 @@ module Aws::Comprehend
     #   resp.entities_detection_job_properties_list[0].vpc_config.security_group_ids[0] #=> String
     #   resp.entities_detection_job_properties_list[0].vpc_config.subnets #=> Array
     #   resp.entities_detection_job_properties_list[0].vpc_config.subnets[0] #=> String
+    #   resp.entities_detection_job_properties_list[0].flywheel_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntitiesDetectionJobs AWS API Documentation
@@ -3490,7 +3475,7 @@ module Aws::Comprehend
     #   resp.entity_recognizer_summaries_list[0].number_of_versions #=> Integer
     #   resp.entity_recognizer_summaries_list[0].latest_version_created_at #=> Time
     #   resp.entity_recognizer_summaries_list[0].latest_version_name #=> String
-    #   resp.entity_recognizer_summaries_list[0].latest_version_status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED"
+    #   resp.entity_recognizer_summaries_list[0].latest_version_status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED", "TRAINED_WITH_WARNING"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntityRecognizerSummaries AWS API Documentation
@@ -3534,7 +3519,7 @@ module Aws::Comprehend
     #
     #   resp = client.list_entity_recognizers({
     #     filter: {
-    #       status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED
+    #       status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED, TRAINED_WITH_WARNING
     #       recognizer_name: "ComprehendArnName",
     #       submit_time_before: Time.now,
     #       submit_time_after: Time.now,
@@ -3548,7 +3533,7 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties_list #=> Array
     #   resp.entity_recognizer_properties_list[0].entity_recognizer_arn #=> String
     #   resp.entity_recognizer_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
-    #   resp.entity_recognizer_properties_list[0].status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED"
+    #   resp.entity_recognizer_properties_list[0].status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED", "TRAINED_WITH_WARNING"
     #   resp.entity_recognizer_properties_list[0].message #=> String
     #   resp.entity_recognizer_properties_list[0].submit_time #=> Time
     #   resp.entity_recognizer_properties_list[0].end_time #=> Time
@@ -4179,9 +4164,9 @@ module Aws::Comprehend
     end
 
     # Attaches a resource-based policy to a custom model. You can use this
-    # policy to authorize an entity in another AWS account to import the
-    # custom model, which replicates it in Amazon Comprehend in their
-    # account.
+    # policy to authorize an entity in another Amazon Web Services account
+    # to import the custom model, which replicates it in Amazon Comprehend
+    # in their account.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the custom model to attach the
@@ -4250,9 +4235,8 @@ module Aws::Comprehend
     #   Specifies where to send the output files.
     #
     # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data.
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you do not set the client
@@ -4262,10 +4246,10 @@ module Aws::Comprehend
     #   not need to pass this option.**
     #
     # @option params [String] :volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
-    #   uses to encrypt data on the storage volume attached to the ML compute
-    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
-    #   either of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt data on the storage volume attached
+    #   to the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -4359,14 +4343,13 @@ module Aws::Comprehend
     #   Specifies where to send the output files.
     #
     # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data. For more information, see
-    #   [https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions][1].
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data. For more information, see
+    #   [Role-based permissions][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions
     #
     # @option params [String] :job_name
     #   An identifier for the job.
@@ -4379,10 +4362,10 @@ module Aws::Comprehend
     #   not need to pass this option.**
     #
     # @option params [String] :volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
-    #   uses to encrypt data on the storage volume attached to the ML compute
-    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
-    #   either of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt data on the storage volume attached
+    #   to the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -4472,14 +4455,13 @@ module Aws::Comprehend
     #   Specifies where to send the output files.
     #
     # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data. For more information, see
-    #   [https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions][1].
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data. For more information, see
+    #   [Role-based permissions][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions
     #
     # @option params [String] :job_name
     #   The identifier of the job.
@@ -4503,10 +4485,10 @@ module Aws::Comprehend
     #   not need to pass this option.**
     #
     # @option params [String] :volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
-    #   uses to encrypt data on the storage volume attached to the ML compute
-    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
-    #   either of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt data on the storage volume attached
+    #   to the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -4600,9 +4582,8 @@ module Aws::Comprehend
     #   Specifies where to send the output files.
     #
     # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data.
     #
     # @option params [String] :job_name
     #   The identifier of the events detection job.
@@ -4727,14 +4708,13 @@ module Aws::Comprehend
     #   Specifies where to send the output files.
     #
     # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data. For more information, see
-    #   [https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions][1].
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data. For more information, see
+    #   [Role-based permissions][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions
     #
     # @option params [String] :job_name
     #   The identifier of the job.
@@ -4752,10 +4732,10 @@ module Aws::Comprehend
     #   not need to pass this option.**
     #
     # @option params [String] :volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
-    #   uses to encrypt data on the storage volume attached to the ML compute
-    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
-    #   either of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt data on the storage volume attached
+    #   to the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -4853,9 +4833,8 @@ module Aws::Comprehend
     #   definition that includes the `PiiEntityTypes` parameter.
     #
     # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data.
     #
     # @option params [String] :job_name
     #   The identifier of the job.
@@ -4942,14 +4921,13 @@ module Aws::Comprehend
     #   Specifies where to send the output files.
     #
     # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data. For more information, see
-    #   [https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions][1].
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data. For more information, see
+    #   [Role-based permissions][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions
     #
     # @option params [String] :job_name
     #   The identifier of the job.
@@ -4967,10 +4945,10 @@ module Aws::Comprehend
     #   not need to pass this option.**
     #
     # @option params [String] :volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
-    #   uses to encrypt data on the storage volume attached to the ML compute
-    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
-    #   either of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt data on the storage volume attached
+    #   to the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -5059,10 +5037,9 @@ module Aws::Comprehend
     #   Specifies where to send the output files.
     #
     # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data. For more information, see [Role-based
-    #   permissions][1].
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data. For more information, see
+    #   [Role-based permissions][1].
     #
     #
     #
@@ -5175,14 +5152,13 @@ module Aws::Comprehend
     #   documents associated with each topic
     #
     # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data. For more information, see
-    #   [https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions][1].
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data. For more information, see
+    #   [Role-based permissions][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions
     #
     # @option params [String] :job_name
     #   The identifier of the job.
@@ -5198,10 +5174,10 @@ module Aws::Comprehend
     #   not need to pass this option.**
     #
     # @option params [String] :volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
-    #   uses to encrypt data on the storage volume attached to the ML compute
-    #   instance(s) that process the analysis job. The VolumeKmsKeyId can be
-    #   either of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt data on the storage volume attached
+    #   to the ML compute instance(s) that process the analysis job. The
+    #   VolumeKmsKeyId can be either of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -5736,9 +5712,8 @@ module Aws::Comprehend
     #   The Amazon Resource Number (ARN) of the active model version.
     #
     # @option params [String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend permission to
-    #   access the flywheel data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend permission to access the flywheel data.
     #
     # @option params [Types::UpdateDataSecurityConfig] :data_security_config
     #   Flywheel data security configuration.
@@ -5811,7 +5786,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

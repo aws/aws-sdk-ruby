@@ -304,12 +304,6 @@ module Aws::Comprehend
     #   A list containing the UTF-8 encoded text of the input documents. The
     #   list can contain a maximum of 25 documents. The maximum size of each
     #   document is 5 KB.
-    #
-    #   <note markdown="1"> Amazon Comprehend performs real-time sentiment analysis on the first
-    #   500 characters of the input text and ignores any additional text in
-    #   the input.
-    #
-    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] language_code
@@ -990,13 +984,12 @@ module Aws::Comprehend
     #   names can have a maximum of 256 characters. Alphanumeric characters,
     #   hyphens (-) and underscores (\_) are allowed. The version name must
     #   be unique among all models with the same classifier name in the
-    #   account/AWS Region.
+    #   Amazon Web Services account/Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1030,10 +1023,10 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt data on the storage volume attached to
-    #   the ML compute instance(s) that process the analysis job. The
-    #   VolumeKmsKeyId can be either of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt data on the storage volume
+    #   attached to the ML compute instance(s) that process the analysis
+    #   job. The VolumeKmsKeyId can be either of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -1061,9 +1054,9 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] model_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt trained custom models. The ModelKmsKeyId
-    #   can be either of the following formats:
+    #   ID for the KMS key that Amazon Comprehend uses to encrypt trained
+    #   custom models. The ModelKmsKeyId can be either of the following
+    #   formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -1073,8 +1066,8 @@ module Aws::Comprehend
     #
     # @!attribute [rw] model_policy
     #   The resource-based policy to attach to your custom document
-    #   classifier model. You can use this policy to allow another AWS
-    #   account to import your custom model.
+    #   classifier model. You can use this policy to allow another Amazon
+    #   Web Services account to import your custom model.
     #
     #   Provide your policy as a JSON body that you enter as a UTF-8 encoded
     #   string without line breaks. To provide valid JSON, enclose the
@@ -1156,10 +1149,9 @@ module Aws::Comprehend
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   trained custom models encrypted with a customer managed key
-    #   (ModelKmsKeyId).
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to trained custom models encrypted with a
+    #   customer managed key (ModelKmsKeyId).
     #   @return [String]
     #
     # @!attribute [rw] flywheel_arn
@@ -1203,7 +1195,7 @@ module Aws::Comprehend
     #   The name given to the newly created recognizer. Recognizer names can
     #   be a maximum of 256 characters. Alphanumeric characters, hyphens (-)
     #   and underscores (\_) are allowed. The name must be unique in the
-    #   account/region.
+    #   account/Region.
     #   @return [String]
     #
     # @!attribute [rw] version_name
@@ -1211,13 +1203,12 @@ module Aws::Comprehend
     #   names can be a maximum of 256 characters. Alphanumeric characters,
     #   hyphens (-) and underscores (\_) are allowed. The version name must
     #   be unique among all models with the same recognizer name in the
-    #   account/ AWS Region.
+    #   account/Region.
     #   @return [String]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1229,7 +1220,7 @@ module Aws::Comprehend
     #
     # @!attribute [rw] input_data_config
     #   Specifies the format and location of the input data. The S3 bucket
-    #   containing the input data must be located in the same region as the
+    #   containing the input data must be located in the same Region as the
     #   entity recognizer being created.
     #   @return [Types::EntityRecognizerInputDataConfig]
     #
@@ -1251,10 +1242,10 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt data on the storage volume attached to
-    #   the ML compute instance(s) that process the analysis job. The
-    #   VolumeKmsKeyId can be either of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt data on the storage volume
+    #   attached to the ML compute instance(s) that process the analysis
+    #   job. The VolumeKmsKeyId can be either of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -1273,9 +1264,9 @@ module Aws::Comprehend
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] model_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt trained custom models. The ModelKmsKeyId
-    #   can be either of the following formats:
+    #   ID for the KMS key that Amazon Comprehend uses to encrypt trained
+    #   custom models. The ModelKmsKeyId can be either of the following
+    #   formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -1285,8 +1276,8 @@ module Aws::Comprehend
     #
     # @!attribute [rw] model_policy
     #   The JSON resource-based policy to attach to your custom entity
-    #   recognizer model. You can use this policy to allow another AWS
-    #   account to import your custom model.
+    #   recognizer model. You can use this policy to allow another Amazon
+    #   Web Services account to import your custom model.
     #
     #   Provide your JSON as a UTF-8 encoded string without line breaks. To
     #   provide valid JSON for your policy, enclose the attribute names and
@@ -1343,9 +1334,9 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend the permissions
-    #   required to access the flywheel data in the data lake.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend the permissions required to access the flywheel data in
+    #   the data lake.
     #   @return [String]
     #
     # @!attribute [rw] task_config
@@ -1415,9 +1406,9 @@ module Aws::Comprehend
     # Data security configuration.
     #
     # @!attribute [rw] model_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt trained custom models. The ModelKmsKeyId
-    #   can be either of the following formats:
+    #   ID for the KMS key that Amazon Comprehend uses to encrypt trained
+    #   custom models. The ModelKmsKeyId can be either of the following
+    #   formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -1522,7 +1513,7 @@ module Aws::Comprehend
     #
     # @!attribute [rw] s3_uri
     #   The Amazon S3 URI for the input data. The S3 bucket must be in the
-    #   same region as the API endpoint that you are calling. The URI can
+    #   same Region as the API endpoint that you are calling. The URI can
     #   point to a single input file or it can provide the prefix for a
     #   collection of input files.
     #
@@ -1558,7 +1549,7 @@ module Aws::Comprehend
     #
     # @!attribute [rw] s3_uri
     #   Specifies the Amazon S3 location where the training documents for an
-    #   entity recognizer are located. The URI must be in the same region as
+    #   entity recognizer are located. The URI must be in the same Region as
     #   the API endpoint that you are calling.
     #   @return [String]
     #
@@ -2311,11 +2302,14 @@ module Aws::Comprehend
     end
 
     # @!attribute [rw] languages
-    #   The languages that Amazon Comprehend detected in the input text. For
-    #   each language, the response returns the RFC 5646 language code and
-    #   the level of confidence that Amazon Comprehend has in the accuracy
-    #   of its inference. For more information about RFC 5646, see [Tags for
-    #   Identifying Languages][1] on the *IETF Tools* web site.
+    #   Array of languages that Amazon Comprehend detected in the input
+    #   text. The array is sorted in descending order of the score (the
+    #   dominant language is always the first element in the array).
+    #
+    #   For each language, the response returns the RFC 5646 language code
+    #   and the level of confidence that Amazon Comprehend has in the
+    #   accuracy of its inference. For more information about RFC 5646, see
+    #   [Tags for Identifying Languages][1] on the *IETF Tools* web site.
     #
     #
     #
@@ -2537,12 +2531,6 @@ module Aws::Comprehend
 
     # @!attribute [rw] text
     #   A UTF-8 text string. The maximum string size is 5 KB.
-    #
-    #   <note markdown="1"> Amazon Comprehend performs real-time sentiment analysis on the first
-    #   500 characters of the input text and ignores any additional text in
-    #   the input.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -2743,8 +2731,8 @@ module Aws::Comprehend
     # @!attribute [rw] job_arn
     #   The Amazon Resource Name (ARN) of the document classification job.
     #   It is a unique, fully qualified identifier for the job. It includes
-    #   the AWS account, Region, and the job ID. The format of the ARN is as
-    #   follows:
+    #   the Amazon Web Services account, Amazon Web Services Region, and the
+    #   job ID. The format of the ARN is as follows:
     #
     #   `arn:<partition>:comprehend:<region>:<account-id>:document-classification-job/<job-id>`
     #
@@ -2791,16 +2779,15 @@ module Aws::Comprehend
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data.
     #   @return [String]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt data on the storage volume attached to
-    #   the ML compute instance(s) that process the analysis job. The
-    #   VolumeKmsKeyId can be either of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt data on the storage volume
+    #   attached to the ML compute instance(s) that process the analysis
+    #   job. The VolumeKmsKeyId can be either of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -2911,7 +2898,7 @@ module Aws::Comprehend
     #
     # @!attribute [rw] s3_uri
     #   The Amazon S3 URI for the input data. The S3 bucket must be in the
-    #   same region as the API endpoint that you are calling. The URI can
+    #   same Region as the API endpoint that you are calling. The URI can
     #   point to a single input file or it can provide the prefix for a
     #   collection of input files.
     #
@@ -2926,8 +2913,8 @@ module Aws::Comprehend
     #
     # @!attribute [rw] test_s3_uri
     #   This specifies the Amazon S3 location where the test annotations for
-    #   an entity recognizer are located. The URI must be in the same AWS
-    #   Region as the API endpoint that you are calling.
+    #   an entity recognizer are located. The URI must be in the same Amazon
+    #   Web Services Region as the API endpoint that you are calling.
     #   @return [String]
     #
     # @!attribute [rw] label_delimiter
@@ -2967,7 +2954,7 @@ module Aws::Comprehend
     # @!attribute [rw] s3_uri
     #   When you use the `OutputDataConfig` object while creating a custom
     #   classifier, you specify the Amazon S3 location where you want to
-    #   write the confusion matrix. The URI must be in the same region as
+    #   write the confusion matrix. The URI must be in the same Region as
     #   the API endpoint that you are calling. The location is used as the
     #   prefix for the actual location of this output file.
     #
@@ -2978,9 +2965,9 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt the output results from an analysis job.
-    #   The KmsKeyId can be one of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt the output results from an
+    #   analysis job. The KmsKeyId can be one of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -3069,16 +3056,15 @@ module Aws::Comprehend
     #   @return [Types::ClassifierMetadata]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data.
     #   @return [String]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt data on the storage volume attached to
-    #   the ML compute instance(s) that process the analysis job. The
-    #   VolumeKmsKeyId can be either of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt data on the storage volume
+    #   attached to the ML compute instance(s) that process the analysis
+    #   job. The VolumeKmsKeyId can be either of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -3104,9 +3090,9 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] model_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt trained custom models. The ModelKmsKeyId
-    #   can be either of the following formats:
+    #   ID for the KMS key that Amazon Comprehend uses to encrypt trained
+    #   custom models. The ModelKmsKeyId can be either of the following
+    #   formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -3120,8 +3106,8 @@ module Aws::Comprehend
     #
     # @!attribute [rw] source_model_arn
     #   The Amazon Resource Name (ARN) of the source model. This model was
-    #   imported from a different AWS account to create the document
-    #   classifier model in your AWS account.
+    #   imported from a different Amazon Web Services account to create the
+    #   document classifier model in your Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] flywheel_arn
@@ -3400,8 +3386,8 @@ module Aws::Comprehend
     # @!attribute [rw] job_arn
     #   The Amazon Resource Name (ARN) of the dominant language detection
     #   job. It is a unique, fully qualified identifier for the job. It
-    #   includes the AWS account, Region, and the job ID. The format of the
-    #   ARN is as follows:
+    #   includes the Amazon Web Services account, Amazon Web Services
+    #   Region, and the job ID. The format of the ARN is as follows:
     #
     #   `arn:<partition>:comprehend:<region>:<account-id>:dominant-language-detection-job/<job-id>`
     #
@@ -3444,16 +3430,15 @@ module Aws::Comprehend
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data.
     #   @return [String]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt data on the storage volume attached to
-    #   the ML compute instance(s) that process the analysis job. The
-    #   VolumeKmsKeyId can be either of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt data on the storage volume
+    #   attached to the ML compute instance(s) that process the analysis
+    #   job. The VolumeKmsKeyId can be either of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -3577,10 +3562,9 @@ module Aws::Comprehend
     #   @return [Time]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   trained custom models encrypted with a customer managed key
-    #   (ModelKmsKeyId).
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to trained custom models encrypted with a
+    #   customer managed key (ModelKmsKeyId).
     #   @return [String]
     #
     # @!attribute [rw] desired_data_access_role_arn
@@ -3657,8 +3641,8 @@ module Aws::Comprehend
     # @!attribute [rw] job_arn
     #   The Amazon Resource Name (ARN) of the entities detection job. It is
     #   a unique, fully qualified identifier for the job. It includes the
-    #   AWS account, Region, and the job ID. The format of the ARN is as
-    #   follows:
+    #   Amazon Web Services account, Amazon Web Services Region, and the job
+    #   ID. The format of the ARN is as follows:
     #
     #   `arn:<partition>:comprehend:<region>:<account-id>:entities-detection-job/<job-id>`
     #
@@ -3709,16 +3693,15 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data.
     #   @return [String]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt data on the storage volume attached to
-    #   the ML compute instance(s) that process the analysis job. The
-    #   VolumeKmsKeyId can be either of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt data on the storage volume
+    #   attached to the ML compute instance(s) that process the analysis
+    #   job. The VolumeKmsKeyId can be either of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -3736,6 +3719,11 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] flywheel_arn
+    #   The Amazon Resource Name (ARN) of the flywheel associated with this
+    #   job.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntitiesDetectionJobProperties AWS API Documentation
     #
     class EntitiesDetectionJobProperties < Struct.new(
@@ -3752,7 +3740,8 @@ module Aws::Comprehend
       :language_code,
       :data_access_role_arn,
       :volume_kms_key_id,
-      :vpc_config)
+      :vpc_config,
+      :flywheel_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3847,13 +3836,13 @@ module Aws::Comprehend
     #
     # @!attribute [rw] s3_uri
     #   Specifies the Amazon S3 location where the annotations for an entity
-    #   recognizer are located. The URI must be in the same region as the
+    #   recognizer are located. The URI must be in the same Region as the
     #   API endpoint that you are calling.
     #   @return [String]
     #
     # @!attribute [rw] test_s3_uri
     #   Specifies the Amazon S3 location where the test annotations for an
-    #   entity recognizer are located. The URI must be in the same region as
+    #   entity recognizer are located. The URI must be in the same Region as
     #   the API endpoint that you are calling.
     #   @return [String]
     #
@@ -3870,14 +3859,14 @@ module Aws::Comprehend
     #
     # @!attribute [rw] s3_uri
     #   Specifies the Amazon S3 location where the training documents for an
-    #   entity recognizer are located. The URI must be in the same region as
+    #   entity recognizer are located. The URI must be in the same Region as
     #   the API endpoint that you are calling.
     #   @return [String]
     #
     # @!attribute [rw] test_s3_uri
     #   Specifies the Amazon S3 location where the test documents for an
-    #   entity recognizer are located. The URI must be in the same AWS
-    #   Region as the API endpoint that you are calling.
+    #   entity recognizer are located. The URI must be in the same Amazon
+    #   Web Services Region as the API endpoint that you are calling.
     #   @return [String]
     #
     # @!attribute [rw] input_format
@@ -3904,7 +3893,7 @@ module Aws::Comprehend
     #
     # @!attribute [rw] s3_uri
     #   Specifies the Amazon S3 location where the entity list is located.
-    #   The URI must be in the same region as the API endpoint that you are
+    #   The URI must be in the same Region as the API endpoint that you are
     #   calling.
     #   @return [String]
     #
@@ -4188,16 +4177,15 @@ module Aws::Comprehend
     #   @return [Types::EntityRecognizerMetadata]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data.
     #   @return [String]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt data on the storage volume attached to
-    #   the ML compute instance(s) that process the analysis job. The
-    #   VolumeKmsKeyId can be either of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt data on the storage volume
+    #   attached to the ML compute instance(s) that process the analysis
+    #   job. The VolumeKmsKeyId can be either of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -4216,9 +4204,9 @@ module Aws::Comprehend
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] model_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt trained custom models. The ModelKmsKeyId
-    #   can be either of the following formats:
+    #   ID for the KMS key that Amazon Comprehend uses to encrypt trained
+    #   custom models. The ModelKmsKeyId can be either of the following
+    #   formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -4232,8 +4220,8 @@ module Aws::Comprehend
     #
     # @!attribute [rw] source_model_arn
     #   The Amazon Resource Name (ARN) of the source model. This model was
-    #   imported from a different AWS account to create the entity
-    #   recognizer model in your AWS account.
+    #   imported from a different Amazon Web Services account to create the
+    #   entity recognizer model in your Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] flywheel_arn
@@ -4452,9 +4440,9 @@ module Aws::Comprehend
     #
     # @!attribute [rw] job_arn
     #   The Amazon Resource Name (ARN) of the events detection job. It is a
-    #   unique, fully qualified identifier for the job. It includes the AWS
-    #   account, Region, and the job ID. The format of the ARN is as
-    #   follows:
+    #   unique, fully qualified identifier for the job. It includes the
+    #   Amazon Web Services account, Amazon Web Services Region, and the job
+    #   ID. The format of the ARN is as follows:
     #
     #   `arn:<partition>:comprehend:<region>:<account-id>:events-detection-job/<job-id>`
     #
@@ -4498,9 +4486,8 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data.
     #   @return [String]
     #
     # @!attribute [rw] target_event_types
@@ -4695,9 +4682,8 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend permission to
-    #   access the flywheel data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend permission to access the flywheel data.
     #   @return [String]
     #
     # @!attribute [rw] task_config
@@ -4852,13 +4838,13 @@ module Aws::Comprehend
     #   import. Version names can have a maximum of 256 characters.
     #   Alphanumeric characters, hyphens (-) and underscores (\_) are
     #   allowed. The version name must be unique among all models with the
-    #   same classifier name in the account/AWS Region.
+    #   same classifier name in the account/Region.
     #   @return [String]
     #
     # @!attribute [rw] model_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt trained custom models. The ModelKmsKeyId
-    #   can be either of the following formats:
+    #   ID for the KMS key that Amazon Comprehend uses to encrypt trained
+    #   custom models. The ModelKmsKeyId can be either of the following
+    #   formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -4867,10 +4853,9 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend permission to
-    #   use Amazon Key Management Service (KMS) to encrypt or decrypt the
-    #   custom model.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend permission to use Amazon Key Management Service (KMS) to
+    #   encrypt or decrypt the custom model.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -4910,7 +4895,7 @@ module Aws::Comprehend
     # field applies only to non-text inputs for custom analysis.
     #
     # @!attribute [rw] s3_uri
-    #   The Amazon S3 URI for the input data. The URI must be in same region
+    #   The Amazon S3 URI for the input data. The URI must be in same Region
     #   as the API endpoint that you are calling. The URI can point to a
     #   single input file or it can provide the prefix for a collection of
     #   data files.
@@ -5128,8 +5113,8 @@ module Aws::Comprehend
     # @!attribute [rw] job_arn
     #   The Amazon Resource Name (ARN) of the key phrases detection job. It
     #   is a unique, fully qualified identifier for the job. It includes the
-    #   AWS account, Region, and the job ID. The format of the ARN is as
-    #   follows:
+    #   Amazon Web Services account, Amazon Web Services Region, and the job
+    #   ID. The format of the ARN is as follows:
     #
     #   `arn:<partition>:comprehend:<region>:<account-id>:key-phrases-detection-job/<job-id>`
     #
@@ -5175,16 +5160,15 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data.
     #   @return [String]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt data on the storage volume attached to
-    #   the ML compute instance(s) that process the analysis job. The
-    #   VolumeKmsKeyId can be either of the following formats:
+    #   ID for the KMS key that Amazon Comprehend uses to encrypt data on
+    #   the storage volume attached to the ML compute instance(s) that
+    #   process the analysis job. The VolumeKmsKeyId can be either of the
+    #   following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -6009,7 +5993,7 @@ module Aws::Comprehend
     # @!attribute [rw] s3_uri
     #   When you use the `OutputDataConfig` object with asynchronous
     #   operations, you specify the Amazon S3 location where you want to
-    #   write the output data. The URI must be in the same region as the API
+    #   write the output data. The URI must be in the same Region as the API
     #   endpoint that you are calling. The location is used as the prefix
     #   for the actual location of the output file.
     #
@@ -6024,9 +6008,9 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt the output results from an analysis job.
-    #   The KmsKeyId can be one of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt the output results from an
+    #   analysis job. The KmsKeyId can be one of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -6122,8 +6106,8 @@ module Aws::Comprehend
     # @!attribute [rw] job_arn
     #   The Amazon Resource Name (ARN) of the PII entities detection job. It
     #   is a unique, fully qualified identifier for the job. It includes the
-    #   AWS account, Region, and the job ID. The format of the ARN is as
-    #   follows:
+    #   Amazon Web Services account, Amazon Web Services Region, and the job
+    #   ID. The format of the ARN is as follows:
     #
     #   `arn:<partition>:comprehend:<region>:<account-id>:pii-entities-detection-job/<job-id>`
     #
@@ -6176,9 +6160,8 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data.
     #   @return [String]
     #
     # @!attribute [rw] mode
@@ -6252,8 +6235,9 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt the output results from an analysis job.
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt the output results from an
+    #   analysis job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/PiiOutputDataConfig AWS API Documentation
@@ -6490,8 +6474,8 @@ module Aws::Comprehend
     # @!attribute [rw] job_arn
     #   The Amazon Resource Name (ARN) of the sentiment detection job. It is
     #   a unique, fully qualified identifier for the job. It includes the
-    #   AWS account, Region, and the job ID. The format of the ARN is as
-    #   follows:
+    #   Amazon Web Services account, Amazon Web Services Region, and the job
+    #   ID. The format of the ARN is as follows:
     #
     #   `arn:<partition>:comprehend:<region>:<account-id>:sentiment-detection-job/<job-id>`
     #
@@ -6537,16 +6521,15 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data.
     #   @return [String]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt data on the storage volume attached to
-    #   the ML compute instance(s) that process the analysis job. The
-    #   VolumeKmsKeyId can be either of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt data on the storage volume
+    #   attached to the ML compute instance(s) that process the analysis
+    #   job. The VolumeKmsKeyId can be either of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -6636,9 +6619,8 @@ module Aws::Comprehend
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -6650,10 +6632,10 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt data on the storage volume attached to
-    #   the ML compute instance(s) that process the analysis job. The
-    #   VolumeKmsKeyId can be either of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt data on the storage volume
+    #   attached to the ML compute instance(s) that process the analysis
+    #   job. The VolumeKmsKeyId can be either of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -6709,8 +6691,8 @@ module Aws::Comprehend
     # @!attribute [rw] job_arn
     #   The Amazon Resource Name (ARN) of the document classification job.
     #   It is a unique, fully qualified identifier for the job. It includes
-    #   the AWS account, Region, and the job ID. The format of the ARN is as
-    #   follows:
+    #   the Amazon Web Services account, Amazon Web Services Region, and the
+    #   job ID. The format of the ARN is as follows:
     #
     #   `arn:<partition>:comprehend:<region>:<account-id>:document-classification-job/<job-id>`
     #
@@ -6762,14 +6744,13 @@ module Aws::Comprehend
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data. For more information, see
-    #   [https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions][1].
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data. For more information, see
+    #   [Role-based permissions][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions
     #   @return [String]
     #
     # @!attribute [rw] job_name
@@ -6785,10 +6766,10 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt data on the storage volume attached to
-    #   the ML compute instance(s) that process the analysis job. The
-    #   VolumeKmsKeyId can be either of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt data on the storage volume
+    #   attached to the ML compute instance(s) that process the analysis
+    #   job. The VolumeKmsKeyId can be either of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -6836,8 +6817,8 @@ module Aws::Comprehend
     # @!attribute [rw] job_arn
     #   The Amazon Resource Name (ARN) of the dominant language detection
     #   job. It is a unique, fully qualified identifier for the job. It
-    #   includes the AWS account, Region, and the job ID. The format of the
-    #   ARN is as follows:
+    #   includes the Amazon Web Services account, Amazon Web Services
+    #   Region, and the job ID. The format of the ARN is as follows:
     #
     #   `arn:<partition>:comprehend:<region>:<account-id>:dominant-language-detection-job/<job-id>`
     #
@@ -6880,14 +6861,13 @@ module Aws::Comprehend
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data. For more information, see
-    #   [https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions][1].
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data. For more information, see
+    #   [Role-based permissions][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions
     #   @return [String]
     #
     # @!attribute [rw] job_name
@@ -6917,10 +6897,10 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt data on the storage volume attached to
-    #   the ML compute instance(s) that process the analysis job. The
-    #   VolumeKmsKeyId can be either of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt data on the storage volume
+    #   attached to the ML compute instance(s) that process the analysis
+    #   job. The VolumeKmsKeyId can be either of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -6976,8 +6956,8 @@ module Aws::Comprehend
     # @!attribute [rw] job_arn
     #   The Amazon Resource Name (ARN) of the entities detection job. It is
     #   a unique, fully qualified identifier for the job. It includes the
-    #   AWS account, Region, and the job ID. The format of the ARN is as
-    #   follows:
+    #   Amazon Web Services account, Amazon Web Services Region, and the job
+    #   ID. The format of the ARN is as follows:
     #
     #   `arn:<partition>:comprehend:<region>:<account-id>:entities-detection-job/<job-id>`
     #
@@ -7030,9 +7010,8 @@ module Aws::Comprehend
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data.
     #   @return [String]
     #
     # @!attribute [rw] job_name
@@ -7084,9 +7063,9 @@ module Aws::Comprehend
     #
     # @!attribute [rw] job_arn
     #   The Amazon Resource Name (ARN) of the events detection job. It is a
-    #   unique, fully qualified identifier for the job. It includes the AWS
-    #   account, Region, and the job ID. The format of the ARN is as
-    #   follows:
+    #   unique, fully qualified identifier for the job. It includes the
+    #   Amazon Web Services account, Amazon Web Services Region, and the job
+    #   ID. The format of the ARN is as follows:
     #
     #   `arn:<partition>:comprehend:<region>:<account-id>:events-detection-job/<job-id>`
     #
@@ -7151,14 +7130,13 @@ module Aws::Comprehend
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data. For more information, see
-    #   [https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions][1].
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data. For more information, see
+    #   [Role-based permissions][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions
     #   @return [String]
     #
     # @!attribute [rw] job_name
@@ -7180,10 +7158,10 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt data on the storage volume attached to
-    #   the ML compute instance(s) that process the analysis job. The
-    #   VolumeKmsKeyId can be either of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt data on the storage volume
+    #   attached to the ML compute instance(s) that process the analysis
+    #   job. The VolumeKmsKeyId can be either of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -7232,8 +7210,8 @@ module Aws::Comprehend
     # @!attribute [rw] job_arn
     #   The Amazon Resource Name (ARN) of the key phrase detection job. It
     #   is a unique, fully qualified identifier for the job. It includes the
-    #   AWS account, Region, and the job ID. The format of the ARN is as
-    #   follows:
+    #   Amazon Web Services account, Amazon Web Services Region, and the job
+    #   ID. The format of the ARN is as follows:
     #
     #   `arn:<partition>:comprehend:<region>:<account-id>:key-phrases-detection-job/<job-id>`
     #
@@ -7290,9 +7268,8 @@ module Aws::Comprehend
     #   @return [Types::RedactionConfig]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data.
     #   @return [String]
     #
     # @!attribute [rw] job_name
@@ -7342,8 +7319,8 @@ module Aws::Comprehend
     # @!attribute [rw] job_arn
     #   The Amazon Resource Name (ARN) of the PII entity detection job. It
     #   is a unique, fully qualified identifier for the job. It includes the
-    #   AWS account, Region, and the job ID. The format of the ARN is as
-    #   follows:
+    #   Amazon Web Services account, Amazon Web Services Region, and the job
+    #   ID. The format of the ARN is as follows:
     #
     #   `arn:<partition>:comprehend:<region>:<account-id>:pii-entities-detection-job/<job-id>`
     #
@@ -7375,14 +7352,13 @@ module Aws::Comprehend
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data. For more information, see
-    #   [https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions][1].
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data. For more information, see
+    #   [Role-based permissions][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions
     #   @return [String]
     #
     # @!attribute [rw] job_name
@@ -7404,10 +7380,10 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt data on the storage volume attached to
-    #   the ML compute instance(s) that process the analysis job. The
-    #   VolumeKmsKeyId can be either of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt data on the storage volume
+    #   attached to the ML compute instance(s) that process the analysis
+    #   job. The VolumeKmsKeyId can be either of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -7456,8 +7432,8 @@ module Aws::Comprehend
     # @!attribute [rw] job_arn
     #   The Amazon Resource Name (ARN) of the sentiment detection job. It is
     #   a unique, fully qualified identifier for the job. It includes the
-    #   AWS account, Region, and the job ID. The format of the ARN is as
-    #   follows:
+    #   Amazon Web Services account, Amazon Web Services Region, and the job
+    #   ID. The format of the ARN is as follows:
     #
     #   `arn:<partition>:comprehend:<region>:<account-id>:sentiment-detection-job/<job-id>`
     #
@@ -7501,10 +7477,9 @@ module Aws::Comprehend
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data. For more information, see [Role-based
-    #   permissions][1].
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data. For more information, see
+    #   [Role-based permissions][1].
     #
     #
     #
@@ -7582,8 +7557,8 @@ module Aws::Comprehend
     # @!attribute [rw] job_arn
     #   The Amazon Resource Name (ARN) of the targeted sentiment detection
     #   job. It is a unique, fully qualified identifier for the job. It
-    #   includes the AWS account, Region, and the job ID. The format of the
-    #   ARN is as follows:
+    #   includes the Amazon Web Services account, Amazon Web Services
+    #   Region, and the job ID. The format of the ARN is as follows:
     #
     #   `arn:<partition>:comprehend:<region>:<account-id>:targeted-sentiment-detection-job/<job-id>`
     #
@@ -7629,14 +7604,13 @@ module Aws::Comprehend
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data. For more information, see
-    #   [https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions][1].
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data. For more information, see
+    #   [Role-based permissions][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions
     #   @return [String]
     #
     # @!attribute [rw] job_name
@@ -7656,10 +7630,10 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt data on the storage volume attached to
-    #   the ML compute instance(s) that process the analysis job. The
-    #   VolumeKmsKeyId can be either of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt data on the storage volume
+    #   attached to the ML compute instance(s) that process the analysis
+    #   job. The VolumeKmsKeyId can be either of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -7707,9 +7681,9 @@ module Aws::Comprehend
     #
     # @!attribute [rw] job_arn
     #   The Amazon Resource Name (ARN) of the topics detection job. It is a
-    #   unique, fully qualified identifier for the job. It includes the AWS
-    #   account, Region, and the job ID. The format of the ARN is as
-    #   follows:
+    #   unique, fully qualified identifier for the job. It includes the
+    #   Amazon Web Services account, Amazon Web Services Region, and the job
+    #   ID. The format of the ARN is as follows:
     #
     #   `arn:<partition>:comprehend:<region>:<account-id>:topics-detection-job/<job-id>`
     #
@@ -8136,8 +8110,8 @@ module Aws::Comprehend
     # @!attribute [rw] job_arn
     #   The Amazon Resource Name (ARN) of the targeted sentiment detection
     #   job. It is a unique, fully qualified identifier for the job. It
-    #   includes the AWS account, Region, and the job ID. The format of the
-    #   ARN is as follows:
+    #   includes the Amazon Web Services account, Amazon Web Services
+    #   Region, and the job ID. The format of the ARN is as follows:
     #
     #   `arn:<partition>:comprehend:<region>:<account-id>:targeted-sentiment-detection-job/<job-id>`
     #
@@ -8183,9 +8157,8 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your input data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your input data.
     #   @return [String]
     #
     # @!attribute [rw] volume_kms_key_id
@@ -8448,9 +8421,9 @@ module Aws::Comprehend
     #
     # @!attribute [rw] job_arn
     #   The Amazon Resource Name (ARN) of the topics detection job. It is a
-    #   unique, fully qualified identifier for the job. It includes the AWS
-    #   account, Region, and the job ID. The format of the ARN is as
-    #   follows:
+    #   unique, fully qualified identifier for the job. It includes the
+    #   Amazon Web Services account, Amazon Web Services Region, and the job
+    #   ID. The format of the ARN is as follows:
     #
     #   `arn:<partition>:comprehend:<region>:<account-id>:topics-detection-job/<job-id>`
     #
@@ -8497,16 +8470,15 @@ module Aws::Comprehend
     #   @return [Integer]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend read access to
-    #   your job data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend read access to your job data.
     #   @return [String]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt data on the storage volume attached to
-    #   the ML compute instance(s) that process the analysis job. The
-    #   VolumeKmsKeyId can be either of the following formats:
+    #   ID for the Amazon Web Services Key Management Service (KMS) key that
+    #   Amazon Comprehend uses to encrypt data on the storage volume
+    #   attached to the ML compute instance(s) that process the analysis
+    #   job. The VolumeKmsKeyId can be either of the following formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -8593,9 +8565,9 @@ module Aws::Comprehend
     # Data security configuration.
     #
     # @!attribute [rw] model_kms_key_id
-    #   ID for the AWS Key Management Service (KMS) key that Amazon
-    #   Comprehend uses to encrypt trained custom models. The ModelKmsKeyId
-    #   can be either of the following formats:
+    #   ID for the KMS key that Amazon Comprehend uses to encrypt trained
+    #   custom models. The ModelKmsKeyId can be either of the following
+    #   formats:
     #
     #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
@@ -8684,9 +8656,8 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend permission to
-    #   access the flywheel data.
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   Comprehend permission to access the flywheel data.
     #   @return [String]
     #
     # @!attribute [rw] data_security_config
@@ -8741,7 +8712,7 @@ module Aws::Comprehend
     # @!attribute [rw] subnets
     #   The ID for each subnet being used in your private VPC. This subnet
     #   is a subset of the a range of IPv4 addresses used by the VPC and is
-    #   specific to a given availability zone in the VPC’s region. This ID
+    #   specific to a given availability zone in the VPC’s Region. This ID
     #   number is preceded by "subnet-", for instance:
     #   "subnet-04ccf456919e69055". For more information, see [VPCs and
     #   Subnets][1].

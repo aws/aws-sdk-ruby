@@ -189,10 +189,7 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora` (for MySQL 5.6-compatible Aurora)
-    #
-    #   * `aurora-mysql` (for MySQL 5.7-compatible and MySQL 8.0-compatible
-    #     Aurora)
+    #   * `aurora-mysql`
     #
     #   * `aurora-postgresql`
     #
@@ -204,17 +201,15 @@ module Aws::RDS
     # @option options [String] :engine_version
     #   The version number of the database engine to use.
     #
-    #   To list all of the available engine versions for MySQL 5.6-compatible
-    #   Aurora, use the following command:
-    #
-    #   `aws rds describe-db-engine-versions --engine aurora --query
-    #   "DBEngineVersions[].EngineVersion"`
-    #
-    #   To list all of the available engine versions for MySQL 5.7-compatible
-    #   and MySQL 8.0-compatible Aurora, use the following command:
+    #   To list all of the available engine versions for Aurora MySQL version
+    #   2 (5.7-compatible) and version 3 (MySQL 8.0-compatible), use the
+    #   following command:
     #
     #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
     #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   You can supply either `5.7` or `8.0` to use the default engine version
+    #   for Aurora MySQL version 2 or version 3, respectively.
     #
     #   To list all of the available engine versions for Aurora PostgreSQL,
     #   use the following command:
@@ -236,8 +231,8 @@ module Aws::RDS
     #
     #   **Aurora MySQL**
     #
-    #   For information, see [MySQL on Amazon RDS Versions][1] in the *Amazon
-    #   Aurora User Guide*.
+    #   For information, see [Database engine updates for Amazon Aurora
+    #   MySQL][1] in the *Amazon Aurora User Guide*.
     #
     #   **Aurora PostgreSQL**
     #
@@ -246,13 +241,13 @@ module Aws::RDS
     #
     #   **MySQL**
     #
-    #   For information, see [MySQL on Amazon RDS Versions][3] in the *Amazon
-    #   RDS User Guide*.
+    #   For information, see [Amazon RDS for MySQL][3] in the *Amazon RDS User
+    #   Guide*.
     #
     #   **PostgreSQL**
     #
-    #   For information, see [Amazon RDS for PostgreSQL versions and
-    #   extensions][4] in the *Amazon RDS User Guide*.
+    #   For information, see [Amazon RDS for PostgreSQL][4] in the *Amazon RDS
+    #   User Guide*.
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -512,26 +507,11 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # @option options [String] :engine_mode
-    #   The DB engine mode of the DB cluster, either `provisioned`,
-    #   `serverless`, `parallelquery`, `global`, or `multimaster`.
-    #
-    #   The `parallelquery` engine mode isn't required for Aurora MySQL
-    #   version 1.23 and higher 1.x versions, and version 2.09 and higher 2.x
-    #   versions.
-    #
-    #   The `global` engine mode isn't required for Aurora MySQL version 1.22
-    #   and higher 1.x versions, and `global` engine mode isn't required for
-    #   any 2.x versions.
-    #
-    #   The `multimaster` engine mode only applies for DB clusters created
-    #   with Aurora MySQL version 5.6.10a.
+    #   The DB engine mode of the DB cluster, either `provisioned` or
+    #   `serverless`.
     #
     #   The `serverless` engine mode only applies for Aurora Serverless v1 DB
     #   clusters.
-    #
-    #   For Aurora PostgreSQL, the `global` engine mode isn't required, and
-    #   both the `parallelquery` and the `multimaster` engine modes currently
-    #   aren't supported.
     #
     #   Limitations and requirements apply to some DB engine modes. For more
     #   information, see the following sections in the *Amazon Aurora User
@@ -541,11 +521,9 @@ module Aws::RDS
     #
     #   * [Requirements for Aurora Serverless v2][2]
     #
-    #   * [Limitations of Parallel Query][3]
+    #   * [Limitations of parallel query][3]
     #
-    #   * [Limitations of Aurora Global Databases][4]
-    #
-    #   * [Limitations of Multi-Master Clusters][5]
+    #   * [Limitations of Aurora global databases][4]
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -555,7 +533,6 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.requirements.html
     #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations
     #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations
-    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations
     # @option options [Types::ScalingConfiguration] :scaling_configuration
     #   For DB clusters in `serverless` DB engine mode, the scaling properties
     #   of the DB cluster.
@@ -670,8 +647,8 @@ module Aws::RDS
     #   be initially allocated for each DB instance in the Multi-AZ DB
     #   cluster.
     #
-    #   For information about valid IOPS values, see [Amazon RDS Provisioned
-    #   IOPS storage][1] in the *Amazon RDS User Guide*.
+    #   For information about valid IOPS values, see [Provisioned IOPS
+    #   storage][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required to create a Multi-AZ DB cluster.
     #
@@ -2767,8 +2744,6 @@ module Aws::RDS
     #   The database engine to return.
     #
     #   Valid Values:
-    #
-    #   * `aurora` (for MySQL 5.6-compatible Aurora)
     #
     #   * `aurora-mysql` (for MySQL 5.7-compatible and MySQL 8.0-compatible
     #     Aurora)

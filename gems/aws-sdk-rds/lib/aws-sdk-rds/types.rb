@@ -1767,6 +1767,12 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # An error occurred while trying to create the CEV.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateCustomDBEngineVersionFault AWS API Documentation
+    #
+    class CreateCustomDBEngineVersionFault < Aws::EmptyStructure; end
+
     # @!attribute [rw] engine
     #   The database engine to use for your custom engine version (CEV). The
     #   only supported value is `custom-oracle-ee`.
@@ -2028,10 +2034,7 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora` (for MySQL 5.6-compatible Aurora)
-    #
-    #   * `aurora-mysql` (for MySQL 5.7-compatible and MySQL 8.0-compatible
-    #     Aurora)
+    #   * `aurora-mysql`
     #
     #   * `aurora-postgresql`
     #
@@ -2045,18 +2048,15 @@ module Aws::RDS
     # @!attribute [rw] engine_version
     #   The version number of the database engine to use.
     #
-    #   To list all of the available engine versions for MySQL
-    #   5.6-compatible Aurora, use the following command:
-    #
-    #   `aws rds describe-db-engine-versions --engine aurora --query
-    #   "DBEngineVersions[].EngineVersion"`
-    #
-    #   To list all of the available engine versions for MySQL
-    #   5.7-compatible and MySQL 8.0-compatible Aurora, use the following
-    #   command:
+    #   To list all of the available engine versions for Aurora MySQL
+    #   version 2 (5.7-compatible) and version 3 (MySQL 8.0-compatible), use
+    #   the following command:
     #
     #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
     #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   You can supply either `5.7` or `8.0` to use the default engine
+    #   version for Aurora MySQL version 2 or version 3, respectively.
     #
     #   To list all of the available engine versions for Aurora PostgreSQL,
     #   use the following command:
@@ -2078,8 +2078,8 @@ module Aws::RDS
     #
     #   **Aurora MySQL**
     #
-    #   For information, see [MySQL on Amazon RDS Versions][1] in the
-    #   *Amazon Aurora User Guide*.
+    #   For information, see [Database engine updates for Amazon Aurora
+    #   MySQL][1] in the *Amazon Aurora User Guide*.
     #
     #   **Aurora PostgreSQL**
     #
@@ -2088,13 +2088,13 @@ module Aws::RDS
     #
     #   **MySQL**
     #
-    #   For information, see [MySQL on Amazon RDS Versions][3] in the
-    #   *Amazon RDS User Guide*.
+    #   For information, see [Amazon RDS for MySQL][3] in the *Amazon RDS
+    #   User Guide*.
     #
     #   **PostgreSQL**
     #
-    #   For information, see [Amazon RDS for PostgreSQL versions and
-    #   extensions][4] in the *Amazon RDS User Guide*.
+    #   For information, see [Amazon RDS for PostgreSQL][4] in the *Amazon
+    #   RDS User Guide*.
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -2385,26 +2385,11 @@ module Aws::RDS
     #   @return [Array<String>]
     #
     # @!attribute [rw] engine_mode
-    #   The DB engine mode of the DB cluster, either `provisioned`,
-    #   `serverless`, `parallelquery`, `global`, or `multimaster`.
-    #
-    #   The `parallelquery` engine mode isn't required for Aurora MySQL
-    #   version 1.23 and higher 1.x versions, and version 2.09 and higher
-    #   2.x versions.
-    #
-    #   The `global` engine mode isn't required for Aurora MySQL version
-    #   1.22 and higher 1.x versions, and `global` engine mode isn't
-    #   required for any 2.x versions.
-    #
-    #   The `multimaster` engine mode only applies for DB clusters created
-    #   with Aurora MySQL version 5.6.10a.
+    #   The DB engine mode of the DB cluster, either `provisioned` or
+    #   `serverless`.
     #
     #   The `serverless` engine mode only applies for Aurora Serverless v1
     #   DB clusters.
-    #
-    #   For Aurora PostgreSQL, the `global` engine mode isn't required, and
-    #   both the `parallelquery` and the `multimaster` engine modes
-    #   currently aren't supported.
     #
     #   Limitations and requirements apply to some DB engine modes. For more
     #   information, see the following sections in the *Amazon Aurora User
@@ -2414,11 +2399,9 @@ module Aws::RDS
     #
     #   * [Requirements for Aurora Serverless v2][2]
     #
-    #   * [Limitations of Parallel Query][3]
+    #   * [Limitations of parallel query][3]
     #
-    #   * [Limitations of Aurora Global Databases][4]
-    #
-    #   * [Limitations of Multi-Master Clusters][5]
+    #   * [Limitations of Aurora global databases][4]
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -2428,7 +2411,6 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.requirements.html
     #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations
     #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations
-    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations
     #   @return [String]
     #
     # @!attribute [rw] scaling_configuration
@@ -2568,8 +2550,8 @@ module Aws::RDS
     #   to be initially allocated for each DB instance in the Multi-AZ DB
     #   cluster.
     #
-    #   For information about valid IOPS values, see [Amazon RDS Provisioned
-    #   IOPS storage][1] in the *Amazon RDS User Guide*.
+    #   For information about valid IOPS values, see [Provisioned IOPS
+    #   storage][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required to create a Multi-AZ DB cluster.
     #
@@ -10773,8 +10755,6 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora` (for MySQL 5.6-compatible Aurora)
-    #
     #   * `aurora-mysql` (for MySQL 5.7-compatible and MySQL 8.0-compatible
     #     Aurora)
     #
@@ -12400,8 +12380,6 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora` (for MySQL 5.6-compatible Aurora)
-    #
     #   * `aurora-mysql` (for MySQL 5.7-compatible and MySQL 8.0-compatible
     #     Aurora)
     #
@@ -13654,8 +13632,8 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] global_cluster_members
-    #   The list of cluster IDs for secondary clusters within the global
-    #   database cluster. Currently limited to 1 item.
+    #   The list of primary and secondary clusters within the global
+    #   database cluster.
     #   @return [Array<Types::GlobalClusterMember>]
     #
     # @!attribute [rw] failover_state
@@ -14588,15 +14566,9 @@ module Aws::RDS
     #   applied during the next maintenance window unless `ApplyImmediately`
     #   is enabled.
     #
-    #   To list all of the available engine versions for MySQL
-    #   5.6-compatible Aurora, use the following command:
-    #
-    #   `aws rds describe-db-engine-versions --engine aurora --query
-    #   "DBEngineVersions[].EngineVersion"`
-    #
-    #   To list all of the available engine versions for MySQL
-    #   5.7-compatible and MySQL 8.0-compatible Aurora, use the following
-    #   command:
+    #   To list all of the available engine versions for Aurora MySQL
+    #   version 2 (5.7-compatible) and version 3 (MySQL 8.0-compatible), use
+    #   the following command:
     #
     #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
     #   "DBEngineVersions[].EngineVersion"`
@@ -18971,22 +18943,15 @@ module Aws::RDS
     # @!attribute [rw] engine
     #   The name of the database engine to be used for this DB cluster.
     #
-    #   Valid Values: `aurora` (for MySQL 5.6-compatible Aurora) and
-    #   `aurora-mysql` (for MySQL 5.7-compatible and MySQL 8.0-compatible
-    #   Aurora)
+    #   Valid Values: `aurora-mysql` (for MySQL 5.7-compatible and MySQL
+    #   8.0-compatible Aurora)
     #   @return [String]
     #
     # @!attribute [rw] engine_version
     #   The version number of the database engine to use.
     #
-    #   To list all of the available engine versions for `aurora` (for MySQL
-    #   5.6-compatible Aurora), use the following command:
-    #
-    #   `aws rds describe-db-engine-versions --engine aurora --query
-    #   "DBEngineVersions[].EngineVersion"`
-    #
-    #   To list all of the available engine versions for `aurora-mysql` (for
-    #   MySQL 5.7-compatible and MySQL 8.0-compatible Aurora), use the
+    #   To list all of the available engine versions for `aurora-mysql`
+    #   (MySQL 5.7-compatible and MySQL 8.0-compatible Aurora), use the
     #   following command:
     #
     #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
@@ -18994,8 +18959,7 @@ module Aws::RDS
     #
     #   **Aurora MySQL**
     #
-    #   Example: `5.6.10a`, `5.6.mysql_aurora.1.19.2`,
-    #   `5.7.mysql_aurora.2.07.1`, `8.0.mysql_aurora.3.02.0`
+    #   Examples: `5.7.mysql_aurora.2.07.1`, `8.0.mysql_aurora.3.02.0`
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -19184,10 +19148,6 @@ module Aws::RDS
     #   **Aurora MySQL**
     #
     #   Possible values are `audit`, `error`, `general`, and `slowquery`.
-    #
-    #   **Aurora PostgreSQL**
-    #
-    #   Possible value is `postgresql`.
     #
     #   For more information about exporting CloudWatch Logs for Amazon
     #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][1]
@@ -19442,13 +19402,9 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The version of the database engine to use for the new DB cluster.
-    #
-    #   To list all of the available engine versions for MySQL
-    #   5.6-compatible Aurora, use the following command:
-    #
-    #   `aws rds describe-db-engine-versions --engine aurora --query
-    #   "DBEngineVersions[].EngineVersion"`
+    #   The version of the database engine to use for the new DB cluster. If
+    #   you don't specify an engine version, the default version for the
+    #   database engine in the Amazon Web Services Region is used.
     #
     #   To list all of the available engine versions for MySQL
     #   5.7-compatible and MySQL 8.0-compatible Aurora, use the following
@@ -19477,8 +19433,8 @@ module Aws::RDS
     #
     #   **Aurora MySQL**
     #
-    #   See [MySQL on Amazon RDS Versions][1] in the *Amazon Aurora User
-    #   Guide*.
+    #   See [Database engine updates for Amazon Aurora MySQL][1] in the
+    #   *Amazon Aurora User Guide*.
     #
     #   **Aurora PostgreSQL**
     #
@@ -19487,8 +19443,7 @@ module Aws::RDS
     #
     #   **MySQL**
     #
-    #   See [MySQL on Amazon RDS Versions][3] in the *Amazon RDS User
-    #   Guide.*
+    #   See [Amazon RDS for MySQL][3] in the *Amazon RDS User Guide.*
     #
     #   **PostgreSQL**
     #
@@ -22803,6 +22758,28 @@ module Aws::RDS
     # @!attribute [rw] iam_role_arn
     #   The name of the IAM role to use for writing to the Amazon S3 bucket
     #   when exporting a snapshot or cluster.
+    #
+    #   In the IAM policy attached to your IAM role, include the following
+    #   required actions to allow the transfer of files from Amazon RDS or
+    #   Amazon Aurora to an S3 bucket:
+    #
+    #   * s3:PutObject*
+    #
+    #   * s3:GetObject*
+    #
+    #   * s3:ListBucket
+    #
+    #   * s3:DeleteObject*
+    #
+    #   * s3:GetBucketLocation
+    #
+    #   In the policy, include the resources to identify the S3 bucket and
+    #   objects in the bucket. The following list of resources shows the
+    #   Amazon Resource Name (ARN) format for accessing S3:
+    #
+    #   * `arn:aws:s3:::your-s3-bucket `
+    #
+    #   * `arn:aws:s3:::your-s3-bucket/*`
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -23169,7 +23146,7 @@ module Aws::RDS
     # Contains the details about a blue/green deployment.
     #
     # For more information, see [Using Amazon RDS Blue/Green Deployments for
-    # database updates][1] in the *Amazon RDS User Guide* and [ Using Amazon
+    # database updates][1] in the *Amazon RDS User Guide* and [Using Amazon
     # RDS Blue/Green Deployments for database updates][2] in the *Amazon
     # Aurora User Guide*.
     #
@@ -23193,17 +23170,20 @@ module Aws::RDS
     #
     #   Values:
     #
-    #   * `preparing-for-switchover` - The resource is being prepared to
-    #     switch over.
+    #   * `PROVISIONING` - The resource is being prepared to switch over.
     #
-    #   * `ready-for-switchover` - The resource is ready to switch over.
+    #   * `AVAILABLE` - The resource is ready to switch over.
     #
-    #   * `switchover-in-progress` - The resource is being switched over.
+    #   * `SWITCHOVER_IN_PROGRESS` - The resource is being switched over.
     #
-    #   * `switchover-completed` - The resource has been switched over.
+    #   * `SWITCHOVER_COMPLETED` - The resource has been switched over.
     #
-    #   * `switchover-failed` - The resource attempted to switch over but
+    #   * `SWITCHOVER_FAILED` - The resource attempted to switch over but
     #     failed.
+    #
+    #   * `MISSING_SOURCE` - The source resource has been deleted.
+    #
+    #   * `MISSING_TARGET` - The target resource has been deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverDetail AWS API Documentation

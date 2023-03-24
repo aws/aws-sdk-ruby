@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.173.0 (2023-03-24)
+------------------
+
+* Feature - Added error code CreateCustomDBEngineVersionFault for when the create custom engine version for Custom engines fails.
+
 1.172.0 (2023-02-15)
 ------------------
 

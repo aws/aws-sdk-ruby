@@ -34,6 +34,7 @@ module Aws::RDS
   # * {BlueGreenDeploymentAlreadyExistsFault}
   # * {BlueGreenDeploymentNotFoundFault}
   # * {CertificateNotFoundFault}
+  # * {CreateCustomDBEngineVersionFault}
   # * {CustomAvailabilityZoneNotFoundFault}
   # * {CustomDBEngineVersionAlreadyExistsFault}
   # * {CustomDBEngineVersionNotFoundFault}
@@ -223,6 +224,16 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::CertificateNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class CreateCustomDBEngineVersionFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::CreateCustomDBEngineVersionFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

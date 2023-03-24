@@ -1080,6 +1080,7 @@ module Aws::Comprehend
     EntitiesDetectionJobProperties.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
     EntitiesDetectionJobProperties.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
     EntitiesDetectionJobProperties.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    EntitiesDetectionJobProperties.add_member(:flywheel_arn, Shapes::ShapeRef.new(shape: ComprehendFlywheelArn, location_name: "FlywheelArn"))
     EntitiesDetectionJobProperties.struct_class = Types::EntitiesDetectionJobProperties
 
     EntitiesDetectionJobPropertiesList.member = Shapes::ShapeRef.new(shape: EntitiesDetectionJobProperties)

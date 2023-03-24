@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2023-03-24)
+------------------
+
+* Feature - Doc-only update to correct alarm actions list
+
 1.71.0 (2023-01-18)
 ------------------
 
