@@ -108,12 +108,16 @@ module Aws::IoTWireless
             Aws::IoTWireless::Endpoints::DeleteServiceProfile.build(context)
           when :delete_wireless_device
             Aws::IoTWireless::Endpoints::DeleteWirelessDevice.build(context)
+          when :delete_wireless_device_import_task
+            Aws::IoTWireless::Endpoints::DeleteWirelessDeviceImportTask.build(context)
           when :delete_wireless_gateway
             Aws::IoTWireless::Endpoints::DeleteWirelessGateway.build(context)
           when :delete_wireless_gateway_task
             Aws::IoTWireless::Endpoints::DeleteWirelessGatewayTask.build(context)
           when :delete_wireless_gateway_task_definition
             Aws::IoTWireless::Endpoints::DeleteWirelessGatewayTaskDefinition.build(context)
+          when :deregister_wireless_device
+            Aws::IoTWireless::Endpoints::DeregisterWirelessDevice.build(context)
           when :disassociate_aws_account_from_partner_account
             Aws::IoTWireless::Endpoints::DisassociateAwsAccountFromPartnerAccount.build(context)
           when :disassociate_multicast_group_from_fuota_task
@@ -164,6 +168,8 @@ module Aws::IoTWireless
             Aws::IoTWireless::Endpoints::GetServiceProfile.build(context)
           when :get_wireless_device
             Aws::IoTWireless::Endpoints::GetWirelessDevice.build(context)
+          when :get_wireless_device_import_task
+            Aws::IoTWireless::Endpoints::GetWirelessDeviceImportTask.build(context)
           when :get_wireless_device_statistics
             Aws::IoTWireless::Endpoints::GetWirelessDeviceStatistics.build(context)
           when :get_wireless_gateway
@@ -182,6 +188,8 @@ module Aws::IoTWireless
             Aws::IoTWireless::Endpoints::ListDestinations.build(context)
           when :list_device_profiles
             Aws::IoTWireless::Endpoints::ListDeviceProfiles.build(context)
+          when :list_devices_for_wireless_device_import_task
+            Aws::IoTWireless::Endpoints::ListDevicesForWirelessDeviceImportTask.build(context)
           when :list_event_configurations
             Aws::IoTWireless::Endpoints::ListEventConfigurations.build(context)
           when :list_fuota_tasks
@@ -202,6 +210,8 @@ module Aws::IoTWireless
             Aws::IoTWireless::Endpoints::ListServiceProfiles.build(context)
           when :list_tags_for_resource
             Aws::IoTWireless::Endpoints::ListTagsForResource.build(context)
+          when :list_wireless_device_import_tasks
+            Aws::IoTWireless::Endpoints::ListWirelessDeviceImportTasks.build(context)
           when :list_wireless_devices
             Aws::IoTWireless::Endpoints::ListWirelessDevices.build(context)
           when :list_wireless_gateway_task_definitions
@@ -228,6 +238,10 @@ module Aws::IoTWireless
             Aws::IoTWireless::Endpoints::StartFuotaTask.build(context)
           when :start_multicast_group_session
             Aws::IoTWireless::Endpoints::StartMulticastGroupSession.build(context)
+          when :start_single_wireless_device_import_task
+            Aws::IoTWireless::Endpoints::StartSingleWirelessDeviceImportTask.build(context)
+          when :start_wireless_device_import_task
+            Aws::IoTWireless::Endpoints::StartWirelessDeviceImportTask.build(context)
           when :tag_resource
             Aws::IoTWireless::Endpoints::TagResource.build(context)
           when :test_wireless_device
@@ -256,6 +270,8 @@ module Aws::IoTWireless
             Aws::IoTWireless::Endpoints::UpdateResourcePosition.build(context)
           when :update_wireless_device
             Aws::IoTWireless::Endpoints::UpdateWirelessDevice.build(context)
+          when :update_wireless_device_import_task
+            Aws::IoTWireless::Endpoints::UpdateWirelessDeviceImportTask.build(context)
           when :update_wireless_gateway
             Aws::IoTWireless::Endpoints::UpdateWirelessGateway.build(context)
           end

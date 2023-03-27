@@ -45,8 +45,8 @@ module Aws::Athena
     # Contains the application runtime IDs and their supported DPU sizes.
     #
     # @!attribute [rw] application_runtime_id
-    #   The name of the supported application runtime (for example, `Jupyter
-    #   1.0`).
+    #   The name of the supported application runtime (for example, `Athena
+    #   notebook version 1`).
     #   @return [String]
     #
     # @!attribute [rw] supported_dpu_sizes
@@ -690,13 +690,15 @@ module Aws::Athena
     #
     # @!attribute [rw] configuration
     #   Contains configuration information for creating an Athena SQL
-    #   workgroup, which includes the location in Amazon S3 where query
-    #   results are stored, the encryption configuration, if any, used for
-    #   encrypting query results, whether the Amazon CloudWatch Metrics are
-    #   enabled for the workgroup, the limit for the amount of bytes scanned
-    #   (cutoff) per query, if it is specified, and whether workgroup's
-    #   settings (specified with `EnforceWorkGroupConfiguration`) in the
-    #   `WorkGroupConfiguration` override client-side settings. See
+    #   workgroup or Spark enabled Athena workgroup. Athena SQL workgroup
+    #   configuration includes the location in Amazon S3 where query and
+    #   calculation results are stored, the encryption configuration, if
+    #   any, used for encrypting query results, whether the Amazon
+    #   CloudWatch Metrics are enabled for the workgroup, the limit for the
+    #   amount of bytes scanned (cutoff) per query, if it is specified, and
+    #   whether workgroup's settings (specified with
+    #   `EnforceWorkGroupConfiguration`) in the `WorkGroupConfiguration`
+    #   override client-side settings. See
     #   WorkGroupConfiguration$EnforceWorkGroupConfiguration.
     #   @return [Types::WorkGroupConfiguration]
     #
@@ -957,7 +959,8 @@ module Aws::Athena
     #
     # @!attribute [rw] recursive_delete_option
     #   The option to delete the workgroup and its contents even if the
-    #   workgroup contains any named queries or query executions.
+    #   workgroup contains any named queries, query executions, or
+    #   notebooks.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteWorkGroupInput AWS API Documentation
@@ -973,8 +976,9 @@ module Aws::Athena
     #
     class DeleteWorkGroupOutput < Aws::EmptyStructure; end
 
-    # If query results are encrypted in Amazon S3, indicates the encryption
-    # option used (for example, `SSE_KMS` or `CSE_KMS`) and key information.
+    # If query and calculation results are encrypted in Amazon S3, indicates
+    # the encryption option used (for example, `SSE_KMS` or `CSE_KMS`) and
+    # key information.
     #
     # @!attribute [rw] encryption_option
     #   Indicates whether Amazon S3 server-side encryption with Amazon
@@ -1022,11 +1026,11 @@ module Aws::Athena
     #
     # @!attribute [rw] additional_configs
     #   Contains additional notebook engine `MAP<string, string>` parameter
-    #   mappings in the form of key-value pairs. To specify an Amazon S3 URI
-    #   that the Jupyter server will download and serve, specify a value for
-    #   the StartSessionRequest$NotebookVersion field, and then add a key
-    #   named `NotebookFileURI` to `AdditionalConfigs` that has value of the
-    #   Amazon S3 URI.
+    #   mappings in the form of key-value pairs. To specify an Athena
+    #   notebook that the Jupyter server will download and serve, specify a
+    #   value for the StartSessionRequest$NotebookVersion field, and then
+    #   add a key named `NotebookId` to `AdditionalConfigs` that has the
+    #   value of the Athena notebook ID.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/EngineConfiguration AWS API Documentation
@@ -1181,7 +1185,7 @@ module Aws::Athena
     end
 
     # @!attribute [rw] code_block
-    #   A pre-signed URL to the code that executed the calculation.
+    #   The unencrypted code that was executed for the calculation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetCalculationExecutionCodeResponse AWS API Documentation
@@ -1703,7 +1707,7 @@ module Aws::Athena
     end
 
     # @!attribute [rw] notebook_id
-    #   The ID of the notebook to import.
+    #   The ID assigned to the imported notebook.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ImportNotebookOutput AWS API Documentation
@@ -2681,12 +2685,12 @@ module Aws::Athena
     #   @return [String]
     #
     # @!attribute [rw] result_configuration
-    #   The location in Amazon S3 where query results were stored and the
-    #   encryption option, if any, used for query results. These are known
-    #   as "client-side settings". If workgroup settings override
-    #   client-side settings, then the query uses the location for the query
-    #   results and the encryption configuration that are specified for the
-    #   workgroup.
+    #   The location in Amazon S3 where query and calculation results are
+    #   stored and the encryption option, if any, used for query results.
+    #   These are known as "client-side settings". If workgroup settings
+    #   override client-side settings, then the query uses the location for
+    #   the query results and the encryption configuration that are
+    #   specified for the workgroup.
     #   @return [Types::ResultConfiguration]
     #
     # @!attribute [rw] result_reuse_configuration
@@ -3096,19 +3100,21 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # The location in Amazon S3 where query results are stored and the
-    # encryption option, if any, used for query results. These are known as
-    # "client-side settings". If workgroup settings override client-side
-    # settings, then the query uses the workgroup settings.
+    # The location in Amazon S3 where query and calculation results are
+    # stored and the encryption option, if any, used for query and
+    # calculation results. These are known as "client-side settings". If
+    # workgroup settings override client-side settings, then the query uses
+    # the workgroup settings.
     #
     # @!attribute [rw] output_location
-    #   The location in Amazon S3 where your query results are stored, such
-    #   as `s3://path/to/query/bucket/`. To run the query, you must specify
-    #   the query results location using one of the ways: either for
-    #   individual queries using either this setting (client-side), or in
-    #   the workgroup, using WorkGroupConfiguration. If none of them is set,
-    #   Athena issues an error that no output location is provided. For more
-    #   information, see [Query Results][1]. If workgroup settings override
+    #   The location in Amazon S3 where your query and calculation results
+    #   are stored, such as `s3://path/to/query/bucket/`. To run the query,
+    #   you must specify the query results location using one of the ways:
+    #   either for individual queries using either this setting
+    #   (client-side), or in the workgroup, using WorkGroupConfiguration. If
+    #   none of them is set, Athena issues an error that no output location
+    #   is provided. For more information, see [Working with query results,
+    #   recent queries, and output files][1]. If workgroup settings override
     #   client-side settings, then the query uses the settings specified for
     #   the workgroup. See
     #   WorkGroupConfiguration$EnforceWorkGroupConfiguration.
@@ -3119,12 +3125,13 @@ module Aws::Athena
     #   @return [String]
     #
     # @!attribute [rw] encryption_configuration
-    #   If query results are encrypted in Amazon S3, indicates the
-    #   encryption option used (for example, `SSE_KMS` or `CSE_KMS`) and key
-    #   information. This is a client-side setting. If workgroup settings
-    #   override client-side settings, then the query uses the encryption
-    #   configuration that is specified for the workgroup, and also uses the
-    #   location for storing query results specified in the workgroup. See
+    #   If query and calculation results are encrypted in Amazon S3,
+    #   indicates the encryption option used (for example, `SSE_KMS` or
+    #   `CSE_KMS`) and key information. This is a client-side setting. If
+    #   workgroup settings override client-side settings, then the query
+    #   uses the encryption configuration that is specified for the
+    #   workgroup, and also uses the location for storing query results
+    #   specified in the workgroup. See
     #   WorkGroupConfiguration$EnforceWorkGroupConfiguration and [Workgroup
     #   Settings Override Client-Side Settings][1].
     #
@@ -3185,12 +3192,13 @@ module Aws::Athena
     # location and encryption configuration for the query results.
     #
     # @!attribute [rw] output_location
-    #   The location in Amazon S3 where your query results are stored, such
-    #   as `s3://path/to/query/bucket/`. For more information, see [Query
-    #   Results][1] If workgroup settings override client-side settings,
-    #   then the query uses the location for the query results and the
-    #   encryption configuration that are specified for the workgroup. The
-    #   "workgroup settings override" is specified in
+    #   The location in Amazon S3 where your query and calculation results
+    #   are stored, such as `s3://path/to/query/bucket/`. For more
+    #   information, see [Working with query results, recent queries, and
+    #   output files][1]. If workgroup settings override client-side
+    #   settings, then the query uses the location for the query results and
+    #   the encryption configuration that are specified for the workgroup.
+    #   The "workgroup settings override" is specified in
     #   `EnforceWorkGroupConfiguration` (true/false) in the
     #   `WorkGroupConfiguration`. See
     #   WorkGroupConfiguration$EnforceWorkGroupConfiguration.
@@ -3216,7 +3224,7 @@ module Aws::Athena
     #   @return [Boolean]
     #
     # @!attribute [rw] encryption_configuration
-    #   The encryption configuration for the query results.
+    #   The encryption configuration for query and calculation results.
     #   @return [Types::EncryptionConfiguration]
     #
     # @!attribute [rw] remove_encryption_configuration
@@ -3437,9 +3445,9 @@ module Aws::Athena
     #   @return [Integer]
     #
     # @!attribute [rw] encryption_configuration
-    #   If query results are encrypted in Amazon S3, indicates the
-    #   encryption option used (for example, `SSE_KMS` or `CSE_KMS`) and key
-    #   information.
+    #   If query and calculation results are encrypted in Amazon S3,
+    #   indicates the encryption option used (for example, `SSE_KMS` or
+    #   `CSE_KMS`) and key information.
     #   @return [Types::EncryptionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/SessionConfiguration AWS API Documentation
@@ -3453,7 +3461,7 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # Contains statistics for a notebook session.
+    # Contains statistics for a session.
     #
     # @!attribute [rw] dpu_execution_in_millis
     #   The data processing unit execution time for a session in
@@ -3468,7 +3476,7 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # Contains information about the status of a notebook session.
+    # Contains information about the status of a session.
     #
     # @!attribute [rw] start_date_time
     #   The date and time that the session started.
@@ -3528,7 +3536,7 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # Contains summary information about a notebook session.
+    # Contains summary information about a session.
     #
     # @!attribute [rw] session_id
     #   The session ID.
@@ -3727,9 +3735,12 @@ module Aws::Athena
     #   @return [Types::EngineConfiguration]
     #
     # @!attribute [rw] notebook_version
-    #   The notebook version. This value is required only when requesting
-    #   that a notebook server be started for the session. The only valid
-    #   notebook version is `Jupyter1.0`.
+    #   The notebook version. This value is supplied automatically for
+    #   notebook sessions in the Athena console and is not required for
+    #   programmatic session access. The only valid notebook version is
+    #   `Athena notebook version 1`. If you specify a value for
+    #   `NotebookVersion`, you must also specify a value for `NotebookId`.
+    #   See EngineConfiguration$AdditionalConfigs.
     #   @return [String]
     #
     # @!attribute [rw] session_idle_timeout_in_minutes
@@ -3917,7 +3928,7 @@ module Aws::Athena
     #
     #
     #
-    # [1]: https://aws.amazon.com/answers/account-management/aws-tagging-strategies/
+    # [1]: https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html
     #
     # @!attribute [rw] key
     #   A tag key. The tag key length is from 1 to 128 Unicode characters in
@@ -4243,7 +4254,8 @@ module Aws::Athena
     #   @return [String]
     #
     # @!attribute [rw] session_id
-    #   The ID of the session in which the notebook will be updated.
+    #   The active notebook session ID. Required if the notebook has an
+    #   active session.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -4390,12 +4402,12 @@ module Aws::Athena
     #
     # @!attribute [rw] configuration
     #   The configuration of the workgroup, which includes the location in
-    #   Amazon S3 where query results are stored, the encryption
-    #   configuration, if any, used for query results; whether the Amazon
-    #   CloudWatch Metrics are enabled for the workgroup; whether workgroup
-    #   settings override client-side settings; and the data usage limits
-    #   for the amount of data scanned per query or per workgroup. The
-    #   workgroup settings override is specified in
+    #   Amazon S3 where query and calculation results are stored, the
+    #   encryption configuration, if any, used for query and calculation
+    #   results; whether the Amazon CloudWatch Metrics are enabled for the
+    #   workgroup; whether workgroup settings override client-side settings;
+    #   and the data usage limits for the amount of data scanned per query
+    #   or per workgroup. The workgroup settings override is specified in
     #   `EnforceWorkGroupConfiguration` (true/false) in the
     #   `WorkGroupConfiguration`. See
     #   WorkGroupConfiguration$EnforceWorkGroupConfiguration.
@@ -4422,24 +4434,27 @@ module Aws::Athena
     end
 
     # The configuration of the workgroup, which includes the location in
-    # Amazon S3 where query results are stored, the encryption option, if
-    # any, used for query results, whether the Amazon CloudWatch Metrics are
-    # enabled for the workgroup and whether workgroup settings override
-    # query settings, and the data usage limits for the amount of data
-    # scanned per query or per workgroup. The workgroup settings override is
-    # specified in `EnforceWorkGroupConfiguration` (true/false) in the
+    # Amazon S3 where query and calculation results are stored, the
+    # encryption option, if any, used for query and calculation results,
+    # whether the Amazon CloudWatch Metrics are enabled for the workgroup
+    # and whether workgroup settings override query settings, and the data
+    # usage limits for the amount of data scanned per query or per
+    # workgroup. The workgroup settings override is specified in
+    # `EnforceWorkGroupConfiguration` (true/false) in the
     # `WorkGroupConfiguration`. See
     # WorkGroupConfiguration$EnforceWorkGroupConfiguration.
     #
     # @!attribute [rw] result_configuration
     #   The configuration for the workgroup, which includes the location in
-    #   Amazon S3 where query results are stored and the encryption option,
-    #   if any, used for query results. To run the query, you must specify
-    #   the query results location using one of the ways: either in the
-    #   workgroup using this setting, or for individual queries
-    #   (client-side), using ResultConfiguration$OutputLocation. If none of
-    #   them is set, Athena issues an error that no output location is
-    #   provided. For more information, see [Query Results][1].
+    #   Amazon S3 where query and calculation results are stored and the
+    #   encryption option, if any, used for query and calculation results.
+    #   To run the query, you must specify the query results location using
+    #   one of the ways: either in the workgroup using this setting, or for
+    #   individual queries (client-side), using
+    #   ResultConfiguration$OutputLocation. If none of them is set, Athena
+    #   issues an error that no output location is provided. For more
+    #   information, see [Working with query results, recent queries, and
+    #   output files][1].
     #
     #
     #
@@ -4493,13 +4508,26 @@ module Aws::Athena
     #   @return [String]
     #
     # @!attribute [rw] execution_role
-    #   Role used in a notebook session for accessing the user's resources.
+    #   Role used in a session for accessing the user's resources.
     #   @return [String]
     #
     # @!attribute [rw] customer_content_encryption_configuration
     #   Specifies the KMS key that is used to encrypt the user's data
     #   stores in Athena.
     #   @return [Types::CustomerContentEncryptionConfiguration]
+    #
+    # @!attribute [rw] enable_minimum_encryption_configuration
+    #   Enforces a minimal level of encryption for the workgroup for query
+    #   and calculation results that are written to Amazon S3. When enabled,
+    #   workgroup users can set encryption only to the minimum level set by
+    #   the administrator or higher when they submit queries.
+    #
+    #   The `EnforceWorkGroupConfiguration` setting takes precedence over
+    #   the `EnableMinimumEncryptionConfiguration` flag. This means that if
+    #   `EnforceWorkGroupConfiguration` is true, the
+    #   `EnableMinimumEncryptionConfiguration` flag is ignored, and the
+    #   workgroup configuration for encryption is used.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/WorkGroupConfiguration AWS API Documentation
     #
@@ -4512,18 +4540,19 @@ module Aws::Athena
       :engine_version,
       :additional_configuration,
       :execution_role,
-      :customer_content_encryption_configuration)
+      :customer_content_encryption_configuration,
+      :enable_minimum_encryption_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The configuration information that will be updated for this workgroup,
-    # which includes the location in Amazon S3 where query results are
-    # stored, the encryption option, if any, used for query results, whether
-    # the Amazon CloudWatch Metrics are enabled for the workgroup, whether
-    # the workgroup settings override the client-side settings, and the data
-    # usage limit for the amount of bytes scanned per query, if it is
-    # specified.
+    # which includes the location in Amazon S3 where query and calculation
+    # results are stored, the encryption option, if any, used for query
+    # results, whether the Amazon CloudWatch Metrics are enabled for the
+    # workgroup, whether the workgroup settings override the client-side
+    # settings, and the data usage limit for the amount of bytes scanned per
+    # query, if it is specified.
     #
     # @!attribute [rw] enforce_work_group_configuration
     #   If set to "true", the settings for the workgroup override
@@ -4597,6 +4626,20 @@ module Aws::Athena
     #   stores in Athena.
     #   @return [Types::CustomerContentEncryptionConfiguration]
     #
+    # @!attribute [rw] enable_minimum_encryption_configuration
+    #   Enforces a minimal level of encryption for the workgroup for query
+    #   and calculation results that are written to Amazon S3. When enabled,
+    #   workgroup users can set encryption only to the minimum level set by
+    #   the administrator or higher when they submit queries. This setting
+    #   does not apply to Spark-enabled workgroups.
+    #
+    #   The `EnforceWorkGroupConfiguration` setting takes precedence over
+    #   the `EnableMinimumEncryptionConfiguration` flag. This means that if
+    #   `EnforceWorkGroupConfiguration` is true, the
+    #   `EnableMinimumEncryptionConfiguration` flag is ignored, and the
+    #   workgroup configuration for encryption is used.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/WorkGroupConfigurationUpdates AWS API Documentation
     #
     class WorkGroupConfigurationUpdates < Struct.new(
@@ -4610,7 +4653,8 @@ module Aws::Athena
       :remove_customer_content_encryption_configuration,
       :additional_configuration,
       :execution_role,
-      :customer_content_encryption_configuration)
+      :customer_content_encryption_configuration,
+      :enable_minimum_encryption_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

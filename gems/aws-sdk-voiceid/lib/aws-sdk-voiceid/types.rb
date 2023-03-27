@@ -24,6 +24,41 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_id
+    #   The identifier of the domain that contains the fraudster.
+    #   @return [String]
+    #
+    # @!attribute [rw] fraudster_id
+    #   The identifier of the fraudster to be associated with the watchlist.
+    #   @return [String]
+    #
+    # @!attribute [rw] watchlist_id
+    #   The identifier of the watchlist you want to associate with the
+    #   fraudster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/AssociateFraudsterRequest AWS API Documentation
+    #
+    class AssociateFraudsterRequest < Struct.new(
+      :domain_id,
+      :fraudster_id,
+      :watchlist_id)
+      SENSITIVE = [:fraudster_id]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fraudster
+    #   Contains all the information about a fraudster.
+    #   @return [Types::Fraudster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/AssociateFraudsterResponse AWS API Documentation
+    #
+    class AssociateFraudsterResponse < Struct.new(
+      :fraudster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration used to authenticate a speaker during a session.
     #
     # @!attribute [rw] acceptance_threshold
@@ -42,12 +77,12 @@ module Aws::VoiceID
     # current session state and streamed audio of the speaker.
     #
     # @!attribute [rw] audio_aggregation_ended_at
-    #   A timestamp indicating when audio aggregation ended for this
-    #   authentication result.
+    #   A timestamp of when audio aggregation ended for this authentication
+    #   result.
     #   @return [Time]
     #
     # @!attribute [rw] audio_aggregation_started_at
-    #   A timestamp indicating when audio aggregation started for this
+    #   A timestamp of when audio aggregation started for this
     #   authentication result.
     #   @return [Time]
     #
@@ -141,15 +176,21 @@ module Aws::VoiceID
     end
 
     # @!attribute [rw] client_token
-    #   The idempotency token for creating a new domain. If not provided,
-    #   Amazon Web Services SDK populates this field.
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A brief description of the domain.
+    #   A brief description of this domain.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -195,6 +236,55 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A brief description of this watchlist.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The identifier of the domain that contains the watchlist.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the watchlist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/CreateWatchlistRequest AWS API Documentation
+    #
+    class CreateWatchlistRequest < Struct.new(
+      :client_token,
+      :description,
+      :domain_id,
+      :name)
+      SENSITIVE = [:description, :name]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] watchlist
+    #   Information about the newly created watchlist.
+    #   @return [Types::Watchlist]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/CreateWatchlistResponse AWS API Documentation
+    #
+    class CreateWatchlistResponse < Struct.new(
+      :watchlist)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] domain_id
     #   The identifier of the domain you want to delete.
     #   @return [String]
@@ -208,7 +298,7 @@ module Aws::VoiceID
     end
 
     # @!attribute [rw] domain_id
-    #   The identifier of the domain containing the fraudster.
+    #   The identifier of the domain that contains the fraudster.
     #   @return [String]
     #
     # @!attribute [rw] fraudster_id
@@ -225,7 +315,7 @@ module Aws::VoiceID
     end
 
     # @!attribute [rw] domain_id
-    #   The identifier of the domain containing the speaker.
+    #   The identifier of the domain that contains the speaker.
     #   @return [String]
     #
     # @!attribute [rw] speaker_id
@@ -242,7 +332,24 @@ module Aws::VoiceID
     end
 
     # @!attribute [rw] domain_id
-    #   The identifier of the domain you are describing.
+    #   The identifier of the domain that contains the watchlist.
+    #   @return [String]
+    #
+    # @!attribute [rw] watchlist_id
+    #   The identifier of the watchlist to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/DeleteWatchlistRequest AWS API Documentation
+    #
+    class DeleteWatchlistRequest < Struct.new(
+      :domain_id,
+      :watchlist_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_id
+    #   The identifier of the domain that you are describing.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/DescribeDomainRequest AWS API Documentation
@@ -266,13 +373,12 @@ module Aws::VoiceID
     end
 
     # @!attribute [rw] domain_id
-    #   The identifier for the domain containing the fraudster registration
-    #   job.
+    #   The identifier of the domain that contains the fraudster
+    #   registration job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
-    #   The identifier for the fraudster registration job you are
-    #   describing.
+    #   The identifier of the fraudster registration job you are describing.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/DescribeFraudsterRegistrationJobRequest AWS API Documentation
@@ -297,7 +403,7 @@ module Aws::VoiceID
     end
 
     # @!attribute [rw] domain_id
-    #   The identifier of the domain containing the fraudster.
+    #   The identifier of the domain that contains the fraudster.
     #   @return [String]
     #
     # @!attribute [rw] fraudster_id
@@ -326,7 +432,8 @@ module Aws::VoiceID
     end
 
     # @!attribute [rw] domain_id
-    #   The identifier of the domain containing the speaker enrollment job.
+    #   The identifier of the domain that contains the speaker enrollment
+    #   job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
@@ -383,6 +490,71 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_id
+    #   The identifier of the domain that contains the watchlist.
+    #   @return [String]
+    #
+    # @!attribute [rw] watchlist_id
+    #   The identifier of the watchlist that you are describing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/DescribeWatchlistRequest AWS API Documentation
+    #
+    class DescribeWatchlistRequest < Struct.new(
+      :domain_id,
+      :watchlist_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] watchlist
+    #   Information about the specified watchlist.
+    #   @return [Types::Watchlist]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/DescribeWatchlistResponse AWS API Documentation
+    #
+    class DescribeWatchlistResponse < Struct.new(
+      :watchlist)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_id
+    #   The identifier of the domain that contains the fraudster.
+    #   @return [String]
+    #
+    # @!attribute [rw] fraudster_id
+    #   The identifier of the fraudster to be disassociated from the
+    #   watchlist.
+    #   @return [String]
+    #
+    # @!attribute [rw] watchlist_id
+    #   The identifier of the watchlist that you want to disassociate from
+    #   the fraudster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/DisassociateFraudsterRequest AWS API Documentation
+    #
+    class DisassociateFraudsterRequest < Struct.new(
+      :domain_id,
+      :fraudster_id,
+      :watchlist_id)
+      SENSITIVE = [:fraudster_id]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fraudster
+    #   Contains all the information about a fraudster.
+    #   @return [Types::Fraudster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/DisassociateFraudsterResponse AWS API Documentation
+    #
+    class DisassociateFraudsterResponse < Struct.new(
+      :fraudster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains all the information about a domain.
     #
     # @!attribute [rw] arn
@@ -390,15 +562,15 @@ module Aws::VoiceID
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The timestamp at which the domain is created.
+    #   The timestamp of when the domain was created.
     #   @return [Time]
     #
     # @!attribute [rw] description
-    #   The client-provided description of the domain.
+    #   The description of the domain.
     #   @return [String]
     #
     # @!attribute [rw] domain_id
-    #   The service-generated identifier for the domain.
+    #   The identifier of the domain.
     #   @return [String]
     #
     # @!attribute [rw] domain_status
@@ -406,7 +578,7 @@ module Aws::VoiceID
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The client-provided name for the domain.
+    #   The name for the domain.
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
@@ -423,8 +595,13 @@ module Aws::VoiceID
     #   @return [Types::ServerSideEncryptionUpdateDetails]
     #
     # @!attribute [rw] updated_at
-    #   The timestamp showing the domain's last update.
+    #   The timestamp of when the domain was last update.
     #   @return [Time]
+    #
+    # @!attribute [rw] watchlist_details
+    #   The watchlist details of a domain. Contains the default watchlist ID
+    #   of the domain.
+    #   @return [Types::WatchlistDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/Domain AWS API Documentation
     #
@@ -437,7 +614,8 @@ module Aws::VoiceID
       :name,
       :server_side_encryption_configuration,
       :server_side_encryption_update_details,
-      :updated_at)
+      :updated_at,
+      :watchlist_details)
       SENSITIVE = [:description, :name]
       include Aws::Structure
     end
@@ -449,15 +627,15 @@ module Aws::VoiceID
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The timestamp showing when the domain is created.
+    #   The timestamp of when the domain was created.
     #   @return [Time]
     #
     # @!attribute [rw] description
-    #   The client-provided description of the domain.
+    #   The description of the domain.
     #   @return [String]
     #
     # @!attribute [rw] domain_id
-    #   The service-generated identifier for the domain.
+    #   The identifier of the domain.
     #   @return [String]
     #
     # @!attribute [rw] domain_status
@@ -482,8 +660,13 @@ module Aws::VoiceID
     #   @return [Types::ServerSideEncryptionUpdateDetails]
     #
     # @!attribute [rw] updated_at
-    #   The timestamp showing the domain's last update.
+    #   The timestamp of when the domain was last updated.
     #   @return [Time]
+    #
+    # @!attribute [rw] watchlist_details
+    #   Provides information about `watchlistDetails` and
+    #   `DefaultWatchlistID`.
+    #   @return [Types::WatchlistDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/DomainSummary AWS API Documentation
     #
@@ -496,7 +679,8 @@ module Aws::VoiceID
       :name,
       :server_side_encryption_configuration,
       :server_side_encryption_update_details,
-      :updated_at)
+      :updated_at,
+      :watchlist_details)
       SENSITIVE = [:description, :name]
       include Aws::Structure
     end
@@ -527,9 +711,8 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # The configuration defining the action to take when a speaker is
-    # flagged by the fraud detection system during a batch speaker
-    # enrollment job, and the risk threshold to use for identification.
+    # The fraud detection configuration to be used during the batch speaker
+    # enrollment job.
     #
     # @!attribute [rw] fraud_detection_action
     #   The action to take when the given speaker is flagged by the fraud
@@ -546,11 +729,17 @@ module Aws::VoiceID
     #   a fraudster.
     #   @return [Integer]
     #
+    # @!attribute [rw] watchlist_ids
+    #   The identifier of watchlists against which fraud detection is
+    #   performed.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/EnrollmentJobFraudDetectionConfig AWS API Documentation
     #
     class EnrollmentJobFraudDetectionConfig < Struct.new(
       :fraud_detection_action,
-      :risk_threshold)
+      :risk_threshold,
+      :watchlist_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -579,7 +768,7 @@ module Aws::VoiceID
     #   @return [Types::AuthenticationResult]
     #
     # @!attribute [rw] domain_id
-    #   The identifier of the domain containing the session.
+    #   The identifier of the domain that contains the session.
     #   @return [String]
     #
     # @!attribute [rw] fraud_detection_result
@@ -649,10 +838,16 @@ module Aws::VoiceID
     #   threshold, the speaker is considered a fraudster.
     #   @return [Integer]
     #
+    # @!attribute [rw] watchlist_id
+    #   The identifier of the watchlist against which fraud detection is
+    #   performed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/FraudDetectionConfiguration AWS API Documentation
     #
     class FraudDetectionConfiguration < Struct.new(
-      :risk_threshold)
+      :risk_threshold,
+      :watchlist_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -661,12 +856,12 @@ module Aws::VoiceID
     # current session state and streamed audio of the speaker.
     #
     # @!attribute [rw] audio_aggregation_ended_at
-    #   A timestamp indicating when audio aggregation ended for this fraud
-    #   detection result.
+    #   A timestamp of when audio aggregation ended for this fraud detection
+    #   result.
     #   @return [Time]
     #
     # @!attribute [rw] audio_aggregation_started_at
-    #   A timestamp indicating when audio aggregation started for this fraud
+    #   A timestamp of when audio aggregation started for this fraud
     #   detection result.
     #   @return [Time]
     #
@@ -740,23 +935,28 @@ module Aws::VoiceID
     # Contains all the information about a fraudster.
     #
     # @!attribute [rw] created_at
-    #   The timestamp when Voice ID identified the fraudster.
+    #   The timestamp of when Voice ID identified the fraudster.
     #   @return [Time]
     #
     # @!attribute [rw] domain_id
-    #   The identifier for the domain containing the fraudster.
+    #   The identifier of the domain that contains the fraudster.
     #   @return [String]
     #
     # @!attribute [rw] generated_fraudster_id
     #   The service-generated identifier for the fraudster.
     #   @return [String]
     #
+    # @!attribute [rw] watchlist_ids
+    #   The identifier of the watchlists the fraudster is a part of.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/Fraudster AWS API Documentation
     #
     class Fraudster < Struct.new(
       :created_at,
       :domain_id,
-      :generated_fraudster_id)
+      :generated_fraudster_id,
+      :watchlist_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -764,8 +964,7 @@ module Aws::VoiceID
     # Contains all the information about a fraudster registration job.
     #
     # @!attribute [rw] created_at
-    #   A timestamp showing the creation time of the fraudster registration
-    #   job.
+    #   A timestamp of when the fraudster registration job was created.
     #   @return [Time]
     #
     # @!attribute [rw] data_access_role_arn
@@ -775,12 +974,12 @@ module Aws::VoiceID
     #   @return [String]
     #
     # @!attribute [rw] domain_id
-    #   The identifier of the domain containing the fraudster registration
-    #   job.
+    #   The identifier of the domain that contains the fraudster
+    #   registration job.
     #   @return [String]
     #
     # @!attribute [rw] ended_at
-    #   A timestamp showing when the fraudster registration job ended.
+    #   A timestamp of when the fraudster registration job ended.
     #   @return [Time]
     #
     # @!attribute [rw] failure_details
@@ -847,16 +1046,16 @@ module Aws::VoiceID
     # Contains a summary of information about a fraudster registration job.
     #
     # @!attribute [rw] created_at
-    #   A timestamp showing when the fraudster registration job is created.
+    #   A timestamp of when the fraudster registration job was created.
     #   @return [Time]
     #
     # @!attribute [rw] domain_id
-    #   The identifier of the domain containing the fraudster registration
-    #   job.
+    #   The identifier of the domain that contains the fraudster
+    #   registration job.
     #   @return [String]
     #
     # @!attribute [rw] ended_at
-    #   A timestamp showing when the fraudster registration job ended.
+    #   A timestamp of when the fraudster registration job ended.
     #   @return [Time]
     #
     # @!attribute [rw] failure_details
@@ -896,6 +1095,35 @@ module Aws::VoiceID
       :job_progress,
       :job_status)
       SENSITIVE = [:job_name]
+      include Aws::Structure
+    end
+
+    # Contains a summary of information about a fraudster.
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the fraudster summary was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] domain_id
+    #   The identifier of the domain that contains the fraudster summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] generated_fraudster_id
+    #   The service-generated identifier for the fraudster.
+    #   @return [String]
+    #
+    # @!attribute [rw] watchlist_ids
+    #   The identifier of the watchlists the fraudster is a part of.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/FraudsterSummary AWS API Documentation
+    #
+    class FraudsterSummary < Struct.new(
+      :created_at,
+      :domain_id,
+      :generated_fraudster_id,
+      :watchlist_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -967,7 +1195,9 @@ module Aws::VoiceID
     end
 
     # @!attribute [rw] max_results
-    #   The maximum number of domains to list per API call.
+    #   The maximum number of results that are returned per call. You can
+    #   use `NextToken` to obtain more pages of results. The default is 100;
+    #   the maximum allowed page size is also 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1010,8 +1240,8 @@ module Aws::VoiceID
     end
 
     # @!attribute [rw] domain_id
-    #   The identifier of the domain containing the fraudster registration
-    #   Jobs.
+    #   The identifier of the domain that contains the fraudster
+    #   registration Jobs.
     #   @return [String]
     #
     # @!attribute [rw] job_status
@@ -1020,8 +1250,8 @@ module Aws::VoiceID
     #
     # @!attribute [rw] max_results
     #   The maximum number of results that are returned per call. You can
-    #   use `NextToken` to obtain further pages of results. The default is
-    #   100; the maximum allowed page size is also 100.
+    #   use `NextToken` to obtain more pages of results. The default is 100;
+    #   the maximum allowed page size is also 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1066,7 +1296,65 @@ module Aws::VoiceID
     end
 
     # @!attribute [rw] domain_id
-    #   The identifier of the domain containing the speaker enrollment jobs.
+    #   The identifier of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results that are returned per call. You can
+    #   use `NextToken` to obtain more pages of results. The default is 100;
+    #   the maximum allowed page size is also 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If `NextToken` is returned, there are more results available. The
+    #   value of `NextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] watchlist_id
+    #   The identifier of the watchlist. If provided, all fraudsters in the
+    #   watchlist are listed. If not provided, all fraudsters in the domain
+    #   are listed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/ListFraudstersRequest AWS API Documentation
+    #
+    class ListFraudstersRequest < Struct.new(
+      :domain_id,
+      :max_results,
+      :next_token,
+      :watchlist_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fraudster_summaries
+    #   A list that contains details about each fraudster in the Amazon Web
+    #   Services account.
+    #   @return [Array<Types::FraudsterSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If `NextToken` is returned, there are more results available. The
+    #   value of `NextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/ListFraudstersResponse AWS API Documentation
+    #
+    class ListFraudstersResponse < Struct.new(
+      :fraudster_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_id
+    #   The identifier of the domain that contains the speaker enrollment
+    #   jobs.
     #   @return [String]
     #
     # @!attribute [rw] job_status
@@ -1075,8 +1363,8 @@ module Aws::VoiceID
     #
     # @!attribute [rw] max_results
     #   The maximum number of results that are returned per call. You can
-    #   use `NextToken` to obtain further pages of results. The default is
-    #   100; the maximum allowed page size is also 100.
+    #   use `NextToken` to obtain more pages of results. The default is 100;
+    #   the maximum allowed page size is also 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1126,8 +1414,8 @@ module Aws::VoiceID
     #
     # @!attribute [rw] max_results
     #   The maximum number of results that are returned per call. You can
-    #   use `NextToken` to obtain further pages of results. The default is
-    #   100; the maximum allowed page size is also 100.
+    #   use `NextToken` to obtain more pages of results. The default is 100;
+    #   the maximum allowed page size is also 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1196,7 +1484,57 @@ module Aws::VoiceID
     end
 
     # @!attribute [rw] domain_id
-    #   The identifier of the domain containing the speaker.
+    #   The identifier of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results that are returned per call. You can
+    #   use `NextToken` to obtain more pages of results. The default is 100;
+    #   the maximum allowed page size is also 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If `NextToken` is returned, there are more results available. The
+    #   value of `NextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/ListWatchlistsRequest AWS API Documentation
+    #
+    class ListWatchlistsRequest < Struct.new(
+      :domain_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If `NextToken` is returned, there are more results available. The
+    #   value of `NextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] watchlist_summaries
+    #   A list that contains details about each watchlist in the Amazon Web
+    #   Services account.
+    #   @return [Array<Types::WatchlistSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/ListWatchlistsResponse AWS API Documentation
+    #
+    class ListWatchlistsResponse < Struct.new(
+      :next_token,
+      :watchlist_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_id
+    #   The identifier of the domain that contains the speaker.
     #   @return [String]
     #
     # @!attribute [rw] speaker_id
@@ -1249,10 +1587,8 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
-    # The configuration defining the action to take when a duplicate
-    # fraudster is detected, and the similarity threshold to use for
-    # detecting a duplicate fraudster during a batch fraudster registration
-    # job.
+    # The registration configuration to be used during the batch fraudster
+    # registration job.
     #
     # @!attribute [rw] duplicate_registration_action
     #   The action to take when a fraudster is identified as a duplicate.
@@ -1266,11 +1602,18 @@ module Aws::VoiceID
     #   order to consider the new fraudster a duplicate.
     #   @return [Integer]
     #
+    # @!attribute [rw] watchlist_ids
+    #   The identifiers of watchlists that a fraudster is registered to. If
+    #   a watchlist isn't provided, the fraudsters are registered to the
+    #   default watchlist.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/RegistrationConfig AWS API Documentation
     #
     class RegistrationConfig < Struct.new(
       :duplicate_registration_action,
-      :fraudster_similarity_threshold)
+      :fraudster_similarity_threshold,
+      :watchlist_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1368,7 +1711,7 @@ module Aws::VoiceID
     # Contains all the information about a speaker.
     #
     # @!attribute [rw] created_at
-    #   A timestamp showing when the speaker is created.
+    #   A timestamp of when the speaker was created.
     #   @return [Time]
     #
     # @!attribute [rw] customer_speaker_id
@@ -1384,7 +1727,7 @@ module Aws::VoiceID
     #   @return [String]
     #
     # @!attribute [rw] last_accessed_at
-    #   The timestamp when the speaker was last accessed for enrollment,
+    #   The timestamp of when the speaker was last accessed for enrollment,
     #   re-enrollment or a successful authentication. This timestamp is
     #   accurate to one hour.
     #   @return [Time]
@@ -1394,7 +1737,7 @@ module Aws::VoiceID
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   A timestamp showing the speaker's last update.
+    #   A timestamp of the speaker's last update.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/Speaker AWS API Documentation
@@ -1414,7 +1757,7 @@ module Aws::VoiceID
     # Contains all the information about a speaker enrollment job.
     #
     # @!attribute [rw] created_at
-    #   A timestamp showing the creation of the speaker enrollment job.
+    #   A timestamp of when the speaker enrollment job was created.
     #   @return [Time]
     #
     # @!attribute [rw] data_access_role_arn
@@ -1429,7 +1772,7 @@ module Aws::VoiceID
     #   @return [String]
     #
     # @!attribute [rw] ended_at
-    #   A timestamp showing when the speaker enrollment job ended.
+    #   A timestamp of when the speaker enrollment job ended.
     #   @return [Time]
     #
     # @!attribute [rw] enrollment_config
@@ -1496,7 +1839,7 @@ module Aws::VoiceID
     # Contains a summary of information about a speaker enrollment job.
     #
     # @!attribute [rw] created_at
-    #   A timestamp showing the creation time of the speaker enrollment job.
+    #   A timestamp of when of the speaker enrollment job was created.
     #   @return [Time]
     #
     # @!attribute [rw] domain_id
@@ -1505,7 +1848,7 @@ module Aws::VoiceID
     #   @return [String]
     #
     # @!attribute [rw] ended_at
-    #   A timestamp showing when the speaker enrollment job ended.
+    #   A timestamp of when the speaker enrollment job ended.
     #   @return [Time]
     #
     # @!attribute [rw] failure_details
@@ -1596,11 +1939,17 @@ module Aws::VoiceID
     end
 
     # @!attribute [rw] client_token
-    #   The idempotency token for starting a new fraudster registration job.
-    #   If not provided, Amazon Web Services SDK populates this field.
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @!attribute [rw] data_access_role_arn
@@ -1616,8 +1965,8 @@ module Aws::VoiceID
     #   @return [String]
     #
     # @!attribute [rw] domain_id
-    #   The identifier of the domain containing the fraudster registration
-    #   job and in which the fraudsters are registered.
+    #   The identifier of the domain that contains the fraudster
+    #   registration job and in which the fraudsters are registered.
     #   @return [String]
     #
     # @!attribute [rw] input_data_config
@@ -1668,11 +2017,17 @@ module Aws::VoiceID
     end
 
     # @!attribute [rw] client_token
-    #   The idempotency token for starting a new speaker enrollment Job. If
-    #   not provided, Amazon Web Services SDK populates this field.
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @!attribute [rw] data_access_role_arn
@@ -1828,7 +2183,7 @@ module Aws::VoiceID
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] description
-    #   A brief description of the domain.
+    #   A brief description about this domain.
     #   @return [String]
     #
     # @!attribute [rw] domain_id
@@ -1872,6 +2227,45 @@ module Aws::VoiceID
       include Aws::Structure
     end
 
+    # @!attribute [rw] description
+    #   A brief description about this watchlist.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The identifier of the domain that contains the watchlist.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the watchlist.
+    #   @return [String]
+    #
+    # @!attribute [rw] watchlist_id
+    #   The identifier of the watchlist to be updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/UpdateWatchlistRequest AWS API Documentation
+    #
+    class UpdateWatchlistRequest < Struct.new(
+      :description,
+      :domain_id,
+      :name,
+      :watchlist_id)
+      SENSITIVE = [:description, :name]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] watchlist
+    #   Details about the updated watchlist.
+    #   @return [Types::Watchlist]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/UpdateWatchlistResponse AWS API Documentation
+    #
+    class UpdateWatchlistResponse < Struct.new(
+      :watchlist)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request failed one or more validations; check the error message
     # for more details.
     #
@@ -1899,6 +2293,110 @@ module Aws::VoiceID
     class VoiceSpoofingRisk < Struct.new(
       :risk_score)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains all the information about a watchlist.
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the watchlist was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] default_watchlist
+    #   Whether the specified watchlist is the default watchlist of a
+    #   domain.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   The description of the watchlist.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The identifier of the domain that contains the watchlist.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name for the watchlist.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp of when the watchlist was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] watchlist_id
+    #   The identifier of the watchlist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/Watchlist AWS API Documentation
+    #
+    class Watchlist < Struct.new(
+      :created_at,
+      :default_watchlist,
+      :description,
+      :domain_id,
+      :name,
+      :updated_at,
+      :watchlist_id)
+      SENSITIVE = [:description, :name]
+      include Aws::Structure
+    end
+
+    # Details of the watchlists in a domain.
+    #
+    # @!attribute [rw] default_watchlist_id
+    #   The identifier of the default watchlist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/WatchlistDetails AWS API Documentation
+    #
+    class WatchlistDetails < Struct.new(
+      :default_watchlist_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a summary of information about a watchlist.
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the watchlist was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] default_watchlist
+    #   Whether the specified watchlist is the default watchlist of a
+    #   domain.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   The description of the watchlist.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The identifier of the domain that contains the watchlist.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name for the watchlist.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp of when the watchlist was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] watchlist_id
+    #   The identifier of the watchlist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/WatchlistSummary AWS API Documentation
+    #
+    class WatchlistSummary < Struct.new(
+      :created_at,
+      :default_watchlist,
+      :description,
+      :domain_id,
+      :name,
+      :updated_at,
+      :watchlist_id)
+      SENSITIVE = [:description, :name]
       include Aws::Structure
     end
 

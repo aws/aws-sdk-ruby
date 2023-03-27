@@ -3098,6 +3098,9 @@ module Aws::MediaLive
     #   the video characteristics of that source.
     #   @return [Types::InputDeviceUhdSettings]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputDeviceResponse AWS API Documentation
     #
     class DescribeInputDeviceResponse < Struct.new(
@@ -3112,7 +3115,8 @@ module Aws::MediaLive
       :network_settings,
       :serial_number,
       :type,
-      :uhd_device_settings)
+      :uhd_device_settings,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5744,10 +5748,16 @@ module Aws::MediaLive
     #   https://docs.aws.amazon.com/medialive/latest/ug/variable-data-identifiers.html
     #   @return [String]
     #
+    # @!attribute [rw] id_3
+    #   Base64 string formatted according to the ID3 specification:
+    #   http://id3.org/id3v2.4.0-structure
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsId3SegmentTaggingScheduleActionSettings AWS API Documentation
     #
     class HlsId3SegmentTaggingScheduleActionSettings < Struct.new(
-      :tag)
+      :tag,
+      :id_3)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6276,6 +6286,10 @@ module Aws::MediaLive
     #   Settings that describe an input device that is type UHD.
     #   @return [Types::InputDeviceUhdSettings]
     #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDevice AWS API Documentation
     #
     class InputDevice < Struct.new(
@@ -6290,7 +6304,8 @@ module Aws::MediaLive
       :network_settings,
       :serial_number,
       :type,
-      :uhd_device_settings)
+      :uhd_device_settings,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6519,6 +6534,10 @@ module Aws::MediaLive
     #   Settings that describe an input device that is type UHD.
     #   @return [Types::InputDeviceUhdSettings]
     #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceSummary AWS API Documentation
     #
     class InputDeviceSummary < Struct.new(
@@ -6533,7 +6552,8 @@ module Aws::MediaLive
       :network_settings,
       :serial_number,
       :type,
-      :uhd_device_settings)
+      :uhd_device_settings,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11819,6 +11839,9 @@ module Aws::MediaLive
     #   the video characteristics of that source.
     #   @return [Types::InputDeviceUhdSettings]
     #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputDeviceResponse AWS API Documentation
     #
     class UpdateInputDeviceResponse < Struct.new(
@@ -11833,7 +11856,8 @@ module Aws::MediaLive
       :network_settings,
       :serial_number,
       :type,
-      :uhd_device_settings)
+      :uhd_device_settings,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

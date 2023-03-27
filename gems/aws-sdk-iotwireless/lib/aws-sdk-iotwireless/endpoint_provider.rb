@@ -43,21 +43,6 @@ module Aws::IoTWireless
             end
             raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
           end
-          if Aws::Endpoints::Matchers.string_equals?(region, "ap-northeast-1")
-            return Aws::Endpoints::Endpoint.new(url: "https://api.iotwireless.ap-northeast-1.amazonaws.com", headers: {}, properties: {})
-          end
-          if Aws::Endpoints::Matchers.string_equals?(region, "ap-southeast-2")
-            return Aws::Endpoints::Endpoint.new(url: "https://api.iotwireless.ap-southeast-2.amazonaws.com", headers: {}, properties: {})
-          end
-          if Aws::Endpoints::Matchers.string_equals?(region, "eu-west-1")
-            return Aws::Endpoints::Endpoint.new(url: "https://api.iotwireless.eu-west-1.amazonaws.com", headers: {}, properties: {})
-          end
-          if Aws::Endpoints::Matchers.string_equals?(region, "us-east-1")
-            return Aws::Endpoints::Endpoint.new(url: "https://api.iotwireless.us-east-1.amazonaws.com", headers: {}, properties: {})
-          end
-          if Aws::Endpoints::Matchers.string_equals?(region, "us-west-2")
-            return Aws::Endpoints::Endpoint.new(url: "https://api.iotwireless.us-west-2.amazonaws.com", headers: {}, properties: {})
-          end
           return Aws::Endpoints::Endpoint.new(url: "https://api.iotwireless.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
         end
       end

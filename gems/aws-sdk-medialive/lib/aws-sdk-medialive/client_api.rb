@@ -1485,6 +1485,7 @@ module Aws::MediaLive
     DescribeInputDeviceResponse.add_member(:serial_number, Shapes::ShapeRef.new(shape: __string, location_name: "serialNumber"))
     DescribeInputDeviceResponse.add_member(:type, Shapes::ShapeRef.new(shape: InputDeviceType, location_name: "type"))
     DescribeInputDeviceResponse.add_member(:uhd_device_settings, Shapes::ShapeRef.new(shape: InputDeviceUhdSettings, location_name: "uhdDeviceSettings"))
+    DescribeInputDeviceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DescribeInputDeviceResponse.struct_class = Types::DescribeInputDeviceResponse
 
     DescribeInputDeviceThumbnailRequest.add_member(:input_device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputDeviceId"))
@@ -1944,7 +1945,8 @@ module Aws::MediaLive
     HlsGroupSettings.add_member(:ts_file_mode, Shapes::ShapeRef.new(shape: HlsTsFileMode, location_name: "tsFileMode"))
     HlsGroupSettings.struct_class = Types::HlsGroupSettings
 
-    HlsId3SegmentTaggingScheduleActionSettings.add_member(:tag, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "tag"))
+    HlsId3SegmentTaggingScheduleActionSettings.add_member(:tag, Shapes::ShapeRef.new(shape: __string, location_name: "tag"))
+    HlsId3SegmentTaggingScheduleActionSettings.add_member(:id_3, Shapes::ShapeRef.new(shape: __string, location_name: "id3"))
     HlsId3SegmentTaggingScheduleActionSettings.struct_class = Types::HlsId3SegmentTaggingScheduleActionSettings
 
     HlsInputSettings.add_member(:bandwidth, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "bandwidth"))
@@ -2048,6 +2050,7 @@ module Aws::MediaLive
     InputDevice.add_member(:serial_number, Shapes::ShapeRef.new(shape: __string, location_name: "serialNumber"))
     InputDevice.add_member(:type, Shapes::ShapeRef.new(shape: InputDeviceType, location_name: "type"))
     InputDevice.add_member(:uhd_device_settings, Shapes::ShapeRef.new(shape: InputDeviceUhdSettings, location_name: "uhdDeviceSettings"))
+    InputDevice.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     InputDevice.struct_class = Types::InputDevice
 
     InputDeviceConfigurableSettings.add_member(:configured_input, Shapes::ShapeRef.new(shape: InputDeviceConfiguredInput, location_name: "configuredInput"))
@@ -2095,6 +2098,7 @@ module Aws::MediaLive
     InputDeviceSummary.add_member(:serial_number, Shapes::ShapeRef.new(shape: __string, location_name: "serialNumber"))
     InputDeviceSummary.add_member(:type, Shapes::ShapeRef.new(shape: InputDeviceType, location_name: "type"))
     InputDeviceSummary.add_member(:uhd_device_settings, Shapes::ShapeRef.new(shape: InputDeviceUhdSettings, location_name: "uhdDeviceSettings"))
+    InputDeviceSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     InputDeviceSummary.struct_class = Types::InputDeviceSummary
 
     InputDeviceUhdSettings.add_member(:active_input, Shapes::ShapeRef.new(shape: InputDeviceActiveInput, location_name: "activeInput"))
@@ -3154,6 +3158,7 @@ module Aws::MediaLive
     UpdateInputDeviceResponse.add_member(:serial_number, Shapes::ShapeRef.new(shape: __string, location_name: "serialNumber"))
     UpdateInputDeviceResponse.add_member(:type, Shapes::ShapeRef.new(shape: InputDeviceType, location_name: "type"))
     UpdateInputDeviceResponse.add_member(:uhd_device_settings, Shapes::ShapeRef.new(shape: InputDeviceUhdSettings, location_name: "uhdDeviceSettings"))
+    UpdateInputDeviceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     UpdateInputDeviceResponse.struct_class = Types::UpdateInputDeviceResponse
 
     UpdateInputRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestinationRequest, location_name: "destinations"))

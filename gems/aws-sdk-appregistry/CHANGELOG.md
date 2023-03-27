@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2023-03-27)
+------------------
+
+* Feature - In this release, we started supporting ARN in applicationSpecifier and attributeGroupSpecifier. GetAttributeGroup, ListAttributeGroups and ListAttributeGroupsForApplication APIs will now have CreatedBy field in the response.
+
 1.19.0 (2023-01-18)
 ------------------
 

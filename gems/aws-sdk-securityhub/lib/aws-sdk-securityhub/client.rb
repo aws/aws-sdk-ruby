@@ -1824,12 +1824,15 @@ module Aws::SecurityHub
 
     # Declines invitations to become a member account.
     #
-    # This operation is only used by accounts that are not part of an
-    # organization. Organization accounts do not receive invitations.
+    # A prospective member account uses this operation to decline an
+    # invitation to become a member.
+    #
+    # This operation is only called by member accounts that aren't part of
+    # an organization. Organization accounts don't receive invitations.
     #
     # @option params [required, Array<String>] :account_ids
-    #   The list of account IDs for the accounts from which to decline the
-    #   invitations to Security Hub.
+    #   The list of prospective member account IDs for which to decline an
+    #   invitation.
     #
     # @return [Types::DeclineInvitationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1948,11 +1951,16 @@ module Aws::SecurityHub
     # Deletes invitations received by the Amazon Web Services account to
     # become a member account.
     #
-    # This operation is only used by accounts that are not part of an
-    # organization. Organization accounts do not receive invitations.
+    # A Security Hub administrator account can use this operation to delete
+    # invitations sent to one or more member accounts.
+    #
+    # This operation is only used to delete invitations that are sent to
+    # member accounts that aren't part of an organization. Organization
+    # accounts don't receive invitations.
     #
     # @option params [required, Array<String>] :account_ids
-    #   The list of the account IDs that sent the invitations to delete.
+    #   The list of member account IDs that received the invitations you want
+    #   to delete.
     #
     # @return [Types::DeleteInvitationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2560,7 +2568,7 @@ module Aws::SecurityHub
     #   The value for this field in a member account matches the value in the
     #   administrator account. For accounts that aren't part of an
     #   organization, the default value of this field is `SECURITY_CONTROL` if
-    #   you enabled Security Hub on or after February 9, 2023.
+    #   you enabled Security Hub on or after February 23, 2023.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5966,7 +5974,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

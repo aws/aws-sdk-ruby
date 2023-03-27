@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2023-03-27)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports ID3 tag insertion for audio only HLS output groups. AWS Elemental Link devices now support tagging.
+
 1.97.0 (2023-03-03)
 ------------------
 

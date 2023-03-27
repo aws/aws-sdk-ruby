@@ -4811,7 +4811,7 @@ module Aws::Connect
     # previous version of this API. It has new metrics, offers filtering at
     # a metric level, and offers the ability to filter and group data by
     # channels, queues, routing profiles, agents, and agent hierarchy
-    # levels. It can retrieve historical data for last the 14 days, in
+    # levels. It can retrieve historical data for the last 14 days, in
     # 24-hour intervals.
     #
     # For a description of the historical metrics that are supported by
@@ -8156,16 +8156,31 @@ module Aws::Connect
     #
     # @option params [Integer] :chat_duration_in_minutes
     #   The total duration of the newly started chat session. If not
-    #   specified, the chat session duration defaults to 25 hour. The minumum
+    #   specified, the chat session duration defaults to 25 hour. The minimum
     #   configurable time is 60 minutes. The maximum configurable time is
     #   10,080 minutes (7 days).
     #
     # @option params [Array<String>] :supported_messaging_content_types
-    #   The supported chat message content types. Content types must always
-    #   contain `text/plain`. You can then put any other supported type in the
-    #   list. For example, all the following lists are valid because they
-    #   contain `text/plain`: `[text/plain, text/markdown, application/json]`,
-    #   `[text/markdown, text/plain]`, `[text/plain, application/json]`.
+    #   The supported chat message content types. Supported types are
+    #   `text/plain`, `text/markdown`, `application/json`,
+    #   `application/vnd.amazonaws.connect.message.interactive`, and
+    #   `application/vnd.amazonaws.connect.message.interactive.response`.
+    #
+    #   Content types must always contain `text/plain`. You can then put any
+    #   other supported type in the list. For example, all the following lists
+    #   are valid because they contain `text/plain`: `[text/plain,
+    #   text/markdown, application/json]`, `[text/markdown, text/plain]`,
+    #   `[text/plain, application/json,
+    #   application/vnd.amazonaws.connect.message.interactive.response]`.
+    #
+    #   <note markdown="1"> The type `application/vnd.amazonaws.connect.message.interactive` is
+    #   required to use the [Show view][1] flow block.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/show-view-block.html
     #
     # @option params [Types::PersistentChat] :persistent_chat
     #   Enable persistent chats. For more information about enabling
@@ -8175,6 +8190,14 @@ module Aws::Connect
     #
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html
+    #
+    # @option params [String] :related_contact_id
+    #   The unique identifier for an Amazon Connect contact. This identifier
+    #   is related to the chat starting.
+    #
+    #   <note markdown="1"> You cannot provide data for both RelatedContactId and PersistentChat.
+    #
+    #    </note>
     #
     # @return [Types::StartChatContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8205,6 +8228,7 @@ module Aws::Connect
     #       rehydration_type: "ENTIRE_PAST_SESSION", # accepts ENTIRE_PAST_SESSION, FROM_SEGMENT
     #       source_contact_id: "ContactId",
     #     },
+    #     related_contact_id: "ContactId",
     #   })
     #
     # @example Response structure
@@ -10749,7 +10773,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

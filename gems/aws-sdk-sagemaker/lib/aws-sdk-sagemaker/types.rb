@@ -1822,7 +1822,8 @@ module Aws::SageMaker
     #     `AutoMLCandidateGenerationConfig` uses the full set of algorithms
     #     for the given training mode.
     #
-    #   For the list of all algorithms per training mode, see .
+    #   For the list of all algorithms per training mode, see `
+    #   AutoMLAlgorithmConfig `.
     #
     #   For more information on each algorithm, see the [Algorithm
     #   support][2] section in Autopilot developer guide.
@@ -1871,7 +1872,7 @@ module Aws::SageMaker
     # A channel is a named input source that training algorithms can
     # consume. The validation dataset size is limited to less than 2 GB. The
     # training dataset size must be less than 100 GB. For more information,
-    # see .
+    # see `  Channel `.
     #
     # <note markdown="1"> A validation dataset must contain the same headers as the training
     # dataset.
@@ -1922,20 +1923,22 @@ module Aws::SageMaker
     end
 
     # A list of container definitions that describe the different containers
-    # that make up an AutoML candidate. For more information, see .
+    # that make up an AutoML candidate. For more information, see `
+    # ContainerDefinition `.
     #
     # @!attribute [rw] image
     #   The Amazon Elastic Container Registry (Amazon ECR) path of the
-    #   container. For more information, see .
+    #   container. For more information, see `  ContainerDefinition `.
     #   @return [String]
     #
     # @!attribute [rw] model_data_url
-    #   The location of the model artifacts. For more information, see .
+    #   The location of the model artifacts. For more information, see `
+    #   ContainerDefinition `.
     #   @return [String]
     #
     # @!attribute [rw] environment
     #   The environment variables to set in the container. For more
-    #   information, see .
+    #   information, see `  ContainerDefinition `.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLContainerDefinition AWS API Documentation
@@ -2008,8 +2011,8 @@ module Aws::SageMaker
 
     # A channel is a named input source that training algorithms can
     # consume. This channel is used for the non tabular training data of an
-    # AutoML job using the V2 API. For tabular training data, see . For more
-    # information, see .
+    # AutoML job using the V2 API. For tabular training data, see `
+    # AutoMLChannel `. For more information, see `  Channel `.
     #
     # @!attribute [rw] channel_type
     #   The type of channel. Defines whether the data are used for training
@@ -2061,7 +2064,8 @@ module Aws::SageMaker
     # @!attribute [rw] max_runtime_per_training_job_in_seconds
     #   The maximum time, in seconds, that each training job executed inside
     #   hyperparameter tuning is allowed to run as part of a hyperparameter
-    #   tuning job. For more information, see the used by the action.
+    #   tuning job. For more information, see the ` StoppingCondition ` used
+    #   by the ` CreateHyperParameterTuningJob ` action.
     #
     #   For V2 jobs (jobs created by calling `CreateAutoMLJobV2`), this
     #   field controls the runtime of the job candidate.
@@ -4485,9 +4489,10 @@ module Aws::SageMaker
     # @!attribute [rw] input_data_config
     #   An array of channel objects that describes the input data and its
     #   location. Each channel is a named input source. Similar to
-    #   `InputDataConfig` supported by . Format(s) supported: CSV, Parquet.
-    #   A minimum of 500 rows is required for the training dataset. There is
-    #   not a minimum number of rows required for the validation dataset.
+    #   `InputDataConfig` supported by ` HyperParameterTrainingJobDefinition
+    #   `. Format(s) supported: CSV, Parquet. A minimum of 500 rows is
+    #   required for the training dataset. There is not a minimum number of
+    #   rows required for the validation dataset.
     #   @return [Array<Types::AutoMLChannel>]
     #
     # @!attribute [rw] output_data_config
@@ -4499,18 +4504,18 @@ module Aws::SageMaker
     # @!attribute [rw] problem_type
     #   Defines the type of supervised learning problem available for the
     #   candidates. For more information, see [ Amazon SageMaker Autopilot
-    #   problem types and algorithm support][1].
+    #   problem types][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-problem-types.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types
     #   @return [String]
     #
     # @!attribute [rw] auto_ml_job_objective
     #   Defines the objective metric used to measure the predictive quality
-    #   of an AutoML job. You provide an AutoMLJobObjective$MetricName and
-    #   Autopilot infers whether to minimize or maximize it. For , only
-    #   `Accuracy` is supported.
+    #   of an AutoML job. You provide an ` AutoMLJobObjective$MetricName `
+    #   and Autopilot infers whether to minimize or maximize it. For `
+    #   CreateAutoMLJobV2 `, only `Accuracy` is supported.
     #   @return [Types::AutoMLJobObjective]
     #
     # @!attribute [rw] auto_ml_job_config
@@ -4580,18 +4585,14 @@ module Aws::SageMaker
     #
     # @!attribute [rw] auto_ml_job_input_data_config
     #   An array of channel objects describing the input data and their
-    #   location. Each channel is a named input source. Similar to
-    #   [InputDataConfig][1] supported by `CreateAutoMLJob`. The supported
+    #   location. Each channel is a named input source. Similar to `
+    #   InputDataConfig ` supported by `CreateAutoMLJob`. The supported
     #   formats depend on the problem type:
     #
     #   * ImageClassification: S3Prefix, `ManifestFile`,
     #     `AugmentedManifestFile`
     #
     #   * TextClassification: S3Prefix
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html#sagemaker-CreateAutoMLJob-request-InputDataConfig
     #   @return [Array<Types::AutoMLJobChannel>]
     #
     # @!attribute [rw] output_data_config
@@ -4626,7 +4627,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] auto_ml_job_objective
     #   Specifies a metric to minimize or maximize as the objective of a
-    #   job. For , only `Accuracy` is supported.
+    #   job. For ` CreateAutoMLJobV2 `, only `Accuracy` is supported.
     #   @return [Types::AutoMLJobObjective]
     #
     # @!attribute [rw] model_deploy_config
@@ -17598,7 +17599,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] metric_name
     #   The name of the metric with the best result. For a description of
-    #   the possible objective metrics, see AutoMLJobObjective$MetricName.
+    #   the possible objective metrics, see ` AutoMLJobObjective$MetricName
+    #   `.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -19494,7 +19496,7 @@ module Aws::SageMaker
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html
     #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html#sagemaker-CreateTrainingJob-request-Environment
-    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTrainingJobDefinition AWS API Documentation
@@ -20252,8 +20254,8 @@ module Aws::SageMaker
     #   reaches the `MaxResource` value, it is stopped. If a value for
     #   `MaxResource` is not provided, and `Hyperband` is selected as the
     #   hyperparameter tuning strategy, `HyperbandTrainingJ` attempts to
-    #   infer `MaxResource` from the following keys (if present) in
-    #   [StaticsHyperParameters][1]:
+    #   infer `MaxResource` from the following keys (if present) in `
+    #   StaticsHyperParameters `:
     #
     #   * `epochs`
     #
@@ -20268,8 +20270,8 @@ module Aws::SageMaker
     #   If `HyperbandStrategyConfig` is unable to infer a value for
     #   `MaxResource`, it generates a validation error. The maximum value is
     #   20,000 epochs. All metrics that correspond to an objective metric
-    #   are used to derive [early stopping decisions][2]. For
-    #   [distributive][3] training jobs, ensure that duplicate metrics are
+    #   are used to derive [early stopping decisions][1]. For
+    #   [distributive][2] training jobs, ensure that duplicate metrics are
     #   not printed in the logs across the individual nodes in a training
     #   job. If multiple nodes are publishing duplicate or incorrect
     #   metrics, training jobs may make an incorrect stopping decision and
@@ -20277,9 +20279,8 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-StaticHyperParameters
-    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html
-    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/distributed-training.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/distributed-training.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperbandStrategyConfig AWS API Documentation
@@ -27087,9 +27088,17 @@ module Aws::SageMaker
     end
 
     # Specifies a metric that the training algorithm writes to `stderr` or
-    # `stdout`. SageMakerhyperparameter tuning captures all defined metrics.
-    # You specify one metric that a hyperparameter tuning job uses as its
-    # objective metric to choose the best training job.
+    # `stdout`. You can view these logs to understand how your training job
+    # performs and check for any errors encountered during training.
+    # SageMaker hyperparameter tuning captures all defined metrics. Specify
+    # one of the defined metrics to use as an objective metric using the
+    # [TuningObjective][1] parameter in the
+    # `HyperParameterTrainingJobDefinition` API to evaluate job performance
+    # during hyperparameter tuning.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-TuningObjective
     #
     # @!attribute [rw] name
     #   The name of the metric.
@@ -27098,12 +27107,12 @@ module Aws::SageMaker
     # @!attribute [rw] regex
     #   A regular expression that searches the output of a training job and
     #   gets the value of the metric. For more information about using
-    #   regular expressions to define metrics, see [Defining Objective
-    #   Metrics][1].
+    #   regular expressions to define metrics, see [Defining metrics and
+    #   environment variables][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MetricDefinition AWS API Documentation

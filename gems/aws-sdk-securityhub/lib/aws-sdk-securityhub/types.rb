@@ -329,6 +329,68 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The associations between a route table and one or more subnets or a
+    # gateway.
+    #
+    # @!attribute [rw] association_state
+    #   The state of the association between a route table and a subnet or
+    #   gateway.
+    #   @return [Types::AssociationStateDetails]
+    #
+    # @!attribute [rw] gateway_id
+    #   The ID of the internet gateway or virtual private gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] main
+    #   Indicates whether this is the main route table.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] route_table_association_id
+    #   The ID of the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] route_table_id
+    #   The ID of the route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet. A subnet ID is not returned for an implicit
+    #   association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AssociationSetDetails AWS API Documentation
+    #
+    class AssociationSetDetails < Struct.new(
+      :association_state,
+      :gateway_id,
+      :main,
+      :route_table_association_id,
+      :route_table_id,
+      :subnet_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the state of an association between a route table and a
+    # subnet or gateway.
+    #
+    # @!attribute [rw] state
+    #   The state of the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message, if applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AssociationStateDetails AWS API Documentation
+    #
+    class AssociationStateDetails < Struct.new(
+      :state,
+      :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an Availability Zone.
     #
     # @!attribute [rw] zone_name
@@ -4459,6 +4521,10 @@ module Aws::SecurityHub
     #   Details about the metadata options for the Amazon EC2 instance.
     #   @return [Types::AwsEc2InstanceMetadataOptions]
     #
+    # @!attribute [rw] monitoring
+    #   Describes the type of monitoring that’s turned on for an instance.
+    #   @return [Types::AwsEc2InstanceMonitoringDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2InstanceDetails AWS API Documentation
     #
     class AwsEc2InstanceDetails < Struct.new(
@@ -4473,7 +4539,8 @@ module Aws::SecurityHub
       :launched_at,
       :network_interfaces,
       :virtualization_type,
-      :metadata_options)
+      :metadata_options,
+      :monitoring)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4513,6 +4580,21 @@ module Aws::SecurityHub
       :http_put_response_hop_limit,
       :http_tokens,
       :instance_metadata_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The type of monitoring that’s turned on for an Amazon EC2 instance.
+    #
+    # @!attribute [rw] state
+    #   Indicates whether detailed monitoring is turned on. Otherwise, basic
+    #   monitoring is turned on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2InstanceMonitoringDetails AWS API Documentation
+    #
+    class AwsEc2InstanceMonitoringDetails < Struct.new(
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6071,6 +6153,46 @@ module Aws::SecurityHub
     class AwsEc2NetworkInterfaceSecurityGroup < Struct.new(
       :group_name,
       :group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about a route table for the specified VPC.
+    #
+    # @!attribute [rw] association_set
+    #   The associations between a route table and one or more subnets or a
+    #   gateway.
+    #   @return [Array<Types::AssociationSetDetails>]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the Amazon Web Services account that owns the route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] propagating_vgw_set
+    #   Describes a virtual private gateway propagating route.
+    #   @return [Array<Types::PropagatingVgwSetDetails>]
+    #
+    # @!attribute [rw] route_table_id
+    #   The ID of the route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] route_set
+    #   The routes in the route table.
+    #   @return [Array<Types::RouteSetDetails>]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the virtual private cloud (VPC).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2RouteTableDetails AWS API Documentation
+    #
+    class AwsEc2RouteTableDetails < Struct.new(
+      :association_set,
+      :owner_id,
+      :propagating_vgw_set,
+      :route_table_id,
+      :route_set,
+      :vpc_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9426,11 +9548,19 @@ module Aws::SecurityHub
     #   The subnets that are associated with the cluster.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] endpoint_public_access
+    #   Indicates whether the Amazon EKS public API server endpoint is
+    #   turned on. If the Amazon EKS public API server endpoint is turned
+    #   off, your cluster's Kubernetes API server can only receive requests
+    #   that originate from within the cluster VPC.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEksClusterResourcesVpcConfigDetails AWS API Documentation
     #
     class AwsEksClusterResourcesVpcConfigDetails < Struct.new(
       :security_group_ids,
-      :subnet_ids)
+      :subnet_ids,
+      :endpoint_public_access)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15108,6 +15238,11 @@ module Aws::SecurityHub
     #   The versioning state of an S3 bucket.
     #   @return [Types::AwsS3BucketBucketVersioningConfiguration]
     #
+    # @!attribute [rw] object_lock_configuration
+    #   Specifies which rule Amazon S3 applies by default to every new
+    #   object placed in the specified bucket.
+    #   @return [Types::AwsS3BucketObjectLockConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketDetails AWS API Documentation
     #
     class AwsS3BucketDetails < Struct.new(
@@ -15122,7 +15257,8 @@ module Aws::SecurityHub
       :bucket_logging_configuration,
       :bucket_website_configuration,
       :bucket_notification_configuration,
-      :bucket_versioning_configuration)
+      :bucket_versioning_configuration,
+      :object_lock_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15244,6 +15380,73 @@ module Aws::SecurityHub
     class AwsS3BucketNotificationConfigurationS3KeyFilterRule < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The container element for S3 Object Lock configuration parameters. In
+    # Amazon S3, Object Lock can help prevent objects from being deleted or
+    # overwritten for a fixed amount of time or indefinitely.
+    #
+    # @!attribute [rw] object_lock_enabled
+    #   Indicates whether the bucket has an Object Lock configuration
+    #   enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule
+    #   Specifies the Object Lock rule for the specified object.
+    #   @return [Types::AwsS3BucketObjectLockConfigurationRuleDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketObjectLockConfiguration AWS API Documentation
+    #
+    class AwsS3BucketObjectLockConfiguration < Struct.new(
+      :object_lock_enabled,
+      :rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The default S3 Object Lock retention mode and period that you want to
+    # apply to new objects placed in the specified Amazon S3 bucket.
+    #
+    # @!attribute [rw] days
+    #   The number of days that you want to specify for the default
+    #   retention period.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mode
+    #   The default Object Lock retention mode you want to apply to new
+    #   objects placed in the specified bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] years
+    #   The number of years that you want to specify for the default
+    #   retention period.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails AWS API Documentation
+    #
+    class AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails < Struct.new(
+      :days,
+      :mode,
+      :years)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the S3 Object Lock rule for the specified object. In Amazon
+    # S3, Object Lock can help prevent objects from being deleted or
+    # overwritten for a fixed amount of time or indefinitely.
+    #
+    # @!attribute [rw] default_retention
+    #   The default Object Lock retention mode and period that you want to
+    #   apply to new objects placed in the specified bucket.
+    #   @return [Types::AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketObjectLockConfigurationRuleDetails AWS API Documentation
+    #
+    class AwsS3BucketObjectLockConfigurationRuleDetails < Struct.new(
+      :default_retention)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16296,7 +16499,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::NumberFilter>]
     #
     # @!attribute [rw] process_parent_pid
-    #   The parent process ID.
+    #   The parent process ID. This field accepts positive integers between
+    #   `O` and `2147483647`.
     #   @return [Array<Types::NumberFilter>]
     #
     # @!attribute [rw] process_launched_at
@@ -19195,8 +19399,8 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] account_ids
-    #   The list of account IDs for the accounts from which to decline the
-    #   invitations to Security Hub.
+    #   The list of prospective member account IDs for which to decline an
+    #   invitation.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeclineInvitationsRequest AWS API Documentation
@@ -19288,7 +19492,8 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] account_ids
-    #   The list of the account IDs that sent the invitations to delete.
+    #   The list of member account IDs that received the invitations you
+    #   want to delete.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteInvitationsRequest AWS API Documentation
@@ -19430,7 +19635,7 @@ module Aws::SecurityHub
     #   The value for this field in a member account matches the value in
     #   the administrator account. For accounts that aren't part of an
     #   organization, the default value of this field is `SECURITY_CONTROL`
-    #   if you enabled Security Hub on or after February 9, 2023.
+    #   if you enabled Security Hub on or after February 23, 2023.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeHubResponse AWS API Documentation
@@ -19794,7 +19999,7 @@ module Aws::SecurityHub
     #   The value for this field in a member account matches the value in
     #   the administrator account. For accounts that aren't part of an
     #   organization, the default value of this field is `SECURITY_CONTROL`
-    #   if you enabled Security Hub on or after February 9, 2023.
+    #   if you enabled Security Hub on or after February 23, 2023.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableSecurityHubRequest AWS API Documentation
@@ -21753,7 +21958,8 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] parent_pid
-    #   The parent process ID.
+    #   The parent process ID. This field accepts positive integers between
+    #   `O` and `2147483647`.
     #   @return [Integer]
     #
     # @!attribute [rw] launched_at
@@ -21862,6 +22068,20 @@ module Aws::SecurityHub
       :marketplace_url,
       :activation_url,
       :product_subscription_resource_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a virtual private gateway propagating route.
+    #
+    # @!attribute [rw] gateway_id
+    #   The ID of the virtual private gateway.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/PropagatingVgwSetDetails AWS API Documentation
+    #
+    class PropagatingVgwSetDetails < Struct.new(
+      :gateway_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22425,6 +22645,12 @@ module Aws::SecurityHub
     #   Details about an WAFv2 rule group.
     #   @return [Types::AwsWafv2RuleGroupDetails]
     #
+    # @!attribute [rw] aws_ec2_route_table
+    #   Provides details about a route table. A route table contains a set
+    #   of rules, called routes, that determine where to direct network
+    #   traffic from your subnet or gateway.
+    #   @return [Types::AwsEc2RouteTableDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceDetails AWS API Documentation
     #
     class ResourceDetails < Struct.new(
@@ -22510,7 +22736,8 @@ module Aws::SecurityHub
       :aws_ec2_launch_template,
       :aws_sage_maker_notebook_instance,
       :aws_wafv_2_web_acl,
-      :aws_wafv_2_rule_group)
+      :aws_wafv_2_rule_group,
+      :aws_ec2_route_table)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22549,6 +22776,95 @@ module Aws::SecurityHub
     class Result < Struct.new(
       :account_id,
       :processing_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the routes in the route table.
+    #
+    # @!attribute [rw] carrier_gateway_id
+    #   The ID of the carrier gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_network_arn
+    #   The Amazon Resource Name (ARN) of the core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_cidr_block
+    #   The IPv4 CIDR block used for the destination match.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_ipv_6_cidr_block
+    #   The IPv6 CIDR block used for the destination match.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_prefix_list_id
+    #   The prefix of the destination Amazon Web Service.
+    #   @return [String]
+    #
+    # @!attribute [rw] egress_only_internet_gateway_id
+    #   The ID of the egress-only internet gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_id
+    #   The ID of a gateway attached to your VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of a NAT instance in your VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_owner_id
+    #   The ID of the Amazon Web Services account that owns the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] local_gateway_id
+    #   The ID of the local gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway_id
+    #   The ID of a NAT gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin
+    #   Describes how the route was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the route.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_id
+    #   The ID of a transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_peering_connection_id
+    #   The ID of a VPC peering connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RouteSetDetails AWS API Documentation
+    #
+    class RouteSetDetails < Struct.new(
+      :carrier_gateway_id,
+      :core_network_arn,
+      :destination_cidr_block,
+      :destination_ipv_6_cidr_block,
+      :destination_prefix_list_id,
+      :egress_only_internet_gateway_id,
+      :gateway_id,
+      :instance_id,
+      :instance_owner_id,
+      :local_gateway_id,
+      :nat_gateway_id,
+      :network_interface_id,
+      :origin,
+      :state,
+      :transit_gateway_id,
+      :vpc_peering_connection_id)
       SENSITIVE = []
       include Aws::Structure
     end

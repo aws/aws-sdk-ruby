@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2023-03-27)
+------------------
+
+* Feature - This release provides an update to the SendMessage API to handle interactive message response content-types.
+
 1.28.0 (2023-01-31)
 ------------------
 

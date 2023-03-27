@@ -10105,17 +10105,31 @@ module Aws::Connect
     # @!attribute [rw] chat_duration_in_minutes
     #   The total duration of the newly started chat session. If not
     #   specified, the chat session duration defaults to 25 hour. The
-    #   minumum configurable time is 60 minutes. The maximum configurable
+    #   minimum configurable time is 60 minutes. The maximum configurable
     #   time is 10,080 minutes (7 days).
     #   @return [Integer]
     #
     # @!attribute [rw] supported_messaging_content_types
-    #   The supported chat message content types. Content types must always
-    #   contain `text/plain`. You can then put any other supported type in
-    #   the list. For example, all the following lists are valid because
-    #   they contain `text/plain`: `[text/plain, text/markdown,
-    #   application/json]`, `[text/markdown, text/plain]`, `[text/plain,
-    #   application/json]`.
+    #   The supported chat message content types. Supported types are
+    #   `text/plain`, `text/markdown`, `application/json`,
+    #   `application/vnd.amazonaws.connect.message.interactive`, and
+    #   `application/vnd.amazonaws.connect.message.interactive.response`.
+    #
+    #   Content types must always contain `text/plain`. You can then put any
+    #   other supported type in the list. For example, all the following
+    #   lists are valid because they contain `text/plain`: `[text/plain,
+    #   text/markdown, application/json]`, `[text/markdown, text/plain]`,
+    #   `[text/plain, application/json,
+    #   application/vnd.amazonaws.connect.message.interactive.response]`.
+    #
+    #   <note markdown="1"> The type `application/vnd.amazonaws.connect.message.interactive` is
+    #   required to use the [Show view][1] flow block.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/show-view-block.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] persistent_chat
@@ -10128,6 +10142,16 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html
     #   @return [Types::PersistentChat]
     #
+    # @!attribute [rw] related_contact_id
+    #   The unique identifier for an Amazon Connect contact. This identifier
+    #   is related to the chat starting.
+    #
+    #   <note markdown="1"> You cannot provide data for both RelatedContactId and
+    #   PersistentChat.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartChatContactRequest AWS API Documentation
     #
     class StartChatContactRequest < Struct.new(
@@ -10139,7 +10163,8 @@ module Aws::Connect
       :client_token,
       :chat_duration_in_minutes,
       :supported_messaging_content_types,
-      :persistent_chat)
+      :persistent_chat,
+      :related_contact_id)
       SENSITIVE = []
       include Aws::Structure
     end

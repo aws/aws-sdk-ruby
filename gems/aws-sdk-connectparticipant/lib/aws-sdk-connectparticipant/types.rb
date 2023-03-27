@@ -149,7 +149,8 @@ module Aws::ConnectParticipant
     #
     # @!attribute [rw] connect_participant
     #   Amazon Connect Participant is used to mark the participant as
-    #   connected for message streaming.
+    #   connected for customer participant in message streaming, as well as
+    #   for agent or manager participant in non-streaming chats.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/CreateParticipantConnectionRequest AWS API Documentation
@@ -539,7 +540,8 @@ module Aws::ConnectParticipant
 
     # @!attribute [rw] content_type
     #   The type of the content. Supported types are `text/plain`,
-    #   `text/markdown`, and `application/json`.
+    #   `text/markdown`, `application/json`, and
+    #   `application/vnd.amazonaws.connect.message.interactive.response`.
     #   @return [String]
     #
     # @!attribute [rw] content
@@ -550,6 +552,10 @@ module Aws::ConnectParticipant
     #
     #   * For `application/json`, the Length Constraints are Minimum of 1,
     #     Maximum of 12000.
+    #
+    #   * For
+    #     `application/vnd.amazonaws.connect.message.interactive.response`,
+    #     the Length Constraints are Minimum of 1, Maximum of 12288.
     #   @return [String]
     #
     # @!attribute [rw] client_token

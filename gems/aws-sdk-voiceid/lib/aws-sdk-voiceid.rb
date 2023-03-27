@@ -32,7 +32,7 @@ require_relative 'aws-sdk-voiceid/customizations'
 # structure.
 #
 #     voice_id = Aws::VoiceID::Client.new
-#     resp = voice_id.create_domain(params)
+#     resp = voice_id.associate_fraudster(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-voiceid/customizations'
 # @!group service
 module Aws::VoiceID
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.12.0'
 
 end

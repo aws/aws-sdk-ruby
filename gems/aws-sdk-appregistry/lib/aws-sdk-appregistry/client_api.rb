@@ -42,6 +42,7 @@ module Aws::AppRegistry
     CreateApplicationResponse = Shapes::StructureShape.new(name: 'CreateApplicationResponse')
     CreateAttributeGroupRequest = Shapes::StructureShape.new(name: 'CreateAttributeGroupRequest')
     CreateAttributeGroupResponse = Shapes::StructureShape.new(name: 'CreateAttributeGroupResponse')
+    CreatedBy = Shapes::StringShape.new(name: 'CreatedBy')
     DeleteApplicationRequest = Shapes::StructureShape.new(name: 'DeleteApplicationRequest')
     DeleteApplicationResponse = Shapes::StructureShape.new(name: 'DeleteApplicationResponse')
     DeleteAttributeGroupRequest = Shapes::StructureShape.new(name: 'DeleteAttributeGroupRequest')
@@ -100,6 +101,7 @@ module Aws::AppRegistry
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::MapShape.new(name: 'Tags')
+    ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -160,6 +162,7 @@ module Aws::AppRegistry
     AttributeGroupDetails.add_member(:id, Shapes::ShapeRef.new(shape: AttributeGroupId, location_name: "id"))
     AttributeGroupDetails.add_member(:arn, Shapes::ShapeRef.new(shape: AttributeGroupArn, location_name: "arn"))
     AttributeGroupDetails.add_member(:name, Shapes::ShapeRef.new(shape: Name, deprecated: true, location_name: "name", metadata: {"deprecatedMessage"=>"This field is deprecated. We recommend not using the field when using ListAttributeGroupsForApplication."}))
+    AttributeGroupDetails.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
     AttributeGroupDetails.struct_class = Types::AttributeGroupDetails
 
     AttributeGroupDetailsList.member = Shapes::ShapeRef.new(shape: AttributeGroupDetails)
@@ -174,6 +177,7 @@ module Aws::AppRegistry
     AttributeGroupSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     AttributeGroupSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     AttributeGroupSummary.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
+    AttributeGroupSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
     AttributeGroupSummary.struct_class = Types::AttributeGroupSummary
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -260,6 +264,7 @@ module Aws::AppRegistry
     GetAttributeGroupResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     GetAttributeGroupResponse.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
     GetAttributeGroupResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    GetAttributeGroupResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
     GetAttributeGroupResponse.struct_class = Types::GetAttributeGroupResponse
 
     GetConfigurationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: AppRegistryConfiguration, location_name: "configuration"))
@@ -377,6 +382,10 @@ module Aws::AppRegistry
     Tags.key = Shapes::ShapeRef.new(shape: TagKey)
     Tags.value = Shapes::ShapeRef.new(shape: TagValue)
 
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ThrottlingException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "serviceCode"))
+    ThrottlingException.struct_class = Types::ThrottlingException
+
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
@@ -446,6 +455,7 @@ module Aws::AppRegistry
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_application, Seahorse::Model::Operation.new.tap do |o|
@@ -458,6 +468,7 @@ module Aws::AppRegistry
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_attribute_group, Seahorse::Model::Operation.new.tap do |o|
@@ -514,6 +525,7 @@ module Aws::AppRegistry
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_application, Seahorse::Model::Operation.new.tap do |o|
@@ -674,6 +686,8 @@ module Aws::AppRegistry
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -708,6 +722,7 @@ module Aws::AppRegistry
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_attribute_group, Seahorse::Model::Operation.new.tap do |o|

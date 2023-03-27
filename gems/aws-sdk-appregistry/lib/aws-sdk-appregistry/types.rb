@@ -10,7 +10,7 @@
 module Aws::AppRegistry
   module Types
 
-    # Includes all of the Service Catalog AppRegistry settings.
+    # Includes all of the AppRegistry settings.
     #
     # @!attribute [rw] tag_query_configuration
     #   Includes the definition of a `tagQuery`.
@@ -119,12 +119,12 @@ module Aws::AppRegistry
     end
 
     # @!attribute [rw] application
-    #   The name or ID of the application.
+    #   The name, ID, or ARN of the application.
     #   @return [String]
     #
     # @!attribute [rw] attribute_group
-    #   The name or ID of the attribute group that holds the attributes to
-    #   describe the application.
+    #   The name, ID, or ARN of the attribute group that holds the
+    #   attributes to describe the application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/AssociateAttributeGroupRequest AWS API Documentation
@@ -156,7 +156,7 @@ module Aws::AppRegistry
     end
 
     # @!attribute [rw] application
-    #   The name or ID of the application.
+    #   The name, ID, or ARN of the application.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -264,12 +264,17 @@ module Aws::AppRegistry
     #   The name of the attribute group.
     #   @return [String]
     #
+    # @!attribute [rw] created_by
+    #   The service principal that created the attribute group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/AttributeGroupDetails AWS API Documentation
     #
     class AttributeGroupDetails < Struct.new(
       :id,
       :arn,
-      :name)
+      :name,
+      :created_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -306,6 +311,10 @@ module Aws::AppRegistry
     #   newly created attribute group.
     #   @return [Time]
     #
+    # @!attribute [rw] created_by
+    #   The service principal that created the attribute group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/AttributeGroupSummary AWS API Documentation
     #
     class AttributeGroupSummary < Struct.new(
@@ -314,7 +323,8 @@ module Aws::AppRegistry
       :name,
       :description,
       :creation_time,
-      :last_update_time)
+      :last_update_time,
+      :created_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -436,7 +446,7 @@ module Aws::AppRegistry
     end
 
     # @!attribute [rw] application
-    #   The name or ID of the application.
+    #   The name, ID, or ARN of the application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/DeleteApplicationRequest AWS API Documentation
@@ -460,8 +470,8 @@ module Aws::AppRegistry
     end
 
     # @!attribute [rw] attribute_group
-    #   The name or ID of the attribute group that holds the attributes to
-    #   describe the application.
+    #   The name, ID, or ARN of the attribute group that holds the
+    #   attributes to describe the application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/DeleteAttributeGroupRequest AWS API Documentation
@@ -485,12 +495,12 @@ module Aws::AppRegistry
     end
 
     # @!attribute [rw] application
-    #   The name or ID of the application.
+    #   The name, ID, or ARN of the application.
     #   @return [String]
     #
     # @!attribute [rw] attribute_group
-    #   The name or ID of the attribute group that holds the attributes to
-    #   describe the application.
+    #   The name, ID, or ARN of the attribute group that holds the
+    #   attributes to describe the application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/DisassociateAttributeGroupRequest AWS API Documentation
@@ -559,7 +569,7 @@ module Aws::AppRegistry
     end
 
     # @!attribute [rw] application
-    #   The name or ID of the application.
+    #   The name, ID, or ARN of the application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/GetApplicationRequest AWS API Documentation
@@ -629,7 +639,7 @@ module Aws::AppRegistry
     end
 
     # @!attribute [rw] application
-    #   The name or ID of the application.
+    #   The name, ID, or ARN of the application.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -663,8 +673,8 @@ module Aws::AppRegistry
     end
 
     # @!attribute [rw] attribute_group
-    #   The name or ID of the attribute group that holds the attributes to
-    #   describe the application.
+    #   The name, ID, or ARN of the attribute group that holds the
+    #   attributes to describe the application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/GetAttributeGroupRequest AWS API Documentation
@@ -713,6 +723,10 @@ module Aws::AppRegistry
     #   Key-value pairs associated with the attribute group.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] created_by
+    #   The service principal that created the attribute group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/GetAttributeGroupResponse AWS API Documentation
     #
     class GetAttributeGroupResponse < Struct.new(
@@ -723,7 +737,8 @@ module Aws::AppRegistry
       :attributes,
       :creation_time,
       :last_update_time,
-      :tags)
+      :tags,
+      :created_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -849,7 +864,7 @@ module Aws::AppRegistry
     end
 
     # @!attribute [rw] application
-    #   The name or ID of the application.
+    #   The name, ID, or ARN of the application.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1239,6 +1254,25 @@ module Aws::AppRegistry
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # The maximum number of API requests has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   A message associated with the Throttling exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   The originating service code.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message,
+      :service_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon resource name (ARN) that specifies the resource.
     #   @return [String]
@@ -1261,7 +1295,7 @@ module Aws::AppRegistry
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] application
-    #   The name or ID of the application that will be updated.
+    #   The name, ID, or ARN of the application that will be updated.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1297,8 +1331,8 @@ module Aws::AppRegistry
     end
 
     # @!attribute [rw] attribute_group
-    #   The name or ID of the attribute group that holds the attributes to
-    #   describe the application.
+    #   The name, ID, or ARN of the attribute group that holds the
+    #   attributes to describe the application.
     #   @return [String]
     #
     # @!attribute [rw] name

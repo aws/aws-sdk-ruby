@@ -794,6 +794,12 @@ module Aws::Athena
     # Gets an authentication token and the URL at which the notebook can be
     # accessed. During programmatic access, `CreatePresignedNotebookUrl`
     # must be called every 10 minutes to refresh the authentication token.
+    # For information about granting programmatic access, see [Grant
+    # programmatic access][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/athena/latest/ug/setting-up.html#setting-up-grant-programmatic-access
     #
     # @option params [required, String] :session_id
     #   The session ID.
@@ -825,24 +831,22 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Creates a workgroup with the specified name. Only one of
-    # `Configurations` or `Configuration` can be specified; `Configurations`
-    # for a workgroup with multi engine support (for example, an Apache
-    # Spark enabled workgroup) or `Configuration` for an Athena SQL
-    # workgroup.
+    # Creates a workgroup with the specified name. A workgroup can be an
+    # Apache Spark enabled workgroup or an Athena SQL workgroup.
     #
     # @option params [required, String] :name
     #   The workgroup name.
     #
     # @option params [Types::WorkGroupConfiguration] :configuration
     #   Contains configuration information for creating an Athena SQL
-    #   workgroup, which includes the location in Amazon S3 where query
-    #   results are stored, the encryption configuration, if any, used for
-    #   encrypting query results, whether the Amazon CloudWatch Metrics are
-    #   enabled for the workgroup, the limit for the amount of bytes scanned
-    #   (cutoff) per query, if it is specified, and whether workgroup's
-    #   settings (specified with `EnforceWorkGroupConfiguration`) in the
-    #   `WorkGroupConfiguration` override client-side settings. See
+    #   workgroup or Spark enabled Athena workgroup. Athena SQL workgroup
+    #   configuration includes the location in Amazon S3 where query and
+    #   calculation results are stored, the encryption configuration, if any,
+    #   used for encrypting query results, whether the Amazon CloudWatch
+    #   Metrics are enabled for the workgroup, the limit for the amount of
+    #   bytes scanned (cutoff) per query, if it is specified, and whether
+    #   workgroup's settings (specified with `EnforceWorkGroupConfiguration`)
+    #   in the `WorkGroupConfiguration` override client-side settings. See
     #   WorkGroupConfiguration$EnforceWorkGroupConfiguration.
     #
     # @option params [String] :description
@@ -883,6 +887,7 @@ module Aws::Athena
     #       customer_content_encryption_configuration: {
     #         kms_key: "KmsKey", # required
     #       },
+    #       enable_minimum_encryption_configuration: false,
     #     },
     #     description: "WorkGroupDescriptionString",
     #     tags: [
@@ -1014,7 +1019,7 @@ module Aws::Athena
     #
     # @option params [Boolean] :recursive_delete_option
     #   The option to delete the workgroup and its contents even if the
-    #   workgroup contains any named queries or query executions.
+    #   workgroup contains any named queries, query executions, or notebooks.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1116,8 +1121,7 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Retrieves a pre-signed URL to a copy of the code that was executed for
-    # the calculation.
+    # Retrieves the unencrypted code that was executed for the calculation.
     #
     # @option params [required, String] :calculation_execution_id
     #   The calculation execution UUID.
@@ -1416,9 +1420,10 @@ module Aws::Athena
 
     # Streams the results of a single query execution specified by
     # `QueryExecutionId` from the Athena query results location in Amazon
-    # S3. For more information, see [Query Results][1] in the *Amazon Athena
-    # User Guide*. This request does not execute the query but returns
-    # results. Use StartQueryExecution to run a query.
+    # S3. For more information, see [Working with query results, recent
+    # queries, and output files][1] in the *Amazon Athena User Guide*. This
+    # request does not execute the query but returns results. Use
+    # StartQueryExecution to run a query.
     #
     # To stream query results successfully, the IAM principal with
     # permission to call `GetQueryResults` also must have permissions to the
@@ -1723,6 +1728,7 @@ module Aws::Athena
     #   resp.work_group.configuration.additional_configuration #=> String
     #   resp.work_group.configuration.execution_role #=> String
     #   resp.work_group.configuration.customer_content_encryption_configuration.kms_key #=> String
+    #   resp.work_group.configuration.enable_minimum_encryption_configuration #=> Boolean
     #   resp.work_group.description #=> String
     #   resp.work_group.creation_time #=> Time
     #
@@ -1790,7 +1796,7 @@ module Aws::Athena
     end
 
     # Returns the supported DPU sizes for the supported application runtimes
-    # (for example, `Jupyter 1.0`).
+    # (for example, `Athena notebook version 1`).
     #
     # @option params [Integer] :max_results
     #   Specifies the maximum number of results to return.
@@ -2039,9 +2045,9 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Lists, in descending order, the executors that have been submitted to
-    # a session. Newer executors are listed first; older executors are
-    # listed later. The result can be optionally filtered by state.
+    # Lists, in descending order, the executors that joined a session. Newer
+    # executors are listed first; older executors are listed later. The
+    # result can be optionally filtered by state.
     #
     # @option params [required, String] :session_id
     #   The session ID.
@@ -2606,8 +2612,7 @@ module Aws::Athena
     end
 
     # Submits calculations for execution within a session. You can supply
-    # the code to run as an inline code block within the request or as an
-    # Amazon S3 URL.
+    # the code to run as an inline code block within the request.
     #
     # @option params [required, String] :session_id
     #   The session ID.
@@ -2779,9 +2784,12 @@ module Aws::Athena
     #   parameter mappings.
     #
     # @option params [String] :notebook_version
-    #   The notebook version. This value is required only when requesting that
-    #   a notebook server be started for the session. The only valid notebook
-    #   version is `Jupyter1.0`.
+    #   The notebook version. This value is supplied automatically for
+    #   notebook sessions in the Athena console and is not required for
+    #   programmatic session access. The only valid notebook version is
+    #   `Athena notebook version 1`. If you specify a value for
+    #   `NotebookVersion`, you must also specify a value for `NotebookId`. See
+    #   EngineConfiguration$AdditionalConfigs.
     #
     # @option params [Integer] :session_idle_timeout_in_minutes
     #   The idle timeout in minutes for the session.
@@ -2924,7 +2932,7 @@ module Aws::Athena
     #
     #
     #
-    # [1]: https://aws.amazon.com/answers/account-management/aws-tagging-strategies/
+    # [1]: https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html
     #
     # @option params [required, String] :resource_arn
     #   Specifies the ARN of the Athena resource (workgroup or data catalog)
@@ -3129,7 +3137,8 @@ module Aws::Athena
     #   The notebook content type. Currently, the only valid type is `IPYNB`.
     #
     # @option params [String] :session_id
-    #   The ID of the session in which the notebook will be updated.
+    #   The active notebook session ID. Required if the notebook has an active
+    #   session.
     #
     # @option params [String] :client_request_token
     #   A unique case-sensitive string used to ensure the request to create
@@ -3234,11 +3243,7 @@ module Aws::Athena
     end
 
     # Updates the workgroup with the specified name. The workgroup's name
-    # cannot be changed. Only one of `ConfigurationsUpdates` or
-    # `ConfigurationUpdates` can be specified; `ConfigurationsUpdates` for a
-    # workgroup with multi engine support (for example, an Apache Spark
-    # enabled workgroup) or `ConfigurationUpdates` for an Athena SQL
-    # workgroup.
+    # cannot be changed. Only `ConfigurationUpdates` can be specified.
     #
     # @option params [required, String] :work_group
     #   The specified workgroup that will be updated.
@@ -3290,6 +3295,7 @@ module Aws::Athena
     #       customer_content_encryption_configuration: {
     #         kms_key: "KmsKey", # required
     #       },
+    #       enable_minimum_encryption_configuration: false,
     #     },
     #     state: "ENABLED", # accepts ENABLED, DISABLED
     #   })
@@ -3316,7 +3322,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

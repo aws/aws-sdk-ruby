@@ -588,11 +588,17 @@ module Aws::IoTWireless
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] sidewalk
+    #   The Sidewalk-related information for creating the Sidewalk device
+    #   profile.
+    #   @return [Types::SidewalkCreateDeviceProfile]
+    #
     class CreateDeviceProfileRequest < Struct.new(
       :name,
       :lo_ra_wan,
       :tags,
-      :client_request_token)
+      :client_request_token,
+      :sidewalk)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -906,6 +912,11 @@ module Aws::IoTWireless
     #   positioning information.
     #   @return [String]
     #
+    # @!attribute [rw] sidewalk
+    #   The device configuration information to use to create the Sidewalk
+    #   device.
+    #   @return [Types::SidewalkCreateWirelessDevice]
+    #
     class CreateWirelessDeviceRequest < Struct.new(
       :type,
       :name,
@@ -914,7 +925,8 @@ module Aws::IoTWireless
       :client_request_token,
       :lo_ra_wan,
       :tags,
-      :positioning)
+      :positioning,
+      :sidewalk)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1071,6 +1083,40 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # The device attestation key (DAK) information.
+    #
+    # @!attribute [rw] certificate_id
+    #   The certificate ID for the DAK.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_allowed_signature
+    #   The maximum number of signatures that the DAK can sign. A value of
+    #   `-1` indicates that there's no device limit.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] factory_support
+    #   Whether factory support has been enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ap_id
+    #   The advertised product ID (APID) that's used for pre-production and
+    #   production applications.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_type_id
+    #   The device type ID that's used for prototyping applications.
+    #   @return [String]
+    #
+    class DakCertificateMetadata < Struct.new(
+      :certificate_id,
+      :max_allowed_signature,
+      :factory_support,
+      :ap_id,
+      :device_type_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the resource to delete.
     #   @return [String]
@@ -1169,6 +1215,18 @@ module Aws::IoTWireless
     class DeleteServiceProfileResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] id
+    #   The unique identifier of the import task to be deleted.
+    #   @return [String]
+    #
+    class DeleteWirelessDeviceImportTaskRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class DeleteWirelessDeviceImportTaskResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] id
     #   The ID of the resource to delete.
     #   @return [String]
     #
@@ -1215,6 +1273,25 @@ module Aws::IoTWireless
     end
 
     class DeleteWirelessGatewayTaskResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] identifier
+    #   The identifier of the wireless device to deregister from AWS IoT
+    #   Wireless.
+    #   @return [String]
+    #
+    # @!attribute [rw] wireless_device_type
+    #   The type of wireless device to deregister from AWS IoT Wireless,
+    #   which can be `LoRaWAN` or `Sidewalk`.
+    #   @return [String]
+    #
+    class DeregisterWirelessDeviceRequest < Struct.new(
+      :identifier,
+      :wireless_device_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class DeregisterWirelessDeviceResponse < Aws::EmptyStructure; end
 
     # Describes a destination.
     #
@@ -1656,11 +1733,16 @@ module Aws::IoTWireless
     #   Information about the device profile.
     #   @return [Types::LoRaWANDeviceProfile]
     #
+    # @!attribute [rw] sidewalk
+    #   Information about the Sidewalk parameters in the device profile.
+    #   @return [Types::SidewalkGetDeviceProfile]
+    #
     class GetDeviceProfileResponse < Struct.new(
       :arn,
       :name,
       :id,
-      :lo_ra_wan)
+      :lo_ra_wan,
+      :sidewalk)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2290,6 +2372,84 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # @!attribute [rw] id
+    #   The identifier of the import task for which information is
+    #   requested.
+    #   @return [String]
+    #
+    class GetWirelessDeviceImportTaskRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The identifier of the import task for which information is
+    #   retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon Resource Name) of the import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_name
+    #   The name of the destination that's assigned to the wireless devices
+    #   in the import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] sidewalk
+    #   The Sidewalk-related information about an import task.
+    #   @return [Types::SidewalkGetStartImportInfo]
+    #
+    # @!attribute [rw] creation_time
+    #   The time at which the import task was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The import task status.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the provided status information, such as a validation
+    #   error that causes the import task to fail.
+    #   @return [String]
+    #
+    # @!attribute [rw] initialized_imported_device_count
+    #   The number of devices in the import task that are waiting for the
+    #   control log to start processing.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pending_imported_device_count
+    #   The number of devices in the import task that are waiting in the
+    #   import task queue to be onboarded.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] onboarded_imported_device_count
+    #   The number of devices in the import task that have been onboarded to
+    #   the import task.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_imported_device_count
+    #   The number of devices in the import task that failed to onboard to
+    #   the import task.
+    #   @return [Integer]
+    #
+    class GetWirelessDeviceImportTaskResponse < Struct.new(
+      :id,
+      :arn,
+      :destination_name,
+      :sidewalk,
+      :creation_time,
+      :status,
+      :status_reason,
+      :initialized_imported_device_count,
+      :pending_imported_device_count,
+      :onboarded_imported_device_count,
+      :failed_imported_device_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] identifier
     #   The identifier of the wireless device to get.
     #   @return [String]
@@ -2772,6 +2932,50 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # Information about a Sidewalk device that has been added to an import
+    # task.
+    #
+    # @!attribute [rw] sidewalk_manufacturing_sn
+    #   The Sidewalk manufacturing serial number (SMSN) of the Sidewalk
+    #   device.
+    #   @return [String]
+    #
+    # @!attribute [rw] onboarding_status
+    #   The onboarding status of the Sidewalk device in the import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] onboarding_status_reason
+    #   The reason for the onboarding status information for the Sidewalk
+    #   device.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_time
+    #   The time at which the status information was last updated.
+    #   @return [Time]
+    #
+    class ImportedSidewalkDevice < Struct.new(
+      :sidewalk_manufacturing_sn,
+      :onboarding_status,
+      :onboarding_status_reason,
+      :last_update_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a wireless device that has been added to an import
+    # task.
+    #
+    # @!attribute [rw] sidewalk
+    #   The Sidewalk-related information about a device that has been added
+    #   to an import task.
+    #   @return [Types::ImportedSidewalkDevice]
+    #
+    class ImportedWirelessDevice < Struct.new(
+      :sidewalk)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An unexpected error occurred while processing a request.
     #
     # @!attribute [rw] message
@@ -2871,9 +3075,15 @@ module Aws::IoTWireless
     #   The maximum number of results to return in this operation.
     #   @return [Integer]
     #
+    # @!attribute [rw] device_profile_type
+    #   A filter to list only device profiles that use this type, which can
+    #   be `LoRaWAN` or `Sidewalk`.
+    #   @return [String]
+    #
     class ListDeviceProfilesRequest < Struct.new(
       :next_token,
-      :max_results)
+      :max_results,
+      :device_profile_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2890,6 +3100,58 @@ module Aws::IoTWireless
     class ListDeviceProfilesResponse < Struct.new(
       :next_token,
       :device_profile_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The identifier of the import task for which wireless devices are
+    #   listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in this operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise `null` to receive the first set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the devices in the import task.
+    #   @return [String]
+    #
+    class ListDevicesForWirelessDeviceImportTaskRequest < Struct.new(
+      :id,
+      :max_results,
+      :next_token,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to use to get the next set of results, or `null` if there
+    #   are no additional results.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_name
+    #   The name of the Sidewalk destination that describes the IoT rule to
+    #   route messages received from devices in an import task that are
+    #   onboarded to AWS IoT Wireless.
+    #   @return [String]
+    #
+    # @!attribute [rw] imported_wireless_device_list
+    #   List of wireless devices in an import task and their onboarding
+    #   status.
+    #   @return [Array<Types::ImportedWirelessDevice>]
+    #
+    class ListDevicesForWirelessDeviceImportTaskResponse < Struct.new(
+      :next_token,
+      :destination_name,
+      :imported_wireless_device_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3239,6 +3501,40 @@ module Aws::IoTWireless
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in this operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise `null` to receive the first set of
+    #   results.
+    #   @return [String]
+    #
+    class ListWirelessDeviceImportTasksRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to use to get the next set of results, or `null` if there
+    #   are no additional results.
+    #   @return [String]
+    #
+    # @!attribute [rw] wireless_device_import_task_list
+    #   List of import tasks and summary information of onboarding status of
+    #   devices in each import task.
+    #   @return [Array<Types::WirelessDeviceImportTask>]
+    #
+    class ListWirelessDeviceImportTasksResponse < Struct.new(
+      :next_token,
+      :wireless_device_import_task_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4794,6 +5090,24 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # Sidewalk object for creating a device profile.
+    #
+    # @api private
+    #
+    class SidewalkCreateDeviceProfile < Aws::EmptyStructure; end
+
+    # Sidewalk object for creating a wireless device.
+    #
+    # @!attribute [rw] device_profile_id
+    #   The ID of the Sidewalk device profile.
+    #   @return [String]
+    #
+    class SidewalkCreateWirelessDevice < Struct.new(
+      :device_profile_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Sidewalk device object.
     #
     # @!attribute [rw] amazon_id
@@ -4812,11 +5126,32 @@ module Aws::IoTWireless
     #   The sidewalk device certificates for Ed25519 and P256r1.
     #   @return [Array<Types::CertificateList>]
     #
+    # @!attribute [rw] private_keys
+    #   The Sidewalk device private keys that will be used for onboarding
+    #   the device.
+    #   @return [Array<Types::CertificateList>]
+    #
+    # @!attribute [rw] device_profile_id
+    #   The ID of the Sidewalk device profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_id
+    #   The ID of the Sidewalk device profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The Sidewalk device status, such as provisioned or registered.
+    #   @return [String]
+    #
     class SidewalkDevice < Struct.new(
       :amazon_id,
       :sidewalk_id,
       :sidewalk_manufacturing_sn,
-      :device_certificates)
+      :device_certificates,
+      :private_keys,
+      :device_profile_id,
+      :certificate_id,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4861,6 +5196,48 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # Gets information about a Sidewalk device profile.
+    #
+    # @!attribute [rw] application_server_public_key
+    #   The Sidewalk application server public key.
+    #   @return [String]
+    #
+    # @!attribute [rw] qualification_status
+    #   Gets information about the certification status of a Sidewalk device
+    #   profile.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dak_certificate_metadata
+    #   The DAK certificate information of the Sidewalk device profile.
+    #   @return [Array<Types::DakCertificateMetadata>]
+    #
+    class SidewalkGetDeviceProfile < Struct.new(
+      :application_server_public_key,
+      :qualification_status,
+      :dak_certificate_metadata)
+      SENSITIVE = [:application_server_public_key]
+      include Aws::Structure
+    end
+
+    # Sidewalk-related information for devices in an import task that are
+    # being onboarded.
+    #
+    # @!attribute [rw] device_creation_file_list
+    #   List of Sidewalk devices that are added to the import task.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] role
+    #   The IAM role that allows AWS IoT Wireless to access the CSV file in
+    #   the S3 bucket.
+    #   @return [String]
+    #
+    class SidewalkGetStartImportInfo < Struct.new(
+      :device_creation_file_list,
+      :role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Sidewalk object used by list functions.
     #
     # @!attribute [rw] amazon_id
@@ -4879,11 +5256,22 @@ module Aws::IoTWireless
     #   The sidewalk device certificates for Ed25519 and P256r1.
     #   @return [Array<Types::CertificateList>]
     #
+    # @!attribute [rw] device_profile_id
+    #   Sidewalk object used by list functions.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the Sidewalk devices, such as provisioned or
+    #   registered.
+    #   @return [String]
+    #
     class SidewalkListDevice < Struct.new(
       :amazon_id,
       :sidewalk_id,
       :sidewalk_manufacturing_sn,
-      :device_certificates)
+      :device_certificates,
+      :device_profile_id,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4925,6 +5313,39 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # Information about an import task created for an individual Sidewalk
+    # device.
+    #
+    # @!attribute [rw] sidewalk_manufacturing_sn
+    #   The Sidewalk manufacturing serial number (SMSN) of the device added
+    #   to the import task.
+    #   @return [String]
+    #
+    class SidewalkSingleStartImportInfo < Struct.new(
+      :sidewalk_manufacturing_sn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an import task created for bulk provisioning.
+    #
+    # @!attribute [rw] device_creation_file
+    #   The CSV file contained in an S3 bucket that's used for adding
+    #   devices to an import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The IAM role that allows AWS IoT Wireless to access the CSV file in
+    #   the S3 bucket.
+    #   @return [String]
+    #
+    class SidewalkStartImportInfo < Struct.new(
+      :device_creation_file,
+      :role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Sidewalk update.
     #
     # @!attribute [rw] app_server_private_key
@@ -4934,6 +5355,19 @@ module Aws::IoTWireless
     class SidewalkUpdateAccount < Struct.new(
       :app_server_private_key)
       SENSITIVE = [:app_server_private_key]
+      include Aws::Structure
+    end
+
+    # Sidewalk object information for updating an import task.
+    #
+    # @!attribute [rw] device_creation_file
+    #   The CSV file contained in an S3 bucket that's used for appending
+    #   devices to an existing import task.
+    #   @return [String]
+    #
+    class SidewalkUpdateImportInfo < Struct.new(
+      :device_creation_file)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5018,6 +5452,112 @@ module Aws::IoTWireless
     end
 
     class StartMulticastGroupSessionResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] destination_name
+    #   The name of the Sidewalk destination that describes the IoT rule to
+    #   route messages from the device in the import task that will be
+    #   onboarded to AWS IoT Wireless.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   Each resource must have a unique client request token. If you try to
+    #   create a new resource with the same token as a resource that already
+    #   exists, an exception occurs. If you omit this value, AWS SDKs will
+    #   automatically generate a unique client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_name
+    #   The name of the wireless device for which an import task is being
+    #   started.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tag to attach to the specified resource. Tags are metadata that
+    #   you can use to manage a resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] sidewalk
+    #   The Sidewalk-related parameters for importing a single wireless
+    #   device.
+    #   @return [Types::SidewalkSingleStartImportInfo]
+    #
+    class StartSingleWirelessDeviceImportTaskRequest < Struct.new(
+      :destination_name,
+      :client_request_token,
+      :device_name,
+      :tags,
+      :sidewalk)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The import task ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon Resource Name) of the import task.
+    #   @return [String]
+    #
+    class StartSingleWirelessDeviceImportTaskResponse < Struct.new(
+      :id,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destination_name
+    #   The name of the Sidewalk destination that describes the IoT rule to
+    #   route messages from the devices in the import task that are
+    #   onboarded to AWS IoT Wireless.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   Each resource must have a unique client request token. If you try to
+    #   create a new resource with the same token as a resource that already
+    #   exists, an exception occurs. If you omit this value, AWS SDKs will
+    #   automatically generate a unique client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tag to attach to the specified resource. Tags are metadata that
+    #   you can use to manage a resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] sidewalk
+    #   The Sidewalk-related parameters for importing wireless devices that
+    #   need to be provisioned in bulk.
+    #   @return [Types::SidewalkStartImportInfo]
+    #
+    class StartWirelessDeviceImportTaskRequest < Struct.new(
+      :destination_name,
+      :client_request_token,
+      :tags,
+      :sidewalk)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The import task ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon Resource Name) of the import task.
+    #   @return [String]
+    #
+    class StartWirelessDeviceImportTaskResponse < Struct.new(
+      :id,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # A simple label consisting of a customer-defined key-value pair
     #
@@ -5649,6 +6189,23 @@ module Aws::IoTWireless
     class UpdateResourcePositionResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] id
+    #   The identifier of the import task to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] sidewalk
+    #   The Sidewalk-related parameters of the import task to be updated.
+    #   @return [Types::SidewalkUpdateImportInfo]
+    #
+    class UpdateWirelessDeviceImportTaskRequest < Struct.new(
+      :id,
+      :sidewalk)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class UpdateWirelessDeviceImportTaskResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] id
     #   The ID of the resource to update.
     #   @return [String]
     #
@@ -5881,7 +6438,7 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] rss
-    #   Recived signal strength of the WLAN measurement data.
+    #   Received signal strength (dBm) of the WLAN measurement data.
     #   @return [Integer]
     #
     class WiFiAccessPoint < Struct.new(
@@ -5913,6 +6470,75 @@ module Aws::IoTWireless
     class WirelessDeviceEventLogOption < Struct.new(
       :event,
       :log_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an import task for wireless devices.
+    #
+    # @!attribute [rw] id
+    #   The ID of the wireless device import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon Resource Name) of the wireless device import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_name
+    #   The name of the Sidewalk destination that that describes the IoT
+    #   rule to route messages from the device in the import task that will
+    #   be onboarded to AWS IoT Wireless
+    #   @return [String]
+    #
+    # @!attribute [rw] sidewalk
+    #   The Sidewalk-related information of the wireless device import task.
+    #   @return [Types::SidewalkGetStartImportInfo]
+    #
+    # @!attribute [rw] creation_time
+    #   The time at which the import task was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status information of the wireless device import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason that provides additional information about the import
+    #   task status.
+    #   @return [String]
+    #
+    # @!attribute [rw] initialized_imported_device_count
+    #   The summary information of count of wireless devices that are
+    #   waiting for the control log to be added to an import task.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pending_imported_device_count
+    #   The summary information of count of wireless devices in an import
+    #   task that are waiting in the queue to be onboarded.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] onboarded_imported_device_count
+    #   The summary information of count of wireless devices in an import
+    #   task that have been onboarded to the import task.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_imported_device_count
+    #   The summary information of count of wireless devices in an import
+    #   task that failed to onboarded to the import task.
+    #   @return [Integer]
+    #
+    class WirelessDeviceImportTask < Struct.new(
+      :id,
+      :arn,
+      :destination_name,
+      :sidewalk,
+      :creation_time,
+      :status,
+      :status_reason,
+      :initialized_imported_device_count,
+      :pending_imported_device_count,
+      :onboarded_imported_device_count,
+      :failed_imported_device_count)
       SENSITIVE = []
       include Aws::Structure
     end

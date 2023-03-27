@@ -378,18 +378,67 @@ module Aws::VoiceID
 
     # @!group API Operations
 
+    # Associates the fraudsters with the watchlist specified in the same
+    # domain.
+    #
+    # @option params [required, String] :domain_id
+    #   The identifier of the domain that contains the fraudster.
+    #
+    # @option params [required, String] :fraudster_id
+    #   The identifier of the fraudster to be associated with the watchlist.
+    #
+    # @option params [required, String] :watchlist_id
+    #   The identifier of the watchlist you want to associate with the
+    #   fraudster.
+    #
+    # @return [Types::AssociateFraudsterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateFraudsterResponse#fraudster #fraudster} => Types::Fraudster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_fraudster({
+    #     domain_id: "DomainId", # required
+    #     fraudster_id: "FraudsterId", # required
+    #     watchlist_id: "WatchlistId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.fraudster.created_at #=> Time
+    #   resp.fraudster.domain_id #=> String
+    #   resp.fraudster.generated_fraudster_id #=> String
+    #   resp.fraudster.watchlist_ids #=> Array
+    #   resp.fraudster.watchlist_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/AssociateFraudster AWS API Documentation
+    #
+    # @overload associate_fraudster(params = {})
+    # @param [Hash] params ({})
+    def associate_fraudster(params = {}, options = {})
+      req = build_request(:associate_fraudster, params)
+      req.send_request(options)
+    end
+
     # Creates a domain that contains all Amazon Connect Voice ID data, such
-    # as speakers, fraudsters, customer audio, and voiceprints.
+    # as speakers, fraudsters, customer audio, and voiceprints. Every domain
+    # is created with a default watchlist that fraudsters can be a part of.
     #
     # @option params [String] :client_token
-    #   The idempotency token for creating a new domain. If not provided,
-    #   Amazon Web Services SDK populates this field.
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
     # @option params [String] :description
-    #   A brief description of the domain.
+    #   A brief description of this domain.
     #
     # @option params [required, String] :name
     #   The name of the domain.
@@ -441,6 +490,7 @@ module Aws::VoiceID
     #   resp.domain.server_side_encryption_update_details.old_kms_key_id #=> String
     #   resp.domain.server_side_encryption_update_details.update_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
     #   resp.domain.updated_at #=> Time
+    #   resp.domain.watchlist_details.default_watchlist_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/CreateDomain AWS API Documentation
     #
@@ -448,6 +498,62 @@ module Aws::VoiceID
     # @param [Hash] params ({})
     def create_domain(params = {}, options = {})
       req = build_request(:create_domain, params)
+      req.send_request(options)
+    end
+
+    # Creates a watchlist that fraudsters can be a part of.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [String] :description
+    #   A brief description of this watchlist.
+    #
+    # @option params [required, String] :domain_id
+    #   The identifier of the domain that contains the watchlist.
+    #
+    # @option params [required, String] :name
+    #   The name of the watchlist.
+    #
+    # @return [Types::CreateWatchlistResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateWatchlistResponse#watchlist #watchlist} => Types::Watchlist
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_watchlist({
+    #     client_token: "ClientTokenString",
+    #     description: "WatchlistDescription",
+    #     domain_id: "DomainId", # required
+    #     name: "WatchlistName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.watchlist.created_at #=> Time
+    #   resp.watchlist.default_watchlist #=> Boolean
+    #   resp.watchlist.description #=> String
+    #   resp.watchlist.domain_id #=> String
+    #   resp.watchlist.name #=> String
+    #   resp.watchlist.updated_at #=> Time
+    #   resp.watchlist.watchlist_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/CreateWatchlist AWS API Documentation
+    #
+    # @overload create_watchlist(params = {})
+    # @param [Hash] params ({})
+    def create_watchlist(params = {}, options = {})
+      req = build_request(:create_watchlist, params)
       req.send_request(options)
     end
 
@@ -473,10 +579,11 @@ module Aws::VoiceID
       req.send_request(options)
     end
 
-    # Deletes the specified fraudster from Voice ID.
+    # Deletes the specified fraudster from Voice ID. This action
+    # disassociates the fraudster from any watchlists it is a part of.
     #
     # @option params [required, String] :domain_id
-    #   The identifier of the domain containing the fraudster.
+    #   The identifier of the domain that contains the fraudster.
     #
     # @option params [required, String] :fraudster_id
     #   The identifier of the fraudster you want to delete.
@@ -502,7 +609,7 @@ module Aws::VoiceID
     # Deletes the specified speaker from Voice ID.
     #
     # @option params [required, String] :domain_id
-    #   The identifier of the domain containing the speaker.
+    #   The identifier of the domain that contains the speaker.
     #
     # @option params [required, String] :speaker_id
     #   The identifier of the speaker you want to delete.
@@ -525,10 +632,40 @@ module Aws::VoiceID
       req.send_request(options)
     end
 
+    # Deletes the specified watchlist from Voice ID. This API throws an
+    # exception when there are fraudsters in the watchlist that you are
+    # trying to delete. You must delete the fraudsters, and then delete the
+    # watchlist. Every domain has a default watchlist which cannot be
+    # deleted.
+    #
+    # @option params [required, String] :domain_id
+    #   The identifier of the domain that contains the watchlist.
+    #
+    # @option params [required, String] :watchlist_id
+    #   The identifier of the watchlist to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_watchlist({
+    #     domain_id: "DomainId", # required
+    #     watchlist_id: "WatchlistId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/DeleteWatchlist AWS API Documentation
+    #
+    # @overload delete_watchlist(params = {})
+    # @param [Hash] params ({})
+    def delete_watchlist(params = {}, options = {})
+      req = build_request(:delete_watchlist, params)
+      req.send_request(options)
+    end
+
     # Describes the specified domain.
     #
     # @option params [required, String] :domain_id
-    #   The identifier of the domain you are describing.
+    #   The identifier of the domain that you are describing.
     #
     # @return [Types::DescribeDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -553,6 +690,7 @@ module Aws::VoiceID
     #   resp.domain.server_side_encryption_update_details.old_kms_key_id #=> String
     #   resp.domain.server_side_encryption_update_details.update_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
     #   resp.domain.updated_at #=> Time
+    #   resp.domain.watchlist_details.default_watchlist_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/DescribeDomain AWS API Documentation
     #
@@ -566,7 +704,7 @@ module Aws::VoiceID
     # Describes the specified fraudster.
     #
     # @option params [required, String] :domain_id
-    #   The identifier of the domain containing the fraudster.
+    #   The identifier of the domain that contains the fraudster.
     #
     # @option params [required, String] :fraudster_id
     #   The identifier of the fraudster you are describing.
@@ -587,6 +725,8 @@ module Aws::VoiceID
     #   resp.fraudster.created_at #=> Time
     #   resp.fraudster.domain_id #=> String
     #   resp.fraudster.generated_fraudster_id #=> String
+    #   resp.fraudster.watchlist_ids #=> Array
+    #   resp.fraudster.watchlist_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/DescribeFraudster AWS API Documentation
     #
@@ -600,11 +740,11 @@ module Aws::VoiceID
     # Describes the specified fraudster registration job.
     #
     # @option params [required, String] :domain_id
-    #   The identifier for the domain containing the fraudster registration
+    #   The identifier of the domain that contains the fraudster registration
     #   job.
     #
     # @option params [required, String] :job_id
-    #   The identifier for the fraudster registration job you are describing.
+    #   The identifier of the fraudster registration job you are describing.
     #
     # @return [Types::DescribeFraudsterRegistrationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -634,6 +774,8 @@ module Aws::VoiceID
     #   resp.job.output_data_config.s3_uri #=> String
     #   resp.job.registration_config.duplicate_registration_action #=> String, one of "SKIP", "REGISTER_AS_NEW"
     #   resp.job.registration_config.fraudster_similarity_threshold #=> Integer
+    #   resp.job.registration_config.watchlist_ids #=> Array
+    #   resp.job.registration_config.watchlist_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/DescribeFraudsterRegistrationJob AWS API Documentation
     #
@@ -685,7 +827,7 @@ module Aws::VoiceID
     # Describes the specified speaker enrollment job.
     #
     # @option params [required, String] :domain_id
-    #   The identifier of the domain containing the speaker enrollment job.
+    #   The identifier of the domain that contains the speaker enrollment job.
     #
     # @option params [required, String] :job_id
     #   The identifier of the speaker enrollment job you are describing.
@@ -710,6 +852,8 @@ module Aws::VoiceID
     #   resp.job.enrollment_config.existing_enrollment_action #=> String, one of "SKIP", "OVERWRITE"
     #   resp.job.enrollment_config.fraud_detection_config.fraud_detection_action #=> String, one of "IGNORE", "FAIL"
     #   resp.job.enrollment_config.fraud_detection_config.risk_threshold #=> Integer
+    #   resp.job.enrollment_config.fraud_detection_config.watchlist_ids #=> Array
+    #   resp.job.enrollment_config.fraud_detection_config.watchlist_ids[0] #=> String
     #   resp.job.failure_details.message #=> String
     #   resp.job.failure_details.status_code #=> Integer
     #   resp.job.input_data_config.s3_uri #=> String
@@ -726,6 +870,89 @@ module Aws::VoiceID
     # @param [Hash] params ({})
     def describe_speaker_enrollment_job(params = {}, options = {})
       req = build_request(:describe_speaker_enrollment_job, params)
+      req.send_request(options)
+    end
+
+    # Describes the specified watchlist.
+    #
+    # @option params [required, String] :domain_id
+    #   The identifier of the domain that contains the watchlist.
+    #
+    # @option params [required, String] :watchlist_id
+    #   The identifier of the watchlist that you are describing.
+    #
+    # @return [Types::DescribeWatchlistResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeWatchlistResponse#watchlist #watchlist} => Types::Watchlist
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_watchlist({
+    #     domain_id: "DomainId", # required
+    #     watchlist_id: "WatchlistId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.watchlist.created_at #=> Time
+    #   resp.watchlist.default_watchlist #=> Boolean
+    #   resp.watchlist.description #=> String
+    #   resp.watchlist.domain_id #=> String
+    #   resp.watchlist.name #=> String
+    #   resp.watchlist.updated_at #=> Time
+    #   resp.watchlist.watchlist_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/DescribeWatchlist AWS API Documentation
+    #
+    # @overload describe_watchlist(params = {})
+    # @param [Hash] params ({})
+    def describe_watchlist(params = {}, options = {})
+      req = build_request(:describe_watchlist, params)
+      req.send_request(options)
+    end
+
+    # Disassociates the fraudsters from the watchlist specified. Voice ID
+    # always expects a fraudster to be a part of at least one watchlist. If
+    # you try to disassociate a fraudster from its only watchlist, a
+    # `ValidationException` is thrown.
+    #
+    # @option params [required, String] :domain_id
+    #   The identifier of the domain that contains the fraudster.
+    #
+    # @option params [required, String] :fraudster_id
+    #   The identifier of the fraudster to be disassociated from the
+    #   watchlist.
+    #
+    # @option params [required, String] :watchlist_id
+    #   The identifier of the watchlist that you want to disassociate from the
+    #   fraudster.
+    #
+    # @return [Types::DisassociateFraudsterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateFraudsterResponse#fraudster #fraudster} => Types::Fraudster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_fraudster({
+    #     domain_id: "DomainId", # required
+    #     fraudster_id: "FraudsterId", # required
+    #     watchlist_id: "WatchlistId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.fraudster.created_at #=> Time
+    #   resp.fraudster.domain_id #=> String
+    #   resp.fraudster.generated_fraudster_id #=> String
+    #   resp.fraudster.watchlist_ids #=> Array
+    #   resp.fraudster.watchlist_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/DisassociateFraudster AWS API Documentation
+    #
+    # @overload disassociate_fraudster(params = {})
+    # @param [Hash] params ({})
+    def disassociate_fraudster(params = {}, options = {})
+      req = build_request(:disassociate_fraudster, params)
       req.send_request(options)
     end
 
@@ -769,6 +996,7 @@ module Aws::VoiceID
     #   resp.fraud_detection_result.audio_aggregation_ended_at #=> Time
     #   resp.fraud_detection_result.audio_aggregation_started_at #=> Time
     #   resp.fraud_detection_result.configuration.risk_threshold #=> Integer
+    #   resp.fraud_detection_result.configuration.watchlist_id #=> String
     #   resp.fraud_detection_result.decision #=> String, one of "HIGH_RISK", "LOW_RISK", "NOT_ENOUGH_SPEECH"
     #   resp.fraud_detection_result.fraud_detection_result_id #=> String
     #   resp.fraud_detection_result.reasons #=> Array
@@ -792,7 +1020,9 @@ module Aws::VoiceID
     # Lists all the domains in the Amazon Web Services account.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of domains to list per API call.
+    #   The maximum number of results that are returned per call. You can use
+    #   `NextToken` to obtain more pages of results. The default is 100; the
+    #   maximum allowed page size is also 100.
     #
     # @option params [String] :next_token
     #   If `NextToken` is returned, there are more results available. The
@@ -829,6 +1059,7 @@ module Aws::VoiceID
     #   resp.domain_summaries[0].server_side_encryption_update_details.old_kms_key_id #=> String
     #   resp.domain_summaries[0].server_side_encryption_update_details.update_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
     #   resp.domain_summaries[0].updated_at #=> Time
+    #   resp.domain_summaries[0].watchlist_details.default_watchlist_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/ListDomains AWS API Documentation
@@ -845,7 +1076,7 @@ module Aws::VoiceID
     # registration jobs in the given domain.
     #
     # @option params [required, String] :domain_id
-    #   The identifier of the domain containing the fraudster registration
+    #   The identifier of the domain that contains the fraudster registration
     #   Jobs.
     #
     # @option params [String] :job_status
@@ -853,8 +1084,8 @@ module Aws::VoiceID
     #
     # @option params [Integer] :max_results
     #   The maximum number of results that are returned per call. You can use
-    #   `NextToken` to obtain further pages of results. The default is 100;
-    #   the maximum allowed page size is also 100.
+    #   `NextToken` to obtain more pages of results. The default is 100; the
+    #   maximum allowed page size is also 100.
     #
     # @option params [String] :next_token
     #   If `NextToken` is returned, there are more results available. The
@@ -902,20 +1133,78 @@ module Aws::VoiceID
       req.send_request(options)
     end
 
+    # Lists all fraudsters in a specified watchlist or domain.
+    #
+    # @option params [required, String] :domain_id
+    #   The identifier of the domain.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that are returned per call. You can use
+    #   `NextToken` to obtain more pages of results. The default is 100; the
+    #   maximum allowed page size is also 100.
+    #
+    # @option params [String] :next_token
+    #   If `NextToken` is returned, there are more results available. The
+    #   value of `NextToken` is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   Keep all other arguments unchanged. Each pagination token expires
+    #   after 24 hours.
+    #
+    # @option params [String] :watchlist_id
+    #   The identifier of the watchlist. If provided, all fraudsters in the
+    #   watchlist are listed. If not provided, all fraudsters in the domain
+    #   are listed.
+    #
+    # @return [Types::ListFraudstersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFraudstersResponse#fraudster_summaries #fraudster_summaries} => Array&lt;Types::FraudsterSummary&gt;
+    #   * {Types::ListFraudstersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_fraudsters({
+    #     domain_id: "DomainId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     watchlist_id: "WatchlistId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.fraudster_summaries #=> Array
+    #   resp.fraudster_summaries[0].created_at #=> Time
+    #   resp.fraudster_summaries[0].domain_id #=> String
+    #   resp.fraudster_summaries[0].generated_fraudster_id #=> String
+    #   resp.fraudster_summaries[0].watchlist_ids #=> Array
+    #   resp.fraudster_summaries[0].watchlist_ids[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/ListFraudsters AWS API Documentation
+    #
+    # @overload list_fraudsters(params = {})
+    # @param [Hash] params ({})
+    def list_fraudsters(params = {}, options = {})
+      req = build_request(:list_fraudsters, params)
+      req.send_request(options)
+    end
+
     # Lists all the speaker enrollment jobs in the domain with the specified
     # `JobStatus`. If `JobStatus` is not provided, this lists all jobs with
     # all possible speaker enrollment job statuses.
     #
     # @option params [required, String] :domain_id
-    #   The identifier of the domain containing the speaker enrollment jobs.
+    #   The identifier of the domain that contains the speaker enrollment
+    #   jobs.
     #
     # @option params [String] :job_status
     #   Provides the status of your speaker enrollment Job.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results that are returned per call. You can use
-    #   `NextToken` to obtain further pages of results. The default is 100;
-    #   the maximum allowed page size is also 100.
+    #   `NextToken` to obtain more pages of results. The default is 100; the
+    #   maximum allowed page size is also 100.
     #
     # @option params [String] :next_token
     #   If `NextToken` is returned, there are more results available. The
@@ -970,8 +1259,8 @@ module Aws::VoiceID
     #
     # @option params [Integer] :max_results
     #   The maximum number of results that are returned per call. You can use
-    #   `NextToken` to obtain further pages of results. The default is 100;
-    #   the maximum allowed page size is also 100.
+    #   `NextToken` to obtain more pages of results. The default is 100; the
+    #   maximum allowed page size is also 100.
     #
     # @option params [String] :next_token
     #   If `NextToken` is returned, there are more results available. The
@@ -1047,6 +1336,59 @@ module Aws::VoiceID
       req.send_request(options)
     end
 
+    # Lists all watchlists in a specified domain.
+    #
+    # @option params [required, String] :domain_id
+    #   The identifier of the domain.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that are returned per call. You can use
+    #   `NextToken` to obtain more pages of results. The default is 100; the
+    #   maximum allowed page size is also 100.
+    #
+    # @option params [String] :next_token
+    #   If `NextToken` is returned, there are more results available. The
+    #   value of `NextToken` is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   Keep all other arguments unchanged. Each pagination token expires
+    #   after 24 hours.
+    #
+    # @return [Types::ListWatchlistsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWatchlistsResponse#next_token #next_token} => String
+    #   * {Types::ListWatchlistsResponse#watchlist_summaries #watchlist_summaries} => Array&lt;Types::WatchlistSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_watchlists({
+    #     domain_id: "DomainId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.watchlist_summaries #=> Array
+    #   resp.watchlist_summaries[0].created_at #=> Time
+    #   resp.watchlist_summaries[0].default_watchlist #=> Boolean
+    #   resp.watchlist_summaries[0].description #=> String
+    #   resp.watchlist_summaries[0].domain_id #=> String
+    #   resp.watchlist_summaries[0].name #=> String
+    #   resp.watchlist_summaries[0].updated_at #=> Time
+    #   resp.watchlist_summaries[0].watchlist_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/ListWatchlists AWS API Documentation
+    #
+    # @overload list_watchlists(params = {})
+    # @param [Hash] params ({})
+    def list_watchlists(params = {}, options = {})
+      req = build_request(:list_watchlists, params)
+      req.send_request(options)
+    end
+
     # Opts out a speaker from Voice ID. A speaker can be opted out
     # regardless of whether or not they already exist in Voice ID. If they
     # don't yet exist, a new speaker is created in an opted out state. If
@@ -1056,7 +1398,7 @@ module Aws::VoiceID
     # embeddings stored in Voice ID.
     #
     # @option params [required, String] :domain_id
-    #   The identifier of the domain containing the speaker.
+    #   The identifier of the domain that contains the speaker.
     #
     # @option params [required, String] :speaker_id
     #   The identifier of the speaker you want opted-out.
@@ -1094,11 +1436,17 @@ module Aws::VoiceID
     # Starts a new batch fraudster registration job using provided details.
     #
     # @option params [String] :client_token
-    #   The idempotency token for starting a new fraudster registration job.
-    #   If not provided, Amazon Web Services SDK populates this field.
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [required, String] :data_access_role_arn
     #   The IAM role Amazon Resource Name (ARN) that grants Voice ID
@@ -1112,8 +1460,8 @@ module Aws::VoiceID
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/voiceid-fraudster-watchlist.html
     #
     # @option params [required, String] :domain_id
-    #   The identifier of the domain containing the fraudster registration job
-    #   and in which the fraudsters are registered.
+    #   The identifier of the domain that contains the fraudster registration
+    #   job and in which the fraudsters are registered.
     #
     # @option params [required, Types::InputDataConfig] :input_data_config
     #   The input data config containing an S3 URI for the input manifest file
@@ -1153,6 +1501,7 @@ module Aws::VoiceID
     #     registration_config: {
     #       duplicate_registration_action: "SKIP", # accepts SKIP, REGISTER_AS_NEW
     #       fraudster_similarity_threshold: 1,
+    #       watchlist_ids: ["WatchlistId"],
     #     },
     #   })
     #
@@ -1173,6 +1522,8 @@ module Aws::VoiceID
     #   resp.job.output_data_config.s3_uri #=> String
     #   resp.job.registration_config.duplicate_registration_action #=> String, one of "SKIP", "REGISTER_AS_NEW"
     #   resp.job.registration_config.fraudster_similarity_threshold #=> Integer
+    #   resp.job.registration_config.watchlist_ids #=> Array
+    #   resp.job.registration_config.watchlist_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/StartFraudsterRegistrationJob AWS API Documentation
     #
@@ -1186,11 +1537,17 @@ module Aws::VoiceID
     # Starts a new batch speaker enrollment job using specified details.
     #
     # @option params [String] :client_token
-    #   The idempotency token for starting a new speaker enrollment Job. If
-    #   not provided, Amazon Web Services SDK populates this field.
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [required, String] :data_access_role_arn
     #   The IAM role Amazon Resource Name (ARN) that grants Voice ID
@@ -1239,6 +1596,7 @@ module Aws::VoiceID
     #       fraud_detection_config: {
     #         fraud_detection_action: "IGNORE", # accepts IGNORE, FAIL
     #         risk_threshold: 1,
+    #         watchlist_ids: ["WatchlistId"],
     #       },
     #     },
     #     input_data_config: { # required
@@ -1260,6 +1618,8 @@ module Aws::VoiceID
     #   resp.job.enrollment_config.existing_enrollment_action #=> String, one of "SKIP", "OVERWRITE"
     #   resp.job.enrollment_config.fraud_detection_config.fraud_detection_action #=> String, one of "IGNORE", "FAIL"
     #   resp.job.enrollment_config.fraud_detection_config.risk_threshold #=> Integer
+    #   resp.job.enrollment_config.fraud_detection_config.watchlist_ids #=> Array
+    #   resp.job.enrollment_config.fraud_detection_config.watchlist_ids[0] #=> String
     #   resp.job.failure_details.message #=> String
     #   resp.job.failure_details.status_code #=> Integer
     #   resp.job.input_data_config.s3_uri #=> String
@@ -1344,7 +1704,7 @@ module Aws::VoiceID
     # 'Description' is not provided, it is removed from the domain.
     #
     # @option params [String] :description
-    #   A brief description of the domain.
+    #   A brief description about this domain.
     #
     # @option params [required, String] :domain_id
     #   The identifier of the domain to be updated.
@@ -1389,6 +1749,7 @@ module Aws::VoiceID
     #   resp.domain.server_side_encryption_update_details.old_kms_key_id #=> String
     #   resp.domain.server_side_encryption_update_details.update_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
     #   resp.domain.updated_at #=> Time
+    #   resp.domain.watchlist_details.default_watchlist_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/UpdateDomain AWS API Documentation
     #
@@ -1396,6 +1757,53 @@ module Aws::VoiceID
     # @param [Hash] params ({})
     def update_domain(params = {}, options = {})
       req = build_request(:update_domain, params)
+      req.send_request(options)
+    end
+
+    # Updates the specified watchlist. Every domain has a default watchlist
+    # which cannot be updated.
+    #
+    # @option params [String] :description
+    #   A brief description about this watchlist.
+    #
+    # @option params [required, String] :domain_id
+    #   The identifier of the domain that contains the watchlist.
+    #
+    # @option params [String] :name
+    #   The name of the watchlist.
+    #
+    # @option params [required, String] :watchlist_id
+    #   The identifier of the watchlist to be updated.
+    #
+    # @return [Types::UpdateWatchlistResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateWatchlistResponse#watchlist #watchlist} => Types::Watchlist
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_watchlist({
+    #     description: "WatchlistDescription",
+    #     domain_id: "DomainId", # required
+    #     name: "WatchlistName",
+    #     watchlist_id: "WatchlistId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.watchlist.created_at #=> Time
+    #   resp.watchlist.default_watchlist #=> Boolean
+    #   resp.watchlist.description #=> String
+    #   resp.watchlist.domain_id #=> String
+    #   resp.watchlist.name #=> String
+    #   resp.watchlist.updated_at #=> Time
+    #   resp.watchlist.watchlist_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/UpdateWatchlist AWS API Documentation
+    #
+    # @overload update_watchlist(params = {})
+    # @param [Hash] params ({})
+    def update_watchlist(params = {}, options = {})
+      req = build_request(:update_watchlist, params)
       req.send_request(options)
     end
 
@@ -1412,7 +1820,7 @@ module Aws::VoiceID
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-voiceid'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

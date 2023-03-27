@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.171.0 (2023-03-27)
+------------------
+
+* Feature - Fixed some improperly rendered links in SDK documentation.
+
 1.170.0 (2023-03-23)
 ------------------
 

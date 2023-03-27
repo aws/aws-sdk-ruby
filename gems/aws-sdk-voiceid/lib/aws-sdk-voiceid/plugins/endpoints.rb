@@ -56,14 +56,20 @@ module Aws::VoiceID
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :associate_fraudster
+            Aws::VoiceID::Endpoints::AssociateFraudster.build(context)
           when :create_domain
             Aws::VoiceID::Endpoints::CreateDomain.build(context)
+          when :create_watchlist
+            Aws::VoiceID::Endpoints::CreateWatchlist.build(context)
           when :delete_domain
             Aws::VoiceID::Endpoints::DeleteDomain.build(context)
           when :delete_fraudster
             Aws::VoiceID::Endpoints::DeleteFraudster.build(context)
           when :delete_speaker
             Aws::VoiceID::Endpoints::DeleteSpeaker.build(context)
+          when :delete_watchlist
+            Aws::VoiceID::Endpoints::DeleteWatchlist.build(context)
           when :describe_domain
             Aws::VoiceID::Endpoints::DescribeDomain.build(context)
           when :describe_fraudster
@@ -74,18 +80,26 @@ module Aws::VoiceID
             Aws::VoiceID::Endpoints::DescribeSpeaker.build(context)
           when :describe_speaker_enrollment_job
             Aws::VoiceID::Endpoints::DescribeSpeakerEnrollmentJob.build(context)
+          when :describe_watchlist
+            Aws::VoiceID::Endpoints::DescribeWatchlist.build(context)
+          when :disassociate_fraudster
+            Aws::VoiceID::Endpoints::DisassociateFraudster.build(context)
           when :evaluate_session
             Aws::VoiceID::Endpoints::EvaluateSession.build(context)
           when :list_domains
             Aws::VoiceID::Endpoints::ListDomains.build(context)
           when :list_fraudster_registration_jobs
             Aws::VoiceID::Endpoints::ListFraudsterRegistrationJobs.build(context)
+          when :list_fraudsters
+            Aws::VoiceID::Endpoints::ListFraudsters.build(context)
           when :list_speaker_enrollment_jobs
             Aws::VoiceID::Endpoints::ListSpeakerEnrollmentJobs.build(context)
           when :list_speakers
             Aws::VoiceID::Endpoints::ListSpeakers.build(context)
           when :list_tags_for_resource
             Aws::VoiceID::Endpoints::ListTagsForResource.build(context)
+          when :list_watchlists
+            Aws::VoiceID::Endpoints::ListWatchlists.build(context)
           when :opt_out_speaker
             Aws::VoiceID::Endpoints::OptOutSpeaker.build(context)
           when :start_fraudster_registration_job
@@ -98,6 +112,8 @@ module Aws::VoiceID
             Aws::VoiceID::Endpoints::UntagResource.build(context)
           when :update_domain
             Aws::VoiceID::Endpoints::UpdateDomain.build(context)
+          when :update_watchlist
+            Aws::VoiceID::Endpoints::UpdateWatchlist.build(context)
           end
         end
       end

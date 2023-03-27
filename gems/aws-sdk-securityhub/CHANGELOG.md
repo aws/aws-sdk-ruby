@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2023-03-27)
+------------------
+
+* Feature - Added new resource detail objects to ASFF, including resources for AwsEksCluster, AWSS3Bucket, AwsEc2RouteTable and AwsEC2Instance.
+
 1.78.0 (2023-02-24)
 ------------------
 

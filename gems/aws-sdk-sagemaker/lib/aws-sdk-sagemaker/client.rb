@@ -1174,7 +1174,7 @@ module Aws::SageMaker
     # Creates an Autopilot job.
     #
     # Find the best-performing model after you run an Autopilot job by
-    # calling .
+    # calling ` DescribeAutoMLJob `.
     #
     # For information about how to use Autopilot, see [Automate Model
     # Development with Amazon SageMaker Autopilot][1].
@@ -1190,9 +1190,10 @@ module Aws::SageMaker
     # @option params [required, Array<Types::AutoMLChannel>] :input_data_config
     #   An array of channel objects that describes the input data and its
     #   location. Each channel is a named input source. Similar to
-    #   `InputDataConfig` supported by . Format(s) supported: CSV, Parquet. A
-    #   minimum of 500 rows is required for the training dataset. There is not
-    #   a minimum number of rows required for the validation dataset.
+    #   `InputDataConfig` supported by ` HyperParameterTrainingJobDefinition
+    #   `. Format(s) supported: CSV, Parquet. A minimum of 500 rows is
+    #   required for the training dataset. There is not a minimum number of
+    #   rows required for the validation dataset.
     #
     # @option params [required, Types::AutoMLOutputDataConfig] :output_data_config
     #   Provides information about encryption and the Amazon S3 output path
@@ -1202,17 +1203,17 @@ module Aws::SageMaker
     # @option params [String] :problem_type
     #   Defines the type of supervised learning problem available for the
     #   candidates. For more information, see [ Amazon SageMaker Autopilot
-    #   problem types and algorithm support][1].
+    #   problem types][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-problem-types.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types
     #
     # @option params [Types::AutoMLJobObjective] :auto_ml_job_objective
     #   Defines the objective metric used to measure the predictive quality of
-    #   an AutoML job. You provide an AutoMLJobObjective$MetricName and
-    #   Autopilot infers whether to minimize or maximize it. For , only
-    #   `Accuracy` is supported.
+    #   an AutoML job. You provide an ` AutoMLJobObjective$MetricName ` and
+    #   Autopilot infers whether to minimize or maximize it. For `
+    #   CreateAutoMLJobV2 `, only `Accuracy` is supported.
     #
     # @option params [Types::AutoMLJobConfig] :auto_ml_job_config
     #   A collection of settings used to configure an AutoML job.
@@ -1328,9 +1329,10 @@ module Aws::SageMaker
     # as images or text for Computer Vision or Natural Language Processing
     # problems.
     #
-    # Find the resulting model after you run an AutoML job V2 by calling .
+    # Find the resulting model after you run an AutoML job V2 by calling `
+    # DescribeAutoMLJobV2 `.
     #
-    # To create an `AutoMLJob` using tabular data, see .
+    # To create an `AutoMLJob` using tabular data, see ` CreateAutoMLJob `.
     #
     # <note markdown="1"> This API action is callable through SageMaker Canvas only. Calling it
     # directly from the CLI or an SDK results in an error.
@@ -1343,18 +1345,14 @@ module Aws::SageMaker
     #
     # @option params [required, Array<Types::AutoMLJobChannel>] :auto_ml_job_input_data_config
     #   An array of channel objects describing the input data and their
-    #   location. Each channel is a named input source. Similar to
-    #   [InputDataConfig][1] supported by `CreateAutoMLJob`. The supported
+    #   location. Each channel is a named input source. Similar to `
+    #   InputDataConfig ` supported by `CreateAutoMLJob`. The supported
     #   formats depend on the problem type:
     #
     #   * ImageClassification: S3Prefix, `ManifestFile`,
     #     `AugmentedManifestFile`
     #
     #   * TextClassification: S3Prefix
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html#sagemaker-CreateAutoMLJob-request-InputDataConfig
     #
     # @option params [required, Types::AutoMLOutputDataConfig] :output_data_config
     #   Provides information about encryption and the Amazon S3 output path
@@ -1383,7 +1381,7 @@ module Aws::SageMaker
     #
     # @option params [Types::AutoMLJobObjective] :auto_ml_job_objective
     #   Specifies a metric to minimize or maximize as the objective of a job.
-    #   For , only `Accuracy` is supported.
+    #   For ` CreateAutoMLJobV2 `, only `Accuracy` is supported.
     #
     # @option params [Types::ModelDeployConfig] :model_deploy_config
     #   Specifies how to generate the endpoint name for an automatic one-click
@@ -23224,7 +23222,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.170.0'
+      context[:gem_version] = '1.171.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

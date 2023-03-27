@@ -374,11 +374,11 @@ module Aws::AppRegistry
     # are machine-readable, such as third-party integrations.
     #
     # @option params [required, String] :application
-    #   The name or ID of the application.
+    #   The name, ID, or ARN of the application.
     #
     # @option params [required, String] :attribute_group
-    #   The name or ID of the attribute group that holds the attributes to
-    #   describe the application.
+    #   The name, ID, or ARN of the attribute group that holds the attributes
+    #   to describe the application.
     #
     # @return [Types::AssociateAttributeGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -406,11 +406,12 @@ module Aws::AppRegistry
       req.send_request(options)
     end
 
-    # Associates a resource with an application. Both the resource and the
-    # application can be specified either by ID or name.
+    # Associates a resource with an application. The resource can be
+    # specified by its ARN or name. The application can be specified by ARN,
+    # ID, or name.
     #
     # @option params [required, String] :application
-    #   The name or ID of the application.
+    #   The name, ID, or ARN of the application.
     #
     # @option params [required, String] :resource_type
     #   The type of resource of which the application will be associated.
@@ -571,12 +572,12 @@ module Aws::AppRegistry
       req.send_request(options)
     end
 
-    # Deletes an application that is specified either by its application ID
-    # or name. All associated attribute groups and resources must be
+    # Deletes an application that is specified either by its application ID,
+    # name, or ARN. All associated attribute groups and resources must be
     # disassociated from it before deleting an application.
     #
     # @option params [required, String] :application
-    #   The name or ID of the application.
+    #   The name, ID, or ARN of the application.
     #
     # @return [Types::DeleteApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -606,12 +607,12 @@ module Aws::AppRegistry
       req.send_request(options)
     end
 
-    # Deletes an attribute group, specified either by its attribute group ID
-    # or name.
+    # Deletes an attribute group, specified either by its attribute group
+    # ID, name, or ARN.
     #
     # @option params [required, String] :attribute_group
-    #   The name or ID of the attribute group that holds the attributes to
-    #   describe the application.
+    #   The name, ID, or ARN of the attribute group that holds the attributes
+    #   to describe the application.
     #
     # @return [Types::DeleteAttributeGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -631,6 +632,7 @@ module Aws::AppRegistry
     #   resp.attribute_group.description #=> String
     #   resp.attribute_group.creation_time #=> Time
     #   resp.attribute_group.last_update_time #=> Time
+    #   resp.attribute_group.created_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/DeleteAttributeGroup AWS API Documentation
     #
@@ -647,11 +649,11 @@ module Aws::AppRegistry
     # `AssociateAttributeGroup`.
     #
     # @option params [required, String] :application
-    #   The name or ID of the application.
+    #   The name, ID, or ARN of the application.
     #
     # @option params [required, String] :attribute_group
-    #   The name or ID of the attribute group that holds the attributes to
-    #   describe the application.
+    #   The name, ID, or ARN of the attribute group that holds the attributes
+    #   to describe the application.
     #
     # @return [Types::DisassociateAttributeGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -719,15 +721,14 @@ module Aws::AppRegistry
     end
 
     # Retrieves metadata information about one of your applications. The
-    # application can be specified either by its unique ID or by its name
-    # (which is unique within one account in one region at a given point in
-    # time). Specify by ID in automated workflows if you want to make sure
-    # that the exact same application is returned or a
-    # `ResourceNotFoundException` is thrown, avoiding the ABA addressing
-    # problem.
+    # application can be specified by its ARN, ID, or name (which is unique
+    # within one account in one region at a given point in time). Specify by
+    # ARN or ID in automated workflows if you want to make sure that the
+    # exact same application is returned or a `ResourceNotFoundException` is
+    # thrown, avoiding the ABA addressing problem.
     #
     # @option params [required, String] :application
-    #   The name or ID of the application.
+    #   The name, ID, or ARN of the application.
     #
     # @return [Types::GetApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -774,7 +775,7 @@ module Aws::AppRegistry
     # Gets the resource associated with the application.
     #
     # @option params [required, String] :application
-    #   The name or ID of the application.
+    #   The name, ID, or ARN of the application.
     #
     # @option params [required, String] :resource_type
     #   The type of resource associated with the application.
@@ -812,13 +813,12 @@ module Aws::AppRegistry
       req.send_request(options)
     end
 
-    # Retrieves an attribute group, either by its name or its ID. The
-    # attribute group can be specified either by its unique ID or by its
-    # name.
+    # Retrieves an attribute group by its ARN, ID, or name. The attribute
+    # group can be specified by its ARN, ID, or name.
     #
     # @option params [required, String] :attribute_group
-    #   The name or ID of the attribute group that holds the attributes to
-    #   describe the application.
+    #   The name, ID, or ARN of the attribute group that holds the attributes
+    #   to describe the application.
     #
     # @return [Types::GetAttributeGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -830,6 +830,7 @@ module Aws::AppRegistry
     #   * {Types::GetAttributeGroupResponse#creation_time #creation_time} => Time
     #   * {Types::GetAttributeGroupResponse#last_update_time #last_update_time} => Time
     #   * {Types::GetAttributeGroupResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetAttributeGroupResponse#created_by #created_by} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -848,6 +849,7 @@ module Aws::AppRegistry
     #   resp.last_update_time #=> Time
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.created_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/GetAttributeGroup AWS API Documentation
     #
@@ -978,7 +980,7 @@ module Aws::AppRegistry
     #  </note>
     #
     # @option params [required, String] :application
-    #   The name or ID of the application.
+    #   The name, ID, or ARN of the application.
     #
     # @option params [String] :next_token
     #   The token to use to get the next page of results after a previous API
@@ -1057,6 +1059,7 @@ module Aws::AppRegistry
     #   resp.attribute_groups[0].description #=> String
     #   resp.attribute_groups[0].creation_time #=> Time
     #   resp.attribute_groups[0].last_update_time #=> Time
+    #   resp.attribute_groups[0].created_by #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/ListAttributeGroups AWS API Documentation
@@ -1104,6 +1107,7 @@ module Aws::AppRegistry
     #   resp.attribute_groups_details[0].id #=> String
     #   resp.attribute_groups_details[0].arn #=> String
     #   resp.attribute_groups_details[0].name #=> String
+    #   resp.attribute_groups_details[0].created_by #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/ListAttributeGroupsForApplication AWS API Documentation
@@ -1278,7 +1282,7 @@ module Aws::AppRegistry
     # Updates an existing application with new attributes.
     #
     # @option params [required, String] :application
-    #   The name or ID of the application that will be updated.
+    #   The name, ID, or ARN of the application that will be updated.
     #
     # @option params [String] :name
     #   Deprecated: The new name of the application. The name must be unique
@@ -1323,8 +1327,8 @@ module Aws::AppRegistry
     # Updates an existing attribute group with new details.
     #
     # @option params [required, String] :attribute_group
-    #   The name or ID of the attribute group that holds the attributes to
-    #   describe the application.
+    #   The name, ID, or ARN of the attribute group that holds the attributes
+    #   to describe the application.
     #
     # @option params [String] :name
     #   Deprecated: The new name of the attribute group. The name must be
@@ -1386,7 +1390,7 @@ module Aws::AppRegistry
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appregistry'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

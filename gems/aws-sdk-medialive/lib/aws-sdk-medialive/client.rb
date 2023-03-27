@@ -538,7 +538,8 @@ module Aws::MediaLive
     #           action_name: "__string", # required
     #           schedule_action_settings: { # required
     #             hls_id_3_segment_tagging_settings: {
-    #               tag: "__string", # required
+    #               tag: "__string",
+    #               id_3: "__string",
     #             },
     #             hls_timed_metadata_settings: {
     #               id_3: "__string", # required
@@ -668,6 +669,7 @@ module Aws::MediaLive
     #   resp.creates.schedule_actions #=> Array
     #   resp.creates.schedule_actions[0].action_name #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.hls_id_3_segment_tagging_settings.tag #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.hls_id_3_segment_tagging_settings.id_3 #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.input_prepare_settings.input_attachment_name_reference #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.input_prepare_settings.input_clipping_settings.input_timecode_source #=> String, one of "ZEROBASED", "EMBEDDED"
@@ -729,6 +731,7 @@ module Aws::MediaLive
     #   resp.deletes.schedule_actions #=> Array
     #   resp.deletes.schedule_actions[0].action_name #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.hls_id_3_segment_tagging_settings.tag #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.hls_id_3_segment_tagging_settings.id_3 #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.input_prepare_settings.input_attachment_name_reference #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.input_prepare_settings.input_clipping_settings.input_timecode_source #=> String, one of "ZEROBASED", "EMBEDDED"
@@ -3707,6 +3710,7 @@ module Aws::MediaLive
     #   * {Types::DescribeInputDeviceResponse#serial_number #serial_number} => String
     #   * {Types::DescribeInputDeviceResponse#type #type} => String
     #   * {Types::DescribeInputDeviceResponse#uhd_device_settings #uhd_device_settings} => Types::InputDeviceUhdSettings
+    #   * {Types::DescribeInputDeviceResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3749,6 +3753,8 @@ module Aws::MediaLive
     #   resp.uhd_device_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.uhd_device_settings.width #=> Integer
     #   resp.uhd_device_settings.latency_ms #=> Integer
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputDevice AWS API Documentation
     #
@@ -4114,6 +4120,7 @@ module Aws::MediaLive
     #   resp.schedule_actions #=> Array
     #   resp.schedule_actions[0].action_name #=> String
     #   resp.schedule_actions[0].schedule_action_settings.hls_id_3_segment_tagging_settings.tag #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.hls_id_3_segment_tagging_settings.id_3 #=> String
     #   resp.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
     #   resp.schedule_actions[0].schedule_action_settings.input_prepare_settings.input_attachment_name_reference #=> String
     #   resp.schedule_actions[0].schedule_action_settings.input_prepare_settings.input_clipping_settings.input_timecode_source #=> String, one of "ZEROBASED", "EMBEDDED"
@@ -4414,6 +4421,8 @@ module Aws::MediaLive
     #   resp.input_devices[0].uhd_device_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.input_devices[0].uhd_device_settings.width #=> Integer
     #   resp.input_devices[0].uhd_device_settings.latency_ms #=> Integer
+    #   resp.input_devices[0].tags #=> Hash
+    #   resp.input_devices[0].tags["__string"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputDevices AWS API Documentation
@@ -8003,6 +8012,7 @@ module Aws::MediaLive
     #   * {Types::UpdateInputDeviceResponse#serial_number #serial_number} => String
     #   * {Types::UpdateInputDeviceResponse#type #type} => String
     #   * {Types::UpdateInputDeviceResponse#uhd_device_settings #uhd_device_settings} => Types::InputDeviceUhdSettings
+    #   * {Types::UpdateInputDeviceResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -8056,6 +8066,8 @@ module Aws::MediaLive
     #   resp.uhd_device_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
     #   resp.uhd_device_settings.width #=> Integer
     #   resp.uhd_device_settings.latency_ms #=> Integer
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputDevice AWS API Documentation
     #
@@ -8322,7 +8334,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.97.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

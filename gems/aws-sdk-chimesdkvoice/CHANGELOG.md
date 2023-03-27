@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2023-03-27)
+------------------
+
+* Feature - Documentation updates for Amazon Chime SDK Voice.
+
 1.3.0 (2023-03-23)
 ------------------
 

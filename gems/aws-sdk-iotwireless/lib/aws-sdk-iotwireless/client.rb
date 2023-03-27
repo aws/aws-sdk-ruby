@@ -676,6 +676,10 @@ module Aws::IoTWireless
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Types::SidewalkCreateDeviceProfile] :sidewalk
+    #   The Sidewalk-related information for creating the Sidewalk device
+    #   profile.
+    #
     # @return [Types::CreateDeviceProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDeviceProfileResponse#arn #arn} => String
@@ -713,6 +717,8 @@ module Aws::IoTWireless
     #       },
     #     ],
     #     client_request_token: "ClientRequestToken",
+    #     sidewalk: {
+    #     },
     #   })
     #
     # @example Response structure
@@ -787,7 +793,7 @@ module Aws::IoTWireless
     #     description: "Description",
     #     client_request_token: "ClientRequestToken",
     #     lo_ra_wan: {
-    #       rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1
+    #       rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1, AS923-2, AS923-3, AS923-4, EU433, CN470, CN779, RU864, KR920, IN865
     #     },
     #     firmware_update_image: "FirmwareUpdateImage", # required
     #     firmware_update_role: "FirmwareUpdateRole", # required
@@ -850,7 +856,7 @@ module Aws::IoTWireless
     #     description: "Description",
     #     client_request_token: "ClientRequestToken",
     #     lo_ra_wan: { # required
-    #       rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1
+    #       rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1, AS923-2, AS923-3, AS923-4, EU433, CN470, CN779, RU864, KR920, IN865
     #       dl_class: "ClassB", # accepts ClassB, ClassC
     #     },
     #     tags: [
@@ -1035,6 +1041,10 @@ module Aws::IoTWireless
     #   FPort values for the GNSS, stream, and ClockSync functions of the
     #   positioning information.
     #
+    # @option params [Types::SidewalkCreateWirelessDevice] :sidewalk
+    #   The device configuration information to use to create the Sidewalk
+    #   device.
+    #
     # @return [Types::CreateWirelessDeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWirelessDeviceResponse#arn #arn} => String
@@ -1105,6 +1115,9 @@ module Aws::IoTWireless
     #       },
     #     ],
     #     positioning: "Enabled", # accepts Enabled, Disabled
+    #     sidewalk: {
+    #       device_profile_id: "DeviceProfileId",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1466,6 +1479,26 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Delete an import task.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier of the import task to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_wireless_device_import_task({
+    #     id: "ImportTaskId", # required
+    #   })
+    #
+    # @overload delete_wireless_device_import_task(params = {})
+    # @param [Hash] params ({})
+    def delete_wireless_device_import_task(params = {}, options = {})
+      req = build_request(:delete_wireless_device_import_task, params)
+      req.send_request(options)
+    end
+
     # Deletes a wireless gateway.
     #
     # @option params [required, String] :id
@@ -1524,6 +1557,32 @@ module Aws::IoTWireless
     # @param [Hash] params ({})
     def delete_wireless_gateway_task_definition(params = {}, options = {})
       req = build_request(:delete_wireless_gateway_task_definition, params)
+      req.send_request(options)
+    end
+
+    # Deregister a wireless device from AWS IoT Wireless.
+    #
+    # @option params [required, String] :identifier
+    #   The identifier of the wireless device to deregister from AWS IoT
+    #   Wireless.
+    #
+    # @option params [String] :wireless_device_type
+    #   The type of wireless device to deregister from AWS IoT Wireless, which
+    #   can be `LoRaWAN` or `Sidewalk`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deregister_wireless_device({
+    #     identifier: "Identifier", # required
+    #     wireless_device_type: "Sidewalk", # accepts Sidewalk, LoRaWAN
+    #   })
+    #
+    # @overload deregister_wireless_device(params = {})
+    # @param [Hash] params ({})
+    def deregister_wireless_device(params = {}, options = {})
+      req = build_request(:deregister_wireless_device, params)
       req.send_request(options)
     end
 
@@ -1733,6 +1792,7 @@ module Aws::IoTWireless
     #   * {Types::GetDeviceProfileResponse#name #name} => String
     #   * {Types::GetDeviceProfileResponse#id #id} => String
     #   * {Types::GetDeviceProfileResponse#lo_ra_wan #lo_ra_wan} => Types::LoRaWANDeviceProfile
+    #   * {Types::GetDeviceProfileResponse#sidewalk #sidewalk} => Types::SidewalkGetDeviceProfile
     #
     # @example Request syntax with placeholder values
     #
@@ -1765,6 +1825,14 @@ module Aws::IoTWireless
     #   resp.lo_ra_wan.rf_region #=> String
     #   resp.lo_ra_wan.supports_join #=> Boolean
     #   resp.lo_ra_wan.supports_32_bit_f_cnt #=> Boolean
+    #   resp.sidewalk.application_server_public_key #=> String
+    #   resp.sidewalk.qualification_status #=> Boolean
+    #   resp.sidewalk.dak_certificate_metadata #=> Array
+    #   resp.sidewalk.dak_certificate_metadata[0].certificate_id #=> String
+    #   resp.sidewalk.dak_certificate_metadata[0].max_allowed_signature #=> Integer
+    #   resp.sidewalk.dak_certificate_metadata[0].factory_support #=> Boolean
+    #   resp.sidewalk.dak_certificate_metadata[0].ap_id #=> String
+    #   resp.sidewalk.dak_certificate_metadata[0].device_type_id #=> String
     #
     # @overload get_device_profile(params = {})
     # @param [Hash] params ({})
@@ -1908,7 +1976,7 @@ module Aws::IoTWireless
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.status #=> String
-    #   resp.lo_ra_wan.rf_region #=> String, one of "EU868", "US915", "AU915", "AS923-1"
+    #   resp.lo_ra_wan.rf_region #=> String, one of "EU868", "US915", "AU915", "AS923-1", "AS923-2", "AS923-3", "AS923-4", "EU433", "CN470", "CN779", "RU864", "KR920", "IN865"
     #   resp.lo_ra_wan.dl_class #=> String, one of "ClassB", "ClassC"
     #   resp.lo_ra_wan.number_of_devices_requested #=> Integer
     #   resp.lo_ra_wan.number_of_devices_in_group #=> Integer
@@ -2589,12 +2657,67 @@ module Aws::IoTWireless
     #   resp.sidewalk.device_certificates #=> Array
     #   resp.sidewalk.device_certificates[0].signing_alg #=> String, one of "Ed25519", "P256r1"
     #   resp.sidewalk.device_certificates[0].value #=> String
+    #   resp.sidewalk.private_keys #=> Array
+    #   resp.sidewalk.private_keys[0].signing_alg #=> String, one of "Ed25519", "P256r1"
+    #   resp.sidewalk.private_keys[0].value #=> String
+    #   resp.sidewalk.device_profile_id #=> String
+    #   resp.sidewalk.certificate_id #=> String
+    #   resp.sidewalk.status #=> String, one of "PROVISIONED", "REGISTERED", "ACTIVATED", "UNKNOWN"
     #   resp.positioning #=> String, one of "Enabled", "Disabled"
     #
     # @overload get_wireless_device(params = {})
     # @param [Hash] params ({})
     def get_wireless_device(params = {}, options = {})
       req = build_request(:get_wireless_device, params)
+      req.send_request(options)
+    end
+
+    # Get information about an import task and count of device onboarding
+    # summary information for the import task.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the import task for which information is requested.
+    #
+    # @return [Types::GetWirelessDeviceImportTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetWirelessDeviceImportTaskResponse#id #id} => String
+    #   * {Types::GetWirelessDeviceImportTaskResponse#arn #arn} => String
+    #   * {Types::GetWirelessDeviceImportTaskResponse#destination_name #destination_name} => String
+    #   * {Types::GetWirelessDeviceImportTaskResponse#sidewalk #sidewalk} => Types::SidewalkGetStartImportInfo
+    #   * {Types::GetWirelessDeviceImportTaskResponse#creation_time #creation_time} => Time
+    #   * {Types::GetWirelessDeviceImportTaskResponse#status #status} => String
+    #   * {Types::GetWirelessDeviceImportTaskResponse#status_reason #status_reason} => String
+    #   * {Types::GetWirelessDeviceImportTaskResponse#initialized_imported_device_count #initialized_imported_device_count} => Integer
+    #   * {Types::GetWirelessDeviceImportTaskResponse#pending_imported_device_count #pending_imported_device_count} => Integer
+    #   * {Types::GetWirelessDeviceImportTaskResponse#onboarded_imported_device_count #onboarded_imported_device_count} => Integer
+    #   * {Types::GetWirelessDeviceImportTaskResponse#failed_imported_device_count #failed_imported_device_count} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_wireless_device_import_task({
+    #     id: "ImportTaskId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.destination_name #=> String
+    #   resp.sidewalk.device_creation_file_list #=> Array
+    #   resp.sidewalk.device_creation_file_list[0] #=> String
+    #   resp.sidewalk.role #=> String
+    #   resp.creation_time #=> Time
+    #   resp.status #=> String, one of "INITIALIZING", "INITIALIZED", "PENDING", "COMPLETE", "FAILED", "DELETING"
+    #   resp.status_reason #=> String
+    #   resp.initialized_imported_device_count #=> Integer
+    #   resp.pending_imported_device_count #=> Integer
+    #   resp.onboarded_imported_device_count #=> Integer
+    #   resp.failed_imported_device_count #=> Integer
+    #
+    # @overload get_wireless_device_import_task(params = {})
+    # @param [Hash] params ({})
+    def get_wireless_device_import_task(params = {}, options = {})
+      req = build_request(:get_wireless_device_import_task, params)
       req.send_request(options)
     end
 
@@ -2909,6 +3032,10 @@ module Aws::IoTWireless
     # @option params [Integer] :max_results
     #   The maximum number of results to return in this operation.
     #
+    # @option params [String] :device_profile_type
+    #   A filter to list only device profiles that use this type, which can be
+    #   `LoRaWAN` or `Sidewalk`.
+    #
     # @return [Types::ListDeviceProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListDeviceProfilesResponse#next_token #next_token} => String
@@ -2921,6 +3048,7 @@ module Aws::IoTWireless
     #   resp = client.list_device_profiles({
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     device_profile_type: "Sidewalk", # accepts Sidewalk, LoRaWAN
     #   })
     #
     # @example Response structure
@@ -2935,6 +3063,56 @@ module Aws::IoTWireless
     # @param [Hash] params ({})
     def list_device_profiles(params = {}, options = {})
       req = build_request(:list_device_profiles, params)
+      req.send_request(options)
+    end
+
+    # List the Sidewalk devices in an import task and their onboarding
+    # status.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the import task for which wireless devices are
+    #   listed.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this operation.
+    #
+    # @option params [String] :next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise `null` to receive the first set of
+    #   results.
+    #
+    # @option params [String] :status
+    #   The status of the devices in the import task.
+    #
+    # @return [Types::ListDevicesForWirelessDeviceImportTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDevicesForWirelessDeviceImportTaskResponse#next_token #next_token} => String
+    #   * {Types::ListDevicesForWirelessDeviceImportTaskResponse#destination_name #destination_name} => String
+    #   * {Types::ListDevicesForWirelessDeviceImportTaskResponse#imported_wireless_device_list #imported_wireless_device_list} => Array&lt;Types::ImportedWirelessDevice&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_devices_for_wireless_device_import_task({
+    #     id: "ImportTaskId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     status: "INITIALIZED", # accepts INITIALIZED, PENDING, ONBOARDED, FAILED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.destination_name #=> String
+    #   resp.imported_wireless_device_list #=> Array
+    #   resp.imported_wireless_device_list[0].sidewalk.sidewalk_manufacturing_sn #=> String
+    #   resp.imported_wireless_device_list[0].sidewalk.onboarding_status #=> String, one of "INITIALIZED", "PENDING", "ONBOARDED", "FAILED"
+    #   resp.imported_wireless_device_list[0].sidewalk.onboarding_status_reason #=> String
+    #   resp.imported_wireless_device_list[0].sidewalk.last_update_time #=> Time
+    #
+    # @overload list_devices_for_wireless_device_import_task(params = {})
+    # @param [Hash] params ({})
+    def list_devices_for_wireless_device_import_task(params = {}, options = {})
+      req = build_request(:list_devices_for_wireless_device_import_task, params)
       req.send_request(options)
     end
 
@@ -3361,6 +3539,53 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # List wireless devices that have been added to an import task.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this operation.
+    #
+    # @option params [String] :next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise `null` to receive the first set of
+    #   results.
+    #
+    # @return [Types::ListWirelessDeviceImportTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWirelessDeviceImportTasksResponse#next_token #next_token} => String
+    #   * {Types::ListWirelessDeviceImportTasksResponse#wireless_device_import_task_list #wireless_device_import_task_list} => Array&lt;Types::WirelessDeviceImportTask&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_wireless_device_import_tasks({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.wireless_device_import_task_list #=> Array
+    #   resp.wireless_device_import_task_list[0].id #=> String
+    #   resp.wireless_device_import_task_list[0].arn #=> String
+    #   resp.wireless_device_import_task_list[0].destination_name #=> String
+    #   resp.wireless_device_import_task_list[0].sidewalk.device_creation_file_list #=> Array
+    #   resp.wireless_device_import_task_list[0].sidewalk.device_creation_file_list[0] #=> String
+    #   resp.wireless_device_import_task_list[0].sidewalk.role #=> String
+    #   resp.wireless_device_import_task_list[0].creation_time #=> Time
+    #   resp.wireless_device_import_task_list[0].status #=> String, one of "INITIALIZING", "INITIALIZED", "PENDING", "COMPLETE", "FAILED", "DELETING"
+    #   resp.wireless_device_import_task_list[0].status_reason #=> String
+    #   resp.wireless_device_import_task_list[0].initialized_imported_device_count #=> Integer
+    #   resp.wireless_device_import_task_list[0].pending_imported_device_count #=> Integer
+    #   resp.wireless_device_import_task_list[0].onboarded_imported_device_count #=> Integer
+    #   resp.wireless_device_import_task_list[0].failed_imported_device_count #=> Integer
+    #
+    # @overload list_wireless_device_import_tasks(params = {})
+    # @param [Hash] params ({})
+    def list_wireless_device_import_tasks(params = {}, options = {})
+      req = build_request(:list_wireless_device_import_tasks, params)
+      req.send_request(options)
+    end
+
     # Lists the wireless devices registered to your AWS account.
     #
     # @option params [Integer] :max_results
@@ -3429,6 +3654,8 @@ module Aws::IoTWireless
     #   resp.wireless_device_list[0].sidewalk.device_certificates #=> Array
     #   resp.wireless_device_list[0].sidewalk.device_certificates[0].signing_alg #=> String, one of "Ed25519", "P256r1"
     #   resp.wireless_device_list[0].sidewalk.device_certificates[0].value #=> String
+    #   resp.wireless_device_list[0].sidewalk.device_profile_id #=> String
+    #   resp.wireless_device_list[0].sidewalk.status #=> String, one of "PROVISIONED", "REGISTERED", "ACTIVATED", "UNKNOWN"
     #   resp.wireless_device_list[0].fuota_device_status #=> String, one of "Initial", "Package_Not_Supported", "FragAlgo_unsupported", "Not_enough_memory", "FragIndex_unsupported", "Wrong_descriptor", "SessionCnt_replay", "MissingFrag", "MemoryError", "MICError", "Successful"
     #   resp.wireless_device_list[0].multicast_device_status #=> String
     #   resp.wireless_device_list[0].mc_group_id #=> Integer
@@ -3889,6 +4116,127 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Start import task for a single wireless device.
+    #
+    # @option params [required, String] :destination_name
+    #   The name of the Sidewalk destination that describes the IoT rule to
+    #   route messages from the device in the import task that will be
+    #   onboarded to AWS IoT Wireless.
+    #
+    # @option params [String] :client_request_token
+    #   Each resource must have a unique client request token. If you try to
+    #   create a new resource with the same token as a resource that already
+    #   exists, an exception occurs. If you omit this value, AWS SDKs will
+    #   automatically generate a unique client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :device_name
+    #   The name of the wireless device for which an import task is being
+    #   started.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tag to attach to the specified resource. Tags are metadata that
+    #   you can use to manage a resource.
+    #
+    # @option params [required, Types::SidewalkSingleStartImportInfo] :sidewalk
+    #   The Sidewalk-related parameters for importing a single wireless
+    #   device.
+    #
+    # @return [Types::StartSingleWirelessDeviceImportTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartSingleWirelessDeviceImportTaskResponse#id #id} => String
+    #   * {Types::StartSingleWirelessDeviceImportTaskResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_single_wireless_device_import_task({
+    #     destination_name: "DestinationName", # required
+    #     client_request_token: "ClientRequestToken",
+    #     device_name: "DeviceName",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     sidewalk: { # required
+    #       sidewalk_manufacturing_sn: "SidewalkManufacturingSn",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #
+    # @overload start_single_wireless_device_import_task(params = {})
+    # @param [Hash] params ({})
+    def start_single_wireless_device_import_task(params = {}, options = {})
+      req = build_request(:start_single_wireless_device_import_task, params)
+      req.send_request(options)
+    end
+
+    # Start import task for provisioning Sidewalk devices in bulk using an
+    # S3 CSV file.
+    #
+    # @option params [required, String] :destination_name
+    #   The name of the Sidewalk destination that describes the IoT rule to
+    #   route messages from the devices in the import task that are onboarded
+    #   to AWS IoT Wireless.
+    #
+    # @option params [String] :client_request_token
+    #   Each resource must have a unique client request token. If you try to
+    #   create a new resource with the same token as a resource that already
+    #   exists, an exception occurs. If you omit this value, AWS SDKs will
+    #   automatically generate a unique client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tag to attach to the specified resource. Tags are metadata that
+    #   you can use to manage a resource.
+    #
+    # @option params [required, Types::SidewalkStartImportInfo] :sidewalk
+    #   The Sidewalk-related parameters for importing wireless devices that
+    #   need to be provisioned in bulk.
+    #
+    # @return [Types::StartWirelessDeviceImportTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartWirelessDeviceImportTaskResponse#id #id} => String
+    #   * {Types::StartWirelessDeviceImportTaskResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_wireless_device_import_task({
+    #     destination_name: "DestinationName", # required
+    #     client_request_token: "ClientRequestToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     sidewalk: { # required
+    #       device_creation_file: "DeviceCreationFile",
+    #       role: "Role",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #
+    # @overload start_wireless_device_import_task(params = {})
+    # @param [Hash] params ({})
+    def start_wireless_device_import_task(params = {}, options = {})
+      req = build_request(:start_wireless_device_import_task, params)
+      req.send_request(options)
+    end
+
     # Adds a tag to a resource.
     #
     # @option params [required, String] :resource_arn
@@ -4114,7 +4462,7 @@ module Aws::IoTWireless
     #     name: "FuotaTaskName",
     #     description: "Description",
     #     lo_ra_wan: {
-    #       rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1
+    #       rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1, AS923-2, AS923-3, AS923-4, EU433, CN470, CN779, RU864, KR920, IN865
     #     },
     #     firmware_update_image: "FirmwareUpdateImage",
     #     firmware_update_role: "FirmwareUpdateRole",
@@ -4208,7 +4556,7 @@ module Aws::IoTWireless
     #     name: "MulticastGroupName",
     #     description: "Description",
     #     lo_ra_wan: {
-    #       rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1
+    #       rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1, AS923-2, AS923-3, AS923-4, EU433, CN470, CN779, RU864, KR920, IN865
     #       dl_class: "ClassB", # accepts ClassB, ClassC
     #     },
     #   })
@@ -4524,6 +4872,32 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Update an import task to add more devices to the task.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the import task to be updated.
+    #
+    # @option params [required, Types::SidewalkUpdateImportInfo] :sidewalk
+    #   The Sidewalk-related parameters of the import task to be updated.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_wireless_device_import_task({
+    #     id: "ImportTaskId", # required
+    #     sidewalk: { # required
+    #       device_creation_file: "DeviceCreationFile",
+    #     },
+    #   })
+    #
+    # @overload update_wireless_device_import_task(params = {})
+    # @param [Hash] params ({})
+    def update_wireless_device_import_task(params = {}, options = {})
+      req = build_request(:update_wireless_device_import_task, params)
+      req.send_request(options)
+    end
+
     # Updates properties of a wireless gateway.
     #
     # @option params [required, String] :id
@@ -4576,7 +4950,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

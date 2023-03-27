@@ -16,18 +16,24 @@ module Aws::VoiceID
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    AssociateFraudsterRequest = Shapes::StructureShape.new(name: 'AssociateFraudsterRequest')
+    AssociateFraudsterResponse = Shapes::StructureShape.new(name: 'AssociateFraudsterResponse')
     AuthenticationConfiguration = Shapes::StructureShape.new(name: 'AuthenticationConfiguration')
     AuthenticationDecision = Shapes::StringShape.new(name: 'AuthenticationDecision')
     AuthenticationResult = Shapes::StructureShape.new(name: 'AuthenticationResult')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClientTokenString = Shapes::StringShape.new(name: 'ClientTokenString')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConflictType = Shapes::StringShape.new(name: 'ConflictType')
     CreateDomainRequest = Shapes::StructureShape.new(name: 'CreateDomainRequest')
     CreateDomainResponse = Shapes::StructureShape.new(name: 'CreateDomainResponse')
+    CreateWatchlistRequest = Shapes::StructureShape.new(name: 'CreateWatchlistRequest')
+    CreateWatchlistResponse = Shapes::StructureShape.new(name: 'CreateWatchlistResponse')
     CustomerSpeakerId = Shapes::StringShape.new(name: 'CustomerSpeakerId')
     DeleteDomainRequest = Shapes::StructureShape.new(name: 'DeleteDomainRequest')
     DeleteFraudsterRequest = Shapes::StructureShape.new(name: 'DeleteFraudsterRequest')
     DeleteSpeakerRequest = Shapes::StructureShape.new(name: 'DeleteSpeakerRequest')
+    DeleteWatchlistRequest = Shapes::StructureShape.new(name: 'DeleteWatchlistRequest')
     DescribeDomainRequest = Shapes::StructureShape.new(name: 'DescribeDomainRequest')
     DescribeDomainResponse = Shapes::StructureShape.new(name: 'DescribeDomainResponse')
     DescribeFraudsterRegistrationJobRequest = Shapes::StructureShape.new(name: 'DescribeFraudsterRegistrationJobRequest')
@@ -38,7 +44,11 @@ module Aws::VoiceID
     DescribeSpeakerEnrollmentJobResponse = Shapes::StructureShape.new(name: 'DescribeSpeakerEnrollmentJobResponse')
     DescribeSpeakerRequest = Shapes::StructureShape.new(name: 'DescribeSpeakerRequest')
     DescribeSpeakerResponse = Shapes::StructureShape.new(name: 'DescribeSpeakerResponse')
+    DescribeWatchlistRequest = Shapes::StructureShape.new(name: 'DescribeWatchlistRequest')
+    DescribeWatchlistResponse = Shapes::StructureShape.new(name: 'DescribeWatchlistResponse')
     Description = Shapes::StringShape.new(name: 'Description')
+    DisassociateFraudsterRequest = Shapes::StructureShape.new(name: 'DisassociateFraudsterRequest')
+    DisassociateFraudsterResponse = Shapes::StructureShape.new(name: 'DisassociateFraudsterResponse')
     Domain = Shapes::StructureShape.new(name: 'Domain')
     DomainId = Shapes::StringShape.new(name: 'DomainId')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
@@ -48,6 +58,7 @@ module Aws::VoiceID
     DuplicateRegistrationAction = Shapes::StringShape.new(name: 'DuplicateRegistrationAction')
     EnrollmentConfig = Shapes::StructureShape.new(name: 'EnrollmentConfig')
     EnrollmentJobFraudDetectionConfig = Shapes::StructureShape.new(name: 'EnrollmentJobFraudDetectionConfig')
+    EnrollmentJobFraudDetectionConfigWatchlistIds = Shapes::ListShape.new(name: 'EnrollmentJobFraudDetectionConfigWatchlistIds')
     EvaluateSessionRequest = Shapes::StructureShape.new(name: 'EvaluateSessionRequest')
     EvaluateSessionResponse = Shapes::StructureShape.new(name: 'EvaluateSessionResponse')
     ExistingEnrollmentAction = Shapes::StringShape.new(name: 'ExistingEnrollmentAction')
@@ -65,6 +76,8 @@ module Aws::VoiceID
     FraudsterRegistrationJobStatus = Shapes::StringShape.new(name: 'FraudsterRegistrationJobStatus')
     FraudsterRegistrationJobSummaries = Shapes::ListShape.new(name: 'FraudsterRegistrationJobSummaries')
     FraudsterRegistrationJobSummary = Shapes::StructureShape.new(name: 'FraudsterRegistrationJobSummary')
+    FraudsterSummaries = Shapes::ListShape.new(name: 'FraudsterSummaries')
+    FraudsterSummary = Shapes::StructureShape.new(name: 'FraudsterSummary')
     GeneratedFraudsterId = Shapes::StringShape.new(name: 'GeneratedFraudsterId')
     GeneratedSpeakerId = Shapes::StringShape.new(name: 'GeneratedSpeakerId')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
@@ -80,12 +93,16 @@ module Aws::VoiceID
     ListDomainsResponse = Shapes::StructureShape.new(name: 'ListDomainsResponse')
     ListFraudsterRegistrationJobsRequest = Shapes::StructureShape.new(name: 'ListFraudsterRegistrationJobsRequest')
     ListFraudsterRegistrationJobsResponse = Shapes::StructureShape.new(name: 'ListFraudsterRegistrationJobsResponse')
+    ListFraudstersRequest = Shapes::StructureShape.new(name: 'ListFraudstersRequest')
+    ListFraudstersResponse = Shapes::StructureShape.new(name: 'ListFraudstersResponse')
     ListSpeakerEnrollmentJobsRequest = Shapes::StructureShape.new(name: 'ListSpeakerEnrollmentJobsRequest')
     ListSpeakerEnrollmentJobsResponse = Shapes::StructureShape.new(name: 'ListSpeakerEnrollmentJobsResponse')
     ListSpeakersRequest = Shapes::StructureShape.new(name: 'ListSpeakersRequest')
     ListSpeakersResponse = Shapes::StructureShape.new(name: 'ListSpeakersResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListWatchlistsRequest = Shapes::StructureShape.new(name: 'ListWatchlistsRequest')
+    ListWatchlistsResponse = Shapes::StructureShape.new(name: 'ListWatchlistsResponse')
     MaxResultsForList = Shapes::IntegerShape.new(name: 'MaxResultsForList')
     MaxResultsForListDomainFe = Shapes::IntegerShape.new(name: 'MaxResultsForListDomainFe')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -93,8 +110,10 @@ module Aws::VoiceID
     OptOutSpeakerResponse = Shapes::StructureShape.new(name: 'OptOutSpeakerResponse')
     OutputDataConfig = Shapes::StructureShape.new(name: 'OutputDataConfig')
     RegistrationConfig = Shapes::StructureShape.new(name: 'RegistrationConfig')
+    RegistrationConfigWatchlistIds = Shapes::ListShape.new(name: 'RegistrationConfigWatchlistIds')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    ResponseWatchlistIds = Shapes::ListShape.new(name: 'ResponseWatchlistIds')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     Score = Shapes::IntegerShape.new(name: 'Score')
     ServerSideEncryptionConfiguration = Shapes::StructureShape.new(name: 'ServerSideEncryptionConfiguration')
@@ -133,11 +152,28 @@ module Aws::VoiceID
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateDomainRequest = Shapes::StructureShape.new(name: 'UpdateDomainRequest')
     UpdateDomainResponse = Shapes::StructureShape.new(name: 'UpdateDomainResponse')
+    UpdateWatchlistRequest = Shapes::StructureShape.new(name: 'UpdateWatchlistRequest')
+    UpdateWatchlistResponse = Shapes::StructureShape.new(name: 'UpdateWatchlistResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     VoiceSpoofingRisk = Shapes::StructureShape.new(name: 'VoiceSpoofingRisk')
+    Watchlist = Shapes::StructureShape.new(name: 'Watchlist')
+    WatchlistDescription = Shapes::StringShape.new(name: 'WatchlistDescription')
+    WatchlistDetails = Shapes::StructureShape.new(name: 'WatchlistDetails')
+    WatchlistId = Shapes::StringShape.new(name: 'WatchlistId')
+    WatchlistName = Shapes::StringShape.new(name: 'WatchlistName')
+    WatchlistSummaries = Shapes::ListShape.new(name: 'WatchlistSummaries')
+    WatchlistSummary = Shapes::StructureShape.new(name: 'WatchlistSummary')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AssociateFraudsterRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
+    AssociateFraudsterRequest.add_member(:fraudster_id, Shapes::ShapeRef.new(shape: FraudsterId, required: true, location_name: "FraudsterId"))
+    AssociateFraudsterRequest.add_member(:watchlist_id, Shapes::ShapeRef.new(shape: WatchlistId, required: true, location_name: "WatchlistId"))
+    AssociateFraudsterRequest.struct_class = Types::AssociateFraudsterRequest
+
+    AssociateFraudsterResponse.add_member(:fraudster, Shapes::ShapeRef.new(shape: Fraudster, location_name: "Fraudster"))
+    AssociateFraudsterResponse.struct_class = Types::AssociateFraudsterResponse
 
     AuthenticationConfiguration.add_member(:acceptance_threshold, Shapes::ShapeRef.new(shape: Score, required: true, location_name: "AcceptanceThreshold"))
     AuthenticationConfiguration.struct_class = Types::AuthenticationConfiguration
@@ -166,6 +202,15 @@ module Aws::VoiceID
     CreateDomainResponse.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, location_name: "Domain"))
     CreateDomainResponse.struct_class = Types::CreateDomainResponse
 
+    CreateWatchlistRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateWatchlistRequest.add_member(:description, Shapes::ShapeRef.new(shape: WatchlistDescription, location_name: "Description"))
+    CreateWatchlistRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
+    CreateWatchlistRequest.add_member(:name, Shapes::ShapeRef.new(shape: WatchlistName, required: true, location_name: "Name"))
+    CreateWatchlistRequest.struct_class = Types::CreateWatchlistRequest
+
+    CreateWatchlistResponse.add_member(:watchlist, Shapes::ShapeRef.new(shape: Watchlist, location_name: "Watchlist"))
+    CreateWatchlistResponse.struct_class = Types::CreateWatchlistResponse
+
     DeleteDomainRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
     DeleteDomainRequest.struct_class = Types::DeleteDomainRequest
 
@@ -176,6 +221,10 @@ module Aws::VoiceID
     DeleteSpeakerRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
     DeleteSpeakerRequest.add_member(:speaker_id, Shapes::ShapeRef.new(shape: SpeakerId, required: true, location_name: "SpeakerId"))
     DeleteSpeakerRequest.struct_class = Types::DeleteSpeakerRequest
+
+    DeleteWatchlistRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
+    DeleteWatchlistRequest.add_member(:watchlist_id, Shapes::ShapeRef.new(shape: WatchlistId, required: true, location_name: "WatchlistId"))
+    DeleteWatchlistRequest.struct_class = Types::DeleteWatchlistRequest
 
     DescribeDomainRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
     DescribeDomainRequest.struct_class = Types::DescribeDomainRequest
@@ -211,6 +260,21 @@ module Aws::VoiceID
     DescribeSpeakerResponse.add_member(:speaker, Shapes::ShapeRef.new(shape: Speaker, location_name: "Speaker"))
     DescribeSpeakerResponse.struct_class = Types::DescribeSpeakerResponse
 
+    DescribeWatchlistRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
+    DescribeWatchlistRequest.add_member(:watchlist_id, Shapes::ShapeRef.new(shape: WatchlistId, required: true, location_name: "WatchlistId"))
+    DescribeWatchlistRequest.struct_class = Types::DescribeWatchlistRequest
+
+    DescribeWatchlistResponse.add_member(:watchlist, Shapes::ShapeRef.new(shape: Watchlist, location_name: "Watchlist"))
+    DescribeWatchlistResponse.struct_class = Types::DescribeWatchlistResponse
+
+    DisassociateFraudsterRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
+    DisassociateFraudsterRequest.add_member(:fraudster_id, Shapes::ShapeRef.new(shape: FraudsterId, required: true, location_name: "FraudsterId"))
+    DisassociateFraudsterRequest.add_member(:watchlist_id, Shapes::ShapeRef.new(shape: WatchlistId, required: true, location_name: "WatchlistId"))
+    DisassociateFraudsterRequest.struct_class = Types::DisassociateFraudsterRequest
+
+    DisassociateFraudsterResponse.add_member(:fraudster, Shapes::ShapeRef.new(shape: Fraudster, location_name: "Fraudster"))
+    DisassociateFraudsterResponse.struct_class = Types::DisassociateFraudsterResponse
+
     Domain.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     Domain.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     Domain.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -220,6 +284,7 @@ module Aws::VoiceID
     Domain.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "ServerSideEncryptionConfiguration"))
     Domain.add_member(:server_side_encryption_update_details, Shapes::ShapeRef.new(shape: ServerSideEncryptionUpdateDetails, location_name: "ServerSideEncryptionUpdateDetails"))
     Domain.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    Domain.add_member(:watchlist_details, Shapes::ShapeRef.new(shape: WatchlistDetails, location_name: "WatchlistDetails"))
     Domain.struct_class = Types::Domain
 
     DomainSummaries.member = Shapes::ShapeRef.new(shape: DomainSummary)
@@ -233,6 +298,7 @@ module Aws::VoiceID
     DomainSummary.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "ServerSideEncryptionConfiguration"))
     DomainSummary.add_member(:server_side_encryption_update_details, Shapes::ShapeRef.new(shape: ServerSideEncryptionUpdateDetails, location_name: "ServerSideEncryptionUpdateDetails"))
     DomainSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    DomainSummary.add_member(:watchlist_details, Shapes::ShapeRef.new(shape: WatchlistDetails, location_name: "WatchlistDetails"))
     DomainSummary.struct_class = Types::DomainSummary
 
     EnrollmentConfig.add_member(:existing_enrollment_action, Shapes::ShapeRef.new(shape: ExistingEnrollmentAction, location_name: "ExistingEnrollmentAction"))
@@ -241,7 +307,10 @@ module Aws::VoiceID
 
     EnrollmentJobFraudDetectionConfig.add_member(:fraud_detection_action, Shapes::ShapeRef.new(shape: FraudDetectionAction, location_name: "FraudDetectionAction"))
     EnrollmentJobFraudDetectionConfig.add_member(:risk_threshold, Shapes::ShapeRef.new(shape: Score, location_name: "RiskThreshold"))
+    EnrollmentJobFraudDetectionConfig.add_member(:watchlist_ids, Shapes::ShapeRef.new(shape: EnrollmentJobFraudDetectionConfigWatchlistIds, location_name: "WatchlistIds"))
     EnrollmentJobFraudDetectionConfig.struct_class = Types::EnrollmentJobFraudDetectionConfig
+
+    EnrollmentJobFraudDetectionConfigWatchlistIds.member = Shapes::ShapeRef.new(shape: WatchlistId)
 
     EvaluateSessionRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
     EvaluateSessionRequest.add_member(:session_name_or_id, Shapes::ShapeRef.new(shape: SessionNameOrId, required: true, location_name: "SessionNameOrId"))
@@ -259,7 +328,8 @@ module Aws::VoiceID
     FailureDetails.add_member(:status_code, Shapes::ShapeRef.new(shape: Integer, location_name: "StatusCode"))
     FailureDetails.struct_class = Types::FailureDetails
 
-    FraudDetectionConfiguration.add_member(:risk_threshold, Shapes::ShapeRef.new(shape: Score, required: true, location_name: "RiskThreshold"))
+    FraudDetectionConfiguration.add_member(:risk_threshold, Shapes::ShapeRef.new(shape: Score, location_name: "RiskThreshold"))
+    FraudDetectionConfiguration.add_member(:watchlist_id, Shapes::ShapeRef.new(shape: WatchlistId, location_name: "WatchlistId"))
     FraudDetectionConfiguration.struct_class = Types::FraudDetectionConfiguration
 
     FraudDetectionReasons.member = Shapes::ShapeRef.new(shape: FraudDetectionReason)
@@ -280,6 +350,7 @@ module Aws::VoiceID
     Fraudster.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     Fraudster.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
     Fraudster.add_member(:generated_fraudster_id, Shapes::ShapeRef.new(shape: GeneratedFraudsterId, location_name: "GeneratedFraudsterId"))
+    Fraudster.add_member(:watchlist_ids, Shapes::ShapeRef.new(shape: ResponseWatchlistIds, location_name: "WatchlistIds"))
     Fraudster.struct_class = Types::Fraudster
 
     FraudsterRegistrationJob.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
@@ -307,6 +378,14 @@ module Aws::VoiceID
     FraudsterRegistrationJobSummary.add_member(:job_progress, Shapes::ShapeRef.new(shape: JobProgress, location_name: "JobProgress"))
     FraudsterRegistrationJobSummary.add_member(:job_status, Shapes::ShapeRef.new(shape: FraudsterRegistrationJobStatus, location_name: "JobStatus"))
     FraudsterRegistrationJobSummary.struct_class = Types::FraudsterRegistrationJobSummary
+
+    FraudsterSummaries.member = Shapes::ShapeRef.new(shape: FraudsterSummary)
+
+    FraudsterSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    FraudsterSummary.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
+    FraudsterSummary.add_member(:generated_fraudster_id, Shapes::ShapeRef.new(shape: GeneratedFraudsterId, location_name: "GeneratedFraudsterId"))
+    FraudsterSummary.add_member(:watchlist_ids, Shapes::ShapeRef.new(shape: ResponseWatchlistIds, location_name: "WatchlistIds"))
+    FraudsterSummary.struct_class = Types::FraudsterSummary
 
     InputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     InputDataConfig.struct_class = Types::InputDataConfig
@@ -339,6 +418,16 @@ module Aws::VoiceID
     ListFraudsterRegistrationJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListFraudsterRegistrationJobsResponse.struct_class = Types::ListFraudsterRegistrationJobsResponse
 
+    ListFraudstersRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
+    ListFraudstersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsForList, location_name: "MaxResults"))
+    ListFraudstersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListFraudstersRequest.add_member(:watchlist_id, Shapes::ShapeRef.new(shape: WatchlistId, location_name: "WatchlistId"))
+    ListFraudstersRequest.struct_class = Types::ListFraudstersRequest
+
+    ListFraudstersResponse.add_member(:fraudster_summaries, Shapes::ShapeRef.new(shape: FraudsterSummaries, location_name: "FraudsterSummaries"))
+    ListFraudstersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListFraudstersResponse.struct_class = Types::ListFraudstersResponse
+
     ListSpeakerEnrollmentJobsRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
     ListSpeakerEnrollmentJobsRequest.add_member(:job_status, Shapes::ShapeRef.new(shape: SpeakerEnrollmentJobStatus, location_name: "JobStatus"))
     ListSpeakerEnrollmentJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsForList, location_name: "MaxResults"))
@@ -364,6 +453,15 @@ module Aws::VoiceID
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    ListWatchlistsRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
+    ListWatchlistsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsForList, location_name: "MaxResults"))
+    ListWatchlistsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListWatchlistsRequest.struct_class = Types::ListWatchlistsRequest
+
+    ListWatchlistsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListWatchlistsResponse.add_member(:watchlist_summaries, Shapes::ShapeRef.new(shape: WatchlistSummaries, location_name: "WatchlistSummaries"))
+    ListWatchlistsResponse.struct_class = Types::ListWatchlistsResponse
+
     OptOutSpeakerRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
     OptOutSpeakerRequest.add_member(:speaker_id, Shapes::ShapeRef.new(shape: SpeakerId, required: true, location_name: "SpeakerId"))
     OptOutSpeakerRequest.struct_class = Types::OptOutSpeakerRequest
@@ -377,11 +475,16 @@ module Aws::VoiceID
 
     RegistrationConfig.add_member(:duplicate_registration_action, Shapes::ShapeRef.new(shape: DuplicateRegistrationAction, location_name: "DuplicateRegistrationAction"))
     RegistrationConfig.add_member(:fraudster_similarity_threshold, Shapes::ShapeRef.new(shape: Score, location_name: "FraudsterSimilarityThreshold"))
+    RegistrationConfig.add_member(:watchlist_ids, Shapes::ShapeRef.new(shape: RegistrationConfigWatchlistIds, location_name: "WatchlistIds"))
     RegistrationConfig.struct_class = Types::RegistrationConfig
+
+    RegistrationConfigWatchlistIds.member = Shapes::ShapeRef.new(shape: WatchlistId)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResponseWatchlistIds.member = Shapes::ShapeRef.new(shape: WatchlistId)
 
     ServerSideEncryptionConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, required: true, location_name: "KmsKeyId"))
     ServerSideEncryptionConfiguration.struct_class = Types::ServerSideEncryptionConfiguration
@@ -496,11 +599,43 @@ module Aws::VoiceID
     UpdateDomainResponse.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, location_name: "Domain"))
     UpdateDomainResponse.struct_class = Types::UpdateDomainResponse
 
+    UpdateWatchlistRequest.add_member(:description, Shapes::ShapeRef.new(shape: WatchlistDescription, location_name: "Description"))
+    UpdateWatchlistRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
+    UpdateWatchlistRequest.add_member(:name, Shapes::ShapeRef.new(shape: WatchlistName, location_name: "Name"))
+    UpdateWatchlistRequest.add_member(:watchlist_id, Shapes::ShapeRef.new(shape: WatchlistId, required: true, location_name: "WatchlistId"))
+    UpdateWatchlistRequest.struct_class = Types::UpdateWatchlistRequest
+
+    UpdateWatchlistResponse.add_member(:watchlist, Shapes::ShapeRef.new(shape: Watchlist, location_name: "Watchlist"))
+    UpdateWatchlistResponse.struct_class = Types::UpdateWatchlistResponse
+
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
 
     VoiceSpoofingRisk.add_member(:risk_score, Shapes::ShapeRef.new(shape: Score, required: true, location_name: "RiskScore"))
     VoiceSpoofingRisk.struct_class = Types::VoiceSpoofingRisk
+
+    Watchlist.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    Watchlist.add_member(:default_watchlist, Shapes::ShapeRef.new(shape: Boolean, location_name: "DefaultWatchlist"))
+    Watchlist.add_member(:description, Shapes::ShapeRef.new(shape: WatchlistDescription, location_name: "Description"))
+    Watchlist.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
+    Watchlist.add_member(:name, Shapes::ShapeRef.new(shape: WatchlistName, location_name: "Name"))
+    Watchlist.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    Watchlist.add_member(:watchlist_id, Shapes::ShapeRef.new(shape: WatchlistId, location_name: "WatchlistId"))
+    Watchlist.struct_class = Types::Watchlist
+
+    WatchlistDetails.add_member(:default_watchlist_id, Shapes::ShapeRef.new(shape: WatchlistId, required: true, location_name: "DefaultWatchlistId"))
+    WatchlistDetails.struct_class = Types::WatchlistDetails
+
+    WatchlistSummaries.member = Shapes::ShapeRef.new(shape: WatchlistSummary)
+
+    WatchlistSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    WatchlistSummary.add_member(:default_watchlist, Shapes::ShapeRef.new(shape: Boolean, location_name: "DefaultWatchlist"))
+    WatchlistSummary.add_member(:description, Shapes::ShapeRef.new(shape: WatchlistDescription, location_name: "Description"))
+    WatchlistSummary.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
+    WatchlistSummary.add_member(:name, Shapes::ShapeRef.new(shape: WatchlistName, location_name: "Name"))
+    WatchlistSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    WatchlistSummary.add_member(:watchlist_id, Shapes::ShapeRef.new(shape: WatchlistId, location_name: "WatchlistId"))
+    WatchlistSummary.struct_class = Types::WatchlistSummary
 
 
     # @api private
@@ -521,12 +656,42 @@ module Aws::VoiceID
         "uid" => "voice-id-2021-09-27",
       }
 
+      api.add_operation(:associate_fraudster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateFraudster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateFraudsterRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateFraudsterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:create_domain, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDomain"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateDomainRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:create_watchlist, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateWatchlist"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateWatchlistRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateWatchlistResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -569,6 +734,20 @@ module Aws::VoiceID
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteSpeakerRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_watchlist, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteWatchlist"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteWatchlistRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -643,6 +822,33 @@ module Aws::VoiceID
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:describe_watchlist, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeWatchlist"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeWatchlistRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeWatchlistResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:disassociate_fraudster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateFraudster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateFraudsterRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateFraudsterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:evaluate_session, Seahorse::Model::Operation.new.tap do |o|
         o.name = "EvaluateSession"
         o.http_method = "POST"
@@ -681,6 +887,25 @@ module Aws::VoiceID
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListFraudsterRegistrationJobsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListFraudsterRegistrationJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_fraudsters, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFraudsters"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListFraudstersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFraudstersResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -743,6 +968,25 @@ module Aws::VoiceID
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:list_watchlists, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListWatchlists"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListWatchlistsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListWatchlistsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:opt_out_speaker, Seahorse::Model::Operation.new.tap do |o|
@@ -824,6 +1068,20 @@ module Aws::VoiceID
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateDomainRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_watchlist, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateWatchlist"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateWatchlistRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateWatchlistResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2023-03-27)
+------------------
+
+* Feature - This release introduces support for RelatedContactId in the StartChatContact API. Interactive message and interactive message response have been added to the list of supported message content types for this API as well.
+
 1.99.0 (2023-03-09)
 ------------------
 

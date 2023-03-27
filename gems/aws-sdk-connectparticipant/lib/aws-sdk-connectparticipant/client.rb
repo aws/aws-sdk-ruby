@@ -484,7 +484,8 @@ module Aws::ConnectParticipant
     #
     # @option params [Boolean] :connect_participant
     #   Amazon Connect Participant is used to mark the participant as
-    #   connected for message streaming.
+    #   connected for customer participant in message streaming, as well as
+    #   for agent or manager participant in non-streaming chats.
     #
     # @return [Types::CreateParticipantConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -808,7 +809,8 @@ module Aws::ConnectParticipant
     #
     # @option params [required, String] :content_type
     #   The type of the content. Supported types are `text/plain`,
-    #   `text/markdown`, and `application/json`.
+    #   `text/markdown`, `application/json`, and
+    #   `application/vnd.amazonaws.connect.message.interactive.response`.
     #
     # @option params [required, String] :content
     #   The content of the message.
@@ -818,6 +820,10 @@ module Aws::ConnectParticipant
     #
     #   * For `application/json`, the Length Constraints are Minimum of 1,
     #     Maximum of 12000.
+    #
+    #   * For
+    #     `application/vnd.amazonaws.connect.message.interactive.response`,
+    #     the Length Constraints are Minimum of 1, Maximum of 12288.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -955,7 +961,7 @@ module Aws::ConnectParticipant
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectparticipant'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

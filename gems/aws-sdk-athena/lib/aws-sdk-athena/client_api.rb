@@ -1184,6 +1184,7 @@ module Aws::Athena
     WorkGroupConfiguration.add_member(:additional_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "AdditionalConfiguration"))
     WorkGroupConfiguration.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "ExecutionRole"))
     WorkGroupConfiguration.add_member(:customer_content_encryption_configuration, Shapes::ShapeRef.new(shape: CustomerContentEncryptionConfiguration, location_name: "CustomerContentEncryptionConfiguration"))
+    WorkGroupConfiguration.add_member(:enable_minimum_encryption_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "EnableMinimumEncryptionConfiguration"))
     WorkGroupConfiguration.struct_class = Types::WorkGroupConfiguration
 
     WorkGroupConfigurationUpdates.add_member(:enforce_work_group_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "EnforceWorkGroupConfiguration"))
@@ -1197,6 +1198,7 @@ module Aws::Athena
     WorkGroupConfigurationUpdates.add_member(:additional_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "AdditionalConfiguration"))
     WorkGroupConfigurationUpdates.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "ExecutionRole"))
     WorkGroupConfigurationUpdates.add_member(:customer_content_encryption_configuration, Shapes::ShapeRef.new(shape: CustomerContentEncryptionConfiguration, location_name: "CustomerContentEncryptionConfiguration"))
+    WorkGroupConfigurationUpdates.add_member(:enable_minimum_encryption_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "EnableMinimumEncryptionConfiguration"))
     WorkGroupConfigurationUpdates.struct_class = Types::WorkGroupConfigurationUpdates
 
     WorkGroupSummary.add_member(:name, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "Name"))
