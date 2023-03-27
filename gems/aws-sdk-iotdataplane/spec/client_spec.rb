@@ -13,10 +13,10 @@ module Aws
         }.to raise_error(Aws::Errors::MissingRegionError)
       end
 
-      it 'requires an endpoint' do
+      it 'can be constructed without an endpoint' do
         expect {
           Client.new(region:'us-west-1')
-        }.to raise_error(ArgumentError, "missing required option `:endpoint'")
+        }.not_to raise_error
       end
 
       it 'requires a valid endpoint' do

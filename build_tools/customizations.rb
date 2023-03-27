@@ -103,10 +103,6 @@ module BuildTools
       end
     end
 
-    api('IoTDataPlane') do |api|
-      api['metadata'].delete('endpointPrefix')
-    end
-
     %w(Lambda LambdaPreview).each do |svc_name|
 
       api(svc_name) do |api|

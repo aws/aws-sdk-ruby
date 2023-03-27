@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Allow construction of client without a custom endpoint.
+
 1.42.0 (2023-01-18)
 ------------------
 
