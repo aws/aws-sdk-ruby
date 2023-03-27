@@ -178,7 +178,6 @@ module Aws::IoTDataPlane
 
       api.metadata = {
         "apiVersion" => "2015-05-28",
-        "endpointPrefix" => "data-ats.iot",
         "protocol" => "rest-json",
         "serviceFullName" => "AWS IoT Data Plane",
         "serviceId" => "IoT Data Plane",
