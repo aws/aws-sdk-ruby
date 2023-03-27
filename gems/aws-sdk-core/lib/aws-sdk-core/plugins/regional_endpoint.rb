@@ -55,7 +55,9 @@ The client endpoint is normally constructed from the `:region`
 option. You should only configure an `:endpoint` when connecting
 to test or custom endpoints. This should be a valid HTTP(S) URI.
         DOCS
+
         endpoint_prefix = cfg.api.metadata['endpointPrefix']
+
         if cfg.region && endpoint_prefix
           if cfg.respond_to?(:sts_regional_endpoints)
             sts_regional = cfg.sts_regional_endpoints
