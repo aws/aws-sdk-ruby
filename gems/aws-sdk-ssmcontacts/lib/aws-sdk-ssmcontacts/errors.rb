@@ -80,6 +80,11 @@ module Aws::SSMContacts
       def resource_type
         @data[:resource_type]
       end
+
+      # @return [String]
+      def dependent_entities
+        @data[:dependent_entities]
+      end
     end
 
     class DataEncryptionException < ServiceError

@@ -38,12 +38,21 @@ module Aws::SSMContacts
     ContactType = Shapes::StringShape.new(name: 'ContactType')
     ContactsList = Shapes::ListShape.new(name: 'ContactsList')
     Content = Shapes::StringShape.new(name: 'Content')
+    CoverageTime = Shapes::StructureShape.new(name: 'CoverageTime')
+    CoverageTimes = Shapes::ListShape.new(name: 'CoverageTimes')
     CreateContactChannelRequest = Shapes::StructureShape.new(name: 'CreateContactChannelRequest')
     CreateContactChannelResult = Shapes::StructureShape.new(name: 'CreateContactChannelResult')
     CreateContactRequest = Shapes::StructureShape.new(name: 'CreateContactRequest')
     CreateContactResult = Shapes::StructureShape.new(name: 'CreateContactResult')
+    CreateRotationOverrideRequest = Shapes::StructureShape.new(name: 'CreateRotationOverrideRequest')
+    CreateRotationOverrideResult = Shapes::StructureShape.new(name: 'CreateRotationOverrideResult')
+    CreateRotationRequest = Shapes::StructureShape.new(name: 'CreateRotationRequest')
+    CreateRotationResult = Shapes::StructureShape.new(name: 'CreateRotationResult')
+    DailySettings = Shapes::ListShape.new(name: 'DailySettings')
     DataEncryptionException = Shapes::StructureShape.new(name: 'DataEncryptionException')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
+    DayOfMonth = Shapes::IntegerShape.new(name: 'DayOfMonth')
+    DayOfWeek = Shapes::StringShape.new(name: 'DayOfWeek')
     DeactivateContactChannelRequest = Shapes::StructureShape.new(name: 'DeactivateContactChannelRequest')
     DeactivateContactChannelResult = Shapes::StructureShape.new(name: 'DeactivateContactChannelResult')
     DeferActivation = Shapes::BooleanShape.new(name: 'DeferActivation')
@@ -51,6 +60,12 @@ module Aws::SSMContacts
     DeleteContactChannelResult = Shapes::StructureShape.new(name: 'DeleteContactChannelResult')
     DeleteContactRequest = Shapes::StructureShape.new(name: 'DeleteContactRequest')
     DeleteContactResult = Shapes::StructureShape.new(name: 'DeleteContactResult')
+    DeleteRotationOverrideRequest = Shapes::StructureShape.new(name: 'DeleteRotationOverrideRequest')
+    DeleteRotationOverrideResult = Shapes::StructureShape.new(name: 'DeleteRotationOverrideResult')
+    DeleteRotationRequest = Shapes::StructureShape.new(name: 'DeleteRotationRequest')
+    DeleteRotationResult = Shapes::StructureShape.new(name: 'DeleteRotationResult')
+    DependentEntity = Shapes::StructureShape.new(name: 'DependentEntity')
+    DependentEntityList = Shapes::ListShape.new(name: 'DependentEntityList')
     DescribeEngagementRequest = Shapes::StructureShape.new(name: 'DescribeEngagementRequest')
     DescribeEngagementResult = Shapes::StructureShape.new(name: 'DescribeEngagementResult')
     DescribePageRequest = Shapes::StructureShape.new(name: 'DescribePageRequest')
@@ -63,6 +78,12 @@ module Aws::SSMContacts
     GetContactPolicyResult = Shapes::StructureShape.new(name: 'GetContactPolicyResult')
     GetContactRequest = Shapes::StructureShape.new(name: 'GetContactRequest')
     GetContactResult = Shapes::StructureShape.new(name: 'GetContactResult')
+    GetRotationOverrideRequest = Shapes::StructureShape.new(name: 'GetRotationOverrideRequest')
+    GetRotationOverrideResult = Shapes::StructureShape.new(name: 'GetRotationOverrideResult')
+    GetRotationRequest = Shapes::StructureShape.new(name: 'GetRotationRequest')
+    GetRotationResult = Shapes::StructureShape.new(name: 'GetRotationResult')
+    HandOffTime = Shapes::StructureShape.new(name: 'HandOffTime')
+    HourOfDay = Shapes::IntegerShape.new(name: 'HourOfDay')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     IncidentId = Shapes::StringShape.new(name: 'IncidentId')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -75,18 +96,35 @@ module Aws::SSMContacts
     ListEngagementsResult = Shapes::StructureShape.new(name: 'ListEngagementsResult')
     ListPageReceiptsRequest = Shapes::StructureShape.new(name: 'ListPageReceiptsRequest')
     ListPageReceiptsResult = Shapes::StructureShape.new(name: 'ListPageReceiptsResult')
+    ListPageResolutionsRequest = Shapes::StructureShape.new(name: 'ListPageResolutionsRequest')
+    ListPageResolutionsResult = Shapes::StructureShape.new(name: 'ListPageResolutionsResult')
     ListPagesByContactRequest = Shapes::StructureShape.new(name: 'ListPagesByContactRequest')
     ListPagesByContactResult = Shapes::StructureShape.new(name: 'ListPagesByContactResult')
     ListPagesByEngagementRequest = Shapes::StructureShape.new(name: 'ListPagesByEngagementRequest')
     ListPagesByEngagementResult = Shapes::StructureShape.new(name: 'ListPagesByEngagementResult')
+    ListPreviewRotationShiftsRequest = Shapes::StructureShape.new(name: 'ListPreviewRotationShiftsRequest')
+    ListPreviewRotationShiftsResult = Shapes::StructureShape.new(name: 'ListPreviewRotationShiftsResult')
+    ListRotationOverridesRequest = Shapes::StructureShape.new(name: 'ListRotationOverridesRequest')
+    ListRotationOverridesResult = Shapes::StructureShape.new(name: 'ListRotationOverridesResult')
+    ListRotationShiftsRequest = Shapes::StructureShape.new(name: 'ListRotationShiftsRequest')
+    ListRotationShiftsResult = Shapes::StructureShape.new(name: 'ListRotationShiftsResult')
+    ListRotationsRequest = Shapes::StructureShape.new(name: 'ListRotationsRequest')
+    ListRotationsResult = Shapes::StructureShape.new(name: 'ListRotationsResult')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResult = Shapes::StructureShape.new(name: 'ListTagsForResourceResult')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    Member = Shapes::StringShape.new(name: 'Member')
+    MinuteOfHour = Shapes::IntegerShape.new(name: 'MinuteOfHour')
+    MonthlySetting = Shapes::StructureShape.new(name: 'MonthlySetting')
+    MonthlySettings = Shapes::ListShape.new(name: 'MonthlySettings')
+    NumberOfOnCalls = Shapes::IntegerShape.new(name: 'NumberOfOnCalls')
+    OverrideList = Shapes::ListShape.new(name: 'OverrideList')
     Page = Shapes::StructureShape.new(name: 'Page')
     PagesList = Shapes::ListShape.new(name: 'PagesList')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     Plan = Shapes::StructureShape.new(name: 'Plan')
     Policy = Shapes::StringShape.new(name: 'Policy')
+    PreviewOverride = Shapes::StructureShape.new(name: 'PreviewOverride')
     PublicContent = Shapes::StringShape.new(name: 'PublicContent')
     PublicSubject = Shapes::StringShape.new(name: 'PublicSubject')
     PutContactPolicyRequest = Shapes::StructureShape.new(name: 'PutContactPolicyRequest')
@@ -95,17 +133,37 @@ module Aws::SSMContacts
     ReceiptInfo = Shapes::StringShape.new(name: 'ReceiptInfo')
     ReceiptType = Shapes::StringShape.new(name: 'ReceiptType')
     ReceiptsList = Shapes::ListShape.new(name: 'ReceiptsList')
+    RecurrenceMultiplier = Shapes::IntegerShape.new(name: 'RecurrenceMultiplier')
+    RecurrenceSettings = Shapes::StructureShape.new(name: 'RecurrenceSettings')
+    ResolutionContact = Shapes::StructureShape.new(name: 'ResolutionContact')
+    ResolutionList = Shapes::ListShape.new(name: 'ResolutionList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RetryAfterSeconds = Shapes::IntegerShape.new(name: 'RetryAfterSeconds')
     RetryIntervalInMinutes = Shapes::IntegerShape.new(name: 'RetryIntervalInMinutes')
+    Rotation = Shapes::StructureShape.new(name: 'Rotation')
+    RotationContactsArnList = Shapes::ListShape.new(name: 'RotationContactsArnList')
+    RotationName = Shapes::StringShape.new(name: 'RotationName')
+    RotationOverride = Shapes::StructureShape.new(name: 'RotationOverride')
+    RotationOverrideContactsArnList = Shapes::ListShape.new(name: 'RotationOverrideContactsArnList')
+    RotationOverridePreviewMemberList = Shapes::ListShape.new(name: 'RotationOverridePreviewMemberList')
+    RotationOverrides = Shapes::ListShape.new(name: 'RotationOverrides')
+    RotationPreviewMemberList = Shapes::ListShape.new(name: 'RotationPreviewMemberList')
+    RotationShift = Shapes::StructureShape.new(name: 'RotationShift')
+    RotationShifts = Shapes::ListShape.new(name: 'RotationShifts')
+    Rotations = Shapes::ListShape.new(name: 'Rotations')
     SendActivationCodeRequest = Shapes::StructureShape.new(name: 'SendActivationCodeRequest')
     SendActivationCodeResult = Shapes::StructureShape.new(name: 'SendActivationCodeResult')
     Sender = Shapes::StringShape.new(name: 'Sender')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    ShiftCoveragesMap = Shapes::MapShape.new(name: 'ShiftCoveragesMap')
+    ShiftDetails = Shapes::StructureShape.new(name: 'ShiftDetails')
+    ShiftType = Shapes::StringShape.new(name: 'ShiftType')
     SimpleAddress = Shapes::StringShape.new(name: 'SimpleAddress')
     SsmContactsArn = Shapes::StringShape.new(name: 'SsmContactsArn')
+    SsmContactsArnList = Shapes::ListShape.new(name: 'SsmContactsArnList')
     Stage = Shapes::StructureShape.new(name: 'Stage')
     StageDurationInMins = Shapes::IntegerShape.new(name: 'StageDurationInMins')
+    StageIndex = Shapes::IntegerShape.new(name: 'StageIndex')
     StagesList = Shapes::ListShape.new(name: 'StagesList')
     StartEngagementRequest = Shapes::StructureShape.new(name: 'StartEngagementRequest')
     StartEngagementResult = Shapes::StructureShape.new(name: 'StartEngagementResult')
@@ -125,16 +183,22 @@ module Aws::SSMContacts
     TargetsList = Shapes::ListShape.new(name: 'TargetsList')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeRange = Shapes::StructureShape.new(name: 'TimeRange')
+    TimeZoneId = Shapes::StringShape.new(name: 'TimeZoneId')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResult = Shapes::StructureShape.new(name: 'UntagResourceResult')
     UpdateContactChannelRequest = Shapes::StructureShape.new(name: 'UpdateContactChannelRequest')
     UpdateContactChannelResult = Shapes::StructureShape.new(name: 'UpdateContactChannelResult')
     UpdateContactRequest = Shapes::StructureShape.new(name: 'UpdateContactRequest')
     UpdateContactResult = Shapes::StructureShape.new(name: 'UpdateContactResult')
+    UpdateRotationRequest = Shapes::StructureShape.new(name: 'UpdateRotationRequest')
+    UpdateRotationResult = Shapes::StructureShape.new(name: 'UpdateRotationResult')
+    Uuid = Shapes::StringShape.new(name: 'Uuid')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    WeeklySetting = Shapes::StructureShape.new(name: 'WeeklySetting')
+    WeeklySettings = Shapes::ListShape.new(name: 'WeeklySettings')
 
     AcceptPageRequest.add_member(:page_id, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "PageId"))
     AcceptPageRequest.add_member(:contact_channel_id, Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "ContactChannelId"))
@@ -162,6 +226,7 @@ module Aws::SSMContacts
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceId"))
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceType"))
+    ConflictException.add_member(:dependent_entities, Shapes::ShapeRef.new(shape: DependentEntityList, location_name: "DependentEntities"))
     ConflictException.struct_class = Types::ConflictException
 
     Contact.add_member(:contact_arn, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "ContactArn"))
@@ -189,6 +254,12 @@ module Aws::SSMContacts
 
     ContactsList.member = Shapes::ShapeRef.new(shape: Contact)
 
+    CoverageTime.add_member(:start, Shapes::ShapeRef.new(shape: HandOffTime, location_name: "Start"))
+    CoverageTime.add_member(:end, Shapes::ShapeRef.new(shape: HandOffTime, location_name: "End"))
+    CoverageTime.struct_class = Types::CoverageTime
+
+    CoverageTimes.member = Shapes::ShapeRef.new(shape: CoverageTime)
+
     CreateContactChannelRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "ContactId"))
     CreateContactChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, required: true, location_name: "Name"))
     CreateContactChannelRequest.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, required: true, location_name: "Type"))
@@ -211,6 +282,30 @@ module Aws::SSMContacts
     CreateContactResult.add_member(:contact_arn, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "ContactArn"))
     CreateContactResult.struct_class = Types::CreateContactResult
 
+    CreateRotationOverrideRequest.add_member(:rotation_id, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "RotationId"))
+    CreateRotationOverrideRequest.add_member(:new_contact_ids, Shapes::ShapeRef.new(shape: RotationOverrideContactsArnList, required: true, location_name: "NewContactIds"))
+    CreateRotationOverrideRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "StartTime"))
+    CreateRotationOverrideRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "EndTime"))
+    CreateRotationOverrideRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken"))
+    CreateRotationOverrideRequest.struct_class = Types::CreateRotationOverrideRequest
+
+    CreateRotationOverrideResult.add_member(:rotation_override_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "RotationOverrideId"))
+    CreateRotationOverrideResult.struct_class = Types::CreateRotationOverrideResult
+
+    CreateRotationRequest.add_member(:name, Shapes::ShapeRef.new(shape: RotationName, required: true, location_name: "Name"))
+    CreateRotationRequest.add_member(:contact_ids, Shapes::ShapeRef.new(shape: RotationContactsArnList, required: true, location_name: "ContactIds"))
+    CreateRotationRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
+    CreateRotationRequest.add_member(:time_zone_id, Shapes::ShapeRef.new(shape: TimeZoneId, required: true, location_name: "TimeZoneId"))
+    CreateRotationRequest.add_member(:recurrence, Shapes::ShapeRef.new(shape: RecurrenceSettings, required: true, location_name: "Recurrence"))
+    CreateRotationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
+    CreateRotationRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken"))
+    CreateRotationRequest.struct_class = Types::CreateRotationRequest
+
+    CreateRotationResult.add_member(:rotation_arn, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "RotationArn"))
+    CreateRotationResult.struct_class = Types::CreateRotationResult
+
+    DailySettings.member = Shapes::ShapeRef.new(shape: HandOffTime)
+
     DataEncryptionException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     DataEncryptionException.struct_class = Types::DataEncryptionException
 
@@ -228,6 +323,23 @@ module Aws::SSMContacts
     DeleteContactRequest.struct_class = Types::DeleteContactRequest
 
     DeleteContactResult.struct_class = Types::DeleteContactResult
+
+    DeleteRotationOverrideRequest.add_member(:rotation_id, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "RotationId"))
+    DeleteRotationOverrideRequest.add_member(:rotation_override_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "RotationOverrideId"))
+    DeleteRotationOverrideRequest.struct_class = Types::DeleteRotationOverrideRequest
+
+    DeleteRotationOverrideResult.struct_class = Types::DeleteRotationOverrideResult
+
+    DeleteRotationRequest.add_member(:rotation_id, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "RotationId"))
+    DeleteRotationRequest.struct_class = Types::DeleteRotationRequest
+
+    DeleteRotationResult.struct_class = Types::DeleteRotationResult
+
+    DependentEntity.add_member(:relation_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RelationType"))
+    DependentEntity.add_member(:dependent_resource_ids, Shapes::ShapeRef.new(shape: SsmContactsArnList, required: true, location_name: "DependentResourceIds"))
+    DependentEntity.struct_class = Types::DependentEntity
+
+    DependentEntityList.member = Shapes::ShapeRef.new(shape: DependentEntity)
 
     DescribeEngagementRequest.add_member(:engagement_id, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "EngagementId"))
     DescribeEngagementRequest.struct_class = Types::DescribeEngagementRequest
@@ -299,13 +411,40 @@ module Aws::SSMContacts
     GetContactResult.add_member(:plan, Shapes::ShapeRef.new(shape: Plan, required: true, location_name: "Plan"))
     GetContactResult.struct_class = Types::GetContactResult
 
+    GetRotationOverrideRequest.add_member(:rotation_id, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "RotationId"))
+    GetRotationOverrideRequest.add_member(:rotation_override_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "RotationOverrideId"))
+    GetRotationOverrideRequest.struct_class = Types::GetRotationOverrideRequest
+
+    GetRotationOverrideResult.add_member(:rotation_override_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "RotationOverrideId"))
+    GetRotationOverrideResult.add_member(:rotation_arn, Shapes::ShapeRef.new(shape: SsmContactsArn, location_name: "RotationArn"))
+    GetRotationOverrideResult.add_member(:new_contact_ids, Shapes::ShapeRef.new(shape: SsmContactsArnList, location_name: "NewContactIds"))
+    GetRotationOverrideResult.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
+    GetRotationOverrideResult.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "EndTime"))
+    GetRotationOverrideResult.add_member(:create_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreateTime"))
+    GetRotationOverrideResult.struct_class = Types::GetRotationOverrideResult
+
+    GetRotationRequest.add_member(:rotation_id, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "RotationId"))
+    GetRotationRequest.struct_class = Types::GetRotationRequest
+
+    GetRotationResult.add_member(:rotation_arn, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "RotationArn"))
+    GetRotationResult.add_member(:name, Shapes::ShapeRef.new(shape: RotationName, required: true, location_name: "Name"))
+    GetRotationResult.add_member(:contact_ids, Shapes::ShapeRef.new(shape: RotationContactsArnList, required: true, location_name: "ContactIds"))
+    GetRotationResult.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "StartTime"))
+    GetRotationResult.add_member(:time_zone_id, Shapes::ShapeRef.new(shape: TimeZoneId, required: true, location_name: "TimeZoneId"))
+    GetRotationResult.add_member(:recurrence, Shapes::ShapeRef.new(shape: RecurrenceSettings, required: true, location_name: "Recurrence"))
+    GetRotationResult.struct_class = Types::GetRotationResult
+
+    HandOffTime.add_member(:hour_of_day, Shapes::ShapeRef.new(shape: HourOfDay, required: true, location_name: "HourOfDay"))
+    HandOffTime.add_member(:minute_of_hour, Shapes::ShapeRef.new(shape: MinuteOfHour, required: true, location_name: "MinuteOfHour"))
+    HandOffTime.struct_class = Types::HandOffTime
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: RetryAfterSeconds, location_name: "RetryAfterSeconds"))
     InternalServerException.struct_class = Types::InternalServerException
 
     ListContactChannelsRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "ContactId"))
     ListContactChannelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListContactChannelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListContactChannelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     ListContactChannelsRequest.struct_class = Types::ListContactChannelsRequest
 
     ListContactChannelsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
@@ -313,7 +452,7 @@ module Aws::SSMContacts
     ListContactChannelsResult.struct_class = Types::ListContactChannelsResult
 
     ListContactsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListContactsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListContactsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     ListContactsRequest.add_member(:alias_prefix, Shapes::ShapeRef.new(shape: ContactAlias, location_name: "AliasPrefix"))
     ListContactsRequest.add_member(:type, Shapes::ShapeRef.new(shape: ContactType, location_name: "Type"))
     ListContactsRequest.struct_class = Types::ListContactsRequest
@@ -323,7 +462,7 @@ module Aws::SSMContacts
     ListContactsResult.struct_class = Types::ListContactsResult
 
     ListEngagementsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListEngagementsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListEngagementsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     ListEngagementsRequest.add_member(:incident_id, Shapes::ShapeRef.new(shape: IncidentId, location_name: "IncidentId"))
     ListEngagementsRequest.add_member(:time_range_value, Shapes::ShapeRef.new(shape: TimeRange, location_name: "TimeRangeValue"))
     ListEngagementsRequest.struct_class = Types::ListEngagementsRequest
@@ -334,16 +473,24 @@ module Aws::SSMContacts
 
     ListPageReceiptsRequest.add_member(:page_id, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "PageId"))
     ListPageReceiptsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListPageReceiptsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListPageReceiptsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     ListPageReceiptsRequest.struct_class = Types::ListPageReceiptsRequest
 
     ListPageReceiptsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListPageReceiptsResult.add_member(:receipts, Shapes::ShapeRef.new(shape: ReceiptsList, location_name: "Receipts"))
     ListPageReceiptsResult.struct_class = Types::ListPageReceiptsResult
 
+    ListPageResolutionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListPageResolutionsRequest.add_member(:page_id, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "PageId"))
+    ListPageResolutionsRequest.struct_class = Types::ListPageResolutionsRequest
+
+    ListPageResolutionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListPageResolutionsResult.add_member(:page_resolutions, Shapes::ShapeRef.new(shape: ResolutionList, required: true, location_name: "PageResolutions"))
+    ListPageResolutionsResult.struct_class = Types::ListPageResolutionsResult
+
     ListPagesByContactRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "ContactId"))
     ListPagesByContactRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListPagesByContactRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListPagesByContactRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     ListPagesByContactRequest.struct_class = Types::ListPagesByContactRequest
 
     ListPagesByContactResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
@@ -352,18 +499,72 @@ module Aws::SSMContacts
 
     ListPagesByEngagementRequest.add_member(:engagement_id, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "EngagementId"))
     ListPagesByEngagementRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
-    ListPagesByEngagementRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListPagesByEngagementRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     ListPagesByEngagementRequest.struct_class = Types::ListPagesByEngagementRequest
 
     ListPagesByEngagementResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListPagesByEngagementResult.add_member(:pages, Shapes::ShapeRef.new(shape: PagesList, required: true, location_name: "Pages"))
     ListPagesByEngagementResult.struct_class = Types::ListPagesByEngagementResult
 
+    ListPreviewRotationShiftsRequest.add_member(:rotation_start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "RotationStartTime"))
+    ListPreviewRotationShiftsRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
+    ListPreviewRotationShiftsRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "EndTime"))
+    ListPreviewRotationShiftsRequest.add_member(:members, Shapes::ShapeRef.new(shape: RotationPreviewMemberList, required: true, location_name: "Members"))
+    ListPreviewRotationShiftsRequest.add_member(:time_zone_id, Shapes::ShapeRef.new(shape: TimeZoneId, required: true, location_name: "TimeZoneId"))
+    ListPreviewRotationShiftsRequest.add_member(:recurrence, Shapes::ShapeRef.new(shape: RecurrenceSettings, required: true, location_name: "Recurrence"))
+    ListPreviewRotationShiftsRequest.add_member(:overrides, Shapes::ShapeRef.new(shape: OverrideList, location_name: "Overrides"))
+    ListPreviewRotationShiftsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListPreviewRotationShiftsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListPreviewRotationShiftsRequest.struct_class = Types::ListPreviewRotationShiftsRequest
+
+    ListPreviewRotationShiftsResult.add_member(:rotation_shifts, Shapes::ShapeRef.new(shape: RotationShifts, location_name: "RotationShifts"))
+    ListPreviewRotationShiftsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListPreviewRotationShiftsResult.struct_class = Types::ListPreviewRotationShiftsResult
+
+    ListRotationOverridesRequest.add_member(:rotation_id, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "RotationId"))
+    ListRotationOverridesRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "StartTime"))
+    ListRotationOverridesRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "EndTime"))
+    ListRotationOverridesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListRotationOverridesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListRotationOverridesRequest.struct_class = Types::ListRotationOverridesRequest
+
+    ListRotationOverridesResult.add_member(:rotation_overrides, Shapes::ShapeRef.new(shape: RotationOverrides, location_name: "RotationOverrides"))
+    ListRotationOverridesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListRotationOverridesResult.struct_class = Types::ListRotationOverridesResult
+
+    ListRotationShiftsRequest.add_member(:rotation_id, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "RotationId"))
+    ListRotationShiftsRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
+    ListRotationShiftsRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "EndTime"))
+    ListRotationShiftsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListRotationShiftsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListRotationShiftsRequest.struct_class = Types::ListRotationShiftsRequest
+
+    ListRotationShiftsResult.add_member(:rotation_shifts, Shapes::ShapeRef.new(shape: RotationShifts, location_name: "RotationShifts"))
+    ListRotationShiftsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListRotationShiftsResult.struct_class = Types::ListRotationShiftsResult
+
+    ListRotationsRequest.add_member(:rotation_name_prefix, Shapes::ShapeRef.new(shape: RotationName, location_name: "RotationNamePrefix"))
+    ListRotationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListRotationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListRotationsRequest.struct_class = Types::ListRotationsRequest
+
+    ListRotationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListRotationsResult.add_member(:rotations, Shapes::ShapeRef.new(shape: Rotations, required: true, location_name: "Rotations"))
+    ListRotationsResult.struct_class = Types::ListRotationsResult
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
     ListTagsForResourceResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
     ListTagsForResourceResult.struct_class = Types::ListTagsForResourceResult
+
+    MonthlySetting.add_member(:day_of_month, Shapes::ShapeRef.new(shape: DayOfMonth, required: true, location_name: "DayOfMonth"))
+    MonthlySetting.add_member(:hand_off_time, Shapes::ShapeRef.new(shape: HandOffTime, required: true, location_name: "HandOffTime"))
+    MonthlySetting.struct_class = Types::MonthlySetting
+
+    MonthlySettings.member = Shapes::ShapeRef.new(shape: MonthlySetting)
+
+    OverrideList.member = Shapes::ShapeRef.new(shape: PreviewOverride)
 
     Page.add_member(:page_arn, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "PageArn"))
     Page.add_member(:engagement_arn, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "EngagementArn"))
@@ -377,8 +578,14 @@ module Aws::SSMContacts
 
     PagesList.member = Shapes::ShapeRef.new(shape: Page)
 
-    Plan.add_member(:stages, Shapes::ShapeRef.new(shape: StagesList, required: true, location_name: "Stages"))
+    Plan.add_member(:stages, Shapes::ShapeRef.new(shape: StagesList, location_name: "Stages"))
+    Plan.add_member(:rotation_ids, Shapes::ShapeRef.new(shape: SsmContactsArnList, location_name: "RotationIds"))
     Plan.struct_class = Types::Plan
+
+    PreviewOverride.add_member(:new_members, Shapes::ShapeRef.new(shape: RotationOverridePreviewMemberList, location_name: "NewMembers"))
+    PreviewOverride.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
+    PreviewOverride.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "EndTime"))
+    PreviewOverride.struct_class = Types::PreviewOverride
 
     PutContactPolicyRequest.add_member(:contact_arn, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "ContactArn"))
     PutContactPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "Policy"))
@@ -394,10 +601,61 @@ module Aws::SSMContacts
 
     ReceiptsList.member = Shapes::ShapeRef.new(shape: Receipt)
 
+    RecurrenceSettings.add_member(:monthly_settings, Shapes::ShapeRef.new(shape: MonthlySettings, location_name: "MonthlySettings"))
+    RecurrenceSettings.add_member(:weekly_settings, Shapes::ShapeRef.new(shape: WeeklySettings, location_name: "WeeklySettings"))
+    RecurrenceSettings.add_member(:daily_settings, Shapes::ShapeRef.new(shape: DailySettings, location_name: "DailySettings"))
+    RecurrenceSettings.add_member(:number_of_on_calls, Shapes::ShapeRef.new(shape: NumberOfOnCalls, required: true, location_name: "NumberOfOnCalls", metadata: {"box"=>true}))
+    RecurrenceSettings.add_member(:shift_coverages, Shapes::ShapeRef.new(shape: ShiftCoveragesMap, location_name: "ShiftCoverages"))
+    RecurrenceSettings.add_member(:recurrence_multiplier, Shapes::ShapeRef.new(shape: RecurrenceMultiplier, required: true, location_name: "RecurrenceMultiplier", metadata: {"box"=>true}))
+    RecurrenceSettings.struct_class = Types::RecurrenceSettings
+
+    ResolutionContact.add_member(:contact_arn, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "ContactArn"))
+    ResolutionContact.add_member(:type, Shapes::ShapeRef.new(shape: ContactType, required: true, location_name: "Type"))
+    ResolutionContact.add_member(:stage_index, Shapes::ShapeRef.new(shape: StageIndex, location_name: "StageIndex", metadata: {"box"=>true}))
+    ResolutionContact.struct_class = Types::ResolutionContact
+
+    ResolutionList.member = Shapes::ShapeRef.new(shape: ResolutionContact)
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceId"))
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    Rotation.add_member(:rotation_arn, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "RotationArn"))
+    Rotation.add_member(:name, Shapes::ShapeRef.new(shape: RotationName, required: true, location_name: "Name"))
+    Rotation.add_member(:contact_ids, Shapes::ShapeRef.new(shape: SsmContactsArnList, location_name: "ContactIds"))
+    Rotation.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
+    Rotation.add_member(:time_zone_id, Shapes::ShapeRef.new(shape: TimeZoneId, location_name: "TimeZoneId"))
+    Rotation.add_member(:recurrence, Shapes::ShapeRef.new(shape: RecurrenceSettings, location_name: "Recurrence"))
+    Rotation.struct_class = Types::Rotation
+
+    RotationContactsArnList.member = Shapes::ShapeRef.new(shape: SsmContactsArn)
+
+    RotationOverride.add_member(:rotation_override_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "RotationOverrideId"))
+    RotationOverride.add_member(:new_contact_ids, Shapes::ShapeRef.new(shape: SsmContactsArnList, required: true, location_name: "NewContactIds"))
+    RotationOverride.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "StartTime"))
+    RotationOverride.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "EndTime"))
+    RotationOverride.add_member(:create_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "CreateTime"))
+    RotationOverride.struct_class = Types::RotationOverride
+
+    RotationOverrideContactsArnList.member = Shapes::ShapeRef.new(shape: SsmContactsArn)
+
+    RotationOverridePreviewMemberList.member = Shapes::ShapeRef.new(shape: Member)
+
+    RotationOverrides.member = Shapes::ShapeRef.new(shape: RotationOverride)
+
+    RotationPreviewMemberList.member = Shapes::ShapeRef.new(shape: Member)
+
+    RotationShift.add_member(:contact_ids, Shapes::ShapeRef.new(shape: SsmContactsArnList, location_name: "ContactIds"))
+    RotationShift.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "StartTime"))
+    RotationShift.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "EndTime"))
+    RotationShift.add_member(:type, Shapes::ShapeRef.new(shape: ShiftType, location_name: "Type"))
+    RotationShift.add_member(:shift_details, Shapes::ShapeRef.new(shape: ShiftDetails, location_name: "ShiftDetails"))
+    RotationShift.struct_class = Types::RotationShift
+
+    RotationShifts.member = Shapes::ShapeRef.new(shape: RotationShift)
+
+    Rotations.member = Shapes::ShapeRef.new(shape: Rotation)
 
     SendActivationCodeRequest.add_member(:contact_channel_id, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "ContactChannelId"))
     SendActivationCodeRequest.struct_class = Types::SendActivationCodeRequest
@@ -410,6 +668,14 @@ module Aws::SSMContacts
     ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QuotaCode"))
     ServiceQuotaExceededException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceCode"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    ShiftCoveragesMap.key = Shapes::ShapeRef.new(shape: DayOfWeek)
+    ShiftCoveragesMap.value = Shapes::ShapeRef.new(shape: CoverageTimes)
+
+    ShiftDetails.add_member(:overridden_contact_ids, Shapes::ShapeRef.new(shape: SsmContactsArnList, required: true, location_name: "OverriddenContactIds"))
+    ShiftDetails.struct_class = Types::ShiftDetails
+
+    SsmContactsArnList.member = Shapes::ShapeRef.new(shape: SsmContactsArn)
 
     Stage.add_member(:duration_in_minutes, Shapes::ShapeRef.new(shape: StageDurationInMins, required: true, location_name: "DurationInMinutes"))
     Stage.add_member(:targets, Shapes::ShapeRef.new(shape: TargetsList, required: true, location_name: "Targets"))
@@ -486,6 +752,15 @@ module Aws::SSMContacts
 
     UpdateContactResult.struct_class = Types::UpdateContactResult
 
+    UpdateRotationRequest.add_member(:rotation_id, Shapes::ShapeRef.new(shape: SsmContactsArn, required: true, location_name: "RotationId"))
+    UpdateRotationRequest.add_member(:contact_ids, Shapes::ShapeRef.new(shape: RotationContactsArnList, location_name: "ContactIds"))
+    UpdateRotationRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
+    UpdateRotationRequest.add_member(:time_zone_id, Shapes::ShapeRef.new(shape: TimeZoneId, location_name: "TimeZoneId"))
+    UpdateRotationRequest.add_member(:recurrence, Shapes::ShapeRef.new(shape: RecurrenceSettings, required: true, location_name: "Recurrence"))
+    UpdateRotationRequest.struct_class = Types::UpdateRotationRequest
+
+    UpdateRotationResult.struct_class = Types::UpdateRotationResult
+
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "Reason"))
     ValidationException.add_member(:fields, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "Fields"))
@@ -496,6 +771,12 @@ module Aws::SSMContacts
     ValidationExceptionField.struct_class = Types::ValidationExceptionField
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
+
+    WeeklySetting.add_member(:day_of_week, Shapes::ShapeRef.new(shape: DayOfWeek, required: true, location_name: "DayOfWeek"))
+    WeeklySetting.add_member(:hand_off_time, Shapes::ShapeRef.new(shape: HandOffTime, required: true, location_name: "HandOffTime"))
+    WeeklySetting.struct_class = Types::WeeklySetting
+
+    WeeklySettings.member = Shapes::ShapeRef.new(shape: WeeklySetting)
 
 
     # @api private
@@ -572,6 +853,34 @@ module Aws::SSMContacts
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:create_rotation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRotation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateRotationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRotationResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:create_rotation_override, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRotationOverride"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateRotationOverrideRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRotationOverrideResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:deactivate_contact_channel, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeactivateContactChannel"
         o.http_method = "POST"
@@ -595,6 +904,7 @@ module Aws::SSMContacts
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -604,6 +914,33 @@ module Aws::SSMContacts
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteContactChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteContactChannelResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:delete_rotation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRotation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRotationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRotationResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:delete_rotation_override, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRotationOverride"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRotationOverrideRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRotationOverrideResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -673,6 +1010,32 @@ module Aws::SSMContacts
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetContactPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetContactPolicyResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:get_rotation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRotation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRotationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRotationResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:get_rotation_override, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRotationOverride"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRotationOverrideRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRotationOverrideResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -755,6 +1118,24 @@ module Aws::SSMContacts
         )
       end)
 
+      api.add_operation(:list_page_resolutions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPageResolutions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListPageResolutionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPageResolutionsResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_pages_by_contact, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListPagesByContact"
         o.http_method = "POST"
@@ -780,6 +1161,82 @@ module Aws::SSMContacts
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListPagesByEngagementRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPagesByEngagementResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_preview_rotation_shifts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPreviewRotationShifts"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListPreviewRotationShiftsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPreviewRotationShiftsResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_rotation_overrides, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRotationOverrides"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListRotationOverridesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRotationOverridesResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_rotation_shifts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRotationShifts"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListRotationShiftsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRotationShiftsResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_rotations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRotations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListRotationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRotationsResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -913,6 +1370,20 @@ module Aws::SSMContacts
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: DataEncryptionException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_rotation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRotation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRotationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRotationResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

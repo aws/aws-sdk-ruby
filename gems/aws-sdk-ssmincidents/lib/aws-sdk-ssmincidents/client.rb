@@ -533,13 +533,13 @@ module Aws::SSMIncidents
     end
 
     # Creates a custom timeline event on the incident details page of an
-    # incident record. Timeline events are automatically created by Incident
-    # Manager, marking key moment during an incident. You can create custom
-    # timeline events to mark important events that are automatically
-    # detected by Incident Manager.
+    # incident record. Incident Manager automatically creates timeline
+    # events that mark key moments during an incident. You can create custom
+    # timeline events to mark important events that Incident Manager can
+    # detect automatically.
     #
     # @option params [String] :client_token
-    #   A token ensuring that the action is called only once with the
+    #   A token that ensures that a client calls the action only once with the
     #   specified details.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -549,25 +549,24 @@ module Aws::SSMIncidents
     #   A short description of the event.
     #
     # @option params [Array<Types::EventReference>] :event_references
-    #   Adds one or more references to the `TimelineEvent`. A reference can be
-    #   an Amazon Web Services resource involved in the incident or in some
-    #   way associated with it. When you specify a reference, you enter the
-    #   Amazon Resource Name (ARN) of the resource. You can also specify a
-    #   related item. As an example, you could specify the ARN of an Amazon
-    #   DynamoDB (DynamoDB) table. The table for this example is the resource.
-    #   You could also specify a Amazon CloudWatch metric for that table. The
-    #   metric is the related item.
+    #   Adds one or more references to the `TimelineEvent`. A reference is an
+    #   Amazon Web Services resource involved or associated with the incident.
+    #   To specify a reference, enter its Amazon Resource Name (ARN). You can
+    #   also specify a related item associated with a resource. For example,
+    #   to specify an Amazon DynamoDB (DynamoDB) table as a resource, use the
+    #   table's ARN. You can also specify an Amazon CloudWatch metric
+    #   associated with the DynamoDB table as a related item.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :event_time
     #   The time that the event occurred.
     #
     # @option params [required, String] :event_type
-    #   The type of the event. You can create timeline events of type `Custom
+    #   The type of event. You can create timeline events of type `Custom
     #   Event`.
     #
     # @option params [required, String] :incident_record_arn
-    #   The Amazon Resource Name (ARN) of the incident record to which the
-    #   event will be added.
+    #   The Amazon Resource Name (ARN) of the incident record that the action
+    #   adds the incident to.
     #
     # @return [Types::CreateTimelineEventOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -706,8 +705,8 @@ module Aws::SSMIncidents
     # Deletes a timeline event from an incident.
     #
     # @option params [required, String] :event_id
-    #   The ID of the event you are updating. You can find this by using
-    #   `ListTimelineEvents`.
+    #   The ID of the event to update. You can use `ListTimelineEvents` to
+    #   find an event's ID.
     #
     # @option params [required, String] :incident_record_arn
     #   The Amazon Resource Name (ARN) of the incident that includes the
@@ -980,8 +979,8 @@ module Aws::SSMIncidents
     # want to update.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   Filters the list of incident records through which you are searching.
-    #   You can filter on the following keys:
+    #   Filters the list of incident records you want to search through. You
+    #   can filter on the following keys:
     #
     #   * `creationTime`
     #
@@ -991,7 +990,7 @@ module Aws::SSMIncidents
     #
     #   * `createdBy`
     #
-    #   Note the following when deciding how to use Filters:
+    #   Note the following when when you use Filters:
     #
     #   * If you don't specify a Filter, the response includes all incident
     #     records.
@@ -1218,7 +1217,7 @@ module Aws::SSMIncidents
     #
     # @option params [Array<Types::Filter>] :filters
     #   Filters the timeline events based on the provided conditional values.
-    #   You can filter timeline events using the following keys:
+    #   You can filter timeline events with the following keys:
     #
     #   * `eventTime`
     #
@@ -1246,7 +1245,7 @@ module Aws::SSMIncidents
     #   The pagination token to continue to the next page of results.
     #
     # @option params [String] :sort_by
-    #   Sort by the specified key value pair.
+    #   Sort timeline events by the specified key value pair.
     #
     # @option params [String] :sort_order
     #   Sorts the order of timeline events by the value specified in the
@@ -1377,8 +1376,8 @@ module Aws::SSMIncidents
     #
     # @option params [Array<Types::RelatedItem>] :related_items
     #   Add related items to the incident for other responders to use. Related
-    #   items are AWS resources, external links, or files uploaded to an
-    #   Amazon S3 bucket.
+    #   items are Amazon Web Services resources, external links, or files
+    #   uploaded to an Amazon S3 bucket.
     #
     # @option params [required, String] :response_plan_arn
     #   The Amazon Resource Name (ARN) of the response plan that pre-defines
@@ -1551,16 +1550,16 @@ module Aws::SSMIncidents
     #   The Chatbot chat channel where responders can collaborate.
     #
     # @option params [String] :client_token
-    #   A token that ensures that the operation is called only once with the
-    #   specified details.
+    #   A token that ensures that a client calls the operation only once with
+    #   the specified details.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [Integer] :impact
-    #   Defines the impact of the incident to customers and applications.
-    #   Providing an impact overwrites the impact provided by the response
-    #   plan.
+    #   Defines the impact of the incident to customers and applications. If
+    #   you provide an impact for an incident, it overwrites the impact
+    #   provided by the response plan.
     #
     #   **Possible impacts:**
     #
@@ -1579,14 +1578,15 @@ module Aws::SSMIncidents
     #     action is needed to avoid impact.
     #
     # @option params [Array<Types::NotificationTargetItem>] :notification_targets
-    #   The Amazon SNS targets that are notified when updates are made to an
-    #   incident.
+    #   The Amazon SNS targets that Incident Manager notifies when a client
+    #   updates an incident.
     #
     #   Using multiple SNS topics creates redundancy in the event that a
     #   Region is down during the incident.
     #
     # @option params [String] :status
-    #   The status of the incident. An incident can be `Open` or `Resolved`.
+    #   The status of the incident. Possible statuses are `Open` or
+    #   `Resolved`.
     #
     # @option params [String] :summary
     #   A longer description of what occurred during the incident.
@@ -1630,18 +1630,19 @@ module Aws::SSMIncidents
     # record.
     #
     # @option params [String] :client_token
-    #   A token ensuring that the operation is called only once with the
-    #   specified details.
+    #   A token that ensures that a client calls the operation only once with
+    #   the specified details.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [required, String] :incident_record_arn
-    #   The Amazon Resource Name (ARN) of the incident record containing the
-    #   related items you are updating.
+    #   The Amazon Resource Name (ARN) of the incident record that contains
+    #   the related items that you update.
     #
     # @option params [required, Types::RelatedItemsUpdate] :related_items_update
-    #   Details about the item you are adding or deleting.
+    #   Details about the item that you are add to, or delete from, an
+    #   incident.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1880,8 +1881,8 @@ module Aws::SSMIncidents
     # Event`.
     #
     # @option params [String] :client_token
-    #   A token ensuring that the operation is called only once with the
-    #   specified details.
+    #   A token that ensures that a client calls the operation only once with
+    #   the specified details.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1890,28 +1891,28 @@ module Aws::SSMIncidents
     #   A short description of the event.
     #
     # @option params [required, String] :event_id
-    #   The ID of the event you are updating. You can find this by using
-    #   `ListTimelineEvents`.
+    #   The ID of the event to update. You can use `ListTimelineEvents` to
+    #   find an event's ID.
     #
     # @option params [Array<Types::EventReference>] :event_references
-    #   Updates all existing references in a `TimelineEvent`. A reference can
-    #   be an Amazon Web Services resource involved in the incident or in some
-    #   way associated with it. When you specify a reference, you enter the
-    #   Amazon Resource Name (ARN) of the resource. You can also specify a
-    #   related item. As an example, you could specify the ARN of an Amazon
-    #   DynamoDB (DynamoDB) table. The table for this example is the resource.
-    #   You could also specify a Amazon CloudWatch metric for that table. The
-    #   metric is the related item.
+    #   Updates all existing references in a `TimelineEvent`. A reference is
+    #   an Amazon Web Services resource involved or associated with the
+    #   incident. To specify a reference, enter its Amazon Resource Name
+    #   (ARN). You can also specify a related item associated with that
+    #   resource. For example, to specify an Amazon DynamoDB (DynamoDB) table
+    #   as a resource, use its ARN. You can also specify an Amazon CloudWatch
+    #   metric associated with the DynamoDB table as a related item.
     #
     #   This update action overrides all existing references. If you want to
     #   keep existing references, you must specify them in the call. If you
-    #   don't, this action removes them and enters only new references.
+    #   don't, this action removes any existing references and enters only
+    #   new references.
     #
     # @option params [Time,DateTime,Date,Integer,String] :event_time
     #   The time that the event occurred.
     #
     # @option params [String] :event_type
-    #   The type of the event. You can update events of type `Custom Event`.
+    #   The type of event. You can update events of type `Custom Event`.
     #
     # @option params [required, String] :incident_record_arn
     #   The Amazon Resource Name (ARN) of the incident that includes the
@@ -1958,7 +1959,7 @@ module Aws::SSMIncidents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssmincidents'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

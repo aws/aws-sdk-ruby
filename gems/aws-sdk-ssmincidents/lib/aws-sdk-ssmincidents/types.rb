@@ -327,8 +327,8 @@ module Aws::SSMIncidents
     end
 
     # @!attribute [rw] client_token
-    #   A token ensuring that the action is called only once with the
-    #   specified details.
+    #   A token that ensures that a client calls the action only once with
+    #   the specified details.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -339,14 +339,14 @@ module Aws::SSMIncidents
     #   @return [String]
     #
     # @!attribute [rw] event_references
-    #   Adds one or more references to the `TimelineEvent`. A reference can
-    #   be an Amazon Web Services resource involved in the incident or in
-    #   some way associated with it. When you specify a reference, you enter
-    #   the Amazon Resource Name (ARN) of the resource. You can also specify
-    #   a related item. As an example, you could specify the ARN of an
-    #   Amazon DynamoDB (DynamoDB) table. The table for this example is the
-    #   resource. You could also specify a Amazon CloudWatch metric for that
-    #   table. The metric is the related item.
+    #   Adds one or more references to the `TimelineEvent`. A reference is
+    #   an Amazon Web Services resource involved or associated with the
+    #   incident. To specify a reference, enter its Amazon Resource Name
+    #   (ARN). You can also specify a related item associated with a
+    #   resource. For example, to specify an Amazon DynamoDB (DynamoDB)
+    #   table as a resource, use the table's ARN. You can also specify an
+    #   Amazon CloudWatch metric associated with the DynamoDB table as a
+    #   related item.
     #   @return [Array<Types::EventReference>]
     #
     # @!attribute [rw] event_time
@@ -354,13 +354,13 @@ module Aws::SSMIncidents
     #   @return [Time]
     #
     # @!attribute [rw] event_type
-    #   The type of the event. You can create timeline events of type
-    #   `Custom Event`.
+    #   The type of event. You can create timeline events of type `Custom
+    #   Event`.
     #   @return [String]
     #
     # @!attribute [rw] incident_record_arn
-    #   The Amazon Resource Name (ARN) of the incident record to which the
-    #   event will be added.
+    #   The Amazon Resource Name (ARN) of the incident record that the
+    #   action adds the incident to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/CreateTimelineEventInput AWS API Documentation
@@ -482,8 +482,8 @@ module Aws::SSMIncidents
     class DeleteResponsePlanOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] event_id
-    #   The ID of the event you are updating. You can find this by using
-    #   `ListTimelineEvents`.
+    #   The ID of the event to update. You can use `ListTimelineEvents` to
+    #   find an event's ID.
     #   @return [String]
     #
     # @!attribute [rw] incident_record_arn
@@ -1124,8 +1124,8 @@ module Aws::SSMIncidents
     end
 
     # @!attribute [rw] filters
-    #   Filters the list of incident records through which you are
-    #   searching. You can filter on the following keys:
+    #   Filters the list of incident records you want to search through. You
+    #   can filter on the following keys:
     #
     #   * `creationTime`
     #
@@ -1135,7 +1135,7 @@ module Aws::SSMIncidents
     #
     #   * `createdBy`
     #
-    #   Note the following when deciding how to use Filters:
+    #   Note the following when when you use Filters:
     #
     #   * If you don't specify a Filter, the response includes all incident
     #     records.
@@ -1316,7 +1316,7 @@ module Aws::SSMIncidents
 
     # @!attribute [rw] filters
     #   Filters the timeline events based on the provided conditional
-    #   values. You can filter timeline events using the following keys:
+    #   values. You can filter timeline events with the following keys:
     #
     #   * `eventTime`
     #
@@ -1348,7 +1348,7 @@ module Aws::SSMIncidents
     #   @return [String]
     #
     # @!attribute [rw] sort_by
-    #   Sort by the specified key value pair.
+    #   Sort timeline events by the specified key value pair.
     #   @return [String]
     #
     # @!attribute [rw] sort_order
@@ -1851,8 +1851,8 @@ module Aws::SSMIncidents
     #
     # @!attribute [rw] related_items
     #   Add related items to the incident for other responders to use.
-    #   Related items are AWS resources, external links, or files uploaded
-    #   to an Amazon S3 bucket.
+    #   Related items are Amazon Web Services resources, external links, or
+    #   files uploaded to an Amazon S3 bucket.
     #   @return [Array<Types::RelatedItem>]
     #
     # @!attribute [rw] response_plan_arn
@@ -2085,17 +2085,17 @@ module Aws::SSMIncidents
     #   @return [Types::ChatChannel]
     #
     # @!attribute [rw] client_token
-    #   A token that ensures that the operation is called only once with the
-    #   specified details.
+    #   A token that ensures that a client calls the operation only once
+    #   with the specified details.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] impact
-    #   Defines the impact of the incident to customers and applications.
-    #   Providing an impact overwrites the impact provided by the response
-    #   plan.
+    #   Defines the impact of the incident to customers and applications. If
+    #   you provide an impact for an incident, it overwrites the impact
+    #   provided by the response plan.
     #
     #   **Possible impacts:**
     #
@@ -2115,15 +2115,16 @@ module Aws::SSMIncidents
     #   @return [Integer]
     #
     # @!attribute [rw] notification_targets
-    #   The Amazon SNS targets that are notified when updates are made to an
-    #   incident.
+    #   The Amazon SNS targets that Incident Manager notifies when a client
+    #   updates an incident.
     #
     #   Using multiple SNS topics creates redundancy in the event that a
     #   Region is down during the incident.
     #   @return [Array<Types::NotificationTargetItem>]
     #
     # @!attribute [rw] status
-    #   The status of the incident. An incident can be `Open` or `Resolved`.
+    #   The status of the incident. Possible statuses are `Open` or
+    #   `Resolved`.
     #   @return [String]
     #
     # @!attribute [rw] summary
@@ -2154,20 +2155,21 @@ module Aws::SSMIncidents
     class UpdateIncidentRecordOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] client_token
-    #   A token ensuring that the operation is called only once with the
-    #   specified details.
+    #   A token that ensures that a client calls the operation only once
+    #   with the specified details.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] incident_record_arn
-    #   The Amazon Resource Name (ARN) of the incident record containing the
-    #   related items you are updating.
+    #   The Amazon Resource Name (ARN) of the incident record that contains
+    #   the related items that you update.
     #   @return [String]
     #
     # @!attribute [rw] related_items_update
-    #   Details about the item you are adding or deleting.
+    #   Details about the item that you are add to, or delete from, an
+    #   incident.
     #   @return [Types::RelatedItemsUpdate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/UpdateRelatedItemsInput AWS API Documentation
@@ -2353,8 +2355,8 @@ module Aws::SSMIncidents
     class UpdateResponsePlanOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] client_token
-    #   A token ensuring that the operation is called only once with the
-    #   specified details.
+    #   A token that ensures that a client calls the operation only once
+    #   with the specified details.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2365,23 +2367,24 @@ module Aws::SSMIncidents
     #   @return [String]
     #
     # @!attribute [rw] event_id
-    #   The ID of the event you are updating. You can find this by using
-    #   `ListTimelineEvents`.
+    #   The ID of the event to update. You can use `ListTimelineEvents` to
+    #   find an event's ID.
     #   @return [String]
     #
     # @!attribute [rw] event_references
-    #   Updates all existing references in a `TimelineEvent`. A reference
-    #   can be an Amazon Web Services resource involved in the incident or
-    #   in some way associated with it. When you specify a reference, you
-    #   enter the Amazon Resource Name (ARN) of the resource. You can also
-    #   specify a related item. As an example, you could specify the ARN of
-    #   an Amazon DynamoDB (DynamoDB) table. The table for this example is
-    #   the resource. You could also specify a Amazon CloudWatch metric for
-    #   that table. The metric is the related item.
+    #   Updates all existing references in a `TimelineEvent`. A reference is
+    #   an Amazon Web Services resource involved or associated with the
+    #   incident. To specify a reference, enter its Amazon Resource Name
+    #   (ARN). You can also specify a related item associated with that
+    #   resource. For example, to specify an Amazon DynamoDB (DynamoDB)
+    #   table as a resource, use its ARN. You can also specify an Amazon
+    #   CloudWatch metric associated with the DynamoDB table as a related
+    #   item.
     #
     #   This update action overrides all existing references. If you want to
     #   keep existing references, you must specify them in the call. If you
-    #   don't, this action removes them and enters only new references.
+    #   don't, this action removes any existing references and enters only
+    #   new references.
     #   @return [Array<Types::EventReference>]
     #
     # @!attribute [rw] event_time
@@ -2389,7 +2392,7 @@ module Aws::SSMIncidents
     #   @return [Time]
     #
     # @!attribute [rw] event_type
-    #   The type of the event. You can update events of type `Custom Event`.
+    #   The type of event. You can update events of type `Custom Event`.
     #   @return [String]
     #
     # @!attribute [rw] incident_record_arn

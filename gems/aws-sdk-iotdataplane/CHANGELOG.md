@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2023-03-28)
+------------------
+
+* Feature - Add endpoint ruleset support for cn-north-1.
+
 * Issue - Allow construction of client without a custom endpoint.
 
 1.42.0 (2023-01-18)
