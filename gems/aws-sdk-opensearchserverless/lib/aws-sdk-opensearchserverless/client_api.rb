@@ -100,6 +100,7 @@ module Aws::OpenSearchServerless
     ListVpcEndpointsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListVpcEndpointsRequestMaxResultsInteger')
     ListVpcEndpointsResponse = Shapes::StructureShape.new(name: 'ListVpcEndpointsResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    OcuLimitExceededException = Shapes::StructureShape.new(name: 'OcuLimitExceededException')
     PolicyDescription = Shapes::StringShape.new(name: 'PolicyDescription')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
     PolicyName = Shapes::StringShape.new(name: 'PolicyName')
@@ -122,6 +123,7 @@ module Aws::OpenSearchServerless
     SecurityPolicySummaries = Shapes::ListShape.new(name: 'SecurityPolicySummaries')
     SecurityPolicySummary = Shapes::StructureShape.new(name: 'SecurityPolicySummary')
     SecurityPolicyType = Shapes::StringShape.new(name: 'SecurityPolicyType')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     String = Shapes::StringShape.new(name: 'String')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
@@ -455,6 +457,9 @@ module Aws::OpenSearchServerless
     ListVpcEndpointsResponse.add_member(:vpc_endpoint_summaries, Shapes::ShapeRef.new(shape: VpcEndpointSummaries, location_name: "vpcEndpointSummaries"))
     ListVpcEndpointsResponse.struct_class = Types::ListVpcEndpointsResponse
 
+    OcuLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    OcuLimitExceededException.struct_class = Types::OcuLimitExceededException
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
@@ -510,6 +515,13 @@ module Aws::OpenSearchServerless
     SecurityPolicySummary.add_member(:policy_version, Shapes::ShapeRef.new(shape: PolicyVersion, location_name: "policyVersion"))
     SecurityPolicySummary.add_member(:type, Shapes::ShapeRef.new(shape: SecurityPolicyType, location_name: "type"))
     SecurityPolicySummary.struct_class = Types::SecurityPolicySummary
+
+    ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, location_name: "quotaCode"))
+    ServiceQuotaExceededException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
+    ServiceQuotaExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
+    ServiceQuotaExceededException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceCode"))
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
 
@@ -689,6 +701,7 @@ module Aws::OpenSearchServerless
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_collection, Seahorse::Model::Operation.new.tap do |o|
@@ -697,9 +710,11 @@ module Aws::OpenSearchServerless
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateCollectionRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateCollectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OcuLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_security_config, Seahorse::Model::Operation.new.tap do |o|
@@ -711,6 +726,7 @@ module Aws::OpenSearchServerless
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_security_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -722,6 +738,7 @@ module Aws::OpenSearchServerless
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_vpc_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -733,6 +750,7 @@ module Aws::OpenSearchServerless
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:delete_access_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -948,6 +966,7 @@ module Aws::OpenSearchServerless
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1017,6 +1036,7 @@ module Aws::OpenSearchServerless
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:update_vpc_endpoint, Seahorse::Model::Operation.new.tap do |o|

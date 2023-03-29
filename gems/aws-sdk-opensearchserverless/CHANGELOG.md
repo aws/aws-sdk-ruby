@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2023-03-29)
+------------------
+
+* Feature - This release includes two new exception types "ServiceQuotaExceededException" and "OcuLimitExceededException".
+
 1.1.0 (2023-01-18)
 ------------------
 

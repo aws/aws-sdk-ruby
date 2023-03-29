@@ -1102,8 +1102,7 @@ module Aws::RDS
     #   The Amazon Resource Name (ARN) of the source DB instance or DB cluster
     #   if this DB cluster is created as a read replica.
     #
-    #   Valid for: Aurora DB clusters and RDS for PostgreSQL Multi-AZ DB
-    #   clusters
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [Array<Types::Tag>] :tags
     #   Tags to assign to the DB cluster.
     #
@@ -1980,11 +1979,21 @@ module Aws::RDS
     #   applied during the next maintenance window unless `ApplyImmediately`
     #   is enabled.
     #
+    #   If the cluster that you're modifying has one or more read replicas,
+    #   all replicas must be running an engine version that's the same or
+    #   later than the version you specify.
+    #
     #   To list all of the available engine versions for Aurora MySQL version
     #   2 (5.7-compatible) and version 3 (MySQL 8.0-compatible), use the
     #   following command:
     #
     #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for MySQL 5.6-compatible
+    #   Aurora, use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora --query
     #   "DBEngineVersions[].EngineVersion"`
     #
     #   To list all of the available engine versions for Aurora PostgreSQL,

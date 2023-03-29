@@ -2139,13 +2139,13 @@ module Aws::RDS
     #
     # You can use the `ReplicationSourceIdentifier` parameter to create an
     # Amazon Aurora DB cluster as a read replica of another DB cluster or
-    # Amazon RDS MySQL or PostgreSQL DB instance. For more information about
-    # Amazon Aurora, see [What is Amazon Aurora?][2] in the *Amazon Aurora
-    # User Guide*.
+    # Amazon RDS for MySQL or PostgreSQL DB instance. For more information
+    # about Amazon Aurora, see [What is Amazon Aurora?][2] in the *Amazon
+    # Aurora User Guide*.
     #
     # You can also use the `ReplicationSourceIdentifier` parameter to create
-    # a Multi-AZ DB cluster read replica with an RDS for PostgreSQL DB
-    # instance as the source. For more information about Multi-AZ DB
+    # a Multi-AZ DB cluster read replica with an RDS for MySQL or PostgreSQL
+    # DB instance as the source. For more information about Multi-AZ DB
     # clusters, see [Multi-AZ DB cluster deployments][3] in the *Amazon RDS
     # User Guide*.
     #
@@ -2419,8 +2419,7 @@ module Aws::RDS
     #   The Amazon Resource Name (ARN) of the source DB instance or DB cluster
     #   if this DB cluster is created as a read replica.
     #
-    #   Valid for: Aurora DB clusters and RDS for PostgreSQL Multi-AZ DB
-    #   clusters
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [Array<Types::Tag>] :tags
     #   Tags to assign to the DB cluster.
@@ -4977,6 +4976,7 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
+    #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -4988,53 +4988,53 @@ module Aws::RDS
     end
 
     # Creates a new DB instance that acts as a read replica for an existing
-    # source DB instance. You can create a read replica for a DB instance
-    # running MySQL, MariaDB, Oracle, PostgreSQL, or SQL Server. For more
-    # information, see [Working with Read Replicas][1] in the *Amazon RDS
-    # User Guide*.
+    # source DB instance or Multi-AZ DB cluster. You can create a read
+    # replica for a DB instance running MySQL, MariaDB, Oracle, PostgreSQL,
+    # or SQL Server. You can create a read replica for a Multi-AZ DB cluster
+    # running MySQL or PostgreSQL. For more information, see [Working with
+    # read replicas][1] and [Migrating from a Multi-AZ DB cluster to a DB
+    # instance using a read replica][2] in the *Amazon RDS User Guide*.
     #
     # Amazon Aurora doesn't support this operation. Call the
     # `CreateDBInstance` operation to create a DB instance for an Aurora DB
     # cluster.
     #
     # All read replica DB instances are created with backups disabled. All
-    # other DB instance attributes (including DB security groups and DB
-    # parameter groups) are inherited from the source DB instance, except as
-    # specified.
+    # other attributes (including DB security groups and DB parameter
+    # groups) are inherited from the source DB instance or cluster, except
+    # as specified.
     #
-    # Your source DB instance must have backup retention enabled.
+    # Your source DB instance or cluster must have backup retention enabled.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html#multi-az-db-clusters-migrating-to-instance-with-read-replica
     #
     # @option params [required, String] :db_instance_identifier
     #   The DB instance identifier of the read replica. This identifier is the
     #   unique key that identifies a DB instance. This parameter is stored as
     #   a lowercase string.
     #
-    # @option params [required, String] :source_db_instance_identifier
+    # @option params [String] :source_db_instance_identifier
     #   The identifier of the DB instance that will act as the source for the
-    #   read replica. Each DB instance can have up to five read replicas.
+    #   read replica. Each DB instance can have up to 15 read replicas, with
+    #   the exception of Oracle and SQL Server, which can have up to five.
     #
     #   Constraints:
     #
     #   * Must be the identifier of an existing MySQL, MariaDB, Oracle,
     #     PostgreSQL, or SQL Server DB instance.
     #
-    #   * Can specify a DB instance that is a MySQL read replica only if the
-    #     source is running MySQL 5.6 or later.
+    #   * Can't be specified if the `SourceDBClusterIdentifier` parameter is
+    #     also specified.
     #
-    #   * For the limitations of Oracle read replicas, see [Read Replica
-    #     Limitations with Oracle][1] in the *Amazon RDS User Guide*.
+    #   * For the limitations of Oracle read replicas, see [Version and
+    #     licensing considerations for RDS for Oracle replicas][1] in the
+    #     *Amazon RDS User Guide*.
     #
-    #   * For the limitations of SQL Server read replicas, see [Read Replica
-    #     Limitations with Microsoft SQL Server][2] in the *Amazon RDS User
-    #     Guide*.
-    #
-    #   * Can specify a PostgreSQL DB instance only if the source is running
-    #     PostgreSQL 9.3.5 or later (9.4.7 and higher for cross-Region
-    #     replication).
+    #   * For the limitations of SQL Server read replicas, see [Read replica
+    #     limitations with SQL Server][2] in the *Amazon RDS User Guide*.
     #
     #   * The specified DB instance must have automatic backups enabled, that
     #     is, its backup retention period must be greater than 0.
@@ -5050,8 +5050,8 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.ReadReplicas.Limitations.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.limitations.html#oracle-read-replicas.limitations.versions-and-licenses
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.ReadReplicas.html#SQLServer.ReadReplicas.Limitations
     #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
     #
     # @option params [String] :db_instance_class
@@ -5089,8 +5089,8 @@ module Aws::RDS
     #   You can create a read replica as a Multi-AZ DB instance. RDS creates a
     #   standby of your replica in another Availability Zone for failover
     #   support for the replica. Creating your read replica as a Multi-AZ DB
-    #   instance is independent of whether the source database is a Multi-AZ
-    #   DB instance.
+    #   instance is independent of whether the source is a Multi-AZ DB
+    #   instance or a Multi-AZ DB cluster.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -5108,10 +5108,10 @@ module Aws::RDS
     #
     # @option params [String] :option_group_name
     #   The option group the DB instance is associated with. If omitted, the
-    #   option group associated with the source instance is used.
+    #   option group associated with the source instance or cluster is used.
     #
     #   <note markdown="1"> For SQL Server, you must use the option group associated with the
-    #   source instance.
+    #   source.
     #
     #    </note>
     #
@@ -5246,10 +5246,10 @@ module Aws::RDS
     #   alias ARN, or alias name for the KMS key.
     #
     #   If you create an encrypted read replica in the same Amazon Web
-    #   Services Region as the source DB instance, then do not specify a value
-    #   for this parameter. A read replica in the same Amazon Web Services
-    #   Region is always encrypted with the same KMS key as the source DB
-    #   instance.
+    #   Services Region as the source DB instance or Multi-AZ DB cluster,
+    #   don't specify a value for this parameter. A read replica in the same
+    #   Amazon Web Services Region is always encrypted with the same KMS key
+    #   as the source DB instance or cluster.
     #
     #   If you create an encrypted read replica in a different Amazon Web
     #   Services Region, then you must specify a KMS key identifier for the
@@ -5259,7 +5259,7 @@ module Aws::RDS
     #   Services Region.
     #
     #   You can't create an encrypted read replica from an unencrypted DB
-    #   instance.
+    #   instance or Multi-AZ DB cluster.
     #
     #   This setting doesn't apply to RDS Custom, which uses the same KMS key
     #   as the primary replica.
@@ -5275,6 +5275,10 @@ module Aws::RDS
     #   This setting applies only to Amazon Web Services GovCloud (US) Regions
     #   and China Amazon Web Services Regions. It's ignored in other Amazon
     #   Web Services Regions.
+    #
+    #   This setting applies only when replicating from a source DB
+    #   *instance*. Source DB clusters aren't supported in Amazon Web
+    #   Services GovCloud (US) Regions and China Amazon Web Services Regions.
     #
     #   You must specify this parameter when you create an encrypted read
     #   replica from another Amazon Web Services Region by using the Amazon
@@ -5455,8 +5459,8 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
     #
     # @option params [String] :domain_iam_role_name
-    #   Specify the name of the IAM role to be used when making API calls to
-    #   the Directory Service.
+    #   The name of the IAM role to be used when making API calls to the
+    #   Directory Service.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -5578,6 +5582,23 @@ module Aws::RDS
     #
     #    </note>
     #
+    # @option params [String] :source_db_cluster_identifier
+    #   The identifier of the Multi-AZ DB cluster that will act as the source
+    #   for the read replica. Each DB cluster can have up to 15 read replicas.
+    #
+    #   Constraints:
+    #
+    #   * Must be the identifier of an existing Multi-AZ DB cluster.
+    #
+    #   * Can't be specified if the `SourceDBInstanceIdentifier` parameter is
+    #     also specified.
+    #
+    #   * The specified DB cluster must have automatic backups enabled, that
+    #     is, its backup retention period must be greater than 0.
+    #
+    #   * The source DB cluster must be in the same Amazon Web Services Region
+    #     as the read replica. Cross-Region replication isn't supported.
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -5617,7 +5638,7 @@ module Aws::RDS
     #
     #   resp = client.create_db_instance_read_replica({
     #     db_instance_identifier: "String", # required
-    #     source_db_instance_identifier: "String", # required
+    #     source_db_instance_identifier: "String",
     #     db_instance_class: "String",
     #     availability_zone: "String",
     #     port: 1,
@@ -5663,6 +5684,7 @@ module Aws::RDS
     #     storage_throughput: 1,
     #     enable_customer_owned_ip: false,
     #     allocated_storage: 1,
+    #     source_db_cluster_identifier: "String",
     #     source_region: "String",
     #   })
     #
@@ -5816,6 +5838,7 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
+    #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -7120,6 +7143,10 @@ module Aws::RDS
     # DB cluster are deleted and can't be recovered. Manual DB cluster
     # snapshots of the specified DB cluster are not deleted.
     #
+    # If you're deleting a Multi-AZ DB cluster with read replicas, all
+    # cluster members are terminated and read replicas are promoted to
+    # standalone instances.
+    #
     # For more information on Amazon Aurora, see [ What is Amazon
     # Aurora?][1] in the *Amazon Aurora User Guide*.
     #
@@ -7785,6 +7812,7 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
+    #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -10169,6 +10197,7 @@ module Aws::RDS
     #   resp.db_instances[0].master_user_secret.kms_key_id #=> String
     #   resp.db_instances[0].certificate_details.ca_identifier #=> String
     #   resp.db_instances[0].certificate_details.valid_till #=> Time
+    #   resp.db_instances[0].read_replica_source_db_cluster_identifier #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -14179,11 +14208,21 @@ module Aws::RDS
     #   applied during the next maintenance window unless `ApplyImmediately`
     #   is enabled.
     #
+    #   If the cluster that you're modifying has one or more read replicas,
+    #   all replicas must be running an engine version that's the same or
+    #   later than the version you specify.
+    #
     #   To list all of the available engine versions for Aurora MySQL version
     #   2 (5.7-compatible) and version 3 (MySQL 8.0-compatible), use the
     #   following command:
     #
     #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for MySQL 5.6-compatible
+    #   Aurora, use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine aurora --query
     #   "DBEngineVersions[].EngineVersion"`
     #
     #   To list all of the available engine versions for Aurora PostgreSQL,
@@ -15386,6 +15425,10 @@ module Aws::RDS
     #   lower. For information about valid engine versions, see
     #   `CreateDBInstance`, or call `DescribeDBEngineVersions`.
     #
+    #   If the instance that you're modifying is acting as a read replica,
+    #   the engine version that you specify must be the same or later than the
+    #   version that the source DB instance or cluster is running.
+    #
     #   In RDS Custom for Oracle, this parameter is supported for read
     #   replicas only if they are in the `PATCH_DB_FAILURE` lifecycle.
     #
@@ -16258,6 +16301,7 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
+    #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -17503,6 +17547,7 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
+    #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -18123,6 +18168,7 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
+    #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -21210,6 +21256,7 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
+    #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -21936,6 +21983,7 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
+    #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -22700,6 +22748,7 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
+    #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -23218,6 +23267,7 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
+    #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -23904,6 +23954,7 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
+    #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -23928,7 +23979,7 @@ module Aws::RDS
     #
     # @option params [required, String] :source_db_instance_arn
     #   The Amazon Resource Name (ARN) of the source DB instance for which to
-    #   stop replicating automated backups, for example,
+    #   stop replicating automate backups, for example,
     #   `arn:aws:rds:us-west-2:123456789012:db:mydatabase`.
     #
     # @return [Types::StopDBInstanceAutomatedBackupsReplicationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -24231,6 +24282,7 @@ module Aws::RDS
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
     #   resp.db_instance.certificate_details.ca_identifier #=> String
     #   resp.db_instance.certificate_details.valid_till #=> Time
+    #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverReadReplica AWS API Documentation
     #
@@ -24254,7 +24306,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.173.0'
+      context[:gem_version] = '1.174.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

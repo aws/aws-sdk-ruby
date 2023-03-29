@@ -29,7 +29,9 @@ module Aws::OpenSearchServerless
   # ## Error Classes
   # * {ConflictException}
   # * {InternalServerException}
+  # * {OcuLimitExceededException}
   # * {ResourceNotFoundException}
+  # * {ServiceQuotaExceededException}
   # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -68,6 +70,21 @@ module Aws::OpenSearchServerless
       end
     end
 
+    class OcuLimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::OpenSearchServerless::Types::OcuLimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class ResourceNotFoundException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -80,6 +97,41 @@ module Aws::OpenSearchServerless
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class ServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::OpenSearchServerless::Types::ServiceQuotaExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def quota_code
+        @data[:quota_code]
+      end
+
+      # @return [String]
+      def resource_id
+        @data[:resource_id]
+      end
+
+      # @return [String]
+      def resource_type
+        @data[:resource_type]
+      end
+
+      # @return [String]
+      def service_code
+        @data[:service_code]
       end
     end
 

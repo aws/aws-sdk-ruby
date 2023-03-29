@@ -114,11 +114,12 @@ module Aws::OpenSearchServerless
     #   The maximum capacity limits for all OpenSearch Serverless
     #   collections, in OpenSearch Compute Units (OCUs). These limits are
     #   used to scale your collections based on the current workload. For
-    #   more information, see [Autoscaling][1].
+    #   more information, see [Managing capacity limits for Amazon
+    #   OpenSearch Serverless][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-overview.html#serverless-scaling
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html
     #   @return [Types::CapacityLimits]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/AccountSettingsDetail AWS API Documentation
@@ -202,11 +203,11 @@ module Aws::OpenSearchServerless
     # The maximum capacity limits for all OpenSearch Serverless collections,
     # in OpenSearch Compute Units (OCUs). These limits are used to scale
     # your collections based on the current workload. For more information,
-    # see [Autoscaling][1].
+    # see [Managing capacity limits for Amazon OpenSearch Serverless][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-overview.html#serverless-scaling
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html
     #
     # @!attribute [rw] max_indexing_capacity_in_ocu
     #   The maximum indexing capacity for collections.
@@ -373,9 +374,9 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
-    # When creating a collection, thrown when a collection with the same
-    # name already exists or is being created. When deleting a collection,
-    # thrown when the collection is not in the ACTIVE or FAILED state.
+    # When creating a resource, thrown when a resource with the same name
+    # already exists or is being created. When deleting a resource, thrown
+    # when the resource is not in the ACTIVE or FAILED state.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -558,7 +559,8 @@ module Aws::OpenSearchServerless
     #   @return [String]
     #
     # @!attribute [rw] saml_options
-    #   Describes SAML options in in the form of a key-value map.
+    #   Describes SAML options in in the form of a key-value map. This field
+    #   is required if you specify `saml` for the `type` parameter.
     #   @return [Types::SamlConfigOptions]
     #
     # @!attribute [rw] type
@@ -1089,7 +1091,7 @@ module Aws::OpenSearchServerless
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   Resource filters (can be collection or indexes) that policies can
+    #   Resource filters (can be collections or indexes) that policies can
     #   apply to.
     #   @return [Array<String>]
     #
@@ -1350,6 +1352,20 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
+    # OCU Limit Exceeded for service limits
+    #
+    # @!attribute [rw] message
+    #   Description of the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/OcuLimitExceededException AWS API Documentation
+    #
+    class OcuLimitExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Thrown when accessing or deleting a resource that does not exist.
     #
     # @!attribute [rw] message
@@ -1375,8 +1391,7 @@ module Aws::OpenSearchServerless
     #   @return [String]
     #
     # @!attribute [rw] session_timeout
-    #   The session timeout, in minutes. Minimum is 15 minutes and maximum
-    #   is 1440 minutes (24 hours or 1 day). Default is 60 minutes.
+    #   The session timeout, in minutes. Default is 60 minutes (12 hours).
     #   @return [Integer]
     #
     # @!attribute [rw] user_attribute
@@ -1594,6 +1609,41 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
+    # Thrown when you attempt to create more resources than the service
+    # allows based on service quotas.
+    #
+    # @!attribute [rw] message
+    #   Description of the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] quota_code
+    #   Service Quotas requirement to identify originating quota.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   Identifier of the resource affected.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Type of the resource affected.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   Service Quotas requirement to identify originating service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message,
+      :quota_code,
+      :resource_id,
+      :resource_type,
+      :service_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A map of key-value pairs associated to an OpenSearch Serverless
     # resource.
     #
@@ -1720,11 +1770,12 @@ module Aws::OpenSearchServerless
     #   The maximum capacity limits for all OpenSearch Serverless
     #   collections, in OpenSearch Compute Units (OCUs). These limits are
     #   used to scale your collections based on the current workload. For
-    #   more information, see [Autoscaling][1].
+    #   more information, see [Managing capacity limits for Amazon
+    #   OpenSearch Serverless][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-overview.html#serverless-scaling
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html
     #   @return [Types::CapacityLimits]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/UpdateAccountSettingsRequest AWS API Documentation
@@ -2082,7 +2133,7 @@ module Aws::OpenSearchServerless
     #   @return [Array<String>]
     #
     # @!attribute [rw] vpc_id
-    #   The ID of the VPC from which you access OpenSearch Serverless
+    #   The ID of the VPC from which you access OpenSearch Serverless.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/VpcEndpointDetail AWS API Documentation

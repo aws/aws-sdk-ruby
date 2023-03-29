@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.174.0 (2023-03-29)
+------------------
+
+* Feature - Add support for creating a read replica DB instance from a Multi-AZ DB cluster.
+
 1.173.0 (2023-03-24)
 ------------------
 

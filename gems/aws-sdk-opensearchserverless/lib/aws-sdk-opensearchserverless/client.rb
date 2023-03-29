@@ -641,7 +641,8 @@ module Aws::OpenSearchServerless
     #   The name of the security configuration.
     #
     # @option params [Types::SamlConfigOptions] :saml_options
-    #   Describes SAML options in in the form of a key-value map.
+    #   Describes SAML options in in the form of a key-value map. This field
+    #   is required if you specify `saml` for the `type` parameter.
     #
     # @option params [required, String] :type
     #   The type of security configuration.
@@ -1207,7 +1208,7 @@ module Aws::OpenSearchServerless
     #   page.
     #
     # @option params [Array<String>] :resource
-    #   Resource filters (can be collection or indexes) that policies can
+    #   Resource filters (can be collections or indexes) that policies can
     #   apply to.
     #
     # @option params [required, String] :type
@@ -1657,21 +1658,22 @@ module Aws::OpenSearchServerless
     end
 
     # Update the OpenSearch Serverless settings for the current Amazon Web
-    # Services account. For more information, see [Autoscaling][1].
+    # Services account. For more information, see [Managing capacity limits
+    # for Amazon OpenSearch Serverless][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-overview.html#serverless-scaling
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html
     #
     # @option params [Types::CapacityLimits] :capacity_limits
     #   The maximum capacity limits for all OpenSearch Serverless collections,
     #   in OpenSearch Compute Units (OCUs). These limits are used to scale
     #   your collections based on the current workload. For more information,
-    #   see [Autoscaling][1].
+    #   see [Managing capacity limits for Amazon OpenSearch Serverless][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-overview.html#serverless-scaling
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html
     #
     # @return [Types::UpdateAccountSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1965,7 +1967,7 @@ module Aws::OpenSearchServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opensearchserverless'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
