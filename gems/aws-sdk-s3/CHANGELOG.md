@@ -4,6 +4,11 @@ Unreleased Changes
 1.119.2 (2023-03-22)
 ------------------
 
+* Issue - Skip `#check_for_cached_region` if custom endpoint provided
+
+1.119.2 (2023-03-22)
+------------------
+
 * Issue - Provide `endpoint` and `bucket` attributes on `Aws::S3::Errors::PermanentRedirect` error objects.
 
 1.119.1 (2023-02-13)
