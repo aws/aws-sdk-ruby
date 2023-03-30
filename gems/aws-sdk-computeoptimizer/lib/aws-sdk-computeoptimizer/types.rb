@@ -2752,31 +2752,31 @@ module Aws::ComputeOptimizer
     #   * <b> <code>EBSThroughputOverprovisioned</code> </b> — The
     #     instance’s EBS throughput configuration can be sized down while
     #     still meeting the performance requirements of your workload. This
-    #     is identified by analyzing the `VolumeReadOps` and
-    #     `VolumeWriteOps` metrics of EBS volumes attached to the current
+    #     is identified by analyzing the `VolumeReadBytes` and
+    #     `VolumeWriteBytes` metrics of EBS volumes attached to the current
     #     instance during the look-back period.
     #
     #   * <b> <code>EBSThroughputUnderprovisioned</code> </b> — The
     #     instance’s EBS throughput configuration doesn't meet the
     #     performance requirements of your workload and there is an
     #     alternative instance type that provides better EBS throughput
-    #     performance. This is identified by analyzing the `VolumeReadOps`
-    #     and `VolumeWriteOps` metrics of EBS volumes attached to the
+    #     performance. This is identified by analyzing the `VolumeReadBytes`
+    #     and `VolumeWriteBytes`&gt; metrics of EBS volumes attached to the
     #     current instance during the look-back period.
     #
     #   * <b> <code>EBSIOPSOverprovisioned</code> </b> — The instance’s EBS
     #     IOPS configuration can be sized down while still meeting the
     #     performance requirements of your workload. This is identified by
-    #     analyzing the `VolumeReadBytes` and `VolumeWriteBytes` metric of
-    #     EBS volumes attached to the current instance during the look-back
+    #     analyzing the `VolumeReadOps` and `VolumeWriteOps` metric of EBS
+    #     volumes attached to the current instance during the look-back
     #     period.
     #
     #   * <b> <code>EBSIOPSUnderprovisioned</code> </b> — The instance’s EBS
     #     IOPS configuration doesn't meet the performance requirements of
     #     your workload and there is an alternative instance type that
     #     provides better EBS IOPS performance. This is identified by
-    #     analyzing the `VolumeReadBytes` and `VolumeWriteBytes` metric of
-    #     EBS volumes attached to the current instance during the look-back
+    #     analyzing the `VolumeReadOps` and `VolumeWriteOps` metric of EBS
+    #     volumes attached to the current instance during the look-back
     #     period.
     #
     #   * <b> <code>NetworkBandwidthOverprovisioned</code> </b> — The
@@ -2917,6 +2917,10 @@ module Aws::ComputeOptimizer
     #   * `Kafka` - Infers that Kafka might be running on the instance.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] instance_state
+    #   The state of the instance when the recommendation was generated.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/InstanceRecommendation AWS API Documentation
     #
     class InstanceRecommendation < Struct.new(
@@ -2933,7 +2937,8 @@ module Aws::ComputeOptimizer
       :last_refresh_timestamp,
       :current_performance_risk,
       :effective_recommendation_preferences,
-      :inferred_workload_types)
+      :inferred_workload_types,
+      :instance_state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4538,6 +4543,10 @@ module Aws::ComputeOptimizer
     #   The burst throughput of the volume.
     #   @return [Integer]
     #
+    # @!attribute [rw] root_volume
+    #   Contains the image used to boot the instance during launch.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/VolumeConfiguration AWS API Documentation
     #
     class VolumeConfiguration < Struct.new(
@@ -4546,7 +4555,8 @@ module Aws::ComputeOptimizer
       :volume_baseline_iops,
       :volume_burst_iops,
       :volume_baseline_throughput,
-      :volume_burst_throughput)
+      :volume_burst_throughput,
+      :root_volume)
       SENSITIVE = []
       include Aws::Structure
     end

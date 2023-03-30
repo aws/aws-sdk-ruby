@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2023-03-30)
+------------------
+
+* Feature - AWS Network Firewall added TLS inspection configurations to allow TLS traffic inspection.
+
 1.24.0 (2023-01-18)
 ------------------
 

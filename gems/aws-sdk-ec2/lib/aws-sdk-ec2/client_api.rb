@@ -187,6 +187,7 @@ module Aws::EC2
     AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
     AvailabilityZoneMessage = Shapes::StructureShape.new(name: 'AvailabilityZoneMessage')
     AvailabilityZoneMessageList = Shapes::ListShape.new(name: 'AvailabilityZoneMessageList')
+    AvailabilityZoneName = Shapes::StringShape.new(name: 'AvailabilityZoneName')
     AvailabilityZoneOptInStatus = Shapes::StringShape.new(name: 'AvailabilityZoneOptInStatus')
     AvailabilityZoneState = Shapes::StringShape.new(name: 'AvailabilityZoneState')
     AvailabilityZoneStringList = Shapes::ListShape.new(name: 'AvailabilityZoneStringList')
@@ -1451,6 +1452,8 @@ module Aws::EC2
     GetVpnConnectionDeviceSampleConfigurationResult = Shapes::StructureShape.new(name: 'GetVpnConnectionDeviceSampleConfigurationResult')
     GetVpnConnectionDeviceTypesRequest = Shapes::StructureShape.new(name: 'GetVpnConnectionDeviceTypesRequest')
     GetVpnConnectionDeviceTypesResult = Shapes::StructureShape.new(name: 'GetVpnConnectionDeviceTypesResult')
+    GetVpnTunnelReplacementStatusRequest = Shapes::StructureShape.new(name: 'GetVpnTunnelReplacementStatusRequest')
+    GetVpnTunnelReplacementStatusResult = Shapes::StructureShape.new(name: 'GetVpnTunnelReplacementStatusResult')
     GpuDeviceCount = Shapes::IntegerShape.new(name: 'GpuDeviceCount')
     GpuDeviceInfo = Shapes::StructureShape.new(name: 'GpuDeviceInfo')
     GpuDeviceInfoList = Shapes::ListShape.new(name: 'GpuDeviceInfoList')
@@ -1913,6 +1916,7 @@ module Aws::EC2
     LocationType = Shapes::StringShape.new(name: 'LocationType')
     LogDestinationType = Shapes::StringShape.new(name: 'LogDestinationType')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MaintenanceDetails = Shapes::StructureShape.new(name: 'MaintenanceDetails')
     ManagedPrefixList = Shapes::StructureShape.new(name: 'ManagedPrefixList')
     ManagedPrefixListSet = Shapes::ListShape.new(name: 'ManagedPrefixListSet')
     MarketType = Shapes::StringShape.new(name: 'MarketType')
@@ -2353,6 +2357,8 @@ module Aws::EC2
     ReplaceRouteTableAssociationResult = Shapes::StructureShape.new(name: 'ReplaceRouteTableAssociationResult')
     ReplaceTransitGatewayRouteRequest = Shapes::StructureShape.new(name: 'ReplaceTransitGatewayRouteRequest')
     ReplaceTransitGatewayRouteResult = Shapes::StructureShape.new(name: 'ReplaceTransitGatewayRouteResult')
+    ReplaceVpnTunnelRequest = Shapes::StructureShape.new(name: 'ReplaceVpnTunnelRequest')
+    ReplaceVpnTunnelResult = Shapes::StructureShape.new(name: 'ReplaceVpnTunnelResult')
     ReplacementStrategy = Shapes::StringShape.new(name: 'ReplacementStrategy')
     ReportInstanceReasonCodes = Shapes::StringShape.new(name: 'ReportInstanceReasonCodes')
     ReportInstanceStatusRequest = Shapes::StructureShape.new(name: 'ReportInstanceStatusRequest')
@@ -5144,7 +5150,7 @@ module Aws::EC2
     CreateVolumePermissionModifications.add_member(:remove, Shapes::ShapeRef.new(shape: CreateVolumePermissionList, location_name: "Remove"))
     CreateVolumePermissionModifications.struct_class = Types::CreateVolumePermissionModifications
 
-    CreateVolumeRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AvailabilityZone"))
+    CreateVolumeRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneName, required: true, location_name: "AvailabilityZone"))
     CreateVolumeRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
     CreateVolumeRequest.add_member(:iops, Shapes::ShapeRef.new(shape: Integer, location_name: "Iops"))
     CreateVolumeRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
@@ -8911,6 +8917,19 @@ module Aws::EC2
     GetVpnConnectionDeviceTypesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetVpnConnectionDeviceTypesResult.struct_class = Types::GetVpnConnectionDeviceTypesResult
 
+    GetVpnTunnelReplacementStatusRequest.add_member(:vpn_connection_id, Shapes::ShapeRef.new(shape: VpnConnectionId, required: true, location_name: "VpnConnectionId"))
+    GetVpnTunnelReplacementStatusRequest.add_member(:vpn_tunnel_outside_ip_address, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VpnTunnelOutsideIpAddress"))
+    GetVpnTunnelReplacementStatusRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetVpnTunnelReplacementStatusRequest.struct_class = Types::GetVpnTunnelReplacementStatusRequest
+
+    GetVpnTunnelReplacementStatusResult.add_member(:vpn_connection_id, Shapes::ShapeRef.new(shape: VpnConnectionId, location_name: "vpnConnectionId"))
+    GetVpnTunnelReplacementStatusResult.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: TransitGatewayId, location_name: "transitGatewayId"))
+    GetVpnTunnelReplacementStatusResult.add_member(:customer_gateway_id, Shapes::ShapeRef.new(shape: CustomerGatewayId, location_name: "customerGatewayId"))
+    GetVpnTunnelReplacementStatusResult.add_member(:vpn_gateway_id, Shapes::ShapeRef.new(shape: VpnGatewayId, location_name: "vpnGatewayId"))
+    GetVpnTunnelReplacementStatusResult.add_member(:vpn_tunnel_outside_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "vpnTunnelOutsideIpAddress"))
+    GetVpnTunnelReplacementStatusResult.add_member(:maintenance_details, Shapes::ShapeRef.new(shape: MaintenanceDetails, location_name: "maintenanceDetails"))
+    GetVpnTunnelReplacementStatusResult.struct_class = Types::GetVpnTunnelReplacementStatusResult
+
     GpuDeviceInfo.add_member(:name, Shapes::ShapeRef.new(shape: GpuDeviceName, location_name: "name"))
     GpuDeviceInfo.add_member(:manufacturer, Shapes::ShapeRef.new(shape: GpuDeviceManufacturerName, location_name: "manufacturer"))
     GpuDeviceInfo.add_member(:count, Shapes::ShapeRef.new(shape: GpuDeviceCount, location_name: "count"))
@@ -10575,6 +10594,11 @@ module Aws::EC2
 
     LocalStorageTypeSet.member = Shapes::ShapeRef.new(shape: LocalStorageType, location_name: "item")
 
+    MaintenanceDetails.add_member(:pending_maintenance, Shapes::ShapeRef.new(shape: String, location_name: "pendingMaintenance"))
+    MaintenanceDetails.add_member(:maintenance_auto_applied_after, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "maintenanceAutoAppliedAfter"))
+    MaintenanceDetails.add_member(:last_maintenance_applied, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "lastMaintenanceApplied"))
+    MaintenanceDetails.struct_class = Types::MaintenanceDetails
+
     ManagedPrefixList.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, location_name: "prefixListId"))
     ManagedPrefixList.add_member(:address_family, Shapes::ShapeRef.new(shape: String, location_name: "addressFamily"))
     ManagedPrefixList.add_member(:state, Shapes::ShapeRef.new(shape: PrefixListState, location_name: "state"))
@@ -11312,6 +11336,7 @@ module Aws::EC2
     ModifyVpnTunnelOptionsRequest.add_member(:vpn_tunnel_outside_ip_address, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VpnTunnelOutsideIpAddress"))
     ModifyVpnTunnelOptionsRequest.add_member(:tunnel_options, Shapes::ShapeRef.new(shape: ModifyVpnTunnelOptionsSpecification, required: true, location_name: "TunnelOptions"))
     ModifyVpnTunnelOptionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyVpnTunnelOptionsRequest.add_member(:skip_tunnel_replacement, Shapes::ShapeRef.new(shape: Boolean, location_name: "SkipTunnelReplacement"))
     ModifyVpnTunnelOptionsRequest.struct_class = Types::ModifyVpnTunnelOptionsRequest
 
     ModifyVpnTunnelOptionsResult.add_member(:vpn_connection, Shapes::ShapeRef.new(shape: VpnConnection, location_name: "vpnConnection"))
@@ -11336,6 +11361,7 @@ module Aws::EC2
     ModifyVpnTunnelOptionsSpecification.add_member(:ike_versions, Shapes::ShapeRef.new(shape: IKEVersionsRequestList, location_name: "IKEVersion"))
     ModifyVpnTunnelOptionsSpecification.add_member(:startup_action, Shapes::ShapeRef.new(shape: String, location_name: "StartupAction"))
     ModifyVpnTunnelOptionsSpecification.add_member(:log_options, Shapes::ShapeRef.new(shape: VpnTunnelLogOptionsSpecification, location_name: "LogOptions"))
+    ModifyVpnTunnelOptionsSpecification.add_member(:enable_tunnel_lifecycle_control, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableTunnelLifecycleControl"))
     ModifyVpnTunnelOptionsSpecification.struct_class = Types::ModifyVpnTunnelOptionsSpecification
 
     MonitorInstancesRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, required: true, location_name: "InstanceId"))
@@ -12332,6 +12358,15 @@ module Aws::EC2
 
     ReplaceTransitGatewayRouteResult.add_member(:route, Shapes::ShapeRef.new(shape: TransitGatewayRoute, location_name: "route"))
     ReplaceTransitGatewayRouteResult.struct_class = Types::ReplaceTransitGatewayRouteResult
+
+    ReplaceVpnTunnelRequest.add_member(:vpn_connection_id, Shapes::ShapeRef.new(shape: VpnConnectionId, required: true, location_name: "VpnConnectionId"))
+    ReplaceVpnTunnelRequest.add_member(:vpn_tunnel_outside_ip_address, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VpnTunnelOutsideIpAddress"))
+    ReplaceVpnTunnelRequest.add_member(:apply_pending_maintenance, Shapes::ShapeRef.new(shape: Boolean, location_name: "ApplyPendingMaintenance"))
+    ReplaceVpnTunnelRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ReplaceVpnTunnelRequest.struct_class = Types::ReplaceVpnTunnelRequest
+
+    ReplaceVpnTunnelResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    ReplaceVpnTunnelResult.struct_class = Types::ReplaceVpnTunnelResult
 
     ReportInstanceStatusRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     ReportInstanceStatusRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -14176,6 +14211,7 @@ module Aws::EC2
     TunnelOption.add_member(:ike_versions, Shapes::ShapeRef.new(shape: IKEVersionsList, location_name: "ikeVersionSet"))
     TunnelOption.add_member(:startup_action, Shapes::ShapeRef.new(shape: String, location_name: "startupAction"))
     TunnelOption.add_member(:log_options, Shapes::ShapeRef.new(shape: VpnTunnelLogOptions, location_name: "logOptions"))
+    TunnelOption.add_member(:enable_tunnel_lifecycle_control, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableTunnelLifecycleControl"))
     TunnelOption.struct_class = Types::TunnelOption
 
     TunnelOptionsList.member = Shapes::ShapeRef.new(shape: TunnelOption, location_name: "item")
@@ -14796,6 +14832,7 @@ module Aws::EC2
     VpnTunnelOptionsSpecification.add_member(:ike_versions, Shapes::ShapeRef.new(shape: IKEVersionsRequestList, location_name: "IKEVersion"))
     VpnTunnelOptionsSpecification.add_member(:startup_action, Shapes::ShapeRef.new(shape: String, location_name: "StartupAction"))
     VpnTunnelOptionsSpecification.add_member(:log_options, Shapes::ShapeRef.new(shape: VpnTunnelLogOptionsSpecification, location_name: "LogOptions"))
+    VpnTunnelOptionsSpecification.add_member(:enable_tunnel_lifecycle_control, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableTunnelLifecycleControl"))
     VpnTunnelOptionsSpecification.struct_class = Types::VpnTunnelOptionsSpecification
 
     VpnTunnelOptionsSpecificationsList.member = Shapes::ShapeRef.new(shape: VpnTunnelOptionsSpecification)
@@ -19218,6 +19255,14 @@ module Aws::EC2
         )
       end)
 
+      api.add_operation(:get_vpn_tunnel_replacement_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetVpnTunnelReplacementStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetVpnTunnelReplacementStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetVpnTunnelReplacementStatusResult)
+      end)
+
       api.add_operation(:import_client_vpn_client_certificate_revocation_list, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ImportClientVpnClientCertificateRevocationList"
         o.http_method = "POST"
@@ -20028,6 +20073,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ReplaceTransitGatewayRouteRequest)
         o.output = Shapes::ShapeRef.new(shape: ReplaceTransitGatewayRouteResult)
+      end)
+
+      api.add_operation(:replace_vpn_tunnel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ReplaceVpnTunnel"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ReplaceVpnTunnelRequest)
+        o.output = Shapes::ShapeRef.new(shape: ReplaceVpnTunnelResult)
       end)
 
       api.add_operation(:report_instance_status, Seahorse::Model::Operation.new.tap do |o|

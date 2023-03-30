@@ -425,6 +425,16 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
+    # <note markdown="1"> This API call has been replaced with a new "traffic sources" API
+    # call (`AttachTrafficSources`) that can attach multiple traffic sources
+    # types. While we continue to support `AttachLoadBalancerTargetGroups`,
+    # and you can use both the original `AttachLoadBalancerTargetGroups` API
+    # call and the new `AttachTrafficSources` API call on the same Auto
+    # Scaling group, we recommend using the new "traffic sources" API call
+    # to simplify how you manage traffic sources.
+    #
+    #  </note>
+    #
     # Attaches one or more target groups to the specified Auto Scaling
     # group.
     #
@@ -495,9 +505,13 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # <note markdown="1"> To attach an Application Load Balancer, Network Load Balancer, or
-    # Gateway Load Balancer, use the AttachLoadBalancerTargetGroups API
-    # operation instead.
+    # <note markdown="1"> This API call has been replaced with a new "traffic sources" API
+    # call (`AttachTrafficSources`) that can attach multiple traffic sources
+    # types. While we continue to support `AttachLoadBalancers`, and you can
+    # use both the original `AttachLoadBalancers` API call and the new
+    # `AttachTrafficSources` API call on the same Auto Scaling group, we
+    # recommend using the new "traffic sources" API call to simplify how
+    # you manage traffic sources.
     #
     #  </note>
     #
@@ -557,19 +571,29 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # **Reserved for use with Amazon VPC Lattice, which is in preview and
-    # subject to change. Do not use this API for production workloads. This
-    # API is also subject to change.**
-    #
     # Attaches one or more traffic sources to the specified Auto Scaling
     # group.
     #
-    # To describe the traffic sources for an Auto Scaling group, call the
-    # DescribeTrafficSources API. To detach a traffic source from the Auto
-    # Scaling group, call the DetachTrafficSources API.
+    # You can use any of the following as traffic sources for an Auto
+    # Scaling group:
+    #
+    # * Application Load Balancer
+    #
+    # * Classic Load Balancer
+    #
+    # * Network Load Balancer
+    #
+    # * Gateway Load Balancer
+    #
+    # * VPC Lattice
     #
     # This operation is additive and does not detach existing traffic
     # sources from the Auto Scaling group.
+    #
+    # After the operation completes, use the DescribeTrafficSources API to
+    # return details about the state of the attachments between traffic
+    # sources and your Auto Scaling group. To detach a traffic source from
+    # the Auto Scaling group, call the DetachTrafficSources API.
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
@@ -578,13 +602,25 @@ module Aws::AutoScaling
     #   The unique identifiers of one or more traffic sources. You can specify
     #   up to 10 traffic sources.
     #
-    #   Currently, you must specify an Amazon Resource Name (ARN) for an
-    #   existing VPC Lattice target group. Amazon EC2 Auto Scaling registers
-    #   the running instances with the attached target groups. The target
-    #   groups receive incoming traffic and route requests to one or more
-    #   registered targets.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To attach a target group to an Auto Scaling group
+    #
+    #   # This example attaches the specified target group to the specified Auto Scaling group.
+    #
+    #   resp = client.attach_traffic_sources({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     traffic_sources: [
+    #       {
+    #         identifier: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -592,7 +628,8 @@ module Aws::AutoScaling
     #     auto_scaling_group_name: "XmlStringMaxLen255", # required
     #     traffic_sources: [ # required
     #       {
-    #         identifier: "XmlStringMaxLen511",
+    #         identifier: "XmlStringMaxLen511", # required
+    #         type: "XmlStringMaxLen511",
     #       },
     #     ],
     #   })
@@ -972,7 +1009,8 @@ module Aws::AutoScaling
     # @option params [Array<String>] :load_balancer_names
     #   A list of Classic Load Balancers associated with this Auto Scaling
     #   group. For Application Load Balancers, Network Load Balancers, and
-    #   Gateway Load Balancer, specify the `TargetGroupARNs` property instead.
+    #   Gateway Load Balancers, specify the `TargetGroupARNs` property
+    #   instead.
     #
     # @option params [Array<String>] :target_group_arns
     #   The Amazon Resource Names (ARN) of the Elastic Load Balancing target
@@ -988,14 +1026,12 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html
     #
     # @option params [String] :health_check_type
-    #   Determines whether any additional health checks are performed on the
-    #   instances in this group. Amazon EC2 health checks are always on. For
-    #   more information, see [Health checks for Auto Scaling instances][1] in
-    #   the *Amazon EC2 Auto Scaling User Guide*.
+    #   A comma-separated list of one or more health check types.
     #
-    #   The valid values are `EC2` (default), `ELB`, and `VPC_LATTICE`. The
-    #   `VPC_LATTICE` health check type is reserved for use with VPC Lattice,
-    #   which is in preview release and is subject to change.
+    #   The valid values are `EC2`, `ELB`, and `VPC_LATTICE`. `EC2` is the
+    #   default health check and cannot be disabled. For more information, see
+    #   [Health checks for Auto Scaling instances][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
     #
     #
@@ -1166,17 +1202,10 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html
     #
     # @option params [Array<Types::TrafficSourceIdentifier>] :traffic_sources
-    #   **Reserved for use with Amazon VPC Lattice, which is in preview
-    #   release and is subject to change. Do not use this parameter for
-    #   production workloads. It is also subject to change.**
-    #
-    #   The unique identifiers of one or more traffic sources.
-    #
-    #   Currently, you must specify an Amazon Resource Name (ARN) for an
-    #   existing VPC Lattice target group. Amazon EC2 Auto Scaling registers
-    #   the running instances with the attached target groups. The target
-    #   groups receive incoming traffic and route requests to one or more
-    #   registered targets.
+    #   The list of traffic sources to attach to this Auto Scaling group. You
+    #   can use any of the following as traffic sources for an Auto Scaling
+    #   group: Classic Load Balancer, Application Load Balancer, Gateway Load
+    #   Balancer, Network Load Balancer, and VPC Lattice.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1390,7 +1419,8 @@ module Aws::AutoScaling
     #     default_instance_warmup: 1,
     #     traffic_sources: [
     #       {
-    #         identifier: "XmlStringMaxLen511",
+    #         identifier: "XmlStringMaxLen511", # required
+    #         type: "XmlStringMaxLen511",
     #       },
     #     ],
     #   })
@@ -2478,6 +2508,7 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].default_instance_warmup #=> Integer
     #   resp.auto_scaling_groups[0].traffic_sources #=> Array
     #   resp.auto_scaling_groups[0].traffic_sources[0].identifier #=> String
+    #   resp.auto_scaling_groups[0].traffic_sources[0].type #=> String
     #   resp.next_token #=> String
     #
     #
@@ -3026,6 +3057,17 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
+    # <note markdown="1"> This API call has been replaced with a new "traffic sources" API
+    # call (`DescribeTrafficSources`) that can describe multiple traffic
+    # sources types. While we continue to support
+    # `DescribeLoadBalancerTargetGroups`, and you can use both the original
+    # `DescribeLoadBalancerTargetGroups` API call and the new
+    # `DescribeTrafficSources` API call on the same Auto Scaling group, we
+    # recommend using the new "traffic sources" API call to simplify how
+    # you manage traffic sources.
+    #
+    #  </note>
+    #
     # Gets information about the Elastic Load Balancing target groups for
     # the specified Auto Scaling group.
     #
@@ -3123,12 +3165,22 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
+    # <note markdown="1"> This API call has been replaced with a new "traffic sources" API
+    # call (`DescribeTrafficSources`) that can describe multiple traffic
+    # sources types. While we continue to support `DescribeLoadBalancers`,
+    # and you can use both the original `DescribeLoadBalancers` API call and
+    # the new `DescribeTrafficSources` API call on the same Auto Scaling
+    # group, we recommend using the new "traffic sources" API call to
+    # simplify how you manage traffic sources.
+    #
+    #  </note>
+    #
     # Gets information about the load balancers for the specified Auto
     # Scaling group.
     #
     # This operation describes only Classic Load Balancers. If you have
     # Application Load Balancers, Network Load Balancers, or Gateway Load
-    # Balancer, use the DescribeLoadBalancerTargetGroups API instead.
+    # Balancers, use the DescribeLoadBalancerTargetGroups API instead.
     #
     # To determine the attachment status of the load balancer, use the
     # `State` element in the response. When you attach a load balancer to an
@@ -3636,7 +3688,7 @@ module Aws::AutoScaling
     #   resp.activities[0].cause #=> String
     #   resp.activities[0].start_time #=> Time
     #   resp.activities[0].end_time #=> Time
-    #   resp.activities[0].status_code #=> String, one of "PendingSpotBidPlacement", "WaitingForSpotInstanceRequestId", "WaitingForSpotInstanceId", "WaitingForInstanceId", "PreInService", "InProgress", "WaitingForELBConnectionDraining", "MidLifecycleAction", "WaitingForInstanceWarmup", "Successful", "Failed", "Cancelled"
+    #   resp.activities[0].status_code #=> String, one of "PendingSpotBidPlacement", "WaitingForSpotInstanceRequestId", "WaitingForSpotInstanceId", "WaitingForInstanceId", "PreInService", "InProgress", "WaitingForELBConnectionDraining", "MidLifecycleAction", "WaitingForInstanceWarmup", "Successful", "Failed", "Cancelled", "WaitingForConnectionDraining"
     #   resp.activities[0].status_message #=> String
     #   resp.activities[0].progress #=> Integer
     #   resp.activities[0].details #=> String
@@ -3965,19 +4017,30 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # **Reserved for use with Amazon VPC Lattice, which is in preview and
-    # subject to change. Do not use this API for production workloads. This
-    # API is also subject to change.**
-    #
     # Gets information about the traffic sources for the specified Auto
     # Scaling group.
+    #
+    # You can optionally provide a traffic source type. If you provide a
+    # traffic source type, then the results only include that traffic source
+    # type.
+    #
+    # If you do not provide a traffic source type, then the results include
+    # all the traffic sources for the specified Auto Scaling group.
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #
-    # @option params [required, String] :traffic_source_type
-    #   The type of traffic source you are describing. Currently, the only
-    #   valid value is `vpc-lattice`.
+    # @option params [String] :traffic_source_type
+    #   The traffic source type that you want to describe.
+    #
+    #   The following lists the valid values:
+    #
+    #   * `elb` if the traffic source is a Classic Load Balancer.
+    #
+    #   * `elbv2` if the traffic source is a Application Load Balancer,
+    #     Gateway Load Balancer, or Network Load Balancer.
+    #
+    #   * `vpc-lattice` if the traffic source is VPC Lattice.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -3992,11 +4055,34 @@ module Aws::AutoScaling
     #   * {Types::DescribeTrafficSourcesResponse#traffic_sources #traffic_sources} => Array&lt;Types::TrafficSourceState&gt;
     #   * {Types::DescribeTrafficSourcesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To describe the target groups for an Auto Scaling group
+    #
+    #   # This example describes the target groups attached to the specified Auto Scaling group.
+    #
+    #   resp = client.describe_traffic_sources({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "", 
+    #     traffic_sources: [
+    #       {
+    #         identifier: "arn:aws:vpc-lattice:us-west-2:123456789012:targetgroup/tg-0e2f2665eEXAMPLE", 
+    #         state: "InService", 
+    #         type: "vpc-lattice", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_traffic_sources({
     #     auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #     traffic_source_type: "XmlStringMaxLen255", # required
+    #     traffic_source_type: "XmlStringMaxLen255",
     #     next_token: "XmlString",
     #     max_records: 1,
     #   })
@@ -4006,6 +4092,8 @@ module Aws::AutoScaling
     #   resp.traffic_sources #=> Array
     #   resp.traffic_sources[0].traffic_source #=> String
     #   resp.traffic_sources[0].state #=> String
+    #   resp.traffic_sources[0].identifier #=> String
+    #   resp.traffic_sources[0].type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeTrafficSources AWS API Documentation
@@ -4162,7 +4250,7 @@ module Aws::AutoScaling
     #   resp.activities[0].cause #=> String
     #   resp.activities[0].start_time #=> Time
     #   resp.activities[0].end_time #=> Time
-    #   resp.activities[0].status_code #=> String, one of "PendingSpotBidPlacement", "WaitingForSpotInstanceRequestId", "WaitingForSpotInstanceId", "WaitingForInstanceId", "PreInService", "InProgress", "WaitingForELBConnectionDraining", "MidLifecycleAction", "WaitingForInstanceWarmup", "Successful", "Failed", "Cancelled"
+    #   resp.activities[0].status_code #=> String, one of "PendingSpotBidPlacement", "WaitingForSpotInstanceRequestId", "WaitingForSpotInstanceId", "WaitingForInstanceId", "PreInService", "InProgress", "WaitingForELBConnectionDraining", "MidLifecycleAction", "WaitingForInstanceWarmup", "Successful", "Failed", "Cancelled", "WaitingForConnectionDraining"
     #   resp.activities[0].status_message #=> String
     #   resp.activities[0].progress #=> Integer
     #   resp.activities[0].details #=> String
@@ -4178,6 +4266,16 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
+    # <note markdown="1"> This API call has been replaced with a new "traffic sources" API
+    # call (`DetachTrafficSources`) that can detach multiple traffic sources
+    # types. While we continue to support `DetachLoadBalancerTargetGroups`,
+    # and you can use both the original `DetachLoadBalancerTargetGroups` API
+    # call and the new `DetachTrafficSources` API call on the same Auto
+    # Scaling group, we recommend using the new "traffic sources" API call
+    # to simplify how you manage traffic sources.
+    #
+    #  </note>
+    #
     # Detaches one or more target groups from the specified Auto Scaling
     # group.
     #
@@ -4230,12 +4328,22 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
+    # <note markdown="1"> This API call has been replaced with a new "traffic sources" API
+    # call (`DetachTrafficSources`) that can detach multiple traffic sources
+    # types. While we continue to support `DetachLoadBalancers`, and you can
+    # use both the original `DetachLoadBalancers` API call and the new
+    # `DetachTrafficSources` API call on the same Auto Scaling group, we
+    # recommend using the new "traffic sources" API call to simplify how
+    # you manage traffic sources.
+    #
+    #  </note>
+    #
     # Detaches one or more Classic Load Balancers from the specified Auto
     # Scaling group.
     #
     # This operation detaches only Classic Load Balancers. If you have
     # Application Load Balancers, Network Load Balancers, or Gateway Load
-    # Balancer, use the DetachLoadBalancerTargetGroups API instead.
+    # Balancers, use the DetachLoadBalancerTargetGroups API instead.
     #
     # When you detach a load balancer, it enters the `Removing` state while
     # deregistering the instances in the group. When all instances are
@@ -4279,12 +4387,13 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # **Reserved for use with Amazon VPC Lattice, which is in preview and
-    # subject to change. Do not use this API for production workloads. This
-    # API is also subject to change.**
-    #
     # Detaches one or more traffic sources from the specified Auto Scaling
     # group.
+    #
+    # When you detach a taffic, it enters the `Removing` state while
+    # deregistering the instances in the group. When all instances are
+    # deregistered, then you can no longer describe the traffic source using
+    # the DescribeTrafficSources API call. The instances continue to run.
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
@@ -4293,14 +4402,25 @@ module Aws::AutoScaling
     #   The unique identifiers of one or more traffic sources you are
     #   detaching. You can specify up to 10 traffic sources.
     #
-    #   Currently, you must specify an Amazon Resource Name (ARN) for an
-    #   existing VPC Lattice target group. When you detach a target group, it
-    #   enters the `Removing` state while deregistering the instances in the
-    #   group. When all instances are deregistered, then you can no longer
-    #   describe the target group using the DescribeTrafficSources API call.
-    #   The instances continue to run.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To detach a target group from an Auto Scaling group
+    #
+    #   # This example detaches the specified target group from the specified Auto Scaling group.
+    #
+    #   resp = client.detach_traffic_sources({
+    #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     traffic_sources: [
+    #       {
+    #         identifier: "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4308,7 +4428,8 @@ module Aws::AutoScaling
     #     auto_scaling_group_name: "XmlStringMaxLen255", # required
     #     traffic_sources: [ # required
     #       {
-    #         identifier: "XmlStringMaxLen511",
+    #         identifier: "XmlStringMaxLen511", # required
+    #         type: "XmlStringMaxLen511",
     #       },
     #     ],
     #   })
@@ -4594,7 +4715,7 @@ module Aws::AutoScaling
     #   resp.activities[0].cause #=> String
     #   resp.activities[0].start_time #=> Time
     #   resp.activities[0].end_time #=> Time
-    #   resp.activities[0].status_code #=> String, one of "PendingSpotBidPlacement", "WaitingForSpotInstanceRequestId", "WaitingForSpotInstanceId", "WaitingForInstanceId", "PreInService", "InProgress", "WaitingForELBConnectionDraining", "MidLifecycleAction", "WaitingForInstanceWarmup", "Successful", "Failed", "Cancelled"
+    #   resp.activities[0].status_code #=> String, one of "PendingSpotBidPlacement", "WaitingForSpotInstanceRequestId", "WaitingForSpotInstanceId", "WaitingForInstanceId", "PreInService", "InProgress", "WaitingForELBConnectionDraining", "MidLifecycleAction", "WaitingForInstanceWarmup", "Successful", "Failed", "Cancelled", "WaitingForConnectionDraining"
     #   resp.activities[0].status_message #=> String
     #   resp.activities[0].progress #=> Integer
     #   resp.activities[0].details #=> String
@@ -4749,7 +4870,7 @@ module Aws::AutoScaling
     #   resp.activities[0].cause #=> String
     #   resp.activities[0].start_time #=> Time
     #   resp.activities[0].end_time #=> Time
-    #   resp.activities[0].status_code #=> String, one of "PendingSpotBidPlacement", "WaitingForSpotInstanceRequestId", "WaitingForSpotInstanceId", "WaitingForInstanceId", "PreInService", "InProgress", "WaitingForELBConnectionDraining", "MidLifecycleAction", "WaitingForInstanceWarmup", "Successful", "Failed", "Cancelled"
+    #   resp.activities[0].status_code #=> String, one of "PendingSpotBidPlacement", "WaitingForSpotInstanceRequestId", "WaitingForSpotInstanceId", "WaitingForInstanceId", "PreInService", "InProgress", "WaitingForELBConnectionDraining", "MidLifecycleAction", "WaitingForInstanceWarmup", "Successful", "Failed", "Cancelled", "WaitingForConnectionDraining"
     #   resp.activities[0].status_message #=> String
     #   resp.activities[0].progress #=> Integer
     #   resp.activities[0].details #=> String
@@ -6468,7 +6589,7 @@ module Aws::AutoScaling
     #   resp.activity.cause #=> String
     #   resp.activity.start_time #=> Time
     #   resp.activity.end_time #=> Time
-    #   resp.activity.status_code #=> String, one of "PendingSpotBidPlacement", "WaitingForSpotInstanceRequestId", "WaitingForSpotInstanceId", "WaitingForInstanceId", "PreInService", "InProgress", "WaitingForELBConnectionDraining", "MidLifecycleAction", "WaitingForInstanceWarmup", "Successful", "Failed", "Cancelled"
+    #   resp.activity.status_code #=> String, one of "PendingSpotBidPlacement", "WaitingForSpotInstanceRequestId", "WaitingForSpotInstanceId", "WaitingForInstanceId", "PreInService", "InProgress", "WaitingForELBConnectionDraining", "MidLifecycleAction", "WaitingForInstanceWarmup", "Successful", "Failed", "Cancelled", "WaitingForConnectionDraining"
     #   resp.activity.status_message #=> String
     #   resp.activity.progress #=> Integer
     #   resp.activity.details #=> String
@@ -6593,12 +6714,16 @@ module Aws::AutoScaling
     #   One or more Availability Zones for the group.
     #
     # @option params [String] :health_check_type
-    #   Determines whether any additional health checks are performed on the
-    #   instances in this group. Amazon EC2 health checks are always on.
+    #   A comma-separated list of one or more health check types.
     #
-    #   The valid values are `EC2` (default), `ELB`, and `VPC_LATTICE`. The
-    #   `VPC_LATTICE` health check type is reserved for use with VPC Lattice,
-    #   which is in preview release and is subject to change.
+    #   The valid values are `EC2`, `ELB`, and `VPC_LATTICE`. `EC2` is the
+    #   default health check and cannot be disabled. For more information, see
+    #   [Health checks for Auto Scaling instances][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html
     #
     # @option params [Integer] :health_check_grace_period
     #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
@@ -6883,7 +7008,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

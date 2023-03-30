@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2023-03-30)
+------------------
+
+* Feature - This feature allows Batch on EKS to support configuration of Pod Labels through Metadata for Batch on EKS Jobs.
+
 1.68.0 (2023-03-23)
 ------------------
 

@@ -2000,6 +2000,8 @@ module Aws::Batch
     #   resp.jobs[0].eks_properties.pod_properties.volumes[0].secret.optional #=> Boolean
     #   resp.jobs[0].eks_properties.pod_properties.pod_name #=> String
     #   resp.jobs[0].eks_properties.pod_properties.node_name #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.metadata.labels #=> Hash
+    #   resp.jobs[0].eks_properties.pod_properties.metadata.labels["String"] #=> String
     #   resp.jobs[0].eks_attempts #=> Array
     #   resp.jobs[0].eks_attempts[0].containers #=> Array
     #   resp.jobs[0].eks_attempts[0].containers[0].exit_code #=> Integer
@@ -3656,7 +3658,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

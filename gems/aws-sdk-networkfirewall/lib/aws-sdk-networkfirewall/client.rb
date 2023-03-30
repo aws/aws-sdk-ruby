@@ -768,6 +768,7 @@ module Aws::NetworkFirewall
     #         rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
     #         stream_exception_policy: "DROP", # accepts DROP, CONTINUE
     #       },
+    #       tls_inspection_configuration_arn: "ResourceArn",
     #     },
     #     description: "Description",
     #     tags: [
@@ -1094,6 +1095,172 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Creates an Network Firewall TLS inspection configuration. A TLS
+    # inspection configuration contains the Certificate Manager certificate
+    # references that Network Firewall uses to decrypt and re-encrypt
+    # inbound traffic.
+    #
+    # After you create a TLS inspection configuration, you associate it with
+    # a firewall policy.
+    #
+    # To update the settings for a TLS inspection configuration, use
+    # UpdateTLSInspectionConfiguration.
+    #
+    # To manage a TLS inspection configuration's tags, use the standard
+    # Amazon Web Services resource tagging operations, ListTagsForResource,
+    # TagResource, and UntagResource.
+    #
+    # To retrieve information about TLS inspection configurations, use
+    # ListTLSInspectionConfigurations and
+    # DescribeTLSInspectionConfiguration.
+    #
+    # For more information about TLS inspection configurations, see
+    # [Decrypting SSL/TLS traffic with TLS inspection configurations][1] in
+    # the *Network Firewall Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html
+    #
+    # @option params [required, String] :tls_inspection_configuration_name
+    #   The descriptive name of the TLS inspection configuration. You can't
+    #   change the name of a TLS inspection configuration after you create it.
+    #
+    # @option params [required, Types::TLSInspectionConfiguration] :tls_inspection_configuration
+    #   The object that defines a TLS inspection configuration. This, along
+    #   with TLSInspectionConfigurationResponse, define the TLS inspection
+    #   configuration. You can retrieve all objects for a TLS inspection
+    #   configuration by calling DescribeTLSInspectionConfiguration.
+    #
+    #   Network Firewall uses a TLS inspection configuration to decrypt
+    #   traffic. Network Firewall re-encrypts the traffic before sending it to
+    #   its destination.
+    #
+    #   To use a TLS inspection configuration, you add it to a Network
+    #   Firewall firewall policy, then you apply the firewall policy to a
+    #   firewall. Network Firewall acts as a proxy service to decrypt and
+    #   inspect inbound traffic. You can reference a TLS inspection
+    #   configuration from more than one firewall policy, and you can use a
+    #   firewall policy in more than one firewall. For more information about
+    #   using TLS inspection configurations, see [Decrypting SSL/TLS traffic
+    #   with TLS inspection configurations][1] in the *Network Firewall
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html
+    #
+    # @option params [String] :description
+    #   A description of the TLS inspection configuration.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The key:value pairs to associate with the resource.
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   A complex type that contains optional Amazon Web Services Key
+    #   Management Service (KMS) encryption settings for your Network Firewall
+    #   resources. Your data is encrypted by default with an Amazon Web
+    #   Services owned key that Amazon Web Services owns and manages for you.
+    #   You can use either the Amazon Web Services owned key, or provide your
+    #   own customer managed key. To learn more about KMS encryption of your
+    #   Network Firewall resources, see [Encryption at rest with Amazon Web
+    #   Services Key Managment Service][1] in the *Network Firewall Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html
+    #
+    # @return [Types::CreateTLSInspectionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTLSInspectionConfigurationResponse#update_token #update_token} => String
+    #   * {Types::CreateTLSInspectionConfigurationResponse#tls_inspection_configuration_response #tls_inspection_configuration_response} => Types::TLSInspectionConfigurationResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_tls_inspection_configuration({
+    #     tls_inspection_configuration_name: "ResourceName", # required
+    #     tls_inspection_configuration: { # required
+    #       server_certificate_configurations: [
+    #         {
+    #           server_certificates: [
+    #             {
+    #               resource_arn: "ResourceArn",
+    #             },
+    #           ],
+    #           scopes: [
+    #             {
+    #               sources: [
+    #                 {
+    #                   address_definition: "AddressDefinition", # required
+    #                 },
+    #               ],
+    #               destinations: [
+    #                 {
+    #                   address_definition: "AddressDefinition", # required
+    #                 },
+    #               ],
+    #               source_ports: [
+    #                 {
+    #                   from_port: 1, # required
+    #                   to_port: 1, # required
+    #                 },
+    #               ],
+    #               destination_ports: [
+    #                 {
+    #                   from_port: 1, # required
+    #                   to_port: 1, # required
+    #                 },
+    #               ],
+    #               protocols: [1],
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #     },
+    #     description: "Description",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     encryption_configuration: {
+    #       key_id: "KeyId",
+    #       type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update_token #=> String
+    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_arn #=> String
+    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_name #=> String
+    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_id #=> String
+    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_status #=> String, one of "ACTIVE", "DELETING"
+    #   resp.tls_inspection_configuration_response.description #=> String
+    #   resp.tls_inspection_configuration_response.tags #=> Array
+    #   resp.tls_inspection_configuration_response.tags[0].key #=> String
+    #   resp.tls_inspection_configuration_response.tags[0].value #=> String
+    #   resp.tls_inspection_configuration_response.last_modified_time #=> Time
+    #   resp.tls_inspection_configuration_response.number_of_associations #=> Integer
+    #   resp.tls_inspection_configuration_response.encryption_configuration.key_id #=> String
+    #   resp.tls_inspection_configuration_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.tls_inspection_configuration_response.certificates #=> Array
+    #   resp.tls_inspection_configuration_response.certificates[0].certificate_arn #=> String
+    #   resp.tls_inspection_configuration_response.certificates[0].certificate_serial #=> String
+    #   resp.tls_inspection_configuration_response.certificates[0].status #=> String
+    #   resp.tls_inspection_configuration_response.certificates[0].status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateTLSInspectionConfiguration AWS API Documentation
+    #
+    # @overload create_tls_inspection_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_tls_inspection_configuration(params = {}, options = {})
+      req = build_request(:create_tls_inspection_configuration, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified Firewall and its FirewallStatus. This operation
     # requires the firewall's `DeleteProtection` flag to be `FALSE`. You
     # can't revert this operation.
@@ -1315,6 +1482,59 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Deletes the specified TLSInspectionConfiguration.
+    #
+    # @option params [String] :tls_inspection_configuration_arn
+    #   The Amazon Resource Name (ARN) of the TLS inspection configuration.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :tls_inspection_configuration_name
+    #   The descriptive name of the TLS inspection configuration. You can't
+    #   change the name of a TLS inspection configuration after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @return [Types::DeleteTLSInspectionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteTLSInspectionConfigurationResponse#tls_inspection_configuration_response #tls_inspection_configuration_response} => Types::TLSInspectionConfigurationResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_tls_inspection_configuration({
+    #     tls_inspection_configuration_arn: "ResourceArn",
+    #     tls_inspection_configuration_name: "ResourceName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_arn #=> String
+    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_name #=> String
+    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_id #=> String
+    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_status #=> String, one of "ACTIVE", "DELETING"
+    #   resp.tls_inspection_configuration_response.description #=> String
+    #   resp.tls_inspection_configuration_response.tags #=> Array
+    #   resp.tls_inspection_configuration_response.tags[0].key #=> String
+    #   resp.tls_inspection_configuration_response.tags[0].value #=> String
+    #   resp.tls_inspection_configuration_response.last_modified_time #=> Time
+    #   resp.tls_inspection_configuration_response.number_of_associations #=> Integer
+    #   resp.tls_inspection_configuration_response.encryption_configuration.key_id #=> String
+    #   resp.tls_inspection_configuration_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.tls_inspection_configuration_response.certificates #=> Array
+    #   resp.tls_inspection_configuration_response.certificates[0].certificate_arn #=> String
+    #   resp.tls_inspection_configuration_response.certificates[0].certificate_serial #=> String
+    #   resp.tls_inspection_configuration_response.certificates[0].status #=> String
+    #   resp.tls_inspection_configuration_response.certificates[0].status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteTLSInspectionConfiguration AWS API Documentation
+    #
+    # @overload delete_tls_inspection_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_tls_inspection_configuration(params = {}, options = {})
+      req = build_request(:delete_tls_inspection_configuration, params)
+      req.send_request(options)
+    end
+
     # Returns the data objects for the specified firewall.
     #
     # @option params [String] :firewall_name
@@ -1447,6 +1667,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy.stateful_default_actions[0] #=> String
     #   resp.firewall_policy.stateful_engine_options.rule_order #=> String, one of "DEFAULT_ACTION_ORDER", "STRICT_ORDER"
     #   resp.firewall_policy.stateful_engine_options.stream_exception_policy #=> String, one of "DROP", "CONTINUE"
+    #   resp.firewall_policy.tls_inspection_configuration_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeFirewallPolicy AWS API Documentation
     #
@@ -1714,6 +1935,79 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Returns the data objects for the specified TLS inspection
+    # configuration.
+    #
+    # @option params [String] :tls_inspection_configuration_arn
+    #   The Amazon Resource Name (ARN) of the TLS inspection configuration.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :tls_inspection_configuration_name
+    #   The descriptive name of the TLS inspection configuration. You can't
+    #   change the name of a TLS inspection configuration after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @return [Types::DescribeTLSInspectionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTLSInspectionConfigurationResponse#update_token #update_token} => String
+    #   * {Types::DescribeTLSInspectionConfigurationResponse#tls_inspection_configuration #tls_inspection_configuration} => Types::TLSInspectionConfiguration
+    #   * {Types::DescribeTLSInspectionConfigurationResponse#tls_inspection_configuration_response #tls_inspection_configuration_response} => Types::TLSInspectionConfigurationResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_tls_inspection_configuration({
+    #     tls_inspection_configuration_arn: "ResourceArn",
+    #     tls_inspection_configuration_name: "ResourceName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update_token #=> String
+    #   resp.tls_inspection_configuration.server_certificate_configurations #=> Array
+    #   resp.tls_inspection_configuration.server_certificate_configurations[0].server_certificates #=> Array
+    #   resp.tls_inspection_configuration.server_certificate_configurations[0].server_certificates[0].resource_arn #=> String
+    #   resp.tls_inspection_configuration.server_certificate_configurations[0].scopes #=> Array
+    #   resp.tls_inspection_configuration.server_certificate_configurations[0].scopes[0].sources #=> Array
+    #   resp.tls_inspection_configuration.server_certificate_configurations[0].scopes[0].sources[0].address_definition #=> String
+    #   resp.tls_inspection_configuration.server_certificate_configurations[0].scopes[0].destinations #=> Array
+    #   resp.tls_inspection_configuration.server_certificate_configurations[0].scopes[0].destinations[0].address_definition #=> String
+    #   resp.tls_inspection_configuration.server_certificate_configurations[0].scopes[0].source_ports #=> Array
+    #   resp.tls_inspection_configuration.server_certificate_configurations[0].scopes[0].source_ports[0].from_port #=> Integer
+    #   resp.tls_inspection_configuration.server_certificate_configurations[0].scopes[0].source_ports[0].to_port #=> Integer
+    #   resp.tls_inspection_configuration.server_certificate_configurations[0].scopes[0].destination_ports #=> Array
+    #   resp.tls_inspection_configuration.server_certificate_configurations[0].scopes[0].destination_ports[0].from_port #=> Integer
+    #   resp.tls_inspection_configuration.server_certificate_configurations[0].scopes[0].destination_ports[0].to_port #=> Integer
+    #   resp.tls_inspection_configuration.server_certificate_configurations[0].scopes[0].protocols #=> Array
+    #   resp.tls_inspection_configuration.server_certificate_configurations[0].scopes[0].protocols[0] #=> Integer
+    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_arn #=> String
+    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_name #=> String
+    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_id #=> String
+    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_status #=> String, one of "ACTIVE", "DELETING"
+    #   resp.tls_inspection_configuration_response.description #=> String
+    #   resp.tls_inspection_configuration_response.tags #=> Array
+    #   resp.tls_inspection_configuration_response.tags[0].key #=> String
+    #   resp.tls_inspection_configuration_response.tags[0].value #=> String
+    #   resp.tls_inspection_configuration_response.last_modified_time #=> Time
+    #   resp.tls_inspection_configuration_response.number_of_associations #=> Integer
+    #   resp.tls_inspection_configuration_response.encryption_configuration.key_id #=> String
+    #   resp.tls_inspection_configuration_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.tls_inspection_configuration_response.certificates #=> Array
+    #   resp.tls_inspection_configuration_response.certificates[0].certificate_arn #=> String
+    #   resp.tls_inspection_configuration_response.certificates[0].certificate_serial #=> String
+    #   resp.tls_inspection_configuration_response.certificates[0].status #=> String
+    #   resp.tls_inspection_configuration_response.certificates[0].status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeTLSInspectionConfiguration AWS API Documentation
+    #
+    # @overload describe_tls_inspection_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_tls_inspection_configuration(params = {}, options = {})
+      req = build_request(:describe_tls_inspection_configuration, params)
+      req.send_request(options)
+    end
+
     # Removes the specified subnet associations from the firewall. This
     # removes the firewall endpoints from the subnets and removes any
     # network filtering protections that the endpoints were providing.
@@ -1949,6 +2243,54 @@ module Aws::NetworkFirewall
     # @param [Hash] params ({})
     def list_rule_groups(params = {}, options = {})
       req = build_request(:list_rule_groups, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the metadata for the TLS inspection configurations that you
+    # have defined. Depending on your setting for max results and the number
+    # of TLS inspection configurations, a single call might not return the
+    # full list.
+    #
+    # @option params [String] :next_token
+    #   When you request a list of objects with a `MaxResults` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   maximum you requested, Network Firewall returns a `NextToken` value in
+    #   the response. To retrieve the next batch of objects, use the token
+    #   returned from the prior request in your next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Network Firewall to return
+    #   for this request. If more objects are available, in the response,
+    #   Network Firewall provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    # @return [Types::ListTLSInspectionConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTLSInspectionConfigurationsResponse#next_token #next_token} => String
+    #   * {Types::ListTLSInspectionConfigurationsResponse#tls_inspection_configurations #tls_inspection_configurations} => Array&lt;Types::TLSInspectionConfigurationMetadata&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tls_inspection_configurations({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.tls_inspection_configurations #=> Array
+    #   resp.tls_inspection_configurations[0].name #=> String
+    #   resp.tls_inspection_configurations[0].arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListTLSInspectionConfigurations AWS API Documentation
+    #
+    # @overload list_tls_inspection_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_tls_inspection_configurations(params = {}, options = {})
+      req = build_request(:list_tls_inspection_configurations, params)
       req.send_request(options)
     end
 
@@ -2485,6 +2827,7 @@ module Aws::NetworkFirewall
     #         rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
     #         stream_exception_policy: "DROP", # accepts DROP, CONTINUE
     #       },
+    #       tls_inspection_configuration_arn: "ResourceArn",
     #     },
     #     description: "Description",
     #     dry_run: false,
@@ -3001,6 +3344,156 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Updates the TLS inspection configuration settings for the specified
+    # TLS inspection configuration. You use a TLS inspection configuration
+    # by reference in one or more firewall policies. When you modify a TLS
+    # inspection configuration, you modify all firewall policies that use
+    # the TLS inspection configuration.
+    #
+    # To update a TLS inspection configuration, first call
+    # DescribeTLSInspectionConfiguration to retrieve the current
+    # TLSInspectionConfiguration object, update the object as needed, and
+    # then provide the updated object to this call.
+    #
+    # @option params [String] :tls_inspection_configuration_arn
+    #   The Amazon Resource Name (ARN) of the TLS inspection configuration.
+    #
+    # @option params [String] :tls_inspection_configuration_name
+    #   The descriptive name of the TLS inspection configuration. You can't
+    #   change the name of a TLS inspection configuration after you create it.
+    #
+    # @option params [required, Types::TLSInspectionConfiguration] :tls_inspection_configuration
+    #   The object that defines a TLS inspection configuration. This, along
+    #   with TLSInspectionConfigurationResponse, define the TLS inspection
+    #   configuration. You can retrieve all objects for a TLS inspection
+    #   configuration by calling DescribeTLSInspectionConfiguration.
+    #
+    #   Network Firewall uses a TLS inspection configuration to decrypt
+    #   traffic. Network Firewall re-encrypts the traffic before sending it to
+    #   its destination.
+    #
+    #   To use a TLS inspection configuration, you add it to a Network
+    #   Firewall firewall policy, then you apply the firewall policy to a
+    #   firewall. Network Firewall acts as a proxy service to decrypt and
+    #   inspect inbound traffic. You can reference a TLS inspection
+    #   configuration from more than one firewall policy, and you can use a
+    #   firewall policy in more than one firewall. For more information about
+    #   using TLS inspection configurations, see [Decrypting SSL/TLS traffic
+    #   with TLS inspection configurations][1] in the *Network Firewall
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html
+    #
+    # @option params [String] :description
+    #   A description of the TLS inspection configuration.
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   A complex type that contains the Amazon Web Services KMS encryption
+    #   configuration settings for your TLS inspection configuration.
+    #
+    # @option params [required, String] :update_token
+    #   A token used for optimistic locking. Network Firewall returns a token
+    #   to your requests that access the TLS inspection configuration. The
+    #   token marks the state of the TLS inspection configuration resource at
+    #   the time of the request.
+    #
+    #   To make changes to the TLS inspection configuration, you provide the
+    #   token in your request. Network Firewall uses the token to ensure that
+    #   the TLS inspection configuration hasn't changed since you last
+    #   retrieved it. If it has changed, the operation fails with an
+    #   `InvalidTokenException`. If this happens, retrieve the TLS inspection
+    #   configuration again to get a current copy of it with a current token.
+    #   Reapply your changes as needed, then try the operation again using the
+    #   new token.
+    #
+    # @return [Types::UpdateTLSInspectionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTLSInspectionConfigurationResponse#update_token #update_token} => String
+    #   * {Types::UpdateTLSInspectionConfigurationResponse#tls_inspection_configuration_response #tls_inspection_configuration_response} => Types::TLSInspectionConfigurationResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_tls_inspection_configuration({
+    #     tls_inspection_configuration_arn: "ResourceArn",
+    #     tls_inspection_configuration_name: "ResourceName",
+    #     tls_inspection_configuration: { # required
+    #       server_certificate_configurations: [
+    #         {
+    #           server_certificates: [
+    #             {
+    #               resource_arn: "ResourceArn",
+    #             },
+    #           ],
+    #           scopes: [
+    #             {
+    #               sources: [
+    #                 {
+    #                   address_definition: "AddressDefinition", # required
+    #                 },
+    #               ],
+    #               destinations: [
+    #                 {
+    #                   address_definition: "AddressDefinition", # required
+    #                 },
+    #               ],
+    #               source_ports: [
+    #                 {
+    #                   from_port: 1, # required
+    #                   to_port: 1, # required
+    #                 },
+    #               ],
+    #               destination_ports: [
+    #                 {
+    #                   from_port: 1, # required
+    #                   to_port: 1, # required
+    #                 },
+    #               ],
+    #               protocols: [1],
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #     },
+    #     description: "Description",
+    #     encryption_configuration: {
+    #       key_id: "KeyId",
+    #       type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #     },
+    #     update_token: "UpdateToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update_token #=> String
+    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_arn #=> String
+    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_name #=> String
+    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_id #=> String
+    #   resp.tls_inspection_configuration_response.tls_inspection_configuration_status #=> String, one of "ACTIVE", "DELETING"
+    #   resp.tls_inspection_configuration_response.description #=> String
+    #   resp.tls_inspection_configuration_response.tags #=> Array
+    #   resp.tls_inspection_configuration_response.tags[0].key #=> String
+    #   resp.tls_inspection_configuration_response.tags[0].value #=> String
+    #   resp.tls_inspection_configuration_response.last_modified_time #=> Time
+    #   resp.tls_inspection_configuration_response.number_of_associations #=> Integer
+    #   resp.tls_inspection_configuration_response.encryption_configuration.key_id #=> String
+    #   resp.tls_inspection_configuration_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.tls_inspection_configuration_response.certificates #=> Array
+    #   resp.tls_inspection_configuration_response.certificates[0].certificate_arn #=> String
+    #   resp.tls_inspection_configuration_response.certificates[0].certificate_serial #=> String
+    #   resp.tls_inspection_configuration_response.certificates[0].status #=> String
+    #   resp.tls_inspection_configuration_response.certificates[0].status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateTLSInspectionConfiguration AWS API Documentation
+    #
+    # @overload update_tls_inspection_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_tls_inspection_configuration(params = {}, options = {})
+      req = build_request(:update_tls_inspection_configuration, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -3014,7 +3507,7 @@ module Aws::NetworkFirewall
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

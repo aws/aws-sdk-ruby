@@ -390,6 +390,7 @@ module Aws::IVS
     #   resp.channels[0].arn #=> String
     #   resp.channels[0].authorized #=> Boolean
     #   resp.channels[0].ingest_endpoint #=> String
+    #   resp.channels[0].insecure_ingest #=> Boolean
     #   resp.channels[0].latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.channels[0].name #=> String
     #   resp.channels[0].playback_url #=> String
@@ -455,6 +456,9 @@ module Aws::IVS
     #   Whether the channel is private (enabled for playback authorization).
     #   Default: `false`.
     #
+    # @option params [Boolean] :insecure_ingest
+    #   Whether the channel allows insecure RTMP ingest. Default: `false`.
+    #
     # @option params [String] :latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live video
     #   up to Full HD. Use `LOW` for near-real-time interaction with viewers.
@@ -508,6 +512,7 @@ module Aws::IVS
     #
     #   resp = client.create_channel({
     #     authorized: false,
+    #     insecure_ingest: false,
     #     latency_mode: "NORMAL", # accepts NORMAL, LOW
     #     name: "ChannelName",
     #     recording_configuration_arn: "ChannelRecordingConfigurationArn",
@@ -522,6 +527,7 @@ module Aws::IVS
     #   resp.channel.arn #=> String
     #   resp.channel.authorized #=> Boolean
     #   resp.channel.ingest_endpoint #=> String
+    #   resp.channel.insecure_ingest #=> Boolean
     #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.channel.name #=> String
     #   resp.channel.playback_url #=> String
@@ -818,6 +824,7 @@ module Aws::IVS
     #   resp.channel.arn #=> String
     #   resp.channel.authorized #=> Boolean
     #   resp.channel.ingest_endpoint #=> String
+    #   resp.channel.insecure_ingest #=> Boolean
     #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.channel.name #=> String
     #   resp.channel.playback_url #=> String
@@ -1004,6 +1011,7 @@ module Aws::IVS
     #   resp.stream_session.channel.arn #=> String
     #   resp.stream_session.channel.authorized #=> Boolean
     #   resp.stream_session.channel.ingest_endpoint #=> String
+    #   resp.stream_session.channel.insecure_ingest #=> Boolean
     #   resp.stream_session.channel.latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.stream_session.channel.name #=> String
     #   resp.stream_session.channel.playback_url #=> String
@@ -1149,6 +1157,7 @@ module Aws::IVS
     #   resp.channels #=> Array
     #   resp.channels[0].arn #=> String
     #   resp.channels[0].authorized #=> Boolean
+    #   resp.channels[0].insecure_ingest #=> Boolean
     #   resp.channels[0].latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.channels[0].name #=> String
     #   resp.channels[0].recording_configuration_arn #=> String
@@ -1578,6 +1587,9 @@ module Aws::IVS
     # @option params [Boolean] :authorized
     #   Whether the channel is private (enabled for playback authorization).
     #
+    # @option params [Boolean] :insecure_ingest
+    #   Whether the channel allows insecure RTMP ingest. Default: `false`.
+    #
     # @option params [String] :latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live video
     #   up to Full HD. Use `LOW` for near-real-time interaction with viewers.
@@ -1620,6 +1632,7 @@ module Aws::IVS
     #   resp = client.update_channel({
     #     arn: "ChannelArn", # required
     #     authorized: false,
+    #     insecure_ingest: false,
     #     latency_mode: "NORMAL", # accepts NORMAL, LOW
     #     name: "ChannelName",
     #     recording_configuration_arn: "ChannelRecordingConfigurationArn",
@@ -1631,6 +1644,7 @@ module Aws::IVS
     #   resp.channel.arn #=> String
     #   resp.channel.authorized #=> Boolean
     #   resp.channel.ingest_endpoint #=> String
+    #   resp.channel.insecure_ingest #=> Boolean
     #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.channel.name #=> String
     #   resp.channel.playback_url #=> String
@@ -1661,7 +1675,7 @@ module Aws::IVS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

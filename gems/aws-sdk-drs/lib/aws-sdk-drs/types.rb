@@ -158,6 +158,11 @@ module Aws::Drs
     #   group with the Replication Configuration Template.
     #   @return [Boolean]
     #
+    # @!attribute [rw] auto_replicate_new_disks
+    #   Whether to allow the AWS replication agent to automatically
+    #   replicate newly added disks.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] bandwidth_throttling
     #   Configure bandwidth throttling for the outbound data transfer rate
     #   of the Source Server in Mbps.
@@ -220,6 +225,7 @@ module Aws::Drs
     #
     class CreateReplicationConfigurationTemplateRequest < Struct.new(
       :associate_default_security_group,
+      :auto_replicate_new_disks,
       :bandwidth_throttling,
       :create_public_ip,
       :data_plane_routing,
@@ -1799,6 +1805,11 @@ module Aws::Drs
     #   group with the Replication Configuration.
     #   @return [Boolean]
     #
+    # @!attribute [rw] auto_replicate_new_disks
+    #   Whether to allow the AWS replication agent to automatically
+    #   replicate newly added disks.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] bandwidth_throttling
     #   Configure bandwidth throttling for the outbound data transfer rate
     #   of the Source Server in Mbps.
@@ -1869,6 +1880,7 @@ module Aws::Drs
     #
     class ReplicationConfiguration < Struct.new(
       :associate_default_security_group,
+      :auto_replicate_new_disks,
       :bandwidth_throttling,
       :create_public_ip,
       :data_plane_routing,
@@ -1938,6 +1950,11 @@ module Aws::Drs
     #   group with the Replication Configuration Template.
     #   @return [Boolean]
     #
+    # @!attribute [rw] auto_replicate_new_disks
+    #   Whether to allow the AWS replication agent to automatically
+    #   replicate newly added disks.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] bandwidth_throttling
     #   Configure bandwidth throttling for the outbound data transfer rate
     #   of the Source Server in Mbps.
@@ -2005,6 +2022,7 @@ module Aws::Drs
     class ReplicationConfigurationTemplate < Struct.new(
       :arn,
       :associate_default_security_group,
+      :auto_replicate_new_disks,
       :bandwidth_throttling,
       :create_public_ip,
       :data_plane_routing,
@@ -2667,6 +2685,11 @@ module Aws::Drs
     #   group with the Replication Configuration.
     #   @return [Boolean]
     #
+    # @!attribute [rw] auto_replicate_new_disks
+    #   Whether to allow the AWS replication agent to automatically
+    #   replicate newly added disks.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] bandwidth_throttling
     #   Configure bandwidth throttling for the outbound data transfer rate
     #   of the Source Server in Mbps.
@@ -2737,6 +2760,7 @@ module Aws::Drs
     #
     class UpdateReplicationConfigurationRequest < Struct.new(
       :associate_default_security_group,
+      :auto_replicate_new_disks,
       :bandwidth_throttling,
       :create_public_ip,
       :data_plane_routing,
@@ -2763,6 +2787,11 @@ module Aws::Drs
     # @!attribute [rw] associate_default_security_group
     #   Whether to associate the default Elastic Disaster Recovery Security
     #   group with the Replication Configuration Template.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] auto_replicate_new_disks
+    #   Whether to allow the AWS replication agent to automatically
+    #   replicate newly added disks.
     #   @return [Boolean]
     #
     # @!attribute [rw] bandwidth_throttling
@@ -2827,6 +2856,7 @@ module Aws::Drs
     class UpdateReplicationConfigurationTemplateRequest < Struct.new(
       :arn,
       :associate_default_security_group,
+      :auto_replicate_new_disks,
       :bandwidth_throttling,
       :create_public_ip,
       :data_plane_routing,

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.372.0 (2023-03-30)
+------------------
+
+* Feature - This release adds support for Tunnel Endpoint Lifecycle control, a new feature that provides Site-to-Site VPN customers with better visibility and control of their VPN tunnel maintenance updates.
+
 1.371.0 (2023-03-21)
 ------------------
 

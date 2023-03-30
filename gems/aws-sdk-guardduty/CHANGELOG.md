@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2023-03-30)
+------------------
+
+* Feature - Added EKS Runtime Monitoring feature support to existing detector, finding APIs and introducing new Coverage APIs
+
 1.66.0 (2023-03-23)
 ------------------
 

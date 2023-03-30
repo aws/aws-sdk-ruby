@@ -1117,6 +1117,12 @@ module Aws::EMR
     #   resp.cluster.status.timeline.creation_date_time #=> Time
     #   resp.cluster.status.timeline.ready_date_time #=> Time
     #   resp.cluster.status.timeline.end_date_time #=> Time
+    #   resp.cluster.status.error_details #=> Array
+    #   resp.cluster.status.error_details[0].error_code #=> String
+    #   resp.cluster.status.error_details[0].error_data #=> Array
+    #   resp.cluster.status.error_details[0].error_data[0] #=> Hash
+    #   resp.cluster.status.error_details[0].error_data[0]["String"] #=> String
+    #   resp.cluster.status.error_details[0].error_message #=> String
     #   resp.cluster.ec2_instance_attributes.ec2_key_name #=> String
     #   resp.cluster.ec2_instance_attributes.ec2_subnet_id #=> String
     #   resp.cluster.ec2_instance_attributes.requested_ec2_subnet_ids #=> Array
@@ -1840,6 +1846,12 @@ module Aws::EMR
     #   resp.clusters[0].status.timeline.creation_date_time #=> Time
     #   resp.clusters[0].status.timeline.ready_date_time #=> Time
     #   resp.clusters[0].status.timeline.end_date_time #=> Time
+    #   resp.clusters[0].status.error_details #=> Array
+    #   resp.clusters[0].status.error_details[0].error_code #=> String
+    #   resp.clusters[0].status.error_details[0].error_data #=> Array
+    #   resp.clusters[0].status.error_details[0].error_data[0] #=> Hash
+    #   resp.clusters[0].status.error_details[0].error_data[0]["String"] #=> String
+    #   resp.clusters[0].status.error_details[0].error_message #=> String
     #   resp.clusters[0].normalized_instance_hours #=> Integer
     #   resp.clusters[0].cluster_arn #=> String
     #   resp.clusters[0].outpost_arn #=> String
@@ -3870,7 +3882,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

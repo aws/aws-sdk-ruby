@@ -847,12 +847,19 @@ module Aws::EMR
     #   of the cluster.
     #   @return [Types::ClusterTimeline]
     #
+    # @!attribute [rw] error_details
+    #   A list of tuples that provide information about the errors that
+    #   caused a cluster termination. This structure may have up to 10
+    #   different `ErrorDetail` tuples.
+    #   @return [Array<Types::ErrorDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ClusterStatus AWS API Documentation
     #
     class ClusterStatus < Struct.new(
       :state,
       :state_change_reason,
-      :timeline)
+      :timeline,
+      :error_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1776,6 +1783,32 @@ module Aws::EMR
       :service_access_security_group,
       :additional_master_security_groups,
       :additional_slave_security_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A tuple that provides information about an error that caused a cluster
+    # to terminate.
+    #
+    # @!attribute [rw] error_code
+    #   The name or code that's associated with the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_data
+    #   A list of key value pairs that provide contextual information to
+    #   explain why the error may have occured.
+    #   @return [Array<Hash<String,String>>]
+    #
+    # @!attribute [rw] error_message
+    #   A message describing the error that occured.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ErrorDetail AWS API Documentation
+    #
+    class ErrorDetail < Struct.new(
+      :error_code,
+      :error_data,
+      :error_message)
       SENSITIVE = []
       include Aws::Structure
     end

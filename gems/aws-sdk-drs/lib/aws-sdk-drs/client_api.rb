@@ -75,6 +75,7 @@ module Aws::Drs
     EC2InstanceID = Shapes::StringShape.new(name: 'EC2InstanceID')
     EC2InstanceState = Shapes::StringShape.new(name: 'EC2InstanceState')
     EC2InstanceType = Shapes::StringShape.new(name: 'EC2InstanceType')
+    EbsSnapshot = Shapes::StringShape.new(name: 'EbsSnapshot')
     EbsSnapshotsList = Shapes::ListShape.new(name: 'EbsSnapshotsList')
     EbsVolumeID = Shapes::StringShape.new(name: 'EbsVolumeID')
     ExtensionStatus = Shapes::StringShape.new(name: 'ExtensionStatus')
@@ -218,7 +219,6 @@ module Aws::Drs
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
     VolumeToConversionMap = Shapes::MapShape.new(name: 'VolumeToConversionMap')
     VolumeToSizeMap = Shapes::MapShape.new(name: 'VolumeToSizeMap')
-    ebsSnapshot = Shapes::StringShape.new(name: 'ebsSnapshot')
 
     AccessDeniedException.add_member(:code, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "code"))
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "message"))
@@ -241,8 +241,8 @@ module Aws::Drs
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "resourceType"))
     ConflictException.struct_class = Types::ConflictException
 
-    ConversionMap.key = Shapes::ShapeRef.new(shape: ebsSnapshot)
-    ConversionMap.value = Shapes::ShapeRef.new(shape: ebsSnapshot)
+    ConversionMap.key = Shapes::ShapeRef.new(shape: EbsSnapshot)
+    ConversionMap.value = Shapes::ShapeRef.new(shape: EbsSnapshot)
 
     ConversionProperties.add_member(:data_timestamp, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "dataTimestamp"))
     ConversionProperties.add_member(:force_uefi, Shapes::ShapeRef.new(shape: Boolean, location_name: "forceUefi"))
@@ -261,6 +261,7 @@ module Aws::Drs
     CreateExtendedSourceServerResponse.struct_class = Types::CreateExtendedSourceServerResponse
 
     CreateReplicationConfigurationTemplateRequest.add_member(:associate_default_security_group, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "associateDefaultSecurityGroup"))
+    CreateReplicationConfigurationTemplateRequest.add_member(:auto_replicate_new_disks, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoReplicateNewDisks"))
     CreateReplicationConfigurationTemplateRequest.add_member(:bandwidth_throttling, Shapes::ShapeRef.new(shape: PositiveInteger, required: true, location_name: "bandwidthThrottling"))
     CreateReplicationConfigurationTemplateRequest.add_member(:create_public_ip, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "createPublicIP"))
     CreateReplicationConfigurationTemplateRequest.add_member(:data_plane_routing, Shapes::ShapeRef.new(shape: ReplicationConfigurationDataPlaneRouting, required: true, location_name: "dataPlaneRouting"))
@@ -419,7 +420,7 @@ module Aws::Drs
 
     Disks.member = Shapes::ShapeRef.new(shape: Disk)
 
-    EbsSnapshotsList.member = Shapes::ShapeRef.new(shape: ebsSnapshot)
+    EbsSnapshotsList.member = Shapes::ShapeRef.new(shape: EbsSnapshot)
 
     GetFailbackReplicationConfigurationRequest.add_member(:recovery_instance_id, Shapes::ShapeRef.new(shape: RecoveryInstanceID, required: true, location_name: "recoveryInstanceID"))
     GetFailbackReplicationConfigurationRequest.struct_class = Types::GetFailbackReplicationConfigurationRequest
@@ -647,6 +648,7 @@ module Aws::Drs
     RecoverySnapshotsList.member = Shapes::ShapeRef.new(shape: RecoverySnapshot)
 
     ReplicationConfiguration.add_member(:associate_default_security_group, Shapes::ShapeRef.new(shape: Boolean, location_name: "associateDefaultSecurityGroup"))
+    ReplicationConfiguration.add_member(:auto_replicate_new_disks, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoReplicateNewDisks"))
     ReplicationConfiguration.add_member(:bandwidth_throttling, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "bandwidthThrottling"))
     ReplicationConfiguration.add_member(:create_public_ip, Shapes::ShapeRef.new(shape: Boolean, location_name: "createPublicIP"))
     ReplicationConfiguration.add_member(:data_plane_routing, Shapes::ShapeRef.new(shape: ReplicationConfigurationDataPlaneRouting, location_name: "dataPlaneRouting"))
@@ -676,6 +678,7 @@ module Aws::Drs
 
     ReplicationConfigurationTemplate.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
     ReplicationConfigurationTemplate.add_member(:associate_default_security_group, Shapes::ShapeRef.new(shape: Boolean, location_name: "associateDefaultSecurityGroup"))
+    ReplicationConfigurationTemplate.add_member(:auto_replicate_new_disks, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoReplicateNewDisks"))
     ReplicationConfigurationTemplate.add_member(:bandwidth_throttling, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "bandwidthThrottling"))
     ReplicationConfigurationTemplate.add_member(:create_public_ip, Shapes::ShapeRef.new(shape: Boolean, location_name: "createPublicIP"))
     ReplicationConfigurationTemplate.add_member(:data_plane_routing, Shapes::ShapeRef.new(shape: ReplicationConfigurationDataPlaneRouting, location_name: "dataPlaneRouting"))
@@ -850,6 +853,7 @@ module Aws::Drs
     UpdateLaunchConfigurationRequest.struct_class = Types::UpdateLaunchConfigurationRequest
 
     UpdateReplicationConfigurationRequest.add_member(:associate_default_security_group, Shapes::ShapeRef.new(shape: Boolean, location_name: "associateDefaultSecurityGroup"))
+    UpdateReplicationConfigurationRequest.add_member(:auto_replicate_new_disks, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoReplicateNewDisks"))
     UpdateReplicationConfigurationRequest.add_member(:bandwidth_throttling, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "bandwidthThrottling"))
     UpdateReplicationConfigurationRequest.add_member(:create_public_ip, Shapes::ShapeRef.new(shape: Boolean, location_name: "createPublicIP"))
     UpdateReplicationConfigurationRequest.add_member(:data_plane_routing, Shapes::ShapeRef.new(shape: ReplicationConfigurationDataPlaneRouting, location_name: "dataPlaneRouting"))
@@ -869,6 +873,7 @@ module Aws::Drs
 
     UpdateReplicationConfigurationTemplateRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
     UpdateReplicationConfigurationTemplateRequest.add_member(:associate_default_security_group, Shapes::ShapeRef.new(shape: Boolean, location_name: "associateDefaultSecurityGroup"))
+    UpdateReplicationConfigurationTemplateRequest.add_member(:auto_replicate_new_disks, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoReplicateNewDisks"))
     UpdateReplicationConfigurationTemplateRequest.add_member(:bandwidth_throttling, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "bandwidthThrottling"))
     UpdateReplicationConfigurationTemplateRequest.add_member(:create_public_ip, Shapes::ShapeRef.new(shape: Boolean, location_name: "createPublicIP"))
     UpdateReplicationConfigurationTemplateRequest.add_member(:data_plane_routing, Shapes::ShapeRef.new(shape: ReplicationConfigurationDataPlaneRouting, location_name: "dataPlaneRouting"))
@@ -1243,6 +1248,7 @@ module Aws::Drs
         o.name = "RetryDataReplication"
         o.http_method = "POST"
         o.http_request_uri = "/RetryDataReplication"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: RetryDataReplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: SourceServer)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

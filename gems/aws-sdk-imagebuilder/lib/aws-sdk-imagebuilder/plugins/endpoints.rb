@@ -108,6 +108,10 @@ module Aws::Imagebuilder
             Aws::Imagebuilder::Endpoints::GetImageRecipePolicy.build(context)
           when :get_infrastructure_configuration
             Aws::Imagebuilder::Endpoints::GetInfrastructureConfiguration.build(context)
+          when :get_workflow_execution
+            Aws::Imagebuilder::Endpoints::GetWorkflowExecution.build(context)
+          when :get_workflow_step_execution
+            Aws::Imagebuilder::Endpoints::GetWorkflowStepExecution.build(context)
           when :import_component
             Aws::Imagebuilder::Endpoints::ImportComponent.build(context)
           when :import_vm_image
@@ -130,12 +134,20 @@ module Aws::Imagebuilder
             Aws::Imagebuilder::Endpoints::ListImagePipelines.build(context)
           when :list_image_recipes
             Aws::Imagebuilder::Endpoints::ListImageRecipes.build(context)
+          when :list_image_scan_finding_aggregations
+            Aws::Imagebuilder::Endpoints::ListImageScanFindingAggregations.build(context)
+          when :list_image_scan_findings
+            Aws::Imagebuilder::Endpoints::ListImageScanFindings.build(context)
           when :list_images
             Aws::Imagebuilder::Endpoints::ListImages.build(context)
           when :list_infrastructure_configurations
             Aws::Imagebuilder::Endpoints::ListInfrastructureConfigurations.build(context)
           when :list_tags_for_resource
             Aws::Imagebuilder::Endpoints::ListTagsForResource.build(context)
+          when :list_workflow_executions
+            Aws::Imagebuilder::Endpoints::ListWorkflowExecutions.build(context)
+          when :list_workflow_step_executions
+            Aws::Imagebuilder::Endpoints::ListWorkflowStepExecutions.build(context)
           when :put_component_policy
             Aws::Imagebuilder::Endpoints::PutComponentPolicy.build(context)
           when :put_container_recipe_policy

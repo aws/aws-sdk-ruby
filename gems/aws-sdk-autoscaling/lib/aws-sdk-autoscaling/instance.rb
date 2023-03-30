@@ -77,10 +77,10 @@ module Aws::AutoScaling
       data[:lifecycle_state]
     end
 
-    # The last reported health status of this instance. "Healthy" means
-    # that the instance is healthy and should remain in service.
-    # "Unhealthy" means that the instance is unhealthy and Amazon EC2 Auto
-    # Scaling should terminate and replace it.
+    # The last reported health status of this instance. `Healthy` means that
+    # the instance is healthy and should remain in service. `Unhealthy`
+    # means that the instance is unhealthy and Amazon EC2 Auto Scaling
+    # should terminate and replace it.
     # @return [String]
     def health_status
       data[:health_status]

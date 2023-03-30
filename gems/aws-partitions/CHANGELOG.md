@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.738.0 (2023-03-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::VPCLattice`.
+
 1.737.0 (2023-03-29)
 ------------------
 

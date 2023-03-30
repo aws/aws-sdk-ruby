@@ -468,6 +468,10 @@ module Aws::Drs
     #   Whether to associate the default Elastic Disaster Recovery Security
     #   group with the Replication Configuration Template.
     #
+    # @option params [Boolean] :auto_replicate_new_disks
+    #   Whether to allow the AWS replication agent to automatically replicate
+    #   newly added disks.
+    #
     # @option params [required, Integer] :bandwidth_throttling
     #   Configure bandwidth throttling for the outbound data transfer rate of
     #   the Source Server in Mbps.
@@ -517,6 +521,7 @@ module Aws::Drs
     #
     #   * {Types::ReplicationConfigurationTemplate#arn #arn} => String
     #   * {Types::ReplicationConfigurationTemplate#associate_default_security_group #associate_default_security_group} => Boolean
+    #   * {Types::ReplicationConfigurationTemplate#auto_replicate_new_disks #auto_replicate_new_disks} => Boolean
     #   * {Types::ReplicationConfigurationTemplate#bandwidth_throttling #bandwidth_throttling} => Integer
     #   * {Types::ReplicationConfigurationTemplate#create_public_ip #create_public_ip} => Boolean
     #   * {Types::ReplicationConfigurationTemplate#data_plane_routing #data_plane_routing} => String
@@ -536,6 +541,7 @@ module Aws::Drs
     #
     #   resp = client.create_replication_configuration_template({
     #     associate_default_security_group: false, # required
+    #     auto_replicate_new_disks: false,
     #     bandwidth_throttling: 1, # required
     #     create_public_ip: false, # required
     #     data_plane_routing: "PRIVATE_IP", # required, accepts PRIVATE_IP, PUBLIC_IP
@@ -567,6 +573,7 @@ module Aws::Drs
     #
     #   resp.arn #=> String
     #   resp.associate_default_security_group #=> Boolean
+    #   resp.auto_replicate_new_disks #=> Boolean
     #   resp.bandwidth_throttling #=> Integer
     #   resp.create_public_ip #=> Boolean
     #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
@@ -725,7 +732,7 @@ module Aws::Drs
     #   resp.items[0].event_data.conversion_properties.root_volume_name #=> String
     #   resp.items[0].event_data.conversion_properties.volume_to_conversion_map #=> Hash
     #   resp.items[0].event_data.conversion_properties.volume_to_conversion_map["LargeBoundedString"] #=> Hash
-    #   resp.items[0].event_data.conversion_properties.volume_to_conversion_map["LargeBoundedString"]["ebsSnapshot"] #=> String
+    #   resp.items[0].event_data.conversion_properties.volume_to_conversion_map["LargeBoundedString"]["EbsSnapshot"] #=> String
     #   resp.items[0].event_data.conversion_properties.volume_to_volume_size #=> Hash
     #   resp.items[0].event_data.conversion_properties.volume_to_volume_size["LargeBoundedString"] #=> Integer
     #   resp.items[0].event_data.conversion_server_id #=> String
@@ -997,6 +1004,7 @@ module Aws::Drs
     #   resp.items #=> Array
     #   resp.items[0].arn #=> String
     #   resp.items[0].associate_default_security_group #=> Boolean
+    #   resp.items[0].auto_replicate_new_disks #=> Boolean
     #   resp.items[0].bandwidth_throttling #=> Integer
     #   resp.items[0].create_public_ip #=> Boolean
     #   resp.items[0].data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
@@ -1364,6 +1372,7 @@ module Aws::Drs
     # @return [Types::ReplicationConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ReplicationConfiguration#associate_default_security_group #associate_default_security_group} => Boolean
+    #   * {Types::ReplicationConfiguration#auto_replicate_new_disks #auto_replicate_new_disks} => Boolean
     #   * {Types::ReplicationConfiguration#bandwidth_throttling #bandwidth_throttling} => Integer
     #   * {Types::ReplicationConfiguration#create_public_ip #create_public_ip} => Boolean
     #   * {Types::ReplicationConfiguration#data_plane_routing #data_plane_routing} => String
@@ -1389,6 +1398,7 @@ module Aws::Drs
     # @example Response structure
     #
     #   resp.associate_default_security_group #=> Boolean
+    #   resp.auto_replicate_new_disks #=> Boolean
     #   resp.bandwidth_throttling #=> Integer
     #   resp.create_public_ip #=> Boolean
     #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
@@ -1555,10 +1565,11 @@ module Aws::Drs
       req.send_request(options)
     end
 
-    # Causes the data replication initiation sequence to begin immediately
-    # upon next Handshake for the specified Source Server ID, regardless of
-    # when the previous initiation started. This command will work only if
-    # the Source Server is stalled or is in a DISCONNECTED or STOPPED state.
+    # WARNING: RetryDataReplication is deprecated. Causes the data
+    # replication initiation sequence to begin immediately upon next
+    # Handshake for the specified Source Server ID, regardless of when the
+    # previous initiation started. This command will work only if the Source
+    # Server is stalled or is in a DISCONNECTED or STOPPED state.
     #
     # @option params [required, String] :source_server_id
     #   The ID of the Source Server whose data replication should be retried.
@@ -2212,6 +2223,10 @@ module Aws::Drs
     #   Whether to associate the default Elastic Disaster Recovery Security
     #   group with the Replication Configuration.
     #
+    # @option params [Boolean] :auto_replicate_new_disks
+    #   Whether to allow the AWS replication agent to automatically replicate
+    #   newly added disks.
+    #
     # @option params [Integer] :bandwidth_throttling
     #   Configure bandwidth throttling for the outbound data transfer rate of
     #   the Source Server in Mbps.
@@ -2265,6 +2280,7 @@ module Aws::Drs
     # @return [Types::ReplicationConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ReplicationConfiguration#associate_default_security_group #associate_default_security_group} => Boolean
+    #   * {Types::ReplicationConfiguration#auto_replicate_new_disks #auto_replicate_new_disks} => Boolean
     #   * {Types::ReplicationConfiguration#bandwidth_throttling #bandwidth_throttling} => Integer
     #   * {Types::ReplicationConfiguration#create_public_ip #create_public_ip} => Boolean
     #   * {Types::ReplicationConfiguration#data_plane_routing #data_plane_routing} => String
@@ -2285,6 +2301,7 @@ module Aws::Drs
     #
     #   resp = client.update_replication_configuration({
     #     associate_default_security_group: false,
+    #     auto_replicate_new_disks: false,
     #     bandwidth_throttling: 1,
     #     create_public_ip: false,
     #     data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
@@ -2324,6 +2341,7 @@ module Aws::Drs
     # @example Response structure
     #
     #   resp.associate_default_security_group #=> Boolean
+    #   resp.auto_replicate_new_disks #=> Boolean
     #   resp.bandwidth_throttling #=> Integer
     #   resp.create_public_ip #=> Boolean
     #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
@@ -2370,6 +2388,10 @@ module Aws::Drs
     # @option params [Boolean] :associate_default_security_group
     #   Whether to associate the default Elastic Disaster Recovery Security
     #   group with the Replication Configuration Template.
+    #
+    # @option params [Boolean] :auto_replicate_new_disks
+    #   Whether to allow the AWS replication agent to automatically replicate
+    #   newly added disks.
     #
     # @option params [Integer] :bandwidth_throttling
     #   Configure bandwidth throttling for the outbound data transfer rate of
@@ -2419,6 +2441,7 @@ module Aws::Drs
     #
     #   * {Types::ReplicationConfigurationTemplate#arn #arn} => String
     #   * {Types::ReplicationConfigurationTemplate#associate_default_security_group #associate_default_security_group} => Boolean
+    #   * {Types::ReplicationConfigurationTemplate#auto_replicate_new_disks #auto_replicate_new_disks} => Boolean
     #   * {Types::ReplicationConfigurationTemplate#bandwidth_throttling #bandwidth_throttling} => Integer
     #   * {Types::ReplicationConfigurationTemplate#create_public_ip #create_public_ip} => Boolean
     #   * {Types::ReplicationConfigurationTemplate#data_plane_routing #data_plane_routing} => String
@@ -2439,6 +2462,7 @@ module Aws::Drs
     #   resp = client.update_replication_configuration_template({
     #     arn: "ARN",
     #     associate_default_security_group: false,
+    #     auto_replicate_new_disks: false,
     #     bandwidth_throttling: 1,
     #     create_public_ip: false,
     #     data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
@@ -2468,6 +2492,7 @@ module Aws::Drs
     #
     #   resp.arn #=> String
     #   resp.associate_default_security_group #=> Boolean
+    #   resp.auto_replicate_new_disks #=> Boolean
     #   resp.bandwidth_throttling #=> Integer
     #   resp.create_public_ip #=> Boolean
     #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
@@ -2513,7 +2538,7 @@ module Aws::Drs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-drs'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

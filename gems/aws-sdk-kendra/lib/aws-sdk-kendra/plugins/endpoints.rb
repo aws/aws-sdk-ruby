@@ -62,6 +62,8 @@ module Aws::Kendra
             Aws::Kendra::Endpoints::AssociatePersonasToEntities.build(context)
           when :batch_delete_document
             Aws::Kendra::Endpoints::BatchDeleteDocument.build(context)
+          when :batch_delete_featured_results_set
+            Aws::Kendra::Endpoints::BatchDeleteFeaturedResultsSet.build(context)
           when :batch_get_document_status
             Aws::Kendra::Endpoints::BatchGetDocumentStatus.build(context)
           when :batch_put_document
@@ -76,6 +78,8 @@ module Aws::Kendra
             Aws::Kendra::Endpoints::CreateExperience.build(context)
           when :create_faq
             Aws::Kendra::Endpoints::CreateFaq.build(context)
+          when :create_featured_results_set
+            Aws::Kendra::Endpoints::CreateFeaturedResultsSet.build(context)
           when :create_index
             Aws::Kendra::Endpoints::CreateIndex.build(context)
           when :create_query_suggestions_block_list
@@ -106,6 +110,8 @@ module Aws::Kendra
             Aws::Kendra::Endpoints::DescribeExperience.build(context)
           when :describe_faq
             Aws::Kendra::Endpoints::DescribeFaq.build(context)
+          when :describe_featured_results_set
+            Aws::Kendra::Endpoints::DescribeFeaturedResultsSet.build(context)
           when :describe_index
             Aws::Kendra::Endpoints::DescribeIndex.build(context)
           when :describe_principal_mapping
@@ -138,6 +144,8 @@ module Aws::Kendra
             Aws::Kendra::Endpoints::ListExperiences.build(context)
           when :list_faqs
             Aws::Kendra::Endpoints::ListFaqs.build(context)
+          when :list_featured_results_sets
+            Aws::Kendra::Endpoints::ListFeaturedResultsSets.build(context)
           when :list_groups_older_than_ordering_id
             Aws::Kendra::Endpoints::ListGroupsOlderThanOrderingId.build(context)
           when :list_indices
@@ -168,6 +176,8 @@ module Aws::Kendra
             Aws::Kendra::Endpoints::UpdateDataSource.build(context)
           when :update_experience
             Aws::Kendra::Endpoints::UpdateExperience.build(context)
+          when :update_featured_results_set
+            Aws::Kendra::Endpoints::UpdateFeaturedResultsSet.build(context)
           when :update_index
             Aws::Kendra::Endpoints::UpdateIndex.build(context)
           when :update_query_suggestions_block_list

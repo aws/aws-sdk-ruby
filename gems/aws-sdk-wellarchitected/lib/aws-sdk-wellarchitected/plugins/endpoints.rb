@@ -82,6 +82,8 @@ module Aws::WellArchitected
             Aws::WellArchitected::Endpoints::ExportLens.build(context)
           when :get_answer
             Aws::WellArchitected::Endpoints::GetAnswer.build(context)
+          when :get_consolidated_report
+            Aws::WellArchitected::Endpoints::GetConsolidatedReport.build(context)
           when :get_lens
             Aws::WellArchitected::Endpoints::GetLens.build(context)
           when :get_lens_review

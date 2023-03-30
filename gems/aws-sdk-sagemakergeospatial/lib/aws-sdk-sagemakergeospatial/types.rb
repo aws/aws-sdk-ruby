@@ -23,11 +23,15 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # The geographic extent of the Earth Observation job.
+    #
     # @note AreaOfInterest is a union - when making an API calls you must set exactly one of the members.
     #
     # @note AreaOfInterest is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AreaOfInterest corresponding to the set member.
     #
     # @!attribute [rw] area_of_interest_geometry
+    #   A GeoJSON object representing the geographic extent in the
+    #   coordinate space.
     #   @return [Types::AreaOfInterestGeometry]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/AreaOfInterest AWS API Documentation
@@ -43,14 +47,19 @@ module Aws::SageMakerGeospatial
       class Unknown < AreaOfInterest; end
     end
 
+    # A GeoJSON object representing the geographic extent in the coordinate
+    # space.
+    #
     # @note AreaOfInterestGeometry is a union - when making an API calls you must set exactly one of the members.
     #
     # @note AreaOfInterestGeometry is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AreaOfInterestGeometry corresponding to the set member.
     #
     # @!attribute [rw] multi_polygon_geometry
+    #   The structure representing the MultiPolygon Geometry.
     #   @return [Types::MultiPolygonGeometryInput]
     #
     # @!attribute [rw] polygon_geometry
+    #   The structure representing Polygon Geometry.
     #   @return [Types::PolygonGeometryInput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/AreaOfInterestGeometry AWS API Documentation
@@ -68,7 +77,10 @@ module Aws::SageMakerGeospatial
       class Unknown < AreaOfInterestGeometry; end
     end
 
+    # The structure containing the asset properties.
+    #
     # @!attribute [rw] href
+    #   Link to the asset object.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/AssetValue AWS API Documentation
@@ -79,10 +91,17 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # Input structure for the BandMath operation type. Defines Predefined
+    # and CustomIndices to be computed using BandMath.
+    #
     # @!attribute [rw] custom_indices
+    #   CustomIndices that are computed.
     #   @return [Types::CustomIndicesInput]
     #
     # @!attribute [rw] predefined_indices
+    #   One or many of the supported predefined indices to compute. Allowed
+    #   values: `NDVI`, `EVI2`, `MSAVI`, `NDWI`, `NDMI`, `NDSI`, and
+    #   `WDRVI`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/BandMathConfigInput AWS API Documentation
@@ -94,12 +113,16 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # Input structure for CloudMasking operation type.
+    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/CloudMaskingConfigInput AWS API Documentation
     #
     class CloudMaskingConfigInput < Aws::EmptyStructure; end
 
+    # Input structure for Cloud Removal Operation type
+    #
     # @!attribute [rw] algorithm_name
     #   The name of the algorithm used for cloud removal.
     #   @return [String]
@@ -109,6 +132,7 @@ module Aws::SageMakerGeospatial
     #   @return [String]
     #
     # @!attribute [rw] target_bands
+    #   TargetBands to be returned in the output of CloudRemoval operation.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/CloudRemovalConfigInput AWS API Documentation
@@ -121,10 +145,13 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # Updating or deleting a resource can cause an inconsistent state.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
     # @!attribute [rw] resource_id
+    #   Identifier of the resource affected.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/ConflictException AWS API Documentation
@@ -136,7 +163,10 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # Input object defining the custom BandMath indices to compute.
+    #
     # @!attribute [rw] operations
+    #   A list of BandMath indices to compute.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/CustomIndicesInput AWS API Documentation
@@ -184,9 +214,11 @@ module Aws::SageMakerGeospatial
     # The structure representing the errors in an EarthObservationJob.
     #
     # @!attribute [rw] message
+    #   A detailed message describing the error in an Earth Observation job.
     #   @return [String]
     #
     # @!attribute [rw] type
+    #   The type of error in an Earth Observation job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/EarthObservationJobErrorDetails AWS API Documentation
@@ -198,10 +230,14 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # The structure representing the EoCloudCover filter.
+    #
     # @!attribute [rw] lower_bound
+    #   Lower bound for EoCloudCover.
     #   @return [Float]
     #
     # @!attribute [rw] upper_bound
+    #   Upper bound for EoCloudCover.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/EoCloudCoverInput AWS API Documentation
@@ -213,11 +249,16 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # Union representing different data sources to be used as input for an
+    # Earth Observation job.
+    #
     # @note EojDataSourceConfigInput is a union - when making an API calls you must set exactly one of the members.
     #
     # @note EojDataSourceConfigInput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of EojDataSourceConfigInput corresponding to the set member.
     #
     # @!attribute [rw] s3_data
+    #   The input structure for S3Data; representing the Amazon S3 location
+    #   of the input data objects.
     #   @return [Types::S3DataInput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/EojDataSourceConfigInput AWS API Documentation
@@ -238,6 +279,14 @@ module Aws::SageMakerGeospatial
     #   being exported.
     #   @return [String]
     #
+    # @!attribute [rw] client_token
+    #   A unique token that guarantees that the call to this API is
+    #   idempotent.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @!attribute [rw] execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that you specified
     #   for the job.
@@ -256,6 +305,7 @@ module Aws::SageMakerGeospatial
     #
     class ExportEarthObservationJobInput < Struct.new(
       :arn,
+      :client_token,
       :execution_role_arn,
       :export_source_images,
       :output_config)
@@ -308,9 +358,13 @@ module Aws::SageMakerGeospatial
     # GetEarthObservationJob.
     #
     # @!attribute [rw] export_results
+    #   The structure for returning the export error details while exporting
+    #   results of an Earth Observation job.
     #   @return [Types::ExportErrorDetailsOutput]
     #
     # @!attribute [rw] export_source_images
+    #   The structure for returning the export error details while exporting
+    #   the source images of an Earth Observation job.
     #   @return [Types::ExportErrorDetailsOutput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/ExportErrorDetails AWS API Documentation
@@ -322,10 +376,16 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # The structure representing the errors in an export EarthObservationJob
+    # operation.
+    #
     # @!attribute [rw] message
+    #   A detailed message describing the error in an export
+    #   EarthObservationJob operation.
     #   @return [String]
     #
     # @!attribute [rw] type
+    #   The type of error in an export EarthObservationJob operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/ExportErrorDetailsOutput AWS API Documentation
@@ -337,9 +397,11 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # The structure containing the Amazon S3 path to export the Earth
+    # Observation job output.
+    #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Key Management Service (KMS) key ID for server-side
-    #   encryption.
+    #   The Key Management Service key ID for server-side encryption.
     #   @return [String]
     #
     # @!attribute [rw] s3_uri
@@ -359,6 +421,14 @@ module Aws::SageMakerGeospatial
     #   The Amazon Resource Name (ARN) of the Vector Enrichment job.
     #   @return [String]
     #
+    # @!attribute [rw] client_token
+    #   A unique token that guarantees that the call to this API is
+    #   idempotent.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @!attribute [rw] execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM rolewith permission to
     #   upload to the location in OutputConfig.
@@ -373,6 +443,7 @@ module Aws::SageMakerGeospatial
     #
     class ExportVectorEnrichmentJobInput < Struct.new(
       :arn,
+      :client_token,
       :execution_role_arn,
       :output_config)
       SENSITIVE = []
@@ -417,6 +488,8 @@ module Aws::SageMakerGeospatial
     # An object containing information about the output file.
     #
     # @!attribute [rw] s3_data
+    #   The input structure for Amazon S3 data; representing the Amazon S3
+    #   location of the input data objects.
     #   @return [Types::VectorEnrichmentJobS3Data]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/ExportVectorEnrichmentJobOutputConfig AWS API Documentation
@@ -476,10 +549,15 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # The structure representing a Geometry in terms of Type and Coordinates
+    # as per GeoJson spec.
+    #
     # @!attribute [rw] coordinates
+    #   The coordinates of the GeoJson Geometry.
     #   @return [Array<Array<Array<Float>>>]
     #
     # @!attribute [rw] type
+    #   GeoJson Geometry types like Polygon and MultiPolygon.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/Geometry AWS API Documentation
@@ -541,8 +619,7 @@ module Aws::SageMakerGeospatial
     #   @return [Types::JobConfigInput]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Key Management Service (KMS) key ID for server-side
-    #   encryption.
+    #   The Key Management Service key ID for server-side encryption.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -550,6 +627,7 @@ module Aws::SageMakerGeospatial
     #   @return [String]
     #
     # @!attribute [rw] output_bands
+    #   Bands available in the output of an operation.
     #   @return [Array<Types::OutputBand>]
     #
     # @!attribute [rw] status
@@ -606,6 +684,7 @@ module Aws::SageMakerGeospatial
     #   @return [String]
     #
     # @!attribute [rw] image_source_bands
+    #   The list of image source bands in the raster data collection.
     #   @return [Array<String>]
     #
     # @!attribute [rw] name
@@ -641,6 +720,10 @@ module Aws::SageMakerGeospatial
 
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the tile operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that you specify.
     #   @return [String]
     #
     # @!attribute [rw] image_assets
@@ -689,6 +772,7 @@ module Aws::SageMakerGeospatial
     #
     class GetTileInput < Struct.new(
       :arn,
+      :execution_role_arn,
       :image_assets,
       :image_mask,
       :output_data_type,
@@ -766,8 +850,7 @@ module Aws::SageMakerGeospatial
     #   @return [Types::VectorEnrichmentJobConfig]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Key Management Service (KMS) key ID for server-side
-    #   encryption.
+    #   The Key Management Service key ID for server-side encryption.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -819,6 +902,9 @@ module Aws::SageMakerGeospatial
     #   @return [String]
     #
     # @!attribute [rw] raster_data_collection_query
+    #   The structure representing the RasterDataCollection Query consisting
+    #   of the Area of Interest, RasterDataCollectionArn,TimeRange and
+    #   Property Filters.
     #   @return [Types::RasterDataCollectionQueryInput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/InputConfigInput AWS API Documentation
@@ -843,6 +929,9 @@ module Aws::SageMakerGeospatial
     #   @return [String]
     #
     # @!attribute [rw] raster_data_collection_query
+    #   The structure representing the RasterDataCollection Query consisting
+    #   of the Area of Interest, RasterDataCollectionArn,
+    #   RasterDataCollectionName, TimeRange, and Property Filters.
     #   @return [Types::RasterDataCollectionQueryOutput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/InputConfigOutput AWS API Documentation
@@ -873,16 +962,20 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
-    # Structure representing the items in the response for
+    # The structure representing the items in the response for
     # SearchRasterDataCollection.
     #
     # @!attribute [rw] assets
+    #   This is a dictionary of Asset Objects data associated with the Item
+    #   that can be downloaded or streamed, each with a unique key.
     #   @return [Hash<String,Types::AssetValue>]
     #
     # @!attribute [rw] date_time
+    #   The searchable date and time of the item, in UTC.
     #   @return [Time]
     #
     # @!attribute [rw] geometry
+    #   The item Geometry in GeoJson format.
     #   @return [Types::Geometry]
     #
     # @!attribute [rw] id
@@ -890,6 +983,7 @@ module Aws::SageMakerGeospatial
     #   @return [String]
     #
     # @!attribute [rw] properties
+    #   This field contains additional properties of the item.
     #   @return [Types::Properties]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/ItemSource AWS API Documentation
@@ -911,6 +1005,8 @@ module Aws::SageMakerGeospatial
     # @note JobConfigInput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of JobConfigInput corresponding to the set member.
     #
     # @!attribute [rw] band_math_config
+    #   An object containing information about the job configuration for
+    #   BandMath.
     #   @return [Types::BandMathConfigInput]
     #
     # @!attribute [rw] cloud_masking_config
@@ -939,6 +1035,8 @@ module Aws::SageMakerGeospatial
     #   @return [Types::ResamplingConfigInput]
     #
     # @!attribute [rw] stack_config
+    #   An object containing information about the job configuration for a
+    #   Stacking Earth Observation job.
     #   @return [Types::StackConfigInput]
     #
     # @!attribute [rw] temporal_statistics_config
@@ -980,16 +1078,27 @@ module Aws::SageMakerGeospatial
       class Unknown < JobConfigInput; end
     end
 
+    # The input structure for Land Cover Operation type.
+    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/LandCoverSegmentationConfigInput AWS API Documentation
     #
     class LandCoverSegmentationConfigInput < Aws::EmptyStructure; end
 
+    # The structure representing Land Cloud Cover property for Landsat data
+    # collection.
+    #
     # @!attribute [rw] lower_bound
+    #   The minimum value for Land Cloud Cover property filter. This will
+    #   filter items having Land Cloud Cover greater than or equal to this
+    #   value.
     #   @return [Float]
     #
     # @!attribute [rw] upper_bound
+    #   The maximum value for Land Cloud Cover property filter. This will
+    #   filter items having Land Cloud Cover less than or equal to this
+    #   value.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/LandsatCloudCoverLandInput AWS API Documentation
@@ -1073,6 +1182,7 @@ module Aws::SageMakerGeospatial
     #   @return [String]
     #
     # @!attribute [rw] operation_type
+    #   The operation type for an Earth Observation job.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1254,7 +1364,12 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # The input structure for Map Matching operation type.
+    #
     # @!attribute [rw] id_attribute_name
+    #   The field name for the data that describes the identifier
+    #   representing a collection of GPS points belonging to an individual
+    #   trace.
     #   @return [String]
     #
     # @!attribute [rw] timestamp_attribute_name
@@ -1280,6 +1395,13 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # The structure representing Polygon Geometry based on the [GeoJson
+    # spec][1].
+    #
+    #
+    #
+    # [1]: https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6
+    #
     # @!attribute [rw] coordinates
     #   The coordinates of the multipolygon geometry.
     #   @return [Array<Array<Array<Array<Float>>>>]
@@ -1292,7 +1414,11 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # Represents an arithmetic operation to compute spectral index.
+    #
     # @!attribute [rw] equation
+    #   Textual representation of the math operation; Equation used to
+    #   compute the spectral index.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1348,7 +1474,12 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # OutputResolution Configuration indicating the target resolution for
+    # the output of Resampling operation.
+    #
     # @!attribute [rw] user_defined
+    #   User Defined Resolution for the output of Resampling operation
+    #   defined by value and unit.
     #   @return [Types::UserDefined]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/OutputResolutionResamplingInput AWS API Documentation
@@ -1359,10 +1490,18 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # The input structure representing Output Resolution for Stacking
+    # Operation.
+    #
     # @!attribute [rw] predefined
+    #   A string value representing Predefined Output Resolution for a
+    #   stacking operation. Allowed values are `HIGHEST`, `LOWEST`, and
+    #   `AVERAGE`.
     #   @return [String]
     #
     # @!attribute [rw] user_defined
+    #   The structure representing User Output Resolution for a Stacking
+    #   operation defined as a value and unit.
     #   @return [Types::UserDefined]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/OutputResolutionStackInput AWS API Documentation
@@ -1374,7 +1513,13 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # The input structure for specifying Platform. Platform refers to the
+    # unique name of the specific platform the instrument is attached to.
+    # For satellites it is the name of the satellite, eg. landsat-8
+    # (Landsat-8), sentinel-2a.
+    #
     # @!attribute [rw] comparison_operator
+    #   The ComparisonOperator to use with PlatformInput.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -1390,7 +1535,19 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # The structure representing Polygon Geometry based on the [GeoJson
+    # spec][1].
+    #
+    #
+    #
+    # [1]: https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6
+    #
     # @!attribute [rw] coordinates
+    #   Coordinates representing a Polygon based on the [GeoJson spec][1].
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6
     #   @return [Array<Array<Array<Float>>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/PolygonGeometryInput AWS API Documentation
@@ -1401,22 +1558,44 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # Properties associated with the Item.
+    #
     # @!attribute [rw] eo_cloud_cover
+    #   Estimate of cloud cover.
     #   @return [Float]
     #
     # @!attribute [rw] landsat_cloud_cover_land
+    #   Land cloud cover for Landsat Data Collection.
     #   @return [Float]
     #
     # @!attribute [rw] platform
+    #   Platform property. Platform refers to the unique name of the
+    #   specific platform the instrument is attached to. For satellites it
+    #   is the name of the satellite, eg. landsat-8 (Landsat-8),
+    #   sentinel-2a.
     #   @return [String]
     #
     # @!attribute [rw] view_off_nadir
+    #   The angle from the sensor between nadir (straight down) and the
+    #   scene center. Measured in degrees (0-90).
     #   @return [Float]
     #
     # @!attribute [rw] view_sun_azimuth
+    #   The sun azimuth angle. From the scene center point on the ground,
+    #   this is the angle between truth north and the sun. Measured
+    #   clockwise in degrees (0-360).
     #   @return [Float]
     #
     # @!attribute [rw] view_sun_elevation
+    #   The sun elevation angle. The angle from the tangent of the scene
+    #   center point to the sun. Measured from the horizon in degrees
+    #   (-90-90). Negative values indicate the sun is below the horizon,
+    #   e.g. sun elevation of -10° means the data was captured during
+    #   [nautical twilight][1].
+    #
+    #
+    #
+    #   [1]: https://www.timeanddate.com/astronomy/different-types-twilight.html
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/Properties AWS API Documentation
@@ -1432,26 +1611,40 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # Represents a single searchable property to search on.
+    #
     # @note Property is a union - when making an API calls you must set exactly one of the members.
     #
     # @note Property is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Property corresponding to the set member.
     #
     # @!attribute [rw] eo_cloud_cover
+    #   The structure representing EoCloudCover property filter containing a
+    #   lower bound and upper bound.
     #   @return [Types::EoCloudCoverInput]
     #
     # @!attribute [rw] landsat_cloud_cover_land
+    #   The structure representing Land Cloud Cover property filter for
+    #   Landsat collection containing a lower bound and upper bound.
     #   @return [Types::LandsatCloudCoverLandInput]
     #
     # @!attribute [rw] platform
+    #   The structure representing Platform property filter consisting of
+    #   value and comparison operator.
     #   @return [Types::PlatformInput]
     #
     # @!attribute [rw] view_off_nadir
+    #   The structure representing ViewOffNadir property filter containing a
+    #   lower bound and upper bound.
     #   @return [Types::ViewOffNadirInput]
     #
     # @!attribute [rw] view_sun_azimuth
+    #   The structure representing ViewSunAzimuth property filter containing
+    #   a lower bound and upper bound.
     #   @return [Types::ViewSunAzimuthInput]
     #
     # @!attribute [rw] view_sun_elevation
+    #   The structure representing ViewSunElevation property filter
+    #   containing a lower bound and upper bound.
     #   @return [Types::ViewSunElevationInput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/Property AWS API Documentation
@@ -1477,7 +1670,11 @@ module Aws::SageMakerGeospatial
       class Unknown < Property; end
     end
 
+    # The structure representing a single PropertyFilter.
+    #
     # @!attribute [rw] property
+    #   Represents a single property to match with when searching a raster
+    #   data collection.
     #   @return [Types::Property]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/PropertyFilter AWS API Documentation
@@ -1488,10 +1685,14 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # A list of PropertyFilter objects.
+    #
     # @!attribute [rw] logical_operator
+    #   The Logical Operator used to combine the Property Filters.
     #   @return [String]
     #
     # @!attribute [rw] properties
+    #   A list of Property Filters.
     #   @return [Array<Types::PropertyFilter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/PropertyFilters AWS API Documentation
@@ -1523,6 +1724,7 @@ module Aws::SageMakerGeospatial
     #   @return [String]
     #
     # @!attribute [rw] supported_filters
+    #   The list of filters supported by the raster data collection.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] tags
@@ -1547,11 +1749,16 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # The input structure for Raster Data Collection Query containing the
+    # Area of Interest, TimeRange Filters, and Property Filters.
+    #
     # @!attribute [rw] area_of_interest
     #   The area of interest being queried for the raster data collection.
     #   @return [Types::AreaOfInterest]
     #
     # @!attribute [rw] property_filters
+    #   The list of Property filters used in the Raster Data Collection
+    #   Query.
     #   @return [Types::PropertyFilters]
     #
     # @!attribute [rw] raster_data_collection_arn
@@ -1559,6 +1766,7 @@ module Aws::SageMakerGeospatial
     #   @return [String]
     #
     # @!attribute [rw] time_range_filter
+    #   The TimeRange Filter used in the RasterDataCollection Query.
     #   @return [Types::TimeRangeFilterInput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/RasterDataCollectionQueryInput AWS API Documentation
@@ -1572,13 +1780,20 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # The output structure contains the Raster Data Collection Query input
+    # along with some additional metadata.
+    #
     # @!attribute [rw] area_of_interest
+    #   The Area of Interest used in the search.
     #   @return [Types::AreaOfInterest]
     #
     # @!attribute [rw] property_filters
+    #   Property filters used in the search.
     #   @return [Types::PropertyFilters]
     #
     # @!attribute [rw] raster_data_collection_arn
+    #   The ARN of the Raster Data Collection against which the search is
+    #   done.
     #   @return [String]
     #
     # @!attribute [rw] raster_data_collection_name
@@ -1586,7 +1801,8 @@ module Aws::SageMakerGeospatial
     #   @return [String]
     #
     # @!attribute [rw] time_range_filter
-    #   @return [Types::TimeRangeFilterInput]
+    #   The TimeRange filter used in the search.
+    #   @return [Types::TimeRangeFilterOutput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/RasterDataCollectionQueryOutput AWS API Documentation
     #
@@ -1604,15 +1820,19 @@ module Aws::SageMakerGeospatial
     # Time Range filter and Property filters.
     #
     # @!attribute [rw] area_of_interest
+    #   The Area of interest to be used in the search query.
     #   @return [Types::AreaOfInterest]
     #
     # @!attribute [rw] band_filter
+    #   The list of Bands to be displayed in the result for each item.
     #   @return [Array<String>]
     #
     # @!attribute [rw] property_filters
+    #   The Property Filters used in the search query.
     #   @return [Types::PropertyFilters]
     #
     # @!attribute [rw] time_range_filter
+    #   The TimeRange Filter used in the search query.
     #   @return [Types::TimeRangeFilterInput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/RasterDataCollectionQueryWithBandFilterInput AWS API Documentation
@@ -1626,14 +1846,20 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # The structure representing input for resampling operation.
+    #
     # @!attribute [rw] algorithm_name
     #   The name of the algorithm used for resampling.
     #   @return [String]
     #
     # @!attribute [rw] output_resolution
+    #   The structure representing output resolution (in target
+    #   georeferenced units) of the result of resampling operation.
     #   @return [Types::OutputResolutionResamplingInput]
     #
     # @!attribute [rw] target_bands
+    #   Bands used in the operation. If no target bands are specified, it
+    #   uses all bands available in the input.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/ResamplingConfigInput AWS API Documentation
@@ -1646,10 +1872,13 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # The request references a resource which does not exist.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
     # @!attribute [rw] resource_id
+    #   Identifier of the resource that was not found.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/ResourceNotFoundException AWS API Documentation
@@ -1661,10 +1890,16 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # The input structure for Reverse Geocoding operation type.
+    #
     # @!attribute [rw] x_attribute_name
+    #   The field name for the data that describes x-axis coordinate, eg.
+    #   longitude of a point.
     #   @return [String]
     #
     # @!attribute [rw] y_attribute_name
+    #   The field name for the data that describes y-axis coordinate, eg.
+    #   latitude of a point.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/ReverseGeocodingConfig AWS API Documentation
@@ -1679,11 +1914,11 @@ module Aws::SageMakerGeospatial
     # Path to Amazon S3 storage location for input data.
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Key Management Service (KMS) key ID for server-side
-    #   encryption.
+    #   The Key Management Service key ID for server-side encryption.
     #   @return [String]
     #
     # @!attribute [rw] metadata_provider
+    #   Metadata provider from whom the Amazon S3 data has been acquired.
     #   @return [String]
     #
     # @!attribute [rw] s3_uri
@@ -1710,6 +1945,16 @@ module Aws::SageMakerGeospatial
     #   @return [String]
     #
     # @!attribute [rw] raster_data_collection_query
+    #   RasterDataCollectionQuery consisting of [AreaOfInterest(AOI)][1],
+    #   [PropertyFilters][2] and [TimeRangeFilterInput][3] used in
+    #   [SearchRasterDataCollection][4].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_AreaOfInterest.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_PropertyFilter.html
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_TimeRangeFilterInput.html
+    #   [4]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_SearchRasterDataCollection.html
     #   @return [Types::RasterDataCollectionQueryWithBandFilterInput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/SearchRasterDataCollectionInput AWS API Documentation
@@ -1723,9 +1968,11 @@ module Aws::SageMakerGeospatial
     end
 
     # @!attribute [rw] approximate_result_count
+    #   Approximate number of results in the response.
     #   @return [Integer]
     #
     # @!attribute [rw] items
+    #   List of items matching the Raster DataCollectionQuery.
     #   @return [Array<Types::ItemSource>]
     #
     # @!attribute [rw] next_token
@@ -1749,6 +1996,7 @@ module Aws::SageMakerGeospatial
     #   @return [String]
     #
     # @!attribute [rw] resource_id
+    #   Identifier of the resource affected.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/ServiceQuotaExceededException AWS API Documentation
@@ -1760,10 +2008,18 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # The input structure for Stacking Operation.
+    #
     # @!attribute [rw] output_resolution
+    #   The structure representing output resolution (in target
+    #   georeferenced units) of the result of stacking operation.
     #   @return [Types::OutputResolutionStackInput]
     #
     # @!attribute [rw] target_bands
+    #   A list of bands to be stacked in the specified order. When the
+    #   parameter is not provided, all the available bands in the data
+    #   collection are stacked in the alphabetical order of their asset
+    #   names.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/StackConfigInput AWS API Documentation
@@ -1797,8 +2053,7 @@ module Aws::SageMakerGeospatial
     #   @return [Types::JobConfigInput]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Key Management Service (KMS) key ID for server-side
-    #   encryption.
+    #   The Key Management Service key ID for server-side encryption.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1849,8 +2104,7 @@ module Aws::SageMakerGeospatial
     #   @return [Types::JobConfigInput]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Key Management Service (KMS) key ID for server-side
-    #   encryption.
+    #   The Key Management Service key ID for server-side encryption.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1904,8 +2158,7 @@ module Aws::SageMakerGeospatial
     #   @return [Types::VectorEnrichmentJobConfig]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Key Management Service (KMS) key ID for server-side
-    #   encryption.
+    #   The Key Management Service key ID for server-side encryption.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1957,8 +2210,7 @@ module Aws::SageMakerGeospatial
     #   @return [Types::VectorEnrichmentJobConfig]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Key Management Service (KMS) key ID for server-side
-    #   encryption.
+    #   The Key Management Service key ID for server-side encryption.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2049,13 +2301,21 @@ module Aws::SageMakerGeospatial
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # The structure representing the configuration for Temporal Statistics
+    # operation.
+    #
     # @!attribute [rw] group_by
+    #   The input for the temporal statistics grouping by time frequency
+    #   option.
     #   @return [String]
     #
     # @!attribute [rw] statistics
+    #   The list of the statistics method options.
     #   @return [Array<String>]
     #
     # @!attribute [rw] target_bands
+    #   The list of target band names for the temporal statistic to
+    #   calculate.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/TemporalStatisticsConfigInput AWS API Documentation
@@ -2104,6 +2364,25 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # The output structure of the time range filter.
+    #
+    # @!attribute [rw] end_time
+    #   The ending time for the time range filter.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   The starting time for the time range filter.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/TimeRangeFilterOutput AWS API Documentation
+    #
+    class TimeRangeFilterOutput < Struct.new(
+      :end_time,
+      :start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource you want to untag.
     #   @return [String]
@@ -2125,10 +2404,15 @@ module Aws::SageMakerGeospatial
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # The output resolution (in target georeferenced units) of the result of
+    # the operation
+    #
     # @!attribute [rw] unit
+    #   The units for output resolution of the result.
     #   @return [String]
     #
     # @!attribute [rw] value
+    #   The value for output resolution of the result.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/UserDefined AWS API Documentation
@@ -2166,9 +2450,11 @@ module Aws::SageMakerGeospatial
     # @note VectorEnrichmentJobConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VectorEnrichmentJobConfig corresponding to the set member.
     #
     # @!attribute [rw] map_matching_config
+    #   The input structure for Map Matching operation type.
     #   @return [Types::MapMatchingConfig]
     #
     # @!attribute [rw] reverse_geocoding_config
+    #   The input structure for Reverse Geocoding operation type.
     #   @return [Types::ReverseGeocodingConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/VectorEnrichmentJobConfig AWS API Documentation
@@ -2186,11 +2472,16 @@ module Aws::SageMakerGeospatial
       class Unknown < VectorEnrichmentJobConfig; end
     end
 
+    # The input structure for the data source that represents the storage
+    # type of the input data objects.
+    #
     # @note VectorEnrichmentJobDataSourceConfigInput is a union - when making an API calls you must set exactly one of the members.
     #
     # @note VectorEnrichmentJobDataSourceConfigInput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VectorEnrichmentJobDataSourceConfigInput corresponding to the set member.
     #
     # @!attribute [rw] s3_data
+    #   The input structure for the Amazon S3 data that represents the
+    #   Amazon S3 location of the input data objects.
     #   @return [Types::VectorEnrichmentJobS3Data]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/VectorEnrichmentJobDataSourceConfigInput AWS API Documentation
@@ -2236,6 +2527,8 @@ module Aws::SageMakerGeospatial
     #   @return [String]
     #
     # @!attribute [rw] type
+    #   The output error details for an Export operation on a Vector
+    #   Enrichment job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/VectorEnrichmentJobExportErrorDetails AWS API Documentation
@@ -2250,9 +2543,12 @@ module Aws::SageMakerGeospatial
     # The input structure for the InputConfig in a VectorEnrichmentJob.
     #
     # @!attribute [rw] data_source_config
+    #   The input structure for the data source that represents the storage
+    #   type of the input data objects.
     #   @return [Types::VectorEnrichmentJobDataSourceConfigInput]
     #
     # @!attribute [rw] document_type
+    #   The input structure that defines the data source file type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/VectorEnrichmentJobInputConfig AWS API Documentation
@@ -2267,8 +2563,7 @@ module Aws::SageMakerGeospatial
     # The Amazon S3 data for the Vector Enrichment job.
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Key Management Service (KMS) key ID for server-side
-    #   encryption.
+    #   The Key Management Service key ID for server-side encryption.
     #   @return [String]
     #
     # @!attribute [rw] s3_uri
@@ -2284,10 +2579,18 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # The input structure for specifying ViewOffNadir property filter.
+    # ViewOffNadir refers to the angle from the sensor between nadir
+    # (straight down) and the scene center. Measured in degrees (0-90).
+    #
     # @!attribute [rw] lower_bound
+    #   The minimum value for ViewOffNadir property filter. This filters
+    #   items having ViewOffNadir greater than or equal to this value.
     #   @return [Float]
     #
     # @!attribute [rw] upper_bound
+    #   The maximum value for ViewOffNadir property filter. This filters
+    #   items having ViewOffNadir lesser than or equal to this value.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/ViewOffNadirInput AWS API Documentation
@@ -2299,10 +2602,19 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # The input structure for specifying ViewSunAzimuth property filter.
+    # ViewSunAzimuth refers to the Sun azimuth angle. From the scene center
+    # point on the ground, this is the angle between truth north and the
+    # sun. Measured clockwise in degrees (0-360).
+    #
     # @!attribute [rw] lower_bound
+    #   The minimum value for ViewSunAzimuth property filter. This filters
+    #   items having ViewSunAzimuth greater than or equal to this value.
     #   @return [Float]
     #
     # @!attribute [rw] upper_bound
+    #   The maximum value for ViewSunAzimuth property filter. This filters
+    #   items having ViewSunAzimuth lesser than or equal to this value.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/ViewSunAzimuthInput AWS API Documentation
@@ -2314,6 +2626,9 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # The input structure for specifying ViewSunElevation angle property
+    # filter.
+    #
     # @!attribute [rw] lower_bound
     #   The lower bound to view the sun elevation.
     #   @return [Float]
@@ -2331,13 +2646,47 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
+    # The structure representing input configuration of ZonalStatistics
+    # operation.
+    #
     # @!attribute [rw] statistics
+    #   List of zonal statistics to compute.
     #   @return [Array<String>]
     #
     # @!attribute [rw] target_bands
+    #   Bands used in the operation. If no target bands are specified, it
+    #   uses all bands available input.
     #   @return [Array<String>]
     #
     # @!attribute [rw] zone_s3_path
+    #   The Amazon S3 path pointing to the GeoJSON containing the polygonal
+    #   zones.
+    #   @return [String]
+    #
+    # @!attribute [rw] zone_s3_path_kms_key_id
+    #   The Amazon Resource Name (ARN) or an ID of a Amazon Web Services Key
+    #   Management Service (Amazon Web Services KMS) key that Amazon
+    #   SageMaker uses to decrypt your output artifacts with Amazon S3
+    #   server-side encryption. The SageMaker execution role must have
+    #   `kms:GenerateDataKey` permission.
+    #
+    #   The `KmsKeyId` can be any of the following formats:
+    #
+    #   * // KMS Key ID
+    #
+    #     `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * // Amazon Resource Name (ARN) of a KMS Key
+    #
+    #     `"arn:aws:kms:<region>:<account>:key/<key-id-12ab-34cd-56ef-1234567890ab>"`
+    #
+    #   For more information about key identifiers, see [Key identifiers
+    #   (KeyID)][1] in the Amazon Web Services Key Management Service
+    #   (Amazon Web Services KMS) documentation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/ZonalStatisticsConfigInput AWS API Documentation
@@ -2345,7 +2694,8 @@ module Aws::SageMakerGeospatial
     class ZonalStatisticsConfigInput < Struct.new(
       :statistics,
       :target_bands,
-      :zone_s3_path)
+      :zone_s3_path,
+      :zone_s3_path_kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end

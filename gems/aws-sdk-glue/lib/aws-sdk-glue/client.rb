@@ -15380,9 +15380,6 @@ module Aws::Glue
     # @option params [required, String] :name
     #   The name of the data quality ruleset.
     #
-    # @option params [String] :updated_name
-    #   The new name of the ruleset, if you are renaming it.
-    #
     # @option params [String] :description
     #   A description of the ruleset.
     #
@@ -15400,7 +15397,6 @@ module Aws::Glue
     #
     #   resp = client.update_data_quality_ruleset({
     #     name: "NameString", # required
-    #     updated_name: "NameString",
     #     description: "DescriptionString",
     #     ruleset: "DataQualityRulesetString",
     #   })
@@ -17323,7 +17319,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.132.0'
+      context[:gem_version] = '1.133.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

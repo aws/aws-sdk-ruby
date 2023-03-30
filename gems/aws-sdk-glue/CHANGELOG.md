@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.133.0 (2023-03-30)
+------------------
+
+* Feature - This release adds support for AWS Glue Data Quality, which helps you evaluate and monitor the quality of your data and includes the API for creating, deleting, or updating data quality rulesets, runs and evaluations.
+
 1.132.0 (2023-02-17)
 ------------------
 

@@ -34301,6 +34301,68 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] vpn_connection_id
+    #   The ID of the Site-to-Site VPN connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_tunnel_outside_ip_address
+    #   The external IP address of the VPN tunnel.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetVpnTunnelReplacementStatusRequest AWS API Documentation
+    #
+    class GetVpnTunnelReplacementStatusRequest < Struct.new(
+      :vpn_connection_id,
+      :vpn_tunnel_outside_ip_address,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpn_connection_id
+    #   The ID of the Site-to-Site VPN connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_id
+    #   The ID of the transit gateway associated with the VPN connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_gateway_id
+    #   The ID of the customer gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_gateway_id
+    #   The ID of the virtual private gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_tunnel_outside_ip_address
+    #   The external IP address of the VPN tunnel.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_details
+    #   Get details of pending tunnel endpoint maintenance.
+    #   @return [Types::MaintenanceDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetVpnTunnelReplacementStatusResult AWS API Documentation
+    #
+    class GetVpnTunnelReplacementStatusResult < Struct.new(
+      :vpn_connection_id,
+      :transit_gateway_id,
+      :customer_gateway_id,
+      :vpn_gateway_id,
+      :vpn_tunnel_outside_ip_address,
+      :maintenance_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the GPU accelerators for the instance type.
     #
     # @!attribute [rw] name
@@ -43090,6 +43152,31 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Details for Site-to-Site VPN tunnel endpoint maintenance events.
+    #
+    # @!attribute [rw] pending_maintenance
+    #   Verify existence of a pending maintenance.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_auto_applied_after
+    #   The timestamp after which Amazon Web Services will automatically
+    #   apply maintenance.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_maintenance_applied
+    #   Timestamp of last applied maintenance.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MaintenanceDetails AWS API Documentation
+    #
+    class MaintenanceDetails < Struct.new(
+      :pending_maintenance,
+      :maintenance_auto_applied_after,
+      :last_maintenance_applied)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a managed prefix list.
     #
     # @!attribute [rw] prefix_list_id
@@ -47300,13 +47387,20 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] skip_tunnel_replacement
+    #   Choose whether or not to trigger immediate tunnel replacement.
+    #
+    #   Valid values: `True` \| `False`
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnTunnelOptionsRequest AWS API Documentation
     #
     class ModifyVpnTunnelOptionsRequest < Struct.new(
       :vpn_connection_id,
       :vpn_tunnel_outside_ip_address,
       :tunnel_options,
-      :dry_run)
+      :dry_run,
+      :skip_tunnel_replacement)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47495,6 +47589,10 @@ module Aws::EC2
     #   Options for logging VPN tunnel activity.
     #   @return [Types::VpnTunnelLogOptionsSpecification]
     #
+    # @!attribute [rw] enable_tunnel_lifecycle_control
+    #   Turn on or off tunnel endpoint lifecycle control feature.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnTunnelOptionsSpecification AWS API Documentation
     #
     class ModifyVpnTunnelOptionsSpecification < Struct.new(
@@ -47516,7 +47614,8 @@ module Aws::EC2
       :phase_2_dh_group_numbers,
       :ike_versions,
       :startup_action,
-      :log_options)
+      :log_options,
+      :enable_tunnel_lifecycle_control)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -52107,6 +52206,48 @@ module Aws::EC2
     #
     class ReplaceTransitGatewayRouteResult < Struct.new(
       :route)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpn_connection_id
+    #   The ID of the Site-to-Site VPN connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_tunnel_outside_ip_address
+    #   The external IP address of the VPN tunnel.
+    #   @return [String]
+    #
+    # @!attribute [rw] apply_pending_maintenance
+    #   Trigger pending tunnel endpoint maintenance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceVpnTunnelRequest AWS API Documentation
+    #
+    class ReplaceVpnTunnelRequest < Struct.new(
+      :vpn_connection_id,
+      :vpn_tunnel_outside_ip_address,
+      :apply_pending_maintenance,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Confirmation of replace tunnel operation.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceVpnTunnelResult AWS API Documentation
+    #
+    class ReplaceVpnTunnelResult < Struct.new(
+      :return)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -61672,6 +61813,10 @@ module Aws::EC2
     #   Options for logging VPN tunnel activity.
     #   @return [Types::VpnTunnelLogOptions]
     #
+    # @!attribute [rw] enable_tunnel_lifecycle_control
+    #   Status of tunnel endpoint lifecycle control feature.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TunnelOption AWS API Documentation
     #
     class TunnelOption < Struct.new(
@@ -61694,7 +61839,8 @@ module Aws::EC2
       :phase_2_dh_group_numbers,
       :ike_versions,
       :startup_action,
-      :log_options)
+      :log_options,
+      :enable_tunnel_lifecycle_control)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -64421,6 +64567,10 @@ module Aws::EC2
     #   Options for logging VPN tunnel activity.
     #   @return [Types::VpnTunnelLogOptionsSpecification]
     #
+    # @!attribute [rw] enable_tunnel_lifecycle_control
+    #   Turn on or off tunnel endpoint lifecycle control feature.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnTunnelOptionsSpecification AWS API Documentation
     #
     class VpnTunnelOptionsSpecification < Struct.new(
@@ -64442,7 +64592,8 @@ module Aws::EC2
       :phase_2_dh_group_numbers,
       :ike_versions,
       :startup_action,
-      :log_options)
+      :log_options,
+      :enable_tunnel_lifecycle_control)
       SENSITIVE = []
       include Aws::Structure
     end

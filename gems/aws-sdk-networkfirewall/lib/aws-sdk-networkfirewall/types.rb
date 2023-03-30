@@ -699,6 +699,105 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # @!attribute [rw] tls_inspection_configuration_name
+    #   The descriptive name of the TLS inspection configuration. You can't
+    #   change the name of a TLS inspection configuration after you create
+    #   it.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_inspection_configuration
+    #   The object that defines a TLS inspection configuration. This, along
+    #   with TLSInspectionConfigurationResponse, define the TLS inspection
+    #   configuration. You can retrieve all objects for a TLS inspection
+    #   configuration by calling DescribeTLSInspectionConfiguration.
+    #
+    #   Network Firewall uses a TLS inspection configuration to decrypt
+    #   traffic. Network Firewall re-encrypts the traffic before sending it
+    #   to its destination.
+    #
+    #   To use a TLS inspection configuration, you add it to a Network
+    #   Firewall firewall policy, then you apply the firewall policy to a
+    #   firewall. Network Firewall acts as a proxy service to decrypt and
+    #   inspect inbound traffic. You can reference a TLS inspection
+    #   configuration from more than one firewall policy, and you can use a
+    #   firewall policy in more than one firewall. For more information
+    #   about using TLS inspection configurations, see [Decrypting SSL/TLS
+    #   traffic with TLS inspection configurations][1] in the *Network
+    #   Firewall Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html
+    #   @return [Types::TLSInspectionConfiguration]
+    #
+    # @!attribute [rw] description
+    #   A description of the TLS inspection configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key:value pairs to associate with the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   A complex type that contains optional Amazon Web Services Key
+    #   Management Service (KMS) encryption settings for your Network
+    #   Firewall resources. Your data is encrypted by default with an Amazon
+    #   Web Services owned key that Amazon Web Services owns and manages for
+    #   you. You can use either the Amazon Web Services owned key, or
+    #   provide your own customer managed key. To learn more about KMS
+    #   encryption of your Network Firewall resources, see [Encryption at
+    #   rest with Amazon Web Services Key Managment Service][1] in the
+    #   *Network Firewall Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateTLSInspectionConfigurationRequest AWS API Documentation
+    #
+    class CreateTLSInspectionConfigurationRequest < Struct.new(
+      :tls_inspection_configuration_name,
+      :tls_inspection_configuration,
+      :description,
+      :tags,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update_token
+    #   A token used for optimistic locking. Network Firewall returns a
+    #   token to your requests that access the TLS inspection configuration.
+    #   The token marks the state of the TLS inspection configuration
+    #   resource at the time of the request.
+    #
+    #   To make changes to the TLS inspection configuration, you provide the
+    #   token in your request. Network Firewall uses the token to ensure
+    #   that the TLS inspection configuration hasn't changed since you last
+    #   retrieved it. If it has changed, the operation fails with an
+    #   `InvalidTokenException`. If this happens, retrieve the TLS
+    #   inspection configuration again to get a current copy of it with a
+    #   current token. Reapply your changes as needed, then try the
+    #   operation again using the new token.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_inspection_configuration_response
+    #   The high-level properties of a TLS inspection configuration. This,
+    #   along with the TLSInspectionConfiguration, define the TLS inspection
+    #   configuration. You can retrieve all objects for a TLS inspection
+    #   configuration by calling DescribeTLSInspectionConfiguration.
+    #   @return [Types::TLSInspectionConfigurationResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateTLSInspectionConfigurationResponse AWS API Documentation
+    #
+    class CreateTLSInspectionConfigurationResponse < Struct.new(
+      :update_token,
+      :tls_inspection_configuration_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An optional, non-standard action to use for stateless packet handling.
     # You can define this in addition to the standard action that you must
     # specify.
@@ -883,6 +982,44 @@ module Aws::NetworkFirewall
     #
     class DeleteRuleGroupResponse < Struct.new(
       :rule_group_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tls_inspection_configuration_arn
+    #   The Amazon Resource Name (ARN) of the TLS inspection configuration.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_inspection_configuration_name
+    #   The descriptive name of the TLS inspection configuration. You can't
+    #   change the name of a TLS inspection configuration after you create
+    #   it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteTLSInspectionConfigurationRequest AWS API Documentation
+    #
+    class DeleteTLSInspectionConfigurationRequest < Struct.new(
+      :tls_inspection_configuration_arn,
+      :tls_inspection_configuration_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tls_inspection_configuration_response
+    #   The high-level properties of a TLS inspection configuration. This,
+    #   along with the TLSInspectionConfiguration, define the TLS inspection
+    #   configuration. You can retrieve all objects for a TLS inspection
+    #   configuration by calling DescribeTLSInspectionConfiguration.
+    #   @return [Types::TLSInspectionConfigurationResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteTLSInspectionConfigurationResponse AWS API Documentation
+    #
+    class DeleteTLSInspectionConfigurationResponse < Struct.new(
+      :tls_inspection_configuration_response)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1246,6 +1383,87 @@ module Aws::NetworkFirewall
       :update_token,
       :rule_group,
       :rule_group_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tls_inspection_configuration_arn
+    #   The Amazon Resource Name (ARN) of the TLS inspection configuration.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_inspection_configuration_name
+    #   The descriptive name of the TLS inspection configuration. You can't
+    #   change the name of a TLS inspection configuration after you create
+    #   it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeTLSInspectionConfigurationRequest AWS API Documentation
+    #
+    class DescribeTLSInspectionConfigurationRequest < Struct.new(
+      :tls_inspection_configuration_arn,
+      :tls_inspection_configuration_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update_token
+    #   A token used for optimistic locking. Network Firewall returns a
+    #   token to your requests that access the TLS inspection configuration.
+    #   The token marks the state of the TLS inspection configuration
+    #   resource at the time of the request.
+    #
+    #   To make changes to the TLS inspection configuration, you provide the
+    #   token in your request. Network Firewall uses the token to ensure
+    #   that the TLS inspection configuration hasn't changed since you last
+    #   retrieved it. If it has changed, the operation fails with an
+    #   `InvalidTokenException`. If this happens, retrieve the TLS
+    #   inspection configuration again to get a current copy of it with a
+    #   current token. Reapply your changes as needed, then try the
+    #   operation again using the new token.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_inspection_configuration
+    #   The object that defines a TLS inspection configuration. This, along
+    #   with TLSInspectionConfigurationResponse, define the TLS inspection
+    #   configuration. You can retrieve all objects for a TLS inspection
+    #   configuration by calling DescribeTLSInspectionConfiguration.
+    #
+    #   Network Firewall uses a TLS inspection configuration to decrypt
+    #   traffic. Network Firewall re-encrypts the traffic before sending it
+    #   to its destination.
+    #
+    #   To use a TLS inspection configuration, you add it to a Network
+    #   Firewall firewall policy, then you apply the firewall policy to a
+    #   firewall. Network Firewall acts as a proxy service to decrypt and
+    #   inspect inbound traffic. You can reference a TLS inspection
+    #   configuration from more than one firewall policy, and you can use a
+    #   firewall policy in more than one firewall. For more information
+    #   about using TLS inspection configurations, see [Decrypting SSL/TLS
+    #   traffic with TLS inspection configurations][1] in the *Network
+    #   Firewall Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html
+    #   @return [Types::TLSInspectionConfiguration]
+    #
+    # @!attribute [rw] tls_inspection_configuration_response
+    #   The high-level properties of a TLS inspection configuration. This,
+    #   along with the TLSInspectionConfiguration, define the TLS inspection
+    #   configuration. You can retrieve all objects for a TLS inspection
+    #   configuration by calling DescribeTLSInspectionConfiguration.
+    #   @return [Types::TLSInspectionConfigurationResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeTLSInspectionConfigurationResponse AWS API Documentation
+    #
+    class DescribeTLSInspectionConfigurationResponse < Struct.new(
+      :update_token,
+      :tls_inspection_configuration,
+      :tls_inspection_configuration_response)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1618,6 +1836,10 @@ module Aws::NetworkFirewall
     #   settings.
     #   @return [Types::StatefulEngineOptions]
     #
+    # @!attribute [rw] tls_inspection_configuration_arn
+    #   The Amazon Resource Name (ARN) of the TLS inspection configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FirewallPolicy AWS API Documentation
     #
     class FirewallPolicy < Struct.new(
@@ -1627,7 +1849,8 @@ module Aws::NetworkFirewall
       :stateless_custom_actions,
       :stateful_rule_group_references,
       :stateful_default_actions,
-      :stateful_engine_options)
+      :stateful_engine_options,
+      :tls_inspection_configuration_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1933,23 +2156,24 @@ module Aws::NetworkFirewall
 
     # Configures one or more IP set references for a Suricata-compatible
     # rule group. This is used in CreateRuleGroup or UpdateRuleGroup. An IP
-    # set reference is a rule variable that references a resource that you
+    # set reference is a rule variable that references resources that you
     # create and manage in another Amazon Web Services service, such as an
     # Amazon VPC prefix list. Network Firewall IP set references enable you
     # to dynamically update the contents of your rules. When you create,
-    # update, or delete the IP set you are referencing in your rule, Network
-    # Firewall automatically updates the rule's content with the changes.
-    # For more information about IP set references in Network Firewall, see
-    # [Using IP set references][1] in the *Network Firewall Developer
-    # Guide*.
+    # update, or delete the resource you are referencing in your rule,
+    # Network Firewall automatically updates the rule's content with the
+    # changes. For more information about IP set references in Network
+    # Firewall, see [Using IP set references][1] in the *Network Firewall
+    # Developer Guide*.
     #
-    # Network Firewall currently supports only [Amazon VPC prefix lists][2]
-    # as IP set references.
+    # Network Firewall currently supports [Amazon VPC prefix lists][2] and
+    # [resource groups][3] in IP set references.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-ip-set-references
     # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html
+    # [3]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-ip-set-references.html#rule-groups-referencing-resource-groups
     #
     # @!attribute [rw] reference_arn
     #   The Amazon Resource Name (ARN) of the resource that you are
@@ -2232,6 +2456,53 @@ module Aws::NetworkFirewall
     class ListRuleGroupsResponse < Struct.new(
       :next_token,
       :rule_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Network Firewall returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects that you want Network Firewall to
+    #   return for this request. If more objects are available, in the
+    #   response, Network Firewall provides a `NextToken` value that you can
+    #   use in a subsequent call to get the next batch of objects.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListTLSInspectionConfigurationsRequest AWS API Documentation
+    #
+    class ListTLSInspectionConfigurationsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Network Firewall returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_inspection_configurations
+    #   The TLS inspection configuration metadata objects that you've
+    #   defined. Depending on your setting for max results and the number of
+    #   TLS inspection configurations, this might not be the full list.
+    #   @return [Array<Types::TLSInspectionConfigurationMetadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListTLSInspectionConfigurationsResponse AWS API Documentation
+    #
+    class ListTLSInspectionConfigurationsResponse < Struct.new(
+      :next_token,
+      :tls_inspection_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2970,6 +3241,123 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # Any Certificate Manager Secure Sockets Layer/Transport Layer Security
+    # (SSL/TLS) server certificate that's associated with a
+    # ServerCertificateConfiguration used in a TLSInspectionConfiguration.
+    # You must request or import a SSL/TLS certificate into ACM for each
+    # domain Network Firewall needs to decrypt and inspect. Network Firewall
+    # uses the SSL/TLS certificates to decrypt specified inbound SSL/TLS
+    # traffic going to your firewall. For information about working with
+    # certificates in Certificate Manager, see [Request a public certificate
+    # ][1] or [Importing certificates][2] in the *Certificate Manager User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html
+    # [2]: https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Certificate Manager SSL/TLS
+    #   server certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ServerCertificate AWS API Documentation
+    #
+    class ServerCertificate < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures the associated Certificate Manager Secure Sockets
+    # Layer/Transport Layer Security (SSL/TLS) server certificates and scope
+    # settings Network Firewall uses to decrypt traffic in a
+    # TLSInspectionConfiguration. For information about working with SSL/TLS
+    # certificates for TLS inspection, see [ Requirements for using SSL/TLS
+    # server certficiates with TLS inspection configurations][1] in the
+    # *Network Firewall Developer Guide*.
+    #
+    # <note markdown="1"> If a server certificate that's associated with your
+    # TLSInspectionConfiguration is revoked, deleted, or expired it can
+    # result in client-side TLS errors.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html
+    #
+    # @!attribute [rw] server_certificates
+    #   The list of a server certificate configuration's Certificate
+    #   Manager SSL/TLS certificates.
+    #   @return [Array<Types::ServerCertificate>]
+    #
+    # @!attribute [rw] scopes
+    #   A list of a server certificate configuration's scopes.
+    #   @return [Array<Types::ServerCertificateScope>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ServerCertificateConfiguration AWS API Documentation
+    #
+    class ServerCertificateConfiguration < Struct.new(
+      :server_certificates,
+      :scopes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings that define the Secure Sockets Layer/Transport Layer Security
+    # (SSL/TLS) traffic that Network Firewall should decrypt for inspection
+    # by the stateful rule engine.
+    #
+    # @!attribute [rw] sources
+    #   The source IP addresses and address ranges to decrypt for
+    #   inspection, in CIDR notation. If not specified, this matches with
+    #   any source address.
+    #   @return [Array<Types::Address>]
+    #
+    # @!attribute [rw] destinations
+    #   The destination IP addresses and address ranges to decrypt for
+    #   inspection, in CIDR notation. If not specified, this matches with
+    #   any destination address.
+    #   @return [Array<Types::Address>]
+    #
+    # @!attribute [rw] source_ports
+    #   The source ports to decrypt for inspection, in Transmission Control
+    #   Protocol (TCP) format. If not specified, this matches with any
+    #   source port.
+    #
+    #   You can specify individual ports, for example `1994`, and you can
+    #   specify port ranges, such as `1990:1994`.
+    #   @return [Array<Types::PortRange>]
+    #
+    # @!attribute [rw] destination_ports
+    #   The destination ports to decrypt for inspection, in Transmission
+    #   Control Protocol (TCP) format. If not specified, this matches with
+    #   any destination port.
+    #
+    #   You can specify individual ports, for example `1994`, and you can
+    #   specify port ranges, such as `1990:1994`.
+    #   @return [Array<Types::PortRange>]
+    #
+    # @!attribute [rw] protocols
+    #   The protocols to decrypt for inspection, specified using each
+    #   protocol's assigned internet protocol number (IANA). Network
+    #   Firewall currently supports only TCP.
+    #   @return [Array<Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ServerCertificateScope AWS API Documentation
+    #
+    class ServerCertificateScope < Struct.new(
+      :sources,
+      :destinations,
+      :source_ports,
+      :destination_ports,
+      :protocols)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # High-level information about the managed rule group that your own rule
     # group is copied from. You can use the the metadata to track version
     # updates made to the originating rule group. You can retrieve all
@@ -3375,6 +3763,138 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # The object that defines a TLS inspection configuration. This, along
+    # with TLSInspectionConfigurationResponse, define the TLS inspection
+    # configuration. You can retrieve all objects for a TLS inspection
+    # configuration by calling DescribeTLSInspectionConfiguration.
+    #
+    # Network Firewall uses a TLS inspection configuration to decrypt
+    # traffic. Network Firewall re-encrypts the traffic before sending it to
+    # its destination.
+    #
+    # To use a TLS inspection configuration, you add it to a Network
+    # Firewall firewall policy, then you apply the firewall policy to a
+    # firewall. Network Firewall acts as a proxy service to decrypt and
+    # inspect inbound traffic. You can reference a TLS inspection
+    # configuration from more than one firewall policy, and you can use a
+    # firewall policy in more than one firewall. For more information about
+    # using TLS inspection configurations, see [Decrypting SSL/TLS traffic
+    # with TLS inspection configurations][1] in the *Network Firewall
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html
+    #
+    # @!attribute [rw] server_certificate_configurations
+    #   Lists the server certificate configurations that are associated with
+    #   the TLS configuration.
+    #   @return [Array<Types::ServerCertificateConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/TLSInspectionConfiguration AWS API Documentation
+    #
+    class TLSInspectionConfiguration < Struct.new(
+      :server_certificate_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # High-level information about a TLS inspection configuration, returned
+    # by `ListTLSInspectionConfigurations`. You can use the information
+    # provided in the metadata to retrieve and manage a TLS configuration.
+    #
+    # @!attribute [rw] name
+    #   The descriptive name of the TLS inspection configuration. You can't
+    #   change the name of a TLS inspection configuration after you create
+    #   it.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the TLS inspection configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/TLSInspectionConfigurationMetadata AWS API Documentation
+    #
+    class TLSInspectionConfigurationMetadata < Struct.new(
+      :name,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The high-level properties of a TLS inspection configuration. This,
+    # along with the `TLSInspectionConfiguration`, define the TLS inspection
+    # configuration. You can retrieve all objects for a TLS inspection
+    # configuration by calling `DescribeTLSInspectionConfiguration`.
+    #
+    # @!attribute [rw] tls_inspection_configuration_arn
+    #   The Amazon Resource Name (ARN) of the TLS inspection configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_inspection_configuration_name
+    #   The descriptive name of the TLS inspection configuration. You can't
+    #   change the name of a TLS inspection configuration after you create
+    #   it.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_inspection_configuration_id
+    #   A unique identifier for the TLS inspection configuration. This ID is
+    #   returned in the responses to create and list commands. You provide
+    #   it to operations such as update and delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_inspection_configuration_status
+    #   Detailed information about the current status of a
+    #   TLSInspectionConfiguration. You can retrieve this for a TLS
+    #   inspection configuration by calling
+    #   DescribeTLSInspectionConfiguration and providing the TLS inspection
+    #   configuration name and ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the TLS inspection configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key:value pairs to associate with the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The last time that the TLS inspection configuration was changed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] number_of_associations
+    #   The number of firewall policies that use this TLS inspection
+    #   configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   A complex type that contains the Amazon Web Services KMS encryption
+    #   configuration settings for your TLS inspection configuration.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @!attribute [rw] certificates
+    #   A list of the certificates associated with the TLS inspection
+    #   configuration.
+    #   @return [Array<Types::TlsCertificateData>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/TLSInspectionConfigurationResponse AWS API Documentation
+    #
+    class TLSInspectionConfigurationResponse < Struct.new(
+      :tls_inspection_configuration_arn,
+      :tls_inspection_configuration_name,
+      :tls_inspection_configuration_id,
+      :tls_inspection_configuration_status,
+      :description,
+      :tags,
+      :last_modified_time,
+      :number_of_associations,
+      :encryption_configuration,
+      :certificates)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A key:value pair associated with an Amazon Web Services resource. The
     # key:value pair can be anything you define. Typically, the tag key
     # represents a category (such as "environment") and the tag value
@@ -3432,6 +3952,36 @@ module Aws::NetworkFirewall
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata about an Certificate Manager certificate.
+    #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_serial
+    #   The serial number of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Contains details about the certificate status, including information
+    #   about certificate errors.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/TlsCertificateData AWS API Documentation
+    #
+    class TlsCertificateData < Struct.new(
+      :certificate_arn,
+      :certificate_serial,
+      :status,
+      :status_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4261,6 +4811,111 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :firewall_name,
       :subnet_change_protection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tls_inspection_configuration_arn
+    #   The Amazon Resource Name (ARN) of the TLS inspection configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_inspection_configuration_name
+    #   The descriptive name of the TLS inspection configuration. You can't
+    #   change the name of a TLS inspection configuration after you create
+    #   it.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_inspection_configuration
+    #   The object that defines a TLS inspection configuration. This, along
+    #   with TLSInspectionConfigurationResponse, define the TLS inspection
+    #   configuration. You can retrieve all objects for a TLS inspection
+    #   configuration by calling DescribeTLSInspectionConfiguration.
+    #
+    #   Network Firewall uses a TLS inspection configuration to decrypt
+    #   traffic. Network Firewall re-encrypts the traffic before sending it
+    #   to its destination.
+    #
+    #   To use a TLS inspection configuration, you add it to a Network
+    #   Firewall firewall policy, then you apply the firewall policy to a
+    #   firewall. Network Firewall acts as a proxy service to decrypt and
+    #   inspect inbound traffic. You can reference a TLS inspection
+    #   configuration from more than one firewall policy, and you can use a
+    #   firewall policy in more than one firewall. For more information
+    #   about using TLS inspection configurations, see [Decrypting SSL/TLS
+    #   traffic with TLS inspection configurations][1] in the *Network
+    #   Firewall Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html
+    #   @return [Types::TLSInspectionConfiguration]
+    #
+    # @!attribute [rw] description
+    #   A description of the TLS inspection configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   A complex type that contains the Amazon Web Services KMS encryption
+    #   configuration settings for your TLS inspection configuration.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @!attribute [rw] update_token
+    #   A token used for optimistic locking. Network Firewall returns a
+    #   token to your requests that access the TLS inspection configuration.
+    #   The token marks the state of the TLS inspection configuration
+    #   resource at the time of the request.
+    #
+    #   To make changes to the TLS inspection configuration, you provide the
+    #   token in your request. Network Firewall uses the token to ensure
+    #   that the TLS inspection configuration hasn't changed since you last
+    #   retrieved it. If it has changed, the operation fails with an
+    #   `InvalidTokenException`. If this happens, retrieve the TLS
+    #   inspection configuration again to get a current copy of it with a
+    #   current token. Reapply your changes as needed, then try the
+    #   operation again using the new token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateTLSInspectionConfigurationRequest AWS API Documentation
+    #
+    class UpdateTLSInspectionConfigurationRequest < Struct.new(
+      :tls_inspection_configuration_arn,
+      :tls_inspection_configuration_name,
+      :tls_inspection_configuration,
+      :description,
+      :encryption_configuration,
+      :update_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update_token
+    #   A token used for optimistic locking. Network Firewall returns a
+    #   token to your requests that access the TLS inspection configuration.
+    #   The token marks the state of the TLS inspection configuration
+    #   resource at the time of the request.
+    #
+    #   To make changes to the TLS inspection configuration, you provide the
+    #   token in your request. Network Firewall uses the token to ensure
+    #   that the TLS inspection configuration hasn't changed since you last
+    #   retrieved it. If it has changed, the operation fails with an
+    #   `InvalidTokenException`. If this happens, retrieve the TLS
+    #   inspection configuration again to get a current copy of it with a
+    #   current token. Reapply your changes as needed, then try the
+    #   operation again using the new token.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_inspection_configuration_response
+    #   The high-level properties of a TLS inspection configuration. This,
+    #   along with the TLSInspectionConfiguration, define the TLS inspection
+    #   configuration. You can retrieve all objects for a TLS inspection
+    #   configuration by calling DescribeTLSInspectionConfiguration.
+    #   @return [Types::TLSInspectionConfigurationResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateTLSInspectionConfigurationResponse AWS API Documentation
+    #
+    class UpdateTLSInspectionConfigurationResponse < Struct.new(
+      :update_token,
+      :tls_inspection_configuration_response)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1328,7 +1328,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   volume = ec2.create_volume({
-    #     availability_zone: "String", # required
+    #     availability_zone: "AvailabilityZoneName", # required
     #     encrypted: false,
     #     iops: 1,
     #     kms_key_id: "KmsKeyId",
