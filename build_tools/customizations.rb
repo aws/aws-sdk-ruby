@@ -226,7 +226,6 @@ module BuildTools
     end
 
     smoke('SMS') do |smoke|
-      puts "Customizing SMS smoke tests: #{smoke}"
       smoke['testCases'] = []
     end
   end
