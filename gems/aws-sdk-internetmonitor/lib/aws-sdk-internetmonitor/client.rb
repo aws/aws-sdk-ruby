@@ -370,14 +370,26 @@ module Aws::InternetMonitor
 
     # Creates a monitor in Amazon CloudWatch Internet Monitor. A monitor is
     # built based on information from the application resources that you
-    # add: Virtual Private Clouds (VPCs), Amazon CloudFront distributions,
-    # and WorkSpaces directories.
+    # add: Amazon Virtual Private Clouds (VPCs), Amazon CloudFront
+    # distributions, and WorkSpaces directories. Internet Monitor then
+    # publishes internet measurements from Amazon Web Services that are
+    # specific to the *city-networks*, that is, the locations and ASNs
+    # (typically internet service providers or ISPs), where clients access
+    # your application. For more information, see [Using Amazon CloudWatch
+    # Internet Monitor][1] in the *Amazon CloudWatch User Guide*.
     #
-    # After you create a monitor, you can view the internet performance for
-    # your application, scoped to a location, as well as any health events
-    # that are impairing traffic. Internet Monitor can also diagnose whether
-    # the impairment is on the Amazon Web Services network or is an issue
-    # with an internet service provider (ISP).
+    # When you create a monitor, you set a maximum limit for the number of
+    # city-networks where client traffic is monitored. The city-network
+    # maximum that you choose is the limit, but you only pay for the number
+    # of city-networks that are actually monitored. You can change the
+    # maximum at any time by updating your monitor. For more information,
+    # see [Choosing a city-network maximum value][2] in the *Amazon
+    # CloudWatch User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-InternetMonitor.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html
     #
     # @option params [required, String] :monitor_name
     #   The name of the monitor.
@@ -409,9 +421,24 @@ module Aws::InternetMonitor
     #   Monitor.
     #
     # @option params [required, Integer] :max_city_networks_to_monitor
-    #   The maximum number of city-network combinations (that is, combinations
-    #   of a city location and network, such as an ISP) to be monitored for
-    #   your resources.
+    #   The maximum number of city-networks to monitor for your resources. A
+    #   city-network is the location (city) where clients access your
+    #   application resources from and the network or ASN, such as an internet
+    #   service provider (ISP), that clients access the resources through.
+    #   This limit helps control billing costs.
+    #
+    #   To learn more, see [Choosing a city-network maximum value ][1] in the
+    #   Amazon CloudWatch Internet Monitor section of the *CloudWatch User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html
+    #
+    # @option params [Types::InternetMeasurementsLogDelivery] :internet_measurements_log_delivery
+    #   Publish internet measurements for Internet Monitor to another
+    #   location, such as an Amazon S3 bucket. The measurements are also
+    #   published to Amazon CloudWatch Logs.
     #
     # @return [Types::CreateMonitorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -428,6 +455,13 @@ module Aws::InternetMonitor
     #       "TagKey" => "TagValue",
     #     },
     #     max_city_networks_to_monitor: 1, # required
+    #     internet_measurements_log_delivery: {
+    #       s3_config: {
+    #         bucket_name: "S3ConfigBucketNameString",
+    #         bucket_prefix: "String",
+    #         log_delivery_status: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -576,6 +610,7 @@ module Aws::InternetMonitor
     #   * {Types::GetMonitorOutput#processing_status_info #processing_status_info} => String
     #   * {Types::GetMonitorOutput#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetMonitorOutput#max_city_networks_to_monitor #max_city_networks_to_monitor} => Integer
+    #   * {Types::GetMonitorOutput#internet_measurements_log_delivery #internet_measurements_log_delivery} => Types::InternetMeasurementsLogDelivery
     #
     # @example Request syntax with placeholder values
     #
@@ -597,6 +632,9 @@ module Aws::InternetMonitor
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.max_city_networks_to_monitor #=> Integer
+    #   resp.internet_measurements_log_delivery.s3_config.bucket_name #=> String
+    #   resp.internet_measurements_log_delivery.s3_config.bucket_prefix #=> String
+    #   resp.internet_measurements_log_delivery.s3_config.log_delivery_status #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetMonitor AWS API Documentation
     #
@@ -854,9 +892,19 @@ module Aws::InternetMonitor
       req.send_request(options)
     end
 
-    # Updates a monitor. You can update a monitor to add or remove
-    # resources, or to change the status of the monitor. You can't change
-    # the name of a monitor.
+    # Updates a monitor. You can update a monitor to change the maximum
+    # number of city-networks (locations and ASNs or internet service
+    # providers), to add or remove resources, or to change the status of the
+    # monitor. Note that you can't change the name of a monitor.
+    #
+    # The city-network maximum that you choose is the limit, but you only
+    # pay for the number of city-networks that are actually monitored. For
+    # more information, see [Choosing a city-network maximum value][1] in
+    # the *Amazon CloudWatch User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html
     #
     # @option params [required, String] :monitor_name
     #   The name of the monitor.
@@ -893,9 +941,15 @@ module Aws::InternetMonitor
     #   not need to pass this option.**
     #
     # @option params [Integer] :max_city_networks_to_monitor
-    #   The maximum number of city-network combinations (that is, combinations
-    #   of a city location and network, such as an ISP) to be monitored for
-    #   your resources.
+    #   The maximum number of city-networks to monitor for your resources. A
+    #   city-network is the location (city) where clients access your
+    #   application resources from and the network or ASN, such as an internet
+    #   service provider, that clients access the resources through.
+    #
+    # @option params [Types::InternetMeasurementsLogDelivery] :internet_measurements_log_delivery
+    #   Publish internet measurements for Internet Monitor to another
+    #   location, such as an Amazon S3 bucket. The measurements are also
+    #   published to Amazon CloudWatch Logs.
     #
     # @return [Types::UpdateMonitorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -911,6 +965,13 @@ module Aws::InternetMonitor
     #     status: "PENDING", # accepts PENDING, ACTIVE, INACTIVE, ERROR
     #     client_token: "String",
     #     max_city_networks_to_monitor: 1,
+    #     internet_measurements_log_delivery: {
+    #       s3_config: {
+    #         bucket_name: "S3ConfigBucketNameString",
+    #         bucket_prefix: "String",
+    #         log_delivery_status: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -940,7 +1001,7 @@ module Aws::InternetMonitor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-internetmonitor'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

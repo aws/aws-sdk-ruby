@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2023-03-31)
+------------------
+
+* Feature - Deprecating AWS Server Migration Service.
+
 1.42.0 (2023-01-18)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.120.0 (2023-03-31)
+------------------
+
+* Feature - Documentation updates for Amazon S3
+
 1.119.2 (2023-03-22)
 ------------------
 

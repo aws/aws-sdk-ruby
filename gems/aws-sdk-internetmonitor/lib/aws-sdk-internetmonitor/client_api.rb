@@ -37,6 +37,7 @@ module Aws::InternetMonitor
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InternetHealth = Shapes::StructureShape.new(name: 'InternetHealth')
+    InternetMeasurementsLogDelivery = Shapes::StructureShape.new(name: 'InternetMeasurementsLogDelivery')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListHealthEventsInput = Shapes::StructureShape.new(name: 'ListHealthEventsInput')
     ListHealthEventsOutput = Shapes::StructureShape.new(name: 'ListHealthEventsOutput')
@@ -44,6 +45,7 @@ module Aws::InternetMonitor
     ListMonitorsOutput = Shapes::StructureShape.new(name: 'ListMonitorsOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
+    LogDeliveryStatus = Shapes::StringShape.new(name: 'LogDeliveryStatus')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaxCityNetworksToMonitor = Shapes::IntegerShape.new(name: 'MaxCityNetworksToMonitor')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -60,6 +62,8 @@ module Aws::InternetMonitor
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoundTripTime = Shapes::StructureShape.new(name: 'RoundTripTime')
+    S3Config = Shapes::StructureShape.new(name: 'S3Config')
+    S3ConfigBucketNameString = Shapes::StringShape.new(name: 'S3ConfigBucketNameString')
     SetOfARNs = Shapes::ListShape.new(name: 'SetOfARNs')
     String = Shapes::StringShape.new(name: 'String')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
@@ -97,6 +101,7 @@ module Aws::InternetMonitor
     CreateMonitorInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateMonitorInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateMonitorInput.add_member(:max_city_networks_to_monitor, Shapes::ShapeRef.new(shape: MaxCityNetworksToMonitor, required: true, location_name: "MaxCityNetworksToMonitor"))
+    CreateMonitorInput.add_member(:internet_measurements_log_delivery, Shapes::ShapeRef.new(shape: InternetMeasurementsLogDelivery, location_name: "InternetMeasurementsLogDelivery"))
     CreateMonitorInput.struct_class = Types::CreateMonitorInput
 
     CreateMonitorOutput.add_member(:arn, Shapes::ShapeRef.new(shape: MonitorArn, required: true, location_name: "Arn"))
@@ -137,6 +142,7 @@ module Aws::InternetMonitor
     GetMonitorOutput.add_member(:processing_status_info, Shapes::ShapeRef.new(shape: String, location_name: "ProcessingStatusInfo"))
     GetMonitorOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     GetMonitorOutput.add_member(:max_city_networks_to_monitor, Shapes::ShapeRef.new(shape: MaxCityNetworksToMonitor, required: true, location_name: "MaxCityNetworksToMonitor"))
+    GetMonitorOutput.add_member(:internet_measurements_log_delivery, Shapes::ShapeRef.new(shape: InternetMeasurementsLogDelivery, location_name: "InternetMeasurementsLogDelivery"))
     GetMonitorOutput.struct_class = Types::GetMonitorOutput
 
     HealthEvent.add_member(:event_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "EventArn"))
@@ -180,6 +186,9 @@ module Aws::InternetMonitor
     InternetHealth.add_member(:availability, Shapes::ShapeRef.new(shape: AvailabilityMeasurement, location_name: "Availability"))
     InternetHealth.add_member(:performance, Shapes::ShapeRef.new(shape: PerformanceMeasurement, location_name: "Performance"))
     InternetHealth.struct_class = Types::InternetHealth
+
+    InternetMeasurementsLogDelivery.add_member(:s3_config, Shapes::ShapeRef.new(shape: S3Config, location_name: "S3Config"))
+    InternetMeasurementsLogDelivery.struct_class = Types::InternetMeasurementsLogDelivery
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     LimitExceededException.struct_class = Types::LimitExceededException
@@ -247,6 +256,11 @@ module Aws::InternetMonitor
     RoundTripTime.add_member(:p95, Shapes::ShapeRef.new(shape: Double, location_name: "P95"))
     RoundTripTime.struct_class = Types::RoundTripTime
 
+    S3Config.add_member(:bucket_name, Shapes::ShapeRef.new(shape: S3ConfigBucketNameString, location_name: "BucketName"))
+    S3Config.add_member(:bucket_prefix, Shapes::ShapeRef.new(shape: String, location_name: "BucketPrefix"))
+    S3Config.add_member(:log_delivery_status, Shapes::ShapeRef.new(shape: LogDeliveryStatus, location_name: "LogDeliveryStatus"))
+    S3Config.struct_class = Types::S3Config
+
     SetOfARNs.member = Shapes::ShapeRef.new(shape: Arn)
 
     TagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
@@ -278,6 +292,7 @@ module Aws::InternetMonitor
     UpdateMonitorInput.add_member(:status, Shapes::ShapeRef.new(shape: MonitorConfigState, location_name: "Status"))
     UpdateMonitorInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     UpdateMonitorInput.add_member(:max_city_networks_to_monitor, Shapes::ShapeRef.new(shape: MaxCityNetworksToMonitor, location_name: "MaxCityNetworksToMonitor"))
+    UpdateMonitorInput.add_member(:internet_measurements_log_delivery, Shapes::ShapeRef.new(shape: InternetMeasurementsLogDelivery, location_name: "InternetMeasurementsLogDelivery"))
     UpdateMonitorInput.struct_class = Types::UpdateMonitorInput
 
     UpdateMonitorOutput.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: MonitorArn, required: true, location_name: "MonitorArn"))

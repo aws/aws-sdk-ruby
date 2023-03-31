@@ -23,6 +23,7 @@ module Aws::SageMakerFeatureStoreRuntime
     BatchGetRecordResultDetail = Shapes::StructureShape.new(name: 'BatchGetRecordResultDetail')
     BatchGetRecordResultDetails = Shapes::ListShape.new(name: 'BatchGetRecordResultDetails')
     DeleteRecordRequest = Shapes::StructureShape.new(name: 'DeleteRecordRequest')
+    DeletionMode = Shapes::StringShape.new(name: 'DeletionMode')
     FeatureGroupName = Shapes::StringShape.new(name: 'FeatureGroupName')
     FeatureName = Shapes::StringShape.new(name: 'FeatureName')
     FeatureNames = Shapes::ListShape.new(name: 'FeatureNames')
@@ -79,6 +80,7 @@ module Aws::SageMakerFeatureStoreRuntime
     DeleteRecordRequest.add_member(:record_identifier_value_as_string, Shapes::ShapeRef.new(shape: ValueAsString, required: true, location: "querystring", location_name: "RecordIdentifierValueAsString"))
     DeleteRecordRequest.add_member(:event_time, Shapes::ShapeRef.new(shape: ValueAsString, required: true, location: "querystring", location_name: "EventTime"))
     DeleteRecordRequest.add_member(:target_stores, Shapes::ShapeRef.new(shape: TargetStores, location: "querystring", location_name: "TargetStores"))
+    DeleteRecordRequest.add_member(:deletion_mode, Shapes::ShapeRef.new(shape: DeletionMode, location: "querystring", location_name: "DeletionMode"))
     DeleteRecordRequest.struct_class = Types::DeleteRecordRequest
 
     FeatureNames.member = Shapes::ShapeRef.new(shape: FeatureName)

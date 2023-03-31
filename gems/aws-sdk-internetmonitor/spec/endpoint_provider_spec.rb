@@ -139,5 +139,18 @@ module Aws::InternetMonitor
       end
     end
 
+    context 'Missing region' do
+      let(:expected) do
+        {"error"=>"Invalid Configuration: Missing Region"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
   end
 end

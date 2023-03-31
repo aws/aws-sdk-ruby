@@ -37,7 +37,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #   @return [String]
     #
     # @!attribute [rw] error_code
-    #   The error code of an error that has occured when attempting to
+    #   The error code of an error that has occurred when attempting to
     #   retrieve a batch of Records. For more information on errors, see
     #   [Errors][1].
     #
@@ -47,7 +47,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   The error message of an error that has occured when attempting to
+    #   The error message of an error that has occurred when attempting to
     #   retrieve a record in the batch.
     #   @return [String]
     #
@@ -134,7 +134,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #   @return [String]
     #
     # @!attribute [rw] record_identifier_value_as_string
-    #   The value of the record identifer in string format.
+    #   The value of the record identifier in string format.
     #   @return [String]
     #
     # @!attribute [rw] record
@@ -171,13 +171,19 @@ module Aws::SageMakerFeatureStoreRuntime
     #   using for the `FeatureGroup`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] deletion_mode
+    #   The name of the deletion mode for deleting the record. By default,
+    #   the deletion mode is set to `SoftDelete`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/DeleteRecordRequest AWS API Documentation
     #
     class DeleteRecordRequest < Struct.new(
       :feature_group_name,
       :record_identifier_value_as_string,
       :event_time,
-      :target_stores)
+      :target_stores,
+      :deletion_mode)
       SENSITIVE = []
       include Aws::Structure
     end

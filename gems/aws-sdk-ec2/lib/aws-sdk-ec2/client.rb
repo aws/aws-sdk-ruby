@@ -39867,7 +39867,9 @@ module Aws::EC2
     # added.
     #
     # @option params [required, String] :capacity_reservation_id
-    #   The ID of the Capacity Reservation.
+    #   The ID of the Capacity Reservation. If you specify a Capacity
+    #   Reservation that is shared with you, the operation returns only
+    #   Capacity Reservation groups that you own.
     #
     # @option params [String] :next_token
     #   The token to use to retrieve the next page of results.
@@ -53807,6 +53809,17 @@ module Aws::EC2
     #   You cannot specify accelerators from different generations in the same
     #   request.
     #
+    #   <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
+    #   customers to Amazon Elastic Inference (EI), and will help current
+    #   customers migrate their workloads to options that offer better price
+    #   and performance. After April 15, 2023, new customers will not be able
+    #   to launch instances with Amazon EI accelerators in Amazon SageMaker,
+    #   Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI
+    #   at least once during the past 30-day period are considered current
+    #   customers and will be able to continue using the service.
+    #
+    #    </note>
+    #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the resources that are created during instance
     #   launch.
@@ -56818,7 +56831,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.372.0'
+      context[:gem_version] = '1.373.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2023-03-31)
+------------------
+
+* Feature - Adding EKS related documentation for appTemplateBody
+
 1.11.0 (2023-03-22)
 ------------------
 

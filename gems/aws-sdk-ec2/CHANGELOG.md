@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.373.0 (2023-03-31)
+------------------
+
+* Feature - Documentation updates for EC2 On Demand Capacity Reservations
+
 1.372.0 (2023-03-30)
 ------------------
 
