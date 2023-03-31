@@ -6,6 +6,7 @@ module BuildTools
     @api_customizations = {}
     @doc_customizations = {}
     @example_customizations = {}
+    @smoke_customizations = {}
 
     class << self
 
@@ -21,6 +22,10 @@ module BuildTools
         @example_customizations[svc_name] = block
       end
 
+      def smoke(svc_name, &block)
+        @smoke_customizations[svc_name] = block
+      end
+
       def apply_api_customizations(svc_name, api)
         @api_customizations[svc_name].call(api) if @api_customizations[svc_name]
       end
@@ -31,6 +36,10 @@ module BuildTools
 
       def apply_example_customizations(svc_name, examples)
         @example_customizations[svc_name].call(examples) if @example_customizations[svc_name]
+      end
+
+      def apply_smoke_customizations(svc_name, smoke)
+        @smoke_customizations[svc_name].call(smoke) if @smoke_customizations[svc_name]
       end
 
       private
@@ -214,6 +223,11 @@ module BuildTools
       operations.each do |operation|
         api['operations'][operation]['authtype'] = 'none'
       end
+    end
+
+    smoke('SMS') do |smoke|
+      puts "Customizing SMS smoke tests: #{smoke}"
+      smoke['testCases'] = []
     end
   end
 end
