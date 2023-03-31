@@ -1,9 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.119.3 (2023-03-30)
-------------------
-
 * Issue - Skip `#check_for_cached_region` if custom endpoint provided
 
 1.119.2 (2023-03-22)

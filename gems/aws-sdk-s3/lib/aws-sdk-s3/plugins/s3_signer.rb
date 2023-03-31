@@ -55,7 +55,7 @@ module Aws
 
             if cached_region &&
                cached_region != context.config.region &&
-               context[:endpoint_params].endpoint.nil?
+               context.config.regional_endpoint
               context.http_request.endpoint.host = S3Signer.new_hostname(
                 context, cached_region
               )
