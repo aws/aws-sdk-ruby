@@ -13915,7 +13915,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_volume({
-    #     availability_zone: "String", # required
+    #     availability_zone: "AvailabilityZoneName", # required
     #     encrypted: false,
     #     iops: 1,
     #     kms_key_id: "KmsKeyId",
@@ -14783,6 +14783,7 @@ module Aws::EC2
     #               log_output_format: "String",
     #             },
     #           },
+    #           enable_tunnel_lifecycle_control: false,
     #         },
     #       ],
     #       local_ipv_4_network_cidr: "String",
@@ -14857,6 +14858,7 @@ module Aws::EC2
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_enabled #=> Boolean
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_group_arn #=> String
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_output_format #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].enable_tunnel_lifecycle_control #=> Boolean
     #   resp.vpn_connection.routes #=> Array
     #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
     #   resp.vpn_connection.routes[0].source #=> String, one of "Static"
@@ -36394,6 +36396,7 @@ module Aws::EC2
     #   resp.vpn_connections[0].options.tunnel_options[0].log_options.cloud_watch_log_options.log_enabled #=> Boolean
     #   resp.vpn_connections[0].options.tunnel_options[0].log_options.cloud_watch_log_options.log_group_arn #=> String
     #   resp.vpn_connections[0].options.tunnel_options[0].log_options.cloud_watch_log_options.log_output_format #=> String
+    #   resp.vpn_connections[0].options.tunnel_options[0].enable_tunnel_lifecycle_control #=> Boolean
     #   resp.vpn_connections[0].routes #=> Array
     #   resp.vpn_connections[0].routes[0].destination_cidr_block #=> String
     #   resp.vpn_connections[0].routes[0].source #=> String, one of "Static"
@@ -39864,7 +39867,9 @@ module Aws::EC2
     # added.
     #
     # @option params [required, String] :capacity_reservation_id
-    #   The ID of the Capacity Reservation.
+    #   The ID of the Capacity Reservation. If you specify a Capacity
+    #   Reservation that is shared with you, the operation returns only
+    #   Capacity Reservation groups that you own.
     #
     # @option params [String] :next_token
     #   The token to use to retrieve the next page of results.
@@ -42627,6 +42632,57 @@ module Aws::EC2
     # @param [Hash] params ({})
     def get_vpn_connection_device_types(params = {}, options = {})
       req = build_request(:get_vpn_connection_device_types, params)
+      req.send_request(options)
+    end
+
+    # Get details of available tunnel endpoint maintenance.
+    #
+    # @option params [required, String] :vpn_connection_id
+    #   The ID of the Site-to-Site VPN connection.
+    #
+    # @option params [required, String] :vpn_tunnel_outside_ip_address
+    #   The external IP address of the VPN tunnel.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetVpnTunnelReplacementStatusResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVpnTunnelReplacementStatusResult#vpn_connection_id #vpn_connection_id} => String
+    #   * {Types::GetVpnTunnelReplacementStatusResult#transit_gateway_id #transit_gateway_id} => String
+    #   * {Types::GetVpnTunnelReplacementStatusResult#customer_gateway_id #customer_gateway_id} => String
+    #   * {Types::GetVpnTunnelReplacementStatusResult#vpn_gateway_id #vpn_gateway_id} => String
+    #   * {Types::GetVpnTunnelReplacementStatusResult#vpn_tunnel_outside_ip_address #vpn_tunnel_outside_ip_address} => String
+    #   * {Types::GetVpnTunnelReplacementStatusResult#maintenance_details #maintenance_details} => Types::MaintenanceDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_vpn_tunnel_replacement_status({
+    #     vpn_connection_id: "VpnConnectionId", # required
+    #     vpn_tunnel_outside_ip_address: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpn_connection_id #=> String
+    #   resp.transit_gateway_id #=> String
+    #   resp.customer_gateway_id #=> String
+    #   resp.vpn_gateway_id #=> String
+    #   resp.vpn_tunnel_outside_ip_address #=> String
+    #   resp.maintenance_details.pending_maintenance #=> String
+    #   resp.maintenance_details.maintenance_auto_applied_after #=> Time
+    #   resp.maintenance_details.last_maintenance_applied #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetVpnTunnelReplacementStatus AWS API Documentation
+    #
+    # @overload get_vpn_tunnel_replacement_status(params = {})
+    # @param [Hash] params ({})
+    def get_vpn_tunnel_replacement_status(params = {}, options = {})
+      req = build_request(:get_vpn_tunnel_replacement_status, params)
       req.send_request(options)
     end
 
@@ -48858,6 +48914,7 @@ module Aws::EC2
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_enabled #=> Boolean
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_group_arn #=> String
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_output_format #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].enable_tunnel_lifecycle_control #=> Boolean
     #   resp.vpn_connection.routes #=> Array
     #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
     #   resp.vpn_connection.routes[0].source #=> String, one of "Static"
@@ -48987,6 +49044,7 @@ module Aws::EC2
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_enabled #=> Boolean
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_group_arn #=> String
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_output_format #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].enable_tunnel_lifecycle_control #=> Boolean
     #   resp.vpn_connection.routes #=> Array
     #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
     #   resp.vpn_connection.routes[0].source #=> String, one of "Static"
@@ -49089,6 +49147,7 @@ module Aws::EC2
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_enabled #=> Boolean
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_group_arn #=> String
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_output_format #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].enable_tunnel_lifecycle_control #=> Boolean
     #   resp.vpn_connection.routes #=> Array
     #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
     #   resp.vpn_connection.routes[0].source #=> String, one of "Static"
@@ -49138,6 +49197,11 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Boolean] :skip_tunnel_replacement
+    #   Choose whether or not to trigger immediate tunnel replacement.
+    #
+    #   Valid values: `True` \| `False`
     #
     # @return [Types::ModifyVpnTunnelOptionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -49202,8 +49266,10 @@ module Aws::EC2
     #           log_output_format: "String",
     #         },
     #       },
+    #       enable_tunnel_lifecycle_control: false,
     #     },
     #     dry_run: false,
+    #     skip_tunnel_replacement: false,
     #   })
     #
     # @example Response structure
@@ -49258,6 +49324,7 @@ module Aws::EC2
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_enabled #=> Boolean
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_group_arn #=> String
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.log_output_format #=> String
+    #   resp.vpn_connection.options.tunnel_options[0].enable_tunnel_lifecycle_control #=> Boolean
     #   resp.vpn_connection.routes #=> Array
     #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
     #   resp.vpn_connection.routes[0].source #=> String, one of "Static"
@@ -51390,6 +51457,49 @@ module Aws::EC2
     # @param [Hash] params ({})
     def replace_transit_gateway_route(params = {}, options = {})
       req = build_request(:replace_transit_gateway_route, params)
+      req.send_request(options)
+    end
+
+    # Trigger replacement of specified VPN tunnel.
+    #
+    # @option params [required, String] :vpn_connection_id
+    #   The ID of the Site-to-Site VPN connection.
+    #
+    # @option params [required, String] :vpn_tunnel_outside_ip_address
+    #   The external IP address of the VPN tunnel.
+    #
+    # @option params [Boolean] :apply_pending_maintenance
+    #   Trigger pending tunnel endpoint maintenance.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ReplaceVpnTunnelResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ReplaceVpnTunnelResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.replace_vpn_tunnel({
+    #     vpn_connection_id: "VpnConnectionId", # required
+    #     vpn_tunnel_outside_ip_address: "String", # required
+    #     apply_pending_maintenance: false,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceVpnTunnel AWS API Documentation
+    #
+    # @overload replace_vpn_tunnel(params = {})
+    # @param [Hash] params ({})
+    def replace_vpn_tunnel(params = {}, options = {})
+      req = build_request(:replace_vpn_tunnel, params)
       req.send_request(options)
     end
 
@@ -53698,6 +53808,17 @@ module Aws::EC2
     #
     #   You cannot specify accelerators from different generations in the same
     #   request.
+    #
+    #   <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
+    #   customers to Amazon Elastic Inference (EI), and will help current
+    #   customers migrate their workloads to options that offer better price
+    #   and performance. After April 15, 2023, new customers will not be able
+    #   to launch instances with Amazon EI accelerators in Amazon SageMaker,
+    #   Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI
+    #   at least once during the past 30-day period are considered current
+    #   customers and will be able to continue using the service.
+    #
+    #    </note>
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the resources that are created during instance
@@ -56710,7 +56831,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.371.0'
+      context[:gem_version] = '1.373.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

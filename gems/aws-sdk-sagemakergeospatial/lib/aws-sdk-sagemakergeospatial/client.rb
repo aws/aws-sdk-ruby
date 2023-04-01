@@ -415,11 +415,19 @@ module Aws::SageMakerGeospatial
     end
 
     # Use this operation to export results of an Earth Observation job and
-    # optionally source images used as input to the EOJ to an S3 location.
+    # optionally source images used as input to the EOJ to an Amazon S3
+    # location.
     #
     # @option params [required, String] :arn
     #   The input Amazon Resource Name (ARN) of the Earth Observation job
     #   being exported.
+    #
+    # @option params [String] :client_token
+    #   A unique token that guarantees that the call to this API is
+    #   idempotent.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @option params [required, String] :execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that you specified for
@@ -445,12 +453,13 @@ module Aws::SageMakerGeospatial
     #
     #   resp = client.export_earth_observation_job({
     #     arn: "EarthObservationJobArn", # required
-    #     execution_role_arn: "String", # required
+    #     client_token: "ExportEarthObservationJobInputClientTokenString",
+    #     execution_role_arn: "ExecutionRoleArn", # required
     #     export_source_images: false,
     #     output_config: { # required
     #       s3_data: { # required
-    #         kms_key_id: "String",
-    #         s3_uri: "String", # required
+    #         kms_key_id: "KmsKey",
+    #         s3_uri: "S3Uri", # required
     #       },
     #     },
     #   })
@@ -474,11 +483,18 @@ module Aws::SageMakerGeospatial
       req.send_request(options)
     end
 
-    # Use this operation to copy results of a Vector Enrichment job to an S3
-    # location.
+    # Use this operation to copy results of a Vector Enrichment job to an
+    # Amazon S3 location.
     #
     # @option params [required, String] :arn
     #   The Amazon Resource Name (ARN) of the Vector Enrichment job.
+    #
+    # @option params [String] :client_token
+    #   A unique token that guarantees that the call to this API is
+    #   idempotent.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @option params [required, String] :execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM rolewith permission to
@@ -500,11 +516,12 @@ module Aws::SageMakerGeospatial
     #
     #   resp = client.export_vector_enrichment_job({
     #     arn: "VectorEnrichmentJobArn", # required
-    #     execution_role_arn: "String", # required
+    #     client_token: "ExportVectorEnrichmentJobInputClientTokenString",
+    #     execution_role_arn: "ExecutionRoleArn", # required
     #     output_config: { # required
     #       s3_data: { # required
-    #         kms_key_id: "String",
-    #         s3_uri: "String", # required
+    #         kms_key_id: "KmsKey",
+    #         s3_uri: "S3Uri", # required
     #       },
     #     },
     #   })
@@ -632,6 +649,7 @@ module Aws::SageMakerGeospatial
     #   resp.job_config.zonal_statistics_config.target_bands #=> Array
     #   resp.job_config.zonal_statistics_config.target_bands[0] #=> String
     #   resp.job_config.zonal_statistics_config.zone_s3_path #=> String
+    #   resp.job_config.zonal_statistics_config.zone_s3_path_kms_key_id #=> String
     #   resp.kms_key_id #=> String
     #   resp.name #=> String
     #   resp.output_bands #=> Array
@@ -704,6 +722,9 @@ module Aws::SageMakerGeospatial
     # @option params [required, String] :arn
     #   The Amazon Resource Name (ARN) of the tile operation.
     #
+    # @option params [String] :execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that you specify.
+    #
     # @option params [required, Array<String>] :image_assets
     #   The particular assets or bands to tile.
     #
@@ -744,6 +765,7 @@ module Aws::SageMakerGeospatial
     #
     #   resp = client.get_tile({
     #     arn: "EarthObservationJobArn", # required
+    #     execution_role_arn: "ExecutionRoleArn",
     #     image_assets: ["String"], # required
     #     image_mask: false,
     #     output_data_type: "INT32", # accepts INT32, FLOAT32, INT16, FLOAT64, UINT16
@@ -1040,6 +1062,16 @@ module Aws::SageMakerGeospatial
     #   in your next request to receive the next set of results.
     #
     # @option params [required, Types::RasterDataCollectionQueryWithBandFilterInput] :raster_data_collection_query
+    #   RasterDataCollectionQuery consisting of [AreaOfInterest(AOI)][1],
+    #   [PropertyFilters][2] and [TimeRangeFilterInput][3] used in
+    #   [SearchRasterDataCollection][4].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_AreaOfInterest.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_PropertyFilter.html
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_TimeRangeFilterInput.html
+    #   [4]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_SearchRasterDataCollection.html
     #
     # @return [Types::SearchRasterDataCollectionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1166,8 +1198,7 @@ module Aws::SageMakerGeospatial
     #   An object containing information about the job configuration.
     #
     # @option params [String] :kms_key_id
-    #   The Amazon Key Management Service (KMS) key ID for server-side
-    #   encryption.
+    #   The Key Management Service key ID for server-side encryption.
     #
     # @option params [required, String] :name
     #   The name of the Earth Observation job.
@@ -1191,17 +1222,17 @@ module Aws::SageMakerGeospatial
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_earth_observation_job({
-    #     client_token: "String",
-    #     execution_role_arn: "String",
+    #     client_token: "StartEarthObservationJobInputClientTokenString",
+    #     execution_role_arn: "ExecutionRoleArn",
     #     input_config: { # required
     #       data_source_config: {
     #         s3_data: {
-    #           kms_key_id: "String",
+    #           kms_key_id: "KmsKey",
     #           metadata_provider: "PLANET_ORDER", # required, accepts PLANET_ORDER
-    #           s3_uri: "String", # required
+    #           s3_uri: "S3Uri", # required
     #         },
     #       },
-    #       previous_earth_observation_job_arn: "String",
+    #       previous_earth_observation_job_arn: "EarthObservationJobArn",
     #       raster_data_collection_query: {
     #         area_of_interest: {
     #           area_of_interest_geometry: {
@@ -1256,7 +1287,7 @@ module Aws::SageMakerGeospatial
     #             },
     #           ],
     #         },
-    #         raster_data_collection_arn: "String", # required
+    #         raster_data_collection_arn: "DataCollectionArn", # required
     #         time_range_filter: { # required
     #           end_time: Time.now, # required
     #           start_time: Time.now, # required
@@ -1317,11 +1348,12 @@ module Aws::SageMakerGeospatial
     #       zonal_statistics_config: {
     #         statistics: ["MEAN"], # required, accepts MEAN, MEDIAN, STANDARD_DEVIATION, MAX, MIN, SUM
     #         target_bands: ["String"],
-    #         zone_s3_path: "String", # required
+    #         zone_s3_path: "S3Uri", # required
+    #         zone_s3_path_kms_key_id: "KmsKey",
     #       },
     #     },
-    #     kms_key_id: "String",
-    #     name: "String", # required
+    #     kms_key_id: "KmsKey",
+    #     name: "StartEarthObservationJobInputNameString", # required
     #     tags: {
     #       "String" => "String",
     #     },
@@ -1397,6 +1429,7 @@ module Aws::SageMakerGeospatial
     #   resp.job_config.zonal_statistics_config.target_bands #=> Array
     #   resp.job_config.zonal_statistics_config.target_bands[0] #=> String
     #   resp.job_config.zonal_statistics_config.zone_s3_path #=> String
+    #   resp.job_config.zonal_statistics_config.zone_s3_path_kms_key_id #=> String
     #   resp.kms_key_id #=> String
     #   resp.name #=> String
     #   resp.status #=> String, one of "INITIALIZING", "IN_PROGRESS", "STOPPING", "COMPLETED", "STOPPED", "FAILED", "DELETING", "DELETED"
@@ -1433,8 +1466,7 @@ module Aws::SageMakerGeospatial
     #   An object containing information about the job configuration.
     #
     # @option params [String] :kms_key_id
-    #   The Amazon Key Management Service (KMS) key ID for server-side
-    #   encryption.
+    #   The Key Management Service key ID for server-side encryption.
     #
     # @option params [required, String] :name
     #   The name of the Vector Enrichment job.
@@ -1459,13 +1491,13 @@ module Aws::SageMakerGeospatial
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_vector_enrichment_job({
-    #     client_token: "String",
-    #     execution_role_arn: "String", # required
+    #     client_token: "StartVectorEnrichmentJobInputClientTokenString",
+    #     execution_role_arn: "ExecutionRoleArn", # required
     #     input_config: { # required
     #       data_source_config: { # required
     #         s3_data: {
-    #           kms_key_id: "String",
-    #           s3_uri: "String", # required
+    #           kms_key_id: "KmsKey",
+    #           s3_uri: "S3Uri", # required
     #         },
     #       },
     #       document_type: "CSV", # required, accepts CSV
@@ -1482,8 +1514,8 @@ module Aws::SageMakerGeospatial
     #         y_attribute_name: "String", # required
     #       },
     #     },
-    #     kms_key_id: "String",
-    #     name: "String", # required
+    #     kms_key_id: "KmsKey",
+    #     name: "StartVectorEnrichmentJobInputNameString", # required
     #     tags: {
     #       "String" => "String",
     #     },
@@ -1632,7 +1664,7 @@ module Aws::SageMakerGeospatial
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakergeospatial'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

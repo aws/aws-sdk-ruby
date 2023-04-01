@@ -110,6 +110,8 @@ module Aws::GuardDuty
             Aws::GuardDuty::Endpoints::EnableOrganizationAdminAccount.build(context)
           when :get_administrator_account
             Aws::GuardDuty::Endpoints::GetAdministratorAccount.build(context)
+          when :get_coverage_statistics
+            Aws::GuardDuty::Endpoints::GetCoverageStatistics.build(context)
           when :get_detector
             Aws::GuardDuty::Endpoints::GetDetector.build(context)
           when :get_filter
@@ -138,6 +140,8 @@ module Aws::GuardDuty
             Aws::GuardDuty::Endpoints::GetUsageStatistics.build(context)
           when :invite_members
             Aws::GuardDuty::Endpoints::InviteMembers.build(context)
+          when :list_coverage
+            Aws::GuardDuty::Endpoints::ListCoverage.build(context)
           when :list_detectors
             Aws::GuardDuty::Endpoints::ListDetectors.build(context)
           when :list_filters

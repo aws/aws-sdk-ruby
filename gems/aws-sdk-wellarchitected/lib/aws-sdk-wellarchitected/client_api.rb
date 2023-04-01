@@ -27,6 +27,8 @@ module Aws::WellArchitected
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     AwsRegion = Shapes::StringShape.new(name: 'AwsRegion')
     Base64String = Shapes::StringShape.new(name: 'Base64String')
+    BestPractice = Shapes::StructureShape.new(name: 'BestPractice')
+    BestPractices = Shapes::ListShape.new(name: 'BestPractices')
     CheckDescription = Shapes::StringShape.new(name: 'CheckDescription')
     CheckDetail = Shapes::StructureShape.new(name: 'CheckDetail')
     CheckDetails = Shapes::ListShape.new(name: 'CheckDetails')
@@ -59,6 +61,8 @@ module Aws::WellArchitected
     Choices = Shapes::ListShape.new(name: 'Choices')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConsolidatedReportMetric = Shapes::StructureShape.new(name: 'ConsolidatedReportMetric')
+    ConsolidatedReportMetrics = Shapes::ListShape.new(name: 'ConsolidatedReportMetrics')
     Count = Shapes::IntegerShape.new(name: 'Count')
     CreateLensShareInput = Shapes::StructureShape.new(name: 'CreateLensShareInput')
     CreateLensShareOutput = Shapes::StructureShape.new(name: 'CreateLensShareOutput')
@@ -85,6 +89,9 @@ module Aws::WellArchitected
     FlaggedResources = Shapes::IntegerShape.new(name: 'FlaggedResources')
     GetAnswerInput = Shapes::StructureShape.new(name: 'GetAnswerInput')
     GetAnswerOutput = Shapes::StructureShape.new(name: 'GetAnswerOutput')
+    GetConsolidatedReportInput = Shapes::StructureShape.new(name: 'GetConsolidatedReportInput')
+    GetConsolidatedReportMaxResults = Shapes::IntegerShape.new(name: 'GetConsolidatedReportMaxResults')
+    GetConsolidatedReportOutput = Shapes::StructureShape.new(name: 'GetConsolidatedReportOutput')
     GetLensInput = Shapes::StructureShape.new(name: 'GetLensInput')
     GetLensOutput = Shapes::StructureShape.new(name: 'GetLensOutput')
     GetLensReviewInput = Shapes::StructureShape.new(name: 'GetLensReviewInput')
@@ -104,6 +111,7 @@ module Aws::WellArchitected
     ImprovementPlanUrl = Shapes::StringShape.new(name: 'ImprovementPlanUrl')
     ImprovementSummaries = Shapes::ListShape.new(name: 'ImprovementSummaries')
     ImprovementSummary = Shapes::StructureShape.new(name: 'ImprovementSummary')
+    IncludeSharedResources = Shapes::BooleanShape.new(name: 'IncludeSharedResources')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     IsApplicable = Shapes::BooleanShape.new(name: 'IsApplicable')
     IsMajorVersion = Shapes::BooleanShape.new(name: 'IsMajorVersion')
@@ -114,6 +122,8 @@ module Aws::WellArchitected
     LensArn = Shapes::StringShape.new(name: 'LensArn')
     LensDescription = Shapes::StringShape.new(name: 'LensDescription')
     LensJSON = Shapes::StringShape.new(name: 'LensJSON')
+    LensMetric = Shapes::StructureShape.new(name: 'LensMetric')
+    LensMetrics = Shapes::ListShape.new(name: 'LensMetrics')
     LensName = Shapes::StringShape.new(name: 'LensName')
     LensNamePrefix = Shapes::StringShape.new(name: 'LensNamePrefix')
     LensOwner = Shapes::StringShape.new(name: 'LensOwner')
@@ -130,6 +140,7 @@ module Aws::WellArchitected
     LensType = Shapes::StringShape.new(name: 'LensType')
     LensUpgradeSummary = Shapes::StructureShape.new(name: 'LensUpgradeSummary')
     LensVersion = Shapes::StringShape.new(name: 'LensVersion')
+    LensesAppliedCount = Shapes::IntegerShape.new(name: 'LensesAppliedCount')
     ListAnswersInput = Shapes::StructureShape.new(name: 'ListAnswersInput')
     ListAnswersMaxResults = Shapes::IntegerShape.new(name: 'ListAnswersMaxResults')
     ListAnswersOutput = Shapes::StructureShape.new(name: 'ListAnswersOutput')
@@ -163,6 +174,7 @@ module Aws::WellArchitected
     ListWorkloadsMaxResults = Shapes::IntegerShape.new(name: 'ListWorkloadsMaxResults')
     ListWorkloadsOutput = Shapes::StructureShape.new(name: 'ListWorkloadsOutput')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MetricType = Shapes::StringShape.new(name: 'MetricType')
     Milestone = Shapes::StructureShape.new(name: 'Milestone')
     MilestoneName = Shapes::StringShape.new(name: 'MilestoneName')
     MilestoneNumber = Shapes::IntegerShape.new(name: 'MilestoneNumber')
@@ -178,6 +190,8 @@ module Aws::WellArchitected
     PillarDifference = Shapes::StructureShape.new(name: 'PillarDifference')
     PillarDifferences = Shapes::ListShape.new(name: 'PillarDifferences')
     PillarId = Shapes::StringShape.new(name: 'PillarId')
+    PillarMetric = Shapes::StructureShape.new(name: 'PillarMetric')
+    PillarMetrics = Shapes::ListShape.new(name: 'PillarMetrics')
     PillarName = Shapes::StringShape.new(name: 'PillarName')
     PillarNotes = Shapes::MapShape.new(name: 'PillarNotes')
     PillarReviewSummaries = Shapes::ListShape.new(name: 'PillarReviewSummaries')
@@ -186,8 +200,11 @@ module Aws::WellArchitected
     QuestionDifference = Shapes::StructureShape.new(name: 'QuestionDifference')
     QuestionDifferences = Shapes::ListShape.new(name: 'QuestionDifferences')
     QuestionId = Shapes::StringShape.new(name: 'QuestionId')
+    QuestionMetric = Shapes::StructureShape.new(name: 'QuestionMetric')
+    QuestionMetrics = Shapes::ListShape.new(name: 'QuestionMetrics')
     QuestionTitle = Shapes::StringShape.new(name: 'QuestionTitle')
     QuotaCode = Shapes::StringShape.new(name: 'QuotaCode')
+    ReportFormat = Shapes::StringShape.new(name: 'ReportFormat')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     Risk = Shapes::StringShape.new(name: 'Risk')
     RiskCounts = Shapes::MapShape.new(name: 'RiskCounts')
@@ -306,6 +323,12 @@ module Aws::WellArchitected
     AssociateLensesInput.add_member(:lens_aliases, Shapes::ShapeRef.new(shape: LensAliases, required: true, location_name: "LensAliases"))
     AssociateLensesInput.struct_class = Types::AssociateLensesInput
 
+    BestPractice.add_member(:choice_id, Shapes::ShapeRef.new(shape: ChoiceId, location_name: "ChoiceId"))
+    BestPractice.add_member(:choice_title, Shapes::ShapeRef.new(shape: ChoiceTitle, location_name: "ChoiceTitle"))
+    BestPractice.struct_class = Types::BestPractice
+
+    BestPractices.member = Shapes::ShapeRef.new(shape: BestPractice)
+
     CheckDetail.add_member(:id, Shapes::ShapeRef.new(shape: CheckId, location_name: "Id"))
     CheckDetail.add_member(:name, Shapes::ShapeRef.new(shape: CheckName, location_name: "Name"))
     CheckDetail.add_member(:description, Shapes::ShapeRef.new(shape: CheckDescription, location_name: "Description"))
@@ -386,6 +409,18 @@ module Aws::WellArchitected
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ExceptionResourceId, required: true, location_name: "ResourceId"))
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ExceptionResourceType, required: true, location_name: "ResourceType"))
     ConflictException.struct_class = Types::ConflictException
+
+    ConsolidatedReportMetric.add_member(:metric_type, Shapes::ShapeRef.new(shape: MetricType, location_name: "MetricType"))
+    ConsolidatedReportMetric.add_member(:risk_counts, Shapes::ShapeRef.new(shape: RiskCounts, location_name: "RiskCounts"))
+    ConsolidatedReportMetric.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, location_name: "WorkloadId"))
+    ConsolidatedReportMetric.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, location_name: "WorkloadName"))
+    ConsolidatedReportMetric.add_member(:workload_arn, Shapes::ShapeRef.new(shape: WorkloadArn, location_name: "WorkloadArn"))
+    ConsolidatedReportMetric.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    ConsolidatedReportMetric.add_member(:lenses, Shapes::ShapeRef.new(shape: LensMetrics, location_name: "Lenses"))
+    ConsolidatedReportMetric.add_member(:lenses_applied_count, Shapes::ShapeRef.new(shape: LensesAppliedCount, location_name: "LensesAppliedCount"))
+    ConsolidatedReportMetric.struct_class = Types::ConsolidatedReportMetric
+
+    ConsolidatedReportMetrics.member = Shapes::ShapeRef.new(shape: ConsolidatedReportMetric)
 
     CreateLensShareInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
     CreateLensShareInput.add_member(:shared_with, Shapes::ShapeRef.new(shape: SharedWith, required: true, location_name: "SharedWith"))
@@ -490,6 +525,17 @@ module Aws::WellArchitected
     GetAnswerOutput.add_member(:answer, Shapes::ShapeRef.new(shape: Answer, location_name: "Answer"))
     GetAnswerOutput.struct_class = Types::GetAnswerOutput
 
+    GetConsolidatedReportInput.add_member(:format, Shapes::ShapeRef.new(shape: ReportFormat, required: true, location: "querystring", location_name: "Format"))
+    GetConsolidatedReportInput.add_member(:include_shared_resources, Shapes::ShapeRef.new(shape: IncludeSharedResources, location: "querystring", location_name: "IncludeSharedResources"))
+    GetConsolidatedReportInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    GetConsolidatedReportInput.add_member(:max_results, Shapes::ShapeRef.new(shape: GetConsolidatedReportMaxResults, location: "querystring", location_name: "MaxResults"))
+    GetConsolidatedReportInput.struct_class = Types::GetConsolidatedReportInput
+
+    GetConsolidatedReportOutput.add_member(:metrics, Shapes::ShapeRef.new(shape: ConsolidatedReportMetrics, location_name: "Metrics"))
+    GetConsolidatedReportOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetConsolidatedReportOutput.add_member(:base_64_string, Shapes::ShapeRef.new(shape: Base64String, location_name: "Base64String"))
+    GetConsolidatedReportOutput.struct_class = Types::GetConsolidatedReportOutput
+
     GetLensInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
     GetLensInput.add_member(:lens_version, Shapes::ShapeRef.new(shape: LensVersion, location: "querystring", location_name: "LensVersion"))
     GetLensInput.struct_class = Types::GetLensInput
@@ -577,6 +623,13 @@ module Aws::WellArchitected
     Lens.struct_class = Types::Lens
 
     LensAliases.member = Shapes::ShapeRef.new(shape: LensAlias)
+
+    LensMetric.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
+    LensMetric.add_member(:pillars, Shapes::ShapeRef.new(shape: PillarMetrics, location_name: "Pillars"))
+    LensMetric.add_member(:risk_counts, Shapes::ShapeRef.new(shape: RiskCounts, location_name: "RiskCounts"))
+    LensMetric.struct_class = Types::LensMetric
+
+    LensMetrics.member = Shapes::ShapeRef.new(shape: LensMetric)
 
     LensReview.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, location_name: "LensAlias"))
     LensReview.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
@@ -813,6 +866,13 @@ module Aws::WellArchitected
 
     PillarDifferences.member = Shapes::ShapeRef.new(shape: PillarDifference)
 
+    PillarMetric.add_member(:pillar_id, Shapes::ShapeRef.new(shape: PillarId, location_name: "PillarId"))
+    PillarMetric.add_member(:risk_counts, Shapes::ShapeRef.new(shape: RiskCounts, location_name: "RiskCounts"))
+    PillarMetric.add_member(:questions, Shapes::ShapeRef.new(shape: QuestionMetrics, location_name: "Questions"))
+    PillarMetric.struct_class = Types::PillarMetric
+
+    PillarMetrics.member = Shapes::ShapeRef.new(shape: PillarMetric)
+
     PillarNotes.key = Shapes::ShapeRef.new(shape: PillarId)
     PillarNotes.value = Shapes::ShapeRef.new(shape: Notes)
 
@@ -830,6 +890,13 @@ module Aws::WellArchitected
     QuestionDifference.struct_class = Types::QuestionDifference
 
     QuestionDifferences.member = Shapes::ShapeRef.new(shape: QuestionDifference)
+
+    QuestionMetric.add_member(:question_id, Shapes::ShapeRef.new(shape: QuestionId, location_name: "QuestionId"))
+    QuestionMetric.add_member(:risk, Shapes::ShapeRef.new(shape: Risk, location_name: "Risk"))
+    QuestionMetric.add_member(:best_practices, Shapes::ShapeRef.new(shape: BestPractices, location_name: "BestPractices"))
+    QuestionMetric.struct_class = Types::QuestionMetric
+
+    QuestionMetrics.member = Shapes::ShapeRef.new(shape: QuestionMetric)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "Message"))
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ExceptionResourceId, required: true, location_name: "ResourceId"))
@@ -1140,6 +1207,7 @@ module Aws::WellArchitected
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
@@ -1252,6 +1320,25 @@ module Aws::WellArchitected
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_consolidated_report, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetConsolidatedReport"
+        o.http_method = "GET"
+        o.http_request_uri = "/consolidatedReport"
+        o.input = Shapes::ShapeRef.new(shape: GetConsolidatedReportInput)
+        o.output = Shapes::ShapeRef.new(shape: GetConsolidatedReportOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_lens, Seahorse::Model::Operation.new.tap do |o|

@@ -159,6 +159,7 @@ module Aws::ComputeOptimizer
     InstanceRecommendationFindingReasonCodes = Shapes::ListShape.new(name: 'InstanceRecommendationFindingReasonCodes')
     InstanceRecommendationOption = Shapes::StructureShape.new(name: 'InstanceRecommendationOption')
     InstanceRecommendations = Shapes::ListShape.new(name: 'InstanceRecommendations')
+    InstanceState = Shapes::StringShape.new(name: 'InstanceState')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
@@ -246,6 +247,7 @@ module Aws::ComputeOptimizer
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    RootVolume = Shapes::BooleanShape.new(name: 'RootVolume')
     S3Destination = Shapes::StructureShape.new(name: 'S3Destination')
     S3DestinationConfig = Shapes::StructureShape.new(name: 'S3DestinationConfig')
     SavingsOpportunity = Shapes::StructureShape.new(name: 'SavingsOpportunity')
@@ -703,6 +705,7 @@ module Aws::ComputeOptimizer
     InstanceRecommendation.add_member(:current_performance_risk, Shapes::ShapeRef.new(shape: CurrentPerformanceRisk, location_name: "currentPerformanceRisk"))
     InstanceRecommendation.add_member(:effective_recommendation_preferences, Shapes::ShapeRef.new(shape: EffectiveRecommendationPreferences, location_name: "effectiveRecommendationPreferences"))
     InstanceRecommendation.add_member(:inferred_workload_types, Shapes::ShapeRef.new(shape: InferredWorkloadTypes, location_name: "inferredWorkloadTypes"))
+    InstanceRecommendation.add_member(:instance_state, Shapes::ShapeRef.new(shape: InstanceState, location_name: "instanceState"))
     InstanceRecommendation.struct_class = Types::InstanceRecommendation
 
     InstanceRecommendationFindingReasonCodes.member = Shapes::ShapeRef.new(shape: InstanceRecommendationFindingReasonCode)
@@ -935,6 +938,7 @@ module Aws::ComputeOptimizer
     VolumeConfiguration.add_member(:volume_burst_iops, Shapes::ShapeRef.new(shape: VolumeBurstIOPS, location_name: "volumeBurstIOPS"))
     VolumeConfiguration.add_member(:volume_baseline_throughput, Shapes::ShapeRef.new(shape: VolumeBaselineThroughput, location_name: "volumeBaselineThroughput"))
     VolumeConfiguration.add_member(:volume_burst_throughput, Shapes::ShapeRef.new(shape: VolumeBurstThroughput, location_name: "volumeBurstThroughput"))
+    VolumeConfiguration.add_member(:root_volume, Shapes::ShapeRef.new(shape: RootVolume, location_name: "rootVolume"))
     VolumeConfiguration.struct_class = Types::VolumeConfiguration
 
     VolumeRecommendation.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeArn, location_name: "volumeArn"))

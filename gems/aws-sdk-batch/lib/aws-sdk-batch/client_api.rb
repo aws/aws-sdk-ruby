@@ -616,6 +616,7 @@ module Aws::Batch
     EksPodPropertiesDetail.add_member(:volumes, Shapes::ShapeRef.new(shape: EksVolumes, location_name: "volumes"))
     EksPodPropertiesDetail.add_member(:pod_name, Shapes::ShapeRef.new(shape: String, location_name: "podName"))
     EksPodPropertiesDetail.add_member(:node_name, Shapes::ShapeRef.new(shape: String, location_name: "nodeName"))
+    EksPodPropertiesDetail.add_member(:metadata, Shapes::ShapeRef.new(shape: EksMetadata, location_name: "metadata"))
     EksPodPropertiesDetail.struct_class = Types::EksPodPropertiesDetail
 
     EksPodPropertiesOverride.add_member(:containers, Shapes::ShapeRef.new(shape: EksContainerOverrideList, location_name: "containers"))

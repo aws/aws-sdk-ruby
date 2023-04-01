@@ -47,13 +47,16 @@ module Aws::SageMakerGeospatial
     EarthObservationJobStatus = Shapes::StringShape.new(name: 'EarthObservationJobStatus')
     EoCloudCoverInput = Shapes::StructureShape.new(name: 'EoCloudCoverInput')
     EojDataSourceConfigInput = Shapes::UnionShape.new(name: 'EojDataSourceConfigInput')
+    ExecutionRoleArn = Shapes::StringShape.new(name: 'ExecutionRoleArn')
     ExportEarthObservationJobInput = Shapes::StructureShape.new(name: 'ExportEarthObservationJobInput')
+    ExportEarthObservationJobInputClientTokenString = Shapes::StringShape.new(name: 'ExportEarthObservationJobInputClientTokenString')
     ExportEarthObservationJobOutput = Shapes::StructureShape.new(name: 'ExportEarthObservationJobOutput')
     ExportErrorDetails = Shapes::StructureShape.new(name: 'ExportErrorDetails')
     ExportErrorDetailsOutput = Shapes::StructureShape.new(name: 'ExportErrorDetailsOutput')
     ExportErrorType = Shapes::StringShape.new(name: 'ExportErrorType')
     ExportS3DataInput = Shapes::StructureShape.new(name: 'ExportS3DataInput')
     ExportVectorEnrichmentJobInput = Shapes::StructureShape.new(name: 'ExportVectorEnrichmentJobInput')
+    ExportVectorEnrichmentJobInputClientTokenString = Shapes::StringShape.new(name: 'ExportVectorEnrichmentJobInputClientTokenString')
     ExportVectorEnrichmentJobOutput = Shapes::StructureShape.new(name: 'ExportVectorEnrichmentJobOutput')
     ExportVectorEnrichmentJobOutputConfig = Shapes::StructureShape.new(name: 'ExportVectorEnrichmentJobOutputConfig')
     Filter = Shapes::StructureShape.new(name: 'Filter')
@@ -78,6 +81,7 @@ module Aws::SageMakerGeospatial
     ItemSource = Shapes::StructureShape.new(name: 'ItemSource')
     ItemSourceList = Shapes::ListShape.new(name: 'ItemSourceList')
     JobConfigInput = Shapes::UnionShape.new(name: 'JobConfigInput')
+    KmsKey = Shapes::StringShape.new(name: 'KmsKey')
     LandCoverSegmentationConfigInput = Shapes::StructureShape.new(name: 'LandCoverSegmentationConfigInput')
     LandsatCloudCoverLandInput = Shapes::StructureShape.new(name: 'LandsatCloudCoverLandInput')
     LinearRing = Shapes::ListShape.new(name: 'LinearRing')
@@ -125,14 +129,19 @@ module Aws::SageMakerGeospatial
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ReverseGeocodingConfig = Shapes::StructureShape.new(name: 'ReverseGeocodingConfig')
     S3DataInput = Shapes::StructureShape.new(name: 'S3DataInput')
+    S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SearchRasterDataCollectionInput = Shapes::StructureShape.new(name: 'SearchRasterDataCollectionInput')
     SearchRasterDataCollectionOutput = Shapes::StructureShape.new(name: 'SearchRasterDataCollectionOutput')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     StackConfigInput = Shapes::StructureShape.new(name: 'StackConfigInput')
     StartEarthObservationJobInput = Shapes::StructureShape.new(name: 'StartEarthObservationJobInput')
+    StartEarthObservationJobInputClientTokenString = Shapes::StringShape.new(name: 'StartEarthObservationJobInputClientTokenString')
+    StartEarthObservationJobInputNameString = Shapes::StringShape.new(name: 'StartEarthObservationJobInputNameString')
     StartEarthObservationJobOutput = Shapes::StructureShape.new(name: 'StartEarthObservationJobOutput')
     StartVectorEnrichmentJobInput = Shapes::StructureShape.new(name: 'StartVectorEnrichmentJobInput')
+    StartVectorEnrichmentJobInputClientTokenString = Shapes::StringShape.new(name: 'StartVectorEnrichmentJobInputClientTokenString')
+    StartVectorEnrichmentJobInputNameString = Shapes::StringShape.new(name: 'StartVectorEnrichmentJobInputNameString')
     StartVectorEnrichmentJobOutput = Shapes::StructureShape.new(name: 'StartVectorEnrichmentJobOutput')
     StopEarthObservationJobInput = Shapes::StructureShape.new(name: 'StopEarthObservationJobInput')
     StopEarthObservationJobOutput = Shapes::StructureShape.new(name: 'StopEarthObservationJobOutput')
@@ -140,6 +149,7 @@ module Aws::SageMakerGeospatial
     StopVectorEnrichmentJobOutput = Shapes::StructureShape.new(name: 'StopVectorEnrichmentJobOutput')
     String = Shapes::StringShape.new(name: 'String')
     StringListInput = Shapes::ListShape.new(name: 'StringListInput')
+    SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
@@ -150,6 +160,7 @@ module Aws::SageMakerGeospatial
     TemporalStatisticsListInput = Shapes::ListShape.new(name: 'TemporalStatisticsListInput')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeRangeFilterInput = Shapes::StructureShape.new(name: 'TimeRangeFilterInput')
+    TimeRangeFilterOutput = Shapes::StructureShape.new(name: 'TimeRangeFilterOutput')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Unit = Shapes::StringShape.new(name: 'Unit')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -212,7 +223,7 @@ module Aws::SageMakerGeospatial
     CloudRemovalConfigInput.struct_class = Types::CloudRemovalConfigInput
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
-    ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceId"))
+    ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
     ConflictException.struct_class = Types::ConflictException
 
     CustomIndicesInput.add_member(:operations, Shapes::ShapeRef.new(shape: OperationsListInput, location_name: "Operations"))
@@ -249,14 +260,15 @@ module Aws::SageMakerGeospatial
     EojDataSourceConfigInput.struct_class = Types::EojDataSourceConfigInput
 
     ExportEarthObservationJobInput.add_member(:arn, Shapes::ShapeRef.new(shape: EarthObservationJobArn, required: true, location_name: "Arn"))
-    ExportEarthObservationJobInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ExecutionRoleArn"))
+    ExportEarthObservationJobInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ExportEarthObservationJobInputClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    ExportEarthObservationJobInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, required: true, location_name: "ExecutionRoleArn"))
     ExportEarthObservationJobInput.add_member(:export_source_images, Shapes::ShapeRef.new(shape: Boolean, location_name: "ExportSourceImages"))
     ExportEarthObservationJobInput.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfigInput, required: true, location_name: "OutputConfig"))
     ExportEarthObservationJobInput.struct_class = Types::ExportEarthObservationJobInput
 
     ExportEarthObservationJobOutput.add_member(:arn, Shapes::ShapeRef.new(shape: EarthObservationJobArn, required: true, location_name: "Arn"))
-    ExportEarthObservationJobOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
-    ExportEarthObservationJobOutput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ExecutionRoleArn"))
+    ExportEarthObservationJobOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "CreationTime"))
+    ExportEarthObservationJobOutput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, required: true, location_name: "ExecutionRoleArn"))
     ExportEarthObservationJobOutput.add_member(:export_source_images, Shapes::ShapeRef.new(shape: Boolean, location_name: "ExportSourceImages"))
     ExportEarthObservationJobOutput.add_member(:export_status, Shapes::ShapeRef.new(shape: EarthObservationJobExportStatus, required: true, location_name: "ExportStatus"))
     ExportEarthObservationJobOutput.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfigInput, required: true, location_name: "OutputConfig"))
@@ -270,18 +282,19 @@ module Aws::SageMakerGeospatial
     ExportErrorDetailsOutput.add_member(:type, Shapes::ShapeRef.new(shape: ExportErrorType, location_name: "Type"))
     ExportErrorDetailsOutput.struct_class = Types::ExportErrorDetailsOutput
 
-    ExportS3DataInput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
-    ExportS3DataInput.add_member(:s3_uri, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3Uri"))
+    ExportS3DataInput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKeyId"))
+    ExportS3DataInput.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     ExportS3DataInput.struct_class = Types::ExportS3DataInput
 
     ExportVectorEnrichmentJobInput.add_member(:arn, Shapes::ShapeRef.new(shape: VectorEnrichmentJobArn, required: true, location_name: "Arn"))
-    ExportVectorEnrichmentJobInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ExecutionRoleArn"))
+    ExportVectorEnrichmentJobInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ExportVectorEnrichmentJobInputClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    ExportVectorEnrichmentJobInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, required: true, location_name: "ExecutionRoleArn"))
     ExportVectorEnrichmentJobInput.add_member(:output_config, Shapes::ShapeRef.new(shape: ExportVectorEnrichmentJobOutputConfig, required: true, location_name: "OutputConfig"))
     ExportVectorEnrichmentJobInput.struct_class = Types::ExportVectorEnrichmentJobInput
 
     ExportVectorEnrichmentJobOutput.add_member(:arn, Shapes::ShapeRef.new(shape: VectorEnrichmentJobArn, required: true, location_name: "Arn"))
-    ExportVectorEnrichmentJobOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
-    ExportVectorEnrichmentJobOutput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ExecutionRoleArn"))
+    ExportVectorEnrichmentJobOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "CreationTime"))
+    ExportVectorEnrichmentJobOutput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, required: true, location_name: "ExecutionRoleArn"))
     ExportVectorEnrichmentJobOutput.add_member(:export_status, Shapes::ShapeRef.new(shape: VectorEnrichmentJobExportStatus, required: true, location_name: "ExportStatus"))
     ExportVectorEnrichmentJobOutput.add_member(:output_config, Shapes::ShapeRef.new(shape: ExportVectorEnrichmentJobOutputConfig, required: true, location_name: "OutputConfig"))
     ExportVectorEnrichmentJobOutput.struct_class = Types::ExportVectorEnrichmentJobOutput
@@ -309,15 +322,15 @@ module Aws::SageMakerGeospatial
     GetEarthObservationJobInput.struct_class = Types::GetEarthObservationJobInput
 
     GetEarthObservationJobOutput.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
-    GetEarthObservationJobOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    GetEarthObservationJobOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "CreationTime"))
     GetEarthObservationJobOutput.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "DurationInSeconds"))
     GetEarthObservationJobOutput.add_member(:error_details, Shapes::ShapeRef.new(shape: EarthObservationJobErrorDetails, location_name: "ErrorDetails"))
-    GetEarthObservationJobOutput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "ExecutionRoleArn"))
+    GetEarthObservationJobOutput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, location_name: "ExecutionRoleArn"))
     GetEarthObservationJobOutput.add_member(:export_error_details, Shapes::ShapeRef.new(shape: ExportErrorDetails, location_name: "ExportErrorDetails"))
     GetEarthObservationJobOutput.add_member(:export_status, Shapes::ShapeRef.new(shape: EarthObservationJobExportStatus, location_name: "ExportStatus"))
     GetEarthObservationJobOutput.add_member(:input_config, Shapes::ShapeRef.new(shape: InputConfigOutput, required: true, location_name: "InputConfig"))
     GetEarthObservationJobOutput.add_member(:job_config, Shapes::ShapeRef.new(shape: JobConfigInput, required: true, location_name: "JobConfig"))
-    GetEarthObservationJobOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    GetEarthObservationJobOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKeyId"))
     GetEarthObservationJobOutput.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     GetEarthObservationJobOutput.add_member(:output_bands, Shapes::ShapeRef.new(shape: EarthObservationJobOutputBands, location_name: "OutputBands"))
     GetEarthObservationJobOutput.add_member(:status, Shapes::ShapeRef.new(shape: EarthObservationJobStatus, required: true, location_name: "Status"))
@@ -338,6 +351,7 @@ module Aws::SageMakerGeospatial
     GetRasterDataCollectionOutput.struct_class = Types::GetRasterDataCollectionOutput
 
     GetTileInput.add_member(:arn, Shapes::ShapeRef.new(shape: EarthObservationJobArn, required: true, location: "querystring", location_name: "Arn"))
+    GetTileInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, location: "querystring", location_name: "ExecutionRoleArn"))
     GetTileInput.add_member(:image_assets, Shapes::ShapeRef.new(shape: StringListInput, required: true, location: "querystring", location_name: "ImageAssets"))
     GetTileInput.add_member(:image_mask, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "ImageMask"))
     GetTileInput.add_member(:output_data_type, Shapes::ShapeRef.new(shape: OutputType, location: "querystring", location_name: "OutputDataType"))
@@ -359,15 +373,15 @@ module Aws::SageMakerGeospatial
     GetVectorEnrichmentJobInput.struct_class = Types::GetVectorEnrichmentJobInput
 
     GetVectorEnrichmentJobOutput.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
-    GetVectorEnrichmentJobOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    GetVectorEnrichmentJobOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "CreationTime"))
     GetVectorEnrichmentJobOutput.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "DurationInSeconds"))
     GetVectorEnrichmentJobOutput.add_member(:error_details, Shapes::ShapeRef.new(shape: VectorEnrichmentJobErrorDetails, location_name: "ErrorDetails"))
-    GetVectorEnrichmentJobOutput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ExecutionRoleArn"))
+    GetVectorEnrichmentJobOutput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, required: true, location_name: "ExecutionRoleArn"))
     GetVectorEnrichmentJobOutput.add_member(:export_error_details, Shapes::ShapeRef.new(shape: VectorEnrichmentJobExportErrorDetails, location_name: "ExportErrorDetails"))
     GetVectorEnrichmentJobOutput.add_member(:export_status, Shapes::ShapeRef.new(shape: VectorEnrichmentJobExportStatus, location_name: "ExportStatus"))
     GetVectorEnrichmentJobOutput.add_member(:input_config, Shapes::ShapeRef.new(shape: VectorEnrichmentJobInputConfig, required: true, location_name: "InputConfig"))
     GetVectorEnrichmentJobOutput.add_member(:job_config, Shapes::ShapeRef.new(shape: VectorEnrichmentJobConfig, required: true, location_name: "JobConfig"))
-    GetVectorEnrichmentJobOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    GetVectorEnrichmentJobOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKeyId"))
     GetVectorEnrichmentJobOutput.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     GetVectorEnrichmentJobOutput.add_member(:status, Shapes::ShapeRef.new(shape: VectorEnrichmentJobStatus, required: true, location_name: "Status"))
     GetVectorEnrichmentJobOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
@@ -377,17 +391,17 @@ module Aws::SageMakerGeospatial
     ImageSourceBandList.member = Shapes::ShapeRef.new(shape: String)
 
     InputConfigInput.add_member(:data_source_config, Shapes::ShapeRef.new(shape: EojDataSourceConfigInput, location_name: "DataSourceConfig"))
-    InputConfigInput.add_member(:previous_earth_observation_job_arn, Shapes::ShapeRef.new(shape: String, location_name: "PreviousEarthObservationJobArn"))
+    InputConfigInput.add_member(:previous_earth_observation_job_arn, Shapes::ShapeRef.new(shape: EarthObservationJobArn, location_name: "PreviousEarthObservationJobArn"))
     InputConfigInput.add_member(:raster_data_collection_query, Shapes::ShapeRef.new(shape: RasterDataCollectionQueryInput, location_name: "RasterDataCollectionQuery"))
     InputConfigInput.struct_class = Types::InputConfigInput
 
     InputConfigOutput.add_member(:data_source_config, Shapes::ShapeRef.new(shape: EojDataSourceConfigInput, location_name: "DataSourceConfig"))
-    InputConfigOutput.add_member(:previous_earth_observation_job_arn, Shapes::ShapeRef.new(shape: String, location_name: "PreviousEarthObservationJobArn"))
+    InputConfigOutput.add_member(:previous_earth_observation_job_arn, Shapes::ShapeRef.new(shape: EarthObservationJobArn, location_name: "PreviousEarthObservationJobArn"))
     InputConfigOutput.add_member(:raster_data_collection_query, Shapes::ShapeRef.new(shape: RasterDataCollectionQueryOutput, location_name: "RasterDataCollectionQuery"))
     InputConfigOutput.struct_class = Types::InputConfigOutput
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
-    InternalServerException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceId"))
+    InternalServerException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
     InternalServerException.struct_class = Types::InternalServerException
 
     ItemSource.add_member(:assets, Shapes::ShapeRef.new(shape: AssetsMap, location_name: "Assets"))
@@ -445,7 +459,7 @@ module Aws::SageMakerGeospatial
     ListEarthObservationJobOutput.struct_class = Types::ListEarthObservationJobOutput
 
     ListEarthObservationJobOutputConfig.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
-    ListEarthObservationJobOutputConfig.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    ListEarthObservationJobOutputConfig.add_member(:creation_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "CreationTime"))
     ListEarthObservationJobOutputConfig.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "DurationInSeconds"))
     ListEarthObservationJobOutputConfig.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     ListEarthObservationJobOutputConfig.add_member(:operation_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "OperationType"))
@@ -479,7 +493,7 @@ module Aws::SageMakerGeospatial
     ListVectorEnrichmentJobOutput.struct_class = Types::ListVectorEnrichmentJobOutput
 
     ListVectorEnrichmentJobOutputConfig.add_member(:arn, Shapes::ShapeRef.new(shape: VectorEnrichmentJobArn, required: true, location_name: "Arn"))
-    ListVectorEnrichmentJobOutputConfig.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    ListVectorEnrichmentJobOutputConfig.add_member(:creation_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "CreationTime"))
     ListVectorEnrichmentJobOutputConfig.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "DurationInSeconds"))
     ListVectorEnrichmentJobOutputConfig.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     ListVectorEnrichmentJobOutputConfig.add_member(:status, Shapes::ShapeRef.new(shape: VectorEnrichmentJobStatus, required: true, location_name: "Status"))
@@ -570,15 +584,15 @@ module Aws::SageMakerGeospatial
 
     RasterDataCollectionQueryInput.add_member(:area_of_interest, Shapes::ShapeRef.new(shape: AreaOfInterest, location_name: "AreaOfInterest"))
     RasterDataCollectionQueryInput.add_member(:property_filters, Shapes::ShapeRef.new(shape: PropertyFilters, location_name: "PropertyFilters"))
-    RasterDataCollectionQueryInput.add_member(:raster_data_collection_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RasterDataCollectionArn"))
+    RasterDataCollectionQueryInput.add_member(:raster_data_collection_arn, Shapes::ShapeRef.new(shape: DataCollectionArn, required: true, location_name: "RasterDataCollectionArn"))
     RasterDataCollectionQueryInput.add_member(:time_range_filter, Shapes::ShapeRef.new(shape: TimeRangeFilterInput, required: true, location_name: "TimeRangeFilter"))
     RasterDataCollectionQueryInput.struct_class = Types::RasterDataCollectionQueryInput
 
     RasterDataCollectionQueryOutput.add_member(:area_of_interest, Shapes::ShapeRef.new(shape: AreaOfInterest, location_name: "AreaOfInterest"))
     RasterDataCollectionQueryOutput.add_member(:property_filters, Shapes::ShapeRef.new(shape: PropertyFilters, location_name: "PropertyFilters"))
-    RasterDataCollectionQueryOutput.add_member(:raster_data_collection_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RasterDataCollectionArn"))
+    RasterDataCollectionQueryOutput.add_member(:raster_data_collection_arn, Shapes::ShapeRef.new(shape: DataCollectionArn, required: true, location_name: "RasterDataCollectionArn"))
     RasterDataCollectionQueryOutput.add_member(:raster_data_collection_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RasterDataCollectionName"))
-    RasterDataCollectionQueryOutput.add_member(:time_range_filter, Shapes::ShapeRef.new(shape: TimeRangeFilterInput, required: true, location_name: "TimeRangeFilter"))
+    RasterDataCollectionQueryOutput.add_member(:time_range_filter, Shapes::ShapeRef.new(shape: TimeRangeFilterOutput, required: true, location_name: "TimeRangeFilter"))
     RasterDataCollectionQueryOutput.struct_class = Types::RasterDataCollectionQueryOutput
 
     RasterDataCollectionQueryWithBandFilterInput.add_member(:area_of_interest, Shapes::ShapeRef.new(shape: AreaOfInterest, location_name: "AreaOfInterest"))
@@ -593,16 +607,16 @@ module Aws::SageMakerGeospatial
     ResamplingConfigInput.struct_class = Types::ResamplingConfigInput
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
-    ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceId"))
+    ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ReverseGeocodingConfig.add_member(:x_attribute_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "XAttributeName"))
     ReverseGeocodingConfig.add_member(:y_attribute_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "YAttributeName"))
     ReverseGeocodingConfig.struct_class = Types::ReverseGeocodingConfig
 
-    S3DataInput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    S3DataInput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKeyId"))
     S3DataInput.add_member(:metadata_provider, Shapes::ShapeRef.new(shape: MetadataProvider, required: true, location_name: "MetadataProvider"))
-    S3DataInput.add_member(:s3_uri, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3Uri"))
+    S3DataInput.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     S3DataInput.struct_class = Types::S3DataInput
 
     SearchRasterDataCollectionInput.add_member(:arn, Shapes::ShapeRef.new(shape: DataCollectionArn, required: true, location_name: "Arn"))
@@ -616,50 +630,50 @@ module Aws::SageMakerGeospatial
     SearchRasterDataCollectionOutput.struct_class = Types::SearchRasterDataCollectionOutput
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
-    ServiceQuotaExceededException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceId"))
+    ServiceQuotaExceededException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     StackConfigInput.add_member(:output_resolution, Shapes::ShapeRef.new(shape: OutputResolutionStackInput, location_name: "OutputResolution"))
     StackConfigInput.add_member(:target_bands, Shapes::ShapeRef.new(shape: StringListInput, location_name: "TargetBands"))
     StackConfigInput.struct_class = Types::StackConfigInput
 
-    StartEarthObservationJobInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
-    StartEarthObservationJobInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "ExecutionRoleArn"))
+    StartEarthObservationJobInput.add_member(:client_token, Shapes::ShapeRef.new(shape: StartEarthObservationJobInputClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartEarthObservationJobInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, location_name: "ExecutionRoleArn"))
     StartEarthObservationJobInput.add_member(:input_config, Shapes::ShapeRef.new(shape: InputConfigInput, required: true, location_name: "InputConfig"))
     StartEarthObservationJobInput.add_member(:job_config, Shapes::ShapeRef.new(shape: JobConfigInput, required: true, location_name: "JobConfig"))
-    StartEarthObservationJobInput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
-    StartEarthObservationJobInput.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
+    StartEarthObservationJobInput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKeyId"))
+    StartEarthObservationJobInput.add_member(:name, Shapes::ShapeRef.new(shape: StartEarthObservationJobInputNameString, required: true, location_name: "Name"))
     StartEarthObservationJobInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     StartEarthObservationJobInput.struct_class = Types::StartEarthObservationJobInput
 
     StartEarthObservationJobOutput.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
-    StartEarthObservationJobOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    StartEarthObservationJobOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "CreationTime"))
     StartEarthObservationJobOutput.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "DurationInSeconds"))
-    StartEarthObservationJobOutput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "ExecutionRoleArn"))
+    StartEarthObservationJobOutput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, location_name: "ExecutionRoleArn"))
     StartEarthObservationJobOutput.add_member(:input_config, Shapes::ShapeRef.new(shape: InputConfigOutput, location_name: "InputConfig"))
     StartEarthObservationJobOutput.add_member(:job_config, Shapes::ShapeRef.new(shape: JobConfigInput, required: true, location_name: "JobConfig"))
-    StartEarthObservationJobOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    StartEarthObservationJobOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKeyId"))
     StartEarthObservationJobOutput.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     StartEarthObservationJobOutput.add_member(:status, Shapes::ShapeRef.new(shape: EarthObservationJobStatus, required: true, location_name: "Status"))
     StartEarthObservationJobOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     StartEarthObservationJobOutput.struct_class = Types::StartEarthObservationJobOutput
 
-    StartVectorEnrichmentJobInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
-    StartVectorEnrichmentJobInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ExecutionRoleArn"))
+    StartVectorEnrichmentJobInput.add_member(:client_token, Shapes::ShapeRef.new(shape: StartVectorEnrichmentJobInputClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartVectorEnrichmentJobInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, required: true, location_name: "ExecutionRoleArn"))
     StartVectorEnrichmentJobInput.add_member(:input_config, Shapes::ShapeRef.new(shape: VectorEnrichmentJobInputConfig, required: true, location_name: "InputConfig"))
     StartVectorEnrichmentJobInput.add_member(:job_config, Shapes::ShapeRef.new(shape: VectorEnrichmentJobConfig, required: true, location_name: "JobConfig"))
-    StartVectorEnrichmentJobInput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
-    StartVectorEnrichmentJobInput.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
+    StartVectorEnrichmentJobInput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKeyId"))
+    StartVectorEnrichmentJobInput.add_member(:name, Shapes::ShapeRef.new(shape: StartVectorEnrichmentJobInputNameString, required: true, location_name: "Name"))
     StartVectorEnrichmentJobInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     StartVectorEnrichmentJobInput.struct_class = Types::StartVectorEnrichmentJobInput
 
     StartVectorEnrichmentJobOutput.add_member(:arn, Shapes::ShapeRef.new(shape: VectorEnrichmentJobArn, required: true, location_name: "Arn"))
-    StartVectorEnrichmentJobOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    StartVectorEnrichmentJobOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "CreationTime"))
     StartVectorEnrichmentJobOutput.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "DurationInSeconds"))
-    StartVectorEnrichmentJobOutput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ExecutionRoleArn"))
+    StartVectorEnrichmentJobOutput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, required: true, location_name: "ExecutionRoleArn"))
     StartVectorEnrichmentJobOutput.add_member(:input_config, Shapes::ShapeRef.new(shape: VectorEnrichmentJobInputConfig, required: true, location_name: "InputConfig"))
     StartVectorEnrichmentJobOutput.add_member(:job_config, Shapes::ShapeRef.new(shape: VectorEnrichmentJobConfig, required: true, location_name: "JobConfig"))
-    StartVectorEnrichmentJobOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    StartVectorEnrichmentJobOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKeyId"))
     StartVectorEnrichmentJobOutput.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     StartVectorEnrichmentJobOutput.add_member(:status, Shapes::ShapeRef.new(shape: VectorEnrichmentJobStatus, required: true, location_name: "Status"))
     StartVectorEnrichmentJobOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
@@ -697,12 +711,16 @@ module Aws::SageMakerGeospatial
     TemporalStatisticsListInput.member = Shapes::ShapeRef.new(shape: TemporalStatistics)
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
-    ThrottlingException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceId"))
+    ThrottlingException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
     TimeRangeFilterInput.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
     TimeRangeFilterInput.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
     TimeRangeFilterInput.struct_class = Types::TimeRangeFilterInput
+
+    TimeRangeFilterOutput.add_member(:end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "EndTime"))
+    TimeRangeFilterOutput.add_member(:start_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "StartTime"))
+    TimeRangeFilterOutput.struct_class = Types::TimeRangeFilterOutput
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "ResourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
@@ -715,7 +733,7 @@ module Aws::SageMakerGeospatial
     UserDefined.struct_class = Types::UserDefined
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
-    ValidationException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceId"))
+    ValidationException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
     ValidationException.struct_class = Types::ValidationException
 
     VectorEnrichmentJobConfig.add_member(:map_matching_config, Shapes::ShapeRef.new(shape: MapMatchingConfig, location_name: "MapMatchingConfig"))
@@ -746,8 +764,8 @@ module Aws::SageMakerGeospatial
 
     VectorEnrichmentJobList.member = Shapes::ShapeRef.new(shape: ListVectorEnrichmentJobOutputConfig)
 
-    VectorEnrichmentJobS3Data.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
-    VectorEnrichmentJobS3Data.add_member(:s3_uri, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3Uri"))
+    VectorEnrichmentJobS3Data.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKeyId"))
+    VectorEnrichmentJobS3Data.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     VectorEnrichmentJobS3Data.struct_class = Types::VectorEnrichmentJobS3Data
 
     ViewOffNadirInput.add_member(:lower_bound, Shapes::ShapeRef.new(shape: Float, required: true, location_name: "LowerBound"))
@@ -764,7 +782,8 @@ module Aws::SageMakerGeospatial
 
     ZonalStatisticsConfigInput.add_member(:statistics, Shapes::ShapeRef.new(shape: ZonalStatisticsListInput, required: true, location_name: "Statistics"))
     ZonalStatisticsConfigInput.add_member(:target_bands, Shapes::ShapeRef.new(shape: StringListInput, location_name: "TargetBands"))
-    ZonalStatisticsConfigInput.add_member(:zone_s3_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ZoneS3Path"))
+    ZonalStatisticsConfigInput.add_member(:zone_s3_path, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "ZoneS3Path"))
+    ZonalStatisticsConfigInput.add_member(:zone_s3_path_kms_key_id, Shapes::ShapeRef.new(shape: KmsKey, location_name: "ZoneS3PathKmsKeyId"))
     ZonalStatisticsConfigInput.struct_class = Types::ZonalStatisticsConfigInput
 
     ZonalStatisticsListInput.member = Shapes::ShapeRef.new(shape: ZonalStatistics)

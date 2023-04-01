@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2023-03-30)
+------------------
+
+* Feature - Amazon EC2 Auto Scaling now supports Elastic Load Balancing traffic sources with the AttachTrafficSources, DetachTrafficSources, and DescribeTrafficSources APIs. This release also introduces a new activity status, "WaitingForConnectionDraining", for VPC Lattice to the DescribeScalingActivities API.
+
 1.86.0 (2023-02-10)
 ------------------
 

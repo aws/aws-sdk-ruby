@@ -167,7 +167,8 @@ module Aws::AutoScaling
     #     default_instance_warmup: 1,
     #     traffic_sources: [
     #       {
-    #         identifier: "XmlStringMaxLen511",
+    #         identifier: "XmlStringMaxLen511", # required
+    #         type: "XmlStringMaxLen511",
     #       },
     #     ],
     #   })
@@ -269,7 +270,8 @@ module Aws::AutoScaling
     # @option options [Array<String>] :load_balancer_names
     #   A list of Classic Load Balancers associated with this Auto Scaling
     #   group. For Application Load Balancers, Network Load Balancers, and
-    #   Gateway Load Balancer, specify the `TargetGroupARNs` property instead.
+    #   Gateway Load Balancers, specify the `TargetGroupARNs` property
+    #   instead.
     # @option options [Array<String>] :target_group_arns
     #   The Amazon Resource Names (ARN) of the Elastic Load Balancing target
     #   groups to associate with the Auto Scaling group. Instances are
@@ -283,14 +285,12 @@ module Aws::AutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html
     # @option options [String] :health_check_type
-    #   Determines whether any additional health checks are performed on the
-    #   instances in this group. Amazon EC2 health checks are always on. For
-    #   more information, see [Health checks for Auto Scaling instances][1] in
-    #   the *Amazon EC2 Auto Scaling User Guide*.
+    #   A comma-separated list of one or more health check types.
     #
-    #   The valid values are `EC2` (default), `ELB`, and `VPC_LATTICE`. The
-    #   `VPC_LATTICE` health check type is reserved for use with VPC Lattice,
-    #   which is in preview release and is subject to change.
+    #   The valid values are `EC2`, `ELB`, and `VPC_LATTICE`. `EC2` is the
+    #   default health check and cannot be disabled. For more information, see
+    #   [Health checks for Auto Scaling instances][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
     #
     #
@@ -447,17 +447,10 @@ module Aws::AutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html
     # @option options [Array<Types::TrafficSourceIdentifier>] :traffic_sources
-    #   **Reserved for use with Amazon VPC Lattice, which is in preview
-    #   release and is subject to change. Do not use this parameter for
-    #   production workloads. It is also subject to change.**
-    #
-    #   The unique identifiers of one or more traffic sources.
-    #
-    #   Currently, you must specify an Amazon Resource Name (ARN) for an
-    #   existing VPC Lattice target group. Amazon EC2 Auto Scaling registers
-    #   the running instances with the attached target groups. The target
-    #   groups receive incoming traffic and route requests to one or more
-    #   registered targets.
+    #   The list of traffic sources to attach to this Auto Scaling group. You
+    #   can use any of the following as traffic sources for an Auto Scaling
+    #   group: Classic Load Balancer, Application Load Balancer, Gateway Load
+    #   Balancer, Network Load Balancer, and VPC Lattice.
     # @return [AutoScalingGroup]
     def create_group(options = {})
       @client.create_auto_scaling_group(options)

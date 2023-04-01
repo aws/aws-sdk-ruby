@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2023-03-30)
+------------------
+
+* Feature - AWS Kendra now supports featured results for a query.
+
 1.63.0 (2023-01-18)
 ------------------
 

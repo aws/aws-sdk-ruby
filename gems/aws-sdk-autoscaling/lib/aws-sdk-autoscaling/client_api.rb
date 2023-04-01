@@ -781,7 +781,7 @@ module Aws::AutoScaling
     DescribeTerminationPolicyTypesAnswer.struct_class = Types::DescribeTerminationPolicyTypesAnswer
 
     DescribeTrafficSourcesRequest.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
-    DescribeTrafficSourcesRequest.add_member(:traffic_source_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "TrafficSourceType"))
+    DescribeTrafficSourcesRequest.add_member(:traffic_source_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "TrafficSourceType"))
     DescribeTrafficSourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
     DescribeTrafficSourcesRequest.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
     DescribeTrafficSourcesRequest.struct_class = Types::DescribeTrafficSourcesRequest
@@ -1491,11 +1491,14 @@ module Aws::AutoScaling
     TotalLocalStorageGBRequest.add_member(:max, Shapes::ShapeRef.new(shape: NullablePositiveDouble, location_name: "Max"))
     TotalLocalStorageGBRequest.struct_class = Types::TotalLocalStorageGBRequest
 
-    TrafficSourceIdentifier.add_member(:identifier, Shapes::ShapeRef.new(shape: XmlStringMaxLen511, location_name: "Identifier"))
+    TrafficSourceIdentifier.add_member(:identifier, Shapes::ShapeRef.new(shape: XmlStringMaxLen511, required: true, location_name: "Identifier"))
+    TrafficSourceIdentifier.add_member(:type, Shapes::ShapeRef.new(shape: XmlStringMaxLen511, location_name: "Type"))
     TrafficSourceIdentifier.struct_class = Types::TrafficSourceIdentifier
 
-    TrafficSourceState.add_member(:traffic_source, Shapes::ShapeRef.new(shape: XmlStringMaxLen511, location_name: "TrafficSource"))
+    TrafficSourceState.add_member(:traffic_source, Shapes::ShapeRef.new(shape: XmlStringMaxLen511, deprecated: true, location_name: "TrafficSource", metadata: {"deprecatedMessage"=>"TrafficSource has been replaced by Identifier"}))
     TrafficSourceState.add_member(:state, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "State"))
+    TrafficSourceState.add_member(:identifier, Shapes::ShapeRef.new(shape: XmlStringMaxLen511, location_name: "Identifier"))
+    TrafficSourceState.add_member(:type, Shapes::ShapeRef.new(shape: XmlStringMaxLen511, location_name: "Type"))
     TrafficSourceState.struct_class = Types::TrafficSourceState
 
     TrafficSourceStates.member = Shapes::ShapeRef.new(shape: TrafficSourceState)
@@ -1989,6 +1992,12 @@ module Aws::AutoScaling
         o.output = Shapes::ShapeRef.new(shape: DescribeTrafficSourcesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_warm_pool, Seahorse::Model::Operation.new.tap do |o|

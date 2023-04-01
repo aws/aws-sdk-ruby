@@ -5109,7 +5109,6 @@ module Aws::Glue
     UpdateCsvClassifierRequest.struct_class = Types::UpdateCsvClassifierRequest
 
     UpdateDataQualityRulesetRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
-    UpdateDataQualityRulesetRequest.add_member(:updated_name, Shapes::ShapeRef.new(shape: NameString, location_name: "UpdatedName"))
     UpdateDataQualityRulesetRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     UpdateDataQualityRulesetRequest.add_member(:ruleset, Shapes::ShapeRef.new(shape: DataQualityRulesetString, location_name: "Ruleset"))
     UpdateDataQualityRulesetRequest.struct_class = Types::UpdateDataQualityRulesetRequest

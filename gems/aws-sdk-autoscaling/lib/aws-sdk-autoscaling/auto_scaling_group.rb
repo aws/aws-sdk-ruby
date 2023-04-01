@@ -109,12 +109,7 @@ module Aws::AutoScaling
       data[:target_group_arns]
     end
 
-    # Determines whether any additional health checks are performed on the
-    # instances in this group. Amazon EC2 health checks are always on.
-    #
-    # The valid values are `EC2` (default), `ELB`, and `VPC_LATTICE`. The
-    # `VPC_LATTICE` health check type is reserved for use with VPC Lattice,
-    # which is in preview release and is subject to change.
+    # A comma-separated list of one or more health check types.
     # @return [String]
     def health_check_type
       data[:health_check_type]
@@ -232,11 +227,7 @@ module Aws::AutoScaling
       data[:default_instance_warmup]
     end
 
-    # **Reserved for use with Amazon VPC Lattice, which is in preview
-    # release and is subject to change. Do not use this parameter for
-    # production workloads. It is also subject to change.**
-    #
-    # The unique identifiers of the traffic sources.
+    # The traffic sources associated with this Auto Scaling group.
     # @return [Array<Types::TrafficSourceIdentifier>]
     def traffic_sources
       data[:traffic_sources]
@@ -1288,12 +1279,16 @@ module Aws::AutoScaling
     # @option options [Array<String>] :availability_zones
     #   One or more Availability Zones for the group.
     # @option options [String] :health_check_type
-    #   Determines whether any additional health checks are performed on the
-    #   instances in this group. Amazon EC2 health checks are always on.
+    #   A comma-separated list of one or more health check types.
     #
-    #   The valid values are `EC2` (default), `ELB`, and `VPC_LATTICE`. The
-    #   `VPC_LATTICE` health check type is reserved for use with VPC Lattice,
-    #   which is in preview release and is subject to change.
+    #   The valid values are `EC2`, `ELB`, and `VPC_LATTICE`. `EC2` is the
+    #   default health check and cannot be disabled. For more information, see
+    #   [Health checks for Auto Scaling instances][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html
     # @option options [Integer] :health_check_grace_period
     #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
     #   before checking the health status of an EC2 instance that has come

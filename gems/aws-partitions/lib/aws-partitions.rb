@@ -574,6 +574,7 @@ module Aws
             'TranscribeStreamingService' => 'transcribestreaming',
             'Transfer' => 'transfer',
             'Translate' => 'translate',
+            'VPCLattice' => 'vpc-lattice',
             'VoiceID' => 'voiceid',
             'WAF' => 'waf',
             'WAFRegional' => 'waf-regional',

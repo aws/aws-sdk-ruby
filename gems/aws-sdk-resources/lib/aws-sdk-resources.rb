@@ -337,6 +337,7 @@ module Aws
   autoload :TranscribeStreamingService, 'aws-sdk-transcribestreamingservice'
   autoload :Transfer, 'aws-sdk-transfer'
   autoload :Translate, 'aws-sdk-translate'
+  autoload :VPCLattice, 'aws-sdk-vpclattice'
   autoload :VoiceID, 'aws-sdk-voiceid'
   autoload :WAF, 'aws-sdk-waf'
   autoload :WAFRegional, 'aws-sdk-wafregional'

@@ -1101,6 +1101,9 @@
   "Translate": {
     "models": "translate/2017-07-01"
   },
+  "VPCLattice": {
+    "models": "vpc-lattice/2022-11-30"
+  },
   "VoiceID": {
     "models": "voice-id/2021-09-27"
   },

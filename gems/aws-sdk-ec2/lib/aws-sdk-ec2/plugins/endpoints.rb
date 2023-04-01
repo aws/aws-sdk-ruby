@@ -958,6 +958,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::GetVpnConnectionDeviceSampleConfiguration.build(context)
           when :get_vpn_connection_device_types
             Aws::EC2::Endpoints::GetVpnConnectionDeviceTypes.build(context)
+          when :get_vpn_tunnel_replacement_status
+            Aws::EC2::Endpoints::GetVpnTunnelReplacementStatus.build(context)
           when :import_client_vpn_client_certificate_revocation_list
             Aws::EC2::Endpoints::ImportClientVpnClientCertificateRevocationList.build(context)
           when :import_image
@@ -1158,6 +1160,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::ReplaceRouteTableAssociation.build(context)
           when :replace_transit_gateway_route
             Aws::EC2::Endpoints::ReplaceTransitGatewayRoute.build(context)
+          when :replace_vpn_tunnel
+            Aws::EC2::Endpoints::ReplaceVpnTunnel.build(context)
           when :report_instance_status
             Aws::EC2::Endpoints::ReportInstanceStatus.build(context)
           when :request_spot_fleet

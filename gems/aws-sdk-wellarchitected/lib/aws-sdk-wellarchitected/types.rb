@@ -24,15 +24,18 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
-    # The choice level additional resources.
+    # The choice level additional resources for a custom lens.
+    #
+    # This field does not apply to Amazon Web Services official lenses.
     #
     # @!attribute [rw] type
-    #   Type of additional resource.
+    #   Type of additional resource for a custom lens.
     #   @return [String]
     #
     # @!attribute [rw] content
     #   The URLs for additional resources, either helpful resources or
-    #   improvement plans. Up to five additional URLs can be specified.
+    #   improvement plans, for a custom lens. Up to five additional URLs can
+    #   be specified.
     #   @return [Array<Types::ChoiceContent>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/AdditionalResources AWS API Documentation
@@ -65,17 +68,29 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] improvement_plan_url
-    #   The improvement plan URL for a question.
+    #   The improvement plan URL for a question in an Amazon Web Services
+    #   official lenses.
     #
     #   This value is only available if the question has been answered.
+    #
+    #   This value does not apply to custom lenses.
     #   @return [String]
     #
     # @!attribute [rw] helpful_resource_url
-    #   The helpful resource URL for a question.
+    #   The helpful resource URL.
+    #
+    #   For Amazon Web Services official lenses, this is the helpful
+    #   resource URL for a question or choice.
+    #
+    #   For custom lenses, this is the helpful resource URL for a question
+    #   and is only provided if `HelpfulResourceDisplayText` was specified
+    #   for the question.
     #   @return [String]
     #
     # @!attribute [rw] helpful_resource_display_text
-    #   The helpful resource text to be displayed.
+    #   The helpful resource text to be displayed for a custom lens.
+    #
+    #   This field does not apply to Amazon Web Services official lenses.
     #   @return [String]
     #
     # @!attribute [rw] choices
@@ -207,6 +222,26 @@ module Aws::WellArchitected
     class AssociateLensesInput < Struct.new(
       :workload_id,
       :lens_aliases)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A best practice, or question choice, that has been identified as a
+    # risk in this question.
+    #
+    # @!attribute [rw] choice_id
+    #   The ID of a choice.
+    #   @return [String]
+    #
+    # @!attribute [rw] choice_title
+    #   The title of a choice.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/BestPractice AWS API Documentation
+    #
+    class BestPractice < Struct.new(
+      :choice_id,
+      :choice_title)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -369,17 +404,24 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] helpful_resource
-    #   The choice level helpful resource.
+    #   The helpful resource (both text and URL) for a particular choice.
+    #
+    #   This field only applies to custom lenses. Each choice can have only
+    #   one helpful resource.
     #   @return [Types::ChoiceContent]
     #
     # @!attribute [rw] improvement_plan
-    #   The choice level improvement plan.
+    #   The improvement plan (both text and URL) for a particular choice.
+    #
+    #   This field only applies to custom lenses. Each choice can have only
+    #   one improvement plan.
     #   @return [Types::ChoiceContent]
     #
     # @!attribute [rw] additional_resources
-    #   The additional resources for a choice. A choice can have up to two
-    #   additional resources: one of type `HELPFUL_RESOURCE`, one of type
-    #   `IMPROVEMENT_PLAN`, or both.
+    #   The additional resources for a choice in a custom lens.
+    #
+    #   A choice can have up to two additional resources: one of type
+    #   `HELPFUL_RESOURCE`, one of type `IMPROVEMENT_PLAN`, or both.
     #   @return [Array<Types::AdditionalResources>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/Choice AWS API Documentation
@@ -481,9 +523,12 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] improvement_plan_url
-    #   The improvement plan URL for a question.
+    #   The improvement plan URL for a question in an Amazon Web Services
+    #   official lenses.
     #
     #   This value is only available if the question has been answered.
+    #
+    #   This value does not apply to custom lenses.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ChoiceImprovementPlan AWS API Documentation
@@ -521,7 +566,7 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
-    # The resource already exists.
+    # The resource has already been processed, was deleted, or is too large.
     #
     # @!attribute [rw] message
     #   Description of the error.
@@ -545,15 +590,73 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # A metric that contributes to the consolidated report.
+    #
+    # @!attribute [rw] metric_type
+    #   The metric type of a metric in the consolidated report. Currently
+    #   only WORKLOAD metric types are supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] risk_counts
+    #   A map from risk names to the count of how many questions have that
+    #   rating.
+    #   @return [Hash<String,Integer>]
+    #
+    # @!attribute [rw] workload_id
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] workload_name
+    #   The name of the workload.
+    #
+    #   The name must be unique within an account within an Amazon Web
+    #   Services Region. Spaces and capitalization are ignored when checking
+    #   for uniqueness.
+    #   @return [String]
+    #
+    # @!attribute [rw] workload_arn
+    #   The ARN for the workload.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time recorded.
+    #   @return [Time]
+    #
+    # @!attribute [rw] lenses
+    #   The metrics for the lenses in the workload.
+    #   @return [Array<Types::LensMetric>]
+    #
+    # @!attribute [rw] lenses_applied_count
+    #   The total number of lenses applied to the workload.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ConsolidatedReportMetric AWS API Documentation
+    #
+    class ConsolidatedReportMetric < Struct.new(
+      :metric_type,
+      :risk_counts,
+      :workload_id,
+      :workload_name,
+      :workload_arn,
+      :updated_at,
+      :lenses,
+      :lenses_applied_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] lens_alias
     #   The alias of the lens.
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -569,8 +672,8 @@ module Aws::WellArchitected
     #
     #   You should not reuse the same token for other requests. If you retry
     #   a request with the same client request token and the same parameters
-    #   after it has completed successfully, the result of the original
-    #   request is returned.
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
     #
     #   This token is listed as required, however, if you do not specify it,
     #   the Amazon Web Services SDKs automatically generate one for you. If
@@ -608,10 +711,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -630,8 +735,8 @@ module Aws::WellArchitected
     #
     #   You should not reuse the same token for other requests. If you retry
     #   a request with the same client request token and the same parameters
-    #   after it has completed successfully, the result of the original
-    #   request is returned.
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
     #
     #   This token is listed as required, however, if you do not specify it,
     #   the Amazon Web Services SDKs automatically generate one for you. If
@@ -689,8 +794,8 @@ module Aws::WellArchitected
     #
     #   You should not reuse the same token for other requests. If you retry
     #   a request with the same client request token and the same parameters
-    #   after it has completed successfully, the result of the original
-    #   request is returned.
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
     #
     #   This token is listed as required, however, if you do not specify it,
     #   the Amazon Web Services SDKs automatically generate one for you. If
@@ -861,8 +966,8 @@ module Aws::WellArchitected
     #
     #   You should not reuse the same token for other requests. If you retry
     #   a request with the same client request token and the same parameters
-    #   after it has completed successfully, the result of the original
-    #   request is returned.
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
     #
     #   This token is listed as required, however, if you do not specify it,
     #   the Amazon Web Services SDKs automatically generate one for you. If
@@ -952,8 +1057,8 @@ module Aws::WellArchitected
     #
     #   You should not reuse the same token for other requests. If you retry
     #   a request with the same client request token and the same parameters
-    #   after it has completed successfully, the result of the original
-    #   request is returned.
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
     #
     #   This token is listed as required, however, if you do not specify it,
     #   the Amazon Web Services SDKs automatically generate one for you. If
@@ -1000,10 +1105,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1014,8 +1121,8 @@ module Aws::WellArchitected
     #
     #   You should not reuse the same token for other requests. If you retry
     #   a request with the same client request token and the same parameters
-    #   after it has completed successfully, the result of the original
-    #   request is returned.
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
     #
     #   This token is listed as required, however, if you do not specify it,
     #   the Amazon Web Services SDKs automatically generate one for you. If
@@ -1049,10 +1156,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1063,8 +1172,8 @@ module Aws::WellArchitected
     #
     #   You should not reuse the same token for other requests. If you retry
     #   a request with the same client request token and the same parameters
-    #   after it has completed successfully, the result of the original
-    #   request is returned.
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
     #
     #   This token is listed as required, however, if you do not specify it,
     #   the Amazon Web Services SDKs automatically generate one for you. If
@@ -1098,8 +1207,8 @@ module Aws::WellArchitected
     #
     #   You should not reuse the same token for other requests. If you retry
     #   a request with the same client request token and the same parameters
-    #   after it has completed successfully, the result of the original
-    #   request is returned.
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
     #
     #   This token is listed as required, however, if you do not specify it,
     #   the Amazon Web Services SDKs automatically generate one for you. If
@@ -1136,8 +1245,8 @@ module Aws::WellArchitected
     #
     #   You should not reuse the same token for other requests. If you retry
     #   a request with the same client request token and the same parameters
-    #   after it has completed successfully, the result of the original
-    #   request is returned.
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
     #
     #   This token is listed as required, however, if you do not specify it,
     #   the Amazon Web Services SDKs automatically generate one for you. If
@@ -1186,10 +1295,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1208,7 +1319,7 @@ module Aws::WellArchitected
     end
 
     # @!attribute [rw] lens_json
-    #   The JSON for the lens.
+    #   The JSON representation of a lens.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ExportLensOutput AWS API Documentation
@@ -1231,10 +1342,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1278,10 +1391,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1306,15 +1421,76 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # @!attribute [rw] format
+    #   The format of the consolidated report.
+    #
+    #   For `PDF`, `Base64String` is returned. For `JSON`, `Metrics` is
+    #   returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_shared_resources
+    #   Set to `true` to have shared resources included in the report.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for this request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetConsolidatedReportInput AWS API Documentation
+    #
+    class GetConsolidatedReportInput < Struct.new(
+      :format,
+      :include_shared_resources,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metrics
+    #   The metrics that make up the consolidated report.
+    #
+    #   Only returned when `JSON` format is requested.
+    #   @return [Array<Types::ConsolidatedReportMetric>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_64_string
+    #   The Base64-encoded string representation of a lens review report.
+    #
+    #   This data can be used to create a PDF file.
+    #
+    #   Only returned by GetConsolidatedReport when `PDF` format is
+    #   requested.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetConsolidatedReportOutput AWS API Documentation
+    #
+    class GetConsolidatedReportOutput < Struct.new(
+      :metrics,
+      :next_token,
+      :base_64_string)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] lens_alias
     #   The alias of the lens.
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1356,10 +1532,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1419,10 +1597,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1475,10 +1655,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1506,10 +1688,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1623,10 +1807,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1641,8 +1827,8 @@ module Aws::WellArchitected
     #
     #   You should not reuse the same token for other requests. If you retry
     #   a request with the same client request token and the same parameters
-    #   after it has completed successfully, the result of the original
-    #   request is returned.
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
     #
     #   This token is listed as required, however, if you do not specify it,
     #   the Amazon Web Services SDKs automatically generate one for you. If
@@ -1669,7 +1855,7 @@ module Aws::WellArchitected
     end
 
     # @!attribute [rw] lens_arn
-    #   The ARN for the lens.
+    #   The ARN for the lens that was created or updated.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1706,9 +1892,12 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] improvement_plan_url
-    #   The improvement plan URL for a question.
+    #   The improvement plan URL for a question in an Amazon Web Services
+    #   official lenses.
     #
     #   This value is only available if the question has been answered.
+    #
+    #   This value does not apply to custom lenses.
     #   @return [String]
     #
     # @!attribute [rw] improvement_plans
@@ -1786,6 +1975,31 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # A metric for a particular lens in a workload.
+    #
+    # @!attribute [rw] lens_arn
+    #   The lens ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillars
+    #   The metrics for the pillars in a lens.
+    #   @return [Array<Types::PillarMetric>]
+    #
+    # @!attribute [rw] risk_counts
+    #   A map from risk names to the count of how many questions have that
+    #   rating.
+    #   @return [Hash<String,Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/LensMetric AWS API Documentation
+    #
+    class LensMetric < Struct.new(
+      :lens_arn,
+      :pillars,
+      :risk_counts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A lens review of a question.
     #
     # @!attribute [rw] lens_alias
@@ -1793,10 +2007,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1830,7 +2046,7 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] risk_counts
-    #   A map from risk names to the count of how questions have that
+    #   A map from risk names to the count of how many questions have that
     #   rating.
     #   @return [Hash<String,Integer>]
     #
@@ -1862,10 +2078,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1878,6 +2096,9 @@ module Aws::WellArchitected
     #   The Base64-encoded string representation of a lens review report.
     #
     #   This data can be used to create a PDF file.
+    #
+    #   Only returned by GetConsolidatedReport when `PDF` format is
+    #   requested.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/LensReviewReport AWS API Documentation
@@ -1897,10 +2118,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -1926,7 +2149,7 @@ module Aws::WellArchitected
     #   @return [Time]
     #
     # @!attribute [rw] risk_counts
-    #   A map from risk names to the count of how questions have that
+    #   A map from risk names to the count of how many questions have that
     #   rating.
     #   @return [Hash<String,Integer>]
     #
@@ -1985,10 +2208,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -2062,10 +2287,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -2107,10 +2334,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -2166,10 +2395,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -2337,10 +2568,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -2396,10 +2629,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -2498,10 +2733,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -2995,6 +3232,33 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # A metric for a particular pillar in a lens.
+    #
+    # @!attribute [rw] pillar_id
+    #   The ID used to identify a pillar, for example, `security`.
+    #
+    #   A pillar is identified by its PillarReviewSummary$PillarId.
+    #   @return [String]
+    #
+    # @!attribute [rw] risk_counts
+    #   A map from risk names to the count of how many questions have that
+    #   rating.
+    #   @return [Hash<String,Integer>]
+    #
+    # @!attribute [rw] questions
+    #   The questions that have been identified as risks in the pillar.
+    #   @return [Array<Types::QuestionMetric>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/PillarMetric AWS API Documentation
+    #
+    class PillarMetric < Struct.new(
+      :pillar_id,
+      :risk_counts,
+      :questions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A pillar review summary of a lens review.
     #
     # @!attribute [rw] pillar_id
@@ -3012,7 +3276,7 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] risk_counts
-    #   A map from risk names to the count of how questions have that
+    #   A map from risk names to the count of how many questions have that
     #   rating.
     #   @return [Hash<String,Integer>]
     #
@@ -3047,6 +3311,31 @@ module Aws::WellArchitected
       :question_id,
       :question_title,
       :difference_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A metric for a particular question in the pillar.
+    #
+    # @!attribute [rw] question_id
+    #   The ID of the question.
+    #   @return [String]
+    #
+    # @!attribute [rw] risk
+    #   The risk for a given workload, lens review, pillar, or question.
+    #   @return [String]
+    #
+    # @!attribute [rw] best_practices
+    #   The best practices, or choices, that have been identified as
+    #   contributing to risk in a question.
+    #   @return [Array<Types::BestPractice>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/QuestionMetric AWS API Documentation
+    #
+    class QuestionMetric < Struct.new(
+      :question_id,
+      :risk,
+      :best_practices)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3129,10 +3418,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -3292,10 +3583,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -3354,10 +3647,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -3405,10 +3700,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -3720,10 +4017,12 @@ module Aws::WellArchitected
     #
     #   For Amazon Web Services official lenses, this is either the lens
     #   alias, such as `serverless`, or the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-west-2::lens/serverless`.
+    #   `arn:aws:wellarchitected:us-east-1::lens/serverless`. Note that some
+    #   operations (such as ExportLens and CreateLensShare) are not
+    #   permitted on Amazon Web Services official lenses.
     #
     #   For custom lenses, this is the lens ARN, such as
-    #   `arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens`.
+    #   `arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef`.
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #   @return [String]
@@ -3740,8 +4039,8 @@ module Aws::WellArchitected
     #
     #   You should not reuse the same token for other requests. If you retry
     #   a request with the same client request token and the same parameters
-    #   after it has completed successfully, the result of the original
-    #   request is returned.
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
     #
     #   This token is listed as required, however, if you do not specify it,
     #   the Amazon Web Services SDKs automatically generate one for you. If
@@ -3960,7 +4259,7 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] risk_counts
-    #   A map from risk names to the count of how questions have that
+    #   A map from risk names to the count of how many questions have that
     #   rating.
     #   @return [Hash<String,Integer>]
     #
@@ -4160,7 +4459,7 @@ module Aws::WellArchitected
     #   @return [Array<String>]
     #
     # @!attribute [rw] risk_counts
-    #   A map from risk names to the count of how questions have that
+    #   A map from risk names to the count of how many questions have that
     #   rating.
     #   @return [Hash<String,Integer>]
     #

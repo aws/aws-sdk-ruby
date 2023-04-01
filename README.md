@@ -624,6 +624,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Transcribe Service                             | Aws::TranscribeService                   | aws-sdk-transcribeservice                   | 2017-10-26  |
 | Amazon Transcribe Streaming Service                   | Aws::TranscribeStreamingService          | aws-sdk-transcribestreamingservice          | 2017-10-26  |
 | Amazon Translate                                      | Aws::Translate                           | aws-sdk-translate                           | 2017-07-01  |
+| Amazon VPC Lattice                                    | Aws::VPCLattice                          | aws-sdk-vpclattice                          | 2022-11-30  |
 | Amazon Voice ID                                       | Aws::VoiceID                             | aws-sdk-voiceid                             | 2021-09-27  |
 | Amazon WorkDocs                                       | Aws::WorkDocs                            | aws-sdk-workdocs                            | 2016-05-01  |
 | Amazon WorkLink                                       | Aws::WorkLink                            | aws-sdk-worklink                            | 2018-09-25  |

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2023-03-30)
+------------------
+
+* Feature - Adds support for new image workflow details and image vulnerability detection.
+
 1.44.0 (2023-01-30)
 ------------------
 

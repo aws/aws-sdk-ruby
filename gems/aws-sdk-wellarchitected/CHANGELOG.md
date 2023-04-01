@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2023-03-30)
+------------------
+
+* Feature - AWS Well-Architected SDK now supports getting consolidated report metrics and generating a consolidated report PDF.
+
 1.20.0 (2023-01-18)
 ------------------
 

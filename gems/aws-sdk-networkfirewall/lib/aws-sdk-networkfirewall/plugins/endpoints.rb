@@ -66,6 +66,8 @@ module Aws::NetworkFirewall
             Aws::NetworkFirewall::Endpoints::CreateFirewallPolicy.build(context)
           when :create_rule_group
             Aws::NetworkFirewall::Endpoints::CreateRuleGroup.build(context)
+          when :create_tls_inspection_configuration
+            Aws::NetworkFirewall::Endpoints::CreateTLSInspectionConfiguration.build(context)
           when :delete_firewall
             Aws::NetworkFirewall::Endpoints::DeleteFirewall.build(context)
           when :delete_firewall_policy
@@ -74,6 +76,8 @@ module Aws::NetworkFirewall
             Aws::NetworkFirewall::Endpoints::DeleteResourcePolicy.build(context)
           when :delete_rule_group
             Aws::NetworkFirewall::Endpoints::DeleteRuleGroup.build(context)
+          when :delete_tls_inspection_configuration
+            Aws::NetworkFirewall::Endpoints::DeleteTLSInspectionConfiguration.build(context)
           when :describe_firewall
             Aws::NetworkFirewall::Endpoints::DescribeFirewall.build(context)
           when :describe_firewall_policy
@@ -86,6 +90,8 @@ module Aws::NetworkFirewall
             Aws::NetworkFirewall::Endpoints::DescribeRuleGroup.build(context)
           when :describe_rule_group_metadata
             Aws::NetworkFirewall::Endpoints::DescribeRuleGroupMetadata.build(context)
+          when :describe_tls_inspection_configuration
+            Aws::NetworkFirewall::Endpoints::DescribeTLSInspectionConfiguration.build(context)
           when :disassociate_subnets
             Aws::NetworkFirewall::Endpoints::DisassociateSubnets.build(context)
           when :list_firewall_policies
@@ -94,6 +100,8 @@ module Aws::NetworkFirewall
             Aws::NetworkFirewall::Endpoints::ListFirewalls.build(context)
           when :list_rule_groups
             Aws::NetworkFirewall::Endpoints::ListRuleGroups.build(context)
+          when :list_tls_inspection_configurations
+            Aws::NetworkFirewall::Endpoints::ListTLSInspectionConfigurations.build(context)
           when :list_tags_for_resource
             Aws::NetworkFirewall::Endpoints::ListTagsForResource.build(context)
           when :put_resource_policy
@@ -118,6 +126,8 @@ module Aws::NetworkFirewall
             Aws::NetworkFirewall::Endpoints::UpdateRuleGroup.build(context)
           when :update_subnet_change_protection
             Aws::NetworkFirewall::Endpoints::UpdateSubnetChangeProtection.build(context)
+          when :update_tls_inspection_configuration
+            Aws::NetworkFirewall::Endpoints::UpdateTLSInspectionConfiguration.build(context)
           end
         end
       end

@@ -543,8 +543,14 @@ module Aws::GuardDuty
     #     },
     #     features: [
     #       {
-    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS
+    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, EKS_RUNTIME_MONITORING
     #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #         additional_configuration: [
+    #           {
+    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT
+    #             status: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #         ],
     #       },
     #     ],
     #   })
@@ -1441,8 +1447,11 @@ module Aws::GuardDuty
     #   resp.data_sources.kubernetes.audit_logs.auto_enable #=> Boolean
     #   resp.data_sources.malware_protection.scan_ec2_instance_with_findings.ebs_volumes.auto_enable #=> Boolean
     #   resp.features #=> Array
-    #   resp.features[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS"
+    #   resp.features[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "EKS_RUNTIME_MONITORING"
     #   resp.features[0].auto_enable #=> String, one of "NEW", "NONE"
+    #   resp.features[0].additional_configuration #=> Array
+    #   resp.features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT"
+    #   resp.features[0].additional_configuration[0].auto_enable #=> String, one of "NEW", "NONE"
     #   resp.next_token #=> String
     #   resp.auto_enable_organization_members #=> String, one of "NEW", "ALL", "NONE"
     #
@@ -1670,6 +1679,60 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Retrieves aggregated statistics for your account. If you are a
+    # GuardDuty administrator, you can retrieve the statistics for all the
+    # resources associated with the active member accounts in your
+    # organization who have enabled EKS Runtime Monitoring and have the
+    # GuardDuty agent running on their EKS nodes.
+    #
+    # @option params [required, String] :detector_id
+    #   The unique ID of the GuardDuty detector associated to the coverage
+    #   statistics.
+    #
+    # @option params [Types::CoverageFilterCriteria] :filter_criteria
+    #   Represents the criteria used to filter the coverage statistics
+    #
+    # @option params [required, Array<String>] :statistics_type
+    #   Represents the statistics type used to aggregate the coverage details.
+    #
+    # @return [Types::GetCoverageStatisticsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCoverageStatisticsResponse#coverage_statistics #coverage_statistics} => Types::CoverageStatistics
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_coverage_statistics({
+    #     detector_id: "DetectorId", # required
+    #     filter_criteria: {
+    #       filter_criterion: [
+    #         {
+    #           criterion_key: "ACCOUNT_ID", # accepts ACCOUNT_ID, CLUSTER_NAME, RESOURCE_TYPE, COVERAGE_STATUS, ADDON_VERSION
+    #           filter_condition: {
+    #             equals: ["String"],
+    #             not_equals: ["String"],
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     statistics_type: ["COUNT_BY_RESOURCE_TYPE"], # required, accepts COUNT_BY_RESOURCE_TYPE, COUNT_BY_COVERAGE_STATUS
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.coverage_statistics.count_by_resource_type #=> Hash
+    #   resp.coverage_statistics.count_by_resource_type["ResourceType"] #=> Integer
+    #   resp.coverage_statistics.count_by_coverage_status #=> Hash
+    #   resp.coverage_statistics.count_by_coverage_status["CoverageStatus"] #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetCoverageStatistics AWS API Documentation
+    #
+    # @overload get_coverage_statistics(params = {})
+    # @param [Hash] params ({})
+    def get_coverage_statistics(params = {}, options = {})
+      req = build_request(:get_coverage_statistics, params)
+      req.send_request(options)
+    end
+
     # Retrieves an Amazon GuardDuty detector specified by the detectorId.
     #
     # There might be regional differences because some data sources might
@@ -1719,9 +1782,13 @@ module Aws::GuardDuty
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.features #=> Array
-    #   resp.features[0].name #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS"
+    #   resp.features[0].name #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "EKS_RUNTIME_MONITORING"
     #   resp.features[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.features[0].updated_at #=> Time
+    #   resp.features[0].additional_configuration #=> Array
+    #   resp.features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT"
+    #   resp.features[0].additional_configuration[0].status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.features[0].additional_configuration[0].updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetector AWS API Documentation
     #
@@ -2121,6 +2188,92 @@ module Aws::GuardDuty
     #   resp.findings[0].service.ebs_volume_scan_details.scan_detections.threat_detected_by_name.threat_names[0].file_paths[0].volume_arn #=> String
     #   resp.findings[0].service.ebs_volume_scan_details.scan_detections.threat_detected_by_name.threat_names[0].file_paths[0].hash #=> String
     #   resp.findings[0].service.ebs_volume_scan_details.scan_detections.threat_detected_by_name.threat_names[0].file_paths[0].file_name #=> String
+    #   resp.findings[0].service.runtime_details.process.name #=> String
+    #   resp.findings[0].service.runtime_details.process.executable_path #=> String
+    #   resp.findings[0].service.runtime_details.process.executable_sha_256 #=> String
+    #   resp.findings[0].service.runtime_details.process.namespace_pid #=> Integer
+    #   resp.findings[0].service.runtime_details.process.pwd #=> String
+    #   resp.findings[0].service.runtime_details.process.pid #=> Integer
+    #   resp.findings[0].service.runtime_details.process.start_time #=> Time
+    #   resp.findings[0].service.runtime_details.process.uuid #=> String
+    #   resp.findings[0].service.runtime_details.process.parent_uuid #=> String
+    #   resp.findings[0].service.runtime_details.process.user #=> String
+    #   resp.findings[0].service.runtime_details.process.user_id #=> Integer
+    #   resp.findings[0].service.runtime_details.process.euid #=> Integer
+    #   resp.findings[0].service.runtime_details.process.lineage #=> Array
+    #   resp.findings[0].service.runtime_details.process.lineage[0].start_time #=> Time
+    #   resp.findings[0].service.runtime_details.process.lineage[0].namespace_pid #=> Integer
+    #   resp.findings[0].service.runtime_details.process.lineage[0].user_id #=> Integer
+    #   resp.findings[0].service.runtime_details.process.lineage[0].name #=> String
+    #   resp.findings[0].service.runtime_details.process.lineage[0].pid #=> Integer
+    #   resp.findings[0].service.runtime_details.process.lineage[0].uuid #=> String
+    #   resp.findings[0].service.runtime_details.process.lineage[0].executable_path #=> String
+    #   resp.findings[0].service.runtime_details.process.lineage[0].euid #=> Integer
+    #   resp.findings[0].service.runtime_details.process.lineage[0].parent_uuid #=> String
+    #   resp.findings[0].service.runtime_details.context.modifying_process.name #=> String
+    #   resp.findings[0].service.runtime_details.context.modifying_process.executable_path #=> String
+    #   resp.findings[0].service.runtime_details.context.modifying_process.executable_sha_256 #=> String
+    #   resp.findings[0].service.runtime_details.context.modifying_process.namespace_pid #=> Integer
+    #   resp.findings[0].service.runtime_details.context.modifying_process.pwd #=> String
+    #   resp.findings[0].service.runtime_details.context.modifying_process.pid #=> Integer
+    #   resp.findings[0].service.runtime_details.context.modifying_process.start_time #=> Time
+    #   resp.findings[0].service.runtime_details.context.modifying_process.uuid #=> String
+    #   resp.findings[0].service.runtime_details.context.modifying_process.parent_uuid #=> String
+    #   resp.findings[0].service.runtime_details.context.modifying_process.user #=> String
+    #   resp.findings[0].service.runtime_details.context.modifying_process.user_id #=> Integer
+    #   resp.findings[0].service.runtime_details.context.modifying_process.euid #=> Integer
+    #   resp.findings[0].service.runtime_details.context.modifying_process.lineage #=> Array
+    #   resp.findings[0].service.runtime_details.context.modifying_process.lineage[0].start_time #=> Time
+    #   resp.findings[0].service.runtime_details.context.modifying_process.lineage[0].namespace_pid #=> Integer
+    #   resp.findings[0].service.runtime_details.context.modifying_process.lineage[0].user_id #=> Integer
+    #   resp.findings[0].service.runtime_details.context.modifying_process.lineage[0].name #=> String
+    #   resp.findings[0].service.runtime_details.context.modifying_process.lineage[0].pid #=> Integer
+    #   resp.findings[0].service.runtime_details.context.modifying_process.lineage[0].uuid #=> String
+    #   resp.findings[0].service.runtime_details.context.modifying_process.lineage[0].executable_path #=> String
+    #   resp.findings[0].service.runtime_details.context.modifying_process.lineage[0].euid #=> Integer
+    #   resp.findings[0].service.runtime_details.context.modifying_process.lineage[0].parent_uuid #=> String
+    #   resp.findings[0].service.runtime_details.context.modified_at #=> Time
+    #   resp.findings[0].service.runtime_details.context.script_path #=> String
+    #   resp.findings[0].service.runtime_details.context.library_path #=> String
+    #   resp.findings[0].service.runtime_details.context.ld_preload_value #=> String
+    #   resp.findings[0].service.runtime_details.context.socket_path #=> String
+    #   resp.findings[0].service.runtime_details.context.runc_binary_path #=> String
+    #   resp.findings[0].service.runtime_details.context.release_agent_path #=> String
+    #   resp.findings[0].service.runtime_details.context.mount_source #=> String
+    #   resp.findings[0].service.runtime_details.context.mount_target #=> String
+    #   resp.findings[0].service.runtime_details.context.file_system_type #=> String
+    #   resp.findings[0].service.runtime_details.context.flags #=> Array
+    #   resp.findings[0].service.runtime_details.context.flags[0] #=> String
+    #   resp.findings[0].service.runtime_details.context.module_name #=> String
+    #   resp.findings[0].service.runtime_details.context.module_file_path #=> String
+    #   resp.findings[0].service.runtime_details.context.module_sha_256 #=> String
+    #   resp.findings[0].service.runtime_details.context.shell_history_file_path #=> String
+    #   resp.findings[0].service.runtime_details.context.target_process.name #=> String
+    #   resp.findings[0].service.runtime_details.context.target_process.executable_path #=> String
+    #   resp.findings[0].service.runtime_details.context.target_process.executable_sha_256 #=> String
+    #   resp.findings[0].service.runtime_details.context.target_process.namespace_pid #=> Integer
+    #   resp.findings[0].service.runtime_details.context.target_process.pwd #=> String
+    #   resp.findings[0].service.runtime_details.context.target_process.pid #=> Integer
+    #   resp.findings[0].service.runtime_details.context.target_process.start_time #=> Time
+    #   resp.findings[0].service.runtime_details.context.target_process.uuid #=> String
+    #   resp.findings[0].service.runtime_details.context.target_process.parent_uuid #=> String
+    #   resp.findings[0].service.runtime_details.context.target_process.user #=> String
+    #   resp.findings[0].service.runtime_details.context.target_process.user_id #=> Integer
+    #   resp.findings[0].service.runtime_details.context.target_process.euid #=> Integer
+    #   resp.findings[0].service.runtime_details.context.target_process.lineage #=> Array
+    #   resp.findings[0].service.runtime_details.context.target_process.lineage[0].start_time #=> Time
+    #   resp.findings[0].service.runtime_details.context.target_process.lineage[0].namespace_pid #=> Integer
+    #   resp.findings[0].service.runtime_details.context.target_process.lineage[0].user_id #=> Integer
+    #   resp.findings[0].service.runtime_details.context.target_process.lineage[0].name #=> String
+    #   resp.findings[0].service.runtime_details.context.target_process.lineage[0].pid #=> Integer
+    #   resp.findings[0].service.runtime_details.context.target_process.lineage[0].uuid #=> String
+    #   resp.findings[0].service.runtime_details.context.target_process.lineage[0].executable_path #=> String
+    #   resp.findings[0].service.runtime_details.context.target_process.lineage[0].euid #=> Integer
+    #   resp.findings[0].service.runtime_details.context.target_process.lineage[0].parent_uuid #=> String
+    #   resp.findings[0].service.runtime_details.context.address_family #=> String
+    #   resp.findings[0].service.runtime_details.context.iana_protocol_number #=> Integer
+    #   resp.findings[0].service.runtime_details.context.memory_regions #=> Array
+    #   resp.findings[0].service.runtime_details.context.memory_regions[0] #=> String
     #   resp.findings[0].severity #=> Float
     #   resp.findings[0].title #=> String
     #   resp.findings[0].type #=> String
@@ -2375,9 +2528,13 @@ module Aws::GuardDuty
     #   resp.member_data_source_configurations[0].data_sources.malware_protection.scan_ec2_instance_with_findings.ebs_volumes.reason #=> String
     #   resp.member_data_source_configurations[0].data_sources.malware_protection.service_role #=> String
     #   resp.member_data_source_configurations[0].features #=> Array
-    #   resp.member_data_source_configurations[0].features[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS"
+    #   resp.member_data_source_configurations[0].features[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "EKS_RUNTIME_MONITORING"
     #   resp.member_data_source_configurations[0].features[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.member_data_source_configurations[0].features[0].updated_at #=> Time
+    #   resp.member_data_source_configurations[0].features[0].additional_configuration #=> Array
+    #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT"
+    #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].updated_at #=> Time
     #   resp.unprocessed_accounts #=> Array
     #   resp.unprocessed_accounts[0].account_id #=> String
     #   resp.unprocessed_accounts[0].result #=> String
@@ -2470,7 +2627,7 @@ module Aws::GuardDuty
     #   resp.accounts[0].data_sources.kubernetes.audit_logs.free_trial_days_remaining #=> Integer
     #   resp.accounts[0].data_sources.malware_protection.scan_ec2_instance_with_findings.free_trial_days_remaining #=> Integer
     #   resp.accounts[0].features #=> Array
-    #   resp.accounts[0].features[0].name #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS"
+    #   resp.accounts[0].features[0].name #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "EKS_RUNTIME_MONITORING"
     #   resp.accounts[0].features[0].free_trial_days_remaining #=> Integer
     #   resp.unprocessed_accounts #=> Array
     #   resp.unprocessed_accounts[0].account_id #=> String
@@ -2667,6 +2824,89 @@ module Aws::GuardDuty
     # @param [Hash] params ({})
     def invite_members(params = {}, options = {})
       req = build_request(:invite_members, params)
+      req.send_request(options)
+    end
+
+    # Lists coverage details for your GuardDuty account. If you're a
+    # GuardDuty administrator, you can retrieve all resources associated
+    # with the active member accounts in your organization.
+    #
+    # Make sure the accounts have EKS Runtime Monitoring enabled and
+    # GuardDuty agent running on their EKS nodes.
+    #
+    # @option params [required, String] :detector_id
+    #   The unique ID of the detector whose coverage details you want to
+    #   retrieve.
+    #
+    # @option params [String] :next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request to a list action. For subsequent calls, use the NextToken
+    #   value returned from the previous request to continue listing results
+    #   after the first page.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response.
+    #
+    # @option params [Types::CoverageFilterCriteria] :filter_criteria
+    #   Represents the criteria used to filter the coverage details.
+    #
+    # @option params [Types::CoverageSortCriteria] :sort_criteria
+    #   Represents the criteria used to sort the coverage details.
+    #
+    # @return [Types::ListCoverageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCoverageResponse#resources #resources} => Array&lt;Types::CoverageResource&gt;
+    #   * {Types::ListCoverageResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_coverage({
+    #     detector_id: "DetectorId", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #     filter_criteria: {
+    #       filter_criterion: [
+    #         {
+    #           criterion_key: "ACCOUNT_ID", # accepts ACCOUNT_ID, CLUSTER_NAME, RESOURCE_TYPE, COVERAGE_STATUS, ADDON_VERSION
+    #           filter_condition: {
+    #             equals: ["String"],
+    #             not_equals: ["String"],
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     sort_criteria: {
+    #       attribute_name: "ACCOUNT_ID", # accepts ACCOUNT_ID, CLUSTER_NAME, COVERAGE_STATUS, ISSUE, ADDON_VERSION, UPDATED_AT
+    #       order_by: "ASC", # accepts ASC, DESC
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resources #=> Array
+    #   resp.resources[0].resource_id #=> String
+    #   resp.resources[0].detector_id #=> String
+    #   resp.resources[0].account_id #=> String
+    #   resp.resources[0].resource_details.eks_cluster_details.cluster_name #=> String
+    #   resp.resources[0].resource_details.eks_cluster_details.covered_nodes #=> Integer
+    #   resp.resources[0].resource_details.eks_cluster_details.compatible_nodes #=> Integer
+    #   resp.resources[0].resource_details.eks_cluster_details.addon_details.addon_version #=> String
+    #   resp.resources[0].resource_details.eks_cluster_details.addon_details.addon_status #=> String
+    #   resp.resources[0].resource_details.resource_type #=> String, one of "EKS"
+    #   resp.resources[0].coverage_status #=> String, one of "HEALTHY", "UNHEALTHY"
+    #   resp.resources[0].issue #=> String
+    #   resp.resources[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListCoverage AWS API Documentation
+    #
+    # @overload list_coverage(params = {})
+    # @param [Hash] params ({})
+    def list_coverage(params = {}, options = {})
+      req = build_request(:list_coverage, params)
       req.send_request(options)
     end
 
@@ -3502,8 +3742,14 @@ module Aws::GuardDuty
     #     },
     #     features: [
     #       {
-    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS
+    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, EKS_RUNTIME_MONITORING
     #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #         additional_configuration: [
+    #           {
+    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT
+    #             status: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #         ],
     #       },
     #     ],
     #   })
@@ -3778,8 +4024,14 @@ module Aws::GuardDuty
     #     },
     #     features: [
     #       {
-    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS
+    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, EKS_RUNTIME_MONITORING
     #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #         additional_configuration: [
+    #           {
+    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT
+    #             status: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #         ],
     #       },
     #     ],
     #   })
@@ -3819,6 +4071,9 @@ module Aws::GuardDuty
     #   Indicates whether to automatically enable member accounts in the
     #   organization.
     #
+    #   Even though this is still supported, we recommend using
+    #   `AutoEnableOrganizationMembers` to achieve the similar results.
+    #
     # @option params [Types::OrganizationDataSourceConfigurations] :data_sources
     #   Describes which data sources will be updated.
     #
@@ -3829,14 +4084,17 @@ module Aws::GuardDuty
     #   Indicates the auto-enablement configuration of GuardDuty for the
     #   member accounts in the organization.
     #
-    #   * `NEW`: Indicates that new accounts joining the organization are
-    #     configured to have GuardDuty enabled automatically.
+    #   * `NEW`: Indicates that when a new account joins the organization,
+    #     they will have GuardDuty enabled automatically.
     #
-    #   * `ALL`: Indicates that all accounts (new and existing members) in the
-    #     organization are configured to have GuardDuty enabled automatically.
+    #   * `ALL`: Indicates that all accounts in the Amazon Web Services
+    #     Organization have GuardDuty enabled automatically. This includes
+    #     `NEW` accounts that join the organization and accounts that may have
+    #     been suspended or removed from the organization in GuardDuty.
     #
-    #   * `NONE`: Indicates that no account in the organization will be
-    #     configured to have GuardDuty enabled automatically.
+    #   * `NONE`: Indicates that GuardDuty will not be automatically enabled
+    #     for any accounts in the organization. GuardDuty must be managed for
+    #     each account individually by the administrator.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3864,8 +4122,14 @@ module Aws::GuardDuty
     #     },
     #     features: [
     #       {
-    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS
+    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, EKS_RUNTIME_MONITORING
     #         auto_enable: "NEW", # accepts NEW, NONE
+    #         additional_configuration: [
+    #           {
+    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT
+    #             auto_enable: "NEW", # accepts NEW, NONE
+    #           },
+    #         ],
     #       },
     #     ],
     #     auto_enable_organization_members: "NEW", # accepts NEW, ALL, NONE
@@ -3971,7 +4235,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

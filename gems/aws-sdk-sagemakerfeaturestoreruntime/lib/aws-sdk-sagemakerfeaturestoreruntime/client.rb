@@ -422,10 +422,26 @@ module Aws::SageMakerFeatureStoreRuntime
       req.send_request(options)
     end
 
-    # Deletes a `Record` from a `FeatureGroup`. When the `DeleteRecord` API
-    # is called a new record will be added to the `OfflineStore` and the
-    # `Record` will be removed from the `OnlineStore`. This record will have
-    # a value of `True` in the `is_deleted` column.
+    # Deletes a `Record` from a `FeatureGroup` in the `OnlineStore`. Feature
+    # Store supports both `SOFT_DELETE` and `HARD_DELETE`. For `SOFT_DELETE`
+    # (default), feature columns are set to `null` and the record is no
+    # longer retrievable by `GetRecord` or `BatchGetRecord`. For`
+    # HARD_DELETE`, the complete `Record` is removed from the `OnlineStore`.
+    # In both cases, Feature Store appends the deleted record marker to the
+    # `OfflineStore` with feature values set to `null`, `is_deleted` value
+    # set to `True`, and `EventTime` set to the delete input `EventTime`.
+    #
+    # Note that the `EventTime` specified in `DeleteRecord` should be set
+    # later than the `EventTime` of the existing record in the `OnlineStore`
+    # for that `RecordIdentifer`. If it is not, the deletion does not occur:
+    #
+    # * For `SOFT_DELETE`, the existing (undeleted) record remains in the
+    #   `OnlineStore`, though the delete record marker is still written to
+    #   the `OfflineStore`.
+    #
+    # * `HARD_DELETE` returns `EventTime`: `400 ValidationException` to
+    #   indicate that the delete operation failed. No delete record marker
+    #   is written to the `OfflineStore`.
     #
     # @option params [required, String] :feature_group_name
     #   The name of the feature group to delete the record from.
@@ -443,6 +459,10 @@ module Aws::SageMakerFeatureStoreRuntime
     #   Feature Store deletes the record from all of the stores that you're
     #   using for the `FeatureGroup`.
     #
+    # @option params [String] :deletion_mode
+    #   The name of the deletion mode for deleting the record. By default, the
+    #   deletion mode is set to `SoftDelete`.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -452,6 +472,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #     record_identifier_value_as_string: "ValueAsString", # required
     #     event_time: "ValueAsString", # required
     #     target_stores: ["OnlineStore"], # accepts OnlineStore, OfflineStore
+    #     deletion_mode: "SoftDelete", # accepts SoftDelete, HardDelete
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/DeleteRecord AWS API Documentation
@@ -569,7 +590,7 @@ module Aws::SageMakerFeatureStoreRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakerfeaturestoreruntime'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

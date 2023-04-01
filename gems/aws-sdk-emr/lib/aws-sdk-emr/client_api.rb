@@ -101,6 +101,9 @@ module Aws::EMR
     EbsVolumeList = Shapes::ListShape.new(name: 'EbsVolumeList')
     Ec2InstanceAttributes = Shapes::StructureShape.new(name: 'Ec2InstanceAttributes')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
+    ErrorData = Shapes::ListShape.new(name: 'ErrorData')
+    ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
+    ErrorDetailList = Shapes::ListShape.new(name: 'ErrorDetailList')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExecutionEngineConfig = Shapes::StructureShape.new(name: 'ExecutionEngineConfig')
     ExecutionEngineType = Shapes::StringShape.new(name: 'ExecutionEngineType')
@@ -473,6 +476,7 @@ module Aws::EMR
     ClusterStatus.add_member(:state, Shapes::ShapeRef.new(shape: ClusterState, location_name: "State"))
     ClusterStatus.add_member(:state_change_reason, Shapes::ShapeRef.new(shape: ClusterStateChangeReason, location_name: "StateChangeReason"))
     ClusterStatus.add_member(:timeline, Shapes::ShapeRef.new(shape: ClusterTimeline, location_name: "Timeline"))
+    ClusterStatus.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetailList, location_name: "ErrorDetails"))
     ClusterStatus.struct_class = Types::ClusterStatus
 
     ClusterSummary.add_member(:id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "Id"))
@@ -656,6 +660,15 @@ module Aws::EMR
     Ec2InstanceAttributes.add_member(:additional_master_security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "AdditionalMasterSecurityGroups"))
     Ec2InstanceAttributes.add_member(:additional_slave_security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "AdditionalSlaveSecurityGroups"))
     Ec2InstanceAttributes.struct_class = Types::Ec2InstanceAttributes
+
+    ErrorData.member = Shapes::ShapeRef.new(shape: StringMap)
+
+    ErrorDetail.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
+    ErrorDetail.add_member(:error_data, Shapes::ShapeRef.new(shape: ErrorData, location_name: "ErrorData"))
+    ErrorDetail.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    ErrorDetail.struct_class = Types::ErrorDetail
+
+    ErrorDetailList.member = Shapes::ShapeRef.new(shape: ErrorDetail)
 
     ExecutionEngineConfig.add_member(:id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "Id"))
     ExecutionEngineConfig.add_member(:type, Shapes::ShapeRef.new(shape: ExecutionEngineType, location_name: "Type"))

@@ -372,8 +372,8 @@ module Aws::Imagebuilder
     # only be used on images in a non-terminal state.
     #
     # @option params [required, String] :image_build_version_arn
-    #   The Amazon Resource Name (ARN) of the image whose creation you want to
-    #   cancel.
+    #   The Amazon Resource Name (ARN) of the image that you want to cancel
+    #   creation for.
     #
     # @option params [required, String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure idempotency of
@@ -831,6 +831,9 @@ module Aws::Imagebuilder
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Types::ImageScanningConfiguration] :image_scanning_configuration
+    #   Contains settings for vulnerability scans.
+    #
     # @return [Types::CreateImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateImageResponse#request_id #request_id} => String
@@ -853,6 +856,13 @@ module Aws::Imagebuilder
     #       "TagKey" => "TagValue",
     #     },
     #     client_token: "ClientToken", # required
+    #     image_scanning_configuration: {
+    #       image_scanning_enabled: false,
+    #       ecr_configuration: {
+    #         repository_name: "NonEmptyString",
+    #         container_tags: ["NonEmptyString"],
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -920,6 +930,9 @@ module Aws::Imagebuilder
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Types::ImageScanningConfiguration] :image_scanning_configuration
+    #   Contains settings for vulnerability scans.
+    #
     # @return [Types::CreateImagePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateImagePipelineResponse#request_id #request_id} => String
@@ -950,6 +963,13 @@ module Aws::Imagebuilder
     #       "TagKey" => "TagValue",
     #     },
     #     client_token: "ClientToken", # required
+    #     image_scanning_configuration: {
+    #       image_scanning_enabled: false,
+    #       ecr_configuration: {
+    #         repository_name: "NonEmptyString",
+    #         container_tags: ["NonEmptyString"],
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1451,8 +1471,8 @@ module Aws::Imagebuilder
     # Gets a component object.
     #
     # @option params [required, String] :component_build_version_arn
-    #   The Amazon Resource Name (ARN) of the component that you want to
-    #   retrieve. Regex requires "/\\d+$" suffix.
+    #   The Amazon Resource Name (ARN) of the component that you want to get.
+    #   Regex requires the suffix `/\d+$`.
     #
     # @return [Types::GetComponentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1712,7 +1732,7 @@ module Aws::Imagebuilder
     # Gets an image.
     #
     # @option params [required, String] :image_build_version_arn
-    #   The Amazon Resource Name (ARN) of the image that you want to retrieve.
+    #   The Amazon Resource Name (ARN) of the image that you want to get.
     #
     # @return [Types::GetImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1896,6 +1916,12 @@ module Aws::Imagebuilder
     #   resp.image.tags["TagKey"] #=> String
     #   resp.image.build_type #=> String, one of "USER_INITIATED", "SCHEDULED", "IMPORT"
     #   resp.image.image_source #=> String, one of "AMAZON_MANAGED", "AWS_MARKETPLACE", "IMPORTED", "CUSTOM"
+    #   resp.image.scan_state.status #=> String, one of "PENDING", "SCANNING", "COLLECTING", "COMPLETED", "ABANDONED", "FAILED", "TIMED_OUT"
+    #   resp.image.scan_state.reason #=> String
+    #   resp.image.image_scanning_configuration.image_scanning_enabled #=> Boolean
+    #   resp.image.image_scanning_configuration.ecr_configuration.repository_name #=> String
+    #   resp.image.image_scanning_configuration.ecr_configuration.container_tags #=> Array
+    #   resp.image.image_scanning_configuration.ecr_configuration.container_tags[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetImage AWS API Documentation
     #
@@ -1947,6 +1973,10 @@ module Aws::Imagebuilder
     #   resp.image_pipeline.date_next_run #=> String
     #   resp.image_pipeline.tags #=> Hash
     #   resp.image_pipeline.tags["TagKey"] #=> String
+    #   resp.image_pipeline.image_scanning_configuration.image_scanning_enabled #=> Boolean
+    #   resp.image_pipeline.image_scanning_configuration.ecr_configuration.repository_name #=> String
+    #   resp.image_pipeline.image_scanning_configuration.ecr_configuration.container_tags #=> Array
+    #   resp.image_pipeline.image_scanning_configuration.ecr_configuration.container_tags[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetImagePipeline AWS API Documentation
     #
@@ -2133,6 +2163,122 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
+    # Get the runtime information that was logged for a specific runtime
+    # instance of the workflow.
+    #
+    # @option params [required, String] :workflow_execution_id
+    #   Use the unique identifier for a runtime instance of the workflow to
+    #   get runtime details.
+    #
+    # @return [Types::GetWorkflowExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetWorkflowExecutionResponse#request_id #request_id} => String
+    #   * {Types::GetWorkflowExecutionResponse#workflow_build_version_arn #workflow_build_version_arn} => String
+    #   * {Types::GetWorkflowExecutionResponse#workflow_execution_id #workflow_execution_id} => String
+    #   * {Types::GetWorkflowExecutionResponse#image_build_version_arn #image_build_version_arn} => String
+    #   * {Types::GetWorkflowExecutionResponse#type #type} => String
+    #   * {Types::GetWorkflowExecutionResponse#status #status} => String
+    #   * {Types::GetWorkflowExecutionResponse#message #message} => String
+    #   * {Types::GetWorkflowExecutionResponse#total_step_count #total_step_count} => Integer
+    #   * {Types::GetWorkflowExecutionResponse#total_steps_succeeded #total_steps_succeeded} => Integer
+    #   * {Types::GetWorkflowExecutionResponse#total_steps_failed #total_steps_failed} => Integer
+    #   * {Types::GetWorkflowExecutionResponse#total_steps_skipped #total_steps_skipped} => Integer
+    #   * {Types::GetWorkflowExecutionResponse#start_time #start_time} => String
+    #   * {Types::GetWorkflowExecutionResponse#end_time #end_time} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_workflow_execution({
+    #     workflow_execution_id: "WorkflowExecutionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.workflow_build_version_arn #=> String
+    #   resp.workflow_execution_id #=> String
+    #   resp.image_build_version_arn #=> String
+    #   resp.type #=> String, one of "BUILD", "TEST", "DISTRIBUTION"
+    #   resp.status #=> String, one of "PENDING", "SKIPPED", "RUNNING", "COMPLETED", "FAILED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_COMPLETED"
+    #   resp.message #=> String
+    #   resp.total_step_count #=> Integer
+    #   resp.total_steps_succeeded #=> Integer
+    #   resp.total_steps_failed #=> Integer
+    #   resp.total_steps_skipped #=> Integer
+    #   resp.start_time #=> String
+    #   resp.end_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetWorkflowExecution AWS API Documentation
+    #
+    # @overload get_workflow_execution(params = {})
+    # @param [Hash] params ({})
+    def get_workflow_execution(params = {}, options = {})
+      req = build_request(:get_workflow_execution, params)
+      req.send_request(options)
+    end
+
+    # Get the runtime information that was logged for a specific runtime
+    # instance of the workflow step.
+    #
+    # @option params [required, String] :step_execution_id
+    #   Use the unique identifier for a specific runtime instance of the
+    #   workflow step to get runtime details for that step.
+    #
+    # @return [Types::GetWorkflowStepExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetWorkflowStepExecutionResponse#request_id #request_id} => String
+    #   * {Types::GetWorkflowStepExecutionResponse#step_execution_id #step_execution_id} => String
+    #   * {Types::GetWorkflowStepExecutionResponse#workflow_build_version_arn #workflow_build_version_arn} => String
+    #   * {Types::GetWorkflowStepExecutionResponse#workflow_execution_id #workflow_execution_id} => String
+    #   * {Types::GetWorkflowStepExecutionResponse#image_build_version_arn #image_build_version_arn} => String
+    #   * {Types::GetWorkflowStepExecutionResponse#name #name} => String
+    #   * {Types::GetWorkflowStepExecutionResponse#description #description} => String
+    #   * {Types::GetWorkflowStepExecutionResponse#action #action} => String
+    #   * {Types::GetWorkflowStepExecutionResponse#status #status} => String
+    #   * {Types::GetWorkflowStepExecutionResponse#rollback_status #rollback_status} => String
+    #   * {Types::GetWorkflowStepExecutionResponse#message #message} => String
+    #   * {Types::GetWorkflowStepExecutionResponse#inputs #inputs} => String
+    #   * {Types::GetWorkflowStepExecutionResponse#outputs #outputs} => String
+    #   * {Types::GetWorkflowStepExecutionResponse#start_time #start_time} => String
+    #   * {Types::GetWorkflowStepExecutionResponse#end_time #end_time} => String
+    #   * {Types::GetWorkflowStepExecutionResponse#on_failure #on_failure} => String
+    #   * {Types::GetWorkflowStepExecutionResponse#timeout_seconds #timeout_seconds} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_workflow_step_execution({
+    #     step_execution_id: "WorkflowStepExecutionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.step_execution_id #=> String
+    #   resp.workflow_build_version_arn #=> String
+    #   resp.workflow_execution_id #=> String
+    #   resp.image_build_version_arn #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.action #=> String
+    #   resp.status #=> String, one of "PENDING", "SKIPPED", "RUNNING", "COMPLETED", "FAILED"
+    #   resp.rollback_status #=> String, one of "RUNNING", "COMPLETED", "SKIPPED", "FAILED"
+    #   resp.message #=> String
+    #   resp.inputs #=> String
+    #   resp.outputs #=> String
+    #   resp.start_time #=> String
+    #   resp.end_time #=> String
+    #   resp.on_failure #=> String
+    #   resp.timeout_seconds #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetWorkflowStepExecution AWS API Documentation
+    #
+    # @overload get_workflow_step_execution(params = {})
+    # @param [Hash] params ({})
+    def get_workflow_step_execution(params = {}, options = {})
+      req = build_request(:get_workflow_step_execution, params)
+      req.send_request(options)
+    end
+
     # Imports a component and transforms its data into a component document.
     #
     # @option params [required, String] :name
@@ -2159,9 +2305,9 @@ module Aws::Imagebuilder
     #   component.
     #
     # @option params [String] :change_description
-    #   The change description of the component. Describes what change has
-    #   been made in this version, or what makes this version different from
-    #   other versions of this component.
+    #   The change description of the component. This description indicates
+    #   the change that has been made in this version, or what makes this
+    #   version different from other versions of this component.
     #
     # @option params [required, String] :type
     #   The type of the component denotes whether the component is used to
@@ -2532,12 +2678,11 @@ module Aws::Imagebuilder
     #   * `platform`
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in the list.
+    #   The maximum items to return in a request.
     #
     # @option params [String] :next_token
-    #   Provides a token for pagination, which determines where to begin the
-    #   next set of results when the current set reaches the maximum for one
-    #   request.
+    #   A token to specify where to start paginating. This is the NextToken
+    #   from a previously truncated response.
     #
     # @return [Types::ListContainerRecipesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2740,8 +2885,7 @@ module Aws::Imagebuilder
     #   Version ARN
     #
     # @option params [Integer] :max_results
-    #   The maxiumum number of results to return from the ListImagePackages
-    #   request.
+    #   The maximum items to return in a request.
     #
     # @option params [String] :next_token
     #   A token to specify where to start paginating. This is the NextToken
@@ -2933,6 +3077,10 @@ module Aws::Imagebuilder
     #   resp.image_pipeline_list[0].date_next_run #=> String
     #   resp.image_pipeline_list[0].tags #=> Hash
     #   resp.image_pipeline_list[0].tags["TagKey"] #=> String
+    #   resp.image_pipeline_list[0].image_scanning_configuration.image_scanning_enabled #=> Boolean
+    #   resp.image_pipeline_list[0].image_scanning_configuration.ecr_configuration.repository_name #=> String
+    #   resp.image_pipeline_list[0].image_scanning_configuration.ecr_configuration.container_tags #=> Array
+    #   resp.image_pipeline_list[0].image_scanning_configuration.ecr_configuration.container_tags[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImagePipelines AWS API Documentation
@@ -3011,6 +3159,196 @@ module Aws::Imagebuilder
     # @param [Hash] params ({})
     def list_image_recipes(params = {}, options = {})
       req = build_request(:list_image_recipes, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of image scan aggregations for your account. You can
+    # filter by the type of key that Image Builder uses to group results.
+    # For example, if you want to get a list of findings by severity level
+    # for one of your pipelines, you might specify your pipeline with the
+    # `imagePipelineArn` filter. If you don't specify a filter, Image
+    # Builder returns an aggregation for your account.
+    #
+    # To streamline results, you can use the following filters in your
+    # request:
+    #
+    # * `accountId`
+    #
+    # * `imageBuildVersionArn`
+    #
+    # * `imagePipelineArn`
+    #
+    # * `vulnerabilityId`
+    #
+    # @option params [Types::Filter] :filter
+    #   A filter name and value pair that is used to return a more specific
+    #   list of results from a list operation. Filters can be used to match a
+    #   set of resources by specific criteria, such as tags, attributes, or
+    #   IDs.
+    #
+    # @option params [String] :next_token
+    #   A token to specify where to start paginating. This is the NextToken
+    #   from a previously truncated response.
+    #
+    # @return [Types::ListImageScanFindingAggregationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListImageScanFindingAggregationsResponse#request_id #request_id} => String
+    #   * {Types::ListImageScanFindingAggregationsResponse#aggregation_type #aggregation_type} => String
+    #   * {Types::ListImageScanFindingAggregationsResponse#responses #responses} => Array&lt;Types::ImageScanFindingAggregation&gt;
+    #   * {Types::ListImageScanFindingAggregationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_image_scan_finding_aggregations({
+    #     filter: {
+    #       name: "FilterName",
+    #       values: ["FilterValue"],
+    #     },
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.aggregation_type #=> String
+    #   resp.responses #=> Array
+    #   resp.responses[0].account_aggregation.account_id #=> String
+    #   resp.responses[0].account_aggregation.severity_counts.all #=> Integer
+    #   resp.responses[0].account_aggregation.severity_counts.critical #=> Integer
+    #   resp.responses[0].account_aggregation.severity_counts.high #=> Integer
+    #   resp.responses[0].account_aggregation.severity_counts.medium #=> Integer
+    #   resp.responses[0].image_aggregation.image_build_version_arn #=> String
+    #   resp.responses[0].image_aggregation.severity_counts.all #=> Integer
+    #   resp.responses[0].image_aggregation.severity_counts.critical #=> Integer
+    #   resp.responses[0].image_aggregation.severity_counts.high #=> Integer
+    #   resp.responses[0].image_aggregation.severity_counts.medium #=> Integer
+    #   resp.responses[0].image_pipeline_aggregation.image_pipeline_arn #=> String
+    #   resp.responses[0].image_pipeline_aggregation.severity_counts.all #=> Integer
+    #   resp.responses[0].image_pipeline_aggregation.severity_counts.critical #=> Integer
+    #   resp.responses[0].image_pipeline_aggregation.severity_counts.high #=> Integer
+    #   resp.responses[0].image_pipeline_aggregation.severity_counts.medium #=> Integer
+    #   resp.responses[0].vulnerability_id_aggregation.vulnerability_id #=> String
+    #   resp.responses[0].vulnerability_id_aggregation.severity_counts.all #=> Integer
+    #   resp.responses[0].vulnerability_id_aggregation.severity_counts.critical #=> Integer
+    #   resp.responses[0].vulnerability_id_aggregation.severity_counts.high #=> Integer
+    #   resp.responses[0].vulnerability_id_aggregation.severity_counts.medium #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImageScanFindingAggregations AWS API Documentation
+    #
+    # @overload list_image_scan_finding_aggregations(params = {})
+    # @param [Hash] params ({})
+    def list_image_scan_finding_aggregations(params = {}, options = {})
+      req = build_request(:list_image_scan_finding_aggregations, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of image scan findings for your account.
+    #
+    # @option params [Array<Types::ImageScanFindingsFilter>] :filters
+    #   An array of name value pairs that you can use to filter your results.
+    #   You can use the following filters to streamline results:
+    #
+    #   * `imageBuildVersionArn`
+    #
+    #   * `imagePipelineArn`
+    #
+    #   * `vulnerabilityId`
+    #
+    #   * `severity`
+    #
+    #   If you don't request a filter, then all findings in your account are
+    #   listed.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum items to return in a request.
+    #
+    # @option params [String] :next_token
+    #   A token to specify where to start paginating. This is the NextToken
+    #   from a previously truncated response.
+    #
+    # @return [Types::ListImageScanFindingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListImageScanFindingsResponse#request_id #request_id} => String
+    #   * {Types::ListImageScanFindingsResponse#findings #findings} => Array&lt;Types::ImageScanFinding&gt;
+    #   * {Types::ListImageScanFindingsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_image_scan_findings({
+    #     filters: [
+    #       {
+    #         name: "FilterName",
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.findings #=> Array
+    #   resp.findings[0].aws_account_id #=> String
+    #   resp.findings[0].image_build_version_arn #=> String
+    #   resp.findings[0].image_pipeline_arn #=> String
+    #   resp.findings[0].type #=> String
+    #   resp.findings[0].description #=> String
+    #   resp.findings[0].title #=> String
+    #   resp.findings[0].remediation.recommendation.text #=> String
+    #   resp.findings[0].remediation.recommendation.url #=> String
+    #   resp.findings[0].severity #=> String
+    #   resp.findings[0].first_observed_at #=> Time
+    #   resp.findings[0].updated_at #=> Time
+    #   resp.findings[0].inspector_score #=> Float
+    #   resp.findings[0].inspector_score_details.adjusted_cvss.score_source #=> String
+    #   resp.findings[0].inspector_score_details.adjusted_cvss.cvss_source #=> String
+    #   resp.findings[0].inspector_score_details.adjusted_cvss.version #=> String
+    #   resp.findings[0].inspector_score_details.adjusted_cvss.score #=> Float
+    #   resp.findings[0].inspector_score_details.adjusted_cvss.scoring_vector #=> String
+    #   resp.findings[0].inspector_score_details.adjusted_cvss.adjustments #=> Array
+    #   resp.findings[0].inspector_score_details.adjusted_cvss.adjustments[0].metric #=> String
+    #   resp.findings[0].inspector_score_details.adjusted_cvss.adjustments[0].reason #=> String
+    #   resp.findings[0].package_vulnerability_details.vulnerability_id #=> String
+    #   resp.findings[0].package_vulnerability_details.vulnerable_packages #=> Array
+    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].name #=> String
+    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].version #=> String
+    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].source_layer_hash #=> String
+    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].epoch #=> Integer
+    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].release #=> String
+    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].arch #=> String
+    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].package_manager #=> String
+    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].file_path #=> String
+    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].fixed_in_version #=> String
+    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].remediation #=> String
+    #   resp.findings[0].package_vulnerability_details.source #=> String
+    #   resp.findings[0].package_vulnerability_details.cvss #=> Array
+    #   resp.findings[0].package_vulnerability_details.cvss[0].base_score #=> Float
+    #   resp.findings[0].package_vulnerability_details.cvss[0].scoring_vector #=> String
+    #   resp.findings[0].package_vulnerability_details.cvss[0].version #=> String
+    #   resp.findings[0].package_vulnerability_details.cvss[0].source #=> String
+    #   resp.findings[0].package_vulnerability_details.related_vulnerabilities #=> Array
+    #   resp.findings[0].package_vulnerability_details.related_vulnerabilities[0] #=> String
+    #   resp.findings[0].package_vulnerability_details.source_url #=> String
+    #   resp.findings[0].package_vulnerability_details.vendor_severity #=> String
+    #   resp.findings[0].package_vulnerability_details.vendor_created_at #=> Time
+    #   resp.findings[0].package_vulnerability_details.vendor_updated_at #=> Time
+    #   resp.findings[0].package_vulnerability_details.reference_urls #=> Array
+    #   resp.findings[0].package_vulnerability_details.reference_urls[0] #=> String
+    #   resp.findings[0].fix_available #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImageScanFindings AWS API Documentation
+    #
+    # @overload list_image_scan_findings(params = {})
+    # @param [Hash] params ({})
+    def list_image_scan_findings(params = {}, options = {})
+      req = build_request(:list_image_scan_findings, params)
       req.send_request(options)
     end
 
@@ -3187,6 +3525,130 @@ module Aws::Imagebuilder
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of workflow runtime instance metadata objects for a
+    # specific image build version.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum items to return in a request.
+    #
+    # @option params [String] :next_token
+    #   A token to specify where to start paginating. This is the NextToken
+    #   from a previously truncated response.
+    #
+    # @option params [required, String] :image_build_version_arn
+    #   List all workflow runtime instances for the specified image build
+    #   version resource ARN.
+    #
+    # @return [Types::ListWorkflowExecutionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWorkflowExecutionsResponse#request_id #request_id} => String
+    #   * {Types::ListWorkflowExecutionsResponse#workflow_executions #workflow_executions} => Array&lt;Types::WorkflowExecutionMetadata&gt;
+    #   * {Types::ListWorkflowExecutionsResponse#image_build_version_arn #image_build_version_arn} => String
+    #   * {Types::ListWorkflowExecutionsResponse#message #message} => String
+    #   * {Types::ListWorkflowExecutionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_workflow_executions({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     image_build_version_arn: "ImageBuildVersionArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.workflow_executions #=> Array
+    #   resp.workflow_executions[0].workflow_build_version_arn #=> String
+    #   resp.workflow_executions[0].workflow_execution_id #=> String
+    #   resp.workflow_executions[0].type #=> String, one of "BUILD", "TEST", "DISTRIBUTION"
+    #   resp.workflow_executions[0].status #=> String, one of "PENDING", "SKIPPED", "RUNNING", "COMPLETED", "FAILED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_COMPLETED"
+    #   resp.workflow_executions[0].message #=> String
+    #   resp.workflow_executions[0].total_step_count #=> Integer
+    #   resp.workflow_executions[0].total_steps_succeeded #=> Integer
+    #   resp.workflow_executions[0].total_steps_failed #=> Integer
+    #   resp.workflow_executions[0].total_steps_skipped #=> Integer
+    #   resp.workflow_executions[0].start_time #=> String
+    #   resp.workflow_executions[0].end_time #=> String
+    #   resp.image_build_version_arn #=> String
+    #   resp.message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListWorkflowExecutions AWS API Documentation
+    #
+    # @overload list_workflow_executions(params = {})
+    # @param [Hash] params ({})
+    def list_workflow_executions(params = {}, options = {})
+      req = build_request(:list_workflow_executions, params)
+      req.send_request(options)
+    end
+
+    # Shows runtime data for each step in a runtime instance of the workflow
+    # that you specify in the request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum items to return in a request.
+    #
+    # @option params [String] :next_token
+    #   A token to specify where to start paginating. This is the NextToken
+    #   from a previously truncated response.
+    #
+    # @option params [required, String] :workflow_execution_id
+    #   The unique identifier that Image Builder assigned to keep track of
+    #   runtime details when it ran the workflow.
+    #
+    # @return [Types::ListWorkflowStepExecutionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWorkflowStepExecutionsResponse#request_id #request_id} => String
+    #   * {Types::ListWorkflowStepExecutionsResponse#steps #steps} => Array&lt;Types::WorkflowStepMetadata&gt;
+    #   * {Types::ListWorkflowStepExecutionsResponse#workflow_build_version_arn #workflow_build_version_arn} => String
+    #   * {Types::ListWorkflowStepExecutionsResponse#workflow_execution_id #workflow_execution_id} => String
+    #   * {Types::ListWorkflowStepExecutionsResponse#image_build_version_arn #image_build_version_arn} => String
+    #   * {Types::ListWorkflowStepExecutionsResponse#message #message} => String
+    #   * {Types::ListWorkflowStepExecutionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_workflow_step_executions({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     workflow_execution_id: "WorkflowExecutionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.steps #=> Array
+    #   resp.steps[0].step_execution_id #=> String
+    #   resp.steps[0].name #=> String
+    #   resp.steps[0].description #=> String
+    #   resp.steps[0].action #=> String
+    #   resp.steps[0].status #=> String, one of "PENDING", "SKIPPED", "RUNNING", "COMPLETED", "FAILED"
+    #   resp.steps[0].rollback_status #=> String, one of "RUNNING", "COMPLETED", "SKIPPED", "FAILED"
+    #   resp.steps[0].message #=> String
+    #   resp.steps[0].inputs #=> String
+    #   resp.steps[0].outputs #=> String
+    #   resp.steps[0].start_time #=> String
+    #   resp.steps[0].end_time #=> String
+    #   resp.workflow_build_version_arn #=> String
+    #   resp.workflow_execution_id #=> String
+    #   resp.image_build_version_arn #=> String
+    #   resp.message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListWorkflowStepExecutions AWS API Documentation
+    #
+    # @overload list_workflow_step_executions(params = {})
+    # @param [Hash] params ({})
+    def list_workflow_step_executions(params = {}, options = {})
+      req = build_request(:list_workflow_step_executions, params)
       req.send_request(options)
     end
 
@@ -3590,12 +4052,13 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :infrastructure_configuration_arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration
-    #   that will be used to build images updated by this image pipeline.
+    #   that Image Builder uses to build images that this image pipeline has
+    #   updated.
     #
     # @option params [String] :distribution_configuration_arn
     #   The Amazon Resource Name (ARN) of the distribution configuration that
-    #   will be used to configure and distribute images updated by this image
-    #   pipeline.
+    #   Image Builder uses to configure and distribute images that this image
+    #   pipeline has updated.
     #
     # @option params [Types::ImageTestsConfiguration] :image_tests_configuration
     #   The image test configuration of the image pipeline.
@@ -3617,6 +4080,9 @@ module Aws::Imagebuilder
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [Types::ImageScanningConfiguration] :image_scanning_configuration
+    #   Contains settings for vulnerability scans.
     #
     # @return [Types::UpdateImagePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3645,6 +4111,13 @@ module Aws::Imagebuilder
     #     },
     #     status: "DISABLED", # accepts DISABLED, ENABLED
     #     client_token: "ClientToken", # required
+    #     image_scanning_configuration: {
+    #       image_scanning_enabled: false,
+    #       ecr_configuration: {
+    #         repository_name: "NonEmptyString",
+    #         container_tags: ["NonEmptyString"],
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -3802,7 +4275,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

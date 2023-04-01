@@ -344,6 +344,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-transcribestreamingservice', '~> 1')
   spec.add_dependency('aws-sdk-transfer', '~> 1')
   spec.add_dependency('aws-sdk-translate', '~> 1')
+  spec.add_dependency('aws-sdk-vpclattice', '~> 1')
   spec.add_dependency('aws-sdk-voiceid', '~> 1')
   spec.add_dependency('aws-sdk-waf', '~> 1')
   spec.add_dependency('aws-sdk-wafregional', '~> 1')

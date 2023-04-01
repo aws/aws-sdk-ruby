@@ -536,6 +536,44 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Removes one or more sets of featured results. Features results are
+    # placed above all other results for certain queries. If there's an
+    # exact match of a query, then one or more specific documents are
+    # featured in the search results.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index used for featuring results.
+    #
+    # @option params [required, Array<String>] :featured_results_set_ids
+    #   The identifiers of the featured results sets that you want to delete.
+    #
+    # @return [Types::BatchDeleteFeaturedResultsSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeleteFeaturedResultsSetResponse#errors #errors} => Array&lt;Types::BatchDeleteFeaturedResultsSetError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_featured_results_set({
+    #     index_id: "IndexId", # required
+    #     featured_results_set_ids: ["FeaturedResultsSetId"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].id #=> String
+    #   resp.errors[0].error_code #=> String, one of "InternalError", "InvalidRequest"
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/BatchDeleteFeaturedResultsSet AWS API Documentation
+    #
+    # @overload batch_delete_featured_results_set(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_featured_results_set(params = {}, options = {})
+      req = build_request(:batch_delete_featured_results_set, params)
+      req.send_request(options)
+    end
+
     # Returns the indexing status for one or more documents submitted with
     # the [ BatchPutDocument][1] API.
     #
@@ -639,8 +677,8 @@ module Aws::Kendra
     #   create the index first using the `CreateIndex` API.
     #
     # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of a role that is allowed to run the
-    #   `BatchPutDocument` API. For more information, see [IAM Roles for
+    #   The Amazon Resource Name (ARN) of an IAM role with permission to
+    #   access your S3 bucket. For more information, see [IAM access roles for
     #   Amazon Kendra][1].
     #
     #
@@ -652,14 +690,11 @@ module Aws::Kendra
     #
     #   Documents have the following file size limits.
     #
-    #   * 5 MB total size for inline documents
-    #
-    #   * 50 MB total size for files from an S3 bucket
+    #   * 50 MB total size for any file
     #
     #   * 5 MB extracted text for any file
     #
-    #   For more information about file size and transaction per second
-    #   quotas, see [Quotas][1].
+    #   For more information, see [Quotas][1].
     #
     #
     #
@@ -959,19 +994,15 @@ module Aws::Kendra
     # 200 if the data source was successfully created. Otherwise, an
     # exception is raised.
     #
-    # Amazon S3 and [custom][1] data sources are the only supported data
-    # sources in the Amazon Web Services GovCloud (US-West) region.
-    #
     # For an example of creating an index and data source using the Python
-    # SDK, see [Getting started with Python SDK][2]. For an example of
+    # SDK, see [Getting started with Python SDK][1]. For an example of
     # creating an index and data source using the Java SDK, see [Getting
-    # started with Java SDK][3].
+    # started with Java SDK][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-custom.html
-    # [2]: https://docs.aws.amazon.com/kendra/latest/dg/gs-python.html
-    # [3]: https://docs.aws.amazon.com/kendra/latest/dg/gs-java.html
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/gs-python.html
+    # [2]: https://docs.aws.amazon.com/kendra/latest/dg/gs-java.html
     #
     # @option params [required, String] :name
     #   A name for the data source connector.
@@ -1010,14 +1041,17 @@ module Aws::Kendra
     #   schedule Amazon Kendra will not periodically update the index. You can
     #   call the `StartDataSourceSyncJob` API to update the index.
     #
+    #   Specify a `cron-` format schedule string or an empty string to
+    #   indicate that the index is updated on demand.
+    #
     #   You can't specify the `Schedule` parameter when the `Type` parameter
     #   is set to `CUSTOM`. If you do, you receive a `ValidationException`
     #   exception.
     #
     # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of a role with permission to access the
-    #   data source and required resources. For more information, see [IAM
-    #   roles for Amazon Kendra][1].
+    #   The Amazon Resource Name (ARN) of an IAM role with permission to
+    #   access the data source and required resources. For more information,
+    #   see [IAM access roles for Amazon Kendra.][1].
     #
     #   You can't specify the `RoleArn` parameter when the `Type` parameter
     #   is set to `CUSTOM`. If you do, you receive a `ValidationException`
@@ -1030,9 +1064,11 @@ module Aws::Kendra
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of key-value pairs that identify the data source connector. You
-    #   can use the tags to identify and organize your resources and to
-    #   control access to resources.
+    #   A list of key-value pairs that identify or categorize the data source
+    #   connector. You can also use tags to help control access to the data
+    #   source connector. Tag keys and values can consist of Unicode letters,
+    #   digits, white space, and any of the following symbols: \_ . : / = + -
+    #   @.
     #
     # @option params [String] :client_token
     #   A token that you provide to identify the request to create a data
@@ -1808,10 +1844,12 @@ module Aws::Kendra
     #   The identifier of the index for your Amazon Kendra experience.
     #
     # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of a role with permission to access
-    #   `Query` API, `QuerySuggestions` API, `SubmitFeedback` API, and IAM
-    #   Identity Center that stores your user and group information. For more
-    #   information, see [IAM roles for Amazon Kendra][1].
+    #   The Amazon Resource Name (ARN) of an IAM role with permission to
+    #   access `Query` API, `GetQuerySuggestions` API, and other required
+    #   APIs. The role also must include permission to access IAM Identity
+    #   Center (successor to Single Sign-On) that stores your user and group
+    #   information. For more information, see [IAM access roles for Amazon
+    #   Kendra][1].
     #
     #
     #
@@ -1872,8 +1910,8 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Creates an new set of frequently asked question (FAQ) questions and
-    # answers.
+    # Creates a set of frequently ask questions (FAQs) using a specified FAQ
+    # file stored in an Amazon S3 bucket.
     #
     # Adding FAQs to an index is an asynchronous operation.
     #
@@ -1897,9 +1935,9 @@ module Aws::Kendra
     #   The path to the FAQ file in S3.
     #
     # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) of a role with permission to access the
-    #   S3 bucket that contains the FAQs. For more information, see [IAM Roles
-    #   for Amazon Kendra][1].
+    #   The Amazon Resource Name (ARN) of an IAM role with permission to
+    #   access the S3 bucket that contains the FAQs. For more information, see
+    #   [IAM access roles for Amazon Kendra][1].
     #
     #
     #
@@ -1981,6 +2019,119 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Creates a set of featured results to display at the top of the search
+    # results page. Featured results are placed above all other results for
+    # certain queries. You map specific queries to specific documents for
+    # featuring in the results. If a query contains an exact match, then one
+    # or more specific documents are featured in the search results.
+    #
+    # You can create up to 50 sets of featured results per index. You can
+    # request to increase this limit by contacting [Support][1].
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/contact-us/
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index that you want to use for featuring
+    #   results.
+    #
+    # @option params [required, String] :featured_results_set_name
+    #   A name for the set of featured results.
+    #
+    # @option params [String] :description
+    #   A description for the set of featured results.
+    #
+    # @option params [String] :client_token
+    #   A token that you provide to identify the request to create a set of
+    #   featured results. Multiple calls to the `CreateFeaturedResultsSet` API
+    #   with the same client token will create only one featured results set.
+    #
+    # @option params [String] :status
+    #   The current status of the set of featured results. When the value is
+    #   `ACTIVE`, featured results are ready for use. You can still configure
+    #   your settings before setting the status to `ACTIVE`. You can set the
+    #   status to `ACTIVE` or `INACTIVE` using the
+    #   [UpdateFeaturedResultsSet][1] API. The queries you specify for
+    #   featured results must be unique per featured results set for each
+    #   index, whether the status is `ACTIVE` or `INACTIVE`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateFeaturedResultsSet.html
+    #
+    # @option params [Array<String>] :query_texts
+    #   A list of queries for featuring results. For more information on the
+    #   list of queries, see [FeaturedResultsSet][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html
+    #
+    # @option params [Array<Types::FeaturedDocument>] :featured_documents
+    #   A list of document IDs for the documents you want to feature at the
+    #   top of the search results page. For more information on the list of
+    #   documents, see [FeaturedResultsSet][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of key-value pairs that identify or categorize the featured
+    #   results set. You can also use tags to help control access to the
+    #   featured results set. Tag keys and values can consist of Unicode
+    #   letters, digits, white space, and any of the following symbols:\_ . :
+    #   / = + - @.
+    #
+    # @return [Types::CreateFeaturedResultsSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFeaturedResultsSetResponse#featured_results_set #featured_results_set} => Types::FeaturedResultsSet
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_featured_results_set({
+    #     index_id: "IndexId", # required
+    #     featured_results_set_name: "FeaturedResultsSetName", # required
+    #     description: "FeaturedResultsSetDescription",
+    #     client_token: "ClientTokenName",
+    #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #     query_texts: ["QueryText"],
+    #     featured_documents: [
+    #       {
+    #         id: "DocumentId",
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.featured_results_set.featured_results_set_id #=> String
+    #   resp.featured_results_set.featured_results_set_name #=> String
+    #   resp.featured_results_set.description #=> String
+    #   resp.featured_results_set.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.featured_results_set.query_texts #=> Array
+    #   resp.featured_results_set.query_texts[0] #=> String
+    #   resp.featured_results_set.featured_documents #=> Array
+    #   resp.featured_results_set.featured_documents[0].id #=> String
+    #   resp.featured_results_set.last_updated_timestamp #=> Integer
+    #   resp.featured_results_set.creation_timestamp #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateFeaturedResultsSet AWS API Documentation
+    #
+    # @overload create_featured_results_set(params = {})
+    # @param [Hash] params ({})
+    def create_featured_results_set(params = {}, options = {})
+      req = build_request(:create_featured_results_set, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon Kendra index. Index creation is an asynchronous API.
     # To determine if index creation has completed, check the `Status` field
     # returned from a call to `DescribeIndex`. The `Status` field is set to
@@ -2005,14 +2156,13 @@ module Aws::Kendra
     # @option params [String] :edition
     #   The Amazon Kendra edition to use for the index. Choose
     #   `DEVELOPER_EDITION` for indexes intended for development, testing, or
-    #   proof of concept. Use `ENTERPRISE_EDITION` for your production
-    #   databases. Once you set the edition for an index, it can't be
-    #   changed.
+    #   proof of concept. Use `ENTERPRISE_EDITION` for production. Once you
+    #   set the edition for an index, it can't be changed.
     #
     #   The `Edition` parameter is optional. If you don't supply a value, the
     #   default is `ENTERPRISE_EDITION`.
     #
-    #   For more information on quota limits for enterprise and developer
+    #   For more information on quota limits for Enterprise and Developer
     #   editions, see [Quotas][1].
     #
     #
@@ -2020,10 +2170,13 @@ module Aws::Kendra
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
     #
     # @option params [required, String] :role_arn
-    #   An Identity and Access Management (IAM) role that gives Amazon Kendra
-    #   permissions to access your Amazon CloudWatch logs and metrics. This is
-    #   also the role you use when you call the `BatchPutDocument` API to
-    #   index documents from an Amazon S3 bucket.
+    #   The Amazon Resource Name (ARN) of an IAM role with permission to
+    #   access your Amazon CloudWatch logs and metrics. For more information,
+    #   see [IAM access roles for Amazon Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
     #
     # @option params [Types::ServerSideEncryptionConfiguration] :server_side_encryption_configuration
     #   The identifier of the KMS customer managed key (CMK) that's used to
@@ -2042,9 +2195,10 @@ module Aws::Kendra
     #   not need to pass this option.**
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of key-value pairs that identify the index. You can use the
-    #   tags to identify and organize your resources and to control access to
-    #   resources.
+    #   A list of key-value pairs that identify or categorize the index. You
+    #   can also use tags to help control access to the index. Tag keys and
+    #   values can consist of Unicode letters, digits, white space, and any of
+    #   the following symbols: \_ . : / = + - @.
     #
     # @option params [Array<Types::UserTokenConfiguration>] :user_token_configurations
     #   The user token configuration.
@@ -2066,9 +2220,9 @@ module Aws::Kendra
     #     accessible to the user will be searchable and displayable.
     #
     # @option params [Types::UserGroupResolutionConfiguration] :user_group_resolution_configuration
-    #   Enables fetching access levels of groups and users from an IAM
-    #   Identity Center (successor to Single Sign-On) identity source. To
-    #   configure this, see [UserGroupResolutionConfiguration][1].
+    #   Gets users and groups from IAM Identity Center (successor to Single
+    #   Sign-On) identity source. To configure this, see
+    #   [UserGroupResolutionConfiguration][1].
     #
     #
     #
@@ -2159,14 +2313,14 @@ module Aws::Kendra
     #   block list for.
     #
     # @option params [required, String] :name
-    #   A user friendly name for the block list.
+    #   A name for the block list.
     #
-    #   For example, the block list named 'offensive-words' includes all
+    #   For example, the name 'offensive-words', which includes all
     #   offensive words that could appear in user queries and need to be
     #   blocked from suggestions.
     #
     # @option params [String] :description
-    #   A user-friendly description for the block list.
+    #   A description for the block list.
     #
     #   For example, the description "List of all offensive words that can
     #   appear in user queries and need to be blocked from suggestions."
@@ -2191,17 +2345,18 @@ module Aws::Kendra
     #   not need to pass this option.**
     #
     # @option params [required, String] :role_arn
-    #   The IAM (Identity and Access Management) role used by Amazon Kendra to
-    #   access the block list text file in your S3 bucket.
+    #   The Amazon Resource Name (ARN) of an IAM role with permission to
+    #   access your S3 bucket that contains the block list text file. For more
+    #   information, see [IAM access roles for Amazon Kendra][1].
     #
-    #   You need permissions to the role ARN (Amazon Web Services Resource
-    #   Name). The role needs S3 read permissions to your file in S3 and needs
-    #   to give STS (Security Token Service) assume role permissions to Amazon
-    #   Kendra.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A tag that you can assign to a block list that categorizes the block
-    #   list.
+    #   A list of key-value pairs that identify or categorize the block list.
+    #   Tag keys and values can consist of Unicode letters, digits, white
+    #   space, and any of the following symbols: \_ . : / = + - @.
     #
     # @return [Types::CreateQuerySuggestionsBlockListResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2260,13 +2415,19 @@ module Aws::Kendra
     #   A description for the thesaurus.
     #
     # @option params [required, String] :role_arn
-    #   An IAM role that gives Amazon Kendra permissions to access thesaurus
-    #   file specified in `SourceS3Path`.
+    #   The Amazon Resource Name (ARN) of an IAM role with permission to
+    #   access your S3 bucket that contains the thesaurus file. For more
+    #   information, see [IAM access roles for Amazon Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of key-value pairs that identify the thesaurus. You can use the
-    #   tags to identify and organize your resources and to control access to
-    #   resources.
+    #   A list of key-value pairs that identify or categorize the thesaurus.
+    #   You can also use tags to help control access to the thesaurus. Tag
+    #   keys and values can consist of Unicode letters, digits, white space,
+    #   and any of the following symbols: \_ . : / = + - @.
     #
     # @option params [required, Types::S3Path] :source_s3_path
     #   The path to the thesaurus file in S3.
@@ -2507,14 +2668,14 @@ module Aws::Kendra
     #   prevents previous actions with lower number IDs from possibly
     #   overriding the latest action.
     #
-    #   The ordering ID can be the UNIX time of the last update you made to a
+    #   The ordering ID can be the Unix time of the last update you made to a
     #   group members list. You would then provide this list when calling
     #   `PutPrincipalMapping`. This ensures your `DELETE` action for that
     #   updated group with the latest members list doesn't get overwritten by
     #   earlier `DELETE` actions for the same group which are yet to be
     #   processed.
     #
-    #   The default ordering ID is the current UNIX time in milliseconds that
+    #   The default ordering ID is the current Unix time in milliseconds that
     #   the action was received by Amazon Kendra.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -3321,6 +3482,63 @@ module Aws::Kendra
     # @param [Hash] params ({})
     def describe_faq(params = {}, options = {})
       req = build_request(:describe_faq, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a set of featured results. Features results are
+    # placed above all other results for certain queries. If there's an
+    # exact match of a query, then one or more specific documents are
+    # featured in the search results.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index used for featuring results.
+    #
+    # @option params [required, String] :featured_results_set_id
+    #   The identifier of the set of featured results that you want to get
+    #   information on.
+    #
+    # @return [Types::DescribeFeaturedResultsSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFeaturedResultsSetResponse#featured_results_set_id #featured_results_set_id} => String
+    #   * {Types::DescribeFeaturedResultsSetResponse#featured_results_set_name #featured_results_set_name} => String
+    #   * {Types::DescribeFeaturedResultsSetResponse#description #description} => String
+    #   * {Types::DescribeFeaturedResultsSetResponse#status #status} => String
+    #   * {Types::DescribeFeaturedResultsSetResponse#query_texts #query_texts} => Array&lt;String&gt;
+    #   * {Types::DescribeFeaturedResultsSetResponse#featured_documents_with_metadata #featured_documents_with_metadata} => Array&lt;Types::FeaturedDocumentWithMetadata&gt;
+    #   * {Types::DescribeFeaturedResultsSetResponse#featured_documents_missing #featured_documents_missing} => Array&lt;Types::FeaturedDocumentMissing&gt;
+    #   * {Types::DescribeFeaturedResultsSetResponse#last_updated_timestamp #last_updated_timestamp} => Integer
+    #   * {Types::DescribeFeaturedResultsSetResponse#creation_timestamp #creation_timestamp} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_featured_results_set({
+    #     index_id: "IndexId", # required
+    #     featured_results_set_id: "FeaturedResultsSetId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.featured_results_set_id #=> String
+    #   resp.featured_results_set_name #=> String
+    #   resp.description #=> String
+    #   resp.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.query_texts #=> Array
+    #   resp.query_texts[0] #=> String
+    #   resp.featured_documents_with_metadata #=> Array
+    #   resp.featured_documents_with_metadata[0].id #=> String
+    #   resp.featured_documents_with_metadata[0].title #=> String
+    #   resp.featured_documents_with_metadata[0].uri #=> String
+    #   resp.featured_documents_missing #=> Array
+    #   resp.featured_documents_missing[0].id #=> String
+    #   resp.last_updated_timestamp #=> Integer
+    #   resp.creation_timestamp #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeFeaturedResultsSet AWS API Documentation
+    #
+    # @overload describe_featured_results_set(params = {})
+    # @param [Hash] params ({})
+    def describe_featured_results_set(params = {}, options = {})
+      req = build_request(:describe_featured_results_set, params)
       req.send_request(options)
     end
 
@@ -4266,6 +4484,54 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Lists all your sets of featured results for a given index. Features
+    # results are placed above all other results for certain queries. If
+    # there's an exact match of a query, then one or more specific
+    # documents are featured in the search results.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index used for featuring results.
+    #
+    # @option params [String] :next_token
+    #   If the response is truncated, Amazon Kendra returns a pagination token
+    #   in the response. You can use this pagination token to retrieve the
+    #   next set of featured results sets.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of featured results sets to return.
+    #
+    # @return [Types::ListFeaturedResultsSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFeaturedResultsSetsResponse#featured_results_set_summary_items #featured_results_set_summary_items} => Array&lt;Types::FeaturedResultsSetSummary&gt;
+    #   * {Types::ListFeaturedResultsSetsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_featured_results_sets({
+    #     index_id: "IndexId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.featured_results_set_summary_items #=> Array
+    #   resp.featured_results_set_summary_items[0].featured_results_set_id #=> String
+    #   resp.featured_results_set_summary_items[0].featured_results_set_name #=> String
+    #   resp.featured_results_set_summary_items[0].status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.featured_results_set_summary_items[0].last_updated_timestamp #=> Integer
+    #   resp.featured_results_set_summary_items[0].creation_timestamp #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListFeaturedResultsSets AWS API Documentation
+    #
+    # @overload list_featured_results_sets(params = {})
+    # @param [Hash] params ({})
+    def list_featured_results_sets(params = {}, options = {})
+      req = build_request(:list_featured_results_sets, params)
+      req.send_request(options)
+    end
+
     # Provides a list of groups that are mapped to users before a given
     # ordering or timestamp identifier.
     #
@@ -4537,9 +4803,6 @@ module Aws::Kendra
     # If more than five `PUT` actions for a group are currently processing,
     # a validation exception is thrown.
     #
-    # `PutPrincipalMapping` is currently not supported in the Amazon Web
-    # Services GovCloud (US-West) region.
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html
@@ -4583,13 +4846,13 @@ module Aws::Kendra
     #   prevents previous actions with lower number IDs from possibly
     #   overriding the latest action.
     #
-    #   The ordering ID can be the UNIX time of the last update you made to a
+    #   The ordering ID can be the Unix time of the last update you made to a
     #   group members list. You would then provide this list when calling
     #   `PutPrincipalMapping`. This ensures your `PUT` action for that updated
     #   group with the latest members list doesn't get overwritten by earlier
     #   `PUT` actions for the same group which are yet to be processed.
     #
-    #   The default ordering ID is the current UNIX time in milliseconds that
+    #   The default ordering ID is the current Unix time in milliseconds that
     #   the action was received by Amazon Kendra.
     #
     # @option params [String] :role_arn
@@ -4754,6 +5017,7 @@ module Aws::Kendra
     #   * {Types::QueryResult#total_number_of_results #total_number_of_results} => Integer
     #   * {Types::QueryResult#warnings #warnings} => Array&lt;Types::Warning&gt;
     #   * {Types::QueryResult#spell_corrected_queries #spell_corrected_queries} => Array&lt;Types::SpellCorrectedQuery&gt;
+    #   * {Types::QueryResult#featured_results_items #featured_results_items} => Array&lt;Types::FeaturedResultsItem&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -4954,6 +5218,40 @@ module Aws::Kendra
     #   resp.spell_corrected_queries[0].corrections[0].end_offset #=> Integer
     #   resp.spell_corrected_queries[0].corrections[0].term #=> String
     #   resp.spell_corrected_queries[0].corrections[0].corrected_term #=> String
+    #   resp.featured_results_items #=> Array
+    #   resp.featured_results_items[0].id #=> String
+    #   resp.featured_results_items[0].type #=> String, one of "DOCUMENT", "QUESTION_ANSWER", "ANSWER"
+    #   resp.featured_results_items[0].additional_attributes #=> Array
+    #   resp.featured_results_items[0].additional_attributes[0].key #=> String
+    #   resp.featured_results_items[0].additional_attributes[0].value_type #=> String, one of "TEXT_WITH_HIGHLIGHTS_VALUE"
+    #   resp.featured_results_items[0].additional_attributes[0].value.text_with_highlights_value.text #=> String
+    #   resp.featured_results_items[0].additional_attributes[0].value.text_with_highlights_value.highlights #=> Array
+    #   resp.featured_results_items[0].additional_attributes[0].value.text_with_highlights_value.highlights[0].begin_offset #=> Integer
+    #   resp.featured_results_items[0].additional_attributes[0].value.text_with_highlights_value.highlights[0].end_offset #=> Integer
+    #   resp.featured_results_items[0].additional_attributes[0].value.text_with_highlights_value.highlights[0].top_answer #=> Boolean
+    #   resp.featured_results_items[0].additional_attributes[0].value.text_with_highlights_value.highlights[0].type #=> String, one of "STANDARD", "THESAURUS_SYNONYM"
+    #   resp.featured_results_items[0].document_id #=> String
+    #   resp.featured_results_items[0].document_title.text #=> String
+    #   resp.featured_results_items[0].document_title.highlights #=> Array
+    #   resp.featured_results_items[0].document_title.highlights[0].begin_offset #=> Integer
+    #   resp.featured_results_items[0].document_title.highlights[0].end_offset #=> Integer
+    #   resp.featured_results_items[0].document_title.highlights[0].top_answer #=> Boolean
+    #   resp.featured_results_items[0].document_title.highlights[0].type #=> String, one of "STANDARD", "THESAURUS_SYNONYM"
+    #   resp.featured_results_items[0].document_excerpt.text #=> String
+    #   resp.featured_results_items[0].document_excerpt.highlights #=> Array
+    #   resp.featured_results_items[0].document_excerpt.highlights[0].begin_offset #=> Integer
+    #   resp.featured_results_items[0].document_excerpt.highlights[0].end_offset #=> Integer
+    #   resp.featured_results_items[0].document_excerpt.highlights[0].top_answer #=> Boolean
+    #   resp.featured_results_items[0].document_excerpt.highlights[0].type #=> String, one of "STANDARD", "THESAURUS_SYNONYM"
+    #   resp.featured_results_items[0].document_uri #=> String
+    #   resp.featured_results_items[0].document_attributes #=> Array
+    #   resp.featured_results_items[0].document_attributes[0].key #=> String
+    #   resp.featured_results_items[0].document_attributes[0].value.string_value #=> String
+    #   resp.featured_results_items[0].document_attributes[0].value.string_list_value #=> Array
+    #   resp.featured_results_items[0].document_attributes[0].value.string_list_value[0] #=> String
+    #   resp.featured_results_items[0].document_attributes[0].value.long_value #=> Integer
+    #   resp.featured_results_items[0].document_attributes[0].value.date_value #=> Time
+    #   resp.featured_results_items[0].feedback_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Query AWS API Documentation
     #
@@ -6077,6 +6375,90 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Updates a set of featured results. Features results are placed above
+    # all other results for certain queries. You map specific queries to
+    # specific documents for featuring in the results. If a query contains
+    # an exact match of a query, then one or more specific documents are
+    # featured in the search results.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index used for featuring results.
+    #
+    # @option params [required, String] :featured_results_set_id
+    #   The identifier of the index used for featuring results.
+    #
+    # @option params [String] :featured_results_set_name
+    #   A new name for the set of featured results.
+    #
+    # @option params [String] :description
+    #   A new description for the set of featured results.
+    #
+    # @option params [String] :status
+    #   You can set the status to `ACTIVE` or `INACTIVE`. When the value is
+    #   `ACTIVE`, featured results are ready for use. You can still configure
+    #   your settings before setting the status to `ACTIVE`. The queries you
+    #   specify for featured results must be unique per featured results set
+    #   for each index, whether the status is `ACTIVE` or `INACTIVE`.
+    #
+    # @option params [Array<String>] :query_texts
+    #   A list of queries for featuring results. For more information on the
+    #   list of queries, see [FeaturedResultsSet][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html
+    #
+    # @option params [Array<Types::FeaturedDocument>] :featured_documents
+    #   A list of document IDs for the documents you want to feature at the
+    #   top of the search results page. For more information on the list of
+    #   featured documents, see [FeaturedResultsSet][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html
+    #
+    # @return [Types::UpdateFeaturedResultsSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFeaturedResultsSetResponse#featured_results_set #featured_results_set} => Types::FeaturedResultsSet
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_featured_results_set({
+    #     index_id: "IndexId", # required
+    #     featured_results_set_id: "FeaturedResultsSetId", # required
+    #     featured_results_set_name: "FeaturedResultsSetName",
+    #     description: "FeaturedResultsSetDescription",
+    #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #     query_texts: ["QueryText"],
+    #     featured_documents: [
+    #       {
+    #         id: "DocumentId",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.featured_results_set.featured_results_set_id #=> String
+    #   resp.featured_results_set.featured_results_set_name #=> String
+    #   resp.featured_results_set.description #=> String
+    #   resp.featured_results_set.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.featured_results_set.query_texts #=> Array
+    #   resp.featured_results_set.query_texts[0] #=> String
+    #   resp.featured_results_set.featured_documents #=> Array
+    #   resp.featured_results_set.featured_documents[0].id #=> String
+    #   resp.featured_results_set.last_updated_timestamp #=> Integer
+    #   resp.featured_results_set.creation_timestamp #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateFeaturedResultsSet AWS API Documentation
+    #
+    # @overload update_featured_results_set(params = {})
+    # @param [Hash] params ({})
+    def update_featured_results_set(params = {}, options = {})
+      req = build_request(:update_featured_results_set, params)
+      req.send_request(options)
+    end
+
     # Updates an existing Amazon Kendra index.
     #
     # @option params [required, String] :id
@@ -6413,7 +6795,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

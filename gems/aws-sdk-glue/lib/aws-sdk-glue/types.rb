@@ -19759,10 +19759,6 @@ module Aws::Glue
     #   The name of the data quality ruleset.
     #   @return [String]
     #
-    # @!attribute [rw] updated_name
-    #   The new name of the ruleset, if you are renaming it.
-    #   @return [String]
-    #
     # @!attribute [rw] description
     #   A description of the ruleset.
     #   @return [String]
@@ -19776,7 +19772,6 @@ module Aws::Glue
     #
     class UpdateDataQualityRulesetRequest < Struct.new(
       :name,
-      :updated_name,
       :description,
       :ruleset)
       SENSITIVE = []

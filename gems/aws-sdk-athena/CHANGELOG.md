@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2023-03-30)
+------------------
+
+* Feature - Make DefaultExecutorDpuSize and CoordinatorDpuSize  fields optional  in StartSession
+
 1.63.0 (2023-03-27)
 ------------------
 

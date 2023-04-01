@@ -149,6 +149,10 @@ module Aws::IVS
     #   used when you set up streaming software.
     #   @return [String]
     #
+    # @!attribute [rw] insecure_ingest
+    #   Whether the channel allows insecure RTMP ingest. Default: `false`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live
     #   video up to Full HD. Use `LOW` for near-real-time interaction with
@@ -209,6 +213,7 @@ module Aws::IVS
       :arn,
       :authorized,
       :ingest_endpoint,
+      :insecure_ingest,
       :latency_mode,
       :name,
       :playback_url,
@@ -240,6 +245,10 @@ module Aws::IVS
     # @!attribute [rw] authorized
     #   Whether the channel is private (enabled for playback authorization).
     #   Default: `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] insecure_ingest
+    #   Whether the channel allows insecure RTMP ingest. Default: `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] latency_mode
@@ -276,6 +285,7 @@ module Aws::IVS
     class ChannelSummary < Struct.new(
       :arn,
       :authorized,
+      :insecure_ingest,
       :latency_mode,
       :name,
       :recording_configuration_arn,
@@ -299,6 +309,10 @@ module Aws::IVS
     # @!attribute [rw] authorized
     #   Whether the channel is private (enabled for playback authorization).
     #   Default: `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] insecure_ingest
+    #   Whether the channel allows insecure RTMP ingest. Default: `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] latency_mode
@@ -354,6 +368,7 @@ module Aws::IVS
     #
     class CreateChannelRequest < Struct.new(
       :authorized,
+      :insecure_ingest,
       :latency_mode,
       :name,
       :recording_configuration_arn,
@@ -1729,6 +1744,10 @@ module Aws::IVS
     #   Whether the channel is private (enabled for playback authorization).
     #   @return [Boolean]
     #
+    # @!attribute [rw] insecure_ingest
+    #   Whether the channel allows insecure RTMP ingest. Default: `false`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live
     #   video up to Full HD. Use `LOW` for near-real-time interaction with
@@ -1771,6 +1790,7 @@ module Aws::IVS
     class UpdateChannelRequest < Struct.new(
       :arn,
       :authorized,
+      :insecure_ingest,
       :latency_mode,
       :name,
       :recording_configuration_arn,

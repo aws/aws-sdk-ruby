@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.162.0 (2023-03-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-vpclattice` gem.
+
 3.161.0 (2023-03-23)
 ------------------
 

@@ -1480,7 +1480,7 @@ module Aws::Batch
     #   @return [Types::FargatePlatformConfiguration]
     #
     # @!attribute [rw] ephemeral_storage
-    #   The amount of ephemeral storage to allocate for the task. This
+    #   The amount of ephemeral storage allocated for the task. This
     #   parameter is used to expand the total amount of ephemeral storage
     #   available, beyond the default amount, for tasks hosted on Fargate.
     #   @return [Types::EphemeralStorage]
@@ -3587,7 +3587,21 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # Describes and uniquely identifies Kubernetes resources. For example,
+    # the compute environment that a pod runs in or the `jobID` for a job
+    # running in the pod. For more information, see [Understanding
+    # Kubernetes Objects][1] in the *Kubernetes documentation*.
+    #
+    #
+    #
+    # [1]: https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/
+    #
     # @!attribute [rw] labels
+    #   Key-value pairs used to identify, sort, and organize cube resources.
+    #   Can contain up to 63 uppercase letters, lowercase letters, numbers,
+    #   hyphens (-), and underscores (\_). Labels can be added or modified
+    #   at any time. Each resource can have multiple labels, but each key
+    #   must be unique for a given object.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EksMetadata AWS API Documentation
@@ -3656,6 +3670,13 @@ module Aws::Batch
     #   @return [Array<Types::EksVolume>]
     #
     # @!attribute [rw] metadata
+    #   Metadata about the Kubernetes pod. For more information, see
+    #   [Understanding Kubernetes Objects][1] in the *Kubernetes
+    #   documentation*.
+    #
+    #
+    #
+    #   [1]: https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/
     #   @return [Types::EksMetadata]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EksPodProperties AWS API Documentation
@@ -3744,6 +3765,17 @@ module Aws::Batch
     #   The name of the node for this job.
     #   @return [String]
     #
+    # @!attribute [rw] metadata
+    #   Describes and uniquely identifies Kubernetes resources. For example,
+    #   the compute environment that a pod runs in or the `jobID` for a job
+    #   running in the pod. For more information, see [Understanding
+    #   Kubernetes Objects][1] in the *Kubernetes documentation*.
+    #
+    #
+    #
+    #   [1]: https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/
+    #   @return [Types::EksMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EksPodPropertiesDetail AWS API Documentation
     #
     class EksPodPropertiesDetail < Struct.new(
@@ -3753,7 +3785,8 @@ module Aws::Batch
       :containers,
       :volumes,
       :pod_name,
-      :node_name)
+      :node_name,
+      :metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3766,6 +3799,8 @@ module Aws::Batch
     #   @return [Array<Types::EksContainerOverride>]
     #
     # @!attribute [rw] metadata
+    #   Metadata about the overrides for the container that's used on the
+    #   Amazon EKS pod.
     #   @return [Types::EksMetadata]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EksPodPropertiesOverride AWS API Documentation

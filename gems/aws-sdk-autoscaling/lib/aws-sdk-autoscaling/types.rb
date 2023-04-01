@@ -298,12 +298,6 @@ module Aws::AutoScaling
     # @!attribute [rw] traffic_sources
     #   The unique identifiers of one or more traffic sources. You can
     #   specify up to 10 traffic sources.
-    #
-    #   Currently, you must specify an Amazon Resource Name (ARN) for an
-    #   existing VPC Lattice target group. Amazon EC2 Auto Scaling registers
-    #   the running instances with the attached target groups. The target
-    #   groups receive incoming traffic and route requests to one or more
-    #   registered targets.
     #   @return [Array<Types::TrafficSourceIdentifier>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachTrafficSourcesType AWS API Documentation
@@ -372,12 +366,7 @@ module Aws::AutoScaling
     #   @return [Array<String>]
     #
     # @!attribute [rw] health_check_type
-    #   Determines whether any additional health checks are performed on the
-    #   instances in this group. Amazon EC2 health checks are always on.
-    #
-    #   The valid values are `EC2` (default), `ELB`, and `VPC_LATTICE`. The
-    #   `VPC_LATTICE` health check type is reserved for use with VPC
-    #   Lattice, which is in preview release and is subject to change.
+    #   A comma-separated list of one or more health check types.
     #   @return [String]
     #
     # @!attribute [rw] health_check_grace_period
@@ -467,11 +456,7 @@ module Aws::AutoScaling
     #   @return [Integer]
     #
     # @!attribute [rw] traffic_sources
-    #   **Reserved for use with Amazon VPC Lattice, which is in preview
-    #   release and is subject to change. Do not use this parameter for
-    #   production workloads. It is also subject to change.**
-    #
-    #   The unique identifiers of the traffic sources.
+    #   The traffic sources associated with this Auto Scaling group.
     #   @return [Array<Types::TrafficSourceIdentifier>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AutoScalingGroup AWS API Documentation
@@ -607,10 +592,10 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] health_status
-    #   The last reported health status of this instance. "Healthy" means
+    #   The last reported health status of this instance. `Healthy` means
     #   that the instance is healthy and should remain in service.
-    #   "Unhealthy" means that the instance is unhealthy and Amazon EC2
-    #   Auto Scaling should terminate and replace it.
+    #   `Unhealthy` means that the instance is unhealthy and Amazon EC2 Auto
+    #   Scaling should terminate and replace it.
     #   @return [String]
     #
     # @!attribute [rw] launch_configuration_name
@@ -1010,7 +995,7 @@ module Aws::AutoScaling
     # @!attribute [rw] load_balancer_names
     #   A list of Classic Load Balancers associated with this Auto Scaling
     #   group. For Application Load Balancers, Network Load Balancers, and
-    #   Gateway Load Balancer, specify the `TargetGroupARNs` property
+    #   Gateway Load Balancers, specify the `TargetGroupARNs` property
     #   instead.
     #   @return [Array<String>]
     #
@@ -1029,14 +1014,12 @@ module Aws::AutoScaling
     #   @return [Array<String>]
     #
     # @!attribute [rw] health_check_type
-    #   Determines whether any additional health checks are performed on the
-    #   instances in this group. Amazon EC2 health checks are always on. For
-    #   more information, see [Health checks for Auto Scaling instances][1]
-    #   in the *Amazon EC2 Auto Scaling User Guide*.
+    #   A comma-separated list of one or more health check types.
     #
-    #   The valid values are `EC2` (default), `ELB`, and `VPC_LATTICE`. The
-    #   `VPC_LATTICE` health check type is reserved for use with VPC
-    #   Lattice, which is in preview release and is subject to change.
+    #   The valid values are `EC2`, `ELB`, and `VPC_LATTICE`. `EC2` is the
+    #   default health check and cannot be disabled. For more information,
+    #   see [Health checks for Auto Scaling instances][1] in the *Amazon EC2
+    #   Auto Scaling User Guide*.
     #
     #
     #
@@ -1224,17 +1207,10 @@ module Aws::AutoScaling
     #   @return [Integer]
     #
     # @!attribute [rw] traffic_sources
-    #   **Reserved for use with Amazon VPC Lattice, which is in preview
-    #   release and is subject to change. Do not use this parameter for
-    #   production workloads. It is also subject to change.**
-    #
-    #   The unique identifiers of one or more traffic sources.
-    #
-    #   Currently, you must specify an Amazon Resource Name (ARN) for an
-    #   existing VPC Lattice target group. Amazon EC2 Auto Scaling registers
-    #   the running instances with the attached target groups. The target
-    #   groups receive incoming traffic and route requests to one or more
-    #   registered targets.
+    #   The list of traffic sources to attach to this Auto Scaling group.
+    #   You can use any of the following as traffic sources for an Auto
+    #   Scaling group: Classic Load Balancer, Application Load Balancer,
+    #   Gateway Load Balancer, Network Load Balancer, and VPC Lattice.
     #   @return [Array<Types::TrafficSourceIdentifier>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroupType AWS API Documentation
@@ -2271,8 +2247,16 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] traffic_source_type
-    #   The type of traffic source you are describing. Currently, the only
-    #   valid value is `vpc-lattice`.
+    #   The traffic source type that you want to describe.
+    #
+    #   The following lists the valid values:
+    #
+    #   * `elb` if the traffic source is a Classic Load Balancer.
+    #
+    #   * `elbv2` if the traffic source is a Application Load Balancer,
+    #     Gateway Load Balancer, or Network Load Balancer.
+    #
+    #   * `vpc-lattice` if the traffic source is VPC Lattice.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2498,13 +2482,6 @@ module Aws::AutoScaling
     # @!attribute [rw] traffic_sources
     #   The unique identifiers of one or more traffic sources you are
     #   detaching. You can specify up to 10 traffic sources.
-    #
-    #   Currently, you must specify an Amazon Resource Name (ARN) for an
-    #   existing VPC Lattice target group. When you detach a target group,
-    #   it enters the `Removing` state while deregistering the instances in
-    #   the group. When all instances are deregistered, then you can no
-    #   longer describe the target group using the DescribeTrafficSources
-    #   API call. The instances continue to run.
     #   @return [Array<Types::TrafficSourceIdentifier>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachTrafficSourcesType AWS API Documentation
@@ -3144,10 +3121,10 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] health_status
-    #   The last reported health status of the instance. "Healthy" means
+    #   The last reported health status of the instance. `Healthy` means
     #   that the instance is healthy and should remain in service.
-    #   "Unhealthy" means that the instance is unhealthy and that Amazon
-    #   EC2 Auto Scaling should terminate and replace it.
+    #   `Unhealthy` means that the instance is unhealthy and that Amazon EC2
+    #   Auto Scaling should terminate and replace it.
     #   @return [String]
     #
     # @!attribute [rw] launch_configuration_name
@@ -3337,7 +3314,7 @@ module Aws::AutoScaling
     #   @return [Types::InstanceRefreshProgressDetails]
     #
     # @!attribute [rw] preferences
-    #   Describes the preferences for an instance refresh.
+    #   The preferences for an instance refresh.
     #   @return [Types::RefreshPreferences]
     #
     # @!attribute [rw] desired_configuration
@@ -7255,7 +7232,7 @@ module Aws::AutoScaling
     end
 
     # This structure defines the CloudWatch metric to return, along with the
-    # statistic, period, and unit.
+    # statistic and unit.
     #
     # For more information about the CloudWatch terminology below, see
     # [Amazon CloudWatch concepts][1] in the *Amazon CloudWatch User Guide*.
@@ -7265,7 +7242,7 @@ module Aws::AutoScaling
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html
     #
     # @!attribute [rw] metric
-    #   Represents a specific metric.
+    #   The metric to use.
     #   @return [Types::Metric]
     #
     # @!attribute [rw] stat
@@ -7273,7 +7250,7 @@ module Aws::AutoScaling
     #   extended statistic. For a list of valid values, see the table in
     #   [Statistics][1] in the *Amazon CloudWatch User Guide*.
     #
-    #   The most commonly used metrics for scaling is `Average`
+    #   The most commonly used metric for scaling is `Average`.
     #
     #
     #
@@ -7338,19 +7315,65 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes the identifier of a traffic source.
-    #
-    # Currently, you must specify an Amazon Resource Name (ARN) for an
-    # existing VPC Lattice target group.
+    # Identifying information for a traffic source.
     #
     # @!attribute [rw] identifier
-    #   The unique identifier of the traffic source.
+    #   Identifies the traffic source.
+    #
+    #   For Application Load Balancers, Gateway Load Balancers, Network Load
+    #   Balancers, and VPC Lattice, this will be the Amazon Resource Name
+    #   (ARN) for a target group in this account and Region. For Classic
+    #   Load Balancers, this will be the name of the Classic Load Balancer
+    #   in this account and Region.
+    #
+    #   For example:
+    #
+    #   * Application Load Balancer ARN:
+    #     `arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/1234567890123456`
+    #
+    #   * Classic Load Balancer name: `my-classic-load-balancer`
+    #
+    #   * VPC Lattice ARN:
+    #     `arn:aws:vpc-lattice:us-west-2:123456789012:targetgroup/tg-1234567890123456`
+    #
+    #   To get the ARN of a target group for a Application Load Balancer,
+    #   Gateway Load Balancer, or Network Load Balancer, or the name of a
+    #   Classic Load Balancer, use the Elastic Load Balancing
+    #   [DescribeTargetGroups][1] and [DescribeLoadBalancers][2] API
+    #   operations.
+    #
+    #   To get the ARN of a target group for VPC Lattice, use the VPC
+    #   Lattice [GetTargetGroup][3] API operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html
+    #   [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html
+    #   [3]: https://docs.aws.amazon.com/vpc-lattice/latest/APIReference/API_GetTargetGroup.html
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Provides additional context for the value of `Identifier`.
+    #
+    #   The following lists the valid values:
+    #
+    #   * `elb` if `Identifier` is the name of a Classic Load Balancer.
+    #
+    #   * `elbv2` if `Identifier` is the ARN of an Application Load
+    #     Balancer, Gateway Load Balancer, or Network Load Balancer target
+    #     group.
+    #
+    #   * `vpc-lattice` if `Identifier` is the ARN of a VPC Lattice target
+    #     group.
+    #
+    #   Required if the identifier is the name of a Classic Load Balancer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/TrafficSourceIdentifier AWS API Documentation
     #
     class TrafficSourceIdentifier < Struct.new(
-      :identifier)
+      :identifier,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7358,37 +7381,63 @@ module Aws::AutoScaling
     # Describes the state of a traffic source.
     #
     # @!attribute [rw] traffic_source
-    #   The unique identifier of the traffic source. Currently, this is the
-    #   Amazon Resource Name (ARN) for a VPC Lattice target group.
+    #   This is replaced by `Identifier`.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The following are the possible states for a VPC Lattice target
-    #   group:
+    #   Describes the current state of a traffic source.
+    #
+    #   The state values are as follows:
     #
     #   * `Adding` - The Auto Scaling instances are being registered with
-    #     the target group.
+    #     the load balancer or target group.
     #
-    #   * `Added` - All Auto Scaling instances are registered with the
-    #     target group.
+    #   * `Added` - All Auto Scaling instances are registered with the load
+    #     balancer or target group.
     #
-    #   * `InService` - At least one Auto Scaling instance passed the
-    #     `VPC_LATTICE` health check.
+    #   * `InService` - For an Elastic Load Balancing load balancer or
+    #     target group, at least one Auto Scaling instance passed an `ELB`
+    #     health check. For VPC Lattice, at least one Auto Scaling instance
+    #     passed an `VPC_LATTICE` health check.
     #
     #   * `Removing` - The Auto Scaling instances are being deregistered
-    #     from the target group. If connection draining is enabled, VPC
+    #     from the load balancer or target group. If connection draining
+    #     (deregistration delay) is enabled, Elastic Load Balancing or VPC
     #     Lattice waits for in-flight requests to complete before
     #     deregistering the instances.
     #
     #   * `Removed` - All Auto Scaling instances are deregistered from the
-    #     target group.
+    #     load balancer or target group.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The unique identifier of the traffic source.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Provides additional context for the value of `Identifier`.
+    #
+    #   The following lists the valid values:
+    #
+    #   * `elb` if `Identifier` is the name of a Classic Load Balancer.
+    #
+    #   * `elbv2` if `Identifier` is the ARN of an Application Load
+    #     Balancer, Gateway Load Balancer, or Network Load Balancer target
+    #     group.
+    #
+    #   * `vpc-lattice` if `Identifier` is the ARN of a VPC Lattice target
+    #     group.
+    #
+    #   Required if the identifier is the name of a Classic Load Balancer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/TrafficSourceState AWS API Documentation
     #
     class TrafficSourceState < Struct.new(
       :traffic_source,
-      :state)
+      :state,
+      :identifier,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7462,12 +7511,16 @@ module Aws::AutoScaling
     #   @return [Array<String>]
     #
     # @!attribute [rw] health_check_type
-    #   Determines whether any additional health checks are performed on the
-    #   instances in this group. Amazon EC2 health checks are always on.
+    #   A comma-separated list of one or more health check types.
     #
-    #   The valid values are `EC2` (default), `ELB`, and `VPC_LATTICE`. The
-    #   `VPC_LATTICE` health check type is reserved for use with VPC
-    #   Lattice, which is in preview release and is subject to change.
+    #   The valid values are `EC2`, `ELB`, and `VPC_LATTICE`. `EC2` is the
+    #   default health check and cannot be disabled. For more information,
+    #   see [Health checks for Auto Scaling instances][1] in the *Amazon EC2
+    #   Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html
     #   @return [String]
     #
     # @!attribute [rw] health_check_grace_period

@@ -26,8 +26,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -56,8 +56,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -142,8 +142,8 @@ module Aws::ResilienceHub
     # Defines an Resilience Hub application.
     #
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -229,8 +229,8 @@ module Aws::ResilienceHub
     # Defines an application assessment.
     #
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -337,8 +337,8 @@ module Aws::ResilienceHub
     # Defines an application assessment summary.
     #
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -422,8 +422,10 @@ module Aws::ResilienceHub
     # Defines an Application Component.
     #
     # @!attribute [rw] additional_info
-    #   Additional configuration parameters for an AWS Resilience Hub
-    #   application.
+    #   Additional configuration parameters for an Resilience Hub
+    #   application. If you want to implement `additionalInfo` through the
+    #   Resilience Hub console rather than using an API call, see [Configure
+    #   the application configuration parameters][1].
     #
     #   <note markdown="1"> Currently, this parameter accepts a key-value mapping (in a string
     #   format) of only one failover region and one associated account.
@@ -434,6 +436,10 @@ module Aws::ResilienceHub
     #   "accounts":[\{"id":"<ACCOUNT_ID>"\}]\}]"`
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] id
@@ -548,8 +554,8 @@ module Aws::ResilienceHub
     # Defines an application summary.
     #
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -826,8 +832,8 @@ module Aws::ResilienceHub
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -878,8 +884,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -894,7 +900,7 @@ module Aws::ResilienceHub
     #   @return [Types::AppComponent]
     #
     # @!attribute [rw] app_version
-    #   The AWS Resilience Hub application version.
+    #   The Resilience Hub application version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/CreateAppVersionAppComponentResponse AWS API Documentation
@@ -913,8 +919,8 @@ module Aws::ResilienceHub
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -926,7 +932,7 @@ module Aws::ResilienceHub
     #
     # @!attribute [rw] app_components
     #   The list of Application Components that this resource belongs to. If
-    #   an Application Component is not part of the AWS Resilience Hub
+    #   an Application Component is not part of the Resilience Hub
     #   application, it will be added.
     #   @return [Array<String>]
     #
@@ -981,8 +987,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -993,7 +999,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] app_version
-    #   The AWS Resilience Hub application version.
+    #   The Resilience Hub application version.
     #   @return [String]
     #
     # @!attribute [rw] physical_resource
@@ -1233,8 +1239,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -1287,8 +1293,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -1313,8 +1319,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -1349,8 +1355,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -1369,8 +1375,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -1404,8 +1410,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -1420,7 +1426,7 @@ module Aws::ResilienceHub
     #   @return [Types::AppComponent]
     #
     # @!attribute [rw] app_version
-    #   The AWS Resilience Hub application version.
+    #   The Resilience Hub application version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/DeleteAppVersionAppComponentResponse AWS API Documentation
@@ -1434,8 +1440,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -1489,8 +1495,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -1501,7 +1507,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] app_version
-    #   The AWS Resilience Hub application version.
+    #   The Resilience Hub application version.
     #   @return [String]
     #
     # @!attribute [rw] physical_resource
@@ -1645,8 +1651,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -1679,8 +1685,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -1691,7 +1697,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] app_version
-    #   The AWS Resilience Hub application version.
+    #   The Resilience Hub application version.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -1709,8 +1715,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -1725,7 +1731,7 @@ module Aws::ResilienceHub
     #   @return [Types::AppComponent]
     #
     # @!attribute [rw] app_version
-    #   The AWS Resilience Hub application version.
+    #   The Resilience Hub application version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/DescribeAppVersionAppComponentResponse AWS API Documentation
@@ -1739,8 +1745,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -1751,7 +1757,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] app_version
-    #   The AWS Resilience Hub application version.
+    #   The Resilience Hub application version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/DescribeAppVersionRequest AWS API Documentation
@@ -1764,8 +1770,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -1776,7 +1782,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] app_version
-    #   The AWS Resilience Hub application version.
+    #   The Resilience Hub application version.
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
@@ -1814,8 +1820,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -1826,7 +1832,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] app_version
-    #   The AWS Resilience Hub application version.
+    #   The Resilience Hub application version.
     #   @return [String]
     #
     # @!attribute [rw] physical_resource
@@ -1846,8 +1852,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -1876,8 +1882,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -1916,17 +1922,23 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] additional_info
-    #   Additional configuration parameters for an AWS Resilience Hub
-    #   application.
+    #   Additional configuration parameters for an Resilience Hub
+    #   application. If you want to implement `additionalInfo` through the
+    #   Resilience Hub console rather than using an API call, see [Configure
+    #   the application configuration parameters][1].
     #
     #   <note markdown="1"> Currently, this parameter supports only failover region and account.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -1937,7 +1949,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] app_version
-    #   The AWS Resilience Hub application version.
+    #   The Resilience Hub application version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/DescribeAppVersionResponse AWS API Documentation
@@ -1951,8 +1963,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -1976,8 +1988,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -1996,7 +2008,7 @@ module Aws::ResilienceHub
     #
     #   * <b> <code>resources</code> </b>
     #
-    #     The list of logical resources that needs to be included in the
+    #     The list of logical resources that must be included in the
     #     Resilience Hub application.
     #
     #     Type: Array
@@ -2040,6 +2052,18 @@ module Aws::ResilienceHub
     #
     #         Type: String
     #
+    #       * `eksSourceName`
+    #
+    #         The name of the Amazon Elastic Kubernetes Service cluster and
+    #         namespace this resource belongs to.
+    #
+    #         <note markdown="1"> This parameter accepts values in "eks-cluster/namespace"
+    #         format.
+    #
+    #          </note>
+    #
+    #         Type: String
+    #
     #     * <i> <code>type</code> </i>
     #
     #       The type of resource.
@@ -2054,8 +2078,10 @@ module Aws::ResilienceHub
     #
     #     * `additionalInfo`
     #
-    #       Additional configuration parameters for an AWS Resilience Hub
-    #       application.
+    #       Additional configuration parameters for an Resilience Hub
+    #       application. If you want to implement `additionalInfo` through
+    #       the Resilience Hub console rather than using an API call, see
+    #       [Configure the application configuration parameters][1].
     #
     #       <note markdown="1"> Currently, this parameter accepts a key-value mapping (in a
     #       string format) of only one failover region and one associated
@@ -2071,7 +2097,7 @@ module Aws::ResilienceHub
     #   * <b> <code>appComponents</code> </b>
     #
     #     The list of Application Components that this resource belongs to.
-    #     If an Application Component is not part of the AWS Resilience Hub
+    #     If an Application Component is not part of the Resilience Hub
     #     application, it will be added.
     #
     #     Type: Array
@@ -2088,7 +2114,7 @@ module Aws::ResilienceHub
     #
     #       The type of Application Component. For more information about
     #       the types of Application Component, see [Grouping resources in
-    #       an AppComponent][1].
+    #       an AppComponent][2].
     #
     #       Type: String
     #
@@ -2101,8 +2127,10 @@ module Aws::ResilienceHub
     #
     #     * `additionalInfo`
     #
-    #       Additional configuration parameters for an AWS Resilience Hub
-    #       application.
+    #       Additional configuration parameters for an Resilience Hub
+    #       application. If you want to implement `additionalInfo` through
+    #       the Resilience Hub console rather than using an API call, see
+    #       [Configure the application configuration parameters][1].
     #
     #       <note markdown="1"> Currently, this parameter accepts a key-value mapping (in a
     #       string format) of only one failover region and one associated
@@ -2142,6 +2170,8 @@ module Aws::ResilienceHub
     #
     #       * `terraformSourceName`
     #
+    #       * `eksSourceName`
+    #
     #        </note>
     #
     #       Each `logicalResourceIds` object includes the following fields:
@@ -2171,14 +2201,28 @@ module Aws::ResilienceHub
     #
     #         Type: String
     #
+    #       * `eksSourceName`
+    #
+    #         The name of the Amazon Elastic Kubernetes Service cluster and
+    #         namespace this resource belongs to.
+    #
+    #         <note markdown="1"> This parameter accepts values in "eks-cluster/namespace"
+    #         format.
+    #
+    #          </note>
+    #
+    #         Type: String
+    #
     #   * <b> <code>version</code> </b>
     #
-    #     The AWS Resilience Hub application version.
+    #     The Resilience Hub application version.
     #
     #   * `additionalInfo`
     #
-    #     Additional configuration parameters for an AWS Resilience Hub
-    #     application.
+    #     Additional configuration parameters for an Resilience Hub
+    #     application. If you want to implement `additionalInfo` through the
+    #     Resilience Hub console rather than using an API call, see
+    #     [Configure the application configuration parameters][1].
     #
     #     <note markdown="1"> Currently, this parameter accepts a key-value mapping (in a string
     #     format) of only one failover region and one associated account.
@@ -2192,7 +2236,8 @@ module Aws::ResilienceHub
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html
+    #   [1]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html
+    #   [2]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html
     #   @return [String]
     #
     # @!attribute [rw] app_version
@@ -2210,8 +2255,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -2230,8 +2275,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -2441,8 +2486,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -2483,8 +2528,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -2599,8 +2644,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -2791,8 +2836,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -2803,7 +2848,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] app_version
-    #   The AWS Resilience Hub application version.
+    #   The Resilience Hub application version.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2846,8 +2891,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -2862,7 +2907,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of Application Components to be displayed per AWS
+    #   Maximum number of Application Components to be displayed per
     #   Resilience Hub application version.
     #   @return [Integer]
     #
@@ -2883,8 +2928,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -2899,7 +2944,7 @@ module Aws::ResilienceHub
     #   @return [Array<Types::AppComponent>]
     #
     # @!attribute [rw] app_version
-    #   The AWS Resilience Hub application version.
+    #   The Resilience Hub application version.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2919,8 +2964,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -2981,8 +3026,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -3048,8 +3093,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -3100,8 +3145,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -3446,8 +3491,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -3556,8 +3601,10 @@ module Aws::ResilienceHub
     # Name (ARN) or an Resilience Hub-native identifier.
     #
     # @!attribute [rw] additional_info
-    #   Additional configuration parameters for an AWS Resilience Hub
-    #   application.
+    #   Additional configuration parameters for an Resilience Hub
+    #   application. If you want to implement `additionalInfo` through the
+    #   Resilience Hub console rather than using an API call, see [Configure
+    #   the application configuration parameters][1].
     #
     #   <note markdown="1"> Currently, this parameter accepts a key-value mapping (in a string
     #   format) of only one failover region and one associated account.
@@ -3568,6 +3615,10 @@ module Aws::ResilienceHub
     #   "accounts":[\{"id":"<ACCOUNT_ID>"\}]\}]"`
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] app_components
@@ -3647,8 +3698,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -3667,8 +3718,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -3692,8 +3743,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -3712,7 +3763,7 @@ module Aws::ResilienceHub
     #
     #   * <b> <code>resources</code> </b>
     #
-    #     The list of logical resources that needs to be included in the
+    #     The list of logical resources that must be included in the
     #     Resilience Hub application.
     #
     #     Type: Array
@@ -3756,6 +3807,18 @@ module Aws::ResilienceHub
     #
     #         Type: String
     #
+    #       * `eksSourceName`
+    #
+    #         The name of the Amazon Elastic Kubernetes Service cluster and
+    #         namespace this resource belongs to.
+    #
+    #         <note markdown="1"> This parameter accepts values in "eks-cluster/namespace"
+    #         format.
+    #
+    #          </note>
+    #
+    #         Type: String
+    #
     #     * <i> <code>type</code> </i>
     #
     #       The type of resource.
@@ -3770,8 +3833,10 @@ module Aws::ResilienceHub
     #
     #     * `additionalInfo`
     #
-    #       Additional configuration parameters for an AWS Resilience Hub
-    #       application.
+    #       Additional configuration parameters for an Resilience Hub
+    #       application. If you want to implement `additionalInfo` through
+    #       the Resilience Hub console rather than using an API call, see
+    #       [Configure the application configuration parameters][1].
     #
     #       <note markdown="1"> Currently, this parameter accepts a key-value mapping (in a
     #       string format) of only one failover region and one associated
@@ -3787,7 +3852,7 @@ module Aws::ResilienceHub
     #   * <b> <code>appComponents</code> </b>
     #
     #     The list of Application Components that this resource belongs to.
-    #     If an Application Component is not part of the AWS Resilience Hub
+    #     If an Application Component is not part of the Resilience Hub
     #     application, it will be added.
     #
     #     Type: Array
@@ -3804,7 +3869,7 @@ module Aws::ResilienceHub
     #
     #       The type of Application Component. For more information about
     #       the types of Application Component, see [Grouping resources in
-    #       an AppComponent][1].
+    #       an AppComponent][2].
     #
     #       Type: String
     #
@@ -3817,8 +3882,10 @@ module Aws::ResilienceHub
     #
     #     * `additionalInfo`
     #
-    #       Additional configuration parameters for an AWS Resilience Hub
-    #       application.
+    #       Additional configuration parameters for an Resilience Hub
+    #       application. If you want to implement `additionalInfo` through
+    #       the Resilience Hub console rather than using an API call, see
+    #       [Configure the application configuration parameters][1].
     #
     #       <note markdown="1"> Currently, this parameter accepts a key-value mapping (in a
     #       string format) of only one failover region and one associated
@@ -3858,6 +3925,8 @@ module Aws::ResilienceHub
     #
     #       * `terraformSourceName`
     #
+    #       * `eksSourceName`
+    #
     #        </note>
     #
     #       Each `logicalResourceIds` object includes the following fields:
@@ -3887,14 +3956,28 @@ module Aws::ResilienceHub
     #
     #         Type: String
     #
+    #       * `eksSourceName`
+    #
+    #         The name of the Amazon Elastic Kubernetes Service cluster and
+    #         namespace this resource belongs to.
+    #
+    #         <note markdown="1"> This parameter accepts values in "eks-cluster/namespace"
+    #         format.
+    #
+    #          </note>
+    #
+    #         Type: String
+    #
     #   * <b> <code>version</code> </b>
     #
-    #     The AWS Resilience Hub application version.
+    #     The Resilience Hub application version.
     #
     #   * `additionalInfo`
     #
-    #     Additional configuration parameters for an AWS Resilience Hub
-    #     application.
+    #     Additional configuration parameters for an Resilience Hub
+    #     application. If you want to implement `additionalInfo` through the
+    #     Resilience Hub console rather than using an API call, see
+    #     [Configure the application configuration parameters][1].
     #
     #     <note markdown="1"> Currently, this parameter accepts a key-value mapping (in a string
     #     format) of only one failover region and one associated account.
@@ -3908,7 +3991,8 @@ module Aws::ResilienceHub
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html
+    #   [1]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html
+    #   [2]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/PutDraftAppVersionTemplateRequest AWS API Documentation
@@ -3921,8 +4005,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -4017,8 +4101,8 @@ module Aws::ResilienceHub
     # CreateRecommendationTemplate action.
     #
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -4134,8 +4218,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -4194,8 +4278,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -4305,8 +4389,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -4330,8 +4414,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -4448,7 +4532,7 @@ module Aws::ResilienceHub
     #
     #   ResourceGroup
     #
-    #   : The resource is mapped to an Resource Groups. The name of the
+    #   : The resource is mapped to Resource Groups. The name of the
     #     resource group is contained in the `resourceGroupName` property.
     #   @return [String]
     #
@@ -4590,8 +4674,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -4783,7 +4867,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] unsupported_resource_status
-    #   The status of unsupported resource.
+    #   The status of the unsupported resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/UnsupportedResource AWS API Documentation
@@ -4819,8 +4903,8 @@ module Aws::ResilienceHub
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -4886,8 +4970,8 @@ module Aws::ResilienceHub
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -4928,8 +5012,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -4944,7 +5028,7 @@ module Aws::ResilienceHub
     #   @return [Types::AppComponent]
     #
     # @!attribute [rw] app_version
-    #   The AWS Resilience Hub application version.
+    #   The Resilience Hub application version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/UpdateAppVersionAppComponentResponse AWS API Documentation
@@ -4958,8 +5042,10 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] additional_info
-    #   Additional configuration parameters for an AWS Resilience Hub
-    #   application.
+    #   Additional configuration parameters for an Resilience Hub
+    #   application. If you want to implement `additionalInfo` through the
+    #   Resilience Hub console rather than using an API call, see [Configure
+    #   the application configuration parameters][1].
     #
     #   <note markdown="1"> Currently, this parameter accepts a key-value mapping (in a string
     #   format) of only one failover region and one associated account.
@@ -4970,11 +5056,15 @@ module Aws::ResilienceHub
     #   "accounts":[\{"id":"<ACCOUNT_ID>"\}]\}]"`
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -4999,8 +5089,8 @@ module Aws::ResilienceHub
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -5012,7 +5102,7 @@ module Aws::ResilienceHub
     #
     # @!attribute [rw] app_components
     #   The list of Application Components that this resource belongs to. If
-    #   an Application Component is not part of the AWS Resilience Hub
+    #   an Application Component is not part of the Resilience Hub
     #   application, it will be added.
     #   @return [Array<String>]
     #
@@ -5068,8 +5158,8 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -5080,7 +5170,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] app_version
-    #   The AWS Resilience Hub application version.
+    #   The Resilience Hub application version.
     #   @return [String]
     #
     # @!attribute [rw] physical_resource
@@ -5100,17 +5190,23 @@ module Aws::ResilienceHub
     end
 
     # @!attribute [rw] additional_info
-    #   Additional configuration parameters for an AWS Resilience Hub
-    #   application.
+    #   Additional configuration parameters for an Resilience Hub
+    #   application. If you want to implement `additionalInfo` through the
+    #   Resilience Hub console rather than using an API call, see [Configure
+    #   the application configuration parameters][1].
     #
     #   <note markdown="1"> Currently, this parameter supports only failover region and account.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] app_arn
-    #   The Amazon Resource Name (ARN) of the AWS Resilience Hub
-    #   application. The format for this ARN is:
+    #   The Amazon Resource Name (ARN) of the Resilience Hub application.
+    #   The format for this ARN is:
     #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
     #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1]
     #   in the *AWS General Reference* guide.
@@ -5121,7 +5217,7 @@ module Aws::ResilienceHub
     #   @return [String]
     #
     # @!attribute [rw] app_version
-    #   The AWS Resilience Hub application version.
+    #   The Resilience Hub application version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/UpdateAppVersionResponse AWS API Documentation

@@ -10,6 +10,30 @@
 module Aws::Imagebuilder
   module Types
 
+    # Contains counts of vulnerability findings from image scans that run
+    # when you create new Image Builder images, or build new versions of
+    # existing images. The vulnerability counts are grouped by severity
+    # level. The counts are aggregated across resources to create the final
+    # tally for the account that owns them.
+    #
+    # @!attribute [rw] account_id
+    #   Identifies the account that owns the aggregated resource findings.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity_counts
+    #   Counts by severity level for medium severity and higher level
+    #   findings, plus a total for all of the findings.
+    #   @return [Types::SeverityCounts]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/AccountAggregation AWS API Documentation
+    #
+    class AccountAggregation < Struct.new(
+      :account_id,
+      :severity_counts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # In addition to your infrastructure configuration, these settings
     # provide an extra layer of control over your build instances. You can
     # also specify commands to run on launch for all of your build
@@ -80,7 +104,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   Image state shows the image status and the reason for that status.
+    #   Image status and the reason for that status.
     #   @return [Types::ImageState]
     #
     # @!attribute [rw] account_id
@@ -156,8 +180,8 @@ module Aws::Imagebuilder
     end
 
     # @!attribute [rw] image_build_version_arn
-    #   The Amazon Resource Name (ARN) of the image whose creation you want
-    #   to cancel.
+    #   The Amazon Resource Name (ARN) of the image that you want to cancel
+    #   creation for.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -191,8 +215,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] image_build_version_arn
-    #   The Amazon Resource Name (ARN) of the image whose creation has been
-    #   cancelled.
+    #   The ARN of the image whose creation this request canceled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CancelImageCreationResponse AWS API Documentation
@@ -937,8 +960,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] component_build_version_arn
-    #   The Amazon Resource Name (ARN) of the component that was created by
-    #   this request.
+    #   The Amazon Resource Name (ARN) of the component that this request
+    #   created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateComponentResponse AWS API Documentation
@@ -1204,6 +1227,10 @@ module Aws::Imagebuilder
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] image_scanning_configuration
+    #   Contains settings for vulnerability scans.
+    #   @return [Types::ImageScanningConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateImagePipelineRequest AWS API Documentation
     #
     class CreateImagePipelineRequest < Struct.new(
@@ -1218,7 +1245,8 @@ module Aws::Imagebuilder
       :schedule,
       :status,
       :tags,
-      :client_token)
+      :client_token,
+      :image_scanning_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1397,6 +1425,10 @@ module Aws::Imagebuilder
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] image_scanning_configuration
+    #   Contains settings for vulnerability scans.
+    #   @return [Types::ImageScanningConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateImageRequest AWS API Documentation
     #
     class CreateImageRequest < Struct.new(
@@ -1407,7 +1439,8 @@ module Aws::Imagebuilder
       :image_tests_configuration,
       :enhanced_image_metadata_enabled,
       :tags,
-      :client_token)
+      :client_token,
+      :image_scanning_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1421,8 +1454,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] image_build_version_arn
-    #   The Amazon Resource Name (ARN) of the image that was created by this
-    #   request.
+    #   The Amazon Resource Name (ARN) of the image that this request
+    #   created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateImageResponse AWS API Documentation
@@ -1556,6 +1589,107 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # Amazon Inspector generates a risk score for each finding. This score
+    # helps you to prioritize findings, to focus on the most critical
+    # findings and the most vulnerable resources. The score uses the Common
+    # Vulnerability Scoring System (CVSS) format. This format is a
+    # modification of the base CVSS score that the National Vulnerability
+    # Database (NVD) provides. For more information about severity levels,
+    # see [Severity levels for Amazon Inspector findings][1] in the *Amazon
+    # Inspector User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-severity.html
+    #
+    # @!attribute [rw] base_score
+    #   The CVSS base score.
+    #   @return [Float]
+    #
+    # @!attribute [rw] scoring_vector
+    #   The vector string of the CVSS score.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The CVSS version that generated the score.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source of the CVSS score.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CvssScore AWS API Documentation
+    #
+    class CvssScore < Struct.new(
+      :base_score,
+      :scoring_vector,
+      :version,
+      :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an adjustment that Amazon Inspector made to the CVSS
+    # score for a finding.
+    #
+    # @!attribute [rw] metric
+    #   The metric that Amazon Inspector used to adjust the CVSS score.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason for the CVSS score adjustment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CvssScoreAdjustment AWS API Documentation
+    #
+    class CvssScoreAdjustment < Struct.new(
+      :metric,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the source of the score, and the factors that determined
+    # the adjustments to create the final score.
+    #
+    # @!attribute [rw] score_source
+    #   The source for the CVSS score.
+    #   @return [String]
+    #
+    # @!attribute [rw] cvss_source
+    #   The source of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The CVSS version that generated the score.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The CVSS score.
+    #   @return [Float]
+    #
+    # @!attribute [rw] scoring_vector
+    #   A vector that measures the severity of the vulnerability.
+    #   @return [String]
+    #
+    # @!attribute [rw] adjustments
+    #   An object that contains details about an adjustment that Amazon
+    #   Inspector made to the CVSS score for the finding.
+    #   @return [Array<Types::CvssScoreAdjustment>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CvssScoreDetails AWS API Documentation
+    #
+    class CvssScoreDetails < Struct.new(
+      :score_source,
+      :cvss_source,
+      :version,
+      :score,
+      :scoring_vector,
+      :adjustments)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] component_build_version_arn
     #   The Amazon Resource Name (ARN) of the component build version to
     #   delete.
@@ -1574,8 +1708,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] component_build_version_arn
-    #   The Amazon Resource Name (ARN) of the component build version that
-    #   was deleted.
+    #   The ARN of the component build version that this request deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/DeleteComponentResponse AWS API Documentation
@@ -1725,8 +1858,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] image_build_version_arn
-    #   The Amazon Resource Name (ARN) of the Image Builder image resource
-    #   that was deleted.
+    #   The ARN of the Image Builder image resource that this request
+    #   deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/DeleteImageResponse AWS API Documentation
@@ -1964,6 +2097,33 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # Settings that Image Builder uses to configure the ECR repository and
+    # the output container images that Amazon Inspector scans.
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the container repository that Amazon Inspector scans to
+    #   identify findings for your container images. The name includes the
+    #   path for the repository location. If you don’t provide this
+    #   information, Image Builder creates a repository in your account
+    #   named `image-builder-image-scanning-repository` for vulnerability
+    #   scans of your output container images.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_tags
+    #   Tags for Image Builder to apply to the output container image that
+    #   &amp;INS; scans. Tags can help you identify and manage your scanned
+    #   images.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/EcrConfiguration AWS API Documentation
+    #
+    class EcrConfiguration < Struct.new(
+      :repository_name,
+      :container_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Define and configure faster launching for output Windows AMIs.
     #
     # @!attribute [rw] enabled
@@ -2121,7 +2281,7 @@ module Aws::Imagebuilder
 
     # @!attribute [rw] component_build_version_arn
     #   The Amazon Resource Name (ARN) of the component that you want to
-    #   retrieve. Regex requires "/\\d+$" suffix.
+    #   get. Regex requires the suffix `/\d+$`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetComponentRequest AWS API Documentation
@@ -2359,8 +2519,7 @@ module Aws::Imagebuilder
     end
 
     # @!attribute [rw] image_build_version_arn
-    #   The Amazon Resource Name (ARN) of the image that you want to
-    #   retrieve.
+    #   The Amazon Resource Name (ARN) of the image that you want to get.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetImageRequest AWS API Documentation
@@ -2418,6 +2577,222 @@ module Aws::Imagebuilder
     class GetInfrastructureConfigurationResponse < Struct.new(
       :request_id,
       :infrastructure_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workflow_execution_id
+    #   Use the unique identifier for a runtime instance of the workflow to
+    #   get runtime details.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetWorkflowExecutionRequest AWS API Documentation
+    #
+    class GetWorkflowExecutionRequest < Struct.new(
+      :workflow_execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The request ID that uniquely identifies this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_build_version_arn
+    #   The Amazon Resource Name (ARN) of the build version for the Image
+    #   Builder workflow resource that defines the specified runtime
+    #   instance of the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_execution_id
+    #   The unique identifier that Image Builder assigned to keep track of
+    #   runtime details when it ran the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_build_version_arn
+    #   The Amazon Resource Name (ARN) of the image resource build version
+    #   that the specified runtime instance of the workflow created.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of workflow that Image Builder ran for the specified
+    #   runtime instance of the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current runtime status for the specified runtime instance of the
+    #   workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The output message from the specified runtime instance of the
+    #   workflow, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_step_count
+    #   The total number of steps in the specified runtime instance of the
+    #   workflow that ran. This number should equal the sum of the step
+    #   counts for steps that succeeded, were skipped, and failed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_steps_succeeded
+    #   A runtime count for the number of steps that ran successfully in the
+    #   specified runtime instance of the workflow.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_steps_failed
+    #   A runtime count for the number of steps that failed in the specified
+    #   runtime instance of the workflow.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_steps_skipped
+    #   A runtime count for the number of steps that were skipped in the
+    #   specified runtime instance of the workflow.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp when the specified runtime instance of the workflow
+    #   started.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp when the specified runtime instance of the workflow
+    #   finished.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetWorkflowExecutionResponse AWS API Documentation
+    #
+    class GetWorkflowExecutionResponse < Struct.new(
+      :request_id,
+      :workflow_build_version_arn,
+      :workflow_execution_id,
+      :image_build_version_arn,
+      :type,
+      :status,
+      :message,
+      :total_step_count,
+      :total_steps_succeeded,
+      :total_steps_failed,
+      :total_steps_skipped,
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] step_execution_id
+    #   Use the unique identifier for a specific runtime instance of the
+    #   workflow step to get runtime details for that step.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetWorkflowStepExecutionRequest AWS API Documentation
+    #
+    class GetWorkflowStepExecutionRequest < Struct.new(
+      :step_execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The request ID that uniquely identifies this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_execution_id
+    #   The unique identifier for the runtime version of the workflow step
+    #   that you specified in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_build_version_arn
+    #   The Amazon Resource Name (ARN) of the build version for the Image
+    #   Builder workflow resource that defines this workflow step.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_execution_id
+    #   The unique identifier that Image Builder assigned to keep track of
+    #   runtime details when it ran the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_build_version_arn
+    #   The Amazon Resource Name (ARN) of the image resource build version
+    #   that the specified runtime instance of the workflow step creates.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the specified runtime instance of the workflow step.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Describes the specified workflow step.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The name of the action that the specified step performs.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status for the specified runtime version of the workflow
+    #   step.
+    #   @return [String]
+    #
+    # @!attribute [rw] rollback_status
+    #   Reports on the rollback status of the specified runtime version of
+    #   the workflow step, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The output message from the specified runtime instance of the
+    #   workflow step, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   Input parameters that Image Builder provided for the specified
+    #   runtime instance of the workflow step.
+    #   @return [String]
+    #
+    # @!attribute [rw] outputs
+    #   The file names that the specified runtime version of the workflow
+    #   step created as output.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp when the specified runtime version of the workflow
+    #   step started.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp when the specified runtime instance of the workflow
+    #   step finished.
+    #   @return [String]
+    #
+    # @!attribute [rw] on_failure
+    #   The action to perform if the workflow step fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] timeout_seconds
+    #   The maximum duration in seconds for this step to complete its
+    #   action.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetWorkflowStepExecutionResponse AWS API Documentation
+    #
+    class GetWorkflowStepExecutionResponse < Struct.new(
+      :request_id,
+      :step_execution_id,
+      :workflow_build_version_arn,
+      :workflow_execution_id,
+      :image_build_version_arn,
+      :name,
+      :description,
+      :action,
+      :status,
+      :rollback_status,
+      :message,
+      :inputs,
+      :outputs,
+      :start_time,
+      :end_time,
+      :on_failure,
+      :timeout_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2579,6 +2954,15 @@ module Aws::Imagebuilder
     #   image.
     #   @return [String]
     #
+    # @!attribute [rw] scan_state
+    #   Contains information about the current state of scans for this
+    #   image.
+    #   @return [Types::ImageScanState]
+    #
+    # @!attribute [rw] image_scanning_configuration
+    #   Contains settings for vulnerability scans.
+    #   @return [Types::ImageScanningConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/Image AWS API Documentation
     #
     class Image < Struct.new(
@@ -2601,7 +2985,31 @@ module Aws::Imagebuilder
       :output_resources,
       :tags,
       :build_type,
-      :image_source)
+      :image_source,
+      :scan_state,
+      :image_scanning_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains vulnerability counts for a specific image.
+    #
+    # @!attribute [rw] image_build_version_arn
+    #   The Amazon Resource Name (ARN) that identifies the image for this
+    #   aggregation.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity_counts
+    #   Counts by severity level for medium severity and higher level
+    #   findings, plus a total for all of the findings for the specified
+    #   image.
+    #   @return [Types::SeverityCounts]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImageAggregation AWS API Documentation
+    #
+    class ImageAggregation < Struct.new(
+      :image_build_version_arn,
+      :severity_counts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2704,6 +3112,10 @@ module Aws::Imagebuilder
     #   The tags of this image pipeline.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] image_scanning_configuration
+    #   Contains settings for vulnerability scans.
+    #   @return [Types::ImageScanningConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImagePipeline AWS API Documentation
     #
     class ImagePipeline < Struct.new(
@@ -2723,7 +3135,30 @@ module Aws::Imagebuilder
       :date_updated,
       :date_last_run,
       :date_next_run,
-      :tags)
+      :tags,
+      :image_scanning_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains vulnerability counts for a specific image pipeline.
+    #
+    # @!attribute [rw] image_pipeline_arn
+    #   The Amazon Resource Name (ARN) that identifies the image pipeline
+    #   for this aggregation.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity_counts
+    #   Counts by severity level for medium severity and higher level
+    #   findings, plus a total for all of the findings for the specified
+    #   image pipeline.
+    #   @return [Types::SeverityCounts]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImagePipelineAggregation AWS API Documentation
+    #
+    class ImagePipelineAggregation < Struct.new(
+      :image_pipeline_arn,
+      :severity_counts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2859,14 +3294,198 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # Image state shows the image status and the reason for that status.
+    # Contains details about a vulnerability scan finding.
+    #
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID that's associated with the
+    #   finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_build_version_arn
+    #   The Amazon Resource Name (ARN) of the image build version that's
+    #   associated with the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_pipeline_arn
+    #   The Amazon Resource Name (ARN) of the image pipeline that's
+    #   associated with the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the finding. Image Builder looks for findings of the
+    #   type `PACKAGE_VULNERABILITY` that apply to output images, and
+    #   excludes other types.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] remediation
+    #   An object that contains the details about how to remediate the
+    #   finding.
+    #   @return [Types::Remediation]
+    #
+    # @!attribute [rw] severity
+    #   The severity of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] first_observed_at
+    #   The date and time when the finding was first observed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the finding was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] inspector_score
+    #   The score that Amazon Inspector assigned for the finding.
+    #   @return [Float]
+    #
+    # @!attribute [rw] inspector_score_details
+    #   An object that contains details of the Amazon Inspector score.
+    #   @return [Types::InspectorScoreDetails]
+    #
+    # @!attribute [rw] package_vulnerability_details
+    #   An object that contains the details of a package vulnerability
+    #   finding.
+    #   @return [Types::PackageVulnerabilityDetails]
+    #
+    # @!attribute [rw] fix_available
+    #   Details about whether a fix is available for any of the packages
+    #   that are identified in the finding through a version update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImageScanFinding AWS API Documentation
+    #
+    class ImageScanFinding < Struct.new(
+      :aws_account_id,
+      :image_build_version_arn,
+      :image_pipeline_arn,
+      :type,
+      :description,
+      :title,
+      :remediation,
+      :severity,
+      :first_observed_at,
+      :updated_at,
+      :inspector_score,
+      :inspector_score_details,
+      :package_vulnerability_details,
+      :fix_available)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This returns exactly one type of aggregation, based on the filter that
+    # Image Builder applies in its API action.
+    #
+    # @!attribute [rw] account_aggregation
+    #   Returns an object that contains severity counts based on an account
+    #   ID.
+    #   @return [Types::AccountAggregation]
+    #
+    # @!attribute [rw] image_aggregation
+    #   Returns an object that contains severity counts based on the Amazon
+    #   Resource Name (ARN) for a specific image.
+    #   @return [Types::ImageAggregation]
+    #
+    # @!attribute [rw] image_pipeline_aggregation
+    #   Returns an object that contains severity counts based on an image
+    #   pipeline ARN.
+    #   @return [Types::ImagePipelineAggregation]
+    #
+    # @!attribute [rw] vulnerability_id_aggregation
+    #   Returns an object that contains severity counts based on
+    #   vulnerability ID.
+    #   @return [Types::VulnerabilityIdAggregation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImageScanFindingAggregation AWS API Documentation
+    #
+    class ImageScanFindingAggregation < Struct.new(
+      :account_aggregation,
+      :image_aggregation,
+      :image_pipeline_aggregation,
+      :vulnerability_id_aggregation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A name value pair that Image Builder applies to streamline results
+    # from the vulnerability scan findings list action.
+    #
+    # @!attribute [rw] name
+    #   The name of the image scan finding filter. Filter names are
+    #   case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The filter values. Filter values are case-sensitive.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImageScanFindingsFilter AWS API Documentation
+    #
+    class ImageScanFindingsFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Shows the vulnerability scan status for a specific image, and the
+    # reason for that status.
+    #
+    # @!attribute [rw] status
+    #   The current state of vulnerability scans for the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason for the scan status for the image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImageScanState AWS API Documentation
+    #
+    class ImageScanState < Struct.new(
+      :status,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains settings for Image Builder image resource and container image
+    # scans.
+    #
+    # @!attribute [rw] image_scanning_enabled
+    #   A setting that indicates whether Image Builder keeps a snapshot of
+    #   the vulnerability scans that Amazon Inspector runs against the build
+    #   instance when you create a new image.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ecr_configuration
+    #   Contains Amazon ECR settings for vulnerability scans.
+    #   @return [Types::EcrConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImageScanningConfiguration AWS API Documentation
+    #
+    class ImageScanningConfiguration < Struct.new(
+      :image_scanning_enabled,
+      :ecr_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Image status and the reason for that status.
     #
     # @!attribute [rw] status
     #   The status of the image.
     #   @return [String]
     #
     # @!attribute [rw] reason
-    #   The reason for the image's status.
+    #   The reason for the status of the image.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImageState AWS API Documentation
@@ -3133,9 +3752,9 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] change_description
-    #   The change description of the component. Describes what change has
-    #   been made in this version, or what makes this version different from
-    #   other versions of this component.
+    #   The change description of the component. This description indicates
+    #   the change that has been made in this version, or what makes this
+    #   version different from other versions of this component.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -3476,6 +4095,22 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # Information about the factors that influenced the score that Amazon
+    # Inspector assigned for a finding.
+    #
+    # @!attribute [rw] adjusted_cvss
+    #   An object that contains details about an adjustment that Amazon
+    #   Inspector made to the CVSS score for the finding.
+    #   @return [Types::CvssScoreDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/InspectorScoreDetails AWS API Documentation
+    #
+    class InspectorScoreDetails < Struct.new(
+      :adjusted_cvss)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines block device mappings for the instance used to configure your
     # image.
     #
@@ -3628,8 +4263,7 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # You have made a request for an action that is not supported by the
-    # service.
+    # You have requested an action that that the service doesn't support.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -3765,10 +4399,10 @@ module Aws::Imagebuilder
     #   @return [Array<Types::ComponentSummary>]
     #
     # @!attribute [rw] next_token
-    #   The next token used for paginated responses. When this is not empty,
-    #   there are additional elements that the service has not included in
-    #   this request. Use this token with the next request to retrieve
-    #   additional objects.
+    #   The next token used for paginated responses. When this field isn't
+    #   empty, there are additional elements that the service has'ot
+    #   included in this request. Use this token with the next request to
+    #   retrieve additional objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListComponentBuildVersionsResponse AWS API Documentation
@@ -3845,10 +4479,10 @@ module Aws::Imagebuilder
     #   @return [Array<Types::ComponentVersion>]
     #
     # @!attribute [rw] next_token
-    #   The next token used for paginated responses. When this is not empty,
-    #   there are additional elements that the service has not included in
-    #   this request. Use this token with the next request to retrieve
-    #   additional objects.
+    #   The next token used for paginated responses. When this field isn't
+    #   empty, there are additional elements that the service has'ot
+    #   included in this request. Use this token with the next request to
+    #   retrieve additional objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListComponentsResponse AWS API Documentation
@@ -3880,13 +4514,12 @@ module Aws::Imagebuilder
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in the list.
+    #   The maximum items to return in a request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Provides a token for pagination, which determines where to begin the
-    #   next set of results when the current set reaches the maximum for one
-    #   request.
+    #   A token to specify where to start paginating. This is the NextToken
+    #   from a previously truncated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListContainerRecipesRequest AWS API Documentation
@@ -3909,10 +4542,10 @@ module Aws::Imagebuilder
     #   @return [Array<Types::ContainerRecipeSummary>]
     #
     # @!attribute [rw] next_token
-    #   The next token field is used for paginated responses. When this is
-    #   not empty, there are additional container recipes that the service
-    #   has not included in this response. Use this token with the next
-    #   request to retrieve additional list items.
+    #   The next token used for paginated responses. When this field isn't
+    #   empty, there are additional elements that the service has'ot
+    #   included in this request. Use this token with the next request to
+    #   retrieve additional objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListContainerRecipesResponse AWS API Documentation
@@ -3957,10 +4590,10 @@ module Aws::Imagebuilder
     #   @return [Array<Types::DistributionConfigurationSummary>]
     #
     # @!attribute [rw] next_token
-    #   The next token used for paginated responses. When this is not empty,
-    #   there are additional elements that the service has not included in
-    #   this request. Use this token with the next request to retrieve
-    #   additional objects.
+    #   The next token used for paginated responses. When this field isn't
+    #   empty, there are additional elements that the service has'ot
+    #   included in this request. Use this token with the next request to
+    #   retrieve additional objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListDistributionConfigurationsResponse AWS API Documentation
@@ -4021,10 +4654,10 @@ module Aws::Imagebuilder
     #   @return [Array<Types::ImageSummary>]
     #
     # @!attribute [rw] next_token
-    #   The next token used for paginated responses. When this is not empty,
-    #   there are additional elements that the service has not included in
-    #   this request. Use this token with the next request to retrieve
-    #   additional objects.
+    #   The next token used for paginated responses. When this field isn't
+    #   empty, there are additional elements that the service has'ot
+    #   included in this request. Use this token with the next request to
+    #   retrieve additional objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImageBuildVersionsResponse AWS API Documentation
@@ -4043,8 +4676,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maxiumum number of results to return from the ListImagePackages
-    #   request.
+    #   The maximum items to return in a request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -4071,8 +4703,10 @@ module Aws::Imagebuilder
     #   @return [Array<Types::ImagePackage>]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start paginating. This is the NextToken
-    #   from a previously truncated response.
+    #   The next token used for paginated responses. When this field isn't
+    #   empty, there are additional elements that the service has'ot
+    #   included in this request. Use this token with the next request to
+    #   retrieve additional objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImagePackagesResponse AWS API Documentation
@@ -4127,10 +4761,10 @@ module Aws::Imagebuilder
     #   @return [Array<Types::ImageSummary>]
     #
     # @!attribute [rw] next_token
-    #   The next token used for paginated responses. When this is not empty,
-    #   there are additional elements that the service has not included in
-    #   this request. Use this token with the next request to retrieve
-    #   additional objects.
+    #   The next token used for paginated responses. When this field isn't
+    #   empty, there are additional elements that the service has'ot
+    #   included in this request. Use this token with the next request to
+    #   retrieve additional objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImagePipelineImagesResponse AWS API Documentation
@@ -4187,10 +4821,10 @@ module Aws::Imagebuilder
     #   @return [Array<Types::ImagePipeline>]
     #
     # @!attribute [rw] next_token
-    #   The next token used for paginated responses. When this is not empty,
-    #   there are additional elements that the service has not included in
-    #   this request. Use this token with the next request to retrieve
-    #   additional objects.
+    #   The next token used for paginated responses. When this field isn't
+    #   empty, there are additional elements that the service has'ot
+    #   included in this request. Use this token with the next request to
+    #   retrieve additional objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImagePipelinesResponse AWS API Documentation
@@ -4250,10 +4884,10 @@ module Aws::Imagebuilder
     #   @return [Array<Types::ImageRecipeSummary>]
     #
     # @!attribute [rw] next_token
-    #   The next token used for paginated responses. When this is not empty,
-    #   there are additional elements that the service has not included in
-    #   this request. Use this token with the next request to retrieve
-    #   additional objects.
+    #   The next token used for paginated responses. When this field isn't
+    #   empty, there are additional elements that the service has'ot
+    #   included in this request. Use this token with the next request to
+    #   retrieve additional objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImageRecipesResponse AWS API Documentation
@@ -4261,6 +4895,136 @@ module Aws::Imagebuilder
     class ListImageRecipesResponse < Struct.new(
       :request_id,
       :image_recipe_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filter
+    #   A filter name and value pair that is used to return a more specific
+    #   list of results from a list operation. Filters can be used to match
+    #   a set of resources by specific criteria, such as tags, attributes,
+    #   or IDs.
+    #   @return [Types::Filter]
+    #
+    # @!attribute [rw] next_token
+    #   A token to specify where to start paginating. This is the NextToken
+    #   from a previously truncated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImageScanFindingAggregationsRequest AWS API Documentation
+    #
+    class ListImageScanFindingAggregationsRequest < Struct.new(
+      :filter,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The request ID that uniquely identifies this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_type
+    #   The aggregation type specifies what type of key is used to group the
+    #   image scan findings. Image Builder returns results based on the
+    #   request filter. If you didn't specify a filter in the request, the
+    #   type defaults to `accountId`.
+    #
+    #   **Aggregation types**
+    #
+    #   * accountId
+    #
+    #   * imageBuildVersionArn
+    #
+    #   * imagePipelineArn
+    #
+    #   * vulnerabilityId
+    #
+    #   Each aggregation includes counts by severity level for medium
+    #   severity and higher level findings, plus a total for all of the
+    #   findings for each key value.
+    #   @return [String]
+    #
+    # @!attribute [rw] responses
+    #   An array of image scan finding aggregations that match the filter
+    #   criteria.
+    #   @return [Array<Types::ImageScanFindingAggregation>]
+    #
+    # @!attribute [rw] next_token
+    #   The next token used for paginated responses. When this field isn't
+    #   empty, there are additional elements that the service has'ot
+    #   included in this request. Use this token with the next request to
+    #   retrieve additional objects.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImageScanFindingAggregationsResponse AWS API Documentation
+    #
+    class ListImageScanFindingAggregationsResponse < Struct.new(
+      :request_id,
+      :aggregation_type,
+      :responses,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filters
+    #   An array of name value pairs that you can use to filter your
+    #   results. You can use the following filters to streamline results:
+    #
+    #   * `imageBuildVersionArn`
+    #
+    #   * `imagePipelineArn`
+    #
+    #   * `vulnerabilityId`
+    #
+    #   * `severity`
+    #
+    #   If you don't request a filter, then all findings in your account
+    #   are listed.
+    #   @return [Array<Types::ImageScanFindingsFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum items to return in a request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to specify where to start paginating. This is the NextToken
+    #   from a previously truncated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImageScanFindingsRequest AWS API Documentation
+    #
+    class ListImageScanFindingsRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The request ID that uniquely identifies this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] findings
+    #   The image scan findings for your account that meet your request
+    #   filter criteria.
+    #   @return [Array<Types::ImageScanFinding>]
+    #
+    # @!attribute [rw] next_token
+    #   The next token used for paginated responses. When this field isn't
+    #   empty, there are additional elements that the service has'ot
+    #   included in this request. Use this token with the next request to
+    #   retrieve additional objects.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImageScanFindingsResponse AWS API Documentation
+    #
+    class ListImageScanFindingsResponse < Struct.new(
+      :request_id,
+      :findings,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -4339,10 +5103,10 @@ module Aws::Imagebuilder
     #   @return [Array<Types::ImageVersion>]
     #
     # @!attribute [rw] next_token
-    #   The next token used for paginated responses. When this is not empty,
-    #   there are additional elements that the service has not included in
-    #   this request. Use this token with the next request to retrieve
-    #   additional objects.
+    #   The next token used for paginated responses. When this field isn't
+    #   empty, there are additional elements that the service has'ot
+    #   included in this request. Use this token with the next request to
+    #   retrieve additional objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImagesResponse AWS API Documentation
@@ -4387,10 +5151,10 @@ module Aws::Imagebuilder
     #   @return [Array<Types::InfrastructureConfigurationSummary>]
     #
     # @!attribute [rw] next_token
-    #   The next token used for paginated responses. When this is not empty,
-    #   there are additional elements that the service has not included in
-    #   this request. Use this token with the next request to retrieve
-    #   additional objects.
+    #   The next token used for paginated responses. When this field isn't
+    #   empty, there are additional elements that the service has'ot
+    #   included in this request. Use this token with the next request to
+    #   retrieve additional objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListInfrastructureConfigurationsResponse AWS API Documentation
@@ -4428,6 +5192,140 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # @!attribute [rw] max_results
+    #   The maximum items to return in a request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to specify where to start paginating. This is the NextToken
+    #   from a previously truncated response.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_build_version_arn
+    #   List all workflow runtime instances for the specified image build
+    #   version resource ARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListWorkflowExecutionsRequest AWS API Documentation
+    #
+    class ListWorkflowExecutionsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :image_build_version_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The request ID that uniquely identifies this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_executions
+    #   Contains an array of runtime details that represents each time a
+    #   workflow ran for the requested image build version.
+    #   @return [Array<Types::WorkflowExecutionMetadata>]
+    #
+    # @!attribute [rw] image_build_version_arn
+    #   The resource ARN of the image build version for which you requested
+    #   a list of workflow runtime details.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The output message from the list action, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The next token used for paginated responses. When this field isn't
+    #   empty, there are additional elements that the service has'ot
+    #   included in this request. Use this token with the next request to
+    #   retrieve additional objects.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListWorkflowExecutionsResponse AWS API Documentation
+    #
+    class ListWorkflowExecutionsResponse < Struct.new(
+      :request_id,
+      :workflow_executions,
+      :image_build_version_arn,
+      :message,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum items to return in a request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to specify where to start paginating. This is the NextToken
+    #   from a previously truncated response.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_execution_id
+    #   The unique identifier that Image Builder assigned to keep track of
+    #   runtime details when it ran the workflow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListWorkflowStepExecutionsRequest AWS API Documentation
+    #
+    class ListWorkflowStepExecutionsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :workflow_execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The request ID that uniquely identifies this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] steps
+    #   Contains an array of runtime details that represents each step in
+    #   this runtime instance of the workflow.
+    #   @return [Array<Types::WorkflowStepMetadata>]
+    #
+    # @!attribute [rw] workflow_build_version_arn
+    #   The build version ARN for the Image Builder workflow resource that
+    #   defines the steps for this runtime instance of the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_execution_id
+    #   The unique identifier that Image Builder assigned to keep track of
+    #   runtime details when it ran the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_build_version_arn
+    #   The image build version resource ARN that's associated with the
+    #   specified runtime instance of the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The output message from the list action, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The next token used for paginated responses. When this field isn't
+    #   empty, there are additional elements that the service has'ot
+    #   included in this request. Use this token with the next request to
+    #   retrieve additional objects.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListWorkflowStepExecutionsResponse AWS API Documentation
+    #
+    class ListWorkflowStepExecutionsResponse < Struct.new(
+      :request_id,
+      :steps,
+      :workflow_build_version_arn,
+      :workflow_execution_id,
+      :image_build_version_arn,
+      :message,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Logging configuration defines where Image Builder uploads your logs.
     #
     # @!attribute [rw] s3_logs
@@ -4458,6 +5356,70 @@ module Aws::Imagebuilder
     class OutputResources < Struct.new(
       :amis,
       :containers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about package vulnerability findings.
+    #
+    # @!attribute [rw] vulnerability_id
+    #   A unique identifier for this vulnerability.
+    #   @return [String]
+    #
+    # @!attribute [rw] vulnerable_packages
+    #   The packages that this vulnerability impacts.
+    #   @return [Array<Types::VulnerablePackage>]
+    #
+    # @!attribute [rw] source
+    #   The source of the vulnerability information.
+    #   @return [String]
+    #
+    # @!attribute [rw] cvss
+    #   CVSS scores for one or more vulnerabilities that Amazon Inspector
+    #   identified for a package.
+    #   @return [Array<Types::CvssScore>]
+    #
+    # @!attribute [rw] related_vulnerabilities
+    #   Vulnerabilities that are often related to the findings for the
+    #   package.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source_url
+    #   A link to the source of the vulnerability information.
+    #   @return [String]
+    #
+    # @!attribute [rw] vendor_severity
+    #   The severity that the vendor assigned to this vulnerability type.
+    #   @return [String]
+    #
+    # @!attribute [rw] vendor_created_at
+    #   The date and time when this vulnerability was first added to the
+    #   vendor's database.
+    #   @return [Time]
+    #
+    # @!attribute [rw] vendor_updated_at
+    #   The date and time when the vendor last updated this vulnerability in
+    #   their database.
+    #   @return [Time]
+    #
+    # @!attribute [rw] reference_urls
+    #   Links to web pages that contain details about the vulnerabilities
+    #   that Amazon Inspector identified for the package.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/PackageVulnerabilityDetails AWS API Documentation
+    #
+    class PackageVulnerabilityDetails < Struct.new(
+      :vulnerability_id,
+      :vulnerable_packages,
+      :source,
+      :cvss,
+      :related_vulnerabilities,
+      :source_url,
+      :vendor_severity,
+      :vendor_created_at,
+      :vendor_updated_at,
+      :reference_urls)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4602,6 +5564,42 @@ module Aws::Imagebuilder
     class PutImageRecipePolicyResponse < Struct.new(
       :request_id,
       :image_recipe_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about how to remediate a finding.
+    #
+    # @!attribute [rw] recommendation
+    #   An object that contains information about the recommended course of
+    #   action to remediate the finding.
+    #   @return [Types::RemediationRecommendation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/Remediation AWS API Documentation
+    #
+    class Remediation < Struct.new(
+      :recommendation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the recommended course of action to remediate the
+    # finding.
+    #
+    # @!attribute [rw] text
+    #   The recommended course of action to remediate the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   A link to more information about the recommended remediation for
+    #   this vulnerability.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/RemediationRecommendation AWS API Documentation
+    #
+    class RemediationRecommendation < Struct.new(
+      :text,
+      :url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4820,6 +5818,38 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # Includes counts by severity level for medium severity and higher level
+    # findings, plus a total for all of the findings for the specified
+    # filter.
+    #
+    # @!attribute [rw] all
+    #   The total number of findings across all severity levels for the
+    #   specified filter.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] critical
+    #   The number of critical severity findings for the specified filter.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] high
+    #   The number of high severity findings for the specified filter.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] medium
+    #   The number of medium severity findings for the specified filter.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/SeverityCounts AWS API Documentation
+    #
+    class SeverityCounts < Struct.new(
+      :all,
+      :critical,
+      :high,
+      :medium)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] image_pipeline_arn
     #   The Amazon Resource Name (ARN) of the image pipeline that you want
     #   to manually invoke.
@@ -5020,13 +6050,14 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] infrastructure_configuration_arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration
-    #   that will be used to build images updated by this image pipeline.
+    #   that Image Builder uses to build images that this image pipeline has
+    #   updated.
     #   @return [String]
     #
     # @!attribute [rw] distribution_configuration_arn
     #   The Amazon Resource Name (ARN) of the distribution configuration
-    #   that will be used to configure and distribute images updated by this
-    #   image pipeline.
+    #   that Image Builder uses to configure and distribute images that this
+    #   image pipeline has updated.
     #   @return [String]
     #
     # @!attribute [rw] image_tests_configuration
@@ -5055,6 +6086,10 @@ module Aws::Imagebuilder
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] image_scanning_configuration
+    #   Contains settings for vulnerability scans.
+    #   @return [Types::ImageScanningConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/UpdateImagePipelineRequest AWS API Documentation
     #
     class UpdateImagePipelineRequest < Struct.new(
@@ -5068,7 +6103,8 @@ module Aws::Imagebuilder
       :enhanced_image_metadata_enabled,
       :schedule,
       :status,
-      :client_token)
+      :client_token,
+      :image_scanning_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5222,6 +6258,226 @@ module Aws::Imagebuilder
       :request_id,
       :client_token,
       :infrastructure_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Includes counts of image and pipeline resource findings by
+    # vulnerability.
+    #
+    # @!attribute [rw] vulnerability_id
+    #   The vulnerability Id for this set of counts.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity_counts
+    #   Counts by severity level for medium severity and higher level
+    #   findings, plus a total for all of the findings for the specified
+    #   vulnerability.
+    #   @return [Types::SeverityCounts]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/VulnerabilityIdAggregation AWS API Documentation
+    #
+    class VulnerabilityIdAggregation < Struct.new(
+      :vulnerability_id,
+      :severity_counts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a vulnerable package that Amazon Inspector
+    # identifies in a finding.
+    #
+    # @!attribute [rw] name
+    #   The name of the vulnerable package.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the vulnerable package.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_layer_hash
+    #   The source layer hash of the vulnerable package.
+    #   @return [String]
+    #
+    # @!attribute [rw] epoch
+    #   The epoch of the vulnerable package.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] release
+    #   The release of the vulnerable package.
+    #   @return [String]
+    #
+    # @!attribute [rw] arch
+    #   The architecture of the vulnerable package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_manager
+    #   The package manager of the vulnerable package.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_path
+    #   The file path of the vulnerable package.
+    #   @return [String]
+    #
+    # @!attribute [rw] fixed_in_version
+    #   The version of the package that contains the vulnerability fix.
+    #   @return [String]
+    #
+    # @!attribute [rw] remediation
+    #   The code to run in your environment to update packages with a fix
+    #   available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/VulnerablePackage AWS API Documentation
+    #
+    class VulnerablePackage < Struct.new(
+      :name,
+      :version,
+      :source_layer_hash,
+      :epoch,
+      :release,
+      :arch,
+      :package_manager,
+      :file_path,
+      :fixed_in_version,
+      :remediation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata that includes details and status from this runtime instance
+    # of the workflow.
+    #
+    # @!attribute [rw] workflow_build_version_arn
+    #   The Amazon Resource Name (ARN) of the workflow resource build
+    #   version that ran.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_execution_id
+    #   Unique identifier that Image Builder assigns to keep track of
+    #   runtime resources each time it runs a workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Indicates what type of workflow that Image Builder ran for this
+    #   runtime instance of the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current runtime status for this workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The runtime output message from the workflow, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_step_count
+    #   The total number of steps in the workflow. This should equal the sum
+    #   of the step counts for steps that succeeded, were skipped, and
+    #   failed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_steps_succeeded
+    #   A runtime count for the number of steps in the workflow that ran
+    #   successfully.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_steps_failed
+    #   A runtime count for the number of steps in the workflow that failed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_steps_skipped
+    #   A runtime count for the number of steps in the workflow that were
+    #   skipped.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp when the runtime instance of this workflow started.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp when this runtime instance of the workflow finished.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/WorkflowExecutionMetadata AWS API Documentation
+    #
+    class WorkflowExecutionMetadata < Struct.new(
+      :workflow_build_version_arn,
+      :workflow_execution_id,
+      :type,
+      :status,
+      :message,
+      :total_step_count,
+      :total_steps_succeeded,
+      :total_steps_failed,
+      :total_steps_skipped,
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Runtime details and status for the workflow step.
+    #
+    # @!attribute [rw] step_execution_id
+    #   A unique identifier for the workflow step, assigned at runtime.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the workflow step.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description of the workflow step.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The step action name.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Runtime status for the workflow step.
+    #   @return [String]
+    #
+    # @!attribute [rw] rollback_status
+    #   Reports on the rollback status of the step, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Detailed output message that the workflow step provides at runtime.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   Input parameters that Image Builder provides for the workflow step.
+    #   @return [String]
+    #
+    # @!attribute [rw] outputs
+    #   The file names that the workflow step created as output for this
+    #   runtime instance of the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp when the workflow step started.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp when the workflow step finished.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/WorkflowStepMetadata AWS API Documentation
+    #
+    class WorkflowStepMetadata < Struct.new(
+      :step_execution_id,
+      :name,
+      :description,
+      :action,
+      :status,
+      :rollback_status,
+      :message,
+      :inputs,
+      :outputs,
+      :start_time,
+      :end_time)
       SENSITIVE = []
       include Aws::Structure
     end

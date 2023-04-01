@@ -40,9 +40,9 @@ module Aws::InternetMonitor
     # equivalent to 1% of the traffic experiencing an availability drop for
     # that pair.
     #
-    # For more information, see [ How Internet Monitor calculates
-    # performance and availability scores][1] in the Amazon CloudWatch
-    # Internet Monitor section of the Amazon CloudWatch User Guide.
+    # For more information, see [How Internet Monitor calculates performance
+    # and availability scores][1] in the Amazon CloudWatch Internet Monitor
+    # section of the *Amazon CloudWatch User Guide*.
     #
     #
     #
@@ -56,13 +56,13 @@ module Aws::InternetMonitor
     #   specific geography or service provider, Amazon CloudWatch Internet
     #   Monitor provides global health scores.
     #
-    #   The Amazon CloudWatch Internet Monitor chapter in the CloudWatch
-    #   User Guide includes detailed information about how Internet Monitor
+    #   The Amazon CloudWatch Internet Monitor chapter in the *CloudWatch
+    #   User Guide* includes detailed information about how Internet Monitor
     #   calculates health scores, including performance and availability
     #   scores, and when it creates and resolves health events. For more
-    #   information, see [ How Amazon Web Services calculates performance
-    #   and availability scores][1] in the Amazon CloudWatch Internet
-    #   Monitor section of the CloudWatch User Guide.
+    #   information, see [How Amazon Web Services calculates performance and
+    #   availability scores][1] in the Amazon CloudWatch Internet Monitor
+    #   section of the *CloudWatch User Guide*.
     #
     #
     #
@@ -73,8 +73,8 @@ module Aws::InternetMonitor
     #   The percentage of impact caused by a health event for total traffic
     #   globally.
     #
-    #   For information about how Internet Monitor calculates impact, see [
-    #   Inside Internet Monitor][1] in the Amazon CloudWatch Internet
+    #   For information about how Internet Monitor calculates impact, see
+    #   [Inside Internet Monitor][1] in the Amazon CloudWatch Internet
     #   Monitor section of the Amazon CloudWatch User Guide.
     #
     #
@@ -86,8 +86,8 @@ module Aws::InternetMonitor
     #   The percentage of impact caused by a health event for client
     #   location traffic globally.
     #
-    #   For information about how Internet Monitor calculates impact, see [
-    #   Inside Internet Monitor][1] in the Amazon CloudWatch Internet
+    #   For information about how Internet Monitor calculates impact, see
+    #   [Inside Internet Monitor][1] in the Amazon CloudWatch Internet
     #   Monitor section of the Amazon CloudWatch User Guide.
     #
     #
@@ -165,10 +165,26 @@ module Aws::InternetMonitor
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] max_city_networks_to_monitor
-    #   The maximum number of city-network combinations (that is,
-    #   combinations of a city location and network, such as an ISP) to be
-    #   monitored for your resources.
+    #   The maximum number of city-networks to monitor for your resources. A
+    #   city-network is the location (city) where clients access your
+    #   application resources from and the network or ASN, such as an
+    #   internet service provider (ISP), that clients access the resources
+    #   through. This limit helps control billing costs.
+    #
+    #   To learn more, see [Choosing a city-network maximum value ][1] in
+    #   the Amazon CloudWatch Internet Monitor section of the *CloudWatch
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html
     #   @return [Integer]
+    #
+    # @!attribute [rw] internet_measurements_log_delivery
+    #   Publish internet measurements for Internet Monitor to another
+    #   location, such as an Amazon S3 bucket. The measurements are also
+    #   published to Amazon CloudWatch Logs.
+    #   @return [Types::InternetMeasurementsLogDelivery]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/CreateMonitorInput AWS API Documentation
     #
@@ -177,7 +193,8 @@ module Aws::InternetMonitor
       :resources,
       :client_token,
       :tags,
-      :max_city_networks_to_monitor)
+      :max_city_networks_to_monitor,
+      :internet_measurements_log_delivery)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -343,10 +360,26 @@ module Aws::InternetMonitor
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] max_city_networks_to_monitor
-    #   The maximum number of city-network combinations (that is,
-    #   combinations of a city location and network, such as an ISP) to be
-    #   monitored for your resources.
+    #   The maximum number of city-networks to monitor for your resources. A
+    #   city-network is the location (city) where clients access your
+    #   application resources from and the network or ASN, such as an
+    #   internet service provider (ISP), that clients access the resources
+    #   through. This limit helps control billing costs.
+    #
+    #   To learn more, see [Choosing a city-network maximum value ][1] in
+    #   the Amazon CloudWatch Internet Monitor section of the *CloudWatch
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html
     #   @return [Integer]
+    #
+    # @!attribute [rw] internet_measurements_log_delivery
+    #   Publish internet measurements for Internet Monitor to another
+    #   location, such as an Amazon S3 bucket. The measurements are also
+    #   published to Amazon CloudWatch Logs.
+    #   @return [Types::InternetMeasurementsLogDelivery]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetMonitorOutput AWS API Documentation
     #
@@ -360,7 +393,8 @@ module Aws::InternetMonitor
       :processing_status,
       :processing_status_info,
       :tags,
-      :max_city_networks_to_monitor)
+      :max_city_networks_to_monitor,
+      :internet_measurements_log_delivery)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -573,9 +607,9 @@ module Aws::InternetMonitor
     #   is equivalent to 1% of the traffic experiencing an availability drop
     #   for that pair.
     #
-    #   For more information, see [ How Internet Monitor calculates
+    #   For more information, see [How Internet Monitor calculates
     #   performance and availability scores][1] in the Amazon CloudWatch
-    #   Internet Monitor section of the Amazon CloudWatch User Guide.
+    #   Internet Monitor section of the *CloudWatch User Guide*.
     #
     #
     #
@@ -589,9 +623,9 @@ module Aws::InternetMonitor
     #   is equivalent to 1% of the traffic experiencing a performance drop
     #   for that pair.
     #
-    #   For more information, see [ How Internet Monitor calculates
+    #   For more information, see [How Internet Monitor calculates
     #   performance and availability scores][1] in the Amazon CloudWatch
-    #   Internet Monitor section of the Amazon CloudWatch User Guide.
+    #   Internet Monitor section of the *CloudWatch User Guide*.
     #
     #
     #
@@ -603,6 +637,28 @@ module Aws::InternetMonitor
     class InternetHealth < Struct.new(
       :availability,
       :performance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information for other locations that you choose to
+    # publish Amazon CloudWatch Internet Monitor internet measurements to,
+    # such as Amazon S3. The measurements are also published to Amazon
+    # CloudWatch Logs.
+    #
+    # @!attribute [rw] s3_config
+    #   The configuration information for publishing Internet Monitor
+    #   internet measurements to Amazon S3. The configuration includes the
+    #   bucket name and (optionally) prefix for the S3 bucket to store the
+    #   measurements, and the delivery status. The delivery status is
+    #   `ENABLED` or `DISABLED`, depending on whether you choose to deliver
+    #   internet measurements to S3 logs.
+    #   @return [Types::S3Config]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/InternetMeasurementsLogDelivery AWS API Documentation
+    #
+    class InternetMeasurementsLogDelivery < Struct.new(
+      :s3_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -858,9 +914,9 @@ module Aws::InternetMonitor
     # equivalent to 1% of the traffic experiencing a performance drop for
     # that pair.
     #
-    # For more information, see [ How Internet Monitor calculates
-    # performance and availability scores][1] in the Amazon CloudWatch
-    # Internet Monitor section of the Amazon CloudWatch User Guide.
+    # For more information, see [How Internet Monitor calculates performance
+    # and availability scores][1] in the Amazon CloudWatch Internet Monitor
+    # section of the *CloudWatch User Guide*.
     #
     #
     #
@@ -878,9 +934,9 @@ module Aws::InternetMonitor
     #   User Guide includes detailed information about how Internet Monitor
     #   calculates health scores, including performance and availability
     #   scores, and when it creates and resolves health events. For more
-    #   information, see [ How Amazon Web Services calculates performance
-    #   and availability scores][1] in the Amazon CloudWatch Internet
-    #   Monitor section of the CloudWatch User Guide.
+    #   information, see [How Amazon Web Services calculates performance and
+    #   availability scores][1] in the Amazon CloudWatch Internet Monitor
+    #   section of the *CloudWatch User Guide*.
     #
     #
     #
@@ -893,9 +949,9 @@ module Aws::InternetMonitor
     #   much latency increased during the event compared to typical
     #   performance for your application traffic globally.
     #
-    #   For more information, see [ When Amazon Web Services creates and
+    #   For more information, see [When Amazon Web Services creates and
     #   resolves health events][1] in the Amazon CloudWatch Internet Monitor
-    #   section of the CloudWatch User Guide.
+    #   section of the *CloudWatch User Guide*.
     #
     #
     #
@@ -909,9 +965,9 @@ module Aws::InternetMonitor
     #   for traffic, from this client location to an Amazon Web Services
     #   location, using a specific client network.
     #
-    #   For more information, see [ When Amazon Web Services creates and
+    #   For more information, see [When Amazon Web Services creates and
     #   resolves health events][1] in the Amazon CloudWatch Internet Monitor
-    #   section of the CloudWatch User Guide.
+    #   section of the *CloudWatch User Guide*.
     #
     #
     #
@@ -923,9 +979,9 @@ module Aws::InternetMonitor
     #   the event compared to typical round-trip time for your application
     #   for traffic.
     #
-    #   For more information, see [ When Amazon Web Services creates and
+    #   For more information, see [When Amazon Web Services creates and
     #   resolves health events][1] in the Amazon CloudWatch Internet Monitor
-    #   section of the CloudWatch User Guide.
+    #   section of the *CloudWatch User Guide*.
     #
     #
     #
@@ -978,6 +1034,36 @@ module Aws::InternetMonitor
       :p50,
       :p90,
       :p95)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for publishing Amazon CloudWatch Internet Monitor
+    # internet measurements to Amazon S3. The configuration includes the
+    # bucket name and (optionally) prefix for the S3 bucket to store the
+    # measurements, and the delivery status. The delivery status is
+    # `ENABLED` or `DISABLED`, depending on whether you choose to deliver
+    # internet measurements to S3 logs.
+    #
+    # @!attribute [rw] bucket_name
+    #   The Amazon S3 bucket name.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_prefix
+    #   The Amazon S3 bucket prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_delivery_status
+    #   The status of publishing Internet Monitor internet measurements to
+    #   an Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/S3Config AWS API Documentation
+    #
+    class S3Config < Struct.new(
+      :bucket_name,
+      :bucket_prefix,
+      :log_delivery_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1093,10 +1179,18 @@ module Aws::InternetMonitor
     #   @return [String]
     #
     # @!attribute [rw] max_city_networks_to_monitor
-    #   The maximum number of city-network combinations (that is,
-    #   combinations of a city location and network, such as an ISP) to be
-    #   monitored for your resources.
+    #   The maximum number of city-networks to monitor for your resources. A
+    #   city-network is the location (city) where clients access your
+    #   application resources from and the network or ASN, such as an
+    #   internet service provider, that clients access the resources
+    #   through.
     #   @return [Integer]
+    #
+    # @!attribute [rw] internet_measurements_log_delivery
+    #   Publish internet measurements for Internet Monitor to another
+    #   location, such as an Amazon S3 bucket. The measurements are also
+    #   published to Amazon CloudWatch Logs.
+    #   @return [Types::InternetMeasurementsLogDelivery]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/UpdateMonitorInput AWS API Documentation
     #
@@ -1106,7 +1200,8 @@ module Aws::InternetMonitor
       :resources_to_remove,
       :status,
       :client_token,
-      :max_city_networks_to_monitor)
+      :max_city_networks_to_monitor,
+      :internet_measurements_log_delivery)
       SENSITIVE = []
       include Aws::Structure
     end
