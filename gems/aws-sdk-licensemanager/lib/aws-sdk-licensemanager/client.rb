@@ -605,7 +605,14 @@ module Aws::LicenseManager
     end
 
     # Creates a grant for the specified license. A grant shares the use of
-    # license entitlements with specific Amazon Web Services accounts.
+    # license entitlements with a specific Amazon Web Services account, an
+    # organization, or an organizational unit (OU). For more information,
+    # see [Granted licenses in License Manager][1] in the *License Manager
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/license-manager/latest/userguide/granted-licenses.html
     #
     # @option params [required, String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -618,8 +625,24 @@ module Aws::LicenseManager
     #   Amazon Resource Name (ARN) of the license.
     #
     # @option params [required, Array<String>] :principals
-    #   The grant principals. This value should be specified as an Amazon
-    #   Resource Name (ARN).
+    #   The grant principals. You can specify one of the following as an
+    #   Amazon Resource Name (ARN):
+    #
+    #   * An Amazon Web Services account, which includes only the account
+    #     specified.
+    #
+    #   ^
+    #   ^
+    #
+    #   * An organizational unit (OU), which includes all accounts in the OU.
+    #
+    #   ^
+    #   ^
+    #
+    #   * An organization, which will include all accounts across your
+    #     organization.
+    #
+    #   ^
     #
     # @option params [required, String] :home_region
     #   Home Region of the grant.
@@ -659,7 +682,13 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
-    # Creates a new version of the specified grant.
+    # Creates a new version of the specified grant. For more information,
+    # see [Granted licenses in License Manager][1] in the *License Manager
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/license-manager/latest/userguide/granted-licenses.html
     #
     # @option params [required, String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -683,6 +712,9 @@ module Aws::LicenseManager
     # @option params [String] :source_version
     #   Current version of the grant.
     #
+    # @option params [Types::Options] :options
+    #   The options specified for the grant.
+    #
     # @return [Types::CreateGrantVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGrantVersionResponse#grant_arn #grant_arn} => String
@@ -699,6 +731,9 @@ module Aws::LicenseManager
     #     status: "PENDING_WORKFLOW", # accepts PENDING_WORKFLOW, PENDING_ACCEPT, REJECTED, ACTIVE, FAILED_WORKFLOW, DELETED, PENDING_DELETE, DISABLED, WORKFLOW_COMPLETED
     #     status_reason: "StatusReasonMessage",
     #     source_version: "String",
+    #     options: {
+    #       activation_override_behavior: "DISTRIBUTED_GRANTS_ONLY", # accepts DISTRIBUTED_GRANTS_ONLY, ALL_GRANTS_PERMITTED_BY_ISSUER
+    #     },
     #   })
     #
     # @example Response structure
@@ -935,8 +970,7 @@ module Aws::LicenseManager
     # @option params [required, Types::LicenseConversionContext] :source_license_context
     #   Information that identifies the license type you are converting from.
     #   For the structure of the source license, see [Convert a license type
-    #   using the Amazon Web Services CLI][1] in the *License Manager User
-    #   Guide*.
+    #   using the CLI ][1] in the *License Manager User Guide*.
     #
     #
     #
@@ -945,8 +979,7 @@ module Aws::LicenseManager
     # @option params [required, Types::LicenseConversionContext] :destination_license_context
     #   Information that identifies the license type you are converting to.
     #   For the structure of the destination license, see [Convert a license
-    #   type using the Amazon Web Services CLI][1] in the *License Manager
-    #   User Guide*.
+    #   type using the CLI ][1] in the *License Manager User Guide*.
     #
     #
     #
@@ -1466,6 +1499,7 @@ module Aws::LicenseManager
     #   resp.grant.version #=> String
     #   resp.grant.granted_operations #=> Array
     #   resp.grant.granted_operations[0] #=> String, one of "CreateGrant", "CheckoutLicense", "CheckoutBorrowLicense", "CheckInLicense", "ExtendConsumptionLicense", "ListPurchasedLicenses", "CreateToken"
+    #   resp.grant.options.activation_override_behavior #=> String, one of "DISTRIBUTED_GRANTS_ONLY", "ALL_GRANTS_PERMITTED_BY_ISSUER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/GetGrant AWS API Documentation
     #
@@ -1862,6 +1896,7 @@ module Aws::LicenseManager
     #   resp.grants[0].version #=> String
     #   resp.grants[0].granted_operations #=> Array
     #   resp.grants[0].granted_operations[0] #=> String, one of "CreateGrant", "CheckoutLicense", "CheckoutBorrowLicense", "CheckInLicense", "ExtendConsumptionLicense", "ListPurchasedLicenses", "CreateToken"
+    #   resp.grants[0].options.activation_override_behavior #=> String, one of "DISTRIBUTED_GRANTS_ONLY", "ALL_GRANTS_PERMITTED_BY_ISSUER"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListDistributedGrants AWS API Documentation
@@ -2317,7 +2352,10 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
-    # Lists grants that are received but not accepted.
+    # Lists grants that are received. Received grants are grants created
+    # while specifying the recipient as this Amazon Web Services account,
+    # your organization, or an organizational unit (OU) to which this member
+    # account belongs.
     #
     # @option params [Array<String>] :grant_arns
     #   Amazon Resource Names (ARNs) of the grants.
@@ -2374,6 +2412,7 @@ module Aws::LicenseManager
     #   resp.grants[0].version #=> String
     #   resp.grants[0].granted_operations #=> Array
     #   resp.grants[0].granted_operations[0] #=> String, one of "CreateGrant", "CheckoutLicense", "CheckoutBorrowLicense", "CheckInLicense", "ExtendConsumptionLicense", "ListPurchasedLicenses", "CreateToken"
+    #   resp.grants[0].options.activation_override_behavior #=> String, one of "DISTRIBUTED_GRANTS_ONLY", "ALL_GRANTS_PERMITTED_BY_ISSUER"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListReceivedGrants AWS API Documentation
@@ -2436,6 +2475,7 @@ module Aws::LicenseManager
     #   resp.grants[0].version #=> String
     #   resp.grants[0].granted_operations #=> Array
     #   resp.grants[0].granted_operations[0] #=> String, one of "CreateGrant", "CheckoutLicense", "CheckoutBorrowLicense", "CheckInLicense", "ExtendConsumptionLicense", "ListPurchasedLicenses", "CreateToken"
+    #   resp.grants[0].options.activation_override_behavior #=> String, one of "DISTRIBUTED_GRANTS_ONLY", "ALL_GRANTS_PERMITTED_BY_ISSUER"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListReceivedGrantsForOrganization AWS API Documentation
@@ -3157,7 +3197,7 @@ module Aws::LicenseManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-licensemanager'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

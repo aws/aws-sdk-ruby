@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2023-04-03)
+------------------
+
+* Feature - Add support for database-level federation
+
 1.33.0 (2023-03-13)
 ------------------
 

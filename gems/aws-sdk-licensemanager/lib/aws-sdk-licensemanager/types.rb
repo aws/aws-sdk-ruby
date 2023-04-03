@@ -377,8 +377,25 @@ module Aws::LicenseManager
     #   @return [String]
     #
     # @!attribute [rw] principals
-    #   The grant principals. This value should be specified as an Amazon
-    #   Resource Name (ARN).
+    #   The grant principals. You can specify one of the following as an
+    #   Amazon Resource Name (ARN):
+    #
+    #   * An Amazon Web Services account, which includes only the account
+    #     specified.
+    #
+    #   ^
+    #   ^
+    #
+    #   * An organizational unit (OU), which includes all accounts in the
+    #     OU.
+    #
+    #   ^
+    #   ^
+    #
+    #   * An organization, which will include all accounts across your
+    #     organization.
+    #
+    #   ^
     #   @return [Array<String>]
     #
     # @!attribute [rw] home_region
@@ -453,6 +470,10 @@ module Aws::LicenseManager
     #   Current version of the grant.
     #   @return [String]
     #
+    # @!attribute [rw] options
+    #   The options specified for the grant.
+    #   @return [Types::Options]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/CreateGrantVersionRequest AWS API Documentation
     #
     class CreateGrantVersionRequest < Struct.new(
@@ -462,7 +483,8 @@ module Aws::LicenseManager
       :allowed_operations,
       :status,
       :status_reason,
-      :source_version)
+      :source_version,
+      :options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -582,8 +604,7 @@ module Aws::LicenseManager
     # @!attribute [rw] source_license_context
     #   Information that identifies the license type you are converting
     #   from. For the structure of the source license, see [Convert a
-    #   license type using the Amazon Web Services CLI][1] in the *License
-    #   Manager User Guide*.
+    #   license type using the CLI ][1] in the *License Manager User Guide*.
     #
     #
     #
@@ -593,8 +614,7 @@ module Aws::LicenseManager
     # @!attribute [rw] destination_license_context
     #   Information that identifies the license type you are converting to.
     #   For the structure of the destination license, see [Convert a license
-    #   type using the Amazon Web Services CLI][1] in the *License Manager
-    #   User Guide*.
+    #   type using the CLI ][1] in the *License Manager User Guide*.
     #
     #
     #
@@ -1238,7 +1258,8 @@ module Aws::LicenseManager
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   Filter values. Filter values are case-sensitive.
+    #   The value of the filter, which is case-sensitive. You can only
+    #   specify one value for the filter.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/Filter AWS API Documentation
@@ -1652,6 +1673,10 @@ module Aws::LicenseManager
     #   Granted operations.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] options
+    #   The options specified for the grant.
+    #   @return [Types::Options]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/Grant AWS API Documentation
     #
     class Grant < Struct.new(
@@ -1664,7 +1689,8 @@ module Aws::LicenseManager
       :grant_status,
       :status_reason,
       :version,
-      :granted_operations)
+      :granted_operations,
+      :options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3120,6 +3146,54 @@ module Aws::LicenseManager
     #
     class NoEntitlementsAllowedException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options you can specify when you create a new version of a grant,
+    # such as activation override behavior. For more information, see
+    # [Granted licenses in License Manager][1] in the *License Manager User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/license-manager/latest/userguide/granted-licenses.html
+    #
+    # @!attribute [rw] activation_override_behavior
+    #   An activation option for your grant that determines the behavior of
+    #   activating a grant. Activation options can only be used with granted
+    #   licenses sourced from the Amazon Web Services Marketplace.
+    #   Additionally, the operation must specify the value of `ACTIVE` for
+    #   the `Status` parameter.
+    #
+    #   * As a license administrator, you can optionally specify an
+    #     `ActivationOverrideBehavior` when activating a grant.
+    #
+    #   * As a grantor, you can optionally specify an
+    #     `ActivationOverrideBehavior` when you activate a grant for a
+    #     grantee account in your organization.
+    #
+    #   * As a grantee, if the grantor creating the distributed grant
+    #     doesn’t specify an `ActivationOverrideBehavior`, you can
+    #     optionally specify one when you are activating the grant.
+    #
+    #   DISTRIBUTED\_GRANTS\_ONLY
+    #
+    #   : Use this value to activate a grant without replacing any member
+    #     account’s active grants for the same product.
+    #
+    #   ALL\_GRANTS\_PERMITTED\_BY\_ISSUER
+    #
+    #   : Use this value to activate a grant and disable other active grants
+    #     in any member accounts for the same product. This action will also
+    #     replace their previously activated grants with this activated
+    #     grant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/Options AWS API Documentation
+    #
+    class Options < Struct.new(
+      :activation_override_behavior)
       SENSITIVE = []
       include Aws::Structure
     end

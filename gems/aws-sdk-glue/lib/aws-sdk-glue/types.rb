@@ -230,10 +230,10 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # A structure containing information for audit.
+    # A structure containing the Lake Formation audit context.
     #
     # @!attribute [rw] additional_audit_context
-    #   The context for the audit..
+    #   A string containing the additional audit context information.
     #   @return [String]
     #
     # @!attribute [rw] requested_columns
@@ -2278,7 +2278,9 @@ module Aws::Glue
     #   @return [Types::DateColumnStatisticsData]
     #
     # @!attribute [rw] decimal_column_statistics_data
-    #   Decimal column statistics data.
+    #   Decimal column statistics data. UnscaledValues within are
+    #   Base64-encoded binary objects storing big-endian, two's complement
+    #   representations of the decimal's unscaled value.
     #   @return [Types::DecimalColumnStatisticsData]
     #
     # @!attribute [rw] double_column_statistics_data
@@ -4827,11 +4829,15 @@ module Aws::Glue
     #   @return [Types::SessionCommand]
     #
     # @!attribute [rw] timeout
-    #   The number of seconds before request times out.
+    #   The number of minutes before session times out. Default for Spark
+    #   ETL jobs is 48 hours (2880 minutes), the maximum session lifetime
+    #   for this job type. Consult the documentation for other job types.
     #   @return [Integer]
     #
     # @!attribute [rw] idle_timeout
-    #   The number of seconds when idle before request times out.
+    #   The number of minutes when idle before session times out. Default
+    #   for Spark ETL jobs is value of Timeout. Consult the documentation
+    #   for other job types.
     #   @return [Integer]
     #
     # @!attribute [rw] default_arguments
@@ -5844,6 +5850,11 @@ module Aws::Glue
     #   The ID of the Data Catalog in which the database resides.
     #   @return [String]
     #
+    # @!attribute [rw] federated_database
+    #   A `FederatedDatabase` structure that references an entity outside
+    #   the Glue Data Catalog.
+    #   @return [Types::FederatedDatabase]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Database AWS API Documentation
     #
     class Database < Struct.new(
@@ -5854,7 +5865,8 @@ module Aws::Glue
       :create_time,
       :create_table_default_permissions,
       :target_database,
-      :catalog_id)
+      :catalog_id,
+      :federated_database)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5912,6 +5924,11 @@ module Aws::Glue
     #   for resource linking.
     #   @return [Types::DatabaseIdentifier]
     #
+    # @!attribute [rw] federated_database
+    #   A `FederatedDatabase` structure that references an entity outside
+    #   the Glue Data Catalog.
+    #   @return [Types::FederatedDatabase]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DatabaseInput AWS API Documentation
     #
     class DatabaseInput < Struct.new(
@@ -5920,7 +5937,8 @@ module Aws::Glue
       :location_uri,
       :parameters,
       :create_table_default_permissions,
-      :target_database)
+      :target_database,
+      :federated_database)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7416,10 +7434,16 @@ module Aws::Glue
     #   A message describing the problem.
     #   @return [String]
     #
+    # @!attribute [rw] from_federation_source
+    #   Indicates whether or not the exception relates to a federated
+    #   source.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/EntityNotFoundException AWS API Documentation
     #
     class EntityNotFoundException < Struct.new(
-      :message)
+      :message,
+      :from_federation_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7571,6 +7595,98 @@ module Aws::Glue
     #
     class ExportLabelsTaskRunProperties < Struct.new(
       :output_s3_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A database that points to an entity outside the Glue Data Catalog.
+    #
+    # @!attribute [rw] identifier
+    #   A unique identifier for the federated database.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_name
+    #   The name of the connection to the external metastore.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FederatedDatabase AWS API Documentation
+    #
+    class FederatedDatabase < Struct.new(
+      :identifier,
+      :connection_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A federated resource already exists.
+    #
+    # @!attribute [rw] message
+    #   The message describing the problem.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_glue_resource
+    #   The associated Glue resource already exists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FederatedResourceAlreadyExistsException AWS API Documentation
+    #
+    class FederatedResourceAlreadyExistsException < Struct.new(
+      :message,
+      :associated_glue_resource)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A table that points to an entity outside the Glue Data Catalog.
+    #
+    # @!attribute [rw] identifier
+    #   A unique identifier for the federated table.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_identifier
+    #   A unique identifier for the federated database.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_name
+    #   The name of the connection to the external metastore.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FederatedTable AWS API Documentation
+    #
+    class FederatedTable < Struct.new(
+      :identifier,
+      :database_identifier,
+      :connection_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A federation source failed.
+    #
+    # @!attribute [rw] federation_source_error_code
+    #   The error code of the problem.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FederationSourceException AWS API Documentation
+    #
+    class FederationSourceException < Struct.new(
+      :federation_source_error_code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FederationSourceRetryableException AWS API Documentation
+    #
+    class FederationSourceRetryableException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8121,7 +8237,7 @@ module Aws::Glue
     end
 
     # @!attribute [rw] column_statistics_list
-    #   List of ColumnStatistics that failed to be retrieved.
+    #   List of ColumnStatistics.
     #   @return [Array<Types::ColumnStatistics>]
     #
     # @!attribute [rw] errors
@@ -8785,7 +8901,11 @@ module Aws::Glue
     #
     # @!attribute [rw] resource_share_type
     #   Allows you to specify that you want to list the databases shared
-    #   with your account. The allowable values are `FOREIGN` or `ALL`.
+    #   with your account. The allowable values are `FEDERATED`, `FOREIGN`
+    #   or `ALL`.
+    #
+    #   * If set to `FEDERATED`, will list the federated databases
+    #     (referencing an external entity) shared with your account.
     #
     #   * If set to `FOREIGN`, will list the databases shared with your
     #     account.
@@ -11467,10 +11587,16 @@ module Aws::Glue
     #   A message describing the problem.
     #   @return [String]
     #
+    # @!attribute [rw] from_federation_source
+    #   Indicates whether or not the exception relates to a federated
+    #   source.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/InvalidInputException AWS API Documentation
     #
     class InvalidInputException < Struct.new(
-      :message)
+      :message,
+      :from_federation_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11812,8 +11938,8 @@ module Aws::Glue
     #
     #   * When you specify an Apache Spark ETL job
     #     (`JobCommand.Name`="glueetl") or Apache Spark streaming ETL job
-    #     (`JobCommand.Name`="gluestreaming"), you can allocate a minimum
-    #     of 2 DPUs. The default is 10 DPUs. This job type cannot have a
+    #     (`JobCommand.Name`="gluestreaming"), you can allocate from 2 to
+    #     100 DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
     #
     #   For Glue version 2.0 jobs, you cannot instead specify a `Maximum
@@ -14848,7 +14974,11 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The operation timed out.
+    #
     # @!attribute [rw] message
+    #   There is a mismatch between the SupportedPermissionType used in the
+    #   query request and the permissions defined on the target table.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PermissionTypeMismatchException AWS API Documentation
@@ -18594,6 +18724,11 @@ module Aws::Glue
     #   The ID of the table version.
     #   @return [String]
     #
+    # @!attribute [rw] federated_table
+    #   A `FederatedTable` structure that references an entity outside the
+    #   Glue Data Catalog.
+    #   @return [Types::FederatedTable]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Table AWS API Documentation
     #
     class Table < Struct.new(
@@ -18616,7 +18751,8 @@ module Aws::Glue
       :is_registered_with_lake_formation,
       :target_table,
       :catalog_id,
-      :version_id)
+      :version_id,
+      :federated_table)
       SENSITIVE = []
       include Aws::Structure
     end

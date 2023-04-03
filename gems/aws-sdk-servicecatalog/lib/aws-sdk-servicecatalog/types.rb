@@ -13,8 +13,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -106,8 +104,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -118,9 +114,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] principal_arn
-    #   The ARN of the principal (IAM user, role, or group). This field
-    #   allows an ARN with no `accountID` if `PrincipalType` is
-    #   `IAM_PATTERN`.
+    #   The ARN of the principal (user, role, or group). This field allows
+    #   an ARN with no `accountID` if `PrincipalType` is `IAM_PATTERN`.
     #
     #   You can associate multiple `IAM` patterns even if the account has no
     #   principal with that name. This is useful in Principal Name Sharing
@@ -150,8 +145,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -202,8 +195,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -253,8 +244,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -289,8 +278,6 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -460,8 +447,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -529,8 +514,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -687,8 +670,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -751,8 +732,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -823,8 +802,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -937,8 +914,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -1053,8 +1028,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -1174,8 +1147,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -1247,8 +1218,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -1274,8 +1243,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -1300,8 +1267,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -1347,8 +1312,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -1373,8 +1336,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -1407,8 +1368,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -1444,8 +1403,6 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -1483,8 +1440,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -1529,8 +1484,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -1574,8 +1527,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -1732,8 +1683,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -1805,8 +1754,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -1861,8 +1808,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -1906,8 +1851,6 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -1960,8 +1903,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -2018,8 +1959,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -2084,8 +2023,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -2187,8 +2124,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -2255,8 +2190,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -2290,8 +2223,6 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -2378,8 +2309,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -2390,9 +2319,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] principal_arn
-    #   The ARN of the principal (IAM user, role, or group). This field
-    #   allows an ARN with no `accountID` if `PrincipalType` is
-    #   `IAM_PATTERN`.
+    #   The ARN of the principal (user, role, or group). This field allows
+    #   an ARN with no `accountID` if `PrincipalType` is `IAM_PATTERN`.
     #   @return [String]
     #
     # @!attribute [rw] principal_type
@@ -2417,8 +2345,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -2463,8 +2389,6 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -2523,10 +2447,24 @@ module Aws::ServiceCatalog
     #
     class EnableAWSOrganizationsAccessOutput < Aws::EmptyStructure; end
 
+    # The ID for the provisioned product resources that are part of a
+    # resource group.
+    #
+    # @!attribute [rw] unique_tag
+    #   The unique key-value pair for a tag that identifies provisioned
+    #   product resources.
+    #   @return [Types::UniqueTagResourceIdentifier]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/EngineWorkflowResourceIdentifier AWS API Documentation
+    #
+    class EngineWorkflowResourceIdentifier < Struct.new(
+      :unique_tag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -2586,8 +2524,6 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -2712,8 +2648,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -2778,8 +2712,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -2961,8 +2893,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -3023,8 +2953,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -3074,8 +3002,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -3132,8 +3058,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -3183,8 +3107,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -3249,8 +3171,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -3309,8 +3229,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -3361,8 +3279,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -3407,8 +3323,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -3460,8 +3374,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -3532,8 +3444,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -3571,8 +3481,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -3612,8 +3520,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -3763,8 +3669,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -3803,8 +3707,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -3851,8 +3753,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -3966,6 +3866,147 @@ module Aws::ServiceCatalog
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] workflow_token
+    #   The encrypted contents of the provisioning engine execution payload
+    #   that Service Catalog sends after the Terraform product provisioning
+    #   workflow starts.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_id
+    #   The identifier of the record.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the provisioning engine execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason why the provisioning engine execution failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   The ID for the provisioned product resources that are part of a
+    #   resource group.
+    #   @return [Types::EngineWorkflowResourceIdentifier]
+    #
+    # @!attribute [rw] outputs
+    #   The output of the provisioning engine execution.
+    #   @return [Array<Types::RecordOutput>]
+    #
+    # @!attribute [rw] idempotency_token
+    #   The idempotency token that identifies the provisioning engine
+    #   execution.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/NotifyProvisionProductEngineWorkflowResultInput AWS API Documentation
+    #
+    class NotifyProvisionProductEngineWorkflowResultInput < Struct.new(
+      :workflow_token,
+      :record_id,
+      :status,
+      :failure_reason,
+      :resource_identifier,
+      :outputs,
+      :idempotency_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/NotifyProvisionProductEngineWorkflowResultOutput AWS API Documentation
+    #
+    class NotifyProvisionProductEngineWorkflowResultOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] workflow_token
+    #   The encrypted contents of the terminate engine execution payload
+    #   that Service Catalog sends after the Terraform product terminate
+    #   workflow starts.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_id
+    #   The identifier of the record.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the terminate engine execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason why the terminate engine execution failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] idempotency_token
+    #   The idempotency token that identifies the terminate engine
+    #   execution.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/NotifyTerminateProvisionedProductEngineWorkflowResultInput AWS API Documentation
+    #
+    class NotifyTerminateProvisionedProductEngineWorkflowResultInput < Struct.new(
+      :workflow_token,
+      :record_id,
+      :status,
+      :failure_reason,
+      :idempotency_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/NotifyTerminateProvisionedProductEngineWorkflowResultOutput AWS API Documentation
+    #
+    class NotifyTerminateProvisionedProductEngineWorkflowResultOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] workflow_token
+    #   The encrypted contents of the update engine execution payload that
+    #   Service Catalog sends after the Terraform product update workflow
+    #   starts.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_id
+    #   The identifier of the record.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the update engine execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason why the update engine execution failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] outputs
+    #   The output of the update engine execution.
+    #   @return [Array<Types::RecordOutput>]
+    #
+    # @!attribute [rw] idempotency_token
+    #   The idempotency token that identifies the update engine execution.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/NotifyUpdateProvisionedProductEngineWorkflowResultInput AWS API Documentation
+    #
+    class NotifyUpdateProvisionedProductEngineWorkflowResultInput < Struct.new(
+      :workflow_token,
+      :record_id,
+      :status,
+      :failure_reason,
+      :outputs,
+      :idempotency_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/NotifyUpdateProvisionedProductEngineWorkflowResultOutput AWS API Documentation
+    #
+    class NotifyUpdateProvisionedProductEngineWorkflowResultOutput < Aws::EmptyStructure; end
 
     # The operation is not supported.
     #
@@ -4145,8 +4186,8 @@ module Aws::ServiceCatalog
     # Information about a principal.
     #
     # @!attribute [rw] principal_arn
-    #   The ARN of the principal (IAM user, role, or group). This field
-    #   allows for an ARN with no `accountID` if the `PrincipalType` is an
+    #   The ARN of the principal (user, role, or group). This field allows
+    #   for an ARN with no `accountID` if the `PrincipalType` is an
     #   `IAM_PATTERN`.
     #   @return [String]
     #
@@ -4304,8 +4345,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -4525,12 +4564,12 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] user_arn
-    #   The Amazon Resource Name (ARN) of the IAM user.
+    #   The Amazon Resource Name (ARN) of the user.
     #   @return [String]
     #
     # @!attribute [rw] user_arn_session
-    #   The ARN of the IAM user in the session. This ARN might contain a
-    #   session ID.
+    #   The ARN of the user in the session. This ARN might contain a session
+    #   ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionedProductAttribute AWS API Documentation
@@ -5440,8 +5479,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -5631,8 +5668,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -5682,8 +5717,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -5758,8 +5791,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -5827,8 +5858,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -6264,8 +6293,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -6304,10 +6331,28 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # The unique key-value pair for a tag that identifies provisioned
+    # product resources.
+    #
+    # @!attribute [rw] key
+    #   A unique key that's attached to a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A unique value that's attached to a resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UniqueTagResourceIdentifier AWS API Documentation
+    #
+    class UniqueTagResourceIdentifier < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -6434,8 +6479,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -6498,8 +6541,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -6568,8 +6609,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -6665,8 +6704,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -6770,8 +6807,6 @@ module Aws::ServiceCatalog
     # @!attribute [rw] accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -6793,7 +6828,7 @@ module Aws::ServiceCatalog
     #   `ExecuteProvisionedProductServiceAction`. Only a role ARN is valid.
     #   A user ARN is invalid.
     #
-    #   The `OWNER` key accepts IAM user ARNs, IAM role ARNs, and STS
+    #   The `OWNER` key accepts user ARNs, IAM role ARNs, and STS
     #   assumed-role ARNs. The owner is the user that has permission to see,
     #   update, terminate, and execute service actions in the provisioned
     #   product.
@@ -6864,8 +6899,6 @@ module Aws::ServiceCatalog
 
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -7126,8 +7159,6 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #

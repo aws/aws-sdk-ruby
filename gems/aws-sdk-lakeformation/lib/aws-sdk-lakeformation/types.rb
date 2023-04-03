@@ -925,7 +925,7 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # A specified entity does not exist
+    # A specified entity does not exist.
     #
     # @!attribute [rw] message
     #   A message describing the problem.
@@ -2404,12 +2404,17 @@ module Aws::LakeFormation
     #   The identifier for the role that registers the resource.
     #   @return [String]
     #
+    # @!attribute [rw] with_federation
+    #   Whether or not the resource is a federated resource.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/RegisterResourceRequest AWS API Documentation
     #
     class RegisterResourceRequest < Struct.new(
       :resource_arn,
       :use_service_linked_role,
-      :role_arn)
+      :role_arn,
+      :with_federation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2530,12 +2535,17 @@ module Aws::LakeFormation
     #   The date and time the resource was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] with_federation
+    #   Whether or not the resource is a federated resource.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ResourceInfo AWS API Documentation
     #
     class ResourceInfo < Struct.new(
       :resource_arn,
       :role_arn,
-      :last_modified)
+      :last_modified,
+      :with_federation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3167,11 +3177,16 @@ module Aws::LakeFormation
     #   The resource ARN.
     #   @return [String]
     #
+    # @!attribute [rw] with_federation
+    #   Whether or not the resource is a federated resource.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateResourceRequest AWS API Documentation
     #
     class UpdateResourceRequest < Struct.new(
       :role_arn,
-      :resource_arn)
+      :resource_arn,
+      :with_federation)
       SENSITIVE = []
       include Aws::Structure
     end

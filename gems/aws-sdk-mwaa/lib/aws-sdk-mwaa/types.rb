@@ -70,8 +70,8 @@ module Aws::MWAA
     #
     # @!attribute [rw] airflow_configuration_options
     #   A list of key-value pairs containing the Apache Airflow
-    #   configuration options you want to attach to your environment. To
-    #   learn more, see [Apache Airflow configuration options][1].
+    #   configuration options you want to attach to your environment. For
+    #   more information, see [Apache Airflow configuration options][1].
     #
     #
     #
@@ -92,7 +92,8 @@ module Aws::MWAA
     #
     # @!attribute [rw] dag_s3_path
     #   The relative path to the DAGs folder on your Amazon S3 bucket. For
-    #   example, `dags`. To learn more, see [Adding or updating DAGs][1].
+    #   example, `dags`. For more information, see [Adding or updating
+    #   DAGs][1].
     #
     #
     #
@@ -101,7 +102,8 @@ module Aws::MWAA
     #
     # @!attribute [rw] environment_class
     #   The environment class type. Valid values: `mw1.small`, `mw1.medium`,
-    #   `mw1.large`. To learn more, see [Amazon MWAA environment class][1].
+    #   `mw1.large`. For more information, see [Amazon MWAA environment
+    #   class][1].
     #
     #
     #
@@ -114,8 +116,8 @@ module Aws::MWAA
     #   and Access Management (IAM) role that grants MWAA permission to
     #   access Amazon Web Services services and resources used by your
     #   environment. For example,
-    #   `arn:aws:iam::123456789:role/my-execution-role`. To learn more, see
-    #   [Amazon MWAA Execution role][1].
+    #   `arn:aws:iam::123456789:role/my-execution-role`. For more
+    #   information, see [Amazon MWAA Execution role][1].
     #
     #
     #
@@ -125,8 +127,8 @@ module Aws::MWAA
     # @!attribute [rw] kms_key
     #   The Amazon Web Services Key Management Service (KMS) key to encrypt
     #   the data in your environment. You can use an Amazon Web Services
-    #   owned CMK, or a Customer managed CMK (advanced). To learn more, see
-    #   [Create an Amazon MWAA environment][1].
+    #   owned CMK, or a Customer managed CMK (advanced). For more
+    #   information, see [Create an Amazon MWAA environment][1].
     #
     #
     #
@@ -164,7 +166,7 @@ module Aws::MWAA
     # @!attribute [rw] network_configuration
     #   The VPC networking components used to secure and enable network
     #   traffic between the Amazon Web Services resources for your
-    #   environment. To learn more, see [About networking on Amazon
+    #   environment. For more information, see [About networking on Amazon
     #   MWAA][1].
     #
     #
@@ -173,9 +175,9 @@ module Aws::MWAA
     #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] plugins_s3_object_version
-    #   The version of the plugins.zip file on your Amazon S3 bucket. A
-    #   version must be specified each time a plugins.zip file is updated.
-    #   To learn more, see [How S3 Versioning works][1].
+    #   The version of the plugins.zip file on your Amazon S3 bucket. You
+    #   must specify a version each time a plugins.zip file is updated. For
+    #   more information, see [How S3 Versioning works][1].
     #
     #
     #
@@ -185,8 +187,8 @@ module Aws::MWAA
     # @!attribute [rw] plugins_s3_path
     #   The relative path to the `plugins.zip` file on your Amazon S3
     #   bucket. For example, `plugins.zip`. If specified, then the
-    #   plugins.zip version is required. To learn more, see [Installing
-    #   custom plugins][1].
+    #   `plugins.zip` version is required. For more information, see
+    #   [Installing custom plugins][1].
     #
     #
     #
@@ -194,9 +196,9 @@ module Aws::MWAA
     #   @return [String]
     #
     # @!attribute [rw] requirements_s3_object_version
-    #   The version of the requirements.txt file on your Amazon S3 bucket. A
-    #   version must be specified each time a requirements.txt file is
-    #   updated. To learn more, see [How S3 Versioning works][1].
+    #   The version of the `requirements.txt` file on your Amazon S3 bucket.
+    #   You must specify a version each time a requirements.txt file is
+    #   updated. For more information, see [How S3 Versioning works][1].
     #
     #
     #
@@ -205,8 +207,8 @@ module Aws::MWAA
     #
     # @!attribute [rw] requirements_s3_path
     #   The relative path to the `requirements.txt` file on your Amazon S3
-    #   bucket. For example, `requirements.txt`. If specified, then a file
-    #   version is required. To learn more, see [Installing Python
+    #   bucket. For example, `requirements.txt`. If specified, then a
+    #   version is required. For more information, see [Installing Python
     #   dependencies][1].
     #
     #
@@ -226,18 +228,51 @@ module Aws::MWAA
     # @!attribute [rw] source_bucket_arn
     #   The Amazon Resource Name (ARN) of the Amazon S3 bucket where your
     #   DAG code and supporting files are stored. For example,
-    #   `arn:aws:s3:::my-airflow-bucket-unique-name`. To learn more, see
-    #   [Create an Amazon S3 bucket for Amazon MWAA][1].
+    #   `arn:aws:s3:::my-airflow-bucket-unique-name`. For more information,
+    #   see [Create an Amazon S3 bucket for Amazon MWAA][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html
     #   @return [String]
     #
+    # @!attribute [rw] startup_script_s3_object_version
+    #   The version of the startup shell script in your Amazon S3 bucket.
+    #   You must specify the [version ID][1] that Amazon S3 assigns to the
+    #   file every time you update the script.
+    #
+    #   Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings
+    #   that are no more than 1,024 bytes long. The following is an example:
+    #
+    #   `3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo`
+    #
+    #   For more information, see [Using a startup script][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html
+    #   [2]: https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html
+    #   @return [String]
+    #
+    # @!attribute [rw] startup_script_s3_path
+    #   The relative path to the startup shell script in your Amazon S3
+    #   bucket. For example, `s3://mwaa-environment/startup.sh`.
+    #
+    #   Amazon MWAA runs the script as your environment starts, and before
+    #   running the Apache Airflow process. You can use this script to
+    #   install dependencies, modify Apache Airflow configuration options,
+    #   and set environment variables. For more information, see [Using a
+    #   startup script][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The key-value tag pairs you want to associate to your environment.
-    #   For example, `"Environment": "Staging"`. To learn more, see [Tagging
-    #   Amazon Web Services resources][1].
+    #   For example, `"Environment": "Staging"`. For more information, see
+    #   [Tagging Amazon Web Services resources][1].
     #
     #
     #
@@ -245,8 +280,8 @@ module Aws::MWAA
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] webserver_access_mode
-    #   The Apache Airflow *Web server* access mode. To learn more, see
-    #   [Apache Airflow access modes][1].
+    #   The Apache Airflow *Web server* access mode. For more information,
+    #   see [Apache Airflow access modes][1].
     #
     #
     #
@@ -281,6 +316,8 @@ module Aws::MWAA
       :requirements_s3_path,
       :schedulers,
       :source_bucket_arn,
+      :startup_script_s3_object_version,
+      :startup_script_s3_path,
       :tags,
       :webserver_access_mode,
       :weekly_maintenance_window_start)
@@ -378,8 +415,8 @@ module Aws::MWAA
     #
     # @!attribute [rw] airflow_configuration_options
     #   A list of key-value pairs containing the Apache Airflow
-    #   configuration options attached to your environment. To learn more,
-    #   see [Apache Airflow configuration options][1].
+    #   configuration options attached to your environment. For more
+    #   information, see [Apache Airflow configuration options][1].
     #
     #
     #
@@ -400,8 +437,9 @@ module Aws::MWAA
     #   @return [Time]
     #
     # @!attribute [rw] dag_s3_path
-    #   The relative path to the DAGs folder on your Amazon S3 bucket. For
-    #   example, `dags`. To learn more, see [Adding or updating DAGs][1].
+    #   The relative path to the DAGs folder in your Amazon S3 bucket. For
+    #   example, `s3://mwaa-environment/dags`. For more information, see
+    #   [Adding or updating DAGs][1].
     #
     #
     #
@@ -410,7 +448,8 @@ module Aws::MWAA
     #
     # @!attribute [rw] environment_class
     #   The environment class type. Valid values: `mw1.small`, `mw1.medium`,
-    #   `mw1.large`. To learn more, see [Amazon MWAA environment class][1].
+    #   `mw1.large`. For more information, see [Amazon MWAA environment
+    #   class][1].
     #
     #
     #
@@ -421,8 +460,8 @@ module Aws::MWAA
     #   The Amazon Resource Name (ARN) of the execution role in IAM that
     #   allows MWAA to access Amazon Web Services resources in your
     #   environment. For example,
-    #   `arn:aws:iam::123456789:role/my-execution-role`. To learn more, see
-    #   [Amazon MWAA Execution role][1].
+    #   `arn:aws:iam::123456789:role/my-execution-role`. For more
+    #   information, see [Amazon MWAA Execution role][1].
     #
     #
     #
@@ -460,7 +499,7 @@ module Aws::MWAA
     # @!attribute [rw] network_configuration
     #   Describes the VPC networking components used to secure and enable
     #   network traffic between the Amazon Web Services resources for your
-    #   environment. To learn more, see [About networking on Amazon
+    #   environment. For more information, see [About networking on Amazon
     #   MWAA][1].
     #
     #
@@ -469,18 +508,26 @@ module Aws::MWAA
     #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] plugins_s3_object_version
-    #   The version of the plugins.zip file on your Amazon S3 bucket. To
-    #   learn more, see [Installing custom plugins][1].
+    #   The version of the `plugins.zip` file in your Amazon S3 bucket. You
+    #   must specify the [version ID][1] that Amazon S3 assigns to the file.
+    #
+    #   Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings
+    #   that are no more than 1,024 bytes long. The following is an example:
+    #
+    #   `3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo`
+    #
+    #   For more information, see [Installing custom plugins][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html
+    #   [2]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html
     #   @return [String]
     #
     # @!attribute [rw] plugins_s3_path
-    #   The relative path to the `plugins.zip` file on your Amazon S3
-    #   bucket. For example, `plugins.zip`. To learn more, see [Installing
-    #   custom plugins][1].
+    #   The relative path to the file in your Amazon S3 bucket. For example,
+    #   `s3://mwaa-environment/plugins.zip`. For more information, see
+    #   [Installing custom plugins][1].
     #
     #
     #
@@ -488,18 +535,27 @@ module Aws::MWAA
     #   @return [String]
     #
     # @!attribute [rw] requirements_s3_object_version
-    #   The version of the requirements.txt file on your Amazon S3 bucket.
-    #   To learn more, see [Installing Python dependencies][1].
+    #   The version of the `requirements.txt ` file on your Amazon S3
+    #   bucket. You must specify the [version ID][1] that Amazon S3 assigns
+    #   to the file.
+    #
+    #   Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings
+    #   that are no more than 1,024 bytes long. The following is an example:
+    #
+    #   `3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo`
+    #
+    #   For more information, see [Installing Python dependencies][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html
+    #   [2]: https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html
     #   @return [String]
     #
     # @!attribute [rw] requirements_s3_path
-    #   The relative path to the `requirements.txt` file on your Amazon S3
-    #   bucket. For example, `requirements.txt`. To learn more, see
-    #   [Installing Python dependencies][1].
+    #   The relative path to the `requirements.txt` file in your Amazon S3
+    #   bucket. For example, `s3://mwaa-environment/requirements.txt`. For
+    #   more information, see [Installing Python dependencies][1].
     #
     #
     #
@@ -513,7 +569,7 @@ module Aws::MWAA
     #
     # @!attribute [rw] service_role_arn
     #   The Amazon Resource Name (ARN) for the service-linked role of the
-    #   environment. To learn more, see [Amazon MWAA Service-linked
+    #   environment. For more information, see [Amazon MWAA Service-linked
     #   role][1].
     #
     #
@@ -524,12 +580,45 @@ module Aws::MWAA
     # @!attribute [rw] source_bucket_arn
     #   The Amazon Resource Name (ARN) of the Amazon S3 bucket where your
     #   DAG code and supporting files are stored. For example,
-    #   `arn:aws:s3:::my-airflow-bucket-unique-name`. To learn more, see
-    #   [Create an Amazon S3 bucket for Amazon MWAA][1].
+    #   `arn:aws:s3:::my-airflow-bucket-unique-name`. For more information,
+    #   see [Create an Amazon S3 bucket for Amazon MWAA][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html
+    #   @return [String]
+    #
+    # @!attribute [rw] startup_script_s3_object_version
+    #   The version of the startup shell script in your Amazon S3 bucket.
+    #   You must specify the [version ID][1] that Amazon S3 assigns to the
+    #   file.
+    #
+    #   Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings
+    #   that are no more than 1,024 bytes long. The following is an example:
+    #
+    #   `3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo`
+    #
+    #   For more information, see [Using a startup script][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html
+    #   [2]: https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html
+    #   @return [String]
+    #
+    # @!attribute [rw] startup_script_s3_path
+    #   The relative path to the startup shell script in your Amazon S3
+    #   bucket. For example, `s3://mwaa-environment/startup.sh`.
+    #
+    #   Amazon MWAA runs the script as your environment starts, and before
+    #   running the Apache Airflow process. You can use this script to
+    #   install dependencies, modify Apache Airflow configuration options,
+    #   and set environment variables. For more information, see [Using a
+    #   startup script][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -561,8 +650,8 @@ module Aws::MWAA
     #     ready to use.
     #
     #   We recommend reviewing our troubleshooting guide for a list of
-    #   common errors and their solutions. To learn more, see [Amazon MWAA
-    #   troubleshooting][1].
+    #   common errors and their solutions. For more information, see [Amazon
+    #   MWAA troubleshooting][1].
     #
     #
     #
@@ -571,8 +660,8 @@ module Aws::MWAA
     #
     # @!attribute [rw] tags
     #   The key-value tag pairs associated to your environment. For example,
-    #   `"Environment": "Staging"`. To learn more, see [Tagging Amazon Web
-    #   Services resources][1].
+    #   `"Environment": "Staging"`. For more information, see [Tagging
+    #   Amazon Web Services resources][1].
     #
     #
     #
@@ -580,8 +669,8 @@ module Aws::MWAA
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] webserver_access_mode
-    #   The Apache Airflow *Web server* access mode. To learn more, see
-    #   [Apache Airflow access modes][1].
+    #   The Apache Airflow *Web server* access mode. For more information,
+    #   see [Apache Airflow access modes][1].
     #
     #
     #
@@ -590,7 +679,7 @@ module Aws::MWAA
     #
     # @!attribute [rw] webserver_url
     #   The Apache Airflow *Web server* host name for the Amazon MWAA
-    #   environment. To learn more, see [Accessing the Apache Airflow
+    #   environment. For more information, see [Accessing the Apache Airflow
     #   UI][1].
     #
     #
@@ -628,6 +717,8 @@ module Aws::MWAA
       :schedulers,
       :service_role_arn,
       :source_bucket_arn,
+      :startup_script_s3_object_version,
+      :startup_script_s3_path,
       :status,
       :tags,
       :webserver_access_mode,
@@ -757,8 +848,8 @@ module Aws::MWAA
     end
 
     # @!attribute [rw] tags
-    #   The key-value tag pairs associated to your environment. To learn
-    #   more, see [Tagging Amazon Web Services resources][1].
+    #   The key-value tag pairs associated to your environment. For more
+    #   information, see [Tagging Amazon Web Services resources][1].
     #
     #
     #
@@ -946,15 +1037,16 @@ module Aws::MWAA
 
     # Describes the VPC networking components used to secure and enable
     # network traffic between the Amazon Web Services resources for your
-    # environment. To learn more, see [About networking on Amazon MWAA][1].
+    # environment. For more information, see [About networking on Amazon
+    # MWAA][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html
     #
     # @!attribute [rw] security_group_ids
-    #   A list of security group IDs. To learn more, see [Security in your
-    #   VPC on Amazon MWAA][1].
+    #   A list of security group IDs. For more information, see [Security in
+    #   your VPC on Amazon MWAA][1].
     #
     #
     #
@@ -962,8 +1054,8 @@ module Aws::MWAA
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_ids
-    #   A list of subnet IDs. To learn more, see [About networking on Amazon
-    #   MWAA][1].
+    #   A list of subnet IDs. For more information, see [About networking on
+    #   Amazon MWAA][1].
     #
     #
     #
@@ -1063,8 +1155,8 @@ module Aws::MWAA
     #
     # @!attribute [rw] tags
     #   The key-value tag pairs you want to associate to your environment.
-    #   For example, `"Environment": "Staging"`. To learn more, see [Tagging
-    #   Amazon Web Services resources][1].
+    #   For example, `"Environment": "Staging"`. For more information, see
+    #   [Tagging Amazon Web Services resources][1].
     #
     #
     #
@@ -1110,8 +1202,8 @@ module Aws::MWAA
 
     # @!attribute [rw] airflow_configuration_options
     #   A list of key-value pairs containing the Apache Airflow
-    #   configuration options you want to attach to your environment. To
-    #   learn more, see [Apache Airflow configuration options][1].
+    #   configuration options you want to attach to your environment. For
+    #   more information, see [Apache Airflow configuration options][1].
     #
     #
     #
@@ -1126,7 +1218,8 @@ module Aws::MWAA
     #
     # @!attribute [rw] dag_s3_path
     #   The relative path to the DAGs folder on your Amazon S3 bucket. For
-    #   example, `dags`. To learn more, see [Adding or updating DAGs][1].
+    #   example, `dags`. For more information, see [Adding or updating
+    #   DAGs][1].
     #
     #
     #
@@ -1135,7 +1228,8 @@ module Aws::MWAA
     #
     # @!attribute [rw] environment_class
     #   The environment class type. Valid values: `mw1.small`, `mw1.medium`,
-    #   `mw1.large`. To learn more, see [Amazon MWAA environment class][1].
+    #   `mw1.large`. For more information, see [Amazon MWAA environment
+    #   class][1].
     #
     #
     #
@@ -1146,8 +1240,8 @@ module Aws::MWAA
     #   The Amazon Resource Name (ARN) of the execution role in IAM that
     #   allows MWAA to access Amazon Web Services resources in your
     #   environment. For example,
-    #   `arn:aws:iam::123456789:role/my-execution-role`. To learn more, see
-    #   [Amazon MWAA Execution role][1].
+    #   `arn:aws:iam::123456789:role/my-execution-role`. For more
+    #   information, see [Amazon MWAA Execution role][1].
     #
     #
     #
@@ -1185,7 +1279,7 @@ module Aws::MWAA
     # @!attribute [rw] network_configuration
     #   The VPC networking components used to secure and enable network
     #   traffic between the Amazon Web Services resources for your
-    #   environment. To learn more, see [About networking on Amazon
+    #   environment. For more information, see [About networking on Amazon
     #   MWAA][1].
     #
     #
@@ -1194,9 +1288,9 @@ module Aws::MWAA
     #   @return [Types::UpdateNetworkConfigurationInput]
     #
     # @!attribute [rw] plugins_s3_object_version
-    #   The version of the plugins.zip file on your Amazon S3 bucket. A
-    #   version must be specified each time a plugins.zip file is updated.
-    #   To learn more, see [How S3 Versioning works][1].
+    #   The version of the plugins.zip file on your Amazon S3 bucket. You
+    #   must specify a version each time a `plugins.zip` file is updated.
+    #   For more information, see [How S3 Versioning works][1].
     #
     #
     #
@@ -1206,8 +1300,8 @@ module Aws::MWAA
     # @!attribute [rw] plugins_s3_path
     #   The relative path to the `plugins.zip` file on your Amazon S3
     #   bucket. For example, `plugins.zip`. If specified, then the
-    #   plugins.zip version is required. To learn more, see [Installing
-    #   custom plugins][1].
+    #   plugins.zip version is required. For more information, see
+    #   [Installing custom plugins][1].
     #
     #
     #
@@ -1215,9 +1309,9 @@ module Aws::MWAA
     #   @return [String]
     #
     # @!attribute [rw] requirements_s3_object_version
-    #   The version of the requirements.txt file on your Amazon S3 bucket. A
-    #   version must be specified each time a requirements.txt file is
-    #   updated. To learn more, see [How S3 Versioning works][1].
+    #   The version of the requirements.txt file on your Amazon S3 bucket.
+    #   You must specify a version each time a `requirements.txt` file is
+    #   updated. For more information, see [How S3 Versioning works][1].
     #
     #
     #
@@ -1227,7 +1321,7 @@ module Aws::MWAA
     # @!attribute [rw] requirements_s3_path
     #   The relative path to the `requirements.txt` file on your Amazon S3
     #   bucket. For example, `requirements.txt`. If specified, then a file
-    #   version is required. To learn more, see [Installing Python
+    #   version is required. For more information, see [Installing Python
     #   dependencies][1].
     #
     #
@@ -1243,17 +1337,50 @@ module Aws::MWAA
     # @!attribute [rw] source_bucket_arn
     #   The Amazon Resource Name (ARN) of the Amazon S3 bucket where your
     #   DAG code and supporting files are stored. For example,
-    #   `arn:aws:s3:::my-airflow-bucket-unique-name`. To learn more, see
-    #   [Create an Amazon S3 bucket for Amazon MWAA][1].
+    #   `arn:aws:s3:::my-airflow-bucket-unique-name`. For more information,
+    #   see [Create an Amazon S3 bucket for Amazon MWAA][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html
     #   @return [String]
     #
+    # @!attribute [rw] startup_script_s3_object_version
+    #   The version of the startup shell script in your Amazon S3 bucket.
+    #   You must specify the [version ID][1] that Amazon S3 assigns to the
+    #   file every time you update the script.
+    #
+    #   Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings
+    #   that are no more than 1,024 bytes long. The following is an example:
+    #
+    #   `3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo`
+    #
+    #   For more information, see [Using a startup script][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html
+    #   [2]: https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html
+    #   @return [String]
+    #
+    # @!attribute [rw] startup_script_s3_path
+    #   The relative path to the startup shell script in your Amazon S3
+    #   bucket. For example, `s3://mwaa-environment/startup.sh`.
+    #
+    #   Amazon MWAA runs the script as your environment starts, and before
+    #   running the Apache Airflow process. You can use this script to
+    #   install dependencies, modify Apache Airflow configuration options,
+    #   and set environment variables. For more information, see [Using a
+    #   startup script][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html
+    #   @return [String]
+    #
     # @!attribute [rw] webserver_access_mode
-    #   The Apache Airflow *Web server* access mode. To learn more, see
-    #   [Apache Airflow access modes][1].
+    #   The Apache Airflow *Web server* access mode. For more information,
+    #   see [Apache Airflow access modes][1].
     #
     #
     #
@@ -1287,6 +1414,8 @@ module Aws::MWAA
       :requirements_s3_path,
       :schedulers,
       :source_bucket_arn,
+      :startup_script_s3_object_version,
+      :startup_script_s3_path,
       :webserver_access_mode,
       :weekly_maintenance_window_start)
       SENSITIVE = [:airflow_configuration_options]
@@ -1329,7 +1458,8 @@ module Aws::MWAA
 
     # Defines the VPC networking components used to secure and enable
     # network traffic between the Amazon Web Services resources for your
-    # environment. To learn more, see [About networking on Amazon MWAA][1].
+    # environment. For more information, see [About networking on Amazon
+    # MWAA][1].
     #
     #
     #
@@ -1337,8 +1467,8 @@ module Aws::MWAA
     #
     # @!attribute [rw] security_group_ids
     #   A list of security group IDs. A security group must be attached to
-    #   the same VPC as the subnets. To learn more, see [Security in your
-    #   VPC on Amazon MWAA][1].
+    #   the same VPC as the subnets. For more information, see [Security in
+    #   your VPC on Amazon MWAA][1].
     #
     #
     #

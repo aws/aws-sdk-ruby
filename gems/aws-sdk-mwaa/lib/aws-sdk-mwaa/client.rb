@@ -409,8 +409,8 @@ module Aws::MWAA
     #
     # @option params [Hash<String,String>] :airflow_configuration_options
     #   A list of key-value pairs containing the Apache Airflow configuration
-    #   options you want to attach to your environment. To learn more, see
-    #   [Apache Airflow configuration options][1].
+    #   options you want to attach to your environment. For more information,
+    #   see [Apache Airflow configuration options][1].
     #
     #
     #
@@ -429,7 +429,8 @@ module Aws::MWAA
     #
     # @option params [required, String] :dag_s3_path
     #   The relative path to the DAGs folder on your Amazon S3 bucket. For
-    #   example, `dags`. To learn more, see [Adding or updating DAGs][1].
+    #   example, `dags`. For more information, see [Adding or updating
+    #   DAGs][1].
     #
     #
     #
@@ -437,7 +438,8 @@ module Aws::MWAA
     #
     # @option params [String] :environment_class
     #   The environment class type. Valid values: `mw1.small`, `mw1.medium`,
-    #   `mw1.large`. To learn more, see [Amazon MWAA environment class][1].
+    #   `mw1.large`. For more information, see [Amazon MWAA environment
+    #   class][1].
     #
     #
     #
@@ -448,8 +450,8 @@ module Aws::MWAA
     #   environment. An execution role is an Amazon Web Services Identity and
     #   Access Management (IAM) role that grants MWAA permission to access
     #   Amazon Web Services services and resources used by your environment.
-    #   For example, `arn:aws:iam::123456789:role/my-execution-role`. To learn
-    #   more, see [Amazon MWAA Execution role][1].
+    #   For example, `arn:aws:iam::123456789:role/my-execution-role`. For more
+    #   information, see [Amazon MWAA Execution role][1].
     #
     #
     #
@@ -458,8 +460,8 @@ module Aws::MWAA
     # @option params [String] :kms_key
     #   The Amazon Web Services Key Management Service (KMS) key to encrypt
     #   the data in your environment. You can use an Amazon Web Services owned
-    #   CMK, or a Customer managed CMK (advanced). To learn more, see [Create
-    #   an Amazon MWAA environment][1].
+    #   CMK, or a Customer managed CMK (advanced). For more information, see
+    #   [Create an Amazon MWAA environment][1].
     #
     #
     #
@@ -491,16 +493,17 @@ module Aws::MWAA
     # @option params [required, Types::NetworkConfiguration] :network_configuration
     #   The VPC networking components used to secure and enable network
     #   traffic between the Amazon Web Services resources for your
-    #   environment. To learn more, see [About networking on Amazon MWAA][1].
+    #   environment. For more information, see [About networking on Amazon
+    #   MWAA][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html
     #
     # @option params [String] :plugins_s3_object_version
-    #   The version of the plugins.zip file on your Amazon S3 bucket. A
-    #   version must be specified each time a plugins.zip file is updated. To
-    #   learn more, see [How S3 Versioning works][1].
+    #   The version of the plugins.zip file on your Amazon S3 bucket. You must
+    #   specify a version each time a plugins.zip file is updated. For more
+    #   information, see [How S3 Versioning works][1].
     #
     #
     #
@@ -508,17 +511,18 @@ module Aws::MWAA
     #
     # @option params [String] :plugins_s3_path
     #   The relative path to the `plugins.zip` file on your Amazon S3 bucket.
-    #   For example, `plugins.zip`. If specified, then the plugins.zip version
-    #   is required. To learn more, see [Installing custom plugins][1].
+    #   For example, `plugins.zip`. If specified, then the `plugins.zip`
+    #   version is required. For more information, see [Installing custom
+    #   plugins][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html
     #
     # @option params [String] :requirements_s3_object_version
-    #   The version of the requirements.txt file on your Amazon S3 bucket. A
-    #   version must be specified each time a requirements.txt file is
-    #   updated. To learn more, see [How S3 Versioning works][1].
+    #   The version of the `requirements.txt` file on your Amazon S3 bucket.
+    #   You must specify a version each time a requirements.txt file is
+    #   updated. For more information, see [How S3 Versioning works][1].
     #
     #
     #
@@ -526,8 +530,8 @@ module Aws::MWAA
     #
     # @option params [String] :requirements_s3_path
     #   The relative path to the `requirements.txt` file on your Amazon S3
-    #   bucket. For example, `requirements.txt`. If specified, then a file
-    #   version is required. To learn more, see [Installing Python
+    #   bucket. For example, `requirements.txt`. If specified, then a version
+    #   is required. For more information, see [Installing Python
     #   dependencies][1].
     #
     #
@@ -545,24 +549,55 @@ module Aws::MWAA
     # @option params [required, String] :source_bucket_arn
     #   The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG
     #   code and supporting files are stored. For example,
-    #   `arn:aws:s3:::my-airflow-bucket-unique-name`. To learn more, see
-    #   [Create an Amazon S3 bucket for Amazon MWAA][1].
+    #   `arn:aws:s3:::my-airflow-bucket-unique-name`. For more information,
+    #   see [Create an Amazon S3 bucket for Amazon MWAA][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html
     #
+    # @option params [String] :startup_script_s3_object_version
+    #   The version of the startup shell script in your Amazon S3 bucket. You
+    #   must specify the [version ID][1] that Amazon S3 assigns to the file
+    #   every time you update the script.
+    #
+    #   Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings that
+    #   are no more than 1,024 bytes long. The following is an example:
+    #
+    #   `3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo`
+    #
+    #   For more information, see [Using a startup script][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html
+    #   [2]: https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html
+    #
+    # @option params [String] :startup_script_s3_path
+    #   The relative path to the startup shell script in your Amazon S3
+    #   bucket. For example, `s3://mwaa-environment/startup.sh`.
+    #
+    #   Amazon MWAA runs the script as your environment starts, and before
+    #   running the Apache Airflow process. You can use this script to install
+    #   dependencies, modify Apache Airflow configuration options, and set
+    #   environment variables. For more information, see [Using a startup
+    #   script][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html
+    #
     # @option params [Hash<String,String>] :tags
     #   The key-value tag pairs you want to associate to your environment. For
-    #   example, `"Environment": "Staging"`. To learn more, see [Tagging
-    #   Amazon Web Services resources][1].
+    #   example, `"Environment": "Staging"`. For more information, see
+    #   [Tagging Amazon Web Services resources][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @option params [String] :webserver_access_mode
-    #   The Apache Airflow *Web server* access mode. To learn more, see
+    #   The Apache Airflow *Web server* access mode. For more information, see
     #   [Apache Airflow access modes][1].
     #
     #
@@ -626,6 +661,8 @@ module Aws::MWAA
     #     requirements_s3_path: "RelativePath",
     #     schedulers: 1,
     #     source_bucket_arn: "S3BucketArn", # required
+    #     startup_script_s3_object_version: "S3ObjectVersion",
+    #     startup_script_s3_path: "RelativePath",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -768,6 +805,8 @@ module Aws::MWAA
     #   resp.environment.schedulers #=> Integer
     #   resp.environment.service_role_arn #=> String
     #   resp.environment.source_bucket_arn #=> String
+    #   resp.environment.startup_script_s3_object_version #=> String
+    #   resp.environment.startup_script_s3_path #=> String
     #   resp.environment.status #=> String, one of "CREATING", "CREATE_FAILED", "AVAILABLE", "UPDATING", "DELETING", "DELETED", "UNAVAILABLE", "UPDATE_FAILED"
     #   resp.environment.tags #=> Hash
     #   resp.environment.tags["TagKey"] #=> String
@@ -918,8 +957,8 @@ module Aws::MWAA
     #
     # @option params [required, Hash<String,String>] :tags
     #   The key-value tag pairs you want to associate to your environment. For
-    #   example, `"Environment": "Staging"`. To learn more, see [Tagging
-    #   Amazon Web Services resources][1].
+    #   example, `"Environment": "Staging"`. For more information, see
+    #   [Tagging Amazon Web Services resources][1].
     #
     #
     #
@@ -981,8 +1020,8 @@ module Aws::MWAA
     #
     # @option params [Hash<String,String>] :airflow_configuration_options
     #   A list of key-value pairs containing the Apache Airflow configuration
-    #   options you want to attach to your environment. To learn more, see
-    #   [Apache Airflow configuration options][1].
+    #   options you want to attach to your environment. For more information,
+    #   see [Apache Airflow configuration options][1].
     #
     #
     #
@@ -995,7 +1034,8 @@ module Aws::MWAA
     #
     # @option params [String] :dag_s3_path
     #   The relative path to the DAGs folder on your Amazon S3 bucket. For
-    #   example, `dags`. To learn more, see [Adding or updating DAGs][1].
+    #   example, `dags`. For more information, see [Adding or updating
+    #   DAGs][1].
     #
     #
     #
@@ -1003,7 +1043,8 @@ module Aws::MWAA
     #
     # @option params [String] :environment_class
     #   The environment class type. Valid values: `mw1.small`, `mw1.medium`,
-    #   `mw1.large`. To learn more, see [Amazon MWAA environment class][1].
+    #   `mw1.large`. For more information, see [Amazon MWAA environment
+    #   class][1].
     #
     #
     #
@@ -1013,8 +1054,8 @@ module Aws::MWAA
     #   The Amazon Resource Name (ARN) of the execution role in IAM that
     #   allows MWAA to access Amazon Web Services resources in your
     #   environment. For example,
-    #   `arn:aws:iam::123456789:role/my-execution-role`. To learn more, see
-    #   [Amazon MWAA Execution role][1].
+    #   `arn:aws:iam::123456789:role/my-execution-role`. For more information,
+    #   see [Amazon MWAA Execution role][1].
     #
     #
     #
@@ -1046,16 +1087,17 @@ module Aws::MWAA
     # @option params [Types::UpdateNetworkConfigurationInput] :network_configuration
     #   The VPC networking components used to secure and enable network
     #   traffic between the Amazon Web Services resources for your
-    #   environment. To learn more, see [About networking on Amazon MWAA][1].
+    #   environment. For more information, see [About networking on Amazon
+    #   MWAA][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html
     #
     # @option params [String] :plugins_s3_object_version
-    #   The version of the plugins.zip file on your Amazon S3 bucket. A
-    #   version must be specified each time a plugins.zip file is updated. To
-    #   learn more, see [How S3 Versioning works][1].
+    #   The version of the plugins.zip file on your Amazon S3 bucket. You must
+    #   specify a version each time a `plugins.zip` file is updated. For more
+    #   information, see [How S3 Versioning works][1].
     #
     #
     #
@@ -1064,16 +1106,16 @@ module Aws::MWAA
     # @option params [String] :plugins_s3_path
     #   The relative path to the `plugins.zip` file on your Amazon S3 bucket.
     #   For example, `plugins.zip`. If specified, then the plugins.zip version
-    #   is required. To learn more, see [Installing custom plugins][1].
+    #   is required. For more information, see [Installing custom plugins][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html
     #
     # @option params [String] :requirements_s3_object_version
-    #   The version of the requirements.txt file on your Amazon S3 bucket. A
-    #   version must be specified each time a requirements.txt file is
-    #   updated. To learn more, see [How S3 Versioning works][1].
+    #   The version of the requirements.txt file on your Amazon S3 bucket. You
+    #   must specify a version each time a `requirements.txt` file is updated.
+    #   For more information, see [How S3 Versioning works][1].
     #
     #
     #
@@ -1082,7 +1124,7 @@ module Aws::MWAA
     # @option params [String] :requirements_s3_path
     #   The relative path to the `requirements.txt` file on your Amazon S3
     #   bucket. For example, `requirements.txt`. If specified, then a file
-    #   version is required. To learn more, see [Installing Python
+    #   version is required. For more information, see [Installing Python
     #   dependencies][1].
     #
     #
@@ -1096,15 +1138,46 @@ module Aws::MWAA
     # @option params [String] :source_bucket_arn
     #   The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG
     #   code and supporting files are stored. For example,
-    #   `arn:aws:s3:::my-airflow-bucket-unique-name`. To learn more, see
-    #   [Create an Amazon S3 bucket for Amazon MWAA][1].
+    #   `arn:aws:s3:::my-airflow-bucket-unique-name`. For more information,
+    #   see [Create an Amazon S3 bucket for Amazon MWAA][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html
     #
+    # @option params [String] :startup_script_s3_object_version
+    #   The version of the startup shell script in your Amazon S3 bucket. You
+    #   must specify the [version ID][1] that Amazon S3 assigns to the file
+    #   every time you update the script.
+    #
+    #   Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings that
+    #   are no more than 1,024 bytes long. The following is an example:
+    #
+    #   `3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo`
+    #
+    #   For more information, see [Using a startup script][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html
+    #   [2]: https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html
+    #
+    # @option params [String] :startup_script_s3_path
+    #   The relative path to the startup shell script in your Amazon S3
+    #   bucket. For example, `s3://mwaa-environment/startup.sh`.
+    #
+    #   Amazon MWAA runs the script as your environment starts, and before
+    #   running the Apache Airflow process. You can use this script to install
+    #   dependencies, modify Apache Airflow configuration options, and set
+    #   environment variables. For more information, see [Using a startup
+    #   script][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html
+    #
     # @option params [String] :webserver_access_mode
-    #   The Apache Airflow *Web server* access mode. To learn more, see
+    #   The Apache Airflow *Web server* access mode. For more information, see
     #   [Apache Airflow access modes][1].
     #
     #
@@ -1166,6 +1239,8 @@ module Aws::MWAA
     #     requirements_s3_path: "RelativePath",
     #     schedulers: 1,
     #     source_bucket_arn: "S3BucketArn",
+    #     startup_script_s3_object_version: "S3ObjectVersion",
+    #     startup_script_s3_path: "RelativePath",
     #     webserver_access_mode: "PRIVATE_ONLY", # accepts PRIVATE_ONLY, PUBLIC_ONLY
     #     weekly_maintenance_window_start: "WeeklyMaintenanceWindowStart",
     #   })
@@ -1196,7 +1271,7 @@ module Aws::MWAA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mwaa'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2023-04-03)
+------------------
+
+* Feature - This release adds grant override options to the CreateGrantVersion API. These options can be used to specify grant replacement behavior during grant activation.
+
 1.43.0 (2023-01-18)
 ------------------
 

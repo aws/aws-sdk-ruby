@@ -198,6 +198,12 @@ module Aws::ServiceCatalog
             Aws::ServiceCatalog::Endpoints::ListStackInstancesForProvisionedProduct.build(context)
           when :list_tag_options
             Aws::ServiceCatalog::Endpoints::ListTagOptions.build(context)
+          when :notify_provision_product_engine_workflow_result
+            Aws::ServiceCatalog::Endpoints::NotifyProvisionProductEngineWorkflowResult.build(context)
+          when :notify_terminate_provisioned_product_engine_workflow_result
+            Aws::ServiceCatalog::Endpoints::NotifyTerminateProvisionedProductEngineWorkflowResult.build(context)
+          when :notify_update_provisioned_product_engine_workflow_result
+            Aws::ServiceCatalog::Endpoints::NotifyUpdateProvisionedProductEngineWorkflowResult.build(context)
           when :provision_product
             Aws::ServiceCatalog::Endpoints::ProvisionProduct.build(context)
           when :reject_portfolio_share

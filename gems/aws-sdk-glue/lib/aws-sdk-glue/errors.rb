@@ -37,6 +37,9 @@ module Aws::Glue
   # * {CrawlerRunningException}
   # * {CrawlerStoppingException}
   # * {EntityNotFoundException}
+  # * {FederatedResourceAlreadyExistsException}
+  # * {FederationSourceException}
+  # * {FederationSourceRetryableException}
   # * {GlueEncryptionException}
   # * {IdempotentParameterMismatchException}
   # * {IllegalBlueprintStateException}
@@ -211,6 +214,66 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def from_federation_source
+        @data[:from_federation_source]
+      end
+    end
+
+    class FederatedResourceAlreadyExistsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Glue::Types::FederatedResourceAlreadyExistsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def associated_glue_resource
+        @data[:associated_glue_resource]
+      end
+    end
+
+    class FederationSourceException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Glue::Types::FederationSourceException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def federation_source_error_code
+        @data[:federation_source_error_code]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class FederationSourceRetryableException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Glue::Types::FederationSourceRetryableException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class GlueEncryptionException < ServiceError
@@ -315,6 +378,11 @@ module Aws::Glue
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+      # @return [String]
+      def from_federation_source
+        @data[:from_federation_source]
       end
     end
 

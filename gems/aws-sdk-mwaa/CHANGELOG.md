@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2023-04-03)
+------------------
+
+* Feature - This Amazon MWAA release adds the ability to customize the Apache Airflow environment by launching a shell script at startup. This shell script is hosted in your environment's Amazon S3 bucket. Amazon MWAA runs the script before installing requirements and initializing the Apache Airflow process.
+
 1.19.0 (2023-01-18)
 ------------------
 

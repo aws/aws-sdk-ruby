@@ -1092,6 +1092,7 @@ module Aws::LakeFormation
     #   resp.resource_info.resource_arn #=> String
     #   resp.resource_info.role_arn #=> String
     #   resp.resource_info.last_modified #=> Time
+    #   resp.resource_info.with_federation #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DescribeResource AWS API Documentation
     #
@@ -2291,6 +2292,7 @@ module Aws::LakeFormation
     #   resp.resource_info_list[0].resource_arn #=> String
     #   resp.resource_info_list[0].role_arn #=> String
     #   resp.resource_info_list[0].last_modified #=> Time
+    #   resp.resource_info_list[0].with_federation #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListResources AWS API Documentation
@@ -2534,6 +2536,9 @@ module Aws::LakeFormation
     # @option params [String] :role_arn
     #   The identifier for the role that registers the resource.
     #
+    # @option params [Boolean] :with_federation
+    #   Whether or not the resource is a federated resource.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2542,6 +2547,7 @@ module Aws::LakeFormation
     #     resource_arn: "ResourceArnString", # required
     #     use_service_linked_role: false,
     #     role_arn: "IAMRoleArn",
+    #     with_federation: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/RegisterResource AWS API Documentation
@@ -3065,6 +3071,9 @@ module Aws::LakeFormation
     # @option params [required, String] :resource_arn
     #   The resource ARN.
     #
+    # @option params [Boolean] :with_federation
+    #   Whether or not the resource is a federated resource.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3072,6 +3081,7 @@ module Aws::LakeFormation
     #   resp = client.update_resource({
     #     role_arn: "IAMRoleArn", # required
     #     resource_arn: "ResourceArnString", # required
+    #     with_federation: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateResource AWS API Documentation
@@ -3195,7 +3205,7 @@ module Aws::LakeFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lakeformation'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

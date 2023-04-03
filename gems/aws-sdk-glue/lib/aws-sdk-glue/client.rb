@@ -2819,6 +2819,10 @@ module Aws::Glue
     #         catalog_id: "CatalogIdString",
     #         database_name: "NameString",
     #       },
+    #       federated_database: {
+    #         identifier: "FederationIdentifier",
+    #         connection_name: "NameString",
+    #       },
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -4864,10 +4868,14 @@ module Aws::Glue
     #   The `SessionCommand` that runs the job.
     #
     # @option params [Integer] :timeout
-    #   The number of seconds before request times out.
+    #   The number of minutes before session times out. Default for Spark ETL
+    #   jobs is 48 hours (2880 minutes), the maximum session lifetime for this
+    #   job type. Consult the documentation for other job types.
     #
     # @option params [Integer] :idle_timeout
-    #   The number of seconds when idle before request times out.
+    #   The number of minutes when idle before session times out. Default for
+    #   Spark ETL jobs is value of Timeout. Consult the documentation for
+    #   other job types.
     #
     # @option params [Hash<String,String>] :default_arguments
     #   A map array of key-value pairs. Max is 75 pairs.
@@ -7299,6 +7307,8 @@ module Aws::Glue
     #   resp.database.target_database.catalog_id #=> String
     #   resp.database.target_database.database_name #=> String
     #   resp.database.catalog_id #=> String
+    #   resp.database.federated_database.identifier #=> String
+    #   resp.database.federated_database.connection_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDatabase AWS API Documentation
     #
@@ -7323,7 +7333,11 @@ module Aws::Glue
     #
     # @option params [String] :resource_share_type
     #   Allows you to specify that you want to list the databases shared with
-    #   your account. The allowable values are `FOREIGN` or `ALL`.
+    #   your account. The allowable values are `FEDERATED`, `FOREIGN` or
+    #   `ALL`.
+    #
+    #   * If set to `FEDERATED`, will list the federated databases
+    #     (referencing an external entity) shared with your account.
     #
     #   * If set to `FOREIGN`, will list the databases shared with your
     #     account.
@@ -7344,7 +7358,7 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString",
     #     next_token: "Token",
     #     max_results: 1,
-    #     resource_share_type: "FOREIGN", # accepts FOREIGN, ALL
+    #     resource_share_type: "FOREIGN", # accepts FOREIGN, ALL, FEDERATED
     #   })
     #
     # @example Response structure
@@ -7363,6 +7377,8 @@ module Aws::Glue
     #   resp.database_list[0].target_database.catalog_id #=> String
     #   resp.database_list[0].target_database.database_name #=> String
     #   resp.database_list[0].catalog_id #=> String
+    #   resp.database_list[0].federated_database.identifier #=> String
+    #   resp.database_list[0].federated_database.connection_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDatabases AWS API Documentation
@@ -10669,6 +10685,9 @@ module Aws::Glue
     #   resp.table.target_table.name #=> String
     #   resp.table.catalog_id #=> String
     #   resp.table.version_id #=> String
+    #   resp.table.federated_table.identifier #=> String
+    #   resp.table.federated_table.database_identifier #=> String
+    #   resp.table.federated_table.connection_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTable AWS API Documentation
     #
@@ -10775,6 +10794,9 @@ module Aws::Glue
     #   resp.table_version.table.target_table.name #=> String
     #   resp.table_version.table.catalog_id #=> String
     #   resp.table_version.table.version_id #=> String
+    #   resp.table_version.table.federated_table.identifier #=> String
+    #   resp.table_version.table.federated_table.database_identifier #=> String
+    #   resp.table_version.table.federated_table.connection_name #=> String
     #   resp.table_version.version_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableVersion AWS API Documentation
@@ -10890,6 +10912,9 @@ module Aws::Glue
     #   resp.table_versions[0].table.target_table.name #=> String
     #   resp.table_versions[0].table.catalog_id #=> String
     #   resp.table_versions[0].table.version_id #=> String
+    #   resp.table_versions[0].table.federated_table.identifier #=> String
+    #   resp.table_versions[0].table.federated_table.database_identifier #=> String
+    #   resp.table_versions[0].table.federated_table.connection_name #=> String
     #   resp.table_versions[0].version_id #=> String
     #   resp.next_token #=> String
     #
@@ -11016,6 +11041,9 @@ module Aws::Glue
     #   resp.table_list[0].target_table.name #=> String
     #   resp.table_list[0].catalog_id #=> String
     #   resp.table_list[0].version_id #=> String
+    #   resp.table_list[0].federated_table.identifier #=> String
+    #   resp.table_list[0].federated_table.database_identifier #=> String
+    #   resp.table_list[0].federated_table.connection_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTables AWS API Documentation
@@ -11599,6 +11627,9 @@ module Aws::Glue
     #   resp.table.target_table.name #=> String
     #   resp.table.catalog_id #=> String
     #   resp.table.version_id #=> String
+    #   resp.table.federated_table.identifier #=> String
+    #   resp.table.federated_table.database_identifier #=> String
+    #   resp.table.federated_table.connection_name #=> String
     #   resp.authorized_columns #=> Array
     #   resp.authorized_columns[0] #=> String
     #   resp.is_registered_with_lake_formation #=> Boolean
@@ -13859,7 +13890,7 @@ module Aws::Glue
     #       },
     #     ],
     #     max_results: 1,
-    #     resource_share_type: "FOREIGN", # accepts FOREIGN, ALL
+    #     resource_share_type: "FOREIGN", # accepts FOREIGN, ALL, FEDERATED
     #   })
     #
     # @example Response structure
@@ -13929,6 +13960,9 @@ module Aws::Glue
     #   resp.table_list[0].target_table.name #=> String
     #   resp.table_list[0].catalog_id #=> String
     #   resp.table_list[0].version_id #=> String
+    #   resp.table_list[0].federated_table.identifier #=> String
+    #   resp.table_list[0].federated_table.database_identifier #=> String
+    #   resp.table_list[0].federated_table.connection_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SearchTables AWS API Documentation
     #
@@ -15456,6 +15490,10 @@ module Aws::Glue
     #       target_database: {
     #         catalog_id: "CatalogIdString",
     #         database_name: "NameString",
+    #       },
+    #       federated_database: {
+    #         identifier: "FederationIdentifier",
+    #         connection_name: "NameString",
     #       },
     #     },
     #   })
@@ -17319,7 +17357,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.133.0'
+      context[:gem_version] = '1.134.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

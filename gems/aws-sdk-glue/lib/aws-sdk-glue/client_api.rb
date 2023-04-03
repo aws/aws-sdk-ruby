@@ -416,6 +416,13 @@ module Aws::Glue
     ExistCondition = Shapes::StringShape.new(name: 'ExistCondition')
     ExportLabelsTaskRunProperties = Shapes::StructureShape.new(name: 'ExportLabelsTaskRunProperties')
     ExtendedString = Shapes::StringShape.new(name: 'ExtendedString')
+    FederatedDatabase = Shapes::StructureShape.new(name: 'FederatedDatabase')
+    FederatedResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'FederatedResourceAlreadyExistsException')
+    FederatedTable = Shapes::StructureShape.new(name: 'FederatedTable')
+    FederationIdentifier = Shapes::StringShape.new(name: 'FederationIdentifier')
+    FederationSourceErrorCode = Shapes::StringShape.new(name: 'FederationSourceErrorCode')
+    FederationSourceException = Shapes::StructureShape.new(name: 'FederationSourceException')
+    FederationSourceRetryableException = Shapes::StructureShape.new(name: 'FederationSourceRetryableException')
     FieldName = Shapes::StringShape.new(name: 'FieldName')
     FieldType = Shapes::StringShape.new(name: 'FieldType')
     FillMissingValues = Shapes::StructureShape.new(name: 'FillMissingValues')
@@ -2277,6 +2284,7 @@ module Aws::Glue
     Database.add_member(:create_table_default_permissions, Shapes::ShapeRef.new(shape: PrincipalPermissionsList, location_name: "CreateTableDefaultPermissions"))
     Database.add_member(:target_database, Shapes::ShapeRef.new(shape: DatabaseIdentifier, location_name: "TargetDatabase"))
     Database.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    Database.add_member(:federated_database, Shapes::ShapeRef.new(shape: FederatedDatabase, location_name: "FederatedDatabase"))
     Database.struct_class = Types::Database
 
     DatabaseIdentifier.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
@@ -2289,6 +2297,7 @@ module Aws::Glue
     DatabaseInput.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
     DatabaseInput.add_member(:create_table_default_permissions, Shapes::ShapeRef.new(shape: PrincipalPermissionsList, location_name: "CreateTableDefaultPermissions"))
     DatabaseInput.add_member(:target_database, Shapes::ShapeRef.new(shape: DatabaseIdentifier, location_name: "TargetDatabase"))
+    DatabaseInput.add_member(:federated_database, Shapes::ShapeRef.new(shape: FederatedDatabase, location_name: "FederatedDatabase"))
     DatabaseInput.struct_class = Types::DatabaseInput
 
     DatabaseList.member = Shapes::ShapeRef.new(shape: Database)
@@ -2618,6 +2627,7 @@ module Aws::Glue
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
 
     EntityNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    EntityNotFoundException.add_member(:from_federation_source, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "FromFederationSource"))
     EntityNotFoundException.struct_class = Types::EntityNotFoundException
 
     ErrorByName.key = Shapes::ShapeRef.new(shape: NameString)
@@ -2652,6 +2662,26 @@ module Aws::Glue
 
     ExportLabelsTaskRunProperties.add_member(:output_s3_path, Shapes::ShapeRef.new(shape: UriString, location_name: "OutputS3Path"))
     ExportLabelsTaskRunProperties.struct_class = Types::ExportLabelsTaskRunProperties
+
+    FederatedDatabase.add_member(:identifier, Shapes::ShapeRef.new(shape: FederationIdentifier, location_name: "Identifier"))
+    FederatedDatabase.add_member(:connection_name, Shapes::ShapeRef.new(shape: NameString, location_name: "ConnectionName"))
+    FederatedDatabase.struct_class = Types::FederatedDatabase
+
+    FederatedResourceAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    FederatedResourceAlreadyExistsException.add_member(:associated_glue_resource, Shapes::ShapeRef.new(shape: GlueResourceArn, location_name: "AssociatedGlueResource"))
+    FederatedResourceAlreadyExistsException.struct_class = Types::FederatedResourceAlreadyExistsException
+
+    FederatedTable.add_member(:identifier, Shapes::ShapeRef.new(shape: FederationIdentifier, location_name: "Identifier"))
+    FederatedTable.add_member(:database_identifier, Shapes::ShapeRef.new(shape: FederationIdentifier, location_name: "DatabaseIdentifier"))
+    FederatedTable.add_member(:connection_name, Shapes::ShapeRef.new(shape: NameString, location_name: "ConnectionName"))
+    FederatedTable.struct_class = Types::FederatedTable
+
+    FederationSourceException.add_member(:federation_source_error_code, Shapes::ShapeRef.new(shape: FederationSourceErrorCode, location_name: "FederationSourceErrorCode"))
+    FederationSourceException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    FederationSourceException.struct_class = Types::FederationSourceException
+
+    FederationSourceRetryableException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    FederationSourceRetryableException.struct_class = Types::FederationSourceRetryableException
 
     FillMissingValues.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
     FillMissingValues.add_member(:inputs, Shapes::ShapeRef.new(shape: OneInput, required: true, location_name: "Inputs"))
@@ -3436,6 +3466,7 @@ module Aws::Glue
     InternalServiceException.struct_class = Types::InternalServiceException
 
     InvalidInputException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    InvalidInputException.add_member(:from_federation_source, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "FromFederationSource"))
     InvalidInputException.struct_class = Types::InvalidInputException
 
     InvalidStateException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
@@ -4859,6 +4890,7 @@ module Aws::Glue
     Table.add_member(:target_table, Shapes::ShapeRef.new(shape: TableIdentifier, location_name: "TargetTable"))
     Table.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     Table.add_member(:version_id, Shapes::ShapeRef.new(shape: VersionString, location_name: "VersionId"))
+    Table.add_member(:federated_table, Shapes::ShapeRef.new(shape: FederatedTable, location_name: "FederatedTable"))
     Table.struct_class = Types::Table
 
     TableError.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, location_name: "TableName"))
@@ -5511,6 +5543,8 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: FederationSourceException)
+        o.errors << Shapes::ShapeRef.new(shape: FederationSourceRetryableException)
       end)
 
       api.add_operation(:batch_get_triggers, Seahorse::Model::Operation.new.tap do |o|
@@ -5710,6 +5744,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: FederatedResourceAlreadyExistsException)
       end)
 
       api.add_operation(:create_dev_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -6479,6 +6514,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+        o.errors << Shapes::ShapeRef.new(shape: FederationSourceException)
       end)
 
       api.add_operation(:get_databases, Seahorse::Model::Operation.new.tap do |o|
@@ -6696,6 +6732,8 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+        o.errors << Shapes::ShapeRef.new(shape: FederationSourceException)
+        o.errors << Shapes::ShapeRef.new(shape: FederationSourceRetryableException)
       end)
 
       api.add_operation(:get_partition_indexes, Seahorse::Model::Operation.new.tap do |o|
@@ -6729,6 +6767,8 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
+        o.errors << Shapes::ShapeRef.new(shape: FederationSourceException)
+        o.errors << Shapes::ShapeRef.new(shape: FederationSourceRetryableException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -6907,6 +6947,8 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
+        o.errors << Shapes::ShapeRef.new(shape: FederationSourceException)
+        o.errors << Shapes::ShapeRef.new(shape: FederationSourceRetryableException)
       end)
 
       api.add_operation(:get_table_version, Seahorse::Model::Operation.new.tap do |o|
@@ -6952,6 +6994,8 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+        o.errors << Shapes::ShapeRef.new(shape: FederationSourceException)
+        o.errors << Shapes::ShapeRef.new(shape: FederationSourceRetryableException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -7014,6 +7058,8 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
         o.errors << Shapes::ShapeRef.new(shape: PermissionTypeMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: FederationSourceException)
+        o.errors << Shapes::ShapeRef.new(shape: FederationSourceRetryableException)
       end)
 
       api.add_operation(:get_unfiltered_partitions_metadata, Seahorse::Model::Operation.new.tap do |o|
@@ -7028,6 +7074,8 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
         o.errors << Shapes::ShapeRef.new(shape: PermissionTypeMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: FederationSourceException)
+        o.errors << Shapes::ShapeRef.new(shape: FederationSourceRetryableException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -7048,6 +7096,8 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
         o.errors << Shapes::ShapeRef.new(shape: PermissionTypeMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: FederationSourceException)
+        o.errors << Shapes::ShapeRef.new(shape: FederationSourceRetryableException)
       end)
 
       api.add_operation(:get_user_defined_function, Seahorse::Model::Operation.new.tap do |o|

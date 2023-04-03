@@ -16,6 +16,7 @@ module Aws::LicenseManager
     AcceptGrantRequest = Shapes::StructureShape.new(name: 'AcceptGrantRequest')
     AcceptGrantResponse = Shapes::StructureShape.new(name: 'AcceptGrantResponse')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    ActivationOverrideBehavior = Shapes::StringShape.new(name: 'ActivationOverrideBehavior')
     AllowedOperation = Shapes::StringShape.new(name: 'AllowedOperation')
     AllowedOperationList = Shapes::ListShape.new(name: 'AllowedOperationList')
     Arn = Shapes::StringShape.new(name: 'Arn')
@@ -185,6 +186,7 @@ module Aws::LicenseManager
     Metadata = Shapes::StructureShape.new(name: 'Metadata')
     MetadataList = Shapes::ListShape.new(name: 'MetadataList')
     NoEntitlementsAllowedException = Shapes::StructureShape.new(name: 'NoEntitlementsAllowedException')
+    Options = Shapes::StructureShape.new(name: 'Options')
     OrganizationConfiguration = Shapes::StructureShape.new(name: 'OrganizationConfiguration')
     PrincipalArnList = Shapes::ListShape.new(name: 'PrincipalArnList')
     ProductInformation = Shapes::StructureShape.new(name: 'ProductInformation')
@@ -343,6 +345,7 @@ module Aws::LicenseManager
     CreateGrantVersionRequest.add_member(:status, Shapes::ShapeRef.new(shape: GrantStatus, location_name: "Status"))
     CreateGrantVersionRequest.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReasonMessage, location_name: "StatusReason"))
     CreateGrantVersionRequest.add_member(:source_version, Shapes::ShapeRef.new(shape: String, location_name: "SourceVersion"))
+    CreateGrantVersionRequest.add_member(:options, Shapes::ShapeRef.new(shape: Options, location_name: "Options"))
     CreateGrantVersionRequest.struct_class = Types::CreateGrantVersionRequest
 
     CreateGrantVersionResponse.add_member(:grant_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "GrantArn"))
@@ -611,6 +614,7 @@ module Aws::LicenseManager
     Grant.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReasonMessage, location_name: "StatusReason"))
     Grant.add_member(:version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Version"))
     Grant.add_member(:granted_operations, Shapes::ShapeRef.new(shape: AllowedOperationList, required: true, location_name: "GrantedOperations"))
+    Grant.add_member(:options, Shapes::ShapeRef.new(shape: Options, location_name: "Options"))
     Grant.struct_class = Types::Grant
 
     GrantList.member = Shapes::ShapeRef.new(shape: Grant)
@@ -927,6 +931,9 @@ module Aws::LicenseManager
 
     NoEntitlementsAllowedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     NoEntitlementsAllowedException.struct_class = Types::NoEntitlementsAllowedException
+
+    Options.add_member(:activation_override_behavior, Shapes::ShapeRef.new(shape: ActivationOverrideBehavior, location_name: "ActivationOverrideBehavior"))
+    Options.struct_class = Types::Options
 
     OrganizationConfiguration.add_member(:enable_integration, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "EnableIntegration"))
     OrganizationConfiguration.struct_class = Types::OrganizationConfiguration

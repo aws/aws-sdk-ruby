@@ -383,8 +383,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -480,8 +478,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -490,8 +486,8 @@ module Aws::ServiceCatalog
     #   The portfolio identifier.
     #
     # @option params [required, String] :principal_arn
-    #   The ARN of the principal (IAM user, role, or group). This field allows
-    #   an ARN with no `accountID` if `PrincipalType` is `IAM_PATTERN`.
+    #   The ARN of the principal (user, role, or group). This field allows an
+    #   ARN with no `accountID` if `PrincipalType` is `IAM_PATTERN`.
     #
     #   You can associate multiple `IAM` patterns even if the account has no
     #   principal with that name. This is useful in Principal Name Sharing if
@@ -528,8 +524,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -578,8 +572,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -641,8 +633,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -670,7 +660,7 @@ module Aws::ServiceCatalog
     #   resp.failed_service_action_associations[0].service_action_id #=> String
     #   resp.failed_service_action_associations[0].product_id #=> String
     #   resp.failed_service_action_associations[0].provisioning_artifact_id #=> String
-    #   resp.failed_service_action_associations[0].error_code #=> String, one of "DUPLICATE_RESOURCE", "INTERNAL_FAILURE", "LIMIT_EXCEEDED", "RESOURCE_NOT_FOUND", "THROTTLING"
+    #   resp.failed_service_action_associations[0].error_code #=> String, one of "DUPLICATE_RESOURCE", "INTERNAL_FAILURE", "LIMIT_EXCEEDED", "RESOURCE_NOT_FOUND", "THROTTLING", "INVALID_PARAMETER"
     #   resp.failed_service_action_associations[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/BatchAssociateServiceActionWithProvisioningArtifact AWS API Documentation
@@ -691,8 +681,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -721,7 +709,7 @@ module Aws::ServiceCatalog
     #   resp.failed_service_action_associations[0].service_action_id #=> String
     #   resp.failed_service_action_associations[0].product_id #=> String
     #   resp.failed_service_action_associations[0].provisioning_artifact_id #=> String
-    #   resp.failed_service_action_associations[0].error_code #=> String, one of "DUPLICATE_RESOURCE", "INTERNAL_FAILURE", "LIMIT_EXCEEDED", "RESOURCE_NOT_FOUND", "THROTTLING"
+    #   resp.failed_service_action_associations[0].error_code #=> String, one of "DUPLICATE_RESOURCE", "INTERNAL_FAILURE", "LIMIT_EXCEEDED", "RESOURCE_NOT_FOUND", "THROTTLING", "INVALID_PARAMETER"
     #   resp.failed_service_action_associations[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/BatchDisassociateServiceActionFromProvisioningArtifact AWS API Documentation
@@ -746,8 +734,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -820,8 +806,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -977,8 +961,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -1082,8 +1064,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -1161,8 +1141,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -1234,7 +1212,7 @@ module Aws::ServiceCatalog
     #     support_description: "SupportDescription",
     #     support_email: "SupportEmail",
     #     support_url: "SupportUrl",
-    #     product_type: "CLOUD_FORMATION_TEMPLATE", # required, accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE
+    #     product_type: "CLOUD_FORMATION_TEMPLATE", # required, accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE, DEFAULT_CUSTOM, TERRAFORM_OPEN_SOURCE
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1247,7 +1225,7 @@ module Aws::ServiceCatalog
     #       info: {
     #         "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #       },
-    #       type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
+    #       type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR, DEFAULT_CUSTOM, TERRAFORM_OPEN_SOURCE
     #       disable_template_validation: false,
     #     },
     #     idempotency_token: "IdempotencyToken", # required
@@ -1271,7 +1249,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_detail.product_view_summary.name #=> String
     #   resp.product_view_detail.product_view_summary.owner #=> String
     #   resp.product_view_detail.product_view_summary.short_description #=> String
-    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE"
+    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
     #   resp.product_view_detail.product_view_summary.distributor #=> String
     #   resp.product_view_detail.product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_detail.product_view_summary.support_email #=> String
@@ -1293,7 +1271,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.id #=> String
     #   resp.provisioning_artifact_detail.name #=> String
     #   resp.provisioning_artifact_detail.description #=> String
-    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR"
+    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.provisioning_artifact_detail.active #=> Boolean
     #   resp.provisioning_artifact_detail.guidance #=> String, one of "DEFAULT", "DEPRECATED"
@@ -1327,8 +1305,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -1446,8 +1422,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -1483,7 +1457,7 @@ module Aws::ServiceCatalog
     #       info: {
     #         "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #       },
-    #       type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
+    #       type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR, DEFAULT_CUSTOM, TERRAFORM_OPEN_SOURCE
     #       disable_template_validation: false,
     #     },
     #     idempotency_token: "IdempotencyToken", # required
@@ -1494,7 +1468,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.id #=> String
     #   resp.provisioning_artifact_detail.name #=> String
     #   resp.provisioning_artifact_detail.description #=> String
-    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR"
+    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.provisioning_artifact_detail.active #=> Boolean
     #   resp.provisioning_artifact_detail.guidance #=> String, one of "DEFAULT", "DEPRECATED"
@@ -1557,8 +1531,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -1650,8 +1622,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -1686,8 +1656,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -1724,8 +1692,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -1779,8 +1745,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -1810,8 +1774,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -1854,8 +1816,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -1892,8 +1852,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -1947,8 +1905,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -1994,8 +1950,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -2038,8 +1992,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -2217,8 +2169,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -2251,7 +2201,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_summary.name #=> String
     #   resp.product_view_summary.owner #=> String
     #   resp.product_view_summary.short_description #=> String
-    #   resp.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE"
+    #   resp.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
     #   resp.product_view_summary.distributor #=> String
     #   resp.product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_summary.support_email #=> String
@@ -2283,8 +2233,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -2330,7 +2278,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_detail.product_view_summary.name #=> String
     #   resp.product_view_detail.product_view_summary.owner #=> String
     #   resp.product_view_detail.product_view_summary.short_description #=> String
-    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE"
+    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
     #   resp.product_view_detail.product_view_summary.distributor #=> String
     #   resp.product_view_detail.product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_detail.product_view_summary.support_email #=> String
@@ -2382,8 +2330,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -2410,7 +2356,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_summary.name #=> String
     #   resp.product_view_summary.owner #=> String
     #   resp.product_view_summary.short_description #=> String
-    #   resp.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE"
+    #   resp.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
     #   resp.product_view_summary.distributor #=> String
     #   resp.product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_summary.support_email #=> String
@@ -2436,8 +2382,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -2502,8 +2446,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -2588,8 +2530,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -2631,7 +2571,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.id #=> String
     #   resp.provisioning_artifact_detail.name #=> String
     #   resp.provisioning_artifact_detail.description #=> String
-    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR"
+    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.provisioning_artifact_detail.active #=> Boolean
     #   resp.provisioning_artifact_detail.guidance #=> String, one of "DEFAULT", "DEPRECATED"
@@ -2662,8 +2602,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -2780,8 +2718,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -2855,8 +2791,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -2902,8 +2836,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -3045,8 +2977,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -3055,8 +2985,8 @@ module Aws::ServiceCatalog
     #   The portfolio identifier.
     #
     # @option params [required, String] :principal_arn
-    #   The ARN of the principal (IAM user, role, or group). This field allows
-    #   an ARN with no `accountID` if `PrincipalType` is `IAM_PATTERN`.
+    #   The ARN of the principal (user, role, or group). This field allows an
+    #   ARN with no `accountID` if `PrincipalType` is `IAM_PATTERN`.
     #
     # @option params [String] :principal_type
     #   The supported value is `IAM` if you use a fully defined ARN, or
@@ -3088,8 +3018,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -3135,8 +3063,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -3228,8 +3154,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -3303,8 +3227,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -3391,8 +3313,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -3483,8 +3403,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -3565,8 +3483,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -3632,8 +3548,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -3683,8 +3597,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -3760,8 +3672,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -3823,8 +3733,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -3893,8 +3801,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -3951,8 +3857,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -4003,8 +3907,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -4062,8 +3964,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -4115,8 +4015,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -4179,8 +4077,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -4206,7 +4102,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_details[0].id #=> String
     #   resp.provisioning_artifact_details[0].name #=> String
     #   resp.provisioning_artifact_details[0].description #=> String
-    #   resp.provisioning_artifact_details[0].type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR"
+    #   resp.provisioning_artifact_details[0].type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
     #   resp.provisioning_artifact_details[0].created_time #=> Time
     #   resp.provisioning_artifact_details[0].active #=> Boolean
     #   resp.provisioning_artifact_details[0].guidance #=> String, one of "DEFAULT", "DEPRECATED"
@@ -4238,8 +4134,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -4268,7 +4162,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_views[0].product_view_summary.name #=> String
     #   resp.provisioning_artifact_views[0].product_view_summary.owner #=> String
     #   resp.provisioning_artifact_views[0].product_view_summary.short_description #=> String
-    #   resp.provisioning_artifact_views[0].product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE"
+    #   resp.provisioning_artifact_views[0].product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
     #   resp.provisioning_artifact_views[0].product_view_summary.distributor #=> String
     #   resp.provisioning_artifact_views[0].product_view_summary.has_default_path #=> Boolean
     #   resp.provisioning_artifact_views[0].product_view_summary.support_email #=> String
@@ -4294,8 +4188,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -4426,8 +4318,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -4492,8 +4382,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -4540,8 +4428,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -4639,6 +4525,166 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Notifies the result of the provisioning engine execution.
+    #
+    # @option params [required, String] :workflow_token
+    #   The encrypted contents of the provisioning engine execution payload
+    #   that Service Catalog sends after the Terraform product provisioning
+    #   workflow starts.
+    #
+    # @option params [required, String] :record_id
+    #   The identifier of the record.
+    #
+    # @option params [required, String] :status
+    #   The status of the provisioning engine execution.
+    #
+    # @option params [String] :failure_reason
+    #   The reason why the provisioning engine execution failed.
+    #
+    # @option params [Types::EngineWorkflowResourceIdentifier] :resource_identifier
+    #   The ID for the provisioned product resources that are part of a
+    #   resource group.
+    #
+    # @option params [Array<Types::RecordOutput>] :outputs
+    #   The output of the provisioning engine execution.
+    #
+    # @option params [required, String] :idempotency_token
+    #   The idempotency token that identifies the provisioning engine
+    #   execution.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.notify_provision_product_engine_workflow_result({
+    #     workflow_token: "EngineWorkflowToken", # required
+    #     record_id: "Id", # required
+    #     status: "SUCCEEDED", # required, accepts SUCCEEDED, FAILED
+    #     failure_reason: "EngineWorkflowFailureReason",
+    #     resource_identifier: {
+    #       unique_tag: {
+    #         key: "UniqueTagKey",
+    #         value: "UniqueTagValue",
+    #       },
+    #     },
+    #     outputs: [
+    #       {
+    #         output_key: "OutputKey",
+    #         output_value: "OutputValue",
+    #         description: "Description",
+    #       },
+    #     ],
+    #     idempotency_token: "IdempotencyToken", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/NotifyProvisionProductEngineWorkflowResult AWS API Documentation
+    #
+    # @overload notify_provision_product_engine_workflow_result(params = {})
+    # @param [Hash] params ({})
+    def notify_provision_product_engine_workflow_result(params = {}, options = {})
+      req = build_request(:notify_provision_product_engine_workflow_result, params)
+      req.send_request(options)
+    end
+
+    # Notifies the result of the terminate engine execution.
+    #
+    # @option params [required, String] :workflow_token
+    #   The encrypted contents of the terminate engine execution payload that
+    #   Service Catalog sends after the Terraform product terminate workflow
+    #   starts.
+    #
+    # @option params [required, String] :record_id
+    #   The identifier of the record.
+    #
+    # @option params [required, String] :status
+    #   The status of the terminate engine execution.
+    #
+    # @option params [String] :failure_reason
+    #   The reason why the terminate engine execution failed.
+    #
+    # @option params [required, String] :idempotency_token
+    #   The idempotency token that identifies the terminate engine execution.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.notify_terminate_provisioned_product_engine_workflow_result({
+    #     workflow_token: "EngineWorkflowToken", # required
+    #     record_id: "Id", # required
+    #     status: "SUCCEEDED", # required, accepts SUCCEEDED, FAILED
+    #     failure_reason: "EngineWorkflowFailureReason",
+    #     idempotency_token: "IdempotencyToken", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/NotifyTerminateProvisionedProductEngineWorkflowResult AWS API Documentation
+    #
+    # @overload notify_terminate_provisioned_product_engine_workflow_result(params = {})
+    # @param [Hash] params ({})
+    def notify_terminate_provisioned_product_engine_workflow_result(params = {}, options = {})
+      req = build_request(:notify_terminate_provisioned_product_engine_workflow_result, params)
+      req.send_request(options)
+    end
+
+    # Notifies the result of the update engine execution.
+    #
+    # @option params [required, String] :workflow_token
+    #   The encrypted contents of the update engine execution payload that
+    #   Service Catalog sends after the Terraform product update workflow
+    #   starts.
+    #
+    # @option params [required, String] :record_id
+    #   The identifier of the record.
+    #
+    # @option params [required, String] :status
+    #   The status of the update engine execution.
+    #
+    # @option params [String] :failure_reason
+    #   The reason why the update engine execution failed.
+    #
+    # @option params [Array<Types::RecordOutput>] :outputs
+    #   The output of the update engine execution.
+    #
+    # @option params [required, String] :idempotency_token
+    #   The idempotency token that identifies the update engine execution.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.notify_update_provisioned_product_engine_workflow_result({
+    #     workflow_token: "EngineWorkflowToken", # required
+    #     record_id: "Id", # required
+    #     status: "SUCCEEDED", # required, accepts SUCCEEDED, FAILED
+    #     failure_reason: "EngineWorkflowFailureReason",
+    #     outputs: [
+    #       {
+    #         output_key: "OutputKey",
+    #         output_value: "OutputValue",
+    #         description: "Description",
+    #       },
+    #     ],
+    #     idempotency_token: "IdempotencyToken", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/NotifyUpdateProvisionedProductEngineWorkflowResult AWS API Documentation
+    #
+    # @overload notify_update_provisioned_product_engine_workflow_result(params = {})
+    # @param [Hash] params ({})
+    def notify_update_provisioned_product_engine_workflow_result(params = {}, options = {})
+      req = build_request(:notify_update_provisioned_product_engine_workflow_result, params)
+      req.send_request(options)
+    end
+
     # Provisions the specified product.
     #
     # A provisioned product is a resourced instance of a product. For
@@ -4665,8 +4711,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -4797,8 +4841,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -4846,8 +4888,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -4913,8 +4953,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -4965,7 +5003,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_summaries[0].name #=> String
     #   resp.product_view_summaries[0].owner #=> String
     #   resp.product_view_summaries[0].short_description #=> String
-    #   resp.product_view_summaries[0].type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE"
+    #   resp.product_view_summaries[0].type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
     #   resp.product_view_summaries[0].distributor #=> String
     #   resp.product_view_summaries[0].has_default_path #=> Boolean
     #   resp.product_view_summaries[0].support_email #=> String
@@ -4991,8 +5029,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -5051,7 +5087,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_details[0].product_view_summary.name #=> String
     #   resp.product_view_details[0].product_view_summary.owner #=> String
     #   resp.product_view_details[0].product_view_summary.short_description #=> String
-    #   resp.product_view_details[0].product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE"
+    #   resp.product_view_details[0].product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
     #   resp.product_view_details[0].product_view_summary.distributor #=> String
     #   resp.product_view_details[0].product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_details[0].product_view_summary.support_email #=> String
@@ -5086,8 +5122,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -5214,8 +5248,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -5276,8 +5308,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -5406,8 +5436,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -5509,8 +5537,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -5574,8 +5600,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -5665,7 +5689,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_detail.product_view_summary.name #=> String
     #   resp.product_view_detail.product_view_summary.owner #=> String
     #   resp.product_view_detail.product_view_summary.short_description #=> String
-    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE"
+    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
     #   resp.product_view_detail.product_view_summary.distributor #=> String
     #   resp.product_view_detail.product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_detail.product_view_summary.support_email #=> String
@@ -5709,8 +5733,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -5843,8 +5865,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -5863,10 +5883,9 @@ module Aws::ServiceCatalog
     #   `ExecuteProvisionedProductServiceAction`. Only a role ARN is valid. A
     #   user ARN is invalid.
     #
-    #   The `OWNER` key accepts IAM user ARNs, IAM role ARNs, and STS
-    #   assumed-role ARNs. The owner is the user that has permission to see,
-    #   update, terminate, and execute service actions in the provisioned
-    #   product.
+    #   The `OWNER` key accepts user ARNs, IAM role ARNs, and STS assumed-role
+    #   ARNs. The owner is the user that has permission to see, update,
+    #   terminate, and execute service actions in the provisioned product.
     #
     #   The administrator can change the owner of a provisioned product to
     #   another IAM or STS entity within the same account. Both end user
@@ -5936,8 +5955,6 @@ module Aws::ServiceCatalog
     # @option params [String] :accept_language
     #   The language code.
     #
-    #   * `en` - English (default)
-    #
     #   * `jp` - Japanese
     #
     #   * `zh` - Chinese
@@ -5995,7 +6012,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.id #=> String
     #   resp.provisioning_artifact_detail.name #=> String
     #   resp.provisioning_artifact_detail.description #=> String
-    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR"
+    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.provisioning_artifact_detail.active #=> Boolean
     #   resp.provisioning_artifact_detail.guidance #=> String, one of "DEFAULT", "DEPRECATED"
@@ -6029,8 +6046,6 @@ module Aws::ServiceCatalog
     #
     # @option params [String] :accept_language
     #   The language code.
-    #
-    #   * `en` - English (default)
     #
     #   * `jp` - Japanese
     #
@@ -6123,7 +6138,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

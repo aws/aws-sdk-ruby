@@ -797,6 +797,7 @@ module Aws::LakeFormation
     RegisterResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn"))
     RegisterResourceRequest.add_member(:use_service_linked_role, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "UseServiceLinkedRole"))
     RegisterResourceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "RoleArn"))
+    RegisterResourceRequest.add_member(:with_federation, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "WithFederation"))
     RegisterResourceRequest.struct_class = Types::RegisterResourceRequest
 
     RegisterResourceResponse.struct_class = Types::RegisterResourceResponse
@@ -822,6 +823,7 @@ module Aws::LakeFormation
     ResourceInfo.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, location_name: "ResourceArn"))
     ResourceInfo.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "RoleArn"))
     ResourceInfo.add_member(:last_modified, Shapes::ShapeRef.new(shape: LastModifiedTimestamp, location_name: "LastModified"))
+    ResourceInfo.add_member(:with_federation, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "WithFederation"))
     ResourceInfo.struct_class = Types::ResourceInfo
 
     ResourceInfoList.member = Shapes::ShapeRef.new(shape: ResourceInfo)
@@ -973,6 +975,7 @@ module Aws::LakeFormation
 
     UpdateResourceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "RoleArn"))
     UpdateResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn"))
+    UpdateResourceRequest.add_member(:with_federation, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "WithFederation"))
     UpdateResourceRequest.struct_class = Types::UpdateResourceRequest
 
     UpdateResourceResponse.struct_class = Types::UpdateResourceResponse
