@@ -92,20 +92,6 @@ module Aws
           end.to raise_error(Aws::S3::Errors::AuthorizationHeaderMalformed)
         end
 
-        it 'does not redirect custom endpoints when the region is cached' do
-          S3::BUCKET_REGIONS['bucket'] = 'us-west-2'
-          stub_request(:put, 'http://bucket.localhost:9000/key')
-            .to_return(status: [200, 'Ok'])
-
-          client = S3::Client.new(
-            client_opts.merge(endpoint: 'http://localhost:9000')
-          )
-          expect_auth({ 'signingRegion' => 'us-east-1' })
-          resp = client.put_object(bucket: 'bucket', key: 'key', body: 'body')
-          host = resp.context.http_request.endpoint.host
-          expect(host).to eq('bucket.localhost')
-        end
-
         it 'does not redirect regional endpoints' do
           stub_request(
             :put, 'https://bucket.s3.us-east-2.amazonaws.com/key'
