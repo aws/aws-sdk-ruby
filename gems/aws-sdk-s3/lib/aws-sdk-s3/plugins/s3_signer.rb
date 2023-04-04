@@ -52,7 +52,10 @@ module Aws
 
           def check_for_cached_region(context, bucket)
             cached_region = S3::BUCKET_REGIONS[bucket]
-            if cached_region && cached_region != context.config.region
+
+            if cached_region &&
+               cached_region != context.config.region &&
+               context.config.regional_endpoint
               context.http_request.endpoint.host = S3Signer.new_hostname(
                 context, cached_region
               )
