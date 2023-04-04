@@ -166,6 +166,7 @@ module Aws
           def new_hostname(context, region)
             endpoint_params = context[:endpoint_params].dup
             endpoint_params.region = region
+            endpoint_params.endpoint = nil
             endpoint =
               context.config.endpoint_provider.resolve_endpoint(endpoint_params)
             URI(endpoint.url).host
