@@ -611,6 +611,7 @@ module Aws::SageMakerRuntime
     #
     #   * {Types::InvokeEndpointAsyncOutput#inference_id #inference_id} => String
     #   * {Types::InvokeEndpointAsyncOutput#output_location #output_location} => String
+    #   * {Types::InvokeEndpointAsyncOutput#failure_location #failure_location} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -629,6 +630,7 @@ module Aws::SageMakerRuntime
     #
     #   resp.inference_id #=> String
     #   resp.output_location #=> String
+    #   resp.failure_location #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointAsync AWS API Documentation
     #
@@ -652,7 +654,7 @@ module Aws::SageMakerRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakerruntime'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

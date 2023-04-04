@@ -123,11 +123,17 @@ module Aws::SageMakerRuntime
     #   The Amazon S3 URI where the inference response payload is stored.
     #   @return [String]
     #
+    # @!attribute [rw] failure_location
+    #   The Amazon S3 URI where the inference failure response payload is
+    #   stored.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointAsyncOutput AWS API Documentation
     #
     class InvokeEndpointAsyncOutput < Struct.new(
       :inference_id,
-      :output_location)
+      :output_location,
+      :failure_location)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -84,6 +84,8 @@ module Aws::SageMaker
     AsyncInferenceConfig = Shapes::StructureShape.new(name: 'AsyncInferenceConfig')
     AsyncInferenceNotificationConfig = Shapes::StructureShape.new(name: 'AsyncInferenceNotificationConfig')
     AsyncInferenceOutputConfig = Shapes::StructureShape.new(name: 'AsyncInferenceOutputConfig')
+    AsyncNotificationTopicTypeList = Shapes::ListShape.new(name: 'AsyncNotificationTopicTypeList')
+    AsyncNotificationTopicTypes = Shapes::StringShape.new(name: 'AsyncNotificationTopicTypes')
     AthenaCatalog = Shapes::StringShape.new(name: 'AthenaCatalog')
     AthenaDatabase = Shapes::StringShape.new(name: 'AthenaDatabase')
     AthenaDatasetDefinition = Shapes::StructureShape.new(name: 'AthenaDatasetDefinition')
@@ -2172,12 +2174,16 @@ module Aws::SageMaker
 
     AsyncInferenceNotificationConfig.add_member(:success_topic, Shapes::ShapeRef.new(shape: SnsTopicArn, location_name: "SuccessTopic"))
     AsyncInferenceNotificationConfig.add_member(:error_topic, Shapes::ShapeRef.new(shape: SnsTopicArn, location_name: "ErrorTopic"))
+    AsyncInferenceNotificationConfig.add_member(:include_inference_response_in, Shapes::ShapeRef.new(shape: AsyncNotificationTopicTypeList, location_name: "IncludeInferenceResponseIn"))
     AsyncInferenceNotificationConfig.struct_class = Types::AsyncInferenceNotificationConfig
 
     AsyncInferenceOutputConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
-    AsyncInferenceOutputConfig.add_member(:s3_output_path, Shapes::ShapeRef.new(shape: DestinationS3Uri, required: true, location_name: "S3OutputPath"))
+    AsyncInferenceOutputConfig.add_member(:s3_output_path, Shapes::ShapeRef.new(shape: DestinationS3Uri, location_name: "S3OutputPath"))
     AsyncInferenceOutputConfig.add_member(:notification_config, Shapes::ShapeRef.new(shape: AsyncInferenceNotificationConfig, location_name: "NotificationConfig"))
+    AsyncInferenceOutputConfig.add_member(:s3_failure_path, Shapes::ShapeRef.new(shape: DestinationS3Uri, location_name: "S3FailurePath"))
     AsyncInferenceOutputConfig.struct_class = Types::AsyncInferenceOutputConfig
+
+    AsyncNotificationTopicTypeList.member = Shapes::ShapeRef.new(shape: AsyncNotificationTopicTypes)
 
     AthenaDatasetDefinition.add_member(:catalog, Shapes::ShapeRef.new(shape: AthenaCatalog, required: true, location_name: "Catalog"))
     AthenaDatasetDefinition.add_member(:database, Shapes::ShapeRef.new(shape: AthenaDatabase, required: true, location_name: "Database"))

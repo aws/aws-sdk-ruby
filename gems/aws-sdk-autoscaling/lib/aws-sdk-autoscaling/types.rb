@@ -366,7 +366,7 @@ module Aws::AutoScaling
     #   @return [Array<String>]
     #
     # @!attribute [rw] health_check_type
-    #   A comma-separated list of one or more health check types.
+    #   A comma-separated value string of one or more health check types.
     #   @return [String]
     #
     # @!attribute [rw] health_check_grace_period
@@ -1014,12 +1014,15 @@ module Aws::AutoScaling
     #   @return [Array<String>]
     #
     # @!attribute [rw] health_check_type
-    #   A comma-separated list of one or more health check types.
+    #   A comma-separated value string of one or more health check types.
     #
     #   The valid values are `EC2`, `ELB`, and `VPC_LATTICE`. `EC2` is the
     #   default health check and cannot be disabled. For more information,
     #   see [Health checks for Auto Scaling instances][1] in the *Amazon EC2
     #   Auto Scaling User Guide*.
+    #
+    #   Only specify `EC2` if you must clear a value that was previously
+    #   set.
     #
     #
     #
@@ -2480,8 +2483,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] traffic_sources
-    #   The unique identifiers of one or more traffic sources you are
-    #   detaching. You can specify up to 10 traffic sources.
+    #   The unique identifiers of one or more traffic sources. You can
+    #   specify up to 10 traffic sources.
     #   @return [Array<Types::TrafficSourceIdentifier>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachTrafficSourcesType AWS API Documentation
@@ -7511,12 +7514,15 @@ module Aws::AutoScaling
     #   @return [Array<String>]
     #
     # @!attribute [rw] health_check_type
-    #   A comma-separated list of one or more health check types.
+    #   A comma-separated value string of one or more health check types.
     #
     #   The valid values are `EC2`, `ELB`, and `VPC_LATTICE`. `EC2` is the
     #   default health check and cannot be disabled. For more information,
     #   see [Health checks for Auto Scaling instances][1] in the *Amazon EC2
     #   Auto Scaling User Guide*.
+    #
+    #   Only specify `EC2` if you must clear a value that was previously
+    #   set.
     #
     #
     #

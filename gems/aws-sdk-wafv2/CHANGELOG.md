@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2023-04-04)
+------------------
+
+* Feature - This release rolls back association config feature for webACLs that protect CloudFront protections.
+
 1.51.0 (2023-04-03)
 ------------------
 

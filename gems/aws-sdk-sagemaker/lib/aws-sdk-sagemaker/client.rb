@@ -1174,14 +1174,15 @@ module Aws::SageMaker
     # Creates an Autopilot job.
     #
     # Find the best-performing model after you run an Autopilot job by
-    # calling ` DescribeAutoMLJob `.
+    # calling [DescribeAutoMLJob][1].
     #
     # For information about how to use Autopilot, see [Automate Model
-    # Development with Amazon SageMaker Autopilot][1].
+    # Development with Amazon SageMaker Autopilot][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html
     #
     # @option params [required, String] :auto_ml_job_name
     #   Identifies an Autopilot job. The name must be unique to your account
@@ -1190,10 +1191,15 @@ module Aws::SageMaker
     # @option params [required, Array<Types::AutoMLChannel>] :input_data_config
     #   An array of channel objects that describes the input data and its
     #   location. Each channel is a named input source. Similar to
-    #   `InputDataConfig` supported by ` HyperParameterTrainingJobDefinition
-    #   `. Format(s) supported: CSV, Parquet. A minimum of 500 rows is
-    #   required for the training dataset. There is not a minimum number of
-    #   rows required for the validation dataset.
+    #   `InputDataConfig` supported by
+    #   [HyperParameterTrainingJobDefinition][1]. Format(s) supported: CSV,
+    #   Parquet. A minimum of 500 rows is required for the training dataset.
+    #   There is not a minimum number of rows required for the validation
+    #   dataset.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html
     #
     # @option params [required, Types::AutoMLOutputDataConfig] :output_data_config
     #   Provides information about encryption and the Amazon S3 output path
@@ -1211,9 +1217,14 @@ module Aws::SageMaker
     #
     # @option params [Types::AutoMLJobObjective] :auto_ml_job_objective
     #   Defines the objective metric used to measure the predictive quality of
-    #   an AutoML job. You provide an ` AutoMLJobObjective$MetricName ` and
-    #   Autopilot infers whether to minimize or maximize it. For `
-    #   CreateAutoMLJobV2 `, only `Accuracy` is supported.
+    #   an AutoML job. You provide an [AutoMLJobObjective$MetricName][1] and
+    #   Autopilot infers whether to minimize or maximize it. For
+    #   [CreateAutoMLJobV2][2], only `Accuracy` is supported.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
     #
     # @option params [Types::AutoMLJobConfig] :auto_ml_job_config
     #   A collection of settings used to configure an AutoML job.
@@ -1329,15 +1340,20 @@ module Aws::SageMaker
     # as images or text for Computer Vision or Natural Language Processing
     # problems.
     #
-    # Find the resulting model after you run an AutoML job V2 by calling `
-    # DescribeAutoMLJobV2 `.
+    # Find the resulting model after you run an AutoML job V2 by calling
+    # [DescribeAutoMLJobV2][1].
     #
-    # To create an `AutoMLJob` using tabular data, see ` CreateAutoMLJob `.
+    # To create an `AutoMLJob` using tabular data, see [CreateAutoMLJob][2].
     #
     # <note markdown="1"> This API action is callable through SageMaker Canvas only. Calling it
     # directly from the CLI or an SDK results in an error.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html
     #
     # @option params [required, String] :auto_ml_job_name
     #   Identifies an Autopilot job. The name must be unique to your account
@@ -1345,14 +1361,18 @@ module Aws::SageMaker
     #
     # @option params [required, Array<Types::AutoMLJobChannel>] :auto_ml_job_input_data_config
     #   An array of channel objects describing the input data and their
-    #   location. Each channel is a named input source. Similar to `
-    #   InputDataConfig ` supported by `CreateAutoMLJob`. The supported
+    #   location. Each channel is a named input source. Similar to
+    #   [InputDataConfig][1] supported by `CreateAutoMLJob`. The supported
     #   formats depend on the problem type:
     #
     #   * ImageClassification: S3Prefix, `ManifestFile`,
     #     `AugmentedManifestFile`
     #
     #   * TextClassification: S3Prefix
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html#sagemaker-CreateAutoMLJob-request-InputDataConfig
     #
     # @option params [required, Types::AutoMLOutputDataConfig] :output_data_config
     #   Provides information about encryption and the Amazon S3 output path
@@ -1381,7 +1401,11 @@ module Aws::SageMaker
     #
     # @option params [Types::AutoMLJobObjective] :auto_ml_job_objective
     #   Specifies a metric to minimize or maximize as the objective of a job.
-    #   For ` CreateAutoMLJobV2 `, only `Accuracy` is supported.
+    #   For [CreateAutoMLJobV2][1], only `Accuracy` is supported.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
     #
     # @option params [Types::ModelDeployConfig] :model_deploy_config
     #   Specifies how to generate the endpoint name for an automatic one-click
@@ -2797,11 +2821,13 @@ module Aws::SageMaker
     #       },
     #       output_config: { # required
     #         kms_key_id: "KmsKeyId",
-    #         s3_output_path: "DestinationS3Uri", # required
+    #         s3_output_path: "DestinationS3Uri",
     #         notification_config: {
     #           success_topic: "SnsTopicArn",
     #           error_topic: "SnsTopicArn",
+    #           include_inference_response_in: ["SUCCESS_NOTIFICATION_TOPIC"], # accepts SUCCESS_NOTIFICATION_TOPIC, ERROR_NOTIFICATION_TOPIC
     #         },
+    #         s3_failure_path: "DestinationS3Uri",
     #       },
     #     },
     #     explainer_config: {
@@ -10690,6 +10716,9 @@ module Aws::SageMaker
     #   resp.async_inference_config.output_config.s3_output_path #=> String
     #   resp.async_inference_config.output_config.notification_config.success_topic #=> String
     #   resp.async_inference_config.output_config.notification_config.error_topic #=> String
+    #   resp.async_inference_config.output_config.notification_config.include_inference_response_in #=> Array
+    #   resp.async_inference_config.output_config.notification_config.include_inference_response_in[0] #=> String, one of "SUCCESS_NOTIFICATION_TOPIC", "ERROR_NOTIFICATION_TOPIC"
+    #   resp.async_inference_config.output_config.s3_failure_path #=> String
     #   resp.pending_deployment_summary.endpoint_config_name #=> String
     #   resp.pending_deployment_summary.production_variants #=> Array
     #   resp.pending_deployment_summary.production_variants[0].variant_name #=> String
@@ -10849,6 +10878,9 @@ module Aws::SageMaker
     #   resp.async_inference_config.output_config.s3_output_path #=> String
     #   resp.async_inference_config.output_config.notification_config.success_topic #=> String
     #   resp.async_inference_config.output_config.notification_config.error_topic #=> String
+    #   resp.async_inference_config.output_config.notification_config.include_inference_response_in #=> Array
+    #   resp.async_inference_config.output_config.notification_config.include_inference_response_in[0] #=> String, one of "SUCCESS_NOTIFICATION_TOPIC", "ERROR_NOTIFICATION_TOPIC"
+    #   resp.async_inference_config.output_config.s3_failure_path #=> String
     #   resp.explainer_config.clarify_explainer_config.enable_explanations #=> String
     #   resp.explainer_config.clarify_explainer_config.inference_config.features_attribute #=> String
     #   resp.explainer_config.clarify_explainer_config.inference_config.content_template #=> String
@@ -23222,7 +23254,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.171.0'
+      context[:gem_version] = '1.172.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

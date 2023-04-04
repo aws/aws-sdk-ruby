@@ -371,6 +371,15 @@ module Aws::ElasticInference
     # Describes the locations in which a given accelerator type or set of
     # types is present in a given region.
     #
+    # February 15, 2023: Starting April 15, 2023, AWS will not onboard new
+    # customers to Amazon Elastic Inference (EI), and will help current
+    # customers migrate their workloads to options that offer better price
+    # and performance. After April 15, 2023, new customers will not be able
+    # to launch instances with Amazon EI accelerators in Amazon SageMaker,
+    # Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI
+    # at least once during the past 30-day period are considered current
+    # customers and will be able to continue using the service.
+    #
     # @option params [required, String] :location_type
     #   The location type that you want to describe accelerator type offerings
     #   for. It can assume the following values: region: will return the
@@ -412,6 +421,15 @@ module Aws::ElasticInference
     # Describes the accelerator types available in a given region, as well
     # as their characteristics, such as memory and throughput.
     #
+    # February 15, 2023: Starting April 15, 2023, AWS will not onboard new
+    # customers to Amazon Elastic Inference (EI), and will help current
+    # customers migrate their workloads to options that offer better price
+    # and performance. After April 15, 2023, new customers will not be able
+    # to launch instances with Amazon EI accelerators in Amazon SageMaker,
+    # Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI
+    # at least once during the past 30-day period are considered current
+    # customers and will be able to continue using the service.
+    #
     # @return [Types::DescribeAcceleratorTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeAcceleratorTypesResponse#accelerator_types #accelerator_types} => Array&lt;Types::AcceleratorType&gt;
@@ -436,6 +454,15 @@ module Aws::ElasticInference
 
     # Describes information over a provided set of accelerators belonging to
     # an account.
+    #
+    # February 15, 2023: Starting April 15, 2023, AWS will not onboard new
+    # customers to Amazon Elastic Inference (EI), and will help current
+    # customers migrate their workloads to options that offer better price
+    # and performance. After April 15, 2023, new customers will not be able
+    # to launch instances with Amazon EI accelerators in Amazon SageMaker,
+    # Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI
+    # at least once during the past 30-day period are considered current
+    # customers and will be able to continue using the service.
     #
     # @option params [Array<String>] :accelerator_ids
     #   The IDs of the accelerators to describe.
@@ -500,6 +527,15 @@ module Aws::ElasticInference
 
     # Returns all tags of an Elastic Inference Accelerator.
     #
+    # February 15, 2023: Starting April 15, 2023, AWS will not onboard new
+    # customers to Amazon Elastic Inference (EI), and will help current
+    # customers migrate their workloads to options that offer better price
+    # and performance. After April 15, 2023, new customers will not be able
+    # to launch instances with Amazon EI accelerators in Amazon SageMaker,
+    # Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI
+    # at least once during the past 30-day period are considered current
+    # customers and will be able to continue using the service.
+    #
     # @option params [required, String] :resource_arn
     #   The ARN of the Elastic Inference Accelerator to list the tags for.
     #
@@ -529,6 +565,15 @@ module Aws::ElasticInference
 
     # Adds the specified tags to an Elastic Inference Accelerator.
     #
+    # February 15, 2023: Starting April 15, 2023, AWS will not onboard new
+    # customers to Amazon Elastic Inference (EI), and will help current
+    # customers migrate their workloads to options that offer better price
+    # and performance. After April 15, 2023, new customers will not be able
+    # to launch instances with Amazon EI accelerators in Amazon SageMaker,
+    # Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI
+    # at least once during the past 30-day period are considered current
+    # customers and will be able to continue using the service.
+    #
     # @option params [required, String] :resource_arn
     #   The ARN of the Elastic Inference Accelerator to tag.
     #
@@ -556,6 +601,15 @@ module Aws::ElasticInference
     end
 
     # Removes the specified tags from an Elastic Inference Accelerator.
+    #
+    # February 15, 2023: Starting April 15, 2023, AWS will not onboard new
+    # customers to Amazon Elastic Inference (EI), and will help current
+    # customers migrate their workloads to options that offer better price
+    # and performance. After April 15, 2023, new customers will not be able
+    # to launch instances with Amazon EI accelerators in Amazon SageMaker,
+    # Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI
+    # at least once during the past 30-day period are considered current
+    # customers and will be able to continue using the service.
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the Elastic Inference Accelerator to untag.
@@ -594,7 +648,7 @@ module Aws::ElasticInference
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticinference'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

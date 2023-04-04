@@ -16,41 +16,6 @@ module Aws::AmplifyUIBuilder
     # components. `ActionParameters` defines the action that is performed
     # when an event occurs on the component.
     #
-    # @!attribute [rw] anchor
-    #   The HTML anchor link to the location to open. Specify this value for
-    #   a navigation action.
-    #   @return [Types::ComponentProperty]
-    #
-    # @!attribute [rw] fields
-    #   A dictionary of key-value pairs mapping Amplify Studio properties to
-    #   fields in a data model. Use when the action performs an operation on
-    #   an Amplify DataStore model.
-    #   @return [Hash<String,Types::ComponentProperty>]
-    #
-    # @!attribute [rw] global
-    #   Specifies whether the user should be signed out globally. Specify
-    #   this value for an auth sign out action.
-    #   @return [Types::ComponentProperty]
-    #
-    # @!attribute [rw] id
-    #   The unique ID of the component that the `ActionParameters` apply to.
-    #   @return [Types::ComponentProperty]
-    #
-    # @!attribute [rw] model
-    #   The name of the data model. Use when the action performs an
-    #   operation on an Amplify DataStore model.
-    #   @return [String]
-    #
-    # @!attribute [rw] state
-    #   A key-value pair that specifies the state property name and its
-    #   initial value.
-    #   @return [Types::MutationActionSetStateParameter]
-    #
-    # @!attribute [rw] target
-    #   The element within the same component to modify when the action
-    #   occurs.
-    #   @return [Types::ComponentProperty]
-    #
     # @!attribute [rw] type
     #   The type of navigation action. Valid values are `url` and `anchor`.
     #   This value is required for a navigation action.
@@ -61,18 +26,53 @@ module Aws::AmplifyUIBuilder
     #   action.
     #   @return [Types::ComponentProperty]
     #
+    # @!attribute [rw] anchor
+    #   The HTML anchor link to the location to open. Specify this value for
+    #   a navigation action.
+    #   @return [Types::ComponentProperty]
+    #
+    # @!attribute [rw] target
+    #   The element within the same component to modify when the action
+    #   occurs.
+    #   @return [Types::ComponentProperty]
+    #
+    # @!attribute [rw] global
+    #   Specifies whether the user should be signed out globally. Specify
+    #   this value for an auth sign out action.
+    #   @return [Types::ComponentProperty]
+    #
+    # @!attribute [rw] model
+    #   The name of the data model. Use when the action performs an
+    #   operation on an Amplify DataStore model.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the component that the `ActionParameters` apply to.
+    #   @return [Types::ComponentProperty]
+    #
+    # @!attribute [rw] fields
+    #   A dictionary of key-value pairs mapping Amplify Studio properties to
+    #   fields in a data model. Use when the action performs an operation on
+    #   an Amplify DataStore model.
+    #   @return [Hash<String,Types::ComponentProperty>]
+    #
+    # @!attribute [rw] state
+    #   A key-value pair that specifies the state property name and its
+    #   initial value.
+    #   @return [Types::MutationActionSetStateParameter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ActionParameters AWS API Documentation
     #
     class ActionParameters < Struct.new(
-      :anchor,
-      :fields,
-      :global,
-      :id,
-      :model,
-      :state,
-      :target,
       :type,
-      :url)
+      :url,
+      :anchor,
+      :target,
+      :global,
+      :model,
+      :id,
+      :fields,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -87,67 +87,9 @@ module Aws::AmplifyUIBuilder
     #   The unique ID of the Amplify app associated with the component.
     #   @return [String]
     #
-    # @!attribute [rw] binding_properties
-    #   The information to connect a component's properties to data at
-    #   runtime. You can't specify `tags` as a valid property for
-    #   `bindingProperties`.
-    #   @return [Hash<String,Types::ComponentBindingPropertiesValue>]
-    #
-    # @!attribute [rw] children
-    #   A list of the component's `ComponentChild` instances.
-    #   @return [Array<Types::ComponentChild>]
-    #
-    # @!attribute [rw] collection_properties
-    #   The data binding configuration for the component's properties. Use
-    #   this for a collection component. You can't specify `tags` as a
-    #   valid property for `collectionProperties`.
-    #   @return [Hash<String,Types::ComponentDataConfiguration>]
-    #
-    # @!attribute [rw] component_type
-    #   The type of the component. This can be an Amplify custom UI
-    #   component or another custom component.
-    #   @return [String]
-    #
-    # @!attribute [rw] created_at
-    #   The time that the component was created.
-    #   @return [Time]
-    #
     # @!attribute [rw] environment_name
     #   The name of the backend environment that is a part of the Amplify
     #   app.
-    #   @return [String]
-    #
-    # @!attribute [rw] events
-    #   Describes the events that can be raised on the component. Use for
-    #   the workflow feature in Amplify Studio that allows you to bind
-    #   events and actions to components.
-    #   @return [Hash<String,Types::ComponentEvent>]
-    #
-    # @!attribute [rw] id
-    #   The unique ID of the component.
-    #   @return [String]
-    #
-    # @!attribute [rw] modified_at
-    #   The time that the component was modified.
-    #   @return [Time]
-    #
-    # @!attribute [rw] name
-    #   The name of the component.
-    #   @return [String]
-    #
-    # @!attribute [rw] overrides
-    #   Describes the component's properties that can be overriden in a
-    #   customized instance of the component. You can't specify `tags` as a
-    #   valid property for `overrides`.
-    #   @return [Hash<String,Hash<String,String>>]
-    #
-    # @!attribute [rw] properties
-    #   Describes the component's properties. You can't specify `tags` as
-    #   a valid property for `properties`.
-    #   @return [Hash<String,Types::ComponentProperty>]
-    #
-    # @!attribute [rw] schema_version
-    #   The schema version of the component when it was imported.
     #   @return [String]
     #
     # @!attribute [rw] source_id
@@ -155,35 +97,93 @@ module Aws::AmplifyUIBuilder
     #   as Figma.
     #   @return [String]
     #
-    # @!attribute [rw] tags
-    #   One or more key-value pairs to use when tagging the component.
-    #   @return [Hash<String,String>]
+    # @!attribute [rw] id
+    #   The unique ID of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] component_type
+    #   The type of the component. This can be an Amplify custom UI
+    #   component or another custom component.
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   Describes the component's properties. You can't specify `tags` as
+    #   a valid property for `properties`.
+    #   @return [Hash<String,Types::ComponentProperty>]
+    #
+    # @!attribute [rw] children
+    #   A list of the component's `ComponentChild` instances.
+    #   @return [Array<Types::ComponentChild>]
     #
     # @!attribute [rw] variants
     #   A list of the component's variants. A variant is a unique style
     #   configuration of a main component.
     #   @return [Array<Types::ComponentVariant>]
     #
+    # @!attribute [rw] overrides
+    #   Describes the component's properties that can be overriden in a
+    #   customized instance of the component. You can't specify `tags` as a
+    #   valid property for `overrides`.
+    #   @return [Hash<String,Hash<String,String>>]
+    #
+    # @!attribute [rw] binding_properties
+    #   The information to connect a component's properties to data at
+    #   runtime. You can't specify `tags` as a valid property for
+    #   `bindingProperties`.
+    #   @return [Hash<String,Types::ComponentBindingPropertiesValue>]
+    #
+    # @!attribute [rw] collection_properties
+    #   The data binding configuration for the component's properties. Use
+    #   this for a collection component. You can't specify `tags` as a
+    #   valid property for `collectionProperties`.
+    #   @return [Hash<String,Types::ComponentDataConfiguration>]
+    #
+    # @!attribute [rw] created_at
+    #   The time that the component was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   The time that the component was modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   One or more key-value pairs to use when tagging the component.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] events
+    #   Describes the events that can be raised on the component. Use for
+    #   the workflow feature in Amplify Studio that allows you to bind
+    #   events and actions to components.
+    #   @return [Hash<String,Types::ComponentEvent>]
+    #
+    # @!attribute [rw] schema_version
+    #   The schema version of the component when it was imported.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/Component AWS API Documentation
     #
     class Component < Struct.new(
       :app_id,
-      :binding_properties,
-      :children,
-      :collection_properties,
-      :component_type,
-      :created_at,
       :environment_name,
-      :events,
-      :id,
-      :modified_at,
-      :name,
-      :overrides,
-      :properties,
-      :schema_version,
       :source_id,
+      :id,
+      :name,
+      :component_type,
+      :properties,
+      :children,
+      :variants,
+      :overrides,
+      :binding_properties,
+      :collection_properties,
+      :created_at,
+      :modified_at,
       :tags,
-      :variants)
+      :events,
+      :schema_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -193,6 +193,10 @@ module Aws::AmplifyUIBuilder
     # properties to a component to allow different values to be entered when
     # a component is reused in different places in an app.
     #
+    # @!attribute [rw] type
+    #   The property type.
+    #   @return [String]
+    #
     # @!attribute [rw] binding_properties
     #   Describes the properties to customize with data at runtime.
     #   @return [Types::ComponentBindingPropertiesValueProperties]
@@ -201,16 +205,12 @@ module Aws::AmplifyUIBuilder
     #   The default value of the property.
     #   @return [String]
     #
-    # @!attribute [rw] type
-    #   The property type.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ComponentBindingPropertiesValue AWS API Documentation
     #
     class ComponentBindingPropertiesValue < Struct.new(
+      :type,
       :binding_properties,
-      :default_value,
-      :type)
+      :default_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -221,68 +221,58 @@ module Aws::AmplifyUIBuilder
     # Amazon S3 bucket, an Amplify DataStore model or an authenticated user
     # attribute.
     #
-    # @!attribute [rw] bucket
-    #   An Amazon S3 bucket.
-    #   @return [String]
-    #
-    # @!attribute [rw] default_value
-    #   The default value to assign to the property.
+    # @!attribute [rw] model
+    #   An Amplify DataStore model.
     #   @return [String]
     #
     # @!attribute [rw] field
     #   The field to bind the data to.
     #   @return [String]
     #
-    # @!attribute [rw] key
-    #   The storage key for an Amazon S3 bucket.
-    #   @return [String]
-    #
-    # @!attribute [rw] model
-    #   An Amplify DataStore model.
-    #   @return [String]
-    #
     # @!attribute [rw] predicates
     #   A list of predicates for binding a component's properties to data.
     #   @return [Array<Types::Predicate>]
-    #
-    # @!attribute [rw] slot_name
-    #   The name of a component slot.
-    #   @return [String]
     #
     # @!attribute [rw] user_attribute
     #   An authenticated user attribute.
     #   @return [String]
     #
+    # @!attribute [rw] bucket
+    #   An Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The storage key for an Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_value
+    #   The default value to assign to the property.
+    #   @return [String]
+    #
+    # @!attribute [rw] slot_name
+    #   The name of a component slot.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ComponentBindingPropertiesValueProperties AWS API Documentation
     #
     class ComponentBindingPropertiesValueProperties < Struct.new(
-      :bucket,
-      :default_value,
-      :field,
-      :key,
       :model,
+      :field,
       :predicates,
-      :slot_name,
-      :user_attribute)
+      :user_attribute,
+      :bucket,
+      :key,
+      :default_value,
+      :slot_name)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # A nested UI configuration within a parent `Component`.
     #
-    # @!attribute [rw] children
-    #   The list of `ComponentChild` instances for this component.
-    #   @return [Array<Types::ComponentChild>]
-    #
     # @!attribute [rw] component_type
     #   The type of the child component.
     #   @return [String]
-    #
-    # @!attribute [rw] events
-    #   Describes the events that can be raised on the child component. Use
-    #   for the workflow feature in Amplify Studio that allows you to bind
-    #   events and actions to components.
-    #   @return [Hash<String,Types::ComponentEvent>]
     #
     # @!attribute [rw] name
     #   The name of the child component.
@@ -293,6 +283,16 @@ module Aws::AmplifyUIBuilder
     #   `tags` as a valid property for `properties`.
     #   @return [Hash<String,Types::ComponentProperty>]
     #
+    # @!attribute [rw] children
+    #   The list of `ComponentChild` instances for this component.
+    #   @return [Array<Types::ComponentChild>]
+    #
+    # @!attribute [rw] events
+    #   Describes the events that can be raised on the child component. Use
+    #   for the workflow feature in Amplify Studio that allows you to bind
+    #   events and actions to components.
+    #   @return [Hash<String,Types::ComponentEvent>]
+    #
     # @!attribute [rw] source_id
     #   The unique ID of the child component in its original source system,
     #   such as Figma.
@@ -301,11 +301,11 @@ module Aws::AmplifyUIBuilder
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ComponentChild AWS API Documentation
     #
     class ComponentChild < Struct.new(
-      :children,
       :component_type,
-      :events,
       :name,
       :properties,
+      :children,
+      :events,
       :source_id)
       SENSITIVE = []
       include Aws::Structure
@@ -315,20 +315,12 @@ module Aws::AmplifyUIBuilder
     # `ComponentConditionProperty` to set a property to different values
     # conditionally, based on the value of another property.
     #
-    # @!attribute [rw] else
-    #   The value to assign to the property if the condition is not met.
-    #   @return [Types::ComponentProperty]
+    # @!attribute [rw] property
+    #   The name of the conditional property.
+    #   @return [String]
     #
     # @!attribute [rw] field
     #   The name of a field. Specify this when the property is a data model.
-    #   @return [String]
-    #
-    # @!attribute [rw] operand
-    #   The value of the property to evaluate.
-    #   @return [String]
-    #
-    # @!attribute [rw] operand_type
-    #   The type of the property to evaluate.
     #   @return [String]
     #
     # @!attribute [rw] operator
@@ -336,24 +328,32 @@ module Aws::AmplifyUIBuilder
     #   represent equals.
     #   @return [String]
     #
-    # @!attribute [rw] property
-    #   The name of the conditional property.
+    # @!attribute [rw] operand
+    #   The value of the property to evaluate.
     #   @return [String]
     #
     # @!attribute [rw] then
     #   The value to assign to the property if the condition is met.
     #   @return [Types::ComponentProperty]
     #
+    # @!attribute [rw] else
+    #   The value to assign to the property if the condition is not met.
+    #   @return [Types::ComponentProperty]
+    #
+    # @!attribute [rw] operand_type
+    #   The type of the property to evaluate.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ComponentConditionProperty AWS API Documentation
     #
     class ComponentConditionProperty < Struct.new(
-      :else,
-      :field,
-      :operand,
-      :operand_type,
-      :operator,
       :property,
-      :then)
+      :field,
+      :operator,
+      :operand,
+      :then,
+      :else,
+      :operand_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -361,15 +361,13 @@ module Aws::AmplifyUIBuilder
     # Describes the configuration for binding a component's properties to
     # data.
     #
-    # @!attribute [rw] identifiers
-    #   A list of IDs to use to bind data to a component. Use this property
-    #   to bind specifically chosen data, rather than data retrieved from a
-    #   query.
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] model
     #   The name of the data model to use to bind data to a component.
     #   @return [String]
+    #
+    # @!attribute [rw] sort
+    #   Describes how to sort the component's properties.
+    #   @return [Array<Types::SortProperty>]
     #
     # @!attribute [rw] predicate
     #   Represents the conditional logic to use when binding data to a
@@ -377,17 +375,19 @@ module Aws::AmplifyUIBuilder
     #   in a collection.
     #   @return [Types::Predicate]
     #
-    # @!attribute [rw] sort
-    #   Describes how to sort the component's properties.
-    #   @return [Array<Types::SortProperty>]
+    # @!attribute [rw] identifiers
+    #   A list of IDs to use to bind data to a component. Use this property
+    #   to bind specifically chosen data, rather than data retrieved from a
+    #   query.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ComponentDataConfiguration AWS API Documentation
     #
     class ComponentDataConfiguration < Struct.new(
-      :identifiers,
       :model,
+      :sort,
       :predicate,
-      :sort)
+      :identifiers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -400,21 +400,21 @@ module Aws::AmplifyUIBuilder
     #   The action to perform when a specific event is raised.
     #   @return [String]
     #
+    # @!attribute [rw] parameters
+    #   Describes information about the action.
+    #   @return [Types::ActionParameters]
+    #
     # @!attribute [rw] binding_event
     #   Binds an event to an action on a component. When you specify a
     #   `bindingEvent`, the event is called when the action is performed.
     #   @return [String]
     #
-    # @!attribute [rw] parameters
-    #   Describes information about the action.
-    #   @return [Types::ActionParameters]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ComponentEvent AWS API Documentation
     #
     class ComponentEvent < Struct.new(
       :action,
-      :binding_event,
-      :parameters)
+      :parameters,
+      :binding_event)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -423,21 +423,39 @@ module Aws::AmplifyUIBuilder
     # `ComponentProperty` to specify the values to render or bind by
     # default.
     #
+    # @!attribute [rw] value
+    #   The value to assign to the component property.
+    #   @return [String]
+    #
     # @!attribute [rw] binding_properties
     #   The information to bind the component property to data at runtime.
     #   @return [Types::ComponentPropertyBindingProperties]
-    #
-    # @!attribute [rw] bindings
-    #   The information to bind the component property to form data.
-    #   @return [Hash<String,Types::FormBindingElement>]
     #
     # @!attribute [rw] collection_binding_properties
     #   The information to bind the component property to data at runtime.
     #   Use this for collection components.
     #   @return [Types::ComponentPropertyBindingProperties]
     #
-    # @!attribute [rw] component_name
-    #   The name of the component that is affected by an event.
+    # @!attribute [rw] default_value
+    #   The default value to assign to the component property.
+    #   @return [String]
+    #
+    # @!attribute [rw] model
+    #   The data model to use to assign a value to the component property.
+    #   @return [String]
+    #
+    # @!attribute [rw] bindings
+    #   The information to bind the component property to form data.
+    #   @return [Hash<String,Types::FormBindingElement>]
+    #
+    # @!attribute [rw] event
+    #   An event that occurs in your app. Use this for workflow data
+    #   binding.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_attribute
+    #   An authenticated user attribute to use to assign a value to the
+    #   component property.
     #   @return [String]
     #
     # @!attribute [rw] concat
@@ -455,13 +473,8 @@ module Aws::AmplifyUIBuilder
     #   after importing it.
     #   @return [Boolean]
     #
-    # @!attribute [rw] default_value
-    #   The default value to assign to the component property.
-    #   @return [String]
-    #
-    # @!attribute [rw] event
-    #   An event that occurs in your app. Use this for workflow data
-    #   binding.
+    # @!attribute [rw] type
+    #   The component type.
     #   @return [String]
     #
     # @!attribute [rw] imported_value
@@ -469,45 +482,32 @@ module Aws::AmplifyUIBuilder
     #   imported into an app.
     #   @return [String]
     #
-    # @!attribute [rw] model
-    #   The data model to use to assign a value to the component property.
+    # @!attribute [rw] component_name
+    #   The name of the component that is affected by an event.
     #   @return [String]
     #
     # @!attribute [rw] property
     #   The name of the component's property that is affected by an event.
     #   @return [String]
     #
-    # @!attribute [rw] type
-    #   The component type.
-    #   @return [String]
-    #
-    # @!attribute [rw] user_attribute
-    #   An authenticated user attribute to use to assign a value to the
-    #   component property.
-    #   @return [String]
-    #
-    # @!attribute [rw] value
-    #   The value to assign to the component property.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ComponentProperty AWS API Documentation
     #
     class ComponentProperty < Struct.new(
+      :value,
       :binding_properties,
-      :bindings,
       :collection_binding_properties,
-      :component_name,
+      :default_value,
+      :model,
+      :bindings,
+      :event,
+      :user_attribute,
       :concat,
       :condition,
       :configured,
-      :default_value,
-      :event,
-      :imported_value,
-      :model,
-      :property,
       :type,
-      :user_attribute,
-      :value)
+      :imported_value,
+      :component_name,
+      :property)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -516,19 +516,19 @@ module Aws::AmplifyUIBuilder
     # exposed properties on the top level component to propagate data to the
     # component's property values.
     #
-    # @!attribute [rw] field
-    #   The data field to bind the property to.
-    #   @return [String]
-    #
     # @!attribute [rw] property
     #   The component property to bind to the data field.
+    #   @return [String]
+    #
+    # @!attribute [rw] field
+    #   The data field to bind the property to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ComponentPropertyBindingProperties AWS API Documentation
     #
     class ComponentPropertyBindingProperties < Struct.new(
-      :field,
-      :property)
+      :property,
+      :field)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -538,10 +538,6 @@ module Aws::AmplifyUIBuilder
     #
     # @!attribute [rw] app_id
     #   The unique ID of the Amplify app associated with the component.
-    #   @return [String]
-    #
-    # @!attribute [rw] component_type
-    #   The component type.
     #   @return [String]
     #
     # @!attribute [rw] environment_name
@@ -557,14 +553,18 @@ module Aws::AmplifyUIBuilder
     #   The name of the component.
     #   @return [String]
     #
+    # @!attribute [rw] component_type
+    #   The component type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ComponentSummary AWS API Documentation
     #
     class ComponentSummary < Struct.new(
       :app_id,
-      :component_type,
       :environment_name,
       :id,
-      :name)
+      :name,
+      :component_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -572,22 +572,22 @@ module Aws::AmplifyUIBuilder
     # Describes the style configuration of a unique variation of a main
     # component.
     #
+    # @!attribute [rw] variant_values
+    #   The combination of variants that comprise this variant. You can't
+    #   specify `tags` as a valid property for `variantValues`.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] overrides
     #   The properties of the component variant that can be overriden when
     #   customizing an instance of the component. You can't specify `tags`
     #   as a valid property for `overrides`.
     #   @return [Hash<String,Hash<String,String>>]
     #
-    # @!attribute [rw] variant_values
-    #   The combination of variants that comprise this variant. You can't
-    #   specify `tags` as a valid property for `variantValues`.
-    #   @return [Hash<String,String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ComponentVariant AWS API Documentation
     #
     class ComponentVariant < Struct.new(
-      :overrides,
-      :variant_values)
+      :variant_values,
+      :overrides)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -595,45 +595,8 @@ module Aws::AmplifyUIBuilder
     # Represents all of the information that is required to create a
     # component.
     #
-    # @!attribute [rw] binding_properties
-    #   The data binding information for the component's properties.
-    #   @return [Hash<String,Types::ComponentBindingPropertiesValue>]
-    #
-    # @!attribute [rw] children
-    #   A list of child components that are instances of the main component.
-    #   @return [Array<Types::ComponentChild>]
-    #
-    # @!attribute [rw] collection_properties
-    #   The data binding configuration for customizing a component's
-    #   properties. Use this for a collection component.
-    #   @return [Hash<String,Types::ComponentDataConfiguration>]
-    #
-    # @!attribute [rw] component_type
-    #   The component type. This can be an Amplify custom UI component or
-    #   another custom component.
-    #   @return [String]
-    #
-    # @!attribute [rw] events
-    #   The event configuration for the component. Use for the workflow
-    #   feature in Amplify Studio that allows you to bind events and actions
-    #   to components.
-    #   @return [Hash<String,Types::ComponentEvent>]
-    #
     # @!attribute [rw] name
     #   The name of the component
-    #   @return [String]
-    #
-    # @!attribute [rw] overrides
-    #   Describes the component properties that can be overriden to
-    #   customize an instance of the component.
-    #   @return [Hash<String,Hash<String,String>>]
-    #
-    # @!attribute [rw] properties
-    #   Describes the component's properties.
-    #   @return [Hash<String,Types::ComponentProperty>]
-    #
-    # @!attribute [rw] schema_version
-    #   The schema version of the component when it was imported.
     #   @return [String]
     #
     # @!attribute [rw] source_id
@@ -641,35 +604,77 @@ module Aws::AmplifyUIBuilder
     #   as Figma.
     #   @return [String]
     #
-    # @!attribute [rw] tags
-    #   One or more key-value pairs to use when tagging the component data.
-    #   @return [Hash<String,String>]
+    # @!attribute [rw] component_type
+    #   The component type. This can be an Amplify custom UI component or
+    #   another custom component.
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   Describes the component's properties.
+    #   @return [Hash<String,Types::ComponentProperty>]
+    #
+    # @!attribute [rw] children
+    #   A list of child components that are instances of the main component.
+    #   @return [Array<Types::ComponentChild>]
     #
     # @!attribute [rw] variants
     #   A list of the unique variants of this component.
     #   @return [Array<Types::ComponentVariant>]
     #
+    # @!attribute [rw] overrides
+    #   Describes the component properties that can be overriden to
+    #   customize an instance of the component.
+    #   @return [Hash<String,Hash<String,String>>]
+    #
+    # @!attribute [rw] binding_properties
+    #   The data binding information for the component's properties.
+    #   @return [Hash<String,Types::ComponentBindingPropertiesValue>]
+    #
+    # @!attribute [rw] collection_properties
+    #   The data binding configuration for customizing a component's
+    #   properties. Use this for a collection component.
+    #   @return [Hash<String,Types::ComponentDataConfiguration>]
+    #
+    # @!attribute [rw] tags
+    #   One or more key-value pairs to use when tagging the component data.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] events
+    #   The event configuration for the component. Use for the workflow
+    #   feature in Amplify Studio that allows you to bind events and actions
+    #   to components.
+    #   @return [Hash<String,Types::ComponentEvent>]
+    #
+    # @!attribute [rw] schema_version
+    #   The schema version of the component when it was imported.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CreateComponentData AWS API Documentation
     #
     class CreateComponentData < Struct.new(
-      :binding_properties,
-      :children,
-      :collection_properties,
-      :component_type,
-      :events,
       :name,
-      :overrides,
-      :properties,
-      :schema_version,
       :source_id,
+      :component_type,
+      :properties,
+      :children,
+      :variants,
+      :overrides,
+      :binding_properties,
+      :collection_properties,
       :tags,
-      :variants)
+      :events,
+      :schema_version)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] app_id
     #   The unique ID of the Amplify app to associate with the component.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_name
+    #   The name of the backend environment that is a part of the Amplify
+    #   app.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -683,18 +688,13 @@ module Aws::AmplifyUIBuilder
     #   Represents the configuration of the component to create.
     #   @return [Types::CreateComponentData]
     #
-    # @!attribute [rw] environment_name
-    #   The name of the backend environment that is a part of the Amplify
-    #   app.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CreateComponentRequest AWS API Documentation
     #
     class CreateComponentRequest < Struct.new(
       :app_id,
+      :environment_name,
       :client_token,
-      :component_to_create,
-      :environment_name)
+      :component_to_create)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -713,56 +713,61 @@ module Aws::AmplifyUIBuilder
 
     # Represents all of the information that is required to create a form.
     #
-    # @!attribute [rw] cta
-    #   The `FormCTA` object that stores the call to action configuration
-    #   for the form.
-    #   @return [Types::FormCTA]
+    # @!attribute [rw] name
+    #   The name of the form.
+    #   @return [String]
     #
     # @!attribute [rw] data_type
     #   The type of data source to use to create the form.
     #   @return [Types::FormDataTypeConfig]
     #
-    # @!attribute [rw] fields
-    #   The configuration information for the form's fields.
-    #   @return [Hash<String,Types::FieldConfig>]
-    #
     # @!attribute [rw] form_action_type
     #   Specifies whether to perform a create or update action on the form.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   The name of the form.
-    #   @return [String]
+    # @!attribute [rw] fields
+    #   The configuration information for the form's fields.
+    #   @return [Hash<String,Types::FieldConfig>]
     #
-    # @!attribute [rw] schema_version
-    #   The schema version of the form.
-    #   @return [String]
+    # @!attribute [rw] style
+    #   The configuration for the form's style.
+    #   @return [Types::FormStyle]
     #
     # @!attribute [rw] sectional_elements
     #   The configuration information for the visual helper elements for the
     #   form. These elements are not associated with any data.
     #   @return [Hash<String,Types::SectionalElement>]
     #
-    # @!attribute [rw] style
-    #   The configuration for the form's style.
-    #   @return [Types::FormStyle]
+    # @!attribute [rw] schema_version
+    #   The schema version of the form.
+    #   @return [String]
+    #
+    # @!attribute [rw] cta
+    #   The `FormCTA` object that stores the call to action configuration
+    #   for the form.
+    #   @return [Types::FormCTA]
     #
     # @!attribute [rw] tags
     #   One or more key-value pairs to use when tagging the form data.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] label_decorator
+    #   Specifies an icon or decoration to display on the form.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CreateFormData AWS API Documentation
     #
     class CreateFormData < Struct.new(
-      :cta,
-      :data_type,
-      :fields,
-      :form_action_type,
       :name,
-      :schema_version,
-      :sectional_elements,
+      :data_type,
+      :form_action_type,
+      :fields,
       :style,
-      :tags)
+      :sectional_elements,
+      :schema_version,
+      :cta,
+      :tags,
+      :label_decorator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -771,16 +776,16 @@ module Aws::AmplifyUIBuilder
     #   The unique ID of the Amplify app to associate with the form.
     #   @return [String]
     #
+    # @!attribute [rw] environment_name
+    #   The name of the backend environment that is a part of the Amplify
+    #   app.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   The unique client token.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
-    #   @return [String]
-    #
-    # @!attribute [rw] environment_name
-    #   The name of the backend environment that is a part of the Amplify
-    #   app.
     #   @return [String]
     #
     # @!attribute [rw] form_to_create
@@ -791,8 +796,8 @@ module Aws::AmplifyUIBuilder
     #
     class CreateFormRequest < Struct.new(
       :app_id,
-      :client_token,
       :environment_name,
+      :client_token,
       :form_to_create)
       SENSITIVE = []
       include Aws::Structure
@@ -816,6 +821,10 @@ module Aws::AmplifyUIBuilder
     #   The name of the theme.
     #   @return [String]
     #
+    # @!attribute [rw] values
+    #   A list of key-value pairs that deﬁnes the properties of the theme.
+    #   @return [Array<Types::ThemeValues>]
+    #
     # @!attribute [rw] overrides
     #   Describes the properties that can be overriden to customize an
     #   instance of the theme.
@@ -825,17 +834,13 @@ module Aws::AmplifyUIBuilder
     #   One or more key-value pairs to use when tagging the theme data.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] values
-    #   A list of key-value pairs that deﬁnes the properties of the theme.
-    #   @return [Array<Types::ThemeValues>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CreateThemeData AWS API Documentation
     #
     class CreateThemeData < Struct.new(
       :name,
+      :values,
       :overrides,
-      :tags,
-      :values)
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -844,16 +849,16 @@ module Aws::AmplifyUIBuilder
     #   The unique ID of the Amplify app associated with the theme.
     #   @return [String]
     #
+    # @!attribute [rw] environment_name
+    #   The name of the backend environment that is a part of the Amplify
+    #   app.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   The unique client token.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
-    #   @return [String]
-    #
-    # @!attribute [rw] environment_name
-    #   The name of the backend environment that is a part of the Amplify
-    #   app.
     #   @return [String]
     #
     # @!attribute [rw] theme_to_create
@@ -864,8 +869,8 @@ module Aws::AmplifyUIBuilder
     #
     class CreateThemeRequest < Struct.new(
       :app_id,
-      :client_token,
       :environment_name,
+      :client_token,
       :theme_to_create)
       SENSITIVE = []
       include Aws::Structure
@@ -983,12 +988,17 @@ module Aws::AmplifyUIBuilder
     #   The location of the application that will receive the access code.
     #   @return [String]
     #
+    # @!attribute [rw] client_id
+    #   The ID of the client to request the token from.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ExchangeCodeForTokenRequestBody AWS API Documentation
     #
     class ExchangeCodeForTokenRequestBody < Struct.new(
       :code,
-      :redirect_uri)
-      SENSITIVE = [:code]
+      :redirect_uri,
+      :client_id)
+      SENSITIVE = [:code, :client_id]
       include Aws::Structure
     end
 
@@ -1136,6 +1146,14 @@ module Aws::AmplifyUIBuilder
 
     # Describes the configuration information for a field in a table.
     #
+    # @!attribute [rw] label
+    #   The label for the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] position
+    #   Specifies the field position.
+    #   @return [Types::FieldPosition]
+    #
     # @!attribute [rw] excluded
     #   Specifies whether to hide a field.
     #   @return [Boolean]
@@ -1145,14 +1163,6 @@ module Aws::AmplifyUIBuilder
     #   for a field.
     #   @return [Types::FieldInputConfig]
     #
-    # @!attribute [rw] label
-    #   The label for the field.
-    #   @return [String]
-    #
-    # @!attribute [rw] position
-    #   Specifies the field position.
-    #   @return [Types::FieldPosition]
-    #
     # @!attribute [rw] validations
     #   The validations to perform on the value in the field.
     #   @return [Array<Types::FieldValidationConfiguration>]
@@ -1160,10 +1170,10 @@ module Aws::AmplifyUIBuilder
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/FieldConfig AWS API Documentation
     #
     class FieldConfig < Struct.new(
-      :excluded,
-      :input_type,
       :label,
       :position,
+      :excluded,
+      :input_type,
       :validations)
       SENSITIVE = []
       include Aws::Structure
@@ -1172,12 +1182,20 @@ module Aws::AmplifyUIBuilder
     # Describes the configuration for the default input values to display
     # for a field.
     #
-    # @!attribute [rw] default_checked
-    #   Specifies whether a field has a default value.
+    # @!attribute [rw] type
+    #   The input type for the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] required
+    #   Specifies a field that requires input.
     #   @return [Boolean]
     #
-    # @!attribute [rw] default_country_code
-    #   The default country code for a phone number.
+    # @!attribute [rw] read_only
+    #   Specifies a read only field.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] placeholder
+    #   The text to display as a placeholder for the field.
     #   @return [String]
     #
     # @!attribute [rw] default_value
@@ -1188,45 +1206,12 @@ module Aws::AmplifyUIBuilder
     #   The text to display to describe the field.
     #   @return [String]
     #
-    # @!attribute [rw] is_array
-    #   Specifies whether to render the field as an array. This property is
-    #   ignored if the `dataSourceType` for the form is a Data Store.
+    # @!attribute [rw] default_checked
+    #   Specifies whether a field has a default value.
     #   @return [Boolean]
     #
-    # @!attribute [rw] max_value
-    #   The maximum value to display for the field.
-    #   @return [Float]
-    #
-    # @!attribute [rw] min_value
-    #   The minimum value to display for the field.
-    #   @return [Float]
-    #
-    # @!attribute [rw] name
-    #   The name of the field.
-    #   @return [String]
-    #
-    # @!attribute [rw] placeholder
-    #   The text to display as a placeholder for the field.
-    #   @return [String]
-    #
-    # @!attribute [rw] read_only
-    #   Specifies a read only field.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] required
-    #   Specifies a field that requires input.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] step
-    #   The stepping increment for a numeric value in a field.
-    #   @return [Float]
-    #
-    # @!attribute [rw] type
-    #   The input type for the field.
-    #   @return [String]
-    #
-    # @!attribute [rw] value
-    #   The value for the field.
+    # @!attribute [rw] default_country_code
+    #   The default country code for a phone number.
     #   @return [String]
     #
     # @!attribute [rw] value_mappings
@@ -1234,24 +1219,54 @@ module Aws::AmplifyUIBuilder
     #   runtime.
     #   @return [Types::ValueMappings]
     #
+    # @!attribute [rw] name
+    #   The name of the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] min_value
+    #   The minimum value to display for the field.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_value
+    #   The maximum value to display for the field.
+    #   @return [Float]
+    #
+    # @!attribute [rw] step
+    #   The stepping increment for a numeric value in a field.
+    #   @return [Float]
+    #
+    # @!attribute [rw] value
+    #   The value for the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_array
+    #   Specifies whether to render the field as an array. This property is
+    #   ignored if the `dataSourceType` for the form is a Data Store.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] file_uploader_config
+    #   The configuration for the file uploader field.
+    #   @return [Types::FileUploaderFieldConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/FieldInputConfig AWS API Documentation
     #
     class FieldInputConfig < Struct.new(
-      :default_checked,
-      :default_country_code,
+      :type,
+      :required,
+      :read_only,
+      :placeholder,
       :default_value,
       :descriptive_text,
-      :is_array,
-      :max_value,
-      :min_value,
+      :default_checked,
+      :default_country_code,
+      :value_mappings,
       :name,
-      :placeholder,
-      :read_only,
-      :required,
+      :min_value,
+      :max_value,
       :step,
-      :type,
       :value,
-      :value_mappings)
+      :is_array,
+      :file_uploader_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1261,10 +1276,6 @@ module Aws::AmplifyUIBuilder
     # @note FieldPosition is a union - when making an API calls you must set exactly one of the members.
     #
     # @note FieldPosition is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FieldPosition corresponding to the set member.
-    #
-    # @!attribute [rw] below
-    #   The field position is below the field specified by the string.
-    #   @return [String]
     #
     # @!attribute [rw] fixed
     #   The field position is fixed and doesn't change in relation to other
@@ -1276,36 +1287,40 @@ module Aws::AmplifyUIBuilder
     #   string.
     #   @return [String]
     #
+    # @!attribute [rw] below
+    #   The field position is below the field specified by the string.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/FieldPosition AWS API Documentation
     #
     class FieldPosition < Struct.new(
-      :below,
       :fixed,
       :right_of,
+      :below,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
-      class Below < FieldPosition; end
       class Fixed < FieldPosition; end
       class RightOf < FieldPosition; end
+      class Below < FieldPosition; end
       class Unknown < FieldPosition; end
     end
 
     # Describes the validation configuration for a field.
     #
-    # @!attribute [rw] num_values
-    #   The validation to perform on a number value.
-    #   @return [Array<Integer>]
+    # @!attribute [rw] type
+    #   The validation to perform on an object type.``
+    #   @return [String]
     #
     # @!attribute [rw] str_values
     #   The validation to perform on a string value.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] type
-    #   The validation to perform on an object type.``
-    #   @return [String]
+    # @!attribute [rw] num_values
+    #   The validation to perform on a number value.
+    #   @return [Array<Integer>]
     #
     # @!attribute [rw] validation_message
     #   The validation message to display.
@@ -1314,10 +1329,69 @@ module Aws::AmplifyUIBuilder
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/FieldValidationConfiguration AWS API Documentation
     #
     class FieldValidationConfiguration < Struct.new(
-      :num_values,
-      :str_values,
       :type,
+      :str_values,
+      :num_values,
       :validation_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration for the file uploader field.
+    #
+    # @!attribute [rw] access_level
+    #   The access level to assign to the uploaded files in the Amazon S3
+    #   bucket where they are stored. The valid values for this property are
+    #   `private`, `protected`, or `public`. For detailed information about
+    #   the permissions associated with each access level, see [File access
+    #   levels][1] in the *Amplify documentation*.
+    #
+    #
+    #
+    #   [1]: https://docs.amplify.aws/lib/storage/configureaccess/q/platform/js/
+    #   @return [String]
+    #
+    # @!attribute [rw] accepted_file_types
+    #   The file types that are allowed to be uploaded by the file uploader.
+    #   Provide this information in an array of strings specifying the valid
+    #   file extensions.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] show_thumbnails
+    #   Specifies whether to display or hide the image preview after
+    #   selecting a file for upload. The default value is `true` to display
+    #   the image preview.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_resumable
+    #   Allows the file upload operation to be paused and resumed. The
+    #   default value is `false`.
+    #
+    #   When `isResumable` is set to `true`, the file uploader uses a
+    #   multipart upload to break the files into chunks before upload. The
+    #   progress of the upload isn't continuous, because the file uploader
+    #   uploads a chunk at a time.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_file_count
+    #   Specifies the maximum number of files that can be selected to
+    #   upload. The default value is an unlimited number of files.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_size
+    #   The maximum file size in bytes that the file uploader will accept.
+    #   The default value is an unlimited file size.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/FileUploaderFieldConfig AWS API Documentation
+    #
+    class FileUploaderFieldConfig < Struct.new(
+      :access_level,
+      :accepted_file_types,
+      :show_thumbnails,
+      :is_resumable,
+      :max_file_count,
+      :max_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1331,25 +1405,9 @@ module Aws::AmplifyUIBuilder
     #   The unique ID of the Amplify app associated with the form.
     #   @return [String]
     #
-    # @!attribute [rw] cta
-    #   Stores the call to action configuration for the form.
-    #   @return [Types::FormCTA]
-    #
-    # @!attribute [rw] data_type
-    #   The type of data source to use to create the form.
-    #   @return [Types::FormDataTypeConfig]
-    #
     # @!attribute [rw] environment_name
     #   The name of the backend environment that is a part of the Amplify
     #   app.
-    #   @return [String]
-    #
-    # @!attribute [rw] fields
-    #   Stores the information about the form's fields.
-    #   @return [Hash<String,Types::FieldConfig>]
-    #
-    # @!attribute [rw] form_action_type
-    #   The operation to perform on the specified form.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -1360,38 +1418,59 @@ module Aws::AmplifyUIBuilder
     #   The name of the form.
     #   @return [String]
     #
-    # @!attribute [rw] schema_version
-    #   The schema version of the form when it was imported.
+    # @!attribute [rw] form_action_type
+    #   The operation to perform on the specified form.
     #   @return [String]
+    #
+    # @!attribute [rw] style
+    #   Stores the configuration for the form's style.
+    #   @return [Types::FormStyle]
+    #
+    # @!attribute [rw] data_type
+    #   The type of data source to use to create the form.
+    #   @return [Types::FormDataTypeConfig]
+    #
+    # @!attribute [rw] fields
+    #   Stores the information about the form's fields.
+    #   @return [Hash<String,Types::FieldConfig>]
     #
     # @!attribute [rw] sectional_elements
     #   Stores the visual helper elements for the form that are not
     #   associated with any data.
     #   @return [Hash<String,Types::SectionalElement>]
     #
-    # @!attribute [rw] style
-    #   Stores the configuration for the form's style.
-    #   @return [Types::FormStyle]
+    # @!attribute [rw] schema_version
+    #   The schema version of the form when it was imported.
+    #   @return [String]
     #
     # @!attribute [rw] tags
     #   One or more key-value pairs to use when tagging the form.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] cta
+    #   Stores the call to action configuration for the form.
+    #   @return [Types::FormCTA]
+    #
+    # @!attribute [rw] label_decorator
+    #   Specifies an icon or decoration to display on the form.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/Form AWS API Documentation
     #
     class Form < Struct.new(
       :app_id,
-      :cta,
-      :data_type,
       :environment_name,
-      :fields,
-      :form_action_type,
       :id,
       :name,
-      :schema_version,
-      :sectional_elements,
+      :form_action_type,
       :style,
-      :tags)
+      :data_type,
+      :fields,
+      :sectional_elements,
+      :schema_version,
+      :tags,
+      :cta,
+      :label_decorator)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1418,13 +1497,13 @@ module Aws::AmplifyUIBuilder
     # Describes the configuration for a button UI element that is a part of
     # a form.
     #
-    # @!attribute [rw] children
-    #   Describes the button's properties.
-    #   @return [String]
-    #
     # @!attribute [rw] excluded
     #   Specifies whether the button is visible on the form.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] children
+    #   Describes the button's properties.
+    #   @return [String]
     #
     # @!attribute [rw] position
     #   The position of the button.
@@ -1433,8 +1512,8 @@ module Aws::AmplifyUIBuilder
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/FormButton AWS API Documentation
     #
     class FormButton < Struct.new(
-      :children,
       :excluded,
+      :children,
       :position)
       SENSITIVE = []
       include Aws::Structure
@@ -1442,17 +1521,17 @@ module Aws::AmplifyUIBuilder
 
     # Describes the call to action button configuration for the form.
     #
-    # @!attribute [rw] cancel
-    #   Displays a cancel button.
-    #   @return [Types::FormButton]
+    # @!attribute [rw] position
+    #   The position of the button.
+    #   @return [String]
     #
     # @!attribute [rw] clear
     #   Displays a clear button.
     #   @return [Types::FormButton]
     #
-    # @!attribute [rw] position
-    #   The position of the button.
-    #   @return [String]
+    # @!attribute [rw] cancel
+    #   Displays a cancel button.
+    #   @return [Types::FormButton]
     #
     # @!attribute [rw] submit
     #   Displays a submit button.
@@ -1461,9 +1540,9 @@ module Aws::AmplifyUIBuilder
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/FormCTA AWS API Documentation
     #
     class FormCTA < Struct.new(
-      :cancel,
-      :clear,
       :position,
+      :clear,
+      :cancel,
       :submit)
       SENSITIVE = []
       include Aws::Structure
@@ -1491,6 +1570,45 @@ module Aws::AmplifyUIBuilder
       include Aws::Structure
     end
 
+    # Represents the data binding configuration for a form's input fields
+    # at runtime.You can use `FormInputBindingPropertiesValue` to add
+    # exposed properties to a form to allow different values to be entered
+    # when a form is reused in different places in an app.
+    #
+    # @!attribute [rw] type
+    #   The property type.
+    #   @return [String]
+    #
+    # @!attribute [rw] binding_properties
+    #   Describes the properties to customize with data at runtime.
+    #   @return [Types::FormInputBindingPropertiesValueProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/FormInputBindingPropertiesValue AWS API Documentation
+    #
+    class FormInputBindingPropertiesValue < Struct.new(
+      :type,
+      :binding_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the data binding configuration for a specific property
+    # using data stored in Amazon Web Services. For Amazon Web Services
+    # connected properties, you can bind a property to data stored in an
+    # Amplify DataStore model.
+    #
+    # @!attribute [rw] model
+    #   An Amplify DataStore model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/FormInputBindingPropertiesValueProperties AWS API Documentation
+    #
+    class FormInputBindingPropertiesValueProperties < Struct.new(
+      :model)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the configuration for an input field on a form. Use
     # `FormInputValueProperty` to specify the values to render or bind by
     # default.
@@ -1499,10 +1617,42 @@ module Aws::AmplifyUIBuilder
     #   The value to assign to the input field.
     #   @return [String]
     #
+    # @!attribute [rw] binding_properties
+    #   The information to bind fields to data at runtime.
+    #   @return [Types::FormInputValuePropertyBindingProperties]
+    #
+    # @!attribute [rw] concat
+    #   A list of form properties to concatenate to create the value to
+    #   assign to this field property.
+    #   @return [Array<Types::FormInputValueProperty>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/FormInputValueProperty AWS API Documentation
     #
     class FormInputValueProperty < Struct.new(
-      :value)
+      :value,
+      :binding_properties,
+      :concat)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Associates a form property to a binding property. This enables exposed
+    # properties on the top level form to propagate data to the form's
+    # property values.
+    #
+    # @!attribute [rw] property
+    #   The form property to bind to the data field.
+    #   @return [String]
+    #
+    # @!attribute [rw] field
+    #   The data field to bind the property to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/FormInputValuePropertyBindingProperties AWS API Documentation
+    #
+    class FormInputValuePropertyBindingProperties < Struct.new(
+      :property,
+      :field)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1513,20 +1663,20 @@ module Aws::AmplifyUIBuilder
     #   The spacing for the horizontal gap.
     #   @return [Types::FormStyleConfig]
     #
-    # @!attribute [rw] outer_padding
-    #   The size of the outer padding for the form.
-    #   @return [Types::FormStyleConfig]
-    #
     # @!attribute [rw] vertical_gap
     #   The spacing for the vertical gap.
+    #   @return [Types::FormStyleConfig]
+    #
+    # @!attribute [rw] outer_padding
+    #   The size of the outer padding for the form.
     #   @return [Types::FormStyleConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/FormStyle AWS API Documentation
     #
     class FormStyle < Struct.new(
       :horizontal_gap,
-      :outer_padding,
-      :vertical_gap)
+      :vertical_gap,
+      :outer_padding)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1766,21 +1916,21 @@ module Aws::AmplifyUIBuilder
     #   app.
     #   @return [String]
     #
-    # @!attribute [rw] max_results
-    #   The maximum number of components to retrieve.
-    #   @return [Integer]
-    #
     # @!attribute [rw] next_token
     #   The token to request the next page of results.
     #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of components to retrieve.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ListComponentsRequest AWS API Documentation
     #
     class ListComponentsRequest < Struct.new(
       :app_id,
       :environment_name,
-      :max_results,
-      :next_token)
+      :next_token,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1811,21 +1961,21 @@ module Aws::AmplifyUIBuilder
     #   app.
     #   @return [String]
     #
-    # @!attribute [rw] max_results
-    #   The maximum number of forms to retrieve.
-    #   @return [Integer]
-    #
     # @!attribute [rw] next_token
     #   The token to request the next page of results.
     #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of forms to retrieve.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ListFormsRequest AWS API Documentation
     #
     class ListFormsRequest < Struct.new(
       :app_id,
       :environment_name,
-      :max_results,
-      :next_token)
+      :next_token,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1856,21 +2006,21 @@ module Aws::AmplifyUIBuilder
     #   app.
     #   @return [String]
     #
-    # @!attribute [rw] max_results
-    #   The maximum number of theme results to return in the response.
-    #   @return [Integer]
-    #
     # @!attribute [rw] next_token
     #   The token to request the next page of results.
     #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of theme results to return in the response.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ListThemesRequest AWS API Documentation
     #
     class ListThemesRequest < Struct.new(
       :app_id,
       :environment_name,
-      :max_results,
-      :next_token)
+      :next_token,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1921,6 +2071,10 @@ module Aws::AmplifyUIBuilder
     # Stores information for generating Amplify DataStore queries. Use a
     # `Predicate` to retrieve a subset of the data in a collection.
     #
+    # @!attribute [rw] or
+    #   A list of predicates to combine logically.
+    #   @return [Array<Types::Predicate>]
+    #
     # @!attribute [rw] and
     #   A list of predicates to combine logically.
     #   @return [Array<Types::Predicate>]
@@ -1929,31 +2083,32 @@ module Aws::AmplifyUIBuilder
     #   The field to query.
     #   @return [String]
     #
-    # @!attribute [rw] operand
-    #   The value to use when performing the evaluation.
-    #   @return [String]
-    #
     # @!attribute [rw] operator
     #   The operator to use to perform the evaluation.
     #   @return [String]
     #
-    # @!attribute [rw] or
-    #   A list of predicates to combine logically.
-    #   @return [Array<Types::Predicate>]
+    # @!attribute [rw] operand
+    #   The value to use when performing the evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] operand_type
+    #   The type of value to use when performing the evaluation.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/Predicate AWS API Documentation
     #
     class Predicate < Struct.new(
+      :or,
       :and,
       :field,
-      :operand,
       :operator,
-      :or)
+      :operand,
+      :operand_type)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Stores the metadata information about a feature on a form or view.
+    # Stores the metadata information about a feature on a form.
     #
     # @!attribute [rw] new_value
     #   The new information to store.
@@ -1971,10 +2126,6 @@ module Aws::AmplifyUIBuilder
     #   The unique ID for the Amplify app.
     #   @return [String]
     #
-    # @!attribute [rw] body
-    #   The metadata information to store.
-    #   @return [Types::PutMetadataFlagBody]
-    #
     # @!attribute [rw] environment_name
     #   The name of the backend environment that is part of the Amplify app.
     #   @return [String]
@@ -1983,13 +2134,17 @@ module Aws::AmplifyUIBuilder
     #   The name of the feature associated with the metadata.
     #   @return [String]
     #
+    # @!attribute [rw] body
+    #   The metadata information to store.
+    #   @return [Types::PutMetadataFlagBody]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/PutMetadataFlagRequest AWS API Documentation
     #
     class PutMetadataFlagRequest < Struct.new(
       :app_id,
-      :body,
       :environment_name,
-      :feature_name)
+      :feature_name,
+      :body)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2019,11 +2174,16 @@ module Aws::AmplifyUIBuilder
     #   might have expired.
     #   @return [String]
     #
+    # @!attribute [rw] client_id
+    #   The ID of the client to request the token from.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/RefreshTokenRequestBody AWS API Documentation
     #
     class RefreshTokenRequestBody < Struct.new(
-      :token)
-      SENSITIVE = [:token]
+      :token,
+      :client_id)
+      SENSITIVE = [:token, :client_id]
       include Aws::Structure
     end
 
@@ -2075,14 +2235,9 @@ module Aws::AmplifyUIBuilder
     # form. A sectional element can be a header, a text block, or a divider.
     # These elements are static and not associated with any data.
     #
-    # @!attribute [rw] level
-    #   Specifies the size of the font for a `Heading` sectional element.
-    #   Valid values are `1 | 2 | 3 | 4 | 5 | 6`.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] orientation
-    #   Specifies the orientation for a `Divider` sectional element. Valid
-    #   values are `horizontal` or `vertical`.
+    # @!attribute [rw] type
+    #   The type of sectional element. Valid values are `Heading`, `Text`,
+    #   and `Divider`.
     #   @return [String]
     #
     # @!attribute [rw] position
@@ -2094,19 +2249,30 @@ module Aws::AmplifyUIBuilder
     #   The text for a `Text` sectional element.
     #   @return [String]
     #
-    # @!attribute [rw] type
-    #   The type of sectional element. Valid values are `Heading`, `Text`,
-    #   and `Divider`.
+    # @!attribute [rw] level
+    #   Specifies the size of the font for a `Heading` sectional element.
+    #   Valid values are `1 | 2 | 3 | 4 | 5 | 6`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] orientation
+    #   Specifies the orientation for a `Divider` sectional element. Valid
+    #   values are `horizontal` or `vertical`.
     #   @return [String]
+    #
+    # @!attribute [rw] excluded
+    #   Excludes a sectional element that was generated by default for a
+    #   specified data model.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/SectionalElement AWS API Documentation
     #
     class SectionalElement < Struct.new(
-      :level,
-      :orientation,
+      :type,
       :position,
       :text,
-      :type)
+      :level,
+      :orientation,
+      :excluded)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2128,19 +2294,19 @@ module Aws::AmplifyUIBuilder
 
     # Describes how to sort the data that you bind to a component.
     #
-    # @!attribute [rw] direction
-    #   The direction of the sort, either ascending or descending.
-    #   @return [String]
-    #
     # @!attribute [rw] field
     #   The field to perform the sort on.
+    #   @return [String]
+    #
+    # @!attribute [rw] direction
+    #   The direction of the sort, either ascending or descending.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/SortProperty AWS API Documentation
     #
     class SortProperty < Struct.new(
-      :direction,
-      :field)
+      :field,
+      :direction)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2152,10 +2318,6 @@ module Aws::AmplifyUIBuilder
     #   The unique ID for the Amplify app associated with the theme.
     #   @return [String]
     #
-    # @!attribute [rw] created_at
-    #   The time that the theme was created.
-    #   @return [Time]
-    #
     # @!attribute [rw] environment_name
     #   The name of the backend environment that is a part of the Amplify
     #   app.
@@ -2165,13 +2327,21 @@ module Aws::AmplifyUIBuilder
     #   The ID for the theme.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   The name of the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time that the theme was created.
+    #   @return [Time]
+    #
     # @!attribute [rw] modified_at
     #   The time that the theme was modified.
     #   @return [Time]
     #
-    # @!attribute [rw] name
-    #   The name of the theme.
-    #   @return [String]
+    # @!attribute [rw] values
+    #   A list of key-value pairs that defines the properties of the theme.
+    #   @return [Array<Types::ThemeValues>]
     #
     # @!attribute [rw] overrides
     #   Describes the properties that can be overriden to customize a theme.
@@ -2181,22 +2351,18 @@ module Aws::AmplifyUIBuilder
     #   One or more key-value pairs to use when tagging the theme.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] values
-    #   A list of key-value pairs that defines the properties of the theme.
-    #   @return [Array<Types::ThemeValues>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/Theme AWS API Documentation
     #
     class Theme < Struct.new(
       :app_id,
-      :created_at,
       :environment_name,
       :id,
-      :modified_at,
       :name,
+      :created_at,
+      :modified_at,
+      :values,
       :overrides,
-      :tags,
-      :values)
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2232,19 +2398,19 @@ module Aws::AmplifyUIBuilder
 
     # Describes the configuration of a theme's properties.
     #
-    # @!attribute [rw] children
-    #   A list of key-value pairs that define the theme's properties.
-    #   @return [Array<Types::ThemeValues>]
-    #
     # @!attribute [rw] value
     #   The value of a theme property.
     #   @return [String]
     #
+    # @!attribute [rw] children
+    #   A list of key-value pairs that define the theme's properties.
+    #   @return [Array<Types::ThemeValues>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ThemeValue AWS API Documentation
     #
     class ThemeValue < Struct.new(
-      :children,
-      :value)
+      :value,
+      :children)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2284,30 +2450,6 @@ module Aws::AmplifyUIBuilder
     # Updates and saves all of the information about a component, based on
     # component ID.
     #
-    # @!attribute [rw] binding_properties
-    #   The data binding information for the component's properties.
-    #   @return [Hash<String,Types::ComponentBindingPropertiesValue>]
-    #
-    # @!attribute [rw] children
-    #   The components that are instances of the main component.
-    #   @return [Array<Types::ComponentChild>]
-    #
-    # @!attribute [rw] collection_properties
-    #   The configuration for binding a component's properties to a data
-    #   model. Use this for a collection component.
-    #   @return [Hash<String,Types::ComponentDataConfiguration>]
-    #
-    # @!attribute [rw] component_type
-    #   The type of the component. This can be an Amplify custom UI
-    #   component or another custom component.
-    #   @return [String]
-    #
-    # @!attribute [rw] events
-    #   The event configuration for the component. Use for the workflow
-    #   feature in Amplify Studio that allows you to bind events and actions
-    #   to components.
-    #   @return [Hash<String,Types::ComponentEvent>]
-    #
     # @!attribute [rw] id
     #   The unique ID of the component to update.
     #   @return [String]
@@ -2316,56 +2458,73 @@ module Aws::AmplifyUIBuilder
     #   The name of the component to update.
     #   @return [String]
     #
-    # @!attribute [rw] overrides
-    #   Describes the properties that can be overriden to customize the
-    #   component.
-    #   @return [Hash<String,Hash<String,String>>]
-    #
-    # @!attribute [rw] properties
-    #   Describes the component's properties.
-    #   @return [Hash<String,Types::ComponentProperty>]
-    #
-    # @!attribute [rw] schema_version
-    #   The schema version of the component when it was imported.
-    #   @return [String]
-    #
     # @!attribute [rw] source_id
     #   The unique ID of the component in its original source system, such
     #   as Figma.
     #   @return [String]
     #
+    # @!attribute [rw] component_type
+    #   The type of the component. This can be an Amplify custom UI
+    #   component or another custom component.
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   Describes the component's properties.
+    #   @return [Hash<String,Types::ComponentProperty>]
+    #
+    # @!attribute [rw] children
+    #   The components that are instances of the main component.
+    #   @return [Array<Types::ComponentChild>]
+    #
     # @!attribute [rw] variants
     #   A list of the unique variants of the main component being updated.
     #   @return [Array<Types::ComponentVariant>]
     #
+    # @!attribute [rw] overrides
+    #   Describes the properties that can be overriden to customize the
+    #   component.
+    #   @return [Hash<String,Hash<String,String>>]
+    #
+    # @!attribute [rw] binding_properties
+    #   The data binding information for the component's properties.
+    #   @return [Hash<String,Types::ComponentBindingPropertiesValue>]
+    #
+    # @!attribute [rw] collection_properties
+    #   The configuration for binding a component's properties to a data
+    #   model. Use this for a collection component.
+    #   @return [Hash<String,Types::ComponentDataConfiguration>]
+    #
+    # @!attribute [rw] events
+    #   The event configuration for the component. Use for the workflow
+    #   feature in Amplify Studio that allows you to bind events and actions
+    #   to components.
+    #   @return [Hash<String,Types::ComponentEvent>]
+    #
+    # @!attribute [rw] schema_version
+    #   The schema version of the component when it was imported.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/UpdateComponentData AWS API Documentation
     #
     class UpdateComponentData < Struct.new(
-      :binding_properties,
-      :children,
-      :collection_properties,
-      :component_type,
-      :events,
       :id,
       :name,
-      :overrides,
-      :properties,
-      :schema_version,
       :source_id,
-      :variants)
+      :component_type,
+      :properties,
+      :children,
+      :variants,
+      :overrides,
+      :binding_properties,
+      :collection_properties,
+      :events,
+      :schema_version)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] app_id
     #   The unique ID for the Amplify app.
-    #   @return [String]
-    #
-    # @!attribute [rw] client_token
-    #   The unique client token.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] environment_name
@@ -2376,6 +2535,13 @@ module Aws::AmplifyUIBuilder
     #   The unique ID for the component.
     #   @return [String]
     #
+    # @!attribute [rw] client_token
+    #   The unique client token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @!attribute [rw] updated_component
     #   The configuration of the updated component.
     #   @return [Types::UpdateComponentData]
@@ -2384,9 +2550,9 @@ module Aws::AmplifyUIBuilder
     #
     class UpdateComponentRequest < Struct.new(
       :app_id,
-      :client_token,
       :environment_name,
       :id,
+      :client_token,
       :updated_component)
       SENSITIVE = []
       include Aws::Structure
@@ -2407,64 +2573,62 @@ module Aws::AmplifyUIBuilder
     # Updates and saves all of the information about a form, based on form
     # ID.
     #
-    # @!attribute [rw] cta
-    #   The `FormCTA` object that stores the call to action configuration
-    #   for the form.
-    #   @return [Types::FormCTA]
+    # @!attribute [rw] name
+    #   The name of the form.
+    #   @return [String]
     #
     # @!attribute [rw] data_type
     #   The type of data source to use to create the form.
     #   @return [Types::FormDataTypeConfig]
     #
-    # @!attribute [rw] fields
-    #   The configuration information for the form's fields.
-    #   @return [Hash<String,Types::FieldConfig>]
-    #
     # @!attribute [rw] form_action_type
     #   Specifies whether to perform a create or update action on the form.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   The name of the form.
-    #   @return [String]
+    # @!attribute [rw] fields
+    #   The configuration information for the form's fields.
+    #   @return [Hash<String,Types::FieldConfig>]
     #
-    # @!attribute [rw] schema_version
-    #   The schema version of the form.
-    #   @return [String]
+    # @!attribute [rw] style
+    #   The configuration for the form's style.
+    #   @return [Types::FormStyle]
     #
     # @!attribute [rw] sectional_elements
     #   The configuration information for the visual helper elements for the
     #   form. These elements are not associated with any data.
     #   @return [Hash<String,Types::SectionalElement>]
     #
-    # @!attribute [rw] style
-    #   The configuration for the form's style.
-    #   @return [Types::FormStyle]
+    # @!attribute [rw] schema_version
+    #   The schema version of the form.
+    #   @return [String]
+    #
+    # @!attribute [rw] cta
+    #   The `FormCTA` object that stores the call to action configuration
+    #   for the form.
+    #   @return [Types::FormCTA]
+    #
+    # @!attribute [rw] label_decorator
+    #   Specifies an icon or decoration to display on the form.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/UpdateFormData AWS API Documentation
     #
     class UpdateFormData < Struct.new(
-      :cta,
-      :data_type,
-      :fields,
-      :form_action_type,
       :name,
-      :schema_version,
+      :data_type,
+      :form_action_type,
+      :fields,
+      :style,
       :sectional_elements,
-      :style)
+      :schema_version,
+      :cta,
+      :label_decorator)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] app_id
     #   The unique ID for the Amplify app.
-    #   @return [String]
-    #
-    # @!attribute [rw] client_token
-    #   The unique client token.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] environment_name
@@ -2475,6 +2639,13 @@ module Aws::AmplifyUIBuilder
     #   The unique ID for the form.
     #   @return [String]
     #
+    # @!attribute [rw] client_token
+    #   The unique client token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @!attribute [rw] updated_form
     #   The request accepts the following data in JSON format.
     #   @return [Types::UpdateFormData]
@@ -2483,9 +2654,9 @@ module Aws::AmplifyUIBuilder
     #
     class UpdateFormRequest < Struct.new(
       :app_id,
-      :client_token,
       :environment_name,
       :id,
+      :client_token,
       :updated_form)
       SENSITIVE = []
       include Aws::Structure
@@ -2513,13 +2684,13 @@ module Aws::AmplifyUIBuilder
     #   The name of the theme to update.
     #   @return [String]
     #
+    # @!attribute [rw] values
+    #   A list of key-value pairs that define the theme's properties.
+    #   @return [Array<Types::ThemeValues>]
+    #
     # @!attribute [rw] overrides
     #   Describes the properties that can be overriden to customize the
     #   theme.
-    #   @return [Array<Types::ThemeValues>]
-    #
-    # @!attribute [rw] values
-    #   A list of key-value pairs that define the theme's properties.
     #   @return [Array<Types::ThemeValues>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/UpdateThemeData AWS API Documentation
@@ -2527,21 +2698,14 @@ module Aws::AmplifyUIBuilder
     class UpdateThemeData < Struct.new(
       :id,
       :name,
-      :overrides,
-      :values)
+      :values,
+      :overrides)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] app_id
     #   The unique ID for the Amplify app.
-    #   @return [String]
-    #
-    # @!attribute [rw] client_token
-    #   The unique client token.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] environment_name
@@ -2552,6 +2716,13 @@ module Aws::AmplifyUIBuilder
     #   The unique ID for the theme.
     #   @return [String]
     #
+    # @!attribute [rw] client_token
+    #   The unique client token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @!attribute [rw] updated_theme
     #   The configuration of the updated theme.
     #   @return [Types::UpdateThemeData]
@@ -2560,9 +2731,9 @@ module Aws::AmplifyUIBuilder
     #
     class UpdateThemeRequest < Struct.new(
       :app_id,
-      :client_token,
       :environment_name,
       :id,
+      :client_token,
       :updated_theme)
       SENSITIVE = []
       include Aws::Structure
@@ -2606,10 +2777,15 @@ module Aws::AmplifyUIBuilder
     #   The value and display value pairs.
     #   @return [Array<Types::ValueMapping>]
     #
+    # @!attribute [rw] binding_properties
+    #   The information to bind fields to data at runtime.
+    #   @return [Hash<String,Types::FormInputBindingPropertiesValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ValueMappings AWS API Documentation
     #
     class ValueMappings < Struct.new(
-      :values)
+      :values,
+      :binding_properties)
       SENSITIVE = []
       include Aws::Structure
     end

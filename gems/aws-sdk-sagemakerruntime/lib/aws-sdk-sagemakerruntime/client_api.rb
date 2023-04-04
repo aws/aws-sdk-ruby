@@ -57,6 +57,7 @@ module Aws::SageMakerRuntime
 
     InvokeEndpointAsyncOutput.add_member(:inference_id, Shapes::ShapeRef.new(shape: Header, location_name: "InferenceId"))
     InvokeEndpointAsyncOutput.add_member(:output_location, Shapes::ShapeRef.new(shape: Header, location: "header", location_name: "X-Amzn-SageMaker-OutputLocation"))
+    InvokeEndpointAsyncOutput.add_member(:failure_location, Shapes::ShapeRef.new(shape: Header, location: "header", location_name: "X-Amzn-SageMaker-FailureLocation"))
     InvokeEndpointAsyncOutput.struct_class = Types::InvokeEndpointAsyncOutput
 
     InvokeEndpointInput.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location: "uri", location_name: "EndpointName"))

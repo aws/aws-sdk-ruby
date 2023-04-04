@@ -1553,11 +1553,17 @@ module Aws::SageMaker
     #   no topic is provided, no notification is sent on failure.
     #   @return [String]
     #
+    # @!attribute [rw] include_inference_response_in
+    #   The Amazon SNS topics where you want the inference response to be
+    #   included.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AsyncInferenceNotificationConfig AWS API Documentation
     #
     class AsyncInferenceNotificationConfig < Struct.new(
       :success_topic,
-      :error_topic)
+      :error_topic,
+      :include_inference_response_in)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1580,12 +1586,17 @@ module Aws::SageMaker
     #   for asynchronous inference.
     #   @return [Types::AsyncInferenceNotificationConfig]
     #
+    # @!attribute [rw] s3_failure_path
+    #   The Amazon S3 location to upload failure inference responses to.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AsyncInferenceOutputConfig AWS API Documentation
     #
     class AsyncInferenceOutputConfig < Struct.new(
       :kms_key_id,
       :s3_output_path,
-      :notification_config)
+      :notification_config,
+      :s3_failure_path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1650,7 +1661,7 @@ module Aws::SageMaker
     #   candidates of an Autopilot job.
     #
     #   <note markdown="1"> Selected algorithms must belong to the list corresponding to the
-    #   training mode set in ` AutoMLJobConfig.Mode ` (`ENSEMBLING` or
+    #   training mode set in [AutoMLJobConfig.Mode][1] (`ENSEMBLING` or
     #   `HYPERPARAMETER_TUNING`). Choose a minimum of 1 algorithm.
     #
     #    </note>
@@ -1680,6 +1691,10 @@ module Aws::SageMaker
     #     * "mlp"
     #
     #     * "xgboost"
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html#sagemaker-Type-AutoMLJobConfig-Mode
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLAlgorithmConfig AWS API Documentation
@@ -1822,16 +1837,17 @@ module Aws::SageMaker
     #     `AutoMLCandidateGenerationConfig` uses the full set of algorithms
     #     for the given training mode.
     #
-    #   For the list of all algorithms per training mode, see `
-    #   AutoMLAlgorithmConfig `.
+    #   For the list of all algorithms per training mode, see [
+    #   AutoMLAlgorithmConfig][2].
     #
     #   For more information on each algorithm, see the [Algorithm
-    #   support][2] section in Autopilot developer guide.
+    #   support][3] section in Autopilot developer guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html
-    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support
     #   @return [Array<Types::AutoMLAlgorithmConfig>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLCandidateGenerationConfig AWS API Documentation
@@ -1872,12 +1888,18 @@ module Aws::SageMaker
     # A channel is a named input source that training algorithms can
     # consume. The validation dataset size is limited to less than 2 GB. The
     # training dataset size must be less than 100 GB. For more information,
-    # see `  Channel `.
+    # see [ Channel][1].
     #
     # <note markdown="1"> A validation dataset must contain the same headers as the training
     # dataset.
     #
     #  </note>
+    #
+    #
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Channel.html
     #
     # @!attribute [rw] data_source
     #   The data source for an AutoML channel.
@@ -1902,8 +1924,8 @@ module Aws::SageMaker
     #   The channel type (optional) is an `enum` string. The default value
     #   is `training`. Channels for training and validation must share the
     #   same `ContentType` and `TargetAttributeName`. For information on
-    #   specifying training and validation channel types, see [ `How to
-    #   specify training and validation datasets` ][1].
+    #   specifying training and validation channel types, see [How to
+    #   specify training and validation datasets][1].
     #
     #
     #
@@ -1923,22 +1945,38 @@ module Aws::SageMaker
     end
 
     # A list of container definitions that describe the different containers
-    # that make up an AutoML candidate. For more information, see `
-    # ContainerDefinition `.
+    # that make up an AutoML candidate. For more information, see [
+    # ContainerDefinition][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html
     #
     # @!attribute [rw] image
     #   The Amazon Elastic Container Registry (Amazon ECR) path of the
-    #   container. For more information, see `  ContainerDefinition `.
+    #   container. For more information, see [ ContainerDefinition][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html
     #   @return [String]
     #
     # @!attribute [rw] model_data_url
-    #   The location of the model artifacts. For more information, see `
-    #   ContainerDefinition `.
+    #   The location of the model artifacts. For more information, see [
+    #   ContainerDefinition][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html
     #   @return [String]
     #
     # @!attribute [rw] environment
     #   The environment variables to set in the container. For more
-    #   information, see `  ContainerDefinition `.
+    #   information, see [ ContainerDefinition][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLContainerDefinition AWS API Documentation
@@ -2011,8 +2049,13 @@ module Aws::SageMaker
 
     # A channel is a named input source that training algorithms can
     # consume. This channel is used for the non tabular training data of an
-    # AutoML job using the V2 API. For tabular training data, see `
-    # AutoMLChannel `. For more information, see `  Channel `.
+    # AutoML job using the V2 API. For tabular training data, see [
+    # AutoMLChannel][1]. For more information, see [ Channel][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLChannel.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Channel.html
     #
     # @!attribute [rw] channel_type
     #   The type of channel. Defines whether the data are used for training
@@ -2064,11 +2107,16 @@ module Aws::SageMaker
     # @!attribute [rw] max_runtime_per_training_job_in_seconds
     #   The maximum time, in seconds, that each training job executed inside
     #   hyperparameter tuning is allowed to run as part of a hyperparameter
-    #   tuning job. For more information, see the ` StoppingCondition ` used
-    #   by the ` CreateHyperParameterTuningJob ` action.
+    #   tuning job. For more information, see the [StoppingCondition][1]
+    #   used by the [CreateHyperParameterTuningJob][2] action.
     #
     #   For V2 jobs (jobs created by calling `CreateAutoMLJobV2`), this
     #   field controls the runtime of the job candidate.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StoppingCondition.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateHyperParameterTuningJob.html
     #   @return [Integer]
     #
     # @!attribute [rw] max_auto_ml_job_runtime_in_seconds
@@ -3915,7 +3963,13 @@ module Aws::SageMaker
     #   requirements. SageMaker supports both `registry/repository[:tag]`
     #   and `registry/repository[@digest]` image path formats. For more
     #   information, see [Using Your Own Algorithms with Amazon
-    #   SageMaker][1]
+    #   SageMaker][1].
+    #
+    #   <note markdown="1"> The model artifacts in an Amazon S3 bucket and the Docker image for
+    #   inference container in Amazon EC2 Container Registry must be in the
+    #   same region as the model or endpoint you are creating.
+    #
+    #    </note>
     #
     #
     #
@@ -3927,7 +3981,13 @@ module Aws::SageMaker
     #   Docker registry accessible from your Amazon Virtual Private Cloud
     #   (VPC). For information about storing containers in a private Docker
     #   registry, see [Use a Private Docker Registry for Real-Time Inference
-    #   Containers][1]
+    #   Containers][1].
+    #
+    #   <note markdown="1"> The model artifacts in an Amazon S3 bucket and the Docker image for
+    #   inference container in Amazon EC2 Container Registry must be in the
+    #   same region as the model or endpoint you are creating.
+    #
+    #    </note>
     #
     #
     #
@@ -4489,10 +4549,15 @@ module Aws::SageMaker
     # @!attribute [rw] input_data_config
     #   An array of channel objects that describes the input data and its
     #   location. Each channel is a named input source. Similar to
-    #   `InputDataConfig` supported by ` HyperParameterTrainingJobDefinition
-    #   `. Format(s) supported: CSV, Parquet. A minimum of 500 rows is
-    #   required for the training dataset. There is not a minimum number of
-    #   rows required for the validation dataset.
+    #   `InputDataConfig` supported by
+    #   [HyperParameterTrainingJobDefinition][1]. Format(s) supported: CSV,
+    #   Parquet. A minimum of 500 rows is required for the training dataset.
+    #   There is not a minimum number of rows required for the validation
+    #   dataset.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html
     #   @return [Array<Types::AutoMLChannel>]
     #
     # @!attribute [rw] output_data_config
@@ -4513,9 +4578,14 @@ module Aws::SageMaker
     #
     # @!attribute [rw] auto_ml_job_objective
     #   Defines the objective metric used to measure the predictive quality
-    #   of an AutoML job. You provide an ` AutoMLJobObjective$MetricName `
-    #   and Autopilot infers whether to minimize or maximize it. For `
-    #   CreateAutoMLJobV2 `, only `Accuracy` is supported.
+    #   of an AutoML job. You provide an [AutoMLJobObjective$MetricName][1]
+    #   and Autopilot infers whether to minimize or maximize it. For
+    #   [CreateAutoMLJobV2][2], only `Accuracy` is supported.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
     #   @return [Types::AutoMLJobObjective]
     #
     # @!attribute [rw] auto_ml_job_config
@@ -4585,14 +4655,18 @@ module Aws::SageMaker
     #
     # @!attribute [rw] auto_ml_job_input_data_config
     #   An array of channel objects describing the input data and their
-    #   location. Each channel is a named input source. Similar to `
-    #   InputDataConfig ` supported by `CreateAutoMLJob`. The supported
+    #   location. Each channel is a named input source. Similar to
+    #   [InputDataConfig][1] supported by `CreateAutoMLJob`. The supported
     #   formats depend on the problem type:
     #
     #   * ImageClassification: S3Prefix, `ManifestFile`,
     #     `AugmentedManifestFile`
     #
     #   * TextClassification: S3Prefix
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html#sagemaker-CreateAutoMLJob-request-InputDataConfig
     #   @return [Array<Types::AutoMLJobChannel>]
     #
     # @!attribute [rw] output_data_config
@@ -4627,7 +4701,11 @@ module Aws::SageMaker
     #
     # @!attribute [rw] auto_ml_job_objective
     #   Specifies a metric to minimize or maximize as the objective of a
-    #   job. For ` CreateAutoMLJobV2 `, only `Accuracy` is supported.
+    #   job. For [CreateAutoMLJobV2][1], only `Accuracy` is supported.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
     #   @return [Types::AutoMLJobObjective]
     #
     # @!attribute [rw] model_deploy_config
@@ -17599,8 +17677,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] metric_name
     #   The name of the metric with the best result. For a description of
-    #   the possible objective metrics, see ` AutoMLJobObjective$MetricName
-    #   `.
+    #   the possible objective metrics, see
+    #   [AutoMLJobObjective$MetricName][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -20254,8 +20336,8 @@ module Aws::SageMaker
     #   reaches the `MaxResource` value, it is stopped. If a value for
     #   `MaxResource` is not provided, and `Hyperband` is selected as the
     #   hyperparameter tuning strategy, `HyperbandTrainingJ` attempts to
-    #   infer `MaxResource` from the following keys (if present) in `
-    #   StaticsHyperParameters `:
+    #   infer `MaxResource` from the following keys (if present) in
+    #   [StaticsHyperParameters][1]:
     #
     #   * `epochs`
     #
@@ -20270,8 +20352,8 @@ module Aws::SageMaker
     #   If `HyperbandStrategyConfig` is unable to infer a value for
     #   `MaxResource`, it generates a validation error. The maximum value is
     #   20,000 epochs. All metrics that correspond to an objective metric
-    #   are used to derive [early stopping decisions][1]. For
-    #   [distributive][2] training jobs, ensure that duplicate metrics are
+    #   are used to derive [early stopping decisions][2]. For
+    #   [distributive][3] training jobs, ensure that duplicate metrics are
     #   not printed in the logs across the individual nodes in a training
     #   job. If multiple nodes are publishing duplicate or incorrect
     #   metrics, training jobs may make an incorrect stopping decision and
@@ -20279,8 +20361,9 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html
-    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/distributed-training.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-StaticHyperParameters
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/distributed-training.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperbandStrategyConfig AWS API Documentation

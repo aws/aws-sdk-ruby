@@ -373,6 +373,9 @@ module Aws::AmplifyUIBuilder
     # @option params [required, String] :app_id
     #   The unique ID of the Amplify app to associate with the component.
     #
+    # @option params [required, String] :environment_name
+    #   The name of the backend environment that is a part of the Amplify app.
+    #
     # @option params [String] :client_token
     #   The unique client token.
     #
@@ -382,9 +385,6 @@ module Aws::AmplifyUIBuilder
     # @option params [required, Types::CreateComponentData] :component_to_create
     #   Represents the configuration of the component to create.
     #
-    # @option params [required, String] :environment_name
-    #   The name of the backend environment that is a part of the Amplify app.
-    #
     # @return [Types::CreateComponentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateComponentResponse#entity #entity} => Types::Component
@@ -393,1468 +393,1472 @@ module Aws::AmplifyUIBuilder
     #
     #   resp = client.create_component({
     #     app_id: "String", # required
+    #     environment_name: "String", # required
     #     client_token: "String",
     #     component_to_create: { # required
-    #       binding_properties: { # required
-    #         "String" => {
-    #           binding_properties: {
-    #             bucket: "String",
-    #             default_value: "String",
-    #             field: "String",
-    #             key: "String",
-    #             model: "String",
-    #             predicates: [
-    #               {
-    #                 and: {
-    #                   # recursive PredicateList
-    #                 },
-    #                 field: "String",
-    #                 operand: "String",
-    #                 operator: "String",
-    #                 or: {
-    #                   # recursive PredicateList
-    #                 },
-    #               },
-    #             ],
-    #             slot_name: "String",
-    #             user_attribute: "String",
-    #           },
-    #           default_value: "String",
-    #           type: "String",
-    #         },
-    #       },
-    #       children: [
-    #         {
-    #           children: {
-    #             # recursive ComponentChildList
-    #           },
-    #           component_type: "String", # required
-    #           events: {
-    #             "String" => {
-    #               action: "String",
-    #               binding_event: "String",
-    #               parameters: {
-    #                 anchor: {
-    #                   binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   bindings: {
-    #                     "String" => {
-    #                       element: "String", # required
-    #                       property: "String", # required
-    #                     },
-    #                   },
-    #                   collection_binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   component_name: "String",
-    #                   concat: [
-    #                     {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   ],
-    #                   condition: {
-    #                     else: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                     field: "String",
-    #                     operand: "String",
-    #                     operand_type: "String",
-    #                     operator: "String",
-    #                     property: "String",
-    #                     then: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   },
-    #                   configured: false,
-    #                   default_value: "String",
-    #                   event: "String",
-    #                   imported_value: "String",
-    #                   model: "String",
-    #                   property: "String",
-    #                   type: "String",
-    #                   user_attribute: "String",
-    #                   value: "String",
-    #                 },
-    #                 fields: {
-    #                   "String" => {
-    #                     binding_properties: {
-    #                       field: "String",
-    #                       property: "String", # required
-    #                     },
-    #                     bindings: {
-    #                       "String" => {
-    #                         element: "String", # required
-    #                         property: "String", # required
-    #                       },
-    #                     },
-    #                     collection_binding_properties: {
-    #                       field: "String",
-    #                       property: "String", # required
-    #                     },
-    #                     component_name: "String",
-    #                     concat: [
-    #                       {
-    #                         # recursive ComponentProperty
-    #                       },
-    #                     ],
-    #                     condition: {
-    #                       else: {
-    #                         # recursive ComponentProperty
-    #                       },
-    #                       field: "String",
-    #                       operand: "String",
-    #                       operand_type: "String",
-    #                       operator: "String",
-    #                       property: "String",
-    #                       then: {
-    #                         # recursive ComponentProperty
-    #                       },
-    #                     },
-    #                     configured: false,
-    #                     default_value: "String",
-    #                     event: "String",
-    #                     imported_value: "String",
-    #                     model: "String",
-    #                     property: "String",
-    #                     type: "String",
-    #                     user_attribute: "String",
-    #                     value: "String",
-    #                   },
-    #                 },
-    #                 global: {
-    #                   binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   bindings: {
-    #                     "String" => {
-    #                       element: "String", # required
-    #                       property: "String", # required
-    #                     },
-    #                   },
-    #                   collection_binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   component_name: "String",
-    #                   concat: [
-    #                     {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   ],
-    #                   condition: {
-    #                     else: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                     field: "String",
-    #                     operand: "String",
-    #                     operand_type: "String",
-    #                     operator: "String",
-    #                     property: "String",
-    #                     then: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   },
-    #                   configured: false,
-    #                   default_value: "String",
-    #                   event: "String",
-    #                   imported_value: "String",
-    #                   model: "String",
-    #                   property: "String",
-    #                   type: "String",
-    #                   user_attribute: "String",
-    #                   value: "String",
-    #                 },
-    #                 id: {
-    #                   binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   bindings: {
-    #                     "String" => {
-    #                       element: "String", # required
-    #                       property: "String", # required
-    #                     },
-    #                   },
-    #                   collection_binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   component_name: "String",
-    #                   concat: [
-    #                     {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   ],
-    #                   condition: {
-    #                     else: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                     field: "String",
-    #                     operand: "String",
-    #                     operand_type: "String",
-    #                     operator: "String",
-    #                     property: "String",
-    #                     then: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   },
-    #                   configured: false,
-    #                   default_value: "String",
-    #                   event: "String",
-    #                   imported_value: "String",
-    #                   model: "String",
-    #                   property: "String",
-    #                   type: "String",
-    #                   user_attribute: "String",
-    #                   value: "String",
-    #                 },
-    #                 model: "String",
-    #                 state: {
-    #                   component_name: "String", # required
-    #                   property: "String", # required
-    #                   set: { # required
-    #                     binding_properties: {
-    #                       field: "String",
-    #                       property: "String", # required
-    #                     },
-    #                     bindings: {
-    #                       "String" => {
-    #                         element: "String", # required
-    #                         property: "String", # required
-    #                       },
-    #                     },
-    #                     collection_binding_properties: {
-    #                       field: "String",
-    #                       property: "String", # required
-    #                     },
-    #                     component_name: "String",
-    #                     concat: [
-    #                       {
-    #                         # recursive ComponentProperty
-    #                       },
-    #                     ],
-    #                     condition: {
-    #                       else: {
-    #                         # recursive ComponentProperty
-    #                       },
-    #                       field: "String",
-    #                       operand: "String",
-    #                       operand_type: "String",
-    #                       operator: "String",
-    #                       property: "String",
-    #                       then: {
-    #                         # recursive ComponentProperty
-    #                       },
-    #                     },
-    #                     configured: false,
-    #                     default_value: "String",
-    #                     event: "String",
-    #                     imported_value: "String",
-    #                     model: "String",
-    #                     property: "String",
-    #                     type: "String",
-    #                     user_attribute: "String",
-    #                     value: "String",
-    #                   },
-    #                 },
-    #                 target: {
-    #                   binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   bindings: {
-    #                     "String" => {
-    #                       element: "String", # required
-    #                       property: "String", # required
-    #                     },
-    #                   },
-    #                   collection_binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   component_name: "String",
-    #                   concat: [
-    #                     {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   ],
-    #                   condition: {
-    #                     else: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                     field: "String",
-    #                     operand: "String",
-    #                     operand_type: "String",
-    #                     operator: "String",
-    #                     property: "String",
-    #                     then: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   },
-    #                   configured: false,
-    #                   default_value: "String",
-    #                   event: "String",
-    #                   imported_value: "String",
-    #                   model: "String",
-    #                   property: "String",
-    #                   type: "String",
-    #                   user_attribute: "String",
-    #                   value: "String",
-    #                 },
-    #                 type: {
-    #                   binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   bindings: {
-    #                     "String" => {
-    #                       element: "String", # required
-    #                       property: "String", # required
-    #                     },
-    #                   },
-    #                   collection_binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   component_name: "String",
-    #                   concat: [
-    #                     {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   ],
-    #                   condition: {
-    #                     else: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                     field: "String",
-    #                     operand: "String",
-    #                     operand_type: "String",
-    #                     operator: "String",
-    #                     property: "String",
-    #                     then: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   },
-    #                   configured: false,
-    #                   default_value: "String",
-    #                   event: "String",
-    #                   imported_value: "String",
-    #                   model: "String",
-    #                   property: "String",
-    #                   type: "String",
-    #                   user_attribute: "String",
-    #                   value: "String",
-    #                 },
-    #                 url: {
-    #                   binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   bindings: {
-    #                     "String" => {
-    #                       element: "String", # required
-    #                       property: "String", # required
-    #                     },
-    #                   },
-    #                   collection_binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   component_name: "String",
-    #                   concat: [
-    #                     {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   ],
-    #                   condition: {
-    #                     else: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                     field: "String",
-    #                     operand: "String",
-    #                     operand_type: "String",
-    #                     operator: "String",
-    #                     property: "String",
-    #                     then: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   },
-    #                   configured: false,
-    #                   default_value: "String",
-    #                   event: "String",
-    #                   imported_value: "String",
-    #                   model: "String",
-    #                   property: "String",
-    #                   type: "String",
-    #                   user_attribute: "String",
-    #                   value: "String",
-    #                 },
-    #               },
-    #             },
-    #           },
-    #           name: "String", # required
-    #           properties: { # required
-    #             "String" => {
-    #               binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               bindings: {
-    #                 "String" => {
-    #                   element: "String", # required
-    #                   property: "String", # required
-    #                 },
-    #               },
-    #               collection_binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               component_name: "String",
-    #               concat: [
-    #                 {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               ],
-    #               condition: {
-    #                 else: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #                 field: "String",
-    #                 operand: "String",
-    #                 operand_type: "String",
-    #                 operator: "String",
-    #                 property: "String",
-    #                 then: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               },
-    #               configured: false,
-    #               default_value: "String",
-    #               event: "String",
-    #               imported_value: "String",
-    #               model: "String",
-    #               property: "String",
-    #               type: "String",
-    #               user_attribute: "String",
-    #               value: "String",
-    #             },
-    #           },
-    #           source_id: "String",
-    #         },
-    #       ],
-    #       collection_properties: {
-    #         "String" => {
-    #           identifiers: ["String"],
-    #           model: "String", # required
-    #           predicate: {
-    #             and: [
-    #               {
-    #                 # recursive Predicate
-    #               },
-    #             ],
-    #             field: "String",
-    #             operand: "String",
-    #             operator: "String",
-    #             or: [
-    #               {
-    #                 # recursive Predicate
-    #               },
-    #             ],
-    #           },
-    #           sort: [
-    #             {
-    #               direction: "ASC", # required, accepts ASC, DESC
-    #               field: "String", # required
-    #             },
-    #           ],
-    #         },
-    #       },
-    #       component_type: "ComponentType", # required
-    #       events: {
-    #         "String" => {
-    #           action: "String",
-    #           binding_event: "String",
-    #           parameters: {
-    #             anchor: {
-    #               binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               bindings: {
-    #                 "String" => {
-    #                   element: "String", # required
-    #                   property: "String", # required
-    #                 },
-    #               },
-    #               collection_binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               component_name: "String",
-    #               concat: [
-    #                 {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               ],
-    #               condition: {
-    #                 else: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #                 field: "String",
-    #                 operand: "String",
-    #                 operand_type: "String",
-    #                 operator: "String",
-    #                 property: "String",
-    #                 then: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               },
-    #               configured: false,
-    #               default_value: "String",
-    #               event: "String",
-    #               imported_value: "String",
-    #               model: "String",
-    #               property: "String",
-    #               type: "String",
-    #               user_attribute: "String",
-    #               value: "String",
-    #             },
-    #             fields: {
-    #               "String" => {
-    #                 binding_properties: {
-    #                   field: "String",
-    #                   property: "String", # required
-    #                 },
-    #                 bindings: {
-    #                   "String" => {
-    #                     element: "String", # required
-    #                     property: "String", # required
-    #                   },
-    #                 },
-    #                 collection_binding_properties: {
-    #                   field: "String",
-    #                   property: "String", # required
-    #                 },
-    #                 component_name: "String",
-    #                 concat: [
-    #                   {
-    #                     # recursive ComponentProperty
-    #                   },
-    #                 ],
-    #                 condition: {
-    #                   else: {
-    #                     # recursive ComponentProperty
-    #                   },
-    #                   field: "String",
-    #                   operand: "String",
-    #                   operand_type: "String",
-    #                   operator: "String",
-    #                   property: "String",
-    #                   then: {
-    #                     # recursive ComponentProperty
-    #                   },
-    #                 },
-    #                 configured: false,
-    #                 default_value: "String",
-    #                 event: "String",
-    #                 imported_value: "String",
-    #                 model: "String",
-    #                 property: "String",
-    #                 type: "String",
-    #                 user_attribute: "String",
-    #                 value: "String",
-    #               },
-    #             },
-    #             global: {
-    #               binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               bindings: {
-    #                 "String" => {
-    #                   element: "String", # required
-    #                   property: "String", # required
-    #                 },
-    #               },
-    #               collection_binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               component_name: "String",
-    #               concat: [
-    #                 {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               ],
-    #               condition: {
-    #                 else: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #                 field: "String",
-    #                 operand: "String",
-    #                 operand_type: "String",
-    #                 operator: "String",
-    #                 property: "String",
-    #                 then: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               },
-    #               configured: false,
-    #               default_value: "String",
-    #               event: "String",
-    #               imported_value: "String",
-    #               model: "String",
-    #               property: "String",
-    #               type: "String",
-    #               user_attribute: "String",
-    #               value: "String",
-    #             },
-    #             id: {
-    #               binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               bindings: {
-    #                 "String" => {
-    #                   element: "String", # required
-    #                   property: "String", # required
-    #                 },
-    #               },
-    #               collection_binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               component_name: "String",
-    #               concat: [
-    #                 {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               ],
-    #               condition: {
-    #                 else: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #                 field: "String",
-    #                 operand: "String",
-    #                 operand_type: "String",
-    #                 operator: "String",
-    #                 property: "String",
-    #                 then: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               },
-    #               configured: false,
-    #               default_value: "String",
-    #               event: "String",
-    #               imported_value: "String",
-    #               model: "String",
-    #               property: "String",
-    #               type: "String",
-    #               user_attribute: "String",
-    #               value: "String",
-    #             },
-    #             model: "String",
-    #             state: {
-    #               component_name: "String", # required
-    #               property: "String", # required
-    #               set: { # required
-    #                 binding_properties: {
-    #                   field: "String",
-    #                   property: "String", # required
-    #                 },
-    #                 bindings: {
-    #                   "String" => {
-    #                     element: "String", # required
-    #                     property: "String", # required
-    #                   },
-    #                 },
-    #                 collection_binding_properties: {
-    #                   field: "String",
-    #                   property: "String", # required
-    #                 },
-    #                 component_name: "String",
-    #                 concat: [
-    #                   {
-    #                     # recursive ComponentProperty
-    #                   },
-    #                 ],
-    #                 condition: {
-    #                   else: {
-    #                     # recursive ComponentProperty
-    #                   },
-    #                   field: "String",
-    #                   operand: "String",
-    #                   operand_type: "String",
-    #                   operator: "String",
-    #                   property: "String",
-    #                   then: {
-    #                     # recursive ComponentProperty
-    #                   },
-    #                 },
-    #                 configured: false,
-    #                 default_value: "String",
-    #                 event: "String",
-    #                 imported_value: "String",
-    #                 model: "String",
-    #                 property: "String",
-    #                 type: "String",
-    #                 user_attribute: "String",
-    #                 value: "String",
-    #               },
-    #             },
-    #             target: {
-    #               binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               bindings: {
-    #                 "String" => {
-    #                   element: "String", # required
-    #                   property: "String", # required
-    #                 },
-    #               },
-    #               collection_binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               component_name: "String",
-    #               concat: [
-    #                 {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               ],
-    #               condition: {
-    #                 else: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #                 field: "String",
-    #                 operand: "String",
-    #                 operand_type: "String",
-    #                 operator: "String",
-    #                 property: "String",
-    #                 then: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               },
-    #               configured: false,
-    #               default_value: "String",
-    #               event: "String",
-    #               imported_value: "String",
-    #               model: "String",
-    #               property: "String",
-    #               type: "String",
-    #               user_attribute: "String",
-    #               value: "String",
-    #             },
-    #             type: {
-    #               binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               bindings: {
-    #                 "String" => {
-    #                   element: "String", # required
-    #                   property: "String", # required
-    #                 },
-    #               },
-    #               collection_binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               component_name: "String",
-    #               concat: [
-    #                 {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               ],
-    #               condition: {
-    #                 else: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #                 field: "String",
-    #                 operand: "String",
-    #                 operand_type: "String",
-    #                 operator: "String",
-    #                 property: "String",
-    #                 then: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               },
-    #               configured: false,
-    #               default_value: "String",
-    #               event: "String",
-    #               imported_value: "String",
-    #               model: "String",
-    #               property: "String",
-    #               type: "String",
-    #               user_attribute: "String",
-    #               value: "String",
-    #             },
-    #             url: {
-    #               binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               bindings: {
-    #                 "String" => {
-    #                   element: "String", # required
-    #                   property: "String", # required
-    #                 },
-    #               },
-    #               collection_binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               component_name: "String",
-    #               concat: [
-    #                 {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               ],
-    #               condition: {
-    #                 else: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #                 field: "String",
-    #                 operand: "String",
-    #                 operand_type: "String",
-    #                 operator: "String",
-    #                 property: "String",
-    #                 then: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               },
-    #               configured: false,
-    #               default_value: "String",
-    #               event: "String",
-    #               imported_value: "String",
-    #               model: "String",
-    #               property: "String",
-    #               type: "String",
-    #               user_attribute: "String",
-    #               value: "String",
-    #             },
-    #           },
-    #         },
-    #       },
     #       name: "ComponentName", # required
-    #       overrides: { # required
-    #         "String" => {
-    #           "String" => "String",
-    #         },
-    #       },
+    #       source_id: "String",
+    #       component_type: "ComponentType", # required
     #       properties: { # required
     #         "String" => {
+    #           value: "String",
     #           binding_properties: {
-    #             field: "String",
     #             property: "String", # required
+    #             field: "String",
     #           },
+    #           collection_binding_properties: {
+    #             property: "String", # required
+    #             field: "String",
+    #           },
+    #           default_value: "String",
+    #           model: "String",
     #           bindings: {
     #             "String" => {
     #               element: "String", # required
     #               property: "String", # required
     #             },
     #           },
-    #           collection_binding_properties: {
-    #             field: "String",
-    #             property: "String", # required
-    #           },
-    #           component_name: "String",
+    #           event: "String",
+    #           user_attribute: "String",
     #           concat: [
     #             {
     #               # recursive ComponentProperty
     #             },
     #           ],
     #           condition: {
-    #             else: {
-    #               # recursive ComponentProperty
-    #             },
-    #             field: "String",
-    #             operand: "String",
-    #             operand_type: "String",
-    #             operator: "String",
     #             property: "String",
+    #             field: "String",
+    #             operator: "String",
+    #             operand: "String",
     #             then: {
     #               # recursive ComponentProperty
     #             },
+    #             else: {
+    #               # recursive ComponentProperty
+    #             },
+    #             operand_type: "String",
     #           },
     #           configured: false,
-    #           default_value: "String",
-    #           event: "String",
-    #           imported_value: "String",
-    #           model: "String",
-    #           property: "String",
     #           type: "String",
-    #           user_attribute: "String",
-    #           value: "String",
+    #           imported_value: "String",
+    #           component_name: "String",
+    #           property: "String",
     #         },
     #       },
-    #       schema_version: "String",
-    #       source_id: "String",
-    #       tags: {
-    #         "TagKey" => "TagValue",
-    #       },
+    #       children: [
+    #         {
+    #           component_type: "String", # required
+    #           name: "String", # required
+    #           properties: { # required
+    #             "String" => {
+    #               value: "String",
+    #               binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               collection_binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               default_value: "String",
+    #               model: "String",
+    #               bindings: {
+    #                 "String" => {
+    #                   element: "String", # required
+    #                   property: "String", # required
+    #                 },
+    #               },
+    #               event: "String",
+    #               user_attribute: "String",
+    #               concat: [
+    #                 {
+    #                   # recursive ComponentProperty
+    #                 },
+    #               ],
+    #               condition: {
+    #                 property: "String",
+    #                 field: "String",
+    #                 operator: "String",
+    #                 operand: "String",
+    #                 then: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 else: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 operand_type: "String",
+    #               },
+    #               configured: false,
+    #               type: "String",
+    #               imported_value: "String",
+    #               component_name: "String",
+    #               property: "String",
+    #             },
+    #           },
+    #           children: {
+    #             # recursive ComponentChildList
+    #           },
+    #           events: {
+    #             "String" => {
+    #               action: "String",
+    #               parameters: {
+    #                 type: {
+    #                   value: "String",
+    #                   binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   collection_binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   default_value: "String",
+    #                   model: "String",
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   event: "String",
+    #                   user_attribute: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     property: "String",
+    #                     field: "String",
+    #                     operator: "String",
+    #                     operand: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     operand_type: "String",
+    #                   },
+    #                   configured: false,
+    #                   type: "String",
+    #                   imported_value: "String",
+    #                   component_name: "String",
+    #                   property: "String",
+    #                 },
+    #                 url: {
+    #                   value: "String",
+    #                   binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   collection_binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   default_value: "String",
+    #                   model: "String",
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   event: "String",
+    #                   user_attribute: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     property: "String",
+    #                     field: "String",
+    #                     operator: "String",
+    #                     operand: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     operand_type: "String",
+    #                   },
+    #                   configured: false,
+    #                   type: "String",
+    #                   imported_value: "String",
+    #                   component_name: "String",
+    #                   property: "String",
+    #                 },
+    #                 anchor: {
+    #                   value: "String",
+    #                   binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   collection_binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   default_value: "String",
+    #                   model: "String",
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   event: "String",
+    #                   user_attribute: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     property: "String",
+    #                     field: "String",
+    #                     operator: "String",
+    #                     operand: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     operand_type: "String",
+    #                   },
+    #                   configured: false,
+    #                   type: "String",
+    #                   imported_value: "String",
+    #                   component_name: "String",
+    #                   property: "String",
+    #                 },
+    #                 target: {
+    #                   value: "String",
+    #                   binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   collection_binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   default_value: "String",
+    #                   model: "String",
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   event: "String",
+    #                   user_attribute: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     property: "String",
+    #                     field: "String",
+    #                     operator: "String",
+    #                     operand: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     operand_type: "String",
+    #                   },
+    #                   configured: false,
+    #                   type: "String",
+    #                   imported_value: "String",
+    #                   component_name: "String",
+    #                   property: "String",
+    #                 },
+    #                 global: {
+    #                   value: "String",
+    #                   binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   collection_binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   default_value: "String",
+    #                   model: "String",
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   event: "String",
+    #                   user_attribute: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     property: "String",
+    #                     field: "String",
+    #                     operator: "String",
+    #                     operand: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     operand_type: "String",
+    #                   },
+    #                   configured: false,
+    #                   type: "String",
+    #                   imported_value: "String",
+    #                   component_name: "String",
+    #                   property: "String",
+    #                 },
+    #                 model: "String",
+    #                 id: {
+    #                   value: "String",
+    #                   binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   collection_binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   default_value: "String",
+    #                   model: "String",
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   event: "String",
+    #                   user_attribute: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     property: "String",
+    #                     field: "String",
+    #                     operator: "String",
+    #                     operand: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     operand_type: "String",
+    #                   },
+    #                   configured: false,
+    #                   type: "String",
+    #                   imported_value: "String",
+    #                   component_name: "String",
+    #                   property: "String",
+    #                 },
+    #                 fields: {
+    #                   "String" => {
+    #                     value: "String",
+    #                     binding_properties: {
+    #                       property: "String", # required
+    #                       field: "String",
+    #                     },
+    #                     collection_binding_properties: {
+    #                       property: "String", # required
+    #                       field: "String",
+    #                     },
+    #                     default_value: "String",
+    #                     model: "String",
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     event: "String",
+    #                     user_attribute: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       property: "String",
+    #                       field: "String",
+    #                       operator: "String",
+    #                       operand: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       operand_type: "String",
+    #                     },
+    #                     configured: false,
+    #                     type: "String",
+    #                     imported_value: "String",
+    #                     component_name: "String",
+    #                     property: "String",
+    #                   },
+    #                 },
+    #                 state: {
+    #                   component_name: "String", # required
+    #                   property: "String", # required
+    #                   set: { # required
+    #                     value: "String",
+    #                     binding_properties: {
+    #                       property: "String", # required
+    #                       field: "String",
+    #                     },
+    #                     collection_binding_properties: {
+    #                       property: "String", # required
+    #                       field: "String",
+    #                     },
+    #                     default_value: "String",
+    #                     model: "String",
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     event: "String",
+    #                     user_attribute: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       property: "String",
+    #                       field: "String",
+    #                       operator: "String",
+    #                       operand: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       operand_type: "String",
+    #                     },
+    #                     configured: false,
+    #                     type: "String",
+    #                     imported_value: "String",
+    #                     component_name: "String",
+    #                     property: "String",
+    #                   },
+    #                 },
+    #               },
+    #               binding_event: "String",
+    #             },
+    #           },
+    #           source_id: "String",
+    #         },
+    #       ],
     #       variants: [ # required
     #         {
+    #           variant_values: {
+    #             "String" => "String",
+    #           },
     #           overrides: {
     #             "String" => {
     #               "String" => "String",
     #             },
     #           },
-    #           variant_values: {
-    #             "String" => "String",
-    #           },
     #         },
     #       ],
+    #       overrides: { # required
+    #         "String" => {
+    #           "String" => "String",
+    #         },
+    #       },
+    #       binding_properties: { # required
+    #         "String" => {
+    #           type: "String",
+    #           binding_properties: {
+    #             model: "String",
+    #             field: "String",
+    #             predicates: [
+    #               {
+    #                 or: {
+    #                   # recursive PredicateList
+    #                 },
+    #                 and: {
+    #                   # recursive PredicateList
+    #                 },
+    #                 field: "String",
+    #                 operator: "String",
+    #                 operand: "String",
+    #                 operand_type: "OperandType",
+    #               },
+    #             ],
+    #             user_attribute: "String",
+    #             bucket: "String",
+    #             key: "String",
+    #             default_value: "String",
+    #             slot_name: "String",
+    #           },
+    #           default_value: "String",
+    #         },
+    #       },
+    #       collection_properties: {
+    #         "String" => {
+    #           model: "String", # required
+    #           sort: [
+    #             {
+    #               field: "String", # required
+    #               direction: "ASC", # required, accepts ASC, DESC
+    #             },
+    #           ],
+    #           predicate: {
+    #             or: [
+    #               {
+    #                 # recursive Predicate
+    #               },
+    #             ],
+    #             and: [
+    #               {
+    #                 # recursive Predicate
+    #               },
+    #             ],
+    #             field: "String",
+    #             operator: "String",
+    #             operand: "String",
+    #             operand_type: "OperandType",
+    #           },
+    #           identifiers: ["String"],
+    #         },
+    #       },
+    #       tags: {
+    #         "TagKey" => "TagValue",
+    #       },
+    #       events: {
+    #         "String" => {
+    #           action: "String",
+    #           parameters: {
+    #             type: {
+    #               value: "String",
+    #               binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               collection_binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               default_value: "String",
+    #               model: "String",
+    #               bindings: {
+    #                 "String" => {
+    #                   element: "String", # required
+    #                   property: "String", # required
+    #                 },
+    #               },
+    #               event: "String",
+    #               user_attribute: "String",
+    #               concat: [
+    #                 {
+    #                   # recursive ComponentProperty
+    #                 },
+    #               ],
+    #               condition: {
+    #                 property: "String",
+    #                 field: "String",
+    #                 operator: "String",
+    #                 operand: "String",
+    #                 then: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 else: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 operand_type: "String",
+    #               },
+    #               configured: false,
+    #               type: "String",
+    #               imported_value: "String",
+    #               component_name: "String",
+    #               property: "String",
+    #             },
+    #             url: {
+    #               value: "String",
+    #               binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               collection_binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               default_value: "String",
+    #               model: "String",
+    #               bindings: {
+    #                 "String" => {
+    #                   element: "String", # required
+    #                   property: "String", # required
+    #                 },
+    #               },
+    #               event: "String",
+    #               user_attribute: "String",
+    #               concat: [
+    #                 {
+    #                   # recursive ComponentProperty
+    #                 },
+    #               ],
+    #               condition: {
+    #                 property: "String",
+    #                 field: "String",
+    #                 operator: "String",
+    #                 operand: "String",
+    #                 then: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 else: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 operand_type: "String",
+    #               },
+    #               configured: false,
+    #               type: "String",
+    #               imported_value: "String",
+    #               component_name: "String",
+    #               property: "String",
+    #             },
+    #             anchor: {
+    #               value: "String",
+    #               binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               collection_binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               default_value: "String",
+    #               model: "String",
+    #               bindings: {
+    #                 "String" => {
+    #                   element: "String", # required
+    #                   property: "String", # required
+    #                 },
+    #               },
+    #               event: "String",
+    #               user_attribute: "String",
+    #               concat: [
+    #                 {
+    #                   # recursive ComponentProperty
+    #                 },
+    #               ],
+    #               condition: {
+    #                 property: "String",
+    #                 field: "String",
+    #                 operator: "String",
+    #                 operand: "String",
+    #                 then: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 else: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 operand_type: "String",
+    #               },
+    #               configured: false,
+    #               type: "String",
+    #               imported_value: "String",
+    #               component_name: "String",
+    #               property: "String",
+    #             },
+    #             target: {
+    #               value: "String",
+    #               binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               collection_binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               default_value: "String",
+    #               model: "String",
+    #               bindings: {
+    #                 "String" => {
+    #                   element: "String", # required
+    #                   property: "String", # required
+    #                 },
+    #               },
+    #               event: "String",
+    #               user_attribute: "String",
+    #               concat: [
+    #                 {
+    #                   # recursive ComponentProperty
+    #                 },
+    #               ],
+    #               condition: {
+    #                 property: "String",
+    #                 field: "String",
+    #                 operator: "String",
+    #                 operand: "String",
+    #                 then: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 else: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 operand_type: "String",
+    #               },
+    #               configured: false,
+    #               type: "String",
+    #               imported_value: "String",
+    #               component_name: "String",
+    #               property: "String",
+    #             },
+    #             global: {
+    #               value: "String",
+    #               binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               collection_binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               default_value: "String",
+    #               model: "String",
+    #               bindings: {
+    #                 "String" => {
+    #                   element: "String", # required
+    #                   property: "String", # required
+    #                 },
+    #               },
+    #               event: "String",
+    #               user_attribute: "String",
+    #               concat: [
+    #                 {
+    #                   # recursive ComponentProperty
+    #                 },
+    #               ],
+    #               condition: {
+    #                 property: "String",
+    #                 field: "String",
+    #                 operator: "String",
+    #                 operand: "String",
+    #                 then: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 else: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 operand_type: "String",
+    #               },
+    #               configured: false,
+    #               type: "String",
+    #               imported_value: "String",
+    #               component_name: "String",
+    #               property: "String",
+    #             },
+    #             model: "String",
+    #             id: {
+    #               value: "String",
+    #               binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               collection_binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               default_value: "String",
+    #               model: "String",
+    #               bindings: {
+    #                 "String" => {
+    #                   element: "String", # required
+    #                   property: "String", # required
+    #                 },
+    #               },
+    #               event: "String",
+    #               user_attribute: "String",
+    #               concat: [
+    #                 {
+    #                   # recursive ComponentProperty
+    #                 },
+    #               ],
+    #               condition: {
+    #                 property: "String",
+    #                 field: "String",
+    #                 operator: "String",
+    #                 operand: "String",
+    #                 then: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 else: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 operand_type: "String",
+    #               },
+    #               configured: false,
+    #               type: "String",
+    #               imported_value: "String",
+    #               component_name: "String",
+    #               property: "String",
+    #             },
+    #             fields: {
+    #               "String" => {
+    #                 value: "String",
+    #                 binding_properties: {
+    #                   property: "String", # required
+    #                   field: "String",
+    #                 },
+    #                 collection_binding_properties: {
+    #                   property: "String", # required
+    #                   field: "String",
+    #                 },
+    #                 default_value: "String",
+    #                 model: "String",
+    #                 bindings: {
+    #                   "String" => {
+    #                     element: "String", # required
+    #                     property: "String", # required
+    #                   },
+    #                 },
+    #                 event: "String",
+    #                 user_attribute: "String",
+    #                 concat: [
+    #                   {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 ],
+    #                 condition: {
+    #                   property: "String",
+    #                   field: "String",
+    #                   operator: "String",
+    #                   operand: "String",
+    #                   then: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   else: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   operand_type: "String",
+    #                 },
+    #                 configured: false,
+    #                 type: "String",
+    #                 imported_value: "String",
+    #                 component_name: "String",
+    #                 property: "String",
+    #               },
+    #             },
+    #             state: {
+    #               component_name: "String", # required
+    #               property: "String", # required
+    #               set: { # required
+    #                 value: "String",
+    #                 binding_properties: {
+    #                   property: "String", # required
+    #                   field: "String",
+    #                 },
+    #                 collection_binding_properties: {
+    #                   property: "String", # required
+    #                   field: "String",
+    #                 },
+    #                 default_value: "String",
+    #                 model: "String",
+    #                 bindings: {
+    #                   "String" => {
+    #                     element: "String", # required
+    #                     property: "String", # required
+    #                   },
+    #                 },
+    #                 event: "String",
+    #                 user_attribute: "String",
+    #                 concat: [
+    #                   {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 ],
+    #                 condition: {
+    #                   property: "String",
+    #                   field: "String",
+    #                   operator: "String",
+    #                   operand: "String",
+    #                   then: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   else: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   operand_type: "String",
+    #                 },
+    #                 configured: false,
+    #                 type: "String",
+    #                 imported_value: "String",
+    #                 component_name: "String",
+    #                 property: "String",
+    #               },
+    #             },
+    #           },
+    #           binding_event: "String",
+    #         },
+    #       },
+    #       schema_version: "String",
     #     },
-    #     environment_name: "String", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.entity.app_id #=> String
-    #   resp.entity.binding_properties #=> Hash
-    #   resp.entity.binding_properties["String"].binding_properties.bucket #=> String
-    #   resp.entity.binding_properties["String"].binding_properties.default_value #=> String
-    #   resp.entity.binding_properties["String"].binding_properties.field #=> String
-    #   resp.entity.binding_properties["String"].binding_properties.key #=> String
-    #   resp.entity.binding_properties["String"].binding_properties.model #=> String
-    #   resp.entity.binding_properties["String"].binding_properties.predicates #=> Array
-    #   resp.entity.binding_properties["String"].binding_properties.predicates[0].and #=> Types::PredicateList
-    #   resp.entity.binding_properties["String"].binding_properties.predicates[0].field #=> String
-    #   resp.entity.binding_properties["String"].binding_properties.predicates[0].operand #=> String
-    #   resp.entity.binding_properties["String"].binding_properties.predicates[0].operator #=> String
-    #   resp.entity.binding_properties["String"].binding_properties.predicates[0].or #=> Types::PredicateList
-    #   resp.entity.binding_properties["String"].binding_properties.slot_name #=> String
-    #   resp.entity.binding_properties["String"].binding_properties.user_attribute #=> String
-    #   resp.entity.binding_properties["String"].default_value #=> String
-    #   resp.entity.binding_properties["String"].type #=> String
-    #   resp.entity.children #=> Array
-    #   resp.entity.children[0].children #=> Types::ComponentChildList
-    #   resp.entity.children[0].component_type #=> String
-    #   resp.entity.children[0].events #=> Hash
-    #   resp.entity.children[0].events["String"].action #=> String
-    #   resp.entity.children[0].events["String"].binding_event #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.bindings #=> Hash
-    #   resp.entity.children[0].events["String"].parameters.anchor.bindings["String"].element #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.bindings["String"].property #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.collection_binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.collection_binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.component_name #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.concat #=> Array
-    #   resp.entity.children[0].events["String"].parameters.anchor.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.anchor.condition.else #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.anchor.condition.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.condition.operand #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.condition.operand_type #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.condition.operator #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.condition.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.condition.then #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.anchor.configured #=> Boolean
-    #   resp.entity.children[0].events["String"].parameters.anchor.default_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.event #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.imported_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.model #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.type #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.user_attribute #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.value #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields #=> Hash
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].bindings #=> Hash
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].bindings["String"].element #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].bindings["String"].property #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].collection_binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].collection_binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].component_name #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].concat #=> Array
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].concat[0] #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.else #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.operand #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.operand_type #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.operator #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.then #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].configured #=> Boolean
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].default_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].event #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].imported_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].model #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].property #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].type #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].user_attribute #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].value #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.bindings #=> Hash
-    #   resp.entity.children[0].events["String"].parameters.global.bindings["String"].element #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.bindings["String"].property #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.collection_binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.collection_binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.component_name #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.concat #=> Array
-    #   resp.entity.children[0].events["String"].parameters.global.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.global.condition.else #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.global.condition.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.condition.operand #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.condition.operand_type #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.condition.operator #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.condition.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.condition.then #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.global.configured #=> Boolean
-    #   resp.entity.children[0].events["String"].parameters.global.default_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.event #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.imported_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.model #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.type #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.user_attribute #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.value #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.bindings #=> Hash
-    #   resp.entity.children[0].events["String"].parameters.id.bindings["String"].element #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.bindings["String"].property #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.collection_binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.collection_binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.component_name #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.concat #=> Array
-    #   resp.entity.children[0].events["String"].parameters.id.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.id.condition.else #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.id.condition.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.condition.operand #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.condition.operand_type #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.condition.operator #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.condition.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.condition.then #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.id.configured #=> Boolean
-    #   resp.entity.children[0].events["String"].parameters.id.default_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.event #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.imported_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.model #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.type #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.user_attribute #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.value #=> String
-    #   resp.entity.children[0].events["String"].parameters.model #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.component_name #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.bindings #=> Hash
-    #   resp.entity.children[0].events["String"].parameters.state.set.bindings["String"].element #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.bindings["String"].property #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.collection_binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.collection_binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.component_name #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.concat #=> Array
-    #   resp.entity.children[0].events["String"].parameters.state.set.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.state.set.condition.else #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.state.set.condition.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.condition.operand #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.condition.operand_type #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.condition.operator #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.condition.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.condition.then #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.state.set.configured #=> Boolean
-    #   resp.entity.children[0].events["String"].parameters.state.set.default_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.event #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.imported_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.model #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.type #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.user_attribute #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.value #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.bindings #=> Hash
-    #   resp.entity.children[0].events["String"].parameters.target.bindings["String"].element #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.bindings["String"].property #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.collection_binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.collection_binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.component_name #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.concat #=> Array
-    #   resp.entity.children[0].events["String"].parameters.target.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.target.condition.else #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.target.condition.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.condition.operand #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.condition.operand_type #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.condition.operator #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.condition.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.condition.then #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.target.configured #=> Boolean
-    #   resp.entity.children[0].events["String"].parameters.target.default_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.event #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.imported_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.model #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.type #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.user_attribute #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.value #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.bindings #=> Hash
-    #   resp.entity.children[0].events["String"].parameters.type.bindings["String"].element #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.bindings["String"].property #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.collection_binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.collection_binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.component_name #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.concat #=> Array
-    #   resp.entity.children[0].events["String"].parameters.type.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.type.condition.else #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.type.condition.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.condition.operand #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.condition.operand_type #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.condition.operator #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.condition.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.condition.then #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.type.configured #=> Boolean
-    #   resp.entity.children[0].events["String"].parameters.type.default_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.event #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.imported_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.model #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.type #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.user_attribute #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.value #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.bindings #=> Hash
-    #   resp.entity.children[0].events["String"].parameters.url.bindings["String"].element #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.bindings["String"].property #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.collection_binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.collection_binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.component_name #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.concat #=> Array
-    #   resp.entity.children[0].events["String"].parameters.url.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.url.condition.else #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.url.condition.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.condition.operand #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.condition.operand_type #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.condition.operator #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.condition.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.condition.then #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.url.configured #=> Boolean
-    #   resp.entity.children[0].events["String"].parameters.url.default_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.event #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.imported_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.model #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.type #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.user_attribute #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.value #=> String
-    #   resp.entity.children[0].name #=> String
-    #   resp.entity.children[0].properties #=> Hash
-    #   resp.entity.children[0].properties["String"].binding_properties.field #=> String
-    #   resp.entity.children[0].properties["String"].binding_properties.property #=> String
-    #   resp.entity.children[0].properties["String"].bindings #=> Hash
-    #   resp.entity.children[0].properties["String"].bindings["String"].element #=> String
-    #   resp.entity.children[0].properties["String"].bindings["String"].property #=> String
-    #   resp.entity.children[0].properties["String"].collection_binding_properties.field #=> String
-    #   resp.entity.children[0].properties["String"].collection_binding_properties.property #=> String
-    #   resp.entity.children[0].properties["String"].component_name #=> String
-    #   resp.entity.children[0].properties["String"].concat #=> Array
-    #   resp.entity.children[0].properties["String"].concat[0] #=> Types::ComponentProperty
-    #   resp.entity.children[0].properties["String"].condition.else #=> Types::ComponentProperty
-    #   resp.entity.children[0].properties["String"].condition.field #=> String
-    #   resp.entity.children[0].properties["String"].condition.operand #=> String
-    #   resp.entity.children[0].properties["String"].condition.operand_type #=> String
-    #   resp.entity.children[0].properties["String"].condition.operator #=> String
-    #   resp.entity.children[0].properties["String"].condition.property #=> String
-    #   resp.entity.children[0].properties["String"].condition.then #=> Types::ComponentProperty
-    #   resp.entity.children[0].properties["String"].configured #=> Boolean
-    #   resp.entity.children[0].properties["String"].default_value #=> String
-    #   resp.entity.children[0].properties["String"].event #=> String
-    #   resp.entity.children[0].properties["String"].imported_value #=> String
-    #   resp.entity.children[0].properties["String"].model #=> String
-    #   resp.entity.children[0].properties["String"].property #=> String
-    #   resp.entity.children[0].properties["String"].type #=> String
-    #   resp.entity.children[0].properties["String"].user_attribute #=> String
-    #   resp.entity.children[0].properties["String"].value #=> String
-    #   resp.entity.children[0].source_id #=> String
-    #   resp.entity.collection_properties #=> Hash
-    #   resp.entity.collection_properties["String"].identifiers #=> Array
-    #   resp.entity.collection_properties["String"].identifiers[0] #=> String
-    #   resp.entity.collection_properties["String"].model #=> String
-    #   resp.entity.collection_properties["String"].predicate.and #=> Array
-    #   resp.entity.collection_properties["String"].predicate.and[0] #=> Types::Predicate
-    #   resp.entity.collection_properties["String"].predicate.field #=> String
-    #   resp.entity.collection_properties["String"].predicate.operand #=> String
-    #   resp.entity.collection_properties["String"].predicate.operator #=> String
-    #   resp.entity.collection_properties["String"].predicate.or #=> Array
-    #   resp.entity.collection_properties["String"].predicate.or[0] #=> Types::Predicate
-    #   resp.entity.collection_properties["String"].sort #=> Array
-    #   resp.entity.collection_properties["String"].sort[0].direction #=> String, one of "ASC", "DESC"
-    #   resp.entity.collection_properties["String"].sort[0].field #=> String
-    #   resp.entity.component_type #=> String
-    #   resp.entity.created_at #=> Time
     #   resp.entity.environment_name #=> String
-    #   resp.entity.events #=> Hash
-    #   resp.entity.events["String"].action #=> String
-    #   resp.entity.events["String"].binding_event #=> String
-    #   resp.entity.events["String"].parameters.anchor.binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.anchor.binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.anchor.bindings #=> Hash
-    #   resp.entity.events["String"].parameters.anchor.bindings["String"].element #=> String
-    #   resp.entity.events["String"].parameters.anchor.bindings["String"].property #=> String
-    #   resp.entity.events["String"].parameters.anchor.collection_binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.anchor.collection_binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.anchor.component_name #=> String
-    #   resp.entity.events["String"].parameters.anchor.concat #=> Array
-    #   resp.entity.events["String"].parameters.anchor.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.anchor.condition.else #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.anchor.condition.field #=> String
-    #   resp.entity.events["String"].parameters.anchor.condition.operand #=> String
-    #   resp.entity.events["String"].parameters.anchor.condition.operand_type #=> String
-    #   resp.entity.events["String"].parameters.anchor.condition.operator #=> String
-    #   resp.entity.events["String"].parameters.anchor.condition.property #=> String
-    #   resp.entity.events["String"].parameters.anchor.condition.then #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.anchor.configured #=> Boolean
-    #   resp.entity.events["String"].parameters.anchor.default_value #=> String
-    #   resp.entity.events["String"].parameters.anchor.event #=> String
-    #   resp.entity.events["String"].parameters.anchor.imported_value #=> String
-    #   resp.entity.events["String"].parameters.anchor.model #=> String
-    #   resp.entity.events["String"].parameters.anchor.property #=> String
-    #   resp.entity.events["String"].parameters.anchor.type #=> String
-    #   resp.entity.events["String"].parameters.anchor.user_attribute #=> String
-    #   resp.entity.events["String"].parameters.anchor.value #=> String
-    #   resp.entity.events["String"].parameters.fields #=> Hash
-    #   resp.entity.events["String"].parameters.fields["String"].binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].bindings #=> Hash
-    #   resp.entity.events["String"].parameters.fields["String"].bindings["String"].element #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].bindings["String"].property #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].collection_binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].collection_binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].component_name #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].concat #=> Array
-    #   resp.entity.events["String"].parameters.fields["String"].concat[0] #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.fields["String"].condition.else #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.fields["String"].condition.field #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].condition.operand #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].condition.operand_type #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].condition.operator #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].condition.property #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].condition.then #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.fields["String"].configured #=> Boolean
-    #   resp.entity.events["String"].parameters.fields["String"].default_value #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].event #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].imported_value #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].model #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].property #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].type #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].user_attribute #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].value #=> String
-    #   resp.entity.events["String"].parameters.global.binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.global.binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.global.bindings #=> Hash
-    #   resp.entity.events["String"].parameters.global.bindings["String"].element #=> String
-    #   resp.entity.events["String"].parameters.global.bindings["String"].property #=> String
-    #   resp.entity.events["String"].parameters.global.collection_binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.global.collection_binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.global.component_name #=> String
-    #   resp.entity.events["String"].parameters.global.concat #=> Array
-    #   resp.entity.events["String"].parameters.global.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.global.condition.else #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.global.condition.field #=> String
-    #   resp.entity.events["String"].parameters.global.condition.operand #=> String
-    #   resp.entity.events["String"].parameters.global.condition.operand_type #=> String
-    #   resp.entity.events["String"].parameters.global.condition.operator #=> String
-    #   resp.entity.events["String"].parameters.global.condition.property #=> String
-    #   resp.entity.events["String"].parameters.global.condition.then #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.global.configured #=> Boolean
-    #   resp.entity.events["String"].parameters.global.default_value #=> String
-    #   resp.entity.events["String"].parameters.global.event #=> String
-    #   resp.entity.events["String"].parameters.global.imported_value #=> String
-    #   resp.entity.events["String"].parameters.global.model #=> String
-    #   resp.entity.events["String"].parameters.global.property #=> String
-    #   resp.entity.events["String"].parameters.global.type #=> String
-    #   resp.entity.events["String"].parameters.global.user_attribute #=> String
-    #   resp.entity.events["String"].parameters.global.value #=> String
-    #   resp.entity.events["String"].parameters.id.binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.id.binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.id.bindings #=> Hash
-    #   resp.entity.events["String"].parameters.id.bindings["String"].element #=> String
-    #   resp.entity.events["String"].parameters.id.bindings["String"].property #=> String
-    #   resp.entity.events["String"].parameters.id.collection_binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.id.collection_binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.id.component_name #=> String
-    #   resp.entity.events["String"].parameters.id.concat #=> Array
-    #   resp.entity.events["String"].parameters.id.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.id.condition.else #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.id.condition.field #=> String
-    #   resp.entity.events["String"].parameters.id.condition.operand #=> String
-    #   resp.entity.events["String"].parameters.id.condition.operand_type #=> String
-    #   resp.entity.events["String"].parameters.id.condition.operator #=> String
-    #   resp.entity.events["String"].parameters.id.condition.property #=> String
-    #   resp.entity.events["String"].parameters.id.condition.then #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.id.configured #=> Boolean
-    #   resp.entity.events["String"].parameters.id.default_value #=> String
-    #   resp.entity.events["String"].parameters.id.event #=> String
-    #   resp.entity.events["String"].parameters.id.imported_value #=> String
-    #   resp.entity.events["String"].parameters.id.model #=> String
-    #   resp.entity.events["String"].parameters.id.property #=> String
-    #   resp.entity.events["String"].parameters.id.type #=> String
-    #   resp.entity.events["String"].parameters.id.user_attribute #=> String
-    #   resp.entity.events["String"].parameters.id.value #=> String
-    #   resp.entity.events["String"].parameters.model #=> String
-    #   resp.entity.events["String"].parameters.state.component_name #=> String
-    #   resp.entity.events["String"].parameters.state.property #=> String
-    #   resp.entity.events["String"].parameters.state.set.binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.state.set.binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.state.set.bindings #=> Hash
-    #   resp.entity.events["String"].parameters.state.set.bindings["String"].element #=> String
-    #   resp.entity.events["String"].parameters.state.set.bindings["String"].property #=> String
-    #   resp.entity.events["String"].parameters.state.set.collection_binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.state.set.collection_binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.state.set.component_name #=> String
-    #   resp.entity.events["String"].parameters.state.set.concat #=> Array
-    #   resp.entity.events["String"].parameters.state.set.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.state.set.condition.else #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.state.set.condition.field #=> String
-    #   resp.entity.events["String"].parameters.state.set.condition.operand #=> String
-    #   resp.entity.events["String"].parameters.state.set.condition.operand_type #=> String
-    #   resp.entity.events["String"].parameters.state.set.condition.operator #=> String
-    #   resp.entity.events["String"].parameters.state.set.condition.property #=> String
-    #   resp.entity.events["String"].parameters.state.set.condition.then #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.state.set.configured #=> Boolean
-    #   resp.entity.events["String"].parameters.state.set.default_value #=> String
-    #   resp.entity.events["String"].parameters.state.set.event #=> String
-    #   resp.entity.events["String"].parameters.state.set.imported_value #=> String
-    #   resp.entity.events["String"].parameters.state.set.model #=> String
-    #   resp.entity.events["String"].parameters.state.set.property #=> String
-    #   resp.entity.events["String"].parameters.state.set.type #=> String
-    #   resp.entity.events["String"].parameters.state.set.user_attribute #=> String
-    #   resp.entity.events["String"].parameters.state.set.value #=> String
-    #   resp.entity.events["String"].parameters.target.binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.target.binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.target.bindings #=> Hash
-    #   resp.entity.events["String"].parameters.target.bindings["String"].element #=> String
-    #   resp.entity.events["String"].parameters.target.bindings["String"].property #=> String
-    #   resp.entity.events["String"].parameters.target.collection_binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.target.collection_binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.target.component_name #=> String
-    #   resp.entity.events["String"].parameters.target.concat #=> Array
-    #   resp.entity.events["String"].parameters.target.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.target.condition.else #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.target.condition.field #=> String
-    #   resp.entity.events["String"].parameters.target.condition.operand #=> String
-    #   resp.entity.events["String"].parameters.target.condition.operand_type #=> String
-    #   resp.entity.events["String"].parameters.target.condition.operator #=> String
-    #   resp.entity.events["String"].parameters.target.condition.property #=> String
-    #   resp.entity.events["String"].parameters.target.condition.then #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.target.configured #=> Boolean
-    #   resp.entity.events["String"].parameters.target.default_value #=> String
-    #   resp.entity.events["String"].parameters.target.event #=> String
-    #   resp.entity.events["String"].parameters.target.imported_value #=> String
-    #   resp.entity.events["String"].parameters.target.model #=> String
-    #   resp.entity.events["String"].parameters.target.property #=> String
-    #   resp.entity.events["String"].parameters.target.type #=> String
-    #   resp.entity.events["String"].parameters.target.user_attribute #=> String
-    #   resp.entity.events["String"].parameters.target.value #=> String
-    #   resp.entity.events["String"].parameters.type.binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.type.binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.type.bindings #=> Hash
-    #   resp.entity.events["String"].parameters.type.bindings["String"].element #=> String
-    #   resp.entity.events["String"].parameters.type.bindings["String"].property #=> String
-    #   resp.entity.events["String"].parameters.type.collection_binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.type.collection_binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.type.component_name #=> String
-    #   resp.entity.events["String"].parameters.type.concat #=> Array
-    #   resp.entity.events["String"].parameters.type.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.type.condition.else #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.type.condition.field #=> String
-    #   resp.entity.events["String"].parameters.type.condition.operand #=> String
-    #   resp.entity.events["String"].parameters.type.condition.operand_type #=> String
-    #   resp.entity.events["String"].parameters.type.condition.operator #=> String
-    #   resp.entity.events["String"].parameters.type.condition.property #=> String
-    #   resp.entity.events["String"].parameters.type.condition.then #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.type.configured #=> Boolean
-    #   resp.entity.events["String"].parameters.type.default_value #=> String
-    #   resp.entity.events["String"].parameters.type.event #=> String
-    #   resp.entity.events["String"].parameters.type.imported_value #=> String
-    #   resp.entity.events["String"].parameters.type.model #=> String
-    #   resp.entity.events["String"].parameters.type.property #=> String
-    #   resp.entity.events["String"].parameters.type.type #=> String
-    #   resp.entity.events["String"].parameters.type.user_attribute #=> String
-    #   resp.entity.events["String"].parameters.type.value #=> String
-    #   resp.entity.events["String"].parameters.url.binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.url.binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.url.bindings #=> Hash
-    #   resp.entity.events["String"].parameters.url.bindings["String"].element #=> String
-    #   resp.entity.events["String"].parameters.url.bindings["String"].property #=> String
-    #   resp.entity.events["String"].parameters.url.collection_binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.url.collection_binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.url.component_name #=> String
-    #   resp.entity.events["String"].parameters.url.concat #=> Array
-    #   resp.entity.events["String"].parameters.url.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.url.condition.else #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.url.condition.field #=> String
-    #   resp.entity.events["String"].parameters.url.condition.operand #=> String
-    #   resp.entity.events["String"].parameters.url.condition.operand_type #=> String
-    #   resp.entity.events["String"].parameters.url.condition.operator #=> String
-    #   resp.entity.events["String"].parameters.url.condition.property #=> String
-    #   resp.entity.events["String"].parameters.url.condition.then #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.url.configured #=> Boolean
-    #   resp.entity.events["String"].parameters.url.default_value #=> String
-    #   resp.entity.events["String"].parameters.url.event #=> String
-    #   resp.entity.events["String"].parameters.url.imported_value #=> String
-    #   resp.entity.events["String"].parameters.url.model #=> String
-    #   resp.entity.events["String"].parameters.url.property #=> String
-    #   resp.entity.events["String"].parameters.url.type #=> String
-    #   resp.entity.events["String"].parameters.url.user_attribute #=> String
-    #   resp.entity.events["String"].parameters.url.value #=> String
+    #   resp.entity.source_id #=> String
     #   resp.entity.id #=> String
-    #   resp.entity.modified_at #=> Time
     #   resp.entity.name #=> String
-    #   resp.entity.overrides #=> Hash
-    #   resp.entity.overrides["String"] #=> Hash
-    #   resp.entity.overrides["String"]["String"] #=> String
+    #   resp.entity.component_type #=> String
     #   resp.entity.properties #=> Hash
-    #   resp.entity.properties["String"].binding_properties.field #=> String
+    #   resp.entity.properties["String"].value #=> String
     #   resp.entity.properties["String"].binding_properties.property #=> String
+    #   resp.entity.properties["String"].binding_properties.field #=> String
+    #   resp.entity.properties["String"].collection_binding_properties.property #=> String
+    #   resp.entity.properties["String"].collection_binding_properties.field #=> String
+    #   resp.entity.properties["String"].default_value #=> String
+    #   resp.entity.properties["String"].model #=> String
     #   resp.entity.properties["String"].bindings #=> Hash
     #   resp.entity.properties["String"].bindings["String"].element #=> String
     #   resp.entity.properties["String"].bindings["String"].property #=> String
-    #   resp.entity.properties["String"].collection_binding_properties.field #=> String
-    #   resp.entity.properties["String"].collection_binding_properties.property #=> String
-    #   resp.entity.properties["String"].component_name #=> String
+    #   resp.entity.properties["String"].event #=> String
+    #   resp.entity.properties["String"].user_attribute #=> String
     #   resp.entity.properties["String"].concat #=> Array
     #   resp.entity.properties["String"].concat[0] #=> Types::ComponentProperty
-    #   resp.entity.properties["String"].condition.else #=> Types::ComponentProperty
-    #   resp.entity.properties["String"].condition.field #=> String
-    #   resp.entity.properties["String"].condition.operand #=> String
-    #   resp.entity.properties["String"].condition.operand_type #=> String
-    #   resp.entity.properties["String"].condition.operator #=> String
     #   resp.entity.properties["String"].condition.property #=> String
+    #   resp.entity.properties["String"].condition.field #=> String
+    #   resp.entity.properties["String"].condition.operator #=> String
+    #   resp.entity.properties["String"].condition.operand #=> String
     #   resp.entity.properties["String"].condition.then #=> Types::ComponentProperty
+    #   resp.entity.properties["String"].condition.else #=> Types::ComponentProperty
+    #   resp.entity.properties["String"].condition.operand_type #=> String
     #   resp.entity.properties["String"].configured #=> Boolean
-    #   resp.entity.properties["String"].default_value #=> String
-    #   resp.entity.properties["String"].event #=> String
-    #   resp.entity.properties["String"].imported_value #=> String
-    #   resp.entity.properties["String"].model #=> String
-    #   resp.entity.properties["String"].property #=> String
     #   resp.entity.properties["String"].type #=> String
-    #   resp.entity.properties["String"].user_attribute #=> String
-    #   resp.entity.properties["String"].value #=> String
-    #   resp.entity.schema_version #=> String
-    #   resp.entity.source_id #=> String
-    #   resp.entity.tags #=> Hash
-    #   resp.entity.tags["TagKey"] #=> String
+    #   resp.entity.properties["String"].imported_value #=> String
+    #   resp.entity.properties["String"].component_name #=> String
+    #   resp.entity.properties["String"].property #=> String
+    #   resp.entity.children #=> Array
+    #   resp.entity.children[0].component_type #=> String
+    #   resp.entity.children[0].name #=> String
+    #   resp.entity.children[0].properties #=> Hash
+    #   resp.entity.children[0].properties["String"].value #=> String
+    #   resp.entity.children[0].properties["String"].binding_properties.property #=> String
+    #   resp.entity.children[0].properties["String"].binding_properties.field #=> String
+    #   resp.entity.children[0].properties["String"].collection_binding_properties.property #=> String
+    #   resp.entity.children[0].properties["String"].collection_binding_properties.field #=> String
+    #   resp.entity.children[0].properties["String"].default_value #=> String
+    #   resp.entity.children[0].properties["String"].model #=> String
+    #   resp.entity.children[0].properties["String"].bindings #=> Hash
+    #   resp.entity.children[0].properties["String"].bindings["String"].element #=> String
+    #   resp.entity.children[0].properties["String"].bindings["String"].property #=> String
+    #   resp.entity.children[0].properties["String"].event #=> String
+    #   resp.entity.children[0].properties["String"].user_attribute #=> String
+    #   resp.entity.children[0].properties["String"].concat #=> Array
+    #   resp.entity.children[0].properties["String"].concat[0] #=> Types::ComponentProperty
+    #   resp.entity.children[0].properties["String"].condition.property #=> String
+    #   resp.entity.children[0].properties["String"].condition.field #=> String
+    #   resp.entity.children[0].properties["String"].condition.operator #=> String
+    #   resp.entity.children[0].properties["String"].condition.operand #=> String
+    #   resp.entity.children[0].properties["String"].condition.then #=> Types::ComponentProperty
+    #   resp.entity.children[0].properties["String"].condition.else #=> Types::ComponentProperty
+    #   resp.entity.children[0].properties["String"].condition.operand_type #=> String
+    #   resp.entity.children[0].properties["String"].configured #=> Boolean
+    #   resp.entity.children[0].properties["String"].type #=> String
+    #   resp.entity.children[0].properties["String"].imported_value #=> String
+    #   resp.entity.children[0].properties["String"].component_name #=> String
+    #   resp.entity.children[0].properties["String"].property #=> String
+    #   resp.entity.children[0].children #=> Types::ComponentChildList
+    #   resp.entity.children[0].events #=> Hash
+    #   resp.entity.children[0].events["String"].action #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.value #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.collection_binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.collection_binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.default_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.model #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.bindings #=> Hash
+    #   resp.entity.children[0].events["String"].parameters.type.bindings["String"].element #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.bindings["String"].property #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.event #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.user_attribute #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.concat #=> Array
+    #   resp.entity.children[0].events["String"].parameters.type.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.type.condition.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.condition.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.condition.operator #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.condition.operand #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.condition.then #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.type.condition.else #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.type.condition.operand_type #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.configured #=> Boolean
+    #   resp.entity.children[0].events["String"].parameters.type.type #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.imported_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.component_name #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.value #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.collection_binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.collection_binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.default_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.model #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.bindings #=> Hash
+    #   resp.entity.children[0].events["String"].parameters.url.bindings["String"].element #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.bindings["String"].property #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.event #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.user_attribute #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.concat #=> Array
+    #   resp.entity.children[0].events["String"].parameters.url.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.url.condition.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.condition.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.condition.operator #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.condition.operand #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.condition.then #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.url.condition.else #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.url.condition.operand_type #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.configured #=> Boolean
+    #   resp.entity.children[0].events["String"].parameters.url.type #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.imported_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.component_name #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.value #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.collection_binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.collection_binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.default_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.model #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.bindings #=> Hash
+    #   resp.entity.children[0].events["String"].parameters.anchor.bindings["String"].element #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.bindings["String"].property #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.event #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.user_attribute #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.concat #=> Array
+    #   resp.entity.children[0].events["String"].parameters.anchor.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.anchor.condition.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.condition.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.condition.operator #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.condition.operand #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.condition.then #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.anchor.condition.else #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.anchor.condition.operand_type #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.configured #=> Boolean
+    #   resp.entity.children[0].events["String"].parameters.anchor.type #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.imported_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.component_name #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.value #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.collection_binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.collection_binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.default_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.model #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.bindings #=> Hash
+    #   resp.entity.children[0].events["String"].parameters.target.bindings["String"].element #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.bindings["String"].property #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.event #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.user_attribute #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.concat #=> Array
+    #   resp.entity.children[0].events["String"].parameters.target.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.target.condition.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.condition.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.condition.operator #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.condition.operand #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.condition.then #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.target.condition.else #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.target.condition.operand_type #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.configured #=> Boolean
+    #   resp.entity.children[0].events["String"].parameters.target.type #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.imported_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.component_name #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.value #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.collection_binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.collection_binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.default_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.model #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.bindings #=> Hash
+    #   resp.entity.children[0].events["String"].parameters.global.bindings["String"].element #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.bindings["String"].property #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.event #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.user_attribute #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.concat #=> Array
+    #   resp.entity.children[0].events["String"].parameters.global.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.global.condition.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.condition.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.condition.operator #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.condition.operand #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.condition.then #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.global.condition.else #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.global.condition.operand_type #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.configured #=> Boolean
+    #   resp.entity.children[0].events["String"].parameters.global.type #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.imported_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.component_name #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.model #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.value #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.collection_binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.collection_binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.default_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.model #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.bindings #=> Hash
+    #   resp.entity.children[0].events["String"].parameters.id.bindings["String"].element #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.bindings["String"].property #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.event #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.user_attribute #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.concat #=> Array
+    #   resp.entity.children[0].events["String"].parameters.id.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.id.condition.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.condition.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.condition.operator #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.condition.operand #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.condition.then #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.id.condition.else #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.id.condition.operand_type #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.configured #=> Boolean
+    #   resp.entity.children[0].events["String"].parameters.id.type #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.imported_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.component_name #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields #=> Hash
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].value #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].collection_binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].collection_binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].default_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].model #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].bindings #=> Hash
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].bindings["String"].element #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].bindings["String"].property #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].event #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].user_attribute #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].concat #=> Array
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].concat[0] #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.operator #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.operand #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.then #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.else #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.operand_type #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].configured #=> Boolean
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].type #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].imported_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].component_name #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].property #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.component_name #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.value #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.collection_binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.collection_binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.default_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.model #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.bindings #=> Hash
+    #   resp.entity.children[0].events["String"].parameters.state.set.bindings["String"].element #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.bindings["String"].property #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.event #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.user_attribute #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.concat #=> Array
+    #   resp.entity.children[0].events["String"].parameters.state.set.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.state.set.condition.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.condition.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.condition.operator #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.condition.operand #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.condition.then #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.state.set.condition.else #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.state.set.condition.operand_type #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.configured #=> Boolean
+    #   resp.entity.children[0].events["String"].parameters.state.set.type #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.imported_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.component_name #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.property #=> String
+    #   resp.entity.children[0].events["String"].binding_event #=> String
+    #   resp.entity.children[0].source_id #=> String
     #   resp.entity.variants #=> Array
+    #   resp.entity.variants[0].variant_values #=> Hash
+    #   resp.entity.variants[0].variant_values["String"] #=> String
     #   resp.entity.variants[0].overrides #=> Hash
     #   resp.entity.variants[0].overrides["String"] #=> Hash
     #   resp.entity.variants[0].overrides["String"]["String"] #=> String
-    #   resp.entity.variants[0].variant_values #=> Hash
-    #   resp.entity.variants[0].variant_values["String"] #=> String
+    #   resp.entity.overrides #=> Hash
+    #   resp.entity.overrides["String"] #=> Hash
+    #   resp.entity.overrides["String"]["String"] #=> String
+    #   resp.entity.binding_properties #=> Hash
+    #   resp.entity.binding_properties["String"].type #=> String
+    #   resp.entity.binding_properties["String"].binding_properties.model #=> String
+    #   resp.entity.binding_properties["String"].binding_properties.field #=> String
+    #   resp.entity.binding_properties["String"].binding_properties.predicates #=> Array
+    #   resp.entity.binding_properties["String"].binding_properties.predicates[0].or #=> Types::PredicateList
+    #   resp.entity.binding_properties["String"].binding_properties.predicates[0].and #=> Types::PredicateList
+    #   resp.entity.binding_properties["String"].binding_properties.predicates[0].field #=> String
+    #   resp.entity.binding_properties["String"].binding_properties.predicates[0].operator #=> String
+    #   resp.entity.binding_properties["String"].binding_properties.predicates[0].operand #=> String
+    #   resp.entity.binding_properties["String"].binding_properties.predicates[0].operand_type #=> String
+    #   resp.entity.binding_properties["String"].binding_properties.user_attribute #=> String
+    #   resp.entity.binding_properties["String"].binding_properties.bucket #=> String
+    #   resp.entity.binding_properties["String"].binding_properties.key #=> String
+    #   resp.entity.binding_properties["String"].binding_properties.default_value #=> String
+    #   resp.entity.binding_properties["String"].binding_properties.slot_name #=> String
+    #   resp.entity.binding_properties["String"].default_value #=> String
+    #   resp.entity.collection_properties #=> Hash
+    #   resp.entity.collection_properties["String"].model #=> String
+    #   resp.entity.collection_properties["String"].sort #=> Array
+    #   resp.entity.collection_properties["String"].sort[0].field #=> String
+    #   resp.entity.collection_properties["String"].sort[0].direction #=> String, one of "ASC", "DESC"
+    #   resp.entity.collection_properties["String"].predicate.or #=> Array
+    #   resp.entity.collection_properties["String"].predicate.or[0] #=> Types::Predicate
+    #   resp.entity.collection_properties["String"].predicate.and #=> Array
+    #   resp.entity.collection_properties["String"].predicate.and[0] #=> Types::Predicate
+    #   resp.entity.collection_properties["String"].predicate.field #=> String
+    #   resp.entity.collection_properties["String"].predicate.operator #=> String
+    #   resp.entity.collection_properties["String"].predicate.operand #=> String
+    #   resp.entity.collection_properties["String"].predicate.operand_type #=> String
+    #   resp.entity.collection_properties["String"].identifiers #=> Array
+    #   resp.entity.collection_properties["String"].identifiers[0] #=> String
+    #   resp.entity.created_at #=> Time
+    #   resp.entity.modified_at #=> Time
+    #   resp.entity.tags #=> Hash
+    #   resp.entity.tags["TagKey"] #=> String
+    #   resp.entity.events #=> Hash
+    #   resp.entity.events["String"].action #=> String
+    #   resp.entity.events["String"].parameters.type.value #=> String
+    #   resp.entity.events["String"].parameters.type.binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.type.binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.type.collection_binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.type.collection_binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.type.default_value #=> String
+    #   resp.entity.events["String"].parameters.type.model #=> String
+    #   resp.entity.events["String"].parameters.type.bindings #=> Hash
+    #   resp.entity.events["String"].parameters.type.bindings["String"].element #=> String
+    #   resp.entity.events["String"].parameters.type.bindings["String"].property #=> String
+    #   resp.entity.events["String"].parameters.type.event #=> String
+    #   resp.entity.events["String"].parameters.type.user_attribute #=> String
+    #   resp.entity.events["String"].parameters.type.concat #=> Array
+    #   resp.entity.events["String"].parameters.type.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.type.condition.property #=> String
+    #   resp.entity.events["String"].parameters.type.condition.field #=> String
+    #   resp.entity.events["String"].parameters.type.condition.operator #=> String
+    #   resp.entity.events["String"].parameters.type.condition.operand #=> String
+    #   resp.entity.events["String"].parameters.type.condition.then #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.type.condition.else #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.type.condition.operand_type #=> String
+    #   resp.entity.events["String"].parameters.type.configured #=> Boolean
+    #   resp.entity.events["String"].parameters.type.type #=> String
+    #   resp.entity.events["String"].parameters.type.imported_value #=> String
+    #   resp.entity.events["String"].parameters.type.component_name #=> String
+    #   resp.entity.events["String"].parameters.type.property #=> String
+    #   resp.entity.events["String"].parameters.url.value #=> String
+    #   resp.entity.events["String"].parameters.url.binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.url.binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.url.collection_binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.url.collection_binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.url.default_value #=> String
+    #   resp.entity.events["String"].parameters.url.model #=> String
+    #   resp.entity.events["String"].parameters.url.bindings #=> Hash
+    #   resp.entity.events["String"].parameters.url.bindings["String"].element #=> String
+    #   resp.entity.events["String"].parameters.url.bindings["String"].property #=> String
+    #   resp.entity.events["String"].parameters.url.event #=> String
+    #   resp.entity.events["String"].parameters.url.user_attribute #=> String
+    #   resp.entity.events["String"].parameters.url.concat #=> Array
+    #   resp.entity.events["String"].parameters.url.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.url.condition.property #=> String
+    #   resp.entity.events["String"].parameters.url.condition.field #=> String
+    #   resp.entity.events["String"].parameters.url.condition.operator #=> String
+    #   resp.entity.events["String"].parameters.url.condition.operand #=> String
+    #   resp.entity.events["String"].parameters.url.condition.then #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.url.condition.else #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.url.condition.operand_type #=> String
+    #   resp.entity.events["String"].parameters.url.configured #=> Boolean
+    #   resp.entity.events["String"].parameters.url.type #=> String
+    #   resp.entity.events["String"].parameters.url.imported_value #=> String
+    #   resp.entity.events["String"].parameters.url.component_name #=> String
+    #   resp.entity.events["String"].parameters.url.property #=> String
+    #   resp.entity.events["String"].parameters.anchor.value #=> String
+    #   resp.entity.events["String"].parameters.anchor.binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.anchor.binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.anchor.collection_binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.anchor.collection_binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.anchor.default_value #=> String
+    #   resp.entity.events["String"].parameters.anchor.model #=> String
+    #   resp.entity.events["String"].parameters.anchor.bindings #=> Hash
+    #   resp.entity.events["String"].parameters.anchor.bindings["String"].element #=> String
+    #   resp.entity.events["String"].parameters.anchor.bindings["String"].property #=> String
+    #   resp.entity.events["String"].parameters.anchor.event #=> String
+    #   resp.entity.events["String"].parameters.anchor.user_attribute #=> String
+    #   resp.entity.events["String"].parameters.anchor.concat #=> Array
+    #   resp.entity.events["String"].parameters.anchor.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.anchor.condition.property #=> String
+    #   resp.entity.events["String"].parameters.anchor.condition.field #=> String
+    #   resp.entity.events["String"].parameters.anchor.condition.operator #=> String
+    #   resp.entity.events["String"].parameters.anchor.condition.operand #=> String
+    #   resp.entity.events["String"].parameters.anchor.condition.then #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.anchor.condition.else #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.anchor.condition.operand_type #=> String
+    #   resp.entity.events["String"].parameters.anchor.configured #=> Boolean
+    #   resp.entity.events["String"].parameters.anchor.type #=> String
+    #   resp.entity.events["String"].parameters.anchor.imported_value #=> String
+    #   resp.entity.events["String"].parameters.anchor.component_name #=> String
+    #   resp.entity.events["String"].parameters.anchor.property #=> String
+    #   resp.entity.events["String"].parameters.target.value #=> String
+    #   resp.entity.events["String"].parameters.target.binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.target.binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.target.collection_binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.target.collection_binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.target.default_value #=> String
+    #   resp.entity.events["String"].parameters.target.model #=> String
+    #   resp.entity.events["String"].parameters.target.bindings #=> Hash
+    #   resp.entity.events["String"].parameters.target.bindings["String"].element #=> String
+    #   resp.entity.events["String"].parameters.target.bindings["String"].property #=> String
+    #   resp.entity.events["String"].parameters.target.event #=> String
+    #   resp.entity.events["String"].parameters.target.user_attribute #=> String
+    #   resp.entity.events["String"].parameters.target.concat #=> Array
+    #   resp.entity.events["String"].parameters.target.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.target.condition.property #=> String
+    #   resp.entity.events["String"].parameters.target.condition.field #=> String
+    #   resp.entity.events["String"].parameters.target.condition.operator #=> String
+    #   resp.entity.events["String"].parameters.target.condition.operand #=> String
+    #   resp.entity.events["String"].parameters.target.condition.then #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.target.condition.else #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.target.condition.operand_type #=> String
+    #   resp.entity.events["String"].parameters.target.configured #=> Boolean
+    #   resp.entity.events["String"].parameters.target.type #=> String
+    #   resp.entity.events["String"].parameters.target.imported_value #=> String
+    #   resp.entity.events["String"].parameters.target.component_name #=> String
+    #   resp.entity.events["String"].parameters.target.property #=> String
+    #   resp.entity.events["String"].parameters.global.value #=> String
+    #   resp.entity.events["String"].parameters.global.binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.global.binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.global.collection_binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.global.collection_binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.global.default_value #=> String
+    #   resp.entity.events["String"].parameters.global.model #=> String
+    #   resp.entity.events["String"].parameters.global.bindings #=> Hash
+    #   resp.entity.events["String"].parameters.global.bindings["String"].element #=> String
+    #   resp.entity.events["String"].parameters.global.bindings["String"].property #=> String
+    #   resp.entity.events["String"].parameters.global.event #=> String
+    #   resp.entity.events["String"].parameters.global.user_attribute #=> String
+    #   resp.entity.events["String"].parameters.global.concat #=> Array
+    #   resp.entity.events["String"].parameters.global.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.global.condition.property #=> String
+    #   resp.entity.events["String"].parameters.global.condition.field #=> String
+    #   resp.entity.events["String"].parameters.global.condition.operator #=> String
+    #   resp.entity.events["String"].parameters.global.condition.operand #=> String
+    #   resp.entity.events["String"].parameters.global.condition.then #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.global.condition.else #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.global.condition.operand_type #=> String
+    #   resp.entity.events["String"].parameters.global.configured #=> Boolean
+    #   resp.entity.events["String"].parameters.global.type #=> String
+    #   resp.entity.events["String"].parameters.global.imported_value #=> String
+    #   resp.entity.events["String"].parameters.global.component_name #=> String
+    #   resp.entity.events["String"].parameters.global.property #=> String
+    #   resp.entity.events["String"].parameters.model #=> String
+    #   resp.entity.events["String"].parameters.id.value #=> String
+    #   resp.entity.events["String"].parameters.id.binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.id.binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.id.collection_binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.id.collection_binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.id.default_value #=> String
+    #   resp.entity.events["String"].parameters.id.model #=> String
+    #   resp.entity.events["String"].parameters.id.bindings #=> Hash
+    #   resp.entity.events["String"].parameters.id.bindings["String"].element #=> String
+    #   resp.entity.events["String"].parameters.id.bindings["String"].property #=> String
+    #   resp.entity.events["String"].parameters.id.event #=> String
+    #   resp.entity.events["String"].parameters.id.user_attribute #=> String
+    #   resp.entity.events["String"].parameters.id.concat #=> Array
+    #   resp.entity.events["String"].parameters.id.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.id.condition.property #=> String
+    #   resp.entity.events["String"].parameters.id.condition.field #=> String
+    #   resp.entity.events["String"].parameters.id.condition.operator #=> String
+    #   resp.entity.events["String"].parameters.id.condition.operand #=> String
+    #   resp.entity.events["String"].parameters.id.condition.then #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.id.condition.else #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.id.condition.operand_type #=> String
+    #   resp.entity.events["String"].parameters.id.configured #=> Boolean
+    #   resp.entity.events["String"].parameters.id.type #=> String
+    #   resp.entity.events["String"].parameters.id.imported_value #=> String
+    #   resp.entity.events["String"].parameters.id.component_name #=> String
+    #   resp.entity.events["String"].parameters.id.property #=> String
+    #   resp.entity.events["String"].parameters.fields #=> Hash
+    #   resp.entity.events["String"].parameters.fields["String"].value #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].collection_binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].collection_binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].default_value #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].model #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].bindings #=> Hash
+    #   resp.entity.events["String"].parameters.fields["String"].bindings["String"].element #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].bindings["String"].property #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].event #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].user_attribute #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].concat #=> Array
+    #   resp.entity.events["String"].parameters.fields["String"].concat[0] #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.fields["String"].condition.property #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].condition.field #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].condition.operator #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].condition.operand #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].condition.then #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.fields["String"].condition.else #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.fields["String"].condition.operand_type #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].configured #=> Boolean
+    #   resp.entity.events["String"].parameters.fields["String"].type #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].imported_value #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].component_name #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].property #=> String
+    #   resp.entity.events["String"].parameters.state.component_name #=> String
+    #   resp.entity.events["String"].parameters.state.property #=> String
+    #   resp.entity.events["String"].parameters.state.set.value #=> String
+    #   resp.entity.events["String"].parameters.state.set.binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.state.set.binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.state.set.collection_binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.state.set.collection_binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.state.set.default_value #=> String
+    #   resp.entity.events["String"].parameters.state.set.model #=> String
+    #   resp.entity.events["String"].parameters.state.set.bindings #=> Hash
+    #   resp.entity.events["String"].parameters.state.set.bindings["String"].element #=> String
+    #   resp.entity.events["String"].parameters.state.set.bindings["String"].property #=> String
+    #   resp.entity.events["String"].parameters.state.set.event #=> String
+    #   resp.entity.events["String"].parameters.state.set.user_attribute #=> String
+    #   resp.entity.events["String"].parameters.state.set.concat #=> Array
+    #   resp.entity.events["String"].parameters.state.set.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.state.set.condition.property #=> String
+    #   resp.entity.events["String"].parameters.state.set.condition.field #=> String
+    #   resp.entity.events["String"].parameters.state.set.condition.operator #=> String
+    #   resp.entity.events["String"].parameters.state.set.condition.operand #=> String
+    #   resp.entity.events["String"].parameters.state.set.condition.then #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.state.set.condition.else #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.state.set.condition.operand_type #=> String
+    #   resp.entity.events["String"].parameters.state.set.configured #=> Boolean
+    #   resp.entity.events["String"].parameters.state.set.type #=> String
+    #   resp.entity.events["String"].parameters.state.set.imported_value #=> String
+    #   resp.entity.events["String"].parameters.state.set.component_name #=> String
+    #   resp.entity.events["String"].parameters.state.set.property #=> String
+    #   resp.entity.events["String"].binding_event #=> String
+    #   resp.entity.schema_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CreateComponent AWS API Documentation
     #
@@ -1870,14 +1874,14 @@ module Aws::AmplifyUIBuilder
     # @option params [required, String] :app_id
     #   The unique ID of the Amplify app to associate with the form.
     #
+    # @option params [required, String] :environment_name
+    #   The name of the backend environment that is a part of the Amplify app.
+    #
     # @option params [String] :client_token
     #   The unique client token.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
-    #
-    # @option params [required, String] :environment_name
-    #   The name of the backend environment that is a part of the Amplify app.
     #
     # @option params [required, Types::CreateFormData] :form_to_create
     #   Represents the configuration of the form to create.
@@ -1890,104 +1894,94 @@ module Aws::AmplifyUIBuilder
     #
     #   resp = client.create_form({
     #     app_id: "String", # required
-    #     client_token: "String",
     #     environment_name: "String", # required
+    #     client_token: "String",
     #     form_to_create: { # required
-    #       cta: {
-    #         cancel: {
-    #           children: "String",
-    #           excluded: false,
-    #           position: {
-    #             below: "String",
-    #             fixed: "first", # accepts first
-    #             right_of: "String",
-    #           },
-    #         },
-    #         clear: {
-    #           children: "String",
-    #           excluded: false,
-    #           position: {
-    #             below: "String",
-    #             fixed: "first", # accepts first
-    #             right_of: "String",
-    #           },
-    #         },
-    #         position: "top", # accepts top, bottom, top_and_bottom
-    #         submit: {
-    #           children: "String",
-    #           excluded: false,
-    #           position: {
-    #             below: "String",
-    #             fixed: "first", # accepts first
-    #             right_of: "String",
-    #           },
-    #         },
-    #       },
+    #       name: "FormName", # required
     #       data_type: { # required
     #         data_source_type: "DataStore", # required, accepts DataStore, Custom
     #         data_type_name: "String", # required
     #       },
+    #       form_action_type: "create", # required, accepts create, update
     #       fields: { # required
     #         "String" => {
+    #           label: "String",
+    #           position: {
+    #             fixed: "first", # accepts first
+    #             right_of: "String",
+    #             below: "String",
+    #           },
     #           excluded: false,
     #           input_type: {
-    #             default_checked: false,
-    #             default_country_code: "String",
+    #             type: "String", # required
+    #             required: false,
+    #             read_only: false,
+    #             placeholder: "String",
     #             default_value: "String",
     #             descriptive_text: "String",
-    #             is_array: false,
-    #             max_value: 1.0,
-    #             min_value: 1.0,
-    #             name: "String",
-    #             placeholder: "String",
-    #             read_only: false,
-    #             required: false,
-    #             step: 1.0,
-    #             type: "String", # required
-    #             value: "String",
+    #             default_checked: false,
+    #             default_country_code: "String",
     #             value_mappings: {
     #               values: [ # required
     #                 {
     #                   display_value: {
     #                     value: "String",
+    #                     binding_properties: {
+    #                       property: "String", # required
+    #                       field: "String",
+    #                     },
+    #                     concat: [
+    #                       {
+    #                         # recursive FormInputValueProperty
+    #                       },
+    #                     ],
     #                   },
     #                   value: { # required
     #                     value: "String",
+    #                     binding_properties: {
+    #                       property: "String", # required
+    #                       field: "String",
+    #                     },
+    #                     concat: [
+    #                       {
+    #                         # recursive FormInputValueProperty
+    #                       },
+    #                     ],
     #                   },
     #                 },
     #               ],
+    #               binding_properties: {
+    #                 "String" => {
+    #                   type: "String",
+    #                   binding_properties: {
+    #                     model: "String",
+    #                   },
+    #                 },
+    #               },
     #             },
-    #           },
-    #           label: "String",
-    #           position: {
-    #             below: "String",
-    #             fixed: "first", # accepts first
-    #             right_of: "String",
+    #             name: "String",
+    #             min_value: 1.0,
+    #             max_value: 1.0,
+    #             step: 1.0,
+    #             value: "String",
+    #             is_array: false,
+    #             file_uploader_config: {
+    #               access_level: "public", # required, accepts public, protected, private
+    #               accepted_file_types: ["String"], # required
+    #               show_thumbnails: false,
+    #               is_resumable: false,
+    #               max_file_count: 1,
+    #               max_size: 1,
+    #             },
     #           },
     #           validations: [
     #             {
-    #               num_values: [1],
-    #               str_values: ["String"],
     #               type: "String", # required
+    #               str_values: ["String"],
+    #               num_values: [1],
     #               validation_message: "String",
     #             },
     #           ],
-    #         },
-    #       },
-    #       form_action_type: "create", # required, accepts create, update
-    #       name: "FormName", # required
-    #       schema_version: "String", # required
-    #       sectional_elements: { # required
-    #         "String" => {
-    #           level: 1,
-    #           orientation: "String",
-    #           position: {
-    #             below: "String",
-    #             fixed: "first", # accepts first
-    #             right_of: "String",
-    #           },
-    #           text: "String",
-    #           type: "String", # required
     #         },
     #       },
     #       style: { # required
@@ -1995,93 +1989,159 @@ module Aws::AmplifyUIBuilder
     #           token_reference: "String",
     #           value: "String",
     #         },
+    #         vertical_gap: {
+    #           token_reference: "String",
+    #           value: "String",
+    #         },
     #         outer_padding: {
     #           token_reference: "String",
     #           value: "String",
     #         },
-    #         vertical_gap: {
-    #           token_reference: "String",
-    #           value: "String",
+    #       },
+    #       sectional_elements: { # required
+    #         "String" => {
+    #           type: "String", # required
+    #           position: {
+    #             fixed: "first", # accepts first
+    #             right_of: "String",
+    #             below: "String",
+    #           },
+    #           text: "String",
+    #           level: 1,
+    #           orientation: "String",
+    #           excluded: false,
+    #         },
+    #       },
+    #       schema_version: "String", # required
+    #       cta: {
+    #         position: "top", # accepts top, bottom, top_and_bottom
+    #         clear: {
+    #           excluded: false,
+    #           children: "String",
+    #           position: {
+    #             fixed: "first", # accepts first
+    #             right_of: "String",
+    #             below: "String",
+    #           },
+    #         },
+    #         cancel: {
+    #           excluded: false,
+    #           children: "String",
+    #           position: {
+    #             fixed: "first", # accepts first
+    #             right_of: "String",
+    #             below: "String",
+    #           },
+    #         },
+    #         submit: {
+    #           excluded: false,
+    #           children: "String",
+    #           position: {
+    #             fixed: "first", # accepts first
+    #             right_of: "String",
+    #             below: "String",
+    #           },
     #         },
     #       },
     #       tags: {
     #         "TagKey" => "TagValue",
     #       },
+    #       label_decorator: "required", # accepts required, optional, none
     #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.entity.app_id #=> String
-    #   resp.entity.cta.cancel.children #=> String
-    #   resp.entity.cta.cancel.excluded #=> Boolean
-    #   resp.entity.cta.cancel.position.below #=> String
-    #   resp.entity.cta.cancel.position.fixed #=> String, one of "first"
-    #   resp.entity.cta.cancel.position.right_of #=> String
-    #   resp.entity.cta.clear.children #=> String
-    #   resp.entity.cta.clear.excluded #=> Boolean
-    #   resp.entity.cta.clear.position.below #=> String
-    #   resp.entity.cta.clear.position.fixed #=> String, one of "first"
-    #   resp.entity.cta.clear.position.right_of #=> String
-    #   resp.entity.cta.position #=> String, one of "top", "bottom", "top_and_bottom"
-    #   resp.entity.cta.submit.children #=> String
-    #   resp.entity.cta.submit.excluded #=> Boolean
-    #   resp.entity.cta.submit.position.below #=> String
-    #   resp.entity.cta.submit.position.fixed #=> String, one of "first"
-    #   resp.entity.cta.submit.position.right_of #=> String
-    #   resp.entity.data_type.data_source_type #=> String, one of "DataStore", "Custom"
-    #   resp.entity.data_type.data_type_name #=> String
     #   resp.entity.environment_name #=> String
-    #   resp.entity.fields #=> Hash
-    #   resp.entity.fields["String"].excluded #=> Boolean
-    #   resp.entity.fields["String"].input_type.default_checked #=> Boolean
-    #   resp.entity.fields["String"].input_type.default_country_code #=> String
-    #   resp.entity.fields["String"].input_type.default_value #=> String
-    #   resp.entity.fields["String"].input_type.descriptive_text #=> String
-    #   resp.entity.fields["String"].input_type.is_array #=> Boolean
-    #   resp.entity.fields["String"].input_type.max_value #=> Float
-    #   resp.entity.fields["String"].input_type.min_value #=> Float
-    #   resp.entity.fields["String"].input_type.name #=> String
-    #   resp.entity.fields["String"].input_type.placeholder #=> String
-    #   resp.entity.fields["String"].input_type.read_only #=> Boolean
-    #   resp.entity.fields["String"].input_type.required #=> Boolean
-    #   resp.entity.fields["String"].input_type.step #=> Float
-    #   resp.entity.fields["String"].input_type.type #=> String
-    #   resp.entity.fields["String"].input_type.value #=> String
-    #   resp.entity.fields["String"].input_type.value_mappings.values #=> Array
-    #   resp.entity.fields["String"].input_type.value_mappings.values[0].display_value.value #=> String
-    #   resp.entity.fields["String"].input_type.value_mappings.values[0].value.value #=> String
-    #   resp.entity.fields["String"].label #=> String
-    #   resp.entity.fields["String"].position.below #=> String
-    #   resp.entity.fields["String"].position.fixed #=> String, one of "first"
-    #   resp.entity.fields["String"].position.right_of #=> String
-    #   resp.entity.fields["String"].validations #=> Array
-    #   resp.entity.fields["String"].validations[0].num_values #=> Array
-    #   resp.entity.fields["String"].validations[0].num_values[0] #=> Integer
-    #   resp.entity.fields["String"].validations[0].str_values #=> Array
-    #   resp.entity.fields["String"].validations[0].str_values[0] #=> String
-    #   resp.entity.fields["String"].validations[0].type #=> String
-    #   resp.entity.fields["String"].validations[0].validation_message #=> String
-    #   resp.entity.form_action_type #=> String, one of "create", "update"
     #   resp.entity.id #=> String
     #   resp.entity.name #=> String
-    #   resp.entity.schema_version #=> String
-    #   resp.entity.sectional_elements #=> Hash
-    #   resp.entity.sectional_elements["String"].level #=> Integer
-    #   resp.entity.sectional_elements["String"].orientation #=> String
-    #   resp.entity.sectional_elements["String"].position.below #=> String
-    #   resp.entity.sectional_elements["String"].position.fixed #=> String, one of "first"
-    #   resp.entity.sectional_elements["String"].position.right_of #=> String
-    #   resp.entity.sectional_elements["String"].text #=> String
-    #   resp.entity.sectional_elements["String"].type #=> String
+    #   resp.entity.form_action_type #=> String, one of "create", "update"
     #   resp.entity.style.horizontal_gap.token_reference #=> String
     #   resp.entity.style.horizontal_gap.value #=> String
-    #   resp.entity.style.outer_padding.token_reference #=> String
-    #   resp.entity.style.outer_padding.value #=> String
     #   resp.entity.style.vertical_gap.token_reference #=> String
     #   resp.entity.style.vertical_gap.value #=> String
+    #   resp.entity.style.outer_padding.token_reference #=> String
+    #   resp.entity.style.outer_padding.value #=> String
+    #   resp.entity.data_type.data_source_type #=> String, one of "DataStore", "Custom"
+    #   resp.entity.data_type.data_type_name #=> String
+    #   resp.entity.fields #=> Hash
+    #   resp.entity.fields["String"].label #=> String
+    #   resp.entity.fields["String"].position.fixed #=> String, one of "first"
+    #   resp.entity.fields["String"].position.right_of #=> String
+    #   resp.entity.fields["String"].position.below #=> String
+    #   resp.entity.fields["String"].excluded #=> Boolean
+    #   resp.entity.fields["String"].input_type.type #=> String
+    #   resp.entity.fields["String"].input_type.required #=> Boolean
+    #   resp.entity.fields["String"].input_type.read_only #=> Boolean
+    #   resp.entity.fields["String"].input_type.placeholder #=> String
+    #   resp.entity.fields["String"].input_type.default_value #=> String
+    #   resp.entity.fields["String"].input_type.descriptive_text #=> String
+    #   resp.entity.fields["String"].input_type.default_checked #=> Boolean
+    #   resp.entity.fields["String"].input_type.default_country_code #=> String
+    #   resp.entity.fields["String"].input_type.value_mappings.values #=> Array
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].display_value.value #=> String
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].display_value.binding_properties.property #=> String
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].display_value.binding_properties.field #=> String
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].display_value.concat #=> Array
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].display_value.concat[0] #=> Types::FormInputValueProperty
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].value.value #=> String
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].value.binding_properties.property #=> String
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].value.binding_properties.field #=> String
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].value.concat #=> Array
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].value.concat[0] #=> Types::FormInputValueProperty
+    #   resp.entity.fields["String"].input_type.value_mappings.binding_properties #=> Hash
+    #   resp.entity.fields["String"].input_type.value_mappings.binding_properties["String"].type #=> String
+    #   resp.entity.fields["String"].input_type.value_mappings.binding_properties["String"].binding_properties.model #=> String
+    #   resp.entity.fields["String"].input_type.name #=> String
+    #   resp.entity.fields["String"].input_type.min_value #=> Float
+    #   resp.entity.fields["String"].input_type.max_value #=> Float
+    #   resp.entity.fields["String"].input_type.step #=> Float
+    #   resp.entity.fields["String"].input_type.value #=> String
+    #   resp.entity.fields["String"].input_type.is_array #=> Boolean
+    #   resp.entity.fields["String"].input_type.file_uploader_config.access_level #=> String, one of "public", "protected", "private"
+    #   resp.entity.fields["String"].input_type.file_uploader_config.accepted_file_types #=> Array
+    #   resp.entity.fields["String"].input_type.file_uploader_config.accepted_file_types[0] #=> String
+    #   resp.entity.fields["String"].input_type.file_uploader_config.show_thumbnails #=> Boolean
+    #   resp.entity.fields["String"].input_type.file_uploader_config.is_resumable #=> Boolean
+    #   resp.entity.fields["String"].input_type.file_uploader_config.max_file_count #=> Integer
+    #   resp.entity.fields["String"].input_type.file_uploader_config.max_size #=> Integer
+    #   resp.entity.fields["String"].validations #=> Array
+    #   resp.entity.fields["String"].validations[0].type #=> String
+    #   resp.entity.fields["String"].validations[0].str_values #=> Array
+    #   resp.entity.fields["String"].validations[0].str_values[0] #=> String
+    #   resp.entity.fields["String"].validations[0].num_values #=> Array
+    #   resp.entity.fields["String"].validations[0].num_values[0] #=> Integer
+    #   resp.entity.fields["String"].validations[0].validation_message #=> String
+    #   resp.entity.sectional_elements #=> Hash
+    #   resp.entity.sectional_elements["String"].type #=> String
+    #   resp.entity.sectional_elements["String"].position.fixed #=> String, one of "first"
+    #   resp.entity.sectional_elements["String"].position.right_of #=> String
+    #   resp.entity.sectional_elements["String"].position.below #=> String
+    #   resp.entity.sectional_elements["String"].text #=> String
+    #   resp.entity.sectional_elements["String"].level #=> Integer
+    #   resp.entity.sectional_elements["String"].orientation #=> String
+    #   resp.entity.sectional_elements["String"].excluded #=> Boolean
+    #   resp.entity.schema_version #=> String
     #   resp.entity.tags #=> Hash
     #   resp.entity.tags["TagKey"] #=> String
+    #   resp.entity.cta.position #=> String, one of "top", "bottom", "top_and_bottom"
+    #   resp.entity.cta.clear.excluded #=> Boolean
+    #   resp.entity.cta.clear.children #=> String
+    #   resp.entity.cta.clear.position.fixed #=> String, one of "first"
+    #   resp.entity.cta.clear.position.right_of #=> String
+    #   resp.entity.cta.clear.position.below #=> String
+    #   resp.entity.cta.cancel.excluded #=> Boolean
+    #   resp.entity.cta.cancel.children #=> String
+    #   resp.entity.cta.cancel.position.fixed #=> String, one of "first"
+    #   resp.entity.cta.cancel.position.right_of #=> String
+    #   resp.entity.cta.cancel.position.below #=> String
+    #   resp.entity.cta.submit.excluded #=> Boolean
+    #   resp.entity.cta.submit.children #=> String
+    #   resp.entity.cta.submit.position.fixed #=> String, one of "first"
+    #   resp.entity.cta.submit.position.right_of #=> String
+    #   resp.entity.cta.submit.position.below #=> String
+    #   resp.entity.label_decorator #=> String, one of "required", "optional", "none"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CreateForm AWS API Documentation
     #
@@ -2097,14 +2157,14 @@ module Aws::AmplifyUIBuilder
     # @option params [required, String] :app_id
     #   The unique ID of the Amplify app associated with the theme.
     #
+    # @option params [required, String] :environment_name
+    #   The name of the backend environment that is a part of the Amplify app.
+    #
     # @option params [String] :client_token
     #   The unique client token.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
-    #
-    # @option params [required, String] :environment_name
-    #   The name of the backend environment that is a part of the Amplify app.
     #
     # @option params [required, Types::CreateThemeData] :theme_to_create
     #   Represents the configuration of the theme to create.
@@ -2117,56 +2177,56 @@ module Aws::AmplifyUIBuilder
     #
     #   resp = client.create_theme({
     #     app_id: "String", # required
-    #     client_token: "String",
     #     environment_name: "String", # required
+    #     client_token: "String",
     #     theme_to_create: { # required
     #       name: "ThemeName", # required
+    #       values: [ # required
+    #         {
+    #           key: "String",
+    #           value: {
+    #             value: "String",
+    #             children: {
+    #               # recursive ThemeValuesList
+    #             },
+    #           },
+    #         },
+    #       ],
     #       overrides: [
     #         {
     #           key: "String",
     #           value: {
+    #             value: "String",
     #             children: {
     #               # recursive ThemeValuesList
     #             },
-    #             value: "String",
     #           },
     #         },
     #       ],
     #       tags: {
     #         "TagKey" => "TagValue",
     #       },
-    #       values: [ # required
-    #         {
-    #           key: "String",
-    #           value: {
-    #             children: {
-    #               # recursive ThemeValuesList
-    #             },
-    #             value: "String",
-    #           },
-    #         },
-    #       ],
     #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.entity.app_id #=> String
-    #   resp.entity.created_at #=> Time
     #   resp.entity.environment_name #=> String
     #   resp.entity.id #=> String
-    #   resp.entity.modified_at #=> Time
     #   resp.entity.name #=> String
-    #   resp.entity.overrides #=> Array
-    #   resp.entity.overrides[0].key #=> String
-    #   resp.entity.overrides[0].value.children #=> Types::ThemeValuesList
-    #   resp.entity.overrides[0].value.value #=> String
-    #   resp.entity.tags #=> Hash
-    #   resp.entity.tags["TagKey"] #=> String
+    #   resp.entity.created_at #=> Time
+    #   resp.entity.modified_at #=> Time
     #   resp.entity.values #=> Array
     #   resp.entity.values[0].key #=> String
-    #   resp.entity.values[0].value.children #=> Types::ThemeValuesList
     #   resp.entity.values[0].value.value #=> String
+    #   resp.entity.values[0].value.children #=> Types::ThemeValuesList
+    #   resp.entity.overrides #=> Array
+    #   resp.entity.overrides[0].key #=> String
+    #   resp.entity.overrides[0].value.value #=> String
+    #   resp.entity.overrides[0].value.children #=> Types::ThemeValuesList
+    #   resp.entity.tags #=> Hash
+    #   resp.entity.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CreateTheme AWS API Documentation
     #
@@ -2290,6 +2350,7 @@ module Aws::AmplifyUIBuilder
     #     request: { # required
     #       code: "SensitiveString", # required
     #       redirect_uri: "String", # required
+    #       client_id: "SensitiveString",
     #     },
     #   })
     #
@@ -2339,544 +2400,546 @@ module Aws::AmplifyUIBuilder
     #
     #   resp.entities #=> Array
     #   resp.entities[0].app_id #=> String
-    #   resp.entities[0].binding_properties #=> Hash
-    #   resp.entities[0].binding_properties["String"].binding_properties.bucket #=> String
-    #   resp.entities[0].binding_properties["String"].binding_properties.default_value #=> String
-    #   resp.entities[0].binding_properties["String"].binding_properties.field #=> String
-    #   resp.entities[0].binding_properties["String"].binding_properties.key #=> String
-    #   resp.entities[0].binding_properties["String"].binding_properties.model #=> String
-    #   resp.entities[0].binding_properties["String"].binding_properties.predicates #=> Array
-    #   resp.entities[0].binding_properties["String"].binding_properties.predicates[0].and #=> Types::PredicateList
-    #   resp.entities[0].binding_properties["String"].binding_properties.predicates[0].field #=> String
-    #   resp.entities[0].binding_properties["String"].binding_properties.predicates[0].operand #=> String
-    #   resp.entities[0].binding_properties["String"].binding_properties.predicates[0].operator #=> String
-    #   resp.entities[0].binding_properties["String"].binding_properties.predicates[0].or #=> Types::PredicateList
-    #   resp.entities[0].binding_properties["String"].binding_properties.slot_name #=> String
-    #   resp.entities[0].binding_properties["String"].binding_properties.user_attribute #=> String
-    #   resp.entities[0].binding_properties["String"].default_value #=> String
-    #   resp.entities[0].binding_properties["String"].type #=> String
-    #   resp.entities[0].children #=> Array
-    #   resp.entities[0].children[0].children #=> Types::ComponentChildList
-    #   resp.entities[0].children[0].component_type #=> String
-    #   resp.entities[0].children[0].events #=> Hash
-    #   resp.entities[0].children[0].events["String"].action #=> String
-    #   resp.entities[0].children[0].events["String"].binding_event #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.binding_properties.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.binding_properties.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.bindings #=> Hash
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.bindings["String"].element #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.bindings["String"].property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.collection_binding_properties.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.collection_binding_properties.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.component_name #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.concat #=> Array
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.concat[0] #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.condition.else #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.condition.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.condition.operand #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.condition.operand_type #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.condition.operator #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.condition.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.condition.then #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.configured #=> Boolean
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.default_value #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.event #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.imported_value #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.model #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.type #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.user_attribute #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.anchor.value #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.fields #=> Hash
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].binding_properties.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].binding_properties.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].bindings #=> Hash
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].bindings["String"].element #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].bindings["String"].property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].collection_binding_properties.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].collection_binding_properties.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].component_name #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].concat #=> Array
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].concat[0] #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].condition.else #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].condition.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].condition.operand #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].condition.operand_type #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].condition.operator #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].condition.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].condition.then #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].configured #=> Boolean
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].default_value #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].event #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].imported_value #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].model #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].type #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].user_attribute #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].value #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.global.binding_properties.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.global.binding_properties.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.global.bindings #=> Hash
-    #   resp.entities[0].children[0].events["String"].parameters.global.bindings["String"].element #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.global.bindings["String"].property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.global.collection_binding_properties.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.global.collection_binding_properties.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.global.component_name #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.global.concat #=> Array
-    #   resp.entities[0].children[0].events["String"].parameters.global.concat[0] #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.global.condition.else #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.global.condition.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.global.condition.operand #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.global.condition.operand_type #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.global.condition.operator #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.global.condition.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.global.condition.then #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.global.configured #=> Boolean
-    #   resp.entities[0].children[0].events["String"].parameters.global.default_value #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.global.event #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.global.imported_value #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.global.model #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.global.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.global.type #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.global.user_attribute #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.global.value #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.id.binding_properties.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.id.binding_properties.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.id.bindings #=> Hash
-    #   resp.entities[0].children[0].events["String"].parameters.id.bindings["String"].element #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.id.bindings["String"].property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.id.collection_binding_properties.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.id.collection_binding_properties.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.id.component_name #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.id.concat #=> Array
-    #   resp.entities[0].children[0].events["String"].parameters.id.concat[0] #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.id.condition.else #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.id.condition.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.id.condition.operand #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.id.condition.operand_type #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.id.condition.operator #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.id.condition.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.id.condition.then #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.id.configured #=> Boolean
-    #   resp.entities[0].children[0].events["String"].parameters.id.default_value #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.id.event #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.id.imported_value #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.id.model #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.id.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.id.type #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.id.user_attribute #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.id.value #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.model #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.state.component_name #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.state.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.binding_properties.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.binding_properties.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.bindings #=> Hash
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.bindings["String"].element #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.bindings["String"].property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.collection_binding_properties.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.collection_binding_properties.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.component_name #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.concat #=> Array
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.concat[0] #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.condition.else #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.condition.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.condition.operand #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.condition.operand_type #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.condition.operator #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.condition.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.condition.then #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.configured #=> Boolean
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.default_value #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.event #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.imported_value #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.model #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.type #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.user_attribute #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.state.set.value #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.target.binding_properties.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.target.binding_properties.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.target.bindings #=> Hash
-    #   resp.entities[0].children[0].events["String"].parameters.target.bindings["String"].element #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.target.bindings["String"].property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.target.collection_binding_properties.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.target.collection_binding_properties.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.target.component_name #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.target.concat #=> Array
-    #   resp.entities[0].children[0].events["String"].parameters.target.concat[0] #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.target.condition.else #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.target.condition.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.target.condition.operand #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.target.condition.operand_type #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.target.condition.operator #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.target.condition.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.target.condition.then #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.target.configured #=> Boolean
-    #   resp.entities[0].children[0].events["String"].parameters.target.default_value #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.target.event #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.target.imported_value #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.target.model #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.target.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.target.type #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.target.user_attribute #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.target.value #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.type.binding_properties.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.type.binding_properties.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.type.bindings #=> Hash
-    #   resp.entities[0].children[0].events["String"].parameters.type.bindings["String"].element #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.type.bindings["String"].property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.type.collection_binding_properties.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.type.collection_binding_properties.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.type.component_name #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.type.concat #=> Array
-    #   resp.entities[0].children[0].events["String"].parameters.type.concat[0] #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.type.condition.else #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.type.condition.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.type.condition.operand #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.type.condition.operand_type #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.type.condition.operator #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.type.condition.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.type.condition.then #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.type.configured #=> Boolean
-    #   resp.entities[0].children[0].events["String"].parameters.type.default_value #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.type.event #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.type.imported_value #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.type.model #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.type.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.type.type #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.type.user_attribute #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.type.value #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.url.binding_properties.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.url.binding_properties.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.url.bindings #=> Hash
-    #   resp.entities[0].children[0].events["String"].parameters.url.bindings["String"].element #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.url.bindings["String"].property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.url.collection_binding_properties.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.url.collection_binding_properties.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.url.component_name #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.url.concat #=> Array
-    #   resp.entities[0].children[0].events["String"].parameters.url.concat[0] #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.url.condition.else #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.url.condition.field #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.url.condition.operand #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.url.condition.operand_type #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.url.condition.operator #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.url.condition.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.url.condition.then #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].events["String"].parameters.url.configured #=> Boolean
-    #   resp.entities[0].children[0].events["String"].parameters.url.default_value #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.url.event #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.url.imported_value #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.url.model #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.url.property #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.url.type #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.url.user_attribute #=> String
-    #   resp.entities[0].children[0].events["String"].parameters.url.value #=> String
-    #   resp.entities[0].children[0].name #=> String
-    #   resp.entities[0].children[0].properties #=> Hash
-    #   resp.entities[0].children[0].properties["String"].binding_properties.field #=> String
-    #   resp.entities[0].children[0].properties["String"].binding_properties.property #=> String
-    #   resp.entities[0].children[0].properties["String"].bindings #=> Hash
-    #   resp.entities[0].children[0].properties["String"].bindings["String"].element #=> String
-    #   resp.entities[0].children[0].properties["String"].bindings["String"].property #=> String
-    #   resp.entities[0].children[0].properties["String"].collection_binding_properties.field #=> String
-    #   resp.entities[0].children[0].properties["String"].collection_binding_properties.property #=> String
-    #   resp.entities[0].children[0].properties["String"].component_name #=> String
-    #   resp.entities[0].children[0].properties["String"].concat #=> Array
-    #   resp.entities[0].children[0].properties["String"].concat[0] #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].properties["String"].condition.else #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].properties["String"].condition.field #=> String
-    #   resp.entities[0].children[0].properties["String"].condition.operand #=> String
-    #   resp.entities[0].children[0].properties["String"].condition.operand_type #=> String
-    #   resp.entities[0].children[0].properties["String"].condition.operator #=> String
-    #   resp.entities[0].children[0].properties["String"].condition.property #=> String
-    #   resp.entities[0].children[0].properties["String"].condition.then #=> Types::ComponentProperty
-    #   resp.entities[0].children[0].properties["String"].configured #=> Boolean
-    #   resp.entities[0].children[0].properties["String"].default_value #=> String
-    #   resp.entities[0].children[0].properties["String"].event #=> String
-    #   resp.entities[0].children[0].properties["String"].imported_value #=> String
-    #   resp.entities[0].children[0].properties["String"].model #=> String
-    #   resp.entities[0].children[0].properties["String"].property #=> String
-    #   resp.entities[0].children[0].properties["String"].type #=> String
-    #   resp.entities[0].children[0].properties["String"].user_attribute #=> String
-    #   resp.entities[0].children[0].properties["String"].value #=> String
-    #   resp.entities[0].children[0].source_id #=> String
-    #   resp.entities[0].collection_properties #=> Hash
-    #   resp.entities[0].collection_properties["String"].identifiers #=> Array
-    #   resp.entities[0].collection_properties["String"].identifiers[0] #=> String
-    #   resp.entities[0].collection_properties["String"].model #=> String
-    #   resp.entities[0].collection_properties["String"].predicate.and #=> Array
-    #   resp.entities[0].collection_properties["String"].predicate.and[0] #=> Types::Predicate
-    #   resp.entities[0].collection_properties["String"].predicate.field #=> String
-    #   resp.entities[0].collection_properties["String"].predicate.operand #=> String
-    #   resp.entities[0].collection_properties["String"].predicate.operator #=> String
-    #   resp.entities[0].collection_properties["String"].predicate.or #=> Array
-    #   resp.entities[0].collection_properties["String"].predicate.or[0] #=> Types::Predicate
-    #   resp.entities[0].collection_properties["String"].sort #=> Array
-    #   resp.entities[0].collection_properties["String"].sort[0].direction #=> String, one of "ASC", "DESC"
-    #   resp.entities[0].collection_properties["String"].sort[0].field #=> String
-    #   resp.entities[0].component_type #=> String
-    #   resp.entities[0].created_at #=> Time
     #   resp.entities[0].environment_name #=> String
-    #   resp.entities[0].events #=> Hash
-    #   resp.entities[0].events["String"].action #=> String
-    #   resp.entities[0].events["String"].binding_event #=> String
-    #   resp.entities[0].events["String"].parameters.anchor.binding_properties.field #=> String
-    #   resp.entities[0].events["String"].parameters.anchor.binding_properties.property #=> String
-    #   resp.entities[0].events["String"].parameters.anchor.bindings #=> Hash
-    #   resp.entities[0].events["String"].parameters.anchor.bindings["String"].element #=> String
-    #   resp.entities[0].events["String"].parameters.anchor.bindings["String"].property #=> String
-    #   resp.entities[0].events["String"].parameters.anchor.collection_binding_properties.field #=> String
-    #   resp.entities[0].events["String"].parameters.anchor.collection_binding_properties.property #=> String
-    #   resp.entities[0].events["String"].parameters.anchor.component_name #=> String
-    #   resp.entities[0].events["String"].parameters.anchor.concat #=> Array
-    #   resp.entities[0].events["String"].parameters.anchor.concat[0] #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.anchor.condition.else #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.anchor.condition.field #=> String
-    #   resp.entities[0].events["String"].parameters.anchor.condition.operand #=> String
-    #   resp.entities[0].events["String"].parameters.anchor.condition.operand_type #=> String
-    #   resp.entities[0].events["String"].parameters.anchor.condition.operator #=> String
-    #   resp.entities[0].events["String"].parameters.anchor.condition.property #=> String
-    #   resp.entities[0].events["String"].parameters.anchor.condition.then #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.anchor.configured #=> Boolean
-    #   resp.entities[0].events["String"].parameters.anchor.default_value #=> String
-    #   resp.entities[0].events["String"].parameters.anchor.event #=> String
-    #   resp.entities[0].events["String"].parameters.anchor.imported_value #=> String
-    #   resp.entities[0].events["String"].parameters.anchor.model #=> String
-    #   resp.entities[0].events["String"].parameters.anchor.property #=> String
-    #   resp.entities[0].events["String"].parameters.anchor.type #=> String
-    #   resp.entities[0].events["String"].parameters.anchor.user_attribute #=> String
-    #   resp.entities[0].events["String"].parameters.anchor.value #=> String
-    #   resp.entities[0].events["String"].parameters.fields #=> Hash
-    #   resp.entities[0].events["String"].parameters.fields["String"].binding_properties.field #=> String
-    #   resp.entities[0].events["String"].parameters.fields["String"].binding_properties.property #=> String
-    #   resp.entities[0].events["String"].parameters.fields["String"].bindings #=> Hash
-    #   resp.entities[0].events["String"].parameters.fields["String"].bindings["String"].element #=> String
-    #   resp.entities[0].events["String"].parameters.fields["String"].bindings["String"].property #=> String
-    #   resp.entities[0].events["String"].parameters.fields["String"].collection_binding_properties.field #=> String
-    #   resp.entities[0].events["String"].parameters.fields["String"].collection_binding_properties.property #=> String
-    #   resp.entities[0].events["String"].parameters.fields["String"].component_name #=> String
-    #   resp.entities[0].events["String"].parameters.fields["String"].concat #=> Array
-    #   resp.entities[0].events["String"].parameters.fields["String"].concat[0] #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.fields["String"].condition.else #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.fields["String"].condition.field #=> String
-    #   resp.entities[0].events["String"].parameters.fields["String"].condition.operand #=> String
-    #   resp.entities[0].events["String"].parameters.fields["String"].condition.operand_type #=> String
-    #   resp.entities[0].events["String"].parameters.fields["String"].condition.operator #=> String
-    #   resp.entities[0].events["String"].parameters.fields["String"].condition.property #=> String
-    #   resp.entities[0].events["String"].parameters.fields["String"].condition.then #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.fields["String"].configured #=> Boolean
-    #   resp.entities[0].events["String"].parameters.fields["String"].default_value #=> String
-    #   resp.entities[0].events["String"].parameters.fields["String"].event #=> String
-    #   resp.entities[0].events["String"].parameters.fields["String"].imported_value #=> String
-    #   resp.entities[0].events["String"].parameters.fields["String"].model #=> String
-    #   resp.entities[0].events["String"].parameters.fields["String"].property #=> String
-    #   resp.entities[0].events["String"].parameters.fields["String"].type #=> String
-    #   resp.entities[0].events["String"].parameters.fields["String"].user_attribute #=> String
-    #   resp.entities[0].events["String"].parameters.fields["String"].value #=> String
-    #   resp.entities[0].events["String"].parameters.global.binding_properties.field #=> String
-    #   resp.entities[0].events["String"].parameters.global.binding_properties.property #=> String
-    #   resp.entities[0].events["String"].parameters.global.bindings #=> Hash
-    #   resp.entities[0].events["String"].parameters.global.bindings["String"].element #=> String
-    #   resp.entities[0].events["String"].parameters.global.bindings["String"].property #=> String
-    #   resp.entities[0].events["String"].parameters.global.collection_binding_properties.field #=> String
-    #   resp.entities[0].events["String"].parameters.global.collection_binding_properties.property #=> String
-    #   resp.entities[0].events["String"].parameters.global.component_name #=> String
-    #   resp.entities[0].events["String"].parameters.global.concat #=> Array
-    #   resp.entities[0].events["String"].parameters.global.concat[0] #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.global.condition.else #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.global.condition.field #=> String
-    #   resp.entities[0].events["String"].parameters.global.condition.operand #=> String
-    #   resp.entities[0].events["String"].parameters.global.condition.operand_type #=> String
-    #   resp.entities[0].events["String"].parameters.global.condition.operator #=> String
-    #   resp.entities[0].events["String"].parameters.global.condition.property #=> String
-    #   resp.entities[0].events["String"].parameters.global.condition.then #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.global.configured #=> Boolean
-    #   resp.entities[0].events["String"].parameters.global.default_value #=> String
-    #   resp.entities[0].events["String"].parameters.global.event #=> String
-    #   resp.entities[0].events["String"].parameters.global.imported_value #=> String
-    #   resp.entities[0].events["String"].parameters.global.model #=> String
-    #   resp.entities[0].events["String"].parameters.global.property #=> String
-    #   resp.entities[0].events["String"].parameters.global.type #=> String
-    #   resp.entities[0].events["String"].parameters.global.user_attribute #=> String
-    #   resp.entities[0].events["String"].parameters.global.value #=> String
-    #   resp.entities[0].events["String"].parameters.id.binding_properties.field #=> String
-    #   resp.entities[0].events["String"].parameters.id.binding_properties.property #=> String
-    #   resp.entities[0].events["String"].parameters.id.bindings #=> Hash
-    #   resp.entities[0].events["String"].parameters.id.bindings["String"].element #=> String
-    #   resp.entities[0].events["String"].parameters.id.bindings["String"].property #=> String
-    #   resp.entities[0].events["String"].parameters.id.collection_binding_properties.field #=> String
-    #   resp.entities[0].events["String"].parameters.id.collection_binding_properties.property #=> String
-    #   resp.entities[0].events["String"].parameters.id.component_name #=> String
-    #   resp.entities[0].events["String"].parameters.id.concat #=> Array
-    #   resp.entities[0].events["String"].parameters.id.concat[0] #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.id.condition.else #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.id.condition.field #=> String
-    #   resp.entities[0].events["String"].parameters.id.condition.operand #=> String
-    #   resp.entities[0].events["String"].parameters.id.condition.operand_type #=> String
-    #   resp.entities[0].events["String"].parameters.id.condition.operator #=> String
-    #   resp.entities[0].events["String"].parameters.id.condition.property #=> String
-    #   resp.entities[0].events["String"].parameters.id.condition.then #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.id.configured #=> Boolean
-    #   resp.entities[0].events["String"].parameters.id.default_value #=> String
-    #   resp.entities[0].events["String"].parameters.id.event #=> String
-    #   resp.entities[0].events["String"].parameters.id.imported_value #=> String
-    #   resp.entities[0].events["String"].parameters.id.model #=> String
-    #   resp.entities[0].events["String"].parameters.id.property #=> String
-    #   resp.entities[0].events["String"].parameters.id.type #=> String
-    #   resp.entities[0].events["String"].parameters.id.user_attribute #=> String
-    #   resp.entities[0].events["String"].parameters.id.value #=> String
-    #   resp.entities[0].events["String"].parameters.model #=> String
-    #   resp.entities[0].events["String"].parameters.state.component_name #=> String
-    #   resp.entities[0].events["String"].parameters.state.property #=> String
-    #   resp.entities[0].events["String"].parameters.state.set.binding_properties.field #=> String
-    #   resp.entities[0].events["String"].parameters.state.set.binding_properties.property #=> String
-    #   resp.entities[0].events["String"].parameters.state.set.bindings #=> Hash
-    #   resp.entities[0].events["String"].parameters.state.set.bindings["String"].element #=> String
-    #   resp.entities[0].events["String"].parameters.state.set.bindings["String"].property #=> String
-    #   resp.entities[0].events["String"].parameters.state.set.collection_binding_properties.field #=> String
-    #   resp.entities[0].events["String"].parameters.state.set.collection_binding_properties.property #=> String
-    #   resp.entities[0].events["String"].parameters.state.set.component_name #=> String
-    #   resp.entities[0].events["String"].parameters.state.set.concat #=> Array
-    #   resp.entities[0].events["String"].parameters.state.set.concat[0] #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.state.set.condition.else #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.state.set.condition.field #=> String
-    #   resp.entities[0].events["String"].parameters.state.set.condition.operand #=> String
-    #   resp.entities[0].events["String"].parameters.state.set.condition.operand_type #=> String
-    #   resp.entities[0].events["String"].parameters.state.set.condition.operator #=> String
-    #   resp.entities[0].events["String"].parameters.state.set.condition.property #=> String
-    #   resp.entities[0].events["String"].parameters.state.set.condition.then #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.state.set.configured #=> Boolean
-    #   resp.entities[0].events["String"].parameters.state.set.default_value #=> String
-    #   resp.entities[0].events["String"].parameters.state.set.event #=> String
-    #   resp.entities[0].events["String"].parameters.state.set.imported_value #=> String
-    #   resp.entities[0].events["String"].parameters.state.set.model #=> String
-    #   resp.entities[0].events["String"].parameters.state.set.property #=> String
-    #   resp.entities[0].events["String"].parameters.state.set.type #=> String
-    #   resp.entities[0].events["String"].parameters.state.set.user_attribute #=> String
-    #   resp.entities[0].events["String"].parameters.state.set.value #=> String
-    #   resp.entities[0].events["String"].parameters.target.binding_properties.field #=> String
-    #   resp.entities[0].events["String"].parameters.target.binding_properties.property #=> String
-    #   resp.entities[0].events["String"].parameters.target.bindings #=> Hash
-    #   resp.entities[0].events["String"].parameters.target.bindings["String"].element #=> String
-    #   resp.entities[0].events["String"].parameters.target.bindings["String"].property #=> String
-    #   resp.entities[0].events["String"].parameters.target.collection_binding_properties.field #=> String
-    #   resp.entities[0].events["String"].parameters.target.collection_binding_properties.property #=> String
-    #   resp.entities[0].events["String"].parameters.target.component_name #=> String
-    #   resp.entities[0].events["String"].parameters.target.concat #=> Array
-    #   resp.entities[0].events["String"].parameters.target.concat[0] #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.target.condition.else #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.target.condition.field #=> String
-    #   resp.entities[0].events["String"].parameters.target.condition.operand #=> String
-    #   resp.entities[0].events["String"].parameters.target.condition.operand_type #=> String
-    #   resp.entities[0].events["String"].parameters.target.condition.operator #=> String
-    #   resp.entities[0].events["String"].parameters.target.condition.property #=> String
-    #   resp.entities[0].events["String"].parameters.target.condition.then #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.target.configured #=> Boolean
-    #   resp.entities[0].events["String"].parameters.target.default_value #=> String
-    #   resp.entities[0].events["String"].parameters.target.event #=> String
-    #   resp.entities[0].events["String"].parameters.target.imported_value #=> String
-    #   resp.entities[0].events["String"].parameters.target.model #=> String
-    #   resp.entities[0].events["String"].parameters.target.property #=> String
-    #   resp.entities[0].events["String"].parameters.target.type #=> String
-    #   resp.entities[0].events["String"].parameters.target.user_attribute #=> String
-    #   resp.entities[0].events["String"].parameters.target.value #=> String
-    #   resp.entities[0].events["String"].parameters.type.binding_properties.field #=> String
-    #   resp.entities[0].events["String"].parameters.type.binding_properties.property #=> String
-    #   resp.entities[0].events["String"].parameters.type.bindings #=> Hash
-    #   resp.entities[0].events["String"].parameters.type.bindings["String"].element #=> String
-    #   resp.entities[0].events["String"].parameters.type.bindings["String"].property #=> String
-    #   resp.entities[0].events["String"].parameters.type.collection_binding_properties.field #=> String
-    #   resp.entities[0].events["String"].parameters.type.collection_binding_properties.property #=> String
-    #   resp.entities[0].events["String"].parameters.type.component_name #=> String
-    #   resp.entities[0].events["String"].parameters.type.concat #=> Array
-    #   resp.entities[0].events["String"].parameters.type.concat[0] #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.type.condition.else #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.type.condition.field #=> String
-    #   resp.entities[0].events["String"].parameters.type.condition.operand #=> String
-    #   resp.entities[0].events["String"].parameters.type.condition.operand_type #=> String
-    #   resp.entities[0].events["String"].parameters.type.condition.operator #=> String
-    #   resp.entities[0].events["String"].parameters.type.condition.property #=> String
-    #   resp.entities[0].events["String"].parameters.type.condition.then #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.type.configured #=> Boolean
-    #   resp.entities[0].events["String"].parameters.type.default_value #=> String
-    #   resp.entities[0].events["String"].parameters.type.event #=> String
-    #   resp.entities[0].events["String"].parameters.type.imported_value #=> String
-    #   resp.entities[0].events["String"].parameters.type.model #=> String
-    #   resp.entities[0].events["String"].parameters.type.property #=> String
-    #   resp.entities[0].events["String"].parameters.type.type #=> String
-    #   resp.entities[0].events["String"].parameters.type.user_attribute #=> String
-    #   resp.entities[0].events["String"].parameters.type.value #=> String
-    #   resp.entities[0].events["String"].parameters.url.binding_properties.field #=> String
-    #   resp.entities[0].events["String"].parameters.url.binding_properties.property #=> String
-    #   resp.entities[0].events["String"].parameters.url.bindings #=> Hash
-    #   resp.entities[0].events["String"].parameters.url.bindings["String"].element #=> String
-    #   resp.entities[0].events["String"].parameters.url.bindings["String"].property #=> String
-    #   resp.entities[0].events["String"].parameters.url.collection_binding_properties.field #=> String
-    #   resp.entities[0].events["String"].parameters.url.collection_binding_properties.property #=> String
-    #   resp.entities[0].events["String"].parameters.url.component_name #=> String
-    #   resp.entities[0].events["String"].parameters.url.concat #=> Array
-    #   resp.entities[0].events["String"].parameters.url.concat[0] #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.url.condition.else #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.url.condition.field #=> String
-    #   resp.entities[0].events["String"].parameters.url.condition.operand #=> String
-    #   resp.entities[0].events["String"].parameters.url.condition.operand_type #=> String
-    #   resp.entities[0].events["String"].parameters.url.condition.operator #=> String
-    #   resp.entities[0].events["String"].parameters.url.condition.property #=> String
-    #   resp.entities[0].events["String"].parameters.url.condition.then #=> Types::ComponentProperty
-    #   resp.entities[0].events["String"].parameters.url.configured #=> Boolean
-    #   resp.entities[0].events["String"].parameters.url.default_value #=> String
-    #   resp.entities[0].events["String"].parameters.url.event #=> String
-    #   resp.entities[0].events["String"].parameters.url.imported_value #=> String
-    #   resp.entities[0].events["String"].parameters.url.model #=> String
-    #   resp.entities[0].events["String"].parameters.url.property #=> String
-    #   resp.entities[0].events["String"].parameters.url.type #=> String
-    #   resp.entities[0].events["String"].parameters.url.user_attribute #=> String
-    #   resp.entities[0].events["String"].parameters.url.value #=> String
+    #   resp.entities[0].source_id #=> String
     #   resp.entities[0].id #=> String
-    #   resp.entities[0].modified_at #=> Time
     #   resp.entities[0].name #=> String
-    #   resp.entities[0].overrides #=> Hash
-    #   resp.entities[0].overrides["String"] #=> Hash
-    #   resp.entities[0].overrides["String"]["String"] #=> String
+    #   resp.entities[0].component_type #=> String
     #   resp.entities[0].properties #=> Hash
-    #   resp.entities[0].properties["String"].binding_properties.field #=> String
+    #   resp.entities[0].properties["String"].value #=> String
     #   resp.entities[0].properties["String"].binding_properties.property #=> String
+    #   resp.entities[0].properties["String"].binding_properties.field #=> String
+    #   resp.entities[0].properties["String"].collection_binding_properties.property #=> String
+    #   resp.entities[0].properties["String"].collection_binding_properties.field #=> String
+    #   resp.entities[0].properties["String"].default_value #=> String
+    #   resp.entities[0].properties["String"].model #=> String
     #   resp.entities[0].properties["String"].bindings #=> Hash
     #   resp.entities[0].properties["String"].bindings["String"].element #=> String
     #   resp.entities[0].properties["String"].bindings["String"].property #=> String
-    #   resp.entities[0].properties["String"].collection_binding_properties.field #=> String
-    #   resp.entities[0].properties["String"].collection_binding_properties.property #=> String
-    #   resp.entities[0].properties["String"].component_name #=> String
+    #   resp.entities[0].properties["String"].event #=> String
+    #   resp.entities[0].properties["String"].user_attribute #=> String
     #   resp.entities[0].properties["String"].concat #=> Array
     #   resp.entities[0].properties["String"].concat[0] #=> Types::ComponentProperty
-    #   resp.entities[0].properties["String"].condition.else #=> Types::ComponentProperty
-    #   resp.entities[0].properties["String"].condition.field #=> String
-    #   resp.entities[0].properties["String"].condition.operand #=> String
-    #   resp.entities[0].properties["String"].condition.operand_type #=> String
-    #   resp.entities[0].properties["String"].condition.operator #=> String
     #   resp.entities[0].properties["String"].condition.property #=> String
+    #   resp.entities[0].properties["String"].condition.field #=> String
+    #   resp.entities[0].properties["String"].condition.operator #=> String
+    #   resp.entities[0].properties["String"].condition.operand #=> String
     #   resp.entities[0].properties["String"].condition.then #=> Types::ComponentProperty
+    #   resp.entities[0].properties["String"].condition.else #=> Types::ComponentProperty
+    #   resp.entities[0].properties["String"].condition.operand_type #=> String
     #   resp.entities[0].properties["String"].configured #=> Boolean
-    #   resp.entities[0].properties["String"].default_value #=> String
-    #   resp.entities[0].properties["String"].event #=> String
-    #   resp.entities[0].properties["String"].imported_value #=> String
-    #   resp.entities[0].properties["String"].model #=> String
-    #   resp.entities[0].properties["String"].property #=> String
     #   resp.entities[0].properties["String"].type #=> String
-    #   resp.entities[0].properties["String"].user_attribute #=> String
-    #   resp.entities[0].properties["String"].value #=> String
-    #   resp.entities[0].schema_version #=> String
-    #   resp.entities[0].source_id #=> String
-    #   resp.entities[0].tags #=> Hash
-    #   resp.entities[0].tags["TagKey"] #=> String
+    #   resp.entities[0].properties["String"].imported_value #=> String
+    #   resp.entities[0].properties["String"].component_name #=> String
+    #   resp.entities[0].properties["String"].property #=> String
+    #   resp.entities[0].children #=> Array
+    #   resp.entities[0].children[0].component_type #=> String
+    #   resp.entities[0].children[0].name #=> String
+    #   resp.entities[0].children[0].properties #=> Hash
+    #   resp.entities[0].children[0].properties["String"].value #=> String
+    #   resp.entities[0].children[0].properties["String"].binding_properties.property #=> String
+    #   resp.entities[0].children[0].properties["String"].binding_properties.field #=> String
+    #   resp.entities[0].children[0].properties["String"].collection_binding_properties.property #=> String
+    #   resp.entities[0].children[0].properties["String"].collection_binding_properties.field #=> String
+    #   resp.entities[0].children[0].properties["String"].default_value #=> String
+    #   resp.entities[0].children[0].properties["String"].model #=> String
+    #   resp.entities[0].children[0].properties["String"].bindings #=> Hash
+    #   resp.entities[0].children[0].properties["String"].bindings["String"].element #=> String
+    #   resp.entities[0].children[0].properties["String"].bindings["String"].property #=> String
+    #   resp.entities[0].children[0].properties["String"].event #=> String
+    #   resp.entities[0].children[0].properties["String"].user_attribute #=> String
+    #   resp.entities[0].children[0].properties["String"].concat #=> Array
+    #   resp.entities[0].children[0].properties["String"].concat[0] #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].properties["String"].condition.property #=> String
+    #   resp.entities[0].children[0].properties["String"].condition.field #=> String
+    #   resp.entities[0].children[0].properties["String"].condition.operator #=> String
+    #   resp.entities[0].children[0].properties["String"].condition.operand #=> String
+    #   resp.entities[0].children[0].properties["String"].condition.then #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].properties["String"].condition.else #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].properties["String"].condition.operand_type #=> String
+    #   resp.entities[0].children[0].properties["String"].configured #=> Boolean
+    #   resp.entities[0].children[0].properties["String"].type #=> String
+    #   resp.entities[0].children[0].properties["String"].imported_value #=> String
+    #   resp.entities[0].children[0].properties["String"].component_name #=> String
+    #   resp.entities[0].children[0].properties["String"].property #=> String
+    #   resp.entities[0].children[0].children #=> Types::ComponentChildList
+    #   resp.entities[0].children[0].events #=> Hash
+    #   resp.entities[0].children[0].events["String"].action #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.type.value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.type.binding_properties.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.type.binding_properties.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.type.collection_binding_properties.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.type.collection_binding_properties.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.type.default_value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.type.model #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.type.bindings #=> Hash
+    #   resp.entities[0].children[0].events["String"].parameters.type.bindings["String"].element #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.type.bindings["String"].property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.type.event #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.type.user_attribute #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.type.concat #=> Array
+    #   resp.entities[0].children[0].events["String"].parameters.type.concat[0] #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.type.condition.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.type.condition.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.type.condition.operator #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.type.condition.operand #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.type.condition.then #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.type.condition.else #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.type.condition.operand_type #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.type.configured #=> Boolean
+    #   resp.entities[0].children[0].events["String"].parameters.type.type #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.type.imported_value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.type.component_name #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.type.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.url.value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.url.binding_properties.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.url.binding_properties.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.url.collection_binding_properties.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.url.collection_binding_properties.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.url.default_value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.url.model #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.url.bindings #=> Hash
+    #   resp.entities[0].children[0].events["String"].parameters.url.bindings["String"].element #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.url.bindings["String"].property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.url.event #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.url.user_attribute #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.url.concat #=> Array
+    #   resp.entities[0].children[0].events["String"].parameters.url.concat[0] #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.url.condition.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.url.condition.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.url.condition.operator #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.url.condition.operand #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.url.condition.then #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.url.condition.else #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.url.condition.operand_type #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.url.configured #=> Boolean
+    #   resp.entities[0].children[0].events["String"].parameters.url.type #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.url.imported_value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.url.component_name #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.url.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.binding_properties.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.binding_properties.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.collection_binding_properties.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.collection_binding_properties.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.default_value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.model #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.bindings #=> Hash
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.bindings["String"].element #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.bindings["String"].property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.event #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.user_attribute #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.concat #=> Array
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.concat[0] #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.condition.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.condition.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.condition.operator #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.condition.operand #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.condition.then #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.condition.else #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.condition.operand_type #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.configured #=> Boolean
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.type #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.imported_value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.component_name #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.anchor.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.target.value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.target.binding_properties.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.target.binding_properties.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.target.collection_binding_properties.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.target.collection_binding_properties.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.target.default_value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.target.model #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.target.bindings #=> Hash
+    #   resp.entities[0].children[0].events["String"].parameters.target.bindings["String"].element #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.target.bindings["String"].property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.target.event #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.target.user_attribute #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.target.concat #=> Array
+    #   resp.entities[0].children[0].events["String"].parameters.target.concat[0] #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.target.condition.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.target.condition.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.target.condition.operator #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.target.condition.operand #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.target.condition.then #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.target.condition.else #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.target.condition.operand_type #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.target.configured #=> Boolean
+    #   resp.entities[0].children[0].events["String"].parameters.target.type #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.target.imported_value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.target.component_name #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.target.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.global.value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.global.binding_properties.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.global.binding_properties.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.global.collection_binding_properties.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.global.collection_binding_properties.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.global.default_value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.global.model #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.global.bindings #=> Hash
+    #   resp.entities[0].children[0].events["String"].parameters.global.bindings["String"].element #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.global.bindings["String"].property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.global.event #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.global.user_attribute #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.global.concat #=> Array
+    #   resp.entities[0].children[0].events["String"].parameters.global.concat[0] #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.global.condition.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.global.condition.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.global.condition.operator #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.global.condition.operand #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.global.condition.then #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.global.condition.else #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.global.condition.operand_type #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.global.configured #=> Boolean
+    #   resp.entities[0].children[0].events["String"].parameters.global.type #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.global.imported_value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.global.component_name #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.global.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.model #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.id.value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.id.binding_properties.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.id.binding_properties.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.id.collection_binding_properties.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.id.collection_binding_properties.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.id.default_value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.id.model #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.id.bindings #=> Hash
+    #   resp.entities[0].children[0].events["String"].parameters.id.bindings["String"].element #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.id.bindings["String"].property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.id.event #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.id.user_attribute #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.id.concat #=> Array
+    #   resp.entities[0].children[0].events["String"].parameters.id.concat[0] #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.id.condition.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.id.condition.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.id.condition.operator #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.id.condition.operand #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.id.condition.then #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.id.condition.else #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.id.condition.operand_type #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.id.configured #=> Boolean
+    #   resp.entities[0].children[0].events["String"].parameters.id.type #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.id.imported_value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.id.component_name #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.id.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.fields #=> Hash
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].binding_properties.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].binding_properties.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].collection_binding_properties.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].collection_binding_properties.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].default_value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].model #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].bindings #=> Hash
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].bindings["String"].element #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].bindings["String"].property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].event #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].user_attribute #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].concat #=> Array
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].concat[0] #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].condition.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].condition.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].condition.operator #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].condition.operand #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].condition.then #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].condition.else #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].condition.operand_type #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].configured #=> Boolean
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].type #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].imported_value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].component_name #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.fields["String"].property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.state.component_name #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.state.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.binding_properties.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.binding_properties.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.collection_binding_properties.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.collection_binding_properties.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.default_value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.model #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.bindings #=> Hash
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.bindings["String"].element #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.bindings["String"].property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.event #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.user_attribute #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.concat #=> Array
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.concat[0] #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.condition.property #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.condition.field #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.condition.operator #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.condition.operand #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.condition.then #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.condition.else #=> Types::ComponentProperty
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.condition.operand_type #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.configured #=> Boolean
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.type #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.imported_value #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.component_name #=> String
+    #   resp.entities[0].children[0].events["String"].parameters.state.set.property #=> String
+    #   resp.entities[0].children[0].events["String"].binding_event #=> String
+    #   resp.entities[0].children[0].source_id #=> String
     #   resp.entities[0].variants #=> Array
+    #   resp.entities[0].variants[0].variant_values #=> Hash
+    #   resp.entities[0].variants[0].variant_values["String"] #=> String
     #   resp.entities[0].variants[0].overrides #=> Hash
     #   resp.entities[0].variants[0].overrides["String"] #=> Hash
     #   resp.entities[0].variants[0].overrides["String"]["String"] #=> String
-    #   resp.entities[0].variants[0].variant_values #=> Hash
-    #   resp.entities[0].variants[0].variant_values["String"] #=> String
+    #   resp.entities[0].overrides #=> Hash
+    #   resp.entities[0].overrides["String"] #=> Hash
+    #   resp.entities[0].overrides["String"]["String"] #=> String
+    #   resp.entities[0].binding_properties #=> Hash
+    #   resp.entities[0].binding_properties["String"].type #=> String
+    #   resp.entities[0].binding_properties["String"].binding_properties.model #=> String
+    #   resp.entities[0].binding_properties["String"].binding_properties.field #=> String
+    #   resp.entities[0].binding_properties["String"].binding_properties.predicates #=> Array
+    #   resp.entities[0].binding_properties["String"].binding_properties.predicates[0].or #=> Types::PredicateList
+    #   resp.entities[0].binding_properties["String"].binding_properties.predicates[0].and #=> Types::PredicateList
+    #   resp.entities[0].binding_properties["String"].binding_properties.predicates[0].field #=> String
+    #   resp.entities[0].binding_properties["String"].binding_properties.predicates[0].operator #=> String
+    #   resp.entities[0].binding_properties["String"].binding_properties.predicates[0].operand #=> String
+    #   resp.entities[0].binding_properties["String"].binding_properties.predicates[0].operand_type #=> String
+    #   resp.entities[0].binding_properties["String"].binding_properties.user_attribute #=> String
+    #   resp.entities[0].binding_properties["String"].binding_properties.bucket #=> String
+    #   resp.entities[0].binding_properties["String"].binding_properties.key #=> String
+    #   resp.entities[0].binding_properties["String"].binding_properties.default_value #=> String
+    #   resp.entities[0].binding_properties["String"].binding_properties.slot_name #=> String
+    #   resp.entities[0].binding_properties["String"].default_value #=> String
+    #   resp.entities[0].collection_properties #=> Hash
+    #   resp.entities[0].collection_properties["String"].model #=> String
+    #   resp.entities[0].collection_properties["String"].sort #=> Array
+    #   resp.entities[0].collection_properties["String"].sort[0].field #=> String
+    #   resp.entities[0].collection_properties["String"].sort[0].direction #=> String, one of "ASC", "DESC"
+    #   resp.entities[0].collection_properties["String"].predicate.or #=> Array
+    #   resp.entities[0].collection_properties["String"].predicate.or[0] #=> Types::Predicate
+    #   resp.entities[0].collection_properties["String"].predicate.and #=> Array
+    #   resp.entities[0].collection_properties["String"].predicate.and[0] #=> Types::Predicate
+    #   resp.entities[0].collection_properties["String"].predicate.field #=> String
+    #   resp.entities[0].collection_properties["String"].predicate.operator #=> String
+    #   resp.entities[0].collection_properties["String"].predicate.operand #=> String
+    #   resp.entities[0].collection_properties["String"].predicate.operand_type #=> String
+    #   resp.entities[0].collection_properties["String"].identifiers #=> Array
+    #   resp.entities[0].collection_properties["String"].identifiers[0] #=> String
+    #   resp.entities[0].created_at #=> Time
+    #   resp.entities[0].modified_at #=> Time
+    #   resp.entities[0].tags #=> Hash
+    #   resp.entities[0].tags["TagKey"] #=> String
+    #   resp.entities[0].events #=> Hash
+    #   resp.entities[0].events["String"].action #=> String
+    #   resp.entities[0].events["String"].parameters.type.value #=> String
+    #   resp.entities[0].events["String"].parameters.type.binding_properties.property #=> String
+    #   resp.entities[0].events["String"].parameters.type.binding_properties.field #=> String
+    #   resp.entities[0].events["String"].parameters.type.collection_binding_properties.property #=> String
+    #   resp.entities[0].events["String"].parameters.type.collection_binding_properties.field #=> String
+    #   resp.entities[0].events["String"].parameters.type.default_value #=> String
+    #   resp.entities[0].events["String"].parameters.type.model #=> String
+    #   resp.entities[0].events["String"].parameters.type.bindings #=> Hash
+    #   resp.entities[0].events["String"].parameters.type.bindings["String"].element #=> String
+    #   resp.entities[0].events["String"].parameters.type.bindings["String"].property #=> String
+    #   resp.entities[0].events["String"].parameters.type.event #=> String
+    #   resp.entities[0].events["String"].parameters.type.user_attribute #=> String
+    #   resp.entities[0].events["String"].parameters.type.concat #=> Array
+    #   resp.entities[0].events["String"].parameters.type.concat[0] #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.type.condition.property #=> String
+    #   resp.entities[0].events["String"].parameters.type.condition.field #=> String
+    #   resp.entities[0].events["String"].parameters.type.condition.operator #=> String
+    #   resp.entities[0].events["String"].parameters.type.condition.operand #=> String
+    #   resp.entities[0].events["String"].parameters.type.condition.then #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.type.condition.else #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.type.condition.operand_type #=> String
+    #   resp.entities[0].events["String"].parameters.type.configured #=> Boolean
+    #   resp.entities[0].events["String"].parameters.type.type #=> String
+    #   resp.entities[0].events["String"].parameters.type.imported_value #=> String
+    #   resp.entities[0].events["String"].parameters.type.component_name #=> String
+    #   resp.entities[0].events["String"].parameters.type.property #=> String
+    #   resp.entities[0].events["String"].parameters.url.value #=> String
+    #   resp.entities[0].events["String"].parameters.url.binding_properties.property #=> String
+    #   resp.entities[0].events["String"].parameters.url.binding_properties.field #=> String
+    #   resp.entities[0].events["String"].parameters.url.collection_binding_properties.property #=> String
+    #   resp.entities[0].events["String"].parameters.url.collection_binding_properties.field #=> String
+    #   resp.entities[0].events["String"].parameters.url.default_value #=> String
+    #   resp.entities[0].events["String"].parameters.url.model #=> String
+    #   resp.entities[0].events["String"].parameters.url.bindings #=> Hash
+    #   resp.entities[0].events["String"].parameters.url.bindings["String"].element #=> String
+    #   resp.entities[0].events["String"].parameters.url.bindings["String"].property #=> String
+    #   resp.entities[0].events["String"].parameters.url.event #=> String
+    #   resp.entities[0].events["String"].parameters.url.user_attribute #=> String
+    #   resp.entities[0].events["String"].parameters.url.concat #=> Array
+    #   resp.entities[0].events["String"].parameters.url.concat[0] #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.url.condition.property #=> String
+    #   resp.entities[0].events["String"].parameters.url.condition.field #=> String
+    #   resp.entities[0].events["String"].parameters.url.condition.operator #=> String
+    #   resp.entities[0].events["String"].parameters.url.condition.operand #=> String
+    #   resp.entities[0].events["String"].parameters.url.condition.then #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.url.condition.else #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.url.condition.operand_type #=> String
+    #   resp.entities[0].events["String"].parameters.url.configured #=> Boolean
+    #   resp.entities[0].events["String"].parameters.url.type #=> String
+    #   resp.entities[0].events["String"].parameters.url.imported_value #=> String
+    #   resp.entities[0].events["String"].parameters.url.component_name #=> String
+    #   resp.entities[0].events["String"].parameters.url.property #=> String
+    #   resp.entities[0].events["String"].parameters.anchor.value #=> String
+    #   resp.entities[0].events["String"].parameters.anchor.binding_properties.property #=> String
+    #   resp.entities[0].events["String"].parameters.anchor.binding_properties.field #=> String
+    #   resp.entities[0].events["String"].parameters.anchor.collection_binding_properties.property #=> String
+    #   resp.entities[0].events["String"].parameters.anchor.collection_binding_properties.field #=> String
+    #   resp.entities[0].events["String"].parameters.anchor.default_value #=> String
+    #   resp.entities[0].events["String"].parameters.anchor.model #=> String
+    #   resp.entities[0].events["String"].parameters.anchor.bindings #=> Hash
+    #   resp.entities[0].events["String"].parameters.anchor.bindings["String"].element #=> String
+    #   resp.entities[0].events["String"].parameters.anchor.bindings["String"].property #=> String
+    #   resp.entities[0].events["String"].parameters.anchor.event #=> String
+    #   resp.entities[0].events["String"].parameters.anchor.user_attribute #=> String
+    #   resp.entities[0].events["String"].parameters.anchor.concat #=> Array
+    #   resp.entities[0].events["String"].parameters.anchor.concat[0] #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.anchor.condition.property #=> String
+    #   resp.entities[0].events["String"].parameters.anchor.condition.field #=> String
+    #   resp.entities[0].events["String"].parameters.anchor.condition.operator #=> String
+    #   resp.entities[0].events["String"].parameters.anchor.condition.operand #=> String
+    #   resp.entities[0].events["String"].parameters.anchor.condition.then #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.anchor.condition.else #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.anchor.condition.operand_type #=> String
+    #   resp.entities[0].events["String"].parameters.anchor.configured #=> Boolean
+    #   resp.entities[0].events["String"].parameters.anchor.type #=> String
+    #   resp.entities[0].events["String"].parameters.anchor.imported_value #=> String
+    #   resp.entities[0].events["String"].parameters.anchor.component_name #=> String
+    #   resp.entities[0].events["String"].parameters.anchor.property #=> String
+    #   resp.entities[0].events["String"].parameters.target.value #=> String
+    #   resp.entities[0].events["String"].parameters.target.binding_properties.property #=> String
+    #   resp.entities[0].events["String"].parameters.target.binding_properties.field #=> String
+    #   resp.entities[0].events["String"].parameters.target.collection_binding_properties.property #=> String
+    #   resp.entities[0].events["String"].parameters.target.collection_binding_properties.field #=> String
+    #   resp.entities[0].events["String"].parameters.target.default_value #=> String
+    #   resp.entities[0].events["String"].parameters.target.model #=> String
+    #   resp.entities[0].events["String"].parameters.target.bindings #=> Hash
+    #   resp.entities[0].events["String"].parameters.target.bindings["String"].element #=> String
+    #   resp.entities[0].events["String"].parameters.target.bindings["String"].property #=> String
+    #   resp.entities[0].events["String"].parameters.target.event #=> String
+    #   resp.entities[0].events["String"].parameters.target.user_attribute #=> String
+    #   resp.entities[0].events["String"].parameters.target.concat #=> Array
+    #   resp.entities[0].events["String"].parameters.target.concat[0] #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.target.condition.property #=> String
+    #   resp.entities[0].events["String"].parameters.target.condition.field #=> String
+    #   resp.entities[0].events["String"].parameters.target.condition.operator #=> String
+    #   resp.entities[0].events["String"].parameters.target.condition.operand #=> String
+    #   resp.entities[0].events["String"].parameters.target.condition.then #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.target.condition.else #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.target.condition.operand_type #=> String
+    #   resp.entities[0].events["String"].parameters.target.configured #=> Boolean
+    #   resp.entities[0].events["String"].parameters.target.type #=> String
+    #   resp.entities[0].events["String"].parameters.target.imported_value #=> String
+    #   resp.entities[0].events["String"].parameters.target.component_name #=> String
+    #   resp.entities[0].events["String"].parameters.target.property #=> String
+    #   resp.entities[0].events["String"].parameters.global.value #=> String
+    #   resp.entities[0].events["String"].parameters.global.binding_properties.property #=> String
+    #   resp.entities[0].events["String"].parameters.global.binding_properties.field #=> String
+    #   resp.entities[0].events["String"].parameters.global.collection_binding_properties.property #=> String
+    #   resp.entities[0].events["String"].parameters.global.collection_binding_properties.field #=> String
+    #   resp.entities[0].events["String"].parameters.global.default_value #=> String
+    #   resp.entities[0].events["String"].parameters.global.model #=> String
+    #   resp.entities[0].events["String"].parameters.global.bindings #=> Hash
+    #   resp.entities[0].events["String"].parameters.global.bindings["String"].element #=> String
+    #   resp.entities[0].events["String"].parameters.global.bindings["String"].property #=> String
+    #   resp.entities[0].events["String"].parameters.global.event #=> String
+    #   resp.entities[0].events["String"].parameters.global.user_attribute #=> String
+    #   resp.entities[0].events["String"].parameters.global.concat #=> Array
+    #   resp.entities[0].events["String"].parameters.global.concat[0] #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.global.condition.property #=> String
+    #   resp.entities[0].events["String"].parameters.global.condition.field #=> String
+    #   resp.entities[0].events["String"].parameters.global.condition.operator #=> String
+    #   resp.entities[0].events["String"].parameters.global.condition.operand #=> String
+    #   resp.entities[0].events["String"].parameters.global.condition.then #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.global.condition.else #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.global.condition.operand_type #=> String
+    #   resp.entities[0].events["String"].parameters.global.configured #=> Boolean
+    #   resp.entities[0].events["String"].parameters.global.type #=> String
+    #   resp.entities[0].events["String"].parameters.global.imported_value #=> String
+    #   resp.entities[0].events["String"].parameters.global.component_name #=> String
+    #   resp.entities[0].events["String"].parameters.global.property #=> String
+    #   resp.entities[0].events["String"].parameters.model #=> String
+    #   resp.entities[0].events["String"].parameters.id.value #=> String
+    #   resp.entities[0].events["String"].parameters.id.binding_properties.property #=> String
+    #   resp.entities[0].events["String"].parameters.id.binding_properties.field #=> String
+    #   resp.entities[0].events["String"].parameters.id.collection_binding_properties.property #=> String
+    #   resp.entities[0].events["String"].parameters.id.collection_binding_properties.field #=> String
+    #   resp.entities[0].events["String"].parameters.id.default_value #=> String
+    #   resp.entities[0].events["String"].parameters.id.model #=> String
+    #   resp.entities[0].events["String"].parameters.id.bindings #=> Hash
+    #   resp.entities[0].events["String"].parameters.id.bindings["String"].element #=> String
+    #   resp.entities[0].events["String"].parameters.id.bindings["String"].property #=> String
+    #   resp.entities[0].events["String"].parameters.id.event #=> String
+    #   resp.entities[0].events["String"].parameters.id.user_attribute #=> String
+    #   resp.entities[0].events["String"].parameters.id.concat #=> Array
+    #   resp.entities[0].events["String"].parameters.id.concat[0] #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.id.condition.property #=> String
+    #   resp.entities[0].events["String"].parameters.id.condition.field #=> String
+    #   resp.entities[0].events["String"].parameters.id.condition.operator #=> String
+    #   resp.entities[0].events["String"].parameters.id.condition.operand #=> String
+    #   resp.entities[0].events["String"].parameters.id.condition.then #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.id.condition.else #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.id.condition.operand_type #=> String
+    #   resp.entities[0].events["String"].parameters.id.configured #=> Boolean
+    #   resp.entities[0].events["String"].parameters.id.type #=> String
+    #   resp.entities[0].events["String"].parameters.id.imported_value #=> String
+    #   resp.entities[0].events["String"].parameters.id.component_name #=> String
+    #   resp.entities[0].events["String"].parameters.id.property #=> String
+    #   resp.entities[0].events["String"].parameters.fields #=> Hash
+    #   resp.entities[0].events["String"].parameters.fields["String"].value #=> String
+    #   resp.entities[0].events["String"].parameters.fields["String"].binding_properties.property #=> String
+    #   resp.entities[0].events["String"].parameters.fields["String"].binding_properties.field #=> String
+    #   resp.entities[0].events["String"].parameters.fields["String"].collection_binding_properties.property #=> String
+    #   resp.entities[0].events["String"].parameters.fields["String"].collection_binding_properties.field #=> String
+    #   resp.entities[0].events["String"].parameters.fields["String"].default_value #=> String
+    #   resp.entities[0].events["String"].parameters.fields["String"].model #=> String
+    #   resp.entities[0].events["String"].parameters.fields["String"].bindings #=> Hash
+    #   resp.entities[0].events["String"].parameters.fields["String"].bindings["String"].element #=> String
+    #   resp.entities[0].events["String"].parameters.fields["String"].bindings["String"].property #=> String
+    #   resp.entities[0].events["String"].parameters.fields["String"].event #=> String
+    #   resp.entities[0].events["String"].parameters.fields["String"].user_attribute #=> String
+    #   resp.entities[0].events["String"].parameters.fields["String"].concat #=> Array
+    #   resp.entities[0].events["String"].parameters.fields["String"].concat[0] #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.fields["String"].condition.property #=> String
+    #   resp.entities[0].events["String"].parameters.fields["String"].condition.field #=> String
+    #   resp.entities[0].events["String"].parameters.fields["String"].condition.operator #=> String
+    #   resp.entities[0].events["String"].parameters.fields["String"].condition.operand #=> String
+    #   resp.entities[0].events["String"].parameters.fields["String"].condition.then #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.fields["String"].condition.else #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.fields["String"].condition.operand_type #=> String
+    #   resp.entities[0].events["String"].parameters.fields["String"].configured #=> Boolean
+    #   resp.entities[0].events["String"].parameters.fields["String"].type #=> String
+    #   resp.entities[0].events["String"].parameters.fields["String"].imported_value #=> String
+    #   resp.entities[0].events["String"].parameters.fields["String"].component_name #=> String
+    #   resp.entities[0].events["String"].parameters.fields["String"].property #=> String
+    #   resp.entities[0].events["String"].parameters.state.component_name #=> String
+    #   resp.entities[0].events["String"].parameters.state.property #=> String
+    #   resp.entities[0].events["String"].parameters.state.set.value #=> String
+    #   resp.entities[0].events["String"].parameters.state.set.binding_properties.property #=> String
+    #   resp.entities[0].events["String"].parameters.state.set.binding_properties.field #=> String
+    #   resp.entities[0].events["String"].parameters.state.set.collection_binding_properties.property #=> String
+    #   resp.entities[0].events["String"].parameters.state.set.collection_binding_properties.field #=> String
+    #   resp.entities[0].events["String"].parameters.state.set.default_value #=> String
+    #   resp.entities[0].events["String"].parameters.state.set.model #=> String
+    #   resp.entities[0].events["String"].parameters.state.set.bindings #=> Hash
+    #   resp.entities[0].events["String"].parameters.state.set.bindings["String"].element #=> String
+    #   resp.entities[0].events["String"].parameters.state.set.bindings["String"].property #=> String
+    #   resp.entities[0].events["String"].parameters.state.set.event #=> String
+    #   resp.entities[0].events["String"].parameters.state.set.user_attribute #=> String
+    #   resp.entities[0].events["String"].parameters.state.set.concat #=> Array
+    #   resp.entities[0].events["String"].parameters.state.set.concat[0] #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.state.set.condition.property #=> String
+    #   resp.entities[0].events["String"].parameters.state.set.condition.field #=> String
+    #   resp.entities[0].events["String"].parameters.state.set.condition.operator #=> String
+    #   resp.entities[0].events["String"].parameters.state.set.condition.operand #=> String
+    #   resp.entities[0].events["String"].parameters.state.set.condition.then #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.state.set.condition.else #=> Types::ComponentProperty
+    #   resp.entities[0].events["String"].parameters.state.set.condition.operand_type #=> String
+    #   resp.entities[0].events["String"].parameters.state.set.configured #=> Boolean
+    #   resp.entities[0].events["String"].parameters.state.set.type #=> String
+    #   resp.entities[0].events["String"].parameters.state.set.imported_value #=> String
+    #   resp.entities[0].events["String"].parameters.state.set.component_name #=> String
+    #   resp.entities[0].events["String"].parameters.state.set.property #=> String
+    #   resp.entities[0].events["String"].binding_event #=> String
+    #   resp.entities[0].schema_version #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ExportComponents AWS API Documentation
@@ -2919,75 +2982,95 @@ module Aws::AmplifyUIBuilder
     #
     #   resp.entities #=> Array
     #   resp.entities[0].app_id #=> String
-    #   resp.entities[0].cta.cancel.children #=> String
-    #   resp.entities[0].cta.cancel.excluded #=> Boolean
-    #   resp.entities[0].cta.cancel.position.below #=> String
-    #   resp.entities[0].cta.cancel.position.fixed #=> String, one of "first"
-    #   resp.entities[0].cta.cancel.position.right_of #=> String
-    #   resp.entities[0].cta.clear.children #=> String
-    #   resp.entities[0].cta.clear.excluded #=> Boolean
-    #   resp.entities[0].cta.clear.position.below #=> String
-    #   resp.entities[0].cta.clear.position.fixed #=> String, one of "first"
-    #   resp.entities[0].cta.clear.position.right_of #=> String
-    #   resp.entities[0].cta.position #=> String, one of "top", "bottom", "top_and_bottom"
-    #   resp.entities[0].cta.submit.children #=> String
-    #   resp.entities[0].cta.submit.excluded #=> Boolean
-    #   resp.entities[0].cta.submit.position.below #=> String
-    #   resp.entities[0].cta.submit.position.fixed #=> String, one of "first"
-    #   resp.entities[0].cta.submit.position.right_of #=> String
-    #   resp.entities[0].data_type.data_source_type #=> String, one of "DataStore", "Custom"
-    #   resp.entities[0].data_type.data_type_name #=> String
     #   resp.entities[0].environment_name #=> String
-    #   resp.entities[0].fields #=> Hash
-    #   resp.entities[0].fields["String"].excluded #=> Boolean
-    #   resp.entities[0].fields["String"].input_type.default_checked #=> Boolean
-    #   resp.entities[0].fields["String"].input_type.default_country_code #=> String
-    #   resp.entities[0].fields["String"].input_type.default_value #=> String
-    #   resp.entities[0].fields["String"].input_type.descriptive_text #=> String
-    #   resp.entities[0].fields["String"].input_type.is_array #=> Boolean
-    #   resp.entities[0].fields["String"].input_type.max_value #=> Float
-    #   resp.entities[0].fields["String"].input_type.min_value #=> Float
-    #   resp.entities[0].fields["String"].input_type.name #=> String
-    #   resp.entities[0].fields["String"].input_type.placeholder #=> String
-    #   resp.entities[0].fields["String"].input_type.read_only #=> Boolean
-    #   resp.entities[0].fields["String"].input_type.required #=> Boolean
-    #   resp.entities[0].fields["String"].input_type.step #=> Float
-    #   resp.entities[0].fields["String"].input_type.type #=> String
-    #   resp.entities[0].fields["String"].input_type.value #=> String
-    #   resp.entities[0].fields["String"].input_type.value_mappings.values #=> Array
-    #   resp.entities[0].fields["String"].input_type.value_mappings.values[0].display_value.value #=> String
-    #   resp.entities[0].fields["String"].input_type.value_mappings.values[0].value.value #=> String
-    #   resp.entities[0].fields["String"].label #=> String
-    #   resp.entities[0].fields["String"].position.below #=> String
-    #   resp.entities[0].fields["String"].position.fixed #=> String, one of "first"
-    #   resp.entities[0].fields["String"].position.right_of #=> String
-    #   resp.entities[0].fields["String"].validations #=> Array
-    #   resp.entities[0].fields["String"].validations[0].num_values #=> Array
-    #   resp.entities[0].fields["String"].validations[0].num_values[0] #=> Integer
-    #   resp.entities[0].fields["String"].validations[0].str_values #=> Array
-    #   resp.entities[0].fields["String"].validations[0].str_values[0] #=> String
-    #   resp.entities[0].fields["String"].validations[0].type #=> String
-    #   resp.entities[0].fields["String"].validations[0].validation_message #=> String
-    #   resp.entities[0].form_action_type #=> String, one of "create", "update"
     #   resp.entities[0].id #=> String
     #   resp.entities[0].name #=> String
-    #   resp.entities[0].schema_version #=> String
-    #   resp.entities[0].sectional_elements #=> Hash
-    #   resp.entities[0].sectional_elements["String"].level #=> Integer
-    #   resp.entities[0].sectional_elements["String"].orientation #=> String
-    #   resp.entities[0].sectional_elements["String"].position.below #=> String
-    #   resp.entities[0].sectional_elements["String"].position.fixed #=> String, one of "first"
-    #   resp.entities[0].sectional_elements["String"].position.right_of #=> String
-    #   resp.entities[0].sectional_elements["String"].text #=> String
-    #   resp.entities[0].sectional_elements["String"].type #=> String
+    #   resp.entities[0].form_action_type #=> String, one of "create", "update"
     #   resp.entities[0].style.horizontal_gap.token_reference #=> String
     #   resp.entities[0].style.horizontal_gap.value #=> String
-    #   resp.entities[0].style.outer_padding.token_reference #=> String
-    #   resp.entities[0].style.outer_padding.value #=> String
     #   resp.entities[0].style.vertical_gap.token_reference #=> String
     #   resp.entities[0].style.vertical_gap.value #=> String
+    #   resp.entities[0].style.outer_padding.token_reference #=> String
+    #   resp.entities[0].style.outer_padding.value #=> String
+    #   resp.entities[0].data_type.data_source_type #=> String, one of "DataStore", "Custom"
+    #   resp.entities[0].data_type.data_type_name #=> String
+    #   resp.entities[0].fields #=> Hash
+    #   resp.entities[0].fields["String"].label #=> String
+    #   resp.entities[0].fields["String"].position.fixed #=> String, one of "first"
+    #   resp.entities[0].fields["String"].position.right_of #=> String
+    #   resp.entities[0].fields["String"].position.below #=> String
+    #   resp.entities[0].fields["String"].excluded #=> Boolean
+    #   resp.entities[0].fields["String"].input_type.type #=> String
+    #   resp.entities[0].fields["String"].input_type.required #=> Boolean
+    #   resp.entities[0].fields["String"].input_type.read_only #=> Boolean
+    #   resp.entities[0].fields["String"].input_type.placeholder #=> String
+    #   resp.entities[0].fields["String"].input_type.default_value #=> String
+    #   resp.entities[0].fields["String"].input_type.descriptive_text #=> String
+    #   resp.entities[0].fields["String"].input_type.default_checked #=> Boolean
+    #   resp.entities[0].fields["String"].input_type.default_country_code #=> String
+    #   resp.entities[0].fields["String"].input_type.value_mappings.values #=> Array
+    #   resp.entities[0].fields["String"].input_type.value_mappings.values[0].display_value.value #=> String
+    #   resp.entities[0].fields["String"].input_type.value_mappings.values[0].display_value.binding_properties.property #=> String
+    #   resp.entities[0].fields["String"].input_type.value_mappings.values[0].display_value.binding_properties.field #=> String
+    #   resp.entities[0].fields["String"].input_type.value_mappings.values[0].display_value.concat #=> Array
+    #   resp.entities[0].fields["String"].input_type.value_mappings.values[0].display_value.concat[0] #=> Types::FormInputValueProperty
+    #   resp.entities[0].fields["String"].input_type.value_mappings.values[0].value.value #=> String
+    #   resp.entities[0].fields["String"].input_type.value_mappings.values[0].value.binding_properties.property #=> String
+    #   resp.entities[0].fields["String"].input_type.value_mappings.values[0].value.binding_properties.field #=> String
+    #   resp.entities[0].fields["String"].input_type.value_mappings.values[0].value.concat #=> Array
+    #   resp.entities[0].fields["String"].input_type.value_mappings.values[0].value.concat[0] #=> Types::FormInputValueProperty
+    #   resp.entities[0].fields["String"].input_type.value_mappings.binding_properties #=> Hash
+    #   resp.entities[0].fields["String"].input_type.value_mappings.binding_properties["String"].type #=> String
+    #   resp.entities[0].fields["String"].input_type.value_mappings.binding_properties["String"].binding_properties.model #=> String
+    #   resp.entities[0].fields["String"].input_type.name #=> String
+    #   resp.entities[0].fields["String"].input_type.min_value #=> Float
+    #   resp.entities[0].fields["String"].input_type.max_value #=> Float
+    #   resp.entities[0].fields["String"].input_type.step #=> Float
+    #   resp.entities[0].fields["String"].input_type.value #=> String
+    #   resp.entities[0].fields["String"].input_type.is_array #=> Boolean
+    #   resp.entities[0].fields["String"].input_type.file_uploader_config.access_level #=> String, one of "public", "protected", "private"
+    #   resp.entities[0].fields["String"].input_type.file_uploader_config.accepted_file_types #=> Array
+    #   resp.entities[0].fields["String"].input_type.file_uploader_config.accepted_file_types[0] #=> String
+    #   resp.entities[0].fields["String"].input_type.file_uploader_config.show_thumbnails #=> Boolean
+    #   resp.entities[0].fields["String"].input_type.file_uploader_config.is_resumable #=> Boolean
+    #   resp.entities[0].fields["String"].input_type.file_uploader_config.max_file_count #=> Integer
+    #   resp.entities[0].fields["String"].input_type.file_uploader_config.max_size #=> Integer
+    #   resp.entities[0].fields["String"].validations #=> Array
+    #   resp.entities[0].fields["String"].validations[0].type #=> String
+    #   resp.entities[0].fields["String"].validations[0].str_values #=> Array
+    #   resp.entities[0].fields["String"].validations[0].str_values[0] #=> String
+    #   resp.entities[0].fields["String"].validations[0].num_values #=> Array
+    #   resp.entities[0].fields["String"].validations[0].num_values[0] #=> Integer
+    #   resp.entities[0].fields["String"].validations[0].validation_message #=> String
+    #   resp.entities[0].sectional_elements #=> Hash
+    #   resp.entities[0].sectional_elements["String"].type #=> String
+    #   resp.entities[0].sectional_elements["String"].position.fixed #=> String, one of "first"
+    #   resp.entities[0].sectional_elements["String"].position.right_of #=> String
+    #   resp.entities[0].sectional_elements["String"].position.below #=> String
+    #   resp.entities[0].sectional_elements["String"].text #=> String
+    #   resp.entities[0].sectional_elements["String"].level #=> Integer
+    #   resp.entities[0].sectional_elements["String"].orientation #=> String
+    #   resp.entities[0].sectional_elements["String"].excluded #=> Boolean
+    #   resp.entities[0].schema_version #=> String
     #   resp.entities[0].tags #=> Hash
     #   resp.entities[0].tags["TagKey"] #=> String
+    #   resp.entities[0].cta.position #=> String, one of "top", "bottom", "top_and_bottom"
+    #   resp.entities[0].cta.clear.excluded #=> Boolean
+    #   resp.entities[0].cta.clear.children #=> String
+    #   resp.entities[0].cta.clear.position.fixed #=> String, one of "first"
+    #   resp.entities[0].cta.clear.position.right_of #=> String
+    #   resp.entities[0].cta.clear.position.below #=> String
+    #   resp.entities[0].cta.cancel.excluded #=> Boolean
+    #   resp.entities[0].cta.cancel.children #=> String
+    #   resp.entities[0].cta.cancel.position.fixed #=> String, one of "first"
+    #   resp.entities[0].cta.cancel.position.right_of #=> String
+    #   resp.entities[0].cta.cancel.position.below #=> String
+    #   resp.entities[0].cta.submit.excluded #=> Boolean
+    #   resp.entities[0].cta.submit.children #=> String
+    #   resp.entities[0].cta.submit.position.fixed #=> String, one of "first"
+    #   resp.entities[0].cta.submit.position.right_of #=> String
+    #   resp.entities[0].cta.submit.position.below #=> String
+    #   resp.entities[0].label_decorator #=> String, one of "required", "optional", "none"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ExportForms AWS API Documentation
@@ -3030,21 +3113,21 @@ module Aws::AmplifyUIBuilder
     #
     #   resp.entities #=> Array
     #   resp.entities[0].app_id #=> String
-    #   resp.entities[0].created_at #=> Time
     #   resp.entities[0].environment_name #=> String
     #   resp.entities[0].id #=> String
-    #   resp.entities[0].modified_at #=> Time
     #   resp.entities[0].name #=> String
-    #   resp.entities[0].overrides #=> Array
-    #   resp.entities[0].overrides[0].key #=> String
-    #   resp.entities[0].overrides[0].value.children #=> Types::ThemeValuesList
-    #   resp.entities[0].overrides[0].value.value #=> String
-    #   resp.entities[0].tags #=> Hash
-    #   resp.entities[0].tags["TagKey"] #=> String
+    #   resp.entities[0].created_at #=> Time
+    #   resp.entities[0].modified_at #=> Time
     #   resp.entities[0].values #=> Array
     #   resp.entities[0].values[0].key #=> String
-    #   resp.entities[0].values[0].value.children #=> Types::ThemeValuesList
     #   resp.entities[0].values[0].value.value #=> String
+    #   resp.entities[0].values[0].value.children #=> Types::ThemeValuesList
+    #   resp.entities[0].overrides #=> Array
+    #   resp.entities[0].overrides[0].key #=> String
+    #   resp.entities[0].overrides[0].value.value #=> String
+    #   resp.entities[0].overrides[0].value.children #=> Types::ThemeValuesList
+    #   resp.entities[0].tags #=> Hash
+    #   resp.entities[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ExportThemes AWS API Documentation
@@ -3082,544 +3165,546 @@ module Aws::AmplifyUIBuilder
     # @example Response structure
     #
     #   resp.component.app_id #=> String
-    #   resp.component.binding_properties #=> Hash
-    #   resp.component.binding_properties["String"].binding_properties.bucket #=> String
-    #   resp.component.binding_properties["String"].binding_properties.default_value #=> String
-    #   resp.component.binding_properties["String"].binding_properties.field #=> String
-    #   resp.component.binding_properties["String"].binding_properties.key #=> String
-    #   resp.component.binding_properties["String"].binding_properties.model #=> String
-    #   resp.component.binding_properties["String"].binding_properties.predicates #=> Array
-    #   resp.component.binding_properties["String"].binding_properties.predicates[0].and #=> Types::PredicateList
-    #   resp.component.binding_properties["String"].binding_properties.predicates[0].field #=> String
-    #   resp.component.binding_properties["String"].binding_properties.predicates[0].operand #=> String
-    #   resp.component.binding_properties["String"].binding_properties.predicates[0].operator #=> String
-    #   resp.component.binding_properties["String"].binding_properties.predicates[0].or #=> Types::PredicateList
-    #   resp.component.binding_properties["String"].binding_properties.slot_name #=> String
-    #   resp.component.binding_properties["String"].binding_properties.user_attribute #=> String
-    #   resp.component.binding_properties["String"].default_value #=> String
-    #   resp.component.binding_properties["String"].type #=> String
-    #   resp.component.children #=> Array
-    #   resp.component.children[0].children #=> Types::ComponentChildList
-    #   resp.component.children[0].component_type #=> String
-    #   resp.component.children[0].events #=> Hash
-    #   resp.component.children[0].events["String"].action #=> String
-    #   resp.component.children[0].events["String"].binding_event #=> String
-    #   resp.component.children[0].events["String"].parameters.anchor.binding_properties.field #=> String
-    #   resp.component.children[0].events["String"].parameters.anchor.binding_properties.property #=> String
-    #   resp.component.children[0].events["String"].parameters.anchor.bindings #=> Hash
-    #   resp.component.children[0].events["String"].parameters.anchor.bindings["String"].element #=> String
-    #   resp.component.children[0].events["String"].parameters.anchor.bindings["String"].property #=> String
-    #   resp.component.children[0].events["String"].parameters.anchor.collection_binding_properties.field #=> String
-    #   resp.component.children[0].events["String"].parameters.anchor.collection_binding_properties.property #=> String
-    #   resp.component.children[0].events["String"].parameters.anchor.component_name #=> String
-    #   resp.component.children[0].events["String"].parameters.anchor.concat #=> Array
-    #   resp.component.children[0].events["String"].parameters.anchor.concat[0] #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.anchor.condition.else #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.anchor.condition.field #=> String
-    #   resp.component.children[0].events["String"].parameters.anchor.condition.operand #=> String
-    #   resp.component.children[0].events["String"].parameters.anchor.condition.operand_type #=> String
-    #   resp.component.children[0].events["String"].parameters.anchor.condition.operator #=> String
-    #   resp.component.children[0].events["String"].parameters.anchor.condition.property #=> String
-    #   resp.component.children[0].events["String"].parameters.anchor.condition.then #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.anchor.configured #=> Boolean
-    #   resp.component.children[0].events["String"].parameters.anchor.default_value #=> String
-    #   resp.component.children[0].events["String"].parameters.anchor.event #=> String
-    #   resp.component.children[0].events["String"].parameters.anchor.imported_value #=> String
-    #   resp.component.children[0].events["String"].parameters.anchor.model #=> String
-    #   resp.component.children[0].events["String"].parameters.anchor.property #=> String
-    #   resp.component.children[0].events["String"].parameters.anchor.type #=> String
-    #   resp.component.children[0].events["String"].parameters.anchor.user_attribute #=> String
-    #   resp.component.children[0].events["String"].parameters.anchor.value #=> String
-    #   resp.component.children[0].events["String"].parameters.fields #=> Hash
-    #   resp.component.children[0].events["String"].parameters.fields["String"].binding_properties.field #=> String
-    #   resp.component.children[0].events["String"].parameters.fields["String"].binding_properties.property #=> String
-    #   resp.component.children[0].events["String"].parameters.fields["String"].bindings #=> Hash
-    #   resp.component.children[0].events["String"].parameters.fields["String"].bindings["String"].element #=> String
-    #   resp.component.children[0].events["String"].parameters.fields["String"].bindings["String"].property #=> String
-    #   resp.component.children[0].events["String"].parameters.fields["String"].collection_binding_properties.field #=> String
-    #   resp.component.children[0].events["String"].parameters.fields["String"].collection_binding_properties.property #=> String
-    #   resp.component.children[0].events["String"].parameters.fields["String"].component_name #=> String
-    #   resp.component.children[0].events["String"].parameters.fields["String"].concat #=> Array
-    #   resp.component.children[0].events["String"].parameters.fields["String"].concat[0] #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.fields["String"].condition.else #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.fields["String"].condition.field #=> String
-    #   resp.component.children[0].events["String"].parameters.fields["String"].condition.operand #=> String
-    #   resp.component.children[0].events["String"].parameters.fields["String"].condition.operand_type #=> String
-    #   resp.component.children[0].events["String"].parameters.fields["String"].condition.operator #=> String
-    #   resp.component.children[0].events["String"].parameters.fields["String"].condition.property #=> String
-    #   resp.component.children[0].events["String"].parameters.fields["String"].condition.then #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.fields["String"].configured #=> Boolean
-    #   resp.component.children[0].events["String"].parameters.fields["String"].default_value #=> String
-    #   resp.component.children[0].events["String"].parameters.fields["String"].event #=> String
-    #   resp.component.children[0].events["String"].parameters.fields["String"].imported_value #=> String
-    #   resp.component.children[0].events["String"].parameters.fields["String"].model #=> String
-    #   resp.component.children[0].events["String"].parameters.fields["String"].property #=> String
-    #   resp.component.children[0].events["String"].parameters.fields["String"].type #=> String
-    #   resp.component.children[0].events["String"].parameters.fields["String"].user_attribute #=> String
-    #   resp.component.children[0].events["String"].parameters.fields["String"].value #=> String
-    #   resp.component.children[0].events["String"].parameters.global.binding_properties.field #=> String
-    #   resp.component.children[0].events["String"].parameters.global.binding_properties.property #=> String
-    #   resp.component.children[0].events["String"].parameters.global.bindings #=> Hash
-    #   resp.component.children[0].events["String"].parameters.global.bindings["String"].element #=> String
-    #   resp.component.children[0].events["String"].parameters.global.bindings["String"].property #=> String
-    #   resp.component.children[0].events["String"].parameters.global.collection_binding_properties.field #=> String
-    #   resp.component.children[0].events["String"].parameters.global.collection_binding_properties.property #=> String
-    #   resp.component.children[0].events["String"].parameters.global.component_name #=> String
-    #   resp.component.children[0].events["String"].parameters.global.concat #=> Array
-    #   resp.component.children[0].events["String"].parameters.global.concat[0] #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.global.condition.else #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.global.condition.field #=> String
-    #   resp.component.children[0].events["String"].parameters.global.condition.operand #=> String
-    #   resp.component.children[0].events["String"].parameters.global.condition.operand_type #=> String
-    #   resp.component.children[0].events["String"].parameters.global.condition.operator #=> String
-    #   resp.component.children[0].events["String"].parameters.global.condition.property #=> String
-    #   resp.component.children[0].events["String"].parameters.global.condition.then #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.global.configured #=> Boolean
-    #   resp.component.children[0].events["String"].parameters.global.default_value #=> String
-    #   resp.component.children[0].events["String"].parameters.global.event #=> String
-    #   resp.component.children[0].events["String"].parameters.global.imported_value #=> String
-    #   resp.component.children[0].events["String"].parameters.global.model #=> String
-    #   resp.component.children[0].events["String"].parameters.global.property #=> String
-    #   resp.component.children[0].events["String"].parameters.global.type #=> String
-    #   resp.component.children[0].events["String"].parameters.global.user_attribute #=> String
-    #   resp.component.children[0].events["String"].parameters.global.value #=> String
-    #   resp.component.children[0].events["String"].parameters.id.binding_properties.field #=> String
-    #   resp.component.children[0].events["String"].parameters.id.binding_properties.property #=> String
-    #   resp.component.children[0].events["String"].parameters.id.bindings #=> Hash
-    #   resp.component.children[0].events["String"].parameters.id.bindings["String"].element #=> String
-    #   resp.component.children[0].events["String"].parameters.id.bindings["String"].property #=> String
-    #   resp.component.children[0].events["String"].parameters.id.collection_binding_properties.field #=> String
-    #   resp.component.children[0].events["String"].parameters.id.collection_binding_properties.property #=> String
-    #   resp.component.children[0].events["String"].parameters.id.component_name #=> String
-    #   resp.component.children[0].events["String"].parameters.id.concat #=> Array
-    #   resp.component.children[0].events["String"].parameters.id.concat[0] #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.id.condition.else #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.id.condition.field #=> String
-    #   resp.component.children[0].events["String"].parameters.id.condition.operand #=> String
-    #   resp.component.children[0].events["String"].parameters.id.condition.operand_type #=> String
-    #   resp.component.children[0].events["String"].parameters.id.condition.operator #=> String
-    #   resp.component.children[0].events["String"].parameters.id.condition.property #=> String
-    #   resp.component.children[0].events["String"].parameters.id.condition.then #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.id.configured #=> Boolean
-    #   resp.component.children[0].events["String"].parameters.id.default_value #=> String
-    #   resp.component.children[0].events["String"].parameters.id.event #=> String
-    #   resp.component.children[0].events["String"].parameters.id.imported_value #=> String
-    #   resp.component.children[0].events["String"].parameters.id.model #=> String
-    #   resp.component.children[0].events["String"].parameters.id.property #=> String
-    #   resp.component.children[0].events["String"].parameters.id.type #=> String
-    #   resp.component.children[0].events["String"].parameters.id.user_attribute #=> String
-    #   resp.component.children[0].events["String"].parameters.id.value #=> String
-    #   resp.component.children[0].events["String"].parameters.model #=> String
-    #   resp.component.children[0].events["String"].parameters.state.component_name #=> String
-    #   resp.component.children[0].events["String"].parameters.state.property #=> String
-    #   resp.component.children[0].events["String"].parameters.state.set.binding_properties.field #=> String
-    #   resp.component.children[0].events["String"].parameters.state.set.binding_properties.property #=> String
-    #   resp.component.children[0].events["String"].parameters.state.set.bindings #=> Hash
-    #   resp.component.children[0].events["String"].parameters.state.set.bindings["String"].element #=> String
-    #   resp.component.children[0].events["String"].parameters.state.set.bindings["String"].property #=> String
-    #   resp.component.children[0].events["String"].parameters.state.set.collection_binding_properties.field #=> String
-    #   resp.component.children[0].events["String"].parameters.state.set.collection_binding_properties.property #=> String
-    #   resp.component.children[0].events["String"].parameters.state.set.component_name #=> String
-    #   resp.component.children[0].events["String"].parameters.state.set.concat #=> Array
-    #   resp.component.children[0].events["String"].parameters.state.set.concat[0] #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.state.set.condition.else #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.state.set.condition.field #=> String
-    #   resp.component.children[0].events["String"].parameters.state.set.condition.operand #=> String
-    #   resp.component.children[0].events["String"].parameters.state.set.condition.operand_type #=> String
-    #   resp.component.children[0].events["String"].parameters.state.set.condition.operator #=> String
-    #   resp.component.children[0].events["String"].parameters.state.set.condition.property #=> String
-    #   resp.component.children[0].events["String"].parameters.state.set.condition.then #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.state.set.configured #=> Boolean
-    #   resp.component.children[0].events["String"].parameters.state.set.default_value #=> String
-    #   resp.component.children[0].events["String"].parameters.state.set.event #=> String
-    #   resp.component.children[0].events["String"].parameters.state.set.imported_value #=> String
-    #   resp.component.children[0].events["String"].parameters.state.set.model #=> String
-    #   resp.component.children[0].events["String"].parameters.state.set.property #=> String
-    #   resp.component.children[0].events["String"].parameters.state.set.type #=> String
-    #   resp.component.children[0].events["String"].parameters.state.set.user_attribute #=> String
-    #   resp.component.children[0].events["String"].parameters.state.set.value #=> String
-    #   resp.component.children[0].events["String"].parameters.target.binding_properties.field #=> String
-    #   resp.component.children[0].events["String"].parameters.target.binding_properties.property #=> String
-    #   resp.component.children[0].events["String"].parameters.target.bindings #=> Hash
-    #   resp.component.children[0].events["String"].parameters.target.bindings["String"].element #=> String
-    #   resp.component.children[0].events["String"].parameters.target.bindings["String"].property #=> String
-    #   resp.component.children[0].events["String"].parameters.target.collection_binding_properties.field #=> String
-    #   resp.component.children[0].events["String"].parameters.target.collection_binding_properties.property #=> String
-    #   resp.component.children[0].events["String"].parameters.target.component_name #=> String
-    #   resp.component.children[0].events["String"].parameters.target.concat #=> Array
-    #   resp.component.children[0].events["String"].parameters.target.concat[0] #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.target.condition.else #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.target.condition.field #=> String
-    #   resp.component.children[0].events["String"].parameters.target.condition.operand #=> String
-    #   resp.component.children[0].events["String"].parameters.target.condition.operand_type #=> String
-    #   resp.component.children[0].events["String"].parameters.target.condition.operator #=> String
-    #   resp.component.children[0].events["String"].parameters.target.condition.property #=> String
-    #   resp.component.children[0].events["String"].parameters.target.condition.then #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.target.configured #=> Boolean
-    #   resp.component.children[0].events["String"].parameters.target.default_value #=> String
-    #   resp.component.children[0].events["String"].parameters.target.event #=> String
-    #   resp.component.children[0].events["String"].parameters.target.imported_value #=> String
-    #   resp.component.children[0].events["String"].parameters.target.model #=> String
-    #   resp.component.children[0].events["String"].parameters.target.property #=> String
-    #   resp.component.children[0].events["String"].parameters.target.type #=> String
-    #   resp.component.children[0].events["String"].parameters.target.user_attribute #=> String
-    #   resp.component.children[0].events["String"].parameters.target.value #=> String
-    #   resp.component.children[0].events["String"].parameters.type.binding_properties.field #=> String
-    #   resp.component.children[0].events["String"].parameters.type.binding_properties.property #=> String
-    #   resp.component.children[0].events["String"].parameters.type.bindings #=> Hash
-    #   resp.component.children[0].events["String"].parameters.type.bindings["String"].element #=> String
-    #   resp.component.children[0].events["String"].parameters.type.bindings["String"].property #=> String
-    #   resp.component.children[0].events["String"].parameters.type.collection_binding_properties.field #=> String
-    #   resp.component.children[0].events["String"].parameters.type.collection_binding_properties.property #=> String
-    #   resp.component.children[0].events["String"].parameters.type.component_name #=> String
-    #   resp.component.children[0].events["String"].parameters.type.concat #=> Array
-    #   resp.component.children[0].events["String"].parameters.type.concat[0] #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.type.condition.else #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.type.condition.field #=> String
-    #   resp.component.children[0].events["String"].parameters.type.condition.operand #=> String
-    #   resp.component.children[0].events["String"].parameters.type.condition.operand_type #=> String
-    #   resp.component.children[0].events["String"].parameters.type.condition.operator #=> String
-    #   resp.component.children[0].events["String"].parameters.type.condition.property #=> String
-    #   resp.component.children[0].events["String"].parameters.type.condition.then #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.type.configured #=> Boolean
-    #   resp.component.children[0].events["String"].parameters.type.default_value #=> String
-    #   resp.component.children[0].events["String"].parameters.type.event #=> String
-    #   resp.component.children[0].events["String"].parameters.type.imported_value #=> String
-    #   resp.component.children[0].events["String"].parameters.type.model #=> String
-    #   resp.component.children[0].events["String"].parameters.type.property #=> String
-    #   resp.component.children[0].events["String"].parameters.type.type #=> String
-    #   resp.component.children[0].events["String"].parameters.type.user_attribute #=> String
-    #   resp.component.children[0].events["String"].parameters.type.value #=> String
-    #   resp.component.children[0].events["String"].parameters.url.binding_properties.field #=> String
-    #   resp.component.children[0].events["String"].parameters.url.binding_properties.property #=> String
-    #   resp.component.children[0].events["String"].parameters.url.bindings #=> Hash
-    #   resp.component.children[0].events["String"].parameters.url.bindings["String"].element #=> String
-    #   resp.component.children[0].events["String"].parameters.url.bindings["String"].property #=> String
-    #   resp.component.children[0].events["String"].parameters.url.collection_binding_properties.field #=> String
-    #   resp.component.children[0].events["String"].parameters.url.collection_binding_properties.property #=> String
-    #   resp.component.children[0].events["String"].parameters.url.component_name #=> String
-    #   resp.component.children[0].events["String"].parameters.url.concat #=> Array
-    #   resp.component.children[0].events["String"].parameters.url.concat[0] #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.url.condition.else #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.url.condition.field #=> String
-    #   resp.component.children[0].events["String"].parameters.url.condition.operand #=> String
-    #   resp.component.children[0].events["String"].parameters.url.condition.operand_type #=> String
-    #   resp.component.children[0].events["String"].parameters.url.condition.operator #=> String
-    #   resp.component.children[0].events["String"].parameters.url.condition.property #=> String
-    #   resp.component.children[0].events["String"].parameters.url.condition.then #=> Types::ComponentProperty
-    #   resp.component.children[0].events["String"].parameters.url.configured #=> Boolean
-    #   resp.component.children[0].events["String"].parameters.url.default_value #=> String
-    #   resp.component.children[0].events["String"].parameters.url.event #=> String
-    #   resp.component.children[0].events["String"].parameters.url.imported_value #=> String
-    #   resp.component.children[0].events["String"].parameters.url.model #=> String
-    #   resp.component.children[0].events["String"].parameters.url.property #=> String
-    #   resp.component.children[0].events["String"].parameters.url.type #=> String
-    #   resp.component.children[0].events["String"].parameters.url.user_attribute #=> String
-    #   resp.component.children[0].events["String"].parameters.url.value #=> String
-    #   resp.component.children[0].name #=> String
-    #   resp.component.children[0].properties #=> Hash
-    #   resp.component.children[0].properties["String"].binding_properties.field #=> String
-    #   resp.component.children[0].properties["String"].binding_properties.property #=> String
-    #   resp.component.children[0].properties["String"].bindings #=> Hash
-    #   resp.component.children[0].properties["String"].bindings["String"].element #=> String
-    #   resp.component.children[0].properties["String"].bindings["String"].property #=> String
-    #   resp.component.children[0].properties["String"].collection_binding_properties.field #=> String
-    #   resp.component.children[0].properties["String"].collection_binding_properties.property #=> String
-    #   resp.component.children[0].properties["String"].component_name #=> String
-    #   resp.component.children[0].properties["String"].concat #=> Array
-    #   resp.component.children[0].properties["String"].concat[0] #=> Types::ComponentProperty
-    #   resp.component.children[0].properties["String"].condition.else #=> Types::ComponentProperty
-    #   resp.component.children[0].properties["String"].condition.field #=> String
-    #   resp.component.children[0].properties["String"].condition.operand #=> String
-    #   resp.component.children[0].properties["String"].condition.operand_type #=> String
-    #   resp.component.children[0].properties["String"].condition.operator #=> String
-    #   resp.component.children[0].properties["String"].condition.property #=> String
-    #   resp.component.children[0].properties["String"].condition.then #=> Types::ComponentProperty
-    #   resp.component.children[0].properties["String"].configured #=> Boolean
-    #   resp.component.children[0].properties["String"].default_value #=> String
-    #   resp.component.children[0].properties["String"].event #=> String
-    #   resp.component.children[0].properties["String"].imported_value #=> String
-    #   resp.component.children[0].properties["String"].model #=> String
-    #   resp.component.children[0].properties["String"].property #=> String
-    #   resp.component.children[0].properties["String"].type #=> String
-    #   resp.component.children[0].properties["String"].user_attribute #=> String
-    #   resp.component.children[0].properties["String"].value #=> String
-    #   resp.component.children[0].source_id #=> String
-    #   resp.component.collection_properties #=> Hash
-    #   resp.component.collection_properties["String"].identifiers #=> Array
-    #   resp.component.collection_properties["String"].identifiers[0] #=> String
-    #   resp.component.collection_properties["String"].model #=> String
-    #   resp.component.collection_properties["String"].predicate.and #=> Array
-    #   resp.component.collection_properties["String"].predicate.and[0] #=> Types::Predicate
-    #   resp.component.collection_properties["String"].predicate.field #=> String
-    #   resp.component.collection_properties["String"].predicate.operand #=> String
-    #   resp.component.collection_properties["String"].predicate.operator #=> String
-    #   resp.component.collection_properties["String"].predicate.or #=> Array
-    #   resp.component.collection_properties["String"].predicate.or[0] #=> Types::Predicate
-    #   resp.component.collection_properties["String"].sort #=> Array
-    #   resp.component.collection_properties["String"].sort[0].direction #=> String, one of "ASC", "DESC"
-    #   resp.component.collection_properties["String"].sort[0].field #=> String
-    #   resp.component.component_type #=> String
-    #   resp.component.created_at #=> Time
     #   resp.component.environment_name #=> String
-    #   resp.component.events #=> Hash
-    #   resp.component.events["String"].action #=> String
-    #   resp.component.events["String"].binding_event #=> String
-    #   resp.component.events["String"].parameters.anchor.binding_properties.field #=> String
-    #   resp.component.events["String"].parameters.anchor.binding_properties.property #=> String
-    #   resp.component.events["String"].parameters.anchor.bindings #=> Hash
-    #   resp.component.events["String"].parameters.anchor.bindings["String"].element #=> String
-    #   resp.component.events["String"].parameters.anchor.bindings["String"].property #=> String
-    #   resp.component.events["String"].parameters.anchor.collection_binding_properties.field #=> String
-    #   resp.component.events["String"].parameters.anchor.collection_binding_properties.property #=> String
-    #   resp.component.events["String"].parameters.anchor.component_name #=> String
-    #   resp.component.events["String"].parameters.anchor.concat #=> Array
-    #   resp.component.events["String"].parameters.anchor.concat[0] #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.anchor.condition.else #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.anchor.condition.field #=> String
-    #   resp.component.events["String"].parameters.anchor.condition.operand #=> String
-    #   resp.component.events["String"].parameters.anchor.condition.operand_type #=> String
-    #   resp.component.events["String"].parameters.anchor.condition.operator #=> String
-    #   resp.component.events["String"].parameters.anchor.condition.property #=> String
-    #   resp.component.events["String"].parameters.anchor.condition.then #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.anchor.configured #=> Boolean
-    #   resp.component.events["String"].parameters.anchor.default_value #=> String
-    #   resp.component.events["String"].parameters.anchor.event #=> String
-    #   resp.component.events["String"].parameters.anchor.imported_value #=> String
-    #   resp.component.events["String"].parameters.anchor.model #=> String
-    #   resp.component.events["String"].parameters.anchor.property #=> String
-    #   resp.component.events["String"].parameters.anchor.type #=> String
-    #   resp.component.events["String"].parameters.anchor.user_attribute #=> String
-    #   resp.component.events["String"].parameters.anchor.value #=> String
-    #   resp.component.events["String"].parameters.fields #=> Hash
-    #   resp.component.events["String"].parameters.fields["String"].binding_properties.field #=> String
-    #   resp.component.events["String"].parameters.fields["String"].binding_properties.property #=> String
-    #   resp.component.events["String"].parameters.fields["String"].bindings #=> Hash
-    #   resp.component.events["String"].parameters.fields["String"].bindings["String"].element #=> String
-    #   resp.component.events["String"].parameters.fields["String"].bindings["String"].property #=> String
-    #   resp.component.events["String"].parameters.fields["String"].collection_binding_properties.field #=> String
-    #   resp.component.events["String"].parameters.fields["String"].collection_binding_properties.property #=> String
-    #   resp.component.events["String"].parameters.fields["String"].component_name #=> String
-    #   resp.component.events["String"].parameters.fields["String"].concat #=> Array
-    #   resp.component.events["String"].parameters.fields["String"].concat[0] #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.fields["String"].condition.else #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.fields["String"].condition.field #=> String
-    #   resp.component.events["String"].parameters.fields["String"].condition.operand #=> String
-    #   resp.component.events["String"].parameters.fields["String"].condition.operand_type #=> String
-    #   resp.component.events["String"].parameters.fields["String"].condition.operator #=> String
-    #   resp.component.events["String"].parameters.fields["String"].condition.property #=> String
-    #   resp.component.events["String"].parameters.fields["String"].condition.then #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.fields["String"].configured #=> Boolean
-    #   resp.component.events["String"].parameters.fields["String"].default_value #=> String
-    #   resp.component.events["String"].parameters.fields["String"].event #=> String
-    #   resp.component.events["String"].parameters.fields["String"].imported_value #=> String
-    #   resp.component.events["String"].parameters.fields["String"].model #=> String
-    #   resp.component.events["String"].parameters.fields["String"].property #=> String
-    #   resp.component.events["String"].parameters.fields["String"].type #=> String
-    #   resp.component.events["String"].parameters.fields["String"].user_attribute #=> String
-    #   resp.component.events["String"].parameters.fields["String"].value #=> String
-    #   resp.component.events["String"].parameters.global.binding_properties.field #=> String
-    #   resp.component.events["String"].parameters.global.binding_properties.property #=> String
-    #   resp.component.events["String"].parameters.global.bindings #=> Hash
-    #   resp.component.events["String"].parameters.global.bindings["String"].element #=> String
-    #   resp.component.events["String"].parameters.global.bindings["String"].property #=> String
-    #   resp.component.events["String"].parameters.global.collection_binding_properties.field #=> String
-    #   resp.component.events["String"].parameters.global.collection_binding_properties.property #=> String
-    #   resp.component.events["String"].parameters.global.component_name #=> String
-    #   resp.component.events["String"].parameters.global.concat #=> Array
-    #   resp.component.events["String"].parameters.global.concat[0] #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.global.condition.else #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.global.condition.field #=> String
-    #   resp.component.events["String"].parameters.global.condition.operand #=> String
-    #   resp.component.events["String"].parameters.global.condition.operand_type #=> String
-    #   resp.component.events["String"].parameters.global.condition.operator #=> String
-    #   resp.component.events["String"].parameters.global.condition.property #=> String
-    #   resp.component.events["String"].parameters.global.condition.then #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.global.configured #=> Boolean
-    #   resp.component.events["String"].parameters.global.default_value #=> String
-    #   resp.component.events["String"].parameters.global.event #=> String
-    #   resp.component.events["String"].parameters.global.imported_value #=> String
-    #   resp.component.events["String"].parameters.global.model #=> String
-    #   resp.component.events["String"].parameters.global.property #=> String
-    #   resp.component.events["String"].parameters.global.type #=> String
-    #   resp.component.events["String"].parameters.global.user_attribute #=> String
-    #   resp.component.events["String"].parameters.global.value #=> String
-    #   resp.component.events["String"].parameters.id.binding_properties.field #=> String
-    #   resp.component.events["String"].parameters.id.binding_properties.property #=> String
-    #   resp.component.events["String"].parameters.id.bindings #=> Hash
-    #   resp.component.events["String"].parameters.id.bindings["String"].element #=> String
-    #   resp.component.events["String"].parameters.id.bindings["String"].property #=> String
-    #   resp.component.events["String"].parameters.id.collection_binding_properties.field #=> String
-    #   resp.component.events["String"].parameters.id.collection_binding_properties.property #=> String
-    #   resp.component.events["String"].parameters.id.component_name #=> String
-    #   resp.component.events["String"].parameters.id.concat #=> Array
-    #   resp.component.events["String"].parameters.id.concat[0] #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.id.condition.else #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.id.condition.field #=> String
-    #   resp.component.events["String"].parameters.id.condition.operand #=> String
-    #   resp.component.events["String"].parameters.id.condition.operand_type #=> String
-    #   resp.component.events["String"].parameters.id.condition.operator #=> String
-    #   resp.component.events["String"].parameters.id.condition.property #=> String
-    #   resp.component.events["String"].parameters.id.condition.then #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.id.configured #=> Boolean
-    #   resp.component.events["String"].parameters.id.default_value #=> String
-    #   resp.component.events["String"].parameters.id.event #=> String
-    #   resp.component.events["String"].parameters.id.imported_value #=> String
-    #   resp.component.events["String"].parameters.id.model #=> String
-    #   resp.component.events["String"].parameters.id.property #=> String
-    #   resp.component.events["String"].parameters.id.type #=> String
-    #   resp.component.events["String"].parameters.id.user_attribute #=> String
-    #   resp.component.events["String"].parameters.id.value #=> String
-    #   resp.component.events["String"].parameters.model #=> String
-    #   resp.component.events["String"].parameters.state.component_name #=> String
-    #   resp.component.events["String"].parameters.state.property #=> String
-    #   resp.component.events["String"].parameters.state.set.binding_properties.field #=> String
-    #   resp.component.events["String"].parameters.state.set.binding_properties.property #=> String
-    #   resp.component.events["String"].parameters.state.set.bindings #=> Hash
-    #   resp.component.events["String"].parameters.state.set.bindings["String"].element #=> String
-    #   resp.component.events["String"].parameters.state.set.bindings["String"].property #=> String
-    #   resp.component.events["String"].parameters.state.set.collection_binding_properties.field #=> String
-    #   resp.component.events["String"].parameters.state.set.collection_binding_properties.property #=> String
-    #   resp.component.events["String"].parameters.state.set.component_name #=> String
-    #   resp.component.events["String"].parameters.state.set.concat #=> Array
-    #   resp.component.events["String"].parameters.state.set.concat[0] #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.state.set.condition.else #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.state.set.condition.field #=> String
-    #   resp.component.events["String"].parameters.state.set.condition.operand #=> String
-    #   resp.component.events["String"].parameters.state.set.condition.operand_type #=> String
-    #   resp.component.events["String"].parameters.state.set.condition.operator #=> String
-    #   resp.component.events["String"].parameters.state.set.condition.property #=> String
-    #   resp.component.events["String"].parameters.state.set.condition.then #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.state.set.configured #=> Boolean
-    #   resp.component.events["String"].parameters.state.set.default_value #=> String
-    #   resp.component.events["String"].parameters.state.set.event #=> String
-    #   resp.component.events["String"].parameters.state.set.imported_value #=> String
-    #   resp.component.events["String"].parameters.state.set.model #=> String
-    #   resp.component.events["String"].parameters.state.set.property #=> String
-    #   resp.component.events["String"].parameters.state.set.type #=> String
-    #   resp.component.events["String"].parameters.state.set.user_attribute #=> String
-    #   resp.component.events["String"].parameters.state.set.value #=> String
-    #   resp.component.events["String"].parameters.target.binding_properties.field #=> String
-    #   resp.component.events["String"].parameters.target.binding_properties.property #=> String
-    #   resp.component.events["String"].parameters.target.bindings #=> Hash
-    #   resp.component.events["String"].parameters.target.bindings["String"].element #=> String
-    #   resp.component.events["String"].parameters.target.bindings["String"].property #=> String
-    #   resp.component.events["String"].parameters.target.collection_binding_properties.field #=> String
-    #   resp.component.events["String"].parameters.target.collection_binding_properties.property #=> String
-    #   resp.component.events["String"].parameters.target.component_name #=> String
-    #   resp.component.events["String"].parameters.target.concat #=> Array
-    #   resp.component.events["String"].parameters.target.concat[0] #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.target.condition.else #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.target.condition.field #=> String
-    #   resp.component.events["String"].parameters.target.condition.operand #=> String
-    #   resp.component.events["String"].parameters.target.condition.operand_type #=> String
-    #   resp.component.events["String"].parameters.target.condition.operator #=> String
-    #   resp.component.events["String"].parameters.target.condition.property #=> String
-    #   resp.component.events["String"].parameters.target.condition.then #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.target.configured #=> Boolean
-    #   resp.component.events["String"].parameters.target.default_value #=> String
-    #   resp.component.events["String"].parameters.target.event #=> String
-    #   resp.component.events["String"].parameters.target.imported_value #=> String
-    #   resp.component.events["String"].parameters.target.model #=> String
-    #   resp.component.events["String"].parameters.target.property #=> String
-    #   resp.component.events["String"].parameters.target.type #=> String
-    #   resp.component.events["String"].parameters.target.user_attribute #=> String
-    #   resp.component.events["String"].parameters.target.value #=> String
-    #   resp.component.events["String"].parameters.type.binding_properties.field #=> String
-    #   resp.component.events["String"].parameters.type.binding_properties.property #=> String
-    #   resp.component.events["String"].parameters.type.bindings #=> Hash
-    #   resp.component.events["String"].parameters.type.bindings["String"].element #=> String
-    #   resp.component.events["String"].parameters.type.bindings["String"].property #=> String
-    #   resp.component.events["String"].parameters.type.collection_binding_properties.field #=> String
-    #   resp.component.events["String"].parameters.type.collection_binding_properties.property #=> String
-    #   resp.component.events["String"].parameters.type.component_name #=> String
-    #   resp.component.events["String"].parameters.type.concat #=> Array
-    #   resp.component.events["String"].parameters.type.concat[0] #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.type.condition.else #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.type.condition.field #=> String
-    #   resp.component.events["String"].parameters.type.condition.operand #=> String
-    #   resp.component.events["String"].parameters.type.condition.operand_type #=> String
-    #   resp.component.events["String"].parameters.type.condition.operator #=> String
-    #   resp.component.events["String"].parameters.type.condition.property #=> String
-    #   resp.component.events["String"].parameters.type.condition.then #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.type.configured #=> Boolean
-    #   resp.component.events["String"].parameters.type.default_value #=> String
-    #   resp.component.events["String"].parameters.type.event #=> String
-    #   resp.component.events["String"].parameters.type.imported_value #=> String
-    #   resp.component.events["String"].parameters.type.model #=> String
-    #   resp.component.events["String"].parameters.type.property #=> String
-    #   resp.component.events["String"].parameters.type.type #=> String
-    #   resp.component.events["String"].parameters.type.user_attribute #=> String
-    #   resp.component.events["String"].parameters.type.value #=> String
-    #   resp.component.events["String"].parameters.url.binding_properties.field #=> String
-    #   resp.component.events["String"].parameters.url.binding_properties.property #=> String
-    #   resp.component.events["String"].parameters.url.bindings #=> Hash
-    #   resp.component.events["String"].parameters.url.bindings["String"].element #=> String
-    #   resp.component.events["String"].parameters.url.bindings["String"].property #=> String
-    #   resp.component.events["String"].parameters.url.collection_binding_properties.field #=> String
-    #   resp.component.events["String"].parameters.url.collection_binding_properties.property #=> String
-    #   resp.component.events["String"].parameters.url.component_name #=> String
-    #   resp.component.events["String"].parameters.url.concat #=> Array
-    #   resp.component.events["String"].parameters.url.concat[0] #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.url.condition.else #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.url.condition.field #=> String
-    #   resp.component.events["String"].parameters.url.condition.operand #=> String
-    #   resp.component.events["String"].parameters.url.condition.operand_type #=> String
-    #   resp.component.events["String"].parameters.url.condition.operator #=> String
-    #   resp.component.events["String"].parameters.url.condition.property #=> String
-    #   resp.component.events["String"].parameters.url.condition.then #=> Types::ComponentProperty
-    #   resp.component.events["String"].parameters.url.configured #=> Boolean
-    #   resp.component.events["String"].parameters.url.default_value #=> String
-    #   resp.component.events["String"].parameters.url.event #=> String
-    #   resp.component.events["String"].parameters.url.imported_value #=> String
-    #   resp.component.events["String"].parameters.url.model #=> String
-    #   resp.component.events["String"].parameters.url.property #=> String
-    #   resp.component.events["String"].parameters.url.type #=> String
-    #   resp.component.events["String"].parameters.url.user_attribute #=> String
-    #   resp.component.events["String"].parameters.url.value #=> String
+    #   resp.component.source_id #=> String
     #   resp.component.id #=> String
-    #   resp.component.modified_at #=> Time
     #   resp.component.name #=> String
-    #   resp.component.overrides #=> Hash
-    #   resp.component.overrides["String"] #=> Hash
-    #   resp.component.overrides["String"]["String"] #=> String
+    #   resp.component.component_type #=> String
     #   resp.component.properties #=> Hash
-    #   resp.component.properties["String"].binding_properties.field #=> String
+    #   resp.component.properties["String"].value #=> String
     #   resp.component.properties["String"].binding_properties.property #=> String
+    #   resp.component.properties["String"].binding_properties.field #=> String
+    #   resp.component.properties["String"].collection_binding_properties.property #=> String
+    #   resp.component.properties["String"].collection_binding_properties.field #=> String
+    #   resp.component.properties["String"].default_value #=> String
+    #   resp.component.properties["String"].model #=> String
     #   resp.component.properties["String"].bindings #=> Hash
     #   resp.component.properties["String"].bindings["String"].element #=> String
     #   resp.component.properties["String"].bindings["String"].property #=> String
-    #   resp.component.properties["String"].collection_binding_properties.field #=> String
-    #   resp.component.properties["String"].collection_binding_properties.property #=> String
-    #   resp.component.properties["String"].component_name #=> String
+    #   resp.component.properties["String"].event #=> String
+    #   resp.component.properties["String"].user_attribute #=> String
     #   resp.component.properties["String"].concat #=> Array
     #   resp.component.properties["String"].concat[0] #=> Types::ComponentProperty
-    #   resp.component.properties["String"].condition.else #=> Types::ComponentProperty
-    #   resp.component.properties["String"].condition.field #=> String
-    #   resp.component.properties["String"].condition.operand #=> String
-    #   resp.component.properties["String"].condition.operand_type #=> String
-    #   resp.component.properties["String"].condition.operator #=> String
     #   resp.component.properties["String"].condition.property #=> String
+    #   resp.component.properties["String"].condition.field #=> String
+    #   resp.component.properties["String"].condition.operator #=> String
+    #   resp.component.properties["String"].condition.operand #=> String
     #   resp.component.properties["String"].condition.then #=> Types::ComponentProperty
+    #   resp.component.properties["String"].condition.else #=> Types::ComponentProperty
+    #   resp.component.properties["String"].condition.operand_type #=> String
     #   resp.component.properties["String"].configured #=> Boolean
-    #   resp.component.properties["String"].default_value #=> String
-    #   resp.component.properties["String"].event #=> String
-    #   resp.component.properties["String"].imported_value #=> String
-    #   resp.component.properties["String"].model #=> String
-    #   resp.component.properties["String"].property #=> String
     #   resp.component.properties["String"].type #=> String
-    #   resp.component.properties["String"].user_attribute #=> String
-    #   resp.component.properties["String"].value #=> String
-    #   resp.component.schema_version #=> String
-    #   resp.component.source_id #=> String
-    #   resp.component.tags #=> Hash
-    #   resp.component.tags["TagKey"] #=> String
+    #   resp.component.properties["String"].imported_value #=> String
+    #   resp.component.properties["String"].component_name #=> String
+    #   resp.component.properties["String"].property #=> String
+    #   resp.component.children #=> Array
+    #   resp.component.children[0].component_type #=> String
+    #   resp.component.children[0].name #=> String
+    #   resp.component.children[0].properties #=> Hash
+    #   resp.component.children[0].properties["String"].value #=> String
+    #   resp.component.children[0].properties["String"].binding_properties.property #=> String
+    #   resp.component.children[0].properties["String"].binding_properties.field #=> String
+    #   resp.component.children[0].properties["String"].collection_binding_properties.property #=> String
+    #   resp.component.children[0].properties["String"].collection_binding_properties.field #=> String
+    #   resp.component.children[0].properties["String"].default_value #=> String
+    #   resp.component.children[0].properties["String"].model #=> String
+    #   resp.component.children[0].properties["String"].bindings #=> Hash
+    #   resp.component.children[0].properties["String"].bindings["String"].element #=> String
+    #   resp.component.children[0].properties["String"].bindings["String"].property #=> String
+    #   resp.component.children[0].properties["String"].event #=> String
+    #   resp.component.children[0].properties["String"].user_attribute #=> String
+    #   resp.component.children[0].properties["String"].concat #=> Array
+    #   resp.component.children[0].properties["String"].concat[0] #=> Types::ComponentProperty
+    #   resp.component.children[0].properties["String"].condition.property #=> String
+    #   resp.component.children[0].properties["String"].condition.field #=> String
+    #   resp.component.children[0].properties["String"].condition.operator #=> String
+    #   resp.component.children[0].properties["String"].condition.operand #=> String
+    #   resp.component.children[0].properties["String"].condition.then #=> Types::ComponentProperty
+    #   resp.component.children[0].properties["String"].condition.else #=> Types::ComponentProperty
+    #   resp.component.children[0].properties["String"].condition.operand_type #=> String
+    #   resp.component.children[0].properties["String"].configured #=> Boolean
+    #   resp.component.children[0].properties["String"].type #=> String
+    #   resp.component.children[0].properties["String"].imported_value #=> String
+    #   resp.component.children[0].properties["String"].component_name #=> String
+    #   resp.component.children[0].properties["String"].property #=> String
+    #   resp.component.children[0].children #=> Types::ComponentChildList
+    #   resp.component.children[0].events #=> Hash
+    #   resp.component.children[0].events["String"].action #=> String
+    #   resp.component.children[0].events["String"].parameters.type.value #=> String
+    #   resp.component.children[0].events["String"].parameters.type.binding_properties.property #=> String
+    #   resp.component.children[0].events["String"].parameters.type.binding_properties.field #=> String
+    #   resp.component.children[0].events["String"].parameters.type.collection_binding_properties.property #=> String
+    #   resp.component.children[0].events["String"].parameters.type.collection_binding_properties.field #=> String
+    #   resp.component.children[0].events["String"].parameters.type.default_value #=> String
+    #   resp.component.children[0].events["String"].parameters.type.model #=> String
+    #   resp.component.children[0].events["String"].parameters.type.bindings #=> Hash
+    #   resp.component.children[0].events["String"].parameters.type.bindings["String"].element #=> String
+    #   resp.component.children[0].events["String"].parameters.type.bindings["String"].property #=> String
+    #   resp.component.children[0].events["String"].parameters.type.event #=> String
+    #   resp.component.children[0].events["String"].parameters.type.user_attribute #=> String
+    #   resp.component.children[0].events["String"].parameters.type.concat #=> Array
+    #   resp.component.children[0].events["String"].parameters.type.concat[0] #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.type.condition.property #=> String
+    #   resp.component.children[0].events["String"].parameters.type.condition.field #=> String
+    #   resp.component.children[0].events["String"].parameters.type.condition.operator #=> String
+    #   resp.component.children[0].events["String"].parameters.type.condition.operand #=> String
+    #   resp.component.children[0].events["String"].parameters.type.condition.then #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.type.condition.else #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.type.condition.operand_type #=> String
+    #   resp.component.children[0].events["String"].parameters.type.configured #=> Boolean
+    #   resp.component.children[0].events["String"].parameters.type.type #=> String
+    #   resp.component.children[0].events["String"].parameters.type.imported_value #=> String
+    #   resp.component.children[0].events["String"].parameters.type.component_name #=> String
+    #   resp.component.children[0].events["String"].parameters.type.property #=> String
+    #   resp.component.children[0].events["String"].parameters.url.value #=> String
+    #   resp.component.children[0].events["String"].parameters.url.binding_properties.property #=> String
+    #   resp.component.children[0].events["String"].parameters.url.binding_properties.field #=> String
+    #   resp.component.children[0].events["String"].parameters.url.collection_binding_properties.property #=> String
+    #   resp.component.children[0].events["String"].parameters.url.collection_binding_properties.field #=> String
+    #   resp.component.children[0].events["String"].parameters.url.default_value #=> String
+    #   resp.component.children[0].events["String"].parameters.url.model #=> String
+    #   resp.component.children[0].events["String"].parameters.url.bindings #=> Hash
+    #   resp.component.children[0].events["String"].parameters.url.bindings["String"].element #=> String
+    #   resp.component.children[0].events["String"].parameters.url.bindings["String"].property #=> String
+    #   resp.component.children[0].events["String"].parameters.url.event #=> String
+    #   resp.component.children[0].events["String"].parameters.url.user_attribute #=> String
+    #   resp.component.children[0].events["String"].parameters.url.concat #=> Array
+    #   resp.component.children[0].events["String"].parameters.url.concat[0] #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.url.condition.property #=> String
+    #   resp.component.children[0].events["String"].parameters.url.condition.field #=> String
+    #   resp.component.children[0].events["String"].parameters.url.condition.operator #=> String
+    #   resp.component.children[0].events["String"].parameters.url.condition.operand #=> String
+    #   resp.component.children[0].events["String"].parameters.url.condition.then #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.url.condition.else #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.url.condition.operand_type #=> String
+    #   resp.component.children[0].events["String"].parameters.url.configured #=> Boolean
+    #   resp.component.children[0].events["String"].parameters.url.type #=> String
+    #   resp.component.children[0].events["String"].parameters.url.imported_value #=> String
+    #   resp.component.children[0].events["String"].parameters.url.component_name #=> String
+    #   resp.component.children[0].events["String"].parameters.url.property #=> String
+    #   resp.component.children[0].events["String"].parameters.anchor.value #=> String
+    #   resp.component.children[0].events["String"].parameters.anchor.binding_properties.property #=> String
+    #   resp.component.children[0].events["String"].parameters.anchor.binding_properties.field #=> String
+    #   resp.component.children[0].events["String"].parameters.anchor.collection_binding_properties.property #=> String
+    #   resp.component.children[0].events["String"].parameters.anchor.collection_binding_properties.field #=> String
+    #   resp.component.children[0].events["String"].parameters.anchor.default_value #=> String
+    #   resp.component.children[0].events["String"].parameters.anchor.model #=> String
+    #   resp.component.children[0].events["String"].parameters.anchor.bindings #=> Hash
+    #   resp.component.children[0].events["String"].parameters.anchor.bindings["String"].element #=> String
+    #   resp.component.children[0].events["String"].parameters.anchor.bindings["String"].property #=> String
+    #   resp.component.children[0].events["String"].parameters.anchor.event #=> String
+    #   resp.component.children[0].events["String"].parameters.anchor.user_attribute #=> String
+    #   resp.component.children[0].events["String"].parameters.anchor.concat #=> Array
+    #   resp.component.children[0].events["String"].parameters.anchor.concat[0] #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.anchor.condition.property #=> String
+    #   resp.component.children[0].events["String"].parameters.anchor.condition.field #=> String
+    #   resp.component.children[0].events["String"].parameters.anchor.condition.operator #=> String
+    #   resp.component.children[0].events["String"].parameters.anchor.condition.operand #=> String
+    #   resp.component.children[0].events["String"].parameters.anchor.condition.then #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.anchor.condition.else #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.anchor.condition.operand_type #=> String
+    #   resp.component.children[0].events["String"].parameters.anchor.configured #=> Boolean
+    #   resp.component.children[0].events["String"].parameters.anchor.type #=> String
+    #   resp.component.children[0].events["String"].parameters.anchor.imported_value #=> String
+    #   resp.component.children[0].events["String"].parameters.anchor.component_name #=> String
+    #   resp.component.children[0].events["String"].parameters.anchor.property #=> String
+    #   resp.component.children[0].events["String"].parameters.target.value #=> String
+    #   resp.component.children[0].events["String"].parameters.target.binding_properties.property #=> String
+    #   resp.component.children[0].events["String"].parameters.target.binding_properties.field #=> String
+    #   resp.component.children[0].events["String"].parameters.target.collection_binding_properties.property #=> String
+    #   resp.component.children[0].events["String"].parameters.target.collection_binding_properties.field #=> String
+    #   resp.component.children[0].events["String"].parameters.target.default_value #=> String
+    #   resp.component.children[0].events["String"].parameters.target.model #=> String
+    #   resp.component.children[0].events["String"].parameters.target.bindings #=> Hash
+    #   resp.component.children[0].events["String"].parameters.target.bindings["String"].element #=> String
+    #   resp.component.children[0].events["String"].parameters.target.bindings["String"].property #=> String
+    #   resp.component.children[0].events["String"].parameters.target.event #=> String
+    #   resp.component.children[0].events["String"].parameters.target.user_attribute #=> String
+    #   resp.component.children[0].events["String"].parameters.target.concat #=> Array
+    #   resp.component.children[0].events["String"].parameters.target.concat[0] #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.target.condition.property #=> String
+    #   resp.component.children[0].events["String"].parameters.target.condition.field #=> String
+    #   resp.component.children[0].events["String"].parameters.target.condition.operator #=> String
+    #   resp.component.children[0].events["String"].parameters.target.condition.operand #=> String
+    #   resp.component.children[0].events["String"].parameters.target.condition.then #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.target.condition.else #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.target.condition.operand_type #=> String
+    #   resp.component.children[0].events["String"].parameters.target.configured #=> Boolean
+    #   resp.component.children[0].events["String"].parameters.target.type #=> String
+    #   resp.component.children[0].events["String"].parameters.target.imported_value #=> String
+    #   resp.component.children[0].events["String"].parameters.target.component_name #=> String
+    #   resp.component.children[0].events["String"].parameters.target.property #=> String
+    #   resp.component.children[0].events["String"].parameters.global.value #=> String
+    #   resp.component.children[0].events["String"].parameters.global.binding_properties.property #=> String
+    #   resp.component.children[0].events["String"].parameters.global.binding_properties.field #=> String
+    #   resp.component.children[0].events["String"].parameters.global.collection_binding_properties.property #=> String
+    #   resp.component.children[0].events["String"].parameters.global.collection_binding_properties.field #=> String
+    #   resp.component.children[0].events["String"].parameters.global.default_value #=> String
+    #   resp.component.children[0].events["String"].parameters.global.model #=> String
+    #   resp.component.children[0].events["String"].parameters.global.bindings #=> Hash
+    #   resp.component.children[0].events["String"].parameters.global.bindings["String"].element #=> String
+    #   resp.component.children[0].events["String"].parameters.global.bindings["String"].property #=> String
+    #   resp.component.children[0].events["String"].parameters.global.event #=> String
+    #   resp.component.children[0].events["String"].parameters.global.user_attribute #=> String
+    #   resp.component.children[0].events["String"].parameters.global.concat #=> Array
+    #   resp.component.children[0].events["String"].parameters.global.concat[0] #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.global.condition.property #=> String
+    #   resp.component.children[0].events["String"].parameters.global.condition.field #=> String
+    #   resp.component.children[0].events["String"].parameters.global.condition.operator #=> String
+    #   resp.component.children[0].events["String"].parameters.global.condition.operand #=> String
+    #   resp.component.children[0].events["String"].parameters.global.condition.then #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.global.condition.else #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.global.condition.operand_type #=> String
+    #   resp.component.children[0].events["String"].parameters.global.configured #=> Boolean
+    #   resp.component.children[0].events["String"].parameters.global.type #=> String
+    #   resp.component.children[0].events["String"].parameters.global.imported_value #=> String
+    #   resp.component.children[0].events["String"].parameters.global.component_name #=> String
+    #   resp.component.children[0].events["String"].parameters.global.property #=> String
+    #   resp.component.children[0].events["String"].parameters.model #=> String
+    #   resp.component.children[0].events["String"].parameters.id.value #=> String
+    #   resp.component.children[0].events["String"].parameters.id.binding_properties.property #=> String
+    #   resp.component.children[0].events["String"].parameters.id.binding_properties.field #=> String
+    #   resp.component.children[0].events["String"].parameters.id.collection_binding_properties.property #=> String
+    #   resp.component.children[0].events["String"].parameters.id.collection_binding_properties.field #=> String
+    #   resp.component.children[0].events["String"].parameters.id.default_value #=> String
+    #   resp.component.children[0].events["String"].parameters.id.model #=> String
+    #   resp.component.children[0].events["String"].parameters.id.bindings #=> Hash
+    #   resp.component.children[0].events["String"].parameters.id.bindings["String"].element #=> String
+    #   resp.component.children[0].events["String"].parameters.id.bindings["String"].property #=> String
+    #   resp.component.children[0].events["String"].parameters.id.event #=> String
+    #   resp.component.children[0].events["String"].parameters.id.user_attribute #=> String
+    #   resp.component.children[0].events["String"].parameters.id.concat #=> Array
+    #   resp.component.children[0].events["String"].parameters.id.concat[0] #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.id.condition.property #=> String
+    #   resp.component.children[0].events["String"].parameters.id.condition.field #=> String
+    #   resp.component.children[0].events["String"].parameters.id.condition.operator #=> String
+    #   resp.component.children[0].events["String"].parameters.id.condition.operand #=> String
+    #   resp.component.children[0].events["String"].parameters.id.condition.then #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.id.condition.else #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.id.condition.operand_type #=> String
+    #   resp.component.children[0].events["String"].parameters.id.configured #=> Boolean
+    #   resp.component.children[0].events["String"].parameters.id.type #=> String
+    #   resp.component.children[0].events["String"].parameters.id.imported_value #=> String
+    #   resp.component.children[0].events["String"].parameters.id.component_name #=> String
+    #   resp.component.children[0].events["String"].parameters.id.property #=> String
+    #   resp.component.children[0].events["String"].parameters.fields #=> Hash
+    #   resp.component.children[0].events["String"].parameters.fields["String"].value #=> String
+    #   resp.component.children[0].events["String"].parameters.fields["String"].binding_properties.property #=> String
+    #   resp.component.children[0].events["String"].parameters.fields["String"].binding_properties.field #=> String
+    #   resp.component.children[0].events["String"].parameters.fields["String"].collection_binding_properties.property #=> String
+    #   resp.component.children[0].events["String"].parameters.fields["String"].collection_binding_properties.field #=> String
+    #   resp.component.children[0].events["String"].parameters.fields["String"].default_value #=> String
+    #   resp.component.children[0].events["String"].parameters.fields["String"].model #=> String
+    #   resp.component.children[0].events["String"].parameters.fields["String"].bindings #=> Hash
+    #   resp.component.children[0].events["String"].parameters.fields["String"].bindings["String"].element #=> String
+    #   resp.component.children[0].events["String"].parameters.fields["String"].bindings["String"].property #=> String
+    #   resp.component.children[0].events["String"].parameters.fields["String"].event #=> String
+    #   resp.component.children[0].events["String"].parameters.fields["String"].user_attribute #=> String
+    #   resp.component.children[0].events["String"].parameters.fields["String"].concat #=> Array
+    #   resp.component.children[0].events["String"].parameters.fields["String"].concat[0] #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.fields["String"].condition.property #=> String
+    #   resp.component.children[0].events["String"].parameters.fields["String"].condition.field #=> String
+    #   resp.component.children[0].events["String"].parameters.fields["String"].condition.operator #=> String
+    #   resp.component.children[0].events["String"].parameters.fields["String"].condition.operand #=> String
+    #   resp.component.children[0].events["String"].parameters.fields["String"].condition.then #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.fields["String"].condition.else #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.fields["String"].condition.operand_type #=> String
+    #   resp.component.children[0].events["String"].parameters.fields["String"].configured #=> Boolean
+    #   resp.component.children[0].events["String"].parameters.fields["String"].type #=> String
+    #   resp.component.children[0].events["String"].parameters.fields["String"].imported_value #=> String
+    #   resp.component.children[0].events["String"].parameters.fields["String"].component_name #=> String
+    #   resp.component.children[0].events["String"].parameters.fields["String"].property #=> String
+    #   resp.component.children[0].events["String"].parameters.state.component_name #=> String
+    #   resp.component.children[0].events["String"].parameters.state.property #=> String
+    #   resp.component.children[0].events["String"].parameters.state.set.value #=> String
+    #   resp.component.children[0].events["String"].parameters.state.set.binding_properties.property #=> String
+    #   resp.component.children[0].events["String"].parameters.state.set.binding_properties.field #=> String
+    #   resp.component.children[0].events["String"].parameters.state.set.collection_binding_properties.property #=> String
+    #   resp.component.children[0].events["String"].parameters.state.set.collection_binding_properties.field #=> String
+    #   resp.component.children[0].events["String"].parameters.state.set.default_value #=> String
+    #   resp.component.children[0].events["String"].parameters.state.set.model #=> String
+    #   resp.component.children[0].events["String"].parameters.state.set.bindings #=> Hash
+    #   resp.component.children[0].events["String"].parameters.state.set.bindings["String"].element #=> String
+    #   resp.component.children[0].events["String"].parameters.state.set.bindings["String"].property #=> String
+    #   resp.component.children[0].events["String"].parameters.state.set.event #=> String
+    #   resp.component.children[0].events["String"].parameters.state.set.user_attribute #=> String
+    #   resp.component.children[0].events["String"].parameters.state.set.concat #=> Array
+    #   resp.component.children[0].events["String"].parameters.state.set.concat[0] #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.state.set.condition.property #=> String
+    #   resp.component.children[0].events["String"].parameters.state.set.condition.field #=> String
+    #   resp.component.children[0].events["String"].parameters.state.set.condition.operator #=> String
+    #   resp.component.children[0].events["String"].parameters.state.set.condition.operand #=> String
+    #   resp.component.children[0].events["String"].parameters.state.set.condition.then #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.state.set.condition.else #=> Types::ComponentProperty
+    #   resp.component.children[0].events["String"].parameters.state.set.condition.operand_type #=> String
+    #   resp.component.children[0].events["String"].parameters.state.set.configured #=> Boolean
+    #   resp.component.children[0].events["String"].parameters.state.set.type #=> String
+    #   resp.component.children[0].events["String"].parameters.state.set.imported_value #=> String
+    #   resp.component.children[0].events["String"].parameters.state.set.component_name #=> String
+    #   resp.component.children[0].events["String"].parameters.state.set.property #=> String
+    #   resp.component.children[0].events["String"].binding_event #=> String
+    #   resp.component.children[0].source_id #=> String
     #   resp.component.variants #=> Array
+    #   resp.component.variants[0].variant_values #=> Hash
+    #   resp.component.variants[0].variant_values["String"] #=> String
     #   resp.component.variants[0].overrides #=> Hash
     #   resp.component.variants[0].overrides["String"] #=> Hash
     #   resp.component.variants[0].overrides["String"]["String"] #=> String
-    #   resp.component.variants[0].variant_values #=> Hash
-    #   resp.component.variants[0].variant_values["String"] #=> String
+    #   resp.component.overrides #=> Hash
+    #   resp.component.overrides["String"] #=> Hash
+    #   resp.component.overrides["String"]["String"] #=> String
+    #   resp.component.binding_properties #=> Hash
+    #   resp.component.binding_properties["String"].type #=> String
+    #   resp.component.binding_properties["String"].binding_properties.model #=> String
+    #   resp.component.binding_properties["String"].binding_properties.field #=> String
+    #   resp.component.binding_properties["String"].binding_properties.predicates #=> Array
+    #   resp.component.binding_properties["String"].binding_properties.predicates[0].or #=> Types::PredicateList
+    #   resp.component.binding_properties["String"].binding_properties.predicates[0].and #=> Types::PredicateList
+    #   resp.component.binding_properties["String"].binding_properties.predicates[0].field #=> String
+    #   resp.component.binding_properties["String"].binding_properties.predicates[0].operator #=> String
+    #   resp.component.binding_properties["String"].binding_properties.predicates[0].operand #=> String
+    #   resp.component.binding_properties["String"].binding_properties.predicates[0].operand_type #=> String
+    #   resp.component.binding_properties["String"].binding_properties.user_attribute #=> String
+    #   resp.component.binding_properties["String"].binding_properties.bucket #=> String
+    #   resp.component.binding_properties["String"].binding_properties.key #=> String
+    #   resp.component.binding_properties["String"].binding_properties.default_value #=> String
+    #   resp.component.binding_properties["String"].binding_properties.slot_name #=> String
+    #   resp.component.binding_properties["String"].default_value #=> String
+    #   resp.component.collection_properties #=> Hash
+    #   resp.component.collection_properties["String"].model #=> String
+    #   resp.component.collection_properties["String"].sort #=> Array
+    #   resp.component.collection_properties["String"].sort[0].field #=> String
+    #   resp.component.collection_properties["String"].sort[0].direction #=> String, one of "ASC", "DESC"
+    #   resp.component.collection_properties["String"].predicate.or #=> Array
+    #   resp.component.collection_properties["String"].predicate.or[0] #=> Types::Predicate
+    #   resp.component.collection_properties["String"].predicate.and #=> Array
+    #   resp.component.collection_properties["String"].predicate.and[0] #=> Types::Predicate
+    #   resp.component.collection_properties["String"].predicate.field #=> String
+    #   resp.component.collection_properties["String"].predicate.operator #=> String
+    #   resp.component.collection_properties["String"].predicate.operand #=> String
+    #   resp.component.collection_properties["String"].predicate.operand_type #=> String
+    #   resp.component.collection_properties["String"].identifiers #=> Array
+    #   resp.component.collection_properties["String"].identifiers[0] #=> String
+    #   resp.component.created_at #=> Time
+    #   resp.component.modified_at #=> Time
+    #   resp.component.tags #=> Hash
+    #   resp.component.tags["TagKey"] #=> String
+    #   resp.component.events #=> Hash
+    #   resp.component.events["String"].action #=> String
+    #   resp.component.events["String"].parameters.type.value #=> String
+    #   resp.component.events["String"].parameters.type.binding_properties.property #=> String
+    #   resp.component.events["String"].parameters.type.binding_properties.field #=> String
+    #   resp.component.events["String"].parameters.type.collection_binding_properties.property #=> String
+    #   resp.component.events["String"].parameters.type.collection_binding_properties.field #=> String
+    #   resp.component.events["String"].parameters.type.default_value #=> String
+    #   resp.component.events["String"].parameters.type.model #=> String
+    #   resp.component.events["String"].parameters.type.bindings #=> Hash
+    #   resp.component.events["String"].parameters.type.bindings["String"].element #=> String
+    #   resp.component.events["String"].parameters.type.bindings["String"].property #=> String
+    #   resp.component.events["String"].parameters.type.event #=> String
+    #   resp.component.events["String"].parameters.type.user_attribute #=> String
+    #   resp.component.events["String"].parameters.type.concat #=> Array
+    #   resp.component.events["String"].parameters.type.concat[0] #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.type.condition.property #=> String
+    #   resp.component.events["String"].parameters.type.condition.field #=> String
+    #   resp.component.events["String"].parameters.type.condition.operator #=> String
+    #   resp.component.events["String"].parameters.type.condition.operand #=> String
+    #   resp.component.events["String"].parameters.type.condition.then #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.type.condition.else #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.type.condition.operand_type #=> String
+    #   resp.component.events["String"].parameters.type.configured #=> Boolean
+    #   resp.component.events["String"].parameters.type.type #=> String
+    #   resp.component.events["String"].parameters.type.imported_value #=> String
+    #   resp.component.events["String"].parameters.type.component_name #=> String
+    #   resp.component.events["String"].parameters.type.property #=> String
+    #   resp.component.events["String"].parameters.url.value #=> String
+    #   resp.component.events["String"].parameters.url.binding_properties.property #=> String
+    #   resp.component.events["String"].parameters.url.binding_properties.field #=> String
+    #   resp.component.events["String"].parameters.url.collection_binding_properties.property #=> String
+    #   resp.component.events["String"].parameters.url.collection_binding_properties.field #=> String
+    #   resp.component.events["String"].parameters.url.default_value #=> String
+    #   resp.component.events["String"].parameters.url.model #=> String
+    #   resp.component.events["String"].parameters.url.bindings #=> Hash
+    #   resp.component.events["String"].parameters.url.bindings["String"].element #=> String
+    #   resp.component.events["String"].parameters.url.bindings["String"].property #=> String
+    #   resp.component.events["String"].parameters.url.event #=> String
+    #   resp.component.events["String"].parameters.url.user_attribute #=> String
+    #   resp.component.events["String"].parameters.url.concat #=> Array
+    #   resp.component.events["String"].parameters.url.concat[0] #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.url.condition.property #=> String
+    #   resp.component.events["String"].parameters.url.condition.field #=> String
+    #   resp.component.events["String"].parameters.url.condition.operator #=> String
+    #   resp.component.events["String"].parameters.url.condition.operand #=> String
+    #   resp.component.events["String"].parameters.url.condition.then #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.url.condition.else #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.url.condition.operand_type #=> String
+    #   resp.component.events["String"].parameters.url.configured #=> Boolean
+    #   resp.component.events["String"].parameters.url.type #=> String
+    #   resp.component.events["String"].parameters.url.imported_value #=> String
+    #   resp.component.events["String"].parameters.url.component_name #=> String
+    #   resp.component.events["String"].parameters.url.property #=> String
+    #   resp.component.events["String"].parameters.anchor.value #=> String
+    #   resp.component.events["String"].parameters.anchor.binding_properties.property #=> String
+    #   resp.component.events["String"].parameters.anchor.binding_properties.field #=> String
+    #   resp.component.events["String"].parameters.anchor.collection_binding_properties.property #=> String
+    #   resp.component.events["String"].parameters.anchor.collection_binding_properties.field #=> String
+    #   resp.component.events["String"].parameters.anchor.default_value #=> String
+    #   resp.component.events["String"].parameters.anchor.model #=> String
+    #   resp.component.events["String"].parameters.anchor.bindings #=> Hash
+    #   resp.component.events["String"].parameters.anchor.bindings["String"].element #=> String
+    #   resp.component.events["String"].parameters.anchor.bindings["String"].property #=> String
+    #   resp.component.events["String"].parameters.anchor.event #=> String
+    #   resp.component.events["String"].parameters.anchor.user_attribute #=> String
+    #   resp.component.events["String"].parameters.anchor.concat #=> Array
+    #   resp.component.events["String"].parameters.anchor.concat[0] #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.anchor.condition.property #=> String
+    #   resp.component.events["String"].parameters.anchor.condition.field #=> String
+    #   resp.component.events["String"].parameters.anchor.condition.operator #=> String
+    #   resp.component.events["String"].parameters.anchor.condition.operand #=> String
+    #   resp.component.events["String"].parameters.anchor.condition.then #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.anchor.condition.else #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.anchor.condition.operand_type #=> String
+    #   resp.component.events["String"].parameters.anchor.configured #=> Boolean
+    #   resp.component.events["String"].parameters.anchor.type #=> String
+    #   resp.component.events["String"].parameters.anchor.imported_value #=> String
+    #   resp.component.events["String"].parameters.anchor.component_name #=> String
+    #   resp.component.events["String"].parameters.anchor.property #=> String
+    #   resp.component.events["String"].parameters.target.value #=> String
+    #   resp.component.events["String"].parameters.target.binding_properties.property #=> String
+    #   resp.component.events["String"].parameters.target.binding_properties.field #=> String
+    #   resp.component.events["String"].parameters.target.collection_binding_properties.property #=> String
+    #   resp.component.events["String"].parameters.target.collection_binding_properties.field #=> String
+    #   resp.component.events["String"].parameters.target.default_value #=> String
+    #   resp.component.events["String"].parameters.target.model #=> String
+    #   resp.component.events["String"].parameters.target.bindings #=> Hash
+    #   resp.component.events["String"].parameters.target.bindings["String"].element #=> String
+    #   resp.component.events["String"].parameters.target.bindings["String"].property #=> String
+    #   resp.component.events["String"].parameters.target.event #=> String
+    #   resp.component.events["String"].parameters.target.user_attribute #=> String
+    #   resp.component.events["String"].parameters.target.concat #=> Array
+    #   resp.component.events["String"].parameters.target.concat[0] #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.target.condition.property #=> String
+    #   resp.component.events["String"].parameters.target.condition.field #=> String
+    #   resp.component.events["String"].parameters.target.condition.operator #=> String
+    #   resp.component.events["String"].parameters.target.condition.operand #=> String
+    #   resp.component.events["String"].parameters.target.condition.then #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.target.condition.else #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.target.condition.operand_type #=> String
+    #   resp.component.events["String"].parameters.target.configured #=> Boolean
+    #   resp.component.events["String"].parameters.target.type #=> String
+    #   resp.component.events["String"].parameters.target.imported_value #=> String
+    #   resp.component.events["String"].parameters.target.component_name #=> String
+    #   resp.component.events["String"].parameters.target.property #=> String
+    #   resp.component.events["String"].parameters.global.value #=> String
+    #   resp.component.events["String"].parameters.global.binding_properties.property #=> String
+    #   resp.component.events["String"].parameters.global.binding_properties.field #=> String
+    #   resp.component.events["String"].parameters.global.collection_binding_properties.property #=> String
+    #   resp.component.events["String"].parameters.global.collection_binding_properties.field #=> String
+    #   resp.component.events["String"].parameters.global.default_value #=> String
+    #   resp.component.events["String"].parameters.global.model #=> String
+    #   resp.component.events["String"].parameters.global.bindings #=> Hash
+    #   resp.component.events["String"].parameters.global.bindings["String"].element #=> String
+    #   resp.component.events["String"].parameters.global.bindings["String"].property #=> String
+    #   resp.component.events["String"].parameters.global.event #=> String
+    #   resp.component.events["String"].parameters.global.user_attribute #=> String
+    #   resp.component.events["String"].parameters.global.concat #=> Array
+    #   resp.component.events["String"].parameters.global.concat[0] #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.global.condition.property #=> String
+    #   resp.component.events["String"].parameters.global.condition.field #=> String
+    #   resp.component.events["String"].parameters.global.condition.operator #=> String
+    #   resp.component.events["String"].parameters.global.condition.operand #=> String
+    #   resp.component.events["String"].parameters.global.condition.then #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.global.condition.else #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.global.condition.operand_type #=> String
+    #   resp.component.events["String"].parameters.global.configured #=> Boolean
+    #   resp.component.events["String"].parameters.global.type #=> String
+    #   resp.component.events["String"].parameters.global.imported_value #=> String
+    #   resp.component.events["String"].parameters.global.component_name #=> String
+    #   resp.component.events["String"].parameters.global.property #=> String
+    #   resp.component.events["String"].parameters.model #=> String
+    #   resp.component.events["String"].parameters.id.value #=> String
+    #   resp.component.events["String"].parameters.id.binding_properties.property #=> String
+    #   resp.component.events["String"].parameters.id.binding_properties.field #=> String
+    #   resp.component.events["String"].parameters.id.collection_binding_properties.property #=> String
+    #   resp.component.events["String"].parameters.id.collection_binding_properties.field #=> String
+    #   resp.component.events["String"].parameters.id.default_value #=> String
+    #   resp.component.events["String"].parameters.id.model #=> String
+    #   resp.component.events["String"].parameters.id.bindings #=> Hash
+    #   resp.component.events["String"].parameters.id.bindings["String"].element #=> String
+    #   resp.component.events["String"].parameters.id.bindings["String"].property #=> String
+    #   resp.component.events["String"].parameters.id.event #=> String
+    #   resp.component.events["String"].parameters.id.user_attribute #=> String
+    #   resp.component.events["String"].parameters.id.concat #=> Array
+    #   resp.component.events["String"].parameters.id.concat[0] #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.id.condition.property #=> String
+    #   resp.component.events["String"].parameters.id.condition.field #=> String
+    #   resp.component.events["String"].parameters.id.condition.operator #=> String
+    #   resp.component.events["String"].parameters.id.condition.operand #=> String
+    #   resp.component.events["String"].parameters.id.condition.then #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.id.condition.else #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.id.condition.operand_type #=> String
+    #   resp.component.events["String"].parameters.id.configured #=> Boolean
+    #   resp.component.events["String"].parameters.id.type #=> String
+    #   resp.component.events["String"].parameters.id.imported_value #=> String
+    #   resp.component.events["String"].parameters.id.component_name #=> String
+    #   resp.component.events["String"].parameters.id.property #=> String
+    #   resp.component.events["String"].parameters.fields #=> Hash
+    #   resp.component.events["String"].parameters.fields["String"].value #=> String
+    #   resp.component.events["String"].parameters.fields["String"].binding_properties.property #=> String
+    #   resp.component.events["String"].parameters.fields["String"].binding_properties.field #=> String
+    #   resp.component.events["String"].parameters.fields["String"].collection_binding_properties.property #=> String
+    #   resp.component.events["String"].parameters.fields["String"].collection_binding_properties.field #=> String
+    #   resp.component.events["String"].parameters.fields["String"].default_value #=> String
+    #   resp.component.events["String"].parameters.fields["String"].model #=> String
+    #   resp.component.events["String"].parameters.fields["String"].bindings #=> Hash
+    #   resp.component.events["String"].parameters.fields["String"].bindings["String"].element #=> String
+    #   resp.component.events["String"].parameters.fields["String"].bindings["String"].property #=> String
+    #   resp.component.events["String"].parameters.fields["String"].event #=> String
+    #   resp.component.events["String"].parameters.fields["String"].user_attribute #=> String
+    #   resp.component.events["String"].parameters.fields["String"].concat #=> Array
+    #   resp.component.events["String"].parameters.fields["String"].concat[0] #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.fields["String"].condition.property #=> String
+    #   resp.component.events["String"].parameters.fields["String"].condition.field #=> String
+    #   resp.component.events["String"].parameters.fields["String"].condition.operator #=> String
+    #   resp.component.events["String"].parameters.fields["String"].condition.operand #=> String
+    #   resp.component.events["String"].parameters.fields["String"].condition.then #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.fields["String"].condition.else #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.fields["String"].condition.operand_type #=> String
+    #   resp.component.events["String"].parameters.fields["String"].configured #=> Boolean
+    #   resp.component.events["String"].parameters.fields["String"].type #=> String
+    #   resp.component.events["String"].parameters.fields["String"].imported_value #=> String
+    #   resp.component.events["String"].parameters.fields["String"].component_name #=> String
+    #   resp.component.events["String"].parameters.fields["String"].property #=> String
+    #   resp.component.events["String"].parameters.state.component_name #=> String
+    #   resp.component.events["String"].parameters.state.property #=> String
+    #   resp.component.events["String"].parameters.state.set.value #=> String
+    #   resp.component.events["String"].parameters.state.set.binding_properties.property #=> String
+    #   resp.component.events["String"].parameters.state.set.binding_properties.field #=> String
+    #   resp.component.events["String"].parameters.state.set.collection_binding_properties.property #=> String
+    #   resp.component.events["String"].parameters.state.set.collection_binding_properties.field #=> String
+    #   resp.component.events["String"].parameters.state.set.default_value #=> String
+    #   resp.component.events["String"].parameters.state.set.model #=> String
+    #   resp.component.events["String"].parameters.state.set.bindings #=> Hash
+    #   resp.component.events["String"].parameters.state.set.bindings["String"].element #=> String
+    #   resp.component.events["String"].parameters.state.set.bindings["String"].property #=> String
+    #   resp.component.events["String"].parameters.state.set.event #=> String
+    #   resp.component.events["String"].parameters.state.set.user_attribute #=> String
+    #   resp.component.events["String"].parameters.state.set.concat #=> Array
+    #   resp.component.events["String"].parameters.state.set.concat[0] #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.state.set.condition.property #=> String
+    #   resp.component.events["String"].parameters.state.set.condition.field #=> String
+    #   resp.component.events["String"].parameters.state.set.condition.operator #=> String
+    #   resp.component.events["String"].parameters.state.set.condition.operand #=> String
+    #   resp.component.events["String"].parameters.state.set.condition.then #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.state.set.condition.else #=> Types::ComponentProperty
+    #   resp.component.events["String"].parameters.state.set.condition.operand_type #=> String
+    #   resp.component.events["String"].parameters.state.set.configured #=> Boolean
+    #   resp.component.events["String"].parameters.state.set.type #=> String
+    #   resp.component.events["String"].parameters.state.set.imported_value #=> String
+    #   resp.component.events["String"].parameters.state.set.component_name #=> String
+    #   resp.component.events["String"].parameters.state.set.property #=> String
+    #   resp.component.events["String"].binding_event #=> String
+    #   resp.component.schema_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/GetComponent AWS API Documentation
     #
@@ -3656,75 +3741,95 @@ module Aws::AmplifyUIBuilder
     # @example Response structure
     #
     #   resp.form.app_id #=> String
-    #   resp.form.cta.cancel.children #=> String
-    #   resp.form.cta.cancel.excluded #=> Boolean
-    #   resp.form.cta.cancel.position.below #=> String
-    #   resp.form.cta.cancel.position.fixed #=> String, one of "first"
-    #   resp.form.cta.cancel.position.right_of #=> String
-    #   resp.form.cta.clear.children #=> String
-    #   resp.form.cta.clear.excluded #=> Boolean
-    #   resp.form.cta.clear.position.below #=> String
-    #   resp.form.cta.clear.position.fixed #=> String, one of "first"
-    #   resp.form.cta.clear.position.right_of #=> String
-    #   resp.form.cta.position #=> String, one of "top", "bottom", "top_and_bottom"
-    #   resp.form.cta.submit.children #=> String
-    #   resp.form.cta.submit.excluded #=> Boolean
-    #   resp.form.cta.submit.position.below #=> String
-    #   resp.form.cta.submit.position.fixed #=> String, one of "first"
-    #   resp.form.cta.submit.position.right_of #=> String
-    #   resp.form.data_type.data_source_type #=> String, one of "DataStore", "Custom"
-    #   resp.form.data_type.data_type_name #=> String
     #   resp.form.environment_name #=> String
-    #   resp.form.fields #=> Hash
-    #   resp.form.fields["String"].excluded #=> Boolean
-    #   resp.form.fields["String"].input_type.default_checked #=> Boolean
-    #   resp.form.fields["String"].input_type.default_country_code #=> String
-    #   resp.form.fields["String"].input_type.default_value #=> String
-    #   resp.form.fields["String"].input_type.descriptive_text #=> String
-    #   resp.form.fields["String"].input_type.is_array #=> Boolean
-    #   resp.form.fields["String"].input_type.max_value #=> Float
-    #   resp.form.fields["String"].input_type.min_value #=> Float
-    #   resp.form.fields["String"].input_type.name #=> String
-    #   resp.form.fields["String"].input_type.placeholder #=> String
-    #   resp.form.fields["String"].input_type.read_only #=> Boolean
-    #   resp.form.fields["String"].input_type.required #=> Boolean
-    #   resp.form.fields["String"].input_type.step #=> Float
-    #   resp.form.fields["String"].input_type.type #=> String
-    #   resp.form.fields["String"].input_type.value #=> String
-    #   resp.form.fields["String"].input_type.value_mappings.values #=> Array
-    #   resp.form.fields["String"].input_type.value_mappings.values[0].display_value.value #=> String
-    #   resp.form.fields["String"].input_type.value_mappings.values[0].value.value #=> String
-    #   resp.form.fields["String"].label #=> String
-    #   resp.form.fields["String"].position.below #=> String
-    #   resp.form.fields["String"].position.fixed #=> String, one of "first"
-    #   resp.form.fields["String"].position.right_of #=> String
-    #   resp.form.fields["String"].validations #=> Array
-    #   resp.form.fields["String"].validations[0].num_values #=> Array
-    #   resp.form.fields["String"].validations[0].num_values[0] #=> Integer
-    #   resp.form.fields["String"].validations[0].str_values #=> Array
-    #   resp.form.fields["String"].validations[0].str_values[0] #=> String
-    #   resp.form.fields["String"].validations[0].type #=> String
-    #   resp.form.fields["String"].validations[0].validation_message #=> String
-    #   resp.form.form_action_type #=> String, one of "create", "update"
     #   resp.form.id #=> String
     #   resp.form.name #=> String
-    #   resp.form.schema_version #=> String
-    #   resp.form.sectional_elements #=> Hash
-    #   resp.form.sectional_elements["String"].level #=> Integer
-    #   resp.form.sectional_elements["String"].orientation #=> String
-    #   resp.form.sectional_elements["String"].position.below #=> String
-    #   resp.form.sectional_elements["String"].position.fixed #=> String, one of "first"
-    #   resp.form.sectional_elements["String"].position.right_of #=> String
-    #   resp.form.sectional_elements["String"].text #=> String
-    #   resp.form.sectional_elements["String"].type #=> String
+    #   resp.form.form_action_type #=> String, one of "create", "update"
     #   resp.form.style.horizontal_gap.token_reference #=> String
     #   resp.form.style.horizontal_gap.value #=> String
-    #   resp.form.style.outer_padding.token_reference #=> String
-    #   resp.form.style.outer_padding.value #=> String
     #   resp.form.style.vertical_gap.token_reference #=> String
     #   resp.form.style.vertical_gap.value #=> String
+    #   resp.form.style.outer_padding.token_reference #=> String
+    #   resp.form.style.outer_padding.value #=> String
+    #   resp.form.data_type.data_source_type #=> String, one of "DataStore", "Custom"
+    #   resp.form.data_type.data_type_name #=> String
+    #   resp.form.fields #=> Hash
+    #   resp.form.fields["String"].label #=> String
+    #   resp.form.fields["String"].position.fixed #=> String, one of "first"
+    #   resp.form.fields["String"].position.right_of #=> String
+    #   resp.form.fields["String"].position.below #=> String
+    #   resp.form.fields["String"].excluded #=> Boolean
+    #   resp.form.fields["String"].input_type.type #=> String
+    #   resp.form.fields["String"].input_type.required #=> Boolean
+    #   resp.form.fields["String"].input_type.read_only #=> Boolean
+    #   resp.form.fields["String"].input_type.placeholder #=> String
+    #   resp.form.fields["String"].input_type.default_value #=> String
+    #   resp.form.fields["String"].input_type.descriptive_text #=> String
+    #   resp.form.fields["String"].input_type.default_checked #=> Boolean
+    #   resp.form.fields["String"].input_type.default_country_code #=> String
+    #   resp.form.fields["String"].input_type.value_mappings.values #=> Array
+    #   resp.form.fields["String"].input_type.value_mappings.values[0].display_value.value #=> String
+    #   resp.form.fields["String"].input_type.value_mappings.values[0].display_value.binding_properties.property #=> String
+    #   resp.form.fields["String"].input_type.value_mappings.values[0].display_value.binding_properties.field #=> String
+    #   resp.form.fields["String"].input_type.value_mappings.values[0].display_value.concat #=> Array
+    #   resp.form.fields["String"].input_type.value_mappings.values[0].display_value.concat[0] #=> Types::FormInputValueProperty
+    #   resp.form.fields["String"].input_type.value_mappings.values[0].value.value #=> String
+    #   resp.form.fields["String"].input_type.value_mappings.values[0].value.binding_properties.property #=> String
+    #   resp.form.fields["String"].input_type.value_mappings.values[0].value.binding_properties.field #=> String
+    #   resp.form.fields["String"].input_type.value_mappings.values[0].value.concat #=> Array
+    #   resp.form.fields["String"].input_type.value_mappings.values[0].value.concat[0] #=> Types::FormInputValueProperty
+    #   resp.form.fields["String"].input_type.value_mappings.binding_properties #=> Hash
+    #   resp.form.fields["String"].input_type.value_mappings.binding_properties["String"].type #=> String
+    #   resp.form.fields["String"].input_type.value_mappings.binding_properties["String"].binding_properties.model #=> String
+    #   resp.form.fields["String"].input_type.name #=> String
+    #   resp.form.fields["String"].input_type.min_value #=> Float
+    #   resp.form.fields["String"].input_type.max_value #=> Float
+    #   resp.form.fields["String"].input_type.step #=> Float
+    #   resp.form.fields["String"].input_type.value #=> String
+    #   resp.form.fields["String"].input_type.is_array #=> Boolean
+    #   resp.form.fields["String"].input_type.file_uploader_config.access_level #=> String, one of "public", "protected", "private"
+    #   resp.form.fields["String"].input_type.file_uploader_config.accepted_file_types #=> Array
+    #   resp.form.fields["String"].input_type.file_uploader_config.accepted_file_types[0] #=> String
+    #   resp.form.fields["String"].input_type.file_uploader_config.show_thumbnails #=> Boolean
+    #   resp.form.fields["String"].input_type.file_uploader_config.is_resumable #=> Boolean
+    #   resp.form.fields["String"].input_type.file_uploader_config.max_file_count #=> Integer
+    #   resp.form.fields["String"].input_type.file_uploader_config.max_size #=> Integer
+    #   resp.form.fields["String"].validations #=> Array
+    #   resp.form.fields["String"].validations[0].type #=> String
+    #   resp.form.fields["String"].validations[0].str_values #=> Array
+    #   resp.form.fields["String"].validations[0].str_values[0] #=> String
+    #   resp.form.fields["String"].validations[0].num_values #=> Array
+    #   resp.form.fields["String"].validations[0].num_values[0] #=> Integer
+    #   resp.form.fields["String"].validations[0].validation_message #=> String
+    #   resp.form.sectional_elements #=> Hash
+    #   resp.form.sectional_elements["String"].type #=> String
+    #   resp.form.sectional_elements["String"].position.fixed #=> String, one of "first"
+    #   resp.form.sectional_elements["String"].position.right_of #=> String
+    #   resp.form.sectional_elements["String"].position.below #=> String
+    #   resp.form.sectional_elements["String"].text #=> String
+    #   resp.form.sectional_elements["String"].level #=> Integer
+    #   resp.form.sectional_elements["String"].orientation #=> String
+    #   resp.form.sectional_elements["String"].excluded #=> Boolean
+    #   resp.form.schema_version #=> String
     #   resp.form.tags #=> Hash
     #   resp.form.tags["TagKey"] #=> String
+    #   resp.form.cta.position #=> String, one of "top", "bottom", "top_and_bottom"
+    #   resp.form.cta.clear.excluded #=> Boolean
+    #   resp.form.cta.clear.children #=> String
+    #   resp.form.cta.clear.position.fixed #=> String, one of "first"
+    #   resp.form.cta.clear.position.right_of #=> String
+    #   resp.form.cta.clear.position.below #=> String
+    #   resp.form.cta.cancel.excluded #=> Boolean
+    #   resp.form.cta.cancel.children #=> String
+    #   resp.form.cta.cancel.position.fixed #=> String, one of "first"
+    #   resp.form.cta.cancel.position.right_of #=> String
+    #   resp.form.cta.cancel.position.below #=> String
+    #   resp.form.cta.submit.excluded #=> Boolean
+    #   resp.form.cta.submit.children #=> String
+    #   resp.form.cta.submit.position.fixed #=> String, one of "first"
+    #   resp.form.cta.submit.position.right_of #=> String
+    #   resp.form.cta.submit.position.below #=> String
+    #   resp.form.label_decorator #=> String, one of "required", "optional", "none"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/GetForm AWS API Documentation
     #
@@ -3794,21 +3899,21 @@ module Aws::AmplifyUIBuilder
     # @example Response structure
     #
     #   resp.theme.app_id #=> String
-    #   resp.theme.created_at #=> Time
     #   resp.theme.environment_name #=> String
     #   resp.theme.id #=> String
-    #   resp.theme.modified_at #=> Time
     #   resp.theme.name #=> String
-    #   resp.theme.overrides #=> Array
-    #   resp.theme.overrides[0].key #=> String
-    #   resp.theme.overrides[0].value.children #=> Types::ThemeValuesList
-    #   resp.theme.overrides[0].value.value #=> String
-    #   resp.theme.tags #=> Hash
-    #   resp.theme.tags["TagKey"] #=> String
+    #   resp.theme.created_at #=> Time
+    #   resp.theme.modified_at #=> Time
     #   resp.theme.values #=> Array
     #   resp.theme.values[0].key #=> String
-    #   resp.theme.values[0].value.children #=> Types::ThemeValuesList
     #   resp.theme.values[0].value.value #=> String
+    #   resp.theme.values[0].value.children #=> Types::ThemeValuesList
+    #   resp.theme.overrides #=> Array
+    #   resp.theme.overrides[0].key #=> String
+    #   resp.theme.overrides[0].value.value #=> String
+    #   resp.theme.overrides[0].value.children #=> Types::ThemeValuesList
+    #   resp.theme.tags #=> Hash
+    #   resp.theme.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/GetTheme AWS API Documentation
     #
@@ -3828,11 +3933,11 @@ module Aws::AmplifyUIBuilder
     # @option params [required, String] :environment_name
     #   The name of the backend environment that is a part of the Amplify app.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of components to retrieve.
-    #
     # @option params [String] :next_token
     #   The token to request the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of components to retrieve.
     #
     # @return [Types::ListComponentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3846,18 +3951,18 @@ module Aws::AmplifyUIBuilder
     #   resp = client.list_components({
     #     app_id: "String", # required
     #     environment_name: "String", # required
-    #     max_results: 1,
     #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.entities #=> Array
     #   resp.entities[0].app_id #=> String
-    #   resp.entities[0].component_type #=> String
     #   resp.entities[0].environment_name #=> String
     #   resp.entities[0].id #=> String
     #   resp.entities[0].name #=> String
+    #   resp.entities[0].component_type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ListComponents AWS API Documentation
@@ -3878,11 +3983,11 @@ module Aws::AmplifyUIBuilder
     # @option params [required, String] :environment_name
     #   The name of the backend environment that is a part of the Amplify app.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of forms to retrieve.
-    #
     # @option params [String] :next_token
     #   The token to request the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of forms to retrieve.
     #
     # @return [Types::ListFormsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3896,8 +4001,8 @@ module Aws::AmplifyUIBuilder
     #   resp = client.list_forms({
     #     app_id: "String", # required
     #     environment_name: "String", # required
-    #     max_results: 1,
     #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -3930,11 +4035,11 @@ module Aws::AmplifyUIBuilder
     # @option params [required, String] :environment_name
     #   The name of the backend environment that is a part of the Amplify app.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of theme results to return in the response.
-    #
     # @option params [String] :next_token
     #   The token to request the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of theme results to return in the response.
     #
     # @return [Types::ListThemesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3948,8 +4053,8 @@ module Aws::AmplifyUIBuilder
     #   resp = client.list_themes({
     #     app_id: "String", # required
     #     environment_name: "String", # required
-    #     max_results: 1,
     #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -3970,13 +4075,10 @@ module Aws::AmplifyUIBuilder
       req.send_request(options)
     end
 
-    # Stores the metadata information about a feature on a form or view.
+    # Stores the metadata information about a feature on a form.
     #
     # @option params [required, String] :app_id
     #   The unique ID for the Amplify app.
-    #
-    # @option params [required, Types::PutMetadataFlagBody] :body
-    #   The metadata information to store.
     #
     # @option params [required, String] :environment_name
     #   The name of the backend environment that is part of the Amplify app.
@@ -3984,17 +4086,20 @@ module Aws::AmplifyUIBuilder
     # @option params [required, String] :feature_name
     #   The name of the feature associated with the metadata.
     #
+    # @option params [required, Types::PutMetadataFlagBody] :body
+    #   The metadata information to store.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_metadata_flag({
     #     app_id: "String", # required
+    #     environment_name: "String", # required
+    #     feature_name: "String", # required
     #     body: { # required
     #       new_value: "String", # required
     #     },
-    #     environment_name: "String", # required
-    #     feature_name: "String", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/PutMetadataFlag AWS API Documentation
@@ -4026,6 +4131,7 @@ module Aws::AmplifyUIBuilder
     #     provider: "figma", # required, accepts figma
     #     refresh_token_body: { # required
     #       token: "SensitiveString", # required
+    #       client_id: "SensitiveString",
     #     },
     #   })
     #
@@ -4048,17 +4154,17 @@ module Aws::AmplifyUIBuilder
     # @option params [required, String] :app_id
     #   The unique ID for the Amplify app.
     #
-    # @option params [String] :client_token
-    #   The unique client token.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
-    #
     # @option params [required, String] :environment_name
     #   The name of the backend environment that is part of the Amplify app.
     #
     # @option params [required, String] :id
     #   The unique ID for the component.
+    #
+    # @option params [String] :client_token
+    #   The unique client token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @option params [required, Types::UpdateComponentData] :updated_component
     #   The configuration of the updated component.
@@ -4071,1467 +4177,1471 @@ module Aws::AmplifyUIBuilder
     #
     #   resp = client.update_component({
     #     app_id: "String", # required
-    #     client_token: "String",
     #     environment_name: "String", # required
     #     id: "Uuid", # required
+    #     client_token: "String",
     #     updated_component: { # required
-    #       binding_properties: {
-    #         "String" => {
-    #           binding_properties: {
-    #             bucket: "String",
-    #             default_value: "String",
-    #             field: "String",
-    #             key: "String",
-    #             model: "String",
-    #             predicates: [
-    #               {
-    #                 and: {
-    #                   # recursive PredicateList
-    #                 },
-    #                 field: "String",
-    #                 operand: "String",
-    #                 operator: "String",
-    #                 or: {
-    #                   # recursive PredicateList
-    #                 },
-    #               },
-    #             ],
-    #             slot_name: "String",
-    #             user_attribute: "String",
-    #           },
-    #           default_value: "String",
-    #           type: "String",
-    #         },
-    #       },
-    #       children: [
-    #         {
-    #           children: {
-    #             # recursive ComponentChildList
-    #           },
-    #           component_type: "String", # required
-    #           events: {
-    #             "String" => {
-    #               action: "String",
-    #               binding_event: "String",
-    #               parameters: {
-    #                 anchor: {
-    #                   binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   bindings: {
-    #                     "String" => {
-    #                       element: "String", # required
-    #                       property: "String", # required
-    #                     },
-    #                   },
-    #                   collection_binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   component_name: "String",
-    #                   concat: [
-    #                     {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   ],
-    #                   condition: {
-    #                     else: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                     field: "String",
-    #                     operand: "String",
-    #                     operand_type: "String",
-    #                     operator: "String",
-    #                     property: "String",
-    #                     then: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   },
-    #                   configured: false,
-    #                   default_value: "String",
-    #                   event: "String",
-    #                   imported_value: "String",
-    #                   model: "String",
-    #                   property: "String",
-    #                   type: "String",
-    #                   user_attribute: "String",
-    #                   value: "String",
-    #                 },
-    #                 fields: {
-    #                   "String" => {
-    #                     binding_properties: {
-    #                       field: "String",
-    #                       property: "String", # required
-    #                     },
-    #                     bindings: {
-    #                       "String" => {
-    #                         element: "String", # required
-    #                         property: "String", # required
-    #                       },
-    #                     },
-    #                     collection_binding_properties: {
-    #                       field: "String",
-    #                       property: "String", # required
-    #                     },
-    #                     component_name: "String",
-    #                     concat: [
-    #                       {
-    #                         # recursive ComponentProperty
-    #                       },
-    #                     ],
-    #                     condition: {
-    #                       else: {
-    #                         # recursive ComponentProperty
-    #                       },
-    #                       field: "String",
-    #                       operand: "String",
-    #                       operand_type: "String",
-    #                       operator: "String",
-    #                       property: "String",
-    #                       then: {
-    #                         # recursive ComponentProperty
-    #                       },
-    #                     },
-    #                     configured: false,
-    #                     default_value: "String",
-    #                     event: "String",
-    #                     imported_value: "String",
-    #                     model: "String",
-    #                     property: "String",
-    #                     type: "String",
-    #                     user_attribute: "String",
-    #                     value: "String",
-    #                   },
-    #                 },
-    #                 global: {
-    #                   binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   bindings: {
-    #                     "String" => {
-    #                       element: "String", # required
-    #                       property: "String", # required
-    #                     },
-    #                   },
-    #                   collection_binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   component_name: "String",
-    #                   concat: [
-    #                     {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   ],
-    #                   condition: {
-    #                     else: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                     field: "String",
-    #                     operand: "String",
-    #                     operand_type: "String",
-    #                     operator: "String",
-    #                     property: "String",
-    #                     then: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   },
-    #                   configured: false,
-    #                   default_value: "String",
-    #                   event: "String",
-    #                   imported_value: "String",
-    #                   model: "String",
-    #                   property: "String",
-    #                   type: "String",
-    #                   user_attribute: "String",
-    #                   value: "String",
-    #                 },
-    #                 id: {
-    #                   binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   bindings: {
-    #                     "String" => {
-    #                       element: "String", # required
-    #                       property: "String", # required
-    #                     },
-    #                   },
-    #                   collection_binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   component_name: "String",
-    #                   concat: [
-    #                     {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   ],
-    #                   condition: {
-    #                     else: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                     field: "String",
-    #                     operand: "String",
-    #                     operand_type: "String",
-    #                     operator: "String",
-    #                     property: "String",
-    #                     then: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   },
-    #                   configured: false,
-    #                   default_value: "String",
-    #                   event: "String",
-    #                   imported_value: "String",
-    #                   model: "String",
-    #                   property: "String",
-    #                   type: "String",
-    #                   user_attribute: "String",
-    #                   value: "String",
-    #                 },
-    #                 model: "String",
-    #                 state: {
-    #                   component_name: "String", # required
-    #                   property: "String", # required
-    #                   set: { # required
-    #                     binding_properties: {
-    #                       field: "String",
-    #                       property: "String", # required
-    #                     },
-    #                     bindings: {
-    #                       "String" => {
-    #                         element: "String", # required
-    #                         property: "String", # required
-    #                       },
-    #                     },
-    #                     collection_binding_properties: {
-    #                       field: "String",
-    #                       property: "String", # required
-    #                     },
-    #                     component_name: "String",
-    #                     concat: [
-    #                       {
-    #                         # recursive ComponentProperty
-    #                       },
-    #                     ],
-    #                     condition: {
-    #                       else: {
-    #                         # recursive ComponentProperty
-    #                       },
-    #                       field: "String",
-    #                       operand: "String",
-    #                       operand_type: "String",
-    #                       operator: "String",
-    #                       property: "String",
-    #                       then: {
-    #                         # recursive ComponentProperty
-    #                       },
-    #                     },
-    #                     configured: false,
-    #                     default_value: "String",
-    #                     event: "String",
-    #                     imported_value: "String",
-    #                     model: "String",
-    #                     property: "String",
-    #                     type: "String",
-    #                     user_attribute: "String",
-    #                     value: "String",
-    #                   },
-    #                 },
-    #                 target: {
-    #                   binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   bindings: {
-    #                     "String" => {
-    #                       element: "String", # required
-    #                       property: "String", # required
-    #                     },
-    #                   },
-    #                   collection_binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   component_name: "String",
-    #                   concat: [
-    #                     {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   ],
-    #                   condition: {
-    #                     else: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                     field: "String",
-    #                     operand: "String",
-    #                     operand_type: "String",
-    #                     operator: "String",
-    #                     property: "String",
-    #                     then: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   },
-    #                   configured: false,
-    #                   default_value: "String",
-    #                   event: "String",
-    #                   imported_value: "String",
-    #                   model: "String",
-    #                   property: "String",
-    #                   type: "String",
-    #                   user_attribute: "String",
-    #                   value: "String",
-    #                 },
-    #                 type: {
-    #                   binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   bindings: {
-    #                     "String" => {
-    #                       element: "String", # required
-    #                       property: "String", # required
-    #                     },
-    #                   },
-    #                   collection_binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   component_name: "String",
-    #                   concat: [
-    #                     {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   ],
-    #                   condition: {
-    #                     else: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                     field: "String",
-    #                     operand: "String",
-    #                     operand_type: "String",
-    #                     operator: "String",
-    #                     property: "String",
-    #                     then: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   },
-    #                   configured: false,
-    #                   default_value: "String",
-    #                   event: "String",
-    #                   imported_value: "String",
-    #                   model: "String",
-    #                   property: "String",
-    #                   type: "String",
-    #                   user_attribute: "String",
-    #                   value: "String",
-    #                 },
-    #                 url: {
-    #                   binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   bindings: {
-    #                     "String" => {
-    #                       element: "String", # required
-    #                       property: "String", # required
-    #                     },
-    #                   },
-    #                   collection_binding_properties: {
-    #                     field: "String",
-    #                     property: "String", # required
-    #                   },
-    #                   component_name: "String",
-    #                   concat: [
-    #                     {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   ],
-    #                   condition: {
-    #                     else: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                     field: "String",
-    #                     operand: "String",
-    #                     operand_type: "String",
-    #                     operator: "String",
-    #                     property: "String",
-    #                     then: {
-    #                       # recursive ComponentProperty
-    #                     },
-    #                   },
-    #                   configured: false,
-    #                   default_value: "String",
-    #                   event: "String",
-    #                   imported_value: "String",
-    #                   model: "String",
-    #                   property: "String",
-    #                   type: "String",
-    #                   user_attribute: "String",
-    #                   value: "String",
-    #                 },
-    #               },
-    #             },
-    #           },
-    #           name: "String", # required
-    #           properties: { # required
-    #             "String" => {
-    #               binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               bindings: {
-    #                 "String" => {
-    #                   element: "String", # required
-    #                   property: "String", # required
-    #                 },
-    #               },
-    #               collection_binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               component_name: "String",
-    #               concat: [
-    #                 {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               ],
-    #               condition: {
-    #                 else: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #                 field: "String",
-    #                 operand: "String",
-    #                 operand_type: "String",
-    #                 operator: "String",
-    #                 property: "String",
-    #                 then: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               },
-    #               configured: false,
-    #               default_value: "String",
-    #               event: "String",
-    #               imported_value: "String",
-    #               model: "String",
-    #               property: "String",
-    #               type: "String",
-    #               user_attribute: "String",
-    #               value: "String",
-    #             },
-    #           },
-    #           source_id: "String",
-    #         },
-    #       ],
-    #       collection_properties: {
-    #         "String" => {
-    #           identifiers: ["String"],
-    #           model: "String", # required
-    #           predicate: {
-    #             and: [
-    #               {
-    #                 # recursive Predicate
-    #               },
-    #             ],
-    #             field: "String",
-    #             operand: "String",
-    #             operator: "String",
-    #             or: [
-    #               {
-    #                 # recursive Predicate
-    #               },
-    #             ],
-    #           },
-    #           sort: [
-    #             {
-    #               direction: "ASC", # required, accepts ASC, DESC
-    #               field: "String", # required
-    #             },
-    #           ],
-    #         },
-    #       },
-    #       component_type: "ComponentType",
-    #       events: {
-    #         "String" => {
-    #           action: "String",
-    #           binding_event: "String",
-    #           parameters: {
-    #             anchor: {
-    #               binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               bindings: {
-    #                 "String" => {
-    #                   element: "String", # required
-    #                   property: "String", # required
-    #                 },
-    #               },
-    #               collection_binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               component_name: "String",
-    #               concat: [
-    #                 {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               ],
-    #               condition: {
-    #                 else: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #                 field: "String",
-    #                 operand: "String",
-    #                 operand_type: "String",
-    #                 operator: "String",
-    #                 property: "String",
-    #                 then: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               },
-    #               configured: false,
-    #               default_value: "String",
-    #               event: "String",
-    #               imported_value: "String",
-    #               model: "String",
-    #               property: "String",
-    #               type: "String",
-    #               user_attribute: "String",
-    #               value: "String",
-    #             },
-    #             fields: {
-    #               "String" => {
-    #                 binding_properties: {
-    #                   field: "String",
-    #                   property: "String", # required
-    #                 },
-    #                 bindings: {
-    #                   "String" => {
-    #                     element: "String", # required
-    #                     property: "String", # required
-    #                   },
-    #                 },
-    #                 collection_binding_properties: {
-    #                   field: "String",
-    #                   property: "String", # required
-    #                 },
-    #                 component_name: "String",
-    #                 concat: [
-    #                   {
-    #                     # recursive ComponentProperty
-    #                   },
-    #                 ],
-    #                 condition: {
-    #                   else: {
-    #                     # recursive ComponentProperty
-    #                   },
-    #                   field: "String",
-    #                   operand: "String",
-    #                   operand_type: "String",
-    #                   operator: "String",
-    #                   property: "String",
-    #                   then: {
-    #                     # recursive ComponentProperty
-    #                   },
-    #                 },
-    #                 configured: false,
-    #                 default_value: "String",
-    #                 event: "String",
-    #                 imported_value: "String",
-    #                 model: "String",
-    #                 property: "String",
-    #                 type: "String",
-    #                 user_attribute: "String",
-    #                 value: "String",
-    #               },
-    #             },
-    #             global: {
-    #               binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               bindings: {
-    #                 "String" => {
-    #                   element: "String", # required
-    #                   property: "String", # required
-    #                 },
-    #               },
-    #               collection_binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               component_name: "String",
-    #               concat: [
-    #                 {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               ],
-    #               condition: {
-    #                 else: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #                 field: "String",
-    #                 operand: "String",
-    #                 operand_type: "String",
-    #                 operator: "String",
-    #                 property: "String",
-    #                 then: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               },
-    #               configured: false,
-    #               default_value: "String",
-    #               event: "String",
-    #               imported_value: "String",
-    #               model: "String",
-    #               property: "String",
-    #               type: "String",
-    #               user_attribute: "String",
-    #               value: "String",
-    #             },
-    #             id: {
-    #               binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               bindings: {
-    #                 "String" => {
-    #                   element: "String", # required
-    #                   property: "String", # required
-    #                 },
-    #               },
-    #               collection_binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               component_name: "String",
-    #               concat: [
-    #                 {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               ],
-    #               condition: {
-    #                 else: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #                 field: "String",
-    #                 operand: "String",
-    #                 operand_type: "String",
-    #                 operator: "String",
-    #                 property: "String",
-    #                 then: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               },
-    #               configured: false,
-    #               default_value: "String",
-    #               event: "String",
-    #               imported_value: "String",
-    #               model: "String",
-    #               property: "String",
-    #               type: "String",
-    #               user_attribute: "String",
-    #               value: "String",
-    #             },
-    #             model: "String",
-    #             state: {
-    #               component_name: "String", # required
-    #               property: "String", # required
-    #               set: { # required
-    #                 binding_properties: {
-    #                   field: "String",
-    #                   property: "String", # required
-    #                 },
-    #                 bindings: {
-    #                   "String" => {
-    #                     element: "String", # required
-    #                     property: "String", # required
-    #                   },
-    #                 },
-    #                 collection_binding_properties: {
-    #                   field: "String",
-    #                   property: "String", # required
-    #                 },
-    #                 component_name: "String",
-    #                 concat: [
-    #                   {
-    #                     # recursive ComponentProperty
-    #                   },
-    #                 ],
-    #                 condition: {
-    #                   else: {
-    #                     # recursive ComponentProperty
-    #                   },
-    #                   field: "String",
-    #                   operand: "String",
-    #                   operand_type: "String",
-    #                   operator: "String",
-    #                   property: "String",
-    #                   then: {
-    #                     # recursive ComponentProperty
-    #                   },
-    #                 },
-    #                 configured: false,
-    #                 default_value: "String",
-    #                 event: "String",
-    #                 imported_value: "String",
-    #                 model: "String",
-    #                 property: "String",
-    #                 type: "String",
-    #                 user_attribute: "String",
-    #                 value: "String",
-    #               },
-    #             },
-    #             target: {
-    #               binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               bindings: {
-    #                 "String" => {
-    #                   element: "String", # required
-    #                   property: "String", # required
-    #                 },
-    #               },
-    #               collection_binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               component_name: "String",
-    #               concat: [
-    #                 {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               ],
-    #               condition: {
-    #                 else: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #                 field: "String",
-    #                 operand: "String",
-    #                 operand_type: "String",
-    #                 operator: "String",
-    #                 property: "String",
-    #                 then: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               },
-    #               configured: false,
-    #               default_value: "String",
-    #               event: "String",
-    #               imported_value: "String",
-    #               model: "String",
-    #               property: "String",
-    #               type: "String",
-    #               user_attribute: "String",
-    #               value: "String",
-    #             },
-    #             type: {
-    #               binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               bindings: {
-    #                 "String" => {
-    #                   element: "String", # required
-    #                   property: "String", # required
-    #                 },
-    #               },
-    #               collection_binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               component_name: "String",
-    #               concat: [
-    #                 {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               ],
-    #               condition: {
-    #                 else: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #                 field: "String",
-    #                 operand: "String",
-    #                 operand_type: "String",
-    #                 operator: "String",
-    #                 property: "String",
-    #                 then: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               },
-    #               configured: false,
-    #               default_value: "String",
-    #               event: "String",
-    #               imported_value: "String",
-    #               model: "String",
-    #               property: "String",
-    #               type: "String",
-    #               user_attribute: "String",
-    #               value: "String",
-    #             },
-    #             url: {
-    #               binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               bindings: {
-    #                 "String" => {
-    #                   element: "String", # required
-    #                   property: "String", # required
-    #                 },
-    #               },
-    #               collection_binding_properties: {
-    #                 field: "String",
-    #                 property: "String", # required
-    #               },
-    #               component_name: "String",
-    #               concat: [
-    #                 {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               ],
-    #               condition: {
-    #                 else: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #                 field: "String",
-    #                 operand: "String",
-    #                 operand_type: "String",
-    #                 operator: "String",
-    #                 property: "String",
-    #                 then: {
-    #                   # recursive ComponentProperty
-    #                 },
-    #               },
-    #               configured: false,
-    #               default_value: "String",
-    #               event: "String",
-    #               imported_value: "String",
-    #               model: "String",
-    #               property: "String",
-    #               type: "String",
-    #               user_attribute: "String",
-    #               value: "String",
-    #             },
-    #           },
-    #         },
-    #       },
     #       id: "Uuid",
     #       name: "ComponentName",
-    #       overrides: {
-    #         "String" => {
-    #           "String" => "String",
-    #         },
-    #       },
+    #       source_id: "String",
+    #       component_type: "ComponentType",
     #       properties: {
     #         "String" => {
+    #           value: "String",
     #           binding_properties: {
-    #             field: "String",
     #             property: "String", # required
+    #             field: "String",
     #           },
+    #           collection_binding_properties: {
+    #             property: "String", # required
+    #             field: "String",
+    #           },
+    #           default_value: "String",
+    #           model: "String",
     #           bindings: {
     #             "String" => {
     #               element: "String", # required
     #               property: "String", # required
     #             },
     #           },
-    #           collection_binding_properties: {
-    #             field: "String",
-    #             property: "String", # required
-    #           },
-    #           component_name: "String",
+    #           event: "String",
+    #           user_attribute: "String",
     #           concat: [
     #             {
     #               # recursive ComponentProperty
     #             },
     #           ],
     #           condition: {
-    #             else: {
-    #               # recursive ComponentProperty
-    #             },
-    #             field: "String",
-    #             operand: "String",
-    #             operand_type: "String",
-    #             operator: "String",
     #             property: "String",
+    #             field: "String",
+    #             operator: "String",
+    #             operand: "String",
     #             then: {
     #               # recursive ComponentProperty
     #             },
+    #             else: {
+    #               # recursive ComponentProperty
+    #             },
+    #             operand_type: "String",
     #           },
     #           configured: false,
-    #           default_value: "String",
-    #           event: "String",
-    #           imported_value: "String",
-    #           model: "String",
-    #           property: "String",
     #           type: "String",
-    #           user_attribute: "String",
-    #           value: "String",
+    #           imported_value: "String",
+    #           component_name: "String",
+    #           property: "String",
     #         },
     #       },
-    #       schema_version: "String",
-    #       source_id: "String",
+    #       children: [
+    #         {
+    #           component_type: "String", # required
+    #           name: "String", # required
+    #           properties: { # required
+    #             "String" => {
+    #               value: "String",
+    #               binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               collection_binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               default_value: "String",
+    #               model: "String",
+    #               bindings: {
+    #                 "String" => {
+    #                   element: "String", # required
+    #                   property: "String", # required
+    #                 },
+    #               },
+    #               event: "String",
+    #               user_attribute: "String",
+    #               concat: [
+    #                 {
+    #                   # recursive ComponentProperty
+    #                 },
+    #               ],
+    #               condition: {
+    #                 property: "String",
+    #                 field: "String",
+    #                 operator: "String",
+    #                 operand: "String",
+    #                 then: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 else: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 operand_type: "String",
+    #               },
+    #               configured: false,
+    #               type: "String",
+    #               imported_value: "String",
+    #               component_name: "String",
+    #               property: "String",
+    #             },
+    #           },
+    #           children: {
+    #             # recursive ComponentChildList
+    #           },
+    #           events: {
+    #             "String" => {
+    #               action: "String",
+    #               parameters: {
+    #                 type: {
+    #                   value: "String",
+    #                   binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   collection_binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   default_value: "String",
+    #                   model: "String",
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   event: "String",
+    #                   user_attribute: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     property: "String",
+    #                     field: "String",
+    #                     operator: "String",
+    #                     operand: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     operand_type: "String",
+    #                   },
+    #                   configured: false,
+    #                   type: "String",
+    #                   imported_value: "String",
+    #                   component_name: "String",
+    #                   property: "String",
+    #                 },
+    #                 url: {
+    #                   value: "String",
+    #                   binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   collection_binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   default_value: "String",
+    #                   model: "String",
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   event: "String",
+    #                   user_attribute: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     property: "String",
+    #                     field: "String",
+    #                     operator: "String",
+    #                     operand: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     operand_type: "String",
+    #                   },
+    #                   configured: false,
+    #                   type: "String",
+    #                   imported_value: "String",
+    #                   component_name: "String",
+    #                   property: "String",
+    #                 },
+    #                 anchor: {
+    #                   value: "String",
+    #                   binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   collection_binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   default_value: "String",
+    #                   model: "String",
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   event: "String",
+    #                   user_attribute: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     property: "String",
+    #                     field: "String",
+    #                     operator: "String",
+    #                     operand: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     operand_type: "String",
+    #                   },
+    #                   configured: false,
+    #                   type: "String",
+    #                   imported_value: "String",
+    #                   component_name: "String",
+    #                   property: "String",
+    #                 },
+    #                 target: {
+    #                   value: "String",
+    #                   binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   collection_binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   default_value: "String",
+    #                   model: "String",
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   event: "String",
+    #                   user_attribute: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     property: "String",
+    #                     field: "String",
+    #                     operator: "String",
+    #                     operand: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     operand_type: "String",
+    #                   },
+    #                   configured: false,
+    #                   type: "String",
+    #                   imported_value: "String",
+    #                   component_name: "String",
+    #                   property: "String",
+    #                 },
+    #                 global: {
+    #                   value: "String",
+    #                   binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   collection_binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   default_value: "String",
+    #                   model: "String",
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   event: "String",
+    #                   user_attribute: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     property: "String",
+    #                     field: "String",
+    #                     operator: "String",
+    #                     operand: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     operand_type: "String",
+    #                   },
+    #                   configured: false,
+    #                   type: "String",
+    #                   imported_value: "String",
+    #                   component_name: "String",
+    #                   property: "String",
+    #                 },
+    #                 model: "String",
+    #                 id: {
+    #                   value: "String",
+    #                   binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   collection_binding_properties: {
+    #                     property: "String", # required
+    #                     field: "String",
+    #                   },
+    #                   default_value: "String",
+    #                   model: "String",
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   event: "String",
+    #                   user_attribute: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     property: "String",
+    #                     field: "String",
+    #                     operator: "String",
+    #                     operand: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     operand_type: "String",
+    #                   },
+    #                   configured: false,
+    #                   type: "String",
+    #                   imported_value: "String",
+    #                   component_name: "String",
+    #                   property: "String",
+    #                 },
+    #                 fields: {
+    #                   "String" => {
+    #                     value: "String",
+    #                     binding_properties: {
+    #                       property: "String", # required
+    #                       field: "String",
+    #                     },
+    #                     collection_binding_properties: {
+    #                       property: "String", # required
+    #                       field: "String",
+    #                     },
+    #                     default_value: "String",
+    #                     model: "String",
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     event: "String",
+    #                     user_attribute: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       property: "String",
+    #                       field: "String",
+    #                       operator: "String",
+    #                       operand: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       operand_type: "String",
+    #                     },
+    #                     configured: false,
+    #                     type: "String",
+    #                     imported_value: "String",
+    #                     component_name: "String",
+    #                     property: "String",
+    #                   },
+    #                 },
+    #                 state: {
+    #                   component_name: "String", # required
+    #                   property: "String", # required
+    #                   set: { # required
+    #                     value: "String",
+    #                     binding_properties: {
+    #                       property: "String", # required
+    #                       field: "String",
+    #                     },
+    #                     collection_binding_properties: {
+    #                       property: "String", # required
+    #                       field: "String",
+    #                     },
+    #                     default_value: "String",
+    #                     model: "String",
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     event: "String",
+    #                     user_attribute: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       property: "String",
+    #                       field: "String",
+    #                       operator: "String",
+    #                       operand: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       operand_type: "String",
+    #                     },
+    #                     configured: false,
+    #                     type: "String",
+    #                     imported_value: "String",
+    #                     component_name: "String",
+    #                     property: "String",
+    #                   },
+    #                 },
+    #               },
+    #               binding_event: "String",
+    #             },
+    #           },
+    #           source_id: "String",
+    #         },
+    #       ],
     #       variants: [
     #         {
+    #           variant_values: {
+    #             "String" => "String",
+    #           },
     #           overrides: {
     #             "String" => {
     #               "String" => "String",
     #             },
     #           },
-    #           variant_values: {
-    #             "String" => "String",
-    #           },
     #         },
     #       ],
+    #       overrides: {
+    #         "String" => {
+    #           "String" => "String",
+    #         },
+    #       },
+    #       binding_properties: {
+    #         "String" => {
+    #           type: "String",
+    #           binding_properties: {
+    #             model: "String",
+    #             field: "String",
+    #             predicates: [
+    #               {
+    #                 or: {
+    #                   # recursive PredicateList
+    #                 },
+    #                 and: {
+    #                   # recursive PredicateList
+    #                 },
+    #                 field: "String",
+    #                 operator: "String",
+    #                 operand: "String",
+    #                 operand_type: "OperandType",
+    #               },
+    #             ],
+    #             user_attribute: "String",
+    #             bucket: "String",
+    #             key: "String",
+    #             default_value: "String",
+    #             slot_name: "String",
+    #           },
+    #           default_value: "String",
+    #         },
+    #       },
+    #       collection_properties: {
+    #         "String" => {
+    #           model: "String", # required
+    #           sort: [
+    #             {
+    #               field: "String", # required
+    #               direction: "ASC", # required, accepts ASC, DESC
+    #             },
+    #           ],
+    #           predicate: {
+    #             or: [
+    #               {
+    #                 # recursive Predicate
+    #               },
+    #             ],
+    #             and: [
+    #               {
+    #                 # recursive Predicate
+    #               },
+    #             ],
+    #             field: "String",
+    #             operator: "String",
+    #             operand: "String",
+    #             operand_type: "OperandType",
+    #           },
+    #           identifiers: ["String"],
+    #         },
+    #       },
+    #       events: {
+    #         "String" => {
+    #           action: "String",
+    #           parameters: {
+    #             type: {
+    #               value: "String",
+    #               binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               collection_binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               default_value: "String",
+    #               model: "String",
+    #               bindings: {
+    #                 "String" => {
+    #                   element: "String", # required
+    #                   property: "String", # required
+    #                 },
+    #               },
+    #               event: "String",
+    #               user_attribute: "String",
+    #               concat: [
+    #                 {
+    #                   # recursive ComponentProperty
+    #                 },
+    #               ],
+    #               condition: {
+    #                 property: "String",
+    #                 field: "String",
+    #                 operator: "String",
+    #                 operand: "String",
+    #                 then: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 else: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 operand_type: "String",
+    #               },
+    #               configured: false,
+    #               type: "String",
+    #               imported_value: "String",
+    #               component_name: "String",
+    #               property: "String",
+    #             },
+    #             url: {
+    #               value: "String",
+    #               binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               collection_binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               default_value: "String",
+    #               model: "String",
+    #               bindings: {
+    #                 "String" => {
+    #                   element: "String", # required
+    #                   property: "String", # required
+    #                 },
+    #               },
+    #               event: "String",
+    #               user_attribute: "String",
+    #               concat: [
+    #                 {
+    #                   # recursive ComponentProperty
+    #                 },
+    #               ],
+    #               condition: {
+    #                 property: "String",
+    #                 field: "String",
+    #                 operator: "String",
+    #                 operand: "String",
+    #                 then: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 else: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 operand_type: "String",
+    #               },
+    #               configured: false,
+    #               type: "String",
+    #               imported_value: "String",
+    #               component_name: "String",
+    #               property: "String",
+    #             },
+    #             anchor: {
+    #               value: "String",
+    #               binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               collection_binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               default_value: "String",
+    #               model: "String",
+    #               bindings: {
+    #                 "String" => {
+    #                   element: "String", # required
+    #                   property: "String", # required
+    #                 },
+    #               },
+    #               event: "String",
+    #               user_attribute: "String",
+    #               concat: [
+    #                 {
+    #                   # recursive ComponentProperty
+    #                 },
+    #               ],
+    #               condition: {
+    #                 property: "String",
+    #                 field: "String",
+    #                 operator: "String",
+    #                 operand: "String",
+    #                 then: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 else: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 operand_type: "String",
+    #               },
+    #               configured: false,
+    #               type: "String",
+    #               imported_value: "String",
+    #               component_name: "String",
+    #               property: "String",
+    #             },
+    #             target: {
+    #               value: "String",
+    #               binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               collection_binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               default_value: "String",
+    #               model: "String",
+    #               bindings: {
+    #                 "String" => {
+    #                   element: "String", # required
+    #                   property: "String", # required
+    #                 },
+    #               },
+    #               event: "String",
+    #               user_attribute: "String",
+    #               concat: [
+    #                 {
+    #                   # recursive ComponentProperty
+    #                 },
+    #               ],
+    #               condition: {
+    #                 property: "String",
+    #                 field: "String",
+    #                 operator: "String",
+    #                 operand: "String",
+    #                 then: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 else: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 operand_type: "String",
+    #               },
+    #               configured: false,
+    #               type: "String",
+    #               imported_value: "String",
+    #               component_name: "String",
+    #               property: "String",
+    #             },
+    #             global: {
+    #               value: "String",
+    #               binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               collection_binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               default_value: "String",
+    #               model: "String",
+    #               bindings: {
+    #                 "String" => {
+    #                   element: "String", # required
+    #                   property: "String", # required
+    #                 },
+    #               },
+    #               event: "String",
+    #               user_attribute: "String",
+    #               concat: [
+    #                 {
+    #                   # recursive ComponentProperty
+    #                 },
+    #               ],
+    #               condition: {
+    #                 property: "String",
+    #                 field: "String",
+    #                 operator: "String",
+    #                 operand: "String",
+    #                 then: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 else: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 operand_type: "String",
+    #               },
+    #               configured: false,
+    #               type: "String",
+    #               imported_value: "String",
+    #               component_name: "String",
+    #               property: "String",
+    #             },
+    #             model: "String",
+    #             id: {
+    #               value: "String",
+    #               binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               collection_binding_properties: {
+    #                 property: "String", # required
+    #                 field: "String",
+    #               },
+    #               default_value: "String",
+    #               model: "String",
+    #               bindings: {
+    #                 "String" => {
+    #                   element: "String", # required
+    #                   property: "String", # required
+    #                 },
+    #               },
+    #               event: "String",
+    #               user_attribute: "String",
+    #               concat: [
+    #                 {
+    #                   # recursive ComponentProperty
+    #                 },
+    #               ],
+    #               condition: {
+    #                 property: "String",
+    #                 field: "String",
+    #                 operator: "String",
+    #                 operand: "String",
+    #                 then: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 else: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 operand_type: "String",
+    #               },
+    #               configured: false,
+    #               type: "String",
+    #               imported_value: "String",
+    #               component_name: "String",
+    #               property: "String",
+    #             },
+    #             fields: {
+    #               "String" => {
+    #                 value: "String",
+    #                 binding_properties: {
+    #                   property: "String", # required
+    #                   field: "String",
+    #                 },
+    #                 collection_binding_properties: {
+    #                   property: "String", # required
+    #                   field: "String",
+    #                 },
+    #                 default_value: "String",
+    #                 model: "String",
+    #                 bindings: {
+    #                   "String" => {
+    #                     element: "String", # required
+    #                     property: "String", # required
+    #                   },
+    #                 },
+    #                 event: "String",
+    #                 user_attribute: "String",
+    #                 concat: [
+    #                   {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 ],
+    #                 condition: {
+    #                   property: "String",
+    #                   field: "String",
+    #                   operator: "String",
+    #                   operand: "String",
+    #                   then: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   else: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   operand_type: "String",
+    #                 },
+    #                 configured: false,
+    #                 type: "String",
+    #                 imported_value: "String",
+    #                 component_name: "String",
+    #                 property: "String",
+    #               },
+    #             },
+    #             state: {
+    #               component_name: "String", # required
+    #               property: "String", # required
+    #               set: { # required
+    #                 value: "String",
+    #                 binding_properties: {
+    #                   property: "String", # required
+    #                   field: "String",
+    #                 },
+    #                 collection_binding_properties: {
+    #                   property: "String", # required
+    #                   field: "String",
+    #                 },
+    #                 default_value: "String",
+    #                 model: "String",
+    #                 bindings: {
+    #                   "String" => {
+    #                     element: "String", # required
+    #                     property: "String", # required
+    #                   },
+    #                 },
+    #                 event: "String",
+    #                 user_attribute: "String",
+    #                 concat: [
+    #                   {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 ],
+    #                 condition: {
+    #                   property: "String",
+    #                   field: "String",
+    #                   operator: "String",
+    #                   operand: "String",
+    #                   then: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   else: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   operand_type: "String",
+    #                 },
+    #                 configured: false,
+    #                 type: "String",
+    #                 imported_value: "String",
+    #                 component_name: "String",
+    #                 property: "String",
+    #               },
+    #             },
+    #           },
+    #           binding_event: "String",
+    #         },
+    #       },
+    #       schema_version: "String",
     #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.entity.app_id #=> String
-    #   resp.entity.binding_properties #=> Hash
-    #   resp.entity.binding_properties["String"].binding_properties.bucket #=> String
-    #   resp.entity.binding_properties["String"].binding_properties.default_value #=> String
-    #   resp.entity.binding_properties["String"].binding_properties.field #=> String
-    #   resp.entity.binding_properties["String"].binding_properties.key #=> String
-    #   resp.entity.binding_properties["String"].binding_properties.model #=> String
-    #   resp.entity.binding_properties["String"].binding_properties.predicates #=> Array
-    #   resp.entity.binding_properties["String"].binding_properties.predicates[0].and #=> Types::PredicateList
-    #   resp.entity.binding_properties["String"].binding_properties.predicates[0].field #=> String
-    #   resp.entity.binding_properties["String"].binding_properties.predicates[0].operand #=> String
-    #   resp.entity.binding_properties["String"].binding_properties.predicates[0].operator #=> String
-    #   resp.entity.binding_properties["String"].binding_properties.predicates[0].or #=> Types::PredicateList
-    #   resp.entity.binding_properties["String"].binding_properties.slot_name #=> String
-    #   resp.entity.binding_properties["String"].binding_properties.user_attribute #=> String
-    #   resp.entity.binding_properties["String"].default_value #=> String
-    #   resp.entity.binding_properties["String"].type #=> String
-    #   resp.entity.children #=> Array
-    #   resp.entity.children[0].children #=> Types::ComponentChildList
-    #   resp.entity.children[0].component_type #=> String
-    #   resp.entity.children[0].events #=> Hash
-    #   resp.entity.children[0].events["String"].action #=> String
-    #   resp.entity.children[0].events["String"].binding_event #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.bindings #=> Hash
-    #   resp.entity.children[0].events["String"].parameters.anchor.bindings["String"].element #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.bindings["String"].property #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.collection_binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.collection_binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.component_name #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.concat #=> Array
-    #   resp.entity.children[0].events["String"].parameters.anchor.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.anchor.condition.else #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.anchor.condition.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.condition.operand #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.condition.operand_type #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.condition.operator #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.condition.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.condition.then #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.anchor.configured #=> Boolean
-    #   resp.entity.children[0].events["String"].parameters.anchor.default_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.event #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.imported_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.model #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.type #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.user_attribute #=> String
-    #   resp.entity.children[0].events["String"].parameters.anchor.value #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields #=> Hash
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].bindings #=> Hash
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].bindings["String"].element #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].bindings["String"].property #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].collection_binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].collection_binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].component_name #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].concat #=> Array
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].concat[0] #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.else #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.operand #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.operand_type #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.operator #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.then #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].configured #=> Boolean
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].default_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].event #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].imported_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].model #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].property #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].type #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].user_attribute #=> String
-    #   resp.entity.children[0].events["String"].parameters.fields["String"].value #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.bindings #=> Hash
-    #   resp.entity.children[0].events["String"].parameters.global.bindings["String"].element #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.bindings["String"].property #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.collection_binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.collection_binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.component_name #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.concat #=> Array
-    #   resp.entity.children[0].events["String"].parameters.global.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.global.condition.else #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.global.condition.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.condition.operand #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.condition.operand_type #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.condition.operator #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.condition.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.condition.then #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.global.configured #=> Boolean
-    #   resp.entity.children[0].events["String"].parameters.global.default_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.event #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.imported_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.model #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.type #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.user_attribute #=> String
-    #   resp.entity.children[0].events["String"].parameters.global.value #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.bindings #=> Hash
-    #   resp.entity.children[0].events["String"].parameters.id.bindings["String"].element #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.bindings["String"].property #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.collection_binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.collection_binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.component_name #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.concat #=> Array
-    #   resp.entity.children[0].events["String"].parameters.id.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.id.condition.else #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.id.condition.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.condition.operand #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.condition.operand_type #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.condition.operator #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.condition.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.condition.then #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.id.configured #=> Boolean
-    #   resp.entity.children[0].events["String"].parameters.id.default_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.event #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.imported_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.model #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.type #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.user_attribute #=> String
-    #   resp.entity.children[0].events["String"].parameters.id.value #=> String
-    #   resp.entity.children[0].events["String"].parameters.model #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.component_name #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.bindings #=> Hash
-    #   resp.entity.children[0].events["String"].parameters.state.set.bindings["String"].element #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.bindings["String"].property #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.collection_binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.collection_binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.component_name #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.concat #=> Array
-    #   resp.entity.children[0].events["String"].parameters.state.set.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.state.set.condition.else #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.state.set.condition.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.condition.operand #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.condition.operand_type #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.condition.operator #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.condition.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.condition.then #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.state.set.configured #=> Boolean
-    #   resp.entity.children[0].events["String"].parameters.state.set.default_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.event #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.imported_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.model #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.type #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.user_attribute #=> String
-    #   resp.entity.children[0].events["String"].parameters.state.set.value #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.bindings #=> Hash
-    #   resp.entity.children[0].events["String"].parameters.target.bindings["String"].element #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.bindings["String"].property #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.collection_binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.collection_binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.component_name #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.concat #=> Array
-    #   resp.entity.children[0].events["String"].parameters.target.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.target.condition.else #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.target.condition.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.condition.operand #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.condition.operand_type #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.condition.operator #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.condition.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.condition.then #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.target.configured #=> Boolean
-    #   resp.entity.children[0].events["String"].parameters.target.default_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.event #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.imported_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.model #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.type #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.user_attribute #=> String
-    #   resp.entity.children[0].events["String"].parameters.target.value #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.bindings #=> Hash
-    #   resp.entity.children[0].events["String"].parameters.type.bindings["String"].element #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.bindings["String"].property #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.collection_binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.collection_binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.component_name #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.concat #=> Array
-    #   resp.entity.children[0].events["String"].parameters.type.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.type.condition.else #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.type.condition.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.condition.operand #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.condition.operand_type #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.condition.operator #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.condition.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.condition.then #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.type.configured #=> Boolean
-    #   resp.entity.children[0].events["String"].parameters.type.default_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.event #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.imported_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.model #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.type #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.user_attribute #=> String
-    #   resp.entity.children[0].events["String"].parameters.type.value #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.bindings #=> Hash
-    #   resp.entity.children[0].events["String"].parameters.url.bindings["String"].element #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.bindings["String"].property #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.collection_binding_properties.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.collection_binding_properties.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.component_name #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.concat #=> Array
-    #   resp.entity.children[0].events["String"].parameters.url.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.url.condition.else #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.url.condition.field #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.condition.operand #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.condition.operand_type #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.condition.operator #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.condition.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.condition.then #=> Types::ComponentProperty
-    #   resp.entity.children[0].events["String"].parameters.url.configured #=> Boolean
-    #   resp.entity.children[0].events["String"].parameters.url.default_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.event #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.imported_value #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.model #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.property #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.type #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.user_attribute #=> String
-    #   resp.entity.children[0].events["String"].parameters.url.value #=> String
-    #   resp.entity.children[0].name #=> String
-    #   resp.entity.children[0].properties #=> Hash
-    #   resp.entity.children[0].properties["String"].binding_properties.field #=> String
-    #   resp.entity.children[0].properties["String"].binding_properties.property #=> String
-    #   resp.entity.children[0].properties["String"].bindings #=> Hash
-    #   resp.entity.children[0].properties["String"].bindings["String"].element #=> String
-    #   resp.entity.children[0].properties["String"].bindings["String"].property #=> String
-    #   resp.entity.children[0].properties["String"].collection_binding_properties.field #=> String
-    #   resp.entity.children[0].properties["String"].collection_binding_properties.property #=> String
-    #   resp.entity.children[0].properties["String"].component_name #=> String
-    #   resp.entity.children[0].properties["String"].concat #=> Array
-    #   resp.entity.children[0].properties["String"].concat[0] #=> Types::ComponentProperty
-    #   resp.entity.children[0].properties["String"].condition.else #=> Types::ComponentProperty
-    #   resp.entity.children[0].properties["String"].condition.field #=> String
-    #   resp.entity.children[0].properties["String"].condition.operand #=> String
-    #   resp.entity.children[0].properties["String"].condition.operand_type #=> String
-    #   resp.entity.children[0].properties["String"].condition.operator #=> String
-    #   resp.entity.children[0].properties["String"].condition.property #=> String
-    #   resp.entity.children[0].properties["String"].condition.then #=> Types::ComponentProperty
-    #   resp.entity.children[0].properties["String"].configured #=> Boolean
-    #   resp.entity.children[0].properties["String"].default_value #=> String
-    #   resp.entity.children[0].properties["String"].event #=> String
-    #   resp.entity.children[0].properties["String"].imported_value #=> String
-    #   resp.entity.children[0].properties["String"].model #=> String
-    #   resp.entity.children[0].properties["String"].property #=> String
-    #   resp.entity.children[0].properties["String"].type #=> String
-    #   resp.entity.children[0].properties["String"].user_attribute #=> String
-    #   resp.entity.children[0].properties["String"].value #=> String
-    #   resp.entity.children[0].source_id #=> String
-    #   resp.entity.collection_properties #=> Hash
-    #   resp.entity.collection_properties["String"].identifiers #=> Array
-    #   resp.entity.collection_properties["String"].identifiers[0] #=> String
-    #   resp.entity.collection_properties["String"].model #=> String
-    #   resp.entity.collection_properties["String"].predicate.and #=> Array
-    #   resp.entity.collection_properties["String"].predicate.and[0] #=> Types::Predicate
-    #   resp.entity.collection_properties["String"].predicate.field #=> String
-    #   resp.entity.collection_properties["String"].predicate.operand #=> String
-    #   resp.entity.collection_properties["String"].predicate.operator #=> String
-    #   resp.entity.collection_properties["String"].predicate.or #=> Array
-    #   resp.entity.collection_properties["String"].predicate.or[0] #=> Types::Predicate
-    #   resp.entity.collection_properties["String"].sort #=> Array
-    #   resp.entity.collection_properties["String"].sort[0].direction #=> String, one of "ASC", "DESC"
-    #   resp.entity.collection_properties["String"].sort[0].field #=> String
-    #   resp.entity.component_type #=> String
-    #   resp.entity.created_at #=> Time
     #   resp.entity.environment_name #=> String
-    #   resp.entity.events #=> Hash
-    #   resp.entity.events["String"].action #=> String
-    #   resp.entity.events["String"].binding_event #=> String
-    #   resp.entity.events["String"].parameters.anchor.binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.anchor.binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.anchor.bindings #=> Hash
-    #   resp.entity.events["String"].parameters.anchor.bindings["String"].element #=> String
-    #   resp.entity.events["String"].parameters.anchor.bindings["String"].property #=> String
-    #   resp.entity.events["String"].parameters.anchor.collection_binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.anchor.collection_binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.anchor.component_name #=> String
-    #   resp.entity.events["String"].parameters.anchor.concat #=> Array
-    #   resp.entity.events["String"].parameters.anchor.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.anchor.condition.else #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.anchor.condition.field #=> String
-    #   resp.entity.events["String"].parameters.anchor.condition.operand #=> String
-    #   resp.entity.events["String"].parameters.anchor.condition.operand_type #=> String
-    #   resp.entity.events["String"].parameters.anchor.condition.operator #=> String
-    #   resp.entity.events["String"].parameters.anchor.condition.property #=> String
-    #   resp.entity.events["String"].parameters.anchor.condition.then #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.anchor.configured #=> Boolean
-    #   resp.entity.events["String"].parameters.anchor.default_value #=> String
-    #   resp.entity.events["String"].parameters.anchor.event #=> String
-    #   resp.entity.events["String"].parameters.anchor.imported_value #=> String
-    #   resp.entity.events["String"].parameters.anchor.model #=> String
-    #   resp.entity.events["String"].parameters.anchor.property #=> String
-    #   resp.entity.events["String"].parameters.anchor.type #=> String
-    #   resp.entity.events["String"].parameters.anchor.user_attribute #=> String
-    #   resp.entity.events["String"].parameters.anchor.value #=> String
-    #   resp.entity.events["String"].parameters.fields #=> Hash
-    #   resp.entity.events["String"].parameters.fields["String"].binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].bindings #=> Hash
-    #   resp.entity.events["String"].parameters.fields["String"].bindings["String"].element #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].bindings["String"].property #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].collection_binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].collection_binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].component_name #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].concat #=> Array
-    #   resp.entity.events["String"].parameters.fields["String"].concat[0] #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.fields["String"].condition.else #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.fields["String"].condition.field #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].condition.operand #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].condition.operand_type #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].condition.operator #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].condition.property #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].condition.then #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.fields["String"].configured #=> Boolean
-    #   resp.entity.events["String"].parameters.fields["String"].default_value #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].event #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].imported_value #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].model #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].property #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].type #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].user_attribute #=> String
-    #   resp.entity.events["String"].parameters.fields["String"].value #=> String
-    #   resp.entity.events["String"].parameters.global.binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.global.binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.global.bindings #=> Hash
-    #   resp.entity.events["String"].parameters.global.bindings["String"].element #=> String
-    #   resp.entity.events["String"].parameters.global.bindings["String"].property #=> String
-    #   resp.entity.events["String"].parameters.global.collection_binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.global.collection_binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.global.component_name #=> String
-    #   resp.entity.events["String"].parameters.global.concat #=> Array
-    #   resp.entity.events["String"].parameters.global.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.global.condition.else #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.global.condition.field #=> String
-    #   resp.entity.events["String"].parameters.global.condition.operand #=> String
-    #   resp.entity.events["String"].parameters.global.condition.operand_type #=> String
-    #   resp.entity.events["String"].parameters.global.condition.operator #=> String
-    #   resp.entity.events["String"].parameters.global.condition.property #=> String
-    #   resp.entity.events["String"].parameters.global.condition.then #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.global.configured #=> Boolean
-    #   resp.entity.events["String"].parameters.global.default_value #=> String
-    #   resp.entity.events["String"].parameters.global.event #=> String
-    #   resp.entity.events["String"].parameters.global.imported_value #=> String
-    #   resp.entity.events["String"].parameters.global.model #=> String
-    #   resp.entity.events["String"].parameters.global.property #=> String
-    #   resp.entity.events["String"].parameters.global.type #=> String
-    #   resp.entity.events["String"].parameters.global.user_attribute #=> String
-    #   resp.entity.events["String"].parameters.global.value #=> String
-    #   resp.entity.events["String"].parameters.id.binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.id.binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.id.bindings #=> Hash
-    #   resp.entity.events["String"].parameters.id.bindings["String"].element #=> String
-    #   resp.entity.events["String"].parameters.id.bindings["String"].property #=> String
-    #   resp.entity.events["String"].parameters.id.collection_binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.id.collection_binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.id.component_name #=> String
-    #   resp.entity.events["String"].parameters.id.concat #=> Array
-    #   resp.entity.events["String"].parameters.id.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.id.condition.else #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.id.condition.field #=> String
-    #   resp.entity.events["String"].parameters.id.condition.operand #=> String
-    #   resp.entity.events["String"].parameters.id.condition.operand_type #=> String
-    #   resp.entity.events["String"].parameters.id.condition.operator #=> String
-    #   resp.entity.events["String"].parameters.id.condition.property #=> String
-    #   resp.entity.events["String"].parameters.id.condition.then #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.id.configured #=> Boolean
-    #   resp.entity.events["String"].parameters.id.default_value #=> String
-    #   resp.entity.events["String"].parameters.id.event #=> String
-    #   resp.entity.events["String"].parameters.id.imported_value #=> String
-    #   resp.entity.events["String"].parameters.id.model #=> String
-    #   resp.entity.events["String"].parameters.id.property #=> String
-    #   resp.entity.events["String"].parameters.id.type #=> String
-    #   resp.entity.events["String"].parameters.id.user_attribute #=> String
-    #   resp.entity.events["String"].parameters.id.value #=> String
-    #   resp.entity.events["String"].parameters.model #=> String
-    #   resp.entity.events["String"].parameters.state.component_name #=> String
-    #   resp.entity.events["String"].parameters.state.property #=> String
-    #   resp.entity.events["String"].parameters.state.set.binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.state.set.binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.state.set.bindings #=> Hash
-    #   resp.entity.events["String"].parameters.state.set.bindings["String"].element #=> String
-    #   resp.entity.events["String"].parameters.state.set.bindings["String"].property #=> String
-    #   resp.entity.events["String"].parameters.state.set.collection_binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.state.set.collection_binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.state.set.component_name #=> String
-    #   resp.entity.events["String"].parameters.state.set.concat #=> Array
-    #   resp.entity.events["String"].parameters.state.set.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.state.set.condition.else #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.state.set.condition.field #=> String
-    #   resp.entity.events["String"].parameters.state.set.condition.operand #=> String
-    #   resp.entity.events["String"].parameters.state.set.condition.operand_type #=> String
-    #   resp.entity.events["String"].parameters.state.set.condition.operator #=> String
-    #   resp.entity.events["String"].parameters.state.set.condition.property #=> String
-    #   resp.entity.events["String"].parameters.state.set.condition.then #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.state.set.configured #=> Boolean
-    #   resp.entity.events["String"].parameters.state.set.default_value #=> String
-    #   resp.entity.events["String"].parameters.state.set.event #=> String
-    #   resp.entity.events["String"].parameters.state.set.imported_value #=> String
-    #   resp.entity.events["String"].parameters.state.set.model #=> String
-    #   resp.entity.events["String"].parameters.state.set.property #=> String
-    #   resp.entity.events["String"].parameters.state.set.type #=> String
-    #   resp.entity.events["String"].parameters.state.set.user_attribute #=> String
-    #   resp.entity.events["String"].parameters.state.set.value #=> String
-    #   resp.entity.events["String"].parameters.target.binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.target.binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.target.bindings #=> Hash
-    #   resp.entity.events["String"].parameters.target.bindings["String"].element #=> String
-    #   resp.entity.events["String"].parameters.target.bindings["String"].property #=> String
-    #   resp.entity.events["String"].parameters.target.collection_binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.target.collection_binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.target.component_name #=> String
-    #   resp.entity.events["String"].parameters.target.concat #=> Array
-    #   resp.entity.events["String"].parameters.target.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.target.condition.else #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.target.condition.field #=> String
-    #   resp.entity.events["String"].parameters.target.condition.operand #=> String
-    #   resp.entity.events["String"].parameters.target.condition.operand_type #=> String
-    #   resp.entity.events["String"].parameters.target.condition.operator #=> String
-    #   resp.entity.events["String"].parameters.target.condition.property #=> String
-    #   resp.entity.events["String"].parameters.target.condition.then #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.target.configured #=> Boolean
-    #   resp.entity.events["String"].parameters.target.default_value #=> String
-    #   resp.entity.events["String"].parameters.target.event #=> String
-    #   resp.entity.events["String"].parameters.target.imported_value #=> String
-    #   resp.entity.events["String"].parameters.target.model #=> String
-    #   resp.entity.events["String"].parameters.target.property #=> String
-    #   resp.entity.events["String"].parameters.target.type #=> String
-    #   resp.entity.events["String"].parameters.target.user_attribute #=> String
-    #   resp.entity.events["String"].parameters.target.value #=> String
-    #   resp.entity.events["String"].parameters.type.binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.type.binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.type.bindings #=> Hash
-    #   resp.entity.events["String"].parameters.type.bindings["String"].element #=> String
-    #   resp.entity.events["String"].parameters.type.bindings["String"].property #=> String
-    #   resp.entity.events["String"].parameters.type.collection_binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.type.collection_binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.type.component_name #=> String
-    #   resp.entity.events["String"].parameters.type.concat #=> Array
-    #   resp.entity.events["String"].parameters.type.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.type.condition.else #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.type.condition.field #=> String
-    #   resp.entity.events["String"].parameters.type.condition.operand #=> String
-    #   resp.entity.events["String"].parameters.type.condition.operand_type #=> String
-    #   resp.entity.events["String"].parameters.type.condition.operator #=> String
-    #   resp.entity.events["String"].parameters.type.condition.property #=> String
-    #   resp.entity.events["String"].parameters.type.condition.then #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.type.configured #=> Boolean
-    #   resp.entity.events["String"].parameters.type.default_value #=> String
-    #   resp.entity.events["String"].parameters.type.event #=> String
-    #   resp.entity.events["String"].parameters.type.imported_value #=> String
-    #   resp.entity.events["String"].parameters.type.model #=> String
-    #   resp.entity.events["String"].parameters.type.property #=> String
-    #   resp.entity.events["String"].parameters.type.type #=> String
-    #   resp.entity.events["String"].parameters.type.user_attribute #=> String
-    #   resp.entity.events["String"].parameters.type.value #=> String
-    #   resp.entity.events["String"].parameters.url.binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.url.binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.url.bindings #=> Hash
-    #   resp.entity.events["String"].parameters.url.bindings["String"].element #=> String
-    #   resp.entity.events["String"].parameters.url.bindings["String"].property #=> String
-    #   resp.entity.events["String"].parameters.url.collection_binding_properties.field #=> String
-    #   resp.entity.events["String"].parameters.url.collection_binding_properties.property #=> String
-    #   resp.entity.events["String"].parameters.url.component_name #=> String
-    #   resp.entity.events["String"].parameters.url.concat #=> Array
-    #   resp.entity.events["String"].parameters.url.concat[0] #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.url.condition.else #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.url.condition.field #=> String
-    #   resp.entity.events["String"].parameters.url.condition.operand #=> String
-    #   resp.entity.events["String"].parameters.url.condition.operand_type #=> String
-    #   resp.entity.events["String"].parameters.url.condition.operator #=> String
-    #   resp.entity.events["String"].parameters.url.condition.property #=> String
-    #   resp.entity.events["String"].parameters.url.condition.then #=> Types::ComponentProperty
-    #   resp.entity.events["String"].parameters.url.configured #=> Boolean
-    #   resp.entity.events["String"].parameters.url.default_value #=> String
-    #   resp.entity.events["String"].parameters.url.event #=> String
-    #   resp.entity.events["String"].parameters.url.imported_value #=> String
-    #   resp.entity.events["String"].parameters.url.model #=> String
-    #   resp.entity.events["String"].parameters.url.property #=> String
-    #   resp.entity.events["String"].parameters.url.type #=> String
-    #   resp.entity.events["String"].parameters.url.user_attribute #=> String
-    #   resp.entity.events["String"].parameters.url.value #=> String
+    #   resp.entity.source_id #=> String
     #   resp.entity.id #=> String
-    #   resp.entity.modified_at #=> Time
     #   resp.entity.name #=> String
-    #   resp.entity.overrides #=> Hash
-    #   resp.entity.overrides["String"] #=> Hash
-    #   resp.entity.overrides["String"]["String"] #=> String
+    #   resp.entity.component_type #=> String
     #   resp.entity.properties #=> Hash
-    #   resp.entity.properties["String"].binding_properties.field #=> String
+    #   resp.entity.properties["String"].value #=> String
     #   resp.entity.properties["String"].binding_properties.property #=> String
+    #   resp.entity.properties["String"].binding_properties.field #=> String
+    #   resp.entity.properties["String"].collection_binding_properties.property #=> String
+    #   resp.entity.properties["String"].collection_binding_properties.field #=> String
+    #   resp.entity.properties["String"].default_value #=> String
+    #   resp.entity.properties["String"].model #=> String
     #   resp.entity.properties["String"].bindings #=> Hash
     #   resp.entity.properties["String"].bindings["String"].element #=> String
     #   resp.entity.properties["String"].bindings["String"].property #=> String
-    #   resp.entity.properties["String"].collection_binding_properties.field #=> String
-    #   resp.entity.properties["String"].collection_binding_properties.property #=> String
-    #   resp.entity.properties["String"].component_name #=> String
+    #   resp.entity.properties["String"].event #=> String
+    #   resp.entity.properties["String"].user_attribute #=> String
     #   resp.entity.properties["String"].concat #=> Array
     #   resp.entity.properties["String"].concat[0] #=> Types::ComponentProperty
-    #   resp.entity.properties["String"].condition.else #=> Types::ComponentProperty
-    #   resp.entity.properties["String"].condition.field #=> String
-    #   resp.entity.properties["String"].condition.operand #=> String
-    #   resp.entity.properties["String"].condition.operand_type #=> String
-    #   resp.entity.properties["String"].condition.operator #=> String
     #   resp.entity.properties["String"].condition.property #=> String
+    #   resp.entity.properties["String"].condition.field #=> String
+    #   resp.entity.properties["String"].condition.operator #=> String
+    #   resp.entity.properties["String"].condition.operand #=> String
     #   resp.entity.properties["String"].condition.then #=> Types::ComponentProperty
+    #   resp.entity.properties["String"].condition.else #=> Types::ComponentProperty
+    #   resp.entity.properties["String"].condition.operand_type #=> String
     #   resp.entity.properties["String"].configured #=> Boolean
-    #   resp.entity.properties["String"].default_value #=> String
-    #   resp.entity.properties["String"].event #=> String
-    #   resp.entity.properties["String"].imported_value #=> String
-    #   resp.entity.properties["String"].model #=> String
-    #   resp.entity.properties["String"].property #=> String
     #   resp.entity.properties["String"].type #=> String
-    #   resp.entity.properties["String"].user_attribute #=> String
-    #   resp.entity.properties["String"].value #=> String
-    #   resp.entity.schema_version #=> String
-    #   resp.entity.source_id #=> String
-    #   resp.entity.tags #=> Hash
-    #   resp.entity.tags["TagKey"] #=> String
+    #   resp.entity.properties["String"].imported_value #=> String
+    #   resp.entity.properties["String"].component_name #=> String
+    #   resp.entity.properties["String"].property #=> String
+    #   resp.entity.children #=> Array
+    #   resp.entity.children[0].component_type #=> String
+    #   resp.entity.children[0].name #=> String
+    #   resp.entity.children[0].properties #=> Hash
+    #   resp.entity.children[0].properties["String"].value #=> String
+    #   resp.entity.children[0].properties["String"].binding_properties.property #=> String
+    #   resp.entity.children[0].properties["String"].binding_properties.field #=> String
+    #   resp.entity.children[0].properties["String"].collection_binding_properties.property #=> String
+    #   resp.entity.children[0].properties["String"].collection_binding_properties.field #=> String
+    #   resp.entity.children[0].properties["String"].default_value #=> String
+    #   resp.entity.children[0].properties["String"].model #=> String
+    #   resp.entity.children[0].properties["String"].bindings #=> Hash
+    #   resp.entity.children[0].properties["String"].bindings["String"].element #=> String
+    #   resp.entity.children[0].properties["String"].bindings["String"].property #=> String
+    #   resp.entity.children[0].properties["String"].event #=> String
+    #   resp.entity.children[0].properties["String"].user_attribute #=> String
+    #   resp.entity.children[0].properties["String"].concat #=> Array
+    #   resp.entity.children[0].properties["String"].concat[0] #=> Types::ComponentProperty
+    #   resp.entity.children[0].properties["String"].condition.property #=> String
+    #   resp.entity.children[0].properties["String"].condition.field #=> String
+    #   resp.entity.children[0].properties["String"].condition.operator #=> String
+    #   resp.entity.children[0].properties["String"].condition.operand #=> String
+    #   resp.entity.children[0].properties["String"].condition.then #=> Types::ComponentProperty
+    #   resp.entity.children[0].properties["String"].condition.else #=> Types::ComponentProperty
+    #   resp.entity.children[0].properties["String"].condition.operand_type #=> String
+    #   resp.entity.children[0].properties["String"].configured #=> Boolean
+    #   resp.entity.children[0].properties["String"].type #=> String
+    #   resp.entity.children[0].properties["String"].imported_value #=> String
+    #   resp.entity.children[0].properties["String"].component_name #=> String
+    #   resp.entity.children[0].properties["String"].property #=> String
+    #   resp.entity.children[0].children #=> Types::ComponentChildList
+    #   resp.entity.children[0].events #=> Hash
+    #   resp.entity.children[0].events["String"].action #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.value #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.collection_binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.collection_binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.default_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.model #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.bindings #=> Hash
+    #   resp.entity.children[0].events["String"].parameters.type.bindings["String"].element #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.bindings["String"].property #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.event #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.user_attribute #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.concat #=> Array
+    #   resp.entity.children[0].events["String"].parameters.type.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.type.condition.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.condition.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.condition.operator #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.condition.operand #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.condition.then #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.type.condition.else #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.type.condition.operand_type #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.configured #=> Boolean
+    #   resp.entity.children[0].events["String"].parameters.type.type #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.imported_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.component_name #=> String
+    #   resp.entity.children[0].events["String"].parameters.type.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.value #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.collection_binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.collection_binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.default_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.model #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.bindings #=> Hash
+    #   resp.entity.children[0].events["String"].parameters.url.bindings["String"].element #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.bindings["String"].property #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.event #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.user_attribute #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.concat #=> Array
+    #   resp.entity.children[0].events["String"].parameters.url.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.url.condition.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.condition.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.condition.operator #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.condition.operand #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.condition.then #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.url.condition.else #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.url.condition.operand_type #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.configured #=> Boolean
+    #   resp.entity.children[0].events["String"].parameters.url.type #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.imported_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.component_name #=> String
+    #   resp.entity.children[0].events["String"].parameters.url.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.value #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.collection_binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.collection_binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.default_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.model #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.bindings #=> Hash
+    #   resp.entity.children[0].events["String"].parameters.anchor.bindings["String"].element #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.bindings["String"].property #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.event #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.user_attribute #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.concat #=> Array
+    #   resp.entity.children[0].events["String"].parameters.anchor.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.anchor.condition.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.condition.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.condition.operator #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.condition.operand #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.condition.then #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.anchor.condition.else #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.anchor.condition.operand_type #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.configured #=> Boolean
+    #   resp.entity.children[0].events["String"].parameters.anchor.type #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.imported_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.component_name #=> String
+    #   resp.entity.children[0].events["String"].parameters.anchor.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.value #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.collection_binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.collection_binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.default_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.model #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.bindings #=> Hash
+    #   resp.entity.children[0].events["String"].parameters.target.bindings["String"].element #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.bindings["String"].property #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.event #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.user_attribute #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.concat #=> Array
+    #   resp.entity.children[0].events["String"].parameters.target.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.target.condition.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.condition.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.condition.operator #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.condition.operand #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.condition.then #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.target.condition.else #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.target.condition.operand_type #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.configured #=> Boolean
+    #   resp.entity.children[0].events["String"].parameters.target.type #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.imported_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.component_name #=> String
+    #   resp.entity.children[0].events["String"].parameters.target.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.value #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.collection_binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.collection_binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.default_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.model #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.bindings #=> Hash
+    #   resp.entity.children[0].events["String"].parameters.global.bindings["String"].element #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.bindings["String"].property #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.event #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.user_attribute #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.concat #=> Array
+    #   resp.entity.children[0].events["String"].parameters.global.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.global.condition.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.condition.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.condition.operator #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.condition.operand #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.condition.then #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.global.condition.else #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.global.condition.operand_type #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.configured #=> Boolean
+    #   resp.entity.children[0].events["String"].parameters.global.type #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.imported_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.component_name #=> String
+    #   resp.entity.children[0].events["String"].parameters.global.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.model #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.value #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.collection_binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.collection_binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.default_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.model #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.bindings #=> Hash
+    #   resp.entity.children[0].events["String"].parameters.id.bindings["String"].element #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.bindings["String"].property #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.event #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.user_attribute #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.concat #=> Array
+    #   resp.entity.children[0].events["String"].parameters.id.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.id.condition.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.condition.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.condition.operator #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.condition.operand #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.condition.then #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.id.condition.else #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.id.condition.operand_type #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.configured #=> Boolean
+    #   resp.entity.children[0].events["String"].parameters.id.type #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.imported_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.component_name #=> String
+    #   resp.entity.children[0].events["String"].parameters.id.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields #=> Hash
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].value #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].collection_binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].collection_binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].default_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].model #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].bindings #=> Hash
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].bindings["String"].element #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].bindings["String"].property #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].event #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].user_attribute #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].concat #=> Array
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].concat[0] #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.operator #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.operand #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.then #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.else #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].condition.operand_type #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].configured #=> Boolean
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].type #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].imported_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].component_name #=> String
+    #   resp.entity.children[0].events["String"].parameters.fields["String"].property #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.component_name #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.value #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.collection_binding_properties.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.collection_binding_properties.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.default_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.model #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.bindings #=> Hash
+    #   resp.entity.children[0].events["String"].parameters.state.set.bindings["String"].element #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.bindings["String"].property #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.event #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.user_attribute #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.concat #=> Array
+    #   resp.entity.children[0].events["String"].parameters.state.set.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.state.set.condition.property #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.condition.field #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.condition.operator #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.condition.operand #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.condition.then #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.state.set.condition.else #=> Types::ComponentProperty
+    #   resp.entity.children[0].events["String"].parameters.state.set.condition.operand_type #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.configured #=> Boolean
+    #   resp.entity.children[0].events["String"].parameters.state.set.type #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.imported_value #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.component_name #=> String
+    #   resp.entity.children[0].events["String"].parameters.state.set.property #=> String
+    #   resp.entity.children[0].events["String"].binding_event #=> String
+    #   resp.entity.children[0].source_id #=> String
     #   resp.entity.variants #=> Array
+    #   resp.entity.variants[0].variant_values #=> Hash
+    #   resp.entity.variants[0].variant_values["String"] #=> String
     #   resp.entity.variants[0].overrides #=> Hash
     #   resp.entity.variants[0].overrides["String"] #=> Hash
     #   resp.entity.variants[0].overrides["String"]["String"] #=> String
-    #   resp.entity.variants[0].variant_values #=> Hash
-    #   resp.entity.variants[0].variant_values["String"] #=> String
+    #   resp.entity.overrides #=> Hash
+    #   resp.entity.overrides["String"] #=> Hash
+    #   resp.entity.overrides["String"]["String"] #=> String
+    #   resp.entity.binding_properties #=> Hash
+    #   resp.entity.binding_properties["String"].type #=> String
+    #   resp.entity.binding_properties["String"].binding_properties.model #=> String
+    #   resp.entity.binding_properties["String"].binding_properties.field #=> String
+    #   resp.entity.binding_properties["String"].binding_properties.predicates #=> Array
+    #   resp.entity.binding_properties["String"].binding_properties.predicates[0].or #=> Types::PredicateList
+    #   resp.entity.binding_properties["String"].binding_properties.predicates[0].and #=> Types::PredicateList
+    #   resp.entity.binding_properties["String"].binding_properties.predicates[0].field #=> String
+    #   resp.entity.binding_properties["String"].binding_properties.predicates[0].operator #=> String
+    #   resp.entity.binding_properties["String"].binding_properties.predicates[0].operand #=> String
+    #   resp.entity.binding_properties["String"].binding_properties.predicates[0].operand_type #=> String
+    #   resp.entity.binding_properties["String"].binding_properties.user_attribute #=> String
+    #   resp.entity.binding_properties["String"].binding_properties.bucket #=> String
+    #   resp.entity.binding_properties["String"].binding_properties.key #=> String
+    #   resp.entity.binding_properties["String"].binding_properties.default_value #=> String
+    #   resp.entity.binding_properties["String"].binding_properties.slot_name #=> String
+    #   resp.entity.binding_properties["String"].default_value #=> String
+    #   resp.entity.collection_properties #=> Hash
+    #   resp.entity.collection_properties["String"].model #=> String
+    #   resp.entity.collection_properties["String"].sort #=> Array
+    #   resp.entity.collection_properties["String"].sort[0].field #=> String
+    #   resp.entity.collection_properties["String"].sort[0].direction #=> String, one of "ASC", "DESC"
+    #   resp.entity.collection_properties["String"].predicate.or #=> Array
+    #   resp.entity.collection_properties["String"].predicate.or[0] #=> Types::Predicate
+    #   resp.entity.collection_properties["String"].predicate.and #=> Array
+    #   resp.entity.collection_properties["String"].predicate.and[0] #=> Types::Predicate
+    #   resp.entity.collection_properties["String"].predicate.field #=> String
+    #   resp.entity.collection_properties["String"].predicate.operator #=> String
+    #   resp.entity.collection_properties["String"].predicate.operand #=> String
+    #   resp.entity.collection_properties["String"].predicate.operand_type #=> String
+    #   resp.entity.collection_properties["String"].identifiers #=> Array
+    #   resp.entity.collection_properties["String"].identifiers[0] #=> String
+    #   resp.entity.created_at #=> Time
+    #   resp.entity.modified_at #=> Time
+    #   resp.entity.tags #=> Hash
+    #   resp.entity.tags["TagKey"] #=> String
+    #   resp.entity.events #=> Hash
+    #   resp.entity.events["String"].action #=> String
+    #   resp.entity.events["String"].parameters.type.value #=> String
+    #   resp.entity.events["String"].parameters.type.binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.type.binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.type.collection_binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.type.collection_binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.type.default_value #=> String
+    #   resp.entity.events["String"].parameters.type.model #=> String
+    #   resp.entity.events["String"].parameters.type.bindings #=> Hash
+    #   resp.entity.events["String"].parameters.type.bindings["String"].element #=> String
+    #   resp.entity.events["String"].parameters.type.bindings["String"].property #=> String
+    #   resp.entity.events["String"].parameters.type.event #=> String
+    #   resp.entity.events["String"].parameters.type.user_attribute #=> String
+    #   resp.entity.events["String"].parameters.type.concat #=> Array
+    #   resp.entity.events["String"].parameters.type.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.type.condition.property #=> String
+    #   resp.entity.events["String"].parameters.type.condition.field #=> String
+    #   resp.entity.events["String"].parameters.type.condition.operator #=> String
+    #   resp.entity.events["String"].parameters.type.condition.operand #=> String
+    #   resp.entity.events["String"].parameters.type.condition.then #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.type.condition.else #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.type.condition.operand_type #=> String
+    #   resp.entity.events["String"].parameters.type.configured #=> Boolean
+    #   resp.entity.events["String"].parameters.type.type #=> String
+    #   resp.entity.events["String"].parameters.type.imported_value #=> String
+    #   resp.entity.events["String"].parameters.type.component_name #=> String
+    #   resp.entity.events["String"].parameters.type.property #=> String
+    #   resp.entity.events["String"].parameters.url.value #=> String
+    #   resp.entity.events["String"].parameters.url.binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.url.binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.url.collection_binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.url.collection_binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.url.default_value #=> String
+    #   resp.entity.events["String"].parameters.url.model #=> String
+    #   resp.entity.events["String"].parameters.url.bindings #=> Hash
+    #   resp.entity.events["String"].parameters.url.bindings["String"].element #=> String
+    #   resp.entity.events["String"].parameters.url.bindings["String"].property #=> String
+    #   resp.entity.events["String"].parameters.url.event #=> String
+    #   resp.entity.events["String"].parameters.url.user_attribute #=> String
+    #   resp.entity.events["String"].parameters.url.concat #=> Array
+    #   resp.entity.events["String"].parameters.url.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.url.condition.property #=> String
+    #   resp.entity.events["String"].parameters.url.condition.field #=> String
+    #   resp.entity.events["String"].parameters.url.condition.operator #=> String
+    #   resp.entity.events["String"].parameters.url.condition.operand #=> String
+    #   resp.entity.events["String"].parameters.url.condition.then #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.url.condition.else #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.url.condition.operand_type #=> String
+    #   resp.entity.events["String"].parameters.url.configured #=> Boolean
+    #   resp.entity.events["String"].parameters.url.type #=> String
+    #   resp.entity.events["String"].parameters.url.imported_value #=> String
+    #   resp.entity.events["String"].parameters.url.component_name #=> String
+    #   resp.entity.events["String"].parameters.url.property #=> String
+    #   resp.entity.events["String"].parameters.anchor.value #=> String
+    #   resp.entity.events["String"].parameters.anchor.binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.anchor.binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.anchor.collection_binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.anchor.collection_binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.anchor.default_value #=> String
+    #   resp.entity.events["String"].parameters.anchor.model #=> String
+    #   resp.entity.events["String"].parameters.anchor.bindings #=> Hash
+    #   resp.entity.events["String"].parameters.anchor.bindings["String"].element #=> String
+    #   resp.entity.events["String"].parameters.anchor.bindings["String"].property #=> String
+    #   resp.entity.events["String"].parameters.anchor.event #=> String
+    #   resp.entity.events["String"].parameters.anchor.user_attribute #=> String
+    #   resp.entity.events["String"].parameters.anchor.concat #=> Array
+    #   resp.entity.events["String"].parameters.anchor.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.anchor.condition.property #=> String
+    #   resp.entity.events["String"].parameters.anchor.condition.field #=> String
+    #   resp.entity.events["String"].parameters.anchor.condition.operator #=> String
+    #   resp.entity.events["String"].parameters.anchor.condition.operand #=> String
+    #   resp.entity.events["String"].parameters.anchor.condition.then #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.anchor.condition.else #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.anchor.condition.operand_type #=> String
+    #   resp.entity.events["String"].parameters.anchor.configured #=> Boolean
+    #   resp.entity.events["String"].parameters.anchor.type #=> String
+    #   resp.entity.events["String"].parameters.anchor.imported_value #=> String
+    #   resp.entity.events["String"].parameters.anchor.component_name #=> String
+    #   resp.entity.events["String"].parameters.anchor.property #=> String
+    #   resp.entity.events["String"].parameters.target.value #=> String
+    #   resp.entity.events["String"].parameters.target.binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.target.binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.target.collection_binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.target.collection_binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.target.default_value #=> String
+    #   resp.entity.events["String"].parameters.target.model #=> String
+    #   resp.entity.events["String"].parameters.target.bindings #=> Hash
+    #   resp.entity.events["String"].parameters.target.bindings["String"].element #=> String
+    #   resp.entity.events["String"].parameters.target.bindings["String"].property #=> String
+    #   resp.entity.events["String"].parameters.target.event #=> String
+    #   resp.entity.events["String"].parameters.target.user_attribute #=> String
+    #   resp.entity.events["String"].parameters.target.concat #=> Array
+    #   resp.entity.events["String"].parameters.target.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.target.condition.property #=> String
+    #   resp.entity.events["String"].parameters.target.condition.field #=> String
+    #   resp.entity.events["String"].parameters.target.condition.operator #=> String
+    #   resp.entity.events["String"].parameters.target.condition.operand #=> String
+    #   resp.entity.events["String"].parameters.target.condition.then #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.target.condition.else #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.target.condition.operand_type #=> String
+    #   resp.entity.events["String"].parameters.target.configured #=> Boolean
+    #   resp.entity.events["String"].parameters.target.type #=> String
+    #   resp.entity.events["String"].parameters.target.imported_value #=> String
+    #   resp.entity.events["String"].parameters.target.component_name #=> String
+    #   resp.entity.events["String"].parameters.target.property #=> String
+    #   resp.entity.events["String"].parameters.global.value #=> String
+    #   resp.entity.events["String"].parameters.global.binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.global.binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.global.collection_binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.global.collection_binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.global.default_value #=> String
+    #   resp.entity.events["String"].parameters.global.model #=> String
+    #   resp.entity.events["String"].parameters.global.bindings #=> Hash
+    #   resp.entity.events["String"].parameters.global.bindings["String"].element #=> String
+    #   resp.entity.events["String"].parameters.global.bindings["String"].property #=> String
+    #   resp.entity.events["String"].parameters.global.event #=> String
+    #   resp.entity.events["String"].parameters.global.user_attribute #=> String
+    #   resp.entity.events["String"].parameters.global.concat #=> Array
+    #   resp.entity.events["String"].parameters.global.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.global.condition.property #=> String
+    #   resp.entity.events["String"].parameters.global.condition.field #=> String
+    #   resp.entity.events["String"].parameters.global.condition.operator #=> String
+    #   resp.entity.events["String"].parameters.global.condition.operand #=> String
+    #   resp.entity.events["String"].parameters.global.condition.then #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.global.condition.else #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.global.condition.operand_type #=> String
+    #   resp.entity.events["String"].parameters.global.configured #=> Boolean
+    #   resp.entity.events["String"].parameters.global.type #=> String
+    #   resp.entity.events["String"].parameters.global.imported_value #=> String
+    #   resp.entity.events["String"].parameters.global.component_name #=> String
+    #   resp.entity.events["String"].parameters.global.property #=> String
+    #   resp.entity.events["String"].parameters.model #=> String
+    #   resp.entity.events["String"].parameters.id.value #=> String
+    #   resp.entity.events["String"].parameters.id.binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.id.binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.id.collection_binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.id.collection_binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.id.default_value #=> String
+    #   resp.entity.events["String"].parameters.id.model #=> String
+    #   resp.entity.events["String"].parameters.id.bindings #=> Hash
+    #   resp.entity.events["String"].parameters.id.bindings["String"].element #=> String
+    #   resp.entity.events["String"].parameters.id.bindings["String"].property #=> String
+    #   resp.entity.events["String"].parameters.id.event #=> String
+    #   resp.entity.events["String"].parameters.id.user_attribute #=> String
+    #   resp.entity.events["String"].parameters.id.concat #=> Array
+    #   resp.entity.events["String"].parameters.id.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.id.condition.property #=> String
+    #   resp.entity.events["String"].parameters.id.condition.field #=> String
+    #   resp.entity.events["String"].parameters.id.condition.operator #=> String
+    #   resp.entity.events["String"].parameters.id.condition.operand #=> String
+    #   resp.entity.events["String"].parameters.id.condition.then #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.id.condition.else #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.id.condition.operand_type #=> String
+    #   resp.entity.events["String"].parameters.id.configured #=> Boolean
+    #   resp.entity.events["String"].parameters.id.type #=> String
+    #   resp.entity.events["String"].parameters.id.imported_value #=> String
+    #   resp.entity.events["String"].parameters.id.component_name #=> String
+    #   resp.entity.events["String"].parameters.id.property #=> String
+    #   resp.entity.events["String"].parameters.fields #=> Hash
+    #   resp.entity.events["String"].parameters.fields["String"].value #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].collection_binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].collection_binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].default_value #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].model #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].bindings #=> Hash
+    #   resp.entity.events["String"].parameters.fields["String"].bindings["String"].element #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].bindings["String"].property #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].event #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].user_attribute #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].concat #=> Array
+    #   resp.entity.events["String"].parameters.fields["String"].concat[0] #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.fields["String"].condition.property #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].condition.field #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].condition.operator #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].condition.operand #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].condition.then #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.fields["String"].condition.else #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.fields["String"].condition.operand_type #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].configured #=> Boolean
+    #   resp.entity.events["String"].parameters.fields["String"].type #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].imported_value #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].component_name #=> String
+    #   resp.entity.events["String"].parameters.fields["String"].property #=> String
+    #   resp.entity.events["String"].parameters.state.component_name #=> String
+    #   resp.entity.events["String"].parameters.state.property #=> String
+    #   resp.entity.events["String"].parameters.state.set.value #=> String
+    #   resp.entity.events["String"].parameters.state.set.binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.state.set.binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.state.set.collection_binding_properties.property #=> String
+    #   resp.entity.events["String"].parameters.state.set.collection_binding_properties.field #=> String
+    #   resp.entity.events["String"].parameters.state.set.default_value #=> String
+    #   resp.entity.events["String"].parameters.state.set.model #=> String
+    #   resp.entity.events["String"].parameters.state.set.bindings #=> Hash
+    #   resp.entity.events["String"].parameters.state.set.bindings["String"].element #=> String
+    #   resp.entity.events["String"].parameters.state.set.bindings["String"].property #=> String
+    #   resp.entity.events["String"].parameters.state.set.event #=> String
+    #   resp.entity.events["String"].parameters.state.set.user_attribute #=> String
+    #   resp.entity.events["String"].parameters.state.set.concat #=> Array
+    #   resp.entity.events["String"].parameters.state.set.concat[0] #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.state.set.condition.property #=> String
+    #   resp.entity.events["String"].parameters.state.set.condition.field #=> String
+    #   resp.entity.events["String"].parameters.state.set.condition.operator #=> String
+    #   resp.entity.events["String"].parameters.state.set.condition.operand #=> String
+    #   resp.entity.events["String"].parameters.state.set.condition.then #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.state.set.condition.else #=> Types::ComponentProperty
+    #   resp.entity.events["String"].parameters.state.set.condition.operand_type #=> String
+    #   resp.entity.events["String"].parameters.state.set.configured #=> Boolean
+    #   resp.entity.events["String"].parameters.state.set.type #=> String
+    #   resp.entity.events["String"].parameters.state.set.imported_value #=> String
+    #   resp.entity.events["String"].parameters.state.set.component_name #=> String
+    #   resp.entity.events["String"].parameters.state.set.property #=> String
+    #   resp.entity.events["String"].binding_event #=> String
+    #   resp.entity.schema_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/UpdateComponent AWS API Documentation
     #
@@ -5547,17 +5657,17 @@ module Aws::AmplifyUIBuilder
     # @option params [required, String] :app_id
     #   The unique ID for the Amplify app.
     #
-    # @option params [String] :client_token
-    #   The unique client token.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
-    #
     # @option params [required, String] :environment_name
     #   The name of the backend environment that is part of the Amplify app.
     #
     # @option params [required, String] :id
     #   The unique ID for the form.
+    #
+    # @option params [String] :client_token
+    #   The unique client token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @option params [required, Types::UpdateFormData] :updated_form
     #   The request accepts the following data in JSON format.
@@ -5570,105 +5680,95 @@ module Aws::AmplifyUIBuilder
     #
     #   resp = client.update_form({
     #     app_id: "String", # required
-    #     client_token: "String",
     #     environment_name: "String", # required
     #     id: "Uuid", # required
+    #     client_token: "String",
     #     updated_form: { # required
-    #       cta: {
-    #         cancel: {
-    #           children: "String",
-    #           excluded: false,
-    #           position: {
-    #             below: "String",
-    #             fixed: "first", # accepts first
-    #             right_of: "String",
-    #           },
-    #         },
-    #         clear: {
-    #           children: "String",
-    #           excluded: false,
-    #           position: {
-    #             below: "String",
-    #             fixed: "first", # accepts first
-    #             right_of: "String",
-    #           },
-    #         },
-    #         position: "top", # accepts top, bottom, top_and_bottom
-    #         submit: {
-    #           children: "String",
-    #           excluded: false,
-    #           position: {
-    #             below: "String",
-    #             fixed: "first", # accepts first
-    #             right_of: "String",
-    #           },
-    #         },
-    #       },
+    #       name: "FormName",
     #       data_type: {
     #         data_source_type: "DataStore", # required, accepts DataStore, Custom
     #         data_type_name: "String", # required
     #       },
+    #       form_action_type: "create", # accepts create, update
     #       fields: {
     #         "String" => {
+    #           label: "String",
+    #           position: {
+    #             fixed: "first", # accepts first
+    #             right_of: "String",
+    #             below: "String",
+    #           },
     #           excluded: false,
     #           input_type: {
-    #             default_checked: false,
-    #             default_country_code: "String",
+    #             type: "String", # required
+    #             required: false,
+    #             read_only: false,
+    #             placeholder: "String",
     #             default_value: "String",
     #             descriptive_text: "String",
-    #             is_array: false,
-    #             max_value: 1.0,
-    #             min_value: 1.0,
-    #             name: "String",
-    #             placeholder: "String",
-    #             read_only: false,
-    #             required: false,
-    #             step: 1.0,
-    #             type: "String", # required
-    #             value: "String",
+    #             default_checked: false,
+    #             default_country_code: "String",
     #             value_mappings: {
     #               values: [ # required
     #                 {
     #                   display_value: {
     #                     value: "String",
+    #                     binding_properties: {
+    #                       property: "String", # required
+    #                       field: "String",
+    #                     },
+    #                     concat: [
+    #                       {
+    #                         # recursive FormInputValueProperty
+    #                       },
+    #                     ],
     #                   },
     #                   value: { # required
     #                     value: "String",
+    #                     binding_properties: {
+    #                       property: "String", # required
+    #                       field: "String",
+    #                     },
+    #                     concat: [
+    #                       {
+    #                         # recursive FormInputValueProperty
+    #                       },
+    #                     ],
     #                   },
     #                 },
     #               ],
+    #               binding_properties: {
+    #                 "String" => {
+    #                   type: "String",
+    #                   binding_properties: {
+    #                     model: "String",
+    #                   },
+    #                 },
+    #               },
     #             },
-    #           },
-    #           label: "String",
-    #           position: {
-    #             below: "String",
-    #             fixed: "first", # accepts first
-    #             right_of: "String",
+    #             name: "String",
+    #             min_value: 1.0,
+    #             max_value: 1.0,
+    #             step: 1.0,
+    #             value: "String",
+    #             is_array: false,
+    #             file_uploader_config: {
+    #               access_level: "public", # required, accepts public, protected, private
+    #               accepted_file_types: ["String"], # required
+    #               show_thumbnails: false,
+    #               is_resumable: false,
+    #               max_file_count: 1,
+    #               max_size: 1,
+    #             },
     #           },
     #           validations: [
     #             {
-    #               num_values: [1],
-    #               str_values: ["String"],
     #               type: "String", # required
+    #               str_values: ["String"],
+    #               num_values: [1],
     #               validation_message: "String",
     #             },
     #           ],
-    #         },
-    #       },
-    #       form_action_type: "create", # accepts create, update
-    #       name: "FormName",
-    #       schema_version: "String",
-    #       sectional_elements: {
-    #         "String" => {
-    #           level: 1,
-    #           orientation: "String",
-    #           position: {
-    #             below: "String",
-    #             fixed: "first", # accepts first
-    #             right_of: "String",
-    #           },
-    #           text: "String",
-    #           type: "String", # required
     #         },
     #       },
     #       style: {
@@ -5676,90 +5776,156 @@ module Aws::AmplifyUIBuilder
     #           token_reference: "String",
     #           value: "String",
     #         },
-    #         outer_padding: {
-    #           token_reference: "String",
-    #           value: "String",
-    #         },
     #         vertical_gap: {
     #           token_reference: "String",
     #           value: "String",
     #         },
+    #         outer_padding: {
+    #           token_reference: "String",
+    #           value: "String",
+    #         },
     #       },
+    #       sectional_elements: {
+    #         "String" => {
+    #           type: "String", # required
+    #           position: {
+    #             fixed: "first", # accepts first
+    #             right_of: "String",
+    #             below: "String",
+    #           },
+    #           text: "String",
+    #           level: 1,
+    #           orientation: "String",
+    #           excluded: false,
+    #         },
+    #       },
+    #       schema_version: "String",
+    #       cta: {
+    #         position: "top", # accepts top, bottom, top_and_bottom
+    #         clear: {
+    #           excluded: false,
+    #           children: "String",
+    #           position: {
+    #             fixed: "first", # accepts first
+    #             right_of: "String",
+    #             below: "String",
+    #           },
+    #         },
+    #         cancel: {
+    #           excluded: false,
+    #           children: "String",
+    #           position: {
+    #             fixed: "first", # accepts first
+    #             right_of: "String",
+    #             below: "String",
+    #           },
+    #         },
+    #         submit: {
+    #           excluded: false,
+    #           children: "String",
+    #           position: {
+    #             fixed: "first", # accepts first
+    #             right_of: "String",
+    #             below: "String",
+    #           },
+    #         },
+    #       },
+    #       label_decorator: "required", # accepts required, optional, none
     #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.entity.app_id #=> String
-    #   resp.entity.cta.cancel.children #=> String
-    #   resp.entity.cta.cancel.excluded #=> Boolean
-    #   resp.entity.cta.cancel.position.below #=> String
-    #   resp.entity.cta.cancel.position.fixed #=> String, one of "first"
-    #   resp.entity.cta.cancel.position.right_of #=> String
-    #   resp.entity.cta.clear.children #=> String
-    #   resp.entity.cta.clear.excluded #=> Boolean
-    #   resp.entity.cta.clear.position.below #=> String
-    #   resp.entity.cta.clear.position.fixed #=> String, one of "first"
-    #   resp.entity.cta.clear.position.right_of #=> String
-    #   resp.entity.cta.position #=> String, one of "top", "bottom", "top_and_bottom"
-    #   resp.entity.cta.submit.children #=> String
-    #   resp.entity.cta.submit.excluded #=> Boolean
-    #   resp.entity.cta.submit.position.below #=> String
-    #   resp.entity.cta.submit.position.fixed #=> String, one of "first"
-    #   resp.entity.cta.submit.position.right_of #=> String
-    #   resp.entity.data_type.data_source_type #=> String, one of "DataStore", "Custom"
-    #   resp.entity.data_type.data_type_name #=> String
     #   resp.entity.environment_name #=> String
-    #   resp.entity.fields #=> Hash
-    #   resp.entity.fields["String"].excluded #=> Boolean
-    #   resp.entity.fields["String"].input_type.default_checked #=> Boolean
-    #   resp.entity.fields["String"].input_type.default_country_code #=> String
-    #   resp.entity.fields["String"].input_type.default_value #=> String
-    #   resp.entity.fields["String"].input_type.descriptive_text #=> String
-    #   resp.entity.fields["String"].input_type.is_array #=> Boolean
-    #   resp.entity.fields["String"].input_type.max_value #=> Float
-    #   resp.entity.fields["String"].input_type.min_value #=> Float
-    #   resp.entity.fields["String"].input_type.name #=> String
-    #   resp.entity.fields["String"].input_type.placeholder #=> String
-    #   resp.entity.fields["String"].input_type.read_only #=> Boolean
-    #   resp.entity.fields["String"].input_type.required #=> Boolean
-    #   resp.entity.fields["String"].input_type.step #=> Float
-    #   resp.entity.fields["String"].input_type.type #=> String
-    #   resp.entity.fields["String"].input_type.value #=> String
-    #   resp.entity.fields["String"].input_type.value_mappings.values #=> Array
-    #   resp.entity.fields["String"].input_type.value_mappings.values[0].display_value.value #=> String
-    #   resp.entity.fields["String"].input_type.value_mappings.values[0].value.value #=> String
-    #   resp.entity.fields["String"].label #=> String
-    #   resp.entity.fields["String"].position.below #=> String
-    #   resp.entity.fields["String"].position.fixed #=> String, one of "first"
-    #   resp.entity.fields["String"].position.right_of #=> String
-    #   resp.entity.fields["String"].validations #=> Array
-    #   resp.entity.fields["String"].validations[0].num_values #=> Array
-    #   resp.entity.fields["String"].validations[0].num_values[0] #=> Integer
-    #   resp.entity.fields["String"].validations[0].str_values #=> Array
-    #   resp.entity.fields["String"].validations[0].str_values[0] #=> String
-    #   resp.entity.fields["String"].validations[0].type #=> String
-    #   resp.entity.fields["String"].validations[0].validation_message #=> String
-    #   resp.entity.form_action_type #=> String, one of "create", "update"
     #   resp.entity.id #=> String
     #   resp.entity.name #=> String
-    #   resp.entity.schema_version #=> String
-    #   resp.entity.sectional_elements #=> Hash
-    #   resp.entity.sectional_elements["String"].level #=> Integer
-    #   resp.entity.sectional_elements["String"].orientation #=> String
-    #   resp.entity.sectional_elements["String"].position.below #=> String
-    #   resp.entity.sectional_elements["String"].position.fixed #=> String, one of "first"
-    #   resp.entity.sectional_elements["String"].position.right_of #=> String
-    #   resp.entity.sectional_elements["String"].text #=> String
-    #   resp.entity.sectional_elements["String"].type #=> String
+    #   resp.entity.form_action_type #=> String, one of "create", "update"
     #   resp.entity.style.horizontal_gap.token_reference #=> String
     #   resp.entity.style.horizontal_gap.value #=> String
-    #   resp.entity.style.outer_padding.token_reference #=> String
-    #   resp.entity.style.outer_padding.value #=> String
     #   resp.entity.style.vertical_gap.token_reference #=> String
     #   resp.entity.style.vertical_gap.value #=> String
+    #   resp.entity.style.outer_padding.token_reference #=> String
+    #   resp.entity.style.outer_padding.value #=> String
+    #   resp.entity.data_type.data_source_type #=> String, one of "DataStore", "Custom"
+    #   resp.entity.data_type.data_type_name #=> String
+    #   resp.entity.fields #=> Hash
+    #   resp.entity.fields["String"].label #=> String
+    #   resp.entity.fields["String"].position.fixed #=> String, one of "first"
+    #   resp.entity.fields["String"].position.right_of #=> String
+    #   resp.entity.fields["String"].position.below #=> String
+    #   resp.entity.fields["String"].excluded #=> Boolean
+    #   resp.entity.fields["String"].input_type.type #=> String
+    #   resp.entity.fields["String"].input_type.required #=> Boolean
+    #   resp.entity.fields["String"].input_type.read_only #=> Boolean
+    #   resp.entity.fields["String"].input_type.placeholder #=> String
+    #   resp.entity.fields["String"].input_type.default_value #=> String
+    #   resp.entity.fields["String"].input_type.descriptive_text #=> String
+    #   resp.entity.fields["String"].input_type.default_checked #=> Boolean
+    #   resp.entity.fields["String"].input_type.default_country_code #=> String
+    #   resp.entity.fields["String"].input_type.value_mappings.values #=> Array
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].display_value.value #=> String
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].display_value.binding_properties.property #=> String
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].display_value.binding_properties.field #=> String
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].display_value.concat #=> Array
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].display_value.concat[0] #=> Types::FormInputValueProperty
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].value.value #=> String
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].value.binding_properties.property #=> String
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].value.binding_properties.field #=> String
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].value.concat #=> Array
+    #   resp.entity.fields["String"].input_type.value_mappings.values[0].value.concat[0] #=> Types::FormInputValueProperty
+    #   resp.entity.fields["String"].input_type.value_mappings.binding_properties #=> Hash
+    #   resp.entity.fields["String"].input_type.value_mappings.binding_properties["String"].type #=> String
+    #   resp.entity.fields["String"].input_type.value_mappings.binding_properties["String"].binding_properties.model #=> String
+    #   resp.entity.fields["String"].input_type.name #=> String
+    #   resp.entity.fields["String"].input_type.min_value #=> Float
+    #   resp.entity.fields["String"].input_type.max_value #=> Float
+    #   resp.entity.fields["String"].input_type.step #=> Float
+    #   resp.entity.fields["String"].input_type.value #=> String
+    #   resp.entity.fields["String"].input_type.is_array #=> Boolean
+    #   resp.entity.fields["String"].input_type.file_uploader_config.access_level #=> String, one of "public", "protected", "private"
+    #   resp.entity.fields["String"].input_type.file_uploader_config.accepted_file_types #=> Array
+    #   resp.entity.fields["String"].input_type.file_uploader_config.accepted_file_types[0] #=> String
+    #   resp.entity.fields["String"].input_type.file_uploader_config.show_thumbnails #=> Boolean
+    #   resp.entity.fields["String"].input_type.file_uploader_config.is_resumable #=> Boolean
+    #   resp.entity.fields["String"].input_type.file_uploader_config.max_file_count #=> Integer
+    #   resp.entity.fields["String"].input_type.file_uploader_config.max_size #=> Integer
+    #   resp.entity.fields["String"].validations #=> Array
+    #   resp.entity.fields["String"].validations[0].type #=> String
+    #   resp.entity.fields["String"].validations[0].str_values #=> Array
+    #   resp.entity.fields["String"].validations[0].str_values[0] #=> String
+    #   resp.entity.fields["String"].validations[0].num_values #=> Array
+    #   resp.entity.fields["String"].validations[0].num_values[0] #=> Integer
+    #   resp.entity.fields["String"].validations[0].validation_message #=> String
+    #   resp.entity.sectional_elements #=> Hash
+    #   resp.entity.sectional_elements["String"].type #=> String
+    #   resp.entity.sectional_elements["String"].position.fixed #=> String, one of "first"
+    #   resp.entity.sectional_elements["String"].position.right_of #=> String
+    #   resp.entity.sectional_elements["String"].position.below #=> String
+    #   resp.entity.sectional_elements["String"].text #=> String
+    #   resp.entity.sectional_elements["String"].level #=> Integer
+    #   resp.entity.sectional_elements["String"].orientation #=> String
+    #   resp.entity.sectional_elements["String"].excluded #=> Boolean
+    #   resp.entity.schema_version #=> String
     #   resp.entity.tags #=> Hash
     #   resp.entity.tags["TagKey"] #=> String
+    #   resp.entity.cta.position #=> String, one of "top", "bottom", "top_and_bottom"
+    #   resp.entity.cta.clear.excluded #=> Boolean
+    #   resp.entity.cta.clear.children #=> String
+    #   resp.entity.cta.clear.position.fixed #=> String, one of "first"
+    #   resp.entity.cta.clear.position.right_of #=> String
+    #   resp.entity.cta.clear.position.below #=> String
+    #   resp.entity.cta.cancel.excluded #=> Boolean
+    #   resp.entity.cta.cancel.children #=> String
+    #   resp.entity.cta.cancel.position.fixed #=> String, one of "first"
+    #   resp.entity.cta.cancel.position.right_of #=> String
+    #   resp.entity.cta.cancel.position.below #=> String
+    #   resp.entity.cta.submit.excluded #=> Boolean
+    #   resp.entity.cta.submit.children #=> String
+    #   resp.entity.cta.submit.position.fixed #=> String, one of "first"
+    #   resp.entity.cta.submit.position.right_of #=> String
+    #   resp.entity.cta.submit.position.below #=> String
+    #   resp.entity.label_decorator #=> String, one of "required", "optional", "none"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/UpdateForm AWS API Documentation
     #
@@ -5775,17 +5941,17 @@ module Aws::AmplifyUIBuilder
     # @option params [required, String] :app_id
     #   The unique ID for the Amplify app.
     #
-    # @option params [String] :client_token
-    #   The unique client token.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
-    #
     # @option params [required, String] :environment_name
     #   The name of the backend environment that is part of the Amplify app.
     #
     # @option params [required, String] :id
     #   The unique ID for the theme.
+    #
+    # @option params [String] :client_token
+    #   The unique client token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @option params [required, Types::UpdateThemeData] :updated_theme
     #   The configuration of the updated theme.
@@ -5798,31 +5964,31 @@ module Aws::AmplifyUIBuilder
     #
     #   resp = client.update_theme({
     #     app_id: "String", # required
-    #     client_token: "String",
     #     environment_name: "String", # required
     #     id: "Uuid", # required
+    #     client_token: "String",
     #     updated_theme: { # required
     #       id: "Uuid",
     #       name: "ThemeName",
-    #       overrides: [
-    #         {
-    #           key: "String",
-    #           value: {
-    #             children: {
-    #               # recursive ThemeValuesList
-    #             },
-    #             value: "String",
-    #           },
-    #         },
-    #       ],
     #       values: [ # required
     #         {
     #           key: "String",
     #           value: {
+    #             value: "String",
     #             children: {
     #               # recursive ThemeValuesList
     #             },
+    #           },
+    #         },
+    #       ],
+    #       overrides: [
+    #         {
+    #           key: "String",
+    #           value: {
     #             value: "String",
+    #             children: {
+    #               # recursive ThemeValuesList
+    #             },
     #           },
     #         },
     #       ],
@@ -5832,21 +5998,21 @@ module Aws::AmplifyUIBuilder
     # @example Response structure
     #
     #   resp.entity.app_id #=> String
-    #   resp.entity.created_at #=> Time
     #   resp.entity.environment_name #=> String
     #   resp.entity.id #=> String
-    #   resp.entity.modified_at #=> Time
     #   resp.entity.name #=> String
-    #   resp.entity.overrides #=> Array
-    #   resp.entity.overrides[0].key #=> String
-    #   resp.entity.overrides[0].value.children #=> Types::ThemeValuesList
-    #   resp.entity.overrides[0].value.value #=> String
-    #   resp.entity.tags #=> Hash
-    #   resp.entity.tags["TagKey"] #=> String
+    #   resp.entity.created_at #=> Time
+    #   resp.entity.modified_at #=> Time
     #   resp.entity.values #=> Array
     #   resp.entity.values[0].key #=> String
-    #   resp.entity.values[0].value.children #=> Types::ThemeValuesList
     #   resp.entity.values[0].value.value #=> String
+    #   resp.entity.values[0].value.children #=> Types::ThemeValuesList
+    #   resp.entity.overrides #=> Array
+    #   resp.entity.overrides[0].key #=> String
+    #   resp.entity.overrides[0].value.value #=> String
+    #   resp.entity.overrides[0].value.children #=> Types::ThemeValuesList
+    #   resp.entity.tags #=> Hash
+    #   resp.entity.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/UpdateTheme AWS API Documentation
     #
@@ -5870,7 +6036,7 @@ module Aws::AmplifyUIBuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplifyuibuilder'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

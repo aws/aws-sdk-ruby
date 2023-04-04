@@ -425,13 +425,12 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # <note markdown="1"> This API call has been replaced with a new "traffic sources" API
-    # call (`AttachTrafficSources`) that can attach multiple traffic sources
-    # types. While we continue to support `AttachLoadBalancerTargetGroups`,
-    # and you can use both the original `AttachLoadBalancerTargetGroups` API
-    # call and the new `AttachTrafficSources` API call on the same Auto
-    # Scaling group, we recommend using the new "traffic sources" API call
-    # to simplify how you manage traffic sources.
+    # <note markdown="1"> This API operation is superseded by AttachTrafficSources, which can
+    # attach multiple traffic sources types. We recommend using
+    # `AttachTrafficSources` to simplify how you manage traffic sources.
+    # However, we continue to support `AttachLoadBalancerTargetGroups`. You
+    # can use both the original `AttachLoadBalancerTargetGroups` API
+    # operation and `AttachTrafficSources` on the same Auto Scaling group.
     #
     #  </note>
     #
@@ -505,13 +504,12 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # <note markdown="1"> This API call has been replaced with a new "traffic sources" API
-    # call (`AttachTrafficSources`) that can attach multiple traffic sources
-    # types. While we continue to support `AttachLoadBalancers`, and you can
-    # use both the original `AttachLoadBalancers` API call and the new
-    # `AttachTrafficSources` API call on the same Auto Scaling group, we
-    # recommend using the new "traffic sources" API call to simplify how
-    # you manage traffic sources.
+    # <note markdown="1"> This API operation is superseded by AttachTrafficSources, which can
+    # attach multiple traffic sources types. We recommend using
+    # `AttachTrafficSources` to simplify how you manage traffic sources.
+    # However, we continue to support `AttachLoadBalancers`. You can use
+    # both the original `AttachLoadBalancers` API operation and
+    # `AttachTrafficSources` on the same Auto Scaling group.
     #
     #  </note>
     #
@@ -581,9 +579,9 @@ module Aws::AutoScaling
     #
     # * Classic Load Balancer
     #
-    # * Network Load Balancer
-    #
     # * Gateway Load Balancer
+    #
+    # * Network Load Balancer
     #
     # * VPC Lattice
     #
@@ -1026,12 +1024,14 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html
     #
     # @option params [String] :health_check_type
-    #   A comma-separated list of one or more health check types.
+    #   A comma-separated value string of one or more health check types.
     #
     #   The valid values are `EC2`, `ELB`, and `VPC_LATTICE`. `EC2` is the
     #   default health check and cannot be disabled. For more information, see
     #   [Health checks for Auto Scaling instances][1] in the *Amazon EC2 Auto
     #   Scaling User Guide*.
+    #
+    #   Only specify `EC2` if you must clear a value that was previously set.
     #
     #
     #
@@ -3057,14 +3057,12 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # <note markdown="1"> This API call has been replaced with a new "traffic sources" API
-    # call (`DescribeTrafficSources`) that can describe multiple traffic
-    # sources types. While we continue to support
-    # `DescribeLoadBalancerTargetGroups`, and you can use both the original
-    # `DescribeLoadBalancerTargetGroups` API call and the new
-    # `DescribeTrafficSources` API call on the same Auto Scaling group, we
-    # recommend using the new "traffic sources" API call to simplify how
-    # you manage traffic sources.
+    # <note markdown="1"> This API operation is superseded by DescribeTrafficSources, which can
+    # describe multiple traffic sources types. We recommend using
+    # `DetachTrafficSources` to simplify how you manage traffic sources.
+    # However, we continue to support `DescribeLoadBalancerTargetGroups`.
+    # You can use both the original `DescribeLoadBalancerTargetGroups` API
+    # operation and `DescribeTrafficSources` on the same Auto Scaling group.
     #
     #  </note>
     #
@@ -3165,13 +3163,12 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # <note markdown="1"> This API call has been replaced with a new "traffic sources" API
-    # call (`DescribeTrafficSources`) that can describe multiple traffic
-    # sources types. While we continue to support `DescribeLoadBalancers`,
-    # and you can use both the original `DescribeLoadBalancers` API call and
-    # the new `DescribeTrafficSources` API call on the same Auto Scaling
-    # group, we recommend using the new "traffic sources" API call to
-    # simplify how you manage traffic sources.
+    # <note markdown="1"> This API operation is superseded by DescribeTrafficSources, which can
+    # describe multiple traffic sources types. We recommend using
+    # `DescribeTrafficSources` to simplify how you manage traffic sources.
+    # However, we continue to support `DescribeLoadBalancers`. You can use
+    # both the original `DescribeLoadBalancers` API operation and
+    # `DescribeTrafficSources` on the same Auto Scaling group.
     #
     #  </note>
     #
@@ -4266,13 +4263,12 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # <note markdown="1"> This API call has been replaced with a new "traffic sources" API
-    # call (`DetachTrafficSources`) that can detach multiple traffic sources
-    # types. While we continue to support `DetachLoadBalancerTargetGroups`,
-    # and you can use both the original `DetachLoadBalancerTargetGroups` API
-    # call and the new `DetachTrafficSources` API call on the same Auto
-    # Scaling group, we recommend using the new "traffic sources" API call
-    # to simplify how you manage traffic sources.
+    # <note markdown="1"> This API operation is superseded by DetachTrafficSources, which can
+    # detach multiple traffic sources types. We recommend using
+    # `DetachTrafficSources` to simplify how you manage traffic sources.
+    # However, we continue to support `DetachLoadBalancerTargetGroups`. You
+    # can use both the original `DetachLoadBalancerTargetGroups` API
+    # operation and `DetachTrafficSources` on the same Auto Scaling group.
     #
     #  </note>
     #
@@ -4328,13 +4324,12 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # <note markdown="1"> This API call has been replaced with a new "traffic sources" API
-    # call (`DetachTrafficSources`) that can detach multiple traffic sources
-    # types. While we continue to support `DetachLoadBalancers`, and you can
-    # use both the original `DetachLoadBalancers` API call and the new
-    # `DetachTrafficSources` API call on the same Auto Scaling group, we
-    # recommend using the new "traffic sources" API call to simplify how
-    # you manage traffic sources.
+    # <note markdown="1"> This API operation is superseded by DetachTrafficSources, which can
+    # detach multiple traffic sources types. We recommend using
+    # `DetachTrafficSources` to simplify how you manage traffic sources.
+    # However, we continue to support `DetachLoadBalancers`. You can use
+    # both the original `DetachLoadBalancers` API operation and
+    # `DetachTrafficSources` on the same Auto Scaling group.
     #
     #  </note>
     #
@@ -4399,8 +4394,8 @@ module Aws::AutoScaling
     #   The name of the Auto Scaling group.
     #
     # @option params [required, Array<Types::TrafficSourceIdentifier>] :traffic_sources
-    #   The unique identifiers of one or more traffic sources you are
-    #   detaching. You can specify up to 10 traffic sources.
+    #   The unique identifiers of one or more traffic sources. You can specify
+    #   up to 10 traffic sources.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6714,12 +6709,14 @@ module Aws::AutoScaling
     #   One or more Availability Zones for the group.
     #
     # @option params [String] :health_check_type
-    #   A comma-separated list of one or more health check types.
+    #   A comma-separated value string of one or more health check types.
     #
     #   The valid values are `EC2`, `ELB`, and `VPC_LATTICE`. `EC2` is the
     #   default health check and cannot be disabled. For more information, see
     #   [Health checks for Auto Scaling instances][1] in the *Amazon EC2 Auto
     #   Scaling User Guide*.
+    #
+    #   Only specify `EC2` if you must clear a value that was previously set.
     #
     #
     #
@@ -7008,7 +7005,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
