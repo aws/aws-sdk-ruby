@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2023-04-04)
+------------------
+
+* Feature - Updated public documentation for the Describe and Tagging APIs.
+
 1.24.0 (2023-04-04)
 ------------------
 

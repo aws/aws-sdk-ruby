@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2023-04-04)
+------------------
+
+* Feature - This release updates the value of MaxResults.
+
 1.32.0 (2023-04-04)
 ------------------
 

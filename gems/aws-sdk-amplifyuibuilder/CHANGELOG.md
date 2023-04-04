@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2023-04-04)
+------------------
+
+* Feature - Support StorageField and custom displays for data-bound options in form builder. Support non-string operands for predicates in collections. Support choosing client to get token from.
+
 1.10.0 (2023-04-04)
 ------------------
 
