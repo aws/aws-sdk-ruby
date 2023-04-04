@@ -52,7 +52,9 @@ module Aws
 
           def check_for_cached_region(context, bucket)
             cached_region = S3::BUCKET_REGIONS[bucket]
-            if cached_region && cached_region != context.config.region
+            if cached_region &&
+               cached_region != context.config.region &&
+               !S3Signer.custom_endpoint?(context)
               context.http_request.endpoint.host = S3Signer.new_hostname(
                 context, cached_region
               )
@@ -77,7 +79,7 @@ module Aws
           def handle_region_errors(response)
             if wrong_sigv4_region?(response) &&
                !fips_region?(response) &&
-               !custom_endpoint?(response) &&
+               !S3Signer.custom_endpoint?(response.context) &&
                !expired_credentials?(response)
               get_region_and_retry(response.context)
             else
@@ -104,15 +106,6 @@ module Aws
 
           def expired_credentials?(resp)
             resp.context.http_response.body_contents.match(/<Code>ExpiredToken<\/Code>/)
-          end
-
-          def custom_endpoint?(resp)
-            region = resp.context.config.region
-            partition = Aws::Endpoints::Matchers.aws_partition(region)
-            endpoint = resp.context.http_request.endpoint
-
-            !endpoint.hostname.include?(partition['dnsSuffix']) &&
-              !endpoint.hostname.include?(partition['dualStackDnsSuffix'])
           end
 
           def wrong_sigv4_region?(resp)
@@ -167,6 +160,15 @@ module Aws
             endpoint =
               context.config.endpoint_provider.resolve_endpoint(endpoint_params)
             URI(endpoint.url).host
+          end
+
+          def custom_endpoint?(context)
+            region = context.config.region
+            partition = Aws::Endpoints::Matchers.aws_partition(region)
+            endpoint = context.http_request.endpoint
+
+            !endpoint.hostname.include?(partition['dnsSuffix']) &&
+              !endpoint.hostname.include?(partition['dualStackDnsSuffix'])
           end
         end
       end
