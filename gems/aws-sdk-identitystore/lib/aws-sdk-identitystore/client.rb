@@ -385,7 +385,9 @@ module Aws::IdentityStore
     #
     # @option params [String] :display_name
     #   A string containing the name of the group. This value is commonly
-    #   displayed when the group is referenced.
+    #   displayed when the group is referenced. "Administrator" and
+    #   "AWSAdministrators" are reserved names and can't be used for users
+    #   or groups.
     #
     # @option params [String] :description
     #   A string containing the description of the group.
@@ -461,7 +463,7 @@ module Aws::IdentityStore
       req.send_request(options)
     end
 
-    # Creates a new user within the specified identity store.
+    # Creates a user within the specified identity store.
     #
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store.
@@ -471,13 +473,14 @@ module Aws::IdentityStore
     #   characters. This value can consist of letters, accented characters,
     #   symbols, numbers, and punctuation. This value is specified at the time
     #   the user is created and stored as an attribute of the user object in
-    #   the identity store.
+    #   the identity store. "Administrator" and "AWSAdministrators" are
+    #   reserved names and can't be used for users or groups.
     #
     # @option params [Types::Name] :name
-    #   An object containing the user's name.
+    #   An object containing the name of the user.
     #
     # @option params [String] :display_name
-    #   A string containing the user's name. This value is typically
+    #   A string containing the name of the user. This value is typically
     #   formatted for display when the user is referenced. For example, "John
     #   Doe."
     #
@@ -485,7 +488,7 @@ module Aws::IdentityStore
     #   A string containing an alternate name for the user.
     #
     # @option params [String] :profile_url
-    #   A string containing a URL that may be associated with the user.
+    #   A string containing a URL that might be associated with the user.
     #
     # @option params [Array<Types::Email>] :emails
     #   A list of `Email` objects containing email addresses associated with
@@ -500,22 +503,22 @@ module Aws::IdentityStore
     #   with the user.
     #
     # @option params [String] :user_type
-    #   A string indicating the user's type. Possible values depend on each
-    #   customer's specific needs, so they are left unspecified.
+    #   A string indicating the type of user. Possible values are left
+    #   unspecified. The value can vary based on your specific use case.
     #
     # @option params [String] :title
-    #   A string containing the user's title. Possible values are left
-    #   unspecified given that they depend on each customer's specific needs.
+    #   A string containing the title of the user. Possible values are left
+    #   unspecified. The value can vary based on your specific use case.
     #
     # @option params [String] :preferred_language
     #   A string containing the preferred language of the user. For example,
     #   "American English" or "en-us."
     #
     # @option params [String] :locale
-    #   A string containing the user's geographical region or location.
+    #   A string containing the geographical region or location of the user.
     #
     # @option params [String] :timezone
-    #   A string containing the user's time zone.
+    #   A string containing the time zone of the user.
     #
     # @return [Types::CreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -846,7 +849,8 @@ module Aws::IdentityStore
     #   A unique identifier for a user or group that is not the primary
     #   identifier. This value can be an identifier from an external identity
     #   provider (IdP) that is associated with the user, the group, or a
-    #   unique attribute. For example, a unique `GroupDisplayName`.
+    #   unique attribute. For the unique attribute, the only valid path is
+    #   `displayName`.
     #
     # @return [Types::GetGroupIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -934,7 +938,8 @@ module Aws::IdentityStore
     #   A unique identifier for a user or group that is not the primary
     #   identifier. This value can be an identifier from an external identity
     #   provider (IdP) that is associated with the user, the group, or a
-    #   unique attribute. For example, a unique `UserDisplayName`.
+    #   unique attribute. For the unique attribute, the only valid paths are
+    #   `userName` and `emails.value`.
     #
     # @return [Types::GetUserIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1389,7 +1394,7 @@ module Aws::IdentityStore
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-identitystore'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

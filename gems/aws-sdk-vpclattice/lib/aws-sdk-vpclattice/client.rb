@@ -1033,10 +1033,11 @@ module Aws::VPCLattice
     # As a result of this operation, the association gets created in the
     # service network account and the VPC owner account.
     #
-    # Once a security group is added to the VPC association it cannot be
-    # removed. You can add or update the security groups being used for the
-    # VPC association once a security group is attached. To remove all
-    # security groups you must reassociate the VPC.
+    # If you add a security group to the service network and VPC
+    # association, the association must continue to always have at least one
+    # security group. You can add or edit security groups at any time.
+    # However, to remove all security groups, you must first delete the
+    # association and recreate it without security groups.
     #
     #
     #
@@ -1244,12 +1245,11 @@ module Aws::VPCLattice
       req.send_request(options)
     end
 
-    # Deletes the specified auth policy. If an auth is set to `Amazon Web
-    # Services_IAM` and the auth policy is deleted, all requests will be
-    # denied by default. If you are trying to remove the auth policy
-    # completely, you must set the auth\_type to `NONE`. If auth is enabled
-    # on the resource, but no auth policy is set, all requests will be
-    # denied.
+    # Deletes the specified auth policy. If an auth is set to `AWS_IAM` and
+    # the auth policy is deleted, all requests will be denied by default. If
+    # you are trying to remove the auth policy completely, you must set the
+    # auth\_type to `NONE`. If auth is enabled on the resource, but no auth
+    # policy is set, all requests will be denied.
     #
     # @option params [required, String] :resource_identifier
     #   The ID or Amazon Resource Name (ARN) of the resource.
@@ -1711,11 +1711,11 @@ module Aws::VPCLattice
     end
 
     # Retrieves information about the resource policy. The resource policy
-    # is an IAM policy created by AWS RAM on behalf of the resource owner
-    # when they share a resource.
+    # is an IAM policy created on behalf of the resource owner when they
+    # share a resource.
     #
     # @option params [required, String] :resource_arn
-    #   An IAM policy.
+    #   The Amazon Resource Name (ARN) of the service network or service.
     #
     # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2582,10 +2582,12 @@ module Aws::VPCLattice
       req.send_request(options)
     end
 
-    # Creates or updates the auth policy.
+    # Creates or updates the auth policy. The policy string in JSON must not
+    # contain newlines or blank lines.
     #
     # @option params [required, String] :policy
-    #   The auth policy.
+    #   The auth policy. The policy string in JSON must not contain newlines
+    #   or blank lines.
     #
     # @option params [required, String] :resource_identifier
     #   The ID or Amazon Resource Name (ARN) of the service network or service
@@ -2623,7 +2625,8 @@ module Aws::VPCLattice
     # permission for sharing services and service networks.
     #
     # @option params [required, String] :policy
-    #   An IAM policy.
+    #   An IAM policy. The policy string in JSON must not contain newlines or
+    #   blank lines.
     #
     # @option params [required, String] :resource_arn
     #   The ID or Amazon Resource Name (ARN) of the service network or service
@@ -3056,12 +3059,15 @@ module Aws::VPCLattice
       req.send_request(options)
     end
 
-    # Updates the service network and VPC association. Once you add a
-    # security group, it cannot be removed.
+    # Updates the service network and VPC association. If you add a security
+    # group to the service network and VPC association, the association must
+    # continue to always have at least one security group. You can add or
+    # edit security groups at any time. However, to remove all security
+    # groups, you must first delete the association and recreate it without
+    # security groups.
     #
     # @option params [required, Array<String>] :security_group_ids
-    #   The IDs of the security groups. Once you add a security group, it
-    #   cannot be removed.
+    #   The IDs of the security groups.
     #
     # @option params [required, String] :service_network_vpc_association_identifier
     #   The ID or Amazon Resource Name (ARN) of the association.
@@ -3181,7 +3187,7 @@ module Aws::VPCLattice
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-vpclattice'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

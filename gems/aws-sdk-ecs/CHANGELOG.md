@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.112.0 (2023-04-05)
+------------------
+
+* Feature - This is a document only updated to add information about Amazon Elastic Inference (EI).
+
 1.111.0 (2023-02-23)
 ------------------
 

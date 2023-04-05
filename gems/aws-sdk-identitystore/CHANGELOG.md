@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2023-04-05)
+------------------
+
+* Feature - Documentation updates for Identity Store CLI command reference.
+
 1.23.0 (2023-01-18)
 ------------------
 

@@ -6973,7 +6973,7 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   Target ID is the name of the public document.
+    #   Target ID is the name of the SSM document.
     #   @return [String]
     #
     # @!attribute [rw] target_version

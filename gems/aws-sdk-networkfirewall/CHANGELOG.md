@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2023-04-05)
+------------------
+
+* Feature - AWS Network Firewall now supports IPv6-only subnets.
+
 1.25.0 (2023-03-30)
 ------------------
 

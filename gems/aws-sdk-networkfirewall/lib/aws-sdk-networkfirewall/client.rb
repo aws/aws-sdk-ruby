@@ -509,7 +509,7 @@ module Aws::NetworkFirewall
     #     subnet_mappings: [ # required
     #       {
     #         subnet_id: "CollectionMember_String", # required
-    #         ip_address_type: "DUALSTACK", # accepts DUALSTACK, IPV4
+    #         ip_address_type: "DUALSTACK", # accepts DUALSTACK, IPV4, IPV6
     #       },
     #     ],
     #   })
@@ -520,7 +520,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_name #=> String
     #   resp.subnet_mappings #=> Array
     #   resp.subnet_mappings[0].subnet_id #=> String
-    #   resp.subnet_mappings[0].ip_address_type #=> String, one of "DUALSTACK", "IPV4"
+    #   resp.subnet_mappings[0].ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
     #   resp.update_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/AssociateSubnets AWS API Documentation
@@ -620,7 +620,7 @@ module Aws::NetworkFirewall
     #     subnet_mappings: [ # required
     #       {
     #         subnet_id: "CollectionMember_String", # required
-    #         ip_address_type: "DUALSTACK", # accepts DUALSTACK, IPV4
+    #         ip_address_type: "DUALSTACK", # accepts DUALSTACK, IPV4, IPV6
     #       },
     #     ],
     #     delete_protection: false,
@@ -647,7 +647,7 @@ module Aws::NetworkFirewall
     #   resp.firewall.vpc_id #=> String
     #   resp.firewall.subnet_mappings #=> Array
     #   resp.firewall.subnet_mappings[0].subnet_id #=> String
-    #   resp.firewall.subnet_mappings[0].ip_address_type #=> String, one of "DUALSTACK", "IPV4"
+    #   resp.firewall.subnet_mappings[0].ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
     #   resp.firewall.delete_protection #=> Boolean
     #   resp.firewall.subnet_change_protection #=> Boolean
     #   resp.firewall.firewall_policy_change_protection #=> Boolean
@@ -1308,7 +1308,7 @@ module Aws::NetworkFirewall
     #   resp.firewall.vpc_id #=> String
     #   resp.firewall.subnet_mappings #=> Array
     #   resp.firewall.subnet_mappings[0].subnet_id #=> String
-    #   resp.firewall.subnet_mappings[0].ip_address_type #=> String, one of "DUALSTACK", "IPV4"
+    #   resp.firewall.subnet_mappings[0].ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
     #   resp.firewall.delete_protection #=> Boolean
     #   resp.firewall.subnet_change_protection #=> Boolean
     #   resp.firewall.firewall_policy_change_protection #=> Boolean
@@ -1570,7 +1570,7 @@ module Aws::NetworkFirewall
     #   resp.firewall.vpc_id #=> String
     #   resp.firewall.subnet_mappings #=> Array
     #   resp.firewall.subnet_mappings[0].subnet_id #=> String
-    #   resp.firewall.subnet_mappings[0].ip_address_type #=> String, one of "DUALSTACK", "IPV4"
+    #   resp.firewall.subnet_mappings[0].ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
     #   resp.firewall.delete_protection #=> Boolean
     #   resp.firewall.subnet_change_protection #=> Boolean
     #   resp.firewall.firewall_policy_change_protection #=> Boolean
@@ -2067,7 +2067,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_name #=> String
     #   resp.subnet_mappings #=> Array
     #   resp.subnet_mappings[0].subnet_id #=> String
-    #   resp.subnet_mappings[0].ip_address_type #=> String, one of "DUALSTACK", "IPV4"
+    #   resp.subnet_mappings[0].ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
     #   resp.update_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DisassociateSubnets AWS API Documentation
@@ -3507,7 +3507,7 @@ module Aws::NetworkFirewall
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

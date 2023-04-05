@@ -3173,7 +3173,7 @@ module Aws::NetworkFirewall
     #
     #
     #
-    #   [1]: https://suricata.readthedocs.io/rules/intro.html#
+    #   [1]: https://suricata.readthedocs.iorules/intro.html#
     #   @return [Array<Types::StatefulRule>]
     #
     # @!attribute [rw] stateless_rules_and_custom_actions
@@ -3444,7 +3444,7 @@ module Aws::NetworkFirewall
     #
     #
     #
-    # [1]: https://suricata.readthedocs.io/rules/intro.html#
+    # [1]: https://suricata.readthedocs.iorules/intro.html#
     #
     # @!attribute [rw] action
     #   Defines what Network Firewall should do with the packets in a

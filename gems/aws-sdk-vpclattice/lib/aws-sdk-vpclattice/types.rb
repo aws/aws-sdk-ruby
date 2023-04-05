@@ -1253,12 +1253,12 @@ module Aws::VPCLattice
     #
     # @!attribute [rw] state
     #   The state of the auth policy. The auth policy is only active when
-    #   the auth type is set to `Amazon Web Services_IAM`. If you provide a
-    #   policy, then authentication and authorization decisions are made
-    #   based on this policy and the client's IAM policy. If the auth type
-    #   is `NONE`, then any auth policy you provide will remain inactive.
-    #   For more information, see [Create a service network][1] in the
-    #   *Amazon VPC Lattice User Guide*.
+    #   the auth type is set to `AWS_IAM`. If you provide a policy, then
+    #   authentication and authorization decisions are made based on this
+    #   policy and the client's IAM policy. If the auth type is `NONE`,
+    #   then any auth policy you provide will remain inactive. For more
+    #   information, see [Create a service network][1] in the *Amazon VPC
+    #   Lattice User Guide*.
     #
     #
     #
@@ -1353,7 +1353,7 @@ module Aws::VPCLattice
     end
 
     # @!attribute [rw] resource_arn
-    #   An IAM policy.
+    #   The Amazon Resource Name (ARN) of the service network or service.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetResourcePolicyRequest AWS API Documentation
@@ -1365,7 +1365,7 @@ module Aws::VPCLattice
     end
 
     # @!attribute [rw] policy
-    #   The Amazon Resource Name (ARN) of the service network or service.
+    #   An IAM policy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetResourcePolicyResponse AWS API Documentation
@@ -2550,7 +2550,8 @@ module Aws::VPCLattice
     end
 
     # @!attribute [rw] policy
-    #   The auth policy.
+    #   The auth policy. The policy string in JSON must not contain newlines
+    #   or blank lines.
     #   @return [String]
     #
     # @!attribute [rw] resource_identifier
@@ -2568,17 +2569,18 @@ module Aws::VPCLattice
     end
 
     # @!attribute [rw] policy
-    #   The auth policy.
+    #   The auth policy. The policy string in JSON must not contain newlines
+    #   or blank lines.
     #   @return [String]
     #
     # @!attribute [rw] state
     #   The state of the auth policy. The auth policy is only active when
-    #   the auth type is set to `Amazon Web Services_IAM`. If you provide a
-    #   policy, then authentication and authorization decisions are made
-    #   based on this policy and the client's IAM policy. If the Auth type
-    #   is `NONE`, then, any auth policy you provide will remain inactive.
-    #   For more information, see [Create a service network][1] in the
-    #   *Amazon VPC Lattice User Guide*.
+    #   the auth type is set to `AWS_IAM`. If you provide a policy, then
+    #   authentication and authorization decisions are made based on this
+    #   policy and the client's IAM policy. If the Auth type is `NONE`,
+    #   then, any auth policy you provide will remain inactive. For more
+    #   information, see [Create a service network][1] in the *Amazon VPC
+    #   Lattice User Guide*.
     #
     #
     #
@@ -2595,7 +2597,8 @@ module Aws::VPCLattice
     end
 
     # @!attribute [rw] policy
-    #   An IAM policy.
+    #   An IAM policy. The policy string in JSON must not contain newlines
+    #   or blank lines.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -3684,8 +3687,7 @@ module Aws::VPCLattice
     end
 
     # @!attribute [rw] security_group_ids
-    #   The IDs of the security groups. Once you add a security group, it
-    #   cannot be removed.
+    #   The IDs of the security groups.
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_network_vpc_association_identifier

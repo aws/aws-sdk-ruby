@@ -325,7 +325,7 @@ module Aws::IVSRealTime
       :participant_id,
       :token,
       :user_id)
-      SENSITIVE = []
+      SENSITIVE = [:token]
       include Aws::Structure
     end
 

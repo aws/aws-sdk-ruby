@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2023-04-05)
+------------------
+
+* Feature - App Runner adds support for seven new vCPU and memory configurations.
+
 1.21.0 (2023-02-17)
 ------------------
 

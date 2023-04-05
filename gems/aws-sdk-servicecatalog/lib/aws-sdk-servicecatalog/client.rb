@@ -1212,7 +1212,7 @@ module Aws::ServiceCatalog
     #     support_description: "SupportDescription",
     #     support_email: "SupportEmail",
     #     support_url: "SupportUrl",
-    #     product_type: "CLOUD_FORMATION_TEMPLATE", # required, accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE, DEFAULT_CUSTOM, TERRAFORM_OPEN_SOURCE
+    #     product_type: "CLOUD_FORMATION_TEMPLATE", # required, accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE, TERRAFORM_OPEN_SOURCE
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1225,7 +1225,7 @@ module Aws::ServiceCatalog
     #       info: {
     #         "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #       },
-    #       type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR, DEFAULT_CUSTOM, TERRAFORM_OPEN_SOURCE
+    #       type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR, TERRAFORM_OPEN_SOURCE
     #       disable_template_validation: false,
     #     },
     #     idempotency_token: "IdempotencyToken", # required
@@ -1249,7 +1249,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_detail.product_view_summary.name #=> String
     #   resp.product_view_detail.product_view_summary.owner #=> String
     #   resp.product_view_detail.product_view_summary.short_description #=> String
-    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
+    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE"
     #   resp.product_view_detail.product_view_summary.distributor #=> String
     #   resp.product_view_detail.product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_detail.product_view_summary.support_email #=> String
@@ -1271,7 +1271,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.id #=> String
     #   resp.provisioning_artifact_detail.name #=> String
     #   resp.provisioning_artifact_detail.description #=> String
-    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
+    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "TERRAFORM_OPEN_SOURCE"
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.provisioning_artifact_detail.active #=> Boolean
     #   resp.provisioning_artifact_detail.guidance #=> String, one of "DEFAULT", "DEPRECATED"
@@ -1457,7 +1457,7 @@ module Aws::ServiceCatalog
     #       info: {
     #         "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #       },
-    #       type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR, DEFAULT_CUSTOM, TERRAFORM_OPEN_SOURCE
+    #       type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR, TERRAFORM_OPEN_SOURCE
     #       disable_template_validation: false,
     #     },
     #     idempotency_token: "IdempotencyToken", # required
@@ -1468,7 +1468,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.id #=> String
     #   resp.provisioning_artifact_detail.name #=> String
     #   resp.provisioning_artifact_detail.description #=> String
-    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
+    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "TERRAFORM_OPEN_SOURCE"
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.provisioning_artifact_detail.active #=> Boolean
     #   resp.provisioning_artifact_detail.guidance #=> String, one of "DEFAULT", "DEPRECATED"
@@ -2201,7 +2201,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_summary.name #=> String
     #   resp.product_view_summary.owner #=> String
     #   resp.product_view_summary.short_description #=> String
-    #   resp.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
+    #   resp.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE"
     #   resp.product_view_summary.distributor #=> String
     #   resp.product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_summary.support_email #=> String
@@ -2278,7 +2278,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_detail.product_view_summary.name #=> String
     #   resp.product_view_detail.product_view_summary.owner #=> String
     #   resp.product_view_detail.product_view_summary.short_description #=> String
-    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
+    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE"
     #   resp.product_view_detail.product_view_summary.distributor #=> String
     #   resp.product_view_detail.product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_detail.product_view_summary.support_email #=> String
@@ -2356,7 +2356,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_summary.name #=> String
     #   resp.product_view_summary.owner #=> String
     #   resp.product_view_summary.short_description #=> String
-    #   resp.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
+    #   resp.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE"
     #   resp.product_view_summary.distributor #=> String
     #   resp.product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_summary.support_email #=> String
@@ -2571,7 +2571,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.id #=> String
     #   resp.provisioning_artifact_detail.name #=> String
     #   resp.provisioning_artifact_detail.description #=> String
-    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
+    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "TERRAFORM_OPEN_SOURCE"
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.provisioning_artifact_detail.active #=> Boolean
     #   resp.provisioning_artifact_detail.guidance #=> String, one of "DEFAULT", "DEPRECATED"
@@ -4102,7 +4102,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_details[0].id #=> String
     #   resp.provisioning_artifact_details[0].name #=> String
     #   resp.provisioning_artifact_details[0].description #=> String
-    #   resp.provisioning_artifact_details[0].type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
+    #   resp.provisioning_artifact_details[0].type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "TERRAFORM_OPEN_SOURCE"
     #   resp.provisioning_artifact_details[0].created_time #=> Time
     #   resp.provisioning_artifact_details[0].active #=> Boolean
     #   resp.provisioning_artifact_details[0].guidance #=> String, one of "DEFAULT", "DEPRECATED"
@@ -4162,7 +4162,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_views[0].product_view_summary.name #=> String
     #   resp.provisioning_artifact_views[0].product_view_summary.owner #=> String
     #   resp.provisioning_artifact_views[0].product_view_summary.short_description #=> String
-    #   resp.provisioning_artifact_views[0].product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
+    #   resp.provisioning_artifact_views[0].product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE"
     #   resp.provisioning_artifact_views[0].product_view_summary.distributor #=> String
     #   resp.provisioning_artifact_views[0].product_view_summary.has_default_path #=> Boolean
     #   resp.provisioning_artifact_views[0].product_view_summary.support_email #=> String
@@ -5003,7 +5003,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_summaries[0].name #=> String
     #   resp.product_view_summaries[0].owner #=> String
     #   resp.product_view_summaries[0].short_description #=> String
-    #   resp.product_view_summaries[0].type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
+    #   resp.product_view_summaries[0].type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE"
     #   resp.product_view_summaries[0].distributor #=> String
     #   resp.product_view_summaries[0].has_default_path #=> Boolean
     #   resp.product_view_summaries[0].support_email #=> String
@@ -5087,7 +5087,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_details[0].product_view_summary.name #=> String
     #   resp.product_view_details[0].product_view_summary.owner #=> String
     #   resp.product_view_details[0].product_view_summary.short_description #=> String
-    #   resp.product_view_details[0].product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
+    #   resp.product_view_details[0].product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE"
     #   resp.product_view_details[0].product_view_summary.distributor #=> String
     #   resp.product_view_details[0].product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_details[0].product_view_summary.support_email #=> String
@@ -5689,7 +5689,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_detail.product_view_summary.name #=> String
     #   resp.product_view_detail.product_view_summary.owner #=> String
     #   resp.product_view_detail.product_view_summary.short_description #=> String
-    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
+    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE"
     #   resp.product_view_detail.product_view_summary.distributor #=> String
     #   resp.product_view_detail.product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_detail.product_view_summary.support_email #=> String
@@ -6012,7 +6012,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.id #=> String
     #   resp.provisioning_artifact_detail.name #=> String
     #   resp.provisioning_artifact_detail.description #=> String
-    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "DEFAULT_CUSTOM", "TERRAFORM_OPEN_SOURCE"
+    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "TERRAFORM_OPEN_SOURCE"
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.provisioning_artifact_detail.active #=> Boolean
     #   resp.provisioning_artifact_detail.guidance #=> String, one of "DEFAULT", "DEPRECATED"
@@ -6138,7 +6138,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

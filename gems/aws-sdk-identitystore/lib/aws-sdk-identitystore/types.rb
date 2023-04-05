@@ -84,7 +84,7 @@ module Aws::IdentityStore
     # A unique identifier for a user or group that is not the primary
     # identifier. This value can be an identifier from an external identity
     # provider (IdP) that is associated with the user, the group, or a
-    # unique attribute. For example, a unique `GroupDisplayName`.
+    # unique attribute.
     #
     # @note AlternateIdentifier is a union - when making an API calls you must set exactly one of the members.
     #
@@ -222,7 +222,9 @@ module Aws::IdentityStore
     #
     # @!attribute [rw] display_name
     #   A string containing the name of the group. This value is commonly
-    #   displayed when the group is referenced.
+    #   displayed when the group is referenced. "Administrator" and
+    #   "AWSAdministrators" are reserved names and can't be used for
+    #   users or groups.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -265,15 +267,17 @@ module Aws::IdentityStore
     #   characters. This value can consist of letters, accented characters,
     #   symbols, numbers, and punctuation. This value is specified at the
     #   time the user is created and stored as an attribute of the user
-    #   object in the identity store.
+    #   object in the identity store. "Administrator" and
+    #   "AWSAdministrators" are reserved names and can't be used for
+    #   users or groups.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   An object containing the user's name.
+    #   An object containing the name of the user.
     #   @return [Types::Name]
     #
     # @!attribute [rw] display_name
-    #   A string containing the user's name. This value is typically
+    #   A string containing the name of the user. This value is typically
     #   formatted for display when the user is referenced. For example,
     #   "John Doe."
     #   @return [String]
@@ -283,7 +287,7 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] profile_url
-    #   A string containing a URL that may be associated with the user.
+    #   A string containing a URL that might be associated with the user.
     #   @return [String]
     #
     # @!attribute [rw] emails
@@ -302,14 +306,13 @@ module Aws::IdentityStore
     #   @return [Array<Types::PhoneNumber>]
     #
     # @!attribute [rw] user_type
-    #   A string indicating the user's type. Possible values depend on each
-    #   customer's specific needs, so they are left unspecified.
+    #   A string indicating the type of user. Possible values are left
+    #   unspecified. The value can vary based on your specific use case.
     #   @return [String]
     #
     # @!attribute [rw] title
-    #   A string containing the user's title. Possible values are left
-    #   unspecified given that they depend on each customer's specific
-    #   needs.
+    #   A string containing the title of the user. Possible values are left
+    #   unspecified. The value can vary based on your specific use case.
     #   @return [String]
     #
     # @!attribute [rw] preferred_language
@@ -318,11 +321,11 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] locale
-    #   A string containing the user's geographical region or location.
+    #   A string containing the geographical region or location of the user.
     #   @return [String]
     #
     # @!attribute [rw] timezone
-    #   A string containing the user's time zone.
+    #   A string containing the time zone of the user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/CreateUserRequest AWS API Documentation
@@ -572,7 +575,7 @@ module Aws::IdentityStore
     #   @return [Types::Name]
     #
     # @!attribute [rw] display_name
-    #   The user's name value for display.
+    #   The display name of the user.
     #   @return [String]
     #
     # @!attribute [rw] nick_name
@@ -584,11 +587,11 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] emails
-    #   The user's email value.
+    #   The email address of the user.
     #   @return [Array<Types::Email>]
     #
     # @!attribute [rw] addresses
-    #   The user's physical address.
+    #   The physical address of the user.
     #   @return [Array<Types::Address>]
     #
     # @!attribute [rw] phone_numbers
@@ -596,11 +599,11 @@ module Aws::IdentityStore
     #   @return [Array<Types::PhoneNumber>]
     #
     # @!attribute [rw] user_type
-    #   A string indicating the user's type.
+    #   A string indicating the type of user.
     #   @return [String]
     #
     # @!attribute [rw] title
-    #   A string containing the user's title.
+    #   A string containing the title of the user.
     #   @return [String]
     #
     # @!attribute [rw] preferred_language
@@ -608,7 +611,7 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] locale
-    #   A string containing the user's geographical region or location.
+    #   A string containing the geographical region or location of the user.
     #   @return [String]
     #
     # @!attribute [rw] timezone
@@ -722,7 +725,8 @@ module Aws::IdentityStore
     #   A unique identifier for a user or group that is not the primary
     #   identifier. This value can be an identifier from an external
     #   identity provider (IdP) that is associated with the user, the group,
-    #   or a unique attribute. For example, a unique `GroupDisplayName`.
+    #   or a unique attribute. For the unique attribute, the only valid path
+    #   is `displayName`.
     #   @return [Types::AlternateIdentifier]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/GetGroupIdRequest AWS API Documentation
@@ -800,7 +804,8 @@ module Aws::IdentityStore
     #   A unique identifier for a user or group that is not the primary
     #   identifier. This value can be an identifier from an external
     #   identity provider (IdP) that is associated with the user, the group,
-    #   or a unique attribute. For example, a unique `UserDisplayName`.
+    #   or a unique attribute. For the unique attribute, the only valid
+    #   paths are `userName` and `emails.value`.
     #   @return [Types::AlternateIdentifier]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/GetUserIdRequest AWS API Documentation
@@ -829,15 +834,15 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
-    # A group object that contains a specified group’s metadata and
-    # attributes.
+    # A group object that contains the metadata and attributes for a
+    # specified group.
     #
     # @!attribute [rw] group_id
     #   The identifier for a group in the identity store.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The group’s display name value. The length limit is 1,024
+    #   The display name value for the group. The length limit is 1,024
     #   characters. This value can consist of letters, accented characters,
     #   symbols, numbers, punctuation, tab, new line, carriage return,
     #   space, and nonbreaking space in this attribute. This value is
@@ -943,8 +948,7 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] retry_after_seconds
-    #   The number of seconds that you would like to wait before retrying
-    #   the next request.
+    #   The number of seconds to wait before retrying the next request.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/InternalServerException AWS API Documentation
@@ -1392,8 +1396,7 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] retry_after_seconds
-    #   The number of seconds that you would like to wait before retrying
-    #   the next request.
+    #   The number of seconds to wait before retrying the next request.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ThrottlingException AWS API Documentation
@@ -1481,8 +1484,8 @@ module Aws::IdentityStore
     #
     class UpdateUserResponse < Aws::EmptyStructure; end
 
-    # A user object that contains a specified user’s metadata and
-    # attributes.
+    # A user object that contains the metadata and attributes for a
+    # specified user.
     #
     # @!attribute [rw] user_name
     #   A unique string used to identify the user. The length limit is 128
@@ -1502,12 +1505,12 @@ module Aws::IdentityStore
     #   @return [Array<Types::ExternalId>]
     #
     # @!attribute [rw] name
-    #   An object containing the user's name.
+    #   An object containing the name of the user.
     #   @return [Types::Name]
     #
     # @!attribute [rw] display_name
-    #   A string containing the user's name that's formatted for display
-    #   when the user is referenced. For example, "John Doe."
+    #   A string containing the name of the user that is formatted for
+    #   display when the user is referenced. For example, "John Doe."
     #   @return [String]
     #
     # @!attribute [rw] nick_name
@@ -1515,7 +1518,7 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] profile_url
-    #   A string containing a URL that may be associated with the user.
+    #   A string containing a URL that might be associated with the user.
     #   @return [String]
     #
     # @!attribute [rw] emails
@@ -1534,13 +1537,13 @@ module Aws::IdentityStore
     #   @return [Array<Types::PhoneNumber>]
     #
     # @!attribute [rw] user_type
-    #   A string indicating the user's type. Possible values depend on each
-    #   customer's specific needs, so they are left unspecified.
+    #   A string indicating the type of user. Possible values are left
+    #   unspecified. The value can vary based on your specific use case.
     #   @return [String]
     #
     # @!attribute [rw] title
-    #   A string containing the user's title. Possible values depend on
-    #   each customer's specific needs, so they are left unspecified.
+    #   A string containing the title of the user. Possible values are left
+    #   unspecified. The value can vary based on your specific use case.
     #   @return [String]
     #
     # @!attribute [rw] preferred_language
@@ -1549,11 +1552,11 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] locale
-    #   A string containing the user's geographical region or location.
+    #   A string containing the geographical region or location of the user.
     #   @return [String]
     #
     # @!attribute [rw] timezone
-    #   A string containing the user's time zone.
+    #   A string containing the time zone of the user.
     #   @return [String]
     #
     # @!attribute [rw] identity_store_id

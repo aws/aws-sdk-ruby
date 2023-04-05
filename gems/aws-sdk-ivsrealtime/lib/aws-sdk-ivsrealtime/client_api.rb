@@ -40,7 +40,7 @@ module Aws::IVSRealTime
     ParticipantTokenConfiguration = Shapes::StructureShape.new(name: 'ParticipantTokenConfiguration')
     ParticipantTokenConfigurations = Shapes::ListShape.new(name: 'ParticipantTokenConfigurations')
     ParticipantTokenDurationMinutes = Shapes::IntegerShape.new(name: 'ParticipantTokenDurationMinutes')
-    ParticipantTokenExpirationTime = Shapes::TimestampShape.new(name: 'ParticipantTokenExpirationTime')
+    ParticipantTokenExpirationTime = Shapes::TimestampShape.new(name: 'ParticipantTokenExpirationTime', timestampFormat: "iso8601")
     ParticipantTokenId = Shapes::StringShape.new(name: 'ParticipantTokenId')
     ParticipantTokenList = Shapes::ListShape.new(name: 'ParticipantTokenList')
     ParticipantTokenString = Shapes::StringShape.new(name: 'ParticipantTokenString')
