@@ -19,6 +19,8 @@ module Aws::Proton
     AccountSettings = Shapes::StructureShape.new(name: 'AccountSettings')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
+    BlockerStatus = Shapes::StringShape.new(name: 'BlockerStatus')
+    BlockerType = Shapes::StringShape.new(name: 'BlockerType')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelComponentDeploymentInput = Shapes::StructureShape.new(name: 'CancelComponentDeploymentInput')
     CancelComponentDeploymentOutput = Shapes::StructureShape.new(name: 'CancelComponentDeploymentOutput')
@@ -53,7 +55,11 @@ module Aws::Proton
     CreateRepositoryInput = Shapes::StructureShape.new(name: 'CreateRepositoryInput')
     CreateRepositoryOutput = Shapes::StructureShape.new(name: 'CreateRepositoryOutput')
     CreateServiceInput = Shapes::StructureShape.new(name: 'CreateServiceInput')
+    CreateServiceInstanceInput = Shapes::StructureShape.new(name: 'CreateServiceInstanceInput')
+    CreateServiceInstanceOutput = Shapes::StructureShape.new(name: 'CreateServiceInstanceOutput')
     CreateServiceOutput = Shapes::StructureShape.new(name: 'CreateServiceOutput')
+    CreateServiceSyncConfigInput = Shapes::StructureShape.new(name: 'CreateServiceSyncConfigInput')
+    CreateServiceSyncConfigOutput = Shapes::StructureShape.new(name: 'CreateServiceSyncConfigOutput')
     CreateServiceTemplateInput = Shapes::StructureShape.new(name: 'CreateServiceTemplateInput')
     CreateServiceTemplateOutput = Shapes::StructureShape.new(name: 'CreateServiceTemplateOutput')
     CreateServiceTemplateVersionInput = Shapes::StructureShape.new(name: 'CreateServiceTemplateVersionInput')
@@ -74,6 +80,8 @@ module Aws::Proton
     DeleteRepositoryOutput = Shapes::StructureShape.new(name: 'DeleteRepositoryOutput')
     DeleteServiceInput = Shapes::StructureShape.new(name: 'DeleteServiceInput')
     DeleteServiceOutput = Shapes::StructureShape.new(name: 'DeleteServiceOutput')
+    DeleteServiceSyncConfigInput = Shapes::StructureShape.new(name: 'DeleteServiceSyncConfigInput')
+    DeleteServiceSyncConfigOutput = Shapes::StructureShape.new(name: 'DeleteServiceSyncConfigOutput')
     DeleteServiceTemplateInput = Shapes::StructureShape.new(name: 'DeleteServiceTemplateInput')
     DeleteServiceTemplateOutput = Shapes::StructureShape.new(name: 'DeleteServiceTemplateOutput')
     DeleteServiceTemplateVersionInput = Shapes::StructureShape.new(name: 'DeleteServiceTemplateVersionInput')
@@ -131,7 +139,13 @@ module Aws::Proton
     GetServiceInput = Shapes::StructureShape.new(name: 'GetServiceInput')
     GetServiceInstanceInput = Shapes::StructureShape.new(name: 'GetServiceInstanceInput')
     GetServiceInstanceOutput = Shapes::StructureShape.new(name: 'GetServiceInstanceOutput')
+    GetServiceInstanceSyncStatusInput = Shapes::StructureShape.new(name: 'GetServiceInstanceSyncStatusInput')
+    GetServiceInstanceSyncStatusOutput = Shapes::StructureShape.new(name: 'GetServiceInstanceSyncStatusOutput')
     GetServiceOutput = Shapes::StructureShape.new(name: 'GetServiceOutput')
+    GetServiceSyncBlockerSummaryInput = Shapes::StructureShape.new(name: 'GetServiceSyncBlockerSummaryInput')
+    GetServiceSyncBlockerSummaryOutput = Shapes::StructureShape.new(name: 'GetServiceSyncBlockerSummaryOutput')
+    GetServiceSyncConfigInput = Shapes::StructureShape.new(name: 'GetServiceSyncConfigInput')
+    GetServiceSyncConfigOutput = Shapes::StructureShape.new(name: 'GetServiceSyncConfigOutput')
     GetServiceTemplateInput = Shapes::StructureShape.new(name: 'GetServiceTemplateInput')
     GetServiceTemplateOutput = Shapes::StructureShape.new(name: 'GetServiceTemplateOutput')
     GetServiceTemplateVersionInput = Shapes::StructureShape.new(name: 'GetServiceTemplateVersionInput')
@@ -143,6 +157,7 @@ module Aws::Proton
     GitBranchName = Shapes::StringShape.new(name: 'GitBranchName')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    LatestSyncBlockers = Shapes::ListShape.new(name: 'LatestSyncBlockers')
     ListComponentOutputsInput = Shapes::StructureShape.new(name: 'ListComponentOutputsInput')
     ListComponentOutputsOutput = Shapes::StructureShape.new(name: 'ListComponentOutputsOutput')
     ListComponentProvisionedResourcesInput = Shapes::StructureShape.new(name: 'ListComponentProvisionedResourcesInput')
@@ -194,6 +209,7 @@ module Aws::Proton
     NotifyResourceDeploymentStatusChangeInputOutputsList = Shapes::ListShape.new(name: 'NotifyResourceDeploymentStatusChangeInputOutputsList')
     NotifyResourceDeploymentStatusChangeInputStatusMessageString = Shapes::StringShape.new(name: 'NotifyResourceDeploymentStatusChangeInputStatusMessageString')
     NotifyResourceDeploymentStatusChangeOutput = Shapes::StructureShape.new(name: 'NotifyResourceDeploymentStatusChangeOutput')
+    OpsFilePath = Shapes::StringShape.new(name: 'OpsFilePath')
     Output = Shapes::StructureShape.new(name: 'Output')
     OutputKey = Shapes::StringShape.new(name: 'OutputKey')
     OutputValueString = Shapes::StringShape.new(name: 'OutputValueString')
@@ -248,6 +264,8 @@ module Aws::Proton
     ServiceStatus = Shapes::StringShape.new(name: 'ServiceStatus')
     ServiceSummary = Shapes::StructureShape.new(name: 'ServiceSummary')
     ServiceSummaryList = Shapes::ListShape.new(name: 'ServiceSummaryList')
+    ServiceSyncBlockerSummary = Shapes::StructureShape.new(name: 'ServiceSyncBlockerSummary')
+    ServiceSyncConfig = Shapes::StructureShape.new(name: 'ServiceSyncConfig')
     ServiceTemplate = Shapes::StructureShape.new(name: 'ServiceTemplate')
     ServiceTemplateArn = Shapes::StringShape.new(name: 'ServiceTemplateArn')
     ServiceTemplateSummary = Shapes::StructureShape.new(name: 'ServiceTemplateSummary')
@@ -263,6 +281,9 @@ module Aws::Proton
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
     String = Shapes::StringShape.new(name: 'String')
     Subdirectory = Shapes::StringShape.new(name: 'Subdirectory')
+    SyncBlocker = Shapes::StructureShape.new(name: 'SyncBlocker')
+    SyncBlockerContext = Shapes::StructureShape.new(name: 'SyncBlockerContext')
+    SyncBlockerContexts = Shapes::ListShape.new(name: 'SyncBlockerContexts')
     SyncType = Shapes::StringShape.new(name: 'SyncType')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -301,6 +322,10 @@ module Aws::Proton
     UpdateServiceOutput = Shapes::StructureShape.new(name: 'UpdateServiceOutput')
     UpdateServicePipelineInput = Shapes::StructureShape.new(name: 'UpdateServicePipelineInput')
     UpdateServicePipelineOutput = Shapes::StructureShape.new(name: 'UpdateServicePipelineOutput')
+    UpdateServiceSyncBlockerInput = Shapes::StructureShape.new(name: 'UpdateServiceSyncBlockerInput')
+    UpdateServiceSyncBlockerOutput = Shapes::StructureShape.new(name: 'UpdateServiceSyncBlockerOutput')
+    UpdateServiceSyncConfigInput = Shapes::StructureShape.new(name: 'UpdateServiceSyncConfigInput')
+    UpdateServiceSyncConfigOutput = Shapes::StructureShape.new(name: 'UpdateServiceSyncConfigOutput')
     UpdateServiceTemplateInput = Shapes::StructureShape.new(name: 'UpdateServiceTemplateInput')
     UpdateServiceTemplateOutput = Shapes::StructureShape.new(name: 'UpdateServiceTemplateOutput')
     UpdateServiceTemplateVersionInput = Shapes::StructureShape.new(name: 'UpdateServiceTemplateVersionInput')
@@ -366,6 +391,7 @@ module Aws::Proton
     Component.add_member(:deployment_status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "deploymentStatusMessage"))
     Component.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     Component.add_member(:environment_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "environmentName"))
+    Component.add_member(:last_client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "lastClientRequestToken"))
     Component.add_member(:last_deployment_attempted_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastDeploymentAttemptedAt"))
     Component.add_member(:last_deployment_succeeded_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastDeploymentSucceededAt"))
     Component.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastModifiedAt"))
@@ -402,6 +428,7 @@ module Aws::Proton
     CountsSummary.add_member(:services, Shapes::ShapeRef.new(shape: ResourceCountsSummary, location_name: "services"))
     CountsSummary.struct_class = Types::CountsSummary
 
+    CreateComponentInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateComponentInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateComponentInput.add_member(:environment_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "environmentName"))
     CreateComponentInput.add_member(:manifest, Shapes::ShapeRef.new(shape: TemplateManifestContents, required: true, location_name: "manifest"))
@@ -489,8 +516,30 @@ module Aws::Proton
     CreateServiceInput.add_member(:template_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "templateName"))
     CreateServiceInput.struct_class = Types::CreateServiceInput
 
+    CreateServiceInstanceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateServiceInstanceInput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
+    CreateServiceInstanceInput.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceName"))
+    CreateServiceInstanceInput.add_member(:spec, Shapes::ShapeRef.new(shape: SpecContents, required: true, location_name: "spec"))
+    CreateServiceInstanceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateServiceInstanceInput.add_member(:template_major_version, Shapes::ShapeRef.new(shape: TemplateVersionPart, location_name: "templateMajorVersion"))
+    CreateServiceInstanceInput.add_member(:template_minor_version, Shapes::ShapeRef.new(shape: TemplateVersionPart, location_name: "templateMinorVersion"))
+    CreateServiceInstanceInput.struct_class = Types::CreateServiceInstanceInput
+
+    CreateServiceInstanceOutput.add_member(:service_instance, Shapes::ShapeRef.new(shape: ServiceInstance, required: true, location_name: "serviceInstance"))
+    CreateServiceInstanceOutput.struct_class = Types::CreateServiceInstanceOutput
+
     CreateServiceOutput.add_member(:service, Shapes::ShapeRef.new(shape: Service, required: true, location_name: "service"))
     CreateServiceOutput.struct_class = Types::CreateServiceOutput
+
+    CreateServiceSyncConfigInput.add_member(:branch, Shapes::ShapeRef.new(shape: GitBranchName, required: true, location_name: "branch"))
+    CreateServiceSyncConfigInput.add_member(:file_path, Shapes::ShapeRef.new(shape: OpsFilePath, required: true, location_name: "filePath"))
+    CreateServiceSyncConfigInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    CreateServiceSyncConfigInput.add_member(:repository_provider, Shapes::ShapeRef.new(shape: RepositoryProvider, required: true, location_name: "repositoryProvider"))
+    CreateServiceSyncConfigInput.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceName"))
+    CreateServiceSyncConfigInput.struct_class = Types::CreateServiceSyncConfigInput
+
+    CreateServiceSyncConfigOutput.add_member(:service_sync_config, Shapes::ShapeRef.new(shape: ServiceSyncConfig, location_name: "serviceSyncConfig"))
+    CreateServiceSyncConfigOutput.struct_class = Types::CreateServiceSyncConfigOutput
 
     CreateServiceTemplateInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateServiceTemplateInput.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
@@ -571,6 +620,12 @@ module Aws::Proton
 
     DeleteServiceOutput.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "service"))
     DeleteServiceOutput.struct_class = Types::DeleteServiceOutput
+
+    DeleteServiceSyncConfigInput.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceName"))
+    DeleteServiceSyncConfigInput.struct_class = Types::DeleteServiceSyncConfigInput
+
+    DeleteServiceSyncConfigOutput.add_member(:service_sync_config, Shapes::ShapeRef.new(shape: ServiceSyncConfig, location_name: "serviceSyncConfig"))
+    DeleteServiceSyncConfigOutput.struct_class = Types::DeleteServiceSyncConfigOutput
 
     DeleteServiceTemplateInput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     DeleteServiceTemplateInput.struct_class = Types::DeleteServiceTemplateInput
@@ -787,8 +842,30 @@ module Aws::Proton
     GetServiceInstanceOutput.add_member(:service_instance, Shapes::ShapeRef.new(shape: ServiceInstance, required: true, location_name: "serviceInstance"))
     GetServiceInstanceOutput.struct_class = Types::GetServiceInstanceOutput
 
+    GetServiceInstanceSyncStatusInput.add_member(:service_instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceInstanceName"))
+    GetServiceInstanceSyncStatusInput.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceName"))
+    GetServiceInstanceSyncStatusInput.struct_class = Types::GetServiceInstanceSyncStatusInput
+
+    GetServiceInstanceSyncStatusOutput.add_member(:desired_state, Shapes::ShapeRef.new(shape: Revision, location_name: "desiredState"))
+    GetServiceInstanceSyncStatusOutput.add_member(:latest_successful_sync, Shapes::ShapeRef.new(shape: ResourceSyncAttempt, location_name: "latestSuccessfulSync"))
+    GetServiceInstanceSyncStatusOutput.add_member(:latest_sync, Shapes::ShapeRef.new(shape: ResourceSyncAttempt, location_name: "latestSync"))
+    GetServiceInstanceSyncStatusOutput.struct_class = Types::GetServiceInstanceSyncStatusOutput
+
     GetServiceOutput.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "service"))
     GetServiceOutput.struct_class = Types::GetServiceOutput
+
+    GetServiceSyncBlockerSummaryInput.add_member(:service_instance_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "serviceInstanceName"))
+    GetServiceSyncBlockerSummaryInput.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceName"))
+    GetServiceSyncBlockerSummaryInput.struct_class = Types::GetServiceSyncBlockerSummaryInput
+
+    GetServiceSyncBlockerSummaryOutput.add_member(:service_sync_blocker_summary, Shapes::ShapeRef.new(shape: ServiceSyncBlockerSummary, location_name: "serviceSyncBlockerSummary"))
+    GetServiceSyncBlockerSummaryOutput.struct_class = Types::GetServiceSyncBlockerSummaryOutput
+
+    GetServiceSyncConfigInput.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceName"))
+    GetServiceSyncConfigInput.struct_class = Types::GetServiceSyncConfigInput
+
+    GetServiceSyncConfigOutput.add_member(:service_sync_config, Shapes::ShapeRef.new(shape: ServiceSyncConfig, location_name: "serviceSyncConfig"))
+    GetServiceSyncConfigOutput.struct_class = Types::GetServiceSyncConfigOutput
 
     GetServiceTemplateInput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     GetServiceTemplateInput.struct_class = Types::GetServiceTemplateInput
@@ -823,6 +900,8 @@ module Aws::Proton
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    LatestSyncBlockers.member = Shapes::ShapeRef.new(shape: SyncBlocker)
 
     ListComponentOutputsInput.add_member(:component_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "componentName"))
     ListComponentOutputsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: EmptyNextToken, location_name: "nextToken"))
@@ -1059,6 +1138,7 @@ module Aws::Proton
     RepositoryBranchInput.struct_class = Types::RepositoryBranchInput
 
     RepositorySummary.add_member(:arn, Shapes::ShapeRef.new(shape: RepositoryArn, required: true, location_name: "arn"))
+    RepositorySummary.add_member(:connection_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "connectionArn"))
     RepositorySummary.add_member(:name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "name"))
     RepositorySummary.add_member(:provider, Shapes::ShapeRef.new(shape: RepositoryProvider, required: true, location_name: "provider"))
     RepositorySummary.struct_class = Types::RepositorySummary
@@ -1143,6 +1223,7 @@ module Aws::Proton
     ServiceInstance.add_member(:deployment_status, Shapes::ShapeRef.new(shape: DeploymentStatus, required: true, location_name: "deploymentStatus"))
     ServiceInstance.add_member(:deployment_status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "deploymentStatusMessage"))
     ServiceInstance.add_member(:environment_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "environmentName"))
+    ServiceInstance.add_member(:last_client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "lastClientRequestToken"))
     ServiceInstance.add_member(:last_deployment_attempted_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastDeploymentAttemptedAt"))
     ServiceInstance.add_member(:last_deployment_succeeded_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastDeploymentSucceededAt"))
     ServiceInstance.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
@@ -1195,6 +1276,18 @@ module Aws::Proton
     ServiceSummary.struct_class = Types::ServiceSummary
 
     ServiceSummaryList.member = Shapes::ShapeRef.new(shape: ServiceSummary)
+
+    ServiceSyncBlockerSummary.add_member(:latest_blockers, Shapes::ShapeRef.new(shape: LatestSyncBlockers, location_name: "latestBlockers"))
+    ServiceSyncBlockerSummary.add_member(:service_instance_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceInstanceName"))
+    ServiceSyncBlockerSummary.add_member(:service_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceName"))
+    ServiceSyncBlockerSummary.struct_class = Types::ServiceSyncBlockerSummary
+
+    ServiceSyncConfig.add_member(:branch, Shapes::ShapeRef.new(shape: GitBranchName, required: true, location_name: "branch"))
+    ServiceSyncConfig.add_member(:file_path, Shapes::ShapeRef.new(shape: OpsFilePath, required: true, location_name: "filePath"))
+    ServiceSyncConfig.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    ServiceSyncConfig.add_member(:repository_provider, Shapes::ShapeRef.new(shape: RepositoryProvider, required: true, location_name: "repositoryProvider"))
+    ServiceSyncConfig.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceName"))
+    ServiceSyncConfig.struct_class = Types::ServiceSyncConfig
 
     ServiceTemplate.add_member(:arn, Shapes::ShapeRef.new(shape: ServiceTemplateArn, required: true, location_name: "arn"))
     ServiceTemplate.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
@@ -1250,6 +1343,22 @@ module Aws::Proton
 
     ServiceTemplateVersionSummaryList.member = Shapes::ShapeRef.new(shape: ServiceTemplateVersionSummary)
 
+    SyncBlocker.add_member(:contexts, Shapes::ShapeRef.new(shape: SyncBlockerContexts, location_name: "contexts"))
+    SyncBlocker.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    SyncBlocker.add_member(:created_reason, Shapes::ShapeRef.new(shape: String, required: true, location_name: "createdReason"))
+    SyncBlocker.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
+    SyncBlocker.add_member(:resolved_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "resolvedAt"))
+    SyncBlocker.add_member(:resolved_reason, Shapes::ShapeRef.new(shape: String, location_name: "resolvedReason"))
+    SyncBlocker.add_member(:status, Shapes::ShapeRef.new(shape: BlockerStatus, required: true, location_name: "status"))
+    SyncBlocker.add_member(:type, Shapes::ShapeRef.new(shape: BlockerType, required: true, location_name: "type"))
+    SyncBlocker.struct_class = Types::SyncBlocker
+
+    SyncBlockerContext.add_member(:key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "key"))
+    SyncBlockerContext.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
+    SyncBlockerContext.struct_class = Types::SyncBlockerContext
+
+    SyncBlockerContexts.member = Shapes::ShapeRef.new(shape: SyncBlockerContext)
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "value"))
     Tag.struct_class = Types::Tag
@@ -1296,6 +1405,7 @@ module Aws::Proton
     UpdateAccountSettingsOutput.add_member(:account_settings, Shapes::ShapeRef.new(shape: AccountSettings, required: true, location_name: "accountSettings"))
     UpdateAccountSettingsOutput.struct_class = Types::UpdateAccountSettingsOutput
 
+    UpdateComponentInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateComponentInput.add_member(:deployment_type, Shapes::ShapeRef.new(shape: ComponentDeploymentUpdateType, required: true, location_name: "deploymentType"))
     UpdateComponentInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateComponentInput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
@@ -1356,6 +1466,7 @@ module Aws::Proton
     UpdateServiceInput.add_member(:spec, Shapes::ShapeRef.new(shape: SpecContents, location_name: "spec"))
     UpdateServiceInput.struct_class = Types::UpdateServiceInput
 
+    UpdateServiceInstanceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateServiceInstanceInput.add_member(:deployment_type, Shapes::ShapeRef.new(shape: DeploymentUpdateType, required: true, location_name: "deploymentType"))
     UpdateServiceInstanceInput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     UpdateServiceInstanceInput.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceName"))
@@ -1379,6 +1490,25 @@ module Aws::Proton
 
     UpdateServicePipelineOutput.add_member(:pipeline, Shapes::ShapeRef.new(shape: ServicePipeline, required: true, location_name: "pipeline"))
     UpdateServicePipelineOutput.struct_class = Types::UpdateServicePipelineOutput
+
+    UpdateServiceSyncBlockerInput.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
+    UpdateServiceSyncBlockerInput.add_member(:resolved_reason, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resolvedReason"))
+    UpdateServiceSyncBlockerInput.struct_class = Types::UpdateServiceSyncBlockerInput
+
+    UpdateServiceSyncBlockerOutput.add_member(:service_instance_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "serviceInstanceName"))
+    UpdateServiceSyncBlockerOutput.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceName"))
+    UpdateServiceSyncBlockerOutput.add_member(:service_sync_blocker, Shapes::ShapeRef.new(shape: SyncBlocker, required: true, location_name: "serviceSyncBlocker"))
+    UpdateServiceSyncBlockerOutput.struct_class = Types::UpdateServiceSyncBlockerOutput
+
+    UpdateServiceSyncConfigInput.add_member(:branch, Shapes::ShapeRef.new(shape: GitBranchName, required: true, location_name: "branch"))
+    UpdateServiceSyncConfigInput.add_member(:file_path, Shapes::ShapeRef.new(shape: OpsFilePath, required: true, location_name: "filePath"))
+    UpdateServiceSyncConfigInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    UpdateServiceSyncConfigInput.add_member(:repository_provider, Shapes::ShapeRef.new(shape: RepositoryProvider, required: true, location_name: "repositoryProvider"))
+    UpdateServiceSyncConfigInput.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceName"))
+    UpdateServiceSyncConfigInput.struct_class = Types::UpdateServiceSyncConfigInput
+
+    UpdateServiceSyncConfigOutput.add_member(:service_sync_config, Shapes::ShapeRef.new(shape: ServiceSyncConfig, location_name: "serviceSyncConfig"))
+    UpdateServiceSyncConfigOutput.struct_class = Types::UpdateServiceSyncConfigOutput
 
     UpdateServiceTemplateInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateServiceTemplateInput.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
@@ -1605,6 +1735,34 @@ module Aws::Proton
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:create_service_instance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateServiceInstance"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateServiceInstanceInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateServiceInstanceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_service_sync_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateServiceSyncConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateServiceSyncConfigInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateServiceSyncConfigOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_service_template, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateServiceTemplate"
         o.http_method = "POST"
@@ -1738,6 +1896,20 @@ module Aws::Proton
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteServiceInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteServiceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_service_sync_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteServiceSyncConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteServiceSyncConfigInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteServiceSyncConfigOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1923,6 +2095,45 @@ module Aws::Proton
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetServiceInstanceInput)
         o.output = Shapes::ShapeRef.new(shape: GetServiceInstanceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_service_instance_sync_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetServiceInstanceSyncStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetServiceInstanceSyncStatusInput)
+        o.output = Shapes::ShapeRef.new(shape: GetServiceInstanceSyncStatusOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_service_sync_blocker_summary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetServiceSyncBlockerSummary"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetServiceSyncBlockerSummaryInput)
+        o.output = Shapes::ShapeRef.new(shape: GetServiceSyncBlockerSummaryOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_service_sync_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetServiceSyncConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetServiceSyncConfigInput)
+        o.output = Shapes::ShapeRef.new(shape: GetServiceSyncConfigOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -2523,6 +2734,34 @@ module Aws::Proton
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateServicePipelineInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateServicePipelineOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_service_sync_blocker, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateServiceSyncBlocker"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateServiceSyncBlockerInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateServiceSyncBlockerOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_service_sync_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateServiceSyncConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateServiceSyncConfigInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateServiceSyncConfigOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

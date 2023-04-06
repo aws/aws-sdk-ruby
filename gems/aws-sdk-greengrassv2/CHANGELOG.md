@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2023-04-06)
+------------------
+
+* Feature - Add support for SUCCEEDED value in coreDeviceExecutionStatus field. Documentation updates for Greengrass V2.
+
 1.24.0 (2023-01-27)
 ------------------
 

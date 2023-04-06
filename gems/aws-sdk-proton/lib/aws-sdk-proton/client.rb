@@ -457,6 +457,7 @@ module Aws::Proton
     #   resp.component.deployment_status_message #=> String
     #   resp.component.description #=> String
     #   resp.component.environment_name #=> String
+    #   resp.component.last_client_request_token #=> String
     #   resp.component.last_deployment_attempted_at #=> Time
     #   resp.component.last_deployment_succeeded_at #=> Time
     #   resp.component.last_modified_at #=> Time
@@ -587,6 +588,7 @@ module Aws::Proton
     #   resp.service_instance.deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
     #   resp.service_instance.deployment_status_message #=> String
     #   resp.service_instance.environment_name #=> String
+    #   resp.service_instance.last_client_request_token #=> String
     #   resp.service_instance.last_deployment_attempted_at #=> Time
     #   resp.service_instance.last_deployment_succeeded_at #=> Time
     #   resp.service_instance.name #=> String
@@ -672,6 +674,12 @@ module Aws::Proton
     #
     # [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
     #
+    # @option params [String] :client_token
+    #   The client token for the created component.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @option params [String] :description
     #   An optional customer-provided description of the component.
     #
@@ -732,6 +740,7 @@ module Aws::Proton
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_component({
+    #     client_token: "ClientToken",
     #     description: "Description",
     #     environment_name: "ResourceName",
     #     manifest: "TemplateManifestContents", # required
@@ -756,6 +765,7 @@ module Aws::Proton
     #   resp.component.deployment_status_message #=> String
     #   resp.component.description #=> String
     #   resp.component.environment_name #=> String
+    #   resp.component.last_client_request_token #=> String
     #   resp.component.last_deployment_attempted_at #=> Time
     #   resp.component.last_deployment_succeeded_at #=> Time
     #   resp.component.last_modified_at #=> Time
@@ -1463,6 +1473,137 @@ module Aws::Proton
       req.send_request(options)
     end
 
+    # Create a service instance.
+    #
+    # @option params [String] :client_token
+    #   The client token of the service instance to create.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :name
+    #   The name of the service instance to create.
+    #
+    # @option params [required, String] :service_name
+    #   The name of the service the service instance is added to.
+    #
+    # @option params [required, String] :spec
+    #   The spec for the service instance you want to create.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An optional list of metadata items that you can associate with the
+    #   Proton service instance. A tag is a key-value pair.
+    #
+    #   For more information, see [Proton resources and tagging][1] in the
+    #   *Proton User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
+    #
+    # @option params [String] :template_major_version
+    #   To create a new major and minor version of the service template,
+    #   *exclude* `major Version`.
+    #
+    # @option params [String] :template_minor_version
+    #   To create a new minor version of the service template, include a
+    #   `major Version`.
+    #
+    # @return [Types::CreateServiceInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateServiceInstanceOutput#service_instance #service_instance} => Types::ServiceInstance
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_service_instance({
+    #     client_token: "ClientToken",
+    #     name: "ResourceName", # required
+    #     service_name: "ResourceName", # required
+    #     spec: "SpecContents", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     template_major_version: "TemplateVersionPart",
+    #     template_minor_version: "TemplateVersionPart",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_instance.arn #=> String
+    #   resp.service_instance.created_at #=> Time
+    #   resp.service_instance.deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
+    #   resp.service_instance.deployment_status_message #=> String
+    #   resp.service_instance.environment_name #=> String
+    #   resp.service_instance.last_client_request_token #=> String
+    #   resp.service_instance.last_deployment_attempted_at #=> Time
+    #   resp.service_instance.last_deployment_succeeded_at #=> Time
+    #   resp.service_instance.name #=> String
+    #   resp.service_instance.service_name #=> String
+    #   resp.service_instance.spec #=> String
+    #   resp.service_instance.template_major_version #=> String
+    #   resp.service_instance.template_minor_version #=> String
+    #   resp.service_instance.template_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateServiceInstance AWS API Documentation
+    #
+    # @overload create_service_instance(params = {})
+    # @param [Hash] params ({})
+    def create_service_instance(params = {}, options = {})
+      req = build_request(:create_service_instance, params)
+      req.send_request(options)
+    end
+
+    # Create the Proton Ops configuration file.
+    #
+    # @option params [required, String] :branch
+    #   The repository branch for your Proton Ops file.
+    #
+    # @option params [required, String] :file_path
+    #   The path to the Proton Ops file.
+    #
+    # @option params [required, String] :repository_name
+    #   The repository name.
+    #
+    # @option params [required, String] :repository_provider
+    #   The provider type for your repository.
+    #
+    # @option params [required, String] :service_name
+    #   The name of the service the Proton Ops file is for.
+    #
+    # @return [Types::CreateServiceSyncConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateServiceSyncConfigOutput#service_sync_config #service_sync_config} => Types::ServiceSyncConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_service_sync_config({
+    #     branch: "GitBranchName", # required
+    #     file_path: "OpsFilePath", # required
+    #     repository_name: "RepositoryName", # required
+    #     repository_provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #     service_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_sync_config.branch #=> String
+    #   resp.service_sync_config.file_path #=> String
+    #   resp.service_sync_config.repository_name #=> String
+    #   resp.service_sync_config.repository_provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
+    #   resp.service_sync_config.service_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateServiceSyncConfig AWS API Documentation
+    #
+    # @overload create_service_sync_config(params = {})
+    # @param [Hash] params ({})
+    def create_service_sync_config(params = {}, options = {})
+      req = build_request(:create_service_sync_config, params)
+      req.send_request(options)
+    end
+
     # Create a service template. The administrator creates a service
     # template to define standardized infrastructure and an optional CI/CD
     # service pipeline. Developers, in turn, select the service template
@@ -1769,6 +1910,7 @@ module Aws::Proton
     #   resp.component.deployment_status_message #=> String
     #   resp.component.description #=> String
     #   resp.component.environment_name #=> String
+    #   resp.component.last_client_request_token #=> String
     #   resp.component.last_deployment_attempted_at #=> Time
     #   resp.component.last_deployment_succeeded_at #=> Time
     #   resp.component.last_modified_at #=> Time
@@ -2078,6 +2220,39 @@ module Aws::Proton
       req.send_request(options)
     end
 
+    # Delete the Proton Ops file.
+    #
+    # @option params [required, String] :service_name
+    #   The name of the service that you want to delete the service sync
+    #   configuration for.
+    #
+    # @return [Types::DeleteServiceSyncConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteServiceSyncConfigOutput#service_sync_config #service_sync_config} => Types::ServiceSyncConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_service_sync_config({
+    #     service_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_sync_config.branch #=> String
+    #   resp.service_sync_config.file_path #=> String
+    #   resp.service_sync_config.repository_name #=> String
+    #   resp.service_sync_config.repository_provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
+    #   resp.service_sync_config.service_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/DeleteServiceSyncConfig AWS API Documentation
+    #
+    # @overload delete_service_sync_config(params = {})
+    # @param [Hash] params ({})
+    def delete_service_sync_config(params = {}, options = {})
+      req = build_request(:delete_service_sync_config, params)
+      req.send_request(options)
+    end
+
     # If no other major or minor versions of the service template exist,
     # delete the service template.
     #
@@ -2268,6 +2443,7 @@ module Aws::Proton
     #   resp.component.deployment_status_message #=> String
     #   resp.component.description #=> String
     #   resp.component.environment_name #=> String
+    #   resp.component.last_client_request_token #=> String
     #   resp.component.last_deployment_attempted_at #=> Time
     #   resp.component.last_deployment_succeeded_at #=> Time
     #   resp.component.last_modified_at #=> Time
@@ -2561,7 +2737,7 @@ module Aws::Proton
     #     branch: "GitBranchName", # required
     #     repository_name: "RepositoryName", # required
     #     repository_provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
-    #     sync_type: "TEMPLATE_SYNC", # required, accepts TEMPLATE_SYNC
+    #     sync_type: "TEMPLATE_SYNC", # required, accepts TEMPLATE_SYNC, SERVICE_SYNC
     #   })
     #
     # @example Response structure
@@ -2594,9 +2770,9 @@ module Aws::Proton
     # up-to-date, behind a template major version, or behind a template
     # minor version), the total number of resources, and the number of
     # resources that are in a failed state, grouped by resource type.
-    # Components, environments, and service templates are exceptions—see the
-    # `components`, `environments`, and `serviceTemplates` field
-    # descriptions.
+    # Components, environments, and service templates return less
+    # information - see the `components`, `environments`, and
+    # `serviceTemplates` field descriptions.
     #
     # For context, the action also returns the total number of each type of
     # Proton template in the Amazon Web Services account.
@@ -2725,7 +2901,7 @@ module Aws::Proton
     #   for.
     #
     # @option params [required, String] :service_name
-    #   The name of the service that the service instance belongs to.
+    #   The name of the service that you want the service instance input for.
     #
     # @return [Types::GetServiceInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2745,6 +2921,7 @@ module Aws::Proton
     #   resp.service_instance.deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
     #   resp.service_instance.deployment_status_message #=> String
     #   resp.service_instance.environment_name #=> String
+    #   resp.service_instance.last_client_request_token #=> String
     #   resp.service_instance.last_deployment_attempted_at #=> Time
     #   resp.service_instance.last_deployment_succeeded_at #=> Time
     #   resp.service_instance.name #=> String
@@ -2765,6 +2942,162 @@ module Aws::Proton
     # @param [Hash] params ({})
     def get_service_instance(params = {}, options = {})
       req = build_request(:get_service_instance, params)
+      req.send_request(options)
+    end
+
+    # Get the status of the synced service instance.
+    #
+    # @option params [required, String] :service_instance_name
+    #   The name of the service instance that you want the sync status input
+    #   for.
+    #
+    # @option params [required, String] :service_name
+    #   The name of the service that the service instance belongs to.
+    #
+    # @return [Types::GetServiceInstanceSyncStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetServiceInstanceSyncStatusOutput#desired_state #desired_state} => Types::Revision
+    #   * {Types::GetServiceInstanceSyncStatusOutput#latest_successful_sync #latest_successful_sync} => Types::ResourceSyncAttempt
+    #   * {Types::GetServiceInstanceSyncStatusOutput#latest_sync #latest_sync} => Types::ResourceSyncAttempt
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_service_instance_sync_status({
+    #     service_instance_name: "ResourceName", # required
+    #     service_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.desired_state.branch #=> String
+    #   resp.desired_state.directory #=> String
+    #   resp.desired_state.repository_name #=> String
+    #   resp.desired_state.repository_provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
+    #   resp.desired_state.sha #=> String
+    #   resp.latest_successful_sync.events #=> Array
+    #   resp.latest_successful_sync.events[0].event #=> String
+    #   resp.latest_successful_sync.events[0].external_id #=> String
+    #   resp.latest_successful_sync.events[0].time #=> Time
+    #   resp.latest_successful_sync.events[0].type #=> String
+    #   resp.latest_successful_sync.initial_revision.branch #=> String
+    #   resp.latest_successful_sync.initial_revision.directory #=> String
+    #   resp.latest_successful_sync.initial_revision.repository_name #=> String
+    #   resp.latest_successful_sync.initial_revision.repository_provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
+    #   resp.latest_successful_sync.initial_revision.sha #=> String
+    #   resp.latest_successful_sync.started_at #=> Time
+    #   resp.latest_successful_sync.status #=> String, one of "INITIATED", "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.latest_successful_sync.target #=> String
+    #   resp.latest_successful_sync.target_revision.branch #=> String
+    #   resp.latest_successful_sync.target_revision.directory #=> String
+    #   resp.latest_successful_sync.target_revision.repository_name #=> String
+    #   resp.latest_successful_sync.target_revision.repository_provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
+    #   resp.latest_successful_sync.target_revision.sha #=> String
+    #   resp.latest_sync.events #=> Array
+    #   resp.latest_sync.events[0].event #=> String
+    #   resp.latest_sync.events[0].external_id #=> String
+    #   resp.latest_sync.events[0].time #=> Time
+    #   resp.latest_sync.events[0].type #=> String
+    #   resp.latest_sync.initial_revision.branch #=> String
+    #   resp.latest_sync.initial_revision.directory #=> String
+    #   resp.latest_sync.initial_revision.repository_name #=> String
+    #   resp.latest_sync.initial_revision.repository_provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
+    #   resp.latest_sync.initial_revision.sha #=> String
+    #   resp.latest_sync.started_at #=> Time
+    #   resp.latest_sync.status #=> String, one of "INITIATED", "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.latest_sync.target #=> String
+    #   resp.latest_sync.target_revision.branch #=> String
+    #   resp.latest_sync.target_revision.directory #=> String
+    #   resp.latest_sync.target_revision.repository_name #=> String
+    #   resp.latest_sync.target_revision.repository_provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
+    #   resp.latest_sync.target_revision.sha #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetServiceInstanceSyncStatus AWS API Documentation
+    #
+    # @overload get_service_instance_sync_status(params = {})
+    # @param [Hash] params ({})
+    def get_service_instance_sync_status(params = {}, options = {})
+      req = build_request(:get_service_instance_sync_status, params)
+      req.send_request(options)
+    end
+
+    # Get detailed data for the service sync blocker summary.
+    #
+    # @option params [String] :service_instance_name
+    #   The name of the service instance that you want to get the service sync
+    #   blocker summary for. If given bothe the instance name and the service
+    #   name, only the instance is blocked.
+    #
+    # @option params [required, String] :service_name
+    #   The name of the service that you want to get the service sync blocker
+    #   summary for. If given only the service name, all instances are
+    #   blocked.
+    #
+    # @return [Types::GetServiceSyncBlockerSummaryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetServiceSyncBlockerSummaryOutput#service_sync_blocker_summary #service_sync_blocker_summary} => Types::ServiceSyncBlockerSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_service_sync_blocker_summary({
+    #     service_instance_name: "ResourceName",
+    #     service_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_sync_blocker_summary.latest_blockers #=> Array
+    #   resp.service_sync_blocker_summary.latest_blockers[0].contexts #=> Array
+    #   resp.service_sync_blocker_summary.latest_blockers[0].contexts[0].key #=> String
+    #   resp.service_sync_blocker_summary.latest_blockers[0].contexts[0].value #=> String
+    #   resp.service_sync_blocker_summary.latest_blockers[0].created_at #=> Time
+    #   resp.service_sync_blocker_summary.latest_blockers[0].created_reason #=> String
+    #   resp.service_sync_blocker_summary.latest_blockers[0].id #=> String
+    #   resp.service_sync_blocker_summary.latest_blockers[0].resolved_at #=> Time
+    #   resp.service_sync_blocker_summary.latest_blockers[0].resolved_reason #=> String
+    #   resp.service_sync_blocker_summary.latest_blockers[0].status #=> String, one of "ACTIVE", "RESOLVED"
+    #   resp.service_sync_blocker_summary.latest_blockers[0].type #=> String, one of "AUTOMATED"
+    #   resp.service_sync_blocker_summary.service_instance_name #=> String
+    #   resp.service_sync_blocker_summary.service_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetServiceSyncBlockerSummary AWS API Documentation
+    #
+    # @overload get_service_sync_blocker_summary(params = {})
+    # @param [Hash] params ({})
+    def get_service_sync_blocker_summary(params = {}, options = {})
+      req = build_request(:get_service_sync_blocker_summary, params)
+      req.send_request(options)
+    end
+
+    # Get detailed information for the service sync configuration.
+    #
+    # @option params [required, String] :service_name
+    #   The name of the service that you want to get the service sync
+    #   configuration for.
+    #
+    # @return [Types::GetServiceSyncConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetServiceSyncConfigOutput#service_sync_config #service_sync_config} => Types::ServiceSyncConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_service_sync_config({
+    #     service_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_sync_config.branch #=> String
+    #   resp.service_sync_config.file_path #=> String
+    #   resp.service_sync_config.repository_name #=> String
+    #   resp.service_sync_config.repository_provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
+    #   resp.service_sync_config.service_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetServiceSyncConfig AWS API Documentation
+    #
+    # @overload get_service_sync_config(params = {})
+    # @param [Hash] params ({})
+    def get_service_sync_config(params = {}, options = {})
+      req = build_request(:get_service_sync_config, params)
       req.send_request(options)
     end
 
@@ -3498,6 +3831,7 @@ module Aws::Proton
     #   resp.next_token #=> String
     #   resp.repositories #=> Array
     #   resp.repositories[0].arn #=> String
+    #   resp.repositories[0].connection_arn #=> String
     #   resp.repositories[0].name #=> String
     #   resp.repositories[0].provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
     #
@@ -3539,7 +3873,7 @@ module Aws::Proton
     #     next_token: "EmptyNextToken",
     #     repository_name: "RepositoryName", # required
     #     repository_provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
-    #     sync_type: "TEMPLATE_SYNC", # required, accepts TEMPLATE_SYNC
+    #     sync_type: "TEMPLATE_SYNC", # required, accepts TEMPLATE_SYNC, SERVICE_SYNC
     #   })
     #
     # @example Response structure
@@ -4276,6 +4610,12 @@ module Aws::Proton
     #
     # [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
     #
+    # @option params [String] :client_token
+    #   The client token for the updated component.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @option params [required, String] :deployment_type
     #   The deployment type. It defines the mode for updating a component, as
     #   follows:
@@ -4338,6 +4678,7 @@ module Aws::Proton
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_component({
+    #     client_token: "ClientToken",
     #     deployment_type: "NONE", # required, accepts NONE, CURRENT_VERSION
     #     description: "Description",
     #     name: "ResourceName", # required
@@ -4355,6 +4696,7 @@ module Aws::Proton
     #   resp.component.deployment_status_message #=> String
     #   resp.component.description #=> String
     #   resp.component.environment_name #=> String
+    #   resp.component.last_client_request_token #=> String
     #   resp.component.last_deployment_attempted_at #=> Time
     #   resp.component.last_deployment_succeeded_at #=> Time
     #   resp.component.last_modified_at #=> Time
@@ -4879,6 +5221,12 @@ module Aws::Proton
     #
     # [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
     #
+    # @option params [String] :client_token
+    #   The client token of the service instance to update.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @option params [required, String] :deployment_type
     #   The deployment type. It defines the mode for updating a service
     #   instance, as follows:
@@ -4940,6 +5288,7 @@ module Aws::Proton
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_service_instance({
+    #     client_token: "ClientToken",
     #     deployment_type: "NONE", # required, accepts NONE, CURRENT_VERSION, MINOR_VERSION, MAJOR_VERSION
     #     name: "ResourceName", # required
     #     service_name: "ResourceName", # required
@@ -4955,6 +5304,7 @@ module Aws::Proton
     #   resp.service_instance.deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
     #   resp.service_instance.deployment_status_message #=> String
     #   resp.service_instance.environment_name #=> String
+    #   resp.service_instance.last_client_request_token #=> String
     #   resp.service_instance.last_deployment_attempted_at #=> Time
     #   resp.service_instance.last_deployment_succeeded_at #=> Time
     #   resp.service_instance.name #=> String
@@ -5101,6 +5451,101 @@ module Aws::Proton
     # @param [Hash] params ({})
     def update_service_pipeline(params = {}, options = {})
       req = build_request(:update_service_pipeline, params)
+      req.send_request(options)
+    end
+
+    # Update the service sync blocker by resolving it.
+    #
+    # @option params [required, String] :id
+    #   The ID of the service sync blocker.
+    #
+    # @option params [required, String] :resolved_reason
+    #   The reason the service sync blocker was resolved.
+    #
+    # @return [Types::UpdateServiceSyncBlockerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateServiceSyncBlockerOutput#service_instance_name #service_instance_name} => String
+    #   * {Types::UpdateServiceSyncBlockerOutput#service_name #service_name} => String
+    #   * {Types::UpdateServiceSyncBlockerOutput#service_sync_blocker #service_sync_blocker} => Types::SyncBlocker
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_service_sync_blocker({
+    #     id: "String", # required
+    #     resolved_reason: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_instance_name #=> String
+    #   resp.service_name #=> String
+    #   resp.service_sync_blocker.contexts #=> Array
+    #   resp.service_sync_blocker.contexts[0].key #=> String
+    #   resp.service_sync_blocker.contexts[0].value #=> String
+    #   resp.service_sync_blocker.created_at #=> Time
+    #   resp.service_sync_blocker.created_reason #=> String
+    #   resp.service_sync_blocker.id #=> String
+    #   resp.service_sync_blocker.resolved_at #=> Time
+    #   resp.service_sync_blocker.resolved_reason #=> String
+    #   resp.service_sync_blocker.status #=> String, one of "ACTIVE", "RESOLVED"
+    #   resp.service_sync_blocker.type #=> String, one of "AUTOMATED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateServiceSyncBlocker AWS API Documentation
+    #
+    # @overload update_service_sync_blocker(params = {})
+    # @param [Hash] params ({})
+    def update_service_sync_blocker(params = {}, options = {})
+      req = build_request(:update_service_sync_blocker, params)
+      req.send_request(options)
+    end
+
+    # Update the Proton Ops config file.
+    #
+    # @option params [required, String] :branch
+    #   The name of the code repository branch where the Proton Ops file is
+    #   found.
+    #
+    # @option params [required, String] :file_path
+    #   The path to the Proton Ops file.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository where the Proton Ops file is found.
+    #
+    # @option params [required, String] :repository_provider
+    #   The name of the repository provider where the Proton Ops file is
+    #   found.
+    #
+    # @option params [required, String] :service_name
+    #   The name of the service the Proton Ops file is for.
+    #
+    # @return [Types::UpdateServiceSyncConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateServiceSyncConfigOutput#service_sync_config #service_sync_config} => Types::ServiceSyncConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_service_sync_config({
+    #     branch: "GitBranchName", # required
+    #     file_path: "OpsFilePath", # required
+    #     repository_name: "RepositoryName", # required
+    #     repository_provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #     service_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_sync_config.branch #=> String
+    #   resp.service_sync_config.file_path #=> String
+    #   resp.service_sync_config.repository_name #=> String
+    #   resp.service_sync_config.repository_provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
+    #   resp.service_sync_config.service_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateServiceSyncConfig AWS API Documentation
+    #
+    # @overload update_service_sync_config(params = {})
+    # @param [Hash] params ({})
+    def update_service_sync_config(params = {}, options = {})
+      req = build_request(:update_service_sync_config, params)
       req.send_request(options)
     end
 
@@ -5312,7 +5757,7 @@ module Aws::Proton
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-proton'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

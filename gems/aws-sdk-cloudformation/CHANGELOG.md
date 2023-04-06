@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2023-04-06)
+------------------
+
+* Feature - Including UPDATE_COMPLETE as a failed status for DeleteStack waiter.
+
 1.76.0 (2023-01-30)
 ------------------
 

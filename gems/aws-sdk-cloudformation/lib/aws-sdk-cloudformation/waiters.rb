@@ -267,6 +267,12 @@ module Aws::CloudFormation
                 "expected" => "UPDATE_ROLLBACK_COMPLETE",
                 "matcher" => "pathAny",
                 "state" => "failure"
+              },
+              {
+                "argument" => "stacks[].stack_status",
+                "expected" => "UPDATE_COMPLETE",
+                "matcher" => "pathAny",
+                "state" => "failure"
               }
             ]
           )

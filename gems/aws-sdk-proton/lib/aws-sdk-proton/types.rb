@@ -257,6 +257,10 @@ module Aws::Proton
     #   with.
     #   @return [String]
     #
+    # @!attribute [rw] last_client_request_token
+    #   The last token the client requested.
+    #   @return [String]
+    #
     # @!attribute [rw] last_deployment_attempted_at
     #   The time when a deployment of the component was last attempted.
     #   @return [Time]
@@ -297,6 +301,7 @@ module Aws::Proton
       :deployment_status_message,
       :description,
       :environment_name,
+      :last_client_request_token,
       :last_deployment_attempted_at,
       :last_deployment_succeeded_at,
       :last_modified_at,
@@ -411,7 +416,8 @@ module Aws::Proton
     #
     # @!attribute [rw] environment_templates
     #   The total number of environment templates in the Amazon Web Services
-    #   account.
+    #   account. The `environmentTemplates` object will only contain `total`
+    #   members.
     #   @return [Types::ResourceCountsSummary]
     #
     # @!attribute [rw] environments
@@ -455,6 +461,13 @@ module Aws::Proton
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   The client token for the created component.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   An optional customer-provided description of the component.
     #   @return [String]
@@ -520,6 +533,7 @@ module Aws::Proton
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateComponentInput AWS API Documentation
     #
     class CreateComponentInput < Struct.new(
+      :client_token,
       :description,
       :environment_name,
       :manifest,
@@ -1052,6 +1066,73 @@ module Aws::Proton
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   The client token of the service instance to create.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the service instance to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the service the service instance is added to.
+    #   @return [String]
+    #
+    # @!attribute [rw] spec
+    #   The spec for the service instance you want to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   An optional list of metadata items that you can associate with the
+    #   Proton service instance. A tag is a key-value pair.
+    #
+    #   For more information, see [Proton resources and tagging][1] in the
+    #   *Proton User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] template_major_version
+    #   To create a new major and minor version of the service template,
+    #   *exclude* `major Version`.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_minor_version
+    #   To create a new minor version of the service template, include a
+    #   `major Version`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateServiceInstanceInput AWS API Documentation
+    #
+    class CreateServiceInstanceInput < Struct.new(
+      :client_token,
+      :name,
+      :service_name,
+      :spec,
+      :tags,
+      :template_major_version,
+      :template_minor_version)
+      SENSITIVE = [:spec]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_instance
+    #   The detailed data of the service instance being created.
+    #   @return [Types::ServiceInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateServiceInstanceOutput AWS API Documentation
+    #
+    class CreateServiceInstanceOutput < Struct.new(
+      :service_instance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] service
     #   The service detail data that's returned by Proton.
     #   @return [Types::Service]
@@ -1060,6 +1141,50 @@ module Aws::Proton
     #
     class CreateServiceOutput < Struct.new(
       :service)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] branch
+    #   The repository branch for your Proton Ops file.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_path
+    #   The path to the Proton Ops file.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The repository name.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_provider
+    #   The provider type for your repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the service the Proton Ops file is for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateServiceSyncConfigInput AWS API Documentation
+    #
+    class CreateServiceSyncConfigInput < Struct.new(
+      :branch,
+      :file_path,
+      :repository_name,
+      :repository_provider,
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_sync_config
+    #   The detailed data of the Proton Ops file.
+    #   @return [Types::ServiceSyncConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateServiceSyncConfigOutput AWS API Documentation
+    #
+    class CreateServiceSyncConfigOutput < Struct.new(
+      :service_sync_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1457,6 +1582,31 @@ module Aws::Proton
       include Aws::Structure
     end
 
+    # @!attribute [rw] service_name
+    #   The name of the service that you want to delete the service sync
+    #   configuration for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/DeleteServiceSyncConfigInput AWS API Documentation
+    #
+    class DeleteServiceSyncConfigInput < Struct.new(
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_sync_config
+    #   The detailed data for the service sync config.
+    #   @return [Types::ServiceSyncConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/DeleteServiceSyncConfigOutput AWS API Documentation
+    #
+    class DeleteServiceSyncConfigOutput < Struct.new(
+      :service_sync_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the service template to delete.
     #   @return [String]
@@ -1627,7 +1777,11 @@ module Aws::Proton
     #   The linked repository that you use to host your rendered
     #   infrastructure templates for self-managed provisioning. A linked
     #   repository is a repository that has been registered with Proton. For
-    #   more information, see CreateRepository.
+    #   more information, see [CreateRepository][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/proton/latest/APIReference/API_CreateRepository.html
     #   @return [Types::RepositoryBranch]
     #
     # @!attribute [rw] spec
@@ -2458,7 +2612,8 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] service_name
-    #   The name of the service that the service instance belongs to.
+    #   The name of the service that you want the service instance input
+    #   for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetServiceInstanceInput AWS API Documentation
@@ -2482,6 +2637,47 @@ module Aws::Proton
       include Aws::Structure
     end
 
+    # @!attribute [rw] service_instance_name
+    #   The name of the service instance that you want the sync status input
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the service that the service instance belongs to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetServiceInstanceSyncStatusInput AWS API Documentation
+    #
+    class GetServiceInstanceSyncStatusInput < Struct.new(
+      :service_instance_name,
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] desired_state
+    #   The service instance sync desired state that's returned by Proton
+    #   @return [Types::Revision]
+    #
+    # @!attribute [rw] latest_successful_sync
+    #   The detailed data of the latest successful sync with the service
+    #   instance.
+    #   @return [Types::ResourceSyncAttempt]
+    #
+    # @!attribute [rw] latest_sync
+    #   The detailed data of the latest sync with the service instance.
+    #   @return [Types::ResourceSyncAttempt]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetServiceInstanceSyncStatusOutput AWS API Documentation
+    #
+    class GetServiceInstanceSyncStatusOutput < Struct.new(
+      :desired_state,
+      :latest_successful_sync,
+      :latest_sync)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] service
     #   The detailed data of the requested service.
     #   @return [Types::Service]
@@ -2490,6 +2686,64 @@ module Aws::Proton
     #
     class GetServiceOutput < Struct.new(
       :service)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_instance_name
+    #   The name of the service instance that you want to get the service
+    #   sync blocker summary for. If given bothe the instance name and the
+    #   service name, only the instance is blocked.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the service that you want to get the service sync
+    #   blocker summary for. If given only the service name, all instances
+    #   are blocked.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetServiceSyncBlockerSummaryInput AWS API Documentation
+    #
+    class GetServiceSyncBlockerSummaryInput < Struct.new(
+      :service_instance_name,
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_sync_blocker_summary
+    #   The detailed data of the requested service sync blocker summary.
+    #   @return [Types::ServiceSyncBlockerSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetServiceSyncBlockerSummaryOutput AWS API Documentation
+    #
+    class GetServiceSyncBlockerSummaryOutput < Struct.new(
+      :service_sync_blocker_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_name
+    #   The name of the service that you want to get the service sync
+    #   configuration for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetServiceSyncConfigInput AWS API Documentation
+    #
+    class GetServiceSyncConfigInput < Struct.new(
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_sync_config
+    #   The detailed data of the requested service sync configuration.
+    #   @return [Types::ServiceSyncConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetServiceSyncConfigOutput AWS API Documentation
+    #
+    class GetServiceSyncConfigOutput < Struct.new(
+      :service_sync_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3769,6 +4023,11 @@ module Aws::Proton
     #   The Amazon Resource Name (ARN) of the linked repository.
     #   @return [String]
     #
+    # @!attribute [rw] connection_arn
+    #   The Amazon Resource Name (ARN) of the of your connection that
+    #   connects Proton to your repository.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The repository name.
     #   @return [String]
@@ -3781,6 +4040,7 @@ module Aws::Proton
     #
     class RepositorySummary < Struct.new(
       :arn,
+      :connection_arn,
       :name,
       :provider)
       SENSITIVE = []
@@ -4150,6 +4410,10 @@ module Aws::Proton
     #   into.
     #   @return [String]
     #
+    # @!attribute [rw] last_client_request_token
+    #   The last client request token received.
+    #   @return [String]
+    #
     # @!attribute [rw] last_deployment_attempted_at
     #   The time when a deployment of the service instance was last
     #   attempted.
@@ -4194,6 +4458,7 @@ module Aws::Proton
       :deployment_status,
       :deployment_status_message,
       :environment_name,
+      :last_client_request_token,
       :last_deployment_attempted_at,
       :last_deployment_succeeded_at,
       :name,
@@ -4403,6 +4668,82 @@ module Aws::Proton
       :status_message,
       :template_name)
       SENSITIVE = [:description, :status_message]
+      include Aws::Structure
+    end
+
+    # If a service instance is manually updated, Proton wants to prevent
+    # accidentally overriding a manual change.
+    #
+    # A blocker is created because of the manual update or deletion of a
+    # service instance. The summary describes the blocker as being active or
+    # resolved.
+    #
+    # @!attribute [rw] latest_blockers
+    #   The latest active blockers for the synced service.
+    #   @return [Array<Types::SyncBlocker>]
+    #
+    # @!attribute [rw] service_instance_name
+    #   The name of the service instance that you want sync your service
+    #   configuration with.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the service that you want to get the sync blocker
+    #   summary for. If given a service instance name and a service name, it
+    #   will return the blockers only applying to the instance that is
+    #   blocked.
+    #
+    #   If given only a service name, it will return the blockers that apply
+    #   to all of the instances. In order to get the blockers for a single
+    #   instance, you will need to make two distinct calls, one to get the
+    #   sync blocker summary for the service and the other to get the sync
+    #   blocker for the service instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ServiceSyncBlockerSummary AWS API Documentation
+    #
+    class ServiceSyncBlockerSummary < Struct.new(
+      :latest_blockers,
+      :service_instance_name,
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Detailed data of the service sync configuration.
+    #
+    # @!attribute [rw] branch
+    #   The name of the code repository branch that holds the service code
+    #   Proton will sync with.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_path
+    #   The file path to the service sync configuration file.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the code repository that holds the service code Proton
+    #   will sync with.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_provider
+    #   The name of the repository provider that holds the repository Proton
+    #   will sync with.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the service that the service instance is added to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ServiceSyncConfig AWS API Documentation
+    #
+    class ServiceSyncConfig < Struct.new(
+      :branch,
+      :file_path,
+      :repository_name,
+      :repository_provider,
+      :service_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4659,6 +5000,74 @@ module Aws::Proton
       include Aws::Structure
     end
 
+    # Detailed data of the sync blocker.
+    #
+    # @!attribute [rw] contexts
+    #   The contexts for the sync blocker.
+    #   @return [Array<Types::SyncBlockerContext>]
+    #
+    # @!attribute [rw] created_at
+    #   The time when the sync blocker was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_reason
+    #   The reason why the sync blocker was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the sync blocker.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolved_at
+    #   The time the sync blocker was resolved.
+    #   @return [Time]
+    #
+    # @!attribute [rw] resolved_reason
+    #   The reason the sync blocker was resolved.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the sync blocker.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the sync blocker.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/SyncBlocker AWS API Documentation
+    #
+    class SyncBlocker < Struct.new(
+      :contexts,
+      :created_at,
+      :created_reason,
+      :id,
+      :resolved_at,
+      :resolved_reason,
+      :status,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Detailed data of the context of the sync blocker.
+    #
+    # @!attribute [rw] key
+    #   The key for the sync blocker context.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the sync blocker context.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/SyncBlockerContext AWS API Documentation
+    #
+    class SyncBlockerContext < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A description of a resource tag.
     #
     # @!attribute [rw] key
@@ -4854,6 +5263,13 @@ module Aws::Proton
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   The client token for the updated component.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @!attribute [rw] deployment_type
     #   The deployment type. It defines the mode for updating a component,
     #   as follows:
@@ -4920,6 +5336,7 @@ module Aws::Proton
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateComponentInput AWS API Documentation
     #
     class UpdateComponentInput < Struct.new(
+      :client_token,
       :deployment_type,
       :description,
       :name,
@@ -5247,6 +5664,13 @@ module Aws::Proton
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   The client token of the service instance to update.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @!attribute [rw] deployment_type
     #   The deployment type. It defines the mode for updating a service
     #   instance, as follows:
@@ -5311,6 +5735,7 @@ module Aws::Proton
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateServiceInstanceInput AWS API Documentation
     #
     class UpdateServiceInstanceInput < Struct.new(
+      :client_token,
       :deployment_type,
       :name,
       :service_name,
@@ -5425,6 +5850,93 @@ module Aws::Proton
     #
     class UpdateServicePipelineOutput < Struct.new(
       :pipeline)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the service sync blocker.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolved_reason
+    #   The reason the service sync blocker was resolved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateServiceSyncBlockerInput AWS API Documentation
+    #
+    class UpdateServiceSyncBlockerInput < Struct.new(
+      :id,
+      :resolved_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_instance_name
+    #   The name of the service instance that you want to update the service
+    #   sync blocker for.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the service that you want to update the service sync
+    #   blocker for.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_sync_blocker
+    #   The detailed data on the service sync blocker that was updated.
+    #   @return [Types::SyncBlocker]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateServiceSyncBlockerOutput AWS API Documentation
+    #
+    class UpdateServiceSyncBlockerOutput < Struct.new(
+      :service_instance_name,
+      :service_name,
+      :service_sync_blocker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] branch
+    #   The name of the code repository branch where the Proton Ops file is
+    #   found.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_path
+    #   The path to the Proton Ops file.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository where the Proton Ops file is found.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_provider
+    #   The name of the repository provider where the Proton Ops file is
+    #   found.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the service the Proton Ops file is for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateServiceSyncConfigInput AWS API Documentation
+    #
+    class UpdateServiceSyncConfigInput < Struct.new(
+      :branch,
+      :file_path,
+      :repository_name,
+      :repository_provider,
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_sync_config
+    #   The detailed data of the Proton Ops file.
+    #   @return [Types::ServiceSyncConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateServiceSyncConfigOutput AWS API Documentation
+    #
+    class UpdateServiceSyncConfigOutput < Struct.new(
+      :service_sync_config)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1223,13 +1223,15 @@ module Aws::RDS
     #
     #   * `aurora-postgresql`
     #
-    #   * `custom-oracle-ee (for RDS Custom for Oracle instances)`
+    #   * `custom-oracle-ee (for RDS Custom for Oracle DB instances)`
     #
-    #   * `custom-sqlserver-ee (for RDS Custom for SQL Server instances)`
+    #   * `custom-oracle-ee-cdb (for RDS Custom for Oracle DB instances)`
     #
-    #   * `custom-sqlserver-se (for RDS Custom for SQL Server instances)`
+    #   * `custom-sqlserver-ee (for RDS Custom for SQL Server DB instances)`
     #
-    #   * `custom-sqlserver-web (for RDS Custom for SQL Server instances)`
+    #   * `custom-sqlserver-se (for RDS Custom for SQL Server DB instances)`
+    #
+    #   * `custom-sqlserver-web (for RDS Custom for SQL Server DB instances)`
     #
     #   * `mariadb`
     #
@@ -2249,9 +2251,6 @@ module Aws::RDS
     #   a VPC.
     #
     #   Constraints:
-    #
-    #   * Can only be specified if the source DB instance identifier specifies
-    #     a DB instance in another Amazon Web Services Region.
     #
     #   * If supplied, must match the name of an existing DBSubnetGroup.
     #

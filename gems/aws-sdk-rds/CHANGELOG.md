@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.175.0 (2023-04-06)
+------------------
+
+* Feature - Adds and updates the SDK examples
+
 1.174.0 (2023-03-29)
 ------------------
 

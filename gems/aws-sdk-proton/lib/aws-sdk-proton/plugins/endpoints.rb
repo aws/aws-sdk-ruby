@@ -80,6 +80,10 @@ module Aws::Proton
             Aws::Proton::Endpoints::CreateRepository.build(context)
           when :create_service
             Aws::Proton::Endpoints::CreateService.build(context)
+          when :create_service_instance
+            Aws::Proton::Endpoints::CreateServiceInstance.build(context)
+          when :create_service_sync_config
+            Aws::Proton::Endpoints::CreateServiceSyncConfig.build(context)
           when :create_service_template
             Aws::Proton::Endpoints::CreateServiceTemplate.build(context)
           when :create_service_template_version
@@ -100,6 +104,8 @@ module Aws::Proton
             Aws::Proton::Endpoints::DeleteRepository.build(context)
           when :delete_service
             Aws::Proton::Endpoints::DeleteService.build(context)
+          when :delete_service_sync_config
+            Aws::Proton::Endpoints::DeleteServiceSyncConfig.build(context)
           when :delete_service_template
             Aws::Proton::Endpoints::DeleteServiceTemplate.build(context)
           when :delete_service_template_version
@@ -128,6 +134,12 @@ module Aws::Proton
             Aws::Proton::Endpoints::GetService.build(context)
           when :get_service_instance
             Aws::Proton::Endpoints::GetServiceInstance.build(context)
+          when :get_service_instance_sync_status
+            Aws::Proton::Endpoints::GetServiceInstanceSyncStatus.build(context)
+          when :get_service_sync_blocker_summary
+            Aws::Proton::Endpoints::GetServiceSyncBlockerSummary.build(context)
+          when :get_service_sync_config
+            Aws::Proton::Endpoints::GetServiceSyncConfig.build(context)
           when :get_service_template
             Aws::Proton::Endpoints::GetServiceTemplate.build(context)
           when :get_service_template_version
@@ -202,6 +214,10 @@ module Aws::Proton
             Aws::Proton::Endpoints::UpdateServiceInstance.build(context)
           when :update_service_pipeline
             Aws::Proton::Endpoints::UpdateServicePipeline.build(context)
+          when :update_service_sync_blocker
+            Aws::Proton::Endpoints::UpdateServiceSyncBlocker.build(context)
+          when :update_service_sync_config
+            Aws::Proton::Endpoints::UpdateServiceSyncConfig.build(context)
           when :update_service_template
             Aws::Proton::Endpoints::UpdateServiceTemplate.build(context)
           when :update_service_template_version

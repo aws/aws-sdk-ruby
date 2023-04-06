@@ -388,6 +388,16 @@ module Aws::RDS
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To associate an AWS Identity and Access Management (IAM) role with a DB cluster
+    #
+    #   # The following example associates a role with a DB cluster.
+    #
+    #   resp = client.add_role_to_db_cluster({
+    #     db_cluster_identifier: "mydbcluster", 
+    #     role_arn: "arn:aws:iam::123456789012:role/RDSLoadFromS3", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_role_to_db_cluster({
@@ -428,6 +438,17 @@ module Aws::RDS
     #   DBEngineVersion.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To associate an AWS Identity and Access Management (IAM) role with a DB instance
+    #
+    #   # The following example adds the role to a DB instance named test-instance.
+    #
+    #   resp = client.add_role_to_db_instance({
+    #     db_instance_identifier: "test-instance", 
+    #     feature_name: "S3_INTEGRATION", 
+    #     role_arn: "arn:aws:iam::111122223333:role/rds-s3-integration-role", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -484,18 +505,34 @@ module Aws::RDS
     #   * {Types::AddSourceIdentifierToSubscriptionResult#event_subscription #event_subscription} => Types::EventSubscription
     #
     #
-    # @example Example: To add a source identifier to an event notification subscription
+    # @example Example: To add a source identifier to a subscription
     #
-    #   # This example add a source identifier to an event notification subscription.
+    #   # The following example adds another source identifier to an existing subscription.
     #
     #   resp = client.add_source_identifier_to_subscription({
-    #     source_identifier: "mymysqlinstance", 
-    #     subscription_name: "mymysqleventsubscription", 
+    #     source_identifier: "test-instance-repl", 
+    #     subscription_name: "my-instance-events", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     event_subscription: {
+    #       cust_subscription_id: "my-instance-events", 
+    #       customer_aws_id: "123456789012", 
+    #       enabled: false, 
+    #       event_categories_list: [
+    #         "backup", 
+    #         "recovery", 
+    #       ], 
+    #       event_subscription_arn: "arn:aws:rds:us-east-1:123456789012:es:my-instance-events", 
+    #       sns_topic_arn: "arn:aws:sns:us-east-1:123456789012:interesting-events", 
+    #       source_ids_list: [
+    #         "test-instance", 
+    #         "test-instance-repl", 
+    #       ], 
+    #       source_type: "db-instance", 
+    #       status: "modifying", 
+    #       subscription_creation_time: "Tue Jul 31 23:22:01 UTC 2018", 
     #     }, 
     #   }
     #
@@ -629,19 +666,28 @@ module Aws::RDS
     #   * {Types::ApplyPendingMaintenanceActionResult#resource_pending_maintenance_actions #resource_pending_maintenance_actions} => Types::ResourcePendingMaintenanceActions
     #
     #
-    # @example Example: To apply a pending maintenance action
+    # @example Example: To apply pending maintenance actions
     #
-    #   # This example immediately applies a pending system update to a DB instance.
+    #   # The following example applies the pending maintenance actions for a DB cluster.
     #
     #   resp = client.apply_pending_maintenance_action({
     #     apply_action: "system-update", 
     #     opt_in_type: "immediate", 
-    #     resource_identifier: "arn:aws:rds:us-east-1:992648334831:db:mymysqlinstance", 
+    #     resource_identifier: "arn:aws:rds:us-east-1:123456789012:cluster:my-db-cluster", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     resource_pending_maintenance_actions: {
+    #       pending_maintenance_action_details: [
+    #         {
+    #           action: "system-update", 
+    #           current_apply_date: Time.parse("2021-01-23T01:07:36.100Z"), 
+    #           description: "Upgrade to Aurora PostgreSQL 3.3.2", 
+    #           opt_in_status: "immediate", 
+    #         }, 
+    #       ], 
+    #       resource_identifier: "arn:aws:rds:us-east-1:123456789012:cluster:my-db-cluster", 
     #     }, 
     #   }
     #
@@ -911,6 +957,29 @@ module Aws::RDS
     #   * {Types::ExportTask#warning_message #warning_message} => String
     #   * {Types::ExportTask#source_type #source_type} => String
     #
+    #
+    # @example Example: To cancel a snapshot export to Amazon S3
+    #
+    #   # The following example cancels an export task in progress that is exporting a snapshot to Amazon S3.
+    #
+    #   resp = client.cancel_export_task({
+    #     export_task_identifier: "my-s3-export-1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     export_task_identifier: "my-s3-export-1", 
+    #     iam_role_arn: "arn:aws:iam::123456789012:role/service-role/export-snap-S3-role", 
+    #     kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/abcd0000-7bfd-4594-af38-aabbccddeeff", 
+    #     percent_progress: 0, 
+    #     s3_bucket: "mybucket", 
+    #     s3_prefix: "", 
+    #     snapshot_time: Time.parse("2019-03-24T20:01:09.815Z"), 
+    #     source_arn: "arn:aws:rds:us-east-1:123456789012:snapshot:publisher-final-snapshot", 
+    #     status: "CANCELING", 
+    #     total_extracted_data_in_gb: 0, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.cancel_export_task({
@@ -1008,6 +1077,10 @@ module Aws::RDS
     #   resp.to_h outputs the following:
     #   {
     #     db_cluster_parameter_group: {
+    #       db_cluster_parameter_group_arn: "arn:aws:rds:us-east-1:123456789012:cluster-pg:mydbclusterparametergroup-copy", 
+    #       db_cluster_parameter_group_name: "mydbclusterparametergroup-copy", 
+    #       db_parameter_group_family: "aurora-mysql5.7", 
+    #       description: "My DB cluster parameter group copy", 
     #     }, 
     #   }
     #
@@ -1234,16 +1307,40 @@ module Aws::RDS
     #
     # @example Example: To copy a DB cluster snapshot
     #
-    #   # The following example copies an automated snapshot of a DB cluster to a new DB cluster snapshot.
+    #   # The following example creates a copy of a DB cluster snapshot, including its tags.
     #
     #   resp = client.copy_db_cluster_snapshot({
-    #     source_db_cluster_snapshot_identifier: "rds:sample-cluster-2016-09-14-10-38", 
-    #     target_db_cluster_snapshot_identifier: "cluster-snapshot-copy-1", 
+    #     copy_tags: true, 
+    #     source_db_cluster_snapshot_identifier: "arn:aws:rds:us-east-1:123456789012:cluster-snapshot:rds:myaurora-2019-06-04-09-16", 
+    #     target_db_cluster_snapshot_identifier: "myclustersnapshotcopy", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_cluster_snapshot: {
+    #       allocated_storage: 0, 
+    #       availability_zones: [
+    #         "us-east-1a", 
+    #         "us-east-1b", 
+    #         "us-east-1e", 
+    #       ], 
+    #       cluster_create_time: Time.parse("2019-04-15T14:18:42.785Z"), 
+    #       db_cluster_identifier: "myaurora", 
+    #       db_cluster_snapshot_arn: "arn:aws:rds:us-east-1:123456789012:cluster-snapshot:myclustersnapshotcopy", 
+    #       db_cluster_snapshot_identifier: "myclustersnapshotcopy", 
+    #       engine: "aurora-mysql", 
+    #       engine_version: "5.7.mysql_aurora.2.04.2", 
+    #       iam_database_authentication_enabled: false, 
+    #       kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE", 
+    #       license_model: "aurora-mysql", 
+    #       master_username: "myadmin", 
+    #       percent_progress: 100, 
+    #       port: 0, 
+    #       snapshot_create_time: Time.parse("2019-06-04T09:16:42.649Z"), 
+    #       snapshot_type: "manual", 
+    #       status: "available", 
+    #       storage_encrypted: true, 
+    #       vpc_id: "vpc-123example", 
     #     }, 
     #   }
     #
@@ -1352,17 +1449,21 @@ module Aws::RDS
     #
     # @example Example: To copy a DB parameter group
     #
-    #   # This example copies a DB parameter group.
+    #   # The following example makes a copy of a DB parameter group.
     #
     #   resp = client.copy_db_parameter_group({
-    #     source_db_parameter_group_identifier: "mymysqlparametergroup", 
-    #     target_db_parameter_group_description: "My MySQL parameter group copy", 
-    #     target_db_parameter_group_identifier: "mymysqlparametergroup-copy", 
+    #     source_db_parameter_group_identifier: "mydbpg", 
+    #     target_db_parameter_group_description: "Copy of mydbpg parameter group", 
+    #     target_db_parameter_group_identifier: "mydbpgcopy", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_parameter_group: {
+    #       db_parameter_group_arn: "arn:aws:rds:us-east-1:814387698303:pg:mydbpgcopy", 
+    #       db_parameter_group_family: "mysql5.7", 
+    #       db_parameter_group_name: "mydbpgcopy", 
+    #       description: "Copy of mydbpg parameter group", 
     #     }, 
     #   }
     #
@@ -1600,16 +1701,42 @@ module Aws::RDS
     #
     # @example Example: To copy a DB snapshot
     #
-    #   # This example copies a DB snapshot.
+    #   # The following example creates a copy of a DB snapshot.
     #
     #   resp = client.copy_db_snapshot({
-    #     source_db_snapshot_identifier: "mydbsnapshot", 
-    #     target_db_snapshot_identifier: "mydbsnapshot-copy", 
+    #     source_db_snapshot_identifier: "rds:database-mysql-2019-06-06-08-38", 
+    #     target_db_snapshot_identifier: "mydbsnapshotcopy", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_snapshot: {
+    #       allocated_storage: 100, 
+    #       availability_zone: "us-east-1f", 
+    #       db_instance_identifier: "database-mysql", 
+    #       db_snapshot_arn: "arn:aws:rds:us-east-1:123456789012:snapshot:mydbsnapshotcopy", 
+    #       db_snapshot_identifier: "mydbsnapshotcopy", 
+    #       dbi_resource_id: "db-ZI7UJ5BLKMBYFGX7FDENCKADC4", 
+    #       encrypted: true, 
+    #       engine: "mysql", 
+    #       engine_version: "5.6.40", 
+    #       iam_database_authentication_enabled: false, 
+    #       instance_create_time: Time.parse("2019-04-30T15:45:53.663Z"), 
+    #       iops: 1000, 
+    #       kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE", 
+    #       license_model: "general-public-license", 
+    #       master_username: "admin", 
+    #       option_group_name: "default:mysql-5-6", 
+    #       percent_progress: 0, 
+    #       port: 3306, 
+    #       processor_features: [
+    #       ], 
+    #       snapshot_type: "manual", 
+    #       source_db_snapshot_identifier: "arn:aws:rds:us-east-1:123456789012:snapshot:rds:database-mysql-2019-06-06-08-38", 
+    #       source_region: "us-east-1", 
+    #       status: "creating", 
+    #       storage_type: "io1", 
+    #       vpc_id: "vpc-6594f31c", 
     #     }, 
     #   }
     #
@@ -1726,17 +1853,25 @@ module Aws::RDS
     #
     # @example Example: To copy an option group
     #
-    #   # This example copies an option group.
+    #   # The following example makes a copy of an option group.
     #
     #   resp = client.copy_option_group({
-    #     source_option_group_identifier: "mymysqloptiongroup", 
-    #     target_option_group_description: "My MySQL option group copy", 
-    #     target_option_group_identifier: "mymysqloptiongroup-copy", 
+    #     source_option_group_identifier: "myoptiongroup", 
+    #     target_option_group_description: "My option group copy", 
+    #     target_option_group_identifier: "new-option-group", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     option_group: {
+    #       allows_vpc_and_non_vpc_instance_memberships: true, 
+    #       engine_name: "oracle-ee", 
+    #       major_engine_version: "11.2", 
+    #       option_group_arn: "arn:aws:rds:us-east-1:123456789012:og:new-option-group", 
+    #       option_group_description: "My option group copy", 
+    #       option_group_name: "new-option-group", 
+    #       options: [
+    #       ], 
     #     }, 
     #   }
     #
@@ -1870,6 +2005,128 @@ module Aws::RDS
     # @return [Types::CreateBlueGreenDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBlueGreenDeploymentResponse#blue_green_deployment #blue_green_deployment} => Types::BlueGreenDeployment
+    #
+    #
+    # @example Example: To create a blue/green deployment for an RDS for MySQL DB instance
+    #
+    #   # The following example creates a blue/green deployment for a MySQL DB instance.
+    #
+    #   resp = client.create_blue_green_deployment({
+    #     blue_green_deployment_name: "bgd-test-instance", 
+    #     source: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance", 
+    #     target_db_parameter_group_name: "mysql-80-group", 
+    #     target_engine_version: "8.0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     blue_green_deployment: {
+    #       blue_green_deployment_identifier: "bgd-v53303651eexfake", 
+    #       blue_green_deployment_name: "bgd-cli-test-instance", 
+    #       create_time: Time.parse("2022-02-25T21:18:51.183000+00:00"), 
+    #       source: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance", 
+    #       status: "PROVISIONING", 
+    #       switchover_details: [
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-replica-1", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-replica-2", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-replica-3", 
+    #         }, 
+    #       ], 
+    #       tasks: [
+    #         {
+    #           name: "CREATING_READ_REPLICA_OF_SOURCE", 
+    #           status: "PENDING", 
+    #         }, 
+    #         {
+    #           name: "DB_ENGINE_VERSION_UPGRADE", 
+    #           status: "PENDING", 
+    #         }, 
+    #         {
+    #           name: "CONFIGURE_BACKUPS", 
+    #           status: "PENDING", 
+    #         }, 
+    #         {
+    #           name: "CREATING_TOPOLOGY_OF_SOURCE", 
+    #           status: "PENDING", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
+    # @example Example: To create a blue/green deployment for an Aurora MySQL DB cluster
+    #
+    #   # The following example creates a blue/green deployment for an Aurora MySQL DB cluster.
+    #
+    #   resp = client.create_blue_green_deployment({
+    #     blue_green_deployment_name: "my-blue-green-deployment", 
+    #     source: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster", 
+    #     target_db_cluster_parameter_group_name: "mysql-80-cluster-group", 
+    #     target_db_parameter_group_name: "ams-80-binlog-enabled", 
+    #     target_engine_version: "8.0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     blue_green_deployment: {
+    #       blue_green_deployment_identifier: "bgd-wi89nwzglccsfake", 
+    #       blue_green_deployment_name: "my-blue-green-deployment", 
+    #       create_time: Time.parse("2022-02-25T21:12:00.288000+00:00"), 
+    #       source: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster", 
+    #       status: "PROVISIONING", 
+    #       switchover_details: [
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster", 
+    #           status: "PROVISIONING", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-1", 
+    #           status: "PROVISIONING", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-2", 
+    #           status: "PROVISIONING", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-3", 
+    #           status: "PROVISIONING", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:cluster-endpoint:my-excluded-member-endpoint", 
+    #           status: "PROVISIONING", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:cluster-endpoint:my-reader-endpoint", 
+    #           status: "PROVISIONING", 
+    #         }, 
+    #       ], 
+    #       tasks: [
+    #         {
+    #           name: "CREATING_READ_REPLICA_OF_SOURCE", 
+    #           status: "PENDING", 
+    #         }, 
+    #         {
+    #           name: "DB_ENGINE_VERSION_UPGRADE", 
+    #           status: "PENDING", 
+    #         }, 
+    #         {
+    #           name: "CREATE_DB_INSTANCES_FOR_CLUSTER", 
+    #           status: "PENDING", 
+    #         }, 
+    #         {
+    #           name: "CREATE_CUSTOM_ENDPOINTS", 
+    #           status: "PENDING", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2963,29 +3220,130 @@ module Aws::RDS
     #   * {Types::CreateDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
     #
     #
-    # @example Example: To create a DB cluster
+    # @example Example: To create a MySQL 5.7--compatible DB cluster
     #
-    #   # This example creates a DB cluster.
+    #   # The following example create a MySQL 5.7-compatible DB cluster.
     #
     #   resp = client.create_db_cluster({
-    #     availability_zones: [
-    #       "us-east-1a", 
-    #     ], 
-    #     backup_retention_period: 1, 
-    #     db_cluster_identifier: "mydbcluster", 
-    #     db_cluster_parameter_group_name: "mydbclusterparametergroup", 
-    #     database_name: "myauroradb", 
-    #     engine: "aurora", 
-    #     engine_version: "5.6.10a", 
+    #     db_cluster_identifier: "sample-cluster", 
+    #     db_subnet_group_name: "default", 
+    #     engine: "aurora-mysql", 
+    #     engine_version: "5.7.12", 
     #     master_user_password: "mypassword", 
-    #     master_username: "myuser", 
-    #     port: 3306, 
-    #     storage_encrypted: true, 
+    #     master_username: "admin", 
+    #     vpc_security_group_ids: [
+    #       "sg-0b91305example", 
+    #     ], 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_cluster: {
+    #       allocated_storage: 1, 
+    #       associated_roles: [
+    #       ], 
+    #       availability_zones: [
+    #         "us-east-1a", 
+    #         "us-east-1b", 
+    #         "us-east-1e", 
+    #       ], 
+    #       backup_retention_period: 1, 
+    #       cluster_create_time: Time.parse("2019-06-07T23:21:33.048Z"), 
+    #       copy_tags_to_snapshot: false, 
+    #       db_cluster_arn: "arn:aws:rds:us-east-1:123456789012:cluster:sample-cluster", 
+    #       db_cluster_identifier: "sample-cluster", 
+    #       db_cluster_members: [
+    #       ], 
+    #       db_cluster_parameter_group: "default.aurora-mysql5.7", 
+    #       db_subnet_group: "default", 
+    #       db_cluster_resource_id: "cluster-ANPAJ4AE5446DAEXAMPLE", 
+    #       deletion_protection: false, 
+    #       endpoint: "sample-cluster.cluster-cnpexample.us-east-1.rds.amazonaws.com", 
+    #       engine: "aurora-mysql", 
+    #       engine_mode: "provisioned", 
+    #       engine_version: "5.7.12", 
+    #       hosted_zone_id: "Z2R2ITUGPM61AM", 
+    #       http_endpoint_enabled: false, 
+    #       iam_database_authentication_enabled: false, 
+    #       master_username: "master", 
+    #       multi_az: false, 
+    #       port: 3306, 
+    #       preferred_backup_window: "09:12-09:42", 
+    #       preferred_maintenance_window: "mon:04:31-mon:05:01", 
+    #       read_replica_identifiers: [
+    #       ], 
+    #       reader_endpoint: "sample-cluster.cluster-ro-cnpexample.us-east-1.rds.amazonaws.com", 
+    #       status: "creating", 
+    #       storage_encrypted: false, 
+    #       vpc_security_groups: [
+    #         {
+    #           status: "active", 
+    #           vpc_security_group_id: "sg-0b91305example", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
+    # @example Example: To create a PostgreSQL--compatible DB cluster
+    #
+    #   # The following creates a PostgreSQL-compatible DB cluster. 
+    #
+    #   resp = client.create_db_cluster({
+    #     db_cluster_identifier: "sample-pg-cluster", 
+    #     db_subnet_group_name: "default", 
+    #     engine: "aurora-postgresql", 
+    #     master_user_password: "mypassword", 
+    #     master_username: "admin", 
+    #     vpc_security_group_ids: [
+    #       "sg-0b91305example", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster: {
+    #       allocated_storage: 1, 
+    #       associated_roles: [
+    #       ], 
+    #       availability_zones: [
+    #         "us-east-1a", 
+    #         "us-east-1b", 
+    #         "us-east-1c", 
+    #       ], 
+    #       backup_retention_period: 1, 
+    #       cluster_create_time: Time.parse("2019-06-07T23:26:08.371Z"), 
+    #       copy_tags_to_snapshot: false, 
+    #       db_cluster_arn: "arn:aws:rds:us-east-1:123456789012:cluster:sample-pg-cluster", 
+    #       db_cluster_identifier: "sample-pg-cluster", 
+    #       db_cluster_members: [
+    #       ], 
+    #       db_cluster_parameter_group: "default.aurora-postgresql9.6", 
+    #       db_subnet_group: "default", 
+    #       db_cluster_resource_id: "cluster-ANPAJ4AE5446DAEXAMPLE", 
+    #       deletion_protection: false, 
+    #       endpoint: "sample-pg-cluster.cluster-cnpexample.us-east-1.rds.amazonaws.com", 
+    #       engine: "aurora-postgresql", 
+    #       engine_mode: "provisioned", 
+    #       engine_version: "9.6.9", 
+    #       hosted_zone_id: "Z2R2ITUGPM61AM", 
+    #       http_endpoint_enabled: false, 
+    #       iam_database_authentication_enabled: false, 
+    #       master_username: "master", 
+    #       multi_az: false, 
+    #       port: 5432, 
+    #       preferred_backup_window: "09:56-10:26", 
+    #       preferred_maintenance_window: "wed:03:33-wed:04:03", 
+    #       read_replica_identifiers: [
+    #       ], 
+    #       reader_endpoint: "sample-pg-cluster.cluster-ro-cnpexample.us-east-1.rds.amazonaws.com", 
+    #       status: "creating", 
+    #       storage_encrypted: false, 
+    #       vpc_security_groups: [
+    #         {
+    #           status: "active", 
+    #           vpc_security_group_id: "sg-0b91305example", 
+    #         }, 
+    #       ], 
     #     }, 
     #   }
     #
@@ -3225,6 +3583,39 @@ module Aws::RDS
     #   * {Types::DBClusterEndpoint#excluded_members #excluded_members} => Array&lt;String&gt;
     #   * {Types::DBClusterEndpoint#db_cluster_endpoint_arn #db_cluster_endpoint_arn} => String
     #
+    #
+    # @example Example: To create a custom DB cluster endpoint
+    #
+    #   # The following example creates a custom DB cluster endpoint and associate it with the specified Aurora DB cluster.
+    #
+    #   resp = client.create_db_cluster_endpoint({
+    #     db_cluster_endpoint_identifier: "mycustomendpoint", 
+    #     db_cluster_identifier: "mydbcluster", 
+    #     endpoint_type: "reader", 
+    #     static_members: [
+    #       "dbinstance1", 
+    #       "dbinstance2", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     custom_endpoint_type: "READER", 
+    #     db_cluster_endpoint_arn: "arn:aws:rds:us-east-1:123456789012:cluster-endpoint:mycustomendpoint", 
+    #     db_cluster_endpoint_identifier: "mycustomendpoint", 
+    #     db_cluster_endpoint_resource_identifier: "cluster-endpoint-ANPAJ4AE5446DAEXAMPLE", 
+    #     db_cluster_identifier: "mydbcluster", 
+    #     endpoint: "mycustomendpoint.cluster-custom-cnpexample.us-east-1.rds.amazonaws.com", 
+    #     endpoint_type: "CUSTOM", 
+    #     excluded_members: [
+    #     ], 
+    #     static_members: [
+    #       "dbinstance1", 
+    #       "dbinstance2", 
+    #     ], 
+    #     status: "creating", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_db_cluster_endpoint({
@@ -3391,17 +3782,21 @@ module Aws::RDS
     #
     # @example Example: To create a DB cluster parameter group
     #
-    #   # This example creates a DB cluster parameter group.
+    #   # The following example creates a DB cluster parameter group.
     #
     #   resp = client.create_db_cluster_parameter_group({
     #     db_cluster_parameter_group_name: "mydbclusterparametergroup", 
     #     db_parameter_group_family: "aurora5.6", 
-    #     description: "My DB cluster parameter group", 
+    #     description: "My new cluster parameter group", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_cluster_parameter_group: {
+    #       db_cluster_parameter_group_arn: "arn:aws:rds:us-east-1:123456789012:cluster-pg:mydbclusterparametergroup", 
+    #       db_cluster_parameter_group_name: "mydbclusterparametergroup", 
+    #       db_parameter_group_family: "aurora5.6", 
+    #       description: "My new cluster parameter group", 
     #     }, 
     #   }
     #
@@ -3484,16 +3879,39 @@ module Aws::RDS
     #
     # @example Example: To create a DB cluster snapshot
     #
-    #   # This example creates a DB cluster snapshot.
+    #   # The following example creates a DB cluster snapshot.
     #
     #   resp = client.create_db_cluster_snapshot({
-    #     db_cluster_identifier: "mydbcluster", 
-    #     db_cluster_snapshot_identifier: "mydbclustersnapshot", 
+    #     db_cluster_identifier: "mydbclustersnapshot", 
+    #     db_cluster_snapshot_identifier: "mydbcluster", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_cluster_snapshot: {
+    #       allocated_storage: 1, 
+    #       availability_zones: [
+    #         "us-east-1a", 
+    #         "us-east-1b", 
+    #         "us-east-1e", 
+    #       ], 
+    #       cluster_create_time: Time.parse("2019-04-15T14:18:42.785Z"), 
+    #       db_cluster_identifier: "mydbcluster", 
+    #       db_cluster_snapshot_arn: "arn:aws:rds:us-east-1:123456789012:cluster-snapshot:mydbclustersnapshot", 
+    #       db_cluster_snapshot_identifier: "mydbclustersnapshot", 
+    #       engine: "aurora-mysql", 
+    #       engine_version: "5.7.mysql_aurora.2.04.2", 
+    #       iam_database_authentication_enabled: false, 
+    #       kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE", 
+    #       license_model: "aurora-mysql", 
+    #       master_username: "myadmin", 
+    #       percent_progress: 0, 
+    #       port: 0, 
+    #       snapshot_create_time: Time.parse("2019-06-18T21:21:00.469Z"), 
+    #       snapshot_type: "manual", 
+    #       status: "creating", 
+    #       storage_encrypted: true, 
+    #       vpc_id: "vpc-6594f31c", 
     #     }, 
     #   }
     #
@@ -3826,13 +4244,15 @@ module Aws::RDS
     #
     #   * `aurora-postgresql`
     #
-    #   * `custom-oracle-ee (for RDS Custom for Oracle instances)`
+    #   * `custom-oracle-ee (for RDS Custom for Oracle DB instances)`
     #
-    #   * `custom-sqlserver-ee (for RDS Custom for SQL Server instances)`
+    #   * `custom-oracle-ee-cdb (for RDS Custom for Oracle DB instances)`
     #
-    #   * `custom-sqlserver-se (for RDS Custom for SQL Server instances)`
+    #   * `custom-sqlserver-ee (for RDS Custom for SQL Server DB instances)`
     #
-    #   * `custom-sqlserver-web (for RDS Custom for SQL Server instances)`
+    #   * `custom-sqlserver-se (for RDS Custom for SQL Server DB instances)`
+    #
+    #   * `custom-sqlserver-web (for RDS Custom for SQL Server DB instances)`
     #
     #   * `mariadb`
     #
@@ -4737,22 +5157,112 @@ module Aws::RDS
     #   * {Types::CreateDBInstanceResult#db_instance #db_instance} => Types::DBInstance
     #
     #
-    # @example Example: To create a DB instance.
+    # @example Example: To create a DB instance
     #
-    #   # This example creates a DB instance.
+    #   # The following example uses the required options to launch a new DB instance.
     #
     #   resp = client.create_db_instance({
-    #     allocated_storage: 5, 
-    #     db_instance_class: "db.t2.micro", 
-    #     db_instance_identifier: "mymysqlinstance", 
-    #     engine: "MySQL", 
-    #     master_user_password: "MyPassword", 
-    #     master_username: "MyUser", 
+    #     allocated_storage: 20, 
+    #     db_instance_class: "db.t3.micro", 
+    #     db_instance_identifier: "test-mysql-instance", 
+    #     engine: "mysql", 
+    #     master_user_password: "secret99", 
+    #     master_username: "admin", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_instance: {
+    #       allocated_storage: 20, 
+    #       associated_roles: [
+    #       ], 
+    #       auto_minor_version_upgrade: true, 
+    #       backup_retention_period: 1, 
+    #       ca_certificate_identifier: "rds-ca-2019", 
+    #       copy_tags_to_snapshot: false, 
+    #       db_instance_arn: "arn:aws:rds:us-west-2:123456789012:db:test-mysql-instance", 
+    #       db_instance_class: "db.t3.micro", 
+    #       db_instance_identifier: "test-mysql-instance", 
+    #       db_instance_status: "creating", 
+    #       db_parameter_groups: [
+    #         {
+    #           db_parameter_group_name: "default.mysql5.7", 
+    #           parameter_apply_status: "in-sync", 
+    #         }, 
+    #       ], 
+    #       db_security_groups: [
+    #       ], 
+    #       db_subnet_group: {
+    #         db_subnet_group_description: "default", 
+    #         db_subnet_group_name: "default", 
+    #         subnet_group_status: "Complete", 
+    #         subnets: [
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-west-2c", 
+    #             }, 
+    #             subnet_identifier: "subnet-########", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-west-2d", 
+    #             }, 
+    #             subnet_identifier: "subnet-########", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-west-2a", 
+    #             }, 
+    #             subnet_identifier: "subnet-########", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-west-2b", 
+    #             }, 
+    #             subnet_identifier: "subnet-########", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #         ], 
+    #         vpc_id: "vpc-2ff2ff2f", 
+    #       }, 
+    #       db_instance_port: 0, 
+    #       dbi_resource_id: "db-5555EXAMPLE44444444EXAMPLE", 
+    #       deletion_protection: false, 
+    #       domain_memberships: [
+    #       ], 
+    #       engine: "mysql", 
+    #       engine_version: "5.7.22", 
+    #       iam_database_authentication_enabled: false, 
+    #       license_model: "general-public-license", 
+    #       master_username: "admin", 
+    #       monitoring_interval: 0, 
+    #       multi_az: false, 
+    #       option_group_memberships: [
+    #         {
+    #           option_group_name: "default:mysql-5-7", 
+    #           status: "in-sync", 
+    #         }, 
+    #       ], 
+    #       pending_modified_values: {
+    #         master_user_password: "****", 
+    #       }, 
+    #       performance_insights_enabled: false, 
+    #       preferred_backup_window: "12:55-13:25", 
+    #       preferred_maintenance_window: "sun:08:07-sun:08:37", 
+    #       publicly_accessible: true, 
+    #       read_replica_db_instance_identifiers: [
+    #       ], 
+    #       storage_encrypted: false, 
+    #       storage_type: "gp2", 
+    #       vpc_security_groups: [
+    #         {
+    #           status: "active", 
+    #           vpc_security_group_id: "sg-12345abc", 
+    #         }, 
+    #       ], 
     #     }, 
     #   }
     #
@@ -5167,9 +5677,6 @@ module Aws::RDS
     #   a VPC.
     #
     #   Constraints:
-    #
-    #   * Can only be specified if the source DB instance identifier specifies
-    #     a DB instance in another Amazon Web Services Region.
     #
     #   * If supplied, must match the name of an existing DBSubnetGroup.
     #
@@ -5608,30 +6115,25 @@ module Aws::RDS
     #   * {Types::CreateDBInstanceReadReplicaResult#db_instance #db_instance} => Types::DBInstance
     #
     #
-    # @example Example: To create a DB instance read replica.
+    # @example Example: To create a DB instance read replica
     #
-    #   # This example creates a DB instance read replica.
+    #   # This example creates a read replica of an existing DB instance named test-instance. The read replica is named
+    #   # test-instance-repl.
     #
     #   resp = client.create_db_instance_read_replica({
-    #     availability_zone: "us-east-1a", 
-    #     copy_tags_to_snapshot: true, 
-    #     db_instance_class: "db.t2.micro", 
-    #     db_instance_identifier: "mydbreadreplica", 
-    #     publicly_accessible: true, 
-    #     source_db_instance_identifier: "mymysqlinstance", 
-    #     storage_type: "gp2", 
-    #     tags: [
-    #       {
-    #         key: "mydbreadreplicakey", 
-    #         value: "mydbreadreplicavalue", 
-    #       }, 
-    #     ], 
+    #     db_instance_identifier: "test-instance-repl", 
+    #     source_db_instance_identifier: "test-instance", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_instance: {
-    #     }, 
+    #       db_instance_arn: "arn:aws:rds:us-east-1:123456789012:db:test-instance-repl", 
+    #       db_instance_identifier: "test-instance-repl", 
+    #       iam_database_authentication_enabled: false, 
+    #       monitoring_interval: 0, 
+    #       read_replica_source_db_instance_identifier: "test-instance", 
+    #     }, # Some output ommitted.
     #   }
     #
     # @example Request syntax with placeholder values
@@ -5958,19 +6460,23 @@ module Aws::RDS
     #   * {Types::CreateDBParameterGroupResult#db_parameter_group #db_parameter_group} => Types::DBParameterGroup
     #
     #
-    # @example Example: To create a DB parameter group.
+    # @example Example: To create a DB parameter group
     #
-    #   # This example creates a DB parameter group.
+    #   # The following example creates a DB parameter group.
     #
     #   resp = client.create_db_parameter_group({
-    #     db_parameter_group_family: "mysql5.6", 
-    #     db_parameter_group_name: "mymysqlparametergroup", 
-    #     description: "My MySQL parameter group", 
+    #     db_parameter_group_family: "MySQL8.0", 
+    #     db_parameter_group_name: "mydbparametergroup", 
+    #     description: "My new parameter group", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_parameter_group: {
+    #       db_parameter_group_arn: "arn:aws:rds:us-east-1:123456789012:pg:mydbparametergroup", 
+    #       db_parameter_group_family: "mysql8.0", 
+    #       db_parameter_group_name: "mydbparametergroup", 
+    #       description: "My new parameter group", 
     #     }, 
     #   }
     #
@@ -6349,18 +6855,42 @@ module Aws::RDS
     #   * {Types::CreateDBSnapshotResult#db_snapshot #db_snapshot} => Types::DBSnapshot
     #
     #
-    # @example Example: To create a DB snapshot.
+    # @example Example: To create a DB snapshot
     #
-    #   # This example creates a DB snapshot.
+    #   # The following example creates a DB snapshot.
     #
     #   resp = client.create_db_snapshot({
-    #     db_instance_identifier: "mymysqlinstance", 
-    #     db_snapshot_identifier: "mydbsnapshot", 
+    #     db_instance_identifier: "mydbsnapshot", 
+    #     db_snapshot_identifier: "database-mysql", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_snapshot: {
+    #       allocated_storage: 100, 
+    #       availability_zone: "us-east-1b", 
+    #       db_instance_identifier: "database-mysql", 
+    #       db_snapshot_arn: "arn:aws:rds:us-east-1:123456789012:snapshot:mydbsnapshot", 
+    #       db_snapshot_identifier: "mydbsnapshot", 
+    #       dbi_resource_id: "db-AKIAIOSFODNN7EXAMPLE", 
+    #       encrypted: true, 
+    #       engine: "mysql", 
+    #       engine_version: "8.0.32", 
+    #       iam_database_authentication_enabled: false, 
+    #       instance_create_time: Time.parse("2019-04-30T15:45:53.663Z"), 
+    #       iops: 1000, 
+    #       kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE", 
+    #       license_model: "general-public-license", 
+    #       master_username: "admin", 
+    #       option_group_name: "default:mysql-8-0", 
+    #       percent_progress: 0, 
+    #       port: 3306, 
+    #       processor_features: [
+    #       ], 
+    #       snapshot_type: "manual", 
+    #       status: "creating", 
+    #       storage_type: "io1", 
+    #       vpc_id: "vpc-6594f31c", 
     #     }, 
     #   }
     #
@@ -6458,22 +6988,51 @@ module Aws::RDS
     #   * {Types::CreateDBSubnetGroupResult#db_subnet_group #db_subnet_group} => Types::DBSubnetGroup
     #
     #
-    # @example Example: To create a DB subnet group.
+    # @example Example: To create a DB subnet group
     #
-    #   # This example creates a DB subnet group.
+    #   # The following example creates a DB subnet group called mysubnetgroup using existing subnets.
     #
     #   resp = client.create_db_subnet_group({
-    #     db_subnet_group_description: "My DB subnet group", 
-    #     db_subnet_group_name: "mydbsubnetgroup", 
+    #     db_subnet_group_description: "test DB subnet group", 
+    #     db_subnet_group_name: "mysubnetgroup", 
     #     subnet_ids: [
-    #       "subnet-1fab8a69", 
-    #       "subnet-d43a468c", 
+    #       "subnet-0a1dc4e1a6f123456", 
+    #       "subnet-070dd7ecb3aaaaaaa", 
+    #       "subnet-00f5b198bc0abcdef", 
     #     ], 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_subnet_group: {
+    #       db_subnet_group_arn: "arn:aws:rds:us-west-2:0123456789012:subgrp:mysubnetgroup", 
+    #       db_subnet_group_description: "test DB subnet group", 
+    #       db_subnet_group_name: "mysubnetgroup", 
+    #       subnet_group_status: "Complete", 
+    #       subnets: [
+    #         {
+    #           subnet_availability_zone: {
+    #             name: "us-west-2b", 
+    #           }, 
+    #           subnet_identifier: "subnet-070dd7ecb3aaaaaaa", 
+    #           subnet_status: "Active", 
+    #         }, 
+    #         {
+    #           subnet_availability_zone: {
+    #             name: "us-west-2d", 
+    #           }, 
+    #           subnet_identifier: "subnet-00f5b198bc0abcdef", 
+    #           subnet_status: "Active", 
+    #         }, 
+    #         {
+    #           subnet_availability_zone: {
+    #             name: "us-west-2b", 
+    #           }, 
+    #           subnet_identifier: "subnet-0a1dc4e1a6f123456", 
+    #           subnet_status: "Active", 
+    #         }, 
+    #       ], 
+    #       vpc_id: "vpc-0f08e7610a1b2c3d4", 
     #     }, 
     #   }
     #
@@ -6634,26 +7193,36 @@ module Aws::RDS
     #   * {Types::CreateEventSubscriptionResult#event_subscription #event_subscription} => Types::EventSubscription
     #
     #
-    # @example Example: To create an event notification subscription
+    # @example Example: To create an event subscription
     #
-    #   # This example creates an event notification subscription.
+    #   # The following example creates a subscription for backup and recovery events for DB instances in the current AWS account.
+    #   # Notifications are sent to an Amazon Simple Notification Service topic.
     #
     #   resp = client.create_event_subscription({
-    #     enabled: true, 
     #     event_categories: [
-    #       "availability", 
+    #       "backup", 
+    #       "recovery", 
     #     ], 
-    #     sns_topic_arn: "arn:aws:sns:us-east-1:992648334831:MyDemoSNSTopic", 
-    #     source_ids: [
-    #       "mymysqlinstance", 
-    #     ], 
+    #     sns_topic_arn: "arn:aws:sns:us-east-1:123456789012:interesting-events", 
     #     source_type: "db-instance", 
-    #     subscription_name: "mymysqleventsubscription", 
+    #     subscription_name: "my-instance-events", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     event_subscription: {
+    #       cust_subscription_id: "my-instance-events", 
+    #       customer_aws_id: "123456789012", 
+    #       enabled: true, 
+    #       event_categories_list: [
+    #         "backup", 
+    #         "recovery", 
+    #       ], 
+    #       event_subscription_arn: "arn:aws:rds:us-east-1:123456789012:es:my-instance-events", 
+    #       sns_topic_arn: "arn:aws:sns:us-east-1:123456789012:interesting-events", 
+    #       source_type: "db-instance", 
+    #       status: "creating", 
+    #       subscription_creation_time: "Tue Jul 31 23:22:01 UTC 2018", 
     #     }, 
     #   }
     #
@@ -6714,7 +7283,8 @@ module Aws::RDS
     #  </note>
     #
     # @option params [String] :global_cluster_identifier
-    #   The cluster identifier of the new global database cluster.
+    #   The cluster identifier of the new global database cluster. This
+    #   parameter is stored as a lowercase string.
     #
     # @option params [String] :source_db_cluster_identifier
     #   The Amazon Resource Name (ARN) to use as the primary cluster of the
@@ -6741,6 +7311,32 @@ module Aws::RDS
     # @return [Types::CreateGlobalClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGlobalClusterResult#global_cluster #global_cluster} => Types::GlobalCluster
+    #
+    #
+    # @example Example: To create a global DB cluster
+    #
+    #   # The following example creates a new Aurora MySQL-compatible global DB cluster.
+    #
+    #   resp = client.create_global_cluster({
+    #     engine: "aurora-mysql", 
+    #     global_cluster_identifier: "myglobalcluster", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     global_cluster: {
+    #       deletion_protection: false, 
+    #       engine: "aurora-mysql", 
+    #       engine_version: "5.7.mysql_aurora.2.07.2", 
+    #       global_cluster_arn: "arn:aws:rds::123456789012:global-cluster:myglobalcluster", 
+    #       global_cluster_identifier: "myglobalcluster", 
+    #       global_cluster_members: [
+    #       ], 
+    #       global_cluster_resource_id: "cluster-f0e523bfe07aabb", 
+    #       status: "available", 
+    #       storage_encrypted: false, 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -6844,20 +7440,28 @@ module Aws::RDS
     #   * {Types::CreateOptionGroupResult#option_group #option_group} => Types::OptionGroup
     #
     #
-    # @example Example: To create an option group
+    # @example Example: To Create an Amazon RDS option group
     #
-    #   # This example creates an option group.
+    #   # The following example creates a new Amazon RDS option group for Oracle MySQL version 8,0 named MyOptionGroup.
     #
     #   resp = client.create_option_group({
-    #     engine_name: "MySQL", 
-    #     major_engine_version: "5.6", 
-    #     option_group_description: "My MySQL 5.6 option group", 
-    #     option_group_name: "mymysqloptiongroup", 
+    #     engine_name: "mysql", 
+    #     major_engine_version: "8.0", 
+    #     option_group_description: "MySQL 8.0 option group", 
+    #     option_group_name: "MyOptionGroup", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     option_group: {
+    #       allows_vpc_and_non_vpc_instance_memberships: true, 
+    #       engine_name: "mysql", 
+    #       major_engine_version: "8.0", 
+    #       option_group_arn: "arn:aws:rds:us-east-1:123456789012:og:myoptiongroup", 
+    #       option_group_description: "MySQL 8.0 option group", 
+    #       option_group_name: "myoptiongroup", 
+    #       options: [
+    #       ], 
     #     }, 
     #   }
     #
@@ -6956,6 +7560,141 @@ module Aws::RDS
     #
     #   * {Types::DeleteBlueGreenDeploymentResponse#blue_green_deployment #blue_green_deployment} => Types::BlueGreenDeployment
     #
+    #
+    # @example Example: To delete resources in green environment for an RDS for MySQL DB instance
+    #
+    #   # The following example deletes the resources in a green environment for an RDS for MySQL DB instance.
+    #
+    #   resp = client.delete_blue_green_deployment({
+    #     blue_green_deployment_identifier: "bgd-v53303651eexfake", 
+    #     delete_target: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     blue_green_deployment: {
+    #       blue_green_deployment_identifier: "bgd-v53303651eexfake", 
+    #       blue_green_deployment_name: "bgd-cli-test-instance", 
+    #       create_time: Time.parse("2022-02-25T21:18:51.183000+00:00"), 
+    #       delete_time: Time.parse("2022-02-25T22:25:31.331000+00:00"), 
+    #       source: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance", 
+    #       status: "DELETING", 
+    #       switchover_details: [
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance", 
+    #           status: "AVAILABLE", 
+    #           target_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-green-rkfbpe", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-replica-1", 
+    #           status: "AVAILABLE", 
+    #           target_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-replica-1-green-j382ha", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-replica-2", 
+    #           status: "AVAILABLE", 
+    #           target_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-replica-2-green-ejv4ao", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-replica-3", 
+    #           status: "AVAILABLE", 
+    #           target_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-replica-3-green-vlpz3t", 
+    #         }, 
+    #       ], 
+    #       target: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-green-rkfbpe", 
+    #       tasks: [
+    #         {
+    #           name: "CREATING_READ_REPLICA_OF_SOURCE", 
+    #           status: "COMPLETED", 
+    #         }, 
+    #         {
+    #           name: "DB_ENGINE_VERSION_UPGRADE", 
+    #           status: "COMPLETED", 
+    #         }, 
+    #         {
+    #           name: "CONFIGURE_BACKUPS", 
+    #           status: "COMPLETED", 
+    #         }, 
+    #         {
+    #           name: "CREATING_TOPOLOGY_OF_SOURCE", 
+    #           status: "COMPLETED", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
+    # @example Example: To delete resources in green environment for an Aurora MySQL DB cluster
+    #
+    #   # The following example deletes the resources in a green environment for an Aurora MySQL DB cluster.
+    #
+    #   resp = client.delete_blue_green_deployment({
+    #     blue_green_deployment_identifier: "bgd-wi89nwzglccsfake", 
+    #     delete_target: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     blue_green_deployment: {
+    #       blue_green_deployment_identifier: "bgd-wi89nwzglccsfake", 
+    #       blue_green_deployment_name: "my-blue-green-deployment", 
+    #       create_time: Time.parse("2022-02-25T21:12:00.288000+00:00"), 
+    #       delete_time: Time.parse("2022-02-25T22:29:11.336000+00:00"), 
+    #       source: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster", 
+    #       status: "DELETING", 
+    #       switchover_details: [
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster", 
+    #           status: "AVAILABLE", 
+    #           target_member: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster-green-3rnukl", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-1", 
+    #           status: "AVAILABLE", 
+    #           target_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-1-green-gpmaxf", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-2", 
+    #           status: "AVAILABLE", 
+    #           target_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-2-green-j2oajq", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-3", 
+    #           status: "AVAILABLE", 
+    #           target_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-3-green-mkxies", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:cluster-endpoint:my-excluded-member-endpoint", 
+    #           status: "AVAILABLE", 
+    #           target_member: "arn:aws:rds:us-east-1:123456789012:cluster-endpoint:my-excluded-member-endpoint-green-4sqjrq", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:cluster-endpoint:my-reader-endpoint", 
+    #           status: "AVAILABLE", 
+    #           target_member: "arn:aws:rds:us-east-1:123456789012:cluster-endpoint:my-reader-endpoint-green-gwwzlg", 
+    #         }, 
+    #       ], 
+    #       target: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster-green-3rnukl", 
+    #       tasks: [
+    #         {
+    #           name: "CREATING_READ_REPLICA_OF_SOURCE", 
+    #           status: "COMPLETED", 
+    #         }, 
+    #         {
+    #           name: "DB_ENGINE_VERSION_UPGRADE", 
+    #           status: "COMPLETED", 
+    #         }, 
+    #         {
+    #           name: "CREATE_DB_INSTANCES_FOR_CLUSTER", 
+    #           status: "COMPLETED", 
+    #         }, 
+    #         {
+    #           name: "CREATE_CUSTOM_ENDPOINTS", 
+    #           status: "COMPLETED", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_blue_green_deployment({
@@ -7023,7 +7762,8 @@ module Aws::RDS
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.delete
     #
     # @option params [required, String] :engine
-    #   The database engine. The only supported engine is `custom-oracle-ee`.
+    #   The database engine. The only supported engines are `custom-oracle-ee`
+    #   and `custom-oracle-ee-cdb`.
     #
     # @option params [required, String] :engine_version
     #   The custom engine version (CEV) for your DB instance. This option is
@@ -7204,19 +7944,32 @@ module Aws::RDS
     #   * {Types::DeleteDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
     #
     #
-    # @example Example: To delete a DB cluster.
+    # @example Example: To delete a DB cluster
     #
-    #   # This example deletes the specified DB cluster.
+    #   # The following example deletes the DB cluster named mycluster and takes a final snapshot named mycluster-final-snapshot.
+    #   # The status of the DB cluster is available while the snapshot is being taken. 
     #
     #   resp = client.delete_db_cluster({
-    #     db_cluster_identifier: "mydbcluster", 
-    #     skip_final_snapshot: true, 
+    #     db_cluster_identifier: "mycluster", 
+    #     final_db_snapshot_identifier: "mycluster-final-snapshot", 
+    #     skip_final_snapshot: false, 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_cluster: {
-    #     }, 
+    #       allocated_storage: 20, 
+    #       availability_zones: [
+    #         "eu-central-1b", 
+    #         "eu-central-1c", 
+    #         "eu-central-1a", 
+    #       ], 
+    #       backup_retention_period: 7, 
+    #       db_cluster_identifier: "mycluster", 
+    #       db_cluster_parameter_group: "default.aurora-postgresql10", 
+    #       db_subnet_group: "default-vpc-aa11bb22", 
+    #       status: "available", 
+    #     }, # Some output ommitted.
     #   }
     #
     # @example Request syntax with placeholder values
@@ -7373,6 +8126,34 @@ module Aws::RDS
     #   * {Types::DBClusterEndpoint#excluded_members #excluded_members} => Array&lt;String&gt;
     #   * {Types::DBClusterEndpoint#db_cluster_endpoint_arn #db_cluster_endpoint_arn} => String
     #
+    #
+    # @example Example: To delete a custom DB cluster endpoint
+    #
+    #   # The following example deletes the specified custom DB cluster endpoint.
+    #
+    #   resp = client.delete_db_cluster_endpoint({
+    #     db_cluster_endpoint_identifier: "mycustomendpoint", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     custom_endpoint_type: "READER", 
+    #     db_cluster_endpoint_arn: "arn:aws:rds:us-east-1:123456789012:cluster-endpoint:mycustomendpoint", 
+    #     db_cluster_endpoint_identifier: "mycustomendpoint", 
+    #     db_cluster_endpoint_resource_identifier: "cluster-endpoint-ANPAJ4AE5446DAEXAMPLE", 
+    #     db_cluster_identifier: "mydbcluster", 
+    #     endpoint: "mycustomendpoint.cluster-custom-cnpexample.us-east-1.rds.amazonaws.com", 
+    #     endpoint_type: "CUSTOM", 
+    #     excluded_members: [
+    #     ], 
+    #     static_members: [
+    #       "dbinstance1", 
+    #       "dbinstance2", 
+    #       "dbinstance3", 
+    #     ], 
+    #     status: "deleting", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_db_cluster_endpoint({
@@ -7432,9 +8213,9 @@ module Aws::RDS
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
-    # @example Example: To delete a DB cluster parameter group.
+    # @example Example: To delete a DB cluster parameter group
     #
-    #   # This example deletes the specified DB cluster parameter group.
+    #   # The following example deletes the specified DB cluster parameter group.
     #
     #   resp = client.delete_db_cluster_parameter_group({
     #     db_cluster_parameter_group_name: "mydbclusterparametergroup", 
@@ -7485,9 +8266,7 @@ module Aws::RDS
     #   * {Types::DeleteDBClusterSnapshotResult#db_cluster_snapshot #db_cluster_snapshot} => Types::DBClusterSnapshot
     #
     #
-    # @example Example: To delete a DB cluster snapshot.
-    #
-    #   # This example deletes the specified DB cluster snapshot.
+    # @example Example: To delete a DB cluster snapshot
     #
     #   resp = client.delete_db_cluster_snapshot({
     #     db_cluster_snapshot_identifier: "mydbclustersnapshot", 
@@ -7496,6 +8275,29 @@ module Aws::RDS
     #   resp.to_h outputs the following:
     #   {
     #     db_cluster_snapshot: {
+    #       allocated_storage: 0, 
+    #       availability_zones: [
+    #         "us-east-1a", 
+    #         "us-east-1b", 
+    #         "us-east-1e", 
+    #       ], 
+    #       cluster_create_time: Time.parse("2019-04-15T14:18:42.785Z"), 
+    #       db_cluster_identifier: "mydbcluster", 
+    #       db_cluster_snapshot_arn: "arn:aws:rds:us-east-1:123456789012:cluster-snapshot:mydbclustersnapshot", 
+    #       db_cluster_snapshot_identifier: "mydbclustersnapshot", 
+    #       engine: "aurora-mysql", 
+    #       engine_version: "5.7.mysql_aurora.2.04.2", 
+    #       iam_database_authentication_enabled: false, 
+    #       kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE", 
+    #       license_model: "aurora-mysql", 
+    #       master_username: "myadmin", 
+    #       percent_progress: 100, 
+    #       port: 0, 
+    #       snapshot_create_time: Time.parse("2019-06-18T21:21:00.469Z"), 
+    #       snapshot_type: "manual", 
+    #       status: "available", 
+    #       storage_encrypted: true, 
+    #       vpc_id: "vpc-6594f31c", 
     #     }, 
     #   }
     #
@@ -7638,19 +8440,23 @@ module Aws::RDS
     #   * {Types::DeleteDBInstanceResult#db_instance #db_instance} => Types::DBInstance
     #
     #
-    # @example Example: To delete a DB instance.
+    # @example Example: To delete a DB instance
     #
-    #   # This example deletes the specified DB instance.
+    #   # The following example deletes the specified DB instance after creating a final DB snapshot named
+    #   # test-instance-final-snap.
     #
     #   resp = client.delete_db_instance({
-    #     db_instance_identifier: "mymysqlinstance", 
-    #     skip_final_snapshot: true, 
+    #     db_instance_identifier: "test-instance", 
+    #     final_db_snapshot_identifier: "test-instance-final-snap", 
+    #     skip_final_snapshot: false, 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_instance: {
-    #     }, 
+    #       db_instance_identifier: "test-instance", 
+    #       db_instance_status: "deleting", 
+    #     }, # Some output ommitted.
     #   }
     #
     # @example Request syntax with placeholder values
@@ -7842,6 +8648,43 @@ module Aws::RDS
     #
     #   * {Types::DeleteDBInstanceAutomatedBackupResult#db_instance_automated_backup #db_instance_automated_backup} => Types::DBInstanceAutomatedBackup
     #
+    #
+    # @example Example: To delete a replicated automated backup from a Region
+    #
+    #   # The following example deletes the automated backup with the specified Amazon Resource Name (ARN).
+    #
+    #   resp = client.delete_db_instance_automated_backup({
+    #     db_instance_automated_backups_arn: "arn:aws:rds:us-west-2:123456789012:auto-backup:ab-jkib2gfq5rv7replzadausbrktni2bn4example", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_instance_automated_backup: {
+    #       allocated_storage: 20, 
+    #       availability_zone: "us-east-1b", 
+    #       backup_retention_period: 7, 
+    #       db_instance_arn: "arn:aws:rds:us-east-1:123456789012:db:new-orcl-db", 
+    #       db_instance_automated_backups_arn: "arn:aws:rds:us-west-2:123456789012:auto-backup:ab-jkib2gfq5rv7replzadausbrktni2bn4example", 
+    #       db_instance_identifier: "new-orcl-db", 
+    #       dbi_resource_id: "db-JKIB2GFQ5RV7REPLZA4EXAMPLE", 
+    #       encrypted: false, 
+    #       engine: "oracle-se2", 
+    #       engine_version: "12.1.0.2.v21", 
+    #       iam_database_authentication_enabled: false, 
+    #       instance_create_time: Time.parse("2020-12-04T15:28:31Z"), 
+    #       license_model: "bring-your-own-license", 
+    #       master_username: "admin", 
+    #       option_group_name: "default:oracle-se2-12-1", 
+    #       port: 1521, 
+    #       region: "us-east-1", 
+    #       restore_window: {
+    #       }, 
+    #       status: "deleting", 
+    #       storage_type: "gp2", 
+    #       vpc_id: "vpc-########", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_db_instance_automated_backup({
@@ -7913,7 +8756,7 @@ module Aws::RDS
     #   # The following example deletes a DB parameter group.
     #
     #   resp = client.delete_db_parameter_group({
-    #     db_parameter_group_name: "mydbparamgroup3", 
+    #     db_parameter_group_name: "mydbparametergroup", 
     #   })
     #
     # @example Request syntax with placeholder values
@@ -8106,9 +8949,9 @@ module Aws::RDS
     #   * {Types::DeleteDBSnapshotResult#db_snapshot #db_snapshot} => Types::DBSnapshot
     #
     #
-    # @example Example: To delete a DB cluster snapshot.
+    # @example Example: To delete a DB snapshot
     #
-    #   # This example deletes the specified DB snapshot.
+    #   # The following example deletes the specified DB snapshot.
     #
     #   resp = client.delete_db_snapshot({
     #     db_snapshot_identifier: "mydbsnapshot", 
@@ -8117,6 +8960,31 @@ module Aws::RDS
     #   resp.to_h outputs the following:
     #   {
     #     db_snapshot: {
+    #       allocated_storage: 100, 
+    #       availability_zone: "us-east-1b", 
+    #       db_instance_identifier: "database-mysql", 
+    #       db_snapshot_arn: "arn:aws:rds:us-east-1:123456789012:snapshot:mydbsnapshot", 
+    #       db_snapshot_identifier: "mydbsnapshot", 
+    #       dbi_resource_id: "db-AKIAIOSFODNN7EXAMPLE", 
+    #       encrypted: true, 
+    #       engine: "mysql", 
+    #       engine_version: "5.6.40", 
+    #       iam_database_authentication_enabled: false, 
+    #       instance_create_time: Time.parse("2019-04-30T15:45:53.663Z"), 
+    #       iops: 1000, 
+    #       kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE", 
+    #       license_model: "general-public-license", 
+    #       master_username: "admin", 
+    #       option_group_name: "default:mysql-5-6", 
+    #       percent_progress: 100, 
+    #       port: 3306, 
+    #       processor_features: [
+    #       ], 
+    #       snapshot_create_time: Time.parse("2019-06-18T22:08:40.702Z"), 
+    #       snapshot_type: "manual", 
+    #       status: "deleted", 
+    #       storage_type: "io1", 
+    #       vpc_id: "vpc-6594f31c", 
     #     }, 
     #   }
     #
@@ -8197,12 +9065,12 @@ module Aws::RDS
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
-    # @example Example: To delete a DB subnet group.
+    # @example Example: To delete a DB subnet group
     #
-    #   # This example deletes the specified DB subnetgroup.
+    #   # The following example deletes the DB subnet group called mysubnetgroup.
     #
     #   resp = client.delete_db_subnet_group({
-    #     db_subnet_group_name: "mydbsubnetgroup", 
+    #     db_subnet_group_name: "mysubnetgroup", 
     #   })
     #
     # @example Request syntax with placeholder values
@@ -8231,17 +9099,32 @@ module Aws::RDS
     #   * {Types::DeleteEventSubscriptionResult#event_subscription #event_subscription} => Types::EventSubscription
     #
     #
-    # @example Example: To delete a DB event subscription.
+    # @example Example: To delete an event subscription
     #
-    #   # This example deletes the specified DB event subscription.
+    #   # The following example deletes the specified event subscription.
     #
     #   resp = client.delete_event_subscription({
-    #     subscription_name: "myeventsubscription", 
+    #     subscription_name: "my-instance-events", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     event_subscription: {
+    #       cust_subscription_id: "my-instance-events", 
+    #       customer_aws_id: "123456789012", 
+    #       enabled: false, 
+    #       event_categories_list: [
+    #         "backup", 
+    #         "recovery", 
+    #       ], 
+    #       event_subscription_arn: "arn:aws:rds:us-east-1:123456789012:es:my-instance-events", 
+    #       sns_topic_arn: "arn:aws:sns:us-east-1:123456789012:interesting-events", 
+    #       source_ids_list: [
+    #         "test-instance", 
+    #       ], 
+    #       source_type: "db-instance", 
+    #       status: "deleting", 
+    #       subscription_creation_time: "2018-07-31 23:22:01.893", 
     #     }, 
     #   }
     #
@@ -8288,6 +9171,31 @@ module Aws::RDS
     # @return [Types::DeleteGlobalClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteGlobalClusterResult#global_cluster #global_cluster} => Types::GlobalCluster
+    #
+    #
+    # @example Example: To delete a global DB cluster
+    #
+    #   # The following example deletes an Aurora MySQL-compatible global DB cluster.
+    #
+    #   resp = client.delete_global_cluster({
+    #     global_cluster_identifier: "myglobalcluster", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     global_cluster: {
+    #       deletion_protection: false, 
+    #       engine: "aurora-mysql", 
+    #       engine_version: "5.7.mysql_aurora.2.07.2", 
+    #       global_cluster_arn: "arn:aws:rds::123456789012:global-cluster:myglobalcluster", 
+    #       global_cluster_identifier: "myglobalcluster", 
+    #       global_cluster_members: [
+    #       ], 
+    #       global_cluster_resource_id: "cluster-f0e523bfe07aabb", 
+    #       status: "available", 
+    #       storage_encrypted: false, 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -8337,12 +9245,12 @@ module Aws::RDS
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
-    # @example Example: To delete an option group.
+    # @example Example: To delete an option group
     #
-    #   # This example deletes the specified option group.
+    #   # The following example deletes the specified option group.
     #
     #   resp = client.delete_option_group({
-    #     option_group_name: "mydboptiongroup", 
+    #     option_group_name: "myoptiongroup", 
     #   })
     #
     # @example Request syntax with placeholder values
@@ -8408,15 +9316,92 @@ module Aws::RDS
     #   * {Types::AccountAttributesMessage#account_quotas #account_quotas} => Array&lt;Types::AccountQuota&gt;
     #
     #
-    # @example Example: To list account attributes
+    # @example Example: To describe account attributes
     #
-    #   # This example lists account attributes.
+    #   # The following example retrieves the attributes for the current AWS account.
     #
     #   resp = client.describe_account_attributes({
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     account_quotas: [
+    #       {
+    #         account_quota_name: "DBInstances", 
+    #         max: 40, 
+    #         used: 4, 
+    #       }, 
+    #       {
+    #         account_quota_name: "ReservedDBInstances", 
+    #         max: 40, 
+    #         used: 0, 
+    #       }, 
+    #       {
+    #         account_quota_name: "AllocatedStorage", 
+    #         max: 100000, 
+    #         used: 40, 
+    #       }, 
+    #       {
+    #         account_quota_name: "DBSecurityGroups", 
+    #         max: 25, 
+    #         used: 0, 
+    #       }, 
+    #       {
+    #         account_quota_name: "AuthorizationsPerDBSecurityGroup", 
+    #         max: 20, 
+    #         used: 0, 
+    #       }, 
+    #       {
+    #         account_quota_name: "DBParameterGroups", 
+    #         max: 50, 
+    #         used: 1, 
+    #       }, 
+    #       {
+    #         account_quota_name: "ManualSnapshots", 
+    #         max: 100, 
+    #         used: 3, 
+    #       }, 
+    #       {
+    #         account_quota_name: "EventSubscriptions", 
+    #         max: 20, 
+    #         used: 0, 
+    #       }, 
+    #       {
+    #         account_quota_name: "DBSubnetGroups", 
+    #         max: 50, 
+    #         used: 1, 
+    #       }, 
+    #       {
+    #         account_quota_name: "OptionGroups", 
+    #         max: 20, 
+    #         used: 1, 
+    #       }, 
+    #       {
+    #         account_quota_name: "SubnetsPerDBSubnetGroup", 
+    #         max: 20, 
+    #         used: 6, 
+    #       }, 
+    #       {
+    #         account_quota_name: "ReadReplicasPerMaster", 
+    #         max: 5, 
+    #         used: 0, 
+    #       }, 
+    #       {
+    #         account_quota_name: "DBClusters", 
+    #         max: 40, 
+    #         used: 1, 
+    #       }, 
+    #       {
+    #         account_quota_name: "DBClusterParameterGroups", 
+    #         max: 50, 
+    #         used: 0, 
+    #       }, 
+    #       {
+    #         account_quota_name: "DBClusterRoles", 
+    #         max: 5, 
+    #         used: 0, 
+    #       }, 
+    #     ], 
     #   }
     #
     # @example Response structure
@@ -8504,6 +9489,214 @@ module Aws::RDS
     #   * {Types::DescribeBlueGreenDeploymentsResponse#marker #marker} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To describe a blue/green deployment of an RDS DB instance after creation completes
+    #
+    #   # The following example retrieves the details of a blue/green deployment after creation completes.
+    #
+    #   resp = client.describe_blue_green_deployments({
+    #     blue_green_deployment_identifier: "bgd-v53303651eexfake", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     blue_green_deployments: [
+    #       {
+    #         blue_green_deployment_identifier: "bgd-v53303651eexfake", 
+    #         blue_green_deployment_name: "bgd-cli-test-instance", 
+    #         create_time: Time.parse("2022-02-25T21:18:51.183000+00:00"), 
+    #         source: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance", 
+    #         status: "AVAILABLE", 
+    #         switchover_details: [
+    #           {
+    #             source_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance", 
+    #             status: "AVAILABLE", 
+    #             target_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-green-rkfbpe", 
+    #           }, 
+    #           {
+    #             source_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-replica-1", 
+    #             status: "AVAILABLE", 
+    #             target_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-replica-1-green-j382ha", 
+    #           }, 
+    #           {
+    #             source_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-replica-2", 
+    #             status: "AVAILABLE", 
+    #             target_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-replica-2-green-ejv4ao", 
+    #           }, 
+    #           {
+    #             source_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-replica-3", 
+    #             status: "AVAILABLE", 
+    #             target_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-replica-3-green-vlpz3t", 
+    #           }, 
+    #         ], 
+    #         target: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-green-rkfbpe", 
+    #         tasks: [
+    #           {
+    #             name: "CREATING_READ_REPLICA_OF_SOURCE", 
+    #             status: "COMPLETED", 
+    #           }, 
+    #           {
+    #             name: "DB_ENGINE_VERSION_UPGRADE", 
+    #             status: "COMPLETED", 
+    #           }, 
+    #           {
+    #             name: "CONFIGURE_BACKUPS", 
+    #             status: "COMPLETED", 
+    #           }, 
+    #           {
+    #             name: "CREATING_TOPOLOGY_OF_SOURCE", 
+    #             status: "COMPLETED", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To describe a blue/green deployment for an Aurora MySQL DB cluster
+    #
+    #   # The following example retrieves the details of a blue/green deployment.
+    #
+    #   resp = client.describe_blue_green_deployments({
+    #     blue_green_deployment_identifier: "bgd-wi89nwzglccsfake", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     blue_green_deployments: [
+    #       {
+    #         blue_green_deployment_identifier: "bgd-wi89nwzglccsfake", 
+    #         blue_green_deployment_name: "my-blue-green-deployment", 
+    #         create_time: Time.parse("2022-02-25T21:12:00.288000+00:00"), 
+    #         source: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster", 
+    #         status: "AVAILABLE", 
+    #         switchover_details: [
+    #           {
+    #             source_member: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster", 
+    #             status: "AVAILABLE", 
+    #             target_member: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster-green-3rnukl", 
+    #           }, 
+    #           {
+    #             source_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-1", 
+    #             status: "AVAILABLE", 
+    #             target_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-1-green-gpmaxf", 
+    #           }, 
+    #           {
+    #             source_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-2", 
+    #             status: "AVAILABLE", 
+    #             target_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-2-green-j2oajq", 
+    #           }, 
+    #           {
+    #             source_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-3", 
+    #             status: "AVAILABLE", 
+    #             target_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-3-green-mkxies", 
+    #           }, 
+    #           {
+    #             source_member: "arn:aws:rds:us-east-1:123456789012:cluster-endpoint:my-excluded-member-endpoint", 
+    #             status: "AVAILABLE", 
+    #             target_member: "arn:aws:rds:us-east-1:123456789012:cluster-endpoint:my-excluded-member-endpoint-green-4sqjrq", 
+    #           }, 
+    #           {
+    #             source_member: "arn:aws:rds:us-east-1:123456789012:cluster-endpoint:my-reader-endpoint", 
+    #             status: "AVAILABLE", 
+    #             target_member: "arn:aws:rds:us-east-1:123456789012:cluster-endpoint:my-reader-endpoint-green-gwwzlg", 
+    #           }, 
+    #         ], 
+    #         target: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster-green-3rnukl", 
+    #         tasks: [
+    #           {
+    #             name: "CREATING_READ_REPLICA_OF_SOURCE", 
+    #             status: "COMPLETED", 
+    #           }, 
+    #           {
+    #             name: "DB_ENGINE_VERSION_UPGRADE", 
+    #             status: "COMPLETED", 
+    #           }, 
+    #           {
+    #             name: "CREATE_DB_INSTANCES_FOR_CLUSTER", 
+    #             status: "COMPLETED", 
+    #           }, 
+    #           {
+    #             name: "CREATE_CUSTOM_ENDPOINTS", 
+    #             status: "COMPLETED", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To describe a blue/green deployment for an Aurora MySQL cluster after switchover
+    #
+    #   # The following example retrieves the details about a blue/green deployment after the green environment is promoted to be
+    #   # the production environment.
+    #
+    #   resp = client.describe_blue_green_deployments({
+    #     blue_green_deployment_identifier: "bgd-wi89nwzglccsfake", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     blue_green_deployments: [
+    #       {
+    #         blue_green_deployment_identifier: "bgd-wi89nwzglccsfake", 
+    #         blue_green_deployment_name: "my-blue-green-deployment", 
+    #         create_time: Time.parse("2022-02-25T22:38:49.522000+00:00"), 
+    #         source: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster-old1", 
+    #         status: "SWITCHOVER_COMPLETED", 
+    #         switchover_details: [
+    #           {
+    #             source_member: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster-old1", 
+    #             status: "SWITCHOVER_COMPLETED", 
+    #             target_member: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster", 
+    #           }, 
+    #           {
+    #             source_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-1-old1", 
+    #             status: "SWITCHOVER_COMPLETED", 
+    #             target_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-1", 
+    #           }, 
+    #           {
+    #             source_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-2-old1", 
+    #             status: "SWITCHOVER_COMPLETED", 
+    #             target_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-2", 
+    #           }, 
+    #           {
+    #             source_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-3-old1", 
+    #             status: "SWITCHOVER_COMPLETED", 
+    #             target_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-3", 
+    #           }, 
+    #           {
+    #             source_member: "arn:aws:rds:us-east-1:123456789012:cluster-endpoint:my-excluded-member-endpoint-old1", 
+    #             status: "SWITCHOVER_COMPLETED", 
+    #             target_member: "arn:aws:rds:us-east-1:123456789012:cluster-endpoint:my-excluded-member-endpoint", 
+    #           }, 
+    #           {
+    #             source_member: "arn:aws:rds:us-east-1:123456789012:cluster-endpoint:my-reader-endpoint-old1", 
+    #             status: "SWITCHOVER_COMPLETED", 
+    #             target_member: "arn:aws:rds:us-east-1:123456789012:cluster-endpoint:my-reader-endpoint", 
+    #           }, 
+    #         ], 
+    #         target: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster", 
+    #         tasks: [
+    #           {
+    #             name: "CREATING_READ_REPLICA_OF_SOURCE", 
+    #             status: "COMPLETED", 
+    #           }, 
+    #           {
+    #             name: "DB_ENGINE_VERSION_UPGRADE", 
+    #             status: "COMPLETED", 
+    #           }, 
+    #           {
+    #             name: "CREATE_DB_INSTANCES_FOR_CLUSTER", 
+    #             status: "COMPLETED", 
+    #           }, 
+    #           {
+    #             name: "CREATE_CUSTOM_ENDPOINTS", 
+    #             status: "COMPLETED", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -8602,17 +9795,54 @@ module Aws::RDS
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list certificates
+    # @example Example: To describe certificates
     #
-    #   # This example lists up to 20 certificates for the specified certificate identifier.
+    #   # The following example retrieves the details of the certificate associated with the user's default region.
     #
     #   resp = client.describe_certificates({
-    #     certificate_identifier: "rds-ca-2015", 
-    #     max_records: 20, 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     certificates: [
+    #       {
+    #         certificate_arn: "arn:aws:rds:us-east-1::cert:rds-ca-ecc384-g1", 
+    #         certificate_identifier: "rds-ca-ecc384-g1", 
+    #         certificate_type: "CA", 
+    #         customer_override: false, 
+    #         thumbprint: "24a97b91cbe86911190576c35c36aab4fEXAMPLE", 
+    #         valid_from: Time.parse("2021-05-25T22:41:55+00:00"), 
+    #         valid_till: Time.parse("2121-05-25T23:41:55+00:00"), 
+    #       }, 
+    #       {
+    #         certificate_arn: "arn:aws:rds:us-east-1::cert:rds-ca-rsa4096-g1", 
+    #         certificate_identifier: "rds-ca-rsa4096-g1", 
+    #         certificate_type: "CA", 
+    #         customer_override: false, 
+    #         thumbprint: "9da6fa7fd2ec09c569a400d876b01b0c1EXAMPLE", 
+    #         valid_from: Time.parse("2021-05-25T22:38:35+00:00"), 
+    #         valid_till: Time.parse("2121-05-25T23:38:35+00:00"), 
+    #       }, 
+    #       {
+    #         certificate_arn: "arn:aws:rds:us-east-1::cert:rds-ca-rsa2048-g1", 
+    #         certificate_identifier: "rds-ca-rsa2048-g1", 
+    #         certificate_type: "CA", 
+    #         customer_override: true, 
+    #         customer_override_valid_till: Time.parse("2061-05-25T23:34:57+00:00"), 
+    #         thumbprint: "2fa77ef894d983ba9d37ad699c84ab0f6EXAMPLE", 
+    #         valid_from: Time.parse("2021-05-25T22:34:57+00:00"), 
+    #         valid_till: Time.parse("2061-05-25T23:34:57+00:00"), 
+    #       }, 
+    #       {
+    #         certificate_arn: "arn:aws:rds:us-east-1::cert:rds-ca-2019", 
+    #         certificate_identifier: "rds-ca-2019", 
+    #         certificate_type: "CA", 
+    #         customer_override: false, 
+    #         thumbprint: "f0ed823ed14447bab557fdf3e49274669EXAMPLE", 
+    #         valid_from: Time.parse("2019-09-19T18:16:53+00:00"), 
+    #         valid_till: Time.parse("2024-08-22T17:08:50+00:00"), 
+    #       }, 
+    #     ], 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -8741,6 +9971,37 @@ module Aws::RDS
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To describe backtracks for a DB cluster
+    #
+    #   # The following example retrieves details about the specified DB cluster.
+    #
+    #   resp = client.describe_db_cluster_backtracks({
+    #     db_cluster_identifier: "mydbcluster", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster_backtracks: [
+    #       {
+    #         backtrack_identifier: "2f5f5294-0dd2-44c9-9f50-EXAMPLE", 
+    #         backtrack_request_creation_time: Time.parse("2021-02-12T14:36:18.819Z"), 
+    #         backtrack_to: Time.parse("2021-02-12T04:59:22Z"), 
+    #         backtracked_from: Time.parse("2021-02-12T14:37:31.640Z"), 
+    #         db_cluster_identifier: "mydbcluster", 
+    #         status: "COMPLETED", 
+    #       }, 
+    #       {
+    #         backtrack_identifier: "3c7a6421-af2a-4ea3-ae95-EXAMPLE", 
+    #         backtrack_request_creation_time: Time.parse("2021-02-12T00:07:53.487Z"), 
+    #         backtrack_to: Time.parse("2021-02-11T22:53:46Z"), 
+    #         backtracked_from: Time.parse("2021-02-12T00:09:27.006Z"), 
+    #         db_cluster_identifier: "mydbcluster", 
+    #         status: "COMPLETED", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_cluster_backtracks({
@@ -8825,6 +10086,67 @@ module Aws::RDS
     #   * {Types::DBClusterEndpointMessage#db_cluster_endpoints #db_cluster_endpoints} => Array&lt;Types::DBClusterEndpoint&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To describe DB cluster endpoints
+    #
+    #   # The following example retrieves details for your DB cluster endpoints. The most common kinds of Aurora clusters have two
+    #   # endpoints. One endpoint has type WRITER. You can use this endpoint for all SQL statements. The other endpoint has type
+    #   # READER. You can use this endpoint only for SELECT and other read-only SQL statements.
+    #
+    #   resp = client.describe_db_cluster_endpoints({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster_endpoints: [
+    #       {
+    #         db_cluster_identifier: "my-database-1", 
+    #         endpoint: "my-database-1.cluster-cnpexample.us-east-1.rds.amazonaws.com", 
+    #         endpoint_type: "WRITER", 
+    #         status: "creating", 
+    #       }, 
+    #       {
+    #         db_cluster_identifier: "my-database-1", 
+    #         endpoint: "my-database-1.cluster-ro-cnpexample.us-east-1.rds.amazonaws.com", 
+    #         endpoint_type: "READER", 
+    #         status: "creating", 
+    #       }, 
+    #       {
+    #         db_cluster_identifier: "mydbcluster", 
+    #         endpoint: "mydbcluster.cluster-cnpexamle.us-east-1.rds.amazonaws.com", 
+    #         endpoint_type: "WRITER", 
+    #         status: "available", 
+    #       }, 
+    #       {
+    #         db_cluster_identifier: "mydbcluster", 
+    #         endpoint: "mydbcluster.cluster-ro-cnpexample.us-east-1.rds.amazonaws.com", 
+    #         endpoint_type: "READER", 
+    #         status: "available", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To describe DB cluster endpoints of a single DB cluster
+    #
+    #   # The following example retrieves details for the DB cluster endpoints of a single specified DB cluster. Aurora Serverless
+    #   # clusters have only a single endpoint with a type of WRITER.
+    #
+    #   resp = client.describe_db_cluster_endpoints({
+    #     db_cluster_identifier: "serverless-cluster", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster_endpoints: [
+    #       {
+    #         db_cluster_identifier: "serverless-cluster", 
+    #         endpoint: "serverless-cluster.cluster-cnpexample.us-east-1.rds.amazonaws.com", 
+    #         endpoint_type: "WRITER", 
+    #         status: "available", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -8921,16 +10243,47 @@ module Aws::RDS
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list DB cluster parameter group settings
+    # @example Example: To describe DB cluster parameter groups
     #
-    #   # This example lists settings for the specified DB cluster parameter group.
+    #   # The following example retrieves details for your DB cluster parameter groups.
     #
     #   resp = client.describe_db_cluster_parameter_groups({
-    #     db_cluster_parameter_group_name: "mydbclusterparametergroup", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     db_cluster_parameter_groups: [
+    #       {
+    #         db_cluster_parameter_group_arn: "arn:aws:rds:us-east-1:123456789012:cluster-pg:default.aurora-mysql5.7", 
+    #         db_cluster_parameter_group_name: "default.aurora-mysql5.7", 
+    #         db_parameter_group_family: "aurora-mysql5.7", 
+    #         description: "Default cluster parameter group for aurora-mysql5.7", 
+    #       }, 
+    #       {
+    #         db_cluster_parameter_group_arn: "arn:aws:rds:us-east-1:123456789012:cluster-pg:default.aurora-postgresql9.6", 
+    #         db_cluster_parameter_group_name: "default.aurora-postgresql9.6", 
+    #         db_parameter_group_family: "aurora-postgresql9.6", 
+    #         description: "Default cluster parameter group for aurora-postgresql9.6", 
+    #       }, 
+    #       {
+    #         db_cluster_parameter_group_arn: "arn:aws:rds:us-east-1:123456789012:cluster-pg:default.aurora5.6", 
+    #         db_cluster_parameter_group_name: "default.aurora5.6", 
+    #         db_parameter_group_family: "aurora5.6", 
+    #         description: "Default cluster parameter group for aurora5.6", 
+    #       }, 
+    #       {
+    #         db_cluster_parameter_group_arn: "arn:aws:rds:us-east-1:123456789012:cluster-pg:mydbclusterpg", 
+    #         db_cluster_parameter_group_name: "mydbclusterpg", 
+    #         db_parameter_group_family: "aurora-mysql5.7", 
+    #         description: "My DB cluster parameter group", 
+    #       }, 
+    #       {
+    #         db_cluster_parameter_group_arn: "arn:aws:rds:us-east-1:123456789012:cluster-pg:mydbclusterpgcopy", 
+    #         db_cluster_parameter_group_name: "mydbclusterpgcopy", 
+    #         db_parameter_group_family: "aurora-mysql5.7", 
+    #         description: "Copy of mydbclusterpg parameter group", 
+    #       }, 
+    #     ], 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -9021,17 +10374,45 @@ module Aws::RDS
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list DB cluster parameters
+    # @example Example: To describe the parameters in a DB cluster parameter group
     #
-    #   # This example lists system parameters for the specified DB cluster parameter group.
+    #   # The following example retrieves details about the parameters in a DB cluster parameter group.
     #
     #   resp = client.describe_db_cluster_parameters({
-    #     db_cluster_parameter_group_name: "mydbclusterparametergroup", 
-    #     source: "system", 
+    #     db_cluster_parameter_group_name: "mydbclusterpg", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     parameters: [
+    #       {
+    #         allowed_values: "0,1", 
+    #         apply_method: "pending-reboot", 
+    #         apply_type: "static", 
+    #         data_type: "boolean", 
+    #         description: "Controls whether user-defined functions that have only an xxx symbol for the main function can be loaded", 
+    #         is_modifiable: false, 
+    #         parameter_name: "allow-suspicious-udfs", 
+    #         source: "engine-default", 
+    #         supported_engine_modes: [
+    #           "provisioned", 
+    #         ], 
+    #       }, 
+    #       {
+    #         allowed_values: "0,1", 
+    #         apply_method: "pending-reboot", 
+    #         apply_type: "static", 
+    #         data_type: "boolean", 
+    #         description: "Enables new features in the Aurora engine.", 
+    #         is_modifiable: true, 
+    #         parameter_name: "aurora_lab_mode", 
+    #         parameter_value: "0", 
+    #         source: "engine-default", 
+    #         supported_engine_modes: [
+    #           "provisioned", 
+    #         ], 
+    #       }, 
+    #     ], # Some output ommitted.
     #   }
     #
     # @example Request syntax with placeholder values
@@ -9100,17 +10481,26 @@ module Aws::RDS
     #   * {Types::DescribeDBClusterSnapshotAttributesResult#db_cluster_snapshot_attributes_result #db_cluster_snapshot_attributes_result} => Types::DBClusterSnapshotAttributesResult
     #
     #
-    # @example Example: To list DB cluster snapshot attributes
+    # @example Example: To describe the attribute names and values for a DB cluster snapshot
     #
-    #   # This example lists attributes for the specified DB cluster snapshot.
+    #   # The following example retrieves details of the attribute names and values for the specified DB cluster snapshot.
     #
     #   resp = client.describe_db_cluster_snapshot_attributes({
-    #     db_cluster_snapshot_identifier: "mydbclustersnapshot", 
+    #     db_cluster_snapshot_identifier: "myclustersnapshot", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_cluster_snapshot_attributes_result: {
+    #       db_cluster_snapshot_attributes: [
+    #         {
+    #           attribute_name: "restore", 
+    #           attribute_values: [
+    #             "123456789012", 
+    #           ], 
+    #         }, 
+    #       ], 
+    #       db_cluster_snapshot_identifier: "myclustersnapshot", 
     #     }, 
     #   }
     #
@@ -9261,17 +10651,68 @@ module Aws::RDS
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list DB cluster snapshots
+    # @example Example: To describe a DB cluster snapshot for a DB cluster
     #
-    #   # This example lists settings for the specified, manually-created cluster snapshot.
+    #   # The following example retrieves the details for the DB cluster snapshots for the specified DB cluster.
     #
     #   resp = client.describe_db_cluster_snapshots({
-    #     db_cluster_snapshot_identifier: "mydbclustersnapshot", 
-    #     snapshot_type: "manual", 
+    #     db_cluster_identifier: "mydbcluster", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     db_cluster_snapshots: [
+    #       {
+    #         allocated_storage: 0, 
+    #         availability_zones: [
+    #           "us-east-1a", 
+    #           "us-east-1b", 
+    #           "us-east-1e", 
+    #         ], 
+    #         cluster_create_time: Time.parse("2019-04-15T14:18:42.785Z"), 
+    #         db_cluster_identifier: "mydbcluster", 
+    #         db_cluster_snapshot_arn: "arn:aws:rds:us-east-1:814387698303:cluster-snapshot:myclustersnapshotcopy", 
+    #         db_cluster_snapshot_identifier: "myclustersnapshotcopy", 
+    #         engine: "aurora-mysql", 
+    #         engine_version: "5.7.mysql_aurora.2.04.2", 
+    #         iam_database_authentication_enabled: false, 
+    #         kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE", 
+    #         license_model: "aurora-mysql", 
+    #         master_username: "myadmin", 
+    #         percent_progress: 100, 
+    #         port: 0, 
+    #         snapshot_create_time: Time.parse("2019-06-04T09:16:42.649Z"), 
+    #         snapshot_type: "manual", 
+    #         status: "available", 
+    #         storage_encrypted: true, 
+    #         vpc_id: "vpc-6594f31c", 
+    #       }, 
+    #       {
+    #         allocated_storage: 0, 
+    #         availability_zones: [
+    #           "us-east-1a", 
+    #           "us-east-1b", 
+    #           "us-east-1e", 
+    #         ], 
+    #         cluster_create_time: Time.parse("2019-04-15T14:18:42.785Z"), 
+    #         db_cluster_identifier: "mydbcluster", 
+    #         db_cluster_snapshot_arn: "arn:aws:rds:us-east-1:123456789012:cluster-snapshot:rds:mydbcluster-2019-06-20-09-16", 
+    #         db_cluster_snapshot_identifier: "rds:mydbcluster-2019-06-20-09-16", 
+    #         engine: "aurora-mysql", 
+    #         engine_version: "5.7.mysql_aurora.2.04.2", 
+    #         iam_database_authentication_enabled: false, 
+    #         kms_key_id: "arn:aws:kms:us-east-1:814387698303:key/AKIAIOSFODNN7EXAMPLE", 
+    #         license_model: "aurora-mysql", 
+    #         master_username: "myadmin", 
+    #         percent_progress: 100, 
+    #         port: 0, 
+    #         snapshot_create_time: Time.parse("2019-06-20T09:16:26.569Z"), 
+    #         snapshot_type: "automated", 
+    #         status: "available", 
+    #         storage_encrypted: true, 
+    #         vpc_id: "vpc-6594f31c", 
+    #       }, 
+    #     ], 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -9380,6 +10821,10 @@ module Aws::RDS
     #     Amazon Resource Names (ARNs). The results list only includes
     #     information about the DB clusters identified by these ARNs.
     #
+    #   * `db-cluster-resource-id` - Accepts DB cluster resource identifiers.
+    #     The results list will only include information about the DB clusters
+    #     identified by these DB cluster resource identifiers.
+    #
     #   * `domain` - Accepts Active Directory directory IDs. The results list
     #     only includes information about the DB clusters associated with
     #     these domains.
@@ -9416,16 +10861,101 @@ module Aws::RDS
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list DB clusters
+    # @example Example: To describe a DB cluster
     #
-    #   # This example lists settings for the specified DB cluster.
+    #   # The following example retrieves the details of the specified DB cluster.
     #
     #   resp = client.describe_db_clusters({
-    #     db_cluster_identifier: "mynewdbcluster", 
+    #     db_cluster_identifier: "mydbcluster", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     db_clusters: [
+    #       {
+    #         allocated_storage: 1, 
+    #         associated_roles: [
+    #         ], 
+    #         availability_zones: [
+    #           "us-east-1a", 
+    #           "us-east-1b", 
+    #           "us-east-1e", 
+    #         ], 
+    #         backup_retention_period: 1, 
+    #         cluster_create_time: Time.parse("2019-04-15T14:18:42.785Z"), 
+    #         db_cluster_arn: "arn:aws:rds:us-east-1:123456789012:cluster:mydbcluster", 
+    #         db_cluster_identifier: "mydbcluster", 
+    #         db_cluster_members: [
+    #           {
+    #             db_cluster_parameter_group_status: "in-sync", 
+    #             db_instance_identifier: "dbinstance3", 
+    #             is_cluster_writer: false, 
+    #             promotion_tier: 1, 
+    #           }, 
+    #           {
+    #             db_cluster_parameter_group_status: "in-sync", 
+    #             db_instance_identifier: "dbinstance1", 
+    #             is_cluster_writer: false, 
+    #             promotion_tier: 1, 
+    #           }, 
+    #           {
+    #             db_cluster_parameter_group_status: "in-sync", 
+    #             db_instance_identifier: "dbinstance2", 
+    #             is_cluster_writer: false, 
+    #             promotion_tier: 1, 
+    #           }, 
+    #           {
+    #             db_cluster_parameter_group_status: "in-sync", 
+    #             db_instance_identifier: "mydbcluster", 
+    #             is_cluster_writer: false, 
+    #             promotion_tier: 1, 
+    #           }, 
+    #           {
+    #             db_cluster_parameter_group_status: "in-sync", 
+    #             db_instance_identifier: "mydbcluster-us-east-1b", 
+    #             is_cluster_writer: false, 
+    #             promotion_tier: 1, 
+    #           }, 
+    #           {
+    #             db_cluster_parameter_group_status: "in-sync", 
+    #             db_instance_identifier: "mydbcluster", 
+    #             is_cluster_writer: true, 
+    #             promotion_tier: 1, 
+    #           }, 
+    #         ], 
+    #         db_cluster_parameter_group: "default.aurora-mysql5.7", 
+    #         db_subnet_group: "default", 
+    #         database_name: "mydbcluster", 
+    #         db_cluster_resource_id: "cluster-AKIAIOSFODNN7EXAMPLE", 
+    #         deletion_protection: false, 
+    #         earliest_restorable_time: Time.parse("2019-06-19T09:16:28.210Z"), 
+    #         endpoint: "mydbcluster.cluster-cnpexample.us-east-1.rds.amazonaws.com", 
+    #         engine: "aurora-mysql", 
+    #         engine_mode: "provisioned", 
+    #         engine_version: "5.7.mysql_aurora.2.04.2", 
+    #         hosted_zone_id: "Z2R2ITUGPM61AM", 
+    #         http_endpoint_enabled: false, 
+    #         iam_database_authentication_enabled: false, 
+    #         kms_key_id: "arn:aws:kms:us-east-1:814387698303:key/AKIAIOSFODNN7EXAMPLE", 
+    #         latest_restorable_time: Time.parse("2019-06-20T22:38:14.908Z"), 
+    #         master_username: "myadmin", 
+    #         multi_az: true, 
+    #         port: 3306, 
+    #         preferred_backup_window: "09:09-09:39", 
+    #         preferred_maintenance_window: "sat:04:09-sat:04:39", 
+    #         read_replica_identifiers: [
+    #         ], 
+    #         reader_endpoint: "mydbcluster.cluster-ro-cnpexample.us-east-1.rds.amazonaws.com", 
+    #         status: "available", 
+    #         storage_encrypted: true, 
+    #         vpc_security_groups: [
+    #           {
+    #             status: "active", 
+    #             vpc_security_group_id: "sg-0b9130572daf3dc16", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     ], 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -9716,20 +11246,41 @@ module Aws::RDS
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list DB engine version settings
+    # @example Example: To describe the DB engine versions for the MySQL DB engine
     #
-    #   # This example lists settings for the specified DB engine version.
+    #   # The following example displays details about each of the DB engine versions for the specified DB engine.
     #
     #   resp = client.describe_db_engine_versions({
-    #     db_parameter_group_family: "mysql5.6", 
-    #     default_only: true, 
     #     engine: "mysql", 
-    #     engine_version: "5.6", 
-    #     list_supported_character_sets: true, 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     db_engine_versions: [
+    #       {
+    #         db_engine_description: "MySQL Community Edition", 
+    #         db_engine_version_description: "MySQL 5.7.33", 
+    #         db_parameter_group_family: "mysql5.7", 
+    #         engine: "mysql", 
+    #         engine_version: "5.7.33", 
+    #         valid_upgrade_target: [
+    #           {
+    #             auto_upgrade: false, 
+    #             description: "MySQL 5.7.34", 
+    #             engine: "mysql", 
+    #             engine_version: "5.7.34", 
+    #             is_major_version_upgrade: false, 
+    #           }, 
+    #           {
+    #             auto_upgrade: false, 
+    #             description: "MySQL 5.7.36", 
+    #             engine: "mysql", 
+    #             engine_version: "5.7.36", 
+    #             is_major_version_upgrade: false, 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     ], # Some output ommitted.
     #   }
     #
     # @example Request syntax with placeholder values
@@ -9890,6 +11441,46 @@ module Aws::RDS
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To describe the automated backups for a DB instance
+    #
+    #   # The following example displays details about the automated backups for the specified DB instance. The details include
+    #   # replicated automated backups in other AWS Regions.
+    #
+    #   resp = client.describe_db_instance_automated_backups({
+    #     db_instance_identifier: "new-orcl-db", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_instance_automated_backups: [
+    #       {
+    #         allocated_storage: 20, 
+    #         backup_retention_period: 14, 
+    #         db_instance_arn: "arn:aws:rds:us-east-1:123456789012:db:new-orcl-db", 
+    #         db_instance_automated_backups_arn: "arn:aws:rds:us-west-2:123456789012:auto-backup:ab-jkib2gfq5rv7replzadausbrktni2bn4example", 
+    #         db_instance_identifier: "new-orcl-db", 
+    #         dbi_resource_id: "db-JKIB2GFQ5RV7REPLZA4EXAMPLE", 
+    #         encrypted: false, 
+    #         engine: "oracle-se2", 
+    #         engine_version: "12.1.0.2.v21", 
+    #         iam_database_authentication_enabled: false, 
+    #         instance_create_time: Time.parse("2020-12-04T15:28:31Z"), 
+    #         license_model: "bring-your-own-license", 
+    #         master_username: "admin", 
+    #         option_group_name: "default:oracle-se2-12-1", 
+    #         port: 1521, 
+    #         region: "us-east-1", 
+    #         restore_window: {
+    #           earliest_time: Time.parse("2020-12-07T21:05:20.939Z"), 
+    #           latest_time: Time.parse("2020-12-07T21:05:20.939Z"), 
+    #         }, 
+    #         status: "replicating", 
+    #         storage_type: "gp2", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_instance_automated_backups({
@@ -10019,16 +11610,30 @@ module Aws::RDS
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list DB instance settings
+    # @example Example: To describe a DB instance
     #
-    #   # This example lists settings for the specified DB instance.
+    #   # The following example retrieves details about the specified DB instance.
     #
     #   resp = client.describe_db_instances({
-    #     db_instance_identifier: "mymysqlinstance", 
+    #     db_instance_identifier: "mydbinstancecf", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     db_instances: [
+    #       {
+    #         db_instance_class: "db.t3.small", 
+    #         db_instance_identifier: "mydbinstancecf", 
+    #         db_instance_status: "available", 
+    #         endpoint: {
+    #           address: "mydbinstancecf.abcexample.us-east-1.rds.amazonaws.com", 
+    #           hosted_zone_id: "Z2R2ITUGPM61AM", 
+    #           port: 3306, 
+    #         }, 
+    #         engine: "mysql", 
+    #         master_username: "admin", 
+    #       }, 
+    #     ], # Some output ommitted.
     #   }
     #
     # @example Request syntax with placeholder values
@@ -10262,20 +11867,48 @@ module Aws::RDS
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list DB log file names
+    # @example Example: To describe the log files for a DB instance
     #
-    #   # This example lists matching log file names for the specified DB instance, file name pattern, last write date in POSIX
-    #   # time with milleseconds, and minimum file size.
+    #   # The following example retrieves details about the log files for the specified DB instance.
     #
     #   resp = client.describe_db_log_files({
-    #     db_instance_identifier: "mymysqlinstance", 
-    #     file_last_written: 1470873600000, 
-    #     file_size: 0, 
-    #     filename_contains: "error", 
+    #     db_instance_identifier: "test-instance", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     describe_db_log_files: [
+    #       {
+    #         last_written: 1533060000000, 
+    #         log_file_name: "error/mysql-error-running.log", 
+    #         size: 0, 
+    #       }, 
+    #       {
+    #         last_written: 1532994300000, 
+    #         log_file_name: "error/mysql-error-running.log.0", 
+    #         size: 2683, 
+    #       }, 
+    #       {
+    #         last_written: 1533057300000, 
+    #         log_file_name: "error/mysql-error-running.log.18", 
+    #         size: 107, 
+    #       }, 
+    #       {
+    #         last_written: 1532991000000, 
+    #         log_file_name: "error/mysql-error-running.log.23", 
+    #         size: 13105, 
+    #       }, 
+    #       {
+    #         last_written: 1533061200000, 
+    #         log_file_name: "error/mysql-error.log", 
+    #         size: 0, 
+    #       }, 
+    #       {
+    #         last_written: 1532989252000, 
+    #         log_file_name: "mysqlUpgrade", 
+    #         size: 3519, 
+    #       }, 
+    #     ], 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -10353,16 +11986,41 @@ module Aws::RDS
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list information about DB parameter groups
+    # @example Example: To describe your DB parameter groups
     #
-    #   # This example lists information about the specified DB parameter group.
+    #   # The following example retrieves details about your DB parameter groups.
     #
     #   resp = client.describe_db_parameter_groups({
-    #     db_parameter_group_name: "mymysqlparametergroup", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     db_parameter_groups: [
+    #       {
+    #         db_parameter_group_arn: "arn:aws:rds:us-east-1:123456789012:pg:default.aurora-mysql5.7", 
+    #         db_parameter_group_family: "aurora-mysql5.7", 
+    #         db_parameter_group_name: "default.aurora-mysql5.7", 
+    #         description: "Default parameter group for aurora-mysql5.7", 
+    #       }, 
+    #       {
+    #         db_parameter_group_arn: "arn:aws:rds:us-east-1:123456789012:pg:default.aurora-postgresql9.6", 
+    #         db_parameter_group_family: "aurora-postgresql9.6", 
+    #         db_parameter_group_name: "default.aurora-postgresql9.6", 
+    #         description: "Default parameter group for aurora-postgresql9.6", 
+    #       }, 
+    #       {
+    #         db_parameter_group_arn: "arn:aws:rds:us-east-1:123456789012:pg:default.aurora5.6", 
+    #         db_parameter_group_family: "aurora5.6", 
+    #         db_parameter_group_name: "default.aurora5.6", 
+    #         description: "Default parameter group for aurora5.6", 
+    #       }, 
+    #       {
+    #         db_parameter_group_arn: "arn:aws:rds:us-east-1:123456789012:pg:default.mariadb10.1", 
+    #         db_parameter_group_family: "mariadb10.1", 
+    #         db_parameter_group_name: "default.mariadb10.1", 
+    #         description: "Default parameter group for mariadb10.1", 
+    #       }, 
+    #     ], # Some output ommitted.
     #   }
     #
     # @example Request syntax with placeholder values
@@ -10443,18 +12101,38 @@ module Aws::RDS
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list information about DB parameters
+    # @example Example: To describe the parameters in a DB parameter group
     #
-    #   # This example lists information for up to the first 20 system parameters for the specified DB parameter group.
+    #   # The following example retrieves the details of the specified DB parameter group.
     #
     #   resp = client.describe_db_parameters({
-    #     db_parameter_group_name: "mymysqlparametergroup", 
-    #     max_records: 20, 
-    #     source: "system", 
+    #     db_parameter_group_name: "mydbpg", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     parameters: [
+    #       {
+    #         allowed_values: "0,1", 
+    #         apply_method: "pending-reboot", 
+    #         apply_type: "static", 
+    #         data_type: "boolean", 
+    #         description: "Controls whether user-defined functions that have only an xxx symbol for the main function can be loaded", 
+    #         is_modifiable: false, 
+    #         parameter_name: "allow-suspicious-udfs", 
+    #         source: "engine-default", 
+    #       }, 
+    #       {
+    #         allowed_values: "0,1", 
+    #         apply_method: "pending-reboot", 
+    #         apply_type: "static", 
+    #         data_type: "boolean", 
+    #         description: "Controls whether the server autogenerates SSL key and certificate files in the data directory, if they do not already exist.", 
+    #         is_modifiable: false, 
+    #         parameter_name: "auto_generate_certs", 
+    #         source: "engine-default", 
+    #       }, 
+    #     ], # Some output omitted.
     #   }
     #
     # @example Request syntax with placeholder values
@@ -10934,9 +12612,9 @@ module Aws::RDS
     #   * {Types::DescribeDBSnapshotAttributesResult#db_snapshot_attributes_result #db_snapshot_attributes_result} => Types::DBSnapshotAttributesResult
     #
     #
-    # @example Example: To list DB snapshot attributes
+    # @example Example: To describe the attribute names and values for a DB snapshot
     #
-    #   # This example lists attributes for the specified DB snapshot.
+    #   # The following example describes the attribute names and values for a DB snapshot.
     #
     #   resp = client.describe_db_snapshot_attributes({
     #     db_snapshot_identifier: "mydbsnapshot", 
@@ -10945,6 +12623,16 @@ module Aws::RDS
     #   resp.to_h outputs the following:
     #   {
     #     db_snapshot_attributes_result: {
+    #       db_snapshot_attributes: [
+    #         {
+    #           attribute_name: "restore", 
+    #           attribute_values: [
+    #             "123456789012", 
+    #             "210987654321", 
+    #           ], 
+    #         }, 
+    #       ], 
+    #       db_snapshot_identifier: "mydbsnapshot", 
     #     }, 
     #   }
     #
@@ -11100,19 +12788,43 @@ module Aws::RDS
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list DB snapshot attributes
+    # @example Example: To describe a DB snapshot for a DB instance
     #
-    #   # This example lists all manually-created, shared snapshots for the specified DB instance.
+    #   # The following example retrieves the details of a DB snapshot for a DB instance.
     #
     #   resp = client.describe_db_snapshots({
-    #     db_instance_identifier: "mymysqlinstance", 
-    #     include_public: false, 
-    #     include_shared: true, 
-    #     snapshot_type: "manual", 
+    #     db_snapshot_identifier: "mydbsnapshot", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     db_snapshots: [
+    #       {
+    #         allocated_storage: 20, 
+    #         availability_zone: "us-east-1f", 
+    #         db_instance_identifier: "mysqldb", 
+    #         db_snapshot_arn: "arn:aws:rds:us-east-1:123456789012:snapshot:mydbsnapshot", 
+    #         db_snapshot_identifier: "mydbsnapshot", 
+    #         dbi_resource_id: "db-AKIAIOSFODNN7EXAMPLE", 
+    #         encrypted: false, 
+    #         engine: "mysql", 
+    #         engine_version: "5.6.37", 
+    #         iam_database_authentication_enabled: false, 
+    #         instance_create_time: Time.parse("2018-02-08T22:24:55.973Z"), 
+    #         license_model: "general-public-license", 
+    #         master_username: "mysqladmin", 
+    #         option_group_name: "default:mysql-5-6", 
+    #         percent_progress: 100, 
+    #         port: 3306, 
+    #         processor_features: [
+    #         ], 
+    #         snapshot_create_time: Time.parse("2018-02-08T22:28:08.598Z"), 
+    #         snapshot_type: "manual", 
+    #         status: "available", 
+    #         storage_type: "gp2", 
+    #         vpc_id: "vpc-6594f31c", 
+    #       }, 
+    #     ], 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -11231,16 +12943,54 @@ module Aws::RDS
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list information about DB subnet groups
+    # @example Example: To describe a DB subnet group
     #
-    #   # This example lists information about the specified DB subnet group.
+    #   # The following example retrieves the details of the specified DB subnet group.
     #
     #   resp = client.describe_db_subnet_groups({
-    #     db_subnet_group_name: "mydbsubnetgroup", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     db_subnet_groups: [
+    #       {
+    #         db_subnet_group_arn: "arn:aws:rds:us-east-1:123456789012:subgrp:mydbsubnetgroup", 
+    #         db_subnet_group_description: "My DB Subnet Group", 
+    #         db_subnet_group_name: "mydbsubnetgroup", 
+    #         subnet_group_status: "Complete", 
+    #         subnets: [
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-east-1a", 
+    #             }, 
+    #             subnet_identifier: "subnet-d8c8e7f4", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-east-1f", 
+    #             }, 
+    #             subnet_identifier: "subnet-718fdc7d", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-east-1a", 
+    #             }, 
+    #             subnet_identifier: "subnet-cbc8e7e7", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #           {
+    #             subnet_availability_zone: {
+    #               name: "us-east-1a", 
+    #             }, 
+    #             subnet_identifier: "subnet-0ccde220", 
+    #             subnet_status: "Active", 
+    #           }, 
+    #         ], 
+    #         vpc_id: "vpc-971c12ee", 
+    #       }, 
+    #     ], 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -11321,18 +13071,32 @@ module Aws::RDS
     #   * {Types::DescribeEngineDefaultClusterParametersResult#engine_defaults #engine_defaults} => Types::EngineDefaults
     #
     #
-    # @example Example: To list default parameters for a DB cluster engine
+    # @example Example: To describe the default engine and system parameter information for the Aurora database engine
     #
-    #   # This example lists default parameters for the specified DB cluster engine.
+    #   # The following example retrieves the details of the default engine and system parameter information for Aurora DB
+    #   # clusters with MySQL 5.7 compatibility.
     #
     #   resp = client.describe_engine_default_cluster_parameters({
-    #     db_parameter_group_family: "aurora5.6", 
+    #     db_parameter_group_family: "aurora-mysql5.7", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     engine_defaults: {
-    #     }, 
+    #       parameters: [
+    #         {
+    #           apply_type: "dynamic", 
+    #           data_type: "string", 
+    #           description: "IAM role ARN used to load data from AWS S3", 
+    #           is_modifiable: true, 
+    #           parameter_name: "aurora_load_from_s3_role", 
+    #           source: "engine-default", 
+    #           supported_engine_modes: [
+    #             "provisioned", 
+    #           ], 
+    #         }, 
+    #       ], 
+    #     }, # Some output omitted.
     #   }
     #
     # @example Request syntax with placeholder values
@@ -11504,18 +13268,30 @@ module Aws::RDS
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list default parameters for a DB engine
+    # @example Example: To describe the default engine and system parameter information for the database engine
     #
-    #   # This example lists default parameters for the specified DB engine.
+    #   # The following example retrieves details for the default engine and system parameter information for MySQL 5.7 DB
+    #   # instances.
     #
     #   resp = client.describe_engine_default_parameters({
-    #     db_parameter_group_family: "mysql5.6", 
+    #     db_parameter_group_family: "mysql5.7", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     engine_defaults: {
-    #     }, 
+    #       parameters: [
+    #         {
+    #           allowed_values: "0,1", 
+    #           apply_type: "static", 
+    #           data_type: "boolean", 
+    #           description: "Controls whether user-defined functions that have only an xxx symbol for the main function can be loaded", 
+    #           is_modifiable: false, 
+    #           parameter_name: "allow-suspicious-udfs", 
+    #           source: "engine-default", 
+    #         }, 
+    #       ], 
+    #     }, # Some output omitted.
     #   }
     #
     # @example Request syntax with placeholder values
@@ -11586,16 +13362,75 @@ module Aws::RDS
     #   * {Types::EventCategoriesMessage#event_categories_map_list #event_categories_map_list} => Array&lt;Types::EventCategoriesMap&gt;
     #
     #
-    # @example Example: To list event categories.
+    # @example Example: To describe event categories
     #
-    #   # This example lists all DB instance event categories.
+    #   # The following example retrieves details about the event categories for all available event sources.
     #
     #   resp = client.describe_event_categories({
-    #     source_type: "db-instance", 
+    #     filters: [
+    #     ], 
+    #     source_type: "", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     event_categories_map_list: [
+    #       {
+    #         event_categories: [
+    #           "deletion", 
+    #           "read replica", 
+    #           "failover", 
+    #           "restoration", 
+    #           "maintenance", 
+    #           "low storage", 
+    #           "configuration change", 
+    #           "backup", 
+    #           "creation", 
+    #           "availability", 
+    #           "recovery", 
+    #           "failure", 
+    #           "backtrack", 
+    #           "notification", 
+    #         ], 
+    #         source_type: "db-instance", 
+    #       }, 
+    #       {
+    #         event_categories: [
+    #           "configuration change", 
+    #           "failure", 
+    #         ], 
+    #         source_type: "db-security-group", 
+    #       }, 
+    #       {
+    #         event_categories: [
+    #           "configuration change", 
+    #         ], 
+    #         source_type: "db-parameter-group", 
+    #       }, 
+    #       {
+    #         event_categories: [
+    #           "deletion", 
+    #           "creation", 
+    #           "restoration", 
+    #           "notification", 
+    #         ], 
+    #         source_type: "db-snapshot", 
+    #       }, 
+    #       {
+    #         event_categories: [
+    #           "failover", 
+    #           "failure", 
+    #           "notification", 
+    #         ], 
+    #         source_type: "db-cluster", 
+    #       }, 
+    #       {
+    #         event_categories: [
+    #           "backup", 
+    #         ], 
+    #         source_type: "db-cluster-snapshot", 
+    #       }, 
+    #     ], 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -11665,16 +13500,31 @@ module Aws::RDS
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list information about DB event notification subscriptions
+    # @example Example: To describe event subscriptions
     #
-    #   # This example lists information for the specified DB event notification subscription.
+    #   # This example describes all of the Amazon RDS event subscriptions for the current AWS account.
     #
     #   resp = client.describe_event_subscriptions({
-    #     subscription_name: "mymysqleventsubscription", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     event_subscriptions_list: [
+    #       {
+    #         cust_subscription_id: "my-instance-events", 
+    #         customer_aws_id: "123456789012", 
+    #         enabled: true, 
+    #         event_categories_list: [
+    #           "backup", 
+    #           "recovery", 
+    #         ], 
+    #         event_subscription_arn: "arn:aws:rds:us-east-1:123456789012:es:my-instance-events", 
+    #         sns_topic_arn: "arn:aws:sns:us-east-1:123456789012:interesting-events", 
+    #         source_type: "db-instance", 
+    #         status: "creating", 
+    #         subscription_creation_time: "2018-07-31 23:22:01.893", 
+    #       }, 
+    #     ], # Some output omitted.
     #   }
     #
     # @example Request syntax with placeholder values
@@ -11830,22 +13680,39 @@ module Aws::RDS
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list information about events
+    # @example Example: To describe events
     #
-    #   # This example lists information for all backup-related events for the specified DB instance for the past 7 days (7 days *
-    #   # 24 hours * 60 minutes = 10,080 minutes).
+    #   # The following retrieves details for the events that have occurred for the specified DB instance.
     #
     #   resp = client.describe_events({
-    #     duration: 10080, 
-    #     event_categories: [
-    #       "backup", 
-    #     ], 
-    #     source_identifier: "mymysqlinstance", 
+    #     source_identifier: "test-instance", 
     #     source_type: "db-instance", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     events: [
+    #       {
+    #         date: Time.parse("2018-07-31T23:09:23.983Z"), 
+    #         event_categories: [
+    #           "backup", 
+    #         ], 
+    #         message: "Backing up DB instance", 
+    #         source_arn: "arn:aws:rds:us-east-1:123456789012:db:test-instance", 
+    #         source_identifier: "test-instance", 
+    #         source_type: "db-instance", 
+    #       }, 
+    #       {
+    #         date: Time.parse("2018-07-31T23:15:13.049Z"), 
+    #         event_categories: [
+    #           "backup", 
+    #         ], 
+    #         message: "Finished DB Instance backup", 
+    #         source_arn: "arn:aws:rds:us-east-1:123456789012:db:test-instance", 
+    #         source_identifier: "test-instance", 
+    #         source_type: "db-instance", 
+    #       }, 
+    #     ], 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -11954,6 +13821,46 @@ module Aws::RDS
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To describe snapshot export tasks
+    #
+    #   # The following example returns information about snapshot exports to Amazon S3.
+    #
+    #   resp = client.describe_export_tasks({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     export_tasks: [
+    #       {
+    #         export_task_identifier: "test-snapshot-export", 
+    #         iam_role_arn: "arn:aws:iam::123456789012:role/service-role/ExportRole", 
+    #         kms_key_id: "arn:aws:kms:us-west-2:123456789012:key/abcd0000-7fca-4128-82f2-aabbccddeeff", 
+    #         percent_progress: 100, 
+    #         s3_bucket: "mybucket", 
+    #         s3_prefix: "", 
+    #         snapshot_time: Time.parse("2020-03-02T18:26:28.163Z"), 
+    #         source_arn: "arn:aws:rds:us-west-2:123456789012:snapshot:test-snapshot", 
+    #         status: "COMPLETE", 
+    #         task_end_time: Time.parse("2020-03-02T19:10:31.985Z"), 
+    #         task_start_time: Time.parse("2020-03-02T18:57:56.896Z"), 
+    #         total_extracted_data_in_gb: 0, 
+    #       }, 
+    #       {
+    #         export_task_identifier: "my-s3-export", 
+    #         iam_role_arn: "arn:aws:iam::123456789012:role/service-role/ExportRole", 
+    #         kms_key_id: "arn:aws:kms:us-west-2:123456789012:key/abcd0000-7fca-4128-82f2-aabbccddeeff", 
+    #         percent_progress: 0, 
+    #         s3_bucket: "mybucket", 
+    #         s3_prefix: "", 
+    #         snapshot_time: Time.parse("2020-03-27T20:48:42.023Z"), 
+    #         source_arn: "arn:aws:rds:us-west-2:123456789012:snapshot:db5-snapshot-test", 
+    #         status: "STARTING", 
+    #         total_extracted_data_in_gb: 0, 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_export_tasks({
@@ -12051,6 +13958,32 @@ module Aws::RDS
     #   * {Types::GlobalClustersMessage#global_clusters #global_clusters} => Array&lt;Types::GlobalCluster&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To describe global DB clusters
+    #
+    #   # The following example lists Aurora global DB clusters in the current AWS Region.
+    #
+    #   resp = client.describe_global_clusters({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     global_clusters: [
+    #       {
+    #         deletion_protection: false, 
+    #         engine: "aurora-mysql", 
+    #         engine_version: "5.7.mysql_aurora.2.07.2", 
+    #         global_cluster_arn: "arn:aws:rds::123456789012:global-cluster:myglobalcluster", 
+    #         global_cluster_identifier: "myglobalcluster", 
+    #         global_cluster_members: [
+    #         ], 
+    #         global_cluster_resource_id: "cluster-f5982077e3b5aabb", 
+    #         status: "available", 
+    #         storage_encrypted: false, 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -12158,17 +14091,55 @@ module Aws::RDS
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list information about DB option group options
+    # @example Example: To describe all available options
     #
-    #   # This example lists information for all option group options for the specified DB engine.
+    #   # The following example lists the options for an RDS for MySQL version 8.0 DB instance.
     #
     #   resp = client.describe_option_group_options({
     #     engine_name: "mysql", 
-    #     major_engine_version: "5.6", 
+    #     major_engine_version: "8.0", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     option_group_options: [
+    #       {
+    #         description: "MariaDB Audit Plugin", 
+    #         engine_name: "mysql", 
+    #         major_engine_version: "8.0", 
+    #         minimum_required_minor_engine_version: "25", 
+    #         name: "MARIADB_AUDIT_PLUGIN", 
+    #         option_group_option_settings: [
+    #           {
+    #             apply_type: "DYNAMIC", 
+    #             is_modifiable: true, 
+    #             is_required: false, 
+    #             minimum_engine_version_per_allowed_value: [
+    #             ], 
+    #             setting_description: "Include specified users", 
+    #             setting_name: "SERVER_AUDIT_INCL_USERS", 
+    #           }, 
+    #           {
+    #             apply_type: "DYNAMIC", 
+    #             is_modifiable: true, 
+    #             is_required: false, 
+    #             minimum_engine_version_per_allowed_value: [
+    #             ], 
+    #             setting_description: "Exclude specified users", 
+    #             setting_name: "SERVER_AUDIT_EXCL_USERS", 
+    #           }, 
+    #         ], 
+    #         options_conflicts_with: [
+    #         ], 
+    #         options_depended_on: [
+    #         ], 
+    #         permanent: false, 
+    #         persistent: false, 
+    #         port_required: false, 
+    #         requires_auto_minor_engine_version_upgrade: false, 
+    #         vpc_only: false, 
+    #       }, 
+    #     ], # Some output omitted.
     #   }
     #
     # @example Request syntax with placeholder values
@@ -12297,17 +14268,29 @@ module Aws::RDS
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list information about DB option groups
+    # @example Example: To describe the available option groups
     #
-    #   # This example lists information for all option groups for the specified DB engine.
+    #   # The following example lists the options groups for an Oracle Database 19c instance.
     #
     #   resp = client.describe_option_groups({
-    #     engine_name: "mysql", 
-    #     major_engine_version: "5.6", 
+    #     engine_name: "oracle-ee", 
+    #     major_engine_version: "19", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     option_groups_list: [
+    #       {
+    #         allows_vpc_and_non_vpc_instance_memberships: true, 
+    #         engine_name: "oracle-ee", 
+    #         major_engine_version: "19", 
+    #         option_group_arn: "arn:aws:rds:us-west-1:111122223333:og:default:oracle-ee-19", 
+    #         option_group_description: "Default option group for oracle-ee 19", 
+    #         option_group_name: "default:oracle-ee-19", 
+    #         options: [
+    #         ], 
+    #       }, 
+    #     ], 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -12466,21 +14449,49 @@ module Aws::RDS
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list information about orderable DB instance options
+    # @example Example: To describe orderable DB instance options
     #
-    #   # This example lists information for all orderable DB instance options for the specified DB engine, engine version, DB
-    #   # instance class, license model, and VPC settings.
+    #   # The following example retrieves details about the orderable options for a DB instances running the MySQL DB engine.
     #
     #   resp = client.describe_orderable_db_instance_options({
-    #     db_instance_class: "db.t2.micro", 
     #     engine: "mysql", 
-    #     engine_version: "5.6.27", 
-    #     license_model: "general-public-license", 
-    #     vpc: true, 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     orderable_db_instance_options: [
+    #       {
+    #         availability_zones: [
+    #           {
+    #             name: "us-east-1a", 
+    #           }, 
+    #           {
+    #             name: "us-east-1b", 
+    #           }, 
+    #           {
+    #             name: "us-east-1c", 
+    #           }, 
+    #           {
+    #             name: "us-east-1d", 
+    #           }, 
+    #           {
+    #             name: "us-east-1e", 
+    #           }, 
+    #           {
+    #             name: "us-east-1f", 
+    #           }, 
+    #         ], 
+    #         db_instance_class: "db.m4.10xlarge", 
+    #         engine: "mysql", 
+    #         engine_version: "5.7.33", 
+    #         license_model: "general-public-license", 
+    #         multi_az_capable: true, 
+    #         read_replica_capable: true, 
+    #         storage_type: "gp2", 
+    #         supports_storage_encryption: true, 
+    #         vpc: true, 
+    #       }, 
+    #     ], # Some output omitted.
     #   }
     #
     # @example Request syntax with placeholder values
@@ -12602,16 +14613,26 @@ module Aws::RDS
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list information about pending maintenance actions
+    # @example Example: To list resources with at least one pending maintenance action
     #
-    #   # This example lists information for all pending maintenance actions for the specified DB instance.
+    #   # The following example lists the pending maintenace action for a DB instance.
     #
     #   resp = client.describe_pending_maintenance_actions({
-    #     resource_identifier: "arn:aws:rds:us-east-1:992648334831:db:mymysqlinstance", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     pending_maintenance_actions: [
+    #       {
+    #         pending_maintenance_action_details: [
+    #           {
+    #             action: "system-update", 
+    #             description: "Upgrade to Aurora PostgreSQL 2.4.2", 
+    #           }, 
+    #         ], 
+    #         resource_identifier: "arn:aws:rds:us-west-2:123456789012:cluster:global-db1-cl1", 
+    #       }, 
+    #     ], 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -12722,21 +14743,40 @@ module Aws::RDS
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list information about reserved DB instances
+    # @example Example: To describe reserved DB instances
     #
-    #   # This example lists information for all reserved DB instances for the specified DB instance class, duration, product,
-    #   # offering type, and availability zone settings.
+    #   # The following example retrieves details about any reserved DB instances in the current AWS account.
     #
     #   resp = client.describe_reserved_db_instances({
-    #     db_instance_class: "db.t2.micro", 
-    #     duration: "1y", 
-    #     multi_az: false, 
-    #     offering_type: "No Upfront", 
-    #     product_description: "mysql", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     reserved_db_instances: [
+    #       {
+    #         currency_code: "USD", 
+    #         db_instance_class: "db.t3.micro", 
+    #         db_instance_count: 1, 
+    #         duration: 31536000, 
+    #         fixed_price: 0, 
+    #         lease_id: "a1b2c3d4-6b69-4a59-be89-5e11aa446666", 
+    #         multi_az: false, 
+    #         offering_type: "No Upfront", 
+    #         product_description: "sqlserver-ex(li)", 
+    #         recurring_charges: [
+    #           {
+    #             recurring_charge_amount: 0.014, 
+    #             recurring_charge_frequency: "Hourly", 
+    #           }, 
+    #         ], 
+    #         reserved_db_instance_arn: "arn:aws:rds:us-west-2:123456789012:ri:myreservedinstance", 
+    #         reserved_db_instance_id: "myreservedinstance", 
+    #         reserved_db_instances_offering_id: "12ab34cd-59af-4b2c-a660-1abcdef23456", 
+    #         start_time: Time.parse("2020-06-01T13:44:21.436Z"), 
+    #         state: "payment-pending", 
+    #         usage_price: 0, 
+    #       }, 
+    #     ], 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -12856,21 +14896,35 @@ module Aws::RDS
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list information about reserved DB instance offerings
+    # @example Example: To describe reserved DB instance offerings
     #
-    #   # This example lists information for all reserved DB instance offerings for the specified DB instance class, duration,
-    #   # product, offering type, and availability zone settings.
+    #   # The following example retrieves details about reserved DB instance options for RDS for Oracle.
     #
     #   resp = client.describe_reserved_db_instances_offerings({
-    #     db_instance_class: "db.t2.micro", 
-    #     duration: "1y", 
-    #     multi_az: false, 
-    #     offering_type: "No Upfront", 
-    #     product_description: "mysql", 
+    #     product_description: "oracle", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     reserved_db_instances_offerings: [
+    #       {
+    #         currency_code: "USD", 
+    #         db_instance_class: "db.m4.xlarge", 
+    #         duration: 31536000, 
+    #         fixed_price: 4089, 
+    #         multi_az: true, 
+    #         offering_type: "Partial Upfront", 
+    #         product_description: "oracle-se2(li)", 
+    #         recurring_charges: [
+    #           {
+    #             recurring_charge_amount: 0.594, 
+    #             recurring_charge_frequency: "Hourly", 
+    #           }, 
+    #         ], 
+    #         reserved_db_instances_offering_id: "005bdee3-9ef4-4182-aa0c-58ef7cb6c2f8", 
+    #         usage_price: 0, 
+    #       }, 
+    #     ], # Some output omitted.
     #   }
     #
     # @example Request syntax with placeholder values
@@ -12971,65 +15025,144 @@ module Aws::RDS
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To describe source regions
+    # @example Example: To describe source Regions
     #
-    #   # To list the AWS regions where a Read Replica can be created.
+    #   # The following example retrieves details about all source AWS Regions where the current AWS Region can create a read
+    #   # replica, copy a DB snapshot from, or replicate automated backups from. It also shows that automated backups can be
+    #   # replicated only from US West (Oregon) to the destination AWS Region, US East (N. Virginia).
     #
     #   resp = client.describe_source_regions({
+    #     region_name: "us-east-1", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     source_regions: [
     #       {
+    #         endpoint: "https://rds.af-south-1.amazonaws.com", 
+    #         region_name: "af-south-1", 
+    #         status: "available", 
+    #         supports_db_instance_automated_backups_replication: false, 
+    #       }, 
+    #       {
+    #         endpoint: "https://rds.ap-east-1.amazonaws.com", 
+    #         region_name: "ap-east-1", 
+    #         status: "available", 
+    #         supports_db_instance_automated_backups_replication: false, 
+    #       }, 
+    #       {
     #         endpoint: "https://rds.ap-northeast-1.amazonaws.com", 
     #         region_name: "ap-northeast-1", 
     #         status: "available", 
+    #         supports_db_instance_automated_backups_replication: true, 
     #       }, 
     #       {
     #         endpoint: "https://rds.ap-northeast-2.amazonaws.com", 
     #         region_name: "ap-northeast-2", 
     #         status: "available", 
+    #         supports_db_instance_automated_backups_replication: true, 
+    #       }, 
+    #       {
+    #         endpoint: "https://rds.ap-northeast-3.amazonaws.com", 
+    #         region_name: "ap-northeast-3", 
+    #         status: "available", 
+    #         supports_db_instance_automated_backups_replication: false, 
     #       }, 
     #       {
     #         endpoint: "https://rds.ap-south-1.amazonaws.com", 
     #         region_name: "ap-south-1", 
     #         status: "available", 
+    #         supports_db_instance_automated_backups_replication: true, 
     #       }, 
     #       {
     #         endpoint: "https://rds.ap-southeast-1.amazonaws.com", 
     #         region_name: "ap-southeast-1", 
     #         status: "available", 
+    #         supports_db_instance_automated_backups_replication: true, 
     #       }, 
     #       {
     #         endpoint: "https://rds.ap-southeast-2.amazonaws.com", 
     #         region_name: "ap-southeast-2", 
     #         status: "available", 
+    #         supports_db_instance_automated_backups_replication: true, 
     #       }, 
     #       {
-    #         endpoint: "https://rds.eu-central-1.amazonaws.com", 
-    #         region_name: "eu-central-1", 
+    #         endpoint: "https://rds.ap-southeast-3.amazonaws.com", 
+    #         region_name: "ap-southeast-3", 
     #         status: "available", 
+    #         supports_db_instance_automated_backups_replication: false, 
+    #       }, 
+    #       {
+    #         endpoint: "https://rds.ca-central-1.amazonaws.com", 
+    #         region_name: "ca-central-1", 
+    #         status: "available", 
+    #         supports_db_instance_automated_backups_replication: true, 
+    #       }, 
+    #       {
+    #         endpoint: "https://rds.eu-north-1.amazonaws.com", 
+    #         region_name: "eu-north-1", 
+    #         status: "available", 
+    #         supports_db_instance_automated_backups_replication: true, 
+    #       }, 
+    #       {
+    #         endpoint: "https://rds.eu-south-1.amazonaws.com", 
+    #         region_name: "eu-south-1", 
+    #         status: "available", 
+    #         supports_db_instance_automated_backups_replication: false, 
     #       }, 
     #       {
     #         endpoint: "https://rds.eu-west-1.amazonaws.com", 
     #         region_name: "eu-west-1", 
     #         status: "available", 
+    #         supports_db_instance_automated_backups_replication: true, 
+    #       }, 
+    #       {
+    #         endpoint: "https://rds.eu-west-2.amazonaws.com", 
+    #         region_name: "eu-west-2", 
+    #         status: "available", 
+    #         supports_db_instance_automated_backups_replication: true, 
+    #       }, 
+    #       {
+    #         endpoint: "https://rds.eu-west-3.amazonaws.com", 
+    #         region_name: "eu-west-3", 
+    #         status: "available", 
+    #         supports_db_instance_automated_backups_replication: true, 
+    #       }, 
+    #       {
+    #         endpoint: "https://rds.me-central-1.amazonaws.com", 
+    #         region_name: "me-central-1", 
+    #         status: "available", 
+    #         supports_db_instance_automated_backups_replication: false, 
+    #       }, 
+    #       {
+    #         endpoint: "https://rds.me-south-1.amazonaws.com", 
+    #         region_name: "me-south-1", 
+    #         status: "available", 
+    #         supports_db_instance_automated_backups_replication: false, 
     #       }, 
     #       {
     #         endpoint: "https://rds.sa-east-1.amazonaws.com", 
     #         region_name: "sa-east-1", 
     #         status: "available", 
+    #         supports_db_instance_automated_backups_replication: true, 
+    #       }, 
+    #       {
+    #         endpoint: "https://rds.us-east-2.amazonaws.com", 
+    #         region_name: "us-east-2", 
+    #         status: "available", 
+    #         supports_db_instance_automated_backups_replication: true, 
     #       }, 
     #       {
     #         endpoint: "https://rds.us-west-1.amazonaws.com", 
     #         region_name: "us-west-1", 
     #         status: "available", 
+    #         supports_db_instance_automated_backups_replication: true, 
     #       }, 
     #       {
     #         endpoint: "https://rds.us-west-2.amazonaws.com", 
     #         region_name: "us-west-2", 
     #         status: "available", 
+    #         supports_db_instance_automated_backups_replication: true, 
     #       }, 
     #     ], 
     #   }
@@ -13078,6 +15211,38 @@ module Aws::RDS
     # @return [Types::DescribeValidDBInstanceModificationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeValidDBInstanceModificationsResult#valid_db_instance_modifications_message #valid_db_instance_modifications_message} => Types::ValidDBInstanceModificationsMessage
+    #
+    #
+    # @example Example: To describe valid modifications for a DB instance
+    #
+    #   # The following example retrieves details about the valid modifications for the specified DB instance.
+    #
+    #   resp = client.describe_valid_db_instance_modifications({
+    #     db_instance_identifier: "database-test1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     valid_db_instance_modifications_message: {
+    #       storage: [
+    #         {
+    #           storage_size: [
+    #             {
+    #               from: 20, 
+    #               step: 1, 
+    #               to: 20, 
+    #             }, 
+    #             {
+    #               from: 22, 
+    #               step: 1, 
+    #               to: 6144, 
+    #             }, 
+    #           ], 
+    #           storage_type: "gp2", 
+    #         }, 
+    #       ], 
+    #     }, # Some output omitted.
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -13180,13 +15345,13 @@ module Aws::RDS
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
-    # @example Example: To list information about DB log files
+    # @example Example: To download a DB log file
     #
-    #   # This example lists information for the specified log file for the specified DB instance.
+    #   # The following example downloads only the latest part of your log file.
     #
     #   resp = client.download_db_log_file_portion({
-    #     db_instance_identifier: "mymysqlinstance", 
-    #     log_file_name: "mysqlUpgrade", 
+    #     db_instance_identifier: "test-instance", 
+    #     log_file_name: "log.txt", 
     #   })
     #
     #   resp.to_h outputs the following:
@@ -13531,16 +15696,26 @@ module Aws::RDS
     #   * {Types::TagListMessage#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #
     #
-    # @example Example: To list information about tags associated with a resource
+    # @example Example: To list tags on an Amazon RDS resource
     #
-    #   # This example lists information about all tags associated with the specified DB option group.
+    #   # The following example lists all tags on a DB instance.
     #
     #   resp = client.list_tags_for_resource({
-    #     resource_name: "arn:aws:rds:us-east-1:992648334831:og:mymysqloptiongroup", 
+    #     resource_name: "arn:aws:rds:us-east-1:123456789012:db:orcl1", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     tag_list: [
+    #       {
+    #         key: "Environment", 
+    #         value: "test", 
+    #       }, 
+    #       {
+    #         key: "Name", 
+    #         value: "MyDatabase", 
+    #       }, 
+    #     ], 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -13681,6 +15856,29 @@ module Aws::RDS
     #
     #   * {Types::ModifyCertificatesResult#certificate #certificate} => Types::Certificate
     #
+    #
+    # @example Example: To temporarily override the system-default SSL/TLS certificate for new DB instances
+    #
+    #   # The following example temporarily overrides the system-default SSL/TLS certificate for new DB instances.
+    #
+    #   resp = client.modify_certificates({
+    #     certificate_identifier: "rds-ca-2019", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     certificate: {
+    #       certificate_arn: "arn:aws:rds:us-east-1::cert:rds-ca-2019", 
+    #       certificate_identifier: "rds-ca-2019", 
+    #       certificate_type: "CA", 
+    #       customer_override: true, 
+    #       customer_override_valid_till: Time.parse("2024-08-22T17:08:50Z"), 
+    #       thumbprint: "EXAMPLE123456789012", 
+    #       valid_from: Time.parse("2019-09-19T18:16:53Z"), 
+    #       valid_till: Time.parse("2024-08-22T17:08:50Z"), 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_certificates({
@@ -13788,6 +15986,25 @@ module Aws::RDS
     #   * {Types::DBClusterCapacityInfo#seconds_before_timeout #seconds_before_timeout} => Integer
     #   * {Types::DBClusterCapacityInfo#timeout_action #timeout_action} => String
     #
+    #
+    # @example Example: To scale the capacity of an Aurora Serverless DB cluster
+    #
+    #   # The following example scales the capacity of an Aurora Serverless DB cluster to 8.
+    #
+    #   resp = client.modify_current_db_cluster_capacity({
+    #     capacity: 8, 
+    #     db_cluster_identifier: "mydbcluster", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     current_capacity: 1, 
+    #     db_cluster_identifier: "mydbcluster", 
+    #     pending_capacity: 8, 
+    #     seconds_before_timeout: 300, 
+    #     timeout_action: "ForceApplyCapacityChange", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_current_db_cluster_capacity({
@@ -13835,7 +16052,8 @@ module Aws::RDS
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.modify
     #
     # @option params [required, String] :engine
-    #   The DB engine. The only supported value is `custom-oracle-ee`.
+    #   The DB engine. The only supported values are `custom-oracle-ee` and
+    #   `custom-oracle-ee-cdb`.
     #
     # @option params [required, String] :engine_version
     #   The custom engine version (CEV) that you want to modify. This option
@@ -14024,14 +16242,10 @@ module Aws::RDS
     #   the DB cluster. If this parameter is disabled, changes to the DB
     #   cluster are applied during the next maintenance window.
     #
-    #   The `ApplyImmediately` parameter only affects the
-    #   `EnableIAMDatabaseAuthentication`, `MasterUserPassword`, and
-    #   `NewDBClusterIdentifier` values. If the `ApplyImmediately` parameter
-    #   is disabled, then changes to the `EnableIAMDatabaseAuthentication`,
-    #   `MasterUserPassword`, and `NewDBClusterIdentifier` values are applied
-    #   during the next maintenance window. All other changes are applied
-    #   immediately, regardless of the value of the `ApplyImmediately`
-    #   parameter.
+    #   Most modifications can be applied immediately or during the next
+    #   scheduled maintenance window. Some modifications, such as turning on
+    #   deletion protection and changing the master password, are applied
+    #   immediately—regardless of when you choose to apply them.
     #
     #   By default, this parameter is disabled.
     #
@@ -14619,22 +16833,77 @@ module Aws::RDS
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
     #
     #
-    # @example Example: To change DB cluster settings
+    # @example Example: To modify a DB cluster
     #
-    #   # This example changes the specified settings for the specified DB cluster.
+    #   # The following example changes the master user password for the DB cluster named cluster-2 and sets the backup retention
+    #   # period to 14 days. The ApplyImmediately parameter causes the changes to be made immediately, instead of waiting until
+    #   # the next maintenance window.
     #
     #   resp = client.modify_db_cluster({
     #     apply_immediately: true, 
-    #     db_cluster_identifier: "mydbcluster", 
-    #     master_user_password: "mynewpassword", 
-    #     new_db_cluster_identifier: "mynewdbcluster", 
-    #     preferred_backup_window: "04:00-04:30", 
-    #     preferred_maintenance_window: "Tue:05:00-Tue:05:30", 
+    #     backup_retention_period: 14, 
+    #     db_cluster_identifier: "cluster-2", 
+    #     master_user_password: "newpassword99", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_cluster: {
+    #       allocated_storage: 1, 
+    #       associated_roles: [
+    #       ], 
+    #       availability_zones: [
+    #         "eu-central-1b", 
+    #         "eu-central-1c", 
+    #         "eu-central-1a", 
+    #       ], 
+    #       backup_retention_period: 14, 
+    #       cluster_create_time: Time.parse("2020-04-03T14:44:02.764Z"), 
+    #       copy_tags_to_snapshot: true, 
+    #       cross_account_clone: false, 
+    #       db_cluster_arn: "arn:aws:rds:eu-central-1:123456789012:cluster:cluster-2", 
+    #       db_cluster_identifier: "cluster-2", 
+    #       db_cluster_members: [
+    #         {
+    #           db_cluster_parameter_group_status: "in-sync", 
+    #           db_instance_identifier: "cluster-2-instance-1", 
+    #           is_cluster_writer: true, 
+    #           promotion_tier: 1, 
+    #         }, 
+    #       ], 
+    #       db_cluster_parameter_group: "default.aurora5.6", 
+    #       db_subnet_group: "default-vpc-2305ca49", 
+    #       database_name: "", 
+    #       db_cluster_resource_id: "cluster-AGJ7XI77XVIS6FUXHU1EXAMPLE", 
+    #       deletion_protection: false, 
+    #       domain_memberships: [
+    #       ], 
+    #       earliest_restorable_time: Time.parse("2020-06-03T02:07:29.637Z"), 
+    #       endpoint: "cluster-2.cluster-############.eu-central-1.rds.amazonaws.com", 
+    #       engine: "aurora", 
+    #       engine_mode: "provisioned", 
+    #       engine_version: "5.6.10a", 
+    #       hosted_zone_id: "Z1RLNU0EXAMPLE", 
+    #       http_endpoint_enabled: false, 
+    #       iam_database_authentication_enabled: false, 
+    #       kms_key_id: "arn:aws:kms:eu-central-1:123456789012:key/d1bd7c8f-5cdb-49ca-8a62-a1b2c3d4e5f6", 
+    #       latest_restorable_time: Time.parse("2020-06-04T15:11:25.748Z"), 
+    #       master_username: "admin", 
+    #       multi_az: false, 
+    #       port: 3306, 
+    #       preferred_backup_window: "01:55-02:25", 
+    #       preferred_maintenance_window: "thu:21:14-thu:21:44", 
+    #       read_replica_identifiers: [
+    #       ], 
+    #       reader_endpoint: "cluster-2.cluster-ro-############.eu-central-1.rds.amazonaws.com", 
+    #       status: "available", 
+    #       storage_encrypted: true, 
+    #       vpc_security_groups: [
+    #         {
+    #           status: "active", 
+    #           vpc_security_group_id: "sg-20a5c047", 
+    #         }, 
+    #       ], 
     #     }, 
     #   }
     #
@@ -14852,6 +17121,39 @@ module Aws::RDS
     #   * {Types::DBClusterEndpoint#excluded_members #excluded_members} => Array&lt;String&gt;
     #   * {Types::DBClusterEndpoint#db_cluster_endpoint_arn #db_cluster_endpoint_arn} => String
     #
+    #
+    # @example Example: To modify a custom DB cluster endpoint
+    #
+    #   # The following example modifies the specified custom DB cluster endpoint.
+    #
+    #   resp = client.modify_db_cluster_endpoint({
+    #     db_cluster_endpoint_identifier: "mycustomendpoint", 
+    #     static_members: [
+    #       "dbinstance1", 
+    #       "dbinstance2", 
+    #       "dbinstance3", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     custom_endpoint_type: "READER", 
+    #     db_cluster_endpoint_arn: "arn:aws:rds:us-east-1:123456789012:cluster-endpoint:mycustomendpoint", 
+    #     db_cluster_endpoint_identifier: "mycustomendpoint", 
+    #     db_cluster_endpoint_resource_identifier: "cluster-endpoint-ANPAJ4AE5446DAEXAMPLE", 
+    #     db_cluster_identifier: "mydbcluster", 
+    #     endpoint: "mycustomendpoint.cluster-custom-cnpexample.us-east-1.rds.amazonaws.com", 
+    #     endpoint_type: "CUSTOM", 
+    #     excluded_members: [
+    #     ], 
+    #     static_members: [
+    #       "dbinstance1", 
+    #       "dbinstance2", 
+    #       "dbinstance3", 
+    #     ], 
+    #     status: "modifying", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_db_cluster_endpoint({
@@ -14947,23 +17249,29 @@ module Aws::RDS
     #   * {Types::DBClusterParameterGroupNameMessage#db_cluster_parameter_group_name #db_cluster_parameter_group_name} => String
     #
     #
-    # @example Example: To change DB cluster parameter group settings
+    # @example Example: To modify parameters in a DB cluster parameter group
     #
-    #   # This example immediately changes the specified setting for the specified DB cluster parameter group.
+    #   # The following example modifies the values of parameters in a DB cluster parameter group.
     #
     #   resp = client.modify_db_cluster_parameter_group({
-    #     db_cluster_parameter_group_name: "mydbclusterparametergroup", 
+    #     db_cluster_parameter_group_name: "mydbclusterpg", 
     #     parameters: [
     #       {
     #         apply_method: "immediate", 
-    #         parameter_name: "time_zone", 
-    #         parameter_value: "America/Phoenix", 
+    #         parameter_name: "server_audit_logging", 
+    #         parameter_value: "1", 
+    #       }, 
+    #       {
+    #         apply_method: "immediate", 
+    #         parameter_name: "server_audit_logs_upload", 
+    #         parameter_value: "1", 
     #       }, 
     #     ], 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     db_cluster_parameter_group_name: "mydbclusterpg", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -15072,26 +17380,30 @@ module Aws::RDS
     #   * {Types::ModifyDBClusterSnapshotAttributeResult#db_cluster_snapshot_attributes_result #db_cluster_snapshot_attributes_result} => Types::DBClusterSnapshotAttributesResult
     #
     #
-    # @example Example: To add or remove access to a manual DB cluster snapshot
+    # @example Example: To modify a DB cluster snapshot attribute
     #
-    #   # The following example gives two AWS accounts access to a manual DB cluster snapshot and ensures that the DB cluster
-    #   # snapshot is private by removing the value "all".
+    #   # The following example makes changes to the specified DB cluster snapshot attribute.
     #
     #   resp = client.modify_db_cluster_snapshot_attribute({
     #     attribute_name: "restore", 
-    #     db_cluster_snapshot_identifier: "manual-cluster-snapshot1", 
+    #     db_cluster_snapshot_identifier: "myclustersnapshot", 
     #     values_to_add: [
-    #       "123451234512", 
     #       "123456789012", 
-    #     ], 
-    #     values_to_remove: [
-    #       "all", 
     #     ], 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_cluster_snapshot_attributes_result: {
+    #       db_cluster_snapshot_attributes: [
+    #         {
+    #           attribute_name: "restore", 
+    #           attribute_values: [
+    #             "123456789012", 
+    #           ], 
+    #         }, 
+    #       ], 
+    #       db_cluster_snapshot_identifier: "myclustersnapshot", 
     #     }, 
     #   }
     #
@@ -16065,24 +18377,53 @@ module Aws::RDS
     #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
     #
     #
-    # @example Example: To change DB instance settings
+    # @example Example: To modify parameters in a DB cluster parameter group
     #
-    #   # This example immediately changes the specified settings for the specified DB instance.
+    #   # The following example associates an option group and a parameter group with a compatible Microsoft SQL Server DB
+    #   # instance. The ApplyImmediately parameter causes the option and parameter groups to be associated immediately, instead of
+    #   # waiting until the next maintenance window.
     #
     #   resp = client.modify_db_instance({
-    #     allocated_storage: 10, 
     #     apply_immediately: true, 
-    #     backup_retention_period: 1, 
-    #     db_instance_class: "db.t2.small", 
-    #     db_instance_identifier: "mymysqlinstance", 
-    #     master_user_password: "mynewpassword", 
-    #     preferred_backup_window: "04:00-04:30", 
-    #     preferred_maintenance_window: "Tue:05:00-Tue:05:30", 
+    #     db_instance_identifier: "database-2", 
+    #     db_parameter_group_name: "test-sqlserver-se-2017", 
+    #     option_group_name: "test-se-2017", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_instance: {
+    #       associated_roles: [
+    #       ], 
+    #       auto_minor_version_upgrade: false, 
+    #       availability_zone: "us-west-2d", 
+    #       character_set_name: "SQL_Latin1_General_CP1_CI_AS", 
+    #       db_instance_class: "db.r4.large", 
+    #       db_instance_identifier: "database-2", 
+    #       db_instance_status: "available", 
+    #       db_parameter_groups: [
+    #         {
+    #           db_parameter_group_name: "test-sqlserver-se-2017", 
+    #           parameter_apply_status: "applying", 
+    #         }, 
+    #       ], 
+    #       deletion_protection: false, 
+    #       engine: "sqlserver-se", 
+    #       engine_version: "14.00.3281.6.v1", 
+    #       license_model: "license-included", 
+    #       max_allocated_storage: 1000, 
+    #       multi_az: true, 
+    #       option_group_memberships: [
+    #         {
+    #           option_group_name: "test-se-2017", 
+    #           status: "pending-apply", 
+    #         }, 
+    #       ], 
+    #       publicly_accessible: true, 
+    #       read_replica_db_instance_identifiers: [
+    #       ], 
+    #       secondary_availability_zone: "us-west-2c", 
+    #       storage_type: "gp2", 
     #     }, 
     #   }
     #
@@ -16380,23 +18721,26 @@ module Aws::RDS
     #   * {Types::DBParameterGroupNameMessage#db_parameter_group_name #db_parameter_group_name} => String
     #
     #
-    # @example Example: To change DB parameter group settings
+    # @example Example: To modify a DB parameter group
     #
-    #   # This example immediately changes the specified setting for the specified DB parameter group.
+    #   # The following example changes the value of the clr enabled parameter in a DB parameter group. The value of the
+    #   # ApplyMethod parameter causes the DB parameter group to be modified immediately, instead of waiting until the next
+    #   # maintenance window.
     #
     #   resp = client.modify_db_parameter_group({
-    #     db_parameter_group_name: "mymysqlparametergroup", 
+    #     db_parameter_group_name: "test-sqlserver-se-2017", 
     #     parameters: [
     #       {
     #         apply_method: "immediate", 
-    #         parameter_name: "time_zone", 
-    #         parameter_value: "America/Phoenix", 
+    #         parameter_name: "clr enabled", 
+    #         parameter_value: "1", 
     #       }, 
     #     ], 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     db_parameter_group_name: "test-sqlserver-se-2017", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -16705,6 +19049,46 @@ module Aws::RDS
     #
     #   * {Types::ModifyDBSnapshotResult#db_snapshot #db_snapshot} => Types::DBSnapshot
     #
+    #
+    # @example Example: To modify a DB snapshot
+    #
+    #   # The following example upgrades a PostgeSQL 10.6 snapshot named db5-snapshot-upg-test to PostgreSQL 11.7. The new DB
+    #   # engine version is shown after the snapshot has finished upgrading and its status is available.
+    #
+    #   resp = client.modify_db_snapshot({
+    #     db_snapshot_identifier: "db5-snapshot-upg-test", 
+    #     engine_version: "11.7", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_snapshot: {
+    #       allocated_storage: 20, 
+    #       availability_zone: "us-west-2a", 
+    #       db_instance_identifier: "database-5", 
+    #       db_snapshot_arn: "arn:aws:rds:us-west-2:123456789012:snapshot:db5-snapshot-upg-test", 
+    #       db_snapshot_identifier: "db5-snapshot-upg-test", 
+    #       dbi_resource_id: "db-GJMF75LM42IL6BTFRE4UZJ5YM4", 
+    #       encrypted: false, 
+    #       engine: "postgres", 
+    #       engine_version: "10.6", 
+    #       iam_database_authentication_enabled: false, 
+    #       instance_create_time: Time.parse("2020-03-27T19:59:04.735Z"), 
+    #       license_model: "postgresql-license", 
+    #       master_username: "postgres", 
+    #       option_group_name: "default:postgres-11", 
+    #       percent_progress: 100, 
+    #       port: 5432, 
+    #       processor_features: [
+    #       ], 
+    #       snapshot_create_time: Time.parse("2020-03-27T20:49:17.092Z"), 
+    #       snapshot_type: "manual", 
+    #       status: "upgrading", 
+    #       storage_type: "gp2", 
+    #       vpc_id: "vpc-2ff27557", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_db_snapshot({
@@ -16830,21 +19214,61 @@ module Aws::RDS
     #   * {Types::ModifyDBSnapshotAttributeResult#db_snapshot_attributes_result #db_snapshot_attributes_result} => Types::DBSnapshotAttributesResult
     #
     #
-    # @example Example: To change DB snapshot attributes
+    # @example Example: To allow two AWS accounts to restore a DB snapshot
     #
-    #   # This example adds the specified attribute for the specified DB snapshot.
+    #   # The following example grants permission to two AWS accounts, with the identifiers 111122223333 and 444455556666, to
+    #   # restore the DB snapshot named mydbsnapshot.
     #
     #   resp = client.modify_db_snapshot_attribute({
     #     attribute_name: "restore", 
     #     db_snapshot_identifier: "mydbsnapshot", 
     #     values_to_add: [
-    #       "all", 
+    #       "111122223333", 
+    #       "444455556666", 
     #     ], 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_snapshot_attributes_result: {
+    #       db_snapshot_attributes: [
+    #         {
+    #           attribute_name: "restore", 
+    #           attribute_values: [
+    #             "111122223333", 
+    #             "444455556666", 
+    #           ], 
+    #         }, 
+    #       ], 
+    #       db_snapshot_identifier: "mydbsnapshot", 
+    #     }, 
+    #   }
+    #
+    # @example Example: To prevent an AWS account from restoring a DB snapshot
+    #
+    #   # The following example removes permission from the AWS account with the identifier 444455556666 to restore the DB
+    #   # snapshot named mydbsnapshot.
+    #
+    #   resp = client.modify_db_snapshot_attribute({
+    #     attribute_name: "restore", 
+    #     db_snapshot_identifier: "mydbsnapshot", 
+    #     values_to_remove: [
+    #       "444455556666", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_snapshot_attributes_result: {
+    #       db_snapshot_attributes: [
+    #         {
+    #           attribute_name: "restore", 
+    #           attribute_values: [
+    #             "111122223333", 
+    #           ], 
+    #         }, 
+    #       ], 
+    #       db_snapshot_identifier: "mydbsnapshot", 
     #     }, 
     #   }
     #
@@ -16898,21 +19322,61 @@ module Aws::RDS
     #   * {Types::ModifyDBSubnetGroupResult#db_subnet_group #db_subnet_group} => Types::DBSubnetGroup
     #
     #
-    # @example Example: To change DB subnet group settings
+    # @example Example: To modify a DB subnet group
     #
-    #   # This example changes the specified setting for the specified DB subnet group.
+    #   # The following example adds a subnet with the ID subnet-08e41f9e230222222 to the DB subnet group named mysubnetgroup. To
+    #   # keep the existing subnets in the subnet group, include their IDs as values in the --subnet-ids option. Make sure to have
+    #   # subnets with at least two different Availability Zones in the DB subnet group.
     #
     #   resp = client.modify_db_subnet_group({
-    #     db_subnet_group_name: "mydbsubnetgroup", 
+    #     db_subnet_group_description: "", 
+    #     db_subnet_group_name: "mysubnetgroup", 
     #     subnet_ids: [
-    #       "subnet-70e1975a", 
-    #       "subnet-747a5c49", 
+    #       "subnet-0a1dc4e1a6f123456", 
+    #       "subnet-070dd7ecb3aaaaaaa", 
+    #       "subnet-00f5b198bc0abcdef", 
+    #       "subnet-08e41f9e230222222", 
     #     ], 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_subnet_group: {
+    #       db_subnet_group_arn: "arn:aws:rds:us-west-2:123456789012:subgrp:mysubnetgroup", 
+    #       db_subnet_group_description: "test DB subnet group", 
+    #       db_subnet_group_name: "mysubnetgroup", 
+    #       subnet_group_status: "Complete", 
+    #       subnets: [
+    #         {
+    #           subnet_availability_zone: {
+    #             name: "us-west-2a", 
+    #           }, 
+    #           subnet_identifier: "subnet-08e41f9e230222222", 
+    #           subnet_status: "Active", 
+    #         }, 
+    #         {
+    #           subnet_availability_zone: {
+    #             name: "us-west-2b", 
+    #           }, 
+    #           subnet_identifier: "subnet-070dd7ecb3aaaaaaa", 
+    #           subnet_status: "Active", 
+    #         }, 
+    #         {
+    #           subnet_availability_zone: {
+    #             name: "us-west-2d", 
+    #           }, 
+    #           subnet_identifier: "subnet-00f5b198bc0abcdef", 
+    #           subnet_status: "Active", 
+    #         }, 
+    #         {
+    #           subnet_availability_zone: {
+    #             name: "us-west-2b", 
+    #           }, 
+    #           subnet_identifier: "subnet-0a1dc4e1a6f123456", 
+    #           subnet_status: "Active", 
+    #         }, 
+    #       ], 
+    #       vpc_id: "vpc-0f08e7610a1b2c3d4", 
     #     }, 
     #   }
     #
@@ -16998,23 +19462,31 @@ module Aws::RDS
     #   * {Types::ModifyEventSubscriptionResult#event_subscription #event_subscription} => Types::EventSubscription
     #
     #
-    # @example Example: To change event notification subscription settings
+    # @example Example: To modify an event subscription
     #
-    #   # This example changes the specified setting for the specified event notification subscription.
+    #   # The following example turns off the specified event subscription, so that it no longer publishes notifications to the
+    #   # specified Amazon Simple Notification Service topic.
     #
     #   resp = client.modify_event_subscription({
-    #     enabled: true, 
-    #     event_categories: [
-    #       "deletion", 
-    #       "low storage", 
-    #     ], 
-    #     source_type: "db-instance", 
-    #     subscription_name: "mymysqleventsubscription", 
+    #     enabled: false, 
+    #     subscription_name: "my-instance-events", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     event_subscription: {
+    #       cust_subscription_id: "my-instance-events", 
+    #       customer_aws_id: "123456789012", 
+    #       enabled: false, 
+    #       event_categories_list: [
+    #         "backup", 
+    #         "recovery", 
+    #       ], 
+    #       event_subscription_arn: "arn:aws:rds:us-east-1:123456789012:es:my-instance-events", 
+    #       sns_topic_arn: "arn:aws:sns:us-east-1:123456789012:interesting-events", 
+    #       source_type: "db-instance", 
+    #       status: "modifying", 
+    #       subscription_creation_time: "Tue Jul 31 23:22:01 UTC 2018", 
     #     }, 
     #   }
     #
@@ -17136,6 +19608,32 @@ module Aws::RDS
     # @return [Types::ModifyGlobalClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyGlobalClusterResult#global_cluster #global_cluster} => Types::GlobalCluster
+    #
+    #
+    # @example Example: To modify a global database cluster
+    #
+    #   # The following example enables deletion protection for an Aurora MySQL-based global database cluster.
+    #
+    #   resp = client.modify_global_cluster({
+    #     deletion_protection: true, 
+    #     global_cluster_identifier: "myglobalcluster", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     global_cluster: {
+    #       deletion_protection: true, 
+    #       engine: "aurora-mysql", 
+    #       engine_version: "5.7.mysql_aurora.2.07.2", 
+    #       global_cluster_arn: "arn:aws:rds::123456789012:global-cluster:myglobalcluster", 
+    #       global_cluster_identifier: "myglobalcluster", 
+    #       global_cluster_members: [
+    #       ], 
+    #       global_cluster_resource_id: "cluster-f0e523bfe07aabb", 
+    #       status: "available", 
+    #       storage_encrypted: false, 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -17375,18 +19873,20 @@ module Aws::RDS
     #
     # @example Example: To promote a read replica
     #
-    #   # This example promotes the specified read replica and sets its backup retention period and preferred backup window.
+    #   # The following example promotes the specified read replica to become a standalone DB instance.
     #
     #   resp = client.promote_read_replica({
-    #     backup_retention_period: 1, 
-    #     db_instance_identifier: "mydbreadreplica", 
-    #     preferred_backup_window: "03:30-04:00", 
+    #     db_instance_identifier: "test-instance-repl", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_instance: {
-    #     }, 
+    #       db_instance_arn: "arn:aws:rds:us-east-1:123456789012:db:test-instance-repl", 
+    #       db_instance_status: "modifying", 
+    #       read_replica_source_db_instance_identifier: "test-instance", 
+    #       storage_type: "standard", 
+    #     }, # Some output ommitted.
     #   }
     #
     # @example Request syntax with placeholder values
@@ -17734,18 +20234,38 @@ module Aws::RDS
     #   * {Types::PurchaseReservedDBInstancesOfferingResult#reserved_db_instance #reserved_db_instance} => Types::ReservedDBInstance
     #
     #
-    # @example Example: To purchase a reserved DB instance offering
+    # @example Example: To purchase a reserved DB instance
     #
-    #   # This example purchases a reserved DB instance offering that matches the specified settings.
+    #   # The following example shows how to buy the reserved DB instance offering from the previous example.
     #
     #   resp = client.purchase_reserved_db_instances_offering({
-    #     reserved_db_instance_id: "myreservationid", 
-    #     reserved_db_instances_offering_id: "fb29428a-646d-4390-850e-5fe89926e727", 
+    #     reserved_db_instance_id: "8ba30be1-b9ec-447f-8f23-6114e3f4c7b4", 
+    #     reserved_db_instances_offering_id: "", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     reserved_db_instance: {
+    #       currency_code: "USD", 
+    #       db_instance_class: "db.t2.micro", 
+    #       db_instance_count: 1, 
+    #       duration: 31536000, 
+    #       fixed_price: 51, 
+    #       multi_az: false, 
+    #       offering_type: "Partial Upfront", 
+    #       product_description: "mysql", 
+    #       recurring_charges: [
+    #         {
+    #           recurring_charge_amount: 0.006, 
+    #           recurring_charge_frequency: "Hourly", 
+    #         }, 
+    #       ], 
+    #       reserved_db_instance_arn: "arn:aws:rds:us-west-2:123456789012:ri:ri-2020-06-29-16-54-57-670", 
+    #       reserved_db_instance_id: "ri-2020-06-29-16-54-57-670", 
+    #       reserved_db_instances_offering_id: "8ba30be1-b9ec-447f-8f23-6114e3f4c7b4", 
+    #       start_time: Time.parse("2020-06-29T16:54:57.670Z"), 
+    #       state: "payment-pending", 
+    #       usage_price: 0, 
     #     }, 
     #   }
     #
@@ -17998,17 +20518,26 @@ module Aws::RDS
     #
     # @example Example: To reboot a DB instance
     #
-    #   # This example reboots the specified DB instance without forcing a failover.
+    #   # The following example starts a reboot of the specified DB instance.
     #
     #   resp = client.reboot_db_instance({
-    #     db_instance_identifier: "mymysqlinstance", 
-    #     force_failover: false, 
+    #     db_instance_identifier: "test-mysql-instance", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_instance: {
-    #     }, 
+    #       db_instance_class: "db.t3.micro", 
+    #       db_instance_identifier: "test-mysql-instance", 
+    #       db_instance_status: "rebooting", 
+    #       endpoint: {
+    #         address: "test-mysql-instance.############.us-west-2.rds.amazonaws.com", 
+    #         hosted_zone_id: "Z1PVIF0EXAMPLE", 
+    #         port: 3306, 
+    #       }, 
+    #       engine: "mysql", 
+    #       master_username: "admin", 
+    #     }, # Some output ommitted.
     #   }
     #
     # @example Request syntax with placeholder values
@@ -18252,6 +20781,47 @@ module Aws::RDS
     #
     #   * {Types::RemoveFromGlobalClusterResult#global_cluster #global_cluster} => Types::GlobalCluster
     #
+    #
+    # @example Example: To detach an Aurora secondary cluster from an Aurora global database cluster
+    #
+    #   # The following example detaches an Aurora secondary cluster from an Aurora global database cluster. The cluster changes
+    #   # from being read-only to a standalone cluster with read-write capability.
+    #
+    #   resp = client.remove_from_global_cluster({
+    #     db_cluster_identifier: "arn:aws:rds:us-west-2:123456789012:cluster:DB-1", 
+    #     global_cluster_identifier: "myglobalcluster", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     global_cluster: {
+    #       deletion_protection: false, 
+    #       engine: "aurora-postgresql", 
+    #       engine_version: "10.11", 
+    #       global_cluster_arn: "arn:aws:rds::123456789012:global-cluster:myglobalcluster", 
+    #       global_cluster_identifier: "myglobalcluster", 
+    #       global_cluster_members: [
+    #         {
+    #           db_cluster_arn: "arn:aws:rds:us-east-1:123456789012:cluster:js-global-cluster", 
+    #           is_writer: true, 
+    #           readers: [
+    #             "arn:aws:rds:us-west-2:123456789012:cluster:DB-1", 
+    #           ], 
+    #         }, 
+    #         {
+    #           db_cluster_arn: "arn:aws:rds:us-west-2:123456789012:cluster:DB-1", 
+    #           global_write_forwarding_status: "disabled", 
+    #           is_writer: false, 
+    #           readers: [
+    #           ], 
+    #         }, 
+    #       ], 
+    #       global_cluster_resource_id: "cluster-abc123def456gh", 
+    #       status: "available", 
+    #       storage_encrypted: true, 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_from_global_cluster({
@@ -18317,6 +20887,16 @@ module Aws::RDS
     #   DBEngineVersion.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To disassociate an Identity and Access Management (IAM) role from a DB cluster
+    #
+    #   # The following example removes a role from a DB cluster.
+    #
+    #   resp = client.remove_role_from_db_cluster({
+    #     db_cluster_identifier: "mydbcluster", 
+    #     role_arn: "arn:aws:iam::123456789012:role/RDSLoadFromS3", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -18387,18 +20967,33 @@ module Aws::RDS
     #   * {Types::RemoveSourceIdentifierFromSubscriptionResult#event_subscription #event_subscription} => Types::EventSubscription
     #
     #
-    # @example Example: To remove a source identifier from a DB event subscription
+    # @example Example: To remove a source identifier from a subscription
     #
-    #   # This example removes the specified source identifier from the specified DB event subscription.
+    #   # The following example removes the specified source identifier from an existing subscription.
     #
     #   resp = client.remove_source_identifier_from_subscription({
-    #     source_identifier: "mymysqlinstance", 
-    #     subscription_name: "myeventsubscription", 
+    #     source_identifier: "test-instance-repl", 
+    #     subscription_name: "my-instance-events", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     event_subscription: {
+    #       cust_subscription_id: "my-instance-events", 
+    #       customer_aws_id: "123456789012", 
+    #       enabled: false, 
+    #       event_categories_list: [
+    #         "backup", 
+    #         "recovery", 
+    #       ], 
+    #       event_subscription_arn: "arn:aws:rds:us-east-1:123456789012:es:my-instance-events", 
+    #       sns_topic_arn: "arn:aws:sns:us-east-1:123456789012:interesting-events", 
+    #       source_ids_list: [
+    #         "test-instance", 
+    #       ], 
+    #       source_type: "db-instance", 
+    #       status: "modifying", 
+    #       subscription_creation_time: "Tue Jul 31 23:22:01 UTC 2018", 
     #     }, 
     #   }
     #
@@ -18460,12 +21055,13 @@ module Aws::RDS
     #
     # @example Example: To remove tags from a resource
     #
-    #   # This example removes the specified tag associated with the specified DB option group.
+    #   # The following example removes tags from a resource.
     #
     #   resp = client.remove_tags_from_resource({
-    #     resource_name: "arn:aws:rds:us-east-1:992648334831:og:mydboptiongroup", 
+    #     resource_name: "arn:aws:rds:us-east-1:123456789012:db:mydbinstance", 
     #     tag_keys: [
-    #       "MyKey", 
+    #       "Name", 
+    #       "Environment", 
     #     ], 
     #   })
     #
@@ -18527,17 +21123,19 @@ module Aws::RDS
     #   * {Types::DBClusterParameterGroupNameMessage#db_cluster_parameter_group_name #db_cluster_parameter_group_name} => String
     #
     #
-    # @example Example: To reset the values of a DB cluster parameter group
+    # @example Example: To reset all parameters to their default values
     #
-    #   # This example resets all parameters for the specified DB cluster parameter group to their default values.
+    #   # The following example resets all parameter values in a customer-created DB cluster parameter group to their default
+    #   # values.
     #
     #   resp = client.reset_db_cluster_parameter_group({
-    #     db_cluster_parameter_group_name: "mydbclusterparametergroup", 
+    #     db_cluster_parameter_group_name: "mydbclpg", 
     #     reset_all_parameters: true, 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     db_cluster_parameter_group_name: "mydbclpg", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -18630,17 +21228,18 @@ module Aws::RDS
     #   * {Types::DBParameterGroupNameMessage#db_parameter_group_name #db_parameter_group_name} => String
     #
     #
-    # @example Example: To reset the values of a DB parameter group
+    # @example Example: To reset all parameters to their default values
     #
-    #   # This example resets all parameters for the specified DB parameter group to their default values.
+    #   # The following example resets all parameter values in a customer-created DB parameter group to their default values.
     #
     #   resp = client.reset_db_parameter_group({
-    #     db_parameter_group_name: "mydbparametergroup", 
+    #     db_parameter_group_name: "mypg", 
     #     reset_all_parameters: true, 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     db_parameter_group_name: "mypg", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -19071,6 +21670,75 @@ module Aws::RDS
     # @return [Types::RestoreDBClusterFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromS3Result#db_cluster #db_cluster} => Types::DBCluster
+    #
+    #
+    # @example Example: To restore an Amazon Aurora DB cluster from Amazon S3
+    #
+    #   # The following example restores an Amazon Aurora MySQL version 5.7-compatible DB cluster from a MySQL 5.7 DB backup file
+    #   # in Amazon S3.
+    #
+    #   resp = client.restore_db_cluster_from_s3({
+    #     db_cluster_identifier: "cluster-s3-restore", 
+    #     engine: "aurora-mysql", 
+    #     master_user_password: "mypassword", 
+    #     master_username: "admin", 
+    #     s3_bucket_name: "mybucket", 
+    #     s3_ingestion_role_arn: "arn:aws:iam::123456789012:role/service-role/TestBackup", 
+    #     s3_prefix: "test-backup", 
+    #     source_engine: "mysql", 
+    #     source_engine_version: "5.7.28", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster: {
+    #       allocated_storage: 1, 
+    #       associated_roles: [
+    #       ], 
+    #       availability_zones: [
+    #         "us-west-2c", 
+    #         "us-west-2a", 
+    #         "us-west-2b", 
+    #       ], 
+    #       backup_retention_period: 1, 
+    #       cluster_create_time: Time.parse("2020-07-27T14:22:08.095Z"), 
+    #       copy_tags_to_snapshot: false, 
+    #       cross_account_clone: false, 
+    #       db_cluster_arn: "arn:aws:rds:us-west-2:123456789012:cluster:cluster-s3-restore", 
+    #       db_cluster_identifier: "cluster-s3-restore", 
+    #       db_cluster_members: [
+    #       ], 
+    #       db_cluster_parameter_group: "default.aurora-mysql5.7", 
+    #       db_subnet_group: "default", 
+    #       db_cluster_resource_id: "cluster-SU5THYQQHOWCXZZDGXREXAMPLE", 
+    #       deletion_protection: false, 
+    #       domain_memberships: [
+    #       ], 
+    #       endpoint: "cluster-s3-restore.cluster-co3xyzabc123.us-west-2.rds.amazonaws.com", 
+    #       engine: "aurora-mysql", 
+    #       engine_mode: "provisioned", 
+    #       engine_version: "5.7.12", 
+    #       hosted_zone_id: "Z1PVIF0EXAMPLE", 
+    #       http_endpoint_enabled: false, 
+    #       iam_database_authentication_enabled: false, 
+    #       master_username: "admin", 
+    #       multi_az: false, 
+    #       port: 3306, 
+    #       preferred_backup_window: "11:15-11:45", 
+    #       preferred_maintenance_window: "thu:12:19-thu:12:49", 
+    #       read_replica_identifiers: [
+    #       ], 
+    #       reader_endpoint: "cluster-s3-restore.cluster-ro-co3xyzabc123.us-west-2.rds.amazonaws.com", 
+    #       status: "creating", 
+    #       storage_encrypted: false, 
+    #       vpc_security_groups: [
+    #         {
+    #           status: "active", 
+    #           vpc_security_group_id: "sg-########", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -19692,19 +22360,68 @@ module Aws::RDS
     #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
     #
     #
-    # @example Example: To restore an Amazon Aurora DB cluster from a DB cluster snapshot
+    # @example Example: To restore a DB cluster from a snapshot
     #
-    #   # The following example restores an Amazon Aurora DB cluster from a DB cluster snapshot.
+    #   # The following example restores an Aurora PostgreSQL DB cluster compatible with PostgreSQL version 10.7 from a DB cluster
+    #   # snapshot named test-instance-snapshot.
     #
     #   resp = client.restore_db_cluster_from_snapshot({
-    #     db_cluster_identifier: "restored-cluster1", 
-    #     engine: "aurora", 
-    #     snapshot_identifier: "sample-cluster-snapshot1", 
+    #     db_cluster_identifier: "newdbcluster", 
+    #     engine: "aurora-postgresql", 
+    #     engine_version: "10.7", 
+    #     snapshot_identifier: "test-instance-snapshot", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_cluster: {
+    #       allocated_storage: 1, 
+    #       associated_roles: [
+    #       ], 
+    #       availability_zones: [
+    #         "us-west-2c", 
+    #         "us-west-2a", 
+    #         "us-west-2b", 
+    #       ], 
+    #       backup_retention_period: 7, 
+    #       cluster_create_time: Time.parse("2020-06-05T15:06:58.634Z"), 
+    #       copy_tags_to_snapshot: false, 
+    #       cross_account_clone: false, 
+    #       db_cluster_arn: "arn:aws:rds:us-west-2:123456789012:cluster:newdbcluster", 
+    #       db_cluster_identifier: "newdbcluster", 
+    #       db_cluster_members: [
+    #       ], 
+    #       db_cluster_parameter_group: "default.aurora-postgresql10", 
+    #       db_subnet_group: "default", 
+    #       database_name: "", 
+    #       db_cluster_resource_id: "cluster-5DSB5IFQDDUVAWOUWM1EXAMPLE", 
+    #       deletion_protection: false, 
+    #       domain_memberships: [
+    #       ], 
+    #       endpoint: "newdbcluster.cluster-############.us-west-2.rds.amazonaws.com", 
+    #       engine: "aurora-postgresql", 
+    #       engine_mode: "provisioned", 
+    #       engine_version: "10.7", 
+    #       hosted_zone_id: "Z1PVIF0EXAMPLE", 
+    #       http_endpoint_enabled: false, 
+    #       iam_database_authentication_enabled: false, 
+    #       kms_key_id: "arn:aws:kms:us-west-2:123456789012:key/287364e4-33e3-4755-a3b0-a1b2c3d4e5f6", 
+    #       master_username: "postgres", 
+    #       multi_az: false, 
+    #       port: 5432, 
+    #       preferred_backup_window: "09:33-10:03", 
+    #       preferred_maintenance_window: "sun:12:22-sun:12:52", 
+    #       read_replica_identifiers: [
+    #       ], 
+    #       reader_endpoint: "newdbcluster.cluster-ro-############.us-west-2.rds.amazonaws.com", 
+    #       status: "creating", 
+    #       storage_encrypted: true, 
+    #       vpc_security_groups: [
+    #         {
+    #           status: "active", 
+    #           vpc_security_group_id: "sg-########", 
+    #         }, 
+    #       ], 
     #     }, 
     #   }
     #
@@ -20302,19 +23019,67 @@ module Aws::RDS
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
     #
     #
-    # @example Example: To restore a DB cluster to a point in time.
+    # @example Example: To restore a DB cluster to a specified time
     #
-    #   # The following example restores a DB cluster to a new DB cluster at a point in time from the source DB cluster.
+    #   # The following example restores the DB cluster named database-4 to the latest possible time. Using copy-on-write as the
+    #   # restore type restores the new DB cluster as a clone of the source DB cluster.
     #
     #   resp = client.restore_db_cluster_to_point_in_time({
-    #     db_cluster_identifier: "sample-restored-cluster1", 
-    #     restore_to_time: Time.parse("2016-09-13T18:45:00Z"), 
-    #     source_db_cluster_identifier: "sample-cluster1", 
+    #     db_cluster_identifier: "sample-cluster-clone", 
+    #     restore_type: "copy-on-write", 
+    #     source_db_cluster_identifier: "database-4", 
+    #     use_latest_restorable_time: true, 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_cluster: {
+    #       allocated_storage: 1, 
+    #       associated_roles: [
+    #       ], 
+    #       availability_zones: [
+    #         "us-west-2c", 
+    #         "us-west-2a", 
+    #         "us-west-2b", 
+    #       ], 
+    #       backup_retention_period: 7, 
+    #       clone_group_id: "8d19331a-099a-45a4-b4aa-11aa22bb33cc44dd", 
+    #       cluster_create_time: Time.parse("2020-03-10T19:57:38.967Z"), 
+    #       copy_tags_to_snapshot: false, 
+    #       cross_account_clone: false, 
+    #       db_cluster_arn: "arn:aws:rds:us-west-2:123456789012:cluster:sample-cluster-clone", 
+    #       db_cluster_identifier: "sample-cluster-clone", 
+    #       db_cluster_members: [
+    #       ], 
+    #       db_cluster_parameter_group: "default.aurora-postgresql10", 
+    #       db_subnet_group: "default", 
+    #       database_name: "", 
+    #       db_cluster_resource_id: "cluster-BIZ77GDSA2XBSTNPFW1EXAMPLE", 
+    #       deletion_protection: false, 
+    #       endpoint: "sample-cluster-clone.cluster-############.us-west-2.rds.amazonaws.com", 
+    #       engine: "aurora-postgresql", 
+    #       engine_mode: "provisioned", 
+    #       engine_version: "10.7", 
+    #       hosted_zone_id: "Z1PVIF0EXAMPLE", 
+    #       http_endpoint_enabled: false, 
+    #       iam_database_authentication_enabled: false, 
+    #       kms_key_id: "arn:aws:kms:us-west-2:123456789012:key/287364e4-33e3-4755-a3b0-a1b2c3d4e5f6", 
+    #       master_username: "postgres", 
+    #       multi_az: false, 
+    #       port: 5432, 
+    #       preferred_backup_window: "09:33-10:03", 
+    #       preferred_maintenance_window: "sun:12:22-sun:12:52", 
+    #       read_replica_identifiers: [
+    #       ], 
+    #       reader_endpoint: "sample-cluster-clone.cluster-ro-############.us-west-2.rds.amazonaws.com", 
+    #       status: "creating", 
+    #       storage_encrypted: true, 
+    #       vpc_security_groups: [
+    #         {
+    #           status: "active", 
+    #           vpc_security_group_id: "sg-########", 
+    #         }, 
+    #       ], 
     #     }, 
     #   }
     #
@@ -20962,98 +23727,41 @@ module Aws::RDS
     #   * {Types::RestoreDBInstanceFromDBSnapshotResult#db_instance #db_instance} => Types::DBInstance
     #
     #
-    # @example Example: To restore a DB instance from a DB snapshot.
+    # @example Example: To restore a DB instance from a DB snapshot
     #
-    #   # The following example restores a DB instance from a DB snapshot.
+    #   # The following example creates a new DB instance named db7-new-instance with the db.t3.small DB instance class from the
+    #   # specified DB snapshot. The source DB instance from which the snapshot was taken uses a deprecated DB instance class, so
+    #   # you can't upgrade it.
     #
     #   resp = client.restore_db_instance_from_db_snapshot({
-    #     db_instance_identifier: "mysqldb-restored", 
-    #     db_snapshot_identifier: "rds:mysqldb-2014-04-22-08-15", 
+    #     db_instance_class: "db.t3.small", 
+    #     db_instance_identifier: "db7-new-instance", 
+    #     db_snapshot_identifier: "db7-test-snapshot", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     db_instance: {
-    #       allocated_storage: 200, 
+    #       associated_roles: [
+    #       ], 
     #       auto_minor_version_upgrade: true, 
-    #       availability_zone: "us-west-2b", 
-    #       backup_retention_period: 7, 
-    #       ca_certificate_identifier: "rds-ca-2015", 
-    #       copy_tags_to_snapshot: false, 
-    #       db_instance_arn: "arn:aws:rds:us-west-2:123456789012:db:mysqldb-restored", 
-    #       db_instance_class: "db.t2.small", 
-    #       db_instance_identifier: "mysqldb-restored", 
-    #       db_instance_status: "available", 
-    #       db_name: "sample", 
-    #       db_parameter_groups: [
-    #         {
-    #           db_parameter_group_name: "default.mysql5.6", 
-    #           parameter_apply_status: "in-sync", 
-    #         }, 
-    #       ], 
-    #       db_security_groups: [
-    #       ], 
-    #       db_subnet_group: {
-    #         db_subnet_group_description: "default", 
-    #         db_subnet_group_name: "default", 
-    #         subnet_group_status: "Complete", 
-    #         subnets: [
-    #           {
-    #             subnet_availability_zone: {
-    #               name: "us-west-2a", 
-    #             }, 
-    #             subnet_identifier: "subnet-77e8db03", 
-    #             subnet_status: "Active", 
-    #           }, 
-    #           {
-    #             subnet_availability_zone: {
-    #               name: "us-west-2b", 
-    #             }, 
-    #             subnet_identifier: "subnet-c39989a1", 
-    #             subnet_status: "Active", 
-    #           }, 
-    #           {
-    #             subnet_availability_zone: {
-    #               name: "us-west-2c", 
-    #             }, 
-    #             subnet_identifier: "subnet-4b267b0d", 
-    #             subnet_status: "Active", 
-    #           }, 
-    #         ], 
-    #         vpc_id: "vpc-c1c5b3a3", 
-    #       }, 
-    #       db_instance_port: 0, 
-    #       dbi_resource_id: "db-VNZUCCBTEDC4WR7THXNJO72HVQ", 
-    #       domain_memberships: [
-    #       ], 
+    #       db_instance_arn: "arn:aws:rds:us-west-2:123456789012:db:db7-new-instance", 
+    #       db_instance_class: "db.t3.small", 
+    #       db_instance_identifier: "db7-new-instance", 
+    #       db_instance_status: "creating", 
+    #       deletion_protection: false, 
     #       engine: "mysql", 
-    #       engine_version: "5.6.27", 
+    #       engine_version: "5.7.22", 
+    #       iam_database_authentication_enabled: false, 
     #       license_model: "general-public-license", 
-    #       master_username: "mymasteruser", 
-    #       monitoring_interval: 0, 
     #       multi_az: false, 
-    #       option_group_memberships: [
-    #         {
-    #           option_group_name: "default:mysql-5-6", 
-    #           status: "in-sync", 
-    #         }, 
-    #       ], 
     #       pending_modified_values: {
     #       }, 
-    #       preferred_backup_window: "12:58-13:28", 
-    #       preferred_maintenance_window: "tue:10:16-tue:10:46", 
-    #       publicly_accessible: true, 
+    #       performance_insights_enabled: false, 
+    #       preferred_maintenance_window: "mon:07:37-mon:08:07", 
     #       read_replica_db_instance_identifiers: [
     #       ], 
-    #       storage_encrypted: false, 
-    #       storage_type: "gp2", 
-    #       vpc_security_groups: [
-    #         {
-    #           status: "active", 
-    #           vpc_security_group_id: "sg-e5e5b0d2", 
-    #         }, 
-    #       ], 
-    #     }, 
+    #     }, # Some output ommitted.
     #   }
     #
     # @example Request syntax with placeholder values
@@ -22449,14 +25157,15 @@ module Aws::RDS
     #   * {Types::RestoreDBInstanceToPointInTimeResult#db_instance #db_instance} => Types::DBInstance
     #
     #
-    # @example Example: To restore a DB instance to a point in time.
+    # @example Example: To restore a DB instance to a point in time
     #
-    #   # The following example restores a DB instance to a new DB instance at a point in time from the source DB instance.
+    #   # The following example restores test-instance to a new DB instance named restored-test-instance, as of the specified
+    #   # time.
     #
     #   resp = client.restore_db_instance_to_point_in_time({
-    #     restore_time: Time.parse("2016-09-13T18:45:00Z"), 
-    #     source_db_instance_identifier: "mysql-sample", 
-    #     target_db_instance_identifier: "mysql-sample-restored", 
+    #     restore_time: Time.parse("2018-07-30T23:45:00.000Z"), 
+    #     source_db_instance_identifier: "test-instance", 
+    #     target_db_instance_identifier: "restored-test-instance", 
     #   })
     #
     #   resp.to_h outputs the following:
@@ -22468,9 +25177,9 @@ module Aws::RDS
     #       backup_retention_period: 7, 
     #       ca_certificate_identifier: "rds-ca-2015", 
     #       copy_tags_to_snapshot: false, 
-    #       db_instance_arn: "arn:aws:rds:us-west-2:123456789012:db:mysql-sample-restored", 
+    #       db_instance_arn: "arn:aws:rds:us-west-2:123456789012:db:restored-test-instance", 
     #       db_instance_class: "db.t2.small", 
-    #       db_instance_identifier: "mysql-sample-restored", 
+    #       db_instance_identifier: "restored-test-instance", 
     #       db_instance_status: "available", 
     #       db_name: "sample", 
     #       db_parameter_groups: [
@@ -22909,6 +25618,27 @@ module Aws::RDS
     #   * {Types::StartActivityStreamResponse#apply_immediately #apply_immediately} => Boolean
     #   * {Types::StartActivityStreamResponse#engine_native_audit_fields_included #engine_native_audit_fields_included} => Boolean
     #
+    #
+    # @example Example: To start a database activity stream
+    #
+    #   # The following example starts an asynchronous activity stream to monitor an Aurora cluster named my-pg-cluster.
+    #
+    #   resp = client.start_activity_stream({
+    #     apply_immediately: true, 
+    #     kms_key_id: "arn:aws:kms:us-east-1:1234567890123:key/a12c345d-6ef7-890g-h123-456i789jk0l1", 
+    #     mode: "async", 
+    #     resource_arn: "arn:aws:rds:us-east-1:1234567890123:cluster:my-pg-cluster", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     apply_immediately: true, 
+    #     kinesis_stream_name: "aws-rds-das-cluster-0ABCDEFGHI1JKLM2NOPQ3R4S", 
+    #     kms_key_id: "arn:aws:kms:us-east-1:1234567890123:key/a12c345d-6ef7-890g-h123-456i789jk0l1", 
+    #     mode: "async", 
+    #     status: "starting", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_activity_stream({
@@ -22959,6 +25689,30 @@ module Aws::RDS
     # @return [Types::StartDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
+    #
+    #
+    # @example Example: To start a DB cluster
+    #
+    #   # The following example starts a DB cluster and its DB instances.
+    #
+    #   resp = client.start_db_cluster({
+    #     db_cluster_identifier: "mydbcluster", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster: {
+    #       allocated_storage: 1, 
+    #       availability_zones: [
+    #         "us-east-1a", 
+    #         "us-east-1e", 
+    #         "us-east-1b", 
+    #       ], 
+    #       backup_retention_period: 1, 
+    #       db_cluster_identifier: "mydbcluster", 
+    #       database_name: "mydb", 
+    #     }, # Some output ommitted.
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -23110,6 +25864,22 @@ module Aws::RDS
     # @return [Types::StartDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDBInstanceResult#db_instance #db_instance} => Types::DBInstance
+    #
+    #
+    # @example Example: To start a DB instance
+    #
+    #   # The following example starts the specified DB instance.
+    #
+    #   resp = client.start_db_instance({
+    #     db_instance_identifier: "test-instance", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_instance: {
+    #       db_instance_status: "starting", 
+    #     }, # Some output ommitted.
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -23344,6 +26114,43 @@ module Aws::RDS
     #
     #   * {Types::StartDBInstanceAutomatedBackupsReplicationResult#db_instance_automated_backup #db_instance_automated_backup} => Types::DBInstanceAutomatedBackup
     #
+    #
+    # @example Example: To enable cross-Region automated backups
+    #
+    #   # The following example replicates automated backups from a DB instance in the US East (N. Virginia) Region. The backup
+    #   # retention period is 14 days.
+    #
+    #   resp = client.start_db_instance_automated_backups_replication({
+    #     backup_retention_period: 14, 
+    #     source_db_instance_arn: "arn:aws:rds:us-east-1:123456789012:db:new-orcl-db", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_instance_automated_backup: {
+    #       allocated_storage: 20, 
+    #       backup_retention_period: 14, 
+    #       db_instance_arn: "arn:aws:rds:us-east-1:123456789012:db:new-orcl-db", 
+    #       db_instance_automated_backups_arn: "arn:aws:rds:us-west-2:123456789012:auto-backup:ab-jkib2gfq5rv7replzadausbrktni2bn4example", 
+    #       db_instance_identifier: "new-orcl-db", 
+    #       dbi_resource_id: "db-JKIB2GFQ5RV7REPLZA4EXAMPLE", 
+    #       encrypted: false, 
+    #       engine: "oracle-se2", 
+    #       engine_version: "12.1.0.2.v21", 
+    #       iam_database_authentication_enabled: false, 
+    #       instance_create_time: Time.parse("2020-12-04T15:28:31Z"), 
+    #       license_model: "bring-your-own-license", 
+    #       master_username: "admin", 
+    #       option_group_name: "default:oracle-se2-12-1", 
+    #       port: 1521, 
+    #       region: "us-east-1", 
+    #       restore_window: {
+    #       }, 
+    #       status: "pending", 
+    #       storage_type: "gp2", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_db_instance_automated_backups_replication({
@@ -23523,6 +26330,32 @@ module Aws::RDS
     #   * {Types::ExportTask#warning_message #warning_message} => String
     #   * {Types::ExportTask#source_type #source_type} => String
     #
+    #
+    # @example Example: To export a snapshot to Amazon S3
+    #
+    #   # The following example exports a DB snapshot named db5-snapshot-test to the Amazon S3 bucket named mybucket.
+    #
+    #   resp = client.start_export_task({
+    #     export_task_identifier: "my-s3-export", 
+    #     iam_role_arn: "arn:aws:iam::123456789012:role/service-role/ExportRole", 
+    #     kms_key_id: "arn:aws:kms:us-west-2:123456789012:key/abcd0000-7fca-4128-82f2-aabbccddeeff", 
+    #     s3_bucket_name: "mybucket", 
+    #     source_arn: "arn:aws:rds:us-west-2:123456789012:snapshot:db5-snapshot-test", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     export_task_identifier: "my-s3-export", 
+    #     iam_role_arn: "arn:aws:iam::123456789012:role/service-role/ExportRole", 
+    #     kms_key_id: "arn:aws:kms:us-west-2:123456789012:key/abcd0000-7fca-4128-82f2-aabbccddeeff", 
+    #     percent_progress: 0, 
+    #     s3_bucket: "mybucket", 
+    #     snapshot_time: Time.parse("2020-03-27T20:48:42.023Z"), 
+    #     source_arn: "arn:aws:rds:us-west-2:123456789012:snapshot:db5-snapshot-test", 
+    #     status: "STARTING", 
+    #     total_extracted_data_in_gb: 0, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_export_task({
@@ -23594,6 +26427,23 @@ module Aws::RDS
     #   * {Types::StopActivityStreamResponse#kinesis_stream_name #kinesis_stream_name} => String
     #   * {Types::StopActivityStreamResponse#status #status} => String
     #
+    #
+    # @example Example: To stop a database activity stream
+    #
+    #   # The following example stops an activity stream in an Aurora cluster named my-pg-cluster.
+    #
+    #   resp = client.stop_activity_stream({
+    #     apply_immediately: true, 
+    #     resource_arn: "arn:aws:rds:us-east-1:1234567890123:cluster:my-pg-cluster", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     kinesis_stream_name: "aws-rds-das-cluster-0ABCDEFGHI1JKLM2NOPQ3R4S", 
+    #     kms_key_id: "arn:aws:kms:us-east-1:1234567890123:key/a12c345d-6ef7-890g-h123-456i789jk0l1", 
+    #     status: "stopping", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.stop_activity_stream({
@@ -23639,6 +26489,30 @@ module Aws::RDS
     # @return [Types::StopDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StopDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
+    #
+    #
+    # @example Example: To stop a DB cluster
+    #
+    #   # The following example stops a DB cluster and its DB instances.
+    #
+    #   resp = client.stop_db_cluster({
+    #     db_cluster_identifier: "mydbcluster", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster: {
+    #       allocated_storage: 1, 
+    #       availability_zones: [
+    #         "us-east-1a", 
+    #         "us-east-1e", 
+    #         "us-east-1b", 
+    #       ], 
+    #       backup_retention_period: 1, 
+    #       db_cluster_identifier: "mydbcluster", 
+    #       database_name: "mydb", 
+    #     }, # Some output ommitted.
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -23796,6 +26670,22 @@ module Aws::RDS
     # @return [Types::StopDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StopDBInstanceResult#db_instance #db_instance} => Types::DBInstance
+    #
+    #
+    # @example Example: To stop a DB instance
+    #
+    #   # The following example stops the specified DB instance.
+    #
+    #   resp = client.stop_db_instance({
+    #     db_instance_identifier: "test-instance", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_instance: {
+    #       db_instance_status: "stopping", 
+    #     }, # Some output ommitted.
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -23986,6 +26876,44 @@ module Aws::RDS
     #
     #   * {Types::StopDBInstanceAutomatedBackupsReplicationResult#db_instance_automated_backup #db_instance_automated_backup} => Types::DBInstanceAutomatedBackup
     #
+    #
+    # @example Example: To stop replicating automated backups
+    #
+    #   # The following example ends replication of automated backups. Replicated backups are retained according to the set backup
+    #   # retention period.
+    #
+    #   resp = client.stop_db_instance_automated_backups_replication({
+    #     source_db_instance_arn: "arn:aws:rds:us-east-1:123456789012:db:new-orcl-db", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_instance_automated_backup: {
+    #       allocated_storage: 20, 
+    #       backup_retention_period: 7, 
+    #       db_instance_arn: "arn:aws:rds:us-east-1:123456789012:db:new-orcl-db", 
+    #       db_instance_automated_backups_arn: "arn:aws:rds:us-west-2:123456789012:auto-backup:ab-jkib2gfq5rv7replzadausbrktni2bn4example", 
+    #       db_instance_identifier: "new-orcl-db", 
+    #       dbi_resource_id: "db-JKIB2GFQ5RV7REPLZA4EXAMPLE", 
+    #       encrypted: false, 
+    #       engine: "oracle-se2", 
+    #       engine_version: "12.1.0.2.v21", 
+    #       iam_database_authentication_enabled: false, 
+    #       instance_create_time: Time.parse("2020-12-04T15:28:31Z"), 
+    #       license_model: "bring-your-own-license", 
+    #       master_username: "admin", 
+    #       option_group_name: "default:oracle-se2-12-1", 
+    #       port: 1521, 
+    #       region: "us-east-1", 
+    #       restore_window: {
+    #         earliest_time: Time.parse("2020-12-04T23:13:21.030Z"), 
+    #         latest_time: Time.parse("2020-12-07T19:59:57Z"), 
+    #       }, 
+    #       status: "replicating", 
+    #       storage_type: "gp2", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.stop_db_instance_automated_backups_replication({
@@ -24069,6 +26997,139 @@ module Aws::RDS
     # @return [Types::SwitchoverBlueGreenDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SwitchoverBlueGreenDeploymentResponse#blue_green_deployment #blue_green_deployment} => Types::BlueGreenDeployment
+    #
+    #
+    # @example Example: To switch a blue/green deployment for an RDS DB instance
+    #
+    #   # The following example promotes the specified green environment as the new production environment.
+    #
+    #   resp = client.switchover_blue_green_deployment({
+    #     blue_green_deployment_identifier: "bgd-wi89nwzglccsfake", 
+    #     switchover_timeout: 300, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     blue_green_deployment: {
+    #       blue_green_deployment_identifier: "bgd-v53303651eexfake", 
+    #       blue_green_deployment_name: "bgd-cli-test-instance", 
+    #       create_time: Time.parse("2022-02-25T22:33:22.225000+00:00"), 
+    #       source: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance", 
+    #       status: "SWITCHOVER_IN_PROGRESS", 
+    #       switchover_details: [
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance", 
+    #           status: "AVAILABLE", 
+    #           target_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-green-blhi1e", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-replica-1", 
+    #           status: "AVAILABLE", 
+    #           target_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-replica-1-green-k5fv7u", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-replica-2", 
+    #           status: "AVAILABLE", 
+    #           target_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-replica-2-green-ggsh8m", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-replica-3", 
+    #           status: "AVAILABLE", 
+    #           target_member: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-replica-3-green-o2vwm0", 
+    #         }, 
+    #       ], 
+    #       target: "arn:aws:rds:us-east-1:123456789012:db:my-db-instance-green-blhi1e", 
+    #       tasks: [
+    #         {
+    #           name: "CREATING_READ_REPLICA_OF_SOURCE", 
+    #           status: "COMPLETED", 
+    #         }, 
+    #         {
+    #           name: "DB_ENGINE_VERSION_UPGRADE", 
+    #           status: "COMPLETED", 
+    #         }, 
+    #         {
+    #           name: "CONFIGURE_BACKUPS", 
+    #           status: "COMPLETED", 
+    #         }, 
+    #         {
+    #           name: "CREATING_TOPOLOGY_OF_SOURCE", 
+    #           status: "COMPLETED", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
+    # @example Example: To promote a blue/green deployment for an Aurora MySQL DB cluster
+    #
+    #   # The following example promotes the specified green environment as the new production environment.
+    #
+    #   resp = client.switchover_blue_green_deployment({
+    #     blue_green_deployment_identifier: "bgd-wi89nwzglccsfake", 
+    #     switchover_timeout: 300, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     blue_green_deployment: {
+    #       blue_green_deployment_identifier: "bgd-wi89nwzglccsfake", 
+    #       blue_green_deployment_name: "my-blue-green-deployment", 
+    #       create_time: Time.parse("2022-02-25T22:38:49.522000+00:00"), 
+    #       source: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster", 
+    #       status: "SWITCHOVER_IN_PROGRESS", 
+    #       switchover_details: [
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster", 
+    #           status: "AVAILABLE", 
+    #           target_member: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster-green-3ud8z6", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-1", 
+    #           status: "AVAILABLE", 
+    #           target_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-1-green-bvxc73", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-2", 
+    #           status: "AVAILABLE", 
+    #           target_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-2-green-7wc4ie", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-3", 
+    #           status: "AVAILABLE", 
+    #           target_member: "arn:aws:rds:us-east-1:123456789012:db:my-aurora-mysql-cluster-3-green-p4xxkz", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:cluster-endpoint:my-excluded-member-endpoint", 
+    #           status: "AVAILABLE", 
+    #           target_member: "arn:aws:rds:us-east-1:123456789012:cluster-endpoint:my-excluded-member-endpoint-green-np1ikl", 
+    #         }, 
+    #         {
+    #           source_member: "arn:aws:rds:us-east-1:123456789012:cluster-endpoint:my-reader-endpoint", 
+    #           status: "AVAILABLE", 
+    #           target_member: "arn:aws:rds:us-east-1:123456789012:cluster-endpoint:my-reader-endpoint-green-miszlf", 
+    #         }, 
+    #       ], 
+    #       target: "arn:aws:rds:us-east-1:123456789012:cluster:my-aurora-mysql-cluster-green-3ud8z6", 
+    #       tasks: [
+    #         {
+    #           name: "CREATING_READ_REPLICA_OF_SOURCE", 
+    #           status: "COMPLETED", 
+    #         }, 
+    #         {
+    #           name: "DB_ENGINE_VERSION_UPGRADE", 
+    #           status: "COMPLETED", 
+    #         }, 
+    #         {
+    #           name: "CREATE_DB_INSTANCES_FOR_CLUSTER", 
+    #           status: "COMPLETED", 
+    #         }, 
+    #         {
+    #           name: "CREATE_CUSTOM_ENDPOINTS", 
+    #           status: "COMPLETED", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -24306,7 +27367,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.174.0'
+      context[:gem_version] = '1.175.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

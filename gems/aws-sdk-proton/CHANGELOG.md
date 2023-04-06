@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2023-04-06)
+------------------
+
+* Feature - This release adds support for the AWS Proton service sync feature. Service sync enables managing an AWS Proton service (creating and updating instances) and all of it's corresponding service instances from a Git repository.
+
 1.23.0 (2023-02-03)
 ------------------
 

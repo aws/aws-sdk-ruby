@@ -1733,7 +1733,7 @@ module Aws::GreengrassV2
     #   resp.effective_deployments[0].iot_job_arn #=> String
     #   resp.effective_deployments[0].description #=> String
     #   resp.effective_deployments[0].target_arn #=> String
-    #   resp.effective_deployments[0].core_device_execution_status #=> String, one of "IN_PROGRESS", "QUEUED", "FAILED", "COMPLETED", "TIMED_OUT", "CANCELED", "REJECTED"
+    #   resp.effective_deployments[0].core_device_execution_status #=> String, one of "IN_PROGRESS", "QUEUED", "FAILED", "COMPLETED", "TIMED_OUT", "CANCELED", "REJECTED", "SUCCEEDED"
     #   resp.effective_deployments[0].reason #=> String
     #   resp.effective_deployments[0].creation_timestamp #=> Time
     #   resp.effective_deployments[0].modified_timestamp #=> Time
@@ -2092,7 +2092,7 @@ module Aws::GreengrassV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrassv2'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1285,13 +1285,15 @@ module Aws::RDS
     #
     #   * `aurora-postgresql`
     #
-    #   * `custom-oracle-ee (for RDS Custom for Oracle instances)`
+    #   * `custom-oracle-ee (for RDS Custom for Oracle DB instances)`
     #
-    #   * `custom-sqlserver-ee (for RDS Custom for SQL Server instances)`
+    #   * `custom-oracle-ee-cdb (for RDS Custom for Oracle DB instances)`
     #
-    #   * `custom-sqlserver-se (for RDS Custom for SQL Server instances)`
+    #   * `custom-sqlserver-ee (for RDS Custom for SQL Server DB instances)`
     #
-    #   * `custom-sqlserver-web (for RDS Custom for SQL Server instances)`
+    #   * `custom-sqlserver-se (for RDS Custom for SQL Server DB instances)`
+    #
+    #   * `custom-sqlserver-web (for RDS Custom for SQL Server DB instances)`
     #
     #   * `mariadb`
     #
@@ -2671,6 +2673,10 @@ module Aws::RDS
     #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
     #     Amazon Resource Names (ARNs). The results list only includes
     #     information about the DB clusters identified by these ARNs.
+    #
+    #   * `db-cluster-resource-id` - Accepts DB cluster resource identifiers.
+    #     The results list will only include information about the DB clusters
+    #     identified by these DB cluster resource identifiers.
     #
     #   * `domain` - Accepts Active Directory directory IDs. The results list
     #     only includes information about the DB clusters associated with
