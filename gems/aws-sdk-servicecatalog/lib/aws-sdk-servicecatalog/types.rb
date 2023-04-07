@@ -5092,6 +5092,8 @@ module Aws::ServiceCatalog
     #
     #   * `MARKETPLACE_CAR` - Amazon Web Services Marketplace Clusters and
     #     Amazon Web Services Resources
+    #
+    #   * `TERRAFORM_OPEN_SOURCE` - Terraform open source configuration file
     #   @return [String]
     #
     # @!attribute [rw] disable_template_validation

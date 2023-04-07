@@ -126,6 +126,8 @@ module Aws::Lambda
             Aws::Lambda::Endpoints::Invoke.build(context)
           when :invoke_async
             Aws::Lambda::Endpoints::InvokeAsync.build(context)
+          when :invoke_with_response_stream
+            Aws::Lambda::Endpoints::InvokeWithResponseStream.build(context)
           when :list_aliases
             Aws::Lambda::Endpoints::ListAliases.build(context)
           when :list_code_signing_configs

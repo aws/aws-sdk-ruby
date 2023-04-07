@@ -1114,6 +1114,9 @@ module Aws::QuickSight
     #           match_all_value: "SessionTagValue",
     #         },
     #       ],
+    #       tag_rule_configurations: [
+    #         ["SessionTagKey"],
+    #       ],
     #     },
     #     column_level_permission_rules: [
     #       {
@@ -1906,6 +1909,63 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Creates a refresh schedule for a dataset. You can create up to 5
+    # different schedules for a single dataset.
+    #
+    # @option params [required, String] :data_set_id
+    #   The ID of the dataset.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The Amazon Web Services account ID.
+    #
+    # @option params [required, Types::RefreshSchedule] :schedule
+    #   The refresh schedule.
+    #
+    # @return [Types::CreateRefreshScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRefreshScheduleResponse#status #status} => Integer
+    #   * {Types::CreateRefreshScheduleResponse#request_id #request_id} => String
+    #   * {Types::CreateRefreshScheduleResponse#schedule_id #schedule_id} => String
+    #   * {Types::CreateRefreshScheduleResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_refresh_schedule({
+    #     data_set_id: "ResourceId", # required
+    #     aws_account_id: "AwsAccountId", # required
+    #     schedule: { # required
+    #       schedule_id: "String", # required
+    #       schedule_frequency: { # required
+    #         interval: "MINUTE15", # required, accepts MINUTE15, MINUTE30, HOURLY, DAILY, WEEKLY, MONTHLY
+    #         refresh_on_day: {
+    #           day_of_week: "SUNDAY", # accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+    #           day_of_month: "DayOfMonth",
+    #         },
+    #         timezone: "String",
+    #         time_of_the_day: "String",
+    #       },
+    #       start_after_date_time: Time.now,
+    #       refresh_type: "INCREMENTAL_REFRESH", # required, accepts INCREMENTAL_REFRESH, FULL_REFRESH
+    #       arn: "Arn",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #   resp.schedule_id #=> String
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateRefreshSchedule AWS API Documentation
+    #
+    # @overload create_refresh_schedule(params = {})
+    # @param [Hash] params ({})
+    def create_refresh_schedule(params = {}, options = {})
+      req = build_request(:create_refresh_schedule, params)
+      req.send_request(options)
+    end
+
     # Creates a template either from a `TemplateDefinition` or from an
     # existing Amazon QuickSight analysis or template. You can use the
     # resulting template to create additional dashboards, templates, or
@@ -2467,6 +2527,40 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Deletes the dataset refresh properties of the dataset.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The Amazon Web Services account ID.
+    #
+    # @option params [required, String] :data_set_id
+    #   The ID of the dataset.
+    #
+    # @return [Types::DeleteDataSetRefreshPropertiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDataSetRefreshPropertiesResponse#request_id #request_id} => String
+    #   * {Types::DeleteDataSetRefreshPropertiesResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_data_set_refresh_properties({
+    #     aws_account_id: "AwsAccountId", # required
+    #     data_set_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteDataSetRefreshProperties AWS API Documentation
+    #
+    # @overload delete_data_set_refresh_properties(params = {})
+    # @param [Hash] params ({})
+    def delete_data_set_refresh_properties(params = {}, options = {})
+      req = build_request(:delete_data_set_refresh_properties, params)
+      req.send_request(options)
+    end
+
     # Deletes the data source permanently. This operation breaks all the
     # datasets that reference the deleted data source.
     #
@@ -2753,6 +2847,48 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def delete_namespace(params = {}, options = {})
       req = build_request(:delete_namespace, params)
+      req.send_request(options)
+    end
+
+    # Deletes a refresh schedule from a dataset.
+    #
+    # @option params [required, String] :data_set_id
+    #   The ID of the dataset.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The Amazon Web Services account ID.
+    #
+    # @option params [required, String] :schedule_id
+    #   The ID of the refresh schedule.
+    #
+    # @return [Types::DeleteRefreshScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRefreshScheduleResponse#status #status} => Integer
+    #   * {Types::DeleteRefreshScheduleResponse#request_id #request_id} => String
+    #   * {Types::DeleteRefreshScheduleResponse#schedule_id #schedule_id} => String
+    #   * {Types::DeleteRefreshScheduleResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_refresh_schedule({
+    #     data_set_id: "ResourceId", # required
+    #     aws_account_id: "AwsAccountId", # required
+    #     schedule_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #   resp.schedule_id #=> String
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteRefreshSchedule AWS API Documentation
+    #
+    # @overload delete_refresh_schedule(params = {})
+    # @param [Hash] params ({})
+    def delete_refresh_schedule(params = {}, options = {})
+      req = build_request(:delete_refresh_schedule, params)
       req.send_request(options)
     end
 
@@ -3651,6 +3787,9 @@ module Aws::QuickSight
     #   resp.data_set.row_level_permission_tag_configuration.tag_rules[0].column_name #=> String
     #   resp.data_set.row_level_permission_tag_configuration.tag_rules[0].tag_multi_value_delimiter #=> String
     #   resp.data_set.row_level_permission_tag_configuration.tag_rules[0].match_all_value #=> String
+    #   resp.data_set.row_level_permission_tag_configuration.tag_rule_configurations #=> Array
+    #   resp.data_set.row_level_permission_tag_configuration.tag_rule_configurations[0] #=> Array
+    #   resp.data_set.row_level_permission_tag_configuration.tag_rule_configurations[0][0] #=> String
     #   resp.data_set.column_level_permission_rules #=> Array
     #   resp.data_set.column_level_permission_rules[0].principals #=> Array
     #   resp.data_set.column_level_permission_rules[0].principals[0] #=> String
@@ -3714,6 +3853,44 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def describe_data_set_permissions(params = {}, options = {})
       req = build_request(:describe_data_set_permissions, params)
+      req.send_request(options)
+    end
+
+    # Describes the refresh properties of a dataset.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The Amazon Web Services account ID.
+    #
+    # @option params [required, String] :data_set_id
+    #   The ID of the dataset.
+    #
+    # @return [Types::DescribeDataSetRefreshPropertiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDataSetRefreshPropertiesResponse#request_id #request_id} => String
+    #   * {Types::DescribeDataSetRefreshPropertiesResponse#status #status} => Integer
+    #   * {Types::DescribeDataSetRefreshPropertiesResponse#data_set_refresh_properties #data_set_refresh_properties} => Types::DataSetRefreshProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_data_set_refresh_properties({
+    #     aws_account_id: "AwsAccountId", # required
+    #     data_set_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #   resp.data_set_refresh_properties.refresh_configuration.incremental_refresh.lookback_window.column_name #=> String
+    #   resp.data_set_refresh_properties.refresh_configuration.incremental_refresh.lookback_window.size #=> Integer
+    #   resp.data_set_refresh_properties.refresh_configuration.incremental_refresh.lookback_window.size_unit #=> String, one of "HOUR", "DAY", "WEEK"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDataSetRefreshProperties AWS API Documentation
+    #
+    # @overload describe_data_set_refresh_properties(params = {})
+    # @param [Hash] params ({})
+    def describe_data_set_refresh_properties(params = {}, options = {})
+      req = build_request(:describe_data_set_refresh_properties, params)
       req.send_request(options)
     end
 
@@ -4225,7 +4402,7 @@ module Aws::QuickSight
     #   resp.ingestion.arn #=> String
     #   resp.ingestion.ingestion_id #=> String
     #   resp.ingestion.ingestion_status #=> String, one of "INITIALIZED", "QUEUED", "RUNNING", "FAILED", "COMPLETED", "CANCELLED"
-    #   resp.ingestion.error_info.type #=> String, one of "FAILURE_TO_ASSUME_ROLE", "INGESTION_SUPERSEDED", "INGESTION_CANCELED", "DATA_SET_DELETED", "DATA_SET_NOT_SPICE", "S3_UPLOADED_FILE_DELETED", "S3_MANIFEST_ERROR", "DATA_TOLERANCE_EXCEPTION", "SPICE_TABLE_NOT_FOUND", "DATA_SET_SIZE_LIMIT_EXCEEDED", "ROW_SIZE_LIMIT_EXCEEDED", "ACCOUNT_CAPACITY_LIMIT_EXCEEDED", "CUSTOMER_ERROR", "DATA_SOURCE_NOT_FOUND", "IAM_ROLE_NOT_AVAILABLE", "CONNECTION_FAILURE", "SQL_TABLE_NOT_FOUND", "PERMISSION_DENIED", "SSL_CERTIFICATE_VALIDATION_FAILURE", "OAUTH_TOKEN_FAILURE", "SOURCE_API_LIMIT_EXCEEDED_FAILURE", "PASSWORD_AUTHENTICATION_FAILURE", "SQL_SCHEMA_MISMATCH_ERROR", "INVALID_DATE_FORMAT", "INVALID_DATAPREP_SYNTAX", "SOURCE_RESOURCE_LIMIT_EXCEEDED", "SQL_INVALID_PARAMETER_VALUE", "QUERY_TIMEOUT", "SQL_NUMERIC_OVERFLOW", "UNRESOLVABLE_HOST", "UNROUTABLE_HOST", "SQL_EXCEPTION", "S3_FILE_INACCESSIBLE", "IOT_FILE_NOT_FOUND", "IOT_DATA_SET_FILE_EMPTY", "INVALID_DATA_SOURCE_CONFIG", "DATA_SOURCE_AUTH_FAILED", "DATA_SOURCE_CONNECTION_FAILED", "FAILURE_TO_PROCESS_JSON_FILE", "INTERNAL_SERVICE_ERROR", "REFRESH_SUPPRESSED_BY_EDIT", "PERMISSION_NOT_FOUND", "ELASTICSEARCH_CURSOR_NOT_ENABLED", "CURSOR_NOT_ENABLED"
+    #   resp.ingestion.error_info.type #=> String, one of "FAILURE_TO_ASSUME_ROLE", "INGESTION_SUPERSEDED", "INGESTION_CANCELED", "DATA_SET_DELETED", "DATA_SET_NOT_SPICE", "S3_UPLOADED_FILE_DELETED", "S3_MANIFEST_ERROR", "DATA_TOLERANCE_EXCEPTION", "SPICE_TABLE_NOT_FOUND", "DATA_SET_SIZE_LIMIT_EXCEEDED", "ROW_SIZE_LIMIT_EXCEEDED", "ACCOUNT_CAPACITY_LIMIT_EXCEEDED", "CUSTOMER_ERROR", "DATA_SOURCE_NOT_FOUND", "IAM_ROLE_NOT_AVAILABLE", "CONNECTION_FAILURE", "SQL_TABLE_NOT_FOUND", "PERMISSION_DENIED", "SSL_CERTIFICATE_VALIDATION_FAILURE", "OAUTH_TOKEN_FAILURE", "SOURCE_API_LIMIT_EXCEEDED_FAILURE", "PASSWORD_AUTHENTICATION_FAILURE", "SQL_SCHEMA_MISMATCH_ERROR", "INVALID_DATE_FORMAT", "INVALID_DATAPREP_SYNTAX", "SOURCE_RESOURCE_LIMIT_EXCEEDED", "SQL_INVALID_PARAMETER_VALUE", "QUERY_TIMEOUT", "SQL_NUMERIC_OVERFLOW", "UNRESOLVABLE_HOST", "UNROUTABLE_HOST", "SQL_EXCEPTION", "S3_FILE_INACCESSIBLE", "IOT_FILE_NOT_FOUND", "IOT_DATA_SET_FILE_EMPTY", "INVALID_DATA_SOURCE_CONFIG", "DATA_SOURCE_AUTH_FAILED", "DATA_SOURCE_CONNECTION_FAILED", "FAILURE_TO_PROCESS_JSON_FILE", "INTERNAL_SERVICE_ERROR", "REFRESH_SUPPRESSED_BY_EDIT", "PERMISSION_NOT_FOUND", "ELASTICSEARCH_CURSOR_NOT_ENABLED", "CURSOR_NOT_ENABLED", "DUPLICATE_COLUMN_NAMES_FOUND"
     #   resp.ingestion.error_info.message #=> String
     #   resp.ingestion.row_info.rows_ingested #=> Integer
     #   resp.ingestion.row_info.rows_dropped #=> Integer
@@ -4326,6 +4503,56 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def describe_namespace(params = {}, options = {})
       req = build_request(:describe_namespace, params)
+      req.send_request(options)
+    end
+
+    # Provides a summary of a refresh schedule.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The Amazon Web Services account ID.
+    #
+    # @option params [required, String] :data_set_id
+    #   The ID of the dataset.
+    #
+    # @option params [required, String] :schedule_id
+    #   The ID of the refresh schedule.
+    #
+    # @return [Types::DescribeRefreshScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRefreshScheduleResponse#refresh_schedule #refresh_schedule} => Types::RefreshSchedule
+    #   * {Types::DescribeRefreshScheduleResponse#status #status} => Integer
+    #   * {Types::DescribeRefreshScheduleResponse#request_id #request_id} => String
+    #   * {Types::DescribeRefreshScheduleResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_refresh_schedule({
+    #     aws_account_id: "AwsAccountId", # required
+    #     data_set_id: "ResourceId", # required
+    #     schedule_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.refresh_schedule.schedule_id #=> String
+    #   resp.refresh_schedule.schedule_frequency.interval #=> String, one of "MINUTE15", "MINUTE30", "HOURLY", "DAILY", "WEEKLY", "MONTHLY"
+    #   resp.refresh_schedule.schedule_frequency.refresh_on_day.day_of_week #=> String, one of "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"
+    #   resp.refresh_schedule.schedule_frequency.refresh_on_day.day_of_month #=> String
+    #   resp.refresh_schedule.schedule_frequency.timezone #=> String
+    #   resp.refresh_schedule.schedule_frequency.time_of_the_day #=> String
+    #   resp.refresh_schedule.start_after_date_time #=> Time
+    #   resp.refresh_schedule.refresh_type #=> String, one of "INCREMENTAL_REFRESH", "FULL_REFRESH"
+    #   resp.refresh_schedule.arn #=> String
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeRefreshSchedule AWS API Documentation
+    #
+    # @overload describe_refresh_schedule(params = {})
+    # @param [Hash] params ({})
+    def describe_refresh_schedule(params = {}, options = {})
+      req = build_request(:describe_refresh_schedule, params)
       req.send_request(options)
     end
 
@@ -6018,7 +6245,7 @@ module Aws::QuickSight
     #   resp.ingestions[0].arn #=> String
     #   resp.ingestions[0].ingestion_id #=> String
     #   resp.ingestions[0].ingestion_status #=> String, one of "INITIALIZED", "QUEUED", "RUNNING", "FAILED", "COMPLETED", "CANCELLED"
-    #   resp.ingestions[0].error_info.type #=> String, one of "FAILURE_TO_ASSUME_ROLE", "INGESTION_SUPERSEDED", "INGESTION_CANCELED", "DATA_SET_DELETED", "DATA_SET_NOT_SPICE", "S3_UPLOADED_FILE_DELETED", "S3_MANIFEST_ERROR", "DATA_TOLERANCE_EXCEPTION", "SPICE_TABLE_NOT_FOUND", "DATA_SET_SIZE_LIMIT_EXCEEDED", "ROW_SIZE_LIMIT_EXCEEDED", "ACCOUNT_CAPACITY_LIMIT_EXCEEDED", "CUSTOMER_ERROR", "DATA_SOURCE_NOT_FOUND", "IAM_ROLE_NOT_AVAILABLE", "CONNECTION_FAILURE", "SQL_TABLE_NOT_FOUND", "PERMISSION_DENIED", "SSL_CERTIFICATE_VALIDATION_FAILURE", "OAUTH_TOKEN_FAILURE", "SOURCE_API_LIMIT_EXCEEDED_FAILURE", "PASSWORD_AUTHENTICATION_FAILURE", "SQL_SCHEMA_MISMATCH_ERROR", "INVALID_DATE_FORMAT", "INVALID_DATAPREP_SYNTAX", "SOURCE_RESOURCE_LIMIT_EXCEEDED", "SQL_INVALID_PARAMETER_VALUE", "QUERY_TIMEOUT", "SQL_NUMERIC_OVERFLOW", "UNRESOLVABLE_HOST", "UNROUTABLE_HOST", "SQL_EXCEPTION", "S3_FILE_INACCESSIBLE", "IOT_FILE_NOT_FOUND", "IOT_DATA_SET_FILE_EMPTY", "INVALID_DATA_SOURCE_CONFIG", "DATA_SOURCE_AUTH_FAILED", "DATA_SOURCE_CONNECTION_FAILED", "FAILURE_TO_PROCESS_JSON_FILE", "INTERNAL_SERVICE_ERROR", "REFRESH_SUPPRESSED_BY_EDIT", "PERMISSION_NOT_FOUND", "ELASTICSEARCH_CURSOR_NOT_ENABLED", "CURSOR_NOT_ENABLED"
+    #   resp.ingestions[0].error_info.type #=> String, one of "FAILURE_TO_ASSUME_ROLE", "INGESTION_SUPERSEDED", "INGESTION_CANCELED", "DATA_SET_DELETED", "DATA_SET_NOT_SPICE", "S3_UPLOADED_FILE_DELETED", "S3_MANIFEST_ERROR", "DATA_TOLERANCE_EXCEPTION", "SPICE_TABLE_NOT_FOUND", "DATA_SET_SIZE_LIMIT_EXCEEDED", "ROW_SIZE_LIMIT_EXCEEDED", "ACCOUNT_CAPACITY_LIMIT_EXCEEDED", "CUSTOMER_ERROR", "DATA_SOURCE_NOT_FOUND", "IAM_ROLE_NOT_AVAILABLE", "CONNECTION_FAILURE", "SQL_TABLE_NOT_FOUND", "PERMISSION_DENIED", "SSL_CERTIFICATE_VALIDATION_FAILURE", "OAUTH_TOKEN_FAILURE", "SOURCE_API_LIMIT_EXCEEDED_FAILURE", "PASSWORD_AUTHENTICATION_FAILURE", "SQL_SCHEMA_MISMATCH_ERROR", "INVALID_DATE_FORMAT", "INVALID_DATAPREP_SYNTAX", "SOURCE_RESOURCE_LIMIT_EXCEEDED", "SQL_INVALID_PARAMETER_VALUE", "QUERY_TIMEOUT", "SQL_NUMERIC_OVERFLOW", "UNRESOLVABLE_HOST", "UNROUTABLE_HOST", "SQL_EXCEPTION", "S3_FILE_INACCESSIBLE", "IOT_FILE_NOT_FOUND", "IOT_DATA_SET_FILE_EMPTY", "INVALID_DATA_SOURCE_CONFIG", "DATA_SOURCE_AUTH_FAILED", "DATA_SOURCE_CONNECTION_FAILED", "FAILURE_TO_PROCESS_JSON_FILE", "INTERNAL_SERVICE_ERROR", "REFRESH_SUPPRESSED_BY_EDIT", "PERMISSION_NOT_FOUND", "ELASTICSEARCH_CURSOR_NOT_ENABLED", "CURSOR_NOT_ENABLED", "DUPLICATE_COLUMN_NAMES_FOUND"
     #   resp.ingestions[0].error_info.message #=> String
     #   resp.ingestions[0].row_info.rows_ingested #=> Integer
     #   resp.ingestions[0].row_info.rows_dropped #=> Integer
@@ -6100,6 +6327,52 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def list_namespaces(params = {}, options = {})
       req = build_request(:list_namespaces, params)
+      req.send_request(options)
+    end
+
+    # Lists the refresh schedules of a dataset. Each dataset can have up to
+    # 5 schedules.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The Amazon Web Services account ID.
+    #
+    # @option params [required, String] :data_set_id
+    #   The ID of the dataset.
+    #
+    # @return [Types::ListRefreshSchedulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRefreshSchedulesResponse#refresh_schedules #refresh_schedules} => Array&lt;Types::RefreshSchedule&gt;
+    #   * {Types::ListRefreshSchedulesResponse#status #status} => Integer
+    #   * {Types::ListRefreshSchedulesResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_refresh_schedules({
+    #     aws_account_id: "AwsAccountId", # required
+    #     data_set_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.refresh_schedules #=> Array
+    #   resp.refresh_schedules[0].schedule_id #=> String
+    #   resp.refresh_schedules[0].schedule_frequency.interval #=> String, one of "MINUTE15", "MINUTE30", "HOURLY", "DAILY", "WEEKLY", "MONTHLY"
+    #   resp.refresh_schedules[0].schedule_frequency.refresh_on_day.day_of_week #=> String, one of "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"
+    #   resp.refresh_schedules[0].schedule_frequency.refresh_on_day.day_of_month #=> String
+    #   resp.refresh_schedules[0].schedule_frequency.timezone #=> String
+    #   resp.refresh_schedules[0].schedule_frequency.time_of_the_day #=> String
+    #   resp.refresh_schedules[0].start_after_date_time #=> Time
+    #   resp.refresh_schedules[0].refresh_type #=> String, one of "INCREMENTAL_REFRESH", "FULL_REFRESH"
+    #   resp.refresh_schedules[0].arn #=> String
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListRefreshSchedules AWS API Documentation
+    #
+    # @overload list_refresh_schedules(params = {})
+    # @param [Hash] params ({})
+    def list_refresh_schedules(params = {}, options = {})
+      req = build_request(:list_refresh_schedules, params)
       req.send_request(options)
     end
 
@@ -6586,6 +6859,54 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def list_users(params = {}, options = {})
       req = build_request(:list_users, params)
+      req.send_request(options)
+    end
+
+    # Creates or updates the dataset refresh properties for the dataset.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The Amazon Web Services account ID.
+    #
+    # @option params [required, String] :data_set_id
+    #   The ID of the dataset.
+    #
+    # @option params [required, Types::DataSetRefreshProperties] :data_set_refresh_properties
+    #   The dataset refresh properties.
+    #
+    # @return [Types::PutDataSetRefreshPropertiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutDataSetRefreshPropertiesResponse#request_id #request_id} => String
+    #   * {Types::PutDataSetRefreshPropertiesResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_data_set_refresh_properties({
+    #     aws_account_id: "AwsAccountId", # required
+    #     data_set_id: "ResourceId", # required
+    #     data_set_refresh_properties: { # required
+    #       refresh_configuration: { # required
+    #         incremental_refresh: { # required
+    #           lookback_window: { # required
+    #             column_name: "String", # required
+    #             size: 1, # required
+    #             size_unit: "HOUR", # required, accepts HOUR, DAY, WEEK
+    #           },
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PutDataSetRefreshProperties AWS API Documentation
+    #
+    # @overload put_data_set_refresh_properties(params = {})
+    # @param [Hash] params ({})
+    def put_data_set_refresh_properties(params = {}, options = {})
+      req = build_request(:put_data_set_refresh_properties, params)
       req.send_request(options)
     end
 
@@ -7971,6 +8292,9 @@ module Aws::QuickSight
     #           match_all_value: "SessionTagValue",
     #         },
     #       ],
+    #       tag_rule_configurations: [
+    #         ["SessionTagKey"],
+    #       ],
     #     },
     #     column_level_permission_rules: [
     #       {
@@ -8738,6 +9062,62 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Updates a refresh schedule for a dataset.
+    #
+    # @option params [required, String] :data_set_id
+    #   The ID of the dataset.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The Amazon Web Services account ID.
+    #
+    # @option params [required, Types::RefreshSchedule] :schedule
+    #   The refresh schedule.
+    #
+    # @return [Types::UpdateRefreshScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRefreshScheduleResponse#status #status} => Integer
+    #   * {Types::UpdateRefreshScheduleResponse#request_id #request_id} => String
+    #   * {Types::UpdateRefreshScheduleResponse#schedule_id #schedule_id} => String
+    #   * {Types::UpdateRefreshScheduleResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_refresh_schedule({
+    #     data_set_id: "ResourceId", # required
+    #     aws_account_id: "AwsAccountId", # required
+    #     schedule: { # required
+    #       schedule_id: "String", # required
+    #       schedule_frequency: { # required
+    #         interval: "MINUTE15", # required, accepts MINUTE15, MINUTE30, HOURLY, DAILY, WEEKLY, MONTHLY
+    #         refresh_on_day: {
+    #           day_of_week: "SUNDAY", # accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+    #           day_of_month: "DayOfMonth",
+    #         },
+    #         timezone: "String",
+    #         time_of_the_day: "String",
+    #       },
+    #       start_after_date_time: Time.now,
+    #       refresh_type: "INCREMENTAL_REFRESH", # required, accepts INCREMENTAL_REFRESH, FULL_REFRESH
+    #       arn: "Arn",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #   resp.schedule_id #=> String
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateRefreshSchedule AWS API Documentation
+    #
+    # @overload update_refresh_schedule(params = {})
+    # @param [Hash] params ({})
+    def update_refresh_schedule(params = {}, options = {})
+      req = build_request(:update_refresh_schedule, params)
+      req.send_request(options)
+    end
+
     # Updates a template from an existing Amazon QuickSight analysis or
     # another template.
     #
@@ -9331,7 +9711,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -220,6 +220,8 @@ module Aws::QuickSight
     CreateIngestionResponse = Shapes::StructureShape.new(name: 'CreateIngestionResponse')
     CreateNamespaceRequest = Shapes::StructureShape.new(name: 'CreateNamespaceRequest')
     CreateNamespaceResponse = Shapes::StructureShape.new(name: 'CreateNamespaceResponse')
+    CreateRefreshScheduleRequest = Shapes::StructureShape.new(name: 'CreateRefreshScheduleRequest')
+    CreateRefreshScheduleResponse = Shapes::StructureShape.new(name: 'CreateRefreshScheduleResponse')
     CreateTemplateAliasRequest = Shapes::StructureShape.new(name: 'CreateTemplateAliasRequest')
     CreateTemplateAliasResponse = Shapes::StructureShape.new(name: 'CreateTemplateAliasResponse')
     CreateTemplateRequest = Shapes::StructureShape.new(name: 'CreateTemplateRequest')
@@ -300,6 +302,7 @@ module Aws::QuickSight
     DataSetName = Shapes::StringShape.new(name: 'DataSetName')
     DataSetReference = Shapes::StructureShape.new(name: 'DataSetReference')
     DataSetReferenceList = Shapes::ListShape.new(name: 'DataSetReferenceList')
+    DataSetRefreshProperties = Shapes::StructureShape.new(name: 'DataSetRefreshProperties')
     DataSetSchema = Shapes::StructureShape.new(name: 'DataSetSchema')
     DataSetSearchFilter = Shapes::StructureShape.new(name: 'DataSetSearchFilter')
     DataSetSearchFilterList = Shapes::ListShape.new(name: 'DataSetSearchFilterList')
@@ -335,6 +338,8 @@ module Aws::QuickSight
     DateTimeParameterList = Shapes::ListShape.new(name: 'DateTimeParameterList')
     DateTimePickerControlDisplayOptions = Shapes::StructureShape.new(name: 'DateTimePickerControlDisplayOptions')
     DateTimeValueWhenUnsetConfiguration = Shapes::StructureShape.new(name: 'DateTimeValueWhenUnsetConfiguration')
+    DayOfMonth = Shapes::StringShape.new(name: 'DayOfMonth')
+    DayOfWeek = Shapes::StringShape.new(name: 'DayOfWeek')
     DecimalDefaultValueList = Shapes::ListShape.new(name: 'DecimalDefaultValueList')
     DecimalDefaultValues = Shapes::StructureShape.new(name: 'DecimalDefaultValues')
     DecimalParameter = Shapes::StructureShape.new(name: 'DecimalParameter')
@@ -357,6 +362,8 @@ module Aws::QuickSight
     DeleteAnalysisResponse = Shapes::StructureShape.new(name: 'DeleteAnalysisResponse')
     DeleteDashboardRequest = Shapes::StructureShape.new(name: 'DeleteDashboardRequest')
     DeleteDashboardResponse = Shapes::StructureShape.new(name: 'DeleteDashboardResponse')
+    DeleteDataSetRefreshPropertiesRequest = Shapes::StructureShape.new(name: 'DeleteDataSetRefreshPropertiesRequest')
+    DeleteDataSetRefreshPropertiesResponse = Shapes::StructureShape.new(name: 'DeleteDataSetRefreshPropertiesResponse')
     DeleteDataSetRequest = Shapes::StructureShape.new(name: 'DeleteDataSetRequest')
     DeleteDataSetResponse = Shapes::StructureShape.new(name: 'DeleteDataSetResponse')
     DeleteDataSourceRequest = Shapes::StructureShape.new(name: 'DeleteDataSourceRequest')
@@ -373,6 +380,8 @@ module Aws::QuickSight
     DeleteIAMPolicyAssignmentResponse = Shapes::StructureShape.new(name: 'DeleteIAMPolicyAssignmentResponse')
     DeleteNamespaceRequest = Shapes::StructureShape.new(name: 'DeleteNamespaceRequest')
     DeleteNamespaceResponse = Shapes::StructureShape.new(name: 'DeleteNamespaceResponse')
+    DeleteRefreshScheduleRequest = Shapes::StructureShape.new(name: 'DeleteRefreshScheduleRequest')
+    DeleteRefreshScheduleResponse = Shapes::StructureShape.new(name: 'DeleteRefreshScheduleResponse')
     DeleteTemplateAliasRequest = Shapes::StructureShape.new(name: 'DeleteTemplateAliasRequest')
     DeleteTemplateAliasResponse = Shapes::StructureShape.new(name: 'DeleteTemplateAliasResponse')
     DeleteTemplateRequest = Shapes::StructureShape.new(name: 'DeleteTemplateRequest')
@@ -406,6 +415,8 @@ module Aws::QuickSight
     DescribeDashboardResponse = Shapes::StructureShape.new(name: 'DescribeDashboardResponse')
     DescribeDataSetPermissionsRequest = Shapes::StructureShape.new(name: 'DescribeDataSetPermissionsRequest')
     DescribeDataSetPermissionsResponse = Shapes::StructureShape.new(name: 'DescribeDataSetPermissionsResponse')
+    DescribeDataSetRefreshPropertiesRequest = Shapes::StructureShape.new(name: 'DescribeDataSetRefreshPropertiesRequest')
+    DescribeDataSetRefreshPropertiesResponse = Shapes::StructureShape.new(name: 'DescribeDataSetRefreshPropertiesResponse')
     DescribeDataSetRequest = Shapes::StructureShape.new(name: 'DescribeDataSetRequest')
     DescribeDataSetResponse = Shapes::StructureShape.new(name: 'DescribeDataSetResponse')
     DescribeDataSourcePermissionsRequest = Shapes::StructureShape.new(name: 'DescribeDataSourcePermissionsRequest')
@@ -430,6 +441,8 @@ module Aws::QuickSight
     DescribeIpRestrictionResponse = Shapes::StructureShape.new(name: 'DescribeIpRestrictionResponse')
     DescribeNamespaceRequest = Shapes::StructureShape.new(name: 'DescribeNamespaceRequest')
     DescribeNamespaceResponse = Shapes::StructureShape.new(name: 'DescribeNamespaceResponse')
+    DescribeRefreshScheduleRequest = Shapes::StructureShape.new(name: 'DescribeRefreshScheduleRequest')
+    DescribeRefreshScheduleResponse = Shapes::StructureShape.new(name: 'DescribeRefreshScheduleResponse')
     DescribeTemplateAliasRequest = Shapes::StructureShape.new(name: 'DescribeTemplateAliasRequest')
     DescribeTemplateAliasResponse = Shapes::StructureShape.new(name: 'DescribeTemplateAliasResponse')
     DescribeTemplateDefinitionRequest = Shapes::StructureShape.new(name: 'DescribeTemplateDefinitionRequest')
@@ -657,6 +670,7 @@ module Aws::QuickSight
     IdentityStore = Shapes::StringShape.new(name: 'IdentityStore')
     IdentityType = Shapes::StringShape.new(name: 'IdentityType')
     IdentityTypeNotSupportedException = Shapes::StructureShape.new(name: 'IdentityTypeNotSupportedException')
+    IncrementalRefresh = Shapes::StructureShape.new(name: 'IncrementalRefresh')
     Ingestion = Shapes::StructureShape.new(name: 'Ingestion')
     IngestionErrorType = Shapes::StringShape.new(name: 'IngestionErrorType')
     IngestionId = Shapes::StringShape.new(name: 'IngestionId')
@@ -754,6 +768,8 @@ module Aws::QuickSight
     ListIngestionsResponse = Shapes::StructureShape.new(name: 'ListIngestionsResponse')
     ListNamespacesRequest = Shapes::StructureShape.new(name: 'ListNamespacesRequest')
     ListNamespacesResponse = Shapes::StructureShape.new(name: 'ListNamespacesResponse')
+    ListRefreshSchedulesRequest = Shapes::StructureShape.new(name: 'ListRefreshSchedulesRequest')
+    ListRefreshSchedulesResponse = Shapes::StructureShape.new(name: 'ListRefreshSchedulesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListTemplateAliasesRequest = Shapes::StructureShape.new(name: 'ListTemplateAliasesRequest')
@@ -784,6 +800,8 @@ module Aws::QuickSight
     LongPlainText = Shapes::StringShape.new(name: 'LongPlainText')
     LongRichText = Shapes::StringShape.new(name: 'LongRichText')
     Longitude = Shapes::FloatShape.new(name: 'Longitude')
+    LookbackWindow = Shapes::StructureShape.new(name: 'LookbackWindow')
+    LookbackWindowSizeUnit = Shapes::StringShape.new(name: 'LookbackWindowSizeUnit')
     ManifestFileLocation = Shapes::StructureShape.new(name: 'ManifestFileLocation')
     MapZoomMode = Shapes::StringShape.new(name: 'MapZoomMode')
     MarginStyle = Shapes::StructureShape.new(name: 'MarginStyle')
@@ -910,6 +928,7 @@ module Aws::QuickSight
     PixelLength = Shapes::StringShape.new(name: 'PixelLength')
     Port = Shapes::IntegerShape.new(name: 'Port')
     PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
+    PositiveLong = Shapes::IntegerShape.new(name: 'PositiveLong')
     PostgreSqlParameters = Shapes::StructureShape.new(name: 'PostgreSqlParameters')
     PreconditionNotMetException = Shapes::StructureShape.new(name: 'PreconditionNotMetException')
     PredefinedHierarchy = Shapes::StructureShape.new(name: 'PredefinedHierarchy')
@@ -923,6 +942,8 @@ module Aws::QuickSight
     ProgressBarOptions = Shapes::StructureShape.new(name: 'ProgressBarOptions')
     ProjectOperation = Shapes::StructureShape.new(name: 'ProjectOperation')
     ProjectedColumnList = Shapes::ListShape.new(name: 'ProjectedColumnList')
+    PutDataSetRefreshPropertiesRequest = Shapes::StructureShape.new(name: 'PutDataSetRefreshPropertiesRequest')
+    PutDataSetRefreshPropertiesResponse = Shapes::StructureShape.new(name: 'PutDataSetRefreshPropertiesResponse')
     Query = Shapes::StringShape.new(name: 'Query')
     QueueInfo = Shapes::StructureShape.new(name: 'QueueInfo')
     QuickSightUserNotFoundException = Shapes::StructureShape.new(name: 'QuickSightUserNotFoundException')
@@ -955,6 +976,11 @@ module Aws::QuickSight
     ReferenceLineStyleConfiguration = Shapes::StructureShape.new(name: 'ReferenceLineStyleConfiguration')
     ReferenceLineValueLabelConfiguration = Shapes::StructureShape.new(name: 'ReferenceLineValueLabelConfiguration')
     ReferenceLineValueLabelRelativePosition = Shapes::StringShape.new(name: 'ReferenceLineValueLabelRelativePosition')
+    RefreshConfiguration = Shapes::StructureShape.new(name: 'RefreshConfiguration')
+    RefreshFrequency = Shapes::StructureShape.new(name: 'RefreshFrequency')
+    RefreshInterval = Shapes::StringShape.new(name: 'RefreshInterval')
+    RefreshSchedule = Shapes::StructureShape.new(name: 'RefreshSchedule')
+    RefreshSchedules = Shapes::ListShape.new(name: 'RefreshSchedules')
     RegisterUserRequest = Shapes::StructureShape.new(name: 'RegisterUserRequest')
     RegisterUserResponse = Shapes::StructureShape.new(name: 'RegisterUserResponse')
     RegisteredUserConsoleFeatureConfigurations = Shapes::StructureShape.new(name: 'RegisteredUserConsoleFeatureConfigurations')
@@ -998,6 +1024,8 @@ module Aws::QuickSight
     RowLevelPermissionTagConfiguration = Shapes::StructureShape.new(name: 'RowLevelPermissionTagConfiguration')
     RowLevelPermissionTagDelimiter = Shapes::StringShape.new(name: 'RowLevelPermissionTagDelimiter')
     RowLevelPermissionTagRule = Shapes::StructureShape.new(name: 'RowLevelPermissionTagRule')
+    RowLevelPermissionTagRuleConfiguration = Shapes::ListShape.new(name: 'RowLevelPermissionTagRuleConfiguration')
+    RowLevelPermissionTagRuleConfigurationList = Shapes::ListShape.new(name: 'RowLevelPermissionTagRuleConfigurationList')
     RowLevelPermissionTagRuleList = Shapes::ListShape.new(name: 'RowLevelPermissionTagRuleList')
     RowSortList = Shapes::ListShape.new(name: 'RowSortList')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
@@ -1015,6 +1043,7 @@ module Aws::QuickSight
     ScatterPlotFieldWells = Shapes::StructureShape.new(name: 'ScatterPlotFieldWells')
     ScatterPlotUnaggregatedFieldWells = Shapes::StructureShape.new(name: 'ScatterPlotUnaggregatedFieldWells')
     ScatterPlotVisual = Shapes::StructureShape.new(name: 'ScatterPlotVisual')
+    ScheduleRefreshOnEntity = Shapes::StructureShape.new(name: 'ScheduleRefreshOnEntity')
     ScrollBarOptions = Shapes::StructureShape.new(name: 'ScrollBarOptions')
     SearchAnalysesRequest = Shapes::StructureShape.new(name: 'SearchAnalysesRequest')
     SearchAnalysesResponse = Shapes::StructureShape.new(name: 'SearchAnalysesResponse')
@@ -1295,6 +1324,8 @@ module Aws::QuickSight
     UpdateLinkPermissionList = Shapes::ListShape.new(name: 'UpdateLinkPermissionList')
     UpdatePublicSharingSettingsRequest = Shapes::StructureShape.new(name: 'UpdatePublicSharingSettingsRequest')
     UpdatePublicSharingSettingsResponse = Shapes::StructureShape.new(name: 'UpdatePublicSharingSettingsResponse')
+    UpdateRefreshScheduleRequest = Shapes::StructureShape.new(name: 'UpdateRefreshScheduleRequest')
+    UpdateRefreshScheduleResponse = Shapes::StructureShape.new(name: 'UpdateRefreshScheduleResponse')
     UpdateResourcePermissionList = Shapes::ListShape.new(name: 'UpdateResourcePermissionList')
     UpdateTemplateAliasRequest = Shapes::StructureShape.new(name: 'UpdateTemplateAliasRequest')
     UpdateTemplateAliasResponse = Shapes::StructureShape.new(name: 'UpdateTemplateAliasResponse')
@@ -2172,6 +2203,17 @@ module Aws::QuickSight
     CreateNamespaceResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     CreateNamespaceResponse.struct_class = Types::CreateNamespaceResponse
 
+    CreateRefreshScheduleRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "DataSetId"))
+    CreateRefreshScheduleRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    CreateRefreshScheduleRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: RefreshSchedule, required: true, location_name: "Schedule"))
+    CreateRefreshScheduleRequest.struct_class = Types::CreateRefreshScheduleRequest
+
+    CreateRefreshScheduleResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    CreateRefreshScheduleResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    CreateRefreshScheduleResponse.add_member(:schedule_id, Shapes::ShapeRef.new(shape: String, location_name: "ScheduleId"))
+    CreateRefreshScheduleResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    CreateRefreshScheduleResponse.struct_class = Types::CreateRefreshScheduleResponse
+
     CreateTemplateAliasRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     CreateTemplateAliasRequest.add_member(:template_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "TemplateId"))
     CreateTemplateAliasRequest.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, required: true, location: "uri", location_name: "AliasName"))
@@ -2507,6 +2549,9 @@ module Aws::QuickSight
 
     DataSetReferenceList.member = Shapes::ShapeRef.new(shape: DataSetReference)
 
+    DataSetRefreshProperties.add_member(:refresh_configuration, Shapes::ShapeRef.new(shape: RefreshConfiguration, required: true, location_name: "RefreshConfiguration"))
+    DataSetRefreshProperties.struct_class = Types::DataSetRefreshProperties
+
     DataSetSchema.add_member(:column_schema_list, Shapes::ShapeRef.new(shape: ColumnSchemaList, location_name: "ColumnSchemaList"))
     DataSetSchema.struct_class = Types::DataSetSchema
 
@@ -2746,6 +2791,14 @@ module Aws::QuickSight
     DeleteDashboardResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DeleteDashboardResponse.struct_class = Types::DeleteDashboardResponse
 
+    DeleteDataSetRefreshPropertiesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DeleteDataSetRefreshPropertiesRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "DataSetId"))
+    DeleteDataSetRefreshPropertiesRequest.struct_class = Types::DeleteDataSetRefreshPropertiesRequest
+
+    DeleteDataSetRefreshPropertiesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DeleteDataSetRefreshPropertiesResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DeleteDataSetRefreshPropertiesResponse.struct_class = Types::DeleteDataSetRefreshPropertiesResponse
+
     DeleteDataSetRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DeleteDataSetRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "DataSetId"))
     DeleteDataSetRequest.struct_class = Types::DeleteDataSetRequest
@@ -2822,6 +2875,17 @@ module Aws::QuickSight
     DeleteNamespaceResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DeleteNamespaceResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DeleteNamespaceResponse.struct_class = Types::DeleteNamespaceResponse
+
+    DeleteRefreshScheduleRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "DataSetId"))
+    DeleteRefreshScheduleRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DeleteRefreshScheduleRequest.add_member(:schedule_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "ScheduleId"))
+    DeleteRefreshScheduleRequest.struct_class = Types::DeleteRefreshScheduleRequest
+
+    DeleteRefreshScheduleResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DeleteRefreshScheduleResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DeleteRefreshScheduleResponse.add_member(:schedule_id, Shapes::ShapeRef.new(shape: String, location_name: "ScheduleId"))
+    DeleteRefreshScheduleResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    DeleteRefreshScheduleResponse.struct_class = Types::DeleteRefreshScheduleResponse
 
     DeleteTemplateAliasRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DeleteTemplateAliasRequest.add_member(:template_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "TemplateId"))
@@ -3001,6 +3065,15 @@ module Aws::QuickSight
     DescribeDataSetPermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DescribeDataSetPermissionsResponse.struct_class = Types::DescribeDataSetPermissionsResponse
 
+    DescribeDataSetRefreshPropertiesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeDataSetRefreshPropertiesRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "DataSetId"))
+    DescribeDataSetRefreshPropertiesRequest.struct_class = Types::DescribeDataSetRefreshPropertiesRequest
+
+    DescribeDataSetRefreshPropertiesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeDataSetRefreshPropertiesResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeDataSetRefreshPropertiesResponse.add_member(:data_set_refresh_properties, Shapes::ShapeRef.new(shape: DataSetRefreshProperties, location_name: "DataSetRefreshProperties"))
+    DescribeDataSetRefreshPropertiesResponse.struct_class = Types::DescribeDataSetRefreshPropertiesResponse
+
     DescribeDataSetRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DescribeDataSetRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "DataSetId"))
     DescribeDataSetRequest.struct_class = Types::DescribeDataSetRequest
@@ -3120,6 +3193,17 @@ module Aws::QuickSight
     DescribeNamespaceResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DescribeNamespaceResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DescribeNamespaceResponse.struct_class = Types::DescribeNamespaceResponse
+
+    DescribeRefreshScheduleRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeRefreshScheduleRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "DataSetId"))
+    DescribeRefreshScheduleRequest.add_member(:schedule_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "ScheduleId"))
+    DescribeRefreshScheduleRequest.struct_class = Types::DescribeRefreshScheduleRequest
+
+    DescribeRefreshScheduleResponse.add_member(:refresh_schedule, Shapes::ShapeRef.new(shape: RefreshSchedule, location_name: "RefreshSchedule"))
+    DescribeRefreshScheduleResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeRefreshScheduleResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeRefreshScheduleResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    DescribeRefreshScheduleResponse.struct_class = Types::DescribeRefreshScheduleResponse
 
     DescribeTemplateAliasRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DescribeTemplateAliasRequest.add_member(:template_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "TemplateId"))
@@ -3946,6 +4030,9 @@ module Aws::QuickSight
     IdentityTypeNotSupportedException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     IdentityTypeNotSupportedException.struct_class = Types::IdentityTypeNotSupportedException
 
+    IncrementalRefresh.add_member(:lookback_window, Shapes::ShapeRef.new(shape: LookbackWindow, required: true, location_name: "LookbackWindow"))
+    IncrementalRefresh.struct_class = Types::IncrementalRefresh
+
     Ingestion.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
     Ingestion.add_member(:ingestion_id, Shapes::ShapeRef.new(shape: IngestionId, location_name: "IngestionId"))
     Ingestion.add_member(:ingestion_status, Shapes::ShapeRef.new(shape: IngestionStatus, required: true, location_name: "IngestionStatus"))
@@ -4349,6 +4436,15 @@ module Aws::QuickSight
     ListNamespacesResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     ListNamespacesResponse.struct_class = Types::ListNamespacesResponse
 
+    ListRefreshSchedulesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    ListRefreshSchedulesRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "DataSetId"))
+    ListRefreshSchedulesRequest.struct_class = Types::ListRefreshSchedulesRequest
+
+    ListRefreshSchedulesResponse.add_member(:refresh_schedules, Shapes::ShapeRef.new(shape: RefreshSchedules, location_name: "RefreshSchedules"))
+    ListRefreshSchedulesResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    ListRefreshSchedulesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    ListRefreshSchedulesResponse.struct_class = Types::ListRefreshSchedulesResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "ResourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -4475,6 +4571,11 @@ module Aws::QuickSight
     LongFormatText.add_member(:plain_text, Shapes::ShapeRef.new(shape: LongPlainText, location_name: "PlainText"))
     LongFormatText.add_member(:rich_text, Shapes::ShapeRef.new(shape: LongRichText, location_name: "RichText"))
     LongFormatText.struct_class = Types::LongFormatText
+
+    LookbackWindow.add_member(:column_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ColumnName"))
+    LookbackWindow.add_member(:size, Shapes::ShapeRef.new(shape: PositiveLong, required: true, location_name: "Size"))
+    LookbackWindow.add_member(:size_unit, Shapes::ShapeRef.new(shape: LookbackWindowSizeUnit, required: true, location_name: "SizeUnit"))
+    LookbackWindow.struct_class = Types::LookbackWindow
 
     ManifestFileLocation.add_member(:bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "Bucket"))
     ManifestFileLocation.add_member(:key, Shapes::ShapeRef.new(shape: S3Key, required: true, location_name: "Key"))
@@ -4943,6 +5044,15 @@ module Aws::QuickSight
 
     ProjectedColumnList.member = Shapes::ShapeRef.new(shape: String)
 
+    PutDataSetRefreshPropertiesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    PutDataSetRefreshPropertiesRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "DataSetId"))
+    PutDataSetRefreshPropertiesRequest.add_member(:data_set_refresh_properties, Shapes::ShapeRef.new(shape: DataSetRefreshProperties, required: true, location_name: "DataSetRefreshProperties"))
+    PutDataSetRefreshPropertiesRequest.struct_class = Types::PutDataSetRefreshPropertiesRequest
+
+    PutDataSetRefreshPropertiesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    PutDataSetRefreshPropertiesResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    PutDataSetRefreshPropertiesResponse.struct_class = Types::PutDataSetRefreshPropertiesResponse
+
     QueueInfo.add_member(:waiting_on_ingestion, Shapes::ShapeRef.new(shape: String, required: true, location_name: "WaitingOnIngestion"))
     QueueInfo.add_member(:queued_ingestion, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueuedIngestion"))
     QueueInfo.struct_class = Types::QueueInfo
@@ -5053,6 +5163,24 @@ module Aws::QuickSight
     ReferenceLineValueLabelConfiguration.add_member(:relative_position, Shapes::ShapeRef.new(shape: ReferenceLineValueLabelRelativePosition, location_name: "RelativePosition"))
     ReferenceLineValueLabelConfiguration.add_member(:format_configuration, Shapes::ShapeRef.new(shape: NumericFormatConfiguration, location_name: "FormatConfiguration"))
     ReferenceLineValueLabelConfiguration.struct_class = Types::ReferenceLineValueLabelConfiguration
+
+    RefreshConfiguration.add_member(:incremental_refresh, Shapes::ShapeRef.new(shape: IncrementalRefresh, required: true, location_name: "IncrementalRefresh"))
+    RefreshConfiguration.struct_class = Types::RefreshConfiguration
+
+    RefreshFrequency.add_member(:interval, Shapes::ShapeRef.new(shape: RefreshInterval, required: true, location_name: "Interval"))
+    RefreshFrequency.add_member(:refresh_on_day, Shapes::ShapeRef.new(shape: ScheduleRefreshOnEntity, location_name: "RefreshOnDay"))
+    RefreshFrequency.add_member(:timezone, Shapes::ShapeRef.new(shape: String, location_name: "Timezone"))
+    RefreshFrequency.add_member(:time_of_the_day, Shapes::ShapeRef.new(shape: String, location_name: "TimeOfTheDay"))
+    RefreshFrequency.struct_class = Types::RefreshFrequency
+
+    RefreshSchedule.add_member(:schedule_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ScheduleId"))
+    RefreshSchedule.add_member(:schedule_frequency, Shapes::ShapeRef.new(shape: RefreshFrequency, required: true, location_name: "ScheduleFrequency"))
+    RefreshSchedule.add_member(:start_after_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartAfterDateTime"))
+    RefreshSchedule.add_member(:refresh_type, Shapes::ShapeRef.new(shape: IngestionType, required: true, location_name: "RefreshType"))
+    RefreshSchedule.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    RefreshSchedule.struct_class = Types::RefreshSchedule
+
+    RefreshSchedules.member = Shapes::ShapeRef.new(shape: RefreshSchedule)
 
     RegisterUserRequest.add_member(:identity_type, Shapes::ShapeRef.new(shape: IdentityType, required: true, location_name: "IdentityType"))
     RegisterUserRequest.add_member(:email, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Email"))
@@ -5182,6 +5310,7 @@ module Aws::QuickSight
 
     RowLevelPermissionTagConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
     RowLevelPermissionTagConfiguration.add_member(:tag_rules, Shapes::ShapeRef.new(shape: RowLevelPermissionTagRuleList, required: true, location_name: "TagRules"))
+    RowLevelPermissionTagConfiguration.add_member(:tag_rule_configurations, Shapes::ShapeRef.new(shape: RowLevelPermissionTagRuleConfigurationList, location_name: "TagRuleConfigurations"))
     RowLevelPermissionTagConfiguration.struct_class = Types::RowLevelPermissionTagConfiguration
 
     RowLevelPermissionTagRule.add_member(:tag_key, Shapes::ShapeRef.new(shape: SessionTagKey, required: true, location_name: "TagKey"))
@@ -5189,6 +5318,10 @@ module Aws::QuickSight
     RowLevelPermissionTagRule.add_member(:tag_multi_value_delimiter, Shapes::ShapeRef.new(shape: RowLevelPermissionTagDelimiter, location_name: "TagMultiValueDelimiter"))
     RowLevelPermissionTagRule.add_member(:match_all_value, Shapes::ShapeRef.new(shape: SessionTagValue, location_name: "MatchAllValue"))
     RowLevelPermissionTagRule.struct_class = Types::RowLevelPermissionTagRule
+
+    RowLevelPermissionTagRuleConfiguration.member = Shapes::ShapeRef.new(shape: SessionTagKey)
+
+    RowLevelPermissionTagRuleConfigurationList.member = Shapes::ShapeRef.new(shape: RowLevelPermissionTagRuleConfiguration)
 
     RowLevelPermissionTagRuleList.member = Shapes::ShapeRef.new(shape: RowLevelPermissionTagRule)
 
@@ -5265,6 +5398,10 @@ module Aws::QuickSight
     ScatterPlotVisual.add_member(:actions, Shapes::ShapeRef.new(shape: VisualCustomActionList, location_name: "Actions"))
     ScatterPlotVisual.add_member(:column_hierarchies, Shapes::ShapeRef.new(shape: ColumnHierarchyList, location_name: "ColumnHierarchies"))
     ScatterPlotVisual.struct_class = Types::ScatterPlotVisual
+
+    ScheduleRefreshOnEntity.add_member(:day_of_week, Shapes::ShapeRef.new(shape: DayOfWeek, location_name: "DayOfWeek"))
+    ScheduleRefreshOnEntity.add_member(:day_of_month, Shapes::ShapeRef.new(shape: DayOfMonth, location_name: "DayOfMonth"))
+    ScheduleRefreshOnEntity.struct_class = Types::ScheduleRefreshOnEntity
 
     ScrollBarOptions.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
     ScrollBarOptions.add_member(:visible_range, Shapes::ShapeRef.new(shape: VisibleRangeOptions, location_name: "VisibleRange"))
@@ -6297,6 +6434,17 @@ module Aws::QuickSight
     UpdatePublicSharingSettingsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     UpdatePublicSharingSettingsResponse.struct_class = Types::UpdatePublicSharingSettingsResponse
 
+    UpdateRefreshScheduleRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "DataSetId"))
+    UpdateRefreshScheduleRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateRefreshScheduleRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: RefreshSchedule, required: true, location_name: "Schedule"))
+    UpdateRefreshScheduleRequest.struct_class = Types::UpdateRefreshScheduleRequest
+
+    UpdateRefreshScheduleResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    UpdateRefreshScheduleResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdateRefreshScheduleResponse.add_member(:schedule_id, Shapes::ShapeRef.new(shape: String, location_name: "ScheduleId"))
+    UpdateRefreshScheduleResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    UpdateRefreshScheduleResponse.struct_class = Types::UpdateRefreshScheduleResponse
+
     UpdateResourcePermissionList.member = Shapes::ShapeRef.new(shape: ResourcePermission)
 
     UpdateTemplateAliasRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -6809,6 +6957,22 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)
 
+      api.add_operation(:create_refresh_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRefreshSchedule"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-schedules"
+        o.input = Shapes::ShapeRef.new(shape: CreateRefreshScheduleRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRefreshScheduleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:create_template, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateTemplate"
         o.http_method = "POST"
@@ -6945,6 +7109,21 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:delete_data_set_refresh_properties, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDataSetRefreshProperties"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-properties"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDataSetRefreshPropertiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDataSetRefreshPropertiesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:delete_data_source, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDataSource"
         o.http_method = "DELETE"
@@ -7046,6 +7225,20 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
+      api.add_operation(:delete_refresh_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRefreshSchedule"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-schedules/{ScheduleId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRefreshScheduleRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRefreshScheduleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:delete_template, Seahorse::Model::Operation.new.tap do |o|
@@ -7289,6 +7482,21 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:describe_data_set_refresh_properties, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDataSetRefreshProperties"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-properties"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDataSetRefreshPropertiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDataSetRefreshPropertiesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:describe_data_source, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeDataSource"
         o.http_method = "GET"
@@ -7440,6 +7648,20 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
+      api.add_operation(:describe_refresh_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRefreshSchedule"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-schedules/{ScheduleId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRefreshScheduleRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRefreshScheduleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:describe_template, Seahorse::Model::Operation.new.tap do |o|
@@ -7856,6 +8078,20 @@ module Aws::QuickSight
         )
       end)
 
+      api.add_operation(:list_refresh_schedules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRefreshSchedules"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-schedules"
+        o.input = Shapes::ShapeRef.new(shape: ListRefreshSchedulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRefreshSchedulesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -8014,6 +8250,22 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
+      api.add_operation(:put_data_set_refresh_properties, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutDataSetRefreshProperties"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-properties"
+        o.input = Shapes::ShapeRef.new(shape: PutDataSetRefreshPropertiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutDataSetRefreshPropertiesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:register_user, Seahorse::Model::Operation.new.tap do |o|
@@ -8433,6 +8685,21 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedPricingPlanException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_refresh_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRefreshSchedule"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-schedules"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRefreshScheduleRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRefreshScheduleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 

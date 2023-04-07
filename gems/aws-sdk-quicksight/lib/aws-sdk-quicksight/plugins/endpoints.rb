@@ -84,6 +84,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::CreateIngestion.build(context)
           when :create_namespace
             Aws::QuickSight::Endpoints::CreateNamespace.build(context)
+          when :create_refresh_schedule
+            Aws::QuickSight::Endpoints::CreateRefreshSchedule.build(context)
           when :create_template
             Aws::QuickSight::Endpoints::CreateTemplate.build(context)
           when :create_template_alias
@@ -102,6 +104,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::DeleteDashboard.build(context)
           when :delete_data_set
             Aws::QuickSight::Endpoints::DeleteDataSet.build(context)
+          when :delete_data_set_refresh_properties
+            Aws::QuickSight::Endpoints::DeleteDataSetRefreshProperties.build(context)
           when :delete_data_source
             Aws::QuickSight::Endpoints::DeleteDataSource.build(context)
           when :delete_folder
@@ -116,6 +120,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::DeleteIAMPolicyAssignment.build(context)
           when :delete_namespace
             Aws::QuickSight::Endpoints::DeleteNamespace.build(context)
+          when :delete_refresh_schedule
+            Aws::QuickSight::Endpoints::DeleteRefreshSchedule.build(context)
           when :delete_template
             Aws::QuickSight::Endpoints::DeleteTemplate.build(context)
           when :delete_template_alias
@@ -150,6 +156,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::DescribeDataSet.build(context)
           when :describe_data_set_permissions
             Aws::QuickSight::Endpoints::DescribeDataSetPermissions.build(context)
+          when :describe_data_set_refresh_properties
+            Aws::QuickSight::Endpoints::DescribeDataSetRefreshProperties.build(context)
           when :describe_data_source
             Aws::QuickSight::Endpoints::DescribeDataSource.build(context)
           when :describe_data_source_permissions
@@ -172,6 +180,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::DescribeIpRestriction.build(context)
           when :describe_namespace
             Aws::QuickSight::Endpoints::DescribeNamespace.build(context)
+          when :describe_refresh_schedule
+            Aws::QuickSight::Endpoints::DescribeRefreshSchedule.build(context)
           when :describe_template
             Aws::QuickSight::Endpoints::DescribeTemplate.build(context)
           when :describe_template_alias
@@ -222,6 +232,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::ListIngestions.build(context)
           when :list_namespaces
             Aws::QuickSight::Endpoints::ListNamespaces.build(context)
+          when :list_refresh_schedules
+            Aws::QuickSight::Endpoints::ListRefreshSchedules.build(context)
           when :list_tags_for_resource
             Aws::QuickSight::Endpoints::ListTagsForResource.build(context)
           when :list_template_aliases
@@ -240,6 +252,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::ListUserGroups.build(context)
           when :list_users
             Aws::QuickSight::Endpoints::ListUsers.build(context)
+          when :put_data_set_refresh_properties
+            Aws::QuickSight::Endpoints::PutDataSetRefreshProperties.build(context)
           when :register_user
             Aws::QuickSight::Endpoints::RegisterUser.build(context)
           when :restore_analysis
@@ -294,6 +308,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::UpdateIpRestriction.build(context)
           when :update_public_sharing_settings
             Aws::QuickSight::Endpoints::UpdatePublicSharingSettings.build(context)
+          when :update_refresh_schedule
+            Aws::QuickSight::Endpoints::UpdateRefreshSchedule.build(context)
           when :update_template
             Aws::QuickSight::Endpoints::UpdateTemplate.build(context)
           when :update_template_alias

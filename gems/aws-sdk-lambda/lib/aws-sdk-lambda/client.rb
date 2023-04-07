@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
+require 'aws-sdk-core/plugins/event_stream_configuration.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:lambda)
 
@@ -81,6 +82,7 @@ module Aws::Lambda
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
+    add_plugin(Aws::Plugins::EventStreamConfiguration)
     add_plugin(Aws::Lambda::Plugins::Endpoints)
 
     # @overload initialize(options)
@@ -210,6 +212,12 @@ module Aws::Lambda
     #   @option options [Boolean] :endpoint_discovery (false)
     #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
+    #   @option options [Proc] :event_stream_handler
+    #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
+    #
+    #   @option options [Proc] :input_event_stream_handler
+    #     When an EventStream or Proc object is provided, it can be used for sending events for the event stream.
+    #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
     #
@@ -225,6 +233,9 @@ module Aws::Lambda
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
     #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
+    #   @option options [Proc] :output_event_stream_handler
+    #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
@@ -730,6 +741,8 @@ module Aws::Lambda
     #
     # * [ Apache Kafka][6]
     #
+    # * [ Amazon DocumentDB][7]
+    #
     # The following error handling options are available only for stream
     # sources (DynamoDB and Kinesis):
     #
@@ -753,17 +766,19 @@ module Aws::Lambda
     # For information about which configuration parameters apply to each
     # event source, see the following topics.
     #
-    # * [ Amazon DynamoDB Streams][7]
+    # * [ Amazon DynamoDB Streams][8]
     #
-    # * [ Amazon Kinesis][8]
+    # * [ Amazon Kinesis][9]
     #
-    # * [ Amazon SQS][9]
+    # * [ Amazon SQS][10]
     #
-    # * [ Amazon MQ and RabbitMQ][10]
+    # * [ Amazon MQ and RabbitMQ][11]
     #
-    # * [ Amazon MSK][11]
+    # * [ Amazon MSK][12]
     #
-    # * [ Apache Kafka][12]
+    # * [ Apache Kafka][13]
+    #
+    # * [ Amazon DocumentDB][14]
     #
     #
     #
@@ -773,12 +788,14 @@ module Aws::Lambda
     # [4]: https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping
     # [5]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html
     # [6]: https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html
-    # [7]: https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params
-    # [8]: https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params
-    # [9]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params
-    # [10]: https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params
-    # [11]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms
-    # [12]: https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms
+    # [7]: https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html
+    # [8]: https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params
+    # [9]: https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params
+    # [10]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params
+    # [11]: https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params
+    # [12]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms
+    # [13]: https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms
+    # [14]: https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html#docdb-configuration
     #
     # @option params [String] :event_source_arn
     #   The Amazon Resource Name (ARN) of the event source.
@@ -794,6 +811,8 @@ module Aws::Lambda
     #     cluster.
     #
     #   * **Amazon MQ** – The ARN of the broker.
+    #
+    #   * **Amazon DocumentDB** – The ARN of the DocumentDB change stream.
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function.
@@ -839,6 +858,8 @@ module Aws::Lambda
     #
     #   * **Amazon MQ (ActiveMQ and RabbitMQ)** – Default 100. Max 10,000.
     #
+    #   * **DocumentDB** – Default 100. Max 10,000.
+    #
     # @option params [Types::FilterCriteria] :filter_criteria
     #   An object that defines the filter criteria that determine whether
     #   Lambda should process an event. For more information, see [Lambda
@@ -855,10 +876,10 @@ module Aws::Lambda
     #   seconds in increments of seconds.
     #
     #   For streams and Amazon SQS event sources, the default batching window
-    #   is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, and Amazon MQ
-    #   event sources, the default batching window is 500 ms. Note that
-    #   because you can only change `MaximumBatchingWindowInSeconds` in
-    #   increments of seconds, you cannot revert back to the 500 ms default
+    #   is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, Amazon MQ,
+    #   and DocumentDB event sources, the default batching window is 500 ms.
+    #   Note that because you can only change `MaximumBatchingWindowInSeconds`
+    #   in increments of seconds, you cannot revert back to the 500 ms default
     #   batching window after you have changed it. To restore the default
     #   batching window, you must create a new event source mapping.
     #
@@ -867,38 +888,41 @@ module Aws::Lambda
     #   `MaximumBatchingWindowInSeconds` to at least 1.
     #
     # @option params [Integer] :parallelization_factor
-    #   (Streams only) The number of batches to process from each shard
-    #   concurrently.
+    #   (Kinesis and DynamoDB Streams only) The number of batches to process
+    #   from each shard concurrently.
     #
     # @option params [String] :starting_position
     #   The position in a stream from which to start reading. Required for
     #   Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources.
-    #   `AT_TIMESTAMP` is supported only for Amazon Kinesis streams.
+    #   `AT_TIMESTAMP` is supported only for Amazon Kinesis streams and Amazon
+    #   DocumentDB.
     #
     # @option params [Time,DateTime,Date,Integer,String] :starting_position_timestamp
     #   With `StartingPosition` set to `AT_TIMESTAMP`, the time from which to
     #   start reading.
     #
     # @option params [Types::DestinationConfig] :destination_config
-    #   (Streams only) An Amazon SQS queue or Amazon SNS topic destination for
-    #   discarded records.
+    #   (Kinesis and DynamoDB Streams only) A standard Amazon SQS queue or
+    #   standard Amazon SNS topic destination for discarded records.
     #
     # @option params [Integer] :maximum_record_age_in_seconds
-    #   (Streams only) Discard records older than the specified age. The
-    #   default value is infinite (-1).
+    #   (Kinesis and DynamoDB Streams only) Discard records older than the
+    #   specified age. The default value is infinite (-1).
     #
     # @option params [Boolean] :bisect_batch_on_function_error
-    #   (Streams only) If the function returns an error, split the batch in
-    #   two and retry.
+    #   (Kinesis and DynamoDB Streams only) If the function returns an error,
+    #   split the batch in two and retry.
     #
     # @option params [Integer] :maximum_retry_attempts
-    #   (Streams only) Discard records after the specified number of retries.
-    #   The default value is infinite (-1). When set to infinite (-1), failed
-    #   records are retried until the record expires.
+    #   (Kinesis and DynamoDB Streams only) Discard records after the
+    #   specified number of retries. The default value is infinite (-1). When
+    #   set to infinite (-1), failed records are retried until the record
+    #   expires.
     #
     # @option params [Integer] :tumbling_window_in_seconds
-    #   (Streams only) The duration in seconds of a processing window. The
-    #   range is between 1 second and 900 seconds.
+    #   (Kinesis and DynamoDB Streams only) The duration in seconds of a
+    #   processing window for DynamoDB and Kinesis Streams event sources. A
+    #   value of 0 seconds indicates no tumbling window.
     #
     # @option params [Array<String>] :topics
     #   The name of the Kafka topic.
@@ -914,8 +938,8 @@ module Aws::Lambda
     #   The self-managed Apache Kafka cluster to receive records from.
     #
     # @option params [Array<String>] :function_response_types
-    #   (Streams and Amazon SQS) A list of current response type enums applied
-    #   to the event source mapping.
+    #   (Kinesis, DynamoDB Streams, and Amazon SQS) A list of current response
+    #   type enums applied to the event source mapping.
     #
     # @option params [Types::AmazonManagedKafkaEventSourceConfig] :amazon_managed_kafka_event_source_config
     #   Specific configuration settings for an Amazon Managed Streaming for
@@ -1524,6 +1548,24 @@ module Aws::Lambda
     #
     #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
     #
+    # @option params [String] :invoke_mode
+    #   Use one of the following options:
+    #
+    #   * `BUFFERED` – This is the default option. Lambda invokes your
+    #     function using the `Invoke` API operation. Invocation results are
+    #     available when the payload is complete. The maximum payload size is
+    #     6 MB.
+    #
+    #   * `RESPONSE_STREAM` – Your function streams payload results as they
+    #     become available. Lambda invokes your function using the
+    #     `InvokeWithResponseStream` API operation. The maximum response
+    #     payload size is 20 MB, however, you can [request a quota
+    #     increase][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html
+    #
     # @return [Types::CreateFunctionUrlConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFunctionUrlConfigResponse#function_url #function_url} => String
@@ -1531,6 +1573,7 @@ module Aws::Lambda
     #   * {Types::CreateFunctionUrlConfigResponse#auth_type #auth_type} => String
     #   * {Types::CreateFunctionUrlConfigResponse#cors #cors} => Types::Cors
     #   * {Types::CreateFunctionUrlConfigResponse#creation_time #creation_time} => Time
+    #   * {Types::CreateFunctionUrlConfigResponse#invoke_mode #invoke_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1546,6 +1589,7 @@ module Aws::Lambda
     #       expose_headers: ["Header"],
     #       max_age: 1,
     #     },
+    #     invoke_mode: "BUFFERED", # accepts BUFFERED, RESPONSE_STREAM
     #   })
     #
     # @example Response structure
@@ -1564,6 +1608,7 @@ module Aws::Lambda
     #   resp.cors.expose_headers[0] #=> String
     #   resp.cors.max_age #=> Integer
     #   resp.creation_time #=> Time
+    #   resp.invoke_mode #=> String, one of "BUFFERED", "RESPONSE_STREAM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionUrlConfig AWS API Documentation
     #
@@ -2669,6 +2714,7 @@ module Aws::Lambda
     #   * {Types::GetFunctionUrlConfigResponse#cors #cors} => Types::Cors
     #   * {Types::GetFunctionUrlConfigResponse#creation_time #creation_time} => Time
     #   * {Types::GetFunctionUrlConfigResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::GetFunctionUrlConfigResponse#invoke_mode #invoke_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2694,6 +2740,7 @@ module Aws::Lambda
     #   resp.cors.max_age #=> Integer
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
+    #   resp.invoke_mode #=> String, one of "BUFFERED", "RESPONSE_STREAM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionUrlConfig AWS API Documentation
     #
@@ -3210,6 +3257,214 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Configure your Lambda functions to stream response payloads back to
+    # clients. For more information, see [Configuring a Lambda function to
+    # stream responses][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-response-streaming.html
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** – `my-function`.
+    #
+    #   * **Function ARN** –
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** – `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @option params [String] :invocation_type
+    #   Use one of the following options:
+    #
+    #   * `RequestResponse` (default) – Invoke the function synchronously.
+    #     Keep the connection open until the function returns a response or
+    #     times out. The API operation response includes the function response
+    #     and additional data.
+    #
+    #   * `DryRun` – Validate parameter values and verify that the IAM user or
+    #     role has permission to invoke the function.
+    #
+    # @option params [String] :log_type
+    #   Set to `Tail` to include the execution log in the response. Applies to
+    #   synchronously invoked functions only.
+    #
+    # @option params [String] :client_context
+    #   Up to 3,583 bytes of base64-encoded data about the invoking client to
+    #   pass to the function in the context object.
+    #
+    # @option params [String] :qualifier
+    #   The alias name.
+    #
+    # @option params [String, StringIO, File] :payload
+    #   The JSON that you want to provide to your Lambda function as input.
+    #
+    #   You can enter the JSON directly. For example, `--payload '\{ "key":
+    #   "value" \}'`. You can also specify a file path. For example,
+    #   `--payload file://payload.json`.
+    #
+    # @return [Types::InvokeWithResponseStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InvokeWithResponseStreamResponse#status_code #status_code} => Integer
+    #   * {Types::InvokeWithResponseStreamResponse#executed_version #executed_version} => String
+    #   * {Types::InvokeWithResponseStreamResponse#event_stream #event_stream} => Types::InvokeWithResponseStreamResponseEvent
+    #   * {Types::InvokeWithResponseStreamResponse#response_stream_content_type #response_stream_content_type} => String
+    #
+    # @example EventStream Operation Example
+    #
+    #   You can process event once it arrives immediately, or wait until
+    #   full response complete and iterate through eventstream enumerator.
+    #
+    #   To interact with event immediately, you need to register #invoke_with_response_stream
+    #   with callbacks, callbacks can be register for specifc events or for all events,
+    #   callback for errors in the event stream is also available for register.
+    #
+    #   Callbacks can be passed in by `:event_stream_handler` option or within block
+    #   statement attached to #invoke_with_response_stream call directly. Hybrid pattern of both
+    #   is also supported.
+    #
+    #   `:event_stream_handler` option takes in either Proc object or
+    #   Aws::Lambda::EventStreams::InvokeWithResponseStreamResponseEvent object.
+    #
+    #   Usage pattern a): callbacks with a block attached to #invoke_with_response_stream
+    #     Example for registering callbacks for all event types and error event
+    #
+    #     client.invoke_with_response_stream( # params input# ) do |stream|
+    #       stream.on_error_event do |event|
+    #         # catch unmodeled error event in the stream
+    #         raise event
+    #         # => Aws::Errors::EventError
+    #         # event.event_type => :error
+    #         # event.error_code => String
+    #         # event.error_message => String
+    #       end
+    #
+    #       stream.on_event do |event|
+    #         # process all events arrive
+    #         puts event.event_type
+    #         ...
+    #       end
+    #
+    #     end
+    #
+    #   Usage pattern b): pass in `:event_stream_handler` for #invoke_with_response_stream
+    #
+    #     1) create a Aws::Lambda::EventStreams::InvokeWithResponseStreamResponseEvent object
+    #     Example for registering callbacks with specific events
+    #
+    #       handler = Aws::Lambda::EventStreams::InvokeWithResponseStreamResponseEvent.new
+    #       handler.on_payload_chunk_event do |event|
+    #         event # => Aws::Lambda::Types::PayloadChunk
+    #       end
+    #       handler.on_invoke_complete_event do |event|
+    #         event # => Aws::Lambda::Types::InvokeComplete
+    #       end
+    #
+    #     client.invoke_with_response_stream( # params input #, event_stream_handler: handler)
+    #
+    #     2) use a Ruby Proc object
+    #     Example for registering callbacks with specific events
+    #
+    #     handler = Proc.new do |stream|
+    #       stream.on_payload_chunk_event do |event|
+    #         event # => Aws::Lambda::Types::PayloadChunk
+    #       end
+    #       stream.on_invoke_complete_event do |event|
+    #         event # => Aws::Lambda::Types::InvokeComplete
+    #       end
+    #     end
+    #
+    #     client.invoke_with_response_stream( # params input #, event_stream_handler: handler)
+    #
+    #   Usage pattern c): hybird pattern of a) and b)
+    #
+    #       handler = Aws::Lambda::EventStreams::InvokeWithResponseStreamResponseEvent.new
+    #       handler.on_payload_chunk_event do |event|
+    #         event # => Aws::Lambda::Types::PayloadChunk
+    #       end
+    #       handler.on_invoke_complete_event do |event|
+    #         event # => Aws::Lambda::Types::InvokeComplete
+    #       end
+    #
+    #     client.invoke_with_response_stream( # params input #, event_stream_handler: handler) do |stream|
+    #       stream.on_error_event do |event|
+    #         # catch unmodeled error event in the stream
+    #         raise event
+    #         # => Aws::Errors::EventError
+    #         # event.event_type => :error
+    #         # event.error_code => String
+    #         # event.error_message => String
+    #       end
+    #     end
+    #
+    #   Besides above usage patterns for process events when they arrive immediately, you can also
+    #   iterate through events after response complete.
+    #
+    #   Events are available at resp.event_stream # => Enumerator
+    #   For parameter input example, please refer to following request syntax
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.invoke_with_response_stream({
+    #     function_name: "NamespacedFunctionName", # required
+    #     invocation_type: "RequestResponse", # accepts RequestResponse, DryRun
+    #     log_type: "None", # accepts None, Tail
+    #     client_context: "String",
+    #     qualifier: "Qualifier",
+    #     payload: "data",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status_code #=> Integer
+    #   resp.executed_version #=> String
+    #   All events are available at resp.event_stream:
+    #   resp.event_stream #=> Enumerator
+    #   resp.event_stream.event_types #=> [:payload_chunk, :invoke_complete]
+    #
+    #   For :payload_chunk event available at #on_payload_chunk_event callback and response eventstream enumerator:
+    #   event.payload #=> String
+    #
+    #   For :invoke_complete event available at #on_invoke_complete_event callback and response eventstream enumerator:
+    #   event.error_code #=> String
+    #   event.error_details #=> String
+    #   event.log_result #=> String
+    #
+    #   resp.response_stream_content_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvokeWithResponseStream AWS API Documentation
+    #
+    # @overload invoke_with_response_stream(params = {})
+    # @param [Hash] params ({})
+    def invoke_with_response_stream(params = {}, options = {}, &block)
+      params = params.dup
+      event_stream_handler = case handler = params.delete(:event_stream_handler)
+        when EventStreams::InvokeWithResponseStreamResponseEvent then handler
+        when Proc then EventStreams::InvokeWithResponseStreamResponseEvent.new.tap(&handler)
+        when nil then EventStreams::InvokeWithResponseStreamResponseEvent.new
+        else
+          msg = "expected :event_stream_handler to be a block or "\
+                "instance of Aws::Lambda::EventStreams::InvokeWithResponseStreamResponseEvent"\
+                ", got `#{handler.inspect}` instead"
+          raise ArgumentError, msg
+        end
+
+      yield(event_stream_handler) if block_given?
+
+      req = build_request(:invoke_with_response_stream, params)
+
+      req.context[:event_stream_handler] = event_stream_handler
+      req.handlers.add(Aws::Binary::DecodeHandler, priority: 95)
+
+      req.send_request(options, &block)
+    end
+
     # Returns a list of [aliases][1] for a Lambda function.
     #
     #
@@ -3346,6 +3601,8 @@ module Aws::Lambda
     #     cluster.
     #
     #   * **Amazon MQ** – The ARN of the broker.
+    #
+    #   * **Amazon DocumentDB** – The ARN of the DocumentDB change stream.
     #
     # @option params [String] :function_name
     #   The name of the Lambda function.
@@ -3563,6 +3820,7 @@ module Aws::Lambda
     #   resp.function_url_configs[0].cors.expose_headers[0] #=> String
     #   resp.function_url_configs[0].cors.max_age #=> Integer
     #   resp.function_url_configs[0].auth_type #=> String, one of "NONE", "AWS_IAM"
+    #   resp.function_url_configs[0].invoke_mode #=> String, one of "BUFFERED", "RESPONSE_STREAM"
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionUrlConfigs AWS API Documentation
@@ -4531,9 +4789,9 @@ module Aws::Lambda
     #
     #   * **Function** - The Amazon Resource Name (ARN) of a Lambda function.
     #
-    #   * **Queue** - The ARN of an SQS queue.
+    #   * **Queue** - The ARN of a standard SQS queue.
     #
-    #   * **Topic** - The ARN of an SNS topic.
+    #   * **Topic** - The ARN of a standard SNS topic.
     #
     #   * **Event Bus** - The ARN of an Amazon EventBridge event bus.
     #
@@ -5046,6 +5304,8 @@ module Aws::Lambda
     #
     # * [ Apache Kafka][6]
     #
+    # * [ Amazon DocumentDB][7]
+    #
     # The following error handling options are available only for stream
     # sources (DynamoDB and Kinesis):
     #
@@ -5069,17 +5329,19 @@ module Aws::Lambda
     # For information about which configuration parameters apply to each
     # event source, see the following topics.
     #
-    # * [ Amazon DynamoDB Streams][7]
+    # * [ Amazon DynamoDB Streams][8]
     #
-    # * [ Amazon Kinesis][8]
+    # * [ Amazon Kinesis][9]
     #
-    # * [ Amazon SQS][9]
+    # * [ Amazon SQS][10]
     #
-    # * [ Amazon MQ and RabbitMQ][10]
+    # * [ Amazon MQ and RabbitMQ][11]
     #
-    # * [ Amazon MSK][11]
+    # * [ Amazon MSK][12]
     #
-    # * [ Apache Kafka][12]
+    # * [ Apache Kafka][13]
+    #
+    # * [ Amazon DocumentDB][14]
     #
     #
     #
@@ -5089,12 +5351,14 @@ module Aws::Lambda
     # [4]: https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping
     # [5]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html
     # [6]: https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html
-    # [7]: https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params
-    # [8]: https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params
-    # [9]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params
-    # [10]: https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params
-    # [11]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms
-    # [12]: https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms
+    # [7]: https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html
+    # [8]: https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params
+    # [9]: https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params
+    # [10]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params
+    # [11]: https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params
+    # [12]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms
+    # [13]: https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms
+    # [14]: https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html#docdb-configuration
     #
     # @option params [required, String] :uuid
     #   The identifier of the event source mapping.
@@ -5143,6 +5407,8 @@ module Aws::Lambda
     #
     #   * **Amazon MQ (ActiveMQ and RabbitMQ)** – Default 100. Max 10,000.
     #
+    #   * **DocumentDB** – Default 100. Max 10,000.
+    #
     # @option params [Types::FilterCriteria] :filter_criteria
     #   An object that defines the filter criteria that determine whether
     #   Lambda should process an event. For more information, see [Lambda
@@ -5159,10 +5425,10 @@ module Aws::Lambda
     #   seconds in increments of seconds.
     #
     #   For streams and Amazon SQS event sources, the default batching window
-    #   is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, and Amazon MQ
-    #   event sources, the default batching window is 500 ms. Note that
-    #   because you can only change `MaximumBatchingWindowInSeconds` in
-    #   increments of seconds, you cannot revert back to the 500 ms default
+    #   is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, Amazon MQ,
+    #   and DocumentDB event sources, the default batching window is 500 ms.
+    #   Note that because you can only change `MaximumBatchingWindowInSeconds`
+    #   in increments of seconds, you cannot revert back to the 500 ms default
     #   batching window after you have changed it. To restore the default
     #   batching window, you must create a new event source mapping.
     #
@@ -5171,37 +5437,39 @@ module Aws::Lambda
     #   `MaximumBatchingWindowInSeconds` to at least 1.
     #
     # @option params [Types::DestinationConfig] :destination_config
-    #   (Streams only) An Amazon SQS queue or Amazon SNS topic destination for
-    #   discarded records.
+    #   (Kinesis and DynamoDB Streams only) A standard Amazon SQS queue or
+    #   standard Amazon SNS topic destination for discarded records.
     #
     # @option params [Integer] :maximum_record_age_in_seconds
-    #   (Streams only) Discard records older than the specified age. The
-    #   default value is infinite (-1).
+    #   (Kinesis and DynamoDB Streams only) Discard records older than the
+    #   specified age. The default value is infinite (-1).
     #
     # @option params [Boolean] :bisect_batch_on_function_error
-    #   (Streams only) If the function returns an error, split the batch in
-    #   two and retry.
+    #   (Kinesis and DynamoDB Streams only) If the function returns an error,
+    #   split the batch in two and retry.
     #
     # @option params [Integer] :maximum_retry_attempts
-    #   (Streams only) Discard records after the specified number of retries.
-    #   The default value is infinite (-1). When set to infinite (-1), failed
-    #   records are retried until the record expires.
+    #   (Kinesis and DynamoDB Streams only) Discard records after the
+    #   specified number of retries. The default value is infinite (-1). When
+    #   set to infinite (-1), failed records are retried until the record
+    #   expires.
     #
     # @option params [Integer] :parallelization_factor
-    #   (Streams only) The number of batches to process from each shard
-    #   concurrently.
+    #   (Kinesis and DynamoDB Streams only) The number of batches to process
+    #   from each shard concurrently.
     #
     # @option params [Array<Types::SourceAccessConfiguration>] :source_access_configurations
     #   An array of authentication protocols or VPC components required to
     #   secure your event source.
     #
     # @option params [Integer] :tumbling_window_in_seconds
-    #   (Streams only) The duration in seconds of a processing window. The
-    #   range is between 1 second and 900 seconds.
+    #   (Kinesis and DynamoDB Streams only) The duration in seconds of a
+    #   processing window for DynamoDB and Kinesis Streams event sources. A
+    #   value of 0 seconds indicates no tumbling window.
     #
     # @option params [Array<String>] :function_response_types
-    #   (Streams and Amazon SQS) A list of current response type enums applied
-    #   to the event source mapping.
+    #   (Kinesis, DynamoDB Streams, and Amazon SQS) A list of current response
+    #   type enums applied to the event source mapping.
     #
     # @option params [Types::ScalingConfig] :scaling_config
     #   (Amazon SQS only) The scaling configuration for the event source. For
@@ -5914,9 +6182,9 @@ module Aws::Lambda
     #
     #   * **Function** - The Amazon Resource Name (ARN) of a Lambda function.
     #
-    #   * **Queue** - The ARN of an SQS queue.
+    #   * **Queue** - The ARN of a standard SQS queue.
     #
-    #   * **Topic** - The ARN of an SNS topic.
+    #   * **Topic** - The ARN of a standard SNS topic.
     #
     #   * **Event Bus** - The ARN of an Amazon EventBridge event bus.
     #
@@ -6002,6 +6270,24 @@ module Aws::Lambda
     #
     #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
     #
+    # @option params [String] :invoke_mode
+    #   Use one of the following options:
+    #
+    #   * `BUFFERED` – This is the default option. Lambda invokes your
+    #     function using the `Invoke` API operation. Invocation results are
+    #     available when the payload is complete. The maximum payload size is
+    #     6 MB.
+    #
+    #   * `RESPONSE_STREAM` – Your function streams payload results as they
+    #     become available. Lambda invokes your function using the
+    #     `InvokeWithResponseStream` API operation. The maximum response
+    #     payload size is 20 MB, however, you can [request a quota
+    #     increase][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html
+    #
     # @return [Types::UpdateFunctionUrlConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFunctionUrlConfigResponse#function_url #function_url} => String
@@ -6010,6 +6296,7 @@ module Aws::Lambda
     #   * {Types::UpdateFunctionUrlConfigResponse#cors #cors} => Types::Cors
     #   * {Types::UpdateFunctionUrlConfigResponse#creation_time #creation_time} => Time
     #   * {Types::UpdateFunctionUrlConfigResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::UpdateFunctionUrlConfigResponse#invoke_mode #invoke_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -6025,6 +6312,7 @@ module Aws::Lambda
     #       expose_headers: ["Header"],
     #       max_age: 1,
     #     },
+    #     invoke_mode: "BUFFERED", # accepts BUFFERED, RESPONSE_STREAM
     #   })
     #
     # @example Response structure
@@ -6044,6 +6332,7 @@ module Aws::Lambda
     #   resp.cors.max_age #=> Integer
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
+    #   resp.invoke_mode #=> String, one of "BUFFERED", "RESPONSE_STREAM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionUrlConfig AWS API Documentation
     #
@@ -6067,7 +6356,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.92.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -63,7 +63,8 @@ module Aws::RedshiftDataAPIService
     #
     # @!attribute [rw] db_user
     #   The database user name. This parameter is required when connecting
-    #   to a cluster and authenticating using temporary credentials.
+    #   to a cluster as a database user and authenticating using temporary
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
@@ -446,7 +447,8 @@ module Aws::RedshiftDataAPIService
     #
     # @!attribute [rw] db_user
     #   The database user name. This parameter is required when connecting
-    #   to a cluster and authenticating using temporary credentials.
+    #   to a cluster as a database user and authenticating using temporary
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -574,7 +576,8 @@ module Aws::RedshiftDataAPIService
     #
     # @!attribute [rw] db_user
     #   The database user name. This parameter is required when connecting
-    #   to a cluster and authenticating using temporary credentials.
+    #   to a cluster as a database user and authenticating using temporary
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -812,7 +815,8 @@ module Aws::RedshiftDataAPIService
     #
     # @!attribute [rw] db_user
     #   The database user name. This parameter is required when connecting
-    #   to a cluster and authenticating using temporary credentials.
+    #   to a cluster as a database user and authenticating using temporary
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -898,7 +902,8 @@ module Aws::RedshiftDataAPIService
     #
     # @!attribute [rw] db_user
     #   The database user name. This parameter is required when connecting
-    #   to a cluster and authenticating using temporary credentials.
+    #   to a cluster as a database user and authenticating using temporary
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1079,7 +1084,8 @@ module Aws::RedshiftDataAPIService
     #
     # @!attribute [rw] db_user
     #   The database user name. This parameter is required when connecting
-    #   to a cluster and authenticating using temporary credentials.
+    #   to a cluster as a database user and authenticating using temporary
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] max_results

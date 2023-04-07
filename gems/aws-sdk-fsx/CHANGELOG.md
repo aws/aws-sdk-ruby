@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2023-04-07)
+------------------
+
+* Feature - Amazon FSx for Lustre now supports creating data repository associations on Persistent_1 and Scratch_2 file systems.
+
 1.64.0 (2023-01-18)
 ------------------
 

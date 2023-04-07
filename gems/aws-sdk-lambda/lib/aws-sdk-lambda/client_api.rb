@@ -174,6 +174,12 @@ module Aws::Lambda
     InvocationType = Shapes::StringShape.new(name: 'InvocationType')
     InvokeAsyncRequest = Shapes::StructureShape.new(name: 'InvokeAsyncRequest')
     InvokeAsyncResponse = Shapes::StructureShape.new(name: 'InvokeAsyncResponse')
+    InvokeMode = Shapes::StringShape.new(name: 'InvokeMode')
+    InvokeResponseStreamUpdate = Shapes::StructureShape.new(name: 'InvokeResponseStreamUpdate')
+    InvokeWithResponseStreamCompleteEvent = Shapes::StructureShape.new(name: 'InvokeWithResponseStreamCompleteEvent')
+    InvokeWithResponseStreamRequest = Shapes::StructureShape.new(name: 'InvokeWithResponseStreamRequest')
+    InvokeWithResponseStreamResponse = Shapes::StructureShape.new(name: 'InvokeWithResponseStreamResponse')
+    InvokeWithResponseStreamResponseEvent = Shapes::StructureShape.new(name: 'InvokeWithResponseStreamResponseEvent')
     KMSAccessDeniedException = Shapes::StructureShape.new(name: 'KMSAccessDeniedException')
     KMSDisabledException = Shapes::StructureShape.new(name: 'KMSDisabledException')
     KMSInvalidStateException = Shapes::StructureShape.new(name: 'KMSInvalidStateException')
@@ -283,6 +289,7 @@ module Aws::Lambda
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceNotReadyException = Shapes::StructureShape.new(name: 'ResourceNotReadyException')
+    ResponseStreamingInvocationType = Shapes::StringShape.new(name: 'ResponseStreamingInvocationType')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     Runtime = Shapes::StringShape.new(name: 'Runtime')
     RuntimeVersionArn = Shapes::StringShape.new(name: 'RuntimeVersionArn')
@@ -532,6 +539,7 @@ module Aws::Lambda
     CreateFunctionUrlConfigRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: FunctionUrlQualifier, location: "querystring", location_name: "Qualifier"))
     CreateFunctionUrlConfigRequest.add_member(:auth_type, Shapes::ShapeRef.new(shape: FunctionUrlAuthType, required: true, location_name: "AuthType"))
     CreateFunctionUrlConfigRequest.add_member(:cors, Shapes::ShapeRef.new(shape: Cors, location_name: "Cors"))
+    CreateFunctionUrlConfigRequest.add_member(:invoke_mode, Shapes::ShapeRef.new(shape: InvokeMode, location_name: "InvokeMode"))
     CreateFunctionUrlConfigRequest.struct_class = Types::CreateFunctionUrlConfigRequest
 
     CreateFunctionUrlConfigResponse.add_member(:function_url, Shapes::ShapeRef.new(shape: FunctionUrl, required: true, location_name: "FunctionUrl"))
@@ -539,6 +547,7 @@ module Aws::Lambda
     CreateFunctionUrlConfigResponse.add_member(:auth_type, Shapes::ShapeRef.new(shape: FunctionUrlAuthType, required: true, location_name: "AuthType"))
     CreateFunctionUrlConfigResponse.add_member(:cors, Shapes::ShapeRef.new(shape: Cors, location_name: "Cors"))
     CreateFunctionUrlConfigResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    CreateFunctionUrlConfigResponse.add_member(:invoke_mode, Shapes::ShapeRef.new(shape: InvokeMode, location_name: "InvokeMode"))
     CreateFunctionUrlConfigResponse.struct_class = Types::CreateFunctionUrlConfigResponse
 
     DeadLetterConfig.add_member(:target_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "TargetArn"))
@@ -762,6 +771,7 @@ module Aws::Lambda
     FunctionUrlConfig.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedTime"))
     FunctionUrlConfig.add_member(:cors, Shapes::ShapeRef.new(shape: Cors, location_name: "Cors"))
     FunctionUrlConfig.add_member(:auth_type, Shapes::ShapeRef.new(shape: FunctionUrlAuthType, required: true, location_name: "AuthType"))
+    FunctionUrlConfig.add_member(:invoke_mode, Shapes::ShapeRef.new(shape: InvokeMode, location_name: "InvokeMode"))
     FunctionUrlConfig.struct_class = Types::FunctionUrlConfig
 
     FunctionUrlConfigList.member = Shapes::ShapeRef.new(shape: FunctionUrlConfig)
@@ -826,6 +836,7 @@ module Aws::Lambda
     GetFunctionUrlConfigResponse.add_member(:cors, Shapes::ShapeRef.new(shape: Cors, location_name: "Cors"))
     GetFunctionUrlConfigResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
     GetFunctionUrlConfigResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedTime"))
+    GetFunctionUrlConfigResponse.add_member(:invoke_mode, Shapes::ShapeRef.new(shape: InvokeMode, location_name: "InvokeMode"))
     GetFunctionUrlConfigResponse.struct_class = Types::GetFunctionUrlConfigResponse
 
     GetLayerVersionByArnRequest.add_member(:arn, Shapes::ShapeRef.new(shape: LayerVersionArn, required: true, location: "querystring", location_name: "Arn"))
@@ -953,6 +964,36 @@ module Aws::Lambda
 
     InvokeAsyncResponse.add_member(:status, Shapes::ShapeRef.new(shape: HttpStatus, location: "statusCode", location_name: "Status"))
     InvokeAsyncResponse.struct_class = Types::InvokeAsyncResponse
+
+    InvokeResponseStreamUpdate.add_member(:payload, Shapes::ShapeRef.new(shape: Blob, eventpayload: true, eventpayload_type: 'blob', location_name: "Payload", metadata: {"eventpayload"=>true}))
+    InvokeResponseStreamUpdate.struct_class = Types::InvokeResponseStreamUpdate
+
+    InvokeWithResponseStreamCompleteEvent.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
+    InvokeWithResponseStreamCompleteEvent.add_member(:error_details, Shapes::ShapeRef.new(shape: String, location_name: "ErrorDetails"))
+    InvokeWithResponseStreamCompleteEvent.add_member(:log_result, Shapes::ShapeRef.new(shape: String, location_name: "LogResult"))
+    InvokeWithResponseStreamCompleteEvent.struct_class = Types::InvokeWithResponseStreamCompleteEvent
+
+    InvokeWithResponseStreamRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location: "uri", location_name: "FunctionName"))
+    InvokeWithResponseStreamRequest.add_member(:invocation_type, Shapes::ShapeRef.new(shape: ResponseStreamingInvocationType, location: "header", location_name: "X-Amz-Invocation-Type"))
+    InvokeWithResponseStreamRequest.add_member(:log_type, Shapes::ShapeRef.new(shape: LogType, location: "header", location_name: "X-Amz-Log-Type"))
+    InvokeWithResponseStreamRequest.add_member(:client_context, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "X-Amz-Client-Context"))
+    InvokeWithResponseStreamRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, location: "querystring", location_name: "Qualifier"))
+    InvokeWithResponseStreamRequest.add_member(:payload, Shapes::ShapeRef.new(shape: Blob, location_name: "Payload"))
+    InvokeWithResponseStreamRequest.struct_class = Types::InvokeWithResponseStreamRequest
+    InvokeWithResponseStreamRequest[:payload] = :payload
+    InvokeWithResponseStreamRequest[:payload_member] = InvokeWithResponseStreamRequest.member(:payload)
+
+    InvokeWithResponseStreamResponse.add_member(:status_code, Shapes::ShapeRef.new(shape: Integer, location: "statusCode", location_name: "StatusCode"))
+    InvokeWithResponseStreamResponse.add_member(:executed_version, Shapes::ShapeRef.new(shape: Version, location: "header", location_name: "X-Amz-Executed-Version"))
+    InvokeWithResponseStreamResponse.add_member(:event_stream, Shapes::ShapeRef.new(shape: InvokeWithResponseStreamResponseEvent, eventstream: true, location_name: "EventStream"))
+    InvokeWithResponseStreamResponse.add_member(:response_stream_content_type, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Content-Type"))
+    InvokeWithResponseStreamResponse.struct_class = Types::InvokeWithResponseStreamResponse
+    InvokeWithResponseStreamResponse[:payload] = :event_stream
+    InvokeWithResponseStreamResponse[:payload_member] = InvokeWithResponseStreamResponse.member(:event_stream)
+
+    InvokeWithResponseStreamResponseEvent.add_member(:payload_chunk, Shapes::ShapeRef.new(shape: InvokeResponseStreamUpdate, event: true, location_name: "PayloadChunk"))
+    InvokeWithResponseStreamResponseEvent.add_member(:invoke_complete, Shapes::ShapeRef.new(shape: InvokeWithResponseStreamCompleteEvent, event: true, location_name: "InvokeComplete"))
+    InvokeWithResponseStreamResponseEvent.struct_class = Types::InvokeWithResponseStreamResponseEvent
 
     KMSAccessDeniedException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     KMSAccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -1419,6 +1460,7 @@ module Aws::Lambda
     UpdateFunctionUrlConfigRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: FunctionUrlQualifier, location: "querystring", location_name: "Qualifier"))
     UpdateFunctionUrlConfigRequest.add_member(:auth_type, Shapes::ShapeRef.new(shape: FunctionUrlAuthType, location_name: "AuthType"))
     UpdateFunctionUrlConfigRequest.add_member(:cors, Shapes::ShapeRef.new(shape: Cors, location_name: "Cors"))
+    UpdateFunctionUrlConfigRequest.add_member(:invoke_mode, Shapes::ShapeRef.new(shape: InvokeMode, location_name: "InvokeMode"))
     UpdateFunctionUrlConfigRequest.struct_class = Types::UpdateFunctionUrlConfigRequest
 
     UpdateFunctionUrlConfigResponse.add_member(:function_url, Shapes::ShapeRef.new(shape: FunctionUrl, required: true, location_name: "FunctionUrl"))
@@ -1427,6 +1469,7 @@ module Aws::Lambda
     UpdateFunctionUrlConfigResponse.add_member(:cors, Shapes::ShapeRef.new(shape: Cors, location_name: "Cors"))
     UpdateFunctionUrlConfigResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
     UpdateFunctionUrlConfigResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedTime"))
+    UpdateFunctionUrlConfigResponse.add_member(:invoke_mode, Shapes::ShapeRef.new(shape: InvokeMode, location_name: "InvokeMode"))
     UpdateFunctionUrlConfigResponse.struct_class = Types::UpdateFunctionUrlConfigResponse
 
     VpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
@@ -1914,6 +1957,40 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestContentException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRuntimeException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+      end)
+
+      api.add_operation(:invoke_with_response_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "InvokeWithResponseStream"
+        o.http_method = "POST"
+        o.http_request_uri = "/2021-11-15/functions/{FunctionName}/response-streaming-invocations"
+        o.input = Shapes::ShapeRef.new(shape: InvokeWithResponseStreamRequest)
+        o.output = Shapes::ShapeRef.new(shape: InvokeWithResponseStreamResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestContentException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedMediaTypeException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: EC2UnexpectedException)
+        o.errors << Shapes::ShapeRef.new(shape: SubnetIPAddressLimitReachedException)
+        o.errors << Shapes::ShapeRef.new(shape: ENILimitReachedException)
+        o.errors << Shapes::ShapeRef.new(shape: EFSMountConnectivityException)
+        o.errors << Shapes::ShapeRef.new(shape: EFSMountFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: EFSMountTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: EFSIOException)
+        o.errors << Shapes::ShapeRef.new(shape: EC2ThrottledException)
+        o.errors << Shapes::ShapeRef.new(shape: EC2AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnetIDException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityGroupIDException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidZipFileException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRuntimeException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
       end)
 
       api.add_operation(:list_aliases, Seahorse::Model::Operation.new.tap do |o|

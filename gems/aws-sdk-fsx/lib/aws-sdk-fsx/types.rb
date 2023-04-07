@@ -275,7 +275,7 @@ module Aws::FSx
     #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
-    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   of up to 63 ASCII characters. This token is automatically filled on
     #   your behalf when you use the Command Line Interface (CLI) or an
     #   Amazon Web Services SDK.
     #
@@ -345,8 +345,8 @@ module Aws::FSx
     # Lustre automatically exports the defined changes asynchronously once
     # your application finishes modifying the file.
     #
-    # This `AutoExportPolicy` is supported only for Amazon FSx for Lustre
-    # file systems with the `Persistent_2` deployment type.
+    # The `AutoExportPolicy` is only supported on Amazon FSx for Lustre file
+    # systems with a data repository association.
     #
     # @!attribute [rw] events
     #   The `AutoExportPolicy` can have the following event values:
@@ -378,8 +378,8 @@ module Aws::FSx
     # FSx for Lustre file system as you modify objects in a linked S3
     # bucket.
     #
-    # The `AutoImportPolicy` is supported only for Amazon FSx for Lustre
-    # file systems with the `Persistent_2` deployment type.
+    # The `AutoImportPolicy` is only supported on Amazon FSx for Lustre file
+    # systems with a data repository association.
     #
     # @!attribute [rw] events
     #   The `AutoImportPolicy` can have the following event values:
@@ -689,8 +689,7 @@ module Aws::FSx
     #   located within the file system’s ExportPath. An example `Path` value
     #   is "s3://myBucket/myExportPath/optionalPrefix". The report
     #   provides the following information for each file in the report:
-    #   FilePath, FileStatus, and ErrorCode. To learn more about a file
-    #   system's `ExportPath`, see .
+    #   FilePath, FileStatus, and ErrorCode.
     #   @return [String]
     #
     # @!attribute [rw] format
@@ -722,7 +721,7 @@ module Aws::FSx
 
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
-    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   of up to 63 ASCII characters. This token is automatically filled on
     #   your behalf when you use the Command Line Interface (CLI) or an
     #   Amazon Web Services SDK.
     #
@@ -819,7 +818,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   (Optional) A string of up to 64 ASCII characters that Amazon FSx
+    #   (Optional) A string of up to 63 ASCII characters that Amazon FSx
     #   uses to ensure idempotent creation. This string is automatically
     #   filled on your behalf when you use the Command Line Interface (CLI)
     #   or an Amazon Web Services SDK.
@@ -928,7 +927,7 @@ module Aws::FSx
     #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
-    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   of up to 63 ASCII characters. This token is automatically filled on
     #   your behalf when you use the Command Line Interface (CLI) or an
     #   Amazon Web Services SDK.
     #
@@ -1008,7 +1007,7 @@ module Aws::FSx
     #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
-    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   of up to 63 ASCII characters. This token is automatically filled on
     #   your behalf when you use the Command Line Interface (CLI) or an
     #   Amazon Web Services SDK.
     #
@@ -1098,7 +1097,7 @@ module Aws::FSx
     end
 
     # @!attribute [rw] client_request_token
-    #   An idempotency token for resource creation, in a string of up to 64
+    #   An idempotency token for resource creation, in a string of up to 63
     #   ASCII characters. This token is automatically filled on your behalf
     #   when you use the Command Line Interface (CLI) or an Amazon Web
     #   Services SDK.
@@ -1223,7 +1222,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
+    #   A string of up to 63 ASCII characters that Amazon FSx uses to ensure
     #   idempotent creation. This string is automatically filled on your
     #   behalf when you use the Command Line Interface (CLI) or an Amazon
     #   Web Services SDK.
@@ -1266,10 +1265,8 @@ module Aws::FSx
     # @!attribute [rw] lustre_configuration
     #   The Lustre configuration for the file system being created.
     #
-    #   <note markdown="1"> The following parameters are not supported for file systems with the
-    #   `Persistent_2` deployment type. Instead, use
-    #   `CreateDataRepositoryAssociation` to create a data repository
-    #   association to link your Lustre file system to a data repository.
+    #   <note markdown="1"> The following parameters are not supported for file systems with a
+    #   data repository association created with .
     #
     #    * `AutoImportPolicy`
     #
@@ -1393,10 +1390,8 @@ module Aws::FSx
 
     # The Lustre configuration for the file system being created.
     #
-    # <note markdown="1"> The following parameters are not supported for file systems with the
-    # `Persistent_2` deployment type. Instead, use
-    # `CreateDataRepositoryAssociation` to create a data repository
-    # association to link your Lustre file system to a data repository.
+    # <note markdown="1"> The following parameters are not supported for file systems with a
+    # data repository association created with .
     #
     #  * `AutoImportPolicy`
     #
@@ -1424,19 +1419,16 @@ module Aws::FSx
     #   specify a prefix after the Amazon S3 bucket name, only object keys
     #   with that prefix are loaded into the file system.
     #
-    #   <note markdown="1"> This parameter is not supported for file systems with the
-    #   `Persistent_2` deployment type. Instead, use
-    #   `CreateDataRepositoryAssociation` to create a data repository
-    #   association to link your Lustre file system to a data repository.
+    #   <note markdown="1"> This parameter is not supported for file systems with a data
+    #   repository association.
     #
     #    </note>
     #   @return [String]
     #
     # @!attribute [rw] export_path
-    #   (Optional) Available with `Scratch` and `Persistent_1` deployment
-    #   types. Specifies the path in the Amazon S3 bucket where the root of
-    #   your Amazon FSx file system is exported. The path must use the same
-    #   Amazon S3 bucket as specified in ImportPath. You can provide an
+    #   (Optional) Specifies the path in the Amazon S3 bucket where the root
+    #   of your Amazon FSx file system is exported. The path must use the
+    #   same Amazon S3 bucket as specified in ImportPath. You can provide an
     #   optional prefix to which new and changed data is to be exported from
     #   your Amazon FSx for Lustre file system. If an `ExportPath` value is
     #   not provided, Amazon FSx sets a default export path,
@@ -1454,10 +1446,8 @@ module Aws::FSx
     #   the contents of your file system to that export prefix in the Amazon
     #   S3 bucket.
     #
-    #   <note markdown="1"> This parameter is not supported for file systems with the
-    #   `Persistent_2` deployment type. Instead, use
-    #   `CreateDataRepositoryAssociation` to create a data repository
-    #   association to link your Lustre file system to a data repository.
+    #   <note markdown="1"> This parameter is not supported for file systems with a data
+    #   repository association.
     #
     #    </note>
     #   @return [String]
@@ -1473,10 +1463,10 @@ module Aws::FSx
     #   512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5
     #   TB.
     #
-    #   This parameter is not supported for file systems with the
-    #   `Persistent_2` deployment type. Instead, use
-    #   `CreateDataRepositoryAssociation` to create a data repository
-    #   association to link your Lustre file system to a data repository.
+    #   <note markdown="1"> This parameter is not supported for file systems with a data
+    #   repository association.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] deployment_type
@@ -1508,10 +1498,10 @@ module Aws::FSx
     #
     #   Encryption of data in transit is automatically turned on when you
     #   access `SCRATCH_2`, `PERSISTENT_1` and `PERSISTENT_2` file systems
-    #   from Amazon EC2 instances that [support automatic encryption][2] in
-    #   the Amazon Web Services Regions where they are available. For more
+    #   from Amazon EC2 instances that support automatic encryption in the
+    #   Amazon Web Services Regions where they are available. For more
     #   information about encryption in transit for FSx for Lustre file
-    #   systems, see [Encrypting data in transit][3] in the *Amazon FSx for
+    #   systems, see [Encrypting data in transit][2] in the *Amazon FSx for
     #   Lustre User Guide*.
     #
     #   (Default = `SCRATCH_1`)
@@ -1519,16 +1509,14 @@ module Aws::FSx
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-fsx-lustre.html#lustre-deployment-types
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data- protection.html
-    #   [3]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html
     #   @return [String]
     #
     # @!attribute [rw] auto_import_policy
-    #   (Optional) Available with `Scratch` and `Persistent_1` deployment
-    #   types. When you create your file system, your existing S3 objects
-    #   appear as file and directory listings. Use this property to choose
-    #   how Amazon FSx keeps your file and directory listings up to date as
-    #   you add or modify objects in your linked S3 bucket.
+    #   (Optional) When you create your file system, your existing S3
+    #   objects appear as file and directory listings. Use this parameter to
+    #   choose how Amazon FSx keeps your file and directory listings up to
+    #   date as you add or modify objects in your linked S3 bucket.
     #   `AutoImportPolicy` can have the following values:
     #
     #   * `NONE` - (Default) AutoImport is off. Amazon FSx only updates file
@@ -1553,10 +1541,8 @@ module Aws::FSx
     #   For more information, see [ Automatically import updates from your
     #   S3 bucket][1].
     #
-    #   <note markdown="1"> This parameter is not supported for file systems with the
-    #   `Persistent_2` deployment type. Instead, use
-    #   `CreateDataRepositoryAssociation` to create a data repository
-    #   association to link your Lustre file system to a data repository.
+    #   <note markdown="1"> This parameter is not supported for file systems with a data
+    #   repository association.
     #
     #    </note>
     #
@@ -1721,7 +1707,8 @@ module Aws::FSx
     #   console, Amazon FSx chooses the last 64 IP addresses from the VPC’s
     #   primary CIDR range to use as the endpoint IP address range for the
     #   file system. You can have overlapping endpoint IP addresses for file
-    #   systems deployed in the same VPC/route tables.
+    #   systems deployed in the same VPC/route tables, as long as they
+    #   don't overlap with any subnet.
     #   @return [String]
     #
     # @!attribute [rw] fsx_admin_password
@@ -1914,7 +1901,7 @@ module Aws::FSx
     # The request object used to create a new Amazon FSx file system.
     #
     # @!attribute [rw] client_request_token
-    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
+    #   A string of up to 63 ASCII characters that Amazon FSx uses to ensure
     #   idempotent creation. This string is automatically filled on your
     #   behalf when you use the Command Line Interface (CLI) or an Amazon
     #   Web Services SDK.
@@ -2051,10 +2038,8 @@ module Aws::FSx
     # @!attribute [rw] lustre_configuration
     #   The Lustre configuration for the file system being created.
     #
-    #   <note markdown="1"> The following parameters are not supported for file systems with the
-    #   `Persistent_2` deployment type. Instead, use
-    #   `CreateDataRepositoryAssociation` to create a data repository
-    #   association to link your Lustre file system to a data repository.
+    #   <note markdown="1"> The following parameters are not supported for file systems with a
+    #   data repository association created with .
     #
     #    * `AutoImportPolicy`
     #
@@ -2291,8 +2276,8 @@ module Aws::FSx
     #
     # @!attribute [rw] junction_path
     #   Specifies the location in the SVM's namespace where the volume is
-    #   mounted. The `JunctionPath` must have a leading forward slash, such
-    #   as `/vol3`.
+    #   mounted. This parameter is required. The `JunctionPath` must have a
+    #   leading forward slash, such as `/vol3`.
     #   @return [String]
     #
     # @!attribute [rw] security_style
@@ -2321,12 +2306,14 @@ module Aws::FSx
     #
     # @!attribute [rw] size_in_megabytes
     #   Specifies the size of the volume, in megabytes (MB), that you are
-    #   creating.
+    #   creating. Provide any whole number in the range of 20–104857600 to
+    #   specify the size of the volume.
     #   @return [Integer]
     #
     # @!attribute [rw] storage_efficiency_enabled
     #   Set to true to enable deduplication, compression, and compaction
-    #   storage efficiency features on the volume.
+    #   storage efficiency features on the volume, or set to false to
+    #   disable them. This parameter is required.
     #   @return [Boolean]
     #
     # @!attribute [rw] storage_virtual_machine_id
@@ -2606,7 +2593,7 @@ module Aws::FSx
 
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
-    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   of up to 63 ASCII characters. This token is automatically filled on
     #   your behalf when you use the Command Line Interface (CLI) or an
     #   Amazon Web Services SDK.
     #
@@ -2658,7 +2645,7 @@ module Aws::FSx
     #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
-    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   of up to 63 ASCII characters. This token is automatically filled on
     #   your behalf when you use the Command Line Interface (CLI) or an
     #   Amazon Web Services SDK.
     #
@@ -2766,7 +2753,7 @@ module Aws::FSx
     #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
-    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   of up to 63 ASCII characters. This token is automatically filled on
     #   your behalf when you use the Command Line Interface (CLI) or an
     #   Amazon Web Services SDK.
     #
@@ -2814,7 +2801,7 @@ module Aws::FSx
 
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
-    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   of up to 63 ASCII characters. This token is automatically filled on
     #   your behalf when you use the Command Line Interface (CLI) or an
     #   Amazon Web Services SDK.
     #
@@ -2881,9 +2868,9 @@ module Aws::FSx
     #
     # * `DescribeDataRepositoryAssociations`
     #
-    # Data repository associations are supported only for an Amazon FSx for
-    # Lustre file system with the `Persistent_2` deployment type and for an
-    # Amazon File Cache resource.
+    # Data repository associations are supported on Amazon File Cache
+    # resources and all Amazon FSx for Lustre file systems excluding
+    # `Scratch_1` deployment types.
     #
     # @!attribute [rw] association_id
     #   The system-generated, unique ID of the data repository association.
@@ -3108,8 +3095,9 @@ module Aws::FSx
     # The data repository configuration object for Lustre file systems
     # returned in the response of the `CreateFileSystem` operation.
     #
-    # This data type is not supported for file systems with the
-    # `Persistent_2` deployment type. Instead, use .
+    # This data type is not supported on file systems with a data repository
+    # association. For file systems with a data repository association, see
+    # .
     #
     # @!attribute [rw] lifecycle
     #   Describes the state of the file system's S3 durable data
@@ -3273,6 +3261,8 @@ module Aws::FSx
     #
     #   * `AUTO_RELEASE_DATA` tasks automatically release files from an
     #     Amazon File Cache resource.
+    #
+    #   * `RELEASE_DATA_FROM_FILESYSTEM` tasks are not supported.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -3511,7 +3501,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
+    #   A string of up to 63 ASCII characters that Amazon FSx uses to ensure
     #   idempotent deletion. This parameter is automatically filled on your
     #   behalf when using the CLI or SDK.
     #
@@ -3554,7 +3544,7 @@ module Aws::FSx
     #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
-    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   of up to 63 ASCII characters. This token is automatically filled on
     #   your behalf when you use the Command Line Interface (CLI) or an
     #   Amazon Web Services SDK.
     #
@@ -3607,7 +3597,7 @@ module Aws::FSx
     #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
-    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   of up to 63 ASCII characters. This token is automatically filled on
     #   your behalf when you use the Command Line Interface (CLI) or an
     #   Amazon Web Services SDK.
     #
@@ -3756,7 +3746,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
+    #   A string of up to 63 ASCII characters that Amazon FSx uses to ensure
     #   idempotent deletion. This token is automatically filled on your
     #   behalf when using the Command Line Interface (CLI) or an Amazon Web
     #   Services SDK.
@@ -3877,7 +3867,7 @@ module Aws::FSx
 
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
-    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   of up to 63 ASCII characters. This token is automatically filled on
     #   your behalf when you use the Command Line Interface (CLI) or an
     #   Amazon Web Services SDK.
     #
@@ -3918,7 +3908,7 @@ module Aws::FSx
 
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
-    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   of up to 63 ASCII characters. This token is automatically filled on
     #   your behalf when you use the Command Line Interface (CLI) or an
     #   Amazon Web Services SDK.
     #
@@ -4016,7 +4006,7 @@ module Aws::FSx
 
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
-    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   of up to 63 ASCII characters. This token is automatically filled on
     #   your behalf when you use the Command Line Interface (CLI) or an
     #   Amazon Web Services SDK.
     #
@@ -4289,7 +4279,7 @@ module Aws::FSx
     #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
-    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   of up to 63 ASCII characters. This token is automatically filled on
     #   your behalf when you use the Command Line Interface (CLI) or an
     #   Amazon Web Services SDK.
     #
@@ -4566,7 +4556,7 @@ module Aws::FSx
     #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
-    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   of up to 63 ASCII characters. This token is automatically filled on
     #   your behalf when you use the Command Line Interface (CLI) or an
     #   Amazon Web Services SDK.
     #
@@ -5123,9 +5113,8 @@ module Aws::FSx
     #
     # @!attribute [rw] owner_id
     #   The Amazon Web Services account that created the file system. If the
-    #   file system was created by an Identity and Access Management (IAM)
-    #   user, the Amazon Web Services account to which the IAM user belongs
-    #   is the owner.
+    #   file system was created by a user in IAM Identity Center, the Amazon
+    #   Web Services account to which the IAM user belongs is the owner.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -5668,8 +5657,9 @@ module Aws::FSx
     #   The data repository configuration object for Lustre file systems
     #   returned in the response of the `CreateFileSystem` operation.
     #
-    #   This data type is not supported for file systems with the
-    #   `Persistent_2` deployment type. Instead, use .
+    #   This data type is not supported on file systems with a data
+    #   repository association. For file systems with a data repository
+    #   association, see .
     #   @return [Types::DataRepositoryConfiguration]
     #
     # @!attribute [rw] deployment_type
@@ -6075,13 +6065,14 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] endpoint_ip_address_range
-    #   (Multi-AZ only) The IP address range in which the endpoints to
-    #   access your file system are created.
-    #
-    #   The Endpoint IP address range you select for your file system must
-    #   exist outside the VPC's CIDR range and must be at least /30 or
-    #   larger. If you do not specify this optional parameter, Amazon FSx
-    #   will automatically select a CIDR block for you.
+    #   (Multi-AZ only) Specifies the IP address range in which the
+    #   endpoints to access your file system will be created. By default in
+    #   the Amazon FSx API, Amazon FSx selects an unused IP address range
+    #   for you from the 198.19.* range. By default in the Amazon FSx
+    #   console, Amazon FSx chooses the last 64 IP addresses from the VPC’s
+    #   primary CIDR range to use as the endpoint IP address range for the
+    #   file system. You can have overlapping endpoint IP addresses for file
+    #   systems deployed in the same VPC/route tables.
     #   @return [String]
     #
     # @!attribute [rw] endpoints
@@ -6686,7 +6677,7 @@ module Aws::FSx
     #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
-    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   of up to 63 ASCII characters. This token is automatically filled on
     #   your behalf when you use the Command Line Interface (CLI) or an
     #   Amazon Web Services SDK.
     #
@@ -6757,7 +6748,7 @@ module Aws::FSx
 
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
-    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   of up to 63 ASCII characters. This token is automatically filled on
     #   your behalf when you use the Command Line Interface (CLI) or an
     #   Amazon Web Services SDK.
     #
@@ -7535,7 +7526,7 @@ module Aws::FSx
     #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
-    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   of up to 63 ASCII characters. This token is automatically filled on
     #   your behalf when you use the Command Line Interface (CLI) or an
     #   Amazon Web Services SDK.
     #
@@ -7621,7 +7612,7 @@ module Aws::FSx
     #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
-    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   of up to 63 ASCII characters. This token is automatically filled on
     #   your behalf when you use the Command Line Interface (CLI) or an
     #   Amazon Web Services SDK.
     #
@@ -7702,10 +7693,8 @@ module Aws::FSx
     #     the S3 bucket, any existing objects that are changed in the S3
     #     bucket, and any objects that were deleted in the S3 bucket.
     #
-    #   The `AutoImportPolicy` parameter is not supported for Lustre file
-    #   systems with the `Persistent_2` deployment type. Instead, use to
-    #   update a data repository association on your `Persistent_2` file
-    #   system.
+    #   This parameter is not supported for file systems with a data
+    #   repository association.
     #   @return [String]
     #
     # @!attribute [rw] data_compression_type
@@ -7927,7 +7916,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
+    #   A string of up to 63 ASCII characters that Amazon FSx uses to ensure
     #   idempotent updates. This string is automatically filled on your
     #   behalf when you use the Command Line Interface (CLI) or an Amazon
     #   Web Services SDK.
@@ -7937,23 +7926,16 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] storage_capacity
-    #   Use this parameter to increase the storage capacity of an Amazon FSx
-    #   for Windows File Server, Amazon FSx for Lustre, or Amazon FSx for
-    #   NetApp ONTAP file system. Specifies the storage capacity target
-    #   value, in GiB, to increase the storage capacity for the file system
-    #   that you're updating.
+    #   Use this parameter to increase the storage capacity of an FSx for
+    #   Windows File Server, FSx for Lustre, FSx for OpenZFS, or FSx for
+    #   ONTAP file system. Specifies the storage capacity target value, in
+    #   GiB, to increase the storage capacity for the file system that
+    #   you're updating.
     #
     #   <note markdown="1"> You can't make a storage capacity increase request if there is an
     #   existing storage capacity increase request in progress.
     #
     #    </note>
-    #
-    #   For Windows file systems, the storage capacity target value must be
-    #   at least 10 percent greater than the current storage capacity value.
-    #   To increase storage capacity, the file system must have at least 16
-    #   MBps of throughput capacity. For more information, see [Managing
-    #   storage capacity][1] in the *Amazon FSx for Windows File Server User
-    #   Guide*.
     #
     #   For Lustre file systems, the storage capacity target value can be
     #   the following:
@@ -7971,18 +7953,31 @@ module Aws::FSx
     #     capacity.
     #
     #   For more information, see [Managing storage and throughput
-    #   capacity][2] in the *Amazon FSx for Lustre User Guide*.
+    #   capacity][1] in the *FSx for Lustre User Guide*.
+    #
+    #   For FSx for OpenZFS file systems, the storage capacity target value
+    #   must be at least 10 percent greater than the current storage
+    #   capacity value. For more information, see [Managing storage
+    #   capacity][2] in the *FSx for OpenZFS User Guide*.
+    #
+    #   For Windows file systems, the storage capacity target value must be
+    #   at least 10 percent greater than the current storage capacity value.
+    #   To increase storage capacity, the file system must have at least 16
+    #   MBps of throughput capacity. For more information, see [Managing
+    #   storage capacity][3] in the *Amazon FSx for Windows File Server User
+    #   Guide*.
     #
     #   For ONTAP file systems, the storage capacity target value must be at
     #   least 10 percent greater than the current storage capacity value.
     #   For more information, see [Managing storage capacity and provisioned
-    #   IOPS][3] in the *Amazon FSx for NetApp ONTAP User Guide*.
+    #   IOPS][4] in the *Amazon FSx for NetApp ONTAP User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
-    #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html
-    #   [3]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-storage-capacity.html
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-storage-capacity.html
+    #   [3]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
+    #   [4]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-storage-capacity.html
     #   @return [Integer]
     #
     # @!attribute [rw] windows_configuration
@@ -8257,7 +8252,7 @@ module Aws::FSx
 
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
-    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   of up to 63 ASCII characters. This token is automatically filled on
     #   your behalf when you use the Command Line Interface (CLI) or an
     #   Amazon Web Services SDK.
     #
@@ -8304,7 +8299,7 @@ module Aws::FSx
     #
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
-    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   of up to 63 ASCII characters. This token is automatically filled on
     #   your behalf when you use the Command Line Interface (CLI) or an
     #   Amazon Web Services SDK.
     #
@@ -8365,7 +8360,7 @@ module Aws::FSx
 
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
-    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   of up to 63 ASCII characters. This token is automatically filled on
     #   your behalf when you use the Command Line Interface (CLI) or an
     #   Amazon Web Services SDK.
     #

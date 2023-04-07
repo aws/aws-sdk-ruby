@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2023-04-07)
+------------------
+
+* Feature - Update documentation of API descriptions as needed in support of temporary credentials with IAM identity.
+
 1.25.0 (2023-03-09)
 ------------------
 

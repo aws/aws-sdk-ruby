@@ -22,6 +22,7 @@ require_relative 'aws-sdk-lambda/endpoint_parameters'
 require_relative 'aws-sdk-lambda/endpoint_provider'
 require_relative 'aws-sdk-lambda/endpoints'
 require_relative 'aws-sdk-lambda/customizations'
+require_relative 'aws-sdk-lambda/event_streams'
 
 # This module provides support for AWS Lambda. This module is available in the
 # `aws-sdk-lambda` gem.
@@ -53,6 +54,6 @@ require_relative 'aws-sdk-lambda/customizations'
 # @!group service
 module Aws::Lambda
 
-  GEM_VERSION = '1.92.0'
+  GEM_VERSION = '1.93.0'
 
 end

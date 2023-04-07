@@ -4737,6 +4737,18 @@ module Aws::DocDB
     #   `DeletionProtection` is disabled. `DeletionProtection` protects
     #   clusters from being accidentally deleted.
     #
+    # @option params [String] :db_cluster_parameter_group_name
+    #   The name of the DB cluster parameter group to associate with this DB
+    #   cluster.
+    #
+    #   *Type:* String.       *Required:* No.
+    #
+    #   If this argument is omitted, the default DB cluster parameter group is
+    #   used. If supplied, must match the name of an existing default DB
+    #   cluster parameter group. The string must consist of from 1 to 255
+    #   letters, numbers or hyphens. Its first character must be a letter, and
+    #   it cannot end with a hyphen or contain two consecutive hyphens.
+    #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
@@ -4761,6 +4773,7 @@ module Aws::DocDB
     #     kms_key_id: "String",
     #     enable_cloudwatch_logs_exports: ["String"],
     #     deletion_protection: false,
+    #     db_cluster_parameter_group_name: "String",
     #   })
     #
     # @example Response structure
@@ -4845,6 +4858,9 @@ module Aws::DocDB
     #
     #   * `copy-on-write` - The new DB cluster is restored as a clone of the
     #     source DB cluster.
+    #
+    #   Constraints: You can't specify `copy-on-write` if the engine version
+    #   of the source DB cluster is earlier than 1.11.
     #
     #   If you don't specify a `RestoreType` value, then the new DB cluster
     #   is restored as a full copy of the source DB cluster.
@@ -5193,7 +5209,7 @@ module Aws::DocDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-docdb'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

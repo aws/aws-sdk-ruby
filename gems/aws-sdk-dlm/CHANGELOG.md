@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2023-04-07)
+------------------
+
+* Feature - Updated timestamp format for GetLifecyclePolicy API
+
 1.55.0 (2023-01-30)
 ------------------
 

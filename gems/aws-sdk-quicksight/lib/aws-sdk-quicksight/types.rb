@@ -4117,6 +4117,55 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @!attribute [rw] data_set_id
+    #   The ID of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule
+    #   The refresh schedule.
+    #   @return [Types::RefreshSchedule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateRefreshScheduleRequest AWS API Documentation
+    #
+    class CreateRefreshScheduleRequest < Struct.new(
+      :data_set_id,
+      :aws_account_id,
+      :schedule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_id
+    #   The ID of the refresh schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the refresh schedule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateRefreshScheduleResponse AWS API Documentation
+    #
+    class CreateRefreshScheduleResponse < Struct.new(
+      :status,
+      :request_id,
+      :schedule_id,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] aws_account_id
     #   The ID of the Amazon Web Services account that contains the template
     #   that you creating an alias for.
@@ -5854,6 +5903,20 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The refresh properties of a dataset.
+    #
+    # @!attribute [rw] refresh_configuration
+    #   The refresh configuration for a dataset.
+    #   @return [Types::RefreshConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetRefreshProperties AWS API Documentation
+    #
+    class DataSetRefreshProperties < Struct.new(
+      :refresh_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Dataset schema.
     #
     # @!attribute [rw] column_schema_list
@@ -7089,6 +7152,40 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
+    #   The ID of the dataset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteDataSetRefreshPropertiesRequest AWS API Documentation
+    #
+    class DeleteDataSetRefreshPropertiesRequest < Struct.new(
+      :aws_account_id,
+      :data_set_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteDataSetRefreshPropertiesResponse AWS API Documentation
+    #
+    class DeleteDataSetRefreshPropertiesResponse < Struct.new(
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_set_id
     #   The ID for the dataset that you want to create. This ID is unique
     #   per Amazon Web Services Region for each Amazon Web Services account.
     #   @return [String]
@@ -7430,6 +7527,55 @@ module Aws::QuickSight
     class DeleteNamespaceResponse < Struct.new(
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_set_id
+    #   The ID of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_id
+    #   The ID of the refresh schedule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteRefreshScheduleRequest AWS API Documentation
+    #
+    class DeleteRefreshScheduleRequest < Struct.new(
+      :data_set_id,
+      :aws_account_id,
+      :schedule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_id
+    #   The ID of the refresh schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the refresh schedule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteRefreshScheduleResponse AWS API Documentation
+    #
+    class DeleteRefreshScheduleResponse < Struct.new(
+      :status,
+      :request_id,
+      :schedule_id,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8358,6 +8504,45 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
+    #   The ID of the dataset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDataSetRefreshPropertiesRequest AWS API Documentation
+    #
+    class DescribeDataSetRefreshPropertiesRequest < Struct.new(
+      :aws_account_id,
+      :data_set_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_set_refresh_properties
+    #   The dataset refresh properties.
+    #   @return [Types::DataSetRefreshProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDataSetRefreshPropertiesResponse AWS API Documentation
+    #
+    class DescribeDataSetRefreshPropertiesResponse < Struct.new(
+      :request_id,
+      :status,
+      :data_set_refresh_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_set_id
     #   The ID for the dataset that you want to create. This ID is unique
     #   per Amazon Web Services Region for each Amazon Web Services account.
     #   @return [String]
@@ -8895,6 +9080,55 @@ module Aws::QuickSight
       :namespace,
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_set_id
+    #   The ID of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_id
+    #   The ID of the refresh schedule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeRefreshScheduleRequest AWS API Documentation
+    #
+    class DescribeRefreshScheduleRequest < Struct.new(
+      :aws_account_id,
+      :data_set_id,
+      :schedule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] refresh_schedule
+    #   The refresh schedule.
+    #   @return [Types::RefreshSchedule]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the refresh schedule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeRefreshScheduleResponse AWS API Documentation
+    #
+    class DescribeRefreshScheduleResponse < Struct.new(
+      :refresh_schedule,
+      :status,
+      :request_id,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12967,6 +13201,20 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The incremental refresh configuration for a dataset.
+    #
+    # @!attribute [rw] lookback_window
+    #   The lookback window setup for an incremental refresh configuration.
+    #   @return [Types::LookbackWindow]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/IncrementalRefresh AWS API Documentation
+    #
+    class IncrementalRefresh < Struct.new(
+      :lookback_window)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the SPICE ingestion for a dataset.
     #
     # @!attribute [rw] arn
@@ -14955,6 +15203,45 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_set_id
+    #   The ID of the dataset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListRefreshSchedulesRequest AWS API Documentation
+    #
+    class ListRefreshSchedulesRequest < Struct.new(
+      :aws_account_id,
+      :data_set_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] refresh_schedules
+    #   The list of refresh schedules for the dataset.
+    #   @return [Array<Types::RefreshSchedule>]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListRefreshSchedulesResponse AWS API Documentation
+    #
+    class ListRefreshSchedulesResponse < Struct.new(
+      :refresh_schedules,
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want a list
     #   of tags for.
@@ -15559,6 +15846,31 @@ module Aws::QuickSight
     class LongFormatText < Struct.new(
       :plain_text,
       :rich_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The lookback window setup of an incremental refresh configuration.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the lookback window column.
+    #   @return [String]
+    #
+    # @!attribute [rw] size
+    #   The lookback window column size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] size_unit
+    #   The size unit that is used for the lookback window column. Valid
+    #   values for this structure are `HOUR`, `DAY`, and `WEEK`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/LookbackWindow AWS API Documentation
+    #
+    class LookbackWindow < Struct.new(
+      :column_name,
+      :size,
+      :size_unit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17806,6 +18118,45 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_set_id
+    #   The ID of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_set_refresh_properties
+    #   The dataset refresh properties.
+    #   @return [Types::DataSetRefreshProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PutDataSetRefreshPropertiesRequest AWS API Documentation
+    #
+    class PutDataSetRefreshPropertiesRequest < Struct.new(
+      :aws_account_id,
+      :data_set_id,
+      :data_set_refresh_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PutDataSetRefreshPropertiesResponse AWS API Documentation
+    #
+    class PutDataSetRefreshPropertiesResponse < Struct.new(
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a queued dataset SPICE ingestion.
     #
     # @!attribute [rw] waiting_on_ingestion
@@ -18344,6 +18695,120 @@ module Aws::QuickSight
     class ReferenceLineValueLabelConfiguration < Struct.new(
       :relative_position,
       :format_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The refresh configuration of a dataset.
+    #
+    # @!attribute [rw] incremental_refresh
+    #   The incremental refresh for the dataset.
+    #   @return [Types::IncrementalRefresh]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RefreshConfiguration AWS API Documentation
+    #
+    class RefreshConfiguration < Struct.new(
+      :incremental_refresh)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the interval between each scheduled refresh of a dataset.
+    #
+    # @!attribute [rw] interval
+    #   The interval between scheduled refreshes. Valid values are as
+    #   follows:
+    #
+    #   * `MINUTE15`: The dataset refreshes every 15 minutes. This value is
+    #     only supported for incremental refreshes. This interval can only
+    #     be used for one schedule per dataset.
+    #
+    #   * `MINUTE30`:The dataset refreshes every 30 minutes. This value is
+    #     only supported for incremental refreshes. This interval can only
+    #     be used for one schedule per dataset.
+    #
+    #   * `HOURLY`: The dataset refreshes every hour. This interval can only
+    #     be used for one schedule per dataset.
+    #
+    #   * `DAILY`: The dataset refreshes every day.
+    #
+    #   * `WEEKLY`: The dataset refreshes every week.
+    #
+    #   * `MONTHLY`: The dataset refreshes every month.
+    #   @return [String]
+    #
+    # @!attribute [rw] refresh_on_day
+    #   The day of the week that you want to schedule the refresh on. This
+    #   value is required for weekly and monthly refresh intervals.
+    #   @return [Types::ScheduleRefreshOnEntity]
+    #
+    # @!attribute [rw] timezone
+    #   The timezone that you want the refresh schedule to use. The timezone
+    #   ID must match a corresponding ID found on
+    #   `java.util.time.getAvailableIDs()`.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_of_the_day
+    #   The time of day that you want the datset to refresh. This value is
+    #   expressed in HH:MM format. This field is not required for schedules
+    #   that refresh hourly.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RefreshFrequency AWS API Documentation
+    #
+    class RefreshFrequency < Struct.new(
+      :interval,
+      :refresh_on_day,
+      :timezone,
+      :time_of_the_day)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The refresh schedule of a dataset.
+    #
+    # @!attribute [rw] schedule_id
+    #   An identifier for the refresh schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_frequency
+    #   The frequency for the refresh schedule.
+    #   @return [Types::RefreshFrequency]
+    #
+    # @!attribute [rw] start_after_date_time
+    #   Time after which the refresh schedule can be started, expressed in
+    #   `YYYY-MM-DDTHH:MM:SS` format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] refresh_type
+    #   The type of refresh that a datset undergoes. Valid values are as
+    #   follows:
+    #
+    #   * `FULL_REFRESH`: A complete refresh of a dataset.
+    #
+    #   * `INCREMENTAL_REFRESH`: A partial refresh of some rows of a
+    #     dataset, based on the time window specified.
+    #
+    #   For more information on full and incremental refreshes, see
+    #   [Refreshing SPICE data][1] in the *Amazon QuickSight User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/refreshing-imported-data.html
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the refresh schedule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RefreshSchedule AWS API Documentation
+    #
+    class RefreshSchedule < Struct.new(
+      :schedule_id,
+      :schedule_frequency,
+      :start_after_date_time,
+      :refresh_type,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19163,11 +19628,20 @@ module Aws::QuickSight
     #   names and columns that they are assigned to.
     #   @return [Array<Types::RowLevelPermissionTagRule>]
     #
+    # @!attribute [rw] tag_rule_configurations
+    #   A list of tag configuration rules to apply to a dataset. All tag
+    #   configurations have the OR condition. Tags within each tile will be
+    #   joined (AND). At least one rule in this structure must have all tag
+    #   values assigned to it to apply Row-level security (RLS) to the
+    #   dataset.
+    #   @return [Array<Array<String>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RowLevelPermissionTagConfiguration AWS API Documentation
     #
     class RowLevelPermissionTagConfiguration < Struct.new(
       :status,
-      :tag_rules)
+      :tag_rules,
+      :tag_rule_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19614,6 +20088,25 @@ module Aws::QuickSight
       :chart_configuration,
       :actions,
       :column_hierarchies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The refresh on entity for weekly or monthly schedules.
+    #
+    # @!attribute [rw] day_of_week
+    #   The day of the week that you want to schedule a refresh on.
+    #   @return [String]
+    #
+    # @!attribute [rw] day_of_month
+    #   The day of the month that you want to schedule refresh on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ScheduleRefreshOnEntity AWS API Documentation
+    #
+    class ScheduleRefreshOnEntity < Struct.new(
+      :day_of_week,
+      :day_of_month)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24584,6 +25077,55 @@ module Aws::QuickSight
     class UpdatePublicSharingSettingsResponse < Struct.new(
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_set_id
+    #   The ID of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule
+    #   The refresh schedule.
+    #   @return [Types::RefreshSchedule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateRefreshScheduleRequest AWS API Documentation
+    #
+    class UpdateRefreshScheduleRequest < Struct.new(
+      :data_set_id,
+      :aws_account_id,
+      :schedule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_id
+    #   The ID of the refresh schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the refresh schedule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateRefreshScheduleResponse AWS API Documentation
+    #
+    class UpdateRefreshScheduleResponse < Struct.new(
+      :status,
+      :request_id,
+      :schedule_id,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
