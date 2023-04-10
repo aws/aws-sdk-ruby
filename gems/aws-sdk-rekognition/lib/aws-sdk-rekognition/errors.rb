@@ -45,6 +45,7 @@ module Aws::Rekognition
   # * {ResourceNotFoundException}
   # * {ResourceNotReadyException}
   # * {ServiceQuotaExceededException}
+  # * {SessionNotFoundException}
   # * {ThrottlingException}
   # * {VideoTooLargeException}
   #
@@ -244,6 +245,16 @@ module Aws::Rekognition
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Rekognition::Types::ServiceQuotaExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class SessionNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Rekognition::Types::SessionNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2023-04-10)
+------------------
+
+* Feature - Remove unexpected API changes.
+
 1.2.0 (2023-02-28)
 ------------------
 

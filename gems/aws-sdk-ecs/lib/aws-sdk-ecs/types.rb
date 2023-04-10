@@ -148,9 +148,8 @@ module Aws::ECS
     #   Amazon EC2 instances in an Auto Scaling group that contain tasks
     #   from being terminated during a scale-in action. The Auto Scaling
     #   group and each instance in the Auto Scaling group must have instance
-    #   protection from scale-in actions enabled as well. For more
-    #   information, see [Instance Protection][1] in the *Auto Scaling User
-    #   Guide*.
+    #   protection from scale-in actions on as well. For more information,
+    #   see [Instance Protection][1] in the *Auto Scaling User Guide*.
     #
     #   When managed termination protection is off, your Amazon EC2
     #   instances aren't protected from termination when the Auto Scaling
@@ -774,7 +773,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/working-with-services.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ClusterServiceConnectDefaultsRequest AWS API Documentation
@@ -789,16 +788,17 @@ module Aws::ECS
     # turn on CloudWatch Container Insights for a cluster.
     #
     # @!attribute [rw] name
-    #   The name of the cluster setting. The only supported value is
-    #   `containerInsights`.
+    #   The name of the cluster setting. The value is `containerInsights` .
     #   @return [String]
     #
     # @!attribute [rw] value
     #   The value to set for the cluster setting. The supported values are
-    #   `enabled` and `disabled`. If `enabled` is specified, CloudWatch
-    #   Container Insights will be enabled for the cluster, otherwise it
-    #   will be off unless the `containerInsights` account setting is turned
-    #   on. If a cluster value is specified, it will override the
+    #   `enabled` and `disabled`.
+    #
+    #   If you set `name` to `containerInsights` and `value` to `enabled`,
+    #   CloudWatch Container Insights will be on for the cluster, otherwise
+    #   it will be off unless the `containerInsights` account setting is
+    #   turned on. If a cluster value is specified, it will override the
     #   `containerInsights` value set with [PutAccountSetting][1] or
     #   [PutAccountSettingDefault][2].
     #
@@ -2511,6 +2511,13 @@ module Aws::ECS
     #
     #   A task definition must be specified if the service uses either the
     #   `ECS` or `CODE_DEPLOY` deployment controllers.
+    #
+    #   For more information about deployment types, see [Amazon ECS
+    #   deployment types][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
     #   @return [String]
     #
     # @!attribute [rw] load_balancers
@@ -2839,9 +2846,9 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] enable_execute_command
-    #   Determines whether the execute command functionality is enabled for
-    #   the service. If `true`, this enables execute command functionality
-    #   on all containers in the service tasks.
+    #   Determines whether the execute command functionality is turned on
+    #   for the service. If `true`, this enables execute command
+    #   functionality on all containers in the service tasks.
     #   @return [Boolean]
     #
     # @!attribute [rw] service_connect_configuration
@@ -3445,9 +3452,9 @@ module Aws::ECS
     #   started, it begins in an `IN_PROGRESS` state. When the service
     #   reaches a steady state, the deployment transitions to a `COMPLETED`
     #   state. If the service fails to reach a steady state and circuit
-    #   breaker is enabled, the deployment transitions to a `FAILED` state.
-    #   A deployment in `FAILED` state doesn't launch any new tasks. For
-    #   more information, see DeploymentCircuitBreaker.
+    #   breaker is turned on, the deployment transitions to a `FAILED`
+    #   state. A deployment in `FAILED` state doesn't launch any new tasks.
+    #   For more information, see DeploymentCircuitBreaker.
     #   @return [String]
     #
     # @!attribute [rw] rollout_state_reason
@@ -3559,12 +3566,12 @@ module Aws::ECS
     #  </note>
     #
     # The **deployment circuit breaker** determines whether a service
-    # deployment will fail if the service can't reach a steady state. If
-    # enabled, a service deployment will transition to a failed state and
-    # stop launching new tasks. You can also configure Amazon ECS to roll
-    # back your service to the last completed deployment after a failure.
-    # For more information, see [Rolling update][1] in the *Amazon Elastic
-    # Container Service Developer Guide*.
+    # deployment will fail if the service can't reach a steady state. If it
+    # is turned on, a service deployment will transition to a failed state
+    # and stop launching new tasks. You can also configure Amazon ECS to
+    # roll back your service to the last completed deployment after a
+    # failure. For more information, see [Rolling update][1] in the *Amazon
+    # Elastic Container Service Developer Guide*.
     #
     #
     #
@@ -4385,7 +4392,7 @@ module Aws::ECS
     #   specified, the root directory value specified in the
     #   `EFSVolumeConfiguration` must either be omitted or set to `/` which
     #   will enforce the path set on the EFS access point. If an access
-    #   point is used, transit encryption must be enabled in the
+    #   point is used, transit encryption must be on in the
     #   `EFSVolumeConfiguration`. For more information, see [Working with
     #   Amazon EFS access points][1] in the *Amazon Elastic File System User
     #   Guide*.
@@ -4397,11 +4404,12 @@ module Aws::ECS
     #
     # @!attribute [rw] iam
     #   Determines whether to use the Amazon ECS task role defined in a task
-    #   definition when mounting the Amazon EFS file system. If enabled,
-    #   transit encryption must be enabled in the `EFSVolumeConfiguration`.
-    #   If this parameter is omitted, the default value of `DISABLED` is
-    #   used. For more information, see [Using Amazon EFS access points][1]
-    #   in the *Amazon Elastic Container Service Developer Guide*.
+    #   definition when mounting the Amazon EFS file system. If it is turned
+    #   on, transit encryption must be turned on in the
+    #   `EFSVolumeConfiguration`. If this parameter is omitted, the default
+    #   value of `DISABLED` is used. For more information, see [Using Amazon
+    #   EFS access points][1] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
     #
     #
     #
@@ -4444,10 +4452,10 @@ module Aws::ECS
     # @!attribute [rw] transit_encryption
     #   Determines whether to use encryption for Amazon EFS data in transit
     #   between the Amazon ECS host and the Amazon EFS server. Transit
-    #   encryption must be enabled if Amazon EFS IAM authorization is used.
-    #   If this parameter is omitted, the default value of `DISABLED` is
-    #   used. For more information, see [Encrypting data in transit][1] in
-    #   the *Amazon Elastic File System User Guide*.
+    #   encryption must be turned on if Amazon EFS IAM authorization is
+    #   used. If this parameter is omitted, the default value of `DISABLED`
+    #   is used. For more information, see [Encrypting data in transit][1]
+    #   in the *Amazon Elastic File System User Guide*.
     #
     #
     #
@@ -4536,9 +4544,12 @@ module Aws::ECS
     # more information, see [Fargate task storage][1] in the *Amazon ECS
     # User Guide for Fargate*.
     #
-    # <note markdown="1"> This parameter is only supported for tasks hosted on Fargate using
-    # Linux platform version `1.4.0` or later. This parameter is not
-    # supported for Windows containers on Fargate.
+    # <note markdown="1"> For tasks using the Fargate launch type, the task requires the
+    # following platforms:
+    #
+    #  * Linux platform version `1.4.0` or later.
+    #
+    # ^
     #
     #  </note>
     #
@@ -4895,7 +4906,7 @@ module Aws::ECS
     #   * `taskArn`: The task ARN.
     #
     #   * `protectionEnabled`: The protection status of the task. If
-    #     scale-in protection is enabled for a task, the value is `true`.
+    #     scale-in protection is turned on for a task, the value is `true`.
     #     Otherwise, it is `false`.
     #
     #   * `expirationDate`: The epoch time when protection for the task will
@@ -6381,7 +6392,7 @@ module Aws::ECS
     #
     # @!attribute [rw] name
     #   The name of the managed agent. When the execute command feature is
-    #   enabled, the managed agent name is `ExecuteCommandAgent`.
+    #   turned on, the managed agent name is `ExecuteCommandAgent`.
     #   @return [String]
     #
     # @!attribute [rw] reason
@@ -6435,7 +6446,7 @@ module Aws::ECS
     # The managed scaling settings for the Auto Scaling group capacity
     # provider.
     #
-    # When managed scaling is enabled, Amazon ECS manages the scale-in and
+    # When managed scaling is turned on, Amazon ECS manages the scale-in and
     # scale-out actions of the Auto Scaling group. Amazon ECS manages a
     # target tracking scaling policy using an Amazon ECS managed CloudWatch
     # metric with the specified `targetCapacity` value as the target value
@@ -6866,7 +6877,7 @@ module Aws::ECS
     #     is a static mapping strategy.
     #
     #   * For containers in a task with the `bridge` network mode, the
-    #     Amazon ECS agent finds open ports on the host and automaticaly
+    #     Amazon ECS agent finds open ports on the host and automatically
     #     binds them to the container ports. This is a dynamic mapping
     #     strategy.
     #
@@ -7129,18 +7140,19 @@ module Aws::ECS
     #   ID for your Amazon ECS container instances is affected. If
     #   `awsvpcTrunking` is specified, the ENI limit for your Amazon ECS
     #   container instances is affected. If `containerInsights` is
-    #   specified, the default setting for CloudWatch Container Insights for
-    #   your clusters is affected.
+    #   specified, the default setting for Amazon Web Services CloudWatch
+    #   Container Insights for your clusters is affected.
     #
-    #   Fargate is transitioning from task count-based quotas to vCPU-based
-    #   quotas. You can set the name to `fargateVCPULimit` to opt in or opt
-    #   out of the vCPU-based quotas. For information about the opt in
-    #   timeline, see [Fargate vCPU-based quotas timeline][1] in the *Amazon
-    #   ECS Developer Guide*.
+    #   When you specify `fargateFIPSMode` for the `name` and `enabled` for
+    #   the `value`, Fargate uses FIPS-140 compliant cryptographic
+    #   algorithms on your tasks. For more information about FIPS-140
+    #   compliance with Fargate, see [ Amazon Web Services Fargate Federal
+    #   Information Processing Standard (FIPS) 140-2 compliance][1] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#fargate-quota-timeline
+    #   [1]: https://docs.aws.amazon.com/AWSEC2ContainerServiceDocs/build/server-root/AmazonECS/latest/developerguide/ecs-fips-compliance.html
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -7178,8 +7190,10 @@ module Aws::ECS
     #   and resource ID for your Amazon ECS container instances is affected.
     #   If `awsvpcTrunking` is specified, the elastic network interface
     #   (ENI) limit for your Amazon ECS container instances is affected. If
-    #   `containerInsights` is specified, the default setting for CloudWatch
-    #   Container Insights for your clusters is affected.
+    #   `containerInsights` is specified, the default setting for Amazon Web
+    #   Services CloudWatch Container Insights for your clusters is
+    #   affected. If `fargateFIPSMode` is specified, Fargate FIPS 140
+    #   compliance is affected.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -7754,8 +7768,8 @@ module Aws::ECS
     #   For more information, see [Fargate task storage][1] in the *Amazon
     #   ECS User Guide for Fargate*.
     #
-    #   <note markdown="1"> This parameter is only supported for tasks hosted on Fargate using
-    #   the following platform versions:
+    #   <note markdown="1"> For tasks using the Fargate launch type, the task requires the
+    #   following platforms:
     #
     #    * Linux platform version `1.4.0` or later.
     #
@@ -7906,7 +7920,7 @@ module Aws::ECS
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html
-    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/url-ecs-dev;ecs-inference.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html
     #
     # @!attribute [rw] value
     #   The value for the specified resource type.
@@ -8565,9 +8579,9 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] enable_execute_command
-    #   Determines whether the execute command functionality is enabled for
-    #   the service. If `true`, the execute command functionality is enabled
-    #   for all containers in tasks as part of the service.
+    #   Determines whether the execute command functionality is turned on
+    #   for the service. If `true`, the execute command functionality is
+    #   turned on for all containers in tasks as part of the service.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Service AWS API Documentation
@@ -8704,7 +8718,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/working-with-services.html
     #   @return [String]
     #
     # @!attribute [rw] services
@@ -9064,9 +9078,9 @@ module Aws::ECS
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_execute_command
-    #   Whether or not the execute command functionality is enabled for the
-    #   task. If `true`, this enables execute command functionality on all
-    #   containers in the task.
+    #   Whether or not the execute command functionality is turned on for
+    #   the task. If `true`, this enables execute command functionality on
+    #   all containers in the task.
     #   @return [Boolean]
     #
     # @!attribute [rw] group
@@ -9548,7 +9562,7 @@ module Aws::ECS
     # * The SSM agent is not installed or is not running
     #
     # * There is an interface Amazon VPC endpoint for Amazon ECS, but there
-    #   is not one for for Systems Manager Session Manager
+    #   is not one for Systems Manager Session Manager
     #
     # For information about how to troubleshoot the issues, see
     # [Troubleshooting issues with ECS Exec][1] in the *Amazon Elastic
@@ -9672,9 +9686,9 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] enable_execute_command
-    #   Determines whether execute command functionality is enabled for this
-    #   task. If `true`, execute command functionality is enabled on all the
-    #   containers in the task.
+    #   Determines whether execute command functionality is turned on for
+    #   this task. If `true`, execute command functionality is turned on all
+    #   the containers in the task.
     #   @return [Boolean]
     #
     # @!attribute [rw] execution_stopped_at
@@ -10356,9 +10370,9 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # An object representing a constraint on task placement in the task
-    # definition. For more information, see [Task placement constraints][1]
-    # in the *Amazon Elastic Container Service Developer Guide*.
+    # The constraint on task placement in the task definition. For more
+    # information, see [Task placement constraints][1] in the *Amazon
+    # Elastic Container Service Developer Guide*.
     #
     # <note markdown="1"> Task placement constraints aren't supported for tasks run on Fargate.
     #
@@ -11369,7 +11383,7 @@ module Aws::ECS
     #   * `taskArn`: The task ARN.
     #
     #   * `protectionEnabled`: The protection status of the task. If
-    #     scale-in protection is enabled for a task, the value is `true`.
+    #     scale-in protection is turned on for a task, the value is `true`.
     #     Otherwise, it is `false`.
     #
     #   * `expirationDate`: The epoch time when protection for the task will

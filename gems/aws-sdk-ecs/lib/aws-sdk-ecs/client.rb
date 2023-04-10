@@ -866,6 +866,13 @@ module Aws::ECS
     #   A task definition must be specified if the service uses either the
     #   `ECS` or `CODE_DEPLOY` deployment controllers.
     #
+    #   For more information about deployment types, see [Amazon ECS
+    #   deployment types][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+    #
     # @option params [Array<Types::LoadBalancer>] :load_balancers
     #   A load balancer object representing the load balancers to use with
     #   your service. For more information, see [Service load balancing][1] in
@@ -1167,7 +1174,7 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html
     #
     # @option params [Boolean] :enable_execute_command
-    #   Determines whether the execute command functionality is enabled for
+    #   Determines whether the execute command functionality is turned on for
     #   the service. If `true`, this enables execute command functionality on
     #   all containers in the service tasks.
     #
@@ -1880,13 +1887,13 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_account_setting({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode
     #     principal_arn: "String",
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
     #
@@ -4282,7 +4289,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.htm
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html
     #
     # @option params [String] :cluster
     #   The Amazon Resource Name (ARN) or short name of the cluster the task
@@ -4527,7 +4534,7 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_account_settings({
-    #     name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights
+    #     name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode
     #     value: "String",
     #     principal_arn: "String",
     #     effective_settings: false,
@@ -4538,7 +4545,7 @@ module Aws::ECS
     # @example Response structure
     #
     #   resp.settings #=> Array
-    #   resp.settings[0].name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights"
+    #   resp.settings[0].name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode"
     #   resp.settings[0].value #=> String
     #   resp.settings[0].principal_arn #=> String
     #   resp.next_token #=> String
@@ -5402,11 +5409,10 @@ module Aws::ECS
     # Modifies an account setting. Account settings are set on a per-Region
     # basis.
     #
-    # If you change the account setting for the root user, the default
-    # settings for all of the users and roles that no individual account
-    # setting was specified are reset for. For more information, see
-    # [Account Settings][1] in the *Amazon Elastic Container Service
-    # Developer Guide*.
+    # If you change the root user account setting, the default settings are
+    # reset for users and roles that do not have specified individual
+    # account settings. For more information, see [Account Settings][1] in
+    # the *Amazon Elastic Container Service Developer Guide*.
     #
     # When `serviceLongArnFormat`, `taskLongArnFormat`, or
     # `containerInstanceLongArnFormat` are specified, the Amazon Resource
@@ -5420,19 +5426,19 @@ module Aws::ECS
     #
     # When `awsvpcTrunking` is specified, the elastic network interface
     # (ENI) limit for any new container instances that support the feature
-    # is changed. If `awsvpcTrunking` is enabled, any new container
+    # is changed. If `awsvpcTrunking` is turned on, any new container
     # instances that support the feature are launched have the increased ENI
     # limits available to them. For more information, see [Elastic Network
     # Interface Trunking][2] in the *Amazon Elastic Container Service
     # Developer Guide*.
     #
     # When `containerInsights` is specified, the default setting indicating
-    # whether CloudWatch Container Insights is enabled for your clusters is
-    # changed. If `containerInsights` is enabled, any new clusters that are
-    # created will have Container Insights enabled unless you disable it
-    # during cluster creation. For more information, see [CloudWatch
-    # Container Insights][3] in the *Amazon Elastic Container Service
-    # Developer Guide*.
+    # whether Amazon Web Services CloudWatch Container Insights is turned on
+    # for your clusters is changed. If `containerInsights` is turned on, any
+    # new clusters that are created will have Container Insights turned on
+    # unless you disable it during cluster creation. For more information,
+    # see [CloudWatch Container Insights][3] in the *Amazon Elastic
+    # Container Service Developer Guide*.
     #
     #
     #
@@ -5449,8 +5455,10 @@ module Aws::ECS
     #   for your Amazon ECS container instances is affected. If
     #   `awsvpcTrunking` is specified, the elastic network interface (ENI)
     #   limit for your Amazon ECS container instances is affected. If
-    #   `containerInsights` is specified, the default setting for CloudWatch
-    #   Container Insights for your clusters is affected.
+    #   `containerInsights` is specified, the default setting for Amazon Web
+    #   Services CloudWatch Container Insights for your clusters is affected.
+    #   If `fargateFIPSMode` is specified, Fargate FIPS 140 compliance is
+    #   affected.
     #
     # @option params [required, String] :value
     #   The account setting value for the specified principal ARN. Accepted
@@ -5517,14 +5525,14 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_account_setting({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode
     #     value: "String", # required
     #     principal_arn: "String",
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
     #
@@ -5550,18 +5558,19 @@ module Aws::ECS
     #   for your Amazon ECS container instances is affected. If
     #   `awsvpcTrunking` is specified, the ENI limit for your Amazon ECS
     #   container instances is affected. If `containerInsights` is specified,
-    #   the default setting for CloudWatch Container Insights for your
-    #   clusters is affected.
+    #   the default setting for Amazon Web Services CloudWatch Container
+    #   Insights for your clusters is affected.
     #
-    #   Fargate is transitioning from task count-based quotas to vCPU-based
-    #   quotas. You can set the name to `fargateVCPULimit` to opt in or opt
-    #   out of the vCPU-based quotas. For information about the opt in
-    #   timeline, see [Fargate vCPU-based quotas timeline][1] in the *Amazon
-    #   ECS Developer Guide*.
+    #   When you specify `fargateFIPSMode` for the `name` and `enabled` for
+    #   the `value`, Fargate uses FIPS-140 compliant cryptographic algorithms
+    #   on your tasks. For more information about FIPS-140 compliance with
+    #   Fargate, see [ Amazon Web Services Fargate Federal Information
+    #   Processing Standard (FIPS) 140-2 compliance][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#fargate-quota-timeline
+    #   [1]: https://docs.aws.amazon.com/AWSEC2ContainerServiceDocs/build/server-root/AmazonECS/latest/developerguide/ecs-fips-compliance.html
     #
     # @option params [required, String] :value
     #   The account setting value for the specified principal ARN. Accepted
@@ -5595,13 +5604,13 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_account_setting_default({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode
     #     value: "String", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
     #
@@ -6322,8 +6331,8 @@ module Aws::ECS
     #   more information, see [Fargate task storage][1] in the *Amazon ECS
     #   User Guide for Fargate*.
     #
-    #   <note markdown="1"> This parameter is only supported for tasks hosted on Fargate using the
-    #   following platform versions:
+    #   <note markdown="1"> For tasks using the Fargate launch type, the task requires the
+    #   following platforms:
     #
     #    * Linux platform version `1.4.0` or later.
     #
@@ -7372,7 +7381,7 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #
     # @option params [Boolean] :enable_execute_command
-    #   Whether or not the execute command functionality is enabled for the
+    #   Whether or not the execute command functionality is turned on for the
     #   task. If `true`, this enables execute command functionality on all
     #   containers in the task.
     #
@@ -9400,7 +9409,7 @@ module Aws::ECS
     # [deployments][2].
     #
     # Task-protection, by default, expires after 2 hours at which point
-    # Amazon ECS unsets the `protectionEnabled` property making the task
+    # Amazon ECS clears the `protectionEnabled` property making the task
     # eligible for termination by a subsequent scale-in event.
     #
     # You can specify a custom expiration period for task protection from 1
@@ -9674,7 +9683,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.112.0'
+      context[:gem_version] = '1.113.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

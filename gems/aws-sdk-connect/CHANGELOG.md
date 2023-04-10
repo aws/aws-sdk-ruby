@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2023-04-10)
+------------------
+
+* Feature - This release adds the ability to configure an agent's routing profile to receive contacts from multiple channels at the same time via extending the UpdateRoutingProfileConcurrency, CreateRoutingProfile and DescribeRoutingProfile APIs.
+
 1.100.0 (2023-03-27)
 ------------------
 

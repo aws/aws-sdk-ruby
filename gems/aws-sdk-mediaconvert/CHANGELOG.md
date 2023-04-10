@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2023-04-10)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK now supports conversion of 608 paint-on captions to pop-on captions for SCC sources.
+
 1.103.0 (2023-03-23)
 ------------------
 

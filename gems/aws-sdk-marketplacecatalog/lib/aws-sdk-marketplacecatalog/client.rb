@@ -407,6 +407,30 @@ module Aws::MarketplaceCatalog
       req.send_request(options)
     end
 
+    # Deletes a resource-based policy on an Entity that is identified by its
+    # resource ARN.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Entity resource that is
+    #   associated with the resource policy.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     resource_arn: "ResourceARN", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Provides information about a given change set.
     #
     # @option params [required, String] :catalog
@@ -503,6 +527,36 @@ module Aws::MarketplaceCatalog
     # @param [Hash] params ({})
     def describe_entity(params = {}, options = {})
       req = build_request(:describe_entity, params)
+      req.send_request(options)
+    end
+
+    # Gets a resource-based policy of an Entity that is identified by its
+    # resource ARN.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Entity resource that is
+    #   associated with the resource policy.
+    #
+    # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePolicyResponse#policy #policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_policy({
+    #     resource_arn: "ResourceARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/GetResourcePolicy AWS API Documentation
+    #
+    # @overload get_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def get_resource_policy(params = {}, options = {})
+      req = build_request(:get_resource_policy, params)
       req.send_request(options)
     end
 
@@ -604,6 +658,8 @@ module Aws::MarketplaceCatalog
     #   Specifies the upper limit of the elements on a single page. If a value
     #   isn't provided, the default value is 20.
     #
+    # @option params [String] :ownership_type
+    #
     # @return [Types::ListEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListEntitiesResponse#entity_summary_list #entity_summary_list} => Array&lt;Types::EntitySummary&gt;
@@ -628,6 +684,7 @@ module Aws::MarketplaceCatalog
     #     },
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     ownership_type: "SELF", # accepts SELF, SHARED
     #   })
     #
     # @example Response structure
@@ -689,6 +746,34 @@ module Aws::MarketplaceCatalog
       req.send_request(options)
     end
 
+    # Attaches a resource-based policy to an Entity. Examples of an entity
+    # include: `AmiProduct` and `ContainerProduct`.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Entity resource you want to
+    #   associate with a resource policy.
+    #
+    # @option params [required, String] :policy
+    #   The policy document to set; formatted in JSON.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     resource_arn: "ResourceARN", # required
+    #     policy: "ResourcePolicyJson", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Allows you to request changes for your entities. Within a single
     # `ChangeSet`, you can't start the same change type against the same
     # entity multiple times. Additionally, when a `ChangeSet` is running,
@@ -704,12 +789,17 @@ module Aws::MarketplaceCatalog
     # (`entity-id@1`).
     #
     # For more information about working with change sets, see [ Working
-    # with change sets][2].
+    # with change sets][2]. For information on change types for single-AMI
+    # products, see [Working with single-AMI products][3]. Als, for more
+    # information on change types available for container-based products,
+    # see [Working with container products][4].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples
     # [2]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets
+    # [3]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products
+    # [4]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products
     #
     # @option params [required, String] :catalog
     #   The catalog related to the request. Fixed value: `AWSMarketplace`
@@ -866,7 +956,7 @@ module Aws::MarketplaceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplacecatalog'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

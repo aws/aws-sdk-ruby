@@ -68,6 +68,7 @@ module Aws::Connect
     AvailableNumberSummary = Shapes::StructureShape.new(name: 'AvailableNumberSummary')
     AvailableNumbersList = Shapes::ListShape.new(name: 'AvailableNumbersList')
     AwsRegion = Shapes::StringShape.new(name: 'AwsRegion')
+    BehaviorType = Shapes::StringShape.new(name: 'BehaviorType')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BotName = Shapes::StringShape.new(name: 'BotName')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
@@ -155,6 +156,7 @@ module Aws::Connect
     CreateVocabularyRequest = Shapes::StructureShape.new(name: 'CreateVocabularyRequest')
     CreateVocabularyResponse = Shapes::StructureShape.new(name: 'CreateVocabularyResponse')
     Credentials = Shapes::StructureShape.new(name: 'Credentials')
+    CrossChannelBehavior = Shapes::StructureShape.new(name: 'CrossChannelBehavior')
     CurrentMetric = Shapes::StructureShape.new(name: 'CurrentMetric')
     CurrentMetricData = Shapes::StructureShape.new(name: 'CurrentMetricData')
     CurrentMetricDataCollections = Shapes::ListShape.new(name: 'CurrentMetricDataCollections')
@@ -1272,6 +1274,9 @@ module Aws::Connect
     Credentials.add_member(:refresh_token_expiration, Shapes::ShapeRef.new(shape: timestamp, location_name: "RefreshTokenExpiration"))
     Credentials.struct_class = Types::Credentials
 
+    CrossChannelBehavior.add_member(:behavior_type, Shapes::ShapeRef.new(shape: BehaviorType, required: true, location_name: "BehaviorType"))
+    CrossChannelBehavior.struct_class = Types::CrossChannelBehavior
+
     CurrentMetric.add_member(:name, Shapes::ShapeRef.new(shape: CurrentMetricName, location_name: "Name"))
     CurrentMetric.add_member(:unit, Shapes::ShapeRef.new(shape: Unit, location_name: "Unit"))
     CurrentMetric.struct_class = Types::CurrentMetric
@@ -2231,6 +2236,7 @@ module Aws::Connect
 
     MediaConcurrency.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, required: true, location_name: "Channel"))
     MediaConcurrency.add_member(:concurrency, Shapes::ShapeRef.new(shape: Concurrency, required: true, location_name: "Concurrency"))
+    MediaConcurrency.add_member(:cross_channel_behavior, Shapes::ShapeRef.new(shape: CrossChannelBehavior, location_name: "CrossChannelBehavior"))
     MediaConcurrency.struct_class = Types::MediaConcurrency
 
     MetricDataCollectionsV2.member = Shapes::ShapeRef.new(shape: MetricDataV2)

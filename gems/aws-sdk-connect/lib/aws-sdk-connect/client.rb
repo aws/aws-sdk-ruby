@@ -1531,6 +1531,9 @@ module Aws::Connect
     #       {
     #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK
     #         concurrency: 1, # required
+    #         cross_channel_behavior: {
+    #           behavior_type: "ROUTE_CURRENT_CHANNEL_ONLY", # required, accepts ROUTE_CURRENT_CHANNEL_ONLY, ROUTE_ANY_CHANNEL
+    #         },
     #       },
     #     ],
     #     tags: {
@@ -3295,6 +3298,7 @@ module Aws::Connect
     #   resp.routing_profile.media_concurrencies #=> Array
     #   resp.routing_profile.media_concurrencies[0].channel #=> String, one of "VOICE", "CHAT", "TASK"
     #   resp.routing_profile.media_concurrencies[0].concurrency #=> Integer
+    #   resp.routing_profile.media_concurrencies[0].cross_channel_behavior.behavior_type #=> String, one of "ROUTE_CURRENT_CHANNEL_ONLY", "ROUTE_ANY_CHANNEL"
     #   resp.routing_profile.default_outbound_queue_id #=> String
     #   resp.routing_profile.tags #=> Hash
     #   resp.routing_profile.tags["TagKey"] #=> String
@@ -4841,7 +4845,8 @@ module Aws::Connect
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The timestamp, in UNIX Epoch time format, at which to end the
     #   reporting interval for the retrieval of historical metrics data. The
-    #   time must be later than the start time timestamp.
+    #   time must be later than the start time timestamp. It cannot be later
+    #   than the current timestamp.
     #
     #   The time range between the start and end time must be less than 24
     #   hours.
@@ -5088,11 +5093,19 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile
     #
+    #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
+    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
+    #     `LT` (for "Less than").
+    #
     #   SUM\_CONTACTS\_ABANDONED\_IN\_X
     #
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #
+    #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
+    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
+    #     `LT` (for "Less than").
     #
     #   SUM\_CONTACTS\_DISCONNECTED
     #
@@ -7745,6 +7758,7 @@ module Aws::Connect
     #   resp.routing_profiles[0].media_concurrencies #=> Array
     #   resp.routing_profiles[0].media_concurrencies[0].channel #=> String, one of "VOICE", "CHAT", "TASK"
     #   resp.routing_profiles[0].media_concurrencies[0].concurrency #=> Integer
+    #   resp.routing_profiles[0].media_concurrencies[0].cross_channel_behavior.behavior_type #=> String, one of "ROUTE_CURRENT_CHANNEL_ONLY", "ROUTE_ANY_CHANNEL"
     #   resp.routing_profiles[0].default_outbound_queue_id #=> String
     #   resp.routing_profiles[0].tags #=> Hash
     #   resp.routing_profiles[0].tags["TagKey"] #=> String
@@ -10004,6 +10018,9 @@ module Aws::Connect
     #       {
     #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK
     #         concurrency: 1, # required
+    #         cross_channel_behavior: {
+    #           behavior_type: "ROUTE_CURRENT_CHANNEL_ONLY", # required, accepts ROUTE_CURRENT_CHANNEL_ONLY, ROUTE_ANY_CHANNEL
+    #         },
     #       },
     #     ],
     #   })
@@ -10773,7 +10790,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.100.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

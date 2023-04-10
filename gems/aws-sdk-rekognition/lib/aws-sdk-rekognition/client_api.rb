@@ -21,6 +21,9 @@ module Aws::Rekognition
     Attributes = Shapes::ListShape.new(name: 'Attributes')
     AudioMetadata = Shapes::StructureShape.new(name: 'AudioMetadata')
     AudioMetadataList = Shapes::ListShape.new(name: 'AudioMetadataList')
+    AuditImage = Shapes::StructureShape.new(name: 'AuditImage')
+    AuditImages = Shapes::ListShape.new(name: 'AuditImages')
+    AuditImagesLimit = Shapes::IntegerShape.new(name: 'AuditImagesLimit')
     Beard = Shapes::StructureShape.new(name: 'Beard')
     BlackFrame = Shapes::StructureShape.new(name: 'BlackFrame')
     BodyPart = Shapes::StringShape.new(name: 'BodyPart')
@@ -62,6 +65,9 @@ module Aws::Rekognition
     CreateCollectionResponse = Shapes::StructureShape.new(name: 'CreateCollectionResponse')
     CreateDatasetRequest = Shapes::StructureShape.new(name: 'CreateDatasetRequest')
     CreateDatasetResponse = Shapes::StructureShape.new(name: 'CreateDatasetResponse')
+    CreateFaceLivenessSessionRequest = Shapes::StructureShape.new(name: 'CreateFaceLivenessSessionRequest')
+    CreateFaceLivenessSessionRequestSettings = Shapes::StructureShape.new(name: 'CreateFaceLivenessSessionRequestSettings')
+    CreateFaceLivenessSessionResponse = Shapes::StructureShape.new(name: 'CreateFaceLivenessSessionResponse')
     CreateProjectRequest = Shapes::StructureShape.new(name: 'CreateProjectRequest')
     CreateProjectResponse = Shapes::StructureShape.new(name: 'CreateProjectResponse')
     CreateProjectVersionRequest = Shapes::StructureShape.new(name: 'CreateProjectVersionRequest')
@@ -184,6 +190,8 @@ module Aws::Rekognition
     GetContentModerationResponse = Shapes::StructureShape.new(name: 'GetContentModerationResponse')
     GetFaceDetectionRequest = Shapes::StructureShape.new(name: 'GetFaceDetectionRequest')
     GetFaceDetectionResponse = Shapes::StructureShape.new(name: 'GetFaceDetectionResponse')
+    GetFaceLivenessSessionResultsRequest = Shapes::StructureShape.new(name: 'GetFaceLivenessSessionResultsRequest')
+    GetFaceLivenessSessionResultsResponse = Shapes::StructureShape.new(name: 'GetFaceLivenessSessionResultsResponse')
     GetFaceSearchRequest = Shapes::StructureShape.new(name: 'GetFaceSearchRequest')
     GetFaceSearchResponse = Shapes::StructureShape.new(name: 'GetFaceSearchResponse')
     GetLabelDetectionRequest = Shapes::StructureShape.new(name: 'GetLabelDetectionRequest')
@@ -270,6 +278,11 @@ module Aws::Rekognition
     ListStreamProcessorsResponse = Shapes::StructureShape.new(name: 'ListStreamProcessorsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    LivenessImageBlob = Shapes::BlobShape.new(name: 'LivenessImageBlob')
+    LivenessOutputConfig = Shapes::StructureShape.new(name: 'LivenessOutputConfig')
+    LivenessS3KeyPrefix = Shapes::StringShape.new(name: 'LivenessS3KeyPrefix')
+    LivenessSessionId = Shapes::StringShape.new(name: 'LivenessSessionId')
+    LivenessSessionStatus = Shapes::StringShape.new(name: 'LivenessSessionStatus')
     MalformedPolicyDocumentException = Shapes::StructureShape.new(name: 'MalformedPolicyDocumentException')
     MaxDurationInSecondsULong = Shapes::IntegerShape.new(name: 'MaxDurationInSecondsULong')
     MaxFaces = Shapes::IntegerShape.new(name: 'MaxFaces')
@@ -361,6 +374,7 @@ module Aws::Rekognition
     SegmentTypes = Shapes::ListShape.new(name: 'SegmentTypes')
     SegmentTypesInfo = Shapes::ListShape.new(name: 'SegmentTypesInfo')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    SessionNotFoundException = Shapes::StructureShape.new(name: 'SessionNotFoundException')
     ShotSegment = Shapes::StructureShape.new(name: 'ShotSegment')
     Smile = Shapes::StructureShape.new(name: 'Smile')
     StartCelebrityRecognitionRequest = Shapes::StructureShape.new(name: 'StartCelebrityRecognitionRequest')
@@ -473,6 +487,13 @@ module Aws::Rekognition
     AudioMetadata.struct_class = Types::AudioMetadata
 
     AudioMetadataList.member = Shapes::ShapeRef.new(shape: AudioMetadata)
+
+    AuditImage.add_member(:bytes, Shapes::ShapeRef.new(shape: LivenessImageBlob, location_name: "Bytes"))
+    AuditImage.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "S3Object"))
+    AuditImage.add_member(:bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "BoundingBox"))
+    AuditImage.struct_class = Types::AuditImage
+
+    AuditImages.member = Shapes::ShapeRef.new(shape: AuditImage)
 
     Beard.add_member(:value, Shapes::ShapeRef.new(shape: Boolean, location_name: "Value"))
     Beard.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
@@ -603,6 +624,18 @@ module Aws::Rekognition
 
     CreateDatasetResponse.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: DatasetArn, location_name: "DatasetArn"))
     CreateDatasetResponse.struct_class = Types::CreateDatasetResponse
+
+    CreateFaceLivenessSessionRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    CreateFaceLivenessSessionRequest.add_member(:settings, Shapes::ShapeRef.new(shape: CreateFaceLivenessSessionRequestSettings, location_name: "Settings"))
+    CreateFaceLivenessSessionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
+    CreateFaceLivenessSessionRequest.struct_class = Types::CreateFaceLivenessSessionRequest
+
+    CreateFaceLivenessSessionRequestSettings.add_member(:output_config, Shapes::ShapeRef.new(shape: LivenessOutputConfig, location_name: "OutputConfig"))
+    CreateFaceLivenessSessionRequestSettings.add_member(:audit_images_limit, Shapes::ShapeRef.new(shape: AuditImagesLimit, location_name: "AuditImagesLimit"))
+    CreateFaceLivenessSessionRequestSettings.struct_class = Types::CreateFaceLivenessSessionRequestSettings
+
+    CreateFaceLivenessSessionResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: LivenessSessionId, required: true, location_name: "SessionId"))
+    CreateFaceLivenessSessionResponse.struct_class = Types::CreateFaceLivenessSessionResponse
 
     CreateProjectRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "ProjectName"))
     CreateProjectRequest.struct_class = Types::CreateProjectRequest
@@ -1043,6 +1076,16 @@ module Aws::Rekognition
     GetFaceDetectionResponse.add_member(:faces, Shapes::ShapeRef.new(shape: FaceDetections, location_name: "Faces"))
     GetFaceDetectionResponse.struct_class = Types::GetFaceDetectionResponse
 
+    GetFaceLivenessSessionResultsRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: LivenessSessionId, required: true, location_name: "SessionId"))
+    GetFaceLivenessSessionResultsRequest.struct_class = Types::GetFaceLivenessSessionResultsRequest
+
+    GetFaceLivenessSessionResultsResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: LivenessSessionId, required: true, location_name: "SessionId"))
+    GetFaceLivenessSessionResultsResponse.add_member(:status, Shapes::ShapeRef.new(shape: LivenessSessionStatus, required: true, location_name: "Status"))
+    GetFaceLivenessSessionResultsResponse.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
+    GetFaceLivenessSessionResultsResponse.add_member(:reference_image, Shapes::ShapeRef.new(shape: AuditImage, location_name: "ReferenceImage"))
+    GetFaceLivenessSessionResultsResponse.add_member(:audit_images, Shapes::ShapeRef.new(shape: AuditImages, location_name: "AuditImages"))
+    GetFaceLivenessSessionResultsResponse.struct_class = Types::GetFaceLivenessSessionResultsResponse
+
     GetFaceSearchRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     GetFaceSearchRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     GetFaceSearchRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
@@ -1299,6 +1342,10 @@ module Aws::Rekognition
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    LivenessOutputConfig.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "S3Bucket"))
+    LivenessOutputConfig.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: LivenessS3KeyPrefix, location_name: "S3KeyPrefix"))
+    LivenessOutputConfig.struct_class = Types::LivenessOutputConfig
+
     MalformedPolicyDocumentException.struct_class = Types::MalformedPolicyDocumentException
 
     ModerationLabel.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
@@ -1516,6 +1563,8 @@ module Aws::Rekognition
     SegmentTypesInfo.member = Shapes::ShapeRef.new(shape: SegmentTypeInfo)
 
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    SessionNotFoundException.struct_class = Types::SessionNotFoundException
 
     ShotSegment.add_member(:index, Shapes::ShapeRef.new(shape: ULong, location_name: "Index"))
     ShotSegment.add_member(:confidence, Shapes::ShapeRef.new(shape: SegmentConfidence, location_name: "Confidence"))
@@ -1871,6 +1920,19 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:create_face_liveness_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateFaceLivenessSession"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateFaceLivenessSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateFaceLivenessSessionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
       end)
 
       api.add_operation(:create_project, Seahorse::Model::Operation.new.tap do |o|
@@ -2298,6 +2360,20 @@ module Aws::Rekognition
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_face_liveness_session_results, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetFaceLivenessSessionResults"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetFaceLivenessSessionResultsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetFaceLivenessSessionResultsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: SessionNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
       end)
 
       api.add_operation(:get_face_search, Seahorse::Model::Operation.new.tap do |o|
@@ -2888,6 +2964,7 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
     end
 

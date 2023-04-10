@@ -6940,7 +6940,7 @@ module Aws::MediaConvert
     # @!attribute [rw] wait_minutes
     #   Required for setting up a job to use queue hopping. Minimum wait
     #   time in minutes until the job can hop to the destination queue.
-    #   Valid range is 1 to 1440 minutes, inclusive.
+    #   Valid range is 1 to 4320 minutes, inclusive.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/HopDestination AWS API Documentation
@@ -7692,6 +7692,16 @@ module Aws::MediaConvert
     #   set up.
     #   @return [String]
     #
+    # @!attribute [rw] client_request_token
+    #   Prevent duplicate jobs from being created and ensure idempotency for
+    #   your requests. A client request token can be any string that
+    #   includes up to 64 ASCII characters. If you reuse a client request
+    #   token within one minute of a successful request, the API returns the
+    #   job details of the original request instead. For more information
+    #   see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/apireference/idempotency.html.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The time, in Unix epoch format in seconds, when the job got created.
     #   @return [Time]
@@ -7805,6 +7815,13 @@ module Aws::MediaConvert
     #   MediaConvert job. You specify metadata in key/value pairs.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] warnings
+    #   Contains any warning messages for the job. Use to help identify
+    #   potential issues with your input, output, or job. For more
+    #   information, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/warning\_codes.html
+    #   @return [Array<Types::WarningGroup>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Job AWS API Documentation
     #
     class Job < Struct.new(
@@ -7812,6 +7829,7 @@ module Aws::MediaConvert
       :acceleration_status,
       :arn,
       :billing_tags_source,
+      :client_request_token,
       :created_at,
       :current_phase,
       :error_code,
@@ -7832,7 +7850,8 @@ module Aws::MediaConvert
       :status,
       :status_update_interval,
       :timing,
-      :user_metadata)
+      :user_metadata,
+      :warnings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13061,6 +13080,27 @@ module Aws::MediaConvert
       :par_numerator,
       :quality_tuning_level,
       :rate_control_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains any warning codes and their count for the job.
+    #
+    # @!attribute [rw] code
+    #   Warning code that identifies a specific warning in the job. For more
+    #   information, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/warning\_codes.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] count
+    #   The number of times this warning occurred in the job.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/WarningGroup AWS API Documentation
+    #
+    class WarningGroup < Struct.new(
+      :code,
+      :count)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -49,9 +49,6 @@ module Aws::MediaConvert
           if Aws::Endpoints::Matchers.string_equals?(region, "cn-northwest-1")
             return Aws::Endpoints::Endpoint.new(url: "https://subscribe.mediaconvert.cn-northwest-1.amazonaws.com.cn", headers: {}, properties: {})
           end
-          if Aws::Endpoints::Matchers.string_equals?(region, "us-gov-west-1")
-            return Aws::Endpoints::Endpoint.new(url: "https://mediaconvert.us-gov-west-1.amazonaws.com", headers: {}, properties: {})
-          end
           return Aws::Endpoints::Endpoint.new(url: "https://mediaconvert.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
         end
       end

@@ -12,6 +12,8 @@ module Aws::MarketplaceCatalog
 
     # Access is denied.
     #
+    # HTTP status code: 403
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -64,7 +66,16 @@ module Aws::MarketplaceCatalog
     # @!attribute [rw] change_type
     #   Change types are single string values that describe your intention
     #   for the change. Each change type is unique for each `EntityType`
-    #   provided in the change's scope.
+    #   provided in the change's scope. For more information on change
+    #   types available for single-AMI products, see [Working with
+    #   single-AMI products][1]. Also, for more information on change types
+    #   available for container-based products, see [Working with container
+    #   products][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products
+    #   [2]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products
     #   @return [String]
     #
     # @!attribute [rw] entity
@@ -77,7 +88,15 @@ module Aws::MarketplaceCatalog
     #
     # @!attribute [rw] details
     #   This object contains details specific to the change type of the
-    #   requested change.
+    #   requested change. For more information on change types available for
+    #   single-AMI products, see [Working with single-AMI products][1].
+    #   Also, for more information on change types available for
+    #   container-based products, see [Working with container products][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products
+    #   [2]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products
     #   @return [String]
     #
     # @!attribute [rw] change_name
@@ -190,6 +209,23 @@ module Aws::MarketplaceCatalog
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Entity resource that is
+    #   associated with the resource policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/DeleteResourcePolicyRequest AWS API Documentation
+    #
+    class DeleteResourcePolicyRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/DeleteResourcePolicyResponse AWS API Documentation
+    #
+    class DeleteResourcePolicyResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] catalog
     #   Required. The catalog related to the request. Fixed value:
@@ -459,7 +495,34 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Entity resource that is
+    #   associated with the resource policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/GetResourcePolicyRequest AWS API Documentation
+    #
+    class GetResourcePolicyRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The policy document to set; formatted in JSON.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/GetResourcePolicyResponse AWS API Documentation
+    #
+    class GetResourcePolicyResponse < Struct.new(
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # There was an internal service exception.
+    #
+    # HTTP status code: 500
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -552,6 +615,9 @@ module Aws::MarketplaceCatalog
     #   value isn't provided, the default value is 20.
     #   @return [Integer]
     #
+    # @!attribute [rw] ownership_type
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ListEntitiesRequest AWS API Documentation
     #
     class ListEntitiesRequest < Struct.new(
@@ -560,7 +626,8 @@ module Aws::MarketplaceCatalog
       :filter_list,
       :sort,
       :next_token,
-      :max_results)
+      :max_results,
+      :ownership_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -615,6 +682,28 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Entity resource you want to
+    #   associate with a resource policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The policy document to set; formatted in JSON.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/PutResourcePolicyRequest AWS API Documentation
+    #
+    class PutResourcePolicyRequest < Struct.new(
+      :resource_arn,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/PutResourcePolicyResponse AWS API Documentation
+    #
+    class PutResourcePolicyResponse < Aws::EmptyStructure; end
+
     # The resource is currently in use.
     #
     # @!attribute [rw] message
@@ -629,6 +718,8 @@ module Aws::MarketplaceCatalog
     end
 
     # The specified resource wasn't found.
+    #
+    # HTTP status code: 404
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -790,6 +881,8 @@ module Aws::MarketplaceCatalog
 
     # Too many requests.
     #
+    # HTTP status code: 429
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -825,6 +918,8 @@ module Aws::MarketplaceCatalog
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # An error occurred during validation.
+    #
+    # HTTP status code: 422
     #
     # @!attribute [rw] message
     #   @return [String]

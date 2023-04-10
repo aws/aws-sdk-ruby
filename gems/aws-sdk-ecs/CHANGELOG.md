@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.113.0 (2023-04-10)
+------------------
+
+* Feature - This release adds support for enabling FIPS compliance on Amazon ECS Fargate tasks
+
 1.112.0 (2023-04-05)
 ------------------
 

@@ -64,6 +64,8 @@ module Aws::Rekognition
             Aws::Rekognition::Endpoints::CreateCollection.build(context)
           when :create_dataset
             Aws::Rekognition::Endpoints::CreateDataset.build(context)
+          when :create_face_liveness_session
+            Aws::Rekognition::Endpoints::CreateFaceLivenessSession.build(context)
           when :create_project
             Aws::Rekognition::Endpoints::CreateProject.build(context)
           when :create_project_version
@@ -116,6 +118,8 @@ module Aws::Rekognition
             Aws::Rekognition::Endpoints::GetContentModeration.build(context)
           when :get_face_detection
             Aws::Rekognition::Endpoints::GetFaceDetection.build(context)
+          when :get_face_liveness_session_results
+            Aws::Rekognition::Endpoints::GetFaceLivenessSessionResults.build(context)
           when :get_face_search
             Aws::Rekognition::Endpoints::GetFaceSearch.build(context)
           when :get_label_detection

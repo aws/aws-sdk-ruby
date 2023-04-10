@@ -866,7 +866,7 @@ module Aws::Omics
     #
     #   resp.arn #=> String
     #   resp.id #=> String
-    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETED", "FAILED", "INACTIVE"
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETED", "FAILED"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1750,7 +1750,7 @@ module Aws::Omics
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.workflow_id #=> String
-    #   resp.workflow_type #=> String, one of "PRIVATE", "SERVICE"
+    #   resp.workflow_type #=> String, one of "PRIVATE"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2051,7 +2051,7 @@ module Aws::Omics
     #   resp = client.get_workflow({
     #     export: ["DEFINITION"], # accepts DEFINITION
     #     id: "WorkflowId", # required
-    #     type: "PRIVATE", # accepts PRIVATE, SERVICE
+    #     type: "PRIVATE", # accepts PRIVATE
     #   })
     #
     # @example Response structure
@@ -2068,12 +2068,12 @@ module Aws::Omics
     #   resp.parameter_template #=> Hash
     #   resp.parameter_template["WorkflowParameterName"].description #=> String
     #   resp.parameter_template["WorkflowParameterName"].optional #=> Boolean
-    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETED", "FAILED", "INACTIVE"
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETED", "FAILED"
     #   resp.status_message #=> String
     #   resp.storage_capacity #=> Integer
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
-    #   resp.type #=> String, one of "PRIVATE", "SERVICE"
+    #   resp.type #=> String, one of "PRIVATE"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2982,7 +2982,7 @@ module Aws::Omics
     #     max_results: 1,
     #     name: "WorkflowName",
     #     starting_token: "WorkflowListToken",
-    #     type: "PRIVATE", # accepts PRIVATE, SERVICE
+    #     type: "PRIVATE", # accepts PRIVATE
     #   })
     #
     # @example Response structure
@@ -2993,8 +2993,8 @@ module Aws::Omics
     #   resp.items[0].digest #=> String
     #   resp.items[0].id #=> String
     #   resp.items[0].name #=> String
-    #   resp.items[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETED", "FAILED", "INACTIVE"
-    #   resp.items[0].type #=> String, one of "PRIVATE", "SERVICE"
+    #   resp.items[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETED", "FAILED"
+    #   resp.items[0].type #=> String, one of "PRIVATE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListWorkflows AWS API Documentation
@@ -3376,7 +3376,7 @@ module Aws::Omics
     #       "TagKey" => "TagValue",
     #     },
     #     workflow_id: "WorkflowId",
-    #     workflow_type: "PRIVATE", # accepts PRIVATE, SERVICE
+    #     workflow_type: "PRIVATE", # accepts PRIVATE
     #   })
     #
     # @example Response structure
@@ -3672,7 +3672,7 @@ module Aws::Omics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

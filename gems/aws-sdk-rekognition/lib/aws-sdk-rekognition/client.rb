@@ -651,6 +651,9 @@ module Aws::Rekognition
     # in the ProjectVersionDescription object. The copy operation has
     # finished when the value of `Status` is `COPYING_COMPLETED`.
     #
+    # This operation requires permissions to perform the
+    # `rekognition:CopyProjectVersion` action.
+    #
     # @option params [required, String] :source_project_arn
     #   The ARN of the source project in the trusting AWS account.
     #
@@ -897,6 +900,60 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # This API operation initiates a Face Liveness session. It returns a
+    # `SessionId`, which you can use to start streaming Face Liveness video
+    # and get the results for a Face Liveness session. You can use the
+    # `OutputConfig` option in the Settings parameter to provide an Amazon
+    # S3 bucket location. The Amazon S3 bucket stores reference images and
+    # audit images. You can use `AuditImagesLimit` to limit of audit images
+    # returned. This number is between 0 and 4. By default, it is set to 0.
+    # The limit is best effort and based on the duration of the
+    # selfie-video.
+    #
+    # @option params [String] :kms_key_id
+    #   The identifier for your AWS Key Management Service key (AWS KMS key).
+    #   Used to encrypt audit images and reference images.
+    #
+    # @option params [Types::CreateFaceLivenessSessionRequestSettings] :settings
+    #   A session settings object. It contains settings for the operation to
+    #   be performed. For Face Liveness, it accepts `OutputConfig` and
+    #   `AuditImagesLimit`.
+    #
+    # @option params [String] :client_request_token
+    #   Idempotent token is used to recognize the Face Liveness request. If
+    #   the same token is used with multiple `CreateFaceLivenessSession`
+    #   requests, the same session is returned. This token is employed to
+    #   avoid unintentionally creating the same session multiple times.
+    #
+    # @return [Types::CreateFaceLivenessSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFaceLivenessSessionResponse#session_id #session_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_face_liveness_session({
+    #     kms_key_id: "KmsKeyId",
+    #     settings: {
+    #       output_config: {
+    #         s3_bucket: "S3Bucket", # required
+    #         s3_key_prefix: "LivenessS3KeyPrefix",
+    #       },
+    #       audit_images_limit: 1,
+    #     },
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session_id #=> String
+    #
+    # @overload create_face_liveness_session(params = {})
+    # @param [Hash] params ({})
+    def create_face_liveness_session(params = {}, options = {})
+      req = build_request(:create_face_liveness_session, params)
+      req.send_request(options)
+    end
+
     # Creates a new Amazon Rekognition Custom Labels project. A project is a
     # group of resources (datasets, model versions) that you use to create
     # and manage Amazon Rekognition Custom Labels models.
@@ -1085,22 +1142,24 @@ module Aws::Rekognition
     #
     # * If you are creating a stream processor for detecting faces, you
     #   provide as input a Kinesis video stream (`Input`) and a Kinesis data
-    #   stream (`Output`) stream. You also specify the face recognition
-    #   criteria in `Settings`. For example, the collection containing faces
-    #   that you want to recognize. After you have finished analyzing a
-    #   streaming video, use StopStreamProcessor to stop processing.
+    #   stream (`Output`) stream for receiving the output. You must use the
+    #   `FaceSearch` option in `Settings`, specifying the collection that
+    #   contains the faces you want to recognize. After you have finished
+    #   analyzing a streaming video, use StopStreamProcessor to stop
+    #   processing.
     #
     # * If you are creating a stream processor to detect labels, you provide
     #   as input a Kinesis video stream (`Input`), Amazon S3 bucket
     #   information (`Output`), and an Amazon SNS topic ARN
     #   (`NotificationChannel`). You can also provide a KMS key ID to
     #   encrypt the data sent to your Amazon S3 bucket. You specify what you
-    #   want to detect in `ConnectedHomeSettings`, such as people, packages
-    #   and people, or pets, people, and packages. You can also specify
-    #   where in the frame you want Amazon Rekognition to monitor with
-    #   `RegionsOfInterest`. When you run the StartStreamProcessor operation
-    #   on a label detection stream processor, you input start and stop
-    #   information to determine the length of the processing time.
+    #   want to detect by using the `ConnectedHome` option in settings, and
+    #   selecting one of the following: `PERSON`, `PET`, `PACKAGE`, `ALL`
+    #   You can also specify where in the frame you want Amazon Rekognition
+    #   to monitor with `RegionsOfInterest`. When you run the
+    #   StartStreamProcessor operation on a label detection stream
+    #   processor, you input start and stop information to determine the
+    #   length of the processing time.
     #
     # Use `Name` to assign an identifier for the stream processor. You use
     # `Name` to manage the stream processor. For example, you can start
@@ -1437,6 +1496,9 @@ module Aws::Rekognition
     # To get a list of project policies attached to a project, call
     # ListProjectPolicies. To attach a project policy to a project, call
     # PutProjectPolicy.
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:DeleteProjectPolicy` action.
     #
     # @option params [required, String] :project_arn
     #   The Amazon Resource Name (ARN) of the project that the project policy
@@ -2206,7 +2268,7 @@ module Aws::Rekognition
     # **Response Elements**
     #
     # For each object, scene, and concept the API returns one or more
-    # labels. The API returns the following types of information regarding
+    # labels. The API returns the following types of information about
     # labels:
     #
     # * Name - The name of the detected label.
@@ -2281,8 +2343,7 @@ module Aws::Rekognition
     #
     #  </note>
     #
-    # This is a stateless API operation. That is, the operation does not
-    # persist any data.
+    # This is a stateless API operation that doesn't return any data.
     #
     # This operation requires permissions to perform the
     # `rekognition:DetectLabels` action.
@@ -2326,8 +2387,12 @@ module Aws::Rekognition
     #   image properties. Specified filters can be inclusive, exclusive, or a
     #   combination of both. Filters can be used for individual labels or
     #   label categories. The exact label names or label categories must be
-    #   supplied. For a full list of labels and label categories, see LINK
-    #   HERE.
+    #   supplied. For a full list of labels and label categories, see
+    #   [Detecting labels][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/rekognition/latest/dg/labels.html
     #
     # @return [Types::DetectLabelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3244,6 +3309,63 @@ module Aws::Rekognition
     # @param [Hash] params ({})
     def get_face_detection(params = {}, options = {})
       req = build_request(:get_face_detection, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the results of a specific Face Liveness session. It requires
+    # the `sessionId` as input, which was created using
+    # `CreateFaceLivenessSession`. Returns the corresponding Face Liveness
+    # confidence score, a reference image that includes a face bounding box,
+    # and audit images that also contain face bounding boxes. The Face
+    # Liveness confidence score ranges from 0 to 100. The reference image
+    # can optionally be returned.
+    #
+    # @option params [required, String] :session_id
+    #   A unique 128-bit UUID. This is used to uniquely identify the session
+    #   and also acts as an idempotency token for all operations associated
+    #   with the session.
+    #
+    # @return [Types::GetFaceLivenessSessionResultsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFaceLivenessSessionResultsResponse#session_id #session_id} => String
+    #   * {Types::GetFaceLivenessSessionResultsResponse#status #status} => String
+    #   * {Types::GetFaceLivenessSessionResultsResponse#confidence #confidence} => Float
+    #   * {Types::GetFaceLivenessSessionResultsResponse#reference_image #reference_image} => Types::AuditImage
+    #   * {Types::GetFaceLivenessSessionResultsResponse#audit_images #audit_images} => Array&lt;Types::AuditImage&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_face_liveness_session_results({
+    #     session_id: "LivenessSessionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session_id #=> String
+    #   resp.status #=> String, one of "CREATED", "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.confidence #=> Float
+    #   resp.reference_image.bytes #=> String
+    #   resp.reference_image.s3_object.bucket #=> String
+    #   resp.reference_image.s3_object.name #=> String
+    #   resp.reference_image.s3_object.version #=> String
+    #   resp.reference_image.bounding_box.width #=> Float
+    #   resp.reference_image.bounding_box.height #=> Float
+    #   resp.reference_image.bounding_box.left #=> Float
+    #   resp.reference_image.bounding_box.top #=> Float
+    #   resp.audit_images #=> Array
+    #   resp.audit_images[0].bytes #=> String
+    #   resp.audit_images[0].s3_object.bucket #=> String
+    #   resp.audit_images[0].s3_object.name #=> String
+    #   resp.audit_images[0].s3_object.version #=> String
+    #   resp.audit_images[0].bounding_box.width #=> Float
+    #   resp.audit_images[0].bounding_box.height #=> Float
+    #   resp.audit_images[0].bounding_box.left #=> Float
+    #   resp.audit_images[0].bounding_box.top #=> Float
+    #
+    # @overload get_face_liveness_session_results(params = {})
+    # @param [Hash] params ({})
+    def get_face_liveness_session_results(params = {}, options = {})
+      req = build_request(:get_face_liveness_session_results, params)
       req.send_request(options)
     end
 
@@ -4769,6 +4891,9 @@ module Aws::Rekognition
     # To attach a project policy to a project, call PutProjectPolicy. To
     # remove a project policy from a project, call DeleteProjectPolicy.
     #
+    # This operation requires permissions to perform the
+    # `rekognition:ListProjectPolicies` action.
+    #
     # @option params [required, String] :project_arn
     #   The ARN of the project for which you want to list the project
     #   policies.
@@ -4936,6 +5061,9 @@ module Aws::Rekognition
     # ListProjectPolicies.
     #
     # You copy a model version by calling CopyProjectVersion.
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:PutProjectPolicy` action.
     #
     # @option params [required, String] :project_arn
     #   The Amazon Resource Name (ARN) of the project that the project policy
@@ -6308,6 +6436,9 @@ module Aws::Rekognition
     # Stops a running model. The operation might take a while to complete.
     # To check the current status, call DescribeProjectVersions.
     #
+    # This operation requires permissions to perform the
+    # `rekognition:StopProjectVersion` action.
+    #
     # @option params [required, String] :project_version_arn
     #   The Amazon Resource Name (ARN) of the model version that you want to
     #   delete.
@@ -6556,7 +6687,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

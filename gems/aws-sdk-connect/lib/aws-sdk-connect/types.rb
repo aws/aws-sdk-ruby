@@ -608,7 +608,8 @@ module Aws::Connect
     #
     # @!attribute [rw] content_type
     #   The type of the content. Supported types are `text/plain`,
-    #   `text/markdown`, and `application/json`.
+    #   `text/markdown`, `application/json`, and
+    #   `application/vnd.amazonaws.connect.message.interactive.response`.
     #   @return [String]
     #
     # @!attribute [rw] content
@@ -619,6 +620,10 @@ module Aws::Connect
     #
     #   * For `application/json`, the Length Constraints are Minimum of 1,
     #     Maximum of 12000.
+    #
+    #   * For
+    #     `application/vnd.amazonaws.connect.message.interactive.response`,
+    #     the Length Constraints are Minimum of 1, Maximum of 12288.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ChatMessage AWS API Documentation
@@ -2403,6 +2408,23 @@ module Aws::Connect
       :refresh_token,
       :refresh_token_expiration)
       SENSITIVE = [:access_token, :refresh_token]
+      include Aws::Structure
+    end
+
+    # Defines the cross-channel routing behavior that allows an agent
+    # working on a contact in one channel to be offered a contact from a
+    # different channel.
+    #
+    # @!attribute [rw] behavior_type
+    #   Specifies the other channels that can be routed to an agent handling
+    #   their current channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CrossChannelBehavior AWS API Documentation
+    #
+    class CrossChannelBehavior < Struct.new(
+      :behavior_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4631,7 +4653,8 @@ module Aws::Connect
     # @!attribute [rw] end_time
     #   The timestamp, in UNIX Epoch time format, at which to end the
     #   reporting interval for the retrieval of historical metrics data. The
-    #   time must be later than the start time timestamp.
+    #   time must be later than the start time timestamp. It cannot be later
+    #   than the current timestamp.
     #
     #   The time range between the start and end time must be less than 24
     #   hours.
@@ -4882,11 +4905,19 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile
     #
+    #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
+    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
+    #     `LT` (for "Less than").
+    #
     #   SUM\_CONTACTS\_ABANDONED\_IN\_X
     #
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #
+    #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
+    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
+    #     `LT` (for "Less than").
     #
     #   SUM\_CONTACTS\_DISCONNECTED
     #
@@ -7711,11 +7742,19 @@ module Aws::Connect
     #   Valid Range for `TASK`: Minimum value of 1. Maximum value of 10.
     #   @return [Integer]
     #
+    # @!attribute [rw] cross_channel_behavior
+    #   Defines the cross-channel routing behavior for each channel that is
+    #   enabled for this Routing Profile. For example, this allows you to
+    #   offer an agent a different contact from another channel when they
+    #   are currently working with a contact from a Voice channel.
+    #   @return [Types::CrossChannelBehavior]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/MediaConcurrency AWS API Documentation
     #
     class MediaConcurrency < Struct.new(
       :channel,
-      :concurrency)
+      :concurrency,
+      :cross_channel_behavior)
       SENSITIVE = []
       include Aws::Structure
     end
