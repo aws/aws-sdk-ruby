@@ -2561,15 +2561,17 @@
     },
     "RedshiftDataParameters":{
       "type":"structure",
-      "required":["Database"],
+      "required":[
+        "Database",
+        "Sql"
+      ],
       "members":{
         "SecretManagerArn":{"shape":"RedshiftSecretManagerArn"},
         "Database":{"shape":"Database"},
         "DbUser":{"shape":"DbUser"},
         "Sql":{"shape":"Sql"},
         "StatementName":{"shape":"StatementName"},
-        "WithEvent":{"shape":"Boolean"},
-        "Sqls":{"shape":"Sqls"}
+        "WithEvent":{"shape":"Boolean"}
       }
     },
     "RedshiftSecretManagerArn":{
@@ -2882,15 +2884,7 @@
     "Sql":{
       "type":"string",
       "max":100000,
-      "min":1,
-      "sensitive":true
-    },
-    "Sqls":{
-      "type":"list",
-      "member":{"shape":"Sql"},
-      "max":40,
-      "min":0,
-      "sensitive":true
+      "min":1
     },
     "SqsParameters":{
       "type":"structure",

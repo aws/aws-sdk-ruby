@@ -1019,7 +1019,6 @@ module Aws::IoT
     Seconds = Shapes::IntegerShape.new(name: 'Seconds')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupList = Shapes::ListShape.new(name: 'SecurityGroupList')
-    SecurityPolicy = Shapes::StringShape.new(name: 'SecurityPolicy')
     SecurityProfileArn = Shapes::StringShape.new(name: 'SecurityProfileArn')
     SecurityProfileDescription = Shapes::StringShape.new(name: 'SecurityProfileDescription')
     SecurityProfileIdentifier = Shapes::StructureShape.new(name: 'SecurityProfileIdentifier')
@@ -1184,7 +1183,6 @@ module Aws::IoT
     TimestreamTimestampUnit = Shapes::StringShape.new(name: 'TimestreamTimestampUnit')
     TimestreamTimestampValue = Shapes::StringShape.new(name: 'TimestreamTimestampValue')
     TinyMaxResults = Shapes::IntegerShape.new(name: 'TinyMaxResults')
-    TlsConfig = Shapes::StructureShape.new(name: 'TlsConfig')
     TlsContext = Shapes::StructureShape.new(name: 'TlsContext')
     Token = Shapes::StringShape.new(name: 'Token')
     TokenKeyName = Shapes::StringShape.new(name: 'TokenKeyName')
@@ -1880,7 +1878,6 @@ module Aws::IoT
     CreateDomainConfigurationRequest.add_member(:authorizer_config, Shapes::ShapeRef.new(shape: AuthorizerConfig, location_name: "authorizerConfig"))
     CreateDomainConfigurationRequest.add_member(:service_type, Shapes::ShapeRef.new(shape: ServiceType, location_name: "serviceType"))
     CreateDomainConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
-    CreateDomainConfigurationRequest.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfig, location_name: "tlsConfig"))
     CreateDomainConfigurationRequest.struct_class = Types::CreateDomainConfigurationRequest
 
     CreateDomainConfigurationResponse.add_member(:domain_configuration_name, Shapes::ShapeRef.new(shape: DomainConfigurationName, location_name: "domainConfigurationName"))
@@ -2446,7 +2443,6 @@ module Aws::IoT
     DescribeDomainConfigurationResponse.add_member(:service_type, Shapes::ShapeRef.new(shape: ServiceType, location_name: "serviceType"))
     DescribeDomainConfigurationResponse.add_member(:domain_type, Shapes::ShapeRef.new(shape: DomainType, location_name: "domainType"))
     DescribeDomainConfigurationResponse.add_member(:last_status_change_date, Shapes::ShapeRef.new(shape: DateType, location_name: "lastStatusChangeDate"))
-    DescribeDomainConfigurationResponse.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfig, location_name: "tlsConfig"))
     DescribeDomainConfigurationResponse.struct_class = Types::DescribeDomainConfigurationResponse
 
     DescribeEndpointRequest.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location: "querystring", location_name: "endpointType"))
@@ -4562,9 +4558,6 @@ module Aws::IoT
     TimestreamTimestamp.add_member(:unit, Shapes::ShapeRef.new(shape: TimestreamTimestampUnit, required: true, location_name: "unit"))
     TimestreamTimestamp.struct_class = Types::TimestreamTimestamp
 
-    TlsConfig.add_member(:security_policy, Shapes::ShapeRef.new(shape: SecurityPolicy, location_name: "securityPolicy"))
-    TlsConfig.struct_class = Types::TlsConfig
-
     TlsContext.add_member(:server_name, Shapes::ShapeRef.new(shape: ServerName, location_name: "serverName"))
     TlsContext.struct_class = Types::TlsContext
 
@@ -4730,7 +4723,6 @@ module Aws::IoT
     UpdateDomainConfigurationRequest.add_member(:authorizer_config, Shapes::ShapeRef.new(shape: AuthorizerConfig, location_name: "authorizerConfig"))
     UpdateDomainConfigurationRequest.add_member(:domain_configuration_status, Shapes::ShapeRef.new(shape: DomainConfigurationStatus, location_name: "domainConfigurationStatus"))
     UpdateDomainConfigurationRequest.add_member(:remove_authorizer_config, Shapes::ShapeRef.new(shape: RemoveAuthorizerConfig, location_name: "removeAuthorizerConfig"))
-    UpdateDomainConfigurationRequest.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfig, location_name: "tlsConfig"))
     UpdateDomainConfigurationRequest.struct_class = Types::UpdateDomainConfigurationRequest
 
     UpdateDomainConfigurationResponse.add_member(:domain_configuration_name, Shapes::ShapeRef.new(shape: ReservedDomainConfigurationName, location_name: "domainConfigurationName"))

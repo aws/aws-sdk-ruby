@@ -448,9 +448,9 @@ module Aws::ECRPublic
     # the digest of the image in your request.
     #
     # @option params [String] :registry_id
-    #   The Amazon Web Services account ID, or registry alias, that's
-    #   associated with the registry that contains the image to delete. If you
-    #   do not specify a registry, the default public registry is assumed.
+    #   The Amazon Web Services account ID that's associated with the
+    #   registry that contains the image to delete. If you do not specify a
+    #   registry, the default public registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The repository in a public registry that contains the image to delete.
@@ -468,7 +468,7 @@ module Aws::ECRPublic
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_delete_image({
-    #     registry_id: "RegistryIdOrAlias",
+    #     registry_id: "RegistryId",
     #     repository_name: "RepositoryName", # required
     #     image_ids: [ # required
     #       {
@@ -1586,7 +1586,7 @@ module Aws::ECRPublic
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecrpublic'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -6847,12 +6847,6 @@
         "VpcDestinationSummary$securityGroups": "<p>The security groups of the VPC destination.</p>"
       }
     },
-    "SecurityPolicy": {
-      "base": null,
-      "refs": {
-        "TlsConfig$securityPolicy": "<p>The security policy for a domain configuration. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/transport-security.html#tls-policy-table\">Security policies </a> in the <i>Amazon Web Services IoT Core developer guide</i>.</p>"
-      }
-    },
     "SecurityProfileArn": {
       "base": null,
       "refs": {
@@ -8121,14 +8115,6 @@
       "base": null,
       "refs": {
         "GetBehaviorModelTrainingSummariesRequest$maxResults": "<p> The maximum number of results to return at one time. The default is 10. </p>"
-      }
-    },
-    "TlsConfig": {
-      "base": "<p>An object that specifies the TLS configuration for a domain.</p>",
-      "refs": {
-        "CreateDomainConfigurationRequest$tlsConfig": "<p>An object that specifies the TLS configuration for a domain.</p>",
-        "DescribeDomainConfigurationResponse$tlsConfig": "<p>An object that specifies the TLS configuration for a domain.</p>",
-        "UpdateDomainConfigurationRequest$tlsConfig": "<p>An object that specifies the TLS configuration for a domain.</p>"
       }
     },
     "TlsContext": {

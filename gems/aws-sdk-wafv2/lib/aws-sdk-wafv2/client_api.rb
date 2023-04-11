@@ -24,8 +24,6 @@ module Aws::WAFV2
     AndStatement = Shapes::StructureShape.new(name: 'AndStatement')
     AssociateWebACLRequest = Shapes::StructureShape.new(name: 'AssociateWebACLRequest')
     AssociateWebACLResponse = Shapes::StructureShape.new(name: 'AssociateWebACLResponse')
-    AssociatedResourceType = Shapes::StringShape.new(name: 'AssociatedResourceType')
-    AssociationConfig = Shapes::StructureShape.new(name: 'AssociationConfig')
     BlockAction = Shapes::StructureShape.new(name: 'BlockAction')
     Body = Shapes::StructureShape.new(name: 'Body')
     BodyParsingFallbackBehavior = Shapes::StringShape.new(name: 'BodyParsingFallbackBehavior')
@@ -255,8 +253,6 @@ module Aws::WAFV2
     ReleaseNotes = Shapes::StringShape.new(name: 'ReleaseNotes')
     ReleaseSummaries = Shapes::ListShape.new(name: 'ReleaseSummaries')
     ReleaseSummary = Shapes::StructureShape.new(name: 'ReleaseSummary')
-    RequestBody = Shapes::MapShape.new(name: 'RequestBody')
-    RequestBodyAssociatedResourceTypeConfig = Shapes::StructureShape.new(name: 'RequestBodyAssociatedResourceTypeConfig')
     RequestInspection = Shapes::StructureShape.new(name: 'RequestInspection')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceArns = Shapes::ListShape.new(name: 'ResourceArns')
@@ -302,7 +298,6 @@ module Aws::WAFV2
     SingleQueryArgument = Shapes::StructureShape.new(name: 'SingleQueryArgument')
     Size = Shapes::IntegerShape.new(name: 'Size')
     SizeConstraintStatement = Shapes::StructureShape.new(name: 'SizeConstraintStatement')
-    SizeInspectionLimit = Shapes::StringShape.new(name: 'SizeInspectionLimit')
     SolveTimestamp = Shapes::IntegerShape.new(name: 'SolveTimestamp')
     SqliMatchStatement = Shapes::StructureShape.new(name: 'SqliMatchStatement')
     Statement = Shapes::StructureShape.new(name: 'Statement')
@@ -397,9 +392,6 @@ module Aws::WAFV2
     AssociateWebACLRequest.struct_class = Types::AssociateWebACLRequest
 
     AssociateWebACLResponse.struct_class = Types::AssociateWebACLResponse
-
-    AssociationConfig.add_member(:request_body, Shapes::ShapeRef.new(shape: RequestBody, location_name: "RequestBody"))
-    AssociationConfig.struct_class = Types::AssociationConfig
 
     BlockAction.add_member(:custom_response, Shapes::ShapeRef.new(shape: CustomResponse, location_name: "CustomResponse"))
     BlockAction.struct_class = Types::BlockAction
@@ -510,7 +502,6 @@ module Aws::WAFV2
     CreateWebACLRequest.add_member(:captcha_config, Shapes::ShapeRef.new(shape: CaptchaConfig, location_name: "CaptchaConfig"))
     CreateWebACLRequest.add_member(:challenge_config, Shapes::ShapeRef.new(shape: ChallengeConfig, location_name: "ChallengeConfig"))
     CreateWebACLRequest.add_member(:token_domains, Shapes::ShapeRef.new(shape: TokenDomains, location_name: "TokenDomains"))
-    CreateWebACLRequest.add_member(:association_config, Shapes::ShapeRef.new(shape: AssociationConfig, location_name: "AssociationConfig"))
     CreateWebACLRequest.struct_class = Types::CreateWebACLRequest
 
     CreateWebACLResponse.add_member(:summary, Shapes::ShapeRef.new(shape: WebACLSummary, location_name: "Summary"))
@@ -1118,12 +1109,6 @@ module Aws::WAFV2
     ReleaseSummary.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     ReleaseSummary.struct_class = Types::ReleaseSummary
 
-    RequestBody.key = Shapes::ShapeRef.new(shape: AssociatedResourceType)
-    RequestBody.value = Shapes::ShapeRef.new(shape: RequestBodyAssociatedResourceTypeConfig)
-
-    RequestBodyAssociatedResourceTypeConfig.add_member(:default_size_inspection_limit, Shapes::ShapeRef.new(shape: SizeInspectionLimit, required: true, location_name: "DefaultSizeInspectionLimit"))
-    RequestBodyAssociatedResourceTypeConfig.struct_class = Types::RequestBodyAssociatedResourceTypeConfig
-
     RequestInspection.add_member(:payload_type, Shapes::ShapeRef.new(shape: PayloadType, required: true, location_name: "PayloadType"))
     RequestInspection.add_member(:username_field, Shapes::ShapeRef.new(shape: UsernameField, required: true, location_name: "UsernameField"))
     RequestInspection.add_member(:password_field, Shapes::ShapeRef.new(shape: PasswordField, required: true, location_name: "PasswordField"))
@@ -1377,7 +1362,6 @@ module Aws::WAFV2
     UpdateWebACLRequest.add_member(:captcha_config, Shapes::ShapeRef.new(shape: CaptchaConfig, location_name: "CaptchaConfig"))
     UpdateWebACLRequest.add_member(:challenge_config, Shapes::ShapeRef.new(shape: ChallengeConfig, location_name: "ChallengeConfig"))
     UpdateWebACLRequest.add_member(:token_domains, Shapes::ShapeRef.new(shape: TokenDomains, location_name: "TokenDomains"))
-    UpdateWebACLRequest.add_member(:association_config, Shapes::ShapeRef.new(shape: AssociationConfig, location_name: "AssociationConfig"))
     UpdateWebACLRequest.struct_class = Types::UpdateWebACLRequest
 
     UpdateWebACLResponse.add_member(:next_lock_token, Shapes::ShapeRef.new(shape: LockToken, location_name: "NextLockToken"))
@@ -1473,7 +1457,6 @@ module Aws::WAFV2
     WebACL.add_member(:captcha_config, Shapes::ShapeRef.new(shape: CaptchaConfig, location_name: "CaptchaConfig"))
     WebACL.add_member(:challenge_config, Shapes::ShapeRef.new(shape: ChallengeConfig, location_name: "ChallengeConfig"))
     WebACL.add_member(:token_domains, Shapes::ShapeRef.new(shape: TokenDomains, location_name: "TokenDomains"))
-    WebACL.add_member(:association_config, Shapes::ShapeRef.new(shape: AssociationConfig, location_name: "AssociationConfig"))
     WebACL.struct_class = Types::WebACL
 
     WebACLSummaries.member = Shapes::ShapeRef.new(shape: WebACLSummary)

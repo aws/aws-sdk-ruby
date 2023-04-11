@@ -190,8 +190,7 @@
         "topic":{"shape":"Topic"},
         "payload":{"shape":"Payload"},
         "qos":{"shape":"Qos"},
-        "lastModifiedTime":{"shape":"Timestamp"},
-        "userProperties":{"shape":"UserPropertiesBlob"}
+        "lastModifiedTime":{"shape":"Timestamp"}
       }
     },
     "GetThingShadowRequest":{
@@ -485,7 +484,6 @@
       "payload":"payload"
     },
     "UserProperties":{"type":"string"},
-    "UserPropertiesBlob":{"type":"blob"},
     "errorMessage":{"type":"string"}
   }
 }

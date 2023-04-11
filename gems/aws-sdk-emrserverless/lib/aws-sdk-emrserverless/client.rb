@@ -702,7 +702,6 @@ module Aws::EMRServerless
     #   resp.job_run.network_configuration.security_group_ids #=> Array
     #   resp.job_run.network_configuration.security_group_ids[0] #=> String
     #   resp.job_run.total_execution_duration_seconds #=> Integer
-    #   resp.job_run.execution_timeout_minutes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetJobRun AWS API Documentation
     #
@@ -1009,13 +1008,12 @@ module Aws::EMRServerless
       req.send_request(options)
     end
 
-    # Assigns tags to resources. A tag is a label that you assign to an
-    # Amazon Web Services resource. Each tag consists of a key and an
-    # optional value, both of which you define. Tags enable you to
-    # categorize your Amazon Web Services resources by attributes such as
-    # purpose, owner, or environment. When you have many resources of the
-    # same type, you can quickly identify a specific resource based on the
-    # tags you've assigned to it.
+    # Assigns tags to resources. A tag is a label that you assign to an AWS
+    # resource. Each tag consists of a key and an optional value, both of
+    # which you define. Tags enable you to categorize your AWS resources by
+    # attributes such as purpose, owner, or environment. When you have many
+    # resources of the same type, you can quickly identify a specific
+    # resource based on the tags you've assigned to it.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource to list
@@ -1228,7 +1226,7 @@ module Aws::EMRServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emrserverless'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -745,11 +745,7 @@
         "tags":{"shape":"TagMap"},
         "totalResourceUtilization":{"shape":"TotalResourceUtilization"},
         "networkConfiguration":{"shape":"NetworkConfiguration"},
-        "totalExecutionDurationSeconds":{"shape":"Integer"},
-        "executionTimeoutMinutes":{
-          "shape":"Duration",
-          "box":true
-        }
+        "totalExecutionDurationSeconds":{"shape":"Integer"}
       }
     },
     "JobRunId":{

@@ -600,13 +600,13 @@
       }
     },
     "Database": {
-      "base": "Redshift Database",
+      "base": null,
       "refs": {
         "RedshiftDataParameters$Database": "<p>The name of the database. Required when authenticating using temporary credentials.</p>"
       }
     },
     "DbUser": {
-      "base": "Database user name",
+      "base": null,
       "refs": {
         "RedshiftDataParameters$DbUser": "<p>The database user name. Required when authenticating using temporary credentials.</p> <p>Do not provide this parameter when connecting to a Redshift Serverless workgroup.</p>"
       }
@@ -1646,7 +1646,7 @@
       }
     },
     "RedshiftSecretManagerArn": {
-      "base": "Optional SecretManager ARN which stores the database credentials",
+      "base": null,
       "refs": {
         "RedshiftDataParameters$SecretManagerArn": "<p>The name or ARN of the secret that enables access to the database. Required when authenticating using Amazon Web Services Secrets Manager.</p>"
       }
@@ -1974,16 +1974,9 @@
       }
     },
     "Sql": {
-      "base": "A single Redshift SQL",
+      "base": null,
       "refs": {
-        "RedshiftDataParameters$Sql": "<p>The SQL statement text to run.</p>",
-        "Sqls$member": null
-      }
-    },
-    "Sqls": {
-      "base": "A list of SQLs.",
-      "refs": {
-        "RedshiftDataParameters$Sqls": null
+        "RedshiftDataParameters$Sql": "<p>The SQL statement text to run.</p>"
       }
     },
     "SqsParameters": {
@@ -2010,7 +2003,7 @@
       }
     },
     "StatementName": {
-      "base": "A name for Redshift DataAPI statement which can be used as filter of ListStatement.",
+      "base": null,
       "refs": {
         "RedshiftDataParameters$StatementName": "<p>The name of the SQL statement. You can name the SQL statement when you create it to identify the query.</p>"
       }

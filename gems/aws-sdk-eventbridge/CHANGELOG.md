@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.43.0 (2023-04-11)
-------------------
-
-* Feature - EventBridge PutTarget support for multiple SQL arguments on RedshiftDataParameters
-
 1.42.0 (2023-01-26)
 ------------------
 
