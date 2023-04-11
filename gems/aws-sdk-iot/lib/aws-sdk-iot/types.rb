@@ -2508,6 +2508,10 @@ module Aws::IoT
     #    </note>
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] tls_config
+    #   An object that specifies the TLS configuration for a domain.
+    #   @return [Types::TlsConfig]
+    #
     class CreateDomainConfigurationRequest < Struct.new(
       :domain_configuration_name,
       :domain_name,
@@ -2515,7 +2519,8 @@ module Aws::IoT
       :validation_certificate_arn,
       :authorizer_config,
       :service_type,
-      :tags)
+      :tags,
+      :tls_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5022,6 +5027,10 @@ module Aws::IoT
     #   changed.
     #   @return [Time]
     #
+    # @!attribute [rw] tls_config
+    #   An object that specifies the TLS configuration for a domain.
+    #   @return [Types::TlsConfig]
+    #
     class DescribeDomainConfigurationResponse < Struct.new(
       :domain_configuration_name,
       :domain_configuration_arn,
@@ -5031,7 +5040,8 @@ module Aws::IoT
       :domain_configuration_status,
       :service_type,
       :domain_type,
-      :last_status_change_date)
+      :last_status_change_date,
+      :tls_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14194,6 +14204,24 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # An object that specifies the TLS configuration for a domain.
+    #
+    # @!attribute [rw] security_policy
+    #   The security policy for a domain configuration. For more
+    #   information, see [Security policies ][1] in the *Amazon Web Services
+    #   IoT Core developer guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/transport-security.html#tls-policy-table
+    #   @return [String]
+    #
+    class TlsConfig < Struct.new(
+      :security_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the TLS context to use for the test authorizer request.
     #
     # @!attribute [rw] server_name
@@ -14990,11 +15018,16 @@ module Aws::IoT
     #   Removes the authorization configuration from a domain.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tls_config
+    #   An object that specifies the TLS configuration for a domain.
+    #   @return [Types::TlsConfig]
+    #
     class UpdateDomainConfigurationRequest < Struct.new(
       :domain_configuration_name,
       :authorizer_config,
       :domain_configuration_status,
-      :remove_authorizer_config)
+      :remove_authorizer_config,
+      :tls_config)
       SENSITIVE = []
       include Aws::Structure
     end

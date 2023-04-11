@@ -721,6 +721,11 @@ module Aws::EMRServerless
     #   state.
     #   @return [Integer]
     #
+    # @!attribute [rw] execution_timeout_minutes
+    #   Maximum duration for the job run to run. If the job run runs beyond
+    #   this duration, it will be automatically cancelled.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/JobRun AWS API Documentation
     #
     class JobRun < Struct.new(
@@ -740,7 +745,8 @@ module Aws::EMRServerless
       :tags,
       :total_resource_utilization,
       :network_configuration,
-      :total_execution_duration_seconds)
+      :total_execution_duration_seconds,
+      :execution_timeout_minutes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1175,7 +1181,7 @@ module Aws::EMRServerless
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The output lists the execution role ARN of the job run.
+    #   This output displays the ARN of the job run..
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/StartJobRunResponse AWS API Documentation
@@ -1366,8 +1372,8 @@ module Aws::EMRServerless
       include Aws::Structure
     end
 
-    # The input fails to satisfy the constraints specified by an AWS
-    # service.
+    # The input fails to satisfy the constraints specified by an Amazon Web
+    # Services service.
     #
     # @!attribute [rw] message
     #   @return [String]

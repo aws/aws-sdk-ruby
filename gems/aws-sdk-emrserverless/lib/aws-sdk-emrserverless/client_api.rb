@@ -291,6 +291,7 @@ module Aws::EMRServerless
     JobRun.add_member(:total_resource_utilization, Shapes::ShapeRef.new(shape: TotalResourceUtilization, location_name: "totalResourceUtilization"))
     JobRun.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     JobRun.add_member(:total_execution_duration_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "totalExecutionDurationSeconds"))
+    JobRun.add_member(:execution_timeout_minutes, Shapes::ShapeRef.new(shape: Duration, location_name: "executionTimeoutMinutes", metadata: {"box"=>true}))
     JobRun.struct_class = Types::JobRun
 
     JobRunStateSet.member = Shapes::ShapeRef.new(shape: JobRunState)

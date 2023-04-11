@@ -301,6 +301,7 @@ module Aws::EventBridge
     Secondary = Shapes::StructureShape.new(name: 'Secondary')
     SecretsManagerSecretArn = Shapes::StringShape.new(name: 'SecretsManagerSecretArn')
     Sql = Shapes::StringShape.new(name: 'Sql')
+    Sqls = Shapes::ListShape.new(name: 'Sqls')
     SqsParameters = Shapes::StructureShape.new(name: 'SqsParameters')
     StartReplayRequest = Shapes::StructureShape.new(name: 'StartReplayRequest')
     StartReplayResponse = Shapes::StructureShape.new(name: 'StartReplayResponse')
@@ -1094,9 +1095,10 @@ module Aws::EventBridge
     RedshiftDataParameters.add_member(:secret_manager_arn, Shapes::ShapeRef.new(shape: RedshiftSecretManagerArn, location_name: "SecretManagerArn"))
     RedshiftDataParameters.add_member(:database, Shapes::ShapeRef.new(shape: Database, required: true, location_name: "Database"))
     RedshiftDataParameters.add_member(:db_user, Shapes::ShapeRef.new(shape: DbUser, location_name: "DbUser"))
-    RedshiftDataParameters.add_member(:sql, Shapes::ShapeRef.new(shape: Sql, required: true, location_name: "Sql"))
+    RedshiftDataParameters.add_member(:sql, Shapes::ShapeRef.new(shape: Sql, location_name: "Sql"))
     RedshiftDataParameters.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementName, location_name: "StatementName"))
     RedshiftDataParameters.add_member(:with_event, Shapes::ShapeRef.new(shape: Boolean, location_name: "WithEvent"))
+    RedshiftDataParameters.add_member(:sqls, Shapes::ShapeRef.new(shape: Sqls, location_name: "Sqls"))
     RedshiftDataParameters.struct_class = Types::RedshiftDataParameters
 
     RemovePermissionRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: StatementId, location_name: "StatementId"))
@@ -1191,6 +1193,8 @@ module Aws::EventBridge
 
     Secondary.add_member(:route, Shapes::ShapeRef.new(shape: Route, required: true, location_name: "Route"))
     Secondary.struct_class = Types::Secondary
+
+    Sqls.member = Shapes::ShapeRef.new(shape: Sql)
 
     SqsParameters.add_member(:message_group_id, Shapes::ShapeRef.new(shape: MessageGroupId, location_name: "MessageGroupId"))
     SqsParameters.struct_class = Types::SqsParameters

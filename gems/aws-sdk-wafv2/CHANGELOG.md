@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2023-04-11)
+------------------
+
+* Feature - For web ACLs that protect CloudFront protections, the default request body inspection size is now 16 KB, and you can use the new association configuration to increase the inspection size further, up to 64 KB. Sizes over 16 KB can incur additional costs.
+
 1.53.0 (2023-04-04)
 ------------------
 

@@ -2431,6 +2431,8 @@ module Aws::EventBridge
     #   resp.targets[0].redshift_data_parameters.sql #=> String
     #   resp.targets[0].redshift_data_parameters.statement_name #=> String
     #   resp.targets[0].redshift_data_parameters.with_event #=> Boolean
+    #   resp.targets[0].redshift_data_parameters.sqls #=> Array
+    #   resp.targets[0].redshift_data_parameters.sqls[0] #=> String
     #   resp.targets[0].sage_maker_pipeline_parameters.pipeline_parameter_list #=> Array
     #   resp.targets[0].sage_maker_pipeline_parameters.pipeline_parameter_list[0].name #=> String
     #   resp.targets[0].sage_maker_pipeline_parameters.pipeline_parameter_list[0].value #=> String
@@ -3078,9 +3080,10 @@ module Aws::EventBridge
     #           secret_manager_arn: "RedshiftSecretManagerArn",
     #           database: "Database", # required
     #           db_user: "DbUser",
-    #           sql: "Sql", # required
+    #           sql: "Sql",
     #           statement_name: "StatementName",
     #           with_event: false,
+    #           sqls: ["Sql"],
     #         },
     #         sage_maker_pipeline_parameters: {
     #           pipeline_parameter_list: [
@@ -3744,7 +3747,7 @@ module Aws::EventBridge
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eventbridge'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

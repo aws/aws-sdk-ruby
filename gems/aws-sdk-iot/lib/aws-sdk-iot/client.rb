@@ -1482,6 +1482,9 @@ module Aws::IoT
     #
     #    </note>
     #
+    # @option params [Types::TlsConfig] :tls_config
+    #   An object that specifies the TLS configuration for a domain.
+    #
     # @return [Types::CreateDomainConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainConfigurationResponse#domain_configuration_name #domain_configuration_name} => String
@@ -1505,6 +1508,9 @@ module Aws::IoT
     #         value: "TagValue",
     #       },
     #     ],
+    #     tls_config: {
+    #       security_policy: "SecurityPolicy",
+    #     },
     #   })
     #
     # @example Response structure
@@ -5408,6 +5414,7 @@ module Aws::IoT
     #   * {Types::DescribeDomainConfigurationResponse#service_type #service_type} => String
     #   * {Types::DescribeDomainConfigurationResponse#domain_type #domain_type} => String
     #   * {Types::DescribeDomainConfigurationResponse#last_status_change_date #last_status_change_date} => Time
+    #   * {Types::DescribeDomainConfigurationResponse#tls_config #tls_config} => Types::TlsConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -5430,6 +5437,7 @@ module Aws::IoT
     #   resp.service_type #=> String, one of "DATA", "CREDENTIAL_PROVIDER", "JOBS"
     #   resp.domain_type #=> String, one of "ENDPOINT", "AWS_MANAGED", "CUSTOMER_MANAGED"
     #   resp.last_status_change_date #=> Time
+    #   resp.tls_config.security_policy #=> String
     #
     # @overload describe_domain_configuration(params = {})
     # @param [Hash] params ({})
@@ -12965,6 +12973,9 @@ module Aws::IoT
     # @option params [Boolean] :remove_authorizer_config
     #   Removes the authorization configuration from a domain.
     #
+    # @option params [Types::TlsConfig] :tls_config
+    #   An object that specifies the TLS configuration for a domain.
+    #
     # @return [Types::UpdateDomainConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDomainConfigurationResponse#domain_configuration_name #domain_configuration_name} => String
@@ -12980,6 +12991,9 @@ module Aws::IoT
     #     },
     #     domain_configuration_status: "ENABLED", # accepts ENABLED, DISABLED
     #     remove_authorizer_config: false,
+    #     tls_config: {
+    #       security_policy: "SecurityPolicy",
+    #     },
     #   })
     #
     # @example Response structure
@@ -14089,7 +14103,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

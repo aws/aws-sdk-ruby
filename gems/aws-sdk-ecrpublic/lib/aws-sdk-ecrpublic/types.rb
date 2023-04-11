@@ -79,9 +79,10 @@ module Aws::ECRPublic
     end
 
     # @!attribute [rw] registry_id
-    #   The Amazon Web Services account ID that's associated with the
-    #   registry that contains the image to delete. If you do not specify a
-    #   registry, the default public registry is assumed.
+    #   The Amazon Web Services account ID, or registry alias, that's
+    #   associated with the registry that contains the image to delete. If
+    #   you do not specify a registry, the default public registry is
+    #   assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name

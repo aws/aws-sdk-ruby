@@ -3751,6 +3751,10 @@ module Aws::EventBridge
     #   statement runs.
     #   @return [Boolean]
     #
+    # @!attribute [rw] sqls
+    #   A list of SQLs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/RedshiftDataParameters AWS API Documentation
     #
     class RedshiftDataParameters < Struct.new(
@@ -3759,8 +3763,9 @@ module Aws::EventBridge
       :db_user,
       :sql,
       :statement_name,
-      :with_event)
-      SENSITIVE = []
+      :with_event,
+      :sqls)
+      SENSITIVE = [:sql, :sqls]
       include Aws::Structure
     end
 
