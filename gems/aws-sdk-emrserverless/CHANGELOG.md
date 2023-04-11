@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2023-04-11)
+------------------
+
+* Feature - This release extends GetJobRun API to return job run timeout (executionTimeoutMinutes) specified during StartJobRun call (or default timeout of 720 minutes if none was specified).
+
 1.5.0 (2023-01-18)
 ------------------
 

@@ -412,18 +412,18 @@ module Aws::IoTDataPlane
     #
     # This action returns the message payload of the retained message, which
     # can incur messaging costs. To list only the topic names of the
-    # retained messages, call
-    # [ListRetainedMessages](/iot/latest/developerguide/API_iotdata_ListRetainedMessages.html).
+    # retained messages, call [ListRetainedMessages][1].
     #
-    # Requires permission to access the [GetRetainedMessage][1] action.
+    # Requires permission to access the [GetRetainedMessage][2] action.
     #
     # For more information about messaging costs, see [Amazon Web Services
-    # IoT Core pricing - Messaging][2].
+    # IoT Core pricing - Messaging][3].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions
-    # [2]: http://aws.amazon.com/iot-core/pricing/#Messaging
+    # [1]: https://docs.aws.amazon.com/iot/latest/apireference/API_iotdata_ListRetainedMessages.html
+    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions
+    # [3]: http://aws.amazon.com/iot-core/pricing/#Messaging
     #
     # @option params [required, String] :topic
     #   The topic name of the retained message to retrieve.
@@ -434,6 +434,7 @@ module Aws::IoTDataPlane
     #   * {Types::GetRetainedMessageResponse#payload #payload} => String
     #   * {Types::GetRetainedMessageResponse#qos #qos} => Integer
     #   * {Types::GetRetainedMessageResponse#last_modified_time #last_modified_time} => Integer
+    #   * {Types::GetRetainedMessageResponse#user_properties #user_properties} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -447,6 +448,7 @@ module Aws::IoTDataPlane
     #   resp.payload #=> String
     #   resp.qos #=> Integer
     #   resp.last_modified_time #=> Integer
+    #   resp.user_properties #=> String
     #
     # @overload get_retained_message(params = {})
     # @param [Hash] params ({})
@@ -558,7 +560,7 @@ module Aws::IoTDataPlane
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/API_iotdata_GetRetainedMessage.html
+    # [1]: https://docs.aws.amazon.com/iot/latest/apireference/API_iotdata_GetRetainedMessage.html
     # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions
     # [3]: http://aws.amazon.com/iot-core/pricing/#Messaging
     #
@@ -768,7 +770,7 @@ module Aws::IoTDataPlane
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotdataplane'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
