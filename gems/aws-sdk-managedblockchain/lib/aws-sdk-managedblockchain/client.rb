@@ -385,7 +385,7 @@ module Aws::ManagedBlockchain
     # @option params [required, String] :accessor_type
     #   The type of accessor.
     #
-    #   <note markdown="1"> Currently accessor type is restricted to `BILLING_TOKEN`.
+    #   <note markdown="1"> Currently, accessor type is restricted to `BILLING_TOKEN`.
     #
     #    </note>
     #
@@ -653,8 +653,6 @@ module Aws::ManagedBlockchain
     #
     #   * `n-ethereum-rinkeby`
     #
-    #   * `n-ethereum-ropsten`
-    #
     # @option params [String] :member_id
     #   The unique identifier of the member that owns this node.
     #
@@ -900,8 +898,6 @@ module Aws::ManagedBlockchain
     #   * `n-ethereum-goerli`
     #
     #   * `n-ethereum-rinkeby`
-    #
-    #   * `n-ethereum-ropsten`
     #
     # @option params [String] :member_id
     #   The unique identifier of the member that owns this node.
@@ -1874,7 +1870,7 @@ module Aws::ManagedBlockchain
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-managedblockchain'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

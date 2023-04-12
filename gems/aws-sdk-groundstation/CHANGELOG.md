@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2023-04-12)
+------------------
+
+* Feature - AWS Ground Station Wideband DigIF GA Release
+
 1.32.0 (2023-01-31)
 ------------------
 

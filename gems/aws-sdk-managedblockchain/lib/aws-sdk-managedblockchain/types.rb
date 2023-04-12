@@ -32,7 +32,7 @@ module Aws::ManagedBlockchain
     # @!attribute [rw] type
     #   The type of the accessor.
     #
-    #   <note markdown="1"> Currently accessor type is restricted to `BILLING_TOKEN`.
+    #   <note markdown="1"> Currently, accessor type is restricted to `BILLING_TOKEN`.
     #
     #    </note>
     #   @return [String]
@@ -191,7 +191,7 @@ module Aws::ManagedBlockchain
     # @!attribute [rw] accessor_type
     #   The type of accessor.
     #
-    #   <note markdown="1"> Currently accessor type is restricted to `BILLING_TOKEN`.
+    #   <note markdown="1"> Currently, accessor type is restricted to `BILLING_TOKEN`.
     #
     #    </note>
     #   @return [String]
@@ -405,8 +405,6 @@ module Aws::ManagedBlockchain
     #   * `n-ethereum-goerli`
     #
     #   * `n-ethereum-rinkeby`
-    #
-    #   * `n-ethereum-ropsten`
     #   @return [String]
     #
     # @!attribute [rw] member_id
@@ -586,8 +584,6 @@ module Aws::ManagedBlockchain
     #   * `n-ethereum-goerli`
     #
     #   * `n-ethereum-rinkeby`
-    #
-    #   * `n-ethereum-ropsten`
     #   @return [String]
     #
     # @!attribute [rw] member_id
@@ -1497,7 +1493,8 @@ module Aws::ManagedBlockchain
     end
 
     # Configuration properties for Hyperledger Fabric for a member in a
-    # Managed Blockchain network using the Hyperledger Fabric framework.
+    # Managed Blockchain network that is using the Hyperledger Fabric
+    # framework.
     #
     # @!attribute [rw] admin_username
     #   The user name for the member's initial administrative user.
@@ -1505,11 +1502,11 @@ module Aws::ManagedBlockchain
     #
     # @!attribute [rw] admin_password
     #   The password for the member's initial administrative user. The
-    #   `AdminPassword` must be at least eight characters long and no more
-    #   than 32 characters. It must contain at least one uppercase letter,
-    #   one lowercase letter, and one digit. It cannot have a single
-    #   quotation mark (‘), a double quotation marks (“), a forward
-    #   slash(/), a backward slash(\\), @, or a space.
+    #   `AdminPassword` must be at least 8 characters long and no more than
+    #   32 characters. It must contain at least one uppercase letter, one
+    #   lowercase letter, and one digit. It cannot have a single quotation
+    #   mark (‘), a double quotation marks (“), a forward slash(/), a
+    #   backward slash(\\), @, or a space.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/MemberFabricConfiguration AWS API Documentation
@@ -1708,7 +1705,7 @@ module Aws::ManagedBlockchain
     #   @return [String]
     #
     # @!attribute [rw] voting_policy
-    #   The voting rules for the network to decide if a proposal is
+    #   The voting rules that the network uses to decide if a proposal is
     #   accepted.
     #   @return [Types::VotingPolicy]
     #
@@ -1775,8 +1772,6 @@ module Aws::ManagedBlockchain
     #   * goerli = `5`
     #
     #   * rinkeby = `4`
-    #
-    #   * ropsten = `3`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NetworkEthereumAttributes AWS API Documentation

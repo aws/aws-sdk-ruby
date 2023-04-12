@@ -514,14 +514,17 @@ module Aws::GroundStation
     # `Config` must match a `DataflowEndpoint` in the same group.
     #
     # @option params [Integer] :contact_post_pass_duration_seconds
-    #   Amount of time, in seconds, after a contact ends for the contact to
-    #   remain in a `POSTPASS` state. A CloudWatch event is emitted when the
-    #   contact enters and exits the `POSTPASS` state.
+    #   Amount of time, in seconds, after a contact ends that the Ground
+    #   Station Dataflow Endpoint Group will be in a `POSTPASS` state. A
+    #   Ground Station Dataflow Endpoint Group State Change event will be
+    #   emitted when the Dataflow Endpoint Group enters and exits the
+    #   `POSTPASS` state.
     #
     # @option params [Integer] :contact_pre_pass_duration_seconds
-    #   Amount of time, in seconds, prior to contact start for the contact to
-    #   remain in a `PREPASS` state. A CloudWatch event is emitted when the
-    #   contact enters and exits the `PREPASS` state.
+    #   Amount of time, in seconds, before a contact starts that the Ground
+    #   Station Dataflow Endpoint Group will be in a `PREPASS` state. A Ground
+    #   Station Dataflow Endpoint Group State Change event will be emitted
+    #   when the Dataflow Endpoint Group enters and exits the `PREPASS` state.
     #
     # @option params [required, Array<Types::EndpointDetails>] :endpoint_details
     #   Endpoint details of each endpoint in the dataflow endpoint group.
@@ -571,6 +574,8 @@ module Aws::GroundStation
     #           name: "SafeName",
     #           status: "created", # accepts created, creating, deleted, deleting, failed
     #         },
+    #         health_reasons: ["NO_REGISTERED_AGENT"], # accepts NO_REGISTERED_AGENT, INVALID_IP_OWNERSHIP, NOT_AUTHORIZED_TO_CREATE_SLR, UNVERIFIED_IP_OWNERSHIP, INITIALIZING_DATAPLANE, DATAPLANE_FAILURE, HEALTHY
+    #         health_status: "UNHEALTHY", # accepts UNHEALTHY, HEALTHY
     #         security_details: {
     #           role_arn: "RoleArn", # required
     #           security_group_ids: ["String"], # required
@@ -935,6 +940,9 @@ module Aws::GroundStation
     #   resp.dataflow_list[0].destination.config_details.endpoint_details.endpoint.mtu #=> Integer
     #   resp.dataflow_list[0].destination.config_details.endpoint_details.endpoint.name #=> String
     #   resp.dataflow_list[0].destination.config_details.endpoint_details.endpoint.status #=> String, one of "created", "creating", "deleted", "deleting", "failed"
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.health_reasons #=> Array
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.health_reasons[0] #=> String, one of "NO_REGISTERED_AGENT", "INVALID_IP_OWNERSHIP", "NOT_AUTHORIZED_TO_CREATE_SLR", "UNVERIFIED_IP_OWNERSHIP", "INITIALIZING_DATAPLANE", "DATAPLANE_FAILURE", "HEALTHY"
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.health_status #=> String, one of "UNHEALTHY", "HEALTHY"
     #   resp.dataflow_list[0].destination.config_details.endpoint_details.security_details.role_arn #=> String
     #   resp.dataflow_list[0].destination.config_details.endpoint_details.security_details.security_group_ids #=> Array
     #   resp.dataflow_list[0].destination.config_details.endpoint_details.security_details.security_group_ids[0] #=> String
@@ -962,6 +970,9 @@ module Aws::GroundStation
     #   resp.dataflow_list[0].source.config_details.endpoint_details.endpoint.mtu #=> Integer
     #   resp.dataflow_list[0].source.config_details.endpoint_details.endpoint.name #=> String
     #   resp.dataflow_list[0].source.config_details.endpoint_details.endpoint.status #=> String, one of "created", "creating", "deleted", "deleting", "failed"
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.health_reasons #=> Array
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.health_reasons[0] #=> String, one of "NO_REGISTERED_AGENT", "INVALID_IP_OWNERSHIP", "NOT_AUTHORIZED_TO_CREATE_SLR", "UNVERIFIED_IP_OWNERSHIP", "INITIALIZING_DATAPLANE", "DATAPLANE_FAILURE", "HEALTHY"
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.health_status #=> String, one of "UNHEALTHY", "HEALTHY"
     #   resp.dataflow_list[0].source.config_details.endpoint_details.security_details.role_arn #=> String
     #   resp.dataflow_list[0].source.config_details.endpoint_details.security_details.security_group_ids #=> Array
     #   resp.dataflow_list[0].source.config_details.endpoint_details.security_details.security_group_ids[0] #=> String
@@ -1054,6 +1065,10 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
+    # <note markdown="1"> For use by AWS Ground Station Agent and shouldn't be called directly.
+    #
+    #  </note>
+    #
     # Gets the latest configuration information for a registered agent.
     #
     # @option params [required, String] :agent_id
@@ -1196,6 +1211,9 @@ module Aws::GroundStation
     #   resp.endpoints_details[0].endpoint.mtu #=> Integer
     #   resp.endpoints_details[0].endpoint.name #=> String
     #   resp.endpoints_details[0].endpoint.status #=> String, one of "created", "creating", "deleted", "deleting", "failed"
+    #   resp.endpoints_details[0].health_reasons #=> Array
+    #   resp.endpoints_details[0].health_reasons[0] #=> String, one of "NO_REGISTERED_AGENT", "INVALID_IP_OWNERSHIP", "NOT_AUTHORIZED_TO_CREATE_SLR", "UNVERIFIED_IP_OWNERSHIP", "INITIALIZING_DATAPLANE", "DATAPLANE_FAILURE", "HEALTHY"
+    #   resp.endpoints_details[0].health_status #=> String, one of "UNHEALTHY", "HEALTHY"
     #   resp.endpoints_details[0].security_details.role_arn #=> String
     #   resp.endpoints_details[0].security_details.security_group_ids #=> Array
     #   resp.endpoints_details[0].security_details.security_group_ids[0] #=> String
@@ -1732,13 +1750,17 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
-    # Registers a new agent with AWS Groundstation.
+    # <note markdown="1"> For use by AWS Ground Station Agent and shouldn't be called directly.
+    #
+    #  </note>
+    #
+    # Registers a new agent with AWS Ground Station.
     #
     # @option params [required, Types::AgentDetails] :agent_details
     #   Detailed information about the agent being registered.
     #
     # @option params [required, Types::DiscoveryData] :discovery_data
-    #   Data for associating and agent with the capabilities it is managing.
+    #   Data for associating an agent with the capabilities it is managing.
     #
     # @return [Types::RegisterAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1748,16 +1770,17 @@ module Aws::GroundStation
     #
     #   resp = client.register_agent({
     #     agent_details: { # required
+    #       agent_cpu_cores: [1],
     #       agent_version: "VersionString", # required
     #       component_versions: [ # required
     #         {
-    #           component_type: "LAMINAR_FLOW", # required, accepts LAMINAR_FLOW, PRISM, DIGITIZER
+    #           component_type: "ComponentTypeString", # required
     #           versions: ["VersionString"], # required
     #         },
     #       ],
     #       instance_id: "InstanceId", # required
     #       instance_type: "InstanceType", # required
-    #       reserved_cpu_cores: [1], # required
+    #       reserved_cpu_cores: [1],
     #     },
     #     discovery_data: { # required
     #       capability_arns: ["CapabilityArn"], # required
@@ -1883,6 +1906,10 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
+    # <note markdown="1"> For use by AWS Ground Station Agent and shouldn't be called directly.
+    #
+    #  </note>
+    #
     # Update the status of the agent.
     #
     # @option params [required, String] :agent_id
@@ -1916,7 +1943,7 @@ module Aws::GroundStation
     #         bytes_received: 1,
     #         bytes_sent: 1,
     #         capability_arn: "CapabilityArn", # required
-    #         component_type: "LAMINAR_FLOW", # required, accepts LAMINAR_FLOW, PRISM, DIGITIZER
+    #         component_type: "ComponentTypeString", # required
     #         dataflow_id: "Uuid", # required
     #         packets_dropped: 1,
     #         status: "SUCCESS", # required, accepts SUCCESS, FAILED, ACTIVE, INACTIVE
@@ -2182,7 +2209,7 @@ module Aws::GroundStation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-groundstation'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

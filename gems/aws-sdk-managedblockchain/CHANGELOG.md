@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2023-04-12)
+------------------
+
+* Feature - Removal of the Ropsten network. The Ethereum foundation ceased support of Ropsten on December 31st, 2022..
+
 1.37.0 (2023-02-28)
 ------------------
 
