@@ -442,6 +442,7 @@ module Aws::ChimeSDKVoice
     CreateSipMediaApplicationRequest.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AwsRegion"))
     CreateSipMediaApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: SipMediaApplicationName, required: true, location_name: "Name"))
     CreateSipMediaApplicationRequest.add_member(:endpoints, Shapes::ShapeRef.new(shape: SipMediaApplicationEndpointList, required: true, location_name: "Endpoints"))
+    CreateSipMediaApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateSipMediaApplicationRequest.struct_class = Types::CreateSipMediaApplicationRequest
 
     CreateSipMediaApplicationResponse.add_member(:sip_media_application, Shapes::ShapeRef.new(shape: SipMediaApplication, location_name: "SipMediaApplication"))
@@ -467,6 +468,7 @@ module Aws::ChimeSDKVoice
     CreateVoiceConnectorRequest.add_member(:name, Shapes::ShapeRef.new(shape: VoiceConnectorName, required: true, location_name: "Name"))
     CreateVoiceConnectorRequest.add_member(:aws_region, Shapes::ShapeRef.new(shape: VoiceConnectorAwsRegion, location_name: "AwsRegion"))
     CreateVoiceConnectorRequest.add_member(:require_encryption, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "RequireEncryption"))
+    CreateVoiceConnectorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateVoiceConnectorRequest.struct_class = Types::CreateVoiceConnectorRequest
 
     CreateVoiceConnectorResponse.add_member(:voice_connector, Shapes::ShapeRef.new(shape: VoiceConnector, location_name: "VoiceConnector"))
@@ -1034,6 +1036,7 @@ module Aws::ChimeSDKVoice
     SipMediaApplication.add_member(:endpoints, Shapes::ShapeRef.new(shape: SipMediaApplicationEndpointList, location_name: "Endpoints"))
     SipMediaApplication.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
     SipMediaApplication.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
+    SipMediaApplication.add_member(:sip_media_application_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SipMediaApplicationArn"))
     SipMediaApplication.struct_class = Types::SipMediaApplication
 
     SipMediaApplicationAlexaSkillConfiguration.add_member(:alexa_skill_status, Shapes::ShapeRef.new(shape: AlexaSkillStatus, required: true, location_name: "AlexaSkillStatus"))

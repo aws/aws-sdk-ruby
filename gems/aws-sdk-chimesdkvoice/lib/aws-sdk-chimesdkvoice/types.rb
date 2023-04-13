@@ -434,12 +434,17 @@ module Aws::ChimeSDKVoice
     #   application.
     #   @return [Array<Types::SipMediaApplicationEndpoint>]
     #
+    # @!attribute [rw] tags
+    #   The tags assigned to the SIP media application.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/CreateSipMediaApplicationRequest AWS API Documentation
     #
     class CreateSipMediaApplicationRequest < Struct.new(
       :aws_region,
       :name,
-      :endpoints)
+      :endpoints,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -552,12 +557,17 @@ module Aws::ChimeSDKVoice
     #   Enables or disables encryption for the Voice Connector.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tags
+    #   The tags assigned to the Voice Connector.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/CreateVoiceConnectorRequest AWS API Documentation
     #
     class CreateVoiceConnectorRequest < Struct.new(
       :name,
       :aws_region,
-      :require_encryption)
+      :require_encryption,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1951,8 +1961,7 @@ module Aws::ChimeSDKVoice
     # CloudWatch Logs.
     #
     # @!attribute [rw] enable_sip_logs
-    #   Boolean that enables sending SIP message logs to Amazon CloudWatch
-    #   logs.
+    #   Boolean that enables sending SIP message logs to Amazon CloudWatch.
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_media_metric_logs
@@ -2867,7 +2876,7 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     #
     # @!attribute [rw] endpoints
-    #   List of endpoints for SIP media application. Currently, only one
+    #   List of endpoints for a SIP media application. Currently, only one
     #   endpoint per SIP media application is permitted.
     #   @return [Array<Types::SipMediaApplicationEndpoint>]
     #
@@ -2879,6 +2888,10 @@ module Aws::ChimeSDKVoice
     #   The time at which the SIP media application was updated.
     #   @return [Time]
     #
+    # @!attribute [rw] sip_media_application_arn
+    #   The ARN of the SIP media application.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/SipMediaApplication AWS API Documentation
     #
     class SipMediaApplication < Struct.new(
@@ -2887,7 +2900,8 @@ module Aws::ChimeSDKVoice
       :name,
       :endpoints,
       :created_timestamp,
-      :updated_timestamp)
+      :updated_timestamp,
+      :sip_media_application_arn)
       SENSITIVE = []
       include Aws::Structure
     end

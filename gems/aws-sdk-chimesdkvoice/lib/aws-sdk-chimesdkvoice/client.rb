@@ -665,6 +665,9 @@ module Aws::ChimeSDKVoice
     #   List of endpoints (Lambda ARNs) specified for the SIP media
     #   application.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags assigned to the SIP media application.
+    #
     # @return [Types::CreateSipMediaApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSipMediaApplicationResponse#sip_media_application #sip_media_application} => Types::SipMediaApplication
@@ -679,6 +682,12 @@ module Aws::ChimeSDKVoice
     #         lambda_arn: "FunctionArn",
     #       },
     #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -690,6 +699,7 @@ module Aws::ChimeSDKVoice
     #   resp.sip_media_application.endpoints[0].lambda_arn #=> String
     #   resp.sip_media_application.created_timestamp #=> Time
     #   resp.sip_media_application.updated_timestamp #=> Time
+    #   resp.sip_media_application.sip_media_application_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/CreateSipMediaApplication AWS API Documentation
     #
@@ -847,6 +857,9 @@ module Aws::ChimeSDKVoice
     # @option params [required, Boolean] :require_encryption
     #   Enables or disables encryption for the Voice Connector.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags assigned to the Voice Connector.
+    #
     # @return [Types::CreateVoiceConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateVoiceConnectorResponse#voice_connector #voice_connector} => Types::VoiceConnector
@@ -857,6 +870,12 @@ module Aws::ChimeSDKVoice
     #     name: "VoiceConnectorName", # required
     #     aws_region: "us-east-1", # accepts us-east-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, ap-northeast-2, ap-northeast-1, ap-southeast-1, ap-southeast-2
     #     require_encryption: false, # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1671,6 +1690,7 @@ module Aws::ChimeSDKVoice
     #   resp.sip_media_application.endpoints[0].lambda_arn #=> String
     #   resp.sip_media_application.created_timestamp #=> Time
     #   resp.sip_media_application.updated_timestamp #=> Time
+    #   resp.sip_media_application.sip_media_application_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/GetSipMediaApplication AWS API Documentation
     #
@@ -2478,6 +2498,7 @@ module Aws::ChimeSDKVoice
     #   resp.sip_media_applications[0].endpoints[0].lambda_arn #=> String
     #   resp.sip_media_applications[0].created_timestamp #=> Time
     #   resp.sip_media_applications[0].updated_timestamp #=> Time
+    #   resp.sip_media_applications[0].sip_media_application_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/ListSipMediaApplications AWS API Documentation
@@ -3743,6 +3764,7 @@ module Aws::ChimeSDKVoice
     #   resp.sip_media_application.endpoints[0].lambda_arn #=> String
     #   resp.sip_media_application.created_timestamp #=> Time
     #   resp.sip_media_application.updated_timestamp #=> Time
+    #   resp.sip_media_application.sip_media_application_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/UpdateSipMediaApplication AWS API Documentation
     #
@@ -4127,7 +4149,7 @@ module Aws::ChimeSDKVoice
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkvoice'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

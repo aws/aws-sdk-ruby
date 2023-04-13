@@ -29,7 +29,10 @@ module Aws::MediaConnect
   # ## Error Classes
   # * {AddFlowOutputs420Exception}
   # * {BadRequestException}
+  # * {ConflictException}
+  # * {CreateBridge420Exception}
   # * {CreateFlow420Exception}
+  # * {CreateGateway420Exception}
   # * {ForbiddenException}
   # * {GrantFlowEntitlements420Exception}
   # * {InternalServerErrorException}
@@ -73,11 +76,56 @@ module Aws::MediaConnect
       end
     end
 
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MediaConnect::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class CreateBridge420Exception < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MediaConnect::Types::CreateBridge420Exception] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class CreateFlow420Exception < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::MediaConnect::Types::CreateFlow420Exception] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class CreateGateway420Exception < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MediaConnect::Types::CreateGateway420Exception] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
