@@ -3261,9 +3261,15 @@ module Aws::Lambda
     # clients. For more information, see [Configuring a Lambda function to
     # stream responses][1].
     #
+    # This operation requires permission for the [lambda:InvokeFunction][2]
+    # action. For details on how to set up permissions for cross-account
+    # invocations, see [Granting function access to other accounts][3].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-response-streaming.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awslambda.html
+    # [3]: https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-xaccountinvoke
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function.
@@ -6356,7 +6362,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -14773,8 +14773,6 @@ module Aws::RDS
     #   The amount of storage in gibibytes (GiB) to allocate to each DB
     #   instance in the Multi-AZ DB cluster.
     #
-    #   Type: Integer
-    #
     #   Valid for: Multi-AZ DB clusters only
     #   @return [Integer]
     #
@@ -15030,6 +15028,35 @@ module Aws::RDS
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #   @return [String]
     #
+    # @!attribute [rw] engine_mode
+    #   The DB engine mode of the DB cluster, either `provisioned` or
+    #   `serverless`.
+    #
+    #   <note markdown="1"> The DB engine mode can be modified only from `serverless` to
+    #   `provisioned`.
+    #
+    #    </note>
+    #
+    #   For more information, see [ CreateDBCluster][1].
+    #
+    #   Valid for: Aurora DB clusters only
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html
+    #   @return [String]
+    #
+    # @!attribute [rw] allow_engine_mode_change
+    #   A value that indicates whether engine mode changes from `serverless`
+    #   to `provisioned` are allowed.
+    #
+    #   Constraints: You must allow engine mode changes when specifying a
+    #   different value for the `EngineMode` parameter from the DB
+    #   cluster's current engine mode.
+    #
+    #   Valid for: Aurora Serverless v1 DB clusters only
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -15071,7 +15098,9 @@ module Aws::RDS
       :network_type,
       :manage_master_user_password,
       :rotate_master_user_password,
-      :master_user_secret_kms_key_id)
+      :master_user_secret_kms_key_id,
+      :engine_mode,
+      :allow_engine_mode_change)
       SENSITIVE = []
       include Aws::Structure
     end

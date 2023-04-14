@@ -1891,6 +1891,10 @@ module Aws::Lambda
     #   specified age. The default value is -1, which sets the maximum age
     #   to infinite. When the value is set to infinite, Lambda never
     #   discards old records.
+    #
+    #   <note markdown="1"> The minimum value that can be set is 60 seconds.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] bisect_batch_on_function_error
@@ -2119,7 +2123,16 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] runtime
-    #   The runtime environment for the Lambda function.
+    #   The identifier of the function's [runtime][1]. Runtime is required
+    #   if the deployment package is a .zip file archive.
+    #
+    #   The following list includes deprecated runtimes. For more
+    #   information, see [Runtime deprecation policy][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
     #   @return [String]
     #
     # @!attribute [rw] role

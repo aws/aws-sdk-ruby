@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2023-04-14)
+------------------
+
+* Feature - This release adds SnapStart related exceptions to InvokeWithResponseStream API. IAM access related documentation is also added for this API.
+
 1.93.0 (2023-04-07)
 ------------------
 

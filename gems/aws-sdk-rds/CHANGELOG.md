@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.176.0 (2023-04-14)
+------------------
+
+* Feature - This release adds support of modifying the engine mode of database clusters.
+
 1.175.0 (2023-04-06)
 ------------------
 

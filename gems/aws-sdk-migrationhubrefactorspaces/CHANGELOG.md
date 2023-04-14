@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2023-04-14)
+------------------
+
+* Feature - Doc only update for Refactor Spaces environments without network bridge feature.
+
 1.11.0 (2023-02-09)
 ------------------
 

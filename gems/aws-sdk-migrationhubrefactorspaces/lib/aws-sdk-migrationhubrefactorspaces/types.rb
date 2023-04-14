@@ -1077,7 +1077,7 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] transit_gateway_id
-    #   The ID of the transit gateway set up by the environment.
+    #   The ID of the Transit Gateway set up by the environment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/migration-hub-refactor-spaces-2021-10-26/EnvironmentSummary AWS API Documentation
@@ -1343,7 +1343,8 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] transit_gateway_id
-    #   The ID of the transit gateway set up by the environment.
+    #   The ID of the Transit Gateway set up by the environment, if
+    #   applicable.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/migration-hub-refactor-spaces-2021-10-26/GetEnvironmentResponse AWS API Documentation

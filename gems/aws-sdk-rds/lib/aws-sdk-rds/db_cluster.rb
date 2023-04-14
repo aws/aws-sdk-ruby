@@ -1783,6 +1783,8 @@ module Aws::RDS
     #     manage_master_user_password: false,
     #     rotate_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
+    #     engine_mode: "String",
+    #     allow_engine_mode_change: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :new_db_cluster_identifier
@@ -2128,8 +2130,6 @@ module Aws::RDS
     #   The amount of storage in gibibytes (GiB) to allocate to each DB
     #   instance in the Multi-AZ DB cluster.
     #
-    #   Type: Integer
-    #
     #   Valid for: Multi-AZ DB clusters only
     # @option options [String] :storage_type
     #   Specifies the storage type to be associated with the DB cluster.
@@ -2356,6 +2356,31 @@ module Aws::RDS
     #   Amazon Web Services Region.
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
+    # @option options [String] :engine_mode
+    #   The DB engine mode of the DB cluster, either `provisioned` or
+    #   `serverless`.
+    #
+    #   <note markdown="1"> The DB engine mode can be modified only from `serverless` to
+    #   `provisioned`.
+    #
+    #    </note>
+    #
+    #   For more information, see [ CreateDBCluster][1].
+    #
+    #   Valid for: Aurora DB clusters only
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html
+    # @option options [Boolean] :allow_engine_mode_change
+    #   A value that indicates whether engine mode changes from `serverless`
+    #   to `provisioned` are allowed.
+    #
+    #   Constraints: You must allow engine mode changes when specifying a
+    #   different value for the `EngineMode` parameter from the DB cluster's
+    #   current engine mode.
+    #
+    #   Valid for: Aurora Serverless v1 DB clusters only
     # @return [DBCluster]
     def modify(options = {})
       options = options.merge(db_cluster_identifier: @id)

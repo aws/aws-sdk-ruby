@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.114.0 (2023-04-14)
+------------------
+
+* Feature - This release supports  ephemeral storage for AWS Fargate Windows containers.
+
 1.113.0 (2023-04-10)
 ------------------
 

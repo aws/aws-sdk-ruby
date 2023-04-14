@@ -1624,42 +1624,47 @@ module Aws::ECS
     #   @return [Array<Types::HostEntry>]
     #
     # @!attribute [rw] docker_security_options
-    #   A list of strings to provide custom labels for SELinux and AppArmor
-    #   multi-level security systems. This field isn't valid for containers
-    #   in tasks using the Fargate launch type.
+    #   A list of strings to provide custom configuration for multiple
+    #   security systems. For more information about valid values, see
+    #   [Docker Run Security Configuration][1]. This field isn't valid for
+    #   containers in tasks using the Fargate launch type.
     #
-    #   With Windows containers, this parameter can be used to reference a
-    #   credential spec file when configuring a container for Active
+    #   For Linux tasks on EC2, this parameter can be used to reference
+    #   custom labels for SELinux and AppArmor multi-level security systems.
+    #
+    #   For any tasks on EC2, this parameter can be used to reference a
+    #   credential spec file that configures a container for Active
     #   Directory authentication. For more information, see [Using gMSAs for
-    #   Windows Containers][1] in the *Amazon Elastic Container Service
-    #   Developer Guide*.
+    #   Windows Containers][2] and [Using gMSAs for Linux Containers][3] in
+    #   the *Amazon Elastic Container Service Developer Guide*.
     #
-    #   This parameter maps to `SecurityOpt` in the [Create a container][2]
-    #   section of the [Docker Remote API][3] and the `--security-opt`
-    #   option to [docker run][4].
+    #   This parameter maps to `SecurityOpt` in the [Create a container][4]
+    #   section of the [Docker Remote API][5] and the `--security-opt`
+    #   option to [docker run][1].
     #
     #   <note markdown="1"> The Amazon ECS container agent running on a container instance must
     #   register with the `ECS_SELINUX_CAPABLE=true` or
     #   `ECS_APPARMOR_CAPABLE=true` environment variables before containers
     #   placed on that instance can use these security options. For more
-    #   information, see [Amazon ECS Container Agent Configuration][5] in
+    #   information, see [Amazon ECS Container Agent Configuration][6] in
     #   the *Amazon Elastic Container Service Developer Guide*.
     #
     #    </note>
     #
     #   For more information about valid values, see [Docker Run Security
-    #   Configuration][4].
+    #   Configuration][1].
     #
     #   Valid values: "no-new-privileges" \| "apparmor:PROFILE" \|
     #   "label:value" \| "credentialspec:CredentialSpecFilePath"
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows-gmsa.html
-    #   [2]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-    #   [3]: https://docs.docker.com/engine/api/v1.35/
-    #   [4]: https://docs.docker.com/engine/reference/run/#security-configuration
-    #   [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
+    #   [1]: https://docs.docker.com/engine/reference/run/#security-configuration
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows-gmsa.html
+    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/linux-gmsa.html
+    #   [4]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [5]: https://docs.docker.com/engine/api/v1.35/
+    #   [6]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] interactive
