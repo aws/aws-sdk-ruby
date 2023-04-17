@@ -534,8 +534,8 @@ module Aws::DynamoDB
     # every table in the request. If you want strongly consistent reads
     # instead, you can set `ConsistentRead` to `true` for any or all tables.
     #
-    # In order to minimize response latency, `BatchGetItem` retrieves items
-    # in parallel.
+    # In order to minimize response latency, `BatchGetItem` may retrieve
+    # items in parallel.
     #
     # When designing your application, keep in mind that DynamoDB does not
     # return items in any particular order. To help parse the response by
@@ -5079,7 +5079,7 @@ module Aws::DynamoDB
     end
 
     # Creates a new table from an existing backup. Any number of users can
-    # execute up to 4 concurrent restores (any type of restore) in a given
+    # execute up to 50 concurrent restores (any type of restore) in a given
     # account.
     #
     # You can call `RestoreTableFromBackup` at a maximum rate of 10 times
@@ -7748,7 +7748,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

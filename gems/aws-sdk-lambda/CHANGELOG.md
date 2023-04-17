@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2023-04-17)
+------------------
+
+* Feature - Add Python 3.10 (python3.10) support to AWS Lambda
+
 1.94.0 (2023-04-14)
 ------------------
 

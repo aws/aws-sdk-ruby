@@ -181,10 +181,14 @@ module Aws::InternetMonitor
     #   @return [Integer]
     #
     # @!attribute [rw] internet_measurements_log_delivery
-    #   Publish internet measurements for Internet Monitor to another
-    #   location, such as an Amazon S3 bucket. The measurements are also
-    #   published to Amazon CloudWatch Logs.
+    #   Publish internet measurements for Internet Monitor to an Amazon S3
+    #   bucket in addition to CloudWatch Logs.
     #   @return [Types::InternetMeasurementsLogDelivery]
+    #
+    # @!attribute [rw] traffic_percentage_to_monitor
+    #   The percentage of the internet-facing traffic for your application
+    #   that you want to monitor with this monitor.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/CreateMonitorInput AWS API Documentation
     #
@@ -194,7 +198,8 @@ module Aws::InternetMonitor
       :client_token,
       :tags,
       :max_city_networks_to_monitor,
-      :internet_measurements_log_delivery)
+      :internet_measurements_log_delivery,
+      :traffic_percentage_to_monitor)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -381,6 +386,11 @@ module Aws::InternetMonitor
     #   published to Amazon CloudWatch Logs.
     #   @return [Types::InternetMeasurementsLogDelivery]
     #
+    # @!attribute [rw] traffic_percentage_to_monitor
+    #   The percentage of the internet-facing traffic for your application
+    #   that you want to monitor with this monitor.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetMonitorOutput AWS API Documentation
     #
     class GetMonitorOutput < Struct.new(
@@ -394,7 +404,8 @@ module Aws::InternetMonitor
       :processing_status_info,
       :tags,
       :max_city_networks_to_monitor,
-      :internet_measurements_log_delivery)
+      :internet_measurements_log_delivery,
+      :traffic_percentage_to_monitor)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -641,9 +652,7 @@ module Aws::InternetMonitor
       include Aws::Structure
     end
 
-    # Configuration information for other locations that you choose to
-    # publish Amazon CloudWatch Internet Monitor internet measurements to,
-    # such as Amazon S3. The measurements are also published to Amazon
+    # Publish internet measurements to an Amazon S3 bucket in addition to
     # CloudWatch Logs.
     #
     # @!attribute [rw] s3_config
@@ -1192,6 +1201,11 @@ module Aws::InternetMonitor
     #   published to Amazon CloudWatch Logs.
     #   @return [Types::InternetMeasurementsLogDelivery]
     #
+    # @!attribute [rw] traffic_percentage_to_monitor
+    #   The percentage of the internet-facing traffic for your application
+    #   that you want to monitor with this monitor.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/UpdateMonitorInput AWS API Documentation
     #
     class UpdateMonitorInput < Struct.new(
@@ -1201,7 +1215,8 @@ module Aws::InternetMonitor
       :status,
       :client_token,
       :max_city_networks_to_monitor,
-      :internet_measurements_log_delivery)
+      :internet_measurements_log_delivery,
+      :traffic_percentage_to_monitor)
       SENSITIVE = []
       include Aws::Structure
     end

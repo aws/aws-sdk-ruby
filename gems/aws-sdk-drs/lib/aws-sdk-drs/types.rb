@@ -153,6 +153,56 @@ module Aws::Drs
       include Aws::Structure
     end
 
+    # @!attribute [rw] copy_private_ip
+    #   Copy private IP.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] copy_tags
+    #   Copy tags.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] launch_disposition
+    #   Launch disposition.
+    #   @return [String]
+    #
+    # @!attribute [rw] licensing
+    #   Licensing.
+    #   @return [Types::Licensing]
+    #
+    # @!attribute [rw] tags
+    #   Request to associate tags during creation of a Launch Configuration
+    #   Template.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] target_instance_type_right_sizing_method
+    #   Target instance type right-sizing method.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/CreateLaunchConfigurationTemplateRequest AWS API Documentation
+    #
+    class CreateLaunchConfigurationTemplateRequest < Struct.new(
+      :copy_private_ip,
+      :copy_tags,
+      :launch_disposition,
+      :licensing,
+      :tags,
+      :target_instance_type_right_sizing_method)
+      SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] launch_configuration_template
+    #   Created Launch Configuration Template.
+    #   @return [Types::LaunchConfigurationTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/CreateLaunchConfigurationTemplateResponse AWS API Documentation
+    #
+    class CreateLaunchConfigurationTemplateResponse < Struct.new(
+      :launch_configuration_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] associate_default_security_group
     #   Whether to associate the default Elastic Disaster Recovery Security
     #   group with the Replication Configuration Template.
@@ -400,6 +450,22 @@ module Aws::Drs
     #
     class DeleteJobResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] launch_configuration_template_id
+    #   The ID of the Launch Configuration Template to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DeleteLaunchConfigurationTemplateRequest AWS API Documentation
+    #
+    class DeleteLaunchConfigurationTemplateRequest < Struct.new(
+      :launch_configuration_template_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DeleteLaunchConfigurationTemplateResponse AWS API Documentation
+    #
+    class DeleteLaunchConfigurationTemplateResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] recovery_instance_id
     #   The ID of the Recovery Instance to be deleted.
     #   @return [String]
@@ -541,6 +607,47 @@ module Aws::Drs
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DescribeJobsResponse AWS API Documentation
     #
     class DescribeJobsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] launch_configuration_template_i_ds
+    #   Request to filter Launch Configuration Templates list by Launch
+    #   Configuration Template ID.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum results to be returned in
+    #   DescribeLaunchConfigurationTemplates.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token of the next Launch Configuration Template to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DescribeLaunchConfigurationTemplatesRequest AWS API Documentation
+    #
+    class DescribeLaunchConfigurationTemplatesRequest < Struct.new(
+      :launch_configuration_template_i_ds,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   List of items returned by DescribeLaunchConfigurationTemplates.
+    #   @return [Array<Types::LaunchConfigurationTemplate>]
+    #
+    # @!attribute [rw] next_token
+    #   The token of the next Launch Configuration Template to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DescribeLaunchConfigurationTemplatesResponse AWS API Documentation
+    #
+    class DescribeLaunchConfigurationTemplatesResponse < Struct.new(
       :items,
       :next_token)
       SENSITIVE = []
@@ -1114,6 +1221,55 @@ module Aws::Drs
       :source_server_id,
       :target_instance_type_right_sizing_method)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Account level Launch Configuration Template.
+    #
+    # @!attribute [rw] arn
+    #   ARN of the Launch Configuration Template.
+    #   @return [String]
+    #
+    # @!attribute [rw] copy_private_ip
+    #   Copy private IP.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] copy_tags
+    #   Copy tags.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] launch_configuration_template_id
+    #   ID of the Launch Configuration Template.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_disposition
+    #   Launch disposition.
+    #   @return [String]
+    #
+    # @!attribute [rw] licensing
+    #   Licensing.
+    #   @return [Types::Licensing]
+    #
+    # @!attribute [rw] tags
+    #   Tags of the Launch Configuration Template.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] target_instance_type_right_sizing_method
+    #   Target instance type right-sizing method.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/LaunchConfigurationTemplate AWS API Documentation
+    #
+    class LaunchConfigurationTemplate < Struct.new(
+      :arn,
+      :copy_private_ip,
+      :copy_tags,
+      :launch_configuration_template_id,
+      :launch_disposition,
+      :licensing,
+      :tags,
+      :target_instance_type_right_sizing_method)
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
@@ -2204,6 +2360,11 @@ module Aws::Drs
     #   the Source Server.
     #   @return [String]
     #
+    # @!attribute [rw] supports_nitro_instances
+    #   Are EC2 nitro instance types supported when recovering the Source
+    #   Server.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/SourceProperties AWS API Documentation
     #
     class SourceProperties < Struct.new(
@@ -2214,7 +2375,8 @@ module Aws::Drs
       :network_interfaces,
       :os,
       :ram_bytes,
-      :recommended_instance_type)
+      :recommended_instance_type,
+      :supports_nitro_instances)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2676,6 +2838,55 @@ module Aws::Drs
       :name,
       :source_server_id,
       :target_instance_type_right_sizing_method)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] copy_private_ip
+    #   Copy private IP.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] copy_tags
+    #   Copy tags.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] launch_configuration_template_id
+    #   Launch Configuration Template ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_disposition
+    #   Launch disposition.
+    #   @return [String]
+    #
+    # @!attribute [rw] licensing
+    #   Licensing.
+    #   @return [Types::Licensing]
+    #
+    # @!attribute [rw] target_instance_type_right_sizing_method
+    #   Target instance type right-sizing method.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UpdateLaunchConfigurationTemplateRequest AWS API Documentation
+    #
+    class UpdateLaunchConfigurationTemplateRequest < Struct.new(
+      :copy_private_ip,
+      :copy_tags,
+      :launch_configuration_template_id,
+      :launch_disposition,
+      :licensing,
+      :target_instance_type_right_sizing_method)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] launch_configuration_template
+    #   Updated Launch Configuration Template.
+    #   @return [Types::LaunchConfigurationTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UpdateLaunchConfigurationTemplateResponse AWS API Documentation
+    #
+    class UpdateLaunchConfigurationTemplateResponse < Struct.new(
+      :launch_configuration_template)
       SENSITIVE = []
       include Aws::Structure
     end

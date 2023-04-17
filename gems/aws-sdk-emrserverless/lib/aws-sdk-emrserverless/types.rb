@@ -707,8 +707,8 @@ module Aws::EMRServerless
     #
     # @!attribute [rw] total_resource_utilization
     #   The aggregate vCPU, memory, and storage resources used from the time
-    #   job start executing till the time job is terminated, rounded up to
-    #   the nearest second.
+    #   the job starts to execute, until the time the job terminates,
+    #   rounded up to the nearest second.
     #   @return [Types::TotalResourceUtilization]
     #
     # @!attribute [rw] network_configuration
@@ -722,9 +722,18 @@ module Aws::EMRServerless
     #   @return [Integer]
     #
     # @!attribute [rw] execution_timeout_minutes
-    #   Maximum duration for the job run to run. If the job run runs beyond
-    #   this duration, it will be automatically cancelled.
+    #   Returns the job run timeout value from the `StartJobRun` call. If no
+    #   timeout was specified, then it returns the default timeout of 720
+    #   minutes.
     #   @return [Integer]
+    #
+    # @!attribute [rw] billed_resource_utilization
+    #   The aggregate vCPU, memory, and storage that AWS has billed for the
+    #   job run. The billed resources include a 1-minute minimum usage for
+    #   workers, plus additional storage over 20 GB per worker. Note that
+    #   billed resources do not include usage for idle pre-initialized
+    #   workers.
+    #   @return [Types::ResourceUtilization]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/JobRun AWS API Documentation
     #
@@ -746,7 +755,8 @@ module Aws::EMRServerless
       :total_resource_utilization,
       :network_configuration,
       :total_execution_duration_seconds,
-      :execution_timeout_minutes)
+      :execution_timeout_minutes,
+      :billed_resource_utilization)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1041,6 +1051,33 @@ module Aws::EMRServerless
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The resource utilization for memory, storage, and vCPU for jobs.
+    #
+    # @!attribute [rw] v_cpu_hour
+    #   The aggregated vCPU used per hour from the time the job starts
+    #   executing until the job is terminated.
+    #   @return [Float]
+    #
+    # @!attribute [rw] memory_gb_hour
+    #   The aggregated memory used per hour from the time the job starts
+    #   executing until the job is terminated.
+    #   @return [Float]
+    #
+    # @!attribute [rw] storage_gb_hour
+    #   The aggregated storage used per hour from the time the job starts
+    #   executing until the job is terminated.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/ResourceUtilization AWS API Documentation
+    #
+    class ResourceUtilization < Struct.new(
+      :v_cpu_hour,
+      :memory_gb_hour,
+      :storage_gb_hour)
       SENSITIVE = []
       include Aws::Structure
     end

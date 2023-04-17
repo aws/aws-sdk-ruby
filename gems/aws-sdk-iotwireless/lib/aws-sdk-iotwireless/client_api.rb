@@ -218,6 +218,7 @@ module Aws::IoTWireless
     GatewayEui = Shapes::StringShape.new(name: 'GatewayEui')
     GatewayList = Shapes::ListShape.new(name: 'GatewayList')
     GatewayListItem = Shapes::StructureShape.new(name: 'GatewayListItem')
+    GatewayMaxEirp = Shapes::FloatShape.new(name: 'GatewayMaxEirp')
     GenAppKey = Shapes::StringShape.new(name: 'GenAppKey')
     GeoJsonPayload = Shapes::BlobShape.new(name: 'GeoJsonPayload')
     GeranCid = Shapes::IntegerShape.new(name: 'GeranCid')
@@ -1634,6 +1635,7 @@ module Aws::IoTWireless
     LoRaWANGateway.add_member(:net_id_filters, Shapes::ShapeRef.new(shape: NetIdFilters, location_name: "NetIdFilters"))
     LoRaWANGateway.add_member(:sub_bands, Shapes::ShapeRef.new(shape: SubBands, location_name: "SubBands"))
     LoRaWANGateway.add_member(:beaconing, Shapes::ShapeRef.new(shape: Beaconing, location_name: "Beaconing"))
+    LoRaWANGateway.add_member(:max_eirp, Shapes::ShapeRef.new(shape: GatewayMaxEirp, location_name: "MaxEirp"))
     LoRaWANGateway.struct_class = Types::LoRaWANGateway
 
     LoRaWANGatewayCurrentVersion.add_member(:current_version, Shapes::ShapeRef.new(shape: LoRaWANGatewayVersion, location_name: "CurrentVersion"))
@@ -1698,6 +1700,7 @@ module Aws::IoTWireless
     LoRaWANMulticastSession.add_member(:dl_freq, Shapes::ShapeRef.new(shape: DlFreq, location_name: "DlFreq"))
     LoRaWANMulticastSession.add_member(:session_start_time, Shapes::ShapeRef.new(shape: SessionStartTimeTimestamp, location_name: "SessionStartTime"))
     LoRaWANMulticastSession.add_member(:session_timeout, Shapes::ShapeRef.new(shape: SessionTimeout, location_name: "SessionTimeout"))
+    LoRaWANMulticastSession.add_member(:ping_slot_period, Shapes::ShapeRef.new(shape: PingSlotPeriod, location_name: "PingSlotPeriod"))
     LoRaWANMulticastSession.struct_class = Types::LoRaWANMulticastSession
 
     LoRaWANSendDataToDevice.add_member(:f_port, Shapes::ShapeRef.new(shape: FPort, location_name: "FPort"))
@@ -1707,6 +1710,8 @@ module Aws::IoTWireless
     LoRaWANServiceProfile.add_member(:add_gw_metadata, Shapes::ShapeRef.new(shape: AddGwMetadata, location_name: "AddGwMetadata"))
     LoRaWANServiceProfile.add_member(:dr_min, Shapes::ShapeRef.new(shape: DrMinBox, location_name: "DrMin"))
     LoRaWANServiceProfile.add_member(:dr_max, Shapes::ShapeRef.new(shape: DrMaxBox, location_name: "DrMax"))
+    LoRaWANServiceProfile.add_member(:pr_allowed, Shapes::ShapeRef.new(shape: PrAllowed, location_name: "PrAllowed"))
+    LoRaWANServiceProfile.add_member(:ra_allowed, Shapes::ShapeRef.new(shape: RaAllowed, location_name: "RaAllowed"))
     LoRaWANServiceProfile.struct_class = Types::LoRaWANServiceProfile
 
     LoRaWANStartFuotaTask.add_member(:start_time, Shapes::ShapeRef.new(shape: StartTime, location_name: "StartTime"))
@@ -2213,6 +2218,7 @@ module Aws::IoTWireless
     UpdateWirelessGatewayRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     UpdateWirelessGatewayRequest.add_member(:join_eui_filters, Shapes::ShapeRef.new(shape: JoinEuiFilters, location_name: "JoinEuiFilters"))
     UpdateWirelessGatewayRequest.add_member(:net_id_filters, Shapes::ShapeRef.new(shape: NetIdFilters, location_name: "NetIdFilters"))
+    UpdateWirelessGatewayRequest.add_member(:max_eirp, Shapes::ShapeRef.new(shape: GatewayMaxEirp, location_name: "MaxEirp"))
     UpdateWirelessGatewayRequest.struct_class = Types::UpdateWirelessGatewayRequest
 
     UpdateWirelessGatewayResponse.struct_class = Types::UpdateWirelessGatewayResponse

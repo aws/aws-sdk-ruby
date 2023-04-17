@@ -30,6 +30,8 @@ module Aws::Drs
     Cpus = Shapes::ListShape.new(name: 'Cpus')
     CreateExtendedSourceServerRequest = Shapes::StructureShape.new(name: 'CreateExtendedSourceServerRequest')
     CreateExtendedSourceServerResponse = Shapes::StructureShape.new(name: 'CreateExtendedSourceServerResponse')
+    CreateLaunchConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'CreateLaunchConfigurationTemplateRequest')
+    CreateLaunchConfigurationTemplateResponse = Shapes::StructureShape.new(name: 'CreateLaunchConfigurationTemplateResponse')
     CreateReplicationConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'CreateReplicationConfigurationTemplateRequest')
     DataReplicationError = Shapes::StructureShape.new(name: 'DataReplicationError')
     DataReplicationErrorString = Shapes::StringShape.new(name: 'DataReplicationErrorString')
@@ -44,6 +46,8 @@ module Aws::Drs
     DataReplicationState = Shapes::StringShape.new(name: 'DataReplicationState')
     DeleteJobRequest = Shapes::StructureShape.new(name: 'DeleteJobRequest')
     DeleteJobResponse = Shapes::StructureShape.new(name: 'DeleteJobResponse')
+    DeleteLaunchConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'DeleteLaunchConfigurationTemplateRequest')
+    DeleteLaunchConfigurationTemplateResponse = Shapes::StructureShape.new(name: 'DeleteLaunchConfigurationTemplateResponse')
     DeleteRecoveryInstanceRequest = Shapes::StructureShape.new(name: 'DeleteRecoveryInstanceRequest')
     DeleteReplicationConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'DeleteReplicationConfigurationTemplateRequest')
     DeleteReplicationConfigurationTemplateResponse = Shapes::StructureShape.new(name: 'DeleteReplicationConfigurationTemplateResponse')
@@ -55,6 +59,8 @@ module Aws::Drs
     DescribeJobsRequestFilters = Shapes::StructureShape.new(name: 'DescribeJobsRequestFilters')
     DescribeJobsRequestFiltersJobIDs = Shapes::ListShape.new(name: 'DescribeJobsRequestFiltersJobIDs')
     DescribeJobsResponse = Shapes::StructureShape.new(name: 'DescribeJobsResponse')
+    DescribeLaunchConfigurationTemplatesRequest = Shapes::StructureShape.new(name: 'DescribeLaunchConfigurationTemplatesRequest')
+    DescribeLaunchConfigurationTemplatesResponse = Shapes::StructureShape.new(name: 'DescribeLaunchConfigurationTemplatesResponse')
     DescribeRecoveryInstancesItems = Shapes::ListShape.new(name: 'DescribeRecoveryInstancesItems')
     DescribeRecoveryInstancesRequest = Shapes::StructureShape.new(name: 'DescribeRecoveryInstancesRequest')
     DescribeRecoveryInstancesRequestFilters = Shapes::StructureShape.new(name: 'DescribeRecoveryInstancesRequestFilters')
@@ -107,6 +113,10 @@ module Aws::Drs
     LastLaunchResult = Shapes::StringShape.new(name: 'LastLaunchResult')
     LastLaunchType = Shapes::StringShape.new(name: 'LastLaunchType')
     LaunchConfiguration = Shapes::StructureShape.new(name: 'LaunchConfiguration')
+    LaunchConfigurationTemplate = Shapes::StructureShape.new(name: 'LaunchConfigurationTemplate')
+    LaunchConfigurationTemplateID = Shapes::StringShape.new(name: 'LaunchConfigurationTemplateID')
+    LaunchConfigurationTemplateIDs = Shapes::ListShape.new(name: 'LaunchConfigurationTemplateIDs')
+    LaunchConfigurationTemplates = Shapes::ListShape.new(name: 'LaunchConfigurationTemplates')
     LaunchDisposition = Shapes::StringShape.new(name: 'LaunchDisposition')
     LaunchStatus = Shapes::StringShape.new(name: 'LaunchStatus')
     Licensing = Shapes::StructureShape.new(name: 'Licensing')
@@ -121,6 +131,7 @@ module Aws::Drs
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResultsReplicatingSourceServers = Shapes::IntegerShape.new(name: 'MaxResultsReplicatingSourceServers')
+    MaxResultsType = Shapes::IntegerShape.new(name: 'MaxResultsType')
     NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
     NetworkInterfaces = Shapes::ListShape.new(name: 'NetworkInterfaces')
     OS = Shapes::StructureShape.new(name: 'OS')
@@ -211,6 +222,8 @@ module Aws::Drs
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateFailbackReplicationConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateFailbackReplicationConfigurationRequest')
     UpdateLaunchConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateLaunchConfigurationRequest')
+    UpdateLaunchConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'UpdateLaunchConfigurationTemplateRequest')
+    UpdateLaunchConfigurationTemplateResponse = Shapes::StructureShape.new(name: 'UpdateLaunchConfigurationTemplateResponse')
     UpdateReplicationConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateReplicationConfigurationRequest')
     UpdateReplicationConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'UpdateReplicationConfigurationTemplateRequest')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
@@ -259,6 +272,17 @@ module Aws::Drs
 
     CreateExtendedSourceServerResponse.add_member(:source_server, Shapes::ShapeRef.new(shape: SourceServer, location_name: "sourceServer"))
     CreateExtendedSourceServerResponse.struct_class = Types::CreateExtendedSourceServerResponse
+
+    CreateLaunchConfigurationTemplateRequest.add_member(:copy_private_ip, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyPrivateIp"))
+    CreateLaunchConfigurationTemplateRequest.add_member(:copy_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyTags"))
+    CreateLaunchConfigurationTemplateRequest.add_member(:launch_disposition, Shapes::ShapeRef.new(shape: LaunchDisposition, location_name: "launchDisposition"))
+    CreateLaunchConfigurationTemplateRequest.add_member(:licensing, Shapes::ShapeRef.new(shape: Licensing, location_name: "licensing"))
+    CreateLaunchConfigurationTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreateLaunchConfigurationTemplateRequest.add_member(:target_instance_type_right_sizing_method, Shapes::ShapeRef.new(shape: TargetInstanceTypeRightSizingMethod, location_name: "targetInstanceTypeRightSizingMethod"))
+    CreateLaunchConfigurationTemplateRequest.struct_class = Types::CreateLaunchConfigurationTemplateRequest
+
+    CreateLaunchConfigurationTemplateResponse.add_member(:launch_configuration_template, Shapes::ShapeRef.new(shape: LaunchConfigurationTemplate, location_name: "launchConfigurationTemplate"))
+    CreateLaunchConfigurationTemplateResponse.struct_class = Types::CreateLaunchConfigurationTemplateResponse
 
     CreateReplicationConfigurationTemplateRequest.add_member(:associate_default_security_group, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "associateDefaultSecurityGroup"))
     CreateReplicationConfigurationTemplateRequest.add_member(:auto_replicate_new_disks, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoReplicateNewDisks"))
@@ -315,6 +339,11 @@ module Aws::Drs
 
     DeleteJobResponse.struct_class = Types::DeleteJobResponse
 
+    DeleteLaunchConfigurationTemplateRequest.add_member(:launch_configuration_template_id, Shapes::ShapeRef.new(shape: LaunchConfigurationTemplateID, required: true, location_name: "launchConfigurationTemplateID"))
+    DeleteLaunchConfigurationTemplateRequest.struct_class = Types::DeleteLaunchConfigurationTemplateRequest
+
+    DeleteLaunchConfigurationTemplateResponse.struct_class = Types::DeleteLaunchConfigurationTemplateResponse
+
     DeleteRecoveryInstanceRequest.add_member(:recovery_instance_id, Shapes::ShapeRef.new(shape: RecoveryInstanceID, required: true, location_name: "recoveryInstanceID"))
     DeleteRecoveryInstanceRequest.struct_class = Types::DeleteRecoveryInstanceRequest
 
@@ -352,6 +381,15 @@ module Aws::Drs
     DescribeJobsResponse.add_member(:items, Shapes::ShapeRef.new(shape: JobsList, location_name: "items"))
     DescribeJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     DescribeJobsResponse.struct_class = Types::DescribeJobsResponse
+
+    DescribeLaunchConfigurationTemplatesRequest.add_member(:launch_configuration_template_i_ds, Shapes::ShapeRef.new(shape: LaunchConfigurationTemplateIDs, location_name: "launchConfigurationTemplateIDs"))
+    DescribeLaunchConfigurationTemplatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
+    DescribeLaunchConfigurationTemplatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    DescribeLaunchConfigurationTemplatesRequest.struct_class = Types::DescribeLaunchConfigurationTemplatesRequest
+
+    DescribeLaunchConfigurationTemplatesResponse.add_member(:items, Shapes::ShapeRef.new(shape: LaunchConfigurationTemplates, location_name: "items"))
+    DescribeLaunchConfigurationTemplatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    DescribeLaunchConfigurationTemplatesResponse.struct_class = Types::DescribeLaunchConfigurationTemplatesResponse
 
     DescribeRecoveryInstancesItems.member = Shapes::ShapeRef.new(shape: RecoveryInstance)
 
@@ -489,6 +527,20 @@ module Aws::Drs
     LaunchConfiguration.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, location_name: "sourceServerID"))
     LaunchConfiguration.add_member(:target_instance_type_right_sizing_method, Shapes::ShapeRef.new(shape: TargetInstanceTypeRightSizingMethod, location_name: "targetInstanceTypeRightSizingMethod"))
     LaunchConfiguration.struct_class = Types::LaunchConfiguration
+
+    LaunchConfigurationTemplate.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
+    LaunchConfigurationTemplate.add_member(:copy_private_ip, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyPrivateIp"))
+    LaunchConfigurationTemplate.add_member(:copy_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyTags"))
+    LaunchConfigurationTemplate.add_member(:launch_configuration_template_id, Shapes::ShapeRef.new(shape: LaunchConfigurationTemplateID, location_name: "launchConfigurationTemplateID"))
+    LaunchConfigurationTemplate.add_member(:launch_disposition, Shapes::ShapeRef.new(shape: LaunchDisposition, location_name: "launchDisposition"))
+    LaunchConfigurationTemplate.add_member(:licensing, Shapes::ShapeRef.new(shape: Licensing, location_name: "licensing"))
+    LaunchConfigurationTemplate.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    LaunchConfigurationTemplate.add_member(:target_instance_type_right_sizing_method, Shapes::ShapeRef.new(shape: TargetInstanceTypeRightSizingMethod, location_name: "targetInstanceTypeRightSizingMethod"))
+    LaunchConfigurationTemplate.struct_class = Types::LaunchConfigurationTemplate
+
+    LaunchConfigurationTemplateIDs.member = Shapes::ShapeRef.new(shape: LaunchConfigurationTemplateID)
+
+    LaunchConfigurationTemplates.member = Shapes::ShapeRef.new(shape: LaunchConfigurationTemplate)
 
     Licensing.add_member(:os_byol, Shapes::ShapeRef.new(shape: Boolean, location_name: "osByol"))
     Licensing.struct_class = Types::Licensing
@@ -737,6 +789,7 @@ module Aws::Drs
     SourceProperties.add_member(:os, Shapes::ShapeRef.new(shape: OS, location_name: "os"))
     SourceProperties.add_member(:ram_bytes, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "ramBytes"))
     SourceProperties.add_member(:recommended_instance_type, Shapes::ShapeRef.new(shape: EC2InstanceType, location_name: "recommendedInstanceType"))
+    SourceProperties.add_member(:supports_nitro_instances, Shapes::ShapeRef.new(shape: Boolean, location_name: "supportsNitroInstances"))
     SourceProperties.struct_class = Types::SourceProperties
 
     SourceServer.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
@@ -852,6 +905,17 @@ module Aws::Drs
     UpdateLaunchConfigurationRequest.add_member(:target_instance_type_right_sizing_method, Shapes::ShapeRef.new(shape: TargetInstanceTypeRightSizingMethod, location_name: "targetInstanceTypeRightSizingMethod"))
     UpdateLaunchConfigurationRequest.struct_class = Types::UpdateLaunchConfigurationRequest
 
+    UpdateLaunchConfigurationTemplateRequest.add_member(:copy_private_ip, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyPrivateIp"))
+    UpdateLaunchConfigurationTemplateRequest.add_member(:copy_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyTags"))
+    UpdateLaunchConfigurationTemplateRequest.add_member(:launch_configuration_template_id, Shapes::ShapeRef.new(shape: LaunchConfigurationTemplateID, required: true, location_name: "launchConfigurationTemplateID"))
+    UpdateLaunchConfigurationTemplateRequest.add_member(:launch_disposition, Shapes::ShapeRef.new(shape: LaunchDisposition, location_name: "launchDisposition"))
+    UpdateLaunchConfigurationTemplateRequest.add_member(:licensing, Shapes::ShapeRef.new(shape: Licensing, location_name: "licensing"))
+    UpdateLaunchConfigurationTemplateRequest.add_member(:target_instance_type_right_sizing_method, Shapes::ShapeRef.new(shape: TargetInstanceTypeRightSizingMethod, location_name: "targetInstanceTypeRightSizingMethod"))
+    UpdateLaunchConfigurationTemplateRequest.struct_class = Types::UpdateLaunchConfigurationTemplateRequest
+
+    UpdateLaunchConfigurationTemplateResponse.add_member(:launch_configuration_template, Shapes::ShapeRef.new(shape: LaunchConfigurationTemplate, location_name: "launchConfigurationTemplate"))
+    UpdateLaunchConfigurationTemplateResponse.struct_class = Types::UpdateLaunchConfigurationTemplateResponse
+
     UpdateReplicationConfigurationRequest.add_member(:associate_default_security_group, Shapes::ShapeRef.new(shape: Boolean, location_name: "associateDefaultSecurityGroup"))
     UpdateReplicationConfigurationRequest.add_member(:auto_replicate_new_disks, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoReplicateNewDisks"))
     UpdateReplicationConfigurationRequest.add_member(:bandwidth_throttling, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "bandwidthThrottling"))
@@ -941,6 +1005,20 @@ module Aws::Drs
         o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
       end)
 
+      api.add_operation(:create_launch_configuration_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLaunchConfigurationTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/CreateLaunchConfigurationTemplate"
+        o.input = Shapes::ShapeRef.new(shape: CreateLaunchConfigurationTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLaunchConfigurationTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+      end)
+
       api.add_operation(:create_replication_configuration_template, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateReplicationConfigurationTemplate"
         o.http_method = "POST"
@@ -961,6 +1039,19 @@ module Aws::Drs
         o.http_request_uri = "/DeleteJob"
         o.input = Shapes::ShapeRef.new(shape: DeleteJobRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+      end)
+
+      api.add_operation(:delete_launch_configuration_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLaunchConfigurationTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/DeleteLaunchConfigurationTemplate"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLaunchConfigurationTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteLaunchConfigurationTemplateResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -1031,6 +1122,25 @@ module Aws::Drs
         o.http_request_uri = "/DescribeJobs"
         o.input = Shapes::ShapeRef.new(shape: DescribeJobsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_launch_configuration_templates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeLaunchConfigurationTemplates"
+        o.http_method = "POST"
+        o.http_request_uri = "/DescribeLaunchConfigurationTemplates"
+        o.input = Shapes::ShapeRef.new(shape: DescribeLaunchConfigurationTemplatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeLaunchConfigurationTemplatesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1400,6 +1510,20 @@ module Aws::Drs
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+      end)
+
+      api.add_operation(:update_launch_configuration_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateLaunchConfigurationTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateLaunchConfigurationTemplate"
+        o.input = Shapes::ShapeRef.new(shape: UpdateLaunchConfigurationTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateLaunchConfigurationTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
       end)

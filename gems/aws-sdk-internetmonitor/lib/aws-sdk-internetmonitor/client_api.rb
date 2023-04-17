@@ -75,6 +75,7 @@ module Aws::InternetMonitor
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
+    TrafficPercentageToMonitor = Shapes::IntegerShape.new(name: 'TrafficPercentageToMonitor')
     TriangulationEventType = Shapes::StringShape.new(name: 'TriangulationEventType')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
@@ -100,8 +101,9 @@ module Aws::InternetMonitor
     CreateMonitorInput.add_member(:resources, Shapes::ShapeRef.new(shape: SetOfARNs, location_name: "Resources"))
     CreateMonitorInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateMonitorInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
-    CreateMonitorInput.add_member(:max_city_networks_to_monitor, Shapes::ShapeRef.new(shape: MaxCityNetworksToMonitor, required: true, location_name: "MaxCityNetworksToMonitor"))
+    CreateMonitorInput.add_member(:max_city_networks_to_monitor, Shapes::ShapeRef.new(shape: MaxCityNetworksToMonitor, location_name: "MaxCityNetworksToMonitor"))
     CreateMonitorInput.add_member(:internet_measurements_log_delivery, Shapes::ShapeRef.new(shape: InternetMeasurementsLogDelivery, location_name: "InternetMeasurementsLogDelivery"))
+    CreateMonitorInput.add_member(:traffic_percentage_to_monitor, Shapes::ShapeRef.new(shape: TrafficPercentageToMonitor, location_name: "TrafficPercentageToMonitor"))
     CreateMonitorInput.struct_class = Types::CreateMonitorInput
 
     CreateMonitorOutput.add_member(:arn, Shapes::ShapeRef.new(shape: MonitorArn, required: true, location_name: "Arn"))
@@ -141,8 +143,9 @@ module Aws::InternetMonitor
     GetMonitorOutput.add_member(:processing_status, Shapes::ShapeRef.new(shape: MonitorProcessingStatusCode, location_name: "ProcessingStatus"))
     GetMonitorOutput.add_member(:processing_status_info, Shapes::ShapeRef.new(shape: String, location_name: "ProcessingStatusInfo"))
     GetMonitorOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
-    GetMonitorOutput.add_member(:max_city_networks_to_monitor, Shapes::ShapeRef.new(shape: MaxCityNetworksToMonitor, required: true, location_name: "MaxCityNetworksToMonitor"))
+    GetMonitorOutput.add_member(:max_city_networks_to_monitor, Shapes::ShapeRef.new(shape: MaxCityNetworksToMonitor, location_name: "MaxCityNetworksToMonitor"))
     GetMonitorOutput.add_member(:internet_measurements_log_delivery, Shapes::ShapeRef.new(shape: InternetMeasurementsLogDelivery, location_name: "InternetMeasurementsLogDelivery"))
+    GetMonitorOutput.add_member(:traffic_percentage_to_monitor, Shapes::ShapeRef.new(shape: TrafficPercentageToMonitor, location_name: "TrafficPercentageToMonitor"))
     GetMonitorOutput.struct_class = Types::GetMonitorOutput
 
     HealthEvent.add_member(:event_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "EventArn"))
@@ -293,6 +296,7 @@ module Aws::InternetMonitor
     UpdateMonitorInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     UpdateMonitorInput.add_member(:max_city_networks_to_monitor, Shapes::ShapeRef.new(shape: MaxCityNetworksToMonitor, location_name: "MaxCityNetworksToMonitor"))
     UpdateMonitorInput.add_member(:internet_measurements_log_delivery, Shapes::ShapeRef.new(shape: InternetMeasurementsLogDelivery, location_name: "InternetMeasurementsLogDelivery"))
+    UpdateMonitorInput.add_member(:traffic_percentage_to_monitor, Shapes::ShapeRef.new(shape: TrafficPercentageToMonitor, location_name: "TrafficPercentageToMonitor"))
     UpdateMonitorInput.struct_class = Types::UpdateMonitorInput
 
     UpdateMonitorOutput.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: MonitorArn, required: true, location_name: "MonitorArn"))

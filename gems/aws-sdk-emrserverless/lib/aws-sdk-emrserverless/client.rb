@@ -612,7 +612,9 @@ module Aws::EMRServerless
       req.send_request(options)
     end
 
-    # Returns a URL to access the job run dashboard.
+    # Returns a URL to access the job run dashboard. The generated URL is
+    # valid for one hour, after which you must invoke the API again to
+    # generate a new URL.
     #
     # @option params [required, String] :application_id
     #   The ID of the application.
@@ -703,6 +705,9 @@ module Aws::EMRServerless
     #   resp.job_run.network_configuration.security_group_ids[0] #=> String
     #   resp.job_run.total_execution_duration_seconds #=> Integer
     #   resp.job_run.execution_timeout_minutes #=> Integer
+    #   resp.job_run.billed_resource_utilization.v_cpu_hour #=> Float
+    #   resp.job_run.billed_resource_utilization.memory_gb_hour #=> Float
+    #   resp.job_run.billed_resource_utilization.storage_gb_hour #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetJobRun AWS API Documentation
     #
@@ -1228,7 +1233,7 @@ module Aws::EMRServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emrserverless'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2023-04-17)
+------------------
+
+* Feature - Supports the new feature of LoRaWAN roaming, allows to configure MaxEirp for LoRaWAN gateway, and allows to configure PingSlotPeriod for LoRaWAN multicast group
+
 1.31.0 (2023-03-27)
 ------------------
 

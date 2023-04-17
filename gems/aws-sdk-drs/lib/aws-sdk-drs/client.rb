@@ -445,6 +445,7 @@ module Aws::Drs
     #   resp.source_server.source_properties.os.full_string #=> String
     #   resp.source_server.source_properties.ram_bytes #=> Integer
     #   resp.source_server.source_properties.recommended_instance_type #=> String
+    #   resp.source_server.source_properties.supports_nitro_instances #=> Boolean
     #   resp.source_server.source_server_id #=> String
     #   resp.source_server.staging_area.error_message #=> String
     #   resp.source_server.staging_area.staging_account_id #=> String
@@ -459,6 +460,67 @@ module Aws::Drs
     # @param [Hash] params ({})
     def create_extended_source_server(params = {}, options = {})
       req = build_request(:create_extended_source_server, params)
+      req.send_request(options)
+    end
+
+    # Creates a new Launch Configuration Template.
+    #
+    # @option params [Boolean] :copy_private_ip
+    #   Copy private IP.
+    #
+    # @option params [Boolean] :copy_tags
+    #   Copy tags.
+    #
+    # @option params [String] :launch_disposition
+    #   Launch disposition.
+    #
+    # @option params [Types::Licensing] :licensing
+    #   Licensing.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Request to associate tags during creation of a Launch Configuration
+    #   Template.
+    #
+    # @option params [String] :target_instance_type_right_sizing_method
+    #   Target instance type right-sizing method.
+    #
+    # @return [Types::CreateLaunchConfigurationTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLaunchConfigurationTemplateResponse#launch_configuration_template #launch_configuration_template} => Types::LaunchConfigurationTemplate
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_launch_configuration_template({
+    #     copy_private_ip: false,
+    #     copy_tags: false,
+    #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
+    #     licensing: {
+    #       os_byol: false,
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.launch_configuration_template.arn #=> String
+    #   resp.launch_configuration_template.copy_private_ip #=> Boolean
+    #   resp.launch_configuration_template.copy_tags #=> Boolean
+    #   resp.launch_configuration_template.launch_configuration_template_id #=> String
+    #   resp.launch_configuration_template.launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.launch_configuration_template.licensing.os_byol #=> Boolean
+    #   resp.launch_configuration_template.tags #=> Hash
+    #   resp.launch_configuration_template.tags["TagKey"] #=> String
+    #   resp.launch_configuration_template.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/CreateLaunchConfigurationTemplate AWS API Documentation
+    #
+    # @overload create_launch_configuration_template(params = {})
+    # @param [Hash] params ({})
+    def create_launch_configuration_template(params = {}, options = {})
+      req = build_request(:create_launch_configuration_template, params)
       req.send_request(options)
     end
 
@@ -625,6 +687,28 @@ module Aws::Drs
     # @param [Hash] params ({})
     def delete_job(params = {}, options = {})
       req = build_request(:delete_job, params)
+      req.send_request(options)
+    end
+
+    # Deletes a single Launch Configuration Template by ID.
+    #
+    # @option params [required, String] :launch_configuration_template_id
+    #   The ID of the Launch Configuration Template to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_launch_configuration_template({
+    #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DeleteLaunchConfigurationTemplate AWS API Documentation
+    #
+    # @overload delete_launch_configuration_template(params = {})
+    # @param [Hash] params ({})
+    def delete_launch_configuration_template(params = {}, options = {})
+      req = build_request(:delete_launch_configuration_template, params)
       req.send_request(options)
     end
 
@@ -811,6 +895,58 @@ module Aws::Drs
     # @param [Hash] params ({})
     def describe_jobs(params = {}, options = {})
       req = build_request(:describe_jobs, params)
+      req.send_request(options)
+    end
+
+    # Lists all Launch Configuration Templates, filtered by Launch
+    # Configuration Template IDs
+    #
+    # @option params [Array<String>] :launch_configuration_template_i_ds
+    #   Request to filter Launch Configuration Templates list by Launch
+    #   Configuration Template ID.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum results to be returned in
+    #   DescribeLaunchConfigurationTemplates.
+    #
+    # @option params [String] :next_token
+    #   The token of the next Launch Configuration Template to retrieve.
+    #
+    # @return [Types::DescribeLaunchConfigurationTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeLaunchConfigurationTemplatesResponse#items #items} => Array&lt;Types::LaunchConfigurationTemplate&gt;
+    #   * {Types::DescribeLaunchConfigurationTemplatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_launch_configuration_templates({
+    #     launch_configuration_template_i_ds: ["LaunchConfigurationTemplateID"],
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].copy_private_ip #=> Boolean
+    #   resp.items[0].copy_tags #=> Boolean
+    #   resp.items[0].launch_configuration_template_id #=> String
+    #   resp.items[0].launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.items[0].licensing.os_byol #=> Boolean
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.items[0].target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DescribeLaunchConfigurationTemplates AWS API Documentation
+    #
+    # @overload describe_launch_configuration_templates(params = {})
+    # @param [Hash] params ({})
+    def describe_launch_configuration_templates(params = {}, options = {})
+      req = build_request(:describe_launch_configuration_templates, params)
       req.send_request(options)
     end
 
@@ -1123,6 +1259,7 @@ module Aws::Drs
     #   resp.items[0].source_properties.os.full_string #=> String
     #   resp.items[0].source_properties.ram_bytes #=> Integer
     #   resp.items[0].source_properties.recommended_instance_type #=> String
+    #   resp.items[0].source_properties.supports_nitro_instances #=> Boolean
     #   resp.items[0].source_server_id #=> String
     #   resp.items[0].staging_area.error_message #=> String
     #   resp.items[0].staging_area.staging_account_id #=> String
@@ -1268,6 +1405,7 @@ module Aws::Drs
     #   resp.source_properties.os.full_string #=> String
     #   resp.source_properties.ram_bytes #=> Integer
     #   resp.source_properties.recommended_instance_type #=> String
+    #   resp.source_properties.supports_nitro_instances #=> Boolean
     #   resp.source_server_id #=> String
     #   resp.staging_area.error_message #=> String
     #   resp.staging_area.staging_account_id #=> String
@@ -1649,6 +1787,7 @@ module Aws::Drs
     #   resp.source_properties.os.full_string #=> String
     #   resp.source_properties.ram_bytes #=> Integer
     #   resp.source_properties.recommended_instance_type #=> String
+    #   resp.source_properties.supports_nitro_instances #=> Boolean
     #   resp.source_server_id #=> String
     #   resp.staging_area.error_message #=> String
     #   resp.staging_area.staging_account_id #=> String
@@ -1876,6 +2015,7 @@ module Aws::Drs
     #   resp.source_server.source_properties.os.full_string #=> String
     #   resp.source_server.source_properties.ram_bytes #=> Integer
     #   resp.source_server.source_properties.recommended_instance_type #=> String
+    #   resp.source_server.source_properties.supports_nitro_instances #=> Boolean
     #   resp.source_server.source_server_id #=> String
     #   resp.source_server.staging_area.error_message #=> String
     #   resp.source_server.staging_area.staging_account_id #=> String
@@ -1988,6 +2128,7 @@ module Aws::Drs
     #   resp.source_server.source_properties.os.full_string #=> String
     #   resp.source_server.source_properties.ram_bytes #=> Integer
     #   resp.source_server.source_properties.recommended_instance_type #=> String
+    #   resp.source_server.source_properties.supports_nitro_instances #=> Boolean
     #   resp.source_server.source_server_id #=> String
     #   resp.source_server.staging_area.error_message #=> String
     #   resp.source_server.staging_area.staging_account_id #=> String
@@ -2214,6 +2355,64 @@ module Aws::Drs
     # @param [Hash] params ({})
     def update_launch_configuration(params = {}, options = {})
       req = build_request(:update_launch_configuration, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing Launch Configuration Template by ID.
+    #
+    # @option params [Boolean] :copy_private_ip
+    #   Copy private IP.
+    #
+    # @option params [Boolean] :copy_tags
+    #   Copy tags.
+    #
+    # @option params [required, String] :launch_configuration_template_id
+    #   Launch Configuration Template ID.
+    #
+    # @option params [String] :launch_disposition
+    #   Launch disposition.
+    #
+    # @option params [Types::Licensing] :licensing
+    #   Licensing.
+    #
+    # @option params [String] :target_instance_type_right_sizing_method
+    #   Target instance type right-sizing method.
+    #
+    # @return [Types::UpdateLaunchConfigurationTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateLaunchConfigurationTemplateResponse#launch_configuration_template #launch_configuration_template} => Types::LaunchConfigurationTemplate
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_launch_configuration_template({
+    #     copy_private_ip: false,
+    #     copy_tags: false,
+    #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
+    #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
+    #     licensing: {
+    #       os_byol: false,
+    #     },
+    #     target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.launch_configuration_template.arn #=> String
+    #   resp.launch_configuration_template.copy_private_ip #=> Boolean
+    #   resp.launch_configuration_template.copy_tags #=> Boolean
+    #   resp.launch_configuration_template.launch_configuration_template_id #=> String
+    #   resp.launch_configuration_template.launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.launch_configuration_template.licensing.os_byol #=> Boolean
+    #   resp.launch_configuration_template.tags #=> Hash
+    #   resp.launch_configuration_template.tags["TagKey"] #=> String
+    #   resp.launch_configuration_template.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/UpdateLaunchConfigurationTemplate AWS API Documentation
+    #
+    # @overload update_launch_configuration_template(params = {})
+    # @param [Hash] params ({})
+    def update_launch_configuration_template(params = {}, options = {})
+      req = build_request(:update_launch_configuration_template, params)
       req.send_request(options)
     end
 
@@ -2538,7 +2737,7 @@ module Aws::Drs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-drs'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

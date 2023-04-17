@@ -403,6 +403,26 @@ module Aws::Appflow
     # @option params [required, Types::ConnectorProfileConfig] :connector_profile_config
     #   Defines the connector-specific configuration and credentials.
     #
+    # @option params [String] :client_token
+    #   The `clientToken` parameter is an idempotency token. It ensures that
+    #   your `CreateConnectorProfile` request completes only once. You choose
+    #   the value to pass. For example, if you don't receive a response from
+    #   your request, you can safely retry the request with the same
+    #   `clientToken` parameter value.
+    #
+    #   If you omit a `clientToken` value, the Amazon Web Services SDK that
+    #   you are using inserts a value for you. This way, the SDK can safely
+    #   retry requests multiple times after a network error. You must provide
+    #   your own value for other use cases.
+    #
+    #   If you specify input parameters that differ from your first request,
+    #   an error occurs. If you use a different value for `clientToken`,
+    #   Amazon AppFlow considers it a new call to `CreateConnectorProfile`.
+    #   The token is active for 8 hours.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::CreateConnectorProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateConnectorProfileResponse#connector_profile_arn #connector_profile_arn} => String
@@ -655,6 +675,7 @@ module Aws::Appflow
     #         },
     #       },
     #     },
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -713,6 +734,26 @@ module Aws::Appflow
     #   the data that's transferred by the associated flow. When Amazon
     #   AppFlow catalogs the data from a flow, it stores metadata in a data
     #   catalog.
+    #
+    # @option params [String] :client_token
+    #   The `clientToken` parameter is an idempotency token. It ensures that
+    #   your `CreateFlow` request completes only once. You choose the value to
+    #   pass. For example, if you don't receive a response from your request,
+    #   you can safely retry the request with the same `clientToken` parameter
+    #   value.
+    #
+    #   If you omit a `clientToken` value, the Amazon Web Services SDK that
+    #   you are using inserts a value for you. This way, the SDK can safely
+    #   retry requests multiple times after a network error. You must provide
+    #   your own value for other use cases.
+    #
+    #   If you specify input parameters that differ from your first request,
+    #   an error occurs. If you use a different value for `clientToken`,
+    #   Amazon AppFlow considers it a new call to `CreateFlow`. The token is
+    #   active for 8 hours.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @return [Types::CreateFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -994,6 +1035,7 @@ module Aws::Appflow
     #         table_prefix: "GlueDataCatalogTablePrefix", # required
     #       },
     #     },
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -2028,6 +2070,26 @@ module Aws::Appflow
     #   The provisioning type of the connector. Currently the only supported
     #   value is LAMBDA.
     #
+    # @option params [String] :client_token
+    #   The `clientToken` parameter is an idempotency token. It ensures that
+    #   your `RegisterConnector` request completes only once. You choose the
+    #   value to pass. For example, if you don't receive a response from your
+    #   request, you can safely retry the request with the same `clientToken`
+    #   parameter value.
+    #
+    #   If you omit a `clientToken` value, the Amazon Web Services SDK that
+    #   you are using inserts a value for you. This way, the SDK can safely
+    #   retry requests multiple times after a network error. You must provide
+    #   your own value for other use cases.
+    #
+    #   If you specify input parameters that differ from your first request,
+    #   an error occurs. If you use a different value for `clientToken`,
+    #   Amazon AppFlow considers it a new call to `RegisterConnector`. The
+    #   token is active for 8 hours.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::RegisterConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterConnectorResponse#connector_arn #connector_arn} => String
@@ -2043,6 +2105,7 @@ module Aws::Appflow
     #         lambda_arn: "ARN", # required
     #       },
     #     },
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -2066,6 +2129,31 @@ module Aws::Appflow
     #   The specified name of the flow. Spaces are not allowed. Use
     #   underscores (\_) or hyphens (-) only.
     #
+    # @option params [String] :client_token
+    #   The `clientToken` parameter is an idempotency token. It ensures that
+    #   your `StartFlow` request completes only once. You choose the value to
+    #   pass. For example, if you don't receive a response from your request,
+    #   you can safely retry the request with the same `clientToken` parameter
+    #   value.
+    #
+    #   If you omit a `clientToken` value, the Amazon Web Services SDK that
+    #   you are using inserts a value for you. This way, the SDK can safely
+    #   retry requests multiple times after a network error. You must provide
+    #   your own value for other use cases.
+    #
+    #   If you specify input parameters that differ from your first request,
+    #   an error occurs for flows that run on a schedule or based on an event.
+    #   However, the error doesn't occur for flows that run on demand. You
+    #   set the conditions that initiate your flow for the `triggerConfig`
+    #   parameter.
+    #
+    #   If you use a different value for `clientToken`, Amazon AppFlow
+    #   considers it a new call to `StartFlow`. The token is active for 8
+    #   hours.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::StartFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartFlowResponse#flow_arn #flow_arn} => String
@@ -2076,6 +2164,7 @@ module Aws::Appflow
     #
     #   resp = client.start_flow({
     #     flow_name: "FlowName", # required
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -2222,6 +2311,26 @@ module Aws::Appflow
     #
     # @option params [required, Types::ConnectorProfileConfig] :connector_profile_config
     #   Defines the connector-specific profile configuration and credentials.
+    #
+    # @option params [String] :client_token
+    #   The `clientToken` parameter is an idempotency token. It ensures that
+    #   your `UpdateConnectorProfile` request completes only once. You choose
+    #   the value to pass. For example, if you don't receive a response from
+    #   your request, you can safely retry the request with the same
+    #   `clientToken` parameter value.
+    #
+    #   If you omit a `clientToken` value, the Amazon Web Services SDK that
+    #   you are using inserts a value for you. This way, the SDK can safely
+    #   retry requests multiple times after a network error. You must provide
+    #   your own value for other use cases.
+    #
+    #   If you specify input parameters that differ from your first request,
+    #   an error occurs. If you use a different value for `clientToken`,
+    #   Amazon AppFlow considers it a new call to `UpdateConnectorProfile`.
+    #   The token is active for 8 hours.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @return [Types::UpdateConnectorProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2472,6 +2581,7 @@ module Aws::Appflow
     #         },
     #       },
     #     },
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -2506,6 +2616,26 @@ module Aws::Appflow
     #   Contains information about the configuration of the connector being
     #   registered.
     #
+    # @option params [String] :client_token
+    #   The `clientToken` parameter is an idempotency token. It ensures that
+    #   your `UpdateConnectorRegistration` request completes only once. You
+    #   choose the value to pass. For example, if you don't receive a
+    #   response from your request, you can safely retry the request with the
+    #   same `clientToken` parameter value.
+    #
+    #   If you omit a `clientToken` value, the Amazon Web Services SDK that
+    #   you are using inserts a value for you. This way, the SDK can safely
+    #   retry requests multiple times after a network error. You must provide
+    #   your own value for other use cases.
+    #
+    #   If you specify input parameters that differ from your first request,
+    #   an error occurs. If you use a different value for `clientToken`,
+    #   Amazon AppFlow considers it a new call to
+    #   `UpdateConnectorRegistration`. The token is active for 8 hours.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::UpdateConnectorRegistrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateConnectorRegistrationResponse#connector_arn #connector_arn} => String
@@ -2520,6 +2650,7 @@ module Aws::Appflow
     #         lambda_arn: "ARN", # required
     #       },
     #     },
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -2564,6 +2695,26 @@ module Aws::Appflow
     #   the data that's transferred by the associated flow. When Amazon
     #   AppFlow catalogs the data from a flow, it stores metadata in a data
     #   catalog.
+    #
+    # @option params [String] :client_token
+    #   The `clientToken` parameter is an idempotency token. It ensures that
+    #   your `UpdateFlow` request completes only once. You choose the value to
+    #   pass. For example, if you don't receive a response from your request,
+    #   you can safely retry the request with the same `clientToken` parameter
+    #   value.
+    #
+    #   If you omit a `clientToken` value, the Amazon Web Services SDK that
+    #   you are using inserts a value for you. This way, the SDK can safely
+    #   retry requests multiple times after a network error. You must provide
+    #   your own value for other use cases.
+    #
+    #   If you specify input parameters that differ from your first request,
+    #   an error occurs. If you use a different value for `clientToken`,
+    #   Amazon AppFlow considers it a new call to `UpdateFlow`. The token is
+    #   active for 8 hours.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @return [Types::UpdateFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2840,6 +2991,7 @@ module Aws::Appflow
     #         table_prefix: "GlueDataCatalogTablePrefix", # required
     #       },
     #     },
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -2868,7 +3020,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -51,6 +51,7 @@ module Aws::Appflow
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientNumber = Shapes::StringShape.new(name: 'ClientNumber')
     ClientSecret = Shapes::StringShape.new(name: 'ClientSecret')
+    ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ClusterIdentifier = Shapes::StringShape.new(name: 'ClusterIdentifier')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectionMode = Shapes::StringShape.new(name: 'ConnectionMode')
@@ -675,6 +676,7 @@ module Aws::Appflow
     CreateConnectorProfileRequest.add_member(:connector_label, Shapes::ShapeRef.new(shape: ConnectorLabel, location_name: "connectorLabel"))
     CreateConnectorProfileRequest.add_member(:connection_mode, Shapes::ShapeRef.new(shape: ConnectionMode, required: true, location_name: "connectionMode"))
     CreateConnectorProfileRequest.add_member(:connector_profile_config, Shapes::ShapeRef.new(shape: ConnectorProfileConfig, required: true, location_name: "connectorProfileConfig"))
+    CreateConnectorProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateConnectorProfileRequest.struct_class = Types::CreateConnectorProfileRequest
 
     CreateConnectorProfileResponse.add_member(:connector_profile_arn, Shapes::ShapeRef.new(shape: ConnectorProfileArn, location_name: "connectorProfileArn"))
@@ -689,6 +691,7 @@ module Aws::Appflow
     CreateFlowRequest.add_member(:tasks, Shapes::ShapeRef.new(shape: Tasks, required: true, location_name: "tasks"))
     CreateFlowRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateFlowRequest.add_member(:metadata_catalog_config, Shapes::ShapeRef.new(shape: MetadataCatalogConfig, location_name: "metadataCatalogConfig"))
+    CreateFlowRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateFlowRequest.struct_class = Types::CreateFlowRequest
 
     CreateFlowResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: FlowArn, location_name: "flowArn"))
@@ -1177,6 +1180,7 @@ module Aws::Appflow
     RegisterConnectorRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     RegisterConnectorRequest.add_member(:connector_provisioning_type, Shapes::ShapeRef.new(shape: ConnectorProvisioningType, location_name: "connectorProvisioningType"))
     RegisterConnectorRequest.add_member(:connector_provisioning_config, Shapes::ShapeRef.new(shape: ConnectorProvisioningConfig, location_name: "connectorProvisioningConfig"))
+    RegisterConnectorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     RegisterConnectorRequest.struct_class = Types::RegisterConnectorRequest
 
     RegisterConnectorResponse.add_member(:connector_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "connectorArn"))
@@ -1374,6 +1378,7 @@ module Aws::Appflow
     SourceFlowConfig.struct_class = Types::SourceFlowConfig
 
     StartFlowRequest.add_member(:flow_name, Shapes::ShapeRef.new(shape: FlowName, required: true, location_name: "flowName"))
+    StartFlowRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     StartFlowRequest.struct_class = Types::StartFlowRequest
 
     StartFlowResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: FlowArn, location_name: "flowArn"))
@@ -1471,6 +1476,7 @@ module Aws::Appflow
     UpdateConnectorProfileRequest.add_member(:connector_profile_name, Shapes::ShapeRef.new(shape: ConnectorProfileName, required: true, location_name: "connectorProfileName"))
     UpdateConnectorProfileRequest.add_member(:connection_mode, Shapes::ShapeRef.new(shape: ConnectionMode, required: true, location_name: "connectionMode"))
     UpdateConnectorProfileRequest.add_member(:connector_profile_config, Shapes::ShapeRef.new(shape: ConnectorProfileConfig, required: true, location_name: "connectorProfileConfig"))
+    UpdateConnectorProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateConnectorProfileRequest.struct_class = Types::UpdateConnectorProfileRequest
 
     UpdateConnectorProfileResponse.add_member(:connector_profile_arn, Shapes::ShapeRef.new(shape: ConnectorProfileArn, location_name: "connectorProfileArn"))
@@ -1479,6 +1485,7 @@ module Aws::Appflow
     UpdateConnectorRegistrationRequest.add_member(:connector_label, Shapes::ShapeRef.new(shape: ConnectorLabel, required: true, location_name: "connectorLabel"))
     UpdateConnectorRegistrationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateConnectorRegistrationRequest.add_member(:connector_provisioning_config, Shapes::ShapeRef.new(shape: ConnectorProvisioningConfig, location_name: "connectorProvisioningConfig"))
+    UpdateConnectorRegistrationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateConnectorRegistrationRequest.struct_class = Types::UpdateConnectorRegistrationRequest
 
     UpdateConnectorRegistrationResponse.add_member(:connector_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "connectorArn"))
@@ -1491,6 +1498,7 @@ module Aws::Appflow
     UpdateFlowRequest.add_member(:destination_flow_config_list, Shapes::ShapeRef.new(shape: DestinationFlowConfigList, required: true, location_name: "destinationFlowConfigList"))
     UpdateFlowRequest.add_member(:tasks, Shapes::ShapeRef.new(shape: Tasks, required: true, location_name: "tasks"))
     UpdateFlowRequest.add_member(:metadata_catalog_config, Shapes::ShapeRef.new(shape: MetadataCatalogConfig, location_name: "metadataCatalogConfig"))
+    UpdateFlowRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateFlowRequest.struct_class = Types::UpdateFlowRequest
 
     UpdateFlowResponse.add_member(:flow_status, Shapes::ShapeRef.new(shape: FlowStatus, location_name: "flowStatus"))

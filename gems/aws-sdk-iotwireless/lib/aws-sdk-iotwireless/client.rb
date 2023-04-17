@@ -984,6 +984,8 @@ module Aws::IoTWireless
     #       add_gw_metadata: false,
     #       dr_min: 1,
     #       dr_max: 1,
+    #       pr_allowed: false,
+    #       ra_allowed: false,
     #     },
     #     tags: [
     #       {
@@ -1179,6 +1181,7 @@ module Aws::IoTWireless
     #         data_rate: 1,
     #         frequencies: [1],
     #       },
+    #       max_eirp: 1.0,
     #     },
     #     tags: [
     #       {
@@ -2010,6 +2013,7 @@ module Aws::IoTWireless
     #   resp.lo_ra_wan.dl_freq #=> Integer
     #   resp.lo_ra_wan.session_start_time #=> Time
     #   resp.lo_ra_wan.session_timeout #=> Integer
+    #   resp.lo_ra_wan.ping_slot_period #=> Integer
     #
     # @overload get_multicast_group_session(params = {})
     # @param [Hash] params ({})
@@ -2806,6 +2810,7 @@ module Aws::IoTWireless
     #   resp.lo_ra_wan.beaconing.data_rate #=> Integer
     #   resp.lo_ra_wan.beaconing.frequencies #=> Array
     #   resp.lo_ra_wan.beaconing.frequencies[0] #=> Integer
+    #   resp.lo_ra_wan.max_eirp #=> Float
     #   resp.arn #=> String
     #   resp.thing_name #=> String
     #   resp.thing_arn #=> String
@@ -3759,6 +3764,7 @@ module Aws::IoTWireless
     #   resp.wireless_gateway_list[0].lo_ra_wan.beaconing.data_rate #=> Integer
     #   resp.wireless_gateway_list[0].lo_ra_wan.beaconing.frequencies #=> Array
     #   resp.wireless_gateway_list[0].lo_ra_wan.beaconing.frequencies[0] #=> Integer
+    #   resp.wireless_gateway_list[0].lo_ra_wan.max_eirp #=> Float
     #   resp.wireless_gateway_list[0].last_uplink_received_at #=> String
     #
     # @overload list_wireless_gateways(params = {})
@@ -4106,6 +4112,7 @@ module Aws::IoTWireless
     #       dl_freq: 1,
     #       session_start_time: Time.now,
     #       session_timeout: 1,
+    #       ping_slot_period: 1,
     #     },
     #   })
     #
@@ -4916,6 +4923,9 @@ module Aws::IoTWireless
     #   A list of NetId values that are used by LoRa gateways to filter the
     #   uplink frames.
     #
+    # @option params [Float] :max_eirp
+    #   The MaxEIRP value.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -4928,6 +4938,7 @@ module Aws::IoTWireless
     #       ["JoinEui"],
     #     ],
     #     net_id_filters: ["NetId"],
+    #     max_eirp: 1.0,
     #   })
     #
     # @overload update_wireless_gateway(params = {})
@@ -4950,7 +4961,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

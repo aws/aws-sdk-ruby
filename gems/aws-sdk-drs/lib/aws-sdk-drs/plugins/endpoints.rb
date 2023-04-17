@@ -58,10 +58,14 @@ module Aws::Drs
           case context.operation_name
           when :create_extended_source_server
             Aws::Drs::Endpoints::CreateExtendedSourceServer.build(context)
+          when :create_launch_configuration_template
+            Aws::Drs::Endpoints::CreateLaunchConfigurationTemplate.build(context)
           when :create_replication_configuration_template
             Aws::Drs::Endpoints::CreateReplicationConfigurationTemplate.build(context)
           when :delete_job
             Aws::Drs::Endpoints::DeleteJob.build(context)
+          when :delete_launch_configuration_template
+            Aws::Drs::Endpoints::DeleteLaunchConfigurationTemplate.build(context)
           when :delete_recovery_instance
             Aws::Drs::Endpoints::DeleteRecoveryInstance.build(context)
           when :delete_replication_configuration_template
@@ -72,6 +76,8 @@ module Aws::Drs
             Aws::Drs::Endpoints::DescribeJobLogItems.build(context)
           when :describe_jobs
             Aws::Drs::Endpoints::DescribeJobs.build(context)
+          when :describe_launch_configuration_templates
+            Aws::Drs::Endpoints::DescribeLaunchConfigurationTemplates.build(context)
           when :describe_recovery_instances
             Aws::Drs::Endpoints::DescribeRecoveryInstances.build(context)
           when :describe_recovery_snapshots
@@ -122,6 +128,8 @@ module Aws::Drs
             Aws::Drs::Endpoints::UpdateFailbackReplicationConfiguration.build(context)
           when :update_launch_configuration
             Aws::Drs::Endpoints::UpdateLaunchConfiguration.build(context)
+          when :update_launch_configuration_template
+            Aws::Drs::Endpoints::UpdateLaunchConfigurationTemplate.build(context)
           when :update_replication_configuration
             Aws::Drs::Endpoints::UpdateReplicationConfiguration.build(context)
           when :update_replication_configuration_template

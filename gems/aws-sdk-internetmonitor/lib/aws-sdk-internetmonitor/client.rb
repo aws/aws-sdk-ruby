@@ -420,7 +420,7 @@ module Aws::InternetMonitor
     #   The tags for a monitor. You can add a maximum of 50 tags in Internet
     #   Monitor.
     #
-    # @option params [required, Integer] :max_city_networks_to_monitor
+    # @option params [Integer] :max_city_networks_to_monitor
     #   The maximum number of city-networks to monitor for your resources. A
     #   city-network is the location (city) where clients access your
     #   application resources from and the network or ASN, such as an internet
@@ -436,9 +436,12 @@ module Aws::InternetMonitor
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html
     #
     # @option params [Types::InternetMeasurementsLogDelivery] :internet_measurements_log_delivery
-    #   Publish internet measurements for Internet Monitor to another
-    #   location, such as an Amazon S3 bucket. The measurements are also
-    #   published to Amazon CloudWatch Logs.
+    #   Publish internet measurements for Internet Monitor to an Amazon S3
+    #   bucket in addition to CloudWatch Logs.
+    #
+    # @option params [Integer] :traffic_percentage_to_monitor
+    #   The percentage of the internet-facing traffic for your application
+    #   that you want to monitor with this monitor.
     #
     # @return [Types::CreateMonitorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -454,7 +457,7 @@ module Aws::InternetMonitor
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     max_city_networks_to_monitor: 1, # required
+    #     max_city_networks_to_monitor: 1,
     #     internet_measurements_log_delivery: {
     #       s3_config: {
     #         bucket_name: "S3ConfigBucketNameString",
@@ -462,6 +465,7 @@ module Aws::InternetMonitor
     #         log_delivery_status: "ENABLED", # accepts ENABLED, DISABLED
     #       },
     #     },
+    #     traffic_percentage_to_monitor: 1,
     #   })
     #
     # @example Response structure
@@ -611,6 +615,7 @@ module Aws::InternetMonitor
     #   * {Types::GetMonitorOutput#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetMonitorOutput#max_city_networks_to_monitor #max_city_networks_to_monitor} => Integer
     #   * {Types::GetMonitorOutput#internet_measurements_log_delivery #internet_measurements_log_delivery} => Types::InternetMeasurementsLogDelivery
+    #   * {Types::GetMonitorOutput#traffic_percentage_to_monitor #traffic_percentage_to_monitor} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -635,6 +640,7 @@ module Aws::InternetMonitor
     #   resp.internet_measurements_log_delivery.s3_config.bucket_name #=> String
     #   resp.internet_measurements_log_delivery.s3_config.bucket_prefix #=> String
     #   resp.internet_measurements_log_delivery.s3_config.log_delivery_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.traffic_percentage_to_monitor #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetMonitor AWS API Documentation
     #
@@ -951,6 +957,10 @@ module Aws::InternetMonitor
     #   location, such as an Amazon S3 bucket. The measurements are also
     #   published to Amazon CloudWatch Logs.
     #
+    # @option params [Integer] :traffic_percentage_to_monitor
+    #   The percentage of the internet-facing traffic for your application
+    #   that you want to monitor with this monitor.
+    #
     # @return [Types::UpdateMonitorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateMonitorOutput#monitor_arn #monitor_arn} => String
@@ -972,6 +982,7 @@ module Aws::InternetMonitor
     #         log_delivery_status: "ENABLED", # accepts ENABLED, DISABLED
     #       },
     #     },
+    #     traffic_percentage_to_monitor: 1,
     #   })
     #
     # @example Response structure
@@ -1001,7 +1012,7 @@ module Aws::InternetMonitor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-internetmonitor'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

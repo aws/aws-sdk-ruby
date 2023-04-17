@@ -93,6 +93,7 @@ module Aws::EMRServerless
     RequestIdentityUserArn = Shapes::StringShape.new(name: 'RequestIdentityUserArn')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceUtilization = Shapes::StructureShape.new(name: 'ResourceUtilization')
     S3MonitoringConfiguration = Shapes::StructureShape.new(name: 'S3MonitoringConfiguration')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     SecurityGroupString = Shapes::StringShape.new(name: 'SecurityGroupString')
@@ -292,6 +293,7 @@ module Aws::EMRServerless
     JobRun.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     JobRun.add_member(:total_execution_duration_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "totalExecutionDurationSeconds"))
     JobRun.add_member(:execution_timeout_minutes, Shapes::ShapeRef.new(shape: Duration, location_name: "executionTimeoutMinutes", metadata: {"box"=>true}))
+    JobRun.add_member(:billed_resource_utilization, Shapes::ShapeRef.new(shape: ResourceUtilization, location_name: "billedResourceUtilization"))
     JobRun.struct_class = Types::JobRun
 
     JobRunStateSet.member = Shapes::ShapeRef.new(shape: JobRunState)
@@ -358,6 +360,11 @@ module Aws::EMRServerless
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String1024, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResourceUtilization.add_member(:v_cpu_hour, Shapes::ShapeRef.new(shape: Double, location_name: "vCPUHour"))
+    ResourceUtilization.add_member(:memory_gb_hour, Shapes::ShapeRef.new(shape: Double, location_name: "memoryGBHour"))
+    ResourceUtilization.add_member(:storage_gb_hour, Shapes::ShapeRef.new(shape: Double, location_name: "storageGBHour"))
+    ResourceUtilization.struct_class = Types::ResourceUtilization
 
     S3MonitoringConfiguration.add_member(:log_uri, Shapes::ShapeRef.new(shape: UriString, location_name: "logUri"))
     S3MonitoringConfiguration.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: EncryptionKeyArn, location_name: "encryptionKeyArn"))

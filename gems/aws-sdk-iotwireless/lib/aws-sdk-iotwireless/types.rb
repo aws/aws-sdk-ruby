@@ -3952,13 +3952,18 @@ module Aws::IoTWireless
     #   frequency parameters.
     #   @return [Types::Beaconing]
     #
+    # @!attribute [rw] max_eirp
+    #   The MaxEIRP value.
+    #   @return [Float]
+    #
     class LoRaWANGateway < Struct.new(
       :gateway_eui,
       :rf_region,
       :join_eui_filters,
       :net_id_filters,
       :sub_bands,
-      :beaconing)
+      :beaconing,
+      :max_eirp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4237,11 +4242,16 @@ module Aws::IoTWireless
     #   How long before a multicast group session is to timeout.
     #   @return [Integer]
     #
+    # @!attribute [rw] ping_slot_period
+    #   The PingSlotPeriod value.
+    #   @return [Integer]
+    #
     class LoRaWANMulticastSession < Struct.new(
       :dl_dr,
       :dl_freq,
       :session_start_time,
-      :session_timeout)
+      :session_timeout,
+      :ping_slot_period)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4279,10 +4289,22 @@ module Aws::IoTWireless
     #   The DrMax value.
     #   @return [Integer]
     #
+    # @!attribute [rw] pr_allowed
+    #   The PRAllowed value that describes whether passive roaming is
+    #   allowed.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ra_allowed
+    #   The RAAllowed value that describes whether roaming activation is
+    #   allowed.
+    #   @return [Boolean]
+    #
     class LoRaWANServiceProfile < Struct.new(
       :add_gw_metadata,
       :dr_min,
-      :dr_max)
+      :dr_max,
+      :pr_allowed,
+      :ra_allowed)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6264,12 +6286,17 @@ module Aws::IoTWireless
     #   uplink frames.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] max_eirp
+    #   The MaxEIRP value.
+    #   @return [Float]
+    #
     class UpdateWirelessGatewayRequest < Struct.new(
       :id,
       :name,
       :description,
       :join_eui_filters,
-      :net_id_filters)
+      :net_id_filters,
+      :max_eirp)
       SENSITIVE = []
       include Aws::Structure
     end
