@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2023-04-19)
+------------------
+
+* Feature - This release supports native document models for custom classification, in addition to plain-text models. You train native document models using documents (PDF, Word, images) in their native format.
+
 1.67.0 (2023-03-24)
 ------------------
 

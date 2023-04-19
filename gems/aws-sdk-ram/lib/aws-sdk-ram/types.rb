@@ -11,7 +11,7 @@ module Aws::RAM
   module Types
 
     # @!attribute [rw] resource_share_invitation_arn
-    #   The [Amazon Resoure Name (ARN)][1] of the invitation that you want
+    #   The [Amazon Resource Name (ARN)][1] of the invitation that you want
     #   to accept.
     #
     #
@@ -29,6 +29,10 @@ module Aws::RAM
     #
     #   If you don't provide this value, then Amazon Web Services generates
     #   a random one for you.
+    #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
     #
     #
     #
@@ -66,7 +70,7 @@ module Aws::RAM
     end
 
     # @!attribute [rw] resource_share_arn
-    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the resource share
     #   to which you want to add or replace permissions.
     #
     #
@@ -75,7 +79,7 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] permission_arn
-    #   Specifies the [Amazon Resoure Name (ARN)][1] of the RAM permission
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the RAM permission
     #   to associate with the resource share. To find the ARN for a
     #   permission, use either the ListPermissions operation or go to the
     #   [Permissions library][2] page in the RAM console and then choose the
@@ -88,10 +92,11 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] replace
-    #   Specifies whether the specified permission should replace or add to
-    #   the existing permission associated with the resource share. Use
-    #   `true` to replace the current permissions. Use `false` to add the
-    #   permission to the current permission. The default value is `false`.
+    #   Specifies whether the specified permission should replace the
+    #   existing permission associated with the resource share. Use `true`
+    #   to replace the current permissions. Use `false` to add the
+    #   permission to a resource share that currently doesn't have a
+    #   permission. The default value is `false`.
     #
     #   <note markdown="1"> A resource share can have only one permission per resource type. If
     #   a resource share already has a permission for the specified resource
@@ -113,6 +118,10 @@ module Aws::RAM
     #   If you don't provide this value, then Amazon Web Services generates
     #   a random one for you.
     #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
+    #
     #
     #
     #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
@@ -120,10 +129,17 @@ module Aws::RAM
     #
     # @!attribute [rw] permission_version
     #   Specifies the version of the RAM permission to associate with the
-    #   resource share. If you don't specify this parameter, the operation
-    #   uses the version designated as the default. You can use the
-    #   ListPermissionVersions operation to discover the available versions
-    #   of a permission.
+    #   resource share. You can specify *only* the version that is currently
+    #   set as the default version for the permission. If you also set the
+    #   `replace` pararameter to `true`, then this operation updates an
+    #   outdated version of the permission to the current default version.
+    #
+    #   <note markdown="1"> You don't need to specify this parameter because the default
+    #   behavior is to use the version that is currently set as the default
+    #   version for the permission. This parameter is supported for
+    #   backwards compatibility.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AssociateResourceSharePermissionRequest AWS API Documentation
@@ -161,7 +177,7 @@ module Aws::RAM
     end
 
     # @!attribute [rw] resource_share_arn
-    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the resource share
     #   that you want to add principals or resources to.
     #
     #
@@ -191,7 +207,7 @@ module Aws::RAM
     #
     #   * An Amazon Web Services account ID, for example: `123456789012`
     #
-    #   * An [Amazon Resoure Name (ARN)][1] of an organization in
+    #   * An [Amazon Resource Name (ARN)][1] of an organization in
     #     Organizations, for example:
     #     `organizations::123456789012:organization/o-exampleorgid`
     #
@@ -227,6 +243,10 @@ module Aws::RAM
     #
     #   If you don't provide this value, then Amazon Web Services generates
     #   a random one for you.
+    #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
     #
     #
     #
@@ -265,6 +285,301 @@ module Aws::RAM
       include Aws::Structure
     end
 
+    # An object that describes a managed permission associated with a
+    # resource share.
+    #
+    # @!attribute [rw] arn
+    #   The [Amazon Resource Name (ARN)][1] of the associated managed
+    #   permission.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] permission_version
+    #   The version of the permission currently associated with the resource
+    #   share.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_version
+    #   Indicates whether the associated resource share is using the default
+    #   version of the permission.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type to which this permission applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the association between the permission and the
+    #   resource share. The following are the possible values:
+    #
+    #   * `ATTACHABLE` – This permission or version can be associated with
+    #     resource shares.
+    #
+    #   * `UNATTACHABLE` – This permission or version can't currently be
+    #     associated with resource shares.
+    #
+    #   * `DELETING` – This permission or version is in the process of being
+    #     deleted.
+    #
+    #   * `DELETED` – This permission or version is deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_set
+    #   Indicates what features are available for this resource share. This
+    #   parameter can have one of the following values:
+    #
+    #   * **STANDARD** – A resource share that supports all functionality.
+    #     These resource shares are visible to all principals you share the
+    #     resource share with. You can modify these resource shares in RAM
+    #     using the console or APIs. This resource share might have been
+    #     created by RAM, or it might have been **CREATED\_FROM\_POLICY**
+    #     and then promoted.
+    #
+    #   * **CREATED\_FROM\_POLICY** – The customer manually shared a
+    #     resource by attaching a resource-based policy. That policy did not
+    #     match any existing managed permissions, so RAM created this
+    #     customer managed permission automatically on the customer's
+    #     behalf based on the attached policy document. This type of
+    #     resource share is visible only to the Amazon Web Services account
+    #     that created it. You can't modify it in RAM unless you promote
+    #     it. For more information, see
+    #     PromoteResourceShareCreatedFromPolicy.
+    #
+    #   * **PROMOTING\_TO\_STANDARD** – This resource share was originally
+    #     `CREATED_FROM_POLICY`, but the customer ran the
+    #     PromoteResourceShareCreatedFromPolicy and that operation is still
+    #     in progress. This value changes to `STANDARD` when complete.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The date and time when the association between the permission and
+    #   the resource share was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] resource_share_arn
+    #   The [Amazon Resource Name (ARN)][1] of a resource share associated
+    #   with this permission.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AssociatedPermission AWS API Documentation
+    #
+    class AssociatedPermission < Struct.new(
+      :arn,
+      :permission_version,
+      :default_version,
+      :resource_type,
+      :status,
+      :feature_set,
+      :last_updated_time,
+      :resource_share_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   Specifies the name of the customer managed permission. The name must
+    #   be unique within the Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Specifies the name of the resource type that this customer managed
+    #   permission applies to.
+    #
+    #   The format is ` <service-code>:<resource-type> ` and is not case
+    #   sensitive. For example, to specify an Amazon EC2 Subnet, you can use
+    #   the string `ec2:subnet`. To see the list of valid values for this
+    #   parameter, query the ListResourceTypes operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_template
+    #   A string in JSON format string that contains the following elements
+    #   of a resource-based policy:
+    #
+    #   * **Effect**: must be set to `ALLOW`.
+    #
+    #   * **Action**: specifies the actions that are allowed by this
+    #     customer managed permission. The list must contain only actions
+    #     that are supported by the specified resource type. For a list of
+    #     all actions supported by each resource type, see [Actions,
+    #     resources, and condition keys for Amazon Web Services services][1]
+    #     in the *Identity and Access Management User Guide*.
+    #
+    #   * **Condition**: (optional) specifies conditional parameters that
+    #     must evaluate to true when a user attempts an action for that
+    #     action to be allowed. For more information about the Condition
+    #     element, see [IAM policies: Condition element][2] in the *Identity
+    #     and Access Management User Guide*.
+    #
+    #   This template can't include either the `Resource` or `Principal`
+    #   elements. Those are both filled in by RAM when it instantiates the
+    #   resource-based policy on each resource shared using this managed
+    #   permission. The `Resource` comes from the ARN of the specific
+    #   resource that you are sharing. The `Principal` comes from the list
+    #   of identities added to the resource share.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry
+    #   the request without accidentally performing the same operation a
+    #   second time. Passing the same value to a later call to an operation
+    #   requires that you also pass the same value for all other parameters.
+    #   We recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates
+    #   a random one for you.
+    #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Specifies a list of one or more tag key and value pairs to attach to
+    #   the permission.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/CreatePermissionRequest AWS API Documentation
+    #
+    class CreatePermissionRequest < Struct.new(
+      :name,
+      :resource_type,
+      :policy_template,
+      :client_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] permission
+    #   A structure with information about this customer managed permission.
+    #   @return [Types::ResourceSharePermissionSummary]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency identifier associated with this request. If you want
+    #   to repeat the same operation in an idempotent manner then you must
+    #   include this value in the `clientToken` request parameter of that
+    #   later call. All other parameters must also have the same values that
+    #   you used in the first call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/CreatePermissionResponse AWS API Documentation
+    #
+    class CreatePermissionResponse < Struct.new(
+      :permission,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] permission_arn
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the customer
+    #   managed permission you're creating a new version for.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_template
+    #   A string in JSON format string that contains the following elements
+    #   of a resource-based policy:
+    #
+    #   * **Effect**: must be set to `ALLOW`.
+    #
+    #   * **Action**: specifies the actions that are allowed by this
+    #     customer managed permission. The list must contain only actions
+    #     that are supported by the specified resource type. For a list of
+    #     all actions supported by each resource type, see [Actions,
+    #     resources, and condition keys for Amazon Web Services services][1]
+    #     in the *Identity and Access Management User Guide*.
+    #
+    #   * **Condition**: (optional) specifies conditional parameters that
+    #     must evaluate to true when a user attempts an action for that
+    #     action to be allowed. For more information about the Condition
+    #     element, see [IAM policies: Condition element][2] in the *Identity
+    #     and Access Management User Guide*.
+    #
+    #   This template can't include either the `Resource` or `Principal`
+    #   elements. Those are both filled in by RAM when it instantiates the
+    #   resource-based policy on each resource shared using this managed
+    #   permission. The `Resource` comes from the ARN of the specific
+    #   resource that you are sharing. The `Principal` comes from the list
+    #   of identities added to the resource share.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry
+    #   the request without accidentally performing the same operation a
+    #   second time. Passing the same value to a later call to an operation
+    #   requires that you also pass the same value for all other parameters.
+    #   We recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates
+    #   a random one for you.
+    #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/CreatePermissionVersionRequest AWS API Documentation
+    #
+    class CreatePermissionVersionRequest < Struct.new(
+      :permission_arn,
+      :policy_template,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] permission
+    #   Information about a RAM managed permission.
+    #   @return [Types::ResourceSharePermissionDetail]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency identifier associated with this request. If you want
+    #   to repeat the same operation in an idempotent manner then you must
+    #   include this value in the `clientToken` request parameter of that
+    #   later call. All other parameters must also have the same values that
+    #   you used in the first call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/CreatePermissionVersionResponse AWS API Documentation
+    #
+    class CreatePermissionVersionResponse < Struct.new(
+      :permission,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   Specifies the name of the resource share.
     #   @return [String]
@@ -282,7 +597,7 @@ module Aws::RAM
     #
     #   * An Amazon Web Services account ID, for example: `123456789012`
     #
-    #   * An [Amazon Resoure Name (ARN)][1] of an organization in
+    #   * An [Amazon Resource Name (ARN)][1] of an organization in
     #     Organizations, for example:
     #     `organizations::123456789012:organization/o-exampleorgid`
     #
@@ -333,6 +648,10 @@ module Aws::RAM
     #
     #   If you don't provide this value, then Amazon Web Services generates
     #   a random one for you.
+    #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
     #
     #
     #
@@ -387,8 +706,157 @@ module Aws::RAM
       include Aws::Structure
     end
 
+    # @!attribute [rw] permission_arn
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the customer
+    #   managed permission that you want to delete.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry
+    #   the request without accidentally performing the same operation a
+    #   second time. Passing the same value to a later call to an operation
+    #   requires that you also pass the same value for all other parameters.
+    #   We recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates
+    #   a random one for you.
+    #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/DeletePermissionRequest AWS API Documentation
+    #
+    class DeletePermissionRequest < Struct.new(
+      :permission_arn,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return_value
+    #   A boolean that indicates whether the delete operations succeeded.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency identifier associated with this request. If you want
+    #   to repeat the same operation in an idempotent manner then you must
+    #   include this value in the `clientToken` request parameter of that
+    #   later call. All other parameters must also have the same values that
+    #   you used in the first call.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission_status
+    #   This operation is performed asynchronously, and this response
+    #   parameter indicates the current status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/DeletePermissionResponse AWS API Documentation
+    #
+    class DeletePermissionResponse < Struct.new(
+      :return_value,
+      :client_token,
+      :permission_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] permission_arn
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the permission with
+    #   the version you want to delete.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] permission_version
+    #   Specifies the version number to delete.
+    #
+    #   You can't delete the default version for a customer managed
+    #   permission.
+    #
+    #   You can't delete a version if it's the only version of the
+    #   permission. You must either first create another version, or delete
+    #   the permission completely.
+    #
+    #   You can't delete a version if it is attached to any resource
+    #   shares. If the version is the default, you must first use
+    #   SetDefaultPermissionVersion to set a different version as the
+    #   default for the customer managed permission, and then use
+    #   AssociateResourceSharePermission to update your resource shares to
+    #   use the new default version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_token
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry
+    #   the request without accidentally performing the same operation a
+    #   second time. Passing the same value to a later call to an operation
+    #   requires that you also pass the same value for all other parameters.
+    #   We recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates
+    #   a random one for you.
+    #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/DeletePermissionVersionRequest AWS API Documentation
+    #
+    class DeletePermissionVersionRequest < Struct.new(
+      :permission_arn,
+      :permission_version,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return_value
+    #   A boolean value that indicates whether the operation is successful.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency identifier associated with this request. If you want
+    #   to repeat the same operation in an idempotent manner then you must
+    #   include this value in the `clientToken` request parameter of that
+    #   later call. All other parameters must also have the same values that
+    #   you used in the first call.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission_status
+    #   This operation is performed asynchronously, and this response
+    #   parameter indicates the current status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/DeletePermissionVersionResponse AWS API Documentation
+    #
+    class DeletePermissionVersionResponse < Struct.new(
+      :return_value,
+      :client_token,
+      :permission_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_share_arn
-    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the resource share
     #   to delete.
     #
     #
@@ -406,6 +874,10 @@ module Aws::RAM
     #
     #   If you don't provide this value, then Amazon Web Services generates
     #   a random one for you.
+    #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
     #
     #
     #
@@ -444,8 +916,8 @@ module Aws::RAM
     end
 
     # @!attribute [rw] resource_share_arn
-    #   The [Amazon Resoure Name (ARN)][1] of the resource share from which
-    #   you want to disassociate a permission.
+    #   The [Amazon Resource Name (ARN)][1] of the resource share that you
+    #   want to remove the managed permission from.
     #
     #
     #
@@ -453,9 +925,9 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] permission_arn
-    #   The [Amazon Resoure Name (ARN)][1] of the permission to disassociate
-    #   from the resource share. Changes to permissions take effect
-    #   immediately.
+    #   The [Amazon Resource Name (ARN)][1] of the managed permission to
+    #   disassociate from the resource share. Changes to permissions take
+    #   effect immediately.
     #
     #
     #
@@ -472,6 +944,10 @@ module Aws::RAM
     #
     #   If you don't provide this value, then Amazon Web Services generates
     #   a random one for you.
+    #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
     #
     #
     #
@@ -511,8 +987,8 @@ module Aws::RAM
     end
 
     # @!attribute [rw] resource_share_arn
-    #   Specifies [Amazon Resoure Name (ARN)][1] of the resource share that
-    #   you want to remove resources from.
+    #   Specifies [Amazon Resource Name (ARN)][1] of the resource share that
+    #   you want to remove resources or principals from.
     #
     #
     #
@@ -523,8 +999,7 @@ module Aws::RAM
     #   Specifies a list of [Amazon Resource Names (ARNs)][1] for one or
     #   more resources that you want to remove from the resource share.
     #   After the operation runs, these resources are no longer shared with
-    #   principals outside of the Amazon Web Services account that created
-    #   the resources.
+    #   principals associated with the resource share.
     #
     #
     #
@@ -539,7 +1014,7 @@ module Aws::RAM
     #
     #   * An Amazon Web Services account ID, for example: `123456789012`
     #
-    #   * An [Amazon Resoure Name (ARN)][1] of an organization in
+    #   * An [Amazon Resource Name (ARN)][1] of an organization in
     #     Organizations, for example:
     #     `organizations::123456789012:organization/o-exampleorgid`
     #
@@ -576,6 +1051,10 @@ module Aws::RAM
     #   If you don't provide this value, then Amazon Web Services generates
     #   a random one for you.
     #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
+    #
     #
     #
     #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
@@ -593,8 +1072,8 @@ module Aws::RAM
     end
 
     # @!attribute [rw] resource_share_associations
-    #   An array of objects that contain information about the updated
-    #   associations for this resource share.
+    #   An array of objects with information about the updated associations
+    #   for this resource share.
     #   @return [Array<Types::ResourceShareAssociation>]
     #
     # @!attribute [rw] client_token
@@ -634,11 +1113,11 @@ module Aws::RAM
     end
 
     # @!attribute [rw] permission_arn
-    #   Specifies the [Amazon Resoure Name (ARN)][1] of the permission whose
-    #   contents you want to retrieve. To find the ARN for a permission, use
-    #   either the ListPermissions operation or go to the [Permissions
-    #   library][2] page in the RAM console and then choose the name of the
-    #   permission. The ARN is displayed on the detail page.
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the permission
+    #   whose contents you want to retrieve. To find the ARN for a
+    #   permission, use either the ListPermissions operation or go to the
+    #   [Permissions library][2] page in the RAM console and then choose the
+    #   name of the permission. The ARN is displayed on the detail page.
     #
     #
     #
@@ -647,9 +1126,11 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] permission_version
-    #   Specifies identifier for the version of the RAM permission to
-    #   retrieve. If you don't specify this parameter, the operation
-    #   retrieves the default version.
+    #   Specifies the version number of the RAM permission to retrieve. If
+    #   you don't specify this parameter, the operation retrieves the
+    #   default version.
+    #
+    #   To see the list of available versions, use ListPermissionVersions.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetPermissionRequest AWS API Documentation
@@ -662,7 +1143,7 @@ module Aws::RAM
     end
 
     # @!attribute [rw] permission
-    #   An object that contains information about the permission.
+    #   An object with details about the permission.
     #   @return [Types::ResourceSharePermissionDetail]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetPermissionResponse AWS API Documentation
@@ -744,11 +1225,11 @@ module Aws::RAM
     #   Specifies whether you want to retrieve the associations that involve
     #   a specified resource or principal.
     #
-    #   * `PRINCIPAL` – list the principals that are associated with the
-    #     specified resource share.
+    #   * `PRINCIPAL` – list the principals whose associations you want to
+    #     see.
     #
-    #   * `RESOURCE` – list the resources that are associated with the
-    #     specified resource share.
+    #   * `RESOURCE` – list the resources whose associations you want to
+    #     see.
     #   @return [String]
     #
     # @!attribute [rw] resource_share_arns
@@ -761,7 +1242,7 @@ module Aws::RAM
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_arn
-    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource whose
+    #   Specifies the [Amazon Resource Name (ARN)][1] of a resource whose
     #   resource shares you want to retrieve.
     #
     #   You cannot specify this parameter if the association type is
@@ -775,7 +1256,7 @@ module Aws::RAM
     # @!attribute [rw] principal
     #   Specifies the ID of the principal whose resource shares you want to
     #   retrieve. This can be an Amazon Web Services account ID, an
-    #   organization ID, an organizational unit ID, or the [Amazon Resoure
+    #   organization ID, an organizational unit ID, or the [Amazon Resource
     #   Name (ARN)][1] of an individual IAM user or role.
     #
     #   You cannot specify this parameter if the association type is
@@ -787,7 +1268,7 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] association_status
-    #   Specifies that you want to retrieve only associations with this
+    #   Specifies that you want to retrieve only associations that have this
     #   status.
     #   @return [String]
     #
@@ -979,13 +1460,18 @@ module Aws::RAM
     #
     # @!attribute [rw] permission_arn
     #   Specifies that you want to retrieve details of only those resource
-    #   shares that use the RAM permission with this [Amazon Resoure Name
-    #   (ARN)][1].
+    #   shares that use the managed permission with this [Amazon Resource
+    #   Name (ARN)][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
+    #
+    # @!attribute [rw] permission_version
+    #   Specifies that you want to retrieve details for only those resource
+    #   shares that use the specified version of the managed permission.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetResourceSharesRequest AWS API Documentation
     #
@@ -997,7 +1483,8 @@ module Aws::RAM
       :tag_filters,
       :next_token,
       :max_results,
-      :permission_arn)
+      :permission_arn,
+      :permission_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1025,9 +1512,9 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The client token input parameter was matched one used with a previous
-    # call to the operation, but at least one of the other input parameters
-    # is different from the previous call.
+    # The operation failed because the client token input parameter matched
+    # one that was used with a previous call to the operation, but at least
+    # one of the other input parameters is different from the previous call.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1040,7 +1527,7 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The client token is not valid.
+    # The operation failed because the specified client token isn't valid.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1053,7 +1540,8 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The specified value for `MaxResults` is not valid.
+    # The operation failed because the specified value for `MaxResults`
+    # isn't valid.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1066,7 +1554,9 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The specified value for `NextToken` is not valid.
+    # The operation failed because the specified value for `NextToken`
+    # isn't valid. You must specify a value you received in the `NextToken`
+    # response of a previous call to this operation.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1079,7 +1569,7 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # A parameter is not valid.
+    # The operation failed because a parameter you specified isn't valid.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1092,7 +1582,20 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The specified resource type is not valid.
+    # The operation failed because a policy you specified isn't valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/InvalidPolicyException AWS API Documentation
+    #
+    class InvalidPolicyException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The operation failed because the specified resource type isn't valid.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1105,7 +1608,8 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The requested state transition is not valid.
+    # The operation failed because the requested operation isn't valid for
+    # the resource share in its current state.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1119,7 +1623,7 @@ module Aws::RAM
     end
 
     # @!attribute [rw] resource_share_invitation_arn
-    #   Specifies the [Amazon Resoure Name (ARN)][1] of the invitation. You
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the invitation. You
     #   can use GetResourceShareInvitations to find the ARN of the
     #   invitation.
     #
@@ -1200,7 +1704,107 @@ module Aws::RAM
     end
 
     # @!attribute [rw] permission_arn
-    #   Specifies the [Amazon Resoure Name (ARN)][1] of the RAM permission
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the managed
+    #   permission.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] permission_version
+    #   Specifies that you want to list only those associations with
+    #   resource shares that use this version of the managed permission. If
+    #   you don't provide a value for this parameter, then the operation
+    #   returns information about associations with resource shares that use
+    #   any version of the managed permission.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] association_status
+    #   Specifies that you want to list only those associations with
+    #   resource shares that match this status.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Specifies that you want to list only those associations with
+    #   resource shares that include at least one resource of this resource
+    #   type.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_set
+    #   Specifies that you want to list only those associations with
+    #   resource shares that have a `featureSet` with this value.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_version
+    #   When `true`, specifies that you want to list only those associations
+    #   with resource shares that use the default version of the specified
+    #   managed permission.
+    #
+    #   When `false` (the default value), lists associations with resource
+    #   shares that use any version of the specified managed permission.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] next_token
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Specifies the total number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the number you specify, the `NextToken` response
+    #   element is returned with a value (not null). Include the specified
+    #   value as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that the service
+    #   might return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPermissionAssociationsRequest AWS API Documentation
+    #
+    class ListPermissionAssociationsRequest < Struct.new(
+      :permission_arn,
+      :permission_version,
+      :association_status,
+      :resource_type,
+      :feature_set,
+      :default_version,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] permissions
+    #   A structure with information about this customer managed permission.
+    #   @return [Array<Types::AssociatedPermission>]
+    #
+    # @!attribute [rw] next_token
+    #   If present, this value indicates that more output is available than
+    #   is included in the current response. Use this value in the
+    #   `NextToken` request parameter in a subsequent call to the operation
+    #   to get the next part of the output. You should repeat this until the
+    #   `NextToken` response element comes back as `null`. This indicates
+    #   that this is the last page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPermissionAssociationsResponse AWS API Documentation
+    #
+    class ListPermissionAssociationsResponse < Struct.new(
+      :permissions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] permission_arn
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the RAM permission
     #   whose versions you want to list. You can use the `permissionVersion`
     #   parameter on the AssociateResourceSharePermission operation to
     #   specify a non-default version to attach.
@@ -1265,9 +1869,11 @@ module Aws::RAM
     end
 
     # @!attribute [rw] resource_type
-    #   Specifies that you want to list permissions for only the specified
-    #   resource type. For example, to list only permissions that apply to
-    #   EC2 subnets, specify `ec2:Subnet`. You can use the ListResourceTypes
+    #   Specifies that you want to list only those permissions that apply to
+    #   the specified resource type. This parameter is not case sensitive.
+    #
+    #   For example, to list only permissions that apply to Amazon EC2
+    #   subnets, specify `ec2:subnet`. You can use the ListResourceTypes
     #   operation to get the specific string required.
     #   @return [String]
     #
@@ -1292,12 +1898,26 @@ module Aws::RAM
     #   operation to ensure that you receive all of the results.
     #   @return [Integer]
     #
+    # @!attribute [rw] permission_type
+    #   Specifies that you want to list only permissions of this type:
+    #
+    #   * `AWS` – returns only Amazon Web Services managed permissions.
+    #
+    #   * `LOCAL` – returns only customer managed permissions
+    #
+    #   * `ALL` – returns both Amazon Web Services managed permissions and
+    #     customer managed permissions.
+    #
+    #   If you don't specify this parameter, the default is `All`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPermissionsRequest AWS API Documentation
     #
     class ListPermissionsRequest < Struct.new(
       :resource_type,
       :next_token,
-      :max_results)
+      :max_results,
+      :permission_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1337,7 +1957,7 @@ module Aws::RAM
     #
     # @!attribute [rw] resource_arn
     #   Specifies that you want to list principal information for the
-    #   resource share with the specified [Amazon Resoure Name (ARN)][1].
+    #   resource share with the specified [Amazon Resource Name (ARN)][1].
     #
     #
     #
@@ -1352,7 +1972,7 @@ module Aws::RAM
     #
     #   * An Amazon Web Services account ID, for example: `123456789012`
     #
-    #   * An [Amazon Resoure Name (ARN)][1] of an organization in
+    #   * An [Amazon Resource Name (ARN)][1] of an organization in
     #     Organizations, for example:
     #     `organizations::123456789012:organization/o-exampleorgid`
     #
@@ -1453,8 +2073,74 @@ module Aws::RAM
       include Aws::Structure
     end
 
+    # @!attribute [rw] work_ids
+    #   A list of IDs. These values come from the `id`field of the
+    #   `replacePermissionAssociationsWork`structure returned by the
+    #   ReplacePermissionAssociations operation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   Specifies that you want to see only the details about requests with
+    #   a status that matches this value.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Specifies the total number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the number you specify, the `NextToken` response
+    #   element is returned with a value (not null). Include the specified
+    #   value as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that the service
+    #   might return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListReplacePermissionAssociationsWorkRequest AWS API Documentation
+    #
+    class ListReplacePermissionAssociationsWorkRequest < Struct.new(
+      :work_ids,
+      :status,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replace_permission_associations_works
+    #   An array of data structures that provide details of the matching
+    #   work IDs.
+    #   @return [Array<Types::ReplacePermissionAssociationsWork>]
+    #
+    # @!attribute [rw] next_token
+    #   If present, this value indicates that more output is available than
+    #   is included in the current response. Use this value in the
+    #   `NextToken` request parameter in a subsequent call to the operation
+    #   to get the next part of the output. You should repeat this until the
+    #   `NextToken` response element comes back as `null`. This indicates
+    #   that this is the last page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListReplacePermissionAssociationsWorkResponse AWS API Documentation
+    #
+    class ListReplacePermissionAssociationsWorkResponse < Struct.new(
+      :replace_permission_associations_works,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_share_arn
-    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the resource share
     #   for which you want to retrieve the associated permissions.
     #
     #
@@ -1703,7 +2389,12 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The format of an Amazon Resource Name (ARN) is not valid.
+    # The operation failed because the specified [Amazon Resource Name
+    # (ARN)][1] has a format that isn't valid.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1716,7 +2407,21 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # A required input parameter is missing.
+    # The operation failed because the policy template that you provided
+    # isn't valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/MalformedPolicyTemplateException AWS API Documentation
+    #
+    class MalformedPolicyTemplateException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The operation failed because a required input parameter is missing.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1729,7 +2434,7 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The requested operation is not permitted.
+    # The operation failed because the requested operation isn't permitted.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1742,15 +2447,71 @@ module Aws::RAM
       include Aws::Structure
     end
 
+    # The operation failed because a permission with the specified name
+    # already exists in the requested Amazon Web Services Region. Choose a
+    # different name.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/PermissionAlreadyExistsException AWS API Documentation
+    #
+    class PermissionAlreadyExistsException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The operation failed because it would exceed the maximum number of
+    # permissions you can create in each Amazon Web Services Region. To view
+    # the limits for your Amazon Web Services account, see the [RAM page in
+    # the Service Quotas console][1].
+    #
+    #
+    #
+    # [1]: https://console.aws.amazon.com/servicequotas/home/services/ram/quotas
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/PermissionLimitExceededException AWS API Documentation
+    #
+    class PermissionLimitExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The operation failed because it would exceed the limit for the number
+    # of versions you can have for a permission. To view the limits for your
+    # Amazon Web Services account, see the [RAM page in the Service Quotas
+    # console][1].
+    #
+    #
+    #
+    # [1]: https://console.aws.amazon.com/servicequotas/home/services/ram/quotas
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/PermissionVersionsLimitExceededException AWS API Documentation
+    #
+    class PermissionVersionsLimitExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a principal for use with Resource Access Manager.
     #
     # @!attribute [rw] id
-    #   The ID of the principal.
+    #   The ID of the principal that can be associated with a resource
+    #   share.
     #   @return [String]
     #
     # @!attribute [rw] resource_share_arn
-    #   The [Amazon Resoure Name (ARN)][1] of a resource share the principal
-    #   is associated with.
+    #   The [Amazon Resource Name (ARN)][1] of a resource share the
+    #   principal is associated with.
     #
     #
     #
@@ -1763,13 +2524,18 @@ module Aws::RAM
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_time
-    #   The date and time when the association was last updated.
+    #   The date and time when the association between the resource share
+    #   and the principal was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] external
-    #   Indicates whether the principal belongs to the same organization in
-    #   Organizations as the Amazon Web Services account that owns the
-    #   resource share.
+    #   Indicates the relationship between the Amazon Web Services account
+    #   the principal belongs to and the account that owns the resource
+    #   share:
+    #
+    #   * `True` – The two accounts belong to same organization.
+    #
+    #   * `False` – The two accounts do not belong to the same organization.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/Principal AWS API Documentation
@@ -1784,8 +2550,74 @@ module Aws::RAM
       include Aws::Structure
     end
 
+    # @!attribute [rw] permission_arn
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the
+    #   `CREATED_FROM_POLICY` permission that you want to promote. You can
+    #   get this [Amazon Resource Name (ARN)][1] by calling the
+    #   ListResourceSharePermissions operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Specifies a name for the promoted customer managed permission.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry
+    #   the request without accidentally performing the same operation a
+    #   second time. Passing the same value to a later call to an operation
+    #   requires that you also pass the same value for all other parameters.
+    #   We recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates
+    #   a random one for you.
+    #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/PromotePermissionCreatedFromPolicyRequest AWS API Documentation
+    #
+    class PromotePermissionCreatedFromPolicyRequest < Struct.new(
+      :permission_arn,
+      :name,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] permission
+    #   Information about an RAM permission.
+    #   @return [Types::ResourceSharePermissionSummary]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency identifier associated with this request. If you want
+    #   to repeat the same operation in an idempotent manner then you must
+    #   include this value in the `clientToken` request parameter of that
+    #   later call. All other parameters must also have the same values that
+    #   you used in the first call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/PromotePermissionCreatedFromPolicyResponse AWS API Documentation
+    #
+    class PromotePermissionCreatedFromPolicyResponse < Struct.new(
+      :permission,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_share_arn
-    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the resource share
     #   to promote.
     #
     #
@@ -1815,7 +2647,7 @@ module Aws::RAM
     end
 
     # @!attribute [rw] resource_share_invitation_arn
-    #   Specifies the [Amazon Resoure Name (ARN)][1] of the invitation that
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the invitation that
     #   you want to reject.
     #
     #
@@ -1833,6 +2665,10 @@ module Aws::RAM
     #
     #   If you don't provide this value, then Amazon Web Services generates
     #   a random one for you.
+    #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
     #
     #
     #
@@ -1869,10 +2705,166 @@ module Aws::RAM
       include Aws::Structure
     end
 
+    # @!attribute [rw] from_permission_arn
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the managed
+    #   permission that you want to replace.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] from_permission_version
+    #   Specifies that you want to updated the permissions for only those
+    #   resource shares that use the specified version of the managed
+    #   permission.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to_permission_arn
+    #   Specifies the ARN of the managed permission that you want to
+    #   associate with resource shares in place of the one specified by
+    #   `fromPerssionArn` and `fromPermissionVersion`.
+    #
+    #   The operation always associates the version that is currently the
+    #   default for the specified managed permission.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry
+    #   the request without accidentally performing the same operation a
+    #   second time. Passing the same value to a later call to an operation
+    #   requires that you also pass the same value for all other parameters.
+    #   We recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates
+    #   a random one for you.
+    #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ReplacePermissionAssociationsRequest AWS API Documentation
+    #
+    class ReplacePermissionAssociationsRequest < Struct.new(
+      :from_permission_arn,
+      :from_permission_version,
+      :to_permission_arn,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replace_permission_associations_work
+    #   Specifies a data structure that you can use to track the
+    #   asynchronous tasks that RAM performs to complete this operation. You
+    #   can use the ListReplacePermissionAssociationsWork operation and pass
+    #   the `id` value returned in this structure.
+    #   @return [Types::ReplacePermissionAssociationsWork]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency identifier associated with this request. If you want
+    #   to repeat the same operation in an idempotent manner then you must
+    #   include this value in the `clientToken` request parameter of that
+    #   later call. All other parameters must also have the same values that
+    #   you used in the first call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ReplacePermissionAssociationsResponse AWS API Documentation
+    #
+    class ReplacePermissionAssociationsResponse < Struct.new(
+      :replace_permission_associations_work,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that represents the background work that RAM performs when
+    # you invoke the ReplacePermissionAssociations operation.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the background task associated with one
+    #   ReplacePermissionAssociations request.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_permission_arn
+    #   The [Amazon Resource Name (ARN)][1] of the managed permission that
+    #   this background task is replacing.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] from_permission_version
+    #   The version of the managed permission that this background task is
+    #   replacing.
+    #   @return [String]
+    #
+    # @!attribute [rw] to_permission_arn
+    #   The ARN of the managed permission that this background task is
+    #   associating with the resource shares in place of the managed
+    #   permission and version specified in `fromPermissionArn` and
+    #   `fromPermissionVersion`.
+    #   @return [String]
+    #
+    # @!attribute [rw] to_permission_version
+    #   The version of the managed permission that this background task is
+    #   associating with the resource shares. This is always the version
+    #   that is currently the default for this managed permission.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Specifies the current status of the background tasks for the
+    #   specified ID. The output is one of the following strings:
+    #
+    #   * `IN_PROGRESS`
+    #
+    #   * `COMPLETED`
+    #
+    #   * `FAILED`
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Specifies the reason for a `FAILED` status. This field is present
+    #   only when there `status` is `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time when this asynchronous background task was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The date and time when the status of this background task was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ReplacePermissionAssociationsWork AWS API Documentation
+    #
+    class ReplacePermissionAssociationsWork < Struct.new(
+      :id,
+      :from_permission_arn,
+      :from_permission_version,
+      :to_permission_arn,
+      :to_permission_version,
+      :status,
+      :status_message,
+      :creation_time,
+      :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a resource associated with a resource share in RAM.
     #
     # @!attribute [rw] arn
-    #   The [Amazon Resoure Name (ARN)][1] of the resource.
+    #   The [Amazon Resource Name (ARN)][1] of the resource.
     #
     #
     #
@@ -1881,11 +2873,13 @@ module Aws::RAM
     #
     # @!attribute [rw] type
     #   The resource type. This takes the form of:
-    #   `service-code`:`resource-code`
+    #   `service-code`:`resource-code`, and is case-insensitive. For
+    #   example, an Amazon EC2 Subnet would be represented by the string
+    #   `ec2:subnet`.
     #   @return [String]
     #
     # @!attribute [rw] resource_share_arn
-    #   The [Amazon Resoure Name (ARN)][1] of the resource share this
+    #   The [Amazon Resource Name (ARN)][1] of the resource share this
     #   resource is associated with.
     #
     #
@@ -1894,8 +2888,8 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] resource_group_arn
-    #   The [Amazon Resoure Name (ARN)][1] of the resource group. This value
-    #   is available only if the resource is part of a resource group.
+    #   The [Amazon Resource Name (ARN)][1] of the resource group. This
+    #   value is available only if the resource is part of a resource group.
     #
     #
     #
@@ -1916,7 +2910,8 @@ module Aws::RAM
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_time
-    #   The date an time when the association was last updated.
+    #   The date an time when the association between the resource and the
+    #   resource share was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] resource_region_scope
@@ -1946,7 +2941,12 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The specified Amazon Resource Name (ARN) was not found.
+    # The operation failed because the specified [Amazon Resource Name
+    # (ARN)][1] was not found.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1962,7 +2962,7 @@ module Aws::RAM
     # Describes a resource share in RAM.
     #
     # @!attribute [rw] resource_share_arn
-    #   The [Amazon Resoure Name (ARN)][1] of the resource share
+    #   The [Amazon Resource Name (ARN)][1] of the resource share
     #
     #
     #
@@ -1981,6 +2981,12 @@ module Aws::RAM
     # @!attribute [rw] allow_external_principals
     #   Indicates whether principals outside your organization in
     #   Organizations can be associated with a resource share.
+    #
+    #   * `True` – the resource share can be shared with any Amazon Web
+    #     Services account.
+    #
+    #   * `False` – the resource share can be shared with only accounts in
+    #     the same organization as the account that owns the resource share.
     #   @return [Boolean]
     #
     # @!attribute [rw] status
@@ -2004,25 +3010,30 @@ module Aws::RAM
     #   @return [Time]
     #
     # @!attribute [rw] feature_set
-    #   Indicates how the resource share was created. Possible values
-    #   include:
+    #   Indicates what features are available for this resource share. This
+    #   parameter can have one of the following values:
     #
-    #   * `CREATED_FROM_POLICY` - Indicates that the resource share was
-    #     created from an Identity and Access Management (IAM)
-    #     resource-based permission policy attached to the resource. This
-    #     type of resource share is visible only to the Amazon Web Services
-    #     account that created it. You can't modify it in RAM unless you
-    #     promote it. For more information, see
+    #   * **STANDARD** – A resource share that supports all functionality.
+    #     These resource shares are visible to all principals you share the
+    #     resource share with. You can modify these resource shares in RAM
+    #     using the console or APIs. This resource share might have been
+    #     created by RAM, or it might have been **CREATED\_FROM\_POLICY**
+    #     and then promoted.
+    #
+    #   * **CREATED\_FROM\_POLICY** – The customer manually shared a
+    #     resource by attaching a resource-based policy. That policy did not
+    #     match any existing managed permissions, so RAM created this
+    #     customer managed permission automatically on the customer's
+    #     behalf based on the attached policy document. This type of
+    #     resource share is visible only to the Amazon Web Services account
+    #     that created it. You can't modify it in RAM unless you promote
+    #     it. For more information, see
     #     PromoteResourceShareCreatedFromPolicy.
     #
-    #   * `PROMOTING_TO_STANDARD` - The resource share is in the process of
-    #     being promoted. For more information, see
-    #     PromoteResourceShareCreatedFromPolicy.
-    #
-    #   * `STANDARD` - Indicates that the resource share was created in RAM
-    #     using the console or APIs. These resource shares are visible to
-    #     all principals you share the resource share with. You can modify
-    #     these resource shares in RAM using the console or APIs.
+    #   * **PROMOTING\_TO\_STANDARD** – This resource share was originally
+    #     `CREATED_FROM_POLICY`, but the customer ran the
+    #     PromoteResourceShareCreatedFromPolicy and that operation is still
+    #     in progress. This value changes to `STANDARD` when complete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceShare AWS API Documentation
@@ -2042,11 +3053,11 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # Describes an association with a resource share and either a principal
-    # or a resource.
+    # Describes an association between a resource share and either a
+    # principal or a resource.
     #
     # @!attribute [rw] resource_share_arn
-    #   The [Amazon Resoure Name (ARN)][1] of the resource share.
+    #   The [Amazon Resource Name (ARN)][1] of the resource share.
     #
     #
     #
@@ -2060,14 +3071,14 @@ module Aws::RAM
     # @!attribute [rw] associated_entity
     #   The associated entity. This can be either of the following:
     #
-    #   * For a resource association, this is the [Amazon Resoure Name
+    #   * For a resource association, this is the [Amazon Resource Name
     #     (ARN)][1] of the resource.
     #
     #   * For principal associations, this is one of the following:
     #
     #     * The ID of an Amazon Web Services account
     #
-    #     * The [Amazon Resoure Name (ARN)][1] of an organization in
+    #     * The [Amazon Resource Name (ARN)][1] of an organization in
     #       Organizations
     #
     #     * The ARN of an organizational unit (OU) in Organizations
@@ -2127,7 +3138,7 @@ module Aws::RAM
     # resource share.
     #
     # @!attribute [rw] resource_share_invitation_arn
-    #   The [Amazon Resoure Name (ARN)][1] of the invitation.
+    #   The [Amazon Resource Name (ARN)][1] of the invitation.
     #
     #
     #
@@ -2139,7 +3150,7 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] resource_share_arn
-    #   The [Amazon Resoure Name (ARN)][1] of the resource share
+    #   The [Amazon Resource Name (ARN)][1] of the resource share
     #
     #
     #
@@ -2169,7 +3180,7 @@ module Aws::RAM
     #   @return [Array<Types::ResourceShareAssociation>]
     #
     # @!attribute [rw] receiver_arn
-    #   The [Amazon Resoure Name (ARN)][1] of the IAM user or role that
+    #   The [Amazon Resource Name (ARN)][1] of the IAM user or role that
     #   received the invitation.
     #
     #
@@ -2193,7 +3204,8 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The specified invitation was already accepted.
+    # The operation failed because the specified invitation was already
+    # accepted.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2206,7 +3218,8 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The specified invitation was already rejected.
+    # The operation failed because the specified invitation was already
+    # rejected.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2219,8 +3232,12 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The specified Amazon Resource Name (ARN) for an invitation was not
-    # found.
+    # The operation failed because the specified [Amazon Resource Name
+    # (ARN)][1] for an invitation was not found.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2233,7 +3250,8 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The specified invitation is expired.
+    # The operation failed because the specified invitation is past its
+    # expiration date and time.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2246,8 +3264,13 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # This request would exceed the limit for resource shares for your
-    # account.
+    # The operation failed because it would exceed the limit for resource
+    # shares for your account. To view the limits for your Amazon Web
+    # Services account, see the [RAM page in the Service Quotas console][1].
+    #
+    #
+    #
+    # [1]: https://console.aws.amazon.com/servicequotas/home/services/ram/quotas
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2260,10 +3283,10 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # Information about an RAM permission.
+    # Information about a RAM managed permission.
     #
     # @!attribute [rw] arn
-    #   The [Amazon Resoure Name (ARN)][1] of this RAM permission.
+    #   The [Amazon Resource Name (ARN)][1] of this RAM managed permission.
     #
     #
     #
@@ -2271,12 +3294,12 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version of the permission represented in this structure.
+    #   The version of the permission described in this response.
     #   @return [String]
     #
     # @!attribute [rw] default_version
     #   Specifies whether the version of the permission represented in this
-    #   structure is the default version for this permission.
+    #   response is the default version for this permission.
     #   @return [Boolean]
     #
     # @!attribute [rw] name
@@ -2304,9 +3327,70 @@ module Aws::RAM
     #
     # @!attribute [rw] is_resource_type_default
     #   Specifies whether the version of the permission represented in this
-    #   structure is the default version for all resources of this resource
+    #   response is the default version for all resources of this resource
     #   type.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] permission_type
+    #   The type of managed permission. This can be one of the following
+    #   values:
+    #
+    #   * `AWS_MANAGED` – Amazon Web Services created and manages this
+    #     managed permission. You can associate it with your resource
+    #     shares, but you can't modify it.
+    #
+    #   * `CUSTOMER_MANAGED` – You, or another principal in your account
+    #     created this managed permission. You can associate it with your
+    #     resource shares and create new versions that have different
+    #     permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_set
+    #   Indicates what features are available for this resource share. This
+    #   parameter can have one of the following values:
+    #
+    #   * **STANDARD** – A resource share that supports all functionality.
+    #     These resource shares are visible to all principals you share the
+    #     resource share with. You can modify these resource shares in RAM
+    #     using the console or APIs. This resource share might have been
+    #     created by RAM, or it might have been **CREATED\_FROM\_POLICY**
+    #     and then promoted.
+    #
+    #   * **CREATED\_FROM\_POLICY** – The customer manually shared a
+    #     resource by attaching a resource-based policy. That policy did not
+    #     match any existing managed permissions, so RAM created this
+    #     customer managed permission automatically on the customer's
+    #     behalf based on the attached policy document. This type of
+    #     resource share is visible only to the Amazon Web Services account
+    #     that created it. You can't modify it in RAM unless you promote
+    #     it. For more information, see
+    #     PromoteResourceShareCreatedFromPolicy.
+    #
+    #   * **PROMOTING\_TO\_STANDARD** – This resource share was originally
+    #     `CREATED_FROM_POLICY`, but the customer ran the
+    #     PromoteResourceShareCreatedFromPolicy and that operation is still
+    #     in progress. This value changes to `STANDARD` when complete.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the association between the permission and the
+    #   resource share. The following are the possible values:
+    #
+    #   * `ATTACHABLE` – This permission or version can be associated with
+    #     resource shares.
+    #
+    #   * `UNATTACHABLE` – This permission or version can't currently be
+    #     associated with resource shares.
+    #
+    #   * `DELETING` – This permission or version is in the process of being
+    #     deleted.
+    #
+    #   * `DELETED` – This permission or version is deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tag key and value pairs attached to the resource share.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceSharePermissionDetail AWS API Documentation
     #
@@ -2319,16 +3403,19 @@ module Aws::RAM
       :permission,
       :creation_time,
       :last_updated_time,
-      :is_resource_type_default)
+      :is_resource_type_default,
+      :permission_type,
+      :feature_set,
+      :status,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Information about an RAM permission that is associated with a resource
-    # share and any of its resources of a specified type.
+    # Information about an RAM permission.
     #
     # @!attribute [rw] arn
-    #   The [Amazon Resoure Name (ARN)][1] of the permission you want
+    #   The [Amazon Resource Name (ARN)][1] of the permission you want
     #   information about.
     #
     #
@@ -2337,20 +3424,23 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version of the permission represented in this structure.
+    #   The version of the permission associated with this resource share.
     #   @return [String]
     #
     # @!attribute [rw] default_version
-    #   Specifies whether the version of the permission represented in this
-    #   structure is the default version for this permission.
+    #   Specifies whether the version of the managed permission used by this
+    #   resource share is the default version for this managed permission.
     #   @return [Boolean]
     #
     # @!attribute [rw] name
-    #   The name of this permission.
+    #   The name of this managed permission.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of resource to which this permission applies.
+    #   The type of resource to which this permission applies. This takes
+    #   the form of: `service-code`:`resource-code`, and is
+    #   case-insensitive. For example, an Amazon EC2 Subnet would be
+    #   represented by the string `ec2:subnet`.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2366,10 +3456,56 @@ module Aws::RAM
     #   @return [Time]
     #
     # @!attribute [rw] is_resource_type_default
-    #   Specifies whether the version of the permission represented in this
-    #   structure is the default version for all resources of this resource
-    #   type.
+    #   Specifies whether the managed permission associated with this
+    #   resource share is the default managed permission for all resources
+    #   of this resource type.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] permission_type
+    #   The type of managed permission. This can be one of the following
+    #   values:
+    #
+    #   * `AWS_MANAGED` – Amazon Web Services created and manages this
+    #     managed permission. You can associate it with your resource
+    #     shares, but you can't modify it.
+    #
+    #   * `CUSTOMER_MANAGED` – You, or another principal in your account
+    #     created this managed permission. You can associate it with your
+    #     resource shares and create new versions that have different
+    #     permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_set
+    #   Indicates what features are available for this resource share. This
+    #   parameter can have one of the following values:
+    #
+    #   * **STANDARD** – A resource share that supports all functionality.
+    #     These resource shares are visible to all principals you share the
+    #     resource share with. You can modify these resource shares in RAM
+    #     using the console or APIs. This resource share might have been
+    #     created by RAM, or it might have been **CREATED\_FROM\_POLICY**
+    #     and then promoted.
+    #
+    #   * **CREATED\_FROM\_POLICY** – The customer manually shared a
+    #     resource by attaching a resource-based policy. That policy did not
+    #     match any existing managed permissions, so RAM created this
+    #     customer managed permission automatically on the customer's
+    #     behalf based on the attached policy document. This type of
+    #     resource share is visible only to the Amazon Web Services account
+    #     that created it. You can't modify it in RAM unless you promote
+    #     it. For more information, see
+    #     PromoteResourceShareCreatedFromPolicy.
+    #
+    #   * **PROMOTING\_TO\_STANDARD** – This resource share was originally
+    #     `CREATED_FROM_POLICY`, but the customer ran the
+    #     PromoteResourceShareCreatedFromPolicy and that operation is still
+    #     in progress. This value changes to `STANDARD` when complete.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of the tag key value pairs currently attached to the
+    #   permission.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceSharePermissionSummary AWS API Documentation
     #
@@ -2382,13 +3518,16 @@ module Aws::RAM
       :status,
       :creation_time,
       :last_updated_time,
-      :is_resource_type_default)
+      :is_resource_type_default,
+      :permission_type,
+      :feature_set,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The service could not respond to the request due to an internal
-    # problem.
+    # The operation failed because the service could not respond to the
+    # request due to an internal problem. Try again later.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2405,7 +3544,10 @@ module Aws::RAM
     # Services service to which resources of that type belong.
     #
     # @!attribute [rw] resource_type
-    #   The type of the resource.
+    #   The type of the resource. This takes the form of:
+    #   `service-code`:`resource-code`, and is case-insensitive. For
+    #   example, an Amazon EC2 Subnet would be represented by the string
+    #   `ec2:subnet`.
     #   @return [String]
     #
     # @!attribute [rw] service_name
@@ -2434,7 +3576,8 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The service is not available.
+    # The operation failed because the service isn't available. Try again
+    # later.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2443,6 +3586,72 @@ module Aws::RAM
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] permission_arn
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the customer
+    #   managed permission whose default version you want to change.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] permission_version
+    #   Specifies the version number that you want to designate as the
+    #   default for customer managed permission. To see a list of all
+    #   available version numbers, use ListPermissionVersions.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_token
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry
+    #   the request without accidentally performing the same operation a
+    #   second time. Passing the same value to a later call to an operation
+    #   requires that you also pass the same value for all other parameters.
+    #   We recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates
+    #   a random one for you.
+    #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/SetDefaultPermissionVersionRequest AWS API Documentation
+    #
+    class SetDefaultPermissionVersionRequest < Struct.new(
+      :permission_arn,
+      :permission_version,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return_value
+    #   A boolean value that indicates whether the operation was successful.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency identifier associated with this request. If you want
+    #   to repeat the same operation in an idempotent manner then you must
+    #   include this value in the `clientToken` request parameter of that
+    #   later call. All other parameters must also have the same values that
+    #   you used in the first call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/SetDefaultPermissionVersionResponse AWS API Documentation
+    #
+    class SetDefaultPermissionVersionResponse < Struct.new(
+      :return_value,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2502,7 +3711,8 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # This request would exceed the limit for tags for your account.
+    # The operation failed because it would exceed the limit for tags for
+    # your Amazon Web Services account.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2515,7 +3725,8 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The specified tag key is a reserved word and can't be used.
+    # The operation failed because the specified tag key is a reserved word
+    # and can't be used.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2529,8 +3740,9 @@ module Aws::RAM
     end
 
     # @!attribute [rw] resource_share_arn
-    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
-    #   that you want to add tags to.
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the resource share
+    #   that you want to add tags to. You must specify *either*
+    #   `resourceShareArn`, or `resourceArn`, but not both.
     #
     #
     #
@@ -2543,11 +3755,22 @@ module Aws::RAM
     #   but can be an empty string.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] resource_arn
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the managed
+    #   permission that you want to add tags to. You must specify *either*
+    #   `resourceArn`, or `resourceShareArn`, but not both.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/TagResourceRequest AWS API Documentation
     #
     class TagResourceRequest < Struct.new(
       :resource_share_arn,
-      :tags)
+      :tags,
+      :resource_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2556,8 +3779,8 @@ module Aws::RAM
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # You exceeded the rate at which you are allowed to perform this
-    # operation. Please try again later.
+    # The operation failed because it exceeded the rate at which you are
+    # allowed to perform this operation. Please try again later.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2570,7 +3793,7 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # A specified resource was not found.
+    # The operation failed because a specified resource couldn't be found.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2583,10 +3806,27 @@ module Aws::RAM
       include Aws::Structure
     end
 
+    # There isn't an existing managed permission defined in RAM that has
+    # the same IAM permissions as the resource-based policy attached to the
+    # resource. You should first run PromotePermissionCreatedFromPolicy to
+    # create that managed permission.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/UnmatchedPolicyPermissionException AWS API Documentation
+    #
+    class UnmatchedPolicyPermissionException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_share_arn
-    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the resource share
     #   that you want to remove tags from. The tags are removed from the
-    #   resource share, not the resources in the resource share.
+    #   resource share, not the resources in the resource share. You must
+    #   specify either `resourceShareArn`, or `resourceArn`, but not both.
     #
     #
     #
@@ -2597,11 +3837,22 @@ module Aws::RAM
     #   Specifies a list of one or more tag keys that you want to remove.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] resource_arn
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the managed
+    #   permission that you want to remove tags from. You must specify
+    #   either `resourceArn`, or `resourceShareArn`, but not both.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/UntagResourceRequest AWS API Documentation
     #
     class UntagResourceRequest < Struct.new(
       :resource_share_arn,
-      :tag_keys)
+      :tag_keys,
+      :resource_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2611,7 +3862,7 @@ module Aws::RAM
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] resource_share_arn
-    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the resource share
     #   that you want to modify.
     #
     #
@@ -2639,6 +3890,10 @@ module Aws::RAM
     #
     #   If you don't provide this value, then Amazon Web Services generates
     #   a random one for you.
+    #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
     #
     #
     #

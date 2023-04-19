@@ -2198,8 +2198,16 @@ module Aws::RDS
     #   If this setting isn't specified, no prefix is assumed.
     #
     # @option params [String] :image_id
-    #   The ID of the AMI. An AMI ID is required to create a CEV for RDS
-    #   Custom for SQL Server.
+    #   The ID of the Amazon Machine Image (AMI). For RDS Custom for SQL
+    #   Server, an AMI ID is required to create a CEV. For RDS Custom for
+    #   Oracle, the default is the most recent AMI available, but you can
+    #   specify an AMI ID that was used in a different Oracle CEV. Find the
+    #   AMIs used by your CEVs by calling the [DescribeDBEngineVersions][1]
+    #   operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBEngineVersions.html
     #
     # @option params [String] :kms_key_id
     #   The Amazon Web Services KMS key identifier for an encrypted CEV. A
@@ -3220,9 +3228,9 @@ module Aws::RDS
     #   * {Types::CreateDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
     #
     #
-    # @example Example: To create a MySQL 5.7--compatible DB cluster
+    # @example Example: To create a MySQL 5.7-compatible DB cluster
     #
-    #   # The following example create a MySQL 5.7-compatible DB cluster.
+    #   # The following example creates a MySQL 5.7-compatible Aurora DB cluster.
     #
     #   resp = client.create_db_cluster({
     #     db_cluster_identifier: "sample-cluster", 
@@ -3284,9 +3292,9 @@ module Aws::RDS
     #     }, 
     #   }
     #
-    # @example Example: To create a PostgreSQL--compatible DB cluster
+    # @example Example: To create a PostgreSQL-compatible DB cluster
     #
-    #   # The following creates a PostgreSQL-compatible DB cluster. 
+    #   # The following example creates a PostgreSQL-compatible Aurora DB cluster.
     #
     #   resp = client.create_db_cluster({
     #     db_cluster_identifier: "sample-pg-cluster", 
@@ -3725,11 +3733,11 @@ module Aws::RDS
     #
     #   **Aurora MySQL**
     #
-    #   Example: `aurora5.6`, `aurora-mysql5.7`, `aurora-mysql8.0`
+    #   Example: `aurora-mysql5.7`, `aurora-mysql8.0`
     #
     #   **Aurora PostgreSQL**
     #
-    #   Example: `aurora-postgresql9.6`
+    #   Example: `aurora-postgresql14`
     #
     #   **RDS for MySQL**
     #
@@ -3758,10 +3766,7 @@ module Aws::RDS
     #
     #   The following are the valid DB engine values:
     #
-    #   * `aurora` (for MySQL 5.6-compatible Aurora)
-    #
-    #   * `aurora-mysql` (for MySQL 5.7-compatible and MySQL 8.0-compatible
-    #     Aurora)
+    #   * `aurora-mysql`
     #
     #   * `aurora-postgresql`
     #
@@ -4237,12 +4242,9 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora` (for MySQL 5.6-compatible Aurora)
+    #   * `aurora-mysql` (for Aurora MySQL DB instances)
     #
-    #   * `aurora-mysql` (for MySQL 5.7-compatible and MySQL 8.0-compatible
-    #     Aurora)
-    #
-    #   * `aurora-postgresql`
+    #   * `aurora-postgresql` (for Aurora PostgreSQL DB instances)
     #
     #   * `custom-oracle-ee (for RDS Custom for Oracle DB instances)`
     #
@@ -6420,10 +6422,7 @@ module Aws::RDS
     #
     #   The following are the valid DB engine values:
     #
-    #   * `aurora` (for MySQL 5.6-compatible Aurora)
-    #
-    #   * `aurora-mysql` (for MySQL 5.7-compatible and MySQL 8.0-compatible
-    #     Aurora)
+    #   * `aurora-mysql`
     #
     #   * `aurora-postgresql`
     #
@@ -11110,10 +11109,11 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora-mysql` (for MySQL 5.7-compatible and MySQL 8.0-compatible
-    #     Aurora)
+    #   * `aurora-mysql`
     #
     #   * `aurora-postgresql`
+    #
+    #   * `custom-oracle-ee`
     #
     #   * `mariadb`
     #
@@ -13148,8 +13148,6 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora5.6`
-    #
     #   * `aurora-mysql5.7`
     #
     #   * `aurora-mysql8.0`
@@ -14364,10 +14362,11 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora-mysql` (for MySQL 5.7-compatible and MySQL 8.0-compatible
-    #     Aurora)
+    #   * `aurora-mysql`
     #
     #   * `aurora-postgresql`
+    #
+    #   * `custom-oracle-ee`
     #
     #   * `mariadb`
     #
@@ -16426,17 +16425,10 @@ module Aws::RDS
     #   all replicas must be running an engine version that's the same or
     #   later than the version you specify.
     #
-    #   To list all of the available engine versions for Aurora MySQL version
-    #   2 (5.7-compatible) and version 3 (MySQL 8.0-compatible), use the
+    #   To list all of the available engine versions for Aurora MySQL, use the
     #   following command:
     #
     #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
-    #   "DBEngineVersions[].EngineVersion"`
-    #
-    #   To list all of the available engine versions for MySQL 5.6-compatible
-    #   Aurora, use the following command:
-    #
-    #   `aws rds describe-db-engine-versions --engine aurora --query
     #   "DBEngineVersions[].EngineVersion"`
     #
     #   To list all of the available engine versions for Aurora PostgreSQL,
@@ -18404,7 +18396,7 @@ module Aws::RDS
     #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
     #
     #
-    # @example Example: To modify parameters in a DB cluster parameter group
+    # @example Example: To modify a DB instance
     #
     #   # The following example associates an option group and a parameter group with a compatible Microsoft SQL Server DB
     #   # instance. The ApplyImmediately parameter causes the option and parameter groups to be associated immediately, instead of
@@ -18451,7 +18443,7 @@ module Aws::RDS
     #       ], 
     #       secondary_availability_zone: "us-west-2c", 
     #       storage_type: "gp2", 
-    #     }, 
+    #     }, # Some output ommitted.
     #   }
     #
     # @example Request syntax with placeholder values
@@ -19601,21 +19593,15 @@ module Aws::RDS
     #   applied during the next maintenance window unless `ApplyImmediately`
     #   is enabled.
     #
-    #   To list all of the available engine versions for `aurora` (for MySQL
-    #   5.6-compatible Aurora), use the following command:
-    #
-    #   `` aws rds describe-db-engine-versions --engine aurora --query
-    #   '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' ``
-    #
     #   To list all of the available engine versions for `aurora-mysql` (for
-    #   MySQL 5.7-compatible and MySQL 8.0-compatible Aurora), use the
-    #   following command:
+    #   MySQL-based Aurora global databases), use the following command:
     #
     #   `` aws rds describe-db-engine-versions --engine aurora-mysql --query
     #   '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' ``
     #
-    #   To list all of the available engine versions for `aurora-postgresql`,
-    #   use the following command:
+    #   To list all of the available engine versions for `aurora-postgresql`
+    #   (for PostgreSQL-based Aurora global databases), use the following
+    #   command:
     #
     #   `` aws rds describe-db-engine-versions --engine aurora-postgresql
     #   --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' ``
@@ -21371,8 +21357,8 @@ module Aws::RDS
     #
     # @option params [String] :db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to associate with the
-    #   restored DB cluster. If this argument is omitted, `default.aurora5.6`
-    #   is used.
+    #   restored DB cluster. If this argument is omitted, the default
+    #   parameter group for the engine version is used.
     #
     #   Constraints:
     #
@@ -21396,15 +21382,13 @@ module Aws::RDS
     # @option params [required, String] :engine
     #   The name of the database engine to be used for this DB cluster.
     #
-    #   Valid Values: `aurora-mysql` (for MySQL 5.7-compatible and MySQL
-    #   8.0-compatible Aurora)
+    #   Valid Values: `aurora-mysql` (for Aurora MySQL)
     #
     # @option params [String] :engine_version
     #   The version number of the database engine to use.
     #
-    #   To list all of the available engine versions for `aurora-mysql` (MySQL
-    #   5.7-compatible and MySQL 8.0-compatible Aurora), use the following
-    #   command:
+    #   To list all of the available engine versions for `aurora-mysql`
+    #   (Aurora MySQL), use the following command:
     #
     #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
     #   "DBEngineVersions[].EngineVersion"`
@@ -22015,8 +21999,8 @@ module Aws::RDS
     #   you don't specify an engine version, the default version for the
     #   database engine in the Amazon Web Services Region is used.
     #
-    #   To list all of the available engine versions for MySQL 5.7-compatible
-    #   and MySQL 8.0-compatible Aurora, use the following command:
+    #   To list all of the available engine versions for Aurora MySQL, use the
+    #   following command:
     #
     #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
     #   "DBEngineVersions[].EngineVersion"`
@@ -22198,8 +22182,8 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @option params [String] :engine_mode
-    #   The DB engine mode of the DB cluster, either `provisioned`,
-    #   `serverless`, `parallelquery`, `global`, or `multimaster`.
+    #   The DB engine mode of the DB cluster, either `provisioned` or
+    #   `serverless`.
     #
     #   For more information, see [ CreateDBCluster][1].
     #
@@ -22672,9 +22656,6 @@ module Aws::RDS
     #
     #   * `copy-on-write` - The new DB cluster is restored as a clone of the
     #     source DB cluster.
-    #
-    #   Constraints: You can't specify `copy-on-write` if the engine version
-    #   of the source DB cluster is earlier than 1.11.
     #
     #   If you don't specify a `RestoreType` value, then the new DB cluster
     #   is restored as a full copy of the source DB cluster.
@@ -27394,7 +27375,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.176.0'
+      context[:gem_version] = '1.177.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

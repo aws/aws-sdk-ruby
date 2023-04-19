@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2023-04-19)
+------------------
+
+* Feature - Provides support for "Snow" Storage class.
+
 1.120.1 (2023-04-05)
 ------------------
 

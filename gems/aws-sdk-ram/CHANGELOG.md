@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2023-04-19)
+------------------
+
+* Feature - This release adds support for customer managed permissions. Customer managed permissions enable customers to author and manage tailored permissions for resources shared using RAM.
+
 1.42.0 (2023-01-18)
 ------------------
 

@@ -856,6 +856,16 @@ module Aws::Comprehend
     #   errors.
     #   @return [Array<Types::ErrorsListItem>]
     #
+    # @!attribute [rw] warnings
+    #   Warnings detected while processing the input document. The response
+    #   includes a warning if there is a mismatch between the input document
+    #   type and the model type associated with the endpoint that you
+    #   specified. The response can also include warnings for individual
+    #   pages that have a mismatch.
+    #
+    #   The field is empty if the system generated no warnings.
+    #   @return [Array<Types::WarningsListItem>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ClassifyDocumentResponse AWS API Documentation
     #
     class ClassifyDocumentResponse < Struct.new(
@@ -863,7 +873,8 @@ module Aws::Comprehend
       :labels,
       :document_metadata,
       :document_type,
-      :errors)
+      :errors,
+      :warnings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1004,8 +1015,9 @@ module Aws::Comprehend
     #   @return [Types::DocumentClassifierInputDataConfig]
     #
     # @!attribute [rw] output_data_config
-    #   Enables the addition of output results configuration parameters for
-    #   custom classifier jobs.
+    #   Specifies the location for the output files from a custom classifier
+    #   job. This parameter is required for a request that creates a native
+    #   classifier model.
     #   @return [Types::DocumentClassifierOutputDataConfig]
     #
     # @!attribute [rw] client_request_token
@@ -2830,6 +2842,29 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # The location of the training documents. This parameter is required in
+    # a request to create a native classifier model.
+    #
+    # @!attribute [rw] s3_uri
+    #   The S3 URI location of the training documents specified in the S3Uri
+    #   CSV file.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_s3_uri
+    #   The S3 URI location of the test documents included in the TestS3Uri
+    #   CSV file. This field is not required if you do not specify a test
+    #   CSV file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierDocuments AWS API Documentation
+    #
+    class DocumentClassifierDocuments < Struct.new(
+      :s3_uri,
+      :test_s3_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information for filtering a list of document classifiers. You
     # can only specify one filtering parameter in a request. For more
     # information, see the `ListDocumentClassifiers` operation.
@@ -2936,6 +2971,45 @@ module Aws::Comprehend
     #   `AUGMENTED_MANIFEST`.
     #   @return [Array<Types::AugmentedManifestsListItem>]
     #
+    # @!attribute [rw] document_type
+    #   The type of input documents for training the model. Provide
+    #   plain-text documents to create a plain-text model, and provide
+    #   semi-structured documents to create a native model.
+    #   @return [String]
+    #
+    # @!attribute [rw] documents
+    #   The S3 location of the training documents. This parameter is
+    #   required in a request to create a native classifier model.
+    #   @return [Types::DocumentClassifierDocuments]
+    #
+    # @!attribute [rw] document_reader_config
+    #   Provides configuration parameters to override the default actions
+    #   for extracting text from PDF documents and image files.
+    #
+    #   By default, Amazon Comprehend performs the following actions to
+    #   extract text from files, based on the input file type:
+    #
+    #   * **Word files** - Amazon Comprehend parser extracts the text.
+    #
+    #   * **Digital PDF files** - Amazon Comprehend parser extracts the
+    #     text.
+    #
+    #   * **Image files and scanned PDF files** - Amazon Comprehend uses the
+    #     Amazon Textract `DetectDocumentText` API to extract the text.
+    #
+    #   `DocumentReaderConfig` does not apply to plain text files or Word
+    #   files.
+    #
+    #   For image files and PDF documents, you can override these default
+    #   actions using the fields listed below. For more information, see [
+    #   Setting text extraction options][1] in the Comprehend Developer
+    #   Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/idp-set-textract-options.html
+    #   @return [Types::DocumentReaderConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierInputDataConfig AWS API Documentation
     #
     class DocumentClassifierInputDataConfig < Struct.new(
@@ -2943,20 +3017,24 @@ module Aws::Comprehend
       :s3_uri,
       :test_s3_uri,
       :label_delimiter,
-      :augmented_manifests)
+      :augmented_manifests,
+      :document_type,
+      :documents,
+      :document_reader_config)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Provides output results configuration parameters for custom classifier
-    # jobs.
+    # Provide the location for output data from a custom classifier job.
+    # This field is mandatory if you are training a native classifier model.
     #
     # @!attribute [rw] s3_uri
     #   When you use the `OutputDataConfig` object while creating a custom
     #   classifier, you specify the Amazon S3 location where you want to
-    #   write the confusion matrix. The URI must be in the same Region as
-    #   the API endpoint that you are calling. The location is used as the
-    #   prefix for the actual location of this output file.
+    #   write the confusion matrix and other output files. The URI must be
+    #   in the same Region as the API endpoint that you are calling. The
+    #   location is used as the prefix for the actual location of this
+    #   output file.
     #
     #   When the custom classifier job is finished, the service creates the
     #   output file in a directory specific to the job. The `S3Uri` field
@@ -3009,9 +3087,13 @@ module Aws::Comprehend
     #
     # @!attribute [rw] status
     #   The status of the document classifier. If the status is `TRAINED`
-    #   the classifier is ready to use. If the status is `FAILED` you can
-    #   see additional information about why the classifier wasn't trained
-    #   in the `Message` field.
+    #   the classifier is ready to use. If the status is
+    #   `TRAINED_WITH_WARNINGS` the classifier training succeeded, but you
+    #   should review the warnings returned in the
+    #   `CreateDocumentClassifier` response.
+    #
+    #   If the status is `FAILED` you can see additional information about
+    #   why the classifier wasn't trained in the `Message` field.
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -3241,11 +3323,11 @@ module Aws::Comprehend
     #
     # For image files and PDF documents, you can override these default
     # actions using the fields listed below. For more information, see [
-    # Setting text extraction options][1].
+    # Setting text extraction options][1] in the Comprehend Developer Guide.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/detecting-cer.html#detecting-cer-pdf
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/idp-set-textract-options.html
     #
     # @!attribute [rw] document_read_action
     #   This field defines the Amazon Textract API operation that Amazon
@@ -8727,6 +8809,37 @@ module Aws::Comprehend
     class VpcConfig < Struct.new(
       :security_group_ids,
       :subnets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The system identified one of the following warnings while processing
+    # the input document:
+    #
+    # * The document to classify is plain text, but the classifier is a
+    #   native model.
+    #
+    # * The document to classify is semi-structured, but the classifier is a
+    #   plain-text model.
+    #
+    # @!attribute [rw] page
+    #   Page number in the input document.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] warn_code
+    #   The type of warning.
+    #   @return [String]
+    #
+    # @!attribute [rw] warn_message
+    #   Text message associated with the warning.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/WarningsListItem AWS API Documentation
+    #
+    class WarningsListItem < Struct.new(
+      :page,
+      :warn_code,
+      :warn_message)
       SENSITIVE = []
       include Aws::Structure
     end

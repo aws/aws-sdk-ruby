@@ -4554,7 +4554,7 @@ module Aws::ECS
     #
     #  * Linux platform version `1.4.0` or later.
     #
-    # ^
+    # * Windows platform version `1.0.0` or later.
     #
     #  </note>
     #
@@ -7146,18 +7146,23 @@ module Aws::ECS
     #   `awsvpcTrunking` is specified, the ENI limit for your Amazon ECS
     #   container instances is affected. If `containerInsights` is
     #   specified, the default setting for Amazon Web Services CloudWatch
-    #   Container Insights for your clusters is affected.
+    #   Container Insights for your clusters is affected. If
+    #   `tagResourceAuthorization` is specified, the opt-in option for
+    #   tagging resources on creation is affected. For information about the
+    #   opt-in timeline, see [Tagging authorization timeline][1] in the
+    #   *Amazon ECS Developer Guide*.
     #
     #   When you specify `fargateFIPSMode` for the `name` and `enabled` for
     #   the `value`, Fargate uses FIPS-140 compliant cryptographic
     #   algorithms on your tasks. For more information about FIPS-140
     #   compliance with Fargate, see [ Amazon Web Services Fargate Federal
-    #   Information Processing Standard (FIPS) 140-2 compliance][1] in the
+    #   Information Processing Standard (FIPS) 140-2 compliance][2] in the
     #   *Amazon Elastic Container Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2ContainerServiceDocs/build/server-root/AmazonECS/latest/developerguide/ecs-fips-compliance.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#tag-resources
+    #   [2]: https://docs.aws.amazon.com/AWSEC2ContainerServiceDocs/build/server-root/AmazonECS/latest/developerguide/ecs-fips-compliance.html
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -7198,7 +7203,14 @@ module Aws::ECS
     #   `containerInsights` is specified, the default setting for Amazon Web
     #   Services CloudWatch Container Insights for your clusters is
     #   affected. If `fargateFIPSMode` is specified, Fargate FIPS 140
-    #   compliance is affected.
+    #   compliance is affected. If `tagResourceAuthorization` is specified,
+    #   the opt-in option for tagging resources on creation is affected. For
+    #   information about the opt-in timeline, see [Tagging authorization
+    #   timeline][1] in the *Amazon ECS Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#tag-resources
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -7778,7 +7790,7 @@ module Aws::ECS
     #
     #    * Linux platform version `1.4.0` or later.
     #
-    #   ^
+    #   * Windows platform version `1.0.0` or later.
     #
     #    </note>
     #
@@ -9084,8 +9096,8 @@ module Aws::ECS
     #
     # @!attribute [rw] enable_execute_command
     #   Whether or not the execute command functionality is turned on for
-    #   the task. If `true`, this enables execute command functionality on
-    #   all containers in the task.
+    #   the task. If `true`, this turns on the execute command functionality
+    #   on all containers in the task.
     #   @return [Boolean]
     #
     # @!attribute [rw] group

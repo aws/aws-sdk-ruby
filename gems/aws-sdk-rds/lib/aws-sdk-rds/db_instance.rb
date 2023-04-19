@@ -463,14 +463,12 @@ module Aws::RDS
     # (IAM) accounts to database accounts is enabled, and otherwise false.
     #
     # IAM database authentication can be enabled for the following database
-    # engines
+    # engines:
     #
-    # * For MySQL 5.6, minor version 5.6.34 or higher
+    # * For MySQL 5.7, minor version 5.7.16 or higher.
     #
-    # * For MySQL 5.7, minor version 5.7.16 or higher
-    #
-    # * Aurora 5.6 or higher. To enable IAM database authentication for
-    #   Aurora, see DBCluster Type.
+    # * For Amazon Aurora, all versions of Aurora MySQL and Aurora
+    #   PostgreSQL.
     # @return [Boolean]
     def iam_database_authentication_enabled
       data[:iam_database_authentication_enabled]
@@ -1216,12 +1214,9 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora` (for MySQL 5.6-compatible Aurora)
+    #   * `aurora-mysql` (for Aurora MySQL DB instances)
     #
-    #   * `aurora-mysql` (for MySQL 5.7-compatible and MySQL 8.0-compatible
-    #     Aurora)
-    #
-    #   * `aurora-postgresql`
+    #   * `aurora-postgresql` (for Aurora PostgreSQL DB instances)
     #
     #   * `custom-oracle-ee (for RDS Custom for Oracle DB instances)`
     #

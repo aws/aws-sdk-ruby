@@ -21,6 +21,18 @@ module Aws::S3Control
       access_point_name = parameters.access_point_name
       use_arn_region = parameters.use_arn_region
       if Aws::Endpoints::Matchers.set?(region)
+        if Aws::Endpoints::Matchers.string_equals?(region, "snow") && Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint))
+          if (partition_result = Aws::Endpoints::Matchers.aws_partition(region))
+            if Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
+              raise ArgumentError, "S3 Snow does not support Dual-stack"
+            end
+            if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
+              raise ArgumentError, "S3 Snow does not support FIPS"
+            end
+            return Aws::Endpoints::Endpoint.new(url: "#{url['scheme']}://#{url['authority']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"#{region}"}]})
+          end
+          raise ArgumentError, "A valid partition could not be determined"
+        end
         if Aws::Endpoints::Matchers.set?(outpost_id)
           if (partition_result = Aws::Endpoints::Matchers.aws_partition(region))
             if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-cn")

@@ -765,6 +765,7 @@ module Aws::Comprehend
     #   * {Types::ClassifyDocumentResponse#document_metadata #document_metadata} => Types::DocumentMetadata
     #   * {Types::ClassifyDocumentResponse#document_type #document_type} => Array&lt;Types::DocumentTypeListItem&gt;
     #   * {Types::ClassifyDocumentResponse#errors #errors} => Array&lt;Types::ErrorsListItem&gt;
+    #   * {Types::ClassifyDocumentResponse#warnings #warnings} => Array&lt;Types::WarningsListItem&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -800,6 +801,10 @@ module Aws::Comprehend
     #   resp.errors[0].page #=> Integer
     #   resp.errors[0].error_code #=> String, one of "TEXTRACT_BAD_PAGE", "TEXTRACT_PROVISIONED_THROUGHPUT_EXCEEDED", "PAGE_CHARACTERS_EXCEEDED", "PAGE_SIZE_EXCEEDED", "INTERNAL_SERVER_ERROR"
     #   resp.errors[0].error_message #=> String
+    #   resp.warnings #=> Array
+    #   resp.warnings[0].page #=> Integer
+    #   resp.warnings[0].warn_code #=> String, one of "INFERENCING_PLAINTEXT_WITH_NATIVE_TRAINED_MODEL", "INFERENCING_NATIVE_DOCUMENT_WITH_PLAINTEXT_TRAINED_MODEL"
+    #   resp.warnings[0].warn_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ClassifyDocument AWS API Documentation
     #
@@ -947,14 +952,13 @@ module Aws::Comprehend
 
     # Creates a new document classifier that you can use to categorize
     # documents. To create a classifier, you provide a set of training
-    # documents that labeled with the categories that you want to use. After
-    # the classifier is trained you can use it to categorize a set of
-    # labeled documents into the categories. For more information, see
-    # [Document Classification][1] in the Comprehend Developer Guide.
+    # documents that are labeled with the categories that you want to use.
+    # For more information, see [Training classifier models][1] in the
+    # Comprehend Developer Guide.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-document-classification.html
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/training-classifier-model.html
     #
     # @option params [required, String] :document_classifier_name
     #   The name of the document classifier.
@@ -980,8 +984,9 @@ module Aws::Comprehend
     #   Specifies the format and location of the input data for the job.
     #
     # @option params [Types::DocumentClassifierOutputDataConfig] :output_data_config
-    #   Enables the addition of output results configuration parameters for
-    #   custom classifier jobs.
+    #   Specifies the location for the output files from a custom classifier
+    #   job. This parameter is required for a request that creates a native
+    #   classifier model.
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
@@ -1082,6 +1087,16 @@ module Aws::Comprehend
     #           document_type: "PLAIN_TEXT_DOCUMENT", # accepts PLAIN_TEXT_DOCUMENT, SEMI_STRUCTURED_DOCUMENT
     #         },
     #       ],
+    #       document_type: "PLAIN_TEXT_DOCUMENT", # accepts PLAIN_TEXT_DOCUMENT, SEMI_STRUCTURED_DOCUMENT
+    #       documents: {
+    #         s3_uri: "S3Uri", # required
+    #         test_s3_uri: "S3Uri",
+    #       },
+    #       document_reader_config: {
+    #         document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #         document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #         feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #       },
     #     },
     #     output_data_config: {
     #       s3_uri: "S3Uri",
@@ -1760,6 +1775,13 @@ module Aws::Comprehend
     #   resp.document_classifier_properties.input_data_config.augmented_manifests[0].annotation_data_s3_uri #=> String
     #   resp.document_classifier_properties.input_data_config.augmented_manifests[0].source_documents_s3_uri #=> String
     #   resp.document_classifier_properties.input_data_config.augmented_manifests[0].document_type #=> String, one of "PLAIN_TEXT_DOCUMENT", "SEMI_STRUCTURED_DOCUMENT"
+    #   resp.document_classifier_properties.input_data_config.document_type #=> String, one of "PLAIN_TEXT_DOCUMENT", "SEMI_STRUCTURED_DOCUMENT"
+    #   resp.document_classifier_properties.input_data_config.documents.s3_uri #=> String
+    #   resp.document_classifier_properties.input_data_config.documents.test_s3_uri #=> String
+    #   resp.document_classifier_properties.input_data_config.document_reader_config.document_read_action #=> String, one of "TEXTRACT_DETECT_DOCUMENT_TEXT", "TEXTRACT_ANALYZE_DOCUMENT"
+    #   resp.document_classifier_properties.input_data_config.document_reader_config.document_read_mode #=> String, one of "SERVICE_DEFAULT", "FORCE_DOCUMENT_READ_ACTION"
+    #   resp.document_classifier_properties.input_data_config.document_reader_config.feature_types #=> Array
+    #   resp.document_classifier_properties.input_data_config.document_reader_config.feature_types[0] #=> String, one of "TABLES", "FORMS"
     #   resp.document_classifier_properties.output_data_config.s3_uri #=> String
     #   resp.document_classifier_properties.output_data_config.kms_key_id #=> String
     #   resp.document_classifier_properties.output_data_config.flywheel_stats_s3_prefix #=> String
@@ -3201,6 +3223,13 @@ module Aws::Comprehend
     #   resp.document_classifier_properties_list[0].input_data_config.augmented_manifests[0].annotation_data_s3_uri #=> String
     #   resp.document_classifier_properties_list[0].input_data_config.augmented_manifests[0].source_documents_s3_uri #=> String
     #   resp.document_classifier_properties_list[0].input_data_config.augmented_manifests[0].document_type #=> String, one of "PLAIN_TEXT_DOCUMENT", "SEMI_STRUCTURED_DOCUMENT"
+    #   resp.document_classifier_properties_list[0].input_data_config.document_type #=> String, one of "PLAIN_TEXT_DOCUMENT", "SEMI_STRUCTURED_DOCUMENT"
+    #   resp.document_classifier_properties_list[0].input_data_config.documents.s3_uri #=> String
+    #   resp.document_classifier_properties_list[0].input_data_config.documents.test_s3_uri #=> String
+    #   resp.document_classifier_properties_list[0].input_data_config.document_reader_config.document_read_action #=> String, one of "TEXTRACT_DETECT_DOCUMENT_TEXT", "TEXTRACT_ANALYZE_DOCUMENT"
+    #   resp.document_classifier_properties_list[0].input_data_config.document_reader_config.document_read_mode #=> String, one of "SERVICE_DEFAULT", "FORCE_DOCUMENT_READ_ACTION"
+    #   resp.document_classifier_properties_list[0].input_data_config.document_reader_config.feature_types #=> Array
+    #   resp.document_classifier_properties_list[0].input_data_config.document_reader_config.feature_types[0] #=> String, one of "TABLES", "FORMS"
     #   resp.document_classifier_properties_list[0].output_data_config.s3_uri #=> String
     #   resp.document_classifier_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.document_classifier_properties_list[0].output_data_config.flywheel_stats_s3_prefix #=> String
@@ -5786,7 +5815,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

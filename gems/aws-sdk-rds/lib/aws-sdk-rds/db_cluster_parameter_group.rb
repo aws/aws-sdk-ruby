@@ -211,11 +211,11 @@ module Aws::RDS
     #
     #   **Aurora MySQL**
     #
-    #   Example: `aurora5.6`, `aurora-mysql5.7`, `aurora-mysql8.0`
+    #   Example: `aurora-mysql5.7`, `aurora-mysql8.0`
     #
     #   **Aurora PostgreSQL**
     #
-    #   Example: `aurora-postgresql9.6`
+    #   Example: `aurora-postgresql14`
     #
     #   **RDS for MySQL**
     #
@@ -244,10 +244,7 @@ module Aws::RDS
     #
     #   The following are the valid DB engine values:
     #
-    #   * `aurora` (for MySQL 5.6-compatible Aurora)
-    #
-    #   * `aurora-mysql` (for MySQL 5.7-compatible and MySQL 8.0-compatible
-    #     Aurora)
+    #   * `aurora-mysql`
     #
     #   * `aurora-postgresql`
     #

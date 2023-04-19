@@ -590,8 +590,8 @@ module Aws::RDS
     #   you don't specify an engine version, the default version for the
     #   database engine in the Amazon Web Services Region is used.
     #
-    #   To list all of the available engine versions for MySQL 5.7-compatible
-    #   and MySQL 8.0-compatible Aurora, use the following command:
+    #   To list all of the available engine versions for Aurora MySQL, use the
+    #   following command:
     #
     #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
     #   "DBEngineVersions[].EngineVersion"`
@@ -762,8 +762,8 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # @option options [String] :engine_mode
-    #   The DB engine mode of the DB cluster, either `provisioned`,
-    #   `serverless`, `parallelquery`, `global`, or `multimaster`.
+    #   The DB engine mode of the DB cluster, either `provisioned` or
+    #   `serverless`.
     #
     #   For more information, see [ CreateDBCluster][1].
     #

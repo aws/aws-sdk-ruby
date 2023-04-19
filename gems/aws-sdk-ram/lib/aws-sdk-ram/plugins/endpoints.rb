@@ -62,8 +62,16 @@ module Aws::RAM
             Aws::RAM::Endpoints::AssociateResourceShare.build(context)
           when :associate_resource_share_permission
             Aws::RAM::Endpoints::AssociateResourceSharePermission.build(context)
+          when :create_permission
+            Aws::RAM::Endpoints::CreatePermission.build(context)
+          when :create_permission_version
+            Aws::RAM::Endpoints::CreatePermissionVersion.build(context)
           when :create_resource_share
             Aws::RAM::Endpoints::CreateResourceShare.build(context)
+          when :delete_permission
+            Aws::RAM::Endpoints::DeletePermission.build(context)
+          when :delete_permission_version
+            Aws::RAM::Endpoints::DeletePermissionVersion.build(context)
           when :delete_resource_share
             Aws::RAM::Endpoints::DeleteResourceShare.build(context)
           when :disassociate_resource_share
@@ -84,22 +92,32 @@ module Aws::RAM
             Aws::RAM::Endpoints::GetResourceShares.build(context)
           when :list_pending_invitation_resources
             Aws::RAM::Endpoints::ListPendingInvitationResources.build(context)
+          when :list_permission_associations
+            Aws::RAM::Endpoints::ListPermissionAssociations.build(context)
           when :list_permission_versions
             Aws::RAM::Endpoints::ListPermissionVersions.build(context)
           when :list_permissions
             Aws::RAM::Endpoints::ListPermissions.build(context)
           when :list_principals
             Aws::RAM::Endpoints::ListPrincipals.build(context)
+          when :list_replace_permission_associations_work
+            Aws::RAM::Endpoints::ListReplacePermissionAssociationsWork.build(context)
           when :list_resource_share_permissions
             Aws::RAM::Endpoints::ListResourceSharePermissions.build(context)
           when :list_resource_types
             Aws::RAM::Endpoints::ListResourceTypes.build(context)
           when :list_resources
             Aws::RAM::Endpoints::ListResources.build(context)
+          when :promote_permission_created_from_policy
+            Aws::RAM::Endpoints::PromotePermissionCreatedFromPolicy.build(context)
           when :promote_resource_share_created_from_policy
             Aws::RAM::Endpoints::PromoteResourceShareCreatedFromPolicy.build(context)
           when :reject_resource_share_invitation
             Aws::RAM::Endpoints::RejectResourceShareInvitation.build(context)
+          when :replace_permission_associations
+            Aws::RAM::Endpoints::ReplacePermissionAssociations.build(context)
+          when :set_default_permission_version
+            Aws::RAM::Endpoints::SetDefaultPermissionVersion.build(context)
           when :tag_resource
             Aws::RAM::Endpoints::TagResource.build(context)
           when :untag_resource

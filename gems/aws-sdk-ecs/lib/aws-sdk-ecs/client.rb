@@ -1887,13 +1887,13 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_account_setting({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization
     #     principal_arn: "String",
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
     #
@@ -4534,7 +4534,7 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_account_settings({
-    #     name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode
+    #     name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization
     #     value: "String",
     #     principal_arn: "String",
     #     effective_settings: false,
@@ -4545,7 +4545,7 @@ module Aws::ECS
     # @example Response structure
     #
     #   resp.settings #=> Array
-    #   resp.settings[0].name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode"
+    #   resp.settings[0].name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization"
     #   resp.settings[0].value #=> String
     #   resp.settings[0].principal_arn #=> String
     #   resp.next_token #=> String
@@ -5440,11 +5440,21 @@ module Aws::ECS
     # see [CloudWatch Container Insights][3] in the *Amazon Elastic
     # Container Service Developer Guide*.
     #
+    # Amazon ECS is introducing tagging authorization for resource creation.
+    # Users must have permissions for actions that create the resource, such
+    # as `ecsCreateCluster`. If tags are specified when you create a
+    # resource, Amazon Web Services performs additional authorization to
+    # verify if users or roles have permissions to create tags. Therefore,
+    # you must grant explicit permissions to use the `ecs:TagResource`
+    # action. For more information, see [Grant permission to tag resources
+    # on creation][4] in the *Amazon ECS Developer Guide*.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html
     # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html
     # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html
+    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/supported-iam-actions-tagging.html
     #
     # @option params [required, String] :name
     #   The Amazon ECS resource name for which to modify the account setting.
@@ -5458,7 +5468,14 @@ module Aws::ECS
     #   `containerInsights` is specified, the default setting for Amazon Web
     #   Services CloudWatch Container Insights for your clusters is affected.
     #   If `fargateFIPSMode` is specified, Fargate FIPS 140 compliance is
-    #   affected.
+    #   affected. If `tagResourceAuthorization` is specified, the opt-in
+    #   option for tagging resources on creation is affected. For information
+    #   about the opt-in timeline, see [Tagging authorization timeline][1] in
+    #   the *Amazon ECS Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#tag-resources
     #
     # @option params [required, String] :value
     #   The account setting value for the specified principal ARN. Accepted
@@ -5525,14 +5542,14 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_account_setting({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization
     #     value: "String", # required
     #     principal_arn: "String",
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
     #
@@ -5559,18 +5576,22 @@ module Aws::ECS
     #   `awsvpcTrunking` is specified, the ENI limit for your Amazon ECS
     #   container instances is affected. If `containerInsights` is specified,
     #   the default setting for Amazon Web Services CloudWatch Container
-    #   Insights for your clusters is affected.
+    #   Insights for your clusters is affected. If `tagResourceAuthorization`
+    #   is specified, the opt-in option for tagging resources on creation is
+    #   affected. For information about the opt-in timeline, see [Tagging
+    #   authorization timeline][1] in the *Amazon ECS Developer Guide*.
     #
     #   When you specify `fargateFIPSMode` for the `name` and `enabled` for
     #   the `value`, Fargate uses FIPS-140 compliant cryptographic algorithms
     #   on your tasks. For more information about FIPS-140 compliance with
     #   Fargate, see [ Amazon Web Services Fargate Federal Information
-    #   Processing Standard (FIPS) 140-2 compliance][1] in the *Amazon Elastic
+    #   Processing Standard (FIPS) 140-2 compliance][2] in the *Amazon Elastic
     #   Container Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2ContainerServiceDocs/build/server-root/AmazonECS/latest/developerguide/ecs-fips-compliance.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#tag-resources
+    #   [2]: https://docs.aws.amazon.com/AWSEC2ContainerServiceDocs/build/server-root/AmazonECS/latest/developerguide/ecs-fips-compliance.html
     #
     # @option params [required, String] :value
     #   The account setting value for the specified principal ARN. Accepted
@@ -5604,13 +5625,13 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_account_setting_default({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization
     #     value: "String", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
     #
@@ -6336,7 +6357,7 @@ module Aws::ECS
     #
     #    * Linux platform version `1.4.0` or later.
     #
-    #   ^
+    #   * Windows platform version `1.0.0` or later.
     #
     #    </note>
     #
@@ -7382,8 +7403,8 @@ module Aws::ECS
     #
     # @option params [Boolean] :enable_execute_command
     #   Whether or not the execute command functionality is turned on for the
-    #   task. If `true`, this enables execute command functionality on all
-    #   containers in the task.
+    #   task. If `true`, this turns on the execute command functionality on
+    #   all containers in the task.
     #
     # @option params [String] :group
     #   The name of the task group to associate with the task. The default
@@ -9683,7 +9704,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.114.0'
+      context[:gem_version] = '1.115.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

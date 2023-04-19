@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2023-04-19)
+------------------
+
+* Feature - Provides support for overriding endpoint when region is "snow". This will enable bucket APIs for Amazon S3 Compatible storage on Snow Family devices.
+
 1.62.0 (2023-03-15)
 ------------------
 

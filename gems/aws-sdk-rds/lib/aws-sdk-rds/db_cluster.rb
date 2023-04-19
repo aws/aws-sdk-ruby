@@ -1981,17 +1981,10 @@ module Aws::RDS
     #   all replicas must be running an engine version that's the same or
     #   later than the version you specify.
     #
-    #   To list all of the available engine versions for Aurora MySQL version
-    #   2 (5.7-compatible) and version 3 (MySQL 8.0-compatible), use the
+    #   To list all of the available engine versions for Aurora MySQL, use the
     #   following command:
     #
     #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
-    #   "DBEngineVersions[].EngineVersion"`
-    #
-    #   To list all of the available engine versions for MySQL 5.6-compatible
-    #   Aurora, use the following command:
-    #
-    #   `aws rds describe-db-engine-versions --engine aurora --query
     #   "DBEngineVersions[].EngineVersion"`
     #
     #   To list all of the available engine versions for Aurora PostgreSQL,
@@ -2459,9 +2452,6 @@ module Aws::RDS
     #
     #   * `copy-on-write` - The new DB cluster is restored as a clone of the
     #     source DB cluster.
-    #
-    #   Constraints: You can't specify `copy-on-write` if the engine version
-    #   of the source DB cluster is earlier than 1.11.
     #
     #   If you don't specify a `RestoreType` value, then the new DB cluster
     #   is restored as a full copy of the source DB cluster.

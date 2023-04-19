@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2023-04-19)
+------------------
+
+* Feature - Update that adds SDK code examples for Security Hub
+
 1.79.0 (2023-03-27)
 ------------------
 

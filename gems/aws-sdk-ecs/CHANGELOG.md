@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2023-04-19)
+------------------
+
+* Feature - This release supports the Account Setting "TagResourceAuthorization" that allows for enhanced Tagging security controls.
+
 1.114.0 (2023-04-14)
 ------------------
 

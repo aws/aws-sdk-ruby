@@ -225,7 +225,7 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] force_overwrite_replica_secret
     #   Specifies whether to overwrite a secret with the same name in the
-    #   destination Region.
+    #   destination Region. By default, secrets aren't overwritten.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/CreateSecretRequest AWS API Documentation
@@ -350,14 +350,15 @@ module Aws::SecretsManager
     #   The number of days from 7 to 30 that Secrets Manager waits before
     #   permanently deleting the secret. You can't use both this parameter
     #   and `ForceDeleteWithoutRecovery` in the same call. If you don't use
-    #   either, then Secrets Manager defaults to a 30 day recovery window.
+    #   either, then by default Secrets Manager uses a 30 day recovery
+    #   window.
     #   @return [Integer]
     #
     # @!attribute [rw] force_delete_without_recovery
     #   Specifies whether to delete the secret without any recovery window.
     #   You can't use both this parameter and `RecoveryWindowInDays` in the
-    #   same call. If you don't use either, then Secrets Manager defaults
-    #   to a 30 day recovery window.
+    #   same call. If you don't use either, then by default Secrets Manager
+    #   uses a 30 day recovery window.
     #
     #   Secrets Manager performs the actual deletion with an asynchronous
     #   background process, so there might be a short delay before the
@@ -993,7 +994,8 @@ module Aws::SecretsManager
     #   Specifies whether to include versions of secrets that don't have
     #   any staging labels attached to them. Versions without staging labels
     #   are considered deprecated and are subject to deletion by Secrets
-    #   Manager.
+    #   Manager. By default, versions without staging labels aren't
+    #   included.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ListSecretVersionIdsRequest AWS API Documentation
@@ -1039,7 +1041,8 @@ module Aws::SecretsManager
     end
 
     # @!attribute [rw] include_planned_deletion
-    #   Specifies whether to include secrets scheduled for deletion.
+    #   Specifies whether to include secrets scheduled for deletion. By
+    #   default, secrets scheduled for deletion aren't included.
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
@@ -1161,7 +1164,7 @@ module Aws::SecretsManager
     # @!attribute [rw] block_public_policy
     #   Specifies whether to block resource-based policies that allow broad
     #   access to the secret, for example those that use a wildcard for the
-    #   principal.
+    #   principal. By default, public policies aren't blocked.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/PutResourcePolicyRequest AWS API Documentation
@@ -1395,7 +1398,7 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] force_overwrite_replica_secret
     #   Specifies whether to overwrite a secret with the same name in the
-    #   destination Region.
+    #   destination Region. By default, secrets aren't overwritten.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ReplicateSecretToRegionsRequest AWS API Documentation
@@ -1593,8 +1596,7 @@ module Aws::SecretsManager
     #   Lambda rotation function. The test creates an `AWSPENDING` version
     #   of the secret and then removes it.
     #
-    #   If you don't specify this value, then by default, Secrets Manager
-    #   rotates the secret immediately.
+    #   By default, Secrets Manager rotates the secret immediately.
     #
     #
     #

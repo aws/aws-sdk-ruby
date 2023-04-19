@@ -2816,5 +2816,87 @@ module Aws::S3Control
       end
     end
 
+    context 'S3 Snow Control with bucket' do
+      let(:expected) do
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"snow", "disableDoubleEncoding"=>true}]}, "url"=>"https://10.0.1.12:433"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"snow", :bucket=>"bucketName", :endpoint=>"https://10.0.1.12:433", :use_fips=>false, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'S3 Snow Control without bucket' do
+      let(:expected) do
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"snow", "disableDoubleEncoding"=>true}]}, "url"=>"https://10.0.1.12:433"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"snow", :endpoint=>"https://10.0.1.12:433", :use_fips=>false, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'S3 Snow Control with bucket and without port' do
+      let(:expected) do
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"snow", "disableDoubleEncoding"=>true}]}, "url"=>"https://10.0.1.12"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"snow", :bucket=>"bucketName", :endpoint=>"https://10.0.1.12", :use_fips=>false, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'S3 Snow Control with bucket and with DNS' do
+      let(:expected) do
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"snow", "disableDoubleEncoding"=>true}]}, "url"=>"http://s3snow.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"snow", :bucket=>"bucketName", :endpoint=>"http://s3snow.com", :use_fips=>false, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'S3 Snow Control with FIPS enabled' do
+      let(:expected) do
+        {"error"=>"S3 Snow does not support FIPS"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"snow", :bucket=>"bucketName", :endpoint=>"https://10.0.1.12:433", :use_fips=>true, :use_dual_stack=>false, :accelerate=>false})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'S3 Snow Control with Dual-stack enabled' do
+      let(:expected) do
+        {"error"=>"S3 Snow does not support Dual-stack"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"snow", :bucket=>"bucketName", :endpoint=>"https://10.0.1.12:433", :use_fips=>false, :use_dual_stack=>true, :accelerate=>false})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
   end
 end

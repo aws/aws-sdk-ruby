@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.177.0 (2023-04-19)
+------------------
+
+* Feature - Adds support for the ImageId parameter of CreateCustomDBEngineVersion to RDS Custom for Oracle
+
 1.176.0 (2023-04-14)
 ------------------
 

@@ -688,7 +688,7 @@ module Aws::SecretsManager
     #
     # @option params [Boolean] :force_overwrite_replica_secret
     #   Specifies whether to overwrite a secret with the same name in the
-    #   destination Region.
+    #   destination Region. By default, secrets aren't overwritten.
     #
     # @return [Types::CreateSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -895,13 +895,13 @@ module Aws::SecretsManager
     #   The number of days from 7 to 30 that Secrets Manager waits before
     #   permanently deleting the secret. You can't use both this parameter
     #   and `ForceDeleteWithoutRecovery` in the same call. If you don't use
-    #   either, then Secrets Manager defaults to a 30 day recovery window.
+    #   either, then by default Secrets Manager uses a 30 day recovery window.
     #
     # @option params [Boolean] :force_delete_without_recovery
     #   Specifies whether to delete the secret without any recovery window.
     #   You can't use both this parameter and `RecoveryWindowInDays` in the
-    #   same call. If you don't use either, then Secrets Manager defaults to
-    #   a 30 day recovery window.
+    #   same call. If you don't use either, then by default Secrets Manager
+    #   uses a 30 day recovery window.
     #
     #   Secrets Manager performs the actual deletion with an asynchronous
     #   background process, so there might be a short delay before the secret
@@ -1456,6 +1456,7 @@ module Aws::SecretsManager
     #   Specifies whether to include versions of secrets that don't have any
     #   staging labels attached to them. Versions without staging labels are
     #   considered deprecated and are subject to deletion by Secrets Manager.
+    #   By default, versions without staging labels aren't included.
     #
     # @return [Types::ListSecretVersionIdsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1568,7 +1569,8 @@ module Aws::SecretsManager
     # [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [Boolean] :include_planned_deletion
-    #   Specifies whether to include secrets scheduled for deletion.
+    #   Specifies whether to include secrets scheduled for deletion. By
+    #   default, secrets scheduled for deletion aren't included.
     #
     # @option params [Integer] :max_results
     #   The number of results to include in the response.
@@ -1727,7 +1729,7 @@ module Aws::SecretsManager
     # @option params [Boolean] :block_public_policy
     #   Specifies whether to block resource-based policies that allow broad
     #   access to the secret, for example those that use a wildcard for the
-    #   principal.
+    #   principal. By default, public policies aren't blocked.
     #
     # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2043,12 +2045,40 @@ module Aws::SecretsManager
     #
     # @option params [Boolean] :force_overwrite_replica_secret
     #   Specifies whether to overwrite a secret with the same name in the
-    #   destination Region.
+    #   destination Region. By default, secrets aren't overwritten.
     #
     # @return [Types::ReplicateSecretToRegionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ReplicateSecretToRegionsResponse#arn #arn} => String
     #   * {Types::ReplicateSecretToRegionsResponse#replication_status #replication_status} => Array&lt;Types::ReplicationStatusType&gt;
+    #
+    #
+    # @example Example: Example
+    #
+    #   # The following example replicates a secret to eu-west-3. The replica is encrypted with the AWS managed key
+    #   # aws/secretsmanager.
+    #
+    #   resp = client.replicate_secret_to_regions({
+    #     add_replica_regions: [
+    #       {
+    #         region: "eu-west-3", 
+    #       }, 
+    #     ], 
+    #     force_overwrite_replica_secret: true, 
+    #     secret_id: "MyTestSecret", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestSecret-1a2b3c", 
+    #     replication_status: [
+    #       {
+    #         kms_key_id: "alias/aws/secretsmanager", 
+    #         region: "eu-west-3", 
+    #         status: "InProgress", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2252,8 +2282,7 @@ module Aws::SecretsManager
     #   Lambda rotation function. The test creates an `AWSPENDING` version of
     #   the secret and then removes it.
     #
-    #   If you don't specify this value, then by default, Secrets Manager
-    #   rotates the secret immediately.
+    #   By default, Secrets Manager rotates the secret immediately.
     #
     #
     #
@@ -2968,9 +2997,10 @@ module Aws::SecretsManager
     # because it might be logged. For more information, see [Logging Secrets
     # Manager events with CloudTrail][2].
     #
-    # <b>Required permissions: </b> `secretsmanager:ValidateResourcePolicy`.
-    # For more information, see [ IAM policy actions for Secrets Manager][3]
-    # and [Authentication and access control in Secrets Manager][4].
+    # <b>Required permissions: </b> `secretsmanager:ValidateResourcePolicy`
+    # and `secretsmanager:PutResourcePolicy`. For more information, see [
+    # IAM policy actions for Secrets Manager][3] and [Authentication and
+    # access control in Secrets Manager][4].
     #
     #
     #
@@ -3050,7 +3080,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

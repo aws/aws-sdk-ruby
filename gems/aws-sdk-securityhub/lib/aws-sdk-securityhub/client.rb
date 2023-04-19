@@ -388,6 +388,18 @@ module Aws::SecurityHub
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To accept an invitation be a member account
+    #
+    #   # The following example demonstrates how an account can accept an invitation from the Security Hub administrator account
+    #   # to be a member account. This operation is applicable only to member accounts that are not added through AWS
+    #   # Organizations.
+    #
+    #   resp = client.accept_administrator_invitation({
+    #     administrator_id: "123456789012", 
+    #     invitation_id: "7ab938c5d52d7904ad09f9e7c20cc4eb", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.accept_administrator_invitation({
@@ -468,6 +480,30 @@ module Aws::SecurityHub
     #
     #   * {Types::BatchDisableStandardsResponse#standards_subscriptions #standards_subscriptions} => Array&lt;Types::StandardsSubscription&gt;
     #
+    #
+    # @example Example: To disable one or more security standards
+    #
+    #   # The following example disables a security standard in Security Hub.
+    #
+    #   resp = client.batch_disable_standards({
+    #     standards_subscription_arns: [
+    #       "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     standards_subscriptions: [
+    #       {
+    #         standards_arn: "arn:aws:securityhub:eu-central-1::standards/pci-dss/v/3.2.1", 
+    #         standards_input: {
+    #         }, 
+    #         standards_status: "DELETING", 
+    #         standards_subscription_arn: "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_disable_standards({
@@ -509,6 +545,32 @@ module Aws::SecurityHub
     # @return [Types::BatchEnableStandardsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::BatchEnableStandardsResponse#standards_subscriptions #standards_subscriptions} => Array&lt;Types::StandardsSubscription&gt;
+    #
+    #
+    # @example Example: To import security findings from a third party provider to Security Hub
+    #
+    #   # The following example imports findings from a third party provider to Security Hub.
+    #
+    #   resp = client.batch_enable_standards({
+    #     standards_subscription_requests: [
+    #       {
+    #         standards_arn: "arn:aws:securityhub:us-west-1::standards/pci-dss/v/3.2.1", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     standards_subscriptions: [
+    #       {
+    #         standards_arn: "arn:aws:securityhub:us-west-1::standards/pci-dss/v/3.2.1", 
+    #         standards_input: {
+    #         }, 
+    #         standards_status: "PENDING", 
+    #         standards_subscription_arn: "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -710,6 +772,52 @@ module Aws::SecurityHub
     #   * {Types::BatchImportFindingsResponse#success_count #success_count} => Integer
     #   * {Types::BatchImportFindingsResponse#failed_findings #failed_findings} => Array&lt;Types::ImportFindingsError&gt;
     #
+    #
+    # @example Example: To import security findings from a third party provider to Security Hub
+    #
+    #   # The following example imports findings from a third party provider to Security Hub.
+    #
+    #   resp = client.batch_import_findings({
+    #     findings: [
+    #       {
+    #         aws_account_id: "123456789012", 
+    #         created_at: "2020-05-27T17:05:54.832Z", 
+    #         description: "Vulnerability in a CloudTrail trail", 
+    #         finding_provider_fields: {
+    #           severity: {
+    #             label: "LOW", 
+    #             original: "10", 
+    #           }, 
+    #           types: [
+    #             "Software and Configuration Checks/Vulnerabilities/CVE", 
+    #           ], 
+    #         }, 
+    #         generator_id: "TestGeneratorId", 
+    #         id: "Id1", 
+    #         product_arn: "arn:aws:securityhub:us-west-1:123456789012:product/123456789012/default", 
+    #         resources: [
+    #           {
+    #             id: "arn:aws:cloudtrail:us-west-1:123456789012:trail/TrailName", 
+    #             partition: "aws", 
+    #             region: "us-west-1", 
+    #             type: "AwsCloudTrailTrail", 
+    #           }, 
+    #         ], 
+    #         schema_version: "2018-10-08", 
+    #         title: "CloudTrail trail vulnerability", 
+    #         updated_at: "2020-06-02T16:05:54.832Z", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     failed_count: 123, 
+    #     failed_findings: [
+    #     ], 
+    #     success_count: 123, 
+    #   }
+    #
     # @example Response structure
     #
     #   resp.failed_count #=> Integer
@@ -844,6 +952,66 @@ module Aws::SecurityHub
     #   * {Types::BatchUpdateFindingsResponse#processed_findings #processed_findings} => Array&lt;Types::AwsSecurityFindingIdentifier&gt;
     #   * {Types::BatchUpdateFindingsResponse#unprocessed_findings #unprocessed_findings} => Array&lt;Types::BatchUpdateFindingsUnprocessedFinding&gt;
     #
+    #
+    # @example Example: To update Security Hub findings
+    #
+    #   # The following example updates Security Hub findings. The finding identifier parameter specifies which findings to
+    #   # update. Only specific finding fields can be updated with this operation.
+    #
+    #   resp = client.batch_update_findings({
+    #     confidence: 80, 
+    #     criticality: 80, 
+    #     finding_identifiers: [
+    #       {
+    #         id: "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1/PCI.Lambda.2/finding/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #         product_arn: "arn:aws:securityhub:us-west-1::product/aws/securityhub", 
+    #       }, 
+    #       {
+    #         id: "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1/PCI.Lambda.2/finding/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222", 
+    #         product_arn: "arn:aws:securityhub:us-west-1::product/aws/securityhub", 
+    #       }, 
+    #     ], 
+    #     note: {
+    #       text: "Known issue that is not a risk.", 
+    #       updated_by: "user1", 
+    #     }, 
+    #     related_findings: [
+    #       {
+    #         id: "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1/PCI.Lambda.2/finding/a1b2c3d4-5678-90ab-cdef-EXAMPLE33333", 
+    #         product_arn: "arn:aws:securityhub:us-west-1::product/aws/securityhub", 
+    #       }, 
+    #     ], 
+    #     severity: {
+    #       label: "LOW", 
+    #     }, 
+    #     types: [
+    #       "Software and Configuration Checks/Vulnerabilities/CVE", 
+    #     ], 
+    #     user_defined_fields: {
+    #       "reviewedByCio" => "true", 
+    #     }, 
+    #     verification_state: "TRUE_POSITIVE", 
+    #     workflow: {
+    #       status: "RESOLVED", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     processed_findings: [
+    #       {
+    #         id: "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1/PCI.Lambda.2/finding/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #         product_arn: "arn:aws:securityhub:us-west-1::product/aws/securityhub", 
+    #       }, 
+    #       {
+    #         id: "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1/PCI.Lambda.2/finding/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222", 
+    #         product_arn: "arn:aws:securityhub:us-west-1::product/aws/securityhub", 
+    #       }, 
+    #     ], 
+    #     unprocessed_findings: [
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_update_findings({
@@ -962,6 +1130,23 @@ module Aws::SecurityHub
     #
     #   * {Types::CreateActionTargetResponse#action_target_arn #action_target_arn} => String
     #
+    #
+    # @example Example: To create a custom action target
+    #
+    #   # The following example creates a custom action target in Security Hub. Custom actions on findings and insights
+    #   # automatically trigger actions in Amazon CloudWatch Events.
+    #
+    #   resp = client.create_action_target({
+    #     description: "Action to send the finding for remediation tracking", 
+    #     id: "Remediation", 
+    #     name: "Send to remediation", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     action_target_arn: "arn:aws:securityhub:us-west-1:123456789012:action/custom/Remediation", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_action_target({
@@ -1035,6 +1220,30 @@ module Aws::SecurityHub
     #   * {Types::CreateFindingAggregatorResponse#region_linking_mode #region_linking_mode} => String
     #   * {Types::CreateFindingAggregatorResponse#regions #regions} => Array&lt;String&gt;
     #
+    #
+    # @example Example: To enable cross-Region aggregation
+    #
+    #   # The following example creates a finding aggregator. This is required to enable cross-Region aggregation.
+    #
+    #   resp = client.create_finding_aggregator({
+    #     region_linking_mode: "SPECIFIED_REGIONS", 
+    #     regions: [
+    #       "us-west-1", 
+    #       "us-west-2", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     finding_aggregation_region: "us-east-1", 
+    #     finding_aggregator_arn: "arn:aws:securityhub:us-east-1:222222222222:finding-aggregator/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     region_linking_mode: "SPECIFIED_REGIONS", 
+    #     regions: [
+    #       "us-west-1", 
+    #       "us-west-2", 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_finding_aggregator({
@@ -1083,6 +1292,36 @@ module Aws::SecurityHub
     # @return [Types::CreateInsightResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateInsightResponse#insight_arn #insight_arn} => String
+    #
+    #
+    # @example Example: To create a custom insight
+    #
+    #   # The following example creates a custom insight in Security Hub. An insight is a collection of findings that relate to a
+    #   # security issue.
+    #
+    #   resp = client.create_insight({
+    #     filters: {
+    #       resource_type: [
+    #         {
+    #           comparison: "EQUALS", 
+    #           value: "AwsIamRole", 
+    #         }, 
+    #       ], 
+    #       severity_label: [
+    #         {
+    #           comparison: "EQUALS", 
+    #           value: "CRITICAL", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     group_by_attribute: "ResourceId", 
+    #     name: "Critical role findings", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     insight_arn: "arn:aws:securityhub:us-west-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1796,6 +2035,29 @@ module Aws::SecurityHub
     #
     #   * {Types::CreateMembersResponse#unprocessed_accounts #unprocessed_accounts} => Array&lt;Types::Result&gt;
     #
+    #
+    # @example Example: To add a member account
+    #
+    #   # The following example creates a member association between the specified accounts and the administrator account (the
+    #   # account that makes the request). This operation is used to add accounts that aren't part of an organization.
+    #
+    #   resp = client.create_members({
+    #     account_details: [
+    #       {
+    #         account_id: "123456789012", 
+    #       }, 
+    #       {
+    #         account_id: "111122223333", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     unprocessed_accounts: [
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_members({
@@ -1838,6 +2100,25 @@ module Aws::SecurityHub
     #
     #   * {Types::DeclineInvitationsResponse#unprocessed_accounts #unprocessed_accounts} => Array&lt;Types::Result&gt;
     #
+    #
+    # @example Example: To decline invitation to become a member account
+    #
+    #   # The following example declines an invitation from the Security Hub administrator account to become a member account. The
+    #   # invited account makes the request.
+    #
+    #   resp = client.decline_invitations({
+    #     account_ids: [
+    #       "123456789012", 
+    #       "111122223333", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     unprocessed_accounts: [
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.decline_invitations({
@@ -1872,6 +2153,22 @@ module Aws::SecurityHub
     #
     #   * {Types::DeleteActionTargetResponse#action_target_arn #action_target_arn} => String
     #
+    #
+    # @example Example: To delete a custom action target
+    #
+    #   # The following example deletes a custom action target that triggers target actions in Amazon CloudWatch Events. Deleting
+    #   # a custom action target doesn't affect findings or insights that were already sent to CloudWatch Events based on the
+    #   # custom action.
+    #
+    #   resp = client.delete_action_target({
+    #     action_target_arn: "arn:aws:securityhub:us-west-1:123456789012:action/custom/Remediation", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     action_target_arn: "arn:aws:securityhub:us-west-1:123456789012:action/custom/Remediation", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_action_target({
@@ -1905,6 +2202,16 @@ module Aws::SecurityHub
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a finding aggregator
+    #
+    #   # The following example deletes a finding aggregator in Security Hub. Deleting the finding aggregator stops cross-Region
+    #   # aggregation. This operation produces no output.
+    #
+    #   resp = client.delete_finding_aggregator({
+    #     finding_aggregator_arn: "arn:aws:securityhub:us-east-1:123456789012:finding-aggregator/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_finding_aggregator({
@@ -1928,6 +2235,20 @@ module Aws::SecurityHub
     # @return [Types::DeleteInsightResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteInsightResponse#insight_arn #insight_arn} => String
+    #
+    #
+    # @example Example: To delete a custom insight
+    #
+    #   # The following example deletes a custom insight in Security Hub.
+    #
+    #   resp = client.delete_insight({
+    #     insight_arn: "arn:aws:securityhub:us-west-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     insight_arn: "arn:aws:securityhub:eu-central-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1966,6 +2287,25 @@ module Aws::SecurityHub
     #
     #   * {Types::DeleteInvitationsResponse#unprocessed_accounts #unprocessed_accounts} => Array&lt;Types::Result&gt;
     #
+    #
+    # @example Example: To delete a custom insight
+    #
+    #   # The following example deletes an invitation sent by the Security Hub administrator account to a prospective member
+    #   # account. This operation is used only for invitations sent to accounts that aren't part of an organization. Organization
+    #   # accounts don't receive invitations.
+    #
+    #   resp = client.delete_invitations({
+    #     account_ids: [
+    #       "123456789012", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     unprocessed_accounts: [
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_invitations({
@@ -1998,6 +2338,25 @@ module Aws::SecurityHub
     # @return [Types::DeleteMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteMembersResponse#unprocessed_accounts #unprocessed_accounts} => Array&lt;Types::Result&gt;
+    #
+    #
+    # @example Example: To delete a member account
+    #
+    #   # The following example deletes the specified member account from Security Hub. This operation can be used to delete
+    #   # member accounts that are part of an organization or that were invited manually.
+    #
+    #   resp = client.delete_members({
+    #     account_ids: [
+    #       "123456789111", 
+    #       "123456789222", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     unprocessed_accounts: [
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2046,6 +2405,29 @@ module Aws::SecurityHub
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To return custom action targets
+    #
+    #   # The following example returns a list of custom action targets. You use custom actions on findings and insights in
+    #   # Security Hub to trigger target actions in Amazon CloudWatch Events.
+    #
+    #   resp = client.describe_action_targets({
+    #     action_target_arns: [
+    #       "arn:aws:securityhub:us-west-1:123456789012:action/custom/Remediation", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     action_targets: [
+    #       {
+    #         action_target_arn: "arn:aws:securityhub:us-west-1:123456789012:action/custom/Remediation", 
+    #         description: "Action to send the finding for remediation tracking", 
+    #         name: "Send to remediation", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_action_targets({
@@ -2084,6 +2466,24 @@ module Aws::SecurityHub
     #   * {Types::DescribeHubResponse#auto_enable_controls #auto_enable_controls} => Boolean
     #   * {Types::DescribeHubResponse#control_finding_generator #control_finding_generator} => String
     #
+    #
+    # @example Example: To return details about Hub resource
+    #
+    #   # The following example returns details about the Hub resource in the calling account. The Hub resource represents the
+    #   # implementation of  the AWS Security Hub service in the calling account.
+    #
+    #   resp = client.describe_hub({
+    #     hub_arn: "arn:aws:securityhub:us-west-1:123456789012:hub/default", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     auto_enable_controls: true, 
+    #     control_finding_generator: "SECURITY_CONTROL", 
+    #     hub_arn: "arn:aws:securityhub:us-west-1:123456789012:hub/default", 
+    #     subscribed_at: "2019-11-19T23:15:10.046Z", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_hub({
@@ -2114,6 +2514,22 @@ module Aws::SecurityHub
     #   * {Types::DescribeOrganizationConfigurationResponse#auto_enable #auto_enable} => Boolean
     #   * {Types::DescribeOrganizationConfigurationResponse#member_account_limit_reached #member_account_limit_reached} => Boolean
     #   * {Types::DescribeOrganizationConfigurationResponse#auto_enable_standards #auto_enable_standards} => String
+    #
+    #
+    # @example Example: To get information about Organizations configuration
+    #
+    #   # The following example returns details about the way in which AWS Organizations is configured for a Security Hub account
+    #   # that belongs to an organization. Only a Security Hub administrator account can call this operation.
+    #
+    #   resp = client.describe_organization_configuration({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     auto_enable: true, 
+    #     auto_enable_standards: "DEFAULT", 
+    #     member_account_limit_reached: true, 
+    #   }
     #
     # @example Response structure
     #
@@ -2159,6 +2575,43 @@ module Aws::SecurityHub
     #   * {Types::DescribeProductsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To get information about Security Hub integrations
+    #
+    #   # The following example returns details about AWS services and third-party products that Security Hub integrates with.
+    #
+    #   resp = client.describe_products({
+    #     max_results: 1, 
+    #     next_token: "NULL", 
+    #     product_arn: "arn:aws:securityhub:us-east-1:517716713836:product/crowdstrike/crowdstrike-falcon", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "U2FsdGVkX18vvPlOqb7RDrWRWVFBJI46MOIAb+nZmRJmR15NoRi2gm13sdQEn3O/pq/78dGs+bKpgA+7HMPHO0qX33/zoRI+uIG/F9yLNhcOrOWzFUdy36JcXLQji3Rpnn/cD1SVkGA98qI3zPOSDg==", 
+    #     products: [
+    #       {
+    #         activation_url: "https://falcon.crowdstrike.com/support/documentation", 
+    #         categories: [
+    #           "Endpoint Detection and Response (EDR)", 
+    #           "AV Scanning and Sandboxing", 
+    #           "Threat Intelligence Feeds and Reports", 
+    #           "Endpoint Forensics", 
+    #           "Network Forensics", 
+    #         ], 
+    #         company_name: "CrowdStrike", 
+    #         description: "CrowdStrike Falcon's single lightweight sensor unifies next-gen antivirus, endpoint detection and response, and 24/7 managed hunting, via the cloud.", 
+    #         integration_types: [
+    #           "SEND_FINDINGS_TO_SECURITY_HUB", 
+    #         ], 
+    #         marketplace_url: "https://aws.amazon.com/marketplace/seller-profile?id=a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #         product_arn: "arn:aws:securityhub:us-east-1:517716713836:product/crowdstrike/crowdstrike-falcon", 
+    #         product_name: "CrowdStrike Falcon", 
+    #         product_subscription_resource_policy: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"123456789333\"},\"Action\":[\"securityhub:BatchImportFindings\"],\"Resource\":\"arn:aws:securityhub:us-west-1:123456789012:product-subscription/crowdstrike/crowdstrike-falcon\",\"Condition\":{\"StringEquals\":{\"securityhub:TargetAccount\":\"123456789012\"}}},{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"123456789012\"},\"Action\":[\"securityhub:BatchImportFindings\"],\"Resource\":\"arn:aws:securityhub:us-west-1:123456789333:product/crowdstrike/crowdstrike-falcon\",\"Condition\":{\"StringEquals\":{\"securityhub:TargetAccount\":\"123456789012\"}}}]}", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2217,6 +2670,44 @@ module Aws::SecurityHub
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To get available Security Hub standards
+    #
+    #   # The following example returns a list of available security standards in Security Hub.
+    #
+    #   resp = client.describe_standards({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     standards: [
+    #       {
+    #         description: "The AWS Foundational Security Best Practices standard is a set of automated security checks that detect when AWS accounts and deployed resources do not align to security best practices. The standard is defined by AWS security experts. This curated set of controls helps improve your security posture in AWS, and cover AWS's most popular and foundational services.", 
+    #         enabled_by_default: true, 
+    #         name: "AWS Foundational Security Best Practices v1.0.0", 
+    #         standards_arn: "arn:aws:securityhub:us-west-1::standards/aws-foundational-security-best-practices/v/1.0.0", 
+    #       }, 
+    #       {
+    #         description: "The Center for Internet Security (CIS) AWS Foundations Benchmark v1.2.0 is a set of security configuration best practices for AWS. This Security Hub standard automatically checks for your compliance readiness against a subset of CIS requirements.", 
+    #         enabled_by_default: true, 
+    #         name: "CIS AWS Foundations Benchmark v1.2.0", 
+    #         standards_arn: "arn:aws:securityhub:us-west-1::ruleset/cis-aws-foundations-benchmark/v/1.2.0", 
+    #       }, 
+    #       {
+    #         description: "The Center for Internet Security (CIS) AWS Foundations Benchmark v1.4.0 is a set of security configuration best practices for AWS. This Security Hub standard automatically checks for your compliance readiness against a subset of CIS requirements.", 
+    #         enabled_by_default: false, 
+    #         name: "CIS AWS Foundations Benchmark v1.4.0", 
+    #         standards_arn: "arn:aws::securityhub:us-west-1::standards/cis-aws-foundations-benchmark/v/1.4.0", 
+    #       }, 
+    #       {
+    #         description: "The Payment Card Industry Data Security Standard (PCI DSS) v3.2.1 is an information security standard for entities that store, process, and/or transmit cardholder data. This Security Hub standard automatically checks for your compliance readiness against a subset of PCI DSS requirements.", 
+    #         enabled_by_default: false, 
+    #         name: "PCI DSS v3.2.1", 
+    #         standards_arn: "arn:aws:securityhub:us-west-1::standards/pci-dss/v/3.2.1", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_standards({
@@ -2274,6 +2765,51 @@ module Aws::SecurityHub
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To get a list of controls for a security standard
+    #
+    #   # The following example returns a list of security controls and control details that apply to a specified security
+    #   # standard. The list includes controls that are enabled and disabled in the standard.
+    #
+    #   resp = client.describe_standards_controls({
+    #     max_results: 2, 
+    #     next_token: "NULL", 
+    #     standards_subscription_arn: "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     controls: [
+    #       {
+    #         control_id: "PCI.AutoScaling.1", 
+    #         control_status: "ENABLED", 
+    #         control_status_updated_at: Time.parse("2020-05-15T18:49:04.473000+00:00"), 
+    #         description: "This AWS control checks whether your Auto Scaling groups that are associated with a load balancer are using Elastic Load Balancing health checks.", 
+    #         related_requirements: [
+    #           "PCI DSS 2.2", 
+    #         ], 
+    #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/PCI.AutoScaling.1/remediation", 
+    #         severity_rating: "LOW", 
+    #         standards_control_arn: "arn:aws:securityhub:us-west-1:123456789012:control/pci-dss/v/3.2.1/PCI.AutoScaling.1", 
+    #         title: "Auto scaling groups associated with a load balancer should use health checks", 
+    #       }, 
+    #       {
+    #         control_id: "PCI.CW.1", 
+    #         control_status: "ENABLED", 
+    #         control_status_updated_at: Time.parse("2020-05-15T18:49:04.498000+00:00"), 
+    #         description: "This control checks for the CloudWatch metric filters using the following pattern { $.userIdentity.type = \"Root\" && $.userIdentity.invokedBy NOT EXISTS && $.eventType != \"AwsServiceEvent\" } It checks that the log group name is configured for use with active multi-region CloudTrail, that there is at least one Event Selector for a Trail with IncludeManagementEvents set to true and ReadWriteType set to All, and that there is at least one active subscriber to an SNS topic associated with the alarm.", 
+    #         related_requirements: [
+    #           "PCI DSS 7.2.1", 
+    #         ], 
+    #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/PCI.CW.1/remediation", 
+    #         severity_rating: "MEDIUM", 
+    #         standards_control_arn: "arn:aws:securityhub:us-west-1:123456789012:control/pci-dss/v/3.2.1/PCI.CW.1", 
+    #         title: "A log metric filter and alarm should exist for usage of the \"root\" user", 
+    #       }, 
+    #     ], 
+    #     next_token: "U2FsdGVkX1+eNkPoZHVl11ip5HUYQPWSWZGmftcmJiHL8JoKEsCDuaKayiPDyLK+LiTkShveoOdvfxXCkOBaGhohIXhsIedN+LSjQV/l7kfCfJcq4PziNC1N9xe9aq2pjlLVZnznTfSImrodT5bRNHe4fELCQq/z+5ka+5Lzmc11axcwTd5lKgQyQqmUVoeriHZhyIiBgWKf7oNYdBVG8OEortVWvSkoUTt+B2ThcnC7l43kI0UNxlkZ6sc64AsW", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_standards_controls({
@@ -2316,6 +2852,16 @@ module Aws::SecurityHub
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To end a Security Hub integration
+    #
+    #   # The following example ends an integration between Security Hub and the specified product that sends findings to Security
+    #   # Hub. After the integration ends, the product no longer sends findings to Security  Hub.
+    #
+    #   resp = client.disable_import_findings_for_product({
+    #     product_subscription_arn: "arn:aws:securityhub:us-east-1:517716713836:product/crowdstrike/crowdstrike-falcon", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.disable_import_findings_for_product({
@@ -2339,6 +2885,16 @@ module Aws::SecurityHub
     #   administrator account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To remove a Security Hub administrator account
+    #
+    #   # The following example removes the Security Hub administrator account in the Region from which the operation was
+    #   # executed. This operation doesn't remove the delegated administrator account in AWS Organizations.
+    #
+    #   resp = client.disable_organization_admin_account({
+    #     admin_account_id: "123456789012", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2372,6 +2928,14 @@ module Aws::SecurityHub
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To deactivate Security Hub
+    #
+    #   # The following example deactivates Security Hub for the current account and Region.
+    #
+    #   resp = client.disable_security_hub({
+    #   })
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableSecurityHub AWS API Documentation
     #
     # @overload disable_security_hub(params = {})
@@ -2389,6 +2953,14 @@ module Aws::SecurityHub
     # account can disassociate a member account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To disassociate requesting account from administrator account
+    #
+    #   # The following example dissociates the requesting account from its associated administrator account.
+    #
+    #   resp = client.disassociate_from_administrator_account({
+    #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisassociateFromAdministratorAccount AWS API Documentation
     #
@@ -2441,6 +3013,18 @@ module Aws::SecurityHub
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To disassociate member accounts from administrator account
+    #
+    #   # The following example dissociates the specified member accounts from the associated administrator account.
+    #
+    #   resp = client.disassociate_members({
+    #     account_ids: [
+    #       "123456789012", 
+    #       "111122223333", 
+    #     ], 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_members({
@@ -2470,6 +3054,21 @@ module Aws::SecurityHub
     #
     #   * {Types::EnableImportFindingsForProductResponse#product_subscription_arn #product_subscription_arn} => String
     #
+    #
+    # @example Example: To activate an integration
+    #
+    #   # The following example activates an integration between Security Hub and a third party partner product that sends
+    #   # findings to Security Hub.
+    #
+    #   resp = client.enable_import_findings_for_product({
+    #     product_arn: "arn:aws:securityhub:us-east-1:517716713836:product/crowdstrike/crowdstrike-falcon", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     product_subscription_arn: "arn:aws:securityhub:us-east-1:517716713836:product-subscription/crowdstrike/crowdstrike-falcon", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.enable_import_findings_for_product({
@@ -2497,6 +3096,16 @@ module Aws::SecurityHub
     #   as the Security Hub administrator account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To designate a Security Hub administrator
+    #
+    #   # The following example designates the specified account as the Security Hub administrator account. The requesting account
+    #   # must be the organization management account.
+    #
+    #   resp = client.enable_organization_admin_account({
+    #     admin_account_id: "123456789012", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -2572,6 +3181,21 @@ module Aws::SecurityHub
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To activate Security Hub
+    #
+    #   # The following example activates the Security Hub service in the requesting AWS account. The service is activated in the
+    #   # current AWS Region or the Region that you specify in the request. Some standards are automatically turned on in your
+    #   # account unless you opt out. To determine which standards are automatically turned on, see the Security Hub
+    #   # documentation.
+    #
+    #   resp = client.enable_security_hub({
+    #     enable_default_standards: true, 
+    #     tags: {
+    #       "Department" => "Security", 
+    #     }, 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.enable_security_hub({
@@ -2600,6 +3224,24 @@ module Aws::SecurityHub
     # @return [Types::GetAdministratorAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetAdministratorAccountResponse#administrator #administrator} => Types::Invitation
+    #
+    #
+    # @example Example: To get details about the Security Hub administrator account
+    #
+    #   # The following example provides details about the Security Hub administrator account for the requesting member account.
+    #
+    #   resp = client.get_administrator_account({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     administrator: {
+    #       account_id: "123456789012", 
+    #       invitation_id: "7ab938c5d52d7904ad09f9e7c20cc4eb", 
+    #       invited_at: Time.parse("2020-06-01T20:21:18.042000+00:00"), 
+    #       member_status: "ASSOCIATED", 
+    #     }, 
+    #   }
     #
     # @example Response structure
     #
@@ -2642,6 +3284,30 @@ module Aws::SecurityHub
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To return a list of enabled standards
+    #
+    #   # The following example returns a list of Security Hub standards that are currently enabled in your account.  
+    #
+    #   resp = client.get_enabled_standards({
+    #     standards_subscription_arns: [
+    #       "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     standards_subscriptions: [
+    #       {
+    #         standards_arn: "arn:aws:securityhub:us-west-1::standards/pci-dss/v/3.2.1", 
+    #         standards_input: {
+    #         }, 
+    #         standards_status: "READY", 
+    #         standards_subscription_arn: "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_enabled_standards({
@@ -2682,6 +3348,26 @@ module Aws::SecurityHub
     #   * {Types::GetFindingAggregatorResponse#finding_aggregation_region #finding_aggregation_region} => String
     #   * {Types::GetFindingAggregatorResponse#region_linking_mode #region_linking_mode} => String
     #   * {Types::GetFindingAggregatorResponse#regions #regions} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: To get cross-Region aggregation details
+    #
+    #   # The following example returns cross-Region aggregation details for the requesting account. 
+    #
+    #   resp = client.get_finding_aggregator({
+    #     finding_aggregator_arn: "arn:aws:securityhub:us-east-1:123456789012:finding-aggregator/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     finding_aggregation_region: "us-east-1", 
+    #     finding_aggregator_arn: "arn:aws:securityhub:us-east-1:123456789012:finding-aggregator/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     region_linking_mode: "SPECIFIED_REGIONS", 
+    #     regions: [
+    #       "us-west-1", 
+    #       "us-west-2", 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2743,6 +3429,115 @@ module Aws::SecurityHub
     #   * {Types::GetFindingsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To get a list of findings
+    #
+    #   # The following example returns a filtered and sorted list of Security Hub findings.
+    #
+    #   resp = client.get_findings({
+    #     filters: {
+    #       aws_account_id: [
+    #         {
+    #           comparison: "PREFIX", 
+    #           value: "123456789012", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     max_results: 1, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     findings: [
+    #       {
+    #         aws_account_id: "123456789012", 
+    #         company_name: "AWS", 
+    #         compliance: {
+    #           associated_standards: [
+    #             {
+    #               standards_id: "standards/aws-foundational-security-best-practices/v/1.0.0", 
+    #             }, 
+    #             {
+    #               standards_id: "standards/pci-dss/v/3.2.1", 
+    #             }, 
+    #             {
+    #               standards_id: "ruleset/cis-aws-foundations-benchmark/v/1.2.0", 
+    #             }, 
+    #             {
+    #               standards_id: "standards/cis-aws-foundations-benchmark/v/1.4.0", 
+    #             }, 
+    #             {
+    #               standards_id: "standards/service-managed-aws-control-tower/v/1.0.0", 
+    #             }, 
+    #           ], 
+    #           related_requirements: [
+    #             "PCI DSS v3.2.1/3.4", 
+    #             "CIS AWS Foundations Benchmark v1.2.0/2.7", 
+    #             "CIS AWS Foundations Benchmark v1.4.0/3.7", 
+    #           ], 
+    #           security_control_id: "CloudTrail.2", 
+    #           status: "FAILED", 
+    #         }, 
+    #         created_at: "2022-10-06T02:18:23.076Z", 
+    #         description: "This AWS control checks whether AWS CloudTrail is configured to use the server side encryption (SSE) AWS Key Management Service (AWS KMS) customer master key (CMK) encryption. The check will pass if the KmsKeyId is defined.", 
+    #         finding_provider_fields: {
+    #           severity: {
+    #             label: "MEDIUM", 
+    #             original: "MEDIUM", 
+    #           }, 
+    #           types: [
+    #             "Software and Configuration Checks/Industry and Regulatory Standards", 
+    #           ], 
+    #         }, 
+    #         first_observed_at: "2022-10-06T02:18:23.076Z", 
+    #         generator_id: "security-control/CloudTrail.2", 
+    #         id: "arn:aws:securityhub:us-east-2:123456789012:security-control/CloudTrail.2/finding/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #         last_observed_at: "2022-10-28T16:10:06.956Z", 
+    #         product_arn: "arn:aws:securityhub:us-east-2::product/aws/securityhub", 
+    #         product_fields: {
+    #           "RelatedAWSResources:0/name" => "securityhub-cloud-trail-encryption-enabled-fe95bf3f", 
+    #           "RelatedAWSResources:0/type" => "AWS::Config::ConfigRule", 
+    #           "Resources:0/Id" => "arn:aws:cloudtrail:us-east-2:123456789012:trail/AWSMacieTrail-DO-NOT-EDIT", 
+    #           "aws/securityhub/CompanyName" => "AWS", 
+    #           "aws/securityhub/FindingId" => "arn:aws:securityhub:us-east-2::product/aws/securityhub/arn:aws:securityhub:us-east-2:123456789012:security-control/CloudTrail.2/finding/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #           "aws/securityhub/ProductName" => "Security Hub", 
+    #         }, 
+    #         product_name: "Security Hub", 
+    #         record_state: "ACTIVE", 
+    #         region: "us-east-2", 
+    #         remediation: {
+    #           recommendation: {
+    #             text: "For directions on how to correct this issue, consult the AWS Security Hub controls documentation.", 
+    #             url: "https://docs.aws.amazon.com/console/securityhub/CloudTrail.2/remediation", 
+    #           }, 
+    #         }, 
+    #         resources: [
+    #           {
+    #             id: "arn:aws:cloudtrail:us-east-2:123456789012:trail/AWSMacieTrail-DO-NOT-EDIT", 
+    #             partition: "aws", 
+    #             region: "us-east-2", 
+    #             type: "AwsCloudTrailTrail", 
+    #           }, 
+    #         ], 
+    #         schema_version: "2018-10-08", 
+    #         severity: {
+    #           label: "MEDIUM", 
+    #           normalized: 40, 
+    #           original: "MEDIUM", 
+    #         }, 
+    #         title: "CloudTrail should have encryption at-rest enabled", 
+    #         types: [
+    #           "Software and Configuration Checks/Industry and Regulatory Standards", 
+    #         ], 
+    #         updated_at: "2022-10-28T16:10:00.093Z", 
+    #         workflow: {
+    #           status: "NEW", 
+    #         }, 
+    #         workflow_state: "NEW", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3410,6 +4205,33 @@ module Aws::SecurityHub
     #
     #   * {Types::GetInsightResultsResponse#insight_results #insight_results} => Types::InsightResults
     #
+    #
+    # @example Example: To get the results of a Security Hub insight
+    #
+    #   # The following example returns the results of the Security Hub insight specified by the insight ARN.
+    #
+    #   resp = client.get_insight_results({
+    #     insight_arn: "arn:aws:securityhub:us-west-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     insight_results: {
+    #       group_by_attribute: "ResourceId", 
+    #       insight_arn: "arn:aws:securityhub:us-west-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #       result_values: [
+    #         {
+    #           count: 10, 
+    #           group_by_attribute_value: "AWS::::Account:111122223333", 
+    #         }, 
+    #         {
+    #           count: 3, 
+    #           group_by_attribute_value: "AWS::::Account:444455556666", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_insight_results({
@@ -3457,6 +4279,42 @@ module Aws::SecurityHub
     #   * {Types::GetInsightsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To get details of a Security Hub insight
+    #
+    #   # The following example returns details of the Security Hub insight with the specified ARN.
+    #
+    #   resp = client.get_insights({
+    #     insight_arns: [
+    #       "arn:aws:securityhub:us-west-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     insights: [
+    #       {
+    #         filters: {
+    #           resource_type: [
+    #             {
+    #               comparison: "EQUALS", 
+    #               value: "AwsIamRole", 
+    #             }, 
+    #           ], 
+    #           severity_label: [
+    #             {
+    #               comparison: "EQUALS", 
+    #               value: "CRITICAL", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         group_by_attribute: "ResourceId", 
+    #         insight_arn: "arn:aws:securityhub:us-west-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #         name: "Critical role findings", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3810,6 +4668,20 @@ module Aws::SecurityHub
     #
     #   * {Types::GetInvitationsCountResponse#invitations_count #invitations_count} => Integer
     #
+    #
+    # @example Example: To get a count of membership invitations
+    #
+    #   # The following example returns a count of invitations that the Security Hub administrator sent to the current member
+    #   # account, not including the currently accepted invitation.
+    #
+    #   resp = client.get_invitations_count({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     invitations_count: 3, 
+    #   }
+    #
     # @example Response structure
     #
     #   resp.invitations_count #=> Integer
@@ -3877,6 +4749,44 @@ module Aws::SecurityHub
     #   * {Types::GetMembersResponse#members #members} => Array&lt;Types::Member&gt;
     #   * {Types::GetMembersResponse#unprocessed_accounts #unprocessed_accounts} => Array&lt;Types::Result&gt;
     #
+    #
+    # @example Example: To get member account details
+    #
+    #   # The following example returns details for the Security Hub member accounts with the specified AWS account IDs. An
+    #   # administrator account may be the delegated Security Hub administrator account for an organization or an administrator
+    #   # account that enabled Security Hub manually. The Security Hub administrator must call this operation.
+    #
+    #   resp = client.get_members({
+    #     account_ids: [
+    #       "444455556666", 
+    #       "777788889999", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     members: [
+    #       {
+    #         account_id: "444455556666", 
+    #         administrator_id: "123456789012", 
+    #         invited_at: Time.parse("2020-06-01T20:15:15.289000+00:00"), 
+    #         master_id: "123456789012", 
+    #         member_status: "ASSOCIATED", 
+    #         updated_at: Time.parse("2020-06-01T20:15:15.289000+00:00"), 
+    #       }, 
+    #       {
+    #         account_id: "777788889999", 
+    #         administrator_id: "123456789012", 
+    #         invited_at: Time.parse("2020-06-01T20:15:15.289000+00:00"), 
+    #         master_id: "123456789012", 
+    #         member_status: "ASSOCIATED", 
+    #         updated_at: Time.parse("2020-06-01T20:15:15.289000+00:00"), 
+    #       }, 
+    #     ], 
+    #     unprocessed_accounts: [
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_members({
@@ -3929,6 +4839,26 @@ module Aws::SecurityHub
     #
     #   * {Types::InviteMembersResponse#unprocessed_accounts #unprocessed_accounts} => Array&lt;Types::Result&gt;
     #
+    #
+    # @example Example: To invite accounts to become members
+    #
+    #   # The following example invites the specified AWS accounts to become member accounts associated with the calling Security
+    #   # Hub administrator account. You only use this operation to invite accounts that don't belong to an AWS Organizations
+    #   # organization.
+    #
+    #   resp = client.invite_members({
+    #     account_ids: [
+    #       "111122223333", 
+    #       "444455556666", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     unprocessed_accounts: [
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.invite_members({
@@ -3972,6 +4902,23 @@ module Aws::SecurityHub
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To list ARNs for enabled integrations
+    #
+    #   # The following example returns a list of subscription Amazon Resource Names (ARNs) for the product integrations that you
+    #   # have currently enabled in Security Hub.
+    #
+    #   resp = client.list_enabled_products_for_import({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     product_subscriptions: [
+    #       "arn:aws:securityhub:us-east-1:517716713836:product-subscription/crowdstrike/crowdstrike-falcon", 
+    #       "arn:aws:securityhub:us-east-1::product/3coresec/3coresec", 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_enabled_products_for_import({
@@ -4012,6 +4959,23 @@ module Aws::SecurityHub
     #   * {Types::ListFindingAggregatorsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To update the enablement status of a standard control
+    #
+    #   # The following example disables the specified control in the specified security standard.
+    #
+    #   resp = client.list_finding_aggregators({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     finding_aggregators: [
+    #       {
+    #         finding_aggregator_arn: "arn:aws:securityhub:us-east-1:222222222222:finding-aggregator/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4060,6 +5024,27 @@ module Aws::SecurityHub
     #   * {Types::ListInvitationsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list membership invitations to calling account
+    #
+    #   # The following example returns a list of Security Hub member invitations sent to the calling AWS account. Only accounts
+    #   # that are invited manually use this operation. It's not for use by accounts that are managed through AWS Organizations.
+    #
+    #   resp = client.list_invitations({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     invitations: [
+    #       {
+    #         account_id: "123456789012", 
+    #         invitation_id: "7ab938c5d52d7904ad09f9e7c20cc4eb", 
+    #         invited_at: Time.parse("2020-06-01T20:21:18.042000+00:00"), 
+    #         member_status: "ASSOCIATED", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4122,6 +5107,37 @@ module Aws::SecurityHub
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To list member account details
+    #
+    #   # The following example returns details about member accounts for the calling Security Hub administrator account. The
+    #   # response includes member accounts that are managed through AWS Organizations and those that were invited manually.
+    #
+    #   resp = client.list_members({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     members: [
+    #       {
+    #         account_id: "111122223333", 
+    #         administrator_id: "123456789012", 
+    #         invited_at: Time.parse("2020-06-01T20:15:15.289000+00:00"), 
+    #         master_id: "123456789012", 
+    #         member_status: "ASSOCIATED", 
+    #         updated_at: Time.parse("2020-06-01T20:15:15.289000+00:00"), 
+    #       }, 
+    #       {
+    #         account_id: "444455556666", 
+    #         administrator_id: "123456789012", 
+    #         invited_at: Time.parse("2020-06-01T20:15:15.289000+00:00"), 
+    #         master_id: "123456789012", 
+    #         member_status: "ASSOCIATED", 
+    #         updated_at: Time.parse("2020-06-01T20:15:15.289000+00:00"), 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_members({
@@ -4171,6 +5187,27 @@ module Aws::SecurityHub
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To list administrator acccounts for an organization
+    #
+    #   # The following example lists the Security  Hub administrator accounts for an organization. Only the organization
+    #   # management account can call this operation.
+    #
+    #   resp = client.list_organization_admin_accounts({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     admin_accounts: [
+    #       {
+    #         account_id: "777788889999", 
+    #       }, 
+    #       {
+    #         status: "ENABLED", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_organization_admin_accounts({
@@ -4218,6 +5255,48 @@ module Aws::SecurityHub
     #   * {Types::ListSecurityControlDefinitionsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list security controls that apply to a standard
+    #
+    #   # The following example lists security controls that apply to a specified Security Hub standard. 
+    #
+    #   resp = client.list_security_control_definitions({
+    #     max_results: 3, 
+    #     next_token: "NULL", 
+    #     standards_arn: "arn:aws:securityhub:::standards/aws-foundational-security-best-practices/v/1.0.0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "U2FsdGVkX1...", 
+    #     security_control_definitions: [
+    #       {
+    #         current_region_availability: "AVAILABLE", 
+    #         description: "This AWS control checks whether ACM Certificates in your account are marked for expiration within a specified time period. Certificates provided by ACM are automatically renewed. ACM does not automatically renew certificates that you import.", 
+    #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/ACM.1/remediation", 
+    #         security_control_id: "ACM.1", 
+    #         severity_rating: "MEDIUM", 
+    #         title: "Imported and ACM-issued certificates should be renewed after a specified time period", 
+    #       }, 
+    #       {
+    #         current_region_availability: "AVAILABLE", 
+    #         description: "This control checks whether all stages of Amazon API Gateway REST and WebSocket APIs have logging enabled. The control fails if logging is not enabled for all methods of a stage or if loggingLevel is neither ERROR nor INFO.", 
+    #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/APIGateway.1/remediation", 
+    #         security_control_id: "APIGateway.1", 
+    #         severity_rating: "MEDIUM", 
+    #         title: "API Gateway REST and WebSocket API execution logging should be enabled", 
+    #       }, 
+    #       {
+    #         current_region_availability: "AVAILABLE", 
+    #         description: "This control checks whether Amazon API Gateway REST API stages have SSL certificates configured that backend systems can use to authenticate that incoming requests are from the API Gateway.", 
+    #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/APIGateway.2/remediation", 
+    #         security_control_id: "APIGateway.2", 
+    #         severity_rating: "MEDIUM", 
+    #         title: "API Gateway REST API stages should be configured to use SSL certificates for backend authentication", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4275,6 +5354,50 @@ module Aws::SecurityHub
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To say whether standard
+    #
+    #   # The following example specifies whether a control is currently enabled or disabled in each enabled standard in the
+    #   # calling account. The response also provides other details about the control.
+    #
+    #   resp = client.list_standards_control_associations({
+    #     security_control_id: "S3.1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     standards_control_association_summaries: [
+    #       {
+    #         association_status: "ENABLED", 
+    #         related_requirements: [
+    #           "PCI DSS 1.2.1", 
+    #           "PCI DSS 1.3.1", 
+    #           "PCI DSS 1.3.2", 
+    #           "PCI DSS 1.3.4", 
+    #           "PCI DSS 1.3.6", 
+    #         ], 
+    #         security_control_arn: "arn:aws:securityhub:us-west-2:110479873537:security-control/S3.1", 
+    #         security_control_id: "S3.1", 
+    #         standards_arn: "arn:aws:securityhub:us-west-2::standards/pci-dss/v/3.2.1", 
+    #         standards_control_description: "This AWS control checks whether the following public access block settings are configured from account level: ignorePublicAcls: True, blockPublicPolicy: True, blockPublicAcls: True, restrictPublicBuckets: True.", 
+    #         standards_control_title: "S3 Block Public Access setting should be enabled", 
+    #         updated_at: Time.parse("2022-01-13T23:03:46.648000+00:00"), 
+    #       }, 
+    #       {
+    #         association_status: "DISABLED", 
+    #         related_requirements: [
+    #         ], 
+    #         security_control_arn: "arn:aws:securityhub:us-west-2:110479873537:security-control/S3.1", 
+    #         security_control_id: "S3.1", 
+    #         standards_arn: "arn:aws:securityhub:us-west-2::standards/aws-foundational-security-best-practices/v/1.0.0", 
+    #         standards_control_description: "This AWS control checks whether the following public access block settings are configured from account level: ignorePublicAcls: True, blockPublicPolicy: True, blockPublicAcls: True, restrictPublicBuckets: True.", 
+    #         standards_control_title: "S3 Block Public Access setting should be enabled", 
+    #         updated_at: Time.parse("2022-08-12T22:59:04.924000+00:00"), 
+    #         updated_reason: "Not relevant to environment", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_standards_control_associations({
@@ -4316,6 +5439,23 @@ module Aws::SecurityHub
     #
     #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
     #
+    #
+    # @example Example: To get a list of tags for a resource
+    #
+    #   # The following example returns a list of tags associated with the specified resource.
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "arn:aws:securityhub:us-west-1:123456789012:hub/default", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: {
+    #       "Area" => "USMidwest", 
+    #       "Department" => "Operations", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
@@ -4348,6 +5488,19 @@ module Aws::SecurityHub
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To tag a resource
+    #
+    #   # The following example adds the 'Department' and 'Area' tags to the specified resource.
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "arn:aws:securityhub:us-west-1:123456789012:hub/default", 
+    #     tags: {
+    #       "Area" => "USMidwest", 
+    #       "Department" => "Operations", 
+    #     }, 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.tag_resource({
@@ -4376,6 +5529,18 @@ module Aws::SecurityHub
     #   can remove up to 50 tags at a time.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To remove tags from a resource
+    #
+    #   # The following example removes the 'Department' tag from the specified resource.
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "arn:aws:securityhub:us-west-1:123456789012:hub/default", 
+    #     tag_keys: [
+    #       "Department", 
+    #     ], 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -4406,6 +5571,18 @@ module Aws::SecurityHub
     #   The updated description for the custom action target.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To update the name and description of a custom action target
+    #
+    #   # The following example updates the name and description of a custom action target in Security Hub. You can create custom
+    #   # actions to automatically respond to Security Hub findings using Amazon EventBridge. 
+    #
+    #   resp = client.update_action_target({
+    #     action_target_arn: "arn:aws:securityhub:us-west-1:123456789012:action/custom/Remediation", 
+    #     description: "Sends specified findings to customer service chat", 
+    #     name: "Chat custom action", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -4476,6 +5653,33 @@ module Aws::SecurityHub
     #   * {Types::UpdateFindingAggregatorResponse#finding_aggregation_region #finding_aggregation_region} => String
     #   * {Types::UpdateFindingAggregatorResponse#region_linking_mode #region_linking_mode} => String
     #   * {Types::UpdateFindingAggregatorResponse#regions #regions} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: To update cross-Region aggregation settings
+    #
+    #   # The following example updates the cross-Region aggregation configuration. You use this operation to change the list of
+    #   # linked Regions and the treatment of new Regions. However, you cannot use this operation to change the aggregation
+    #   # Region.
+    #
+    #   resp = client.update_finding_aggregator({
+    #     finding_aggregator_arn: "arn:aws:securityhub:us-east-1:123456789012:finding-aggregator/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     region_linking_mode: "SPECIFIED_REGIONS", 
+    #     regions: [
+    #       "us-west-1", 
+    #       "us-west-2", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     finding_aggregation_region: "us-east-1", 
+    #     finding_aggregator_arn: "arn:aws:securityhub:us-east-1:123456789012:finding-aggregator/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     region_linking_mode: "SPECIFIED_REGIONS", 
+    #     regions: [
+    #       "us-west-1", 
+    #       "us-west-2", 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -5191,6 +6395,30 @@ module Aws::SecurityHub
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To update an insight
+    #
+    #   # The following example updates the specified Security Hub insight.
+    #
+    #   resp = client.update_insight({
+    #     filters: {
+    #       resource_type: [
+    #         {
+    #           comparison: "EQUALS", 
+    #           value: "AwsIamRole", 
+    #         }, 
+    #       ], 
+    #       severity_label: [
+    #         {
+    #           comparison: "EQUALS", 
+    #           value: "HIGH", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     insight_arn: "arn:aws:securityhub:us-west-1:123456789012:insight/123456789012/custom/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     name: "High severity role findings", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_insight({
@@ -5872,6 +7100,16 @@ module Aws::SecurityHub
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To update organization configuration
+    #
+    #   # The following example updates the configuration for an organization so that Security Hub is automatically activated for
+    #   # new member accounts. Only the Security Hub administrator account can call this operation.
+    #
+    #   resp = client.update_organization_configuration({
+    #     auto_enable: true, 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_organization_configuration({
@@ -5913,6 +7151,17 @@ module Aws::SecurityHub
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To update Security Hub settings
+    #
+    #   # The following example updates Security Hub settings to turn on consolidated control findings, and to automatically
+    #   # enable new controls in enabled standards.
+    #
+    #   resp = client.update_security_hub_configuration({
+    #     auto_enable_controls: true, 
+    #     control_finding_generator: "SECURITY_CONTROL", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_security_hub_configuration({
@@ -5944,6 +7193,17 @@ module Aws::SecurityHub
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To update the enablement status of a standard control
+    #
+    #   # The following example disables the specified control in the specified security standard.
+    #
+    #   resp = client.update_standards_control({
+    #     control_status: "DISABLED", 
+    #     disabled_reason: "Not applicable to my service", 
+    #     standards_control_arn: "arn:aws:securityhub:us-west-1:123456789012:control/pci-dss/v/3.2.1/PCI.AutoScaling.1", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_standards_control({
@@ -5974,7 +7234,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

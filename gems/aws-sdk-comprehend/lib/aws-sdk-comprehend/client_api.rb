@@ -151,6 +151,8 @@ module Aws::Comprehend
     DocumentClassifierArn = Shapes::StringShape.new(name: 'DocumentClassifierArn')
     DocumentClassifierAugmentedManifestsList = Shapes::ListShape.new(name: 'DocumentClassifierAugmentedManifestsList')
     DocumentClassifierDataFormat = Shapes::StringShape.new(name: 'DocumentClassifierDataFormat')
+    DocumentClassifierDocumentTypeFormat = Shapes::StringShape.new(name: 'DocumentClassifierDocumentTypeFormat')
+    DocumentClassifierDocuments = Shapes::StructureShape.new(name: 'DocumentClassifierDocuments')
     DocumentClassifierEndpointArn = Shapes::StringShape.new(name: 'DocumentClassifierEndpointArn')
     DocumentClassifierFilter = Shapes::StructureShape.new(name: 'DocumentClassifierFilter')
     DocumentClassifierInputDataConfig = Shapes::StructureShape.new(name: 'DocumentClassifierInputDataConfig')
@@ -305,6 +307,7 @@ module Aws::Comprehend
     ListOfRelationships = Shapes::ListShape.new(name: 'ListOfRelationships')
     ListOfSyntaxTokens = Shapes::ListShape.new(name: 'ListOfSyntaxTokens')
     ListOfTargetedSentimentEntities = Shapes::ListShape.new(name: 'ListOfTargetedSentimentEntities')
+    ListOfWarnings = Shapes::ListShape.new(name: 'ListOfWarnings')
     ListPiiEntitiesDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListPiiEntitiesDetectionJobsRequest')
     ListPiiEntitiesDetectionJobsResponse = Shapes::StructureShape.new(name: 'ListPiiEntitiesDetectionJobsResponse')
     ListSentimentDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListSentimentDetectionJobsRequest')
@@ -324,6 +327,7 @@ module Aws::Comprehend
     NumberOfTopicsInteger = Shapes::IntegerShape.new(name: 'NumberOfTopicsInteger')
     OutputDataConfig = Shapes::StructureShape.new(name: 'OutputDataConfig')
     PageBasedErrorCode = Shapes::StringShape.new(name: 'PageBasedErrorCode')
+    PageBasedWarningCode = Shapes::StringShape.new(name: 'PageBasedWarningCode')
     PartOfSpeechTag = Shapes::StructureShape.new(name: 'PartOfSpeechTag')
     PartOfSpeechTagType = Shapes::StringShape.new(name: 'PartOfSpeechTagType')
     PiiEntitiesDetectionJobFilter = Shapes::StructureShape.new(name: 'PiiEntitiesDetectionJobFilter')
@@ -434,6 +438,7 @@ module Aws::Comprehend
     UpdateFlywheelResponse = Shapes::StructureShape.new(name: 'UpdateFlywheelResponse')
     VersionName = Shapes::StringShape.new(name: 'VersionName')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
+    WarningsListItem = Shapes::StructureShape.new(name: 'WarningsListItem')
 
     AttributeNamesList.member = Shapes::ShapeRef.new(shape: AttributeNamesListItem)
 
@@ -579,6 +584,7 @@ module Aws::Comprehend
     ClassifyDocumentResponse.add_member(:document_metadata, Shapes::ShapeRef.new(shape: DocumentMetadata, location_name: "DocumentMetadata"))
     ClassifyDocumentResponse.add_member(:document_type, Shapes::ShapeRef.new(shape: ListOfDocumentType, location_name: "DocumentType"))
     ClassifyDocumentResponse.add_member(:errors, Shapes::ShapeRef.new(shape: ListOfErrors, location_name: "Errors"))
+    ClassifyDocumentResponse.add_member(:warnings, Shapes::ShapeRef.new(shape: ListOfWarnings, location_name: "Warnings"))
     ClassifyDocumentResponse.struct_class = Types::ClassifyDocumentResponse
 
     ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -944,6 +950,10 @@ module Aws::Comprehend
 
     DocumentClassifierAugmentedManifestsList.member = Shapes::ShapeRef.new(shape: AugmentedManifestsListItem)
 
+    DocumentClassifierDocuments.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
+    DocumentClassifierDocuments.add_member(:test_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "TestS3Uri"))
+    DocumentClassifierDocuments.struct_class = Types::DocumentClassifierDocuments
+
     DocumentClassifierFilter.add_member(:status, Shapes::ShapeRef.new(shape: ModelStatus, location_name: "Status"))
     DocumentClassifierFilter.add_member(:document_classifier_name, Shapes::ShapeRef.new(shape: ComprehendArnName, location_name: "DocumentClassifierName"))
     DocumentClassifierFilter.add_member(:submit_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeBefore"))
@@ -955,6 +965,9 @@ module Aws::Comprehend
     DocumentClassifierInputDataConfig.add_member(:test_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "TestS3Uri"))
     DocumentClassifierInputDataConfig.add_member(:label_delimiter, Shapes::ShapeRef.new(shape: LabelDelimiter, location_name: "LabelDelimiter"))
     DocumentClassifierInputDataConfig.add_member(:augmented_manifests, Shapes::ShapeRef.new(shape: DocumentClassifierAugmentedManifestsList, location_name: "AugmentedManifests"))
+    DocumentClassifierInputDataConfig.add_member(:document_type, Shapes::ShapeRef.new(shape: DocumentClassifierDocumentTypeFormat, location_name: "DocumentType"))
+    DocumentClassifierInputDataConfig.add_member(:documents, Shapes::ShapeRef.new(shape: DocumentClassifierDocuments, location_name: "Documents"))
+    DocumentClassifierInputDataConfig.add_member(:document_reader_config, Shapes::ShapeRef.new(shape: DocumentReaderConfig, location_name: "DocumentReaderConfig"))
     DocumentClassifierInputDataConfig.struct_class = Types::DocumentClassifierInputDataConfig
 
     DocumentClassifierOutputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri"))
@@ -1518,6 +1531,8 @@ module Aws::Comprehend
 
     ListOfTargetedSentimentEntities.member = Shapes::ShapeRef.new(shape: TargetedSentimentEntity)
 
+    ListOfWarnings.member = Shapes::ShapeRef.new(shape: WarningsListItem)
+
     ListPiiEntitiesDetectionJobsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: PiiEntitiesDetectionJobFilter, location_name: "Filter"))
     ListPiiEntitiesDetectionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListPiiEntitiesDetectionJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
@@ -2025,6 +2040,11 @@ module Aws::Comprehend
     VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, required: true, location_name: "SecurityGroupIds"))
     VpcConfig.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, required: true, location_name: "Subnets"))
     VpcConfig.struct_class = Types::VpcConfig
+
+    WarningsListItem.add_member(:page, Shapes::ShapeRef.new(shape: Integer, location_name: "Page"))
+    WarningsListItem.add_member(:warn_code, Shapes::ShapeRef.new(shape: PageBasedWarningCode, location_name: "WarnCode"))
+    WarningsListItem.add_member(:warn_message, Shapes::ShapeRef.new(shape: String, location_name: "WarnMessage"))
+    WarningsListItem.struct_class = Types::WarningsListItem
 
 
     # @api private
@@ -2924,6 +2944,7 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: KmsKeyValidationException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -2937,6 +2958,7 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: KmsKeyValidationException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -2952,6 +2974,7 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: KmsKeyValidationException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -2965,6 +2988,7 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: KmsKeyValidationException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -2991,6 +3015,7 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: KmsKeyValidationException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -3004,6 +3029,7 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: KmsKeyValidationException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -3017,6 +3043,7 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: KmsKeyValidationException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -3030,6 +3057,7 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: KmsKeyValidationException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -3043,6 +3071,7 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: KmsKeyValidationException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
