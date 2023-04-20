@@ -2120,6 +2120,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidFleetStatusException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:create_game_server_group, Seahorse::Model::Operation.new.tap do |o|

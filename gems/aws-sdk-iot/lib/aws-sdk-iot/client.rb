@@ -2323,7 +2323,7 @@ module Aws::IoT
     #   resp.aws_iot_job_id #=> String
     #   resp.ota_update_arn #=> String
     #   resp.aws_iot_job_arn #=> String
-    #   resp.ota_update_status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED"
+    #   resp.ota_update_status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_FAILED"
     #
     # @overload create_ota_update(params = {})
     # @param [Hash] params ({})
@@ -6987,7 +6987,7 @@ module Aws::IoT
     #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.signature_algorithm #=> String
     #   resp.ota_update_info.ota_update_files[0].attributes #=> Hash
     #   resp.ota_update_info.ota_update_files[0].attributes["AttributeKey"] #=> String
-    #   resp.ota_update_info.ota_update_status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED"
+    #   resp.ota_update_info.ota_update_status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_FAILED"
     #   resp.ota_update_info.aws_iot_job_id #=> String
     #   resp.ota_update_info.aws_iot_job_arn #=> String
     #   resp.ota_update_info.error_info.code #=> String
@@ -9095,6 +9095,8 @@ module Aws::IoT
     #   * {Types::ListManagedJobTemplatesResponse#managed_job_templates #managed_job_templates} => Array&lt;Types::ManagedJobTemplateSummary&gt;
     #   * {Types::ListManagedJobTemplatesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_managed_job_templates({
@@ -9272,7 +9274,7 @@ module Aws::IoT
     #   resp = client.list_ota_updates({
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     ota_update_status: "CREATE_PENDING", # accepts CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_COMPLETE, CREATE_FAILED
+    #     ota_update_status: "CREATE_PENDING", # accepts CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_COMPLETE, CREATE_FAILED, DELETE_IN_PROGRESS, DELETE_FAILED
     #   })
     #
     # @example Response structure
@@ -9733,6 +9735,8 @@ module Aws::IoT
     #
     #   * {Types::ListRelatedResourcesForAuditFindingResponse#related_resources #related_resources} => Array&lt;Types::RelatedResource&gt;
     #   * {Types::ListRelatedResourcesForAuditFindingResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -14089,7 +14093,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.102.0'
+      context[:gem_version] = '1.103.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -178,9 +178,9 @@ module Aws::ChimeSDKMediaPipelines
     #   @return [Types::PostCallAnalyticsSettings]
     #
     # @!attribute [rw] call_analytics_stream_categories
-    #   By default, all `CategoryEvents` will be sent to the insights
-    #   target. If this parameter is specified, only included categories
-    #   will be sent to the insights target.
+    #   By default, all `CategoryEvents` are sent to the insights target. If
+    #   this parameter is specified, only included categories are sent to
+    #   the insights target.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/AmazonTranscribeCallAnalyticsProcessorConfiguration AWS API Documentation
@@ -338,7 +338,8 @@ module Aws::ChimeSDKMediaPipelines
     #   `CREDIT_DEBIT_EXPIRY`, `CREDIT_DEBIT_NUMBER`, `EMAIL`, `NAME`,
     #   `PHONE`, `PIN`, `SSN`, or `ALL`.
     #
-    #   Length Constraints: Minimum length of 1. Maximum length of 300.
+    #   If you leave this parameter empty, the default behavior is
+    #   equivalent to `ALL`.
     #   @return [String]
     #
     # @!attribute [rw] language_model_name
@@ -1256,12 +1257,7 @@ module Aws::ChimeSDKMediaPipelines
     # Data Stream sink.
     #
     # @!attribute [rw] insights_target
-    #   The URL of the sink,
-    #   [https://aws.amazon.com/kinesis/data-streams/][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/kinesis/data-streams/
+    #   The ARN of the sink.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/KinesisDataStreamSinkConfiguration AWS API Documentation
@@ -1337,12 +1333,7 @@ module Aws::ChimeSDKMediaPipelines
     # function's data sink.
     #
     # @!attribute [rw] insights_target
-    #   The URL of the sink,
-    #   [https://aws.amazon.com/kinesis/data-streams/][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/kinesis/data-streams/
+    #   The ARN of the sink.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/LambdaFunctionSinkConfiguration AWS API Documentation
@@ -2018,7 +2009,20 @@ module Aws::ChimeSDKMediaPipelines
       include Aws::Structure
     end
 
-    # The settings for a post-call voice analytics task.
+    # Allows you to specify additional settings for your Call Analytics
+    # post-call request, including output locations for your redacted
+    # transcript, which IAM role to use, and which encryption key to use.
+    #
+    # `DataAccessRoleArn` and `OutputLocation` are required fields.
+    #
+    # `PostCallAnalyticsSettings` provides the same insights as a Call
+    # Analytics post-call transcription. For more information, refer to
+    # [Post-call analytics with real-time transcriptions][1] in the *Amazon
+    # Transcribe Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-post-call.html
     #
     # @!attribute [rw] output_location
     #   The URL of the Amazon S3 bucket that contains the post-call data.
@@ -2040,7 +2044,7 @@ module Aws::ChimeSDKMediaPipelines
     #   @return [String]
     #
     # @!attribute [rw] output_encryption_kms_key_id
-    #   The ID of the KMS (Key Management System) key used to encrypt the
+    #   The ID of the KMS (Key Management Service) key used to encrypt the
     #   output.
     #   @return [String]
     #
@@ -2055,7 +2059,7 @@ module Aws::ChimeSDKMediaPipelines
       include Aws::Structure
     end
 
-    # Defines the configuration for a presenter only video tile.
+    # Defines the configuration for a presenter-only video tile.
     #
     # @!attribute [rw] presenter_position
     #   Defines the position of the presenter video tile. Default:
@@ -2122,7 +2126,7 @@ module Aws::ChimeSDKMediaPipelines
       include Aws::Structure
     end
 
-    # A structure the holds the settings for recording audio and video.
+    # A structure that holds the settings for recording media.
     #
     # @!attribute [rw] stream_arn
     #   The ARN of the recording stream.
@@ -2173,31 +2177,38 @@ module Aws::ChimeSDKMediaPipelines
       include Aws::Structure
     end
 
-    # The structure that holds the settings for transmitting audio and video
-    # to the Amazon S3 bucket.
+    # The structure that holds the settings for transmitting media to the
+    # Amazon S3 bucket. These values are used as defaults if
+    # `S3RecordingSinkRuntimeConfiguration` is not specified.
     #
     # @!attribute [rw] destination
-    #   The URL of the Amazon S3 bucket used as the recording sink.
+    #   The default URI of the Amazon S3 bucket used as the recording sink.
+    #   @return [String]
+    #
+    # @!attribute [rw] recording_file_format
+    #   The default file format for the media files sent to the Amazon S3
+    #   bucket.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/S3RecordingSinkConfiguration AWS API Documentation
     #
     class S3RecordingSinkConfiguration < Struct.new(
-      :destination)
+      :destination,
+      :recording_file_format)
       SENSITIVE = [:destination]
       include Aws::Structure
     end
 
-    # A structure that holds the settings for transmitting audio and video
-    # recordings to the runtime Amazon S3 bucket.
+    # A structure that holds the settings for transmitting media files to
+    # the Amazon S3 bucket. If specified, the settings in this structure
+    # override any settings in `S3RecordingSinkConfiguration`.
     #
     # @!attribute [rw] destination
-    #   The URL of the S3 bucket used as the runtime sink.
+    #   The URI of the S3 bucket used as the sink.
     #   @return [String]
     #
     # @!attribute [rw] recording_file_format
-    #   The file formats for the audio and video files sent to the Amazon S3
-    #   bucket.
+    #   The file format for the media files sent to the Amazon S3 bucket.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/S3RecordingSinkRuntimeConfiguration AWS API Documentation
@@ -2303,12 +2314,7 @@ module Aws::ChimeSDKMediaPipelines
     # The configuration settings for the SNS topic sink.
     #
     # @!attribute [rw] insights_target
-    #   The URL of the SNS sink,
-    #   [https://aws.amazon.com/kinesis/data-streams/][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/kinesis/data-streams/
+    #   The ARN of the SNS sink.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/SnsTopicSinkConfiguration AWS API Documentation
@@ -2334,15 +2340,10 @@ module Aws::ChimeSDKMediaPipelines
       include Aws::Structure
     end
 
-    # The URL of the SQS sink.
+    # The configuration settings for the SQS sink.
     #
     # @!attribute [rw] insights_target
-    #   The URL of the SQS sink,
-    #   [https://aws.amazon.com/kinesis/data-streams/][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/kinesis/data-streams/
+    #   The ARN of the SQS sink.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/SqsQueueSinkConfiguration AWS API Documentation

@@ -242,6 +242,7 @@ module Aws::GuardDuty
     KubernetesDetails = Shapes::StructureShape.new(name: 'KubernetesDetails')
     KubernetesUserDetails = Shapes::StructureShape.new(name: 'KubernetesUserDetails')
     KubernetesWorkloadDetails = Shapes::StructureShape.new(name: 'KubernetesWorkloadDetails')
+    LambdaDetails = Shapes::StructureShape.new(name: 'LambdaDetails')
     Lineage = Shapes::ListShape.new(name: 'Lineage')
     LineageObject = Shapes::StructureShape.new(name: 'LineageObject')
     ListCoverageRequest = Shapes::StructureShape.new(name: 'ListCoverageRequest')
@@ -385,6 +386,7 @@ module Aws::GuardDuty
     StopMonitoringMembersRequest = Shapes::StructureShape.new(name: 'StopMonitoringMembersRequest')
     StopMonitoringMembersResponse = Shapes::StructureShape.new(name: 'StopMonitoringMembersResponse')
     String = Shapes::StringShape.new(name: 'String')
+    SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -448,6 +450,7 @@ module Aws::GuardDuty
     VolumeMount = Shapes::StructureShape.new(name: 'VolumeMount')
     VolumeMounts = Shapes::ListShape.new(name: 'VolumeMounts')
     Volumes = Shapes::ListShape.new(name: 'Volumes')
+    VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
 
     AcceptAdministratorInvitationRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     AcceptAdministratorInvitationRequest.add_member(:administrator_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "administratorId"))
@@ -1253,6 +1256,17 @@ module Aws::GuardDuty
     KubernetesWorkloadDetails.add_member(:volumes, Shapes::ShapeRef.new(shape: Volumes, location_name: "volumes"))
     KubernetesWorkloadDetails.struct_class = Types::KubernetesWorkloadDetails
 
+    LambdaDetails.add_member(:function_arn, Shapes::ShapeRef.new(shape: String, location_name: "functionArn"))
+    LambdaDetails.add_member(:function_name, Shapes::ShapeRef.new(shape: String, location_name: "functionName"))
+    LambdaDetails.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    LambdaDetails.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedAt"))
+    LambdaDetails.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, location_name: "revisionId"))
+    LambdaDetails.add_member(:function_version, Shapes::ShapeRef.new(shape: String, location_name: "functionVersion"))
+    LambdaDetails.add_member(:role, Shapes::ShapeRef.new(shape: String, location_name: "role"))
+    LambdaDetails.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
+    LambdaDetails.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    LambdaDetails.struct_class = Types::LambdaDetails
+
     Lineage.member = Shapes::ShapeRef.new(shape: LineageObject)
 
     LineageObject.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
@@ -1645,6 +1659,7 @@ module Aws::GuardDuty
     Resource.add_member(:container_details, Shapes::ShapeRef.new(shape: Container, location_name: "containerDetails"))
     Resource.add_member(:rds_db_instance_details, Shapes::ShapeRef.new(shape: RdsDbInstanceDetails, location_name: "rdsDbInstanceDetails"))
     Resource.add_member(:rds_db_user_details, Shapes::ShapeRef.new(shape: RdsDbUserDetails, location_name: "rdsDbUserDetails"))
+    Resource.add_member(:lambda_details, Shapes::ShapeRef.new(shape: LambdaDetails, location_name: "lambdaDetails"))
     Resource.struct_class = Types::Resource
 
     ResourceDetails.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, location_name: "instanceArn"))
@@ -1812,6 +1827,8 @@ module Aws::GuardDuty
 
     StopMonitoringMembersResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: UnprocessedAccounts, required: true, location_name: "unprocessedAccounts"))
     StopMonitoringMembersResponse.struct_class = Types::StopMonitoringMembersResponse
+
+    SubnetIds.member = Shapes::ShapeRef.new(shape: String)
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
@@ -2017,6 +2034,11 @@ module Aws::GuardDuty
     VolumeMounts.member = Shapes::ShapeRef.new(shape: VolumeMount)
 
     Volumes.member = Shapes::ShapeRef.new(shape: Volume)
+
+    VpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "subnetIds"))
+    VpcConfig.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
+    VpcConfig.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroups, location_name: "securityGroups"))
+    VpcConfig.struct_class = Types::VpcConfig
 
 
     # @api private

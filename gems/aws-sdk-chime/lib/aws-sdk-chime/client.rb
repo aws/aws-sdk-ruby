@@ -517,11 +517,11 @@ module Aws::Chime
 
     # Creates up to 100 new attendees for an active Amazon Chime SDK
     # meeting. For more information about the Amazon Chime SDK, see [Using
-    # the Amazon Chime SDK][1] in the *Amazon Chime Developer Guide*.
+    # the Amazon Chime SDK][1] in the *Amazon Chime SDK Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
     #
     # @option params [required, String] :meeting_id
     #   The Amazon Chime SDK meeting ID.
@@ -1106,11 +1106,11 @@ module Aws::Chime
 
     # Creates a new attendee for an active Amazon Chime SDK meeting. For
     # more information about the Amazon Chime SDK, see [Using the Amazon
-    # Chime SDK][1] in the *Amazon Chime Developer Guide*.
+    # Chime SDK][1] in the *Amazon Chime SDK Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
     #
     # @option params [required, String] :meeting_id
     #   The Amazon Chime SDK meeting ID.
@@ -1469,7 +1469,9 @@ module Aws::Chime
     #   The ARN of the sink type.
     #
     # @option params [String] :client_request_token
-    #   The token assigned to the client making the pipeline request.
+    #   The unique identifier for the client request. The token makes the API
+    #   request idempotent. Use a different token for different media pipeline
+    #   requests.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1545,14 +1547,14 @@ module Aws::Chime
     # Creates a new Amazon Chime SDK meeting in the specified media Region
     # with no initial attendees. For more information about specifying media
     # Regions, see [Amazon Chime SDK Media Regions][1] in the *Amazon Chime
-    # Developer Guide* . For more information about the Amazon Chime SDK,
-    # see [Using the Amazon Chime SDK][2] in the *Amazon Chime Developer
-    # Guide* .
+    # SDK Developer Guide* . For more information about the Amazon Chime
+    # SDK, see [Using the Amazon Chime SDK][2] in the *Amazon Chime SDK
+    # Developer Guide* .
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html
-    # [2]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/chime-sdk-meetings-regions.html
+    # [2]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
     #
     # @option params [required, String] :client_request_token
     #   The unique identifier for the client request. Use a different token
@@ -1684,14 +1686,15 @@ module Aws::Chime
 
     # Creates a new Amazon Chime SDK meeting in the specified media Region,
     # with attendees. For more information about specifying media Regions,
-    # see [Amazon Chime SDK Media Regions][1] in the *Amazon Chime Developer
-    # Guide* . For more information about the Amazon Chime SDK, see [Using
-    # the Amazon Chime SDK][2] in the *Amazon Chime Developer Guide* .
+    # see [Amazon Chime SDK Media Regions][1] in the *Amazon Chime SDK
+    # Developer Guide* . For more information about the Amazon Chime SDK,
+    # see [Using the Amazon Chime SDK][2] in the *Amazon Chime SDK Developer
+    # Guide* .
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html
-    # [2]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/chime-sdk-meetings-regions.html
+    # [2]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
     #
     # @option params [required, String] :client_request_token
     #   The unique identifier for the client request. Use a different token
@@ -1722,7 +1725,7 @@ module Aws::Chime
     #   The resource target configurations for receiving Amazon Chime SDK
     #   meeting and attendee event notifications. The Amazon Chime SDK
     #   supports resource targets located in the US East (N. Virginia) AWS
-    #   Region (`us-east-1`).
+    #   Region (us-east-1).
     #
     # @option params [Array<Types::CreateAttendeeRequestItem>] :attendees
     #   The request containing the attendees to create.
@@ -2459,11 +2462,11 @@ module Aws::Chime
     # deletes their `JoinToken`. Attendees are automatically deleted when a
     # Amazon Chime SDK meeting is deleted. For more information about the
     # Amazon Chime SDK, see [Using the Amazon Chime SDK][1] in the *Amazon
-    # Chime Developer Guide*.
+    # Chime SDK Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
     #
     # @option params [required, String] :meeting_id
     #   The Amazon Chime SDK meeting ID.
@@ -2720,12 +2723,12 @@ module Aws::Chime
     # Deletes the specified Amazon Chime SDK meeting. The operation deletes
     # all attendees, disconnects all clients, and prevents new clients from
     # joining the meeting. For more information about the Amazon Chime SDK,
-    # see [Using the Amazon Chime SDK][1] in the *Amazon Chime Developer
+    # see [Using the Amazon Chime SDK][1] in the *Amazon Chime SDK Developer
     # Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
     #
     # @option params [required, String] :meeting_id
     #   The Amazon Chime SDK meeting ID.
@@ -3757,12 +3760,12 @@ module Aws::Chime
 
     # Gets the Amazon Chime SDK attendee details for a specified meeting ID
     # and attendee ID. For more information about the Amazon Chime SDK, see
-    # [Using the Amazon Chime SDK][1] in the *Amazon Chime Developer Guide*
-    # .
+    # [Using the Amazon Chime SDK][1] in the *Amazon Chime SDK Developer
+    # Guide* .
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
     #
     # @option params [required, String] :meeting_id
     #   The Amazon Chime SDK meeting ID.
@@ -3994,11 +3997,11 @@ module Aws::Chime
 
     # Gets the Amazon Chime SDK meeting details for the specified meeting
     # ID. For more information about the Amazon Chime SDK, see [Using the
-    # Amazon Chime SDK][1] in the *Amazon Chime Developer Guide* .
+    # Amazon Chime SDK][1] in the *Amazon Chime SDK Developer Guide* .
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
     #
     # @option params [required, String] :meeting_id
     #   The Amazon Chime SDK meeting ID.
@@ -5047,11 +5050,11 @@ module Aws::Chime
 
     # Lists the attendees for the specified Amazon Chime SDK meeting. For
     # more information about the Amazon Chime SDK, see [Using the Amazon
-    # Chime SDK][1] in the *Amazon Chime Developer Guide*.
+    # Chime SDK][1] in the *Amazon Chime SDK Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
     #
     # @option params [required, String] :meeting_id
     #   The Amazon Chime SDK meeting ID.
@@ -5676,11 +5679,11 @@ module Aws::Chime
 
     # Lists up to 100 active Amazon Chime SDK meetings. For more information
     # about the Amazon Chime SDK, see [Using the Amazon Chime SDK][1] in the
-    # *Amazon Chime Developer Guide*.
+    # *Amazon Chime SDK Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
     #
     # @option params [String] :next_token
     #   The token to use to retrieve the next page of results.
@@ -7301,7 +7304,26 @@ module Aws::Chime
       req.send_request(options)
     end
 
-    # Starts transcription for the specified `meetingId`.
+    # Starts transcription for the specified `meetingId`. For more
+    # information, refer to [ Using Amazon Chime SDK live transcription ][1]
+    # in the *Amazon Chime SDK Developer Guide*.
+    #
+    # If you specify an invalid configuration, a `TranscriptFailed` event
+    # will be sent with the contents of the `BadRequestException` generated
+    # by Amazon Transcribe. For more information on each parameter and which
+    # combinations are valid, refer to the [StartStreamTranscription][2] API
+    # in the *Amazon Transcribe Developer Guide*.
+    #
+    # Amazon Chime SDK live transcription is powered by Amazon Transcribe.
+    # Use of Amazon Transcribe is subject to the [AWS Service Terms][3],
+    # including the terms specific to the AWS Machine Learning and
+    # Artificial Intelligence Services.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meeting-transcription.html
+    # [2]: https://docs.aws.amazon.com/transcribe/latest/APIReference/API_streaming_StartStreamTranscription.html
+    # [3]: https://aws.amazon.com/service-terms/
     #
     # @option params [required, String] :meeting_id
     #   The unique ID of the meeting being transcribed.
@@ -7319,7 +7341,7 @@ module Aws::Chime
     #     meeting_id: "GuidString", # required
     #     transcription_configuration: { # required
     #       engine_transcribe_settings: {
-    #         language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
+    #         language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN, th-TH, hi-IN
     #         vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #         vocabulary_filter_name: "String",
     #         vocabulary_name: "String",
@@ -7330,6 +7352,11 @@ module Aws::Chime
     #         content_redaction_type: "PII", # accepts PII
     #         pii_entity_types: "TranscribePiiEntityTypes",
     #         language_model_name: "TranscribeLanguageModelName",
+    #         identify_language: false,
+    #         language_options: "TranscribeLanguageOptions",
+    #         preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN, th-TH, hi-IN
+    #         vocabulary_names: "TranscribeVocabularyNamesOrFilterNamesString",
+    #         vocabulary_filter_names: "TranscribeVocabularyNamesOrFilterNamesString",
     #       },
     #       engine_transcribe_medical_settings: {
     #         language_code: "en-US", # required, accepts en-US
@@ -8600,7 +8627,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

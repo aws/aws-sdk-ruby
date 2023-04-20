@@ -10,6 +10,44 @@
 module Aws::WAFV2
   module Types
 
+    # Information for a single API key.
+    #
+    # @!attribute [rw] token_domains
+    #   The token domains that are defined in this API key.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] api_key
+    #   The generated, encrypted API key. You can copy this for use in your
+    #   JavaScript CAPTCHA integration.
+    #
+    #   For information about how to use this in your CAPTCHA JavaScript
+    #   integration, see [WAF client application integration][1] in the *WAF
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The date and time that the key was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] version
+    #   Internal value used by WAF to manage the key.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/APIKeySummary AWS API Documentation
+    #
+    class APIKeySummary < Struct.new(
+      :token_domains,
+      :api_key,
+      :creation_timestamp,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details for your use of the account takeover prevention managed rule
     # group, `AWSManagedRulesATPRuleSet`. This configuration is used in
     # `ManagedRuleGroupConfig`.
@@ -814,6 +852,57 @@ module Aws::WAFV2
     #
     class CountAction < Struct.new(
       :custom_request_handling)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, an Amazon Cognito user pool, or an App Runner
+    #   service.
+    #
+    #   To work with CloudFront, you must also specify the Region US East
+    #   (N. Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_domains
+    #   The client application domains that you want to use this API key
+    #   for.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/CreateAPIKeyRequest AWS API Documentation
+    #
+    class CreateAPIKeyRequest < Struct.new(
+      :scope,
+      :token_domains)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] api_key
+    #   The generated, encrypted API key. You can copy this for use in your
+    #   JavaScript CAPTCHA integration.
+    #
+    #   For information about how to use this in your CAPTCHA JavaScript
+    #   integration, see [WAF client application integration][1] in the *WAF
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/CreateAPIKeyResponse AWS API Documentation
+    #
+    class CreateAPIKeyResponse < Struct.new(
+      :api_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2295,6 +2384,52 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, an Amazon Cognito user pool, or an App Runner
+    #   service.
+    #
+    #   To work with CloudFront, you must also specify the Region US East
+    #   (N. Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_key
+    #   The encrypted API key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetDecryptedAPIKeyRequest AWS API Documentation
+    #
+    class GetDecryptedAPIKeyRequest < Struct.new(
+      :scope,
+      :api_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] token_domains
+    #   The token domains that are defined in this API key.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The date and time that the key was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetDecryptedAPIKeyResponse AWS API Documentation
+    #
+    class GetDecryptedAPIKeyResponse < Struct.new(
+      :token_domains,
+      :creation_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the IP set. You cannot change the name of an `IPSet`
     #   after you create it.
@@ -3592,6 +3727,83 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, an Amazon Cognito user pool, or an App Runner
+    #   service.
+    #
+    #   To work with CloudFront, you must also specify the Region US East
+    #   (N. Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of objects that you want WAF to return for this
+    #   request. If more objects are available, in the response, WAF
+    #   provides a `NextMarker` value that you can use in a subsequent call
+    #   to get the next batch of objects.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListAPIKeysRequest AWS API Documentation
+    #
+    class ListAPIKeysRequest < Struct.new(
+      :scope,
+      :next_marker,
+      :limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_key_summaries
+    #   The array of key summaries. If you specified a `Limit` in your
+    #   request, this might not be the full list.
+    #   @return [Array<Types::APIKeySummary>]
+    #
+    # @!attribute [rw] application_integration_url
+    #   The CAPTCHA application integration URL, for use in your JavaScript
+    #   implementation.
+    #
+    #   For information about how to use this in your CAPTCHA JavaScript
+    #   integration, see [WAF client application integration][1] in the *WAF
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListAPIKeysResponse AWS API Documentation
+    #
+    class ListAPIKeysResponse < Struct.new(
+      :next_marker,
+      :api_key_summaries,
+      :application_integration_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] vendor_name
     #   The name of the managed rule group vendor. You use this, along with
     #   the rule group name, to identify the rule group.
@@ -3655,7 +3867,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] versions
     #   The versions that are currently available for the specified managed
-    #   rule group.
+    #   rule group. If you specified a `Limit` in your request, this might
+    #   not be the full list.
     #   @return [Array<Types::ManagedRuleGroupVersion>]
     #
     # @!attribute [rw] current_default_version
@@ -3722,6 +3935,8 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] managed_rule_groups
+    #   Array of managed rule groups that you can use. If you specified a
+    #   `Limit` in your request, this might not be the full list.
     #   @return [Array<Types::ManagedRuleGroupSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListAvailableManagedRuleGroupsResponse AWS API Documentation
@@ -3783,8 +3998,8 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] ip_sets
-    #   Array of IPSets. This may not be the full list of IPSets that you
-    #   have defined. See the `Limit` specification for this request.
+    #   Array of IPSets. If you specified a `Limit` in your request, this
+    #   might not be the full list.
     #   @return [Array<Types::IPSetSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListIPSetsResponse AWS API Documentation
@@ -3838,6 +4053,8 @@ module Aws::WAFV2
     end
 
     # @!attribute [rw] logging_configurations
+    #   Array of logging configurations. If you specified a `Limit` in your
+    #   request, this might not be the full list.
     #   @return [Array<Types::LoggingConfiguration>]
     #
     # @!attribute [rw] next_marker
@@ -3907,7 +4124,8 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] managed_rule_sets
-    #   Your managed rule sets.
+    #   Your managed rule sets. If you specified a `Limit` in your request,
+    #   this might not be the full list.
     #   @return [Array<Types::ManagedRuleSetSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListManagedRuleSetsResponse AWS API Documentation
@@ -3949,7 +4167,9 @@ module Aws::WAFV2
     end
 
     # @!attribute [rw] release_summaries
-    #   High level information for the available SDK releases.
+    #   The high level information for the available SDK releases. If you
+    #   specified a `Limit` in your request, this might not be the full
+    #   list.
     #   @return [Array<Types::ReleaseSummary>]
     #
     # @!attribute [rw] next_marker
@@ -4019,6 +4239,8 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] regex_pattern_sets
+    #   Array of regex pattern sets. If you specified a `Limit` in your
+    #   request, this might not be the full list.
     #   @return [Array<Types::RegexPatternSetSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListRegexPatternSetsResponse AWS API Documentation
@@ -4120,6 +4342,8 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] rule_groups
+    #   Array of rule groups. If you specified a `Limit` in your request,
+    #   this might not be the full list.
     #   @return [Array<Types::RuleGroupSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListRuleGroupsResponse AWS API Documentation
@@ -4169,7 +4393,9 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] tag_info_for_resource
-    #   The collection of tagging definitions for the resource.
+    #   The collection of tagging definitions for the resource. If you
+    #   specified a `Limit` in your request, this might not be the full
+    #   list.
     #   @return [Types::TagInfoForResource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListTagsForResourceResponse AWS API Documentation
@@ -4231,6 +4457,8 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] web_acls
+    #   Array of web ACLs. If you specified a `Limit` in your request, this
+    #   might not be the full list.
     #   @return [Array<Types::WebACLSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListWebACLsResponse AWS API Documentation

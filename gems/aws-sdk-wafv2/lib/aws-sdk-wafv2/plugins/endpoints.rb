@@ -60,6 +60,8 @@ module Aws::WAFV2
             Aws::WAFV2::Endpoints::AssociateWebACL.build(context)
           when :check_capacity
             Aws::WAFV2::Endpoints::CheckCapacity.build(context)
+          when :create_api_key
+            Aws::WAFV2::Endpoints::CreateAPIKey.build(context)
           when :create_ip_set
             Aws::WAFV2::Endpoints::CreateIPSet.build(context)
           when :create_regex_pattern_set
@@ -88,6 +90,8 @@ module Aws::WAFV2
             Aws::WAFV2::Endpoints::DisassociateWebACL.build(context)
           when :generate_mobile_sdk_release_url
             Aws::WAFV2::Endpoints::GenerateMobileSdkReleaseUrl.build(context)
+          when :get_decrypted_api_key
+            Aws::WAFV2::Endpoints::GetDecryptedAPIKey.build(context)
           when :get_ip_set
             Aws::WAFV2::Endpoints::GetIPSet.build(context)
           when :get_logging_configuration
@@ -110,6 +114,8 @@ module Aws::WAFV2
             Aws::WAFV2::Endpoints::GetWebACL.build(context)
           when :get_web_acl_for_resource
             Aws::WAFV2::Endpoints::GetWebACLForResource.build(context)
+          when :list_api_keys
+            Aws::WAFV2::Endpoints::ListAPIKeys.build(context)
           when :list_available_managed_rule_group_versions
             Aws::WAFV2::Endpoints::ListAvailableManagedRuleGroupVersions.build(context)
           when :list_available_managed_rule_groups

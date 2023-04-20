@@ -814,6 +814,7 @@ module Aws::ChimeSDKMediaPipelines
     #         },
     #         s3_recording_sink_configuration: {
     #           destination: "Arn",
+    #           recording_file_format: "Wav", # accepts Wav, Opus
     #         },
     #         voice_analytics_processor_configuration: {
     #           speaker_search_status: "Enabled", # accepts Enabled, Disabled
@@ -888,6 +889,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.filter_partial_results #=> Boolean
     #   resp.media_insights_pipeline_configuration.elements[0].kinesis_data_stream_sink_configuration.insights_target #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].s3_recording_sink_configuration.destination #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].s3_recording_sink_configuration.recording_file_format #=> String, one of "Wav", "Opus"
     #   resp.media_insights_pipeline_configuration.elements[0].voice_analytics_processor_configuration.speaker_search_status #=> String, one of "Enabled", "Disabled"
     #   resp.media_insights_pipeline_configuration.elements[0].voice_analytics_processor_configuration.voice_tone_analysis_status #=> String, one of "Enabled", "Disabled"
     #   resp.media_insights_pipeline_configuration.elements[0].lambda_function_sink_configuration.insights_target #=> String
@@ -1190,6 +1192,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.filter_partial_results #=> Boolean
     #   resp.media_insights_pipeline_configuration.elements[0].kinesis_data_stream_sink_configuration.insights_target #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].s3_recording_sink_configuration.destination #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].s3_recording_sink_configuration.recording_file_format #=> String, one of "Wav", "Opus"
     #   resp.media_insights_pipeline_configuration.elements[0].voice_analytics_processor_configuration.speaker_search_status #=> String, one of "Enabled", "Disabled"
     #   resp.media_insights_pipeline_configuration.elements[0].voice_analytics_processor_configuration.voice_tone_analysis_status #=> String, one of "Enabled", "Disabled"
     #   resp.media_insights_pipeline_configuration.elements[0].lambda_function_sink_configuration.insights_target #=> String
@@ -1618,6 +1621,7 @@ module Aws::ChimeSDKMediaPipelines
     #         },
     #         s3_recording_sink_configuration: {
     #           destination: "Arn",
+    #           recording_file_format: "Wav", # accepts Wav, Opus
     #         },
     #         voice_analytics_processor_configuration: {
     #           speaker_search_status: "Enabled", # accepts Enabled, Disabled
@@ -1685,6 +1689,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.filter_partial_results #=> Boolean
     #   resp.media_insights_pipeline_configuration.elements[0].kinesis_data_stream_sink_configuration.insights_target #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].s3_recording_sink_configuration.destination #=> String
+    #   resp.media_insights_pipeline_configuration.elements[0].s3_recording_sink_configuration.recording_file_format #=> String, one of "Wav", "Opus"
     #   resp.media_insights_pipeline_configuration.elements[0].voice_analytics_processor_configuration.speaker_search_status #=> String, one of "Enabled", "Disabled"
     #   resp.media_insights_pipeline_configuration.elements[0].voice_analytics_processor_configuration.voice_tone_analysis_status #=> String, one of "Enabled", "Disabled"
     #   resp.media_insights_pipeline_configuration.elements[0].lambda_function_sink_configuration.insights_target #=> String
@@ -1743,7 +1748,7 @@ module Aws::ChimeSDKMediaPipelines
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmediapipelines'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

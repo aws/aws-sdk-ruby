@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.174.0 (2023-04-20)
+------------------
+
+* Feature - Amazon SageMaker Canvas adds ModelRegisterSettings support for CanvasAppSettings.
+
 1.173.0 (2023-04-04)
 ------------------
 

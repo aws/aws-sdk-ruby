@@ -3685,6 +3685,63 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Information about the Lambda function involved in the finding.
+    #
+    # @!attribute [rw] function_arn
+    #   Amazon Resource Name (ARN) of the Lambda function.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_name
+    #   Name of the Lambda function.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description of the Lambda function.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The timestamp when the Lambda function was last modified. This field
+    #   is in the UTC date string format `(2023-03-22T19:37:20.168Z)`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision ID of the Lambda function version.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_version
+    #   The version of the Lambda function.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The execution role of the Lambda function.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Amazon Virtual Private Cloud configuration details associated with
+    #   your Lambda function.
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags attached to this resource, listed in the format of
+    #   `key`:`value` pair.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/LambdaDetails AWS API Documentation
+    #
+    class LambdaDetails < Struct.new(
+      :function_arn,
+      :function_name,
+      :description,
+      :last_modified_at,
+      :revision_id,
+      :function_version,
+      :role,
+      :vpc_config,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the runtime process details.
     #
     # @!attribute [rw] start_time
@@ -5611,6 +5668,11 @@ module Aws::GuardDuty
     #   login attempt was made.
     #   @return [Types::RdsDbUserDetails]
     #
+    # @!attribute [rw] lambda_details
+    #   Contains information about the Lambda function that was involved in
+    #   a finding.
+    #   @return [Types::LambdaDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Resource AWS API Documentation
     #
     class Resource < Struct.new(
@@ -5624,7 +5686,8 @@ module Aws::GuardDuty
       :ecs_cluster_details,
       :container_details,
       :rds_db_instance_details,
-      :rds_db_user_details)
+      :rds_db_user_details,
+      :lambda_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7191,6 +7254,33 @@ module Aws::GuardDuty
     class VolumeMount < Struct.new(
       :name,
       :mount_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Amazon Virtual Private Cloud configuration details associated with
+    # your Lambda function.
+    #
+    # @!attribute [rw] subnet_ids
+    #   The identifiers of the subnets that are associated with your Lambda
+    #   function.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_id
+    #   The identifier of the Amazon Virtual Private Cloud.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_groups
+    #   The identifier of the security group attached to the Lambda
+    #   function.
+    #   @return [Array<Types::SecurityGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/VpcConfig AWS API Documentation
+    #
+    class VpcConfig < Struct.new(
+      :subnet_ids,
+      :vpc_id,
+      :security_groups)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -452,7 +452,7 @@ module Aws::ChimeSDKMeetings
     #
     # * When you change a `video` or `content` capability from `None` or
     #   `Receive` to `Send` or `SendReceive` , and if the attendee turned on
-    #   their video or content streams, remote attendess can receive those
+    #   their video or content streams, remote attendees can receive those
     #   streams, but only after media renegotiation between the client and
     #   the Amazon Chime back-end server.
     #
@@ -541,7 +541,7 @@ module Aws::ChimeSDKMeetings
     #
     #   * When you change a `video` or `content` capability from `None` or
     #     `Receive` to `Send` or `SendReceive` , and if the attendee turned on
-    #     their video or content streams, remote attendess can receive those
+    #     their video or content streams, remote attendees can receive those
     #     streams, but only after media renegotiation between the client and
     #     the Amazon Chime back-end server.
     #
@@ -1137,15 +1137,22 @@ module Aws::ChimeSDKMeetings
     # information, refer to [ Using Amazon Chime SDK live transcription ][1]
     # in the *Amazon Chime SDK Developer Guide*.
     #
+    # If you specify an invalid configuration, a `TranscriptFailed` event
+    # will be sent with the contents of the `BadRequestException` generated
+    # by Amazon Transcribe. For more information on each parameter and which
+    # combinations are valid, refer to the [StartStreamTranscription][2] API
+    # in the *Amazon Transcribe Developer Guide*.
+    #
     # Amazon Chime SDK live transcription is powered by Amazon Transcribe.
-    # Use of Amazon Transcribe is subject to the [AWS Service Terms][2],
+    # Use of Amazon Transcribe is subject to the [AWS Service Terms][3],
     # including the terms specific to the AWS Machine Learning and
     # Artificial Intelligence Services.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meeting-transcription.html
-    # [2]: https://aws.amazon.com/service-terms/
+    # [2]: https://docs.aws.amazon.com/transcribe/latest/APIReference/API_streaming_StartStreamTranscription.html
+    # [3]: https://aws.amazon.com/service-terms/
     #
     # @option params [required, String] :meeting_id
     #   The unique ID of the meeting being transcribed.
@@ -1163,7 +1170,7 @@ module Aws::ChimeSDKMeetings
     #     meeting_id: "GuidString", # required
     #     transcription_configuration: { # required
     #       engine_transcribe_settings: {
-    #         language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
+    #         language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN, th-TH, hi-IN
     #         vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #         vocabulary_filter_name: "String",
     #         vocabulary_name: "String",
@@ -1176,7 +1183,9 @@ module Aws::ChimeSDKMeetings
     #         language_model_name: "TranscribeLanguageModelName",
     #         identify_language: false,
     #         language_options: "TranscribeLanguageOptions",
-    #         preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
+    #         preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN, th-TH, hi-IN
+    #         vocabulary_names: "TranscribeVocabularyNamesOrFilterNamesString",
+    #         vocabulary_filter_names: "TranscribeVocabularyNamesOrFilterNamesString",
     #       },
     #       engine_transcribe_medical_settings: {
     #         language_code: "en-US", # required, accepts en-US
@@ -1312,7 +1321,7 @@ module Aws::ChimeSDKMeetings
       req.send_request(options)
     end
 
-    # The capabilties that you want to update.
+    # The capabilities that you want to update.
     #
     # <note markdown="1"> You use the capabilities with a set of values that control what the
     # capabilities can do, such as `SendReceive` data. For more information
@@ -1336,7 +1345,7 @@ module Aws::ChimeSDKMeetings
     #
     # * When you change a `video` or `content` capability from `None` or
     #   `Receive` to `Send` or `SendReceive` , and if the attendee turned on
-    #   their video or content streams, remote attendess can receive those
+    #   their video or content streams, remote attendees can receive those
     #   streams, but only after media renegotiation between the client and
     #   the Amazon Chime back-end server.
     #
@@ -1347,7 +1356,7 @@ module Aws::ChimeSDKMeetings
     #   The ID of the attendee associated with the update request.
     #
     # @option params [required, Types::AttendeeCapabilities] :capabilities
-    #   The capabilties that you want to update.
+    #   The capabilities that you want to update.
     #
     # @return [Types::UpdateAttendeeCapabilitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1396,7 +1405,7 @@ module Aws::ChimeSDKMeetings
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmeetings'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

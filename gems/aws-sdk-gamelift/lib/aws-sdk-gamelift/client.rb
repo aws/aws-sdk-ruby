@@ -445,22 +445,22 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the GameLift FleetIQ solution and game
-    # server groups.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
     # Locates an available game server and temporarily reserves it to host
     # gameplay and players. This operation is called from a game client or
     # client service (such as a matchmaker) to request hosting resources for
-    # a new game session. In response, GameLift FleetIQ locates an available
-    # game server, places it in `CLAIMED` status for 60 seconds, and returns
-    # connection information that players can use to connect to the game
-    # server.
+    # a new game session. In response, Amazon GameLift FleetIQ locates an
+    # available game server, places it in `CLAIMED` status for 60 seconds,
+    # and returns connection information that players can use to connect to
+    # the game server.
     #
     # To claim a game server, identify a game server group. You can also
-    # specify a game server ID, although this approach bypasses GameLift
-    # FleetIQ placement optimization. Optionally, include game data to pass
-    # to the game server at the start of a game session, such as a game map
-    # or player information.
+    # specify a game server ID, although this approach bypasses Amazon
+    # GameLift FleetIQ placement optimization. Optionally, include game data
+    # to pass to the game server at the start of a game session, such as a
+    # game map or player information.
     #
     # When a game server is successfully claimed, connection information is
     # returned. A claimed game server's utilization status remains
@@ -487,7 +487,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [GameLift FleetIQ Guide][2]
+    # [Amazon GameLift FleetIQ Guide][2]
     #
     #
     #
@@ -497,12 +497,12 @@ module Aws::GameLift
     # @option params [required, String] :game_server_group_name
     #   A unique identifier for the game server group where the game server is
     #   running. If you are not specifying a game server to claim, this value
-    #   identifies where you want GameLift FleetIQ to look for an available
-    #   game server to claim.
+    #   identifies where you want Amazon GameLift FleetIQ to look for an
+    #   available game server to claim.
     #
     # @option params [String] :game_server_id
     #   A custom string that uniquely identifies the game server to claim. If
-    #   this parameter is left empty, GameLift FleetIQ searches for an
+    #   this parameter is left empty, Amazon GameLift FleetIQ searches for an
     #   available game server in the specified game server group.
     #
     # @option params [String] :game_server_data
@@ -640,12 +640,12 @@ module Aws::GameLift
     # binary files. Combine game server binaries into a zip file for use
     # with Amazon GameLift.
     #
-    # When setting up a new game build for GameLift, we recommend using the
-    # CLI command <b> <a
+    # When setting up a new game build for Amazon GameLift, we recommend
+    # using the CLI command <b> <a
     # href="https://docs.aws.amazon.com/cli/latest/reference/gamelift/upload-build.html">upload-build</a>
     # </b>. This helper command combines two tasks: (1) it uploads your
-    # build files from a file directory to a GameLift Amazon S3 location,
-    # and (2) it creates a new build resource.
+    # build files from a file directory to a Amazon GameLift Amazon S3
+    # location, and (2) it creates a new build resource.
     #
     # You can use the operation in the following scenarios:
     #
@@ -655,14 +655,14 @@ module Aws::GameLift
     #   bucket. With permissions in place, specify a build name, operating
     #   system, and the Amazon S3 storage location of your game build.
     #
-    # * To directly upload your build files to a GameLift Amazon S3
+    # * To directly upload your build files to a Amazon GameLift Amazon S3
     #   location. To use this option, specify a build name and operating
     #   system. This operation creates a new build resource and also returns
     #   an Amazon S3 location with temporary access credentials. Use the
     #   credentials to manually upload your build files to the specified
     #   Amazon S3 location. For more information, see [Uploading Objects][1]
     #   in the *Amazon S3 Developer Guide*. After you upload build files to
-    #   the GameLift Amazon S3 location, you can't update them.
+    #   the Amazon GameLift Amazon S3 location, you can't update them.
     #
     # If successful, this operation creates a new build resource with a
     # unique build ID and places it in `INITIALIZED` status. A build must be
@@ -684,12 +684,12 @@ module Aws::GameLift
     # [4]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
     #
     # @option params [String] :name
-    #   A descriptive label associated with a build. Build names do not need
+    #   A descriptive label associated with a build. Build names don't need
     #   to be unique. You can change this value later.
     #
     # @option params [String] :version
     #   Version information associated with a build or script. Version strings
-    #   do not need to be unique. You can change this value later.
+    #   don't need to be unique. You can change this value later.
     #
     # @option params [Types::S3Location] :storage_location
     #   Information indicating where your game build files are stored. Use
@@ -707,9 +707,9 @@ module Aws::GameLift
     #   The operating system that you built the game server binaries to run
     #   on. This value determines the type of fleet resources that you can use
     #   for this build. If your game build contains multiple executables, they
-    #   all must run on the same operating system. If an operating system is
-    #   not specified when creating a build, GameLift uses the default value
-    #   (WINDOWS\_2012). This value cannot be changed later.
+    #   all must run on the same operating system. If an operating system
+    #   isn't specified when creating a build, Amazon GameLift uses the
+    #   default value (WINDOWS\_2012). This value can't be changed later.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of labels to assign to the new build resource. Tags are
@@ -731,8 +731,9 @@ module Aws::GameLift
     #
     # @option params [String] :server_sdk_version
     #   A server SDK version you used when integrating your game server build
-    #   with GameLift. For more information see [Integrate games with custom
-    #   game servers][1].
+    #   with Amazon GameLift. For more information see [Integrate games with
+    #   custom game servers][1]. By default Amazon GameLift sets this value to
+    #   `4.0.2`.
     #
     #
     #
@@ -755,7 +756,7 @@ module Aws::GameLift
     #       role_arn: "NonEmptyString",
     #       object_version: "NonEmptyString",
     #     },
-    #     operating_system: "WINDOWS_2012", # accepts WINDOWS_2012, AMAZON_LINUX, AMAZON_LINUX_2
+    #     operating_system: "WINDOWS_2012", # accepts WINDOWS_2012, AMAZON_LINUX, AMAZON_LINUX_2, WINDOWS_2016
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -773,7 +774,7 @@ module Aws::GameLift
     #   resp.build.version #=> String
     #   resp.build.status #=> String, one of "INITIALIZED", "READY", "FAILED"
     #   resp.build.size_on_disk #=> Integer
-    #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2"
+    #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016"
     #   resp.build.creation_time #=> Time
     #   resp.build.server_sdk_version #=> String
     #   resp.upload_credentials.access_key_id #=> String
@@ -793,31 +794,30 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Creates a fleet of Amazon Elastic Compute Cloud (Amazon Elastic
-    # Compute Cloud) instances to host your custom game server or Realtime
-    # Servers. Use this operation to configure the computing resources for
-    # your fleet and provide instructions for running game servers on each
-    # instance.
+    # Creates a fleet of Amazon Elastic Compute Cloud (Amazon EC2) instances
+    # to host your custom game server or Realtime Servers. Use this
+    # operation to configure the computing resources for your fleet and
+    # provide instructions for running game servers on each instance.
     #
-    # Most GameLift fleets can deploy instances to multiple locations,
-    # including the home Region (where the fleet is created) and an optional
-    # set of remote locations. Fleets that are created in the following
-    # Amazon Web Services Regions support multiple locations: us-east-1 (N.
-    # Virginia), us-west-2 (Oregon), eu-central-1 (Frankfurt), eu-west-1
-    # (Ireland), ap-southeast-2 (Sydney), ap-northeast-1 (Tokyo), and
-    # ap-northeast-2 (Seoul). Fleets that are created in other GameLift
-    # Regions can deploy instances in the fleet's home Region only. All
-    # fleet instances use the same configuration regardless of location;
-    # however, you can adjust capacity settings and turn auto-scaling on/off
-    # for each location.
+    # Most Amazon GameLift fleets can deploy instances to multiple
+    # locations, including the home Region (where the fleet is created) and
+    # an optional set of remote locations. Fleets that are created in the
+    # following Amazon Web Services Regions support multiple locations:
+    # us-east-1 (N. Virginia), us-west-2 (Oregon), eu-central-1 (Frankfurt),
+    # eu-west-1 (Ireland), ap-southeast-2 (Sydney), ap-northeast-1 (Tokyo),
+    # and ap-northeast-2 (Seoul). Fleets that are created in other Amazon
+    # GameLift Regions can deploy instances in the fleet's home Region
+    # only. All fleet instances use the same configuration regardless of
+    # location; however, you can adjust capacity settings and turn
+    # auto-scaling on/off for each location.
     #
     # To create a fleet, choose the hardware for your instances, specify a
     # game server build or Realtime script to deploy, and provide a runtime
-    # configuration to direct GameLift how to start and run game servers on
-    # each instance in the fleet. Set permissions for inbound traffic to
-    # your game servers, and enable optional features as needed. When
-    # creating a multi-location fleet, provide a list of additional remote
-    # locations.
+    # configuration to direct Amazon GameLift how to start and run game
+    # servers on each instance in the fleet. Set permissions for inbound
+    # traffic to your game servers, and enable optional features as needed.
+    # When creating a multi-location fleet, provide a list of additional
+    # remote locations.
     #
     # If you need to debug your fleet, fetch logs, view performance metrics
     # or other actions on the fleet, create the development fleet with port
@@ -826,8 +826,8 @@ module Aws::GameLift
     # finished.
     #
     # If successful, this operation creates a new Fleet resource and places
-    # it in `NEW` status, which prompts GameLift to initiate the [fleet
-    # creation workflow][1].
+    # it in `NEW` status, which prompts Amazon GameLift to initiate the
+    # [fleet creation workflow][1].
     #
     # **Learn more**
     #
@@ -839,7 +839,7 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creation-workflow.html
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-all.html#fleets-creation-workflow
     # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation
     #
@@ -853,14 +853,14 @@ module Aws::GameLift
     # @option params [String] :build_id
     #   The unique identifier for a custom game server build to be deployed on
     #   fleet instances. You can use either the build ID or ARN. The build
-    #   must be uploaded to GameLift and in `READY` status. This fleet
+    #   must be uploaded to Amazon GameLift and in `READY` status. This fleet
     #   property cannot be changed later.
     #
     # @option params [String] :script_id
     #   The unique identifier for a Realtime configuration script to be
     #   deployed on fleet instances. You can use either the script ID or ARN.
-    #   Scripts must be uploaded to GameLift prior to creating the fleet. This
-    #   fleet property cannot be changed later.
+    #   Scripts must be uploaded to Amazon GameLift prior to creating the
+    #   fleet. This fleet property cannot be changed later.
     #
     # @option params [String] :server_launch_path
     #   **This parameter is no longer used.** Specify a server launch path
@@ -873,22 +873,24 @@ module Aws::GameLift
     #   parameter instead continue to be valid.
     #
     # @option params [Array<String>] :log_paths
-    #   **This parameter is no longer used.** To specify where GameLift should
-    #   store log files once a server process shuts down, use the GameLift
-    #   server API `ProcessReady()` and specify one or more directory paths in
-    #   `logParameters`. For more information, see [Initialize the server
-    #   process][1] in the *GameLift Developer Guide*.
+    #   **This parameter is no longer used.** To specify where Amazon GameLift
+    #   should store log files once a server process shuts down, use the
+    #   Amazon GameLift server API `ProcessReady()` and specify one or more
+    #   directory paths in `logParameters`. For more information, see
+    #   [Initialize the server process][1] in the *Amazon GameLift Developer
+    #   Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-initialize
     #
     # @option params [String] :ec2_instance_type
-    #   The GameLift-supported Amazon EC2 instance type to use for all fleet
-    #   instances. Instance type determines the computing resources that will
-    #   be used to host your game servers, including CPU, memory, storage, and
-    #   networking capacity. See [Amazon Elastic Compute Cloud Instance
-    #   Types][1] for detailed descriptions of Amazon EC2 instance types.
+    #   The Amazon GameLift-supported Amazon EC2 instance type to use for all
+    #   fleet instances. Instance type determines the computing resources that
+    #   will be used to host your game servers, including CPU, memory,
+    #   storage, and networking capacity. See [Amazon Elastic Compute Cloud
+    #   Instance Types][1] for detailed descriptions of Amazon EC2 instance
+    #   types.
     #
     #
     #
@@ -898,7 +900,7 @@ module Aws::GameLift
     #   The allowed IP address ranges and port settings that allow inbound
     #   traffic to access game sessions on this fleet. If the fleet is hosting
     #   a custom game build, this property must be set before players can
-    #   connect to game sessions. For Realtime Servers fleets, GameLift
+    #   connect to game sessions. For Realtime Servers fleets, Amazon GameLift
     #   automatically sets TCP and UDP ranges.
     #
     # @option params [String] :new_game_session_protection_policy
@@ -941,17 +943,17 @@ module Aws::GameLift
     #   metric group at a time.
     #
     # @option params [String] :peer_vpc_aws_account_id
-    #   Used when peering your GameLift fleet with a VPC, the unique
+    #   Used when peering your Amazon GameLift fleet with a VPC, the unique
     #   identifier for the Amazon Web Services account that owns the VPC. You
     #   can find your account ID in the Amazon Web Services Management Console
     #   under account settings.
     #
     # @option params [String] :peer_vpc_id
     #   A unique identifier for a VPC with resources to be accessed by your
-    #   GameLift fleet. The VPC must be in the same Region as your fleet. To
-    #   look up a VPC ID, use the [VPC Dashboard][1] in the Amazon Web
-    #   Services Management Console. Learn more about VPC peering in [VPC
-    #   Peering with GameLift Fleets][2].
+    #   Amazon GameLift fleet. The VPC must be in the same Region as your
+    #   fleet. To look up a VPC ID, use the [VPC Dashboard][1] in the Amazon
+    #   Web Services Management Console. Learn more about VPC peering in [VPC
+    #   Peering with Amazon GameLift Fleets][2].
     #
     #
     #
@@ -985,11 +987,11 @@ module Aws::GameLift
     #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
     #
     # @option params [Types::CertificateConfiguration] :certificate_configuration
-    #   Prompts GameLift to generate a TLS/SSL certificate for the fleet.
-    #   GameLift uses the certificates to encrypt traffic between game clients
-    #   and the game servers running on GameLift. By default, the
-    #   `CertificateConfiguration` is `DISABLED`. You can't change this
-    #   property after you create the fleet.
+    #   Prompts Amazon GameLift to generate a TLS/SSL certificate for the
+    #   fleet. Amazon GameLift uses the certificates to encrypt traffic
+    #   between game clients and the game servers running on Amazon GameLift.
+    #   By default, the `CertificateConfiguration` is `DISABLED`. You can't
+    #   change this property after you create the fleet.
     #
     #   Certificate Manager (ACM) certificates expire after 13 months.
     #   Certificate expiration can cause fleets to fail, preventing players
@@ -1013,10 +1015,13 @@ module Aws::GameLift
     #   A set of remote locations to deploy additional instances to and manage
     #   as part of the fleet. This parameter can only be used when creating
     #   fleets in Amazon Web Services Regions that support multiple locations.
-    #   You can add any GameLift-supported Amazon Web Services Region as a
-    #   remote location, in the form of an Amazon Web Services Region code
-    #   such as `us-west-2`. To create a fleet with instances in the home
-    #   Region only, omit this parameter.
+    #   You can add any Amazon GameLift-supported Amazon Web Services Region
+    #   as a remote location, in the form of an Amazon Web Services Region
+    #   code such as `us-west-2`. To create a fleet with instances in the home
+    #   Region only, don't use this parameter.
+    #
+    #   To use this parameter, Amazon GameLift requires you to use your home
+    #   location in the request.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of labels to assign to the new fleet resource. Tags are
@@ -1031,11 +1036,12 @@ module Aws::GameLift
     #
     # @option params [String] :compute_type
     #   The type of compute resource used to host your game servers. You can
-    #   use your own compute resources with GameLift Anywhere or use Amazon
-    #   EC2 instances with managed GameLift.
+    #   use your own compute resources with Amazon GameLift Anywhere or use
+    #   Amazon EC2 instances with managed Amazon GameLift. By default, this
+    #   property is set to `EC2`.
     #
     # @option params [Types::AnywhereConfiguration] :anywhere_configuration
-    #   GameLift Anywhere configuration options.
+    #   Amazon GameLift Anywhere configuration options.
     #
     # @return [Types::CreateFleetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1122,7 +1128,7 @@ module Aws::GameLift
     #   resp.fleet_attributes.log_paths #=> Array
     #   resp.fleet_attributes.log_paths[0] #=> String
     #   resp.fleet_attributes.new_game_session_protection_policy #=> String, one of "NoProtection", "FullProtection"
-    #   resp.fleet_attributes.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2"
+    #   resp.fleet_attributes.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016"
     #   resp.fleet_attributes.resource_creation_limit_policy.new_game_sessions_per_creator #=> Integer
     #   resp.fleet_attributes.resource_creation_limit_policy.policy_period_in_minutes #=> Integer
     #   resp.fleet_attributes.metric_groups #=> Array
@@ -1162,9 +1168,9 @@ module Aws::GameLift
     # list of one or more locations.
     #
     # If successful, this operation returns the list of added locations with
-    # their status set to `NEW`. GameLift initiates the process of starting
-    # an instance in each added location. You can track the status of each
-    # new location by monitoring location creation events using
+    # their status set to `NEW`. Amazon GameLift initiates the process of
+    # starting an instance in each added location. You can track the status
+    # of each new location by monitoring location creation events using
     # [DescribeFleetEvents][1].
     #
     # **Learn more**
@@ -1184,8 +1190,8 @@ module Aws::GameLift
     #
     # @option params [required, Array<Types::LocationConfiguration>] :locations
     #   A list of locations to deploy additional instances to and manage as
-    #   part of the fleet. You can add any GameLift-supported Amazon Web
-    #   Services Region as a remote location, in the form of an Amazon Web
+    #   part of the fleet. You can add any Amazon GameLift-supported Amazon
+    #   Web Services Region as a remote location, in the form of an Amazon Web
     #   Services Region code such as `us-west-2`.
     #
     # @return [Types::CreateFleetLocationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1222,16 +1228,16 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the GameLift FleetIQ solution and game
-    # server groups.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
-    # Creates a GameLift FleetIQ game server group for managing game hosting
-    # on a collection of Amazon Elastic Compute Cloud instances for game
-    # hosting. This operation creates the game server group, creates an Auto
-    # Scaling group in your Amazon Web Services account, and establishes a
-    # link between the two groups. You can view the status of your game
-    # server groups in the GameLift console. Game server group metrics and
-    # events are emitted to Amazon CloudWatch.
+    # Creates a Amazon GameLift FleetIQ game server group for managing game
+    # hosting on a collection of Amazon Elastic Compute Cloud instances for
+    # game hosting. This operation creates the game server group, creates an
+    # Auto Scaling group in your Amazon Web Services account, and
+    # establishes a link between the two groups. You can view the status of
+    # your game server groups in the Amazon GameLift console. Game server
+    # group metrics and events are emitted to Amazon CloudWatch.
     #
     # Before creating a new game server group, you must have the following:
     #
@@ -1242,17 +1248,17 @@ module Aws::GameLift
     #   Guide*.
     #
     # * An IAM role that extends limited access to your Amazon Web Services
-    #   account to allow GameLift FleetIQ to create and interact with the
-    #   Auto Scaling group. For more information, see [Create IAM roles for
-    #   cross-service interaction][2] in the *GameLift FleetIQ Developer
-    #   Guide*.
+    #   account to allow Amazon GameLift FleetIQ to create and interact with
+    #   the Auto Scaling group. For more information, see [Create IAM roles
+    #   for cross-service interaction][2] in the *Amazon GameLift FleetIQ
+    #   Developer Guide*.
     #
     # To create a new game server group, specify a unique group name, IAM
     # role and Amazon Elastic Compute Cloud launch template, and provide a
     # list of instance types that can be used in the group. You must also
     # set initial maximum and minimum limits on the group's instance count.
     # You can optionally set an Auto Scaling policy with target tracking
-    # based on a GameLift FleetIQ metric.
+    # based on a Amazon GameLift FleetIQ metric.
     #
     # Once the game server group and corresponding Auto Scaling group are
     # created, you have full access to change the Auto Scaling group's
@@ -1260,12 +1266,12 @@ module Aws::GameLift
     # a game server group, including maximum/minimum size and auto-scaling
     # policy settings, must be updated directly in the Auto Scaling group.
     # Keep in mind that some Auto Scaling group properties are periodically
-    # updated by GameLift FleetIQ as part of its balancing activities to
-    # optimize for availability and cost.
+    # updated by Amazon GameLift FleetIQ as part of its balancing activities
+    # to optimize for availability and cost.
     #
     # **Learn more**
     #
-    # [GameLift FleetIQ Guide][3]
+    # [Amazon GameLift FleetIQ Guide][3]
     #
     #
     #
@@ -1276,8 +1282,8 @@ module Aws::GameLift
     # @option params [required, String] :game_server_group_name
     #   An identifier for the new game server group. This value is used to
     #   generate unique ARN identifiers for the Amazon EC2 Auto Scaling group
-    #   and the GameLift FleetIQ game server group. The name must be unique
-    #   per Region per Amazon Web Services account.
+    #   and the Amazon GameLift FleetIQ game server group. The name must be
+    #   unique per Region per Amazon Web Services account.
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name ([ARN][1]) for an IAM role that allows Amazon
@@ -1289,18 +1295,18 @@ module Aws::GameLift
     #
     # @option params [required, Integer] :min_size
     #   The minimum number of instances allowed in the Amazon EC2 Auto Scaling
-    #   group. During automatic scaling events, GameLift FleetIQ and Amazon
-    #   EC2 do not scale down the group below this minimum. In production,
-    #   this value should be set to at least 1. After the Auto Scaling group
-    #   is created, update this value directly in the Auto Scaling group using
-    #   the Amazon Web Services console or APIs.
+    #   group. During automatic scaling events, Amazon GameLift FleetIQ and
+    #   Amazon EC2 do not scale down the group below this minimum. In
+    #   production, this value should be set to at least 1. After the Auto
+    #   Scaling group is created, update this value directly in the Auto
+    #   Scaling group using the Amazon Web Services console or APIs.
     #
     # @option params [required, Integer] :max_size
     #   The maximum number of instances allowed in the Amazon EC2 Auto Scaling
-    #   group. During automatic scaling events, GameLift FleetIQ and EC2 do
-    #   not scale up the group above this maximum. After the Auto Scaling
-    #   group is created, update this value directly in the Auto Scaling group
-    #   using the Amazon Web Services console or APIs.
+    #   group. During automatic scaling events, Amazon GameLift FleetIQ and
+    #   EC2 do not scale up the group above this maximum. After the Auto
+    #   Scaling group is created, update this value directly in the Auto
+    #   Scaling group using the Amazon Web Services console or APIs.
     #
     # @option params [required, Types::LaunchTemplateSpecification] :launch_template
     #   The Amazon EC2 launch template that contains configuration settings
@@ -1314,8 +1320,8 @@ module Aws::GameLift
     #
     #   <note markdown="1"> If you specify network interfaces in your launch template, you must
     #   explicitly set the property `AssociatePublicIpAddress` to "true". If
-    #   no network interface is specified in the launch template, GameLift
-    #   FleetIQ uses your account's default VPC.
+    #   no network interface is specified in the launch template, Amazon
+    #   GameLift FleetIQ uses your account's default VPC.
     #
     #    </note>
     #
@@ -1326,7 +1332,7 @@ module Aws::GameLift
     # @option params [required, Array<Types::InstanceDefinition>] :instance_definitions
     #   The Amazon EC2 instance types and sizes to use in the Auto Scaling
     #   group. The instance definitions must specify at least two different
-    #   instance types that are supported by GameLift FleetIQ. For more
+    #   instance types that are supported by Amazon GameLift FleetIQ. For more
     #   information on instance types, see [EC2 Instance Types][1] in the
     #   *Amazon Elastic Compute Cloud User Guide*. You can optionally specify
     #   capacity weighting for each instance type. If no weight value is
@@ -1349,9 +1355,9 @@ module Aws::GameLift
     #   the Auto Scaling group using the Amazon Web Services console or APIs.
     #
     # @option params [String] :balancing_strategy
-    #   Indicates how GameLift FleetIQ balances the use of Spot Instances and
-    #   On-Demand Instances in the game server group. Method options include
-    #   the following:
+    #   Indicates how Amazon GameLift FleetIQ balances the use of Spot
+    #   Instances and On-Demand Instances in the game server group. Method
+    #   options include the following:
     #
     #   * `SPOT_ONLY` - Only Spot Instances are used in the game server group.
     #     If Spot Instances are unavailable or not viable for game hosting,
@@ -1384,12 +1390,12 @@ module Aws::GameLift
     #
     # @option params [Array<String>] :vpc_subnets
     #   A list of virtual private cloud (VPC) subnets to use with instances in
-    #   the game server group. By default, all GameLift FleetIQ-supported
-    #   Availability Zones are used. You can use this parameter to specify
-    #   VPCs that you've set up. This property cannot be updated after the
-    #   game server group is created, and the corresponding Auto Scaling group
-    #   will always use the property value that is set with this request, even
-    #   if the Auto Scaling group is updated directly.
+    #   the game server group. By default, all Amazon GameLift
+    #   FleetIQ-supported Availability Zones are used. You can use this
+    #   parameter to specify VPCs that you've set up. This property cannot be
+    #   updated after the game server group is created, and the corresponding
+    #   Auto Scaling group will always use the property value that is set with
+    #   this request, even if the Auto Scaling group is updated directly.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of labels to assign to the new game server group resource. Tags
@@ -1471,9 +1477,9 @@ module Aws::GameLift
     # Creates a multiplayer game session for players in a specific fleet
     # location. This operation prompts an available server process to start
     # a game session and retrieves connection information for the new game
-    # session. As an alternative, consider using the GameLift game session
-    # placement feature with [StartGameSessionPlacement][1] , which uses
-    # FleetIQ algorithms and queues to optimize the placement process.
+    # session. As an alternative, consider using the Amazon GameLift game
+    # session placement feature with [StartGameSessionPlacement][1] , which
+    # uses FleetIQ algorithms and queues to optimize the placement process.
     #
     # When creating a game session, you specify exactly where you want to
     # place it and provide a set of game session configuration settings. The
@@ -1548,11 +1554,18 @@ module Aws::GameLift
     #
     # @option params [String] :creator_id
     #   A unique identifier for a player or entity creating the game session.
-    #   This parameter is required when requesting a new game session on a
-    #   fleet with a resource creation limit policy. This type of policy
-    #   limits the number of concurrent active game sessions that one player
-    #   can create within a certain time span. GameLift uses the CreatorId to
-    #   evaluate the new request against the policy.
+    #
+    #   If you add a resource creation limit policy to a fleet, the
+    #   `CreateGameSession` operation requires a `CreatorId`. Amazon GameLift
+    #   limits the number of game session creation requests with the same
+    #   `CreatorId` in a specified time period.
+    #
+    #   If you your fleet doesn't have a resource creation limit policy and
+    #   you provide a `CreatorId` in your `CreateGameSession` requests, Amazon
+    #   GameLift limits requests to one request per `CreatorId` per second.
+    #
+    #   To not limit `CreateGameSession` requests with the same `CreatorId`,
+    #   don't provide a `CreatorId` in your `CreateGameSession` request.
     #
     # @option params [String] :game_session_id
     #   *This parameter is deprecated. Use `IdempotencyToken` instead.*
@@ -1651,8 +1664,8 @@ module Aws::GameLift
     # placement locations and find an available game server there, then
     # prompts the game server process to start a new game session.
     #
-    # A game session queue is configured with a set of destinations
-    # (GameLift fleets or aliases), which determine the locations where the
+    # A game session queue is configured with a set of destinations (Amazon
+    # GameLift fleets or aliases), which determine the locations where the
     # queue can place new game sessions. These destinations can span
     # multiple fleet types (Spot and On-Demand), instance types, and Amazon
     # Web Services Regions. If the queue includes multi-location fleets, the
@@ -1878,22 +1891,22 @@ module Aws::GameLift
     end
 
     # Defines a new matchmaking configuration for use with FlexMatch.
-    # Whether your are using FlexMatch with GameLift hosting or as a
+    # Whether your are using FlexMatch with Amazon GameLift hosting or as a
     # standalone matchmaking service, the matchmaking configuration sets out
     # rules for matching players and forming teams. If you're also using
-    # GameLift hosting, it defines how to start game sessions for each
-    # match. Your matchmaking system can use multiple configurations to
+    # Amazon GameLift hosting, it defines how to start game sessions for
+    # each match. Your matchmaking system can use multiple configurations to
     # handle different game scenarios. All matchmaking requests identify the
     # matchmaking configuration to use and provide player attributes
     # consistent with that configuration.
     #
     # To create a matchmaking configuration, you must provide the following:
-    # configuration name and FlexMatch mode (with or without GameLift
+    # configuration name and FlexMatch mode (with or without Amazon GameLift
     # hosting); a rule set that specifies how to evaluate players and find
     # acceptable matches; whether player acceptance is required; and the
     # maximum time allowed for a matchmaking attempt. When using FlexMatch
-    # with GameLift hosting, you also need to identify the game session
-    # queue to use when starting a game session for the match.
+    # with Amazon GameLift hosting, you also need to identify the game
+    # session queue to use when starting a game session for the match.
     #
     # In addition, you must set up an Amazon Simple Notification Service
     # topic to receive matchmaking notifications. Provide the topic ARN in
@@ -1919,14 +1932,14 @@ module Aws::GameLift
     #   A human-readable description of the matchmaking configuration.
     #
     # @option params [Array<String>] :game_session_queue_arns
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   game session queue resource and uniquely identifies it. ARNs are
-    #   unique across all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift game session queue resource and uniquely identifies it. ARNs
+    #   are unique across all Regions. Format is
     #   `arn:aws:gamelift:<region>::gamesessionqueue/<queue name>`. Queues can
-    #   be located in any Region. Queues are used to start new GameLift-hosted
-    #   game sessions for matches that are created with this matchmaking
-    #   configuration. If `FlexMatchMode` is set to `STANDALONE`, do not set
-    #   this parameter.
+    #   be located in any Region. Queues are used to start new Amazon
+    #   GameLift-hosted game sessions for matches that are created with this
+    #   matchmaking configuration. If `FlexMatchMode` is set to `STANDALONE`,
+    #   do not set this parameter.
     #
     #
     #
@@ -2002,7 +2015,7 @@ module Aws::GameLift
     #   The method used to backfill game sessions that are created with this
     #   matchmaking configuration. Specify `MANUAL` when your game manages
     #   backfill requests manually or does not use the match backfill feature.
-    #   Specify `AUTOMATIC` to have GameLift create a backfill request
+    #   Specify `AUTOMATIC` to have Amazon GameLift create a backfill request
     #   whenever a game session has one or more open slots. Learn more about
     #   manual and automatic backfill in [ Backfill Existing Games with
     #   FlexMatch][1]. Automatic backfill is not available when
@@ -2014,14 +2027,14 @@ module Aws::GameLift
     #
     # @option params [String] :flex_match_mode
     #   Indicates whether this matchmaking configuration is being used with
-    #   GameLift hosting or as a standalone matchmaking solution.
+    #   Amazon GameLift hosting or as a standalone matchmaking solution.
     #
     #   * **STANDALONE** - FlexMatch forms matches and returns match
     #     information, including players and team assignments, in a [
     #     MatchmakingSucceeded][1] event.
     #
     #   * **WITH\_QUEUE** - FlexMatch forms matches and uses the specified
-    #     GameLift queue to start a game session for the match.
+    #     Amazon GameLift queue to start a game session for the match.
     #
     #
     #
@@ -2202,8 +2215,8 @@ module Aws::GameLift
     # and a new `PlayerSessions` object is returned with a player session
     # ID. The player references the player session ID when sending a
     # connection request to the game session, and the game server can use it
-    # to validate the player reservation with the GameLift service. Player
-    # sessions cannot be updated.
+    # to validate the player reservation with the Amazon GameLift service.
+    # Player sessions cannot be updated.
     #
     # The maximum number of players per game session is 200. It is not
     # adjustable.
@@ -2224,8 +2237,9 @@ module Aws::GameLift
     #   A unique identifier for a player. Player IDs are developer-defined.
     #
     # @option params [String] :player_data
-    #   Developer-defined information related to a player. GameLift does not
-    #   use this data, so it can be formatted as needed for use in the game.
+    #   Developer-defined information related to a player. Amazon GameLift
+    #   does not use this data, so it can be formatted as needed for use in
+    #   the game.
     #
     # @return [Types::CreatePlayerSessionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2277,8 +2291,8 @@ module Aws::GameLift
     # and new `PlayerSession` objects are returned with player session IDs.
     # Each player references their player session ID when sending a
     # connection request to the game session, and the game server can use it
-    # to validate the player reservation with the GameLift service. Player
-    # sessions cannot be updated.
+    # to validate the player reservation with the Amazon GameLift service.
+    # Player sessions cannot be updated.
     #
     # The maximum number of players per game session is 200. It is not
     # adjustable.
@@ -2388,8 +2402,8 @@ module Aws::GameLift
     # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
     #
     # @option params [String] :name
-    #   A descriptive label that is associated with a script. Script names do
-    #   not need to be unique. You can use [UpdateScript][1] to change this
+    #   A descriptive label that is associated with a script. Script names
+    #   don't need to be unique. You can use [UpdateScript][1] to change this
     #   value later.
     #
     #
@@ -2398,7 +2412,7 @@ module Aws::GameLift
     #
     # @option params [String] :version
     #   Version information associated with a build or script. Version strings
-    #   do not need to be unique. You can use [UpdateScript][1] to change this
+    #   don't need to be unique. You can use [UpdateScript][1] to change this
     #   value later.
     #
     #
@@ -2534,15 +2548,15 @@ module Aws::GameLift
     #
     # @option params [required, String] :game_lift_aws_account_id
     #   A unique identifier for the Amazon Web Services account that you use
-    #   to manage your GameLift fleet. You can find your Account ID in the
-    #   Amazon Web Services Management Console under account settings.
+    #   to manage your Amazon GameLift fleet. You can find your Account ID in
+    #   the Amazon Web Services Management Console under account settings.
     #
     # @option params [required, String] :peer_vpc_id
     #   A unique identifier for a VPC with resources to be accessed by your
-    #   GameLift fleet. The VPC must be in the same Region as your fleet. To
-    #   look up a VPC ID, use the [VPC Dashboard][1] in the Amazon Web
-    #   Services Management Console. Learn more about VPC peering in [VPC
-    #   Peering with GameLift Fleets][2].
+    #   Amazon GameLift fleet. The VPC must be in the same Region as your
+    #   fleet. To look up a VPC ID, use the [VPC Dashboard][1] in the Amazon
+    #   Web Services Management Console. Learn more about VPC peering in [VPC
+    #   Peering with Amazon GameLift Fleets][2].
     #
     #
     #
@@ -2628,10 +2642,10 @@ module Aws::GameLift
     #
     # @option params [required, String] :peer_vpc_id
     #   A unique identifier for a VPC with resources to be accessed by your
-    #   GameLift fleet. The VPC must be in the same Region as your fleet. To
-    #   look up a VPC ID, use the [VPC Dashboard][1] in the Amazon Web
-    #   Services Management Console. Learn more about VPC peering in [VPC
-    #   Peering with GameLift Fleets][2].
+    #   Amazon GameLift fleet. The VPC must be in the same Region as your
+    #   fleet. To look up a VPC ID, use the [VPC Dashboard][1] in the Amazon
+    #   Web Services Management Console. Learn more about VPC peering in [VPC
+    #   Peering with Amazon GameLift Fleets][2].
     #
     #
     #
@@ -2748,7 +2762,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [Setting up GameLift Fleets][2]
+    # [Setting up Amazon GameLift Fleets][2]
     #
     #
     #
@@ -2790,7 +2804,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [Setting up GameLift fleets][1]
+    # [Setting up Amazon GameLift fleets][1]
     #
     #
     #
@@ -2834,8 +2848,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the GameLift FleetIQ solution and game
-    # server groups.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
     # Terminates a game server group and permanently deletes the game server
     # group record. You have several options for how these resources are
@@ -2858,15 +2872,15 @@ module Aws::GameLift
     # off. The game server group status is changed to `DELETE_SCHEDULED`,
     # which prevents new game servers from being registered and stops
     # automatic scaling activity. Once all game servers in the game server
-    # group are deregistered, GameLift FleetIQ can begin deleting resources.
-    # If any of the delete operations fail, the game server group is placed
-    # in `ERROR` status.
+    # group are deregistered, Amazon GameLift FleetIQ can begin deleting
+    # resources. If any of the delete operations fail, the game server group
+    # is placed in `ERROR` status.
     #
-    # GameLift FleetIQ emits delete events to Amazon CloudWatch.
+    # Amazon GameLift FleetIQ emits delete events to Amazon CloudWatch.
     #
     # **Learn more**
     #
-    # [GameLift FleetIQ Guide][1]
+    # [Amazon GameLift FleetIQ Guide][1]
     #
     #
     #
@@ -3050,9 +3064,9 @@ module Aws::GameLift
     end
 
     # Deletes a fleet scaling policy. Once deleted, the policy is no longer
-    # in force and GameLift removes all record of it. To delete a scaling
-    # policy, specify both the scaling policy name and the fleet ID it is
-    # associated with.
+    # in force and Amazon GameLift removes all record of it. To delete a
+    # scaling policy, specify both the scaling policy name and the fleet ID
+    # it is associated with.
     #
     # To temporarily suspend scaling policies, use [StopFleetActions][1].
     # This operation suspends all policies for the fleet.
@@ -3146,15 +3160,15 @@ module Aws::GameLift
     #
     # @option params [required, String] :game_lift_aws_account_id
     #   A unique identifier for the Amazon Web Services account that you use
-    #   to manage your GameLift fleet. You can find your Account ID in the
-    #   Amazon Web Services Management Console under account settings.
+    #   to manage your Amazon GameLift fleet. You can find your Account ID in
+    #   the Amazon Web Services Management Console under account settings.
     #
     # @option params [required, String] :peer_vpc_id
     #   A unique identifier for a VPC with resources to be accessed by your
-    #   GameLift fleet. The VPC must be in the same Region as your fleet. To
-    #   look up a VPC ID, use the [VPC Dashboard][1] in the Amazon Web
-    #   Services Management Console. Learn more about VPC peering in [VPC
-    #   Peering with GameLift Fleets][2].
+    #   Amazon GameLift fleet. The VPC must be in the same Region as your
+    #   fleet. To look up a VPC ID, use the [VPC Dashboard][1] in the Amazon
+    #   Web Services Management Console. Learn more about VPC peering in [VPC
+    #   Peering with Amazon GameLift Fleets][2].
     #
     #
     #
@@ -3250,8 +3264,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the GameLift FleetIQ solution and game
-    # server groups.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
     # Removes the game server from a game server group. As a result of this
     # operation, the deregistered game server can no longer be claimed and
@@ -3263,7 +3277,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [GameLift FleetIQ Guide][1]
+    # [Amazon GameLift FleetIQ Guide][1]
     #
     #
     #
@@ -3382,7 +3396,7 @@ module Aws::GameLift
     #   resp.build.version #=> String
     #   resp.build.status #=> String, one of "INITIALIZED", "READY", "FAILED"
     #   resp.build.size_on_disk #=> Integer
-    #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2"
+    #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016"
     #   resp.build.creation_time #=> Time
     #   resp.build.server_sdk_version #=> String
     #
@@ -3396,7 +3410,7 @@ module Aws::GameLift
     end
 
     # Retrieves properties for a compute resource. To request a compute
-    # resource specify the fleet ID and compute name. If successful,
+    # resource specify the fleet ID and compute name. If successful, Amazon
     # GameLift returns an object containing the build properties.
     #
     # @option params [required, String] :fleet_id
@@ -3428,7 +3442,7 @@ module Aws::GameLift
     #   resp.compute.compute_status #=> String, one of "PENDING", "ACTIVE", "TERMINATING"
     #   resp.compute.location #=> String
     #   resp.compute.creation_time #=> Time
-    #   resp.compute.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2"
+    #   resp.compute.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016"
     #   resp.compute.type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5a.large", "c5a.xlarge", "c5a.2xlarge", "c5a.4xlarge", "c5a.8xlarge", "c5a.12xlarge", "c5a.16xlarge", "c5a.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c6a.large", "c6a.xlarge", "c6a.2xlarge", "c6a.4xlarge", "c6a.8xlarge", "c6a.12xlarge", "c6a.16xlarge", "c6a.24xlarge", "c6i.large", "c6i.xlarge", "c6i.2xlarge", "c6i.4xlarge", "c6i.8xlarge", "c6i.12xlarge", "c6i.16xlarge", "c6i.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge"
     #   resp.compute.game_lift_service_sdk_endpoint #=> String
     #
@@ -3447,9 +3461,9 @@ module Aws::GameLift
     # Services account can use. Learn more at [Amazon EC2 Instance
     # Types][1]. The information returned includes the maximum number of
     # instances allowed and your account's current usage across all fleets.
-    # This information can affect your ability to scale your GameLift
+    # This information can affect your ability to scale your Amazon GameLift
     # fleets. You can request a limit increase for your account by using the
-    # **Service limits** page in the GameLift console.
+    # **Service limits** page in the Amazon GameLift console.
     #
     # Instance limits differ based on whether the instances are deployed in
     # a fleet's home Region or in a remote location. For remote locations,
@@ -3493,7 +3507,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [Setting up GameLift fleets][2]
+    # [Setting up Amazon GameLift fleets][2]
     #
     #
     #
@@ -3501,11 +3515,11 @@ module Aws::GameLift
     # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [String] :ec2_instance_type
-    #   Name of an Amazon EC2 instance type that is supported in GameLift. A
-    #   fleet instance type determines the computing resources of each
-    #   instance in the fleet, including CPU, memory, storage, and networking
-    #   capacity. Do not specify a value for this parameter to retrieve limits
-    #   for all instance types.
+    #   Name of an Amazon EC2 instance type that is supported in Amazon
+    #   GameLift. A fleet instance type determines the computing resources of
+    #   each instance in the fleet, including CPU, memory, storage, and
+    #   networking capacity. Do not specify a value for this parameter to
+    #   retrieve limits for all instance types.
     #
     # @option params [String] :location
     #   The name of a remote location to request instance limits for, in the
@@ -3563,7 +3577,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [Setting up GameLift fleets][1]
+    # [Setting up Amazon GameLift fleets][1]
     #
     #
     #
@@ -3623,7 +3637,7 @@ module Aws::GameLift
     #   resp.fleet_attributes[0].log_paths #=> Array
     #   resp.fleet_attributes[0].log_paths[0] #=> String
     #   resp.fleet_attributes[0].new_game_session_protection_policy #=> String, one of "NoProtection", "FullProtection"
-    #   resp.fleet_attributes[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2"
+    #   resp.fleet_attributes[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016"
     #   resp.fleet_attributes[0].resource_creation_limit_policy.new_game_sessions_per_creator #=> Integer
     #   resp.fleet_attributes[0].resource_creation_limit_policy.policy_period_in_minutes #=> Integer
     #   resp.fleet_attributes[0].metric_groups #=> Array
@@ -3676,7 +3690,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [Setting up GameLift fleets][1]
+    # [Setting up Amazon GameLift fleets][1]
     #
     # [GameLift metrics for fleets][2]
     #
@@ -3758,7 +3772,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [Setting up GameLift fleets][1]
+    # [Setting up Amazon GameLift fleets][1]
     #
     #
     #
@@ -3850,7 +3864,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [Setting up GameLift fleets][1]
+    # [Setting up Amazon GameLift fleets][1]
     #
     #
     #
@@ -3929,7 +3943,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [Setting up GameLift fleets][1]
+    # [Setting up Amazon GameLift fleets][1]
     #
     # [GameLift metrics for fleets][2]
     #
@@ -3994,7 +4008,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [Setting up GameLift fleets][1]
+    # [Setting up Amazon GameLift fleets][1]
     #
     # [GameLift metrics for fleets][2]
     #
@@ -4064,7 +4078,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [Setting up GameLift fleets][1]
+    # [Setting up Amazon GameLift fleets][1]
     #
     #
     #
@@ -4145,7 +4159,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [Setting up GameLift Fleets][3]
+    # [Setting up Amazon GameLift Fleets][3]
     #
     # [GameLift Metrics for Fleets][4]
     #
@@ -4210,8 +4224,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the GameLift FleetIQ solution and game
-    # server groups.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
     # Retrieves information for a registered game server. Information
     # includes game server status, health check info, and the instance that
@@ -4222,7 +4236,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [GameLift FleetIQ Guide][1]
+    # [Amazon GameLift FleetIQ Guide][1]
     #
     #
     #
@@ -4270,11 +4284,11 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the GameLift FleetIQ solution and game
-    # server groups.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
     # Retrieves information on a game server group. This operation returns
-    # only properties related to GameLift FleetIQ. To view or update
+    # only properties related to Amazon GameLift FleetIQ. To view or update
     # properties for the corresponding Auto Scaling group, such as launch
     # template, auto scaling policies, and maximum/minimum group size,
     # access the Auto Scaling group directly.
@@ -4284,7 +4298,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [GameLift FleetIQ Guide][1]
+    # [Amazon GameLift FleetIQ Guide][1]
     #
     #
     #
@@ -4331,12 +4345,12 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the GameLift FleetIQ solution and game
-    # server groups.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
     # Retrieves status information about the Amazon EC2 instances associated
-    # with a GameLift FleetIQ game server group. Use this operation to
-    # detect when instances are active or not available to host new game
+    # with a Amazon GameLift FleetIQ game server group. Use this operation
+    # to detect when instances are active or not available to host new game
     # servers.
     #
     # To request status for all instances in the game server group, provide
@@ -4352,7 +4366,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [GameLift FleetIQ Guide][1]
+    # [Amazon GameLift FleetIQ Guide][1]
     #
     #
     #
@@ -4893,7 +4907,7 @@ module Aws::GameLift
     #   resp.instances[0].instance_id #=> String
     #   resp.instances[0].ip_address #=> String
     #   resp.instances[0].dns_name #=> String
-    #   resp.instances[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2"
+    #   resp.instances[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016"
     #   resp.instances[0].type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5a.large", "c5a.xlarge", "c5a.2xlarge", "c5a.4xlarge", "c5a.8xlarge", "c5a.12xlarge", "c5a.16xlarge", "c5a.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c6a.large", "c6a.xlarge", "c6a.2xlarge", "c6a.4xlarge", "c6a.8xlarge", "c6a.12xlarge", "c6a.16xlarge", "c6a.24xlarge", "c6i.large", "c6i.xlarge", "c6i.2xlarge", "c6i.4xlarge", "c6i.8xlarge", "c6i.12xlarge", "c6i.16xlarge", "c6i.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge"
     #   resp.instances[0].status #=> String, one of "PENDING", "ACTIVE", "TERMINATING"
     #   resp.instances[0].creation_time #=> Time
@@ -5260,8 +5274,8 @@ module Aws::GameLift
     end
 
     # Retrieves a fleet's runtime configuration settings. The runtime
-    # configuration tells GameLift which server processes to run (and how)
-    # on each instance in the fleet.
+    # configuration tells Amazon GameLift which server processes to run (and
+    # how) on each instance in the fleet.
     #
     # To get the runtime configuration that is currently in forces for a
     # fleet, provide the fleet ID.
@@ -5272,7 +5286,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [Setting up GameLift fleets][1]
+    # [Setting up Amazon GameLift fleets][1]
     #
     # [Running multiple processes on a fleet][2]
     #
@@ -5557,14 +5571,15 @@ module Aws::GameLift
     # real time.
     #
     # To remotely access an instance, you need credentials that match the
-    # operating system of the instance. For a Windows instance, GameLift
-    # returns a user name and password as strings for use with a Windows
-    # Remote Desktop client. For a Linux instance, GameLift returns a user
-    # name and RSA private key, also as strings, for use with an SSH client.
-    # The private key must be saved in the proper format to a `.pem` file
-    # before using. If you're making this request using the CLI, saving the
-    # secret can be handled as part of the `GetInstanceAccess` request, as
-    # shown in one of the examples for this operation.
+    # operating system of the instance. For a Windows instance, Amazon
+    # GameLift returns a user name and password as strings for use with a
+    # Windows Remote Desktop client. For a Linux instance, Amazon GameLift
+    # returns a user name and RSA private key, also as strings, for use with
+    # an SSH client. The private key must be saved in the proper format to a
+    # `.pem` file before using. If you're making this request using the
+    # CLI, saving the secret can be handled as part of the
+    # `GetInstanceAccess` request, as shown in one of the examples for this
+    # operation.
     #
     # To request access to a specific instance, specify the IDs of both the
     # instance and the fleet it belongs to.
@@ -5621,17 +5636,17 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Requests an authorization token from GameLift. The authorization token
-    # is used by your game server to authenticate with GameLift. Each
-    # authentication token has an expiration token. To continue using the
-    # compute resource to host your game server, regularly retrieve a new
-    # authorization token.
+    # Requests an authentication token from Amazon GameLift. The
+    # authentication token is used by your game server to authenticate with
+    # Amazon GameLift. Each authentication token has an expiration time. To
+    # continue using the compute resource to host your game server,
+    # regularly retrieve a new authorization token.
     #
     # @option params [required, String] :fleet_id
     #   A unique identifier for the fleet that the compute is registered to.
     #
     # @option params [required, String] :compute_name
-    #   The name of the compute resource you are requesting the authorization
+    #   The name of the compute resource you are requesting the authentication
     #   token for.
     #
     # @return [Types::GetComputeAuthTokenOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -5669,7 +5684,7 @@ module Aws::GameLift
     end
 
     # Retrieves the location of stored game session logs for a specified
-    # game session. When a game session is terminated, GameLift
+    # game session. When a game session is terminated, Amazon GameLift
     # automatically stores the logs in Amazon S3 and retains them for 14
     # days. Use this URL to download the logs.
     #
@@ -5716,14 +5731,15 @@ module Aws::GameLift
     # real time.
     #
     # To remotely access an instance, you need credentials that match the
-    # operating system of the instance. For a Windows instance, GameLift
-    # returns a user name and password as strings for use with a Windows
-    # Remote Desktop client. For a Linux instance, GameLift returns a user
-    # name and RSA private key, also as strings, for use with an SSH client.
-    # The private key must be saved in the proper format to a `.pem` file
-    # before using. If you're making this request using the CLI, saving the
-    # secret can be handled as part of the `GetInstanceAccess` request, as
-    # shown in one of the examples for this operation.
+    # operating system of the instance. For a Windows instance, Amazon
+    # GameLift returns a user name and password as strings for use with a
+    # Windows Remote Desktop client. For a Linux instance, Amazon GameLift
+    # returns a user name and RSA private key, also as strings, for use with
+    # an SSH client. The private key must be saved in the proper format to a
+    # `.pem` file before using. If you're making this request using the
+    # CLI, saving the secret can be handled as part of the
+    # `GetInstanceAccess` request, as shown in one of the examples for this
+    # operation.
     #
     # To request access to a specific instance, specify the IDs of both the
     # instance and the fleet it belongs to. You can retrieve a fleet's
@@ -5773,7 +5789,7 @@ module Aws::GameLift
     #   resp.instance_access.fleet_id #=> String
     #   resp.instance_access.instance_id #=> String
     #   resp.instance_access.ip_address #=> String
-    #   resp.instance_access.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2"
+    #   resp.instance_access.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016"
     #   resp.instance_access.credentials.user_name #=> String
     #   resp.instance_access.credentials.secret #=> String
     #
@@ -5919,7 +5935,7 @@ module Aws::GameLift
     # @option params [String] :next_token
     #   A token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   operation. To start at the beginning of the result set, do not specify
+    #   operation. To start at the beginning of the result set, don't specify
     #   a value.
     #
     # @return [Types::ListBuildsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -5946,7 +5962,7 @@ module Aws::GameLift
     #   resp.builds[0].version #=> String
     #   resp.builds[0].status #=> String, one of "INITIALIZED", "READY", "FAILED"
     #   resp.builds[0].size_on_disk #=> Integer
-    #   resp.builds[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2"
+    #   resp.builds[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016"
     #   resp.builds[0].creation_time #=> Time
     #   resp.builds[0].server_sdk_version #=> String
     #   resp.next_token #=> String
@@ -6009,7 +6025,7 @@ module Aws::GameLift
     #   resp.compute_list[0].compute_status #=> String, one of "PENDING", "ACTIVE", "TERMINATING"
     #   resp.compute_list[0].location #=> String
     #   resp.compute_list[0].creation_time #=> Time
-    #   resp.compute_list[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2"
+    #   resp.compute_list[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016"
     #   resp.compute_list[0].type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5a.large", "c5a.xlarge", "c5a.2xlarge", "c5a.4xlarge", "c5a.8xlarge", "c5a.12xlarge", "c5a.16xlarge", "c5a.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c6a.large", "c6a.xlarge", "c6a.2xlarge", "c6a.4xlarge", "c6a.8xlarge", "c6a.12xlarge", "c6a.16xlarge", "c6a.24xlarge", "c6i.large", "c6i.xlarge", "c6i.2xlarge", "c6i.4xlarge", "c6i.8xlarge", "c6i.12xlarge", "c6i.16xlarge", "c6i.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge"
     #   resp.compute_list[0].game_lift_service_sdk_endpoint #=> String
     #   resp.next_token #=> String
@@ -6056,7 +6072,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [Setting up GameLift fleets][2]
+    # [Setting up Amazon GameLift fleets][2]
     #
     #
     #
@@ -6166,8 +6182,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the GameLift FleetIQ solution and game
-    # server groups.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
     # Retrieves information on all game servers that are currently active in
     # a specified game server group. You can opt to sort the list by game
@@ -6176,7 +6192,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [GameLift FleetIQ Guide][1]
+    # [Amazon GameLift FleetIQ Guide][1]
     #
     #
     #
@@ -6313,7 +6329,7 @@ module Aws::GameLift
     # @option params [String] :next_token
     #   A token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   operation. To start at the beginning of the result set, do not specify
+    #   operation. To start at the beginning of the result set, don't specify
     #   a value.
     #
     # @return [Types::ListScriptsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -6354,24 +6370,10 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Retrieves all tags that are assigned to a GameLift resource. Resource
-    # tags are used to organize Amazon Web Services resources for a range of
+    # Retrieves all tags assigned to a Amazon GameLift resource. Use
+    # resource tags to organize Amazon Web Services resources for a range of
     # purposes. This operation handles the permissions necessary to manage
-    # tags for the following GameLift resource types:
-    #
-    # * Build
-    #
-    # * Script
-    #
-    # * Fleet
-    #
-    # * Alias
-    #
-    # * GameSessionQueue
-    #
-    # * MatchmakingConfiguration
-    #
-    # * MatchmakingRuleSet
+    # tags for Amazon GameLift resources that support tagging.
     #
     # To list tags for a resource, specify the unique ARN value for the
     # resource.
@@ -6394,11 +6396,11 @@ module Aws::GameLift
     # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to and uniquely
-    #   identifies the GameLift resource that you want to retrieve tags for.
-    #   GameLift resource ARNs are included in the data object for the
-    #   resource, which can be retrieved by calling a List or Describe
-    #   operation for the resource type.
+    #   The Amazon Resource Name ([ARN][1]) that uniquely identifies the
+    #   Amazon GameLift resource that you want to retrieve tags for. Amazon
+    #   GameLift includes resource ARNs in the data object for the resource.
+    #   You can retrieve the ARN by calling a `List` or `Describe` operation
+    #   for the resource type.
     #
     #
     #
@@ -6641,9 +6643,9 @@ module Aws::GameLift
 
     # Registers your compute resources in a fleet you previously created.
     # After you register a compute to your fleet, you can monitor and manage
-    # your compute using GameLift. The operation returns the compute
+    # your compute using Amazon GameLift. The operation returns the compute
     # resource containing SDK endpoint you can use to connect your game
-    # server to GameLift.
+    # server to Amazon GameLift.
     #
     # **Learn more**
     #
@@ -6666,15 +6668,15 @@ module Aws::GameLift
     #
     # @option params [String] :certificate_path
     #   The path to the TLS certificate on your compute resource. The path and
-    #   certificate are not validated by GameLift.
+    #   certificate are not validated by Amazon GameLift.
     #
     # @option params [String] :dns_name
-    #   The DNS name of the compute resource. GameLift requires the DNS name
-    #   or IP address to manage your compute resource.
+    #   The DNS name of the compute resource. Amazon GameLift requires the DNS
+    #   name or IP address to manage your compute resource.
     #
     # @option params [String] :ip_address
-    #   The IP address of the compute resource. GameLift requires the DNS name
-    #   or IP address to manage your compute resource.
+    #   The IP address of the compute resource. Amazon GameLift requires the
+    #   DNS name or IP address to manage your compute resource.
     #
     # @option params [String] :location
     #   The name of the custom location you added to the fleet you are
@@ -6706,7 +6708,7 @@ module Aws::GameLift
     #   resp.compute.compute_status #=> String, one of "PENDING", "ACTIVE", "TERMINATING"
     #   resp.compute.location #=> String
     #   resp.compute.creation_time #=> Time
-    #   resp.compute.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2"
+    #   resp.compute.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016"
     #   resp.compute.type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5a.large", "c5a.xlarge", "c5a.2xlarge", "c5a.4xlarge", "c5a.8xlarge", "c5a.12xlarge", "c5a.16xlarge", "c5a.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c6a.large", "c6a.xlarge", "c6a.2xlarge", "c6a.4xlarge", "c6a.8xlarge", "c6a.12xlarge", "c6a.16xlarge", "c6a.24xlarge", "c6i.large", "c6i.xlarge", "c6i.2xlarge", "c6i.4xlarge", "c6i.8xlarge", "c6i.12xlarge", "c6i.16xlarge", "c6i.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge"
     #   resp.compute.game_lift_service_sdk_endpoint #=> String
     #
@@ -6719,15 +6721,16 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the GameLift FleetIQ solution and game
-    # server groups.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
-    # Creates a new game server resource and notifies GameLift FleetIQ that
-    # the game server is ready to host gameplay and players. This operation
-    # is called by a game server process that is running on an instance in a
-    # game server group. Registering game servers enables GameLift FleetIQ
-    # to track available game servers and enables game clients and services
-    # to claim a game server for a new game session.
+    # Creates a new game server resource and notifies Amazon GameLift
+    # FleetIQ that the game server is ready to host gameplay and players.
+    # This operation is called by a game server process that is running on
+    # an instance in a game server group. Registering game servers enables
+    # Amazon GameLift FleetIQ to track available game servers and enables
+    # game clients and services to claim a game server for a new game
+    # session.
     #
     # To register a game server, identify the game server group and instance
     # where the game server is running, and provide a unique identifier for
@@ -6740,7 +6743,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [GameLift FleetIQ Guide][1]
+    # [Amazon GameLift FleetIQ Guide][1]
     #
     #
     #
@@ -6901,8 +6904,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the GameLift FleetIQ solution and game
-    # server groups.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
     # Reinstates activity on a game server group after it has been
     # suspended. A game server group might be suspended by the
@@ -6920,7 +6923,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [GameLift FleetIQ Guide][1]
+    # [Amazon GameLift FleetIQ Guide][1]
     #
     #
     #
@@ -7214,13 +7217,13 @@ module Aws::GameLift
     #   locations, provide a fleet ID, a location name, and the type of
     #   actions to resume.
     #
-    # If successful, GameLift once again initiates scaling events as
+    # If successful, Amazon GameLift once again initiates scaling events as
     # triggered by the fleet's scaling policies. If actions on the fleet
     # location were never stopped, this operation will have no effect.
     #
     # **Learn more**
     #
-    # [Setting up GameLift fleets][2]
+    # [Setting up Amazon GameLift fleets][2]
     #
     #
     #
@@ -7439,15 +7442,15 @@ module Aws::GameLift
     # FlexMatch uses this information to select new players so that
     # backfilled match continues to meet the original match requirements.
     #
-    # When using FlexMatch with GameLift managed hosting, you can request a
-    # backfill match from a client service by calling this operation with a
-    # `GameSessions` ID. You also have the option of making backfill
-    # requests directly from your game server. In response to a request,
-    # FlexMatch creates player sessions for the new players, updates the
-    # `GameSession` resource, and sends updated matchmaking data to the game
-    # server. You can request a backfill match at any point after a game
-    # session is started. Each game session can have only one active
-    # backfill request at a time; a subsequent request automatically
+    # When using FlexMatch with Amazon GameLift managed hosting, you can
+    # request a backfill match from a client service by calling this
+    # operation with a `GameSessions` ID. You also have the option of making
+    # backfill requests directly from your game server. In response to a
+    # request, FlexMatch creates player sessions for the new players,
+    # updates the `GameSession` resource, and sends updated matchmaking data
+    # to the game server. You can request a backfill match at any point
+    # after a game session is started. Each game session can have only one
+    # active backfill request at a time; a subsequent request automatically
     # replaces the earlier request.
     #
     # When using FlexMatch as a standalone component, request a backfill
@@ -7472,7 +7475,7 @@ module Aws::GameLift
     #
     # [ Matchmaking events][2] (reference)
     #
-    # [ How GameLift FlexMatch works][3]
+    # [ How Amazon GameLift FlexMatch works][3]
     #
     #
     #
@@ -7581,8 +7584,8 @@ module Aws::GameLift
     end
 
     # Uses FlexMatch to create a game match for a group of players based on
-    # custom matchmaking rules. With games that use GameLift managed
-    # hosting, this operation also triggers GameLift to find hosting
+    # custom matchmaking rules. With games that use Amazon GameLift managed
+    # hosting, this operation also triggers Amazon GameLift to find hosting
     # resources and start a new game session for the new match. Each
     # matchmaking request includes information on one or more players and
     # specifies the FlexMatch matchmaker to use. When a request is for
@@ -7608,7 +7611,7 @@ module Aws::GameLift
     #
     # [ Set Up FlexMatch event notification][2]
     #
-    # [ How GameLift FlexMatch works][3]
+    # [ How Amazon GameLift FlexMatch works][3]
     #
     #
     #
@@ -7714,12 +7717,12 @@ module Aws::GameLift
     #   locations, provide a fleet ID, a location name, and the type of
     #   actions to suspend.
     #
-    # If successful, GameLift no longer initiates scaling events except in
-    # response to manual changes using [UpdateFleetCapacity][1].
+    # If successful, Amazon GameLift no longer initiates scaling events
+    # except in response to manual changes using [UpdateFleetCapacity][1].
     #
     # **Learn more**
     #
-    # [Setting up GameLift Fleets][2]
+    # [Setting up Amazon GameLift Fleets][2]
     #
     #
     #
@@ -7862,8 +7865,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the GameLift FleetIQ solution and game
-    # server groups.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
     # Temporarily stops activity on a game server group without terminating
     # instances or the game server group. You can restart activity by
@@ -7889,7 +7892,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [GameLift FleetIQ Guide][1]
+    # [Amazon GameLift FleetIQ Guide][1]
     #
     #
     #
@@ -7940,31 +7943,16 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Assigns a tag to a GameLift resource. Amazon Web Services resource
-    # tags provide an additional management tool set. You can use tags to
+    # Assigns a tag to an Amazon GameLift resource. You can use tags to
     # organize resources, create IAM permissions policies to manage access
     # to groups of resources, customize Amazon Web Services cost breakdowns,
-    # etc. This operation handles the permissions necessary to manage tags
-    # for the following GameLift resource types:
-    #
-    # * Build
-    #
-    # * Script
-    #
-    # * Fleet
-    #
-    # * Alias
-    #
-    # * GameSessionQueue
-    #
-    # * MatchmakingConfiguration
-    #
-    # * MatchmakingRuleSet
+    # and more. This operation handles the permissions necessary to manage
+    # tags for Amazon GameLift resources that support tagging.
     #
     # To add a tag to a resource, specify the unique ARN value for the
     # resource and provide a tag list containing one or more tags. The
     # operation succeeds even if the list includes tags that are already
-    # assigned to the specified resource.
+    # assigned to the resource.
     #
     # **Learn more**
     #
@@ -7984,21 +7972,21 @@ module Aws::GameLift
     # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to and uniquely
-    #   identifies the GameLift resource that you want to assign tags to.
-    #   GameLift resource ARNs are included in the data object for the
-    #   resource, which can be retrieved by calling a List or Describe
-    #   operation for the resource type.
+    #   The Amazon Resource Name ([ARN][1]) that uniquely identifies the
+    #   Amazon GameLift resource that you want to assign tags to. Amazon
+    #   GameLift includes resource ARNs in the data object for the resource.
+    #   You can retrieve the ARN by calling a `List` or `Describe` operation
+    #   for the resource type.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   A list of one or more tags to assign to the specified GameLift
+    #   A list of one or more tags to assign to the specified Amazon GameLift
     #   resource. Tags are developer-defined and structured as key-value
     #   pairs. The maximum tag limit may be lower than stated. See [ Tagging
-    #   Amazon Web Services Resources][1] for actual tagging limits.
+    #   Amazon Web Services Resources][1] for tagging limits.
     #
     #
     #
@@ -8027,29 +8015,15 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Removes a tag that is assigned to a GameLift resource. Resource tags
-    # are used to organize Amazon Web Services resources for a range of
+    # Removes a tag assigned to a Amazon GameLift resource. You can use
+    # resource tags to organize Amazon Web Services resources for a range of
     # purposes. This operation handles the permissions necessary to manage
-    # tags for the following GameLift resource types:
-    #
-    # * Build
-    #
-    # * Script
-    #
-    # * Fleet
-    #
-    # * Alias
-    #
-    # * GameSessionQueue
-    #
-    # * MatchmakingConfiguration
-    #
-    # * MatchmakingRuleSet
+    # tags for Amazon GameLift resources that support tagging.
     #
     # To remove a tag from a resource, specify the unique ARN value for the
-    # resource and provide a string list containing one or more tags to be
-    # removed. This operation succeeds even if the list includes tags that
-    # are not currently assigned to the specified resource.
+    # resource and provide a string list containing one or more tags to
+    # remove. This operation succeeds even if the list includes tags that
+    # aren't assigned to the resource.
     #
     # **Learn more**
     #
@@ -8069,21 +8043,19 @@ module Aws::GameLift
     # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to and uniquely
-    #   identifies the GameLift resource that you want to remove tags from.
-    #   GameLift resource ARNs are included in the data object for the
-    #   resource, which can be retrieved by calling a List or Describe
-    #   operation for the resource type.
+    #   The Amazon Resource Name ([ARN][1]) that uniquely identifies the
+    #   Amazon GameLift resource that you want to remove tags from. Amazon
+    #   GameLift includes resource ARNs in the data object for the resource.
+    #   You can retrieve the ARN by calling a `List` or `Describe` operation
+    #   for the resource type.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
     #
     # @option params [required, Array<String>] :tag_keys
-    #   A list of one or more tag keys to remove from the specified GameLift
-    #   resource. An Amazon Web Services resource can have only one tag with a
-    #   specific tag key, so specifying the tag key identifies which tag to
-    #   remove.
+    #   A list of one or more tag keys to remove from the specified Amazon
+    #   GameLift resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -8190,12 +8162,12 @@ module Aws::GameLift
     #   build ID or ARN value.
     #
     # @option params [String] :name
-    #   A descriptive label associated with a build. Build names do not need
+    #   A descriptive label associated with a build. Build names don't need
     #   to be unique.
     #
     # @option params [String] :version
     #   Version information associated with a build or script. Version strings
-    #   do not need to be unique.
+    #   don't need to be unique.
     #
     # @return [Types::UpdateBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8217,7 +8189,7 @@ module Aws::GameLift
     #   resp.build.version #=> String
     #   resp.build.status #=> String, one of "INITIALIZED", "READY", "FAILED"
     #   resp.build.size_on_disk #=> Integer
-    #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2"
+    #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016"
     #   resp.build.creation_time #=> Time
     #   resp.build.server_sdk_version #=> String
     #
@@ -8240,7 +8212,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [Setting up GameLift fleets][1]
+    # [Setting up Amazon GameLift fleets][1]
     #
     #
     #
@@ -8285,7 +8257,7 @@ module Aws::GameLift
     #   time.
     #
     # @option params [Types::AnywhereConfiguration] :anywhere_configuration
-    #   GameLift Anywhere configuration options.
+    #   Amazon GameLift Anywhere configuration options.
     #
     # @return [Types::UpdateFleetAttributesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8330,9 +8302,9 @@ module Aws::GameLift
     # configuration. Use this operation to set the following fleet capacity
     # properties:
     #
-    # * Minimum/maximum size: Set hard limits on fleet capacity. GameLift
-    #   cannot set the fleet's capacity to a value outside of this range,
-    #   whether the capacity is changed manually or through automatic
+    # * Minimum/maximum size: Set hard limits on fleet capacity. Amazon
+    #   GameLift cannot set the fleet's capacity to a value outside of this
+    #   range, whether the capacity is changed manually or through automatic
     #   scaling.
     #
     # * Desired capacity: Manually set the number of Amazon EC2 instances to
@@ -8353,8 +8325,8 @@ module Aws::GameLift
     #   must be in `ACTIVE` status.
     #
     # If successful, capacity settings are updated immediately. In response
-    # a change in desired capacity, GameLift initiates steps to start new
-    # instances or terminate existing instances in the requested fleet
+    # a change in desired capacity, Amazon GameLift initiates steps to start
+    # new instances or terminate existing instances in the requested fleet
     # location. This continues until the location's active instance count
     # matches the new desired instance count. You can track a fleet's
     # current capacity by calling [DescribeFleetCapacity][2] or
@@ -8442,7 +8414,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [Setting up GameLift fleets][1]
+    # [Setting up Amazon GameLift fleets][1]
     #
     #
     #
@@ -8499,13 +8471,13 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the GameLift FleetIQ solution and game
-    # server groups.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
-    # Updates information about a registered game server to help GameLift
-    # FleetIQ to track game server availability. This operation is called by
-    # a game server process that is running on an instance in a game server
-    # group.
+    # Updates information about a registered game server to help Amazon
+    # GameLift FleetIQ to track game server availability. This operation is
+    # called by a game server process that is running on an instance in a
+    # game server group.
     #
     # Use this operation to update the following types of game server
     # information. You can make all three types of updates in the same
@@ -8531,7 +8503,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [GameLift FleetIQ Guide][1]
+    # [Amazon GameLift FleetIQ Guide][1]
     #
     #
     #
@@ -8595,23 +8567,23 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the GameLift FleetIQ solution and game
-    # server groups.**
+    # **This operation is used with the Amazon GameLift FleetIQ solution and
+    # game server groups.**
     #
-    # Updates GameLift FleetIQ-specific properties for a game server group.
-    # Many Auto Scaling group properties are updated on the Auto Scaling
-    # group directly, including the launch template, Auto Scaling policies,
-    # and maximum/minimum/desired instance counts.
+    # Updates Amazon GameLift FleetIQ-specific properties for a game server
+    # group. Many Auto Scaling group properties are updated on the Auto
+    # Scaling group directly, including the launch template, Auto Scaling
+    # policies, and maximum/minimum/desired instance counts.
     #
     # To update the game server group, specify the game server group ID and
     # provide the updated values. Before applying the updates, the new
-    # values are validated to ensure that GameLift FleetIQ can continue to
-    # perform instance balancing activity. If successful, a
+    # values are validated to ensure that Amazon GameLift FleetIQ can
+    # continue to perform instance balancing activity. If successful, a
     # `GameServerGroup` object is returned.
     #
     # **Learn more**
     #
-    # [GameLift FleetIQ Guide][1]
+    # [Amazon GameLift FleetIQ Guide][1]
     #
     #
     #
@@ -8632,15 +8604,15 @@ module Aws::GameLift
     # @option params [Array<Types::InstanceDefinition>] :instance_definitions
     #   An updated list of Amazon EC2 instance types to use in the Auto
     #   Scaling group. The instance definitions must specify at least two
-    #   different instance types that are supported by GameLift FleetIQ. This
-    #   updated list replaces the entire current list of instance definitions
-    #   for the game server group. For more information on instance types, see
-    #   [EC2 Instance Types][1] in the *Amazon EC2 User Guide*. You can
-    #   optionally specify capacity weighting for each instance type. If no
-    #   weight value is specified for an instance type, it is set to the
-    #   default value "1". For more information about capacity weighting,
-    #   see [ Instance Weighting for Amazon EC2 Auto Scaling][2] in the Amazon
-    #   EC2 Auto Scaling User Guide.
+    #   different instance types that are supported by Amazon GameLift
+    #   FleetIQ. This updated list replaces the entire current list of
+    #   instance definitions for the game server group. For more information
+    #   on instance types, see [EC2 Instance Types][1] in the *Amazon EC2 User
+    #   Guide*. You can optionally specify capacity weighting for each
+    #   instance type. If no weight value is specified for an instance type,
+    #   it is set to the default value "1". For more information about
+    #   capacity weighting, see [ Instance Weighting for Amazon EC2 Auto
+    #   Scaling][2] in the Amazon EC2 Auto Scaling User Guide.
     #
     #
     #
@@ -8659,9 +8631,9 @@ module Aws::GameLift
     #   This property is set to `NO_PROTECTION` by default.
     #
     # @option params [String] :balancing_strategy
-    #   Indicates how GameLift FleetIQ balances the use of Spot Instances and
-    #   On-Demand Instances in the game server group. Method options include
-    #   the following:
+    #   Indicates how Amazon GameLift FleetIQ balances the use of Spot
+    #   Instances and On-Demand Instances in the game server group. Method
+    #   options include the following:
     #
     #   * `SPOT_ONLY` - Only Spot Instances are used in the game server group.
     #     If Spot Instances are unavailable or not viable for game hosting,
@@ -8959,14 +8931,14 @@ module Aws::GameLift
     #   A description for the matchmaking configuration.
     #
     # @option params [Array<String>] :game_session_queue_arns
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   game session queue resource and uniquely identifies it. ARNs are
-    #   unique across all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift game session queue resource and uniquely identifies it. ARNs
+    #   are unique across all Regions. Format is
     #   `arn:aws:gamelift:<region>::gamesessionqueue/<queue name>`. Queues can
-    #   be located in any Region. Queues are used to start new GameLift-hosted
-    #   game sessions for matches that are created with this matchmaking
-    #   configuration. If `FlexMatchMode` is set to `STANDALONE`, do not set
-    #   this parameter.
+    #   be located in any Region. Queues are used to start new Amazon
+    #   GameLift-hosted game sessions for matches that are created with this
+    #   matchmaking configuration. If `FlexMatchMode` is set to `STANDALONE`,
+    #   do not set this parameter.
     #
     #
     #
@@ -9054,14 +9026,14 @@ module Aws::GameLift
     #
     # @option params [String] :flex_match_mode
     #   Indicates whether this matchmaking configuration is being used with
-    #   GameLift hosting or as a standalone matchmaking solution.
+    #   Amazon GameLift hosting or as a standalone matchmaking solution.
     #
     #   * **STANDALONE** - FlexMatch forms matches and returns match
     #     information, including players and team assignments, in a [
     #     MatchmakingSucceeded][1] event.
     #
     #   * **WITH\_QUEUE** - FlexMatch forms matches and uses the specified
-    #     GameLift queue to start a game session for the match.
+    #     Amazon GameLift queue to start a game session for the match.
     #
     #
     #
@@ -9128,10 +9100,10 @@ module Aws::GameLift
     end
 
     # Updates the current runtime configuration for the specified fleet,
-    # which tells GameLift how to launch server processes on all instances
-    # in the fleet. You can update a fleet's runtime configuration at any
-    # time after the fleet is created; it does not need to be in `ACTIVE`
-    # status.
+    # which tells Amazon GameLift how to launch server processes on all
+    # instances in the fleet. You can update a fleet's runtime
+    # configuration at any time after the fleet is created; it does not need
+    # to be in `ACTIVE` status.
     #
     # To update runtime configuration, specify the fleet ID and provide a
     # `RuntimeConfiguration` with an updated set of server process
@@ -9146,7 +9118,7 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [Setting up GameLift fleets][1]
+    # [Setting up Amazon GameLift fleets][1]
     #
     #
     #
@@ -9157,7 +9129,7 @@ module Aws::GameLift
     #   You can use either the fleet ID or ARN value.
     #
     # @option params [required, Types::RuntimeConfiguration] :runtime_configuration
-    #   Instructions for alaunching server processes on each instance in the
+    #   Instructions for launching server processes on each instance in the
     #   fleet. Server processes run either a custom game build executable or a
     #   Realtime Servers script. The runtime configuration lists the types of
     #   server processes to run on an instance, how to launch them, and the
@@ -9235,12 +9207,12 @@ module Aws::GameLift
     #   either the script ID or ARN value.
     #
     # @option params [String] :name
-    #   A descriptive label that is associated with a script. Script names do
-    #   not need to be unique.
+    #   A descriptive label that is associated with a script. Script names
+    #   don't need to be unique.
     #
     # @option params [String] :version
     #   Version information associated with a build or script. Version strings
-    #   do not need to be unique.
+    #   don't need to be unique.
     #
     # @option params [Types::S3Location] :storage_location
     #   The location of the Amazon S3 bucket where a zipped file containing
@@ -9358,7 +9330,7 @@ module Aws::GameLift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

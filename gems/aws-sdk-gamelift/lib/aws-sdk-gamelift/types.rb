@@ -59,9 +59,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] alias_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   alias resource and uniquely identifies it. ARNs are unique across
-    #   all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift alias resource and uniquely identifies it. ARNs are unique
+    #   across all Regions. Format is
     #   `arn:aws:gamelift:<region>::alias/alias-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
     #   In a GameLift alias ARN, the resource ID matches the alias ID value.
     #
@@ -105,12 +105,14 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # GameLift Anywhere configuration options for your Anywhere fleets.
+    # Amazon GameLift Anywhere configuration options for your Anywhere
+    # fleets.
     #
     # @!attribute [rw] cost
-    #   The cost to run your fleet per hour. GameLift uses the provided cost
-    #   of your fleet to balance usage in queues. For more information about
-    #   queues, see [Setting up queues][1].
+    #   The cost to run your fleet per hour. Amazon GameLift uses the
+    #   provided cost of your fleet to balance usage in queues. For more
+    #   information about queues, see [Setting up queues][1] in the *Amazon
+    #   GameLift Developer Guide*.
     #
     #
     #
@@ -207,9 +209,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] build_arn
-    #   The Amazon Resource Name ([ARN][1]) assigned to a GameLift build
-    #   resource and uniquely identifies it. ARNs are unique across all
-    #   Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) assigned to a Amazon GameLift
+    #   build resource and uniquely identifies it. ARNs are unique across
+    #   all Regions. Format is
     #   `arn:aws:gamelift:<region>::build/build-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
     #   In a GameLift build ARN, the resource ID matches the *BuildId*
     #   value.
@@ -220,7 +222,7 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   A descriptive label associated with a build. Build names do not need
+    #   A descriptive label associated with a build. Build names don't need
     #   to be unique. It can be set using [CreateBuild][1] or
     #   [UpdateBuild][2].
     #
@@ -232,7 +234,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] version
     #   Version information associated with a build or script. Version
-    #   strings do not need to be unique.
+    #   strings don't need to be unique.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -271,7 +273,8 @@ module Aws::GameLift
     #   @return [Time]
     #
     # @!attribute [rw] server_sdk_version
-    #   The GameLift Server SDK version used to develop your game server.
+    #   The Amazon GameLift Server SDK version used to develop your game
+    #   server.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/Build AWS API Documentation
@@ -293,7 +296,7 @@ module Aws::GameLift
     # Determines whether a TLS/SSL certificate is generated for a fleet.
     # This feature must be enabled when creating the fleet. All instances in
     # a fleet share the same certificate. The certificate can be retrieved
-    # by calling the [GameLift Server SDK][1] operation
+    # by calling the [Amazon GameLift Server SDK][1] operation
     # `GetInstanceCertificate`.
     #
     #
@@ -322,14 +325,14 @@ module Aws::GameLift
     # @!attribute [rw] game_server_group_name
     #   A unique identifier for the game server group where the game server
     #   is running. If you are not specifying a game server to claim, this
-    #   value identifies where you want GameLift FleetIQ to look for an
-    #   available game server to claim.
+    #   value identifies where you want Amazon GameLift FleetIQ to look for
+    #   an available game server to claim.
     #   @return [String]
     #
     # @!attribute [rw] game_server_id
     #   A custom string that uniquely identifies the game server to claim.
-    #   If this parameter is left empty, GameLift FleetIQ searches for an
-    #   available game server in the specified game server group.
+    #   If this parameter is left empty, Amazon GameLift FleetIQ searches
+    #   for an available game server in the specified game server group.
     #   @return [String]
     #
     # @!attribute [rw] game_server_data
@@ -361,7 +364,7 @@ module Aws::GameLift
     end
 
     # Resources used to host your game servers. A compute resource can be
-    # managed GameLift Amazon EC2 instances or your own resources.
+    # managed Amazon GameLift Amazon EC2 instances or your own resources.
     #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet that the compute is registered to.
@@ -383,13 +386,13 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] ip_address
-    #   The IP address of the compute resource. GameLift requires the DNS
-    #   name or IP address to manage your compute resource.
+    #   The IP address of the compute resource. Amazon GameLift requires the
+    #   DNS name or IP address to manage your compute resource.
     #   @return [String]
     #
     # @!attribute [rw] dns_name
-    #   The DNS name of the compute resource. GameLift requires the DNS name
-    #   or IP address to manage your compute resource.
+    #   The DNS name of the compute resource. Amazon GameLift requires the
+    #   DNS name or IP address to manage your compute resource.
     #   @return [String]
     #
     # @!attribute [rw] compute_status
@@ -413,13 +416,13 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   Which compute type that the fleet uses. A fleet can use Anywhere
-    #   compute resources owned by you or managed Amazon EC2 instances.
+    #   The compute type that the fleet uses. A fleet can use Anywhere
+    #   compute resources that you own, or use managed Amazon EC2 instances.
     #   @return [String]
     #
     # @!attribute [rw] game_lift_service_sdk_endpoint
-    #   The endpoint connection details of the GameLift SDK endpoint that
-    #   your game server connects to.
+    #   The endpoint connection details of the Amazon GameLift SDK endpoint
+    #   that your game server connects to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/Compute AWS API Documentation
@@ -507,13 +510,13 @@ module Aws::GameLift
     end
 
     # @!attribute [rw] name
-    #   A descriptive label associated with a build. Build names do not need
+    #   A descriptive label associated with a build. Build names don't need
     #   to be unique. You can change this value later.
     #   @return [String]
     #
     # @!attribute [rw] version
     #   Version information associated with a build or script. Version
-    #   strings do not need to be unique. You can change this value later.
+    #   strings don't need to be unique. You can change this value later.
     #   @return [String]
     #
     # @!attribute [rw] storage_location
@@ -535,9 +538,9 @@ module Aws::GameLift
     #   on. This value determines the type of fleet resources that you can
     #   use for this build. If your game build contains multiple
     #   executables, they all must run on the same operating system. If an
-    #   operating system is not specified when creating a build, GameLift
-    #   uses the default value (WINDOWS\_2012). This value cannot be changed
-    #   later.
+    #   operating system isn't specified when creating a build, Amazon
+    #   GameLift uses the default value (WINDOWS\_2012). This value can't
+    #   be changed later.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -562,8 +565,9 @@ module Aws::GameLift
     #
     # @!attribute [rw] server_sdk_version
     #   A server SDK version you used when integrating your game server
-    #   build with GameLift. For more information see [Integrate games with
-    #   custom game servers][1].
+    #   build with Amazon GameLift. For more information see [Integrate
+    #   games with custom game servers][1]. By default Amazon GameLift sets
+    #   this value to `4.0.2`.
     #
     #
     #
@@ -627,15 +631,15 @@ module Aws::GameLift
     # @!attribute [rw] build_id
     #   The unique identifier for a custom game server build to be deployed
     #   on fleet instances. You can use either the build ID or ARN. The
-    #   build must be uploaded to GameLift and in `READY` status. This fleet
-    #   property cannot be changed later.
+    #   build must be uploaded to Amazon GameLift and in `READY` status.
+    #   This fleet property cannot be changed later.
     #   @return [String]
     #
     # @!attribute [rw] script_id
     #   The unique identifier for a Realtime configuration script to be
     #   deployed on fleet instances. You can use either the script ID or
-    #   ARN. Scripts must be uploaded to GameLift prior to creating the
-    #   fleet. This fleet property cannot be changed later.
+    #   ARN. Scripts must be uploaded to Amazon GameLift prior to creating
+    #   the fleet. This fleet property cannot be changed later.
     #   @return [String]
     #
     # @!attribute [rw] server_launch_path
@@ -651,12 +655,12 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] log_paths
-    #   **This parameter is no longer used.** To specify where GameLift
-    #   should store log files once a server process shuts down, use the
-    #   GameLift server API `ProcessReady()` and specify one or more
-    #   directory paths in `logParameters`. For more information, see
-    #   [Initialize the server process][1] in the *GameLift Developer
-    #   Guide*.
+    #   **This parameter is no longer used.** To specify where Amazon
+    #   GameLift should store log files once a server process shuts down,
+    #   use the Amazon GameLift server API `ProcessReady()` and specify one
+    #   or more directory paths in `logParameters`. For more information,
+    #   see [Initialize the server process][1] in the *Amazon GameLift
+    #   Developer Guide*.
     #
     #
     #
@@ -664,12 +668,12 @@ module Aws::GameLift
     #   @return [Array<String>]
     #
     # @!attribute [rw] ec2_instance_type
-    #   The GameLift-supported Amazon EC2 instance type to use for all fleet
-    #   instances. Instance type determines the computing resources that
-    #   will be used to host your game servers, including CPU, memory,
-    #   storage, and networking capacity. See [Amazon Elastic Compute Cloud
-    #   Instance Types][1] for detailed descriptions of Amazon EC2 instance
-    #   types.
+    #   The Amazon GameLift-supported Amazon EC2 instance type to use for
+    #   all fleet instances. Instance type determines the computing
+    #   resources that will be used to host your game servers, including
+    #   CPU, memory, storage, and networking capacity. See [Amazon Elastic
+    #   Compute Cloud Instance Types][1] for detailed descriptions of Amazon
+    #   EC2 instance types.
     #
     #
     #
@@ -681,7 +685,7 @@ module Aws::GameLift
     #   traffic to access game sessions on this fleet. If the fleet is
     #   hosting a custom game build, this property must be set before
     #   players can connect to game sessions. For Realtime Servers fleets,
-    #   GameLift automatically sets TCP and UDP ranges.
+    #   Amazon GameLift automatically sets TCP and UDP ranges.
     #   @return [Array<Types::IpPermission>]
     #
     # @!attribute [rw] new_game_session_protection_policy
@@ -728,7 +732,7 @@ module Aws::GameLift
     #   @return [Array<String>]
     #
     # @!attribute [rw] peer_vpc_aws_account_id
-    #   Used when peering your GameLift fleet with a VPC, the unique
+    #   Used when peering your Amazon GameLift fleet with a VPC, the unique
     #   identifier for the Amazon Web Services account that owns the VPC.
     #   You can find your account ID in the Amazon Web Services Management
     #   Console under account settings.
@@ -736,10 +740,10 @@ module Aws::GameLift
     #
     # @!attribute [rw] peer_vpc_id
     #   A unique identifier for a VPC with resources to be accessed by your
-    #   GameLift fleet. The VPC must be in the same Region as your fleet. To
-    #   look up a VPC ID, use the [VPC Dashboard][1] in the Amazon Web
-    #   Services Management Console. Learn more about VPC peering in [VPC
-    #   Peering with GameLift Fleets][2].
+    #   Amazon GameLift fleet. The VPC must be in the same Region as your
+    #   fleet. To look up a VPC ID, use the [VPC Dashboard][1] in the Amazon
+    #   Web Services Management Console. Learn more about VPC peering in
+    #   [VPC Peering with Amazon GameLift Fleets][2].
     #
     #
     #
@@ -776,11 +780,11 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] certificate_configuration
-    #   Prompts GameLift to generate a TLS/SSL certificate for the fleet.
-    #   GameLift uses the certificates to encrypt traffic between game
-    #   clients and the game servers running on GameLift. By default, the
-    #   `CertificateConfiguration` is `DISABLED`. You can't change this
-    #   property after you create the fleet.
+    #   Prompts Amazon GameLift to generate a TLS/SSL certificate for the
+    #   fleet. Amazon GameLift uses the certificates to encrypt traffic
+    #   between game clients and the game servers running on Amazon
+    #   GameLift. By default, the `CertificateConfiguration` is `DISABLED`.
+    #   You can't change this property after you create the fleet.
     #
     #   Certificate Manager (ACM) certificates expire after 13 months.
     #   Certificate expiration can cause fleets to fail, preventing players
@@ -805,10 +809,13 @@ module Aws::GameLift
     #   A set of remote locations to deploy additional instances to and
     #   manage as part of the fleet. This parameter can only be used when
     #   creating fleets in Amazon Web Services Regions that support multiple
-    #   locations. You can add any GameLift-supported Amazon Web Services
-    #   Region as a remote location, in the form of an Amazon Web Services
-    #   Region code such as `us-west-2`. To create a fleet with instances in
-    #   the home Region only, omit this parameter.
+    #   locations. You can add any Amazon GameLift-supported Amazon Web
+    #   Services Region as a remote location, in the form of an Amazon Web
+    #   Services Region code such as `us-west-2`. To create a fleet with
+    #   instances in the home Region only, don't use this parameter.
+    #
+    #   To use this parameter, Amazon GameLift requires you to use your home
+    #   location in the request.
     #   @return [Array<Types::LocationConfiguration>]
     #
     # @!attribute [rw] tags
@@ -826,12 +833,13 @@ module Aws::GameLift
     #
     # @!attribute [rw] compute_type
     #   The type of compute resource used to host your game servers. You can
-    #   use your own compute resources with GameLift Anywhere or use Amazon
-    #   EC2 instances with managed GameLift.
+    #   use your own compute resources with Amazon GameLift Anywhere or use
+    #   Amazon EC2 instances with managed Amazon GameLift. By default, this
+    #   property is set to `EC2`.
     #   @return [String]
     #
     # @!attribute [rw] anywhere_configuration
-    #   GameLift Anywhere configuration options.
+    #   Amazon GameLift Anywhere configuration options.
     #   @return [Types::AnywhereConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleetInput AWS API Documentation
@@ -870,9 +878,9 @@ module Aws::GameLift
     #
     # @!attribute [rw] locations
     #   A list of locations to deploy additional instances to and manage as
-    #   part of the fleet. You can add any GameLift-supported Amazon Web
-    #   Services Region as a remote location, in the form of an Amazon Web
-    #   Services Region code such as `us-west-2`.
+    #   part of the fleet. You can add any Amazon GameLift-supported Amazon
+    #   Web Services Region as a remote location, in the form of an Amazon
+    #   Web Services Region code such as `us-west-2`.
     #   @return [Array<Types::LocationConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleetLocationsInput AWS API Documentation
@@ -890,9 +898,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] fleet_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   fleet resource and uniquely identifies it. ARNs are unique across
-    #   all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift fleet resource and uniquely identifies it. ARNs are unique
+    #   across all Regions. Format is
     #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
     #
     #
@@ -903,7 +911,7 @@ module Aws::GameLift
     # @!attribute [rw] location_states
     #   The remote locations that are being added to the fleet, and the
     #   life-cycle status of each location. For new locations, the status is
-    #   set to `NEW`. During location creation, GameLift updates each
+    #   set to `NEW`. During location creation, Amazon GameLift updates each
     #   location's status as instances are deployed there and prepared for
     #   game hosting. This list does not include the fleet home Region or
     #   any remote locations that were already added to the fleet.
@@ -927,11 +935,11 @@ module Aws::GameLift
     # @!attribute [rw] location_states
     #   The fleet's locations and life-cycle status of each location. For
     #   new fleets, the status of all locations is set to `NEW`. During
-    #   fleet creation, GameLift updates each location status as instances
-    #   are deployed there and prepared for game hosting. This list includes
-    #   an entry for the fleet's home Region. For fleets with no remote
-    #   locations, only one entry, representing the home Region, is
-    #   returned.
+    #   fleet creation, Amazon GameLift updates each location status as
+    #   instances are deployed there and prepared for game hosting. This
+    #   list includes an entry for the fleet's home Region. For fleets with
+    #   no remote locations, only one entry, representing the home Region,
+    #   is returned.
     #   @return [Array<Types::LocationState>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleetOutput AWS API Documentation
@@ -946,8 +954,8 @@ module Aws::GameLift
     # @!attribute [rw] game_server_group_name
     #   An identifier for the new game server group. This value is used to
     #   generate unique ARN identifiers for the Amazon EC2 Auto Scaling
-    #   group and the GameLift FleetIQ game server group. The name must be
-    #   unique per Region per Amazon Web Services account.
+    #   group and the Amazon GameLift FleetIQ game server group. The name
+    #   must be unique per Region per Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -961,19 +969,20 @@ module Aws::GameLift
     #
     # @!attribute [rw] min_size
     #   The minimum number of instances allowed in the Amazon EC2 Auto
-    #   Scaling group. During automatic scaling events, GameLift FleetIQ and
-    #   Amazon EC2 do not scale down the group below this minimum. In
-    #   production, this value should be set to at least 1. After the Auto
-    #   Scaling group is created, update this value directly in the Auto
-    #   Scaling group using the Amazon Web Services console or APIs.
+    #   Scaling group. During automatic scaling events, Amazon GameLift
+    #   FleetIQ and Amazon EC2 do not scale down the group below this
+    #   minimum. In production, this value should be set to at least 1.
+    #   After the Auto Scaling group is created, update this value directly
+    #   in the Auto Scaling group using the Amazon Web Services console or
+    #   APIs.
     #   @return [Integer]
     #
     # @!attribute [rw] max_size
     #   The maximum number of instances allowed in the Amazon EC2 Auto
-    #   Scaling group. During automatic scaling events, GameLift FleetIQ and
-    #   EC2 do not scale up the group above this maximum. After the Auto
-    #   Scaling group is created, update this value directly in the Auto
-    #   Scaling group using the Amazon Web Services console or APIs.
+    #   Scaling group. During automatic scaling events, Amazon GameLift
+    #   FleetIQ and EC2 do not scale up the group above this maximum. After
+    #   the Auto Scaling group is created, update this value directly in the
+    #   Auto Scaling group using the Amazon Web Services console or APIs.
     #   @return [Integer]
     #
     # @!attribute [rw] launch_template
@@ -988,7 +997,7 @@ module Aws::GameLift
     #
     #   <note markdown="1"> If you specify network interfaces in your launch template, you must
     #   explicitly set the property `AssociatePublicIpAddress` to "true".
-    #   If no network interface is specified in the launch template,
+    #   If no network interface is specified in the launch template, Amazon
     #   GameLift FleetIQ uses your account's default VPC.
     #
     #    </note>
@@ -1001,9 +1010,9 @@ module Aws::GameLift
     # @!attribute [rw] instance_definitions
     #   The Amazon EC2 instance types and sizes to use in the Auto Scaling
     #   group. The instance definitions must specify at least two different
-    #   instance types that are supported by GameLift FleetIQ. For more
-    #   information on instance types, see [EC2 Instance Types][1] in the
-    #   *Amazon Elastic Compute Cloud User Guide*. You can optionally
+    #   instance types that are supported by Amazon GameLift FleetIQ. For
+    #   more information on instance types, see [EC2 Instance Types][1] in
+    #   the *Amazon Elastic Compute Cloud User Guide*. You can optionally
     #   specify capacity weighting for each instance type. If no weight
     #   value is specified for an instance type, it is set to the default
     #   value "1". For more information about capacity weighting, see [
@@ -1027,9 +1036,9 @@ module Aws::GameLift
     #   @return [Types::GameServerGroupAutoScalingPolicy]
     #
     # @!attribute [rw] balancing_strategy
-    #   Indicates how GameLift FleetIQ balances the use of Spot Instances
-    #   and On-Demand Instances in the game server group. Method options
-    #   include the following:
+    #   Indicates how Amazon GameLift FleetIQ balances the use of Spot
+    #   Instances and On-Demand Instances in the game server group. Method
+    #   options include the following:
     #
     #   * `SPOT_ONLY` - Only Spot Instances are used in the game server
     #     group. If Spot Instances are unavailable or not viable for game
@@ -1064,12 +1073,13 @@ module Aws::GameLift
     #
     # @!attribute [rw] vpc_subnets
     #   A list of virtual private cloud (VPC) subnets to use with instances
-    #   in the game server group. By default, all GameLift FleetIQ-supported
-    #   Availability Zones are used. You can use this parameter to specify
-    #   VPCs that you've set up. This property cannot be updated after the
-    #   game server group is created, and the corresponding Auto Scaling
-    #   group will always use the property value that is set with this
-    #   request, even if the Auto Scaling group is updated directly.
+    #   in the game server group. By default, all Amazon GameLift
+    #   FleetIQ-supported Availability Zones are used. You can use this
+    #   parameter to specify VPCs that you've set up. This property cannot
+    #   be updated after the game server group is created, and the
+    #   corresponding Auto Scaling group will always use the property value
+    #   that is set with this request, even if the Auto Scaling group is
+    #   updated directly.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -1105,10 +1115,10 @@ module Aws::GameLift
 
     # @!attribute [rw] game_server_group
     #   The newly created game server group object, including the new ARN
-    #   value for the GameLift FleetIQ game server group and the object's
-    #   status. The Amazon EC2 Auto Scaling group ARN is initially null,
-    #   since the group has not yet been created. This value is added once
-    #   the game server group status reaches `ACTIVE`.
+    #   value for the Amazon GameLift FleetIQ game server group and the
+    #   object's status. The Amazon EC2 Auto Scaling group ARN is initially
+    #   null, since the group has not yet been created. This value is added
+    #   once the game server group status reaches `ACTIVE`.
     #   @return [Types::GameServerGroup]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameServerGroupOutput AWS API Documentation
@@ -1155,11 +1165,20 @@ module Aws::GameLift
     #
     # @!attribute [rw] creator_id
     #   A unique identifier for a player or entity creating the game
-    #   session. This parameter is required when requesting a new game
-    #   session on a fleet with a resource creation limit policy. This type
-    #   of policy limits the number of concurrent active game sessions that
-    #   one player can create within a certain time span. GameLift uses the
-    #   CreatorId to evaluate the new request against the policy.
+    #   session.
+    #
+    #   If you add a resource creation limit policy to a fleet, the
+    #   `CreateGameSession` operation requires a `CreatorId`. Amazon
+    #   GameLift limits the number of game session creation requests with
+    #   the same `CreatorId` in a specified time period.
+    #
+    #   If you your fleet doesn't have a resource creation limit policy and
+    #   you provide a `CreatorId` in your `CreateGameSession` requests,
+    #   Amazon GameLift limits requests to one request per `CreatorId` per
+    #   second.
+    #
+    #   To not limit `CreateGameSession` requests with the same `CreatorId`,
+    #   don't provide a `CreatorId` in your `CreateGameSession` request.
     #   @return [String]
     #
     # @!attribute [rw] game_session_id
@@ -1378,11 +1397,11 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_session_queue_arns
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   game session queue resource and uniquely identifies it. ARNs are
-    #   unique across all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift game session queue resource and uniquely identifies it.
+    #   ARNs are unique across all Regions. Format is
     #   `arn:aws:gamelift:<region>::gamesessionqueue/<queue name>`. Queues
-    #   can be located in any Region. Queues are used to start new
+    #   can be located in any Region. Queues are used to start new Amazon
     #   GameLift-hosted game sessions for matches that are created with this
     #   matchmaking configuration. If `FlexMatchMode` is set to
     #   `STANDALONE`, do not set this parameter.
@@ -1471,11 +1490,11 @@ module Aws::GameLift
     #   The method used to backfill game sessions that are created with this
     #   matchmaking configuration. Specify `MANUAL` when your game manages
     #   backfill requests manually or does not use the match backfill
-    #   feature. Specify `AUTOMATIC` to have GameLift create a backfill
-    #   request whenever a game session has one or more open slots. Learn
-    #   more about manual and automatic backfill in [ Backfill Existing
-    #   Games with FlexMatch][1]. Automatic backfill is not available when
-    #   `FlexMatchMode` is set to `STANDALONE`.
+    #   feature. Specify `AUTOMATIC` to have Amazon GameLift create a
+    #   backfill request whenever a game session has one or more open slots.
+    #   Learn more about manual and automatic backfill in [ Backfill
+    #   Existing Games with FlexMatch][1]. Automatic backfill is not
+    #   available when `FlexMatchMode` is set to `STANDALONE`.
     #
     #
     #
@@ -1484,14 +1503,14 @@ module Aws::GameLift
     #
     # @!attribute [rw] flex_match_mode
     #   Indicates whether this matchmaking configuration is being used with
-    #   GameLift hosting or as a standalone matchmaking solution.
+    #   Amazon GameLift hosting or as a standalone matchmaking solution.
     #
     #   * **STANDALONE** - FlexMatch forms matches and returns match
     #     information, including players and team assignments, in a [
     #     MatchmakingSucceeded][1] event.
     #
     #   * **WITH\_QUEUE** - FlexMatch forms matches and uses the specified
-    #     GameLift queue to start a game session for the match.
+    #     Amazon GameLift queue to start a game session for the match.
     #
     #
     #
@@ -1602,8 +1621,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] player_data
-    #   Developer-defined information related to a player. GameLift does not
-    #   use this data, so it can be formatted as needed for use in the game.
+    #   Developer-defined information related to a player. Amazon GameLift
+    #   does not use this data, so it can be formatted as needed for use in
+    #   the game.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreatePlayerSessionInput AWS API Documentation
@@ -1669,7 +1689,7 @@ module Aws::GameLift
 
     # @!attribute [rw] name
     #   A descriptive label that is associated with a script. Script names
-    #   do not need to be unique. You can use [UpdateScript][1] to change
+    #   don't need to be unique. You can use [UpdateScript][1] to change
     #   this value later.
     #
     #
@@ -1679,7 +1699,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] version
     #   Version information associated with a build or script. Version
-    #   strings do not need to be unique. You can use [UpdateScript][1] to
+    #   strings don't need to be unique. You can use [UpdateScript][1] to
     #   change this value later.
     #
     #
@@ -1762,16 +1782,17 @@ module Aws::GameLift
 
     # @!attribute [rw] game_lift_aws_account_id
     #   A unique identifier for the Amazon Web Services account that you use
-    #   to manage your GameLift fleet. You can find your Account ID in the
-    #   Amazon Web Services Management Console under account settings.
+    #   to manage your Amazon GameLift fleet. You can find your Account ID
+    #   in the Amazon Web Services Management Console under account
+    #   settings.
     #   @return [String]
     #
     # @!attribute [rw] peer_vpc_id
     #   A unique identifier for a VPC with resources to be accessed by your
-    #   GameLift fleet. The VPC must be in the same Region as your fleet. To
-    #   look up a VPC ID, use the [VPC Dashboard][1] in the Amazon Web
-    #   Services Management Console. Learn more about VPC peering in [VPC
-    #   Peering with GameLift Fleets][2].
+    #   Amazon GameLift fleet. The VPC must be in the same Region as your
+    #   fleet. To look up a VPC ID, use the [VPC Dashboard][1] in the Amazon
+    #   Web Services Management Console. Learn more about VPC peering in
+    #   [VPC Peering with Amazon GameLift Fleets][2].
     #
     #
     #
@@ -1816,10 +1837,10 @@ module Aws::GameLift
     #
     # @!attribute [rw] peer_vpc_id
     #   A unique identifier for a VPC with resources to be accessed by your
-    #   GameLift fleet. The VPC must be in the same Region as your fleet. To
-    #   look up a VPC ID, use the [VPC Dashboard][1] in the Amazon Web
-    #   Services Management Console. Learn more about VPC peering in [VPC
-    #   Peering with GameLift Fleets][2].
+    #   Amazon GameLift fleet. The VPC must be in the same Region as your
+    #   fleet. To look up a VPC ID, use the [VPC Dashboard][1] in the Amazon
+    #   Web Services Management Console. Learn more about VPC peering in
+    #   [VPC Peering with Amazon GameLift Fleets][2].
     #
     #
     #
@@ -1905,9 +1926,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] fleet_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   fleet resource and uniquely identifies it. ARNs are unique across
-    #   all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift fleet resource and uniquely identifies it. ARNs are unique
+    #   across all Regions. Format is
     #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
     #
     #
@@ -2076,16 +2097,17 @@ module Aws::GameLift
 
     # @!attribute [rw] game_lift_aws_account_id
     #   A unique identifier for the Amazon Web Services account that you use
-    #   to manage your GameLift fleet. You can find your Account ID in the
-    #   Amazon Web Services Management Console under account settings.
+    #   to manage your Amazon GameLift fleet. You can find your Account ID
+    #   in the Amazon Web Services Management Console under account
+    #   settings.
     #   @return [String]
     #
     # @!attribute [rw] peer_vpc_id
     #   A unique identifier for a VPC with resources to be accessed by your
-    #   GameLift fleet. The VPC must be in the same Region as your fleet. To
-    #   look up a VPC ID, use the [VPC Dashboard][1] in the Amazon Web
-    #   Services Management Console. Learn more about VPC peering in [VPC
-    #   Peering with GameLift Fleets][2].
+    #   Amazon GameLift fleet. The VPC must be in the same Region as your
+    #   fleet. To look up a VPC ID, use the [VPC Dashboard][1] in the Amazon
+    #   Web Services Management Console. Learn more about VPC peering in
+    #   [VPC Peering with Amazon GameLift Fleets][2].
     #
     #
     #
@@ -2252,9 +2274,9 @@ module Aws::GameLift
     end
 
     # @!attribute [rw] ec2_instance_type
-    #   Name of an Amazon EC2 instance type that is supported in GameLift. A
-    #   fleet instance type determines the computing resources of each
-    #   instance in the fleet, including CPU, memory, storage, and
+    #   Name of an Amazon EC2 instance type that is supported in Amazon
+    #   GameLift. A fleet instance type determines the computing resources
+    #   of each instance in the fleet, including CPU, memory, storage, and
     #   networking capacity. Do not specify a value for this parameter to
     #   retrieve limits for all instance types.
     #   @return [String]
@@ -2493,9 +2515,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] fleet_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   fleet resource and uniquely identifies it. ARNs are unique across
-    #   all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift fleet resource and uniquely identifies it. ARNs are unique
+    #   across all Regions. Format is
     #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
     #
     #
@@ -2617,9 +2639,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] fleet_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   fleet resource and uniquely identifies it. ARNs are unique across
-    #   all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift fleet resource and uniquely identifies it. ARNs are unique
+    #   across all Regions. Format is
     #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
     #
     #
@@ -3489,8 +3511,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] player_data
-    #   Developer-defined information related to a player. GameLift does not
-    #   use this data, so it can be formatted as needed for use in the game.
+    #   Developer-defined information related to a player. Amazon GameLift
+    #   does not use this data, so it can be formatted as needed for use in
+    #   the game.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DesiredPlayerSession AWS API Documentation
@@ -3553,12 +3576,12 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # The GameLift service limits for an Amazon EC2 instance type and
-    # current utilization. GameLift allows Amazon Web Services accounts a
-    # maximum number of instances, per instance type, per Amazon Web
-    # Services Region or location, for use with GameLift. You can request an
-    # limit increase for your account by using the **Service limits** page
-    # in the GameLift console.
+    # The Amazon GameLift service limits for an Amazon EC2 instance type and
+    # current utilization. Amazon GameLift allows Amazon Web Services
+    # accounts a maximum number of instances, per instance type, per Amazon
+    # Web Services Region or location, for use with Amazon GameLift. You can
+    # request an limit increase for your account by using the **Service
+    # limits** page in the Amazon GameLift console.
     #
     # @!attribute [rw] ec2_instance_type
     #   The name of an Amazon EC2 instance type. See [Amazon Elastic Compute
@@ -3594,8 +3617,8 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Log entry describing an event that involves GameLift resources (such
-    # as a fleet). In addition to tracking activity, event codes and
+    # Log entry describing an event that involves Amazon GameLift resources
+    # (such as a fleet). In addition to tracking activity, event codes and
     # messages can provide additional information for troubleshooting and
     # debugging problems.
     #
@@ -3620,17 +3643,17 @@ module Aws::GameLift
     #     fleet instance for installation.
     #
     #   * FLEET\_STATE\_VALIDATING -- Fleet status changed from
-    #     `DOWNLOADING` to `VALIDATING`. GameLift has successfully
+    #     `DOWNLOADING` to `VALIDATING`. Amazon GameLift has successfully
     #     downloaded the build and is now validating the build files.
     #
     #   * FLEET\_STATE\_BUILDING -- Fleet status changed from `VALIDATING`
-    #     to `BUILDING`. GameLift has successfully verified the build files
-    #     and is now running the installation scripts.
+    #     to `BUILDING`. Amazon GameLift has successfully verified the build
+    #     files and is now running the installation scripts.
     #
     #   * FLEET\_STATE\_ACTIVATING -- Fleet status changed from `BUILDING`
-    #     to `ACTIVATING`. GameLift is trying to launch an instance and test
-    #     the connectivity between the build and the GameLift Service via
-    #     the Server SDK.
+    #     to `ACTIVATING`. Amazon GameLift is trying to launch an instance
+    #     and test the connectivity between the build and the Amazon
+    #     GameLift Service via the Server SDK.
     #
     #   * FLEET\_STATE\_ACTIVE -- The fleet's status changed from
     #     `ACTIVATING` to `ACTIVE`. The fleet is now ready to host game
@@ -3663,12 +3686,13 @@ module Aws::GameLift
     #   * FLEET\_CREATION\_VALIDATING\_RUNTIME\_CONFIG -- The build process
     #     was successful, and the GameLift is now verifying that the game
     #     server launch paths, which are specified in the fleet's runtime
-    #     configuration, exist. If any listed launch path exists, GameLift
-    #     tries to launch a game server process and waits for the process to
-    #     report ready. Failures in this stage prevent a fleet from moving
-    #     to `ACTIVE` status. Logs for this stage list the launch paths in
-    #     the runtime configuration and indicate whether each is found.
-    #     Access the logs by using the URL in *PreSignedLogUrl*.
+    #     configuration, exist. If any listed launch path exists, Amazon
+    #     GameLift tries to launch a game server process and waits for the
+    #     process to report ready. Failures in this stage prevent a fleet
+    #     from moving to `ACTIVE` status. Logs for this stage list the
+    #     launch paths in the runtime configuration and indicate whether
+    #     each is found. Access the logs by using the URL in
+    #     *PreSignedLogUrl*.
     #
     #   * FLEET\_VALIDATION\_LAUNCH\_PATH\_NOT\_FOUND -- Validation of the
     #     runtime configuration failed because the executable specified in a
@@ -3700,8 +3724,8 @@ module Aws::GameLift
     #   **VPC peering events:**
     #
     #   * FLEET\_VPC\_PEERING\_SUCCEEDED -- A VPC peering connection has
-    #     been established between the VPC for an GameLift fleet and a VPC
-    #     in your Amazon Web Services account.
+    #     been established between the VPC for an Amazon GameLift fleet and
+    #     a VPC in your Amazon Web Services account.
     #
     #   * FLEET\_VPC\_PEERING\_FAILED -- A requested VPC peering connection
     #     has failed. Event details and status information provide
@@ -3800,7 +3824,7 @@ module Aws::GameLift
     #   Location of stored logs with additional detail that is related to
     #   the event. This is useful for debugging issues. The URL is valid for
     #   15 minutes. You can also access fleet creation logs through the
-    #   GameLift console.
+    #   Amazon GameLift console.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/Event AWS API Documentation
@@ -3835,7 +3859,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Describes a GameLift fleet of game hosting resources.
+    # Describes a Amazon GameLift fleet of game hosting resources.
     #
     # **Related actions**
     #
@@ -3844,9 +3868,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] fleet_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   fleet resource and uniquely identifies it. ARNs are unique across
-    #   all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift fleet resource and uniquely identifies it. ARNs are unique
+    #   across all Regions. Format is
     #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
     #   In a GameLift fleet ARN, the resource ID matches the `FleetId`
     #   value.
@@ -3906,8 +3930,8 @@ module Aws::GameLift
     #   * **NEW** -- A new fleet has been defined and desired instances is
     #     set to 1.
     #
-    #   * **DOWNLOADING/VALIDATING/BUILDING/ACTIVATING** -- GameLift is
-    #     setting up the new fleet, creating new instances with the game
+    #   * **DOWNLOADING/VALIDATING/BUILDING/ACTIVATING** -- Amazon GameLift
+    #     is setting up the new fleet, creating new instances with the game
     #     build or Realtime script and starting server processes.
     #
     #   * **ACTIVE** -- Hosts can now accept game sessions.
@@ -3926,9 +3950,10 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] build_arn
-    #   The Amazon Resource Name ([ARN][1]) associated with the GameLift
-    #   build resource that is deployed on instances in this fleet. In a
-    #   GameLift build ARN, the resource ID matches the `BuildId` value.
+    #   The Amazon Resource Name ([ARN][1]) associated with the Amazon
+    #   GameLift build resource that is deployed on instances in this fleet.
+    #   In a GameLift build ARN, the resource ID matches the `BuildId`
+    #   value.
     #
     #
     #
@@ -3968,7 +3993,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] log_paths
     #   **This parameter is no longer used.** Game session log paths are now
-    #   defined using the GameLift server API `ProcessReady()`
+    #   defined using the Amazon GameLift server API `ProcessReady()`
     #   `logParameters`. See more information in the [Server API
     #   Reference][1].
     #
@@ -4000,9 +4025,9 @@ module Aws::GameLift
     #   you can control players' ability to consume available resources.
     #
     #   The policy is evaluated when a player tries to create a new game
-    #   session. On receiving a `CreateGameSession` request, GameLift checks
-    #   that the player (identified by `CreatorId`) has created fewer than
-    #   game session limit in the specified time period.
+    #   session. On receiving a `CreateGameSession` request, Amazon GameLift
+    #   checks that the player (identified by `CreatorId`) has created fewer
+    #   than game session limit in the specified time period.
     #   @return [Types::ResourceCreationLimitPolicy]
     #
     # @!attribute [rw] metric_groups
@@ -4041,7 +4066,7 @@ module Aws::GameLift
     #   Determines whether a TLS/SSL certificate is generated for a fleet.
     #   This feature must be enabled when creating the fleet. All instances
     #   in a fleet share the same certificate. The certificate can be
-    #   retrieved by calling the [GameLift Server SDK][1] operation
+    #   retrieved by calling the [Amazon GameLift Server SDK][1] operation
     #   `GetInstanceCertificate`.
     #
     #
@@ -4051,12 +4076,13 @@ module Aws::GameLift
     #
     # @!attribute [rw] compute_type
     #   The type of compute resource used to host your game servers. You can
-    #   use your own compute resources with GameLift Anywhere or use Amazon
-    #   EC2 instances with managed GameLift.
+    #   use your own compute resources with Amazon GameLift Anywhere or use
+    #   Amazon EC2 instances with managed Amazon GameLift.
     #   @return [String]
     #
     # @!attribute [rw] anywhere_configuration
-    #   GameLift Anywhere configuration options for your Anywhere fleets.
+    #   Amazon GameLift Anywhere configuration options for your Anywhere
+    #   fleets.
     #   @return [Types::AnywhereConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/FleetAttributes AWS API Documentation
@@ -4111,9 +4137,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] fleet_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   fleet resource and uniquely identifies it. ARNs are unique across
-    #   all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift fleet resource and uniquely identifies it. ARNs are unique
+    #   across all Regions. Format is
     #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
     #
     #
@@ -4182,9 +4208,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] fleet_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   fleet resource and uniquely identifies it. ARNs are unique across
-    #   all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift fleet resource and uniquely identifies it. ARNs are unique
+    #   across all Regions. Format is
     #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
     #
     #
@@ -4237,8 +4263,8 @@ module Aws::GameLift
     # details to be used when setting up the new game session. For example,
     # a game property might specify a game mode, level, or map. Game
     # properties are passed to the game server process when initiating a new
-    # game session. For more information, see the [ GameLift Developer
-    # Guide][1].
+    # game session. For more information, see the [ Amazon GameLift
+    # Developer Guide][1].
     #
     #
     #
@@ -4261,8 +4287,8 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # **This data type is used with the GameLift FleetIQ and game server
-    # groups.**
+    # **This data type is used with the Amazon GameLift FleetIQ and game
+    # server groups.**
     #
     # Properties describing a game server that is running on an instance in
     # a game server group.
@@ -4365,8 +4391,8 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # **This data type is used with the GameLift FleetIQ and game server
-    # groups.**
+    # **This data type is used with the Amazon GameLift FleetIQ and game
+    # server groups.**
     #
     # Properties that describe a game server group resource. A game server
     # group manages certain properties related to a corresponding Amazon EC2
@@ -4397,15 +4423,15 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] instance_definitions
-    #   The set of Amazon EC2 instance types that GameLift FleetIQ can use
-    #   when balancing and automatically scaling instances in the
+    #   The set of Amazon EC2 instance types that Amazon GameLift FleetIQ
+    #   can use when balancing and automatically scaling instances in the
     #   corresponding Auto Scaling group.
     #   @return [Array<Types::InstanceDefinition>]
     #
     # @!attribute [rw] balancing_strategy
-    #   Indicates how GameLift FleetIQ balances the use of Spot Instances
-    #   and On-Demand Instances in the game server group. Method options
-    #   include the following:
+    #   Indicates how Amazon GameLift FleetIQ balances the use of Spot
+    #   Instances and On-Demand Instances in the game server group. Method
+    #   options include the following:
     #
     #   * `SPOT_ONLY` - Only Spot Instances are used in the game server
     #     group. If Spot Instances are unavailable or not viable for game
@@ -4446,22 +4472,22 @@ module Aws::GameLift
     #   The current status of the game server group. Possible statuses
     #   include:
     #
-    #   * `NEW` - GameLift FleetIQ has validated the
+    #   * `NEW` - Amazon GameLift FleetIQ has validated the
     #     `CreateGameServerGroup()` request.
     #
-    #   * `ACTIVATING` - GameLift FleetIQ is setting up a game server group,
-    #     which includes creating an Auto Scaling group in your Amazon Web
-    #     Services account.
+    #   * `ACTIVATING` - Amazon GameLift FleetIQ is setting up a game server
+    #     group, which includes creating an Auto Scaling group in your
+    #     Amazon Web Services account.
     #
     #   * `ACTIVE` - The game server group has been successfully created.
     #
     #   * `DELETE_SCHEDULED` - A request to delete the game server group has
     #     been received.
     #
-    #   * `DELETING` - GameLift FleetIQ has received a valid
-    #     `DeleteGameServerGroup()` request and is processing it. GameLift
-    #     FleetIQ must first complete and release hosts before it deletes
-    #     the Auto Scaling group and the game server group.
+    #   * `DELETING` - Amazon GameLift FleetIQ has received a valid
+    #     `DeleteGameServerGroup()` request and is processing it. Amazon
+    #     GameLift FleetIQ must first complete and release hosts before it
+    #     deletes the Auto Scaling group and the game server group.
     #
     #   * `DELETED` - The game server group has been successfully deleted.
     #
@@ -4511,8 +4537,8 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # **This data type is used with the GameLift FleetIQ and game server
-    # groups.**
+    # **This data type is used with the Amazon GameLift FleetIQ and game
+    # server groups.**
     #
     # Configuration settings for intelligent automatic scaling that uses
     # target tracking. These settings are used to add an Auto Scaling policy
@@ -4523,19 +4549,20 @@ module Aws::GameLift
     #
     # @!attribute [rw] estimated_instance_warmup
     #   Length of time, in seconds, it takes for a new instance to start new
-    #   game server processes and register with GameLift FleetIQ. Specifying
-    #   a warm-up time can be useful, particularly with game servers that
-    #   take a long time to start up, because it avoids prematurely starting
-    #   new instances.
+    #   game server processes and register with Amazon GameLift FleetIQ.
+    #   Specifying a warm-up time can be useful, particularly with game
+    #   servers that take a long time to start up, because it avoids
+    #   prematurely starting new instances.
     #   @return [Integer]
     #
     # @!attribute [rw] target_tracking_configuration
     #   Settings for a target-based scaling policy applied to Auto Scaling
     #   group. These settings are used to create a target-based policy that
-    #   tracks the GameLift FleetIQ metric `"PercentUtilizedGameServers"`
-    #   and specifies a target value for the metric. As player usage
-    #   changes, the policy triggers to adjust the game server group
-    #   capacity so that the metric returns to the target value.
+    #   tracks the Amazon GameLift FleetIQ metric
+    #   `"PercentUtilizedGameServers"` and specifies a target value for the
+    #   metric. As player usage changes, the policy triggers to adjust the
+    #   game server group capacity so that the metric returns to the target
+    #   value.
     #   @return [Types::TargetTrackingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameServerGroupAutoScalingPolicy AWS API Documentation
@@ -4547,8 +4574,8 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # **This data type is used with the GameLift FleetIQ and game server
-    # groups.**
+    # **This data type is used with the Amazon GameLift FleetIQ and game
+    # server groups.**
     #
     # Additional properties, including status, that describe an EC2 instance
     # in a game server group. Instance configurations are set with game
@@ -4675,8 +4702,8 @@ module Aws::GameLift
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] ip_address
-    #   The IP address of the game session. To connect to a GameLift game
-    #   server, an app needs both the IP address and port number.
+    #   The IP address of the game session. To connect to a Amazon GameLift
+    #   game server, an app needs both the IP address and port number.
     #   @return [String]
     #
     # @!attribute [rw] dns_name
@@ -4699,8 +4726,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   The port number for the game session. To connect to a GameLift game
-    #   server, an app needs both the IP address and port number.
+    #   The port number for the game session. To connect to a Amazon
+    #   GameLift game server, an app needs both the IP address and port
+    #   number.
     #   @return [Integer]
     #
     # @!attribute [rw] player_session_creation_policy
@@ -4784,8 +4812,8 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] ip_address
-    #   The IP address of the game session. To connect to a GameLift game
-    #   server, an app needs both the IP address and port number.
+    #   The IP address of the game session. To connect to a Amazon GameLift
+    #   game server, an app needs both the IP address and port number.
     #   @return [String]
     #
     # @!attribute [rw] dns_name
@@ -4808,8 +4836,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   The port number for the game session. To connect to a GameLift game
-    #   server, an app needs both the IP address and port number.
+    #   The port number for the game session. To connect to a Amazon
+    #   GameLift game server, an app needs both the IP address and port
+    #   number.
     #   @return [Integer]
     #
     # @!attribute [rw] matched_player_sessions
@@ -4898,8 +4927,8 @@ module Aws::GameLift
     #     before the time limit expired. You can resubmit the placement
     #     request as needed.
     #
-    #   * **FAILED** -- GameLift is not able to complete the process of
-    #     placing the game session. Common reasons are the game session
+    #   * **FAILED** -- Amazon GameLift is not able to complete the process
+    #     of placing the game session. Common reasons are the game session
     #     terminated before the placement process was completed, or an
     #     unexpected internal error.
     #   @return [String]
@@ -4962,10 +4991,10 @@ module Aws::GameLift
     #   @return [Time]
     #
     # @!attribute [rw] ip_address
-    #   The IP address of the game session. To connect to a GameLift game
-    #   server, an app needs both the IP address and port number. This value
-    #   is set once the new game session is placed (placement status is
-    #   `FULFILLED`).
+    #   The IP address of the game session. To connect to a Amazon GameLift
+    #   game server, an app needs both the IP address and port number. This
+    #   value is set once the new game session is placed (placement status
+    #   is `FULFILLED`).
     #   @return [String]
     #
     # @!attribute [rw] dns_name
@@ -4988,10 +5017,10 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   The port number for the game session. To connect to a GameLift game
-    #   server, an app needs both the IP address and port number. This value
-    #   is set once the new game session is placed (placement status is
-    #   `FULFILLED`).
+    #   The port number for the game session. To connect to a Amazon
+    #   GameLift game server, an app needs both the IP address and port
+    #   number. This value is set once the new game session is placed
+    #   (placement status is `FULFILLED`).
     #   @return [Integer]
     #
     # @!attribute [rw] placed_player_sessions
@@ -5062,12 +5091,12 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_session_queue_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   game session queue resource and uniquely identifies it. ARNs are
-    #   unique across all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift game session queue resource and uniquely identifies it.
+    #   ARNs are unique across all Regions. Format is
     #   `arn:aws:gamelift:<region>::gamesessionqueue/<queue name>`. In a
-    #   GameLift game session queue ARN, the resource ID matches the *Name*
-    #   value.
+    #   Amazon GameLift game session queue ARN, the resource ID matches the
+    #   *Name* value.
     #
     #
     #
@@ -5184,9 +5213,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] fleet_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   fleet resource and uniquely identifies it. ARNs are unique across
-    #   all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift fleet resource and uniquely identifies it. ARNs are unique
+    #   across all Regions. Format is
     #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
     #
     #
@@ -5199,9 +5228,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] compute_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   compute resource and uniquely identifies it. ARNs are unique across
-    #   all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift compute resource and uniquely identifies it. ARNs are
+    #   unique across all Regions. Format is
     #   `arn:aws:gamelift:<region>::compute/compute-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
     #
     #
@@ -5231,7 +5260,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] compute_name
     #   The name of the compute resource you are requesting the
-    #   authorization token for.
+    #   authentication token for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetComputeAuthTokenInput AWS API Documentation
@@ -5248,9 +5277,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] fleet_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   fleet resource and uniquely identifies it. ARNs are unique across
-    #   all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift fleet resource and uniquely identifies it. ARNs are unique
+    #   across all Regions. Format is
     #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
     #
     #
@@ -5260,13 +5289,13 @@ module Aws::GameLift
     #
     # @!attribute [rw] compute_name
     #   The name of the compute resource you are requesting the
-    #   authorization token for.
+    #   authentication token for.
     #   @return [String]
     #
     # @!attribute [rw] compute_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   compute resource and uniquely identifies it. ARNs are unique across
-    #   all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift compute resource and uniquely identifies it. ARNs are
+    #   unique across all Regions. Format is
     #   `arn:aws:gamelift:<region>::compute/compute-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`
     #
     #
@@ -5275,14 +5304,15 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] auth_token
-    #   The authorization token that your game server uses to authenticate
-    #   with GameLift.
+    #   The authentication token that your game server uses to authenticate
+    #   with Amazon GameLift.
     #   @return [String]
     #
     # @!attribute [rw] expiration_timestamp
-    #   The amount of time until the authorization token is no longer valid.
-    #   To continue using the compute resource for game server hosting,
-    #   renew the authorization token by using this operation again.
+    #   The amount of time until the authentication token is no longer
+    #   valid. To continue using the compute resource for game server
+    #   hosting, renew the authentication token by using this operation
+    #   again.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetComputeAuthTokenOutput AWS API Documentation
@@ -5375,8 +5405,8 @@ module Aws::GameLift
     end
 
     # Represents an EC2 instance of virtual computing resources that hosts
-    # one or more game servers. In GameLift, a fleet can contain zero or
-    # more instances.
+    # one or more game servers. In Amazon GameLift, a fleet can contain zero
+    # or more instances.
     #
     # **Related actions**
     #
@@ -5385,9 +5415,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] fleet_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   fleet resource and uniquely identifies it. ARNs are unique across
-    #   all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift fleet resource and uniquely identifies it. ARNs are unique
+    #   across all Regions. Format is
     #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
     #
     #
@@ -5441,8 +5471,8 @@ module Aws::GameLift
     #
     #   * **ACTIVE** -- The instance has been successfully created and at
     #     least one server process has successfully launched and reported
-    #     back to GameLift that it is ready to host a game session. The
-    #     instance is now considered ready to host game sessions.
+    #     back to Amazon GameLift that it is ready to host a game session.
+    #     The instance is now considered ready to host game sessions.
     #
     #   * **TERMINATING** -- The instance is in the process of shutting
     #     down. This may happen to reduce capacity during a scaling down
@@ -5533,12 +5563,12 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # **This data type is used with the GameLift FleetIQ and game server
-    # groups.**
+    # **This data type is used with the Amazon GameLift FleetIQ and game
+    # server groups.**
     #
     # An allowed instance type for a game server group. All game server
-    # groups must have at least two instance types defined for it. GameLift
-    # FleetIQ periodically evaluates each defined instance type for
+    # groups must have at least two instance types defined for it. Amazon
+    # GameLift FleetIQ periodically evaluates each defined instance type for
     # viability. It then updates the Auto Scaling group with the list of
     # viable instance types.
     #
@@ -5549,8 +5579,8 @@ module Aws::GameLift
     # @!attribute [rw] weighted_capacity
     #   Instance weighting that indicates how much this instance type
     #   contributes to the total capacity of a game server group. Instance
-    #   weights are used by GameLift FleetIQ to calculate the instance
-    #   type's cost per unit hour and better identify the most
+    #   weights are used by Amazon GameLift FleetIQ to calculate the
+    #   instance type's cost per unit hour and better identify the most
     #   cost-effective options. For detailed information on weighting
     #   instance capacity, see [Instance Weighting][1] in the *Amazon
     #   Elastic Compute Cloud Auto Scaling User Guide*. Default value is
@@ -5634,22 +5664,27 @@ module Aws::GameLift
     # sessions are assigned an IP address/port number combination, which
     # must fall into the fleet's allowed ranges. Fleets with custom game
     # builds must have permissions explicitly set. For Realtime Servers
-    # fleets, GameLift automatically opens two port ranges, one for TCP
-    # messaging and one for UDP.
+    # fleets, Amazon GameLift automatically opens two port ranges, one for
+    # TCP messaging and one for UDP.
     #
     # @!attribute [rw] from_port
     #   A starting value for a range of allowed port numbers.
     #
-    #   For fleets using Windows and Linux builds, only ports 1026-60000 are
+    #   For fleets using Linux builds, only ports `22` and `1026-60000` are
     #   valid.
+    #
+    #   For fleets using Windows builds, only ports `1026-60000` are valid.
     #   @return [Integer]
     #
     # @!attribute [rw] to_port
     #   An ending value for a range of allowed port numbers. Port numbers
-    #   are end-inclusive. This value must be higher than `FromPort`.
+    #   are end-inclusive. This value must be equal to or greater than
+    #   `FromPort`.
     #
-    #   For fleets using Windows and Linux builds, only ports 1026-60000 are
+    #   For fleets using Linux builds, only ports `22` and `1026-60000` are
     #   valid.
+    #
+    #   For fleets using Windows builds, only ports `1026-60000` are valid.
     #   @return [Integer]
     #
     # @!attribute [rw] ip_range
@@ -5673,8 +5708,8 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # **This data type is used with the GameLift FleetIQ and game server
-    # groups.**
+    # **This data type is used with the Amazon GameLift FleetIQ and game
+    # server groups.**
     #
     # An Amazon Elastic Compute Cloud launch template that contains
     # configuration settings and game server code to be deployed to all
@@ -5813,7 +5848,7 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   A token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   operation. To start at the beginning of the result set, do not
+    #   operation. To start at the beginning of the result set, don't
     #   specify a value.
     #   @return [String]
     #
@@ -6096,7 +6131,7 @@ module Aws::GameLift
     # @!attribute [rw] next_token
     #   A token that indicates the start of the next sequential page of
     #   results. Use the token that is returned with a previous call to this
-    #   operation. To start at the beginning of the result set, do not
+    #   operation. To start at the beginning of the result set, don't
     #   specify a value.
     #   @return [String]
     #
@@ -6129,11 +6164,11 @@ module Aws::GameLift
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to and uniquely
-    #   identifies the GameLift resource that you want to retrieve tags for.
-    #   GameLift resource ARNs are included in the data object for the
-    #   resource, which can be retrieved by calling a List or Describe
-    #   operation for the resource type.
+    #   The Amazon Resource Name ([ARN][1]) that uniquely identifies the
+    #   Amazon GameLift resource that you want to retrieve tags for. Amazon
+    #   GameLift includes resource ARNs in the data object for the resource.
+    #   You can retrieve the ARN by calling a `List` or `Describe` operation
+    #   for the resource type.
     #
     #
     #
@@ -6149,8 +6184,7 @@ module Aws::GameLift
     end
 
     # @!attribute [rw] tags
-    #   The collection of tags that have been assigned to the specified
-    #   resource.
+    #   The collection of tags assigned to the resource.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListTagsForResourceResponse AWS API Documentation
@@ -6189,8 +6223,8 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # A remote location where a multi-location fleet can deploy EC2
-    # instances for game hosting.
+    # A remote location where a multi-location fleet can deploy game servers
+    # for game hosting.
     #
     # @!attribute [rw] location
     #   An Amazon Web Services Region code, such as `us-west-2`.
@@ -6211,9 +6245,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] location_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   location resource and uniquely identifies it. ARNs are unique across
-    #   all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift location resource and uniquely identifies it. ARNs are
+    #   unique across all Regions. Format is
     #   `arn:aws:gamelift:<region>::location/location-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
     #
     #
@@ -6239,7 +6273,7 @@ module Aws::GameLift
     # * **NEW** -- A new fleet location has been defined and desired
     #   instances is set to 1.
     #
-    # * **DOWNLOADING/VALIDATING/BUILDING/ACTIVATING** -- GameLift is
+    # * **DOWNLOADING/VALIDATING/BUILDING/ACTIVATING** -- Amazon GameLift is
     #   setting up the new fleet location, creating new instances with the
     #   game build or Realtime script and starting server processes.
     #
@@ -6310,12 +6344,12 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] configuration_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   matchmaking configuration resource and uniquely identifies it. ARNs
-    #   are unique across all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift matchmaking configuration resource and uniquely identifies
+    #   it. ARNs are unique across all Regions. Format is
     #   `arn:aws:gamelift:<region>::matchmakingconfiguration/<matchmaking
-    #   configuration name>`. In a GameLift configuration ARN, the resource
-    #   ID matches the *Name* value.
+    #   configuration name>`. In a Amazon GameLift configuration ARN, the
+    #   resource ID matches the *Name* value.
     #
     #
     #
@@ -6328,11 +6362,11 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_session_queue_arns
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   game session queue resource and uniquely identifies it. ARNs are
-    #   unique across all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift game session queue resource and uniquely identifies it.
+    #   ARNs are unique across all Regions. Format is
     #   `arn:aws:gamelift:<region>::gamesessionqueue/<queue name>`. Queues
-    #   can be located in any Region. Queues are used to start new
+    #   can be located in any Region. Queues are used to start new Amazon
     #   GameLift-hosted game sessions for matches that are created with this
     #   matchmaking configuration. This property is not set when
     #   `FlexMatchMode` is set to `STANDALONE`.
@@ -6445,14 +6479,14 @@ module Aws::GameLift
     #
     # @!attribute [rw] flex_match_mode
     #   Indicates whether this matchmaking configuration is being used with
-    #   GameLift hosting or as a standalone matchmaking solution.
+    #   Amazon GameLift hosting or as a standalone matchmaking solution.
     #
     #   * **STANDALONE** - FlexMatch forms matches and returns match
     #     information, including players and team assignments, in a [
     #     MatchmakingSucceeded][1] event.
     #
     #   * **WITH\_QUEUE** - FlexMatch forms matches and uses the specified
-    #     GameLift queue to start a game session for the match.
+    #     Amazon GameLift queue to start a game session for the match.
     #
     #
     #
@@ -6527,9 +6561,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] rule_set_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   matchmaking rule set resource and uniquely identifies it. ARNs are
-    #   unique across all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift matchmaking rule set resource and uniquely identifies it.
+    #   ARNs are unique across all Regions. Format is
     #   `arn:aws:gamelift:<region>::matchmakingruleset/<ruleset name>`. In a
     #   GameLift rule set ARN, the resource ID matches the *RuleSetName*
     #   value.
@@ -6925,8 +6959,8 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] ip_address
-    #   The IP address of the game session. To connect to a GameLift game
-    #   server, an app needs both the IP address and port number.
+    #   The IP address of the game session. To connect to a Amazon GameLift
+    #   game server, an app needs both the IP address and port number.
     #   @return [String]
     #
     # @!attribute [rw] dns_name
@@ -6954,8 +6988,9 @@ module Aws::GameLift
     #   @return [Integer]
     #
     # @!attribute [rw] player_data
-    #   Developer-defined information related to a player. GameLift does not
-    #   use this data, so it can be formatted as needed for use in the game.
+    #   Developer-defined information related to a player. Amazon GameLift
+    #   does not use this data, so it can be formatted as needed for use in
+    #   the game.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/PlayerSession AWS API Documentation
@@ -7183,17 +7218,17 @@ module Aws::GameLift
     #
     # @!attribute [rw] certificate_path
     #   The path to the TLS certificate on your compute resource. The path
-    #   and certificate are not validated by GameLift.
+    #   and certificate are not validated by Amazon GameLift.
     #   @return [String]
     #
     # @!attribute [rw] dns_name
-    #   The DNS name of the compute resource. GameLift requires the DNS name
-    #   or IP address to manage your compute resource.
+    #   The DNS name of the compute resource. Amazon GameLift requires the
+    #   DNS name or IP address to manage your compute resource.
     #   @return [String]
     #
     # @!attribute [rw] ip_address
-    #   The IP address of the compute resource. GameLift requires the DNS
-    #   name or IP address to manage your compute resource.
+    #   The IP address of the compute resource. Amazon GameLift requires the
+    #   DNS name or IP address to manage your compute resource.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -7353,9 +7388,9 @@ module Aws::GameLift
     # control players' ability to consume available resources.
     #
     # The policy is evaluated when a player tries to create a new game
-    # session. On receiving a `CreateGameSession` request, GameLift checks
-    # that the player (identified by `CreatorId`) has created fewer than
-    # game session limit in the specified time period.
+    # session. On receiving a `CreateGameSession` request, Amazon GameLift
+    # checks that the player (identified by `CreatorId`) has created fewer
+    # than game session limit in the specified time period.
     #
     # @!attribute [rw] new_game_sessions_per_creator
     #   A policy that puts limits on the number of game sessions that a
@@ -7363,9 +7398,9 @@ module Aws::GameLift
     #   you can control players' ability to consume available resources.
     #
     #   The policy is evaluated when a player tries to create a new game
-    #   session. On receiving a `CreateGameSession` request, GameLift checks
-    #   that the player (identified by `CreatorId`) has created fewer than
-    #   game session limit in the specified time period.
+    #   session. On receiving a `CreateGameSession` request, Amazon GameLift
+    #   checks that the player (identified by `CreatorId`) has created fewer
+    #   than game session limit in the specified time period.
     #   @return [Integer]
     #
     # @!attribute [rw] policy_period_in_minutes
@@ -7458,14 +7493,15 @@ module Aws::GameLift
     # A collection of server process configurations that describe the set of
     # processes to run on each instance in a fleet. Server processes run
     # either an executable in a custom game build or a Realtime Servers
-    # script. GameLift launches the configured processes, manages their life
-    # cycle, and replaces them as needed. Each instance checks regularly for
-    # an updated runtime configuration.
+    # script. Amazon GameLift launches the configured processes, manages
+    # their life cycle, and replaces them as needed. Each instance checks
+    # regularly for an updated runtime configuration.
     #
-    # A GameLift instance is limited to 50 processes running concurrently.
-    # To calculate the total number of processes in a runtime configuration,
-    # add the values of the `ConcurrentExecutions` parameter for each server
-    # process. Learn more about [ Running Multiple Processes on a Fleet][1].
+    # A Amazon GameLift instance is limited to 50 processes running
+    # concurrently. To calculate the total number of processes in a runtime
+    # configuration, add the values of the `ConcurrentExecutions` parameter
+    # for each server process. Learn more about [ Running Multiple Processes
+    # on a Fleet][1].
     #
     #
     #
@@ -7506,8 +7542,8 @@ module Aws::GameLift
     # @!attribute [rw] bucket
     #   An Amazon S3 bucket identifier. Thename of the S3 bucket.
     #
-    #   <note markdown="1"> GameLift doesn't support uploading from Amazon S3 buckets with
-    #   names that contain a dot (.).
+    #   <note markdown="1"> Amazon GameLift doesn't support uploading from Amazon S3 buckets
+    #   with names that contain a dot (.).
     #
     #    </note>
     #   @return [String]
@@ -7554,9 +7590,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] fleet_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   fleet resource and uniquely identifies it. ARNs are unique across
-    #   all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift fleet resource and uniquely identifies it. ARNs are unique
+    #   across all Regions. Format is
     #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
     #
     #
@@ -7735,10 +7771,10 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] script_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   script resource and uniquely identifies it. ARNs are unique across
-    #   all Regions. In a GameLift script ARN, the resource ID matches the
-    #   *ScriptId* value.
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift script resource and uniquely identifies it. ARNs are unique
+    #   across all Regions. In a GameLift script ARN, the resource ID
+    #   matches the *ScriptId* value.
     #
     #
     #
@@ -7747,12 +7783,12 @@ module Aws::GameLift
     #
     # @!attribute [rw] name
     #   A descriptive label that is associated with a script. Script names
-    #   do not need to be unique.
+    #   don't need to be unique.
     #   @return [String]
     #
     # @!attribute [rw] version
     #   Version information associated with a build or script. Version
-    #   strings do not need to be unique.
+    #   strings don't need to be unique.
     #   @return [String]
     #
     # @!attribute [rw] size_on_disk
@@ -7993,9 +8029,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] fleet_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   fleet resource and uniquely identifies it. ARNs are unique across
-    #   all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift fleet resource and uniquely identifies it. ARNs are unique
+    #   across all Regions. Format is
     #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
     #
     #
@@ -8244,9 +8280,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] fleet_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   fleet resource and uniquely identifies it. ARNs are unique across
-    #   all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift fleet resource and uniquely identifies it. ARNs are unique
+    #   across all Regions. Format is
     #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
     #
     #
@@ -8336,7 +8372,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # A label that can be assigned to a GameLift resource.
+    # A label that you can assign to a Amazon GameLift resource.
     #
     # **Learn more**
     #
@@ -8356,12 +8392,12 @@ module Aws::GameLift
     # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
     #
     # @!attribute [rw] key
-    #   The key for a developer-defined key:value pair for tagging an Amazon
+    #   The key for a developer-defined key value pair for tagging an Amazon
     #   Web Services resource.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value for a developer-defined key:value pair for tagging an
+    #   The value for a developer-defined key value pair for tagging an
     #   Amazon Web Services resource.
     #   @return [String]
     #
@@ -8375,11 +8411,11 @@ module Aws::GameLift
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to and uniquely
-    #   identifies the GameLift resource that you want to assign tags to.
-    #   GameLift resource ARNs are included in the data object for the
-    #   resource, which can be retrieved by calling a List or Describe
-    #   operation for the resource type.
+    #   The Amazon Resource Name ([ARN][1]) that uniquely identifies the
+    #   Amazon GameLift resource that you want to assign tags to. Amazon
+    #   GameLift includes resource ARNs in the data object for the resource.
+    #   You can retrieve the ARN by calling a `List` or `Describe` operation
+    #   for the resource type.
     #
     #
     #
@@ -8387,10 +8423,10 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of one or more tags to assign to the specified GameLift
-    #   resource. Tags are developer-defined and structured as key-value
-    #   pairs. The maximum tag limit may be lower than stated. See [ Tagging
-    #   Amazon Web Services Resources][1] for actual tagging limits.
+    #   A list of one or more tags to assign to the specified Amazon
+    #   GameLift resource. Tags are developer-defined and structured as
+    #   key-value pairs. The maximum tag limit may be lower than stated. See
+    #   [ Tagging Amazon Web Services Resources][1] for tagging limits.
     #
     #
     #
@@ -8449,14 +8485,14 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # **This data type is used with the GameLift FleetIQ and game server
-    # groups.**
+    # **This data type is used with the Amazon GameLift FleetIQ and game
+    # server groups.**
     #
     # Settings for a target-based scaling policy as part of a
     # [GameServerGroupAutoScalingPolicy][1] . These settings are used to
-    # create a target-based policy that tracks the GameLift FleetIQ metric
-    # `"PercentUtilizedGameServers"` and specifies a target value for the
-    # metric. As player usage changes, the policy triggers to adjust the
+    # create a target-based policy that tracks the Amazon GameLift FleetIQ
+    # metric `"PercentUtilizedGameServers"` and specifies a target value for
+    # the metric. As player usage changes, the policy triggers to adjust the
     # game server group capacity so that the metric returns to the target
     # value.
     #
@@ -8522,11 +8558,11 @@ module Aws::GameLift
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to and uniquely
-    #   identifies the GameLift resource that you want to remove tags from.
-    #   GameLift resource ARNs are included in the data object for the
-    #   resource, which can be retrieved by calling a List or Describe
-    #   operation for the resource type.
+    #   The Amazon Resource Name ([ARN][1]) that uniquely identifies the
+    #   Amazon GameLift resource that you want to remove tags from. Amazon
+    #   GameLift includes resource ARNs in the data object for the resource.
+    #   You can retrieve the ARN by calling a `List` or `Describe` operation
+    #   for the resource type.
     #
     #
     #
@@ -8534,10 +8570,8 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   A list of one or more tag keys to remove from the specified GameLift
-    #   resource. An Amazon Web Services resource can have only one tag with
-    #   a specific tag key, so specifying the tag key identifies which tag
-    #   to remove.
+    #   A list of one or more tag keys to remove from the specified Amazon
+    #   GameLift resource.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UntagResourceRequest AWS API Documentation
@@ -8601,13 +8635,13 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   A descriptive label associated with a build. Build names do not need
+    #   A descriptive label associated with a build. Build names don't need
     #   to be unique.
     #   @return [String]
     #
     # @!attribute [rw] version
     #   Version information associated with a build or script. Version
-    #   strings do not need to be unique.
+    #   strings don't need to be unique.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateBuildInput AWS API Documentation
@@ -8677,7 +8711,7 @@ module Aws::GameLift
     #   @return [Array<String>]
     #
     # @!attribute [rw] anywhere_configuration
-    #   GameLift Anywhere configuration options.
+    #   Amazon GameLift Anywhere configuration options.
     #   @return [Types::AnywhereConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetAttributesInput AWS API Documentation
@@ -8699,9 +8733,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] fleet_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   fleet resource and uniquely identifies it. ARNs are unique across
-    #   all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift fleet resource and uniquely identifies it. ARNs are unique
+    #   across all Regions. Format is
     #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
     #
     #
@@ -8762,9 +8796,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] fleet_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   fleet resource and uniquely identifies it. ARNs are unique across
-    #   all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift fleet resource and uniquely identifies it. ARNs are unique
+    #   across all Regions. Format is
     #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
     #
     #
@@ -8815,9 +8849,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] fleet_arn
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   fleet resource and uniquely identifies it. ARNs are unique across
-    #   all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift fleet resource and uniquely identifies it. ARNs are unique
+    #   across all Regions. Format is
     #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
     #
     #
@@ -8851,11 +8885,11 @@ module Aws::GameLift
     # @!attribute [rw] instance_definitions
     #   An updated list of Amazon EC2 instance types to use in the Auto
     #   Scaling group. The instance definitions must specify at least two
-    #   different instance types that are supported by GameLift FleetIQ.
-    #   This updated list replaces the entire current list of instance
-    #   definitions for the game server group. For more information on
-    #   instance types, see [EC2 Instance Types][1] in the *Amazon EC2 User
-    #   Guide*. You can optionally specify capacity weighting for each
+    #   different instance types that are supported by Amazon GameLift
+    #   FleetIQ. This updated list replaces the entire current list of
+    #   instance definitions for the game server group. For more information
+    #   on instance types, see [EC2 Instance Types][1] in the *Amazon EC2
+    #   User Guide*. You can optionally specify capacity weighting for each
     #   instance type. If no weight value is specified for an instance type,
     #   it is set to the default value "1". For more information about
     #   capacity weighting, see [ Instance Weighting for Amazon EC2 Auto
@@ -8880,9 +8914,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] balancing_strategy
-    #   Indicates how GameLift FleetIQ balances the use of Spot Instances
-    #   and On-Demand Instances in the game server group. Method options
-    #   include the following:
+    #   Indicates how Amazon GameLift FleetIQ balances the use of Spot
+    #   Instances and On-Demand Instances in the game server group. Method
+    #   options include the following:
     #
     #   * `SPOT_ONLY` - Only Spot Instances are used in the game server
     #     group. If Spot Instances are unavailable or not viable for game
@@ -9131,11 +9165,11 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_session_queue_arns
-    #   The Amazon Resource Name ([ARN][1]) that is assigned to a GameLift
-    #   game session queue resource and uniquely identifies it. ARNs are
-    #   unique across all Regions. Format is
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to a Amazon
+    #   GameLift game session queue resource and uniquely identifies it.
+    #   ARNs are unique across all Regions. Format is
     #   `arn:aws:gamelift:<region>::gamesessionqueue/<queue name>`. Queues
-    #   can be located in any Region. Queues are used to start new
+    #   can be located in any Region. Queues are used to start new Amazon
     #   GameLift-hosted game sessions for matches that are created with this
     #   matchmaking configuration. If `FlexMatchMode` is set to
     #   `STANDALONE`, do not set this parameter.
@@ -9237,14 +9271,14 @@ module Aws::GameLift
     #
     # @!attribute [rw] flex_match_mode
     #   Indicates whether this matchmaking configuration is being used with
-    #   GameLift hosting or as a standalone matchmaking solution.
+    #   Amazon GameLift hosting or as a standalone matchmaking solution.
     #
     #   * **STANDALONE** - FlexMatch forms matches and returns match
     #     information, including players and team assignments, in a [
     #     MatchmakingSucceeded][1] event.
     #
     #   * **WITH\_QUEUE** - FlexMatch forms matches and uses the specified
-    #     GameLift queue to start a game session for the match.
+    #     Amazon GameLift queue to start a game session for the match.
     #
     #
     #
@@ -9290,7 +9324,7 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] runtime_configuration
-    #   Instructions for alaunching server processes on each instance in the
+    #   Instructions for launching server processes on each instance in the
     #   fleet. Server processes run either a custom game build executable or
     #   a Realtime Servers script. The runtime configuration lists the types
     #   of server processes to run on an instance, how to launch them, and
@@ -9326,12 +9360,12 @@ module Aws::GameLift
     #
     # @!attribute [rw] name
     #   A descriptive label that is associated with a script. Script names
-    #   do not need to be unique.
+    #   don't need to be unique.
     #   @return [String]
     #
     # @!attribute [rw] version
     #   Version information associated with a build or script. Version
-    #   strings do not need to be unique.
+    #   strings don't need to be unique.
     #   @return [String]
     #
     # @!attribute [rw] storage_location
@@ -9428,8 +9462,9 @@ module Aws::GameLift
     #
     # @!attribute [rw] game_lift_aws_account_id
     #   A unique identifier for the Amazon Web Services account that you use
-    #   to manage your GameLift fleet. You can find your Account ID in the
-    #   Amazon Web Services Management Console under account settings.
+    #   to manage your Amazon GameLift fleet. You can find your Account ID
+    #   in the Amazon Web Services Management Console under account
+    #   settings.
     #   @return [String]
     #
     # @!attribute [rw] peer_vpc_aws_account_id
@@ -9438,10 +9473,10 @@ module Aws::GameLift
     #
     # @!attribute [rw] peer_vpc_id
     #   A unique identifier for a VPC with resources to be accessed by your
-    #   GameLift fleet. The VPC must be in the same Region as your fleet. To
-    #   look up a VPC ID, use the [VPC Dashboard][1] in the Amazon Web
-    #   Services Management Console. Learn more about VPC peering in [VPC
-    #   Peering with GameLift Fleets][2].
+    #   Amazon GameLift fleet. The VPC must be in the same Region as your
+    #   fleet. To look up a VPC ID, use the [VPC Dashboard][1] in the Amazon
+    #   Web Services Management Console. Learn more about VPC peering in
+    #   [VPC Peering with Amazon GameLift Fleets][2].
     #
     #
     #
@@ -9520,10 +9555,10 @@ module Aws::GameLift
     #
     # @!attribute [rw] peer_vpc_id
     #   A unique identifier for a VPC with resources to be accessed by your
-    #   GameLift fleet. The VPC must be in the same Region as your fleet. To
-    #   look up a VPC ID, use the [VPC Dashboard][1] in the Amazon Web
-    #   Services Management Console. Learn more about VPC peering in [VPC
-    #   Peering with GameLift Fleets][2].
+    #   Amazon GameLift fleet. The VPC must be in the same Region as your
+    #   fleet. To look up a VPC ID, use the [VPC Dashboard][1] in the Amazon
+    #   Web Services Management Console. Learn more about VPC peering in
+    #   [VPC Peering with Amazon GameLift Fleets][2].
     #
     #
     #

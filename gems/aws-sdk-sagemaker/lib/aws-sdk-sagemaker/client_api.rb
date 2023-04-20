@@ -1294,6 +1294,7 @@ module Aws::SageMaker
     ModelQualityAppSpecification = Shapes::StructureShape.new(name: 'ModelQualityAppSpecification')
     ModelQualityBaselineConfig = Shapes::StructureShape.new(name: 'ModelQualityBaselineConfig')
     ModelQualityJobInput = Shapes::StructureShape.new(name: 'ModelQualityJobInput')
+    ModelRegisterSettings = Shapes::StructureShape.new(name: 'ModelRegisterSettings')
     ModelSortKey = Shapes::StringShape.new(name: 'ModelSortKey')
     ModelStepMetadata = Shapes::StructureShape.new(name: 'ModelStepMetadata')
     ModelSummary = Shapes::StructureShape.new(name: 'ModelSummary')
@@ -2400,6 +2401,7 @@ module Aws::SageMaker
     CandidateSteps.member = Shapes::ShapeRef.new(shape: AutoMLCandidateStep)
 
     CanvasAppSettings.add_member(:time_series_forecasting_settings, Shapes::ShapeRef.new(shape: TimeSeriesForecastingSettings, location_name: "TimeSeriesForecastingSettings"))
+    CanvasAppSettings.add_member(:model_register_settings, Shapes::ShapeRef.new(shape: ModelRegisterSettings, location_name: "ModelRegisterSettings"))
     CanvasAppSettings.struct_class = Types::CanvasAppSettings
 
     CapacitySize.add_member(:type, Shapes::ShapeRef.new(shape: CapacitySizeType, required: true, location_name: "Type"))
@@ -6961,6 +6963,10 @@ module Aws::SageMaker
     ModelQualityJobInput.add_member(:batch_transform_input, Shapes::ShapeRef.new(shape: BatchTransformInput, location_name: "BatchTransformInput"))
     ModelQualityJobInput.add_member(:ground_truth_s3_input, Shapes::ShapeRef.new(shape: MonitoringGroundTruthS3Input, required: true, location_name: "GroundTruthS3Input"))
     ModelQualityJobInput.struct_class = Types::ModelQualityJobInput
+
+    ModelRegisterSettings.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "Status"))
+    ModelRegisterSettings.add_member(:cross_account_model_register_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "CrossAccountModelRegisterRoleArn"))
+    ModelRegisterSettings.struct_class = Types::ModelRegisterSettings
 
     ModelStepMetadata.add_member(:arn, Shapes::ShapeRef.new(shape: String256, location_name: "Arn"))
     ModelStepMetadata.struct_class = Types::ModelStepMetadata

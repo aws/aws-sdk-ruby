@@ -99,6 +99,7 @@ module Aws::ChimeSDKMeetings
     TranscribePiiEntityTypes = Shapes::StringShape.new(name: 'TranscribePiiEntityTypes')
     TranscribeRegion = Shapes::StringShape.new(name: 'TranscribeRegion')
     TranscribeVocabularyFilterMethod = Shapes::StringShape.new(name: 'TranscribeVocabularyFilterMethod')
+    TranscribeVocabularyNamesOrFilterNamesString = Shapes::StringShape.new(name: 'TranscribeVocabularyNamesOrFilterNamesString')
     TranscriptionConfiguration = Shapes::StructureShape.new(name: 'TranscriptionConfiguration')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     UnprocessableEntityException = Shapes::StructureShape.new(name: 'UnprocessableEntityException')
@@ -234,6 +235,8 @@ module Aws::ChimeSDKMeetings
     EngineTranscribeSettings.add_member(:identify_language, Shapes::ShapeRef.new(shape: Boolean, location_name: "IdentifyLanguage"))
     EngineTranscribeSettings.add_member(:language_options, Shapes::ShapeRef.new(shape: TranscribeLanguageOptions, location_name: "LanguageOptions"))
     EngineTranscribeSettings.add_member(:preferred_language, Shapes::ShapeRef.new(shape: TranscribeLanguageCode, location_name: "PreferredLanguage"))
+    EngineTranscribeSettings.add_member(:vocabulary_names, Shapes::ShapeRef.new(shape: TranscribeVocabularyNamesOrFilterNamesString, location_name: "VocabularyNames"))
+    EngineTranscribeSettings.add_member(:vocabulary_filter_names, Shapes::ShapeRef.new(shape: TranscribeVocabularyNamesOrFilterNamesString, location_name: "VocabularyFilterNames"))
     EngineTranscribeSettings.struct_class = Types::EngineTranscribeSettings
 
     ForbiddenException.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "Code"))

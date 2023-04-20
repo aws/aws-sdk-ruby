@@ -543,7 +543,7 @@ module Aws::GuardDuty
     #     },
     #     features: [
     #       {
-    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, EKS_RUNTIME_MONITORING
+    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, EKS_RUNTIME_MONITORING, LAMBDA_NETWORK_LOGS
     #         status: "ENABLED", # accepts ENABLED, DISABLED
     #         additional_configuration: [
     #           {
@@ -1447,7 +1447,7 @@ module Aws::GuardDuty
     #   resp.data_sources.kubernetes.audit_logs.auto_enable #=> Boolean
     #   resp.data_sources.malware_protection.scan_ec2_instance_with_findings.ebs_volumes.auto_enable #=> Boolean
     #   resp.features #=> Array
-    #   resp.features[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "EKS_RUNTIME_MONITORING"
+    #   resp.features[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "EKS_RUNTIME_MONITORING", "LAMBDA_NETWORK_LOGS"
     #   resp.features[0].auto_enable #=> String, one of "NEW", "NONE"
     #   resp.features[0].additional_configuration #=> Array
     #   resp.features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT"
@@ -1782,7 +1782,7 @@ module Aws::GuardDuty
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.features #=> Array
-    #   resp.features[0].name #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "EKS_RUNTIME_MONITORING"
+    #   resp.features[0].name #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "EKS_RUNTIME_MONITORING", "LAMBDA_NETWORK_LOGS"
     #   resp.features[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.features[0].updated_at #=> Time
     #   resp.features[0].additional_configuration #=> Array
@@ -2058,6 +2058,22 @@ module Aws::GuardDuty
     #   resp.findings[0].resource.rds_db_user_details.database #=> String
     #   resp.findings[0].resource.rds_db_user_details.ssl #=> String
     #   resp.findings[0].resource.rds_db_user_details.auth_method #=> String
+    #   resp.findings[0].resource.lambda_details.function_arn #=> String
+    #   resp.findings[0].resource.lambda_details.function_name #=> String
+    #   resp.findings[0].resource.lambda_details.description #=> String
+    #   resp.findings[0].resource.lambda_details.last_modified_at #=> Time
+    #   resp.findings[0].resource.lambda_details.revision_id #=> String
+    #   resp.findings[0].resource.lambda_details.function_version #=> String
+    #   resp.findings[0].resource.lambda_details.role #=> String
+    #   resp.findings[0].resource.lambda_details.vpc_config.subnet_ids #=> Array
+    #   resp.findings[0].resource.lambda_details.vpc_config.subnet_ids[0] #=> String
+    #   resp.findings[0].resource.lambda_details.vpc_config.vpc_id #=> String
+    #   resp.findings[0].resource.lambda_details.vpc_config.security_groups #=> Array
+    #   resp.findings[0].resource.lambda_details.vpc_config.security_groups[0].group_id #=> String
+    #   resp.findings[0].resource.lambda_details.vpc_config.security_groups[0].group_name #=> String
+    #   resp.findings[0].resource.lambda_details.tags #=> Array
+    #   resp.findings[0].resource.lambda_details.tags[0].key #=> String
+    #   resp.findings[0].resource.lambda_details.tags[0].value #=> String
     #   resp.findings[0].schema_version #=> String
     #   resp.findings[0].service.action.action_type #=> String
     #   resp.findings[0].service.action.aws_api_call_action.api #=> String
@@ -2528,7 +2544,7 @@ module Aws::GuardDuty
     #   resp.member_data_source_configurations[0].data_sources.malware_protection.scan_ec2_instance_with_findings.ebs_volumes.reason #=> String
     #   resp.member_data_source_configurations[0].data_sources.malware_protection.service_role #=> String
     #   resp.member_data_source_configurations[0].features #=> Array
-    #   resp.member_data_source_configurations[0].features[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "EKS_RUNTIME_MONITORING"
+    #   resp.member_data_source_configurations[0].features[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "EKS_RUNTIME_MONITORING", "LAMBDA_NETWORK_LOGS"
     #   resp.member_data_source_configurations[0].features[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.member_data_source_configurations[0].features[0].updated_at #=> Time
     #   resp.member_data_source_configurations[0].features[0].additional_configuration #=> Array
@@ -2627,7 +2643,7 @@ module Aws::GuardDuty
     #   resp.accounts[0].data_sources.kubernetes.audit_logs.free_trial_days_remaining #=> Integer
     #   resp.accounts[0].data_sources.malware_protection.scan_ec2_instance_with_findings.free_trial_days_remaining #=> Integer
     #   resp.accounts[0].features #=> Array
-    #   resp.accounts[0].features[0].name #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "EKS_RUNTIME_MONITORING"
+    #   resp.accounts[0].features[0].name #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "EKS_RUNTIME_MONITORING", "LAMBDA_NETWORK_LOGS"
     #   resp.accounts[0].features[0].free_trial_days_remaining #=> Integer
     #   resp.unprocessed_accounts #=> Array
     #   resp.unprocessed_accounts[0].account_id #=> String
@@ -3742,7 +3758,7 @@ module Aws::GuardDuty
     #     },
     #     features: [
     #       {
-    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, EKS_RUNTIME_MONITORING
+    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, EKS_RUNTIME_MONITORING, LAMBDA_NETWORK_LOGS
     #         status: "ENABLED", # accepts ENABLED, DISABLED
     #         additional_configuration: [
     #           {
@@ -4024,7 +4040,7 @@ module Aws::GuardDuty
     #     },
     #     features: [
     #       {
-    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, EKS_RUNTIME_MONITORING
+    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, EKS_RUNTIME_MONITORING, LAMBDA_NETWORK_LOGS
     #         status: "ENABLED", # accepts ENABLED, DISABLED
     #         additional_configuration: [
     #           {
@@ -4122,7 +4138,7 @@ module Aws::GuardDuty
     #     },
     #     features: [
     #       {
-    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, EKS_RUNTIME_MONITORING
+    #         name: "S3_DATA_EVENTS", # accepts S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, EKS_RUNTIME_MONITORING, LAMBDA_NETWORK_LOGS
     #         auto_enable: "NEW", # accepts NEW, NONE
     #         additional_configuration: [
     #           {
@@ -4235,7 +4251,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

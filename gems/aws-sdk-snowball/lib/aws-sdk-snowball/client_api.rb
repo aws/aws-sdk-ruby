@@ -72,6 +72,7 @@ module Aws::Snowball
     GetSoftwareUpdatesRequest = Shapes::StructureShape.new(name: 'GetSoftwareUpdatesRequest')
     GetSoftwareUpdatesResult = Shapes::StructureShape.new(name: 'GetSoftwareUpdatesResult')
     INDTaxDocuments = Shapes::StructureShape.new(name: 'INDTaxDocuments')
+    InitialClusterSize = Shapes::IntegerShape.new(name: 'InitialClusterSize')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidAddressException = Shapes::StructureShape.new(name: 'InvalidAddressException')
     InvalidInputCombinationException = Shapes::StructureShape.new(name: 'InvalidInputCombinationException')
@@ -111,18 +112,23 @@ module Aws::Snowball
     LongTermPricingAssociatedJobIdList = Shapes::ListShape.new(name: 'LongTermPricingAssociatedJobIdList')
     LongTermPricingEntryList = Shapes::ListShape.new(name: 'LongTermPricingEntryList')
     LongTermPricingId = Shapes::StringShape.new(name: 'LongTermPricingId')
+    LongTermPricingIdList = Shapes::ListShape.new(name: 'LongTermPricingIdList')
     LongTermPricingListEntry = Shapes::StructureShape.new(name: 'LongTermPricingListEntry')
     LongTermPricingType = Shapes::StringShape.new(name: 'LongTermPricingType')
     NFSOnDeviceServiceConfiguration = Shapes::StructureShape.new(name: 'NFSOnDeviceServiceConfiguration')
+    NodeFaultTolerance = Shapes::IntegerShape.new(name: 'NodeFaultTolerance')
     Notification = Shapes::StructureShape.new(name: 'Notification')
     OnDeviceServiceConfiguration = Shapes::StructureShape.new(name: 'OnDeviceServiceConfiguration')
     RemoteManagement = Shapes::StringShape.new(name: 'RemoteManagement')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ReturnShippingLabelAlreadyExistsException = Shapes::StructureShape.new(name: 'ReturnShippingLabelAlreadyExistsException')
     RoleARN = Shapes::StringShape.new(name: 'RoleARN')
+    S3OnDeviceServiceConfiguration = Shapes::StructureShape.new(name: 'S3OnDeviceServiceConfiguration')
     S3Resource = Shapes::StructureShape.new(name: 'S3Resource')
     S3ResourceList = Shapes::ListShape.new(name: 'S3ResourceList')
+    S3StorageLimit = Shapes::FloatShape.new(name: 'S3StorageLimit')
     ServiceName = Shapes::StringShape.new(name: 'ServiceName')
+    ServiceSize = Shapes::IntegerShape.new(name: 'ServiceSize')
     ServiceVersion = Shapes::StructureShape.new(name: 'ServiceVersion')
     ServiceVersionList = Shapes::ListShape.new(name: 'ServiceVersionList')
     Shipment = Shapes::StructureShape.new(name: 'Shipment')
@@ -227,21 +233,26 @@ module Aws::Snowball
     CreateAddressResult.struct_class = Types::CreateAddressResult
 
     CreateClusterRequest.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, required: true, location_name: "JobType"))
-    CreateClusterRequest.add_member(:resources, Shapes::ShapeRef.new(shape: JobResource, required: true, location_name: "Resources"))
+    CreateClusterRequest.add_member(:resources, Shapes::ShapeRef.new(shape: JobResource, location_name: "Resources"))
     CreateClusterRequest.add_member(:on_device_service_configuration, Shapes::ShapeRef.new(shape: OnDeviceServiceConfiguration, location_name: "OnDeviceServiceConfiguration"))
     CreateClusterRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     CreateClusterRequest.add_member(:address_id, Shapes::ShapeRef.new(shape: AddressId, required: true, location_name: "AddressId"))
     CreateClusterRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyARN, location_name: "KmsKeyARN"))
-    CreateClusterRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
+    CreateClusterRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
     CreateClusterRequest.add_member(:snowball_type, Shapes::ShapeRef.new(shape: SnowballType, required: true, location_name: "SnowballType"))
     CreateClusterRequest.add_member(:shipping_option, Shapes::ShapeRef.new(shape: ShippingOption, required: true, location_name: "ShippingOption"))
     CreateClusterRequest.add_member(:notification, Shapes::ShapeRef.new(shape: Notification, location_name: "Notification"))
     CreateClusterRequest.add_member(:forwarding_address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "ForwardingAddressId"))
     CreateClusterRequest.add_member(:tax_documents, Shapes::ShapeRef.new(shape: TaxDocuments, location_name: "TaxDocuments"))
     CreateClusterRequest.add_member(:remote_management, Shapes::ShapeRef.new(shape: RemoteManagement, location_name: "RemoteManagement"))
+    CreateClusterRequest.add_member(:initial_cluster_size, Shapes::ShapeRef.new(shape: InitialClusterSize, location_name: "InitialClusterSize"))
+    CreateClusterRequest.add_member(:force_create_jobs, Shapes::ShapeRef.new(shape: Boolean, location_name: "ForceCreateJobs"))
+    CreateClusterRequest.add_member(:long_term_pricing_ids, Shapes::ShapeRef.new(shape: LongTermPricingIdList, location_name: "LongTermPricingIds"))
+    CreateClusterRequest.add_member(:snowball_capacity_preference, Shapes::ShapeRef.new(shape: SnowballCapacity, location_name: "SnowballCapacityPreference"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResult.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "ClusterId"))
+    CreateClusterResult.add_member(:job_list_entries, Shapes::ShapeRef.new(shape: JobListEntryList, location_name: "JobListEntries"))
     CreateClusterResult.struct_class = Types::CreateClusterResult
 
     CreateJobRequest.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "JobType"))
@@ -511,6 +522,8 @@ module Aws::Snowball
 
     LongTermPricingEntryList.member = Shapes::ShapeRef.new(shape: LongTermPricingListEntry)
 
+    LongTermPricingIdList.member = Shapes::ShapeRef.new(shape: LongTermPricingId)
+
     LongTermPricingListEntry.add_member(:long_term_pricing_id, Shapes::ShapeRef.new(shape: LongTermPricingId, location_name: "LongTermPricingId"))
     LongTermPricingListEntry.add_member(:long_term_pricing_end_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LongTermPricingEndDate"))
     LongTermPricingListEntry.add_member(:long_term_pricing_start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LongTermPricingStartDate"))
@@ -535,10 +548,17 @@ module Aws::Snowball
     OnDeviceServiceConfiguration.add_member(:nfs_on_device_service, Shapes::ShapeRef.new(shape: NFSOnDeviceServiceConfiguration, location_name: "NFSOnDeviceService"))
     OnDeviceServiceConfiguration.add_member(:tgw_on_device_service, Shapes::ShapeRef.new(shape: TGWOnDeviceServiceConfiguration, location_name: "TGWOnDeviceService"))
     OnDeviceServiceConfiguration.add_member(:eks_on_device_service, Shapes::ShapeRef.new(shape: EKSOnDeviceServiceConfiguration, location_name: "EKSOnDeviceService"))
+    OnDeviceServiceConfiguration.add_member(:s3_on_device_service, Shapes::ShapeRef.new(shape: S3OnDeviceServiceConfiguration, location_name: "S3OnDeviceService"))
     OnDeviceServiceConfiguration.struct_class = Types::OnDeviceServiceConfiguration
 
     ReturnShippingLabelAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ReturnShippingLabelAlreadyExistsException.struct_class = Types::ReturnShippingLabelAlreadyExistsException
+
+    S3OnDeviceServiceConfiguration.add_member(:storage_limit, Shapes::ShapeRef.new(shape: S3StorageLimit, location_name: "StorageLimit"))
+    S3OnDeviceServiceConfiguration.add_member(:storage_unit, Shapes::ShapeRef.new(shape: StorageUnit, location_name: "StorageUnit"))
+    S3OnDeviceServiceConfiguration.add_member(:service_size, Shapes::ShapeRef.new(shape: ServiceSize, location_name: "ServiceSize"))
+    S3OnDeviceServiceConfiguration.add_member(:fault_tolerance, Shapes::ShapeRef.new(shape: NodeFaultTolerance, location_name: "FaultTolerance"))
+    S3OnDeviceServiceConfiguration.struct_class = Types::S3OnDeviceServiceConfiguration
 
     S3Resource.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "BucketArn"))
     S3Resource.add_member(:key_range, Shapes::ShapeRef.new(shape: KeyRange, location_name: "KeyRange"))

@@ -619,6 +619,7 @@ module Aws::ChimeSDKMediaPipelines
     S3BucketSinkConfiguration.struct_class = Types::S3BucketSinkConfiguration
 
     S3RecordingSinkConfiguration.add_member(:destination, Shapes::ShapeRef.new(shape: Arn, location_name: "Destination"))
+    S3RecordingSinkConfiguration.add_member(:recording_file_format, Shapes::ShapeRef.new(shape: RecordingFileFormat, location_name: "RecordingFileFormat"))
     S3RecordingSinkConfiguration.struct_class = Types::S3RecordingSinkConfiguration
 
     S3RecordingSinkRuntimeConfiguration.add_member(:destination, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Destination"))

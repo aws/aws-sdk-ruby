@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.103.0 (2023-04-20)
+------------------
+
+* Feature - Support additional OTA states in GetOTAUpdate API
+
 1.102.0 (2023-04-11)
 ------------------
 

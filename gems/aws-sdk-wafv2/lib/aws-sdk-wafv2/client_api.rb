@@ -13,6 +13,11 @@ module Aws::WAFV2
 
     include Seahorse::Model
 
+    APIKey = Shapes::StringShape.new(name: 'APIKey')
+    APIKeySummaries = Shapes::ListShape.new(name: 'APIKeySummaries')
+    APIKeySummary = Shapes::StructureShape.new(name: 'APIKeySummary')
+    APIKeyTokenDomains = Shapes::ListShape.new(name: 'APIKeyTokenDomains')
+    APIKeyVersion = Shapes::IntegerShape.new(name: 'APIKeyVersion')
     AWSManagedRulesATPRuleSet = Shapes::StructureShape.new(name: 'AWSManagedRulesATPRuleSet')
     AWSManagedRulesBotControlRuleSet = Shapes::StructureShape.new(name: 'AWSManagedRulesBotControlRuleSet')
     Action = Shapes::StringShape.new(name: 'Action')
@@ -51,6 +56,8 @@ module Aws::WAFV2
     Country = Shapes::StringShape.new(name: 'Country')
     CountryCode = Shapes::StringShape.new(name: 'CountryCode')
     CountryCodes = Shapes::ListShape.new(name: 'CountryCodes')
+    CreateAPIKeyRequest = Shapes::StructureShape.new(name: 'CreateAPIKeyRequest')
+    CreateAPIKeyResponse = Shapes::StructureShape.new(name: 'CreateAPIKeyResponse')
     CreateIPSetRequest = Shapes::StructureShape.new(name: 'CreateIPSetRequest')
     CreateIPSetResponse = Shapes::StructureShape.new(name: 'CreateIPSetResponse')
     CreateRegexPatternSetRequest = Shapes::StructureShape.new(name: 'CreateRegexPatternSetRequest')
@@ -114,6 +121,8 @@ module Aws::WAFV2
     GenerateMobileSdkReleaseUrlRequest = Shapes::StructureShape.new(name: 'GenerateMobileSdkReleaseUrlRequest')
     GenerateMobileSdkReleaseUrlResponse = Shapes::StructureShape.new(name: 'GenerateMobileSdkReleaseUrlResponse')
     GeoMatchStatement = Shapes::StructureShape.new(name: 'GeoMatchStatement')
+    GetDecryptedAPIKeyRequest = Shapes::StructureShape.new(name: 'GetDecryptedAPIKeyRequest')
+    GetDecryptedAPIKeyResponse = Shapes::StructureShape.new(name: 'GetDecryptedAPIKeyResponse')
     GetIPSetRequest = Shapes::StructureShape.new(name: 'GetIPSetRequest')
     GetIPSetResponse = Shapes::StructureShape.new(name: 'GetIPSetResponse')
     GetLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'GetLoggingConfigurationRequest')
@@ -171,6 +180,8 @@ module Aws::WAFV2
     LabelSummaries = Shapes::ListShape.new(name: 'LabelSummaries')
     LabelSummary = Shapes::StructureShape.new(name: 'LabelSummary')
     Labels = Shapes::ListShape.new(name: 'Labels')
+    ListAPIKeysRequest = Shapes::StructureShape.new(name: 'ListAPIKeysRequest')
+    ListAPIKeysResponse = Shapes::StructureShape.new(name: 'ListAPIKeysResponse')
     ListAvailableManagedRuleGroupVersionsRequest = Shapes::StructureShape.new(name: 'ListAvailableManagedRuleGroupVersionsRequest')
     ListAvailableManagedRuleGroupVersionsResponse = Shapes::StructureShape.new(name: 'ListAvailableManagedRuleGroupVersionsResponse')
     ListAvailableManagedRuleGroupsRequest = Shapes::StructureShape.new(name: 'ListAvailableManagedRuleGroupsRequest')
@@ -371,6 +382,16 @@ module Aws::WAFV2
     WebACLSummary = Shapes::StructureShape.new(name: 'WebACLSummary')
     XssMatchStatement = Shapes::StructureShape.new(name: 'XssMatchStatement')
 
+    APIKeySummaries.member = Shapes::ShapeRef.new(shape: APIKeySummary)
+
+    APIKeySummary.add_member(:token_domains, Shapes::ShapeRef.new(shape: TokenDomains, location_name: "TokenDomains"))
+    APIKeySummary.add_member(:api_key, Shapes::ShapeRef.new(shape: APIKey, location_name: "APIKey"))
+    APIKeySummary.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimestamp"))
+    APIKeySummary.add_member(:version, Shapes::ShapeRef.new(shape: APIKeyVersion, location_name: "Version"))
+    APIKeySummary.struct_class = Types::APIKeySummary
+
+    APIKeyTokenDomains.member = Shapes::ShapeRef.new(shape: TokenDomain)
+
     AWSManagedRulesATPRuleSet.add_member(:login_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "LoginPath"))
     AWSManagedRulesATPRuleSet.add_member(:request_inspection, Shapes::ShapeRef.new(shape: RequestInspection, location_name: "RequestInspection"))
     AWSManagedRulesATPRuleSet.add_member(:response_inspection, Shapes::ShapeRef.new(shape: ResponseInspection, location_name: "ResponseInspection"))
@@ -464,6 +485,13 @@ module Aws::WAFV2
     CountAction.struct_class = Types::CountAction
 
     CountryCodes.member = Shapes::ShapeRef.new(shape: CountryCode)
+
+    CreateAPIKeyRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
+    CreateAPIKeyRequest.add_member(:token_domains, Shapes::ShapeRef.new(shape: APIKeyTokenDomains, required: true, location_name: "TokenDomains"))
+    CreateAPIKeyRequest.struct_class = Types::CreateAPIKeyRequest
+
+    CreateAPIKeyResponse.add_member(:api_key, Shapes::ShapeRef.new(shape: APIKey, location_name: "APIKey"))
+    CreateAPIKeyResponse.struct_class = Types::CreateAPIKeyResponse
 
     CreateIPSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
     CreateIPSetRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
@@ -662,6 +690,14 @@ module Aws::WAFV2
     GeoMatchStatement.add_member(:forwarded_ip_config, Shapes::ShapeRef.new(shape: ForwardedIPConfig, location_name: "ForwardedIPConfig"))
     GeoMatchStatement.struct_class = Types::GeoMatchStatement
 
+    GetDecryptedAPIKeyRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
+    GetDecryptedAPIKeyRequest.add_member(:api_key, Shapes::ShapeRef.new(shape: APIKey, required: true, location_name: "APIKey"))
+    GetDecryptedAPIKeyRequest.struct_class = Types::GetDecryptedAPIKeyRequest
+
+    GetDecryptedAPIKeyResponse.add_member(:token_domains, Shapes::ShapeRef.new(shape: TokenDomains, location_name: "TokenDomains"))
+    GetDecryptedAPIKeyResponse.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimestamp"))
+    GetDecryptedAPIKeyResponse.struct_class = Types::GetDecryptedAPIKeyResponse
+
     GetIPSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
     GetIPSetRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
     GetIPSetRequest.add_member(:id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "Id"))
@@ -842,6 +878,16 @@ module Aws::WAFV2
     LabelSummary.struct_class = Types::LabelSummary
 
     Labels.member = Shapes::ShapeRef.new(shape: Label)
+
+    ListAPIKeysRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
+    ListAPIKeysRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
+    ListAPIKeysRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
+    ListAPIKeysRequest.struct_class = Types::ListAPIKeysRequest
+
+    ListAPIKeysResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
+    ListAPIKeysResponse.add_member(:api_key_summaries, Shapes::ShapeRef.new(shape: APIKeySummaries, location_name: "APIKeySummaries"))
+    ListAPIKeysResponse.add_member(:application_integration_url, Shapes::ShapeRef.new(shape: OutputUrl, location_name: "ApplicationIntegrationURL"))
+    ListAPIKeysResponse.struct_class = Types::ListAPIKeysResponse
 
     ListAvailableManagedRuleGroupVersionsRequest.add_member(:vendor_name, Shapes::ShapeRef.new(shape: VendorName, required: true, location_name: "VendorName"))
     ListAvailableManagedRuleGroupVersionsRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
@@ -1538,6 +1584,18 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
+      api.add_operation(:create_api_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAPIKey"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateAPIKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAPIKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
+      end)
+
       api.add_operation(:create_ip_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateIPSet"
         o.http_method = "POST"
@@ -1750,6 +1808,18 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
+      api.add_operation(:get_decrypted_api_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDecryptedAPIKey"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDecryptedAPIKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDecryptedAPIKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidResourceException)
+      end)
+
       api.add_operation(:get_ip_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetIPSet"
         o.http_method = "POST"
@@ -1879,6 +1949,18 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFUnavailableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+      end)
+
+      api.add_operation(:list_api_keys, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAPIKeys"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAPIKeysRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAPIKeysResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidResourceException)
       end)
 
       api.add_operation(:list_available_managed_rule_group_versions, Seahorse::Model::Operation.new.tap do |o|

@@ -4955,7 +4955,7 @@ module Aws::IoT
         "serviceFullName" => "AWS IoT",
         "serviceId" => "IoT",
         "signatureVersion" => "v4",
-        "signingName" => "execute-api",
+        "signingName" => "iot",
         "uid" => "iot-2015-05-28",
       }
 
@@ -7148,6 +7148,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_metric_values, Seahorse::Model::Operation.new.tap do |o|
@@ -7365,6 +7371,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_role_aliases, Seahorse::Model::Operation.new.tap do |o|

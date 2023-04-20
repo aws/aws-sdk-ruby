@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2023-04-20)
+------------------
+
+* Feature - Amazon GameLift supports creating Builds for Windows 2016 operating system.
+
 1.61.0 (2023-01-18)
 ------------------
 

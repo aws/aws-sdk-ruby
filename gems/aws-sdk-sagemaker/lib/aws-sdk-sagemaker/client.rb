@@ -456,7 +456,7 @@ module Aws::SageMaker
     # also added to all training jobs that the hyperparameter tuning job
     # launches, add the tags when you first create the tuning job by
     # specifying them in the `Tags` parameter of
-    # CreateHyperParameterTuningJob
+    # [CreateHyperParameterTuningJob][2]
     #
     #  </note>
     #
@@ -467,13 +467,17 @@ module Aws::SageMaker
     # sure that the tags associated with a Domain or User Profile are also
     # added to all Apps that the Domain or User Profile launches, add the
     # tags when you first create the Domain or User Profile by specifying
-    # them in the `Tags` parameter of CreateDomain or CreateUserProfile.
+    # them in the `Tags` parameter of [CreateDomain][3] or
+    # [CreateUserProfile][4].
     #
     #  </note>
     #
     #
     #
     # [1]: https://aws.amazon.com/answers/account-management/aws-tagging-strategies/
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateHyperParameterTuningJob.html
+    # [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateDomain.html
+    # [4]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateUserProfile.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to tag.
@@ -521,7 +525,11 @@ module Aws::SageMaker
 
     # Associates a trial component with a trial. A trial component can be
     # associated with multiple trials. To disassociate a trial component
-    # from a trial, call the DisassociateTrialComponent API.
+    # from a trial, call the [DisassociateTrialComponent][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DisassociateTrialComponent.html
     #
     # @option params [required, String] :trial_component_name
     #   The name of the component to associated with the trial.
@@ -1598,10 +1606,16 @@ module Aws::SageMaker
     # resource use and costs. The response body contains the
     # `CompilationJobArn` for the compiled job.
     #
-    # To stop a model compilation job, use StopCompilationJob. To get
+    # To stop a model compilation job, use [StopCompilationJob][1]. To get
     # information about a particular model compilation job, use
-    # DescribeCompilationJob. To get information about multiple model
-    # compilation jobs, use ListCompilationJobs.
+    # [DescribeCompilationJob][2]. To get information about multiple model
+    # compilation jobs, use [ListCompilationJobs][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StopCompilationJob.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeCompilationJob.html
+    # [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListCompilationJobs.html
     #
     # @option params [required, String] :compilation_job_name
     #   A name for the model compilation job. The name must be unique within
@@ -1647,14 +1661,15 @@ module Aws::SageMaker
     #   and the target device the model runs on.
     #
     # @option params [Types::NeoVpcConfig] :vpc_config
-    #   A VpcConfig object that specifies the VPC that you want your
+    #   A [VpcConfig][1] object that specifies the VPC that you want your
     #   compilation job to connect to. Control access to your models by
     #   configuring the VPC. For more information, see [Protect Compilation
-    #   Jobs by Using an Amazon Virtual Private Cloud][1].
+    #   Jobs by Using an Amazon Virtual Private Cloud][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VpcConfig.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html
     #
     # @option params [required, Types::StoppingCondition] :stopping_condition
     #   Specifies a limit to how long a model compilation job can run. When
@@ -2211,6 +2226,10 @@ module Aws::SageMaker
     #           status: "ENABLED", # accepts ENABLED, DISABLED
     #           amazon_forecast_role_arn: "RoleArn",
     #         },
+    #         model_register_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #           cross_account_model_register_role_arn: "RoleArn",
+    #         },
     #       },
     #     },
     #     subnet_ids: ["SubnetId"], # required
@@ -2468,13 +2487,13 @@ module Aws::SageMaker
     # Creates an endpoint using the endpoint configuration specified in the
     # request. SageMaker uses the endpoint to provision resources and deploy
     # models. You create the endpoint configuration with the
-    # CreateEndpointConfig API.
+    # [CreateEndpointConfig][1] API.
     #
     # Use this API to deploy models using SageMaker hosting services.
     #
     # For an example that calls this method when deploying a model to
     # SageMaker hosting services, see the [Create Endpoint example
-    # notebook.][1]
+    # notebook.][2]
     #
     # <note markdown="1"> You must not delete an `EndpointConfig` that is in use by an endpoint
     # that is live or while the `UpdateEndpoint` or `CreateEndpoint`
@@ -2490,17 +2509,18 @@ module Aws::SageMaker
     # the resources (ML compute instances), and deploys the model(s) on
     # them.
     #
-    # <note markdown="1"> When you call CreateEndpoint, a load call is made to DynamoDB to
+    # <note markdown="1"> When you call [CreateEndpoint][3], a load call is made to DynamoDB to
     # verify that your endpoint configuration exists. When you read data
-    # from a DynamoDB table supporting [ `Eventually Consistent Reads` ][2],
+    # from a DynamoDB table supporting [ `Eventually Consistent Reads` ][4],
     # the response might not reflect the results of a recently completed
     # write operation. The response might include some stale data. If the
     # dependent entities are not yet in DynamoDB, this causes a validation
     # error. If you repeat your read request after a short time, the
     # response should return the latest data. So retry logic is recommended
     # to handle these possible issues. We also recommend that customers call
-    # DescribeEndpointConfig before calling CreateEndpoint to minimize the
-    # potential impact of a DynamoDB eventually consistent read.
+    # [DescribeEndpointConfig][5] before calling [CreateEndpoint][3] to
+    # minimize the potential impact of a DynamoDB eventually consistent
+    # read.
     #
     #  </note>
     #
@@ -2508,7 +2528,7 @@ module Aws::SageMaker
     # `Creating`. After it creates the endpoint, it sets the status to
     # `InService`. SageMaker can then process incoming requests for
     # inferences. To check the status of an endpoint, use the
-    # DescribeEndpoint API.
+    # [DescribeEndpoint][6] API.
     #
     # If any of the models hosted at this endpoint get model data from an
     # Amazon S3 location, SageMaker uses Amazon Web Services Security Token
@@ -2517,14 +2537,14 @@ module Aws::SageMaker
     # account by default. If you previously deactivated Amazon Web Services
     # STS for a region, you need to reactivate Amazon Web Services STS for
     # that region. For more information, see [Activating and Deactivating
-    # Amazon Web Services STS in an Amazon Web Services Region][3] in the
+    # Amazon Web Services STS in an Amazon Web Services Region][7] in the
     # *Amazon Web Services Identity and Access Management User Guide*.
     #
     # <note markdown="1"> To add the IAM role policies for using this API operation, go to the
-    # [IAM console][4], and choose Roles in the left navigation pane. Search
-    # the IAM role that you want to grant access to use the CreateEndpoint
-    # and CreateEndpointConfig API operations, add the following policies to
-    # the role.
+    # [IAM console][8], and choose Roles in the left navigation pane. Search
+    # the IAM role that you want to grant access to use the
+    # [CreateEndpoint][3] and [CreateEndpointConfig][1] API operations, add
+    # the following policies to the role.
     #
     #  * Option 1: For a full SageMaker access, search and attach the
     #   `AmazonSageMakerFullAccess` policy.
@@ -2545,27 +2565,39 @@ module Aws::SageMaker
     #   `]`
     #
     #   For more information, see [SageMaker API Permissions: Actions,
-    #   Permissions, and Resources Reference][5].
+    #   Permissions, and Resources Reference][9].
     #
     #  </note>
     #
     #
     #
-    # [1]: https://github.com/aws/amazon-sagemaker-examples/blob/master/sagemaker-fundamentals/create-endpoint/create_endpoint.ipynb
-    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html
-    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
-    # [4]: https://console.aws.amazon.com/iam/
-    # [5]: https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html
+    # [2]: https://github.com/aws/amazon-sagemaker-examples/blob/master/sagemaker-fundamentals/create-endpoint/create_endpoint.ipynb
+    # [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html
+    # [4]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html
+    # [5]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpointConfig.html
+    # [6]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html
+    # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
+    # [8]: https://console.aws.amazon.com/iam/
+    # [9]: https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html
     #
     # @option params [required, String] :endpoint_name
     #   The name of the endpoint.The name must be unique within an Amazon Web
     #   Services Region in your Amazon Web Services account. The name is
     #   case-insensitive in `CreateEndpoint`, but the case is preserved and
-    #   must be matched in .
+    #   must be matched in [InvokeEndpoint][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html
     #
     # @option params [required, String] :endpoint_config_name
     #   The name of an endpoint configuration. For more information, see
-    #   CreateEndpointConfig.
+    #   [CreateEndpointConfig][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html
     #
     # @option params [Types::DeploymentConfig] :deployment_config
     #   The deployment configuration for an endpoint, which contains the
@@ -2640,7 +2672,7 @@ module Aws::SageMaker
     # to deploy models. In the configuration, you identify one or more
     # models, created using the `CreateModel` API, to deploy and the
     # resources that you want SageMaker to provision. Then you call the
-    # CreateEndpoint API.
+    # [CreateEndpoint][1] API.
     #
     # <note markdown="1"> Use this API if you want to use SageMaker hosting services to deploy
     # models into production.
@@ -2659,27 +2691,34 @@ module Aws::SageMaker
     # distributes two-thirds of the traffic to Model A, and one-third to
     # model B.
     #
-    # <note markdown="1"> When you call CreateEndpoint, a load call is made to DynamoDB to
+    # <note markdown="1"> When you call [CreateEndpoint][1], a load call is made to DynamoDB to
     # verify that your endpoint configuration exists. When you read data
-    # from a DynamoDB table supporting [ `Eventually Consistent Reads` ][1],
+    # from a DynamoDB table supporting [ `Eventually Consistent Reads` ][2],
     # the response might not reflect the results of a recently completed
     # write operation. The response might include some stale data. If the
     # dependent entities are not yet in DynamoDB, this causes a validation
     # error. If you repeat your read request after a short time, the
     # response should return the latest data. So retry logic is recommended
     # to handle these possible issues. We also recommend that customers call
-    # DescribeEndpointConfig before calling CreateEndpoint to minimize the
-    # potential impact of a DynamoDB eventually consistent read.
+    # [DescribeEndpointConfig][3] before calling [CreateEndpoint][1] to
+    # minimize the potential impact of a DynamoDB eventually consistent
+    # read.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html
+    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html
+    # [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpointConfig.html
     #
     # @option params [required, String] :endpoint_config_name
     #   The name of the endpoint configuration. You specify this name in a
-    #   CreateEndpoint request.
+    #   [CreateEndpoint][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html
     #
     # @option params [required, Array<Types::ProductionVariant>] :production_variants
     #   An array of `ProductionVariant` objects, one for each model that you
@@ -2920,16 +2959,26 @@ module Aws::SageMaker
     # Python (Boto), you must use the logging APIs provided by the SDK.
     #
     # You can add tags to experiments, trials, trial components and then use
-    # the Search API to search for the tags.
+    # the [Search][1] API to search for the tags.
     #
     # To add a description to an experiment, specify the optional
     # `Description` parameter. To add a description later, or to change the
-    # description, call the UpdateExperiment API.
+    # description, call the [UpdateExperiment][2] API.
     #
-    # To get a list of all your experiments, call the ListExperiments API.
-    # To view an experiment's properties, call the DescribeExperiment API.
-    # To get a list of all the trials associated with an experiment, call
-    # the ListTrials API. To create a trial call the CreateTrial API.
+    # To get a list of all your experiments, call the [ListExperiments][3]
+    # API. To view an experiment's properties, call the
+    # [DescribeExperiment][4] API. To get a list of all the trials
+    # associated with an experiment, call the [ListTrials][5] API. To create
+    # a trial call the [CreateTrial][6] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateExperiment.html
+    # [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListExperiments.html
+    # [4]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeExperiment.html
+    # [5]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListTrials.html
+    # [6]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrial.html
     #
     # @option params [required, String] :experiment_name
     #   The name of the experiment. The name must be unique in your Amazon Web
@@ -2944,8 +2993,12 @@ module Aws::SageMaker
     #   The description of the experiment.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags to associate with the experiment. You can use Search
-    #   API to search on the tags.
+    #   A list of tags to associate with the experiment. You can use
+    #   [Search][1] API to search on the tags.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html
     #
     # @return [Types::CreateExperimentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3058,11 +3111,12 @@ module Aws::SageMaker
     #
     # @option params [Types::OnlineStoreConfig] :online_store_config
     #   You can turn the `OnlineStore` on or off by specifying `True` for the
-    #   `EnableOnlineStore` flag in `OnlineStoreConfig`; the default value is
-    #   `False`.
+    #   `EnableOnlineStore` flag in `OnlineStoreConfig`.
     #
     #   You can also include an Amazon Web Services KMS key ID (`KMSKeyId`)
     #   for at-rest encryption of the `OnlineStore`.
+    #
+    #   The default value is `False`.
     #
     # @option params [Types::OfflineStoreConfig] :offline_store_config
     #   Use this to configure an `OfflineFeatureStore`. This parameter allows
@@ -3083,12 +3137,13 @@ module Aws::SageMaker
     #   * Format for the offline store table. Supported formats are Glue
     #     (Default) and [Apache Iceberg][2].
     #
-    #   To learn more about this parameter, see OfflineStoreConfig.
+    #   To learn more about this parameter, see [OfflineStoreConfig][3].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html
     #   [2]: https://iceberg.apache.org/
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OfflineStoreConfig.html
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM execution role used to
@@ -3388,25 +3443,34 @@ module Aws::SageMaker
     #   not case sensitive.
     #
     # @option params [required, Types::HyperParameterTuningJobConfig] :hyper_parameter_tuning_job_config
-    #   The HyperParameterTuningJobConfig object that describes the tuning
-    #   job, including the search strategy, the objective metric used to
-    #   evaluate training jobs, ranges of parameters to search, and resource
-    #   limits for the tuning job. For more information, see [How
-    #   Hyperparameter Tuning Works][1].
+    #   The [HyperParameterTuningJobConfig][1] object that describes the
+    #   tuning job, including the search strategy, the objective metric used
+    #   to evaluate training jobs, ranges of parameters to search, and
+    #   resource limits for the tuning job. For more information, see [How
+    #   Hyperparameter Tuning Works][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html
     #
     # @option params [Types::HyperParameterTrainingJobDefinition] :training_job_definition
-    #   The HyperParameterTrainingJobDefinition object that describes the
+    #   The [HyperParameterTrainingJobDefinition][1] object that describes the
     #   training jobs that this tuning job launches, including static
     #   hyperparameters, input data configuration, output data configuration,
     #   resource configuration, and stopping condition.
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html
+    #
     # @option params [Array<Types::HyperParameterTrainingJobDefinition>] :training_job_definitions
-    #   A list of the HyperParameterTrainingJobDefinition objects launched for
-    #   this tuning job.
+    #   A list of the [HyperParameterTrainingJobDefinition][1] objects
+    #   launched for this tuning job.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html
     #
     # @option params [Types::HyperParameterTuningJobWarmStartConfig] :warm_start_config
     #   Specifies the configuration for starting the hyperparameter tuning job
@@ -4154,7 +4218,10 @@ module Aws::SageMaker
     # @option params [required, String] :job_name
     #   A name for the recommendation job. The name must be unique within the
     #   Amazon Web Services Region and within your Amazon Web Services
-    #   account.
+    #   account. The job name is passed down to the resources created by the
+    #   recommendation job. The names of resources (such as the model,
+    #   endpoint configuration, endpoint, and compilation) that are prefixed
+    #   with the job name are truncated at 40 characters.
     #
     # @option params [required, String] :job_type
     #   Defines the type of recommendation job. Specify `Default` to initiate
@@ -4679,17 +4746,18 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @option params [Types::VpcConfig] :vpc_config
-    #   A VpcConfig object that specifies the VPC that you want your model to
-    #   connect to. Control access to and from your model container by
-    #   configuring the VPC. `VpcConfig` is used in hosting services and in
+    #   A [VpcConfig][1] object that specifies the VPC that you want your
+    #   model to connect to. Control access to and from your model container
+    #   by configuring the VPC. `VpcConfig` is used in hosting services and in
     #   batch transform. For more information, see [Protect Endpoints by Using
-    #   an Amazon Virtual Private Cloud][1] and [Protect Data in Batch
-    #   Transform Jobs by Using an Amazon Virtual Private Cloud][2].
+    #   an Amazon Virtual Private Cloud][2] and [Protect Data in Batch
+    #   Transform Jobs by Using an Amazon Virtual Private Cloud][3].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
-    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VpcConfig.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html
     #
     # @option params [Boolean] :enable_network_isolation
     #   Isolates the model container. No inbound or outbound network calls can
@@ -4953,7 +5021,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-api-json-schema.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards.html#model-cards-json-schema
     #
     # @option params [required, String] :model_card_status
     #   The approval status of the model card within your organization.
@@ -6419,16 +6487,17 @@ module Aws::SageMaker
     # notebook instance. For more information, see [Limit Access to a
     # Notebook Instance by IP Address][1].
     #
-    # <note markdown="1"> The URL that you get from a call to CreatePresignedNotebookInstanceUrl
-    # is valid only for 5 minutes. If you try to use the URL after the
-    # 5-minute limit expires, you are directed to the Amazon Web Services
-    # console sign-in page.
+    # <note markdown="1"> The URL that you get from a call to
+    # [CreatePresignedNotebookInstanceUrl][2] is valid only for 5 minutes.
+    # If you try to use the URL after the 5-minute limit expires, you are
+    # directed to the Amazon Web Services console sign-in page.
     #
     #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/security_iam_id-based-policy-examples.html#nbi-ip-filter
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreatePresignedNotebookInstanceUrl.html
     #
     # @option params [required, String] :notebook_instance_name
     #   The name of the notebook instance.
@@ -6512,11 +6581,17 @@ module Aws::SageMaker
     #   Associates a SageMaker job as a trial component with an experiment and
     #   trial. Specified when you call the following APIs:
     #
-    #   * CreateProcessingJob
+    #   * [CreateProcessingJob][1]
     #
-    #   * CreateTrainingJob
+    #   * [CreateTrainingJob][2]
     #
-    #   * CreateTransformJob
+    #   * [CreateTransformJob][3]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateProcessingJob.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTransformJob.html
     #
     # @return [Types::CreateProcessingJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6989,14 +7064,15 @@ module Aws::SageMaker
     #   an instance count greater than 1.
     #
     # @option params [Types::VpcConfig] :vpc_config
-    #   A VpcConfig object that specifies the VPC that you want your training
-    #   job to connect to. Control access to and from your training container
-    #   by configuring the VPC. For more information, see [Protect Training
-    #   Jobs by Using an Amazon Virtual Private Cloud][1].
+    #   A [VpcConfig][1] object that specifies the VPC that you want your
+    #   training job to connect to. Control access to and from your training
+    #   container by configuring the VPC. For more information, see [Protect
+    #   Training Jobs by Using an Amazon Virtual Private Cloud][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VpcConfig.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
     #
     # @option params [required, Types::StoppingCondition] :stopping_condition
     #   Specifies a limit to how long a model training job can run. It also
@@ -7081,11 +7157,17 @@ module Aws::SageMaker
     #   Associates a SageMaker job as a trial component with an experiment and
     #   trial. Specified when you call the following APIs:
     #
-    #   * CreateProcessingJob
+    #   * [CreateProcessingJob][1]
     #
-    #   * CreateTrainingJob
+    #   * [CreateTrainingJob][2]
     #
-    #   * CreateTransformJob
+    #   * [CreateTransformJob][3]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateProcessingJob.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTransformJob.html
     #
     # @option params [Types::ProfilerConfig] :profiler_config
     #   Configuration information for Amazon SageMaker Debugger system
@@ -7423,11 +7505,17 @@ module Aws::SageMaker
     #   Associates a SageMaker job as a trial component with an experiment and
     #   trial. Specified when you call the following APIs:
     #
-    #   * CreateProcessingJob
+    #   * [CreateProcessingJob][1]
     #
-    #   * CreateTrainingJob
+    #   * [CreateTrainingJob][2]
     #
-    #   * CreateTransformJob
+    #   * [CreateTransformJob][3]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateProcessingJob.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTransformJob.html
     #
     # @return [Types::CreateTransformJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7516,12 +7604,19 @@ module Aws::SageMaker
     # logged, and indexed. When you use the Amazon Web Services SDK for
     # Python (Boto), you must use the logging APIs provided by the SDK.
     #
-    # You can add tags to a trial and then use the Search API to search for
-    # the tags.
+    # You can add tags to a trial and then use the [Search][1] API to search
+    # for the tags.
     #
-    # To get a list of all your trials, call the ListTrials API. To view a
-    # trial's properties, call the DescribeTrial API. To create a trial
-    # component, call the CreateTrialComponent API.
+    # To get a list of all your trials, call the [ListTrials][2] API. To
+    # view a trial's properties, call the [DescribeTrial][3] API. To create
+    # a trial component, call the [CreateTrialComponent][4] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListTrials.html
+    # [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeTrial.html
+    # [4]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrialComponent.html
     #
     # @option params [required, String] :trial_name
     #   The name of the trial. The name must be unique in your Amazon Web
@@ -7538,8 +7633,12 @@ module Aws::SageMaker
     #   Metadata properties of the tracking entity, trial, or trial component.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags to associate with the trial. You can use Search API to
-    #   search on the tags.
+    #   A list of tags to associate with the trial. You can use [Search][1]
+    #   API to search on the tags.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html
     #
     # @return [Types::CreateTrialResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7590,8 +7689,12 @@ module Aws::SageMaker
     # logged, and indexed. When you use the Amazon Web Services SDK for
     # Python (Boto), you must use the logging APIs provided by the SDK.
     #
-    # You can add tags to a trial component and then use the Search API to
-    # search for the tags.
+    # You can add tags to a trial component and then use the [Search][1] API
+    # to search for the tags.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html
     #
     # @option params [required, String] :trial_component_name
     #   The name of the component. The name must be unique in your Amazon Web
@@ -7633,8 +7736,12 @@ module Aws::SageMaker
     #   Metadata properties of the tracking entity, trial, or trial component.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags to associate with the component. You can use Search API
-    #   to search on the tags.
+    #   A list of tags to associate with the component. You can use
+    #   [Search][1] API to search on the tags.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html
     #
     # @return [Types::CreateTrialComponentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7823,6 +7930,10 @@ module Aws::SageMaker
     #           status: "ENABLED", # accepts ENABLED, DISABLED
     #           amazon_forecast_role_arn: "RoleArn",
     #         },
+    #         model_register_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #           cross_account_model_register_role_arn: "RoleArn",
+    #         },
     #       },
     #     },
     #   })
@@ -7846,25 +7957,26 @@ module Aws::SageMaker
     # Amazon Web Services Region per Amazon Web Services account.
     #
     # If you want to create a new workforce in an Amazon Web Services Region
-    # where a workforce already exists, use the API operation to delete the
-    # existing workforce and then use `CreateWorkforce` to create a new
-    # workforce.
+    # where a workforce already exists, use the [DeleteWorkforce][1] API
+    # operation to delete the existing workforce and then use
+    # `CreateWorkforce` to create a new workforce.
     #
     # To create a private workforce using Amazon Cognito, you must specify a
     # Cognito user pool in `CognitoConfig`. You can also create an Amazon
     # Cognito workforce using the Amazon SageMaker console. For more
-    # information, see [ Create a Private Workforce (Amazon Cognito)][1].
+    # information, see [ Create a Private Workforce (Amazon Cognito)][2].
     #
     # To create a private workforce using your own OIDC Identity Provider
     # (IdP), specify your IdP configuration in `OidcConfig`. Your OIDC IdP
     # must support *groups* because groups are used by Ground Truth and
     # Amazon A2I to create work teams. For more information, see [ Create a
-    # Private Workforce (OIDC IdP)][2].
+    # Private Workforce (OIDC IdP)][3].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html
-    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private-oidc.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteWorkforce.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html
+    # [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private-oidc.html
     #
     # @option params [Types::CognitoConfig] :cognito_config
     #   Use this parameter to configure an Amazon Cognito private workforce. A
@@ -8492,8 +8604,12 @@ module Aws::SageMaker
     end
 
     # Deletes an SageMaker experiment. All trials associated with the
-    # experiment must be deleted first. Use the ListTrials API to get a list
-    # of the trials associated with the experiment.
+    # experiment must be deleted first. Use the [ListTrials][1] API to get a
+    # list of the trials associated with the experiment.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListTrials.html
     #
     # @option params [required, String] :experiment_name
     #   The name of the experiment to delete.
@@ -8641,8 +8757,12 @@ module Aws::SageMaker
     # template).
     #
     # To see a list of human task user interfaces (work task templates) in
-    # your account, use . When you delete a worker task template, it no
-    # longer appears when you call `ListHumanTaskUis`.
+    # your account, use [ListHumanTaskUis][1]. When you delete a worker task
+    # template, it no longer appears when you call `ListHumanTaskUis`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListHumanTaskUis.html
     #
     # @option params [required, String] :human_task_ui_name
     #   The name of the human task user interface (work task template) you
@@ -9170,8 +9290,12 @@ module Aws::SageMaker
     end
 
     # Deletes the specified trial. All trial components that make up the
-    # trial must be deleted first. Use the DescribeTrialComponent API to get
-    # the list of trial components.
+    # trial must be deleted first. Use the [DescribeTrialComponent][1] API
+    # to get the list of trial components.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeTrialComponent.html
     #
     # @option params [required, String] :trial_name
     #   The name of the trial to delete.
@@ -9202,7 +9326,11 @@ module Aws::SageMaker
     # Deletes the specified trial component. A trial component must be
     # disassociated from all trials before the trial component can be
     # deleted. To disassociate a trial component from a trial, call the
-    # DisassociateTrialComponent API.
+    # [DisassociateTrialComponent][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DisassociateTrialComponent.html
     #
     # @option params [required, String] :trial_component_name
     #   The name of the component to delete.
@@ -9262,12 +9390,18 @@ module Aws::SageMaker
     #
     # If you want to create a new workforce in an Amazon Web Services Region
     # where a workforce already exists, use this operation to delete the
-    # existing workforce and then use to create a new workforce.
+    # existing workforce and then use [CreateWorkforce][1] to create a new
+    # workforce.
     #
     # If a private workforce contains one or more work teams, you must use
-    # the operation to delete all work teams before you delete the
-    # workforce. If you try to delete a workforce that contains one or more
-    # work teams, you will recieve a `ResourceInUse` error.
+    # the [DeleteWorkteam][2] operation to delete all work teams before you
+    # delete the workforce. If you try to delete a workforce that contains
+    # one or more work teams, you will recieve a `ResourceInUse` error.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateWorkforce.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteWorkteam.html
     #
     # @option params [required, String] :workforce_name
     #   The name of the workforce.
@@ -10038,9 +10172,14 @@ module Aws::SageMaker
 
     # Returns information about a model compilation job.
     #
-    # To create a model compilation job, use CreateCompilationJob. To get
-    # information about multiple model compilation jobs, use
-    # ListCompilationJobs.
+    # To create a model compilation job, use [CreateCompilationJob][1]. To
+    # get information about multiple model compilation jobs, use
+    # [ListCompilationJobs][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateCompilationJob.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListCompilationJobs.html
     #
     # @option params [required, String] :compilation_job_name
     #   The name of the model compilation job that you want information about.
@@ -10457,6 +10596,8 @@ module Aws::SageMaker
     #   resp.default_user_settings.r_session_app_settings.custom_images[0].app_image_config_name #=> String
     #   resp.default_user_settings.canvas_app_settings.time_series_forecasting_settings.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.default_user_settings.canvas_app_settings.time_series_forecasting_settings.amazon_forecast_role_arn #=> String
+    #   resp.default_user_settings.canvas_app_settings.model_register_settings.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.default_user_settings.canvas_app_settings.model_register_settings.cross_account_model_register_role_arn #=> String
     #   resp.app_network_access_type #=> String, one of "PublicInternetOnly", "VpcOnly"
     #   resp.home_efs_file_system_kms_key_id #=> String
     #   resp.subnet_ids #=> Array
@@ -14045,6 +14186,8 @@ module Aws::SageMaker
     #   resp.user_settings.r_session_app_settings.custom_images[0].app_image_config_name #=> String
     #   resp.user_settings.canvas_app_settings.time_series_forecasting_settings.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.user_settings.canvas_app_settings.time_series_forecasting_settings.amazon_forecast_role_arn #=> String
+    #   resp.user_settings.canvas_app_settings.model_register_settings.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.user_settings.canvas_app_settings.model_register_settings.cross_account_model_register_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeUserProfile AWS API Documentation
     #
@@ -14180,12 +14323,17 @@ module Aws::SageMaker
     # other trials the component is associated with. Before you can delete a
     # component, you must disassociate the component from all trials it is
     # associated with. To associate a trial component with a trial, call the
-    # AssociateTrialComponent API.
+    # [AssociateTrialComponent][1] API.
     #
     # To get a list of the trials a component is associated with, use the
-    # Search API. Specify `ExperimentTrialComponent` for the `Resource`
+    # [Search][2] API. Specify `ExperimentTrialComponent` for the `Resource`
     # parameter. The list appears in the response under
     # `Results.TrialComponent.Parents`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AssociateTrialComponent.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html
     #
     # @option params [required, String] :trial_component_name
     #   The name of the component to disassociate from the trial.
@@ -15258,9 +15406,14 @@ module Aws::SageMaker
 
     # Lists model compilation jobs that satisfy various filters.
     #
-    # To create a model compilation job, use CreateCompilationJob. To get
-    # information about a particular model compilation job you have created,
-    # use DescribeCompilationJob.
+    # To create a model compilation job, use [CreateCompilationJob][1]. To
+    # get information about a particular model compilation job you have
+    # created, use [DescribeCompilationJob][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateCompilationJob.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeCompilationJob.html
     #
     # @option params [String] :next_token
     #   If the result of the previous `ListCompilationJobs` request was
@@ -15293,7 +15446,7 @@ module Aws::SageMaker
     #
     # @option params [String] :status_equals
     #   A filter that retrieves model compilation jobs with a specific
-    #   DescribeCompilationJobResponse$CompilationJobStatus status.
+    #   `CompilationJobStatus` status.
     #
     # @option params [String] :sort_by
     #   The field by which to sort results. The default is `CreationTime`.
@@ -16480,8 +16633,12 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Gets a list of HyperParameterTuningJobSummary objects that describe
-    # the hyperparameter tuning jobs launched in your account.
+    # Gets a list of [HyperParameterTuningJobSummary][1] objects that
+    # describe the hyperparameter tuning jobs launched in your account.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobSummary.html
     #
     # @option params [String] :next_token
     #   If the result of the previous `ListHyperParameterTuningJobs` request
@@ -16743,11 +16900,19 @@ module Aws::SageMaker
     #
     # @option params [String] :type
     #   Selects inference experiments of this type. For the possible types of
-    #   inference experiments, see CreateInferenceExperimentRequest$Type.
+    #   inference experiments, see [CreateInferenceExperiment][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceExperiment.html
     #
     # @option params [String] :status_equals
     #   Selects inference experiments which are in this status. For the
-    #   possible statuses, see DescribeInferenceExperimentResponse$Status.
+    #   possible statuses, see [DescribeInferenceExperiment][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeInferenceExperiment.html
     #
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
     #   Selects inference experiments which were created after this timestamp.
@@ -18274,7 +18439,11 @@ module Aws::SageMaker
     end
 
     # Lists notebook instance lifestyle configurations created with the
-    # CreateNotebookInstanceLifecycleConfig API.
+    # [CreateNotebookInstanceLifecycleConfig][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateNotebookInstanceLifecycleConfig.html
     #
     # @option params [String] :next_token
     #   If the result of a `ListNotebookInstanceLifecycleConfigs` request was
@@ -19300,8 +19469,12 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Gets a list of TrainingJobSummary objects that describe the training
-    # jobs that a hyperparameter tuning job launched.
+    # Gets a list of [TrainingJobSummary][1] objects that describe the
+    # training jobs that a hyperparameter tuning job launched.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TrainingJobSummary.html
     #
     # @option params [required, String] :hyper_parameter_tuning_job_name
     #   The name of the tuning job whose training jobs you want to list.
@@ -20052,7 +20225,11 @@ module Aws::SageMaker
     #   provide a `HumanTaskUiArn` if you use the `UiTemplate` parameter.
     #
     #   See a list of available Human Ui Amazon Resource Names (ARNs) in
-    #   UiConfig.
+    #   [UiConfig][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UiConfig.html
     #
     # @return [Types::RenderUiTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -20520,9 +20697,9 @@ module Aws::SageMaker
     # stopped, it sends the SIGKILL signal.
     #
     # When it receives a `StopCompilationJob` request, Amazon SageMaker
-    # changes the CompilationJobSummary$CompilationJobStatus of the job to
-    # `Stopping`. After Amazon SageMaker stops the job, it sets the
-    # CompilationJobSummary$CompilationJobStatus to `Stopped`.
+    # changes the `CompilationJobStatus` of the job to `Stopping`. After
+    # Amazon SageMaker stops the job, it sets the `CompilationJobStatus` to
+    # `Stopped`.
     #
     # @option params [required, String] :compilation_job_name
     #   The name of the model compilation job to stop.
@@ -21329,6 +21506,10 @@ module Aws::SageMaker
     #           status: "ENABLED", # accepts ENABLED, DISABLED
     #           amazon_forecast_role_arn: "RoleArn",
     #         },
+    #         model_register_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #           cross_account_model_register_role_arn: "RoleArn",
+    #         },
     #       },
     #     },
     #     domain_settings_for_update: {
@@ -21404,7 +21585,7 @@ module Aws::SageMaker
     # When SageMaker receives the request, it sets the endpoint status to
     # `Updating`. After updating the endpoint, it sets the status to
     # `InService`. To check the status of an endpoint, use the
-    # DescribeEndpoint API.
+    # [DescribeEndpoint][1] API.
     #
     # <note markdown="1"> You must not delete an `EndpointConfig` in use by an endpoint that is
     # live or while the `UpdateEndpoint` or `CreateEndpoint` operations are
@@ -21417,6 +21598,10 @@ module Aws::SageMaker
     # stop incurring charges.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html
     #
     # @option params [required, String] :endpoint_name
     #   The name of the endpoint whose configuration you want to update.
@@ -21439,12 +21624,16 @@ module Aws::SageMaker
     #
     # @option params [Array<Types::VariantProperty>] :exclude_retained_variant_properties
     #   When you are updating endpoint resources with
-    #   UpdateEndpointInput$RetainAllVariantProperties, whose value is set to
-    #   `true`, `ExcludeRetainedVariantProperties` specifies the list of type
-    #   VariantProperty to override with the values provided by
+    #   `RetainAllVariantProperties`, whose value is set to `true`,
+    #   `ExcludeRetainedVariantProperties` specifies the list of type
+    #   [VariantProperty][1] to override with the values provided by
     #   `EndpointConfig`. If you don't specify a value for
     #   `ExcludeRetainedVariantProperties`, no variant properties are
     #   overridden.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VariantProperty.html
     #
     # @option params [Types::DeploymentConfig] :deployment_config
     #   The deployment configuration for an endpoint, which contains the
@@ -21515,7 +21704,11 @@ module Aws::SageMaker
     # existing endpoint. When it receives the request, SageMaker sets the
     # endpoint status to `Updating`. After updating the endpoint, it sets
     # the status to `InService`. To check the status of an endpoint, use the
-    # DescribeEndpoint API.
+    # [DescribeEndpoint][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html
     #
     # @option params [required, String] :endpoint_name
     #   The name of an existing SageMaker endpoint.
@@ -21723,7 +21916,12 @@ module Aws::SageMaker
     end
 
     # Updates the properties of a SageMaker image. To change the image's
-    # tags, use the AddTags and DeleteTags APIs.
+    # tags, use the [AddTags][1] and [DeleteTags][2] APIs.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AddTags.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteTags.html
     #
     # @option params [Array<String>] :delete_properties
     #   A list of properties to delete. Only the `Description` and
@@ -21869,7 +22067,11 @@ module Aws::SageMaker
     # Updates an inference experiment that you created. The status of the
     # inference experiment has to be either `Created`, `Running`. For more
     # information on the status of an inference experiment, see
-    # DescribeInferenceExperimentResponse$Status.
+    # [DescribeInferenceExperiment][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeInferenceExperiment.html
     #
     # @option params [required, String] :name
     #   The name of the inference experiment to be updated.
@@ -21973,7 +22175,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-api-json-schema.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards.html#model-cards-json-schema
     #
     # @option params [String] :model_card_status
     #   The approval status of the model card within your organization.
@@ -22424,7 +22626,11 @@ module Aws::SageMaker
     end
 
     # Updates a notebook instance lifecycle configuration created with the
-    # CreateNotebookInstanceLifecycleConfig API.
+    # [CreateNotebookInstanceLifecycleConfig][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateNotebookInstanceLifecycleConfig.html
     #
     # @option params [required, String] :notebook_instance_lifecycle_config_name
     #   The name of the lifecycle configuration.
@@ -23003,6 +23209,10 @@ module Aws::SageMaker
     #           status: "ENABLED", # accepts ENABLED, DISABLED
     #           amazon_forecast_role_arn: "RoleArn",
     #         },
+    #         model_register_settings: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #           cross_account_model_register_role_arn: "RoleArn",
+    #         },
     #       },
     #     },
     #   })
@@ -23046,21 +23256,27 @@ module Aws::SageMaker
     #
     # You can only update your OIDC IdP configuration when there are no work
     # teams associated with your workforce. You can delete work teams using
-    # the operation.
+    # the [DeleteWorkteam][2] operation.
     #
     # After restricting access to a range of IP addresses or updating your
     # OIDC IdP configuration with this operation, you can view details about
-    # your update workforce using the operation.
+    # your update workforce using the [DescribeWorkforce][3] operation.
     #
     # This operation only applies to private workforces.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteWorkteam.html
+    # [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeWorkforce.html
     #
     # @option params [required, String] :workforce_name
     #   The name of the private workforce that you want to update. You can
-    #   find your workforce name by using the operation.
+    #   find your workforce name by using the [ListWorkforces][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListWorkforces.html
     #
     # @option params [Types::SourceIpConfig] :source_ip_config
     #   A list of one to ten worker IP address ranges ([CIDRs][1]) that can be
@@ -23254,7 +23470,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.173.0'
+      context[:gem_version] = '1.174.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

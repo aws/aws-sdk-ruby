@@ -500,6 +500,37 @@ module Aws::Snowball
     #   need to use the Snowball Client to manage the device.
     #   @return [String]
     #
+    # @!attribute [rw] initial_cluster_size
+    #   If provided, each job will be automatically created and associated
+    #   with the new cluster. If not provided, will be treated as 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] force_create_jobs
+    #   Force to create cluster when user attempts to overprovision or
+    #   underprovision a cluster. A cluster is overprovisioned or
+    #   underprovisioned if the initial size of the cluster is more
+    #   (overprovisioned) or less (underprovisioned) than what needed to
+    #   meet capacity requirement specified with
+    #   `OnDeviceServiceConfiguration`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] long_term_pricing_ids
+    #   Lists long-term pricing id that will be used to associate with jobs
+    #   automatically created for the new cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] snowball_capacity_preference
+    #   If your job is being created in one of the US regions, you have the
+    #   option of specifying what size Snow device you'd like for this job.
+    #   In all other regions, Snowballs come with 80 TB in storage capacity.
+    #
+    #   For more information, see
+    #   "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
+    #   (Snow Family Devices and Capacity) in the *Snowcone User Guide* or
+    #   "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
+    #   (Snow Family Devices and Capacity) in the *Snowcone User Guide*.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
@@ -515,7 +546,11 @@ module Aws::Snowball
       :notification,
       :forwarding_address_id,
       :tax_documents,
-      :remote_management)
+      :remote_management,
+      :initial_cluster_size,
+      :force_create_jobs,
+      :long_term_pricing_ids,
+      :snowball_capacity_preference)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -524,10 +559,20 @@ module Aws::Snowball
     #   The automatically generated ID for a cluster.
     #   @return [String]
     #
+    # @!attribute [rw] job_list_entries
+    #   List of jobs created for this cluster. For syntax, see
+    #   [ListJobsResult$JobListEntries][1] in this guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/snowball/latest/api-reference/API_ListJobs.html#API_ListJobs_ResponseSyntax
+    #   @return [Array<Types::JobListEntry>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateClusterResult AWS API Documentation
     #
     class CreateClusterResult < Struct.new(
-      :cluster_id)
+      :cluster_id,
+      :job_list_entries)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1069,8 +1114,8 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # Your IAM user lacks the necessary Amazon EC2 permissions to perform
-    # the attempted action.
+    # Your user lacks the necessary Amazon EC2 permissions to perform the
+    # attempted action.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2061,12 +2106,18 @@ module Aws::Snowball
     #   The configuration of EKS Anywhere on the Snow Family device.
     #   @return [Types::EKSOnDeviceServiceConfiguration]
     #
+    # @!attribute [rw] s3_on_device_service
+    #   Configuration for Amazon S3 compatible storage on Snow family
+    #   devices.
+    #   @return [Types::S3OnDeviceServiceConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/OnDeviceServiceConfiguration AWS API Documentation
     #
     class OnDeviceServiceConfiguration < Struct.new(
       :nfs_on_device_service,
       :tgw_on_device_service,
-      :eks_on_device_service)
+      :eks_on_device_service,
+      :s3_on_device_service)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2082,6 +2133,47 @@ module Aws::Snowball
     #
     class ReturnShippingLabelAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Amazon S3 compatible storage on Snow family devices configuration
+    # items.
+    #
+    # @!attribute [rw] storage_limit
+    #   If the specified storage limit value matches storage limit of one of
+    #   the defined configurations, that configuration will be used. If the
+    #   specified storage limit value does not match any defined
+    #   configuration, the request will fail. If more than one configuration
+    #   has the same storage limit as specified, the other input need to be
+    #   provided.
+    #   @return [Float]
+    #
+    # @!attribute [rw] storage_unit
+    #   Storage unit. Currently the only supported unit is TB.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_size
+    #   Applicable when creating a cluster. Specifies how many nodes are
+    #   needed for Amazon S3 compatible storage on Snow family devices. If
+    #   specified, the other input can be omitted.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fault_tolerance
+    #   &gt;Fault tolerance level of the cluster. This indicates the number
+    #   of nodes that can go down without degrading the performance of the
+    #   cluster. This additional input helps when the specified
+    #   `StorageLimit` matches more than one Amazon S3 compatible storage on
+    #   Snow family devices service configuration.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/S3OnDeviceServiceConfiguration AWS API Documentation
+    #
+    class S3OnDeviceServiceConfiguration < Struct.new(
+      :storage_limit,
+      :storage_unit,
+      :service_size,
+      :fault_tolerance)
       SENSITIVE = []
       include Aws::Structure
     end

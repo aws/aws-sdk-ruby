@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2023-04-20)
+------------------
+
+* Feature - You can now create encrypted API keys to use in a client application integration of the JavaScript CAPTCHA API . You can also retrieve a list of your API keys and the JavaScript application integration URL.
+
 1.54.0 (2023-04-11)
 ------------------
 

@@ -1191,6 +1191,63 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
+    # Creates an API key for use in the integration of the CAPTCHA API in
+    # your JavaScript client applications. The integration lets you
+    # customize the placement and characteristics of the CAPTCHA puzzle for
+    # your end users. For more information about the CAPTCHA JavaScript
+    # integration, see [WAF client application integration][1] in the *WAF
+    # Developer Guide*.
+    #
+    # The CAPTCHA API requires a key that authorizes CAPTCHA use from the
+    # client application domain. You can use a single key for up to 5
+    # domains. After you generate a key, you can copy it for use in your
+    # JavaScript integration.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html
+    #
+    # @option params [required, String] :scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or for
+    #   a regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
+    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #
+    #   To work with CloudFront, you must also specify the Region US East (N.
+    #   Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #
+    # @option params [required, Array<String>] :token_domains
+    #   The client application domains that you want to use this API key for.
+    #
+    # @return [Types::CreateAPIKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAPIKeyResponse#api_key #api_key} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_api_key({
+    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #     token_domains: ["TokenDomain"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.api_key #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/CreateAPIKey AWS API Documentation
+    #
+    # @overload create_api_key(params = {})
+    # @param [Hash] params ({})
+    def create_api_key(params = {}, options = {})
+      req = build_request(:create_api_key, params)
+      req.send_request(options)
+    end
+
     # Creates an IPSet, which you use to identify web requests that
     # originate from specific IP addresses or ranges of IP addresses. For
     # example, if you're receiving a lot of requests from a ranges of IP
@@ -3594,6 +3651,53 @@ module Aws::WAFV2
     # @param [Hash] params ({})
     def generate_mobile_sdk_release_url(params = {}, options = {})
       req = build_request(:generate_mobile_sdk_release_url, params)
+      req.send_request(options)
+    end
+
+    # Returns your API key in decrypted form. Use this to check the token
+    # domains that you have defined for the key.
+    #
+    # @option params [required, String] :scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or for
+    #   a regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
+    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #
+    #   To work with CloudFront, you must also specify the Region US East (N.
+    #   Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #
+    # @option params [required, String] :api_key
+    #   The encrypted API key.
+    #
+    # @return [Types::GetDecryptedAPIKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDecryptedAPIKeyResponse#token_domains #token_domains} => Array&lt;String&gt;
+    #   * {Types::GetDecryptedAPIKeyResponse#creation_timestamp #creation_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_decrypted_api_key({
+    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #     api_key: "APIKey", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.token_domains #=> Array
+    #   resp.token_domains[0] #=> String
+    #   resp.creation_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetDecryptedAPIKey AWS API Documentation
+    #
+    # @overload get_decrypted_api_key(params = {})
+    # @param [Hash] params ({})
+    def get_decrypted_api_key(params = {}, options = {})
+      req = build_request(:get_decrypted_api_key, params)
       req.send_request(options)
     end
 
@@ -6244,6 +6348,70 @@ module Aws::WAFV2
     # @param [Hash] params ({})
     def get_web_acl_for_resource(params = {}, options = {})
       req = build_request(:get_web_acl_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of the API keys that you've defined for the
+    # specified scope.
+    #
+    # @option params [required, String] :scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or for
+    #   a regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
+    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #
+    #   To work with CloudFront, you must also specify the Region US East (N.
+    #   Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #
+    # @option params [String] :next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of objects that you want WAF to return for this
+    #   request. If more objects are available, in the response, WAF provides
+    #   a `NextMarker` value that you can use in a subsequent call to get the
+    #   next batch of objects.
+    #
+    # @return [Types::ListAPIKeysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAPIKeysResponse#next_marker #next_marker} => String
+    #   * {Types::ListAPIKeysResponse#api_key_summaries #api_key_summaries} => Array&lt;Types::APIKeySummary&gt;
+    #   * {Types::ListAPIKeysResponse#application_integration_url #application_integration_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_api_keys({
+    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #     next_marker: "NextMarker",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_marker #=> String
+    #   resp.api_key_summaries #=> Array
+    #   resp.api_key_summaries[0].token_domains #=> Array
+    #   resp.api_key_summaries[0].token_domains[0] #=> String
+    #   resp.api_key_summaries[0].api_key #=> String
+    #   resp.api_key_summaries[0].creation_timestamp #=> Time
+    #   resp.api_key_summaries[0].version #=> Integer
+    #   resp.application_integration_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListAPIKeys AWS API Documentation
+    #
+    # @overload list_api_keys(params = {})
+    # @param [Hash] params ({})
+    def list_api_keys(params = {}, options = {})
+      req = build_request(:list_api_keys, params)
       req.send_request(options)
     end
 
@@ -9452,7 +9620,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

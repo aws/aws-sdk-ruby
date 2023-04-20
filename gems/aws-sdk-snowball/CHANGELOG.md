@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2023-04-20)
+------------------
+
+* Feature - Adds support for Amazon S3 compatible storage. AWS Snow Family customers can now use Amazon S3 compatible storage on Snowball Edge devices. Also adds support for V3_5S. This is a refreshed AWS Snowball Edge Storage Optimized device type with 210TB SSD (customer usable).
+
 1.53.0 (2023-02-13)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2023-04-20)
+------------------
+
+* Feature - This release adds support for the new Lambda Protection feature.
+
 1.67.0 (2023-03-30)
 ------------------
 

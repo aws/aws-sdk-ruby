@@ -534,7 +534,7 @@ module Aws::Snowball
     #   "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
     #   (Snow Family Devices and Capacity) in the *Snowcone User Guide*.
     #
-    # @option params [required, Types::JobResource] :resources
+    # @option params [Types::JobResource] :resources
     #   The resources associated with the cluster job. These resources include
     #   Amazon S3 buckets and optional Lambda functions written in the Python
     #   language.
@@ -561,7 +561,7 @@ module Aws::Snowball
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
     #
-    # @option params [required, String] :role_arn
+    # @option params [String] :role_arn
     #   The `RoleARN` that you want to associate with this cluster. `RoleArn`
     #   values are created by using the [CreateRole][1] API action in Identity
     #   and Access Management (IAM).
@@ -634,9 +634,36 @@ module Aws::Snowball
     #   available when the device arrives at your location. Otherwise, you
     #   need to use the Snowball Client to manage the device.
     #
+    # @option params [Integer] :initial_cluster_size
+    #   If provided, each job will be automatically created and associated
+    #   with the new cluster. If not provided, will be treated as 0.
+    #
+    # @option params [Boolean] :force_create_jobs
+    #   Force to create cluster when user attempts to overprovision or
+    #   underprovision a cluster. A cluster is overprovisioned or
+    #   underprovisioned if the initial size of the cluster is more
+    #   (overprovisioned) or less (underprovisioned) than what needed to meet
+    #   capacity requirement specified with `OnDeviceServiceConfiguration`.
+    #
+    # @option params [Array<String>] :long_term_pricing_ids
+    #   Lists long-term pricing id that will be used to associate with jobs
+    #   automatically created for the new cluster.
+    #
+    # @option params [String] :snowball_capacity_preference
+    #   If your job is being created in one of the US regions, you have the
+    #   option of specifying what size Snow device you'd like for this job.
+    #   In all other regions, Snowballs come with 80 TB in storage capacity.
+    #
+    #   For more information, see
+    #   "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
+    #   (Snow Family Devices and Capacity) in the *Snowcone User Guide* or
+    #   "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
+    #   (Snow Family Devices and Capacity) in the *Snowcone User Guide*.
+    #
     # @return [Types::CreateClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResult#cluster_id #cluster_id} => String
+    #   * {Types::CreateClusterResult#job_list_entries #job_list_entries} => Array&lt;Types::JobListEntry&gt;
     #
     #
     # @example Example: To create a cluster
@@ -677,7 +704,7 @@ module Aws::Snowball
     #
     #   resp = client.create_cluster({
     #     job_type: "IMPORT", # required, accepts IMPORT, EXPORT, LOCAL_USE
-    #     resources: { # required
+    #     resources: {
     #       s3_resources: [
     #         {
     #           bucket_arn: "ResourceARN",
@@ -723,12 +750,18 @@ module Aws::Snowball
     #         kubernetes_version: "String",
     #         eks_anywhere_version: "String",
     #       },
+    #       s3_on_device_service: {
+    #         storage_limit: 1.0,
+    #         storage_unit: "TB", # accepts TB
+    #         service_size: 1,
+    #         fault_tolerance: 1,
+    #       },
     #     },
     #     description: "String",
     #     address_id: "AddressId", # required
     #     kms_key_arn: "KmsKeyARN",
-    #     role_arn: "RoleARN", # required
-    #     snowball_type: "STANDARD", # required, accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD, V3_5C
+    #     role_arn: "RoleARN",
+    #     snowball_type: "STANDARD", # required, accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD, V3_5C, V3_5S
     #     shipping_option: "SECOND_DAY", # required, accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     notification: {
     #       sns_topic_arn: "SnsTopicARN",
@@ -742,11 +775,23 @@ module Aws::Snowball
     #       },
     #     },
     #     remote_management: "INSTALLED_ONLY", # accepts INSTALLED_ONLY, INSTALLED_AUTOSTART
+    #     initial_cluster_size: 1,
+    #     force_create_jobs: false,
+    #     long_term_pricing_ids: ["LongTermPricingId"],
+    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, T32, NoPreference, T240
     #   })
     #
     # @example Response structure
     #
     #   resp.cluster_id #=> String
+    #   resp.job_list_entries #=> Array
+    #   resp.job_list_entries[0].job_id #=> String
+    #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
+    #   resp.job_list_entries[0].is_master #=> Boolean
+    #   resp.job_list_entries[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
+    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C", "V3_5S"
+    #   resp.job_list_entries[0].creation_date #=> Time
+    #   resp.job_list_entries[0].description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateCluster AWS API Documentation
     #
@@ -779,7 +824,7 @@ module Aws::Snowball
     #
     # **Snow Family devices and their capacities.**
     #
-    # * Snow Family device type: **SNC1\_SSD**
+    # * Device type: **SNC1\_SSD**
     #
     #   * Capacity: T14
     #
@@ -787,7 +832,7 @@ module Aws::Snowball
     #
     #
     #
-    # * Snow Family device type: **SNC1\_HDD**
+    # * Device type: **SNC1\_HDD**
     #
     #   * Capacity: T8
     #
@@ -851,6 +896,22 @@ module Aws::Snowball
     #     Singapore Amazon Web Services Region.
     #
     #      </note>
+    #
+    #
+    #
+    # * Device type: **V3\_5C**
+    #
+    #   * Capacity: T32
+    #
+    #   * Description: Snowball Edge Compute Optimized without GPU
+    #
+    #
+    #
+    # * Device type: **V3\_5S**
+    #
+    #   * Capacity: T240
+    #
+    #   * Description: Snowball Edge Storage Optimized 210TB
     #
     #
     #
@@ -1082,12 +1143,18 @@ module Aws::Snowball
     #         kubernetes_version: "String",
     #         eks_anywhere_version: "String",
     #       },
+    #       s3_on_device_service: {
+    #         storage_limit: 1.0,
+    #         storage_unit: "TB", # accepts TB
+    #         service_size: 1,
+    #         fault_tolerance: 1,
+    #       },
     #     },
     #     description: "String",
     #     address_id: "AddressId",
     #     kms_key_arn: "KmsKeyARN",
     #     role_arn: "RoleARN",
-    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, T32, NoPreference
+    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, T32, NoPreference, T240
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     notification: {
     #       sns_topic_arn: "SnsTopicARN",
@@ -1095,7 +1162,7 @@ module Aws::Snowball
     #       notify_all: false,
     #     },
     #     cluster_id: "ClusterId",
-    #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD, V3_5C
+    #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD, V3_5C, V3_5S
     #     forwarding_address_id: "AddressId",
     #     tax_documents: {
     #       ind: {
@@ -1149,9 +1216,9 @@ module Aws::Snowball
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_long_term_pricing({
-    #     long_term_pricing_type: "OneYear", # required, accepts OneYear, ThreeYear
+    #     long_term_pricing_type: "OneYear", # required, accepts OneYear, ThreeYear, OneMonth
     #     is_long_term_pricing_auto_renew: false,
-    #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD, V3_5C
+    #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S, SNC1_HDD, SNC1_SSD, V3_5C, V3_5S
     #   })
     #
     # @example Response structure
@@ -1414,7 +1481,7 @@ module Aws::Snowball
     #   resp.cluster_metadata.role_arn #=> String
     #   resp.cluster_metadata.cluster_state #=> String, one of "AwaitingQuorum", "Pending", "InUse", "Complete", "Cancelled"
     #   resp.cluster_metadata.job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.cluster_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C"
+    #   resp.cluster_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C", "V3_5S"
     #   resp.cluster_metadata.creation_date #=> Time
     #   resp.cluster_metadata.resources.s3_resources #=> Array
     #   resp.cluster_metadata.resources.s3_resources[0].bucket_arn #=> String
@@ -1444,6 +1511,10 @@ module Aws::Snowball
     #   resp.cluster_metadata.on_device_service_configuration.tgw_on_device_service.storage_unit #=> String, one of "TB"
     #   resp.cluster_metadata.on_device_service_configuration.eks_on_device_service.kubernetes_version #=> String
     #   resp.cluster_metadata.on_device_service_configuration.eks_on_device_service.eks_anywhere_version #=> String
+    #   resp.cluster_metadata.on_device_service_configuration.s3_on_device_service.storage_limit #=> Float
+    #   resp.cluster_metadata.on_device_service_configuration.s3_on_device_service.storage_unit #=> String, one of "TB"
+    #   resp.cluster_metadata.on_device_service_configuration.s3_on_device_service.service_size #=> Integer
+    #   resp.cluster_metadata.on_device_service_configuration.s3_on_device_service.fault_tolerance #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeCluster AWS API Documentation
     #
@@ -1519,7 +1590,7 @@ module Aws::Snowball
     #   resp.job_metadata.job_id #=> String
     #   resp.job_metadata.job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_metadata.job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.job_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C"
+    #   resp.job_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C", "V3_5S"
     #   resp.job_metadata.creation_date #=> Time
     #   resp.job_metadata.resources.s3_resources #=> Array
     #   resp.job_metadata.resources.s3_resources[0].bucket_arn #=> String
@@ -1544,7 +1615,7 @@ module Aws::Snowball
     #   resp.job_metadata.shipping_details.inbound_shipment.tracking_number #=> String
     #   resp.job_metadata.shipping_details.outbound_shipment.status #=> String
     #   resp.job_metadata.shipping_details.outbound_shipment.tracking_number #=> String
-    #   resp.job_metadata.snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "T8", "T14", "T32", "NoPreference"
+    #   resp.job_metadata.snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "T8", "T14", "T32", "NoPreference", "T240"
     #   resp.job_metadata.notification.sns_topic_arn #=> String
     #   resp.job_metadata.notification.job_states_to_notify #=> Array
     #   resp.job_metadata.notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
@@ -1568,11 +1639,15 @@ module Aws::Snowball
     #   resp.job_metadata.on_device_service_configuration.tgw_on_device_service.storage_unit #=> String, one of "TB"
     #   resp.job_metadata.on_device_service_configuration.eks_on_device_service.kubernetes_version #=> String
     #   resp.job_metadata.on_device_service_configuration.eks_on_device_service.eks_anywhere_version #=> String
+    #   resp.job_metadata.on_device_service_configuration.s3_on_device_service.storage_limit #=> Float
+    #   resp.job_metadata.on_device_service_configuration.s3_on_device_service.storage_unit #=> String, one of "TB"
+    #   resp.job_metadata.on_device_service_configuration.s3_on_device_service.service_size #=> Integer
+    #   resp.job_metadata.on_device_service_configuration.s3_on_device_service.fault_tolerance #=> Integer
     #   resp.sub_job_metadata #=> Array
     #   resp.sub_job_metadata[0].job_id #=> String
     #   resp.sub_job_metadata[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.sub_job_metadata[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.sub_job_metadata[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C"
+    #   resp.sub_job_metadata[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C", "V3_5S"
     #   resp.sub_job_metadata[0].creation_date #=> Time
     #   resp.sub_job_metadata[0].resources.s3_resources #=> Array
     #   resp.sub_job_metadata[0].resources.s3_resources[0].bucket_arn #=> String
@@ -1597,7 +1672,7 @@ module Aws::Snowball
     #   resp.sub_job_metadata[0].shipping_details.inbound_shipment.tracking_number #=> String
     #   resp.sub_job_metadata[0].shipping_details.outbound_shipment.status #=> String
     #   resp.sub_job_metadata[0].shipping_details.outbound_shipment.tracking_number #=> String
-    #   resp.sub_job_metadata[0].snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "T8", "T14", "T32", "NoPreference"
+    #   resp.sub_job_metadata[0].snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "T8", "T14", "T32", "NoPreference", "T240"
     #   resp.sub_job_metadata[0].notification.sns_topic_arn #=> String
     #   resp.sub_job_metadata[0].notification.job_states_to_notify #=> Array
     #   resp.sub_job_metadata[0].notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
@@ -1621,6 +1696,10 @@ module Aws::Snowball
     #   resp.sub_job_metadata[0].on_device_service_configuration.tgw_on_device_service.storage_unit #=> String, one of "TB"
     #   resp.sub_job_metadata[0].on_device_service_configuration.eks_on_device_service.kubernetes_version #=> String
     #   resp.sub_job_metadata[0].on_device_service_configuration.eks_on_device_service.eks_anywhere_version #=> String
+    #   resp.sub_job_metadata[0].on_device_service_configuration.s3_on_device_service.storage_limit #=> Float
+    #   resp.sub_job_metadata[0].on_device_service_configuration.s3_on_device_service.storage_unit #=> String, one of "TB"
+    #   resp.sub_job_metadata[0].on_device_service_configuration.s3_on_device_service.service_size #=> Integer
+    #   resp.sub_job_metadata[0].on_device_service_configuration.s3_on_device_service.fault_tolerance #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeJob AWS API Documentation
     #
@@ -1974,7 +2053,7 @@ module Aws::Snowball
     #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_list_entries[0].is_master #=> Boolean
     #   resp.job_list_entries[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C"
+    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C", "V3_5S"
     #   resp.job_list_entries[0].creation_date #=> Time
     #   resp.job_list_entries[0].description #=> String
     #   resp.next_token #=> String
@@ -2056,9 +2135,11 @@ module Aws::Snowball
     # This action returns a list of the different Amazon EC2 Amazon Machine
     # Images (AMIs) that are owned by your Amazon Web Services accountthat
     # would be supported for use on a Snow device. Currently, supported AMIs
-    # are based on the CentOS 7 (x86\_64) - with Updates HVM, Ubuntu Server
-    # 14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM) images, available
-    # on the Amazon Web Services Marketplace.
+    # are based on the Amazon Linux-2, Ubuntu 20.04 LTS - Focal, or Ubuntu
+    # 22.04 LTS - Jammy images, available on the Amazon Web Services
+    # Marketplace. Ubuntu 16.04 LTS - Xenial (HVM) images are no longer
+    # supported in the Market, but still supported for use on devices
+    # through Amazon EC2 VM Import/Export and running locally in AMIs.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results for the list of compatible images.
@@ -2160,7 +2241,7 @@ module Aws::Snowball
     #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_list_entries[0].is_master #=> Boolean
     #   resp.job_list_entries[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C"
+    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C", "V3_5S"
     #   resp.job_list_entries[0].creation_date #=> Time
     #   resp.job_list_entries[0].description #=> String
     #   resp.next_token #=> String
@@ -2203,12 +2284,12 @@ module Aws::Snowball
     #   resp.long_term_pricing_entries[0].long_term_pricing_id #=> String
     #   resp.long_term_pricing_entries[0].long_term_pricing_end_date #=> Time
     #   resp.long_term_pricing_entries[0].long_term_pricing_start_date #=> Time
-    #   resp.long_term_pricing_entries[0].long_term_pricing_type #=> String, one of "OneYear", "ThreeYear"
+    #   resp.long_term_pricing_entries[0].long_term_pricing_type #=> String, one of "OneYear", "ThreeYear", "OneMonth"
     #   resp.long_term_pricing_entries[0].current_active_job #=> String
     #   resp.long_term_pricing_entries[0].replacement_job #=> String
     #   resp.long_term_pricing_entries[0].is_long_term_pricing_auto_renew #=> Boolean
     #   resp.long_term_pricing_entries[0].long_term_pricing_status #=> String
-    #   resp.long_term_pricing_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C"
+    #   resp.long_term_pricing_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S", "SNC1_HDD", "SNC1_SSD", "V3_5C", "V3_5S"
     #   resp.long_term_pricing_entries[0].job_ids #=> Array
     #   resp.long_term_pricing_entries[0].job_ids[0] #=> String
     #   resp.next_token #=> String
@@ -2395,6 +2476,12 @@ module Aws::Snowball
     #         kubernetes_version: "String",
     #         eks_anywhere_version: "String",
     #       },
+    #       s3_on_device_service: {
+    #         storage_limit: 1.0,
+    #         storage_unit: "TB", # accepts TB
+    #         service_size: 1,
+    #         fault_tolerance: 1,
+    #       },
     #     },
     #     address_id: "AddressId",
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
@@ -2541,11 +2628,17 @@ module Aws::Snowball
     #         kubernetes_version: "String",
     #         eks_anywhere_version: "String",
     #       },
+    #       s3_on_device_service: {
+    #         storage_limit: 1.0,
+    #         storage_unit: "TB", # accepts TB
+    #         service_size: 1,
+    #         fault_tolerance: 1,
+    #       },
     #     },
     #     address_id: "AddressId",
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     description: "String",
-    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, T32, NoPreference
+    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, T8, T14, T32, NoPreference, T240
     #     forwarding_address_id: "AddressId",
     #   })
     #
@@ -2636,7 +2729,7 @@ module Aws::Snowball
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-snowball'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

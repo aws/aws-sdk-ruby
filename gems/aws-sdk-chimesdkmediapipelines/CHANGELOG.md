@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2023-04-20)
+------------------
+
+* Feature - This release adds support for specifying the recording file format in an S3 recording sink configuration.
+
 1.4.0 (2023-03-23)
 ------------------
 
