@@ -1579,6 +1579,73 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #   Only contacts in the CHAT channel are supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @!attribute [rw] participant_details
+    #   Information identifying the participant.
+    #
+    #   The only Valid value for `ParticipantRole` is `CUSTOM_BOT`.
+    #
+    #    `DisplayName` is **Required**.
+    #   @return [Types::ParticipantDetailsToAdd]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateParticipantRequest AWS API Documentation
+    #
+    class CreateParticipantRequest < Struct.new(
+      :instance_id,
+      :contact_id,
+      :client_token,
+      :participant_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] participant_credentials
+    #   The token used by the chat participant to call
+    #   `CreateParticipantConnection`. The participant token is valid for
+    #   the lifetime of a chat participant.
+    #   @return [Types::ParticipantTokenCredentials]
+    #
+    # @!attribute [rw] participant_id
+    #   The identifier for a chat participant. The participantId for a chat
+    #   participant is the same throughout the chat lifecycle.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateParticipantResponse AWS API Documentation
+    #
+    class CreateParticipantResponse < Struct.new(
+      :participant_credentials,
+      :participant_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the queue.
     #   @return [String]
@@ -7787,7 +7854,15 @@ module Aws::Connect
     # @!attribute [rw] metric_filter_key
     #   The key to use for filtering data.
     #
-    #   Valid metric filter keys: `INITIATION_METHOD`, `DISCONNECT_REASON`
+    #   Valid metric filter keys: `INITIATION_METHOD`, `DISCONNECT_REASON`.
+    #   These are the same values as the `InitiationMethod` and
+    #   `DisconnectReason` in the contact record. For more information, see
+    #   [ContactTraceRecord][1] in the *Amazon Connect Administrator's
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord
     #   @return [String]
     #
     # @!attribute [rw] metric_filter_values
@@ -8010,6 +8085,25 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The details to add for the participant.
+    #
+    # @!attribute [rw] participant_role
+    #   The role of the participant being added.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the participant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ParticipantDetailsToAdd AWS API Documentation
+    #
+    class ParticipantDetailsToAdd < Struct.new(
+      :participant_role,
+      :display_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration information for the timer. After the timer configuration
     # is set, it persists for the duration of the chat. It persists across
     # new contacts in the chain, for example, transfer contacts.
@@ -8083,6 +8177,32 @@ module Aws::Connect
       class ParticipantTimerAction < ParticipantTimerValue; end
       class ParticipantTimerDurationInMinutes < ParticipantTimerValue; end
       class Unknown < ParticipantTimerValue; end
+    end
+
+    # The credentials used by the participant.
+    #
+    # @!attribute [rw] participant_token
+    #   The token used by the chat participant to call
+    #   [CreateParticipantConnection][1]. The participant token is valid for
+    #   the lifetime of a chat participant.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
+    #   @return [String]
+    #
+    # @!attribute [rw] expiry
+    #   The expiration of the token. It's specified in ISO 8601 format:
+    #   yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ParticipantTokenCredentials AWS API Documentation
+    #
+    class ParticipantTokenCredentials < Struct.new(
+      :participant_token,
+      :expiry)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # Enable persistent chats. For more information about enabling

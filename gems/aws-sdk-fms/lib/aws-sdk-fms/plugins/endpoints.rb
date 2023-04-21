@@ -80,6 +80,8 @@ module Aws::FMS
             Aws::FMS::Endpoints::DisassociateThirdPartyFirewall.build(context)
           when :get_admin_account
             Aws::FMS::Endpoints::GetAdminAccount.build(context)
+          when :get_admin_scope
+            Aws::FMS::Endpoints::GetAdminScope.build(context)
           when :get_apps_list
             Aws::FMS::Endpoints::GetAppsList.build(context)
           when :get_compliance_detail
@@ -98,6 +100,10 @@ module Aws::FMS
             Aws::FMS::Endpoints::GetThirdPartyFirewallAssociationStatus.build(context)
           when :get_violation_details
             Aws::FMS::Endpoints::GetViolationDetails.build(context)
+          when :list_admin_accounts_for_organization
+            Aws::FMS::Endpoints::ListAdminAccountsForOrganization.build(context)
+          when :list_admins_managing_account
+            Aws::FMS::Endpoints::ListAdminsManagingAccount.build(context)
           when :list_apps_lists
             Aws::FMS::Endpoints::ListAppsLists.build(context)
           when :list_compliance_status
@@ -118,6 +124,8 @@ module Aws::FMS
             Aws::FMS::Endpoints::ListTagsForResource.build(context)
           when :list_third_party_firewall_firewall_policies
             Aws::FMS::Endpoints::ListThirdPartyFirewallFirewallPolicies.build(context)
+          when :put_admin_account
+            Aws::FMS::Endpoints::PutAdminAccount.build(context)
           when :put_apps_list
             Aws::FMS::Endpoints::PutAppsList.build(context)
           when :put_notification_channel

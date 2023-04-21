@@ -1303,6 +1303,78 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Adds a new participant into an on-going chat contact. For more
+    # information, see [Customize chat flow experiences by integrating
+    # custom participants][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-customize-flow.html
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact in this instance of Amazon Connect. Only
+    #   contacts in the CHAT channel are supported.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [required, Types::ParticipantDetailsToAdd] :participant_details
+    #   Information identifying the participant.
+    #
+    #   The only Valid value for `ParticipantRole` is `CUSTOM_BOT`.
+    #
+    #    `DisplayName` is **Required**.
+    #
+    # @return [Types::CreateParticipantResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateParticipantResponse#participant_credentials #participant_credentials} => Types::ParticipantTokenCredentials
+    #   * {Types::CreateParticipantResponse#participant_id #participant_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_participant({
+    #     instance_id: "InstanceId", # required
+    #     contact_id: "ContactId", # required
+    #     client_token: "ClientToken",
+    #     participant_details: { # required
+    #       participant_role: "AGENT", # accepts AGENT, CUSTOMER, SYSTEM, CUSTOM_BOT
+    #       display_name: "DisplayName",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.participant_credentials.participant_token #=> String
+    #   resp.participant_credentials.expiry #=> String
+    #   resp.participant_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateParticipant AWS API Documentation
+    #
+    # @overload create_participant(params = {})
+    # @param [Hash] params ({})
+    def create_participant(params = {}, options = {})
+      req = build_request(:create_participant, params)
+      req.send_request(options)
+    end
+
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
@@ -10790,7 +10862,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -15,8 +15,15 @@ module Aws::FMS
 
     AWSAccountId = Shapes::StringShape.new(name: 'AWSAccountId')
     AWSAccountIdList = Shapes::ListShape.new(name: 'AWSAccountIdList')
+    AWSRegion = Shapes::StringShape.new(name: 'AWSRegion')
+    AWSRegionList = Shapes::ListShape.new(name: 'AWSRegionList')
+    AccountIdList = Shapes::ListShape.new(name: 'AccountIdList')
     AccountRoleStatus = Shapes::StringShape.new(name: 'AccountRoleStatus')
+    AccountScope = Shapes::StructureShape.new(name: 'AccountScope')
     ActionTarget = Shapes::StructureShape.new(name: 'ActionTarget')
+    AdminAccountSummary = Shapes::StructureShape.new(name: 'AdminAccountSummary')
+    AdminAccountSummaryList = Shapes::ListShape.new(name: 'AdminAccountSummaryList')
+    AdminScope = Shapes::StructureShape.new(name: 'AdminScope')
     App = Shapes::StructureShape.new(name: 'App')
     AppsList = Shapes::ListShape.new(name: 'AppsList')
     AppsListData = Shapes::StructureShape.new(name: 'AppsListData')
@@ -44,6 +51,7 @@ module Aws::FMS
     CustomerPolicyScopeIdList = Shapes::ListShape.new(name: 'CustomerPolicyScopeIdList')
     CustomerPolicyScopeIdType = Shapes::StringShape.new(name: 'CustomerPolicyScopeIdType')
     CustomerPolicyScopeMap = Shapes::MapShape.new(name: 'CustomerPolicyScopeMap')
+    CustomerPolicyStatus = Shapes::StringShape.new(name: 'CustomerPolicyStatus')
     DeleteAppsListRequest = Shapes::StructureShape.new(name: 'DeleteAppsListRequest')
     DeleteNotificationChannelRequest = Shapes::StructureShape.new(name: 'DeleteNotificationChannelRequest')
     DeletePolicyRequest = Shapes::StructureShape.new(name: 'DeletePolicyRequest')
@@ -86,6 +94,8 @@ module Aws::FMS
     FirewallSubnetMissingVPCEndpointViolation = Shapes::StructureShape.new(name: 'FirewallSubnetMissingVPCEndpointViolation')
     GetAdminAccountRequest = Shapes::StructureShape.new(name: 'GetAdminAccountRequest')
     GetAdminAccountResponse = Shapes::StructureShape.new(name: 'GetAdminAccountResponse')
+    GetAdminScopeRequest = Shapes::StructureShape.new(name: 'GetAdminScopeRequest')
+    GetAdminScopeResponse = Shapes::StructureShape.new(name: 'GetAdminScopeResponse')
     GetAppsListRequest = Shapes::StructureShape.new(name: 'GetAppsListRequest')
     GetAppsListResponse = Shapes::StructureShape.new(name: 'GetAppsListResponse')
     GetComplianceDetailRequest = Shapes::StructureShape.new(name: 'GetComplianceDetailRequest')
@@ -115,6 +125,10 @@ module Aws::FMS
     LengthBoundedString = Shapes::StringShape.new(name: 'LengthBoundedString')
     LengthBoundedStringList = Shapes::ListShape.new(name: 'LengthBoundedStringList')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListAdminAccountsForOrganizationRequest = Shapes::StructureShape.new(name: 'ListAdminAccountsForOrganizationRequest')
+    ListAdminAccountsForOrganizationResponse = Shapes::StructureShape.new(name: 'ListAdminAccountsForOrganizationResponse')
+    ListAdminsManagingAccountRequest = Shapes::StructureShape.new(name: 'ListAdminsManagingAccountRequest')
+    ListAdminsManagingAccountResponse = Shapes::StructureShape.new(name: 'ListAdminsManagingAccountResponse')
     ListAppsListsRequest = Shapes::StructureShape.new(name: 'ListAppsListsRequest')
     ListAppsListsResponse = Shapes::StructureShape.new(name: 'ListAppsListsResponse')
     ListComplianceStatusRequest = Shapes::StructureShape.new(name: 'ListComplianceStatusRequest')
@@ -158,6 +172,10 @@ module Aws::FMS
     NetworkFirewallUnexpectedFirewallRoutesViolation = Shapes::StructureShape.new(name: 'NetworkFirewallUnexpectedFirewallRoutesViolation')
     NetworkFirewallUnexpectedGatewayRoutesViolation = Shapes::StructureShape.new(name: 'NetworkFirewallUnexpectedGatewayRoutesViolation')
     OrderedRemediationActions = Shapes::ListShape.new(name: 'OrderedRemediationActions')
+    OrganizationStatus = Shapes::StringShape.new(name: 'OrganizationStatus')
+    OrganizationalUnitId = Shapes::StringShape.new(name: 'OrganizationalUnitId')
+    OrganizationalUnitIdList = Shapes::ListShape.new(name: 'OrganizationalUnitIdList')
+    OrganizationalUnitScope = Shapes::StructureShape.new(name: 'OrganizationalUnitScope')
     PaginationMaxResults = Shapes::IntegerShape.new(name: 'PaginationMaxResults')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PartialMatch = Shapes::StructureShape.new(name: 'PartialMatch')
@@ -171,6 +189,7 @@ module Aws::FMS
     PolicyOption = Shapes::StructureShape.new(name: 'PolicyOption')
     PolicySummary = Shapes::StructureShape.new(name: 'PolicySummary')
     PolicySummaryList = Shapes::ListShape.new(name: 'PolicySummaryList')
+    PolicyTypeScope = Shapes::StructureShape.new(name: 'PolicyTypeScope')
     PolicyUpdateToken = Shapes::StringShape.new(name: 'PolicyUpdateToken')
     PossibleRemediationAction = Shapes::StructureShape.new(name: 'PossibleRemediationAction')
     PossibleRemediationActionList = Shapes::ListShape.new(name: 'PossibleRemediationActionList')
@@ -185,6 +204,7 @@ module Aws::FMS
     ProtocolsListData = Shapes::StructureShape.new(name: 'ProtocolsListData')
     ProtocolsListDataSummary = Shapes::StructureShape.new(name: 'ProtocolsListDataSummary')
     ProtocolsListsData = Shapes::ListShape.new(name: 'ProtocolsListsData')
+    PutAdminAccountRequest = Shapes::StructureShape.new(name: 'PutAdminAccountRequest')
     PutAppsListRequest = Shapes::StructureShape.new(name: 'PutAppsListRequest')
     PutAppsListResponse = Shapes::StructureShape.new(name: 'PutAppsListResponse')
     PutNotificationChannelRequest = Shapes::StructureShape.new(name: 'PutNotificationChannelRequest')
@@ -195,6 +215,7 @@ module Aws::FMS
     PutResourceSetRequest = Shapes::StructureShape.new(name: 'PutResourceSetRequest')
     PutResourceSetResponse = Shapes::StructureShape.new(name: 'PutResourceSetResponse')
     ReferenceRule = Shapes::StringShape.new(name: 'ReferenceRule')
+    RegionScope = Shapes::StructureShape.new(name: 'RegionScope')
     RemediationAction = Shapes::StructureShape.new(name: 'RemediationAction')
     RemediationActionDescription = Shapes::StringShape.new(name: 'RemediationActionDescription')
     RemediationActionType = Shapes::StringShape.new(name: 'RemediationActionType')
@@ -210,6 +231,7 @@ module Aws::FMS
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceSet = Shapes::StructureShape.new(name: 'ResourceSet')
     ResourceSetIds = Shapes::ListShape.new(name: 'ResourceSetIds')
+    ResourceSetStatus = Shapes::StringShape.new(name: 'ResourceSetStatus')
     ResourceSetSummary = Shapes::StructureShape.new(name: 'ResourceSetSummary')
     ResourceSetSummaryList = Shapes::ListShape.new(name: 'ResourceSetSummaryList')
     ResourceTag = Shapes::StructureShape.new(name: 'ResourceTag')
@@ -229,6 +251,7 @@ module Aws::FMS
     SecurityGroupRuleDescription = Shapes::StructureShape.new(name: 'SecurityGroupRuleDescription')
     SecurityServicePolicyData = Shapes::StructureShape.new(name: 'SecurityServicePolicyData')
     SecurityServiceType = Shapes::StringShape.new(name: 'SecurityServiceType')
+    SecurityServiceTypeList = Shapes::ListShape.new(name: 'SecurityServiceTypeList')
     StatefulEngineOptions = Shapes::StructureShape.new(name: 'StatefulEngineOptions')
     StatefulRuleGroup = Shapes::StructureShape.new(name: 'StatefulRuleGroup')
     StatefulRuleGroupList = Shapes::ListShape.new(name: 'StatefulRuleGroupList')
@@ -263,9 +286,31 @@ module Aws::FMS
 
     AWSAccountIdList.member = Shapes::ShapeRef.new(shape: AWSAccountId)
 
+    AWSRegionList.member = Shapes::ShapeRef.new(shape: AWSRegion)
+
+    AccountIdList.member = Shapes::ShapeRef.new(shape: AWSAccountId)
+
+    AccountScope.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "Accounts"))
+    AccountScope.add_member(:all_accounts_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllAccountsEnabled"))
+    AccountScope.add_member(:exclude_specified_accounts, Shapes::ShapeRef.new(shape: Boolean, location_name: "ExcludeSpecifiedAccounts"))
+    AccountScope.struct_class = Types::AccountScope
+
     ActionTarget.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId"))
     ActionTarget.add_member(:description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Description"))
     ActionTarget.struct_class = Types::ActionTarget
+
+    AdminAccountSummary.add_member(:admin_account, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "AdminAccount"))
+    AdminAccountSummary.add_member(:default_admin, Shapes::ShapeRef.new(shape: Boolean, location_name: "DefaultAdmin"))
+    AdminAccountSummary.add_member(:status, Shapes::ShapeRef.new(shape: OrganizationStatus, location_name: "Status"))
+    AdminAccountSummary.struct_class = Types::AdminAccountSummary
+
+    AdminAccountSummaryList.member = Shapes::ShapeRef.new(shape: AdminAccountSummary)
+
+    AdminScope.add_member(:account_scope, Shapes::ShapeRef.new(shape: AccountScope, location_name: "AccountScope"))
+    AdminScope.add_member(:organizational_unit_scope, Shapes::ShapeRef.new(shape: OrganizationalUnitScope, location_name: "OrganizationalUnitScope"))
+    AdminScope.add_member(:region_scope, Shapes::ShapeRef.new(shape: RegionScope, location_name: "RegionScope"))
+    AdminScope.add_member(:policy_type_scope, Shapes::ShapeRef.new(shape: PolicyTypeScope, location_name: "PolicyTypeScope"))
+    AdminScope.struct_class = Types::AdminScope
 
     App.add_member(:app_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AppName"))
     App.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, required: true, location_name: "Protocol"))
@@ -487,6 +532,13 @@ module Aws::FMS
     GetAdminAccountResponse.add_member(:role_status, Shapes::ShapeRef.new(shape: AccountRoleStatus, location_name: "RoleStatus"))
     GetAdminAccountResponse.struct_class = Types::GetAdminAccountResponse
 
+    GetAdminScopeRequest.add_member(:admin_account, Shapes::ShapeRef.new(shape: AWSAccountId, required: true, location_name: "AdminAccount"))
+    GetAdminScopeRequest.struct_class = Types::GetAdminScopeRequest
+
+    GetAdminScopeResponse.add_member(:admin_scope, Shapes::ShapeRef.new(shape: AdminScope, location_name: "AdminScope"))
+    GetAdminScopeResponse.add_member(:status, Shapes::ShapeRef.new(shape: OrganizationStatus, location_name: "Status"))
+    GetAdminScopeResponse.struct_class = Types::GetAdminScopeResponse
+
     GetAppsListRequest.add_member(:list_id, Shapes::ShapeRef.new(shape: ListId, required: true, location_name: "ListId"))
     GetAppsListRequest.add_member(:default_list, Shapes::ShapeRef.new(shape: Boolean, location_name: "DefaultList"))
     GetAppsListRequest.struct_class = Types::GetAppsListRequest
@@ -581,6 +633,22 @@ module Aws::FMS
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     LimitExceededException.struct_class = Types::LimitExceededException
+
+    ListAdminAccountsForOrganizationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListAdminAccountsForOrganizationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
+    ListAdminAccountsForOrganizationRequest.struct_class = Types::ListAdminAccountsForOrganizationRequest
+
+    ListAdminAccountsForOrganizationResponse.add_member(:admin_accounts, Shapes::ShapeRef.new(shape: AdminAccountSummaryList, location_name: "AdminAccounts"))
+    ListAdminAccountsForOrganizationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListAdminAccountsForOrganizationResponse.struct_class = Types::ListAdminAccountsForOrganizationResponse
+
+    ListAdminsManagingAccountRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListAdminsManagingAccountRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
+    ListAdminsManagingAccountRequest.struct_class = Types::ListAdminsManagingAccountRequest
+
+    ListAdminsManagingAccountResponse.add_member(:admin_accounts, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "AdminAccounts"))
+    ListAdminsManagingAccountResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListAdminsManagingAccountResponse.struct_class = Types::ListAdminsManagingAccountResponse
 
     ListAppsListsRequest.add_member(:default_lists, Shapes::ShapeRef.new(shape: Boolean, location_name: "DefaultLists"))
     ListAppsListsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
@@ -771,6 +839,13 @@ module Aws::FMS
 
     OrderedRemediationActions.member = Shapes::ShapeRef.new(shape: RemediationActionWithOrder)
 
+    OrganizationalUnitIdList.member = Shapes::ShapeRef.new(shape: OrganizationalUnitId)
+
+    OrganizationalUnitScope.add_member(:organizational_units, Shapes::ShapeRef.new(shape: OrganizationalUnitIdList, location_name: "OrganizationalUnits"))
+    OrganizationalUnitScope.add_member(:all_organizational_units_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllOrganizationalUnitsEnabled"))
+    OrganizationalUnitScope.add_member(:exclude_specified_organizational_units, Shapes::ShapeRef.new(shape: Boolean, location_name: "ExcludeSpecifiedOrganizationalUnits"))
+    OrganizationalUnitScope.struct_class = Types::OrganizationalUnitScope
+
     PartialMatch.add_member(:reference, Shapes::ShapeRef.new(shape: ReferenceRule, location_name: "Reference"))
     PartialMatch.add_member(:target_violation_reasons, Shapes::ShapeRef.new(shape: TargetViolationReasons, location_name: "TargetViolationReasons"))
     PartialMatch.struct_class = Types::PartialMatch
@@ -791,6 +866,7 @@ module Aws::FMS
     Policy.add_member(:exclude_map, Shapes::ShapeRef.new(shape: CustomerPolicyScopeMap, location_name: "ExcludeMap"))
     Policy.add_member(:resource_set_ids, Shapes::ShapeRef.new(shape: ResourceSetIds, location_name: "ResourceSetIds"))
     Policy.add_member(:policy_description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "PolicyDescription"))
+    Policy.add_member(:policy_status, Shapes::ShapeRef.new(shape: CustomerPolicyStatus, location_name: "PolicyStatus"))
     Policy.struct_class = Types::Policy
 
     PolicyComplianceDetail.add_member(:policy_owner, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "PolicyOwner"))
@@ -824,9 +900,14 @@ module Aws::FMS
     PolicySummary.add_member(:security_service_type, Shapes::ShapeRef.new(shape: SecurityServiceType, location_name: "SecurityServiceType"))
     PolicySummary.add_member(:remediation_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "RemediationEnabled"))
     PolicySummary.add_member(:delete_unused_fm_managed_resources, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteUnusedFMManagedResources"))
+    PolicySummary.add_member(:policy_status, Shapes::ShapeRef.new(shape: CustomerPolicyStatus, location_name: "PolicyStatus"))
     PolicySummary.struct_class = Types::PolicySummary
 
     PolicySummaryList.member = Shapes::ShapeRef.new(shape: PolicySummary)
+
+    PolicyTypeScope.add_member(:policy_types, Shapes::ShapeRef.new(shape: SecurityServiceTypeList, location_name: "PolicyTypes"))
+    PolicyTypeScope.add_member(:all_policy_types_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllPolicyTypesEnabled"))
+    PolicyTypeScope.struct_class = Types::PolicyTypeScope
 
     PossibleRemediationAction.add_member(:description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Description"))
     PossibleRemediationAction.add_member(:ordered_remediation_actions, Shapes::ShapeRef.new(shape: OrderedRemediationActions, required: true, location_name: "OrderedRemediationActions"))
@@ -864,6 +945,10 @@ module Aws::FMS
 
     ProtocolsListsData.member = Shapes::ShapeRef.new(shape: ProtocolsListDataSummary)
 
+    PutAdminAccountRequest.add_member(:admin_account, Shapes::ShapeRef.new(shape: AWSAccountId, required: true, location_name: "AdminAccount"))
+    PutAdminAccountRequest.add_member(:admin_scope, Shapes::ShapeRef.new(shape: AdminScope, location_name: "AdminScope"))
+    PutAdminAccountRequest.struct_class = Types::PutAdminAccountRequest
+
     PutAppsListRequest.add_member(:apps_list, Shapes::ShapeRef.new(shape: AppsListData, required: true, location_name: "AppsList"))
     PutAppsListRequest.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     PutAppsListRequest.struct_class = Types::PutAppsListRequest
@@ -900,6 +985,10 @@ module Aws::FMS
     PutResourceSetResponse.add_member(:resource_set_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceSetArn"))
     PutResourceSetResponse.struct_class = Types::PutResourceSetResponse
 
+    RegionScope.add_member(:regions, Shapes::ShapeRef.new(shape: AWSRegionList, location_name: "Regions"))
+    RegionScope.add_member(:all_regions_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllRegionsEnabled"))
+    RegionScope.struct_class = Types::RegionScope
+
     RemediationAction.add_member(:description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Description"))
     RemediationAction.add_member(:ec2_create_route_action, Shapes::ShapeRef.new(shape: EC2CreateRouteAction, location_name: "EC2CreateRouteAction"))
     RemediationAction.add_member(:ec2_replace_route_action, Shapes::ShapeRef.new(shape: EC2ReplaceRouteAction, location_name: "EC2ReplaceRouteAction"))
@@ -932,6 +1021,7 @@ module Aws::FMS
     ResourceSet.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
     ResourceSet.add_member(:resource_type_list, Shapes::ShapeRef.new(shape: ResourceTypeList, required: true, location_name: "ResourceTypeList"))
     ResourceSet.add_member(:last_update_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "LastUpdateTime"))
+    ResourceSet.add_member(:resource_set_status, Shapes::ShapeRef.new(shape: ResourceSetStatus, location_name: "ResourceSetStatus"))
     ResourceSet.struct_class = Types::ResourceSet
 
     ResourceSetIds.member = Shapes::ShapeRef.new(shape: Base62Id)
@@ -940,6 +1030,7 @@ module Aws::FMS
     ResourceSetSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     ResourceSetSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     ResourceSetSummary.add_member(:last_update_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "LastUpdateTime"))
+    ResourceSetSummary.add_member(:resource_set_status, Shapes::ShapeRef.new(shape: ResourceSetStatus, location_name: "ResourceSetStatus"))
     ResourceSetSummary.struct_class = Types::ResourceSetSummary
 
     ResourceSetSummaryList.member = Shapes::ShapeRef.new(shape: ResourceSetSummary)
@@ -1021,6 +1112,8 @@ module Aws::FMS
     SecurityServicePolicyData.add_member(:managed_service_data, Shapes::ShapeRef.new(shape: ManagedServiceData, location_name: "ManagedServiceData"))
     SecurityServicePolicyData.add_member(:policy_option, Shapes::ShapeRef.new(shape: PolicyOption, location_name: "PolicyOption"))
     SecurityServicePolicyData.struct_class = Types::SecurityServicePolicyData
+
+    SecurityServiceTypeList.member = Shapes::ShapeRef.new(shape: SecurityServiceType)
 
     StatefulEngineOptions.add_member(:rule_order, Shapes::ShapeRef.new(shape: RuleOrder, location_name: "RuleOrder"))
     StatefulEngineOptions.struct_class = Types::StatefulEngineOptions
@@ -1260,6 +1353,18 @@ module Aws::FMS
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
+      api.add_operation(:get_admin_scope, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAdminScope"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAdminScopeRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAdminScopeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
       api.add_operation(:get_apps_list, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAppsList"
         o.http_method = "POST"
@@ -1361,6 +1466,40 @@ module Aws::FMS
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
+      api.add_operation(:list_admin_accounts_for_organization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAdminAccountsForOrganization"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAdminAccountsForOrganizationRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAdminAccountsForOrganizationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_admins_managing_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAdminsManagingAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAdminsManagingAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAdminsManagingAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_apps_lists, Seahorse::Model::Operation.new.tap do |o|
@@ -1510,6 +1649,18 @@ module Aws::FMS
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:put_admin_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAdminAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutAdminAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:put_apps_list, Seahorse::Model::Operation.new.tap do |o|

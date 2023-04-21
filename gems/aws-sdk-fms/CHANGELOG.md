@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2023-04-21)
+------------------
+
+* Feature - AWS Firewall Manager adds support for multiple administrators. You can now delegate more than one administrator per organization.
+
 1.55.0 (2023-01-18)
 ------------------
 

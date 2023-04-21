@@ -10,6 +10,52 @@
 module Aws::FMS
   module Types
 
+    # Configures the accounts within the administrator's Organizations
+    # organization that the specified Firewall Manager administrator can
+    # apply policies to.
+    #
+    # @!attribute [rw] accounts
+    #   The list of accounts within the organization that the specified
+    #   Firewall Manager administrator either can or cannot apply policies
+    #   to, based on the value of `ExcludeSpecifiedAccounts`. If
+    #   `ExcludeSpecifiedAccounts` is set to `true`, then the Firewall
+    #   Manager administrator can apply policies to all members of the
+    #   organization except for the accounts in this list. If
+    #   `ExcludeSpecifiedAccounts` is set to `false`, then the Firewall
+    #   Manager administrator can only apply policies to the accounts in
+    #   this list.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] all_accounts_enabled
+    #   A boolean value that indicates if the administrator can apply
+    #   policies to all accounts within an organization. If true, the
+    #   administrator can apply policies to all accounts within the
+    #   organization. You can either enable management of all accounts
+    #   through this operation, or you can specify a list of accounts to
+    #   manage in `AccountScope$Accounts`. You cannot specify both.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] exclude_specified_accounts
+    #   A boolean value that excludes the accounts in
+    #   `AccountScope$Accounts` from the administrator's scope. If true,
+    #   the Firewall Manager administrator can apply policies to all members
+    #   of the organization except for the accounts listed in
+    #   `AccountScope$Accounts`. You can either specify a list of accounts
+    #   to exclude by `AccountScope$Accounts`, or you can enable management
+    #   of all accounts by `AccountScope$AllAccountsEnabled`. You cannot
+    #   specify both.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/AccountScope AWS API Documentation
+    #
+    class AccountScope < Struct.new(
+      :accounts,
+      :all_accounts_enabled,
+      :exclude_specified_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a remediation action target.
     #
     # @!attribute [rw] resource_id
@@ -25,6 +71,103 @@ module Aws::FMS
     class ActionTarget < Struct.new(
       :resource_id,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains high level information about the Firewall Manager
+    # administrator account.
+    #
+    # @!attribute [rw] admin_account
+    #   The Amazon Web Services account ID of the Firewall Manager
+    #   administrator's account.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_admin
+    #   A boolean value that indicates if the administrator is the default
+    #   administrator. If true, then this is the default administrator
+    #   account. The default administrator can manage third-party firewalls
+    #   and has full administrative scope. There is only one default
+    #   administrator account per organization. For information about
+    #   Firewall Manager default administrator accounts, see [Managing
+    #   Firewall Manager administrators][1] in the *Firewall Manager
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/fms-administrators.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   The current status of the request to onboard a member account as an
+    #   Firewall Manager administator.
+    #
+    #   * `ONBOARDING` - The account is onboarding to Firewall Manager as an
+    #     administrator.
+    #
+    #   * `ONBOARDING_COMPLETE` - Firewall Manager The account is onboarded
+    #     to Firewall Manager as an administrator, and can perform actions
+    #     on the resources defined in their AdminScope.
+    #
+    #   * `OFFBOARDING` - The account is being removed as an Firewall
+    #     Manager administrator.
+    #
+    #   * `OFFBOARDING_COMPLETE` - The account has been removed as an
+    #     Firewall Manager administrator.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/AdminAccountSummary AWS API Documentation
+    #
+    class AdminAccountSummary < Struct.new(
+      :admin_account,
+      :default_admin,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the resources that the Firewall Manager administrator can
+    # manage. For more information about administrative scope, see [Managing
+    # Firewall Manager administrators][1] in the *Firewall Manager Developer
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/fms-administrators.html
+    #
+    # @!attribute [rw] account_scope
+    #   Defines the accounts that the specified Firewall Manager
+    #   administrator can apply policies to.
+    #   @return [Types::AccountScope]
+    #
+    # @!attribute [rw] organizational_unit_scope
+    #   Defines the Organizations organizational units that the specified
+    #   Firewall Manager administrator can apply policies to. For more
+    #   information about OUs in Organizations, see [Managing organizational
+    #   units (OUs) ][1] in the *Organizations User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_ous.html
+    #   @return [Types::OrganizationalUnitScope]
+    #
+    # @!attribute [rw] region_scope
+    #   Defines the Amazon Web Services Regions that the specified Firewall
+    #   Manager administrator can perform actions in.
+    #   @return [Types::RegionScope]
+    #
+    # @!attribute [rw] policy_type_scope
+    #   Defines the Firewall Manager policy types that the specified
+    #   Firewall Manager administrator can create and manage.
+    #   @return [Types::PolicyTypeScope]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/AdminScope AWS API Documentation
+    #
+    class AdminScope < Struct.new(
+      :account_scope,
+      :organizational_unit_scope,
+      :region_scope,
+      :policy_type_scope)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -139,10 +282,11 @@ module Aws::FMS
 
     # @!attribute [rw] admin_account
     #   The Amazon Web Services account ID to associate with Firewall
-    #   Manager as the Firewall Manager administrator account. This must be
-    #   an Organizations member account. For more information about
-    #   Organizations, see [Managing the Amazon Web Services Accounts in
-    #   Your Organization][1].
+    #   Manager as the Firewall Manager default administrator account. This
+    #   account must be a member account of the organization in
+    #   Organizations whose resources you want to protect. For more
+    #   information about Organizations, see [Managing the Amazon Web
+    #   Services Accounts in Your Organization][1].
     #
     #
     #
@@ -271,8 +415,8 @@ module Aws::FMS
     end
 
     # @!attribute [rw] resource_set_identifier
-    #   A unique identifier for the resource set, used in a TODO to refer to
-    #   the resource set.
+    #   A unique identifier for the resource set, used in a request to refer
+    #   to the resource set.
     #   @return [String]
     #
     # @!attribute [rw] items
@@ -291,8 +435,8 @@ module Aws::FMS
     end
 
     # @!attribute [rw] resource_set_identifier
-    #   A unique identifier for the resource set, used in a TODO to refer to
-    #   the resource set.
+    #   A unique identifier for the resource set, used in a request to refer
+    #   to the resource set.
     #   @return [String]
     #
     # @!attribute [rw] failed_items
@@ -309,8 +453,8 @@ module Aws::FMS
     end
 
     # @!attribute [rw] resource_set_identifier
-    #   A unique identifier for the resource set, used in a TODO to refer to
-    #   the resource set.
+    #   A unique identifier for the resource set, used in a request to refer
+    #   to the resource set.
     #   @return [String]
     #
     # @!attribute [rw] items
@@ -329,8 +473,8 @@ module Aws::FMS
     end
 
     # @!attribute [rw] resource_set_identifier
-    #   A unique identifier for the resource set, used in a TODO to refer to
-    #   the resource set.
+    #   A unique identifier for the resource set, used in a request to refer
+    #   to the resource set.
     #   @return [String]
     #
     # @!attribute [rw] failed_items
@@ -465,8 +609,8 @@ module Aws::FMS
     end
 
     # @!attribute [rw] identifier
-    #   A unique identifier for the resource set, used in a TODO to refer to
-    #   the resource set.
+    #   A unique identifier for the resource set, used in a request to refer
+    #   to the resource set.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/DeleteResourceSetRequest AWS API Documentation
@@ -1061,13 +1205,13 @@ module Aws::FMS
     class GetAdminAccountRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] admin_account
-    #   The Amazon Web Services account that is set as the Firewall Manager
+    #   The account that is set as the Firewall Manager default
     #   administrator.
     #   @return [String]
     #
     # @!attribute [rw] role_status
-    #   The status of the Amazon Web Services account that you set as the
-    #   Firewall Manager administrator.
+    #   The status of the account that you set as the Firewall Manager
+    #   default administrator.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetAdminAccountResponse AWS API Documentation
@@ -1075,6 +1219,50 @@ module Aws::FMS
     class GetAdminAccountResponse < Struct.new(
       :admin_account,
       :role_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] admin_account
+    #   The administator account that you want to get the details for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetAdminScopeRequest AWS API Documentation
+    #
+    class GetAdminScopeRequest < Struct.new(
+      :admin_account)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] admin_scope
+    #   Contains details about the administrative scope of the requested
+    #   account.
+    #   @return [Types::AdminScope]
+    #
+    # @!attribute [rw] status
+    #   The current status of the request to onboard a member account as an
+    #   Firewall Manager administator.
+    #
+    #   * `ONBOARDING` - The account is onboarding to Firewall Manager as an
+    #     administrator.
+    #
+    #   * `ONBOARDING_COMPLETE` - Firewall Manager The account is onboarded
+    #     to Firewall Manager as an administrator, and can perform actions
+    #     on the resources defined in their AdminScope.
+    #
+    #   * `OFFBOARDING` - The account is being removed as an Firewall
+    #     Manager administrator.
+    #
+    #   * `OFFBOARDING_COMPLETE` - The account has been removed as an
+    #     Firewall Manager administrator.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetAdminScopeResponse AWS API Documentation
+    #
+    class GetAdminScopeResponse < Struct.new(
+      :admin_scope,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1342,8 +1530,8 @@ module Aws::FMS
     end
 
     # @!attribute [rw] identifier
-    #   A unique identifier for the resource set, used in a TODO to refer to
-    #   the resource set.
+    #   A unique identifier for the resource set, used in a request to refer
+    #   to the resource set.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetResourceSetRequest AWS API Documentation
@@ -1554,6 +1742,99 @@ module Aws::FMS
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Firewall Manager returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects that you want Firewall Manager to
+    #   return for this request. If more objects are available, in the
+    #   response, Firewall Manager provides a `NextToken` value that you can
+    #   use in a subsequent call to get the next batch of objects.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListAdminAccountsForOrganizationRequest AWS API Documentation
+    #
+    class ListAdminAccountsForOrganizationRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] admin_accounts
+    #   A list of Firewall Manager administrator accounts within the
+    #   organization that were onboarded as administrators by
+    #   AssociateAdminAccount or PutAdminAccount.
+    #   @return [Array<Types::AdminAccountSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Firewall Manager returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListAdminAccountsForOrganizationResponse AWS API Documentation
+    #
+    class ListAdminAccountsForOrganizationResponse < Struct.new(
+      :admin_accounts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Firewall Manager returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects that you want Firewall Manager to
+    #   return for this request. If more objects are available, in the
+    #   response, Firewall Manager provides a `NextToken` value that you can
+    #   use in a subsequent call to get the next batch of objects.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListAdminsManagingAccountRequest AWS API Documentation
+    #
+    class ListAdminsManagingAccountRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] admin_accounts
+    #   The list of accounts who manage member accounts within their
+    #   AdminScope.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Firewall Manager returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListAdminsManagingAccountResponse AWS API Documentation
+    #
+    class ListAdminsManagingAccountResponse < Struct.new(
+      :admin_accounts,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1873,8 +2154,8 @@ module Aws::FMS
     end
 
     # @!attribute [rw] identifier
-    #   A unique identifier for the resource set, used in a TODO to refer to
-    #   the resource set.
+    #   A unique identifier for the resource set, used in a request to refer
+    #   to the resource set.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2582,6 +2863,62 @@ module Aws::FMS
       include Aws::Structure
     end
 
+    # Defines the Organizations organizational units (OUs) that the
+    # specified Firewall Manager administrator can apply policies to. For
+    # more information about OUs in Organizations, see [Managing
+    # organizational units (OUs) ][1] in the *Organizations User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_ous.html
+    #
+    # @!attribute [rw] organizational_units
+    #   The list of OUs within the organization that the specified Firewall
+    #   Manager administrator either can or cannot apply policies to, based
+    #   on the value of
+    #   `OrganizationalUnitScope$ExcludeSpecifiedOrganizationalUnits`. If
+    #   `OrganizationalUnitScope$ExcludeSpecifiedOrganizationalUnits` is set
+    #   to `true`, then the Firewall Manager administrator can apply
+    #   policies to all OUs in the organization except for the OUs in this
+    #   list. If
+    #   `OrganizationalUnitScope$ExcludeSpecifiedOrganizationalUnits` is set
+    #   to `false`, then the Firewall Manager administrator can only apply
+    #   policies to the OUs in this list.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] all_organizational_units_enabled
+    #   A boolean value that indicates if the administrator can apply
+    #   policies to all OUs within an organization. If true, the
+    #   administrator can manage all OUs within the organization. You can
+    #   either enable management of all OUs through this operation, or you
+    #   can specify OUs to manage in
+    #   `OrganizationalUnitScope$OrganizationalUnits`. You cannot specify
+    #   both.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] exclude_specified_organizational_units
+    #   A boolean value that excludes the OUs in
+    #   `OrganizationalUnitScope$OrganizationalUnits` from the
+    #   administrator's scope. If true, the Firewall Manager administrator
+    #   can apply policies to all OUs in the organization except for the OUs
+    #   listed in `OrganizationalUnitScope$OrganizationalUnits`. You can
+    #   either specify a list of OUs to exclude by
+    #   `OrganizationalUnitScope$OrganizationalUnits`, or you can enable
+    #   management of all OUs by
+    #   `OrganizationalUnitScope$AllOrganizationalUnitsEnabled`. You cannot
+    #   specify both.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/OrganizationalUnitScope AWS API Documentation
+    #
+    class OrganizationalUnitScope < Struct.new(
+      :organizational_units,
+      :all_organizational_units_enabled,
+      :exclude_specified_organizational_units)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The reference rule that partially matches the `ViolationTarget` rule
     # and violation reason.
     #
@@ -2755,6 +3092,18 @@ module Aws::FMS
     #   The definition of the Network Firewall firewall policy.
     #   @return [String]
     #
+    # @!attribute [rw] policy_status
+    #   Indicates whether the policy is in or out of an admin's policy or
+    #   Region scope.
+    #
+    #   * `ACTIVE` - The administrator can manage and delete the policy.
+    #
+    #   * `OUT_OF_ADMIN_SCOPE` - The administrator can view the policy, but
+    #     they can't edit or delete the policy. Existing policy protections
+    #     stay in place. Any new resources that come into scope of the
+    #     policy won't be protected.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/Policy AWS API Documentation
     #
     class Policy < Struct.new(
@@ -2771,7 +3120,8 @@ module Aws::FMS
       :include_map,
       :exclude_map,
       :resource_set_ids,
-      :policy_description)
+      :policy_description,
+      :policy_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2959,6 +3309,18 @@ module Aws::FMS
     #   policies.
     #   @return [Boolean]
     #
+    # @!attribute [rw] policy_status
+    #   Indicates whether the policy is in or out of an admin's policy or
+    #   Region scope.
+    #
+    #   * `ACTIVE` - The administrator can manage and delete the policy.
+    #
+    #   * `OUT_OF_ADMIN_SCOPE` - The administrator can view the policy, but
+    #     they can't edit or delete the policy. Existing policy protections
+    #     stay in place. Any new resources that come into scope of the
+    #     policy won't be protected.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PolicySummary AWS API Documentation
     #
     class PolicySummary < Struct.new(
@@ -2968,7 +3330,32 @@ module Aws::FMS
       :resource_type,
       :security_service_type,
       :remediation_enabled,
-      :delete_unused_fm_managed_resources)
+      :delete_unused_fm_managed_resources,
+      :policy_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the policy types that the specified Firewall Manager
+    # administrator can manage.
+    #
+    # @!attribute [rw] policy_types
+    #   The list of policy types that the specified Firewall Manager
+    #   administrator can manage.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] all_policy_types_enabled
+    #   Allows the specified Firewall Manager administrator to manage all
+    #   Firewall Manager policy types, except for third-party policy types.
+    #   Third-party policy types can only be managed by the Firewall Manager
+    #   default administrator.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PolicyTypeScope AWS API Documentation
+    #
+    class PolicyTypeScope < Struct.new(
+      :policy_types,
+      :all_policy_types_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3090,6 +3477,35 @@ module Aws::FMS
       :list_id,
       :list_name,
       :protocols_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] admin_account
+    #   The Amazon Web Services account ID to add as an Firewall Manager
+    #   administrator account. The account must be a member of the
+    #   organization that was onboarded to Firewall Manager by
+    #   AssociateAdminAccount. For more information about Organizations, see
+    #   [Managing the Amazon Web Services Accounts in Your Organization][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html
+    #   @return [String]
+    #
+    # @!attribute [rw] admin_scope
+    #   Configures the resources that the specified Firewall Manager
+    #   administrator can manage. As a best practice, set the administrative
+    #   scope according to the principles of least privilege. Only grant the
+    #   administrator the specific resources or permissions that they need
+    #   to perform the duties of their role.
+    #   @return [Types::AdminScope]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PutAdminAccountRequest AWS API Documentation
+    #
+    class PutAdminAccountRequest < Struct.new(
+      :admin_account,
+      :admin_scope)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3254,6 +3670,28 @@ module Aws::FMS
       include Aws::Structure
     end
 
+    # Defines the Amazon Web Services Regions that the specified Firewall
+    # Manager administrator can manage.
+    #
+    # @!attribute [rw] regions
+    #   The Amazon Web Services Regions that the specified Firewall Manager
+    #   administrator can perform actions in.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] all_regions_enabled
+    #   Allows the specified Firewall Manager administrator to manage all
+    #   Amazon Web Services Regions.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/RegionScope AWS API Documentation
+    #
+    class RegionScope < Struct.new(
+      :regions,
+      :all_regions_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an individual action you can take to remediate a
     # violation.
     #
@@ -3413,6 +3851,19 @@ module Aws::FMS
     #   The last time that the resource set was changed.
     #   @return [Time]
     #
+    # @!attribute [rw] resource_set_status
+    #   Indicates whether the resource set is in or out of an admin's
+    #   Region scope.
+    #
+    #   * `ACTIVE` - The administrator can manage and delete the resource
+    #     set.
+    #
+    #   * `OUT_OF_ADMIN_SCOPE` - The administrator can view the resource
+    #     set, but they can't edit or delete the resource set. Existing
+    #     protections stay in place. Any new resource that come into scope
+    #     of the resource set won't be protected.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ResourceSet AWS API Documentation
     #
     class ResourceSet < Struct.new(
@@ -3421,7 +3872,8 @@ module Aws::FMS
       :description,
       :update_token,
       :resource_type_list,
-      :last_update_time)
+      :last_update_time,
+      :resource_set_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3447,13 +3899,27 @@ module Aws::FMS
     #   The last time that the resource set was changed.
     #   @return [Time]
     #
+    # @!attribute [rw] resource_set_status
+    #   Indicates whether the resource set is in or out of an admin's
+    #   Region scope.
+    #
+    #   * `ACTIVE` - The administrator can manage and delete the resource
+    #     set.
+    #
+    #   * `OUT_OF_ADMIN_SCOPE` - The administrator can view the resource
+    #     set, but they can't edit or delete the resource set. Existing
+    #     protections stay in place. Any new resource that come into scope
+    #     of the resource set won't be protected.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ResourceSetSummary AWS API Documentation
     #
     class ResourceSetSummary < Struct.new(
       :id,
       :name,
       :description,
-      :last_update_time)
+      :last_update_time,
+      :resource_set_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3840,6 +4306,17 @@ module Aws::FMS
     #
     #      </note>
     #
+    #   * Example: `IMPORT_NETWORK_FIREWALL`
+    #     `"\{"type":"IMPORT_NETWORK_FIREWALL","awsNetworkFirewallConfig":\{"networkFirewallStatelessRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-west-2:000000000000:stateless-rulegroup\/rg1","priority":1\}],"networkFirewallStatelessDefaultActions":["aws:drop"],"networkFirewallStatelessFragmentDefaultActions":["aws:pass"],"networkFirewallStatelessCustomActions":[],"networkFirewallStatefulRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-west-2:aws-managed:stateful-rulegroup\/ThreatSignaturesEmergingEventsStrictOrder","priority":8\}],"networkFirewallStatefulEngineOptions":\{"ruleOrder":"STRICT_ORDER"\},"networkFirewallStatefulDefaultActions":["aws:drop_strict"]\}\}"`
+    #
+    #     `"\{"type":"DNS_FIREWALL","preProcessRuleGroups":[\{"ruleGroupId":"rslvr-frg-1","priority":10\}],"postProcessRuleGroups":[\{"ruleGroupId":"rslvr-frg-2","priority":9911\}]\}"`
+    #
+    #     <note markdown="1"> Valid values for `preProcessRuleGroups` are between 1 and 99.
+    #     Valid values for `postProcessRuleGroups` are between 9901 and
+    #     10000.
+    #
+    #      </note>
+    #
     #   * Example: `NETWORK_FIREWALL` - Centralized deployment model
     #
     #     `"\{"type":"NETWORK_FIREWALL","awsNetworkFirewallConfig":\{"networkFirewallStatelessRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test","priority":1\}],"networkFirewallStatelessDefaultActions":["aws:forward_to_sfe","customActionName"],"networkFirewallStatelessFragmentDefaultActions":["aws:forward_to_sfe","customActionName"],"networkFirewallStatelessCustomActions":[\{"actionName":"customActionName","actionDefinition":\{"publishMetricAction":\{"dimensions":[\{"value":"metricdimensionvalue"\}]\}\}\}],"networkFirewallStatefulRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test"\}],"networkFirewallLoggingConfiguration":\{"logDestinationConfigs":[\{"logDestinationType":"S3","logType":"ALERT","logDestination":\{"bucketName":"s3-bucket-name"\}\},\{"logDestinationType":"S3","logType":"FLOW","logDestination":\{"bucketName":"s3-bucket-name"\}\}],"overrideExistingConfig":true\}\},"firewallDeploymentModel":\{"centralizedFirewallDeploymentModel":\{"centralizedFirewallOrchestrationConfig":\{"inspectionVpcIds":[\{"resourceId":"vpc-1234","accountId":"123456789011"\}],"firewallCreationConfig":\{"endpointLocation":\{"availabilityZoneConfigList":[\{"availabilityZoneId":null,"availabilityZoneName":"us-east-1a","allowedIPV4CidrList":["10.0.0.0/28"]\}]\}\},"allowedIPV4CidrList":[]\}\}\}\}"`
@@ -3981,14 +4458,40 @@ module Aws::FMS
     #     Advanced policy, this `ManagedServiceData` configuration is an
     #     empty string.
     #
-    #   * Example: `WAFV2`
+    #   * Example: `WAFV2` - Account takeover prevention and Bot Control
+    #     managed rule groups, and rule action override
     #
-    #     `"\{"type":"WAFV2","preProcessRuleGroups":[\{"ruleGroupArn":null,"overrideAction":\{"type":"NONE"\},"managedRuleGroupIdentifier":\{"version":null,"vendorName":"AWS","managedRuleGroupName":"AWSManagedRulesAmazonIpReputationList"\},"ruleGroupType":"ManagedRuleGroup","excludeRules":[\{"name":"NoUserAgent_HEADER"\}]\}],"postProcessRuleGroups":[],"defaultAction":\{"type":"ALLOW"\},"overrideCustomerWebACLAssociation":false,"loggingConfiguration":\{"logDestinationConfigs":["arn:aws:firehose:us-west-2:12345678912:deliverystream/aws-waf-logs-fms-admin-destination"],"redactedFields":[\{"redactedFieldType":"SingleHeader","redactedFieldValue":"Cookies"\},\{"redactedFieldType":"Method"\}]\}\}"`
+    #     `"\{"type":"WAFV2","preProcessRuleGroups":[\{"ruleGroupArn":null,"overrideAction":\{"type":"NONE"\},"managedRuleGroupIdentifier":\{"versionEnabled":null,"version":null,"vendorName":"AWS","managedRuleGroupName":"AWSManagedRulesATPRuleSet","managedRuleGroupConfigs":[\{"awsmanagedRulesATPRuleSet":\{"loginPath":"/loginpath","requestInspection":\{"payloadType":"FORM_ENCODED|JSON","usernameField":\{"identifier":"/form/username"\},"passwordField":\{"identifier":"/form/password"\}\}\}\}]\},"ruleGroupType":"ManagedRuleGroup","excludeRules":[],"sampledRequestsEnabled":true\},\{"ruleGroupArn":null,"overrideAction":\{"type":"NONE"\},"managedRuleGroupIdentifier":\{"versionEnabled":null,"version":null,"vendorName":"AWS","managedRuleGroupName":"AWSManagedRulesBotControlRuleSet","managedRuleGroupConfigs":[\{"awsmanagedRulesBotControlRuleSet":\{"inspectionLevel":"TARGETED|COMMON"\}\}]\},"ruleGroupType":"ManagedRuleGroup","excludeRules":[],"sampledRequestsEnabled":true,"ruleActionOverrides":[\{"name":"Rule1","actionToUse":\{"allow|block|count|captcha|challenge":\{\}\}\},\{"name":"Rule2","actionToUse":\{"allow|block|count|captcha|challenge":\{\}\}\}]\}],"postProcessRuleGroups":[],"defaultAction":\{"type":"ALLOW"\},"customRequestHandling":null,"customResponse":null,"overrideCustomerWebACLAssociation":false,"loggingConfiguration":null,"sampledRequestsEnabledForDefaultActions":true\}"`
     #
-    #     In the `loggingConfiguration`, you can specify one
-    #     `logDestinationConfigs`, you can optionally provide up to 20
-    #     `redactedFields`, and the `RedactedFieldType` must be one of
-    #     `URI`, `QUERY_STRING`, `HEADER`, or `METHOD`.
+    #     * Fraud Control account takeover prevention (ATP) - For
+    #       information about the properties available for
+    #       `AWSManagedRulesATPRuleSet` managed rule groups, see
+    #       [AWSManagedRulesATPRuleSet][2] in the *WAF API Reference*.
+    #
+    #     * Bot Control - For information about
+    #       `AWSManagedRulesBotControlRuleSet` managed rule groups, see
+    #       [AWSManagedRulesBotControlRuleSet][3] in the *WAF API
+    #       Reference*.
+    #
+    #     * Rule action overrides - Firewall Manager supports rule action
+    #       overrides only for managed rule groups. To configure a
+    #       `RuleActionOverrides` add the `Name` of the rule to override,
+    #       and `ActionToUse`, which is the new action to use for the rule.
+    #       For information about using rule action override, see
+    #       [RuleActionOverride][4] in the *WAF API Reference*.
+    #
+    #   * Example: `WAFV2` - `CAPTCHA` and `Challenge` configs
+    #
+    #     `"\{"type":"WAFV2","preProcessRuleGroups":[\{"ruleGroupArn":null,"overrideAction":\{"type":"NONE"\},"managedRuleGroupIdentifier":\{"versionEnabled":null,"version":null,"vendorName":"AWS","managedRuleGroupName":"AWSManagedRulesAdminProtectionRuleSet"\},"ruleGroupType":"ManagedRuleGroup","excludeRules":[],"sampledRequestsEnabled":true\}],"postProcessRuleGroups":[],"defaultAction":\{"type":"ALLOW"\},"customRequestHandling":null,"customResponse":null,"overrideCustomerWebACLAssociation":false,"loggingConfiguration":null,"sampledRequestsEnabledForDefaultActions":true,"captchaConfig":\{"immunityTimeProperty":\{"immunityTime":500\}\},"challengeConfig":\{"immunityTimeProperty":\{"immunityTime":800\}\},"tokenDomains":["google.com","amazon.com"]\}"`
+    #
+    #     If you update the policy's values for `captchaConfig`,
+    #     `challengeConfig`, or `tokenDomains`, Firewall Manager will
+    #     overwrite your local web ACLs to contain the new value(s).
+    #     However, if you don't update the policy's `captchaConfig`,
+    #     `challengeConfig`, or `tokenDomains` values, the values in your
+    #     local web ACLs will remain unchanged. For information about
+    #     CAPTCHA and Challenge configs, see [CaptchaConfig][5] and
+    #     [ChallengeConfig][6] in the *WAF API Reference*.
     #
     #   * Example: `WAFV2` - Firewall Manager support for WAF managed rule
     #     group versioning
@@ -4002,6 +4505,34 @@ module Aws::FMS
     #     then Firewall Manager uses the default version of the WAF managed
     #     rule group.
     #
+    #   * Example: `WAFV2` - Logging configurations
+    #
+    #     `"\{"type":"WAFV2","preProcessRuleGroups":[\{"ruleGroupArn":null,
+    #     "overrideAction":\{"type":"NONE"\},"managedRuleGroupIdentifier":
+    #     \{"versionEnabled":null,"version":null,"vendorName":"AWS",
+    #     "managedRuleGroupName":"AWSManagedRulesAdminProtectionRuleSet"\}
+    #     ,"ruleGroupType":"ManagedRuleGroup","excludeRules":[],
+    #     "sampledRequestsEnabled":true\}],"postProcessRuleGroups":[],
+    #     "defaultAction":\{"type":"ALLOW"\},"customRequestHandling"
+    #     \:null,"customResponse":null,"overrideCustomerWebACLAssociation"
+    #     \:false,"loggingConfiguration":\{"logDestinationConfigs":
+    #     ["arn:aws:s3:::aws-waf-logs-example-bucket"]
+    #     ,"redactedFields":[],"loggingFilterConfigs":\{"defaultBehavior":"KEEP",
+    #     "filters":[\{"behavior":"KEEP","requirement":"MEETS_ALL",
+    #     "conditions":[\{"actionCondition":"CAPTCHA"\},\{"actionCondition":
+    #     "CHALLENGE"\},
+    #     \{"actionCondition":"EXCLUDED_AS_COUNT"\}]\}]\}\},"sampledRequestsEnabledForDefaultActions":true\}"`
+    #
+    #     Firewall Manager supports Amazon Kinesis Data Firehose and Amazon
+    #     S3 as the `logDestinationConfigs` in your `loggingConfiguration`.
+    #     For information about WAF logging configurations, see
+    #     [LoggingConfiguration][7] in the *WAF API Reference*
+    #
+    #     In the `loggingConfiguration`, you can specify one
+    #     `logDestinationConfigs`. Optionally provide as many as 20
+    #     `redactedFields`. The `RedactedFieldType` must be one of `URI`,
+    #     `QUERY_STRING`, `HEADER`, or `METHOD`.
+    #
     #   * Example: `WAF Classic`
     #
     #     `"\{"type": "WAF", "ruleGroups":
@@ -4012,6 +4543,12 @@ module Aws::FMS
     #
     #
     #   [1]: https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html
+    #   [2]: https://docs.aws.amazon.com/waf/latest/APIReference/API_AWSManagedRulesATPRuleSet.html
+    #   [3]: https://docs.aws.amazon.com/waf/latest/APIReference/API_AWSManagedRulesBotControlRuleSet.html
+    #   [4]: https://docs.aws.amazon.com/waf/latest/APIReference/API_RuleActionOverride.html
+    #   [5]: https://docs.aws.amazon.com/waf/latest/APIReference/API_CaptchaConfig.html
+    #   [6]: https://docs.aws.amazon.com/waf/latest/APIReference/API_ChallengeConfig.html
+    #   [7]: https://docs.aws.amazon.com/waf/latest/APIReference/API_LoggingConfiguration.html
     #   @return [String]
     #
     # @!attribute [rw] policy_option

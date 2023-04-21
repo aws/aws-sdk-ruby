@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2023-04-21)
+------------------
+
+* Feature - This release adds a new API CreateParticipant. For Amazon Connect Chat, you can use this new API to customize chat flow experiences.
+
 1.101.0 (2023-04-10)
 ------------------
 

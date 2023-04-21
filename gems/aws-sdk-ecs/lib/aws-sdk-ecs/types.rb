@@ -5408,6 +5408,9 @@ module Aws::ECS
     #   <note markdown="1"> If you're using tasks that use the Fargate launch type, the
     #   `maxSwap` parameter isn't supported.
     #
+    #    If you're using tasks on Amazon Linux 2023 the `swappiness`
+    #   parameter isn't supported.
+    #
     #    </note>
     #
     #
@@ -5428,6 +5431,9 @@ module Aws::ECS
     #
     #   <note markdown="1"> If you're using tasks that use the Fargate launch type, the
     #   `swappiness` parameter isn't supported.
+    #
+    #    If you're using tasks on Amazon Linux 2023 the `swappiness`
+    #   parameter isn't supported.
     #
     #    </note>
     #
@@ -6846,6 +6852,13 @@ module Aws::ECS
     # mode, specify the exposed ports using `containerPort`. The `hostPort`
     # can be left blank or it must be the same value as the `containerPort`.
     #
+    # Most fields of this parameter (`containerPort`, `hostPort`,
+    # `protocol`) maps to `PortBindings` in the [Create a container][1]
+    # section of the [Docker Remote API][2] and the `--publish` option to [
+    # `docker run` ][3]. If the network mode of a task definition is set to
+    # `host`, host ports must either be undefined or match the container
+    # port in the port mapping.
+    #
     # <note markdown="1"> You can't expose the same container port for multiple protocols. If
     # you attempt this, an error is returned.
     #
@@ -6854,6 +6867,12 @@ module Aws::ECS
     # After a task reaches the `RUNNING` status, manual and automatic host
     # and container port assignments are visible in the `networkBindings`
     # section of DescribeTasks API responses.
+    #
+    #
+    #
+    # [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    # [2]: https://docs.docker.com/engine/api/v1.35/
+    # [3]: https://docs.docker.com/engine/reference/commandline/run/
     #
     # @!attribute [rw] container_port
     #   The port number on the container that's bound to the user-specified
@@ -7162,7 +7181,7 @@ module Aws::ECS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#tag-resources
-    #   [2]: https://docs.aws.amazon.com/AWSEC2ContainerServiceDocs/build/server-root/AmazonECS/latest/developerguide/ecs-fips-compliance.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-fips-compliance.html
     #   @return [String]
     #
     # @!attribute [rw] value

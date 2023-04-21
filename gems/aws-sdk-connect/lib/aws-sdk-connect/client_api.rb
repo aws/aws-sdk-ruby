@@ -132,6 +132,8 @@ module Aws::Connect
     CreateInstanceResponse = Shapes::StructureShape.new(name: 'CreateInstanceResponse')
     CreateIntegrationAssociationRequest = Shapes::StructureShape.new(name: 'CreateIntegrationAssociationRequest')
     CreateIntegrationAssociationResponse = Shapes::StructureShape.new(name: 'CreateIntegrationAssociationResponse')
+    CreateParticipantRequest = Shapes::StructureShape.new(name: 'CreateParticipantRequest')
+    CreateParticipantResponse = Shapes::StructureShape.new(name: 'CreateParticipantResponse')
     CreateQueueRequest = Shapes::StructureShape.new(name: 'CreateQueueRequest')
     CreateQueueResponse = Shapes::StructureShape.new(name: 'CreateQueueResponse')
     CreateQuickConnectRequest = Shapes::StructureShape.new(name: 'CreateQuickConnectRequest')
@@ -321,6 +323,7 @@ module Aws::Connect
     HoursOfOperationSummary = Shapes::StructureShape.new(name: 'HoursOfOperationSummary')
     HoursOfOperationSummaryList = Shapes::ListShape.new(name: 'HoursOfOperationSummaryList')
     HoursOfOperationTimeSlice = Shapes::StructureShape.new(name: 'HoursOfOperationTimeSlice')
+    ISO8601Datetime = Shapes::StringShape.new(name: 'ISO8601Datetime')
     IdempotencyException = Shapes::StructureShape.new(name: 'IdempotencyException')
     InboundCallsEnabled = Shapes::BooleanShape.new(name: 'InboundCallsEnabled')
     Instance = Shapes::StructureShape.new(name: 'Instance')
@@ -468,7 +471,9 @@ module Aws::Connect
     OutboundContactNotPermittedException = Shapes::StructureShape.new(name: 'OutboundContactNotPermittedException')
     PEM = Shapes::StringShape.new(name: 'PEM')
     ParticipantDetails = Shapes::StructureShape.new(name: 'ParticipantDetails')
+    ParticipantDetailsToAdd = Shapes::StructureShape.new(name: 'ParticipantDetailsToAdd')
     ParticipantId = Shapes::StringShape.new(name: 'ParticipantId')
+    ParticipantRole = Shapes::StringShape.new(name: 'ParticipantRole')
     ParticipantTimerAction = Shapes::StringShape.new(name: 'ParticipantTimerAction')
     ParticipantTimerConfigList = Shapes::ListShape.new(name: 'ParticipantTimerConfigList')
     ParticipantTimerConfiguration = Shapes::StructureShape.new(name: 'ParticipantTimerConfiguration')
@@ -476,6 +481,7 @@ module Aws::Connect
     ParticipantTimerType = Shapes::StringShape.new(name: 'ParticipantTimerType')
     ParticipantTimerValue = Shapes::UnionShape.new(name: 'ParticipantTimerValue')
     ParticipantToken = Shapes::StringShape.new(name: 'ParticipantToken')
+    ParticipantTokenCredentials = Shapes::StructureShape.new(name: 'ParticipantTokenCredentials')
     Password = Shapes::StringShape.new(name: 'Password')
     Percentage = Shapes::IntegerShape.new(name: 'Percentage')
     PermissionsList = Shapes::ListShape.new(name: 'PermissionsList')
@@ -1128,6 +1134,16 @@ module Aws::Connect
     CreateIntegrationAssociationResponse.add_member(:integration_association_id, Shapes::ShapeRef.new(shape: IntegrationAssociationId, location_name: "IntegrationAssociationId"))
     CreateIntegrationAssociationResponse.add_member(:integration_association_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "IntegrationAssociationArn"))
     CreateIntegrationAssociationResponse.struct_class = Types::CreateIntegrationAssociationResponse
+
+    CreateParticipantRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    CreateParticipantRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
+    CreateParticipantRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateParticipantRequest.add_member(:participant_details, Shapes::ShapeRef.new(shape: ParticipantDetailsToAdd, required: true, location_name: "ParticipantDetails"))
+    CreateParticipantRequest.struct_class = Types::CreateParticipantRequest
+
+    CreateParticipantResponse.add_member(:participant_credentials, Shapes::ShapeRef.new(shape: ParticipantTokenCredentials, location_name: "ParticipantCredentials"))
+    CreateParticipantResponse.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, location_name: "ParticipantId"))
+    CreateParticipantResponse.struct_class = Types::CreateParticipantResponse
 
     CreateQueueRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     CreateQueueRequest.add_member(:name, Shapes::ShapeRef.new(shape: CommonNameLength127, required: true, location_name: "Name"))
@@ -2298,6 +2314,10 @@ module Aws::Connect
     ParticipantDetails.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "DisplayName"))
     ParticipantDetails.struct_class = Types::ParticipantDetails
 
+    ParticipantDetailsToAdd.add_member(:participant_role, Shapes::ShapeRef.new(shape: ParticipantRole, location_name: "ParticipantRole"))
+    ParticipantDetailsToAdd.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
+    ParticipantDetailsToAdd.struct_class = Types::ParticipantDetailsToAdd
+
     ParticipantTimerConfigList.member = Shapes::ShapeRef.new(shape: ParticipantTimerConfiguration)
 
     ParticipantTimerConfiguration.add_member(:participant_role, Shapes::ShapeRef.new(shape: TimerEligibleParticipantRoles, required: true, location_name: "ParticipantRole"))
@@ -2312,6 +2332,10 @@ module Aws::Connect
     ParticipantTimerValue.add_member_subclass(:participant_timer_duration_in_minutes, Types::ParticipantTimerValue::ParticipantTimerDurationInMinutes)
     ParticipantTimerValue.add_member_subclass(:unknown, Types::ParticipantTimerValue::Unknown)
     ParticipantTimerValue.struct_class = Types::ParticipantTimerValue
+
+    ParticipantTokenCredentials.add_member(:participant_token, Shapes::ShapeRef.new(shape: ParticipantToken, location_name: "ParticipantToken"))
+    ParticipantTokenCredentials.add_member(:expiry, Shapes::ShapeRef.new(shape: ISO8601Datetime, location_name: "Expiry"))
+    ParticipantTokenCredentials.struct_class = Types::ParticipantTokenCredentials
 
     PermissionsList.member = Shapes::ShapeRef.new(shape: SecurityProfilePermission)
 
@@ -3613,6 +3637,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_participant, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateParticipant"
+        o.http_method = "POST"
+        o.http_request_uri = "/contact/create-participant"
+        o.input = Shapes::ShapeRef.new(shape: CreateParticipantRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateParticipantResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 

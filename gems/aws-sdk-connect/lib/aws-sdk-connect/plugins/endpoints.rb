@@ -90,6 +90,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::CreateInstance.build(context)
           when :create_integration_association
             Aws::Connect::Endpoints::CreateIntegrationAssociation.build(context)
+          when :create_participant
+            Aws::Connect::Endpoints::CreateParticipant.build(context)
           when :create_queue
             Aws::Connect::Endpoints::CreateQueue.build(context)
           when :create_quick_connect

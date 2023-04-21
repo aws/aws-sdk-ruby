@@ -378,18 +378,26 @@ module Aws::FMS
 
     # @!group API Operations
 
-    # Sets the Firewall Manager administrator account. The account must be a
-    # member of the organization in Organizations whose resources you want
-    # to protect. Firewall Manager sets the permissions that allow the
-    # account to administer your Firewall Manager policies.
+    # Sets a Firewall Manager default administrator account. The Firewall
+    # Manager default administrator account can manage third-party firewalls
+    # and has full administrative scope that allows administration of all
+    # policy types, accounts, organizational units, and Regions. This
+    # account must be a member account of the organization in Organizations
+    # whose resources you want to protect.
     #
-    # The account that you associate with Firewall Manager is called the
-    # Firewall Manager administrator account.
+    # For information about working with Firewall Manager administrator
+    # accounts, see [Managing Firewall Manager administrators][1] in the
+    # *Firewall Manager Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/fms-administrators.html
     #
     # @option params [required, String] :admin_account
     #   The Amazon Web Services account ID to associate with Firewall Manager
-    #   as the Firewall Manager administrator account. This must be an
-    #   Organizations member account. For more information about
+    #   as the Firewall Manager default administrator account. This account
+    #   must be a member account of the organization in Organizations whose
+    #   resources you want to protect. For more information about
     #   Organizations, see [Managing the Amazon Web Services Accounts in Your
     #   Organization][1].
     #
@@ -448,8 +456,8 @@ module Aws::FMS
     # Associate resources to a Firewall Manager resource set.
     #
     # @option params [required, String] :resource_set_identifier
-    #   A unique identifier for the resource set, used in a TODO to refer to
-    #   the resource set.
+    #   A unique identifier for the resource set, used in a request to refer
+    #   to the resource set.
     #
     # @option params [required, Array<String>] :items
     #   The uniform resource identifiers (URIs) of resources that should be
@@ -487,8 +495,8 @@ module Aws::FMS
     # Disassociates resources from a Firewall Manager resource set.
     #
     # @option params [required, String] :resource_set_identifier
-    #   A unique identifier for the resource set, used in a TODO to refer to
-    #   the resource set.
+    #   A unique identifier for the resource set, used in a request to refer
+    #   to the resource set.
     #
     # @option params [required, Array<String>] :items
     #   The uniform resource identifiers (URI) of resources that should be
@@ -642,8 +650,8 @@ module Aws::FMS
     # Deletes the specified ResourceSet.
     #
     # @option params [required, String] :identifier
-    #   A unique identifier for the resource set, used in a TODO to refer to
-    #   the resource set.
+    #   A unique identifier for the resource set, used in a request to refer
+    #   to the resource set.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -662,9 +670,15 @@ module Aws::FMS
       req.send_request(options)
     end
 
-    # Disassociates the account that has been set as the Firewall Manager
-    # administrator account. To set a different account as the administrator
-    # account, you must submit an `AssociateAdminAccount` request.
+    # Disassociates an Firewall Manager administrator account. To set a
+    # different account as an Firewall Manager administrator, submit a
+    # PutAdminAccount request. To set an account as a default administrator
+    # account, you must submit an AssociateAdminAccount request.
+    #
+    # Disassociation of the default administrator account follows the first
+    # in, last out principle. If you are the default administrator, all
+    # Firewall Manager administrators within the organization must first
+    # disassociate their accounts before you can disassociate your account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -709,7 +723,7 @@ module Aws::FMS
     end
 
     # Returns the Organizations account that is associated with Firewall
-    # Manager as the Firewall Manager administrator.
+    # Manager as the Firewall Manager default administrator.
     #
     # @return [Types::GetAdminAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -727,6 +741,51 @@ module Aws::FMS
     # @param [Hash] params ({})
     def get_admin_account(params = {}, options = {})
       req = build_request(:get_admin_account, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the specified account's administrative
+    # scope. The admistrative scope defines the resources that an Firewall
+    # Manager administrator can manage.
+    #
+    # @option params [required, String] :admin_account
+    #   The administator account that you want to get the details for.
+    #
+    # @return [Types::GetAdminScopeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAdminScopeResponse#admin_scope #admin_scope} => Types::AdminScope
+    #   * {Types::GetAdminScopeResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_admin_scope({
+    #     admin_account: "AWSAccountId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.admin_scope.account_scope.accounts #=> Array
+    #   resp.admin_scope.account_scope.accounts[0] #=> String
+    #   resp.admin_scope.account_scope.all_accounts_enabled #=> Boolean
+    #   resp.admin_scope.account_scope.exclude_specified_accounts #=> Boolean
+    #   resp.admin_scope.organizational_unit_scope.organizational_units #=> Array
+    #   resp.admin_scope.organizational_unit_scope.organizational_units[0] #=> String
+    #   resp.admin_scope.organizational_unit_scope.all_organizational_units_enabled #=> Boolean
+    #   resp.admin_scope.organizational_unit_scope.exclude_specified_organizational_units #=> Boolean
+    #   resp.admin_scope.region_scope.regions #=> Array
+    #   resp.admin_scope.region_scope.regions[0] #=> String
+    #   resp.admin_scope.region_scope.all_regions_enabled #=> Boolean
+    #   resp.admin_scope.policy_type_scope.policy_types #=> Array
+    #   resp.admin_scope.policy_type_scope.policy_types[0] #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL", "IMPORT_NETWORK_FIREWALL"
+    #   resp.admin_scope.policy_type_scope.all_policy_types_enabled #=> Boolean
+    #   resp.status #=> String, one of "ONBOARDING", "ONBOARDING_COMPLETE", "OFFBOARDING", "OFFBOARDING_COMPLETE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetAdminScope AWS API Documentation
+    #
+    # @overload get_admin_scope(params = {})
+    # @param [Hash] params ({})
+    def get_admin_scope(params = {}, options = {})
+      req = build_request(:get_admin_scope, params)
       req.send_request(options)
     end
 
@@ -911,6 +970,7 @@ module Aws::FMS
     #   resp.policy.resource_set_ids #=> Array
     #   resp.policy.resource_set_ids[0] #=> String
     #   resp.policy.policy_description #=> String
+    #   resp.policy.policy_status #=> String, one of "ACTIVE", "OUT_OF_ADMIN_SCOPE"
     #   resp.policy_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetPolicy AWS API Documentation
@@ -1043,8 +1103,8 @@ module Aws::FMS
     # Gets information about a specific resource set.
     #
     # @option params [required, String] :identifier
-    #   A unique identifier for the resource set, used in a TODO to refer to
-    #   the resource set.
+    #   A unique identifier for the resource set, used in a request to refer
+    #   to the resource set.
     #
     # @return [Types::GetResourceSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1066,6 +1126,7 @@ module Aws::FMS
     #   resp.resource_set.resource_type_list #=> Array
     #   resp.resource_set.resource_type_list[0] #=> String
     #   resp.resource_set.last_update_time #=> Time
+    #   resp.resource_set.resource_set_status #=> String, one of "ACTIVE", "OUT_OF_ADMIN_SCOPE"
     #   resp.resource_set_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetResourceSet AWS API Documentation
@@ -1473,6 +1534,105 @@ module Aws::FMS
       req.send_request(options)
     end
 
+    # Returns a `AdminAccounts` object that lists the Firewall Manager
+    # administrators within the organization that are onboarded to Firewall
+    # Manager by AssociateAdminAccount.
+    #
+    # This operation can be called only from the organization's management
+    # account.
+    #
+    # @option params [String] :next_token
+    #   When you request a list of objects with a `MaxResults` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   maximum you requested, Firewall Manager returns a `NextToken` value in
+    #   the response. To retrieve the next batch of objects, use the token
+    #   returned from the prior request in your next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Firewall Manager to return
+    #   for this request. If more objects are available, in the response,
+    #   Firewall Manager provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    # @return [Types::ListAdminAccountsForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAdminAccountsForOrganizationResponse#admin_accounts #admin_accounts} => Array&lt;Types::AdminAccountSummary&gt;
+    #   * {Types::ListAdminAccountsForOrganizationResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_admin_accounts_for_organization({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.admin_accounts #=> Array
+    #   resp.admin_accounts[0].admin_account #=> String
+    #   resp.admin_accounts[0].default_admin #=> Boolean
+    #   resp.admin_accounts[0].status #=> String, one of "ONBOARDING", "ONBOARDING_COMPLETE", "OFFBOARDING", "OFFBOARDING_COMPLETE"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListAdminAccountsForOrganization AWS API Documentation
+    #
+    # @overload list_admin_accounts_for_organization(params = {})
+    # @param [Hash] params ({})
+    def list_admin_accounts_for_organization(params = {}, options = {})
+      req = build_request(:list_admin_accounts_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Lists the accounts that are managing the specified Organizations
+    # member account. This is useful for any member account so that they can
+    # view the accounts who are managing their account. This operation only
+    # returns the managing administrators that have the requested account
+    # within their AdminScope.
+    #
+    # @option params [String] :next_token
+    #   When you request a list of objects with a `MaxResults` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   maximum you requested, Firewall Manager returns a `NextToken` value in
+    #   the response. To retrieve the next batch of objects, use the token
+    #   returned from the prior request in your next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Firewall Manager to return
+    #   for this request. If more objects are available, in the response,
+    #   Firewall Manager provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    # @return [Types::ListAdminsManagingAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAdminsManagingAccountResponse#admin_accounts #admin_accounts} => Array&lt;String&gt;
+    #   * {Types::ListAdminsManagingAccountResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_admins_managing_account({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.admin_accounts #=> Array
+    #   resp.admin_accounts[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListAdminsManagingAccount AWS API Documentation
+    #
+    # @overload list_admins_managing_account(params = {})
+    # @param [Hash] params ({})
+    def list_admins_managing_account(params = {}, options = {})
+      req = build_request(:list_admins_managing_account, params)
+      req.send_request(options)
+    end
+
     # Returns an array of `AppsListDataSummary` objects.
     #
     # @option params [Boolean] :default_lists
@@ -1654,8 +1814,8 @@ module Aws::FMS
     # Returns a `MemberAccounts` object that lists the member accounts in
     # the administrator's Amazon Web Services organization.
     #
-    # The `ListMemberAccounts` must be submitted by the account that is set
-    # as the Firewall Manager administrator.
+    # Either an Firewall Manager administrator or the organization's
+    # management account can make this request.
     #
     # @option params [String] :next_token
     #   If you specify a value for `MaxResults` and you have more account IDs
@@ -1744,6 +1904,7 @@ module Aws::FMS
     #   resp.policy_list[0].security_service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL", "IMPORT_NETWORK_FIREWALL"
     #   resp.policy_list[0].remediation_enabled #=> Boolean
     #   resp.policy_list[0].delete_unused_fm_managed_resources #=> Boolean
+    #   resp.policy_list[0].policy_status #=> String, one of "ACTIVE", "OUT_OF_ADMIN_SCOPE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListPolicies AWS API Documentation
@@ -1815,8 +1976,8 @@ module Aws::FMS
     # resource set.
     #
     # @option params [required, String] :identifier
-    #   A unique identifier for the resource set, used in a TODO to refer to
-    #   the resource set.
+    #   A unique identifier for the resource set, used in a request to refer
+    #   to the resource set.
     #
     # @option params [Integer] :max_results
     #   The maximum number of objects that you want Firewall Manager to return
@@ -1894,6 +2055,7 @@ module Aws::FMS
     #   resp.resource_sets[0].name #=> String
     #   resp.resource_sets[0].description #=> String
     #   resp.resource_sets[0].last_update_time #=> Time
+    #   resp.resource_sets[0].resource_set_status #=> String, one of "ACTIVE", "OUT_OF_ADMIN_SCOPE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListResourceSets AWS API Documentation
@@ -1995,6 +2157,77 @@ module Aws::FMS
       req.send_request(options)
     end
 
+    # Creates or updates an Firewall Manager administrator account. The
+    # account must be a member of the organization that was onboarded to
+    # Firewall Manager by AssociateAdminAccount. Only the organization's
+    # management account can create an Firewall Manager administrator
+    # account. When you create an Firewall Manager administrator account,
+    # the service checks to see if the account is already a delegated
+    # administrator within Organizations. If the account isn't a delegated
+    # administrator, Firewall Manager calls Organizations to delegate the
+    # account within Organizations. For more information about administrator
+    # accounts within Organizations, see [Managing the Amazon Web Services
+    # Accounts in Your Organization][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html
+    #
+    # @option params [required, String] :admin_account
+    #   The Amazon Web Services account ID to add as an Firewall Manager
+    #   administrator account. The account must be a member of the
+    #   organization that was onboarded to Firewall Manager by
+    #   AssociateAdminAccount. For more information about Organizations, see
+    #   [Managing the Amazon Web Services Accounts in Your Organization][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html
+    #
+    # @option params [Types::AdminScope] :admin_scope
+    #   Configures the resources that the specified Firewall Manager
+    #   administrator can manage. As a best practice, set the administrative
+    #   scope according to the principles of least privilege. Only grant the
+    #   administrator the specific resources or permissions that they need to
+    #   perform the duties of their role.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_admin_account({
+    #     admin_account: "AWSAccountId", # required
+    #     admin_scope: {
+    #       account_scope: {
+    #         accounts: ["AWSAccountId"],
+    #         all_accounts_enabled: false,
+    #         exclude_specified_accounts: false,
+    #       },
+    #       organizational_unit_scope: {
+    #         organizational_units: ["OrganizationalUnitId"],
+    #         all_organizational_units_enabled: false,
+    #         exclude_specified_organizational_units: false,
+    #       },
+    #       region_scope: {
+    #         regions: ["AWSRegion"],
+    #         all_regions_enabled: false,
+    #       },
+    #       policy_type_scope: {
+    #         policy_types: ["WAF"], # accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL, THIRD_PARTY_FIREWALL, IMPORT_NETWORK_FIREWALL
+    #         all_policy_types_enabled: false,
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PutAdminAccount AWS API Documentation
+    #
+    # @overload put_admin_account(params = {})
+    # @param [Hash] params ({})
+    def put_admin_account(params = {}, options = {})
+      req = build_request(:put_admin_account, params)
+      req.send_request(options)
+    end
+
     # Creates an Firewall Manager applications list.
     #
     # @option params [required, Types::AppsListData] :apps_list
@@ -2072,15 +2305,18 @@ module Aws::FMS
     # Designates the IAM role and Amazon Simple Notification Service (SNS)
     # topic that Firewall Manager uses to record SNS logs.
     #
-    # To perform this action outside of the console, you must configure the
-    # SNS topic to allow the Firewall Manager role `AWSServiceRoleForFMS` to
-    # publish SNS logs. For more information, see [Firewall Manager required
-    # permissions for API actions][1] in the *Firewall Manager Developer
-    # Guide*.
+    # To perform this action outside of the console, you must first
+    # configure the SNS topic's access policy to allow the `SnsRoleName` to
+    # publish SNS logs. If the `SnsRoleName` provided is a role other than
+    # the `AWSServiceRoleForFMS` service-linked role, this role must have a
+    # trust relationship configured to allow the Firewall Manager service
+    # principal `fms.amazonaws.com` to assume this role. For information
+    # about configuring an SNS access policy, see [Service roles for
+    # Firewall Manager][1] in the *Firewall Manager Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/fms-api-permissions-ref.html
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/fms-security_iam_service-with-iam.html#fms-security_iam_service-with-iam-roles-service
     #
     # @option params [required, String] :sns_topic_arn
     #   The Amazon Resource Name (ARN) of the SNS topic that collects
@@ -2191,6 +2427,7 @@ module Aws::FMS
     #       },
     #       resource_set_ids: ["Base62Id"],
     #       policy_description: "ResourceDescription",
+    #       policy_status: "ACTIVE", # accepts ACTIVE, OUT_OF_ADMIN_SCOPE
     #     },
     #     tag_list: [
     #       {
@@ -2227,6 +2464,7 @@ module Aws::FMS
     #   resp.policy.resource_set_ids #=> Array
     #   resp.policy.resource_set_ids[0] #=> String
     #   resp.policy.policy_description #=> String
+    #   resp.policy.policy_status #=> String, one of "ACTIVE", "OUT_OF_ADMIN_SCOPE"
     #   resp.policy_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PutPolicy AWS API Documentation
@@ -2327,6 +2565,7 @@ module Aws::FMS
     #       update_token: "UpdateToken",
     #       resource_type_list: ["ResourceType"], # required
     #       last_update_time: Time.now,
+    #       resource_set_status: "ACTIVE", # accepts ACTIVE, OUT_OF_ADMIN_SCOPE
     #     },
     #     tag_list: [
     #       {
@@ -2345,6 +2584,7 @@ module Aws::FMS
     #   resp.resource_set.resource_type_list #=> Array
     #   resp.resource_set.resource_type_list[0] #=> String
     #   resp.resource_set.last_update_time #=> Time
+    #   resp.resource_set.resource_set_status #=> String, one of "ACTIVE", "OUT_OF_ADMIN_SCOPE"
     #   resp.resource_set_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PutResourceSet AWS API Documentation
@@ -2430,7 +2670,7 @@ module Aws::FMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fms'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
