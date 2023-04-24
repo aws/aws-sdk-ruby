@@ -36,7 +36,6 @@ def create_bucket(options = {})
   end
 
   options[:object_ownership] ||= 'ObjectWriter'
-  end
 
   @client.create_bucket(options)
   @client.wait_until(:bucket_exists, bucket: @bucket_name)
