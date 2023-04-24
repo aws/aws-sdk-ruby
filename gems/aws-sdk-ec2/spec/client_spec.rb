@@ -87,7 +87,7 @@ module Aws
 
         it 'requires a source region' do
           expect { client.copy_snapshot }
-            .to raise_error(ArgumentError, /source region/)
+            .to raise_error(ArgumentError, /Source region/)
         end
 
         it 'populates :presigned_url' do
