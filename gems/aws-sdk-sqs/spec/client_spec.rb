@@ -20,21 +20,14 @@ module Aws
         Aws.config = {}
       end
 
-      describe 'empty XML result element' do
+      describe 'empty JSON result element' do
 
         it 'returns a structure with all of the root members' do
           client.handle(step: :send) do |context|
             context.http_response.signal_done(
               status_code: 200,
               headers: {},
-              body:<<-XML)
-              <ReceiveMessageResponse>
-                <ReceiveMessageResult/>
-                <ResponseMetadata>
-                  <RequestId>request-id</RequestId>
-                </ResponseMetadata>
-              </ReceiveMessageResponse>
-            XML
+              body: '{"Messages": []}')
             Seahorse::Client::Response.new(context: context)
           end
           resp = client.receive_message(queue_url: 'https://foo.com')
