@@ -34,8 +34,13 @@ def create_bucket(options = {})
       location_constraint: @client.config.region
     }
   end
+
+  options[:object_ownership] ||= 'ObjectWriter'
+  end
+
   @client.create_bucket(options)
   @client.wait_until(:bucket_exists, bucket: @bucket_name)
+  @client.delete_public_access_block(bucket: @bucket_name)
   @created_buckets << @bucket_name
 end
 
