@@ -35,8 +35,7 @@ def create_bucket(options = {})
     }
   end
 
-  unless options[:object_ownership]
-    options[:object_ownership] = 'ObjectWriter'
+  options[:object_ownership] ||= 'ObjectWriter'
   end
 
   @client.create_bucket(options)
