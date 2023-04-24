@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2023-04-24)
+------------------
+
+* Feature - Added new status result to Liveness session status.
+
 1.75.0 (2023-04-10)
 ------------------
 

@@ -2848,16 +2848,15 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # A trust provider is a third-party entity that creates, maintains, and
-    # manages identity information for users and devices. One or more trust
-    # providers can be attached to an Amazon Web Services Verified Access
+    # Attaches the specified Amazon Web Services Verified Access trust
+    # provider to the specified Amazon Web Services Verified Access
     # instance.
     #
     # @option params [required, String] :verified_access_instance_id
-    #   The ID of the Amazon Web Services Verified Access instance.
+    #   The ID of the Verified Access instance.
     #
     # @option params [required, String] :verified_access_trust_provider_id
-    #   The ID of the Amazon Web Services Verified Access trust provider.
+    #   The ID of the Verified Access trust provider.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
@@ -13231,10 +13230,10 @@ module Aws::EC2
     #   The ID of the Verified Access group to associate the endpoint with.
     #
     # @option params [required, String] :endpoint_type
-    #   The type of Amazon Web Services Verified Access endpoint to create.
+    #   The type of Verified Access endpoint to create.
     #
     # @option params [required, String] :attachment_type
-    #   The Amazon Web Services network component Verified Access attaches to.
+    #   The type of attachment.
     #
     # @option params [required, String] :domain_certificate_arn
     #   The ARN of the public TLS/SSL certificate in Amazon Web Services
@@ -13246,30 +13245,29 @@ module Aws::EC2
     #   The DNS name for users to reach your application.
     #
     # @option params [required, String] :endpoint_domain_prefix
-    #   A custom identifier that gets prepended to a DNS name that is
+    #   A custom identifier that is prepended to the DNS name that is
     #   generated for the endpoint.
     #
     # @option params [Array<String>] :security_group_ids
-    #   The Amazon EC2 security groups to associate with the Amazon Web
-    #   Services Verified Access endpoint.
+    #   The IDs of the security groups to associate with the Verified Access
+    #   endpoint.
     #
     # @option params [Types::CreateVerifiedAccessEndpointLoadBalancerOptions] :load_balancer_options
-    #   The load balancer details if creating the Amazon Web Services Verified
-    #   Access endpoint as `load-balancer`type.
+    #   The load balancer details. This parameter is required if the endpoint
+    #   type is `load-balancer`.
     #
     # @option params [Types::CreateVerifiedAccessEndpointEniOptions] :network_interface_options
-    #   The network interface details if creating the Amazon Web Services
-    #   Verified Access endpoint as `network-interface`type.
+    #   The network interface details. This parameter is required if the
+    #   endpoint type is `network-interface`.
     #
     # @option params [String] :description
-    #   A description for the Amazon Web Services Verified Access endpoint.
+    #   A description for the Verified Access endpoint.
     #
     # @option params [String] :policy_document
-    #   The Amazon Web Services Verified Access policy document.
+    #   The Verified Access policy document.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
-    #   The tags to assign to the Amazon Web Services Verified Access
-    #   endpoint.
+    #   The tags to assign to the Verified Access endpoint.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
@@ -13373,24 +13371,22 @@ module Aws::EC2
 
     # An Amazon Web Services Verified Access group is a collection of Amazon
     # Web Services Verified Access endpoints who's associated applications
-    # have similar security requirements. Each instance within an Amazon Web
-    # Services Verified Access group shares an Amazon Web Services Verified
-    # Access policy. For example, you can group all Amazon Web Services
-    # Verified Access instances associated with “sales” applications
-    # together and use one common Amazon Web Services Verified Access
-    # policy.
+    # have similar security requirements. Each instance within a Verified
+    # Access group shares an Verified Access policy. For example, you can
+    # group all Verified Access instances associated with "sales"
+    # applications together and use one common Verified Access policy.
     #
     # @option params [required, String] :verified_access_instance_id
-    #   The ID of the Amazon Web Services Verified Access instance.
+    #   The ID of the Verified Access instance.
     #
     # @option params [String] :description
-    #   A description for the Amazon Web Services Verified Access group.
+    #   A description for the Verified Access group.
     #
     # @option params [String] :policy_document
-    #   The Amazon Web Services Verified Access policy document.
+    #   The Verified Access policy document.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
-    #   The tags to assign to the Amazon Web Services Verified Access group.
+    #   The tags to assign to the Verified Access group.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
@@ -13463,11 +13459,10 @@ module Aws::EC2
     # security requirements are met.
     #
     # @option params [String] :description
-    #   A description for the Amazon Web Services Verified Access instance.
+    #   A description for the Verified Access instance.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
-    #   The tags to assign to the Amazon Web Services Verified Access
-    #   instance.
+    #   The tags to assign to the Verified Access instance.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
@@ -13538,35 +13533,36 @@ module Aws::EC2
     # A trust provider is a third-party entity that creates, maintains, and
     # manages identity information for users and devices. When an
     # application request is made, the identity information sent by the
-    # trust provider will be evaluated by Amazon Web Services Verified
-    # Access, before allowing or denying the application request.
+    # trust provider is evaluated by Verified Access before allowing or
+    # denying the application request.
     #
     # @option params [required, String] :trust_provider_type
-    #   The type of trust provider can be either user or device-based.
+    #   The type of trust provider.
     #
     # @option params [String] :user_trust_provider_type
-    #   The type of user-based trust provider.
+    #   The type of user-based trust provider. This parameter is required when
+    #   the provider type is `user`.
     #
     # @option params [String] :device_trust_provider_type
-    #   The type of device-based trust provider.
+    #   The type of device-based trust provider. This parameter is required
+    #   when the provider type is `device`.
     #
     # @option params [Types::CreateVerifiedAccessTrustProviderOidcOptions] :oidc_options
-    #   The OpenID Connect details for an `oidc`-type, user-identity based
-    #   trust provider.
+    #   The options for a OpenID Connect-compatible user-identity trust
+    #   provider. This parameter is required when the provider type is `user`.
     #
     # @option params [Types::CreateVerifiedAccessTrustProviderDeviceOptions] :device_options
-    #   The options for device identity based trust providers.
+    #   The options for a device-based trust provider. This parameter is
+    #   required when the provider type is `device`.
     #
     # @option params [required, String] :policy_reference_name
     #   The identifier to be used when working with policy rules.
     #
     # @option params [String] :description
-    #   A description for the Amazon Web Services Verified Access trust
-    #   provider.
+    #   A description for the Verified Access trust provider.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
-    #   The tags to assign to the Amazon Web Services Verified Access trust
-    #   provider.
+    #   The tags to assign to the Verified Access trust provider.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
@@ -13602,7 +13598,7 @@ module Aws::EC2
     #       token_endpoint: "String",
     #       user_info_endpoint: "String",
     #       client_id: "String",
-    #       client_secret: "String",
+    #       client_secret: "ClientSecretType",
     #       scope: "String",
     #     },
     #     device_options: {
@@ -17867,7 +17863,7 @@ module Aws::EC2
     # Delete an Amazon Web Services Verified Access endpoint.
     #
     # @option params [required, String] :verified_access_endpoint_id
-    #   The ID of the Amazon Web Services Verified Access endpoint.
+    #   The ID of the Verified Access endpoint.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
@@ -17942,7 +17938,7 @@ module Aws::EC2
     # Delete an Amazon Web Services Verified Access group.
     #
     # @option params [required, String] :verified_access_group_id
-    #   The ID of the Amazon Web Services Verified Access group.
+    #   The ID of the Verified Access group.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
@@ -18000,7 +17996,7 @@ module Aws::EC2
     # Delete an Amazon Web Services Verified Access instance.
     #
     # @option params [required, String] :verified_access_instance_id
-    #   The ID of the Amazon Web Services Verified Access instance.
+    #   The ID of the Verified Access instance.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -18060,7 +18056,7 @@ module Aws::EC2
     # Delete an Amazon Web Services Verified Access trust provider.
     #
     # @option params [required, String] :verified_access_trust_provider_id
-    #   The ID of the Amazon Web Services Verified Access trust provider.
+    #   The ID of the Verified Access trust provider.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -34100,16 +34096,16 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describe Amazon Web Services Verified Access endpoints.
+    # Describes the specified Amazon Web Services Verified Access endpoints.
     #
     # @option params [Array<String>] :verified_access_endpoint_ids
-    #   The ID of the Amazon Web Services Verified Access endpoint.
+    #   The ID of the Verified Access endpoint.
     #
     # @option params [String] :verified_access_instance_id
-    #   The ID of the Amazon Web Services Verified Access instance.
+    #   The ID of the Verified Access instance.
     #
     # @option params [String] :verified_access_group_id
-    #   The ID of the Amazon Web Services Verified Access group.
+    #   The ID of the Verified Access group.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
@@ -34194,13 +34190,13 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describe details of existing Verified Access groups.
+    # Describes the specified Verified Access groups.
     #
     # @option params [Array<String>] :verified_access_group_ids
-    #   The ID of the Amazon Web Services Verified Access groups.
+    #   The ID of the Verified Access groups.
     #
     # @option params [String] :verified_access_instance_id
-    #   The ID of the Amazon Web Services Verified Access instance.
+    #   The ID of the Verified Access instance.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
@@ -34267,11 +34263,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the current logging configuration for the Amazon Web
-    # Services Verified Access instances.
+    # Describes the specified Amazon Web Services Verified Access instances.
     #
     # @option params [Array<String>] :verified_access_instance_ids
-    #   The IDs of the Amazon Web Services Verified Access instances.
+    #   The IDs of the Verified Access instances.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
@@ -34341,10 +34336,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describe Verified Access instances.
+    # Describes the specified Amazon Web Services Verified Access instances.
     #
     # @option params [Array<String>] :verified_access_instance_ids
-    #   The IDs of the Amazon Web Services Verified Access instances.
+    #   The IDs of the Verified Access instances.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
@@ -34412,10 +34407,11 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describe details of existing Verified Access trust providers.
+    # Describes the specified Amazon Web Services Verified Access trust
+    # providers.
     #
     # @option params [Array<String>] :verified_access_trust_provider_ids
-    #   The IDs of the Amazon Web Services Verified Access trust providers.
+    #   The IDs of the Verified Access trust providers.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
@@ -36681,14 +36677,15 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Detach a trust provider from an Amazon Web Services Verified Access
+    # Detaches the specified Amazon Web Services Verified Access trust
+    # provider from the specified Amazon Web Services Verified Access
     # instance.
     #
     # @option params [required, String] :verified_access_instance_id
-    #   The ID of the Amazon Web Services Verified Access instance.
+    #   The ID of the Verified Access instance.
     #
     # @option params [required, String] :verified_access_trust_provider_id
-    #   The ID of the Amazon Web Services Verified Access trust provider.
+    #   The ID of the Verified Access trust provider.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
@@ -42448,7 +42445,7 @@ module Aws::EC2
     # Get the Verified Access policy associated with the endpoint.
     #
     # @option params [required, String] :verified_access_endpoint_id
-    #   The ID of the Amazon Web Services Verified Access endpoint.
+    #   The ID of the Verified Access endpoint.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -42486,7 +42483,7 @@ module Aws::EC2
     # group.
     #
     # @option params [required, String] :verified_access_group_id
-    #   The ID of the Amazon Web Services Verified Access group.
+    #   The ID of the Verified Access group.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -47493,24 +47490,24 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Modifies the configuration of an Amazon Web Services Verified Access
-    # endpoint.
+    # Modifies the configuration of the specified Amazon Web Services
+    # Verified Access endpoint.
     #
     # @option params [required, String] :verified_access_endpoint_id
-    #   The ID of the Amazon Web Services Verified Access endpoint.
+    #   The ID of the Verified Access endpoint.
     #
     # @option params [String] :verified_access_group_id
-    #   The ID of the Amazon Web Services Verified Access group.
+    #   The ID of the Verified Access group.
     #
     # @option params [Types::ModifyVerifiedAccessEndpointLoadBalancerOptions] :load_balancer_options
-    #   The load balancer details if creating the Amazon Web Services Verified
-    #   Access endpoint as `load-balancer`type.
+    #   The load balancer details if creating the Verified Access endpoint as
+    #   `load-balancer`type.
     #
     # @option params [Types::ModifyVerifiedAccessEndpointEniOptions] :network_interface_options
     #   The network interface options.
     #
     # @option params [String] :description
-    #   A description for the Amazon Web Services Verified Access endpoint.
+    #   A description for the Verified Access endpoint.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
@@ -47593,16 +47590,17 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Modifies the specified Verified Access endpoint policy.
+    # Modifies the specified Amazon Web Services Verified Access endpoint
+    # policy.
     #
     # @option params [required, String] :verified_access_endpoint_id
-    #   The ID of the Amazon Web Services Verified Access endpoint.
+    #   The ID of the Verified Access endpoint.
     #
     # @option params [required, Boolean] :policy_enabled
     #   The status of the Verified Access policy.
     #
     # @option params [String] :policy_document
-    #   The Amazon Web Services Verified Access policy document.
+    #   The Verified Access policy document.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
@@ -47651,16 +47649,17 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Modifies the specified Verified Access group configuration.
+    # Modifies the specified Amazon Web Services Verified Access group
+    # configuration.
     #
     # @option params [required, String] :verified_access_group_id
-    #   The ID of the Amazon Web Services Verified Access group.
+    #   The ID of the Verified Access group.
     #
     # @option params [String] :verified_access_instance_id
-    #   The ID of the Amazon Web Services Verified Access instance.
+    #   The ID of the Verified Access instance.
     #
     # @option params [String] :description
-    #   A description for the Amazon Web Services Verified Access group.
+    #   A description for the Verified Access group.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
@@ -47717,16 +47716,17 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Modifies the specified Verified Access group policy.
+    # Modifies the specified Amazon Web Services Verified Access group
+    # policy.
     #
     # @option params [required, String] :verified_access_group_id
-    #   The ID of the Amazon Web Services Verified Access group.
+    #   The ID of the Verified Access group.
     #
     # @option params [required, Boolean] :policy_enabled
     #   The status of the Verified Access policy.
     #
     # @option params [String] :policy_document
-    #   The Amazon Web Services Verified Access policy document.
+    #   The Verified Access policy document.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
@@ -47775,13 +47775,14 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Modifies the configuration of the specified Verified Access instance.
+    # Modifies the configuration of the specified Amazon Web Services
+    # Verified Access instance.
     #
     # @option params [required, String] :verified_access_instance_id
-    #   The ID of the Amazon Web Services Verified Access instance.
+    #   The ID of the Verified Access instance.
     #
     # @option params [String] :description
-    #   A description for the Amazon Web Services Verified Access instance.
+    #   A description for the Verified Access instance.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -47843,11 +47844,10 @@ module Aws::EC2
     # Services Verified Access instance.
     #
     # @option params [required, String] :verified_access_instance_id
-    #   The ID of the Amazon Web Services Verified Access instance.
+    #   The ID of the Verified Access instance.
     #
     # @option params [required, Types::VerifiedAccessLogOptions] :access_logs
-    #   The configuration options for Amazon Web Services Verified Access
-    #   instances.
+    #   The configuration options for Verified Access instances.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -47926,15 +47926,14 @@ module Aws::EC2
     # Verified Access trust provider.
     #
     # @option params [required, String] :verified_access_trust_provider_id
-    #   The ID of the Amazon Web Services Verified Access trust provider.
+    #   The ID of the Verified Access trust provider.
     #
     # @option params [Types::ModifyVerifiedAccessTrustProviderOidcOptions] :oidc_options
-    #   The OpenID Connect details for an `oidc`-type, user-identity based
-    #   trust provider.
+    #   The options for an OpenID Connect-compatible user-identity trust
+    #   provider.
     #
     # @option params [String] :description
-    #   A description for the Amazon Web Services Verified Access trust
-    #   provider.
+    #   A description for the Verified Access trust provider.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -47963,6 +47962,12 @@ module Aws::EC2
     #   resp = client.modify_verified_access_trust_provider({
     #     verified_access_trust_provider_id: "VerifiedAccessTrustProviderId", # required
     #     oidc_options: {
+    #       issuer: "String",
+    #       authorization_endpoint: "String",
+    #       token_endpoint: "String",
+    #       user_info_endpoint: "String",
+    #       client_id: "String",
+    #       client_secret: "ClientSecretType",
     #       scope: "String",
     #     },
     #     description: "String",
@@ -56831,7 +56836,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.375.0'
+      context[:gem_version] = '1.376.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

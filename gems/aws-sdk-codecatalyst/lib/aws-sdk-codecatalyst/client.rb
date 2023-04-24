@@ -370,11 +370,12 @@ module Aws::CodeCatalyst
 
     # Creates a personal access token (PAT) for the current user. A personal
     # access token (PAT) is similar to a password. It is associated with
-    # your user account. You use PATs to access Amazon CodeCatalyst
-    # resources such as source repositories from third-party applications
-    # like Git and integrated development environments (IDEs). For more
-    # information, see [Managing personal access tokens in Amazon
-    # CodeCatalyst][1].
+    # your user identity for use across all spaces and projects in Amazon
+    # CodeCatalyst. You use PATs to access CodeCatalyst from resources that
+    # include integrated development environments (IDEs) and Git-based
+    # source repositories. PATs represent you in Amazon CodeCatalyst and you
+    # can manage them in your user settings.For more information, see
+    # [Managing personal access tokens in Amazon CodeCatalyst][1].
     #
     #
     #
@@ -422,8 +423,8 @@ module Aws::CodeCatalyst
     end
 
     # Creates a Dev Environment in Amazon CodeCatalyst, a cloud-based
-    # development Dev Environment that you can use to quickly work on the
-    # code stored in the source repositories of your project.
+    # development environment that you can use to quickly work on the code
+    # stored in the source repositories of your project.
     #
     # <note markdown="1"> When created in the Amazon CodeCatalyst console, by default a Dev
     # Environment is configured to have a 2 core processor, 4GB of RAM, and
@@ -636,8 +637,8 @@ module Aws::CodeCatalyst
     #
     # @option params [required, String] :id
     #   The ID of the personal access token to delete. You can find the IDs of
-    #   all PATs associated with your user account by calling
-    #   ListAccessTokens.
+    #   all PATs associated with your Amazon Web Services Builder ID in a
+    #   space by calling ListAccessTokens.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -947,8 +948,8 @@ module Aws::CodeCatalyst
     end
 
     # Lists all personal access tokens (PATs) associated with the user who
-    # calls the API. You can only list PATs associated with your user
-    # account.
+    # calls the API. You can only list PATs associated with your Amazon Web
+    # Services Builder ID.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to show in a single call to this API. If
@@ -991,7 +992,7 @@ module Aws::CodeCatalyst
       req.send_request(options)
     end
 
-    # Retrives a list of Dev Environments in a project.
+    # Retrieves a list of Dev Environments in a project.
     #
     # @option params [required, String] :space_name
     #   The name of the space.
@@ -1700,7 +1701,7 @@ module Aws::CodeCatalyst
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecatalyst'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

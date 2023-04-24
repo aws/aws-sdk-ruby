@@ -228,6 +228,35 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Optional settings for Advanced input filter when you set Advanced
+    # input filter to Enabled.
+    #
+    # @!attribute [rw] add_texture
+    #   Add texture and detail to areas of your input video content that
+    #   were lost after applying the Advanced input filter. To adaptively
+    #   add texture and reduce softness: Choose Enabled. To not add any
+    #   texture: Keep the default value, Disabled. We recommend that you
+    #   choose Disabled for input video content that doesn't have texture,
+    #   including screen recordings, computer graphics, or cartoons.
+    #   @return [String]
+    #
+    # @!attribute [rw] sharpening
+    #   Optionally specify the amount of sharpening to apply when you use
+    #   the Advanced input filter. Sharpening adds contrast to the edges of
+    #   your video content and can reduce softness. To apply no sharpening:
+    #   Keep the default value, Off. To apply a minimal amount of sharpening
+    #   choose Low, or for the maximum choose High.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AdvancedInputFilterSettings AWS API Documentation
+    #
+    class AdvancedInputFilterSettings < Struct.new(
+      :add_texture,
+      :sharpening)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Required when you set (Codec) under
     # (AudioDescriptions)>(CodecSettings) to the value AIFF.
     #
@@ -632,7 +661,7 @@ module Aws::MediaConvert
     #   Specify the True-peak limiter threshold in decibels relative to full
     #   scale (dBFS). The peak inter-audio sample loudness in your output
     #   will be limited to the value that you specify, without affecting the
-    #   overall target LKFS. Enter a value from 0 to -20. Leave blank to use
+    #   overall target LKFS. Enter a value from 0 to -8. Leave blank to use
     #   the default value 0.
     #   @return [Float]
     #
@@ -1020,17 +1049,18 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] framerate_conversion_algorithm
     #   Choose the method that you want MediaConvert to use when increasing
-    #   or decreasing the frame rate. We recommend using drop duplicate
-    #   (DUPLICATE\_DROP) for numerically simple conversions, such as 60 fps
-    #   to 30 fps. For numerically complex conversions, you can use
-    #   interpolate (INTERPOLATE) to avoid stutter. This results in a smooth
-    #   picture, but might introduce undesirable video artifacts. For
-    #   complex frame rate conversions, especially if your source video has
-    #   already been converted from its original cadence, use FrameFormer
-    #   (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer
-    #   chooses the best conversion method frame by frame. Note that using
-    #   FrameFormer increases the transcoding time and incurs a significant
-    #   add-on cost.
+    #   or decreasing the frame rate. For numerically simple conversions,
+    #   such as 60 fps to 30 fps: We recommend that you keep the default
+    #   value, Drop duplicate. For numerically complex conversions, to avoid
+    #   stutter: Choose Interpolate. This results in a smooth picture, but
+    #   might introduce undesirable video artifacts. For complex frame rate
+    #   conversions, especially if your source video has already been
+    #   converted from its original cadence: Choose FrameFormer to do
+    #   motion-compensated interpolation. FrameFormer uses the best
+    #   conversion method frame by frame. Note that using FrameFormer
+    #   increases the transcoding time and incurs a significant add-on cost.
+    #   When you choose FrameFormer, your input video resolution must be at
+    #   least 128x96.
     #   @return [String]
     #
     # @!attribute [rw] framerate_denominator
@@ -1190,17 +1220,18 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] framerate_conversion_algorithm
     #   Choose the method that you want MediaConvert to use when increasing
-    #   or decreasing the frame rate. We recommend using drop duplicate
-    #   (DUPLICATE\_DROP) for numerically simple conversions, such as 60 fps
-    #   to 30 fps. For numerically complex conversions, you can use
-    #   interpolate (INTERPOLATE) to avoid stutter. This results in a smooth
-    #   picture, but might introduce undesirable video artifacts. For
-    #   complex frame rate conversions, especially if your source video has
-    #   already been converted from its original cadence, use FrameFormer
-    #   (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer
-    #   chooses the best conversion method frame by frame. Note that using
-    #   FrameFormer increases the transcoding time and incurs a significant
-    #   add-on cost.
+    #   or decreasing the frame rate. For numerically simple conversions,
+    #   such as 60 fps to 30 fps: We recommend that you keep the default
+    #   value, Drop duplicate. For numerically complex conversions, to avoid
+    #   stutter: Choose Interpolate. This results in a smooth picture, but
+    #   might introduce undesirable video artifacts. For complex frame rate
+    #   conversions, especially if your source video has already been
+    #   converted from its original cadence: Choose FrameFormer to do
+    #   motion-compensated interpolation. FrameFormer uses the best
+    #   conversion method frame by frame. Note that using FrameFormer
+    #   increases the transcoding time and incurs a significant add-on cost.
+    #   When you choose FrameFormer, your input video resolution must be at
+    #   least 128x96.
     #   @return [String]
     #
     # @!attribute [rw] framerate_denominator
@@ -3549,12 +3580,13 @@ module Aws::MediaConvert
     # Settings for deinterlacer
     #
     # @!attribute [rw] algorithm
-    #   Only applies when you set Deinterlacer (DeinterlaceMode) to
-    #   Deinterlace (DEINTERLACE) or Adaptive (ADAPTIVE). Motion adaptive
-    #   interpolate (INTERPOLATE) produces sharper pictures, while blend
-    #   (BLEND) produces smoother motion. Use (INTERPOLATE\_TICKER) OR
-    #   (BLEND\_TICKER) if your source file includes a ticker, such as a
-    #   scrolling headline at the bottom of the frame.
+    #   Only applies when you set Deinterlace mode to Deinterlace or
+    #   Adaptive. Interpolate produces sharper pictures, while blend
+    #   produces smoother motion. If your source file includes a ticker,
+    #   such as a scrolling headline at the bottom of the frame: Choose
+    #   Interpolate ticker or Blend ticker. To apply field doubling: Choose
+    #   Linear interpolation. Note that Linear interpolation may introduce
+    #   video artifacts into your output.
     #   @return [String]
     #
     # @!attribute [rw] control
@@ -4876,6 +4908,14 @@ module Aws::MediaConvert
     #   wrapper, and it also translates the 608 data into 708.
     #   @return [String]
     #
+    # @!attribute [rw] convert_paint_to_pop
+    #   Choose the presentation style of your input SCC captions. To use the
+    #   same presentation style as your input: Keep the default value,
+    #   Disabled. To convert paint-on captions to pop-on: Choose Enabled. We
+    #   also recommend that you choose Enabled if you notice additional
+    #   repeated lines in your output captions.
+    #   @return [String]
+    #
     # @!attribute [rw] framerate
     #   Ignore this setting unless your input captions format is SCC. To
     #   have the service compensate for differing frame rates between your
@@ -4923,6 +4963,7 @@ module Aws::MediaConvert
     #
     class FileSourceSettings < Struct.new(
       :convert_608_to_708,
+      :convert_paint_to_pop,
       :framerate,
       :source_file,
       :time_delta,
@@ -5266,13 +5307,15 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] dynamic_sub_gop
-    #   Choose Adaptive to improve subjective video quality for high-motion
-    #   content. This will cause the service to use fewer B-frames (which
-    #   infer information based on other frames) for high-motion portions of
-    #   the video and more B-frames for low-motion portions. The maximum
-    #   number of B-frames is limited by the value you provide for the
-    #   setting B frames between reference frames
-    #   (numberBFramesBetweenReferenceFrames).
+    #   Specify whether to allow the number of B-frames in your output GOP
+    #   structure to vary or not depending on your input video content. To
+    #   improve the subjective video quality of your output that has
+    #   high-motion content: Leave blank or keep the default value Adaptive.
+    #   MediaConvert will use fewer B-frames for high-motion video content
+    #   than low-motion content. The maximum number of B- frames is limited
+    #   by the value that you choose for B-frames between reference frames.
+    #   To use the same number B-frames for all types of content: Choose
+    #   Static.
     #   @return [String]
     #
     # @!attribute [rw] entropy_encoding
@@ -5325,17 +5368,18 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] framerate_conversion_algorithm
     #   Choose the method that you want MediaConvert to use when increasing
-    #   or decreasing the frame rate. We recommend using drop duplicate
-    #   (DUPLICATE\_DROP) for numerically simple conversions, such as 60 fps
-    #   to 30 fps. For numerically complex conversions, you can use
-    #   interpolate (INTERPOLATE) to avoid stutter. This results in a smooth
-    #   picture, but might introduce undesirable video artifacts. For
-    #   complex frame rate conversions, especially if your source video has
-    #   already been converted from its original cadence, use FrameFormer
-    #   (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer
-    #   chooses the best conversion method frame by frame. Note that using
-    #   FrameFormer increases the transcoding time and incurs a significant
-    #   add-on cost.
+    #   or decreasing the frame rate. For numerically simple conversions,
+    #   such as 60 fps to 30 fps: We recommend that you keep the default
+    #   value, Drop duplicate. For numerically complex conversions, to avoid
+    #   stutter: Choose Interpolate. This results in a smooth picture, but
+    #   might introduce undesirable video artifacts. For complex frame rate
+    #   conversions, especially if your source video has already been
+    #   converted from its original cadence: Choose FrameFormer to do
+    #   motion-compensated interpolation. FrameFormer uses the best
+    #   conversion method frame by frame. Note that using FrameFormer
+    #   increases the transcoding time and incurs a significant add-on cost.
+    #   When you choose FrameFormer, your input video resolution must be at
+    #   least 128x96.
     #   @return [String]
     #
     # @!attribute [rw] framerate_denominator
@@ -5359,8 +5403,12 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] gop_b_reference
-    #   If enable, use reference B frames for GOP structures that have B
-    #   frames > 1.
+    #   Specify whether to allow B-frames to be referenced by other frame
+    #   types. To use reference B-frames when your GOP structure has 1 or
+    #   more B-frames: Leave blank or keep the default value Enabled. We
+    #   recommend that you choose Enabled to help improve the video quality
+    #   of your output relative to its bitrate. To not use reference
+    #   B-frames: Choose Disabled.
     #   @return [String]
     #
     # @!attribute [rw] gop_closed_cadence
@@ -5465,14 +5513,11 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] number_b_frames_between_reference_frames
-    #   This setting to determines the number of B-frames that MediaConvert
-    #   puts between reference frames in this output. We recommend that you
-    #   use automatic behavior to allow the transcoder to choose the best
-    #   value based on characteristics of your input video. In the console,
-    #   choose AUTO to select this automatic behavior. When you manually
-    #   edit your JSON job specification, leave this setting out to choose
-    #   automatic behavior. When you want to specify this number explicitly,
-    #   choose a whole number from 0 through 7.
+    #   Specify the number of B-frames between reference frames in this
+    #   output. For the best video quality: Leave blank. MediaConvert
+    #   automatically determines the number of B-frames to use based on the
+    #   characteristics of your input video. To manually specify the number
+    #   of B-frames between reference frames: Enter an integer from 0 to 7.
     #   @return [Integer]
     #
     # @!attribute [rw] number_reference_frames
@@ -5510,9 +5555,14 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] quality_tuning_level
-    #   Optional. Use Quality tuning level (qualityTuningLevel) to choose
-    #   how you want to trade off encoding speed for output video quality.
-    #   The default behavior is faster, lower quality, single-pass encoding.
+    #   The Quality tuning level you choose represents a trade-off between
+    #   the encoding speed of your job and the output video quality. For the
+    #   fastest encoding speed at the cost of video quality: Choose Single
+    #   pass. For a good balance between encoding speed and video quality:
+    #   Leave blank or keep the default value Single pass HQ. For the best
+    #   video quality, at the cost of encoding speed: Choose Multi pass HQ.
+    #   MediaConvert performs an analysis pass on your input followed by an
+    #   encoding pass. Outputs that use this feature incur pro-tier pricing.
     #   @return [String]
     #
     # @!attribute [rw] qvbr_settings
@@ -5810,13 +5860,15 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] dynamic_sub_gop
-    #   Choose Adaptive to improve subjective video quality for high-motion
-    #   content. This will cause the service to use fewer B-frames (which
-    #   infer information based on other frames) for high-motion portions of
-    #   the video and more B-frames for low-motion portions. The maximum
-    #   number of B-frames is limited by the value you provide for the
-    #   setting B frames between reference frames
-    #   (numberBFramesBetweenReferenceFrames).
+    #   Specify whether to allow the number of B-frames in your output GOP
+    #   structure to vary or not depending on your input video content. To
+    #   improve the subjective video quality of your output that has
+    #   high-motion content: Leave blank or keep the default value Adaptive.
+    #   MediaConvert will use fewer B-frames for high-motion video content
+    #   than low-motion content. The maximum number of B- frames is limited
+    #   by the value that you choose for B-frames between reference frames.
+    #   To use the same number B-frames for all types of content: Choose
+    #   Static.
     #   @return [String]
     #
     # @!attribute [rw] flicker_adaptive_quantization
@@ -5848,17 +5900,18 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] framerate_conversion_algorithm
     #   Choose the method that you want MediaConvert to use when increasing
-    #   or decreasing the frame rate. We recommend using drop duplicate
-    #   (DUPLICATE\_DROP) for numerically simple conversions, such as 60 fps
-    #   to 30 fps. For numerically complex conversions, you can use
-    #   interpolate (INTERPOLATE) to avoid stutter. This results in a smooth
-    #   picture, but might introduce undesirable video artifacts. For
-    #   complex frame rate conversions, especially if your source video has
-    #   already been converted from its original cadence, use FrameFormer
-    #   (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer
-    #   chooses the best conversion method frame by frame. Note that using
-    #   FrameFormer increases the transcoding time and incurs a significant
-    #   add-on cost.
+    #   or decreasing the frame rate. For numerically simple conversions,
+    #   such as 60 fps to 30 fps: We recommend that you keep the default
+    #   value, Drop duplicate. For numerically complex conversions, to avoid
+    #   stutter: Choose Interpolate. This results in a smooth picture, but
+    #   might introduce undesirable video artifacts. For complex frame rate
+    #   conversions, especially if your source video has already been
+    #   converted from its original cadence: Choose FrameFormer to do
+    #   motion-compensated interpolation. FrameFormer uses the best
+    #   conversion method frame by frame. Note that using FrameFormer
+    #   increases the transcoding time and incurs a significant add-on cost.
+    #   When you choose FrameFormer, your input video resolution must be at
+    #   least 128x96.
     #   @return [String]
     #
     # @!attribute [rw] framerate_denominator
@@ -5882,8 +5935,12 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] gop_b_reference
-    #   If enable, use reference B frames for GOP structures that have B
-    #   frames > 1.
+    #   Specify whether to allow B-frames to be referenced by other frame
+    #   types. To use reference B-frames when your GOP structure has 1 or
+    #   more B-frames: Leave blank or keep the default value Enabled. We
+    #   recommend that you choose Enabled to help improve the video quality
+    #   of your output relative to its bitrate. To not use reference
+    #   B-frames: Choose Disabled.
     #   @return [String]
     #
     # @!attribute [rw] gop_closed_cadence
@@ -5988,10 +6045,11 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] number_b_frames_between_reference_frames
-    #   Specify the number of B-frames that MediaConvert puts between
-    #   reference frames in this output. Valid values are whole numbers from
-    #   0 through 7. When you don't specify a value, MediaConvert defaults
-    #   to 2.
+    #   Specify the number of B-frames between reference frames in this
+    #   output. For the best video quality: Leave blank. MediaConvert
+    #   automatically determines the number of B-frames to use based on the
+    #   characteristics of your input video. To manually specify the number
+    #   of B-frames between reference frames: Enter an integer from 0 to 7.
     #   @return [Integer]
     #
     # @!attribute [rw] number_reference_frames
@@ -7015,15 +7073,24 @@ module Aws::MediaConvert
     # object and any required children when you set destinationType to IMSC.
     #
     # @!attribute [rw] accessibility
-    #   Set Accessibility subtitles to Enabled if the ISMC or WebVTT
-    #   captions track is intended to provide accessibility for people who
-    #   are deaf or hard of hearing. When you enable this feature,
-    #   MediaConvert adds the following attributes under EXT-X-MEDIA in the
-    #   HLS or CMAF manifest for this track:
+    #   If the IMSC captions track is intended to provide accessibility for
+    #   people who are deaf or hard of hearing: Set Accessibility subtitles
+    #   to Enabled. When you do, MediaConvert adds accessibility attributes
+    #   to your output HLS or DASH manifest. For HLS manifests, MediaConvert
+    #   adds the following accessibility attributes under EXT-X-MEDIA for
+    #   this track:
     #   CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound"
-    #   and AUTOSELECT="YES". Keep the default value, Disabled, if the
-    #   captions track is not intended to provide such accessibility.
-    #   MediaConvert will not add the above attributes.
+    #   and AUTOSELECT="YES". For DASH manifests, MediaConvert adds the
+    #   following in the adaptation set for this track: <Accessibility
+    #   schemeIdUri="urn:mpeg:dash:role:2011" value="caption" />
+    #
+    #   . If the captions track is not intended to provide such
+    #   accessibility: Keep the default value, Disabled. When you do, for
+    #   DASH manifests, MediaConvert instead adds the following in the
+    #   adaptation set for this track: <Role
+    #   schemeIDUri="urn:mpeg:dash:role:2011" value="subtitle" />
+    #
+    #   .
     #   @return [String]
     #
     # @!attribute [rw] style_passthrough
@@ -7049,6 +7116,27 @@ module Aws::MediaConvert
     # You can use multiple video inputs to do input stitching. For more
     # information, see
     # https://docs.aws.amazon.com/mediaconvert/latest/ug/assembling-multiple-inputs-and-input-clips.html
+    #
+    # @!attribute [rw] advanced_input_filter
+    #   Use to remove noise, blocking, blurriness, or ringing from your
+    #   input as a pre-filter step before encoding. The Advanced input
+    #   filter removes more types of compression artifacts and is an
+    #   improvement when compared to basic Deblock and Denoise filters. To
+    #   remove video compression artifacts from your input and improve the
+    #   video quality: Choose Enabled. Additionally, this filter can help
+    #   increase the video quality of your output relative to its bitrate,
+    #   since noisy inputs are more complex and require more bits to encode.
+    #   To help restore loss of detail after applying the filter, you can
+    #   optionally add texture or sharpening as an additional step.Jobs that
+    #   use this feature incur pro-tier pricing. To not apply advanced input
+    #   filtering: Choose Disabled. Note that you can still apply basic
+    #   filtering with Deblock and Denoise.
+    #   @return [String]
+    #
+    # @!attribute [rw] advanced_input_filter_settings
+    #   Optional settings for Advanced input filter when you set Advanced
+    #   input filter to Enabled.
+    #   @return [Types::AdvancedInputFilterSettings]
     #
     # @!attribute [rw] audio_selector_groups
     #   Use audio selector groups to combine multiple sidecar audio inputs
@@ -7122,20 +7210,23 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] filter_enable
-    #   Specify how the transcoding service applies the denoise and deblock
-    #   filters. You must also enable the filters separately, with Denoise
-    #   (InputDenoiseFilter) and Deblock (InputDeblockFilter). * Auto - The
-    #   transcoding service determines whether to apply filtering, depending
-    #   on input type and quality. * Disable - The input is not filtered.
-    #   This is true even if you use the API to enable them in
-    #   (InputDeblockFilter) and (InputDeblockFilter). * Force - The input
-    #   is filtered regardless of input type.
+    #   Specify whether to apply input filtering to improve the video
+    #   quality of your input. To apply filtering depending on your input
+    #   type and quality: Choose Auto. To apply no filtering: Choose
+    #   Disable. To apply filtering regardless of your input type and
+    #   quality: Choose Force. When you do, you must also specify a value
+    #   for Filter strength.
     #   @return [String]
     #
     # @!attribute [rw] filter_strength
-    #   Use Filter strength (FilterStrength) to adjust the magnitude the
-    #   input filter settings (Deblock and Denoise). The range is 0 to 5.
-    #   Default is 0.
+    #   Specify the strength of the input filter. To apply an automatic
+    #   amount of filtering based the compression artifacts measured in your
+    #   input: We recommend that you leave Filter strength blank and set
+    #   Filter enable to Auto. To manually apply filtering: Enter a value
+    #   from 1 to 5, where 1 is the least amount of filtering and 5 is the
+    #   most. The value that you enter applies to the strength of the
+    #   Deblock or Denoise filters, or to the strength of the Advanced input
+    #   filter.
     #   @return [Integer]
     #
     # @!attribute [rw] image_inserter
@@ -7243,6 +7334,8 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Input AWS API Documentation
     #
     class Input < Struct.new(
+      :advanced_input_filter,
+      :advanced_input_filter_settings,
       :audio_selector_groups,
       :audio_selectors,
       :caption_selectors,
@@ -7354,6 +7447,27 @@ module Aws::MediaConvert
 
     # Specified video input in a template.
     #
+    # @!attribute [rw] advanced_input_filter
+    #   Use to remove noise, blocking, blurriness, or ringing from your
+    #   input as a pre-filter step before encoding. The Advanced input
+    #   filter removes more types of compression artifacts and is an
+    #   improvement when compared to basic Deblock and Denoise filters. To
+    #   remove video compression artifacts from your input and improve the
+    #   video quality: Choose Enabled. Additionally, this filter can help
+    #   increase the video quality of your output relative to its bitrate,
+    #   since noisy inputs are more complex and require more bits to encode.
+    #   To help restore loss of detail after applying the filter, you can
+    #   optionally add texture or sharpening as an additional step.Jobs that
+    #   use this feature incur pro-tier pricing. To not apply advanced input
+    #   filtering: Choose Disabled. Note that you can still apply basic
+    #   filtering with Deblock and Denoise.
+    #   @return [String]
+    #
+    # @!attribute [rw] advanced_input_filter_settings
+    #   Optional settings for Advanced input filter when you set Advanced
+    #   input filter to Enabled.
+    #   @return [Types::AdvancedInputFilterSettings]
+    #
     # @!attribute [rw] audio_selector_groups
     #   Use audio selector groups to combine multiple sidecar audio inputs
     #   so that you can assign them to a single output audio tab
@@ -7408,20 +7522,23 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] filter_enable
-    #   Specify how the transcoding service applies the denoise and deblock
-    #   filters. You must also enable the filters separately, with Denoise
-    #   (InputDenoiseFilter) and Deblock (InputDeblockFilter). * Auto - The
-    #   transcoding service determines whether to apply filtering, depending
-    #   on input type and quality. * Disable - The input is not filtered.
-    #   This is true even if you use the API to enable them in
-    #   (InputDeblockFilter) and (InputDeblockFilter). * Force - The input
-    #   is filtered regardless of input type.
+    #   Specify whether to apply input filtering to improve the video
+    #   quality of your input. To apply filtering depending on your input
+    #   type and quality: Choose Auto. To apply no filtering: Choose
+    #   Disable. To apply filtering regardless of your input type and
+    #   quality: Choose Force. When you do, you must also specify a value
+    #   for Filter strength.
     #   @return [String]
     #
     # @!attribute [rw] filter_strength
-    #   Use Filter strength (FilterStrength) to adjust the magnitude the
-    #   input filter settings (Deblock and Denoise). The range is 0 to 5.
-    #   Default is 0.
+    #   Specify the strength of the input filter. To apply an automatic
+    #   amount of filtering based the compression artifacts measured in your
+    #   input: We recommend that you leave Filter strength blank and set
+    #   Filter enable to Auto. To manually apply filtering: Enter a value
+    #   from 1 to 5, where 1 is the least amount of filtering and 5 is the
+    #   most. The value that you enter applies to the strength of the
+    #   Deblock or Denoise filters, or to the strength of the Advanced input
+    #   filter.
     #   @return [Integer]
     #
     # @!attribute [rw] image_inserter
@@ -7510,6 +7627,8 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/InputTemplate AWS API Documentation
     #
     class InputTemplate < Struct.new(
+      :advanced_input_filter,
+      :advanced_input_filter_settings,
       :audio_selector_groups,
       :audio_selectors,
       :caption_selectors,
@@ -9642,17 +9761,18 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] framerate_conversion_algorithm
     #   Choose the method that you want MediaConvert to use when increasing
-    #   or decreasing the frame rate. We recommend using drop duplicate
-    #   (DUPLICATE\_DROP) for numerically simple conversions, such as 60 fps
-    #   to 30 fps. For numerically complex conversions, you can use
-    #   interpolate (INTERPOLATE) to avoid stutter. This results in a smooth
-    #   picture, but might introduce undesirable video artifacts. For
-    #   complex frame rate conversions, especially if your source video has
-    #   already been converted from its original cadence, use FrameFormer
-    #   (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer
-    #   chooses the best conversion method frame by frame. Note that using
-    #   FrameFormer increases the transcoding time and incurs a significant
-    #   add-on cost.
+    #   or decreasing the frame rate. For numerically simple conversions,
+    #   such as 60 fps to 30 fps: We recommend that you keep the default
+    #   value, Drop duplicate. For numerically complex conversions, to avoid
+    #   stutter: Choose Interpolate. This results in a smooth picture, but
+    #   might introduce undesirable video artifacts. For complex frame rate
+    #   conversions, especially if your source video has already been
+    #   converted from its original cadence: Choose FrameFormer to do
+    #   motion-compensated interpolation. FrameFormer uses the best
+    #   conversion method frame by frame. Note that using FrameFormer
+    #   increases the transcoding time and incurs a significant add-on cost.
+    #   When you choose FrameFormer, your input video resolution must be at
+    #   least 128x96.
     #   @return [String]
     #
     # @!attribute [rw] framerate_denominator
@@ -10960,17 +11080,18 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] framerate_conversion_algorithm
     #   Choose the method that you want MediaConvert to use when increasing
-    #   or decreasing the frame rate. We recommend using drop duplicate
-    #   (DUPLICATE\_DROP) for numerically simple conversions, such as 60 fps
-    #   to 30 fps. For numerically complex conversions, you can use
-    #   interpolate (INTERPOLATE) to avoid stutter. This results in a smooth
-    #   picture, but might introduce undesirable video artifacts. For
-    #   complex frame rate conversions, especially if your source video has
-    #   already been converted from its original cadence, use FrameFormer
-    #   (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer
-    #   chooses the best conversion method frame by frame. Note that using
-    #   FrameFormer increases the transcoding time and incurs a significant
-    #   add-on cost.
+    #   or decreasing the frame rate. For numerically simple conversions,
+    #   such as 60 fps to 30 fps: We recommend that you keep the default
+    #   value, Drop duplicate. For numerically complex conversions, to avoid
+    #   stutter: Choose Interpolate. This results in a smooth picture, but
+    #   might introduce undesirable video artifacts. For complex frame rate
+    #   conversions, especially if your source video has already been
+    #   converted from its original cadence: Choose FrameFormer to do
+    #   motion-compensated interpolation. FrameFormer uses the best
+    #   conversion method frame by frame. Note that using FrameFormer
+    #   increases the transcoding time and incurs a significant add-on cost.
+    #   When you choose FrameFormer, your input video resolution must be at
+    #   least 128x96.
     #   @return [String]
     #
     # @!attribute [rw] framerate_denominator
@@ -12209,17 +12330,18 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] framerate_conversion_algorithm
     #   Choose the method that you want MediaConvert to use when increasing
-    #   or decreasing the frame rate. We recommend using drop duplicate
-    #   (DUPLICATE\_DROP) for numerically simple conversions, such as 60 fps
-    #   to 30 fps. For numerically complex conversions, you can use
-    #   interpolate (INTERPOLATE) to avoid stutter. This results in a smooth
-    #   picture, but might introduce undesirable video artifacts. For
-    #   complex frame rate conversions, especially if your source video has
-    #   already been converted from its original cadence, use FrameFormer
-    #   (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer
-    #   chooses the best conversion method frame by frame. Note that using
-    #   FrameFormer increases the transcoding time and incurs a significant
-    #   add-on cost.
+    #   or decreasing the frame rate. For numerically simple conversions,
+    #   such as 60 fps to 30 fps: We recommend that you keep the default
+    #   value, Drop duplicate. For numerically complex conversions, to avoid
+    #   stutter: Choose Interpolate. This results in a smooth picture, but
+    #   might introduce undesirable video artifacts. For complex frame rate
+    #   conversions, especially if your source video has already been
+    #   converted from its original cadence: Choose FrameFormer to do
+    #   motion-compensated interpolation. FrameFormer uses the best
+    #   conversion method frame by frame. Note that using FrameFormer
+    #   increases the transcoding time and incurs a significant add-on cost.
+    #   When you choose FrameFormer, your input video resolution must be at
+    #   least 128x96.
     #   @return [String]
     #
     # @!attribute [rw] framerate_denominator
@@ -12339,7 +12461,12 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] codec
     #   Specifies the video codec. This must be equal to one of the enum
-    #   values defined by the object VideoCodec.
+    #   values defined by the object VideoCodec. To passthrough the video
+    #   stream of your input JPEG2000, VC-3, AVC-INTRA or Apple ProRes video
+    #   without any video encoding: Choose Passthrough. If you have multiple
+    #   input videos, note that they must have identical encoding
+    #   attributes. When you choose Passthrough, your output container must
+    #   be MXF or QuickTime MOV.
     #   @return [String]
     #
     # @!attribute [rw] frame_capture_settings
@@ -12845,17 +12972,18 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] framerate_conversion_algorithm
     #   Choose the method that you want MediaConvert to use when increasing
-    #   or decreasing the frame rate. We recommend using drop duplicate
-    #   (DUPLICATE\_DROP) for numerically simple conversions, such as 60 fps
-    #   to 30 fps. For numerically complex conversions, you can use
-    #   interpolate (INTERPOLATE) to avoid stutter. This results in a smooth
-    #   picture, but might introduce undesirable video artifacts. For
-    #   complex frame rate conversions, especially if your source video has
-    #   already been converted from its original cadence, use FrameFormer
-    #   (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer
-    #   chooses the best conversion method frame by frame. Note that using
-    #   FrameFormer increases the transcoding time and incurs a significant
-    #   add-on cost.
+    #   or decreasing the frame rate. For numerically simple conversions,
+    #   such as 60 fps to 30 fps: We recommend that you keep the default
+    #   value, Drop duplicate. For numerically complex conversions, to avoid
+    #   stutter: Choose Interpolate. This results in a smooth picture, but
+    #   might introduce undesirable video artifacts. For complex frame rate
+    #   conversions, especially if your source video has already been
+    #   converted from its original cadence: Choose FrameFormer to do
+    #   motion-compensated interpolation. FrameFormer uses the best
+    #   conversion method frame by frame. Note that using FrameFormer
+    #   increases the transcoding time and incurs a significant add-on cost.
+    #   When you choose FrameFormer, your input video resolution must be at
+    #   least 128x96.
     #   @return [String]
     #
     # @!attribute [rw] framerate_denominator
@@ -12980,17 +13108,18 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] framerate_conversion_algorithm
     #   Choose the method that you want MediaConvert to use when increasing
-    #   or decreasing the frame rate. We recommend using drop duplicate
-    #   (DUPLICATE\_DROP) for numerically simple conversions, such as 60 fps
-    #   to 30 fps. For numerically complex conversions, you can use
-    #   interpolate (INTERPOLATE) to avoid stutter. This results in a smooth
-    #   picture, but might introduce undesirable video artifacts. For
-    #   complex frame rate conversions, especially if your source video has
-    #   already been converted from its original cadence, use FrameFormer
-    #   (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer
-    #   chooses the best conversion method frame by frame. Note that using
-    #   FrameFormer increases the transcoding time and incurs a significant
-    #   add-on cost.
+    #   or decreasing the frame rate. For numerically simple conversions,
+    #   such as 60 fps to 30 fps: We recommend that you keep the default
+    #   value, Drop duplicate. For numerically complex conversions, to avoid
+    #   stutter: Choose Interpolate. This results in a smooth picture, but
+    #   might introduce undesirable video artifacts. For complex frame rate
+    #   conversions, especially if your source video has already been
+    #   converted from its original cadence: Choose FrameFormer to do
+    #   motion-compensated interpolation. FrameFormer uses the best
+    #   conversion method frame by frame. Note that using FrameFormer
+    #   increases the transcoding time and incurs a significant add-on cost.
+    #   When you choose FrameFormer, your input video resolution must be at
+    #   least 128x96.
     #   @return [String]
     #
     # @!attribute [rw] framerate_denominator
@@ -13151,15 +13280,24 @@ module Aws::MediaConvert
     # WebVTT.
     #
     # @!attribute [rw] accessibility
-    #   Set Accessibility subtitles to Enabled if the ISMC or WebVTT
-    #   captions track is intended to provide accessibility for people who
-    #   are deaf or hard of hearing. When you enable this feature,
-    #   MediaConvert adds the following attributes under EXT-X-MEDIA in the
-    #   HLS or CMAF manifest for this track:
+    #   If the WebVTT captions track is intended to provide accessibility
+    #   for people who are deaf or hard of hearing: Set Accessibility
+    #   subtitles to Enabled. When you do, MediaConvert adds accessibility
+    #   attributes to your output HLS or DASH manifest. For HLS manifests,
+    #   MediaConvert adds the following accessibility attributes under
+    #   EXT-X-MEDIA for this track:
     #   CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound"
-    #   and AUTOSELECT="YES". Keep the default value, Disabled, if the
-    #   captions track is not intended to provide such accessibility.
-    #   MediaConvert will not add the above attributes.
+    #   and AUTOSELECT="YES". For DASH manifests, MediaConvert adds the
+    #   following in the adaptation set for this track: <Accessibility
+    #   schemeIdUri="urn:mpeg:dash:role:2011" value="caption" />
+    #
+    #   . If the captions track is not intended to provide such
+    #   accessibility: Keep the default value, Disabled. When you do, for
+    #   DASH manifests, MediaConvert instead adds the following in the
+    #   adaptation set for this track: <Role
+    #   schemeIDUri="urn:mpeg:dash:role:2011" value="subtitle" />
+    #
+    #   .
     #   @return [String]
     #
     # @!attribute [rw] style_passthrough
@@ -13507,17 +13645,18 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] framerate_conversion_algorithm
     #   Choose the method that you want MediaConvert to use when increasing
-    #   or decreasing the frame rate. We recommend using drop duplicate
-    #   (DUPLICATE\_DROP) for numerically simple conversions, such as 60 fps
-    #   to 30 fps. For numerically complex conversions, you can use
-    #   interpolate (INTERPOLATE) to avoid stutter. This results in a smooth
-    #   picture, but might introduce undesirable video artifacts. For
-    #   complex frame rate conversions, especially if your source video has
-    #   already been converted from its original cadence, use FrameFormer
-    #   (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer
-    #   chooses the best conversion method frame by frame. Note that using
-    #   FrameFormer increases the transcoding time and incurs a significant
-    #   add-on cost.
+    #   or decreasing the frame rate. For numerically simple conversions,
+    #   such as 60 fps to 30 fps: We recommend that you keep the default
+    #   value, Drop duplicate. For numerically complex conversions, to avoid
+    #   stutter: Choose Interpolate. This results in a smooth picture, but
+    #   might introduce undesirable video artifacts. For complex frame rate
+    #   conversions, especially if your source video has already been
+    #   converted from its original cadence: Choose FrameFormer to do
+    #   motion-compensated interpolation. FrameFormer uses the best
+    #   conversion method frame by frame. Note that using FrameFormer
+    #   increases the transcoding time and incurs a significant add-on cost.
+    #   When you choose FrameFormer, your input video resolution must be at
+    #   least 128x96.
     #   @return [String]
     #
     # @!attribute [rw] framerate_denominator

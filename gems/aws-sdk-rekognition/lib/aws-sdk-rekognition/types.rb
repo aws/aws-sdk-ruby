@@ -4405,7 +4405,7 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] s3_key_prefix
-    #   The prefix appended to the output files for the Face Liveness
+    #   The prefix prepended to the output files for the Face Liveness
     #   session results.
     #   @return [String]
     #

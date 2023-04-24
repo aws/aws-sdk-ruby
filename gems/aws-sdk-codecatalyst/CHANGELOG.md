@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2023-04-24)
+------------------
+
+* Feature - Documentation updates for Amazon CodeCatalyst.
+
 1.2.0 (2023-03-01)
 ------------------
 

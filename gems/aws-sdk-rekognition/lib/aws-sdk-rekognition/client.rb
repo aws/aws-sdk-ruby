@@ -905,9 +905,9 @@ module Aws::Rekognition
     # and get the results for a Face Liveness session. You can use the
     # `OutputConfig` option in the Settings parameter to provide an Amazon
     # S3 bucket location. The Amazon S3 bucket stores reference images and
-    # audit images. You can use `AuditImagesLimit` to limit of audit images
-    # returned. This number is between 0 and 4. By default, it is set to 0.
-    # The limit is best effort and based on the duration of the
+    # audit images. You can use `AuditImagesLimit` to limit the number of
+    # audit images returned. This number is between 0 and 4. By default, it
+    # is set to 0. The limit is best effort and based on the duration of the
     # selfie-video.
     #
     # @option params [String] :kms_key_id
@@ -3342,7 +3342,7 @@ module Aws::Rekognition
     # @example Response structure
     #
     #   resp.session_id #=> String
-    #   resp.status #=> String, one of "CREATED", "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.status #=> String, one of "CREATED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "EXPIRED"
     #   resp.confidence #=> Float
     #   resp.reference_image.bytes #=> String
     #   resp.reference_image.s3_object.bucket #=> String
@@ -6687,7 +6687,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

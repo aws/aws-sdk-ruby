@@ -341,8 +341,8 @@ module Aws::CodeCatalyst
 
     # @!attribute [rw] id
     #   The ID of the personal access token to delete. You can find the IDs
-    #   of all PATs associated with your user account by calling
-    #   ListAccessTokens.
+    #   of all PATs associated with your Amazon Web Services Builder ID in a
+    #   space by calling ListAccessTokens.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/DeleteAccessTokenRequest AWS API Documentation
@@ -1088,7 +1088,7 @@ module Aws::CodeCatalyst
 
     # @!attribute [rw] items
     #   A list of personal access tokens (PATs) associated with the calling
-    #   user.
+    #   user identity.
     #   @return [Array<Types::AccessTokenSummary>]
     #
     # @!attribute [rw] next_token
@@ -1484,7 +1484,7 @@ module Aws::CodeCatalyst
     #   @return [String]
     #
     # @!attribute [rw] items
-    #   Information about the space.
+    #   Information about the spaces.
     #   @return [Array<Types::SpaceSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/ListSpacesResponse AWS API Documentation

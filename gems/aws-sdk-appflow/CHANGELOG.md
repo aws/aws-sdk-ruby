@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2023-04-24)
+------------------
+
+* Feature - Increased the max length for RefreshToken and AuthCode from 2048 to 4096.
+
 1.37.0 (2023-04-17)
 ------------------
 

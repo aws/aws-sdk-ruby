@@ -308,6 +308,7 @@ module Aws::EC2
     ClientData = Shapes::StructureShape.new(name: 'ClientData')
     ClientLoginBannerOptions = Shapes::StructureShape.new(name: 'ClientLoginBannerOptions')
     ClientLoginBannerResponseOptions = Shapes::StructureShape.new(name: 'ClientLoginBannerResponseOptions')
+    ClientSecretType = Shapes::StringShape.new(name: 'ClientSecretType')
     ClientVpnAssociationId = Shapes::StringShape.new(name: 'ClientVpnAssociationId')
     ClientVpnAuthentication = Shapes::StructureShape.new(name: 'ClientVpnAuthentication')
     ClientVpnAuthenticationList = Shapes::ListShape.new(name: 'ClientVpnAuthenticationList')
@@ -5121,7 +5122,7 @@ module Aws::EC2
     CreateVerifiedAccessTrustProviderOidcOptions.add_member(:token_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "TokenEndpoint"))
     CreateVerifiedAccessTrustProviderOidcOptions.add_member(:user_info_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "UserInfoEndpoint"))
     CreateVerifiedAccessTrustProviderOidcOptions.add_member(:client_id, Shapes::ShapeRef.new(shape: String, location_name: "ClientId"))
-    CreateVerifiedAccessTrustProviderOidcOptions.add_member(:client_secret, Shapes::ShapeRef.new(shape: String, location_name: "ClientSecret"))
+    CreateVerifiedAccessTrustProviderOidcOptions.add_member(:client_secret, Shapes::ShapeRef.new(shape: ClientSecretType, location_name: "ClientSecret"))
     CreateVerifiedAccessTrustProviderOidcOptions.add_member(:scope, Shapes::ShapeRef.new(shape: String, location_name: "Scope"))
     CreateVerifiedAccessTrustProviderOidcOptions.struct_class = Types::CreateVerifiedAccessTrustProviderOidcOptions
 
@@ -7782,7 +7783,7 @@ module Aws::EC2
 
     DiskImageDescription.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
     DiskImageDescription.add_member(:format, Shapes::ShapeRef.new(shape: DiskImageFormat, location_name: "format"))
-    DiskImageDescription.add_member(:import_manifest_url, Shapes::ShapeRef.new(shape: String, location_name: "importManifestUrl"))
+    DiskImageDescription.add_member(:import_manifest_url, Shapes::ShapeRef.new(shape: ImportManifestUrl, location_name: "importManifestUrl"))
     DiskImageDescription.add_member(:size, Shapes::ShapeRef.new(shape: Long, location_name: "size"))
     DiskImageDescription.struct_class = Types::DiskImageDescription
 
@@ -11188,6 +11189,12 @@ module Aws::EC2
     ModifyVerifiedAccessInstanceResult.add_member(:verified_access_instance, Shapes::ShapeRef.new(shape: VerifiedAccessInstance, location_name: "verifiedAccessInstance"))
     ModifyVerifiedAccessInstanceResult.struct_class = Types::ModifyVerifiedAccessInstanceResult
 
+    ModifyVerifiedAccessTrustProviderOidcOptions.add_member(:issuer, Shapes::ShapeRef.new(shape: String, location_name: "Issuer"))
+    ModifyVerifiedAccessTrustProviderOidcOptions.add_member(:authorization_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "AuthorizationEndpoint"))
+    ModifyVerifiedAccessTrustProviderOidcOptions.add_member(:token_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "TokenEndpoint"))
+    ModifyVerifiedAccessTrustProviderOidcOptions.add_member(:user_info_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "UserInfoEndpoint"))
+    ModifyVerifiedAccessTrustProviderOidcOptions.add_member(:client_id, Shapes::ShapeRef.new(shape: String, location_name: "ClientId"))
+    ModifyVerifiedAccessTrustProviderOidcOptions.add_member(:client_secret, Shapes::ShapeRef.new(shape: ClientSecretType, location_name: "ClientSecret"))
     ModifyVerifiedAccessTrustProviderOidcOptions.add_member(:scope, Shapes::ShapeRef.new(shape: String, location_name: "Scope"))
     ModifyVerifiedAccessTrustProviderOidcOptions.struct_class = Types::ModifyVerifiedAccessTrustProviderOidcOptions
 
@@ -11672,7 +11679,7 @@ module Aws::EC2
     OidcOptions.add_member(:token_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "tokenEndpoint"))
     OidcOptions.add_member(:user_info_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "userInfoEndpoint"))
     OidcOptions.add_member(:client_id, Shapes::ShapeRef.new(shape: String, location_name: "clientId"))
-    OidcOptions.add_member(:client_secret, Shapes::ShapeRef.new(shape: String, location_name: "clientSecret"))
+    OidcOptions.add_member(:client_secret, Shapes::ShapeRef.new(shape: ClientSecretType, location_name: "clientSecret"))
     OidcOptions.add_member(:scope, Shapes::ShapeRef.new(shape: String, location_name: "scope"))
     OidcOptions.struct_class = Types::OidcOptions
 

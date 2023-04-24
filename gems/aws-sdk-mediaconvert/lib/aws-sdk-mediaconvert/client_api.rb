@@ -32,6 +32,10 @@ module Aws::MediaConvert
     AccelerationMode = Shapes::StringShape.new(name: 'AccelerationMode')
     AccelerationSettings = Shapes::StructureShape.new(name: 'AccelerationSettings')
     AccelerationStatus = Shapes::StringShape.new(name: 'AccelerationStatus')
+    AdvancedInputFilter = Shapes::StringShape.new(name: 'AdvancedInputFilter')
+    AdvancedInputFilterAddTexture = Shapes::StringShape.new(name: 'AdvancedInputFilterAddTexture')
+    AdvancedInputFilterSettings = Shapes::StructureShape.new(name: 'AdvancedInputFilterSettings')
+    AdvancedInputFilterSharpen = Shapes::StringShape.new(name: 'AdvancedInputFilterSharpen')
     AfdSignaling = Shapes::StringShape.new(name: 'AfdSignaling')
     AiffSettings = Shapes::StructureShape.new(name: 'AiffSettings')
     AllowedRenditionSize = Shapes::StructureShape.new(name: 'AllowedRenditionSize')
@@ -103,6 +107,7 @@ module Aws::MediaConvert
     CaptionDestinationSettings = Shapes::StructureShape.new(name: 'CaptionDestinationSettings')
     CaptionDestinationType = Shapes::StringShape.new(name: 'CaptionDestinationType')
     CaptionSelector = Shapes::StructureShape.new(name: 'CaptionSelector')
+    CaptionSourceConvertPaintOnToPopOn = Shapes::StringShape.new(name: 'CaptionSourceConvertPaintOnToPopOn')
     CaptionSourceFramerate = Shapes::StructureShape.new(name: 'CaptionSourceFramerate')
     CaptionSourceSettings = Shapes::StructureShape.new(name: 'CaptionSourceSettings')
     CaptionSourceType = Shapes::StringShape.new(name: 'CaptionSourceType')
@@ -658,12 +663,12 @@ module Aws::MediaConvert
     __doubleMin0 = Shapes::FloatShape.new(name: '__doubleMin0')
     __doubleMin0Max1 = Shapes::FloatShape.new(name: '__doubleMin0Max1')
     __doubleMin0Max2147483647 = Shapes::FloatShape.new(name: '__doubleMin0Max2147483647')
-    __doubleMinNegative20Max0 = Shapes::FloatShape.new(name: '__doubleMinNegative20Max0')
     __doubleMinNegative59Max0 = Shapes::FloatShape.new(name: '__doubleMinNegative59Max0')
     __doubleMinNegative60Max3 = Shapes::FloatShape.new(name: '__doubleMinNegative60Max3')
     __doubleMinNegative60Max6 = Shapes::FloatShape.new(name: '__doubleMinNegative60Max6')
     __doubleMinNegative60MaxNegative1 = Shapes::FloatShape.new(name: '__doubleMinNegative60MaxNegative1')
     __doubleMinNegative6Max3 = Shapes::FloatShape.new(name: '__doubleMinNegative6Max3')
+    __doubleMinNegative8Max0 = Shapes::FloatShape.new(name: '__doubleMinNegative8Max0')
     __integer = Shapes::IntegerShape.new(name: '__integer')
     __integerMin0Max0 = Shapes::IntegerShape.new(name: '__integerMin0Max0')
     __integerMin0Max1 = Shapes::IntegerShape.new(name: '__integerMin0Max1')
@@ -844,7 +849,7 @@ module Aws::MediaConvert
     __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932 = Shapes::StringShape.new(name: '__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932')
     __stringPatternDD = Shapes::StringShape.new(name: '__stringPatternDD')
     __stringPatternHttps = Shapes::StringShape.new(name: '__stringPatternHttps')
-    __stringPatternHttpsKantarmediaCom = Shapes::StringShape.new(name: '__stringPatternHttpsKantarmediaCom')
+    __stringPatternHttpsKantarmediaComFr = Shapes::StringShape.new(name: '__stringPatternHttpsKantarmediaComFr')
     __stringPatternIdentityAZaZ26AZaZ09163 = Shapes::StringShape.new(name: '__stringPatternIdentityAZaZ26AZaZ09163')
     __stringPatternS3 = Shapes::StringShape.new(name: '__stringPatternS3')
     __stringPatternS3ASSETMAPXml = Shapes::StringShape.new(name: '__stringPatternS3ASSETMAPXml')
@@ -881,6 +886,10 @@ module Aws::MediaConvert
 
     AccelerationSettings.add_member(:mode, Shapes::ShapeRef.new(shape: AccelerationMode, required: true, location_name: "mode"))
     AccelerationSettings.struct_class = Types::AccelerationSettings
+
+    AdvancedInputFilterSettings.add_member(:add_texture, Shapes::ShapeRef.new(shape: AdvancedInputFilterAddTexture, location_name: "addTexture"))
+    AdvancedInputFilterSettings.add_member(:sharpening, Shapes::ShapeRef.new(shape: AdvancedInputFilterSharpen, location_name: "sharpening"))
+    AdvancedInputFilterSettings.struct_class = Types::AdvancedInputFilterSettings
 
     AiffSettings.add_member(:bit_depth, Shapes::ShapeRef.new(shape: __integerMin16Max24, location_name: "bitDepth"))
     AiffSettings.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin1Max64, location_name: "channels"))
@@ -937,7 +946,7 @@ module Aws::MediaConvert
     AudioNormalizationSettings.add_member(:loudness_logging, Shapes::ShapeRef.new(shape: AudioNormalizationLoudnessLogging, location_name: "loudnessLogging"))
     AudioNormalizationSettings.add_member(:peak_calculation, Shapes::ShapeRef.new(shape: AudioNormalizationPeakCalculation, location_name: "peakCalculation"))
     AudioNormalizationSettings.add_member(:target_lkfs, Shapes::ShapeRef.new(shape: __doubleMinNegative59Max0, location_name: "targetLkfs"))
-    AudioNormalizationSettings.add_member(:true_peak_limiter_threshold, Shapes::ShapeRef.new(shape: __doubleMinNegative20Max0, location_name: "truePeakLimiterThreshold"))
+    AudioNormalizationSettings.add_member(:true_peak_limiter_threshold, Shapes::ShapeRef.new(shape: __doubleMinNegative8Max0, location_name: "truePeakLimiterThreshold"))
     AudioNormalizationSettings.struct_class = Types::AudioNormalizationSettings
 
     AudioSelector.add_member(:audio_duration_correction, Shapes::ShapeRef.new(shape: AudioDurationCorrection, location_name: "audioDurationCorrection"))
@@ -1460,6 +1469,7 @@ module Aws::MediaConvert
     FileGroupSettings.struct_class = Types::FileGroupSettings
 
     FileSourceSettings.add_member(:convert_608_to_708, Shapes::ShapeRef.new(shape: FileSourceConvert608To708, location_name: "convert608To708"))
+    FileSourceSettings.add_member(:convert_paint_to_pop, Shapes::ShapeRef.new(shape: CaptionSourceConvertPaintOnToPopOn, location_name: "convertPaintToPop"))
     FileSourceSettings.add_member(:framerate, Shapes::ShapeRef.new(shape: CaptionSourceFramerate, location_name: "framerate"))
     FileSourceSettings.add_member(:source_file, Shapes::ShapeRef.new(shape: __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT, location_name: "sourceFile"))
     FileSourceSettings.add_member(:time_delta, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "timeDelta"))
@@ -1714,6 +1724,8 @@ module Aws::MediaConvert
     ImscDestinationSettings.add_member(:style_passthrough, Shapes::ShapeRef.new(shape: ImscStylePassthrough, location_name: "stylePassthrough"))
     ImscDestinationSettings.struct_class = Types::ImscDestinationSettings
 
+    Input.add_member(:advanced_input_filter, Shapes::ShapeRef.new(shape: AdvancedInputFilter, location_name: "advancedInputFilter"))
+    Input.add_member(:advanced_input_filter_settings, Shapes::ShapeRef.new(shape: AdvancedInputFilterSettings, location_name: "advancedInputFilterSettings"))
     Input.add_member(:audio_selector_groups, Shapes::ShapeRef.new(shape: __mapOfAudioSelectorGroup, location_name: "audioSelectorGroups"))
     Input.add_member(:audio_selectors, Shapes::ShapeRef.new(shape: __mapOfAudioSelector, location_name: "audioSelectors"))
     Input.add_member(:caption_selectors, Shapes::ShapeRef.new(shape: __mapOfCaptionSelector, location_name: "captionSelectors"))
@@ -1748,6 +1760,8 @@ module Aws::MediaConvert
     InputDecryptionSettings.add_member(:kms_key_region, Shapes::ShapeRef.new(shape: __stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912, location_name: "kmsKeyRegion"))
     InputDecryptionSettings.struct_class = Types::InputDecryptionSettings
 
+    InputTemplate.add_member(:advanced_input_filter, Shapes::ShapeRef.new(shape: AdvancedInputFilter, location_name: "advancedInputFilter"))
+    InputTemplate.add_member(:advanced_input_filter_settings, Shapes::ShapeRef.new(shape: AdvancedInputFilterSettings, location_name: "advancedInputFilterSettings"))
     InputTemplate.add_member(:audio_selector_groups, Shapes::ShapeRef.new(shape: __mapOfAudioSelectorGroup, location_name: "audioSelectorGroups"))
     InputTemplate.add_member(:audio_selectors, Shapes::ShapeRef.new(shape: __mapOfAudioSelector, location_name: "audioSelectors"))
     InputTemplate.add_member(:caption_selectors, Shapes::ShapeRef.new(shape: __mapOfCaptionSelector, location_name: "captionSelectors"))
@@ -1868,7 +1882,7 @@ module Aws::MediaConvert
     KantarWatermarkSettings.add_member(:credentials_secret_name, Shapes::ShapeRef.new(shape: __stringMin1Max512PatternAZAZ09, location_name: "credentialsSecretName"))
     KantarWatermarkSettings.add_member(:file_offset, Shapes::ShapeRef.new(shape: __doubleMin0, location_name: "fileOffset"))
     KantarWatermarkSettings.add_member(:kantar_license_id, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "kantarLicenseId"))
-    KantarWatermarkSettings.add_member(:kantar_server_url, Shapes::ShapeRef.new(shape: __stringPatternHttpsKantarmediaCom, location_name: "kantarServerUrl"))
+    KantarWatermarkSettings.add_member(:kantar_server_url, Shapes::ShapeRef.new(shape: __stringPatternHttpsKantarmediaComFr, location_name: "kantarServerUrl"))
     KantarWatermarkSettings.add_member(:log_destination, Shapes::ShapeRef.new(shape: __stringPatternS3, location_name: "logDestination"))
     KantarWatermarkSettings.add_member(:metadata_3, Shapes::ShapeRef.new(shape: __stringMin1Max50, location_name: "metadata3"))
     KantarWatermarkSettings.add_member(:metadata_4, Shapes::ShapeRef.new(shape: __stringMin1Max50, location_name: "metadata4"))

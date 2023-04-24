@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2023-04-24)
+------------------
+
+* Feature - This release introduces a noise reduction pre-filter, linear interpolation deinterlace mode, video pass-through, updated default job settings, and expanded LC-AAC Stereo audio bitrate ranges.
+
 1.104.0 (2023-04-10)
 ------------------
 

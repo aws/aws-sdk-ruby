@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.376.0 (2023-04-24)
+------------------
+
+* Feature - API changes to AWS Verified Access related to identity providers' information.
+
 1.375.0 (2023-04-04)
 ------------------
 

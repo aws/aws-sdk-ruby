@@ -2758,11 +2758,11 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_instance_id
-    #   The ID of the Amazon Web Services Verified Access instance.
+    #   The ID of the Verified Access instance.
     #   @return [String]
     #
     # @!attribute [rw] verified_access_trust_provider_id
-    #   The ID of the Amazon Web Services Verified Access trust provider.
+    #   The ID of the Verified Access trust provider.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -2797,11 +2797,11 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_trust_provider
-    #   The ID of the Amazon Web Services Verified Access trust provider.
+    #   The ID of the Verified Access trust provider.
     #   @return [Types::VerifiedAccessTrustProvider]
     #
     # @!attribute [rw] verified_access_instance
-    #   The ID of the Amazon Web Services Verified Access instance.
+    #   The ID of the Verified Access instance.
     #   @return [Types::VerifiedAccessInstance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachVerifiedAccessTrustProviderResult AWS API Documentation
@@ -11258,7 +11258,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Options for a network interface-type endpoint.
+    # Describes the network interface options when creating an Amazon Web
+    # Services Verified Access endpoint using the `network-interface` type.
     #
     # @!attribute [rw] network_interface_id
     #   The ID of the network interface.
@@ -11282,8 +11283,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes a load balancer when creating an Amazon Web Services
-    # Verified Access endpoint using the `load-balancer` type.
+    # Describes the load balancer options when creating an Amazon Web
+    # Services Verified Access endpoint using the `load-balancer` type.
     #
     # @!attribute [rw] protocol
     #   The IP protocol.
@@ -11317,12 +11318,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] endpoint_type
-    #   The type of Amazon Web Services Verified Access endpoint to create.
+    #   The type of Verified Access endpoint to create.
     #   @return [String]
     #
     # @!attribute [rw] attachment_type
-    #   The Amazon Web Services network component Verified Access attaches
-    #   to.
+    #   The type of attachment.
     #   @return [String]
     #
     # @!attribute [rw] domain_certificate_arn
@@ -11337,36 +11337,35 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] endpoint_domain_prefix
-    #   A custom identifier that gets prepended to a DNS name that is
+    #   A custom identifier that is prepended to the DNS name that is
     #   generated for the endpoint.
     #   @return [String]
     #
     # @!attribute [rw] security_group_ids
-    #   The Amazon EC2 security groups to associate with the Amazon Web
-    #   Services Verified Access endpoint.
+    #   The IDs of the security groups to associate with the Verified Access
+    #   endpoint.
     #   @return [Array<String>]
     #
     # @!attribute [rw] load_balancer_options
-    #   The load balancer details if creating the Amazon Web Services
-    #   Verified Access endpoint as `load-balancer`type.
+    #   The load balancer details. This parameter is required if the
+    #   endpoint type is `load-balancer`.
     #   @return [Types::CreateVerifiedAccessEndpointLoadBalancerOptions]
     #
     # @!attribute [rw] network_interface_options
-    #   The network interface details if creating the Amazon Web Services
-    #   Verified Access endpoint as `network-interface`type.
+    #   The network interface details. This parameter is required if the
+    #   endpoint type is `network-interface`.
     #   @return [Types::CreateVerifiedAccessEndpointEniOptions]
     #
     # @!attribute [rw] description
-    #   A description for the Amazon Web Services Verified Access endpoint.
+    #   A description for the Verified Access endpoint.
     #   @return [String]
     #
     # @!attribute [rw] policy_document
-    #   The Amazon Web Services Verified Access policy document.
+    #   The Verified Access policy document.
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
-    #   The tags to assign to the Amazon Web Services Verified Access
-    #   endpoint.
+    #   The tags to assign to the Verified Access endpoint.
     #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] client_token
@@ -11411,7 +11410,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_endpoint
-    #   The ID of the Amazon Web Services Verified Access endpoint.
+    #   The ID of the Verified Access endpoint.
     #   @return [Types::VerifiedAccessEndpoint]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessEndpointResult AWS API Documentation
@@ -11423,19 +11422,19 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_instance_id
-    #   The ID of the Amazon Web Services Verified Access instance.
+    #   The ID of the Verified Access instance.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description for the Amazon Web Services Verified Access group.
+    #   A description for the Verified Access group.
     #   @return [String]
     #
     # @!attribute [rw] policy_document
-    #   The Amazon Web Services Verified Access policy document.
+    #   The Verified Access policy document.
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
-    #   The tags to assign to the Amazon Web Services Verified Access group.
+    #   The tags to assign to the Verified Access group.
     #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] client_token
@@ -11484,12 +11483,11 @@ module Aws::EC2
     end
 
     # @!attribute [rw] description
-    #   A description for the Amazon Web Services Verified Access instance.
+    #   A description for the Verified Access instance.
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
-    #   The tags to assign to the Amazon Web Services Verified Access
-    #   instance.
+    #   The tags to assign to the Verified Access instance.
     #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] client_token
@@ -11524,7 +11522,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_instance
-    #   The ID of the Amazon Web Services Verified Access instance.
+    #   The ID of the Verified Access instance.
     #   @return [Types::VerifiedAccessInstance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessInstanceResult AWS API Documentation
@@ -11535,7 +11533,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Options for a device-identity type trust provider.
+    # Describes the options when creating an Amazon Web Services Verified
+    # Access trust provider using the `device` type.
     #
     # @!attribute [rw] tenant_id
     #   The ID of the tenant application with the device-identity provider.
@@ -11549,7 +11548,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Options for an OIDC-based, user-identity type trust provider.
+    # Describes the options when creating an Amazon Web Services Verified
+    # Access trust provider using the `user` type.
     #
     # @!attribute [rw] issuer
     #   The OIDC issuer.
@@ -11591,29 +11591,33 @@ module Aws::EC2
       :client_id,
       :client_secret,
       :scope)
-      SENSITIVE = []
+      SENSITIVE = [:client_secret]
       include Aws::Structure
     end
 
     # @!attribute [rw] trust_provider_type
-    #   The type of trust provider can be either user or device-based.
+    #   The type of trust provider.
     #   @return [String]
     #
     # @!attribute [rw] user_trust_provider_type
-    #   The type of user-based trust provider.
+    #   The type of user-based trust provider. This parameter is required
+    #   when the provider type is `user`.
     #   @return [String]
     #
     # @!attribute [rw] device_trust_provider_type
-    #   The type of device-based trust provider.
+    #   The type of device-based trust provider. This parameter is required
+    #   when the provider type is `device`.
     #   @return [String]
     #
     # @!attribute [rw] oidc_options
-    #   The OpenID Connect details for an `oidc`-type, user-identity based
-    #   trust provider.
+    #   The options for a OpenID Connect-compatible user-identity trust
+    #   provider. This parameter is required when the provider type is
+    #   `user`.
     #   @return [Types::CreateVerifiedAccessTrustProviderOidcOptions]
     #
     # @!attribute [rw] device_options
-    #   The options for device identity based trust providers.
+    #   The options for a device-based trust provider. This parameter is
+    #   required when the provider type is `device`.
     #   @return [Types::CreateVerifiedAccessTrustProviderDeviceOptions]
     #
     # @!attribute [rw] policy_reference_name
@@ -11621,13 +11625,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description for the Amazon Web Services Verified Access trust
-    #   provider.
+    #   A description for the Verified Access trust provider.
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
-    #   The tags to assign to the Amazon Web Services Verified Access trust
-    #   provider.
+    #   The tags to assign to the Verified Access trust provider.
     #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] client_token
@@ -11668,7 +11670,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_trust_provider
-    #   The ID of the Amazon Web Services Verified Access trust provider.
+    #   The ID of the Verified Access trust provider.
     #   @return [Types::VerifiedAccessTrustProvider]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessTrustProviderResult AWS API Documentation
@@ -14773,7 +14775,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_endpoint_id
-    #   The ID of the Amazon Web Services Verified Access endpoint.
+    #   The ID of the Verified Access endpoint.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -14807,7 +14809,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_endpoint
-    #   The ID of the Amazon Web Services Verified Access endpoint.
+    #   The ID of the Verified Access endpoint.
     #   @return [Types::VerifiedAccessEndpoint]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVerifiedAccessEndpointResult AWS API Documentation
@@ -14819,7 +14821,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_group_id
-    #   The ID of the Amazon Web Services Verified Access group.
+    #   The ID of the Verified Access group.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -14853,7 +14855,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_group
-    #   The ID of the Amazon Web Services Verified Access group.
+    #   The ID of the Verified Access group.
     #   @return [Types::VerifiedAccessGroup]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVerifiedAccessGroupResult AWS API Documentation
@@ -14865,7 +14867,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_instance_id
-    #   The ID of the Amazon Web Services Verified Access instance.
+    #   The ID of the Verified Access instance.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -14899,7 +14901,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_instance
-    #   The ID of the Amazon Web Services Verified Access instance.
+    #   The ID of the Verified Access instance.
     #   @return [Types::VerifiedAccessInstance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVerifiedAccessInstanceResult AWS API Documentation
@@ -14911,7 +14913,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_trust_provider_id
-    #   The ID of the Amazon Web Services Verified Access trust provider.
+    #   The ID of the Verified Access trust provider.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -14945,7 +14947,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_trust_provider
-    #   The ID of the Amazon Web Services Verified Access trust provider.
+    #   The ID of the Verified Access trust provider.
     #   @return [Types::VerifiedAccessTrustProvider]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVerifiedAccessTrustProviderResult AWS API Documentation
@@ -25131,15 +25133,15 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_endpoint_ids
-    #   The ID of the Amazon Web Services Verified Access endpoint.
+    #   The ID of the Verified Access endpoint.
     #   @return [Array<String>]
     #
     # @!attribute [rw] verified_access_instance_id
-    #   The ID of the Amazon Web Services Verified Access instance.
+    #   The ID of the Verified Access instance.
     #   @return [String]
     #
     # @!attribute [rw] verified_access_group_id
-    #   The ID of the Amazon Web Services Verified Access group.
+    #   The ID of the Verified Access group.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -25178,7 +25180,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_endpoints
-    #   The ID of the Amazon Web Services Verified Access endpoint.
+    #   The ID of the Verified Access endpoint.
     #   @return [Array<Types::VerifiedAccessEndpoint>]
     #
     # @!attribute [rw] next_token
@@ -25196,11 +25198,11 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_group_ids
-    #   The ID of the Amazon Web Services Verified Access groups.
+    #   The ID of the Verified Access groups.
     #   @return [Array<String>]
     #
     # @!attribute [rw] verified_access_instance_id
-    #   The ID of the Amazon Web Services Verified Access instance.
+    #   The ID of the Verified Access instance.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -25256,7 +25258,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_instance_ids
-    #   The IDs of the Amazon Web Services Verified Access instances.
+    #   The IDs of the Verified Access instances.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -25293,8 +25295,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] logging_configurations
-    #   The current logging configuration for the Amazon Web Services
-    #   Verified Access instances.
+    #   The current logging configuration for the Verified Access instances.
     #   @return [Array<Types::VerifiedAccessInstanceLoggingConfiguration>]
     #
     # @!attribute [rw] next_token
@@ -25312,7 +25313,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_instance_ids
-    #   The IDs of the Amazon Web Services Verified Access instances.
+    #   The IDs of the Verified Access instances.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -25349,7 +25350,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_instances
-    #   The IDs of the Amazon Web Services Verified Access instances.
+    #   The IDs of the Verified Access instances.
     #   @return [Array<Types::VerifiedAccessInstance>]
     #
     # @!attribute [rw] next_token
@@ -25367,7 +25368,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_trust_provider_ids
-    #   The IDs of the Amazon Web Services Verified Access trust providers.
+    #   The IDs of the Verified Access trust providers.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -25404,7 +25405,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_trust_providers
-    #   The IDs of the Amazon Web Services Verified Access trust providers.
+    #   The IDs of the Verified Access trust providers.
     #   @return [Array<Types::VerifiedAccessTrustProvider>]
     #
     # @!attribute [rw] next_token
@@ -26900,11 +26901,11 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_instance_id
-    #   The ID of the Amazon Web Services Verified Access instance.
+    #   The ID of the Verified Access instance.
     #   @return [String]
     #
     # @!attribute [rw] verified_access_trust_provider_id
-    #   The ID of the Amazon Web Services Verified Access trust provider.
+    #   The ID of the Verified Access trust provider.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -26939,11 +26940,11 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_trust_provider
-    #   The ID of the Amazon Web Services Verified Access trust provider.
+    #   The ID of the Verified Access trust provider.
     #   @return [Types::VerifiedAccessTrustProvider]
     #
     # @!attribute [rw] verified_access_instance
-    #   The ID of the Amazon Web Services Verified Access instance.
+    #   The ID of the Verified Access instance.
     #   @return [Types::VerifiedAccessInstance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachVerifiedAccessTrustProviderResult AWS API Documentation
@@ -27025,8 +27026,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Options for an Amazon Web Services Verified Access device-identity
-    # based trust provider.
+    # Describes the options for an Amazon Web Services Verified Access
+    # device-identity based trust provider.
     #
     # @!attribute [rw] tenant_id
     #   The ID of the tenant application with the device-identity provider.
@@ -28292,7 +28293,7 @@ module Aws::EC2
       :format,
       :import_manifest_url,
       :size)
-      SENSITIVE = []
+      SENSITIVE = [:import_manifest_url]
       include Aws::Structure
     end
 
@@ -34125,7 +34126,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_endpoint_id
-    #   The ID of the Amazon Web Services Verified Access endpoint.
+    #   The ID of the Verified Access endpoint.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -34149,7 +34150,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] policy_document
-    #   The Amazon Web Services Verified Access policy document.
+    #   The Verified Access policy document.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetVerifiedAccessEndpointPolicyResult AWS API Documentation
@@ -34162,7 +34163,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_group_id
-    #   The ID of the Amazon Web Services Verified Access group.
+    #   The ID of the Verified Access group.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -34186,7 +34187,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] policy_document
-    #   The Amazon Web Services Verified Access policy document.
+    #   The Verified Access policy document.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetVerifiedAccessGroupPolicyResult AWS API Documentation
@@ -46174,7 +46175,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Options for a network-interface type Verified Access endpoint.
+    # Describes the options when modifying a Verified Access endpoint with
+    # the `network-interface` type.
     #
     # @!attribute [rw] protocol
     #   The IP protocol.
@@ -46219,7 +46221,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_endpoint_id
-    #   The ID of the Amazon Web Services Verified Access endpoint.
+    #   The ID of the Verified Access endpoint.
     #   @return [String]
     #
     # @!attribute [rw] policy_enabled
@@ -46227,7 +46229,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] policy_document
-    #   The Amazon Web Services Verified Access policy document.
+    #   The Verified Access policy document.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -46267,7 +46269,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] policy_document
-    #   The Amazon Web Services Verified Access policy document.
+    #   The Verified Access policy document.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessEndpointPolicyResult AWS API Documentation
@@ -46280,16 +46282,16 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_endpoint_id
-    #   The ID of the Amazon Web Services Verified Access endpoint.
+    #   The ID of the Verified Access endpoint.
     #   @return [String]
     #
     # @!attribute [rw] verified_access_group_id
-    #   The ID of the Amazon Web Services Verified Access group.
+    #   The ID of the Verified Access group.
     #   @return [String]
     #
     # @!attribute [rw] load_balancer_options
-    #   The load balancer details if creating the Amazon Web Services
-    #   Verified Access endpoint as `load-balancer`type.
+    #   The load balancer details if creating the Verified Access endpoint
+    #   as `load-balancer`type.
     #   @return [Types::ModifyVerifiedAccessEndpointLoadBalancerOptions]
     #
     # @!attribute [rw] network_interface_options
@@ -46297,7 +46299,7 @@ module Aws::EC2
     #   @return [Types::ModifyVerifiedAccessEndpointEniOptions]
     #
     # @!attribute [rw] description
-    #   A description for the Amazon Web Services Verified Access endpoint.
+    #   A description for the Verified Access endpoint.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -46335,7 +46337,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_endpoint
-    #   The Amazon Web Services Verified Access endpoint details.
+    #   The Verified Access endpoint details.
     #   @return [Types::VerifiedAccessEndpoint]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessEndpointResult AWS API Documentation
@@ -46347,7 +46349,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_group_id
-    #   The ID of the Amazon Web Services Verified Access group.
+    #   The ID of the Verified Access group.
     #   @return [String]
     #
     # @!attribute [rw] policy_enabled
@@ -46355,7 +46357,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] policy_document
-    #   The Amazon Web Services Verified Access policy document.
+    #   The Verified Access policy document.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -46395,7 +46397,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] policy_document
-    #   The Amazon Web Services Verified Access policy document.
+    #   The Verified Access policy document.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessGroupPolicyResult AWS API Documentation
@@ -46408,15 +46410,15 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_group_id
-    #   The ID of the Amazon Web Services Verified Access group.
+    #   The ID of the Verified Access group.
     #   @return [String]
     #
     # @!attribute [rw] verified_access_instance_id
-    #   The ID of the Amazon Web Services Verified Access instance.
+    #   The ID of the Verified Access instance.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description for the Amazon Web Services Verified Access group.
+    #   A description for the Verified Access group.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -46452,7 +46454,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_group
-    #   Details of Amazon Web Services Verified Access group.
+    #   Details of Verified Access group.
     #   @return [Types::VerifiedAccessGroup]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessGroupResult AWS API Documentation
@@ -46464,12 +46466,11 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_instance_id
-    #   The ID of the Amazon Web Services Verified Access instance.
+    #   The ID of the Verified Access instance.
     #   @return [String]
     #
     # @!attribute [rw] access_logs
-    #   The configuration options for Amazon Web Services Verified Access
-    #   instances.
+    #   The configuration options for Verified Access instances.
     #   @return [Types::VerifiedAccessLogOptions]
     #
     # @!attribute [rw] dry_run
@@ -46504,8 +46505,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] logging_configuration
-    #   The logging configuration for Amazon Web Services Verified Access
-    #   instance.
+    #   The logging configuration for the Verified Access instance.
     #   @return [Types::VerifiedAccessInstanceLoggingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessInstanceLoggingConfigurationResult AWS API Documentation
@@ -46517,11 +46517,11 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_instance_id
-    #   The ID of the Amazon Web Services Verified Access instance.
+    #   The ID of the Verified Access instance.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description for the Amazon Web Services Verified Access instance.
+    #   A description for the Verified Access instance.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -46556,7 +46556,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_instance
-    #   The ID of the Amazon Web Services Verified Access instance.
+    #   The ID of the Verified Access instance.
     #   @return [Types::VerifiedAccessInstance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessInstanceResult AWS API Documentation
@@ -46567,8 +46567,31 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # OpenID Connect options for an `oidc`-type, user-identity based trust
-    # provider.
+    # Options for an OpenID Connect-compatible user-identity trust provider.
+    #
+    # @!attribute [rw] issuer
+    #   The OIDC issuer.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_endpoint
+    #   The OIDC authorization endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_endpoint
+    #   The OIDC token endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_info_endpoint
+    #   The OIDC user info endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The client identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret
+    #   The client secret.
+    #   @return [String]
     #
     # @!attribute [rw] scope
     #   OpenID Connect (OIDC) scopes are used by an application during
@@ -46579,23 +46602,28 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessTrustProviderOidcOptions AWS API Documentation
     #
     class ModifyVerifiedAccessTrustProviderOidcOptions < Struct.new(
+      :issuer,
+      :authorization_endpoint,
+      :token_endpoint,
+      :user_info_endpoint,
+      :client_id,
+      :client_secret,
       :scope)
-      SENSITIVE = []
+      SENSITIVE = [:client_secret]
       include Aws::Structure
     end
 
     # @!attribute [rw] verified_access_trust_provider_id
-    #   The ID of the Amazon Web Services Verified Access trust provider.
+    #   The ID of the Verified Access trust provider.
     #   @return [String]
     #
     # @!attribute [rw] oidc_options
-    #   The OpenID Connect details for an `oidc`-type, user-identity based
-    #   trust provider.
+    #   The options for an OpenID Connect-compatible user-identity trust
+    #   provider.
     #   @return [Types::ModifyVerifiedAccessTrustProviderOidcOptions]
     #
     # @!attribute [rw] description
-    #   A description for the Amazon Web Services Verified Access trust
-    #   provider.
+    #   A description for the Verified Access trust provider.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -46631,7 +46659,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_trust_provider
-    #   The ID of the Amazon Web Services Verified Access trust provider.
+    #   The ID of the Verified Access trust provider.
     #   @return [Types::VerifiedAccessTrustProvider]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessTrustProviderResult AWS API Documentation
@@ -48977,7 +49005,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Options for OIDC-based, user-identity type trust provider.
+    # Describes the options for an OpenID Connect-compatible user-identity
+    # trust provider.
     #
     # @!attribute [rw] issuer
     #   The OIDC issuer.
@@ -49017,7 +49046,7 @@ module Aws::EC2
       :client_id,
       :client_secret,
       :scope)
-      SENSITIVE = []
+      SENSITIVE = [:client_secret]
       include Aws::Structure
     end
 
@@ -62992,12 +63021,12 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] oidc_options
-    #   The OpenID Connect details for an `oidc`-type, user-identity based
-    #   trust provider.
+    #   The options for an OpenID Connect-compatible user-identity trust
+    #   provider.
     #   @return [Types::OidcOptions]
     #
     # @!attribute [rw] device_options
-    #   The options for device-identity type trust provider.
+    #   The options for device-identity trust provider.
     #   @return [Types::DeviceOptions]
     #
     # @!attribute [rw] policy_reference_name
