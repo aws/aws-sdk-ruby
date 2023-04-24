@@ -58,38 +58,59 @@ module Aws
       end
 
       describe '#copy_snapshot' do
-
-        it 'requires a source shapshot region' do
-          ec2 = Client.new(stub_responses: true)
-          expect {
-            ec2.copy_snapshot
-          }.to raise_error(ArgumentError)
+        let(:client) do
+          Client.new(
+            region: destination_region,
+            credentials: Credentials.new('akid', 'secret'),
+            stub_responses: true
+          )
         end
 
-        it 'manages :destination_region and :presigned_url' do
-          now = Time.now
-          allow(Time).to receive(:now).and_return(now)
-          dest_region = 'us-west-1'
-          src_region = 'us-west-2'
-          snap_id = 'id'
+        let(:kms_key_id) { '238f8ec9-420a-0690-8ec9-009f34fc3ef5' }
+        let(:source_snapshot_id) { 'snap-1234567890abcdef0' }
+        let(:source_region) { 'us-east-1' }
+        let(:destination_region) { 'us-west-2' }
 
-          ec2 = Client.new(region: dest_region, stub_responses: true)
-          resp = ec2.copy_snapshot({
-            source_region: src_region,
-            source_snapshot_id: snap_id,
-          })
-
-          expect(resp.context.params[:destination_region]).to eq(dest_region)
-
-          presigned_query_params = CGI.parse(resp.context.params[:presigned_url])
-          expect(resp.context.params[:presigned_url]).to match(/^https:\/\/ec2\.#{src_region}.amazonaws.com/)
-          expect(presigned_query_params['DestinationRegion']).to eq([dest_region])
-          expect(presigned_query_params['SourceRegion']).to eq([src_region])
-          expect(presigned_query_params['SourceSnapshotId']).to eq([snap_id])
-
-
+        let(:params) do
+          {
+            kms_key_id: kms_key_id,
+            source_region: source_region,
+            encrypted: true,
+            source_snapshot_id: 'snap-1234567890abcdef0',
+            destination_region: 'ca-central-1' # should be ignored
+          }
         end
 
+        before do
+          allow(Time).to receive(:now).and_return(Time.utc(2023, 1, 24))
+        end
+
+        it 'requires a source region' do
+          expect { client.copy_snapshot }
+            .to raise_error(ArgumentError, /source region/)
+        end
+
+        it 'populates :presigned_url' do
+          resp = client.copy_snapshot(params)
+
+          expect(resp.context.params[:destination_region])
+            .to eq(destination_region)
+
+          presigned_url = resp.context.params[:presigned_url]
+          presigned_url_params = CGI.parse(presigned_url.split('?').last)
+
+          expect(presigned_url)
+            .to match(/^https:\/\/ec2\.#{source_region}.amazonaws.com/)
+
+          expect(presigned_url_params['Action']).to eq(['CopySnapshot'])
+          expect(presigned_url_params['Version']).to eq(['2016-11-15'])
+          expect(presigned_url_params['DestinationRegion']).to eq([destination_region])
+          expect(presigned_url_params['SourceRegion']).to eq([source_region])
+          expect(presigned_url_params['SourceSnapshotId']).to eq([source_snapshot_id])
+
+          expect(presigned_url_params['X-Amz-Signature'])
+            .to eq(['c34b30736cc5cd6a10af02c1edb50aed3d7424577644fb912f676846a65311cf'])
+        end
       end
 
       describe '#wait_until' do
