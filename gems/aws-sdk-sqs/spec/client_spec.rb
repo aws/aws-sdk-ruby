@@ -20,28 +20,37 @@ module Aws
         Aws.config = {}
       end
 
-      describe 'empty XML result element' do
-
+      describe 'empty result element' do
         it 'returns a structure with all of the root members' do
-          client.handle(step: :send) do |context|
-            context.http_response.signal_done(
-              status_code: 200,
-              headers: {},
-              body:<<-XML)
-              <ReceiveMessageResponse>
-                <ReceiveMessageResult/>
-                <ResponseMetadata>
-                  <RequestId>request-id</RequestId>
-                </ResponseMetadata>
-              </ReceiveMessageResponse>
-            XML
-            Seahorse::Client::Response.new(context: context)
+          if client.config.api.metadata['protocol'] == 'json'
+            client.handle(step: :send) do |context|
+              context.http_response.signal_done(
+                status_code: 200,
+                headers: {},
+                body: '{"Messages": []}'
+              )
+              Seahorse::Client::Response.new(context: context)
+            end
+          else
+            client.handle(step: :send) do |context|
+              context.http_response.signal_done(
+                status_code: 200,
+                headers: {},
+                body:<<-XML)
+                <ReceiveMessageResponse>
+                  <ReceiveMessageResult/>
+                  <ResponseMetadata>
+                    <RequestId>request-id</RequestId>
+                  </ResponseMetadata>
+                </ReceiveMessageResponse>
+              XML
+              Seahorse::Client::Response.new(context: context)
+            end
           end
           resp = client.receive_message(queue_url: 'https://foo.com')
           expect(resp.data.members).to eq([:messages])
           expect(resp.data.messages).to eq([])
         end
-
       end
 
       describe '#stub_responses' do
