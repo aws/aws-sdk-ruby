@@ -113,7 +113,6 @@ module BuildTools
     end
 
     %w(Lambda LambdaPreview).each do |svc_name|
-
       api(svc_name) do |api|
         api['shapes']['Timestamp']['type'] = 'timestamp'
       end
@@ -122,7 +121,10 @@ module BuildTools
         docs['shapes']['Blob']['refs']['UpdateFunctionCodeRequest$ZipFile'] =
           "<p>.zip file containing your packaged source code.</p>"
       end
+    end
 
+    smoke('MTurk') do |smoke|
+      smoke['testCases'] = []
     end
 
     # Cross Region Copying
@@ -210,6 +212,10 @@ module BuildTools
       end
     end
 
+    smoke('SMS') do |smoke|
+      smoke['testCases'] = []
+    end
+
     api('SQS') do |api|
       api['metadata']['errorPrefix'] = 'AWS.SimpleQueueService.'
       api['shapes']['StringList']['flattened'] = true
@@ -223,10 +229,6 @@ module BuildTools
       operations.each do |operation|
         api['operations'][operation]['authtype'] = 'none'
       end
-    end
-
-    smoke('SMS') do |smoke|
-      smoke['testCases'] = []
     end
   end
 end
