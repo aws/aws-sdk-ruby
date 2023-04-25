@@ -63,7 +63,7 @@ module BuildTools
         waiters: model_path('waiters-2.json', config['models']),
         resources: model_path('resources-1.json', config['models']),
         examples: load_examples(svc_name, config['models']),
-        smoke_tests: model_path('smoke.json', config['models']),
+        smoke_tests: load_smoke(svc_name, config['models']),
         legacy_endpoints: config.fetch('legacyEndpoints', false),
         endpoint_rules: model_path('endpoint-rule-set-1.json', config['models']),
         endpoint_tests: model_path('endpoint-tests-1.json', config['models']),
@@ -91,6 +91,17 @@ module BuildTools
         examples = JSON.load(File.read(path))
         BuildTools::Customizations.apply_example_customizations(svc_name, examples)
         examples
+      else
+        nil
+      end
+    end
+
+    def load_smoke(svc_name, models_dir)
+      path = model_path('smoke.json', models_dir)
+      if path
+        smoke = JSON.load(File.read(path))
+        BuildTools::Customizations.apply_smoke_customizations(svc_name, smoke)
+        smoke
       else
         nil
       end

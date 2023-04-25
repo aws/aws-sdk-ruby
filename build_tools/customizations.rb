@@ -6,6 +6,7 @@ module BuildTools
     @api_customizations = {}
     @doc_customizations = {}
     @example_customizations = {}
+    @smoke_customizations = {}
 
     class << self
 
@@ -21,6 +22,10 @@ module BuildTools
         @example_customizations[svc_name] = block
       end
 
+      def smoke(svc_name, &block)
+        @smoke_customizations[svc_name] = block
+      end
+
       def apply_api_customizations(svc_name, api)
         @api_customizations[svc_name].call(api) if @api_customizations[svc_name]
       end
@@ -31,6 +36,10 @@ module BuildTools
 
       def apply_example_customizations(svc_name, examples)
         @example_customizations[svc_name].call(examples) if @example_customizations[svc_name]
+      end
+
+      def apply_smoke_customizations(svc_name, smoke)
+        @smoke_customizations[svc_name].call(smoke) if @smoke_customizations[svc_name]
       end
 
       private
@@ -104,7 +113,6 @@ module BuildTools
     end
 
     %w(Lambda LambdaPreview).each do |svc_name|
-
       api(svc_name) do |api|
         api['shapes']['Timestamp']['type'] = 'timestamp'
       end
@@ -113,7 +121,10 @@ module BuildTools
         docs['shapes']['Blob']['refs']['UpdateFunctionCodeRequest$ZipFile'] =
           "<p>.zip file containing your packaged source code.</p>"
       end
+    end
 
+    smoke('MTurk') do |smoke|
+      smoke['testCases'] = []
     end
 
     # Cross Region Copying
@@ -199,6 +210,10 @@ module BuildTools
           input_shape['required']&.delete(label)
         end
       end
+    end
+
+    smoke('SMS') do |smoke|
+      smoke['testCases'] = []
     end
 
     api('SQS') do |api|
