@@ -32,7 +32,7 @@ require_relative 'aws-sdk-connect/customizations'
 # structure.
 #
 #     connect = Aws::Connect::Client.new
-#     resp = connect.associate_approved_origin(params)
+#     resp = connect.activate_evaluation_form(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-connect/customizations'
 # @!group service
 module Aws::Connect
 
-  GEM_VERSION = '1.102.0'
+  GEM_VERSION = '1.103.0'
 
 end

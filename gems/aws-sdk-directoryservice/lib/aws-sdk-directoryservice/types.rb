@@ -3832,7 +3832,9 @@ module Aws::DirectoryService
     # directory.
     #
     # @!attribute [rw] type
-    #   The type of directory setting. For example, `Protocol` or `Cipher`.
+    #   The type, or category, of a directory setting. Similar settings have
+    #   the same type. For example, `Protocol`, `Cipher`, or
+    #   `Certificate-Based Authentication`.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3842,7 +3844,8 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] allowed_values
-    #   The valid range of values for the directory setting.
+    #   The valid range of values for the directory setting. These values
+    #   depend on the `DataType` of your directory.
     #   @return [String]
     #
     # @!attribute [rw] applied_value
@@ -3880,6 +3883,12 @@ module Aws::DirectoryService
     #   last submitted.
     #   @return [Time]
     #
+    # @!attribute [rw] data_type
+    #   The data type of a directory setting. This is used to define the
+    #   `AllowedValues` of a setting. For example a data type can be
+    #   `Boolean`, `DurationInSeconds`, or `Enum`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/SettingEntry AWS API Documentation
     #
     class SettingEntry < Struct.new(
@@ -3892,7 +3901,8 @@ module Aws::DirectoryService
       :request_detailed_status,
       :request_status_message,
       :last_updated_date_time,
-      :last_requested_date_time)
+      :last_requested_date_time,
+      :data_type)
       SENSITIVE = []
       include Aws::Structure
     end

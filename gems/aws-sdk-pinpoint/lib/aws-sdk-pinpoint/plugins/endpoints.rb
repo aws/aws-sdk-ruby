@@ -190,6 +190,12 @@ module Aws::Pinpoint
             Aws::Pinpoint::Endpoints::GetJourneyExecutionActivityMetrics.build(context)
           when :get_journey_execution_metrics
             Aws::Pinpoint::Endpoints::GetJourneyExecutionMetrics.build(context)
+          when :get_journey_run_execution_activity_metrics
+            Aws::Pinpoint::Endpoints::GetJourneyRunExecutionActivityMetrics.build(context)
+          when :get_journey_run_execution_metrics
+            Aws::Pinpoint::Endpoints::GetJourneyRunExecutionMetrics.build(context)
+          when :get_journey_runs
+            Aws::Pinpoint::Endpoints::GetJourneyRuns.build(context)
           when :get_push_template
             Aws::Pinpoint::Endpoints::GetPushTemplate.build(context)
           when :get_recommender_configuration

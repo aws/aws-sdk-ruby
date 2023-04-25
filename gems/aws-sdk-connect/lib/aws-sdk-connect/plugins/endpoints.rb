@@ -56,6 +56,8 @@ module Aws::Connect
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :activate_evaluation_form
+            Aws::Connect::Endpoints::ActivateEvaluationForm.build(context)
           when :associate_approved_origin
             Aws::Connect::Endpoints::AssociateApprovedOrigin.build(context)
           when :associate_bot
@@ -84,6 +86,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::CreateContactFlow.build(context)
           when :create_contact_flow_module
             Aws::Connect::Endpoints::CreateContactFlowModule.build(context)
+          when :create_evaluation_form
+            Aws::Connect::Endpoints::CreateEvaluationForm.build(context)
           when :create_hours_of_operation
             Aws::Connect::Endpoints::CreateHoursOfOperation.build(context)
           when :create_instance
@@ -114,10 +118,16 @@ module Aws::Connect
             Aws::Connect::Endpoints::CreateUserHierarchyGroup.build(context)
           when :create_vocabulary
             Aws::Connect::Endpoints::CreateVocabulary.build(context)
+          when :deactivate_evaluation_form
+            Aws::Connect::Endpoints::DeactivateEvaluationForm.build(context)
+          when :delete_contact_evaluation
+            Aws::Connect::Endpoints::DeleteContactEvaluation.build(context)
           when :delete_contact_flow
             Aws::Connect::Endpoints::DeleteContactFlow.build(context)
           when :delete_contact_flow_module
             Aws::Connect::Endpoints::DeleteContactFlowModule.build(context)
+          when :delete_evaluation_form
+            Aws::Connect::Endpoints::DeleteEvaluationForm.build(context)
           when :delete_hours_of_operation
             Aws::Connect::Endpoints::DeleteHoursOfOperation.build(context)
           when :delete_instance
@@ -146,10 +156,14 @@ module Aws::Connect
             Aws::Connect::Endpoints::DescribeAgentStatus.build(context)
           when :describe_contact
             Aws::Connect::Endpoints::DescribeContact.build(context)
+          when :describe_contact_evaluation
+            Aws::Connect::Endpoints::DescribeContactEvaluation.build(context)
           when :describe_contact_flow
             Aws::Connect::Endpoints::DescribeContactFlow.build(context)
           when :describe_contact_flow_module
             Aws::Connect::Endpoints::DescribeContactFlowModule.build(context)
+          when :describe_evaluation_form
+            Aws::Connect::Endpoints::DescribeEvaluationForm.build(context)
           when :describe_hours_of_operation
             Aws::Connect::Endpoints::DescribeHoursOfOperation.build(context)
           when :describe_instance
@@ -222,6 +236,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::ListApprovedOrigins.build(context)
           when :list_bots
             Aws::Connect::Endpoints::ListBots.build(context)
+          when :list_contact_evaluations
+            Aws::Connect::Endpoints::ListContactEvaluations.build(context)
           when :list_contact_flow_modules
             Aws::Connect::Endpoints::ListContactFlowModules.build(context)
           when :list_contact_flows
@@ -230,6 +246,10 @@ module Aws::Connect
             Aws::Connect::Endpoints::ListContactReferences.build(context)
           when :list_default_vocabularies
             Aws::Connect::Endpoints::ListDefaultVocabularies.build(context)
+          when :list_evaluation_form_versions
+            Aws::Connect::Endpoints::ListEvaluationFormVersions.build(context)
+          when :list_evaluation_forms
+            Aws::Connect::Endpoints::ListEvaluationForms.build(context)
           when :list_hours_of_operations
             Aws::Connect::Endpoints::ListHoursOfOperations.build(context)
           when :list_instance_attributes
@@ -304,6 +324,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::SearchVocabularies.build(context)
           when :start_chat_contact
             Aws::Connect::Endpoints::StartChatContact.build(context)
+          when :start_contact_evaluation
+            Aws::Connect::Endpoints::StartContactEvaluation.build(context)
           when :start_contact_recording
             Aws::Connect::Endpoints::StartContactRecording.build(context)
           when :start_contact_streaming
@@ -318,6 +340,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::StopContactRecording.build(context)
           when :stop_contact_streaming
             Aws::Connect::Endpoints::StopContactStreaming.build(context)
+          when :submit_contact_evaluation
+            Aws::Connect::Endpoints::SubmitContactEvaluation.build(context)
           when :suspend_contact_recording
             Aws::Connect::Endpoints::SuspendContactRecording.build(context)
           when :tag_resource
@@ -332,6 +356,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::UpdateContact.build(context)
           when :update_contact_attributes
             Aws::Connect::Endpoints::UpdateContactAttributes.build(context)
+          when :update_contact_evaluation
+            Aws::Connect::Endpoints::UpdateContactEvaluation.build(context)
           when :update_contact_flow_content
             Aws::Connect::Endpoints::UpdateContactFlowContent.build(context)
           when :update_contact_flow_metadata
@@ -344,6 +370,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::UpdateContactFlowName.build(context)
           when :update_contact_schedule
             Aws::Connect::Endpoints::UpdateContactSchedule.build(context)
+          when :update_evaluation_form
+            Aws::Connect::Endpoints::UpdateEvaluationForm.build(context)
           when :update_hours_of_operation
             Aws::Connect::Endpoints::UpdateHoursOfOperation.build(context)
           when :update_instance_attribute

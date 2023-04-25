@@ -32,7 +32,7 @@ require_relative 'aws-sdk-datasync/customizations'
 # structure.
 #
 #     data_sync = Aws::DataSync::Client.new
-#     resp = data_sync.cancel_task_execution(params)
+#     resp = data_sync.add_storage_system(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-datasync/customizations'
 # @!group service
 module Aws::DataSync
 
-  GEM_VERSION = '1.55.0'
+  GEM_VERSION = '1.56.0'
 
 end

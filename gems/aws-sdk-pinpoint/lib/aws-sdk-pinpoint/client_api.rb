@@ -255,6 +255,12 @@ module Aws::Pinpoint
     GetJourneyExecutionMetricsResponse = Shapes::StructureShape.new(name: 'GetJourneyExecutionMetricsResponse')
     GetJourneyRequest = Shapes::StructureShape.new(name: 'GetJourneyRequest')
     GetJourneyResponse = Shapes::StructureShape.new(name: 'GetJourneyResponse')
+    GetJourneyRunExecutionActivityMetricsRequest = Shapes::StructureShape.new(name: 'GetJourneyRunExecutionActivityMetricsRequest')
+    GetJourneyRunExecutionActivityMetricsResponse = Shapes::StructureShape.new(name: 'GetJourneyRunExecutionActivityMetricsResponse')
+    GetJourneyRunExecutionMetricsRequest = Shapes::StructureShape.new(name: 'GetJourneyRunExecutionMetricsRequest')
+    GetJourneyRunExecutionMetricsResponse = Shapes::StructureShape.new(name: 'GetJourneyRunExecutionMetricsResponse')
+    GetJourneyRunsRequest = Shapes::StructureShape.new(name: 'GetJourneyRunsRequest')
+    GetJourneyRunsResponse = Shapes::StructureShape.new(name: 'GetJourneyRunsResponse')
     GetPushTemplateRequest = Shapes::StructureShape.new(name: 'GetPushTemplateRequest')
     GetPushTemplateResponse = Shapes::StructureShape.new(name: 'GetPushTemplateResponse')
     GetRecommenderConfigurationRequest = Shapes::StructureShape.new(name: 'GetRecommenderConfigurationRequest')
@@ -311,6 +317,11 @@ module Aws::Pinpoint
     JourneyLimits = Shapes::StructureShape.new(name: 'JourneyLimits')
     JourneyPushMessage = Shapes::StructureShape.new(name: 'JourneyPushMessage')
     JourneyResponse = Shapes::StructureShape.new(name: 'JourneyResponse')
+    JourneyRunExecutionActivityMetricsResponse = Shapes::StructureShape.new(name: 'JourneyRunExecutionActivityMetricsResponse')
+    JourneyRunExecutionMetricsResponse = Shapes::StructureShape.new(name: 'JourneyRunExecutionMetricsResponse')
+    JourneyRunResponse = Shapes::StructureShape.new(name: 'JourneyRunResponse')
+    JourneyRunStatus = Shapes::StringShape.new(name: 'JourneyRunStatus')
+    JourneyRunsResponse = Shapes::StructureShape.new(name: 'JourneyRunsResponse')
     JourneySMSMessage = Shapes::StructureShape.new(name: 'JourneySMSMessage')
     JourneySchedule = Shapes::StructureShape.new(name: 'JourneySchedule')
     JourneyStateRequest = Shapes::StructureShape.new(name: 'JourneyStateRequest')
@@ -329,6 +340,7 @@ module Aws::Pinpoint
     ListOfInAppMessageCampaign = Shapes::ListShape.new(name: 'ListOfInAppMessageCampaign')
     ListOfInAppMessageContent = Shapes::ListShape.new(name: 'ListOfInAppMessageContent')
     ListOfJourneyResponse = Shapes::ListShape.new(name: 'ListOfJourneyResponse')
+    ListOfJourneyRunResponse = Shapes::ListShape.new(name: 'ListOfJourneyRunResponse')
     ListOfMultiConditionalBranch = Shapes::ListShape.new(name: 'ListOfMultiConditionalBranch')
     ListOfOpenHoursRules = Shapes::ListShape.new(name: 'ListOfOpenHoursRules')
     ListOfRandomSplitEntry = Shapes::ListShape.new(name: 'ListOfRandomSplitEntry')
@@ -730,6 +742,7 @@ module Aws::Pinpoint
     ActivityResponse.add_member(:timezones_total_count, Shapes::ShapeRef.new(shape: __integer, location_name: "TimezonesTotalCount"))
     ActivityResponse.add_member(:total_endpoint_count, Shapes::ShapeRef.new(shape: __integer, location_name: "TotalEndpointCount"))
     ActivityResponse.add_member(:treatment_id, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentId"))
+    ActivityResponse.add_member(:execution_metrics, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "ExecutionMetrics"))
     ActivityResponse.struct_class = Types::ActivityResponse
 
     AddressConfiguration.add_member(:body_override, Shapes::ShapeRef.new(shape: __string, location_name: "BodyOverride"))
@@ -1934,6 +1947,42 @@ module Aws::Pinpoint
     GetJourneyResponse[:payload] = :journey_response
     GetJourneyResponse[:payload_member] = GetJourneyResponse.member(:journey_response)
 
+    GetJourneyRunExecutionActivityMetricsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    GetJourneyRunExecutionActivityMetricsRequest.add_member(:journey_activity_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "journey-activity-id"))
+    GetJourneyRunExecutionActivityMetricsRequest.add_member(:journey_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "journey-id"))
+    GetJourneyRunExecutionActivityMetricsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "next-token"))
+    GetJourneyRunExecutionActivityMetricsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "page-size"))
+    GetJourneyRunExecutionActivityMetricsRequest.add_member(:run_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "run-id"))
+    GetJourneyRunExecutionActivityMetricsRequest.struct_class = Types::GetJourneyRunExecutionActivityMetricsRequest
+
+    GetJourneyRunExecutionActivityMetricsResponse.add_member(:journey_run_execution_activity_metrics_response, Shapes::ShapeRef.new(shape: JourneyRunExecutionActivityMetricsResponse, required: true, location_name: "JourneyRunExecutionActivityMetricsResponse"))
+    GetJourneyRunExecutionActivityMetricsResponse.struct_class = Types::GetJourneyRunExecutionActivityMetricsResponse
+    GetJourneyRunExecutionActivityMetricsResponse[:payload] = :journey_run_execution_activity_metrics_response
+    GetJourneyRunExecutionActivityMetricsResponse[:payload_member] = GetJourneyRunExecutionActivityMetricsResponse.member(:journey_run_execution_activity_metrics_response)
+
+    GetJourneyRunExecutionMetricsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    GetJourneyRunExecutionMetricsRequest.add_member(:journey_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "journey-id"))
+    GetJourneyRunExecutionMetricsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "next-token"))
+    GetJourneyRunExecutionMetricsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "page-size"))
+    GetJourneyRunExecutionMetricsRequest.add_member(:run_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "run-id"))
+    GetJourneyRunExecutionMetricsRequest.struct_class = Types::GetJourneyRunExecutionMetricsRequest
+
+    GetJourneyRunExecutionMetricsResponse.add_member(:journey_run_execution_metrics_response, Shapes::ShapeRef.new(shape: JourneyRunExecutionMetricsResponse, required: true, location_name: "JourneyRunExecutionMetricsResponse"))
+    GetJourneyRunExecutionMetricsResponse.struct_class = Types::GetJourneyRunExecutionMetricsResponse
+    GetJourneyRunExecutionMetricsResponse[:payload] = :journey_run_execution_metrics_response
+    GetJourneyRunExecutionMetricsResponse[:payload_member] = GetJourneyRunExecutionMetricsResponse.member(:journey_run_execution_metrics_response)
+
+    GetJourneyRunsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    GetJourneyRunsRequest.add_member(:journey_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "journey-id"))
+    GetJourneyRunsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "page-size"))
+    GetJourneyRunsRequest.add_member(:token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "token"))
+    GetJourneyRunsRequest.struct_class = Types::GetJourneyRunsRequest
+
+    GetJourneyRunsResponse.add_member(:journey_runs_response, Shapes::ShapeRef.new(shape: JourneyRunsResponse, required: true, location_name: "JourneyRunsResponse"))
+    GetJourneyRunsResponse.struct_class = Types::GetJourneyRunsResponse
+    GetJourneyRunsResponse[:payload] = :journey_runs_response
+    GetJourneyRunsResponse[:payload_member] = GetJourneyRunsResponse.member(:journey_runs_response)
+
     GetPushTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "template-name"))
     GetPushTemplateRequest.add_member(:version, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "version"))
     GetPushTemplateRequest.struct_class = Types::GetPushTemplateRequest
@@ -2248,6 +2297,32 @@ module Aws::Pinpoint
     JourneyResponse.add_member(:closed_days, Shapes::ShapeRef.new(shape: ClosedDays, location_name: "ClosedDays"))
     JourneyResponse.struct_class = Types::JourneyResponse
 
+    JourneyRunExecutionActivityMetricsResponse.add_member(:activity_type, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ActivityType"))
+    JourneyRunExecutionActivityMetricsResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ApplicationId"))
+    JourneyRunExecutionActivityMetricsResponse.add_member(:journey_activity_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "JourneyActivityId"))
+    JourneyRunExecutionActivityMetricsResponse.add_member(:journey_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "JourneyId"))
+    JourneyRunExecutionActivityMetricsResponse.add_member(:last_evaluated_time, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "LastEvaluatedTime"))
+    JourneyRunExecutionActivityMetricsResponse.add_member(:metrics, Shapes::ShapeRef.new(shape: MapOf__string, required: true, location_name: "Metrics"))
+    JourneyRunExecutionActivityMetricsResponse.add_member(:run_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "RunId"))
+    JourneyRunExecutionActivityMetricsResponse.struct_class = Types::JourneyRunExecutionActivityMetricsResponse
+
+    JourneyRunExecutionMetricsResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ApplicationId"))
+    JourneyRunExecutionMetricsResponse.add_member(:journey_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "JourneyId"))
+    JourneyRunExecutionMetricsResponse.add_member(:last_evaluated_time, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "LastEvaluatedTime"))
+    JourneyRunExecutionMetricsResponse.add_member(:metrics, Shapes::ShapeRef.new(shape: MapOf__string, required: true, location_name: "Metrics"))
+    JourneyRunExecutionMetricsResponse.add_member(:run_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "RunId"))
+    JourneyRunExecutionMetricsResponse.struct_class = Types::JourneyRunExecutionMetricsResponse
+
+    JourneyRunResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "CreationTime"))
+    JourneyRunResponse.add_member(:last_update_time, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "LastUpdateTime"))
+    JourneyRunResponse.add_member(:run_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "RunId"))
+    JourneyRunResponse.add_member(:status, Shapes::ShapeRef.new(shape: JourneyRunStatus, required: true, location_name: "Status"))
+    JourneyRunResponse.struct_class = Types::JourneyRunResponse
+
+    JourneyRunsResponse.add_member(:item, Shapes::ShapeRef.new(shape: ListOfJourneyRunResponse, required: true, location_name: "Item"))
+    JourneyRunsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
+    JourneyRunsResponse.struct_class = Types::JourneyRunsResponse
+
     JourneySMSMessage.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
     JourneySMSMessage.add_member(:origination_number, Shapes::ShapeRef.new(shape: __string, location_name: "OriginationNumber"))
     JourneySMSMessage.add_member(:sender_id, Shapes::ShapeRef.new(shape: __string, location_name: "SenderId"))
@@ -2298,6 +2373,8 @@ module Aws::Pinpoint
     ListOfInAppMessageContent.member = Shapes::ShapeRef.new(shape: InAppMessageContent)
 
     ListOfJourneyResponse.member = Shapes::ShapeRef.new(shape: JourneyResponse)
+
+    ListOfJourneyRunResponse.member = Shapes::ShapeRef.new(shape: JourneyRunResponse)
 
     ListOfMultiConditionalBranch.member = Shapes::ShapeRef.new(shape: MultiConditionalBranch)
 
@@ -4392,6 +4469,51 @@ module Aws::Pinpoint
         o.http_request_uri = "/v1/apps/{application-id}/journeys/{journey-id}/execution-metrics"
         o.input = Shapes::ShapeRef.new(shape: GetJourneyExecutionMetricsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetJourneyExecutionMetricsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: PayloadTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:get_journey_run_execution_activity_metrics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetJourneyRunExecutionActivityMetrics"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/apps/{application-id}/journeys/{journey-id}/runs/{run-id}/activities/{journey-activity-id}/execution-metrics"
+        o.input = Shapes::ShapeRef.new(shape: GetJourneyRunExecutionActivityMetricsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetJourneyRunExecutionActivityMetricsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: PayloadTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:get_journey_run_execution_metrics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetJourneyRunExecutionMetrics"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/apps/{application-id}/journeys/{journey-id}/runs/{run-id}/execution-metrics"
+        o.input = Shapes::ShapeRef.new(shape: GetJourneyRunExecutionMetricsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetJourneyRunExecutionMetricsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: PayloadTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:get_journey_runs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetJourneyRuns"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/apps/{application-id}/journeys/{journey-id}/runs"
+        o.input = Shapes::ShapeRef.new(shape: GetJourneyRunsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetJourneyRunsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: PayloadTooLargeException)

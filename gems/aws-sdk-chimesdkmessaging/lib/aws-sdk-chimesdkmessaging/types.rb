@@ -935,6 +935,9 @@ module Aws::ChimeSDKMessaging
     #
     # @!attribute [rw] client_request_token
     #   The client token for the request. An Idempotency token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/CreateChannelFlowRequest AWS API Documentation
@@ -1295,16 +1298,11 @@ module Aws::ChimeSDKMessaging
     #   API call.
     #   @return [String]
     #
-    # @!attribute [rw] sub_channel_id
-    #   The ID of the SubChannel in the request.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/DeleteChannelRequest AWS API Documentation
     #
     class DeleteChannelRequest < Struct.new(
       :channel_arn,
-      :chime_bearer,
-      :sub_channel_id)
+      :chime_bearer)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3220,16 +3218,11 @@ module Aws::ChimeSDKMessaging
     #   API call.
     #   @return [String]
     #
-    # @!attribute [rw] sub_channel_id
-    #   The ID of the SubChannel in the request.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/UpdateChannelReadMarkerRequest AWS API Documentation
     #
     class UpdateChannelReadMarkerRequest < Struct.new(
       :channel_arn,
-      :chime_bearer,
-      :sub_channel_id)
+      :chime_bearer)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3238,15 +3231,10 @@ module Aws::ChimeSDKMessaging
     #   The ARN of the channel.
     #   @return [String]
     #
-    # @!attribute [rw] sub_channel_id
-    #   The ID of the SubChannel in the response.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/UpdateChannelReadMarkerResponse AWS API Documentation
     #
     class UpdateChannelReadMarkerResponse < Struct.new(
-      :channel_arn,
-      :sub_channel_id)
+      :channel_arn)
       SENSITIVE = []
       include Aws::Structure
     end

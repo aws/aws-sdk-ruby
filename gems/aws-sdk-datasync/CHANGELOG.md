@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2023-04-25)
+------------------
+
+* Feature - This release adds 13 new APIs to support AWS DataSync Discovery GA.
+
 1.55.0 (2023-02-22)
 ------------------
 

@@ -435,7 +435,7 @@ module Aws::ChimeSDKMessaging
     CreateChannelFlowRequest.add_member(:processors, Shapes::ShapeRef.new(shape: ProcessorList, required: true, location_name: "Processors"))
     CreateChannelFlowRequest.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyResourceName, required: true, location_name: "Name"))
     CreateChannelFlowRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateChannelFlowRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken"))
+    CreateChannelFlowRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateChannelFlowRequest.struct_class = Types::CreateChannelFlowRequest
 
     CreateChannelFlowResponse.add_member(:channel_flow_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelFlowArn"))
@@ -507,7 +507,6 @@ module Aws::ChimeSDKMessaging
 
     DeleteChannelRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
     DeleteChannelRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "header", location_name: "x-amz-chime-bearer"))
-    DeleteChannelRequest.add_member(:sub_channel_id, Shapes::ShapeRef.new(shape: SubChannelId, location: "querystring", location_name: "sub-channel-id"))
     DeleteChannelRequest.struct_class = Types::DeleteChannelRequest
 
     DeleteMessagingStreamingConfigurationsRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "appInstanceArn"))
@@ -937,11 +936,9 @@ module Aws::ChimeSDKMessaging
 
     UpdateChannelReadMarkerRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
     UpdateChannelReadMarkerRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "header", location_name: "x-amz-chime-bearer"))
-    UpdateChannelReadMarkerRequest.add_member(:sub_channel_id, Shapes::ShapeRef.new(shape: SubChannelId, location_name: "SubChannelId"))
     UpdateChannelReadMarkerRequest.struct_class = Types::UpdateChannelReadMarkerRequest
 
     UpdateChannelReadMarkerResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
-    UpdateChannelReadMarkerResponse.add_member(:sub_channel_id, Shapes::ShapeRef.new(shape: SubChannelId, location_name: "SubChannelId"))
     UpdateChannelReadMarkerResponse.struct_class = Types::UpdateChannelReadMarkerResponse
 
     UpdateChannelRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
@@ -1107,6 +1104,7 @@ module Aws::ChimeSDKMessaging
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
@@ -1191,6 +1189,7 @@ module Aws::ChimeSDKMessaging
         o.http_request_uri = "/app-instances/{appInstanceArn}/streaming-configurations"
         o.input = Shapes::ShapeRef.new(shape: DeleteMessagingStreamingConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)

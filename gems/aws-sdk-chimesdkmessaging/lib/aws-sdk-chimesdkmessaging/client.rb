@@ -747,6 +747,9 @@ module Aws::ChimeSDKMessaging
     # @option params [required, String] :client_request_token
     #   The client token for the request. An Idempotency token.
     #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::CreateChannelFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChannelFlowResponse#channel_flow_arn #channel_flow_arn} => String
@@ -947,9 +950,6 @@ module Aws::ChimeSDKMessaging
     #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
     #   API call.
     #
-    # @option params [String] :sub_channel_id
-    #   The ID of the SubChannel in the request.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -957,7 +957,6 @@ module Aws::ChimeSDKMessaging
     #   resp = client.delete_channel({
     #     channel_arn: "ChimeArn", # required
     #     chime_bearer: "ChimeArn", # required
-    #     sub_channel_id: "SubChannelId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/DeleteChannel AWS API Documentation
@@ -3137,26 +3136,20 @@ module Aws::ChimeSDKMessaging
     #   The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the
     #   API call.
     #
-    # @option params [String] :sub_channel_id
-    #   The ID of the SubChannel in the request.
-    #
     # @return [Types::UpdateChannelReadMarkerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateChannelReadMarkerResponse#channel_arn #channel_arn} => String
-    #   * {Types::UpdateChannelReadMarkerResponse#sub_channel_id #sub_channel_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_channel_read_marker({
     #     channel_arn: "ChimeArn", # required
     #     chime_bearer: "ChimeArn", # required
-    #     sub_channel_id: "SubChannelId",
     #   })
     #
     # @example Response structure
     #
     #   resp.channel_arn #=> String
-    #   resp.sub_channel_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/UpdateChannelReadMarker AWS API Documentation
     #
@@ -3180,7 +3173,7 @@ module Aws::ChimeSDKMessaging
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmessaging'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -368,6 +368,55 @@ module Aws::Connect
 
     # @!group API Operations
 
+    # Activates an evaluation form in the specified Amazon Connect instance.
+    # After the evaluation form is activated, it is available to start new
+    # evaluations based on the form.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :evaluation_form_id
+    #   The unique identifier for the evaluation form.
+    #
+    # @option params [required, Integer] :evaluation_form_version
+    #   The version of the evaluation form to activate. If the version
+    #   property is not provided, the latest version of the evaluation form is
+    #   activated.
+    #
+    # @return [Types::ActivateEvaluationFormResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ActivateEvaluationFormResponse#evaluation_form_id #evaluation_form_id} => String
+    #   * {Types::ActivateEvaluationFormResponse#evaluation_form_arn #evaluation_form_arn} => String
+    #   * {Types::ActivateEvaluationFormResponse#evaluation_form_version #evaluation_form_version} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.activate_evaluation_form({
+    #     instance_id: "InstanceId", # required
+    #     evaluation_form_id: "ResourceId", # required
+    #     evaluation_form_version: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.evaluation_form_id #=> String
+    #   resp.evaluation_form_arn #=> String
+    #   resp.evaluation_form_version #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ActivateEvaluationForm AWS API Documentation
+    #
+    # @overload activate_evaluation_form(params = {})
+    # @param [Hash] params ({})
+    def activate_evaluation_form(params = {}, options = {})
+      req = build_request(:activate_evaluation_form, params)
+      req.send_request(options)
+    end
+
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
@@ -1090,6 +1139,142 @@ module Aws::Connect
     # @param [Hash] params ({})
     def create_contact_flow_module(params = {}, options = {})
       req = build_request(:create_contact_flow_module, params)
+      req.send_request(options)
+    end
+
+    # Creates an evaluation form in the specified Amazon Connect instance.
+    # The form can be used to define questions related to agent performance,
+    # and create sections to organize such questions. An evaluation form
+    # must have a unique title within an instance. Question and section
+    # identifiers cannot be duplicated within the same evaluation form.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :title
+    #   A unique title of the evaluation form.
+    #
+    # @option params [String] :description
+    #   The description of the evaluation form.
+    #
+    # @option params [required, Array<Types::EvaluationFormItem>] :items
+    #   Items that are part of the evaluation form. The total number of
+    #   sections and questions must not exceed 100 each. Questions must be
+    #   contained in a section.
+    #
+    # @option params [Types::EvaluationFormScoringStrategy] :scoring_strategy
+    #   A scoring strategy of the evaluation form.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @return [Types::CreateEvaluationFormResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateEvaluationFormResponse#evaluation_form_id #evaluation_form_id} => String
+    #   * {Types::CreateEvaluationFormResponse#evaluation_form_arn #evaluation_form_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_evaluation_form({
+    #     instance_id: "InstanceId", # required
+    #     title: "EvaluationFormTitle", # required
+    #     description: "EvaluationFormDescription",
+    #     items: [ # required
+    #       {
+    #         section: {
+    #           title: "EvaluationFormSectionTitle", # required
+    #           ref_id: "ReferenceId", # required
+    #           instructions: "EvaluationFormQuestionInstructions",
+    #           items: {
+    #             # recursive EvaluationFormItemsList
+    #           },
+    #           weight: 1.0,
+    #         },
+    #         question: {
+    #           title: "EvaluationFormQuestionTitle", # required
+    #           instructions: "EvaluationFormQuestionInstructions",
+    #           ref_id: "ReferenceId", # required
+    #           not_applicable_enabled: false,
+    #           question_type: "TEXT", # required, accepts TEXT, SINGLESELECT, NUMERIC
+    #           question_type_properties: {
+    #             numeric: {
+    #               min_value: 1, # required
+    #               max_value: 1, # required
+    #               options: [
+    #                 {
+    #                   min_value: 1, # required
+    #                   max_value: 1, # required
+    #                   score: 1,
+    #                   automatic_fail: false,
+    #                 },
+    #               ],
+    #               automation: {
+    #                 property_value: {
+    #                   label: "OVERALL_CUSTOMER_SENTIMENT_SCORE", # required, accepts OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME
+    #                 },
+    #               },
+    #             },
+    #             single_select: {
+    #               options: [ # required
+    #                 {
+    #                   ref_id: "ReferenceId", # required
+    #                   text: "EvaluationFormSingleSelectQuestionOptionText", # required
+    #                   score: 1,
+    #                   automatic_fail: false,
+    #                 },
+    #               ],
+    #               display_as: "DROPDOWN", # accepts DROPDOWN, RADIO
+    #               automation: {
+    #                 options: [ # required
+    #                   {
+    #                     rule_category: {
+    #                       category: "SingleSelectQuestionRuleCategoryAutomationLabel", # required
+    #                       condition: "PRESENT", # required, accepts PRESENT, NOT_PRESENT
+    #                       option_ref_id: "ReferenceId", # required
+    #                     },
+    #                   },
+    #                 ],
+    #                 default_option_ref_id: "ReferenceId",
+    #               },
+    #             },
+    #           },
+    #           weight: 1.0,
+    #         },
+    #       },
+    #     ],
+    #     scoring_strategy: {
+    #       mode: "QUESTION_ONLY", # required, accepts QUESTION_ONLY, SECTION_ONLY
+    #       status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.evaluation_form_id #=> String
+    #   resp.evaluation_form_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateEvaluationForm AWS API Documentation
+    #
+    # @overload create_evaluation_form(params = {})
+    # @param [Hash] params ({})
+    def create_evaluation_form(params = {}, options = {})
+      req = build_request(:create_evaluation_form, params)
       req.send_request(options)
     end
 
@@ -2310,6 +2495,85 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Deactivates an evaluation form in the specified Amazon Connect
+    # instance. After a form is deactivated, it is no longer available for
+    # users to start new evaluations based on the form.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :evaluation_form_id
+    #   The unique identifier for the evaluation form.
+    #
+    # @option params [required, Integer] :evaluation_form_version
+    #   A version of the evaluation form. If the version property is not
+    #   provided, the latest version of the evaluation form is deactivated.
+    #
+    # @return [Types::DeactivateEvaluationFormResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeactivateEvaluationFormResponse#evaluation_form_id #evaluation_form_id} => String
+    #   * {Types::DeactivateEvaluationFormResponse#evaluation_form_arn #evaluation_form_arn} => String
+    #   * {Types::DeactivateEvaluationFormResponse#evaluation_form_version #evaluation_form_version} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deactivate_evaluation_form({
+    #     instance_id: "InstanceId", # required
+    #     evaluation_form_id: "ResourceId", # required
+    #     evaluation_form_version: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.evaluation_form_id #=> String
+    #   resp.evaluation_form_arn #=> String
+    #   resp.evaluation_form_version #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeactivateEvaluationForm AWS API Documentation
+    #
+    # @overload deactivate_evaluation_form(params = {})
+    # @param [Hash] params ({})
+    def deactivate_evaluation_form(params = {}, options = {})
+      req = build_request(:deactivate_evaluation_form, params)
+      req.send_request(options)
+    end
+
+    # Deletes a contact evaluation in the specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :evaluation_id
+    #   A unique identifier for the contact evaluation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_contact_evaluation({
+    #     instance_id: "InstanceId", # required
+    #     evaluation_id: "ResourceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteContactEvaluation AWS API Documentation
+    #
+    # @overload delete_contact_evaluation(params = {})
+    # @param [Hash] params ({})
+    def delete_contact_evaluation(params = {}, options = {})
+      req = build_request(:delete_contact_evaluation, params)
+      req.send_request(options)
+    end
+
     # Deletes a flow for the specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
@@ -2369,6 +2633,47 @@ module Aws::Connect
     # @param [Hash] params ({})
     def delete_contact_flow_module(params = {}, options = {})
       req = build_request(:delete_contact_flow_module, params)
+      req.send_request(options)
+    end
+
+    # Deletes an evaluation form in the specified Amazon Connect instance.
+    #
+    # * If the version property is provided, only the specified version of
+    #   the evaluation form is deleted.
+    #
+    # * If no version is provided, then the full form (all versions) is
+    #   deleted.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :evaluation_form_id
+    #   The unique identifier for the evaluation form.
+    #
+    # @option params [Integer] :evaluation_form_version
+    #   The unique identifier for the evaluation form.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_evaluation_form({
+    #     instance_id: "InstanceId", # required
+    #     evaluation_form_id: "ResourceId", # required
+    #     evaluation_form_version: 1,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteEvaluationForm AWS API Documentation
+    #
+    # @overload delete_evaluation_form(params = {})
+    # @param [Hash] params ({})
+    def delete_evaluation_form(params = {}, options = {})
+      req = build_request(:delete_evaluation_form, params)
       req.send_request(options)
     end
 
@@ -2894,6 +3199,108 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Describes a contact evaluation in the specified Amazon Connect
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :evaluation_id
+    #   A unique identifier for the contact evaluation.
+    #
+    # @return [Types::DescribeContactEvaluationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeContactEvaluationResponse#evaluation #evaluation} => Types::Evaluation
+    #   * {Types::DescribeContactEvaluationResponse#evaluation_form #evaluation_form} => Types::EvaluationFormContent
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_contact_evaluation({
+    #     instance_id: "InstanceId", # required
+    #     evaluation_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.evaluation.evaluation_id #=> String
+    #   resp.evaluation.evaluation_arn #=> String
+    #   resp.evaluation.metadata.contact_id #=> String
+    #   resp.evaluation.metadata.evaluator_arn #=> String
+    #   resp.evaluation.metadata.contact_agent_id #=> String
+    #   resp.evaluation.metadata.score.percentage #=> Float
+    #   resp.evaluation.metadata.score.not_applicable #=> Boolean
+    #   resp.evaluation.metadata.score.automatic_fail #=> Boolean
+    #   resp.evaluation.answers #=> Hash
+    #   resp.evaluation.answers["ResourceId"].value.string_value #=> String
+    #   resp.evaluation.answers["ResourceId"].value.numeric_value #=> Float
+    #   resp.evaluation.answers["ResourceId"].value.not_applicable #=> Boolean
+    #   resp.evaluation.answers["ResourceId"].system_suggested_value.string_value #=> String
+    #   resp.evaluation.answers["ResourceId"].system_suggested_value.numeric_value #=> Float
+    #   resp.evaluation.answers["ResourceId"].system_suggested_value.not_applicable #=> Boolean
+    #   resp.evaluation.notes #=> Hash
+    #   resp.evaluation.notes["ResourceId"].value #=> String
+    #   resp.evaluation.status #=> String, one of "DRAFT", "SUBMITTED"
+    #   resp.evaluation.scores #=> Hash
+    #   resp.evaluation.scores["ResourceId"].percentage #=> Float
+    #   resp.evaluation.scores["ResourceId"].not_applicable #=> Boolean
+    #   resp.evaluation.scores["ResourceId"].automatic_fail #=> Boolean
+    #   resp.evaluation.created_time #=> Time
+    #   resp.evaluation.last_modified_time #=> Time
+    #   resp.evaluation.tags #=> Hash
+    #   resp.evaluation.tags["TagKey"] #=> String
+    #   resp.evaluation_form.evaluation_form_version #=> Integer
+    #   resp.evaluation_form.evaluation_form_id #=> String
+    #   resp.evaluation_form.evaluation_form_arn #=> String
+    #   resp.evaluation_form.title #=> String
+    #   resp.evaluation_form.description #=> String
+    #   resp.evaluation_form.items #=> Array
+    #   resp.evaluation_form.items[0].section.title #=> String
+    #   resp.evaluation_form.items[0].section.ref_id #=> String
+    #   resp.evaluation_form.items[0].section.instructions #=> String
+    #   resp.evaluation_form.items[0].section.items #=> Types::EvaluationFormItemsList
+    #   resp.evaluation_form.items[0].section.weight #=> Float
+    #   resp.evaluation_form.items[0].question.title #=> String
+    #   resp.evaluation_form.items[0].question.instructions #=> String
+    #   resp.evaluation_form.items[0].question.ref_id #=> String
+    #   resp.evaluation_form.items[0].question.not_applicable_enabled #=> Boolean
+    #   resp.evaluation_form.items[0].question.question_type #=> String, one of "TEXT", "SINGLESELECT", "NUMERIC"
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.min_value #=> Integer
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.max_value #=> Integer
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options #=> Array
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].min_value #=> Integer
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].max_value #=> Integer
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].score #=> Integer
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].automatic_fail #=> Boolean
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.property_value.label #=> String, one of "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options #=> Array
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options[0].ref_id #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options[0].text #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options[0].score #=> Integer
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options[0].automatic_fail #=> Boolean
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.display_as #=> String, one of "DROPDOWN", "RADIO"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options #=> Array
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].rule_category.category #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].rule_category.condition #=> String, one of "PRESENT", "NOT_PRESENT"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].rule_category.option_ref_id #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.default_option_ref_id #=> String
+    #   resp.evaluation_form.items[0].question.weight #=> Float
+    #   resp.evaluation_form.scoring_strategy.mode #=> String, one of "QUESTION_ONLY", "SECTION_ONLY"
+    #   resp.evaluation_form.scoring_strategy.status #=> String, one of "ENABLED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactEvaluation AWS API Documentation
+    #
+    # @overload describe_contact_evaluation(params = {})
+    # @param [Hash] params ({})
+    def describe_contact_evaluation(params = {}, options = {})
+      req = build_request(:describe_contact_evaluation, params)
+      req.send_request(options)
+    end
+
     # Describes the specified flow.
     #
     # You can also create and update flows using the [Amazon Connect Flow
@@ -2983,6 +3390,94 @@ module Aws::Connect
     # @param [Hash] params ({})
     def describe_contact_flow_module(params = {}, options = {})
       req = build_request(:describe_contact_flow_module, params)
+      req.send_request(options)
+    end
+
+    # Describes an evaluation form in the specified Amazon Connect instance.
+    # If the version property is not provided, the latest version of the
+    # evaluation form is described.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :evaluation_form_id
+    #   A unique identifier for the contact evaluation.
+    #
+    # @option params [Integer] :evaluation_form_version
+    #   A version of the evaluation form.
+    #
+    # @return [Types::DescribeEvaluationFormResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEvaluationFormResponse#evaluation_form #evaluation_form} => Types::EvaluationForm
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_evaluation_form({
+    #     instance_id: "InstanceId", # required
+    #     evaluation_form_id: "ResourceId", # required
+    #     evaluation_form_version: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.evaluation_form.evaluation_form_id #=> String
+    #   resp.evaluation_form.evaluation_form_version #=> Integer
+    #   resp.evaluation_form.locked #=> Boolean
+    #   resp.evaluation_form.evaluation_form_arn #=> String
+    #   resp.evaluation_form.title #=> String
+    #   resp.evaluation_form.description #=> String
+    #   resp.evaluation_form.status #=> String, one of "DRAFT", "ACTIVE"
+    #   resp.evaluation_form.items #=> Array
+    #   resp.evaluation_form.items[0].section.title #=> String
+    #   resp.evaluation_form.items[0].section.ref_id #=> String
+    #   resp.evaluation_form.items[0].section.instructions #=> String
+    #   resp.evaluation_form.items[0].section.items #=> Types::EvaluationFormItemsList
+    #   resp.evaluation_form.items[0].section.weight #=> Float
+    #   resp.evaluation_form.items[0].question.title #=> String
+    #   resp.evaluation_form.items[0].question.instructions #=> String
+    #   resp.evaluation_form.items[0].question.ref_id #=> String
+    #   resp.evaluation_form.items[0].question.not_applicable_enabled #=> Boolean
+    #   resp.evaluation_form.items[0].question.question_type #=> String, one of "TEXT", "SINGLESELECT", "NUMERIC"
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.min_value #=> Integer
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.max_value #=> Integer
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options #=> Array
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].min_value #=> Integer
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].max_value #=> Integer
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].score #=> Integer
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].automatic_fail #=> Boolean
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.property_value.label #=> String, one of "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options #=> Array
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options[0].ref_id #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options[0].text #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options[0].score #=> Integer
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options[0].automatic_fail #=> Boolean
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.display_as #=> String, one of "DROPDOWN", "RADIO"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options #=> Array
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].rule_category.category #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].rule_category.condition #=> String, one of "PRESENT", "NOT_PRESENT"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].rule_category.option_ref_id #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.default_option_ref_id #=> String
+    #   resp.evaluation_form.items[0].question.weight #=> Float
+    #   resp.evaluation_form.scoring_strategy.mode #=> String, one of "QUESTION_ONLY", "SECTION_ONLY"
+    #   resp.evaluation_form.scoring_strategy.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.evaluation_form.created_time #=> Time
+    #   resp.evaluation_form.created_by #=> String
+    #   resp.evaluation_form.last_modified_time #=> Time
+    #   resp.evaluation_form.last_modified_by #=> String
+    #   resp.evaluation_form.tags #=> Hash
+    #   resp.evaluation_form.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeEvaluationForm AWS API Documentation
+    #
+    # @overload describe_evaluation_form(params = {})
+    # @param [Hash] params ({})
+    def describe_evaluation_form(params = {}, options = {})
+      req = build_request(:describe_evaluation_form, params)
       req.send_request(options)
     end
 
@@ -5557,6 +6052,67 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Lists contact evaluations in the specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    #   This is not expected to be set because the value returned in the
+    #   previous response is always null.
+    #
+    # @return [Types::ListContactEvaluationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListContactEvaluationsResponse#evaluation_summary_list #evaluation_summary_list} => Array&lt;Types::EvaluationSummary&gt;
+    #   * {Types::ListContactEvaluationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_contact_evaluations({
+    #     instance_id: "InstanceId", # required
+    #     contact_id: "ContactId", # required
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.evaluation_summary_list #=> Array
+    #   resp.evaluation_summary_list[0].evaluation_id #=> String
+    #   resp.evaluation_summary_list[0].evaluation_arn #=> String
+    #   resp.evaluation_summary_list[0].evaluation_form_title #=> String
+    #   resp.evaluation_summary_list[0].evaluation_form_id #=> String
+    #   resp.evaluation_summary_list[0].status #=> String, one of "DRAFT", "SUBMITTED"
+    #   resp.evaluation_summary_list[0].evaluator_arn #=> String
+    #   resp.evaluation_summary_list[0].score.percentage #=> Float
+    #   resp.evaluation_summary_list[0].score.not_applicable #=> Boolean
+    #   resp.evaluation_summary_list[0].score.automatic_fail #=> Boolean
+    #   resp.evaluation_summary_list[0].created_time #=> Time
+    #   resp.evaluation_summary_list[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactEvaluations AWS API Documentation
+    #
+    # @overload list_contact_evaluations(params = {})
+    # @param [Hash] params ({})
+    def list_contact_evaluations(params = {}, options = {})
+      req = build_request(:list_contact_evaluations, params)
+      req.send_request(options)
+    end
+
     # Provides information about the flow modules for the specified Amazon
     # Connect instance.
     #
@@ -5812,6 +6368,125 @@ module Aws::Connect
     # @param [Hash] params ({})
     def list_default_vocabularies(params = {}, options = {})
       req = build_request(:list_default_vocabularies, params)
+      req.send_request(options)
+    end
+
+    # Lists versions of an evaluation form in the specified Amazon Connect
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :evaluation_form_id
+    #   The unique identifier for the evaluation form.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @return [Types::ListEvaluationFormVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEvaluationFormVersionsResponse#evaluation_form_version_summary_list #evaluation_form_version_summary_list} => Array&lt;Types::EvaluationFormVersionSummary&gt;
+    #   * {Types::ListEvaluationFormVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_evaluation_form_versions({
+    #     instance_id: "InstanceId", # required
+    #     evaluation_form_id: "ResourceId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.evaluation_form_version_summary_list #=> Array
+    #   resp.evaluation_form_version_summary_list[0].evaluation_form_arn #=> String
+    #   resp.evaluation_form_version_summary_list[0].evaluation_form_id #=> String
+    #   resp.evaluation_form_version_summary_list[0].evaluation_form_version #=> Integer
+    #   resp.evaluation_form_version_summary_list[0].locked #=> Boolean
+    #   resp.evaluation_form_version_summary_list[0].status #=> String, one of "DRAFT", "ACTIVE"
+    #   resp.evaluation_form_version_summary_list[0].created_time #=> Time
+    #   resp.evaluation_form_version_summary_list[0].created_by #=> String
+    #   resp.evaluation_form_version_summary_list[0].last_modified_time #=> Time
+    #   resp.evaluation_form_version_summary_list[0].last_modified_by #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListEvaluationFormVersions AWS API Documentation
+    #
+    # @overload list_evaluation_form_versions(params = {})
+    # @param [Hash] params ({})
+    def list_evaluation_form_versions(params = {}, options = {})
+      req = build_request(:list_evaluation_form_versions, params)
+      req.send_request(options)
+    end
+
+    # Lists evaluation forms in the specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @return [Types::ListEvaluationFormsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEvaluationFormsResponse#evaluation_form_summary_list #evaluation_form_summary_list} => Array&lt;Types::EvaluationFormSummary&gt;
+    #   * {Types::ListEvaluationFormsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_evaluation_forms({
+    #     instance_id: "InstanceId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.evaluation_form_summary_list #=> Array
+    #   resp.evaluation_form_summary_list[0].evaluation_form_id #=> String
+    #   resp.evaluation_form_summary_list[0].evaluation_form_arn #=> String
+    #   resp.evaluation_form_summary_list[0].title #=> String
+    #   resp.evaluation_form_summary_list[0].created_time #=> Time
+    #   resp.evaluation_form_summary_list[0].created_by #=> String
+    #   resp.evaluation_form_summary_list[0].last_modified_time #=> Time
+    #   resp.evaluation_form_summary_list[0].last_modified_by #=> String
+    #   resp.evaluation_form_summary_list[0].last_activated_time #=> Time
+    #   resp.evaluation_form_summary_list[0].last_activated_by #=> String
+    #   resp.evaluation_form_summary_list[0].latest_version #=> Integer
+    #   resp.evaluation_form_summary_list[0].active_version #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListEvaluationForms AWS API Documentation
+    #
+    # @overload list_evaluation_forms(params = {})
+    # @param [Hash] params ({})
+    def list_evaluation_forms(params = {}, options = {})
+      req = build_request(:list_evaluation_forms, params)
       req.send_request(options)
     end
 
@@ -8333,6 +9008,72 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Starts an empty evaluation in the specified Amazon Connect instance,
+    # using the given evaluation form for the particular contact. The
+    # evaluation form version used for the contact evaluation corresponds to
+    # the currently activated version. If no version is activated for the
+    # evaluation form, the contact evaluation cannot be started.
+    #
+    # <note markdown="1"> Evaluations created through the public API do not contain answer
+    # values suggested from automation.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #
+    # @option params [required, String] :evaluation_form_id
+    #   The unique identifier for the evaluation form.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @return [Types::StartContactEvaluationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartContactEvaluationResponse#evaluation_id #evaluation_id} => String
+    #   * {Types::StartContactEvaluationResponse#evaluation_arn #evaluation_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_contact_evaluation({
+    #     instance_id: "InstanceId", # required
+    #     contact_id: "ContactId", # required
+    #     evaluation_form_id: "ResourceId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.evaluation_id #=> String
+    #   resp.evaluation_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartContactEvaluation AWS API Documentation
+    #
+    # @overload start_contact_evaluation(params = {})
+    # @param [Hash] params ({})
+    def start_contact_evaluation(params = {}, options = {})
+      req = build_request(:start_contact_evaluation, params)
+      req.send_request(options)
+    end
+
     # Starts recording the contact:
     #
     # * If the API is called *before* the agent joins the call, recording
@@ -8839,6 +9580,73 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Submits a contact evaluation in the specified Amazon Connect instance.
+    # Answers included in the request are merged with existing answers for
+    # the given evaluation. If no answers or notes are passed, the
+    # evaluation is submitted with the existing answers and notes. You can
+    # delete an answer or note by passing an empty object (`\{\}`) to the
+    # question identifier.
+    #
+    # If a contact evaluation is already in submitted state, this operation
+    # will trigger a resubmission.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :evaluation_id
+    #   A unique identifier for the contact evaluation.
+    #
+    # @option params [Hash<String,Types::EvaluationAnswerInput>] :answers
+    #   A map of question identifiers to answer value.
+    #
+    # @option params [Hash<String,Types::EvaluationNote>] :notes
+    #   A map of question identifiers to note value.
+    #
+    # @return [Types::SubmitContactEvaluationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SubmitContactEvaluationResponse#evaluation_id #evaluation_id} => String
+    #   * {Types::SubmitContactEvaluationResponse#evaluation_arn #evaluation_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.submit_contact_evaluation({
+    #     instance_id: "InstanceId", # required
+    #     evaluation_id: "ResourceId", # required
+    #     answers: {
+    #       "ResourceId" => {
+    #         value: {
+    #           string_value: "EvaluationAnswerDataStringValue",
+    #           numeric_value: 1.0,
+    #           not_applicable: false,
+    #         },
+    #       },
+    #     },
+    #     notes: {
+    #       "ResourceId" => {
+    #         value: "EvaluationNoteString",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.evaluation_id #=> String
+    #   resp.evaluation_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SubmitContactEvaluation AWS API Documentation
+    #
+    # @overload submit_contact_evaluation(params = {})
+    # @param [Hash] params ({})
+    def submit_contact_evaluation(params = {}, options = {})
+      req = build_request(:submit_contact_evaluation, params)
+      req.send_request(options)
+    end
+
     # When a contact is being recorded, this API suspends recording the
     # call. For example, you might suspend the call recording while
     # collecting sensitive information, such as a credit card number. Then
@@ -9211,6 +10019,69 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Updates details about a contact evaluation in the specified Amazon
+    # Connect instance. A contact evaluation must be in draft state. Answers
+    # included in the request are merged with existing answers for the given
+    # evaluation. An answer or note can be deleted by passing an empty
+    # object (`\{\}`) to the question identifier.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :evaluation_id
+    #   A unique identifier for the contact evaluation.
+    #
+    # @option params [Hash<String,Types::EvaluationAnswerInput>] :answers
+    #   A map of question identifiers to answer value.
+    #
+    # @option params [Hash<String,Types::EvaluationNote>] :notes
+    #   A map of question identifiers to note value.
+    #
+    # @return [Types::UpdateContactEvaluationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateContactEvaluationResponse#evaluation_id #evaluation_id} => String
+    #   * {Types::UpdateContactEvaluationResponse#evaluation_arn #evaluation_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_contact_evaluation({
+    #     instance_id: "InstanceId", # required
+    #     evaluation_id: "ResourceId", # required
+    #     answers: {
+    #       "ResourceId" => {
+    #         value: {
+    #           string_value: "EvaluationAnswerDataStringValue",
+    #           numeric_value: 1.0,
+    #           not_applicable: false,
+    #         },
+    #       },
+    #     },
+    #     notes: {
+    #       "ResourceId" => {
+    #         value: "EvaluationNoteString",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.evaluation_id #=> String
+    #   resp.evaluation_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactEvaluation AWS API Documentation
+    #
+    # @overload update_contact_evaluation(params = {})
+    # @param [Hash] params ({})
+    def update_contact_evaluation(params = {}, options = {})
+      req = build_request(:update_contact_evaluation, params)
+      req.send_request(options)
+    end
+
     # Updates the specified flow.
     #
     # You can also create and update flows using the [Amazon Connect Flow
@@ -9451,6 +10322,158 @@ module Aws::Connect
     # @param [Hash] params ({})
     def update_contact_schedule(params = {}, options = {})
       req = build_request(:update_contact_schedule, params)
+      req.send_request(options)
+    end
+
+    # Updates details about a specific evaluation form version in the
+    # specified Amazon Connect instance. An evaluation form must have a
+    # unique title within an instance. Question and section identifiers
+    # cannot be duplicated within the same evaluation form.
+    #
+    # This operation does not support partial updates. Instead it does a
+    # full update of evaluation form content.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :evaluation_form_id
+    #   The unique identifier for the evaluation form.
+    #
+    # @option params [required, Integer] :evaluation_form_version
+    #   A version of the evaluation form to update.
+    #
+    # @option params [Boolean] :create_new_version
+    #   A flag indicating whether the operation must create a new version.
+    #
+    # @option params [required, String] :title
+    #   A unique title of the evaluation form.
+    #
+    # @option params [String] :description
+    #   The description of the evaluation form.
+    #
+    # @option params [required, Array<Types::EvaluationFormItem>] :items
+    #   Items that are part of the evaluation form. The total number of
+    #   sections and questions must not exceed 100 each. Questions must be
+    #   contained in a section.
+    #
+    # @option params [Types::EvaluationFormScoringStrategy] :scoring_strategy
+    #   A scoring strategy of the evaluation form.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @return [Types::UpdateEvaluationFormResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateEvaluationFormResponse#evaluation_form_id #evaluation_form_id} => String
+    #   * {Types::UpdateEvaluationFormResponse#evaluation_form_arn #evaluation_form_arn} => String
+    #   * {Types::UpdateEvaluationFormResponse#evaluation_form_version #evaluation_form_version} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_evaluation_form({
+    #     instance_id: "InstanceId", # required
+    #     evaluation_form_id: "ResourceId", # required
+    #     evaluation_form_version: 1, # required
+    #     create_new_version: false,
+    #     title: "EvaluationFormTitle", # required
+    #     description: "EvaluationFormDescription",
+    #     items: [ # required
+    #       {
+    #         section: {
+    #           title: "EvaluationFormSectionTitle", # required
+    #           ref_id: "ReferenceId", # required
+    #           instructions: "EvaluationFormQuestionInstructions",
+    #           items: {
+    #             # recursive EvaluationFormItemsList
+    #           },
+    #           weight: 1.0,
+    #         },
+    #         question: {
+    #           title: "EvaluationFormQuestionTitle", # required
+    #           instructions: "EvaluationFormQuestionInstructions",
+    #           ref_id: "ReferenceId", # required
+    #           not_applicable_enabled: false,
+    #           question_type: "TEXT", # required, accepts TEXT, SINGLESELECT, NUMERIC
+    #           question_type_properties: {
+    #             numeric: {
+    #               min_value: 1, # required
+    #               max_value: 1, # required
+    #               options: [
+    #                 {
+    #                   min_value: 1, # required
+    #                   max_value: 1, # required
+    #                   score: 1,
+    #                   automatic_fail: false,
+    #                 },
+    #               ],
+    #               automation: {
+    #                 property_value: {
+    #                   label: "OVERALL_CUSTOMER_SENTIMENT_SCORE", # required, accepts OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME
+    #                 },
+    #               },
+    #             },
+    #             single_select: {
+    #               options: [ # required
+    #                 {
+    #                   ref_id: "ReferenceId", # required
+    #                   text: "EvaluationFormSingleSelectQuestionOptionText", # required
+    #                   score: 1,
+    #                   automatic_fail: false,
+    #                 },
+    #               ],
+    #               display_as: "DROPDOWN", # accepts DROPDOWN, RADIO
+    #               automation: {
+    #                 options: [ # required
+    #                   {
+    #                     rule_category: {
+    #                       category: "SingleSelectQuestionRuleCategoryAutomationLabel", # required
+    #                       condition: "PRESENT", # required, accepts PRESENT, NOT_PRESENT
+    #                       option_ref_id: "ReferenceId", # required
+    #                     },
+    #                   },
+    #                 ],
+    #                 default_option_ref_id: "ReferenceId",
+    #               },
+    #             },
+    #           },
+    #           weight: 1.0,
+    #         },
+    #       },
+    #     ],
+    #     scoring_strategy: {
+    #       mode: "QUESTION_ONLY", # required, accepts QUESTION_ONLY, SECTION_ONLY
+    #       status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.evaluation_form_id #=> String
+    #   resp.evaluation_form_arn #=> String
+    #   resp.evaluation_form_version #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateEvaluationForm AWS API Documentation
+    #
+    # @overload update_evaluation_form(params = {})
+    # @param [Hash] params ({})
+    def update_evaluation_form(params = {}, options = {})
+      req = build_request(:update_evaluation_form, params)
       req.send_request(options)
     end
 
@@ -10862,7 +11885,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.102.0'
+      context[:gem_version] = '1.103.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

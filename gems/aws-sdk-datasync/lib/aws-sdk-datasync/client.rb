@@ -378,6 +378,92 @@ module Aws::DataSync
 
     # @!group API Operations
 
+    # Creates an Amazon Web Services resource for an on-premises storage
+    # system that you want DataSync Discovery to collect information about.
+    #
+    # @option params [required, Types::DiscoveryServerConfiguration] :server_configuration
+    #   Specifies the server name and network port required to connect with
+    #   the management interface of your on-premises storage system.
+    #
+    # @option params [required, String] :system_type
+    #   Specifies the type of on-premises storage system that you want
+    #   DataSync Discovery to collect information about.
+    #
+    #   <note markdown="1"> DataSync Discovery currently supports NetApp Fabric-Attached Storage
+    #   (FAS) and All Flash FAS (AFF) systems running ONTAP 9.7 or later.
+    #
+    #    </note>
+    #
+    # @option params [required, Array<String>] :agent_arns
+    #   Specifies the Amazon Resource Name (ARN) of the DataSync agent that
+    #   connects to and reads from your on-premises storage system's
+    #   management interface.
+    #
+    # @option params [String] :cloud_watch_log_group_arn
+    #   Specifies the ARN of the Amazon CloudWatch log group for monitoring
+    #   and logging discovery job events.
+    #
+    # @option params [Array<Types::TagListEntry>] :tags
+    #   Specifies labels that help you categorize, filter, and search for your
+    #   Amazon Web Services resources. We recommend creating at least a name
+    #   tag for your on-premises storage system.
+    #
+    # @option params [String] :name
+    #   Specifies a familiar name for your on-premises storage system.
+    #
+    # @option params [required, String] :client_token
+    #   Specifies a client token to make sure requests with this API operation
+    #   are idempotent. If you don't specify a client token, DataSync
+    #   generates one for you automatically.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::Credentials] :credentials
+    #   Specifies the user name and password for accessing your on-premises
+    #   storage system's management interface.
+    #
+    # @return [Types::AddStorageSystemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AddStorageSystemResponse#storage_system_arn #storage_system_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_storage_system({
+    #     server_configuration: { # required
+    #       server_hostname: "DiscoveryServerHostname", # required
+    #       server_port: 1,
+    #     },
+    #     system_type: "NetAppONTAP", # required, accepts NetAppONTAP
+    #     agent_arns: ["AgentArn"], # required
+    #     cloud_watch_log_group_arn: "LogGroupArn",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     name: "Name",
+    #     client_token: "PtolemyUUID", # required
+    #     credentials: { # required
+    #       username: "PtolemyUsername", # required
+    #       password: "PtolemyPassword", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.storage_system_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/AddStorageSystem AWS API Documentation
+    #
+    # @overload add_storage_system(params = {})
+    # @param [Hash] params ({})
+    def add_storage_system(params = {}, options = {})
+      req = build_request(:add_storage_system, params)
+      req.send_request(options)
+    end
+
     # Stops an DataSync task execution that's in progress. The transfer of
     # some files are abruptly interrupted. File contents that're
     # transferred to the destination might be incomplete or inconsistent
@@ -1260,13 +1346,23 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Creates an endpoint for an Amazon S3 bucket that DataSync can access
-    # for a transfer. For more information, see [Create an Amazon S3
-    # location][1].
+    # A *location* is an endpoint for an Amazon S3 bucket. DataSync can use
+    # the location as a source or destination for copying data.
+    #
+    # Before you create your location, make sure that you read the following
+    # sections:
+    #
+    #  * [Storage class considerations with Amazon S3 locations][1]
+    #
+    # * [Evaluating S3 request costs when using DataSync][2]
+    #
+    # For more information, see [Creating an Amazon S3 location][3].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes
+    # [2]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-s3-requests
+    # [3]: https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli
     #
     # @option params [String] :subdirectory
     #   A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3
@@ -1471,6 +1567,15 @@ module Aws::DataSync
     # A task includes a source location, a destination location, and the
     # preferences for how and when you want to transfer your data (such as
     # bandwidth limits, scheduling, among other options).
+    #
+    # If you're planning to transfer data to or from an Amazon S3 location,
+    # review [how DataSync can affect your S3 request charges][1] and the
+    # [DataSync pricing page][2] before you begin.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-s3-requests
+    # [2]: http://aws.amazon.com/datasync/pricing/
     #
     # @option params [required, String] :source_location_arn
     #   The Amazon Resource Name (ARN) of the source location for the task.
@@ -1714,6 +1819,45 @@ module Aws::DataSync
     # @param [Hash] params ({})
     def describe_agent(params = {}, options = {})
       req = build_request(:describe_agent, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a DataSync discovery job.
+    #
+    # @option params [required, String] :discovery_job_arn
+    #   Specifies the Amazon Resource Name (ARN) of the discovery job that you
+    #   want information about.
+    #
+    # @return [Types::DescribeDiscoveryJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDiscoveryJobResponse#storage_system_arn #storage_system_arn} => String
+    #   * {Types::DescribeDiscoveryJobResponse#discovery_job_arn #discovery_job_arn} => String
+    #   * {Types::DescribeDiscoveryJobResponse#collection_duration_minutes #collection_duration_minutes} => Integer
+    #   * {Types::DescribeDiscoveryJobResponse#status #status} => String
+    #   * {Types::DescribeDiscoveryJobResponse#job_start_time #job_start_time} => Time
+    #   * {Types::DescribeDiscoveryJobResponse#job_end_time #job_end_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_discovery_job({
+    #     discovery_job_arn: "DiscoveryJobArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.storage_system_arn #=> String
+    #   resp.discovery_job_arn #=> String
+    #   resp.collection_duration_minutes #=> Integer
+    #   resp.status #=> String, one of "RUNNING", "WARNING", "TERMINATED", "FAILED", "STOPPED", "COMPLETED", "COMPLETED_WITH_ISSUES"
+    #   resp.job_start_time #=> Time
+    #   resp.job_end_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeDiscoveryJob AWS API Documentation
+    #
+    # @overload describe_discovery_job(params = {})
+    # @param [Hash] params ({})
+    def describe_discovery_job(params = {}, options = {})
+      req = build_request(:describe_discovery_job, params)
       req.send_request(options)
     end
 
@@ -2160,6 +2304,284 @@ module Aws::DataSync
       req.send_request(options)
     end
 
+    # Returns information about an on-premises storage system that you're
+    # using with DataSync Discovery.
+    #
+    # @option params [required, String] :storage_system_arn
+    #   Specifies the Amazon Resource Name (ARN) of an on-premises storage
+    #   system that you're using with DataSync Discovery.
+    #
+    # @return [Types::DescribeStorageSystemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeStorageSystemResponse#storage_system_arn #storage_system_arn} => String
+    #   * {Types::DescribeStorageSystemResponse#server_configuration #server_configuration} => Types::DiscoveryServerConfiguration
+    #   * {Types::DescribeStorageSystemResponse#system_type #system_type} => String
+    #   * {Types::DescribeStorageSystemResponse#agent_arns #agent_arns} => Array&lt;String&gt;
+    #   * {Types::DescribeStorageSystemResponse#name #name} => String
+    #   * {Types::DescribeStorageSystemResponse#error_message #error_message} => String
+    #   * {Types::DescribeStorageSystemResponse#connectivity_status #connectivity_status} => String
+    #   * {Types::DescribeStorageSystemResponse#cloud_watch_log_group_arn #cloud_watch_log_group_arn} => String
+    #   * {Types::DescribeStorageSystemResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeStorageSystemResponse#secrets_manager_arn #secrets_manager_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_storage_system({
+    #     storage_system_arn: "StorageSystemArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.storage_system_arn #=> String
+    #   resp.server_configuration.server_hostname #=> String
+    #   resp.server_configuration.server_port #=> Integer
+    #   resp.system_type #=> String, one of "NetAppONTAP"
+    #   resp.agent_arns #=> Array
+    #   resp.agent_arns[0] #=> String
+    #   resp.name #=> String
+    #   resp.error_message #=> String
+    #   resp.connectivity_status #=> String, one of "PASS", "FAIL", "UNKNOWN"
+    #   resp.cloud_watch_log_group_arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.secrets_manager_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeStorageSystem AWS API Documentation
+    #
+    # @overload describe_storage_system(params = {})
+    # @param [Hash] params ({})
+    def describe_storage_system(params = {}, options = {})
+      req = build_request(:describe_storage_system, params)
+      req.send_request(options)
+    end
+
+    # Returns information, including performance data and capacity usage,
+    # which DataSync Discovery collects about a specific resource in
+    # your-premises storage system.
+    #
+    # @option params [required, String] :discovery_job_arn
+    #   Specifies the Amazon Resource Name (ARN) of the discovery job that
+    #   collects information about your on-premises storage system.
+    #
+    # @option params [required, String] :resource_type
+    #   Specifies the kind of storage system resource that you want
+    #   information about.
+    #
+    # @option params [required, String] :resource_id
+    #   Specifies the universally unique identifier (UUID) of the storage
+    #   system resource that you want information about.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   Specifies a time within the total duration that the discovery job ran.
+    #   To see information gathered during a certain time frame, use this
+    #   parameter with `EndTime`.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   Specifies a time within the total duration that the discovery job ran.
+    #   To see information gathered during a certain time frame, use this
+    #   parameter with `StartTime`.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies how many results that you want in the response.
+    #
+    # @option params [String] :next_token
+    #   Specifies an opaque string that indicates the position to begin the
+    #   next list of results in the response.
+    #
+    # @return [Types::DescribeStorageSystemResourceMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeStorageSystemResourceMetricsResponse#metrics #metrics} => Array&lt;Types::ResourceMetrics&gt;
+    #   * {Types::DescribeStorageSystemResourceMetricsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_storage_system_resource_metrics({
+    #     discovery_job_arn: "DiscoveryJobArn", # required
+    #     resource_type: "SVM", # required, accepts SVM, VOLUME, CLUSTER
+    #     resource_id: "ResourceId", # required
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     max_results: 1,
+    #     next_token: "DiscoveryNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.metrics #=> Array
+    #   resp.metrics[0].timestamp #=> Time
+    #   resp.metrics[0].p95_metrics.iops.read #=> Float
+    #   resp.metrics[0].p95_metrics.iops.write #=> Float
+    #   resp.metrics[0].p95_metrics.iops.other #=> Float
+    #   resp.metrics[0].p95_metrics.iops.total #=> Float
+    #   resp.metrics[0].p95_metrics.throughput.read #=> Float
+    #   resp.metrics[0].p95_metrics.throughput.write #=> Float
+    #   resp.metrics[0].p95_metrics.throughput.other #=> Float
+    #   resp.metrics[0].p95_metrics.throughput.total #=> Float
+    #   resp.metrics[0].p95_metrics.latency.read #=> Float
+    #   resp.metrics[0].p95_metrics.latency.write #=> Float
+    #   resp.metrics[0].p95_metrics.latency.other #=> Float
+    #   resp.metrics[0].capacity.used #=> Integer
+    #   resp.metrics[0].capacity.provisioned #=> Integer
+    #   resp.metrics[0].capacity.logical_used #=> Integer
+    #   resp.metrics[0].resource_id #=> String
+    #   resp.metrics[0].resource_type #=> String, one of "SVM", "VOLUME", "CLUSTER"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeStorageSystemResourceMetrics AWS API Documentation
+    #
+    # @overload describe_storage_system_resource_metrics(params = {})
+    # @param [Hash] params ({})
+    def describe_storage_system_resource_metrics(params = {}, options = {})
+      req = build_request(:describe_storage_system_resource_metrics, params)
+      req.send_request(options)
+    end
+
+    # Returns information that DataSync Discovery collects about resources
+    # in your on-premises storage system.
+    #
+    # @option params [required, String] :discovery_job_arn
+    #   Specifies the Amazon Resource Name (ARN) of the discovery job that's
+    #   collecting data from your on-premises storage system.
+    #
+    # @option params [required, String] :resource_type
+    #   Specifies what kind of storage system resources that you want
+    #   information about.
+    #
+    # @option params [Array<String>] :resource_ids
+    #   Specifies the universally unique identifiers (UUIDs) of the storage
+    #   system resources that you want information about. You can't use this
+    #   parameter in combination with the `Filter` parameter.
+    #
+    # @option params [Hash<String,Array>] :filter
+    #   Filters the storage system resources that you want returned. For
+    #   example, this might be volumes associated with a specific storage
+    #   virtual machine (SVM).
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the maximum number of storage system resources that you want
+    #   to list in a response.
+    #
+    # @option params [String] :next_token
+    #   Specifies an opaque string that indicates the position to begin the
+    #   next list of results in the response.
+    #
+    # @return [Types::DescribeStorageSystemResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeStorageSystemResourcesResponse#resource_details #resource_details} => Types::ResourceDetails
+    #   * {Types::DescribeStorageSystemResourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_storage_system_resources({
+    #     discovery_job_arn: "DiscoveryJobArn", # required
+    #     resource_type: "SVM", # required, accepts SVM, VOLUME, CLUSTER
+    #     resource_ids: ["ResourceId"],
+    #     filter: {
+    #       "SVM" => ["PtolemyString"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "DiscoveryNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_details.net_app_ontapsv_ms #=> Array
+    #   resp.resource_details.net_app_ontapsv_ms[0].cluster_uuid #=> String
+    #   resp.resource_details.net_app_ontapsv_ms[0].resource_id #=> String
+    #   resp.resource_details.net_app_ontapsv_ms[0].svm_name #=> String
+    #   resp.resource_details.net_app_ontapsv_ms[0].cifs_share_count #=> Integer
+    #   resp.resource_details.net_app_ontapsv_ms[0].enabled_protocols #=> Array
+    #   resp.resource_details.net_app_ontapsv_ms[0].enabled_protocols[0] #=> String
+    #   resp.resource_details.net_app_ontapsv_ms[0].total_capacity_used #=> Integer
+    #   resp.resource_details.net_app_ontapsv_ms[0].total_capacity_provisioned #=> Integer
+    #   resp.resource_details.net_app_ontapsv_ms[0].total_logical_capacity_used #=> Integer
+    #   resp.resource_details.net_app_ontapsv_ms[0].max_p95_performance.iops_read #=> Float
+    #   resp.resource_details.net_app_ontapsv_ms[0].max_p95_performance.iops_write #=> Float
+    #   resp.resource_details.net_app_ontapsv_ms[0].max_p95_performance.iops_other #=> Float
+    #   resp.resource_details.net_app_ontapsv_ms[0].max_p95_performance.iops_total #=> Float
+    #   resp.resource_details.net_app_ontapsv_ms[0].max_p95_performance.throughput_read #=> Float
+    #   resp.resource_details.net_app_ontapsv_ms[0].max_p95_performance.throughput_write #=> Float
+    #   resp.resource_details.net_app_ontapsv_ms[0].max_p95_performance.throughput_other #=> Float
+    #   resp.resource_details.net_app_ontapsv_ms[0].max_p95_performance.throughput_total #=> Float
+    #   resp.resource_details.net_app_ontapsv_ms[0].max_p95_performance.latency_read #=> Float
+    #   resp.resource_details.net_app_ontapsv_ms[0].max_p95_performance.latency_write #=> Float
+    #   resp.resource_details.net_app_ontapsv_ms[0].max_p95_performance.latency_other #=> Float
+    #   resp.resource_details.net_app_ontapsv_ms[0].recommendations #=> Array
+    #   resp.resource_details.net_app_ontapsv_ms[0].recommendations[0].storage_type #=> String
+    #   resp.resource_details.net_app_ontapsv_ms[0].recommendations[0].storage_configuration #=> Hash
+    #   resp.resource_details.net_app_ontapsv_ms[0].recommendations[0].storage_configuration["PtolemyString"] #=> String
+    #   resp.resource_details.net_app_ontapsv_ms[0].recommendations[0].estimated_monthly_storage_cost #=> String
+    #   resp.resource_details.net_app_ontapsv_ms[0].nfs_exported_volumes #=> Integer
+    #   resp.resource_details.net_app_ontapsv_ms[0].recommendation_status #=> String, one of "NONE", "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.resource_details.net_app_ontapsv_ms[0].total_snapshot_capacity_used #=> Integer
+    #   resp.resource_details.net_app_ontap_volumes #=> Array
+    #   resp.resource_details.net_app_ontap_volumes[0].volume_name #=> String
+    #   resp.resource_details.net_app_ontap_volumes[0].resource_id #=> String
+    #   resp.resource_details.net_app_ontap_volumes[0].cifs_share_count #=> Integer
+    #   resp.resource_details.net_app_ontap_volumes[0].security_style #=> String
+    #   resp.resource_details.net_app_ontap_volumes[0].svm_uuid #=> String
+    #   resp.resource_details.net_app_ontap_volumes[0].svm_name #=> String
+    #   resp.resource_details.net_app_ontap_volumes[0].capacity_used #=> Integer
+    #   resp.resource_details.net_app_ontap_volumes[0].capacity_provisioned #=> Integer
+    #   resp.resource_details.net_app_ontap_volumes[0].logical_capacity_used #=> Integer
+    #   resp.resource_details.net_app_ontap_volumes[0].nfs_exported #=> Boolean
+    #   resp.resource_details.net_app_ontap_volumes[0].snapshot_capacity_used #=> Integer
+    #   resp.resource_details.net_app_ontap_volumes[0].max_p95_performance.iops_read #=> Float
+    #   resp.resource_details.net_app_ontap_volumes[0].max_p95_performance.iops_write #=> Float
+    #   resp.resource_details.net_app_ontap_volumes[0].max_p95_performance.iops_other #=> Float
+    #   resp.resource_details.net_app_ontap_volumes[0].max_p95_performance.iops_total #=> Float
+    #   resp.resource_details.net_app_ontap_volumes[0].max_p95_performance.throughput_read #=> Float
+    #   resp.resource_details.net_app_ontap_volumes[0].max_p95_performance.throughput_write #=> Float
+    #   resp.resource_details.net_app_ontap_volumes[0].max_p95_performance.throughput_other #=> Float
+    #   resp.resource_details.net_app_ontap_volumes[0].max_p95_performance.throughput_total #=> Float
+    #   resp.resource_details.net_app_ontap_volumes[0].max_p95_performance.latency_read #=> Float
+    #   resp.resource_details.net_app_ontap_volumes[0].max_p95_performance.latency_write #=> Float
+    #   resp.resource_details.net_app_ontap_volumes[0].max_p95_performance.latency_other #=> Float
+    #   resp.resource_details.net_app_ontap_volumes[0].recommendations #=> Array
+    #   resp.resource_details.net_app_ontap_volumes[0].recommendations[0].storage_type #=> String
+    #   resp.resource_details.net_app_ontap_volumes[0].recommendations[0].storage_configuration #=> Hash
+    #   resp.resource_details.net_app_ontap_volumes[0].recommendations[0].storage_configuration["PtolemyString"] #=> String
+    #   resp.resource_details.net_app_ontap_volumes[0].recommendations[0].estimated_monthly_storage_cost #=> String
+    #   resp.resource_details.net_app_ontap_volumes[0].recommendation_status #=> String, one of "NONE", "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.resource_details.net_app_ontap_clusters #=> Array
+    #   resp.resource_details.net_app_ontap_clusters[0].cifs_share_count #=> Integer
+    #   resp.resource_details.net_app_ontap_clusters[0].nfs_exported_volumes #=> Integer
+    #   resp.resource_details.net_app_ontap_clusters[0].resource_id #=> String
+    #   resp.resource_details.net_app_ontap_clusters[0].cluster_name #=> String
+    #   resp.resource_details.net_app_ontap_clusters[0].max_p95_performance.iops_read #=> Float
+    #   resp.resource_details.net_app_ontap_clusters[0].max_p95_performance.iops_write #=> Float
+    #   resp.resource_details.net_app_ontap_clusters[0].max_p95_performance.iops_other #=> Float
+    #   resp.resource_details.net_app_ontap_clusters[0].max_p95_performance.iops_total #=> Float
+    #   resp.resource_details.net_app_ontap_clusters[0].max_p95_performance.throughput_read #=> Float
+    #   resp.resource_details.net_app_ontap_clusters[0].max_p95_performance.throughput_write #=> Float
+    #   resp.resource_details.net_app_ontap_clusters[0].max_p95_performance.throughput_other #=> Float
+    #   resp.resource_details.net_app_ontap_clusters[0].max_p95_performance.throughput_total #=> Float
+    #   resp.resource_details.net_app_ontap_clusters[0].max_p95_performance.latency_read #=> Float
+    #   resp.resource_details.net_app_ontap_clusters[0].max_p95_performance.latency_write #=> Float
+    #   resp.resource_details.net_app_ontap_clusters[0].max_p95_performance.latency_other #=> Float
+    #   resp.resource_details.net_app_ontap_clusters[0].cluster_block_storage_size #=> Integer
+    #   resp.resource_details.net_app_ontap_clusters[0].cluster_block_storage_used #=> Integer
+    #   resp.resource_details.net_app_ontap_clusters[0].cluster_block_storage_logical_used #=> Integer
+    #   resp.resource_details.net_app_ontap_clusters[0].recommendations #=> Array
+    #   resp.resource_details.net_app_ontap_clusters[0].recommendations[0].storage_type #=> String
+    #   resp.resource_details.net_app_ontap_clusters[0].recommendations[0].storage_configuration #=> Hash
+    #   resp.resource_details.net_app_ontap_clusters[0].recommendations[0].storage_configuration["PtolemyString"] #=> String
+    #   resp.resource_details.net_app_ontap_clusters[0].recommendations[0].estimated_monthly_storage_cost #=> String
+    #   resp.resource_details.net_app_ontap_clusters[0].recommendation_status #=> String, one of "NONE", "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeStorageSystemResources AWS API Documentation
+    #
+    # @overload describe_storage_system_resources(params = {})
+    # @param [Hash] params ({})
+    def describe_storage_system_resources(params = {}, options = {})
+      req = build_request(:describe_storage_system_resources, params)
+      req.send_request(options)
+    end
+
     # Returns metadata about a task.
     #
     # @option params [required, String] :task_arn
@@ -2316,6 +2738,58 @@ module Aws::DataSync
       req.send_request(options)
     end
 
+    # Creates recommendations about where to migrate your data to in Amazon
+    # Web Services. Recommendations are generated based on information that
+    # DataSync Discovery collects about your on-premises storage system's
+    # resources. For more information, see [Recommendations provided by
+    # DataSync Discovery][1].
+    #
+    # Once generated, you can view your recommendations by using the
+    # [DescribeStorageSystemResources][2] operation.
+    #
+    # <note markdown="1"> If your [discovery job completes successfully][3], you don't need to
+    # use this operation. DataSync Discovery generates the recommendations
+    # for you automatically.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html
+    # [2]: https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeStorageSystemResources.html
+    # [3]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#discovery-job-statuses-table
+    #
+    # @option params [required, String] :discovery_job_arn
+    #   Specifies the Amazon Resource Name (ARN) of the discovery job that
+    #   collects information about your on-premises storage system.
+    #
+    # @option params [required, Array<String>] :resource_ids
+    #   Specifies the universally unique identifiers (UUIDs) of the resources
+    #   in your storage system that you want recommendations on.
+    #
+    # @option params [required, String] :resource_type
+    #   Specifies the type of resource in your storage system that you want
+    #   recommendations on.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.generate_recommendations({
+    #     discovery_job_arn: "DiscoveryJobArn", # required
+    #     resource_ids: ["ResourceId"], # required
+    #     resource_type: "SVM", # required, accepts SVM, VOLUME, CLUSTER
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/GenerateRecommendations AWS API Documentation
+    #
+    # @overload generate_recommendations(params = {})
+    # @param [Hash] params ({})
+    def generate_recommendations(params = {}, options = {})
+      req = build_request(:generate_recommendations, params)
+      req.send_request(options)
+    end
+
     # Returns a list of DataSync agents that belong to an Amazon Web
     # Services account in the Amazon Web Services Region specified in the
     # request.
@@ -2377,6 +2851,53 @@ module Aws::DataSync
       req.send_request(options)
     end
 
+    # Provides a list of the existing discovery jobs in the Amazon Web
+    # Services Region and Amazon Web Services account where you're using
+    # DataSync Discovery.
+    #
+    # @option params [String] :storage_system_arn
+    #   Specifies the Amazon Resource Name (ARN) of an on-premises storage
+    #   system. Use this parameter if you only want to list the discovery jobs
+    #   that are associated with a specific storage system.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies how many results you want in the response.
+    #
+    # @option params [String] :next_token
+    #   Specifies an opaque string that indicates the position to begin the
+    #   next list of results in the response.
+    #
+    # @return [Types::ListDiscoveryJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDiscoveryJobsResponse#discovery_jobs #discovery_jobs} => Array&lt;Types::DiscoveryJobListEntry&gt;
+    #   * {Types::ListDiscoveryJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_discovery_jobs({
+    #     storage_system_arn: "StorageSystemArn",
+    #     max_results: 1,
+    #     next_token: "DiscoveryNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.discovery_jobs #=> Array
+    #   resp.discovery_jobs[0].discovery_job_arn #=> String
+    #   resp.discovery_jobs[0].status #=> String, one of "RUNNING", "WARNING", "TERMINATED", "FAILED", "STOPPED", "COMPLETED", "COMPLETED_WITH_ISSUES"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListDiscoveryJobs AWS API Documentation
+    #
+    # @overload list_discovery_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_discovery_jobs(params = {}, options = {})
+      req = build_request(:list_discovery_jobs, params)
+      req.send_request(options)
+    end
+
     # Returns a list of source and destination locations.
     #
     # If you have more locations than are returned in a response (that is,
@@ -2431,6 +2952,46 @@ module Aws::DataSync
     # @param [Hash] params ({})
     def list_locations(params = {}, options = {})
       req = build_request(:list_locations, params)
+      req.send_request(options)
+    end
+
+    # Lists the on-premises storage systems that you're using with DataSync
+    # Discovery.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies how many results you want in the response.
+    #
+    # @option params [String] :next_token
+    #   Specifies an opaque string that indicates the position to begin the
+    #   next list of results in the response.
+    #
+    # @return [Types::ListStorageSystemsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStorageSystemsResponse#storage_systems #storage_systems} => Array&lt;Types::StorageSystemListEntry&gt;
+    #   * {Types::ListStorageSystemsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_storage_systems({
+    #     max_results: 1,
+    #     next_token: "DiscoveryNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.storage_systems #=> Array
+    #   resp.storage_systems[0].storage_system_arn #=> String
+    #   resp.storage_systems[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListStorageSystems AWS API Documentation
+    #
+    # @overload list_storage_systems(params = {})
+    # @param [Hash] params ({})
+    def list_storage_systems(params = {}, options = {})
+      req = build_request(:list_storage_systems, params)
       req.send_request(options)
     end
 
@@ -2575,15 +3136,111 @@ module Aws::DataSync
       req.send_request(options)
     end
 
+    # Permanently removes a storage system resource from DataSync Discovery,
+    # including the associated discovery jobs, collected data, and
+    # recommendations.
+    #
+    # @option params [required, String] :storage_system_arn
+    #   Specifies the Amazon Resource Name (ARN) of the storage system that
+    #   you want to permanently remove from DataSync Discovery.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_storage_system({
+    #     storage_system_arn: "StorageSystemArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/RemoveStorageSystem AWS API Documentation
+    #
+    # @overload remove_storage_system(params = {})
+    # @param [Hash] params ({})
+    def remove_storage_system(params = {}, options = {})
+      req = build_request(:remove_storage_system, params)
+      req.send_request(options)
+    end
+
+    # Runs a DataSync discovery job on your on-premises storage system. If
+    # you haven't added the storage system to DataSync Discovery yet, do
+    # this first by using the [AddStorageSystem][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_AddStorageSystem.html
+    #
+    # @option params [required, String] :storage_system_arn
+    #   Specifies the Amazon Resource Name (ARN) of the on-premises storage
+    #   system that you want to run the discovery job on.
+    #
+    # @option params [required, Integer] :collection_duration_minutes
+    #   Specifies in minutes how long you want the discovery job to run.
+    #
+    #   <note markdown="1"> For more accurate recommendations, we recommend a duration of at least
+    #   14 days. Longer durations allow time to collect a sufficient number of
+    #   data points and provide a realistic representation of storage
+    #   performance and utilization.
+    #
+    #    </note>
+    #
+    # @option params [required, String] :client_token
+    #   Specifies a client token to make sure requests with this API operation
+    #   are idempotent. If you don't specify a client token, DataSync
+    #   generates one for you automatically.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::TagListEntry>] :tags
+    #   Specifies labels that help you categorize, filter, and search for your
+    #   Amazon Web Services resources.
+    #
+    # @return [Types::StartDiscoveryJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDiscoveryJobResponse#discovery_job_arn #discovery_job_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_discovery_job({
+    #     storage_system_arn: "StorageSystemArn", # required
+    #     collection_duration_minutes: 1, # required
+    #     client_token: "PtolemyUUID", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.discovery_job_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/StartDiscoveryJob AWS API Documentation
+    #
+    # @overload start_discovery_job(params = {})
+    # @param [Hash] params ({})
+    def start_discovery_job(params = {}, options = {})
+      req = build_request(:start_discovery_job, params)
+      req.send_request(options)
+    end
+
     # Starts an DataSync task. For each task, you can only run one task
     # execution at a time.
     #
     # There are several phases to a task execution. For more information,
     # see [Task execution statuses][1].
     #
+    # If you're planning to transfer data to or from an Amazon S3 location,
+    # review [how DataSync can affect your S3 request charges][2] and the
+    # [DataSync pricing page][3] before you begin.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/working-with-task-executions.html#understand-task-execution-statuses
+    # [2]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-s3-requests
+    # [3]: http://aws.amazon.com/datasync/pricing/
     #
     # @option params [required, String] :task_arn
     #   Specifies the Amazon Resource Name (ARN) of the task that you want to
@@ -2676,6 +3333,39 @@ module Aws::DataSync
       req.send_request(options)
     end
 
+    # Stops a running DataSync discovery job.
+    #
+    # You can stop a discovery job anytime. A job that's stopped before
+    # it's scheduled to end likely will provide you some information about
+    # your on-premises storage system resources. To get recommendations for
+    # a stopped job, you must use the [GenerateRecommendations][1]
+    # operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_GenerateRecommendations.html
+    #
+    # @option params [required, String] :discovery_job_arn
+    #   Specifies the Amazon Resource Name (ARN) of the discovery job that you
+    #   want to stop.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_discovery_job({
+    #     discovery_job_arn: "DiscoveryJobArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/StopDiscoveryJob AWS API Documentation
+    #
+    # @overload stop_discovery_job(params = {})
+    # @param [Hash] params ({})
+    def stop_discovery_job(params = {}, options = {})
+      req = build_request(:stop_discovery_job, params)
+      req.send_request(options)
+    end
+
     # Applies a *tag* to an Amazon Web Services resource. Tags are key-value
     # pairs that can help you manage, filter, and search for your resources.
     #
@@ -2762,6 +3452,35 @@ module Aws::DataSync
     # @param [Hash] params ({})
     def update_agent(params = {}, options = {})
       req = build_request(:update_agent, params)
+      req.send_request(options)
+    end
+
+    # Edits a DataSync discovery job configuration.
+    #
+    # @option params [required, String] :discovery_job_arn
+    #   Specifies the Amazon Resource Name (ARN) of the discovery job that you
+    #   want to update.
+    #
+    # @option params [required, Integer] :collection_duration_minutes
+    #   Specifies in minutes how long that you want the discovery job to run.
+    #   (You can't set this parameter to less than the number of minutes that
+    #   the job has already run for.)
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_discovery_job({
+    #     discovery_job_arn: "DiscoveryJobArn", # required
+    #     collection_duration_minutes: 1, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateDiscoveryJob AWS API Documentation
+    #
+    # @overload update_discovery_job(params = {})
+    # @param [Hash] params ({})
+    def update_discovery_job(params = {}, options = {})
+      req = build_request(:update_discovery_job, params)
       req.send_request(options)
     end
 
@@ -3091,6 +3810,60 @@ module Aws::DataSync
       req.send_request(options)
     end
 
+    # Modifies some configurations of an on-premises storage system resource
+    # that you're using with DataSync Discovery.
+    #
+    # @option params [required, String] :storage_system_arn
+    #   Specifies the ARN of the on-premises storage system that you want
+    #   reconfigure.
+    #
+    # @option params [Types::DiscoveryServerConfiguration] :server_configuration
+    #   Specifies the server name and network port required to connect with
+    #   your on-premises storage system's management interface.
+    #
+    # @option params [Array<String>] :agent_arns
+    #   Specifies the Amazon Resource Name (ARN) of the DataSync agent that
+    #   connects to and reads your on-premises storage system.
+    #
+    # @option params [String] :name
+    #   Specifies a familiar name for your on-premises storage system.
+    #
+    # @option params [String] :cloud_watch_log_group_arn
+    #   Specifies the ARN of the Amazon CloudWatch log group for monitoring
+    #   and logging discovery job events.
+    #
+    # @option params [Types::Credentials] :credentials
+    #   Specifies the user name and password for accessing your on-premises
+    #   storage system's management interface.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_storage_system({
+    #     storage_system_arn: "StorageSystemArn", # required
+    #     server_configuration: {
+    #       server_hostname: "DiscoveryServerHostname", # required
+    #       server_port: 1,
+    #     },
+    #     agent_arns: ["AgentArn"],
+    #     name: "Name",
+    #     cloud_watch_log_group_arn: "LogGroupArn",
+    #     credentials: {
+    #       username: "PtolemyUsername", # required
+    #       password: "PtolemyPassword", # required
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateStorageSystem AWS API Documentation
+    #
+    # @overload update_storage_system(params = {})
+    # @param [Hash] params ({})
+    def update_storage_system(params = {}, options = {})
+      req = build_request(:update_storage_system, params)
+      req.send_request(options)
+    end
+
     # Updates the metadata associated with a task.
     #
     # @option params [required, String] :task_arn
@@ -3194,24 +3967,17 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Updates execution of a task.
+    # Modifies a running DataSync task.
     #
-    # You can modify bandwidth throttling for a task execution that is
-    # running or queued. For more information, see [Adjusting Bandwidth
-    # Throttling for a Task Execution][1].
-    #
-    # <note markdown="1"> The only `Option` that can be modified by `UpdateTaskExecution` is `
-    # BytesPerSecond `.
+    # <note markdown="1"> Currently, the only `Option` that you can modify with
+    # `UpdateTaskExecution` is ` BytesPerSecond `, which throttles bandwidth
+    # for a running or queued task.
     #
     #  </note>
     #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/working-with-task-executions.html#adjust-bandwidth-throttling
-    #
     # @option params [required, String] :task_execution_arn
-    #   The Amazon Resource Name (ARN) of the specific task execution that is
-    #   being updated.
+    #   Specifies the Amazon Resource Name (ARN) of the task execution that
+    #   you're updating.
     #
     # @option params [required, Types::Options] :options
     #   Configures your DataSync task settings. These options include how
@@ -3269,7 +4035,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

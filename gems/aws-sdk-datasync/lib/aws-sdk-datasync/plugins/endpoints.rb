@@ -56,6 +56,8 @@ module Aws::DataSync
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :add_storage_system
+            Aws::DataSync::Endpoints::AddStorageSystem.build(context)
           when :cancel_task_execution
             Aws::DataSync::Endpoints::CancelTaskExecution.build(context)
           when :create_agent
@@ -90,6 +92,8 @@ module Aws::DataSync
             Aws::DataSync::Endpoints::DeleteTask.build(context)
           when :describe_agent
             Aws::DataSync::Endpoints::DescribeAgent.build(context)
+          when :describe_discovery_job
+            Aws::DataSync::Endpoints::DescribeDiscoveryJob.build(context)
           when :describe_location_efs
             Aws::DataSync::Endpoints::DescribeLocationEfs.build(context)
           when :describe_location_fsx_lustre
@@ -110,28 +114,48 @@ module Aws::DataSync
             Aws::DataSync::Endpoints::DescribeLocationS3.build(context)
           when :describe_location_smb
             Aws::DataSync::Endpoints::DescribeLocationSmb.build(context)
+          when :describe_storage_system
+            Aws::DataSync::Endpoints::DescribeStorageSystem.build(context)
+          when :describe_storage_system_resource_metrics
+            Aws::DataSync::Endpoints::DescribeStorageSystemResourceMetrics.build(context)
+          when :describe_storage_system_resources
+            Aws::DataSync::Endpoints::DescribeStorageSystemResources.build(context)
           when :describe_task
             Aws::DataSync::Endpoints::DescribeTask.build(context)
           when :describe_task_execution
             Aws::DataSync::Endpoints::DescribeTaskExecution.build(context)
+          when :generate_recommendations
+            Aws::DataSync::Endpoints::GenerateRecommendations.build(context)
           when :list_agents
             Aws::DataSync::Endpoints::ListAgents.build(context)
+          when :list_discovery_jobs
+            Aws::DataSync::Endpoints::ListDiscoveryJobs.build(context)
           when :list_locations
             Aws::DataSync::Endpoints::ListLocations.build(context)
+          when :list_storage_systems
+            Aws::DataSync::Endpoints::ListStorageSystems.build(context)
           when :list_tags_for_resource
             Aws::DataSync::Endpoints::ListTagsForResource.build(context)
           when :list_task_executions
             Aws::DataSync::Endpoints::ListTaskExecutions.build(context)
           when :list_tasks
             Aws::DataSync::Endpoints::ListTasks.build(context)
+          when :remove_storage_system
+            Aws::DataSync::Endpoints::RemoveStorageSystem.build(context)
+          when :start_discovery_job
+            Aws::DataSync::Endpoints::StartDiscoveryJob.build(context)
           when :start_task_execution
             Aws::DataSync::Endpoints::StartTaskExecution.build(context)
+          when :stop_discovery_job
+            Aws::DataSync::Endpoints::StopDiscoveryJob.build(context)
           when :tag_resource
             Aws::DataSync::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::DataSync::Endpoints::UntagResource.build(context)
           when :update_agent
             Aws::DataSync::Endpoints::UpdateAgent.build(context)
+          when :update_discovery_job
+            Aws::DataSync::Endpoints::UpdateDiscoveryJob.build(context)
           when :update_location_hdfs
             Aws::DataSync::Endpoints::UpdateLocationHdfs.build(context)
           when :update_location_nfs
@@ -140,6 +164,8 @@ module Aws::DataSync
             Aws::DataSync::Endpoints::UpdateLocationObjectStorage.build(context)
           when :update_location_smb
             Aws::DataSync::Endpoints::UpdateLocationSmb.build(context)
+          when :update_storage_system
+            Aws::DataSync::Endpoints::UpdateStorageSystem.build(context)
           when :update_task
             Aws::DataSync::Endpoints::UpdateTask.build(context)
           when :update_task_execution

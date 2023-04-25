@@ -1257,6 +1257,17 @@ module Aws::Pinpoint
     #   for A/B testing of a campaign.
     #   @return [String]
     #
+    # @!attribute [rw] execution_metrics
+    #   A JSON object that contains metrics relating to the campaign
+    #   execution for this campaign activity. For information about the
+    #   structure and contents of the results, see [Standard Amazon Pinpoint
+    #   analytics metrics][1] in the *Amazon Pinpoint Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com//pinpoint/latest/developerguide/analytics-standard-metrics.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ActivityResponse AWS API Documentation
     #
     class ActivityResponse < Struct.new(
@@ -1272,7 +1283,8 @@ module Aws::Pinpoint
       :timezones_completed_count,
       :timezones_total_count,
       :total_endpoint_count,
-      :treatment_id)
+      :treatment_id,
+      :execution_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6863,6 +6875,127 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] journey_activity_id
+    #   @return [String]
+    #
+    # @!attribute [rw] journey_id
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   @return [String]
+    #
+    # @!attribute [rw] run_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourneyRunExecutionActivityMetricsRequest AWS API Documentation
+    #
+    class GetJourneyRunExecutionActivityMetricsRequest < Struct.new(
+      :application_id,
+      :journey_activity_id,
+      :journey_id,
+      :next_token,
+      :page_size,
+      :run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] journey_run_execution_activity_metrics_response
+    #   Provides the results of a query that retrieved the data for a
+    #   standard execution metric that applies to a journey activity for a
+    #   particular journey run, and provides information about that query.
+    #   @return [Types::JourneyRunExecutionActivityMetricsResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourneyRunExecutionActivityMetricsResponse AWS API Documentation
+    #
+    class GetJourneyRunExecutionActivityMetricsResponse < Struct.new(
+      :journey_run_execution_activity_metrics_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] journey_id
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   @return [String]
+    #
+    # @!attribute [rw] run_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourneyRunExecutionMetricsRequest AWS API Documentation
+    #
+    class GetJourneyRunExecutionMetricsRequest < Struct.new(
+      :application_id,
+      :journey_id,
+      :next_token,
+      :page_size,
+      :run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] journey_run_execution_metrics_response
+    #   Provides the results of a query that retrieved the data for a
+    #   standard execution metric that applies to a journey run, and
+    #   provides information about that query.
+    #   @return [Types::JourneyRunExecutionMetricsResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourneyRunExecutionMetricsResponse AWS API Documentation
+    #
+    class GetJourneyRunExecutionMetricsResponse < Struct.new(
+      :journey_run_execution_metrics_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] journey_id
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   @return [String]
+    #
+    # @!attribute [rw] token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourneyRunsRequest AWS API Documentation
+    #
+    class GetJourneyRunsRequest < Struct.new(
+      :application_id,
+      :journey_id,
+      :page_size,
+      :token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] journey_runs_response
+    #   Provides information from all runs of a journey.
+    #   @return [Types::JourneyRunsResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourneyRunsResponse AWS API Documentation
+    #
+    class GetJourneyRunsResponse < Struct.new(
+      :journey_runs_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] template_name
     #   @return [String]
     #
@@ -8054,25 +8187,25 @@ module Aws::Pinpoint
     #   The type of activity that the metric applies to. Possible values
     #   are:
     #
-    #   * CONDITIONAL\_SPLIT - For a yes/no split activity, which is an
+    #   * CONDITIONAL\_SPLIT – For a yes/no split activity, which is an
     #     activity that sends participants down one of two paths in a
     #     journey.
     #
-    #   * HOLDOUT - For a holdout activity, which is an activity that stops
+    #   * HOLDOUT – For a holdout activity, which is an activity that stops
     #     a journey for a specified percentage of participants.
     #
-    #   * MESSAGE - For an email activity, which is an activity that sends
+    #   * MESSAGE – For an email activity, which is an activity that sends
     #     an email message to participants.
     #
-    #   * MULTI\_CONDITIONAL\_SPLIT - For a multivariate split activity,
+    #   * MULTI\_CONDITIONAL\_SPLIT – For a multivariate split activity,
     #     which is an activity that sends participants down one of as many
     #     as five paths in a journey.
     #
-    #   * RANDOM\_SPLIT - For a random split activity, which is an activity
+    #   * RANDOM\_SPLIT – For a random split activity, which is an activity
     #     that sends specified percentages of participants down one of as
     #     many as five paths in a journey.
     #
-    #   * WAIT - For a wait activity, which is an activity that waits for a
+    #   * WAIT – For a wait activity, which is an activity that waits for a
     #     certain amount of time or until a specific date and time before
     #     moving participants to the next activity in a journey.
     #   @return [String]
@@ -8179,6 +8312,8 @@ module Aws::Pinpoint
     #   @return [Integer]
     #
     # @!attribute [rw] endpoint_reentry_interval
+    #   Minimum time that must pass before an endpoint can re-enter a given
+    #   journey.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyLimits AWS API Documentation
@@ -8199,7 +8334,7 @@ module Aws::Pinpoint
     #   The number of seconds that the push notification service should keep
     #   the message, if the service is unable to deliver the notification
     #   the first time. This value is converted to an expiration value when
-    #   it's sent to a push-notification service. If this value is 0, the
+    #   it's sent to a push notification service. If this value is 0, the
     #   service treats the notification as if it expires immediately and the
     #   service doesn't store or try to deliver the notification again.
     #
@@ -8354,9 +8489,13 @@ module Aws::Pinpoint
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] wait_for_quiet_time
+    #   Indicates whether endpoints in quiet hours should enter a wait
+    #   activity until quiet hours have elapsed.
     #   @return [Boolean]
     #
     # @!attribute [rw] refresh_on_segment_update
+    #   Indicates whether the journey participants should be refreshed when
+    #   a segment is updated.
     #   @return [Boolean]
     #
     # @!attribute [rw] journey_channel_settings
@@ -8364,19 +8503,19 @@ module Aws::Pinpoint
     #   @return [Types::JourneyChannelSettings]
     #
     # @!attribute [rw] sending_schedule
-    #   Indicates if journey have Advance Quiet Time (OpenHours and
-    #   ClosedDays). This flag should be set to true in order to allow
-    #   (OpenHours and ClosedDays)
+    #   Indicates if journey has Advance Quiet Time enabled. This flag
+    #   should be set to true in order to allow using OpenHours and
+    #   ClosedDays.
     #   @return [Boolean]
     #
     # @!attribute [rw] open_hours
-    #   The time when journey allow to send messages. QuietTime should be
+    #   The time when a journey can send messages. QuietTime should be
     #   configured first and SendingSchedule should be set to true.
     #   @return [Types::OpenHours]
     #
     # @!attribute [rw] closed_days
-    #   The time when journey will stop sending messages. QuietTime should
-    #   be configured first and SendingSchedule should be set to true.
+    #   The time when a journey will not send messages. QuietTime should be
+    #   configured first and SendingSchedule should be set to true.
     #   @return [Types::ClosedDays]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyResponse AWS API Documentation
@@ -8403,6 +8542,183 @@ module Aws::Pinpoint
       :sending_schedule,
       :open_hours,
       :closed_days)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the results of a query that retrieved the data for a standard
+    # execution metric that applies to a journey activity for a particular
+    # journey run, and provides information about that query.
+    #
+    # @!attribute [rw] activity_type
+    #   The type of activity that the metric applies to. Possible values
+    #   are:
+    #
+    #   * CONDITIONAL\_SPLIT – For a yes/no split activity, which is an
+    #     activity that sends participants down one of two paths in a
+    #     journey.
+    #
+    #   * HOLDOUT – For a holdout activity, which is an activity that stops
+    #     a journey for a specified percentage of participants.
+    #
+    #   * MESSAGE – For an email activity, which is an activity that sends
+    #     an email message to participants.
+    #
+    #   * MULTI\_CONDITIONAL\_SPLIT – For a multivariate split activity,
+    #     which is an activity that sends participants down one of as many
+    #     as five paths in a journey.
+    #
+    #   * RANDOM\_SPLIT – For a random split activity, which is an activity
+    #     that sends specified percentages of participants down one of as
+    #     many as five paths in a journey.
+    #
+    #   * WAIT – For a wait activity, which is an activity that waits for a
+    #     certain amount of time or until a specific date and time before
+    #     moving participants to the next activity in a journey.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_id
+    #   The unique identifier for the application that the metric applies
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] journey_activity_id
+    #   The unique identifier for the activity that the metric applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] journey_id
+    #   The unique identifier for the journey that the metric applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_evaluated_time
+    #   The date and time, in ISO 8601 format, when Amazon Pinpoint last
+    #   evaluated the execution status of the activity for this journey run
+    #   and updated the data for the metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics
+    #   A JSON object that contains the results of the query. For
+    #   information about the structure and contents of the results, see see
+    #   [Standard Amazon Pinpoint analytics metrics][1] in the *Amazon
+    #   Pinpoint Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com//pinpoint/latest/developerguide/analytics-standard-metrics.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] run_id
+    #   The unique identifier for the journey run that the metric applies
+    #   to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyRunExecutionActivityMetricsResponse AWS API Documentation
+    #
+    class JourneyRunExecutionActivityMetricsResponse < Struct.new(
+      :activity_type,
+      :application_id,
+      :journey_activity_id,
+      :journey_id,
+      :last_evaluated_time,
+      :metrics,
+      :run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the results of a query that retrieved the data for a standard
+    # execution metric that applies to a journey run, and provides
+    # information about that query.
+    #
+    # @!attribute [rw] application_id
+    #   The unique identifier for the application that the metric applies
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] journey_id
+    #   The unique identifier for the journey that the metric applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_evaluated_time
+    #   The date and time, in ISO 8601 format, when Amazon Pinpoint last
+    #   evaluated the journey run and updated the data for the metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics
+    #   A JSON object that contains the results of the query. For
+    #   information about the structure and contents of the results, see the
+    #   [Standard Amazon Pinpoint analytics metrics][1] in the *Amazon
+    #   Pinpoint Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com//pinpoint/latest/developerguide/analytics-standard-metrics.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] run_id
+    #   The unique identifier for the journey run that the metric applies
+    #   to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyRunExecutionMetricsResponse AWS API Documentation
+    #
+    class JourneyRunExecutionMetricsResponse < Struct.new(
+      :application_id,
+      :journey_id,
+      :last_evaluated_time,
+      :metrics,
+      :run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information from a specified run of a journey.
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the journey run was created or scheduled, in ISO 8601
+    #   format.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_time
+    #   The last time the journey run was updated, in ISO 8601 format..
+    #   @return [String]
+    #
+    # @!attribute [rw] run_id
+    #   The unique identifier for the run.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the journey run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyRunResponse AWS API Documentation
+    #
+    class JourneyRunResponse < Struct.new(
+      :creation_time,
+      :last_update_time,
+      :run_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information from all runs of a journey.
+    #
+    # @!attribute [rw] item
+    #   An array of responses, one for each run of the journey
+    #   @return [Array<Types::JourneyRunResponse>]
+    #
+    # @!attribute [rw] next_token
+    #   The string to use in a subsequent request to get the next page of
+    #   results in a paginated response. This value is null if there are no
+    #   additional pages.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyRunsResponse AWS API Documentation
+    #
+    class JourneyRunsResponse < Struct.new(
+      :item,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13322,9 +13638,13 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] wait_for_quiet_time
+    #   Indicates whether endpoints in quiet hours should enter a wait
+    #   activity until quiet hours have elapsed.
     #   @return [Boolean]
     #
     # @!attribute [rw] refresh_on_segment_update
+    #   Indicates whether the journey participants should be refreshed when
+    #   a segment is updated.
     #   @return [Boolean]
     #
     # @!attribute [rw] journey_channel_settings
@@ -13333,9 +13653,9 @@ module Aws::Pinpoint
     #   @return [Types::JourneyChannelSettings]
     #
     # @!attribute [rw] sending_schedule
-    #   Indicates if journey have Advance Quiet Time (OpenHours and
-    #   ClosedDays). This flag should be set to true in order to allow
-    #   (OpenHours and ClosedDays)
+    #   Indicates if journey has Advance Quiet Time enabled. This flag
+    #   should be set to true in order to allow using OpenHours and
+    #   ClosedDays.
     #   @return [Boolean]
     #
     # @!attribute [rw] open_hours
@@ -13458,14 +13778,16 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
-    # Open Hour Rules.
+    # Specifies the start and end time for OpenHours.
     #
     # @!attribute [rw] start_time
-    #   Local start time in ISO 8601 format.
+    #   The start of the scheduled time, in ISO 8601 format, when the
+    #   channel can send messages.
     #   @return [String]
     #
     # @!attribute [rw] end_time
-    #   Local start time in ISO 8601 format.
+    #   The end of the scheduled time, in ISO 8601 format, when the channel
+    #   can't send messages.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/OpenHoursRule AWS API Documentation
@@ -13477,8 +13799,7 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
-    # The time when journey allow to send messages. QuietTime should be
-    # configured first and SendingSchedule should be set to true.
+    # Specifies the times when message are allowed to be sent to endpoints.
     #
     # @!attribute [rw] email
     #   Rules for Email Channel.
@@ -13512,18 +13833,18 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
-    # Closed Days Rule. Part of Journey sending schedule.
+    # Specifies the rule settings for when messages can't be sent.
     #
     # @!attribute [rw] name
-    #   Name of the rule.
+    #   The name of the closed day rule.
     #   @return [String]
     #
     # @!attribute [rw] start_date_time
-    #   Start Datetime in ISO 8601 format.
+    #   Start DateTime ISO 8601 format
     #   @return [String]
     #
     # @!attribute [rw] end_date_time
-    #   End Datetime in ISO 8601 format.
+    #   End DateTime ISO 8601 format
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ClosedDaysRule AWS API Documentation
@@ -13536,7 +13857,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
-    # The time when journey will stop sending messages.
+    # The time when a journey will not send messages. QuietTime should be
+    # configured first and SendingSchedule should be set to true.
     #
     # @!attribute [rw] email
     #   Rules for a Channel.

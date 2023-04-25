@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2023-04-25)
+------------------
+
+* Feature - Adds support for journey runs and querying journey execution metrics based on journey runs. Adds execution metrics to campaign activities. Updates docs for Advanced Quiet Time.
+
 1.70.0 (2023-01-18)
 ------------------
 

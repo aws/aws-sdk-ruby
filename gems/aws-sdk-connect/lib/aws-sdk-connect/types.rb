@@ -37,6 +37,57 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_id
+    #   The unique identifier for the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_version
+    #   The version of the evaluation form to activate. If the version
+    #   property is not provided, the latest version of the evaluation form
+    #   is activated.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ActivateEvaluationFormRequest AWS API Documentation
+    #
+    class ActivateEvaluationFormRequest < Struct.new(
+      :instance_id,
+      :evaluation_form_id,
+      :evaluation_form_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] evaluation_form_id
+    #   The unique identifier for the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_arn
+    #   The Amazon Resource Name (ARN) for the evaluation form resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_version
+    #   A version of the evaluation form.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ActivateEvaluationFormResponse AWS API Documentation
+    #
+    class ActivateEvaluationFormResponse < Struct.new(
+      :evaluation_form_id,
+      :evaluation_form_arn,
+      :evaluation_form_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the [contact][1] associated to the user.
     #
     #
@@ -1389,6 +1440,77 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
+    # @!attribute [rw] title
+    #   A unique title of the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   Items that are part of the evaluation form. The total number of
+    #   sections and questions must not exceed 100 each. Questions must be
+    #   contained in a section.
+    #   @return [Array<Types::EvaluationFormItem>]
+    #
+    # @!attribute [rw] scoring_strategy
+    #   A scoring strategy of the evaluation form.
+    #   @return [Types::EvaluationFormScoringStrategy]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateEvaluationFormRequest AWS API Documentation
+    #
+    class CreateEvaluationFormRequest < Struct.new(
+      :instance_id,
+      :title,
+      :description,
+      :items,
+      :scoring_strategy,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] evaluation_form_id
+    #   The unique identifier for the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_arn
+    #   The Amazon Resource Name (ARN) for the evaluation form resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateEvaluationFormResponse AWS API Documentation
+    #
+    class CreateEvaluationFormResponse < Struct.new(
+      :evaluation_form_id,
+      :evaluation_form_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the hours of operation.
     #   @return [String]
@@ -2599,6 +2721,56 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_id
+    #   The unique identifier for the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_version
+    #   A version of the evaluation form. If the version property is not
+    #   provided, the latest version of the evaluation form is deactivated.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeactivateEvaluationFormRequest AWS API Documentation
+    #
+    class DeactivateEvaluationFormRequest < Struct.new(
+      :instance_id,
+      :evaluation_form_id,
+      :evaluation_form_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] evaluation_form_id
+    #   The unique identifier for the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_arn
+    #   The Amazon Resource Name (ARN) for the evaluation form resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_version
+    #   The version of the deactivated evaluation form resource.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeactivateEvaluationFormResponse AWS API Documentation
+    #
+    class DeactivateEvaluationFormResponse < Struct.new(
+      :evaluation_form_id,
+      :evaluation_form_arn,
+      :evaluation_form_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a default vocabulary.
     #
     # @!attribute [rw] instance_id
@@ -2635,6 +2807,28 @@ module Aws::Connect
       :language_code,
       :vocabulary_id,
       :vocabulary_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_id
+    #   A unique identifier for the contact evaluation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteContactEvaluationRequest AWS API Documentation
+    #
+    class DeleteContactEvaluationRequest < Struct.new(
+      :instance_id,
+      :evaluation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2690,6 +2884,33 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteContactFlowResponse AWS API Documentation
     #
     class DeleteContactFlowResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_id
+    #   The unique identifier for the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_version
+    #   The unique identifier for the evaluation form.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteEvaluationFormRequest AWS API Documentation
+    #
+    class DeleteEvaluationFormRequest < Struct.new(
+      :instance_id,
+      :evaluation_form_id,
+      :evaluation_form_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -3021,6 +3242,46 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
+    # @!attribute [rw] evaluation_id
+    #   A unique identifier for the contact evaluation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactEvaluationRequest AWS API Documentation
+    #
+    class DescribeContactEvaluationRequest < Struct.new(
+      :instance_id,
+      :evaluation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] evaluation
+    #   Information about the evaluation form completed for a specific
+    #   contact.
+    #   @return [Types::Evaluation]
+    #
+    # @!attribute [rw] evaluation_form
+    #   Information about the evaluation form.
+    #   @return [Types::EvaluationFormContent]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactEvaluationResponse AWS API Documentation
+    #
+    class DescribeContactEvaluationResponse < Struct.new(
+      :evaluation,
+      :evaluation_form)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
     # @!attribute [rw] contact_flow_module_id
     #   The identifier of the flow module.
     #   @return [String]
@@ -3105,6 +3366,45 @@ module Aws::Connect
     #
     class DescribeContactResponse < Struct.new(
       :contact)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_id
+    #   A unique identifier for the contact evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_version
+    #   A version of the evaluation form.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeEvaluationFormRequest AWS API Documentation
+    #
+    class DescribeEvaluationFormRequest < Struct.new(
+      :instance_id,
+      :evaluation_form_id,
+      :evaluation_form_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] evaluation_form
+    #   Information about the evaluation form.
+    #   @return [Types::EvaluationForm]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeEvaluationFormResponse AWS API Documentation
+    #
+    class DescribeEvaluationFormResponse < Struct.new(
+      :evaluation_form)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3974,6 +4274,867 @@ module Aws::Connect
     class EncryptionConfig < Struct.new(
       :encryption_type,
       :key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a contact evaluation.
+    #
+    # @!attribute [rw] evaluation_id
+    #   A unique identifier for the contact evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_arn
+    #   The Amazon Resource Name (ARN) for the contact evaluation resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   Metadata about the contact evaluation.
+    #   @return [Types::EvaluationMetadata]
+    #
+    # @!attribute [rw] answers
+    #   A map of question identifiers to answer value.
+    #   @return [Hash<String,Types::EvaluationAnswerOutput>]
+    #
+    # @!attribute [rw] notes
+    #   A map of question identifiers to note value.
+    #   @return [Hash<String,Types::EvaluationNote>]
+    #
+    # @!attribute [rw] status
+    #   The status of the contact evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] scores
+    #   A map of item (section or question) identifiers to score value.
+    #   @return [Hash<String,Types::EvaluationScore>]
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp for when the evaluation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp for when the evaluation was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Evaluation AWS API Documentation
+    #
+    class Evaluation < Struct.new(
+      :evaluation_id,
+      :evaluation_arn,
+      :metadata,
+      :answers,
+      :notes,
+      :status,
+      :scores,
+      :created_time,
+      :last_modified_time,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about answer data for a contact evaluation. Answer data
+    # must be either string, numeric, or not applicable.
+    #
+    # @note EvaluationAnswerData is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note EvaluationAnswerData is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of EvaluationAnswerData corresponding to the set member.
+    #
+    # @!attribute [rw] string_value
+    #   The string value for an answer in a contact evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] numeric_value
+    #   The numeric value for an answer in a contact evaluation.
+    #   @return [Float]
+    #
+    # @!attribute [rw] not_applicable
+    #   The flag to mark the question as not applicable.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationAnswerData AWS API Documentation
+    #
+    class EvaluationAnswerData < Struct.new(
+      :string_value,
+      :numeric_value,
+      :not_applicable,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class StringValue < EvaluationAnswerData; end
+      class NumericValue < EvaluationAnswerData; end
+      class NotApplicable < EvaluationAnswerData; end
+      class Unknown < EvaluationAnswerData; end
+    end
+
+    # Information about input answers for a contact evaluation.
+    #
+    # @!attribute [rw] value
+    #   The value for an answer in a contact evaluation.
+    #   @return [Types::EvaluationAnswerData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationAnswerInput AWS API Documentation
+    #
+    class EvaluationAnswerInput < Struct.new(
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about output answers for a contact evaluation.
+    #
+    # @!attribute [rw] value
+    #   The value for an answer in a contact evaluation.
+    #   @return [Types::EvaluationAnswerData]
+    #
+    # @!attribute [rw] system_suggested_value
+    #   The system suggested value for an answer in a contact evaluation.
+    #   @return [Types::EvaluationAnswerData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationAnswerOutput AWS API Documentation
+    #
+    class EvaluationAnswerOutput < Struct.new(
+      :value,
+      :system_suggested_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the evaluation form.
+    #
+    # @!attribute [rw] evaluation_form_id
+    #   The unique identifier for the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_version
+    #   A version of the evaluation form.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] locked
+    #   The flag indicating whether the evaluation form is locked for
+    #   changes.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] evaluation_form_arn
+    #   The Amazon Resource Name (ARN) for the evaluation form resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   A unique title of the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   Items that are part of the evaluation form. The total number of
+    #   sections and questions must not exceed 100 each. Questions must be
+    #   contained in a section.
+    #   @return [Array<Types::EvaluationFormItem>]
+    #
+    # @!attribute [rw] scoring_strategy
+    #   A scoring strategy of the evaluation form.
+    #   @return [Types::EvaluationFormScoringStrategy]
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp for when the evaluation form was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The Amazon Resource Name (ARN) of the user who created the
+    #   evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp for when the evaluation form was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The Amazon Resource Name (ARN) of the user who last updated the
+    #   evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationForm AWS API Documentation
+    #
+    class EvaluationForm < Struct.new(
+      :evaluation_form_id,
+      :evaluation_form_version,
+      :locked,
+      :evaluation_form_arn,
+      :title,
+      :description,
+      :status,
+      :items,
+      :scoring_strategy,
+      :created_time,
+      :created_by,
+      :last_modified_time,
+      :last_modified_by,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an evaluation form used in a contact evaluation.
+    #
+    # @!attribute [rw] evaluation_form_version
+    #   A version of the evaluation form.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] evaluation_form_id
+    #   The unique identifier for the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_arn
+    #   The Amazon Resource Name (ARN) for the evaluation form resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   A unique title of the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   Items that are part of the evaluation form. The total number of
+    #   sections and questions must not exceed 100 each. Questions must be
+    #   contained in a section.
+    #   @return [Array<Types::EvaluationFormItem>]
+    #
+    # @!attribute [rw] scoring_strategy
+    #   A scoring strategy of the evaluation form.
+    #   @return [Types::EvaluationFormScoringStrategy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormContent AWS API Documentation
+    #
+    class EvaluationFormContent < Struct.new(
+      :evaluation_form_version,
+      :evaluation_form_id,
+      :evaluation_form_arn,
+      :title,
+      :description,
+      :items,
+      :scoring_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an item from an evaluation form. The item must be
+    # either a section or a question.
+    #
+    # @note EvaluationFormItem is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note EvaluationFormItem is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of EvaluationFormItem corresponding to the set member.
+    #
+    # @!attribute [rw] section
+    #   The information of the section.
+    #   @return [Types::EvaluationFormSection]
+    #
+    # @!attribute [rw] question
+    #   The information of the question.
+    #   @return [Types::EvaluationFormQuestion]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormItem AWS API Documentation
+    #
+    class EvaluationFormItem < Struct.new(
+      :section,
+      :question,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Section < EvaluationFormItem; end
+      class Question < EvaluationFormItem; end
+      class Unknown < EvaluationFormItem; end
+    end
+
+    # Information about the automation configuration in numeric questions.
+    #
+    # @note EvaluationFormNumericQuestionAutomation is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note EvaluationFormNumericQuestionAutomation is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of EvaluationFormNumericQuestionAutomation corresponding to the set member.
+    #
+    # @!attribute [rw] property_value
+    #   The property value of the automation.
+    #   @return [Types::NumericQuestionPropertyValueAutomation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormNumericQuestionAutomation AWS API Documentation
+    #
+    class EvaluationFormNumericQuestionAutomation < Struct.new(
+      :property_value,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class PropertyValue < EvaluationFormNumericQuestionAutomation; end
+      class Unknown < EvaluationFormNumericQuestionAutomation; end
+    end
+
+    # Information about the option range used for scoring in numeric
+    # questions.
+    #
+    # @!attribute [rw] min_value
+    #   The minimum answer value of the range option.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_value
+    #   The maximum answer value of the range option.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] score
+    #   The score assigned to answer values within the range option.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] automatic_fail
+    #   The flag to mark the option as automatic fail. If an automatic fail
+    #   answer is provided, the overall evaluation gets a score of 0.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormNumericQuestionOption AWS API Documentation
+    #
+    class EvaluationFormNumericQuestionOption < Struct.new(
+      :min_value,
+      :max_value,
+      :score,
+      :automatic_fail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about properties for a numeric question in an evaluation
+    # form.
+    #
+    # @!attribute [rw] min_value
+    #   The minimum answer value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_value
+    #   The maximum answer value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] options
+    #   The scoring options of the numeric question.
+    #   @return [Array<Types::EvaluationFormNumericQuestionOption>]
+    #
+    # @!attribute [rw] automation
+    #   The automation properties of the numeric question.
+    #   @return [Types::EvaluationFormNumericQuestionAutomation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormNumericQuestionProperties AWS API Documentation
+    #
+    class EvaluationFormNumericQuestionProperties < Struct.new(
+      :min_value,
+      :max_value,
+      :options,
+      :automation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a question from an evaluation form.
+    #
+    # @!attribute [rw] title
+    #   The title of the question.
+    #   @return [String]
+    #
+    # @!attribute [rw] instructions
+    #   The instructions of the section.
+    #   @return [String]
+    #
+    # @!attribute [rw] ref_id
+    #   The identifier of the question. An identifier must be unique within
+    #   the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] not_applicable_enabled
+    #   The flag to enable not applicable answers to the question.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] question_type
+    #   The type of the question.
+    #   @return [String]
+    #
+    # @!attribute [rw] question_type_properties
+    #   The properties of the type of question. Text questions do not have
+    #   to define question type properties.
+    #   @return [Types::EvaluationFormQuestionTypeProperties]
+    #
+    # @!attribute [rw] weight
+    #   The scoring weight of the section.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormQuestion AWS API Documentation
+    #
+    class EvaluationFormQuestion < Struct.new(
+      :title,
+      :instructions,
+      :ref_id,
+      :not_applicable_enabled,
+      :question_type,
+      :question_type_properties,
+      :weight)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about properties for a question in an evaluation form. The
+    # question type properties must be either for a numeric question or a
+    # single select question.
+    #
+    # @note EvaluationFormQuestionTypeProperties is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note EvaluationFormQuestionTypeProperties is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of EvaluationFormQuestionTypeProperties corresponding to the set member.
+    #
+    # @!attribute [rw] numeric
+    #   The properties of the numeric question.
+    #   @return [Types::EvaluationFormNumericQuestionProperties]
+    #
+    # @!attribute [rw] single_select
+    #   The properties of the numeric question.
+    #   @return [Types::EvaluationFormSingleSelectQuestionProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormQuestionTypeProperties AWS API Documentation
+    #
+    class EvaluationFormQuestionTypeProperties < Struct.new(
+      :numeric,
+      :single_select,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Numeric < EvaluationFormQuestionTypeProperties; end
+      class SingleSelect < EvaluationFormQuestionTypeProperties; end
+      class Unknown < EvaluationFormQuestionTypeProperties; end
+    end
+
+    # Information about scoring strategy for an evaluation form.
+    #
+    # @!attribute [rw] mode
+    #   The scoring mode of the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The scoring status of the evaluation form.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormScoringStrategy AWS API Documentation
+    #
+    class EvaluationFormScoringStrategy < Struct.new(
+      :mode,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a section from an evaluation form. A section can
+    # contain sections and/or questions. Evaluation forms can only contain
+    # sections and subsections (two level nesting).
+    #
+    # @!attribute [rw] title
+    #   The title of the section.
+    #   @return [String]
+    #
+    # @!attribute [rw] ref_id
+    #   The identifier of the section. An identifier must be unique within
+    #   the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] instructions
+    #   The instructions of the section.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   The items of the section.
+    #   @return [Array<Types::EvaluationFormItem>]
+    #
+    # @!attribute [rw] weight
+    #   The scoring weight of the section.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormSection AWS API Documentation
+    #
+    class EvaluationFormSection < Struct.new(
+      :title,
+      :ref_id,
+      :instructions,
+      :items,
+      :weight)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the automation configuration in single select
+    # questions. Automation options are evaluated in order, and the first
+    # matched option is applied. If no automation option matches, and there
+    # is a default option, then the default option is applied.
+    #
+    # @!attribute [rw] options
+    #   The automation options of the single select question.
+    #   @return [Array<Types::EvaluationFormSingleSelectQuestionAutomationOption>]
+    #
+    # @!attribute [rw] default_option_ref_id
+    #   The identifier of the default answer option, when none of the
+    #   automation options match the criteria.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormSingleSelectQuestionAutomation AWS API Documentation
+    #
+    class EvaluationFormSingleSelectQuestionAutomation < Struct.new(
+      :options,
+      :default_option_ref_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the automation option of a single select question.
+    #
+    # @note EvaluationFormSingleSelectQuestionAutomationOption is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note EvaluationFormSingleSelectQuestionAutomationOption is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of EvaluationFormSingleSelectQuestionAutomationOption corresponding to the set member.
+    #
+    # @!attribute [rw] rule_category
+    #   The automation option based on a rule category for the single select
+    #   question.
+    #   @return [Types::SingleSelectQuestionRuleCategoryAutomation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormSingleSelectQuestionAutomationOption AWS API Documentation
+    #
+    class EvaluationFormSingleSelectQuestionAutomationOption < Struct.new(
+      :rule_category,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class RuleCategory < EvaluationFormSingleSelectQuestionAutomationOption; end
+      class Unknown < EvaluationFormSingleSelectQuestionAutomationOption; end
+    end
+
+    # Information about the automation configuration in single select
+    # questions.
+    #
+    # @!attribute [rw] ref_id
+    #   The identifier of the answer option. An identifier must be unique
+    #   within the question.
+    #   @return [String]
+    #
+    # @!attribute [rw] text
+    #   The title of the answer option.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The score assigned to the answer option.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] automatic_fail
+    #   The flag to mark the option as automatic fail. If an automatic fail
+    #   answer is provided, the overall evaluation gets a score of 0.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormSingleSelectQuestionOption AWS API Documentation
+    #
+    class EvaluationFormSingleSelectQuestionOption < Struct.new(
+      :ref_id,
+      :text,
+      :score,
+      :automatic_fail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the options in single select questions.
+    #
+    # @!attribute [rw] options
+    #   The answer options of the single select question.
+    #   @return [Array<Types::EvaluationFormSingleSelectQuestionOption>]
+    #
+    # @!attribute [rw] display_as
+    #   The display mode of the single select question.
+    #   @return [String]
+    #
+    # @!attribute [rw] automation
+    #   The display mode of the single select question.
+    #   @return [Types::EvaluationFormSingleSelectQuestionAutomation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormSingleSelectQuestionProperties AWS API Documentation
+    #
+    class EvaluationFormSingleSelectQuestionProperties < Struct.new(
+      :options,
+      :display_as,
+      :automation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about an evaluation form.
+    #
+    # @!attribute [rw] evaluation_form_id
+    #   The unique identifier for the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_arn
+    #   The Amazon Resource Name (ARN) for the evaluation form resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   A unique title of the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp for when the evaluation form was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The Amazon Resource Name (ARN) of the user who created the
+    #   evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp for when the evaluation form was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The Amazon Resource Name (ARN) of the user who last updated the
+    #   evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_activated_time
+    #   The timestamp for when the evaluation form was last activated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_activated_by
+    #   The Amazon Resource Name (ARN) of the user who last activated the
+    #   evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_version
+    #   The version number of the latest evaluation form version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] active_version
+    #   The version of the active evaluation form version.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormSummary AWS API Documentation
+    #
+    class EvaluationFormSummary < Struct.new(
+      :evaluation_form_id,
+      :evaluation_form_arn,
+      :title,
+      :created_time,
+      :created_by,
+      :last_modified_time,
+      :last_modified_by,
+      :last_activated_time,
+      :last_activated_by,
+      :latest_version,
+      :active_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about an evaluation form.
+    #
+    # @!attribute [rw] evaluation_form_arn
+    #   The Amazon Resource Name (ARN) for the evaluation form resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_id
+    #   The unique identifier for the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_version
+    #   A version of the evaluation form.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] locked
+    #   The flag indicating whether the evaluation form is locked for
+    #   changes.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   The status of the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp for when the evaluation form was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The Amazon Resource Name (ARN) of the user who created the
+    #   evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp for when the evaluation form was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The Amazon Resource Name (ARN) of the user who last updated the
+    #   evaluation form.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormVersionSummary AWS API Documentation
+    #
+    class EvaluationFormVersionSummary < Struct.new(
+      :evaluation_form_arn,
+      :evaluation_form_id,
+      :evaluation_form_version,
+      :locked,
+      :status,
+      :created_time,
+      :created_by,
+      :last_modified_time,
+      :last_modified_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata information about a contact evaluation.
+    #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluator_arn
+    #   The Amazon Resource Name (ARN) of the user who last updated the
+    #   evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_agent_id
+    #   The identifier of the agent who performed the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The overall score of the contact evaluation.
+    #   @return [Types::EvaluationScore]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationMetadata AWS API Documentation
+    #
+    class EvaluationMetadata < Struct.new(
+      :contact_id,
+      :evaluator_arn,
+      :contact_agent_id,
+      :score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about notes for a contact evaluation.
+    #
+    # @!attribute [rw] value
+    #   The note for an item (section or question) in a contact evaluation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationNote AWS API Documentation
+    #
+    class EvaluationNote < Struct.new(
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about scores of a contact evaluation item (section or
+    # question).
+    #
+    # @!attribute [rw] percentage
+    #   The score percentage for an item in a contact evaluation.
+    #   @return [Float]
+    #
+    # @!attribute [rw] not_applicable
+    #   The flag to mark the item as not applicable for scoring.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] automatic_fail
+    #   The flag that marks the item as automatic fail. If the item or a
+    #   child item gets an automatic fail answer, this flag will be true.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationScore AWS API Documentation
+    #
+    class EvaluationScore < Struct.new(
+      :percentage,
+      :not_applicable,
+      :automatic_fail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a contact evaluation.
+    #
+    # @!attribute [rw] evaluation_id
+    #   A unique identifier for the contact evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_arn
+    #   The Amazon Resource Name (ARN) for the contact evaluation resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_title
+    #   A unique title of the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_id
+    #   The unique identifier for the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the contact evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluator_arn
+    #   The Amazon Resource Name (ARN) of the user who last updated the
+    #   evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The overall score of the contact evaluation.
+    #   @return [Types::EvaluationScore]
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp for when the evaluation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp for when the evaluation was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationSummary AWS API Documentation
+    #
+    class EvaluationSummary < Struct.new(
+      :evaluation_id,
+      :evaluation_arn,
+      :evaluation_form_title,
+      :evaluation_form_id,
+      :status,
+      :evaluator_arn,
+      :score,
+      :created_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6272,6 +7433,59 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    #   This is not expected to be set because the value returned in the
+    #   previous response is always null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactEvaluationsRequest AWS API Documentation
+    #
+    class ListContactEvaluationsRequest < Struct.new(
+      :instance_id,
+      :contact_id,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] evaluation_summary_list
+    #   Provides details about a list of contact evaluations belonging to an
+    #   instance.
+    #   @return [Array<Types::EvaluationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #
+    #   This is always returned as null in the response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactEvaluationsResponse AWS API Documentation
+    #
+    class ListContactEvaluationsResponse < Struct.new(
+      :evaluation_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
@@ -6478,6 +7692,107 @@ module Aws::Connect
     #
     class ListDefaultVocabulariesResponse < Struct.new(
       :default_vocabulary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_id
+    #   The unique identifier for the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListEvaluationFormVersionsRequest AWS API Documentation
+    #
+    class ListEvaluationFormVersionsRequest < Struct.new(
+      :instance_id,
+      :evaluation_form_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] evaluation_form_version_summary_list
+    #   Provides details about a list of evaluation forms belonging to an
+    #   instance.
+    #   @return [Array<Types::EvaluationFormVersionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListEvaluationFormVersionsResponse AWS API Documentation
+    #
+    class ListEvaluationFormVersionsResponse < Struct.new(
+      :evaluation_form_version_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListEvaluationFormsRequest AWS API Documentation
+    #
+    class ListEvaluationFormsRequest < Struct.new(
+      :instance_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] evaluation_form_summary_list
+    #   Provides details about a list of evaluation forms belonging to an
+    #   instance.
+    #   @return [Array<Types::EvaluationFormSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListEvaluationFormsResponse AWS API Documentation
+    #
+    class ListEvaluationFormsResponse < Struct.new(
+      :evaluation_form_summary_list,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -8029,6 +9344,33 @@ module Aws::Connect
     class NumberReference < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the property value used in automation of a numeric
+    # questions. Label values are associated with minimum and maximum values
+    # for the numeric question.
+    #
+    # * Sentiment scores have a minimum value of -5 and maximum value of 5.
+    #
+    # * Duration labels, such as `NON_TALK_TIME`, `CONTACT_DURATION`,
+    #   `AGENT_INTERACTION_DURATION`, `CUSTOMER_HOLD_TIME` have a minimum
+    #   value of 0 and maximum value of 28800.
+    #
+    # * Percantages have a minimum value of 0 and maximum value of 100.
+    #
+    # * `NUMBER_OF_INTERRUPTIONS` has a minimum value of 0 and maximum value
+    #   of 100.
+    #
+    # @!attribute [rw] label
+    #   The property label of the automation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/NumericQuestionPropertyValueAutomation AWS API Documentation
+    #
+    class NumericQuestionPropertyValueAutomation < Struct.new(
+      :label)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10209,6 +11551,35 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about the automation option based on a rule category for a
+    # single select question.
+    #
+    # @!attribute [rw] category
+    #   The category name, as defined in Rules.
+    #   @return [String]
+    #
+    # @!attribute [rw] condition
+    #   The condition to apply for the automation option. If the condition
+    #   is `PRESENT`, then the option is applied when the contact data
+    #   includes the category. Similarly, if the condition is `NOT_PRESENT`,
+    #   then the option is applied when the contact data does not include
+    #   the category.
+    #   @return [String]
+    #
+    # @!attribute [rw] option_ref_id
+    #   The identifier of the answer option tha
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SingleSelectQuestionRuleCategoryAutomation AWS API Documentation
+    #
+    class SingleSelectQuestionRuleCategoryAutomation < Struct.new(
+      :category,
+      :condition,
+      :option_ref_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
@@ -10359,6 +11730,65 @@ module Aws::Connect
       :participant_id,
       :participant_token,
       :continued_from_contact_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_id
+    #   The unique identifier for the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartContactEvaluationRequest AWS API Documentation
+    #
+    class StartContactEvaluationRequest < Struct.new(
+      :instance_id,
+      :contact_id,
+      :evaluation_form_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] evaluation_id
+    #   A unique identifier for the contact evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_arn
+    #   The Amazon Resource Name (ARN) for the contact evaluation resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartContactEvaluationResponse AWS API Documentation
+    #
+    class StartContactEvaluationResponse < Struct.new(
+      :evaluation_id,
+      :evaluation_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10816,6 +12246,55 @@ module Aws::Connect
     class StringReference < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_id
+    #   A unique identifier for the contact evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] answers
+    #   A map of question identifiers to answer value.
+    #   @return [Hash<String,Types::EvaluationAnswerInput>]
+    #
+    # @!attribute [rw] notes
+    #   A map of question identifiers to note value.
+    #   @return [Hash<String,Types::EvaluationNote>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SubmitContactEvaluationRequest AWS API Documentation
+    #
+    class SubmitContactEvaluationRequest < Struct.new(
+      :instance_id,
+      :evaluation_id,
+      :answers,
+      :notes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] evaluation_id
+    #   A unique identifier for the contact evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_arn
+    #   The Amazon Resource Name (ARN) for the contact evaluation resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SubmitContactEvaluationResponse AWS API Documentation
+    #
+    class SubmitContactEvaluationResponse < Struct.new(
+      :evaluation_id,
+      :evaluation_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11458,6 +12937,55 @@ module Aws::Connect
     class UpdateContactAttributesResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_id
+    #   A unique identifier for the contact evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] answers
+    #   A map of question identifiers to answer value.
+    #   @return [Hash<String,Types::EvaluationAnswerInput>]
+    #
+    # @!attribute [rw] notes
+    #   A map of question identifiers to note value.
+    #   @return [Hash<String,Types::EvaluationNote>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactEvaluationRequest AWS API Documentation
+    #
+    class UpdateContactEvaluationRequest < Struct.new(
+      :instance_id,
+      :evaluation_id,
+      :answers,
+      :notes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] evaluation_id
+    #   A unique identifier for the contact evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_arn
+    #   The Amazon Resource Name (ARN) for the contact evaluation resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactEvaluationResponse AWS API Documentation
+    #
+    class UpdateContactEvaluationResponse < Struct.new(
+      :evaluation_id,
+      :evaluation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance.
     #   @return [String]
     #
@@ -11707,6 +13235,97 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactScheduleResponse AWS API Documentation
     #
     class UpdateContactScheduleResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_id
+    #   The unique identifier for the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_version
+    #   A version of the evaluation form to update.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] create_new_version
+    #   A flag indicating whether the operation must create a new version.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] title
+    #   A unique title of the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   Items that are part of the evaluation form. The total number of
+    #   sections and questions must not exceed 100 each. Questions must be
+    #   contained in a section.
+    #   @return [Array<Types::EvaluationFormItem>]
+    #
+    # @!attribute [rw] scoring_strategy
+    #   A scoring strategy of the evaluation form.
+    #   @return [Types::EvaluationFormScoringStrategy]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateEvaluationFormRequest AWS API Documentation
+    #
+    class UpdateEvaluationFormRequest < Struct.new(
+      :instance_id,
+      :evaluation_form_id,
+      :evaluation_form_version,
+      :create_new_version,
+      :title,
+      :description,
+      :items,
+      :scoring_strategy,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] evaluation_form_id
+    #   The unique identifier for the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_arn
+    #   The Amazon Resource Name (ARN) for the contact evaluation resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_form_version
+    #   The version of the updated evaluation form resource.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateEvaluationFormResponse AWS API Documentation
+    #
+    class UpdateEvaluationFormResponse < Struct.new(
+      :evaluation_form_id,
+      :evaluation_form_arn,
+      :evaluation_form_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the

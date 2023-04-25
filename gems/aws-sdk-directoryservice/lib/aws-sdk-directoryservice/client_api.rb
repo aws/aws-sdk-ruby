@@ -135,6 +135,7 @@ module Aws::DirectoryService
     DirectoryAlreadyInRegionException = Shapes::StructureShape.new(name: 'DirectoryAlreadyInRegionException')
     DirectoryAlreadySharedException = Shapes::StructureShape.new(name: 'DirectoryAlreadySharedException')
     DirectoryConfigurationSettingAllowedValues = Shapes::StringShape.new(name: 'DirectoryConfigurationSettingAllowedValues')
+    DirectoryConfigurationSettingDataType = Shapes::StringShape.new(name: 'DirectoryConfigurationSettingDataType')
     DirectoryConfigurationSettingLastRequestedDateTime = Shapes::TimestampShape.new(name: 'DirectoryConfigurationSettingLastRequestedDateTime')
     DirectoryConfigurationSettingLastUpdatedDateTime = Shapes::TimestampShape.new(name: 'DirectoryConfigurationSettingLastUpdatedDateTime')
     DirectoryConfigurationSettingName = Shapes::StringShape.new(name: 'DirectoryConfigurationSettingName')
@@ -1189,6 +1190,7 @@ module Aws::DirectoryService
     SettingEntry.add_member(:request_status_message, Shapes::ShapeRef.new(shape: DirectoryConfigurationSettingRequestStatusMessage, location_name: "RequestStatusMessage"))
     SettingEntry.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: DirectoryConfigurationSettingLastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
     SettingEntry.add_member(:last_requested_date_time, Shapes::ShapeRef.new(shape: DirectoryConfigurationSettingLastRequestedDateTime, location_name: "LastRequestedDateTime"))
+    SettingEntry.add_member(:data_type, Shapes::ShapeRef.new(shape: DirectoryConfigurationSettingDataType, location_name: "DataType"))
     SettingEntry.struct_class = Types::SettingEntry
 
     Settings.member = Shapes::ShapeRef.new(shape: Setting)

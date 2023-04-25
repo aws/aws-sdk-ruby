@@ -1882,6 +1882,7 @@ module Aws::DirectoryService
     #   resp.setting_entries[0].request_status_message #=> String
     #   resp.setting_entries[0].last_updated_date_time #=> Time
     #   resp.setting_entries[0].last_requested_date_time #=> Time
+    #   resp.setting_entries[0].data_type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeSettings AWS API Documentation
@@ -3366,7 +3367,7 @@ module Aws::DirectoryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

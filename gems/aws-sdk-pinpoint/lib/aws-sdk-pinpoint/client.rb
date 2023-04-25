@@ -4901,6 +4901,8 @@ module Aws::Pinpoint
     #   resp.activities_response.item[0].timezones_total_count #=> Integer
     #   resp.activities_response.item[0].total_endpoint_count #=> Integer
     #   resp.activities_response.item[0].treatment_id #=> String
+    #   resp.activities_response.item[0].execution_metrics #=> Hash
+    #   resp.activities_response.item[0].execution_metrics["__string"] #=> String
     #   resp.activities_response.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignActivities AWS API Documentation
@@ -7020,6 +7022,225 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def get_journey_execution_metrics(params = {}, options = {})
       req = build_request(:get_journey_execution_metrics, params)
+      req.send_request(options)
+    end
+
+    # Retrieves (queries) pre-aggregated data for a standard run execution
+    # metric that applies to a journey activity.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, String] :journey_activity_id
+    #
+    # @option params [required, String] :journey_id
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :page_size
+    #
+    # @option params [required, String] :run_id
+    #
+    # @return [Types::GetJourneyRunExecutionActivityMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetJourneyRunExecutionActivityMetricsResponse#journey_run_execution_activity_metrics_response #journey_run_execution_activity_metrics_response} => Types::JourneyRunExecutionActivityMetricsResponse
+    #
+    #
+    # @example Example: To get the activity execution metrics for a journey run
+    #
+    #   # The following example gets activity execution metrics for a single run of a journey.
+    #
+    #   resp = client.get_journey_run_execution_activity_metrics({
+    #     application_id: "11111111112222222222333333333344", 
+    #     journey_id: "aaaaaaaaaabbbbbbbbbbccccccccccdd", 
+    #     run_id: "99999999998888888888777777777766", 
+    #     journey_activity_id: "AAAAAAAAAA", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     journey_run_execution_activity_metrics_response: {
+    #       application_id: "11111111112222222222333333333344", 
+    #       journey_id: "aaaaaaaaaabbbbbbbbbbccccccccccdd", 
+    #       run_id: "99999999998888888888777777777766", 
+    #       journey_activity_id: "AAAAAAAAAA", 
+    #       activity_type: "EMAIL", 
+    #       last_evaluated_time: "2000-01-01T00:00:05.000Z", 
+    #       metrics: {
+    #         "SUCCESS" => "1", 
+    #       }, 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_journey_run_execution_activity_metrics({
+    #     application_id: "__string", # required
+    #     journey_activity_id: "__string", # required
+    #     journey_id: "__string", # required
+    #     next_token: "__string",
+    #     page_size: "__string",
+    #     run_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.journey_run_execution_activity_metrics_response.activity_type #=> String
+    #   resp.journey_run_execution_activity_metrics_response.application_id #=> String
+    #   resp.journey_run_execution_activity_metrics_response.journey_activity_id #=> String
+    #   resp.journey_run_execution_activity_metrics_response.journey_id #=> String
+    #   resp.journey_run_execution_activity_metrics_response.last_evaluated_time #=> String
+    #   resp.journey_run_execution_activity_metrics_response.metrics #=> Hash
+    #   resp.journey_run_execution_activity_metrics_response.metrics["__string"] #=> String
+    #   resp.journey_run_execution_activity_metrics_response.run_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourneyRunExecutionActivityMetrics AWS API Documentation
+    #
+    # @overload get_journey_run_execution_activity_metrics(params = {})
+    # @param [Hash] params ({})
+    def get_journey_run_execution_activity_metrics(params = {}, options = {})
+      req = build_request(:get_journey_run_execution_activity_metrics, params)
+      req.send_request(options)
+    end
+
+    # Retrieves (queries) pre-aggregated data for a standard run execution
+    # metric that applies to a journey.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, String] :journey_id
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :page_size
+    #
+    # @option params [required, String] :run_id
+    #
+    # @return [Types::GetJourneyRunExecutionMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetJourneyRunExecutionMetricsResponse#journey_run_execution_metrics_response #journey_run_execution_metrics_response} => Types::JourneyRunExecutionMetricsResponse
+    #
+    #
+    # @example Example: To get the execution metrics for a journey run
+    #
+    #   # The following example gets execution metrics for a single run of a journey.
+    #
+    #   resp = client.get_journey_run_execution_metrics({
+    #     application_id: "11111111112222222222333333333344", 
+    #     journey_id: "aaaaaaaaaabbbbbbbbbbccccccccccdd", 
+    #     run_id: "99999999998888888888777777777766", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     journey_run_execution_metrics_response: {
+    #       application_id: "11111111112222222222333333333344", 
+    #       journey_id: "aaaaaaaaaabbbbbbbbbbccccccccccdd", 
+    #       run_id: "99999999998888888888777777777766", 
+    #       last_evaluated_time: "2000-01-01T00:00:05.000Z", 
+    #       metrics: {
+    #         "ENDPOINT_PRODUCED" => "1", 
+    #         "ENDPOINT_ENTERED" => "1", 
+    #         "ENDPOINT_LEFT" => "1", 
+    #       }, 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_journey_run_execution_metrics({
+    #     application_id: "__string", # required
+    #     journey_id: "__string", # required
+    #     next_token: "__string",
+    #     page_size: "__string",
+    #     run_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.journey_run_execution_metrics_response.application_id #=> String
+    #   resp.journey_run_execution_metrics_response.journey_id #=> String
+    #   resp.journey_run_execution_metrics_response.last_evaluated_time #=> String
+    #   resp.journey_run_execution_metrics_response.metrics #=> Hash
+    #   resp.journey_run_execution_metrics_response.metrics["__string"] #=> String
+    #   resp.journey_run_execution_metrics_response.run_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourneyRunExecutionMetrics AWS API Documentation
+    #
+    # @overload get_journey_run_execution_metrics(params = {})
+    # @param [Hash] params ({})
+    def get_journey_run_execution_metrics(params = {}, options = {})
+      req = build_request(:get_journey_run_execution_metrics, params)
+      req.send_request(options)
+    end
+
+    # Provides information about the runs of a journey.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, String] :journey_id
+    #
+    # @option params [String] :page_size
+    #
+    # @option params [String] :token
+    #
+    # @return [Types::GetJourneyRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetJourneyRunsResponse#journey_runs_response #journey_runs_response} => Types::JourneyRunsResponse
+    #
+    #
+    # @example Example: To get the runs of a journey
+    #
+    #   # The following example gets the runs of a journey.
+    #
+    #   resp = client.get_journey_runs({
+    #     application_id: "11111111112222222222333333333344", 
+    #     journey_id: "aaaaaaaaaabbbbbbbbbbccccccccccdd", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     journey_runs_response: {
+    #       item: [
+    #         {
+    #           run_id: "99999999998888888888777777777766", 
+    #           creation_time: "2000-01-01T00:00:00.000Z", 
+    #           last_update_time: "2000-01-01T00:00:05.000Z", 
+    #           status: "COMPLETED", 
+    #         }, 
+    #         {
+    #           run_id: "ffffffffffeeeeeeeeeeddddddddddcc", 
+    #           creation_time: "2000-01-01T00:00:10.000Z", 
+    #           last_update_time: "2000-01-01T00:00:10.000Z", 
+    #           status: "SCHEDULED", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_journey_runs({
+    #     application_id: "__string", # required
+    #     journey_id: "__string", # required
+    #     page_size: "__string",
+    #     token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.journey_runs_response.item #=> Array
+    #   resp.journey_runs_response.item[0].creation_time #=> String
+    #   resp.journey_runs_response.item[0].last_update_time #=> String
+    #   resp.journey_runs_response.item[0].run_id #=> String
+    #   resp.journey_runs_response.item[0].status #=> String, one of "SCHEDULED", "RUNNING", "COMPLETED", "CANCELLED"
+    #   resp.journey_runs_response.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourneyRuns AWS API Documentation
+    #
+    # @overload get_journey_runs(params = {})
+    # @param [Hash] params ({})
+    def get_journey_runs(params = {}, options = {})
+      req = build_request(:get_journey_runs, params)
       req.send_request(options)
     end
 
@@ -12491,7 +12712,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
