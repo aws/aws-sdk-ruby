@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.163.0 (2023-04-26)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-osis` gem.
+
 3.162.0 (2023-03-30)
 ------------------
 

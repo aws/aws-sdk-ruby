@@ -250,6 +250,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-networkmanager', '~> 1')
   spec.add_dependency('aws-sdk-nimblestudio', '~> 1')
   spec.add_dependency('aws-sdk-oam', '~> 1')
+  spec.add_dependency('aws-sdk-osis', '~> 1')
   spec.add_dependency('aws-sdk-omics', '~> 1')
   spec.add_dependency('aws-sdk-opensearchserverless', '~> 1')
   spec.add_dependency('aws-sdk-opensearchservice', '~> 1')

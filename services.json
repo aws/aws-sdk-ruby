@@ -755,6 +755,9 @@
   "OAM": {
     "models": "oam/2022-06-10"
   },
+  "OSIS": {
+    "models": "osis/2022-01-01"
+  },
   "Omics": {
     "models": "omics/2022-11-28"
   },

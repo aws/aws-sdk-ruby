@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.755.0 (2023-04-26)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::OSIS`.
+
 1.754.0 (2023-04-25)
 ------------------
 

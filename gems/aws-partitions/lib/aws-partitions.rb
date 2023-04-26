@@ -477,6 +477,7 @@ module Aws
             'NetworkManager' => 'networkmanager',
             'NimbleStudio' => 'nimble',
             'OAM' => 'oam',
+            'OSIS' => 'osis',
             'Omics' => 'omics',
             'OpenSearchServerless' => 'aoss',
             'OpenSearchService' => 'es',

@@ -240,6 +240,7 @@ module Aws
   autoload :NetworkManager, 'aws-sdk-networkmanager'
   autoload :NimbleStudio, 'aws-sdk-nimblestudio'
   autoload :OAM, 'aws-sdk-oam'
+  autoload :OSIS, 'aws-sdk-osis'
   autoload :Omics, 'aws-sdk-omics'
   autoload :OpenSearchServerless, 'aws-sdk-opensearchserverless'
   autoload :OpenSearchService, 'aws-sdk-opensearchservice'

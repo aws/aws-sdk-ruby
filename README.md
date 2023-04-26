@@ -582,6 +582,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon MemoryDB                                       | Aws::MemoryDB                            | aws-sdk-memorydb                            | 2021-01-01  |
 | Amazon Neptune                                        | Aws::Neptune                             | aws-sdk-neptune                             | 2014-10-31  |
 | Amazon Omics                                          | Aws::Omics                               | aws-sdk-omics                               | 2022-11-28  |
+| Amazon OpenSearch Ingestion                           | Aws::OSIS                                | aws-sdk-osis                                | 2022-01-01  |
 | Amazon OpenSearch Service                             | Aws::OpenSearchService                   | aws-sdk-opensearchservice                   | 2021-01-01  |
 | Amazon Personalize                                    | Aws::Personalize                         | aws-sdk-personalize                         | 2018-05-22  |
 | Amazon Personalize Events                             | Aws::PersonalizeEvents                   | aws-sdk-personalizeevents                   | 2018-03-22  |
