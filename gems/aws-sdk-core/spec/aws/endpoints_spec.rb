@@ -94,7 +94,13 @@ module Aws
             let(:signature_version) { auth_type }
 
             it 'signs with sigv4 with double encoding' do
-              expect_auth_scheme({ 'name' => 'sigv4', 'disableDoubleEncoding' => true })
+              expect_auth_scheme(
+                {
+                  'name' => 'sigv4',
+                  'disableDoubleEncoding' => true,
+                  'disableNormalizePath' => true
+                }
+              )
               client.operation
             end
           end
