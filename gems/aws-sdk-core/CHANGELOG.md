@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix signing for S3/S3 Control and `aws-crt` gem.
+
 3.171.0 (2023-03-22)
 ------------------
 
