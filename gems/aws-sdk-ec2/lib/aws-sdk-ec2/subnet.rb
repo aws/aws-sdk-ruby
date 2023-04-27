@@ -447,6 +447,7 @@ module Aws::EC2
     #     cpu_options: {
     #       core_count: 1,
     #       threads_per_core: 1,
+    #       amd_sev_snp: "enabled", # accepts enabled, disabled
     #     },
     #     capacity_reservation_specification: {
     #       capacity_reservation_preference: "open", # accepts open, none
@@ -506,21 +507,20 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
     # @option options [Integer] :ipv_6_address_count
-    #   \[EC2-VPC\] The number of IPv6 addresses to associate with the primary
-    #   network interface. Amazon EC2 chooses the IPv6 addresses from the
-    #   range of your subnet. You cannot specify this option and the option to
-    #   assign specific IPv6 addresses in the same request. You can specify
-    #   this option if you've specified a minimum number of instances to
-    #   launch.
+    #   The number of IPv6 addresses to associate with the primary network
+    #   interface. Amazon EC2 chooses the IPv6 addresses from the range of
+    #   your subnet. You cannot specify this option and the option to assign
+    #   specific IPv6 addresses in the same request. You can specify this
+    #   option if you've specified a minimum number of instances to launch.
     #
     #   You cannot specify this option and the network interfaces option in
     #   the same request.
     # @option options [Array<Types::InstanceIpv6Address>] :ipv_6_addresses
-    #   \[EC2-VPC\] The IPv6 addresses from the range of the subnet to
-    #   associate with the primary network interface. You cannot specify this
-    #   option and the option to assign a number of IPv6 addresses in the same
-    #   request. You cannot specify this option if you've specified a minimum
-    #   number of instances to launch.
+    #   The IPv6 addresses from the range of the subnet to associate with the
+    #   primary network interface. You cannot specify this option and the
+    #   option to assign a number of IPv6 addresses in the same request. You
+    #   cannot specify this option if you've specified a minimum number of
+    #   instances to launch.
     #
     #   You cannot specify this option and the network interfaces option in
     #   the same request.
@@ -600,7 +600,7 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html
     # @option options [Array<String>] :security_groups
-    #   \[EC2-Classic, default VPC\] The names of the security groups.
+    #   \[Default VPC\] The names of the security groups.
     #
     #   If you specify a network interface, you must specify any security
     #   groups as part of the network interface.
@@ -673,8 +673,8 @@ module Aws::EC2
     #   a network interface, you must specify any security groups and subnets
     #   as part of the network interface.
     # @option options [String] :private_ip_address
-    #   \[EC2-VPC\] The primary IPv4 address. You must specify a value from
-    #   the IPv4 address range of the subnet.
+    #   The primary IPv4 address. You must specify a value from the IPv4
+    #   address range of the subnet.
     #
     #   Only one private IP address can be designated as primary. You can't
     #   specify this option if you've specified the option to designate a
@@ -1126,12 +1126,6 @@ module Aws::EC2
     #     launched the instance.
     #
     #   * `dns-name` - The public DNS name of the instance.
-    #
-    #   * `group-id` - The ID of the security group for the instance.
-    #     EC2-Classic only.
-    #
-    #   * `group-name` - The name of the security group for the instance.
-    #     EC2-Classic only.
     #
     #   * `hibernation-options.configured` - A Boolean that indicates whether
     #     the instance is enabled for hibernation. A value of `true` means

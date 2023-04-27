@@ -29200,8 +29200,9 @@ module Aws::SageMaker
     # @!attribute [rw] cross_account_model_register_role_arn
     #   The Amazon Resource Name (ARN) of the SageMaker model registry
     #   account. Required only to register model versions created by a
-    #   different SageMaker Canvas AWS account than the AWS account in which
-    #   SageMaker model registry is set up.
+    #   different SageMaker Canvas Amazon Web Services account than the
+    #   Amazon Web Services account in which SageMaker model registry is set
+    #   up.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelRegisterSettings AWS API Documentation

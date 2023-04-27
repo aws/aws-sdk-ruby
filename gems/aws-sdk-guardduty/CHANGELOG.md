@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2023-04-27)
+------------------
+
+* Feature - Added API support to initiate on-demand malware scan on specific resources.
+
 1.68.0 (2023-04-20)
 ------------------
 

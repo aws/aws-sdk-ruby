@@ -91,15 +91,15 @@ module Aws::EC2
       data[:platform]
     end
 
-    # (IPv4 only) The private DNS hostname name assigned to the instance.
+    # \[IPv4 only\] The private DNS hostname name assigned to the instance.
     # This DNS hostname can only be used inside the Amazon EC2 network. This
     # name is not available until the instance enters the `running` state.
     #
-    # \[EC2-VPC\] The Amazon-provided DNS server resolves Amazon-provided
-    # private DNS hostnames if you've enabled DNS resolution and DNS
-    # hostnames in your VPC. If you are not using the Amazon-provided DNS
-    # server in your VPC, your custom domain name servers must resolve the
-    # hostname as appropriate.
+    # The Amazon-provided DNS server resolves Amazon-provided private DNS
+    # hostnames if you've enabled DNS resolution and DNS hostnames in your
+    # VPC. If you are not using the Amazon-provided DNS server in your VPC,
+    # your custom domain name servers must resolve the hostname as
+    # appropriate.
     # @return [String]
     def private_dns_name
       data[:private_dns_name]
@@ -117,10 +117,9 @@ module Aws::EC2
       data[:product_codes]
     end
 
-    # (IPv4 only) The public DNS name assigned to the instance. This name is
-    # not available until the instance enters the `running` state. For
-    # EC2-VPC, this name is only available if you've enabled DNS hostnames
-    # for your VPC.
+    # \[IPv4 only\] The public DNS name assigned to the instance. This name
+    # is not available until the instance enters the `running` state. This
+    # name is only available if you've enabled DNS hostnames for your VPC.
     # @return [String]
     def public_dns_name
       data[:public_dns_name]
@@ -155,13 +154,13 @@ module Aws::EC2
       data[:state_transition_reason]
     end
 
-    # \[EC2-VPC\] The ID of the subnet in which the instance is running.
+    # The ID of the subnet in which the instance is running.
     # @return [String]
     def subnet_id
       data[:subnet_id]
     end
 
-    # \[EC2-VPC\] The ID of the VPC in which the instance is running.
+    # The ID of the VPC in which the instance is running.
     # @return [String]
     def vpc_id
       data[:vpc_id]
@@ -1075,10 +1074,9 @@ module Aws::EC2
     #   This option is supported only for HVM instances. Specifying this
     #   option with a PV instance can make it unreachable.
     # @option options [Array<String>] :groups
-    #   \[EC2-VPC\] Replaces the security groups of the instance with the
-    #   specified security groups. You must specify at least one security
-    #   group, even if it's just the default security group for the VPC. You
-    #   must specify the security group ID, not the security group name.
+    #   Replaces the security groups of the instance with the specified
+    #   security groups. You must specify the ID of at least one security
+    #   group, even if it's just the default security group for the VPC.
     # @option options [Types::AttributeValue] :instance_initiated_shutdown_behavior
     #   Specifies whether an instance stops or terminates when you initiate
     #   shutdown from the instance (using the operating system command for

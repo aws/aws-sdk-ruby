@@ -162,6 +162,8 @@ module Aws::GuardDuty
             Aws::GuardDuty::Endpoints::ListTagsForResource.build(context)
           when :list_threat_intel_sets
             Aws::GuardDuty::Endpoints::ListThreatIntelSets.build(context)
+          when :start_malware_scan
+            Aws::GuardDuty::Endpoints::StartMalwareScan.build(context)
           when :start_monitoring_members
             Aws::GuardDuty::Endpoints::StartMonitoringMembers.build(context)
           when :stop_monitoring_members

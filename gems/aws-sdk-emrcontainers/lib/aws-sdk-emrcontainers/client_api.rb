@@ -33,6 +33,8 @@ module Aws::EMRContainers
     CreateManagedEndpointResponse = Shapes::StructureShape.new(name: 'CreateManagedEndpointResponse')
     CreateVirtualClusterRequest = Shapes::StructureShape.new(name: 'CreateVirtualClusterRequest')
     CreateVirtualClusterResponse = Shapes::StructureShape.new(name: 'CreateVirtualClusterResponse')
+    CredentialType = Shapes::StringShape.new(name: 'CredentialType')
+    Credentials = Shapes::UnionShape.new(name: 'Credentials')
     Date = Shapes::TimestampShape.new(name: 'Date', timestampFormat: "iso8601")
     DeleteJobTemplateRequest = Shapes::StructureShape.new(name: 'DeleteJobTemplateRequest')
     DeleteJobTemplateResponse = Shapes::StructureShape.new(name: 'DeleteJobTemplateResponse')
@@ -60,6 +62,8 @@ module Aws::EMRContainers
     EntryPointArguments = Shapes::ListShape.new(name: 'EntryPointArguments')
     EntryPointPath = Shapes::StringShape.new(name: 'EntryPointPath')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
+    GetManagedEndpointSessionCredentialsRequest = Shapes::StructureShape.new(name: 'GetManagedEndpointSessionCredentialsRequest')
+    GetManagedEndpointSessionCredentialsResponse = Shapes::StructureShape.new(name: 'GetManagedEndpointSessionCredentialsResponse')
     IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     JavaInteger = Shapes::IntegerShape.new(name: 'JavaInteger')
@@ -85,6 +89,7 @@ module Aws::EMRContainers
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListVirtualClustersRequest = Shapes::StructureShape.new(name: 'ListVirtualClustersRequest')
     ListVirtualClustersResponse = Shapes::StructureShape.new(name: 'ListVirtualClustersResponse')
+    LogContext = Shapes::StringShape.new(name: 'LogContext')
     LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
     MonitoringConfiguration = Shapes::StructureShape.new(name: 'MonitoringConfiguration')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -97,6 +102,7 @@ module Aws::EMRContainers
     PersistentAppUI = Shapes::StringShape.new(name: 'PersistentAppUI')
     ReleaseLabel = Shapes::StringShape.new(name: 'ReleaseLabel')
     RequestIdentityUserArn = Shapes::StringShape.new(name: 'RequestIdentityUserArn')
+    RequestThrottledException = Shapes::StructureShape.new(name: 'RequestThrottledException')
     ResourceIdString = Shapes::StringShape.new(name: 'ResourceIdString')
     ResourceNameString = Shapes::StringShape.new(name: 'ResourceNameString')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -127,6 +133,7 @@ module Aws::EMRContainers
     TemplateParameterDataType = Shapes::StringShape.new(name: 'TemplateParameterDataType')
     TemplateParameterInputMap = Shapes::MapShape.new(name: 'TemplateParameterInputMap')
     TemplateParameterName = Shapes::StringShape.new(name: 'TemplateParameterName')
+    Token = Shapes::StringShape.new(name: 'Token')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UriString = Shapes::StringShape.new(name: 'UriString')
@@ -216,6 +223,12 @@ module Aws::EMRContainers
     CreateVirtualClusterResponse.add_member(:arn, Shapes::ShapeRef.new(shape: VirtualClusterArn, location_name: "arn"))
     CreateVirtualClusterResponse.struct_class = Types::CreateVirtualClusterResponse
 
+    Credentials.add_member(:token, Shapes::ShapeRef.new(shape: Token, location_name: "token"))
+    Credentials.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    Credentials.add_member_subclass(:token, Types::Credentials::Token)
+    Credentials.add_member_subclass(:unknown, Types::Credentials::Unknown)
+    Credentials.struct_class = Types::Credentials
+
     DeleteJobTemplateRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "templateId"))
     DeleteJobTemplateRequest.struct_class = Types::DeleteJobTemplateRequest
 
@@ -292,6 +305,20 @@ module Aws::EMRContainers
     Endpoints.member = Shapes::ShapeRef.new(shape: Endpoint)
 
     EntryPointArguments.member = Shapes::ShapeRef.new(shape: EntryPointArgument)
+
+    GetManagedEndpointSessionCredentialsRequest.add_member(:endpoint_identifier, Shapes::ShapeRef.new(shape: String2048, required: true, location: "uri", location_name: "endpointId"))
+    GetManagedEndpointSessionCredentialsRequest.add_member(:virtual_cluster_identifier, Shapes::ShapeRef.new(shape: String2048, required: true, location: "uri", location_name: "virtualClusterId"))
+    GetManagedEndpointSessionCredentialsRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "executionRoleArn"))
+    GetManagedEndpointSessionCredentialsRequest.add_member(:credential_type, Shapes::ShapeRef.new(shape: CredentialType, required: true, location_name: "credentialType"))
+    GetManagedEndpointSessionCredentialsRequest.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: JavaInteger, location_name: "durationInSeconds"))
+    GetManagedEndpointSessionCredentialsRequest.add_member(:log_context, Shapes::ShapeRef.new(shape: LogContext, location_name: "logContext"))
+    GetManagedEndpointSessionCredentialsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    GetManagedEndpointSessionCredentialsRequest.struct_class = Types::GetManagedEndpointSessionCredentialsRequest
+
+    GetManagedEndpointSessionCredentialsResponse.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "id"))
+    GetManagedEndpointSessionCredentialsResponse.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "credentials"))
+    GetManagedEndpointSessionCredentialsResponse.add_member(:expires_at, Shapes::ShapeRef.new(shape: Date, location_name: "expiresAt"))
+    GetManagedEndpointSessionCredentialsResponse.struct_class = Types::GetManagedEndpointSessionCredentialsResponse
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String1024, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
@@ -420,6 +447,9 @@ module Aws::EMRContainers
 
     ParametricS3MonitoringConfiguration.add_member(:log_uri, Shapes::ShapeRef.new(shape: UriString, location_name: "logUri"))
     ParametricS3MonitoringConfiguration.struct_class = Types::ParametricS3MonitoringConfiguration
+
+    RequestThrottledException.add_member(:message, Shapes::ShapeRef.new(shape: String1024, location_name: "message"))
+    RequestThrottledException.struct_class = Types::RequestThrottledException
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String1024, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -640,6 +670,18 @@ module Aws::EMRContainers
         o.input = Shapes::ShapeRef.new(shape: DescribeVirtualClusterRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeVirtualClusterResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_managed_endpoint_session_credentials, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetManagedEndpointSessionCredentials"
+        o.http_method = "POST"
+        o.http_request_uri = "/virtualclusters/{virtualClusterId}/endpoints/{endpointId}/credentials"
+        o.input = Shapes::ShapeRef.new(shape: GetManagedEndpointSessionCredentialsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetManagedEndpointSessionCredentialsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestThrottledException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)

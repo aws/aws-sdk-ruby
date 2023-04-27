@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2023-04-27)
+------------------
+
+* Feature - Add Java 17 (java17) support to AWS Lambda
+
 1.95.0 (2023-04-17)
 ------------------
 

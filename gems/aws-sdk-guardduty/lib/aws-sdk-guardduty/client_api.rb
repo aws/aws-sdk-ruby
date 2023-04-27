@@ -46,6 +46,7 @@ module Aws::GuardDuty
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CloudTrailConfigurationResult = Shapes::StructureShape.new(name: 'CloudTrailConfigurationResult')
     Condition = Shapes::StructureShape.new(name: 'Condition')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     Container = Shapes::StructureShape.new(name: 'Container')
     Containers = Shapes::ListShape.new(name: 'Containers')
     CountByCoverageStatus = Shapes::MapShape.new(name: 'CountByCoverageStatus')
@@ -347,6 +348,7 @@ module Aws::GuardDuty
     RemoteIpDetails = Shapes::StructureShape.new(name: 'RemoteIpDetails')
     RemotePortDetails = Shapes::StructureShape.new(name: 'RemotePortDetails')
     Resource = Shapes::StructureShape.new(name: 'Resource')
+    ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceDetails = Shapes::StructureShape.new(name: 'ResourceDetails')
     ResourceList = Shapes::ListShape.new(name: 'ResourceList')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
@@ -371,6 +373,7 @@ module Aws::GuardDuty
     ScanStatus = Shapes::StringShape.new(name: 'ScanStatus')
     ScanThreatName = Shapes::StructureShape.new(name: 'ScanThreatName')
     ScanThreatNames = Shapes::ListShape.new(name: 'ScanThreatNames')
+    ScanType = Shapes::StringShape.new(name: 'ScanType')
     ScannedItemCount = Shapes::StructureShape.new(name: 'ScannedItemCount')
     Scans = Shapes::ListShape.new(name: 'Scans')
     SecurityContext = Shapes::StructureShape.new(name: 'SecurityContext')
@@ -381,6 +384,8 @@ module Aws::GuardDuty
     SortCriteria = Shapes::StructureShape.new(name: 'SortCriteria')
     SourceIps = Shapes::ListShape.new(name: 'SourceIps')
     Sources = Shapes::ListShape.new(name: 'Sources')
+    StartMalwareScanRequest = Shapes::StructureShape.new(name: 'StartMalwareScanRequest')
+    StartMalwareScanResponse = Shapes::StructureShape.new(name: 'StartMalwareScanResponse')
     StartMonitoringMembersRequest = Shapes::StructureShape.new(name: 'StartMonitoringMembersRequest')
     StartMonitoringMembersResponse = Shapes::StructureShape.new(name: 'StartMonitoringMembersResponse')
     StopMonitoringMembersRequest = Shapes::StructureShape.new(name: 'StopMonitoringMembersRequest')
@@ -577,6 +582,10 @@ module Aws::GuardDuty
     Condition.add_member(:less_than, Shapes::ShapeRef.new(shape: Long, location_name: "lessThan"))
     Condition.add_member(:less_than_or_equal, Shapes::ShapeRef.new(shape: Long, location_name: "lessThanOrEqual"))
     Condition.struct_class = Types::Condition
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ConflictException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "__type"))
+    ConflictException.struct_class = Types::ConflictException
 
     Container.add_member(:container_runtime, Shapes::ShapeRef.new(shape: String, location_name: "containerRuntime"))
     Container.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
@@ -917,6 +926,7 @@ module Aws::GuardDuty
     EbsVolumeScanDetails.add_member(:trigger_finding_id, Shapes::ShapeRef.new(shape: String, location_name: "triggerFindingId"))
     EbsVolumeScanDetails.add_member(:sources, Shapes::ShapeRef.new(shape: Sources, location_name: "sources"))
     EbsVolumeScanDetails.add_member(:scan_detections, Shapes::ShapeRef.new(shape: ScanDetections, location_name: "scanDetections"))
+    EbsVolumeScanDetails.add_member(:scan_type, Shapes::ShapeRef.new(shape: ScanType, location_name: "scanType"))
     EbsVolumeScanDetails.struct_class = Types::EbsVolumeScanDetails
 
     EbsVolumesResult.add_member(:status, Shapes::ShapeRef.new(shape: DataSourceStatus, location_name: "status"))
@@ -1725,6 +1735,7 @@ module Aws::GuardDuty
     Scan.add_member(:total_bytes, Shapes::ShapeRef.new(shape: PositiveLong, location_name: "totalBytes"))
     Scan.add_member(:file_count, Shapes::ShapeRef.new(shape: PositiveLong, location_name: "fileCount"))
     Scan.add_member(:attached_volumes, Shapes::ShapeRef.new(shape: VolumeDetails, location_name: "attachedVolumes"))
+    Scan.add_member(:scan_type, Shapes::ShapeRef.new(shape: ScanType, location_name: "scanType"))
     Scan.struct_class = Types::Scan
 
     ScanCondition.add_member(:map_equals, Shapes::ShapeRef.new(shape: MapEquals, required: true, location_name: "mapEquals"))
@@ -1813,6 +1824,12 @@ module Aws::GuardDuty
     SourceIps.member = Shapes::ShapeRef.new(shape: String)
 
     Sources.member = Shapes::ShapeRef.new(shape: String)
+
+    StartMalwareScanRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
+    StartMalwareScanRequest.struct_class = Types::StartMalwareScanRequest
+
+    StartMalwareScanResponse.add_member(:scan_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "scanId"))
+    StartMalwareScanResponse.struct_class = Types::StartMalwareScanResponse
 
     StartMonitoringMembersRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     StartMonitoringMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, required: true, location_name: "accountIds"))
@@ -2667,6 +2684,17 @@ module Aws::GuardDuty
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:start_malware_scan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMalwareScan"
+        o.http_method = "POST"
+        o.http_request_uri = "/malware-scan/start"
+        o.input = Shapes::ShapeRef.new(shape: StartMalwareScanRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartMalwareScanResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
       api.add_operation(:start_monitoring_members, Seahorse::Model::Operation.new.tap do |o|

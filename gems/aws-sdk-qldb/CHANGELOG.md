@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2023-04-27)
+------------------
+
+* Feature - Documentation updates for Amazon QLDB
+
 1.27.0 (2023-01-18)
 ------------------
 

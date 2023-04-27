@@ -4211,7 +4211,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, Array<String>] :spot_instance_request_ids
-    #   One or more Spot Instance request IDs.
+    #   The IDs of the Spot Instance requests.
     #
     # @return [Types::CancelSpotInstanceRequestsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8123,6 +8123,7 @@ module Aws::EC2
     #       cpu_options: {
     #         core_count: 1,
     #         threads_per_core: 1,
+    #         amd_sev_snp: "enabled", # accepts enabled, disabled
     #       },
     #       capacity_reservation_specification: {
     #         capacity_reservation_preference: "open", # accepts open, none
@@ -8506,6 +8507,7 @@ module Aws::EC2
     #       cpu_options: {
     #         core_count: 1,
     #         threads_per_core: 1,
+    #         amd_sev_snp: "enabled", # accepts enabled, disabled
     #       },
     #       capacity_reservation_specification: {
     #         capacity_reservation_preference: "open", # accepts open, none
@@ -8688,6 +8690,7 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.credit_specification.cpu_credits #=> String
     #   resp.launch_template_version.launch_template_data.cpu_options.core_count #=> Integer
     #   resp.launch_template_version.launch_template_data.cpu_options.threads_per_core #=> Integer
+    #   resp.launch_template_version.launch_template_data.cpu_options.amd_sev_snp #=> String, one of "enabled", "disabled"
     #   resp.launch_template_version.launch_template_data.capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
     #   resp.launch_template_version.launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
     #   resp.launch_template_version.launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_resource_group_arn #=> String
@@ -24044,8 +24047,8 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters. Filter names and values are case-sensitive.
     #
-    #   * `auto-recovery-supported` - Indicates whether auto recovery is
-    #     supported (`true` \| `false`).
+    #   * `auto-recovery-supported` - Indicates whether Amazon CloudWatch
+    #     action based recovery is supported (`true` \| `false`).
     #
     #   * `bare-metal` - Indicates whether it is a bare metal instance type
     #     (`true` \| `false`).
@@ -24241,6 +24244,8 @@ module Aws::EC2
     #   resp.instance_types[0].processor_info.supported_architectures #=> Array
     #   resp.instance_types[0].processor_info.supported_architectures[0] #=> String, one of "i386", "x86_64", "arm64", "x86_64_mac", "arm64_mac"
     #   resp.instance_types[0].processor_info.sustained_clock_speed_in_ghz #=> Float
+    #   resp.instance_types[0].processor_info.supported_features #=> Array
+    #   resp.instance_types[0].processor_info.supported_features[0] #=> String, one of "amd-sev-snp"
     #   resp.instance_types[0].v_cpu_info.default_v_cpus #=> Integer
     #   resp.instance_types[0].v_cpu_info.default_cores #=> Integer
     #   resp.instance_types[0].v_cpu_info.default_threads_per_core #=> Integer
@@ -24373,12 +24378,6 @@ module Aws::EC2
     #     launched the instance.
     #
     #   * `dns-name` - The public DNS name of the instance.
-    #
-    #   * `group-id` - The ID of the security group for the instance.
-    #     EC2-Classic only.
-    #
-    #   * `group-name` - The name of the security group for the instance.
-    #     EC2-Classic only.
     #
     #   * `hibernation-options.configured` - A Boolean that indicates whether
     #     the instance is enabled for hibernation. A value of `true` means
@@ -24859,6 +24858,7 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].virtualization_type #=> String, one of "hvm", "paravirtual"
     #   resp.reservations[0].instances[0].cpu_options.core_count #=> Integer
     #   resp.reservations[0].instances[0].cpu_options.threads_per_core #=> Integer
+    #   resp.reservations[0].instances[0].cpu_options.amd_sev_snp #=> String, one of "enabled", "disabled"
     #   resp.reservations[0].instances[0].capacity_reservation_id #=> String
     #   resp.reservations[0].instances[0].capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
     #   resp.reservations[0].instances[0].capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
@@ -25912,6 +25912,7 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.credit_specification.cpu_credits #=> String
     #   resp.launch_template_versions[0].launch_template_data.cpu_options.core_count #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.cpu_options.threads_per_core #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.cpu_options.amd_sev_snp #=> String, one of "enabled", "disabled"
     #   resp.launch_template_versions[0].launch_template_data.capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
     #   resp.launch_template_versions[0].launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
     #   resp.launch_template_versions[0].launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_resource_group_arn #=> String
@@ -29384,17 +29385,12 @@ module Aws::EC2
     #     `Availability Zone`).
     #
     #   * `product-description` - The Reserved Instance product platform
-    #     description. Instances that include `(Amazon VPC)` in the product
-    #     platform description will only be displayed to EC2-Classic account
-    #     holders and are for use with Amazon VPC (`Linux/UNIX` \| `Linux/UNIX
-    #     (Amazon VPC)` \| `SUSE Linux` \| `SUSE Linux (Amazon VPC)` \| `Red
-    #     Hat Enterprise Linux` \| `Red Hat Enterprise Linux (Amazon VPC)` \|
-    #     `Red Hat Enterprise Linux with HA (Amazon VPC)` \| `Windows` \|
-    #     `Windows (Amazon VPC)` \| `Windows with SQL Server Standard` \|
-    #     `Windows with SQL Server Standard (Amazon VPC)` \| `Windows with SQL
-    #     Server Web` \| `Windows with SQL Server Web (Amazon VPC)` \|
-    #     `Windows with SQL Server Enterprise` \| `Windows with SQL Server
-    #     Enterprise (Amazon VPC)`).
+    #     description (`Linux/UNIX` \| `Linux with SQL Server Standard` \|
+    #     `Linux with SQL Server Web` \| `Linux with SQL Server Enterprise` \|
+    #     `SUSE Linux` \| `Red Hat Enterprise Linux` \| `Red Hat Enterprise
+    #     Linux with HA` \| `Windows` \| `Windows with SQL Server Standard` \|
+    #     `Windows with SQL Server Web` \| `Windows with SQL Server
+    #     Enterprise`).
     #
     #   * `reserved-instances-id` - The ID of the Reserved Instance.
     #
@@ -29621,9 +29617,6 @@ module Aws::EC2
     #   * `modification-result.target-configuration.instance-type` - The
     #     instance type of the new Reserved Instances.
     #
-    #   * `modification-result.target-configuration.platform` - The network
-    #     platform of the new Reserved Instances (`EC2-Classic` \| `EC2-VPC`).
-    #
     #   * `reserved-instances-id` - The ID of the Reserved Instances modified.
     #
     #   * `reserved-instances-modification-id` - The ID of the modification
@@ -29735,17 +29728,12 @@ module Aws::EC2
     #     the Reserved Instance Marketplace are listed.
     #
     #   * `product-description` - The Reserved Instance product platform
-    #     description. Instances that include `(Amazon VPC)` in the product
-    #     platform description will only be displayed to EC2-Classic account
-    #     holders and are for use with Amazon VPC. (`Linux/UNIX` \|
-    #     `Linux/UNIX (Amazon VPC)` \| `SUSE Linux` \| `SUSE Linux (Amazon
-    #     VPC)` \| `Red Hat Enterprise Linux` \| `Red Hat Enterprise Linux
-    #     (Amazon VPC)` \| `Red Hat Enterprise Linux with HA (Amazon VPC)` \|
-    #     `Windows` \| `Windows (Amazon VPC)` \| `Windows with SQL Server
-    #     Standard` \| `Windows with SQL Server Standard (Amazon VPC)` \|
-    #     `Windows with SQL Server Web` \| ` Windows with SQL Server Web
-    #     (Amazon VPC)` \| `Windows with SQL Server Enterprise` \| `Windows
-    #     with SQL Server Enterprise (Amazon VPC)`)
+    #     description (`Linux/UNIX` \| `Linux with SQL Server Standard` \|
+    #     `Linux with SQL Server Web` \| `Linux with SQL Server Enterprise` \|
+    #     `SUSE Linux` \| `Red Hat Enterprise Linux` \| `Red Hat Enterprise
+    #     Linux with HA` \| `Windows` \| `Windows with SQL Server Standard` \|
+    #     `Windows with SQL Server Web` \| `Windows with SQL Server
+    #     Enterprise`).
     #
     #   * `reserved-instances-offering-id` - The Reserved Instances offering
     #     ID.
@@ -30137,9 +30125,6 @@ module Aws::EC2
     #
     #   * `instance-type` - The instance type (for example, `c4.large`).
     #
-    #   * `network-platform` - The network platform (`EC2-Classic` or
-    #     `EC2-VPC`).
-    #
     #   * `platform` - The platform (`Linux/UNIX` or `Windows`).
     #
     # @option params [required, Types::SlotDateTimeRangeRequest] :first_slot_start_time_range
@@ -30297,9 +30282,6 @@ module Aws::EC2
     #     `us-west-2a`).
     #
     #   * `instance-type` - The instance type (for example, `c4.large`).
-    #
-    #   * `network-platform` - The network platform (`EC2-Classic` or
-    #     `EC2-VPC`).
     #
     #   * `platform` - The platform (`Linux/UNIX` or `Windows`).
     #
@@ -31867,7 +31849,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `availability-zone-group` - The Availability Zone group.
     #
@@ -31995,7 +31977,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :spot_instance_request_ids
-    #   One or more Spot Instance request IDs.
+    #   The IDs of the Spot Instance requests.
     #
     # @option params [String] :next_token
     #   The token returned from a previous paginated request. Pagination
@@ -32199,7 +32181,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances-history.html
     #
     # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `availability-zone` - The Availability Zone for which prices should
     #     be returned.
@@ -40832,6 +40814,7 @@ module Aws::EC2
     #   resp.launch_template_data.credit_specification.cpu_credits #=> String
     #   resp.launch_template_data.cpu_options.core_count #=> Integer
     #   resp.launch_template_data.cpu_options.threads_per_core #=> Integer
+    #   resp.launch_template_data.cpu_options.amd_sev_snp #=> String, one of "enabled", "disabled"
     #   resp.launch_template_data.capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
     #   resp.launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
     #   resp.launch_template_data.capacity_reservation_specification.capacity_reservation_target.capacity_reservation_resource_group_arn #=> String
@@ -44795,9 +44778,9 @@ module Aws::EC2
     #
     # <b>Note: </b>Using this action to change the security groups
     # associated with an elastic network interface (ENI) attached to an
-    # instance in a VPC can result in an error if the instance has more than
-    # one ENI. To change the security groups associated with an ENI attached
-    # to an instance that has multiple ENIs, we recommend that you use the
+    # instance can result in an error if the instance has more than one ENI.
+    # To change the security groups associated with an ENI attached to an
+    # instance that has multiple ENIs, we recommend that you use the
     # ModifyNetworkInterfaceAttribute action.
     #
     # To modify some attributes, the instance must be stopped. For more
@@ -44866,10 +44849,9 @@ module Aws::EC2
     #   option with a PV instance can make it unreachable.
     #
     # @option params [Array<String>] :groups
-    #   \[EC2-VPC\] Replaces the security groups of the instance with the
-    #   specified security groups. You must specify at least one security
-    #   group, even if it's just the default security group for the VPC. You
-    #   must specify the security group ID, not the security group name.
+    #   Replaces the security groups of the instance with the specified
+    #   security groups. You must specify the ID of at least one security
+    #   group, even if it's just the default security group for the VPC.
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance.
@@ -46410,17 +46392,9 @@ module Aws::EC2
     # For more information, see [Modifying Reserved Instances][1] in the
     # *Amazon EC2 User Guide*.
     #
-    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
-    # EC2-Classic to a VPC. For more information, see [Migrate from
-    # EC2-Classic to a VPC][2] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @option params [required, Array<String>] :reserved_instances_ids
     #   The IDs of the Reserved Instances to modify.
@@ -49877,18 +49851,10 @@ module Aws::EC2
     # For more information, see [Reserved Instances][1] and [Reserved
     # Instance Marketplace][2] in the *Amazon EC2 User Guide*.
     #
-    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
-    # EC2-Classic to a VPC. For more information, see [Migrate from
-    # EC2-Classic to a VPC][3] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @option params [required, Integer] :instance_count
     #   The number of Reserved Instances to purchase.
@@ -52104,18 +52070,10 @@ module Aws::EC2
     # Spot Instances, see [Which is the best Spot request method to use?][2]
     # in the *Amazon EC2 User Guide for Linux Instances*.
     #
-    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
-    # EC2-Classic to a VPC. For more information, see [Migrate from
-    # EC2-Classic to a VPC][3] in the *Amazon EC2 User Guide for Linux
-    # Instances*.
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-best-practices.html#which-spot-request-method-to-use
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @option params [String] :availability_zone_group
     #   The user-specified name for a logical grouping of requests.
@@ -53496,32 +53454,24 @@ module Aws::EC2
     # You can specify a number of options, or leave the default options. The
     # following rules apply:
     #
-    # * \[EC2-VPC\] If you don't specify a subnet ID, we choose a default
-    #   subnet from your default VPC for you. If you don't have a default
-    #   VPC, you must specify a subnet ID in the request.
+    # * If you don't specify a subnet ID, we choose a default subnet from
+    #   your default VPC for you. If you don't have a default VPC, you must
+    #   specify a subnet ID in the request.
     #
-    # * \[EC2-Classic\] If don't specify an Availability Zone, we choose
-    #   one for you.
-    #
-    # * Some instance types must be launched into a VPC. If you do not have
-    #   a default VPC, or if you do not specify a subnet ID, the request
-    #   fails. For more information, see [Instance types available only in a
-    #   VPC][1].
-    #
-    # * \[EC2-VPC\] All instances have a network interface with a primary
-    #   private IPv4 address. If you don't specify this address, we choose
-    #   one from the IPv4 range of your subnet.
+    # * All instances have a network interface with a primary private IPv4
+    #   address. If you don't specify this address, we choose one from the
+    #   IPv4 range of your subnet.
     #
     # * Not all instance types support IPv6 addresses. For more information,
-    #   see [Instance types][2].
+    #   see [Instance types][1].
     #
     # * If you don't specify a security group ID, we use the default
-    #   security group. For more information, see [Security groups][3].
+    #   security group. For more information, see [Security groups][2].
     #
     # * If any of the AMIs have a product code attached for which the user
     #   has not subscribed, the request fails.
     #
-    # You can create a [launch template][4], which is a resource that
+    # You can create a [launch template][3], which is a resource that
     # contains the parameters to launch an instance. When you launch an
     # instance using RunInstances, you can specify the launch template
     # instead of specifying the launch parameters.
@@ -53534,33 +53484,25 @@ module Aws::EC2
     # You can check the state of your instance using DescribeInstances. You
     # can tag instances and EBS volumes during launch, after launch, or
     # both. For more information, see CreateTags and [Tagging your Amazon
-    # EC2 resources][5].
+    # EC2 resources][4].
     #
     # Linux instances have access to the public key of the key pair at boot.
     # You can use this key to provide secure access to the instance. Amazon
     # EC2 public images use this feature to provide secure access without
-    # passwords. For more information, see [Key pairs][6].
+    # passwords. For more information, see [Key pairs][5].
     #
     # For troubleshooting, see [What to do if an instance immediately
-    # terminates][7], and [Troubleshooting connecting to your instance][8].
-    #
-    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
-    # EC2-Classic to a VPC. For more information, see [Migrate from
-    # EC2-Classic to a VPC][9] in the *Amazon EC2 User Guide*.
-    #
-    #  </note>
+    # terminates][6], and [Troubleshooting connecting to your instance][7].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html#vpc-only-instance-types
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html
-    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
-    # [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
-    # [6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
-    # [7]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_InstanceStraightToTerminated.html
-    # [8]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html
-    # [9]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
+    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
+    # [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
+    # [6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_InstanceStraightToTerminated.html
+    # [7]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html
     #
     # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
     #   The block device mapping, which defines the EBS volumes and instance
@@ -53587,22 +53529,21 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
     #
     # @option params [Integer] :ipv_6_address_count
-    #   \[EC2-VPC\] The number of IPv6 addresses to associate with the primary
-    #   network interface. Amazon EC2 chooses the IPv6 addresses from the
-    #   range of your subnet. You cannot specify this option and the option to
-    #   assign specific IPv6 addresses in the same request. You can specify
-    #   this option if you've specified a minimum number of instances to
-    #   launch.
+    #   The number of IPv6 addresses to associate with the primary network
+    #   interface. Amazon EC2 chooses the IPv6 addresses from the range of
+    #   your subnet. You cannot specify this option and the option to assign
+    #   specific IPv6 addresses in the same request. You can specify this
+    #   option if you've specified a minimum number of instances to launch.
     #
     #   You cannot specify this option and the network interfaces option in
     #   the same request.
     #
     # @option params [Array<Types::InstanceIpv6Address>] :ipv_6_addresses
-    #   \[EC2-VPC\] The IPv6 addresses from the range of the subnet to
-    #   associate with the primary network interface. You cannot specify this
-    #   option and the option to assign a number of IPv6 addresses in the same
-    #   request. You cannot specify this option if you've specified a minimum
-    #   number of instances to launch.
+    #   The IPv6 addresses from the range of the subnet to associate with the
+    #   primary network interface. You cannot specify this option and the
+    #   option to assign a number of IPv6 addresses in the same request. You
+    #   cannot specify this option if you've specified a minimum number of
+    #   instances to launch.
     #
     #   You cannot specify this option and the network interfaces option in
     #   the same request.
@@ -53691,7 +53632,7 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html
     #
     # @option params [Array<String>] :security_groups
-    #   \[EC2-Classic, default VPC\] The names of the security groups.
+    #   \[Default VPC\] The names of the security groups.
     #
     #   If you specify a network interface, you must specify any security
     #   groups as part of the network interface.
@@ -53699,7 +53640,7 @@ module Aws::EC2
     #   Default: Amazon EC2 uses the default security group.
     #
     # @option params [String] :subnet_id
-    #   \[EC2-VPC\] The ID of the subnet to launch the instance into.
+    #   The ID of the subnet to launch the instance into.
     #
     #   If you specify a network interface, you must specify any subnets as
     #   part of the network interface.
@@ -53783,8 +53724,8 @@ module Aws::EC2
     #   as part of the network interface.
     #
     # @option params [String] :private_ip_address
-    #   \[EC2-VPC\] The primary IPv4 address. You must specify a value from
-    #   the IPv4 address range of the subnet.
+    #   The primary IPv4 address. You must specify a value from the IPv4
+    #   address range of the subnet.
     #
     #   Only one private IP address can be designated as primary. You can't
     #   specify this option if you've specified the option to designate a
@@ -54138,6 +54079,7 @@ module Aws::EC2
     #     cpu_options: {
     #       core_count: 1,
     #       threads_per_core: 1,
+    #       amd_sev_snp: "enabled", # accepts enabled, disabled
     #     },
     #     capacity_reservation_specification: {
     #       capacity_reservation_preference: "open", # accepts open, none
@@ -54294,6 +54236,7 @@ module Aws::EC2
     #   resp.instances[0].virtualization_type #=> String, one of "hvm", "paravirtual"
     #   resp.instances[0].cpu_options.core_count #=> Integer
     #   resp.instances[0].cpu_options.threads_per_core #=> Integer
+    #   resp.instances[0].cpu_options.amd_sev_snp #=> String, one of "enabled", "disabled"
     #   resp.instances[0].capacity_reservation_id #=> String
     #   resp.instances[0].capacity_reservation_specification.capacity_reservation_preference #=> String, one of "open", "none"
     #   resp.instances[0].capacity_reservation_specification.capacity_reservation_target.capacity_reservation_id #=> String
@@ -56836,7 +56779,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.376.0'
+      context[:gem_version] = '1.377.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

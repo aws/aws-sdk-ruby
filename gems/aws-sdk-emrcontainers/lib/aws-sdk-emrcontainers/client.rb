@@ -1000,6 +1000,68 @@ module Aws::EMRContainers
       req.send_request(options)
     end
 
+    # Generate a session token to connect to a managed endpoint.
+    #
+    # @option params [required, String] :endpoint_identifier
+    #   The ARN of the managed endpoint for which the request is submitted.
+    #
+    # @option params [required, String] :virtual_cluster_identifier
+    #   The ARN of the Virtual Cluster which the Managed Endpoint belongs to.
+    #
+    # @option params [required, String] :execution_role_arn
+    #   The IAM Execution Role ARN that will be used by the job run.
+    #
+    # @option params [required, String] :credential_type
+    #   Type of the token requested. Currently supported and default value of
+    #   this field is “TOKEN.”
+    #
+    # @option params [Integer] :duration_in_seconds
+    #   Duration in seconds for which the session token is valid. The default
+    #   duration is 15 minutes and the maximum is 12 hours.
+    #
+    # @option params [String] :log_context
+    #   String identifier used to separate sections of the execution logs
+    #   uploaded to S3.
+    #
+    # @option params [String] :client_token
+    #   The client idempotency token of the job run request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::GetManagedEndpointSessionCredentialsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetManagedEndpointSessionCredentialsResponse#id #id} => String
+    #   * {Types::GetManagedEndpointSessionCredentialsResponse#credentials #credentials} => Types::Credentials
+    #   * {Types::GetManagedEndpointSessionCredentialsResponse#expires_at #expires_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_managed_endpoint_session_credentials({
+    #     endpoint_identifier: "String2048", # required
+    #     virtual_cluster_identifier: "String2048", # required
+    #     execution_role_arn: "IAMRoleArn", # required
+    #     credential_type: "CredentialType", # required
+    #     duration_in_seconds: 1,
+    #     log_context: "LogContext",
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.credentials.token #=> String
+    #   resp.expires_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/GetManagedEndpointSessionCredentials AWS API Documentation
+    #
+    # @overload get_managed_endpoint_session_credentials(params = {})
+    # @param [Hash] params ({})
+    def get_managed_endpoint_session_credentials(params = {}, options = {})
+      req = build_request(:get_managed_endpoint_session_credentials, params)
+      req.send_request(options)
+    end
+
     # Lists job runs based on a set of parameters. A job run is a unit of
     # work, such as a Spark jar, PySpark script, or SparkSQL query, that you
     # submit to Amazon EMR on EKS.
@@ -1553,7 +1615,7 @@ module Aws::EMRContainers
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emrcontainers'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

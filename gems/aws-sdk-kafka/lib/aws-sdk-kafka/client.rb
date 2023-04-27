@@ -471,7 +471,23 @@ module Aws::Kafka
     #         public_access: {
     #           type: "__string",
     #         },
+    #         vpc_connectivity: {
+    #           client_authentication: {
+    #             sasl: {
+    #               scram: {
+    #                 enabled: false,
+    #               },
+    #               iam: {
+    #                 enabled: false,
+    #               },
+    #             },
+    #             tls: {
+    #               enabled: false,
+    #             },
+    #           },
+    #         },
     #       },
+    #       zone_ids: ["__string"],
     #     },
     #     client_authentication: {
     #       sasl: {
@@ -603,7 +619,23 @@ module Aws::Kafka
     #           public_access: {
     #             type: "__string",
     #           },
+    #           vpc_connectivity: {
+    #             client_authentication: {
+    #               sasl: {
+    #                 scram: {
+    #                   enabled: false,
+    #                 },
+    #                 iam: {
+    #                   enabled: false,
+    #                 },
+    #               },
+    #               tls: {
+    #                 enabled: false,
+    #               },
+    #             },
+    #           },
     #         },
+    #         zone_ids: ["__string"],
     #       },
     #       client_authentication: {
     #         sasl: {
@@ -751,6 +783,72 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Creates a new Amazon MSK VPC connection.
+    #
+    # @option params [required, String] :target_cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #
+    # @option params [required, String] :authentication
+    #
+    # @option params [required, String] :vpc_id
+    #   The VPC ID of the VPC connection.
+    #
+    # @option params [required, Array<String>] :client_subnets
+    #   The list of subnets in the client VPC.
+    #
+    # @option params [required, Array<String>] :security_groups
+    #   The list of security groups to attach to the VPC connection.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Create tags when creating the VPC connection.
+    #
+    # @return [Types::CreateVpcConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVpcConnectionResponse#vpc_connection_arn #vpc_connection_arn} => String
+    #   * {Types::CreateVpcConnectionResponse#state #state} => String
+    #   * {Types::CreateVpcConnectionResponse#authentication #authentication} => String
+    #   * {Types::CreateVpcConnectionResponse#vpc_id #vpc_id} => String
+    #   * {Types::CreateVpcConnectionResponse#client_subnets #client_subnets} => Array&lt;String&gt;
+    #   * {Types::CreateVpcConnectionResponse#security_groups #security_groups} => Array&lt;String&gt;
+    #   * {Types::CreateVpcConnectionResponse#creation_time #creation_time} => Time
+    #   * {Types::CreateVpcConnectionResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_vpc_connection({
+    #     target_cluster_arn: "__string", # required
+    #     authentication: "__string", # required
+    #     vpc_id: "__string", # required
+    #     client_subnets: ["__string"], # required
+    #     security_groups: ["__string"], # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_connection_arn #=> String
+    #   resp.state #=> String, one of "CREATING", "AVAILABLE", "INACTIVE", "DEACTIVATING", "DELETING", "FAILED", "REJECTED", "REJECTING"
+    #   resp.authentication #=> String
+    #   resp.vpc_id #=> String
+    #   resp.client_subnets #=> Array
+    #   resp.client_subnets[0] #=> String
+    #   resp.security_groups #=> Array
+    #   resp.security_groups[0] #=> String
+    #   resp.creation_time #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateVpcConnection AWS API Documentation
+    #
+    # @overload create_vpc_connection(params = {})
+    # @param [Hash] params ({})
+    def create_vpc_connection(params = {}, options = {})
+      req = build_request(:create_vpc_connection, params)
+      req.send_request(options)
+    end
+
     # Deletes the MSK cluster specified by the Amazon Resource Name (ARN) in
     # the request.
     #
@@ -815,6 +913,35 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Deletes the Amazon MSK VPC connection specified in your request.
+    #
+    # @option params [required, String] :arn
+    #
+    # @return [Types::DeleteVpcConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteVpcConnectionResponse#vpc_connection_arn #vpc_connection_arn} => String
+    #   * {Types::DeleteVpcConnectionResponse#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_vpc_connection({
+    #     arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_connection_arn #=> String
+    #   resp.state #=> String, one of "CREATING", "AVAILABLE", "INACTIVE", "DEACTIVATING", "DELETING", "FAILED", "REJECTED", "REJECTING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteVpcConnection AWS API Documentation
+    #
+    # @overload delete_vpc_connection(params = {})
+    # @param [Hash] params ({})
+    def delete_vpc_connection(params = {}, options = {})
+      req = build_request(:delete_vpc_connection, params)
+      req.send_request(options)
+    end
+
     # Returns a description of the MSK cluster whose Amazon Resource Name
     # (ARN) is specified in the request.
     #
@@ -843,6 +970,11 @@ module Aws::Kafka
     #   resp.cluster_info.broker_node_group_info.storage_info.ebs_storage_info.provisioned_throughput.volume_throughput #=> Integer
     #   resp.cluster_info.broker_node_group_info.storage_info.ebs_storage_info.volume_size #=> Integer
     #   resp.cluster_info.broker_node_group_info.connectivity_info.public_access.type #=> String
+    #   resp.cluster_info.broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram.enabled #=> Boolean
+    #   resp.cluster_info.broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
+    #   resp.cluster_info.broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_info.broker_node_group_info.zone_ids #=> Array
+    #   resp.cluster_info.broker_node_group_info.zone_ids[0] #=> String
     #   resp.cluster_info.client_authentication.sasl.scram.enabled #=> Boolean
     #   resp.cluster_info.client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_info.client_authentication.tls.certificate_authority_arn_list #=> Array
@@ -928,6 +1060,11 @@ module Aws::Kafka
     #   resp.cluster_info.provisioned.broker_node_group_info.storage_info.ebs_storage_info.provisioned_throughput.volume_throughput #=> Integer
     #   resp.cluster_info.provisioned.broker_node_group_info.storage_info.ebs_storage_info.volume_size #=> Integer
     #   resp.cluster_info.provisioned.broker_node_group_info.connectivity_info.public_access.type #=> String
+    #   resp.cluster_info.provisioned.broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram.enabled #=> Boolean
+    #   resp.cluster_info.provisioned.broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
+    #   resp.cluster_info.provisioned.broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_info.provisioned.broker_node_group_info.zone_ids #=> Array
+    #   resp.cluster_info.provisioned.broker_node_group_info.zone_ids[0] #=> String
     #   resp.cluster_info.provisioned.current_broker_software_info.configuration_arn #=> String
     #   resp.cluster_info.provisioned.current_broker_software_info.configuration_revision #=> Integer
     #   resp.cluster_info.provisioned.current_broker_software_info.kafka_version #=> String
@@ -1028,6 +1165,9 @@ module Aws::Kafka
     #   resp.cluster_operation_info.source_cluster_info.encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
     #   resp.cluster_operation_info.source_cluster_info.encryption_info.encryption_in_transit.in_cluster #=> Boolean
     #   resp.cluster_operation_info.source_cluster_info.connectivity_info.public_access.type #=> String
+    #   resp.cluster_operation_info.source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram.enabled #=> Boolean
+    #   resp.cluster_operation_info.source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
+    #   resp.cluster_operation_info.source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
     #   resp.cluster_operation_info.source_cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
     #   resp.cluster_operation_info.target_cluster_info.broker_ebs_volume_info #=> Array
     #   resp.cluster_operation_info.target_cluster_info.broker_ebs_volume_info[0].kafka_broker_node_id #=> String
@@ -1059,7 +1199,15 @@ module Aws::Kafka
     #   resp.cluster_operation_info.target_cluster_info.encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
     #   resp.cluster_operation_info.target_cluster_info.encryption_info.encryption_in_transit.in_cluster #=> Boolean
     #   resp.cluster_operation_info.target_cluster_info.connectivity_info.public_access.type #=> String
+    #   resp.cluster_operation_info.target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram.enabled #=> Boolean
+    #   resp.cluster_operation_info.target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
+    #   resp.cluster_operation_info.target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
     #   resp.cluster_operation_info.target_cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
+    #   resp.cluster_operation_info.vpc_connection_info.vpc_connection_arn #=> String
+    #   resp.cluster_operation_info.vpc_connection_info.owner #=> String
+    #   resp.cluster_operation_info.vpc_connection_info.user_identity.type #=> String, one of "AWSACCOUNT", "AWSSERVICE"
+    #   resp.cluster_operation_info.vpc_connection_info.user_identity.principal_id #=> String
+    #   resp.cluster_operation_info.vpc_connection_info.creation_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeClusterOperation AWS API Documentation
     #
@@ -1150,6 +1298,52 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Displays information about the specified Amazon MSK VPC connection.
+    #
+    # @option params [required, String] :arn
+    #
+    # @return [Types::DescribeVpcConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeVpcConnectionResponse#vpc_connection_arn #vpc_connection_arn} => String
+    #   * {Types::DescribeVpcConnectionResponse#target_cluster_arn #target_cluster_arn} => String
+    #   * {Types::DescribeVpcConnectionResponse#state #state} => String
+    #   * {Types::DescribeVpcConnectionResponse#authentication #authentication} => String
+    #   * {Types::DescribeVpcConnectionResponse#vpc_id #vpc_id} => String
+    #   * {Types::DescribeVpcConnectionResponse#subnets #subnets} => Array&lt;String&gt;
+    #   * {Types::DescribeVpcConnectionResponse#security_groups #security_groups} => Array&lt;String&gt;
+    #   * {Types::DescribeVpcConnectionResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeVpcConnectionResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_vpc_connection({
+    #     arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_connection_arn #=> String
+    #   resp.target_cluster_arn #=> String
+    #   resp.state #=> String, one of "CREATING", "AVAILABLE", "INACTIVE", "DEACTIVATING", "DELETING", "FAILED", "REJECTED", "REJECTING"
+    #   resp.authentication #=> String
+    #   resp.vpc_id #=> String
+    #   resp.subnets #=> Array
+    #   resp.subnets[0] #=> String
+    #   resp.security_groups #=> Array
+    #   resp.security_groups[0] #=> String
+    #   resp.creation_time #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeVpcConnection AWS API Documentation
+    #
+    # @overload describe_vpc_connection(params = {})
+    # @param [Hash] params ({})
+    def describe_vpc_connection(params = {}, options = {})
+      req = build_request(:describe_vpc_connection, params)
+      req.send_request(options)
+    end
+
     # Disassociates one or more Scram Secrets from an Amazon MSK cluster.
     #
     # @option params [required, String] :cluster_arn
@@ -1199,6 +1393,9 @@ module Aws::Kafka
     #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_tls #bootstrap_broker_string_tls} => String
     #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_sasl_scram #bootstrap_broker_string_sasl_scram} => String
     #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_sasl_iam #bootstrap_broker_string_sasl_iam} => String
+    #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_vpc_connectivity_tls #bootstrap_broker_string_vpc_connectivity_tls} => String
+    #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_vpc_connectivity_sasl_scram #bootstrap_broker_string_vpc_connectivity_sasl_scram} => String
+    #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_vpc_connectivity_sasl_iam #bootstrap_broker_string_vpc_connectivity_sasl_iam} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1215,6 +1412,9 @@ module Aws::Kafka
     #   resp.bootstrap_broker_string_tls #=> String
     #   resp.bootstrap_broker_string_sasl_scram #=> String
     #   resp.bootstrap_broker_string_sasl_iam #=> String
+    #   resp.bootstrap_broker_string_vpc_connectivity_tls #=> String
+    #   resp.bootstrap_broker_string_vpc_connectivity_sasl_scram #=> String
+    #   resp.bootstrap_broker_string_vpc_connectivity_sasl_iam #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/GetBootstrapBrokers AWS API Documentation
     #
@@ -1325,6 +1525,9 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].source_cluster_info.encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
     #   resp.cluster_operation_info_list[0].source_cluster_info.encryption_info.encryption_in_transit.in_cluster #=> Boolean
     #   resp.cluster_operation_info_list[0].source_cluster_info.connectivity_info.public_access.type #=> String
+    #   resp.cluster_operation_info_list[0].source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram.enabled #=> Boolean
+    #   resp.cluster_operation_info_list[0].source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
+    #   resp.cluster_operation_info_list[0].source_cluster_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
     #   resp.cluster_operation_info_list[0].source_cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_ebs_volume_info #=> Array
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_ebs_volume_info[0].kafka_broker_node_id #=> String
@@ -1356,7 +1559,15 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].target_cluster_info.encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
     #   resp.cluster_operation_info_list[0].target_cluster_info.encryption_info.encryption_in_transit.in_cluster #=> Boolean
     #   resp.cluster_operation_info_list[0].target_cluster_info.connectivity_info.public_access.type #=> String
+    #   resp.cluster_operation_info_list[0].target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram.enabled #=> Boolean
+    #   resp.cluster_operation_info_list[0].target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
+    #   resp.cluster_operation_info_list[0].target_cluster_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
     #   resp.cluster_operation_info_list[0].target_cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
+    #   resp.cluster_operation_info_list[0].vpc_connection_info.vpc_connection_arn #=> String
+    #   resp.cluster_operation_info_list[0].vpc_connection_info.owner #=> String
+    #   resp.cluster_operation_info_list[0].vpc_connection_info.user_identity.type #=> String, one of "AWSACCOUNT", "AWSSERVICE"
+    #   resp.cluster_operation_info_list[0].vpc_connection_info.user_identity.principal_id #=> String
+    #   resp.cluster_operation_info_list[0].vpc_connection_info.creation_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClusterOperations AWS API Documentation
@@ -1405,6 +1616,11 @@ module Aws::Kafka
     #   resp.cluster_info_list[0].broker_node_group_info.storage_info.ebs_storage_info.provisioned_throughput.volume_throughput #=> Integer
     #   resp.cluster_info_list[0].broker_node_group_info.storage_info.ebs_storage_info.volume_size #=> Integer
     #   resp.cluster_info_list[0].broker_node_group_info.connectivity_info.public_access.type #=> String
+    #   resp.cluster_info_list[0].broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram.enabled #=> Boolean
+    #   resp.cluster_info_list[0].broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
+    #   resp.cluster_info_list[0].broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_info_list[0].broker_node_group_info.zone_ids #=> Array
+    #   resp.cluster_info_list[0].broker_node_group_info.zone_ids[0] #=> String
     #   resp.cluster_info_list[0].client_authentication.sasl.scram.enabled #=> Boolean
     #   resp.cluster_info_list[0].client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_info_list[0].client_authentication.tls.certificate_authority_arn_list #=> Array
@@ -1509,6 +1725,11 @@ module Aws::Kafka
     #   resp.cluster_info_list[0].provisioned.broker_node_group_info.storage_info.ebs_storage_info.provisioned_throughput.volume_throughput #=> Integer
     #   resp.cluster_info_list[0].provisioned.broker_node_group_info.storage_info.ebs_storage_info.volume_size #=> Integer
     #   resp.cluster_info_list[0].provisioned.broker_node_group_info.connectivity_info.public_access.type #=> String
+    #   resp.cluster_info_list[0].provisioned.broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram.enabled #=> Boolean
+    #   resp.cluster_info_list[0].provisioned.broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam.enabled #=> Boolean
+    #   resp.cluster_info_list[0].provisioned.broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_info_list[0].provisioned.broker_node_group_info.zone_ids #=> Array
+    #   resp.cluster_info_list[0].provisioned.broker_node_group_info.zone_ids[0] #=> String
     #   resp.cluster_info_list[0].provisioned.current_broker_software_info.configuration_arn #=> String
     #   resp.cluster_info_list[0].provisioned.current_broker_software_info.configuration_revision #=> Integer
     #   resp.cluster_info_list[0].provisioned.current_broker_software_info.kafka_version #=> String
@@ -1792,6 +2013,195 @@ module Aws::Kafka
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Displays a list of client VPC connections.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListClientVpcConnectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListClientVpcConnectionsResponse#next_token #next_token} => String
+    #   * {Types::ListClientVpcConnectionsResponse#client_vpc_connections #client_vpc_connections} => Array&lt;Types::ClientVpcConnection&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_client_vpc_connections({
+    #     cluster_arn: "__string", # required
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.client_vpc_connections #=> Array
+    #   resp.client_vpc_connections[0].authentication #=> String
+    #   resp.client_vpc_connections[0].creation_time #=> Time
+    #   resp.client_vpc_connections[0].state #=> String, one of "CREATING", "AVAILABLE", "INACTIVE", "DEACTIVATING", "DELETING", "FAILED", "REJECTED", "REJECTING"
+    #   resp.client_vpc_connections[0].vpc_connection_arn #=> String
+    #   resp.client_vpc_connections[0].owner #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClientVpcConnections AWS API Documentation
+    #
+    # @overload list_client_vpc_connections(params = {})
+    # @param [Hash] params ({})
+    def list_client_vpc_connections(params = {}, options = {})
+      req = build_request(:list_client_vpc_connections, params)
+      req.send_request(options)
+    end
+
+    # Displays a list of Amazon MSK VPC connections.
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListVpcConnectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVpcConnectionsResponse#next_token #next_token} => String
+    #   * {Types::ListVpcConnectionsResponse#vpc_connections #vpc_connections} => Array&lt;Types::VpcConnection&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_vpc_connections({
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.vpc_connections #=> Array
+    #   resp.vpc_connections[0].vpc_connection_arn #=> String
+    #   resp.vpc_connections[0].target_cluster_arn #=> String
+    #   resp.vpc_connections[0].creation_time #=> Time
+    #   resp.vpc_connections[0].authentication #=> String
+    #   resp.vpc_connections[0].vpc_id #=> String
+    #   resp.vpc_connections[0].state #=> String, one of "CREATING", "AVAILABLE", "INACTIVE", "DEACTIVATING", "DELETING", "FAILED", "REJECTED", "REJECTING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListVpcConnections AWS API Documentation
+    #
+    # @overload list_vpc_connections(params = {})
+    # @param [Hash] params ({})
+    def list_vpc_connections(params = {}, options = {})
+      req = build_request(:list_vpc_connections, params)
+      req.send_request(options)
+    end
+
+    # @option params [String] :cluster_arn
+    #
+    # @option params [required, String] :vpc_connection_arn
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reject_client_vpc_connection({
+    #     cluster_arn: "__string",
+    #     vpc_connection_arn: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/RejectClientVpcConnection AWS API Documentation
+    #
+    # @overload reject_client_vpc_connection(params = {})
+    # @param [Hash] params ({})
+    def reject_client_vpc_connection(params = {}, options = {})
+      req = build_request(:reject_client_vpc_connection, params)
+      req.send_request(options)
+    end
+
+    # Deletes the MSK cluster policy specified by the Amazon Resource Name
+    # (ARN) in your request.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_cluster_policy({
+    #     cluster_arn: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteClusterPolicy AWS API Documentation
+    #
+    # @overload delete_cluster_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_cluster_policy(params = {}, options = {})
+      req = build_request(:delete_cluster_policy, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the contents of the specified MSK cluster policy.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @return [Types::GetClusterPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetClusterPolicyResponse#current_version #current_version} => String
+    #   * {Types::GetClusterPolicyResponse#policy #policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cluster_policy({
+    #     cluster_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.current_version #=> String
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/GetClusterPolicy AWS API Documentation
+    #
+    # @overload get_cluster_policy(params = {})
+    # @param [Hash] params ({})
+    def get_cluster_policy(params = {}, options = {})
+      req = build_request(:get_cluster_policy, params)
+      req.send_request(options)
+    end
+
+    # Creates or updates the specified MSK cluster policy. If updating the
+    # policy, the currentVersion field is required in the request payload.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @option params [String] :current_version
+    #
+    # @option params [required, String] :policy
+    #
+    # @return [Types::PutClusterPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutClusterPolicyResponse#current_version #current_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_cluster_policy({
+    #     cluster_arn: "__string", # required
+    #     current_version: "__string",
+    #     policy: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.current_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/PutClusterPolicy AWS API Documentation
+    #
+    # @overload put_cluster_policy(params = {})
+    # @param [Hash] params ({})
+    def put_cluster_policy(params = {}, options = {})
+      req = build_request(:put_cluster_policy, params)
       req.send_request(options)
     end
 
@@ -2137,7 +2547,7 @@ module Aws::Kafka
       req.send_request(options)
     end
 
-    # Updates the connectivity configuration for the cluster.
+    # Updates the connectivity configuration for the MSK cluster.
     #
     # @option params [required, String] :cluster_arn
     #
@@ -2159,6 +2569,21 @@ module Aws::Kafka
     #     connectivity_info: { # required
     #       public_access: {
     #         type: "__string",
+    #       },
+    #       vpc_connectivity: {
+    #         client_authentication: {
+    #           sasl: {
+    #             scram: {
+    #               enabled: false,
+    #             },
+    #             iam: {
+    #               enabled: false,
+    #             },
+    #           },
+    #           tls: {
+    #             enabled: false,
+    #           },
+    #         },
     #       },
     #     },
     #     current_version: "__string", # required
@@ -2384,7 +2809,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

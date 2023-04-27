@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2023-04-27)
+------------------
+
+* Feature - Updated X-Ray documentation with Resource Policy API descriptions.
+
 1.51.0 (2023-01-18)
 ------------------
 

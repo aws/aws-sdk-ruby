@@ -1342,7 +1342,7 @@ module Aws::GuardDuty
     #     filter_criteria: {
     #       filter_criterion: [
     #         {
-    #           criterion_key: "EC2_INSTANCE_ARN", # accepts EC2_INSTANCE_ARN, SCAN_ID, ACCOUNT_ID, GUARDDUTY_FINDING_ID, SCAN_START_TIME, SCAN_STATUS
+    #           criterion_key: "EC2_INSTANCE_ARN", # accepts EC2_INSTANCE_ARN, SCAN_ID, ACCOUNT_ID, GUARDDUTY_FINDING_ID, SCAN_START_TIME, SCAN_STATUS, SCAN_TYPE
     #           filter_condition: {
     #             equals_value: "NonEmptyString",
     #             greater_than: 1,
@@ -1363,7 +1363,7 @@ module Aws::GuardDuty
     #   resp.scans[0].detector_id #=> String
     #   resp.scans[0].admin_detector_id #=> String
     #   resp.scans[0].scan_id #=> String
-    #   resp.scans[0].scan_status #=> String, one of "RUNNING", "COMPLETED", "FAILED"
+    #   resp.scans[0].scan_status #=> String, one of "RUNNING", "COMPLETED", "FAILED", "SKIPPED"
     #   resp.scans[0].failure_reason #=> String
     #   resp.scans[0].scan_start_time #=> Time
     #   resp.scans[0].scan_end_time #=> Time
@@ -1382,6 +1382,7 @@ module Aws::GuardDuty
     #   resp.scans[0].attached_volumes[0].encryption_type #=> String
     #   resp.scans[0].attached_volumes[0].snapshot_arn #=> String
     #   resp.scans[0].attached_volumes[0].kms_key_arn #=> String
+    #   resp.scans[0].scan_type #=> String, one of "GUARDDUTY_INITIATED", "ON_DEMAND"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeMalwareScans AWS API Documentation
@@ -2204,6 +2205,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.ebs_volume_scan_details.scan_detections.threat_detected_by_name.threat_names[0].file_paths[0].volume_arn #=> String
     #   resp.findings[0].service.ebs_volume_scan_details.scan_detections.threat_detected_by_name.threat_names[0].file_paths[0].hash #=> String
     #   resp.findings[0].service.ebs_volume_scan_details.scan_detections.threat_detected_by_name.threat_names[0].file_paths[0].file_name #=> String
+    #   resp.findings[0].service.ebs_volume_scan_details.scan_type #=> String, one of "GUARDDUTY_INITIATED", "ON_DEMAND"
     #   resp.findings[0].service.runtime_details.process.name #=> String
     #   resp.findings[0].service.runtime_details.process.executable_path #=> String
     #   resp.findings[0].service.runtime_details.process.executable_sha_256 #=> String
@@ -3533,6 +3535,40 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Initiates the malware scan. Invoking this API will automatically
+    # create the [Service-linked role ][1] in the corresponding account.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/slr-permissions-malware-protection.html
+    #
+    # @option params [required, String] :resource_arn
+    #   Amazon Resource Name (ARN) of the resource for which you invoked the
+    #   API.
+    #
+    # @return [Types::StartMalwareScanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMalwareScanResponse#scan_id #scan_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_malware_scan({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scan_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StartMalwareScan AWS API Documentation
+    #
+    # @overload start_malware_scan(params = {})
+    # @param [Hash] params ({})
+    def start_malware_scan(params = {}, options = {})
+      req = build_request(:start_malware_scan, params)
+      req.send_request(options)
+    end
+
     # Turns on GuardDuty monitoring of the specified member accounts. Use
     # this operation to restart monitoring of accounts that you stopped
     # monitoring with the [StopMonitoringMembers][1] operation.
@@ -4251,7 +4287,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -76,20 +76,25 @@ module Aws::IoTDeviceAdvisor
 
     class DeleteSuiteDefinitionResponse < Aws::EmptyStructure; end
 
-    # Information of a test device. A thing ARN or a certificate ARN is
-    # required.
+    # Information of a test device. A thing ARN, certificate ARN or device
+    # role ARN is required.
     #
     # @!attribute [rw] thing_arn
-    #   Lists devices thing ARN.
+    #   Lists device's thing ARN.
     #   @return [String]
     #
     # @!attribute [rw] certificate_arn
-    #   Lists devices certificate ARN.
+    #   Lists device's certificate ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_role_arn
+    #   Lists device's role ARN.
     #   @return [String]
     #
     class DeviceUnderTest < Struct.new(
       :thing_arn,
-      :certificate_arn)
+      :certificate_arn,
+      :device_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -102,9 +107,19 @@ module Aws::IoTDeviceAdvisor
     #   The certificate ARN of the device. This is an optional parameter.
     #   @return [String]
     #
+    # @!attribute [rw] device_role_arn
+    #   The device role ARN of the device. This is an optional parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_method
+    #   The authentication method used during the device connection.
+    #   @return [String]
+    #
     class GetEndpointRequest < Struct.new(
       :thing_arn,
-      :certificate_arn)
+      :certificate_arn,
+      :device_role_arn,
+      :authentication_method)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -14,6 +14,7 @@ module Aws::IoTDeviceAdvisor
     include Seahorse::Model
 
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
+    AuthenticationMethod = Shapes::StringShape.new(name: 'AuthenticationMethod')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateSuiteDefinitionRequest = Shapes::StructureShape.new(name: 'CreateSuiteDefinitionRequest')
     CreateSuiteDefinitionResponse = Shapes::StructureShape.new(name: 'CreateSuiteDefinitionResponse')
@@ -114,12 +115,15 @@ module Aws::IoTDeviceAdvisor
 
     DeviceUnderTest.add_member(:thing_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "thingArn"))
     DeviceUnderTest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "certificateArn"))
+    DeviceUnderTest.add_member(:device_role_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "deviceRoleArn"))
     DeviceUnderTest.struct_class = Types::DeviceUnderTest
 
     DeviceUnderTestList.member = Shapes::ShapeRef.new(shape: DeviceUnderTest)
 
     GetEndpointRequest.add_member(:thing_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location: "querystring", location_name: "thingArn"))
     GetEndpointRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location: "querystring", location_name: "certificateArn"))
+    GetEndpointRequest.add_member(:device_role_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location: "querystring", location_name: "deviceRoleArn"))
+    GetEndpointRequest.add_member(:authentication_method, Shapes::ShapeRef.new(shape: AuthenticationMethod, location: "querystring", location_name: "authenticationMethod"))
     GetEndpointRequest.struct_class = Types::GetEndpointRequest
 
     GetEndpointResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "endpoint"))

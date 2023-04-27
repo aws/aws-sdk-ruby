@@ -153,6 +153,10 @@ module Aws::Kafka
     #   Information about the broker access configuration.
     #   @return [Types::ConnectivityInfo]
     #
+    # @!attribute [rw] zone_ids
+    #   The zoneIds for the cluster.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/BrokerNodeGroupInfo AWS API Documentation
     #
     class BrokerNodeGroupInfo < Struct.new(
@@ -161,7 +165,8 @@ module Aws::Kafka
       :instance_type,
       :security_groups,
       :storage_info,
-      :connectivity_info)
+      :connectivity_info,
+      :zone_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -251,6 +256,21 @@ module Aws::Kafka
       :sasl,
       :tls,
       :unauthenticated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sasl
+    #   @return [Types::VpcConnectivitySasl]
+    #
+    # @!attribute [rw] tls
+    #   @return [Types::VpcConnectivityTls]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/VpcConnectivityClientAuthentication AWS API Documentation
+    #
+    class VpcConnectivityClientAuthentication < Struct.new(
+      :sasl,
+      :tls)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -442,6 +462,11 @@ module Aws::Kafka
     #   Information about cluster attributes after a cluster is updated.
     #   @return [Types::MutableClusterInfo]
     #
+    # @!attribute [rw] vpc_connection_info
+    #   Description of the VPC connection for CreateVpcConnection and
+    #   DeleteVpcConnection operations.
+    #   @return [Types::VpcConnectionInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClusterOperationInfo AWS API Documentation
     #
     class ClusterOperationInfo < Struct.new(
@@ -455,7 +480,8 @@ module Aws::Kafka
       :operation_state,
       :operation_type,
       :source_cluster_info,
-      :target_cluster_info)
+      :target_cluster_info,
+      :vpc_connection_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -493,6 +519,79 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # The client VPC connection object.
+    #
+    # @!attribute [rw] authentication
+    #   The VPC connection authentication type.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation time of the VPC connection.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The state of a configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_connection_arn
+    #   The Amazon Resource Name (ARN) of the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The owner of the VPC connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClientVpcConnection AWS API Documentation
+    #
+    class ClientVpcConnection < Struct.new(
+      :authentication,
+      :creation_time,
+      :state,
+      :vpc_connection_arn,
+      :owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The VPC connection object.
+    #
+    # @!attribute [rw] vpc_connection_arn
+    #   The Amazon Resource Name (ARN) of the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation time of the VPC connection.
+    #   @return [Time]
+    #
+    # @!attribute [rw] authentication
+    #   The authentication type for the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The VPC ID of the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of a configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/VpcConnection AWS API Documentation
+    #
+    class VpcConnection < Struct.new(
+      :vpc_connection_arn,
+      :target_cluster_arn,
+      :creation_time,
+      :authentication,
+      :vpc_id,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains source Apache Kafka versions and compatible target Apache
     # Kafka versions.
     #
@@ -518,6 +617,7 @@ module Aws::Kafka
     #   @return [String]
     #
     # @!attribute [rw] creation_time
+    #   The time when the configuration was created.
     #   @return [Time]
     #
     # @!attribute [rw] description
@@ -624,10 +724,15 @@ module Aws::Kafka
     #   Public access control for brokers.
     #   @return [Types::PublicAccess]
     #
+    # @!attribute [rw] vpc_connectivity
+    #   VpcConnectivity control for brokers.
+    #   @return [Types::VpcConnectivity]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ConnectivityInfo AWS API Documentation
     #
     class ConnectivityInfo < Struct.new(
-      :public_access)
+      :public_access,
+      :vpc_connectivity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -796,6 +901,93 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Request body for CreateVpcConnection.
+    #
+    # @!attribute [rw] target_cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The VPC ID of the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_subnets
+    #   The list of subnets in the client VPC.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_groups
+    #   The list of security groups to attach to the VPC connection.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   Create tags when creating the VPC connection.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateVpcConnectionRequest AWS API Documentation
+    #
+    class CreateVpcConnectionRequest < Struct.new(
+      :target_cluster_arn,
+      :authentication,
+      :vpc_id,
+      :client_subnets,
+      :security_groups,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response body for CreateVpcConnection
+    #
+    # @!attribute [rw] vpc_connection_arn
+    #   The Amazon Resource Name (ARN) of the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the VPC connection. The only possible state is
+    #   CREATING.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The VPC ID of the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_subnets
+    #   The list of subnets in the client VPC.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_groups
+    #   The list of security groups attached to the VPC connection.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the VPC connection was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   Tags attached to the VPC connection.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateVpcConnectionResponse AWS API Documentation
+    #
+    class CreateVpcConnectionResponse < Struct.new(
+      :vpc_connection_arn,
+      :state,
+      :authentication,
+      :vpc_id,
+      :client_subnets,
+      :security_groups,
+      :creation_time,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster_arn
     #   @return [String]
     #
@@ -861,6 +1053,39 @@ module Aws::Kafka
     #
     class DeleteConfigurationResponse < Struct.new(
       :arn,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request body for DeleteVpcConnection.
+    #
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteVpcConnectionRequest AWS API Documentation
+    #
+    class DeleteVpcConnectionRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response body for DeleteVpcConnection.
+    #
+    # @!attribute [rw] vpc_connection_arn
+    #   The Amazon Resource Name (ARN) of the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the VPC connection. The only possible state is
+    #   DELETING.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteVpcConnectionResponse AWS API Documentation
+    #
+    class DeleteVpcConnectionResponse < Struct.new(
+      :vpc_connection_arn,
       :state)
       SENSITIVE = []
       include Aws::Structure
@@ -1018,6 +1243,73 @@ module Aws::Kafka
       :description,
       :revision,
       :server_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeVpcConnectionRequest AWS API Documentation
+    #
+    class DescribeVpcConnectionRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response body for DescribeVpcConnection.
+    #
+    # @!attribute [rw] vpc_connection_arn
+    #   The Amazon Resource Name (ARN) of the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the VPC connection. The possible states are AVAILABLE,
+    #   INACTIVE, DEACTIVATING, DELETING, CREATING, REJECTING, REJECTED and
+    #   FAILED.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication
+    #   The authentication type of the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The VPC ID of the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnets
+    #   The list of subnets in the client VPC.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_groups
+    #   The list of security groups attached to the VPC connection.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation time of the VPC connection.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   Tags attached to the VPC connection.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeVpcConnectionResponse AWS API Documentation
+    #
+    class DescribeVpcConnectionResponse < Struct.new(
+      :vpc_connection_arn,
+      :target_cluster_arn,
+      :state,
+      :authentication,
+      :vpc_id,
+      :subnets,
+      :security_groups,
+      :creation_time,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1285,6 +1577,21 @@ module Aws::Kafka
     #   <programlisting>\{ "BootstrapBrokerStringSaslIam": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098" \}</programlisting>
     #   @return [String]
     #
+    # @!attribute [rw] bootstrap_broker_string_vpc_connectivity_tls
+    #   A string containing one or more dns name (or IP) and Tls port pairs
+    #   for VPC connectivity.
+    #   @return [String]
+    #
+    # @!attribute [rw] bootstrap_broker_string_vpc_connectivity_sasl_scram
+    #   A string containing one or more dns name (or IP) and SASL SCRAM port
+    #   pairs for VPC connectivity.
+    #   @return [String]
+    #
+    # @!attribute [rw] bootstrap_broker_string_vpc_connectivity_sasl_iam
+    #   A string containing one or more dns name (or IP) and SASL IAM port
+    #   pairs for VPC connectivity.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/GetBootstrapBrokersResponse AWS API Documentation
     #
     class GetBootstrapBrokersResponse < Struct.new(
@@ -1294,7 +1601,10 @@ module Aws::Kafka
       :bootstrap_broker_string_public_tls,
       :bootstrap_broker_string_tls,
       :bootstrap_broker_string_sasl_scram,
-      :bootstrap_broker_string_sasl_iam)
+      :bootstrap_broker_string_sasl_iam,
+      :bootstrap_broker_string_vpc_connectivity_tls,
+      :bootstrap_broker_string_vpc_connectivity_sasl_scram,
+      :bootstrap_broker_string_vpc_connectivity_sasl_iam)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1542,6 +1852,92 @@ module Aws::Kafka
     #
     class DescribeClusterV2Response < Struct.new(
       :cluster_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request body for DeleteClusterPolicy.
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteClusterPolicyRequest AWS API Documentation
+    #
+    class DeleteClusterPolicyRequest < Struct.new(
+      :cluster_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response body for DeleteClusterPolicy.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteClusterPolicyResponse AWS API Documentation
+    #
+    class DeleteClusterPolicyResponse < Aws::EmptyStructure; end
+
+    # Request body for GetClusterPolicy.
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/GetClusterPolicyRequest AWS API Documentation
+    #
+    class GetClusterPolicyRequest < Struct.new(
+      :cluster_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about the specified cluster policy.
+    #
+    # @!attribute [rw] current_version
+    #   Cluster policy version.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   Cluster policy attached to the MSK cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/GetClusterPolicyResponse AWS API Documentation
+    #
+    class GetClusterPolicyResponse < Struct.new(
+      :current_version,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request body for PutClusterPolicy.
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] current_version
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/PutClusterPolicyRequest AWS API Documentation
+    #
+    class PutClusterPolicyRequest < Struct.new(
+      :cluster_arn,
+      :current_version,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response body for PutClusterPolicy.
+    #
+    # @!attribute [rw] current_version
+    #   Cluster policy version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/PutClusterPolicyResponse AWS API Documentation
+    #
+    class PutClusterPolicyResponse < Struct.new(
+      :current_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2112,6 +2508,111 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Request body for ListClientVpcConnections.
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClientVpcConnectionsRequest AWS API Documentation
+    #
+    class ListClientVpcConnectionsRequest < Struct.new(
+      :cluster_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response contains an array of client VPC connections and a next
+    # token if the response is truncated.
+    #
+    # @!attribute [rw] next_token
+    #   If the response of ListClientVpcConnections is truncated, it returns
+    #   a NextToken in the response. This Nexttoken should be sent in the
+    #   subsequent request to ListClientVpcConnections.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_vpc_connections
+    #   List containing a ClientVpcConnection object.
+    #   @return [Array<Types::ClientVpcConnection>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClientVpcConnectionsResponse AWS API Documentation
+    #
+    class ListClientVpcConnectionsResponse < Struct.new(
+      :next_token,
+      :client_vpc_connections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request body for ListVpcConnections.
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListVpcConnectionsRequest AWS API Documentation
+    #
+    class ListVpcConnectionsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response contains an array of MSK VPC connections and a next token
+    # if the response is truncated.
+    #
+    # @!attribute [rw] next_token
+    #   If the response of ListVpcConnections is truncated, it returns a
+    #   NextToken in the response. This NextToken should be sent in the
+    #   subsequent request to ListVpcConnections.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_connections
+    #   List containing a VpcConnection object.
+    #   @return [Array<Types::VpcConnection>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListVpcConnectionsResponse AWS API Documentation
+    #
+    class ListVpcConnectionsResponse < Struct.new(
+      :next_token,
+      :vpc_connections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request body for RejectClientVpcConnection.
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_connection_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/RejectClientVpcConnectionRequest AWS API Documentation
+    #
+    class RejectClientVpcConnectionRequest < Struct.new(
+      :cluster_arn,
+      :vpc_connection_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response body for RejectClientVpcConnection.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/RejectClientVpcConnectionResponse AWS API Documentation
+    #
+    class RejectClientVpcConnectionResponse < Aws::EmptyStructure; end
+
     # Information about cluster attributes that can be updated via update
     # APIs.
     #
@@ -2138,6 +2639,7 @@ module Aws::Kafka
     #   @return [String]
     #
     # @!attribute [rw] kafka_version
+    #   The Apache Kafka version.
     #   @return [String]
     #
     # @!attribute [rw] logging_info
@@ -2255,6 +2757,21 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # @!attribute [rw] scram
+    #   @return [Types::VpcConnectivityScram]
+    #
+    # @!attribute [rw] iam
+    #   @return [Types::VpcConnectivityIam]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/VpcConnectivitySasl AWS API Documentation
+    #
+    class VpcConnectivitySasl < Struct.new(
+      :scram,
+      :iam)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] enabled
     #   SASL/SCRAM authentication is enabled or not.
     #   @return [Boolean]
@@ -2268,11 +2785,34 @@ module Aws::Kafka
     end
 
     # @!attribute [rw] enabled
+    #   SASL/SCRAM authentication for VPC connectivity is on or off.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/VpcConnectivityScram AWS API Documentation
+    #
+    class VpcConnectivityScram < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] enabled
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Iam AWS API Documentation
     #
     class Iam < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] enabled
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/VpcConnectivityIam AWS API Documentation
+    #
+    class VpcConnectivityIam < Struct.new(
       :enabled)
       SENSITIVE = []
       include Aws::Structure
@@ -2363,6 +2903,18 @@ module Aws::Kafka
     #
     class Tls < Struct.new(
       :certificate_authority_arn_list,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] enabled
+    #   TLS authentication for VPC connectivity is on or off.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/VpcConnectivityTls AWS API Documentation
+    #
+    class VpcConnectivityTls < Struct.new(
       :enabled)
       SENSITIVE = []
       include Aws::Structure
@@ -2917,6 +3469,24 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Description of the requester that calls the API operation.
+    #
+    # @!attribute [rw] type
+    #   The identity type of the requester that calls the API operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UserIdentity AWS API Documentation
+    #
+    class UserIdentity < Struct.new(
+      :type,
+      :principal_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Zookeeper node information.
     #
     # @!attribute [rw] attached_eni_id
@@ -3049,6 +3619,46 @@ module Aws::Kafka
     #
     class PublicAccess < Struct.new(
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Broker VPC connectivity access control.
+    #
+    # @!attribute [rw] client_authentication
+    #   @return [Types::VpcConnectivityClientAuthentication]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/VpcConnectivity AWS API Documentation
+    #
+    class VpcConnectivity < Struct.new(
+      :client_authentication)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Description of the VPC connection for CreateVpcConnection and
+    # DeleteVpcConnection operations.
+    #
+    # @!attribute [rw] vpc_connection_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   @return [String]
+    #
+    # @!attribute [rw] user_identity
+    #   Description of the requester that calls the API operation.
+    #   @return [Types::UserIdentity]
+    #
+    # @!attribute [rw] creation_time
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/VpcConnectionInfo AWS API Documentation
+    #
+    class VpcConnectionInfo < Struct.new(
+      :vpc_connection_arn,
+      :owner,
+      :user_identity,
+      :creation_time)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.377.0 (2023-04-27)
+------------------
+
+* Feature - This release adds support for AMD SEV-SNP on EC2 instances.
+
 1.376.0 (2023-04-24)
 ------------------
 

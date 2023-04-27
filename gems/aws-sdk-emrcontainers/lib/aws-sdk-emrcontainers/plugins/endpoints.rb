@@ -78,6 +78,8 @@ module Aws::EMRContainers
             Aws::EMRContainers::Endpoints::DescribeManagedEndpoint.build(context)
           when :describe_virtual_cluster
             Aws::EMRContainers::Endpoints::DescribeVirtualCluster.build(context)
+          when :get_managed_endpoint_session_credentials
+            Aws::EMRContainers::Endpoints::GetManagedEndpointSessionCredentials.build(context)
           when :list_job_runs
             Aws::EMRContainers::Endpoints::ListJobRuns.build(context)
           when :list_job_templates

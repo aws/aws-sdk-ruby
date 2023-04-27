@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.175.0 (2023-04-27)
+------------------
+
+* Feature - Added ml.p4d.24xlarge and ml.p4de.24xlarge as supported instances for SageMaker Studio
+
 1.174.0 (2023-04-20)
 ------------------
 

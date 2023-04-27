@@ -28,6 +28,7 @@ module Aws::EMRContainers
   #
   # ## Error Classes
   # * {InternalServerException}
+  # * {RequestThrottledException}
   # * {ResourceNotFoundException}
   # * {ValidationException}
   #
@@ -42,6 +43,21 @@ module Aws::EMRContainers
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::EMRContainers::Types::InternalServerException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class RequestThrottledException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::EMRContainers::Types::RequestThrottledException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

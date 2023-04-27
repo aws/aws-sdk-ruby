@@ -4061,7 +4061,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] spot_instance_request_ids
-    #   One or more Spot Instance request IDs.
+    #   The IDs of the Spot Instance requests.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotInstanceRequestsRequest AWS API Documentation
@@ -4076,7 +4076,7 @@ module Aws::EC2
     # Contains the output of CancelSpotInstanceRequests.
     #
     # @!attribute [rw] cancelled_spot_instance_requests
-    #   One or more Spot Instance requests.
+    #   The Spot Instance requests.
     #   @return [Array<Types::CancelledSpotInstanceRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotInstanceRequestsResult AWS API Documentation
@@ -6207,11 +6207,16 @@ module Aws::EC2
     #   The number of threads per CPU core.
     #   @return [Integer]
     #
+    # @!attribute [rw] amd_sev_snp
+    #   Indicates whether the instance is enabled for AMD SEV-SNP.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CpuOptions AWS API Documentation
     #
     class CpuOptions < Struct.new(
       :core_count,
-      :threads_per_core)
+      :threads_per_core,
+      :amd_sev_snp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6229,11 +6234,17 @@ module Aws::EC2
     #   value of `2`.
     #   @return [Integer]
     #
+    # @!attribute [rw] amd_sev_snp
+    #   Indicates whether to enable the instance for AMD SEV-SNP. AMD
+    #   SEV-SNP is supported with M6a, R6a, and C6a instance types only.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CpuOptionsRequest AWS API Documentation
     #
     class CpuOptionsRequest < Struct.new(
       :core_count,
-      :threads_per_core)
+      :threads_per_core,
+      :amd_sev_snp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19064,8 +19075,8 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters. Filter names and values are case-sensitive.
     #
-    #   * `auto-recovery-supported` - Indicates whether auto recovery is
-    #     supported (`true` \| `false`).
+    #   * `auto-recovery-supported` - Indicates whether Amazon CloudWatch
+    #     action based recovery is supported (`true` \| `false`).
     #
     #   * `bare-metal` - Indicates whether it is a bare metal instance type
     #     (`true` \| `false`).
@@ -19297,12 +19308,6 @@ module Aws::EC2
     #     launched the instance.
     #
     #   * `dns-name` - The public DNS name of the instance.
-    #
-    #   * `group-id` - The ID of the security group for the instance.
-    #     EC2-Classic only.
-    #
-    #   * `group-name` - The name of the security group for the instance.
-    #     EC2-Classic only.
     #
     #   * `hibernation-options.configured` - A Boolean that indicates
     #     whether the instance is enabled for hibernation. A value of `true`
@@ -22137,10 +22142,6 @@ module Aws::EC2
     #   * `modification-result.target-configuration.instance-type` - The
     #     instance type of the new Reserved Instances.
     #
-    #   * `modification-result.target-configuration.platform` - The network
-    #     platform of the new Reserved Instances (`EC2-Classic` \|
-    #     `EC2-VPC`).
-    #
     #   * `reserved-instances-id` - The ID of the Reserved Instances
     #     modified.
     #
@@ -22221,17 +22222,12 @@ module Aws::EC2
     #     the Reserved Instance Marketplace are listed.
     #
     #   * `product-description` - The Reserved Instance product platform
-    #     description. Instances that include `(Amazon VPC)` in the product
-    #     platform description will only be displayed to EC2-Classic account
-    #     holders and are for use with Amazon VPC. (`Linux/UNIX` \|
-    #     `Linux/UNIX (Amazon VPC)` \| `SUSE Linux` \| `SUSE Linux (Amazon
-    #     VPC)` \| `Red Hat Enterprise Linux` \| `Red Hat Enterprise Linux
-    #     (Amazon VPC)` \| `Red Hat Enterprise Linux with HA (Amazon VPC)`
-    #     \| `Windows` \| `Windows (Amazon VPC)` \| `Windows with SQL Server
-    #     Standard` \| `Windows with SQL Server Standard (Amazon VPC)` \|
-    #     `Windows with SQL Server Web` \| ` Windows with SQL Server Web
-    #     (Amazon VPC)` \| `Windows with SQL Server Enterprise` \| `Windows
-    #     with SQL Server Enterprise (Amazon VPC)`)
+    #     description (`Linux/UNIX` \| `Linux with SQL Server Standard` \|
+    #     `Linux with SQL Server Web` \| `Linux with SQL Server Enterprise`
+    #     \| `SUSE Linux` \| `Red Hat Enterprise Linux` \| `Red Hat
+    #     Enterprise Linux with HA` \| `Windows` \| `Windows with SQL Server
+    #     Standard` \| `Windows with SQL Server Web` \| `Windows with SQL
+    #     Server Enterprise`).
     #
     #   * `reserved-instances-offering-id` - The Reserved Instances offering
     #     ID.
@@ -22396,17 +22392,12 @@ module Aws::EC2
     #     `Availability Zone`).
     #
     #   * `product-description` - The Reserved Instance product platform
-    #     description. Instances that include `(Amazon VPC)` in the product
-    #     platform description will only be displayed to EC2-Classic account
-    #     holders and are for use with Amazon VPC (`Linux/UNIX` \|
-    #     `Linux/UNIX (Amazon VPC)` \| `SUSE Linux` \| `SUSE Linux (Amazon
-    #     VPC)` \| `Red Hat Enterprise Linux` \| `Red Hat Enterprise Linux
-    #     (Amazon VPC)` \| `Red Hat Enterprise Linux with HA (Amazon VPC)`
-    #     \| `Windows` \| `Windows (Amazon VPC)` \| `Windows with SQL Server
-    #     Standard` \| `Windows with SQL Server Standard (Amazon VPC)` \|
-    #     `Windows with SQL Server Web` \| `Windows with SQL Server Web
-    #     (Amazon VPC)` \| `Windows with SQL Server Enterprise` \| `Windows
-    #     with SQL Server Enterprise (Amazon VPC)`).
+    #     description (`Linux/UNIX` \| `Linux with SQL Server Standard` \|
+    #     `Linux with SQL Server Web` \| `Linux with SQL Server Enterprise`
+    #     \| `SUSE Linux` \| `Red Hat Enterprise Linux` \| `Red Hat
+    #     Enterprise Linux with HA` \| `Windows` \| `Windows with SQL Server
+    #     Standard` \| `Windows with SQL Server Web` \| `Windows with SQL
+    #     Server Enterprise`).
     #
     #   * `reserved-instances-id` - The ID of the Reserved Instance.
     #
@@ -22630,9 +22621,6 @@ module Aws::EC2
     #
     #   * `instance-type` - The instance type (for example, `c4.large`).
     #
-    #   * `network-platform` - The network platform (`EC2-Classic` or
-    #     `EC2-VPC`).
-    #
     #   * `platform` - The platform (`Linux/UNIX` or `Windows`).
     #   @return [Array<Types::Filter>]
     #
@@ -22718,9 +22706,6 @@ module Aws::EC2
     #     `us-west-2a`).
     #
     #   * `instance-type` - The instance type (for example, `c4.large`).
-    #
-    #   * `network-platform` - The network platform (`EC2-Classic` or
-    #     `EC2-VPC`).
     #
     #   * `platform` - The platform (`Linux/UNIX` or `Windows`).
     #   @return [Array<Types::Filter>]
@@ -23528,7 +23513,7 @@ module Aws::EC2
     # Contains the parameters for DescribeSpotInstanceRequests.
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `availability-zone-group` - The Availability Zone group.
     #
@@ -23658,7 +23643,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] spot_instance_request_ids
-    #   One or more Spot Instance request IDs.
+    #   The IDs of the Spot Instance requests.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -23692,7 +23677,7 @@ module Aws::EC2
     # Contains the output of DescribeSpotInstanceRequests.
     #
     # @!attribute [rw] spot_instance_requests
-    #   One or more Spot Instance requests.
+    #   The Spot Instance requests.
     #   @return [Array<Types::SpotInstanceRequest>]
     #
     # @!attribute [rw] next_token
@@ -23712,7 +23697,7 @@ module Aws::EC2
     # Contains the parameters for DescribeSpotPriceHistory.
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `availability-zone` - The Availability Zone for which prices
     #     should be returned.
@@ -36421,16 +36406,16 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] private_dns_name
-    #   (IPv4 only) The private DNS hostname name assigned to the instance.
-    #   This DNS hostname can only be used inside the Amazon EC2 network.
-    #   This name is not available until the instance enters the `running`
-    #   state.
+    #   \[IPv4 only\] The private DNS hostname name assigned to the
+    #   instance. This DNS hostname can only be used inside the Amazon EC2
+    #   network. This name is not available until the instance enters the
+    #   `running` state.
     #
-    #   \[EC2-VPC\] The Amazon-provided DNS server resolves Amazon-provided
-    #   private DNS hostnames if you've enabled DNS resolution and DNS
-    #   hostnames in your VPC. If you are not using the Amazon-provided DNS
-    #   server in your VPC, your custom domain name servers must resolve the
-    #   hostname as appropriate.
+    #   The Amazon-provided DNS server resolves Amazon-provided private DNS
+    #   hostnames if you've enabled DNS resolution and DNS hostnames in
+    #   your VPC. If you are not using the Amazon-provided DNS server in
+    #   your VPC, your custom domain name servers must resolve the hostname
+    #   as appropriate.
     #   @return [String]
     #
     # @!attribute [rw] private_ip_address
@@ -36442,10 +36427,10 @@ module Aws::EC2
     #   @return [Array<Types::ProductCode>]
     #
     # @!attribute [rw] public_dns_name
-    #   (IPv4 only) The public DNS name assigned to the instance. This name
-    #   is not available until the instance enters the `running` state. For
-    #   EC2-VPC, this name is only available if you've enabled DNS
-    #   hostnames for your VPC.
+    #   \[IPv4 only\] The public DNS name assigned to the instance. This
+    #   name is not available until the instance enters the `running` state.
+    #   This name is only available if you've enabled DNS hostnames for
+    #   your VPC.
     #   @return [String]
     #
     # @!attribute [rw] public_ip_address
@@ -36470,11 +36455,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
-    #   \[EC2-VPC\] The ID of the subnet in which the instance is running.
+    #   The ID of the subnet in which the instance is running.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
-    #   \[EC2-VPC\] The ID of the VPC in which the instance is running.
+    #   The ID of the VPC in which the instance is running.
     #   @return [String]
     #
     # @!attribute [rw] architecture
@@ -36525,7 +36510,7 @@ module Aws::EC2
     #   @return [Array<Types::ElasticInferenceAcceleratorAssociation>]
     #
     # @!attribute [rw] network_interfaces
-    #   \[EC2-VPC\] The network interfaces for the instance.
+    #   The network interfaces for the instance.
     #   @return [Array<Types::InstanceNetworkInterface>]
     #
     # @!attribute [rw] outpost_arn
@@ -39127,7 +39112,8 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_recovery_supported
-    #   Indicates whether auto recovery is supported.
+    #   Indicates whether Amazon CloudWatch action based recovery is
+    #   supported.
     #   @return [Boolean]
     #
     # @!attribute [rw] supported_boot_modes
@@ -40888,10 +40874,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_groups
-    #   One or more security groups. When requesting instances in a VPC, you
-    #   must specify the IDs of the security groups. When requesting
-    #   instances in EC2-Classic, you can specify the names or the IDs of
-    #   the security groups.
+    #   The IDs of the security groups.
     #   @return [Array<Types::GroupIdentifier>]
     #
     # @!attribute [rw] addressing_type
@@ -40899,7 +40882,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] block_device_mappings
-    #   One or more block device mapping entries.
+    #   The block device mapping entries.
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] ebs_optimized
@@ -40934,8 +40917,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] network_interfaces
-    #   One or more network interfaces. If you specify a network interface,
-    #   you must specify subnet IDs and security group IDs using the network
+    #   The network interfaces. If you specify a network interface, you must
+    #   specify subnet IDs and security group IDs using the network
     #   interface.
     #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
     #
@@ -41200,11 +41183,16 @@ module Aws::EC2
     #   The number of threads per CPU core.
     #   @return [Integer]
     #
+    # @!attribute [rw] amd_sev_snp
+    #   Indicates whether the instance is enabled for AMD SEV-SNP.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateCpuOptions AWS API Documentation
     #
     class LaunchTemplateCpuOptions < Struct.new(
       :core_count,
-      :threads_per_core)
+      :threads_per_core,
+      :amd_sev_snp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41222,11 +41210,17 @@ module Aws::EC2
     #   value of `2`.
     #   @return [Integer]
     #
+    # @!attribute [rw] amd_sev_snp
+    #   Indicates whether to enable the instance for AMD SEV-SNP. AMD
+    #   SEV-SNP is supported with M6a, R6a, and C6a instance types only.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateCpuOptionsRequest AWS API Documentation
     #
     class LaunchTemplateCpuOptionsRequest < Struct.new(
       :core_count,
-      :threads_per_core)
+      :threads_per_core,
+      :amd_sev_snp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42160,9 +42154,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] tenancy
-    #   The tenancy of the instance (if the instance is running in a VPC).
-    #   An instance with a tenancy of `dedicated` runs on single-tenant
-    #   hardware.
+    #   The tenancy of the instance. An instance with a tenancy of
+    #   `dedicated` runs on single-tenant hardware.
     #   @return [String]
     #
     # @!attribute [rw] spread_domain
@@ -42219,9 +42212,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] tenancy
-    #   The tenancy of the instance (if the instance is running in a VPC).
-    #   An instance with a tenancy of dedicated runs on single-tenant
-    #   hardware.
+    #   The tenancy of the instance. An instance with a tenancy of dedicated
+    #   runs on single-tenant hardware.
     #   @return [String]
     #
     # @!attribute [rw] spread_domain
@@ -44282,10 +44274,9 @@ module Aws::EC2
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] groups
-    #   \[EC2-VPC\] Replaces the security groups of the instance with the
-    #   specified security groups. You must specify at least one security
+    #   Replaces the security groups of the instance with the specified
+    #   security groups. You must specify the ID of at least one security
     #   group, even if it's just the default security group for the VPC.
-    #   You must specify the security group ID, not the security group name.
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_id
@@ -49866,9 +49857,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] tenancy
-    #   The tenancy of the instance (if the instance is running in a VPC).
-    #   An instance with a tenancy of `dedicated` runs on single-tenant
-    #   hardware.
+    #   The tenancy of the instance. An instance with a tenancy of
+    #   `dedicated` runs on single-tenant hardware.
     #
     #   This parameter is not supported for [CreateFleet][1]. The `host`
     #   tenancy is not supported for [ImportInstance][2] or for T3 instances
@@ -50386,11 +50376,18 @@ module Aws::EC2
     #   The speed of the processor, in GHz.
     #   @return [Float]
     #
+    # @!attribute [rw] supported_features
+    #   Indicates whether the instance type supports AMD SEV-SNP. If the
+    #   request returns `amd-sev-snp`, AMD SEV-SNP is supported. Otherwise,
+    #   it is not supported.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProcessorInfo AWS API Documentation
     #
     class ProcessorInfo < Struct.new(
       :supported_architectures,
-      :sustained_clock_speed_in_ghz)
+      :sustained_clock_speed_in_ghz,
+      :supported_features)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -52448,12 +52445,20 @@ module Aws::EC2
     #
     #   * `resolve:ssm:parameter-name:label`
     #
-    #   For more information, see [Use a Systems Manager parameter to find
-    #   an AMI][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   * `resolve:ssm:public-parameter`
+    #
+    #   <note markdown="1"> Currently, EC2 Fleet and Spot Fleet do not support specifying a
+    #   Systems Manager parameter. If the launch template will be used by an
+    #   EC2 Fleet or Spot Fleet, you must specify the AMI ID.
+    #
+    #    </note>
+    #
+    #   For more information, see [Use a Systems Manager parameter instead
+    #   of an AMI ID][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html#using-systems-manager-parameter-to-find-AMI
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-launch-template.html#use-an-ssm-parameter-instead-of-an-ami-id
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -52914,7 +52919,7 @@ module Aws::EC2
     # Contains the output of RequestSpotInstances.
     #
     # @!attribute [rw] spot_instance_requests
-    #   One or more Spot Instance requests.
+    #   The Spot Instance requests.
     #   @return [Array<Types::SpotInstanceRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotInstancesResult AWS API Documentation
@@ -52928,14 +52933,11 @@ module Aws::EC2
     # Describes the launch specification for an instance.
     #
     # @!attribute [rw] security_group_ids
-    #   One or more security group IDs.
+    #   The IDs of the security groups.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_groups
-    #   One or more security groups. When requesting instances in a VPC, you
-    #   must specify the IDs of the security groups. When requesting
-    #   instances in EC2-Classic, you can specify the names or the IDs of
-    #   the security groups.
+    #   Not supported.
     #   @return [Array<String>]
     #
     # @!attribute [rw] addressing_type
@@ -52943,11 +52945,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] block_device_mappings
-    #   One or more block device mapping entries. You can't specify both a
-    #   snapshot ID and an encryption value. This is because only blank
-    #   volumes can be encrypted on creation. If a snapshot is the basis for
-    #   a volume, it is not blank and its encryption status is used for the
-    #   volume encryption status.
+    #   The block device mapping entries. You can't specify both a snapshot
+    #   ID and an encryption value. This is because only blank volumes can
+    #   be encrypted on creation. If a snapshot is the basis for a volume,
+    #   it is not blank and its encryption status is used for the volume
+    #   encryption status.
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] ebs_optimized
@@ -52989,8 +52991,8 @@ module Aws::EC2
     #   @return [Types::RunInstancesMonitoringEnabled]
     #
     # @!attribute [rw] network_interfaces
-    #   One or more network interfaces. If you specify a network interface,
-    #   you must specify subnet IDs and security group IDs using the network
+    #   The network interfaces. If you specify a network interface, you must
+    #   specify subnet IDs and security group IDs using the network
     #   interface.
     #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
     #
@@ -53039,7 +53041,7 @@ module Aws::EC2
     # instances in the launch request.
     #
     # @!attribute [rw] groups
-    #   \[EC2-Classic only\] The security groups.
+    #   Not supported.
     #   @return [Array<Types::GroupIdentifier>]
     #
     # @!attribute [rw] instances
@@ -53334,8 +53336,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The network platform of the modified Reserved Instances, which is
-    #   either EC2-Classic or EC2-VPC.
+    #   The network platform of the modified Reserved Instances.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -54918,23 +54919,22 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_address_count
-    #   \[EC2-VPC\] The number of IPv6 addresses to associate with the
-    #   primary network interface. Amazon EC2 chooses the IPv6 addresses
-    #   from the range of your subnet. You cannot specify this option and
-    #   the option to assign specific IPv6 addresses in the same request.
-    #   You can specify this option if you've specified a minimum number of
-    #   instances to launch.
+    #   The number of IPv6 addresses to associate with the primary network
+    #   interface. Amazon EC2 chooses the IPv6 addresses from the range of
+    #   your subnet. You cannot specify this option and the option to assign
+    #   specific IPv6 addresses in the same request. You can specify this
+    #   option if you've specified a minimum number of instances to launch.
     #
     #   You cannot specify this option and the network interfaces option in
     #   the same request.
     #   @return [Integer]
     #
     # @!attribute [rw] ipv_6_addresses
-    #   \[EC2-VPC\] The IPv6 addresses from the range of the subnet to
-    #   associate with the primary network interface. You cannot specify
-    #   this option and the option to assign a number of IPv6 addresses in
-    #   the same request. You cannot specify this option if you've
-    #   specified a minimum number of instances to launch.
+    #   The IPv6 addresses from the range of the subnet to associate with
+    #   the primary network interface. You cannot specify this option and
+    #   the option to assign a number of IPv6 addresses in the same request.
+    #   You cannot specify this option if you've specified a minimum number
+    #   of instances to launch.
     #
     #   You cannot specify this option and the network interfaces option in
     #   the same request.
@@ -55034,7 +55034,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_groups
-    #   \[EC2-Classic, default VPC\] The names of the security groups.
+    #   \[Default VPC\] The names of the security groups.
     #
     #   If you specify a network interface, you must specify any security
     #   groups as part of the network interface.
@@ -55043,7 +55043,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_id
-    #   \[EC2-VPC\] The ID of the subnet to launch the instance into.
+    #   The ID of the subnet to launch the instance into.
     #
     #   If you specify a network interface, you must specify any subnets as
     #   part of the network interface.
@@ -55138,8 +55138,8 @@ module Aws::EC2
     #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
     #
     # @!attribute [rw] private_ip_address
-    #   \[EC2-VPC\] The primary IPv4 address. You must specify a value from
-    #   the IPv4 address range of the subnet.
+    #   The primary IPv4 address. You must specify a value from the IPv4
+    #   address range of the subnet.
     #
     #   Only one private IP address can be designated as primary. You can't
     #   specify this option if you've specified the option to designate a
@@ -55526,7 +55526,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] network_platform
-    #   The network platform (`EC2-Classic` or `EC2-VPC`).
+    #   The network platform.
     #   @return [String]
     #
     # @!attribute [rw] next_slot_start_time
@@ -55619,7 +55619,7 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] network_platform
-    #   The network platform (`EC2-Classic` or `EC2-VPC`).
+    #   The network platform.
     #   @return [String]
     #
     # @!attribute [rw] platform
@@ -57456,10 +57456,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_LaunchTemplateConfig.html
     #
     # @!attribute [rw] security_groups
-    #   One or more security groups. When requesting instances in a VPC, you
-    #   must specify the IDs of the security groups. When requesting
-    #   instances in EC2-Classic, you can specify the names or the IDs of
-    #   the security groups.
+    #   The security groups.
     #   @return [Array<Types::GroupIdentifier>]
     #
     # @!attribute [rw] addressing_type

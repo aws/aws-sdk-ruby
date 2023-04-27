@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2023-04-27)
+------------------
+
+* Feature - Enabled Pagination for List Entities and List Change Sets operations
+
 1.26.0 (2023-04-10)
 ------------------
 

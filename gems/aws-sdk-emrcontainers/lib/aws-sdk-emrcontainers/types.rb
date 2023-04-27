@@ -386,6 +386,27 @@ module Aws::EMRContainers
       include Aws::Structure
     end
 
+    # The structure containing the session token being returned.
+    #
+    # @note Credentials is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Credentials corresponding to the set member.
+    #
+    # @!attribute [rw] token
+    #   The actual session token being returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/Credentials AWS API Documentation
+    #
+    class Credentials < Struct.new(
+      :token,
+      :unknown)
+      SENSITIVE = [:token]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Token < Credentials; end
+      class Unknown < Credentials; end
+    end
+
     # @!attribute [rw] id
     #   The ID of the job template that will be deleted.
     #   @return [String]
@@ -689,6 +710,77 @@ module Aws::EMRContainers
       :state_details,
       :failure_reason,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] endpoint_identifier
+    #   The ARN of the managed endpoint for which the request is submitted.
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_cluster_identifier
+    #   The ARN of the Virtual Cluster which the Managed Endpoint belongs
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The IAM Execution Role ARN that will be used by the job run.
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_type
+    #   Type of the token requested. Currently supported and default value
+    #   of this field is “TOKEN.”
+    #   @return [String]
+    #
+    # @!attribute [rw] duration_in_seconds
+    #   Duration in seconds for which the session token is valid. The
+    #   default duration is 15 minutes and the maximum is 12 hours.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] log_context
+    #   String identifier used to separate sections of the execution logs
+    #   uploaded to S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The client idempotency token of the job run request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/GetManagedEndpointSessionCredentialsRequest AWS API Documentation
+    #
+    class GetManagedEndpointSessionCredentialsRequest < Struct.new(
+      :endpoint_identifier,
+      :virtual_cluster_identifier,
+      :execution_role_arn,
+      :credential_type,
+      :duration_in_seconds,
+      :log_context,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The identifier of the session token returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] credentials
+    #   The structure containing the session credentials.
+    #   @return [Types::Credentials]
+    #
+    # @!attribute [rw] expires_at
+    #   The date and time when the session token will expire.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/GetManagedEndpointSessionCredentialsResponse AWS API Documentation
+    #
+    class GetManagedEndpointSessionCredentialsResponse < Struct.new(
+      :id,
+      :credentials,
+      :expires_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1279,6 +1371,19 @@ module Aws::EMRContainers
     #
     class ParametricS3MonitoringConfiguration < Struct.new(
       :log_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request throttled.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/RequestThrottledException AWS API Documentation
+    #
+    class RequestThrottledException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

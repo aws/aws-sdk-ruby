@@ -461,13 +461,13 @@ module Aws::QLDB
     #   [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-standard-mode.html
     #
     # @option params [Boolean] :deletion_protection
-    #   The flag that prevents a ledger from being deleted by any user. If not
-    #   provided on ledger creation, this feature is enabled (`true`) by
-    #   default.
+    #   Specifies whether the ledger is protected from being deleted by any
+    #   user. If not defined during ledger creation, this feature is enabled
+    #   (`true`) by default.
     #
     #   If deletion protection is enabled, you must first disable it before
     #   you can delete the ledger. You can disable it by calling the
-    #   `UpdateLedger` operation to set the flag to `false`.
+    #   `UpdateLedger` operation to set this parameter to `false`.
     #
     # @option params [String] :kms_key
     #   The key in Key Management Service (KMS) to use for encryption of data
@@ -482,7 +482,8 @@ module Aws::QLDB
     #   * **Undefined**: By default, use an Amazon Web Services owned KMS key.
     #
     #   * **A valid symmetric customer managed KMS key**: Use the specified
-    #     KMS key in your account that you create, own, and manage.
+    #     symmetric encryption KMS key in your account that you create, own,
+    #     and manage.
     #
     #     Amazon QLDB does not support asymmetric keys. For more information,
     #     see [Using symmetric and asymmetric keys][2] in the *Key Management
@@ -558,7 +559,7 @@ module Aws::QLDB
     #
     # If deletion protection is enabled, you must first disable it before
     # you can delete the ledger. You can disable it by calling the
-    # `UpdateLedger` operation to set the flag to `false`.
+    # `UpdateLedger` operation to set this parameter to `false`.
     #
     # @option params [required, String] :name
     #   The name of the ledger that you want to delete.
@@ -744,13 +745,6 @@ module Aws::QLDB
     # binary representation of Amazon Ion format, or in *JSON Lines* text
     # format.
     #
-    # In JSON Lines format, each journal block in the exported data object
-    # is a valid JSON object that is delimited by a newline. You can use
-    # this format to easily integrate JSON exports with analytics tools such
-    # as Glue and Amazon Athena because these services can parse
-    # newline-delimited JSON automatically. For more information about the
-    # format, see [JSON Lines][1].
-    #
     # If the ledger with the given `Name` doesn't exist, then throws
     # `ResourceNotFoundException`.
     #
@@ -760,10 +754,6 @@ module Aws::QLDB
     # You can initiate up to two concurrent journal export requests for each
     # ledger. Beyond this limit, journal export requests throw
     # `LimitExceededException`.
-    #
-    #
-    #
-    # [1]: https://jsonlines.org/
     #
     # @option params [required, String] :name
     #   The name of the ledger.
@@ -801,8 +791,7 @@ module Aws::QLDB
     #   The Amazon Resource Name (ARN) of the IAM role that grants QLDB
     #   permissions for a journal export job to do the following:
     #
-    #   * Write objects into your Amazon Simple Storage Service (Amazon S3)
-    #     bucket.
+    #   * Write objects into your Amazon S3 bucket.
     #
     #   * (Optional) Use your customer managed key in Key Management Service
     #     (KMS) for server-side encryption of your exported data.
@@ -812,8 +801,22 @@ module Aws::QLDB
     #   resource. This is required for all journal export requests.
     #
     # @option params [String] :output_format
-    #   The output format of your exported journal data. If this parameter is
-    #   not specified, the exported data defaults to `ION_TEXT` format.
+    #   The output format of your exported journal data. A journal export job
+    #   can write the data objects in either the text or binary representation
+    #   of [Amazon Ion][1] format, or in [JSON Lines][2] text format.
+    #
+    #   Default: `ION_TEXT`
+    #
+    #   In JSON Lines format, each journal block in an exported data object is
+    #   a valid JSON object that is delimited by a newline. You can use this
+    #   format to directly integrate JSON exports with analytics tools such as
+    #   Amazon Athena and Glue because these services can parse
+    #   newline-delimited JSON automatically.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/ion.html
+    #   [2]: https://jsonlines.org/
     #
     # @return [Types::ExportJournalToS3Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1006,9 +1009,7 @@ module Aws::QLDB
       req.send_request(options)
     end
 
-    # Returns an array of all Amazon QLDB journal stream descriptors for a
-    # given ledger. The output of each stream descriptor includes the same
-    # details that are returned by `DescribeJournalKinesisStream`.
+    # Returns all Amazon QLDB journal streams for a given ledger.
     #
     # This action does not return any expired journal streams. For more
     # information, see [Expiration for terminal streams][1] in the *Amazon
@@ -1077,9 +1078,8 @@ module Aws::QLDB
       req.send_request(options)
     end
 
-    # Returns an array of journal export job descriptions for all ledgers
-    # that are associated with the current Amazon Web Services account and
-    # Region.
+    # Returns all journal export jobs for all ledgers that are associated
+    # with the current Amazon Web Services account and Region.
     #
     # This action returns a maximum of `MaxResults` items, and is paginated
     # so that you can retrieve all the items by calling
@@ -1144,8 +1144,7 @@ module Aws::QLDB
       req.send_request(options)
     end
 
-    # Returns an array of journal export job descriptions for a specified
-    # ledger.
+    # Returns all journal export jobs for a specified ledger.
     #
     # This action returns a maximum of `MaxResults` items, and is paginated
     # so that you can retrieve all the items by calling
@@ -1214,12 +1213,12 @@ module Aws::QLDB
       req.send_request(options)
     end
 
-    # Returns an array of ledger summaries that are associated with the
-    # current Amazon Web Services account and Region.
+    # Returns all ledgers that are associated with the current Amazon Web
+    # Services account and Region.
     #
-    # This action returns a maximum of 100 items and is paginated so that
-    # you can retrieve all the items by calling `ListLedgers` multiple
-    # times.
+    # This action returns a maximum of `MaxResults` items and is paginated
+    # so that you can retrieve all the items by calling `ListLedgers`
+    # multiple times.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single `ListLedgers`
@@ -1463,13 +1462,13 @@ module Aws::QLDB
     #   The name of the ledger.
     #
     # @option params [Boolean] :deletion_protection
-    #   The flag that prevents a ledger from being deleted by any user. If not
-    #   provided on ledger creation, this feature is enabled (`true`) by
-    #   default.
+    #   Specifies whether the ledger is protected from being deleted by any
+    #   user. If not defined during ledger creation, this feature is enabled
+    #   (`true`) by default.
     #
     #   If deletion protection is enabled, you must first disable it before
     #   you can delete the ledger. You can disable it by calling the
-    #   `UpdateLedger` operation to set the flag to `false`.
+    #   `UpdateLedger` operation to set this parameter to `false`.
     #
     # @option params [String] :kms_key
     #   The key in Key Management Service (KMS) to use for encryption of data
@@ -1484,7 +1483,8 @@ module Aws::QLDB
     #   * **Undefined**: Make no changes to the KMS key of the ledger.
     #
     #   * **A valid symmetric customer managed KMS key**: Use the specified
-    #     KMS key in your account that you create, own, and manage.
+    #     symmetric encryption KMS key in your account that you create, own,
+    #     and manage.
     #
     #     Amazon QLDB does not support asymmetric keys. For more information,
     #     see [Using symmetric and asymmetric keys][2] in the *Key Management
@@ -1641,7 +1641,7 @@ module Aws::QLDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-qldb'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

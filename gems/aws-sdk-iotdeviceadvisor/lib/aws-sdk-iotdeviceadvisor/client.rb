@@ -399,13 +399,14 @@ module Aws::IoTDeviceAdvisor
     #         {
     #           thing_arn: "AmazonResourceName",
     #           certificate_arn: "AmazonResourceName",
+    #           device_role_arn: "AmazonResourceName",
     #         },
     #       ],
     #       intended_for_qualification: false,
     #       is_long_duration_test: false,
     #       root_group: "RootGroup", # required
     #       device_permission_role_arn: "AmazonResourceName", # required
-    #       protocol: "MqttV3_1_1", # accepts MqttV3_1_1, MqttV5
+    #       protocol: "MqttV3_1_1", # accepts MqttV3_1_1, MqttV5, MqttV3_1_1_OverWebSocket, MqttV5_OverWebSocket
     #     },
     #     tags: {
     #       "String128" => "String256",
@@ -460,6 +461,12 @@ module Aws::IoTDeviceAdvisor
     # @option params [String] :certificate_arn
     #   The certificate ARN of the device. This is an optional parameter.
     #
+    # @option params [String] :device_role_arn
+    #   The device role ARN of the device. This is an optional parameter.
+    #
+    # @option params [String] :authentication_method
+    #   The authentication method used during the device connection.
+    #
     # @return [Types::GetEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetEndpointResponse#endpoint #endpoint} => String
@@ -469,6 +476,8 @@ module Aws::IoTDeviceAdvisor
     #   resp = client.get_endpoint({
     #     thing_arn: "AmazonResourceName",
     #     certificate_arn: "AmazonResourceName",
+    #     device_role_arn: "AmazonResourceName",
+    #     authentication_method: "X509ClientCertificate", # accepts X509ClientCertificate, SignatureVersion4
     #   })
     #
     # @example Response structure
@@ -524,11 +533,12 @@ module Aws::IoTDeviceAdvisor
     #   resp.suite_definition_configuration.devices #=> Array
     #   resp.suite_definition_configuration.devices[0].thing_arn #=> String
     #   resp.suite_definition_configuration.devices[0].certificate_arn #=> String
+    #   resp.suite_definition_configuration.devices[0].device_role_arn #=> String
     #   resp.suite_definition_configuration.intended_for_qualification #=> Boolean
     #   resp.suite_definition_configuration.is_long_duration_test #=> Boolean
     #   resp.suite_definition_configuration.root_group #=> String
     #   resp.suite_definition_configuration.device_permission_role_arn #=> String
-    #   resp.suite_definition_configuration.protocol #=> String, one of "MqttV3_1_1", "MqttV5"
+    #   resp.suite_definition_configuration.protocol #=> String, one of "MqttV3_1_1", "MqttV5", "MqttV3_1_1_OverWebSocket", "MqttV5_OverWebSocket"
     #   resp.created_at #=> Time
     #   resp.last_modified_at #=> Time
     #   resp.tags #=> Hash
@@ -584,6 +594,7 @@ module Aws::IoTDeviceAdvisor
     #   resp.suite_run_arn #=> String
     #   resp.suite_run_configuration.primary_device.thing_arn #=> String
     #   resp.suite_run_configuration.primary_device.certificate_arn #=> String
+    #   resp.suite_run_configuration.primary_device.device_role_arn #=> String
     #   resp.suite_run_configuration.selected_test_list #=> Array
     #   resp.suite_run_configuration.selected_test_list[0] #=> String
     #   resp.suite_run_configuration.parallel_run #=> Boolean
@@ -693,9 +704,10 @@ module Aws::IoTDeviceAdvisor
     #   resp.suite_definition_information_list[0].default_devices #=> Array
     #   resp.suite_definition_information_list[0].default_devices[0].thing_arn #=> String
     #   resp.suite_definition_information_list[0].default_devices[0].certificate_arn #=> String
+    #   resp.suite_definition_information_list[0].default_devices[0].device_role_arn #=> String
     #   resp.suite_definition_information_list[0].intended_for_qualification #=> Boolean
     #   resp.suite_definition_information_list[0].is_long_duration_test #=> Boolean
-    #   resp.suite_definition_information_list[0].protocol #=> String, one of "MqttV3_1_1", "MqttV5"
+    #   resp.suite_definition_information_list[0].protocol #=> String, one of "MqttV3_1_1", "MqttV5", "MqttV3_1_1_OverWebSocket", "MqttV5_OverWebSocket"
     #   resp.suite_definition_information_list[0].created_at #=> Time
     #   resp.next_token #=> String
     #
@@ -838,6 +850,7 @@ module Aws::IoTDeviceAdvisor
     #       primary_device: { # required
     #         thing_arn: "AmazonResourceName",
     #         certificate_arn: "AmazonResourceName",
+    #         device_role_arn: "AmazonResourceName",
     #       },
     #       selected_test_list: ["UUID"],
     #       parallel_run: false,
@@ -989,13 +1002,14 @@ module Aws::IoTDeviceAdvisor
     #         {
     #           thing_arn: "AmazonResourceName",
     #           certificate_arn: "AmazonResourceName",
+    #           device_role_arn: "AmazonResourceName",
     #         },
     #       ],
     #       intended_for_qualification: false,
     #       is_long_duration_test: false,
     #       root_group: "RootGroup", # required
     #       device_permission_role_arn: "AmazonResourceName", # required
-    #       protocol: "MqttV3_1_1", # accepts MqttV3_1_1, MqttV5
+    #       protocol: "MqttV3_1_1", # accepts MqttV3_1_1, MqttV5, MqttV3_1_1_OverWebSocket, MqttV5_OverWebSocket
     #     },
     #   })
     #
@@ -1028,7 +1042,7 @@ module Aws::IoTDeviceAdvisor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotdeviceadvisor'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

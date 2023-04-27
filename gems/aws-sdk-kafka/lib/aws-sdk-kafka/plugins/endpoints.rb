@@ -64,10 +64,14 @@ module Aws::Kafka
             Aws::Kafka::Endpoints::CreateClusterV2.build(context)
           when :create_configuration
             Aws::Kafka::Endpoints::CreateConfiguration.build(context)
+          when :create_vpc_connection
+            Aws::Kafka::Endpoints::CreateVpcConnection.build(context)
           when :delete_cluster
             Aws::Kafka::Endpoints::DeleteCluster.build(context)
           when :delete_configuration
             Aws::Kafka::Endpoints::DeleteConfiguration.build(context)
+          when :delete_vpc_connection
+            Aws::Kafka::Endpoints::DeleteVpcConnection.build(context)
           when :describe_cluster
             Aws::Kafka::Endpoints::DescribeCluster.build(context)
           when :describe_cluster_v2
@@ -78,6 +82,8 @@ module Aws::Kafka
             Aws::Kafka::Endpoints::DescribeConfiguration.build(context)
           when :describe_configuration_revision
             Aws::Kafka::Endpoints::DescribeConfigurationRevision.build(context)
+          when :describe_vpc_connection
+            Aws::Kafka::Endpoints::DescribeVpcConnection.build(context)
           when :batch_disassociate_scram_secret
             Aws::Kafka::Endpoints::BatchDisassociateScramSecret.build(context)
           when :get_bootstrap_brokers
@@ -102,6 +108,18 @@ module Aws::Kafka
             Aws::Kafka::Endpoints::ListScramSecrets.build(context)
           when :list_tags_for_resource
             Aws::Kafka::Endpoints::ListTagsForResource.build(context)
+          when :list_client_vpc_connections
+            Aws::Kafka::Endpoints::ListClientVpcConnections.build(context)
+          when :list_vpc_connections
+            Aws::Kafka::Endpoints::ListVpcConnections.build(context)
+          when :reject_client_vpc_connection
+            Aws::Kafka::Endpoints::RejectClientVpcConnection.build(context)
+          when :delete_cluster_policy
+            Aws::Kafka::Endpoints::DeleteClusterPolicy.build(context)
+          when :get_cluster_policy
+            Aws::Kafka::Endpoints::GetClusterPolicy.build(context)
+          when :put_cluster_policy
+            Aws::Kafka::Endpoints::PutClusterPolicy.build(context)
           when :reboot_broker
             Aws::Kafka::Endpoints::RebootBroker.build(context)
           when :tag_resource

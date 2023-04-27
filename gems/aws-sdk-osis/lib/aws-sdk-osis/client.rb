@@ -369,11 +369,11 @@ module Aws::OSIS
     # @!group API Operations
 
     # Creates an OpenSearch Ingestion pipeline. For more information, see
-    # [Creating and managing OpenSearch Ingestion pipelines][1].
+    # [Creating Amazon OpenSearch Ingestion pipelines][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html
     #
     # @option params [required, String] :pipeline_name
     #   The name of the OpenSearch Ingestion pipeline to create. Pipeline
@@ -465,11 +465,11 @@ module Aws::OSIS
     end
 
     # Deletes an OpenSearch Ingestion pipeline. For more information, see
-    # [Deleting pipelines][1].
+    # [Deleting Amazon OpenSearch Ingestion pipelines][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html#delete-pipeline
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/delete-pipeline.html
     #
     # @option params [required, String] :pipeline_name
     #   The name of the pipeline to delete.
@@ -540,7 +540,12 @@ module Aws::OSIS
 
     # Retrieves information about a specific blueprint for OpenSearch
     # Ingestion. Blueprints are templates for the configuration needed for a
-    # `CreatePipeline` request.
+    # `CreatePipeline` request. For more information, see [Using blueprints
+    # to create a pipeline][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html#pipeline-blueprint
     #
     # @option params [required, String] :blueprint_name
     #   The name of the blueprint to retrieve.
@@ -573,12 +578,12 @@ module Aws::OSIS
     # OpenSearch Ingestion pipeline. Currently, this operation only returns
     # information when a pipeline is being created.
     #
-    # For more information, see [Creating and managing OpenSearch Ingestion
-    # pipelines][1].
+    # For more information, see [Tracking the status of pipeline
+    # creation][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html#get-pipeline-progress
     #
     # @option params [required, String] :pipeline_name
     #   The name of the pipeline.
@@ -614,7 +619,12 @@ module Aws::OSIS
       req.send_request(options)
     end
 
-    # Retrieves a list of all available blueprints for Data Prepper.
+    # Retrieves a list of all available blueprints for Data Prepper. For
+    # more information, see [Using blueprints to create a pipeline][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html#pipeline-blueprint
     #
     # @return [Types::ListPipelineBlueprintsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -635,12 +645,12 @@ module Aws::OSIS
     end
 
     # Lists all OpenSearch Ingestion pipelines in the current Amazon Web
-    # Services account and Region. For more information, see [Creating and
-    # managing OpenSearch Ingestion pipelines][1].
+    # Services account and Region. For more information, see [Viewing Amazon
+    # OpenSearch Ingestion pipelines][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/list-pipeline.html
     #
     # @option params [Integer] :max_results
     #   An optional parameter that specifies the maximum number of results to
@@ -688,8 +698,8 @@ module Aws::OSIS
     end
 
     # Lists all resource tags associated with an OpenSearch Ingestion
-    # pipeline. For more information, see [Tagging OpenSearch Ingestion
-    # pipelines][1].
+    # pipeline. For more information, see [Tagging Amazon OpenSearch
+    # Ingestion pipelines][1].
     #
     #
     #
@@ -724,11 +734,11 @@ module Aws::OSIS
     end
 
     # Starts an OpenSearch Ingestion pipeline. For more information, see
-    # [Starting pipelines][1].
+    # [Starting an OpenSearch Ingestion pipeline][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html#start-pipeline
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline--stop-start.html#pipeline--start
     #
     # @option params [required, String] :pipeline_name
     #   The name of the pipeline to start.
@@ -776,11 +786,11 @@ module Aws::OSIS
     end
 
     # Stops an OpenSearch Ingestion pipeline. For more information, see
-    # [Stopping pipelines][1].
+    # [Stopping an OpenSearch Ingestion pipeline][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html#stop-pipeline
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline--stop-start.html#pipeline--stop
     #
     # @option params [required, String] :pipeline_name
     #   The name of the pipeline to stop.
@@ -828,7 +838,7 @@ module Aws::OSIS
     end
 
     # Tags an OpenSearch Ingestion pipeline. For more information, see
-    # [Tagging OpenSearch Ingestion pipelines][1].
+    # [Tagging Amazon OpenSearch Ingestion pipelines][1].
     #
     #
     #
@@ -864,7 +874,8 @@ module Aws::OSIS
     end
 
     # Removes one or more tags from an OpenSearch Ingestion pipeline. For
-    # more information, see [Tagging OpenSearch Ingestion pipelines][1].
+    # more information, see [Tagging Amazon OpenSearch Ingestion
+    # pipelines][1].
     #
     #
     #
@@ -895,11 +906,11 @@ module Aws::OSIS
     end
 
     # Updates an OpenSearch Ingestion pipeline. For more information, see
-    # [Creating and managing OpenSearch Ingestion pipelines][1].
+    # [Updating Amazon OpenSearch Ingestion pipelines][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/update-pipeline.html
     #
     # @option params [required, String] :pipeline_name
     #   The name of the pipeline to update.
@@ -971,12 +982,12 @@ module Aws::OSIS
     end
 
     # Checks whether an OpenSearch Ingestion pipeline configuration is valid
-    # prior to creation. For more information, see [Creating and managing
+    # prior to creation. For more information, see [Creating Amazon
     # OpenSearch Ingestion pipelines][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html
     #
     # @option params [required, String] :pipeline_configuration_body
     #   The pipeline configuration in YAML format. The command accepts the
@@ -1023,7 +1034,7 @@ module Aws::OSIS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-osis'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
