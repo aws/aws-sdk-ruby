@@ -2429,11 +2429,11 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Imports the specified Windows 10 Bring Your Own License (BYOL) image
-    # into Amazon WorkSpaces. The image must be an already licensed Amazon
-    # EC2 image that is in your Amazon Web Services account, and you must
-    # own the image. For more information about creating BYOL images, see [
-    # Bring Your Own Windows Desktop Licenses][1].
+    # Imports the specified Windows 10 or 11 Bring Your Own License (BYOL)
+    # image into Amazon WorkSpaces. The image must be an already licensed
+    # Amazon EC2 image that is in your Amazon Web Services account, and you
+    # must own the image. For more information about creating BYOL images,
+    # see [ Bring Your Own Windows Desktop Licenses][1].
     #
     #
     #
@@ -2476,12 +2476,14 @@ module Aws::WorkSpaces
     #
     # @option params [Array<String>] :applications
     #   If specified, the version of Microsoft Office to subscribe to. Valid
-    #   only for Windows 10 BYOL images. For more information about
+    #   only for Windows 10 and 11 BYOL images. For more information about
     #   subscribing to Office for BYOL images, see [ Bring Your Own Windows
     #   Desktop Licenses][1].
     #
-    #   <note markdown="1"> Although this parameter is an array, only one item is allowed at this
-    #   time.
+    #   <note markdown="1"> * Although this parameter is an array, only one item is allowed at
+    #     this time.
+    #
+    #   * Windows 11 only supports `Microsoft_Office_2019`.
     #
     #    </note>
     #
@@ -3570,7 +3572,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

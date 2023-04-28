@@ -55,6 +55,7 @@ module Aws::Rekognition
     ConnectedHomeSettingsForUpdate = Shapes::StructureShape.new(name: 'ConnectedHomeSettingsForUpdate')
     ContentClassifier = Shapes::StringShape.new(name: 'ContentClassifier')
     ContentClassifiers = Shapes::ListShape.new(name: 'ContentClassifiers')
+    ContentModerationAggregateBy = Shapes::StringShape.new(name: 'ContentModerationAggregateBy')
     ContentModerationDetection = Shapes::StructureShape.new(name: 'ContentModerationDetection')
     ContentModerationDetections = Shapes::ListShape.new(name: 'ContentModerationDetections')
     ContentModerationSortBy = Shapes::StringShape.new(name: 'ContentModerationSortBy')
@@ -187,6 +188,7 @@ module Aws::Rekognition
     GetCelebrityRecognitionRequest = Shapes::StructureShape.new(name: 'GetCelebrityRecognitionRequest')
     GetCelebrityRecognitionResponse = Shapes::StructureShape.new(name: 'GetCelebrityRecognitionResponse')
     GetContentModerationRequest = Shapes::StructureShape.new(name: 'GetContentModerationRequest')
+    GetContentModerationRequestMetadata = Shapes::StructureShape.new(name: 'GetContentModerationRequestMetadata')
     GetContentModerationResponse = Shapes::StructureShape.new(name: 'GetContentModerationResponse')
     GetFaceDetectionRequest = Shapes::StructureShape.new(name: 'GetFaceDetectionRequest')
     GetFaceDetectionResponse = Shapes::StructureShape.new(name: 'GetFaceDetectionResponse')
@@ -195,6 +197,7 @@ module Aws::Rekognition
     GetFaceSearchRequest = Shapes::StructureShape.new(name: 'GetFaceSearchRequest')
     GetFaceSearchResponse = Shapes::StructureShape.new(name: 'GetFaceSearchResponse')
     GetLabelDetectionRequest = Shapes::StructureShape.new(name: 'GetLabelDetectionRequest')
+    GetLabelDetectionRequestMetadata = Shapes::StructureShape.new(name: 'GetLabelDetectionRequestMetadata')
     GetLabelDetectionResponse = Shapes::StructureShape.new(name: 'GetLabelDetectionResponse')
     GetPersonTrackingRequest = Shapes::StructureShape.new(name: 'GetPersonTrackingRequest')
     GetPersonTrackingResponse = Shapes::StructureShape.new(name: 'GetPersonTrackingResponse')
@@ -588,6 +591,9 @@ module Aws::Rekognition
 
     ContentModerationDetection.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     ContentModerationDetection.add_member(:moderation_label, Shapes::ShapeRef.new(shape: ModerationLabel, location_name: "ModerationLabel"))
+    ContentModerationDetection.add_member(:start_timestamp_millis, Shapes::ShapeRef.new(shape: ULong, location_name: "StartTimestampMillis"))
+    ContentModerationDetection.add_member(:end_timestamp_millis, Shapes::ShapeRef.new(shape: ULong, location_name: "EndTimestampMillis"))
+    ContentModerationDetection.add_member(:duration_millis, Shapes::ShapeRef.new(shape: ULong, location_name: "DurationMillis"))
     ContentModerationDetection.struct_class = Types::ContentModerationDetection
 
     ContentModerationDetections.member = Shapes::ShapeRef.new(shape: ContentModerationDetection)
@@ -1048,13 +1054,21 @@ module Aws::Rekognition
     GetCelebrityRecognitionResponse.add_member(:video_metadata, Shapes::ShapeRef.new(shape: VideoMetadata, location_name: "VideoMetadata"))
     GetCelebrityRecognitionResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     GetCelebrityRecognitionResponse.add_member(:celebrities, Shapes::ShapeRef.new(shape: CelebrityRecognitions, location_name: "Celebrities"))
+    GetCelebrityRecognitionResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    GetCelebrityRecognitionResponse.add_member(:video, Shapes::ShapeRef.new(shape: Video, location_name: "Video"))
+    GetCelebrityRecognitionResponse.add_member(:job_tag, Shapes::ShapeRef.new(shape: JobTag, location_name: "JobTag"))
     GetCelebrityRecognitionResponse.struct_class = Types::GetCelebrityRecognitionResponse
 
     GetContentModerationRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     GetContentModerationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     GetContentModerationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     GetContentModerationRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: ContentModerationSortBy, location_name: "SortBy"))
+    GetContentModerationRequest.add_member(:aggregate_by, Shapes::ShapeRef.new(shape: ContentModerationAggregateBy, location_name: "AggregateBy"))
     GetContentModerationRequest.struct_class = Types::GetContentModerationRequest
+
+    GetContentModerationRequestMetadata.add_member(:sort_by, Shapes::ShapeRef.new(shape: ContentModerationSortBy, location_name: "SortBy"))
+    GetContentModerationRequestMetadata.add_member(:aggregate_by, Shapes::ShapeRef.new(shape: ContentModerationAggregateBy, location_name: "AggregateBy"))
+    GetContentModerationRequestMetadata.struct_class = Types::GetContentModerationRequestMetadata
 
     GetContentModerationResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: VideoJobStatus, location_name: "JobStatus"))
     GetContentModerationResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "StatusMessage"))
@@ -1062,6 +1076,10 @@ module Aws::Rekognition
     GetContentModerationResponse.add_member(:moderation_labels, Shapes::ShapeRef.new(shape: ContentModerationDetections, location_name: "ModerationLabels"))
     GetContentModerationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     GetContentModerationResponse.add_member(:moderation_model_version, Shapes::ShapeRef.new(shape: String, location_name: "ModerationModelVersion"))
+    GetContentModerationResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    GetContentModerationResponse.add_member(:video, Shapes::ShapeRef.new(shape: Video, location_name: "Video"))
+    GetContentModerationResponse.add_member(:job_tag, Shapes::ShapeRef.new(shape: JobTag, location_name: "JobTag"))
+    GetContentModerationResponse.add_member(:get_request_metadata, Shapes::ShapeRef.new(shape: GetContentModerationRequestMetadata, location_name: "GetRequestMetadata"))
     GetContentModerationResponse.struct_class = Types::GetContentModerationResponse
 
     GetFaceDetectionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
@@ -1074,6 +1092,9 @@ module Aws::Rekognition
     GetFaceDetectionResponse.add_member(:video_metadata, Shapes::ShapeRef.new(shape: VideoMetadata, location_name: "VideoMetadata"))
     GetFaceDetectionResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     GetFaceDetectionResponse.add_member(:faces, Shapes::ShapeRef.new(shape: FaceDetections, location_name: "Faces"))
+    GetFaceDetectionResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    GetFaceDetectionResponse.add_member(:video, Shapes::ShapeRef.new(shape: Video, location_name: "Video"))
+    GetFaceDetectionResponse.add_member(:job_tag, Shapes::ShapeRef.new(shape: JobTag, location_name: "JobTag"))
     GetFaceDetectionResponse.struct_class = Types::GetFaceDetectionResponse
 
     GetFaceLivenessSessionResultsRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: LivenessSessionId, required: true, location_name: "SessionId"))
@@ -1097,6 +1118,9 @@ module Aws::Rekognition
     GetFaceSearchResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     GetFaceSearchResponse.add_member(:video_metadata, Shapes::ShapeRef.new(shape: VideoMetadata, location_name: "VideoMetadata"))
     GetFaceSearchResponse.add_member(:persons, Shapes::ShapeRef.new(shape: PersonMatches, location_name: "Persons"))
+    GetFaceSearchResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    GetFaceSearchResponse.add_member(:video, Shapes::ShapeRef.new(shape: Video, location_name: "Video"))
+    GetFaceSearchResponse.add_member(:job_tag, Shapes::ShapeRef.new(shape: JobTag, location_name: "JobTag"))
     GetFaceSearchResponse.struct_class = Types::GetFaceSearchResponse
 
     GetLabelDetectionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
@@ -1106,12 +1130,20 @@ module Aws::Rekognition
     GetLabelDetectionRequest.add_member(:aggregate_by, Shapes::ShapeRef.new(shape: LabelDetectionAggregateBy, location_name: "AggregateBy"))
     GetLabelDetectionRequest.struct_class = Types::GetLabelDetectionRequest
 
+    GetLabelDetectionRequestMetadata.add_member(:sort_by, Shapes::ShapeRef.new(shape: LabelDetectionSortBy, location_name: "SortBy"))
+    GetLabelDetectionRequestMetadata.add_member(:aggregate_by, Shapes::ShapeRef.new(shape: LabelDetectionAggregateBy, location_name: "AggregateBy"))
+    GetLabelDetectionRequestMetadata.struct_class = Types::GetLabelDetectionRequestMetadata
+
     GetLabelDetectionResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: VideoJobStatus, location_name: "JobStatus"))
     GetLabelDetectionResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "StatusMessage"))
     GetLabelDetectionResponse.add_member(:video_metadata, Shapes::ShapeRef.new(shape: VideoMetadata, location_name: "VideoMetadata"))
     GetLabelDetectionResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     GetLabelDetectionResponse.add_member(:labels, Shapes::ShapeRef.new(shape: LabelDetections, location_name: "Labels"))
     GetLabelDetectionResponse.add_member(:label_model_version, Shapes::ShapeRef.new(shape: String, location_name: "LabelModelVersion"))
+    GetLabelDetectionResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    GetLabelDetectionResponse.add_member(:video, Shapes::ShapeRef.new(shape: Video, location_name: "Video"))
+    GetLabelDetectionResponse.add_member(:job_tag, Shapes::ShapeRef.new(shape: JobTag, location_name: "JobTag"))
+    GetLabelDetectionResponse.add_member(:get_request_metadata, Shapes::ShapeRef.new(shape: GetLabelDetectionRequestMetadata, location_name: "GetRequestMetadata"))
     GetLabelDetectionResponse.struct_class = Types::GetLabelDetectionResponse
 
     GetPersonTrackingRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
@@ -1125,6 +1157,9 @@ module Aws::Rekognition
     GetPersonTrackingResponse.add_member(:video_metadata, Shapes::ShapeRef.new(shape: VideoMetadata, location_name: "VideoMetadata"))
     GetPersonTrackingResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     GetPersonTrackingResponse.add_member(:persons, Shapes::ShapeRef.new(shape: PersonDetections, location_name: "Persons"))
+    GetPersonTrackingResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    GetPersonTrackingResponse.add_member(:video, Shapes::ShapeRef.new(shape: Video, location_name: "Video"))
+    GetPersonTrackingResponse.add_member(:job_tag, Shapes::ShapeRef.new(shape: JobTag, location_name: "JobTag"))
     GetPersonTrackingResponse.struct_class = Types::GetPersonTrackingResponse
 
     GetSegmentDetectionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
@@ -1139,6 +1174,9 @@ module Aws::Rekognition
     GetSegmentDetectionResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     GetSegmentDetectionResponse.add_member(:segments, Shapes::ShapeRef.new(shape: SegmentDetections, location_name: "Segments"))
     GetSegmentDetectionResponse.add_member(:selected_segment_types, Shapes::ShapeRef.new(shape: SegmentTypesInfo, location_name: "SelectedSegmentTypes"))
+    GetSegmentDetectionResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    GetSegmentDetectionResponse.add_member(:video, Shapes::ShapeRef.new(shape: Video, location_name: "Video"))
+    GetSegmentDetectionResponse.add_member(:job_tag, Shapes::ShapeRef.new(shape: JobTag, location_name: "JobTag"))
     GetSegmentDetectionResponse.struct_class = Types::GetSegmentDetectionResponse
 
     GetTextDetectionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
@@ -1152,6 +1190,9 @@ module Aws::Rekognition
     GetTextDetectionResponse.add_member(:text_detections, Shapes::ShapeRef.new(shape: TextDetectionResults, location_name: "TextDetections"))
     GetTextDetectionResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     GetTextDetectionResponse.add_member(:text_model_version, Shapes::ShapeRef.new(shape: String, location_name: "TextModelVersion"))
+    GetTextDetectionResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    GetTextDetectionResponse.add_member(:video, Shapes::ShapeRef.new(shape: Video, location_name: "Video"))
+    GetTextDetectionResponse.add_member(:job_tag, Shapes::ShapeRef.new(shape: JobTag, location_name: "JobTag"))
     GetTextDetectionResponse.struct_class = Types::GetTextDetectionResponse
 
     GroundTruthManifest.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "S3Object"))

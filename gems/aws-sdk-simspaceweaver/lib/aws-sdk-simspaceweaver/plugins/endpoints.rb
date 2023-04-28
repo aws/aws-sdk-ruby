@@ -56,6 +56,8 @@ module Aws::SimSpaceWeaver
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :create_snapshot
+            Aws::SimSpaceWeaver::Endpoints::CreateSnapshot.build(context)
           when :delete_app
             Aws::SimSpaceWeaver::Endpoints::DeleteApp.build(context)
           when :delete_simulation

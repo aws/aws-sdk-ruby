@@ -3004,6 +3004,9 @@ module Aws::Rekognition
     #   * {Types::GetCelebrityRecognitionResponse#video_metadata #video_metadata} => Types::VideoMetadata
     #   * {Types::GetCelebrityRecognitionResponse#next_token #next_token} => String
     #   * {Types::GetCelebrityRecognitionResponse#celebrities #celebrities} => Array&lt;Types::CelebrityRecognition&gt;
+    #   * {Types::GetCelebrityRecognitionResponse#job_id #job_id} => String
+    #   * {Types::GetCelebrityRecognitionResponse#video #video} => Types::Video
+    #   * {Types::GetCelebrityRecognitionResponse#job_tag #job_tag} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -3075,6 +3078,11 @@ module Aws::Rekognition
     #   resp.celebrities[0].celebrity.face.quality.sharpness #=> Float
     #   resp.celebrities[0].celebrity.face.confidence #=> Float
     #   resp.celebrities[0].celebrity.known_gender.type #=> String, one of "Male", "Female", "Nonbinary", "Unlisted"
+    #   resp.job_id #=> String
+    #   resp.video.s3_object.bucket #=> String
+    #   resp.video.s3_object.name #=> String
+    #   resp.video.s3_object.version #=> String
+    #   resp.job_tag #=> String
     #
     # @overload get_celebrity_recognition(params = {})
     # @param [Hash] params ({})
@@ -3151,6 +3159,11 @@ module Aws::Rekognition
     #   Within each label group, the array element are sorted by detection
     #   confidence. The default sort is by `TIMESTAMP`.
     #
+    # @option params [String] :aggregate_by
+    #   Defines how to aggregate results of the StartContentModeration
+    #   request. Default aggregation option is TIMESTAMPS. SEGMENTS mode
+    #   aggregates moderation labels over time.
+    #
     # @return [Types::GetContentModerationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetContentModerationResponse#job_status #job_status} => String
@@ -3159,6 +3172,10 @@ module Aws::Rekognition
     #   * {Types::GetContentModerationResponse#moderation_labels #moderation_labels} => Array&lt;Types::ContentModerationDetection&gt;
     #   * {Types::GetContentModerationResponse#next_token #next_token} => String
     #   * {Types::GetContentModerationResponse#moderation_model_version #moderation_model_version} => String
+    #   * {Types::GetContentModerationResponse#job_id #job_id} => String
+    #   * {Types::GetContentModerationResponse#video #video} => Types::Video
+    #   * {Types::GetContentModerationResponse#job_tag #job_tag} => String
+    #   * {Types::GetContentModerationResponse#get_request_metadata #get_request_metadata} => Types::GetContentModerationRequestMetadata
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -3169,6 +3186,7 @@ module Aws::Rekognition
     #     max_results: 1,
     #     next_token: "PaginationToken",
     #     sort_by: "NAME", # accepts NAME, TIMESTAMP
+    #     aggregate_by: "TIMESTAMPS", # accepts TIMESTAMPS, SEGMENTS
     #   })
     #
     # @example Response structure
@@ -3187,8 +3205,18 @@ module Aws::Rekognition
     #   resp.moderation_labels[0].moderation_label.confidence #=> Float
     #   resp.moderation_labels[0].moderation_label.name #=> String
     #   resp.moderation_labels[0].moderation_label.parent_name #=> String
+    #   resp.moderation_labels[0].start_timestamp_millis #=> Integer
+    #   resp.moderation_labels[0].end_timestamp_millis #=> Integer
+    #   resp.moderation_labels[0].duration_millis #=> Integer
     #   resp.next_token #=> String
     #   resp.moderation_model_version #=> String
+    #   resp.job_id #=> String
+    #   resp.video.s3_object.bucket #=> String
+    #   resp.video.s3_object.name #=> String
+    #   resp.video.s3_object.version #=> String
+    #   resp.job_tag #=> String
+    #   resp.get_request_metadata.sort_by #=> String, one of "NAME", "TIMESTAMP"
+    #   resp.get_request_metadata.aggregate_by #=> String, one of "TIMESTAMPS", "SEGMENTS"
     #
     # @overload get_content_moderation(params = {})
     # @param [Hash] params ({})
@@ -3244,6 +3272,9 @@ module Aws::Rekognition
     #   * {Types::GetFaceDetectionResponse#video_metadata #video_metadata} => Types::VideoMetadata
     #   * {Types::GetFaceDetectionResponse#next_token #next_token} => String
     #   * {Types::GetFaceDetectionResponse#faces #faces} => Array&lt;Types::FaceDetection&gt;
+    #   * {Types::GetFaceDetectionResponse#job_id #job_id} => String
+    #   * {Types::GetFaceDetectionResponse#video #video} => Types::Video
+    #   * {Types::GetFaceDetectionResponse#job_tag #job_tag} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -3304,6 +3335,11 @@ module Aws::Rekognition
     #   resp.faces[0].face.quality.brightness #=> Float
     #   resp.faces[0].face.quality.sharpness #=> Float
     #   resp.faces[0].face.confidence #=> Float
+    #   resp.job_id #=> String
+    #   resp.video.s3_object.bucket #=> String
+    #   resp.video.s3_object.name #=> String
+    #   resp.video.s3_object.version #=> String
+    #   resp.job_tag #=> String
     #
     # @overload get_face_detection(params = {})
     # @param [Hash] params ({})
@@ -3433,6 +3469,9 @@ module Aws::Rekognition
     #   * {Types::GetFaceSearchResponse#next_token #next_token} => String
     #   * {Types::GetFaceSearchResponse#video_metadata #video_metadata} => Types::VideoMetadata
     #   * {Types::GetFaceSearchResponse#persons #persons} => Array&lt;Types::PersonMatch&gt;
+    #   * {Types::GetFaceSearchResponse#job_id #job_id} => String
+    #   * {Types::GetFaceSearchResponse#video #video} => Types::Video
+    #   * {Types::GetFaceSearchResponse#job_tag #job_tag} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -3510,6 +3549,11 @@ module Aws::Rekognition
     #   resp.persons[0].face_matches[0].face.external_image_id #=> String
     #   resp.persons[0].face_matches[0].face.confidence #=> Float
     #   resp.persons[0].face_matches[0].face.index_faces_model_version #=> String
+    #   resp.job_id #=> String
+    #   resp.video.s3_object.bucket #=> String
+    #   resp.video.s3_object.name #=> String
+    #   resp.video.s3_object.version #=> String
+    #   resp.job_tag #=> String
     #
     # @overload get_face_search(params = {})
     # @param [Hash] params ({})
@@ -3631,6 +3675,10 @@ module Aws::Rekognition
     #   * {Types::GetLabelDetectionResponse#next_token #next_token} => String
     #   * {Types::GetLabelDetectionResponse#labels #labels} => Array&lt;Types::LabelDetection&gt;
     #   * {Types::GetLabelDetectionResponse#label_model_version #label_model_version} => String
+    #   * {Types::GetLabelDetectionResponse#job_id #job_id} => String
+    #   * {Types::GetLabelDetectionResponse#video #video} => Types::Video
+    #   * {Types::GetLabelDetectionResponse#job_tag #job_tag} => String
+    #   * {Types::GetLabelDetectionResponse#get_request_metadata #get_request_metadata} => Types::GetLabelDetectionRequestMetadata
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -3684,6 +3732,13 @@ module Aws::Rekognition
     #   resp.labels[0].end_timestamp_millis #=> Integer
     #   resp.labels[0].duration_millis #=> Integer
     #   resp.label_model_version #=> String
+    #   resp.job_id #=> String
+    #   resp.video.s3_object.bucket #=> String
+    #   resp.video.s3_object.name #=> String
+    #   resp.video.s3_object.version #=> String
+    #   resp.job_tag #=> String
+    #   resp.get_request_metadata.sort_by #=> String, one of "NAME", "TIMESTAMP"
+    #   resp.get_request_metadata.aggregate_by #=> String, one of "TIMESTAMPS", "SEGMENTS"
     #
     # @overload get_label_detection(params = {})
     # @param [Hash] params ({})
@@ -3761,6 +3816,9 @@ module Aws::Rekognition
     #   * {Types::GetPersonTrackingResponse#video_metadata #video_metadata} => Types::VideoMetadata
     #   * {Types::GetPersonTrackingResponse#next_token #next_token} => String
     #   * {Types::GetPersonTrackingResponse#persons #persons} => Array&lt;Types::PersonDetection&gt;
+    #   * {Types::GetPersonTrackingResponse#job_id #job_id} => String
+    #   * {Types::GetPersonTrackingResponse#video #video} => Types::Video
+    #   * {Types::GetPersonTrackingResponse#job_tag #job_tag} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -3827,6 +3885,11 @@ module Aws::Rekognition
     #   resp.persons[0].person.face.quality.brightness #=> Float
     #   resp.persons[0].person.face.quality.sharpness #=> Float
     #   resp.persons[0].person.face.confidence #=> Float
+    #   resp.job_id #=> String
+    #   resp.video.s3_object.bucket #=> String
+    #   resp.video.s3_object.name #=> String
+    #   resp.video.s3_object.version #=> String
+    #   resp.job_tag #=> String
     #
     # @overload get_person_tracking(params = {})
     # @param [Hash] params ({})
@@ -3894,6 +3957,9 @@ module Aws::Rekognition
     #   * {Types::GetSegmentDetectionResponse#next_token #next_token} => String
     #   * {Types::GetSegmentDetectionResponse#segments #segments} => Array&lt;Types::SegmentDetection&gt;
     #   * {Types::GetSegmentDetectionResponse#selected_segment_types #selected_segment_types} => Array&lt;Types::SegmentTypeInfo&gt;
+    #   * {Types::GetSegmentDetectionResponse#job_id #job_id} => String
+    #   * {Types::GetSegmentDetectionResponse#video #video} => Types::Video
+    #   * {Types::GetSegmentDetectionResponse#job_tag #job_tag} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -3941,6 +4007,11 @@ module Aws::Rekognition
     #   resp.selected_segment_types #=> Array
     #   resp.selected_segment_types[0].type #=> String, one of "TECHNICAL_CUE", "SHOT"
     #   resp.selected_segment_types[0].model_version #=> String
+    #   resp.job_id #=> String
+    #   resp.video.s3_object.bucket #=> String
+    #   resp.video.s3_object.name #=> String
+    #   resp.video.s3_object.version #=> String
+    #   resp.job_tag #=> String
     #
     # @overload get_segment_detection(params = {})
     # @param [Hash] params ({})
@@ -4003,6 +4074,9 @@ module Aws::Rekognition
     #   * {Types::GetTextDetectionResponse#text_detections #text_detections} => Array&lt;Types::TextDetectionResult&gt;
     #   * {Types::GetTextDetectionResponse#next_token #next_token} => String
     #   * {Types::GetTextDetectionResponse#text_model_version #text_model_version} => String
+    #   * {Types::GetTextDetectionResponse#job_id #job_id} => String
+    #   * {Types::GetTextDetectionResponse#video #video} => Types::Video
+    #   * {Types::GetTextDetectionResponse#job_tag #job_tag} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -4041,6 +4115,11 @@ module Aws::Rekognition
     #   resp.text_detections[0].text_detection.geometry.polygon[0].y #=> Float
     #   resp.next_token #=> String
     #   resp.text_model_version #=> String
+    #   resp.job_id #=> String
+    #   resp.video.s3_object.bucket #=> String
+    #   resp.video.s3_object.name #=> String
+    #   resp.video.s3_object.version #=> String
+    #   resp.job_tag #=> String
     #
     # @overload get_text_detection(params = {})
     # @param [Hash] params ({})
@@ -6687,7 +6766,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

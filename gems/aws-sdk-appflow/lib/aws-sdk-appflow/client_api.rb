@@ -208,6 +208,7 @@ module Aws::Appflow
     InstanceUrl = Shapes::StringShape.new(name: 'InstanceUrl')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     JavaBoolean = Shapes::BooleanShape.new(name: 'JavaBoolean')
+    JwtToken = Shapes::StringShape.new(name: 'JwtToken')
     KMSArn = Shapes::StringShape.new(name: 'KMSArn')
     Key = Shapes::StringShape.new(name: 'Key')
     Label = Shapes::StringShape.new(name: 'Label')
@@ -1244,6 +1245,8 @@ module Aws::Appflow
     SalesforceConnectorProfileCredentials.add_member(:refresh_token, Shapes::ShapeRef.new(shape: RefreshToken, location_name: "refreshToken"))
     SalesforceConnectorProfileCredentials.add_member(:o_auth_request, Shapes::ShapeRef.new(shape: ConnectorOAuthRequest, location_name: "oAuthRequest"))
     SalesforceConnectorProfileCredentials.add_member(:client_credentials_arn, Shapes::ShapeRef.new(shape: ClientCredentialsArn, location_name: "clientCredentialsArn"))
+    SalesforceConnectorProfileCredentials.add_member(:o_auth_2_grant_type, Shapes::ShapeRef.new(shape: OAuth2GrantType, location_name: "oAuth2GrantType"))
+    SalesforceConnectorProfileCredentials.add_member(:jwt_token, Shapes::ShapeRef.new(shape: JwtToken, location_name: "jwtToken"))
     SalesforceConnectorProfileCredentials.struct_class = Types::SalesforceConnectorProfileCredentials
 
     SalesforceConnectorProfileProperties.add_member(:instance_url, Shapes::ShapeRef.new(shape: InstanceUrl, location_name: "instanceUrl"))
@@ -1262,6 +1265,7 @@ module Aws::Appflow
 
     SalesforceMetadata.add_member(:o_auth_scopes, Shapes::ShapeRef.new(shape: OAuthScopeList, location_name: "oAuthScopes"))
     SalesforceMetadata.add_member(:data_transfer_apis, Shapes::ShapeRef.new(shape: SalesforceDataTransferApiList, location_name: "dataTransferApis"))
+    SalesforceMetadata.add_member(:oauth2_grant_types_supported, Shapes::ShapeRef.new(shape: OAuth2GrantTypeSupportedList, location_name: "oauth2GrantTypesSupported"))
     SalesforceMetadata.struct_class = Types::SalesforceMetadata
 
     SalesforceSourceProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "object"))

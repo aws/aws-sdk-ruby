@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2023-04-28)
+------------------
+
+* Feature - This release adds PAUSED and PAUSING state as a returned value for DescribeReplicationConfigurations response.
+
 1.59.0 (2023-02-15)
 ------------------
 

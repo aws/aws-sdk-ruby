@@ -625,9 +625,27 @@ module Aws::Rekognition
     #   The content moderation label detected by in the stored video.
     #   @return [Types::ModerationLabel]
     #
+    # @!attribute [rw] start_timestamp_millis
+    #   The time in milliseconds defining the start of the timeline segment
+    #   containing a continuously detected moderation label.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_timestamp_millis
+    #   The time in milliseconds defining the end of the timeline segment
+    #   containing a continuously detected moderation label.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] duration_millis
+    #   The time duration of a segment in milliseconds, I.e. time elapsed
+    #   from StartTimestampMillis to EndTimestampMillis.
+    #   @return [Integer]
+    #
     class ContentModerationDetection < Struct.new(
       :timestamp,
-      :moderation_label)
+      :moderation_label,
+      :start_timestamp_millis,
+      :end_timestamp_millis,
+      :duration_millis)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2878,12 +2896,34 @@ module Aws::Rekognition
     #   Array of celebrities recognized in the video.
     #   @return [Array<Types::CelebrityRecognition>]
     #
+    # @!attribute [rw] job_id
+    #   Job identifier for the celebrity recognition operation for which you
+    #   want to obtain results. The job identifer is returned by an initial
+    #   call to StartCelebrityRecognition.
+    #   @return [String]
+    #
+    # @!attribute [rw] video
+    #   Video file stored in an Amazon S3 bucket. Amazon Rekognition video
+    #   start operations such as StartLabelDetection use `Video` to specify
+    #   a video for analysis. The supported file formats are .mp4, .mov and
+    #   .avi.
+    #   @return [Types::Video]
+    #
+    # @!attribute [rw] job_tag
+    #   A job identifier specified in the call to StartCelebrityRecognition
+    #   and returned in the job completion notification sent to your Amazon
+    #   Simple Notification Service topic.
+    #   @return [String]
+    #
     class GetCelebrityRecognitionResponse < Struct.new(
       :job_status,
       :status_message,
       :video_metadata,
       :next_token,
-      :celebrities)
+      :celebrities,
+      :job_id,
+      :video,
+      :job_tag)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2916,11 +2956,36 @@ module Aws::Rekognition
     #   detection confidence. The default sort is by `TIMESTAMP`.
     #   @return [String]
     #
+    # @!attribute [rw] aggregate_by
+    #   Defines how to aggregate results of the StartContentModeration
+    #   request. Default aggregation option is TIMESTAMPS. SEGMENTS mode
+    #   aggregates moderation labels over time.
+    #   @return [String]
+    #
     class GetContentModerationRequest < Struct.new(
       :job_id,
       :max_results,
       :next_token,
-      :sort_by)
+      :sort_by,
+      :aggregate_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata about a content moderation request, including the
+    # SortBy and AggregateBy options.
+    #
+    # @!attribute [rw] sort_by
+    #   The sorting method chosen for a GetContentModeration request.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregate_by
+    #   The aggregation method chosen for a GetContentModeration request.
+    #   @return [String]
+    #
+    class GetContentModerationRequestMetadata < Struct.new(
+      :sort_by,
+      :aggregate_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2956,13 +3021,41 @@ module Aws::Rekognition
     #   detect inappropriate, unwanted, or offensive content.
     #   @return [String]
     #
+    # @!attribute [rw] job_id
+    #   Job identifier for the content moderation operation for which you
+    #   want to obtain results. The job identifer is returned by an initial
+    #   call to StartContentModeration.
+    #   @return [String]
+    #
+    # @!attribute [rw] video
+    #   Video file stored in an Amazon S3 bucket. Amazon Rekognition video
+    #   start operations such as StartLabelDetection use `Video` to specify
+    #   a video for analysis. The supported file formats are .mp4, .mov and
+    #   .avi.
+    #   @return [Types::Video]
+    #
+    # @!attribute [rw] job_tag
+    #   A job identifier specified in the call to StartContentModeration and
+    #   returned in the job completion notification sent to your Amazon
+    #   Simple Notification Service topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] get_request_metadata
+    #   Information about the paramters used when getting a response.
+    #   Includes information on aggregation and sorting methods.
+    #   @return [Types::GetContentModerationRequestMetadata]
+    #
     class GetContentModerationResponse < Struct.new(
       :job_status,
       :status_message,
       :video_metadata,
       :moderation_labels,
       :next_token,
-      :moderation_model_version)
+      :moderation_model_version,
+      :job_id,
+      :video,
+      :job_tag,
+      :get_request_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3021,12 +3114,34 @@ module Aws::Rekognition
     #   start of the video, the face was detected.
     #   @return [Array<Types::FaceDetection>]
     #
+    # @!attribute [rw] job_id
+    #   Job identifier for the face detection operation for which you want
+    #   to obtain results. The job identifer is returned by an initial call
+    #   to StartFaceDetection.
+    #   @return [String]
+    #
+    # @!attribute [rw] video
+    #   Video file stored in an Amazon S3 bucket. Amazon Rekognition video
+    #   start operations such as StartLabelDetection use `Video` to specify
+    #   a video for analysis. The supported file formats are .mp4, .mov and
+    #   .avi.
+    #   @return [Types::Video]
+    #
+    # @!attribute [rw] job_tag
+    #   A job identifier specified in the call to StartFaceDetection and
+    #   returned in the job completion notification sent to your Amazon
+    #   Simple Notification Service topic.
+    #   @return [String]
+    #
     class GetFaceDetectionResponse < Struct.new(
       :job_status,
       :status_message,
       :video_metadata,
       :next_token,
-      :faces)
+      :faces,
+      :job_id,
+      :video,
+      :job_tag)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3153,12 +3268,34 @@ module Aws::Rekognition
     #   person.
     #   @return [Array<Types::PersonMatch>]
     #
+    # @!attribute [rw] job_id
+    #   Job identifier for the face search operation for which you want to
+    #   obtain results. The job identifer is returned by an initial call to
+    #   StartFaceSearch.
+    #   @return [String]
+    #
+    # @!attribute [rw] video
+    #   Video file stored in an Amazon S3 bucket. Amazon Rekognition video
+    #   start operations such as StartLabelDetection use `Video` to specify
+    #   a video for analysis. The supported file formats are .mp4, .mov and
+    #   .avi.
+    #   @return [Types::Video]
+    #
+    # @!attribute [rw] job_tag
+    #   A job identifier specified in the call to StartFaceSearch and
+    #   returned in the job completion notification sent to your Amazon
+    #   Simple Notification Service topic.
+    #   @return [String]
+    #
     class GetFaceSearchResponse < Struct.new(
       :job_status,
       :status_message,
       :next_token,
       :video_metadata,
-      :persons)
+      :persons,
+      :job_id,
+      :video,
+      :job_tag)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3206,6 +3343,24 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # Contains metadata about a label detection request, including the
+    # SortBy and AggregateBy options.
+    #
+    # @!attribute [rw] sort_by
+    #   The sorting method chosen for a GetLabelDetection request.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregate_by
+    #   The aggregation method chosen for a GetLabelDetection request.
+    #   @return [String]
+    #
+    class GetLabelDetectionRequestMetadata < Struct.new(
+      :sort_by,
+      :aggregate_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] job_status
     #   The current status of the label detection job.
     #   @return [String]
@@ -3238,13 +3393,41 @@ module Aws::Rekognition
     #   labels.
     #   @return [String]
     #
+    # @!attribute [rw] job_id
+    #   Job identifier for the label detection operation for which you want
+    #   to obtain results. The job identifer is returned by an initial call
+    #   to StartLabelDetection.
+    #   @return [String]
+    #
+    # @!attribute [rw] video
+    #   Video file stored in an Amazon S3 bucket. Amazon Rekognition video
+    #   start operations such as StartLabelDetection use `Video` to specify
+    #   a video for analysis. The supported file formats are .mp4, .mov and
+    #   .avi.
+    #   @return [Types::Video]
+    #
+    # @!attribute [rw] job_tag
+    #   A job identifier specified in the call to StartLabelDetection and
+    #   returned in the job completion notification sent to your Amazon
+    #   Simple Notification Service topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] get_request_metadata
+    #   Information about the paramters used when getting a response.
+    #   Includes information on aggregation and sorting methods.
+    #   @return [Types::GetLabelDetectionRequestMetadata]
+    #
     class GetLabelDetectionResponse < Struct.new(
       :job_status,
       :status_message,
       :video_metadata,
       :next_token,
       :labels,
-      :label_model_version)
+      :label_model_version,
+      :job_id,
+      :video,
+      :job_tag,
+      :get_request_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3312,12 +3495,34 @@ module Aws::Rekognition
     #   for each time a person's path is tracked.
     #   @return [Array<Types::PersonDetection>]
     #
+    # @!attribute [rw] job_id
+    #   Job identifier for the person tracking operation for which you want
+    #   to obtain results. The job identifer is returned by an initial call
+    #   to StartPersonTracking.
+    #   @return [String]
+    #
+    # @!attribute [rw] video
+    #   Video file stored in an Amazon S3 bucket. Amazon Rekognition video
+    #   start operations such as StartLabelDetection use `Video` to specify
+    #   a video for analysis. The supported file formats are .mp4, .mov and
+    #   .avi.
+    #   @return [Types::Video]
+    #
+    # @!attribute [rw] job_tag
+    #   A job identifier specified in the call to StartCelebrityRecognition
+    #   and returned in the job completion notification sent to your Amazon
+    #   Simple Notification Service topic.
+    #   @return [String]
+    #
     class GetPersonTrackingResponse < Struct.new(
       :job_status,
       :status_message,
       :video_metadata,
       :next_token,
-      :persons)
+      :persons,
+      :job_id,
+      :video,
+      :job_tag)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3393,6 +3598,25 @@ module Aws::Rekognition
     #   `StartSegmentDetection`.
     #   @return [Array<Types::SegmentTypeInfo>]
     #
+    # @!attribute [rw] job_id
+    #   Job identifier for the segment detection operation for which you
+    #   want to obtain results. The job identifer is returned by an initial
+    #   call to StartSegmentDetection.
+    #   @return [String]
+    #
+    # @!attribute [rw] video
+    #   Video file stored in an Amazon S3 bucket. Amazon Rekognition video
+    #   start operations such as StartLabelDetection use `Video` to specify
+    #   a video for analysis. The supported file formats are .mp4, .mov and
+    #   .avi.
+    #   @return [Types::Video]
+    #
+    # @!attribute [rw] job_tag
+    #   A job identifier specified in the call to StartSegmentDetection and
+    #   returned in the job completion notification sent to your Amazon
+    #   Simple Notification Service topic.
+    #   @return [String]
+    #
     class GetSegmentDetectionResponse < Struct.new(
       :job_status,
       :status_message,
@@ -3400,7 +3624,10 @@ module Aws::Rekognition
       :audio_metadata,
       :next_token,
       :segments,
-      :selected_segment_types)
+      :selected_segment_types,
+      :job_id,
+      :video,
+      :job_tag)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3463,13 +3690,35 @@ module Aws::Rekognition
     #   text.
     #   @return [String]
     #
+    # @!attribute [rw] job_id
+    #   Job identifier for the text detection operation for which you want
+    #   to obtain results. The job identifer is returned by an initial call
+    #   to StartTextDetection.
+    #   @return [String]
+    #
+    # @!attribute [rw] video
+    #   Video file stored in an Amazon S3 bucket. Amazon Rekognition video
+    #   start operations such as StartLabelDetection use `Video` to specify
+    #   a video for analysis. The supported file formats are .mp4, .mov and
+    #   .avi.
+    #   @return [Types::Video]
+    #
+    # @!attribute [rw] job_tag
+    #   A job identifier specified in the call to StartTextDetection and
+    #   returned in the job completion notification sent to your Amazon
+    #   Simple Notification Service topic.
+    #   @return [String]
+    #
     class GetTextDetectionResponse < Struct.new(
       :job_status,
       :status_message,
       :video_metadata,
       :text_detections,
       :next_token,
-      :text_model_version)
+      :text_model_version,
+      :job_id,
+      :video,
+      :job_tag)
       SENSITIVE = []
       include Aws::Structure
     end

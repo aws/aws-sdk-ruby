@@ -1129,7 +1129,7 @@ module Aws::EFS
     #   resp.original_source_file_system_arn #=> String
     #   resp.creation_time #=> Time
     #   resp.destinations #=> Array
-    #   resp.destinations[0].status #=> String, one of "ENABLED", "ENABLING", "DELETING", "ERROR"
+    #   resp.destinations[0].status #=> String, one of "ENABLED", "ENABLING", "DELETING", "ERROR", "PAUSED", "PAUSING"
     #   resp.destinations[0].file_system_id #=> String
     #   resp.destinations[0].region #=> String
     #   resp.destinations[0].last_replicated_timestamp #=> Time
@@ -2041,7 +2041,7 @@ module Aws::EFS
     #   resp.replications[0].original_source_file_system_arn #=> String
     #   resp.replications[0].creation_time #=> Time
     #   resp.replications[0].destinations #=> Array
-    #   resp.replications[0].destinations[0].status #=> String, one of "ENABLED", "ENABLING", "DELETING", "ERROR"
+    #   resp.replications[0].destinations[0].status #=> String, one of "ENABLED", "ENABLING", "DELETING", "ERROR", "PAUSED", "PAUSING"
     #   resp.replications[0].destinations[0].file_system_id #=> String
     #   resp.replications[0].destinations[0].region #=> String
     #   resp.replications[0].destinations[0].last_replicated_timestamp #=> Time
@@ -2703,7 +2703,7 @@ module Aws::EFS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

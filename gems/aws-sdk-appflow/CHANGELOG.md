@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2023-04-28)
+------------------
+
+* Feature - Adds Jwt Support for Salesforce Credentials.
+
 1.38.0 (2023-04-24)
 ------------------
 

@@ -1136,7 +1136,9 @@ module Aws::DirectConnect
 
     # @!attribute [rw] number_of_connections
     #   The number of physical dedicated connections initially provisioned
-    #   and bundled by the LAG.
+    #   and bundled by the LAG. You can have a maximum of four connections
+    #   when the port speed is 1G or 10G, or two when the port speed is
+    #   100G.
     #   @return [Integer]
     #
     # @!attribute [rw] location
@@ -3132,7 +3134,7 @@ module Aws::DirectConnect
     #
     # @!attribute [rw] mtu
     #   The maximum transmission unit (MTU), in bytes. The supported values
-    #   are 1500 and 9001. The default value is 1500.
+    #   are 1500 and 8500. The default value is 1500.
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key

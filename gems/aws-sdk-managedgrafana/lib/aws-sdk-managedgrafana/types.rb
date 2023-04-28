@@ -285,6 +285,12 @@ module Aws::ManagedGrafana
     #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
     #   @return [String]
     #
+    # @!attribute [rw] grafana_version
+    #   Specifies the version of Grafana to support in the new workspace.
+    #
+    #   Supported values are `8.4` and `9.4`.
+    #   @return [String]
+    #
     # @!attribute [rw] network_access_control
     #   Configuration for network access to your workspace.
     #
@@ -388,6 +394,7 @@ module Aws::ManagedGrafana
       :authentication_providers,
       :client_token,
       :configuration,
+      :grafana_version,
       :network_access_control,
       :organization_role_name,
       :permission_type,

@@ -546,6 +546,64 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Cancels the capacity reservation with the specified name.
+    #
+    # @option params [required, String] :name
+    #   The name of the capacity reservation to cancel.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_capacity_reservation({
+    #     name: "CapacityReservationName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CancelCapacityReservation AWS API Documentation
+    #
+    # @overload cancel_capacity_reservation(params = {})
+    # @param [Hash] params ({})
+    def cancel_capacity_reservation(params = {}, options = {})
+      req = build_request(:cancel_capacity_reservation, params)
+      req.send_request(options)
+    end
+
+    # Creates a capacity reservation with the specified name and number of
+    # requested data processing units.
+    #
+    # @option params [required, Integer] :target_dpus
+    #   The number of requested data processing units.
+    #
+    # @option params [required, String] :name
+    #   The name of the capacity reservation to create.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags for the capacity reservation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_capacity_reservation({
+    #     target_dpus: 1, # required
+    #     name: "CapacityReservationName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateCapacityReservation AWS API Documentation
+    #
+    # @overload create_capacity_reservation(params = {})
+    # @param [Hash] params ({})
+    def create_capacity_reservation(params = {}, options = {})
+      req = build_request(:create_capacity_reservation, params)
+      req.send_request(options)
+    end
+
     # Creates (registers) a data catalog with the specified name and
     # properties. Catalogs created are visible to all users of the same
     # Amazon Web Services account.
@@ -1180,6 +1238,77 @@ module Aws::Athena
     # @param [Hash] params ({})
     def get_calculation_execution_status(params = {}, options = {})
       req = build_request(:get_calculation_execution_status, params)
+      req.send_request(options)
+    end
+
+    # Gets the capacity assignment configuration for a capacity reservation,
+    # if one exists.
+    #
+    # @option params [required, String] :capacity_reservation_name
+    #   The name of the capacity reservation to retrieve the capacity
+    #   assignment configuration for.
+    #
+    # @return [Types::GetCapacityAssignmentConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCapacityAssignmentConfigurationOutput#capacity_assignment_configuration #capacity_assignment_configuration} => Types::CapacityAssignmentConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_capacity_assignment_configuration({
+    #     capacity_reservation_name: "CapacityReservationName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_assignment_configuration.capacity_reservation_name #=> String
+    #   resp.capacity_assignment_configuration.capacity_assignments #=> Array
+    #   resp.capacity_assignment_configuration.capacity_assignments[0].work_group_names #=> Array
+    #   resp.capacity_assignment_configuration.capacity_assignments[0].work_group_names[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetCapacityAssignmentConfiguration AWS API Documentation
+    #
+    # @overload get_capacity_assignment_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_capacity_assignment_configuration(params = {}, options = {})
+      req = build_request(:get_capacity_assignment_configuration, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the capacity reservation with the specified
+    # name.
+    #
+    # @option params [required, String] :name
+    #   The name of the capacity reservation.
+    #
+    # @return [Types::GetCapacityReservationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCapacityReservationOutput#capacity_reservation #capacity_reservation} => Types::CapacityReservation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_capacity_reservation({
+    #     name: "CapacityReservationName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_reservation.name #=> String
+    #   resp.capacity_reservation.status #=> String, one of "PENDING", "ACTIVE", "CANCELLING", "CANCELLED", "FAILED", "UPDATE_PENDING"
+    #   resp.capacity_reservation.target_dpus #=> Integer
+    #   resp.capacity_reservation.allocated_dpus #=> Integer
+    #   resp.capacity_reservation.last_allocation.status #=> String, one of "PENDING", "SUCCEEDED", "FAILED"
+    #   resp.capacity_reservation.last_allocation.status_message #=> String
+    #   resp.capacity_reservation.last_allocation.request_time #=> Time
+    #   resp.capacity_reservation.last_allocation.request_completion_time #=> Time
+    #   resp.capacity_reservation.last_successful_allocation_time #=> Time
+    #   resp.capacity_reservation.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetCapacityReservation AWS API Documentation
+    #
+    # @overload get_capacity_reservation(params = {})
+    # @param [Hash] params ({})
+    def get_capacity_reservation(params = {}, options = {})
+      req = build_request(:get_capacity_reservation, params)
       req.send_request(options)
     end
 
@@ -1910,6 +2039,53 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Lists the capacity reservations for the current account.
+    #
+    # @option params [String] :next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the maximum number of results to return.
+    #
+    # @return [Types::ListCapacityReservationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCapacityReservationsOutput#next_token #next_token} => String
+    #   * {Types::ListCapacityReservationsOutput#capacity_reservations #capacity_reservations} => Array&lt;Types::CapacityReservation&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_capacity_reservations({
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.capacity_reservations #=> Array
+    #   resp.capacity_reservations[0].name #=> String
+    #   resp.capacity_reservations[0].status #=> String, one of "PENDING", "ACTIVE", "CANCELLING", "CANCELLED", "FAILED", "UPDATE_PENDING"
+    #   resp.capacity_reservations[0].target_dpus #=> Integer
+    #   resp.capacity_reservations[0].allocated_dpus #=> Integer
+    #   resp.capacity_reservations[0].last_allocation.status #=> String, one of "PENDING", "SUCCEEDED", "FAILED"
+    #   resp.capacity_reservations[0].last_allocation.status_message #=> String
+    #   resp.capacity_reservations[0].last_allocation.request_time #=> Time
+    #   resp.capacity_reservations[0].last_allocation.request_completion_time #=> Time
+    #   resp.capacity_reservations[0].last_successful_allocation_time #=> Time
+    #   resp.capacity_reservations[0].creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListCapacityReservations AWS API Documentation
+    #
+    # @overload list_capacity_reservations(params = {})
+    # @param [Hash] params ({})
+    def list_capacity_reservations(params = {}, options = {})
+      req = build_request(:list_capacity_reservations, params)
+      req.send_request(options)
+    end
+
     # Lists the data catalogs in the current Amazon Web Services account.
     #
     # <note markdown="1"> In the Athena console, data catalogs are listed as "data sources" on
@@ -2520,8 +2696,7 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Lists the tags associated with an Athena workgroup or data catalog
-    # resource.
+    # Lists the tags associated with an Athena resource.
     #
     # @option params [required, String] :resource_arn
     #   Lists the tags for the resource with the specified ARN.
@@ -2608,6 +2783,40 @@ module Aws::Athena
     # @param [Hash] params ({})
     def list_work_groups(params = {}, options = {})
       req = build_request(:list_work_groups, params)
+      req.send_request(options)
+    end
+
+    # Puts a new capacity assignment configuration for a specified capacity
+    # reservation. If a capacity assignment configuration already exists for
+    # the capacity reservation, replaces the existing capacity assignment
+    # configuration.
+    #
+    # @option params [required, String] :capacity_reservation_name
+    #   The name of the capacity reservation to put a capacity assignment
+    #   configuration for.
+    #
+    # @option params [required, Array<Types::CapacityAssignment>] :capacity_assignments
+    #   The list of assignments for the capacity assignment configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_capacity_assignment_configuration({
+    #     capacity_reservation_name: "CapacityReservationName", # required
+    #     capacity_assignments: [ # required
+    #       {
+    #         work_group_names: ["WorkGroupName"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/PutCapacityAssignmentConfiguration AWS API Documentation
+    #
+    # @overload put_capacity_assignment_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_capacity_assignment_configuration(params = {}, options = {})
+      req = build_request(:put_capacity_assignment_configuration, params)
       req.send_request(options)
     end
 
@@ -2917,30 +3126,29 @@ module Aws::Athena
     end
 
     # Adds one or more tags to an Athena resource. A tag is a label that you
-    # assign to a resource. In Athena, a resource can be a workgroup or data
-    # catalog. Each tag consists of a key and an optional value, both of
-    # which you define. For example, you can use tags to categorize Athena
-    # workgroups or data catalogs by purpose, owner, or environment. Use a
-    # consistent set of tag keys to make it easier to search and filter
-    # workgroups or data catalogs in your account. For best practices, see
-    # [Tagging Best Practices][1]. Tag keys can be from 1 to 128 UTF-8
-    # Unicode characters, and tag values can be from 0 to 256 UTF-8 Unicode
-    # characters. Tags can use letters and numbers representable in UTF-8,
-    # and the following characters: + - = . \_ : / @. Tag keys and values
-    # are case-sensitive. Tag keys must be unique per resource. If you
-    # specify more than one tag, separate them by commas.
+    # assign to a resource. Each tag consists of a key and an optional
+    # value, both of which you define. For example, you can use tags to
+    # categorize Athena workgroups, data catalogs, or capacity reservations
+    # by purpose, owner, or environment. Use a consistent set of tag keys to
+    # make it easier to search and filter the resources in your account. For
+    # best practices, see [Tagging Best Practices][1]. Tag keys can be from
+    # 1 to 128 UTF-8 Unicode characters, and tag values can be from 0 to 256
+    # UTF-8 Unicode characters. Tags can use letters and numbers
+    # representable in UTF-8, and the following characters: + - = . \_ : /
+    # @. Tag keys and values are case-sensitive. Tag keys must be unique per
+    # resource. If you specify more than one tag, separate them by commas.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html
     #
     # @option params [required, String] :resource_arn
-    #   Specifies the ARN of the Athena resource (workgroup or data catalog)
-    #   to which tags are to be added.
+    #   Specifies the ARN of the Athena resource to which tags are to be
+    #   added.
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   A collection of one or more tags, separated by commas, to be added to
-    #   an Athena workgroup or data catalog resource.
+    #   an Athena resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2997,7 +3205,7 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Removes one or more tags from a data catalog or workgroup resource.
+    # Removes one or more tags from an Athena resource.
     #
     # @option params [required, String] :resource_arn
     #   Specifies the ARN of the resource from which tags are to be removed.
@@ -3021,6 +3229,33 @@ module Aws::Athena
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates the number of requested data processing units for the capacity
+    # reservation with the specified name.
+    #
+    # @option params [required, Integer] :target_dpus
+    #   The new number of requested data processing units.
+    #
+    # @option params [required, String] :name
+    #   The name of the capacity reservation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_capacity_reservation({
+    #     target_dpus: 1, # required
+    #     name: "CapacityReservationName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateCapacityReservation AWS API Documentation
+    #
+    # @overload update_capacity_reservation(params = {})
+    # @param [Hash] params ({})
+    def update_capacity_reservation(params = {}, options = {})
+      req = build_request(:update_capacity_reservation, params)
       req.send_request(options)
     end
 
@@ -3322,7 +3557,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

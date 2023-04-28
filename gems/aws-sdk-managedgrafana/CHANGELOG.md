@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2023-04-28)
+------------------
+
+* Feature - This release adds support for the grafanaVersion parameter in CreateWorkspace.
+
 1.13.0 (2023-02-23)
 ------------------
 

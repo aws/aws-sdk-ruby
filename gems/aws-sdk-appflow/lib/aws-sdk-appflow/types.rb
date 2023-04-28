@@ -4076,14 +4076,54 @@ module Aws::Appflow
     #   secret of the connected app.
     #   @return [String]
     #
+    # @!attribute [rw] o_auth_2_grant_type
+    #   Specifies the OAuth 2.0 grant type that Amazon AppFlow uses when it
+    #   requests an access token from Salesforce. Amazon AppFlow requires an
+    #   access token each time it attempts to access your Salesforce
+    #   records.
+    #
+    #   You can specify one of the following values:
+    #
+    #   AUTHORIZATION\_CODE
+    #
+    #   : Amazon AppFlow passes an authorization code when it requests the
+    #     access token from Salesforce. Amazon AppFlow receives the
+    #     authorization code from Salesforce after you log in to your
+    #     Salesforce account and authorize Amazon AppFlow to access your
+    #     records.
+    #
+    #   CLIENT\_CREDENTIALS
+    #
+    #   : Amazon AppFlow passes client credentials (a client ID and client
+    #     secret) when it requests the access token from Salesforce. You
+    #     provide these credentials to Amazon AppFlow when you define the
+    #     connection to your Salesforce account.
+    #
+    #   JWT\_BEARER
+    #
+    #   : Amazon AppFlow passes a JSON web token (JWT) when it requests the
+    #     access token from Salesforce. You provide the JWT to Amazon
+    #     AppFlow when you define the connection to your Salesforce account.
+    #     When you use this grant type, you don't need to log in to your
+    #     Salesforce account to authorize Amazon AppFlow to access your
+    #     records.
+    #   @return [String]
+    #
+    # @!attribute [rw] jwt_token
+    #   A JSON web token (JWT) that authorizes Amazon AppFlow to access your
+    #   Salesforce records.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SalesforceConnectorProfileCredentials AWS API Documentation
     #
     class SalesforceConnectorProfileCredentials < Struct.new(
       :access_token,
       :refresh_token,
       :o_auth_request,
-      :client_credentials_arn)
-      SENSITIVE = [:access_token, :client_credentials_arn]
+      :client_credentials_arn,
+      :o_auth_2_grant_type,
+      :jwt_token)
+      SENSITIVE = [:access_token, :client_credentials_arn, :jwt_token]
       include Aws::Structure
     end
 
@@ -4250,11 +4290,43 @@ module Aws::Appflow
     #   flows transfers data to or from Salesforce.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] oauth2_grant_types_supported
+    #   The OAuth 2.0 grant types that Amazon AppFlow can use when it
+    #   requests an access token from Salesforce. Amazon AppFlow requires an
+    #   access token each time it attempts to access your Salesforce
+    #   records.
+    #
+    #   AUTHORIZATION\_CODE
+    #
+    #   : Amazon AppFlow passes an authorization code when it requests the
+    #     access token from Salesforce. Amazon AppFlow receives the
+    #     authorization code from Salesforce after you log in to your
+    #     Salesforce account and authorize Amazon AppFlow to access your
+    #     records.
+    #
+    #   CLIENT\_CREDENTIALS
+    #
+    #   : Amazon AppFlow passes client credentials (a client ID and client
+    #     secret) when it requests the access token from Salesforce. You
+    #     provide these credentials to Amazon AppFlow when you define the
+    #     connection to your Salesforce account.
+    #
+    #   JWT\_BEARER
+    #
+    #   : Amazon AppFlow passes a JSON web token (JWT) when it requests the
+    #     access token from Salesforce. You provide the JWT to Amazon
+    #     AppFlow when you define the connection to your Salesforce account.
+    #     When you use this grant type, you don't need to log in to your
+    #     Salesforce account to authorize Amazon AppFlow to access your
+    #     records.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SalesforceMetadata AWS API Documentation
     #
     class SalesforceMetadata < Struct.new(
       :o_auth_scopes,
-      :data_transfer_apis)
+      :data_transfer_apis,
+      :oauth2_grant_types_supported)
       SENSITIVE = []
       include Aws::Structure
     end

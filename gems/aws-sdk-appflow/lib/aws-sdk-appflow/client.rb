@@ -515,7 +515,7 @@ module Aws::Appflow
     #           },
     #           o_auth_2_properties: {
     #             token_url: "TokenUrl", # required
-    #             o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #             o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE, JWT_BEARER
     #             token_url_custom_properties: {
     #               "CustomPropertyKey" => "CustomPropertyValue",
     #             },
@@ -584,6 +584,8 @@ module Aws::Appflow
     #             redirect_uri: "RedirectUri",
     #           },
     #           client_credentials_arn: "ClientCredentialsArn",
+    #           o_auth_2_grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE, JWT_BEARER
+    #           jwt_token: "JwtToken",
     #         },
     #         service_now: {
     #           username: "Username", # required
@@ -1152,6 +1154,8 @@ module Aws::Appflow
     #   resp.connector_configuration.connector_metadata.salesforce.o_auth_scopes[0] #=> String
     #   resp.connector_configuration.connector_metadata.salesforce.data_transfer_apis #=> Array
     #   resp.connector_configuration.connector_metadata.salesforce.data_transfer_apis[0] #=> String, one of "AUTOMATIC", "BULKV2", "REST_SYNC"
+    #   resp.connector_configuration.connector_metadata.salesforce.oauth2_grant_types_supported #=> Array
+    #   resp.connector_configuration.connector_metadata.salesforce.oauth2_grant_types_supported[0] #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE", "JWT_BEARER"
     #   resp.connector_configuration.connector_metadata.slack.o_auth_scopes #=> Array
     #   resp.connector_configuration.connector_metadata.slack.o_auth_scopes[0] #=> String
     #   resp.connector_configuration.connector_metadata.snowflake.supported_regions #=> Array
@@ -1180,7 +1184,7 @@ module Aws::Appflow
     #   resp.connector_configuration.authentication_config.o_auth_2_defaults.auth_code_urls #=> Array
     #   resp.connector_configuration.authentication_config.o_auth_2_defaults.auth_code_urls[0] #=> String
     #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_grant_types_supported #=> Array
-    #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_grant_types_supported[0] #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
+    #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_grant_types_supported[0] #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE", "JWT_BEARER"
     #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties #=> Array
     #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].key #=> String
     #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].is_required #=> Boolean
@@ -1397,7 +1401,7 @@ module Aws::Appflow
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.profile_properties #=> Hash
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.profile_properties["ProfilePropertyKey"] #=> String
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.o_auth_2_properties.token_url #=> String
-    #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.o_auth_2_properties.o_auth_2_grant_type #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
+    #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.o_auth_2_properties.o_auth_2_grant_type #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE", "JWT_BEARER"
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.o_auth_2_properties.token_url_custom_properties #=> Hash
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.o_auth_2_properties.token_url_custom_properties["CustomPropertyKey"] #=> String
     #   resp.connector_profile_details[0].connector_profile_properties.pardot.instance_url #=> String
@@ -1472,6 +1476,8 @@ module Aws::Appflow
     #   resp.connector_configurations["ConnectorType"].connector_metadata.salesforce.o_auth_scopes[0] #=> String
     #   resp.connector_configurations["ConnectorType"].connector_metadata.salesforce.data_transfer_apis #=> Array
     #   resp.connector_configurations["ConnectorType"].connector_metadata.salesforce.data_transfer_apis[0] #=> String, one of "AUTOMATIC", "BULKV2", "REST_SYNC"
+    #   resp.connector_configurations["ConnectorType"].connector_metadata.salesforce.oauth2_grant_types_supported #=> Array
+    #   resp.connector_configurations["ConnectorType"].connector_metadata.salesforce.oauth2_grant_types_supported[0] #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE", "JWT_BEARER"
     #   resp.connector_configurations["ConnectorType"].connector_metadata.slack.o_auth_scopes #=> Array
     #   resp.connector_configurations["ConnectorType"].connector_metadata.slack.o_auth_scopes[0] #=> String
     #   resp.connector_configurations["ConnectorType"].connector_metadata.snowflake.supported_regions #=> Array
@@ -1500,7 +1506,7 @@ module Aws::Appflow
     #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.auth_code_urls #=> Array
     #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.auth_code_urls[0] #=> String
     #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_grant_types_supported #=> Array
-    #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_grant_types_supported[0] #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
+    #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_grant_types_supported[0] #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE", "JWT_BEARER"
     #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties #=> Array
     #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].key #=> String
     #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].is_required #=> Boolean
@@ -2421,7 +2427,7 @@ module Aws::Appflow
     #           },
     #           o_auth_2_properties: {
     #             token_url: "TokenUrl", # required
-    #             o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #             o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE, JWT_BEARER
     #             token_url_custom_properties: {
     #               "CustomPropertyKey" => "CustomPropertyValue",
     #             },
@@ -2490,6 +2496,8 @@ module Aws::Appflow
     #             redirect_uri: "RedirectUri",
     #           },
     #           client_credentials_arn: "ClientCredentialsArn",
+    #           o_auth_2_grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE, JWT_BEARER
+    #           jwt_token: "JwtToken",
     #         },
     #         service_now: {
     #           username: "Username", # required
@@ -3020,7 +3028,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
