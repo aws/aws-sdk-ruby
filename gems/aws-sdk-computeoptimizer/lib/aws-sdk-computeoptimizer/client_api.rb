@@ -148,6 +148,8 @@ module Aws::ComputeOptimizer
     High = Shapes::IntegerShape.new(name: 'High')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
     IncludeMemberAccounts = Shapes::BooleanShape.new(name: 'IncludeMemberAccounts')
+    InferredWorkloadSaving = Shapes::StructureShape.new(name: 'InferredWorkloadSaving')
+    InferredWorkloadSavings = Shapes::ListShape.new(name: 'InferredWorkloadSavings')
     InferredWorkloadType = Shapes::StringShape.new(name: 'InferredWorkloadType')
     InferredWorkloadTypes = Shapes::ListShape.new(name: 'InferredWorkloadTypes')
     InferredWorkloadTypesPreference = Shapes::StringShape.new(name: 'InferredWorkloadTypesPreference')
@@ -264,6 +266,10 @@ module Aws::ComputeOptimizer
     Summaries = Shapes::ListShape.new(name: 'Summaries')
     Summary = Shapes::StructureShape.new(name: 'Summary')
     SummaryValue = Shapes::FloatShape.new(name: 'SummaryValue')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
+    Tags = Shapes::ListShape.new(name: 'Tags')
     TaskDefinitionArn = Shapes::StringShape.new(name: 'TaskDefinitionArn')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -415,6 +421,7 @@ module Aws::ComputeOptimizer
     ECSServiceRecommendation.add_member(:finding_reason_codes, Shapes::ShapeRef.new(shape: ECSServiceRecommendationFindingReasonCodes, location_name: "findingReasonCodes"))
     ECSServiceRecommendation.add_member(:service_recommendation_options, Shapes::ShapeRef.new(shape: ECSServiceRecommendationOptions, location_name: "serviceRecommendationOptions"))
     ECSServiceRecommendation.add_member(:current_performance_risk, Shapes::ShapeRef.new(shape: CurrentPerformanceRisk, location_name: "currentPerformanceRisk"))
+    ECSServiceRecommendation.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ECSServiceRecommendation.struct_class = Types::ECSServiceRecommendation
 
     ECSServiceRecommendationFilter.add_member(:name, Shapes::ShapeRef.new(shape: ECSServiceRecommendationFilterName, location_name: "name"))
@@ -687,6 +694,12 @@ module Aws::ComputeOptimizer
     GetRecommendationSummariesResponse.add_member(:recommendation_summaries, Shapes::ShapeRef.new(shape: RecommendationSummaries, location_name: "recommendationSummaries"))
     GetRecommendationSummariesResponse.struct_class = Types::GetRecommendationSummariesResponse
 
+    InferredWorkloadSaving.add_member(:inferred_workload_types, Shapes::ShapeRef.new(shape: InferredWorkloadTypes, location_name: "inferredWorkloadTypes"))
+    InferredWorkloadSaving.add_member(:estimated_monthly_savings, Shapes::ShapeRef.new(shape: EstimatedMonthlySavings, location_name: "estimatedMonthlySavings"))
+    InferredWorkloadSaving.struct_class = Types::InferredWorkloadSaving
+
+    InferredWorkloadSavings.member = Shapes::ShapeRef.new(shape: InferredWorkloadSaving)
+
     InferredWorkloadTypes.member = Shapes::ShapeRef.new(shape: InferredWorkloadType)
 
     InstanceArns.member = Shapes::ShapeRef.new(shape: InstanceArn)
@@ -706,6 +719,7 @@ module Aws::ComputeOptimizer
     InstanceRecommendation.add_member(:effective_recommendation_preferences, Shapes::ShapeRef.new(shape: EffectiveRecommendationPreferences, location_name: "effectiveRecommendationPreferences"))
     InstanceRecommendation.add_member(:inferred_workload_types, Shapes::ShapeRef.new(shape: InferredWorkloadTypes, location_name: "inferredWorkloadTypes"))
     InstanceRecommendation.add_member(:instance_state, Shapes::ShapeRef.new(shape: InstanceState, location_name: "instanceState"))
+    InstanceRecommendation.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     InstanceRecommendation.struct_class = Types::InstanceRecommendation
 
     InstanceRecommendationFindingReasonCodes.member = Shapes::ShapeRef.new(shape: InstanceRecommendationFindingReasonCode)
@@ -762,6 +776,7 @@ module Aws::ComputeOptimizer
     LambdaFunctionRecommendation.add_member(:finding_reason_codes, Shapes::ShapeRef.new(shape: LambdaFunctionRecommendationFindingReasonCodes, location_name: "findingReasonCodes"))
     LambdaFunctionRecommendation.add_member(:memory_size_recommendation_options, Shapes::ShapeRef.new(shape: LambdaFunctionMemoryRecommendationOptions, location_name: "memorySizeRecommendationOptions"))
     LambdaFunctionRecommendation.add_member(:current_performance_risk, Shapes::ShapeRef.new(shape: CurrentPerformanceRisk, location_name: "currentPerformanceRisk"))
+    LambdaFunctionRecommendation.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     LambdaFunctionRecommendation.struct_class = Types::LambdaFunctionRecommendation
 
     LambdaFunctionRecommendationFilter.add_member(:name, Shapes::ShapeRef.new(shape: LambdaFunctionRecommendationFilterName, location_name: "name"))
@@ -862,6 +877,7 @@ module Aws::ComputeOptimizer
     RecommendationSummary.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
     RecommendationSummary.add_member(:savings_opportunity, Shapes::ShapeRef.new(shape: SavingsOpportunity, location_name: "savingsOpportunity"))
     RecommendationSummary.add_member(:current_performance_risk_ratings, Shapes::ShapeRef.new(shape: CurrentPerformanceRiskRatings, location_name: "currentPerformanceRiskRatings"))
+    RecommendationSummary.add_member(:inferred_workload_savings, Shapes::ShapeRef.new(shape: InferredWorkloadSavings, location_name: "inferredWorkloadSavings"))
     RecommendationSummary.struct_class = Types::RecommendationSummary
 
     RecommendedOptionProjectedMetric.add_member(:recommended_instance_type, Shapes::ShapeRef.new(shape: RecommendedInstanceType, location_name: "recommendedInstanceType"))
@@ -910,6 +926,12 @@ module Aws::ComputeOptimizer
     Summary.add_member(:reason_code_summaries, Shapes::ShapeRef.new(shape: ReasonCodeSummaries, location_name: "reasonCodeSummaries"))
     Summary.struct_class = Types::Summary
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "value"))
+    Tag.struct_class = Types::Tag
+
+    Tags.member = Shapes::ShapeRef.new(shape: Tag)
+
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
@@ -950,6 +972,7 @@ module Aws::ComputeOptimizer
     VolumeRecommendation.add_member(:volume_recommendation_options, Shapes::ShapeRef.new(shape: VolumeRecommendationOptions, location_name: "volumeRecommendationOptions"))
     VolumeRecommendation.add_member(:last_refresh_timestamp, Shapes::ShapeRef.new(shape: LastRefreshTimestamp, location_name: "lastRefreshTimestamp"))
     VolumeRecommendation.add_member(:current_performance_risk, Shapes::ShapeRef.new(shape: CurrentPerformanceRisk, location_name: "currentPerformanceRisk"))
+    VolumeRecommendation.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     VolumeRecommendation.struct_class = Types::VolumeRecommendation
 
     VolumeRecommendationOption.add_member(:configuration, Shapes::ShapeRef.new(shape: VolumeConfiguration, location_name: "configuration"))

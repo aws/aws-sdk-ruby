@@ -183,6 +183,11 @@ module Aws::ComputeOptimizer
     #     instances.
     #
     #   * `Redis` - Infers that Redis might be running on the instances.
+    #
+    #   * `Kafka` - Infers that Kafka might be running on the instance.
+    #
+    #   * `SQLServer` - Infers that SQLServer might be running on the
+    #     instance.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/AutoScalingGroupRecommendation AWS API Documentation
@@ -493,6 +498,23 @@ module Aws::ComputeOptimizer
     #
     #   Specify `Finding` to return recommendations with a specific finding
     #   classification (for example, `NotOptimized`).
+    #
+    #   You can filter your Amazon EBS volume recommendations by `tag:key`
+    #   and `tag-key` tags.
+    #
+    #   A `tag:key` is a key and value combination of a tag assigned to your
+    #   Amazon EBS volume recommendations. Use the tag key in the filter
+    #   name and the tag value as the filter value. For example, to find all
+    #   Amazon EBS volume recommendations that have a tag with the key of
+    #   `Owner` and the value of `TeamA`, specify `tag:Owner` for the filter
+    #   name and `TeamA` for the filter value.
+    #
+    #   A `tag-key` is the key of a tag assigned to your Amazon EBS volume
+    #   recommendations. Use this filter to find all of your Amazon EBS
+    #   volume recommendations that have a tag with a specific key. This
+    #   doesn’t consider the tag value. For example, you can find your
+    #   Amazon EBS volume recommendations with a tag key value of `Owner` or
+    #   without any tag keys assigned.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -780,6 +802,10 @@ module Aws::ComputeOptimizer
     #   of its workload.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags assigned to your Amazon ECS service recommendations.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ECSServiceRecommendation AWS API Documentation
     #
     class ECSServiceRecommendation < Struct.new(
@@ -793,7 +819,8 @@ module Aws::ComputeOptimizer
       :finding,
       :finding_reason_codes,
       :service_recommendation_options,
-      :current_performance_risk)
+      :current_performance_risk,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -810,6 +837,23 @@ module Aws::ComputeOptimizer
     #
     #   Specify `FindingReasonCode` to return recommendations with a
     #   specific finding reason code.
+    #
+    #   You can filter your Amazon ECS service recommendations by `tag:key`
+    #   and `tag-key` tags.
+    #
+    #   A `tag:key` is a key and value combination of a tag assigned to your
+    #   Amazon ECS service recommendations. Use the tag key in the filter
+    #   name and the tag value as the filter value. For example, to find all
+    #   Amazon ECS service recommendations that have a tag with the key of
+    #   `Owner` and the value of `TeamA`, specify `tag:Owner` for the filter
+    #   name and `TeamA` for the filter value.
+    #
+    #   A `tag-key` is the key of a tag assigned to your Amazon ECS service
+    #   recommendations. Use this filter to find all of your Amazon ECS
+    #   service recommendations that have a tag with a specific key. This
+    #   doesn’t consider the tag value. For example, you can find your
+    #   Amazon ECS service recommendations with a tag key value of `Owner`
+    #   or without any tag keys assigned.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -1736,13 +1780,32 @@ module Aws::ComputeOptimizer
     #   The name of the filter.
     #
     #   Specify `Finding` to return recommendations with a specific finding
-    #   classification (for example, `Underprovisioned`).
+    #   classification. For example, `Underprovisioned`.
     #
     #   Specify `RecommendationSourceType` to return recommendations of a
-    #   specific resource type (for example, `Ec2Instance`).
+    #   specific resource type. For example, `Ec2Instance`.
     #
     #   Specify `FindingReasonCodes` to return recommendations with a
-    #   specific finding reason code (for example, `CPUUnderprovisioned`).
+    #   specific finding reason code. For example, `CPUUnderprovisioned`.
+    #
+    #   Specify `InferredWorkloadTypes` to return recommendations of a
+    #   specific inferred workload. For example, `Redis`.
+    #
+    #   You can filter your EC2 instance recommendations by `tag:key` and
+    #   `tag-key` tags.
+    #
+    #   A `tag:key` is a key and value combination of a tag assigned to your
+    #   recommendations. Use the tag key in the filter name and the tag
+    #   value as the filter value. For example, to find all recommendations
+    #   that have a tag with the key of `Owner` and the value of `TeamA`,
+    #   specify `tag:Owner` for the filter name and `TeamA` for the filter
+    #   value.
+    #
+    #   A `tag-key` is the key of a tag assigned to your recommendations.
+    #   Use this filter to find all of your recommendations that have a tag
+    #   with a specific key. This doesn’t consider the tag value. For
+    #   example, you can find your recommendations with a tag key value of
+    #   `Owner` or without any tag keys assigned.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -2663,6 +2726,60 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # The estimated monthly savings after you adjust the configurations of
+    # your instances running on the inferred workload types to the
+    # recommended configurations. If the `inferredWorkloadTypes` list
+    # contains multiple entries, then the savings are the sum of the monthly
+    # savings from instances that run the exact combination of the inferred
+    # workload types.
+    #
+    # @!attribute [rw] inferred_workload_types
+    #   The applications that might be running on the instance as inferred
+    #   by Compute Optimizer.
+    #
+    #   Compute Optimizer can infer if one of the following applications
+    #   might be running on the instance:
+    #
+    #   * `AmazonEmr` - Infers that Amazon EMR might be running on the
+    #     instance.
+    #
+    #   * `ApacheCassandra` - Infers that Apache Cassandra might be running
+    #     on the instance.
+    #
+    #   * `ApacheHadoop` - Infers that Apache Hadoop might be running on the
+    #     instance.
+    #
+    #   * `Memcached` - Infers that Memcached might be running on the
+    #     instance.
+    #
+    #   * `NGINX` - Infers that NGINX might be running on the instance.
+    #
+    #   * `PostgreSql` - Infers that PostgreSQL might be running on the
+    #     instance.
+    #
+    #   * `Redis` - Infers that Redis might be running on the instance.
+    #
+    #   * `Kafka` - Infers that Kafka might be running on the instance.
+    #
+    #   * `SQLServer` - Infers that SQLServer might be running on the
+    #     instance.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] estimated_monthly_savings
+    #   An object that describes the estimated monthly savings amount
+    #   possible by adopting Compute Optimizer recommendations for a given
+    #   resource. This is based on the On-Demand instance pricing.
+    #   @return [Types::EstimatedMonthlySavings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/InferredWorkloadSaving AWS API Documentation
+    #
+    class InferredWorkloadSaving < Struct.new(
+      :inferred_workload_types,
+      :estimated_monthly_savings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an Amazon EC2 instance recommendation.
     #
     # @!attribute [rw] instance_arn
@@ -2761,7 +2878,7 @@ module Aws::ComputeOptimizer
     #     performance requirements of your workload and there is an
     #     alternative instance type that provides better EBS throughput
     #     performance. This is identified by analyzing the `VolumeReadBytes`
-    #     and `VolumeWriteBytes`&gt; metrics of EBS volumes attached to the
+    #     and `VolumeWriteBytes` metrics of EBS volumes attached to the
     #     current instance during the look-back period.
     #
     #   * <b> <code>EBSIOPSOverprovisioned</code> </b> — The instance’s EBS
@@ -2915,11 +3032,18 @@ module Aws::ComputeOptimizer
     #   * `Redis` - Infers that Redis might be running on the instance.
     #
     #   * `Kafka` - Infers that Kafka might be running on the instance.
+    #
+    #   * `SQLServer` - Infers that SQLServer might be running on the
+    #     instance.
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_state
     #   The state of the instance when the recommendation was generated.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags assigned to your Amazon EC2 instance recommendations.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/InstanceRecommendation AWS API Documentation
     #
@@ -2938,7 +3062,8 @@ module Aws::ComputeOptimizer
       :current_performance_risk,
       :effective_recommendation_preferences,
       :inferred_workload_types,
-      :instance_state)
+      :instance_state,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3377,6 +3502,10 @@ module Aws::ComputeOptimizer
     #   current Lambda function requires more memory.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags assigned to your Lambda function recommendations.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/LambdaFunctionRecommendation AWS API Documentation
     #
     class LambdaFunctionRecommendation < Struct.new(
@@ -3391,7 +3520,8 @@ module Aws::ComputeOptimizer
       :finding,
       :finding_reason_codes,
       :memory_size_recommendation_options,
-      :current_performance_risk)
+      :current_performance_risk,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3414,6 +3544,23 @@ module Aws::ComputeOptimizer
     #   Specify `FindingReasonCode` to return recommendations with a
     #   specific finding reason code (for example,
     #   `MemoryUnderprovisioned`).
+    #
+    #   You can filter your Lambda function recommendations by `tag:key` and
+    #   `tag-key` tags.
+    #
+    #   A `tag:key` is a key and value combination of a tag assigned to your
+    #   Lambda function recommendations. Use the tag key in the filter name
+    #   and the tag value as the filter value. For example, to find all
+    #   Lambda function recommendations that have a tag with the key of
+    #   `Owner` and the value of `TeamA`, specify `tag:Owner` for the filter
+    #   name and `TeamA` for the filter value.
+    #
+    #   A `tag-key` is the key of a tag assigned to your Lambda function
+    #   recommendations. Use this filter to find all of your Lambda function
+    #   recommendations that have a tag with a specific key. This doesn’t
+    #   consider the tag value. For example, you can find your Lambda
+    #   function recommendations with a tag key value of `Owner` or without
+    #   any tag keys assigned.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -3951,6 +4098,13 @@ module Aws::ComputeOptimizer
     #   resource type.
     #   @return [Types::CurrentPerformanceRiskRatings]
     #
+    # @!attribute [rw] inferred_workload_savings
+    #   An array of objects that describes the estimated monthly saving
+    #   amounts for the instances running on the specified
+    #   `inferredWorkloadTypes`. The array contains the top three savings
+    #   opportunites for the instances running inferred workload types.
+    #   @return [Array<Types::InferredWorkloadSaving>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RecommendationSummary AWS API Documentation
     #
     class RecommendationSummary < Struct.new(
@@ -3958,7 +4112,8 @@ module Aws::ComputeOptimizer
       :recommendation_resource_type,
       :account_id,
       :savings_opportunity,
-      :current_performance_risk_ratings)
+      :current_performance_risk_ratings,
+      :inferred_workload_savings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4120,8 +4275,8 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] estimated_monthly_savings
     #   An object that describes the estimated monthly savings amount
-    #   possible, based on On-Demand instance pricing, by adopting Compute
-    #   Optimizer recommendations for a given resource.
+    #   possible by adopting Compute Optimizer recommendations for a given
+    #   resource. This is based on the On-Demand instance pricing..
     #   @return [Types::EstimatedMonthlySavings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/SavingsOpportunity AWS API Documentation
@@ -4290,6 +4445,28 @@ module Aws::ComputeOptimizer
       :name,
       :value,
       :reason_code_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of tag key and value pairs that you define.
+    #
+    # @!attribute [rw] key
+    #   One part of a key-value pair that makes up a tag. A key is a general
+    #   label that acts like a category for more specific tag values.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   One part of a key-value pair that make up a tag. A value acts as a
+    #   descriptor within a tag category (key). The value can be empty or
+    #   null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4618,6 +4795,10 @@ module Aws::ComputeOptimizer
     #   EBS volume doesn't have sufficient capacity.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags assigned to your Amazon EBS volume recommendations.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/VolumeRecommendation AWS API Documentation
     #
     class VolumeRecommendation < Struct.new(
@@ -4629,7 +4810,8 @@ module Aws::ComputeOptimizer
       :look_back_period_in_days,
       :volume_recommendation_options,
       :last_refresh_timestamp,
-      :current_performance_risk)
+      :current_performance_risk,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

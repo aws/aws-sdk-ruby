@@ -620,7 +620,7 @@ module Aws::ComputeOptimizer
     #     account_ids: ["AccountId"],
     #     filters: [
     #       {
-    #         name: "Finding", # accepts Finding, FindingReasonCodes, RecommendationSourceType
+    #         name: "Finding", # accepts Finding, FindingReasonCodes, RecommendationSourceType, InferredWorkloadTypes
     #         values: ["FilterValue"],
     #       },
     #     ],
@@ -758,7 +758,7 @@ module Aws::ComputeOptimizer
     #         values: ["FilterValue"],
     #       },
     #     ],
-    #     fields_to_export: ["AccountId"], # accepts AccountId, VolumeArn, Finding, UtilizationMetricsVolumeReadOpsPerSecondMaximum, UtilizationMetricsVolumeWriteOpsPerSecondMaximum, UtilizationMetricsVolumeReadBytesPerSecondMaximum, UtilizationMetricsVolumeWriteBytesPerSecondMaximum, LookbackPeriodInDays, CurrentConfigurationVolumeType, CurrentConfigurationVolumeBaselineIOPS, CurrentConfigurationVolumeBaselineThroughput, CurrentConfigurationVolumeBurstIOPS, CurrentConfigurationVolumeBurstThroughput, CurrentConfigurationVolumeSize, CurrentMonthlyPrice, RecommendationOptionsConfigurationVolumeType, RecommendationOptionsConfigurationVolumeBaselineIOPS, RecommendationOptionsConfigurationVolumeBaselineThroughput, RecommendationOptionsConfigurationVolumeBurstIOPS, RecommendationOptionsConfigurationVolumeBurstThroughput, RecommendationOptionsConfigurationVolumeSize, RecommendationOptionsMonthlyPrice, RecommendationOptionsPerformanceRisk, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, RootVolume
+    #     fields_to_export: ["AccountId"], # accepts AccountId, VolumeArn, Finding, UtilizationMetricsVolumeReadOpsPerSecondMaximum, UtilizationMetricsVolumeWriteOpsPerSecondMaximum, UtilizationMetricsVolumeReadBytesPerSecondMaximum, UtilizationMetricsVolumeWriteBytesPerSecondMaximum, LookbackPeriodInDays, CurrentConfigurationVolumeType, CurrentConfigurationVolumeBaselineIOPS, CurrentConfigurationVolumeBaselineThroughput, CurrentConfigurationVolumeBurstIOPS, CurrentConfigurationVolumeBurstThroughput, CurrentConfigurationVolumeSize, CurrentMonthlyPrice, RecommendationOptionsConfigurationVolumeType, RecommendationOptionsConfigurationVolumeBaselineIOPS, RecommendationOptionsConfigurationVolumeBaselineThroughput, RecommendationOptionsConfigurationVolumeBurstIOPS, RecommendationOptionsConfigurationVolumeBurstThroughput, RecommendationOptionsConfigurationVolumeSize, RecommendationOptionsMonthlyPrice, RecommendationOptionsPerformanceRisk, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, RootVolume, Tags
     #     s3_destination_config: { # required
     #       bucket: "DestinationBucket",
     #       key_prefix: "DestinationKeyPrefix",
@@ -886,11 +886,11 @@ module Aws::ComputeOptimizer
     #     account_ids: ["AccountId"],
     #     filters: [
     #       {
-    #         name: "Finding", # accepts Finding, FindingReasonCodes, RecommendationSourceType
+    #         name: "Finding", # accepts Finding, FindingReasonCodes, RecommendationSourceType, InferredWorkloadTypes
     #         values: ["FilterValue"],
     #       },
     #     ],
-    #     fields_to_export: ["AccountId"], # accepts AccountId, InstanceArn, InstanceName, Finding, FindingReasonCodes, LookbackPeriodInDays, CurrentInstanceType, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsInstanceType, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPlatformDifferences, RecommendationOptionsPerformanceRisk, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationsSourcesRecommendationSourceArn, RecommendationsSourcesRecommendationSourceType, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, EffectiveRecommendationPreferencesCpuVendorArchitectures, EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics, EffectiveRecommendationPreferencesInferredWorkloadTypes, InferredWorkloadTypes, RecommendationOptionsMigrationEffort, EffectiveRecommendationPreferencesExternalMetricsSource, InstanceState
+    #     fields_to_export: ["AccountId"], # accepts AccountId, InstanceArn, InstanceName, Finding, FindingReasonCodes, LookbackPeriodInDays, CurrentInstanceType, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsInstanceType, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPlatformDifferences, RecommendationOptionsPerformanceRisk, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationsSourcesRecommendationSourceArn, RecommendationsSourcesRecommendationSourceType, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, EffectiveRecommendationPreferencesCpuVendorArchitectures, EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics, EffectiveRecommendationPreferencesInferredWorkloadTypes, InferredWorkloadTypes, RecommendationOptionsMigrationEffort, EffectiveRecommendationPreferencesExternalMetricsSource, InstanceState, Tags
     #     s3_destination_config: { # required
     #       bucket: "DestinationBucket",
     #       key_prefix: "DestinationKeyPrefix",
@@ -1023,7 +1023,7 @@ module Aws::ComputeOptimizer
     #         values: ["FilterValue"],
     #       },
     #     ],
-    #     fields_to_export: ["AccountId"], # accepts AccountId, ServiceArn, LookbackPeriodInDays, LastRefreshTimestamp, LaunchType, CurrentPerformanceRisk, CurrentServiceConfigurationMemory, CurrentServiceConfigurationCpu, CurrentServiceConfigurationTaskDefinitionArn, CurrentServiceConfigurationAutoScalingConfiguration, CurrentServiceContainerConfigurations, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, Finding, FindingReasonCodes, RecommendationOptionsMemory, RecommendationOptionsCpu, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, RecommendationOptionsContainerRecommendations, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum
+    #     fields_to_export: ["AccountId"], # accepts AccountId, ServiceArn, LookbackPeriodInDays, LastRefreshTimestamp, LaunchType, CurrentPerformanceRisk, CurrentServiceConfigurationMemory, CurrentServiceConfigurationCpu, CurrentServiceConfigurationTaskDefinitionArn, CurrentServiceConfigurationAutoScalingConfiguration, CurrentServiceContainerConfigurations, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, Finding, FindingReasonCodes, RecommendationOptionsMemory, RecommendationOptionsCpu, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, RecommendationOptionsContainerRecommendations, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, Tags
     #     s3_destination_config: { # required
     #       bucket: "DestinationBucket",
     #       key_prefix: "DestinationKeyPrefix",
@@ -1154,7 +1154,7 @@ module Aws::ComputeOptimizer
     #         values: ["FilterValue"],
     #       },
     #     ],
-    #     fields_to_export: ["AccountId"], # accepts AccountId, FunctionArn, FunctionVersion, Finding, FindingReasonCodes, NumberOfInvocations, UtilizationMetricsDurationMaximum, UtilizationMetricsDurationAverage, UtilizationMetricsMemoryMaximum, UtilizationMetricsMemoryAverage, LookbackPeriodInDays, CurrentConfigurationMemorySize, CurrentConfigurationTimeout, CurrentCostTotal, CurrentCostAverage, RecommendationOptionsConfigurationMemorySize, RecommendationOptionsCostLow, RecommendationOptionsCostHigh, RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound, RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound, RecommendationOptionsProjectedUtilizationMetricsDurationExpected, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue
+    #     fields_to_export: ["AccountId"], # accepts AccountId, FunctionArn, FunctionVersion, Finding, FindingReasonCodes, NumberOfInvocations, UtilizationMetricsDurationMaximum, UtilizationMetricsDurationAverage, UtilizationMetricsMemoryMaximum, UtilizationMetricsMemoryAverage, LookbackPeriodInDays, CurrentConfigurationMemorySize, CurrentConfigurationTimeout, CurrentCostTotal, CurrentCostAverage, RecommendationOptionsConfigurationMemorySize, RecommendationOptionsCostLow, RecommendationOptionsCostHigh, RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound, RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound, RecommendationOptionsProjectedUtilizationMetricsDurationExpected, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, Tags
     #     s3_destination_config: { # required
     #       bucket: "DestinationBucket",
     #       key_prefix: "DestinationKeyPrefix",
@@ -1238,7 +1238,7 @@ module Aws::ComputeOptimizer
     #     max_results: 1,
     #     filters: [
     #       {
-    #         name: "Finding", # accepts Finding, FindingReasonCodes, RecommendationSourceType
+    #         name: "Finding", # accepts Finding, FindingReasonCodes, RecommendationSourceType, InferredWorkloadTypes
     #         values: ["FilterValue"],
     #       },
     #     ],
@@ -1287,7 +1287,7 @@ module Aws::ComputeOptimizer
     #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.inferred_workload_types #=> String, one of "Active", "Inactive"
     #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.external_metrics_preference.source #=> String, one of "Datadog", "Dynatrace", "NewRelic", "Instana"
     #   resp.auto_scaling_group_recommendations[0].inferred_workload_types #=> Array
-    #   resp.auto_scaling_group_recommendations[0].inferred_workload_types[0] #=> String, one of "AmazonEmr", "ApacheCassandra", "ApacheHadoop", "Memcached", "Nginx", "PostgreSql", "Redis", "Kafka"
+    #   resp.auto_scaling_group_recommendations[0].inferred_workload_types[0] #=> String, one of "AmazonEmr", "ApacheCassandra", "ApacheHadoop", "Memcached", "Nginx", "PostgreSql", "Redis", "Kafka", "SQLServer"
     #   resp.errors #=> Array
     #   resp.errors[0].identifier #=> String
     #   resp.errors[0].code #=> String
@@ -1397,6 +1397,9 @@ module Aws::ComputeOptimizer
     #   resp.volume_recommendations[0].volume_recommendation_options[0].savings_opportunity.estimated_monthly_savings.value #=> Float
     #   resp.volume_recommendations[0].last_refresh_timestamp #=> Time
     #   resp.volume_recommendations[0].current_performance_risk #=> String, one of "VeryLow", "Low", "Medium", "High"
+    #   resp.volume_recommendations[0].tags #=> Array
+    #   resp.volume_recommendations[0].tags[0].key #=> String
+    #   resp.volume_recommendations[0].tags[0].value #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].identifier #=> String
     #   resp.errors[0].code #=> String
@@ -1468,7 +1471,7 @@ module Aws::ComputeOptimizer
     #     max_results: 1,
     #     filters: [
     #       {
-    #         name: "Finding", # accepts Finding, FindingReasonCodes, RecommendationSourceType
+    #         name: "Finding", # accepts Finding, FindingReasonCodes, RecommendationSourceType, InferredWorkloadTypes
     #         values: ["FilterValue"],
     #       },
     #     ],
@@ -1519,8 +1522,11 @@ module Aws::ComputeOptimizer
     #   resp.instance_recommendations[0].effective_recommendation_preferences.inferred_workload_types #=> String, one of "Active", "Inactive"
     #   resp.instance_recommendations[0].effective_recommendation_preferences.external_metrics_preference.source #=> String, one of "Datadog", "Dynatrace", "NewRelic", "Instana"
     #   resp.instance_recommendations[0].inferred_workload_types #=> Array
-    #   resp.instance_recommendations[0].inferred_workload_types[0] #=> String, one of "AmazonEmr", "ApacheCassandra", "ApacheHadoop", "Memcached", "Nginx", "PostgreSql", "Redis", "Kafka"
+    #   resp.instance_recommendations[0].inferred_workload_types[0] #=> String, one of "AmazonEmr", "ApacheCassandra", "ApacheHadoop", "Memcached", "Nginx", "PostgreSql", "Redis", "Kafka", "SQLServer"
     #   resp.instance_recommendations[0].instance_state #=> String, one of "pending", "running", "shutting-down", "terminated", "stopping", "stopped"
+    #   resp.instance_recommendations[0].tags #=> Array
+    #   resp.instance_recommendations[0].tags[0].key #=> String
+    #   resp.instance_recommendations[0].tags[0].value #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].identifier #=> String
     #   resp.errors[0].code #=> String
@@ -1772,6 +1778,9 @@ module Aws::ComputeOptimizer
     #   resp.ecs_service_recommendations[0].service_recommendation_options[0].container_recommendations[0].memory_size_configuration.memory_reservation #=> Integer
     #   resp.ecs_service_recommendations[0].service_recommendation_options[0].container_recommendations[0].cpu #=> Integer
     #   resp.ecs_service_recommendations[0].current_performance_risk #=> String, one of "VeryLow", "Low", "Medium", "High"
+    #   resp.ecs_service_recommendations[0].tags #=> Array
+    #   resp.ecs_service_recommendations[0].tags[0].key #=> String
+    #   resp.ecs_service_recommendations[0].tags[0].value #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].identifier #=> String
     #   resp.errors[0].code #=> String
@@ -2020,6 +2029,9 @@ module Aws::ComputeOptimizer
     #   resp.lambda_function_recommendations[0].memory_size_recommendation_options[0].savings_opportunity.estimated_monthly_savings.currency #=> String, one of "USD", "CNY"
     #   resp.lambda_function_recommendations[0].memory_size_recommendation_options[0].savings_opportunity.estimated_monthly_savings.value #=> Float
     #   resp.lambda_function_recommendations[0].current_performance_risk #=> String, one of "VeryLow", "Low", "Medium", "High"
+    #   resp.lambda_function_recommendations[0].tags #=> Array
+    #   resp.lambda_function_recommendations[0].tags[0].key #=> String
+    #   resp.lambda_function_recommendations[0].tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetLambdaFunctionRecommendations AWS API Documentation
     #
@@ -2195,6 +2207,11 @@ module Aws::ComputeOptimizer
     #   resp.recommendation_summaries[0].current_performance_risk_ratings.medium #=> Integer
     #   resp.recommendation_summaries[0].current_performance_risk_ratings.low #=> Integer
     #   resp.recommendation_summaries[0].current_performance_risk_ratings.very_low #=> Integer
+    #   resp.recommendation_summaries[0].inferred_workload_savings #=> Array
+    #   resp.recommendation_summaries[0].inferred_workload_savings[0].inferred_workload_types #=> Array
+    #   resp.recommendation_summaries[0].inferred_workload_savings[0].inferred_workload_types[0] #=> String, one of "AmazonEmr", "ApacheCassandra", "ApacheHadoop", "Memcached", "Nginx", "PostgreSql", "Redis", "Kafka", "SQLServer"
+    #   resp.recommendation_summaries[0].inferred_workload_savings[0].estimated_monthly_savings.currency #=> String, one of "USD", "CNY"
+    #   resp.recommendation_summaries[0].inferred_workload_savings[0].estimated_monthly_savings.value #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetRecommendationSummaries AWS API Documentation
     #
@@ -2419,7 +2436,7 @@ module Aws::ComputeOptimizer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-computeoptimizer'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
