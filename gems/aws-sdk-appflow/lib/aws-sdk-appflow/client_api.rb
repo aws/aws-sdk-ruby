@@ -46,6 +46,8 @@ module Aws::Appflow
     BucketName = Shapes::StringShape.new(name: 'BucketName')
     BucketPrefix = Shapes::StringShape.new(name: 'BucketPrefix')
     BusinessUnitId = Shapes::StringShape.new(name: 'BusinessUnitId')
+    CancelFlowExecutionsRequest = Shapes::StructureShape.new(name: 'CancelFlowExecutionsRequest')
+    CancelFlowExecutionsResponse = Shapes::StructureShape.new(name: 'CancelFlowExecutionsResponse')
     CatalogType = Shapes::StringShape.new(name: 'CatalogType')
     ClientCredentialsArn = Shapes::StringShape.new(name: 'ClientCredentialsArn')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
@@ -166,6 +168,7 @@ module Aws::Appflow
     EventBridgeMetadata = Shapes::StructureShape.new(name: 'EventBridgeMetadata')
     ExecutionDetails = Shapes::StructureShape.new(name: 'ExecutionDetails')
     ExecutionId = Shapes::StringShape.new(name: 'ExecutionId')
+    ExecutionIds = Shapes::ListShape.new(name: 'ExecutionIds')
     ExecutionMessage = Shapes::StringShape.new(name: 'ExecutionMessage')
     ExecutionRecord = Shapes::StructureShape.new(name: 'ExecutionRecord')
     ExecutionResult = Shapes::StructureShape.new(name: 'ExecutionResult')
@@ -459,6 +462,13 @@ module Aws::Appflow
     BasicAuthCredentials.add_member(:username, Shapes::ShapeRef.new(shape: Username, required: true, location_name: "username"))
     BasicAuthCredentials.add_member(:password, Shapes::ShapeRef.new(shape: Password, required: true, location_name: "password"))
     BasicAuthCredentials.struct_class = Types::BasicAuthCredentials
+
+    CancelFlowExecutionsRequest.add_member(:flow_name, Shapes::ShapeRef.new(shape: FlowName, required: true, location_name: "flowName"))
+    CancelFlowExecutionsRequest.add_member(:execution_ids, Shapes::ShapeRef.new(shape: ExecutionIds, location_name: "executionIds"))
+    CancelFlowExecutionsRequest.struct_class = Types::CancelFlowExecutionsRequest
+
+    CancelFlowExecutionsResponse.add_member(:invalid_executions, Shapes::ShapeRef.new(shape: ExecutionIds, location_name: "invalidExecutions"))
+    CancelFlowExecutionsResponse.struct_class = Types::CancelFlowExecutionsResponse
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
@@ -898,6 +908,8 @@ module Aws::Appflow
     ExecutionDetails.add_member(:most_recent_execution_time, Shapes::ShapeRef.new(shape: Date, location_name: "mostRecentExecutionTime"))
     ExecutionDetails.add_member(:most_recent_execution_status, Shapes::ShapeRef.new(shape: ExecutionStatus, location_name: "mostRecentExecutionStatus"))
     ExecutionDetails.struct_class = Types::ExecutionDetails
+
+    ExecutionIds.member = Shapes::ShapeRef.new(shape: ExecutionId)
 
     ExecutionRecord.add_member(:execution_id, Shapes::ShapeRef.new(shape: ExecutionId, location_name: "executionId"))
     ExecutionRecord.add_member(:execution_status, Shapes::ShapeRef.new(shape: ExecutionStatus, location_name: "executionStatus"))
@@ -1577,6 +1589,19 @@ module Aws::Appflow
         "signingName" => "appflow",
         "uid" => "appflow-2020-08-23",
       }
+
+      api.add_operation(:cancel_flow_executions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelFlowExecutions"
+        o.http_method = "POST"
+        o.http_request_uri = "/cancel-flow-executions"
+        o.input = Shapes::ShapeRef.new(shape: CancelFlowExecutionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelFlowExecutionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
 
       api.add_operation(:create_connector_profile, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateConnectorProfile"

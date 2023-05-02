@@ -56,6 +56,8 @@ module Aws::Appflow
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :cancel_flow_executions
+            Aws::Appflow::Endpoints::CancelFlowExecutions.build(context)
           when :create_connector_profile
             Aws::Appflow::Endpoints::CreateConnectorProfile.build(context)
           when :create_flow

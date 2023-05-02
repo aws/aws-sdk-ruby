@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.176.0 (2023-05-02)
+------------------
+
+* Feature - Amazon Sagemaker Autopilot supports training models with sample weights and additional objective metrics.
+
 1.175.0 (2023-04-27)
 ------------------
 

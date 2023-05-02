@@ -221,6 +221,41 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # @!attribute [rw] flow_name
+    #   The name of a flow with active runs that you want to cancel.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_ids
+    #   The ID of each active run to cancel. These runs must belong to the
+    #   flow you specify in your request.
+    #
+    #   If you omit this parameter, your request ends all active runs that
+    #   belong to the flow.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/CancelFlowExecutionsRequest AWS API Documentation
+    #
+    class CancelFlowExecutionsRequest < Struct.new(
+      :flow_name,
+      :execution_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] invalid_executions
+    #   The IDs of runs that Amazon AppFlow couldn't cancel. These runs
+    #   might be ineligible for canceling because they haven't started yet
+    #   or have already completed.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/CancelFlowExecutionsResponse AWS API Documentation
+    #
+    class CancelFlowExecutionsResponse < Struct.new(
+      :invalid_executions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # There was a conflict when processing the request (for example, a flow
     # with the given name already exists within the account. Check for
     # conflicting resource names and try again.

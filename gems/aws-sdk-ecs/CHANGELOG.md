@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.117.0 (2023-05-02)
+------------------
+
+* Feature - Documentation only update to address Amazon ECS tickets.
+
 1.116.0 (2023-04-21)
 ------------------
 

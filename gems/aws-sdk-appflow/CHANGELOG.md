@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2023-05-02)
+------------------
+
+* Feature - This release adds new API to cancel flow executions.
+
 1.39.0 (2023-04-28)
 ------------------
 

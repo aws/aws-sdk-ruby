@@ -5479,7 +5479,7 @@ module Aws::ECS
     #
     # @option params [required, String] :value
     #   The account setting value for the specified principal ARN. Accepted
-    #   values are `enabled` and `disabled`.
+    #   values are `enabled`, `disabled`, `on`, and `off`.
     #
     # @option params [String] :principal_arn
     #   The ARN of the principal, which can be a user, role, or the root user.
@@ -5595,7 +5595,7 @@ module Aws::ECS
     #
     # @option params [required, String] :value
     #   The account setting value for the specified principal ARN. Accepted
-    #   values are `enabled` and `disabled`.
+    #   values are `enabled`, `disabled`, `on`, and `off`.
     #
     # @return [Types::PutAccountSettingDefaultResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9704,7 +9704,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.116.0'
+      context[:gem_version] = '1.117.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

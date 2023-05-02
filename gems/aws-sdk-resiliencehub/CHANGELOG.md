@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2023-05-02)
+------------------
+
+* Feature - This release will improve resource level transparency in applications by discovering previously hidden resources.
+
 1.12.0 (2023-03-31)
 ------------------
 

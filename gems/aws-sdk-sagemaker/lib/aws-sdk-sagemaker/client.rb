@@ -1280,6 +1280,7 @@ module Aws::SageMaker
     #         target_attribute_name: "TargetAttributeName", # required
     #         content_type: "ContentType",
     #         channel_type: "training", # accepts training, validation
+    #         sample_weight_attribute_name: "SampleWeightAttributeName",
     #       },
     #     ],
     #     output_data_config: { # required
@@ -9929,6 +9930,7 @@ module Aws::SageMaker
     #   resp.input_data_config[0].target_attribute_name #=> String
     #   resp.input_data_config[0].content_type #=> String
     #   resp.input_data_config[0].channel_type #=> String, one of "training", "validation"
+    #   resp.input_data_config[0].sample_weight_attribute_name #=> String
     #   resp.output_data_config.kms_key_id #=> String
     #   resp.output_data_config.s3_output_path #=> String
     #   resp.role_arn #=> String
@@ -23470,7 +23472,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.175.0'
+      context[:gem_version] = '1.176.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
