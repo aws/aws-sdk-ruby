@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.378.0 (2023-05-03)
+------------------
+
+* Feature - Adds an SDK paginator for GetNetworkInsightsAccessScopeAnalysisFindings
+
 1.377.0 (2023-04-27)
 ------------------
 

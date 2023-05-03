@@ -656,6 +656,55 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Information about an Availability Zone on a domain.
+    #
+    # @!attribute [rw] availability_zone_name
+    #   The name of the Availability Zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] zone_status
+    #   The current state of the Availability Zone. Current options are
+    #   `Active` and `StandBy`.
+    #
+    #   * `Active` - Data nodes in the Availability Zone are in use.
+    #
+    #   * `StandBy` - Data nodes in the Availability Zone are in a standby
+    #     state.
+    #
+    #   * `NotAvailable` - Unable to retrieve information.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_data_node_count
+    #   The total number of data nodes configured in the Availability Zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] available_data_node_count
+    #   The number of data nodes active in the Availability Zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_shards
+    #   The total number of primary and replica shards in the Availability
+    #   Zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_un_assigned_shards
+    #   The total number of primary and replica shards that aren't
+    #   allocated to any of the nodes in the Availability Zone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AvailabilityZoneInfo AWS API Documentation
+    #
+    class AvailabilityZoneInfo < Struct.new(
+      :availability_zone_name,
+      :zone_status,
+      :configured_data_node_count,
+      :available_data_node_count,
+      :total_shards,
+      :total_un_assigned_shards)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An error occurred while processing the request.
     #
     # @!attribute [rw] message
@@ -844,7 +893,8 @@ module Aws::OpenSearchService
     #
     # @!attribute [rw] dedicated_master_count
     #   Number of dedicated master nodes in the cluster. This number must be
-    #   greater than 1, otherwise you receive a validation exception.
+    #   greater than 2 and not 4, otherwise you receive a validation
+    #   exception.
     #   @return [Integer]
     #
     # @!attribute [rw] warm_enabled
@@ -863,6 +913,16 @@ module Aws::OpenSearchService
     #   Container for cold storage configuration options.
     #   @return [Types::ColdStorageOptions]
     #
+    # @!attribute [rw] multi_az_with_standby_enabled
+    #   A boolean that indicates whether a multi-AZ domain is turned on with
+    #   a standby AZ. For more information, see [Configuring a multi-AZ
+    #   domain in Amazon OpenSearch Service][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-multiaz.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ClusterConfig AWS API Documentation
     #
     class ClusterConfig < Struct.new(
@@ -876,7 +936,8 @@ module Aws::OpenSearchService
       :warm_enabled,
       :warm_type,
       :warm_count,
-      :cold_storage_options)
+      :cold_storage_options,
+      :multi_az_with_standby_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1277,7 +1338,7 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] package_type
-    #   Type of package.
+    #   The type of package.
     #   @return [String]
     #
     # @!attribute [rw] package_description
@@ -1609,6 +1670,127 @@ module Aws::OpenSearchService
     #
     class DescribeDomainConfigResponse < Struct.new(
       :domain_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the `DescribeDomainHealth` operation.
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainHealthRequest AWS API Documentation
+    #
+    class DescribeDomainHealthRequest < Struct.new(
+      :domain_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a `DescribeDomainHealth` request. Contains health
+    # information for the requested domain.
+    #
+    # @!attribute [rw] domain_state
+    #   The current state of the domain.
+    #
+    #   * `Processing` - The domain has updates in progress.
+    #
+    #   * `Active` - Requested changes have been processed and deployed to
+    #     the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_count
+    #   The number of Availability Zones configured for the domain. If the
+    #   service is unable to fetch this information, it will return
+    #   `NotAvailable`.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_availability_zone_count
+    #   The number of active Availability Zones configured for the domain.
+    #   If the service is unable to fetch this information, it will return
+    #   `NotAvailable`.
+    #   @return [String]
+    #
+    # @!attribute [rw] stand_by_availability_zone_count
+    #   The number of standby Availability Zones configured for the domain.
+    #   If the service is unable to fetch this information, it will return
+    #   `NotAvailable`.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_node_count
+    #   The number of data nodes configured for the domain. If the service
+    #   is unable to fetch this information, it will return `NotAvailable`.
+    #   @return [String]
+    #
+    # @!attribute [rw] dedicated_master
+    #   A boolean that indicates if dedicated master nodes are activated for
+    #   the domain.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] master_eligible_node_count
+    #   The number of nodes that can be elected as a master node. If
+    #   dedicated master nodes is turned on, this value is the number of
+    #   dedicated master nodes configured for the domain. If the service is
+    #   unable to fetch this information, it will return `NotAvailable`.
+    #   @return [String]
+    #
+    # @!attribute [rw] warm_node_count
+    #   The number of warm nodes configured for the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] master_node
+    #   Indicates whether the domain has an elected master node.
+    #
+    #   * **Available** - The domain has an elected master node.
+    #
+    #   * **UnAvailable** - The master node hasn't yet been elected, and a
+    #     quorum to elect a new master node hasn't been reached.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_health
+    #   The current health status of your cluster.
+    #
+    #   * `Red` - At least one primary shard is not allocated to any node.
+    #
+    #   * `Yellow` - All primary shards are allocated to nodes, but some
+    #     replicas aren’t.
+    #
+    #   * `Green` - All primary shards and their replicas are allocated to
+    #     nodes.
+    #
+    #   * `NotAvailable` - Unable to retrieve cluster health.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_shards
+    #   The total number of primary and replica shards for the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_un_assigned_shards
+    #   The total number of primary and replica shards not allocated to any
+    #   of the nodes for the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_information
+    #   A list of `EnvironmentInfo` for the domain.
+    #   @return [Array<Types::EnvironmentInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainHealthResponse AWS API Documentation
+    #
+    class DescribeDomainHealthResponse < Struct.new(
+      :domain_state,
+      :availability_zone_count,
+      :active_availability_zone_count,
+      :stand_by_availability_zone_count,
+      :data_node_count,
+      :dedicated_master,
+      :master_eligible_node_count,
+      :warm_node_count,
+      :master_node,
+      :cluster_health,
+      :total_shards,
+      :total_un_assigned_shards,
+      :environment_information)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2075,7 +2257,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # An error occured because the client wanted to access a not supported
+    # An error occured because the client wanted to access an unsupported
     # operation.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DisabledOperationException AWS API Documentation
@@ -2358,9 +2540,8 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] reference_path
-    #   Denotes the location of the package on the OpenSearch Service
-    #   cluster nodes. It's the same as `synonym_path` for dictionary
-    #   files.
+    #   The relative path of the package on the OpenSearch Service cluster
+    #   nodes. This is `synonym_path` when the package is for synonym files.
     #   @return [String]
     #
     # @!attribute [rw] error_details
@@ -2742,6 +2923,20 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Information about the active domain environment.
+    #
+    # @!attribute [rw] availability_zone_information
+    #   A list of `AvailabilityZoneInfo` for the domain.
+    #   @return [Array<Types::AvailabilityZoneInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/EnvironmentInfo AWS API Documentation
+    #
+    class EnvironmentInfo < Struct.new(
+      :availability_zone_information)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Additional information if the package is in an error state. Null
     # otherwise.
     #
@@ -3117,6 +3312,10 @@ module Aws::OpenSearchService
     #   or an UltraWarm node.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] availability_zones
+    #   The supported Availability Zones for the instance type.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/InstanceTypeDetails AWS API Documentation
     #
     class InstanceTypeDetails < Struct.new(
@@ -3126,7 +3325,8 @@ module Aws::OpenSearchService
       :app_logs_enabled,
       :advanced_security_enabled,
       :warm_enabled,
-      :instance_role)
+      :instance_role,
+      :availability_zones)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3138,8 +3338,8 @@ module Aws::OpenSearchService
     #
     class InternalException < Aws::EmptyStructure; end
 
-    # The request processing has failed because you provided an invalid
-    # pagination token.
+    # Request processing failed because you provided an invalid pagination
+    # token.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/InvalidPaginationTokenException AWS API Documentation
     #
@@ -3269,13 +3469,13 @@ module Aws::OpenSearchService
     end
 
     # @!attribute [rw] engine_version
-    #   Version of OpenSearch or Elasticsearch, in the format
+    #   The version of OpenSearch or Elasticsearch, in the format
     #   Elasticsearch\_X.Y or OpenSearch\_X.Y. Defaults to the latest
     #   version of OpenSearch.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
-    #   Name of the domain to list instance type details for.
+    #   The name of the domain.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -3290,13 +3490,25 @@ module Aws::OpenSearchService
     #   next page.
     #   @return [String]
     #
+    # @!attribute [rw] retrieve_a_zs
+    #   An optional parameter that specifies the Availability Zones for the
+    #   domain.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_type
+    #   An optional parameter that lists information for a given instance
+    #   type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListInstanceTypeDetailsRequest AWS API Documentation
     #
     class ListInstanceTypeDetailsRequest < Struct.new(
       :engine_version,
       :domain_name,
       :max_results,
-      :next_token)
+      :next_token,
+      :retrieve_a_zs,
+      :instance_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3777,7 +3989,7 @@ module Aws::OpenSearchService
     #   Whether to enable an off-peak window.
     #
     #   This option is only available when modifying a domain created prior
-    #   to February 13, 2023, not when creating a new domain. All domains
+    #   to February 16, 2023, not when creating a new domain. All domains
     #   created after this date have the off-peak window enabled by default.
     #   You can't disable the off-peak window after it's enabled for a
     #   domain.
@@ -3951,7 +4163,7 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] package_name
-    #   User-specified name of the package.
+    #   The user-specified name of the package.
     #   @return [String]
     #
     # @!attribute [rw] package_type
@@ -3963,7 +4175,9 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] package_status
-    #   Current status of the package.
+    #   The current status of the package. The available options are
+    #   `AVAILABLE`, `COPYING`, `COPY_FAILED`, `VALIDATNG`,
+    #   `VALIDATION_FAILED`, `DELETING`, and `DELETE_FAILED`.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -4300,8 +4514,7 @@ module Aws::OpenSearchService
     #
     class ResourceAlreadyExistsException < Aws::EmptyStructure; end
 
-    # An exception for accessing or deleting a resource that does not
-    # exist..
+    # An exception for accessing or deleting a resource that doesn't exist.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ResourceNotFoundException AWS API Documentation
     #
@@ -4883,12 +5096,6 @@ module Aws::OpenSearchService
     #     clauses allowed in a Lucene boolean query. Default is 1,024.
     #     Queries with more than the permitted number of clauses result in a
     #     `TooManyClauses` error.
-    #
-    #   * `"override_main_response_version": "true" | "false"` - Note the
-    #     use of a string rather than a boolean. Specifies whether the
-    #     domain reports its version as 7.10 to allow Elasticsearch OSS
-    #     clients and plugins to continue working with it. Default is false
-    #     when creating a domain and true when upgrading a domain.
     #
     #   For more information, see [Advanced cluster parameters][1].
     #

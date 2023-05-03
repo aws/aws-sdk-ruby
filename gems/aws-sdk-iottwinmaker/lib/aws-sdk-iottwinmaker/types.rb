@@ -1517,6 +1517,10 @@ module Aws::IoTTwinMaker
     #   The generated scene metadata.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] error
+    #   The SceneResponse error.
+    #   @return [Types::SceneError]
+    #
     class GetSceneResponse < Struct.new(
       :workspace_id,
       :scene_id,
@@ -1527,7 +1531,8 @@ module Aws::IoTTwinMaker
       :description,
       :capabilities,
       :scene_metadata,
-      :generated_scene_metadata)
+      :generated_scene_metadata,
+      :error)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2526,6 +2531,23 @@ module Aws::IoTTwinMaker
     #
     class Row < Struct.new(
       :row_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scene error.
+    #
+    # @!attribute [rw] code
+    #   The SceneError code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The SceneError message.
+    #   @return [String]
+    #
+    class SceneError < Struct.new(
+      :code,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

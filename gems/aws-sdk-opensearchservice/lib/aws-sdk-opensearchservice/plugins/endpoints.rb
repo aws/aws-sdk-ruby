@@ -92,6 +92,8 @@ module Aws::OpenSearchService
             Aws::OpenSearchService::Endpoints::DescribeDomainChangeProgress.build(context)
           when :describe_domain_config
             Aws::OpenSearchService::Endpoints::DescribeDomainConfig.build(context)
+          when :describe_domain_health
+            Aws::OpenSearchService::Endpoints::DescribeDomainHealth.build(context)
           when :describe_domains
             Aws::OpenSearchService::Endpoints::DescribeDomains.build(context)
           when :describe_dry_run_progress

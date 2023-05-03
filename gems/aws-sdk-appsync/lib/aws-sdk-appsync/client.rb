@@ -374,7 +374,7 @@ module Aws::AppSync
     #   The domain name.
     #
     # @option params [required, String] :api_id
-    #   The API ID.
+    #   The API ID. Private APIs can not be associated with custom domains.
     #
     # @return [Types::AssociateApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -867,6 +867,12 @@ module Aws::AppSync
     # @option params [Types::LambdaAuthorizerConfig] :lambda_authorizer_config
     #   Configuration for Lambda function authorization.
     #
+    # @option params [String] :visibility
+    #   Sets the value of the GraphQL API to public (`GLOBAL`) or private
+    #   (`PRIVATE`). If no value is provided, the visibility will be set to
+    #   `GLOBAL` by default. This value cannot be changed once the API has
+    #   been created.
+    #
     # @return [Types::CreateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGraphqlApiResponse#graphql_api #graphql_api} => Types::GraphqlApi
@@ -923,6 +929,7 @@ module Aws::AppSync
     #       authorizer_uri: "String", # required
     #       identity_validation_expression: "String",
     #     },
+    #     visibility: "GLOBAL", # accepts GLOBAL, PRIVATE
     #   })
     #
     # @example Response structure
@@ -963,6 +970,9 @@ module Aws::AppSync
     #   resp.graphql_api.lambda_authorizer_config.authorizer_result_ttl_in_seconds #=> Integer
     #   resp.graphql_api.lambda_authorizer_config.authorizer_uri #=> String
     #   resp.graphql_api.lambda_authorizer_config.identity_validation_expression #=> String
+    #   resp.graphql_api.dns #=> Hash
+    #   resp.graphql_api.dns["String"] #=> String
+    #   resp.graphql_api.visibility #=> String, one of "GLOBAL", "PRIVATE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApi AWS API Documentation
     #
@@ -1766,6 +1776,9 @@ module Aws::AppSync
     #   resp.graphql_api.lambda_authorizer_config.authorizer_result_ttl_in_seconds #=> Integer
     #   resp.graphql_api.lambda_authorizer_config.authorizer_uri #=> String
     #   resp.graphql_api.lambda_authorizer_config.identity_validation_expression #=> String
+    #   resp.graphql_api.dns #=> Hash
+    #   resp.graphql_api.dns["String"] #=> String
+    #   resp.graphql_api.visibility #=> String, one of "GLOBAL", "PRIVATE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetGraphqlApi AWS API Documentation
     #
@@ -2211,6 +2224,9 @@ module Aws::AppSync
     #   resp.graphql_apis[0].lambda_authorizer_config.authorizer_result_ttl_in_seconds #=> Integer
     #   resp.graphql_apis[0].lambda_authorizer_config.authorizer_uri #=> String
     #   resp.graphql_apis[0].lambda_authorizer_config.identity_validation_expression #=> String
+    #   resp.graphql_apis[0].dns #=> Hash
+    #   resp.graphql_apis[0].dns["String"] #=> String
+    #   resp.graphql_apis[0].visibility #=> String, one of "GLOBAL", "PRIVATE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListGraphqlApis AWS API Documentation
@@ -3059,6 +3075,9 @@ module Aws::AppSync
     #   resp.graphql_api.lambda_authorizer_config.authorizer_result_ttl_in_seconds #=> Integer
     #   resp.graphql_api.lambda_authorizer_config.authorizer_uri #=> String
     #   resp.graphql_api.lambda_authorizer_config.identity_validation_expression #=> String
+    #   resp.graphql_api.dns #=> Hash
+    #   resp.graphql_api.dns["String"] #=> String
+    #   resp.graphql_api.visibility #=> String, one of "GLOBAL", "PRIVATE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApi AWS API Documentation
     #
@@ -3256,7 +3275,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

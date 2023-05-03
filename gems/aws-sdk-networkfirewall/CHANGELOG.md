@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2023-05-03)
+------------------
+
+* Feature - AWS Network Firewall now supports policy level HOME_NET variable overrides.
+
 1.26.0 (2023-04-05)
 ------------------
 

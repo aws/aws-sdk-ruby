@@ -137,6 +137,7 @@ module Aws::NetworkFirewall
     PerObjectStatus = Shapes::StructureShape.new(name: 'PerObjectStatus')
     PerObjectSyncStatus = Shapes::StringShape.new(name: 'PerObjectSyncStatus')
     PolicyString = Shapes::StringShape.new(name: 'PolicyString')
+    PolicyVariables = Shapes::StructureShape.new(name: 'PolicyVariables')
     Port = Shapes::StringShape.new(name: 'Port')
     PortRange = Shapes::StructureShape.new(name: 'PortRange')
     PortRangeBound = Shapes::IntegerShape.new(name: 'PortRangeBound')
@@ -515,6 +516,7 @@ module Aws::NetworkFirewall
     FirewallPolicy.add_member(:stateful_default_actions, Shapes::ShapeRef.new(shape: StatefulActions, location_name: "StatefulDefaultActions"))
     FirewallPolicy.add_member(:stateful_engine_options, Shapes::ShapeRef.new(shape: StatefulEngineOptions, location_name: "StatefulEngineOptions"))
     FirewallPolicy.add_member(:tls_inspection_configuration_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "TLSInspectionConfigurationArn"))
+    FirewallPolicy.add_member(:policy_variables, Shapes::ShapeRef.new(shape: PolicyVariables, location_name: "PolicyVariables"))
     FirewallPolicy.struct_class = Types::FirewallPolicy
 
     FirewallPolicyMetadata.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
@@ -663,6 +665,9 @@ module Aws::NetworkFirewall
     PerObjectStatus.add_member(:sync_status, Shapes::ShapeRef.new(shape: PerObjectSyncStatus, location_name: "SyncStatus"))
     PerObjectStatus.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
     PerObjectStatus.struct_class = Types::PerObjectStatus
+
+    PolicyVariables.add_member(:rule_variables, Shapes::ShapeRef.new(shape: IPSets, location_name: "RuleVariables"))
+    PolicyVariables.struct_class = Types::PolicyVariables
 
     PortRange.add_member(:from_port, Shapes::ShapeRef.new(shape: PortRangeBound, required: true, location_name: "FromPort"))
     PortRange.add_member(:to_port, Shapes::ShapeRef.new(shape: PortRangeBound, required: true, location_name: "ToPort"))

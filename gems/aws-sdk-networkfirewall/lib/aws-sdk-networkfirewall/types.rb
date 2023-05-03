@@ -286,12 +286,14 @@ module Aws::NetworkFirewall
     #
     # @!attribute [rw] status_message
     #   If Network Firewall fails to create or delete the firewall endpoint
-    #   in the subnet, it populates this with the reason for the failure and
-    #   how to resolve it. Depending on the error, it can take as many as 15
+    #   in the subnet, it populates this with the reason for the error or
+    #   failure and how to resolve it. A `FAILED` status indicates a
+    #   non-recoverable state, and a `ERROR` status indicates an issue that
+    #   you can fix. Depending on the error, it can take as many as 15
     #   minutes to populate this field. For more information about the
-    #   errors and solutions available for this field, see [Troubleshooting
-    #   firewall endpoint failures][1] in the *Network Firewall Developer
-    #   Guide*.
+    #   causes for failiure or errors and solutions available for this
+    #   field, see [Troubleshooting firewall endpoint failures][1] in the
+    #   *Network Firewall Developer Guide*.
     #
     #
     #
@@ -1840,6 +1842,11 @@ module Aws::NetworkFirewall
     #   The Amazon Resource Name (ARN) of the TLS inspection configuration.
     #   @return [String]
     #
+    # @!attribute [rw] policy_variables
+    #   Contains variables that you can use to override default Suricata
+    #   settings in your firewall policy.
+    #   @return [Types::PolicyVariables]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FirewallPolicy AWS API Documentation
     #
     class FirewallPolicy < Struct.new(
@@ -1850,7 +1857,8 @@ module Aws::NetworkFirewall
       :stateful_rule_group_references,
       :stateful_default_actions,
       :stateful_engine_options,
-      :tls_inspection_configuration_arn)
+      :tls_inspection_configuration_arn,
+      :policy_variables)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2730,6 +2738,26 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # Contains variables that you can use to override default Suricata
+    # settings in your firewall policy.
+    #
+    # @!attribute [rw] rule_variables
+    #   The IPv4 or IPv6 addresses in CIDR notation to use for the Suricata
+    #   `HOME_NET` variable. If your firewall uses an inspection VPC, you
+    #   might want to override the `HOME_NET` variable with the CIDRs of
+    #   your home networks. If you don't override `HOME_NET` with your own
+    #   CIDRs, Network Firewall by default uses the CIDR of your inspection
+    #   VPC.
+    #   @return [Hash<String,Types::IPSet>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/PolicyVariables AWS API Documentation
+    #
+    class PolicyVariables < Struct.new(
+      :rule_variables)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A single port range specification. This is used for source and
     # destination port ranges in the stateless rule MatchAttributes,
     # `SourcePorts`, and `DestinationPorts` settings.
@@ -2803,10 +2831,6 @@ module Aws::NetworkFirewall
     #
     #   For a firewall policy resource, you can specify the following
     #   operations in the Actions section of the statement:
-    #
-    #   * network-firewall:CreateFirewall
-    #
-    #   * network-firewall:UpdateFirewall
     #
     #   * network-firewall:AssociateFirewallPolicy
     #
@@ -3173,7 +3197,7 @@ module Aws::NetworkFirewall
     #
     #
     #
-    #   [1]: https://suricata.readthedocs.iorules/intro.html#
+    #   [1]: https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html
     #   @return [Array<Types::StatefulRule>]
     #
     # @!attribute [rw] stateless_rules_and_custom_actions
@@ -3444,7 +3468,7 @@ module Aws::NetworkFirewall
     #
     #
     #
-    # [1]: https://suricata.readthedocs.iorules/intro.html#
+    # [1]: https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html
     #
     # @!attribute [rw] action
     #   Defines what Network Firewall should do with the packets in a
@@ -3468,16 +3492,6 @@ module Aws::NetworkFirewall
     #     drop traffic. You can enable the rule with `ALERT` action, verify
     #     in the logs that the rule is filtering as you want, then change
     #     the action to `DROP`.
-    #
-    #   * **REJECT** - Drops TCP traffic that matches the conditions of the
-    #     stateful rule, and sends a TCP reset packet back to sender of the
-    #     packet. A TCP reset packet is a packet with no payload and a `RST`
-    #     bit contained in the TCP header flags. Also sends an alert log
-    #     mesage if alert logging is configured in the Firewall
-    #     LoggingConfiguration.
-    #
-    #     `REJECT` isn't currently available for use with IMAP and FTP
-    #     protocols.
     #   @return [String]
     #
     # @!attribute [rw] header

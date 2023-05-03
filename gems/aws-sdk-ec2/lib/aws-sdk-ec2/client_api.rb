@@ -19086,6 +19086,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetNetworkInsightsAccessScopeAnalysisFindingsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetNetworkInsightsAccessScopeAnalysisFindingsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_network_insights_access_scope_content, Seahorse::Model::Operation.new.tap do |o|

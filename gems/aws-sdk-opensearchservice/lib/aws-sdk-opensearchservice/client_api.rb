@@ -51,6 +51,10 @@ module Aws::OpenSearchService
     AutoTuneState = Shapes::StringShape.new(name: 'AutoTuneState')
     AutoTuneStatus = Shapes::StructureShape.new(name: 'AutoTuneStatus')
     AutoTuneType = Shapes::StringShape.new(name: 'AutoTuneType')
+    AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
+    AvailabilityZoneInfo = Shapes::StructureShape.new(name: 'AvailabilityZoneInfo')
+    AvailabilityZoneInfoList = Shapes::ListShape.new(name: 'AvailabilityZoneInfoList')
+    AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
     BackendRole = Shapes::StringShape.new(name: 'BackendRole')
     BaseException = Shapes::StructureShape.new(name: 'BaseException')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -106,6 +110,8 @@ module Aws::OpenSearchService
     DescribeDomainChangeProgressResponse = Shapes::StructureShape.new(name: 'DescribeDomainChangeProgressResponse')
     DescribeDomainConfigRequest = Shapes::StructureShape.new(name: 'DescribeDomainConfigRequest')
     DescribeDomainConfigResponse = Shapes::StructureShape.new(name: 'DescribeDomainConfigResponse')
+    DescribeDomainHealthRequest = Shapes::StructureShape.new(name: 'DescribeDomainHealthRequest')
+    DescribeDomainHealthResponse = Shapes::StructureShape.new(name: 'DescribeDomainHealthResponse')
     DescribeDomainRequest = Shapes::StructureShape.new(name: 'DescribeDomainRequest')
     DescribeDomainResponse = Shapes::StructureShape.new(name: 'DescribeDomainResponse')
     DescribeDomainsRequest = Shapes::StructureShape.new(name: 'DescribeDomainsRequest')
@@ -140,6 +146,7 @@ module Aws::OpenSearchService
     DomainConfig = Shapes::StructureShape.new(name: 'DomainConfig')
     DomainEndpointOptions = Shapes::StructureShape.new(name: 'DomainEndpointOptions')
     DomainEndpointOptionsStatus = Shapes::StructureShape.new(name: 'DomainEndpointOptionsStatus')
+    DomainHealth = Shapes::StringShape.new(name: 'DomainHealth')
     DomainId = Shapes::StringShape.new(name: 'DomainId')
     DomainInfo = Shapes::StructureShape.new(name: 'DomainInfo')
     DomainInfoList = Shapes::ListShape.new(name: 'DomainInfoList')
@@ -150,6 +157,7 @@ module Aws::OpenSearchService
     DomainPackageDetails = Shapes::StructureShape.new(name: 'DomainPackageDetails')
     DomainPackageDetailsList = Shapes::ListShape.new(name: 'DomainPackageDetailsList')
     DomainPackageStatus = Shapes::StringShape.new(name: 'DomainPackageStatus')
+    DomainState = Shapes::StringShape.new(name: 'DomainState')
     DomainStatus = Shapes::StructureShape.new(name: 'DomainStatus')
     DomainStatusList = Shapes::ListShape.new(name: 'DomainStatusList')
     Double = Shapes::FloatShape.new(name: 'Double')
@@ -166,6 +174,8 @@ module Aws::OpenSearchService
     Endpoint = Shapes::StringShape.new(name: 'Endpoint')
     EndpointsMap = Shapes::MapShape.new(name: 'EndpointsMap')
     EngineType = Shapes::StringShape.new(name: 'EngineType')
+    EnvironmentInfo = Shapes::StructureShape.new(name: 'EnvironmentInfo')
+    EnvironmentInfoList = Shapes::ListShape.new(name: 'EnvironmentInfoList')
     ErrorDetails = Shapes::StructureShape.new(name: 'ErrorDetails')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ErrorType = Shapes::StringShape.new(name: 'ErrorType')
@@ -192,6 +202,7 @@ module Aws::OpenSearchService
     InstanceRoleList = Shapes::ListShape.new(name: 'InstanceRoleList')
     InstanceTypeDetails = Shapes::StructureShape.new(name: 'InstanceTypeDetails')
     InstanceTypeDetailsList = Shapes::ListShape.new(name: 'InstanceTypeDetailsList')
+    InstanceTypeString = Shapes::StringShape.new(name: 'InstanceTypeString')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerClass = Shapes::IntegerShape.new(name: 'IntegerClass')
     InternalException = Shapes::StructureShape.new(name: 'InternalException')
@@ -232,6 +243,7 @@ module Aws::OpenSearchService
     LogPublishingOptionsStatus = Shapes::StructureShape.new(name: 'LogPublishingOptionsStatus')
     LogType = Shapes::StringShape.new(name: 'LogType')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MasterNodeStatus = Shapes::StringShape.new(name: 'MasterNodeStatus')
     MasterUserOptions = Shapes::StructureShape.new(name: 'MasterUserOptions')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaximumInstanceCount = Shapes::IntegerShape.new(name: 'MaximumInstanceCount')
@@ -241,6 +253,9 @@ module Aws::OpenSearchService
     NodeToNodeEncryptionOptions = Shapes::StructureShape.new(name: 'NodeToNodeEncryptionOptions')
     NodeToNodeEncryptionOptionsStatus = Shapes::StructureShape.new(name: 'NodeToNodeEncryptionOptionsStatus')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
+    NumberOfAZs = Shapes::StringShape.new(name: 'NumberOfAZs')
+    NumberOfNodes = Shapes::StringShape.new(name: 'NumberOfNodes')
+    NumberOfShards = Shapes::StringShape.new(name: 'NumberOfShards')
     OffPeakWindow = Shapes::StructureShape.new(name: 'OffPeakWindow')
     OffPeakWindowOptions = Shapes::StructureShape.new(name: 'OffPeakWindowOptions')
     OffPeakWindowOptionsStatus = Shapes::StructureShape.new(name: 'OffPeakWindowOptionsStatus')
@@ -377,6 +392,7 @@ module Aws::OpenSearchService
     VpcEndpoints = Shapes::ListShape.new(name: 'VpcEndpoints')
     WindowStartTime = Shapes::StructureShape.new(name: 'WindowStartTime')
     ZoneAwarenessConfig = Shapes::StructureShape.new(name: 'ZoneAwarenessConfig')
+    ZoneStatus = Shapes::StringShape.new(name: 'ZoneStatus')
 
     AWSDomainInformation.add_member(:owner_id, Shapes::ShapeRef.new(shape: OwnerId, location_name: "OwnerId"))
     AWSDomainInformation.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
@@ -494,6 +510,18 @@ module Aws::OpenSearchService
     AutoTuneStatus.add_member(:pending_deletion, Shapes::ShapeRef.new(shape: Boolean, location_name: "PendingDeletion"))
     AutoTuneStatus.struct_class = Types::AutoTuneStatus
 
+    AvailabilityZoneInfo.add_member(:availability_zone_name, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZoneName"))
+    AvailabilityZoneInfo.add_member(:zone_status, Shapes::ShapeRef.new(shape: ZoneStatus, location_name: "ZoneStatus"))
+    AvailabilityZoneInfo.add_member(:configured_data_node_count, Shapes::ShapeRef.new(shape: NumberOfNodes, location_name: "ConfiguredDataNodeCount"))
+    AvailabilityZoneInfo.add_member(:available_data_node_count, Shapes::ShapeRef.new(shape: NumberOfNodes, location_name: "AvailableDataNodeCount"))
+    AvailabilityZoneInfo.add_member(:total_shards, Shapes::ShapeRef.new(shape: NumberOfShards, location_name: "TotalShards"))
+    AvailabilityZoneInfo.add_member(:total_un_assigned_shards, Shapes::ShapeRef.new(shape: NumberOfShards, location_name: "TotalUnAssignedShards"))
+    AvailabilityZoneInfo.struct_class = Types::AvailabilityZoneInfo
+
+    AvailabilityZoneInfoList.member = Shapes::ShapeRef.new(shape: AvailabilityZoneInfo)
+
+    AvailabilityZoneList.member = Shapes::ShapeRef.new(shape: AvailabilityZone)
+
     BaseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     BaseException.struct_class = Types::BaseException
 
@@ -535,6 +563,7 @@ module Aws::OpenSearchService
     ClusterConfig.add_member(:warm_type, Shapes::ShapeRef.new(shape: OpenSearchWarmPartitionInstanceType, location_name: "WarmType"))
     ClusterConfig.add_member(:warm_count, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "WarmCount"))
     ClusterConfig.add_member(:cold_storage_options, Shapes::ShapeRef.new(shape: ColdStorageOptions, location_name: "ColdStorageOptions"))
+    ClusterConfig.add_member(:multi_az_with_standby_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "MultiAZWithStandbyEnabled"))
     ClusterConfig.struct_class = Types::ClusterConfig
 
     ClusterConfigStatus.add_member(:options, Shapes::ShapeRef.new(shape: ClusterConfig, required: true, location_name: "Options"))
@@ -671,6 +700,24 @@ module Aws::OpenSearchService
 
     DescribeDomainConfigResponse.add_member(:domain_config, Shapes::ShapeRef.new(shape: DomainConfig, required: true, location_name: "DomainConfig"))
     DescribeDomainConfigResponse.struct_class = Types::DescribeDomainConfigResponse
+
+    DescribeDomainHealthRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    DescribeDomainHealthRequest.struct_class = Types::DescribeDomainHealthRequest
+
+    DescribeDomainHealthResponse.add_member(:domain_state, Shapes::ShapeRef.new(shape: DomainState, location_name: "DomainState"))
+    DescribeDomainHealthResponse.add_member(:availability_zone_count, Shapes::ShapeRef.new(shape: NumberOfAZs, location_name: "AvailabilityZoneCount"))
+    DescribeDomainHealthResponse.add_member(:active_availability_zone_count, Shapes::ShapeRef.new(shape: NumberOfAZs, location_name: "ActiveAvailabilityZoneCount"))
+    DescribeDomainHealthResponse.add_member(:stand_by_availability_zone_count, Shapes::ShapeRef.new(shape: NumberOfAZs, location_name: "StandByAvailabilityZoneCount"))
+    DescribeDomainHealthResponse.add_member(:data_node_count, Shapes::ShapeRef.new(shape: NumberOfNodes, location_name: "DataNodeCount"))
+    DescribeDomainHealthResponse.add_member(:dedicated_master, Shapes::ShapeRef.new(shape: Boolean, location_name: "DedicatedMaster"))
+    DescribeDomainHealthResponse.add_member(:master_eligible_node_count, Shapes::ShapeRef.new(shape: NumberOfNodes, location_name: "MasterEligibleNodeCount"))
+    DescribeDomainHealthResponse.add_member(:warm_node_count, Shapes::ShapeRef.new(shape: NumberOfNodes, location_name: "WarmNodeCount"))
+    DescribeDomainHealthResponse.add_member(:master_node, Shapes::ShapeRef.new(shape: MasterNodeStatus, location_name: "MasterNode"))
+    DescribeDomainHealthResponse.add_member(:cluster_health, Shapes::ShapeRef.new(shape: DomainHealth, location_name: "ClusterHealth"))
+    DescribeDomainHealthResponse.add_member(:total_shards, Shapes::ShapeRef.new(shape: NumberOfShards, location_name: "TotalShards"))
+    DescribeDomainHealthResponse.add_member(:total_un_assigned_shards, Shapes::ShapeRef.new(shape: NumberOfShards, location_name: "TotalUnAssignedShards"))
+    DescribeDomainHealthResponse.add_member(:environment_information, Shapes::ShapeRef.new(shape: EnvironmentInfoList, location_name: "EnvironmentInformation"))
+    DescribeDomainHealthResponse.struct_class = Types::DescribeDomainHealthResponse
 
     DescribeDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     DescribeDomainRequest.struct_class = Types::DescribeDomainRequest
@@ -893,6 +940,11 @@ module Aws::OpenSearchService
     EndpointsMap.key = Shapes::ShapeRef.new(shape: String)
     EndpointsMap.value = Shapes::ShapeRef.new(shape: ServiceUrl)
 
+    EnvironmentInfo.add_member(:availability_zone_information, Shapes::ShapeRef.new(shape: AvailabilityZoneInfoList, location_name: "AvailabilityZoneInformation"))
+    EnvironmentInfo.struct_class = Types::EnvironmentInfo
+
+    EnvironmentInfoList.member = Shapes::ShapeRef.new(shape: EnvironmentInfo)
+
     ErrorDetails.add_member(:error_type, Shapes::ShapeRef.new(shape: ErrorType, location_name: "ErrorType"))
     ErrorDetails.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
     ErrorDetails.struct_class = Types::ErrorDetails
@@ -965,6 +1017,7 @@ module Aws::OpenSearchService
     InstanceTypeDetails.add_member(:advanced_security_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "AdvancedSecurityEnabled"))
     InstanceTypeDetails.add_member(:warm_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "WarmEnabled"))
     InstanceTypeDetails.add_member(:instance_role, Shapes::ShapeRef.new(shape: InstanceRoleList, location_name: "InstanceRole"))
+    InstanceTypeDetails.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZoneList, location_name: "AvailabilityZones"))
     InstanceTypeDetails.struct_class = Types::InstanceTypeDetails
 
     InstanceTypeDetailsList.member = Shapes::ShapeRef.new(shape: InstanceTypeDetails)
@@ -1008,6 +1061,8 @@ module Aws::OpenSearchService
     ListInstanceTypeDetailsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location: "querystring", location_name: "domainName"))
     ListInstanceTypeDetailsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListInstanceTypeDetailsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListInstanceTypeDetailsRequest.add_member(:retrieve_a_zs, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "retrieveAZs"))
+    ListInstanceTypeDetailsRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceTypeString, location: "querystring", location_name: "instanceType"))
     ListInstanceTypeDetailsRequest.struct_class = Types::ListInstanceTypeDetailsRequest
 
     ListInstanceTypeDetailsResponse.add_member(:instance_type_details, Shapes::ShapeRef.new(shape: InstanceTypeDetailsList, location_name: "InstanceTypeDetails"))
@@ -1701,6 +1756,19 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:describe_domain_health, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDomainHealth"
+        o.http_method = "GET"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/health"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDomainHealthRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDomainHealthResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
       end)
 
       api.add_operation(:describe_domains, Seahorse::Model::Operation.new.tap do |o|

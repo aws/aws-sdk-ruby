@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2023-05-03)
+------------------
+
+* Feature - This release adds a field for GetScene API to return error code and message from dependency services.
+
 1.10.0 (2023-03-22)
 ------------------
 

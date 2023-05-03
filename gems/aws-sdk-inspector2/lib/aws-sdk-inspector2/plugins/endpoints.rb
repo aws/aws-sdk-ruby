@@ -62,6 +62,10 @@ module Aws::Inspector2
             Aws::Inspector2::Endpoints::BatchGetAccountStatus.build(context)
           when :batch_get_free_trial_info
             Aws::Inspector2::Endpoints::BatchGetFreeTrialInfo.build(context)
+          when :batch_get_member_ec2_deep_inspection_status
+            Aws::Inspector2::Endpoints::BatchGetMemberEc2DeepInspectionStatus.build(context)
+          when :batch_update_member_ec2_deep_inspection_status
+            Aws::Inspector2::Endpoints::BatchUpdateMemberEc2DeepInspectionStatus.build(context)
           when :cancel_findings_report
             Aws::Inspector2::Endpoints::CancelFindingsReport.build(context)
           when :create_filter
@@ -86,6 +90,8 @@ module Aws::Inspector2
             Aws::Inspector2::Endpoints::GetConfiguration.build(context)
           when :get_delegated_admin_account
             Aws::Inspector2::Endpoints::GetDelegatedAdminAccount.build(context)
+          when :get_ec2_deep_inspection_configuration
+            Aws::Inspector2::Endpoints::GetEc2DeepInspectionConfiguration.build(context)
           when :get_findings_report_status
             Aws::Inspector2::Endpoints::GetFindingsReportStatus.build(context)
           when :get_member
@@ -116,8 +122,12 @@ module Aws::Inspector2
             Aws::Inspector2::Endpoints::UntagResource.build(context)
           when :update_configuration
             Aws::Inspector2::Endpoints::UpdateConfiguration.build(context)
+          when :update_ec2_deep_inspection_configuration
+            Aws::Inspector2::Endpoints::UpdateEc2DeepInspectionConfiguration.build(context)
           when :update_filter
             Aws::Inspector2::Endpoints::UpdateFilter.build(context)
+          when :update_org_ec2_deep_inspection_configuration
+            Aws::Inspector2::Endpoints::UpdateOrgEc2DeepInspectionConfiguration.build(context)
           when :update_organization_configuration
             Aws::Inspector2::Endpoints::UpdateOrganizationConfiguration.build(context)
           end

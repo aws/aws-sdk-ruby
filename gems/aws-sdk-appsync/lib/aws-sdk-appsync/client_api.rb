@@ -135,6 +135,7 @@ module Aws::AppSync
     GetSchemaCreationStatusResponse = Shapes::StructureShape.new(name: 'GetSchemaCreationStatusResponse')
     GetTypeRequest = Shapes::StructureShape.new(name: 'GetTypeRequest')
     GetTypeResponse = Shapes::StructureShape.new(name: 'GetTypeResponse')
+    GraphQLApiVisibility = Shapes::StringShape.new(name: 'GraphQLApiVisibility')
     GraphQLSchemaException = Shapes::StructureShape.new(name: 'GraphQLSchemaException')
     GraphqlApi = Shapes::StructureShape.new(name: 'GraphqlApi')
     GraphqlApis = Shapes::ListShape.new(name: 'GraphqlApis')
@@ -385,6 +386,7 @@ module Aws::AppSync
     CreateGraphqlApiRequest.add_member(:additional_authentication_providers, Shapes::ShapeRef.new(shape: AdditionalAuthenticationProviders, location_name: "additionalAuthenticationProviders"))
     CreateGraphqlApiRequest.add_member(:xray_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "xrayEnabled"))
     CreateGraphqlApiRequest.add_member(:lambda_authorizer_config, Shapes::ShapeRef.new(shape: LambdaAuthorizerConfig, location_name: "lambdaAuthorizerConfig"))
+    CreateGraphqlApiRequest.add_member(:visibility, Shapes::ShapeRef.new(shape: GraphQLApiVisibility, location_name: "visibility"))
     CreateGraphqlApiRequest.struct_class = Types::CreateGraphqlApiRequest
 
     CreateGraphqlApiResponse.add_member(:graphql_api, Shapes::ShapeRef.new(shape: GraphqlApi, location_name: "graphqlApi"))
@@ -648,6 +650,8 @@ module Aws::AppSync
     GraphqlApi.add_member(:xray_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "xrayEnabled"))
     GraphqlApi.add_member(:waf_web_acl_arn, Shapes::ShapeRef.new(shape: String, location_name: "wafWebAclArn"))
     GraphqlApi.add_member(:lambda_authorizer_config, Shapes::ShapeRef.new(shape: LambdaAuthorizerConfig, location_name: "lambdaAuthorizerConfig"))
+    GraphqlApi.add_member(:dns, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "dns"))
+    GraphqlApi.add_member(:visibility, Shapes::ShapeRef.new(shape: GraphQLApiVisibility, location_name: "visibility"))
     GraphqlApi.struct_class = Types::GraphqlApi
 
     GraphqlApis.member = Shapes::ShapeRef.new(shape: GraphqlApi)
