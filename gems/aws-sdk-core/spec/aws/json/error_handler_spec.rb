@@ -106,7 +106,8 @@ module Aws
               'awsQueryCompatible' => {},
               'protocol' => 'json',
               'endpointPrefix' => 'svc',
-              'signatureVersion' => 'v4'
+              'signatureVersion' => 'v4',
+              'errorPrefix' => 'Prefix' # service customization needs to set this
             },
             'operations' => {
               'Foo' => {
@@ -136,7 +137,7 @@ module Aws
         it 'extracts code and message from x-amzn-query-error' do
           stub_request(:post, "https://svc.us-west-2.amazonaws.com/").
             to_return(:status => 400, headers: {
-              'x-amzn-query-error': 'AwsQueryError;Sender'
+              'x-amzn-query-error': 'Prefix.AwsQueryError;Sender'
             }, :body => error_resp)
           expect {
             client_aws_query_compatible.foo()
