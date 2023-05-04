@@ -201,6 +201,7 @@ module Aws::CloudWatch
     MetricStreamEntries = Shapes::ListShape.new(name: 'MetricStreamEntries')
     MetricStreamEntry = Shapes::StructureShape.new(name: 'MetricStreamEntry')
     MetricStreamFilter = Shapes::StructureShape.new(name: 'MetricStreamFilter')
+    MetricStreamFilterMetricNames = Shapes::ListShape.new(name: 'MetricStreamFilterMetricNames')
     MetricStreamFilters = Shapes::ListShape.new(name: 'MetricStreamFilters')
     MetricStreamName = Shapes::StringShape.new(name: 'MetricStreamName')
     MetricStreamNames = Shapes::ListShape.new(name: 'MetricStreamNames')
@@ -810,7 +811,10 @@ module Aws::CloudWatch
     MetricStreamEntry.struct_class = Types::MetricStreamEntry
 
     MetricStreamFilter.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
+    MetricStreamFilter.add_member(:metric_names, Shapes::ShapeRef.new(shape: MetricStreamFilterMetricNames, location_name: "MetricNames"))
     MetricStreamFilter.struct_class = Types::MetricStreamFilter
+
+    MetricStreamFilterMetricNames.member = Shapes::ShapeRef.new(shape: MetricName)
 
     MetricStreamFilters.member = Shapes::ShapeRef.new(shape: MetricStreamFilter)
 

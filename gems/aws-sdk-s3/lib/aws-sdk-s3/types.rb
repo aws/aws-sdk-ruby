@@ -13,8 +13,8 @@ module Aws::S3
     # Specifies the days since the initiation of an incomplete multipart
     # upload that Amazon S3 will wait before permanently removing all parts
     # of the upload. For more information, see [ Aborting Incomplete
-    # Multipart Uploads Using a Bucket Lifecycle Policy][1] in the *Amazon
-    # S3 User Guide*.
+    # Multipart Uploads Using a Bucket Lifecycle Configuration][1] in the
+    # *Amazon S3 User Guide*.
     #
     #
     #
@@ -58,14 +58,14 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -474,7 +474,10 @@ module Aws::S3
     # @!attribute [rw] comments
     #   A single character used to indicate that a row should be ignored
     #   when the character is present at the start of that row. You can
-    #   specify any character to indicate a comment line.
+    #   specify any character to indicate a comment line. The default
+    #   character is `#`.
+    #
+    #   Default: `#`
     #   @return [String]
     #
     # @!attribute [rw] quote_escape_character
@@ -708,14 +711,14 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -802,11 +805,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption
-    #   If you specified server-side encryption either with an Amazon
-    #   S3-managed encryption key or an Amazon Web Services KMS key in your
-    #   initiate multipart upload request, the response includes this
-    #   header. It confirms the encryption algorithm that Amazon S3 used to
-    #   encrypt the object.
+    #   The server-side encryption algorithm used when storing this object
+    #   in Amazon S3 (for example, AES256, `aws:kms`).
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -816,8 +816,8 @@ module Aws::S3
     #
     # @!attribute [rw] ssekms_key_id
     #   If present, specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric customer
-    #   managed key that was used for the object.
+    #   Management Service (Amazon Web Services KMS) symmetric encryption
+    #   customer managed key that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
@@ -863,14 +863,14 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1172,7 +1172,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, aws:kms).
+    #   in Amazon S3 (for example, AES256, `aws:kms`).
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
@@ -1190,8 +1190,8 @@ module Aws::S3
     #
     # @!attribute [rw] ssekms_key_id
     #   If present, specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric customer
-    #   managed key that was used for the object.
+    #   Management Service (Amazon Web Services KMS) symmetric encryption
+    #   customer managed key that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -1247,14 +1247,14 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1410,7 +1410,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, aws:kms).
+    #   in Amazon S3 (for example, AES256, `aws:kms`).
     #   @return [String]
     #
     # @!attribute [rw] storage_class
@@ -1430,7 +1430,9 @@ module Aws::S3
     #   If the bucket is configured as a website, redirects requests for
     #   this object to another object in the same bucket or to an external
     #   URL. Amazon S3 stores the value of this header in the object
-    #   metadata.
+    #   metadata. This value is unique to each object and is not copied when
+    #   using the `x-amz-metadata-directive` header. Instead, you may opt to
+    #   provide this header in combination with the directive.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
@@ -1855,7 +1857,7 @@ module Aws::S3
     #   this header. The header indicates when the initiated multipart
     #   upload becomes eligible for an abort operation. For more
     #   information, see [ Aborting Incomplete Multipart Uploads Using a
-    #   Bucket Lifecycle Policy][1].
+    #   Bucket Lifecycle Configuration][1].
     #
     #   The response also includes the `x-amz-abort-rule-id` header that
     #   provides the ID of the lifecycle configuration rule that defines
@@ -1885,14 +1887,14 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1910,7 +1912,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, aws:kms).
+    #   in Amazon S3 (for example, AES256, `aws:kms`).
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
@@ -1928,8 +1930,8 @@ module Aws::S3
     #
     # @!attribute [rw] ssekms_key_id
     #   If present, specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric customer
-    #   managed key that was used for the object.
+    #   Management Service (Amazon Web Services KMS) symmetric encryption
+    #   customer managed key that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -1991,14 +1993,14 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2067,7 +2069,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, aws:kms).
+    #   in Amazon S3 (for example, AES256, `aws:kms`).
     #   @return [String]
     #
     # @!attribute [rw] storage_class
@@ -2110,13 +2112,13 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   Specifies the ID of the symmetric customer managed key to use for
-    #   object encryption. All GET and PUT requests for an object protected
-    #   by Amazon Web Services KMS will fail if not made via SSL or using
-    #   SigV4. For information about configuring using any of the officially
-    #   supported Amazon Web Services SDKs and Amazon Web Services CLI, see
-    #   [Specifying the Signature Version in Request Authentication][1] in
-    #   the *Amazon S3 User Guide*.
+    #   Specifies the ID of the symmetric encryption customer managed key to
+    #   use for object encryption. All GET and PUT requests for an object
+    #   protected by Amazon Web Services KMS will fail if not made via SSL
+    #   or using SigV4. For information about configuring using any of the
+    #   officially supported Amazon Web Services SDKs and Amazon Web
+    #   Services CLI, see [Specifying the Signature Version in Request
+    #   Authentication][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2413,7 +2415,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The ID used to identify the metrics configuration.
+    #   The ID used to identify the metrics configuration. The ID has a 64
+    #   character limit and can only contain letters, numbers, periods,
+    #   dashes, and underscores.
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
@@ -2658,14 +2662,14 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2751,14 +2755,14 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2829,14 +2833,14 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -3049,15 +3053,16 @@ module Aws::S3
     #
     # @!attribute [rw] encryption_type
     #   The server-side encryption algorithm used when storing job results
-    #   in Amazon S3 (for example, AES256, aws:kms).
+    #   in Amazon S3 (for example, AES256, `aws:kms`).
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
     #   If the encryption type is `aws:kms`, this optional value specifies
-    #   the ID of the symmetric customer managed key to use for encryption
-    #   of job results. Amazon S3 only supports symmetric keys. For more
-    #   information, see [Using symmetric and asymmetric keys][1] in the
-    #   *Amazon Web Services Key Management Service Developer Guide*.
+    #   the ID of the symmetric encryption customer managed key to use for
+    #   encryption of job results. Amazon S3 only supports symmetric
+    #   encryption KMS keys. For more information, see [Asymmetric keys in
+    #   Amazon Web Services KMS][1] in the *Amazon Web Services Key
+    #   Management Service Developer Guide*.
     #
     #
     #
@@ -3087,9 +3092,9 @@ module Aws::S3
     #   Amazon Web Services KMS key stored in Amazon Web Services Key
     #   Management Service (KMS) for the destination bucket. Amazon S3 uses
     #   this key to encrypt replica objects. Amazon S3 only supports
-    #   symmetric, customer managed KMS keys. For more information, see
-    #   [Using symmetric and asymmetric keys][1] in the *Amazon Web Services
-    #   Key Management Service Developer Guide*.
+    #   symmetric encryption KMS keys. For more information, see [Asymmetric
+    #   keys in Amazon Web Services KMS][1] in the *Amazon Web Services Key
+    #   Management Service Developer Guide*.
     #
     #
     #
@@ -3129,9 +3134,8 @@ module Aws::S3
     # @!attribute [rw] code
     #   The error code is a string that uniquely identifies an error
     #   condition. It is meant to be read and understood by programs that
-    #   detect and handle errors by type.
-    #
-    #   **Amazon S3 error codes**
+    #   detect and handle errors by type. The following is a list of Amazon
+    #   S3 error codes. For more information, see [Error responses][1].
     #
     #   * * *Code:* AccessDenied
     #
@@ -3370,7 +3374,7 @@ module Aws::S3
     #
     #     * *Description:* The specified location constraint is not valid.
     #       For more information about Regions, see [How to Select a Region
-    #       for Your Buckets][1].
+    #       for Your Buckets][2].
     #
     #     * *HTTP Status Code:* 400 Bad Request
     #
@@ -3755,7 +3759,7 @@ module Aws::S3
     #
     #     * *Description:* Your account is not signed up for the Amazon S3
     #       service. You must sign up before you can use Amazon S3. You can
-    #       sign up at the following URL: [Amazon S3][2]
+    #       sign up at the following URL: [Amazon S3][3]
     #
     #     * *HTTP Status Code:* 403 Forbidden
     #
@@ -3846,7 +3850,7 @@ module Aws::S3
     #     * *Description:* The request signature we calculated does not
     #       match the signature you provided. Check your Amazon Web Services
     #       secret access key and signing method. For more information, see
-    #       [REST Authentication][3] and [SOAP Authentication][4] for
+    #       [REST Authentication][4] and [SOAP Authentication][5] for
     #       details.
     #
     #     * *HTTP Status Code:* 403 Forbidden
@@ -3855,7 +3859,7 @@ module Aws::S3
     #
     #   * * *Code:* ServiceUnavailable
     #
-    #     * *Description:* Reduce your request rate.
+    #     * *Description:* Service is unable to handle request.
     #
     #     * *HTTP Status Code:* 503 Service Unavailable
     #
@@ -3925,10 +3929,11 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro
-    #   [2]: http://aws.amazon.com/s3
-    #   [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html
-    #   [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/SOAPAuthentication.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro
+    #   [3]: http://aws.amazon.com/s3
+    #   [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html
+    #   [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/SOAPAuthentication.html
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -3991,6 +3996,8 @@ module Aws::S3
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-what-is-isnot-replicated.html#existing-object-replication
     #
     # @!attribute [rw] status
+    #   Specifies whether Amazon S3 replicates existing source bucket
+    #   objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ExistingObjectReplication AWS API Documentation
@@ -4080,6 +4087,20 @@ module Aws::S3
 
     # @!attribute [rw] bucket
     #   Specifies the S3 bucket whose ACL is being requested.
+    #
+    #   To use this API operation against an access point, provide the alias
+    #   of the access point in place of the bucket name.
+    #
+    #   To use this API operation against an Object Lambda access point,
+    #   provide the alias of the Object Lambda access point in place of the
+    #   bucket name. If the Object Lambda access point alias in a request is
+    #   not valid, the error code `InvalidAccessPointAliasError` is
+    #   returned. For more information about `InvalidAccessPointAliasError`,
+    #   see [List of Error Codes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
@@ -4149,6 +4170,20 @@ module Aws::S3
 
     # @!attribute [rw] bucket
     #   The bucket name for which to get the cors configuration.
+    #
+    #   To use this API operation against an access point, provide the alias
+    #   of the access point in place of the bucket name.
+    #
+    #   To use this API operation against an Object Lambda access point,
+    #   provide the alias of the Object Lambda access point in place of the
+    #   bucket name. If the Object Lambda access point alias in a request is
+    #   not valid, the error code `InvalidAccessPointAliasError` is
+    #   returned. For more information about `InvalidAccessPointAliasError`,
+    #   see [List of Error Codes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
@@ -4348,6 +4383,20 @@ module Aws::S3
 
     # @!attribute [rw] bucket
     #   The name of the bucket for which to get the location.
+    #
+    #   To use this API operation against an access point, provide the alias
+    #   of the access point in place of the bucket name.
+    #
+    #   To use this API operation against an Object Lambda access point,
+    #   provide the alias of the Object Lambda access point in place of the
+    #   bucket name. If the Object Lambda access point alias in a request is
+    #   not valid, the error code `InvalidAccessPointAliasError` is
+    #   returned. For more information about `InvalidAccessPointAliasError`,
+    #   see [List of Error Codes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
@@ -4420,7 +4469,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The ID used to identify the metrics configuration.
+    #   The ID used to identify the metrics configuration. The ID has a 64
+    #   character limit and can only contain letters, numbers, periods,
+    #   dashes, and underscores.
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
@@ -4442,6 +4493,20 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   The name of the bucket for which to get the notification
     #   configuration.
+    #
+    #   To use this API operation against an access point, provide the alias
+    #   of the access point in place of the bucket name.
+    #
+    #   To use this API operation against an Object Lambda access point,
+    #   provide the alias of the Object Lambda access point in place of the
+    #   bucket name. If the Object Lambda access point alias in a request is
+    #   not valid, the error code `InvalidAccessPointAliasError` is
+    #   returned. For more information about `InvalidAccessPointAliasError`,
+    #   see [List of Error Codes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
@@ -4506,6 +4571,20 @@ module Aws::S3
 
     # @!attribute [rw] bucket
     #   The bucket name for which to get the bucket policy.
+    #
+    #   To use this API operation against an access point, provide the alias
+    #   of the access point in place of the bucket name.
+    #
+    #   To use this API operation against an Object Lambda access point,
+    #   provide the alias of the Object Lambda access point in place of the
+    #   bucket name. If the Object Lambda access point alias in a request is
+    #   not valid, the error code `InvalidAccessPointAliasError` is
+    #   returned. For more information about `InvalidAccessPointAliasError`,
+    #   see [List of Error Codes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
@@ -4939,14 +5018,14 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5291,7 +5370,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, aws:kms).
+    #   in Amazon S3 (for example, AES256, `aws:kms`).
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -5313,8 +5392,8 @@ module Aws::S3
     #
     # @!attribute [rw] ssekms_key_id
     #   If present, specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric customer
-    #   managed key that was used for the object.
+    #   Management Service (Amazon Web Services KMS) symmetric encryption
+    #   customer managed key that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
@@ -5421,14 +5500,14 @@ module Aws::S3
     #   When using an Object Lambda access point the hostname takes the form
     #   *AccessPointName*-*AccountId*.s3-object-lambda.*Region*.amazonaws.com.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5463,7 +5542,7 @@ module Aws::S3
     # @!attribute [rw] range
     #   Downloads the specified range bytes of an object. For more
     #   information about the HTTP Range header, see
-    #   [https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35][1].
+    #   [https://www.rfc-editor.org/rfc/rfc9110.html#name-range][1].
     #
     #   <note markdown="1"> Amazon S3 doesn't support retrieving multiple ranges of data per
     #   `GET` request.
@@ -5472,7 +5551,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
+    #   [1]: https://www.rfc-editor.org/rfc/rfc9110.html#name-range
     #   @return [String]
     #
     # @!attribute [rw] response_cache_control
@@ -5680,14 +5759,14 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5931,19 +6010,27 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with an Object Lambda access point, provide
+    #   the alias of the Object Lambda access point in place of the bucket
+    #   name. If the Object Lambda access point alias in a request is not
+    #   valid, the error code `InvalidAccessPointAliasError` is returned.
+    #   For more information about `InvalidAccessPointAliasError`, see [List
+    #   of Error Codes][2].
+    #
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][3] in the *Amazon S3 User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList
+    #   [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
@@ -6120,11 +6207,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption
-    #   If the object is stored using server-side encryption either with an
-    #   Amazon Web Services KMS key or an Amazon S3-managed encryption key,
-    #   the response includes this header with the value of the server-side
-    #   encryption algorithm used when storing this object in Amazon S3 (for
-    #   example, AES256, aws:kms).
+    #   The server-side encryption algorithm used when storing this object
+    #   in Amazon S3 (for example, AES256, `aws:kms`).
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -6146,8 +6230,8 @@ module Aws::S3
     #
     # @!attribute [rw] ssekms_key_id
     #   If present, specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric customer
-    #   managed key that was used for the object.
+    #   Management Service (Amazon Web Services KMS) symmetric encryption
+    #   customer managed key that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
@@ -6306,14 +6390,14 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -6346,8 +6430,10 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] range
-    #   Because `HeadObject` returns only the metadata for an object, this
-    #   parameter has no effect.
+    #   HeadObject returns only the metadata for an object. If the Range is
+    #   satisfiable, only the `ContentLength` is affected in the response.
+    #   If the Range is not satisfiable, S3 returns a `416 - Requested Range
+    #   Not Satisfiable` error.
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -6843,12 +6929,12 @@ module Aws::S3
     #
     # @!attribute [rw] filter
     #   Specifies object key name filtering rules. For information about key
-    #   name filtering, see [Configuring Event Notifications][1] in the
-    #   *Amazon S3 User Guide*.
+    #   name filtering, see [Configuring event notifications using object
+    #   key name filtering][1] in the *Amazon S3 User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/notification-how-to-filtering.html
     #   @return [Types::NotificationConfigurationFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LambdaFunctionConfiguration AWS API Documentation
@@ -6864,6 +6950,13 @@ module Aws::S3
 
     # Container for lifecycle rules. You can add as many as 1000 rules.
     #
+    # For more information see, [Managing your storage lifecycle][1] in the
+    # *Amazon S3 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html
+    #
     # @!attribute [rw] rules
     #   Specifies lifecycle configuration rules for an Amazon S3 bucket.
     #   @return [Array<Types::Rule>]
@@ -6878,9 +6971,17 @@ module Aws::S3
 
     # Container for the expiration for the lifecycle of the object.
     #
+    # For more information see, [Managing your storage lifecycle][1] in the
+    # *Amazon S3 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html
+    #
     # @!attribute [rw] date
-    #   Indicates at what date the object is to be moved or deleted. Should
-    #   be in GMT ISO 8601 Format.
+    #   Indicates at what date the object is to be moved or deleted. The
+    #   date value must conform to the ISO 8601 format. The time is always
+    #   midnight UTC.
     #   @return [Time]
     #
     # @!attribute [rw] days
@@ -6906,6 +7007,13 @@ module Aws::S3
     end
 
     # A lifecycle rule for individual objects in an Amazon S3 bucket.
+    #
+    # For more information see, [Managing your storage lifecycle][1] in the
+    # *Amazon S3 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html
     #
     # @!attribute [rw] expiration
     #   Specifies the expiration for the lifecycle of the object in the form
@@ -6969,8 +7077,8 @@ module Aws::S3
     #   Specifies the days since the initiation of an incomplete multipart
     #   upload that Amazon S3 will wait before permanently removing all
     #   parts of the upload. For more information, see [ Aborting Incomplete
-    #   Multipart Uploads Using a Bucket Lifecycle Policy][1] in the *Amazon
-    #   S3 User Guide*.
+    #   Multipart Uploads Using a Bucket Lifecycle Configuration][1] in the
+    #   *Amazon S3 User Guide*.
     #
     #
     #
@@ -7430,14 +7538,14 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -7787,14 +7895,14 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -7880,14 +7988,14 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -7946,8 +8054,8 @@ module Aws::S3
     #
     # @!attribute [rw] key_count
     #   KeyCount is the number of keys returned with this request. KeyCount
-    #   will always be less than or equals to MaxKeys field. Say you ask for
-    #   50 keys, your result will include less than equals 50 keys
+    #   will always be less than or equal to the `MaxKeys` field. Say you
+    #   ask for 50 keys, your result will include 50 keys or fewer.
     #   @return [Integer]
     #
     # @!attribute [rw] continuation_token
@@ -7999,14 +8107,14 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -8087,7 +8195,7 @@ module Aws::S3
     #   includes this header indicating when the initiated multipart upload
     #   will become eligible for abort operation. For more information, see
     #   [Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle
-    #   Policy][1].
+    #   Configuration][1].
     #
     #   The response will also include the `x-amz-abort-rule-id` header that
     #   will provide the ID of the lifecycle configuration rule that defines
@@ -8208,14 +8316,14 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -8435,7 +8543,9 @@ module Aws::S3
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTMetricConfiguration.html
     #
     # @!attribute [rw] id
-    #   The ID used to identify the metrics configuration.
+    #   The ID used to identify the metrics configuration. The ID has a 64
+    #   character limit and can only contain letters, numbers, periods,
+    #   dashes, and underscores.
     #   @return [String]
     #
     # @!attribute [rw] filter
@@ -8705,12 +8815,12 @@ module Aws::S3
     end
 
     # Specifies object key name filtering rules. For information about key
-    # name filtering, see [Configuring Event Notifications][1] in the
-    # *Amazon S3 User Guide*.
+    # name filtering, see [Configuring event notifications using object key
+    # name filtering][1] in the *Amazon S3 User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/notification-how-to-filtering.html
     #
     # @!attribute [rw] key
     #   A container for object key name prefix and suffix filtering rules.
@@ -9073,7 +9183,24 @@ module Aws::S3
     # Container for the owner's display name and ID.
     #
     # @!attribute [rw] display_name
-    #   Container for the display name of the owner.
+    #   Container for the display name of the owner. This value is only
+    #   supported in the following Amazon Web Services Regions:
+    #
+    #   * US East (N. Virginia)
+    #
+    #   * US West (N. California)
+    #
+    #   * US West (Oregon)
+    #
+    #   * Asia Pacific (Singapore)
+    #
+    #   * Asia Pacific (Sydney)
+    #
+    #   * Asia Pacific (Tokyo)
+    #
+    #   * Europe (Ireland)
+    #
+    #   * South America (São Paulo)
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -9578,10 +9705,14 @@ module Aws::S3
 
     # @!attribute [rw] bucket
     #   Specifies default encryption for a bucket using server-side
-    #   encryption with Amazon S3-managed keys (SSE-S3) or customer managed
-    #   keys (SSE-KMS). For information about the Amazon S3 default
-    #   encryption feature, see [Amazon S3 Default Bucket Encryption][1] in
-    #   the *Amazon S3 User Guide*.
+    #   encryption with different key options. By default, all buckets have
+    #   a default encryption configuration that uses server-side encryption
+    #   with Amazon S3 managed keys (SSE-S3). You can optionally configure
+    #   default encryption for a bucket by using server-side encryption with
+    #   an Amazon Web Services KMS key (SSE-KMS) or a customer-provided key
+    #   (SSE-C). For information about the bucket default encryption
+    #   feature, see [Amazon S3 Bucket Default Encryption][1] in the *Amazon
+    #   S3 User Guide*.
     #
     #
     #
@@ -9834,7 +9965,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The ID used to identify the metrics configuration.
+    #   The ID used to identify the metrics configuration. The ID has a 64
+    #   character limit and can only contain letters, numbers, periods,
+    #   dashes, and underscores.
     #   @return [String]
     #
     # @!attribute [rw] metrics_configuration
@@ -10457,14 +10590,14 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -10770,10 +10903,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption
-    #   If you specified server-side encryption either with an Amazon Web
-    #   Services KMS key or Amazon S3-managed encryption key in your PUT
-    #   request, the response includes this header. It confirms the
-    #   encryption algorithm that Amazon S3 used to encrypt the object.
+    #   The server-side encryption algorithm used when storing this object
+    #   in Amazon S3 (for example, AES256, `aws:kms`).
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -10794,17 +10925,19 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If `x-amz-server-side-encryption` is present and has the value of
-    #   `aws:kms`, this header specifies the ID of the Amazon Web Services
-    #   Key Management Service (Amazon Web Services KMS) symmetric customer
-    #   managed key that was used for the object.
+    #   If `x-amz-server-side-encryption` is has a valid value of `aws:kms`,
+    #   this header specifies the ID of the Amazon Web Services Key
+    #   Management Service (Amazon Web Services KMS) symmetric encryption
+    #   customer managed key that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
     #   If present, specifies the Amazon Web Services KMS Encryption Context
     #   to use for object encryption. The value of this header is a
     #   base64-encoded UTF-8 string holding JSON with the encryption context
-    #   key-value pairs.
+    #   key-value pairs. This value is stored as object metadata and
+    #   automatically gets passed on to Amazon Web Services KMS for future
+    #   `GetObject` or `CopyObject` operations on this object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
@@ -10865,14 +10998,14 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -10893,11 +11026,11 @@ module Aws::S3
     # @!attribute [rw] content_disposition
     #   Specifies presentational information for the object. For more
     #   information, see
-    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1][1].
+    #   [https://www.rfc-editor.org/rfc/rfc6266#section-4][1].
     #
     #
     #
-    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1
+    #   [1]: https://www.rfc-editor.org/rfc/rfc6266#section-4
     #   @return [String]
     #
     # @!attribute [rw] content_encoding
@@ -10905,11 +11038,11 @@ module Aws::S3
     #   thus what decoding mechanisms must be applied to obtain the
     #   media-type referenced by the Content-Type header field. For more
     #   information, see
-    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11][1].
+    #   [https://www.rfc-editor.org/rfc/rfc9110.html#field.content-encoding][1].
     #
     #
     #
-    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11
+    #   [1]: https://www.rfc-editor.org/rfc/rfc9110.html#field.content-encoding
     #   @return [String]
     #
     # @!attribute [rw] content_language
@@ -10920,11 +11053,11 @@ module Aws::S3
     #   Size of the body in bytes. This parameter is useful when the size of
     #   the body cannot be determined automatically. For more information,
     #   see
-    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13][1].
+    #   [https://www.rfc-editor.org/rfc/rfc9110.html#name-content-length][1].
     #
     #
     #
-    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13
+    #   [1]: https://www.rfc-editor.org/rfc/rfc9110.html#name-content-length
     #   @return [Integer]
     #
     # @!attribute [rw] content_md5
@@ -10944,11 +11077,11 @@ module Aws::S3
     # @!attribute [rw] content_type
     #   A standard MIME type describing the format of the contents. For more
     #   information, see
-    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17][1].
+    #   [https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type][1].
     #
     #
     #
-    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
+    #   [1]: https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type
     #   @return [String]
     #
     # @!attribute [rw] checksum_algorithm
@@ -11019,11 +11152,11 @@ module Aws::S3
     # @!attribute [rw] expires
     #   The date and time at which the object is no longer cacheable. For
     #   more information, see
-    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21][1].
+    #   [https://www.rfc-editor.org/rfc/rfc7234#section-5.3][1].
     #
     #
     #
-    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21
+    #   [1]: https://www.rfc-editor.org/rfc/rfc7234#section-5.3
     #   @return [Time]
     #
     # @!attribute [rw] grant_full_control
@@ -11061,7 +11194,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, aws:kms).
+    #   in Amazon S3 (for example, AES256, `aws:kms`).
     #   @return [String]
     #
     # @!attribute [rw] storage_class
@@ -11125,9 +11258,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If `x-amz-server-side-encryption` is present and has the value of
-    #   `aws:kms`, this header specifies the ID of the Amazon Web Services
-    #   Key Management Service (Amazon Web Services KMS) symmetrical
+    #   If `x-amz-server-side-encryption` has a valid value of `aws:kms`,
+    #   this header specifies the ID of the Amazon Web Services Key
+    #   Management Service (Amazon Web Services KMS) symmetric encryption
     #   customer managed key that was used for the object. If you specify
     #   `x-amz-server-side-encryption:aws:kms`, but do not provide`
     #   x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the
@@ -11140,7 +11273,9 @@ module Aws::S3
     #   Specifies the Amazon Web Services KMS Encryption Context to use for
     #   object encryption. The value of this header is a base64-encoded
     #   UTF-8 string holding JSON with the encryption context key-value
-    #   pairs.
+    #   pairs. This value is stored as object metadata and automatically
+    #   gets passed on to Amazon Web Services KMS for future `GetObject` or
+    #   `CopyObject` operations on this object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
@@ -11371,14 +11506,14 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -11538,12 +11673,12 @@ module Aws::S3
     #
     # @!attribute [rw] filter
     #   Specifies object key name filtering rules. For information about key
-    #   name filtering, see [Configuring Event Notifications][1] in the
-    #   *Amazon S3 User Guide*.
+    #   name filtering, see [Configuring event notifications using object
+    #   key name filtering][1] in the *Amazon S3 User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/notification-how-to-filtering.html
     #   @return [Types::NotificationConfigurationFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/QueueConfiguration AWS API Documentation
@@ -11807,6 +11942,13 @@ module Aws::S3
     #   @return [Types::SourceSelectionCriteria]
     #
     # @!attribute [rw] existing_object_replication
+    #   Optional configuration to replicate existing source bucket objects.
+    #   For more information, see [Replicating Existing Objects][1] in the
+    #   *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-what-is-isnot-replicated.html#existing-object-replication
     #   @return [Types::ExistingObjectReplication]
     #
     # @!attribute [rw] destination
@@ -12032,14 +12174,14 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -12261,8 +12403,8 @@ module Aws::S3
     #   Specifies the days since the initiation of an incomplete multipart
     #   upload that Amazon S3 will wait before permanently removing all
     #   parts of the upload. For more information, see [ Aborting Incomplete
-    #   Multipart Uploads Using a Bucket Lifecycle Policy][1] in the *Amazon
-    #   S3 User Guide*.
+    #   Multipart Uploads Using a Bucket Lifecycle Configuration][1] in the
+    #   *Amazon S3 User Guide*.
     #
     #
     #
@@ -12354,8 +12496,8 @@ module Aws::S3
     #
     # @!attribute [rw] key_id
     #   Specifies the ID of the Amazon Web Services Key Management Service
-    #   (Amazon Web Services KMS) symmetric customer managed key to use for
-    #   encrypting inventory reports.
+    #   (Amazon Web Services KMS) symmetric encryption customer managed key
+    #   to use for encrypting inventory reports.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SSEKMS AWS API Documentation
@@ -12594,22 +12736,22 @@ module Aws::S3
     #   `aws:kms`.
     #
     #   You can specify the key ID or the Amazon Resource Name (ARN) of the
-    #   KMS key. However, if you are using encryption with cross-account or
-    #   Amazon Web Services service operations you must use a fully
-    #   qualified KMS key ARN. For more information, see [Using encryption
-    #   for cross-account operations][1].
+    #   KMS key. If you use a key ID, you can run into a LogDestination
+    #   undeliverable error when creating a VPC flow log.
     #
-    #   **For example:**
+    #   If you are using encryption with cross-account or Amazon Web
+    #   Services service operations you must use a fully qualified KMS key
+    #   ARN. For more information, see [Using encryption for cross-account
+    #   operations][1].
     #
     #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Key ARN:
     #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #   Amazon S3 only supports symmetric KMS keys and not asymmetric KMS
-    #   keys. For more information, see [Using symmetric and asymmetric
-    #   keys][2] in the *Amazon Web Services Key Management Service
-    #   Developer Guide*.
+    #   Amazon S3 only supports symmetric encryption KMS keys. For more
+    #   information, see [Asymmetric keys in Amazon Web Services KMS][2] in
+    #   the *Amazon Web Services Key Management Service Developer Guide*.
     #
     #
     #
@@ -12925,12 +13067,12 @@ module Aws::S3
     #
     # @!attribute [rw] filter
     #   Specifies object key name filtering rules. For information about key
-    #   name filtering, see [Configuring Event Notifications][1] in the
-    #   *Amazon S3 User Guide*.
+    #   name filtering, see [Configuring event notifications using object
+    #   key name filtering][1] in the *Amazon S3 User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/notification-how-to-filtering.html
     #   @return [Types::NotificationConfigurationFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/TopicConfiguration AWS API Documentation
@@ -13029,7 +13171,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, aws:kms).
+    #   in Amazon S3 (for example, AES256, `aws:kms`).
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
@@ -13047,8 +13189,8 @@ module Aws::S3
     #
     # @!attribute [rw] ssekms_key_id
     #   If present, specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric customer
-    #   managed key that was used for the object.
+    #   Management Service (Amazon Web Services KMS) symmetric encryption
+    #   customer managed key that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
@@ -13088,14 +13230,14 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -13282,7 +13424,7 @@ module Aws::S3
 
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, aws:kms).
+    #   in Amazon S3 (for example, AES256, `aws:kms`).
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -13356,8 +13498,8 @@ module Aws::S3
     #
     # @!attribute [rw] ssekms_key_id
     #   If present, specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric customer
-    #   managed key was used for the object.
+    #   Management Service (Amazon Web Services KMS) symmetric encryption
+    #   customer managed key was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
@@ -13404,14 +13546,14 @@ module Aws::S3
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
-    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   When you use this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form `
     #   AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com`.
-    #   When using this action with S3 on Outposts through the Amazon Web
-    #   Services SDKs, you provide the Outposts bucket ARN in place of the
-    #   bucket name. For more information about S3 on Outposts ARNs, see
-    #   [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   When you use this action with S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts access point ARN in place of
+    #   the bucket name. For more information about S3 on Outposts ARNs, see
+    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -13651,9 +13793,7 @@ module Aws::S3
     #
     # @!attribute [rw] status_code
     #   The integer status code for an HTTP response of a corresponding
-    #   `GetObject` request.
-    #
-    #   **Status Codes**
+    #   `GetObject` request. The following is a list of status codes.
     #
     #   * `200 - OK`
     #
@@ -13895,7 +14035,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing requested
-    #   object in Amazon S3 (for example, AES256, aws:kms).
+    #   object in Amazon S3 (for example, AES256, `aws:kms`).
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
@@ -13906,8 +14046,8 @@ module Aws::S3
     #
     # @!attribute [rw] ssekms_key_id
     #   If present, specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric customer
-    #   managed key that was used for stored in Amazon S3 object.
+    #   Management Service (Amazon Web Services KMS) symmetric encryption
+    #   customer managed key that was used for stored in Amazon S3 object.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5

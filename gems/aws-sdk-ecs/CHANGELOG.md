@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2023-05-04)
+------------------
+
+* Feature - Documentation update for new error type NamespaceNotFoundException for CreateCluster and UpdateCluster
+
 1.117.0 (2023-05-02)
 ------------------
 

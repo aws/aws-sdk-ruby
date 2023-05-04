@@ -94,6 +94,12 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::CreateTheme.build(context)
           when :create_theme_alias
             Aws::QuickSight::Endpoints::CreateThemeAlias.build(context)
+          when :create_topic
+            Aws::QuickSight::Endpoints::CreateTopic.build(context)
+          when :create_topic_refresh_schedule
+            Aws::QuickSight::Endpoints::CreateTopicRefreshSchedule.build(context)
+          when :create_vpc_connection
+            Aws::QuickSight::Endpoints::CreateVPCConnection.build(context)
           when :delete_account_customization
             Aws::QuickSight::Endpoints::DeleteAccountCustomization.build(context)
           when :delete_account_subscription
@@ -130,10 +136,16 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::DeleteTheme.build(context)
           when :delete_theme_alias
             Aws::QuickSight::Endpoints::DeleteThemeAlias.build(context)
+          when :delete_topic
+            Aws::QuickSight::Endpoints::DeleteTopic.build(context)
+          when :delete_topic_refresh_schedule
+            Aws::QuickSight::Endpoints::DeleteTopicRefreshSchedule.build(context)
           when :delete_user
             Aws::QuickSight::Endpoints::DeleteUser.build(context)
           when :delete_user_by_principal_id
             Aws::QuickSight::Endpoints::DeleteUserByPrincipalId.build(context)
+          when :delete_vpc_connection
+            Aws::QuickSight::Endpoints::DeleteVPCConnection.build(context)
           when :describe_account_customization
             Aws::QuickSight::Endpoints::DescribeAccountCustomization.build(context)
           when :describe_account_settings
@@ -196,8 +208,18 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::DescribeThemeAlias.build(context)
           when :describe_theme_permissions
             Aws::QuickSight::Endpoints::DescribeThemePermissions.build(context)
+          when :describe_topic
+            Aws::QuickSight::Endpoints::DescribeTopic.build(context)
+          when :describe_topic_permissions
+            Aws::QuickSight::Endpoints::DescribeTopicPermissions.build(context)
+          when :describe_topic_refresh
+            Aws::QuickSight::Endpoints::DescribeTopicRefresh.build(context)
+          when :describe_topic_refresh_schedule
+            Aws::QuickSight::Endpoints::DescribeTopicRefreshSchedule.build(context)
           when :describe_user
             Aws::QuickSight::Endpoints::DescribeUser.build(context)
+          when :describe_vpc_connection
+            Aws::QuickSight::Endpoints::DescribeVPCConnection.build(context)
           when :generate_embed_url_for_anonymous_user
             Aws::QuickSight::Endpoints::GenerateEmbedUrlForAnonymousUser.build(context)
           when :generate_embed_url_for_registered_user
@@ -248,10 +270,16 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::ListThemeVersions.build(context)
           when :list_themes
             Aws::QuickSight::Endpoints::ListThemes.build(context)
+          when :list_topic_refresh_schedules
+            Aws::QuickSight::Endpoints::ListTopicRefreshSchedules.build(context)
+          when :list_topics
+            Aws::QuickSight::Endpoints::ListTopics.build(context)
           when :list_user_groups
             Aws::QuickSight::Endpoints::ListUserGroups.build(context)
           when :list_users
             Aws::QuickSight::Endpoints::ListUsers.build(context)
+          when :list_vpc_connections
+            Aws::QuickSight::Endpoints::ListVPCConnections.build(context)
           when :put_data_set_refresh_properties
             Aws::QuickSight::Endpoints::PutDataSetRefreshProperties.build(context)
           when :register_user
@@ -322,8 +350,16 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::UpdateThemeAlias.build(context)
           when :update_theme_permissions
             Aws::QuickSight::Endpoints::UpdateThemePermissions.build(context)
+          when :update_topic
+            Aws::QuickSight::Endpoints::UpdateTopic.build(context)
+          when :update_topic_permissions
+            Aws::QuickSight::Endpoints::UpdateTopicPermissions.build(context)
+          when :update_topic_refresh_schedule
+            Aws::QuickSight::Endpoints::UpdateTopicRefreshSchedule.build(context)
           when :update_user
             Aws::QuickSight::Endpoints::UpdateUser.build(context)
+          when :update_vpc_connection
+            Aws::QuickSight::Endpoints::UpdateVPCConnection.build(context)
           end
         end
       end
