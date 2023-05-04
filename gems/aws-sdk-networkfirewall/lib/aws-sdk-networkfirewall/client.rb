@@ -663,7 +663,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_status.sync_states #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.subnet_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.endpoint_id #=> String
-    #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
+    #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "SCALING", "READY", "FAILED", "ERROR"
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status_message #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].config #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
@@ -766,7 +766,7 @@ module Aws::NetworkFirewall
     #       stateful_default_actions: ["CollectionMember_String"],
     #       stateful_engine_options: {
     #         rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
-    #         stream_exception_policy: "DROP", # accepts DROP, CONTINUE, REJECT
+    #         stream_exception_policy: "DROP", # accepts DROP, CONTINUE
     #       },
     #       tls_inspection_configuration_arn: "ResourceArn",
     #       policy_variables: {
@@ -1331,7 +1331,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_status.sync_states #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.subnet_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.endpoint_id #=> String
-    #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
+    #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "SCALING", "READY", "FAILED", "ERROR"
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status_message #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].config #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
@@ -1593,7 +1593,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_status.sync_states #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.subnet_id #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.endpoint_id #=> String
-    #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
+    #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "SCALING", "READY", "FAILED", "ERROR"
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status_message #=> String
     #   resp.firewall_status.sync_states["AvailabilityZone"].config #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
@@ -1673,7 +1673,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy.stateful_default_actions #=> Array
     #   resp.firewall_policy.stateful_default_actions[0] #=> String
     #   resp.firewall_policy.stateful_engine_options.rule_order #=> String, one of "DEFAULT_ACTION_ORDER", "STRICT_ORDER"
-    #   resp.firewall_policy.stateful_engine_options.stream_exception_policy #=> String, one of "DROP", "CONTINUE", "REJECT"
+    #   resp.firewall_policy.stateful_engine_options.stream_exception_policy #=> String, one of "DROP", "CONTINUE"
     #   resp.firewall_policy.tls_inspection_configuration_arn #=> String
     #   resp.firewall_policy.policy_variables.rule_variables #=> Hash
     #   resp.firewall_policy.policy_variables.rule_variables["RuleVariableName"].definition #=> Array
@@ -2831,7 +2831,7 @@ module Aws::NetworkFirewall
     #       stateful_default_actions: ["CollectionMember_String"],
     #       stateful_engine_options: {
     #         rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
-    #         stream_exception_policy: "DROP", # accepts DROP, CONTINUE, REJECT
+    #         stream_exception_policy: "DROP", # accepts DROP, CONTINUE
     #       },
     #       tls_inspection_configuration_arn: "ResourceArn",
     #       policy_variables: {
@@ -3520,7 +3520,7 @@ module Aws::NetworkFirewall
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

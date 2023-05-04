@@ -315,7 +315,7 @@ module Aws::S3
     # @option options [String] :range
     #   Downloads the specified range bytes of an object. For more information
     #   about the HTTP Range header, see
-    #   [https://www.rfc-editor.org/rfc/rfc9110.html#name-range][1].
+    #   [https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35][1].
     #
     #   <note markdown="1"> Amazon S3 doesn't support retrieving multiple ranges of data per
     #   `GET` request.
@@ -324,7 +324,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc9110.html#name-range
+    #   [1]: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
     # @option options [String] :response_cache_control
     #   Sets the `Cache-Control` header of the response.
     # @option options [String] :response_content_disposition
@@ -412,10 +412,8 @@ module Aws::S3
     #   Return the object only if it has not been modified since the specified
     #   time; otherwise, return a 412 (precondition failed) error.
     # @option options [String] :range
-    #   HeadObject returns only the metadata for an object. If the Range is
-    #   satisfiable, only the `ContentLength` is affected in the response. If
-    #   the Range is not satisfiable, S3 returns a `416 - Requested Range Not
-    #   Satisfiable` error.
+    #   Because `HeadObject` returns only the metadata for an object, this
+    #   parameter has no effect.
     # @option options [String] :sse_customer_algorithm
     #   Specifies the algorithm to use to when encrypting the object (for
     #   example, AES256).

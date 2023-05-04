@@ -1945,13 +1945,8 @@
     "MetricStreamFilter":{
       "type":"structure",
       "members":{
-        "Namespace":{"shape":"Namespace"},
-        "MetricNames":{"shape":"MetricStreamFilterMetricNames"}
+        "Namespace":{"shape":"Namespace"}
       }
-    },
-    "MetricStreamFilterMetricNames":{
-      "type":"list",
-      "member":{"shape":"MetricName"}
     },
     "MetricStreamFilters":{
       "type":"list",

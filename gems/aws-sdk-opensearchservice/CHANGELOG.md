@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.19.0 (2023-05-04)
-------------------
-
-* Feature - DescribeDomainNodes: A new API that provides configuration information for nodes part of the domain
-
 1.18.0 (2023-05-03)
 ------------------
 

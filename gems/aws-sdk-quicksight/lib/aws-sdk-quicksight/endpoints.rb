@@ -277,48 +277,6 @@ module Aws::QuickSight
       end
     end
 
-    class CreateTopic
-      def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
-        Aws::QuickSight::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
-        )
-      end
-    end
-
-    class CreateTopicRefreshSchedule
-      def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
-        Aws::QuickSight::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
-        )
-      end
-    end
-
-    class CreateVPCConnection
-      def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
-        Aws::QuickSight::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
-        )
-      end
-    end
-
     class DeleteAccountCustomization
       def self.build(context)
         unless context.config.regional_endpoint
@@ -571,34 +529,6 @@ module Aws::QuickSight
       end
     end
 
-    class DeleteTopic
-      def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
-        Aws::QuickSight::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
-        )
-      end
-    end
-
-    class DeleteTopicRefreshSchedule
-      def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
-        Aws::QuickSight::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
-        )
-      end
-    end
-
     class DeleteUser
       def self.build(context)
         unless context.config.regional_endpoint
@@ -614,20 +544,6 @@ module Aws::QuickSight
     end
 
     class DeleteUserByPrincipalId
-      def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
-        Aws::QuickSight::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
-        )
-      end
-    end
-
-    class DeleteVPCConnection
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -1075,77 +991,7 @@ module Aws::QuickSight
       end
     end
 
-    class DescribeTopic
-      def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
-        Aws::QuickSight::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
-        )
-      end
-    end
-
-    class DescribeTopicPermissions
-      def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
-        Aws::QuickSight::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
-        )
-      end
-    end
-
-    class DescribeTopicRefresh
-      def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
-        Aws::QuickSight::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
-        )
-      end
-    end
-
-    class DescribeTopicRefreshSchedule
-      def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
-        Aws::QuickSight::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
-        )
-      end
-    end
-
     class DescribeUser
-      def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
-        Aws::QuickSight::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
-        )
-      end
-    end
-
-    class DescribeVPCConnection
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -1509,34 +1355,6 @@ module Aws::QuickSight
       end
     end
 
-    class ListTopicRefreshSchedules
-      def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
-        Aws::QuickSight::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
-        )
-      end
-    end
-
-    class ListTopics
-      def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
-        Aws::QuickSight::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
-        )
-      end
-    end
-
     class ListUserGroups
       def self.build(context)
         unless context.config.regional_endpoint
@@ -1552,20 +1370,6 @@ module Aws::QuickSight
     end
 
     class ListUsers
-      def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
-        Aws::QuickSight::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
-        )
-      end
-    end
-
-    class ListVPCConnections
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -2069,63 +1873,7 @@ module Aws::QuickSight
       end
     end
 
-    class UpdateTopic
-      def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
-        Aws::QuickSight::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
-        )
-      end
-    end
-
-    class UpdateTopicPermissions
-      def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
-        Aws::QuickSight::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
-        )
-      end
-    end
-
-    class UpdateTopicRefreshSchedule
-      def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
-        Aws::QuickSight::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
-        )
-      end
-    end
-
     class UpdateUser
-      def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
-        Aws::QuickSight::EndpointParameters.new(
-          region: context.config.region,
-          use_dual_stack: context.config.use_dualstack_endpoint,
-          use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
-        )
-      end
-    end
-
-    class UpdateVPCConnection
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

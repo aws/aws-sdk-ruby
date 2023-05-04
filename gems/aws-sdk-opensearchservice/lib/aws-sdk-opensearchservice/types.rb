@@ -1182,7 +1182,7 @@ module Aws::OpenSearchService
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] log_publishing_options
-    #   Key-value pairs to configure log publishing.
+    #   Key-value pairs to configure slow log publishing.
     #   @return [Hash<String,Types::LogPublishingOption>]
     #
     # @!attribute [rw] domain_endpoint_options
@@ -1555,13 +1555,6 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # An exception for when a failure in one of the dependencies results in
-    # the service being unable to fetch details about the resource.
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DependencyFailureException AWS API Documentation
-    #
-    class DependencyFailureException < Aws::EmptyStructure; end
-
     # Container for the parameters to the `DescribeDomainAutoTunes`
     # operation.
     #
@@ -1798,36 +1791,6 @@ module Aws::OpenSearchService
       :total_shards,
       :total_un_assigned_shards,
       :environment_information)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Container for the parameters to the `DescribeDomainNodes` operation.
-    #
-    # @!attribute [rw] domain_name
-    #   The name of the domain.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainNodesRequest AWS API Documentation
-    #
-    class DescribeDomainNodesRequest < Struct.new(
-      :domain_name)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The result of a `DescribeDomainNodes` request. Contains information
-    # about the nodes on the requested domain.
-    #
-    # @!attribute [rw] domain_nodes_status_list
-    #   Contains nodes information list `DomainNodesStatusList` with details
-    #   about the all nodes on the requested domain.
-    #   @return [Array<Types::DomainNodesStatus>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainNodesResponse AWS API Documentation
-    #
-    class DescribeDomainNodesResponse < Struct.new(
-      :domain_nodes_status_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2093,7 +2056,7 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   A non-empty list of values for the specified filter field.
+    #   A list of values for the specified filter field.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribePackagesFilter AWS API Documentation
@@ -2388,7 +2351,7 @@ module Aws::OpenSearchService
     #   @return [Types::AdvancedOptionsStatus]
     #
     # @!attribute [rw] log_publishing_options
-    #   Key-value pairs to configure log publishing.
+    #   Key-value pairs to configure slow log publishing.
     #   @return [Types::LogPublishingOptionsStatus]
     #
     # @!attribute [rw] domain_endpoint_options
@@ -2536,56 +2499,6 @@ module Aws::OpenSearchService
     #
     class DomainInformationContainer < Struct.new(
       :aws_domain_information)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Container for information about nodes on the domain.
-    #
-    # @!attribute [rw] node_id
-    #   The ID of the node.
-    #   @return [String]
-    #
-    # @!attribute [rw] node_type
-    #   Indicates whether the nodes is a data, master, or ultrawarm node.
-    #   @return [String]
-    #
-    # @!attribute [rw] availability_zone
-    #   The Availability Zone of the node.
-    #   @return [String]
-    #
-    # @!attribute [rw] instance_type
-    #   The instance type information of the node.
-    #   @return [String]
-    #
-    # @!attribute [rw] node_status
-    #   Indicates if the node is active or in standby.
-    #   @return [String]
-    #
-    # @!attribute [rw] storage_type
-    #   Indicates if the node has EBS or instance storage.
-    #   @return [String]
-    #
-    # @!attribute [rw] storage_volume_type
-    #   If the nodes has EBS storage, indicates if the volume type is GP2 or
-    #   GP3. Only applicable for data nodes.
-    #   @return [String]
-    #
-    # @!attribute [rw] storage_size
-    #   The storage size of the node, in GiB.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DomainNodesStatus AWS API Documentation
-    #
-    class DomainNodesStatus < Struct.new(
-      :node_id,
-      :node_type,
-      :availability_zone,
-      :instance_type,
-      :node_status,
-      :storage_type,
-      :storage_volume_type,
-      :storage_size)
       SENSITIVE = []
       include Aws::Structure
     end

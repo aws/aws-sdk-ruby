@@ -1144,7 +1144,8 @@ module Aws::Connect
 
     # Creates an evaluation form in the specified Amazon Connect instance.
     # The form can be used to define questions related to agent performance,
-    # and create sections to organize such questions. Question and section
+    # and create sections to organize such questions. An evaluation form
+    # must have a unique title within an instance. Question and section
     # identifiers cannot be duplicated within the same evaluation form.
     #
     # @option params [required, String] :instance_id
@@ -1156,7 +1157,7 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :title
-    #   A title of the evaluation form.
+    #   A unique title of the evaluation form.
     #
     # @option params [String] :description
     #   The description of the evaluation form.
@@ -10325,7 +10326,8 @@ module Aws::Connect
     end
 
     # Updates details about a specific evaluation form version in the
-    # specified Amazon Connect instance. Question and section identifiers
+    # specified Amazon Connect instance. An evaluation form must have a
+    # unique title within an instance. Question and section identifiers
     # cannot be duplicated within the same evaluation form.
     #
     # This operation does not support partial updates. Instead it does a
@@ -10349,7 +10351,7 @@ module Aws::Connect
     #   A flag indicating whether the operation must create a new version.
     #
     # @option params [required, String] :title
-    #   A title of the evaluation form.
+    #   A unique title of the evaluation form.
     #
     # @option params [String] :description
     #   The description of the evaluation form.
@@ -11883,7 +11885,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.104.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

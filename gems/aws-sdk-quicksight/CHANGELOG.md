@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.79.0 (2023-05-04)
-------------------
-
-* Feature - Add support for Topic, Dataset parameters and VPC
-
 1.78.0 (2023-04-07)
 ------------------
 

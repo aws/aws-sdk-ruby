@@ -403,7 +403,7 @@ module Aws::CloudWatch
     #
     #   ^
     #
-    #   **SNS notification action:**
+    #   **SSN notification action:**
     #
     #   * `arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #     `
@@ -446,7 +446,7 @@ module Aws::CloudWatch
     #
     #   ^
     #
-    #   **SNS notification action:**
+    #   **SSN notification action:**
     #
     #   * `arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #     `
@@ -489,7 +489,7 @@ module Aws::CloudWatch
     #
     #   ^
     #
-    #   **SNS notification action:**
+    #   **SSN notification action:**
     #
     #   * `arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #     `

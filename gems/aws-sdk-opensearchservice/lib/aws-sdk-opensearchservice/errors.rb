@@ -30,7 +30,6 @@ module Aws::OpenSearchService
   # * {AccessDeniedException}
   # * {BaseException}
   # * {ConflictException}
-  # * {DependencyFailureException}
   # * {DisabledOperationException}
   # * {InternalException}
   # * {InvalidPaginationTokenException}
@@ -77,16 +76,6 @@ module Aws::OpenSearchService
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::OpenSearchService::Types::ConflictException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-    end
-
-    class DependencyFailureException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::OpenSearchService::Types::DependencyFailureException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

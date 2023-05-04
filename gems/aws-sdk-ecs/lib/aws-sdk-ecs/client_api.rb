@@ -1857,7 +1857,6 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: NamespaceNotFoundException)
       end)
 
       api.add_operation(:create_service, Seahorse::Model::Operation.new.tap do |o|
@@ -2496,7 +2495,6 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: NamespaceNotFoundException)
       end)
 
       api.add_operation(:update_cluster_settings, Seahorse::Model::Operation.new.tap do |o|

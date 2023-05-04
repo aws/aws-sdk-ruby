@@ -2056,8 +2056,8 @@ module Aws::Rekognition
     # face detected, the operation returns face details. These details
     # include a bounding box of the face, a confidence value (that the
     # bounding box contains a face), and a fixed set of attributes such as
-    # facial landmarks (for example, coordinates of eye and mouth), pose,
-    # presence of facial occlusion, and so on.
+    # facial landmarks (for example, coordinates of eye and mouth), presence
+    # of beard, sunglasses, and so on.
     #
     # The face-detection algorithm is most effective on frontal faces. For
     # non-frontal or obscured faces, the algorithm might not detect the
@@ -2087,17 +2087,17 @@ module Aws::Rekognition
     #   guide.
     #
     # @option params [Array<String>] :attributes
-    #   An array of facial attributes you want to be returned. A `DEFAULT`
-    #   subset of facial attributes - `BoundingBox`, `Confidence`, `Pose`,
-    #   `Quality`, and `Landmarks` - will always be returned. You can request
-    #   for specific facial attributes (in addition to the default list) - by
-    #   using \[`"DEFAULT", "FACE_OCCLUDED"`\] or just \[`"FACE_OCCLUDED"`\].
-    #   You can request for all facial attributes by using \[`"ALL"]`.
-    #   Requesting more attributes may increase response time.
+    #   An array of facial attributes you want to be returned. This can be the
+    #   default list of attributes or all attributes. If you don't specify a
+    #   value for `Attributes` or if you specify `["DEFAULT"]`, the API
+    #   returns the following subset of facial attributes: `BoundingBox`,
+    #   `Confidence`, `Pose`, `Quality`, and `Landmarks`. If you provide
+    #   `["ALL"]`, all facial attributes are returned, but the operation takes
+    #   longer to complete.
     #
     #   If you provide both, `["ALL", "DEFAULT"]`, the service uses a logical
-    #   "AND" operator to determine which attributes to return (in this
-    #   case, all attributes).
+    #   AND operator to determine which attributes to return (in this case,
+    #   all attributes).
     #
     # @return [Types::DetectFacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2181,7 +2181,7 @@ module Aws::Rekognition
     #         version: "S3ObjectVersion",
     #       },
     #     },
-    #     attributes: ["DEFAULT"], # accepts DEFAULT, ALL, AGE_RANGE, BEARD, EMOTIONS, EYEGLASSES, EYES_OPEN, GENDER, MOUTH_OPEN, MUSTACHE, FACE_OCCLUDED, SMILE, SUNGLASSES
+    #     attributes: ["DEFAULT"], # accepts DEFAULT, ALL
     #   })
     #
     # @example Response structure
@@ -2222,8 +2222,6 @@ module Aws::Rekognition
     #   resp.face_details[0].quality.brightness #=> Float
     #   resp.face_details[0].quality.sharpness #=> Float
     #   resp.face_details[0].confidence #=> Float
-    #   resp.face_details[0].face_occluded.value #=> Boolean
-    #   resp.face_details[0].face_occluded.confidence #=> Float
     #   resp.orientation_correction #=> String, one of "ROTATE_0", "ROTATE_90", "ROTATE_180", "ROTATE_270"
     #
     # @overload detect_faces(params = {})
@@ -3079,8 +3077,6 @@ module Aws::Rekognition
     #   resp.celebrities[0].celebrity.face.quality.brightness #=> Float
     #   resp.celebrities[0].celebrity.face.quality.sharpness #=> Float
     #   resp.celebrities[0].celebrity.face.confidence #=> Float
-    #   resp.celebrities[0].celebrity.face.face_occluded.value #=> Boolean
-    #   resp.celebrities[0].celebrity.face.face_occluded.confidence #=> Float
     #   resp.celebrities[0].celebrity.known_gender.type #=> String, one of "Male", "Female", "Nonbinary", "Unlisted"
     #   resp.job_id #=> String
     #   resp.video.s3_object.bucket #=> String
@@ -3339,8 +3335,6 @@ module Aws::Rekognition
     #   resp.faces[0].face.quality.brightness #=> Float
     #   resp.faces[0].face.quality.sharpness #=> Float
     #   resp.faces[0].face.confidence #=> Float
-    #   resp.faces[0].face.face_occluded.value #=> Boolean
-    #   resp.faces[0].face.face_occluded.confidence #=> Float
     #   resp.job_id #=> String
     #   resp.video.s3_object.bucket #=> String
     #   resp.video.s3_object.name #=> String
@@ -3544,8 +3538,6 @@ module Aws::Rekognition
     #   resp.persons[0].person.face.quality.brightness #=> Float
     #   resp.persons[0].person.face.quality.sharpness #=> Float
     #   resp.persons[0].person.face.confidence #=> Float
-    #   resp.persons[0].person.face.face_occluded.value #=> Boolean
-    #   resp.persons[0].person.face.face_occluded.confidence #=> Float
     #   resp.persons[0].face_matches #=> Array
     #   resp.persons[0].face_matches[0].similarity #=> Float
     #   resp.persons[0].face_matches[0].face.face_id #=> String
@@ -3893,8 +3885,6 @@ module Aws::Rekognition
     #   resp.persons[0].person.face.quality.brightness #=> Float
     #   resp.persons[0].person.face.quality.sharpness #=> Float
     #   resp.persons[0].person.face.confidence #=> Float
-    #   resp.persons[0].person.face.face_occluded.value #=> Boolean
-    #   resp.persons[0].person.face.face_occluded.confidence #=> Float
     #   resp.job_id #=> String
     #   resp.video.s3_object.bucket #=> String
     #   resp.video.s3_object.name #=> String
@@ -4226,15 +4216,13 @@ module Aws::Rekognition
     #
     # * An image ID, `ImageId`, assigned by the service for the input image.
     #
-    # If you request `ALL` or specific facial attributes (e.g.,
-    # `FACE_OCCLUDED`) by using the detectionAttributes parameter, Amazon
-    # Rekognition returns detailed facial attributes, such as facial
-    # landmarks (for example, location of eye and mouth), facial occlusion,
-    # and other facial attributes.
-    #
-    # If you provide the same image, specify the same collection, and use
-    # the same external ID in the `IndexFaces` operation, Amazon Rekognition
-    # doesn't save duplicate face metadata.
+    # If you request all facial attributes (by using the
+    # `detectionAttributes` parameter), Amazon Rekognition returns detailed
+    # facial attributes, such as facial landmarks (for example, location of
+    # eye and mouth) and other facial attributes. If you provide the same
+    # image, specify the same collection, and use the same external ID in
+    # the `IndexFaces` operation, Amazon Rekognition doesn't save duplicate
+    # face metadata.
     #
     #
     #
@@ -4264,13 +4252,13 @@ module Aws::Rekognition
     #   The ID you want to assign to all the faces detected in the image.
     #
     # @option params [Array<String>] :detection_attributes
-    #   An array of facial attributes you want to be returned. A `DEFAULT`
-    #   subset of facial attributes - `BoundingBox`, `Confidence`, `Pose`,
-    #   `Quality`, and `Landmarks` - will always be returned. You can request
-    #   for specific facial attributes (in addition to the default list) - by
-    #   using `["DEFAULT", "FACE_OCCLUDED"]` or just `["FACE_OCCLUDED"]`. You
-    #   can request for all facial attributes by using `["ALL"]`. Requesting
-    #   more attributes may increase response time.
+    #   An array of facial attributes that you want to be returned. This can
+    #   be the default list of attributes or all attributes. If you don't
+    #   specify a value for `Attributes` or if you specify `["DEFAULT"]`, the
+    #   API returns the following subset of facial attributes: `BoundingBox`,
+    #   `Confidence`, `Pose`, `Quality`, and `Landmarks`. If you provide
+    #   `["ALL"]`, all facial attributes are returned, but the operation takes
+    #   longer to complete.
     #
     #   If you provide both, `["ALL", "DEFAULT"]`, the service uses a logical
     #   AND operator to determine which attributes to return (in this case,
@@ -4471,7 +4459,7 @@ module Aws::Rekognition
     #       },
     #     },
     #     external_image_id: "ExternalImageId",
-    #     detection_attributes: ["DEFAULT"], # accepts DEFAULT, ALL, AGE_RANGE, BEARD, EMOTIONS, EYEGLASSES, EYES_OPEN, GENDER, MOUTH_OPEN, MUSTACHE, FACE_OCCLUDED, SMILE, SUNGLASSES
+    #     detection_attributes: ["DEFAULT"], # accepts DEFAULT, ALL
     #     max_faces: 1,
     #     quality_filter: "NONE", # accepts NONE, AUTO, LOW, MEDIUM, HIGH
     #   })
@@ -4523,8 +4511,6 @@ module Aws::Rekognition
     #   resp.face_records[0].face_detail.quality.brightness #=> Float
     #   resp.face_records[0].face_detail.quality.sharpness #=> Float
     #   resp.face_records[0].face_detail.confidence #=> Float
-    #   resp.face_records[0].face_detail.face_occluded.value #=> Boolean
-    #   resp.face_records[0].face_detail.face_occluded.confidence #=> Float
     #   resp.orientation_correction #=> String, one of "ROTATE_0", "ROTATE_90", "ROTATE_180", "ROTATE_270"
     #   resp.face_model_version #=> String
     #   resp.unindexed_faces #=> Array
@@ -4565,8 +4551,6 @@ module Aws::Rekognition
     #   resp.unindexed_faces[0].face_detail.quality.brightness #=> Float
     #   resp.unindexed_faces[0].face_detail.quality.sharpness #=> Float
     #   resp.unindexed_faces[0].face_detail.confidence #=> Float
-    #   resp.unindexed_faces[0].face_detail.face_occluded.value #=> Boolean
-    #   resp.unindexed_faces[0].face_detail.face_occluded.confidence #=> Float
     #
     # @overload index_faces(params = {})
     # @param [Hash] params ({})
@@ -6782,7 +6766,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

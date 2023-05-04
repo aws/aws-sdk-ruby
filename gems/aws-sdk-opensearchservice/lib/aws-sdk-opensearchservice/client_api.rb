@@ -101,7 +101,6 @@ module Aws::OpenSearchService
     DeletePackageResponse = Shapes::StructureShape.new(name: 'DeletePackageResponse')
     DeleteVpcEndpointRequest = Shapes::StructureShape.new(name: 'DeleteVpcEndpointRequest')
     DeleteVpcEndpointResponse = Shapes::StructureShape.new(name: 'DeleteVpcEndpointResponse')
-    DependencyFailureException = Shapes::StructureShape.new(name: 'DependencyFailureException')
     DeploymentCloseDateTimeStamp = Shapes::TimestampShape.new(name: 'DeploymentCloseDateTimeStamp')
     DeploymentStatus = Shapes::StringShape.new(name: 'DeploymentStatus')
     DeploymentType = Shapes::StringShape.new(name: 'DeploymentType')
@@ -113,8 +112,6 @@ module Aws::OpenSearchService
     DescribeDomainConfigResponse = Shapes::StructureShape.new(name: 'DescribeDomainConfigResponse')
     DescribeDomainHealthRequest = Shapes::StructureShape.new(name: 'DescribeDomainHealthRequest')
     DescribeDomainHealthResponse = Shapes::StructureShape.new(name: 'DescribeDomainHealthResponse')
-    DescribeDomainNodesRequest = Shapes::StructureShape.new(name: 'DescribeDomainNodesRequest')
-    DescribeDomainNodesResponse = Shapes::StructureShape.new(name: 'DescribeDomainNodesResponse')
     DescribeDomainRequest = Shapes::StructureShape.new(name: 'DescribeDomainRequest')
     DescribeDomainResponse = Shapes::StructureShape.new(name: 'DescribeDomainResponse')
     DescribeDomainsRequest = Shapes::StructureShape.new(name: 'DescribeDomainsRequest')
@@ -157,8 +154,6 @@ module Aws::OpenSearchService
     DomainName = Shapes::StringShape.new(name: 'DomainName')
     DomainNameFqdn = Shapes::StringShape.new(name: 'DomainNameFqdn')
     DomainNameList = Shapes::ListShape.new(name: 'DomainNameList')
-    DomainNodesStatus = Shapes::StructureShape.new(name: 'DomainNodesStatus')
-    DomainNodesStatusList = Shapes::ListShape.new(name: 'DomainNodesStatusList')
     DomainPackageDetails = Shapes::StructureShape.new(name: 'DomainPackageDetails')
     DomainPackageDetailsList = Shapes::ListShape.new(name: 'DomainPackageDetailsList')
     DomainPackageStatus = Shapes::StringShape.new(name: 'DomainPackageStatus')
@@ -255,11 +250,8 @@ module Aws::OpenSearchService
     Message = Shapes::StringShape.new(name: 'Message')
     MinimumInstanceCount = Shapes::IntegerShape.new(name: 'MinimumInstanceCount')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
-    NodeId = Shapes::StringShape.new(name: 'NodeId')
-    NodeStatus = Shapes::StringShape.new(name: 'NodeStatus')
     NodeToNodeEncryptionOptions = Shapes::StructureShape.new(name: 'NodeToNodeEncryptionOptions')
     NodeToNodeEncryptionOptionsStatus = Shapes::StructureShape.new(name: 'NodeToNodeEncryptionOptionsStatus')
-    NodeType = Shapes::StringShape.new(name: 'NodeType')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NumberOfAZs = Shapes::StringShape.new(name: 'NumberOfAZs')
     NumberOfNodes = Shapes::StringShape.new(name: 'NumberOfNodes')
@@ -387,7 +379,6 @@ module Aws::OpenSearchService
     VersionList = Shapes::ListShape.new(name: 'VersionList')
     VersionStatus = Shapes::StructureShape.new(name: 'VersionStatus')
     VersionString = Shapes::StringShape.new(name: 'VersionString')
-    VolumeSize = Shapes::StringShape.new(name: 'VolumeSize')
     VolumeType = Shapes::StringShape.new(name: 'VolumeType')
     VpcEndpoint = Shapes::StructureShape.new(name: 'VpcEndpoint')
     VpcEndpointError = Shapes::StructureShape.new(name: 'VpcEndpointError')
@@ -688,8 +679,6 @@ module Aws::OpenSearchService
     DeleteVpcEndpointResponse.add_member(:vpc_endpoint_summary, Shapes::ShapeRef.new(shape: VpcEndpointSummary, required: true, location_name: "VpcEndpointSummary"))
     DeleteVpcEndpointResponse.struct_class = Types::DeleteVpcEndpointResponse
 
-    DependencyFailureException.struct_class = Types::DependencyFailureException
-
     DescribeDomainAutoTunesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     DescribeDomainAutoTunesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     DescribeDomainAutoTunesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -729,12 +718,6 @@ module Aws::OpenSearchService
     DescribeDomainHealthResponse.add_member(:total_un_assigned_shards, Shapes::ShapeRef.new(shape: NumberOfShards, location_name: "TotalUnAssignedShards"))
     DescribeDomainHealthResponse.add_member(:environment_information, Shapes::ShapeRef.new(shape: EnvironmentInfoList, location_name: "EnvironmentInformation"))
     DescribeDomainHealthResponse.struct_class = Types::DescribeDomainHealthResponse
-
-    DescribeDomainNodesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
-    DescribeDomainNodesRequest.struct_class = Types::DescribeDomainNodesRequest
-
-    DescribeDomainNodesResponse.add_member(:domain_nodes_status_list, Shapes::ShapeRef.new(shape: DomainNodesStatusList, location_name: "DomainNodesStatusList"))
-    DescribeDomainNodesResponse.struct_class = Types::DescribeDomainNodesResponse
 
     DescribeDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     DescribeDomainRequest.struct_class = Types::DescribeDomainRequest
@@ -875,18 +858,6 @@ module Aws::OpenSearchService
     DomainInformationContainer.struct_class = Types::DomainInformationContainer
 
     DomainNameList.member = Shapes::ShapeRef.new(shape: DomainName)
-
-    DomainNodesStatus.add_member(:node_id, Shapes::ShapeRef.new(shape: NodeId, location_name: "NodeId"))
-    DomainNodesStatus.add_member(:node_type, Shapes::ShapeRef.new(shape: NodeType, location_name: "NodeType"))
-    DomainNodesStatus.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
-    DomainNodesStatus.add_member(:instance_type, Shapes::ShapeRef.new(shape: OpenSearchPartitionInstanceType, location_name: "InstanceType"))
-    DomainNodesStatus.add_member(:node_status, Shapes::ShapeRef.new(shape: NodeStatus, location_name: "NodeStatus"))
-    DomainNodesStatus.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageTypeName, location_name: "StorageType"))
-    DomainNodesStatus.add_member(:storage_volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "StorageVolumeType"))
-    DomainNodesStatus.add_member(:storage_size, Shapes::ShapeRef.new(shape: VolumeSize, location_name: "StorageSize"))
-    DomainNodesStatus.struct_class = Types::DomainNodesStatus
-
-    DomainNodesStatusList.member = Shapes::ShapeRef.new(shape: DomainNodesStatus)
 
     DomainPackageDetails.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, location_name: "PackageID"))
     DomainPackageDetails.add_member(:package_name, Shapes::ShapeRef.new(shape: PackageName, location_name: "PackageName"))
@@ -1798,20 +1769,6 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
-      end)
-
-      api.add_operation(:describe_domain_nodes, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DescribeDomainNodes"
-        o.http_method = "GET"
-        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/nodes"
-        o.input = Shapes::ShapeRef.new(shape: DescribeDomainNodesRequest)
-        o.output = Shapes::ShapeRef.new(shape: DescribeDomainNodesResponse)
-        o.errors << Shapes::ShapeRef.new(shape: BaseException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyFailureException)
       end)
 
       api.add_operation(:describe_domains, Seahorse::Model::Operation.new.tap do |o|

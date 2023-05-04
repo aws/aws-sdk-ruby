@@ -1441,7 +1441,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] title
-    #   A title of the evaluation form.
+    #   A unique title of the evaluation form.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -4428,7 +4428,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] title
-    #   A title of the evaluation form.
+    #   A unique title of the evaluation form.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -4509,7 +4509,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] title
-    #   A title of the evaluation form.
+    #   A unique title of the evaluation form.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -4901,7 +4901,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] title
-    #   A title of the evaluation form.
+    #   A unique title of the evaluation form.
     #   @return [String]
     #
     # @!attribute [rw] created_time
@@ -5095,7 +5095,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] evaluation_form_title
-    #   A title of the evaluation form.
+    #   A unique title of the evaluation form.
     #   @return [String]
     #
     # @!attribute [rw] evaluation_form_id
@@ -9358,10 +9358,10 @@ module Aws::Connect
     #   `AGENT_INTERACTION_DURATION`, `CUSTOMER_HOLD_TIME` have a minimum
     #   value of 0 and maximum value of 28800.
     #
-    # * Percentages have a minimum value of 0 and maximum value of 100.
+    # * Percantages have a minimum value of 0 and maximum value of 100.
     #
     # * `NUMBER_OF_INTERRUPTIONS` has a minimum value of 0 and maximum value
-    #   of 1000.
+    #   of 100.
     #
     # @!attribute [rw] label
     #   The property label of the automation.
@@ -11567,7 +11567,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] option_ref_id
-    #   The identifier of the answer option.
+    #   The identifier of the answer option tha
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SingleSelectQuestionRuleCategoryAutomation AWS API Documentation
@@ -13258,7 +13258,7 @@ module Aws::Connect
     #   @return [Boolean]
     #
     # @!attribute [rw] title
-    #   A title of the evaluation form.
+    #   A unique title of the evaluation form.
     #   @return [String]
     #
     # @!attribute [rw] description
