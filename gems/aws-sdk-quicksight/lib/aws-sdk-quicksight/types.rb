@@ -1441,6 +1441,21 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The bookmarks configuration of an embedded dashboard.
+    #
+    # @!attribute [rw] enabled
+    #   A Boolean value that determines whether a user can bookmark an
+    #   embedded dashboard.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BookmarksConfigurations AWS API Documentation
+    #
+    class BookmarksConfigurations < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The display options for tile borders for visuals.
     #
     # @!attribute [rw] show
@@ -1990,6 +2005,25 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A structure that represents the cell value synonym.
+    #
+    # @!attribute [rw] cell_value
+    #   The cell value.
+    #   @return [String]
+    #
+    # @!attribute [rw] synonyms
+    #   Other names or aliases for the cell value.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CellValueSynonym AWS API Documentation
+    #
+    class CellValueSynonym < Struct.new(
+      :cell_value,
+      :synonyms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The label options for an axis on a chart.
     #
     # @!attribute [rw] visibility
@@ -2046,6 +2080,20 @@ module Aws::QuickSight
     #
     class ClusterMarkerConfiguration < Struct.new(
       :cluster_marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that represents a collective constant.
+    #
+    # @!attribute [rw] value_list
+    #   A list of values for the collective constant.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CollectiveConstant AWS API Documentation
+    #
+    class CollectiveConstant < Struct.new(
+      :value_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2566,6 +2614,32 @@ module Aws::QuickSight
       :chart_configuration,
       :actions,
       :column_hierarchies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that represents a comparative order.
+    #
+    # @!attribute [rw] use_ordering
+    #   The ordering type for a column. Valid values for this structure are
+    #   `GREATER_IS_BETTER`, `LESSER_IS_BETTER` and `SPECIFIED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] specifed_order
+    #   The list of columns to be used in the ordering.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] treat_undefined_specified_values
+    #   The treat of undefined specified values. Valid values for this
+    #   structure are `LEAST` and `MOST`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ComparativeOrder AWS API Documentation
+    #
+    class ComparativeOrder < Struct.new(
+      :use_ordering,
+      :specifed_order,
+      :treat_undefined_specified_values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3482,6 +3556,10 @@ module Aws::QuickSight
     #   this dataset as a source.
     #   @return [Types::DataSetUsageConfiguration]
     #
+    # @!attribute [rw] dataset_parameters
+    #   The parameter declarations of the dataset.
+    #   @return [Array<Types::DatasetParameter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateDataSetRequest AWS API Documentation
     #
     class CreateDataSetRequest < Struct.new(
@@ -3498,7 +3576,8 @@ module Aws::QuickSight
       :row_level_permission_tag_configuration,
       :column_level_permission_rules,
       :tags,
-      :data_set_usage_configuration)
+      :data_set_usage_configuration,
+      :dataset_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3881,8 +3960,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] assignment_name
-    #   The name of the assignment, also called a rule. It must be unique
-    #   within an Amazon Web Services account.
+    #   The name of the assignment, also called a rule. The name must be
+    #   unique within the Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] assignment_status
@@ -3926,7 +4005,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] assignment_name
-    #   The name of the assignment. This name must be unique within the
+    #   The name of the assignment. The name must be unique within the
     #   Amazon Web Services account.
     #   @return [String]
     #
@@ -4475,6 +4554,227 @@ module Aws::QuickSight
       :creation_status,
       :status,
       :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the topic
+    #   you're creating a refresh schedule for.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_id
+    #   The ID of the topic that you want to modify. This ID is unique per
+    #   Amazon Web Services Region for each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_name
+    #   The name of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] refresh_schedule
+    #   The definition of a refresh schedule.
+    #   @return [Types::TopicRefreshSchedule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateTopicRefreshScheduleRequest AWS API Documentation
+    #
+    class CreateTopicRefreshScheduleRequest < Struct.new(
+      :aws_account_id,
+      :topic_id,
+      :dataset_arn,
+      :dataset_name,
+      :refresh_schedule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] topic_id
+    #   The ID of the topic that you want to modify. This ID is unique per
+    #   Amazon Web Services Region for each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_arn
+    #   The Amazon Resource Name (ARN) of the topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateTopicRefreshScheduleResponse AWS API Documentation
+    #
+    class CreateTopicRefreshScheduleResponse < Struct.new(
+      :topic_id,
+      :topic_arn,
+      :dataset_arn,
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that you want to create a
+    #   topic in.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_id
+    #   The ID for the topic that you want to create. This ID is unique per
+    #   Amazon Web Services Region for each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic
+    #   The definition of a topic to create.
+    #   @return [Types::TopicDetails]
+    #
+    # @!attribute [rw] tags
+    #   Contains a map of the key-value pairs for the resource tag or tags
+    #   that are assigned to the dataset.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateTopicRequest AWS API Documentation
+    #
+    class CreateTopicRequest < Struct.new(
+      :aws_account_id,
+      :topic_id,
+      :topic,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_id
+    #   The ID for the topic that you want to create. This ID is unique per
+    #   Amazon Web Services Region for each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] refresh_arn
+    #   The Amazon Resource Name (ARN) of the topic refresh.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateTopicResponse AWS API Documentation
+    #
+    class CreateTopicResponse < Struct.new(
+      :arn,
+      :topic_id,
+      :refresh_arn,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID of the account where you want to
+    #   create a new VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_connection_id
+    #   The ID of the VPC connection that you're creating. This ID is a
+    #   unique identifier for each Amazon Web Services Region in an Amazon
+    #   Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The display name for the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of subnet IDs for the VPC connection.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_ids
+    #   A list of security group IDs for the VPC connection.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dns_resolvers
+    #   A list of IP addresses of DNS resolver endpoints for the VPC
+    #   connection.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] role_arn
+    #   The IAM role to associate with the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map of the key-value pairs for the resource tag or tags assigned
+    #   to the VPC connection.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateVPCConnectionRequest AWS API Documentation
+    #
+    class CreateVPCConnectionRequest < Struct.new(
+      :aws_account_id,
+      :vpc_connection_id,
+      :name,
+      :subnet_ids,
+      :security_group_ids,
+      :dns_resolvers,
+      :role_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_connection_id
+    #   The ID for the VPC connection that you're creating. This ID is
+    #   unique per Amazon Web Services Region for each Amazon Web Services
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_status
+    #   The status of the creation of the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_status
+    #   The availability status of the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateVPCConnectionResponse AWS API Documentation
+    #
+    class CreateVPCConnectionResponse < Struct.new(
+      :arn,
+      :vpc_connection_id,
+      :creation_status,
+      :availability_status,
+      :request_id,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5417,6 +5717,26 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A structure that represents a data aggregation.
+    #
+    # @!attribute [rw] dataset_row_date_granularity
+    #   The level of time precision that is used to aggregate `DateTime`
+    #   values.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_date_column_name
+    #   The column name for the default date.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataAggregation AWS API Documentation
+    #
+    class DataAggregation < Struct.new(
+      :dataset_row_date_granularity,
+      :default_date_column_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The options for data bars.
     #
     # @!attribute [rw] field_id
@@ -5558,6 +5878,10 @@ module Aws::QuickSight
     #   labels.
     #   @return [String]
     #
+    # @!attribute [rw] totals_visibility
+    #   Determines the visibility of the total.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataLabelOptions AWS API Documentation
     #
     class DataLabelOptions < Struct.new(
@@ -5569,7 +5893,8 @@ module Aws::QuickSight
       :label_content,
       :label_font_configuration,
       :label_color,
-      :overlap)
+      :overlap,
+      :totals_visibility)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5818,6 +6143,10 @@ module Aws::QuickSight
     #   this dataset as a source.
     #   @return [Types::DataSetUsageConfiguration]
     #
+    # @!attribute [rw] dataset_parameters
+    #   The parameters that are declared in a dataset.
+    #   @return [Array<Types::DatasetParameter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSet AWS API Documentation
     #
     class DataSet < Struct.new(
@@ -5836,7 +6165,8 @@ module Aws::QuickSight
       :row_level_permission_data_set,
       :row_level_permission_tag_configuration,
       :column_level_permission_rules,
-      :data_set_usage_configuration)
+      :data_set_usage_configuration,
+      :dataset_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6477,6 +6807,84 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A structure that represents a dataset.
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_name
+    #   The name of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_description
+    #   The description of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_aggregation
+    #   The definition of a data aggregation.
+    #   @return [Types::DataAggregation]
+    #
+    # @!attribute [rw] filters
+    #   The list of filter definitions.
+    #   @return [Array<Types::TopicFilter>]
+    #
+    # @!attribute [rw] columns
+    #   The list of column definitions.
+    #   @return [Array<Types::TopicColumn>]
+    #
+    # @!attribute [rw] calculated_fields
+    #   The list of calculated field definitions.
+    #   @return [Array<Types::TopicCalculatedField>]
+    #
+    # @!attribute [rw] named_entities
+    #   The list of named entities definitions.
+    #   @return [Array<Types::TopicNamedEntity>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DatasetMetadata AWS API Documentation
+    #
+    class DatasetMetadata < Struct.new(
+      :dataset_arn,
+      :dataset_name,
+      :dataset_description,
+      :data_aggregation,
+      :filters,
+      :columns,
+      :calculated_fields,
+      :named_entities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A dataset parameter.
+    #
+    # @!attribute [rw] string_dataset_parameter
+    #   A string parameter that is created in the dataset.
+    #   @return [Types::StringDatasetParameter]
+    #
+    # @!attribute [rw] decimal_dataset_parameter
+    #   A decimal parameter that is created in the dataset.
+    #   @return [Types::DecimalDatasetParameter]
+    #
+    # @!attribute [rw] integer_dataset_parameter
+    #   An integer parameter that is created in the dataset.
+    #   @return [Types::IntegerDatasetParameter]
+    #
+    # @!attribute [rw] date_time_dataset_parameter
+    #   A date time parameter that is created in the dataset.
+    #   @return [Types::DateTimeDatasetParameter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DatasetParameter AWS API Documentation
+    #
+    class DatasetParameter < Struct.new(
+      :string_dataset_parameter,
+      :decimal_dataset_parameter,
+      :integer_dataset_parameter,
+      :date_time_dataset_parameter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The options that determine how a date axis is displayed.
     #
     # @!attribute [rw] missing_date_visibility
@@ -6569,6 +6977,56 @@ module Aws::QuickSight
       :column,
       :aggregation_function,
       :format_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A date time parameter for a dataset.
+    #
+    # @!attribute [rw] id
+    #   An identifier for the parameter that is created in the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the date time parameter that is created in the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] value_type
+    #   The value type of the dataset parameter. Valid values are `single
+    #   value` or `multi value`.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_granularity
+    #   The time granularity of the date time parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_values
+    #   A list of default values for a given date time parameter. This
+    #   structure only accepts static values.
+    #   @return [Types::DateTimeDatasetParameterDefaultValues]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DateTimeDatasetParameter AWS API Documentation
+    #
+    class DateTimeDatasetParameter < Struct.new(
+      :id,
+      :name,
+      :value_type,
+      :time_granularity,
+      :default_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The default values of a date time parameter.
+    #
+    # @!attribute [rw] static_values
+    #   A list of static default values for a given date time parameter.
+    #   @return [Array<Time>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DateTimeDatasetParameterDefaultValues AWS API Documentation
+    #
+    class DateTimeDatasetParameterDefaultValues < Struct.new(
+      :static_values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6684,13 +7142,19 @@ module Aws::QuickSight
     #   parameter when a value has not been set.
     #   @return [Types::DateTimeValueWhenUnsetConfiguration]
     #
+    # @!attribute [rw] mapped_data_set_parameters
+    #   A list of dataset parameters that are mapped to an analysis
+    #   parameter.
+    #   @return [Array<Types::MappedDataSetParameter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DateTimeParameterDeclaration AWS API Documentation
     #
     class DateTimeParameterDeclaration < Struct.new(
       :name,
       :default_values,
       :time_granularity,
-      :value_when_unset)
+      :value_when_unset,
+      :mapped_data_set_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6737,6 +7201,51 @@ module Aws::QuickSight
       :value_when_unset_option,
       :custom_value)
       SENSITIVE = [:custom_value]
+      include Aws::Structure
+    end
+
+    # A decimal parameter for a dataset.
+    #
+    # @!attribute [rw] id
+    #   An identifier for the decimal parameter created in the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the decimal parameter that is created in the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] value_type
+    #   The value type of the dataset parameter. Valid values are `single
+    #   value` or `multi value`.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_values
+    #   A list of default values for a given decimal parameter. This
+    #   structure only accepts static values.
+    #   @return [Types::DecimalDatasetParameterDefaultValues]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DecimalDatasetParameter AWS API Documentation
+    #
+    class DecimalDatasetParameter < Struct.new(
+      :id,
+      :name,
+      :value_type,
+      :default_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The default values of a decimal parameter.
+    #
+    # @!attribute [rw] static_values
+    #   A list of static default values for a given decimal parameter.
+    #   @return [Array<Float>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DecimalDatasetParameterDefaultValues AWS API Documentation
+    #
+    class DecimalDatasetParameterDefaultValues < Struct.new(
+      :static_values)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6801,13 +7310,19 @@ module Aws::QuickSight
     #   parameter when a value has not been set.
     #   @return [Types::DecimalValueWhenUnsetConfiguration]
     #
+    # @!attribute [rw] mapped_data_set_parameters
+    #   A list of dataset parameters that are mapped to an analysis
+    #   parameter.
+    #   @return [Array<Types::MappedDataSetParameter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DecimalParameterDeclaration AWS API Documentation
     #
     class DecimalParameterDeclaration < Struct.new(
       :parameter_value_type,
       :name,
       :default_values,
-      :value_when_unset)
+      :value_when_unset,
+      :mapped_data_set_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6849,6 +7364,26 @@ module Aws::QuickSight
       :value_when_unset_option,
       :custom_value)
       SENSITIVE = [:custom_value]
+      include Aws::Structure
+    end
+
+    # A structure that represents a default formatting definition.
+    #
+    # @!attribute [rw] display_format
+    #   The display format. Valid values for this structure are `AUTO`,
+    #   `PERCENT`, `CURRENCY`, `NUMBER`, `DATE`, and `STRING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_format_options
+    #   The additional options for display formatting.
+    #   @return [Types::DisplayFormatOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DefaultFormatting AWS API Documentation
+    #
+    class DefaultFormatting < Struct.new(
+      :display_format,
+      :display_format_options)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7799,6 +8334,109 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_id
+    #   The ID of the topic that you want to modify. This ID is unique per
+    #   Amazon Web Services Region for each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_id
+    #   The ID of the dataset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteTopicRefreshScheduleRequest AWS API Documentation
+    #
+    class DeleteTopicRefreshScheduleRequest < Struct.new(
+      :aws_account_id,
+      :topic_id,
+      :dataset_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] topic_id
+    #   The ID of the topic that you want to modify. This ID is unique per
+    #   Amazon Web Services Region for each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_arn
+    #   The Amazon Resource Name (ARN) of the topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteTopicRefreshScheduleResponse AWS API Documentation
+    #
+    class DeleteTopicRefreshScheduleResponse < Struct.new(
+      :topic_id,
+      :topic_arn,
+      :dataset_arn,
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the topic
+    #   that you want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_id
+    #   The ID of the topic that you want to delete. This ID is unique per
+    #   Amazon Web Services Region for each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteTopicRequest AWS API Documentation
+    #
+    class DeleteTopicRequest < Struct.new(
+      :aws_account_id,
+      :topic_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_id
+    #   The ID of the topic that you want to delete. This ID is unique per
+    #   Amazon Web Services Region for each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteTopicResponse AWS API Documentation
+    #
+    class DeleteTopicResponse < Struct.new(
+      :arn,
+      :topic_id,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] principal_id
     #   The principal ID of the user.
     #   @return [String]
@@ -7875,6 +8513,65 @@ module Aws::QuickSight
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteUserResponse AWS API Documentation
     #
     class DeleteUserResponse < Struct.new(
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID of the account where you want to
+    #   delete a VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_connection_id
+    #   The ID of the VPC connection that you're creating. This ID is a
+    #   unique identifier for each Amazon Web Services Region in an Amazon
+    #   Web Services account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteVPCConnectionRequest AWS API Documentation
+    #
+    class DeleteVPCConnectionRequest < Struct.new(
+      :aws_account_id,
+      :vpc_connection_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the deleted VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_connection_id
+    #   The ID of the VPC connection that you're creating. This ID is a
+    #   unique identifier for each Amazon Web Services Region in an Amazon
+    #   Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_status
+    #   The deletion status of the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_status
+    #   The availability status of the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteVPCConnectionResponse AWS API Documentation
+    #
+    class DeleteVPCConnectionResponse < Struct.new(
+      :arn,
+      :vpc_connection_id,
+      :deletion_status,
+      :availability_status,
       :request_id,
       :status)
       SENSITIVE = []
@@ -9536,6 +10233,220 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the topic
+    #   that you want described.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_id
+    #   The ID of the topic that you want to describe. This ID is unique per
+    #   Amazon Web Services Region for each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeTopicPermissionsRequest AWS API Documentation
+    #
+    class DescribeTopicPermissionsRequest < Struct.new(
+      :aws_account_id,
+      :topic_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] topic_id
+    #   The ID of the topic that you want to describe. This ID is unique per
+    #   Amazon Web Services Region for each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_arn
+    #   The Amazon Resource Name (ARN) of the topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   A list of resource permissions that are configured to the topic.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeTopicPermissionsResponse AWS API Documentation
+    #
+    class DescribeTopicPermissionsResponse < Struct.new(
+      :topic_id,
+      :topic_arn,
+      :permissions,
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the topic
+    #   whose refresh you want to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_id
+    #   The ID of the topic that you want to describe. This ID is unique per
+    #   Amazon Web Services Region for each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] refresh_id
+    #   The ID of the refresh, which is performed when the topic is created
+    #   or updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeTopicRefreshRequest AWS API Documentation
+    #
+    class DescribeTopicRefreshRequest < Struct.new(
+      :aws_account_id,
+      :topic_id,
+      :refresh_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] refresh_details
+    #   Details of the refresh, which is performed when the topic is created
+    #   or updated.
+    #   @return [Types::TopicRefreshDetails]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeTopicRefreshResponse AWS API Documentation
+    #
+    class DescribeTopicRefreshResponse < Struct.new(
+      :refresh_details,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_id
+    #   The ID of the topic that contains the refresh schedule that you want
+    #   to describe. This ID is unique per Amazon Web Services Region for
+    #   each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_id
+    #   The ID of the dataset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeTopicRefreshScheduleRequest AWS API Documentation
+    #
+    class DescribeTopicRefreshScheduleRequest < Struct.new(
+      :aws_account_id,
+      :topic_id,
+      :dataset_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] topic_id
+    #   The ID of the topic that contains the refresh schedule that you want
+    #   to describe. This ID is unique per Amazon Web Services Region for
+    #   each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_arn
+    #   The Amazon Resource Name (ARN) of the topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] refresh_schedule
+    #   The definition of a refresh schedule.
+    #   @return [Types::TopicRefreshSchedule]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeTopicRefreshScheduleResponse AWS API Documentation
+    #
+    class DescribeTopicRefreshScheduleResponse < Struct.new(
+      :topic_id,
+      :topic_arn,
+      :dataset_arn,
+      :refresh_schedule,
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_id
+    #   The ID of the topic that you want to describe. This ID is unique per
+    #   Amazon Web Services Region for each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeTopicRequest AWS API Documentation
+    #
+    class DescribeTopicRequest < Struct.new(
+      :aws_account_id,
+      :topic_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_id
+    #   The ID of the topic that you want to describe. This ID is unique per
+    #   Amazon Web Services Region for each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic
+    #   The definition of a topic.
+    #   @return [Types::TopicDetails]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeTopicResponse AWS API Documentation
+    #
+    class DescribeTopicResponse < Struct.new(
+      :arn,
+      :topic_id,
+      :topic,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] user_name
     #   The name of the user that you want to describe.
     #   @return [String]
@@ -9582,6 +10493,49 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID of the account that contains the
+    #   VPC connection that you want described.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_connection_id
+    #   The ID of the VPC connection that you're creating. This ID is a
+    #   unique identifier for each Amazon Web Services Region in an Amazon
+    #   Web Services account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeVPCConnectionRequest AWS API Documentation
+    #
+    class DescribeVPCConnectionRequest < Struct.new(
+      :aws_account_id,
+      :vpc_connection_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_connection
+    #   A response object that provides information for the specified VPC
+    #   connection.
+    #   @return [Types::VPCConnection]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeVPCConnectionResponse AWS API Documentation
+    #
+    class DescribeVPCConnectionResponse < Struct.new(
+      :vpc_connection,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration of destination parameter values.
     #
     # This is a union type structure. For this structure to be valid, only
@@ -9604,13 +10558,18 @@ module Aws::QuickSight
     #   The source field ID of the destination parameter.
     #   @return [String]
     #
+    # @!attribute [rw] source_column
+    #   A column of a data set.
+    #   @return [Types::ColumnIdentifier]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DestinationParameterValueConfiguration AWS API Documentation
     #
     class DestinationParameterValueConfiguration < Struct.new(
       :custom_values_configuration,
       :select_all_value_options,
       :source_parameter_name,
-      :source_field)
+      :source_field,
+      :source_column)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9635,6 +10594,76 @@ module Aws::QuickSight
       :numerical_dimension_field,
       :categorical_dimension_field,
       :date_dimension_field)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that represents additional options for display formatting.
+    #
+    # @!attribute [rw] use_blank_cell_format
+    #   A Boolean value that indicates whether to use blank cell format.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] blank_cell_format
+    #   Determines the blank cell format.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_format
+    #   Determines the `DateTime` format.
+    #   @return [String]
+    #
+    # @!attribute [rw] decimal_separator
+    #   Determines the decimal separator.
+    #   @return [String]
+    #
+    # @!attribute [rw] grouping_separator
+    #   Determines the grouping separator.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_grouping
+    #   A Boolean value that indicates whether to use grouping.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] fraction_digits
+    #   Determines the number of fraction digits.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix
+    #   The prefix value for a display format.
+    #   @return [String]
+    #
+    # @!attribute [rw] suffix
+    #   The suffix value for a display format.
+    #   @return [String]
+    #
+    # @!attribute [rw] unit_scaler
+    #   The unit scaler. Valid values for this structure are: `NONE`,
+    #   `AUTO`, `THOUSANDS`, `MILLIONS`, `BILLIONS`, and `TRILLIONS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] negative_format
+    #   The negative format.
+    #   @return [Types::NegativeFormat]
+    #
+    # @!attribute [rw] currency_symbol
+    #   The currency symbol, such as `USD`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DisplayFormatOptions AWS API Documentation
+    #
+    class DisplayFormatOptions < Struct.new(
+      :use_blank_cell_format,
+      :blank_cell_format,
+      :date_format,
+      :decimal_separator,
+      :grouping_separator,
+      :use_grouping,
+      :fraction_digits,
+      :prefix,
+      :suffix,
+      :unit_scaler,
+      :negative_format,
+      :currency_symbol)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10697,11 +11726,16 @@ module Aws::QuickSight
     #   ^
     #   @return [String]
     #
+    # @!attribute [rw] selected_columns
+    #   The selected columns of a dataset.
+    #   @return [Array<Types::ColumnIdentifier>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterOperationSelectedFieldsConfiguration AWS API Documentation
     #
     class FilterOperationSelectedFieldsConfiguration < Struct.new(
       :selected_fields,
-      :selected_field_options)
+      :selected_field_options,
+      :selected_columns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13367,6 +14401,51 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # An integer parameter for a dataset.
+    #
+    # @!attribute [rw] id
+    #   An identifier for the integer parameter created in the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the integer parameter that is created in the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] value_type
+    #   The value type of the dataset parameter. Valid values are `single
+    #   value` or `multi value`.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_values
+    #   A list of default values for a given integer parameter. This
+    #   structure only accepts static values.
+    #   @return [Types::IntegerDatasetParameterDefaultValues]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/IntegerDatasetParameter AWS API Documentation
+    #
+    class IntegerDatasetParameter < Struct.new(
+      :id,
+      :name,
+      :value_type,
+      :default_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The default values of an integer parameter.
+    #
+    # @!attribute [rw] static_values
+    #   A list of static default values for a given integer parameter.
+    #   @return [Array<Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/IntegerDatasetParameterDefaultValues AWS API Documentation
+    #
+    class IntegerDatasetParameterDefaultValues < Struct.new(
+      :static_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The default values of the `IntegerParameterDeclaration`.
     #
     # @!attribute [rw] dynamic_value
@@ -13427,13 +14506,19 @@ module Aws::QuickSight
     #   A parameter declaration for the `Integer` data type.
     #   @return [Types::IntegerValueWhenUnsetConfiguration]
     #
+    # @!attribute [rw] mapped_data_set_parameters
+    #   A list of dataset parameters that are mapped to an analysis
+    #   parameter.
+    #   @return [Array<Types::MappedDataSetParameter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/IntegerParameterDeclaration AWS API Documentation
     #
     class IntegerParameterDeclaration < Struct.new(
       :parameter_value_type,
       :name,
       :default_values,
-      :value_when_unset)
+      :value_when_unset,
+      :mapped_data_set_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15626,6 +16711,110 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the topic
+    #   whose refresh schedule you want described.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_id
+    #   The ID for the topic that you want to describe. This ID is unique
+    #   per Amazon Web Services Region for each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListTopicRefreshSchedulesRequest AWS API Documentation
+    #
+    class ListTopicRefreshSchedulesRequest < Struct.new(
+      :aws_account_id,
+      :topic_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] topic_id
+    #   The ID for the topic that you want to describe. This ID is unique
+    #   per Amazon Web Services Region for each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_arn
+    #   The Amazon Resource Name (ARN) of the topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] refresh_schedules
+    #   The list of topic refresh schedules.
+    #   @return [Array<Types::TopicRefreshScheduleSummary>]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListTopicRefreshSchedulesResponse AWS API Documentation
+    #
+    class ListTopicRefreshSchedulesResponse < Struct.new(
+      :topic_id,
+      :topic_arn,
+      :refresh_schedules,
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the topics
+    #   that you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListTopicsRequest AWS API Documentation
+    #
+    class ListTopicsRequest < Struct.new(
+      :aws_account_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] topics_summaries
+    #   A list of topic summaries.
+    #   @return [Array<Types::TopicSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListTopicsResponse AWS API Documentation
+    #
+    class ListTopicsResponse < Struct.new(
+      :topics_summaries,
+      :next_token,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] user_name
     #   The Amazon QuickSight user name that you want to list group
     #   memberships for.
@@ -15737,6 +16926,59 @@ module Aws::QuickSight
     #
     class ListUsersResponse < Struct.new(
       :user_list,
+      :next_token,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID of the account that contains the
+    #   VPC connections that you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListVPCConnectionsRequest AWS API Documentation
+    #
+    class ListVPCConnectionsRequest < Struct.new(
+      :aws_account_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_connection_summaries
+    #   A `VPCConnectionSummaries` object that returns a summary of VPC
+    #   connection objects.
+    #   @return [Array<Types::VPCConnectionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListVPCConnectionsResponse AWS API Documentation
+    #
+    class ListVPCConnectionsResponse < Struct.new(
+      :vpc_connection_summaries,
       :next_token,
       :request_id,
       :status)
@@ -15890,6 +17132,26 @@ module Aws::QuickSight
     class ManifestFileLocation < Struct.new(
       :bucket,
       :key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A dataset parameter that is mapped to an analysis parameter.
+    #
+    # @!attribute [rw] data_set_identifier
+    #   A unique name that identifies a dataset within the analysis or
+    #   dashboard.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_set_parameter_name
+    #   The name of the dataset parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/MappedDataSetParameter AWS API Documentation
+    #
+    class MappedDataSetParameter < Struct.new(
+      :data_set_identifier,
+      :data_set_parameter_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16129,6 +17391,64 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A structure that represents a named entity.
+    #
+    # @!attribute [rw] field_name
+    #   The name of the entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_name
+    #   The property name to be used for the named entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_role
+    #   The property role. Valid values for this structure are `PRIMARY` and
+    #   `ID`.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_usage
+    #   The property usage. Valid values for this structure are `INHERIT`,
+    #   `DIMENSION`, and `MEASURE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric
+    #   The definition of a metric.
+    #   @return [Types::NamedEntityDefinitionMetric]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/NamedEntityDefinition AWS API Documentation
+    #
+    class NamedEntityDefinition < Struct.new(
+      :field_name,
+      :property_name,
+      :property_role,
+      :property_usage,
+      :metric)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that represents a metric.
+    #
+    # @!attribute [rw] aggregation
+    #   The aggregation of a named entity. Valid values for this structure
+    #   are `SUM`, `MIN`, `MAX`, `COUNT`, `AVERAGE`, `DISTINCT_COUNT`,
+    #   `STDEV`, `STDEVP`, `VAR`, `VARP`, `PERCENTILE`, `MEDIAN`, and
+    #   `CUSTOM`.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_function_parameters
+    #   The additional parameters for an aggregation function.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/NamedEntityDefinitionMetric AWS API Documentation
+    #
+    class NamedEntityDefinitionMetric < Struct.new(
+      :aggregation,
+      :aggregation_function_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Errors that occur during namespace creation.
     #
     # @!attribute [rw] type
@@ -16188,6 +17508,25 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A structure that represents a negative format.
+    #
+    # @!attribute [rw] prefix
+    #   The prefix for a negative format.
+    #   @return [String]
+    #
+    # @!attribute [rw] suffix
+    #   The suffix for a negative format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/NegativeFormat AWS API Documentation
+    #
+    class NegativeFormat < Struct.new(
+      :prefix,
+      :suffix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The options that determine the negative value configuration.
     #
     # @!attribute [rw] display_mode
@@ -16198,6 +17537,70 @@ module Aws::QuickSight
     #
     class NegativeValueConfiguration < Struct.new(
       :display_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The structure that contains information about a network interface.
+    #
+    # @!attribute [rw] subnet_id
+    #   The subnet ID associated with the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The availability zone that the network interface resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   An error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The network interface ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/NetworkInterface AWS API Documentation
+    #
+    class NetworkInterface < Struct.new(
+      :subnet_id,
+      :availability_zone,
+      :error_message,
+      :status,
+      :network_interface_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration that overrides the existing default values for a
+    # dataset parameter that is inherited from another dataset.
+    #
+    # @!attribute [rw] string_static_values
+    #   A list of static default values for a given string parameter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] decimal_static_values
+    #   A list of static default values for a given decimal parameter.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] date_time_static_values
+    #   A list of static default values for a given date time parameter.
+    #   @return [Array<Time>]
+    #
+    # @!attribute [rw] integer_static_values
+    #   A list of static default values for a given integer parameter.
+    #   @return [Array<Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/NewDefaultValues AWS API Documentation
+    #
+    class NewDefaultValues < Struct.new(
+      :string_static_values,
+      :decimal_static_values,
+      :date_time_static_values,
+      :integer_static_values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16621,11 +18024,11 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   Port.
+    #   The port.
     #   @return [Integer]
     #
     # @!attribute [rw] database
-    #   Database.
+    #   The database.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/OracleParameters AWS API Documentation
@@ -16649,7 +18052,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   Type.
+    #   The type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/OutputColumn AWS API Documentation
@@ -16658,6 +18061,31 @@ module Aws::QuickSight
       :name,
       :description,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A transform operation that overrides the dataset parameter values that
+    # are defined in another dataset.
+    #
+    # @!attribute [rw] parameter_name
+    #   The name of the parameter to be overridden with different values.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_parameter_name
+    #   The new name for the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_default_values
+    #   The new default values for the parameter.
+    #   @return [Types::NewDefaultValues]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/OverrideDatasetParameterOperation AWS API Documentation
+    #
+    class OverrideDatasetParameterOperation < Struct.new(
+      :parameter_name,
+      :new_parameter_name,
+      :new_default_values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18416,6 +19844,25 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A structure that represents a range constant.
+    #
+    # @!attribute [rw] minimum
+    #   The minimum value for a range constant.
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum
+    #   The maximum value for a range constant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RangeConstant AWS API Documentation
+    #
+    class RangeConstant < Struct.new(
+      :minimum,
+      :maximum)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The range ends label type of a data path label.
     #
     # @!attribute [rw] visibility
@@ -19034,10 +20481,16 @@ module Aws::QuickSight
     #   The state persistence settings of an embedded dashboard.
     #   @return [Types::StatePersistenceConfigurations]
     #
+    # @!attribute [rw] bookmarks
+    #   The bookmarks configuration for an embedded dashboard in Amazon
+    #   QuickSight.
+    #   @return [Types::BookmarksConfigurations]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserDashboardFeatureConfigurations AWS API Documentation
     #
     class RegisteredUserDashboardFeatureConfigurations < Struct.new(
-      :state_persistence)
+      :state_persistence,
+      :bookmarks)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19919,13 +21372,18 @@ module Aws::QuickSight
     #   The size field well of a scatter plot.
     #   @return [Array<Types::MeasureField>]
     #
+    # @!attribute [rw] label
+    #   The label field well of a scatter plot.
+    #   @return [Array<Types::DimensionField>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ScatterPlotCategoricallyAggregatedFieldWells AWS API Documentation
     #
     class ScatterPlotCategoricallyAggregatedFieldWells < Struct.new(
       :x_axis,
       :y_axis,
       :category,
-      :size)
+      :size,
+      :label)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19994,16 +21452,14 @@ module Aws::QuickSight
     # one of the attributes can be defined.
     #
     # @!attribute [rw] scatter_plot_categorically_aggregated_field_wells
-    #   The aggregated field wells of a scatter plot. Scatter plots that
-    #   have a field in the category (group/color) field will have
-    #   aggregated field wells. The x and y-axes of these scatter plots are
-    #   aggregated by category.
+    #   The aggregated field wells of a scatter plot. The x and y-axes of
+    #   scatter plots with aggregated field wells are aggregated by
+    #   category, label, or both.
     #   @return [Types::ScatterPlotCategoricallyAggregatedFieldWells]
     #
     # @!attribute [rw] scatter_plot_unaggregated_field_wells
-    #   The unaggregated field wells of a scatter plot. Scatter plots
-    #   without a category field well have unaggregated field wells. The x
-    #   and y-axes of these scatter plots are unaggregated.
+    #   The unaggregated field wells of a scatter plot. The x and y-axes of
+    #   these scatter plots are unaggregated.
     #   @return [Types::ScatterPlotUnaggregatedFieldWells]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ScatterPlotFieldWells AWS API Documentation
@@ -20033,12 +21489,22 @@ module Aws::QuickSight
     #   The size field well of a scatter plot.
     #   @return [Array<Types::MeasureField>]
     #
+    # @!attribute [rw] category
+    #   The category field well of a scatter plot.
+    #   @return [Array<Types::DimensionField>]
+    #
+    # @!attribute [rw] label
+    #   The label field well of a scatter plot.
+    #   @return [Array<Types::DimensionField>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ScatterPlotUnaggregatedFieldWells AWS API Documentation
     #
     class ScatterPlotUnaggregatedFieldWells < Struct.new(
       :x_axis,
       :y_axis,
-      :size)
+      :size,
+      :category,
+      :label)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20653,6 +22119,74 @@ module Aws::QuickSight
     class SelectedSheetsFilterScopeConfiguration < Struct.new(
       :sheet_visual_scoping_configurations)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that represents a semantic entity type.
+    #
+    # @!attribute [rw] type_name
+    #   The semantic entity type name.
+    #   @return [String]
+    #
+    # @!attribute [rw] sub_type_name
+    #   The semantic entity sub type name.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_parameters
+    #   The semantic entity type parameters.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SemanticEntityType AWS API Documentation
+    #
+    class SemanticEntityType < Struct.new(
+      :type_name,
+      :sub_type_name,
+      :type_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that represents a semantic type.
+    #
+    # @!attribute [rw] type_name
+    #   The semantic type name.
+    #   @return [String]
+    #
+    # @!attribute [rw] sub_type_name
+    #   The semantic type sub type name.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_parameters
+    #   The semantic type parameters.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] truthy_cell_value
+    #   The semantic type truthy cell value.
+    #   @return [String]
+    #
+    # @!attribute [rw] truthy_cell_value_synonyms
+    #   The other names or aliases for the true cell value.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] falsey_cell_value
+    #   The semantic type falsey cell value.
+    #   @return [String]
+    #
+    # @!attribute [rw] falsey_cell_value_synonyms
+    #   The other names or aliases for the false cell value.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SemanticType AWS API Documentation
+    #
+    class SemanticType < Struct.new(
+      :type_name,
+      :sub_type_name,
+      :type_parameters,
+      :truthy_cell_value,
+      :truthy_cell_value_synonyms,
+      :falsey_cell_value,
+      :falsey_cell_value_synonyms)
+      SENSITIVE = [:truthy_cell_value, :falsey_cell_value]
       include Aws::Structure
     end
 
@@ -21297,6 +22831,52 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A string parameter for a dataset.
+    #
+    # @!attribute [rw] id
+    #   An identifier for the string parameter that is created in the
+    #   dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the string parameter that is created in the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] value_type
+    #   The value type of the dataset parameter. Valid values are `single
+    #   value` or `multi value`.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_values
+    #   A list of default values for a given string dataset parameter type.
+    #   This structure only accepts static values.
+    #   @return [Types::StringDatasetParameterDefaultValues]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StringDatasetParameter AWS API Documentation
+    #
+    class StringDatasetParameter < Struct.new(
+      :id,
+      :name,
+      :value_type,
+      :default_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The default values of a string parameter.
+    #
+    # @!attribute [rw] static_values
+    #   A list of static default values for a given string parameter.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StringDatasetParameterDefaultValues AWS API Documentation
+    #
+    class StringDatasetParameterDefaultValues < Struct.new(
+      :static_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The default values of the `StringParameterDeclaration`.
     #
     # @!attribute [rw] dynamic_value
@@ -21377,13 +22957,19 @@ module Aws::QuickSight
     #   parameter when a value has not been set.
     #   @return [Types::StringValueWhenUnsetConfiguration]
     #
+    # @!attribute [rw] mapped_data_set_parameters
+    #   A list of dataset parameters that are mapped to an analysis
+    #   parameter.
+    #   @return [Array<Types::MappedDataSetParameter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StringParameterDeclaration AWS API Documentation
     #
     class StringParameterDeclaration < Struct.new(
       :parameter_value_type,
       :name,
       :default_values,
-      :value_when_unset)
+      :value_when_unset,
+      :mapped_data_set_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23312,6 +24898,668 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A structure that represents a calculated field.
+    #
+    # @!attribute [rw] calculated_field_name
+    #   The calculated field name.
+    #   @return [String]
+    #
+    # @!attribute [rw] calculated_field_description
+    #   The calculated field description.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression
+    #   The calculated field expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] calculated_field_synonyms
+    #   The other names or aliases for the calculated field.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] is_included_in_topic
+    #   A boolean value that indicates if a calculated field is included in
+    #   the topic.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] disable_indexing
+    #   A Boolean value that indicates if a calculated field is visible in
+    #   the autocomplete.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] column_data_role
+    #   The column data role for a calculated field. Valid values for this
+    #   structure are `DIMENSION` and `MEASURE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_granularity
+    #   The level of time precision that is used to aggregate `DateTime`
+    #   values.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_formatting
+    #   The default formatting definition.
+    #   @return [Types::DefaultFormatting]
+    #
+    # @!attribute [rw] aggregation
+    #   The default aggregation. Valid values for this structure are `SUM`,
+    #   `MAX`, `MIN`, `COUNT`, `DISTINCT_COUNT`, and `AVERAGE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] comparative_order
+    #   The order in which data is displayed for the calculated field when
+    #   it's used in a comparative context.
+    #   @return [Types::ComparativeOrder]
+    #
+    # @!attribute [rw] semantic_type
+    #   The semantic type.
+    #   @return [Types::SemanticType]
+    #
+    # @!attribute [rw] allowed_aggregations
+    #   The list of aggregation types that are allowed for the calculated
+    #   field. Valid values for this structure are `COUNT`,
+    #   `DISTINCT_COUNT`, `MIN`, `MAX`, `MEDIAN`, `SUM`, `AVERAGE`, `STDEV`,
+    #   `STDEVP`, `VAR`, `VARP`, and `PERCENTILE`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_allowed_aggregations
+    #   The list of aggregation types that are not allowed for the
+    #   calculated field. Valid values for this structure are `COUNT`,
+    #   `DISTINCT_COUNT`, `MIN`, `MAX`, `MEDIAN`, `SUM`, `AVERAGE`, `STDEV`,
+    #   `STDEVP`, `VAR`, `VARP`, and `PERCENTILE`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] never_aggregate_in_filter
+    #   A Boolean value that indicates whether to never aggregate calculated
+    #   field in filters.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cell_value_synonyms
+    #   The other names or aliases for the calculated field cell value.
+    #   @return [Array<Types::CellValueSynonym>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicCalculatedField AWS API Documentation
+    #
+    class TopicCalculatedField < Struct.new(
+      :calculated_field_name,
+      :calculated_field_description,
+      :expression,
+      :calculated_field_synonyms,
+      :is_included_in_topic,
+      :disable_indexing,
+      :column_data_role,
+      :time_granularity,
+      :default_formatting,
+      :aggregation,
+      :comparative_order,
+      :semantic_type,
+      :allowed_aggregations,
+      :not_allowed_aggregations,
+      :never_aggregate_in_filter,
+      :cell_value_synonyms)
+      SENSITIVE = [:expression]
+      include Aws::Structure
+    end
+
+    # A structure that represents a category filter.
+    #
+    # @!attribute [rw] category_filter_function
+    #   The category filter function. Valid values for this structure are
+    #   `EXACT` and `CONTAINS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] category_filter_type
+    #   The category filter type. This element is used to specify whether a
+    #   filter is a simple category filter or an inverse category filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] constant
+    #   The constant used in a category filter.
+    #   @return [Types::TopicCategoryFilterConstant]
+    #
+    # @!attribute [rw] inverse
+    #   A Boolean value that indicates if the filter is inverse.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicCategoryFilter AWS API Documentation
+    #
+    class TopicCategoryFilter < Struct.new(
+      :category_filter_function,
+      :category_filter_type,
+      :constant,
+      :inverse)
+      SENSITIVE = [:constant]
+      include Aws::Structure
+    end
+
+    # A constant used in a category filter.
+    #
+    # @!attribute [rw] constant_type
+    #   The type of category filter constant. This element is used to
+    #   specify whether a constant is a singular or collective. Valid values
+    #   are `SINGULAR` and `COLLECTIVE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] singular_constant
+    #   A singular constant used in a category filter. This element is used
+    #   to specify a single value for the constant.
+    #   @return [String]
+    #
+    # @!attribute [rw] collective_constant
+    #   A collective constant used in a category filter. This element is
+    #   used to specify a list of values for the constant.
+    #   @return [Types::CollectiveConstant]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicCategoryFilterConstant AWS API Documentation
+    #
+    class TopicCategoryFilterConstant < Struct.new(
+      :constant_type,
+      :singular_constant,
+      :collective_constant)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a column in a dataset.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] column_friendly_name
+    #   A user-friendly name for the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] column_description
+    #   A description of the column and its contents.
+    #   @return [String]
+    #
+    # @!attribute [rw] column_synonyms
+    #   The other names or aliases for the column.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] column_data_role
+    #   The role of the column in the data. Valid values are `DIMENSION` and
+    #   `MEASURE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation
+    #   The type of aggregation that is performed on the column data when
+    #   it's queried. Valid values for this structure are `SUM`, `MAX`,
+    #   `MIN`, `COUNT`, `DISTINCT_COUNT`, and `AVERAGE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_included_in_topic
+    #   A Boolean value that indicates whether the column is included in the
+    #   query results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] disable_indexing
+    #   A Boolean value that indicates whether the column shows in the
+    #   autocomplete functionality.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] comparative_order
+    #   The order in which data is displayed for the column when it's used
+    #   in a comparative context.
+    #   @return [Types::ComparativeOrder]
+    #
+    # @!attribute [rw] semantic_type
+    #   The semantic type of data contained in the column.
+    #   @return [Types::SemanticType]
+    #
+    # @!attribute [rw] time_granularity
+    #   The level of time precision that is used to aggregate `DateTime`
+    #   values.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_aggregations
+    #   The list of aggregation types that are allowed for the column. Valid
+    #   values for this structure are `COUNT`, `DISTINCT_COUNT`, `MIN`,
+    #   `MAX`, `MEDIAN`, `SUM`, `AVERAGE`, `STDEV`, `STDEVP`, `VAR`, `VARP`,
+    #   and `PERCENTILE`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_allowed_aggregations
+    #   The list of aggregation types that are not allowed for the column.
+    #   Valid values for this structure are `COUNT`, `DISTINCT_COUNT`,
+    #   `MIN`, `MAX`, `MEDIAN`, `SUM`, `AVERAGE`, `STDEV`, `STDEVP`, `VAR`,
+    #   `VARP`, and `PERCENTILE`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] default_formatting
+    #   The default formatting used for values in the column.
+    #   @return [Types::DefaultFormatting]
+    #
+    # @!attribute [rw] never_aggregate_in_filter
+    #   A Boolean value that indicates whether to aggregate the column data
+    #   when it's used in a filter context.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cell_value_synonyms
+    #   The other names or aliases for the column cell value.
+    #   @return [Array<Types::CellValueSynonym>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicColumn AWS API Documentation
+    #
+    class TopicColumn < Struct.new(
+      :column_name,
+      :column_friendly_name,
+      :column_description,
+      :column_synonyms,
+      :column_data_role,
+      :aggregation,
+      :is_included_in_topic,
+      :disable_indexing,
+      :comparative_order,
+      :semantic_type,
+      :time_granularity,
+      :allowed_aggregations,
+      :not_allowed_aggregations,
+      :default_formatting,
+      :never_aggregate_in_filter,
+      :cell_value_synonyms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter used to restrict data based on a range of dates or times.
+    #
+    # @!attribute [rw] inclusive
+    #   A Boolean value that indicates whether the date range filter should
+    #   include the boundary values. If set to true, the filter includes the
+    #   start and end dates. If set to false, the filter excludes them.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] constant
+    #   The constant used in a date range filter.
+    #   @return [Types::TopicRangeFilterConstant]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicDateRangeFilter AWS API Documentation
+    #
+    class TopicDateRangeFilter < Struct.new(
+      :inclusive,
+      :constant)
+      SENSITIVE = [:constant]
+      include Aws::Structure
+    end
+
+    # A structure that describes the details of a topic, such as its name,
+    # description, and associated data sets.
+    #
+    # @!attribute [rw] name
+    #   The name of the topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_sets
+    #   The data sets that the topic is associated with.
+    #   @return [Array<Types::DatasetMetadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicDetails AWS API Documentation
+    #
+    class TopicDetails < Struct.new(
+      :name,
+      :description,
+      :data_sets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that represents a filter used to select items for a topic.
+    #
+    # @!attribute [rw] filter_description
+    #   A description of the filter used to select items for a topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_class
+    #   The class of the filter. Valid values for this structure are
+    #   `ENFORCED_VALUE_FILTER`, `CONDITIONAL_VALUE_FILTER`, and
+    #   `NAMED_VALUE_FILTER`.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_name
+    #   The name of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_synonyms
+    #   The other names or aliases for the filter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] operand_field_name
+    #   The name of the field that the filter operates on.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_type
+    #   The type of the filter. Valid values for this structure are
+    #   `CATEGORY_FILTER`, `NUMERIC_EQUALITY_FILTER`,
+    #   `NUMERIC_RANGE_FILTER`, `DATE_RANGE_FILTER`, and
+    #   `RELATIVE_DATE_FILTER`.
+    #   @return [String]
+    #
+    # @!attribute [rw] category_filter
+    #   The category filter that is associated with this filter.
+    #   @return [Types::TopicCategoryFilter]
+    #
+    # @!attribute [rw] numeric_equality_filter
+    #   The numeric equality filter.
+    #   @return [Types::TopicNumericEqualityFilter]
+    #
+    # @!attribute [rw] numeric_range_filter
+    #   The numeric range filter.
+    #   @return [Types::TopicNumericRangeFilter]
+    #
+    # @!attribute [rw] date_range_filter
+    #   The date range filter.
+    #   @return [Types::TopicDateRangeFilter]
+    #
+    # @!attribute [rw] relative_date_filter
+    #   The relative date filter.
+    #   @return [Types::TopicRelativeDateFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicFilter AWS API Documentation
+    #
+    class TopicFilter < Struct.new(
+      :filter_description,
+      :filter_class,
+      :filter_name,
+      :filter_synonyms,
+      :operand_field_name,
+      :filter_type,
+      :category_filter,
+      :numeric_equality_filter,
+      :numeric_range_filter,
+      :date_range_filter,
+      :relative_date_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that represents a named entity.
+    #
+    # @!attribute [rw] entity_name
+    #   The name of the named entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_description
+    #   The description of the named entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_synonyms
+    #   The other names or aliases for the named entity.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] semantic_entity_type
+    #   The type of named entity that a topic represents.
+    #   @return [Types::SemanticEntityType]
+    #
+    # @!attribute [rw] definition
+    #   The definition of a named entity.
+    #   @return [Array<Types::NamedEntityDefinition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicNamedEntity AWS API Documentation
+    #
+    class TopicNamedEntity < Struct.new(
+      :entity_name,
+      :entity_description,
+      :entity_synonyms,
+      :semantic_entity_type,
+      :definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter that filters topics based on the value of a numeric field.
+    # The filter includes only topics whose numeric field value matches the
+    # specified value.
+    #
+    # @!attribute [rw] constant
+    #   The constant used in a numeric equality filter.
+    #   @return [Types::TopicSingularFilterConstant]
+    #
+    # @!attribute [rw] aggregation
+    #   An aggregation function that specifies how to calculate the value of
+    #   a numeric field for a topic. Valid values for this structure are
+    #   `NO_AGGREGATION`, `SUM`, `AVERAGE`, `COUNT`, `DISTINCT_COUNT`,
+    #   `MAX`, `MEDIAN`, `MIN`, `STDEV`, `STDEVP`, `VAR`, and `VARP`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicNumericEqualityFilter AWS API Documentation
+    #
+    class TopicNumericEqualityFilter < Struct.new(
+      :constant,
+      :aggregation)
+      SENSITIVE = [:constant]
+      include Aws::Structure
+    end
+
+    # A filter that filters topics based on the value of a numeric field.
+    # The filter includes only topics whose numeric field value falls within
+    # the specified range.
+    #
+    # @!attribute [rw] inclusive
+    #   A Boolean value that indicates whether the endpoints of the numeric
+    #   range are included in the filter. If set to true, topics whose
+    #   numeric field value is equal to the endpoint values will be included
+    #   in the filter. If set to false, topics whose numeric field value is
+    #   equal to the endpoint values will be excluded from the filter.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] constant
+    #   The constant used in a numeric range filter.
+    #   @return [Types::TopicRangeFilterConstant]
+    #
+    # @!attribute [rw] aggregation
+    #   An aggregation function that specifies how to calculate the value of
+    #   a numeric field for a topic, Valid values for this structure are
+    #   `NO_AGGREGATION`, `SUM`, `AVERAGE`, `COUNT`, `DISTINCT_COUNT`,
+    #   `MAX`, `MEDIAN`, `MIN`, `STDEV`, `STDEVP`, `VAR`, and `VARP`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicNumericRangeFilter AWS API Documentation
+    #
+    class TopicNumericRangeFilter < Struct.new(
+      :inclusive,
+      :constant,
+      :aggregation)
+      SENSITIVE = [:constant]
+      include Aws::Structure
+    end
+
+    # A constant value that is used in a range filter to specify the
+    # endpoints of the range.
+    #
+    # @!attribute [rw] constant_type
+    #   The data type of the constant value that is used in a range filter.
+    #   Valid values for this structure are `RANGE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] range_constant
+    #   The value of the constant that is used to specify the endpoints of a
+    #   range filter.
+    #   @return [Types::RangeConstant]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicRangeFilterConstant AWS API Documentation
+    #
+    class TopicRangeFilterConstant < Struct.new(
+      :constant_type,
+      :range_constant)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details about the refresh of a topic.
+    #
+    # @!attribute [rw] refresh_arn
+    #   The Amazon Resource Name (ARN) of the topic refresh.
+    #   @return [String]
+    #
+    # @!attribute [rw] refresh_id
+    #   The ID of the refresh, which occurs as a result of topic creation or
+    #   topic update.
+    #   @return [String]
+    #
+    # @!attribute [rw] refresh_status
+    #   The status of the refresh job that indicates whether the job is
+    #   still running, completed successfully, or failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicRefreshDetails AWS API Documentation
+    #
+    class TopicRefreshDetails < Struct.new(
+      :refresh_arn,
+      :refresh_id,
+      :refresh_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that represents a topic refresh schedule.
+    #
+    # @!attribute [rw] is_enabled
+    #   A Boolean value that controls whether to schedule is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] based_on_spice_schedule
+    #   A Boolean value that controls whether to schedule runs at the same
+    #   schedule that is specified in SPICE dataset.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] starting_at
+    #   The starting date and time for the refresh schedule.
+    #   @return [Time]
+    #
+    # @!attribute [rw] timezone
+    #   The timezone that you want the refresh schedule to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] repeat_at
+    #   The time of day when the refresh should run, for example,
+    #   Monday-Sunday.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_schedule_type
+    #   The type of refresh schedule. Valid values for this structure are
+    #   `HOURLY`, `DAILY`, `WEEKLY`, and `MONTHLY`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicRefreshSchedule AWS API Documentation
+    #
+    class TopicRefreshSchedule < Struct.new(
+      :is_enabled,
+      :based_on_spice_schedule,
+      :starting_at,
+      :timezone,
+      :repeat_at,
+      :topic_schedule_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the refresh schedule details for a dataset.
+    #
+    # @!attribute [rw] dataset_id
+    #   The ID of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_name
+    #   The name of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] refresh_schedule
+    #   The definition of a refresh schedule.
+    #   @return [Types::TopicRefreshSchedule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicRefreshScheduleSummary AWS API Documentation
+    #
+    class TopicRefreshScheduleSummary < Struct.new(
+      :dataset_id,
+      :dataset_arn,
+      :dataset_name,
+      :refresh_schedule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that represents a relative date filter.
+    #
+    # @!attribute [rw] time_granularity
+    #   The level of time precision that is used to aggregate `DateTime`
+    #   values.
+    #   @return [String]
+    #
+    # @!attribute [rw] relative_date_filter_function
+    #   The function to be used in a relative date filter to determine the
+    #   range of dates to include in the results. Valid values for this
+    #   structure are `BEFORE`, `AFTER`, and `BETWEEN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] constant
+    #   The constant used in a relative date filter.
+    #   @return [Types::TopicSingularFilterConstant]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicRelativeDateFilter AWS API Documentation
+    #
+    class TopicRelativeDateFilter < Struct.new(
+      :time_granularity,
+      :relative_date_filter_function,
+      :constant)
+      SENSITIVE = [:constant]
+      include Aws::Structure
+    end
+
+    # A structure that represents a singular filter constant, used in
+    # filters to specify a single value to match against.
+    #
+    # @!attribute [rw] constant_type
+    #   The type of the singular filter constant. Valid values for this
+    #   structure are `SINGULAR`.
+    #   @return [String]
+    #
+    # @!attribute [rw] singular_constant
+    #   The value of the singular filter constant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicSingularFilterConstant AWS API Documentation
+    #
+    class TopicSingularFilterConstant < Struct.new(
+      :constant_type,
+      :singular_constant)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A topic summary.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_id
+    #   The ID for the topic. This ID is unique per Amazon Web Services
+    #   Region for each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the topic.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicSummary AWS API Documentation
+    #
+    class TopicSummary < Struct.new(
+      :arn,
+      :topic_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The total aggregation computation configuration.
     #
     # @!attribute [rw] computation_id
@@ -23404,6 +25652,11 @@ module Aws::QuickSight
     #   A transform operation that removes tags associated with a column.
     #   @return [Types::UntagColumnOperation]
     #
+    # @!attribute [rw] override_dataset_parameter_operation
+    #   A transform operation that overrides the dataset parameter values
+    #   that are defined in another dataset.
+    #   @return [Types::OverrideDatasetParameterOperation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TransformOperation AWS API Documentation
     #
     class TransformOperation < Struct.new(
@@ -23413,7 +25666,8 @@ module Aws::QuickSight
       :rename_column_operation,
       :cast_column_type_operation,
       :tag_column_operation,
-      :untag_column_operation)
+      :untag_column_operation,
+      :override_dataset_parameter_operation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24536,6 +26790,10 @@ module Aws::QuickSight
     #   this dataset as a source.
     #   @return [Types::DataSetUsageConfiguration]
     #
+    # @!attribute [rw] dataset_parameters
+    #   The parameter declarations of the dataset.
+    #   @return [Array<Types::DatasetParameter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateDataSetRequest AWS API Documentation
     #
     class UpdateDataSetRequest < Struct.new(
@@ -24550,7 +26808,8 @@ module Aws::QuickSight
       :row_level_permission_data_set,
       :row_level_permission_tag_configuration,
       :column_level_permission_rules,
-      :data_set_usage_configuration)
+      :data_set_usage_configuration,
+      :dataset_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24901,8 +27160,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] assignment_name
-    #   The name of the assignment, also called a rule. This name must be
-    #   unique within an Amazon Web Services account.
+    #   The name of the assignment, also called a rule. The name must be
+    #   unique within the Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -25528,6 +27787,187 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the topic
+    #   that you want to update the permissions for.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_id
+    #   The ID of the topic that you want to modify. This ID is unique per
+    #   Amazon Web Services Region for each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_permissions
+    #   The resource permissions that you want to grant to the topic.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] revoke_permissions
+    #   The resource permissions that you want to revoke from the topic.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateTopicPermissionsRequest AWS API Documentation
+    #
+    class UpdateTopicPermissionsRequest < Struct.new(
+      :aws_account_id,
+      :topic_id,
+      :grant_permissions,
+      :revoke_permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] topic_id
+    #   The ID of the topic that you want to modify. This ID is unique per
+    #   Amazon Web Services Region for each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_arn
+    #   The Amazon Resource Name (ARN) of the topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   A list of resource permissions on the topic.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateTopicPermissionsResponse AWS API Documentation
+    #
+    class UpdateTopicPermissionsResponse < Struct.new(
+      :topic_id,
+      :topic_arn,
+      :permissions,
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the topic
+    #   whose refresh schedule you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_id
+    #   The ID of the topic that you want to modify. This ID is unique per
+    #   Amazon Web Services Region for each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_id
+    #   The ID of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] refresh_schedule
+    #   The definition of a refresh schedule.
+    #   @return [Types::TopicRefreshSchedule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateTopicRefreshScheduleRequest AWS API Documentation
+    #
+    class UpdateTopicRefreshScheduleRequest < Struct.new(
+      :aws_account_id,
+      :topic_id,
+      :dataset_id,
+      :refresh_schedule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] topic_id
+    #   The ID of the topic that you want to modify. This ID is unique per
+    #   Amazon Web Services Region for each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_arn
+    #   The Amazon Resource Name (ARN) of the topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateTopicRefreshScheduleResponse AWS API Documentation
+    #
+    class UpdateTopicRefreshScheduleResponse < Struct.new(
+      :topic_id,
+      :topic_arn,
+      :dataset_arn,
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the topic
+    #   that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_id
+    #   The ID of the topic that you want to modify. This ID is unique per
+    #   Amazon Web Services Region for each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic
+    #   The definition of the topic that you want to update.
+    #   @return [Types::TopicDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateTopicRequest AWS API Documentation
+    #
+    class UpdateTopicRequest < Struct.new(
+      :aws_account_id,
+      :topic_id,
+      :topic)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] topic_id
+    #   The ID of the topic that you want to modify. This ID is unique per
+    #   Amazon Web Services Region for each Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] refresh_arn
+    #   The Amazon Resource Name (ARN) of the topic refresh.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateTopicResponse AWS API Documentation
+    #
+    class UpdateTopicResponse < Struct.new(
+      :topic_id,
+      :arn,
+      :refresh_arn,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] user_name
     #   The Amazon QuickSight user name that you want to update.
     #   @return [String]
@@ -25671,6 +28111,91 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID of the account that contains the
+    #   VPC connection that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_connection_id
+    #   The ID of the VPC connection that you're updating. This ID is a
+    #   unique identifier for each Amazon Web Services Region in an Amazon
+    #   Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The display name for the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of subnet IDs for the VPC connection.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_ids
+    #   A list of security group IDs for the VPC connection.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dns_resolvers
+    #   A list of IP addresses of DNS resolver endpoints for the VPC
+    #   connection.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] role_arn
+    #   An IAM role associated with the VPC connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateVPCConnectionRequest AWS API Documentation
+    #
+    class UpdateVPCConnectionRequest < Struct.new(
+      :aws_account_id,
+      :vpc_connection_id,
+      :name,
+      :subnet_ids,
+      :security_group_ids,
+      :dns_resolvers,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_connection_id
+    #   The ID of the VPC connection that you are updating. This ID is a
+    #   unique identifier for each Amazon Web Services Region in anAmazon
+    #   Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_status
+    #   The update status of the VPC connection's last update.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_status
+    #   The availability status of the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateVPCConnectionResponse AWS API Documentation
+    #
+    class UpdateVPCConnectionResponse < Struct.new(
+      :arn,
+      :vpc_connection_id,
+      :update_status,
+      :availability_status,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the format for a source file or files.
     #
     # @!attribute [rw] format
@@ -25791,6 +28316,152 @@ module Aws::QuickSight
       :external_login_federation_provider_type,
       :external_login_federation_provider_url,
       :external_login_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The structure of a VPC connection.
+    #
+    # @!attribute [rw] vpc_connection_id
+    #   The ID of the VPC connection that you're creating. This ID is a
+    #   unique identifier for each Amazon Web Services Region in an Amazon
+    #   Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The display name for the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The Amazon EC2 VPC ID associated with the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The Amazon EC2 security group IDs associated with the VPC
+    #   connection.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dns_resolvers
+    #   A list of IP addresses of DNS resolver endpoints for the VPC
+    #   connection.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The status of the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_status
+    #   The availability status of the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interfaces
+    #   A list of network interfaces.
+    #   @return [Array<Types::NetworkInterface>]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role associated with the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time that the VPC connection was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time that the VPC connection was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/VPCConnection AWS API Documentation
+    #
+    class VPCConnection < Struct.new(
+      :vpc_connection_id,
+      :arn,
+      :name,
+      :vpc_id,
+      :security_group_ids,
+      :dns_resolvers,
+      :status,
+      :availability_status,
+      :network_interfaces,
+      :role_arn,
+      :created_time,
+      :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary metadata that describes a VPC connection.
+    #
+    # @!attribute [rw] vpc_connection_id
+    #   The ID of the VPC connection that you're creating. This ID is a
+    #   unique identifier for each Amazon Web Services Region in an Amazon
+    #   Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The display name for the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The Amazon EC2 VPC ID associated with the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The Amazon EC2 security group IDs associated with the VPC
+    #   connection.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dns_resolvers
+    #   A list of IP addresses of DNS resolver endpoints for the VPC
+    #   connection.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The status of the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_status
+    #   The availability status of the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interfaces
+    #   A list of network interfaces.
+    #   @return [Array<Types::NetworkInterface>]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role associated with the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time that the VPC connection was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time that the VPC connection was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/VPCConnectionSummary AWS API Documentation
+    #
+    class VPCConnectionSummary < Struct.new(
+      :vpc_connection_id,
+      :arn,
+      :name,
+      :vpc_id,
+      :security_group_ids,
+      :dns_resolvers,
+      :status,
+      :availability_status,
+      :network_interfaces,
+      :role_arn,
+      :created_time,
+      :last_updated_time)
       SENSITIVE = []
       include Aws::Structure
     end

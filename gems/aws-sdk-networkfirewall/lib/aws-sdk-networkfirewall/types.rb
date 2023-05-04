@@ -3197,7 +3197,7 @@ module Aws::NetworkFirewall
     #
     #
     #
-    #   [1]: https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html
+    #   [1]: https://suricata.readthedocs.iorules/intro.html#
     #   @return [Array<Types::StatefulRule>]
     #
     # @!attribute [rw] stateless_rules_and_custom_actions
@@ -3449,6 +3449,13 @@ module Aws::NetworkFirewall
     #     behavior is rule dependent—a TCP-layer rule using a
     #     `flow:stateless` rule would still match, as would the
     #     `aws:drop_strict` default action.
+    #
+    #   * `REJECT` - Network Firewall fails closed and drops all subsequent
+    #     traffic going to the firewall. Network Firewall also sends a TCP
+    #     reject packet back to your client so that the client can
+    #     immediately establish a new session. Network Firewall will have
+    #     context about the new session and will apply rules to the
+    #     subsequent traffic.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/StatefulEngineOptions AWS API Documentation
@@ -3468,7 +3475,7 @@ module Aws::NetworkFirewall
     #
     #
     #
-    # [1]: https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html
+    # [1]: https://suricata.readthedocs.iorules/intro.html#
     #
     # @!attribute [rw] action
     #   Defines what Network Firewall should do with the packets in a
@@ -3492,6 +3499,16 @@ module Aws::NetworkFirewall
     #     drop traffic. You can enable the rule with `ALERT` action, verify
     #     in the logs that the rule is filtering as you want, then change
     #     the action to `DROP`.
+    #
+    #   * **REJECT** - Drops TCP traffic that matches the conditions of the
+    #     stateful rule, and sends a TCP reset packet back to sender of the
+    #     packet. A TCP reset packet is a packet with no payload and a `RST`
+    #     bit contained in the TCP header flags. Also sends an alert log
+    #     mesage if alert logging is configured in the Firewall
+    #     LoggingConfiguration.
+    #
+    #     `REJECT` isn't currently available for use with IMAP and FTP
+    #     protocols.
     #   @return [String]
     #
     # @!attribute [rw] header

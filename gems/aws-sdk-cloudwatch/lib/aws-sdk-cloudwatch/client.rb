@@ -1956,8 +1956,12 @@ module Aws::CloudWatch
     #   resp.name #=> String
     #   resp.include_filters #=> Array
     #   resp.include_filters[0].namespace #=> String
+    #   resp.include_filters[0].metric_names #=> Array
+    #   resp.include_filters[0].metric_names[0] #=> String
     #   resp.exclude_filters #=> Array
     #   resp.exclude_filters[0].namespace #=> String
+    #   resp.exclude_filters[0].metric_names #=> Array
+    #   resp.exclude_filters[0].metric_names[0] #=> String
     #   resp.firehose_arn #=> String
     #   resp.role_arn #=> String
     #   resp.state #=> String
@@ -2944,6 +2948,9 @@ module Aws::CloudWatch
     # and `AWSServiceRoleForCloudWatchAlarms_ActionSSM`. For more
     # information, see [Amazon Web Services service-linked role][2].
     #
+    # Each `PutMetricAlarm` action has a maximum uncompressed payload of 120
+    # KB.
+    #
     # **Cross-account alarms**
     #
     # You can set an alarm on metrics in the current account, or in another
@@ -3015,7 +3022,7 @@ module Aws::CloudWatch
     #
     #   ^
     #
-    #   **SSN notification action:**
+    #   **SNS notification action:**
     #
     #   * `arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #     `
@@ -3059,7 +3066,7 @@ module Aws::CloudWatch
     #
     #   ^
     #
-    #   **SSN notification action:**
+    #   **SNS notification action:**
     #
     #   * `arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #     `
@@ -3103,7 +3110,7 @@ module Aws::CloudWatch
     #
     #   ^
     #
-    #   **SSN notification action:**
+    #   **SNS notification action:**
     #
     #   * `arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #     `
@@ -3641,11 +3648,13 @@ module Aws::CloudWatch
     #     include_filters: [
     #       {
     #         namespace: "Namespace",
+    #         metric_names: ["MetricName"],
     #       },
     #     ],
     #     exclude_filters: [
     #       {
     #         namespace: "Namespace",
+    #         metric_names: ["MetricName"],
     #       },
     #     ],
     #     firehose_arn: "AmazonResourceName", # required
@@ -3914,7 +3923,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

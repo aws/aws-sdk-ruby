@@ -3392,6 +3392,158 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Returns history for a Security Hub finding in the last 90 days. The
+    # history includes changes made to any fields in the Amazon Web Services
+    # Security Finding Format (ASFF).
+    #
+    # @option params [required, Types::AwsSecurityFindingIdentifier] :finding_identifier
+    #   Identifies which finding to get the finding history for.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   An ISO 8601-formatted timestamp that indicates the start time of the
+    #   requested finding history. A correctly formatted example is
+    #   `2020-05-21T20:16:34.724Z`. The value cannot contain spaces, and date
+    #   and time should be separated by `T`. For more information, see [RFC
+    #   3339 section 5.6, Internet Date/Time Format][1].
+    #
+    #   If you provide values for both `StartTime` and `EndTime`, Security Hub
+    #   returns finding history for the specified time period. If you provide
+    #   a value for `StartTime` but not for `EndTime`, Security Hub returns
+    #   finding history from the `StartTime` to the time at which the API is
+    #   called. If you provide a value for `EndTime` but not for `StartTime`,
+    #   Security Hub returns finding history from the [CreatedAt][2] timestamp
+    #   of the finding to the `EndTime`. If you provide neither `StartTime`
+    #   nor `EndTime`, Security Hub returns finding history from the CreatedAt
+    #   timestamp of the finding to the time at which the API is called. In
+    #   all of these scenarios, the response is limited to 100 results, and
+    #   the maximum time period is limited to 90 days.
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   [2]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   An ISO 8601-formatted timestamp that indicates the end time of the
+    #   requested finding history. A correctly formatted example is
+    #   `2020-05-21T20:16:34.724Z`. The value cannot contain spaces, and date
+    #   and time should be separated by `T`. For more information, see [RFC
+    #   3339 section 5.6, Internet Date/Time Format][1].
+    #
+    #   If you provide values for both `StartTime` and `EndTime`, Security Hub
+    #   returns finding history for the specified time period. If you provide
+    #   a value for `StartTime` but not for `EndTime`, Security Hub returns
+    #   finding history from the `StartTime` to the time at which the API is
+    #   called. If you provide a value for `EndTime` but not for `StartTime`,
+    #   Security Hub returns finding history from the [CreatedAt][2] timestamp
+    #   of the finding to the `EndTime`. If you provide neither `StartTime`
+    #   nor `EndTime`, Security Hub returns finding history from the CreatedAt
+    #   timestamp of the finding to the time at which the API is called. In
+    #   all of these scenarios, the response is limited to 100 results, and
+    #   the maximum time period is limited to 90 days.
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   [2]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
+    #
+    # @option params [String] :next_token
+    #   A token for pagination purposes. Provide `NULL` as the initial value.
+    #   In subsequent requests, provide the token included in the response to
+    #   get up to an additional 100 results of finding history. If you don’t
+    #   provide `NextToken`, Security Hub returns up to 100 results of finding
+    #   history for each request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned. If you don’t provide it,
+    #   Security Hub returns up to 100 results of finding history.
+    #
+    # @return [Types::GetFindingHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFindingHistoryResponse#records #records} => Array&lt;Types::FindingHistoryRecord&gt;
+    #   * {Types::GetFindingHistoryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To get finding history
+    #
+    #   # The following example retrieves the history of the specified finding during the specified time frame. If the time frame
+    #   # permits, Security Hub returns finding history for the last 90 days.
+    #
+    #   resp = client.get_finding_history({
+    #     end_time: Time.parse("2021-09-31T15:53:35.573Z"), 
+    #     finding_identifier: {
+    #       id: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #       product_arn: "arn:aws:securityhub:us-west-2:123456789012:product/123456789012/default", 
+    #     }, 
+    #     max_results: 2, 
+    #     start_time: Time.parse("2021-09-30T15:53:35.573Z"), 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     records: [
+    #       {
+    #         finding_created: false, 
+    #         finding_identifier: {
+    #           id: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #           product_arn: "arn:aws:securityhub:us-west-2:123456789012:product/123456789012/default", 
+    #         }, 
+    #         update_source: {
+    #           identity: "arn:aws:iam::444455556666:role/Admin", 
+    #           type: "BATCH_UPDATE_FINDINGS", 
+    #         }, 
+    #         update_time: Time.parse("2021-09-31T15:52:25.573Z"), 
+    #         updates: [
+    #           {
+    #             new_value: "MEDIUM", 
+    #             old_value: "HIGH", 
+    #             updated_field: "Severity", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_finding_history({
+    #     finding_identifier: { # required
+    #       id: "NonEmptyString", # required
+    #       product_arn: "NonEmptyString", # required
+    #     },
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.records #=> Array
+    #   resp.records[0].finding_identifier.id #=> String
+    #   resp.records[0].finding_identifier.product_arn #=> String
+    #   resp.records[0].update_time #=> Time
+    #   resp.records[0].finding_created #=> Boolean
+    #   resp.records[0].update_source.type #=> String, one of "BATCH_UPDATE_FINDINGS", "BATCH_IMPORT_FINDINGS"
+    #   resp.records[0].update_source.identity #=> String
+    #   resp.records[0].updates #=> Array
+    #   resp.records[0].updates[0].updated_field #=> String
+    #   resp.records[0].updates[0].old_value #=> String
+    #   resp.records[0].updates[0].new_value #=> String
+    #   resp.records[0].next_token #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindingHistory AWS API Documentation
+    #
+    # @overload get_finding_history(params = {})
+    # @param [Hash] params ({})
+    def get_finding_history(params = {}, options = {})
+      req = build_request(:get_finding_history, params)
+      req.send_request(options)
+    end
+
     # Returns a list of findings that match the specified criteria.
     #
     # If finding aggregation is enabled, then when you call `GetFindings`
@@ -7234,7 +7386,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

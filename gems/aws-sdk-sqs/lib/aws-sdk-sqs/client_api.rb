@@ -43,15 +43,25 @@ module Aws::SQS
     DeleteMessageRequest = Shapes::StructureShape.new(name: 'DeleteMessageRequest')
     DeleteQueueRequest = Shapes::StructureShape.new(name: 'DeleteQueueRequest')
     EmptyBatchRequest = Shapes::StructureShape.new(name: 'EmptyBatchRequest')
+    ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     GetQueueAttributesRequest = Shapes::StructureShape.new(name: 'GetQueueAttributesRequest')
     GetQueueAttributesResult = Shapes::StructureShape.new(name: 'GetQueueAttributesResult')
     GetQueueUrlRequest = Shapes::StructureShape.new(name: 'GetQueueUrlRequest')
     GetQueueUrlResult = Shapes::StructureShape.new(name: 'GetQueueUrlResult')
-    Integer = Shapes::IntegerShape.new(name: 'Integer')
+    InvalidAddress = Shapes::StructureShape.new(name: 'InvalidAddress')
     InvalidAttributeName = Shapes::StructureShape.new(name: 'InvalidAttributeName')
+    InvalidAttributeValue = Shapes::StructureShape.new(name: 'InvalidAttributeValue')
     InvalidBatchEntryId = Shapes::StructureShape.new(name: 'InvalidBatchEntryId')
     InvalidIdFormat = Shapes::StructureShape.new(name: 'InvalidIdFormat')
     InvalidMessageContents = Shapes::StructureShape.new(name: 'InvalidMessageContents')
+    InvalidSecurity = Shapes::StructureShape.new(name: 'InvalidSecurity')
+    KmsAccessDenied = Shapes::StructureShape.new(name: 'KmsAccessDenied')
+    KmsDisabled = Shapes::StructureShape.new(name: 'KmsDisabled')
+    KmsInvalidKeyUsage = Shapes::StructureShape.new(name: 'KmsInvalidKeyUsage')
+    KmsInvalidState = Shapes::StructureShape.new(name: 'KmsInvalidState')
+    KmsNotFound = Shapes::StructureShape.new(name: 'KmsNotFound')
+    KmsOptInRequired = Shapes::StructureShape.new(name: 'KmsOptInRequired')
+    KmsThrottled = Shapes::StructureShape.new(name: 'KmsThrottled')
     ListDeadLetterSourceQueuesRequest = Shapes::StructureShape.new(name: 'ListDeadLetterSourceQueuesRequest')
     ListDeadLetterSourceQueuesResult = Shapes::StructureShape.new(name: 'ListDeadLetterSourceQueuesResult')
     ListQueueTagsRequest = Shapes::StructureShape.new(name: 'ListQueueTagsRequest')
@@ -70,6 +80,7 @@ module Aws::SQS
     MessageSystemAttributeName = Shapes::StringShape.new(name: 'MessageSystemAttributeName')
     MessageSystemAttributeNameForSends = Shapes::StringShape.new(name: 'MessageSystemAttributeNameForSends')
     MessageSystemAttributeValue = Shapes::StructureShape.new(name: 'MessageSystemAttributeValue')
+    NullableInteger = Shapes::IntegerShape.new(name: 'NullableInteger')
     OverLimit = Shapes::StructureShape.new(name: 'OverLimit')
     PurgeQueueInProgress = Shapes::StructureShape.new(name: 'PurgeQueueInProgress')
     PurgeQueueRequest = Shapes::StructureShape.new(name: 'PurgeQueueRequest')
@@ -83,6 +94,7 @@ module Aws::SQS
     ReceiveMessageRequest = Shapes::StructureShape.new(name: 'ReceiveMessageRequest')
     ReceiveMessageResult = Shapes::StructureShape.new(name: 'ReceiveMessageResult')
     RemovePermissionRequest = Shapes::StructureShape.new(name: 'RemovePermissionRequest')
+    RequestThrottled = Shapes::StructureShape.new(name: 'RequestThrottled')
     SendMessageBatchRequest = Shapes::StructureShape.new(name: 'SendMessageBatchRequest')
     SendMessageBatchRequestEntry = Shapes::StructureShape.new(name: 'SendMessageBatchRequestEntry')
     SendMessageBatchRequestEntryList = Shapes::ListShape.new(name: 'SendMessageBatchRequestEntryList', flattened: true)
@@ -104,9 +116,9 @@ module Aws::SQS
     UnsupportedOperation = Shapes::StructureShape.new(name: 'UnsupportedOperation')
     UntagQueueRequest = Shapes::StructureShape.new(name: 'UntagQueueRequest')
 
-    AWSAccountIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "AWSAccountId")
+    AWSAccountIdList.member = Shapes::ShapeRef.new(shape: String)
 
-    ActionNameList.member = Shapes::ShapeRef.new(shape: String, location_name: "ActionName")
+    ActionNameList.member = Shapes::ShapeRef.new(shape: String)
 
     AddPermissionRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     AddPermissionRequest.add_member(:label, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Label"))
@@ -114,10 +126,12 @@ module Aws::SQS
     AddPermissionRequest.add_member(:actions, Shapes::ShapeRef.new(shape: ActionNameList, required: true, location_name: "Actions"))
     AddPermissionRequest.struct_class = Types::AddPermissionRequest
 
-    AttributeNameList.member = Shapes::ShapeRef.new(shape: QueueAttributeName, location_name: "AttributeName")
+    AttributeNameList.member = Shapes::ShapeRef.new(shape: QueueAttributeName)
 
+    BatchEntryIdsNotDistinct.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     BatchEntryIdsNotDistinct.struct_class = Types::BatchEntryIdsNotDistinct
 
+    BatchRequestTooLong.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     BatchRequestTooLong.struct_class = Types::BatchRequestTooLong
 
     BatchResultErrorEntry.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Id"))
@@ -126,9 +140,9 @@ module Aws::SQS
     BatchResultErrorEntry.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     BatchResultErrorEntry.struct_class = Types::BatchResultErrorEntry
 
-    BatchResultErrorEntryList.member = Shapes::ShapeRef.new(shape: BatchResultErrorEntry, location_name: "BatchResultErrorEntry")
+    BatchResultErrorEntryList.member = Shapes::ShapeRef.new(shape: BatchResultErrorEntry)
 
-    BinaryList.member = Shapes::ShapeRef.new(shape: Binary, location_name: "BinaryListValue")
+    BinaryList.member = Shapes::ShapeRef.new(shape: Binary)
 
     ChangeMessageVisibilityBatchRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     ChangeMessageVisibilityBatchRequest.add_member(:entries, Shapes::ShapeRef.new(shape: ChangeMessageVisibilityBatchRequestEntryList, required: true, location_name: "Entries"))
@@ -136,10 +150,10 @@ module Aws::SQS
 
     ChangeMessageVisibilityBatchRequestEntry.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Id"))
     ChangeMessageVisibilityBatchRequestEntry.add_member(:receipt_handle, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReceiptHandle"))
-    ChangeMessageVisibilityBatchRequestEntry.add_member(:visibility_timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "VisibilityTimeout"))
+    ChangeMessageVisibilityBatchRequestEntry.add_member(:visibility_timeout, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "VisibilityTimeout"))
     ChangeMessageVisibilityBatchRequestEntry.struct_class = Types::ChangeMessageVisibilityBatchRequestEntry
 
-    ChangeMessageVisibilityBatchRequestEntryList.member = Shapes::ShapeRef.new(shape: ChangeMessageVisibilityBatchRequestEntry, location_name: "ChangeMessageVisibilityBatchRequestEntry")
+    ChangeMessageVisibilityBatchRequestEntryList.member = Shapes::ShapeRef.new(shape: ChangeMessageVisibilityBatchRequestEntry)
 
     ChangeMessageVisibilityBatchResult.add_member(:successful, Shapes::ShapeRef.new(shape: ChangeMessageVisibilityBatchResultEntryList, required: true, location_name: "Successful"))
     ChangeMessageVisibilityBatchResult.add_member(:failed, Shapes::ShapeRef.new(shape: BatchResultErrorEntryList, required: true, location_name: "Failed"))
@@ -148,16 +162,16 @@ module Aws::SQS
     ChangeMessageVisibilityBatchResultEntry.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Id"))
     ChangeMessageVisibilityBatchResultEntry.struct_class = Types::ChangeMessageVisibilityBatchResultEntry
 
-    ChangeMessageVisibilityBatchResultEntryList.member = Shapes::ShapeRef.new(shape: ChangeMessageVisibilityBatchResultEntry, location_name: "ChangeMessageVisibilityBatchResultEntry")
+    ChangeMessageVisibilityBatchResultEntryList.member = Shapes::ShapeRef.new(shape: ChangeMessageVisibilityBatchResultEntry)
 
     ChangeMessageVisibilityRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     ChangeMessageVisibilityRequest.add_member(:receipt_handle, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReceiptHandle"))
-    ChangeMessageVisibilityRequest.add_member(:visibility_timeout, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "VisibilityTimeout"))
+    ChangeMessageVisibilityRequest.add_member(:visibility_timeout, Shapes::ShapeRef.new(shape: NullableInteger, required: true, location_name: "VisibilityTimeout"))
     ChangeMessageVisibilityRequest.struct_class = Types::ChangeMessageVisibilityRequest
 
     CreateQueueRequest.add_member(:queue_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueName"))
-    CreateQueueRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: QueueAttributeMap, location_name: "Attribute"))
-    CreateQueueRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tag"))
+    CreateQueueRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: QueueAttributeMap, location_name: "Attributes"))
+    CreateQueueRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateQueueRequest.struct_class = Types::CreateQueueRequest
 
     CreateQueueResult.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, location_name: "QueueUrl"))
@@ -171,7 +185,7 @@ module Aws::SQS
     DeleteMessageBatchRequestEntry.add_member(:receipt_handle, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReceiptHandle"))
     DeleteMessageBatchRequestEntry.struct_class = Types::DeleteMessageBatchRequestEntry
 
-    DeleteMessageBatchRequestEntryList.member = Shapes::ShapeRef.new(shape: DeleteMessageBatchRequestEntry, location_name: "DeleteMessageBatchRequestEntry")
+    DeleteMessageBatchRequestEntryList.member = Shapes::ShapeRef.new(shape: DeleteMessageBatchRequestEntry)
 
     DeleteMessageBatchResult.add_member(:successful, Shapes::ShapeRef.new(shape: DeleteMessageBatchResultEntryList, required: true, location_name: "Successful"))
     DeleteMessageBatchResult.add_member(:failed, Shapes::ShapeRef.new(shape: BatchResultErrorEntryList, required: true, location_name: "Failed"))
@@ -180,7 +194,7 @@ module Aws::SQS
     DeleteMessageBatchResultEntry.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Id"))
     DeleteMessageBatchResultEntry.struct_class = Types::DeleteMessageBatchResultEntry
 
-    DeleteMessageBatchResultEntryList.member = Shapes::ShapeRef.new(shape: DeleteMessageBatchResultEntry, location_name: "DeleteMessageBatchResultEntry")
+    DeleteMessageBatchResultEntryList.member = Shapes::ShapeRef.new(shape: DeleteMessageBatchResultEntry)
 
     DeleteMessageRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     DeleteMessageRequest.add_member(:receipt_handle, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReceiptHandle"))
@@ -189,13 +203,14 @@ module Aws::SQS
     DeleteQueueRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     DeleteQueueRequest.struct_class = Types::DeleteQueueRequest
 
+    EmptyBatchRequest.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     EmptyBatchRequest.struct_class = Types::EmptyBatchRequest
 
     GetQueueAttributesRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     GetQueueAttributesRequest.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNameList, location_name: "AttributeNames"))
     GetQueueAttributesRequest.struct_class = Types::GetQueueAttributesRequest
 
-    GetQueueAttributesResult.add_member(:attributes, Shapes::ShapeRef.new(shape: QueueAttributeMap, location_name: "Attribute"))
+    GetQueueAttributesResult.add_member(:attributes, Shapes::ShapeRef.new(shape: QueueAttributeMap, location_name: "Attributes"))
     GetQueueAttributesResult.struct_class = Types::GetQueueAttributesResult
 
     GetQueueUrlRequest.add_member(:queue_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueName"))
@@ -205,13 +220,46 @@ module Aws::SQS
     GetQueueUrlResult.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, location_name: "QueueUrl"))
     GetQueueUrlResult.struct_class = Types::GetQueueUrlResult
 
+    InvalidAddress.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidAddress.struct_class = Types::InvalidAddress
+
+    InvalidAttributeName.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     InvalidAttributeName.struct_class = Types::InvalidAttributeName
 
+    InvalidAttributeValue.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidAttributeValue.struct_class = Types::InvalidAttributeValue
+
+    InvalidBatchEntryId.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     InvalidBatchEntryId.struct_class = Types::InvalidBatchEntryId
 
     InvalidIdFormat.struct_class = Types::InvalidIdFormat
 
+    InvalidMessageContents.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     InvalidMessageContents.struct_class = Types::InvalidMessageContents
+
+    InvalidSecurity.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidSecurity.struct_class = Types::InvalidSecurity
+
+    KmsAccessDenied.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    KmsAccessDenied.struct_class = Types::KmsAccessDenied
+
+    KmsDisabled.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    KmsDisabled.struct_class = Types::KmsDisabled
+
+    KmsInvalidKeyUsage.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    KmsInvalidKeyUsage.struct_class = Types::KmsInvalidKeyUsage
+
+    KmsInvalidState.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    KmsInvalidState.struct_class = Types::KmsInvalidState
+
+    KmsNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    KmsNotFound.struct_class = Types::KmsNotFound
+
+    KmsOptInRequired.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    KmsOptInRequired.struct_class = Types::KmsOptInRequired
+
+    KmsThrottled.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    KmsThrottled.struct_class = Types::KmsThrottled
 
     ListDeadLetterSourceQueuesRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     ListDeadLetterSourceQueuesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
@@ -225,7 +273,7 @@ module Aws::SQS
     ListQueueTagsRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     ListQueueTagsRequest.struct_class = Types::ListQueueTagsRequest
 
-    ListQueueTagsResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tag"))
+    ListQueueTagsResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     ListQueueTagsResult.struct_class = Types::ListQueueTagsResult
 
     ListQueuesRequest.add_member(:queue_name_prefix, Shapes::ShapeRef.new(shape: String, location_name: "QueueNamePrefix"))
@@ -241,66 +289,72 @@ module Aws::SQS
     Message.add_member(:receipt_handle, Shapes::ShapeRef.new(shape: String, location_name: "ReceiptHandle"))
     Message.add_member(:md5_of_body, Shapes::ShapeRef.new(shape: String, location_name: "MD5OfBody"))
     Message.add_member(:body, Shapes::ShapeRef.new(shape: String, location_name: "Body"))
-    Message.add_member(:attributes, Shapes::ShapeRef.new(shape: MessageSystemAttributeMap, location_name: "Attribute"))
+    Message.add_member(:attributes, Shapes::ShapeRef.new(shape: MessageSystemAttributeMap, location_name: "Attributes"))
     Message.add_member(:md5_of_message_attributes, Shapes::ShapeRef.new(shape: String, location_name: "MD5OfMessageAttributes"))
-    Message.add_member(:message_attributes, Shapes::ShapeRef.new(shape: MessageBodyAttributeMap, location_name: "MessageAttribute"))
+    Message.add_member(:message_attributes, Shapes::ShapeRef.new(shape: MessageBodyAttributeMap, location_name: "MessageAttributes"))
     Message.struct_class = Types::Message
 
-    MessageAttributeNameList.member = Shapes::ShapeRef.new(shape: MessageAttributeName, location_name: "MessageAttributeName")
+    MessageAttributeNameList.member = Shapes::ShapeRef.new(shape: MessageAttributeName)
 
     MessageAttributeValue.add_member(:string_value, Shapes::ShapeRef.new(shape: String, location_name: "StringValue"))
     MessageAttributeValue.add_member(:binary_value, Shapes::ShapeRef.new(shape: Binary, location_name: "BinaryValue"))
-    MessageAttributeValue.add_member(:string_list_values, Shapes::ShapeRef.new(shape: StringList, location_name: "StringListValue"))
-    MessageAttributeValue.add_member(:binary_list_values, Shapes::ShapeRef.new(shape: BinaryList, location_name: "BinaryListValue"))
+    MessageAttributeValue.add_member(:string_list_values, Shapes::ShapeRef.new(shape: StringList, location_name: "StringListValues"))
+    MessageAttributeValue.add_member(:binary_list_values, Shapes::ShapeRef.new(shape: BinaryList, location_name: "BinaryListValues"))
     MessageAttributeValue.add_member(:data_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataType"))
     MessageAttributeValue.struct_class = Types::MessageAttributeValue
 
-    MessageBodyAttributeMap.key = Shapes::ShapeRef.new(shape: String, location_name: "Name")
-    MessageBodyAttributeMap.value = Shapes::ShapeRef.new(shape: MessageAttributeValue, location_name: "Value")
+    MessageBodyAttributeMap.key = Shapes::ShapeRef.new(shape: String)
+    MessageBodyAttributeMap.value = Shapes::ShapeRef.new(shape: MessageAttributeValue)
 
-    MessageBodySystemAttributeMap.key = Shapes::ShapeRef.new(shape: MessageSystemAttributeNameForSends, location_name: "Name")
-    MessageBodySystemAttributeMap.value = Shapes::ShapeRef.new(shape: MessageSystemAttributeValue, location_name: "Value")
+    MessageBodySystemAttributeMap.key = Shapes::ShapeRef.new(shape: MessageSystemAttributeNameForSends)
+    MessageBodySystemAttributeMap.value = Shapes::ShapeRef.new(shape: MessageSystemAttributeValue)
 
-    MessageList.member = Shapes::ShapeRef.new(shape: Message, location_name: "Message")
+    MessageList.member = Shapes::ShapeRef.new(shape: Message)
 
     MessageNotInflight.struct_class = Types::MessageNotInflight
 
-    MessageSystemAttributeMap.key = Shapes::ShapeRef.new(shape: MessageSystemAttributeName, location_name: "Name")
-    MessageSystemAttributeMap.value = Shapes::ShapeRef.new(shape: String, location_name: "Value")
+    MessageSystemAttributeMap.key = Shapes::ShapeRef.new(shape: MessageSystemAttributeName)
+    MessageSystemAttributeMap.value = Shapes::ShapeRef.new(shape: String)
 
     MessageSystemAttributeValue.add_member(:string_value, Shapes::ShapeRef.new(shape: String, location_name: "StringValue"))
     MessageSystemAttributeValue.add_member(:binary_value, Shapes::ShapeRef.new(shape: Binary, location_name: "BinaryValue"))
-    MessageSystemAttributeValue.add_member(:string_list_values, Shapes::ShapeRef.new(shape: StringList, location_name: "StringListValue", metadata: {"flattened"=>true}))
-    MessageSystemAttributeValue.add_member(:binary_list_values, Shapes::ShapeRef.new(shape: BinaryList, location_name: "BinaryListValue", metadata: {"flattened"=>true}))
+    MessageSystemAttributeValue.add_member(:string_list_values, Shapes::ShapeRef.new(shape: StringList, location_name: "StringListValues", metadata: {"flattened"=>true}))
+    MessageSystemAttributeValue.add_member(:binary_list_values, Shapes::ShapeRef.new(shape: BinaryList, location_name: "BinaryListValues", metadata: {"flattened"=>true}))
     MessageSystemAttributeValue.add_member(:data_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataType"))
     MessageSystemAttributeValue.struct_class = Types::MessageSystemAttributeValue
 
+    OverLimit.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     OverLimit.struct_class = Types::OverLimit
 
+    PurgeQueueInProgress.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     PurgeQueueInProgress.struct_class = Types::PurgeQueueInProgress
 
     PurgeQueueRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     PurgeQueueRequest.struct_class = Types::PurgeQueueRequest
 
-    QueueAttributeMap.key = Shapes::ShapeRef.new(shape: QueueAttributeName, location_name: "Name")
-    QueueAttributeMap.value = Shapes::ShapeRef.new(shape: String, location_name: "Value")
+    QueueAttributeMap.key = Shapes::ShapeRef.new(shape: QueueAttributeName)
+    QueueAttributeMap.value = Shapes::ShapeRef.new(shape: String)
 
+    QueueDeletedRecently.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     QueueDeletedRecently.struct_class = Types::QueueDeletedRecently
 
+    QueueDoesNotExist.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     QueueDoesNotExist.struct_class = Types::QueueDoesNotExist
 
+    QueueNameExists.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     QueueNameExists.struct_class = Types::QueueNameExists
 
-    QueueUrlList.member = Shapes::ShapeRef.new(shape: String, location_name: "QueueUrl")
+    QueueUrlList.member = Shapes::ShapeRef.new(shape: String)
 
+    ReceiptHandleIsInvalid.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ReceiptHandleIsInvalid.struct_class = Types::ReceiptHandleIsInvalid
 
     ReceiveMessageRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     ReceiveMessageRequest.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNameList, location_name: "AttributeNames"))
     ReceiveMessageRequest.add_member(:message_attribute_names, Shapes::ShapeRef.new(shape: MessageAttributeNameList, location_name: "MessageAttributeNames"))
-    ReceiveMessageRequest.add_member(:max_number_of_messages, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxNumberOfMessages"))
-    ReceiveMessageRequest.add_member(:visibility_timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "VisibilityTimeout"))
-    ReceiveMessageRequest.add_member(:wait_time_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "WaitTimeSeconds"))
+    ReceiveMessageRequest.add_member(:max_number_of_messages, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "MaxNumberOfMessages"))
+    ReceiveMessageRequest.add_member(:visibility_timeout, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "VisibilityTimeout"))
+    ReceiveMessageRequest.add_member(:wait_time_seconds, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "WaitTimeSeconds"))
     ReceiveMessageRequest.add_member(:receive_request_attempt_id, Shapes::ShapeRef.new(shape: String, location_name: "ReceiveRequestAttemptId"))
     ReceiveMessageRequest.struct_class = Types::ReceiveMessageRequest
 
@@ -311,20 +365,23 @@ module Aws::SQS
     RemovePermissionRequest.add_member(:label, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Label"))
     RemovePermissionRequest.struct_class = Types::RemovePermissionRequest
 
+    RequestThrottled.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    RequestThrottled.struct_class = Types::RequestThrottled
+
     SendMessageBatchRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     SendMessageBatchRequest.add_member(:entries, Shapes::ShapeRef.new(shape: SendMessageBatchRequestEntryList, required: true, location_name: "Entries"))
     SendMessageBatchRequest.struct_class = Types::SendMessageBatchRequest
 
     SendMessageBatchRequestEntry.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Id"))
     SendMessageBatchRequestEntry.add_member(:message_body, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MessageBody"))
-    SendMessageBatchRequestEntry.add_member(:delay_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "DelaySeconds"))
-    SendMessageBatchRequestEntry.add_member(:message_attributes, Shapes::ShapeRef.new(shape: MessageBodyAttributeMap, location_name: "MessageAttribute"))
-    SendMessageBatchRequestEntry.add_member(:message_system_attributes, Shapes::ShapeRef.new(shape: MessageBodySystemAttributeMap, location_name: "MessageSystemAttribute"))
+    SendMessageBatchRequestEntry.add_member(:delay_seconds, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "DelaySeconds"))
+    SendMessageBatchRequestEntry.add_member(:message_attributes, Shapes::ShapeRef.new(shape: MessageBodyAttributeMap, location_name: "MessageAttributes"))
+    SendMessageBatchRequestEntry.add_member(:message_system_attributes, Shapes::ShapeRef.new(shape: MessageBodySystemAttributeMap, location_name: "MessageSystemAttributes"))
     SendMessageBatchRequestEntry.add_member(:message_deduplication_id, Shapes::ShapeRef.new(shape: String, location_name: "MessageDeduplicationId"))
     SendMessageBatchRequestEntry.add_member(:message_group_id, Shapes::ShapeRef.new(shape: String, location_name: "MessageGroupId"))
     SendMessageBatchRequestEntry.struct_class = Types::SendMessageBatchRequestEntry
 
-    SendMessageBatchRequestEntryList.member = Shapes::ShapeRef.new(shape: SendMessageBatchRequestEntry, location_name: "SendMessageBatchRequestEntry")
+    SendMessageBatchRequestEntryList.member = Shapes::ShapeRef.new(shape: SendMessageBatchRequestEntry)
 
     SendMessageBatchResult.add_member(:successful, Shapes::ShapeRef.new(shape: SendMessageBatchResultEntryList, required: true, location_name: "Successful"))
     SendMessageBatchResult.add_member(:failed, Shapes::ShapeRef.new(shape: BatchResultErrorEntryList, required: true, location_name: "Failed"))
@@ -338,13 +395,13 @@ module Aws::SQS
     SendMessageBatchResultEntry.add_member(:sequence_number, Shapes::ShapeRef.new(shape: String, location_name: "SequenceNumber"))
     SendMessageBatchResultEntry.struct_class = Types::SendMessageBatchResultEntry
 
-    SendMessageBatchResultEntryList.member = Shapes::ShapeRef.new(shape: SendMessageBatchResultEntry, location_name: "SendMessageBatchResultEntry")
+    SendMessageBatchResultEntryList.member = Shapes::ShapeRef.new(shape: SendMessageBatchResultEntry)
 
     SendMessageRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     SendMessageRequest.add_member(:message_body, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MessageBody"))
-    SendMessageRequest.add_member(:delay_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "DelaySeconds"))
-    SendMessageRequest.add_member(:message_attributes, Shapes::ShapeRef.new(shape: MessageBodyAttributeMap, location_name: "MessageAttribute"))
-    SendMessageRequest.add_member(:message_system_attributes, Shapes::ShapeRef.new(shape: MessageBodySystemAttributeMap, location_name: "MessageSystemAttribute"))
+    SendMessageRequest.add_member(:delay_seconds, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "DelaySeconds"))
+    SendMessageRequest.add_member(:message_attributes, Shapes::ShapeRef.new(shape: MessageBodyAttributeMap, location_name: "MessageAttributes"))
+    SendMessageRequest.add_member(:message_system_attributes, Shapes::ShapeRef.new(shape: MessageBodySystemAttributeMap, location_name: "MessageSystemAttributes"))
     SendMessageRequest.add_member(:message_deduplication_id, Shapes::ShapeRef.new(shape: String, location_name: "MessageDeduplicationId"))
     SendMessageRequest.add_member(:message_group_id, Shapes::ShapeRef.new(shape: String, location_name: "MessageGroupId"))
     SendMessageRequest.struct_class = Types::SendMessageRequest
@@ -357,22 +414,24 @@ module Aws::SQS
     SendMessageResult.struct_class = Types::SendMessageResult
 
     SetQueueAttributesRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
-    SetQueueAttributesRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: QueueAttributeMap, required: true, location_name: "Attribute"))
+    SetQueueAttributesRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: QueueAttributeMap, required: true, location_name: "Attributes"))
     SetQueueAttributesRequest.struct_class = Types::SetQueueAttributesRequest
 
-    StringList.member = Shapes::ShapeRef.new(shape: String, location_name: "StringListValue")
+    StringList.member = Shapes::ShapeRef.new(shape: String)
 
-    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey, location_name: "TagKey")
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
-    TagMap.key = Shapes::ShapeRef.new(shape: TagKey, location_name: "Key")
-    TagMap.value = Shapes::ShapeRef.new(shape: TagValue, location_name: "Value")
+    TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
 
     TagQueueRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     TagQueueRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
     TagQueueRequest.struct_class = Types::TagQueueRequest
 
+    TooManyEntriesInBatchRequest.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     TooManyEntriesInBatchRequest.struct_class = Types::TooManyEntriesInBatchRequest
 
+    UnsupportedOperation.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     UnsupportedOperation.struct_class = Types::UnsupportedOperation
 
     UntagQueueRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
@@ -387,15 +446,17 @@ module Aws::SQS
 
       api.metadata = {
         "apiVersion" => "2012-11-05",
+        "awsQueryCompatible" => {},
         "endpointPrefix" => "sqs",
         "errorPrefix" => "AWS.SimpleQueueService.",
-        "protocol" => "query",
+        "jsonVersion" => "1.0",
+        "protocol" => "json",
         "serviceAbbreviation" => "Amazon SQS",
         "serviceFullName" => "Amazon Simple Queue Service",
         "serviceId" => "SQS",
         "signatureVersion" => "v4",
+        "targetPrefix" => "AmazonSQS",
         "uid" => "sqs-2012-11-05",
-        "xmlNamespace" => "http://queue.amazonaws.com/doc/2012-11-05/",
       }
 
       api.add_operation(:add_permission, Seahorse::Model::Operation.new.tap do |o|
@@ -405,6 +466,11 @@ module Aws::SQS
         o.input = Shapes::ShapeRef.new(shape: AddPermissionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: OverLimit)
+        o.errors << Shapes::ShapeRef.new(shape: RequestThrottled)
+        o.errors << Shapes::ShapeRef.new(shape: QueueDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAddress)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurity)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
 
       api.add_operation(:change_message_visibility, Seahorse::Model::Operation.new.tap do |o|
@@ -415,6 +481,9 @@ module Aws::SQS
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: MessageNotInflight)
         o.errors << Shapes::ShapeRef.new(shape: ReceiptHandleIsInvalid)
+        o.errors << Shapes::ShapeRef.new(shape: RequestThrottled)
+        o.errors << Shapes::ShapeRef.new(shape: QueueDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
 
       api.add_operation(:change_message_visibility_batch, Seahorse::Model::Operation.new.tap do |o|
@@ -427,6 +496,9 @@ module Aws::SQS
         o.errors << Shapes::ShapeRef.new(shape: EmptyBatchRequest)
         o.errors << Shapes::ShapeRef.new(shape: BatchEntryIdsNotDistinct)
         o.errors << Shapes::ShapeRef.new(shape: InvalidBatchEntryId)
+        o.errors << Shapes::ShapeRef.new(shape: RequestThrottled)
+        o.errors << Shapes::ShapeRef.new(shape: QueueDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
 
       api.add_operation(:create_queue, Seahorse::Model::Operation.new.tap do |o|
@@ -437,6 +509,12 @@ module Aws::SQS
         o.output = Shapes::ShapeRef.new(shape: CreateQueueResult)
         o.errors << Shapes::ShapeRef.new(shape: QueueDeletedRecently)
         o.errors << Shapes::ShapeRef.new(shape: QueueNameExists)
+        o.errors << Shapes::ShapeRef.new(shape: RequestThrottled)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAddress)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAttributeName)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAttributeValue)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurity)
       end)
 
       api.add_operation(:delete_message, Seahorse::Model::Operation.new.tap do |o|
@@ -447,6 +525,10 @@ module Aws::SQS
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidIdFormat)
         o.errors << Shapes::ShapeRef.new(shape: ReceiptHandleIsInvalid)
+        o.errors << Shapes::ShapeRef.new(shape: RequestThrottled)
+        o.errors << Shapes::ShapeRef.new(shape: QueueDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurity)
       end)
 
       api.add_operation(:delete_message_batch, Seahorse::Model::Operation.new.tap do |o|
@@ -459,6 +541,9 @@ module Aws::SQS
         o.errors << Shapes::ShapeRef.new(shape: EmptyBatchRequest)
         o.errors << Shapes::ShapeRef.new(shape: BatchEntryIdsNotDistinct)
         o.errors << Shapes::ShapeRef.new(shape: InvalidBatchEntryId)
+        o.errors << Shapes::ShapeRef.new(shape: RequestThrottled)
+        o.errors << Shapes::ShapeRef.new(shape: QueueDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
 
       api.add_operation(:delete_queue, Seahorse::Model::Operation.new.tap do |o|
@@ -467,6 +552,11 @@ module Aws::SQS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteQueueRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: RequestThrottled)
+        o.errors << Shapes::ShapeRef.new(shape: QueueDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAddress)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurity)
       end)
 
       api.add_operation(:get_queue_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -476,6 +566,10 @@ module Aws::SQS
         o.input = Shapes::ShapeRef.new(shape: GetQueueAttributesRequest)
         o.output = Shapes::ShapeRef.new(shape: GetQueueAttributesResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAttributeName)
+        o.errors << Shapes::ShapeRef.new(shape: RequestThrottled)
+        o.errors << Shapes::ShapeRef.new(shape: QueueDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurity)
       end)
 
       api.add_operation(:get_queue_url, Seahorse::Model::Operation.new.tap do |o|
@@ -484,7 +578,11 @@ module Aws::SQS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetQueueUrlRequest)
         o.output = Shapes::ShapeRef.new(shape: GetQueueUrlResult)
+        o.errors << Shapes::ShapeRef.new(shape: RequestThrottled)
         o.errors << Shapes::ShapeRef.new(shape: QueueDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAddress)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurity)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
 
       api.add_operation(:list_dead_letter_source_queues, Seahorse::Model::Operation.new.tap do |o|
@@ -494,6 +592,10 @@ module Aws::SQS
         o.input = Shapes::ShapeRef.new(shape: ListDeadLetterSourceQueuesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDeadLetterSourceQueuesResult)
         o.errors << Shapes::ShapeRef.new(shape: QueueDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: RequestThrottled)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurity)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAddress)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -508,6 +610,11 @@ module Aws::SQS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListQueueTagsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListQueueTagsResult)
+        o.errors << Shapes::ShapeRef.new(shape: RequestThrottled)
+        o.errors << Shapes::ShapeRef.new(shape: QueueDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAddress)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurity)
       end)
 
       api.add_operation(:list_queues, Seahorse::Model::Operation.new.tap do |o|
@@ -516,6 +623,10 @@ module Aws::SQS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListQueuesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListQueuesResult)
+        o.errors << Shapes::ShapeRef.new(shape: RequestThrottled)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurity)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAddress)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -532,6 +643,10 @@ module Aws::SQS
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: QueueDoesNotExist)
         o.errors << Shapes::ShapeRef.new(shape: PurgeQueueInProgress)
+        o.errors << Shapes::ShapeRef.new(shape: RequestThrottled)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAddress)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurity)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
 
       api.add_operation(:receive_message, Seahorse::Model::Operation.new.tap do |o|
@@ -540,7 +655,18 @@ module Aws::SQS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ReceiveMessageRequest)
         o.output = Shapes::ShapeRef.new(shape: ReceiveMessageResult)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
         o.errors << Shapes::ShapeRef.new(shape: OverLimit)
+        o.errors << Shapes::ShapeRef.new(shape: RequestThrottled)
+        o.errors << Shapes::ShapeRef.new(shape: QueueDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurity)
+        o.errors << Shapes::ShapeRef.new(shape: KmsDisabled)
+        o.errors << Shapes::ShapeRef.new(shape: KmsInvalidState)
+        o.errors << Shapes::ShapeRef.new(shape: KmsNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: KmsOptInRequired)
+        o.errors << Shapes::ShapeRef.new(shape: KmsThrottled)
+        o.errors << Shapes::ShapeRef.new(shape: KmsAccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: KmsInvalidKeyUsage)
       end)
 
       api.add_operation(:remove_permission, Seahorse::Model::Operation.new.tap do |o|
@@ -549,6 +675,11 @@ module Aws::SQS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RemovePermissionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAddress)
+        o.errors << Shapes::ShapeRef.new(shape: RequestThrottled)
+        o.errors << Shapes::ShapeRef.new(shape: QueueDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurity)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
 
       api.add_operation(:send_message, Seahorse::Model::Operation.new.tap do |o|
@@ -559,6 +690,16 @@ module Aws::SQS
         o.output = Shapes::ShapeRef.new(shape: SendMessageResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidMessageContents)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: RequestThrottled)
+        o.errors << Shapes::ShapeRef.new(shape: QueueDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurity)
+        o.errors << Shapes::ShapeRef.new(shape: KmsDisabled)
+        o.errors << Shapes::ShapeRef.new(shape: KmsInvalidState)
+        o.errors << Shapes::ShapeRef.new(shape: KmsNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: KmsOptInRequired)
+        o.errors << Shapes::ShapeRef.new(shape: KmsThrottled)
+        o.errors << Shapes::ShapeRef.new(shape: KmsAccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: KmsInvalidKeyUsage)
       end)
 
       api.add_operation(:send_message_batch, Seahorse::Model::Operation.new.tap do |o|
@@ -573,6 +714,16 @@ module Aws::SQS
         o.errors << Shapes::ShapeRef.new(shape: BatchRequestTooLong)
         o.errors << Shapes::ShapeRef.new(shape: InvalidBatchEntryId)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: RequestThrottled)
+        o.errors << Shapes::ShapeRef.new(shape: QueueDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurity)
+        o.errors << Shapes::ShapeRef.new(shape: KmsDisabled)
+        o.errors << Shapes::ShapeRef.new(shape: KmsInvalidState)
+        o.errors << Shapes::ShapeRef.new(shape: KmsNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: KmsOptInRequired)
+        o.errors << Shapes::ShapeRef.new(shape: KmsThrottled)
+        o.errors << Shapes::ShapeRef.new(shape: KmsAccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: KmsInvalidKeyUsage)
       end)
 
       api.add_operation(:set_queue_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -582,6 +733,13 @@ module Aws::SQS
         o.input = Shapes::ShapeRef.new(shape: SetQueueAttributesRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidAttributeName)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAttributeValue)
+        o.errors << Shapes::ShapeRef.new(shape: RequestThrottled)
+        o.errors << Shapes::ShapeRef.new(shape: QueueDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: OverLimit)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAddress)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurity)
       end)
 
       api.add_operation(:tag_queue, Seahorse::Model::Operation.new.tap do |o|
@@ -590,6 +748,11 @@ module Aws::SQS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: TagQueueRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAddress)
+        o.errors << Shapes::ShapeRef.new(shape: RequestThrottled)
+        o.errors << Shapes::ShapeRef.new(shape: QueueDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurity)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
 
       api.add_operation(:untag_queue, Seahorse::Model::Operation.new.tap do |o|
@@ -598,6 +761,11 @@ module Aws::SQS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UntagQueueRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAddress)
+        o.errors << Shapes::ShapeRef.new(shape: RequestThrottled)
+        o.errors << Shapes::ShapeRef.new(shape: QueueDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurity)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
     end
 
