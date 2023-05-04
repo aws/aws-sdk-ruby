@@ -130,6 +130,8 @@ module Aws::SecurityHub
             Aws::SecurityHub::Endpoints::GetEnabledStandards.build(context)
           when :get_finding_aggregator
             Aws::SecurityHub::Endpoints::GetFindingAggregator.build(context)
+          when :get_finding_history
+            Aws::SecurityHub::Endpoints::GetFindingHistory.build(context)
           when :get_findings
             Aws::SecurityHub::Endpoints::GetFindings.build(context)
           when :get_insight_results

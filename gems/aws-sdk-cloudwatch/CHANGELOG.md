@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2023-05-04)
+------------------
+
+* Feature - Adds support for filtering by metric names in CloudWatch Metric Streams.
+
 1.72.0 (2023-03-24)
 ------------------
 

@@ -673,7 +673,7 @@ module Aws::OpenSearchService
     #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options
     #
     # @option params [Hash<String,Types::LogPublishingOption>] :log_publishing_options
-    #   Key-value pairs to configure slow log publishing.
+    #   Key-value pairs to configure log publishing.
     #
     # @option params [Types::DomainEndpointOptions] :domain_endpoint_options
     #   Additional options for the domain endpoint, such as whether to require
@@ -1830,6 +1830,44 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def describe_domain_health(params = {}, options = {})
       req = build_request(:describe_domain_health, params)
+      req.send_request(options)
+    end
+
+    # Returns information about domain and nodes, including data nodes,
+    # master nodes, ultrawarm nodes, Availability Zone(s), standby nodes,
+    # node configurations, and node states.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @return [Types::DescribeDomainNodesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDomainNodesResponse#domain_nodes_status_list #domain_nodes_status_list} => Array&lt;Types::DomainNodesStatus&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_domain_nodes({
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_nodes_status_list #=> Array
+    #   resp.domain_nodes_status_list[0].node_id #=> String
+    #   resp.domain_nodes_status_list[0].node_type #=> String, one of "Data", "Ultrawarm", "Master"
+    #   resp.domain_nodes_status_list[0].availability_zone #=> String
+    #   resp.domain_nodes_status_list[0].instance_type #=> String, one of "m3.medium.search", "m3.large.search", "m3.xlarge.search", "m3.2xlarge.search", "m4.large.search", "m4.xlarge.search", "m4.2xlarge.search", "m4.4xlarge.search", "m4.10xlarge.search", "m5.large.search", "m5.xlarge.search", "m5.2xlarge.search", "m5.4xlarge.search", "m5.12xlarge.search", "m5.24xlarge.search", "r5.large.search", "r5.xlarge.search", "r5.2xlarge.search", "r5.4xlarge.search", "r5.12xlarge.search", "r5.24xlarge.search", "c5.large.search", "c5.xlarge.search", "c5.2xlarge.search", "c5.4xlarge.search", "c5.9xlarge.search", "c5.18xlarge.search", "t3.nano.search", "t3.micro.search", "t3.small.search", "t3.medium.search", "t3.large.search", "t3.xlarge.search", "t3.2xlarge.search", "ultrawarm1.medium.search", "ultrawarm1.large.search", "ultrawarm1.xlarge.search", "t2.micro.search", "t2.small.search", "t2.medium.search", "r3.large.search", "r3.xlarge.search", "r3.2xlarge.search", "r3.4xlarge.search", "r3.8xlarge.search", "i2.xlarge.search", "i2.2xlarge.search", "d2.xlarge.search", "d2.2xlarge.search", "d2.4xlarge.search", "d2.8xlarge.search", "c4.large.search", "c4.xlarge.search", "c4.2xlarge.search", "c4.4xlarge.search", "c4.8xlarge.search", "r4.large.search", "r4.xlarge.search", "r4.2xlarge.search", "r4.4xlarge.search", "r4.8xlarge.search", "r4.16xlarge.search", "i3.large.search", "i3.xlarge.search", "i3.2xlarge.search", "i3.4xlarge.search", "i3.8xlarge.search", "i3.16xlarge.search", "r6g.large.search", "r6g.xlarge.search", "r6g.2xlarge.search", "r6g.4xlarge.search", "r6g.8xlarge.search", "r6g.12xlarge.search", "m6g.large.search", "m6g.xlarge.search", "m6g.2xlarge.search", "m6g.4xlarge.search", "m6g.8xlarge.search", "m6g.12xlarge.search", "c6g.large.search", "c6g.xlarge.search", "c6g.2xlarge.search", "c6g.4xlarge.search", "c6g.8xlarge.search", "c6g.12xlarge.search", "r6gd.large.search", "r6gd.xlarge.search", "r6gd.2xlarge.search", "r6gd.4xlarge.search", "r6gd.8xlarge.search", "r6gd.12xlarge.search", "r6gd.16xlarge.search", "t4g.small.search", "t4g.medium.search"
+    #   resp.domain_nodes_status_list[0].node_status #=> String, one of "Active", "StandBy", "NotAvailable"
+    #   resp.domain_nodes_status_list[0].storage_type #=> String
+    #   resp.domain_nodes_status_list[0].storage_volume_type #=> String, one of "standard", "gp2", "io1", "gp3"
+    #   resp.domain_nodes_status_list[0].storage_size #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainNodes AWS API Documentation
+    #
+    # @overload describe_domain_nodes(params = {})
+    # @param [Hash] params ({})
+    def describe_domain_nodes(params = {}, options = {})
+      req = build_request(:describe_domain_nodes, params)
       req.send_request(options)
     end
 
@@ -3418,7 +3456,7 @@ module Aws::OpenSearchService
     end
 
     # Modifies the cluster configuration of the specified Amazon OpenSearch
-    # Service domain.
+    # Service domain.sl
     #
     # @option params [required, String] :domain_name
     #   The name of the domain that you're updating.
@@ -4082,7 +4120,7 @@ module Aws::OpenSearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

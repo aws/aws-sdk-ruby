@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2023-05-04)
+------------------
+
+* Feature - Remove unused InvalidParameterException from CreateParticipant API
+
 1.104.0 (2023-05-02)
 ------------------
 

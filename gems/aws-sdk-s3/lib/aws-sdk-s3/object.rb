@@ -239,11 +239,8 @@ module Aws::S3
       data[:website_redirect_location]
     end
 
-    # If the object is stored using server-side encryption either with an
-    # Amazon Web Services KMS key or an Amazon S3-managed encryption key,
-    # the response includes this header with the value of the server-side
-    # encryption algorithm used when storing this object in Amazon S3 (for
-    # example, AES256, aws:kms).
+    # The server-side encryption algorithm used when storing this object in
+    # Amazon S3 (for example, AES256, `aws:kms`).
     # @return [String]
     def server_side_encryption
       data[:server_side_encryption]
@@ -273,8 +270,8 @@ module Aws::S3
     end
 
     # If present, specifies the ID of the Amazon Web Services Key Management
-    # Service (Amazon Web Services KMS) symmetric customer managed key that
-    # was used for the object.
+    # Service (Amazon Web Services KMS) symmetric encryption customer
+    # managed key that was used for the object.
     # @return [String]
     def ssekms_key_id
       data[:ssekms_key_id]
@@ -740,7 +737,7 @@ module Aws::S3
     #   or replaced with tag-set provided in the request.
     # @option options [String] :server_side_encryption
     #   The server-side encryption algorithm used when storing this object in
-    #   Amazon S3 (for example, AES256, aws:kms).
+    #   Amazon S3 (for example, AES256, `aws:kms`).
     # @option options [String] :storage_class
     #   By default, Amazon S3 uses the STANDARD Storage Class to store newly
     #   created objects. The STANDARD storage class provides high durability
@@ -755,7 +752,10 @@ module Aws::S3
     # @option options [String] :website_redirect_location
     #   If the bucket is configured as a website, redirects requests for this
     #   object to another object in the same bucket or to an external URL.
-    #   Amazon S3 stores the value of this header in the object metadata.
+    #   Amazon S3 stores the value of this header in the object metadata. This
+    #   value is unique to each object and is not copied when using the
+    #   `x-amz-metadata-directive` header. Instead, you may opt to provide
+    #   this header in combination with the directive.
     # @option options [String] :sse_customer_algorithm
     #   Specifies the algorithm to use to when encrypting the object (for
     #   example, AES256).
@@ -927,7 +927,7 @@ module Aws::S3
     # @option options [String] :range
     #   Downloads the specified range bytes of an object. For more information
     #   about the HTTP Range header, see
-    #   [https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35][1].
+    #   [https://www.rfc-editor.org/rfc/rfc9110.html#name-range][1].
     #
     #   <note markdown="1"> Amazon S3 doesn't support retrieving multiple ranges of data per
     #   `GET` request.
@@ -936,7 +936,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
+    #   [1]: https://www.rfc-editor.org/rfc/rfc9110.html#name-range
     # @option options [String] :response_cache_control
     #   Sets the `Cache-Control` header of the response.
     # @option options [String] :response_content_disposition
@@ -1069,7 +1069,7 @@ module Aws::S3
     #   A map of metadata to store with the object in S3.
     # @option options [String] :server_side_encryption
     #   The server-side encryption algorithm used when storing this object in
-    #   Amazon S3 (for example, AES256, aws:kms).
+    #   Amazon S3 (for example, AES256, `aws:kms`).
     # @option options [String] :storage_class
     #   By default, Amazon S3 uses the STANDARD Storage Class to store newly
     #   created objects. The STANDARD storage class provides high durability
@@ -1099,13 +1099,13 @@ module Aws::S3
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
     #   ensure that the encryption key was transmitted without error.
     # @option options [String] :ssekms_key_id
-    #   Specifies the ID of the symmetric customer managed key to use for
-    #   object encryption. All GET and PUT requests for an object protected by
-    #   Amazon Web Services KMS will fail if not made via SSL or using SigV4.
-    #   For information about configuring using any of the officially
-    #   supported Amazon Web Services SDKs and Amazon Web Services CLI, see
-    #   [Specifying the Signature Version in Request Authentication][1] in the
-    #   *Amazon S3 User Guide*.
+    #   Specifies the ID of the symmetric encryption customer managed key to
+    #   use for object encryption. All GET and PUT requests for an object
+    #   protected by Amazon Web Services KMS will fail if not made via SSL or
+    #   using SigV4. For information about configuring using any of the
+    #   officially supported Amazon Web Services SDKs and Amazon Web Services
+    #   CLI, see [Specifying the Signature Version in Request
+    #   Authentication][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1234,30 +1234,30 @@ module Aws::S3
     # @option options [String] :content_disposition
     #   Specifies presentational information for the object. For more
     #   information, see
-    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1][1].
+    #   [https://www.rfc-editor.org/rfc/rfc6266#section-4][1].
     #
     #
     #
-    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1
+    #   [1]: https://www.rfc-editor.org/rfc/rfc6266#section-4
     # @option options [String] :content_encoding
     #   Specifies what content encodings have been applied to the object and
     #   thus what decoding mechanisms must be applied to obtain the media-type
     #   referenced by the Content-Type header field. For more information, see
-    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11][1].
+    #   [https://www.rfc-editor.org/rfc/rfc9110.html#field.content-encoding][1].
     #
     #
     #
-    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11
+    #   [1]: https://www.rfc-editor.org/rfc/rfc9110.html#field.content-encoding
     # @option options [String] :content_language
     #   The language the content is in.
     # @option options [Integer] :content_length
     #   Size of the body in bytes. This parameter is useful when the size of
     #   the body cannot be determined automatically. For more information, see
-    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13][1].
+    #   [https://www.rfc-editor.org/rfc/rfc9110.html#name-content-length][1].
     #
     #
     #
-    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13
+    #   [1]: https://www.rfc-editor.org/rfc/rfc9110.html#name-content-length
     # @option options [String] :content_md5
     #   The base64-encoded 128-bit MD5 digest of the message (without the
     #   headers) according to RFC 1864. This header can be used as a message
@@ -1273,11 +1273,11 @@ module Aws::S3
     # @option options [String] :content_type
     #   A standard MIME type describing the format of the contents. For more
     #   information, see
-    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17][1].
+    #   [https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type][1].
     #
     #
     #
-    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
+    #   [1]: https://www.rfc-editor.org/rfc/rfc9110.html#name-content-type
     # @option options [String] :checksum_algorithm
     #   Indicates the algorithm used to create the checksum for the object
     #   when using the SDK. This header will not provide any additional
@@ -1336,11 +1336,11 @@ module Aws::S3
     # @option options [Time,DateTime,Date,Integer,String] :expires
     #   The date and time at which the object is no longer cacheable. For more
     #   information, see
-    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21][1].
+    #   [https://www.rfc-editor.org/rfc/rfc7234#section-5.3][1].
     #
     #
     #
-    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21
+    #   [1]: https://www.rfc-editor.org/rfc/rfc7234#section-5.3
     # @option options [String] :grant_full_control
     #   Gives the grantee READ, READ\_ACP, and WRITE\_ACP permissions on the
     #   object.
@@ -1362,7 +1362,7 @@ module Aws::S3
     #   A map of metadata to store with the object in S3.
     # @option options [String] :server_side_encryption
     #   The server-side encryption algorithm used when storing this object in
-    #   Amazon S3 (for example, AES256, aws:kms).
+    #   Amazon S3 (for example, AES256, `aws:kms`).
     # @option options [String] :storage_class
     #   By default, Amazon S3 uses the STANDARD Storage Class to store newly
     #   created objects. The STANDARD storage class provides high durability
@@ -1413,9 +1413,9 @@ module Aws::S3
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
     #   ensure that the encryption key was transmitted without error.
     # @option options [String] :ssekms_key_id
-    #   If `x-amz-server-side-encryption` is present and has the value of
-    #   `aws:kms`, this header specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetrical customer
+    #   If `x-amz-server-side-encryption` has a valid value of `aws:kms`, this
+    #   header specifies the ID of the Amazon Web Services Key Management
+    #   Service (Amazon Web Services KMS) symmetric encryption customer
     #   managed key that was used for the object. If you specify
     #   `x-amz-server-side-encryption:aws:kms`, but do not provide`
     #   x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the
@@ -1425,7 +1425,10 @@ module Aws::S3
     # @option options [String] :ssekms_encryption_context
     #   Specifies the Amazon Web Services KMS Encryption Context to use for
     #   object encryption. The value of this header is a base64-encoded UTF-8
-    #   string holding JSON with the encryption context key-value pairs.
+    #   string holding JSON with the encryption context key-value pairs. This
+    #   value is stored as object metadata and automatically gets passed on to
+    #   Amazon Web Services KMS for future `GetObject` or `CopyObject`
+    #   operations on this object.
     # @option options [Boolean] :bucket_key_enabled
     #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
     #   encryption with server-side encryption using AWS KMS (SSE-KMS).
@@ -1637,8 +1640,10 @@ module Aws::S3
     #   Return the object only if it has not been modified since the specified
     #   time; otherwise, return a 412 (precondition failed) error.
     # @option options [String] :range
-    #   Because `HeadObject` returns only the metadata for an object, this
-    #   parameter has no effect.
+    #   HeadObject returns only the metadata for an object. If the Range is
+    #   satisfiable, only the `ContentLength` is affected in the response. If
+    #   the Range is not satisfiable, S3 returns a `416 - Requested Range Not
+    #   Satisfiable` error.
     # @option options [String] :version_id
     #   VersionId used to reference a specific version of the object.
     # @option options [String] :sse_customer_algorithm

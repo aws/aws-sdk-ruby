@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2023-05-04)
+------------------
+
+* Feature - This release adds a new attribute FaceOccluded. Additionally, you can now select attributes individually (e.g. ["DEFAULT", "FACE_OCCLUDED", "AGE_RANGE"] instead of ["ALL"]), which can reduce response time.
+
 1.77.0 (2023-04-28)
 ------------------
 

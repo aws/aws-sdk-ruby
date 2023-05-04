@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.177.0 (2023-05-04)
+------------------
+
+* Feature - We added support for ml.inf2 and ml.trn1 family of instances on Amazon SageMaker for deploying machine learning (ML) models for Real-time and Asynchronous inference. You can use these instances to achieve high performance at a low cost for generative artificial intelligence (AI) models.
+
 1.176.0 (2023-05-02)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2023-05-04)
+------------------
+
+* Feature - Add support for Finding History.
+
 1.80.0 (2023-04-19)
 ------------------
 

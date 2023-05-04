@@ -171,6 +171,7 @@ module Aws::Rekognition
     FaceMatch = Shapes::StructureShape.new(name: 'FaceMatch')
     FaceMatchList = Shapes::ListShape.new(name: 'FaceMatchList')
     FaceModelVersionList = Shapes::ListShape.new(name: 'FaceModelVersionList')
+    FaceOccluded = Shapes::StructureShape.new(name: 'FaceOccluded')
     FaceRecord = Shapes::StructureShape.new(name: 'FaceRecord')
     FaceRecordList = Shapes::ListShape.new(name: 'FaceRecordList')
     FaceSearchSettings = Shapes::StructureShape.new(name: 'FaceSearchSettings')
@@ -987,6 +988,7 @@ module Aws::Rekognition
     FaceDetail.add_member(:pose, Shapes::ShapeRef.new(shape: Pose, location_name: "Pose"))
     FaceDetail.add_member(:quality, Shapes::ShapeRef.new(shape: ImageQuality, location_name: "Quality"))
     FaceDetail.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
+    FaceDetail.add_member(:face_occluded, Shapes::ShapeRef.new(shape: FaceOccluded, location_name: "FaceOccluded"))
     FaceDetail.struct_class = Types::FaceDetail
 
     FaceDetailList.member = Shapes::ShapeRef.new(shape: FaceDetail)
@@ -1008,6 +1010,10 @@ module Aws::Rekognition
     FaceMatchList.member = Shapes::ShapeRef.new(shape: FaceMatch)
 
     FaceModelVersionList.member = Shapes::ShapeRef.new(shape: String)
+
+    FaceOccluded.add_member(:value, Shapes::ShapeRef.new(shape: Boolean, location_name: "Value"))
+    FaceOccluded.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
+    FaceOccluded.struct_class = Types::FaceOccluded
 
     FaceRecord.add_member(:face, Shapes::ShapeRef.new(shape: Face, location_name: "Face"))
     FaceRecord.add_member(:face_detail, Shapes::ShapeRef.new(shape: FaceDetail, location_name: "FaceDetail"))
