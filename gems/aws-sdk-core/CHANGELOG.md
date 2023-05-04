@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix error code parsing in AWS query compatible JSON services.
+
 3.171.0 (2023-03-22)
 ------------------
 

@@ -26,11 +26,13 @@ module Aws
       end
 
       def error_code(json, context)
-        code = if aws_query_error?(context)
-          context.http_response.headers['x-amzn-query-error'].split(';')[0]
-        else
-          json['__type']
-        end
+        code =
+          if aws_query_error?(context)
+            error = context.http_response.headers['x-amzn-query-error'].split(';')[0]
+            remove_prefix(error, context)
+          else
+            json['__type']
+          end
         code ||= json['code']
         code ||= context.http_response.headers['x-amzn-errortype']
         if code
@@ -43,6 +45,14 @@ module Aws
       def aws_query_error?(context)
         context.config.api.metadata['awsQueryCompatible'] &&
           context.http_response.headers['x-amzn-query-error']
+      end
+
+      def remove_prefix(error_code, context)
+        if prefix = context.config.api.metadata['errorPrefix']
+          error_code.sub(/^#{prefix}/, '')
+        else
+          error_code
+        end
       end
 
       def error_message(code, json)
