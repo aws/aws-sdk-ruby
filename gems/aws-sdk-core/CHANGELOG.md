@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add :region option to `Aws::Log::Formatter`.
+
 3.171.0 (2023-03-22)
 ------------------
 
