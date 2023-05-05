@@ -4157,7 +4157,8 @@
         "CompressionType":{"shape":"CompressionType"},
         "TargetAttributeName":{"shape":"TargetAttributeName"},
         "ContentType":{"shape":"ContentType"},
-        "ChannelType":{"shape":"AutoMLChannelType"}
+        "ChannelType":{"shape":"AutoMLChannelType"},
+        "SampleWeightAttributeName":{"shape":"SampleWeightAttributeName"}
       }
     },
     "AutoMLChannelType":{
@@ -16939,7 +16940,13 @@
         "ml.r6gd.8xlarge",
         "ml.r6gd.12xlarge",
         "ml.r6gd.16xlarge",
-        "ml.p4de.24xlarge"
+        "ml.p4de.24xlarge",
+        "ml.trn1.2xlarge",
+        "ml.trn1.32xlarge",
+        "ml.inf2.xlarge",
+        "ml.inf2.8xlarge",
+        "ml.inf2.24xlarge",
+        "ml.inf2.48xlarge"
       ]
     },
     "ProductionVariantList":{
@@ -17993,6 +18000,12 @@
         "Enabled",
         "Disabled"
       ]
+    },
+    "SampleWeightAttributeName":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9_-]+$"
     },
     "SamplingPercentage":{
       "type":"integer",

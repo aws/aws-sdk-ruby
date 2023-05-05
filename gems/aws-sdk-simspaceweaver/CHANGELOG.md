@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2023-04-28)
+------------------
+
+* Feature - Added a new CreateSnapshot API. For the StartSimulation API, SchemaS3Location is now optional, added a new SnapshotS3Location parameter. For the DescribeSimulation API, added SNAPSHOT_IN_PROGRESS simulation state, deprecated SchemaError, added new fields: StartError and SnapshotS3Location.
+
 1.1.0 (2023-01-18)
 ------------------
 

@@ -74,12 +74,14 @@ module Aws::WellArchitected
     CreateWorkloadOutput = Shapes::StructureShape.new(name: 'CreateWorkloadOutput')
     CreateWorkloadShareInput = Shapes::StructureShape.new(name: 'CreateWorkloadShareInput')
     CreateWorkloadShareOutput = Shapes::StructureShape.new(name: 'CreateWorkloadShareOutput')
+    DefinitionType = Shapes::StringShape.new(name: 'DefinitionType')
     DeleteLensInput = Shapes::StructureShape.new(name: 'DeleteLensInput')
     DeleteLensShareInput = Shapes::StructureShape.new(name: 'DeleteLensShareInput')
     DeleteWorkloadInput = Shapes::StructureShape.new(name: 'DeleteWorkloadInput')
     DeleteWorkloadShareInput = Shapes::StructureShape.new(name: 'DeleteWorkloadShareInput')
     DifferenceStatus = Shapes::StringShape.new(name: 'DifferenceStatus')
     DisassociateLensesInput = Shapes::StructureShape.new(name: 'DisassociateLensesInput')
+    DiscoveryIntegrationStatus = Shapes::StringShape.new(name: 'DiscoveryIntegrationStatus')
     DisplayText = Shapes::StringShape.new(name: 'DisplayText')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     ExceptionResourceId = Shapes::StringShape.new(name: 'ExceptionResourceId')
@@ -271,6 +273,7 @@ module Aws::WellArchitected
     WorkloadNonAwsRegion = Shapes::StringShape.new(name: 'WorkloadNonAwsRegion')
     WorkloadNonAwsRegions = Shapes::ListShape.new(name: 'WorkloadNonAwsRegions')
     WorkloadPillarPriorities = Shapes::ListShape.new(name: 'WorkloadPillarPriorities')
+    WorkloadResourceDefinition = Shapes::ListShape.new(name: 'WorkloadResourceDefinition')
     WorkloadReviewOwner = Shapes::StringShape.new(name: 'WorkloadReviewOwner')
     WorkloadShare = Shapes::StructureShape.new(name: 'WorkloadShare')
     WorkloadShareSummaries = Shapes::ListShape.new(name: 'WorkloadShareSummaries')
@@ -974,6 +977,7 @@ module Aws::WellArchitected
     UpdateAnswerOutput.struct_class = Types::UpdateAnswerOutput
 
     UpdateGlobalSettingsInput.add_member(:organization_sharing_status, Shapes::ShapeRef.new(shape: OrganizationSharingStatus, location_name: "OrganizationSharingStatus"))
+    UpdateGlobalSettingsInput.add_member(:discovery_integration_status, Shapes::ShapeRef.new(shape: DiscoveryIntegrationStatus, location_name: "DiscoveryIntegrationStatus"))
     UpdateGlobalSettingsInput.struct_class = Types::UpdateGlobalSettingsInput
 
     UpdateLensReviewInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
@@ -1080,6 +1084,7 @@ module Aws::WellArchitected
     WorkloadAwsRegions.member = Shapes::ShapeRef.new(shape: AwsRegion)
 
     WorkloadDiscoveryConfig.add_member(:trusted_advisor_integration_status, Shapes::ShapeRef.new(shape: TrustedAdvisorIntegrationStatus, location_name: "TrustedAdvisorIntegrationStatus"))
+    WorkloadDiscoveryConfig.add_member(:workload_resource_definition, Shapes::ShapeRef.new(shape: WorkloadResourceDefinition, location_name: "WorkloadResourceDefinition"))
     WorkloadDiscoveryConfig.struct_class = Types::WorkloadDiscoveryConfig
 
     WorkloadLenses.member = Shapes::ShapeRef.new(shape: LensAlias)
@@ -1087,6 +1092,8 @@ module Aws::WellArchitected
     WorkloadNonAwsRegions.member = Shapes::ShapeRef.new(shape: WorkloadNonAwsRegion)
 
     WorkloadPillarPriorities.member = Shapes::ShapeRef.new(shape: PillarId)
+
+    WorkloadResourceDefinition.member = Shapes::ShapeRef.new(shape: DefinitionType)
 
     WorkloadShare.add_member(:share_id, Shapes::ShapeRef.new(shape: ShareId, location_name: "ShareId"))
     WorkloadShare.add_member(:shared_by, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "SharedBy"))

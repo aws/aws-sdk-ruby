@@ -286,12 +286,14 @@ module Aws::NetworkFirewall
     #
     # @!attribute [rw] status_message
     #   If Network Firewall fails to create or delete the firewall endpoint
-    #   in the subnet, it populates this with the reason for the failure and
-    #   how to resolve it. Depending on the error, it can take as many as 15
+    #   in the subnet, it populates this with the reason for the error or
+    #   failure and how to resolve it. A `FAILED` status indicates a
+    #   non-recoverable state, and a `ERROR` status indicates an issue that
+    #   you can fix. Depending on the error, it can take as many as 15
     #   minutes to populate this field. For more information about the
-    #   errors and solutions available for this field, see [Troubleshooting
-    #   firewall endpoint failures][1] in the *Network Firewall Developer
-    #   Guide*.
+    #   causes for failiure or errors and solutions available for this
+    #   field, see [Troubleshooting firewall endpoint failures][1] in the
+    #   *Network Firewall Developer Guide*.
     #
     #
     #
@@ -1840,6 +1842,11 @@ module Aws::NetworkFirewall
     #   The Amazon Resource Name (ARN) of the TLS inspection configuration.
     #   @return [String]
     #
+    # @!attribute [rw] policy_variables
+    #   Contains variables that you can use to override default Suricata
+    #   settings in your firewall policy.
+    #   @return [Types::PolicyVariables]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FirewallPolicy AWS API Documentation
     #
     class FirewallPolicy < Struct.new(
@@ -1850,7 +1857,8 @@ module Aws::NetworkFirewall
       :stateful_rule_group_references,
       :stateful_default_actions,
       :stateful_engine_options,
-      :tls_inspection_configuration_arn)
+      :tls_inspection_configuration_arn,
+      :policy_variables)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2730,6 +2738,26 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # Contains variables that you can use to override default Suricata
+    # settings in your firewall policy.
+    #
+    # @!attribute [rw] rule_variables
+    #   The IPv4 or IPv6 addresses in CIDR notation to use for the Suricata
+    #   `HOME_NET` variable. If your firewall uses an inspection VPC, you
+    #   might want to override the `HOME_NET` variable with the CIDRs of
+    #   your home networks. If you don't override `HOME_NET` with your own
+    #   CIDRs, Network Firewall by default uses the CIDR of your inspection
+    #   VPC.
+    #   @return [Hash<String,Types::IPSet>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/PolicyVariables AWS API Documentation
+    #
+    class PolicyVariables < Struct.new(
+      :rule_variables)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A single port range specification. This is used for source and
     # destination port ranges in the stateless rule MatchAttributes,
     # `SourcePorts`, and `DestinationPorts` settings.
@@ -2803,10 +2831,6 @@ module Aws::NetworkFirewall
     #
     #   For a firewall policy resource, you can specify the following
     #   operations in the Actions section of the statement:
-    #
-    #   * network-firewall:CreateFirewall
-    #
-    #   * network-firewall:UpdateFirewall
     #
     #   * network-firewall:AssociateFirewallPolicy
     #
@@ -3425,6 +3449,13 @@ module Aws::NetworkFirewall
     #     behavior is rule dependent—a TCP-layer rule using a
     #     `flow:stateless` rule would still match, as would the
     #     `aws:drop_strict` default action.
+    #
+    #   * `REJECT` - Network Firewall fails closed and drops all subsequent
+    #     traffic going to the firewall. Network Firewall also sends a TCP
+    #     reject packet back to your client so that the client can
+    #     immediately establish a new session. Network Firewall will have
+    #     context about the new session and will apply rules to the
+    #     subsequent traffic.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/StatefulEngineOptions AWS API Documentation

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2023-05-03)
+------------------
+
+* Feature - Private API support for AWS AppSync. With Private APIs, you can now create GraphQL APIs that can only be accessed from your Amazon Virtual Private Cloud ("VPC").
+
 1.58.0 (2023-01-31)
 ------------------
 

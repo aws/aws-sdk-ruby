@@ -398,8 +398,8 @@ module Aws::Inspector2
     #   @return [Boolean]
     #
     # @!attribute [rw] lambda
-    #   Represents whether AWS Lambda scans are automatically enabled for
-    #   new members of your Amazon Inspector organization.
+    #   Represents whether AWS Lambda standard scans are automatically
+    #   enabled for new members of your Amazon Inspector organization.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AutoEnable AWS API Documentation
@@ -754,6 +754,74 @@ module Aws::Inspector2
     class BatchGetFreeTrialInfoResponse < Struct.new(
       :accounts,
       :failed_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_ids
+    #   The unique identifiers for the Amazon Web Services accounts to
+    #   retrieve Amazon Inspector deep inspection activation status for.
+    #   </p>
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/BatchGetMemberEc2DeepInspectionStatusRequest AWS API Documentation
+    #
+    class BatchGetMemberEc2DeepInspectionStatusRequest < Struct.new(
+      :account_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_ids
+    #   An array of objects that provide details on the activation status of
+    #   Amazon Inspector deep inspection for each of the requested accounts.
+    #   </p>
+    #   @return [Array<Types::MemberAccountEc2DeepInspectionStatusState>]
+    #
+    # @!attribute [rw] failed_account_ids
+    #   An array of objects that provide details on any accounts that failed
+    #   to activate Amazon Inspector deep inspection and why.      </p>
+    #   @return [Array<Types::FailedMemberAccountEc2DeepInspectionStatusState>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/BatchGetMemberEc2DeepInspectionStatusResponse AWS API Documentation
+    #
+    class BatchGetMemberEc2DeepInspectionStatusResponse < Struct.new(
+      :account_ids,
+      :failed_account_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_ids
+    #   The unique identifiers for the Amazon Web Services accounts to
+    #   change Amazon Inspector deep inspection status for.
+    #   @return [Array<Types::MemberAccountEc2DeepInspectionStatus>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/BatchUpdateMemberEc2DeepInspectionStatusRequest AWS API Documentation
+    #
+    class BatchUpdateMemberEc2DeepInspectionStatusRequest < Struct.new(
+      :account_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_ids
+    #   An array of objects that provide details for each of the accounts
+    #   that Amazon Inspector deep inspection status was successfully
+    #   changed for.
+    #   @return [Array<Types::MemberAccountEc2DeepInspectionStatusState>]
+    #
+    # @!attribute [rw] failed_account_ids
+    #   An array of objects that provide details for each of the accounts
+    #   that Amazon Inspector deep inspection status could not be
+    #   successfully changed for.
+    #   @return [Array<Types::FailedMemberAccountEc2DeepInspectionStatusState>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/BatchUpdateMemberEc2DeepInspectionStatusResponse AWS API Documentation
+    #
+    class BatchUpdateMemberEc2DeepInspectionStatusResponse < Struct.new(
+      :account_ids,
+      :failed_account_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1280,7 +1348,7 @@ module Aws::Inspector2
     #   @return [String]
     #
     # @!attribute [rw] key_prefix
-    #   The prefix of the KMS key used to export findings.
+    #   The prefix of the Amazon S3 bucket used to export findings.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
@@ -1725,6 +1793,35 @@ module Aws::Inspector2
       :error_message,
       :resource_status,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains details about a member account in your
+    # organization that failed to activate Amazon Inspector deep inspection.
+    #
+    # @!attribute [rw] account_id
+    #   The unique identifier for the Amazon Web Services account of the
+    #   organization member that failed to activate Amazon Inspector deep
+    #   inspection.
+    #   @return [String]
+    #
+    # @!attribute [rw] ec2_scan_status
+    #   The status of EC2 scanning in the account that failed to activate
+    #   Amazon Inspector deep inspection.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message explaining why the account failed to activate
+    #   Amazon Inspector deep inspection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/FailedMemberAccountEc2DeepInspectionStatusState AWS API Documentation
+    #
+    class FailedMemberAccountEc2DeepInspectionStatusState < Struct.new(
+      :account_id,
+      :ec2_scan_status,
+      :error_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2288,6 +2385,42 @@ module Aws::Inspector2
     #
     class GetDelegatedAdminAccountResponse < Struct.new(
       :delegated_admin)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetEc2DeepInspectionConfigurationRequest AWS API Documentation
+    #
+    class GetEc2DeepInspectionConfigurationRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] error_message
+    #   An error message explaining why Amazon Inspector deep inspection
+    #   configurations could not be retrieved for your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] org_package_paths
+    #   The Amazon Inspector deep inspection custom paths for your
+    #   organization.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] package_paths
+    #   The Amazon Inspector deep inspection custom paths for your account.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The activation status of Amazon Inspector deep inspection in your
+    #   account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetEc2DeepInspectionConfigurationResponse AWS API Documentation
+    #
+    class GetEc2DeepInspectionConfigurationResponse < Struct.new(
+      :error_message,
+      :org_package_paths,
+      :package_paths,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3224,6 +3357,56 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # An object that contains details about the status of Amazon Inspector
+    # deep inspection for a member account in your organization.
+    #
+    # @!attribute [rw] account_id
+    #   The unique identifier for the Amazon Web Services account of the
+    #   organization member.
+    #   @return [String]
+    #
+    # @!attribute [rw] activate_deep_inspection
+    #   Whether Amazon Inspector deep inspection is active in the account.
+    #   If `TRUE` Amazon Inspector deep inspection is active, if `FALSE` it
+    #   is not active.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/MemberAccountEc2DeepInspectionStatus AWS API Documentation
+    #
+    class MemberAccountEc2DeepInspectionStatus < Struct.new(
+      :account_id,
+      :activate_deep_inspection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains details about the state of Amazon Inspector
+    # deep inspection for a member account.
+    #
+    # @!attribute [rw] account_id
+    #   The unique identifier for the Amazon Web Services account of the
+    #   organization member
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message explaining why the account failed to activate
+    #   Amazon Inspector deep inspection.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The state of Amazon Inspector deep inspection in the member account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/MemberAccountEc2DeepInspectionStatusState AWS API Documentation
+    #
+    class MemberAccountEc2DeepInspectionStatusState < Struct.new(
+      :account_id,
+      :error_message,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information on the network path associated with a finding.
     #
     # @!attribute [rw] steps
@@ -3745,8 +3928,7 @@ module Aws::Inspector2
     #   @return [String]
     #
     # @!attribute [rw] lambda
-    #   The status of Amazon Inspector scanning for AWS Lambda function
-    #   resources.
+    #   The status of Amazon Inspector scanning for AWS Lambda function.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceStatus AWS API Documentation
@@ -4053,6 +4235,62 @@ module Aws::Inspector2
     #
     class UpdateConfigurationResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] activate_deep_inspection
+    #   Specify `TRUE` to activate Amazon Inspector deep inspection in your
+    #   account, or `FALSE` to deactivate. Member accounts in an
+    #   organization cannot deactivate deep inspection, instead the
+    #   delegated administrator for the organization can deactivate a member
+    #   account using [BatchUpdateMemberEc2DeepInspectionStatus][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/inspector/v2/APIReference/API_BatchUpdateMemberEc2DeepInspectionStatus.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] package_paths
+    #   The Amazon Inspector deep inspection custom paths you are adding for
+    #   your account.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateEc2DeepInspectionConfigurationRequest AWS API Documentation
+    #
+    class UpdateEc2DeepInspectionConfigurationRequest < Struct.new(
+      :activate_deep_inspection,
+      :package_paths)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] error_message
+    #   An error message explaining why new Amazon Inspector deep inspection
+    #   custom paths could not be added.
+    #   @return [String]
+    #
+    # @!attribute [rw] org_package_paths
+    #   The current Amazon Inspector deep inspection custom paths for the
+    #   organization.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] package_paths
+    #   The current Amazon Inspector deep inspection custom paths for your
+    #   account.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The status of Amazon Inspector deep inspection in your account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateEc2DeepInspectionConfigurationResponse AWS API Documentation
+    #
+    class UpdateEc2DeepInspectionConfigurationResponse < Struct.new(
+      :error_message,
+      :org_package_paths,
+      :package_paths,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] action
     #   Specifies the action that is to be applied to the findings that
     #   match the filter.
@@ -4102,6 +4340,23 @@ module Aws::Inspector2
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] org_package_paths
+    #   The Amazon Inspector deep inspection custom paths you are adding for
+    #   your organization.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateOrgEc2DeepInspectionConfigurationRequest AWS API Documentation
+    #
+    class UpdateOrgEc2DeepInspectionConfigurationRequest < Struct.new(
+      :org_package_paths)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateOrgEc2DeepInspectionConfigurationResponse AWS API Documentation
+    #
+    class UpdateOrgEc2DeepInspectionConfigurationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] auto_enable
     #   Defines which scan types are enabled automatically for new members

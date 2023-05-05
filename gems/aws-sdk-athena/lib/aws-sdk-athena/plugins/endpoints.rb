@@ -62,6 +62,10 @@ module Aws::Athena
             Aws::Athena::Endpoints::BatchGetPreparedStatement.build(context)
           when :batch_get_query_execution
             Aws::Athena::Endpoints::BatchGetQueryExecution.build(context)
+          when :cancel_capacity_reservation
+            Aws::Athena::Endpoints::CancelCapacityReservation.build(context)
+          when :create_capacity_reservation
+            Aws::Athena::Endpoints::CreateCapacityReservation.build(context)
           when :create_data_catalog
             Aws::Athena::Endpoints::CreateDataCatalog.build(context)
           when :create_named_query
@@ -92,6 +96,10 @@ module Aws::Athena
             Aws::Athena::Endpoints::GetCalculationExecutionCode.build(context)
           when :get_calculation_execution_status
             Aws::Athena::Endpoints::GetCalculationExecutionStatus.build(context)
+          when :get_capacity_assignment_configuration
+            Aws::Athena::Endpoints::GetCapacityAssignmentConfiguration.build(context)
+          when :get_capacity_reservation
+            Aws::Athena::Endpoints::GetCapacityReservation.build(context)
           when :get_data_catalog
             Aws::Athena::Endpoints::GetDataCatalog.build(context)
           when :get_database
@@ -122,6 +130,8 @@ module Aws::Athena
             Aws::Athena::Endpoints::ListApplicationDPUSizes.build(context)
           when :list_calculation_executions
             Aws::Athena::Endpoints::ListCalculationExecutions.build(context)
+          when :list_capacity_reservations
+            Aws::Athena::Endpoints::ListCapacityReservations.build(context)
           when :list_data_catalogs
             Aws::Athena::Endpoints::ListDataCatalogs.build(context)
           when :list_databases
@@ -148,6 +158,8 @@ module Aws::Athena
             Aws::Athena::Endpoints::ListTagsForResource.build(context)
           when :list_work_groups
             Aws::Athena::Endpoints::ListWorkGroups.build(context)
+          when :put_capacity_assignment_configuration
+            Aws::Athena::Endpoints::PutCapacityAssignmentConfiguration.build(context)
           when :start_calculation_execution
             Aws::Athena::Endpoints::StartCalculationExecution.build(context)
           when :start_query_execution
@@ -164,6 +176,8 @@ module Aws::Athena
             Aws::Athena::Endpoints::TerminateSession.build(context)
           when :untag_resource
             Aws::Athena::Endpoints::UntagResource.build(context)
+          when :update_capacity_reservation
+            Aws::Athena::Endpoints::UpdateCapacityReservation.build(context)
           when :update_data_catalog
             Aws::Athena::Endpoints::UpdateDataCatalog.build(context)
           when :update_named_query

@@ -1702,6 +1702,7 @@ module Aws::IoTTwinMaker
     #   * {Types::GetSceneResponse#capabilities #capabilities} => Array&lt;String&gt;
     #   * {Types::GetSceneResponse#scene_metadata #scene_metadata} => Hash&lt;String,String&gt;
     #   * {Types::GetSceneResponse#generated_scene_metadata #generated_scene_metadata} => Hash&lt;String,String&gt;
+    #   * {Types::GetSceneResponse#error #error} => Types::SceneError
     #
     # @example Request syntax with placeholder values
     #
@@ -1725,6 +1726,8 @@ module Aws::IoTTwinMaker
     #   resp.scene_metadata["Name"] #=> String
     #   resp.generated_scene_metadata #=> Hash
     #   resp.generated_scene_metadata["Name"] #=> String
+    #   resp.error.code #=> String, one of "MATTERPORT_ERROR"
+    #   resp.error.message #=> String
     #
     # @overload get_scene(params = {})
     # @param [Hash] params ({})
@@ -2699,7 +2702,7 @@ module Aws::IoTTwinMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iottwinmaker'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

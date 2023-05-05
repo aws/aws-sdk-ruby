@@ -368,6 +368,73 @@ module Aws::Appflow
 
     # @!group API Operations
 
+    # Cancels active runs for a flow.
+    #
+    # You can cancel all of the active runs for a flow, or you can cancel
+    # specific runs by providing their IDs.
+    #
+    # You can cancel a flow run only when the run is in progress. You can't
+    # cancel a run that has already completed or failed. You also can't
+    # cancel a run that's scheduled to occur but hasn't started yet. To
+    # prevent a scheduled run, you can deactivate the flow with the
+    # `StopFlow` action.
+    #
+    # You cannot resume a run after you cancel it.
+    #
+    # When you send your request, the status for each run becomes
+    # `CancelStarted`. When the cancellation completes, the status becomes
+    # `Canceled`.
+    #
+    # <note markdown="1"> When you cancel a run, you still incur charges for any data that the
+    # run already processed before the cancellation. If the run had already
+    # written some data to the flow destination, then that data remains in
+    # the destination. If you configured the flow to use a batch API (such
+    # as the Salesforce Bulk API 2.0), then the run will finish reading or
+    # writing its entire batch of data after the cancellation. For these
+    # operations, the data processing charges for Amazon AppFlow apply. For
+    # the pricing information, see [Amazon AppFlow pricing][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/appflow/pricing/
+    #
+    # @option params [required, String] :flow_name
+    #   The name of a flow with active runs that you want to cancel.
+    #
+    # @option params [Array<String>] :execution_ids
+    #   The ID of each active run to cancel. These runs must belong to the
+    #   flow you specify in your request.
+    #
+    #   If you omit this parameter, your request ends all active runs that
+    #   belong to the flow.
+    #
+    # @return [Types::CancelFlowExecutionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelFlowExecutionsResponse#invalid_executions #invalid_executions} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_flow_executions({
+    #     flow_name: "FlowName", # required
+    #     execution_ids: ["ExecutionId"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.invalid_executions #=> Array
+    #   resp.invalid_executions[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/CancelFlowExecutions AWS API Documentation
+    #
+    # @overload cancel_flow_executions(params = {})
+    # @param [Hash] params ({})
+    def cancel_flow_executions(params = {}, options = {})
+      req = build_request(:cancel_flow_executions, params)
+      req.send_request(options)
+    end
+
     # Creates a new connector profile associated with your Amazon Web
     # Services account. There is a soft quota of 100 connector profiles per
     # Amazon Web Services account. If you need more connector profiles than
@@ -515,7 +582,7 @@ module Aws::Appflow
     #           },
     #           o_auth_2_properties: {
     #             token_url: "TokenUrl", # required
-    #             o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #             o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE, JWT_BEARER
     #             token_url_custom_properties: {
     #               "CustomPropertyKey" => "CustomPropertyValue",
     #             },
@@ -584,6 +651,8 @@ module Aws::Appflow
     #             redirect_uri: "RedirectUri",
     #           },
     #           client_credentials_arn: "ClientCredentialsArn",
+    #           o_auth_2_grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE, JWT_BEARER
+    #           jwt_token: "JwtToken",
     #         },
     #         service_now: {
     #           username: "Username", # required
@@ -1152,6 +1221,8 @@ module Aws::Appflow
     #   resp.connector_configuration.connector_metadata.salesforce.o_auth_scopes[0] #=> String
     #   resp.connector_configuration.connector_metadata.salesforce.data_transfer_apis #=> Array
     #   resp.connector_configuration.connector_metadata.salesforce.data_transfer_apis[0] #=> String, one of "AUTOMATIC", "BULKV2", "REST_SYNC"
+    #   resp.connector_configuration.connector_metadata.salesforce.oauth2_grant_types_supported #=> Array
+    #   resp.connector_configuration.connector_metadata.salesforce.oauth2_grant_types_supported[0] #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE", "JWT_BEARER"
     #   resp.connector_configuration.connector_metadata.slack.o_auth_scopes #=> Array
     #   resp.connector_configuration.connector_metadata.slack.o_auth_scopes[0] #=> String
     #   resp.connector_configuration.connector_metadata.snowflake.supported_regions #=> Array
@@ -1180,7 +1251,7 @@ module Aws::Appflow
     #   resp.connector_configuration.authentication_config.o_auth_2_defaults.auth_code_urls #=> Array
     #   resp.connector_configuration.authentication_config.o_auth_2_defaults.auth_code_urls[0] #=> String
     #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_grant_types_supported #=> Array
-    #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_grant_types_supported[0] #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
+    #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_grant_types_supported[0] #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE", "JWT_BEARER"
     #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties #=> Array
     #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].key #=> String
     #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].is_required #=> Boolean
@@ -1397,7 +1468,7 @@ module Aws::Appflow
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.profile_properties #=> Hash
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.profile_properties["ProfilePropertyKey"] #=> String
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.o_auth_2_properties.token_url #=> String
-    #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.o_auth_2_properties.o_auth_2_grant_type #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
+    #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.o_auth_2_properties.o_auth_2_grant_type #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE", "JWT_BEARER"
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.o_auth_2_properties.token_url_custom_properties #=> Hash
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.o_auth_2_properties.token_url_custom_properties["CustomPropertyKey"] #=> String
     #   resp.connector_profile_details[0].connector_profile_properties.pardot.instance_url #=> String
@@ -1472,6 +1543,8 @@ module Aws::Appflow
     #   resp.connector_configurations["ConnectorType"].connector_metadata.salesforce.o_auth_scopes[0] #=> String
     #   resp.connector_configurations["ConnectorType"].connector_metadata.salesforce.data_transfer_apis #=> Array
     #   resp.connector_configurations["ConnectorType"].connector_metadata.salesforce.data_transfer_apis[0] #=> String, one of "AUTOMATIC", "BULKV2", "REST_SYNC"
+    #   resp.connector_configurations["ConnectorType"].connector_metadata.salesforce.oauth2_grant_types_supported #=> Array
+    #   resp.connector_configurations["ConnectorType"].connector_metadata.salesforce.oauth2_grant_types_supported[0] #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE", "JWT_BEARER"
     #   resp.connector_configurations["ConnectorType"].connector_metadata.slack.o_auth_scopes #=> Array
     #   resp.connector_configurations["ConnectorType"].connector_metadata.slack.o_auth_scopes[0] #=> String
     #   resp.connector_configurations["ConnectorType"].connector_metadata.snowflake.supported_regions #=> Array
@@ -1500,7 +1573,7 @@ module Aws::Appflow
     #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.auth_code_urls #=> Array
     #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.auth_code_urls[0] #=> String
     #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_grant_types_supported #=> Array
-    #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_grant_types_supported[0] #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
+    #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_grant_types_supported[0] #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE", "JWT_BEARER"
     #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties #=> Array
     #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].key #=> String
     #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].is_required #=> Boolean
@@ -1722,7 +1795,7 @@ module Aws::Appflow
     #   resp.destination_flow_config_list[0].destination_connector_properties.sapo_data.write_operation_type #=> String, one of "INSERT", "UPSERT", "UPDATE", "DELETE"
     #   resp.last_run_execution_details.most_recent_execution_message #=> String
     #   resp.last_run_execution_details.most_recent_execution_time #=> Time
-    #   resp.last_run_execution_details.most_recent_execution_status #=> String, one of "InProgress", "Successful", "Error"
+    #   resp.last_run_execution_details.most_recent_execution_status #=> String, one of "InProgress", "Successful", "Error", "CancelStarted", "Canceled"
     #   resp.trigger_config.trigger_type #=> String, one of "Scheduled", "Event", "OnDemand"
     #   resp.trigger_config.trigger_properties.scheduled.schedule_expression #=> String
     #   resp.trigger_config.trigger_properties.scheduled.data_pull_mode #=> String, one of "Incremental", "Complete"
@@ -1770,10 +1843,10 @@ module Aws::Appflow
     #   resp.last_run_metadata_catalog_details[0].table_name #=> String
     #   resp.last_run_metadata_catalog_details[0].table_registration_output.message #=> String
     #   resp.last_run_metadata_catalog_details[0].table_registration_output.result #=> String
-    #   resp.last_run_metadata_catalog_details[0].table_registration_output.status #=> String, one of "InProgress", "Successful", "Error"
+    #   resp.last_run_metadata_catalog_details[0].table_registration_output.status #=> String, one of "InProgress", "Successful", "Error", "CancelStarted", "Canceled"
     #   resp.last_run_metadata_catalog_details[0].partition_registration_output.message #=> String
     #   resp.last_run_metadata_catalog_details[0].partition_registration_output.result #=> String
-    #   resp.last_run_metadata_catalog_details[0].partition_registration_output.status #=> String, one of "InProgress", "Successful", "Error"
+    #   resp.last_run_metadata_catalog_details[0].partition_registration_output.status #=> String, one of "InProgress", "Successful", "Error", "CancelStarted", "Canceled"
     #   resp.schema_version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DescribeFlow AWS API Documentation
@@ -1818,7 +1891,7 @@ module Aws::Appflow
     #
     #   resp.flow_executions #=> Array
     #   resp.flow_executions[0].execution_id #=> String
-    #   resp.flow_executions[0].execution_status #=> String, one of "InProgress", "Successful", "Error"
+    #   resp.flow_executions[0].execution_status #=> String, one of "InProgress", "Successful", "Error", "CancelStarted", "Canceled"
     #   resp.flow_executions[0].execution_result.error_info.put_failures_count #=> Integer
     #   resp.flow_executions[0].execution_result.error_info.execution_message #=> String
     #   resp.flow_executions[0].execution_result.bytes_processed #=> Integer
@@ -1833,10 +1906,10 @@ module Aws::Appflow
     #   resp.flow_executions[0].metadata_catalog_details[0].table_name #=> String
     #   resp.flow_executions[0].metadata_catalog_details[0].table_registration_output.message #=> String
     #   resp.flow_executions[0].metadata_catalog_details[0].table_registration_output.result #=> String
-    #   resp.flow_executions[0].metadata_catalog_details[0].table_registration_output.status #=> String, one of "InProgress", "Successful", "Error"
+    #   resp.flow_executions[0].metadata_catalog_details[0].table_registration_output.status #=> String, one of "InProgress", "Successful", "Error", "CancelStarted", "Canceled"
     #   resp.flow_executions[0].metadata_catalog_details[0].partition_registration_output.message #=> String
     #   resp.flow_executions[0].metadata_catalog_details[0].partition_registration_output.result #=> String
-    #   resp.flow_executions[0].metadata_catalog_details[0].partition_registration_output.status #=> String, one of "InProgress", "Successful", "Error"
+    #   resp.flow_executions[0].metadata_catalog_details[0].partition_registration_output.status #=> String, one of "InProgress", "Successful", "Error", "CancelStarted", "Canceled"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DescribeFlowExecutionRecords AWS API Documentation
@@ -2010,7 +2083,7 @@ module Aws::Appflow
     #   resp.flows[0].tags["TagKey"] #=> String
     #   resp.flows[0].last_run_execution_details.most_recent_execution_message #=> String
     #   resp.flows[0].last_run_execution_details.most_recent_execution_time #=> Time
-    #   resp.flows[0].last_run_execution_details.most_recent_execution_status #=> String, one of "InProgress", "Successful", "Error"
+    #   resp.flows[0].last_run_execution_details.most_recent_execution_status #=> String, one of "InProgress", "Successful", "Error", "CancelStarted", "Canceled"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ListFlows AWS API Documentation
@@ -2421,7 +2494,7 @@ module Aws::Appflow
     #           },
     #           o_auth_2_properties: {
     #             token_url: "TokenUrl", # required
-    #             o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #             o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE, JWT_BEARER
     #             token_url_custom_properties: {
     #               "CustomPropertyKey" => "CustomPropertyValue",
     #             },
@@ -2490,6 +2563,8 @@ module Aws::Appflow
     #             redirect_uri: "RedirectUri",
     #           },
     #           client_credentials_arn: "ClientCredentialsArn",
+    #           o_auth_2_grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE, JWT_BEARER
+    #           jwt_token: "JwtToken",
     #         },
     #         service_now: {
     #           username: "Username", # required
@@ -3020,7 +3095,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

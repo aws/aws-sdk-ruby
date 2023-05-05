@@ -673,7 +673,7 @@ module Aws::OpenSearchService
     #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options
     #
     # @option params [Hash<String,Types::LogPublishingOption>] :log_publishing_options
-    #   Key-value pairs to configure slow log publishing.
+    #   Key-value pairs to configure log publishing.
     #
     # @option params [Types::DomainEndpointOptions] :domain_endpoint_options
     #   Additional options for the domain endpoint, such as whether to require
@@ -724,6 +724,7 @@ module Aws::OpenSearchService
     #       cold_storage_options: {
     #         enabled: false, # required
     #       },
+    #       multi_az_with_standby_enabled: false,
     #     },
     #     ebs_options: {
     #       ebs_enabled: false,
@@ -849,6 +850,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.cluster_config.warm_type #=> String, one of "ultrawarm1.medium.search", "ultrawarm1.large.search", "ultrawarm1.xlarge.search"
     #   resp.domain_status.cluster_config.warm_count #=> Integer
     #   resp.domain_status.cluster_config.cold_storage_options.enabled #=> Boolean
+    #   resp.domain_status.cluster_config.multi_az_with_standby_enabled #=> Boolean
     #   resp.domain_status.ebs_options.ebs_enabled #=> Boolean
     #   resp.domain_status.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1", "gp3"
     #   resp.domain_status.ebs_options.volume_size #=> Integer
@@ -1005,7 +1007,7 @@ module Aws::OpenSearchService
     #   Unique name for the package.
     #
     # @option params [required, String] :package_type
-    #   Type of package.
+    #   The type of package.
     #
     # @option params [String] :package_description
     #   Description of the package.
@@ -1143,6 +1145,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.cluster_config.warm_type #=> String, one of "ultrawarm1.medium.search", "ultrawarm1.large.search", "ultrawarm1.xlarge.search"
     #   resp.domain_status.cluster_config.warm_count #=> Integer
     #   resp.domain_status.cluster_config.cold_storage_options.enabled #=> Boolean
+    #   resp.domain_status.cluster_config.multi_az_with_standby_enabled #=> Boolean
     #   resp.domain_status.ebs_options.ebs_enabled #=> Boolean
     #   resp.domain_status.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1", "gp3"
     #   resp.domain_status.ebs_options.volume_size #=> Integer
@@ -1416,6 +1419,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.cluster_config.warm_type #=> String, one of "ultrawarm1.medium.search", "ultrawarm1.large.search", "ultrawarm1.xlarge.search"
     #   resp.domain_status.cluster_config.warm_count #=> Integer
     #   resp.domain_status.cluster_config.cold_storage_options.enabled #=> Boolean
+    #   resp.domain_status.cluster_config.multi_az_with_standby_enabled #=> Boolean
     #   resp.domain_status.ebs_options.ebs_enabled #=> Boolean
     #   resp.domain_status.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1", "gp3"
     #   resp.domain_status.ebs_options.volume_size #=> Integer
@@ -1626,6 +1630,7 @@ module Aws::OpenSearchService
     #   resp.domain_config.cluster_config.options.warm_type #=> String, one of "ultrawarm1.medium.search", "ultrawarm1.large.search", "ultrawarm1.xlarge.search"
     #   resp.domain_config.cluster_config.options.warm_count #=> Integer
     #   resp.domain_config.cluster_config.options.cold_storage_options.enabled #=> Boolean
+    #   resp.domain_config.cluster_config.options.multi_az_with_standby_enabled #=> Boolean
     #   resp.domain_config.cluster_config.status.creation_date #=> Time
     #   resp.domain_config.cluster_config.status.update_date #=> Time
     #   resp.domain_config.cluster_config.status.update_version #=> Integer
@@ -1767,6 +1772,105 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Returns information about domain and node health, the standby
+    # Availability Zone, number of nodes per Availability Zone, and shard
+    # count per node.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @return [Types::DescribeDomainHealthResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDomainHealthResponse#domain_state #domain_state} => String
+    #   * {Types::DescribeDomainHealthResponse#availability_zone_count #availability_zone_count} => String
+    #   * {Types::DescribeDomainHealthResponse#active_availability_zone_count #active_availability_zone_count} => String
+    #   * {Types::DescribeDomainHealthResponse#stand_by_availability_zone_count #stand_by_availability_zone_count} => String
+    #   * {Types::DescribeDomainHealthResponse#data_node_count #data_node_count} => String
+    #   * {Types::DescribeDomainHealthResponse#dedicated_master #dedicated_master} => Boolean
+    #   * {Types::DescribeDomainHealthResponse#master_eligible_node_count #master_eligible_node_count} => String
+    #   * {Types::DescribeDomainHealthResponse#warm_node_count #warm_node_count} => String
+    #   * {Types::DescribeDomainHealthResponse#master_node #master_node} => String
+    #   * {Types::DescribeDomainHealthResponse#cluster_health #cluster_health} => String
+    #   * {Types::DescribeDomainHealthResponse#total_shards #total_shards} => String
+    #   * {Types::DescribeDomainHealthResponse#total_un_assigned_shards #total_un_assigned_shards} => String
+    #   * {Types::DescribeDomainHealthResponse#environment_information #environment_information} => Array&lt;Types::EnvironmentInfo&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_domain_health({
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_state #=> String, one of "Active", "Processing", "NotAvailable"
+    #   resp.availability_zone_count #=> String
+    #   resp.active_availability_zone_count #=> String
+    #   resp.stand_by_availability_zone_count #=> String
+    #   resp.data_node_count #=> String
+    #   resp.dedicated_master #=> Boolean
+    #   resp.master_eligible_node_count #=> String
+    #   resp.warm_node_count #=> String
+    #   resp.master_node #=> String, one of "Available", "UnAvailable"
+    #   resp.cluster_health #=> String, one of "Red", "Yellow", "Green", "NotAvailable"
+    #   resp.total_shards #=> String
+    #   resp.total_un_assigned_shards #=> String
+    #   resp.environment_information #=> Array
+    #   resp.environment_information[0].availability_zone_information #=> Array
+    #   resp.environment_information[0].availability_zone_information[0].availability_zone_name #=> String
+    #   resp.environment_information[0].availability_zone_information[0].zone_status #=> String, one of "Active", "StandBy", "NotAvailable"
+    #   resp.environment_information[0].availability_zone_information[0].configured_data_node_count #=> String
+    #   resp.environment_information[0].availability_zone_information[0].available_data_node_count #=> String
+    #   resp.environment_information[0].availability_zone_information[0].total_shards #=> String
+    #   resp.environment_information[0].availability_zone_information[0].total_un_assigned_shards #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainHealth AWS API Documentation
+    #
+    # @overload describe_domain_health(params = {})
+    # @param [Hash] params ({})
+    def describe_domain_health(params = {}, options = {})
+      req = build_request(:describe_domain_health, params)
+      req.send_request(options)
+    end
+
+    # Returns information about domain and nodes, including data nodes,
+    # master nodes, ultrawarm nodes, Availability Zone(s), standby nodes,
+    # node configurations, and node states.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain.
+    #
+    # @return [Types::DescribeDomainNodesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDomainNodesResponse#domain_nodes_status_list #domain_nodes_status_list} => Array&lt;Types::DomainNodesStatus&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_domain_nodes({
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_nodes_status_list #=> Array
+    #   resp.domain_nodes_status_list[0].node_id #=> String
+    #   resp.domain_nodes_status_list[0].node_type #=> String, one of "Data", "Ultrawarm", "Master"
+    #   resp.domain_nodes_status_list[0].availability_zone #=> String
+    #   resp.domain_nodes_status_list[0].instance_type #=> String, one of "m3.medium.search", "m3.large.search", "m3.xlarge.search", "m3.2xlarge.search", "m4.large.search", "m4.xlarge.search", "m4.2xlarge.search", "m4.4xlarge.search", "m4.10xlarge.search", "m5.large.search", "m5.xlarge.search", "m5.2xlarge.search", "m5.4xlarge.search", "m5.12xlarge.search", "m5.24xlarge.search", "r5.large.search", "r5.xlarge.search", "r5.2xlarge.search", "r5.4xlarge.search", "r5.12xlarge.search", "r5.24xlarge.search", "c5.large.search", "c5.xlarge.search", "c5.2xlarge.search", "c5.4xlarge.search", "c5.9xlarge.search", "c5.18xlarge.search", "t3.nano.search", "t3.micro.search", "t3.small.search", "t3.medium.search", "t3.large.search", "t3.xlarge.search", "t3.2xlarge.search", "ultrawarm1.medium.search", "ultrawarm1.large.search", "ultrawarm1.xlarge.search", "t2.micro.search", "t2.small.search", "t2.medium.search", "r3.large.search", "r3.xlarge.search", "r3.2xlarge.search", "r3.4xlarge.search", "r3.8xlarge.search", "i2.xlarge.search", "i2.2xlarge.search", "d2.xlarge.search", "d2.2xlarge.search", "d2.4xlarge.search", "d2.8xlarge.search", "c4.large.search", "c4.xlarge.search", "c4.2xlarge.search", "c4.4xlarge.search", "c4.8xlarge.search", "r4.large.search", "r4.xlarge.search", "r4.2xlarge.search", "r4.4xlarge.search", "r4.8xlarge.search", "r4.16xlarge.search", "i3.large.search", "i3.xlarge.search", "i3.2xlarge.search", "i3.4xlarge.search", "i3.8xlarge.search", "i3.16xlarge.search", "r6g.large.search", "r6g.xlarge.search", "r6g.2xlarge.search", "r6g.4xlarge.search", "r6g.8xlarge.search", "r6g.12xlarge.search", "m6g.large.search", "m6g.xlarge.search", "m6g.2xlarge.search", "m6g.4xlarge.search", "m6g.8xlarge.search", "m6g.12xlarge.search", "c6g.large.search", "c6g.xlarge.search", "c6g.2xlarge.search", "c6g.4xlarge.search", "c6g.8xlarge.search", "c6g.12xlarge.search", "r6gd.large.search", "r6gd.xlarge.search", "r6gd.2xlarge.search", "r6gd.4xlarge.search", "r6gd.8xlarge.search", "r6gd.12xlarge.search", "r6gd.16xlarge.search", "t4g.small.search", "t4g.medium.search"
+    #   resp.domain_nodes_status_list[0].node_status #=> String, one of "Active", "StandBy", "NotAvailable"
+    #   resp.domain_nodes_status_list[0].storage_type #=> String
+    #   resp.domain_nodes_status_list[0].storage_volume_type #=> String, one of "standard", "gp2", "io1", "gp3"
+    #   resp.domain_nodes_status_list[0].storage_size #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainNodes AWS API Documentation
+    #
+    # @overload describe_domain_nodes(params = {})
+    # @param [Hash] params ({})
+    def describe_domain_nodes(params = {}, options = {})
+      req = build_request(:describe_domain_nodes, params)
+      req.send_request(options)
+    end
+
     # Returns domain configuration information about the specified Amazon
     # OpenSearch Service domains.
     #
@@ -1810,6 +1914,7 @@ module Aws::OpenSearchService
     #   resp.domain_status_list[0].cluster_config.warm_type #=> String, one of "ultrawarm1.medium.search", "ultrawarm1.large.search", "ultrawarm1.xlarge.search"
     #   resp.domain_status_list[0].cluster_config.warm_count #=> Integer
     #   resp.domain_status_list[0].cluster_config.cold_storage_options.enabled #=> Boolean
+    #   resp.domain_status_list[0].cluster_config.multi_az_with_standby_enabled #=> Boolean
     #   resp.domain_status_list[0].ebs_options.ebs_enabled #=> Boolean
     #   resp.domain_status_list[0].ebs_options.volume_type #=> String, one of "standard", "gp2", "io1", "gp3"
     #   resp.domain_status_list[0].ebs_options.volume_size #=> Integer
@@ -1942,6 +2047,7 @@ module Aws::OpenSearchService
     #   resp.dry_run_config.cluster_config.warm_type #=> String, one of "ultrawarm1.medium.search", "ultrawarm1.large.search", "ultrawarm1.xlarge.search"
     #   resp.dry_run_config.cluster_config.warm_count #=> Integer
     #   resp.dry_run_config.cluster_config.cold_storage_options.enabled #=> Boolean
+    #   resp.dry_run_config.cluster_config.multi_az_with_standby_enabled #=> Boolean
     #   resp.dry_run_config.ebs_options.ebs_enabled #=> Boolean
     #   resp.dry_run_config.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1", "gp3"
     #   resp.dry_run_config.ebs_options.volume_size #=> Integer
@@ -2524,7 +2630,8 @@ module Aws::OpenSearchService
     end
 
     # Returns a list of Amazon OpenSearch Service package versions, along
-    # with their creation time and commit message. For more information, see
+    # with their creation time, commit message, and plugin properties (if
+    # the package is a zip plugin package). For more information, see
     # [Custom packages for Amazon OpenSearch Service][1].
     #
     #
@@ -2761,12 +2868,12 @@ module Aws::OpenSearchService
     # or Elasticsearch version.
     #
     # @option params [required, String] :engine_version
-    #   Version of OpenSearch or Elasticsearch, in the format
+    #   The version of OpenSearch or Elasticsearch, in the format
     #   Elasticsearch\_X.Y or OpenSearch\_X.Y. Defaults to the latest version
     #   of OpenSearch.
     #
     # @option params [String] :domain_name
-    #   Name of the domain to list instance type details for.
+    #   The name of the domain.
     #
     # @option params [Integer] :max_results
     #   An optional parameter that specifies the maximum number of results to
@@ -2777,6 +2884,14 @@ module Aws::OpenSearchService
     #   `nextToken`, you can include the returned `nextToken` in subsequent
     #   `ListInstanceTypeDetails` operations, which returns results in the
     #   next page.
+    #
+    # @option params [Boolean] :retrieve_a_zs
+    #   An optional parameter that specifies the Availability Zones for the
+    #   domain.
+    #
+    # @option params [String] :instance_type
+    #   An optional parameter that lists information for a given instance
+    #   type.
     #
     # @return [Types::ListInstanceTypeDetailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2792,6 +2907,8 @@ module Aws::OpenSearchService
     #     domain_name: "DomainName",
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     retrieve_a_zs: false,
+    #     instance_type: "InstanceTypeString",
     #   })
     #
     # @example Response structure
@@ -2805,6 +2922,8 @@ module Aws::OpenSearchService
     #   resp.instance_type_details[0].warm_enabled #=> Boolean
     #   resp.instance_type_details[0].instance_role #=> Array
     #   resp.instance_type_details[0].instance_role[0] #=> String
+    #   resp.instance_type_details[0].availability_zones #=> Array
+    #   resp.instance_type_details[0].availability_zones[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListInstanceTypeDetails AWS API Documentation
@@ -3337,7 +3456,7 @@ module Aws::OpenSearchService
     end
 
     # Modifies the cluster configuration of the specified Amazon OpenSearch
-    # Service domain.
+    # Service domain.sl
     #
     # @option params [required, String] :domain_name
     #   The name of the domain that you're updating.
@@ -3387,12 +3506,6 @@ module Aws::OpenSearchService
     #     clauses allowed in a Lucene boolean query. Default is 1,024. Queries
     #     with more than the permitted number of clauses result in a
     #     `TooManyClauses` error.
-    #
-    #   * `"override_main_response_version": "true" | "false"` - Note the use
-    #     of a string rather than a boolean. Specifies whether the domain
-    #     reports its version as 7.10 to allow Elasticsearch OSS clients and
-    #     plugins to continue working with it. Default is false when creating
-    #     a domain and true when upgrading a domain.
     #
     #   For more information, see [Advanced cluster parameters][1].
     #
@@ -3474,6 +3587,7 @@ module Aws::OpenSearchService
     #       cold_storage_options: {
     #         enabled: false, # required
     #       },
+    #       multi_az_with_standby_enabled: false,
     #     },
     #     ebs_options: {
     #       ebs_enabled: false,
@@ -3591,6 +3705,7 @@ module Aws::OpenSearchService
     #   resp.domain_config.cluster_config.options.warm_type #=> String, one of "ultrawarm1.medium.search", "ultrawarm1.large.search", "ultrawarm1.xlarge.search"
     #   resp.domain_config.cluster_config.options.warm_count #=> Integer
     #   resp.domain_config.cluster_config.options.cold_storage_options.enabled #=> Boolean
+    #   resp.domain_config.cluster_config.options.multi_az_with_standby_enabled #=> Boolean
     #   resp.domain_config.cluster_config.status.creation_date #=> Time
     #   resp.domain_config.cluster_config.status.update_date #=> Time
     #   resp.domain_config.cluster_config.status.update_version #=> Integer
@@ -4005,7 +4120,7 @@ module Aws::OpenSearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

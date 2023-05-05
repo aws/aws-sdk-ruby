@@ -204,6 +204,7 @@ module Aws::ResilienceHub
     ResourceMappingType = Shapes::StringShape.new(name: 'ResourceMappingType')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceResolutionStatusType = Shapes::StringShape.new(name: 'ResourceResolutionStatusType')
+    ResourceSourceType = Shapes::StringShape.new(name: 'ResourceSourceType')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     RetryAfterSeconds = Shapes::IntegerShape.new(name: 'RetryAfterSeconds')
     S3Location = Shapes::StructureShape.new(name: 'S3Location')
@@ -451,7 +452,7 @@ module Aws::ResilienceHub
     CreateAppVersionResourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateAppVersionResourceRequest.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, required: true, location_name: "logicalResourceId"))
     CreateAppVersionResourceRequest.add_member(:physical_resource_id, Shapes::ShapeRef.new(shape: String2048, required: true, location_name: "physicalResourceId"))
-    CreateAppVersionResourceRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "resourceName"))
+    CreateAppVersionResourceRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "resourceName"))
     CreateAppVersionResourceRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "resourceType"))
     CreateAppVersionResourceRequest.struct_class = Types::CreateAppVersionResourceRequest
 
@@ -868,9 +869,11 @@ module Aws::ResilienceHub
     PhysicalResource.add_member(:app_components, Shapes::ShapeRef.new(shape: AppComponentList, location_name: "appComponents"))
     PhysicalResource.add_member(:excluded, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "excluded"))
     PhysicalResource.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, required: true, location_name: "logicalResourceId"))
+    PhysicalResource.add_member(:parent_resource_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "parentResourceName"))
     PhysicalResource.add_member(:physical_resource_id, Shapes::ShapeRef.new(shape: PhysicalResourceId, required: true, location_name: "physicalResourceId"))
     PhysicalResource.add_member(:resource_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "resourceName"))
     PhysicalResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "resourceType"))
+    PhysicalResource.add_member(:source_type, Shapes::ShapeRef.new(shape: ResourceSourceType, location_name: "sourceType"))
     PhysicalResource.struct_class = Types::PhysicalResource
 
     PhysicalResourceId.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: CustomerId, location_name: "awsAccountId"))

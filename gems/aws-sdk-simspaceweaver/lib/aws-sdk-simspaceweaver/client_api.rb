@@ -21,6 +21,8 @@ module Aws::SimSpaceWeaver
     ClockTargetStatus = Shapes::StringShape.new(name: 'ClockTargetStatus')
     CloudWatchLogsLogGroup = Shapes::StructureShape.new(name: 'CloudWatchLogsLogGroup')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CreateSnapshotInput = Shapes::StructureShape.new(name: 'CreateSnapshotInput')
+    CreateSnapshotOutput = Shapes::StructureShape.new(name: 'CreateSnapshotOutput')
     DeleteAppInput = Shapes::StructureShape.new(name: 'DeleteAppInput')
     DeleteAppOutput = Shapes::StructureShape.new(name: 'DeleteAppOutput')
     DeleteSimulationInput = Shapes::StructureShape.new(name: 'DeleteSimulationInput')
@@ -49,14 +51,17 @@ module Aws::SimSpaceWeaver
     LoggingConfiguration = Shapes::StructureShape.new(name: 'LoggingConfiguration')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     ObjectKey = Shapes::StringShape.new(name: 'ObjectKey')
+    ObjectKeyPrefix = Shapes::StringShape.new(name: 'ObjectKeyPrefix')
     OptionalString = Shapes::StringShape.new(name: 'OptionalString')
     PortNumber = Shapes::IntegerShape.new(name: 'PortNumber')
     PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    S3Destination = Shapes::StructureShape.new(name: 'S3Destination')
     S3Location = Shapes::StructureShape.new(name: 'S3Location')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SimSpaceWeaverArn = Shapes::StringShape.new(name: 'SimSpaceWeaverArn')
+    SimSpaceWeaverLongResourceName = Shapes::StringShape.new(name: 'SimSpaceWeaverLongResourceName')
     SimSpaceWeaverResourceName = Shapes::StringShape.new(name: 'SimSpaceWeaverResourceName')
     SimulationAppEndpointInfo = Shapes::StructureShape.new(name: 'SimulationAppEndpointInfo')
     SimulationAppList = Shapes::ListShape.new(name: 'SimulationAppList')
@@ -107,6 +112,12 @@ module Aws::SimSpaceWeaver
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
+    CreateSnapshotInput.add_member(:destination, Shapes::ShapeRef.new(shape: S3Destination, required: true, location_name: "Destination"))
+    CreateSnapshotInput.add_member(:simulation, Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, required: true, location_name: "Simulation"))
+    CreateSnapshotInput.struct_class = Types::CreateSnapshotInput
+
+    CreateSnapshotOutput.struct_class = Types::CreateSnapshotOutput
+
     DeleteAppInput.add_member(:app, Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, required: true, location: "querystring", location_name: "app"))
     DeleteAppInput.add_member(:domain, Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, required: true, location: "querystring", location_name: "domain"))
     DeleteAppInput.add_member(:simulation, Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, required: true, location: "querystring", location_name: "simulation"))
@@ -119,7 +130,7 @@ module Aws::SimSpaceWeaver
 
     DeleteSimulationOutput.struct_class = Types::DeleteSimulationOutput
 
-    DescribeAppInput.add_member(:app, Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, required: true, location: "querystring", location_name: "app"))
+    DescribeAppInput.add_member(:app, Shapes::ShapeRef.new(shape: SimSpaceWeaverLongResourceName, required: true, location: "querystring", location_name: "app"))
     DescribeAppInput.add_member(:domain, Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, required: true, location: "querystring", location_name: "domain"))
     DescribeAppInput.add_member(:simulation, Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, required: true, location: "querystring", location_name: "simulation"))
     DescribeAppInput.struct_class = Types::DescribeAppInput
@@ -128,7 +139,7 @@ module Aws::SimSpaceWeaver
     DescribeAppOutput.add_member(:domain, Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Domain"))
     DescribeAppOutput.add_member(:endpoint_info, Shapes::ShapeRef.new(shape: SimulationAppEndpointInfo, location_name: "EndpointInfo"))
     DescribeAppOutput.add_member(:launch_overrides, Shapes::ShapeRef.new(shape: LaunchOverrides, location_name: "LaunchOverrides"))
-    DescribeAppOutput.add_member(:name, Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Name"))
+    DescribeAppOutput.add_member(:name, Shapes::ShapeRef.new(shape: SimSpaceWeaverLongResourceName, location_name: "Name"))
     DescribeAppOutput.add_member(:simulation, Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Simulation"))
     DescribeAppOutput.add_member(:status, Shapes::ShapeRef.new(shape: SimulationAppStatus, location_name: "Status"))
     DescribeAppOutput.add_member(:target_status, Shapes::ShapeRef.new(shape: SimulationAppTargetStatus, location_name: "TargetStatus"))
@@ -146,8 +157,10 @@ module Aws::SimSpaceWeaver
     DescribeSimulationOutput.add_member(:maximum_duration, Shapes::ShapeRef.new(shape: TimeToLiveString, location_name: "MaximumDuration"))
     DescribeSimulationOutput.add_member(:name, Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Name"))
     DescribeSimulationOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
-    DescribeSimulationOutput.add_member(:schema_error, Shapes::ShapeRef.new(shape: OptionalString, location_name: "SchemaError"))
+    DescribeSimulationOutput.add_member(:schema_error, Shapes::ShapeRef.new(shape: OptionalString, deprecated: true, location_name: "SchemaError", metadata: {"deprecatedMessage"=>"SchemaError is no longer used, check StartError instead."}))
     DescribeSimulationOutput.add_member(:schema_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "SchemaS3Location"))
+    DescribeSimulationOutput.add_member(:snapshot_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "SnapshotS3Location"))
+    DescribeSimulationOutput.add_member(:start_error, Shapes::ShapeRef.new(shape: OptionalString, location_name: "StartError"))
     DescribeSimulationOutput.add_member(:status, Shapes::ShapeRef.new(shape: SimulationStatus, location_name: "Status"))
     DescribeSimulationOutput.add_member(:target_status, Shapes::ShapeRef.new(shape: SimulationTargetStatus, location_name: "TargetStatus"))
     DescribeSimulationOutput.struct_class = Types::DescribeSimulationOutput
@@ -205,6 +218,10 @@ module Aws::SimSpaceWeaver
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    S3Destination.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, location_name: "BucketName"))
+    S3Destination.add_member(:object_key_prefix, Shapes::ShapeRef.new(shape: ObjectKeyPrefix, location_name: "ObjectKeyPrefix"))
+    S3Destination.struct_class = Types::S3Destination
+
     S3Location.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, location_name: "BucketName"))
     S3Location.add_member(:object_key, Shapes::ShapeRef.new(shape: ObjectKey, location_name: "ObjectKey"))
     S3Location.struct_class = Types::S3Location
@@ -219,7 +236,7 @@ module Aws::SimSpaceWeaver
     SimulationAppList.member = Shapes::ShapeRef.new(shape: SimulationAppMetadata)
 
     SimulationAppMetadata.add_member(:domain, Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Domain"))
-    SimulationAppMetadata.add_member(:name, Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Name"))
+    SimulationAppMetadata.add_member(:name, Shapes::ShapeRef.new(shape: SimSpaceWeaverLongResourceName, location_name: "Name"))
     SimulationAppMetadata.add_member(:simulation, Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, location_name: "Simulation"))
     SimulationAppMetadata.add_member(:status, Shapes::ShapeRef.new(shape: SimulationAppStatus, location_name: "Status"))
     SimulationAppMetadata.add_member(:target_status, Shapes::ShapeRef.new(shape: SimulationAppTargetStatus, location_name: "TargetStatus"))
@@ -267,7 +284,8 @@ module Aws::SimSpaceWeaver
     StartSimulationInput.add_member(:maximum_duration, Shapes::ShapeRef.new(shape: TimeToLiveString, location_name: "MaximumDuration"))
     StartSimulationInput.add_member(:name, Shapes::ShapeRef.new(shape: SimSpaceWeaverResourceName, required: true, location_name: "Name"))
     StartSimulationInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
-    StartSimulationInput.add_member(:schema_s3_location, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "SchemaS3Location"))
+    StartSimulationInput.add_member(:schema_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "SchemaS3Location"))
+    StartSimulationInput.add_member(:snapshot_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "SnapshotS3Location"))
     StartSimulationInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     StartSimulationInput.struct_class = Types::StartSimulationInput
 
@@ -333,6 +351,19 @@ module Aws::SimSpaceWeaver
         "signingName" => "simspaceweaver",
         "uid" => "simspaceweaver-2022-10-28",
       }
+
+      api.add_operation(:create_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/createsnapshot"
+        o.input = Shapes::ShapeRef.new(shape: CreateSnapshotInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateSnapshotOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
 
       api.add_operation(:delete_app, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteApp"

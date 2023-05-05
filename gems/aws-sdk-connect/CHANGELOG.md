@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2023-05-04)
+------------------
+
+* Feature - Remove unused InvalidParameterException from CreateParticipant API
+
+1.104.0 (2023-05-02)
+------------------
+
+* Feature - Amazon Connect Service Rules API update: Added OnContactEvaluationSubmit event source to support user configuring evaluation form rules.
+
 1.103.0 (2023-04-25)
 ------------------
 

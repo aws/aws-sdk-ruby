@@ -812,6 +812,7 @@ module Aws::WellArchitected
     #     },
     #     discovery_config: {
     #       trusted_advisor_integration_status: "ENABLED", # accepts ENABLED, DISABLED
+    #       workload_resource_definition: ["WORKLOAD_METADATA"], # accepts WORKLOAD_METADATA, APP_REGISTRY
     #     },
     #     applications: ["ApplicationArn"],
     #   })
@@ -1699,6 +1700,8 @@ module Aws::WellArchitected
     #   resp.milestone.workload.tags #=> Hash
     #   resp.milestone.workload.tags["TagKey"] #=> String
     #   resp.milestone.workload.discovery_config.trusted_advisor_integration_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.milestone.workload.discovery_config.workload_resource_definition #=> Array
+    #   resp.milestone.workload.discovery_config.workload_resource_definition[0] #=> String, one of "WORKLOAD_METADATA", "APP_REGISTRY"
     #   resp.milestone.workload.applications #=> Array
     #   resp.milestone.workload.applications[0] #=> String
     #
@@ -1760,6 +1763,8 @@ module Aws::WellArchitected
     #   resp.workload.tags #=> Hash
     #   resp.workload.tags["TagKey"] #=> String
     #   resp.workload.discovery_config.trusted_advisor_integration_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.workload.discovery_config.workload_resource_definition #=> Array
+    #   resp.workload.discovery_config.workload_resource_definition[0] #=> String, one of "WORKLOAD_METADATA", "APP_REGISTRY"
     #   resp.workload.applications #=> Array
     #   resp.workload.applications[0] #=> String
     #
@@ -2870,10 +2875,13 @@ module Aws::WellArchitected
     end
 
     # Updates whether the Amazon Web Services account is opted into
-    # organization sharing features.
+    # organization sharing and discovery integration features.
     #
     # @option params [String] :organization_sharing_status
     #   The status of organization sharing settings.
+    #
+    # @option params [String] :discovery_integration_status
+    #   The status of discovery support settings.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2881,6 +2889,7 @@ module Aws::WellArchitected
     #
     #   resp = client.update_global_settings({
     #     organization_sharing_status: "ENABLED", # accepts ENABLED, DISABLED
+    #     discovery_integration_status: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateGlobalSettings AWS API Documentation
@@ -3155,6 +3164,7 @@ module Aws::WellArchitected
     #     improvement_status: "NOT_APPLICABLE", # accepts NOT_APPLICABLE, NOT_STARTED, IN_PROGRESS, COMPLETE, RISK_ACKNOWLEDGED
     #     discovery_config: {
     #       trusted_advisor_integration_status: "ENABLED", # accepts ENABLED, DISABLED
+    #       workload_resource_definition: ["WORKLOAD_METADATA"], # accepts WORKLOAD_METADATA, APP_REGISTRY
     #     },
     #     applications: ["ApplicationArn"],
     #   })
@@ -3192,6 +3202,8 @@ module Aws::WellArchitected
     #   resp.workload.tags #=> Hash
     #   resp.workload.tags["TagKey"] #=> String
     #   resp.workload.discovery_config.trusted_advisor_integration_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.workload.discovery_config.workload_resource_definition #=> Array
+    #   resp.workload.discovery_config.workload_resource_definition[0] #=> String, one of "WORKLOAD_METADATA", "APP_REGISTRY"
     #   resp.workload.applications #=> Array
     #   resp.workload.applications[0] #=> String
     #
@@ -3321,7 +3333,7 @@ module Aws::WellArchitected
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wellarchitected'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

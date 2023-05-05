@@ -3680,10 +3680,15 @@ module Aws::WellArchitected
     #   The status of organization sharing settings.
     #   @return [String]
     #
+    # @!attribute [rw] discovery_integration_status
+    #   The status of discovery support settings.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateGlobalSettingsInput AWS API Documentation
     #
     class UpdateGlobalSettingsInput < Struct.new(
-      :organization_sharing_status)
+      :organization_sharing_status,
+      :discovery_integration_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4333,10 +4338,18 @@ module Aws::WellArchitected
     #   workload.
     #   @return [String]
     #
+    # @!attribute [rw] workload_resource_definition
+    #   The mode to use for identifying resources associated with the
+    #   workload.
+    #
+    #   You can specify `WORKLOAD_METADATA`, `APP_REGISTRY`, or both.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/WorkloadDiscoveryConfig AWS API Documentation
     #
     class WorkloadDiscoveryConfig < Struct.new(
-      :trusted_advisor_integration_status)
+      :trusted_advisor_integration_status,
+      :workload_resource_definition)
       SENSITIVE = []
       include Aws::Structure
     end

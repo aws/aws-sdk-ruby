@@ -52,6 +52,10 @@ module Aws::Inspector2
     BatchGetFreeTrialInfoRequest = Shapes::StructureShape.new(name: 'BatchGetFreeTrialInfoRequest')
     BatchGetFreeTrialInfoRequestAccountIdsList = Shapes::ListShape.new(name: 'BatchGetFreeTrialInfoRequestAccountIdsList')
     BatchGetFreeTrialInfoResponse = Shapes::StructureShape.new(name: 'BatchGetFreeTrialInfoResponse')
+    BatchGetMemberEc2DeepInspectionStatusRequest = Shapes::StructureShape.new(name: 'BatchGetMemberEc2DeepInspectionStatusRequest')
+    BatchGetMemberEc2DeepInspectionStatusResponse = Shapes::StructureShape.new(name: 'BatchGetMemberEc2DeepInspectionStatusResponse')
+    BatchUpdateMemberEc2DeepInspectionStatusRequest = Shapes::StructureShape.new(name: 'BatchUpdateMemberEc2DeepInspectionStatusRequest')
+    BatchUpdateMemberEc2DeepInspectionStatusResponse = Shapes::StructureShape.new(name: 'BatchUpdateMemberEc2DeepInspectionStatusResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelFindingsReportRequest = Shapes::StructureShape.new(name: 'CancelFindingsReportRequest')
     CancelFindingsReportResponse = Shapes::StructureShape.new(name: 'CancelFindingsReportResponse')
@@ -102,6 +106,7 @@ module Aws::Inspector2
     DisassociateMemberRequest = Shapes::StructureShape.new(name: 'DisassociateMemberRequest')
     DisassociateMemberResponse = Shapes::StructureShape.new(name: 'DisassociateMemberResponse')
     Double = Shapes::FloatShape.new(name: 'Double')
+    Ec2DeepInspectionStatus = Shapes::StringShape.new(name: 'Ec2DeepInspectionStatus')
     Ec2InstanceAggregation = Shapes::StructureShape.new(name: 'Ec2InstanceAggregation')
     Ec2InstanceAggregationResponse = Shapes::StructureShape.new(name: 'Ec2InstanceAggregationResponse')
     Ec2InstanceSortBy = Shapes::StringShape.new(name: 'Ec2InstanceSortBy')
@@ -128,6 +133,8 @@ module Aws::Inspector2
     ExternalReportStatus = Shapes::StringShape.new(name: 'ExternalReportStatus')
     FailedAccount = Shapes::StructureShape.new(name: 'FailedAccount')
     FailedAccountList = Shapes::ListShape.new(name: 'FailedAccountList')
+    FailedMemberAccountEc2DeepInspectionStatusState = Shapes::StructureShape.new(name: 'FailedMemberAccountEc2DeepInspectionStatusState')
+    FailedMemberAccountEc2DeepInspectionStatusStateList = Shapes::ListShape.new(name: 'FailedMemberAccountEc2DeepInspectionStatusStateList')
     FilePath = Shapes::StringShape.new(name: 'FilePath')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterAction = Shapes::StringShape.new(name: 'FilterAction')
@@ -163,6 +170,8 @@ module Aws::Inspector2
     GetConfigurationResponse = Shapes::StructureShape.new(name: 'GetConfigurationResponse')
     GetDelegatedAdminAccountRequest = Shapes::StructureShape.new(name: 'GetDelegatedAdminAccountRequest')
     GetDelegatedAdminAccountResponse = Shapes::StructureShape.new(name: 'GetDelegatedAdminAccountResponse')
+    GetEc2DeepInspectionConfigurationRequest = Shapes::StructureShape.new(name: 'GetEc2DeepInspectionConfigurationRequest')
+    GetEc2DeepInspectionConfigurationResponse = Shapes::StructureShape.new(name: 'GetEc2DeepInspectionConfigurationResponse')
     GetFindingsReportStatusRequest = Shapes::StructureShape.new(name: 'GetFindingsReportStatusRequest')
     GetFindingsReportStatusResponse = Shapes::StructureShape.new(name: 'GetFindingsReportStatusResponse')
     GetMemberRequest = Shapes::StructureShape.new(name: 'GetMemberRequest')
@@ -227,6 +236,10 @@ module Aws::Inspector2
     MapKey = Shapes::StringShape.new(name: 'MapKey')
     MapValue = Shapes::StringShape.new(name: 'MapValue')
     Member = Shapes::StructureShape.new(name: 'Member')
+    MemberAccountEc2DeepInspectionStatus = Shapes::StructureShape.new(name: 'MemberAccountEc2DeepInspectionStatus')
+    MemberAccountEc2DeepInspectionStatusList = Shapes::ListShape.new(name: 'MemberAccountEc2DeepInspectionStatusList')
+    MemberAccountEc2DeepInspectionStatusState = Shapes::StructureShape.new(name: 'MemberAccountEc2DeepInspectionStatusState')
+    MemberAccountEc2DeepInspectionStatusStateList = Shapes::ListShape.new(name: 'MemberAccountEc2DeepInspectionStatusStateList')
     MemberList = Shapes::ListShape.new(name: 'MemberList')
     MeteringAccountId = Shapes::StringShape.new(name: 'MeteringAccountId')
     MonthlyCostEstimate = Shapes::FloatShape.new(name: 'MonthlyCostEstimate')
@@ -253,6 +266,8 @@ module Aws::Inspector2
     PackageType = Shapes::StringShape.new(name: 'PackageType')
     PackageVersion = Shapes::StringShape.new(name: 'PackageVersion')
     PackageVulnerabilityDetails = Shapes::StructureShape.new(name: 'PackageVulnerabilityDetails')
+    Path = Shapes::StringShape.new(name: 'Path')
+    PathList = Shapes::ListShape.new(name: 'PathList')
     Permission = Shapes::StructureShape.new(name: 'Permission')
     Permissions = Shapes::ListShape.new(name: 'Permissions')
     Platform = Shapes::StringShape.new(name: 'Platform')
@@ -321,8 +336,12 @@ module Aws::Inspector2
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateConfigurationRequest')
     UpdateConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateConfigurationResponse')
+    UpdateEc2DeepInspectionConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateEc2DeepInspectionConfigurationRequest')
+    UpdateEc2DeepInspectionConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateEc2DeepInspectionConfigurationResponse')
     UpdateFilterRequest = Shapes::StructureShape.new(name: 'UpdateFilterRequest')
     UpdateFilterResponse = Shapes::StructureShape.new(name: 'UpdateFilterResponse')
+    UpdateOrgEc2DeepInspectionConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateOrgEc2DeepInspectionConfigurationRequest')
+    UpdateOrgEc2DeepInspectionConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateOrgEc2DeepInspectionConfigurationResponse')
     UpdateOrganizationConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateOrganizationConfigurationRequest')
     UpdateOrganizationConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateOrganizationConfigurationResponse')
     Usage = Shapes::StructureShape.new(name: 'Usage')
@@ -522,6 +541,20 @@ module Aws::Inspector2
     BatchGetFreeTrialInfoResponse.add_member(:accounts, Shapes::ShapeRef.new(shape: FreeTrialAccountInfoList, required: true, location_name: "accounts"))
     BatchGetFreeTrialInfoResponse.add_member(:failed_accounts, Shapes::ShapeRef.new(shape: FreeTrialInfoErrorList, required: true, location_name: "failedAccounts"))
     BatchGetFreeTrialInfoResponse.struct_class = Types::BatchGetFreeTrialInfoResponse
+
+    BatchGetMemberEc2DeepInspectionStatusRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdSet, location_name: "accountIds"))
+    BatchGetMemberEc2DeepInspectionStatusRequest.struct_class = Types::BatchGetMemberEc2DeepInspectionStatusRequest
+
+    BatchGetMemberEc2DeepInspectionStatusResponse.add_member(:account_ids, Shapes::ShapeRef.new(shape: MemberAccountEc2DeepInspectionStatusStateList, location_name: "accountIds"))
+    BatchGetMemberEc2DeepInspectionStatusResponse.add_member(:failed_account_ids, Shapes::ShapeRef.new(shape: FailedMemberAccountEc2DeepInspectionStatusStateList, location_name: "failedAccountIds"))
+    BatchGetMemberEc2DeepInspectionStatusResponse.struct_class = Types::BatchGetMemberEc2DeepInspectionStatusResponse
+
+    BatchUpdateMemberEc2DeepInspectionStatusRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: MemberAccountEc2DeepInspectionStatusList, required: true, location_name: "accountIds"))
+    BatchUpdateMemberEc2DeepInspectionStatusRequest.struct_class = Types::BatchUpdateMemberEc2DeepInspectionStatusRequest
+
+    BatchUpdateMemberEc2DeepInspectionStatusResponse.add_member(:account_ids, Shapes::ShapeRef.new(shape: MemberAccountEc2DeepInspectionStatusStateList, location_name: "accountIds"))
+    BatchUpdateMemberEc2DeepInspectionStatusResponse.add_member(:failed_account_ids, Shapes::ShapeRef.new(shape: FailedMemberAccountEc2DeepInspectionStatusStateList, location_name: "failedAccountIds"))
+    BatchUpdateMemberEc2DeepInspectionStatusResponse.struct_class = Types::BatchUpdateMemberEc2DeepInspectionStatusResponse
 
     CancelFindingsReportRequest.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, required: true, location_name: "reportId"))
     CancelFindingsReportRequest.struct_class = Types::CancelFindingsReportRequest
@@ -743,6 +776,13 @@ module Aws::Inspector2
 
     FailedAccountList.member = Shapes::ShapeRef.new(shape: FailedAccount)
 
+    FailedMemberAccountEc2DeepInspectionStatusState.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    FailedMemberAccountEc2DeepInspectionStatusState.add_member(:ec2_scan_status, Shapes::ShapeRef.new(shape: Status, location_name: "ec2ScanStatus"))
+    FailedMemberAccountEc2DeepInspectionStatusState.add_member(:error_message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "errorMessage"))
+    FailedMemberAccountEc2DeepInspectionStatusState.struct_class = Types::FailedMemberAccountEc2DeepInspectionStatusState
+
+    FailedMemberAccountEc2DeepInspectionStatusStateList.member = Shapes::ShapeRef.new(shape: FailedMemberAccountEc2DeepInspectionStatusState)
+
     Filter.add_member(:action, Shapes::ShapeRef.new(shape: FilterAction, required: true, location_name: "action"))
     Filter.add_member(:arn, Shapes::ShapeRef.new(shape: FilterArn, required: true, location_name: "arn"))
     Filter.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimeTimestamp, required: true, location_name: "createdAt"))
@@ -862,6 +902,14 @@ module Aws::Inspector2
 
     GetDelegatedAdminAccountResponse.add_member(:delegated_admin, Shapes::ShapeRef.new(shape: DelegatedAdmin, location_name: "delegatedAdmin"))
     GetDelegatedAdminAccountResponse.struct_class = Types::GetDelegatedAdminAccountResponse
+
+    GetEc2DeepInspectionConfigurationRequest.struct_class = Types::GetEc2DeepInspectionConfigurationRequest
+
+    GetEc2DeepInspectionConfigurationResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "errorMessage"))
+    GetEc2DeepInspectionConfigurationResponse.add_member(:org_package_paths, Shapes::ShapeRef.new(shape: PathList, location_name: "orgPackagePaths"))
+    GetEc2DeepInspectionConfigurationResponse.add_member(:package_paths, Shapes::ShapeRef.new(shape: PathList, location_name: "packagePaths"))
+    GetEc2DeepInspectionConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: Ec2DeepInspectionStatus, location_name: "status"))
+    GetEc2DeepInspectionConfigurationResponse.struct_class = Types::GetEc2DeepInspectionConfigurationResponse
 
     GetFindingsReportStatusRequest.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, location_name: "reportId"))
     GetFindingsReportStatusRequest.struct_class = Types::GetFindingsReportStatusRequest
@@ -1058,6 +1106,19 @@ module Aws::Inspector2
     Member.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "updatedAt"))
     Member.struct_class = Types::Member
 
+    MemberAccountEc2DeepInspectionStatus.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    MemberAccountEc2DeepInspectionStatus.add_member(:activate_deep_inspection, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "activateDeepInspection"))
+    MemberAccountEc2DeepInspectionStatus.struct_class = Types::MemberAccountEc2DeepInspectionStatus
+
+    MemberAccountEc2DeepInspectionStatusList.member = Shapes::ShapeRef.new(shape: MemberAccountEc2DeepInspectionStatus)
+
+    MemberAccountEc2DeepInspectionStatusState.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    MemberAccountEc2DeepInspectionStatusState.add_member(:error_message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "errorMessage"))
+    MemberAccountEc2DeepInspectionStatusState.add_member(:status, Shapes::ShapeRef.new(shape: Ec2DeepInspectionStatus, location_name: "status"))
+    MemberAccountEc2DeepInspectionStatusState.struct_class = Types::MemberAccountEc2DeepInspectionStatusState
+
+    MemberAccountEc2DeepInspectionStatusStateList.member = Shapes::ShapeRef.new(shape: MemberAccountEc2DeepInspectionStatusState)
+
     MemberList.member = Shapes::ShapeRef.new(shape: Member)
 
     NetworkPath.add_member(:steps, Shapes::ShapeRef.new(shape: StepList, location_name: "steps"))
@@ -1108,6 +1169,8 @@ module Aws::Inspector2
     PackageVulnerabilityDetails.add_member(:vulnerability_id, Shapes::ShapeRef.new(shape: VulnerabilityId, required: true, location_name: "vulnerabilityId"))
     PackageVulnerabilityDetails.add_member(:vulnerable_packages, Shapes::ShapeRef.new(shape: VulnerablePackageList, location_name: "vulnerablePackages"))
     PackageVulnerabilityDetails.struct_class = Types::PackageVulnerabilityDetails
+
+    PathList.member = Shapes::ShapeRef.new(shape: Path)
 
     Permission.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, required: true, location_name: "operation"))
     Permission.add_member(:service, Shapes::ShapeRef.new(shape: Service, required: true, location_name: "service"))
@@ -1259,6 +1322,16 @@ module Aws::Inspector2
 
     UpdateConfigurationResponse.struct_class = Types::UpdateConfigurationResponse
 
+    UpdateEc2DeepInspectionConfigurationRequest.add_member(:activate_deep_inspection, Shapes::ShapeRef.new(shape: Boolean, location_name: "activateDeepInspection"))
+    UpdateEc2DeepInspectionConfigurationRequest.add_member(:package_paths, Shapes::ShapeRef.new(shape: PathList, location_name: "packagePaths"))
+    UpdateEc2DeepInspectionConfigurationRequest.struct_class = Types::UpdateEc2DeepInspectionConfigurationRequest
+
+    UpdateEc2DeepInspectionConfigurationResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "errorMessage"))
+    UpdateEc2DeepInspectionConfigurationResponse.add_member(:org_package_paths, Shapes::ShapeRef.new(shape: PathList, location_name: "orgPackagePaths"))
+    UpdateEc2DeepInspectionConfigurationResponse.add_member(:package_paths, Shapes::ShapeRef.new(shape: PathList, location_name: "packagePaths"))
+    UpdateEc2DeepInspectionConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: Ec2DeepInspectionStatus, location_name: "status"))
+    UpdateEc2DeepInspectionConfigurationResponse.struct_class = Types::UpdateEc2DeepInspectionConfigurationResponse
+
     UpdateFilterRequest.add_member(:action, Shapes::ShapeRef.new(shape: FilterAction, location_name: "action"))
     UpdateFilterRequest.add_member(:description, Shapes::ShapeRef.new(shape: FilterDescription, location_name: "description"))
     UpdateFilterRequest.add_member(:filter_arn, Shapes::ShapeRef.new(shape: FilterArn, required: true, location_name: "filterArn"))
@@ -1269,6 +1342,11 @@ module Aws::Inspector2
 
     UpdateFilterResponse.add_member(:arn, Shapes::ShapeRef.new(shape: FilterArn, required: true, location_name: "arn"))
     UpdateFilterResponse.struct_class = Types::UpdateFilterResponse
+
+    UpdateOrgEc2DeepInspectionConfigurationRequest.add_member(:org_package_paths, Shapes::ShapeRef.new(shape: PathList, required: true, location_name: "orgPackagePaths"))
+    UpdateOrgEc2DeepInspectionConfigurationRequest.struct_class = Types::UpdateOrgEc2DeepInspectionConfigurationRequest
+
+    UpdateOrgEc2DeepInspectionConfigurationResponse.struct_class = Types::UpdateOrgEc2DeepInspectionConfigurationResponse
 
     UpdateOrganizationConfigurationRequest.add_member(:auto_enable, Shapes::ShapeRef.new(shape: AutoEnable, required: true, location_name: "autoEnable"))
     UpdateOrganizationConfigurationRequest.struct_class = Types::UpdateOrganizationConfigurationRequest
@@ -1370,6 +1448,30 @@ module Aws::Inspector2
         o.http_request_uri = "/freetrialinfo/batchget"
         o.input = Shapes::ShapeRef.new(shape: BatchGetFreeTrialInfoRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchGetFreeTrialInfoResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:batch_get_member_ec2_deep_inspection_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetMemberEc2DeepInspectionStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/ec2deepinspectionstatus/member/batch/get"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetMemberEc2DeepInspectionStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetMemberEc2DeepInspectionStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:batch_update_member_ec2_deep_inspection_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchUpdateMemberEc2DeepInspectionStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/ec2deepinspectionstatus/member/batch/update"
+        o.input = Shapes::ShapeRef.new(shape: BatchUpdateMemberEc2DeepInspectionStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchUpdateMemberEc2DeepInspectionStatusResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1526,6 +1628,18 @@ module Aws::Inspector2
         o.output = Shapes::ShapeRef.new(shape: GetDelegatedAdminAccountResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_ec2_deep_inspection_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEc2DeepInspectionConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/ec2deepinspectionconfiguration/get"
+        o.input = Shapes::ShapeRef.new(shape: GetEc2DeepInspectionConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEc2DeepInspectionConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1763,6 +1877,18 @@ module Aws::Inspector2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:update_ec2_deep_inspection_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateEc2DeepInspectionConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/ec2deepinspectionconfiguration/update"
+        o.input = Shapes::ShapeRef.new(shape: UpdateEc2DeepInspectionConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateEc2DeepInspectionConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:update_filter, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateFilter"
         o.http_method = "POST"
@@ -1772,6 +1898,18 @@ module Aws::Inspector2
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_org_ec2_deep_inspection_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateOrgEc2DeepInspectionConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/ec2deepinspectionconfiguration/org/update"
+        o.input = Shapes::ShapeRef.new(shape: UpdateOrgEc2DeepInspectionConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateOrgEc2DeepInspectionConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)

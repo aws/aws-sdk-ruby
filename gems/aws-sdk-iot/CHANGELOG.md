@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2023-04-28)
+------------------
+
+* Feature - This release allows AWS IoT Core users to specify a TLS security policy when creating and updating AWS IoT Domain Configurations.
+
 1.103.0 (2023-04-20)
 ------------------
 

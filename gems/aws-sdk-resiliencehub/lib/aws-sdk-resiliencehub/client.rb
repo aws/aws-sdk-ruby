@@ -447,10 +447,12 @@ module Aws::ResilienceHub
 
     # Creates an Resilience Hub application. An Resilience Hub application
     # is a collection of Amazon Web Services resources structured to prevent
-    # and recover Amazon Web Services application disruptions. To describe a
-    # Resilience Hub application, you provide an application name, resources
-    # from one or more–up to 20–CloudFormation stacks, and an appropriate
-    # resiliency policy.
+    # and recover Amazon Web Services application disruptions. To describe
+    # an Resilience Hub application, you provide an application name,
+    # resources from one or more CloudFormation stacks, Resource Groups,
+    # Terraform state files, AppRegistry applications, and an appropriate
+    # resiliency policy. For more information about the number of resources
+    # supported per application, see [Service Quotas][1].
     #
     # After you create an Resilience Hub application, you publish it so that
     # you can run a resiliency assessment on it. You can then use
@@ -458,6 +460,10 @@ module Aws::ResilienceHub
     # another assessment, comparing results, and then iterating the process
     # until you achieve your goals for recovery time objective (RTO) and
     # recovery point objective (RPO).
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/resiliencehub.html#limits_resiliencehub
     #
     # @option params [String] :assessment_schedule
     #   Assessment execution schedule with 'Daily' or 'Disabled' values.
@@ -675,7 +681,7 @@ module Aws::ResilienceHub
     # @option params [required, String] :physical_resource_id
     #   The physical identifier of the resource.
     #
-    # @option params [required, String] :resource_name
+    # @option params [String] :resource_name
     #   The name of the resource.
     #
     # @option params [required, String] :resource_type
@@ -706,7 +712,7 @@ module Aws::ResilienceHub
     #       terraform_source_name: "String255",
     #     },
     #     physical_resource_id: "String2048", # required
-    #     resource_name: "EntityName", # required
+    #     resource_name: "EntityName",
     #     resource_type: "String255", # required
     #   })
     #
@@ -730,12 +736,14 @@ module Aws::ResilienceHub
     #   resp.physical_resource.logical_resource_id.logical_stack_name #=> String
     #   resp.physical_resource.logical_resource_id.resource_group_name #=> String
     #   resp.physical_resource.logical_resource_id.terraform_source_name #=> String
+    #   resp.physical_resource.parent_resource_name #=> String
     #   resp.physical_resource.physical_resource_id.aws_account_id #=> String
     #   resp.physical_resource.physical_resource_id.aws_region #=> String
     #   resp.physical_resource.physical_resource_id.identifier #=> String
     #   resp.physical_resource.physical_resource_id.type #=> String, one of "Arn", "Native"
     #   resp.physical_resource.resource_name #=> String
     #   resp.physical_resource.resource_type #=> String
+    #   resp.physical_resource.source_type #=> String, one of "AppTemplate", "Discovered"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/CreateAppVersionResource AWS API Documentation
     #
@@ -1280,12 +1288,14 @@ module Aws::ResilienceHub
     #   resp.physical_resource.logical_resource_id.logical_stack_name #=> String
     #   resp.physical_resource.logical_resource_id.resource_group_name #=> String
     #   resp.physical_resource.logical_resource_id.terraform_source_name #=> String
+    #   resp.physical_resource.parent_resource_name #=> String
     #   resp.physical_resource.physical_resource_id.aws_account_id #=> String
     #   resp.physical_resource.physical_resource_id.aws_region #=> String
     #   resp.physical_resource.physical_resource_id.identifier #=> String
     #   resp.physical_resource.physical_resource_id.type #=> String, one of "Arn", "Native"
     #   resp.physical_resource.resource_name #=> String
     #   resp.physical_resource.resource_type #=> String
+    #   resp.physical_resource.source_type #=> String, one of "AppTemplate", "Discovered"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/DeleteAppVersionResource AWS API Documentation
     #
@@ -1697,12 +1707,14 @@ module Aws::ResilienceHub
     #   resp.physical_resource.logical_resource_id.logical_stack_name #=> String
     #   resp.physical_resource.logical_resource_id.resource_group_name #=> String
     #   resp.physical_resource.logical_resource_id.terraform_source_name #=> String
+    #   resp.physical_resource.parent_resource_name #=> String
     #   resp.physical_resource.physical_resource_id.aws_account_id #=> String
     #   resp.physical_resource.physical_resource_id.aws_region #=> String
     #   resp.physical_resource.physical_resource_id.identifier #=> String
     #   resp.physical_resource.physical_resource_id.type #=> String, one of "Arn", "Native"
     #   resp.physical_resource.resource_name #=> String
     #   resp.physical_resource.resource_type #=> String
+    #   resp.physical_resource.source_type #=> String, one of "AppTemplate", "Discovered"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/DescribeAppVersionResource AWS API Documentation
     #
@@ -2575,12 +2587,14 @@ module Aws::ResilienceHub
     #   resp.physical_resources[0].logical_resource_id.logical_stack_name #=> String
     #   resp.physical_resources[0].logical_resource_id.resource_group_name #=> String
     #   resp.physical_resources[0].logical_resource_id.terraform_source_name #=> String
+    #   resp.physical_resources[0].parent_resource_name #=> String
     #   resp.physical_resources[0].physical_resource_id.aws_account_id #=> String
     #   resp.physical_resources[0].physical_resource_id.aws_region #=> String
     #   resp.physical_resources[0].physical_resource_id.identifier #=> String
     #   resp.physical_resources[0].physical_resource_id.type #=> String, one of "Arn", "Native"
     #   resp.physical_resources[0].resource_name #=> String
     #   resp.physical_resources[0].resource_type #=> String
+    #   resp.physical_resources[0].source_type #=> String, one of "AppTemplate", "Discovered"
     #   resp.resolution_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/ListAppVersionResources AWS API Documentation
@@ -4078,12 +4092,14 @@ module Aws::ResilienceHub
     #   resp.physical_resource.logical_resource_id.logical_stack_name #=> String
     #   resp.physical_resource.logical_resource_id.resource_group_name #=> String
     #   resp.physical_resource.logical_resource_id.terraform_source_name #=> String
+    #   resp.physical_resource.parent_resource_name #=> String
     #   resp.physical_resource.physical_resource_id.aws_account_id #=> String
     #   resp.physical_resource.physical_resource_id.aws_region #=> String
     #   resp.physical_resource.physical_resource_id.identifier #=> String
     #   resp.physical_resource.physical_resource_id.type #=> String, one of "Arn", "Native"
     #   resp.physical_resource.resource_name #=> String
     #   resp.physical_resource.resource_type #=> String
+    #   resp.physical_resource.source_type #=> String, one of "AppTemplate", "Discovered"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/UpdateAppVersionResource AWS API Documentation
     #
@@ -4182,7 +4198,7 @@ module Aws::ResilienceHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resiliencehub'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

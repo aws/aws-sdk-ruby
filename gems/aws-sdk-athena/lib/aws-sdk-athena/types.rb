@@ -344,6 +344,142 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the capacity reservation to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CancelCapacityReservationInput AWS API Documentation
+    #
+    class CancelCapacityReservationInput < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CancelCapacityReservationOutput AWS API Documentation
+    #
+    class CancelCapacityReservationOutput < Aws::EmptyStructure; end
+
+    # Contains the submission time of a single allocation request for a
+    # capacity reservation and the most recent status of the attempted
+    # allocation.
+    #
+    # @!attribute [rw] status
+    #   The status of the capacity allocation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message of the capacity allocation.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_time
+    #   The time when the capacity allocation was requested.
+    #   @return [Time]
+    #
+    # @!attribute [rw] request_completion_time
+    #   The time when the capacity allocation request was completed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CapacityAllocation AWS API Documentation
+    #
+    class CapacityAllocation < Struct.new(
+      :status,
+      :status_message,
+      :request_time,
+      :request_completion_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A mapping between one or more workgroups and a capacity reservation.
+    #
+    # @!attribute [rw] work_group_names
+    #   The list of workgroup names for the capacity assignment.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CapacityAssignment AWS API Documentation
+    #
+    class CapacityAssignment < Struct.new(
+      :work_group_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Assigns Athena workgroups (and hence their queries) to capacity
+    # reservations. A capacity reservation can have only one capacity
+    # assignment configuration, but the capacity assignment configuration
+    # can be made up of multiple individual assignments. Each assignment
+    # specifies how Athena queries can consume capacity from the capacity
+    # reservation that their workgroup is mapped to.
+    #
+    # @!attribute [rw] capacity_reservation_name
+    #   The name of the reservation that the capacity assignment
+    #   configuration is for.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_assignments
+    #   The list of assignments that make up the capacity assignment
+    #   configuration.
+    #   @return [Array<Types::CapacityAssignment>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CapacityAssignmentConfiguration AWS API Documentation
+    #
+    class CapacityAssignmentConfiguration < Struct.new(
+      :capacity_reservation_name,
+      :capacity_assignments)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A reservation for a specified number of data processing units (DPUs).
+    # When a reservation is initially created, it has no DPUs. Athena
+    # allocates DPUs until the allocated amount equals the requested amount.
+    #
+    # @!attribute [rw] name
+    #   The name of the capacity reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the capacity reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_dpus
+    #   The number of data processing units requested.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] allocated_dpus
+    #   The number of data processing units currently allocated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_allocation
+    #   Contains the submission time of a single allocation request for a
+    #   capacity reservation and the most recent status of the attempted
+    #   allocation.
+    #   @return [Types::CapacityAllocation]
+    #
+    # @!attribute [rw] last_successful_allocation_time
+    #   The time of the most recent capacity allocation that succeeded.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time
+    #   The time in UTC epoch millis when the capacity reservation was
+    #   created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CapacityReservation AWS API Documentation
+    #
+    class CapacityReservation < Struct.new(
+      :name,
+      :status,
+      :target_dpus,
+      :allocated_dpus,
+      :last_allocation,
+      :last_successful_allocation_time,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains metadata for a column in a table.
     #
     # @!attribute [rw] name
@@ -428,6 +564,32 @@ module Aws::Athena
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] target_dpus
+    #   The number of requested data processing units.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   The name of the capacity reservation to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the capacity reservation.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateCapacityReservationInput AWS API Documentation
+    #
+    class CreateCapacityReservationInput < Struct.new(
+      :target_dpus,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateCapacityReservationOutput AWS API Documentation
+    #
+    class CreateCapacityReservationOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] name
     #   The name of the data catalog to create. The catalog name must be
@@ -1011,7 +1173,7 @@ module Aws::Athena
     # @!attribute [rw] coordinator_dpu_size
     #   The number of DPUs to use for the coordinator. A coordinator is a
     #   special executor that orchestrates processing work and manages other
-    #   executors in a notebook session.
+    #   executors in a notebook session. The default is 1.
     #   @return [Integer]
     #
     # @!attribute [rw] max_concurrent_dpus
@@ -1021,7 +1183,7 @@ module Aws::Athena
     # @!attribute [rw] default_executor_dpu_size
     #   The default number of DPUs to use for executors. An executor is the
     #   smallest unit of compute that a notebook session can request from
-    #   Athena.
+    #   Athena. The default is 1.
     #   @return [Integer]
     #
     # @!attribute [rw] additional_configs
@@ -1278,6 +1440,56 @@ module Aws::Athena
     class GetCalculationExecutionStatusResponse < Struct.new(
       :status,
       :statistics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_reservation_name
+    #   The name of the capacity reservation to retrieve the capacity
+    #   assignment configuration for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetCapacityAssignmentConfigurationInput AWS API Documentation
+    #
+    class GetCapacityAssignmentConfigurationInput < Struct.new(
+      :capacity_reservation_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_assignment_configuration
+    #   The requested capacity assignment configuration for the specified
+    #   capacity reservation.
+    #   @return [Types::CapacityAssignmentConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetCapacityAssignmentConfigurationOutput AWS API Documentation
+    #
+    class GetCapacityAssignmentConfigurationOutput < Struct.new(
+      :capacity_assignment_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the capacity reservation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetCapacityReservationInput AWS API Documentation
+    #
+    class GetCapacityReservationInput < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_reservation
+    #   The requested capacity reservation structure.
+    #   @return [Types::CapacityReservation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetCapacityReservationOutput AWS API Documentation
+    #
+    class GetCapacityReservationOutput < Struct.new(
+      :capacity_reservation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1856,6 +2068,44 @@ module Aws::Athena
     class ListCalculationExecutionsResponse < Struct.new(
       :next_token,
       :calculations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Specifies the maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListCapacityReservationsInput AWS API Documentation
+    #
+    class ListCapacityReservationsInput < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the NextToken from the response
+    #   object of the previous page call.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservations
+    #   The capacity reservations for the current account.
+    #   @return [Array<Types::CapacityReservation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListCapacityReservationsOutput AWS API Documentation
+    #
+    class ListCapacityReservationsOutput < Struct.new(
+      :next_token,
+      :capacity_reservations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2665,6 +2915,28 @@ module Aws::Athena
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] capacity_reservation_name
+    #   The name of the capacity reservation to put a capacity assignment
+    #   configuration for.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_assignments
+    #   The list of assignments for the capacity assignment configuration.
+    #   @return [Array<Types::CapacityAssignment>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/PutCapacityAssignmentConfigurationInput AWS API Documentation
+    #
+    class PutCapacityAssignmentConfigurationInput < Struct.new(
+      :capacity_reservation_name,
+      :capacity_assignments)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/PutCapacityAssignmentConfigurationOutput AWS API Documentation
+    #
+    class PutCapacityAssignmentConfigurationOutput < Aws::EmptyStructure; end
 
     # Information about a single instance of a query execution.
     #
@@ -3913,14 +4185,14 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # A label that you assign to a resource. In Athena, a resource can be a
-    # workgroup or data catalog. Each tag consists of a key and an optional
-    # value, both of which you define. For example, you can use tags to
-    # categorize Athena workgroups or data catalogs by purpose, owner, or
-    # environment. Use a consistent set of tag keys to make it easier to
-    # search and filter workgroups or data catalogs in your account. For
-    # best practices, see [Tagging Best Practices][1]. Tag keys can be from
-    # 1 to 128 UTF-8 Unicode characters, and tag values can be from 0 to 256
+    # A label that you assign to a resource. Athena resources include
+    # workgroups, data catalogs, and capacity reservations. Each tag
+    # consists of a key and an optional value, both of which you define. For
+    # example, you can use tags to categorize Athena resources by purpose,
+    # owner, or environment. Use a consistent set of tag keys to make it
+    # easier to search and filter the resources in your account. For best
+    # practices, see [Tagging Best Practices][1]. Tag keys can be from 1 to
+    # 128 UTF-8 Unicode characters, and tag values can be from 0 to 256
     # UTF-8 Unicode characters. Tags can use letters and numbers
     # representable in UTF-8, and the following characters: + - = . \_ : /
     # @. Tag keys and values are case-sensitive. Tag keys must be unique per
@@ -3954,13 +4226,13 @@ module Aws::Athena
     end
 
     # @!attribute [rw] resource_arn
-    #   Specifies the ARN of the Athena resource (workgroup or data catalog)
-    #   to which tags are to be added.
+    #   Specifies the ARN of the Athena resource to which tags are to be
+    #   added.
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   A collection of one or more tags, separated by commas, to be added
-    #   to an Athena workgroup or data catalog resource.
+    #   to an Athena resource.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/TagResourceInput AWS API Documentation
@@ -4147,6 +4419,27 @@ module Aws::Athena
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UntagResourceOutput AWS API Documentation
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] target_dpus
+    #   The new number of requested data processing units.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   The name of the capacity reservation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateCapacityReservationInput AWS API Documentation
+    #
+    class UpdateCapacityReservationInput < Struct.new(
+      :target_dpus,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateCapacityReservationOutput AWS API Documentation
+    #
+    class UpdateCapacityReservationOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] name
     #   The name of the data catalog to update. The catalog name must be

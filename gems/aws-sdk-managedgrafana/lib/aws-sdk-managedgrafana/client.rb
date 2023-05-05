@@ -491,6 +491,11 @@ module Aws::ManagedGrafana
     #
     #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
     #
+    # @option params [String] :grafana_version
+    #   Specifies the version of Grafana to support in the new workspace.
+    #
+    #   Supported values are `8.4` and `9.4`.
+    #
     # @option params [Types::NetworkAccessConfiguration] :network_access_control
     #   Configuration for network access to your workspace.
     #
@@ -586,6 +591,7 @@ module Aws::ManagedGrafana
     #     authentication_providers: ["AWS_SSO"], # required, accepts AWS_SSO, SAML
     #     client_token: "ClientToken",
     #     configuration: "OverridableConfigurationJson",
+    #     grafana_version: "GrafanaVersion",
     #     network_access_control: {
     #       prefix_list_ids: ["PrefixListId"], # required
     #       vpce_ids: ["VpceId"], # required
@@ -1628,7 +1634,7 @@ module Aws::ManagedGrafana
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-managedgrafana'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

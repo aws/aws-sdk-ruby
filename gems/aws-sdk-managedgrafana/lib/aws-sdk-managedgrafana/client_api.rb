@@ -193,6 +193,7 @@ module Aws::ManagedGrafana
     CreateWorkspaceRequest.add_member(:authentication_providers, Shapes::ShapeRef.new(shape: AuthenticationProviders, required: true, location_name: "authenticationProviders"))
     CreateWorkspaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateWorkspaceRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: OverridableConfigurationJson, location_name: "configuration", metadata: {"jsonvalue"=>true}))
+    CreateWorkspaceRequest.add_member(:grafana_version, Shapes::ShapeRef.new(shape: GrafanaVersion, location_name: "grafanaVersion"))
     CreateWorkspaceRequest.add_member(:network_access_control, Shapes::ShapeRef.new(shape: NetworkAccessConfiguration, location_name: "networkAccessControl"))
     CreateWorkspaceRequest.add_member(:organization_role_name, Shapes::ShapeRef.new(shape: OrganizationRoleName, location_name: "organizationRoleName"))
     CreateWorkspaceRequest.add_member(:permission_type, Shapes::ShapeRef.new(shape: PermissionType, required: true, location_name: "permissionType"))

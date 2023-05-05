@@ -1648,6 +1648,7 @@ module Aws::SageMaker
     SageMakerImageVersionAlias = Shapes::StringShape.new(name: 'SageMakerImageVersionAlias')
     SageMakerImageVersionAliases = Shapes::ListShape.new(name: 'SageMakerImageVersionAliases')
     SagemakerServicecatalogStatus = Shapes::StringShape.new(name: 'SagemakerServicecatalogStatus')
+    SampleWeightAttributeName = Shapes::StringShape.new(name: 'SampleWeightAttributeName')
     SamplingPercentage = Shapes::IntegerShape.new(name: 'SamplingPercentage')
     ScheduleConfig = Shapes::StructureShape.new(name: 'ScheduleConfig')
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
@@ -2235,6 +2236,7 @@ module Aws::SageMaker
     AutoMLChannel.add_member(:target_attribute_name, Shapes::ShapeRef.new(shape: TargetAttributeName, required: true, location_name: "TargetAttributeName"))
     AutoMLChannel.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType"))
     AutoMLChannel.add_member(:channel_type, Shapes::ShapeRef.new(shape: AutoMLChannelType, location_name: "ChannelType"))
+    AutoMLChannel.add_member(:sample_weight_attribute_name, Shapes::ShapeRef.new(shape: SampleWeightAttributeName, location_name: "SampleWeightAttributeName"))
     AutoMLChannel.struct_class = Types::AutoMLChannel
 
     AutoMLContainerDefinition.add_member(:image, Shapes::ShapeRef.new(shape: ContainerImage, required: true, location_name: "Image"))

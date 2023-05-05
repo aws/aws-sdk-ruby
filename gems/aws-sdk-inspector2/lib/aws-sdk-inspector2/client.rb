@@ -369,7 +369,16 @@ module Aws::Inspector2
     # @!group API Operations
 
     # Associates an Amazon Web Services account with an Amazon Inspector
-    # delegated administrator.
+    # delegated administrator. An HTTP 200 response indicates the
+    # association was successfully started, but doesn’t indicate whether it
+    # was completed. You can check if the association completed by using
+    # [ListMembers][1] for multiple accounts or [GetMembers][2] for a single
+    # account.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/inspector/v2/APIReference/API_ListMembers.html
+    # [2]: https://docs.aws.amazon.com/inspector/v2/APIReference/API_GetMember.html
     #
     # @option params [required, String] :account_id
     #   The Amazon Web Services account ID of the member account to be
@@ -486,6 +495,92 @@ module Aws::Inspector2
     # @param [Hash] params ({})
     def batch_get_free_trial_info(params = {}, options = {})
       req = build_request(:batch_get_free_trial_info, params)
+      req.send_request(options)
+    end
+
+    # Retrieves Amazon Inspector deep inspection activation status of
+    # multiple member accounts within your organization. You must be the
+    # delegated administrator of an organization in Amazon Inspector to use
+    # this API.
+    #
+    # @option params [Array<String>] :account_ids
+    #   The unique identifiers for the Amazon Web Services accounts to
+    #   retrieve Amazon Inspector deep inspection activation status for.
+    #   </p>
+    #
+    # @return [Types::BatchGetMemberEc2DeepInspectionStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetMemberEc2DeepInspectionStatusResponse#account_ids #account_ids} => Array&lt;Types::MemberAccountEc2DeepInspectionStatusState&gt;
+    #   * {Types::BatchGetMemberEc2DeepInspectionStatusResponse#failed_account_ids #failed_account_ids} => Array&lt;Types::FailedMemberAccountEc2DeepInspectionStatusState&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_member_ec2_deep_inspection_status({
+    #     account_ids: ["AccountId"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_ids #=> Array
+    #   resp.account_ids[0].account_id #=> String
+    #   resp.account_ids[0].error_message #=> String
+    #   resp.account_ids[0].status #=> String, one of "ACTIVATED", "DEACTIVATED", "PENDING", "FAILED"
+    #   resp.failed_account_ids #=> Array
+    #   resp.failed_account_ids[0].account_id #=> String
+    #   resp.failed_account_ids[0].ec2_scan_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
+    #   resp.failed_account_ids[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/BatchGetMemberEc2DeepInspectionStatus AWS API Documentation
+    #
+    # @overload batch_get_member_ec2_deep_inspection_status(params = {})
+    # @param [Hash] params ({})
+    def batch_get_member_ec2_deep_inspection_status(params = {}, options = {})
+      req = build_request(:batch_get_member_ec2_deep_inspection_status, params)
+      req.send_request(options)
+    end
+
+    # Activates or deactivates Amazon Inspector deep inspection for the
+    # provided member accounts in your organization. You must be the
+    # delegated administrator of an organization in Amazon Inspector to use
+    # this API.
+    #
+    # @option params [required, Array<Types::MemberAccountEc2DeepInspectionStatus>] :account_ids
+    #   The unique identifiers for the Amazon Web Services accounts to change
+    #   Amazon Inspector deep inspection status for.
+    #
+    # @return [Types::BatchUpdateMemberEc2DeepInspectionStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchUpdateMemberEc2DeepInspectionStatusResponse#account_ids #account_ids} => Array&lt;Types::MemberAccountEc2DeepInspectionStatusState&gt;
+    #   * {Types::BatchUpdateMemberEc2DeepInspectionStatusResponse#failed_account_ids #failed_account_ids} => Array&lt;Types::FailedMemberAccountEc2DeepInspectionStatusState&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_update_member_ec2_deep_inspection_status({
+    #     account_ids: [ # required
+    #       {
+    #         account_id: "AccountId", # required
+    #         activate_deep_inspection: false, # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_ids #=> Array
+    #   resp.account_ids[0].account_id #=> String
+    #   resp.account_ids[0].error_message #=> String
+    #   resp.account_ids[0].status #=> String, one of "ACTIVATED", "DEACTIVATED", "PENDING", "FAILED"
+    #   resp.failed_account_ids #=> Array
+    #   resp.failed_account_ids[0].account_id #=> String
+    #   resp.failed_account_ids[0].ec2_scan_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
+    #   resp.failed_account_ids[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/BatchUpdateMemberEc2DeepInspectionStatus AWS API Documentation
+    #
+    # @overload batch_update_member_ec2_deep_inspection_status(params = {})
+    # @param [Hash] params ({})
+    def batch_update_member_ec2_deep_inspection_status(params = {}, options = {})
+      req = build_request(:batch_update_member_ec2_deep_inspection_status, params)
       req.send_request(options)
     end
 
@@ -826,7 +921,9 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
-    # Creates a finding report.
+    # Creates a finding report. By default only `ACTIVE` findings are
+    # returned in the report. To see `SUPRESSED` or `CLOSED` findings you
+    # must specify a value for the `findingStatus` filter criteria.
     #
     # @option params [Types::FilterCriteria] :filter_criteria
     #   The filter criteria to apply to the results of the finding report.
@@ -1416,6 +1513,34 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Retrieves the activation status of Amazon Inspector deep inspection
+    # and custom paths associated with your account.
+    #
+    # @return [Types::GetEc2DeepInspectionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEc2DeepInspectionConfigurationResponse#error_message #error_message} => String
+    #   * {Types::GetEc2DeepInspectionConfigurationResponse#org_package_paths #org_package_paths} => Array&lt;String&gt;
+    #   * {Types::GetEc2DeepInspectionConfigurationResponse#package_paths #package_paths} => Array&lt;String&gt;
+    #   * {Types::GetEc2DeepInspectionConfigurationResponse#status #status} => String
+    #
+    # @example Response structure
+    #
+    #   resp.error_message #=> String
+    #   resp.org_package_paths #=> Array
+    #   resp.org_package_paths[0] #=> String
+    #   resp.package_paths #=> Array
+    #   resp.package_paths[0] #=> String
+    #   resp.status #=> String, one of "ACTIVATED", "DEACTIVATED", "PENDING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetEc2DeepInspectionConfiguration AWS API Documentation
+    #
+    # @overload get_ec2_deep_inspection_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_ec2_deep_inspection_configuration(params = {}, options = {})
+      req = build_request(:get_ec2_deep_inspection_configuration, params)
+      req.send_request(options)
+    end
+
     # Gets the status of a findings report.
     #
     # @option params [String] :report_id
@@ -1786,7 +1911,7 @@ module Aws::Inspector2
     #   resp.covered_resources[0].resource_metadata.lambda_function.layers[0] #=> String
     #   resp.covered_resources[0].resource_metadata.lambda_function.runtime #=> String, one of "NODEJS", "NODEJS_12_X", "NODEJS_14_X", "NODEJS_16_X", "JAVA_8", "JAVA_8_AL2", "JAVA_11", "PYTHON_3_7", "PYTHON_3_8", "PYTHON_3_9", "UNSUPPORTED", "NODEJS_18_X", "GO_1_X"
     #   resp.covered_resources[0].resource_type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY", "AWS_LAMBDA_FUNCTION"
-    #   resp.covered_resources[0].scan_status.reason #=> String, one of "PENDING_INITIAL_SCAN", "ACCESS_DENIED", "INTERNAL_ERROR", "UNMANAGED_EC2_INSTANCE", "UNSUPPORTED_OS", "SCAN_ELIGIBILITY_EXPIRED", "RESOURCE_TERMINATED", "SUCCESSFUL", "NO_RESOURCES_FOUND", "IMAGE_SIZE_EXCEEDED", "SCAN_FREQUENCY_MANUAL", "SCAN_FREQUENCY_SCAN_ON_PUSH", "EC2_INSTANCE_STOPPED", "PENDING_DISABLE", "NO_INVENTORY", "STALE_INVENTORY", "EXCLUDED_BY_TAG", "UNSUPPORTED_RUNTIME"
+    #   resp.covered_resources[0].scan_status.reason #=> String, one of "PENDING_INITIAL_SCAN", "ACCESS_DENIED", "INTERNAL_ERROR", "UNMANAGED_EC2_INSTANCE", "UNSUPPORTED_OS", "SCAN_ELIGIBILITY_EXPIRED", "RESOURCE_TERMINATED", "SUCCESSFUL", "NO_RESOURCES_FOUND", "IMAGE_SIZE_EXCEEDED", "SCAN_FREQUENCY_MANUAL", "SCAN_FREQUENCY_SCAN_ON_PUSH", "EC2_INSTANCE_STOPPED", "PENDING_DISABLE", "NO_INVENTORY", "STALE_INVENTORY", "EXCLUDED_BY_TAG", "UNSUPPORTED_RUNTIME", "UNSUPPORTED_MEDIA_TYPE", "UNSUPPORTED_CONFIG_FILE", "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED", "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED", "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED", "DEEP_INSPECTION_NO_INVENTORY"
     #   resp.covered_resources[0].scan_status.status_code #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.covered_resources[0].scan_type #=> String, one of "NETWORK", "PACKAGE"
     #   resp.next_token #=> String
@@ -2836,7 +2961,7 @@ module Aws::Inspector2
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].file_path #=> String
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].fixed_in_version #=> String
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].name #=> String
-    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].package_manager #=> String, one of "BUNDLER", "CARGO", "COMPOSER", "NPM", "NUGET", "PIPENV", "POETRY", "YARN", "GOBINARY", "GOMOD", "JAR", "OS", "PIP", "PYTHONPKG", "NODEPKG", "POM"
+    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].package_manager #=> String, one of "BUNDLER", "CARGO", "COMPOSER", "NPM", "NUGET", "PIPENV", "POETRY", "YARN", "GOBINARY", "GOMOD", "JAR", "OS", "PIP", "PYTHONPKG", "NODEPKG", "POM", "GEMSPEC"
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].release #=> String
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].remediation #=> String
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].source_lambda_layer_arn #=> String
@@ -3112,6 +3237,56 @@ module Aws::Inspector2
     # @param [Hash] params ({})
     def update_configuration(params = {}, options = {})
       req = build_request(:update_configuration, params)
+      req.send_request(options)
+    end
+
+    # Activates, deactivates Amazon Inspector deep inspection, or updates
+    # custom paths for your account.
+    #
+    # @option params [Boolean] :activate_deep_inspection
+    #   Specify `TRUE` to activate Amazon Inspector deep inspection in your
+    #   account, or `FALSE` to deactivate. Member accounts in an organization
+    #   cannot deactivate deep inspection, instead the delegated administrator
+    #   for the organization can deactivate a member account using
+    #   [BatchUpdateMemberEc2DeepInspectionStatus][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/inspector/v2/APIReference/API_BatchUpdateMemberEc2DeepInspectionStatus.html
+    #
+    # @option params [Array<String>] :package_paths
+    #   The Amazon Inspector deep inspection custom paths you are adding for
+    #   your account.
+    #
+    # @return [Types::UpdateEc2DeepInspectionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateEc2DeepInspectionConfigurationResponse#error_message #error_message} => String
+    #   * {Types::UpdateEc2DeepInspectionConfigurationResponse#org_package_paths #org_package_paths} => Array&lt;String&gt;
+    #   * {Types::UpdateEc2DeepInspectionConfigurationResponse#package_paths #package_paths} => Array&lt;String&gt;
+    #   * {Types::UpdateEc2DeepInspectionConfigurationResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_ec2_deep_inspection_configuration({
+    #     activate_deep_inspection: false,
+    #     package_paths: ["Path"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.error_message #=> String
+    #   resp.org_package_paths #=> Array
+    #   resp.org_package_paths[0] #=> String
+    #   resp.package_paths #=> Array
+    #   resp.package_paths[0] #=> String
+    #   resp.status #=> String, one of "ACTIVATED", "DEACTIVATED", "PENDING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateEc2DeepInspectionConfiguration AWS API Documentation
+    #
+    # @overload update_ec2_deep_inspection_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_ec2_deep_inspection_configuration(params = {}, options = {})
+      req = build_request(:update_ec2_deep_inspection_configuration, params)
       req.send_request(options)
     end
 
@@ -3421,6 +3596,31 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Updates the Amazon Inspector deep inspection custom paths for your
+    # organization. You must be an Amazon Inspector delegated administrator
+    # to use this API.
+    #
+    # @option params [required, Array<String>] :org_package_paths
+    #   The Amazon Inspector deep inspection custom paths you are adding for
+    #   your organization.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_org_ec2_deep_inspection_configuration({
+    #     org_package_paths: ["Path"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateOrgEc2DeepInspectionConfiguration AWS API Documentation
+    #
+    # @overload update_org_ec2_deep_inspection_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_org_ec2_deep_inspection_configuration(params = {}, options = {})
+      req = build_request(:update_org_ec2_deep_inspection_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates the configurations for your Amazon Inspector organization.
     #
     # @option params [required, Types::AutoEnable] :auto_enable
@@ -3469,7 +3669,7 @@ module Aws::Inspector2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

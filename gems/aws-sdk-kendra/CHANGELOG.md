@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2023-05-02)
+------------------
+
+* Feature - AWS Kendra now supports configuring document fields/attributes via the GetQuerySuggestions API. You can now base query suggestions on the contents of document fields.
+
 1.64.0 (2023-03-30)
 ------------------
 

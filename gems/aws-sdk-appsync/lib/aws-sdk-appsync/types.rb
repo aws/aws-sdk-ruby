@@ -332,7 +332,7 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] api_id
-    #   The API ID.
+    #   The API ID. Private APIs can not be associated with custom domains.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/AssociateApiRequest AWS API Documentation
@@ -942,6 +942,13 @@ module Aws::AppSync
     #   Configuration for Lambda function authorization.
     #   @return [Types::LambdaAuthorizerConfig]
     #
+    # @!attribute [rw] visibility
+    #   Sets the value of the GraphQL API to public (`GLOBAL`) or private
+    #   (`PRIVATE`). If no value is provided, the visibility will be set to
+    #   `GLOBAL` by default. This value cannot be changed once the API has
+    #   been created.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApiRequest AWS API Documentation
     #
     class CreateGraphqlApiRequest < Struct.new(
@@ -953,7 +960,8 @@ module Aws::AppSync
       :tags,
       :additional_authentication_providers,
       :xray_enabled,
-      :lambda_authorizer_config)
+      :lambda_authorizer_config,
+      :visibility)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2128,6 +2136,17 @@ module Aws::AppSync
     #   Configuration for Lambda function authorization.
     #   @return [Types::LambdaAuthorizerConfig]
     #
+    # @!attribute [rw] dns
+    #   The DNS records for the API.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] visibility
+    #   Sets the value of the GraphQL API to public (`GLOBAL`) or private
+    #   (`PRIVATE`). If no value is provided, the visibility will be set to
+    #   `GLOBAL` by default. This value cannot be changed once the API has
+    #   been created.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GraphqlApi AWS API Documentation
     #
     class GraphqlApi < Struct.new(
@@ -2143,7 +2162,9 @@ module Aws::AppSync
       :additional_authentication_providers,
       :xray_enabled,
       :waf_web_acl_arn,
-      :lambda_authorizer_config)
+      :lambda_authorizer_config,
+      :dns,
+      :visibility)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2190,9 +2211,10 @@ module Aws::AppSync
     #
     # @!attribute [rw] authorizer_result_ttl_in_seconds
     #   The number of seconds a response should be cached for. The default
-    #   is 5 minutes (300 seconds). The Lambda function can override this by
-    #   returning a `ttlOverride` key in its response. A value of 0 disables
-    #   caching of responses.
+    #   is 0 seconds, which disables caching. If you don't specify a value
+    #   for `authorizerResultTtlInSeconds`, the default value is used. The
+    #   maximum value is one hour (3600 seconds). The Lambda function can
+    #   override this by returning a `ttlOverride` key in its response.
     #   @return [Integer]
     #
     # @!attribute [rw] authorizer_uri

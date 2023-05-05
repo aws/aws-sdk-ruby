@@ -2138,7 +2138,8 @@ module Aws::DirectConnect
     #
     # @option params [required, Integer] :number_of_connections
     #   The number of physical dedicated connections initially provisioned and
-    #   bundled by the LAG.
+    #   bundled by the LAG. You can have a maximum of four connections when
+    #   the port speed is 1G or 10G, or two when the port speed is 100G.
     #
     # @option params [required, String] :location
     #   The location for the LAG.
@@ -4906,7 +4907,7 @@ module Aws::DirectConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

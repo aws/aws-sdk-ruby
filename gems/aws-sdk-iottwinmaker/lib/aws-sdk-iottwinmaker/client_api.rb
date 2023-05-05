@@ -194,6 +194,8 @@ module Aws::IoTTwinMaker
     S3Url = Shapes::StringShape.new(name: 'S3Url')
     SceneCapabilities = Shapes::ListShape.new(name: 'SceneCapabilities')
     SceneCapability = Shapes::StringShape.new(name: 'SceneCapability')
+    SceneError = Shapes::StructureShape.new(name: 'SceneError')
+    SceneErrorCode = Shapes::StringShape.new(name: 'SceneErrorCode')
     SceneMetadataMap = Shapes::MapShape.new(name: 'SceneMetadataMap')
     SceneMetadataValue = Shapes::StringShape.new(name: 'SceneMetadataValue')
     SceneSummaries = Shapes::ListShape.new(name: 'SceneSummaries')
@@ -637,6 +639,7 @@ module Aws::IoTTwinMaker
     GetSceneResponse.add_member(:capabilities, Shapes::ShapeRef.new(shape: SceneCapabilities, location_name: "capabilities"))
     GetSceneResponse.add_member(:scene_metadata, Shapes::ShapeRef.new(shape: SceneMetadataMap, location_name: "sceneMetadata"))
     GetSceneResponse.add_member(:generated_scene_metadata, Shapes::ShapeRef.new(shape: GeneratedSceneMetadataMap, location_name: "generatedSceneMetadata"))
+    GetSceneResponse.add_member(:error, Shapes::ShapeRef.new(shape: SceneError, location_name: "error"))
     GetSceneResponse.struct_class = Types::GetSceneResponse
 
     GetSyncJobRequest.add_member(:sync_source, Shapes::ShapeRef.new(shape: SyncSource, required: true, location: "uri", location_name: "syncSource"))
@@ -905,6 +908,10 @@ module Aws::IoTTwinMaker
     Rows.member = Shapes::ShapeRef.new(shape: Row)
 
     SceneCapabilities.member = Shapes::ShapeRef.new(shape: SceneCapability)
+
+    SceneError.add_member(:code, Shapes::ShapeRef.new(shape: SceneErrorCode, location_name: "code"))
+    SceneError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    SceneError.struct_class = Types::SceneError
 
     SceneMetadataMap.key = Shapes::ShapeRef.new(shape: Name)
     SceneMetadataMap.value = Shapes::ShapeRef.new(shape: SceneMetadataValue)

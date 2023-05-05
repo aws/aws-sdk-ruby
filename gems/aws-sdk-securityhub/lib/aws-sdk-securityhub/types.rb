@@ -15981,7 +15981,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] generator_id
     #   The identifier for the solution-specific component (a discrete unit
-    #   of logic) that generated a finding. In various security-findings
+    #   of logic) that generated a finding. In various security findings
     #   providers' solutions, this generator can be called a rule, a check,
     #   a detector, a plugin, etc.
     #   @return [String]
@@ -16000,7 +16000,7 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     #
     # @!attribute [rw] first_observed_at
-    #   Indicates when the security-findings provider first observed the
+    #   Indicates when the security findings provider first observed the
     #   potential security issue that a finding captured.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
@@ -16014,7 +16014,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] last_observed_at
-    #   Indicates when the security-findings provider most recently observed
+    #   Indicates when the security findings provider most recently observed
     #   the potential security issue that a finding captured.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
@@ -16028,7 +16028,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Indicates when the security-findings provider created the potential
+    #   Indicates when the security findings provider created the potential
     #   security issue that a finding captured.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
@@ -16042,7 +16042,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   Indicates when the security-findings provider last updated the
+    #   Indicates when the security findings provider last updated the
     #   finding record.
     #
     #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
@@ -16098,12 +16098,12 @@ module Aws::SecurityHub
     #   @return [Types::Remediation]
     #
     # @!attribute [rw] source_url
-    #   A URL that links to a page about the current finding in the
-    #   security-findings provider's solution.
+    #   A URL that links to a page about the current finding in the security
+    #   findings provider's solution.
     #   @return [String]
     #
     # @!attribute [rw] product_fields
-    #   A data type where security-findings providers can include additional
+    #   A data type where security findings providers can include additional
     #   solution-specific details that aren't part of the defined
     #   `AwsSecurityFinding` format.
     #
@@ -16277,7 +16277,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] generator_id
     #   The identifier for the solution-specific component (a discrete unit
-    #   of logic) that generated a finding. In various security-findings
+    #   of logic) that generated a finding. In various security findings
     #   providers' solutions, this generator can be called a rule, a check,
     #   a detector, a plugin, etc.
     #   @return [Array<Types::StringFilter>]
@@ -16292,9 +16292,9 @@ module Aws::SecurityHub
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] first_observed_at
-    #   An ISO8601-formatted timestamp that indicates when the
-    #   security-findings provider first observed the potential security
-    #   issue that a finding captured.
+    #   An ISO8601-formatted timestamp that indicates when the security
+    #   findings provider first observed the potential security issue that a
+    #   finding captured.
     #
     #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
     #   value cannot contain spaces, and date and time should be separated
@@ -16307,9 +16307,9 @@ module Aws::SecurityHub
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] last_observed_at
-    #   An ISO8601-formatted timestamp that indicates when the
-    #   security-findings provider most recently observed the potential
-    #   security issue that a finding captured.
+    #   An ISO8601-formatted timestamp that indicates when the security
+    #   findings provider most recently observed the potential security
+    #   issue that a finding captured.
     #
     #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
     #   value cannot contain spaces, and date and time should be separated
@@ -16322,9 +16322,9 @@ module Aws::SecurityHub
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] created_at
-    #   An ISO8601-formatted timestamp that indicates when the
-    #   security-findings provider captured the potential security issue
-    #   that a finding captured.
+    #   An ISO8601-formatted timestamp that indicates when the security
+    #   findings provider captured the potential security issue that a
+    #   finding captured.
     #
     #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
     #   value cannot contain spaces, and date and time should be separated
@@ -16337,8 +16337,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] updated_at
-    #   An ISO8601-formatted timestamp that indicates when the
-    #   security-findings provider last updated the finding record.
+    #   An ISO8601-formatted timestamp that indicates when the security
+    #   findings provider last updated the finding record.
     #
     #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
     #   value cannot contain spaces, and date and time should be separated
@@ -16351,7 +16351,7 @@ module Aws::SecurityHub
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] severity_product
-    #   The native severity as defined by the security-findings provider's
+    #   The native severity as defined by the security findings provider's
     #   solution that generated the finding.
     #   @return [Array<Types::NumberFilter>]
     #
@@ -16395,12 +16395,12 @@ module Aws::SecurityHub
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] source_url
-    #   A URL that links to a page about the current finding in the
-    #   security-findings provider's solution.
+    #   A URL that links to a page about the current finding in the security
+    #   findings provider's solution.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] product_fields
-    #   A data type where security-findings providers can include additional
+    #   A data type where security findings providers can include additional
     #   solution-specific details that aren't part of the defined
     #   `AwsSecurityFinding` format.
     #   @return [Array<Types::MapFilter>]
@@ -16940,7 +16940,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Identifies a finding to update using `BatchUpdateFindings`.
+    # Identifies which finding to get the finding history for.
     #
     # @!attribute [rw] id
     #   The identifier of the finding that was specified by the finding
@@ -20066,6 +20066,138 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # A list of events that changed the specified finding during the
+    # specified time period. Each record represents a single finding change
+    # event.
+    #
+    # @!attribute [rw] finding_identifier
+    #   Identifies which finding to get the finding history for.
+    #   @return [Types::AwsSecurityFindingIdentifier]
+    #
+    # @!attribute [rw] update_time
+    #   An ISO 8601-formatted timestamp that indicates when the security
+    #   findings provider last updated the finding record. A correctly
+    #   formatted example is `2020-05-21T20:16:34.724Z`. The value cannot
+    #   contain spaces, and date and time should be separated by `T`. For
+    #   more information, see [RFC 3339 section 5.6, Internet Date/Time
+    #   Format][1].
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   @return [Time]
+    #
+    # @!attribute [rw] finding_created
+    #   Identifies whether the event marks the creation of a new finding. A
+    #   value of `True` means that the finding is newly created. A value of
+    #   `False` means that the finding isn’t newly created.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] update_source
+    #   Identifies the source of the event that changed the finding. For
+    #   example, an integrated Amazon Web Service or third-party partner
+    #   integration may call [ `BatchImportFindings` ][1], or an Security
+    #   Hub customer may call [ `BatchUpdateFindings` ][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html
+    #   [2]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html
+    #   @return [Types::FindingHistoryUpdateSource]
+    #
+    # @!attribute [rw] updates
+    #   An array of objects that provides details about the finding change
+    #   event, including the Amazon Web Services Security Finding Format
+    #   (ASFF) field that changed, the value of the field before the change,
+    #   and the value of the field after the change.
+    #   @return [Array<Types::FindingHistoryUpdate>]
+    #
+    # @!attribute [rw] next_token
+    #   A token for pagination purposes. Provide this token in the
+    #   subsequent request to [ `GetFindingsHistory` ][1] to get up to an
+    #   additional 100 results of history for the same finding that you
+    #   specified in your initial request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetFindingsHistory.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FindingHistoryRecord AWS API Documentation
+    #
+    class FindingHistoryRecord < Struct.new(
+      :finding_identifier,
+      :update_time,
+      :finding_created,
+      :update_source,
+      :updates,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An array of objects that provides details about a change to a finding,
+    # including the Amazon Web Services Security Finding Format (ASFF) field
+    # that changed, the value of the field before the change, and the value
+    # of the field after the change.
+    #
+    # @!attribute [rw] updated_field
+    #   The ASFF field that changed during the finding change event.
+    #   @return [String]
+    #
+    # @!attribute [rw] old_value
+    #   The value of the ASFF field before the finding change event.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_value
+    #   The value of the ASFF field after the finding change event. To
+    #   preserve storage and readability, Security Hub omits this value if [
+    #   `FindingHistoryRecord` ][1] exceeds database limits.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_FindingHistoryRecord.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FindingHistoryUpdate AWS API Documentation
+    #
+    class FindingHistoryUpdate < Struct.new(
+      :updated_field,
+      :old_value,
+      :new_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the source of the finding change event.
+    #
+    # @!attribute [rw] type
+    #   Describes the type of finding change event, such as a call to [
+    #   `BatchImportFindings` ][1] (by an integrated Amazon Web Service or
+    #   third party partner integration) or [ `BatchUpdateFindings` ][2] (by
+    #   a Security Hub customer).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html
+    #   [2]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html
+    #   @return [String]
+    #
+    # @!attribute [rw] identity
+    #   The identity of the source that initiated the finding change event.
+    #   For example, the Amazon Resource Name (ARN) of a partner that calls
+    #   BatchImportFindings or of a customer that calls BatchUpdateFindings.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FindingHistoryUpdateSource AWS API Documentation
+    #
+    class FindingHistoryUpdateSource < Struct.new(
+      :type,
+      :identity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # In a `BatchImportFindings` request, finding providers use
     # `FindingProviderFields` to provide and update values for confidence,
     # criticality, related findings, severity, and types.
@@ -20354,6 +20486,108 @@ module Aws::SecurityHub
       :finding_aggregation_region,
       :region_linking_mode,
       :regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] finding_identifier
+    #   Identifies which finding to get the finding history for.
+    #   @return [Types::AwsSecurityFindingIdentifier]
+    #
+    # @!attribute [rw] start_time
+    #   An ISO 8601-formatted timestamp that indicates the start time of the
+    #   requested finding history. A correctly formatted example is
+    #   `2020-05-21T20:16:34.724Z`. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For more information, see
+    #   [RFC 3339 section 5.6, Internet Date/Time Format][1].
+    #
+    #   If you provide values for both `StartTime` and `EndTime`, Security
+    #   Hub returns finding history for the specified time period. If you
+    #   provide a value for `StartTime` but not for `EndTime`, Security Hub
+    #   returns finding history from the `StartTime` to the time at which
+    #   the API is called. If you provide a value for `EndTime` but not for
+    #   `StartTime`, Security Hub returns finding history from the
+    #   [CreatedAt][2] timestamp of the finding to the `EndTime`. If you
+    #   provide neither `StartTime` nor `EndTime`, Security Hub returns
+    #   finding history from the CreatedAt timestamp of the finding to the
+    #   time at which the API is called. In all of these scenarios, the
+    #   response is limited to 100 results, and the maximum time period is
+    #   limited to 90 days.
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   [2]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   An ISO 8601-formatted timestamp that indicates the end time of the
+    #   requested finding history. A correctly formatted example is
+    #   `2020-05-21T20:16:34.724Z`. The value cannot contain spaces, and
+    #   date and time should be separated by `T`. For more information, see
+    #   [RFC 3339 section 5.6, Internet Date/Time Format][1].
+    #
+    #   If you provide values for both `StartTime` and `EndTime`, Security
+    #   Hub returns finding history for the specified time period. If you
+    #   provide a value for `StartTime` but not for `EndTime`, Security Hub
+    #   returns finding history from the `StartTime` to the time at which
+    #   the API is called. If you provide a value for `EndTime` but not for
+    #   `StartTime`, Security Hub returns finding history from the
+    #   [CreatedAt][2] timestamp of the finding to the `EndTime`. If you
+    #   provide neither `StartTime` nor `EndTime`, Security Hub returns
+    #   finding history from the CreatedAt timestamp of the finding to the
+    #   time at which the API is called. In all of these scenarios, the
+    #   response is limited to 100 results, and the maximum time period is
+    #   limited to 90 days.
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   [2]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_token
+    #   A token for pagination purposes. Provide `NULL` as the initial
+    #   value. In subsequent requests, provide the token included in the
+    #   response to get up to an additional 100 results of finding history.
+    #   If you don’t provide `NextToken`, Security Hub returns up to 100
+    #   results of finding history for each request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned. If you don’t provide
+    #   it, Security Hub returns up to 100 results of finding history.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindingHistoryRequest AWS API Documentation
+    #
+    class GetFindingHistoryRequest < Struct.new(
+      :finding_identifier,
+      :start_time,
+      :end_time,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] records
+    #   A list of events that altered the specified finding during the
+    #   specified time period.
+    #   @return [Array<Types::FindingHistoryRecord>]
+    #
+    # @!attribute [rw] next_token
+    #   A token for pagination purposes. Provide this token in the
+    #   subsequent request to `GetFindingsHistory` to get up to an
+    #   additional 100 results of history for the same finding that you
+    #   specified in your initial request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindingHistoryResponse AWS API Documentation
+    #
+    class GetFindingHistoryResponse < Struct.new(
+      :records,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end

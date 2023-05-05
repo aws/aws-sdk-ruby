@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2023-04-28)
+------------------
+
+* Feature - Added Windows 11 to support Microsoft_Office_2019
+
 1.79.0 (2023-02-09)
 ------------------
 

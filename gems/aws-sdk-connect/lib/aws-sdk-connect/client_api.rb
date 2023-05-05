@@ -4107,7 +4107,6 @@ module Aws::Connect
         o.input = Shapes::ShapeRef.new(shape: CreateParticipantRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateParticipantResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)

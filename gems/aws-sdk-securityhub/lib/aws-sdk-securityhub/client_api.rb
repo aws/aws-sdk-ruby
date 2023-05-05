@@ -710,6 +710,12 @@ module Aws::SecurityHub
     FilePaths = Shapes::StructureShape.new(name: 'FilePaths')
     FindingAggregator = Shapes::StructureShape.new(name: 'FindingAggregator')
     FindingAggregatorList = Shapes::ListShape.new(name: 'FindingAggregatorList')
+    FindingHistoryRecord = Shapes::StructureShape.new(name: 'FindingHistoryRecord')
+    FindingHistoryRecordList = Shapes::ListShape.new(name: 'FindingHistoryRecordList')
+    FindingHistoryUpdate = Shapes::StructureShape.new(name: 'FindingHistoryUpdate')
+    FindingHistoryUpdateSource = Shapes::StructureShape.new(name: 'FindingHistoryUpdateSource')
+    FindingHistoryUpdateSourceType = Shapes::StringShape.new(name: 'FindingHistoryUpdateSourceType')
+    FindingHistoryUpdatesList = Shapes::ListShape.new(name: 'FindingHistoryUpdatesList')
     FindingProviderFields = Shapes::StructureShape.new(name: 'FindingProviderFields')
     FindingProviderSeverity = Shapes::StructureShape.new(name: 'FindingProviderSeverity')
     FirewallPolicyDetails = Shapes::StructureShape.new(name: 'FirewallPolicyDetails')
@@ -726,6 +732,8 @@ module Aws::SecurityHub
     GetEnabledStandardsResponse = Shapes::StructureShape.new(name: 'GetEnabledStandardsResponse')
     GetFindingAggregatorRequest = Shapes::StructureShape.new(name: 'GetFindingAggregatorRequest')
     GetFindingAggregatorResponse = Shapes::StructureShape.new(name: 'GetFindingAggregatorResponse')
+    GetFindingHistoryRequest = Shapes::StructureShape.new(name: 'GetFindingHistoryRequest')
+    GetFindingHistoryResponse = Shapes::StructureShape.new(name: 'GetFindingHistoryResponse')
     GetFindingsRequest = Shapes::StructureShape.new(name: 'GetFindingsRequest')
     GetFindingsResponse = Shapes::StructureShape.new(name: 'GetFindingsResponse')
     GetInsightResultsRequest = Shapes::StructureShape.new(name: 'GetInsightResultsRequest')
@@ -4688,6 +4696,27 @@ module Aws::SecurityHub
 
     FindingAggregatorList.member = Shapes::ShapeRef.new(shape: FindingAggregator)
 
+    FindingHistoryRecord.add_member(:finding_identifier, Shapes::ShapeRef.new(shape: AwsSecurityFindingIdentifier, location_name: "FindingIdentifier"))
+    FindingHistoryRecord.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdateTime"))
+    FindingHistoryRecord.add_member(:finding_created, Shapes::ShapeRef.new(shape: Boolean, location_name: "FindingCreated"))
+    FindingHistoryRecord.add_member(:update_source, Shapes::ShapeRef.new(shape: FindingHistoryUpdateSource, location_name: "UpdateSource"))
+    FindingHistoryRecord.add_member(:updates, Shapes::ShapeRef.new(shape: FindingHistoryUpdatesList, location_name: "Updates"))
+    FindingHistoryRecord.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    FindingHistoryRecord.struct_class = Types::FindingHistoryRecord
+
+    FindingHistoryRecordList.member = Shapes::ShapeRef.new(shape: FindingHistoryRecord)
+
+    FindingHistoryUpdate.add_member(:updated_field, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "UpdatedField"))
+    FindingHistoryUpdate.add_member(:old_value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OldValue"))
+    FindingHistoryUpdate.add_member(:new_value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NewValue"))
+    FindingHistoryUpdate.struct_class = Types::FindingHistoryUpdate
+
+    FindingHistoryUpdateSource.add_member(:type, Shapes::ShapeRef.new(shape: FindingHistoryUpdateSourceType, location_name: "Type"))
+    FindingHistoryUpdateSource.add_member(:identity, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Identity"))
+    FindingHistoryUpdateSource.struct_class = Types::FindingHistoryUpdateSource
+
+    FindingHistoryUpdatesList.member = Shapes::ShapeRef.new(shape: FindingHistoryUpdate)
+
     FindingProviderFields.add_member(:confidence, Shapes::ShapeRef.new(shape: RatioScale, location_name: "Confidence"))
     FindingProviderFields.add_member(:criticality, Shapes::ShapeRef.new(shape: RatioScale, location_name: "Criticality"))
     FindingProviderFields.add_member(:related_findings, Shapes::ShapeRef.new(shape: RelatedFindingList, location_name: "RelatedFindings"))
@@ -4749,6 +4778,17 @@ module Aws::SecurityHub
     GetFindingAggregatorResponse.add_member(:region_linking_mode, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RegionLinkingMode"))
     GetFindingAggregatorResponse.add_member(:regions, Shapes::ShapeRef.new(shape: StringList, location_name: "Regions"))
     GetFindingAggregatorResponse.struct_class = Types::GetFindingAggregatorResponse
+
+    GetFindingHistoryRequest.add_member(:finding_identifier, Shapes::ShapeRef.new(shape: AwsSecurityFindingIdentifier, required: true, location_name: "FindingIdentifier"))
+    GetFindingHistoryRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    GetFindingHistoryRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    GetFindingHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetFindingHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    GetFindingHistoryRequest.struct_class = Types::GetFindingHistoryRequest
+
+    GetFindingHistoryResponse.add_member(:records, Shapes::ShapeRef.new(shape: FindingHistoryRecordList, location_name: "Records"))
+    GetFindingHistoryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetFindingHistoryResponse.struct_class = Types::GetFindingHistoryResponse
 
     GetFindingsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: AwsSecurityFindingFilters, location_name: "Filters"))
     GetFindingsRequest.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SortCriteria, location_name: "SortCriteria"))
@@ -6238,6 +6278,24 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_finding_history, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetFindingHistory"
+        o.http_method = "POST"
+        o.http_request_uri = "/findingHistory/get"
+        o.input = Shapes::ShapeRef.new(shape: GetFindingHistoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetFindingHistoryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_findings, Seahorse::Model::Operation.new.tap do |o|

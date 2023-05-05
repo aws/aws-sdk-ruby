@@ -43,12 +43,6 @@ module Aws::DirectConnect
             end
             raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
           end
-          if Aws::Endpoints::Matchers.string_equals?(region, "us-gov-east-1")
-            return Aws::Endpoints::Endpoint.new(url: "https://directconnect.us-gov-east-1.amazonaws.com", headers: {}, properties: {})
-          end
-          if Aws::Endpoints::Matchers.string_equals?(region, "us-gov-west-1")
-            return Aws::Endpoints::Endpoint.new(url: "https://directconnect.us-gov-west-1.amazonaws.com", headers: {}, properties: {})
-          end
           return Aws::Endpoints::Endpoint.new(url: "https://directconnect.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
         end
       end

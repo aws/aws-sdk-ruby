@@ -32,7 +32,7 @@ require_relative 'aws-sdk-appflow/customizations'
 # structure.
 #
 #     appflow = Aws::Appflow::Client.new
-#     resp = appflow.create_connector_profile(params)
+#     resp = appflow.cancel_flow_executions(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-appflow/customizations'
 # @!group service
 module Aws::Appflow
 
-  GEM_VERSION = '1.38.0'
+  GEM_VERSION = '1.40.0'
 
 end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2023-05-03)
+------------------
+
+* Feature - This feature provides deep inspection for linux based instance
+
 1.10.0 (2023-01-18)
 ------------------
 

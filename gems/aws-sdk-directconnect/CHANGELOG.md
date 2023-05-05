@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2023-04-28)
+------------------
+
+* Feature - This release corrects the jumbo frames MTU from 9100 to 8500.
+
 1.57.0 (2023-03-14)
 ------------------
 

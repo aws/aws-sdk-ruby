@@ -1482,6 +1482,9 @@ module Aws::IoT
     #
     #    </note>
     #
+    # @option params [Types::TlsConfig] :tls_config
+    #   An object that specifies the TLS configuration for a domain.
+    #
     # @return [Types::CreateDomainConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainConfigurationResponse#domain_configuration_name #domain_configuration_name} => String
@@ -1505,6 +1508,9 @@ module Aws::IoT
     #         value: "TagValue",
     #       },
     #     ],
+    #     tls_config: {
+    #       security_policy: "SecurityPolicy",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1710,20 +1716,18 @@ module Aws::IoT
     #   A list of things and thing groups to which the job should be sent.
     #
     # @option params [String] :document_source
-    #   An S3 link to the job document. Required if you don't specify a value
-    #   for `document`.
+    #   An S3 link, or S3 object URL, to the job document. The link is an
+    #   Amazon S3 object URL and is required if you don't specify a value for
+    #   `document`.
     #
-    #   <note markdown="1"> If the job document resides in an S3 bucket, you must use a
-    #   placeholder link when specifying the document.
+    #   For example, `--document-source
+    #   https://s3.region-code.amazonaws.com/example-firmware/device-firmware.1.0`.
     #
-    #    The placeholder link is of the following form:
+    #   For more information, see [Methods for accessing a bucket][1].
     #
-    #    `$\{aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key\}`
     #
-    #    where *bucket* is your bucket name and *key* is the object in the
-    #   bucket to which you are linking.
     #
-    #    </note>
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html
     #
     # @option params [String] :document
     #   The job document. Required if you don't specify a value for
@@ -5408,6 +5412,7 @@ module Aws::IoT
     #   * {Types::DescribeDomainConfigurationResponse#service_type #service_type} => String
     #   * {Types::DescribeDomainConfigurationResponse#domain_type #domain_type} => String
     #   * {Types::DescribeDomainConfigurationResponse#last_status_change_date #last_status_change_date} => Time
+    #   * {Types::DescribeDomainConfigurationResponse#tls_config #tls_config} => Types::TlsConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -5430,6 +5435,7 @@ module Aws::IoT
     #   resp.service_type #=> String, one of "DATA", "CREDENTIAL_PROVIDER", "JOBS"
     #   resp.domain_type #=> String, one of "ENDPOINT", "AWS_MANAGED", "CUSTOMER_MANAGED"
     #   resp.last_status_change_date #=> Time
+    #   resp.tls_config.security_policy #=> String
     #
     # @overload describe_domain_configuration(params = {})
     # @param [Hash] params ({})
@@ -12969,6 +12975,9 @@ module Aws::IoT
     # @option params [Boolean] :remove_authorizer_config
     #   Removes the authorization configuration from a domain.
     #
+    # @option params [Types::TlsConfig] :tls_config
+    #   An object that specifies the TLS configuration for a domain.
+    #
     # @return [Types::UpdateDomainConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDomainConfigurationResponse#domain_configuration_name #domain_configuration_name} => String
@@ -12984,6 +12993,9 @@ module Aws::IoT
     #     },
     #     domain_configuration_status: "ENABLED", # accepts ENABLED, DISABLED
     #     remove_authorizer_config: false,
+    #     tls_config: {
+    #       security_policy: "SecurityPolicy",
+    #     },
     #   })
     #
     # @example Response structure
@@ -14093,7 +14105,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.103.0'
+      context[:gem_version] = '1.104.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

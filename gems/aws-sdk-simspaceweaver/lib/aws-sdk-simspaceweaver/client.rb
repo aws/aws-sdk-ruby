@@ -368,6 +368,68 @@ module Aws::SimSpaceWeaver
 
     # @!group API Operations
 
+    # Creates a snapshot of the specified simulation. A snapshot is a file
+    # that contains simulation state data at a specific time. The state data
+    # saved in a snapshot includes entity data from the State Fabric, the
+    # simulation configuration specified in the schema, and the clock tick
+    # number. You can use the snapshot to initialize a new simulation. For
+    # more information about snapshots, see [Snapshots][1] in the *SimSpace
+    # Weaver User Guide*.
+    #
+    # You specify a `Destination` when you create a snapshot. The
+    # `Destination` is the name of an Amazon S3 bucket and an optional
+    # `ObjectKeyPrefix`. The `ObjectKeyPrefix` is usually the name of a
+    # folder in the bucket. SimSpace Weaver creates a `snapshot` folder
+    # inside the `Destination` and places the snapshot file there.
+    #
+    # The snapshot file is an Amazon S3 object. It has an object key with
+    # the form: `
+    # object-key-prefix/snapshot/simulation-name-YYMMdd-HHmm-ss.zip`, where:
+    #
+    # * ` YY ` is the 2-digit year
+    #
+    # * ` MM ` is the 2-digit month
+    #
+    # * ` dd ` is the 2-digit day of the month
+    #
+    # * ` HH ` is the 2-digit hour (24-hour clock)
+    #
+    # * ` mm ` is the 2-digit minutes
+    #
+    # * ` ss ` is the 2-digit seconds
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/simspaceweaver/latest/userguide/working-with_snapshots.html
+    #
+    # @option params [required, Types::S3Destination] :destination
+    #   The Amazon S3 bucket and optional folder (object key prefix) where
+    #   SimSpace Weaver creates the snapshot file.
+    #
+    # @option params [required, String] :simulation
+    #   The name of the simulation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_snapshot({
+    #     destination: { # required
+    #       bucket_name: "BucketName",
+    #       object_key_prefix: "ObjectKeyPrefix",
+    #     },
+    #     simulation: "SimSpaceWeaverResourceName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/simspaceweaver-2022-10-28/CreateSnapshot AWS API Documentation
+    #
+    # @overload create_snapshot(params = {})
+    # @param [Hash] params ({})
+    def create_snapshot(params = {}, options = {})
+      req = build_request(:create_snapshot, params)
+      req.send_request(options)
+    end
+
     # Deletes the instance of the given custom app.
     #
     # @option params [required, String] :app
@@ -401,9 +463,8 @@ module Aws::SimSpaceWeaver
     # Deletes all SimSpace Weaver resources assigned to the given
     # simulation.
     #
-    # <note markdown="1"> Your simulation uses resources in other Amazon Web Services services.
-    # This API operation doesn't delete resources in other Amazon Web
-    # Services services.
+    # <note markdown="1"> Your simulation uses resources in other Amazon Web Services. This API
+    # operation doesn't delete resources in other Amazon Web Services.
     #
     #  </note>
     #
@@ -452,7 +513,7 @@ module Aws::SimSpaceWeaver
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_app({
-    #     app: "SimSpaceWeaverResourceName", # required
+    #     app: "SimSpaceWeaverLongResourceName", # required
     #     domain: "SimSpaceWeaverResourceName", # required
     #     simulation: "SimSpaceWeaverResourceName", # required
     #   })
@@ -499,6 +560,8 @@ module Aws::SimSpaceWeaver
     #   * {Types::DescribeSimulationOutput#role_arn #role_arn} => String
     #   * {Types::DescribeSimulationOutput#schema_error #schema_error} => String
     #   * {Types::DescribeSimulationOutput#schema_s3_location #schema_s3_location} => Types::S3Location
+    #   * {Types::DescribeSimulationOutput#snapshot_s3_location #snapshot_s3_location} => Types::S3Location
+    #   * {Types::DescribeSimulationOutput#start_error #start_error} => String
     #   * {Types::DescribeSimulationOutput#status #status} => String
     #   * {Types::DescribeSimulationOutput#target_status #target_status} => String
     #
@@ -528,7 +591,10 @@ module Aws::SimSpaceWeaver
     #   resp.schema_error #=> String
     #   resp.schema_s3_location.bucket_name #=> String
     #   resp.schema_s3_location.object_key #=> String
-    #   resp.status #=> String, one of "UNKNOWN", "STARTING", "STARTED", "STOPPING", "STOPPED", "FAILED", "DELETING", "DELETED"
+    #   resp.snapshot_s3_location.bucket_name #=> String
+    #   resp.snapshot_s3_location.object_key #=> String
+    #   resp.start_error #=> String
+    #   resp.status #=> String, one of "UNKNOWN", "STARTING", "STARTED", "STOPPING", "STOPPED", "FAILED", "DELETING", "DELETED", "SNAPSHOT_IN_PROGRESS"
     #   resp.target_status #=> String, one of "UNKNOWN", "STARTED", "STOPPED", "DELETED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/simspaceweaver-2022-10-28/DescribeSimulation AWS API Documentation
@@ -550,13 +616,13 @@ module Aws::SimSpaceWeaver
     #   The maximum number of apps to list.
     #
     # @option params [String] :next_token
-    #   If SimSpace Weaver returns `nextToken`, there are more results
+    #   If SimSpace Weaver returns `nextToken`, then there are more results
     #   available. The value of `nextToken` is a unique pagination token for
     #   each page. To retrieve the next page, call the operation again using
     #   the returned token. Keep all other arguments unchanged. If no results
-    #   remain, `nextToken` is set to `null`. Each pagination token expires
-    #   after 24 hours. If you provide a token that isn't valid, you receive
-    #   an *HTTP 400 ValidationException* error.
+    #   remain, then `nextToken` is set to `null`. Each pagination token
+    #   expires after 24 hours. If you provide a token that isn't valid, then
+    #   you receive an *HTTP 400 ValidationException* error.
     #
     # @option params [required, String] :simulation
     #   The name of the simulation that you want to list apps for.
@@ -603,13 +669,13 @@ module Aws::SimSpaceWeaver
     #   The maximum number of simulations to list.
     #
     # @option params [String] :next_token
-    #   If SimSpace Weaver returns `nextToken`, there are more results
+    #   If SimSpace Weaver returns `nextToken`, then there are more results
     #   available. The value of `nextToken` is a unique pagination token for
     #   each page. To retrieve the next page, call the operation again using
     #   the returned token. Keep all other arguments unchanged. If no results
-    #   remain, `nextToken` is set to `null`. Each pagination token expires
-    #   after 24 hours. If you provide a token that isn't valid, you receive
-    #   an *HTTP 400 ValidationException* error.
+    #   remain, then `nextToken` is set to `null`. Each pagination token
+    #   expires after 24 hours. If you provide a token that isn't valid, then
+    #   you receive an *HTTP 400 ValidationException* error.
     #
     # @return [Types::ListSimulationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -632,7 +698,7 @@ module Aws::SimSpaceWeaver
     #   resp.simulations[0].arn #=> String
     #   resp.simulations[0].creation_time #=> Time
     #   resp.simulations[0].name #=> String
-    #   resp.simulations[0].status #=> String, one of "UNKNOWN", "STARTING", "STARTED", "STOPPING", "STOPPED", "FAILED", "DELETING", "DELETED"
+    #   resp.simulations[0].status #=> String, one of "UNKNOWN", "STARTING", "STARTED", "STOPPING", "STOPPED", "FAILED", "DELETING", "DELETED", "SNAPSHOT_IN_PROGRESS"
     #   resp.simulations[0].target_status #=> String, one of "UNKNOWN", "STARTED", "STOPPED", "DELETED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/simspaceweaver-2022-10-28/ListSimulations AWS API Documentation
@@ -698,8 +764,8 @@ module Aws::SimSpaceWeaver
     #   The name of the domain of the app.
     #
     # @option params [Types::LaunchOverrides] :launch_overrides
-    #   Options that apply when the app starts. These optiAons override
-    #   default behavior.
+    #   Options that apply when the app starts. These options override default
+    #   behavior.
     #
     # @option params [required, String] :name
     #   The name of the app.
@@ -763,7 +829,16 @@ module Aws::SimSpaceWeaver
       req.send_request(options)
     end
 
-    # Starts a simulation with the given name and schema.
+    # Starts a simulation with the given name. You must choose to start your
+    # simulation from a schema or from a snapshot. For more information
+    # about the schema, see the [schema reference][1] in the *SimSpace
+    # Weaver User Guide*. For more information about snapshots, see
+    # [Snapshots][2] in the *SimSpace Weaver User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/simspaceweaver/latest/userguide/schema-reference.html
+    # [2]: https://docs.aws.amazon.com/simspaceweaver/latest/userguide/working-with_snapshots.html
     #
     # @option params [String] :client_token
     #   A value that you provide to ensure that repeated calls to this API
@@ -779,8 +854,11 @@ module Aws::SimSpaceWeaver
     #
     # @option params [String] :maximum_duration
     #   The maximum running time of the simulation, specified as a number of
-    #   months (m or M), hours (h or H), or days (d or D). The simulation
-    #   stops when it reaches this limit.
+    #   minutes (m or M), hours (h or H), or days (d or D). The simulation
+    #   stops when it reaches this limit. The maximum value is `14D`, or its
+    #   equivalent in the other units. The default value is `14D`. A value
+    #   equivalent to `0` makes the simulation immediately transition to
+    #   `Stopping` as soon as it reaches `Started`.
     #
     # @option params [required, String] :name
     #   The name of the simulation.
@@ -798,10 +876,30 @@ module Aws::SimSpaceWeaver
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
     #
-    # @option params [required, Types::S3Location] :schema_s3_location
+    # @option params [Types::S3Location] :schema_s3_location
     #   The location of the simulation schema in Amazon Simple Storage Service
     #   (Amazon S3). For more information about Amazon S3, see the [ *Amazon
     #   Simple Storage Service User Guide* ][1].
+    #
+    #   Provide a `SchemaS3Location` to start your simulation from a schema.
+    #
+    #   If you provide a `SchemaS3Location` then you can't provide a
+    #   `SnapshotS3Location`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
+    #
+    # @option params [Types::S3Location] :snapshot_s3_location
+    #   The location of the snapshot .zip file in Amazon Simple Storage
+    #   Service (Amazon S3). For more information about Amazon S3, see the [
+    #   *Amazon Simple Storage Service User Guide* ][1].
+    #
+    #   Provide a `SnapshotS3Location` to start your simulation from a
+    #   snapshot.
+    #
+    #   If you provide a `SnapshotS3Location` then you can't provide a
+    #   `SchemaS3Location`.
     #
     #
     #
@@ -830,7 +928,11 @@ module Aws::SimSpaceWeaver
     #     maximum_duration: "TimeToLiveString",
     #     name: "SimSpaceWeaverResourceName", # required
     #     role_arn: "RoleArn", # required
-    #     schema_s3_location: { # required
+    #     schema_s3_location: {
+    #       bucket_name: "BucketName",
+    #       object_key: "ObjectKey",
+    #     },
+    #     snapshot_s3_location: {
     #       bucket_name: "BucketName",
     #       object_key: "ObjectKey",
     #     },
@@ -909,9 +1011,9 @@ module Aws::SimSpaceWeaver
 
     # Stops the given simulation.
     #
-    # You can't restart a simulation after you stop it. If you need to
-    # restart a simulation, you must stop it, delete it, and start a new
-    # instance of it.
+    # You can't restart a simulation after you stop it. If you want to
+    # restart a simulation, then you must stop it, delete it, and start a
+    # new instance of it.
     #
     # @option params [required, String] :simulation
     #   The name of the simulation.
@@ -1024,7 +1126,7 @@ module Aws::SimSpaceWeaver
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-simspaceweaver'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

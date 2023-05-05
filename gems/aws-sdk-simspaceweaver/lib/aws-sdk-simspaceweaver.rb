@@ -32,7 +32,7 @@ require_relative 'aws-sdk-simspaceweaver/customizations'
 # structure.
 #
 #     sim_space_weaver = Aws::SimSpaceWeaver::Client.new
-#     resp = sim_space_weaver.delete_app(params)
+#     resp = sim_space_weaver.create_snapshot(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-simspaceweaver/customizations'
 # @!group service
 module Aws::SimSpaceWeaver
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.2.0'
 
 end

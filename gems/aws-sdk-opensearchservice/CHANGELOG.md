@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2023-05-04)
+------------------
+
+* Feature - DescribeDomainNodes: A new API that provides configuration information for nodes part of the domain
+
+1.18.0 (2023-05-03)
+------------------
+
+* Feature - Amazon OpenSearch Service adds the option to deploy a domain across multiple Availability Zones, with each AZ containing a complete copy of data and with nodes in one AZ acting as a standby. This option provides 99.99% availability and consistent performance in the event of infrastructure failure.
+
 1.17.0 (2023-02-22)
 ------------------
 

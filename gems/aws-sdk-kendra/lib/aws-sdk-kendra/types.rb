@@ -433,6 +433,125 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Gets information on the configuration of document fields/attributes
+    # that you want to base query suggestions on. To change your
+    # configuration, use [AttributeSuggestionsUpdateConfig][1] and then call
+    # [UpdateQuerySuggestionsConfig][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_AttributeSuggestionsUpdateConfig.html
+    # [2]: https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html
+    #
+    # @!attribute [rw] suggestable_config_list
+    #   The list of fields/attributes that you want to set as suggestible
+    #   for query suggestions.
+    #   @return [Array<Types::SuggestableConfig>]
+    #
+    # @!attribute [rw] attribute_suggestions_mode
+    #   The mode is set to either `ACTIVE` or `INACTIVE`. If the `Mode` for
+    #   query history is set to `ENABLED` when calling
+    #   [UpdateQuerySuggestionsConfig][1] and `AttributeSuggestionsMode` to
+    #   use fields/attributes is set to `ACTIVE`, and you haven't set your
+    #   `SuggestionTypes` preference to `DOCUMENT_ATTRIBUTES`, then Amazon
+    #   Kendra uses the query history.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AttributeSuggestionsDescribeConfig AWS API Documentation
+    #
+    class AttributeSuggestionsDescribeConfig < Struct.new(
+      :suggestable_config_list,
+      :attribute_suggestions_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information for the document
+    # fields/attributes that you want to base query suggestions on.
+    #
+    # @!attribute [rw] suggestion_attributes
+    #   The list of document field/attribute keys or field names to use for
+    #   query suggestions. If the content within any of the fields match
+    #   what your user starts typing as their query, then the field content
+    #   is returned as a query suggestion.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] additional_response_attributes
+    #   The list of additional document field/attribute keys or field names
+    #   to include in the response. You can use additional fields to provide
+    #   extra information in the response. Additional fields are not used to
+    #   based suggestions on.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] attribute_filter
+    #   Filters the search results based on document fields/attributes.
+    #   @return [Types::AttributeFilter]
+    #
+    # @!attribute [rw] user_context
+    #   Applies user context filtering so that only users who are given
+    #   access to certain documents see these document in their search
+    #   results.
+    #   @return [Types::UserContext]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AttributeSuggestionsGetConfig AWS API Documentation
+    #
+    class AttributeSuggestionsGetConfig < Struct.new(
+      :suggestion_attributes,
+      :additional_response_attributes,
+      :attribute_filter,
+      :user_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates the configuration information for the document
+    # fields/attributes that you want to base query suggestions on.
+    #
+    # To deactivate using documents fields for query suggestions, set the
+    # mode to `INACTIVE`. You must also set `SuggestionTypes` as either
+    # `QUERY` or `DOCUMENT_ATTRIBUTES` and then call
+    # [GetQuerySuggestions][1]. If you set to `QUERY`, then Amazon Kendra
+    # uses the query history to base suggestions on. If you set to
+    # `DOCUMENT_ATTRIBUTES`, then Amazon Kendra uses the contents of
+    # document fields to base suggestions on.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html
+    #
+    # @!attribute [rw] suggestable_config_list
+    #   The list of fields/attributes that you want to set as suggestible
+    #   for query suggestions.
+    #   @return [Array<Types::SuggestableConfig>]
+    #
+    # @!attribute [rw] attribute_suggestions_mode
+    #   You can set the mode to `ACTIVE` or `INACTIVE`. You must also set
+    #   `SuggestionTypes` as either `QUERY` or `DOCUMENT_ATTRIBUTES` and
+    #   then call [GetQuerySuggestions][1]. If `Mode` to use query history
+    #   is set to `ENABLED` when calling [UpdateQuerySuggestionsConfig][2]
+    #   and `AttributeSuggestionsMode` to use fields/attributes is set to
+    #   `ACTIVE`, and you haven't set your `SuggestionTypes` preference to
+    #   `DOCUMENT_ATTRIBUTES`, then Amazon Kendra uses the query history.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html
+    #   [2]: https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AttributeSuggestionsUpdateConfig AWS API Documentation
+    #
+    class AttributeSuggestionsUpdateConfig < Struct.new(
+      :suggestable_config_list,
+      :attribute_suggestions_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides the configuration information to connect to websites that
     # require user authentication.
     #
@@ -3841,6 +3960,13 @@ module Aws::Kendra
     # @!attribute [rw] last_suggestions_build_time
     #   The Unix timestamp when query suggestions for an index was last
     #   updated.
+    #
+    #   Amazon Kendra automatically updates suggestions every 24 hours,
+    #   after you change a setting or after you apply a [block list][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/query-suggestions.html#query-suggestions-blocklist
     #   @return [Time]
     #
     # @!attribute [rw] last_clear_time
@@ -3860,7 +3986,16 @@ module Aws::Kendra
     #   settings, if you filter out certain queries from suggestions using a
     #   block list, and as the query log accumulates more queries for Amazon
     #   Kendra to learn from.
+    #
+    #   If the count is much lower than you expected, it could be because
+    #   Amazon Kendra needs more queries in the query history to learn from
+    #   or your current query suggestions settings are too strict.
     #   @return [Integer]
+    #
+    # @!attribute [rw] attribute_suggestions_config
+    #   Configuration information for the document fields/attributes that
+    #   you want to base query suggestions on.
+    #   @return [Types::AttributeSuggestionsDescribeConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeQuerySuggestionsConfigResponse AWS API Documentation
     #
@@ -3873,7 +4008,8 @@ module Aws::Kendra
       :minimum_query_count,
       :last_suggestions_build_time,
       :last_clear_time,
-      :total_suggestions_count)
+      :total_suggestions_count,
+      :attribute_suggestions_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5263,12 +5399,33 @@ module Aws::Kendra
     #   users.
     #   @return [Integer]
     #
+    # @!attribute [rw] suggestion_types
+    #   The suggestions type to base query suggestions on. The suggestion
+    #   types are query history or document fields/attributes. You can set
+    #   one type or the other.
+    #
+    #   If you set query history as your suggestions type, Amazon Kendra
+    #   suggests queries relevant to your users based on popular queries in
+    #   the query history.
+    #
+    #   If you set document fields/attributes as your suggestions type,
+    #   Amazon Kendra suggests queries relevant to your users based on the
+    #   contents of document fields.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] attribute_suggestions_config
+    #   Configuration information for the document fields/attributes that
+    #   you want to base query suggestions on.
+    #   @return [Types::AttributeSuggestionsGetConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/GetQuerySuggestionsRequest AWS API Documentation
     #
     class GetQuerySuggestionsRequest < Struct.new(
       :index_id,
       :query_text,
-      :max_suggestions_count)
+      :max_suggestions_count,
+      :suggestion_types,
+      :attribute_suggestions_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9084,6 +9241,33 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # The document ID and its fields/attributes that are used for a query
+    # suggestion, if document fields set to use for query suggestions.
+    #
+    # @!attribute [rw] document_id
+    #   The identifier of the document used for a query suggestion.
+    #   @return [String]
+    #
+    # @!attribute [rw] suggestion_attributes
+    #   The document fields/attributes used for a query suggestion.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] additional_attributes
+    #   The additional fields/attributes to include in the response. You can
+    #   use additional fields to provide extra information in the response.
+    #   Additional fields are not used to based suggestions on.
+    #   @return [Array<Types::DocumentAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SourceDocument AWS API Documentation
+    #
+    class SourceDocument < Struct.new(
+      :document_id,
+      :suggestion_attributes,
+      :additional_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A query with suggested spell corrections.
     #
     # @!attribute [rw] suggested_query_text
@@ -9270,6 +9454,27 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Provides the configuration information for a document field/attribute
+    # that you want to base query suggestions on.
+    #
+    # @!attribute [rw] attribute_name
+    #   The name of the document field/attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] suggestable
+    #   `TRUE` means the document field/attribute is suggestible, so the
+    #   contents within the field can be used for query suggestions.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SuggestableConfig AWS API Documentation
+    #
+    class SuggestableConfig < Struct.new(
+      :attribute_name,
+      :suggestable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A single query suggestion.
     #
     # @!attribute [rw] id
@@ -9284,11 +9489,18 @@ module Aws::Kendra
     #   The value is the text string of a suggestion.
     #   @return [Types::SuggestionValue]
     #
+    # @!attribute [rw] source_documents
+    #   The list of document IDs and their fields/attributes that are used
+    #   for a single query suggestion, if document fields set to use for
+    #   query suggestions.
+    #   @return [Array<Types::SourceDocument>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Suggestion AWS API Documentation
     #
     class Suggestion < Struct.new(
       :id,
-      :value)
+      :value,
+      :source_documents)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9808,7 +10020,8 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] featured_results_set_id
-    #   The identifier of the index used for featuring results.
+    #   The identifier of the set of featured results that you want to
+    #   update.
     #   @return [String]
     #
     # @!attribute [rw] featured_results_set_name
@@ -10056,6 +10269,11 @@ module Aws::Kendra
     #   How you tune this setting depends on your specific needs.
     #   @return [Integer]
     #
+    # @!attribute [rw] attribute_suggestions_config
+    #   Configuration information for the document fields/attributes that
+    #   you want to base query suggestions on.
+    #   @return [Types::AttributeSuggestionsUpdateConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateQuerySuggestionsConfigRequest AWS API Documentation
     #
     class UpdateQuerySuggestionsConfigRequest < Struct.new(
@@ -10064,7 +10282,8 @@ module Aws::Kendra
       :query_log_look_back_window_in_days,
       :include_queries_without_user_information,
       :minimum_number_of_querying_users,
-      :minimum_query_count)
+      :minimum_query_count,
+      :attribute_suggestions_config)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -2306,7 +2306,7 @@ module Aws::Kendra
     #
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
-    # [2]: https://docs.aws.amazon.com/kendra/latest/dg/query-suggestions.html#suggestions-block-list
+    # [2]: https://docs.aws.amazon.com/kendra/latest/dg/query-suggestions.html#query-suggestions-blocklist
     #
     # @option params [required, String] :index_id
     #   The identifier of the index you want to create a query suggestions
@@ -3767,6 +3767,7 @@ module Aws::Kendra
     #   * {Types::DescribeQuerySuggestionsConfigResponse#last_suggestions_build_time #last_suggestions_build_time} => Time
     #   * {Types::DescribeQuerySuggestionsConfigResponse#last_clear_time #last_clear_time} => Time
     #   * {Types::DescribeQuerySuggestionsConfigResponse#total_suggestions_count #total_suggestions_count} => Integer
+    #   * {Types::DescribeQuerySuggestionsConfigResponse#attribute_suggestions_config #attribute_suggestions_config} => Types::AttributeSuggestionsDescribeConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -3785,6 +3786,10 @@ module Aws::Kendra
     #   resp.last_suggestions_build_time #=> Time
     #   resp.last_clear_time #=> Time
     #   resp.total_suggestions_count #=> Integer
+    #   resp.attribute_suggestions_config.suggestable_config_list #=> Array
+    #   resp.attribute_suggestions_config.suggestable_config_list[0].attribute_name #=> String
+    #   resp.attribute_suggestions_config.suggestable_config_list[0].suggestable #=> Boolean
+    #   resp.attribute_suggestions_config.attribute_suggestions_mode #=> String, one of "ACTIVE", "INACTIVE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeQuerySuggestionsConfig AWS API Documentation
     #
@@ -3974,6 +3979,23 @@ module Aws::Kendra
     #   The maximum number of query suggestions you want to show to your
     #   users.
     #
+    # @option params [Array<String>] :suggestion_types
+    #   The suggestions type to base query suggestions on. The suggestion
+    #   types are query history or document fields/attributes. You can set one
+    #   type or the other.
+    #
+    #   If you set query history as your suggestions type, Amazon Kendra
+    #   suggests queries relevant to your users based on popular queries in
+    #   the query history.
+    #
+    #   If you set document fields/attributes as your suggestions type, Amazon
+    #   Kendra suggests queries relevant to your users based on the contents
+    #   of document fields.
+    #
+    # @option params [Types::AttributeSuggestionsGetConfig] :attribute_suggestions_config
+    #   Configuration information for the document fields/attributes that you
+    #   want to base query suggestions on.
+    #
     # @return [Types::GetQuerySuggestionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetQuerySuggestionsResponse#query_suggestions_id #query_suggestions_id} => String
@@ -3985,6 +4007,100 @@ module Aws::Kendra
     #     index_id: "IndexId", # required
     #     query_text: "SuggestionQueryText", # required
     #     max_suggestions_count: 1,
+    #     suggestion_types: ["QUERY"], # accepts QUERY, DOCUMENT_ATTRIBUTES
+    #     attribute_suggestions_config: {
+    #       suggestion_attributes: ["DocumentAttributeKey"],
+    #       additional_response_attributes: ["DocumentAttributeKey"],
+    #       attribute_filter: {
+    #         and_all_filters: [
+    #           {
+    #             # recursive AttributeFilter
+    #           },
+    #         ],
+    #         or_all_filters: [
+    #           {
+    #             # recursive AttributeFilter
+    #           },
+    #         ],
+    #         not_filter: {
+    #           # recursive AttributeFilter
+    #         },
+    #         equals_to: {
+    #           key: "DocumentAttributeKey", # required
+    #           value: { # required
+    #             string_value: "DocumentAttributeStringValue",
+    #             string_list_value: ["String"],
+    #             long_value: 1,
+    #             date_value: Time.now,
+    #           },
+    #         },
+    #         contains_all: {
+    #           key: "DocumentAttributeKey", # required
+    #           value: { # required
+    #             string_value: "DocumentAttributeStringValue",
+    #             string_list_value: ["String"],
+    #             long_value: 1,
+    #             date_value: Time.now,
+    #           },
+    #         },
+    #         contains_any: {
+    #           key: "DocumentAttributeKey", # required
+    #           value: { # required
+    #             string_value: "DocumentAttributeStringValue",
+    #             string_list_value: ["String"],
+    #             long_value: 1,
+    #             date_value: Time.now,
+    #           },
+    #         },
+    #         greater_than: {
+    #           key: "DocumentAttributeKey", # required
+    #           value: { # required
+    #             string_value: "DocumentAttributeStringValue",
+    #             string_list_value: ["String"],
+    #             long_value: 1,
+    #             date_value: Time.now,
+    #           },
+    #         },
+    #         greater_than_or_equals: {
+    #           key: "DocumentAttributeKey", # required
+    #           value: { # required
+    #             string_value: "DocumentAttributeStringValue",
+    #             string_list_value: ["String"],
+    #             long_value: 1,
+    #             date_value: Time.now,
+    #           },
+    #         },
+    #         less_than: {
+    #           key: "DocumentAttributeKey", # required
+    #           value: { # required
+    #             string_value: "DocumentAttributeStringValue",
+    #             string_list_value: ["String"],
+    #             long_value: 1,
+    #             date_value: Time.now,
+    #           },
+    #         },
+    #         less_than_or_equals: {
+    #           key: "DocumentAttributeKey", # required
+    #           value: { # required
+    #             string_value: "DocumentAttributeStringValue",
+    #             string_list_value: ["String"],
+    #             long_value: 1,
+    #             date_value: Time.now,
+    #           },
+    #         },
+    #       },
+    #       user_context: {
+    #         token: "Token",
+    #         user_id: "PrincipalName",
+    #         groups: ["PrincipalName"],
+    #         data_source_groups: [
+    #           {
+    #             group_id: "PrincipalName", # required
+    #             data_source_id: "DataSourceId", # required
+    #           },
+    #         ],
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -3996,6 +4112,17 @@ module Aws::Kendra
     #   resp.suggestions[0].value.text.highlights #=> Array
     #   resp.suggestions[0].value.text.highlights[0].begin_offset #=> Integer
     #   resp.suggestions[0].value.text.highlights[0].end_offset #=> Integer
+    #   resp.suggestions[0].source_documents #=> Array
+    #   resp.suggestions[0].source_documents[0].document_id #=> String
+    #   resp.suggestions[0].source_documents[0].suggestion_attributes #=> Array
+    #   resp.suggestions[0].source_documents[0].suggestion_attributes[0] #=> String
+    #   resp.suggestions[0].source_documents[0].additional_attributes #=> Array
+    #   resp.suggestions[0].source_documents[0].additional_attributes[0].key #=> String
+    #   resp.suggestions[0].source_documents[0].additional_attributes[0].value.string_value #=> String
+    #   resp.suggestions[0].source_documents[0].additional_attributes[0].value.string_list_value #=> Array
+    #   resp.suggestions[0].source_documents[0].additional_attributes[0].value.string_list_value[0] #=> String
+    #   resp.suggestions[0].source_documents[0].additional_attributes[0].value.long_value #=> Integer
+    #   resp.suggestions[0].source_documents[0].additional_attributes[0].value.date_value #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/GetQuerySuggestions AWS API Documentation
     #
@@ -6385,7 +6512,7 @@ module Aws::Kendra
     #   The identifier of the index used for featuring results.
     #
     # @option params [required, String] :featured_results_set_id
-    #   The identifier of the index used for featuring results.
+    #   The identifier of the set of featured results that you want to update.
     #
     # @option params [String] :featured_results_set_name
     #   A new name for the set of featured results.
@@ -6645,8 +6772,8 @@ module Aws::Kendra
     # Amazon Kendra supports partial updates, so you only need to provide
     # the fields you want to update.
     #
-    # If an update is currently processing (i.e. 'happening'), you need to
-    # wait for the update to finish before making another update.
+    # If an update is currently processing, you need to wait for the update
+    # to finish before making another update.
     #
     # Updates to query suggestions settings might not take effect right
     # away. The time for your updated settings to take effect depends on the
@@ -6714,6 +6841,10 @@ module Aws::Kendra
     #
     #   How you tune this setting depends on your specific needs.
     #
+    # @option params [Types::AttributeSuggestionsUpdateConfig] :attribute_suggestions_config
+    #   Configuration information for the document fields/attributes that you
+    #   want to base query suggestions on.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -6725,6 +6856,15 @@ module Aws::Kendra
     #     include_queries_without_user_information: false,
     #     minimum_number_of_querying_users: 1,
     #     minimum_query_count: 1,
+    #     attribute_suggestions_config: {
+    #       suggestable_config_list: [
+    #         {
+    #           attribute_name: "DocumentAttributeKey",
+    #           suggestable: false,
+    #         },
+    #       ],
+    #       attribute_suggestions_mode: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateQuerySuggestionsConfig AWS API Documentation
@@ -6795,7 +6935,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

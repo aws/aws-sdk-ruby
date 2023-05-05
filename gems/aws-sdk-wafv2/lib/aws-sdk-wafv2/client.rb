@@ -381,7 +381,8 @@ module Aws::WAFV2
     # Associates a web ACL with a regional application resource, to protect
     # the resource. A regional application can be an Application Load
     # Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL
-    # API, an Amazon Cognito user pool, or an App Runner service.
+    # API, an Amazon Cognito user pool, an App Runner service, or an Amazon
+    # Web Services Verified Access instance.
     #
     # For Amazon CloudFront, don't use this call. Instead, use your
     # CloudFront distribution configuration. To associate a web ACL, in the
@@ -435,6 +436,10 @@ module Aws::WAFV2
     #     `arn:partition:apprunner:region:account-id:service/apprunner-service-name/apprunner-service-id
     #     `
     #
+    #   * For an Amazon Web Services Verified Access instance:
+    #     `arn:partition:ec2:region:account-id:verified-access-instance/instance-id
+    #     `
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -474,7 +479,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -1191,17 +1197,17 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
-    # Creates an API key for use in the integration of the CAPTCHA API in
-    # your JavaScript client applications. The integration lets you
-    # customize the placement and characteristics of the CAPTCHA puzzle for
-    # your end users. For more information about the CAPTCHA JavaScript
-    # integration, see [WAF client application integration][1] in the *WAF
-    # Developer Guide*.
+    # Creates an API key that contains a set of token domains.
     #
-    # The CAPTCHA API requires a key that authorizes CAPTCHA use from the
-    # client application domain. You can use a single key for up to 5
-    # domains. After you generate a key, you can copy it for use in your
-    # JavaScript integration.
+    # API keys are required for the integration of the CAPTCHA API in your
+    # JavaScript client applications. The API lets you customize the
+    # placement and characteristics of the CAPTCHA puzzle for your end
+    # users. For more information about the CAPTCHA JavaScript integration,
+    # see [WAF client application integration][1] in the *WAF Developer
+    # Guide*.
+    #
+    # You can use a single key for up to 5 domains. After you generate a
+    # key, you can copy it for use in your JavaScript integration.
     #
     #
     #
@@ -1211,7 +1217,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -1223,6 +1230,11 @@ module Aws::WAFV2
     #
     # @option params [required, Array<String>] :token_domains
     #   The client application domains that you want to use this API key for.
+    #
+    #   Example JSON: `"TokenDomains": ["abc.com", "store.abc.com"]`
+    #
+    #   Public suffixes aren't allowed. For example, you can't use `usa.gov`
+    #   or `co.uk` as token domains.
     #
     # @return [Types::CreateAPIKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1262,7 +1274,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -1372,7 +1385,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -1447,7 +1461,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -2251,7 +2266,8 @@ module Aws::WAFV2
     # can associate a web ACL with one or more Amazon Web Services resources
     # to protect. The resources can be an Amazon CloudFront distribution, an
     # Amazon API Gateway REST API, an Application Load Balancer, an AppSync
-    # GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    # GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    # Amazon Web Services Verified Access instance.
     #
     # @option params [required, String] :name
     #   The name of the web ACL. You cannot change the name of a web ACL after
@@ -2261,7 +2277,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -3175,7 +3192,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -3280,7 +3298,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -3335,7 +3354,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -3420,7 +3440,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -3480,7 +3501,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -3557,7 +3579,8 @@ module Aws::WAFV2
     # existing web ACL association. A resource can have at most one web ACL
     # association. A regional application can be an Application Load
     # Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL
-    # API, an Amazon Cognito user pool, or an App Runner service.
+    # API, an Amazon Cognito user pool, an App Runner service, or an Amazon
+    # Web Services Verified Access instance.
     #
     # For Amazon CloudFront, don't use this call. Instead, use your
     # CloudFront distribution configuration. To disassociate a web ACL,
@@ -3591,6 +3614,10 @@ module Aws::WAFV2
     #
     #   * For an App Runner service:
     #     `arn:partition:apprunner:region:account-id:service/apprunner-service-name/apprunner-service-id
+    #     `
+    #
+    #   * For an Amazon Web Services Verified Access instance:
+    #     `arn:partition:ec2:region:account-id:verified-access-instance/instance-id
     #     `
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -3657,11 +3684,23 @@ module Aws::WAFV2
     # Returns your API key in decrypted form. Use this to check the token
     # domains that you have defined for the key.
     #
+    # API keys are required for the integration of the CAPTCHA API in your
+    # JavaScript client applications. The API lets you customize the
+    # placement and characteristics of the CAPTCHA puzzle for your end
+    # users. For more information about the CAPTCHA JavaScript integration,
+    # see [WAF client application integration][1] in the *WAF Developer
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html
+    #
     # @option params [required, String] :scope
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -3711,7 +3750,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -3843,7 +3883,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -4000,7 +4041,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -4073,7 +4115,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -4130,7 +4173,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -4486,7 +4530,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -4582,7 +4627,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -5490,6 +5536,10 @@ module Aws::WAFV2
     #     `arn:partition:apprunner:region:account-id:service/apprunner-service-name/apprunner-service-id
     #     `
     #
+    #   * For an Amazon Web Services Verified Access instance:
+    #     `arn:partition:ec2:region:account-id:verified-access-instance/instance-id
+    #     `
+    #
     # @return [Types::GetWebACLForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetWebACLForResourceResponse#web_acl #web_acl} => Types::WebACL
@@ -6354,11 +6404,23 @@ module Aws::WAFV2
     # Retrieves a list of the API keys that you've defined for the
     # specified scope.
     #
+    # API keys are required for the integration of the CAPTCHA API in your
+    # JavaScript client applications. The API lets you customize the
+    # placement and characteristics of the CAPTCHA puzzle for your end
+    # users. For more information about the CAPTCHA JavaScript integration,
+    # see [WAF client application integration][1] in the *WAF Developer
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html
+    #
     # @option params [required, String] :scope
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -6430,7 +6492,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -6495,7 +6558,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -6556,7 +6620,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -6617,7 +6682,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -6716,7 +6782,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -6837,7 +6904,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -6904,7 +6972,8 @@ module Aws::WAFV2
     #   Used for web ACLs that are scoped for regional applications. A
     #   regional application can be an Application Load Balancer (ALB), an
     #   Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito
-    #   user pool, or an App Runner service.
+    #   user pool, an App Runner service, or an Amazon Web Services Verified
+    #   Access instance.
     #
     #   <note markdown="1"> If you don't provide a resource type, the call uses the resource type
     #   `APPLICATION_LOAD_BALANCER`.
@@ -6921,7 +6990,7 @@ module Aws::WAFV2
     #
     #   resp = client.list_resources_for_web_acl({
     #     web_acl_arn: "ResourceArn", # required
-    #     resource_type: "APPLICATION_LOAD_BALANCER", # accepts APPLICATION_LOAD_BALANCER, API_GATEWAY, APPSYNC, COGNITO_USER_POOL, APP_RUNNER_SERVICE
+    #     resource_type: "APPLICATION_LOAD_BALANCER", # accepts APPLICATION_LOAD_BALANCER, API_GATEWAY, APPSYNC, COGNITO_USER_POOL, APP_RUNNER_SERVICE, VERIFIED_ACCESS_INSTANCE
     #   })
     #
     # @example Response structure
@@ -6945,7 +7014,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -7064,7 +7134,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -7341,7 +7412,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -7579,7 +7651,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -7704,7 +7777,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -7810,7 +7884,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -7916,7 +7991,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -8732,7 +8808,8 @@ module Aws::WAFV2
     # can associate a web ACL with one or more Amazon Web Services resources
     # to protect. The resources can be an Amazon CloudFront distribution, an
     # Amazon API Gateway REST API, an Application Load Balancer, an AppSync
-    # GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    # GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    # Amazon Web Services Verified Access instance.
     #
     # @option params [required, String] :name
     #   The name of the web ACL. You cannot change the name of a web ACL after
@@ -8742,7 +8819,8 @@ module Aws::WAFV2
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
-    #   GraphQL API, an Amazon Cognito user pool, or an App Runner service.
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -9620,7 +9698,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

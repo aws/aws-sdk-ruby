@@ -35,6 +35,10 @@ module Aws::Kendra
     AssociatePersonasToEntitiesResponse = Shapes::StructureShape.new(name: 'AssociatePersonasToEntitiesResponse')
     AttributeFilter = Shapes::StructureShape.new(name: 'AttributeFilter')
     AttributeFilterList = Shapes::ListShape.new(name: 'AttributeFilterList')
+    AttributeSuggestionsDescribeConfig = Shapes::StructureShape.new(name: 'AttributeSuggestionsDescribeConfig')
+    AttributeSuggestionsGetConfig = Shapes::StructureShape.new(name: 'AttributeSuggestionsGetConfig')
+    AttributeSuggestionsMode = Shapes::StringShape.new(name: 'AttributeSuggestionsMode')
+    AttributeSuggestionsUpdateConfig = Shapes::StructureShape.new(name: 'AttributeSuggestionsUpdateConfig')
     AuthenticationConfiguration = Shapes::StructureShape.new(name: 'AuthenticationConfiguration')
     BasicAuthenticationConfiguration = Shapes::StructureShape.new(name: 'BasicAuthenticationConfiguration')
     BasicAuthenticationConfigurationList = Shapes::ListShape.new(name: 'BasicAuthenticationConfigurationList')
@@ -492,6 +496,8 @@ module Aws::Kendra
     SnapshotsDataRecords = Shapes::ListShape.new(name: 'SnapshotsDataRecords')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     SortingConfiguration = Shapes::StructureShape.new(name: 'SortingConfiguration')
+    SourceDocument = Shapes::StructureShape.new(name: 'SourceDocument')
+    SourceDocuments = Shapes::ListShape.new(name: 'SourceDocuments')
     SpellCorrectedQuery = Shapes::StructureShape.new(name: 'SpellCorrectedQuery')
     SpellCorrectedQueryList = Shapes::ListShape.new(name: 'SpellCorrectedQueryList')
     SpellCorrectionConfiguration = Shapes::StructureShape.new(name: 'SpellCorrectionConfiguration')
@@ -506,6 +512,8 @@ module Aws::Kendra
     SubmitFeedbackRequest = Shapes::StructureShape.new(name: 'SubmitFeedbackRequest')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
+    SuggestableConfig = Shapes::StructureShape.new(name: 'SuggestableConfig')
+    SuggestableConfigList = Shapes::ListShape.new(name: 'SuggestableConfigList')
     SuggestedQueryText = Shapes::StringShape.new(name: 'SuggestedQueryText')
     Suggestion = Shapes::StructureShape.new(name: 'Suggestion')
     SuggestionHighlight = Shapes::StructureShape.new(name: 'SuggestionHighlight')
@@ -513,6 +521,8 @@ module Aws::Kendra
     SuggestionList = Shapes::ListShape.new(name: 'SuggestionList')
     SuggestionQueryText = Shapes::StringShape.new(name: 'SuggestionQueryText')
     SuggestionTextWithHighlights = Shapes::StructureShape.new(name: 'SuggestionTextWithHighlights')
+    SuggestionType = Shapes::StringShape.new(name: 'SuggestionType')
+    SuggestionTypes = Shapes::ListShape.new(name: 'SuggestionTypes')
     SuggestionValue = Shapes::StructureShape.new(name: 'SuggestionValue')
     TableCell = Shapes::StructureShape.new(name: 'TableCell')
     TableCellList = Shapes::ListShape.new(name: 'TableCellList')
@@ -654,6 +664,20 @@ module Aws::Kendra
     AttributeFilter.struct_class = Types::AttributeFilter
 
     AttributeFilterList.member = Shapes::ShapeRef.new(shape: AttributeFilter)
+
+    AttributeSuggestionsDescribeConfig.add_member(:suggestable_config_list, Shapes::ShapeRef.new(shape: SuggestableConfigList, location_name: "SuggestableConfigList"))
+    AttributeSuggestionsDescribeConfig.add_member(:attribute_suggestions_mode, Shapes::ShapeRef.new(shape: AttributeSuggestionsMode, location_name: "AttributeSuggestionsMode"))
+    AttributeSuggestionsDescribeConfig.struct_class = Types::AttributeSuggestionsDescribeConfig
+
+    AttributeSuggestionsGetConfig.add_member(:suggestion_attributes, Shapes::ShapeRef.new(shape: DocumentAttributeKeyList, location_name: "SuggestionAttributes"))
+    AttributeSuggestionsGetConfig.add_member(:additional_response_attributes, Shapes::ShapeRef.new(shape: DocumentAttributeKeyList, location_name: "AdditionalResponseAttributes"))
+    AttributeSuggestionsGetConfig.add_member(:attribute_filter, Shapes::ShapeRef.new(shape: AttributeFilter, location_name: "AttributeFilter"))
+    AttributeSuggestionsGetConfig.add_member(:user_context, Shapes::ShapeRef.new(shape: UserContext, location_name: "UserContext"))
+    AttributeSuggestionsGetConfig.struct_class = Types::AttributeSuggestionsGetConfig
+
+    AttributeSuggestionsUpdateConfig.add_member(:suggestable_config_list, Shapes::ShapeRef.new(shape: SuggestableConfigList, location_name: "SuggestableConfigList"))
+    AttributeSuggestionsUpdateConfig.add_member(:attribute_suggestions_mode, Shapes::ShapeRef.new(shape: AttributeSuggestionsMode, location_name: "AttributeSuggestionsMode"))
+    AttributeSuggestionsUpdateConfig.struct_class = Types::AttributeSuggestionsUpdateConfig
 
     AuthenticationConfiguration.add_member(:basic_authentication, Shapes::ShapeRef.new(shape: BasicAuthenticationConfigurationList, location_name: "BasicAuthentication"))
     AuthenticationConfiguration.struct_class = Types::AuthenticationConfiguration
@@ -1228,6 +1252,7 @@ module Aws::Kendra
     DescribeQuerySuggestionsConfigResponse.add_member(:last_suggestions_build_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastSuggestionsBuildTime"))
     DescribeQuerySuggestionsConfigResponse.add_member(:last_clear_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastClearTime"))
     DescribeQuerySuggestionsConfigResponse.add_member(:total_suggestions_count, Shapes::ShapeRef.new(shape: Integer, location_name: "TotalSuggestionsCount"))
+    DescribeQuerySuggestionsConfigResponse.add_member(:attribute_suggestions_config, Shapes::ShapeRef.new(shape: AttributeSuggestionsDescribeConfig, location_name: "AttributeSuggestionsConfig"))
     DescribeQuerySuggestionsConfigResponse.struct_class = Types::DescribeQuerySuggestionsConfigResponse
 
     DescribeThesaurusRequest.add_member(:id, Shapes::ShapeRef.new(shape: ThesaurusId, required: true, location_name: "Id"))
@@ -1498,6 +1523,8 @@ module Aws::Kendra
     GetQuerySuggestionsRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     GetQuerySuggestionsRequest.add_member(:query_text, Shapes::ShapeRef.new(shape: SuggestionQueryText, required: true, location_name: "QueryText"))
     GetQuerySuggestionsRequest.add_member(:max_suggestions_count, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxSuggestionsCount"))
+    GetQuerySuggestionsRequest.add_member(:suggestion_types, Shapes::ShapeRef.new(shape: SuggestionTypes, location_name: "SuggestionTypes"))
+    GetQuerySuggestionsRequest.add_member(:attribute_suggestions_config, Shapes::ShapeRef.new(shape: AttributeSuggestionsGetConfig, location_name: "AttributeSuggestionsConfig"))
     GetQuerySuggestionsRequest.struct_class = Types::GetQuerySuggestionsRequest
 
     GetQuerySuggestionsResponse.add_member(:query_suggestions_id, Shapes::ShapeRef.new(shape: QuerySuggestionsId, location_name: "QuerySuggestionsId"))
@@ -2106,6 +2133,13 @@ module Aws::Kendra
     SortingConfiguration.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "SortOrder"))
     SortingConfiguration.struct_class = Types::SortingConfiguration
 
+    SourceDocument.add_member(:document_id, Shapes::ShapeRef.new(shape: String, location_name: "DocumentId"))
+    SourceDocument.add_member(:suggestion_attributes, Shapes::ShapeRef.new(shape: DocumentAttributeKeyList, location_name: "SuggestionAttributes"))
+    SourceDocument.add_member(:additional_attributes, Shapes::ShapeRef.new(shape: DocumentAttributeList, location_name: "AdditionalAttributes"))
+    SourceDocument.struct_class = Types::SourceDocument
+
+    SourceDocuments.member = Shapes::ShapeRef.new(shape: SourceDocument)
+
     SpellCorrectedQuery.add_member(:suggested_query_text, Shapes::ShapeRef.new(shape: SuggestedQueryText, location_name: "SuggestedQueryText"))
     SpellCorrectedQuery.add_member(:corrections, Shapes::ShapeRef.new(shape: CorrectionList, location_name: "Corrections"))
     SpellCorrectedQuery.struct_class = Types::SpellCorrectedQuery
@@ -2145,8 +2179,15 @@ module Aws::Kendra
 
     SubnetIdList.member = Shapes::ShapeRef.new(shape: SubnetId)
 
+    SuggestableConfig.add_member(:attribute_name, Shapes::ShapeRef.new(shape: DocumentAttributeKey, location_name: "AttributeName"))
+    SuggestableConfig.add_member(:suggestable, Shapes::ShapeRef.new(shape: ObjectBoolean, location_name: "Suggestable"))
+    SuggestableConfig.struct_class = Types::SuggestableConfig
+
+    SuggestableConfigList.member = Shapes::ShapeRef.new(shape: SuggestableConfig)
+
     Suggestion.add_member(:id, Shapes::ShapeRef.new(shape: ResultId, location_name: "Id"))
     Suggestion.add_member(:value, Shapes::ShapeRef.new(shape: SuggestionValue, location_name: "Value"))
+    Suggestion.add_member(:source_documents, Shapes::ShapeRef.new(shape: SourceDocuments, location_name: "SourceDocuments"))
     Suggestion.struct_class = Types::Suggestion
 
     SuggestionHighlight.add_member(:begin_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "BeginOffset"))
@@ -2160,6 +2201,8 @@ module Aws::Kendra
     SuggestionTextWithHighlights.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
     SuggestionTextWithHighlights.add_member(:highlights, Shapes::ShapeRef.new(shape: SuggestionHighlightList, location_name: "Highlights"))
     SuggestionTextWithHighlights.struct_class = Types::SuggestionTextWithHighlights
+
+    SuggestionTypes.member = Shapes::ShapeRef.new(shape: SuggestionType)
 
     SuggestionValue.add_member(:text, Shapes::ShapeRef.new(shape: SuggestionTextWithHighlights, location_name: "Text"))
     SuggestionValue.struct_class = Types::SuggestionValue
@@ -2295,6 +2338,7 @@ module Aws::Kendra
     UpdateQuerySuggestionsConfigRequest.add_member(:include_queries_without_user_information, Shapes::ShapeRef.new(shape: ObjectBoolean, location_name: "IncludeQueriesWithoutUserInformation"))
     UpdateQuerySuggestionsConfigRequest.add_member(:minimum_number_of_querying_users, Shapes::ShapeRef.new(shape: MinimumNumberOfQueryingUsers, location_name: "MinimumNumberOfQueryingUsers"))
     UpdateQuerySuggestionsConfigRequest.add_member(:minimum_query_count, Shapes::ShapeRef.new(shape: MinimumQueryCount, location_name: "MinimumQueryCount"))
+    UpdateQuerySuggestionsConfigRequest.add_member(:attribute_suggestions_config, Shapes::ShapeRef.new(shape: AttributeSuggestionsUpdateConfig, location_name: "AttributeSuggestionsConfig"))
     UpdateQuerySuggestionsConfigRequest.struct_class = Types::UpdateQuerySuggestionsConfigRequest
 
     UpdateThesaurusRequest.add_member(:id, Shapes::ShapeRef.new(shape: ThesaurusId, required: true, location_name: "Id"))

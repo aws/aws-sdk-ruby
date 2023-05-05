@@ -3633,6 +3633,10 @@ module Aws::ResilienceHub
     #   The logical identifier of the resource.
     #   @return [Types::LogicalResourceId]
     #
+    # @!attribute [rw] parent_resource_name
+    #   The name of the parent resource.
+    #   @return [String]
+    #
     # @!attribute [rw] physical_resource_id
     #   The physical identifier of the resource.
     #   @return [Types::PhysicalResourceId]
@@ -3645,6 +3649,10 @@ module Aws::ResilienceHub
     #   The type of resource.
     #   @return [String]
     #
+    # @!attribute [rw] source_type
+    #   The type of input source.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/PhysicalResource AWS API Documentation
     #
     class PhysicalResource < Struct.new(
@@ -3652,9 +3660,11 @@ module Aws::ResilienceHub
       :app_components,
       :excluded,
       :logical_resource_id,
+      :parent_resource_name,
       :physical_resource_id,
       :resource_name,
-      :resource_type)
+      :resource_type,
+      :source_type)
       SENSITIVE = []
       include Aws::Structure
     end

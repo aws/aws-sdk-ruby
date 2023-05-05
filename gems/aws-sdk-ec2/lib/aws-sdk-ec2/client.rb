@@ -41018,6 +41018,8 @@ module Aws::EC2
     #   * {Types::GetNetworkInsightsAccessScopeAnalysisFindingsResult#analysis_findings #analysis_findings} => Array&lt;Types::AccessScopeAnalysisFinding&gt;
     #   * {Types::GetNetworkInsightsAccessScopeAnalysisFindingsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_network_insights_access_scope_analysis_findings({
@@ -56779,7 +56781,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.377.0'
+      context[:gem_version] = '1.378.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

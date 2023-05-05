@@ -15,6 +15,7 @@ module Aws::Athena
 
     AclConfiguration = Shapes::StructureShape.new(name: 'AclConfiguration')
     Age = Shapes::IntegerShape.new(name: 'Age')
+    AllocatedDpusInteger = Shapes::IntegerShape.new(name: 'AllocatedDpusInteger')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     ApplicationDPUSizes = Shapes::StructureShape.new(name: 'ApplicationDPUSizes')
     ApplicationDPUSizesList = Shapes::ListShape.new(name: 'ApplicationDPUSizesList')
@@ -39,6 +40,17 @@ module Aws::Athena
     CalculationStatus = Shapes::StructureShape.new(name: 'CalculationStatus')
     CalculationSummary = Shapes::StructureShape.new(name: 'CalculationSummary')
     CalculationsList = Shapes::ListShape.new(name: 'CalculationsList')
+    CancelCapacityReservationInput = Shapes::StructureShape.new(name: 'CancelCapacityReservationInput')
+    CancelCapacityReservationOutput = Shapes::StructureShape.new(name: 'CancelCapacityReservationOutput')
+    CapacityAllocation = Shapes::StructureShape.new(name: 'CapacityAllocation')
+    CapacityAllocationStatus = Shapes::StringShape.new(name: 'CapacityAllocationStatus')
+    CapacityAssignment = Shapes::StructureShape.new(name: 'CapacityAssignment')
+    CapacityAssignmentConfiguration = Shapes::StructureShape.new(name: 'CapacityAssignmentConfiguration')
+    CapacityAssignmentsList = Shapes::ListShape.new(name: 'CapacityAssignmentsList')
+    CapacityReservation = Shapes::StructureShape.new(name: 'CapacityReservation')
+    CapacityReservationName = Shapes::StringShape.new(name: 'CapacityReservationName')
+    CapacityReservationStatus = Shapes::StringShape.new(name: 'CapacityReservationStatus')
+    CapacityReservationsList = Shapes::ListShape.new(name: 'CapacityReservationsList')
     CatalogNameString = Shapes::StringShape.new(name: 'CatalogNameString')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     CodeBlock = Shapes::StringShape.new(name: 'CodeBlock')
@@ -49,6 +61,8 @@ module Aws::Athena
     ColumnNullable = Shapes::StringShape.new(name: 'ColumnNullable')
     CommentString = Shapes::StringShape.new(name: 'CommentString')
     CoordinatorDpuSize = Shapes::IntegerShape.new(name: 'CoordinatorDpuSize')
+    CreateCapacityReservationInput = Shapes::StructureShape.new(name: 'CreateCapacityReservationInput')
+    CreateCapacityReservationOutput = Shapes::StructureShape.new(name: 'CreateCapacityReservationOutput')
     CreateDataCatalogInput = Shapes::StructureShape.new(name: 'CreateDataCatalogInput')
     CreateDataCatalogOutput = Shapes::StructureShape.new(name: 'CreateDataCatalogOutput')
     CreateNamedQueryInput = Shapes::StructureShape.new(name: 'CreateNamedQueryInput')
@@ -109,6 +123,10 @@ module Aws::Athena
     GetCalculationExecutionResponse = Shapes::StructureShape.new(name: 'GetCalculationExecutionResponse')
     GetCalculationExecutionStatusRequest = Shapes::StructureShape.new(name: 'GetCalculationExecutionStatusRequest')
     GetCalculationExecutionStatusResponse = Shapes::StructureShape.new(name: 'GetCalculationExecutionStatusResponse')
+    GetCapacityAssignmentConfigurationInput = Shapes::StructureShape.new(name: 'GetCapacityAssignmentConfigurationInput')
+    GetCapacityAssignmentConfigurationOutput = Shapes::StructureShape.new(name: 'GetCapacityAssignmentConfigurationOutput')
+    GetCapacityReservationInput = Shapes::StructureShape.new(name: 'GetCapacityReservationInput')
+    GetCapacityReservationOutput = Shapes::StructureShape.new(name: 'GetCapacityReservationOutput')
     GetDataCatalogInput = Shapes::StructureShape.new(name: 'GetDataCatalogInput')
     GetDataCatalogOutput = Shapes::StructureShape.new(name: 'GetDataCatalogOutput')
     GetDatabaseInput = Shapes::StructureShape.new(name: 'GetDatabaseInput')
@@ -145,6 +163,8 @@ module Aws::Athena
     ListApplicationDPUSizesOutput = Shapes::StructureShape.new(name: 'ListApplicationDPUSizesOutput')
     ListCalculationExecutionsRequest = Shapes::StructureShape.new(name: 'ListCalculationExecutionsRequest')
     ListCalculationExecutionsResponse = Shapes::StructureShape.new(name: 'ListCalculationExecutionsResponse')
+    ListCapacityReservationsInput = Shapes::StructureShape.new(name: 'ListCapacityReservationsInput')
+    ListCapacityReservationsOutput = Shapes::StructureShape.new(name: 'ListCapacityReservationsOutput')
     ListDataCatalogsInput = Shapes::StructureShape.new(name: 'ListDataCatalogsInput')
     ListDataCatalogsOutput = Shapes::StructureShape.new(name: 'ListDataCatalogsOutput')
     ListDatabasesInput = Shapes::StructureShape.new(name: 'ListDatabasesInput')
@@ -174,6 +194,7 @@ module Aws::Athena
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaxApplicationDPUSizesCount = Shapes::IntegerShape.new(name: 'MaxApplicationDPUSizesCount')
     MaxCalculationsCount = Shapes::IntegerShape.new(name: 'MaxCalculationsCount')
+    MaxCapacityReservationsCount = Shapes::IntegerShape.new(name: 'MaxCapacityReservationsCount')
     MaxConcurrentDpus = Shapes::IntegerShape.new(name: 'MaxConcurrentDpus')
     MaxDataCatalogsCount = Shapes::IntegerShape.new(name: 'MaxDataCatalogsCount')
     MaxDatabasesCount = Shapes::IntegerShape.new(name: 'MaxDatabasesCount')
@@ -210,6 +231,8 @@ module Aws::Athena
     PreparedStatementNameList = Shapes::ListShape.new(name: 'PreparedStatementNameList')
     PreparedStatementSummary = Shapes::StructureShape.new(name: 'PreparedStatementSummary')
     PreparedStatementsList = Shapes::ListShape.new(name: 'PreparedStatementsList')
+    PutCapacityAssignmentConfigurationInput = Shapes::StructureShape.new(name: 'PutCapacityAssignmentConfigurationInput')
+    PutCapacityAssignmentConfigurationOutput = Shapes::StructureShape.new(name: 'PutCapacityAssignmentConfigurationOutput')
     QueryExecution = Shapes::StructureShape.new(name: 'QueryExecution')
     QueryExecutionContext = Shapes::StructureShape.new(name: 'QueryExecutionContext')
     QueryExecutionId = Shapes::StringShape.new(name: 'QueryExecutionId')
@@ -275,6 +298,7 @@ module Aws::Athena
     TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
     TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TargetDpusInteger = Shapes::IntegerShape.new(name: 'TargetDpusInteger')
     TerminateSessionRequest = Shapes::StructureShape.new(name: 'TerminateSessionRequest')
     TerminateSessionResponse = Shapes::StructureShape.new(name: 'TerminateSessionResponse')
     ThrottleReason = Shapes::StringShape.new(name: 'ThrottleReason')
@@ -290,6 +314,8 @@ module Aws::Athena
     UnprocessedQueryExecutionIdList = Shapes::ListShape.new(name: 'UnprocessedQueryExecutionIdList')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
+    UpdateCapacityReservationInput = Shapes::StructureShape.new(name: 'UpdateCapacityReservationInput')
+    UpdateCapacityReservationOutput = Shapes::StructureShape.new(name: 'UpdateCapacityReservationOutput')
     UpdateDataCatalogInput = Shapes::StructureShape.new(name: 'UpdateDataCatalogInput')
     UpdateDataCatalogOutput = Shapes::StructureShape.new(name: 'UpdateDataCatalogOutput')
     UpdateNamedQueryInput = Shapes::StructureShape.new(name: 'UpdateNamedQueryInput')
@@ -307,6 +333,7 @@ module Aws::Athena
     WorkGroupConfigurationUpdates = Shapes::StructureShape.new(name: 'WorkGroupConfigurationUpdates')
     WorkGroupDescriptionString = Shapes::StringShape.new(name: 'WorkGroupDescriptionString')
     WorkGroupName = Shapes::StringShape.new(name: 'WorkGroupName')
+    WorkGroupNamesList = Shapes::ListShape.new(name: 'WorkGroupNamesList')
     WorkGroupState = Shapes::StringShape.new(name: 'WorkGroupState')
     WorkGroupSummary = Shapes::StructureShape.new(name: 'WorkGroupSummary')
     WorkGroupsList = Shapes::ListShape.new(name: 'WorkGroupsList')
@@ -376,6 +403,37 @@ module Aws::Athena
 
     CalculationsList.member = Shapes::ShapeRef.new(shape: CalculationSummary)
 
+    CancelCapacityReservationInput.add_member(:name, Shapes::ShapeRef.new(shape: CapacityReservationName, required: true, location_name: "Name"))
+    CancelCapacityReservationInput.struct_class = Types::CancelCapacityReservationInput
+
+    CancelCapacityReservationOutput.struct_class = Types::CancelCapacityReservationOutput
+
+    CapacityAllocation.add_member(:status, Shapes::ShapeRef.new(shape: CapacityAllocationStatus, required: true, location_name: "Status"))
+    CapacityAllocation.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
+    CapacityAllocation.add_member(:request_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "RequestTime"))
+    CapacityAllocation.add_member(:request_completion_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RequestCompletionTime"))
+    CapacityAllocation.struct_class = Types::CapacityAllocation
+
+    CapacityAssignment.add_member(:work_group_names, Shapes::ShapeRef.new(shape: WorkGroupNamesList, location_name: "WorkGroupNames"))
+    CapacityAssignment.struct_class = Types::CapacityAssignment
+
+    CapacityAssignmentConfiguration.add_member(:capacity_reservation_name, Shapes::ShapeRef.new(shape: CapacityReservationName, location_name: "CapacityReservationName"))
+    CapacityAssignmentConfiguration.add_member(:capacity_assignments, Shapes::ShapeRef.new(shape: CapacityAssignmentsList, location_name: "CapacityAssignments"))
+    CapacityAssignmentConfiguration.struct_class = Types::CapacityAssignmentConfiguration
+
+    CapacityAssignmentsList.member = Shapes::ShapeRef.new(shape: CapacityAssignment)
+
+    CapacityReservation.add_member(:name, Shapes::ShapeRef.new(shape: CapacityReservationName, required: true, location_name: "Name"))
+    CapacityReservation.add_member(:status, Shapes::ShapeRef.new(shape: CapacityReservationStatus, required: true, location_name: "Status"))
+    CapacityReservation.add_member(:target_dpus, Shapes::ShapeRef.new(shape: TargetDpusInteger, required: true, location_name: "TargetDpus"))
+    CapacityReservation.add_member(:allocated_dpus, Shapes::ShapeRef.new(shape: AllocatedDpusInteger, required: true, location_name: "AllocatedDpus"))
+    CapacityReservation.add_member(:last_allocation, Shapes::ShapeRef.new(shape: CapacityAllocation, location_name: "LastAllocation"))
+    CapacityReservation.add_member(:last_successful_allocation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastSuccessfulAllocationTime"))
+    CapacityReservation.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    CapacityReservation.struct_class = Types::CapacityReservation
+
+    CapacityReservationsList.member = Shapes::ShapeRef.new(shape: CapacityReservation)
+
     Column.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     Column.add_member(:type, Shapes::ShapeRef.new(shape: TypeString, location_name: "Type"))
     Column.add_member(:comment, Shapes::ShapeRef.new(shape: CommentString, location_name: "Comment"))
@@ -396,6 +454,13 @@ module Aws::Athena
     ColumnInfoList.member = Shapes::ShapeRef.new(shape: ColumnInfo)
 
     ColumnList.member = Shapes::ShapeRef.new(shape: Column)
+
+    CreateCapacityReservationInput.add_member(:target_dpus, Shapes::ShapeRef.new(shape: TargetDpusInteger, required: true, location_name: "TargetDpus"))
+    CreateCapacityReservationInput.add_member(:name, Shapes::ShapeRef.new(shape: CapacityReservationName, required: true, location_name: "Name"))
+    CreateCapacityReservationInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateCapacityReservationInput.struct_class = Types::CreateCapacityReservationInput
+
+    CreateCapacityReservationOutput.struct_class = Types::CreateCapacityReservationOutput
 
     CreateDataCatalogInput.add_member(:name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "Name"))
     CreateDataCatalogInput.add_member(:type, Shapes::ShapeRef.new(shape: DataCatalogType, required: true, location_name: "Type"))
@@ -564,6 +629,18 @@ module Aws::Athena
     GetCalculationExecutionStatusResponse.add_member(:statistics, Shapes::ShapeRef.new(shape: CalculationStatistics, location_name: "Statistics"))
     GetCalculationExecutionStatusResponse.struct_class = Types::GetCalculationExecutionStatusResponse
 
+    GetCapacityAssignmentConfigurationInput.add_member(:capacity_reservation_name, Shapes::ShapeRef.new(shape: CapacityReservationName, required: true, location_name: "CapacityReservationName"))
+    GetCapacityAssignmentConfigurationInput.struct_class = Types::GetCapacityAssignmentConfigurationInput
+
+    GetCapacityAssignmentConfigurationOutput.add_member(:capacity_assignment_configuration, Shapes::ShapeRef.new(shape: CapacityAssignmentConfiguration, required: true, location_name: "CapacityAssignmentConfiguration"))
+    GetCapacityAssignmentConfigurationOutput.struct_class = Types::GetCapacityAssignmentConfigurationOutput
+
+    GetCapacityReservationInput.add_member(:name, Shapes::ShapeRef.new(shape: CapacityReservationName, required: true, location_name: "Name"))
+    GetCapacityReservationInput.struct_class = Types::GetCapacityReservationInput
+
+    GetCapacityReservationOutput.add_member(:capacity_reservation, Shapes::ShapeRef.new(shape: CapacityReservation, required: true, location_name: "CapacityReservation"))
+    GetCapacityReservationOutput.struct_class = Types::GetCapacityReservationOutput
+
     GetDataCatalogInput.add_member(:name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "Name"))
     GetDataCatalogInput.struct_class = Types::GetDataCatalogInput
 
@@ -687,6 +764,14 @@ module Aws::Athena
     ListCalculationExecutionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: SessionManagerToken, location_name: "NextToken"))
     ListCalculationExecutionsResponse.add_member(:calculations, Shapes::ShapeRef.new(shape: CalculationsList, location_name: "Calculations"))
     ListCalculationExecutionsResponse.struct_class = Types::ListCalculationExecutionsResponse
+
+    ListCapacityReservationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListCapacityReservationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxCapacityReservationsCount, location_name: "MaxResults"))
+    ListCapacityReservationsInput.struct_class = Types::ListCapacityReservationsInput
+
+    ListCapacityReservationsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListCapacityReservationsOutput.add_member(:capacity_reservations, Shapes::ShapeRef.new(shape: CapacityReservationsList, required: true, location_name: "CapacityReservations"))
+    ListCapacityReservationsOutput.struct_class = Types::ListCapacityReservationsOutput
 
     ListDataCatalogsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListDataCatalogsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxDataCatalogsCount, location_name: "MaxResults"))
@@ -858,6 +943,12 @@ module Aws::Athena
     PreparedStatementSummary.struct_class = Types::PreparedStatementSummary
 
     PreparedStatementsList.member = Shapes::ShapeRef.new(shape: PreparedStatementSummary)
+
+    PutCapacityAssignmentConfigurationInput.add_member(:capacity_reservation_name, Shapes::ShapeRef.new(shape: CapacityReservationName, required: true, location_name: "CapacityReservationName"))
+    PutCapacityAssignmentConfigurationInput.add_member(:capacity_assignments, Shapes::ShapeRef.new(shape: CapacityAssignmentsList, required: true, location_name: "CapacityAssignments"))
+    PutCapacityAssignmentConfigurationInput.struct_class = Types::PutCapacityAssignmentConfigurationInput
+
+    PutCapacityAssignmentConfigurationOutput.struct_class = Types::PutCapacityAssignmentConfigurationOutput
 
     QueryExecution.add_member(:query_execution_id, Shapes::ShapeRef.new(shape: QueryExecutionId, location_name: "QueryExecutionId"))
     QueryExecution.add_member(:query, Shapes::ShapeRef.new(shape: QueryString, location_name: "Query"))
@@ -1120,6 +1211,12 @@ module Aws::Athena
 
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
+    UpdateCapacityReservationInput.add_member(:target_dpus, Shapes::ShapeRef.new(shape: TargetDpusInteger, required: true, location_name: "TargetDpus"))
+    UpdateCapacityReservationInput.add_member(:name, Shapes::ShapeRef.new(shape: CapacityReservationName, required: true, location_name: "Name"))
+    UpdateCapacityReservationInput.struct_class = Types::UpdateCapacityReservationInput
+
+    UpdateCapacityReservationOutput.struct_class = Types::UpdateCapacityReservationOutput
+
     UpdateDataCatalogInput.add_member(:name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "Name"))
     UpdateDataCatalogInput.add_member(:type, Shapes::ShapeRef.new(shape: DataCatalogType, required: true, location_name: "Type"))
     UpdateDataCatalogInput.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
@@ -1201,6 +1298,8 @@ module Aws::Athena
     WorkGroupConfigurationUpdates.add_member(:enable_minimum_encryption_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "EnableMinimumEncryptionConfiguration"))
     WorkGroupConfigurationUpdates.struct_class = Types::WorkGroupConfigurationUpdates
 
+    WorkGroupNamesList.member = Shapes::ShapeRef.new(shape: WorkGroupName)
+
     WorkGroupSummary.add_member(:name, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "Name"))
     WorkGroupSummary.add_member(:state, Shapes::ShapeRef.new(shape: WorkGroupState, location_name: "State"))
     WorkGroupSummary.add_member(:description, Shapes::ShapeRef.new(shape: WorkGroupDescriptionString, location_name: "Description"))
@@ -1256,6 +1355,26 @@ module Aws::Athena
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: BatchGetQueryExecutionInput)
         o.output = Shapes::ShapeRef.new(shape: BatchGetQueryExecutionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:cancel_capacity_reservation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelCapacityReservation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelCapacityReservationInput)
+        o.output = Shapes::ShapeRef.new(shape: CancelCapacityReservationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_capacity_reservation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCapacityReservation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateCapacityReservationInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateCapacityReservationOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
@@ -1416,6 +1535,26 @@ module Aws::Athena
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_capacity_assignment_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCapacityAssignmentConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCapacityAssignmentConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: GetCapacityAssignmentConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_capacity_reservation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCapacityReservation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCapacityReservationInput)
+        o.output = Shapes::ShapeRef.new(shape: GetCapacityReservationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:get_data_catalog, Seahorse::Model::Operation.new.tap do |o|
@@ -1588,6 +1727,22 @@ module Aws::Athena
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_capacity_reservations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCapacityReservations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListCapacityReservationsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListCapacityReservationsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1799,6 +1954,16 @@ module Aws::Athena
         )
       end)
 
+      api.add_operation(:put_capacity_assignment_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutCapacityAssignmentConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutCapacityAssignmentConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: PutCapacityAssignmentConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:start_calculation_execution, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartCalculationExecution"
         o.http_method = "POST"
@@ -1886,6 +2051,16 @@ module Aws::Athena
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_capacity_reservation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCapacityReservation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCapacityReservationInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCapacityReservationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:update_data_catalog, Seahorse::Model::Operation.new.tap do |o|

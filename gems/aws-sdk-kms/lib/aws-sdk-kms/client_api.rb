@@ -20,6 +20,7 @@ module Aws::KMS
     AliasNameType = Shapes::StringShape.new(name: 'AliasNameType')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
     ArnType = Shapes::StringShape.new(name: 'ArnType')
+    AttestationDocumentType = Shapes::BlobShape.new(name: 'AttestationDocumentType')
     BooleanType = Shapes::BooleanShape.new(name: 'BooleanType')
     CancelKeyDeletionRequest = Shapes::StructureShape.new(name: 'CancelKeyDeletionRequest')
     CancelKeyDeletionResponse = Shapes::StructureShape.new(name: 'CancelKeyDeletionResponse')
@@ -129,6 +130,7 @@ module Aws::KMS
     KMSInvalidMacException = Shapes::StructureShape.new(name: 'KMSInvalidMacException')
     KMSInvalidSignatureException = Shapes::StructureShape.new(name: 'KMSInvalidSignatureException')
     KMSInvalidStateException = Shapes::StructureShape.new(name: 'KMSInvalidStateException')
+    KeyEncryptionMechanism = Shapes::StringShape.new(name: 'KeyEncryptionMechanism')
     KeyIdType = Shapes::StringShape.new(name: 'KeyIdType')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
     KeyListEntry = Shapes::StructureShape.new(name: 'KeyListEntry')
@@ -175,6 +177,7 @@ module Aws::KMS
     PutKeyPolicyRequest = Shapes::StructureShape.new(name: 'PutKeyPolicyRequest')
     ReEncryptRequest = Shapes::StructureShape.new(name: 'ReEncryptRequest')
     ReEncryptResponse = Shapes::StructureShape.new(name: 'ReEncryptResponse')
+    RecipientInfo = Shapes::StructureShape.new(name: 'RecipientInfo')
     RegionType = Shapes::StringShape.new(name: 'RegionType')
     ReplicateKeyRequest = Shapes::StructureShape.new(name: 'ReplicateKeyRequest')
     ReplicateKeyResponse = Shapes::StructureShape.new(name: 'ReplicateKeyResponse')
@@ -345,11 +348,13 @@ module Aws::KMS
     DecryptRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
     DecryptRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
     DecryptRequest.add_member(:encryption_algorithm, Shapes::ShapeRef.new(shape: EncryptionAlgorithmSpec, location_name: "EncryptionAlgorithm"))
+    DecryptRequest.add_member(:recipient, Shapes::ShapeRef.new(shape: RecipientInfo, location_name: "Recipient"))
     DecryptRequest.struct_class = Types::DecryptRequest
 
     DecryptResponse.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
     DecryptResponse.add_member(:plaintext, Shapes::ShapeRef.new(shape: PlaintextType, location_name: "Plaintext"))
     DecryptResponse.add_member(:encryption_algorithm, Shapes::ShapeRef.new(shape: EncryptionAlgorithmSpec, location_name: "EncryptionAlgorithm"))
+    DecryptResponse.add_member(:ciphertext_for_recipient, Shapes::ShapeRef.new(shape: CiphertextType, location_name: "CiphertextForRecipient"))
     DecryptResponse.struct_class = Types::DecryptResponse
 
     DeleteAliasRequest.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasNameType, required: true, location_name: "AliasName"))
@@ -428,6 +433,7 @@ module Aws::KMS
     GenerateDataKeyPairRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     GenerateDataKeyPairRequest.add_member(:key_pair_spec, Shapes::ShapeRef.new(shape: DataKeyPairSpec, required: true, location_name: "KeyPairSpec"))
     GenerateDataKeyPairRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
+    GenerateDataKeyPairRequest.add_member(:recipient, Shapes::ShapeRef.new(shape: RecipientInfo, location_name: "Recipient"))
     GenerateDataKeyPairRequest.struct_class = Types::GenerateDataKeyPairRequest
 
     GenerateDataKeyPairResponse.add_member(:private_key_ciphertext_blob, Shapes::ShapeRef.new(shape: CiphertextType, location_name: "PrivateKeyCiphertextBlob"))
@@ -435,6 +441,7 @@ module Aws::KMS
     GenerateDataKeyPairResponse.add_member(:public_key, Shapes::ShapeRef.new(shape: PublicKeyType, location_name: "PublicKey"))
     GenerateDataKeyPairResponse.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
     GenerateDataKeyPairResponse.add_member(:key_pair_spec, Shapes::ShapeRef.new(shape: DataKeyPairSpec, location_name: "KeyPairSpec"))
+    GenerateDataKeyPairResponse.add_member(:ciphertext_for_recipient, Shapes::ShapeRef.new(shape: CiphertextType, location_name: "CiphertextForRecipient"))
     GenerateDataKeyPairResponse.struct_class = Types::GenerateDataKeyPairResponse
 
     GenerateDataKeyPairWithoutPlaintextRequest.add_member(:encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextType, location_name: "EncryptionContext"))
@@ -454,11 +461,13 @@ module Aws::KMS
     GenerateDataKeyRequest.add_member(:number_of_bytes, Shapes::ShapeRef.new(shape: NumberOfBytesType, location_name: "NumberOfBytes"))
     GenerateDataKeyRequest.add_member(:key_spec, Shapes::ShapeRef.new(shape: DataKeySpec, location_name: "KeySpec"))
     GenerateDataKeyRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
+    GenerateDataKeyRequest.add_member(:recipient, Shapes::ShapeRef.new(shape: RecipientInfo, location_name: "Recipient"))
     GenerateDataKeyRequest.struct_class = Types::GenerateDataKeyRequest
 
     GenerateDataKeyResponse.add_member(:ciphertext_blob, Shapes::ShapeRef.new(shape: CiphertextType, location_name: "CiphertextBlob"))
     GenerateDataKeyResponse.add_member(:plaintext, Shapes::ShapeRef.new(shape: PlaintextType, location_name: "Plaintext"))
     GenerateDataKeyResponse.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
+    GenerateDataKeyResponse.add_member(:ciphertext_for_recipient, Shapes::ShapeRef.new(shape: CiphertextType, location_name: "CiphertextForRecipient"))
     GenerateDataKeyResponse.struct_class = Types::GenerateDataKeyResponse
 
     GenerateDataKeyWithoutPlaintextRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
@@ -485,9 +494,11 @@ module Aws::KMS
 
     GenerateRandomRequest.add_member(:number_of_bytes, Shapes::ShapeRef.new(shape: NumberOfBytesType, location_name: "NumberOfBytes"))
     GenerateRandomRequest.add_member(:custom_key_store_id, Shapes::ShapeRef.new(shape: CustomKeyStoreIdType, location_name: "CustomKeyStoreId"))
+    GenerateRandomRequest.add_member(:recipient, Shapes::ShapeRef.new(shape: RecipientInfo, location_name: "Recipient"))
     GenerateRandomRequest.struct_class = Types::GenerateRandomRequest
 
     GenerateRandomResponse.add_member(:plaintext, Shapes::ShapeRef.new(shape: PlaintextType, location_name: "Plaintext"))
+    GenerateRandomResponse.add_member(:ciphertext_for_recipient, Shapes::ShapeRef.new(shape: CiphertextType, location_name: "CiphertextForRecipient"))
     GenerateRandomResponse.struct_class = Types::GenerateRandomResponse
 
     GetKeyPolicyRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
@@ -739,6 +750,10 @@ module Aws::KMS
     ReEncryptResponse.add_member(:source_encryption_algorithm, Shapes::ShapeRef.new(shape: EncryptionAlgorithmSpec, location_name: "SourceEncryptionAlgorithm"))
     ReEncryptResponse.add_member(:destination_encryption_algorithm, Shapes::ShapeRef.new(shape: EncryptionAlgorithmSpec, location_name: "DestinationEncryptionAlgorithm"))
     ReEncryptResponse.struct_class = Types::ReEncryptResponse
+
+    RecipientInfo.add_member(:key_encryption_algorithm, Shapes::ShapeRef.new(shape: KeyEncryptionMechanism, location_name: "KeyEncryptionAlgorithm"))
+    RecipientInfo.add_member(:attestation_document, Shapes::ShapeRef.new(shape: AttestationDocumentType, location_name: "AttestationDocument"))
+    RecipientInfo.struct_class = Types::RecipientInfo
 
     ReplicateKeyRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     ReplicateKeyRequest.add_member(:replica_region, Shapes::ShapeRef.new(shape: RegionType, required: true, location_name: "ReplicaRegion"))

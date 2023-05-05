@@ -7186,7 +7186,7 @@ module Aws::ECS
     #
     # @!attribute [rw] value
     #   The account setting value for the specified principal ARN. Accepted
-    #   values are `enabled` and `disabled`.
+    #   values are `enabled`, `disabled`, `on`, and `off`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAccountSettingDefaultRequest AWS API Documentation
@@ -7234,7 +7234,7 @@ module Aws::ECS
     #
     # @!attribute [rw] value
     #   The account setting value for the specified principal ARN. Accepted
-    #   values are `enabled` and `disabled`.
+    #   values are `enabled`, `disabled`, `on`, and `off`.
     #   @return [String]
     #
     # @!attribute [rw] principal_arn

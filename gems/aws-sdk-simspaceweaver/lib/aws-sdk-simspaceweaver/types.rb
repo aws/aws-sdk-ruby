@@ -62,6 +62,28 @@ module Aws::SimSpaceWeaver
       include Aws::Structure
     end
 
+    # @!attribute [rw] destination
+    #   The Amazon S3 bucket and optional folder (object key prefix) where
+    #   SimSpace Weaver creates the snapshot file.
+    #   @return [Types::S3Destination]
+    #
+    # @!attribute [rw] simulation
+    #   The name of the simulation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/simspaceweaver-2022-10-28/CreateSnapshotInput AWS API Documentation
+    #
+    class CreateSnapshotInput < Struct.new(
+      :destination,
+      :simulation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/simspaceweaver-2022-10-28/CreateSnapshotOutput AWS API Documentation
+    #
+    class CreateSnapshotOutput < Aws::EmptyStructure; end
+
     # @!attribute [rw] app
     #   The name of the app.
     #   @return [String]
@@ -140,7 +162,7 @@ module Aws::SimSpaceWeaver
     #   @return [Types::SimulationAppEndpointInfo]
     #
     # @!attribute [rw] launch_overrides
-    #   Options that apply when the app starts. These optiAons override
+    #   Options that apply when the app starts. These options override
     #   default behavior.
     #   @return [Types::LaunchOverrides]
     #
@@ -223,8 +245,11 @@ module Aws::SimSpaceWeaver
     #
     # @!attribute [rw] maximum_duration
     #   The maximum running time of the simulation, specified as a number of
-    #   months (m or M), hours (h or H), or days (d or D). The simulation
-    #   stops when it reaches this limit.
+    #   minutes (m or M), hours (h or H), or days (d or D). The simulation
+    #   stops when it reaches this limit. The maximum value is `14D`, or its
+    #   equivalent in the other units. The default value is `14D`. A value
+    #   equivalent to `0` makes the simulation immediately transition to
+    #   `Stopping` as soon as it reaches `Started`.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -260,6 +285,22 @@ module Aws::SimSpaceWeaver
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
     #   @return [Types::S3Location]
     #
+    # @!attribute [rw] snapshot_s3_location
+    #   A location in Amazon Simple Storage Service (Amazon S3) where
+    #   SimSpace Weaver stores simulation data, such as your app .zip files
+    #   and schema file. For more information about Amazon S3, see the [
+    #   *Amazon Simple Storage Service User Guide* ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
+    #   @return [Types::S3Location]
+    #
+    # @!attribute [rw] start_error
+    #   An error message that SimSpace Weaver returns only if a problem
+    #   occurs when the simulation is in the `STARTING` state.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The current lifecycle state of the simulation.
     #   @return [String]
@@ -282,6 +323,8 @@ module Aws::SimSpaceWeaver
       :role_arn,
       :schema_error,
       :schema_s3_location,
+      :snapshot_s3_location,
+      :start_error,
       :status,
       :target_status)
       SENSITIVE = []
@@ -291,33 +334,29 @@ module Aws::SimSpaceWeaver
     # A collection of app instances that run the same executable app code
     # and have the same launch options and commands.
     #
-    # For more information about domains, see [Key concepts][1] in the
-    # *Amazon Web Services SimSpace Weaver User Guide*.
+    # For more information about domains, see [Key concepts: Domains][1] in
+    # the *SimSpace Weaver User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html
+    # [1]: https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html#what-is_key-concepts_domains
     #
     # @!attribute [rw] lifecycle
-    #   The type of lifecycle management for apps in the domain. This value
-    #   indicates whether apps in this domain are *managed* (SimSpace Weaver
-    #   starts and stops the apps) or *unmanaged* (you must start and stop
-    #   the apps).
+    #   The type of lifecycle management for apps in the domain. Indicates
+    #   whether apps in this domain are *managed* (SimSpace Weaver starts
+    #   and stops the apps) or *unmanaged* (you must start and stop the
+    #   apps).
     #
     #   **Lifecycle types**
     #
-    #   * `PerWorker` – Managed: SimSpace Weaver starts 1 app on each worker
+    #   * `PerWorker` – Managed: SimSpace Weaver starts one app on each
+    #     worker.
     #
-    #   * `BySpatialSubdivision` – Managed: SimSpace Weaver starts 1 app for
-    #     each spatial partition
+    #   * `BySpatialSubdivision` – Managed: SimSpace Weaver starts one app
+    #     for each spatial partition.
     #
-    #   * `ByRequest` – Unmanaged: You use the **StartApp** API to start the
-    #     apps and use the **StopApp** API to stop the apps.
-    #
-    #   <note markdown="1"> The lifecycle types will change when the service is released for
-    #   general availability (GA).
-    #
-    #    </note>
+    #   * `ByRequest` – Unmanaged: You use the `StartApp` API to start the
+    #     apps and use the `StopApp` API to stop the apps.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -344,8 +383,8 @@ module Aws::SimSpaceWeaver
       include Aws::Structure
     end
 
-    # Options that apply when the app starts. These optiAons override
-    # default behavior.
+    # Options that apply when the app starts. These options override default
+    # behavior.
     #
     # @!attribute [rw] launch_commands
     #   App launch commands and command line parameters that override the
@@ -369,13 +408,13 @@ module Aws::SimSpaceWeaver
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   If SimSpace Weaver returns `nextToken`, there are more results
+    #   If SimSpace Weaver returns `nextToken`, then there are more results
     #   available. The value of `nextToken` is a unique pagination token for
     #   each page. To retrieve the next page, call the operation again using
     #   the returned token. Keep all other arguments unchanged. If no
-    #   results remain, `nextToken` is set to `null`. Each pagination token
-    #   expires after 24 hours. If you provide a token that isn't valid,
-    #   you receive an *HTTP 400 ValidationException* error.
+    #   results remain, then `nextToken` is set to `null`. Each pagination
+    #   token expires after 24 hours. If you provide a token that isn't
+    #   valid, then you receive an *HTTP 400 ValidationException* error.
     #   @return [String]
     #
     # @!attribute [rw] simulation
@@ -398,13 +437,13 @@ module Aws::SimSpaceWeaver
     #   @return [Array<Types::SimulationAppMetadata>]
     #
     # @!attribute [rw] next_token
-    #   If SimSpace Weaver returns `nextToken`, there are more results
+    #   If SimSpace Weaver returns `nextToken`, then there are more results
     #   available. The value of `nextToken` is a unique pagination token for
     #   each page. To retrieve the next page, call the operation again using
     #   the returned token. Keep all other arguments unchanged. If no
-    #   results remain, `nextToken` is set to `null`. Each pagination token
-    #   expires after 24 hours. If you provide a token that isn't valid,
-    #   you receive an *HTTP 400 ValidationException* error.
+    #   results remain, then `nextToken` is set to `null`. Each pagination
+    #   token expires after 24 hours. If you provide a token that isn't
+    #   valid, then you receive an *HTTP 400 ValidationException* error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/simspaceweaver-2022-10-28/ListAppsOutput AWS API Documentation
@@ -421,13 +460,13 @@ module Aws::SimSpaceWeaver
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   If SimSpace Weaver returns `nextToken`, there are more results
+    #   If SimSpace Weaver returns `nextToken`, then there are more results
     #   available. The value of `nextToken` is a unique pagination token for
     #   each page. To retrieve the next page, call the operation again using
     #   the returned token. Keep all other arguments unchanged. If no
-    #   results remain, `nextToken` is set to `null`. Each pagination token
-    #   expires after 24 hours. If you provide a token that isn't valid,
-    #   you receive an *HTTP 400 ValidationException* error.
+    #   results remain, then `nextToken` is set to `null`. Each pagination
+    #   token expires after 24 hours. If you provide a token that isn't
+    #   valid, then you receive an *HTTP 400 ValidationException* error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/simspaceweaver-2022-10-28/ListSimulationsInput AWS API Documentation
@@ -440,13 +479,13 @@ module Aws::SimSpaceWeaver
     end
 
     # @!attribute [rw] next_token
-    #   If SimSpace Weaver returns `nextToken`, there are more results
+    #   If SimSpace Weaver returns `nextToken`, then there are more results
     #   available. The value of `nextToken` is a unique pagination token for
     #   each page. To retrieve the next page, call the operation again using
     #   the returned token. Keep all other arguments unchanged. If no
-    #   results remain, `nextToken` is set to `null`. Each pagination token
-    #   expires after 24 hours. If you provide a token that isn't valid,
-    #   you receive an *HTTP 400 ValidationException* error.
+    #   results remain, then `nextToken` is set to `null`. Each pagination
+    #   token expires after 24 hours. If you provide a token that isn't
+    #   valid, then you receive an *HTTP 400 ValidationException* error.
     #   @return [String]
     #
     # @!attribute [rw] simulations
@@ -505,12 +544,12 @@ module Aws::SimSpaceWeaver
     #
     # @!attribute [rw] domains
     #   A list of domains for the simulation. For more information about
-    #   domains, see [Key concepts][1] in the *Amazon Web Services SimSpace
-    #   Weaver User Guide*.
+    #   domains, see [Key concepts: Domains][1] in the *SimSpace Weaver User
+    #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html
+    #   [1]: https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html#what-is_key-concepts_domains
     #   @return [Array<Types::Domain>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/simspaceweaver-2022-10-28/LiveSimulationState AWS API Documentation
@@ -568,8 +607,41 @@ module Aws::SimSpaceWeaver
       include Aws::Structure
     end
 
+    # An Amazon S3 bucket and optional folder (object key prefix) where
+    # SimSpace Weaver creates a file.
+    #
+    # @!attribute [rw] bucket_name
+    #   The name of an Amazon S3 bucket. For more information about buckets,
+    #   see [Creating, configuring, and working with Amazon S3 buckets][1]
+    #   in the *Amazon Simple Storage Service User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html
+    #   @return [String]
+    #
+    # @!attribute [rw] object_key_prefix
+    #   A string prefix for an Amazon S3 object key. It's usually a folder
+    #   name. For more information about folders in Amazon S3, see
+    #   [Organizing objects in the Amazon S3 console using folders][1] in
+    #   the *Amazon Simple Storage Service User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/simspaceweaver-2022-10-28/S3Destination AWS API Documentation
+    #
+    class S3Destination < Struct.new(
+      :bucket_name,
+      :object_key_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A location in Amazon Simple Storage Service (Amazon S3) where SimSpace
-    # Weaver stores simulation data, such as your app zip files and schema
+    # Weaver stores simulation data, such as your app .zip files and schema
     # file. For more information about Amazon S3, see the [ *Amazon Simple
     # Storage Service User Guide* ][1].
     #
@@ -619,7 +691,13 @@ module Aws::SimSpaceWeaver
     end
 
     # Information about the network endpoint that you can use to connect to
-    # your custom or service app.
+    # your custom or service app. For more information about SimSpace Weaver
+    # apps, see [Key concepts: Apps][1] in the *SimSpace Weaver User
+    # Guide*..
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html#what-is_key-concepts_apps
     #
     # @!attribute [rw] address
     #   The IP address of the app. SimSpace Weaver dynamically assigns this
@@ -640,16 +718,15 @@ module Aws::SimSpaceWeaver
       include Aws::Structure
     end
 
-    # A collection of metadata about an app.
+    # A collection of metadata about the app.
     #
     # @!attribute [rw] domain
     #   The domain of the app. For more information about domains, see [Key
-    #   concepts][1] in the *Amazon Web Services SimSpace Weaver User
-    #   Guide*.
+    #   concepts: Domains][1] in the *SimSpace Weaver User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html
+    #   [1]: https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html#what-is_key-concepts_domains
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -786,7 +863,7 @@ module Aws::SimSpaceWeaver
     #   @return [String]
     #
     # @!attribute [rw] launch_overrides
-    #   Options that apply when the app starts. These optiAons override
+    #   Options that apply when the app starts. These options override
     #   default behavior.
     #   @return [Types::LaunchOverrides]
     #
@@ -865,8 +942,11 @@ module Aws::SimSpaceWeaver
     #
     # @!attribute [rw] maximum_duration
     #   The maximum running time of the simulation, specified as a number of
-    #   months (m or M), hours (h or H), or days (d or D). The simulation
-    #   stops when it reaches this limit.
+    #   minutes (m or M), hours (h or H), or days (d or D). The simulation
+    #   stops when it reaches this limit. The maximum value is `14D`, or its
+    #   equivalent in the other units. The default value is `14D`. A value
+    #   equivalent to `0` makes the simulation immediately transition to
+    #   `Stopping` as soon as it reaches `Started`.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -892,6 +972,27 @@ module Aws::SimSpaceWeaver
     #   Service (Amazon S3). For more information about Amazon S3, see the [
     #   *Amazon Simple Storage Service User Guide* ][1].
     #
+    #   Provide a `SchemaS3Location` to start your simulation from a schema.
+    #
+    #   If you provide a `SchemaS3Location` then you can't provide a
+    #   `SnapshotS3Location`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
+    #   @return [Types::S3Location]
+    #
+    # @!attribute [rw] snapshot_s3_location
+    #   The location of the snapshot .zip file in Amazon Simple Storage
+    #   Service (Amazon S3). For more information about Amazon S3, see the [
+    #   *Amazon Simple Storage Service User Guide* ][1].
+    #
+    #   Provide a `SnapshotS3Location` to start your simulation from a
+    #   snapshot.
+    #
+    #   If you provide a `SnapshotS3Location` then you can't provide a
+    #   `SchemaS3Location`.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
@@ -916,6 +1017,7 @@ module Aws::SimSpaceWeaver
       :name,
       :role_arn,
       :schema_s3_location,
+      :snapshot_s3_location,
       :tags)
       SENSITIVE = [:client_token]
       include Aws::Structure

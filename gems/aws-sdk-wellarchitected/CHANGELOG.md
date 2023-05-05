@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2023-05-03)
+------------------
+
+* Feature - This release deepens integration with AWS Service Catalog AppRegistry to improve workload resource discovery.
+
 1.21.0 (2023-03-30)
 ------------------
 
