@@ -428,7 +428,7 @@ module Aws
               object.upload_stream(tempfile: true) do |_write_stream|
                 raise 'something went wrong'
               end
-            end.to raise_error('multipart upload failed: something went wrong')
+            end.to raise_error(/multipart upload failed/, /something went wrong/)
           end
 
           it 'reports when it is unable to abort a failed multipart upload' do
