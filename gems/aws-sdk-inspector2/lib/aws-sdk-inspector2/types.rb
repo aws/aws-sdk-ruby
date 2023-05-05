@@ -384,6 +384,41 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # The Amazon Web Services Threat Intel Group (ATIG) details for a
+    # specific vulnerability.
+    #
+    # @!attribute [rw] first_seen
+    #   The date and time this vulnerability was first observed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_seen
+    #   The date and time this vulnerability was last observed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] targets
+    #   The commercial sectors this vulnerability targets.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ttps
+    #   The [MITRE ATT&amp;CK][1] tactics, techniques, and procedures (TTPs)
+    #   associated with vulnerability.
+    #
+    #
+    #
+    #   [1]: https://attack.mitre.org/
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AtigData AWS API Documentation
+    #
+    class AtigData < Struct.new(
+      :first_seen,
+      :last_seen,
+      :targets,
+      :ttps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents which scan types are automatically enabled for new members
     # of your Amazon Inspector organization.
     #
@@ -850,6 +885,32 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # The Cybersecurity and Infrastructure Security Agency (CISA) details
+    # for a specific vulnerability.
+    #
+    # @!attribute [rw] action
+    #   The remediation action recommended by CISA for this vulnerability.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_added
+    #   The date and time CISA added this vulnerability to their catalogue.
+    #   @return [Time]
+    #
+    # @!attribute [rw] date_due
+    #   The date and time CISA expects a fix to have been provided
+    #   vulnerability.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CisaData AWS API Documentation
+    #
+    class CisaData < Struct.new(
+      :action,
+      :date_added,
+      :date_due)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A conflict occurred.
     #
     # @!attribute [rw] message
@@ -1136,6 +1197,46 @@ module Aws::Inspector2
     #
     class CreateFindingsReportResponse < Struct.new(
       :report_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Common Vulnerability Scoring System (CVSS) version 2 details for
+    # the vulnerability.
+    #
+    # @!attribute [rw] base_score
+    #   The CVSS v2 base score for the vulnerability.
+    #   @return [Float]
+    #
+    # @!attribute [rw] scoring_vector
+    #   The scoring vector associated with the CVSS v2 score.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Cvss2 AWS API Documentation
+    #
+    class Cvss2 < Struct.new(
+      :base_score,
+      :scoring_vector)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Common Vulnerability Scoring System (CVSS) version 3 details for
+    # the vulnerability.
+    #
+    # @!attribute [rw] base_score
+    #   The CVSS v3 base score for the vulnerability.
+    #   @return [Float]
+    #
+    # @!attribute [rw] scoring_vector
+    #   The scoring vector associated with the CVSS v3 score.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Cvss3 AWS API Documentation
+    #
+    class Cvss3 < Struct.new(
+      :base_score,
+      :scoring_vector)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1739,6 +1840,39 @@ module Aws::Inspector2
     class EnableResponse < Struct.new(
       :accounts,
       :failed_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the Exploit Prediction Scoring System (EPSS) score.
+    #
+    # @!attribute [rw] score
+    #   The Exploit Prediction Scoring System (EPSS) score.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Epss AWS API Documentation
+    #
+    class Epss < Struct.new(
+      :score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information on when this exploit was observed.
+    #
+    # @!attribute [rw] first_seen
+    #   The date an time when the exploit was first seen.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_seen
+    #   The date an time when the exploit was last seen.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ExploitObserved AWS API Documentation
+    #
+    class ExploitObserved < Struct.new(
+      :first_seen,
+      :last_seen)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3960,6 +4094,60 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # Details on the criteria used to define the filter for a vulnerability
+    # search.
+    #
+    # @!attribute [rw] vulnerability_ids
+    #   The IDs for specific vulnerabilities.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/SearchVulnerabilitiesFilterCriteria AWS API Documentation
+    #
+    class SearchVulnerabilitiesFilterCriteria < Struct.new(
+      :vulnerability_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filter_criteria
+    #   The criteria used to filter the results of a vulnerability search.
+    #   @return [Types::SearchVulnerabilitiesFilterCriteria]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request to a list action. For subsequent calls, use the `NextToken`
+    #   value returned from the previous request to continue listing results
+    #   after the first page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/SearchVulnerabilitiesRequest AWS API Documentation
+    #
+    class SearchVulnerabilitiesRequest < Struct.new(
+      :filter_criteria,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination parameter to be used on the next list operation to
+    #   retrieve more items.
+    #   @return [String]
+    #
+    # @!attribute [rw] vulnerabilities
+    #   Details about the listed vulnerability.
+    #   @return [Array<Types::Vulnerability>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/SearchVulnerabilitiesResponse AWS API Documentation
+    #
+    class SearchVulnerabilitiesResponse < Struct.new(
+      :next_token,
+      :vulnerabilities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You have exceeded your service quota. To perform the requested action,
     # remove some of the relevant resources, or use Service Quotas to
     # request a service quota increase.
@@ -4472,6 +4660,108 @@ module Aws::Inspector2
     class ValidationExceptionField < Struct.new(
       :message,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a specific vulnerability Amazon Inspector can
+    # detect.
+    #
+    # @!attribute [rw] atig_data
+    #   An object that contains information about the Amazon Web Services
+    #   Threat Intel Group (ATIG) details for the vulnerability.
+    #   @return [Types::AtigData]
+    #
+    # @!attribute [rw] cisa_data
+    #   An object that contains the Cybersecurity and Infrastructure
+    #   Security Agency (CISA) details for the vulnerability.
+    #   @return [Types::CisaData]
+    #
+    # @!attribute [rw] cvss2
+    #   An object that contains the Common Vulnerability Scoring System
+    #   (CVSS) Version 2 details for the vulnerability.
+    #   @return [Types::Cvss2]
+    #
+    # @!attribute [rw] cvss3
+    #   An object that contains the Common Vulnerability Scoring System
+    #   (CVSS) Version 3 details for the vulnerability.
+    #   @return [Types::Cvss3]
+    #
+    # @!attribute [rw] cwes
+    #   The Common Weakness Enumeration (CWE) associated with the
+    #   vulnerability.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] description
+    #   A description of the vulnerability.
+    #   @return [String]
+    #
+    # @!attribute [rw] detection_platforms
+    #   Platforms that the vulnerability can be detected on.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] epss
+    #   An object that contains the Exploit Prediction Scoring System (EPSS)
+    #   score.
+    #   @return [Types::Epss]
+    #
+    # @!attribute [rw] exploit_observed
+    #   An object that contains details on when the exploit was observed.
+    #   @return [Types::ExploitObserved]
+    #
+    # @!attribute [rw] id
+    #   The ID for the specific vulnerability.
+    #   @return [String]
+    #
+    # @!attribute [rw] reference_urls
+    #   Links to various resources with more information on this
+    #   vulnerability.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] related_vulnerabilities
+    #   A list of related vulnerabilities.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source
+    #   The source of the vulnerability information.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_url
+    #   A link to the official source material for this vulnerability.
+    #   @return [String]
+    #
+    # @!attribute [rw] vendor_created_at
+    #   The date and time when the vendor created this vulnerability.
+    #   @return [Time]
+    #
+    # @!attribute [rw] vendor_severity
+    #   The severity assigned by the vendor.
+    #   @return [String]
+    #
+    # @!attribute [rw] vendor_updated_at
+    #   The date and time when the vendor last updated this vulnerability.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Vulnerability AWS API Documentation
+    #
+    class Vulnerability < Struct.new(
+      :atig_data,
+      :cisa_data,
+      :cvss2,
+      :cvss3,
+      :cwes,
+      :description,
+      :detection_platforms,
+      :epss,
+      :exploit_observed,
+      :id,
+      :reference_urls,
+      :related_vulnerabilities,
+      :source,
+      :source_url,
+      :vendor_created_at,
+      :vendor_severity,
+      :vendor_updated_at)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -39,6 +39,7 @@ module Aws::Inspector2
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssociateMemberRequest = Shapes::StructureShape.new(name: 'AssociateMemberRequest')
     AssociateMemberResponse = Shapes::StructureShape.new(name: 'AssociateMemberResponse')
+    AtigData = Shapes::StructureShape.new(name: 'AtigData')
     AutoEnable = Shapes::StructureShape.new(name: 'AutoEnable')
     AwsEc2InstanceDetails = Shapes::StructureShape.new(name: 'AwsEc2InstanceDetails')
     AwsEcrContainerAggregation = Shapes::StructureShape.new(name: 'AwsEcrContainerAggregation')
@@ -59,6 +60,10 @@ module Aws::Inspector2
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelFindingsReportRequest = Shapes::StructureShape.new(name: 'CancelFindingsReportRequest')
     CancelFindingsReportResponse = Shapes::StructureShape.new(name: 'CancelFindingsReportResponse')
+    CisaAction = Shapes::StringShape.new(name: 'CisaAction')
+    CisaData = Shapes::StructureShape.new(name: 'CisaData')
+    CisaDateAdded = Shapes::TimestampShape.new(name: 'CisaDateAdded')
+    CisaDateDue = Shapes::TimestampShape.new(name: 'CisaDateDue')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     Component = Shapes::StringShape.new(name: 'Component')
     ComponentType = Shapes::StringShape.new(name: 'ComponentType')
@@ -81,11 +86,19 @@ module Aws::Inspector2
     CreateFindingsReportRequest = Shapes::StructureShape.new(name: 'CreateFindingsReportRequest')
     CreateFindingsReportResponse = Shapes::StructureShape.new(name: 'CreateFindingsReportResponse')
     Currency = Shapes::StringShape.new(name: 'Currency')
+    Cvss2 = Shapes::StructureShape.new(name: 'Cvss2')
+    Cvss2BaseScore = Shapes::FloatShape.new(name: 'Cvss2BaseScore')
+    Cvss2ScoringVector = Shapes::StringShape.new(name: 'Cvss2ScoringVector')
+    Cvss3 = Shapes::StructureShape.new(name: 'Cvss3')
+    Cvss3BaseScore = Shapes::FloatShape.new(name: 'Cvss3BaseScore')
+    Cvss3ScoringVector = Shapes::StringShape.new(name: 'Cvss3ScoringVector')
     CvssScore = Shapes::StructureShape.new(name: 'CvssScore')
     CvssScoreAdjustment = Shapes::StructureShape.new(name: 'CvssScoreAdjustment')
     CvssScoreAdjustmentList = Shapes::ListShape.new(name: 'CvssScoreAdjustmentList')
     CvssScoreDetails = Shapes::StructureShape.new(name: 'CvssScoreDetails')
     CvssScoreList = Shapes::ListShape.new(name: 'CvssScoreList')
+    Cwe = Shapes::StringShape.new(name: 'Cwe')
+    Cwes = Shapes::ListShape.new(name: 'Cwes')
     DateFilter = Shapes::StructureShape.new(name: 'DateFilter')
     DateFilterList = Shapes::ListShape.new(name: 'DateFilterList')
     DateTimeTimestamp = Shapes::TimestampShape.new(name: 'DateTimeTimestamp')
@@ -98,6 +111,7 @@ module Aws::Inspector2
     DescribeOrganizationConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeOrganizationConfigurationRequest')
     DescribeOrganizationConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeOrganizationConfigurationResponse')
     Destination = Shapes::StructureShape.new(name: 'Destination')
+    DetectionPlatforms = Shapes::ListShape.new(name: 'DetectionPlatforms')
     DisableDelegatedAdminAccountRequest = Shapes::StructureShape.new(name: 'DisableDelegatedAdminAccountRequest')
     DisableDelegatedAdminAccountResponse = Shapes::StructureShape.new(name: 'DisableDelegatedAdminAccountResponse')
     DisableRequest = Shapes::StructureShape.new(name: 'DisableRequest')
@@ -125,10 +139,13 @@ module Aws::Inspector2
     EnableRequest = Shapes::StructureShape.new(name: 'EnableRequest')
     EnableResourceTypeList = Shapes::ListShape.new(name: 'EnableResourceTypeList')
     EnableResponse = Shapes::StructureShape.new(name: 'EnableResponse')
+    Epss = Shapes::StructureShape.new(name: 'Epss')
+    EpssScore = Shapes::FloatShape.new(name: 'EpssScore')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExecutionRoleArn = Shapes::StringShape.new(name: 'ExecutionRoleArn')
     ExploitAvailable = Shapes::StringShape.new(name: 'ExploitAvailable')
+    ExploitObserved = Shapes::StructureShape.new(name: 'ExploitObserved')
     ExploitabilityDetails = Shapes::StructureShape.new(name: 'ExploitabilityDetails')
     ExternalReportStatus = Shapes::StringShape.new(name: 'ExternalReportStatus')
     FailedAccount = Shapes::StructureShape.new(name: 'FailedAccount')
@@ -155,6 +172,7 @@ module Aws::Inspector2
     FindingTypeAggregation = Shapes::StructureShape.new(name: 'FindingTypeAggregation')
     FindingTypeAggregationResponse = Shapes::StructureShape.new(name: 'FindingTypeAggregationResponse')
     FindingTypeSortBy = Shapes::StringShape.new(name: 'FindingTypeSortBy')
+    FirstSeen = Shapes::TimestampShape.new(name: 'FirstSeen')
     FixAvailable = Shapes::StringShape.new(name: 'FixAvailable')
     FreeTrialAccountInfo = Shapes::StructureShape.new(name: 'FreeTrialAccountInfo')
     FreeTrialAccountInfoList = Shapes::ListShape.new(name: 'FreeTrialAccountInfoList')
@@ -199,6 +217,7 @@ module Aws::Inspector2
     LambdaLayerList = Shapes::ListShape.new(name: 'LambdaLayerList')
     LambdaLayerSortBy = Shapes::StringShape.new(name: 'LambdaLayerSortBy')
     LambdaVpcConfig = Shapes::StructureShape.new(name: 'LambdaVpcConfig')
+    LastSeen = Shapes::TimestampShape.new(name: 'LastSeen')
     LayerList = Shapes::ListShape.new(name: 'LayerList')
     ListAccountPermissionsMaxResults = Shapes::IntegerShape.new(name: 'ListAccountPermissionsMaxResults')
     ListAccountPermissionsRequest = Shapes::StructureShape.new(name: 'ListAccountPermissionsRequest')
@@ -276,6 +295,8 @@ module Aws::Inspector2
     PortRangeFilter = Shapes::StructureShape.new(name: 'PortRangeFilter')
     PortRangeFilterList = Shapes::ListShape.new(name: 'PortRangeFilterList')
     Recommendation = Shapes::StructureShape.new(name: 'Recommendation')
+    RelatedVulnerabilities = Shapes::ListShape.new(name: 'RelatedVulnerabilities')
+    RelatedVulnerability = Shapes::StringShape.new(name: 'RelatedVulnerability')
     RelationshipStatus = Shapes::StringShape.new(name: 'RelationshipStatus')
     Remediation = Shapes::StructureShape.new(name: 'Remediation')
     ReportFormat = Shapes::StringShape.new(name: 'ReportFormat')
@@ -299,6 +320,9 @@ module Aws::Inspector2
     ScanStatusCode = Shapes::StringShape.new(name: 'ScanStatusCode')
     ScanStatusReason = Shapes::StringShape.new(name: 'ScanStatusReason')
     ScanType = Shapes::StringShape.new(name: 'ScanType')
+    SearchVulnerabilitiesFilterCriteria = Shapes::StructureShape.new(name: 'SearchVulnerabilitiesFilterCriteria')
+    SearchVulnerabilitiesRequest = Shapes::StructureShape.new(name: 'SearchVulnerabilitiesRequest')
+    SearchVulnerabilitiesResponse = Shapes::StructureShape.new(name: 'SearchVulnerabilitiesResponse')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     Service = Shapes::StringShape.new(name: 'Service')
@@ -327,11 +351,15 @@ module Aws::Inspector2
     TagMap = Shapes::MapShape.new(name: 'TagMap')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    Target = Shapes::StringShape.new(name: 'Target')
+    Targets = Shapes::ListShape.new(name: 'Targets')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TitleAggregation = Shapes::StructureShape.new(name: 'TitleAggregation')
     TitleAggregationResponse = Shapes::StructureShape.new(name: 'TitleAggregationResponse')
     TitleSortBy = Shapes::StringShape.new(name: 'TitleSortBy')
+    Ttp = Shapes::StringShape.new(name: 'Ttp')
+    Ttps = Shapes::ListShape.new(name: 'Ttps')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateConfigurationRequest')
@@ -356,10 +384,22 @@ module Aws::Inspector2
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFields = Shapes::ListShape.new(name: 'ValidationExceptionFields')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    VendorCreatedAt = Shapes::TimestampShape.new(name: 'VendorCreatedAt')
+    VendorSeverity = Shapes::StringShape.new(name: 'VendorSeverity')
+    VendorUpdatedAt = Shapes::TimestampShape.new(name: 'VendorUpdatedAt')
     Version = Shapes::StringShape.new(name: 'Version')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
+    VulnId = Shapes::StringShape.new(name: 'VulnId')
+    VulnIdList = Shapes::ListShape.new(name: 'VulnIdList')
+    Vulnerabilities = Shapes::ListShape.new(name: 'Vulnerabilities')
+    Vulnerability = Shapes::StructureShape.new(name: 'Vulnerability')
+    VulnerabilityDescription = Shapes::StringShape.new(name: 'VulnerabilityDescription')
     VulnerabilityId = Shapes::StringShape.new(name: 'VulnerabilityId')
     VulnerabilityIdList = Shapes::ListShape.new(name: 'VulnerabilityIdList')
+    VulnerabilityReferenceUrl = Shapes::StringShape.new(name: 'VulnerabilityReferenceUrl')
+    VulnerabilityReferenceUrls = Shapes::ListShape.new(name: 'VulnerabilityReferenceUrls')
+    VulnerabilitySource = Shapes::StringShape.new(name: 'VulnerabilitySource')
+    VulnerabilitySourceUrl = Shapes::StringShape.new(name: 'VulnerabilitySourceUrl')
     VulnerablePackage = Shapes::StructureShape.new(name: 'VulnerablePackage')
     VulnerablePackageList = Shapes::ListShape.new(name: 'VulnerablePackageList')
     VulnerablePackageRemediation = Shapes::StringShape.new(name: 'VulnerablePackageRemediation')
@@ -466,6 +506,12 @@ module Aws::Inspector2
     AssociateMemberResponse.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
     AssociateMemberResponse.struct_class = Types::AssociateMemberResponse
 
+    AtigData.add_member(:first_seen, Shapes::ShapeRef.new(shape: FirstSeen, location_name: "firstSeen"))
+    AtigData.add_member(:last_seen, Shapes::ShapeRef.new(shape: LastSeen, location_name: "lastSeen"))
+    AtigData.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "targets"))
+    AtigData.add_member(:ttps, Shapes::ShapeRef.new(shape: Ttps, location_name: "ttps"))
+    AtigData.struct_class = Types::AtigData
+
     AutoEnable.add_member(:ec2, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ec2"))
     AutoEnable.add_member(:ecr, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ecr"))
     AutoEnable.add_member(:lambda, Shapes::ShapeRef.new(shape: Boolean, location_name: "lambda"))
@@ -562,6 +608,11 @@ module Aws::Inspector2
     CancelFindingsReportResponse.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, required: true, location_name: "reportId"))
     CancelFindingsReportResponse.struct_class = Types::CancelFindingsReportResponse
 
+    CisaData.add_member(:action, Shapes::ShapeRef.new(shape: CisaAction, location_name: "action"))
+    CisaData.add_member(:date_added, Shapes::ShapeRef.new(shape: CisaDateAdded, location_name: "dateAdded"))
+    CisaData.add_member(:date_due, Shapes::ShapeRef.new(shape: CisaDateDue, location_name: "dateDue"))
+    CisaData.struct_class = Types::CisaData
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
@@ -629,6 +680,14 @@ module Aws::Inspector2
     CreateFindingsReportResponse.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, location_name: "reportId"))
     CreateFindingsReportResponse.struct_class = Types::CreateFindingsReportResponse
 
+    Cvss2.add_member(:base_score, Shapes::ShapeRef.new(shape: Cvss2BaseScore, location_name: "baseScore"))
+    Cvss2.add_member(:scoring_vector, Shapes::ShapeRef.new(shape: Cvss2ScoringVector, location_name: "scoringVector"))
+    Cvss2.struct_class = Types::Cvss2
+
+    Cvss3.add_member(:base_score, Shapes::ShapeRef.new(shape: Cvss3BaseScore, location_name: "baseScore"))
+    Cvss3.add_member(:scoring_vector, Shapes::ShapeRef.new(shape: Cvss3ScoringVector, location_name: "scoringVector"))
+    Cvss3.struct_class = Types::Cvss3
+
     CvssScore.add_member(:base_score, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "baseScore"))
     CvssScore.add_member(:scoring_vector, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "scoringVector"))
     CvssScore.add_member(:source, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "source"))
@@ -650,6 +709,8 @@ module Aws::Inspector2
     CvssScoreDetails.struct_class = Types::CvssScoreDetails
 
     CvssScoreList.member = Shapes::ShapeRef.new(shape: CvssScore)
+
+    Cwes.member = Shapes::ShapeRef.new(shape: Cwe)
 
     DateFilter.add_member(:end_inclusive, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endInclusive"))
     DateFilter.add_member(:start_inclusive, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startInclusive"))
@@ -683,6 +744,8 @@ module Aws::Inspector2
     Destination.add_member(:key_prefix, Shapes::ShapeRef.new(shape: String, location_name: "keyPrefix"))
     Destination.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "kmsKeyArn"))
     Destination.struct_class = Types::Destination
+
+    DetectionPlatforms.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
     DisableDelegatedAdminAccountRequest.add_member(:delegated_admin_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "delegatedAdminAccountId"))
     DisableDelegatedAdminAccountRequest.struct_class = Types::DisableDelegatedAdminAccountRequest
@@ -763,6 +826,13 @@ module Aws::Inspector2
     EnableResponse.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, required: true, location_name: "accounts"))
     EnableResponse.add_member(:failed_accounts, Shapes::ShapeRef.new(shape: FailedAccountList, location_name: "failedAccounts"))
     EnableResponse.struct_class = Types::EnableResponse
+
+    Epss.add_member(:score, Shapes::ShapeRef.new(shape: EpssScore, location_name: "score"))
+    Epss.struct_class = Types::Epss
+
+    ExploitObserved.add_member(:first_seen, Shapes::ShapeRef.new(shape: FirstSeen, location_name: "firstSeen"))
+    ExploitObserved.add_member(:last_seen, Shapes::ShapeRef.new(shape: LastSeen, location_name: "lastSeen"))
+    ExploitObserved.struct_class = Types::ExploitObserved
 
     ExploitabilityDetails.add_member(:last_known_exploit_at, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "lastKnownExploitAt"))
     ExploitabilityDetails.struct_class = Types::ExploitabilityDetails
@@ -1192,6 +1262,8 @@ module Aws::Inspector2
     Recommendation.add_member(:text, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "text"))
     Recommendation.struct_class = Types::Recommendation
 
+    RelatedVulnerabilities.member = Shapes::ShapeRef.new(shape: RelatedVulnerability)
+
     Remediation.add_member(:recommendation, Shapes::ShapeRef.new(shape: Recommendation, location_name: "recommendation"))
     Remediation.struct_class = Types::Remediation
 
@@ -1244,6 +1316,17 @@ module Aws::Inspector2
     ScanStatus.add_member(:status_code, Shapes::ShapeRef.new(shape: ScanStatusCode, required: true, location_name: "statusCode"))
     ScanStatus.struct_class = Types::ScanStatus
 
+    SearchVulnerabilitiesFilterCriteria.add_member(:vulnerability_ids, Shapes::ShapeRef.new(shape: VulnIdList, required: true, location_name: "vulnerabilityIds"))
+    SearchVulnerabilitiesFilterCriteria.struct_class = Types::SearchVulnerabilitiesFilterCriteria
+
+    SearchVulnerabilitiesRequest.add_member(:filter_criteria, Shapes::ShapeRef.new(shape: SearchVulnerabilitiesFilterCriteria, required: true, location_name: "filterCriteria"))
+    SearchVulnerabilitiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    SearchVulnerabilitiesRequest.struct_class = Types::SearchVulnerabilitiesRequest
+
+    SearchVulnerabilitiesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    SearchVulnerabilitiesResponse.add_member(:vulnerabilities, Shapes::ShapeRef.new(shape: Vulnerabilities, required: true, location_name: "vulnerabilities"))
+    SearchVulnerabilitiesResponse.struct_class = Types::SearchVulnerabilitiesResponse
+
     SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -1294,6 +1377,8 @@ module Aws::Inspector2
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    Targets.member = Shapes::ShapeRef.new(shape: Target)
+
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ThrottlingException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
     ThrottlingException.struct_class = Types::ThrottlingException
@@ -1310,6 +1395,8 @@ module Aws::Inspector2
     TitleAggregationResponse.add_member(:title, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "title"))
     TitleAggregationResponse.add_member(:vulnerability_id, Shapes::ShapeRef.new(shape: String, location_name: "vulnerabilityId"))
     TitleAggregationResponse.struct_class = Types::TitleAggregationResponse
+
+    Ttps.member = Shapes::ShapeRef.new(shape: Ttp)
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
@@ -1381,7 +1468,32 @@ module Aws::Inspector2
 
     ValidationExceptionFields.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
 
+    VulnIdList.member = Shapes::ShapeRef.new(shape: VulnId)
+
+    Vulnerabilities.member = Shapes::ShapeRef.new(shape: Vulnerability)
+
+    Vulnerability.add_member(:atig_data, Shapes::ShapeRef.new(shape: AtigData, location_name: "atigData"))
+    Vulnerability.add_member(:cisa_data, Shapes::ShapeRef.new(shape: CisaData, location_name: "cisaData"))
+    Vulnerability.add_member(:cvss2, Shapes::ShapeRef.new(shape: Cvss2, location_name: "cvss2"))
+    Vulnerability.add_member(:cvss3, Shapes::ShapeRef.new(shape: Cvss3, location_name: "cvss3"))
+    Vulnerability.add_member(:cwes, Shapes::ShapeRef.new(shape: Cwes, location_name: "cwes"))
+    Vulnerability.add_member(:description, Shapes::ShapeRef.new(shape: VulnerabilityDescription, location_name: "description"))
+    Vulnerability.add_member(:detection_platforms, Shapes::ShapeRef.new(shape: DetectionPlatforms, location_name: "detectionPlatforms"))
+    Vulnerability.add_member(:epss, Shapes::ShapeRef.new(shape: Epss, location_name: "epss"))
+    Vulnerability.add_member(:exploit_observed, Shapes::ShapeRef.new(shape: ExploitObserved, location_name: "exploitObserved"))
+    Vulnerability.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "id"))
+    Vulnerability.add_member(:reference_urls, Shapes::ShapeRef.new(shape: VulnerabilityReferenceUrls, location_name: "referenceUrls"))
+    Vulnerability.add_member(:related_vulnerabilities, Shapes::ShapeRef.new(shape: RelatedVulnerabilities, location_name: "relatedVulnerabilities"))
+    Vulnerability.add_member(:source, Shapes::ShapeRef.new(shape: VulnerabilitySource, location_name: "source"))
+    Vulnerability.add_member(:source_url, Shapes::ShapeRef.new(shape: VulnerabilitySourceUrl, location_name: "sourceUrl"))
+    Vulnerability.add_member(:vendor_created_at, Shapes::ShapeRef.new(shape: VendorCreatedAt, location_name: "vendorCreatedAt"))
+    Vulnerability.add_member(:vendor_severity, Shapes::ShapeRef.new(shape: VendorSeverity, location_name: "vendorSeverity"))
+    Vulnerability.add_member(:vendor_updated_at, Shapes::ShapeRef.new(shape: VendorUpdatedAt, location_name: "vendorUpdatedAt"))
+    Vulnerability.struct_class = Types::Vulnerability
+
     VulnerabilityIdList.member = Shapes::ShapeRef.new(shape: VulnerabilityId)
+
+    VulnerabilityReferenceUrls.member = Shapes::ShapeRef.new(shape: VulnerabilityReferenceUrl)
 
     VulnerablePackage.add_member(:arch, Shapes::ShapeRef.new(shape: PackageArchitecture, location_name: "arch"))
     VulnerablePackage.add_member(:epoch, Shapes::ShapeRef.new(shape: PackageEpoch, location_name: "epoch"))
@@ -1834,6 +1946,23 @@ module Aws::Inspector2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:search_vulnerabilities, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchVulnerabilities"
+        o.http_method = "POST"
+        o.http_request_uri = "/vulnerabilities/search"
+        o.input = Shapes::ShapeRef.new(shape: SearchVulnerabilitiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchVulnerabilitiesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
           tokens: {
             "next_token" => "next_token"
           }

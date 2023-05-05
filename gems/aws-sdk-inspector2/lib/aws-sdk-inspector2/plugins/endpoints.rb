@@ -116,6 +116,8 @@ module Aws::Inspector2
             Aws::Inspector2::Endpoints::ListTagsForResource.build(context)
           when :list_usage_totals
             Aws::Inspector2::Endpoints::ListUsageTotals.build(context)
+          when :search_vulnerabilities
+            Aws::Inspector2::Endpoints::SearchVulnerabilities.build(context)
           when :tag_resource
             Aws::Inspector2::Endpoints::TagResource.build(context)
           when :untag_resource

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2023-05-05)
+------------------
+
+* Feature - Revert previous SQS protocol change.
+
 1.54.0 (2023-05-04)
 ------------------
 

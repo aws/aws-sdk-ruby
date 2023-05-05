@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.379.0 (2023-05-05)
+------------------
+
+* Feature - This release adds support the inf2 and trn1n instances. inf2 instances are purpose built for deep learning inference while trn1n instances are powered by AWS Trainium accelerators and they build on the capabilities of Trainium-powered trn1 instances.
+
 1.378.0 (2023-05-03)
 ------------------
 

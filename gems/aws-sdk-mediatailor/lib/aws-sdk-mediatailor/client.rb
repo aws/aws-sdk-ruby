@@ -1697,7 +1697,8 @@ module Aws::MediaTailor
     # @example Response structure
     #
     #   resp.ad_decision_server_url #=> String
-    #   resp.avail_suppression.mode #=> String, one of "OFF", "BEHIND_LIVE_EDGE"
+    #   resp.avail_suppression.fill_policy #=> String, one of "FULL_AVAIL_ONLY", "PARTIAL_AVAIL"
+    #   resp.avail_suppression.mode #=> String, one of "OFF", "BEHIND_LIVE_EDGE", "AFTER_LIVE_EDGE"
     #   resp.avail_suppression.value #=> String
     #   resp.bumper.end_url #=> String
     #   resp.bumper.start_url #=> String
@@ -2003,7 +2004,8 @@ module Aws::MediaTailor
     #
     #   resp.items #=> Array
     #   resp.items[0].ad_decision_server_url #=> String
-    #   resp.items[0].avail_suppression.mode #=> String, one of "OFF", "BEHIND_LIVE_EDGE"
+    #   resp.items[0].avail_suppression.fill_policy #=> String, one of "FULL_AVAIL_ONLY", "PARTIAL_AVAIL"
+    #   resp.items[0].avail_suppression.mode #=> String, one of "OFF", "BEHIND_LIVE_EDGE", "AFTER_LIVE_EDGE"
     #   resp.items[0].avail_suppression.value #=> String
     #   resp.items[0].bumper.end_url #=> String
     #   resp.items[0].bumper.start_url #=> String
@@ -2419,7 +2421,8 @@ module Aws::MediaTailor
     #   resp = client.put_playback_configuration({
     #     ad_decision_server_url: "__string",
     #     avail_suppression: {
-    #       mode: "OFF", # accepts OFF, BEHIND_LIVE_EDGE
+    #       fill_policy: "FULL_AVAIL_ONLY", # accepts FULL_AVAIL_ONLY, PARTIAL_AVAIL
+    #       mode: "OFF", # accepts OFF, BEHIND_LIVE_EDGE, AFTER_LIVE_EDGE
     #       value: "__string",
     #     },
     #     bumper: {
@@ -2461,7 +2464,8 @@ module Aws::MediaTailor
     # @example Response structure
     #
     #   resp.ad_decision_server_url #=> String
-    #   resp.avail_suppression.mode #=> String, one of "OFF", "BEHIND_LIVE_EDGE"
+    #   resp.avail_suppression.fill_policy #=> String, one of "FULL_AVAIL_ONLY", "PARTIAL_AVAIL"
+    #   resp.avail_suppression.mode #=> String, one of "OFF", "BEHIND_LIVE_EDGE", "AFTER_LIVE_EDGE"
     #   resp.avail_suppression.value #=> String
     #   resp.bumper.end_url #=> String
     #   resp.bumper.start_url #=> String
@@ -3044,7 +3048,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -67,29 +67,15 @@ module Aws::SQS
 
     # Two or more batch entries in the request have the same `Id`.
     #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/BatchEntryIdsNotDistinct AWS API Documentation
     #
-    class BatchEntryIdsNotDistinct < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
+    class BatchEntryIdsNotDistinct < Aws::EmptyStructure; end
 
     # The length of all the messages put together is more than the limit.
     #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/BatchRequestTooLong AWS API Documentation
     #
-    class BatchRequestTooLong < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
+    class BatchRequestTooLong < Aws::EmptyStructure; end
 
     # Gives a detailed description of the result of an action on each entry
     # in the request.
@@ -145,6 +131,17 @@ module Aws::SQS
 
     # Encloses a receipt handle and an entry id for each message in `
     # ChangeMessageVisibilityBatch.`
+    #
+    # All of the following list parameters must be prefixed with
+    # `ChangeMessageVisibilityBatchRequestEntry.n`, where `n` is an integer
+    # value starting with `1`. For example, a parameter list for this action
+    # might look like this:
+    #
+    # `&ChangeMessageVisibilityBatchRequestEntry.1.Id=change_visibility_msg_2`
+    #
+    # `&ChangeMessageVisibilityBatchRequestEntry.1.ReceiptHandle=your_receipt_handle`
+    #
+    # `&ChangeMessageVisibilityBatchRequestEntry.1.VisibilityTimeout=45`
     #
     # @!attribute [rw] id
     #   An identifier for this particular receipt handle used to communicate
@@ -272,33 +269,23 @@ module Aws::SQS
     #   * `MessageRetentionPeriod` – The length of time, in seconds, for
     #     which Amazon SQS retains a message. Valid values: An integer from
     #     60 seconds (1 minute) to 1,209,600 seconds (14 days). Default:
-    #     345,600 (4 days). When you change a queue's attributes, the
-    #     change can take up to 60 seconds for most of the attributes to
-    #     propagate throughout the Amazon SQS system. Changes made to the
-    #     `MessageRetentionPeriod` attribute can take up to 15 minutes and
-    #     will impact existing messages in the queue potentially causing
-    #     them to be expired and deleted if the `MessageRetentionPeriod` is
-    #     reduced below the age of existing messages.
+    #     345,600 (4 days).
     #
     #   * `Policy` – The queue's policy. A valid Amazon Web Services
     #     policy. For more information about policy structure, see [Overview
-    #     of Amazon Web Services IAM Policies][1] in the *IAM User Guide*.
+    #     of Amazon Web Services IAM Policies][1] in the *Amazon IAM User
+    #     Guide*.
     #
     #   * `ReceiveMessageWaitTimeSeconds` – The length of time, in seconds,
     #     for which a ` ReceiveMessage ` action waits for a message to
     #     arrive. Valid values: An integer from 0 to 20 (seconds). Default:
     #     0.
     #
-    #   * `VisibilityTimeout` – The visibility timeout for the queue, in
-    #     seconds. Valid values: An integer from 0 to 43,200 (12 hours).
-    #     Default: 30. For more information about the visibility timeout,
-    #     see [Visibility Timeout][2] in the *Amazon SQS Developer Guide*.
-    #
-    #   The following attributes apply only to [dead-letter queues:][3]
-    #
     #   * `RedrivePolicy` – The string that includes the parameters for the
     #     dead-letter queue functionality of the source queue as a JSON
-    #     object. The parameters are as follows:
+    #     object. For more information about the redrive policy and
+    #     dead-letter queues, see [Using Amazon SQS Dead-Letter Queues][2]
+    #     in the *Amazon SQS Developer Guide*.
     #
     #     * `deadLetterTargetArn` – The Amazon Resource Name (ARN) of the
     #       dead-letter queue to which Amazon SQS moves messages after the
@@ -306,42 +293,20 @@ module Aws::SQS
     #
     #     * `maxReceiveCount` – The number of times a message is delivered
     #       to the source queue before being moved to the dead-letter queue.
-    #       Default: 10. When the `ReceiveCount` for a message exceeds the
+    #       When the `ReceiveCount` for a message exceeds the
     #       `maxReceiveCount` for a queue, Amazon SQS moves the message to
     #       the dead-letter-queue.
     #
-    #   * `RedriveAllowPolicy` – The string that includes the parameters for
-    #     the permissions for the dead-letter queue redrive permission and
-    #     which source queues can specify dead-letter queues as a JSON
-    #     object. The parameters are as follows:
+    #     <note markdown="1"> The dead-letter queue of a FIFO queue must also be a FIFO queue.
+    #     Similarly, the dead-letter queue of a standard queue must also be
+    #     a standard queue.
     #
-    #     * `redrivePermission` – The permission type that defines which
-    #       source queues can specify the current queue as the dead-letter
-    #       queue. Valid values are:
+    #      </note>
     #
-    #       * `allowAll` – (Default) Any source queues in this Amazon Web
-    #         Services account in the same Region can specify this queue as
-    #         the dead-letter queue.
-    #
-    #       * `denyAll` – No source queues can specify this queue as the
-    #         dead-letter queue.
-    #
-    #       * `byQueue` – Only queues specified by the `sourceQueueArns`
-    #         parameter can specify this queue as the dead-letter queue.
-    #
-    #     * `sourceQueueArns` – The Amazon Resource Names (ARN)s of the
-    #       source queues that can specify this queue as the dead-letter
-    #       queue and redrive messages. You can specify this parameter only
-    #       when the `redrivePermission` parameter is set to `byQueue`. You
-    #       can specify up to 10 source queue ARNs. To allow more than 10
-    #       source queues to specify dead-letter queues, set the
-    #       `redrivePermission` parameter to `allowAll`.
-    #
-    #   <note markdown="1"> The dead-letter queue of a FIFO queue must also be a FIFO queue.
-    #   Similarly, the dead-letter queue of a standard queue must also be a
-    #   standard queue.
-    #
-    #    </note>
+    #   * `VisibilityTimeout` – The visibility timeout for the queue, in
+    #     seconds. Valid values: An integer from 0 to 43,200 (12 hours).
+    #     Default: 30. For more information about the visibility timeout,
+    #     see [Visibility Timeout][3] in the *Amazon SQS Developer Guide*.
     #
     #   The following attributes apply only to [server-side-encryption][4]:
     #
@@ -360,11 +325,11 @@ module Aws::SQS
     #     hours). Default: 300 (5 minutes). A shorter time period provides
     #     better security but results in more calls to KMS which might incur
     #     charges after Free Tier. For more information, see [How Does the
-    #     Data Key Reuse Period Work?][8]
+    #     Data Key Reuse Period Work?][8].
     #
     #   * `SqsManagedSseEnabled` – Enables server-side queue encryption
     #     using SQS owned encryption keys. Only one server-side encryption
-    #     option is supported per queue (for example, [SSE-KMS][9] or
+    #     option is supported per queue (e.g. [SSE-KMS][9] or
     #     [SSE-SQS][10]).
     #
     #   The following attributes apply only to [FIFO (first-in-first-out)
@@ -442,8 +407,8 @@ module Aws::SQS
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html
-    #   [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
-    #   [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
+    #   [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
+    #   [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
     #   [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html
     #   [5]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms
     #   [6]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
@@ -483,7 +448,7 @@ module Aws::SQS
     #
     #    Cross-account permissions don't apply to this action. For more
     #   information, see [Grant cross-account permissions to a role and a
-    #   username][3] in the *Amazon SQS Developer Guide*.
+    #   user name][3] in the *Amazon SQS Developer Guide*.
     #
     #    </note>
     #
@@ -635,16 +600,9 @@ module Aws::SQS
 
     # The batch request doesn't contain any entries.
     #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/EmptyBatchRequest AWS API Documentation
     #
-    class EmptyBatchRequest < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
+    class EmptyBatchRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue whose attribute information is
@@ -656,7 +614,7 @@ module Aws::SQS
     # @!attribute [rw] attribute_names
     #   A list of attributes for which to retrieve information.
     #
-    #   The `AttributeNames` parameter is optional, but if you don't
+    #   The `AttributeName.N` parameter is optional, but if you don't
     #   specify values for this parameter, the request returns empty
     #   results.
     #
@@ -670,10 +628,10 @@ module Aws::SQS
     #
     #   The `ApproximateNumberOfMessagesDelayed`,
     #   `ApproximateNumberOfMessagesNotVisible`, and
-    #   `ApproximateNumberOfMessages` metrics may not achieve consistency
-    #   until at least 1 minute after the producers stop sending messages.
-    #   This period is required for the queue metadata to reach eventual
-    #   consistency.
+    #   `ApproximateNumberOfMessagesVisible` metrics may not achieve
+    #   consistency until at least 1 minute after the producers stop sending
+    #   messages. This period is required for the queue metadata to reach
+    #   eventual consistency.
     #
     #   * `All` – Returns all values.
     #
@@ -705,14 +663,7 @@ module Aws::SQS
     #     message can contain before Amazon SQS rejects it.
     #
     #   * `MessageRetentionPeriod` – Returns the length of time, in seconds,
-    #     for which Amazon SQS retains a message. When you change a queue's
-    #     attributes, the change can take up to 60 seconds for most of the
-    #     attributes to propagate throughout the Amazon SQS system. Changes
-    #     made to the `MessageRetentionPeriod` attribute can take up to 15
-    #     minutes and will impact existing messages in the queue potentially
-    #     causing them to be expired and deleted if the
-    #     `MessageRetentionPeriod` is reduced below the age of existing
-    #     messages.
+    #     for which Amazon SQS retains a message.
     #
     #   * `Policy` – Returns the policy of the queue.
     #
@@ -722,15 +673,11 @@ module Aws::SQS
     #     seconds, for which the `ReceiveMessage` action waits for a message
     #     to arrive.
     #
-    #   * `VisibilityTimeout` – Returns the visibility timeout for the
-    #     queue. For more information about the visibility timeout, see
-    #     [Visibility Timeout][2] in the *Amazon SQS Developer Guide*.
-    #
-    #   The following attributes apply only to [dead-letter queues:][3]
-    #
     #   * `RedrivePolicy` – The string that includes the parameters for the
     #     dead-letter queue functionality of the source queue as a JSON
-    #     object. The parameters are as follows:
+    #     object. For more information about the redrive policy and
+    #     dead-letter queues, see [Using Amazon SQS Dead-Letter Queues][2]
+    #     in the *Amazon SQS Developer Guide*.
     #
     #     * `deadLetterTargetArn` – The Amazon Resource Name (ARN) of the
     #       dead-letter queue to which Amazon SQS moves messages after the
@@ -738,42 +685,13 @@ module Aws::SQS
     #
     #     * `maxReceiveCount` – The number of times a message is delivered
     #       to the source queue before being moved to the dead-letter queue.
-    #       Default: 10. When the `ReceiveCount` for a message exceeds the
+    #       When the `ReceiveCount` for a message exceeds the
     #       `maxReceiveCount` for a queue, Amazon SQS moves the message to
     #       the dead-letter-queue.
     #
-    #   * `RedriveAllowPolicy` – The string that includes the parameters for
-    #     the permissions for the dead-letter queue redrive permission and
-    #     which source queues can specify dead-letter queues as a JSON
-    #     object. The parameters are as follows:
-    #
-    #     * `redrivePermission` – The permission type that defines which
-    #       source queues can specify the current queue as the dead-letter
-    #       queue. Valid values are:
-    #
-    #       * `allowAll` – (Default) Any source queues in this Amazon Web
-    #         Services account in the same Region can specify this queue as
-    #         the dead-letter queue.
-    #
-    #       * `denyAll` – No source queues can specify this queue as the
-    #         dead-letter queue.
-    #
-    #       * `byQueue` – Only queues specified by the `sourceQueueArns`
-    #         parameter can specify this queue as the dead-letter queue.
-    #
-    #     * `sourceQueueArns` – The Amazon Resource Names (ARN)s of the
-    #       source queues that can specify this queue as the dead-letter
-    #       queue and redrive messages. You can specify this parameter only
-    #       when the `redrivePermission` parameter is set to `byQueue`. You
-    #       can specify up to 10 source queue ARNs. To allow more than 10
-    #       source queues to specify dead-letter queues, set the
-    #       `redrivePermission` parameter to `allowAll`.
-    #
-    #   <note markdown="1"> The dead-letter queue of a FIFO queue must also be a FIFO queue.
-    #   Similarly, the dead-letter queue of a standard queue must also be a
-    #   standard queue.
-    #
-    #    </note>
+    #   * `VisibilityTimeout` – Returns the visibility timeout for the
+    #     queue. For more information about the visibility timeout, see
+    #     [Visibility Timeout][3] in the *Amazon SQS Developer Guide*.
     #
     #   The following attributes apply only to [server-side-encryption][4]:
     #
@@ -788,8 +706,8 @@ module Aws::SQS
     #
     #   * `SqsManagedSseEnabled` – Returns information about whether the
     #     queue is using SSE-SQS encryption using SQS owned encryption keys.
-    #     Only one server-side encryption option is supported per queue (for
-    #     example, [SSE-KMS][7] or [SSE-SQS][8]).
+    #     Only one server-side encryption option is supported per queue
+    #     (e.g. [SSE-KMS][7] or [SSE-SQS][8]).
     #
     #   The following attributes apply only to [FIFO (first-in-first-out)
     #   queues][9]:
@@ -836,8 +754,8 @@ module Aws::SQS
     #
     #
     #   [1]: http://en.wikipedia.org/wiki/Unix_time
-    #   [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
-    #   [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
+    #   [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
+    #   [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
     #   [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html
     #   [5]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms
     #   [6]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-how-does-the-data-key-reuse-period-work
@@ -914,58 +832,18 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    # The `accountId` is invalid.
-    #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/InvalidAddress AWS API Documentation
-    #
-    class InvalidAddress < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # The specified attribute doesn't exist.
-    #
-    # @!attribute [rw] message
-    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/InvalidAttributeName AWS API Documentation
     #
-    class InvalidAttributeName < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # A queue attribute value is invalid.
-    #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/InvalidAttributeValue AWS API Documentation
-    #
-    class InvalidAttributeValue < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
+    class InvalidAttributeName < Aws::EmptyStructure; end
 
     # The `Id` of a batch entry in a batch request doesn't abide by the
     # specification.
     #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/InvalidBatchEntryId AWS API Documentation
     #
-    class InvalidBatchEntryId < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
+    class InvalidBatchEntryId < Aws::EmptyStructure; end
 
     # The specified receipt handle isn't valid for the current version.
     #
@@ -975,131 +853,9 @@ module Aws::SQS
 
     # The message contains characters outside the allowed set.
     #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/InvalidMessageContents AWS API Documentation
     #
-    class InvalidMessageContents < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # When the request to a queue is not HTTPS and SigV4.
-    #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/InvalidSecurity AWS API Documentation
-    #
-    class InvalidSecurity < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The caller doesn't have the required KMS access.
-    #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/KmsAccessDenied AWS API Documentation
-    #
-    class KmsAccessDenied < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The request was denied due to request throttling.
-    #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/KmsDisabled AWS API Documentation
-    #
-    class KmsDisabled < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The request was rejected for one of the following reasons:
-    #
-    # * The KeyUsage value of the KMS key is incompatible with the API
-    #   operation.
-    #
-    # * The encryption algorithm or signing algorithm specified for the
-    #   operation is incompatible with the type of key material in the KMS
-    #   key (KeySpec).
-    #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/KmsInvalidKeyUsage AWS API Documentation
-    #
-    class KmsInvalidKeyUsage < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The request was rejected because the state of the specified resource
-    # is not valid for this request.
-    #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/KmsInvalidState AWS API Documentation
-    #
-    class KmsInvalidState < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The request was rejected because the specified entity or resource
-    # could not be found.
-    #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/KmsNotFound AWS API Documentation
-    #
-    class KmsNotFound < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The request was rejected because the specified key policy isn't
-    # syntactically or semantically correct.
-    #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/KmsOptInRequired AWS API Documentation
-    #
-    class KmsOptInRequired < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Amazon Web Services KMS throttles requests for the following
-    # conditions.
-    #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/KmsThrottled AWS API Documentation
-    #
-    class KmsThrottled < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
+    class InvalidMessageContents < Aws::EmptyStructure; end
 
     # @!attribute [rw] queue_url
     #   The URL of a dead-letter queue.
@@ -1314,7 +1070,7 @@ module Aws::SQS
     #
     # `Name`, `type`, `value` and the message body must not be empty or
     # null. All parts of the message attribute, including `Name`, `Type`,
-    # and `Value`, are part of the message size restriction (256 KiB or
+    # and `Value`, are part of the message size restriction (256 KB or
     # 262,144 bytes).
     #
     # @!attribute [rw] string_value
@@ -1425,35 +1181,21 @@ module Aws::SQS
     end
 
     # The specified action violates a limit. For example, `ReceiveMessage`
-    # returns this error if the maximum number of in flight messages is
+    # returns this error if the maximum number of inflight messages is
     # reached and `AddPermission` returns this error if the maximum number
     # of permissions for the queue is reached.
     #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/OverLimit AWS API Documentation
     #
-    class OverLimit < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
+    class OverLimit < Aws::EmptyStructure; end
 
     # Indicates that the specified queue previously received a `PurgeQueue`
     # request within the last 60 seconds (the time it can take to delete the
     # messages in the queue).
     #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/PurgeQueueInProgress AWS API Documentation
     #
-    class PurgeQueueInProgress < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
+    class PurgeQueueInProgress < Aws::EmptyStructure; end
 
     # @!attribute [rw] queue_url
     #   The URL of the queue from which the `PurgeQueue` action deletes
@@ -1473,57 +1215,29 @@ module Aws::SQS
     # You must wait 60 seconds after deleting a queue before you can create
     # another queue with the same name.
     #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/QueueDeletedRecently AWS API Documentation
     #
-    class QueueDeletedRecently < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
+    class QueueDeletedRecently < Aws::EmptyStructure; end
 
     # The specified queue doesn't exist.
     #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/QueueDoesNotExist AWS API Documentation
     #
-    class QueueDoesNotExist < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
+    class QueueDoesNotExist < Aws::EmptyStructure; end
 
     # A queue with this name already exists. Amazon SQS returns this error
     # only if the request includes attributes whose values differ from those
     # of the existing queue.
     #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/QueueNameExists AWS API Documentation
     #
-    class QueueNameExists < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
+    class QueueNameExists < Aws::EmptyStructure; end
 
     # The specified receipt handle isn't valid.
     #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ReceiptHandleIsInvalid AWS API Documentation
     #
-    class ReceiptHandleIsInvalid < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
+    class ReceiptHandleIsInvalid < Aws::EmptyStructure; end
 
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue from which messages are received.
@@ -1548,7 +1262,7 @@ module Aws::SQS
     #
     #   * `SenderId`
     #
-    #     * For a user, returns the user ID, for example
+    #     * For an IAM user, returns the IAM user ID, for example
     #       `ABCDEFGHI1JKLMNOPQ23R`.
     #
     #     * For an IAM role, returns the IAM role ID, for example
@@ -1559,8 +1273,7 @@ module Aws::SQS
     #
     #   * `SqsManagedSseEnabled` – Enables server-side queue encryption
     #     using SQS owned encryption keys. Only one server-side encryption
-    #     option is supported per queue (for example, [SSE-KMS][2] or
-    #     [SSE-SQS][3]).
+    #     option is supported per queue (e.g. [SSE-KMS][2] or [SSE-SQS][3]).
     #
     #   * `MessageDeduplicationId` – Returns the value provided by the
     #     producer that calls the ` SendMessage ` action.
@@ -1745,32 +1458,6 @@ module Aws::SQS
     class RemovePermissionRequest < Struct.new(
       :queue_url,
       :label)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The request was denied due to request throttling.
-    #
-    # * The rate of requests per second exceeds the AWS KMS request quota
-    #   for an account and Region.
-    #
-    # * A burst or sustained high rate of requests to change the state of
-    #   the same KMS key. This condition is often known as a "hot key."
-    #
-    # * Requests for operations on KMS keys in a Amazon Web Services
-    #   CloudHSM key store might be throttled at a lower-than-expected rate
-    #   when the Amazon Web Services CloudHSM cluster associated with the
-    #   Amazon Web Services CloudHSM key store is processing numerous
-    #   commands, including those unrelated to the Amazon Web Services
-    #   CloudHSM key store.
-    #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/RequestThrottled AWS API Documentation
-    #
-    class RequestThrottled < Struct.new(
-      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2063,7 +1750,7 @@ module Aws::SQS
     #
     # @!attribute [rw] message_body
     #   The message to send. The minimum size is one character. The maximum
-    #   size is 256 KiB.
+    #   size is 256 KB.
     #
     #   A message can include only XML, JSON, and unformatted text. The
     #   following Unicode characters are allowed:
@@ -2318,13 +2005,7 @@ module Aws::SQS
     #   * `MessageRetentionPeriod` – The length of time, in seconds, for
     #     which Amazon SQS retains a message. Valid values: An integer
     #     representing seconds, from 60 (1 minute) to 1,209,600 (14 days).
-    #     Default: 345,600 (4 days). When you change a queue's attributes,
-    #     the change can take up to 60 seconds for most of the attributes to
-    #     propagate throughout the Amazon SQS system. Changes made to the
-    #     `MessageRetentionPeriod` attribute can take up to 15 minutes and
-    #     will impact existing messages in the queue potentially causing
-    #     them to be expired and deleted if the `MessageRetentionPeriod` is
-    #     reduced below the age of existing messages.
+    #     Default: 345,600 (4 days).
     #
     #   * `Policy` – The queue's policy. A valid Amazon Web Services
     #     policy. For more information about policy structure, see [Overview
@@ -2336,16 +2017,11 @@ module Aws::SQS
     #     arrive. Valid values: An integer from 0 to 20 (seconds). Default:
     #     0.
     #
-    #   * `VisibilityTimeout` – The visibility timeout for the queue, in
-    #     seconds. Valid values: An integer from 0 to 43,200 (12 hours).
-    #     Default: 30. For more information about the visibility timeout,
-    #     see [Visibility Timeout][2] in the *Amazon SQS Developer Guide*.
-    #
-    #   The following attributes apply only to [dead-letter queues:][3]
-    #
     #   * `RedrivePolicy` – The string that includes the parameters for the
     #     dead-letter queue functionality of the source queue as a JSON
-    #     object. The parameters are as follows:
+    #     object. For more information about the redrive policy and
+    #     dead-letter queues, see [Using Amazon SQS Dead-Letter Queues][2]
+    #     in the *Amazon SQS Developer Guide*.
     #
     #     * `deadLetterTargetArn` – The Amazon Resource Name (ARN) of the
     #       dead-letter queue to which Amazon SQS moves messages after the
@@ -2353,42 +2029,20 @@ module Aws::SQS
     #
     #     * `maxReceiveCount` – The number of times a message is delivered
     #       to the source queue before being moved to the dead-letter queue.
-    #       Default: 10. When the `ReceiveCount` for a message exceeds the
+    #       When the `ReceiveCount` for a message exceeds the
     #       `maxReceiveCount` for a queue, Amazon SQS moves the message to
     #       the dead-letter-queue.
     #
-    #   * `RedriveAllowPolicy` – The string that includes the parameters for
-    #     the permissions for the dead-letter queue redrive permission and
-    #     which source queues can specify dead-letter queues as a JSON
-    #     object. The parameters are as follows:
+    #     <note markdown="1"> The dead-letter queue of a FIFO queue must also be a FIFO queue.
+    #     Similarly, the dead-letter queue of a standard queue must also be
+    #     a standard queue.
     #
-    #     * `redrivePermission` – The permission type that defines which
-    #       source queues can specify the current queue as the dead-letter
-    #       queue. Valid values are:
+    #      </note>
     #
-    #       * `allowAll` – (Default) Any source queues in this Amazon Web
-    #         Services account in the same Region can specify this queue as
-    #         the dead-letter queue.
-    #
-    #       * `denyAll` – No source queues can specify this queue as the
-    #         dead-letter queue.
-    #
-    #       * `byQueue` – Only queues specified by the `sourceQueueArns`
-    #         parameter can specify this queue as the dead-letter queue.
-    #
-    #     * `sourceQueueArns` – The Amazon Resource Names (ARN)s of the
-    #       source queues that can specify this queue as the dead-letter
-    #       queue and redrive messages. You can specify this parameter only
-    #       when the `redrivePermission` parameter is set to `byQueue`. You
-    #       can specify up to 10 source queue ARNs. To allow more than 10
-    #       source queues to specify dead-letter queues, set the
-    #       `redrivePermission` parameter to `allowAll`.
-    #
-    #   <note markdown="1"> The dead-letter queue of a FIFO queue must also be a FIFO queue.
-    #   Similarly, the dead-letter queue of a standard queue must also be a
-    #   standard queue.
-    #
-    #    </note>
+    #   * `VisibilityTimeout` – The visibility timeout for the queue, in
+    #     seconds. Valid values: An integer from 0 to 43,200 (12 hours).
+    #     Default: 30. For more information about the visibility timeout,
+    #     see [Visibility Timeout][3] in the *Amazon SQS Developer Guide*.
     #
     #   The following attributes apply only to [server-side-encryption][4]:
     #
@@ -2411,7 +2065,7 @@ module Aws::SQS
     #
     #   * `SqsManagedSseEnabled` – Enables server-side queue encryption
     #     using SQS owned encryption keys. Only one server-side encryption
-    #     option is supported per queue (for example, [SSE-KMS][9] or
+    #     option is supported per queue (e.g. [SSE-KMS][9] or
     #     [SSE-SQS][10]).
     #
     #   The following attribute applies only to [FIFO (first-in-first-out)
@@ -2478,8 +2132,8 @@ module Aws::SQS
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html
-    #   [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
-    #   [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
+    #   [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
+    #   [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
     #   [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html
     #   [5]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms
     #   [6]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
@@ -2521,29 +2175,15 @@ module Aws::SQS
 
     # The batch request contains more entries than permissible.
     #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/TooManyEntriesInBatchRequest AWS API Documentation
     #
-    class TooManyEntriesInBatchRequest < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
+    class TooManyEntriesInBatchRequest < Aws::EmptyStructure; end
 
     # Error code 400. Unsupported operation.
     #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/UnsupportedOperation AWS API Documentation
     #
-    class UnsupportedOperation < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
+    class UnsupportedOperation < Aws::EmptyStructure; end
 
     # @!attribute [rw] queue_url
     #   The URL of the queue.

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2023-05-05)
+------------------
+
+* Feature - This release adds support for AFTER_LIVE_EDGE mode configuration for avail suppression, and adding a fill-policy setting that sets the avail suppression to PARTIAL_AVAIL or FULL_AVAIL_ONLY when AFTER_LIVE_EDGE is enabled.
+
 1.60.0 (2023-02-01)
 ------------------
 

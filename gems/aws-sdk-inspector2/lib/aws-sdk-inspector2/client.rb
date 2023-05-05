@@ -3158,6 +3158,79 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Lists Amazon Inspector coverage details for a specific vulnerability.
+    #
+    # @option params [required, Types::SearchVulnerabilitiesFilterCriteria] :filter_criteria
+    #   The criteria used to filter the results of a vulnerability search.
+    #
+    # @option params [String] :next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request to a list action. For subsequent calls, use the `NextToken`
+    #   value returned from the previous request to continue listing results
+    #   after the first page.
+    #
+    # @return [Types::SearchVulnerabilitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchVulnerabilitiesResponse#next_token #next_token} => String
+    #   * {Types::SearchVulnerabilitiesResponse#vulnerabilities #vulnerabilities} => Array&lt;Types::Vulnerability&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_vulnerabilities({
+    #     filter_criteria: { # required
+    #       vulnerability_ids: ["VulnId"], # required
+    #     },
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.vulnerabilities #=> Array
+    #   resp.vulnerabilities[0].atig_data.first_seen #=> Time
+    #   resp.vulnerabilities[0].atig_data.last_seen #=> Time
+    #   resp.vulnerabilities[0].atig_data.targets #=> Array
+    #   resp.vulnerabilities[0].atig_data.targets[0] #=> String
+    #   resp.vulnerabilities[0].atig_data.ttps #=> Array
+    #   resp.vulnerabilities[0].atig_data.ttps[0] #=> String
+    #   resp.vulnerabilities[0].cisa_data.action #=> String
+    #   resp.vulnerabilities[0].cisa_data.date_added #=> Time
+    #   resp.vulnerabilities[0].cisa_data.date_due #=> Time
+    #   resp.vulnerabilities[0].cvss2.base_score #=> Float
+    #   resp.vulnerabilities[0].cvss2.scoring_vector #=> String
+    #   resp.vulnerabilities[0].cvss3.base_score #=> Float
+    #   resp.vulnerabilities[0].cvss3.scoring_vector #=> String
+    #   resp.vulnerabilities[0].cwes #=> Array
+    #   resp.vulnerabilities[0].cwes[0] #=> String
+    #   resp.vulnerabilities[0].description #=> String
+    #   resp.vulnerabilities[0].detection_platforms #=> Array
+    #   resp.vulnerabilities[0].detection_platforms[0] #=> String
+    #   resp.vulnerabilities[0].epss.score #=> Float
+    #   resp.vulnerabilities[0].exploit_observed.first_seen #=> Time
+    #   resp.vulnerabilities[0].exploit_observed.last_seen #=> Time
+    #   resp.vulnerabilities[0].id #=> String
+    #   resp.vulnerabilities[0].reference_urls #=> Array
+    #   resp.vulnerabilities[0].reference_urls[0] #=> String
+    #   resp.vulnerabilities[0].related_vulnerabilities #=> Array
+    #   resp.vulnerabilities[0].related_vulnerabilities[0] #=> String
+    #   resp.vulnerabilities[0].source #=> String, one of "NVD"
+    #   resp.vulnerabilities[0].source_url #=> String
+    #   resp.vulnerabilities[0].vendor_created_at #=> Time
+    #   resp.vulnerabilities[0].vendor_severity #=> String
+    #   resp.vulnerabilities[0].vendor_updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/SearchVulnerabilities AWS API Documentation
+    #
+    # @overload search_vulnerabilities(params = {})
+    # @param [Hash] params ({})
+    def search_vulnerabilities(params = {}, options = {})
+      req = build_request(:search_vulnerabilities, params)
+      req.send_request(options)
+    end
+
     # Adds tags to a resource.
     #
     # @option params [required, String] :resource_arn
@@ -3669,7 +3742,7 @@ module Aws::Inspector2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
