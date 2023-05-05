@@ -22,30 +22,13 @@ module Aws
 
       describe 'empty result element' do
         it 'returns a structure with all of the root members' do
-          if client.config.api.metadata['protocol'] == 'json'
-            client.handle(step: :send) do |context|
-              context.http_response.signal_done(
-                status_code: 200,
-                headers: {},
-                body: '{"Messages": []}'
-              )
-              Seahorse::Client::Response.new(context: context)
-            end
-          else
-            client.handle(step: :send) do |context|
-              context.http_response.signal_done(
-                status_code: 200,
-                headers: {},
-                body:<<-XML)
-                <ReceiveMessageResponse>
-                  <ReceiveMessageResult/>
-                  <ResponseMetadata>
-                    <RequestId>request-id</RequestId>
-                  </ResponseMetadata>
-                </ReceiveMessageResponse>
-              XML
-              Seahorse::Client::Response.new(context: context)
-            end
+          client.handle(step: :send) do |context|
+            context.http_response.signal_done(
+              status_code: 200,
+              headers: {},
+              body: '{"Messages": []}'
+            )
+            Seahorse::Client::Response.new(context: context)
           end
           resp = client.receive_message(queue_url: 'https://foo.com')
           expect(resp.data.members).to eq([:messages])
