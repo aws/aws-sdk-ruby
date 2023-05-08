@@ -26,6 +26,8 @@ module Aws
     #
     # You can put any of these placeholders into you pattern.
     #
+    #   * `:region` - The region configured for the client.
+    #
     #   * `:client_class` - The name of the client class.
     #
     #   * `:operation` - The name of the client request method.
