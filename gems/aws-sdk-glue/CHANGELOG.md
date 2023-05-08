@@ -4,7 +4,7 @@ Unreleased Changes
 1.135.0 (2023-05-08)
 ------------------
 
-* Feature - We don't do release notes https://w.amazon.com/bin/view/AWSDocs/common-tasks/release-notes
+* Feature - Expand WorkerType enumeration.
 
 1.134.0 (2023-04-03)
 ------------------
