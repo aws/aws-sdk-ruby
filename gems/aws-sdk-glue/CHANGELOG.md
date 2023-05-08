@@ -4,7 +4,7 @@ Unreleased Changes
 1.135.0 (2023-05-08)
 ------------------
 
-* Feature - Expand WorkerType enumeration.
+* Feature - Support large worker types G.4x and G.8x for Glue Spark.
 
 1.134.0 (2023-04-03)
 ------------------
