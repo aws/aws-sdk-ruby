@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.172.0 (2023-05-08)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
 * Feature - Add :region option to `Aws::Log::Formatter`.
 
 3.171.1 (2023-05-04)

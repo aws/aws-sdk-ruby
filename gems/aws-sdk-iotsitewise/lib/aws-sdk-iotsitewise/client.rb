@@ -560,10 +560,10 @@ module Aws::IoTSiteWise
     #   The maximum number of results to return for each paginated request. A
     #   result set is returned in the two cases, whichever occurs first.
     #
-    #   * The size of the result set is less than 1 MB.
+    #   * The size of the result set is equal to 1 MB.
     #
-    #   * The number of data points in the result set is less than the value
-    #     of `maxResults`. The maximum value of `maxResults` is 4000.
+    #   * The number of data points in the result set is equal to the value of
+    #     `maxResults`. The maximum value of `maxResults` is 4000.
     #
     # @return [Types::BatchGetAssetPropertyAggregatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -712,10 +712,10 @@ module Aws::IoTSiteWise
     #   The maximum number of results to return for each paginated request. A
     #   result set is returned in the two cases, whichever occurs first.
     #
-    #   * The size of the result set is less than 1 MB.
+    #   * The size of the result set is equal to 4 MB.
     #
-    #   * The number of data points in the result set is less than the value
-    #     of `maxResults`. The maximum value of `maxResults` is 4000.
+    #   * The number of data points in the result set is equal to the value of
+    #     `maxResults`. The maximum value of `maxResults` is 20000.
     #
     # @return [Types::BatchGetAssetPropertyValueHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2869,9 +2869,13 @@ module Aws::IoTSiteWise
     #   The token to be used for the next set of paginated results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return for each paginated request.
+    #   The maximum number of results to return for each paginated request. A
+    #   result set is returned in the two cases, whichever occurs first.
     #
-    #   Default: 100
+    #   * The size of the result set is equal to 1 MB.
+    #
+    #   * The number of data points in the result set is equal to the value of
+    #     `maxResults`. The maximum value of `maxResults` is 250.
     #
     # @return [Types::GetAssetPropertyAggregatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3031,9 +3035,13 @@ module Aws::IoTSiteWise
     #   The token to be used for the next set of paginated results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return for each paginated request.
+    #   The maximum number of results to return for each paginated request. A
+    #   result set is returned in the two cases, whichever occurs first.
     #
-    #   Default: 100
+    #   * The size of the result set is equal to 4 MB.
+    #
+    #   * The number of data points in the result set is equal to the value of
+    #     `maxResults`. The maximum value of `maxResults` is 20000.
     #
     # @return [Types::GetAssetPropertyValueHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5029,7 +5037,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

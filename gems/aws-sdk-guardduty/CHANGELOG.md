@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2023-05-08)
+------------------
+
+* Feature - Add AccessDeniedException 403 Error message code to support 3 Tagging related APIs
+
 1.69.0 (2023-04-27)
 ------------------
 

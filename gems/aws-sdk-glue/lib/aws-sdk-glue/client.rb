@@ -958,7 +958,7 @@ module Aws::Glue
     #   resp.dev_endpoints[0].zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoints[0].public_address #=> String
     #   resp.dev_endpoints[0].status #=> String
-    #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X"
     #   resp.dev_endpoints[0].glue_version #=> String
     #   resp.dev_endpoints[0].number_of_workers #=> Integer
     #   resp.dev_endpoints[0].number_of_nodes #=> Integer
@@ -1032,7 +1032,7 @@ module Aws::Glue
     #   resp.jobs[0].allocated_capacity #=> Integer
     #   resp.jobs[0].timeout #=> Integer
     #   resp.jobs[0].max_capacity #=> Float
-    #   resp.jobs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.jobs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X"
     #   resp.jobs[0].number_of_workers #=> Integer
     #   resp.jobs[0].security_configuration #=> String
     #   resp.jobs[0].notification_property.notify_delay_after #=> Integer
@@ -1952,7 +1952,7 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X"
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -2020,7 +2020,7 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X"
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -2990,7 +2990,7 @@ module Aws::Glue
     #     public_key: "GenericString",
     #     public_keys: ["GenericString"],
     #     number_of_nodes: 1,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X, G.4X, G.8X
     #     glue_version: "GlueVersionString",
     #     number_of_workers: 1,
     #     extra_python_libs_s3_path: "GenericString",
@@ -3015,7 +3015,7 @@ module Aws::Glue
     #   resp.yarn_endpoint_address #=> String
     #   resp.zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.number_of_nodes #=> Integer
-    #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X"
     #   resp.glue_version #=> String
     #   resp.number_of_workers #=> Integer
     #   resp.availability_zone #=> String
@@ -3258,7 +3258,7 @@ module Aws::Glue
     #     },
     #     glue_version: "GlueVersionString",
     #     number_of_workers: 1,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X, G.4X, G.8X
     #     code_gen_configuration_nodes: {
     #       "NodeId" => {
     #         athena_connector_source: {
@@ -4376,7 +4376,7 @@ module Aws::Glue
     #     role: "RoleString", # required
     #     glue_version: "GlueVersionString",
     #     max_capacity: 1.0,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X, G.4X, G.8X
     #     number_of_workers: 1,
     #     timeout: 1,
     #     max_retries: 1,
@@ -4950,7 +4950,7 @@ module Aws::Glue
     #     },
     #     max_capacity: 1.0,
     #     number_of_workers: 1,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X, G.4X, G.8X
     #     security_configuration: "NameString",
     #     glue_version: "GlueVersionString",
     #     tags: {
@@ -7464,7 +7464,7 @@ module Aws::Glue
     #   resp.dev_endpoint.zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoint.public_address #=> String
     #   resp.dev_endpoint.status #=> String
-    #   resp.dev_endpoint.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.dev_endpoint.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X"
     #   resp.dev_endpoint.glue_version #=> String
     #   resp.dev_endpoint.number_of_workers #=> Integer
     #   resp.dev_endpoint.number_of_nodes #=> Integer
@@ -7535,7 +7535,7 @@ module Aws::Glue
     #   resp.dev_endpoints[0].zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoints[0].public_address #=> String
     #   resp.dev_endpoints[0].status #=> String
-    #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X"
     #   resp.dev_endpoints[0].glue_version #=> String
     #   resp.dev_endpoints[0].number_of_workers #=> Integer
     #   resp.dev_endpoints[0].number_of_nodes #=> Integer
@@ -7601,7 +7601,7 @@ module Aws::Glue
     #   resp.job.allocated_capacity #=> Integer
     #   resp.job.timeout #=> Integer
     #   resp.job.max_capacity #=> Float
-    #   resp.job.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.job.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X"
     #   resp.job.number_of_workers #=> Integer
     #   resp.job.security_configuration #=> String
     #   resp.job.notification_property.notify_delay_after #=> Integer
@@ -8359,7 +8359,7 @@ module Aws::Glue
     #   resp.job_run.execution_time #=> Integer
     #   resp.job_run.timeout #=> Integer
     #   resp.job_run.max_capacity #=> Float
-    #   resp.job_run.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.job_run.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X"
     #   resp.job_run.number_of_workers #=> Integer
     #   resp.job_run.security_configuration #=> String
     #   resp.job_run.log_group_name #=> String
@@ -8425,7 +8425,7 @@ module Aws::Glue
     #   resp.job_runs[0].execution_time #=> Integer
     #   resp.job_runs[0].timeout #=> Integer
     #   resp.job_runs[0].max_capacity #=> Float
-    #   resp.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X"
     #   resp.job_runs[0].number_of_workers #=> Integer
     #   resp.job_runs[0].security_configuration #=> String
     #   resp.job_runs[0].log_group_name #=> String
@@ -8489,7 +8489,7 @@ module Aws::Glue
     #   resp.jobs[0].allocated_capacity #=> Integer
     #   resp.jobs[0].timeout #=> Integer
     #   resp.jobs[0].max_capacity #=> Float
-    #   resp.jobs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.jobs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X"
     #   resp.jobs[0].number_of_workers #=> Integer
     #   resp.jobs[0].security_configuration #=> String
     #   resp.jobs[0].notification_property.notify_delay_after #=> Integer
@@ -9373,7 +9373,7 @@ module Aws::Glue
     #   resp.role #=> String
     #   resp.glue_version #=> String
     #   resp.max_capacity #=> Float
-    #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X"
     #   resp.number_of_workers #=> Integer
     #   resp.timeout #=> Integer
     #   resp.max_retries #=> Integer
@@ -9483,7 +9483,7 @@ module Aws::Glue
     #   resp.transforms[0].role #=> String
     #   resp.transforms[0].glue_version #=> String
     #   resp.transforms[0].max_capacity #=> Float
-    #   resp.transforms[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.transforms[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X"
     #   resp.transforms[0].number_of_workers #=> Integer
     #   resp.transforms[0].timeout #=> Integer
     #   resp.transforms[0].max_retries #=> Integer
@@ -11849,7 +11849,7 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X"
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -11917,7 +11917,7 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X"
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -12038,7 +12038,7 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.run.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.run.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X"
     #   resp.run.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.run.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -12199,7 +12199,7 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X"
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X"
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -14444,7 +14444,7 @@ module Aws::Glue
     #     notification_property: {
     #       notify_delay_after: 1,
     #     },
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X, G.4X, G.8X
     #     number_of_workers: 1,
     #     execution_class: "FLEX", # accepts FLEX, STANDARD
     #   })
@@ -15619,7 +15619,7 @@ module Aws::Glue
     #       allocated_capacity: 1,
     #       timeout: 1,
     #       max_capacity: 1.0,
-    #       worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
+    #       worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X, G.4X, G.8X
     #       number_of_workers: 1,
     #       security_configuration: "NameString",
     #       notification_property: {
@@ -16728,7 +16728,7 @@ module Aws::Glue
     #     role: "RoleString",
     #     glue_version: "GlueVersionString",
     #     max_capacity: 1.0,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X, G.4X, G.8X
     #     number_of_workers: 1,
     #     timeout: 1,
     #     max_retries: 1,
@@ -17357,7 +17357,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.134.0'
+      context[:gem_version] = '1.135.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

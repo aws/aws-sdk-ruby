@@ -88,6 +88,25 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # An access denied exception object.
+    #
+    # @!attribute [rw] message
+    #   The error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The error type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the access keys.
     #
     # @!attribute [rw] access_key_id

@@ -576,7 +576,7 @@ module Aws::STS
     #     in IAM.
     #
     #   The combination of `NameQualifier` and `Subject` can be used to
-    #   uniquely identify a federated user.
+    #   uniquely identify a user.
     #
     #   The following pseudocode shows how the hash value is calculated:
     #
@@ -1200,11 +1200,10 @@ module Aws::STS
     #   The duration, in seconds, that the session should last. Acceptable
     #   durations for federation sessions range from 900 seconds (15
     #   minutes) to 129,600 seconds (36 hours), with 43,200 seconds (12
-    #   hours) as the default. Sessions obtained using Amazon Web Services
-    #   account root user credentials are restricted to a maximum of 3,600
-    #   seconds (one hour). If the specified duration is longer than one
-    #   hour, the session obtained by using root user credentials defaults
-    #   to one hour.
+    #   hours) as the default. Sessions obtained using root user credentials
+    #   are restricted to a maximum of 3,600 seconds (one hour). If the
+    #   specified duration is longer than one hour, the session obtained by
+    #   using root user credentials defaults to one hour.
     #   @return [Integer]
     #
     # @!attribute [rw] tags

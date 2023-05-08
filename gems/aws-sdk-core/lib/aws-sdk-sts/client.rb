@@ -406,10 +406,11 @@ module Aws::STS
     # identity-based policy of the role that is being assumed. For more
     # information, see [Session Policies][3] in the *IAM User Guide*.
     #
-    # When you create a role, you create two policies: A role trust policy
-    # that specifies *who* can assume the role and a permissions policy that
-    # specifies *what* can be done with the role. You specify the trusted
-    # principal who is allowed to assume the role in the role trust policy.
+    # When you create a role, you create two policies: a role trust policy
+    # that specifies *who* can assume the role, and a permissions policy
+    # that specifies *what* can be done with the role. You specify the
+    # trusted principal that is allowed to assume the role in the role trust
+    # policy.
     #
     # To assume a role from a different account, your Amazon Web Services
     # account must be trusted by the role. The trust relationship is defined
@@ -418,10 +419,9 @@ module Aws::STS
     # users in the account.
     #
     # A user who wants to access a role in a different account must also
-    # have permissions that are delegated from the user account
-    # administrator. The administrator must attach a policy that allows the
-    # user to call `AssumeRole` for the ARN of the role in the other
-    # account.
+    # have permissions that are delegated from the account administrator.
+    # The administrator must attach a policy that allows the user to call
+    # `AssumeRole` for the ARN of the role in the other account.
     #
     # To allow a user to assume a role in the same account, you can do
     # either of the following:
@@ -1206,10 +1206,8 @@ module Aws::STS
     # the user with a consistent identity throughout the lifetime of an
     # application.
     #
-    #  To learn more about Amazon Cognito, see [Amazon Cognito Overview][4]
-    # in *Amazon Web Services SDK for Android Developer Guide* and [Amazon
-    # Cognito Overview][5] in the *Amazon Web Services SDK for iOS Developer
-    # Guide*.
+    #  To learn more about Amazon Cognito, see [Amazon Cognito identity
+    # pools][1] in *Amazon Cognito Developer Guide*.
     #
     #  </note>
     #
@@ -1223,8 +1221,8 @@ module Aws::STS
     # a token from the web identity provider. For a comparison of
     # `AssumeRoleWithWebIdentity` with the other API operations that produce
     # temporary credentials, see [Requesting Temporary Security
-    # Credentials][6] and [Comparing the Amazon Web Services STS API
-    # operations][7] in the *IAM User Guide*.
+    # Credentials][4] and [Comparing the Amazon Web Services STS API
+    # operations][5] in the *IAM User Guide*.
     #
     # The temporary security credentials returned by this API consist of an
     # access key ID, a secret access key, and a security token. Applications
@@ -1240,11 +1238,11 @@ module Aws::STS
     # to the maximum session duration setting for the role. This setting can
     # have a value from 1 hour to 12 hours. To learn how to view the maximum
     # value for your role, see [View the Maximum Session Duration Setting
-    # for a Role][8] in the *IAM User Guide*. The maximum session duration
+    # for a Role][6] in the *IAM User Guide*. The maximum session duration
     # limit applies when you use the `AssumeRole*` API operations or the
     # `assume-role*` CLI commands. However the limit does not apply when you
     # use those operations to create a console URL. For more information,
-    # see [Using IAM Roles][9] in the *IAM User Guide*.
+    # see [Using IAM Roles][7] in the *IAM User Guide*.
     #
     # **Permissions**
     #
@@ -1253,7 +1251,7 @@ module Aws::STS
     # Amazon Web Services service with the following exception: you cannot
     # call the STS `GetFederationToken` or `GetSessionToken` API operations.
     #
-    # (Optional) You can pass inline or managed [session policies][10] to
+    # (Optional) You can pass inline or managed [session policies][8] to
     # this operation. You can pass a single JSON policy document to use as
     # an inline session policy. You can also specify up to 10 managed policy
     # Amazon Resource Names (ARNs) to use as managed session policies. The
@@ -1266,19 +1264,19 @@ module Aws::STS
     # resources in the account that owns the role. You cannot use session
     # policies to grant more permissions than those allowed by the
     # identity-based policy of the role that is being assumed. For more
-    # information, see [Session Policies][10] in the *IAM User Guide*.
+    # information, see [Session Policies][8] in the *IAM User Guide*.
     #
     # **Tags**
     #
     # (Optional) You can configure your IdP to pass attributes into your web
     # identity token as session tags. Each session tag consists of a key
     # name and an associated value. For more information about session tags,
-    # see [Passing Session Tags in STS][11] in the *IAM User Guide*.
+    # see [Passing Session Tags in STS][9] in the *IAM User Guide*.
     #
     # You can pass up to 50 session tags. The plaintext session tag keys
     # can’t exceed 128 characters and the values can’t exceed 256
     # characters. For these and additional limits, see [IAM and STS
-    # Character Limits][12] in the *IAM User Guide*.
+    # Character Limits][10] in the *IAM User Guide*.
     #
     # <note markdown="1"> An Amazon Web Services conversion compresses the passed inline session
     # policy, managed policy ARNs, and session tags into a packed binary
@@ -1296,12 +1294,12 @@ module Aws::STS
     # An administrator must grant you the permissions necessary to pass
     # session tags. The administrator can also create granular permissions
     # to allow you to pass only specific session tags. For more information,
-    # see [Tutorial: Using Tags for Attribute-Based Access Control][13] in
+    # see [Tutorial: Using Tags for Attribute-Based Access Control][11] in
     # the *IAM User Guide*.
     #
     # You can set the session tags as transitive. Transitive tags persist
     # during role chaining. For more information, see [Chaining Roles with
-    # Session Tags][14] in the *IAM User Guide*.
+    # Session Tags][12] in the *IAM User Guide*.
     #
     # **Identities**
     #
@@ -1313,19 +1311,19 @@ module Aws::STS
     # specified in the role's trust policy.
     #
     # Calling `AssumeRoleWithWebIdentity` can result in an entry in your
-    # CloudTrail logs. The entry includes the [Subject][15] of the provided
+    # CloudTrail logs. The entry includes the [Subject][13] of the provided
     # web identity token. We recommend that you avoid using any personally
     # identifiable information (PII) in this field. For example, you could
     # instead use a GUID or a pairwise identifier, as [suggested in the OIDC
-    # specification][16].
+    # specification][14].
     #
     # For more information about how to use web identity federation and the
     # `AssumeRoleWithWebIdentity` API, see the following resources:
     #
-    # * [Using Web Identity Federation API Operations for Mobile Apps][17]
-    #   and [Federation Through a Web-based Identity Provider][18].
+    # * [Using Web Identity Federation API Operations for Mobile Apps][15]
+    #   and [Federation Through a Web-based Identity Provider][16].
     #
-    # * [ Web Identity Federation Playground][19]. Walk through the process
+    # * [ Web Identity Federation Playground][17]. Walk through the process
     #   of authenticating through Login with Amazon, Facebook, or Google,
     #   getting temporary security credentials, and then using those
     #   credentials to make a request to Amazon Web Services.
@@ -1336,7 +1334,7 @@ module Aws::STS
     #   toolkits then show how to use the information from these providers
     #   to get and use temporary security credentials.
     #
-    # * [Web Identity Federation with Mobile Applications][20]. This article
+    # * [Web Identity Federation with Mobile Applications][18]. This article
     #   discusses web identity federation and shows an example of how to use
     #   web identity federation to get access to content in Amazon S3.
     #
@@ -1345,23 +1343,21 @@ module Aws::STS
     # [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html
     # [2]: http://aws.amazon.com/sdkforios/
     # [3]: http://aws.amazon.com/sdkforandroid/
-    # [4]: https://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/cognito-auth.html#d0e840
-    # [5]: https://docs.aws.amazon.com/mobile/sdkforios/developerguide/cognito-auth.html#d0e664
-    # [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html
-    # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison
-    # [8]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
-    # [9]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
-    # [10]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
-    # [11]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html
-    # [12]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html#reference_iam-limits-entity-length
-    # [13]: https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_attribute-based-access-control.html
-    # [14]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html#id_session-tags_role-chaining
-    # [15]: http://openid.net/specs/openid-connect-core-1_0.html#Claims
-    # [16]: http://openid.net/specs/openid-connect-core-1_0.html#SubjectIDTypes
-    # [17]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc_manual.html
-    # [18]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity
-    # [19]: https://aws.amazon.com/blogs/aws/the-aws-web-identity-federation-playground/
-    # [20]: http://aws.amazon.com/articles/web-identity-federation-with-mobile-applications
+    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html
+    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison
+    # [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
+    # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+    # [8]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
+    # [9]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html
+    # [10]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html#reference_iam-limits-entity-length
+    # [11]: https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_attribute-based-access-control.html
+    # [12]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html#id_session-tags_role-chaining
+    # [13]: http://openid.net/specs/openid-connect-core-1_0.html#Claims
+    # [14]: http://openid.net/specs/openid-connect-core-1_0.html#SubjectIDTypes
+    # [15]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc_manual.html
+    # [16]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity
+    # [17]: https://aws.amazon.com/blogs/aws/the-aws-web-identity-federation-playground/
+    # [18]: http://aws.amazon.com/articles/web-identity-federation-with-mobile-applications
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the role that the caller is
@@ -1720,11 +1716,11 @@ module Aws::STS
     # to call the operation.
     #
     # <note markdown="1"> No permissions are required to perform this operation. If an
-    # administrator adds a policy to your IAM user or role that explicitly
+    # administrator attaches a policy to your identity that explicitly
     # denies access to the `sts:GetCallerIdentity` action, you can still
     # perform this operation. Permissions are not required because the same
-    # information is returned when an IAM user or role is denied access. To
-    # view an example response, see [I Am Not Authorized to Perform:
+    # information is returned when access is denied. To view an example
+    # response, see [I Am Not Authorized to Perform:
     # iam:DeleteVirtualMFADevice][1] in the *IAM User Guide*.
     #
     #  </note>
@@ -1801,43 +1797,43 @@ module Aws::STS
     end
 
     # Returns a set of temporary security credentials (consisting of an
-    # access key ID, a secret access key, and a security token) for a
-    # federated user. A typical use is in a proxy application that gets
-    # temporary security credentials on behalf of distributed applications
-    # inside a corporate network. You must call the `GetFederationToken`
-    # operation using the long-term security credentials of an IAM user. As
-    # a result, this call is appropriate in contexts where those credentials
-    # can be safely stored, usually in a server-based application. For a
-    # comparison of `GetFederationToken` with the other API operations that
-    # produce temporary credentials, see [Requesting Temporary Security
+    # access key ID, a secret access key, and a security token) for a user.
+    # A typical use is in a proxy application that gets temporary security
+    # credentials on behalf of distributed applications inside a corporate
+    # network.
+    #
+    # You must call the `GetFederationToken` operation using the long-term
+    # security credentials of an IAM user. As a result, this call is
+    # appropriate in contexts where those credentials can be safeguarded,
+    # usually in a server-based application. For a comparison of
+    # `GetFederationToken` with the other API operations that produce
+    # temporary credentials, see [Requesting Temporary Security
     # Credentials][1] and [Comparing the Amazon Web Services STS API
     # operations][2] in the *IAM User Guide*.
+    #
+    # Although it is possible to call `GetFederationToken` using the
+    # security credentials of an Amazon Web Services account root user
+    # rather than an IAM user that you create for the purpose of a proxy
+    # application, we do not recommend it. For more information, see
+    # [Safeguard your root user credentials and don't use them for everyday
+    # tasks][3] in the *IAM User Guide*.
     #
     # <note markdown="1"> You can create a mobile-based or browser-based app that can
     # authenticate users using a web identity provider like Login with
     # Amazon, Facebook, Google, or an OpenID Connect-compatible identity
-    # provider. In this case, we recommend that you use [Amazon Cognito][3]
+    # provider. In this case, we recommend that you use [Amazon Cognito][4]
     # or `AssumeRoleWithWebIdentity`. For more information, see [Federation
-    # Through a Web-based Identity Provider][4] in the *IAM User Guide*.
+    # Through a Web-based Identity Provider][5] in the *IAM User Guide*.
     #
     #  </note>
-    #
-    # You can also call `GetFederationToken` using the security credentials
-    # of an Amazon Web Services account root user, but we do not recommend
-    # it. Instead, we recommend that you create an IAM user for the purpose
-    # of the proxy application. Then attach a policy to the IAM user that
-    # limits federated users to only the actions and resources that they
-    # need to access. For more information, see [IAM Best Practices][5] in
-    # the *IAM User Guide*.
     #
     # **Session duration**
     #
     # The temporary credentials are valid for the specified duration, from
     # 900 seconds (15 minutes) up to a maximum of 129,600 seconds (36
     # hours). The default session duration is 43,200 seconds (12 hours).
-    # Temporary credentials obtained by using the Amazon Web Services
-    # account root user credentials have a maximum duration of 3,600 seconds
-    # (1 hour).
+    # Temporary credentials obtained by using the root user credentials have
+    # a maximum duration of 3,600 seconds (1 hour).
     #
     # **Permissions**
     #
@@ -1887,9 +1883,9 @@ module Aws::STS
     # <note markdown="1"> You can create a mobile-based or browser-based app that can
     # authenticate users using a web identity provider like Login with
     # Amazon, Facebook, Google, or an OpenID Connect-compatible identity
-    # provider. In this case, we recommend that you use [Amazon Cognito][3]
+    # provider. In this case, we recommend that you use [Amazon Cognito][4]
     # or `AssumeRoleWithWebIdentity`. For more information, see [Federation
-    # Through a Web-based Identity Provider][4] in the *IAM User Guide*.
+    # Through a Web-based Identity Provider][5] in the *IAM User Guide*.
     #
     #  </note>
     #
@@ -1911,9 +1907,9 @@ module Aws::STS
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html
     # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison
-    # [3]: http://aws.amazon.com/cognito/
-    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity
-    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#lock-away-credentials
+    # [4]: http://aws.amazon.com/cognito/
+    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity
     # [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
     # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_getfederationtoken
     # [8]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html
@@ -2030,10 +2026,10 @@ module Aws::STS
     #   The duration, in seconds, that the session should last. Acceptable
     #   durations for federation sessions range from 900 seconds (15 minutes)
     #   to 129,600 seconds (36 hours), with 43,200 seconds (12 hours) as the
-    #   default. Sessions obtained using Amazon Web Services account root user
-    #   credentials are restricted to a maximum of 3,600 seconds (one hour).
-    #   If the specified duration is longer than one hour, the session
-    #   obtained by using root user credentials defaults to one hour.
+    #   default. Sessions obtained using root user credentials are restricted
+    #   to a maximum of 3,600 seconds (one hour). If the specified duration is
+    #   longer than one hour, the session obtained by using root user
+    #   credentials defaults to one hour.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of session tags. Each session tag consists of a key name and an
@@ -2153,14 +2149,15 @@ module Aws::STS
     # secret access key, and a security token. Typically, you use
     # `GetSessionToken` if you want to use MFA to protect programmatic calls
     # to specific Amazon Web Services API operations like Amazon EC2
-    # `StopInstances`. MFA-enabled IAM users would need to call
-    # `GetSessionToken` and submit an MFA code that is associated with their
-    # MFA device. Using the temporary security credentials that are returned
-    # from the call, IAM users can then make programmatic calls to API
-    # operations that require MFA authentication. If you do not supply a
-    # correct MFA code, then the API returns an access denied error. For a
-    # comparison of `GetSessionToken` with the other API operations that
-    # produce temporary credentials, see [Requesting Temporary Security
+    # `StopInstances`.
+    #
+    # MFA-enabled IAM users must call `GetSessionToken` and submit an MFA
+    # code that is associated with their MFA device. Using the temporary
+    # security credentials that the call returns, IAM users can then make
+    # programmatic calls to API operations that require MFA authentication.
+    # An incorrect MFA code causes the API to return an access denied error.
+    # For a comparison of `GetSessionToken` with the other API operations
+    # that produce temporary credentials, see [Requesting Temporary Security
     # Credentials][1] and [Comparing the Amazon Web Services STS API
     # operations][2] in the *IAM User Guide*.
     #
@@ -2175,13 +2172,13 @@ module Aws::STS
     # **Session Duration**
     #
     # The `GetSessionToken` operation must be called by using the long-term
-    # Amazon Web Services security credentials of the Amazon Web Services
-    # account root user or an IAM user. Credentials that are created by IAM
-    # users are valid for the duration that you specify. This duration can
-    # range from 900 seconds (15 minutes) up to a maximum of 129,600 seconds
-    # (36 hours), with a default of 43,200 seconds (12 hours). Credentials
-    # based on account credentials can range from 900 seconds (15 minutes)
-    # up to 3,600 seconds (1 hour), with a default of 1 hour.
+    # Amazon Web Services security credentials of an IAM user. Credentials
+    # that are created by IAM users are valid for the duration that you
+    # specify. This duration can range from 900 seconds (15 minutes) up to a
+    # maximum of 129,600 seconds (36 hours), with a default of 43,200
+    # seconds (12 hours). Credentials based on account credentials can range
+    # from 900 seconds (15 minutes) up to 3,600 seconds (1 hour), with a
+    # default of 1 hour.
     #
     # **Permissions**
     #
@@ -2195,24 +2192,23 @@ module Aws::STS
     # * You cannot call any STS API *except* `AssumeRole` or
     #   `GetCallerIdentity`.
     #
-    # <note markdown="1"> We recommend that you do not call `GetSessionToken` with Amazon Web
-    # Services account root user credentials. Instead, follow our [best
-    # practices][4] by creating one or more IAM users, giving them the
-    # necessary permissions, and using IAM users for everyday interaction
-    # with Amazon Web Services.
+    # The credentials that `GetSessionToken` returns are based on
+    # permissions associated with the IAM user whose credentials were used
+    # to call the operation. The temporary credentials have the same
+    # permissions as the IAM user.
+    #
+    # <note markdown="1"> Although it is possible to call `GetSessionToken` using the security
+    # credentials of an Amazon Web Services account root user rather than an
+    # IAM user, we do not recommend it. If `GetSessionToken` is called using
+    # root user credentials, the temporary credentials have root user
+    # permissions. For more information, see [Safeguard your root user
+    # credentials and don't use them for everyday tasks][4] in the *IAM
+    # User Guide*
     #
     #  </note>
     #
-    # The credentials that are returned by `GetSessionToken` are based on
-    # permissions associated with the user whose credentials were used to
-    # call the operation. If `GetSessionToken` is called using Amazon Web
-    # Services account root user credentials, the temporary credentials have
-    # root user permissions. Similarly, if `GetSessionToken` is called using
-    # the credentials of an IAM user, the temporary credentials have the
-    # same permissions as the IAM user.
-    #
     # For more information about using `GetSessionToken` to create temporary
-    # credentials, go to [Temporary Credentials for Users in Untrusted
+    # credentials, see [Temporary Credentials for Users in Untrusted
     # Environments][5] in the *IAM User Guide*.
     #
     #
@@ -2220,7 +2216,7 @@ module Aws::STS
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html
     # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison
     # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_getsessiontoken.html
-    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#create-iam-users
+    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#lock-away-credentials
     # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_getsessiontoken
     #
     # @option params [Integer] :duration_seconds
@@ -2318,7 +2314,7 @@ module Aws::STS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.171.1'
+      context[:gem_version] = '3.172.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
