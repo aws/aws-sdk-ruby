@@ -50,6 +50,7 @@ The SDK searches the following locations for credentials:
     * Assume Role Web Identity Credentials (`web_identity_token_file`, `role_arn`, `source_profile`)
     * Assume Role Credentials (`role_arn`, `source_profile`)
     * Process Credentials (`credential_process`)
+    * SSO Credentials (`sso_session`, `sso_account_id`, `sso_role_name`, `sso_region`)
   * Unless `ENV['AWS_SDK_CONFIG_OPT_OUT']` is set, the shared configuration ini file at `~/.aws/config` will also be parsed for credentials.
 * From an instance profile when running on EC2 or from the ECS credential provider when running in an ECS container with that feature enabled.
 
