@@ -24,6 +24,11 @@ module Aws::Glue
     AggregateOperation = Shapes::StructureShape.new(name: 'AggregateOperation')
     AggregateOperations = Shapes::ListShape.new(name: 'AggregateOperations')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
+    AmazonRedshiftAdvancedOption = Shapes::StructureShape.new(name: 'AmazonRedshiftAdvancedOption')
+    AmazonRedshiftAdvancedOptions = Shapes::ListShape.new(name: 'AmazonRedshiftAdvancedOptions')
+    AmazonRedshiftNodeData = Shapes::StructureShape.new(name: 'AmazonRedshiftNodeData')
+    AmazonRedshiftSource = Shapes::StructureShape.new(name: 'AmazonRedshiftSource')
+    AmazonRedshiftTarget = Shapes::StructureShape.new(name: 'AmazonRedshiftTarget')
     ApplyMapping = Shapes::StructureShape.new(name: 'ApplyMapping')
     AthenaConnectorSource = Shapes::StructureShape.new(name: 'AthenaConnectorSource')
     AttemptCount = Shapes::IntegerShape.new(name: 'AttemptCount')
@@ -762,6 +767,8 @@ module Aws::Glue
     NullableInteger = Shapes::IntegerShape.new(name: 'NullableInteger')
     OneInput = Shapes::ListShape.new(name: 'OneInput')
     OperationTimeoutException = Shapes::StructureShape.new(name: 'OperationTimeoutException')
+    Option = Shapes::StructureShape.new(name: 'Option')
+    OptionList = Shapes::ListShape.new(name: 'OptionList')
     OracleSQLCatalogSource = Shapes::StructureShape.new(name: 'OracleSQLCatalogSource')
     OracleSQLCatalogTarget = Shapes::StructureShape.new(name: 'OracleSQLCatalogTarget')
     OrchestrationArgumentsMap = Shapes::MapShape.new(name: 'OrchestrationArgumentsMap')
@@ -1167,6 +1174,49 @@ module Aws::Glue
 
     AlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     AlreadyExistsException.struct_class = Types::AlreadyExistsException
+
+    AmazonRedshiftAdvancedOption.add_member(:key, Shapes::ShapeRef.new(shape: GenericString, location_name: "Key"))
+    AmazonRedshiftAdvancedOption.add_member(:value, Shapes::ShapeRef.new(shape: GenericString, location_name: "Value"))
+    AmazonRedshiftAdvancedOption.struct_class = Types::AmazonRedshiftAdvancedOption
+
+    AmazonRedshiftAdvancedOptions.member = Shapes::ShapeRef.new(shape: AmazonRedshiftAdvancedOption)
+
+    AmazonRedshiftNodeData.add_member(:access_type, Shapes::ShapeRef.new(shape: GenericLimitedString, location_name: "AccessType"))
+    AmazonRedshiftNodeData.add_member(:source_type, Shapes::ShapeRef.new(shape: GenericLimitedString, location_name: "SourceType"))
+    AmazonRedshiftNodeData.add_member(:connection, Shapes::ShapeRef.new(shape: Option, location_name: "Connection"))
+    AmazonRedshiftNodeData.add_member(:schema, Shapes::ShapeRef.new(shape: Option, location_name: "Schema"))
+    AmazonRedshiftNodeData.add_member(:table, Shapes::ShapeRef.new(shape: Option, location_name: "Table"))
+    AmazonRedshiftNodeData.add_member(:catalog_database, Shapes::ShapeRef.new(shape: Option, location_name: "CatalogDatabase"))
+    AmazonRedshiftNodeData.add_member(:catalog_table, Shapes::ShapeRef.new(shape: Option, location_name: "CatalogTable"))
+    AmazonRedshiftNodeData.add_member(:catalog_redshift_schema, Shapes::ShapeRef.new(shape: GenericString, location_name: "CatalogRedshiftSchema"))
+    AmazonRedshiftNodeData.add_member(:catalog_redshift_table, Shapes::ShapeRef.new(shape: GenericString, location_name: "CatalogRedshiftTable"))
+    AmazonRedshiftNodeData.add_member(:temp_dir, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "TempDir"))
+    AmazonRedshiftNodeData.add_member(:iam_role, Shapes::ShapeRef.new(shape: Option, location_name: "IamRole"))
+    AmazonRedshiftNodeData.add_member(:advanced_options, Shapes::ShapeRef.new(shape: AmazonRedshiftAdvancedOptions, location_name: "AdvancedOptions"))
+    AmazonRedshiftNodeData.add_member(:sample_query, Shapes::ShapeRef.new(shape: GenericString, location_name: "SampleQuery"))
+    AmazonRedshiftNodeData.add_member(:pre_action, Shapes::ShapeRef.new(shape: GenericString, location_name: "PreAction"))
+    AmazonRedshiftNodeData.add_member(:post_action, Shapes::ShapeRef.new(shape: GenericString, location_name: "PostAction"))
+    AmazonRedshiftNodeData.add_member(:action, Shapes::ShapeRef.new(shape: GenericString, location_name: "Action"))
+    AmazonRedshiftNodeData.add_member(:table_prefix, Shapes::ShapeRef.new(shape: GenericLimitedString, location_name: "TablePrefix"))
+    AmazonRedshiftNodeData.add_member(:upsert, Shapes::ShapeRef.new(shape: BooleanValue, location_name: "Upsert"))
+    AmazonRedshiftNodeData.add_member(:merge_action, Shapes::ShapeRef.new(shape: GenericLimitedString, location_name: "MergeAction"))
+    AmazonRedshiftNodeData.add_member(:merge_when_matched, Shapes::ShapeRef.new(shape: GenericLimitedString, location_name: "MergeWhenMatched"))
+    AmazonRedshiftNodeData.add_member(:merge_when_not_matched, Shapes::ShapeRef.new(shape: GenericLimitedString, location_name: "MergeWhenNotMatched"))
+    AmazonRedshiftNodeData.add_member(:merge_clause, Shapes::ShapeRef.new(shape: GenericString, location_name: "MergeClause"))
+    AmazonRedshiftNodeData.add_member(:crawler_connection, Shapes::ShapeRef.new(shape: GenericString, location_name: "CrawlerConnection"))
+    AmazonRedshiftNodeData.add_member(:table_schema, Shapes::ShapeRef.new(shape: OptionList, location_name: "TableSchema"))
+    AmazonRedshiftNodeData.add_member(:staging_table, Shapes::ShapeRef.new(shape: GenericString, location_name: "StagingTable"))
+    AmazonRedshiftNodeData.add_member(:selected_columns, Shapes::ShapeRef.new(shape: OptionList, location_name: "SelectedColumns"))
+    AmazonRedshiftNodeData.struct_class = Types::AmazonRedshiftNodeData
+
+    AmazonRedshiftSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, location_name: "Name"))
+    AmazonRedshiftSource.add_member(:data, Shapes::ShapeRef.new(shape: AmazonRedshiftNodeData, location_name: "Data"))
+    AmazonRedshiftSource.struct_class = Types::AmazonRedshiftSource
+
+    AmazonRedshiftTarget.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, location_name: "Name"))
+    AmazonRedshiftTarget.add_member(:data, Shapes::ShapeRef.new(shape: AmazonRedshiftNodeData, location_name: "Data"))
+    AmazonRedshiftTarget.add_member(:inputs, Shapes::ShapeRef.new(shape: OneInput, location_name: "Inputs"))
+    AmazonRedshiftTarget.struct_class = Types::AmazonRedshiftTarget
 
     ApplyMapping.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
     ApplyMapping.add_member(:inputs, Shapes::ShapeRef.new(shape: OneInput, required: true, location_name: "Inputs"))
@@ -1590,6 +1640,8 @@ module Aws::Glue
     CodeGenConfigurationNode.add_member(:s3_delta_source, Shapes::ShapeRef.new(shape: S3DeltaSource, location_name: "S3DeltaSource"))
     CodeGenConfigurationNode.add_member(:s3_delta_catalog_target, Shapes::ShapeRef.new(shape: S3DeltaCatalogTarget, location_name: "S3DeltaCatalogTarget"))
     CodeGenConfigurationNode.add_member(:s3_delta_direct_target, Shapes::ShapeRef.new(shape: S3DeltaDirectTarget, location_name: "S3DeltaDirectTarget"))
+    CodeGenConfigurationNode.add_member(:amazon_redshift_source, Shapes::ShapeRef.new(shape: AmazonRedshiftSource, location_name: "AmazonRedshiftSource"))
+    CodeGenConfigurationNode.add_member(:amazon_redshift_target, Shapes::ShapeRef.new(shape: AmazonRedshiftTarget, location_name: "AmazonRedshiftTarget"))
     CodeGenConfigurationNode.struct_class = Types::CodeGenConfigurationNode
 
     CodeGenConfigurationNodes.key = Shapes::ShapeRef.new(shape: NodeId)
@@ -2591,6 +2643,7 @@ module Aws::Glue
     DynamicTransform.add_member(:function_name, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "FunctionName"))
     DynamicTransform.add_member(:path, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Path"))
     DynamicTransform.add_member(:version, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "Version"))
+    DynamicTransform.add_member(:output_schemas, Shapes::ShapeRef.new(shape: GlueSchemas, location_name: "OutputSchemas"))
     DynamicTransform.struct_class = Types::DynamicTransform
 
     DynamoDBCatalogSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
@@ -4032,6 +4085,13 @@ module Aws::Glue
 
     OperationTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     OperationTimeoutException.struct_class = Types::OperationTimeoutException
+
+    Option.add_member(:value, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "Value"))
+    Option.add_member(:label, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "Label"))
+    Option.add_member(:description, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "Description"))
+    Option.struct_class = Types::Option
+
+    OptionList.member = Shapes::ShapeRef.new(shape: Option)
 
     OracleSQLCatalogSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
     OracleSQLCatalogSource.add_member(:database, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Database"))

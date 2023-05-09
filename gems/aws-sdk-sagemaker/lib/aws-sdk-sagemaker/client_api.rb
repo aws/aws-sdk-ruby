@@ -1513,6 +1513,7 @@ module Aws::SageMaker
     ProductionVariantModelDataDownloadTimeoutInSeconds = Shapes::IntegerShape.new(name: 'ProductionVariantModelDataDownloadTimeoutInSeconds')
     ProductionVariantSSMAccess = Shapes::BooleanShape.new(name: 'ProductionVariantSSMAccess')
     ProductionVariantServerlessConfig = Shapes::StructureShape.new(name: 'ProductionVariantServerlessConfig')
+    ProductionVariantServerlessUpdateConfig = Shapes::StructureShape.new(name: 'ProductionVariantServerlessUpdateConfig')
     ProductionVariantStatus = Shapes::StructureShape.new(name: 'ProductionVariantStatus')
     ProductionVariantStatusList = Shapes::ListShape.new(name: 'ProductionVariantStatusList')
     ProductionVariantSummary = Shapes::StructureShape.new(name: 'ProductionVariantSummary')
@@ -1673,6 +1674,7 @@ module Aws::SageMaker
     SendPipelineExecutionStepSuccessResponse = Shapes::StructureShape.new(name: 'SendPipelineExecutionStepSuccessResponse')
     ServerlessMaxConcurrency = Shapes::IntegerShape.new(name: 'ServerlessMaxConcurrency')
     ServerlessMemorySizeInMB = Shapes::IntegerShape.new(name: 'ServerlessMemorySizeInMB')
+    ServerlessProvisionedConcurrency = Shapes::IntegerShape.new(name: 'ServerlessProvisionedConcurrency')
     ServiceCatalogEntityId = Shapes::StringShape.new(name: 'ServiceCatalogEntityId')
     ServiceCatalogProvisionedProductDetails = Shapes::StructureShape.new(name: 'ServiceCatalogProvisionedProductDetails')
     ServiceCatalogProvisioningDetails = Shapes::StructureShape.new(name: 'ServiceCatalogProvisioningDetails')
@@ -4624,6 +4626,7 @@ module Aws::SageMaker
     DesiredWeightAndCapacity.add_member(:variant_name, Shapes::ShapeRef.new(shape: VariantName, required: true, location_name: "VariantName"))
     DesiredWeightAndCapacity.add_member(:desired_weight, Shapes::ShapeRef.new(shape: VariantWeight, location_name: "DesiredWeight"))
     DesiredWeightAndCapacity.add_member(:desired_instance_count, Shapes::ShapeRef.new(shape: TaskCount, location_name: "DesiredInstanceCount"))
+    DesiredWeightAndCapacity.add_member(:serverless_update_config, Shapes::ShapeRef.new(shape: ProductionVariantServerlessUpdateConfig, location_name: "ServerlessUpdateConfig"))
     DesiredWeightAndCapacity.struct_class = Types::DesiredWeightAndCapacity
 
     DesiredWeightAndCapacityList.member = Shapes::ShapeRef.new(shape: DesiredWeightAndCapacity)
@@ -7542,7 +7545,12 @@ module Aws::SageMaker
 
     ProductionVariantServerlessConfig.add_member(:memory_size_in_mb, Shapes::ShapeRef.new(shape: ServerlessMemorySizeInMB, required: true, location_name: "MemorySizeInMB"))
     ProductionVariantServerlessConfig.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: ServerlessMaxConcurrency, required: true, location_name: "MaxConcurrency"))
+    ProductionVariantServerlessConfig.add_member(:provisioned_concurrency, Shapes::ShapeRef.new(shape: ServerlessProvisionedConcurrency, location_name: "ProvisionedConcurrency"))
     ProductionVariantServerlessConfig.struct_class = Types::ProductionVariantServerlessConfig
+
+    ProductionVariantServerlessUpdateConfig.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: ServerlessMaxConcurrency, location_name: "MaxConcurrency"))
+    ProductionVariantServerlessUpdateConfig.add_member(:provisioned_concurrency, Shapes::ShapeRef.new(shape: ServerlessProvisionedConcurrency, location_name: "ProvisionedConcurrency"))
+    ProductionVariantServerlessUpdateConfig.struct_class = Types::ProductionVariantServerlessUpdateConfig
 
     ProductionVariantStatus.add_member(:status, Shapes::ShapeRef.new(shape: VariantStatus, required: true, location_name: "Status"))
     ProductionVariantStatus.add_member(:status_message, Shapes::ShapeRef.new(shape: VariantStatusMessage, location_name: "StatusMessage"))

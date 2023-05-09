@@ -5022,7 +5022,8 @@ module Aws::SageMaker
     #   inter-app communication in `VPCOnly` mode. Required when
     #   `CreateDomain.AppNetworkAccessType` is `VPCOnly` and
     #   `DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn`
-    #   is provided.
+    #   is provided. If setting up the domain for use with RStudio, this
+    #   value must be set to `Service`.
     #   @return [String]
     #
     # @!attribute [rw] domain_settings
@@ -15618,12 +15619,18 @@ module Aws::SageMaker
     #   The variant's capacity.
     #   @return [Integer]
     #
+    # @!attribute [rw] serverless_update_config
+    #   Specifies the serverless update concurrency configuration for an
+    #   endpoint variant.
+    #   @return [Types::ProductionVariantServerlessUpdateConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DesiredWeightAndCapacity AWS API Documentation
     #
     class DesiredWeightAndCapacity < Struct.new(
       :variant_name,
       :desired_weight,
-      :desired_instance_count)
+      :desired_instance_count,
+      :serverless_update_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15973,7 +15980,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] r_studio_server_pro_domain_settings_for_update
     #   A collection of `RStudioServerPro` Domain-level app settings to
-    #   update.
+    #   update. A single `RStudioServerPro` application is created for a
+    #   domain.
     #   @return [Types::RStudioServerProDomainSettingsForUpdate]
     #
     # @!attribute [rw] execution_role_identity_config
@@ -32378,11 +32386,40 @@ module Aws::SageMaker
     #   endpoint can process.
     #   @return [Integer]
     #
+    # @!attribute [rw] provisioned_concurrency
+    #   The amount of provisioned concurrency to allocate for the serverless
+    #   endpoint. Should be less than or equal to `MaxConcurrency`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantServerlessConfig AWS API Documentation
     #
     class ProductionVariantServerlessConfig < Struct.new(
       :memory_size_in_mb,
-      :max_concurrency)
+      :max_concurrency,
+      :provisioned_concurrency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the serverless update concurrency configuration for an
+    # endpoint variant.
+    #
+    # @!attribute [rw] max_concurrency
+    #   The updated maximum number of concurrent invocations your serverless
+    #   endpoint can process.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] provisioned_concurrency
+    #   The updated amount of provisioned concurrency to allocate for the
+    #   serverless endpoint. Should be less than or equal to
+    #   `MaxConcurrency`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantServerlessUpdateConfig AWS API Documentation
+    #
+    class ProductionVariantServerlessUpdateConfig < Struct.new(
+      :max_concurrency,
+      :provisioned_concurrency)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38459,7 +38496,8 @@ module Aws::SageMaker
     #   inter-app communication in `VPCOnly` mode. Required when
     #   `CreateDomain.AppNetworkAccessType` is `VPCOnly` and
     #   `DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn`
-    #   is provided.
+    #   is provided. If setting up the domain for use with RStudio, this
+    #   value must be set to `Service`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateDomainRequest AWS API Documentation

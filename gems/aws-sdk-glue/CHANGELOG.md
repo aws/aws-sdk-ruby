@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.136.0 (2023-05-09)
+------------------
+
+* Feature - This release adds AmazonRedshift Source and Target nodes in addition to DynamicTransform OutputSchemas
+
 1.135.0 (2023-05-08)
 ------------------
 

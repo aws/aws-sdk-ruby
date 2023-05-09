@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2023-05-09)
+------------------
+
+* Feature - With this release, Amazon SageMaker Serverless Inference customers can use Application Auto Scaling to auto scale the provisioned concurrency of their serverless endpoints.
+
 1.68.0 (2023-03-20)
 ------------------
 

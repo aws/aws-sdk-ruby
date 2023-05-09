@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.178.0 (2023-05-09)
+------------------
+
+* Feature - This release includes support for (1) Provisioned Concurrency for Amazon SageMaker Serverless Inference and (2) UpdateEndpointWeightsAndCapacities API for Serverless endpoints.
+
 1.177.0 (2023-05-04)
 ------------------
 

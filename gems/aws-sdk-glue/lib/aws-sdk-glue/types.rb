@@ -155,6 +155,219 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies an Amazon Redshift data store.
+    #
+    # @!attribute [rw] key
+    #   The key when specifying a key-value pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value when specifying a key-value pair.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AmazonRedshiftAdvancedOption AWS API Documentation
+    #
+    class AmazonRedshiftAdvancedOption < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies an Amazon Redshift node.
+    #
+    # @!attribute [rw] access_type
+    #   The access type for the Redshift connection. Can be a direct
+    #   connection or catalog connections.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_type
+    #   The source type to specify whether a specific table is the source or
+    #   a custom query.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection
+    #   The Glue connection to the Redshift cluster.
+    #   @return [Types::Option]
+    #
+    # @!attribute [rw] schema
+    #   The Redshift schema name when working with a direct connection.
+    #   @return [Types::Option]
+    #
+    # @!attribute [rw] table
+    #   The Redshift table name when working with a direct connection.
+    #   @return [Types::Option]
+    #
+    # @!attribute [rw] catalog_database
+    #   The name of the Glue Data Catalog database when working with a data
+    #   catalog.
+    #   @return [Types::Option]
+    #
+    # @!attribute [rw] catalog_table
+    #   The Glue Data Catalog table name when working with a data catalog.
+    #   @return [Types::Option]
+    #
+    # @!attribute [rw] catalog_redshift_schema
+    #   The Redshift schema name when working with a data catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog_redshift_table
+    #   The database table to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] temp_dir
+    #   The Amazon S3 path where temporary data can be staged when copying
+    #   out of the database.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role
+    #   Optional. The role name use when connection to S3. The IAM role ill
+    #   default to the role on the job when left blank.
+    #   @return [Types::Option]
+    #
+    # @!attribute [rw] advanced_options
+    #   Optional values when connecting to the Redshift cluster.
+    #   @return [Array<Types::AmazonRedshiftAdvancedOption>]
+    #
+    # @!attribute [rw] sample_query
+    #   The SQL used to fetch the data from a Redshift sources when the
+    #   SourceType is 'query'.
+    #   @return [String]
+    #
+    # @!attribute [rw] pre_action
+    #   The SQL used before a MERGE or APPEND with upsert is run.
+    #   @return [String]
+    #
+    # @!attribute [rw] post_action
+    #   The SQL used before a MERGE or APPEND with upsert is run.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   Specifies how writing to a Redshift cluser will occur.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_prefix
+    #   Specifies the prefix to a table.
+    #   @return [String]
+    #
+    # @!attribute [rw] upsert
+    #   The action used on Redshift sinks when doing an APPEND.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] merge_action
+    #   The action used when to detemine how a MERGE in a Redshift sink will
+    #   be handled.
+    #   @return [String]
+    #
+    # @!attribute [rw] merge_when_matched
+    #   The action used when to detemine how a MERGE in a Redshift sink will
+    #   be handled when an existing record matches a new record.
+    #   @return [String]
+    #
+    # @!attribute [rw] merge_when_not_matched
+    #   The action used when to detemine how a MERGE in a Redshift sink will
+    #   be handled when an existing record doesn't match a new record.
+    #   @return [String]
+    #
+    # @!attribute [rw] merge_clause
+    #   The SQL used in a custom merge to deal with matching records.
+    #   @return [String]
+    #
+    # @!attribute [rw] crawler_connection
+    #   Specifies the name of the connection that is associated with the
+    #   catalog table used.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_schema
+    #   The array of schema output for a given node.
+    #   @return [Array<Types::Option>]
+    #
+    # @!attribute [rw] staging_table
+    #   The name of the temporary staging table that is used when doing a
+    #   MERGE or APPEND with upsert.
+    #   @return [String]
+    #
+    # @!attribute [rw] selected_columns
+    #   The list of column names used to determine a matching record when
+    #   doing a MERGE or APPEND with upsert.
+    #   @return [Array<Types::Option>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AmazonRedshiftNodeData AWS API Documentation
+    #
+    class AmazonRedshiftNodeData < Struct.new(
+      :access_type,
+      :source_type,
+      :connection,
+      :schema,
+      :table,
+      :catalog_database,
+      :catalog_table,
+      :catalog_redshift_schema,
+      :catalog_redshift_table,
+      :temp_dir,
+      :iam_role,
+      :advanced_options,
+      :sample_query,
+      :pre_action,
+      :post_action,
+      :action,
+      :table_prefix,
+      :upsert,
+      :merge_action,
+      :merge_when_matched,
+      :merge_when_not_matched,
+      :merge_clause,
+      :crawler_connection,
+      :table_schema,
+      :staging_table,
+      :selected_columns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies an Amazon Redshift source.
+    #
+    # @!attribute [rw] name
+    #   The name of the Amazon Redshift source.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   Specifies the data of the Amazon Reshift source node.
+    #   @return [Types::AmazonRedshiftNodeData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AmazonRedshiftSource AWS API Documentation
+    #
+    class AmazonRedshiftSource < Struct.new(
+      :name,
+      :data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies an Amazon Redshift target.
+    #
+    # @!attribute [rw] name
+    #   The name of the Amazon Redshift target.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   Specifies the data of the Amazon Reshift target node.
+    #   @return [Types::AmazonRedshiftNodeData]
+    #
+    # @!attribute [rw] inputs
+    #   The nodes that are inputs to the data target.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AmazonRedshiftTarget AWS API Documentation
+    #
+    class AmazonRedshiftTarget < Struct.new(
+      :name,
+      :data,
+      :inputs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies a transform that maps data property keys in the data source
     # to data property keys in the data target. You can rename keys, modify
     # the data types for keys, and choose which keys to drop from the
@@ -1993,6 +2206,14 @@ module Aws::Glue
     #   S3.
     #   @return [Types::S3DeltaDirectTarget]
     #
+    # @!attribute [rw] amazon_redshift_source
+    #   Specifies a target that writes to a data source in Amazon Redshift.
+    #   @return [Types::AmazonRedshiftSource]
+    #
+    # @!attribute [rw] amazon_redshift_target
+    #   Specifies a target that writes to a data target in Amazon Redshift.
+    #   @return [Types::AmazonRedshiftTarget]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CodeGenConfigurationNode AWS API Documentation
     #
     class CodeGenConfigurationNode < Struct.new(
@@ -2058,7 +2279,9 @@ module Aws::Glue
       :catalog_delta_source,
       :s3_delta_source,
       :s3_delta_catalog_target,
-      :s3_delta_direct_target)
+      :s3_delta_direct_target,
+      :amazon_redshift_source,
+      :amazon_redshift_target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7287,6 +7510,10 @@ module Aws::Glue
     #   This field is not used and will be deprecated in future release.
     #   @return [String]
     #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the dynamic transform.
+    #   @return [Array<Types::GlueSchema>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DynamicTransform AWS API Documentation
     #
     class DynamicTransform < Struct.new(
@@ -7296,7 +7523,8 @@ module Aws::Glue
       :parameters,
       :function_name,
       :path,
-      :version)
+      :version,
+      :output_schemas)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14642,6 +14870,30 @@ module Aws::Glue
     #
     class OperationTimeoutException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies an option value.
+    #
+    # @!attribute [rw] value
+    #   Specifies the value of the option.
+    #   @return [String]
+    #
+    # @!attribute [rw] label
+    #   Specifies the label of the option.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Specifies the description of the option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Option AWS API Documentation
+    #
+    class Option < Struct.new(
+      :value,
+      :label,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end

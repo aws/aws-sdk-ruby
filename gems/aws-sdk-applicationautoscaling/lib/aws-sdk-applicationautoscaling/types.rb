@@ -208,6 +208,10 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
+    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -279,6 +283,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
     #     an Amazon Neptune DB cluster.
+    #
+    #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
+    #     provisioned concurrency for a SageMaker Serverless endpoint.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicyRequest AWS API Documentation
@@ -375,6 +382,10 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
+    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -446,6 +457,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
     #     an Amazon Neptune DB cluster.
+    #
+    #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
+    #     provisioned concurrency for a SageMaker Serverless endpoint.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScheduledActionRequest AWS API Documentation
@@ -538,6 +552,10 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
+    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -610,6 +628,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
     #     an Amazon Neptune DB cluster.
+    #
+    #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
+    #     provisioned concurrency for a SageMaker Serverless endpoint.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTargetRequest AWS API Documentation
@@ -701,6 +722,10 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
+    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -774,6 +799,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
     #     an Amazon Neptune DB cluster.
+    #
+    #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
+    #     provisioned concurrency for a SageMaker Serverless endpoint.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -896,6 +924,10 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
+    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -968,6 +1000,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
     #     an Amazon Neptune DB cluster.
+    #
+    #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
+    #     provisioned concurrency for a SageMaker Serverless endpoint.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1108,6 +1143,10 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
+    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -1180,6 +1219,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
     #     an Amazon Neptune DB cluster.
+    #
+    #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
+    #     provisioned concurrency for a SageMaker Serverless endpoint.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1307,6 +1349,10 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
+    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -1379,6 +1425,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
     #     an Amazon Neptune DB cluster.
+    #
+    #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
+    #     provisioned concurrency for a SageMaker Serverless endpoint.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1747,6 +1796,10 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
+    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -1818,6 +1871,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
     #     an Amazon Neptune DB cluster.
+    #
+    #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
+    #     provisioned concurrency for a SageMaker Serverless endpoint.
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -2016,6 +2072,10 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
+    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2087,6 +2147,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
     #     an Amazon Neptune DB cluster.
+    #
+    #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
+    #     provisioned concurrency for a SageMaker Serverless endpoint.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -2202,6 +2265,10 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
+    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2274,6 +2341,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
     #     an Amazon Neptune DB cluster.
+    #
+    #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
+    #     provisioned concurrency for a SageMaker Serverless endpoint.
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
@@ -2294,6 +2364,8 @@ module Aws::ApplicationAutoScaling
     #   * EMR clusters
     #
     #   * Lambda provisioned concurrency
+    #
+    #   * SageMaker Serverless endpoint provisioned concurrency
     #
     #   * SageMaker endpoint variants
     #
@@ -2519,6 +2591,10 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
+    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2591,6 +2667,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
     #     an Amazon Neptune DB cluster.
+    #
+    #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
+    #     provisioned concurrency for a SageMaker Serverless endpoint.
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
@@ -2752,6 +2831,10 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
+    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2823,6 +2906,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
     #     an Amazon Neptune DB cluster.
+    #
+    #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
+    #     provisioned concurrency for a SageMaker Serverless endpoint.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2976,6 +3062,10 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
+    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -3047,6 +3137,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
     #     an Amazon Neptune DB cluster.
+    #
+    #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
+    #     provisioned concurrency for a SageMaker Serverless endpoint.
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -3216,6 +3309,10 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
+    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -3287,6 +3384,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
     #     an Amazon Neptune DB cluster.
+    #
+    #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
+    #     provisioned concurrency for a SageMaker Serverless endpoint.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -3476,6 +3576,8 @@ module Aws::ApplicationAutoScaling
     #
     #   * Neptune clusters
     #
+    #   * SageMaker Serverless endpoint provisioned concurrency
+    #
     #   * SageMaker endpoint variants
     #
     #   * Spot Fleets
@@ -3559,7 +3661,7 @@ module Aws::ApplicationAutoScaling
     #
     # @!attribute [rw] tags
     #   The tags assigned to the resource. A tag is a label that you assign
-    #   to an AWS resource.
+    #   to an Amazon Web Services resource.
     #
     #   Each tag consists of a tag key and a tag value.
     #
@@ -3835,6 +3937,8 @@ module Aws::ApplicationAutoScaling
     #
     #   * Neptune clusters
     #
+    #   * SageMaker Serverless endpoint provisioned concurrency
+    #
     #   * SageMaker endpoint variants
     #
     #   * Spot Fleets
@@ -3880,6 +3984,8 @@ module Aws::ApplicationAutoScaling
     #   * EMR clusters
     #
     #   * Neptune clusters
+    #
+    #   * SageMaker Serverless endpoint provisioned concurrency
     #
     #   * SageMaker endpoint variants
     #

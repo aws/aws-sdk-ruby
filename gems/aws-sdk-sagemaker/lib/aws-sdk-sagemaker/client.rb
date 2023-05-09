@@ -2139,7 +2139,8 @@ module Aws::SageMaker
     #   inter-app communication in `VPCOnly` mode. Required when
     #   `CreateDomain.AppNetworkAccessType` is `VPCOnly` and
     #   `DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn`
-    #   is provided.
+    #   is provided. If setting up the domain for use with RStudio, this value
+    #   must be set to `Service`.
     #
     # @option params [Types::DomainSettings] :domain_settings
     #   A collection of `Domain` settings.
@@ -2826,6 +2827,7 @@ module Aws::SageMaker
     #         serverless_config: {
     #           memory_size_in_mb: 1, # required
     #           max_concurrency: 1, # required
+    #           provisioned_concurrency: 1,
     #         },
     #         volume_size_in_gb: 1,
     #         model_data_download_timeout_in_seconds: 1,
@@ -2917,6 +2919,7 @@ module Aws::SageMaker
     #         serverless_config: {
     #           memory_size_in_mb: 1, # required
     #           max_concurrency: 1, # required
+    #           provisioned_concurrency: 1,
     #         },
     #         volume_size_in_gb: 1,
     #         model_data_download_timeout_in_seconds: 1,
@@ -10833,8 +10836,10 @@ module Aws::SageMaker
     #   resp.production_variants[0].variant_status[0].start_time #=> Time
     #   resp.production_variants[0].current_serverless_config.memory_size_in_mb #=> Integer
     #   resp.production_variants[0].current_serverless_config.max_concurrency #=> Integer
+    #   resp.production_variants[0].current_serverless_config.provisioned_concurrency #=> Integer
     #   resp.production_variants[0].desired_serverless_config.memory_size_in_mb #=> Integer
     #   resp.production_variants[0].desired_serverless_config.max_concurrency #=> Integer
+    #   resp.production_variants[0].desired_serverless_config.provisioned_concurrency #=> Integer
     #   resp.data_capture_config.enable_capture #=> Boolean
     #   resp.data_capture_config.capture_status #=> String, one of "Started", "Stopped"
     #   resp.data_capture_config.current_sampling_percentage #=> Integer
@@ -10881,8 +10886,10 @@ module Aws::SageMaker
     #   resp.pending_deployment_summary.production_variants[0].variant_status[0].start_time #=> Time
     #   resp.pending_deployment_summary.production_variants[0].current_serverless_config.memory_size_in_mb #=> Integer
     #   resp.pending_deployment_summary.production_variants[0].current_serverless_config.max_concurrency #=> Integer
+    #   resp.pending_deployment_summary.production_variants[0].current_serverless_config.provisioned_concurrency #=> Integer
     #   resp.pending_deployment_summary.production_variants[0].desired_serverless_config.memory_size_in_mb #=> Integer
     #   resp.pending_deployment_summary.production_variants[0].desired_serverless_config.max_concurrency #=> Integer
+    #   resp.pending_deployment_summary.production_variants[0].desired_serverless_config.provisioned_concurrency #=> Integer
     #   resp.pending_deployment_summary.start_time #=> Time
     #   resp.pending_deployment_summary.shadow_production_variants #=> Array
     #   resp.pending_deployment_summary.shadow_production_variants[0].variant_name #=> String
@@ -10902,8 +10909,10 @@ module Aws::SageMaker
     #   resp.pending_deployment_summary.shadow_production_variants[0].variant_status[0].start_time #=> Time
     #   resp.pending_deployment_summary.shadow_production_variants[0].current_serverless_config.memory_size_in_mb #=> Integer
     #   resp.pending_deployment_summary.shadow_production_variants[0].current_serverless_config.max_concurrency #=> Integer
+    #   resp.pending_deployment_summary.shadow_production_variants[0].current_serverless_config.provisioned_concurrency #=> Integer
     #   resp.pending_deployment_summary.shadow_production_variants[0].desired_serverless_config.memory_size_in_mb #=> Integer
     #   resp.pending_deployment_summary.shadow_production_variants[0].desired_serverless_config.max_concurrency #=> Integer
+    #   resp.pending_deployment_summary.shadow_production_variants[0].desired_serverless_config.provisioned_concurrency #=> Integer
     #   resp.explainer_config.clarify_explainer_config.enable_explanations #=> String
     #   resp.explainer_config.clarify_explainer_config.inference_config.features_attribute #=> String
     #   resp.explainer_config.clarify_explainer_config.inference_config.content_template #=> String
@@ -10943,8 +10952,10 @@ module Aws::SageMaker
     #   resp.shadow_production_variants[0].variant_status[0].start_time #=> Time
     #   resp.shadow_production_variants[0].current_serverless_config.memory_size_in_mb #=> Integer
     #   resp.shadow_production_variants[0].current_serverless_config.max_concurrency #=> Integer
+    #   resp.shadow_production_variants[0].current_serverless_config.provisioned_concurrency #=> Integer
     #   resp.shadow_production_variants[0].desired_serverless_config.memory_size_in_mb #=> Integer
     #   resp.shadow_production_variants[0].desired_serverless_config.max_concurrency #=> Integer
+    #   resp.shadow_production_variants[0].desired_serverless_config.provisioned_concurrency #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -11000,6 +11011,7 @@ module Aws::SageMaker
     #   resp.production_variants[0].core_dump_config.kms_key_id #=> String
     #   resp.production_variants[0].serverless_config.memory_size_in_mb #=> Integer
     #   resp.production_variants[0].serverless_config.max_concurrency #=> Integer
+    #   resp.production_variants[0].serverless_config.provisioned_concurrency #=> Integer
     #   resp.production_variants[0].volume_size_in_gb #=> Integer
     #   resp.production_variants[0].model_data_download_timeout_in_seconds #=> Integer
     #   resp.production_variants[0].container_startup_health_check_timeout_in_seconds #=> Integer
@@ -11058,6 +11070,7 @@ module Aws::SageMaker
     #   resp.shadow_production_variants[0].core_dump_config.kms_key_id #=> String
     #   resp.shadow_production_variants[0].serverless_config.memory_size_in_mb #=> Integer
     #   resp.shadow_production_variants[0].serverless_config.max_concurrency #=> Integer
+    #   resp.shadow_production_variants[0].serverless_config.provisioned_concurrency #=> Integer
     #   resp.shadow_production_variants[0].volume_size_in_gb #=> Integer
     #   resp.shadow_production_variants[0].model_data_download_timeout_in_seconds #=> Integer
     #   resp.shadow_production_variants[0].container_startup_health_check_timeout_in_seconds #=> Integer
@@ -21428,7 +21441,8 @@ module Aws::SageMaker
     #   inter-app communication in `VPCOnly` mode. Required when
     #   `CreateDomain.AppNetworkAccessType` is `VPCOnly` and
     #   `DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn`
-    #   is provided.
+    #   is provided. If setting up the domain for use with RStudio, this value
+    #   must be set to `Service`.
     #
     # @return [Types::UpdateDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -21731,6 +21745,10 @@ module Aws::SageMaker
     #         variant_name: "VariantName", # required
     #         desired_weight: 1.0,
     #         desired_instance_count: 1,
+    #         serverless_update_config: {
+    #           max_concurrency: 1,
+    #           provisioned_concurrency: 1,
+    #         },
     #       },
     #     ],
     #   })
@@ -23472,7 +23490,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.177.0'
+      context[:gem_version] = '1.178.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
