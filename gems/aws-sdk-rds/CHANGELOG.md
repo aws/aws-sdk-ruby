@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.178.0 (2023-05-10)
+------------------
+
+* Feature - Amazon Relational Database Service (RDS) updates for the new Aurora I/O-Optimized storage type for Amazon Aurora DB clusters
+
 1.177.0 (2023-04-19)
 ------------------
 

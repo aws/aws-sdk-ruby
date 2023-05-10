@@ -197,6 +197,14 @@ module Aws::RDS
       data[:db_system_id]
     end
 
+    # The storage type associated with the DB cluster snapshot.
+    #
+    # This setting is only for Aurora DB clusters.
+    # @return [String]
+    def storage_type
+      data[:storage_type]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -840,14 +848,15 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
     # @option options [String] :storage_type
-    #   Specifies the storage type to be associated with the each DB instance
-    #   in the Multi-AZ DB cluster.
+    #   Specifies the storage type to be associated with the DB cluster.
     #
-    #   Valid values: `io1`
+    #   When specified for a Multi-AZ DB cluster, a value for the `Iops`
+    #   parameter is required.
     #
-    #   When specified, a value for the `Iops` parameter is required.
+    #   Valid values: `aurora`, `aurora-iopt1` (Aurora DB clusters); `io1`
+    #   (Multi-AZ DB clusters)
     #
-    #   Default: `io1`
+    #   Default: `aurora` (Aurora DB clusters); `io1` (Multi-AZ DB clusters)
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [Integer] :iops

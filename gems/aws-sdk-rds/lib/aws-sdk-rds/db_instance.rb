@@ -462,13 +462,15 @@ module Aws::RDS
     # True if mapping of Amazon Web Services Identity and Access Management
     # (IAM) accounts to database accounts is enabled, and otherwise false.
     #
-    # IAM database authentication can be enabled for the following database
-    # engines:
+    # For a list of engine versions that support IAM database
+    # authentication, see [IAM database authentication][1] in the *Amazon
+    # RDS User Guide* and [IAM database authentication in Aurora][2] in the
+    # *Amazon Aurora User Guide*.
     #
-    # * For MySQL 5.7, minor version 5.7.16 or higher.
     #
-    # * For Amazon Aurora, all versions of Aurora MySQL and Aurora
-    #   PostgreSQL.
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.Aurora_Fea_Regions_DB-eng.Feature.IAMdbauth.html
     # @return [Boolean]
     def iam_database_authentication_enabled
       data[:iam_database_authentication_enabled]
@@ -3631,15 +3633,15 @@ module Aws::RDS
     #   A value that indicates whether to manage the master user password with
     #   Amazon Web Services Secrets Manager.
     #
-    #   If the DB cluster doesn't manage the master user password with Amazon
-    #   Web Services Secrets Manager, you can turn on this management. In this
-    #   case, you can't specify `MasterUserPassword`.
+    #   If the DB instance doesn't manage the master user password with
+    #   Amazon Web Services Secrets Manager, you can turn on this management.
+    #   In this case, you can't specify `MasterUserPassword`.
     #
-    #   If the DB cluster already manages the master user password with Amazon
-    #   Web Services Secrets Manager, and you specify that the master user
-    #   password is not managed with Amazon Web Services Secrets Manager, then
-    #   you must specify `MasterUserPassword`. In this case, RDS deletes the
-    #   secret and uses the new password for the master user specified by
+    #   If the DB instance already manages the master user password with
+    #   Amazon Web Services Secrets Manager, and you specify that the master
+    #   user password is not managed with Amazon Web Services Secrets Manager,
+    #   then you must specify `MasterUserPassword`. In this case, RDS deletes
+    #   the secret and uses the new password for the master user specified by
     #   `MasterUserPassword`.
     #
     #   For more information, see [Password management with Amazon Web

@@ -1389,6 +1389,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.tag_list[0].key #=> String
     #   resp.db_cluster_snapshot.tag_list[0].value #=> String
     #   resp.db_cluster_snapshot.db_system_id #=> String
+    #   resp.db_cluster_snapshot.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterSnapshot AWS API Documentation
     #
@@ -2851,17 +2852,13 @@ module Aws::RDS
     #   The `serverless` engine mode only applies for Aurora Serverless v1 DB
     #   clusters.
     #
-    #   Limitations and requirements apply to some DB engine modes. For more
-    #   information, see the following sections in the *Amazon Aurora User
+    #   For information about limitations and requirements for Serverless DB
+    #   clusters, see the following sections in the *Amazon Aurora User
     #   Guide*:
     #
     #   * [Limitations of Aurora Serverless v1][1]
     #
     #   * [Requirements for Aurora Serverless v2][2]
-    #
-    #   * [Limitations of parallel query][3]
-    #
-    #   * [Limitations of Aurora global databases][4]
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -2869,8 +2866,6 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.requirements.html
-    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations
-    #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations
     #
     # @option params [Types::ScalingConfiguration] :scaling_configuration
     #   For DB clusters in `serverless` DB engine mode, the scaling properties
@@ -2984,13 +2979,15 @@ module Aws::RDS
     #
     #   This setting is required to create a Multi-AZ DB cluster.
     #
-    #   Valid values: `io1`
+    #   When specified for a Multi-AZ DB cluster, a value for the `Iops`
+    #   parameter is required.
     #
-    #   When specified, a value for the `Iops` parameter is required.
+    #   Valid values: `aurora`, `aurora-iopt1` (Aurora DB clusters); `io1`
+    #   (Multi-AZ DB clusters)
     #
-    #   Default: `io1`
+    #   Default: `aurora` (Aurora DB clusters); `io1` (Multi-AZ DB clusters)
     #
-    #   Valid for: Multi-AZ DB clusters only
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
@@ -3520,6 +3517,7 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -3537,6 +3535,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -3961,6 +3960,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.tag_list[0].key #=> String
     #   resp.db_cluster_snapshot.tag_list[0].value #=> String
     #   resp.db_cluster_snapshot.db_system_id #=> String
+    #   resp.db_cluster_snapshot.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterSnapshot AWS API Documentation
     #
@@ -8074,6 +8074,7 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -8091,6 +8092,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -8334,6 +8336,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.tag_list[0].key #=> String
     #   resp.db_cluster_snapshot.tag_list[0].value #=> String
     #   resp.db_cluster_snapshot.db_system_id #=> String
+    #   resp.db_cluster_snapshot.storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterSnapshot AWS API Documentation
     #
@@ -9914,8 +9917,7 @@ module Aws::RDS
     #   Constraints:
     #
     #   * Must contain a valid universally unique identifier (UUID). For more
-    #     information about UUIDs, see [A Universally Unique Identifier (UUID)
-    #     URN Namespace][1].
+    #     information about UUIDs, see [Universally unique identifier][1].
     #
     #   ^
     #
@@ -9923,7 +9925,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://www.ietf.org/rfc/rfc4122.txt
+    #   [1]: https://en.wikipedia.org/wiki/Universally_unique_identifier
     #
     # @option params [Array<Types::Filter>] :filters
     #   A filter that specifies one or more DB clusters to describe. Supported
@@ -10762,6 +10764,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshots[0].tag_list[0].key #=> String
     #   resp.db_cluster_snapshots[0].tag_list[0].value #=> String
     #   resp.db_cluster_snapshots[0].db_system_id #=> String
+    #   resp.db_cluster_snapshots[0].storage_type #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -11069,6 +11072,7 @@ module Aws::RDS
     #   resp.db_clusters[0].pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_clusters[0].pending_modified_values.allocated_storage #=> Integer
     #   resp.db_clusters[0].pending_modified_values.iops #=> Integer
+    #   resp.db_clusters[0].pending_modified_values.storage_type #=> String
     #   resp.db_clusters[0].db_cluster_instance_class #=> String
     #   resp.db_clusters[0].storage_type #=> String
     #   resp.db_clusters[0].iops #=> Integer
@@ -11086,6 +11090,7 @@ module Aws::RDS
     #   resp.db_clusters[0].master_user_secret.secret_arn #=> String
     #   resp.db_clusters[0].master_user_secret.secret_status #=> String
     #   resp.db_clusters[0].master_user_secret.kms_key_id #=> String
+    #   resp.db_clusters[0].io_optimized_next_allowed_modification_time #=> Time
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -15554,6 +15559,7 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -15571,6 +15577,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -16583,13 +16590,15 @@ module Aws::RDS
     # @option params [String] :storage_type
     #   Specifies the storage type to be associated with the DB cluster.
     #
-    #   Valid values: `io1`
+    #   When specified for a Multi-AZ DB cluster, a value for the `Iops`
+    #   parameter is required.
     #
-    #   When specified, a value for the `Iops` parameter is required.
+    #   Valid values: `aurora`, `aurora-iopt1` (Aurora DB clusters); `io1`
+    #   (Multi-AZ DB clusters)
     #
-    #   Default: `io1`
+    #   Default: `aurora` (Aurora DB clusters); `io1` (Multi-AZ DB clusters)
     #
-    #   Valid for: Multi-AZ DB clusters only
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
@@ -17078,6 +17087,7 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -17095,6 +17105,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -18310,15 +18321,15 @@ module Aws::RDS
     #   A value that indicates whether to manage the master user password with
     #   Amazon Web Services Secrets Manager.
     #
-    #   If the DB cluster doesn't manage the master user password with Amazon
-    #   Web Services Secrets Manager, you can turn on this management. In this
-    #   case, you can't specify `MasterUserPassword`.
+    #   If the DB instance doesn't manage the master user password with
+    #   Amazon Web Services Secrets Manager, you can turn on this management.
+    #   In this case, you can't specify `MasterUserPassword`.
     #
-    #   If the DB cluster already manages the master user password with Amazon
-    #   Web Services Secrets Manager, and you specify that the master user
-    #   password is not managed with Amazon Web Services Secrets Manager, then
-    #   you must specify `MasterUserPassword`. In this case, RDS deletes the
-    #   secret and uses the new password for the master user specified by
+    #   If the DB instance already manages the master user password with
+    #   Amazon Web Services Secrets Manager, and you specify that the master
+    #   user password is not managed with Amazon Web Services Secrets Manager,
+    #   then you must specify `MasterUserPassword`. In this case, RDS deletes
+    #   the secret and uses the new password for the master user specified by
     #   `MasterUserPassword`.
     #
     #   For more information, see [Password management with Amazon Web
@@ -20190,6 +20201,7 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -20207,6 +20219,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -20459,6 +20472,7 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -20476,6 +20490,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBCluster AWS API Documentation
     #
@@ -21678,6 +21693,15 @@ module Aws::RDS
     #   Amazon Web Services account has a different default KMS key for each
     #   Amazon Web Services Region.
     #
+    # @option params [String] :storage_type
+    #   Specifies the storage type to be associated with the DB cluster.
+    #
+    #   Valid values: `aurora`, `aurora-iopt1`
+    #
+    #   Default: `aurora`
+    #
+    #   Valid for: Aurora DB clusters only
+    #
     # @return [Types::RestoreDBClusterFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromS3Result#db_cluster #db_cluster} => Types::DBCluster
@@ -21797,6 +21821,7 @@ module Aws::RDS
     #     network_type: "String",
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
+    #     storage_type: "String",
     #   })
     #
     # @example Response structure
@@ -21894,6 +21919,7 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -21911,6 +21937,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -22268,14 +22295,15 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
     #
     # @option params [String] :storage_type
-    #   Specifies the storage type to be associated with the each DB instance
-    #   in the Multi-AZ DB cluster.
+    #   Specifies the storage type to be associated with the DB cluster.
     #
-    #   Valid values: `io1`
+    #   When specified for a Multi-AZ DB cluster, a value for the `Iops`
+    #   parameter is required.
     #
-    #   When specified, a value for the `Iops` parameter is required.
+    #   Valid values: `aurora`, `aurora-iopt1` (Aurora DB clusters); `io1`
+    #   (Multi-AZ DB clusters)
     #
-    #   Default: `io1`
+    #   Default: `aurora` (Aurora DB clusters); `io1` (Multi-AZ DB clusters)
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -22579,6 +22607,7 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -22596,6 +22625,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -22924,16 +22954,17 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
     #
     # @option params [String] :storage_type
-    #   Specifies the storage type to be associated with the each DB instance
-    #   in the Multi-AZ DB cluster.
+    #   Specifies the storage type to be associated with the DB cluster.
     #
-    #   Valid values: `io1`
+    #   When specified for a Multi-AZ DB cluster, a value for the `Iops`
+    #   parameter is required.
     #
-    #   When specified, a value for the `Iops` parameter is required.
+    #   Valid values: `aurora`, `aurora-iopt1` (Aurora DB clusters); `io1`
+    #   (Multi-AZ DB clusters)
     #
-    #   Default: `io1`
+    #   Default: `aurora` (Aurora DB clusters); `io1` (Multi-AZ DB clusters)
     #
-    #   Valid for: Multi-AZ DB clusters only
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [Boolean] :publicly_accessible
     #   A value that indicates whether the DB cluster is publicly accessible.
@@ -23233,6 +23264,7 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -23250,6 +23282,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -25823,6 +25856,7 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -25840,6 +25874,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -26623,6 +26658,7 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
     #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -26640,6 +26676,7 @@ module Aws::RDS
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -27375,7 +27412,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.177.0'
+      context[:gem_version] = '1.178.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

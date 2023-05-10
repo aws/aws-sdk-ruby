@@ -922,6 +922,10 @@ module Aws::RDS
     #   is only for non-Aurora Multi-AZ DB clusters.
     #   @return [Integer]
     #
+    # @!attribute [rw] storage_type
+    #   The storage type for the DB cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ClusterPendingModifiedValues AWS API Documentation
     #
     class ClusterPendingModifiedValues < Struct.new(
@@ -932,7 +936,8 @@ module Aws::RDS
       :engine_version,
       :backup_retention_period,
       :allocated_storage,
-      :iops)
+      :iops,
+      :storage_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2398,17 +2403,13 @@ module Aws::RDS
     #   The `serverless` engine mode only applies for Aurora Serverless v1
     #   DB clusters.
     #
-    #   Limitations and requirements apply to some DB engine modes. For more
-    #   information, see the following sections in the *Amazon Aurora User
+    #   For information about limitations and requirements for Serverless DB
+    #   clusters, see the following sections in the *Amazon Aurora User
     #   Guide*:
     #
     #   * [Limitations of Aurora Serverless v1][1]
     #
     #   * [Requirements for Aurora Serverless v2][2]
-    #
-    #   * [Limitations of parallel query][3]
-    #
-    #   * [Limitations of Aurora global databases][4]
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -2416,8 +2417,6 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.requirements.html
-    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations
-    #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations
     #   @return [String]
     #
     # @!attribute [rw] scaling_configuration
@@ -2543,13 +2542,15 @@ module Aws::RDS
     #
     #   This setting is required to create a Multi-AZ DB cluster.
     #
-    #   Valid values: `io1`
+    #   When specified for a Multi-AZ DB cluster, a value for the `Iops`
+    #   parameter is required.
     #
-    #   When specified, a value for the `Iops` parameter is required.
+    #   Valid values: `aurora`, `aurora-iopt1` (Aurora DB clusters); `io1`
+    #   (Multi-AZ DB clusters)
     #
-    #   Default: `io1`
+    #   Default: `aurora` (Aurora DB clusters); `io1` (Multi-AZ DB clusters)
     #
-    #   Valid for: Multi-AZ DB clusters only
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #   @return [String]
     #
     # @!attribute [rw] iops
@@ -6054,8 +6055,8 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] engine_mode
-    #   The DB engine mode of the DB cluster, either `provisioned`,
-    #   `serverless`, `parallelquery`, `global`, or `multimaster`.
+    #   The DB engine mode of the DB cluster, either `provisioned` or
+    #   `serverless`.
     #
     #   For more information, see [ CreateDBCluster][1].
     #
@@ -6176,8 +6177,6 @@ module Aws::RDS
     #
     # @!attribute [rw] storage_type
     #   The storage type associated with the DB cluster.
-    #
-    #   This setting is only for non-Aurora Multi-AZ DB clusters.
     #   @return [String]
     #
     # @!attribute [rw] iops
@@ -6320,6 +6319,13 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html
     #   @return [Types::MasterUserSecret]
     #
+    # @!attribute [rw] io_optimized_next_allowed_modification_time
+    #   The next time you can modify the DB cluster to use the
+    #   `aurora-iopt1` storage type.
+    #
+    #   This setting is only for Aurora DB clusters.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -6393,7 +6399,8 @@ module Aws::RDS
       :serverless_v2_scaling_configuration,
       :network_type,
       :db_system_id,
-      :master_user_secret)
+      :master_user_secret,
+      :io_optimized_next_allowed_modification_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7030,6 +7037,12 @@ module Aws::RDS
     #   Reserved for future use.
     #   @return [String]
     #
+    # @!attribute [rw] storage_type
+    #   The storage type associated with the DB cluster snapshot.
+    #
+    #   This setting is only for Aurora DB clusters.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterSnapshot AWS API Documentation
     #
     class DBClusterSnapshot < Struct.new(
@@ -7055,7 +7068,8 @@ module Aws::RDS
       :source_db_cluster_snapshot_arn,
       :iam_database_authentication_enabled,
       :tag_list,
-      :db_system_id)
+      :db_system_id,
+      :storage_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7755,13 +7769,15 @@ module Aws::RDS
     #   Management (IAM) accounts to database accounts is enabled, and
     #   otherwise false.
     #
-    #   IAM database authentication can be enabled for the following
-    #   database engines:
+    #   For a list of engine versions that support IAM database
+    #   authentication, see [IAM database authentication][1] in the *Amazon
+    #   RDS User Guide* and [IAM database authentication in Aurora][2] in
+    #   the *Amazon Aurora User Guide*.
     #
-    #   * For MySQL 5.7, minor version 5.7.16 or higher.
     #
-    #   * For Amazon Aurora, all versions of Aurora MySQL and Aurora
-    #     PostgreSQL.
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.Aurora_Fea_Regions_DB-eng.Feature.IAMdbauth.html
     #   @return [Boolean]
     #
     # @!attribute [rw] performance_insights_enabled
@@ -10328,8 +10344,8 @@ module Aws::RDS
     #   Constraints:
     #
     #   * Must contain a valid universally unique identifier (UUID). For
-    #     more information about UUIDs, see [A Universally Unique Identifier
-    #     (UUID) URN Namespace][1].
+    #     more information about UUIDs, see [Universally unique
+    #     identifier][1].
     #
     #   ^
     #
@@ -10337,7 +10353,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://www.ietf.org/rfc/rfc4122.txt
+    #   [1]: https://en.wikipedia.org/wiki/Universally_unique_identifier
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -14769,13 +14785,15 @@ module Aws::RDS
     # @!attribute [rw] storage_type
     #   Specifies the storage type to be associated with the DB cluster.
     #
-    #   Valid values: `io1`
+    #   When specified for a Multi-AZ DB cluster, a value for the `Iops`
+    #   parameter is required.
     #
-    #   When specified, a value for the `Iops` parameter is required.
+    #   Valid values: `aurora`, `aurora-iopt1` (Aurora DB clusters); `io1`
+    #   (Multi-AZ DB clusters)
     #
-    #   Default: `io1`
+    #   Default: `aurora` (Aurora DB clusters); `io1` (Multi-AZ DB clusters)
     #
-    #   Valid for: Multi-AZ DB clusters only
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #   @return [String]
     #
     # @!attribute [rw] iops
@@ -16153,11 +16171,11 @@ module Aws::RDS
     #   A value that indicates whether to manage the master user password
     #   with Amazon Web Services Secrets Manager.
     #
-    #   If the DB cluster doesn't manage the master user password with
+    #   If the DB instance doesn't manage the master user password with
     #   Amazon Web Services Secrets Manager, you can turn on this
     #   management. In this case, you can't specify `MasterUserPassword`.
     #
-    #   If the DB cluster already manages the master user password with
+    #   If the DB instance already manages the master user password with
     #   Amazon Web Services Secrets Manager, and you specify that the master
     #   user password is not managed with Amazon Web Services Secrets
     #   Manager, then you must specify `MasterUserPassword`. In this case,
@@ -19325,6 +19343,16 @@ module Aws::RDS
     #   each Amazon Web Services Region.
     #   @return [String]
     #
+    # @!attribute [rw] storage_type
+    #   Specifies the storage type to be associated with the DB cluster.
+    #
+    #   Valid values: `aurora`, `aurora-iopt1`
+    #
+    #   Default: `aurora`
+    #
+    #   Valid for: Aurora DB clusters only
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3Message AWS API Documentation
     #
     class RestoreDBClusterFromS3Message < Struct.new(
@@ -19362,7 +19390,8 @@ module Aws::RDS
       :serverless_v2_scaling_configuration,
       :network_type,
       :manage_master_user_password,
-      :master_user_secret_kms_key_id)
+      :master_user_secret_kms_key_id,
+      :storage_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19753,14 +19782,15 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] storage_type
-    #   Specifies the storage type to be associated with the each DB
-    #   instance in the Multi-AZ DB cluster.
+    #   Specifies the storage type to be associated with the DB cluster.
     #
-    #   Valid values: `io1`
+    #   When specified for a Multi-AZ DB cluster, a value for the `Iops`
+    #   parameter is required.
     #
-    #   When specified, a value for the `Iops` parameter is required.
+    #   Valid values: `aurora`, `aurora-iopt1` (Aurora DB clusters); `io1`
+    #   (Multi-AZ DB clusters)
     #
-    #   Default: `io1`
+    #   Default: `aurora` (Aurora DB clusters); `io1` (Multi-AZ DB clusters)
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #   @return [String]
@@ -20244,16 +20274,17 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] storage_type
-    #   Specifies the storage type to be associated with the each DB
-    #   instance in the Multi-AZ DB cluster.
+    #   Specifies the storage type to be associated with the DB cluster.
     #
-    #   Valid values: `io1`
+    #   When specified for a Multi-AZ DB cluster, a value for the `Iops`
+    #   parameter is required.
     #
-    #   When specified, a value for the `Iops` parameter is required.
+    #   Valid values: `aurora`, `aurora-iopt1` (Aurora DB clusters); `io1`
+    #   (Multi-AZ DB clusters)
     #
-    #   Default: `io1`
+    #   Default: `aurora` (Aurora DB clusters); `io1` (Multi-AZ DB clusters)
     #
-    #   Valid for: Multi-AZ DB clusters only
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #   @return [String]
     #
     # @!attribute [rw] publicly_accessible
@@ -23073,8 +23104,14 @@ module Aws::RDS
     #
     class StorageQuotaExceededFault < Aws::EmptyStructure; end
 
-    # Storage of the `StorageType` specified can't be associated with the
-    # DB instance.
+    # The `aurora-iopt1` storage type isn't available, because you modified
+    # the DB cluster to use this storage type less than one month ago.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StorageTypeNotAvailableFault AWS API Documentation
+    #
+    class StorageTypeNotAvailableFault < Aws::EmptyStructure; end
+
+    # The specified `StorageType` can't be associated with the DB instance.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StorageTypeNotSupportedFault AWS API Documentation
     #

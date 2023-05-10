@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2023-05-10)
+------------------
+
+* Feature - This release adds a new API parameter to exclude old history events from decision tasks.
+
 1.39.0 (2023-01-30)
 ------------------
 

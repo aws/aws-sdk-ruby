@@ -1303,8 +1303,8 @@ module Aws::SWF
     #   value of `NextPageToken` is a unique pagination token for each page.
     #   Make the call again using the returned token to retrieve the next
     #   page. Keep all other arguments unchanged. Each pagination token
-    #   expires after 60 seconds. Using an expired pagination token will
-    #   return a `400` error: "`Specified token has exceeded its maximum
+    #   expires after 24 hours. Using an expired pagination token will return
+    #   a `400` error: "`Specified token has exceeded its maximum
     #   lifetime`".
     #
     #   The configured `maximumPageSize` determines how many results can be
@@ -1642,8 +1642,8 @@ module Aws::SWF
     #   value of `NextPageToken` is a unique pagination token for each page.
     #   Make the call again using the returned token to retrieve the next
     #   page. Keep all other arguments unchanged. Each pagination token
-    #   expires after 60 seconds. Using an expired pagination token will
-    #   return a `400` error: "`Specified token has exceeded its maximum
+    #   expires after 24 hours. Using an expired pagination token will return
+    #   a `400` error: "`Specified token has exceeded its maximum
     #   lifetime`".
     #
     #   The configured `maximumPageSize` determines how many results can be
@@ -1808,8 +1808,8 @@ module Aws::SWF
     #   value of `NextPageToken` is a unique pagination token for each page.
     #   Make the call again using the returned token to retrieve the next
     #   page. Keep all other arguments unchanged. Each pagination token
-    #   expires after 60 seconds. Using an expired pagination token will
-    #   return a `400` error: "`Specified token has exceeded its maximum
+    #   expires after 24 hours. Using an expired pagination token will return
+    #   a `400` error: "`Specified token has exceeded its maximum
     #   lifetime`".
     #
     #   The configured `maximumPageSize` determines how many results can be
@@ -1926,8 +1926,8 @@ module Aws::SWF
     #   value of `NextPageToken` is a unique pagination token for each page.
     #   Make the call again using the returned token to retrieve the next
     #   page. Keep all other arguments unchanged. Each pagination token
-    #   expires after 60 seconds. Using an expired pagination token will
-    #   return a `400` error: "`Specified token has exceeded its maximum
+    #   expires after 24 hours. Using an expired pagination token will return
+    #   a `400` error: "`Specified token has exceeded its maximum
     #   lifetime`".
     #
     #   The configured `maximumPageSize` determines how many results can be
@@ -2051,8 +2051,8 @@ module Aws::SWF
     #   value of `NextPageToken` is a unique pagination token for each page.
     #   Make the call again using the returned token to retrieve the next
     #   page. Keep all other arguments unchanged. Each pagination token
-    #   expires after 60 seconds. Using an expired pagination token will
-    #   return a `400` error: "`Specified token has exceeded its maximum
+    #   expires after 24 hours. Using an expired pagination token will return
+    #   a `400` error: "`Specified token has exceeded its maximum
     #   lifetime`".
     #
     #   The configured `maximumPageSize` determines how many results can be
@@ -2202,8 +2202,8 @@ module Aws::SWF
     #   value of `NextPageToken` is a unique pagination token for each page.
     #   Make the call again using the returned token to retrieve the next
     #   page. Keep all other arguments unchanged. Each pagination token
-    #   expires after 60 seconds. Using an expired pagination token will
-    #   return a `400` error: "`Specified token has exceeded its maximum
+    #   expires after 24 hours. Using an expired pagination token will return
+    #   a `400` error: "`Specified token has exceeded its maximum
     #   lifetime`".
     #
     #   The configured `maximumPageSize` determines how many results can be
@@ -2303,7 +2303,7 @@ module Aws::SWF
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
     #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
-    #   not *be* the literal string `arn`.
+    #   *not* be the literal string `arn`.
     #
     # @option params [String] :identity
     #   Identity of the worker making the request, recorded in the
@@ -2405,10 +2405,9 @@ module Aws::SWF
     # @option params [required, Types::TaskList] :task_list
     #   Specifies the task list to poll for decision tasks.
     #
-    #   The specified string must not start or end with whitespace. It must
-    #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
-    #   not *be* the literal string `arn`.
+    #   The specified string must not contain a `:` (colon), `/` (slash), `|`
+    #   (vertical bar), or any control characters (`\u0000-\u001f` \|
+    #   `\u007f-\u009f`). Also, it must *not* be the literal string `arn`.
     #
     # @option params [String] :identity
     #   Identity of the decider making the request, which is recorded in the
@@ -2421,8 +2420,8 @@ module Aws::SWF
     #   value of `NextPageToken` is a unique pagination token for each page.
     #   Make the call again using the returned token to retrieve the next
     #   page. Keep all other arguments unchanged. Each pagination token
-    #   expires after 60 seconds. Using an expired pagination token will
-    #   return a `400` error: "`Specified token has exceeded its maximum
+    #   expires after 24 hours. Using an expired pagination token will return
+    #   a `400` error: "`Specified token has exceeded its maximum
     #   lifetime`".
     #
     #   The configured `maximumPageSize` determines how many results can be
@@ -2448,6 +2447,12 @@ module Aws::SWF
     #   the results are returned in ascending order of the `eventTimestamp` of
     #   the events.
     #
+    # @option params [Boolean] :start_at_previous_started_event
+    #   When set to `true`, returns the events with `eventTimestamp` greater
+    #   than or equal to `eventTimestamp` of the most recent
+    #   `DecisionTaskStarted` event. By default, this parameter is set to
+    #   `false`.
+    #
     # @return [Types::DecisionTask] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DecisionTask#task_token #task_token} => String
@@ -2471,6 +2476,7 @@ module Aws::SWF
     #     next_page_token: "PageToken",
     #     maximum_page_size: 1,
     #     reverse_order: false,
+    #     start_at_previous_started_event: false,
     #   })
     #
     # @example Response structure
@@ -2875,10 +2881,9 @@ module Aws::SWF
     # @option params [required, String] :name
     #   The name of the activity type within the domain.
     #
-    #   The specified string must not start or end with whitespace. It must
-    #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
-    #   not *be* the literal string `arn`.
+    #   The specified string must not contain a `:` (colon), `/` (slash), `|`
+    #   (vertical bar), or any control characters (`\u0000-\u001f` \|
+    #   `\u007f-\u009f`). Also, it must *not* be the literal string `arn`.
     #
     # @option params [required, String] :version
     #   The version of the activity type.
@@ -2888,10 +2893,9 @@ module Aws::SWF
     #
     #    </note>
     #
-    #   The specified string must not start or end with whitespace. It must
-    #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
-    #   not *be* the literal string `arn`.
+    #   The specified string must not contain a `:` (colon), `/` (slash), `|`
+    #   (vertical bar), or any control characters (`\u0000-\u001f` \|
+    #   `\u007f-\u009f`). Also, it must *not* be the literal string `arn`.
     #
     # @option params [String] :description
     #   A textual description of the activity type.
@@ -3015,7 +3019,7 @@ module Aws::SWF
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
     #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
-    #   not *be* the literal string `arn`.
+    #   *not* be the literal string `arn`.
     #
     # @option params [String] :description
     #   A text description of the domain.
@@ -3115,10 +3119,9 @@ module Aws::SWF
     # @option params [required, String] :name
     #   The name of the workflow type.
     #
-    #   The specified string must not start or end with whitespace. It must
-    #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
-    #   not *be* the literal string `arn`.
+    #   The specified string must not contain a `:` (colon), `/` (slash), `|`
+    #   (vertical bar), or any control characters (`\u0000-\u001f` \|
+    #   `\u007f-\u009f`). Also, it must *not* be the literal string `arn`.
     #
     # @option params [required, String] :version
     #   The version of the workflow type.
@@ -3129,10 +3132,9 @@ module Aws::SWF
     #
     #    </note>
     #
-    #   The specified string must not start or end with whitespace. It must
-    #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
-    #   not *be* the literal string `arn`.
+    #   The specified string must not contain a `:` (colon), `/` (slash), `|`
+    #   (vertical bar), or any control characters (`\u0000-\u001f` \|
+    #   `\u007f-\u009f`). Also, it must *not* be the literal string `arn`.
     #
     # @option params [String] :description
     #   Textual description of the workflow type.
@@ -3797,6 +3799,10 @@ module Aws::SWF
     # @option params [required, String] :domain
     #   The name of the domain in which the workflow execution is created.
     #
+    #   The specified string must not contain a `:` (colon), `/` (slash), `|`
+    #   (vertical bar), or any control characters (`\u0000-\u001f` \|
+    #   `\u007f-\u009f`). Also, it must *not* be the literal string `arn`.
+    #
     # @option params [required, String] :workflow_id
     #   The user defined identifier associated with the workflow execution.
     #   You can use this to associate a custom identifier with the workflow
@@ -3805,10 +3811,9 @@ module Aws::SWF
     #   open workflow executions with the same `workflowId` at the same time
     #   within the same domain.
     #
-    #   The specified string must not start or end with whitespace. It must
-    #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
-    #   not *be* the literal string `arn`.
+    #   The specified string must not contain a `:` (colon), `/` (slash), `|`
+    #   (vertical bar), or any control characters (`\u0000-\u001f` \|
+    #   `\u007f-\u009f`). Also, it must *not* be the literal string `arn`.
     #
     # @option params [required, Types::WorkflowType] :workflow_type
     #   The type of the workflow to start.
@@ -3825,10 +3830,9 @@ module Aws::SWF
     #
     #    </note>
     #
-    #   The specified string must not start or end with whitespace. It must
-    #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it must
-    #   not *be* the literal string `arn`.
+    #   The specified string must not contain a `:` (colon), `/` (slash), `|`
+    #   (vertical bar), or any control characters (`\u0000-\u001f` \|
+    #   `\u007f-\u009f`). Also, it must *not* be the literal string `arn`.
     #
     # @option params [String] :task_priority
     #   The task priority to use for this workflow execution. This overrides
@@ -4329,7 +4333,7 @@ module Aws::SWF
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-swf'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

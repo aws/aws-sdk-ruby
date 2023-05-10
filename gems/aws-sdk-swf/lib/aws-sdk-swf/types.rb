@@ -2145,7 +2145,7 @@ module Aws::SWF
     #   value of `NextPageToken` is a unique pagination token for each page.
     #   Make the call again using the returned token to retrieve the next
     #   page. Keep all other arguments unchanged. Each pagination token
-    #   expires after 60 seconds. Using an expired pagination token will
+    #   expires after 24 hours. Using an expired pagination token will
     #   return a `400` error: "`Specified token has exceeded its maximum
     #   lifetime`".
     #
@@ -2931,7 +2931,7 @@ module Aws::SWF
     #   value of `NextPageToken` is a unique pagination token for each page.
     #   Make the call again using the returned token to retrieve the next
     #   page. Keep all other arguments unchanged. Each pagination token
-    #   expires after 60 seconds. Using an expired pagination token will
+    #   expires after 24 hours. Using an expired pagination token will
     #   return a `400` error: "`Specified token has exceeded its maximum
     #   lifetime`".
     #
@@ -3039,7 +3039,7 @@ module Aws::SWF
     #   value of `NextPageToken` is a unique pagination token for each page.
     #   Make the call again using the returned token to retrieve the next
     #   page. Keep all other arguments unchanged. Each pagination token
-    #   expires after 60 seconds. Using an expired pagination token will
+    #   expires after 24 hours. Using an expired pagination token will
     #   return a `400` error: "`Specified token has exceeded its maximum
     #   lifetime`".
     #
@@ -3078,7 +3078,7 @@ module Aws::SWF
     #   value of `NextPageToken` is a unique pagination token for each page.
     #   Make the call again using the returned token to retrieve the next
     #   page. Keep all other arguments unchanged. Each pagination token
-    #   expires after 60 seconds. Using an expired pagination token will
+    #   expires after 24 hours. Using an expired pagination token will
     #   return a `400` error: "`Specified token has exceeded its maximum
     #   lifetime`".
     #
@@ -3145,7 +3145,7 @@ module Aws::SWF
     #   value of `NextPageToken` is a unique pagination token for each page.
     #   Make the call again using the returned token to retrieve the next
     #   page. Keep all other arguments unchanged. Each pagination token
-    #   expires after 60 seconds. Using an expired pagination token will
+    #   expires after 24 hours. Using an expired pagination token will
     #   return a `400` error: "`Specified token has exceeded its maximum
     #   lifetime`".
     #
@@ -3225,7 +3225,7 @@ module Aws::SWF
     #   value of `NextPageToken` is a unique pagination token for each page.
     #   Make the call again using the returned token to retrieve the next
     #   page. Keep all other arguments unchanged. Each pagination token
-    #   expires after 60 seconds. Using an expired pagination token will
+    #   expires after 24 hours. Using an expired pagination token will
     #   return a `400` error: "`Specified token has exceeded its maximum
     #   lifetime`".
     #
@@ -3323,7 +3323,7 @@ module Aws::SWF
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
     #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
-    #   must not *be* the literal string `arn`.
+    #   must *not* be the literal string `arn`.
     #   @return [Types::TaskList]
     #
     # @!attribute [rw] identity
@@ -3348,10 +3348,9 @@ module Aws::SWF
     # @!attribute [rw] task_list
     #   Specifies the task list to poll for decision tasks.
     #
-    #   The specified string must not start or end with whitespace. It must
-    #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
-    #   must not *be* the literal string `arn`.
+    #   The specified string must not contain a `:` (colon), `/` (slash),
+    #   `|` (vertical bar), or any control characters (`\u0000-\u001f` \|
+    #   `\u007f-\u009f`). Also, it must *not* be the literal string `arn`.
     #   @return [Types::TaskList]
     #
     # @!attribute [rw] identity
@@ -3366,7 +3365,7 @@ module Aws::SWF
     #   value of `NextPageToken` is a unique pagination token for each page.
     #   Make the call again using the returned token to retrieve the next
     #   page. Keep all other arguments unchanged. Each pagination token
-    #   expires after 60 seconds. Using an expired pagination token will
+    #   expires after 24 hours. Using an expired pagination token will
     #   return a `400` error: "`Specified token has exceeded its maximum
     #   lifetime`".
     #
@@ -3396,13 +3395,21 @@ module Aws::SWF
     #   of the events.
     #   @return [Boolean]
     #
+    # @!attribute [rw] start_at_previous_started_event
+    #   When set to `true`, returns the events with `eventTimestamp` greater
+    #   than or equal to `eventTimestamp` of the most recent
+    #   `DecisionTaskStarted` event. By default, this parameter is set to
+    #   `false`.
+    #   @return [Boolean]
+    #
     class PollForDecisionTaskInput < Struct.new(
       :domain,
       :task_list,
       :identity,
       :next_page_token,
       :maximum_page_size,
-      :reverse_order)
+      :reverse_order,
+      :start_at_previous_started_event)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3513,10 +3520,9 @@ module Aws::SWF
     # @!attribute [rw] name
     #   The name of the activity type within the domain.
     #
-    #   The specified string must not start or end with whitespace. It must
-    #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
-    #   must not *be* the literal string `arn`.
+    #   The specified string must not contain a `:` (colon), `/` (slash),
+    #   `|` (vertical bar), or any control characters (`\u0000-\u001f` \|
+    #   `\u007f-\u009f`). Also, it must *not* be the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -3527,10 +3533,9 @@ module Aws::SWF
     #
     #    </note>
     #
-    #   The specified string must not start or end with whitespace. It must
-    #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
-    #   must not *be* the literal string `arn`.
+    #   The specified string must not contain a `:` (colon), `/` (slash),
+    #   `|` (vertical bar), or any control characters (`\u0000-\u001f` \|
+    #   `\u007f-\u009f`). Also, it must *not* be the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3626,7 +3631,7 @@ module Aws::SWF
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
     #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
-    #   must not *be* the literal string `arn`.
+    #   must *not* be the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3675,10 +3680,9 @@ module Aws::SWF
     # @!attribute [rw] name
     #   The name of the workflow type.
     #
-    #   The specified string must not start or end with whitespace. It must
-    #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
-    #   must not *be* the literal string `arn`.
+    #   The specified string must not contain a `:` (colon), `/` (slash),
+    #   `|` (vertical bar), or any control characters (`\u0000-\u001f` \|
+    #   `\u007f-\u009f`). Also, it must *not* be the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -3691,10 +3695,9 @@ module Aws::SWF
     #
     #    </note>
     #
-    #   The specified string must not start or end with whitespace. It must
-    #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
-    #   must not *be* the literal string `arn`.
+    #   The specified string must not contain a `:` (colon), `/` (slash),
+    #   `|` (vertical bar), or any control characters (`\u0000-\u001f` \|
+    #   `\u007f-\u009f`). Also, it must *not* be the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -4212,10 +4215,9 @@ module Aws::SWF
     # @!attribute [rw] activity_id
     #   The `activityId` of the activity task.
     #
-    #   The specified string must not start or end with whitespace. It must
-    #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
-    #   must not contain the literal string `arn`.
+    #   The specified string must not contain a `:` (colon), `/` (slash),
+    #   `|` (vertical bar), or any control characters (`\u0000-\u001f` \|
+    #   `\u007f-\u009f`). Also, it must *not* be the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] control
@@ -4253,10 +4255,9 @@ module Aws::SWF
     #
     #    </note>
     #
-    #   The specified string must not start or end with whitespace. It must
-    #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
-    #   must not contain the literal string `arn`.
+    #   The specified string must not contain a `:` (colon), `/` (slash),
+    #   `|` (vertical bar), or any control characters (`\u0000-\u001f` \|
+    #   `\u007f-\u009f`). Also, it must *not* be the literal string `arn`.
     #   @return [Types::TaskList]
     #
     # @!attribute [rw] task_priority
@@ -4406,8 +4407,9 @@ module Aws::SWF
     # @!attribute [rw] start_to_close_timeout
     #   The timeout value, in seconds, after which the Lambda function is
     #   considered to be failed once it has started. This can be any integer
-    #   from 1-300 (1s-5m). If no value is supplied, than a default value of
-    #   300s is assumed.
+    #   from 1-900 (1s-15m).
+    #
+    #   If no value is supplied, then a default value of 900s is assumed.
     #   @return [String]
     #
     class ScheduleLambdaFunctionDecisionAttributes < Struct.new(
@@ -4708,10 +4710,9 @@ module Aws::SWF
     # @!attribute [rw] workflow_id
     #   The `workflowId` of the workflow execution.
     #
-    #   The specified string must not start or end with whitespace. It must
-    #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
-    #   must not contain the literal string `arn`.
+    #   The specified string must not contain a `:` (colon), `/` (slash),
+    #   `|` (vertical bar), or any control characters (`\u0000-\u001f` \|
+    #   `\u007f-\u009f`). Also, it must *not* be the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] control
@@ -4755,7 +4756,7 @@ module Aws::SWF
     #   The specified string must not start or end with whitespace. It must
     #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
     #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
-    #   must not contain the literal string `arn`.
+    #   must *not* be the literal string `arn`.
     #   @return [Types::TaskList]
     #
     # @!attribute [rw] task_priority
@@ -5087,10 +5088,9 @@ module Aws::SWF
     # @!attribute [rw] timer_id
     #   The unique ID of the timer.
     #
-    #   The specified string must not start or end with whitespace. It must
-    #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
-    #   must not contain the literal string `arn`.
+    #   The specified string must not contain a `:` (colon), `/` (slash),
+    #   `|` (vertical bar), or any control characters (`\u0000-\u001f` \|
+    #   `\u007f-\u009f`). Also, it must *not* be the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] control
@@ -5153,6 +5153,10 @@ module Aws::SWF
 
     # @!attribute [rw] domain
     #   The name of the domain in which the workflow execution is created.
+    #
+    #   The specified string must not contain a `:` (colon), `/` (slash),
+    #   `|` (vertical bar), or any control characters (`\u0000-\u001f` \|
+    #   `\u007f-\u009f`). Also, it must *not* be the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] workflow_id
@@ -5163,10 +5167,9 @@ module Aws::SWF
     #   cannot have two open workflow executions with the same `workflowId`
     #   at the same time within the same domain.
     #
-    #   The specified string must not start or end with whitespace. It must
-    #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
-    #   must not *be* the literal string `arn`.
+    #   The specified string must not contain a `:` (colon), `/` (slash),
+    #   `|` (vertical bar), or any control characters (`\u0000-\u001f` \|
+    #   `\u007f-\u009f`). Also, it must *not* be the literal string `arn`.
     #   @return [String]
     #
     # @!attribute [rw] workflow_type
@@ -5185,10 +5188,9 @@ module Aws::SWF
     #
     #    </note>
     #
-    #   The specified string must not start or end with whitespace. It must
-    #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
-    #   control characters (`\u0000-\u001f` \| `\u007f-\u009f`). Also, it
-    #   must not *be* the literal string `arn`.
+    #   The specified string must not contain a `:` (colon), `/` (slash),
+    #   `|` (vertical bar), or any control characters (`\u0000-\u001f` \|
+    #   `\u007f-\u009f`). Also, it must *not* be the literal string `arn`.
     #   @return [Types::TaskList]
     #
     # @!attribute [rw] task_priority
