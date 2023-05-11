@@ -5874,8 +5874,8 @@ module Aws::Connect
     #   reporting interval for the retrieval of historical metrics data. The
     #   time must be before the end time timestamp. The time range between
     #   the start and end time must be less than 24 hours. The start time
-    #   cannot be earlier than 14 days before the time of the request.
-    #   Historical metrics are available for 14 days.
+    #   cannot be earlier than 35 days before the time of the request.
+    #   Historical metrics are available for 35 days.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
@@ -9224,6 +9224,9 @@ module Aws::Connect
     #
     # @!attribute [rw] name
     #   The name of the metric.
+    #
+    #   This parameter is required. The following Required = No is
+    #   incorrect.
     #   @return [String]
     #
     # @!attribute [rw] threshold

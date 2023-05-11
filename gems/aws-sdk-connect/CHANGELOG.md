@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2023-05-11)
+------------------
+
+* Feature - This release updates GetMetricDataV2 API, to support metric data up-to last 35 days
+
 1.105.0 (2023-05-04)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2023-05-11)
+------------------
+
+* Feature - This release fixes DescribePackages API error with null filter value parameter.
+
 1.69.0 (2023-01-18)
 ------------------
 

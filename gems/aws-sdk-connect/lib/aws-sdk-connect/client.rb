@@ -5381,7 +5381,7 @@ module Aws::Connect
     # previous version of this API. It has new metrics, offers filtering at
     # a metric level, and offers the ability to filter and group data by
     # channels, queues, routing profiles, agents, and agent hierarchy
-    # levels. It can retrieve historical data for the last 14 days, in
+    # levels. It can retrieve historical data for the last 35 days, in
     # 24-hour intervals.
     #
     # For a description of the historical metrics that are supported by
@@ -5405,8 +5405,8 @@ module Aws::Connect
     #   reporting interval for the retrieval of historical metrics data. The
     #   time must be before the end time timestamp. The time range between the
     #   start and end time must be less than 24 hours. The start time cannot
-    #   be earlier than 14 days before the time of the request. Historical
-    #   metrics are available for 14 days.
+    #   be earlier than 35 days before the time of the request. Historical
+    #   metrics are available for 35 days.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The timestamp, in UNIX Epoch time format, at which to end the
@@ -10720,7 +10720,13 @@ module Aws::Connect
     # instance or traffic distribution group in the same Amazon Web Services
     # Region.
     #
-    # You can call [DescribePhoneNumber][1] API to verify the status of a
+    # After using this API, you must verify that the phone number is
+    # attached to the correct flow in the target instance or traffic
+    # distribution group. You need to do this because the API switches only
+    # the phone number to a new instance or traffic distribution group. It
+    # doesn't migrate the flow configuration of the phone number, too.
+    #
+    #  You can call [DescribePhoneNumber][1] API to verify the status of a
     # previous [UpdatePhoneNumber][2] operation.
     #
     #
@@ -11883,7 +11889,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.106.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -68,10 +68,14 @@ module Aws::Support
             Aws::Support::Endpoints::DescribeCases.build(context)
           when :describe_communications
             Aws::Support::Endpoints::DescribeCommunications.build(context)
+          when :describe_create_case_options
+            Aws::Support::Endpoints::DescribeCreateCaseOptions.build(context)
           when :describe_services
             Aws::Support::Endpoints::DescribeServices.build(context)
           when :describe_severity_levels
             Aws::Support::Endpoints::DescribeSeverityLevels.build(context)
+          when :describe_supported_languages
+            Aws::Support::Endpoints::DescribeSupportedLanguages.build(context)
           when :describe_trusted_advisor_check_refresh_statuses
             Aws::Support::Endpoints::DescribeTrustedAdvisorCheckRefreshStatuses.build(context)
           when :describe_trusted_advisor_check_result

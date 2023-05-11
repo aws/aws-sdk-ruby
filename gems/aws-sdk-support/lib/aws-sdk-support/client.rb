@@ -610,9 +610,10 @@ module Aws::Support
     #
     # @option params [String] :language
     #   The language in which Amazon Web Services Support handles the case.
-    #   Amazon Web Services Support currently supports English ("en") and
-    #   Japanese ("ja"). You must specify the ISO 639-1 code for the
-    #   `language` parameter if you want support in that language.
+    #   Amazon Web Services Support currently supports Chinese (“zh”), English
+    #   ("en"), Japanese ("ja") and Korean (“ko”). You must specify the
+    #   ISO 639-1 code for the `language` parameter if you want support in
+    #   that language.
     #
     # @option params [String] :issue_type
     #   The type of issue for the case. You can specify `customer-service` or
@@ -766,9 +767,10 @@ module Aws::Support
     #
     # @option params [String] :language
     #   The language in which Amazon Web Services Support handles the case.
-    #   Amazon Web Services Support currently supports English ("en") and
-    #   Japanese ("ja"). You must specify the ISO 639-1 code for the
-    #   `language` parameter if you want support in that language.
+    #   Amazon Web Services Support currently supports Chinese (“zh”), English
+    #   ("en"), Japanese ("ja") and Korean (“ko”). You must specify the
+    #   ISO 639-1 code for the `language` parameter if you want support in
+    #   that language.
     #
     # @option params [Boolean] :include_communications
     #   Specifies whether to include communications in the `DescribeCases`
@@ -918,6 +920,83 @@ module Aws::Support
       req.send_request(options)
     end
 
+    # Returns a list of CreateCaseOption types along with the corresponding
+    # supported hours and language availability. You can specify the
+    # `language` `categoryCode`, `issueType` and `serviceCode` used to
+    # retrieve the CreateCaseOptions.
+    #
+    # <note markdown="1"> * You must have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan to use the Amazon Web Services Support API.
+    #
+    # * If you call the Amazon Web Services Support API from an account that
+    #   doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan, the `SubscriptionRequiredException` error message appears. For
+    #   information about changing your support plan, see [Amazon Web
+    #   Services Support][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/premiumsupport/
+    #
+    # @option params [required, String] :issue_type
+    #   The type of issue for the case. You can specify `customer-service` or
+    #   `technical`. If you don't specify a value, the default is
+    #   `technical`.
+    #
+    # @option params [required, String] :service_code
+    #   The code for the Amazon Web Services service. You can use the
+    #   DescribeServices operation to get the possible `serviceCode` values.
+    #
+    # @option params [required, String] :language
+    #   The language in which Amazon Web Services Support handles the case.
+    #   Amazon Web Services Support currently supports Chinese (“zh”), English
+    #   ("en"), Japanese ("ja") and Korean (“ko”). You must specify the
+    #   ISO 639-1 code for the `language` parameter if you want support in
+    #   that language.
+    #
+    # @option params [required, String] :category_code
+    #   The category of problem for the support case. You also use the
+    #   DescribeServices operation to get the category code for a service.
+    #   Each Amazon Web Services service defines its own set of category
+    #   codes.
+    #
+    # @return [Types::DescribeCreateCaseOptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCreateCaseOptionsResponse#language_availability #language_availability} => String
+    #   * {Types::DescribeCreateCaseOptionsResponse#communication_types #communication_types} => Array&lt;Types::CommunicationTypeOptions&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_create_case_options({
+    #     issue_type: "IssueType", # required
+    #     service_code: "ServiceCode", # required
+    #     language: "Language", # required
+    #     category_code: "CategoryCode", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.language_availability #=> String
+    #   resp.communication_types #=> Array
+    #   resp.communication_types[0].type #=> String
+    #   resp.communication_types[0].supported_hours #=> Array
+    #   resp.communication_types[0].supported_hours[0].start_time #=> String
+    #   resp.communication_types[0].supported_hours[0].end_time #=> String
+    #   resp.communication_types[0].dates_without_support #=> Array
+    #   resp.communication_types[0].dates_without_support[0].start_date_time #=> String
+    #   resp.communication_types[0].dates_without_support[0].end_date_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCreateCaseOptions AWS API Documentation
+    #
+    # @overload describe_create_case_options(params = {})
+    # @param [Hash] params ({})
+    def describe_create_case_options(params = {}, options = {})
+      req = build_request(:describe_create_case_options, params)
+      req.send_request(options)
+    end
+
     # Returns the current list of Amazon Web Services services and a list of
     # service categories for each service. You then use service names and
     # categories in your CreateCase requests. Each Amazon Web Services
@@ -953,9 +1032,10 @@ module Aws::Support
     #
     # @option params [String] :language
     #   The language in which Amazon Web Services Support handles the case.
-    #   Amazon Web Services Support currently supports English ("en") and
-    #   Japanese ("ja"). You must specify the ISO 639-1 code for the
-    #   `language` parameter if you want support in that language.
+    #   Amazon Web Services Support currently supports Chinese (“zh”), English
+    #   ("en"), Japanese ("ja") and Korean (“ko”). You must specify the
+    #   ISO 639-1 code for the `language` parameter if you want support in
+    #   that language.
     #
     # @return [Types::DescribeServicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1007,9 +1087,10 @@ module Aws::Support
     #
     # @option params [String] :language
     #   The language in which Amazon Web Services Support handles the case.
-    #   Amazon Web Services Support currently supports English ("en") and
-    #   Japanese ("ja"). You must specify the ISO 639-1 code for the
-    #   `language` parameter if you want support in that language.
+    #   Amazon Web Services Support currently supports Chinese (“zh”), English
+    #   ("en"), Japanese ("ja") and Korean (“ko”). You must specify the
+    #   ISO 639-1 code for the `language` parameter if you want support in
+    #   that language.
     #
     # @return [Types::DescribeSeverityLevelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1033,6 +1114,68 @@ module Aws::Support
     # @param [Hash] params ({})
     def describe_severity_levels(params = {}, options = {})
       req = build_request(:describe_severity_levels, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of supported languages for a specified `categoryCode`,
+    # `issueType` and `serviceCode`. The returned supported languages will
+    # include a ISO 639-1 code for the `language`, and the language display
+    # name.
+    #
+    # <note markdown="1"> * You must have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan to use the Amazon Web Services Support API.
+    #
+    # * If you call the Amazon Web Services Support API from an account that
+    #   doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan, the `SubscriptionRequiredException` error message appears. For
+    #   information about changing your support plan, see [Amazon Web
+    #   Services Support][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/premiumsupport/
+    #
+    # @option params [required, String] :issue_type
+    #   The type of issue for the case. You can specify `customer-service` or
+    #   `technical`.
+    #
+    # @option params [required, String] :service_code
+    #   The code for the Amazon Web Services service. You can use the
+    #   DescribeServices operation to get the possible `serviceCode` values.
+    #
+    # @option params [required, String] :category_code
+    #   The category of problem for the support case. You also use the
+    #   DescribeServices operation to get the category code for a service.
+    #   Each Amazon Web Services service defines its own set of category
+    #   codes.
+    #
+    # @return [Types::DescribeSupportedLanguagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSupportedLanguagesResponse#supported_languages #supported_languages} => Array&lt;Types::SupportedLanguage&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_supported_languages({
+    #     issue_type: "ValidatedIssueTypeString", # required
+    #     service_code: "ValidatedServiceCode", # required
+    #     category_code: "ValidatedCategoryCode", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.supported_languages #=> Array
+    #   resp.supported_languages[0].code #=> String
+    #   resp.supported_languages[0].language #=> String
+    #   resp.supported_languages[0].display #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeSupportedLanguages AWS API Documentation
+    #
+    # @overload describe_supported_languages(params = {})
+    # @param [Hash] params ({})
+    def describe_supported_languages(params = {}, options = {})
+      req = build_request(:describe_supported_languages, params)
       req.send_request(options)
     end
 
@@ -1503,7 +1646,7 @@ module Aws::Support
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-support'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1490,7 +1490,7 @@ module Aws::ElasticsearchService
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   A list of values for the specified field.
+    #   A non-empty list of values for the specified field.
     #   @return [Array<String>]
     #
     class DescribePackagesFilter < Struct.new(

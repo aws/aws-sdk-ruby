@@ -387,8 +387,8 @@ module Aws::IVSRealTime
     #   Default: `PUBLISH, SUBSCRIBE`.
     #
     # @option params [Integer] :duration
-    #   Duration (in minutes), after which the token expires. Default: 60 (1
-    #   hour).
+    #   Duration (in minutes), after which the token expires. Default: 720 (12
+    #   hours).
     #
     # @option params [required, String] :stage_arn
     #   ARN of the stage to which this token is scoped.
@@ -534,8 +534,8 @@ module Aws::IVSRealTime
     # permanently from a specified stage.
     #
     # @option params [required, String] :participant_id
-    #   Identifier of the participant to be disconnected. This is returned by
-    #   CreateParticipantToken.
+    #   Identifier of the participant to be disconnected. This is assigned by
+    #   IVS and returned by CreateParticipantToken.
     #
     # @option params [String] :reason
     #   Description of why this participant is being disconnected.
@@ -559,6 +559,49 @@ module Aws::IVSRealTime
     # @param [Hash] params ({})
     def disconnect_participant(params = {}, options = {})
       req = build_request(:disconnect_participant, params)
+      req.send_request(options)
+    end
+
+    # Gets information about the specified participant token.
+    #
+    # @option params [required, String] :participant_id
+    #   Unique identifier for the participant. This is assigned by IVS and
+    #   returned by CreateParticipantToken.
+    #
+    # @option params [required, String] :session_id
+    #   ID of a session within the stage.
+    #
+    # @option params [required, String] :stage_arn
+    #   Stage ARN.
+    #
+    # @return [Types::GetParticipantResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetParticipantResponse#participant #participant} => Types::Participant
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_participant({
+    #     participant_id: "ParticipantId", # required
+    #     session_id: "StageSessionId", # required
+    #     stage_arn: "StageArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.participant.attributes #=> Hash
+    #   resp.participant.attributes["String"] #=> String
+    #   resp.participant.first_join_time #=> Time
+    #   resp.participant.participant_id #=> String
+    #   resp.participant.published #=> Boolean
+    #   resp.participant.state #=> String, one of "CONNECTED", "DISCONNECTED"
+    #   resp.participant.user_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetParticipant AWS API Documentation
+    #
+    # @overload get_participant(params = {})
+    # @param [Hash] params ({})
+    def get_participant(params = {}, options = {})
+      req = build_request(:get_participant, params)
       req.send_request(options)
     end
 
@@ -591,6 +634,210 @@ module Aws::IVSRealTime
     # @param [Hash] params ({})
     def get_stage(params = {}, options = {})
       req = build_request(:get_stage, params)
+      req.send_request(options)
+    end
+
+    # Gets information for the specified stage session.
+    #
+    # @option params [required, String] :session_id
+    #   ID of a session within the stage.
+    #
+    # @option params [required, String] :stage_arn
+    #   ARN of the stage for which the information is to be retrieved.
+    #
+    # @return [Types::GetStageSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetStageSessionResponse#stage_session #stage_session} => Types::StageSession
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_stage_session({
+    #     session_id: "StageSessionId", # required
+    #     stage_arn: "StageArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.stage_session.end_time #=> Time
+    #   resp.stage_session.session_id #=> String
+    #   resp.stage_session.start_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetStageSession AWS API Documentation
+    #
+    # @overload get_stage_session(params = {})
+    # @param [Hash] params ({})
+    def get_stage_session(params = {}, options = {})
+      req = build_request(:get_stage_session, params)
+      req.send_request(options)
+    end
+
+    # Lists events for a specified participant that occurred during a
+    # specified stage session.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return. Default: 50.
+    #
+    # @option params [String] :next_token
+    #   The first participant to retrieve. This is used for pagination; see
+    #   the `nextToken` response field.
+    #
+    # @option params [required, String] :participant_id
+    #   Unique identifier for this participant. This is assigned by IVS and
+    #   returned by CreateParticipantToken.
+    #
+    # @option params [required, String] :session_id
+    #   ID of a session within the stage.
+    #
+    # @option params [required, String] :stage_arn
+    #   Stage ARN.
+    #
+    # @return [Types::ListParticipantEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListParticipantEventsResponse#events #events} => Array&lt;Types::Event&gt;
+    #   * {Types::ListParticipantEventsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_participant_events({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     participant_id: "ParticipantId", # required
+    #     session_id: "StageSessionId", # required
+    #     stage_arn: "StageArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.events #=> Array
+    #   resp.events[0].error_code #=> String, one of "INSUFFICIENT_CAPABILITIES"
+    #   resp.events[0].event_time #=> Time
+    #   resp.events[0].name #=> String, one of "JOINED", "LEFT", "PUBLISH_STARTED", "PUBLISH_STOPPED", "SUBSCRIBE_STARTED", "SUBSCRIBE_STOPPED", "PUBLISH_ERROR", "SUBSCRIBE_ERROR", "JOIN_ERROR"
+    #   resp.events[0].participant_id #=> String
+    #   resp.events[0].remote_participant_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListParticipantEvents AWS API Documentation
+    #
+    # @overload list_participant_events(params = {})
+    # @param [Hash] params ({})
+    def list_participant_events(params = {}, options = {})
+      req = build_request(:list_participant_events, params)
+      req.send_request(options)
+    end
+
+    # Lists all participants in a specified stage session.
+    #
+    # @option params [Boolean] :filter_by_published
+    #   Filters the response list to only show participants who published
+    #   during the stage session. Only one of `filterByUserId`,
+    #   `filterByPublished`, or `filterByState` can be provided per request.
+    #
+    # @option params [String] :filter_by_state
+    #   Filters the response list to only show participants in the specified
+    #   state. Only one of `filterByUserId`, `filterByPublished`, or
+    #   `filterByState` can be provided per request.
+    #
+    # @option params [String] :filter_by_user_id
+    #   Filters the response list to match the specified user ID. Only one of
+    #   `filterByUserId`, `filterByPublished`, or `filterByState` can be
+    #   provided per request. A `userId` is a customer-assigned name to help
+    #   identify the token; this can be used to link a participant to a user
+    #   in the customer’s own systems.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return. Default: 50.
+    #
+    # @option params [String] :next_token
+    #   The first participant to retrieve. This is used for pagination; see
+    #   the `nextToken` response field.
+    #
+    # @option params [required, String] :session_id
+    #   ID of the session within the stage.
+    #
+    # @option params [required, String] :stage_arn
+    #   Stage ARN.
+    #
+    # @return [Types::ListParticipantsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListParticipantsResponse#next_token #next_token} => String
+    #   * {Types::ListParticipantsResponse#participants #participants} => Array&lt;Types::ParticipantSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_participants({
+    #     filter_by_published: false,
+    #     filter_by_state: "CONNECTED", # accepts CONNECTED, DISCONNECTED
+    #     filter_by_user_id: "UserId",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     session_id: "StageSessionId", # required
+    #     stage_arn: "StageArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.participants #=> Array
+    #   resp.participants[0].first_join_time #=> Time
+    #   resp.participants[0].participant_id #=> String
+    #   resp.participants[0].published #=> Boolean
+    #   resp.participants[0].state #=> String, one of "CONNECTED", "DISCONNECTED"
+    #   resp.participants[0].user_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListParticipants AWS API Documentation
+    #
+    # @overload list_participants(params = {})
+    # @param [Hash] params ({})
+    def list_participants(params = {}, options = {})
+      req = build_request(:list_participants, params)
+      req.send_request(options)
+    end
+
+    # Gets all sessions for a specified stage.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return. Default: 50.
+    #
+    # @option params [String] :next_token
+    #   The first stage to retrieve. This is used for pagination; see the
+    #   `nextToken` response field.
+    #
+    # @option params [required, String] :stage_arn
+    #   Stage ARN.
+    #
+    # @return [Types::ListStageSessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStageSessionsResponse#next_token #next_token} => String
+    #   * {Types::ListStageSessionsResponse#stage_sessions #stage_sessions} => Array&lt;Types::StageSessionSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_stage_sessions({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     stage_arn: "StageArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.stage_sessions #=> Array
+    #   resp.stage_sessions[0].end_time #=> Time
+    #   resp.stage_sessions[0].session_id #=> String
+    #   resp.stage_sessions[0].start_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListStageSessions AWS API Documentation
+    #
+    # @overload list_stage_sessions(params = {})
+    # @param [Hash] params ({})
+    def list_stage_sessions(params = {}, options = {})
+      req = build_request(:list_stage_sessions, params)
       req.send_request(options)
     end
 
@@ -785,7 +1032,7 @@ module Aws::IVSRealTime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivsrealtime'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -29,6 +29,7 @@ module Aws::Support
     AttachmentSetIdNotFound = Shapes::StructureShape.new(name: 'AttachmentSetIdNotFound')
     AttachmentSetSizeLimitExceeded = Shapes::StructureShape.new(name: 'AttachmentSetSizeLimitExceeded')
     Attachments = Shapes::ListShape.new(name: 'Attachments')
+    AvailabilityErrorMessage = Shapes::StringShape.new(name: 'AvailabilityErrorMessage')
     BeforeTime = Shapes::StringShape.new(name: 'BeforeTime')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CaseCreationLimitExceeded = Shapes::StructureShape.new(name: 'CaseCreationLimitExceeded')
@@ -44,12 +45,17 @@ module Aws::Support
     CategoryName = Shapes::StringShape.new(name: 'CategoryName')
     CcEmailAddress = Shapes::StringShape.new(name: 'CcEmailAddress')
     CcEmailAddressList = Shapes::ListShape.new(name: 'CcEmailAddressList')
+    Code = Shapes::StringShape.new(name: 'Code')
     Communication = Shapes::StructureShape.new(name: 'Communication')
     CommunicationBody = Shapes::StringShape.new(name: 'CommunicationBody')
     CommunicationList = Shapes::ListShape.new(name: 'CommunicationList')
+    CommunicationTypeOptions = Shapes::StructureShape.new(name: 'CommunicationTypeOptions')
+    CommunicationTypeOptionsList = Shapes::ListShape.new(name: 'CommunicationTypeOptionsList')
     CreateCaseRequest = Shapes::StructureShape.new(name: 'CreateCaseRequest')
     CreateCaseResponse = Shapes::StructureShape.new(name: 'CreateCaseResponse')
     Data = Shapes::BlobShape.new(name: 'Data')
+    DateInterval = Shapes::StructureShape.new(name: 'DateInterval')
+    DatesWithoutSupportList = Shapes::ListShape.new(name: 'DatesWithoutSupportList')
     DescribeAttachmentLimitExceeded = Shapes::StructureShape.new(name: 'DescribeAttachmentLimitExceeded')
     DescribeAttachmentRequest = Shapes::StructureShape.new(name: 'DescribeAttachmentRequest')
     DescribeAttachmentResponse = Shapes::StructureShape.new(name: 'DescribeAttachmentResponse')
@@ -57,10 +63,14 @@ module Aws::Support
     DescribeCasesResponse = Shapes::StructureShape.new(name: 'DescribeCasesResponse')
     DescribeCommunicationsRequest = Shapes::StructureShape.new(name: 'DescribeCommunicationsRequest')
     DescribeCommunicationsResponse = Shapes::StructureShape.new(name: 'DescribeCommunicationsResponse')
+    DescribeCreateCaseOptionsRequest = Shapes::StructureShape.new(name: 'DescribeCreateCaseOptionsRequest')
+    DescribeCreateCaseOptionsResponse = Shapes::StructureShape.new(name: 'DescribeCreateCaseOptionsResponse')
     DescribeServicesRequest = Shapes::StructureShape.new(name: 'DescribeServicesRequest')
     DescribeServicesResponse = Shapes::StructureShape.new(name: 'DescribeServicesResponse')
     DescribeSeverityLevelsRequest = Shapes::StructureShape.new(name: 'DescribeSeverityLevelsRequest')
     DescribeSeverityLevelsResponse = Shapes::StructureShape.new(name: 'DescribeSeverityLevelsResponse')
+    DescribeSupportedLanguagesRequest = Shapes::StructureShape.new(name: 'DescribeSupportedLanguagesRequest')
+    DescribeSupportedLanguagesResponse = Shapes::StructureShape.new(name: 'DescribeSupportedLanguagesResponse')
     DescribeTrustedAdvisorCheckRefreshStatusesRequest = Shapes::StructureShape.new(name: 'DescribeTrustedAdvisorCheckRefreshStatusesRequest')
     DescribeTrustedAdvisorCheckRefreshStatusesResponse = Shapes::StructureShape.new(name: 'DescribeTrustedAdvisorCheckRefreshStatusesResponse')
     DescribeTrustedAdvisorCheckResultRequest = Shapes::StructureShape.new(name: 'DescribeTrustedAdvisorCheckResultRequest')
@@ -69,8 +79,10 @@ module Aws::Support
     DescribeTrustedAdvisorCheckSummariesResponse = Shapes::StructureShape.new(name: 'DescribeTrustedAdvisorCheckSummariesResponse')
     DescribeTrustedAdvisorChecksRequest = Shapes::StructureShape.new(name: 'DescribeTrustedAdvisorChecksRequest')
     DescribeTrustedAdvisorChecksResponse = Shapes::StructureShape.new(name: 'DescribeTrustedAdvisorChecksResponse')
+    Display = Shapes::StringShape.new(name: 'Display')
     DisplayId = Shapes::StringShape.new(name: 'DisplayId')
     Double = Shapes::FloatShape.new(name: 'Double')
+    EndTime = Shapes::StringShape.new(name: 'EndTime')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExpiryTime = Shapes::StringShape.new(name: 'ExpiryTime')
     FileName = Shapes::StringShape.new(name: 'FileName')
@@ -98,11 +110,17 @@ module Aws::Support
     SeverityLevelCode = Shapes::StringShape.new(name: 'SeverityLevelCode')
     SeverityLevelName = Shapes::StringShape.new(name: 'SeverityLevelName')
     SeverityLevelsList = Shapes::ListShape.new(name: 'SeverityLevelsList')
+    StartTime = Shapes::StringShape.new(name: 'StartTime')
     Status = Shapes::StringShape.new(name: 'Status')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     Subject = Shapes::StringShape.new(name: 'Subject')
     SubmittedBy = Shapes::StringShape.new(name: 'SubmittedBy')
+    SupportedHour = Shapes::StructureShape.new(name: 'SupportedHour')
+    SupportedHoursList = Shapes::ListShape.new(name: 'SupportedHoursList')
+    SupportedLanguage = Shapes::StructureShape.new(name: 'SupportedLanguage')
+    SupportedLanguagesList = Shapes::ListShape.new(name: 'SupportedLanguagesList')
+    ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeCreated = Shapes::StringShape.new(name: 'TimeCreated')
     TrustedAdvisorCategorySpecificSummary = Shapes::StructureShape.new(name: 'TrustedAdvisorCategorySpecificSummary')
     TrustedAdvisorCheckDescription = Shapes::StructureShape.new(name: 'TrustedAdvisorCheckDescription')
@@ -116,6 +134,13 @@ module Aws::Support
     TrustedAdvisorResourceDetail = Shapes::StructureShape.new(name: 'TrustedAdvisorResourceDetail')
     TrustedAdvisorResourceDetailList = Shapes::ListShape.new(name: 'TrustedAdvisorResourceDetailList')
     TrustedAdvisorResourcesSummary = Shapes::StructureShape.new(name: 'TrustedAdvisorResourcesSummary')
+    Type = Shapes::StringShape.new(name: 'Type')
+    ValidatedCategoryCode = Shapes::StringShape.new(name: 'ValidatedCategoryCode')
+    ValidatedCommunicationBody = Shapes::StringShape.new(name: 'ValidatedCommunicationBody')
+    ValidatedDateTime = Shapes::StringShape.new(name: 'ValidatedDateTime')
+    ValidatedIssueTypeString = Shapes::StringShape.new(name: 'ValidatedIssueTypeString')
+    ValidatedLanguageAvailability = Shapes::StringShape.new(name: 'ValidatedLanguageAvailability')
+    ValidatedServiceCode = Shapes::StringShape.new(name: 'ValidatedServiceCode')
 
     AddAttachmentsToSetRequest.add_member(:attachment_set_id, Shapes::ShapeRef.new(shape: AttachmentSetId, location_name: "attachmentSetId"))
     AddAttachmentsToSetRequest.add_member(:attachments, Shapes::ShapeRef.new(shape: Attachments, required: true, location_name: "attachments"))
@@ -194,13 +219,20 @@ module Aws::Support
     CcEmailAddressList.member = Shapes::ShapeRef.new(shape: CcEmailAddress)
 
     Communication.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, location_name: "caseId"))
-    Communication.add_member(:body, Shapes::ShapeRef.new(shape: CommunicationBody, location_name: "body"))
+    Communication.add_member(:body, Shapes::ShapeRef.new(shape: ValidatedCommunicationBody, location_name: "body"))
     Communication.add_member(:submitted_by, Shapes::ShapeRef.new(shape: SubmittedBy, location_name: "submittedBy"))
     Communication.add_member(:time_created, Shapes::ShapeRef.new(shape: TimeCreated, location_name: "timeCreated"))
     Communication.add_member(:attachment_set, Shapes::ShapeRef.new(shape: AttachmentSet, location_name: "attachmentSet"))
     Communication.struct_class = Types::Communication
 
     CommunicationList.member = Shapes::ShapeRef.new(shape: Communication)
+
+    CommunicationTypeOptions.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "type"))
+    CommunicationTypeOptions.add_member(:supported_hours, Shapes::ShapeRef.new(shape: SupportedHoursList, location_name: "supportedHours"))
+    CommunicationTypeOptions.add_member(:dates_without_support, Shapes::ShapeRef.new(shape: DatesWithoutSupportList, location_name: "datesWithoutSupport"))
+    CommunicationTypeOptions.struct_class = Types::CommunicationTypeOptions
+
+    CommunicationTypeOptionsList.member = Shapes::ShapeRef.new(shape: CommunicationTypeOptions)
 
     CreateCaseRequest.add_member(:subject, Shapes::ShapeRef.new(shape: Subject, required: true, location_name: "subject"))
     CreateCaseRequest.add_member(:service_code, Shapes::ShapeRef.new(shape: ServiceCode, location_name: "serviceCode"))
@@ -215,6 +247,12 @@ module Aws::Support
 
     CreateCaseResponse.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, location_name: "caseId"))
     CreateCaseResponse.struct_class = Types::CreateCaseResponse
+
+    DateInterval.add_member(:start_date_time, Shapes::ShapeRef.new(shape: ValidatedDateTime, location_name: "startDateTime"))
+    DateInterval.add_member(:end_date_time, Shapes::ShapeRef.new(shape: ValidatedDateTime, location_name: "endDateTime"))
+    DateInterval.struct_class = Types::DateInterval
+
+    DatesWithoutSupportList.member = Shapes::ShapeRef.new(shape: DateInterval)
 
     DescribeAttachmentLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     DescribeAttachmentLimitExceeded.struct_class = Types::DescribeAttachmentLimitExceeded
@@ -251,6 +289,16 @@ module Aws::Support
     DescribeCommunicationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeCommunicationsResponse.struct_class = Types::DescribeCommunicationsResponse
 
+    DescribeCreateCaseOptionsRequest.add_member(:issue_type, Shapes::ShapeRef.new(shape: IssueType, required: true, location_name: "issueType"))
+    DescribeCreateCaseOptionsRequest.add_member(:service_code, Shapes::ShapeRef.new(shape: ServiceCode, required: true, location_name: "serviceCode"))
+    DescribeCreateCaseOptionsRequest.add_member(:language, Shapes::ShapeRef.new(shape: Language, required: true, location_name: "language"))
+    DescribeCreateCaseOptionsRequest.add_member(:category_code, Shapes::ShapeRef.new(shape: CategoryCode, required: true, location_name: "categoryCode"))
+    DescribeCreateCaseOptionsRequest.struct_class = Types::DescribeCreateCaseOptionsRequest
+
+    DescribeCreateCaseOptionsResponse.add_member(:language_availability, Shapes::ShapeRef.new(shape: ValidatedLanguageAvailability, location_name: "languageAvailability"))
+    DescribeCreateCaseOptionsResponse.add_member(:communication_types, Shapes::ShapeRef.new(shape: CommunicationTypeOptionsList, location_name: "communicationTypes"))
+    DescribeCreateCaseOptionsResponse.struct_class = Types::DescribeCreateCaseOptionsResponse
+
     DescribeServicesRequest.add_member(:service_code_list, Shapes::ShapeRef.new(shape: ServiceCodeList, location_name: "serviceCodeList"))
     DescribeServicesRequest.add_member(:language, Shapes::ShapeRef.new(shape: Language, location_name: "language"))
     DescribeServicesRequest.struct_class = Types::DescribeServicesRequest
@@ -263,6 +311,14 @@ module Aws::Support
 
     DescribeSeverityLevelsResponse.add_member(:severity_levels, Shapes::ShapeRef.new(shape: SeverityLevelsList, location_name: "severityLevels"))
     DescribeSeverityLevelsResponse.struct_class = Types::DescribeSeverityLevelsResponse
+
+    DescribeSupportedLanguagesRequest.add_member(:issue_type, Shapes::ShapeRef.new(shape: ValidatedIssueTypeString, required: true, location_name: "issueType"))
+    DescribeSupportedLanguagesRequest.add_member(:service_code, Shapes::ShapeRef.new(shape: ValidatedServiceCode, required: true, location_name: "serviceCode"))
+    DescribeSupportedLanguagesRequest.add_member(:category_code, Shapes::ShapeRef.new(shape: ValidatedCategoryCode, required: true, location_name: "categoryCode"))
+    DescribeSupportedLanguagesRequest.struct_class = Types::DescribeSupportedLanguagesRequest
+
+    DescribeSupportedLanguagesResponse.add_member(:supported_languages, Shapes::ShapeRef.new(shape: SupportedLanguagesList, location_name: "supportedLanguages"))
+    DescribeSupportedLanguagesResponse.struct_class = Types::DescribeSupportedLanguagesResponse
 
     DescribeTrustedAdvisorCheckRefreshStatusesRequest.add_member(:check_ids, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "checkIds"))
     DescribeTrustedAdvisorCheckRefreshStatusesRequest.struct_class = Types::DescribeTrustedAdvisorCheckRefreshStatusesRequest
@@ -325,6 +381,22 @@ module Aws::Support
     SeverityLevelsList.member = Shapes::ShapeRef.new(shape: SeverityLevel)
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
+
+    SupportedHour.add_member(:start_time, Shapes::ShapeRef.new(shape: StartTime, location_name: "startTime"))
+    SupportedHour.add_member(:end_time, Shapes::ShapeRef.new(shape: EndTime, location_name: "endTime"))
+    SupportedHour.struct_class = Types::SupportedHour
+
+    SupportedHoursList.member = Shapes::ShapeRef.new(shape: SupportedHour)
+
+    SupportedLanguage.add_member(:code, Shapes::ShapeRef.new(shape: Code, location_name: "code"))
+    SupportedLanguage.add_member(:language, Shapes::ShapeRef.new(shape: Language, location_name: "language"))
+    SupportedLanguage.add_member(:display, Shapes::ShapeRef.new(shape: Display, location_name: "display"))
+    SupportedLanguage.struct_class = Types::SupportedLanguage
+
+    SupportedLanguagesList.member = Shapes::ShapeRef.new(shape: SupportedLanguage)
+
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: AvailabilityErrorMessage, location_name: "message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
 
     TrustedAdvisorCategorySpecificSummary.add_member(:cost_optimizing, Shapes::ShapeRef.new(shape: TrustedAdvisorCostOptimizingSummary, location_name: "costOptimizing"))
     TrustedAdvisorCategorySpecificSummary.struct_class = Types::TrustedAdvisorCategorySpecificSummary
@@ -480,6 +552,16 @@ module Aws::Support
         )
       end)
 
+      api.add_operation(:describe_create_case_options, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeCreateCaseOptions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeCreateCaseOptionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeCreateCaseOptionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:describe_services, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeServices"
         o.http_method = "POST"
@@ -498,6 +580,16 @@ module Aws::Support
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:describe_supported_languages, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeSupportedLanguages"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeSupportedLanguagesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeSupportedLanguagesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:describe_trusted_advisor_check_refresh_statuses, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeTrustedAdvisorCheckRefreshStatuses"
         o.http_method = "POST"
@@ -505,6 +597,7 @@ module Aws::Support
         o.input = Shapes::ShapeRef.new(shape: DescribeTrustedAdvisorCheckRefreshStatusesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeTrustedAdvisorCheckRefreshStatusesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:describe_trusted_advisor_check_result, Seahorse::Model::Operation.new.tap do |o|
@@ -514,6 +607,7 @@ module Aws::Support
         o.input = Shapes::ShapeRef.new(shape: DescribeTrustedAdvisorCheckResultRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeTrustedAdvisorCheckResultResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:describe_trusted_advisor_check_summaries, Seahorse::Model::Operation.new.tap do |o|
@@ -523,6 +617,7 @@ module Aws::Support
         o.input = Shapes::ShapeRef.new(shape: DescribeTrustedAdvisorCheckSummariesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeTrustedAdvisorCheckSummariesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:describe_trusted_advisor_checks, Seahorse::Model::Operation.new.tap do |o|
@@ -532,6 +627,7 @@ module Aws::Support
         o.input = Shapes::ShapeRef.new(shape: DescribeTrustedAdvisorChecksRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeTrustedAdvisorChecksResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:refresh_trusted_advisor_check, Seahorse::Model::Operation.new.tap do |o|
