@@ -62,7 +62,7 @@ module Aws
       def send_request(options)
         req = options[:client].build_request(@operation_name, options[:params])
         req.handlers.remove(RAISE_HANDLER)
-        req.send_request
+        req.send_request(context: { user_agent_feature_metadata: 'ft/waiter' })
       end
 
       def acceptor_matches?(acceptor, response)
