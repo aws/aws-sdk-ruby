@@ -54,7 +54,7 @@ module AwsSdkCodeGenerator
           params: waiter['params']
         ).to_s.strip
         if waiter['path']
-          "resp = waiter.wait(params.merge(#{args}), #{context_str}"
+          "resp = waiter.wait(params.merge(#{args}), #{context_str})"
         else
           "waiter.wait(params.merge(#{args}), #{context_str})"
         end
