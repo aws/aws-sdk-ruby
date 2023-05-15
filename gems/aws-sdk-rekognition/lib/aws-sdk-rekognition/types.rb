@@ -2432,6 +2432,29 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # Indicates the direction the eyes are gazing in (independent of the
+    # head pose) as determined by its pitch and yaw.
+    #
+    # @!attribute [rw] yaw
+    #   Value representing eye direction on the yaw axis.
+    #   @return [Float]
+    #
+    # @!attribute [rw] pitch
+    #   Value representing eye direction on the pitch axis.
+    #   @return [Float]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence that the service has in its predicted eye direction.
+    #   @return [Float]
+    #
+    class EyeDirection < Struct.new(
+      :yaw,
+      :pitch,
+      :confidence)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Indicates whether or not the eyes on the face are open, and the
     # confidence level in the determination.
     #
@@ -2620,6 +2643,11 @@ module Aws::Rekognition
     #   sunglasses, strands of hair, and others.
     #   @return [Types::FaceOccluded]
     #
+    # @!attribute [rw] eye_direction
+    #   Indicates the direction the eyes are gazing in, as defined by pitch
+    #   and yaw.
+    #   @return [Types::EyeDirection]
+    #
     class FaceDetail < Struct.new(
       :bounding_box,
       :age_range,
@@ -2636,7 +2664,8 @@ module Aws::Rekognition
       :pose,
       :quality,
       :confidence,
-      :face_occluded)
+      :face_occluded,
+      :eye_direction)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2023-05-15)
+------------------
+
+* Feature - With this release, the users can list the active sessions connected to their Dev Environment on AWS CodeCatalyst
+
 1.3.0 (2023-04-24)
 ------------------
 

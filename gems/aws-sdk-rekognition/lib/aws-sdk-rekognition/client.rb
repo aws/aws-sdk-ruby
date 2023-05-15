@@ -2181,7 +2181,7 @@ module Aws::Rekognition
     #         version: "S3ObjectVersion",
     #       },
     #     },
-    #     attributes: ["DEFAULT"], # accepts DEFAULT, ALL, AGE_RANGE, BEARD, EMOTIONS, EYEGLASSES, EYES_OPEN, GENDER, MOUTH_OPEN, MUSTACHE, FACE_OCCLUDED, SMILE, SUNGLASSES
+    #     attributes: ["DEFAULT"], # accepts DEFAULT, ALL, AGE_RANGE, BEARD, EMOTIONS, EYE_DIRECTION, EYEGLASSES, EYES_OPEN, GENDER, MOUTH_OPEN, MUSTACHE, FACE_OCCLUDED, SMILE, SUNGLASSES
     #   })
     #
     # @example Response structure
@@ -2224,6 +2224,9 @@ module Aws::Rekognition
     #   resp.face_details[0].confidence #=> Float
     #   resp.face_details[0].face_occluded.value #=> Boolean
     #   resp.face_details[0].face_occluded.confidence #=> Float
+    #   resp.face_details[0].eye_direction.yaw #=> Float
+    #   resp.face_details[0].eye_direction.pitch #=> Float
+    #   resp.face_details[0].eye_direction.confidence #=> Float
     #   resp.orientation_correction #=> String, one of "ROTATE_0", "ROTATE_90", "ROTATE_180", "ROTATE_270"
     #
     # @overload detect_faces(params = {})
@@ -3081,6 +3084,9 @@ module Aws::Rekognition
     #   resp.celebrities[0].celebrity.face.confidence #=> Float
     #   resp.celebrities[0].celebrity.face.face_occluded.value #=> Boolean
     #   resp.celebrities[0].celebrity.face.face_occluded.confidence #=> Float
+    #   resp.celebrities[0].celebrity.face.eye_direction.yaw #=> Float
+    #   resp.celebrities[0].celebrity.face.eye_direction.pitch #=> Float
+    #   resp.celebrities[0].celebrity.face.eye_direction.confidence #=> Float
     #   resp.celebrities[0].celebrity.known_gender.type #=> String, one of "Male", "Female", "Nonbinary", "Unlisted"
     #   resp.job_id #=> String
     #   resp.video.s3_object.bucket #=> String
@@ -3341,6 +3347,9 @@ module Aws::Rekognition
     #   resp.faces[0].face.confidence #=> Float
     #   resp.faces[0].face.face_occluded.value #=> Boolean
     #   resp.faces[0].face.face_occluded.confidence #=> Float
+    #   resp.faces[0].face.eye_direction.yaw #=> Float
+    #   resp.faces[0].face.eye_direction.pitch #=> Float
+    #   resp.faces[0].face.eye_direction.confidence #=> Float
     #   resp.job_id #=> String
     #   resp.video.s3_object.bucket #=> String
     #   resp.video.s3_object.name #=> String
@@ -3546,6 +3555,9 @@ module Aws::Rekognition
     #   resp.persons[0].person.face.confidence #=> Float
     #   resp.persons[0].person.face.face_occluded.value #=> Boolean
     #   resp.persons[0].person.face.face_occluded.confidence #=> Float
+    #   resp.persons[0].person.face.eye_direction.yaw #=> Float
+    #   resp.persons[0].person.face.eye_direction.pitch #=> Float
+    #   resp.persons[0].person.face.eye_direction.confidence #=> Float
     #   resp.persons[0].face_matches #=> Array
     #   resp.persons[0].face_matches[0].similarity #=> Float
     #   resp.persons[0].face_matches[0].face.face_id #=> String
@@ -3895,6 +3907,9 @@ module Aws::Rekognition
     #   resp.persons[0].person.face.confidence #=> Float
     #   resp.persons[0].person.face.face_occluded.value #=> Boolean
     #   resp.persons[0].person.face.face_occluded.confidence #=> Float
+    #   resp.persons[0].person.face.eye_direction.yaw #=> Float
+    #   resp.persons[0].person.face.eye_direction.pitch #=> Float
+    #   resp.persons[0].person.face.eye_direction.confidence #=> Float
     #   resp.job_id #=> String
     #   resp.video.s3_object.bucket #=> String
     #   resp.video.s3_object.name #=> String
@@ -4471,7 +4486,7 @@ module Aws::Rekognition
     #       },
     #     },
     #     external_image_id: "ExternalImageId",
-    #     detection_attributes: ["DEFAULT"], # accepts DEFAULT, ALL, AGE_RANGE, BEARD, EMOTIONS, EYEGLASSES, EYES_OPEN, GENDER, MOUTH_OPEN, MUSTACHE, FACE_OCCLUDED, SMILE, SUNGLASSES
+    #     detection_attributes: ["DEFAULT"], # accepts DEFAULT, ALL, AGE_RANGE, BEARD, EMOTIONS, EYE_DIRECTION, EYEGLASSES, EYES_OPEN, GENDER, MOUTH_OPEN, MUSTACHE, FACE_OCCLUDED, SMILE, SUNGLASSES
     #     max_faces: 1,
     #     quality_filter: "NONE", # accepts NONE, AUTO, LOW, MEDIUM, HIGH
     #   })
@@ -4525,6 +4540,9 @@ module Aws::Rekognition
     #   resp.face_records[0].face_detail.confidence #=> Float
     #   resp.face_records[0].face_detail.face_occluded.value #=> Boolean
     #   resp.face_records[0].face_detail.face_occluded.confidence #=> Float
+    #   resp.face_records[0].face_detail.eye_direction.yaw #=> Float
+    #   resp.face_records[0].face_detail.eye_direction.pitch #=> Float
+    #   resp.face_records[0].face_detail.eye_direction.confidence #=> Float
     #   resp.orientation_correction #=> String, one of "ROTATE_0", "ROTATE_90", "ROTATE_180", "ROTATE_270"
     #   resp.face_model_version #=> String
     #   resp.unindexed_faces #=> Array
@@ -4567,6 +4585,9 @@ module Aws::Rekognition
     #   resp.unindexed_faces[0].face_detail.confidence #=> Float
     #   resp.unindexed_faces[0].face_detail.face_occluded.value #=> Boolean
     #   resp.unindexed_faces[0].face_detail.face_occluded.confidence #=> Float
+    #   resp.unindexed_faces[0].face_detail.eye_direction.yaw #=> Float
+    #   resp.unindexed_faces[0].face_detail.eye_direction.pitch #=> Float
+    #   resp.unindexed_faces[0].face_detail.eye_direction.confidence #=> Float
     #
     # @overload index_faces(params = {})
     # @param [Hash] params ({})
@@ -6782,7 +6803,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

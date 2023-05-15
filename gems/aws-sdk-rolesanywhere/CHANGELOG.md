@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2023-05-15)
+------------------
+
+* Feature - Adds support for custom notification settings in a trust anchor. Introduces PutNotificationSettings and ResetNotificationSettings API's. Updates DurationSeconds max value to 3600.
+
 1.2.0 (2023-01-18)
 ------------------
 

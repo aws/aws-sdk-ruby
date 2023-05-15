@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2023-05-15)
+------------------
+
+* Feature - This release adds a new EyeDirection attribute in Amazon Rekognition DetectFaces and IndexFaces APIs which predicts the yaw and pitch angles of a person's eye gaze direction for each face detected in the image.
+
 1.78.0 (2023-05-04)
 ------------------
 

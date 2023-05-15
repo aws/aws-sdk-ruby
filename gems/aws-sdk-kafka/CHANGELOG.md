@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2023-05-15)
+------------------
+
+* Feature - Added a fix to make clusterarn a required field in ListClientVpcConnections and RejectClientVpcConnection APIs
+
 1.55.0 (2023-04-27)
 ------------------
 

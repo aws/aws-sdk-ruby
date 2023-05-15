@@ -1195,13 +1195,19 @@ module Aws::Athena
     #   value of the Athena notebook ID.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] spark_properties
+    #   Specifies custom jar files and Spark properties for use cases like
+    #   cluster encryption, table formats, and general Spark tuning.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/EngineConfiguration AWS API Documentation
     #
     class EngineConfiguration < Struct.new(
       :coordinator_dpu_size,
       :max_concurrent_dpus,
       :default_executor_dpu_size,
-      :additional_configs)
+      :additional_configs,
+      :spark_properties)
       SENSITIVE = []
       include Aws::Structure
     end

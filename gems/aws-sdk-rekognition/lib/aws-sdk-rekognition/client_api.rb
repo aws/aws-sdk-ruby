@@ -157,6 +157,7 @@ module Aws::Rekognition
     EvaluationResult = Shapes::StructureShape.new(name: 'EvaluationResult')
     ExtendedPaginationToken = Shapes::StringShape.new(name: 'ExtendedPaginationToken')
     ExternalImageId = Shapes::StringShape.new(name: 'ExternalImageId')
+    EyeDirection = Shapes::StructureShape.new(name: 'EyeDirection')
     EyeOpen = Shapes::StructureShape.new(name: 'EyeOpen')
     Eyeglasses = Shapes::StructureShape.new(name: 'Eyeglasses')
     Face = Shapes::StructureShape.new(name: 'Face')
@@ -957,6 +958,11 @@ module Aws::Rekognition
     EvaluationResult.add_member(:summary, Shapes::ShapeRef.new(shape: Summary, location_name: "Summary"))
     EvaluationResult.struct_class = Types::EvaluationResult
 
+    EyeDirection.add_member(:yaw, Shapes::ShapeRef.new(shape: Degree, location_name: "Yaw"))
+    EyeDirection.add_member(:pitch, Shapes::ShapeRef.new(shape: Degree, location_name: "Pitch"))
+    EyeDirection.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
+    EyeDirection.struct_class = Types::EyeDirection
+
     EyeOpen.add_member(:value, Shapes::ShapeRef.new(shape: Boolean, location_name: "Value"))
     EyeOpen.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     EyeOpen.struct_class = Types::EyeOpen
@@ -989,6 +995,7 @@ module Aws::Rekognition
     FaceDetail.add_member(:quality, Shapes::ShapeRef.new(shape: ImageQuality, location_name: "Quality"))
     FaceDetail.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     FaceDetail.add_member(:face_occluded, Shapes::ShapeRef.new(shape: FaceOccluded, location_name: "FaceOccluded"))
+    FaceDetail.add_member(:eye_direction, Shapes::ShapeRef.new(shape: EyeDirection, location_name: "EyeDirection"))
     FaceDetail.struct_class = Types::FaceDetail
 
     FaceDetailList.member = Shapes::ShapeRef.new(shape: FaceDetail)

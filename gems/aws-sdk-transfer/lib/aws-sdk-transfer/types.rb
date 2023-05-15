@@ -117,11 +117,11 @@ module Aws::Transfer
     #
     # @!attribute [rw] destination_file_location
     #   Specifies the location for the file being copied. Use
-    #   `$\{Transfer:username\}` or `$\{Transfer:UploadDate\}` in this field
+    #   `$\{Transfer:UserName\}` or `$\{Transfer:UploadDate\}` in this field
     #   to parametrize the destination prefix by username or uploaded date.
     #
     #   * Set the value of `DestinationFileLocation` to
-    #     `$\{Transfer:username\}` to copy uploaded files to an Amazon S3
+    #     `$\{Transfer:UserName\}` to copy uploaded files to an Amazon S3
     #     bucket that is prefixed with the name of the Transfer Family user
     #     that uploaded the file.
     #
@@ -130,7 +130,7 @@ module Aws::Transfer
     #     bucket that is prefixed with the date of the upload.
     #
     #     <note markdown="1"> The system resolves `UploadDate` to a date format of *YYYY-MM-DD*,
-    #     based on the date the file is uploaded.
+    #     based on the date the file is uploaded in UTC.
     #
     #      </note>
     #   @return [Types::InputFileLocation]
@@ -138,6 +138,15 @@ module Aws::Transfer
     # @!attribute [rw] overwrite_existing
     #   A flag that indicates whether to overwrite an existing file of the
     #   same name. The default is `FALSE`.
+    #
+    #   If the workflow is processing a file that has the same name as an
+    #   existing file, the behavior is as follows:
+    #
+    #   * If `OverwriteExisting` is `TRUE`, the existing file is replaced
+    #     with the file being processed.
+    #
+    #   * If `OverwriteExisting` is `FALSE`, nothing happens, and the
+    #     workflow processing stops.
     #   @return [String]
     #
     # @!attribute [rw] source_file_location
@@ -637,11 +646,12 @@ module Aws::Transfer
     #
     # @!attribute [rw] identity_provider_details
     #   Required when `IdentityProviderType` is set to
-    #   `AWS_DIRECTORY_SERVICE` or `API_GATEWAY`. Accepts an array
-    #   containing all of the information required to use a directory in
-    #   `AWS_DIRECTORY_SERVICE` or invoke a customer-supplied authentication
-    #   API, including the API Gateway URL. Not required when
-    #   `IdentityProviderType` is set to `SERVICE_MANAGED`.
+    #   `AWS_DIRECTORY_SERVICE`, `Amazon Web Services_LAMBDA` or
+    #   `API_GATEWAY`. Accepts an array containing all of the information
+    #   required to use a directory in `AWS_DIRECTORY_SERVICE` or invoke a
+    #   customer-supplied authentication API, including the API Gateway URL.
+    #   Not required when `IdentityProviderType` is set to
+    #   `SERVICE_MANAGED`.
     #   @return [Types::IdentityProviderDetails]
     #
     # @!attribute [rw] identity_provider_type
@@ -663,7 +673,7 @@ module Aws::Transfer
     #
     #   Use the `AWS_LAMBDA` value to directly use an Lambda function as
     #   your identity provider. If you choose this value, you must specify
-    #   the ARN for the Lambda function in the `Function` parameter or the
+    #   the ARN for the Lambda function in the `Function` parameter for the
     #   `IdentityProviderDetails` data type.
     #   @return [String]
     #
@@ -775,8 +785,8 @@ module Aws::Transfer
     #   In addition to a workflow to execute when a file is uploaded
     #   completely, `WorkflowDetails` can also contain a workflow ID (and
     #   execution role) for a workflow to execute on partial upload. A
-    #   partial upload occurs when a file is open when the session
-    #   disconnects.
+    #   partial upload occurs when the server session disconnects while the
+    #   file is still being uploaded.
     #   @return [Types::WorkflowDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateServerRequest AWS API Documentation
@@ -963,8 +973,7 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] user_name
-    #   A unique string that identifies a user account associated with a
-    #   server.
+    #   A unique string that identifies a Transfer Family user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateUserResponse AWS API Documentation
@@ -1011,9 +1020,9 @@ module Aws::Transfer
     #   Specifies the steps (actions) to take if errors are encountered
     #   during execution of the workflow.
     #
-    #   <note markdown="1"> For custom steps, the lambda function needs to send `FAILURE` to the
+    #   <note markdown="1"> For custom steps, the Lambda function needs to send `FAILURE` to the
     #   call back API to kick off the exception steps. Additionally, if the
-    #   lambda does not send `SUCCESS` before it times out, the exception
+    #   Lambda does not send `SUCCESS` before it times out, the exception
     #   steps are executed.
     #
     #    </note>
@@ -1054,7 +1063,7 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] target
-    #   The ARN for the lambda function that is being called.
+    #   The ARN for the Lambda function that is being called.
     #   @return [String]
     #
     # @!attribute [rw] timeout_seconds
@@ -1111,10 +1120,35 @@ module Aws::Transfer
     # @!attribute [rw] overwrite_existing
     #   A flag that indicates whether to overwrite an existing file of the
     #   same name. The default is `FALSE`.
+    #
+    #   If the workflow is processing a file that has the same name as an
+    #   existing file, the behavior is as follows:
+    #
+    #   * If `OverwriteExisting` is `TRUE`, the existing file is replaced
+    #     with the file being processed.
+    #
+    #   * If `OverwriteExisting` is `FALSE`, nothing happens, and the
+    #     workflow processing stops.
     #   @return [String]
     #
     # @!attribute [rw] destination_file_location
-    #   Specifies the location for the file that's being processed.
+    #   Specifies the location for the file being decrypted. Use
+    #   `$\{Transfer:UserName\}` or `$\{Transfer:UploadDate\}` in this field
+    #   to parametrize the destination prefix by username or uploaded date.
+    #
+    #   * Set the value of `DestinationFileLocation` to
+    #     `$\{Transfer:UserName\}` to decrypt uploaded files to an Amazon S3
+    #     bucket that is prefixed with the name of the Transfer Family user
+    #     that uploaded the file.
+    #
+    #   * Set the value of `DestinationFileLocation` to
+    #     `$\{Transfer:UploadDate\}` to decrypt uploaded files to an Amazon
+    #     S3 bucket that is prefixed with the date of the upload.
+    #
+    #     <note markdown="1"> The system resolves `UploadDate` to a date format of *YYYY-MM-DD*,
+    #     based on the date the file is uploaded in UTC.
+    #
+    #      </note>
     #   @return [Types::InputFileLocation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DecryptStepDetails AWS API Documentation
@@ -1628,8 +1662,8 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] user
-    #   An array containing the properties of the user account for the
-    #   `ServerID` value that you specified.
+    #   An array containing the properties of the Transfer Family user for
+    #   the `ServerID` value that you specified.
     #   @return [Types::DescribedUser]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeUserResponse AWS API Documentation
@@ -2293,7 +2327,7 @@ module Aws::Transfer
     #
     #   Use the `AWS_LAMBDA` value to directly use an Lambda function as
     #   your identity provider. If you choose this value, you must specify
-    #   the ARN for the Lambda function in the `Function` parameter or the
+    #   the ARN for the Lambda function in the `Function` parameter for the
     #   `IdentityProviderDetails` data type.
     #   @return [String]
     #
@@ -2402,8 +2436,8 @@ module Aws::Transfer
     #   In addition to a workflow to execute when a file is uploaded
     #   completely, `WorkflowDetails` can also contain a workflow ID (and
     #   execution role) for a workflow to execute on partial upload. A
-    #   partial upload occurs when a file is open when the session
-    #   disconnects.
+    #   partial upload occurs when the server session disconnects while the
+    #   file is still being uploaded.
     #   @return [Types::WorkflowDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedServer AWS API Documentation
@@ -2857,8 +2891,9 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] invocation_role
-    #   Provides the type of `InvocationRole` used to authenticate the user
-    #   account.
+    #   This parameter is only applicable if your `IdentityProviderType` is
+    #   `API_GATEWAY`. Provides the type of `InvocationRole` used to
+    #   authenticate the user account.
     #   @return [String]
     #
     # @!attribute [rw] directory_id
@@ -2867,7 +2902,26 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] function
-    #   The ARN for a lambda function to use for the Identity provider.
+    #   The ARN for a Lambda function to use for the Identity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] sftp_authentication_methods
+    #   For SFTP-enabled servers, and for custom identity providers *only*,
+    #   you can specify whether to authenticate using a password, SSH key
+    #   pair, or both.
+    #
+    #   * `PASSWORD` - users must provide their password to connect.
+    #
+    #   * `PUBLIC_KEY` - users must provide their private key to connect.
+    #
+    #   * `PUBLIC_KEY_OR_PASSWORD` - users can authenticate with either
+    #     their password or their key. This is the default value.
+    #
+    #   * `PUBLIC_KEY_AND_PASSWORD` - users must provide both their private
+    #     key and their password to connect. The server checks the key
+    #     first, and then if the key is valid, the system prompts for a
+    #     password. If the private key provided does not match the public
+    #     key that is stored, authentication fails.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/IdentityProviderDetails AWS API Documentation
@@ -2876,7 +2930,8 @@ module Aws::Transfer
       :url,
       :invocation_role,
       :directory_id,
-      :function)
+      :function,
+      :sftp_authentication_methods)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3014,7 +3069,7 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] user_name
-    #   The name of the user account that is assigned to one or more
+    #   The name of the Transfer Family user that is assigned to one or more
     #   servers.
     #   @return [String]
     #
@@ -3343,19 +3398,8 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] executions
-    #   Returns the details for each execution.
-    #
-    #   * **NextToken**: returned from a call to several APIs, you can use
-    #     pass it to a subsequent command to continue listing additional
-    #     executions.
-    #
-    #   * **StartTime**: timestamp indicating when the execution began.
-    #
-    #   * **Executions**: details of the execution, including the execution
-    #     ID, initial file location, and Service metadata.
-    #
-    #   * **Status**: one of the following values: `IN_PROGRESS`,
-    #     `COMPLETED`, `EXCEPTION`, `HANDLING_EXEPTION`.
+    #   Returns the details for each execution, in a `ListedExecution`
+    #   array.
     #   @return [Array<Types::ListedExecution>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListExecutionsResponse AWS API Documentation
@@ -3638,8 +3682,8 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] users
-    #   Returns the user accounts and their properties for the `ServerId`
-    #   value that you specify.
+    #   Returns the Transfer Family users and their properties for the
+    #   `ServerId` value that you specify.
     #   @return [Array<Types::ListedUser>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListUsersResponse AWS API Documentation
@@ -4038,7 +4082,7 @@ module Aws::Transfer
     #
     #   Use the `AWS_LAMBDA` value to directly use an Lambda function as
     #   your identity provider. If you choose this value, you must specify
-    #   the ARN for the Lambda function in the `Function` parameter or the
+    #   the ARN for the Lambda function in the `Function` parameter for the
     #   `IdentityProviderDetails` data type.
     #   @return [String]
     #
@@ -4552,15 +4596,15 @@ module Aws::Transfer
     end
 
     # Provides information about the public Secure Shell (SSH) key that is
-    # associated with a user account for the specific file transfer
+    # associated with a Transfer Family user for the specific file transfer
     # protocol-enabled server (as identified by `ServerId`). The information
     # returned includes the date the key was imported, the public key
     # contents, and the public key ID. A user can store more than one SSH
     # public key associated with their user name on a specific server.
     #
     # @!attribute [rw] date_imported
-    #   Specifies the date that the public key was added to the user
-    #   account.
+    #   Specifies the date that the public key was added to the Transfer
+    #   Family user.
     #   @return [Time]
     #
     # @!attribute [rw] ssh_public_key_body
@@ -4672,8 +4716,8 @@ module Aws::Transfer
     #
     # @!attribute [rw] tags
     #   Key-value pairs assigned to ARNs that you can use to group and
-    #   search for resources by type. You can attach this metadata to user
-    #   accounts for any purpose.
+    #   search for resources by type. You can attach this metadata to
+    #   resources (servers, users, workflows, and so on) for any purpose.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/TagResourceRequest AWS API Documentation
@@ -4736,18 +4780,20 @@ module Aws::Transfer
     #   * File Transfer Protocol Secure (FTPS)
     #
     #   * File Transfer Protocol (FTP)
+    #
+    #   * Applicability Statement 2 (AS2)
     #   @return [String]
     #
     # @!attribute [rw] source_ip
-    #   The source IP address of the user account to be tested.
+    #   The source IP address of the account to be tested.
     #   @return [String]
     #
     # @!attribute [rw] user_name
-    #   The name of the user account to be tested.
+    #   The name of the account to be tested.
     #   @return [String]
     #
     # @!attribute [rw] user_password
-    #   The password of the user account to be tested.
+    #   The password of the account to be tested.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/TestIdentityProviderRequest AWS API Documentation
@@ -4763,11 +4809,13 @@ module Aws::Transfer
     end
 
     # @!attribute [rw] response
-    #   The response that is returned from your API Gateway.
+    #   The response that is returned from your API Gateway or your Lambda
+    #   function.
     #   @return [String]
     #
     # @!attribute [rw] status_code
-    #   The HTTP status code that is the response from your API Gateway.
+    #   The HTTP status code that is the response from your API Gateway or
+    #   your Lambda function.
     #   @return [Integer]
     #
     # @!attribute [rw] message
@@ -5452,7 +5500,7 @@ module Aws::Transfer
     #
     # @!attribute [rw] server_id
     #   A system-assigned unique identifier for a server instance that the
-    #   user account is assigned to.
+    #   Transfer Family user is assigned to.
     #   @return [String]
     #
     # @!attribute [rw] workflow_details
@@ -5462,8 +5510,8 @@ module Aws::Transfer
     #   In addition to a workflow to execute when a file is uploaded
     #   completely, `WorkflowDetails` can also contain a workflow ID (and
     #   execution role) for a workflow to execute on partial upload. A
-    #   partial upload occurs when a file is open when the session
-    #   disconnects.
+    #   partial upload occurs when the server session disconnects while the
+    #   file is still being uploaded.
     #
     #   To remove an associated workflow from a server, you can provide an
     #   empty `OnUpload` object, as in the following example.
@@ -5493,8 +5541,8 @@ module Aws::Transfer
     end
 
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for a server that the user
-    #   account is assigned to.
+    #   A system-assigned unique identifier for a server that the Transfer
+    #   Family user is assigned to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateServerResponse AWS API Documentation
@@ -5599,8 +5647,8 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for a server instance that the
-    #   user account is assigned to.
+    #   A system-assigned unique identifier for a Transfer Family server
+    #   instance that the user is assigned to.
     #   @return [String]
     #
     # @!attribute [rw] user_name
@@ -5631,8 +5679,8 @@ module Aws::Transfer
     # request to update a user's properties.
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for a server instance that the
-    #   user account is assigned to.
+    #   A system-assigned unique identifier for a Transfer Family server
+    #   instance that the account is assigned to.
     #   @return [String]
     #
     # @!attribute [rw] user_name
@@ -5652,8 +5700,8 @@ module Aws::Transfer
     # Specifies the user name, server ID, and session ID for a workflow.
     #
     # @!attribute [rw] user_name
-    #   A unique string that identifies a user account associated with a
-    #   server.
+    #   A unique string that identifies a Transfer Family user associated
+    #   with a server.
     #   @return [String]
     #
     # @!attribute [rw] server_id
@@ -5682,7 +5730,8 @@ module Aws::Transfer
     # In addition to a workflow to execute when a file is uploaded
     # completely, `WorkflowDetails` can also contain a workflow ID (and
     # execution role) for a workflow to execute on partial upload. A partial
-    # upload occurs when a file is open when the session disconnects.
+    # upload occurs when the server session disconnects while the file is
+    # still being uploaded.
     #
     # @!attribute [rw] workflow_id
     #   A unique identifier for the workflow.
