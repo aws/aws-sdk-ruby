@@ -48,12 +48,21 @@ module AwsSdkCodeGenerator
       end
 
       def arguments(merge, params, streaming)
+        context_str = "{ context: { user_agent_feature: 'ft/resource' } }"
         if merge
-          streaming ? '(options, &block)' : '(options)'
+          if streaming
+            "(options, #{context_str}, &block)"
+          else
+            "(options, #{context_str})"
+          end
         elsif params.empty?
-          ''
+          "{}, #{context_str}"
         else
-          streaming ? "(#{params}, &block)" : "(#{params})"
+          if streaming
+            "({#{params}}, #{context_str}, &block)"
+          else
+            "({#{params}}, #{context_str})"
+          end
         end
       end
 

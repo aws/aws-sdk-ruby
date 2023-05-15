@@ -133,6 +133,7 @@ module ApiHelper
     def sample_service(options = {})
       api_hash = options.fetch(:api, api(options))
       api_hash['metadata'] ||= metadata(options)
+      api_hash['metadata']['serviceId'] ||= 'ServiceId' # required
       module_name = next_sample_module_name
       code = AwsSdkCodeGenerator::CodeBuilder.new(
         aws_sdk_core_lib_path: File.expand_path('../../lib/', __FILE__),

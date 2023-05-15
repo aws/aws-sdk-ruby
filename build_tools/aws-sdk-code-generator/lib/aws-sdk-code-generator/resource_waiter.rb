@@ -49,13 +49,14 @@ module AwsSdkCodeGenerator
       private
 
       def wait_call(waiter)
+        context_str = "{ context: { user_agent_feature: 'ft/resource' } }"
         args = ResourceClientRequestParams.new(
           params: waiter['params']
         ).to_s.strip
         if waiter['path']
-          "resp = waiter.wait(params.merge(#{args}))"
+          "resp = waiter.wait(params.merge(#{args}), #{context_str}"
         else
-          "waiter.wait(params.merge(#{args}))"
+          "waiter.wait(params.merge(#{args}), #{context_str})"
         end
       end
 

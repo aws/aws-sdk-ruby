@@ -62,7 +62,12 @@ module Aws
       def send_request(options)
         req = options[:client].build_request(@operation_name, options[:params])
         req.handlers.remove(RAISE_HANDLER)
-        req.send_request(context: { user_agent_feature_metadata: 'ft/waiter' })
+        # Other features like resources may have waiter support.
+        if (feature_context = options.fetch(:options, {}).fetch(:context, {})
+                                     .fetch(:user_agent_feature, nil))
+          options[:options][:context][:user_agent_feature] = feature_context + ' ft/waiter'
+        end
+        req.send_request(options[:options])
       end
 
       def acceptor_matches?(acceptor, response)

@@ -5,7 +5,6 @@ module Aws
     # @api private
     class UserAgent < Seahorse::Client::Plugin
       option(:user_agent_suffix)
-      option(:user_agent_framework)
 
       # @api private
       class Handler < Seahorse::Client::Handler
@@ -21,8 +20,8 @@ module Aws
 
           def to_s
             ua = "aws-sdk-ruby3/#{CORE_GEM_VERSION}"
-            ua += " #{api_metadata}" if api_metadata
-            ua += " #{legacy_api_metadata}" if legacy_api_metadata
+            ua += " #{api_metadata}"
+            ua += " #{legacy_api_metadata}"
             ua += " #{os_metadata}"
             ua += " #{legacy_os_metadata}"
             ua += " #{language_metadata}"
@@ -92,7 +91,7 @@ module Aws
 
           # TODO: somehow set this for resources, s3 transfer, s3 encryption, etc
           def feature_metadata
-            @context[:user_agent_feature_metadata]
+            @context[:user_agent_feature]
           end
 
           def config_metadata
@@ -100,7 +99,7 @@ module Aws
           end
 
           def framework_metadata
-            @context.config.user_agent_framework
+            @context[:user_agent_framework]
           end
 
           def app_id
