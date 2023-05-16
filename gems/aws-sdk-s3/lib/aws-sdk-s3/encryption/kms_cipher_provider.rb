@@ -18,9 +18,12 @@ module Aws
         def encryption_cipher
           encryption_context = { "kms_cmk_id" => @kms_key_id }
           key_data = @kms_client.generate_data_key(
-            key_id: @kms_key_id,
-            encryption_context: encryption_context,
-            key_spec: 'AES_256',
+            {
+              key_id: @kms_key_id,
+              encryption_context: encryption_context,
+              key_spec: 'AES_256'
+            },
+            { metadata: { user_agent_feature: 'ft/s3-encrypt#1' } }
           )
           cipher = Utils.aes_encryption_cipher(:CBC)
           cipher.key = key_data.plaintext
@@ -59,8 +62,11 @@ module Aws
           end
 
           key = @kms_client.decrypt(
-            ciphertext_blob: decode64(envelope['x-amz-key-v2']),
-            encryption_context: encryption_context
+            {
+              ciphertext_blob: decode64(envelope['x-amz-key-v2']),
+              encryption_context: encryption_context
+            },
+            { metadata: { user_agent_feature: 'ft/s3-encrypt#1' } }
           ).plaintext
 
           iv = decode64(envelope['x-amz-iv'])

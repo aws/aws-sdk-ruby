@@ -351,7 +351,7 @@ module Aws
         # @option (see S3::Client#put_object)
         # @return (see S3::Client#put_object)
         # @see S3::Client#put_object
-        def put_object(params = {})
+        def put_object(params = {}, options = {})
           kms_encryption_context = params.delete(:kms_encryption_context)
           req = @client.build_request(:put_object, params)
           req.handlers.add(EncryptHandler, priority: 95)
@@ -361,7 +361,7 @@ module Aws
             instruction_file_suffix: @instruction_file_suffix,
             kms_encryption_context: kms_encryption_context
           }
-          req.send_request
+          req.send_request(request_options(options))
         end
 
         # Gets an object from Amazon S3, decrypting data locally.
@@ -395,7 +395,7 @@ module Aws
         # @return (see S3::Client#get_object)
         # @see S3::Client#get_object
         # @note The `:range` request parameter is not supported.
-        def get_object(params = {}, &block)
+        def get_object(params = {}, options = {}, &block)
           if params[:range]
             raise NotImplementedError, '#get_object with :range not supported'
           end
@@ -414,10 +414,19 @@ module Aws
             kms_allow_decrypt_with_any_cmk: kms_any_cmk_mode,
             security_profile: security_profile
           }
-          req.send_request(target: block)
+          req.send_request(request_options(options).merge(target: block))
         end
 
         private
+
+        def request_options(options)
+          # Resource model can take encryption clients
+          if (feature = options.fetch(:metadata, {}).fetch(:user_agent_feature, nil))
+            { metadata: { user_agent_feature: feature + ' ft/s3-encrypt#2' } }
+          else
+            { metadata: { user_agent_feature: 'ft/s3-encrypt#2' } }
+          end
+        end
 
         # Validate required parameters exist and don't conflict.
         # The cek_alg and wrap_alg are passed on to the CipherProviders

@@ -27,10 +27,10 @@ module Aws
             ua += " #{language_metadata}"
             ua += " #{legacy_language_metadata}"
             ua += " #{env_metadata}" if env_metadata
-            ua += " #{feature_metadata}" if feature_metadata
             ua += " #{config_metadata}" if config_metadata
-            ua += " #{framework_metadata}" if framework_metadata
             ua += " #{app_id}" if app_id
+            ua += " #{feature_metadata}" if feature_metadata
+            ua += " #{framework_metadata}" if framework_metadata
             if @context.config.user_agent_suffix
               ua += " #{@context.config.user_agent_suffix}"
             end
@@ -89,23 +89,22 @@ module Aws
             "exec-env/#{execution_env}"
           end
 
-          # TODO: somehow set this for resources, s3 transfer, s3 encryption, etc
-          def feature_metadata
-            @context[:user_agent_feature]
-          end
-
           def config_metadata
             "cfg/retry-mode##{@context.config.retry_mode}"
-          end
-
-          def framework_metadata
-            @context[:user_agent_framework]
           end
 
           def app_id
             return unless (app_id = ENV['AWS_SDK_UA_APP_ID'])
 
             "app/#{app_id}"
+          end
+
+          def feature_metadata
+            @context[:user_agent_feature]
+          end
+
+          def framework_metadata
+            @context[:user_agent_framework]
           end
         end
       end
