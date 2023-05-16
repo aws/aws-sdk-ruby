@@ -1364,7 +1364,7 @@ module Aws::Detective
     #
     #   resp = client.update_datasource_packages({
     #     graph_arn: "GraphArn", # required
-    #     datasource_packages: ["DETECTIVE_CORE"], # required, accepts DETECTIVE_CORE, EKS_AUDIT
+    #     datasource_packages: ["DETECTIVE_CORE"], # required, accepts DETECTIVE_CORE, EKS_AUDIT, ASFF_SECURITYHUB_FINDING
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/UpdateDatasourcePackages AWS API Documentation
@@ -1418,7 +1418,7 @@ module Aws::Detective
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-detective'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

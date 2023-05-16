@@ -3207,7 +3207,7 @@ module Aws::DirectConnect
     #
     # @!attribute [rw] mtu
     #   The maximum transmission unit (MTU), in bytes. The supported values
-    #   are 1500 and 9001. The default value is 1500.
+    #   are 1500 and 8500. The default value is 1500
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key
@@ -3758,7 +3758,7 @@ module Aws::DirectConnect
     #
     # @!attribute [rw] mtu
     #   The maximum transmission unit (MTU), in bytes. The supported values
-    #   are 1500 and 9001. The default value is 1500.
+    #   are 1500 and 8500. The default value is 1500
     #   @return [Integer]
     #
     # @!attribute [rw] jumbo_frame_capable

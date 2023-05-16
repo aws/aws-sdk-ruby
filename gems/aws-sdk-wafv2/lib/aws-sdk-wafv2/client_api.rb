@@ -177,6 +177,7 @@ module Aws::WAFV2
     LabelMatchStatement = Shapes::StructureShape.new(name: 'LabelMatchStatement')
     LabelName = Shapes::StringShape.new(name: 'LabelName')
     LabelNameCondition = Shapes::StructureShape.new(name: 'LabelNameCondition')
+    LabelNamespace = Shapes::StringShape.new(name: 'LabelNamespace')
     LabelSummaries = Shapes::ListShape.new(name: 'LabelSummaries')
     LabelSummary = Shapes::StructureShape.new(name: 'LabelSummary')
     Labels = Shapes::ListShape.new(name: 'Labels')
@@ -252,8 +253,18 @@ module Aws::WAFV2
     QueryString = Shapes::StructureShape.new(name: 'QueryString')
     RateBasedStatement = Shapes::StructureShape.new(name: 'RateBasedStatement')
     RateBasedStatementAggregateKeyType = Shapes::StringShape.new(name: 'RateBasedStatementAggregateKeyType')
+    RateBasedStatementCustomKey = Shapes::StructureShape.new(name: 'RateBasedStatementCustomKey')
+    RateBasedStatementCustomKeys = Shapes::ListShape.new(name: 'RateBasedStatementCustomKeys')
     RateBasedStatementManagedKeysIPSet = Shapes::StructureShape.new(name: 'RateBasedStatementManagedKeysIPSet')
     RateLimit = Shapes::IntegerShape.new(name: 'RateLimit')
+    RateLimitCookie = Shapes::StructureShape.new(name: 'RateLimitCookie')
+    RateLimitForwardedIP = Shapes::StructureShape.new(name: 'RateLimitForwardedIP')
+    RateLimitHTTPMethod = Shapes::StructureShape.new(name: 'RateLimitHTTPMethod')
+    RateLimitHeader = Shapes::StructureShape.new(name: 'RateLimitHeader')
+    RateLimitIP = Shapes::StructureShape.new(name: 'RateLimitIP')
+    RateLimitLabelNamespace = Shapes::StructureShape.new(name: 'RateLimitLabelNamespace')
+    RateLimitQueryArgument = Shapes::StructureShape.new(name: 'RateLimitQueryArgument')
+    RateLimitQueryString = Shapes::StructureShape.new(name: 'RateLimitQueryString')
     RedactedFields = Shapes::ListShape.new(name: 'RedactedFields')
     Regex = Shapes::StructureShape.new(name: 'Regex')
     RegexMatchStatement = Shapes::StructureShape.new(name: 'RegexMatchStatement')
@@ -377,6 +388,7 @@ module Aws::WAFV2
     WAFTagOperationException = Shapes::StructureShape.new(name: 'WAFTagOperationException')
     WAFTagOperationInternalErrorException = Shapes::StructureShape.new(name: 'WAFTagOperationInternalErrorException')
     WAFUnavailableEntityException = Shapes::StructureShape.new(name: 'WAFUnavailableEntityException')
+    WAFUnsupportedAggregateKeyTypeException = Shapes::StructureShape.new(name: 'WAFUnsupportedAggregateKeyTypeException')
     WebACL = Shapes::StructureShape.new(name: 'WebACL')
     WebACLSummaries = Shapes::ListShape.new(name: 'WebACLSummaries')
     WebACLSummary = Shapes::StructureShape.new(name: 'WebACLSummary')
@@ -1119,11 +1131,48 @@ module Aws::WAFV2
     RateBasedStatement.add_member(:aggregate_key_type, Shapes::ShapeRef.new(shape: RateBasedStatementAggregateKeyType, required: true, location_name: "AggregateKeyType"))
     RateBasedStatement.add_member(:scope_down_statement, Shapes::ShapeRef.new(shape: Statement, location_name: "ScopeDownStatement"))
     RateBasedStatement.add_member(:forwarded_ip_config, Shapes::ShapeRef.new(shape: ForwardedIPConfig, location_name: "ForwardedIPConfig"))
+    RateBasedStatement.add_member(:custom_keys, Shapes::ShapeRef.new(shape: RateBasedStatementCustomKeys, location_name: "CustomKeys"))
     RateBasedStatement.struct_class = Types::RateBasedStatement
+
+    RateBasedStatementCustomKey.add_member(:header, Shapes::ShapeRef.new(shape: RateLimitHeader, location_name: "Header"))
+    RateBasedStatementCustomKey.add_member(:cookie, Shapes::ShapeRef.new(shape: RateLimitCookie, location_name: "Cookie"))
+    RateBasedStatementCustomKey.add_member(:query_argument, Shapes::ShapeRef.new(shape: RateLimitQueryArgument, location_name: "QueryArgument"))
+    RateBasedStatementCustomKey.add_member(:query_string, Shapes::ShapeRef.new(shape: RateLimitQueryString, location_name: "QueryString"))
+    RateBasedStatementCustomKey.add_member(:http_method, Shapes::ShapeRef.new(shape: RateLimitHTTPMethod, location_name: "HTTPMethod"))
+    RateBasedStatementCustomKey.add_member(:forwarded_ip, Shapes::ShapeRef.new(shape: RateLimitForwardedIP, location_name: "ForwardedIP"))
+    RateBasedStatementCustomKey.add_member(:ip, Shapes::ShapeRef.new(shape: RateLimitIP, location_name: "IP"))
+    RateBasedStatementCustomKey.add_member(:label_namespace, Shapes::ShapeRef.new(shape: RateLimitLabelNamespace, location_name: "LabelNamespace"))
+    RateBasedStatementCustomKey.struct_class = Types::RateBasedStatementCustomKey
+
+    RateBasedStatementCustomKeys.member = Shapes::ShapeRef.new(shape: RateBasedStatementCustomKey)
 
     RateBasedStatementManagedKeysIPSet.add_member(:ip_address_version, Shapes::ShapeRef.new(shape: IPAddressVersion, location_name: "IPAddressVersion"))
     RateBasedStatementManagedKeysIPSet.add_member(:addresses, Shapes::ShapeRef.new(shape: IPAddresses, location_name: "Addresses"))
     RateBasedStatementManagedKeysIPSet.struct_class = Types::RateBasedStatementManagedKeysIPSet
+
+    RateLimitCookie.add_member(:name, Shapes::ShapeRef.new(shape: FieldToMatchData, required: true, location_name: "Name"))
+    RateLimitCookie.add_member(:text_transformations, Shapes::ShapeRef.new(shape: TextTransformations, required: true, location_name: "TextTransformations"))
+    RateLimitCookie.struct_class = Types::RateLimitCookie
+
+    RateLimitForwardedIP.struct_class = Types::RateLimitForwardedIP
+
+    RateLimitHTTPMethod.struct_class = Types::RateLimitHTTPMethod
+
+    RateLimitHeader.add_member(:name, Shapes::ShapeRef.new(shape: FieldToMatchData, required: true, location_name: "Name"))
+    RateLimitHeader.add_member(:text_transformations, Shapes::ShapeRef.new(shape: TextTransformations, required: true, location_name: "TextTransformations"))
+    RateLimitHeader.struct_class = Types::RateLimitHeader
+
+    RateLimitIP.struct_class = Types::RateLimitIP
+
+    RateLimitLabelNamespace.add_member(:namespace, Shapes::ShapeRef.new(shape: LabelNamespace, required: true, location_name: "Namespace"))
+    RateLimitLabelNamespace.struct_class = Types::RateLimitLabelNamespace
+
+    RateLimitQueryArgument.add_member(:name, Shapes::ShapeRef.new(shape: FieldToMatchData, required: true, location_name: "Name"))
+    RateLimitQueryArgument.add_member(:text_transformations, Shapes::ShapeRef.new(shape: TextTransformations, required: true, location_name: "TextTransformations"))
+    RateLimitQueryArgument.struct_class = Types::RateLimitQueryArgument
+
+    RateLimitQueryString.add_member(:text_transformations, Shapes::ShapeRef.new(shape: TextTransformations, required: true, location_name: "TextTransformations"))
+    RateLimitQueryString.struct_class = Types::RateLimitQueryString
 
     RedactedFields.member = Shapes::ShapeRef.new(shape: FieldToMatch)
 
@@ -1502,6 +1551,9 @@ module Aws::WAFV2
 
     WAFUnavailableEntityException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     WAFUnavailableEntityException.struct_class = Types::WAFUnavailableEntityException
+
+    WAFUnsupportedAggregateKeyTypeException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    WAFUnsupportedAggregateKeyTypeException.struct_class = Types::WAFUnsupportedAggregateKeyTypeException
 
     WebACL.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
     WebACL.add_member(:id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "Id"))
@@ -1889,6 +1941,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFUnsupportedAggregateKeyTypeException)
       end)
 
       api.add_operation(:get_regex_pattern_set, Seahorse::Model::Operation.new.tap do |o|

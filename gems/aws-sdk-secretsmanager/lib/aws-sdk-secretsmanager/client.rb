@@ -909,6 +909,9 @@ module Aws::SecretsManager
     #   create a secret with the same name, use appropriate back off and retry
     #   logic.
     #
+    #   If you forcibly delete an already deleted or nonexistent secret, the
+    #   operation does not return `ResourceNotFoundException`.
+    #
     #   Use this parameter with caution. This parameter causes the operation
     #   to skip the normal recovery window before the permanent deletion that
     #   Secrets Manager would normally impose with the `RecoveryWindowInDays`
@@ -3080,7 +3083,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

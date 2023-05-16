@@ -882,7 +882,7 @@ module Aws::WAFV2
     #           },
     #           rate_based_statement: {
     #             limit: 1, # required
-    #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP
+    #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP, CUSTOM_KEYS, CONSTANT
     #             scope_down_statement: {
     #               # recursive Statement
     #             },
@@ -890,6 +890,54 @@ module Aws::WAFV2
     #               header_name: "ForwardedIPHeaderName", # required
     #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #             },
+    #             custom_keys: [
+    #               {
+    #                 header: {
+    #                   name: "FieldToMatchData", # required
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
+    #                 cookie: {
+    #                   name: "FieldToMatchData", # required
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
+    #                 query_argument: {
+    #                   name: "FieldToMatchData", # required
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
+    #                 query_string: {
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
+    #                 http_method: {
+    #                 },
+    #                 forwarded_ip: {
+    #                 },
+    #                 ip: {
+    #                 },
+    #                 label_namespace: {
+    #                   namespace: "LabelNamespace", # required
+    #                 },
+    #               },
+    #             ],
     #           },
     #           and_statement: {
     #             statements: [ # required
@@ -1919,7 +1967,7 @@ module Aws::WAFV2
     #           },
     #           rate_based_statement: {
     #             limit: 1, # required
-    #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP
+    #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP, CUSTOM_KEYS, CONSTANT
     #             scope_down_statement: {
     #               # recursive Statement
     #             },
@@ -1927,6 +1975,54 @@ module Aws::WAFV2
     #               header_name: "ForwardedIPHeaderName", # required
     #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #             },
+    #             custom_keys: [
+    #               {
+    #                 header: {
+    #                   name: "FieldToMatchData", # required
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
+    #                 cookie: {
+    #                   name: "FieldToMatchData", # required
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
+    #                 query_argument: {
+    #                   name: "FieldToMatchData", # required
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
+    #                 query_string: {
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
+    #                 http_method: {
+    #                 },
+    #                 forwarded_ip: {
+    #                 },
+    #                 ip: {
+    #                 },
+    #                 label_namespace: {
+    #                   namespace: "LabelNamespace", # required
+    #                 },
+    #               },
+    #             ],
     #           },
     #           and_statement: {
     #             statements: [ # required
@@ -2785,7 +2881,7 @@ module Aws::WAFV2
     #           },
     #           rate_based_statement: {
     #             limit: 1, # required
-    #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP
+    #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP, CUSTOM_KEYS, CONSTANT
     #             scope_down_statement: {
     #               # recursive Statement
     #             },
@@ -2793,6 +2889,54 @@ module Aws::WAFV2
     #               header_name: "ForwardedIPHeaderName", # required
     #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #             },
+    #             custom_keys: [
+    #               {
+    #                 header: {
+    #                   name: "FieldToMatchData", # required
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
+    #                 cookie: {
+    #                   name: "FieldToMatchData", # required
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
+    #                 query_argument: {
+    #                   name: "FieldToMatchData", # required
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
+    #                 query_string: {
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
+    #                 http_method: {
+    #                 },
+    #                 forwarded_ip: {
+    #                 },
+    #                 ip: {
+    #                 },
+    #                 label_namespace: {
+    #                   namespace: "LabelNamespace", # required
+    #                 },
+    #               },
+    #             ],
     #           },
     #           and_statement: {
     #             statements: [ # required
@@ -4018,11 +4162,13 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
-    # Retrieves the keys that are currently blocked by a rate-based rule
-    # instance. The maximum number of managed keys that can be blocked for a
-    # single rate-based rule instance is 10,000. If more than 10,000
-    # addresses exceed the rate limit, those with the highest rates are
-    # blocked.
+    # Retrieves the IP addresses that are currently blocked by a rate-based
+    # rule instance. This is only available for rate-based rules that
+    # aggregate solely on the IP address or on the forwarded IP address.
+    #
+    # The maximum number of addresses that can be blocked for a single
+    # rate-based rule instance is 10,000. If more than 10,000 addresses
+    # exceed the rate limit, those with the highest rates are blocked.
     #
     # For a rate-based rule that you've defined inside a rule group,
     # provide the name of the rule group reference statement in your
@@ -4368,10 +4514,27 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.rule_group.rules[0].statement.rate_based_statement.limit #=> Integer
-    #   resp.rule_group.rules[0].statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP"
+    #   resp.rule_group.rules[0].statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP", "CUSTOM_KEYS", "CONSTANT"
     #   resp.rule_group.rules[0].statement.rate_based_statement.scope_down_statement #=> Types::Statement
     #   resp.rule_group.rules[0].statement.rate_based_statement.forwarded_ip_config.header_name #=> String
     #   resp.rule_group.rules[0].statement.rate_based_statement.forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys #=> Array
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].header.name #=> String
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].header.text_transformations #=> Array
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].header.text_transformations[0].priority #=> Integer
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].header.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].cookie.name #=> String
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].cookie.text_transformations #=> Array
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].cookie.text_transformations[0].priority #=> Integer
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].cookie.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].query_argument.name #=> String
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].query_argument.text_transformations #=> Array
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].query_argument.text_transformations[0].priority #=> Integer
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].query_argument.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].query_string.text_transformations #=> Array
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].query_string.text_transformations[0].priority #=> Integer
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].query_string.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.rule_group.rules[0].statement.rate_based_statement.custom_keys[0].label_namespace.namespace #=> String
     #   resp.rule_group.rules[0].statement.and_statement.statements #=> Array
     #   resp.rule_group.rules[0].statement.and_statement.statements[0] #=> Types::Statement
     #   resp.rule_group.rules[0].statement.or_statement.statements #=> Array
@@ -4826,10 +4989,27 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.rules[0].statement.rate_based_statement.limit #=> Integer
-    #   resp.web_acl.rules[0].statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP"
+    #   resp.web_acl.rules[0].statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP", "CUSTOM_KEYS", "CONSTANT"
     #   resp.web_acl.rules[0].statement.rate_based_statement.scope_down_statement #=> Types::Statement
     #   resp.web_acl.rules[0].statement.rate_based_statement.forwarded_ip_config.header_name #=> String
     #   resp.web_acl.rules[0].statement.rate_based_statement.forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys #=> Array
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].header.name #=> String
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].header.text_transformations #=> Array
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].header.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].header.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].cookie.name #=> String
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].cookie.text_transformations #=> Array
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].cookie.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].cookie.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].query_argument.name #=> String
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].query_argument.text_transformations #=> Array
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].query_argument.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].query_argument.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].query_string.text_transformations #=> Array
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].query_string.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].query_string.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].label_namespace.namespace #=> String
     #   resp.web_acl.rules[0].statement.and_statement.statements #=> Array
     #   resp.web_acl.rules[0].statement.and_statement.statements[0] #=> Types::Statement
     #   resp.web_acl.rules[0].statement.or_statement.statements #=> Array
@@ -5105,10 +5285,27 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.limit #=> Integer
-    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP", "CUSTOM_KEYS", "CONSTANT"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.scope_down_statement #=> Types::Statement
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.forwarded_ip_config.header_name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].header.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].header.text_transformations #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].header.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].header.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].cookie.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].cookie.text_transformations #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].cookie.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].cookie.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_argument.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_argument.text_transformations #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_argument.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_argument.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_string.text_transformations #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_string.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_string.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].label_namespace.namespace #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.and_statement.statements #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.and_statement.statements[0] #=> Types::Statement
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.or_statement.statements #=> Array
@@ -5376,10 +5573,27 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.limit #=> Integer
-    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP", "CUSTOM_KEYS", "CONSTANT"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.scope_down_statement #=> Types::Statement
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.forwarded_ip_config.header_name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].header.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].header.text_transformations #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].header.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].header.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].cookie.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].cookie.text_transformations #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].cookie.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].cookie.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_argument.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_argument.text_transformations #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_argument.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_argument.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_string.text_transformations #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_string.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_string.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].label_namespace.namespace #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.and_statement.statements #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.and_statement.statements[0] #=> Types::Statement
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.or_statement.statements #=> Array
@@ -5719,10 +5933,27 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.rules[0].statement.rate_based_statement.limit #=> Integer
-    #   resp.web_acl.rules[0].statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP"
+    #   resp.web_acl.rules[0].statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP", "CUSTOM_KEYS", "CONSTANT"
     #   resp.web_acl.rules[0].statement.rate_based_statement.scope_down_statement #=> Types::Statement
     #   resp.web_acl.rules[0].statement.rate_based_statement.forwarded_ip_config.header_name #=> String
     #   resp.web_acl.rules[0].statement.rate_based_statement.forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys #=> Array
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].header.name #=> String
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].header.text_transformations #=> Array
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].header.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].header.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].cookie.name #=> String
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].cookie.text_transformations #=> Array
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].cookie.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].cookie.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].query_argument.name #=> String
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].query_argument.text_transformations #=> Array
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].query_argument.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].query_argument.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].query_string.text_transformations #=> Array
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].query_string.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].query_string.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.rules[0].statement.rate_based_statement.custom_keys[0].label_namespace.namespace #=> String
     #   resp.web_acl.rules[0].statement.and_statement.statements #=> Array
     #   resp.web_acl.rules[0].statement.and_statement.statements[0] #=> Types::Statement
     #   resp.web_acl.rules[0].statement.or_statement.statements #=> Array
@@ -5998,10 +6229,27 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.limit #=> Integer
-    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP", "CUSTOM_KEYS", "CONSTANT"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.scope_down_statement #=> Types::Statement
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.forwarded_ip_config.header_name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].header.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].header.text_transformations #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].header.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].header.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].cookie.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].cookie.text_transformations #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].cookie.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].cookie.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_argument.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_argument.text_transformations #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_argument.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_argument.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_string.text_transformations #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_string.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_string.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].label_namespace.namespace #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.and_statement.statements #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.and_statement.statements[0] #=> Types::Statement
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.or_statement.statements #=> Array
@@ -6269,10 +6517,27 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.limit #=> Integer
-    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP", "CUSTOM_KEYS", "CONSTANT"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.scope_down_statement #=> Types::Statement
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.forwarded_ip_config.header_name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].header.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].header.text_transformations #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].header.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].header.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].cookie.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].cookie.text_transformations #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].cookie.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].cookie.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_argument.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_argument.text_transformations #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_argument.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_argument.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_string.text_transformations #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_string.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].query_string.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.custom_keys[0].label_namespace.namespace #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.and_statement.statements #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.and_statement.statements[0] #=> Types::Statement
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.or_statement.statements #=> Array
@@ -8440,7 +8705,7 @@ module Aws::WAFV2
     #           },
     #           rate_based_statement: {
     #             limit: 1, # required
-    #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP
+    #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP, CUSTOM_KEYS, CONSTANT
     #             scope_down_statement: {
     #               # recursive Statement
     #             },
@@ -8448,6 +8713,54 @@ module Aws::WAFV2
     #               header_name: "ForwardedIPHeaderName", # required
     #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #             },
+    #             custom_keys: [
+    #               {
+    #                 header: {
+    #                   name: "FieldToMatchData", # required
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
+    #                 cookie: {
+    #                   name: "FieldToMatchData", # required
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
+    #                 query_argument: {
+    #                   name: "FieldToMatchData", # required
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
+    #                 query_string: {
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
+    #                 http_method: {
+    #                 },
+    #                 forwarded_ip: {
+    #                 },
+    #                 ip: {
+    #                 },
+    #                 label_namespace: {
+    #                   namespace: "LabelNamespace", # required
+    #                 },
+    #               },
+    #             ],
     #           },
     #           and_statement: {
     #             statements: [ # required
@@ -9340,7 +9653,7 @@ module Aws::WAFV2
     #           },
     #           rate_based_statement: {
     #             limit: 1, # required
-    #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP
+    #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP, CUSTOM_KEYS, CONSTANT
     #             scope_down_statement: {
     #               # recursive Statement
     #             },
@@ -9348,6 +9661,54 @@ module Aws::WAFV2
     #               header_name: "ForwardedIPHeaderName", # required
     #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #             },
+    #             custom_keys: [
+    #               {
+    #                 header: {
+    #                   name: "FieldToMatchData", # required
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
+    #                 cookie: {
+    #                   name: "FieldToMatchData", # required
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
+    #                 query_argument: {
+    #                   name: "FieldToMatchData", # required
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
+    #                 query_string: {
+    #                   text_transformations: [ # required
+    #                     {
+    #                       priority: 1, # required
+    #                       type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                     },
+    #                   ],
+    #                 },
+    #                 http_method: {
+    #                 },
+    #                 forwarded_ip: {
+    #                 },
+    #                 ip: {
+    #                 },
+    #                 label_namespace: {
+    #                   namespace: "LabelNamespace", # required
+    #                 },
+    #               },
+    #             ],
     #           },
     #           and_statement: {
     #             statements: [ # required
@@ -9698,7 +10059,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

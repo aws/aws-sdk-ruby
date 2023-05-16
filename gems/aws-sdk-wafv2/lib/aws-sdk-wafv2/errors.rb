@@ -45,6 +45,7 @@ module Aws::WAFV2
   # * {WAFTagOperationException}
   # * {WAFTagOperationInternalErrorException}
   # * {WAFUnavailableEntityException}
+  # * {WAFUnsupportedAggregateKeyTypeException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -327,6 +328,21 @@ module Aws::WAFV2
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::WAFV2::Types::WAFUnavailableEntityException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class WAFUnsupportedAggregateKeyTypeException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WAFV2::Types::WAFUnsupportedAggregateKeyTypeException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

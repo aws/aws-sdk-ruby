@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.137.0 (2023-05-16)
+------------------
+
+* Feature - Add Support for Tags for Custom Entity Types
+
 1.136.0 (2023-05-09)
 ------------------
 
