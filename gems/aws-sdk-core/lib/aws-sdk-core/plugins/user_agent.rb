@@ -28,7 +28,7 @@ module Aws
 
           def to_s
             ua = "aws-sdk-ruby3/#{CORE_GEM_VERSION}"
-            ua += " #{api_metadata}"
+            ua += " #{api_metadata}" if api_metadata
             ua += " #{legacy_api_metadata}"
             ua += " #{os_metadata}"
             ua += " #{legacy_os_metadata}"
@@ -49,6 +49,8 @@ module Aws
 
           def api_metadata
             service_id = @context.config.api.metadata['serviceId']
+            return unless service_id
+
             service_id = service_id.gsub(' ', '_').downcase
             gem_version = @context[:gem_version]
             "api/#{service_id}##{gem_version}"
@@ -108,14 +110,15 @@ module Aws
           end
 
           def feature_metadata
-            # @context[:user_agent_feature]
             return unless Thread.current[:aws_sdk_core_user_agent_feature]
 
             Thread.current[:aws_sdk_core_user_agent_feature].join(' ')
           end
 
           def framework_metadata
-            @context[:user_agent_framework]
+            return unless Thread.current[:aws_sdk_core_user_agent_framework]
+
+            Thread.current[:aws_sdk_core_user_agent_framework].join(' ')
           end
         end
       end
