@@ -39,7 +39,9 @@ module AwsSdkCodeGenerator
 # @return [self]
           DOCS
           m.code = <<-CODE.rstrip
-#{request(resource)}
+Aws::Plugins::UserAgent.feature('resource') do
+  #{request(resource)}
+end 
 @data = resp.#{data_path(resource)}
 self
           CODE

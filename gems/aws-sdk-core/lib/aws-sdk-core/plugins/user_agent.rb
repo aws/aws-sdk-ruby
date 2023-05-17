@@ -6,6 +6,14 @@ module Aws
     class UserAgent < Seahorse::Client::Plugin
       option(:user_agent_suffix)
 
+      def self.feature(feature, &block)
+        Thread.current[:aws_sdk_core_user_agent_feature] ||= []
+        Thread.current[:aws_sdk_core_user_agent_feature] << "ft/#{feature}"
+        block.call
+      ensure
+        Thread.current[:aws_sdk_core_user_agent_feature].pop
+      end
+
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
@@ -100,7 +108,10 @@ module Aws
           end
 
           def feature_metadata
-            @context[:user_agent_feature]
+            # @context[:user_agent_feature]
+            return unless Thread.current[:aws_sdk_core_user_agent_feature]
+
+            Thread.current[:aws_sdk_core_user_agent_feature].join(' ')
           end
 
           def framework_metadata

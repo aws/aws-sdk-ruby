@@ -49,15 +49,15 @@ module AwsSdkCodeGenerator
       private
 
       def wait_call(waiter)
-        options_str = "{ metadata: { user_agent_feature: 'ft/resource' } }"
         args = ResourceClientRequestParams.new(
           params: waiter['params']
         ).to_s.strip
-        if waiter['path']
-          "resp = waiter.wait(params.merge(#{args}), #{options_str})"
-        else
-          "waiter.wait(params.merge(#{args}), #{options_str})"
-        end
+        parts = []
+        parts << 'resp = ' if waiter['path']
+        parts << "Aws::Plugins::UserAgent.feature('resource') do\n"
+        parts << "  waiter.wait(params.merge(#{args}))"
+        parts << "\nend"
+        parts.join
       end
 
       def constructor_args(resource, waiter)

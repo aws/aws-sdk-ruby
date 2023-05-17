@@ -69,7 +69,6 @@ module Seahorse
       #
       def send_request(options = {}, &block)
         @context[:response_target] = options[:target] || block
-        @context.metadata.merge!(options[:metadata] || {})
         @handlers.to_stack.call(@context)
       end
 

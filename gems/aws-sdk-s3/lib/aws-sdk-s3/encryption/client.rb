@@ -262,7 +262,7 @@ module Aws
         # @option (see S3::Client#put_object)
         # @return (see S3::Client#put_object)
         # @see S3::Client#put_object
-        def put_object(params = {}, options = {})
+        def put_object(params = {})
           req = @client.build_request(:put_object, params)
           req.handlers.add(EncryptHandler, priority: 95)
           req.context[:encryption] = {
@@ -270,7 +270,9 @@ module Aws
             envelope_location: @envelope_location,
             instruction_file_suffix: @instruction_file_suffix,
           }
-          req.send_request(request_options(options))
+          Aws::Plugins::UserAgent.feature('s3-encrypt#1') do
+            req.send_request
+          end
         end
 
         # Gets an object from Amazon S3, decrypting  data locally.
@@ -286,7 +288,7 @@ module Aws
         # @return (see S3::Client#get_object)
         # @see S3::Client#get_object
         # @note The `:range` request parameter is not yet supported.
-        def get_object(params = {}, options = {}, &block)
+        def get_object(params = {}, &block)
           if params[:range]
             raise NotImplementedError, '#get_object with :range not supported yet'
           end
@@ -298,19 +300,12 @@ module Aws
             envelope_location: envelope_location,
             instruction_file_suffix: instruction_file_suffix,
           }
-          req.send_request(request_options(options).merge(target: block))
+          Aws::Plugins::UserAgent.feature('s3-encrypt#1') do
+            req.send_request(target: block)
+          end
         end
 
         private
-
-        def request_options(options)
-          # Resource model can take encryption clients
-          if (feature = options.fetch(:metadata, {}).fetch(:user_agent_feature, nil))
-            { metadata: { user_agent_feature: feature + ' ft/s3-encrypt#1' } }
-          else
-            { metadata: { user_agent_feature: 'ft/s3-encrypt#1' } }
-          end
-        end
 
         def extract_client(options)
           options[:client] || begin

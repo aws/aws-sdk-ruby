@@ -62,22 +62,9 @@ module Aws
       def send_request(options)
         req = options[:client].build_request(@operation_name, options[:params])
         req.handlers.remove(RAISE_HANDLER)
-        # wait() method did not have options previously.
-        # Options may not exist because of new core and old service combination.
-        options[:options] ||= {}
-        req.send_request(next_request_options(options[:options]))
-      end
 
-      def next_request_options(options)
-        # Other features like resources may have waiters support.
-        if (feature = options.fetch(:metadata, {}).fetch(:user_agent_feature, nil))
-          if !feature.include?('ft/waiter')
-            { metadata: { user_agent_feature: feature + ' ft/waiter' } }
-          else
-            { metadata: { user_agent_feature: feature } }
-          end
-        else
-          { metadata: { user_agent_feature: 'ft/paginator' } }
+        Aws::Plugins::UserAgent.feature('waiter') do
+          req.send_request
         end
       end
 

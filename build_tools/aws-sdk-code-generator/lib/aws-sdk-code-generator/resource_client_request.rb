@@ -15,9 +15,11 @@ module AwsSdkCodeGenerator
         parts = []
         parts << request_options(params) if merge
         parts << assignment(options)
-        parts << "@client."
+        parts << "Aws::Plugins::UserAgent.feature('resource') do\n"
+        parts << "  @client."
         parts << operation_name(request)
         parts << arguments(merge, params, streaming)
+        parts << "\nend"
         parts.join
       end
 
@@ -48,21 +50,12 @@ module AwsSdkCodeGenerator
       end
 
       def arguments(merge, params, streaming)
-        options_str = "{ metadata: { user_agent_feature: 'ft/resource' } }"
         if merge
-          if streaming
-            "(options, #{options_str}, &block)"
-          else
-            "(options, #{options_str})"
-          end
+          streaming ? '(options, &block)' : '(options)'
         elsif params.empty?
-          "({}, #{options_str})"
+          ''
         else
-          if streaming
-            "({#{params}}, #{options_str}, &block)"
-          else
-            "({#{params}}, #{options_str})"
-          end
+          streaming ? "(#{params}, &block)" : "(#{params})"
         end
       end
 

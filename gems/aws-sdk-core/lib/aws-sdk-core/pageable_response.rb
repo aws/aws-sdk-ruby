@@ -201,20 +201,8 @@ module Aws
       def next_response(params)
         params = next_page_params(params)
         request = context.client.build_request(context.operation_name, params)
-        options = next_response_options
-        request.send_request(options)
-      end
-
-      def next_response_options
-        # Other features like resources may have pagination support.
-        if (feature = context.metadata[:user_agent_feature])
-          if !feature.include?('ft/paginator')
-            { metadata: { user_agent_feature: feature + ' ft/paginator' } }
-          else
-            { metadata: { user_agent_feature: feature } }
-          end
-        else
-          { metadata: { user_agent_feature: 'ft/paginator' } }
+        Aws::Plugins::UserAgent.feature('paginator') do
+          request.send_request
         end
       end
 
