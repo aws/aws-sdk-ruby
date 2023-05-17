@@ -32,21 +32,23 @@ module Aws
         }
         @params[:version_id] = options[:version_id] if options[:version_id]
 
-        case @mode
-        when 'auto' then multipart_download
-        when 'single_request' then single_request
-        when 'get_range'
-          if @chunk_size
-            resp = @client.head_object(@params)
-            multithreaded_get_by_ranges(construct_chunks(resp.content_length))
+        Aws::Plugins::UserAgent.feature('s3-transfer') do
+          case @mode
+          when 'auto' then multipart_download
+          when 'single_request' then single_request
+          when 'get_range'
+            if @chunk_size
+              resp = @client.head_object(@params)
+              multithreaded_get_by_ranges(construct_chunks(resp.content_length))
+            else
+              msg = 'In :get_range mode, :chunk_size must be provided'
+              raise ArgumentError, msg
+            end
           else
-            msg = 'In :get_range mode, :chunk_size must be provided'
+            msg = "Invalid mode #{@mode} provided, "\
+                  'mode should be :single_request, :get_range or :auto'
             raise ArgumentError, msg
           end
-        else
-          msg = "Invalid mode #{@mode} provided, "\
-                'mode should be :single_request, :get_range or :auto'
-          raise ArgumentError, msg
         end
       end
 

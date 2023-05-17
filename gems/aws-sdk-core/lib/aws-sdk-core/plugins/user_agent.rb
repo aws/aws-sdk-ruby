@@ -14,11 +14,23 @@ module Aws
         Thread.current[:aws_sdk_core_user_agent_feature].pop
       end
 
+      def self.framework(framework, &block)
+        Thread.current[:aws_sdk_core_user_agent_framework] ||= []
+        Thread.current[:aws_sdk_core_user_agent_framework] << "lib/#{framework}"
+        block.call
+      ensure
+        Thread.current[:aws_sdk_core_user_agent_framework].pop
+      end
+
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          context.http_request.headers['User-Agent'] = UserAgent.new(context).to_s
+          set_user_agent(context)
           @handler.call(context)
+        end
+
+        def set_user_agent(context)
+          context.http_request.headers['User-Agent'] = UserAgent.new(context).to_s
         end
 
         class UserAgent
@@ -28,6 +40,7 @@ module Aws
 
           def to_s
             ua = "aws-sdk-ruby3/#{CORE_GEM_VERSION}"
+            ua += ' ua/2.0'
             ua += " #{api_metadata}" if api_metadata
             ua += " #{legacy_api_metadata}"
             ua += " #{os_metadata}"
