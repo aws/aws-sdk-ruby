@@ -16,7 +16,10 @@ maximum length of 50.
         DOCS
         app_id = ENV['AWS_SDK_UA_APP_ID']
         app_id ||= Aws.shared_config.sdk_ua_app_id(profile: cfg.profile)
-        app_id[0..50] if app_id
+        if app_id && app_id.length > 50
+          warn 'sdk_ua_app_id should not be longer than 50 characters'
+        end
+        app_id
       end
 
       def self.feature(feature, &block)
@@ -132,6 +135,8 @@ maximum length of 50.
           def app_id
             return unless (app_id = @context.config.sdk_ua_app_id)
 
+            # Sanitize and only allow these characters
+            app_id = app_id.gsub(/[^!#$%&'*+\-.^_`|~0-9A-Za-z]/, '-')
             "app/#{app_id}"
           end
 

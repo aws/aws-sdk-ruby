@@ -16,7 +16,7 @@ module Aws
           case key
           when 'internal-traffic' then nil
           when 'os' then
-            os_family = given['os']['os-family'].downcase
+            os_family = given['os']['family'].downcase
             version = given['os']['version']
             allow(Gem::Platform).to receive(:local).and_return(
               double('platform', os: os_family, version: version, cpu: nil)
@@ -61,7 +61,7 @@ module Aws
         if (exact_order = expected['containsInExactOrder'])
           begin
             actual_order = actual.split(' ')
-            exact_order = Enumerator.new(exact_order)
+            exact_order = exact_order.each
             actual_order.each do |a|
               # special case
               a = 'aws-sdk-{language}/{version}' if a =~ /aws-sdk-ruby3/
@@ -78,6 +78,12 @@ module Aws
             expect(actual).to include(e)
           end
         end
+
+        if (contains = expected['contains'])
+          contains.each do |contain|
+            expect(actual).to include(contain)
+          end
+        end
       end
 
       context 'test runner' do
@@ -86,7 +92,7 @@ module Aws
         )
 
         tests.each_with_index do |test, index|
-          it "passes test #{index + 1}" do
+          it "passes test #{index + 1}: #{test['description']}" do
             given = test['given']
             expected_header = test['expectedRequestHeaders']['user-agent']
             feature_callable, framework_callable = setup(given)
