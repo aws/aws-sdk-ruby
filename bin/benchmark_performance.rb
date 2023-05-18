@@ -8,59 +8,57 @@ Dir.glob("gems/*/lib") do |gem_path|
   $LOAD_PATH.unshift(File.expand_path(gem_path))
 end
 
-benchmark_data = {}
+benchmark_data = {'version' => '1.0'}
 begin
   benchmark_data['commit_id'] = `git rev-parse HEAD`.strip
 rescue
   # unable to get a commit, maybe run outside of a git repo.  Skip
 end
 
-def benchmark_require(gem, data)
+# Run a block in a fork and returns the data from it
+# the block must take a single argument and will be called with an empty hash
+# any data that should be communicated back to the parent process can be written to that hash
+def fork_run(&block)
   rd, wr = IO.pipe
   p1 = fork do
-    t1 = Time.now
-    require gem
-    wr.write(Time.now - t1)
+    h = {}
+    block.call(h)
+    wr.write(JSON.dump(h))
     wr.close
   end
   Process.wait(p1)
   wr.close
-  data['require_time_ms'] = rd.read.to_f * 1000.0
+  h = JSON.parse(rd.read, symbolize_names: true)
   rd.close
+  return h
+end
 
-  rd, wr = IO.pipe
-  p2 = fork do
-    require 'memory_profiler'
+def benchmark_require(gem, data)
+  data.merge!(fork_run do |out|
+    t1 = Time.now
+    require gem
+    out[:require_time] = Time.now - t1
+  end)
+
+  data.merge!(fork_run do |out|
     r = ::MemoryProfiler.report { require gem }
-    wr.write(r.total_retained_memsize)
-    wr.close
-  end
-  Process.wait(p2)
-  wr.close
-  data['require_mem_retained'] = rd.read.to_i
-  rd.close
+    out[:require_mem_retained] = r.total_retained_memsize
+  end)
 end
 
 def benchmark_client(gem, module_name, data)
-  rd, wr = IO.pipe
-  p2 = fork do
+  data.merge!(fork_run do |out|
     require gem
     client_klass = Aws.const_get(module_name).const_get(:Client)
     r = ::MemoryProfiler.report { client_klass.new }
-    wr.write(r.total_retained_memsize)
-    wr.write("\n")
+    out[:client_mem_retained] = r.total_retained_memsize
+
     n = 1000
     r = Benchmark.bm do |x|
       x.report { n.times do   ; a = client_klass.new; end }
     end
-    wr.write( r.first.total / n * 1000.0)
-    wr.close
-  end
-  Process.wait(p2)
-  wr.close
-  mem,t = rd.read.split("\n")
-  data['client_mem_retained'] = mem.to_i
-  data['client_init_ms'] = t.to_f
+    out[:client_init_ms] = r.first.total / n * 1000.0
+  end)
 end
 
 benchmark_gems = {
