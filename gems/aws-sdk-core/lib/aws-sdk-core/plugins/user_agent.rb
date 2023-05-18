@@ -6,6 +6,19 @@ module Aws
     class UserAgent < Seahorse::Client::Plugin
       option(:user_agent_suffix)
 
+      option(
+        :sdk_ua_app_id,
+        doc_type: 'String',
+        docstring: <<-DOCS) do |cfg|
+A unique and opaque application ID that is appended to the
+User-Agent header as app/<sdk_ua_app_id>. It should have a
+maximum length of 50.
+        DOCS
+        app_id = ENV['AWS_SDK_UA_APP_ID']
+        app_id ||= Aws.shared_config.sdk_ua_app_id(profile: cfg.profile)
+        app_id[0..50] if app_id
+      end
+
       def self.feature(feature, &block)
         Thread.current[:aws_sdk_core_user_agent_feature] ||= []
         Thread.current[:aws_sdk_core_user_agent_feature] << "ft/#{feature}"
@@ -117,7 +130,7 @@ module Aws
           end
 
           def app_id
-            return unless (app_id = ENV['AWS_SDK_UA_APP_ID'])
+            return unless (app_id = @context.config.sdk_ua_app_id)
 
             "app/#{app_id}"
           end

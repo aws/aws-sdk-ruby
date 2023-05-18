@@ -8,20 +8,100 @@ module Aws
       let(:svc) { ApiHelper.sample_service }
       let(:client) { svc::Client.new(stub_responses: true) }
 
+      def setup(given)
+        feature_callable = nil
+        framework_callable = nil
 
-      tests = JSON.load_file(
-        File.join(File.dirname(__FILE__), 'user_agent_tests.json')
-      )
+        given.keys.each do |key|
+          case key
+          when 'internal-traffic' then nil
+          when 'os' then
+            os_family = given['os']['os-family'].downcase
+            version = given['os']['version']
+            allow(Gem::Platform).to receive(:local).and_return(
+              double('platform', os: os_family, version: version, cpu: nil)
+            )
+          when 'language'
+            name = given['language']['name']
+            version = given['language']['version']
+            stub_const('RUBY_ENGINE', name)
+            stub_const('RUBY_ENGINE_VERSION', version)
+          when 'environmentVariables'
+            given['environmentVariables'].each { |k, v| ENV[k] = v }
+          when 'sharedConfigFile'
+            given['sharedConfigFile'].each do |k, v|
+              allow_any_instance_of(Aws::SharedConfig)
+                .to receive(k.to_sym).and_return(v)
+            end
+          when 'feature'
+            version = given['feature']['version']
+            feature = given['feature']['name']
+            feature += "##{version}" unless version.empty?
+            feature_callable = proc do |callable|
+              Aws::Plugins::UserAgent.feature(feature) do
+                callable.call
+              end
+            end
+          when 'framework'
+            version = given['framework']['version']
+            framework = given['framework']['name']
+            framework += "##{version}" unless version.empty?
+            framework_callable = proc do |callable|
+              Aws::Plugins::UserAgent.framework(framework) do
+                callable.call
+              end
+            end
+          end
+        end
 
+        [feature_callable, framework_callable]
+      end
 
-      puts tests.first
+      def assert_header(expected, actual)
+        if (exact_order = expected['containsInExactOrder'])
+          begin
+            actual_order = actual.split(' ')
+            exact_order = Enumerator.new(exact_order)
+            actual_order.each do |a|
+              # special case
+              a = 'aws-sdk-{language}/{version}' if a =~ /aws-sdk-ruby3/
+              a == exact_order.peek ? exact_order.next : next
+            end
+            raise 'Exhausted user agent metadata before expected order was met'
+          rescue StopIteration
+            # exact order has been met
+          end
+        end
 
-      context 'sets user agent' do
-        it 'sets the user agent' do
-          resp = client.example_operation
-          header = resp.context.http_request.headers['User-Agent']
-          puts header
-          expect(header).to match(/aws-sdk-ruby3/)
+        if (any_order = expected['containsInAnyOrder'])
+          any_order.each do |e|
+            expect(actual).to include(e)
+          end
+        end
+      end
+
+      context 'test runner' do
+        tests = JSON.load_file(
+          File.join(File.dirname(__FILE__), 'user_agent_tests.json')
+        )
+
+        tests.each_with_index do |test, index|
+          it "passes test #{index + 1}" do
+            given = test['given']
+            expected_header = test['expectedRequestHeaders']['user-agent']
+            feature_callable, framework_callable = setup(given)
+
+            callable1 = proc { client.example_operation }
+            callable2 = callable1
+            callable2 = proc { feature_callable.call(callable1) } if feature_callable
+            callable3 = callable2
+            callable3 = proc { framework_callable.call(callable2) } if framework_callable
+
+            resp = callable3.call
+            actual_header = resp.context.http_request.headers['User-Agent']
+
+            assert_header(expected_header, actual_header)
+          end
         end
       end
     end

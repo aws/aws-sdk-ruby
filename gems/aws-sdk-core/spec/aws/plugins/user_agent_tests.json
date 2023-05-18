@@ -11,7 +11,7 @@
         "version":"{version}"
       },
       "environmentVariables":{
-        "exec-env":"lambda",
+        "AWS_EXECUTION_ENV":"lambda",
         "AWS_SDK_UA_APP_ID":"123456"
       },
       "sharedConfigFile":{
@@ -60,7 +60,6 @@
       "user-agent":{
         "containsInExactOrder":[
           "aws-sdk-{language}/{version}",
-          "md/internal",
           "ua/2.0",
           "os/linux#5.4.228-131.415.AMZN2.X86_64",
           "lang/{language}#{version}"
