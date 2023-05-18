@@ -1559,6 +1559,67 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Creates a prompt. For more information about prompts, such as
+    # supported file types and maximum length, see [Create prompts][1] in
+    # the *Amazon Connect Administrator's Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/prompts.html
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :name
+    #   The name of the prompt.
+    #
+    # @option params [String] :description
+    #   The description of the prompt.
+    #
+    # @option params [required, String] :s3_uri
+    #   The URI for the S3 bucket where the prompt is stored.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
+    #
+    # @return [Types::CreatePromptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePromptResponse#prompt_arn #prompt_arn} => String
+    #   * {Types::CreatePromptResponse#prompt_id #prompt_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_prompt({
+    #     instance_id: "InstanceId", # required
+    #     name: "CommonNameLength127", # required
+    #     description: "PromptDescription",
+    #     s3_uri: "S3Uri", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.prompt_arn #=> String
+    #   resp.prompt_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreatePrompt AWS API Documentation
+    #
+    # @overload create_prompt(params = {})
+    # @param [Hash] params ({})
+    def create_prompt(params = {}, options = {})
+      req = build_request(:create_prompt, params)
+      req.send_request(options)
+    end
+
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
@@ -2780,6 +2841,37 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Deletes a prompt.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :prompt_id
+    #   A unique identifier for the prompt.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_prompt({
+    #     instance_id: "InstanceId", # required
+    #     prompt_id: "PromptId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeletePrompt AWS API Documentation
+    #
+    # @overload delete_prompt(params = {})
+    # @param [Hash] params ({})
+    def delete_prompt(params = {}, options = {})
+      req = build_request(:delete_prompt, params)
+      req.send_request(options)
+    end
+
     # Deletes a quick connect.
     #
     # @option params [required, String] :instance_id
@@ -3728,6 +3820,48 @@ module Aws::Connect
     # @param [Hash] params ({})
     def describe_phone_number(params = {}, options = {})
       req = build_request(:describe_phone_number, params)
+      req.send_request(options)
+    end
+
+    # Describes the prompt.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :prompt_id
+    #   A unique identifier for the prompt.
+    #
+    # @return [Types::DescribePromptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePromptResponse#prompt #prompt} => Types::Prompt
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_prompt({
+    #     instance_id: "InstanceId", # required
+    #     prompt_id: "PromptId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.prompt.prompt_arn #=> String
+    #   resp.prompt.prompt_id #=> String
+    #   resp.prompt.name #=> String
+    #   resp.prompt.description #=> String
+    #   resp.prompt.tags #=> Hash
+    #   resp.prompt.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribePrompt AWS API Documentation
+    #
+    # @overload describe_prompt(params = {})
+    # @param [Hash] params ({})
+    def describe_prompt(params = {}, options = {})
+      req = build_request(:describe_prompt, params)
       req.send_request(options)
     end
 
@@ -5764,6 +5898,43 @@ module Aws::Connect
     # @param [Hash] params ({})
     def get_metric_data_v2(params = {}, options = {})
       req = build_request(:get_metric_data_v2, params)
+      req.send_request(options)
+    end
+
+    # Gets the prompt file.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :prompt_id
+    #   A unique identifier for the prompt.
+    #
+    # @return [Types::GetPromptFileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPromptFileResponse#prompt_presigned_url #prompt_presigned_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_prompt_file({
+    #     instance_id: "InstanceId", # required
+    #     prompt_id: "PromptId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.prompt_presigned_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetPromptFile AWS API Documentation
+    #
+    # @overload get_prompt_file(params = {})
+    # @param [Hash] params ({})
+    def get_prompt_file(params = {}, options = {})
+      req = build_request(:get_prompt_file, params)
       req.send_request(options)
     end
 
@@ -10781,6 +10952,57 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Updates a prompt.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :prompt_id
+    #   A unique identifier for the prompt.
+    #
+    # @option params [String] :name
+    #   The name of the prompt.
+    #
+    # @option params [String] :description
+    #   A description of the prompt.
+    #
+    # @option params [String] :s3_uri
+    #   The URI for the S3 bucket where the prompt is stored.
+    #
+    # @return [Types::UpdatePromptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePromptResponse#prompt_arn #prompt_arn} => String
+    #   * {Types::UpdatePromptResponse#prompt_id #prompt_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_prompt({
+    #     instance_id: "InstanceId", # required
+    #     prompt_id: "PromptId", # required
+    #     name: "CommonNameLength127",
+    #     description: "PromptDescription",
+    #     s3_uri: "S3Uri",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.prompt_arn #=> String
+    #   resp.prompt_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdatePrompt AWS API Documentation
+    #
+    # @overload update_prompt(params = {})
+    # @param [Hash] params ({})
+    def update_prompt(params = {}, options = {})
+      req = build_request(:update_prompt, params)
+      req.send_request(options)
+    end
+
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
@@ -11889,7 +12111,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

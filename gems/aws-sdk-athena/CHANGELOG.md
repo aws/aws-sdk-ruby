@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2023-05-18)
+------------------
+
+* Feature - Removing SparkProperties from EngineConfiguration object for StartSession API call
+
 1.66.0 (2023-05-15)
 ------------------
 

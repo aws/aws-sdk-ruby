@@ -837,11 +837,6 @@ module Aws::ECS
     #
     # @!attribute [rw] image_digest
     #   The container image manifest digest.
-    #
-    #   <note markdown="1"> The `imageDigest` is only returned if the container is using an
-    #   image hosted in Amazon ECR, otherwise it is omitted.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] runtime_id
@@ -2601,7 +2596,7 @@ module Aws::ECS
     #
     # @!attribute [rw] desired_count
     #   The number of instantiations of the specified task definition to
-    #   place and keep running on your cluster.
+    #   place and keep running in your service.
     #
     #   This is required if `schedulingStrategy` is `REPLICA` or isn't
     #   specified. If `schedulingStrategy` is `DAEMON` then this isn't

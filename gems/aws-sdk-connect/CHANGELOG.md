@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2023-05-18)
+------------------
+
+* Feature - You can programmatically create and manage prompts using APIs, for example, to extract prompts stored within Amazon Connect and add them to your Amazon S3 bucket. AWS CloudTrail, AWS CloudFormation and tagging are supported.
+
 1.106.0 (2023-05-11)
 ------------------
 

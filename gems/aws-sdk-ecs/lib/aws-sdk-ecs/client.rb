@@ -946,7 +946,7 @@ module Aws::ECS
     #
     # @option params [Integer] :desired_count
     #   The number of instantiations of the specified task definition to place
-    #   and keep running on your cluster.
+    #   and keep running in your service.
     #
     #   This is required if `schedulingStrategy` is `REPLICA` or isn't
     #   specified. If `schedulingStrategy` is `DAEMON` then this isn't
@@ -9704,7 +9704,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.118.0'
+      context[:gem_version] = '1.119.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

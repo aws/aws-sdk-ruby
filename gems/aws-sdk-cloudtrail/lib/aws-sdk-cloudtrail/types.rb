@@ -77,8 +77,8 @@ module Aws::CloudTrail
     # Advanced event selectors let you create fine-grained selectors for the
     # following CloudTrail event record ﬁelds. They help you control costs
     # by logging only those events that are important to you. For more
-    # information about advanced event selectors, see [Logging data events
-    # for trails][1] in the *CloudTrail User Guide*.
+    # information about advanced event selectors, see [Logging data
+    # events][1] in the *CloudTrail User Guide*.
     #
     # * `readOnly`
     #
@@ -166,33 +166,39 @@ module Aws::CloudTrail
     #     CloudTrail data events. `resources.type` can only use the `Equals`
     #     operator, and the value can be one of the following:
     #
-    #     * `AWS::CloudTrail::Channel`
-    #
-    #     * `AWS::S3::Object`
+    #     * `AWS::DynamoDB::Table`
     #
     #     * `AWS::Lambda::Function`
     #
-    #     * `AWS::DynamoDB::Table`
+    #     * `AWS::S3::Object`
     #
-    #     * `AWS::S3Outposts::Object`
+    #     * `AWS::CloudTrail::Channel`
     #
-    #     * `AWS::ManagedBlockchain::Node`
-    #
-    #     * `AWS::S3ObjectLambda::AccessPoint`
-    #
-    #     * `AWS::EC2::Snapshot`
-    #
-    #     * `AWS::S3::AccessPoint`
+    #     * `AWS::Cognito::IdentityPool`
     #
     #     * `AWS::DynamoDB::Stream`
     #
-    #     * `AWS::Glue::Table`
+    #     * `AWS::EC2::Snapshot`
     #
     #     * `AWS::FinSpace::Environment`
+    #
+    #     * `AWS::Glue::Table`
+    #
+    #     * `AWS::GuardDuty::Detector`
+    #
+    #     * `AWS::KendraRanking::ExecutionPlan`
+    #
+    #     * `AWS::ManagedBlockchain::Node`
     #
     #     * `AWS::SageMaker::ExperimentTrialComponent`
     #
     #     * `AWS::SageMaker::FeatureGroup`
+    #
+    #     * `AWS::S3::AccessPoint`
+    #
+    #     * `AWS::S3ObjectLambda::AccessPoint`
+    #
+    #     * `AWS::S3Outposts::Object`
     #
     #     You can have only one `resources.type` ﬁeld per selector. To log
     #     data events on more than one resource type, add another selector.
@@ -214,30 +220,19 @@ module Aws::CloudTrail
     #
     #     * `arn:<partition>:s3:::<bucket_name>/<object_path>/`
     #
-    #     When `resources.type` equals `AWS::S3::AccessPoint`, and the
-    #     operator is set to `Equals` or `NotEquals`, the ARN must be in one
-    #     of the following formats. To log events on all objects in an S3
-    #     access point, we recommend that you use only the access point ARN,
-    #     don’t include the object path, and use the `StartsWith` or
-    #     `NotStartsWith` operators.
+    #     When resources.type equals `AWS::DynamoDB::Table`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
     #
-    #     * `arn:<partition>:s3:<region>:<account_ID>:accesspoint/<access_point_name>`
+    #     * `arn:<partition>:dynamodb:<region>:<account_ID>:table/<table_name>`
     #
-    #     * `arn:<partition>:s3:<region>:<account_ID>:accesspoint/<access_point_name>/object/<object_path>`
+    #     ^
     #
     #     When resources.type equals `AWS::Lambda::Function`, and the
     #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
     #     following format:
     #
     #     * `arn:<partition>:lambda:<region>:<account_ID>:function:<function_name>`
-    #
-    #     ^
-    #
-    #     When resources.type equals `AWS::DynamoDB::Table`, and the
-    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
-    #     following format:
-    #
-    #     * `arn:<partition>:dynamodb:<region>:<account_ID>:table/<table_name>`
     #
     #     ^
     #
@@ -249,35 +244,11 @@ module Aws::CloudTrail
     #
     #     ^
     #
-    #     When `resources.type` equals `AWS::S3Outposts::Object`, and the
+    #     When resources.type equals `AWS::Cognito::IdentityPool`, and the
     #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
     #     following format:
     #
-    #     * `arn:<partition>:s3-outposts:<region>:<account_ID>:<object_path>`
-    #
-    #     ^
-    #
-    #     When `resources.type` equals `AWS::ManagedBlockchain::Node`, and
-    #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
-    #     the following format:
-    #
-    #     * `arn:<partition>:managedblockchain:<region>:<account_ID>:nodes/<node_ID>`
-    #
-    #     ^
-    #
-    #     When `resources.type` equals `AWS::S3ObjectLambda::AccessPoint`,
-    #     and the operator is set to `Equals` or `NotEquals`, the ARN must
-    #     be in the following format:
-    #
-    #     * `arn:<partition>:s3-object-lambda:<region>:<account_ID>:accesspoint/<access_point_name>`
-    #
-    #     ^
-    #
-    #     When `resources.type` equals `AWS::EC2::Snapshot`, and the
-    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
-    #     following format:
-    #
-    #     * `arn:<partition>:ec2:<region>::snapshot/<snapshot_ID>`
+    #     * `arn:<partition>:cognito-identity:<region>:<account_ID>:identitypool/<identity_pool_ID>`
     #
     #     ^
     #
@@ -289,11 +260,11 @@ module Aws::CloudTrail
     #
     #     ^
     #
-    #     When `resources.type` equals `AWS::Glue::Table`, and the operator
-    #     is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     When `resources.type` equals `AWS::EC2::Snapshot`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
     #     following format:
     #
-    #     * `arn:<partition>:glue:<region>:<account_ID>:table/<database_name>/<table_name>`
+    #     * `arn:<partition>:ec2:<region>::snapshot/<snapshot_ID>`
     #
     #     ^
     #
@@ -302,6 +273,38 @@ module Aws::CloudTrail
     #     following format:
     #
     #     * `arn:<partition>:finspace:<region>:<account_ID>:environment/<environment_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::Glue::Table`, and the operator
+    #     is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:glue:<region>:<account_ID>:table/<database_name>/<table_name>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::GuardDuty::Detector`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:guardduty:<region>:<account_ID>:detector/<detector_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::KendraRanking::ExecutionPlan`,
+    #     and the operator is set to `Equals` or `NotEquals`, the ARN must
+    #     be in the following format:
+    #
+    #     * `arn:<partition>:kendra-ranking:<region>:<account_ID>:rescore-execution-plan/<rescore_execution_plan_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::ManagedBlockchain::Node`, and
+    #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
+    #     the following format:
+    #
+    #     * `arn:<partition>:managedblockchain:<region>:<account_ID>:nodes/<node_ID>`
     #
     #     ^
     #
@@ -319,6 +322,33 @@ module Aws::CloudTrail
     #     the following format:
     #
     #     * `arn:<partition>:sagemaker:<region>:<account_ID>:feature-group/<feature_group_name>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::S3::AccessPoint`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in one
+    #     of the following formats. To log events on all objects in an S3
+    #     access point, we recommend that you use only the access point ARN,
+    #     don’t include the object path, and use the `StartsWith` or
+    #     `NotStartsWith` operators.
+    #
+    #     * `arn:<partition>:s3:<region>:<account_ID>:accesspoint/<access_point_name>`
+    #
+    #     * `arn:<partition>:s3:<region>:<account_ID>:accesspoint/<access_point_name>/object/<object_path>`
+    #
+    #     When `resources.type` equals `AWS::S3ObjectLambda::AccessPoint`,
+    #     and the operator is set to `Equals` or `NotEquals`, the ARN must
+    #     be in the following format:
+    #
+    #     * `arn:<partition>:s3-object-lambda:<region>:<account_ID>:accesspoint/<access_point_name>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::S3Outposts::Object`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:s3-outposts:<region>:<account_ID>:<object_path>`
     #
     #     ^
     #   @return [String]
@@ -1085,11 +1115,11 @@ module Aws::CloudTrail
     #   The resource type in which you want to log data events. You can
     #   specify the following *basic* event selector resource types:
     #
-    #   * `AWS::S3::Object`
+    #   * `AWS::DynamoDB::Table`
     #
     #   * `AWS::Lambda::Function`
     #
-    #   * `AWS::DynamoDB::Table`
+    #   * `AWS::S3::Object`
     #
     #   The following resource types are also available through *advanced*
     #   event selectors. Basic event selector resource types are valid in
@@ -1099,25 +1129,31 @@ module Aws::CloudTrail
     #
     #   * `AWS::CloudTrail::Channel`
     #
-    #   * `AWS::S3Outposts::Object`
-    #
-    #   * `AWS::ManagedBlockchain::Node`
-    #
-    #   * `AWS::S3ObjectLambda::AccessPoint`
-    #
-    #   * `AWS::EC2::Snapshot`
-    #
-    #   * `AWS::S3::AccessPoint`
+    #   * `AWS::Cognito::IdentityPool`
     #
     #   * `AWS::DynamoDB::Stream`
     #
-    #   * `AWS::Glue::Table`
+    #   * `AWS::EC2::Snapshot`
     #
     #   * `AWS::FinSpace::Environment`
+    #
+    #   * `AWS::Glue::Table`
+    #
+    #   * `AWS::GuardDuty::Detector`
+    #
+    #   * `AWS::KendraRanking::ExecutionPlan`
+    #
+    #   * `AWS::ManagedBlockchain::Node`
     #
     #   * `AWS::SageMaker::ExperimentTrialComponent`
     #
     #   * `AWS::SageMaker::FeatureGroup`
+    #
+    #   * `AWS::S3::AccessPoint`
+    #
+    #   * `AWS::S3ObjectLambda::AccessPoint`
+    #
+    #   * `AWS::S3Outposts::Object`
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -2475,12 +2511,20 @@ module Aws::CloudTrail
     #
     class InsightNotEnabledException < Aws::EmptyStructure; end
 
-    # A JSON string that contains a list of insight types that are logged on
-    # a trail.
+    # A JSON string that contains a list of Insights types that are logged
+    # on a trail.
     #
     # @!attribute [rw] insight_type
-    #   The type of insights to log on a trail. `ApiCallRateInsight` and
-    #   `ApiErrorRateInsight` are valid insight types.
+    #   The type of Insights events to log on a trail. `ApiCallRateInsight`
+    #   and `ApiErrorRateInsight` are valid Insight types.
+    #
+    #   The `ApiCallRateInsight` Insights type analyzes write-only
+    #   management API calls that are aggregated per minute against a
+    #   baseline API call volume.
+    #
+    #   The `ApiErrorRateInsight` Insights type analyzes management API
+    #   calls that result in error codes. The error is shown if the API call
+    #   is unsuccessful.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InsightSelector AWS API Documentation
@@ -2491,10 +2535,9 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # This exception is thrown when the IAM user or role that is used to
-    # create the organization resource lacks one or more required
-    # permissions for creating an organization resource in a required
-    # service.
+    # This exception is thrown when the IAM identity that is used to create
+    # the organization resource lacks one or more required permissions for
+    # creating an organization resource in a required service.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InsufficientDependencyServiceAccessPermissionException AWS API Documentation
     #
@@ -3350,8 +3393,8 @@ module Aws::CloudTrail
     #   `EventSelectors`, but not both. If you apply
     #   `AdvancedEventSelectors` to a trail, any existing `EventSelectors`
     #   are overwritten. For more information about advanced event
-    #   selectors, see [Logging data events for trails][1] in the
-    #   *CloudTrail User Guide*.
+    #   selectors, see [Logging data events][1] in the *CloudTrail User
+    #   Guide*.
     #
     #
     #
@@ -3401,7 +3444,15 @@ module Aws::CloudTrail
     # @!attribute [rw] insight_selectors
     #   A JSON string that contains the insight types you want to log on a
     #   trail. `ApiCallRateInsight` and `ApiErrorRateInsight` are valid
-    #   insight types.
+    #   Insight types.
+    #
+    #   The `ApiCallRateInsight` Insights type analyzes write-only
+    #   management API calls that are aggregated per minute against a
+    #   baseline API call volume.
+    #
+    #   The `ApiErrorRateInsight` Insights type analyzes management API
+    #   calls that result in error codes. The error is shown if the API call
+    #   is unsuccessful.
     #   @return [Array<Types::InsightSelector>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutInsightSelectorsRequest AWS API Documentation

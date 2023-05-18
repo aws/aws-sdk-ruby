@@ -58,7 +58,7 @@ module Aws::MediaConvert
     #   (Receiver Mix): One channel, C. Includes audio description data from
     #   your stereo input. For more information see ETSI TS 101 154 Annex E.
     #   * 1.0 Mono: One channel, C. * 2.0 Stereo: Two channels, L, R. *
-    #   5.1 Surround: Five channels, C, L, R, Ls, Rs, LFE.
+    #   5.1 Surround: Six channels, C, L, R, Ls, Rs, LFE.
     #   @return [String]
     #
     # @!attribute [rw] rate_control_mode
@@ -6724,9 +6724,9 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] segments_per_subdirectory
-    #   Number of segments to write to a subdirectory before starting a new
-    #   one. directoryStructure must be SINGLE\_DIRECTORY for this setting
-    #   to have an effect.
+    #   Specify the number of segments to write to a subdirectory before
+    #   starting a new one. You must also set Directory structure to
+    #   Subdirectory per stream for this setting to have an effect.
     #   @return [Integer]
     #
     # @!attribute [rw] stream_inf_resolution
@@ -7127,10 +7127,10 @@ module Aws::MediaConvert
     #   increase the video quality of your output relative to its bitrate,
     #   since noisy inputs are more complex and require more bits to encode.
     #   To help restore loss of detail after applying the filter, you can
-    #   optionally add texture or sharpening as an additional step.Jobs that
-    #   use this feature incur pro-tier pricing. To not apply advanced input
-    #   filtering: Choose Disabled. Note that you can still apply basic
-    #   filtering with Deblock and Denoise.
+    #   optionally add texture or sharpening as an additional step. Jobs
+    #   that use this feature incur pro-tier pricing. To not apply advanced
+    #   input filtering: Choose Disabled. Note that you can still apply
+    #   basic filtering with Deblock and Denoise.
     #   @return [String]
     #
     # @!attribute [rw] advanced_input_filter_settings
@@ -7457,10 +7457,10 @@ module Aws::MediaConvert
     #   increase the video quality of your output relative to its bitrate,
     #   since noisy inputs are more complex and require more bits to encode.
     #   To help restore loss of detail after applying the filter, you can
-    #   optionally add texture or sharpening as an additional step.Jobs that
-    #   use this feature incur pro-tier pricing. To not apply advanced input
-    #   filtering: Choose Disabled. Note that you can still apply basic
-    #   filtering with Deblock and Denoise.
+    #   optionally add texture or sharpening as an additional step. Jobs
+    #   that use this feature incur pro-tier pricing. To not apply advanced
+    #   input filtering: Choose Disabled. Note that you can still apply
+    #   basic filtering with Deblock and Denoise.
     #   @return [String]
     #
     # @!attribute [rw] advanced_input_filter_settings
@@ -12593,9 +12593,12 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] height
-    #   Use the Height (Height) setting to define the video resolution
-    #   height for this output. Specify in pixels. If you don't provide a
-    #   value here, the service will use the input height.
+    #   Use Height to define the video resolution height, in pixels, for
+    #   this output. To use the same resolution as your input: Leave both
+    #   Width and Height blank. To evenly scale from your input resolution:
+    #   Leave Height blank and enter a value for Width. For example, if your
+    #   input is 1920x1080 and you set Width to 1280, your output will be
+    #   1280x720.
     #   @return [Integer]
     #
     # @!attribute [rw] position
@@ -12659,9 +12662,12 @@ module Aws::MediaConvert
     #   @return [Types::VideoPreprocessor]
     #
     # @!attribute [rw] width
-    #   Use Width (Width) to define the video resolution width, in pixels,
-    #   for this output. If you don't provide a value here, the service
-    #   will use the input width.
+    #   Use Width to define the video resolution width, in pixels, for this
+    #   output. To use the same resolution as your input: Leave both Width
+    #   and Height blank. To evenly scale from your input resolution: Leave
+    #   Width blank and enter a value for Height. For example, if your input
+    #   is 1920x1080 and you set Height to 720, your output will be
+    #   1280x720.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoDescription AWS API Documentation
