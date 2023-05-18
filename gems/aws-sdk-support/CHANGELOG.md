@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2023-05-11)
+------------------
+
+* Feature - This release adds 2 new Support APIs, DescribeCreateCaseOptions and DescribeSupportedLanguages. You can use these new APIs to get available support languages.
+
 1.45.0 (2023-01-31)
 ------------------
 

@@ -64,8 +64,18 @@ module Aws::IVSRealTime
             Aws::IVSRealTime::Endpoints::DeleteStage.build(context)
           when :disconnect_participant
             Aws::IVSRealTime::Endpoints::DisconnectParticipant.build(context)
+          when :get_participant
+            Aws::IVSRealTime::Endpoints::GetParticipant.build(context)
           when :get_stage
             Aws::IVSRealTime::Endpoints::GetStage.build(context)
+          when :get_stage_session
+            Aws::IVSRealTime::Endpoints::GetStageSession.build(context)
+          when :list_participant_events
+            Aws::IVSRealTime::Endpoints::ListParticipantEvents.build(context)
+          when :list_participants
+            Aws::IVSRealTime::Endpoints::ListParticipants.build(context)
+          when :list_stage_sessions
+            Aws::IVSRealTime::Endpoints::ListStageSessions.build(context)
           when :list_stages
             Aws::IVSRealTime::Endpoints::ListStages.build(context)
           when :list_tags_for_resource

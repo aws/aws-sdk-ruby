@@ -3794,12 +3794,17 @@ module Aws::Glue
     #   If no context words are passed only a regular expression is checked.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   A list of tags applied to the custom entity type.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCustomEntityTypeRequest AWS API Documentation
     #
     class CreateCustomEntityTypeRequest < Struct.new(
       :name,
       :regex_string,
-      :context_words)
+      :context_words,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13520,11 +13525,16 @@ module Aws::Glue
     #   The maximum number of results to return.
     #   @return [Integer]
     #
+    # @!attribute [rw] tags
+    #   A list of key-value pair tags.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListCustomEntityTypesRequest AWS API Documentation
     #
     class ListCustomEntityTypesRequest < Struct.new(
       :next_token,
-      :max_results)
+      :max_results,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

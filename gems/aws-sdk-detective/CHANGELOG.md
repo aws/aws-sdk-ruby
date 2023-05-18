@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2023-05-16)
+------------------
+
+* Feature - Added and updated API operations in Detective to support the integration of ASFF Security Hub findings.
+
 1.32.0 (2023-01-18)
 ------------------
 

@@ -1769,6 +1769,62 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] name
+    #   The name of the prompt.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the prompt.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_uri
+    #   The URI for the S3 bucket where the prompt is stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreatePromptRequest AWS API Documentation
+    #
+    class CreatePromptRequest < Struct.new(
+      :instance_id,
+      :name,
+      :description,
+      :s3_uri,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] prompt_arn
+    #   The Amazon Resource Name (ARN) of the prompt.
+    #   @return [String]
+    #
+    # @!attribute [rw] prompt_id
+    #   A unique identifier for the prompt.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreatePromptResponse AWS API Documentation
+    #
+    class CreatePromptResponse < Struct.new(
+      :prompt_arn,
+      :prompt_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] name
     #   The name of the queue.
     #   @return [String]
     #
@@ -2982,6 +3038,28 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
+    # @!attribute [rw] prompt_id
+    #   A unique identifier for the prompt.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeletePromptRequest AWS API Documentation
+    #
+    class DeletePromptRequest < Struct.new(
+      :instance_id,
+      :prompt_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
     # @!attribute [rw] quick_connect_id
     #   The identifier for the quick connect.
     #   @return [String]
@@ -3567,6 +3645,40 @@ module Aws::Connect
     #
     class DescribePhoneNumberResponse < Struct.new(
       :claimed_phone_number_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] prompt_id
+    #   A unique identifier for the prompt.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribePromptRequest AWS API Documentation
+    #
+    class DescribePromptRequest < Struct.new(
+      :instance_id,
+      :prompt_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] prompt
+    #   Information about the prompt.
+    #   @return [Types::Prompt]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribePromptResponse AWS API Documentation
+    #
+    class DescribePromptResponse < Struct.new(
+      :prompt)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5874,8 +5986,8 @@ module Aws::Connect
     #   reporting interval for the retrieval of historical metrics data. The
     #   time must be before the end time timestamp. The time range between
     #   the start and end time must be less than 24 hours. The start time
-    #   cannot be earlier than 14 days before the time of the request.
-    #   Historical metrics are available for 14 days.
+    #   cannot be earlier than 35 days before the time of the request.
+    #   Historical metrics are available for 35 days.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
@@ -6207,6 +6319,41 @@ module Aws::Connect
     class GetMetricDataV2Response < Struct.new(
       :next_token,
       :metric_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] prompt_id
+    #   A unique identifier for the prompt.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetPromptFileRequest AWS API Documentation
+    #
+    class GetPromptFileRequest < Struct.new(
+      :instance_id,
+      :prompt_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] prompt_presigned_url
+    #   A generated URL to the prompt that can be given to an unauthorized
+    #   user so they can access the prompt in S3.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetPromptFileResponse AWS API Documentation
+    #
+    class GetPromptFileResponse < Struct.new(
+      :prompt_presigned_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9224,6 +9371,9 @@ module Aws::Connect
     #
     # @!attribute [rw] name
     #   The name of the metric.
+    #
+    #   This parameter is required. The following Required = No is
+    #   incorrect.
     #   @return [String]
     #
     # @!attribute [rw] threshold
@@ -9689,6 +9839,42 @@ module Aws::Connect
     #
     class ProblemDetail < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a prompt.
+    #
+    # @!attribute [rw] prompt_arn
+    #   The Amazon Resource Name (ARN) of the prompt.
+    #   @return [String]
+    #
+    # @!attribute [rw] prompt_id
+    #   A unique identifier for the prompt.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the prompt.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for the prompt.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \\\{ "tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Prompt AWS API Documentation
+    #
+    class Prompt < Struct.new(
+      :prompt_arn,
+      :prompt_id,
+      :name,
+      :description,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13533,6 +13719,60 @@ module Aws::Connect
     class UpdatePhoneNumberResponse < Struct.new(
       :phone_number_id,
       :phone_number_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] prompt_id
+    #   A unique identifier for the prompt.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the prompt.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the prompt.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_uri
+    #   The URI for the S3 bucket where the prompt is stored.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdatePromptRequest AWS API Documentation
+    #
+    class UpdatePromptRequest < Struct.new(
+      :instance_id,
+      :prompt_id,
+      :name,
+      :description,
+      :s3_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] prompt_arn
+    #   The Amazon Resource Name (ARN) of the prompt.
+    #   @return [String]
+    #
+    # @!attribute [rw] prompt_id
+    #   A unique identifier for the prompt.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdatePromptResponse AWS API Documentation
+    #
+    class UpdatePromptResponse < Struct.new(
+      :prompt_arn,
+      :prompt_id)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -82,6 +82,8 @@ module Aws::CodeCatalyst
             Aws::CodeCatalyst::Endpoints::GetUserDetails.build(context)
           when :list_access_tokens
             Aws::CodeCatalyst::Endpoints::ListAccessTokens.build(context)
+          when :list_dev_environment_sessions
+            Aws::CodeCatalyst::Endpoints::ListDevEnvironmentSessions.build(context)
           when :list_dev_environments
             Aws::CodeCatalyst::Endpoints::ListDevEnvironments.build(context)
           when :list_event_logs

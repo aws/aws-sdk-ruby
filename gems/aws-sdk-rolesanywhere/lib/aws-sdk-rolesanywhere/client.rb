@@ -368,10 +368,9 @@ module Aws::RolesAnywhere
 
     # @!group API Operations
 
-    # Creates a profile. A profile is configuration resource to list the
-    # roles that RolesAnywhere service is trusted to assume. In addition, by
-    # applying a profile you can intersect permissions with IAM managed
-    # policies.
+    # Creates a *profile*, a list of the roles that Roles Anywhere service
+    # is trusted to assume. You use profiles to intersect permissions with
+    # IAM managed policies.
     #
     # <b>Required permissions: </b> `rolesanywhere:CreateProfile`.
     #
@@ -389,20 +388,12 @@ module Aws::RolesAnywhere
     #   The name of the profile.
     #
     # @option params [Boolean] :require_instance_properties
-    #   Specifies whether instance properties are required in
-    #   [CreateSession][1] requests with this profile.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html
+    #   Specifies whether instance properties are required in temporary
+    #   credential requests with this profile.
     #
     # @option params [required, Array<String>] :role_arns
-    #   A list of IAM roles that this profile can assume in a
-    #   [CreateSession][1] operation.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html
+    #   A list of IAM roles that this profile can assume in a temporary
+    #   credential request.
     #
     # @option params [String] :session_policy
     #   A session policy that applies to the trust boundary of the vended
@@ -459,14 +450,12 @@ module Aws::RolesAnywhere
       req.send_request(options)
     end
 
-    # Creates a trust anchor. You establish trust between IAM Roles Anywhere
-    # and your certificate authority (CA) by configuring a trust anchor. A
-    # Trust Anchor is defined either as a reference to a AWS Certificate
-    # Manager Private Certificate Authority (ACM PCA), or by uploading a
-    # Certificate Authority (CA) certificate. Your AWS workloads can
-    # authenticate with the trust anchor using certificates issued by the
-    # trusted Certificate Authority (CA) in exchange for temporary AWS
-    # credentials.
+    # Creates a trust anchor to establish trust between IAM Roles Anywhere
+    # and your certificate authority (CA). You can define a trust anchor as
+    # a reference to an Private Certificate Authority (Private CA) or by
+    # uploading a CA certificate. Your Amazon Web Services workloads can
+    # authenticate with the trust anchor using certificates issued by the CA
+    # in exchange for temporary Amazon Web Services credentials.
     #
     # <b>Required permissions: </b> `rolesanywhere:CreateTrustAnchor`.
     #
@@ -475,6 +464,9 @@ module Aws::RolesAnywhere
     #
     # @option params [required, String] :name
     #   The name of the trust anchor.
+    #
+    # @option params [Array<Types::NotificationSetting>] :notification_settings
+    #   A list of notification settings to be associated to the trust anchor.
     #
     # @option params [required, Types::Source] :source
     #   The trust anchor type and its related certificate data.
@@ -491,10 +483,18 @@ module Aws::RolesAnywhere
     #   resp = client.create_trust_anchor({
     #     enabled: false,
     #     name: "ResourceName", # required
+    #     notification_settings: [
+    #       {
+    #         channel: "ALL", # accepts ALL
+    #         enabled: false, # required
+    #         event: "CA_CERTIFICATE_EXPIRY", # required, accepts CA_CERTIFICATE_EXPIRY, END_ENTITY_CERTIFICATE_EXPIRY
+    #         threshold: 1,
+    #       },
+    #     ],
     #     source: { # required
     #       source_data: {
     #         acm_pca_arn: "String",
-    #         x509_certificate_data: "String",
+    #         x509_certificate_data: "SourceDataX509CertificateDataString",
     #       },
     #       source_type: "AWS_ACM_PCA", # accepts AWS_ACM_PCA, CERTIFICATE_BUNDLE, SELF_SIGNED_REPOSITORY
     #     },
@@ -511,6 +511,12 @@ module Aws::RolesAnywhere
     #   resp.trust_anchor.created_at #=> Time
     #   resp.trust_anchor.enabled #=> Boolean
     #   resp.trust_anchor.name #=> String
+    #   resp.trust_anchor.notification_settings #=> Array
+    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
+    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
+    #   resp.trust_anchor.notification_settings[0].enabled #=> Boolean
+    #   resp.trust_anchor.notification_settings[0].event #=> String, one of "CA_CERTIFICATE_EXPIRY", "END_ENTITY_CERTIFICATE_EXPIRY"
+    #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
     #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
     #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
     #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
@@ -629,6 +635,12 @@ module Aws::RolesAnywhere
     #   resp.trust_anchor.created_at #=> Time
     #   resp.trust_anchor.enabled #=> Boolean
     #   resp.trust_anchor.name #=> String
+    #   resp.trust_anchor.notification_settings #=> Array
+    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
+    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
+    #   resp.trust_anchor.notification_settings[0].enabled #=> Boolean
+    #   resp.trust_anchor.notification_settings[0].event #=> String, one of "CA_CERTIFICATE_EXPIRY", "END_ENTITY_CERTIFICATE_EXPIRY"
+    #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
     #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
     #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
     #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
@@ -682,14 +694,10 @@ module Aws::RolesAnywhere
       req.send_request(options)
     end
 
-    # Disables a profile. When disabled, [CreateSession][1] requests with
+    # Disables a profile. When disabled, temporary credential requests with
     # this profile fail.
     #
     # <b>Required permissions: </b> `rolesanywhere:DisableProfile`.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html
     #
     # @option params [required, String] :profile_id
     #   The unique identifier of the profile.
@@ -730,14 +738,10 @@ module Aws::RolesAnywhere
       req.send_request(options)
     end
 
-    # Disables a trust anchor. When disabled, [CreateSession][1] requests
+    # Disables a trust anchor. When disabled, temporary credential requests
     # specifying this trust anchor are unauthorized.
     #
     # <b>Required permissions: </b> `rolesanywhere:DisableTrustAnchor`.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html
     #
     # @option params [required, String] :trust_anchor_id
     #   The unique identifier of the trust anchor.
@@ -757,6 +761,12 @@ module Aws::RolesAnywhere
     #   resp.trust_anchor.created_at #=> Time
     #   resp.trust_anchor.enabled #=> Boolean
     #   resp.trust_anchor.name #=> String
+    #   resp.trust_anchor.notification_settings #=> Array
+    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
+    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
+    #   resp.trust_anchor.notification_settings[0].enabled #=> Boolean
+    #   resp.trust_anchor.notification_settings[0].event #=> String, one of "CA_CERTIFICATE_EXPIRY", "END_ENTITY_CERTIFICATE_EXPIRY"
+    #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
     #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
     #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
     #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
@@ -812,14 +822,9 @@ module Aws::RolesAnywhere
       req.send_request(options)
     end
 
-    # Enables the roles in a profile to receive session credentials in
-    # [CreateSession][1].
+    # Enables temporary credential requests for a profile.
     #
     # <b>Required permissions: </b> `rolesanywhere:EnableProfile`.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html
     #
     # @option params [required, String] :profile_id
     #   The unique identifier of the profile.
@@ -883,6 +888,12 @@ module Aws::RolesAnywhere
     #   resp.trust_anchor.created_at #=> Time
     #   resp.trust_anchor.enabled #=> Boolean
     #   resp.trust_anchor.name #=> String
+    #   resp.trust_anchor.notification_settings #=> Array
+    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
+    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
+    #   resp.trust_anchor.notification_settings[0].enabled #=> Boolean
+    #   resp.trust_anchor.notification_settings[0].event #=> String, one of "CA_CERTIFICATE_EXPIRY", "END_ENTITY_CERTIFICATE_EXPIRY"
+    #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
     #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
     #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
     #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
@@ -979,11 +990,11 @@ module Aws::RolesAnywhere
       req.send_request(options)
     end
 
-    # Gets a Subject. A Subject associates a certificate identity with
-    # authentication attempts by CreateSession. The Subject resources stores
-    # audit information such as status of the last authentication attempt,
-    # the certificate data used in the attempt, and the last time the
-    # associated identity attempted authentication.
+    # Gets a *subject*, which associates a certificate identity with
+    # authentication attempts. The subject stores auditing information such
+    # as the status of the last authentication attempt, the certificate data
+    # used in the attempt, and the last time the associated identity
+    # attempted authentication.
     #
     # <b>Required permissions: </b> `rolesanywhere:GetSubject`.
     #
@@ -1053,6 +1064,12 @@ module Aws::RolesAnywhere
     #   resp.trust_anchor.created_at #=> Time
     #   resp.trust_anchor.enabled #=> Boolean
     #   resp.trust_anchor.name #=> String
+    #   resp.trust_anchor.notification_settings #=> Array
+    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
+    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
+    #   resp.trust_anchor.notification_settings[0].enabled #=> Boolean
+    #   resp.trust_anchor.notification_settings[0].event #=> String, one of "CA_CERTIFICATE_EXPIRY", "END_ENTITY_CERTIFICATE_EXPIRY"
+    #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
     #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
     #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
     #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
@@ -1069,15 +1086,15 @@ module Aws::RolesAnywhere
       req.send_request(options)
     end
 
-    # Imports the certificate revocation list (CRL). CRl is a list of
+    # Imports the certificate revocation list (CRL). A CRL is a list of
     # certificates that have been revoked by the issuing certificate
-    # Authority (CA). IAM Roles Anywhere validates against the crl list
-    # before issuing credentials.
+    # Authority (CA). IAM Roles Anywhere validates against the CRL before
+    # issuing credentials.
     #
     # <b>Required permissions: </b> `rolesanywhere:ImportCrl`.
     #
     # @option params [required, String, StringIO, File] :crl_data
-    #   The x509 v3 specified certificate revocation list
+    #   The x509 v3 specified certificate revocation list (CRL).
     #
     # @option params [Boolean] :enabled
     #   Specifies whether the certificate revocation list (CRL) is enabled.
@@ -1131,15 +1148,15 @@ module Aws::RolesAnywhere
       req.send_request(options)
     end
 
-    # Lists all Crls in the authenticated account and Amazon Web Services
-    # Region.
+    # Lists all certificate revocation lists (CRL) in the authenticated
+    # account and Amazon Web Services Region.
     #
     # <b>Required permissions: </b> `rolesanywhere:ListCrls`.
     #
     # @option params [String] :next_token
     #   A token that indicates where the output should continue from, if a
-    #   previous operation did not show all results. To get the next results,
-    #   call the operation again with this value.
+    #   previous request did not show all results. To get the next results,
+    #   make the request again with this value.
     #
     # @option params [Integer] :page_size
     #   The number of resources in the paginated list.
@@ -1187,8 +1204,8 @@ module Aws::RolesAnywhere
     #
     # @option params [String] :next_token
     #   A token that indicates where the output should continue from, if a
-    #   previous operation did not show all results. To get the next results,
-    #   call the operation again with this value.
+    #   previous request did not show all results. To get the next results,
+    #   make the request again with this value.
     #
     # @option params [Integer] :page_size
     #   The number of resources in the paginated list.
@@ -1242,8 +1259,8 @@ module Aws::RolesAnywhere
     #
     # @option params [String] :next_token
     #   A token that indicates where the output should continue from, if a
-    #   previous operation did not show all results. To get the next results,
-    #   call the operation again with this value.
+    #   previous request did not show all results. To get the next results,
+    #   make the request again with this value.
     #
     # @option params [Integer] :page_size
     #   The number of resources in the paginated list.
@@ -1322,8 +1339,8 @@ module Aws::RolesAnywhere
     #
     # @option params [String] :next_token
     #   A token that indicates where the output should continue from, if a
-    #   previous operation did not show all results. To get the next results,
-    #   call the operation again with this value.
+    #   previous request did not show all results. To get the next results,
+    #   make the request again with this value.
     #
     # @option params [Integer] :page_size
     #   The number of resources in the paginated list.
@@ -1349,6 +1366,12 @@ module Aws::RolesAnywhere
     #   resp.trust_anchors[0].created_at #=> Time
     #   resp.trust_anchors[0].enabled #=> Boolean
     #   resp.trust_anchors[0].name #=> String
+    #   resp.trust_anchors[0].notification_settings #=> Array
+    #   resp.trust_anchors[0].notification_settings[0].channel #=> String, one of "ALL"
+    #   resp.trust_anchors[0].notification_settings[0].configured_by #=> String
+    #   resp.trust_anchors[0].notification_settings[0].enabled #=> Boolean
+    #   resp.trust_anchors[0].notification_settings[0].event #=> String, one of "CA_CERTIFICATE_EXPIRY", "END_ENTITY_CERTIFICATE_EXPIRY"
+    #   resp.trust_anchors[0].notification_settings[0].threshold #=> Integer
     #   resp.trust_anchors[0].source.source_data.acm_pca_arn #=> String
     #   resp.trust_anchors[0].source.source_data.x509_certificate_data #=> String
     #   resp.trust_anchors[0].source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
@@ -1362,6 +1385,121 @@ module Aws::RolesAnywhere
     # @param [Hash] params ({})
     def list_trust_anchors(params = {}, options = {})
       req = build_request(:list_trust_anchors, params)
+      req.send_request(options)
+    end
+
+    # Attaches a list of *notification settings* to a trust anchor.
+    #
+    # A notification setting includes information such as event name,
+    # threshold, status of the notification setting, and the channel to
+    # notify.
+    #
+    # <b>Required permissions: </b> `rolesanywhere:PutNotificationSettings`.
+    #
+    # @option params [required, Array<Types::NotificationSetting>] :notification_settings
+    #   A list of notification settings to be associated to the trust anchor.
+    #
+    # @option params [required, String] :trust_anchor_id
+    #   The unique identifier of the trust anchor.
+    #
+    # @return [Types::PutNotificationSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutNotificationSettingsResponse#trust_anchor #trust_anchor} => Types::TrustAnchorDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_notification_settings({
+    #     notification_settings: [ # required
+    #       {
+    #         channel: "ALL", # accepts ALL
+    #         enabled: false, # required
+    #         event: "CA_CERTIFICATE_EXPIRY", # required, accepts CA_CERTIFICATE_EXPIRY, END_ENTITY_CERTIFICATE_EXPIRY
+    #         threshold: 1,
+    #       },
+    #     ],
+    #     trust_anchor_id: "Uuid", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.trust_anchor.created_at #=> Time
+    #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.name #=> String
+    #   resp.trust_anchor.notification_settings #=> Array
+    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
+    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
+    #   resp.trust_anchor.notification_settings[0].enabled #=> Boolean
+    #   resp.trust_anchor.notification_settings[0].event #=> String, one of "CA_CERTIFICATE_EXPIRY", "END_ENTITY_CERTIFICATE_EXPIRY"
+    #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
+    #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
+    #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
+    #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
+    #   resp.trust_anchor.trust_anchor_arn #=> String
+    #   resp.trust_anchor.trust_anchor_id #=> String
+    #   resp.trust_anchor.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/PutNotificationSettings AWS API Documentation
+    #
+    # @overload put_notification_settings(params = {})
+    # @param [Hash] params ({})
+    def put_notification_settings(params = {}, options = {})
+      req = build_request(:put_notification_settings, params)
+      req.send_request(options)
+    end
+
+    # Resets the *custom notification setting* to IAM Roles Anywhere default
+    # setting.
+    #
+    # <b>Required permissions: </b>
+    # `rolesanywhere:ResetNotificationSettings`.
+    #
+    # @option params [required, Array<Types::NotificationSettingKey>] :notification_setting_keys
+    #   A list of notification setting keys to reset. A notification setting
+    #   key includes the event and the channel.
+    #
+    # @option params [required, String] :trust_anchor_id
+    #   The unique identifier of the trust anchor.
+    #
+    # @return [Types::ResetNotificationSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResetNotificationSettingsResponse#trust_anchor #trust_anchor} => Types::TrustAnchorDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reset_notification_settings({
+    #     notification_setting_keys: [ # required
+    #       {
+    #         channel: "ALL", # accepts ALL
+    #         event: "CA_CERTIFICATE_EXPIRY", # required, accepts CA_CERTIFICATE_EXPIRY, END_ENTITY_CERTIFICATE_EXPIRY
+    #       },
+    #     ],
+    #     trust_anchor_id: "Uuid", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.trust_anchor.created_at #=> Time
+    #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.name #=> String
+    #   resp.trust_anchor.notification_settings #=> Array
+    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
+    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
+    #   resp.trust_anchor.notification_settings[0].enabled #=> Boolean
+    #   resp.trust_anchor.notification_settings[0].event #=> String, one of "CA_CERTIFICATE_EXPIRY", "END_ENTITY_CERTIFICATE_EXPIRY"
+    #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
+    #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
+    #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
+    #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
+    #   resp.trust_anchor.trust_anchor_arn #=> String
+    #   resp.trust_anchor.trust_anchor_id #=> String
+    #   resp.trust_anchor.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ResetNotificationSettings AWS API Documentation
+    #
+    # @overload reset_notification_settings(params = {})
+    # @param [Hash] params ({})
+    def reset_notification_settings(params = {}, options = {})
+      req = build_request(:reset_notification_settings, params)
       req.send_request(options)
     end
 
@@ -1426,15 +1564,15 @@ module Aws::RolesAnywhere
       req.send_request(options)
     end
 
-    # Updates the certificate revocation list (CRL). CRl is a list of
+    # Updates the certificate revocation list (CRL). A CRL is a list of
     # certificates that have been revoked by the issuing certificate
-    # Authority (CA). IAM Roles Anywhere validates against the crl list
-    # before issuing credentials.
+    # authority (CA). IAM Roles Anywhere validates against the CRL before
+    # issuing credentials.
     #
     # <b>Required permissions: </b> `rolesanywhere:UpdateCrl`.
     #
     # @option params [String, StringIO, File] :crl_data
-    #   The x509 v3 specified certificate revocation list
+    #   The x509 v3 specified certificate revocation list (CRL).
     #
     # @option params [required, String] :crl_id
     #   The unique identifier of the certificate revocation list (CRL).
@@ -1474,10 +1612,9 @@ module Aws::RolesAnywhere
       req.send_request(options)
     end
 
-    # Updates the profile. A profile is configuration resource to list the
-    # roles that RolesAnywhere service is trusted to assume. In addition, by
-    # applying a profile you can scope-down permissions with IAM managed
-    # policies.
+    # Updates a *profile*, a list of the roles that IAM Roles Anywhere
+    # service is trusted to assume. You use profiles to intersect
+    # permissions with IAM managed policies.
     #
     # <b>Required permissions: </b> `rolesanywhere:UpdateProfile`.
     #
@@ -1495,12 +1632,8 @@ module Aws::RolesAnywhere
     #   The unique identifier of the profile.
     #
     # @option params [Array<String>] :role_arns
-    #   A list of IAM roles that this profile can assume in a
-    #   [CreateSession][1] operation.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html
+    #   A list of IAM roles that this profile can assume in a temporary
+    #   credential request.
     #
     # @option params [String] :session_policy
     #   A session policy that applies to the trust boundary of the vended
@@ -1547,14 +1680,13 @@ module Aws::RolesAnywhere
       req.send_request(options)
     end
 
-    # Updates the trust anchor.You establish trust between IAM Roles
-    # Anywhere and your certificate authority (CA) by configuring a trust
-    # anchor. A Trust Anchor is defined either as a reference to a AWS
-    # Certificate Manager Private Certificate Authority (ACM PCA), or by
-    # uploading a Certificate Authority (CA) certificate. Your AWS workloads
-    # can authenticate with the trust anchor using certificates issued by
-    # the trusted Certificate Authority (CA) in exchange for temporary AWS
-    # credentials.
+    # Updates a trust anchor. You establish trust between IAM Roles Anywhere
+    # and your certificate authority (CA) by configuring a trust anchor. You
+    # can define a trust anchor as a reference to an Private Certificate
+    # Authority (Private CA) or by uploading a CA certificate. Your Amazon
+    # Web Services workloads can authenticate with the trust anchor using
+    # certificates issued by the CA in exchange for temporary Amazon Web
+    # Services credentials.
     #
     # <b>Required permissions: </b> `rolesanywhere:UpdateTrustAnchor`.
     #
@@ -1578,7 +1710,7 @@ module Aws::RolesAnywhere
     #     source: {
     #       source_data: {
     #         acm_pca_arn: "String",
-    #         x509_certificate_data: "String",
+    #         x509_certificate_data: "SourceDataX509CertificateDataString",
     #       },
     #       source_type: "AWS_ACM_PCA", # accepts AWS_ACM_PCA, CERTIFICATE_BUNDLE, SELF_SIGNED_REPOSITORY
     #     },
@@ -1590,6 +1722,12 @@ module Aws::RolesAnywhere
     #   resp.trust_anchor.created_at #=> Time
     #   resp.trust_anchor.enabled #=> Boolean
     #   resp.trust_anchor.name #=> String
+    #   resp.trust_anchor.notification_settings #=> Array
+    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
+    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
+    #   resp.trust_anchor.notification_settings[0].enabled #=> Boolean
+    #   resp.trust_anchor.notification_settings[0].event #=> String, one of "CA_CERTIFICATE_EXPIRY", "END_ENTITY_CERTIFICATE_EXPIRY"
+    #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
     #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
     #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
     #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
@@ -1619,7 +1757,7 @@ module Aws::RolesAnywhere
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rolesanywhere'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

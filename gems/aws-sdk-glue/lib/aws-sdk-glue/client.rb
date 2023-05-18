@@ -2797,6 +2797,9 @@ module Aws::Glue
     #
     #   If no context words are passed only a regular expression is checked.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A list of tags applied to the custom entity type.
+    #
     # @return [Types::CreateCustomEntityTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCustomEntityTypeResponse#name #name} => String
@@ -2807,6 +2810,9 @@ module Aws::Glue
     #     name: "NameString", # required
     #     regex_string: "NameString", # required
     #     context_words: ["NameString"],
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -11772,6 +11778,9 @@ module Aws::Glue
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A list of key-value pair tags.
+    #
     # @return [Types::ListCustomEntityTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListCustomEntityTypesResponse#custom_entity_types #custom_entity_types} => Array&lt;Types::CustomEntityType&gt;
@@ -11784,6 +11793,9 @@ module Aws::Glue
     #   resp = client.list_custom_entity_types({
     #     next_token: "PaginationToken",
     #     max_results: 1,
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -15740,7 +15752,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.136.0'
+      context[:gem_version] = '1.137.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

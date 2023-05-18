@@ -889,8 +889,9 @@ module Aws::Transfer
     #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/edit-server-config.html#configuring-servers-change-host-key
     #
     # @option params [Types::IdentityProviderDetails] :identity_provider_details
-    #   Required when `IdentityProviderType` is set to `AWS_DIRECTORY_SERVICE`
-    #   or `API_GATEWAY`. Accepts an array containing all of the information
+    #   Required when `IdentityProviderType` is set to
+    #   `AWS_DIRECTORY_SERVICE`, `Amazon Web Services_LAMBDA` or
+    #   `API_GATEWAY`. Accepts an array containing all of the information
     #   required to use a directory in `AWS_DIRECTORY_SERVICE` or invoke a
     #   customer-supplied authentication API, including the API Gateway URL.
     #   Not required when `IdentityProviderType` is set to `SERVICE_MANAGED`.
@@ -914,7 +915,7 @@ module Aws::Transfer
     #
     #   Use the `AWS_LAMBDA` value to directly use an Lambda function as your
     #   identity provider. If you choose this value, you must specify the ARN
-    #   for the Lambda function in the `Function` parameter or the
+    #   for the Lambda function in the `Function` parameter for the
     #   `IdentityProviderDetails` data type.
     #
     # @option params [String] :logging_role
@@ -1017,7 +1018,8 @@ module Aws::Transfer
     #   In addition to a workflow to execute when a file is uploaded
     #   completely, `WorkflowDetails` can also contain a workflow ID (and
     #   execution role) for a workflow to execute on partial upload. A partial
-    #   upload occurs when a file is open when the session disconnects.
+    #   upload occurs when the server session disconnects while the file is
+    #   still being uploaded.
     #
     # @return [Types::CreateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1042,6 +1044,7 @@ module Aws::Transfer
     #       invocation_role: "Role",
     #       directory_id: "DirectoryId",
     #       function: "Function",
+    #       sftp_authentication_methods: "PASSWORD", # accepts PASSWORD, PUBLIC_KEY, PUBLIC_KEY_OR_PASSWORD, PUBLIC_KEY_AND_PASSWORD
     #     },
     #     identity_provider_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, API_GATEWAY, AWS_DIRECTORY_SERVICE, AWS_LAMBDA
     #     logging_role: "Role",
@@ -1303,9 +1306,9 @@ module Aws::Transfer
     #   Specifies the steps (actions) to take if errors are encountered during
     #   execution of the workflow.
     #
-    #   <note markdown="1"> For custom steps, the lambda function needs to send `FAILURE` to the
+    #   <note markdown="1"> For custom steps, the Lambda function needs to send `FAILURE` to the
     #   call back API to kick off the exception steps. Additionally, if the
-    #   lambda does not send `SUCCESS` before it times out, the exception
+    #   Lambda does not send `SUCCESS` before it times out, the exception
     #   steps are executed.
     #
     #    </note>
@@ -1572,7 +1575,7 @@ module Aws::Transfer
       req.send_request(options)
     end
 
-    # Deletes the host key that's specified in the `HoskKeyId` parameter.
+    # Deletes the host key that's specified in the `HostKeyId` parameter.
     #
     # @option params [required, String] :server_id
     #   The identifier of the server that contains the host key that you are
@@ -1935,6 +1938,14 @@ module Aws::Transfer
     # You can use `DescribeExecution` to check the details of the execution
     # of the specified workflow.
     #
+    # <note markdown="1"> This API call only returns details for in-progress workflows.
+    #
+    #  If you provide an ID for an execution that is not in progress, or if
+    # the execution doesn't match the specified workflow ID, you receive a
+    # `ResourceNotFound` exception.
+    #
+    #  </note>
+    #
     # @option params [required, String] :execution_id
     #   A unique identifier for the execution of a workflow.
     #
@@ -2162,6 +2173,7 @@ module Aws::Transfer
     #   resp.server.identity_provider_details.invocation_role #=> String
     #   resp.server.identity_provider_details.directory_id #=> String
     #   resp.server.identity_provider_details.function #=> String
+    #   resp.server.identity_provider_details.sftp_authentication_methods #=> String, one of "PASSWORD", "PUBLIC_KEY", "PUBLIC_KEY_OR_PASSWORD", "PUBLIC_KEY_AND_PASSWORD"
     #   resp.server.identity_provider_type #=> String, one of "SERVICE_MANAGED", "API_GATEWAY", "AWS_DIRECTORY_SERVICE", "AWS_LAMBDA"
     #   resp.server.logging_role #=> String
     #   resp.server.post_authentication_login_banner #=> String
@@ -2470,9 +2482,9 @@ module Aws::Transfer
       req.send_request(options)
     end
 
-    # Adds a Secure Shell (SSH) public key to a user account identified by a
-    # `UserName` value assigned to the specific file transfer
-    # protocol-enabled server, identified by `ServerId`.
+    # Adds a Secure Shell (SSH) public key to a Transfer Family user
+    # identified by a `UserName` value assigned to the specific file
+    # transfer protocol-enabled server, identified by `ServerId`.
     #
     # The response returns the `UserName` value, the `ServerId` value, and
     # the name of the `SshPublicKeyId`.
@@ -2486,7 +2498,8 @@ module Aws::Transfer
     #   Transfer Family accepts RSA, ECDSA, and ED25519 keys.
     #
     # @option params [required, String] :user_name
-    #   The name of the user account that is assigned to one or more servers.
+    #   The name of the Transfer Family user that is assigned to one or more
+    #   servers.
     #
     # @return [Types::ImportSshPublicKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2716,7 +2729,12 @@ module Aws::Transfer
       req.send_request(options)
     end
 
-    # Lists all executions for the specified workflow.
+    # Lists all in-progress executions for the specified workflow.
+    #
+    # <note markdown="1"> If the specified workflow ID cannot be found, `ListExecutions` returns
+    # a `ResourceNotFound` exception.
+    #
+    #  </note>
     #
     # @option params [Integer] :max_results
     #   Specifies the maximum number of executions to return.
@@ -3086,7 +3104,8 @@ module Aws::Transfer
       req.send_request(options)
     end
 
-    # Lists all of your workflows.
+    # Lists all workflows associated with your Amazon Web Services account
+    # for your current region.
     #
     # @option params [Integer] :max_results
     #   Specifies the maximum number of workflows to return.
@@ -3281,8 +3300,8 @@ module Aws::Transfer
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   Key-value pairs assigned to ARNs that you can use to group and search
-    #   for resources by type. You can attach this metadata to user accounts
-    #   for any purpose.
+    #   for resources by type. You can attach this metadata to resources
+    #   (servers, users, workflows, and so on) for any purpose.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3318,10 +3337,16 @@ module Aws::Transfer
     # The `ServerId` and `UserName` parameters are required. The
     # `ServerProtocol`, `SourceIp`, and `UserPassword` are all optional.
     #
-    # <note markdown="1"> You cannot use `TestIdentityProvider` if the `IdentityProviderType` of
-    # your server is `SERVICE_MANAGED`.
+    # Note the following:
     #
-    #  </note>
+    # * You cannot use `TestIdentityProvider` if the `IdentityProviderType`
+    #   of your server is `SERVICE_MANAGED`.
+    #
+    # * `TestIdentityProvider` does not work with keys: it only accepts
+    #   passwords.
+    #
+    # * `TestIdentityProvider` can test the password operation for a custom
+    #   Identity Provider that handles keys and passwords.
     #
     # * If you provide any incorrect values for any parameters, the
     #   `Response` field is empty.
@@ -3338,7 +3363,11 @@ module Aws::Transfer
     #   error:
     #
     #   `An error occurred (ResourceNotFoundException) when calling the
-    #   TestIdentityProvider operation: Unknown server`
+    #   TestIdentityProvider operation: Unknown server`.
+    #
+    #   It is possible your sever is in a different region. You can specify
+    #   a region by adding the following: `--region region-code`, such as
+    #   `--region us-east-2` to specify a server in **US East (Ohio)**.
     #
     # @option params [required, String] :server_id
     #   A system-assigned identifier for a specific server. That server's
@@ -3355,14 +3384,16 @@ module Aws::Transfer
     #
     #   * File Transfer Protocol (FTP)
     #
+    #   * Applicability Statement 2 (AS2)
+    #
     # @option params [String] :source_ip
-    #   The source IP address of the user account to be tested.
+    #   The source IP address of the account to be tested.
     #
     # @option params [required, String] :user_name
-    #   The name of the user account to be tested.
+    #   The name of the account to be tested.
     #
     # @option params [String] :user_password
-    #   The password of the user account to be tested.
+    #   The password of the account to be tested.
     #
     # @return [Types::TestIdentityProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4060,7 +4091,7 @@ module Aws::Transfer
     #
     # @option params [required, String] :server_id
     #   A system-assigned unique identifier for a server instance that the
-    #   user account is assigned to.
+    #   Transfer Family user is assigned to.
     #
     # @option params [Types::WorkflowDetails] :workflow_details
     #   Specifies the workflow ID for the workflow to assign and the execution
@@ -4069,7 +4100,8 @@ module Aws::Transfer
     #   In addition to a workflow to execute when a file is uploaded
     #   completely, `WorkflowDetails` can also contain a workflow ID (and
     #   execution role) for a workflow to execute on partial upload. A partial
-    #   upload occurs when a file is open when the session disconnects.
+    #   upload occurs when the server session disconnects while the file is
+    #   still being uploaded.
     #
     #   To remove an associated workflow from a server, you can provide an
     #   empty `OnUpload` object, as in the following example.
@@ -4105,6 +4137,7 @@ module Aws::Transfer
     #       invocation_role: "Role",
     #       directory_id: "DirectoryId",
     #       function: "Function",
+    #       sftp_authentication_methods: "PASSWORD", # accepts PASSWORD, PUBLIC_KEY, PUBLIC_KEY_OR_PASSWORD, PUBLIC_KEY_AND_PASSWORD
     #     },
     #     logging_role: "NullableRole",
     #     post_authentication_login_banner: "PostAuthenticationLoginBanner",
@@ -4234,8 +4267,8 @@ module Aws::Transfer
     #   users' transfer requests.
     #
     # @option params [required, String] :server_id
-    #   A system-assigned unique identifier for a server instance that the
-    #   user account is assigned to.
+    #   A system-assigned unique identifier for a Transfer Family server
+    #   instance that the user is assigned to.
     #
     # @option params [required, String] :user_name
     #   A unique string that identifies a user and is associated with a server
@@ -4299,7 +4332,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

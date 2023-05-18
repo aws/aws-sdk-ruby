@@ -508,7 +508,7 @@ module Aws::STS
       :policy_arns,
       :policy,
       :duration_seconds)
-      SENSITIVE = []
+      SENSITIVE = [:saml_assertion]
       include Aws::Structure
     end
 
@@ -780,7 +780,7 @@ module Aws::STS
       :policy_arns,
       :policy,
       :duration_seconds)
-      SENSITIVE = []
+      SENSITIVE = [:web_identity_token]
       include Aws::Structure
     end
 
@@ -941,7 +941,7 @@ module Aws::STS
       :secret_access_key,
       :session_token,
       :expiration)
-      SENSITIVE = []
+      SENSITIVE = [:secret_access_key]
       include Aws::Structure
     end
 

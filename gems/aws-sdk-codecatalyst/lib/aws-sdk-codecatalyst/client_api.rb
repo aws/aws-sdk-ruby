@@ -40,7 +40,10 @@ module Aws::CodeCatalyst
     DevEnvironmentRepositorySummaries = Shapes::ListShape.new(name: 'DevEnvironmentRepositorySummaries')
     DevEnvironmentRepositorySummary = Shapes::StructureShape.new(name: 'DevEnvironmentRepositorySummary')
     DevEnvironmentSessionConfiguration = Shapes::StructureShape.new(name: 'DevEnvironmentSessionConfiguration')
+    DevEnvironmentSessionSummary = Shapes::StructureShape.new(name: 'DevEnvironmentSessionSummary')
+    DevEnvironmentSessionSummaryIdString = Shapes::StringShape.new(name: 'DevEnvironmentSessionSummaryIdString')
     DevEnvironmentSessionType = Shapes::StringShape.new(name: 'DevEnvironmentSessionType')
+    DevEnvironmentSessionsSummaryList = Shapes::ListShape.new(name: 'DevEnvironmentSessionsSummaryList')
     DevEnvironmentStatus = Shapes::StringShape.new(name: 'DevEnvironmentStatus')
     DevEnvironmentSummary = Shapes::StructureShape.new(name: 'DevEnvironmentSummary')
     DevEnvironmentSummaryAliasString = Shapes::StringShape.new(name: 'DevEnvironmentSummaryAliasString')
@@ -87,6 +90,10 @@ module Aws::CodeCatalyst
     ListAccessTokensRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAccessTokensRequestMaxResultsInteger')
     ListAccessTokensRequestNextTokenString = Shapes::StringShape.new(name: 'ListAccessTokensRequestNextTokenString')
     ListAccessTokensResponse = Shapes::StructureShape.new(name: 'ListAccessTokensResponse')
+    ListDevEnvironmentSessionsRequest = Shapes::StructureShape.new(name: 'ListDevEnvironmentSessionsRequest')
+    ListDevEnvironmentSessionsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListDevEnvironmentSessionsRequestMaxResultsInteger')
+    ListDevEnvironmentSessionsRequestNextTokenString = Shapes::StringShape.new(name: 'ListDevEnvironmentSessionsRequestNextTokenString')
+    ListDevEnvironmentSessionsResponse = Shapes::StructureShape.new(name: 'ListDevEnvironmentSessionsResponse')
     ListDevEnvironmentsRequest = Shapes::StructureShape.new(name: 'ListDevEnvironmentsRequest')
     ListDevEnvironmentsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListDevEnvironmentsRequestMaxResultsInteger')
     ListDevEnvironmentsRequestNextTokenString = Shapes::StringShape.new(name: 'ListDevEnvironmentsRequestNextTokenString')
@@ -260,6 +267,15 @@ module Aws::CodeCatalyst
     DevEnvironmentSessionConfiguration.add_member(:execute_command_session_configuration, Shapes::ShapeRef.new(shape: ExecuteCommandSessionConfiguration, location_name: "executeCommandSessionConfiguration"))
     DevEnvironmentSessionConfiguration.struct_class = Types::DevEnvironmentSessionConfiguration
 
+    DevEnvironmentSessionSummary.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "spaceName"))
+    DevEnvironmentSessionSummary.add_member(:project_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "projectName"))
+    DevEnvironmentSessionSummary.add_member(:dev_environment_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "devEnvironmentId"))
+    DevEnvironmentSessionSummary.add_member(:started_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "startedTime"))
+    DevEnvironmentSessionSummary.add_member(:id, Shapes::ShapeRef.new(shape: DevEnvironmentSessionSummaryIdString, required: true, location_name: "id"))
+    DevEnvironmentSessionSummary.struct_class = Types::DevEnvironmentSessionSummary
+
+    DevEnvironmentSessionsSummaryList.member = Shapes::ShapeRef.new(shape: DevEnvironmentSessionSummary)
+
     DevEnvironmentSummary.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, location_name: "spaceName"))
     DevEnvironmentSummary.add_member(:project_name, Shapes::ShapeRef.new(shape: NameString, location_name: "projectName"))
     DevEnvironmentSummary.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "id"))
@@ -401,6 +417,17 @@ module Aws::CodeCatalyst
     ListAccessTokensResponse.add_member(:items, Shapes::ShapeRef.new(shape: AccessTokenSummaries, required: true, location_name: "items"))
     ListAccessTokensResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListAccessTokensResponse.struct_class = Types::ListAccessTokensResponse
+
+    ListDevEnvironmentSessionsRequest.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "spaceName"))
+    ListDevEnvironmentSessionsRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "projectName"))
+    ListDevEnvironmentSessionsRequest.add_member(:dev_environment_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "devEnvironmentId"))
+    ListDevEnvironmentSessionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListDevEnvironmentSessionsRequestNextTokenString, location_name: "nextToken"))
+    ListDevEnvironmentSessionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListDevEnvironmentSessionsRequestMaxResultsInteger, location_name: "maxResults"))
+    ListDevEnvironmentSessionsRequest.struct_class = Types::ListDevEnvironmentSessionsRequest
+
+    ListDevEnvironmentSessionsResponse.add_member(:items, Shapes::ShapeRef.new(shape: DevEnvironmentSessionsSummaryList, required: true, location_name: "items"))
+    ListDevEnvironmentSessionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListDevEnvironmentSessionsResponse.struct_class = Types::ListDevEnvironmentSessionsResponse
 
     ListDevEnvironmentsRequest.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "spaceName"))
     ListDevEnvironmentsRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: NameString, required: true, location: "uri", location_name: "projectName"))
@@ -803,6 +830,26 @@ module Aws::CodeCatalyst
         o.http_request_uri = "/v1/accessTokens"
         o.input = Shapes::ShapeRef.new(shape: ListAccessTokensRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAccessTokensResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_dev_environment_sessions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDevEnvironmentSessions"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments/{devEnvironmentId}/sessions"
+        o.input = Shapes::ShapeRef.new(shape: ListDevEnvironmentSessionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDevEnvironmentSessionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

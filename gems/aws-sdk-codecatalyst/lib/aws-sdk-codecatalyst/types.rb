@@ -463,6 +463,45 @@ module Aws::CodeCatalyst
       include Aws::Structure
     end
 
+    # Information about active sessions for a Dev Environment.
+    #
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project in the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] dev_environment_id
+    #   The system-generated unique ID of the Dev Environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_time
+    #   The date and time the session started, in coordinated universal time
+    #   (UTC) timestamp format as specified in [RFC 3339][1]
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   @return [Time]
+    #
+    # @!attribute [rw] id
+    #   The system-generated unique ID of the Dev Environment session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/DevEnvironmentSessionSummary AWS API Documentation
+    #
+    class DevEnvironmentSessionSummary < Struct.new(
+      :space_name,
+      :project_name,
+      :dev_environment_id,
+      :started_time,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a Dev Environment.
     #
     # @!attribute [rw] space_name
@@ -1099,6 +1138,60 @@ module Aws::CodeCatalyst
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/ListAccessTokensResponse AWS API Documentation
     #
     class ListAccessTokensResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project in the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] dev_environment_id
+    #   The system-generated unique ID of the Dev Environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token returned from a call to this API to indicate the next batch
+    #   of results to return, if any.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to show in a single call to this API.
+    #   If the number of results is larger than the number you specified,
+    #   the response will include a `NextToken` element, which you can use
+    #   to obtain additional results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/ListDevEnvironmentSessionsRequest AWS API Documentation
+    #
+    class ListDevEnvironmentSessionsRequest < Struct.new(
+      :space_name,
+      :project_name,
+      :dev_environment_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   Information about each session retrieved in the list.
+    #   @return [Array<Types::DevEnvironmentSessionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token returned from a call to this API to indicate the next batch
+    #   of results to return, if any.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/ListDevEnvironmentSessionsResponse AWS API Documentation
+    #
+    class ListDevEnvironmentSessionsResponse < Struct.new(
       :items,
       :next_token)
       SENSITIVE = []

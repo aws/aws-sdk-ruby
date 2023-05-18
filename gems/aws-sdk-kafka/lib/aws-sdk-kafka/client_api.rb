@@ -779,7 +779,7 @@ module Aws::Kafka
     RebootBrokerResponse.add_member(:cluster_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterOperationArn"))
     RebootBrokerResponse.struct_class = Types::RebootBrokerResponse
 
-    RejectClientVpcConnectionRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location: "uri", location_name: "clusterArn"))
+    RejectClientVpcConnectionRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
     RejectClientVpcConnectionRequest.add_member(:vpc_connection_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "vpcConnectionArn"))
     RejectClientVpcConnectionRequest.struct_class = Types::RejectClientVpcConnectionRequest
 

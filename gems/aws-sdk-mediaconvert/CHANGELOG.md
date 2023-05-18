@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2023-05-18)
+------------------
+
+* Feature - This release introduces a new MXF Profile for XDCAM which is strictly compliant with the SMPTE RDD 9 standard and improved handling of output name modifiers.
+
 1.105.0 (2023-04-24)
 ------------------
 

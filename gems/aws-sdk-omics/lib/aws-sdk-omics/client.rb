@@ -368,6 +368,32 @@ module Aws::Omics
 
     # @!group API Operations
 
+    # Stops a multipart upload.
+    #
+    # @option params [required, String] :sequence_store_id
+    #   The sequence store ID for the store involved in the multipart upload.
+    #
+    # @option params [required, String] :upload_id
+    #   The ID for the multipart upload.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.abort_multipart_read_set_upload({
+    #     sequence_store_id: "SequenceStoreId", # required
+    #     upload_id: "UploadId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/AbortMultipartReadSetUpload AWS API Documentation
+    #
+    # @overload abort_multipart_read_set_upload(params = {})
+    # @param [Hash] params ({})
+    def abort_multipart_read_set_upload(params = {}, options = {})
+      req = build_request(:abort_multipart_read_set_upload, params)
+      req.send_request(options)
+    end
+
     # Deletes one or more read sets.
     #
     # @option params [required, Array<String>] :ids
@@ -390,8 +416,8 @@ module Aws::Omics
     # @example Response structure
     #
     #   resp.errors #=> Array
-    #   resp.errors[0].code #=> String
     #   resp.errors[0].id #=> String
+    #   resp.errors[0].code #=> String
     #   resp.errors[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/BatchDeleteReadSet AWS API Documentation
@@ -469,16 +495,62 @@ module Aws::Omics
       req.send_request(options)
     end
 
+    # Concludes a multipart upload once you have uploaded all the
+    # components.
+    #
+    # @option params [required, String] :sequence_store_id
+    #   The sequence store ID for the store involved in the multipart upload.
+    #
+    # @option params [required, String] :upload_id
+    #   The ID for the multipart upload.
+    #
+    # @option params [required, Array<Types::CompleteReadSetUploadPartListItem>] :parts
+    #   The individual uploads or parts of a multipart upload.
+    #
+    # @return [Types::CompleteMultipartReadSetUploadResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CompleteMultipartReadSetUploadResponse#read_set_id #read_set_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.complete_multipart_read_set_upload({
+    #     sequence_store_id: "SequenceStoreId", # required
+    #     upload_id: "UploadId", # required
+    #     parts: [ # required
+    #       {
+    #         part_number: 1, # required
+    #         part_source: "SOURCE1", # required, accepts SOURCE1, SOURCE2
+    #         checksum: "String", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.read_set_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CompleteMultipartReadSetUpload AWS API Documentation
+    #
+    # @overload complete_multipart_read_set_upload(params = {})
+    # @param [Hash] params ({})
+    def complete_multipart_read_set_upload(params = {}, options = {})
+      req = build_request(:complete_multipart_read_set_upload, params)
+      req.send_request(options)
+    end
+
     # Creates an annotation store.
     #
-    # @option params [String] :description
-    #   A description for the store.
+    # @option params [Types::ReferenceItem] :reference
+    #   The genome reference for the store's annotations.
     #
     # @option params [String] :name
     #   A name for the store.
     #
-    # @option params [Types::ReferenceItem] :reference
-    #   The genome reference for the store's annotations.
+    # @option params [String] :description
+    #   A description for the store.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags for the store.
     #
     # @option params [Types::SseConfig] :sse_config
     #   Server-side encryption (SSE) settings for the store.
@@ -489,30 +561,30 @@ module Aws::Omics
     # @option params [Types::StoreOptions] :store_options
     #   File parsing options for the annotation store.
     #
-    # @option params [Hash<String,String>] :tags
-    #   Tags for the store.
-    #
     # @return [Types::CreateAnnotationStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateAnnotationStoreResponse#creation_time #creation_time} => Time
     #   * {Types::CreateAnnotationStoreResponse#id #id} => String
-    #   * {Types::CreateAnnotationStoreResponse#name #name} => String
     #   * {Types::CreateAnnotationStoreResponse#reference #reference} => Types::ReferenceItem
-    #   * {Types::CreateAnnotationStoreResponse#status #status} => String
     #   * {Types::CreateAnnotationStoreResponse#store_format #store_format} => String
     #   * {Types::CreateAnnotationStoreResponse#store_options #store_options} => Types::StoreOptions
+    #   * {Types::CreateAnnotationStoreResponse#status #status} => String
+    #   * {Types::CreateAnnotationStoreResponse#name #name} => String
+    #   * {Types::CreateAnnotationStoreResponse#creation_time #creation_time} => Time
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_annotation_store({
-    #     description: "StoreDescription",
-    #     name: "CreateAnnotationStoreRequestNameString",
     #     reference: {
     #       reference_arn: "ReferenceArn",
     #     },
+    #     name: "CreateAnnotationStoreRequestNameString",
+    #     description: "StoreDescription",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #     sse_config: {
-    #       key_arn: "SseConfigKeyArnString",
     #       type: "KMS", # required, accepts KMS
+    #       key_arn: "SseConfigKeyArnString",
     #     },
     #     store_format: "GFF", # required, accepts GFF, TSV, VCF
     #     store_options: {
@@ -528,18 +600,12 @@ module Aws::Omics
     #         ],
     #       },
     #     },
-    #     tags: {
-    #       "TagKey" => "TagValue",
-    #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.creation_time #=> Time
     #   resp.id #=> String
-    #   resp.name #=> String
     #   resp.reference.reference_arn #=> String
-    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
     #   resp.store_format #=> String, one of "GFF", "TSV", "VCF"
     #   resp.store_options.tsv_store_options.annotation_type #=> String, one of "GENERIC", "CHR_POS", "CHR_POS_REF_ALT", "CHR_START_END_ONE_BASE", "CHR_START_END_REF_ALT_ONE_BASE", "CHR_START_END_ZERO_BASE", "CHR_START_END_REF_ALT_ZERO_BASE"
     #   resp.store_options.tsv_store_options.format_to_header #=> Hash
@@ -547,6 +613,9 @@ module Aws::Omics
     #   resp.store_options.tsv_store_options.schema #=> Array
     #   resp.store_options.tsv_store_options.schema[0] #=> Hash
     #   resp.store_options.tsv_store_options.schema[0]["SchemaItemKeyString"] #=> String, one of "LONG", "INT", "STRING", "FLOAT", "DOUBLE", "BOOLEAN"
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
+    #   resp.name #=> String
+    #   resp.creation_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateAnnotationStore AWS API Documentation
     #
@@ -557,43 +626,66 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Creates a reference store.
+    # Begins a multipart read set upload.
+    #
+    # @option params [required, String] :sequence_store_id
+    #   The sequence store ID for the store that is the destination of the
+    #   multipart uploads.
     #
     # @option params [String] :client_token
-    #   To ensure that requests don't run multiple times, specify a unique
-    #   token for each request.
+    #   An idempotency token that can be used to avoid triggering multiple
+    #   multipart uploads.
     #
-    # @option params [String] :description
-    #   A description for the store.
+    # @option params [required, String] :source_file_type
+    #   The type of file being uploaded.
+    #
+    # @option params [required, String] :subject_id
+    #   The source's subject ID.
+    #
+    # @option params [required, String] :sample_id
+    #   The source's sample ID.
+    #
+    # @option params [String] :generated_from
+    #   Where the source originated.
+    #
+    # @option params [required, String] :reference_arn
+    #   The ARN of the reference.
     #
     # @option params [required, String] :name
-    #   A name for the store.
+    #   The name of the read set.
     #
-    # @option params [Types::SseConfig] :sse_config
-    #   Server-side encryption (SSE) settings for the store.
+    # @option params [String] :description
+    #   The description of the read set.
     #
     # @option params [Hash<String,String>] :tags
-    #   Tags for the store.
+    #   Any tags to add to the read set.
     #
-    # @return [Types::CreateReferenceStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    # @return [Types::CreateMultipartReadSetUploadResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateReferenceStoreResponse#arn #arn} => String
-    #   * {Types::CreateReferenceStoreResponse#creation_time #creation_time} => Time
-    #   * {Types::CreateReferenceStoreResponse#description #description} => String
-    #   * {Types::CreateReferenceStoreResponse#id #id} => String
-    #   * {Types::CreateReferenceStoreResponse#name #name} => String
-    #   * {Types::CreateReferenceStoreResponse#sse_config #sse_config} => Types::SseConfig
+    #   * {Types::CreateMultipartReadSetUploadResponse#sequence_store_id #sequence_store_id} => String
+    #   * {Types::CreateMultipartReadSetUploadResponse#upload_id #upload_id} => String
+    #   * {Types::CreateMultipartReadSetUploadResponse#source_file_type #source_file_type} => String
+    #   * {Types::CreateMultipartReadSetUploadResponse#subject_id #subject_id} => String
+    #   * {Types::CreateMultipartReadSetUploadResponse#sample_id #sample_id} => String
+    #   * {Types::CreateMultipartReadSetUploadResponse#generated_from #generated_from} => String
+    #   * {Types::CreateMultipartReadSetUploadResponse#reference_arn #reference_arn} => String
+    #   * {Types::CreateMultipartReadSetUploadResponse#name #name} => String
+    #   * {Types::CreateMultipartReadSetUploadResponse#description #description} => String
+    #   * {Types::CreateMultipartReadSetUploadResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::CreateMultipartReadSetUploadResponse#creation_time #creation_time} => Time
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.create_reference_store({
+    #   resp = client.create_multipart_read_set_upload({
+    #     sequence_store_id: "SequenceStoreId", # required
     #     client_token: "ClientToken",
-    #     description: "ReferenceStoreDescription",
-    #     name: "ReferenceStoreName", # required
-    #     sse_config: {
-    #       key_arn: "SseConfigKeyArnString",
-    #       type: "KMS", # required, accepts KMS
-    #     },
+    #     source_file_type: "FASTQ", # required, accepts FASTQ, BAM, CRAM
+    #     subject_id: "SubjectId", # required
+    #     sample_id: "SampleId", # required
+    #     generated_from: "GeneratedFrom",
+    #     reference_arn: "ReferenceArn", # required
+    #     name: "ReadSetName", # required
+    #     description: "ReadSetDescription",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -601,13 +693,79 @@ module Aws::Omics
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
-    #   resp.creation_time #=> Time
-    #   resp.description #=> String
-    #   resp.id #=> String
+    #   resp.sequence_store_id #=> String
+    #   resp.upload_id #=> String
+    #   resp.source_file_type #=> String, one of "FASTQ", "BAM", "CRAM"
+    #   resp.subject_id #=> String
+    #   resp.sample_id #=> String
+    #   resp.generated_from #=> String
+    #   resp.reference_arn #=> String
     #   resp.name #=> String
-    #   resp.sse_config.key_arn #=> String
+    #   resp.description #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateMultipartReadSetUpload AWS API Documentation
+    #
+    # @overload create_multipart_read_set_upload(params = {})
+    # @param [Hash] params ({})
+    def create_multipart_read_set_upload(params = {}, options = {})
+      req = build_request(:create_multipart_read_set_upload, params)
+      req.send_request(options)
+    end
+
+    # Creates a reference store.
+    #
+    # @option params [required, String] :name
+    #   A name for the store.
+    #
+    # @option params [String] :description
+    #   A description for the store.
+    #
+    # @option params [Types::SseConfig] :sse_config
+    #   Server-side encryption (SSE) settings for the store.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags for the store.
+    #
+    # @option params [String] :client_token
+    #   To ensure that requests don't run multiple times, specify a unique
+    #   token for each request.
+    #
+    # @return [Types::CreateReferenceStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateReferenceStoreResponse#id #id} => String
+    #   * {Types::CreateReferenceStoreResponse#arn #arn} => String
+    #   * {Types::CreateReferenceStoreResponse#name #name} => String
+    #   * {Types::CreateReferenceStoreResponse#description #description} => String
+    #   * {Types::CreateReferenceStoreResponse#sse_config #sse_config} => Types::SseConfig
+    #   * {Types::CreateReferenceStoreResponse#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_reference_store({
+    #     name: "ReferenceStoreName", # required
+    #     description: "ReferenceStoreDescription",
+    #     sse_config: {
+    #       type: "KMS", # required, accepts KMS
+    #       key_arn: "SseConfigKeyArnString",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
     #   resp.sse_config.type #=> String, one of "KMS"
+    #   resp.sse_config.key_arn #=> String
+    #   resp.creation_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateReferenceStore AWS API Documentation
     #
@@ -620,17 +778,20 @@ module Aws::Omics
 
     # Creates a run group.
     #
+    # @option params [String] :name
+    #   A name for the group.
+    #
     # @option params [Integer] :max_cpus
     #   The maximum number of CPUs to use in the group.
-    #
-    # @option params [Integer] :max_duration
-    #   A maximum run time for the group in minutes.
     #
     # @option params [Integer] :max_runs
     #   The maximum number of concurrent runs for the group.
     #
-    # @option params [String] :name
-    #   A name for the group.
+    # @option params [Integer] :max_duration
+    #   A maximum run time for the group in minutes.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags for the group.
     #
     # @option params [required, String] :request_id
     #   To ensure that requests don't run multiple times, specify a unique ID
@@ -639,8 +800,8 @@ module Aws::Omics
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [Hash<String,String>] :tags
-    #   Tags for the group.
+    # @option params [Integer] :max_gpus
+    #   The maximum GPUs that can be used by a run group.
     #
     # @return [Types::CreateRunGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -651,14 +812,15 @@ module Aws::Omics
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_run_group({
-    #     max_cpus: 1,
-    #     max_duration: 1,
-    #     max_runs: 1,
     #     name: "RunGroupName",
-    #     request_id: "RunGroupRequestId", # required
+    #     max_cpus: 1,
+    #     max_runs: 1,
+    #     max_duration: 1,
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     request_id: "RunGroupRequestId", # required
+    #     max_gpus: 1,
     #   })
     #
     # @example Response structure
@@ -679,15 +841,11 @@ module Aws::Omics
 
     # Creates a sequence store.
     #
-    # @option params [String] :client_token
-    #   To ensure that requests don't run multiple times, specify a unique
-    #   token for each request.
+    # @option params [required, String] :name
+    #   A name for the store.
     #
     # @option params [String] :description
     #   A description for the store.
-    #
-    # @option params [required, String] :name
-    #   A name for the store.
     #
     # @option params [Types::SseConfig] :sse_config
     #   Server-side encryption (SSE) settings for the store.
@@ -695,39 +853,50 @@ module Aws::Omics
     # @option params [Hash<String,String>] :tags
     #   Tags for the store.
     #
+    # @option params [String] :client_token
+    #   To ensure that requests don't run multiple times, specify a unique
+    #   token for each request.
+    #
+    # @option params [String] :fallback_location
+    #   An S3 location that is used to store files that have failed a direct
+    #   upload.
+    #
     # @return [Types::CreateSequenceStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateSequenceStoreResponse#arn #arn} => String
-    #   * {Types::CreateSequenceStoreResponse#creation_time #creation_time} => Time
-    #   * {Types::CreateSequenceStoreResponse#description #description} => String
     #   * {Types::CreateSequenceStoreResponse#id #id} => String
+    #   * {Types::CreateSequenceStoreResponse#arn #arn} => String
     #   * {Types::CreateSequenceStoreResponse#name #name} => String
+    #   * {Types::CreateSequenceStoreResponse#description #description} => String
     #   * {Types::CreateSequenceStoreResponse#sse_config #sse_config} => Types::SseConfig
+    #   * {Types::CreateSequenceStoreResponse#creation_time #creation_time} => Time
+    #   * {Types::CreateSequenceStoreResponse#fallback_location #fallback_location} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_sequence_store({
-    #     client_token: "ClientToken",
-    #     description: "SequenceStoreDescription",
     #     name: "SequenceStoreName", # required
+    #     description: "SequenceStoreDescription",
     #     sse_config: {
-    #       key_arn: "SseConfigKeyArnString",
     #       type: "KMS", # required, accepts KMS
+    #       key_arn: "SseConfigKeyArnString",
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     client_token: "ClientToken",
+    #     fallback_location: "S3Destination",
     #   })
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
-    #   resp.creation_time #=> Time
-    #   resp.description #=> String
     #   resp.id #=> String
+    #   resp.arn #=> String
     #   resp.name #=> String
-    #   resp.sse_config.key_arn #=> String
+    #   resp.description #=> String
     #   resp.sse_config.type #=> String, one of "KMS"
+    #   resp.sse_config.key_arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.fallback_location #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateSequenceStore AWS API Documentation
     #
@@ -740,53 +909,53 @@ module Aws::Omics
 
     # Creates a variant store.
     #
-    # @option params [String] :description
-    #   A description for the store.
+    # @option params [required, Types::ReferenceItem] :reference
+    #   The genome reference for the store's variants.
     #
     # @option params [String] :name
     #   A name for the store.
     #
-    # @option params [required, Types::ReferenceItem] :reference
-    #   The genome reference for the store's variants.
-    #
-    # @option params [Types::SseConfig] :sse_config
-    #   Server-side encryption (SSE) settings for the store.
+    # @option params [String] :description
+    #   A description for the store.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags for the store.
     #
+    # @option params [Types::SseConfig] :sse_config
+    #   Server-side encryption (SSE) settings for the store.
+    #
     # @return [Types::CreateVariantStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateVariantStoreResponse#creation_time #creation_time} => Time
     #   * {Types::CreateVariantStoreResponse#id #id} => String
-    #   * {Types::CreateVariantStoreResponse#name #name} => String
     #   * {Types::CreateVariantStoreResponse#reference #reference} => Types::ReferenceItem
     #   * {Types::CreateVariantStoreResponse#status #status} => String
+    #   * {Types::CreateVariantStoreResponse#name #name} => String
+    #   * {Types::CreateVariantStoreResponse#creation_time #creation_time} => Time
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_variant_store({
-    #     description: "StoreDescription",
-    #     name: "CreateVariantStoreRequestNameString",
     #     reference: { # required
     #       reference_arn: "ReferenceArn",
     #     },
-    #     sse_config: {
-    #       key_arn: "SseConfigKeyArnString",
-    #       type: "KMS", # required, accepts KMS
-    #     },
+    #     name: "CreateVariantStoreRequestNameString",
+    #     description: "StoreDescription",
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     sse_config: {
+    #       type: "KMS", # required, accepts KMS
+    #       key_arn: "SseConfigKeyArnString",
     #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.creation_time #=> Time
     #   resp.id #=> String
-    #   resp.name #=> String
     #   resp.reference.reference_arn #=> String
     #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
+    #   resp.name #=> String
+    #   resp.creation_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateVariantStore AWS API Documentation
     #
@@ -799,11 +968,8 @@ module Aws::Omics
 
     # Creates a workflow.
     #
-    # @option params [String] :definition_uri
-    #   The URI of a definition for the workflow.
-    #
-    # @option params [String, StringIO, File] :definition_zip
-    #   A ZIP archive for the workflow.
+    # @option params [String] :name
+    #   A name for the workflow.
     #
     # @option params [String] :description
     #   A description for the workflow.
@@ -811,14 +977,23 @@ module Aws::Omics
     # @option params [String] :engine
     #   An engine for the workflow.
     #
+    # @option params [String, StringIO, File] :definition_zip
+    #   A ZIP archive for the workflow.
+    #
+    # @option params [String] :definition_uri
+    #   The URI of a definition for the workflow.
+    #
     # @option params [String] :main
     #   The path of the main definition file for the workflow.
     #
-    # @option params [String] :name
-    #   A name for the workflow.
-    #
     # @option params [Hash<String,Types::WorkflowParameter>] :parameter_template
     #   A parameter template for the workflow.
+    #
+    # @option params [Integer] :storage_capacity
+    #   A storage capacity for the workflow in gigabytes.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags for the workflow.
     #
     # @option params [required, String] :request_id
     #   To ensure that requests don't run multiple times, specify a unique ID
@@ -827,11 +1002,8 @@ module Aws::Omics
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [Integer] :storage_capacity
-    #   A storage capacity for the workflow in gigabytes.
-    #
-    # @option params [Hash<String,String>] :tags
-    #   Tags for the workflow.
+    # @option params [String] :accelerators
+    #   The computational accelerator specified to run the workflow.
     #
     # @return [Types::CreateWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -843,30 +1015,31 @@ module Aws::Omics
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_workflow({
-    #     definition_uri: "WorkflowDefinition",
-    #     definition_zip: "data",
+    #     name: "WorkflowName",
     #     description: "WorkflowDescription",
     #     engine: "WDL", # accepts WDL, NEXTFLOW
+    #     definition_zip: "data",
+    #     definition_uri: "WorkflowDefinition",
     #     main: "WorkflowMain",
-    #     name: "WorkflowName",
     #     parameter_template: {
     #       "WorkflowParameterName" => {
     #         description: "WorkflowParameterDescription",
     #         optional: false,
     #       },
     #     },
-    #     request_id: "WorkflowRequestId", # required
     #     storage_capacity: 1,
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     request_id: "WorkflowRequestId", # required
+    #     accelerators: "GPU", # accepts GPU
     #   })
     #
     # @example Response structure
     #
     #   resp.arn #=> String
     #   resp.id #=> String
-    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETED", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETED", "FAILED", "INACTIVE"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -881,11 +1054,11 @@ module Aws::Omics
 
     # Deletes an annotation store.
     #
-    # @option params [Boolean] :force
-    #   Whether to force deletion.
-    #
     # @option params [required, String] :name
     #   The store's name.
+    #
+    # @option params [Boolean] :force
+    #   Whether to force deletion.
     #
     # @return [Types::DeleteAnnotationStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -894,8 +1067,8 @@ module Aws::Omics
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_annotation_store({
-    #     force: false,
     #     name: "String", # required
+    #     force: false,
     #   })
     #
     # @example Response structure
@@ -1027,11 +1200,11 @@ module Aws::Omics
 
     # Deletes a variant store.
     #
-    # @option params [Boolean] :force
-    #   Whether to force deletion.
-    #
     # @option params [required, String] :name
     #   The store's name.
+    #
+    # @option params [Boolean] :force
+    #   Whether to force deletion.
     #
     # @return [Types::DeleteVariantStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1040,8 +1213,8 @@ module Aws::Omics
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_variant_store({
-    #     force: false,
     #     name: "String", # required
+    #     force: false,
     #   })
     #
     # @example Response structure
@@ -1086,17 +1259,18 @@ module Aws::Omics
     #
     # @return [Types::GetAnnotationImportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetAnnotationImportResponse#completion_time #completion_time} => Time
-    #   * {Types::GetAnnotationImportResponse#creation_time #creation_time} => Time
-    #   * {Types::GetAnnotationImportResponse#destination_name #destination_name} => String
-    #   * {Types::GetAnnotationImportResponse#format_options #format_options} => Types::FormatOptions
     #   * {Types::GetAnnotationImportResponse#id #id} => String
-    #   * {Types::GetAnnotationImportResponse#items #items} => Array&lt;Types::AnnotationImportItemDetail&gt;
+    #   * {Types::GetAnnotationImportResponse#destination_name #destination_name} => String
     #   * {Types::GetAnnotationImportResponse#role_arn #role_arn} => String
-    #   * {Types::GetAnnotationImportResponse#run_left_normalization #run_left_normalization} => Boolean
     #   * {Types::GetAnnotationImportResponse#status #status} => String
     #   * {Types::GetAnnotationImportResponse#status_message #status_message} => String
+    #   * {Types::GetAnnotationImportResponse#creation_time #creation_time} => Time
     #   * {Types::GetAnnotationImportResponse#update_time #update_time} => Time
+    #   * {Types::GetAnnotationImportResponse#completion_time #completion_time} => Time
+    #   * {Types::GetAnnotationImportResponse#items #items} => Array&lt;Types::AnnotationImportItemDetail&gt;
+    #   * {Types::GetAnnotationImportResponse#run_left_normalization #run_left_normalization} => Boolean
+    #   * {Types::GetAnnotationImportResponse#format_options #format_options} => Types::FormatOptions
+    #   * {Types::GetAnnotationImportResponse#annotation_fields #annotation_fields} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1106,29 +1280,31 @@ module Aws::Omics
     #
     # @example Response structure
     #
-    #   resp.completion_time #=> Time
-    #   resp.creation_time #=> Time
-    #   resp.destination_name #=> String
-    #   resp.format_options.tsv_options.read_options.comment #=> String
-    #   resp.format_options.tsv_options.read_options.encoding #=> String
-    #   resp.format_options.tsv_options.read_options.escape #=> String
-    #   resp.format_options.tsv_options.read_options.escape_quotes #=> Boolean
-    #   resp.format_options.tsv_options.read_options.header #=> Boolean
-    #   resp.format_options.tsv_options.read_options.line_sep #=> String
-    #   resp.format_options.tsv_options.read_options.quote #=> String
-    #   resp.format_options.tsv_options.read_options.quote_all #=> Boolean
-    #   resp.format_options.tsv_options.read_options.sep #=> String
-    #   resp.format_options.vcf_options.ignore_filter_field #=> Boolean
-    #   resp.format_options.vcf_options.ignore_qual_field #=> Boolean
     #   resp.id #=> String
-    #   resp.items #=> Array
-    #   resp.items[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED", "COMPLETED_WITH_FAILURES"
-    #   resp.items[0].source #=> String
+    #   resp.destination_name #=> String
     #   resp.role_arn #=> String
-    #   resp.run_left_normalization #=> Boolean
     #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED", "COMPLETED_WITH_FAILURES"
     #   resp.status_message #=> String
+    #   resp.creation_time #=> Time
     #   resp.update_time #=> Time
+    #   resp.completion_time #=> Time
+    #   resp.items #=> Array
+    #   resp.items[0].source #=> String
+    #   resp.items[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED", "COMPLETED_WITH_FAILURES"
+    #   resp.run_left_normalization #=> Boolean
+    #   resp.format_options.tsv_options.read_options.sep #=> String
+    #   resp.format_options.tsv_options.read_options.encoding #=> String
+    #   resp.format_options.tsv_options.read_options.quote #=> String
+    #   resp.format_options.tsv_options.read_options.quote_all #=> Boolean
+    #   resp.format_options.tsv_options.read_options.escape #=> String
+    #   resp.format_options.tsv_options.read_options.escape_quotes #=> Boolean
+    #   resp.format_options.tsv_options.read_options.comment #=> String
+    #   resp.format_options.tsv_options.read_options.header #=> Boolean
+    #   resp.format_options.tsv_options.read_options.line_sep #=> String
+    #   resp.format_options.vcf_options.ignore_qual_field #=> Boolean
+    #   resp.format_options.vcf_options.ignore_filter_field #=> Boolean
+    #   resp.annotation_fields #=> Hash
+    #   resp.annotation_fields["AnnotationFieldMapKeyString"] #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1151,20 +1327,20 @@ module Aws::Omics
     #
     # @return [Types::GetAnnotationStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetAnnotationStoreResponse#creation_time #creation_time} => Time
-    #   * {Types::GetAnnotationStoreResponse#description #description} => String
     #   * {Types::GetAnnotationStoreResponse#id #id} => String
-    #   * {Types::GetAnnotationStoreResponse#name #name} => String
     #   * {Types::GetAnnotationStoreResponse#reference #reference} => Types::ReferenceItem
-    #   * {Types::GetAnnotationStoreResponse#sse_config #sse_config} => Types::SseConfig
     #   * {Types::GetAnnotationStoreResponse#status #status} => String
-    #   * {Types::GetAnnotationStoreResponse#status_message #status_message} => String
     #   * {Types::GetAnnotationStoreResponse#store_arn #store_arn} => String
-    #   * {Types::GetAnnotationStoreResponse#store_format #store_format} => String
-    #   * {Types::GetAnnotationStoreResponse#store_options #store_options} => Types::StoreOptions
-    #   * {Types::GetAnnotationStoreResponse#store_size_bytes #store_size_bytes} => Integer
-    #   * {Types::GetAnnotationStoreResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetAnnotationStoreResponse#name #name} => String
+    #   * {Types::GetAnnotationStoreResponse#description #description} => String
+    #   * {Types::GetAnnotationStoreResponse#sse_config #sse_config} => Types::SseConfig
+    #   * {Types::GetAnnotationStoreResponse#creation_time #creation_time} => Time
     #   * {Types::GetAnnotationStoreResponse#update_time #update_time} => Time
+    #   * {Types::GetAnnotationStoreResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetAnnotationStoreResponse#store_options #store_options} => Types::StoreOptions
+    #   * {Types::GetAnnotationStoreResponse#store_format #store_format} => String
+    #   * {Types::GetAnnotationStoreResponse#status_message #status_message} => String
+    #   * {Types::GetAnnotationStoreResponse#store_size_bytes #store_size_bytes} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -1174,27 +1350,27 @@ module Aws::Omics
     #
     # @example Response structure
     #
-    #   resp.creation_time #=> Time
-    #   resp.description #=> String
     #   resp.id #=> String
-    #   resp.name #=> String
     #   resp.reference.reference_arn #=> String
-    #   resp.sse_config.key_arn #=> String
-    #   resp.sse_config.type #=> String, one of "KMS"
     #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
-    #   resp.status_message #=> String
     #   resp.store_arn #=> String
-    #   resp.store_format #=> String, one of "GFF", "TSV", "VCF"
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.sse_config.type #=> String, one of "KMS"
+    #   resp.sse_config.key_arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.update_time #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #   resp.store_options.tsv_store_options.annotation_type #=> String, one of "GENERIC", "CHR_POS", "CHR_POS_REF_ALT", "CHR_START_END_ONE_BASE", "CHR_START_END_REF_ALT_ONE_BASE", "CHR_START_END_ZERO_BASE", "CHR_START_END_REF_ALT_ZERO_BASE"
     #   resp.store_options.tsv_store_options.format_to_header #=> Hash
     #   resp.store_options.tsv_store_options.format_to_header["FormatToHeaderKey"] #=> String
     #   resp.store_options.tsv_store_options.schema #=> Array
     #   resp.store_options.tsv_store_options.schema[0] #=> Hash
     #   resp.store_options.tsv_store_options.schema[0]["SchemaItemKeyString"] #=> String, one of "LONG", "INT", "STRING", "FLOAT", "DOUBLE", "BOOLEAN"
+    #   resp.store_format #=> String, one of "GFF", "TSV", "VCF"
+    #   resp.status_message #=> String
     #   resp.store_size_bytes #=> Integer
-    #   resp.tags #=> Hash
-    #   resp.tags["TagKey"] #=> String
-    #   resp.update_time #=> Time
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1213,17 +1389,17 @@ module Aws::Omics
 
     # Gets a file from a read set.
     #
-    # @option params [String] :file
-    #   The file to retrieve.
-    #
     # @option params [required, String] :id
     #   The read set's ID.
     #
-    # @option params [required, Integer] :part_number
-    #   The part number to retrieve.
-    #
     # @option params [required, String] :sequence_store_id
     #   The read set's sequence store ID.
+    #
+    # @option params [String] :file
+    #   The file to retrieve.
+    #
+    # @option params [required, Integer] :part_number
+    #   The part number to retrieve.
     #
     # @return [Types::GetReadSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1232,10 +1408,10 @@ module Aws::Omics
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_read_set({
-    #     file: "SOURCE1", # accepts SOURCE1, SOURCE2, INDEX
     #     id: "ReadSetId", # required
-    #     part_number: 1, # required
     #     sequence_store_id: "SequenceStoreId", # required
+    #     file: "SOURCE1", # accepts SOURCE1, SOURCE2, INDEX
+    #     part_number: 1, # required
     #   })
     #
     # @example Response structure
@@ -1261,13 +1437,13 @@ module Aws::Omics
     #
     # @return [Types::GetReadSetActivationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetReadSetActivationJobResponse#completion_time #completion_time} => Time
-    #   * {Types::GetReadSetActivationJobResponse#creation_time #creation_time} => Time
     #   * {Types::GetReadSetActivationJobResponse#id #id} => String
     #   * {Types::GetReadSetActivationJobResponse#sequence_store_id #sequence_store_id} => String
-    #   * {Types::GetReadSetActivationJobResponse#sources #sources} => Array&lt;Types::ActivateReadSetSourceItem&gt;
     #   * {Types::GetReadSetActivationJobResponse#status #status} => String
     #   * {Types::GetReadSetActivationJobResponse#status_message #status_message} => String
+    #   * {Types::GetReadSetActivationJobResponse#creation_time #creation_time} => Time
+    #   * {Types::GetReadSetActivationJobResponse#completion_time #completion_time} => Time
+    #   * {Types::GetReadSetActivationJobResponse#sources #sources} => Array&lt;Types::ActivateReadSetSourceItem&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1278,16 +1454,16 @@ module Aws::Omics
     #
     # @example Response structure
     #
-    #   resp.completion_time #=> Time
-    #   resp.creation_time #=> Time
     #   resp.id #=> String
     #   resp.sequence_store_id #=> String
+    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLING", "CANCELLED", "FAILED", "COMPLETED", "COMPLETED_WITH_FAILURES"
+    #   resp.status_message #=> String
+    #   resp.creation_time #=> Time
+    #   resp.completion_time #=> Time
     #   resp.sources #=> Array
     #   resp.sources[0].read_set_id #=> String
     #   resp.sources[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "FINISHED", "FAILED"
     #   resp.sources[0].status_message #=> String
-    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLING", "CANCELLED", "FAILED", "COMPLETED", "COMPLETED_WITH_FAILURES"
-    #   resp.status_message #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1305,43 +1481,43 @@ module Aws::Omics
 
     # Gets information about a read set export job.
     #
-    # @option params [required, String] :id
-    #   The job's ID.
-    #
     # @option params [required, String] :sequence_store_id
     #   The job's sequence store ID.
     #
+    # @option params [required, String] :id
+    #   The job's ID.
+    #
     # @return [Types::GetReadSetExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetReadSetExportJobResponse#completion_time #completion_time} => Time
-    #   * {Types::GetReadSetExportJobResponse#creation_time #creation_time} => Time
-    #   * {Types::GetReadSetExportJobResponse#destination #destination} => String
     #   * {Types::GetReadSetExportJobResponse#id #id} => String
-    #   * {Types::GetReadSetExportJobResponse#read_sets #read_sets} => Array&lt;Types::ExportReadSetDetail&gt;
     #   * {Types::GetReadSetExportJobResponse#sequence_store_id #sequence_store_id} => String
+    #   * {Types::GetReadSetExportJobResponse#destination #destination} => String
     #   * {Types::GetReadSetExportJobResponse#status #status} => String
     #   * {Types::GetReadSetExportJobResponse#status_message #status_message} => String
+    #   * {Types::GetReadSetExportJobResponse#creation_time #creation_time} => Time
+    #   * {Types::GetReadSetExportJobResponse#completion_time #completion_time} => Time
+    #   * {Types::GetReadSetExportJobResponse#read_sets #read_sets} => Array&lt;Types::ExportReadSetDetail&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_read_set_export_job({
-    #     id: "ExportJobId", # required
     #     sequence_store_id: "SequenceStoreId", # required
+    #     id: "ExportJobId", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.completion_time #=> Time
-    #   resp.creation_time #=> Time
-    #   resp.destination #=> String
     #   resp.id #=> String
+    #   resp.sequence_store_id #=> String
+    #   resp.destination #=> String
+    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLING", "CANCELLED", "FAILED", "COMPLETED", "COMPLETED_WITH_FAILURES"
+    #   resp.status_message #=> String
+    #   resp.creation_time #=> Time
+    #   resp.completion_time #=> Time
     #   resp.read_sets #=> Array
     #   resp.read_sets[0].id #=> String
     #   resp.read_sets[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "FINISHED", "FAILED"
     #   resp.read_sets[0].status_message #=> String
-    #   resp.sequence_store_id #=> String
-    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLING", "CANCELLED", "FAILED", "COMPLETED", "COMPLETED_WITH_FAILURES"
-    #   resp.status_message #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1367,14 +1543,14 @@ module Aws::Omics
     #
     # @return [Types::GetReadSetImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetReadSetImportJobResponse#completion_time #completion_time} => Time
-    #   * {Types::GetReadSetImportJobResponse#creation_time #creation_time} => Time
     #   * {Types::GetReadSetImportJobResponse#id #id} => String
-    #   * {Types::GetReadSetImportJobResponse#role_arn #role_arn} => String
     #   * {Types::GetReadSetImportJobResponse#sequence_store_id #sequence_store_id} => String
-    #   * {Types::GetReadSetImportJobResponse#sources #sources} => Array&lt;Types::ImportReadSetSourceItem&gt;
+    #   * {Types::GetReadSetImportJobResponse#role_arn #role_arn} => String
     #   * {Types::GetReadSetImportJobResponse#status #status} => String
     #   * {Types::GetReadSetImportJobResponse#status_message #status_message} => String
+    #   * {Types::GetReadSetImportJobResponse#creation_time #creation_time} => Time
+    #   * {Types::GetReadSetImportJobResponse#completion_time #completion_time} => Time
+    #   * {Types::GetReadSetImportJobResponse#sources #sources} => Array&lt;Types::ImportReadSetSourceItem&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1385,27 +1561,27 @@ module Aws::Omics
     #
     # @example Response structure
     #
-    #   resp.completion_time #=> Time
-    #   resp.creation_time #=> Time
     #   resp.id #=> String
-    #   resp.role_arn #=> String
     #   resp.sequence_store_id #=> String
+    #   resp.role_arn #=> String
+    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLING", "CANCELLED", "FAILED", "COMPLETED", "COMPLETED_WITH_FAILURES"
+    #   resp.status_message #=> String
+    #   resp.creation_time #=> Time
+    #   resp.completion_time #=> Time
     #   resp.sources #=> Array
-    #   resp.sources[0].description #=> String
-    #   resp.sources[0].generated_from #=> String
-    #   resp.sources[0].name #=> String
-    #   resp.sources[0].reference_arn #=> String
-    #   resp.sources[0].sample_id #=> String
-    #   resp.sources[0].source_file_type #=> String, one of "FASTQ", "BAM", "CRAM"
     #   resp.sources[0].source_files.source1 #=> String
     #   resp.sources[0].source_files.source2 #=> String
+    #   resp.sources[0].source_file_type #=> String, one of "FASTQ", "BAM", "CRAM"
     #   resp.sources[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "FINISHED", "FAILED"
     #   resp.sources[0].status_message #=> String
     #   resp.sources[0].subject_id #=> String
+    #   resp.sources[0].sample_id #=> String
+    #   resp.sources[0].generated_from #=> String
+    #   resp.sources[0].reference_arn #=> String
+    #   resp.sources[0].name #=> String
+    #   resp.sources[0].description #=> String
     #   resp.sources[0].tags #=> Hash
     #   resp.sources[0].tags["TagKey"] #=> String
-    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLING", "CANCELLED", "FAILED", "COMPLETED", "COMPLETED_WITH_FAILURES"
-    #   resp.status_message #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1431,19 +1607,20 @@ module Aws::Omics
     #
     # @return [Types::GetReadSetMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetReadSetMetadataResponse#id #id} => String
     #   * {Types::GetReadSetMetadataResponse#arn #arn} => String
-    #   * {Types::GetReadSetMetadataResponse#creation_time #creation_time} => Time
+    #   * {Types::GetReadSetMetadataResponse#sequence_store_id #sequence_store_id} => String
+    #   * {Types::GetReadSetMetadataResponse#subject_id #subject_id} => String
+    #   * {Types::GetReadSetMetadataResponse#sample_id #sample_id} => String
+    #   * {Types::GetReadSetMetadataResponse#status #status} => String
+    #   * {Types::GetReadSetMetadataResponse#name #name} => String
     #   * {Types::GetReadSetMetadataResponse#description #description} => String
     #   * {Types::GetReadSetMetadataResponse#file_type #file_type} => String
-    #   * {Types::GetReadSetMetadataResponse#files #files} => Types::ReadSetFiles
-    #   * {Types::GetReadSetMetadataResponse#id #id} => String
-    #   * {Types::GetReadSetMetadataResponse#name #name} => String
-    #   * {Types::GetReadSetMetadataResponse#reference_arn #reference_arn} => String
-    #   * {Types::GetReadSetMetadataResponse#sample_id #sample_id} => String
+    #   * {Types::GetReadSetMetadataResponse#creation_time #creation_time} => Time
     #   * {Types::GetReadSetMetadataResponse#sequence_information #sequence_information} => Types::SequenceInformation
-    #   * {Types::GetReadSetMetadataResponse#sequence_store_id #sequence_store_id} => String
-    #   * {Types::GetReadSetMetadataResponse#status #status} => String
-    #   * {Types::GetReadSetMetadataResponse#subject_id #subject_id} => String
+    #   * {Types::GetReadSetMetadataResponse#reference_arn #reference_arn} => String
+    #   * {Types::GetReadSetMetadataResponse#files #files} => Types::ReadSetFiles
+    #   * {Types::GetReadSetMetadataResponse#status_message #status_message} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1454,30 +1631,31 @@ module Aws::Omics
     #
     # @example Response structure
     #
+    #   resp.id #=> String
     #   resp.arn #=> String
-    #   resp.creation_time #=> Time
+    #   resp.sequence_store_id #=> String
+    #   resp.subject_id #=> String
+    #   resp.sample_id #=> String
+    #   resp.status #=> String, one of "ARCHIVED", "ACTIVATING", "ACTIVE", "DELETING", "DELETED", "PROCESSING_UPLOAD", "UPLOAD_FAILED"
+    #   resp.name #=> String
     #   resp.description #=> String
     #   resp.file_type #=> String, one of "FASTQ", "BAM", "CRAM"
-    #   resp.files.index.content_length #=> Integer
-    #   resp.files.index.part_size #=> Integer
-    #   resp.files.index.total_parts #=> Integer
-    #   resp.files.source1.content_length #=> Integer
-    #   resp.files.source1.part_size #=> Integer
-    #   resp.files.source1.total_parts #=> Integer
-    #   resp.files.source2.content_length #=> Integer
-    #   resp.files.source2.part_size #=> Integer
-    #   resp.files.source2.total_parts #=> Integer
-    #   resp.id #=> String
-    #   resp.name #=> String
-    #   resp.reference_arn #=> String
-    #   resp.sample_id #=> String
-    #   resp.sequence_information.alignment #=> String
-    #   resp.sequence_information.generated_from #=> String
-    #   resp.sequence_information.total_base_count #=> Integer
+    #   resp.creation_time #=> Time
     #   resp.sequence_information.total_read_count #=> Integer
-    #   resp.sequence_store_id #=> String
-    #   resp.status #=> String, one of "ARCHIVED", "ACTIVATING", "ACTIVE", "DELETING", "DELETED"
-    #   resp.subject_id #=> String
+    #   resp.sequence_information.total_base_count #=> Integer
+    #   resp.sequence_information.generated_from #=> String
+    #   resp.sequence_information.alignment #=> String
+    #   resp.reference_arn #=> String
+    #   resp.files.source1.total_parts #=> Integer
+    #   resp.files.source1.part_size #=> Integer
+    #   resp.files.source1.content_length #=> Integer
+    #   resp.files.source2.total_parts #=> Integer
+    #   resp.files.source2.part_size #=> Integer
+    #   resp.files.source2.content_length #=> Integer
+    #   resp.files.index.total_parts #=> Integer
+    #   resp.files.index.part_size #=> Integer
+    #   resp.files.index.content_length #=> Integer
+    #   resp.status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetReadSetMetadata AWS API Documentation
     #
@@ -1490,20 +1668,20 @@ module Aws::Omics
 
     # Gets a reference file.
     #
-    # @option params [String] :file
-    #   The file to retrieve.
-    #
     # @option params [required, String] :id
     #   The reference's ID.
     #
-    # @option params [required, Integer] :part_number
-    #   The part number to retrieve.
+    # @option params [required, String] :reference_store_id
+    #   The reference's store ID.
     #
     # @option params [String] :range
     #   The range to retrieve.
     #
-    # @option params [required, String] :reference_store_id
-    #   The reference's store ID.
+    # @option params [required, Integer] :part_number
+    #   The part number to retrieve.
+    #
+    # @option params [String] :file
+    #   The file to retrieve.
     #
     # @return [Types::GetReferenceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1512,11 +1690,11 @@ module Aws::Omics
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_reference({
-    #     file: "SOURCE", # accepts SOURCE, INDEX
     #     id: "ReferenceId", # required
-    #     part_number: 1, # required
-    #     range: "Range",
     #     reference_store_id: "ReferenceStoreId", # required
+    #     range: "Range",
+    #     part_number: 1, # required
+    #     file: "SOURCE", # accepts SOURCE, INDEX
     #   })
     #
     # @example Response structure
@@ -1542,14 +1720,14 @@ module Aws::Omics
     #
     # @return [Types::GetReferenceImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetReferenceImportJobResponse#completion_time #completion_time} => Time
-    #   * {Types::GetReferenceImportJobResponse#creation_time #creation_time} => Time
     #   * {Types::GetReferenceImportJobResponse#id #id} => String
     #   * {Types::GetReferenceImportJobResponse#reference_store_id #reference_store_id} => String
     #   * {Types::GetReferenceImportJobResponse#role_arn #role_arn} => String
-    #   * {Types::GetReferenceImportJobResponse#sources #sources} => Array&lt;Types::ImportReferenceSourceItem&gt;
     #   * {Types::GetReferenceImportJobResponse#status #status} => String
     #   * {Types::GetReferenceImportJobResponse#status_message #status_message} => String
+    #   * {Types::GetReferenceImportJobResponse#creation_time #creation_time} => Time
+    #   * {Types::GetReferenceImportJobResponse#completion_time #completion_time} => Time
+    #   * {Types::GetReferenceImportJobResponse#sources #sources} => Array&lt;Types::ImportReferenceSourceItem&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1560,21 +1738,21 @@ module Aws::Omics
     #
     # @example Response structure
     #
-    #   resp.completion_time #=> Time
-    #   resp.creation_time #=> Time
     #   resp.id #=> String
     #   resp.reference_store_id #=> String
     #   resp.role_arn #=> String
+    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLING", "CANCELLED", "FAILED", "COMPLETED", "COMPLETED_WITH_FAILURES"
+    #   resp.status_message #=> String
+    #   resp.creation_time #=> Time
+    #   resp.completion_time #=> Time
     #   resp.sources #=> Array
-    #   resp.sources[0].description #=> String
-    #   resp.sources[0].name #=> String
     #   resp.sources[0].source_file #=> String
     #   resp.sources[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "FINISHED", "FAILED"
     #   resp.sources[0].status_message #=> String
+    #   resp.sources[0].name #=> String
+    #   resp.sources[0].description #=> String
     #   resp.sources[0].tags #=> Hash
     #   resp.sources[0].tags["TagKey"] #=> String
-    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLING", "CANCELLED", "FAILED", "COMPLETED", "COMPLETED_WITH_FAILURES"
-    #   resp.status_message #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1600,16 +1778,16 @@ module Aws::Omics
     #
     # @return [Types::GetReferenceMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetReferenceMetadataResponse#arn #arn} => String
-    #   * {Types::GetReferenceMetadataResponse#creation_time #creation_time} => Time
-    #   * {Types::GetReferenceMetadataResponse#description #description} => String
-    #   * {Types::GetReferenceMetadataResponse#files #files} => Types::ReferenceFiles
     #   * {Types::GetReferenceMetadataResponse#id #id} => String
-    #   * {Types::GetReferenceMetadataResponse#md5 #md5} => String
-    #   * {Types::GetReferenceMetadataResponse#name #name} => String
+    #   * {Types::GetReferenceMetadataResponse#arn #arn} => String
     #   * {Types::GetReferenceMetadataResponse#reference_store_id #reference_store_id} => String
+    #   * {Types::GetReferenceMetadataResponse#md5 #md5} => String
     #   * {Types::GetReferenceMetadataResponse#status #status} => String
+    #   * {Types::GetReferenceMetadataResponse#name #name} => String
+    #   * {Types::GetReferenceMetadataResponse#description #description} => String
+    #   * {Types::GetReferenceMetadataResponse#creation_time #creation_time} => Time
     #   * {Types::GetReferenceMetadataResponse#update_time #update_time} => Time
+    #   * {Types::GetReferenceMetadataResponse#files #files} => Types::ReferenceFiles
     #
     # @example Request syntax with placeholder values
     #
@@ -1620,21 +1798,21 @@ module Aws::Omics
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
-    #   resp.creation_time #=> Time
-    #   resp.description #=> String
-    #   resp.files.index.content_length #=> Integer
-    #   resp.files.index.part_size #=> Integer
-    #   resp.files.index.total_parts #=> Integer
-    #   resp.files.source.content_length #=> Integer
-    #   resp.files.source.part_size #=> Integer
-    #   resp.files.source.total_parts #=> Integer
     #   resp.id #=> String
-    #   resp.md5 #=> String
-    #   resp.name #=> String
+    #   resp.arn #=> String
     #   resp.reference_store_id #=> String
+    #   resp.md5 #=> String
     #   resp.status #=> String, one of "ACTIVE", "DELETING", "DELETED"
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.creation_time #=> Time
     #   resp.update_time #=> Time
+    #   resp.files.source.total_parts #=> Integer
+    #   resp.files.source.part_size #=> Integer
+    #   resp.files.source.content_length #=> Integer
+    #   resp.files.index.total_parts #=> Integer
+    #   resp.files.index.part_size #=> Integer
+    #   resp.files.index.content_length #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetReferenceMetadata AWS API Documentation
     #
@@ -1652,12 +1830,12 @@ module Aws::Omics
     #
     # @return [Types::GetReferenceStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetReferenceStoreResponse#arn #arn} => String
-    #   * {Types::GetReferenceStoreResponse#creation_time #creation_time} => Time
-    #   * {Types::GetReferenceStoreResponse#description #description} => String
     #   * {Types::GetReferenceStoreResponse#id #id} => String
+    #   * {Types::GetReferenceStoreResponse#arn #arn} => String
     #   * {Types::GetReferenceStoreResponse#name #name} => String
+    #   * {Types::GetReferenceStoreResponse#description #description} => String
     #   * {Types::GetReferenceStoreResponse#sse_config #sse_config} => Types::SseConfig
+    #   * {Types::GetReferenceStoreResponse#creation_time #creation_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1667,13 +1845,13 @@ module Aws::Omics
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
-    #   resp.creation_time #=> Time
-    #   resp.description #=> String
     #   resp.id #=> String
+    #   resp.arn #=> String
     #   resp.name #=> String
-    #   resp.sse_config.key_arn #=> String
+    #   resp.description #=> String
     #   resp.sse_config.type #=> String, one of "KMS"
+    #   resp.sse_config.key_arn #=> String
+    #   resp.creation_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetReferenceStore AWS API Documentation
     #
@@ -1686,71 +1864,73 @@ module Aws::Omics
 
     # Gets information about a workflow run.
     #
-    # @option params [Array<String>] :export
-    #   The run's export format.
-    #
     # @option params [required, String] :id
     #   The run's ID.
+    #
+    # @option params [Array<String>] :export
+    #   The run's export format.
     #
     # @return [Types::GetRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRunResponse#arn #arn} => String
-    #   * {Types::GetRunResponse#creation_time #creation_time} => Time
-    #   * {Types::GetRunResponse#definition #definition} => String
-    #   * {Types::GetRunResponse#digest #digest} => String
     #   * {Types::GetRunResponse#id #id} => String
-    #   * {Types::GetRunResponse#log_level #log_level} => String
-    #   * {Types::GetRunResponse#name #name} => String
-    #   * {Types::GetRunResponse#output_uri #output_uri} => String
-    #   * {Types::GetRunResponse#parameters #parameters} => Hash,Array,String,Numeric,Boolean
-    #   * {Types::GetRunResponse#priority #priority} => Integer
-    #   * {Types::GetRunResponse#resource_digests #resource_digests} => Hash&lt;String,String&gt;
-    #   * {Types::GetRunResponse#role_arn #role_arn} => String
-    #   * {Types::GetRunResponse#run_group_id #run_group_id} => String
-    #   * {Types::GetRunResponse#run_id #run_id} => String
-    #   * {Types::GetRunResponse#start_time #start_time} => Time
-    #   * {Types::GetRunResponse#started_by #started_by} => String
     #   * {Types::GetRunResponse#status #status} => String
-    #   * {Types::GetRunResponse#status_message #status_message} => String
-    #   * {Types::GetRunResponse#stop_time #stop_time} => Time
-    #   * {Types::GetRunResponse#storage_capacity #storage_capacity} => Integer
-    #   * {Types::GetRunResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetRunResponse#workflow_id #workflow_id} => String
     #   * {Types::GetRunResponse#workflow_type #workflow_type} => String
+    #   * {Types::GetRunResponse#run_id #run_id} => String
+    #   * {Types::GetRunResponse#role_arn #role_arn} => String
+    #   * {Types::GetRunResponse#name #name} => String
+    #   * {Types::GetRunResponse#run_group_id #run_group_id} => String
+    #   * {Types::GetRunResponse#priority #priority} => Integer
+    #   * {Types::GetRunResponse#definition #definition} => String
+    #   * {Types::GetRunResponse#digest #digest} => String
+    #   * {Types::GetRunResponse#parameters #parameters} => Hash,Array,String,Numeric,Boolean
+    #   * {Types::GetRunResponse#storage_capacity #storage_capacity} => Integer
+    #   * {Types::GetRunResponse#output_uri #output_uri} => String
+    #   * {Types::GetRunResponse#log_level #log_level} => String
+    #   * {Types::GetRunResponse#resource_digests #resource_digests} => Hash&lt;String,String&gt;
+    #   * {Types::GetRunResponse#started_by #started_by} => String
+    #   * {Types::GetRunResponse#creation_time #creation_time} => Time
+    #   * {Types::GetRunResponse#start_time #start_time} => Time
+    #   * {Types::GetRunResponse#stop_time #stop_time} => Time
+    #   * {Types::GetRunResponse#status_message #status_message} => String
+    #   * {Types::GetRunResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetRunResponse#accelerators #accelerators} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_run({
-    #     export: ["DEFINITION"], # accepts DEFINITION
     #     id: "RunId", # required
+    #     export: ["DEFINITION"], # accepts DEFINITION
     #   })
     #
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.creation_time #=> Time
+    #   resp.id #=> String
+    #   resp.status #=> String, one of "PENDING", "STARTING", "RUNNING", "STOPPING", "COMPLETED", "DELETED", "CANCELLED", "FAILED"
+    #   resp.workflow_id #=> String
+    #   resp.workflow_type #=> String, one of "PRIVATE", "READY2RUN"
+    #   resp.run_id #=> String
+    #   resp.role_arn #=> String
+    #   resp.name #=> String
+    #   resp.run_group_id #=> String
+    #   resp.priority #=> Integer
     #   resp.definition #=> String
     #   resp.digest #=> String
-    #   resp.id #=> String
-    #   resp.log_level #=> String, one of "OFF", "FATAL", "ERROR", "ALL"
-    #   resp.name #=> String
+    #   resp.storage_capacity #=> Integer
     #   resp.output_uri #=> String
-    #   resp.priority #=> Integer
+    #   resp.log_level #=> String, one of "OFF", "FATAL", "ERROR", "ALL"
     #   resp.resource_digests #=> Hash
     #   resp.resource_digests["RunResourceDigestKey"] #=> String
-    #   resp.role_arn #=> String
-    #   resp.run_group_id #=> String
-    #   resp.run_id #=> String
-    #   resp.start_time #=> Time
     #   resp.started_by #=> String
-    #   resp.status #=> String, one of "PENDING", "STARTING", "RUNNING", "STOPPING", "COMPLETED", "DELETED", "CANCELLED", "FAILED"
-    #   resp.status_message #=> String
+    #   resp.creation_time #=> Time
+    #   resp.start_time #=> Time
     #   resp.stop_time #=> Time
-    #   resp.storage_capacity #=> Integer
+    #   resp.status_message #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
-    #   resp.workflow_id #=> String
-    #   resp.workflow_type #=> String, one of "PRIVATE"
+    #   resp.accelerators #=> String, one of "GPU"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1775,13 +1955,14 @@ module Aws::Omics
     # @return [Types::GetRunGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRunGroupResponse#arn #arn} => String
-    #   * {Types::GetRunGroupResponse#creation_time #creation_time} => Time
     #   * {Types::GetRunGroupResponse#id #id} => String
-    #   * {Types::GetRunGroupResponse#max_cpus #max_cpus} => Integer
-    #   * {Types::GetRunGroupResponse#max_duration #max_duration} => Integer
-    #   * {Types::GetRunGroupResponse#max_runs #max_runs} => Integer
     #   * {Types::GetRunGroupResponse#name #name} => String
+    #   * {Types::GetRunGroupResponse#max_cpus #max_cpus} => Integer
+    #   * {Types::GetRunGroupResponse#max_runs #max_runs} => Integer
+    #   * {Types::GetRunGroupResponse#max_duration #max_duration} => Integer
+    #   * {Types::GetRunGroupResponse#creation_time #creation_time} => Time
     #   * {Types::GetRunGroupResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetRunGroupResponse#max_gpus #max_gpus} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -1792,14 +1973,15 @@ module Aws::Omics
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.creation_time #=> Time
     #   resp.id #=> String
-    #   resp.max_cpus #=> Integer
-    #   resp.max_duration #=> Integer
-    #   resp.max_runs #=> Integer
     #   resp.name #=> String
+    #   resp.max_cpus #=> Integer
+    #   resp.max_runs #=> Integer
+    #   resp.max_duration #=> Integer
+    #   resp.creation_time #=> Time
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.max_gpus #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetRunGroup AWS API Documentation
     #
@@ -1820,16 +2002,17 @@ module Aws::Omics
     #
     # @return [Types::GetRunTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetRunTaskResponse#cpus #cpus} => Integer
-    #   * {Types::GetRunTaskResponse#creation_time #creation_time} => Time
-    #   * {Types::GetRunTaskResponse#log_stream #log_stream} => String
-    #   * {Types::GetRunTaskResponse#memory #memory} => Integer
-    #   * {Types::GetRunTaskResponse#name #name} => String
-    #   * {Types::GetRunTaskResponse#start_time #start_time} => Time
-    #   * {Types::GetRunTaskResponse#status #status} => String
-    #   * {Types::GetRunTaskResponse#status_message #status_message} => String
-    #   * {Types::GetRunTaskResponse#stop_time #stop_time} => Time
     #   * {Types::GetRunTaskResponse#task_id #task_id} => String
+    #   * {Types::GetRunTaskResponse#status #status} => String
+    #   * {Types::GetRunTaskResponse#name #name} => String
+    #   * {Types::GetRunTaskResponse#cpus #cpus} => Integer
+    #   * {Types::GetRunTaskResponse#memory #memory} => Integer
+    #   * {Types::GetRunTaskResponse#creation_time #creation_time} => Time
+    #   * {Types::GetRunTaskResponse#start_time #start_time} => Time
+    #   * {Types::GetRunTaskResponse#stop_time #stop_time} => Time
+    #   * {Types::GetRunTaskResponse#status_message #status_message} => String
+    #   * {Types::GetRunTaskResponse#log_stream #log_stream} => String
+    #   * {Types::GetRunTaskResponse#gpus #gpus} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -1840,16 +2023,17 @@ module Aws::Omics
     #
     # @example Response structure
     #
-    #   resp.cpus #=> Integer
-    #   resp.creation_time #=> Time
-    #   resp.log_stream #=> String
-    #   resp.memory #=> Integer
-    #   resp.name #=> String
-    #   resp.start_time #=> Time
-    #   resp.status #=> String, one of "PENDING", "STARTING", "RUNNING", "STOPPING", "COMPLETED", "CANCELLED", "FAILED"
-    #   resp.status_message #=> String
-    #   resp.stop_time #=> Time
     #   resp.task_id #=> String
+    #   resp.status #=> String, one of "PENDING", "STARTING", "RUNNING", "STOPPING", "COMPLETED", "CANCELLED", "FAILED"
+    #   resp.name #=> String
+    #   resp.cpus #=> Integer
+    #   resp.memory #=> Integer
+    #   resp.creation_time #=> Time
+    #   resp.start_time #=> Time
+    #   resp.stop_time #=> Time
+    #   resp.status_message #=> String
+    #   resp.log_stream #=> String
+    #   resp.gpus #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1873,12 +2057,13 @@ module Aws::Omics
     #
     # @return [Types::GetSequenceStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetSequenceStoreResponse#arn #arn} => String
-    #   * {Types::GetSequenceStoreResponse#creation_time #creation_time} => Time
-    #   * {Types::GetSequenceStoreResponse#description #description} => String
     #   * {Types::GetSequenceStoreResponse#id #id} => String
+    #   * {Types::GetSequenceStoreResponse#arn #arn} => String
     #   * {Types::GetSequenceStoreResponse#name #name} => String
+    #   * {Types::GetSequenceStoreResponse#description #description} => String
     #   * {Types::GetSequenceStoreResponse#sse_config #sse_config} => Types::SseConfig
+    #   * {Types::GetSequenceStoreResponse#creation_time #creation_time} => Time
+    #   * {Types::GetSequenceStoreResponse#fallback_location #fallback_location} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1888,13 +2073,14 @@ module Aws::Omics
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
-    #   resp.creation_time #=> Time
-    #   resp.description #=> String
     #   resp.id #=> String
+    #   resp.arn #=> String
     #   resp.name #=> String
-    #   resp.sse_config.key_arn #=> String
+    #   resp.description #=> String
     #   resp.sse_config.type #=> String, one of "KMS"
+    #   resp.sse_config.key_arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.fallback_location #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetSequenceStore AWS API Documentation
     #
@@ -1912,16 +2098,17 @@ module Aws::Omics
     #
     # @return [Types::GetVariantImportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetVariantImportResponse#completion_time #completion_time} => Time
-    #   * {Types::GetVariantImportResponse#creation_time #creation_time} => Time
-    #   * {Types::GetVariantImportResponse#destination_name #destination_name} => String
     #   * {Types::GetVariantImportResponse#id #id} => String
-    #   * {Types::GetVariantImportResponse#items #items} => Array&lt;Types::VariantImportItemDetail&gt;
+    #   * {Types::GetVariantImportResponse#destination_name #destination_name} => String
     #   * {Types::GetVariantImportResponse#role_arn #role_arn} => String
-    #   * {Types::GetVariantImportResponse#run_left_normalization #run_left_normalization} => Boolean
     #   * {Types::GetVariantImportResponse#status #status} => String
     #   * {Types::GetVariantImportResponse#status_message #status_message} => String
+    #   * {Types::GetVariantImportResponse#creation_time #creation_time} => Time
     #   * {Types::GetVariantImportResponse#update_time #update_time} => Time
+    #   * {Types::GetVariantImportResponse#completion_time #completion_time} => Time
+    #   * {Types::GetVariantImportResponse#items #items} => Array&lt;Types::VariantImportItemDetail&gt;
+    #   * {Types::GetVariantImportResponse#run_left_normalization #run_left_normalization} => Boolean
+    #   * {Types::GetVariantImportResponse#annotation_fields #annotation_fields} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1931,19 +2118,21 @@ module Aws::Omics
     #
     # @example Response structure
     #
-    #   resp.completion_time #=> Time
-    #   resp.creation_time #=> Time
-    #   resp.destination_name #=> String
     #   resp.id #=> String
-    #   resp.items #=> Array
-    #   resp.items[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED", "COMPLETED_WITH_FAILURES"
-    #   resp.items[0].source #=> String
-    #   resp.items[0].status_message #=> String
+    #   resp.destination_name #=> String
     #   resp.role_arn #=> String
-    #   resp.run_left_normalization #=> Boolean
     #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED", "COMPLETED_WITH_FAILURES"
     #   resp.status_message #=> String
+    #   resp.creation_time #=> Time
     #   resp.update_time #=> Time
+    #   resp.completion_time #=> Time
+    #   resp.items #=> Array
+    #   resp.items[0].source #=> String
+    #   resp.items[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED", "COMPLETED_WITH_FAILURES"
+    #   resp.items[0].status_message #=> String
+    #   resp.run_left_normalization #=> Boolean
+    #   resp.annotation_fields #=> Hash
+    #   resp.annotation_fields["AnnotationFieldMapKeyString"] #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1966,18 +2155,18 @@ module Aws::Omics
     #
     # @return [Types::GetVariantStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetVariantStoreResponse#creation_time #creation_time} => Time
-    #   * {Types::GetVariantStoreResponse#description #description} => String
     #   * {Types::GetVariantStoreResponse#id #id} => String
-    #   * {Types::GetVariantStoreResponse#name #name} => String
     #   * {Types::GetVariantStoreResponse#reference #reference} => Types::ReferenceItem
-    #   * {Types::GetVariantStoreResponse#sse_config #sse_config} => Types::SseConfig
     #   * {Types::GetVariantStoreResponse#status #status} => String
-    #   * {Types::GetVariantStoreResponse#status_message #status_message} => String
     #   * {Types::GetVariantStoreResponse#store_arn #store_arn} => String
-    #   * {Types::GetVariantStoreResponse#store_size_bytes #store_size_bytes} => Integer
-    #   * {Types::GetVariantStoreResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetVariantStoreResponse#name #name} => String
+    #   * {Types::GetVariantStoreResponse#description #description} => String
+    #   * {Types::GetVariantStoreResponse#sse_config #sse_config} => Types::SseConfig
+    #   * {Types::GetVariantStoreResponse#creation_time #creation_time} => Time
     #   * {Types::GetVariantStoreResponse#update_time #update_time} => Time
+    #   * {Types::GetVariantStoreResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetVariantStoreResponse#status_message #status_message} => String
+    #   * {Types::GetVariantStoreResponse#store_size_bytes #store_size_bytes} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -1987,20 +2176,20 @@ module Aws::Omics
     #
     # @example Response structure
     #
-    #   resp.creation_time #=> Time
-    #   resp.description #=> String
     #   resp.id #=> String
-    #   resp.name #=> String
     #   resp.reference.reference_arn #=> String
-    #   resp.sse_config.key_arn #=> String
-    #   resp.sse_config.type #=> String, one of "KMS"
     #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
-    #   resp.status_message #=> String
     #   resp.store_arn #=> String
-    #   resp.store_size_bytes #=> Integer
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.sse_config.type #=> String, one of "KMS"
+    #   resp.sse_config.key_arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.update_time #=> Time
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
-    #   resp.update_time #=> Time
+    #   resp.status_message #=> String
+    #   resp.store_size_bytes #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2019,61 +2208,66 @@ module Aws::Omics
 
     # Gets information about a workflow.
     #
-    # @option params [Array<String>] :export
-    #   The export format for the workflow.
-    #
     # @option params [required, String] :id
     #   The workflow's ID.
     #
     # @option params [String] :type
     #   The workflow's type.
     #
+    # @option params [Array<String>] :export
+    #   The export format for the workflow.
+    #
     # @return [Types::GetWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetWorkflowResponse#arn #arn} => String
-    #   * {Types::GetWorkflowResponse#creation_time #creation_time} => Time
-    #   * {Types::GetWorkflowResponse#definition #definition} => String
-    #   * {Types::GetWorkflowResponse#description #description} => String
-    #   * {Types::GetWorkflowResponse#digest #digest} => String
-    #   * {Types::GetWorkflowResponse#engine #engine} => String
     #   * {Types::GetWorkflowResponse#id #id} => String
-    #   * {Types::GetWorkflowResponse#main #main} => String
-    #   * {Types::GetWorkflowResponse#name #name} => String
-    #   * {Types::GetWorkflowResponse#parameter_template #parameter_template} => Hash&lt;String,Types::WorkflowParameter&gt;
     #   * {Types::GetWorkflowResponse#status #status} => String
-    #   * {Types::GetWorkflowResponse#status_message #status_message} => String
-    #   * {Types::GetWorkflowResponse#storage_capacity #storage_capacity} => Integer
-    #   * {Types::GetWorkflowResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetWorkflowResponse#type #type} => String
+    #   * {Types::GetWorkflowResponse#name #name} => String
+    #   * {Types::GetWorkflowResponse#description #description} => String
+    #   * {Types::GetWorkflowResponse#engine #engine} => String
+    #   * {Types::GetWorkflowResponse#definition #definition} => String
+    #   * {Types::GetWorkflowResponse#main #main} => String
+    #   * {Types::GetWorkflowResponse#digest #digest} => String
+    #   * {Types::GetWorkflowResponse#parameter_template #parameter_template} => Hash&lt;String,Types::WorkflowParameter&gt;
+    #   * {Types::GetWorkflowResponse#storage_capacity #storage_capacity} => Integer
+    #   * {Types::GetWorkflowResponse#creation_time #creation_time} => Time
+    #   * {Types::GetWorkflowResponse#status_message #status_message} => String
+    #   * {Types::GetWorkflowResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetWorkflowResponse#metadata #metadata} => Hash&lt;String,String&gt;
+    #   * {Types::GetWorkflowResponse#accelerators #accelerators} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_workflow({
-    #     export: ["DEFINITION"], # accepts DEFINITION
     #     id: "WorkflowId", # required
-    #     type: "PRIVATE", # accepts PRIVATE
+    #     type: "PRIVATE", # accepts PRIVATE, READY2RUN
+    #     export: ["DEFINITION"], # accepts DEFINITION
     #   })
     #
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.creation_time #=> Time
-    #   resp.definition #=> String
-    #   resp.description #=> String
-    #   resp.digest #=> String
-    #   resp.engine #=> String, one of "WDL", "NEXTFLOW"
     #   resp.id #=> String
-    #   resp.main #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETED", "FAILED", "INACTIVE"
+    #   resp.type #=> String, one of "PRIVATE", "READY2RUN"
     #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.engine #=> String, one of "WDL", "NEXTFLOW"
+    #   resp.definition #=> String
+    #   resp.main #=> String
+    #   resp.digest #=> String
     #   resp.parameter_template #=> Hash
     #   resp.parameter_template["WorkflowParameterName"].description #=> String
     #   resp.parameter_template["WorkflowParameterName"].optional #=> Boolean
-    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETED", "FAILED"
-    #   resp.status_message #=> String
     #   resp.storage_capacity #=> Integer
+    #   resp.creation_time #=> Time
+    #   resp.status_message #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
-    #   resp.type #=> String, one of "PRIVATE"
+    #   resp.metadata #=> Hash
+    #   resp.metadata["WorkflowMetadataKey"] #=> String
+    #   resp.accelerators #=> String, one of "GPU"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2091,18 +2285,18 @@ module Aws::Omics
 
     # Retrieves a list of annotation import jobs.
     #
-    # @option params [Types::ListAnnotationImportJobsFilter] :filter
-    #   A filter to apply to the list.
+    # @option params [Integer] :max_results
+    #   The maximum number of jobs to return in one page of results.
     #
     # @option params [Array<String>] :ids
     #   IDs of annotation import jobs to retrieve.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of jobs to return in one page of results.
-    #
     # @option params [String] :next_token
     #   Specify the pagination token from a previous request to retrieve the
     #   next page of results.
+    #
+    # @option params [Types::ListAnnotationImportJobsFilter] :filter
+    #   A filter to apply to the list.
     #
     # @return [Types::ListAnnotationImportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2114,26 +2308,28 @@ module Aws::Omics
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_annotation_import_jobs({
+    #     max_results: 1,
+    #     ids: ["ResourceIdentifier"],
+    #     next_token: "ListAnnotationImportJobsRequestNextTokenString",
     #     filter: {
     #       status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLED, COMPLETED, FAILED, COMPLETED_WITH_FAILURES
     #       store_name: "String",
     #     },
-    #     ids: ["ResourceIdentifier"],
-    #     max_results: 1,
-    #     next_token: "ListAnnotationImportJobsRequestNextTokenString",
     #   })
     #
     # @example Response structure
     #
     #   resp.annotation_import_jobs #=> Array
-    #   resp.annotation_import_jobs[0].completion_time #=> Time
-    #   resp.annotation_import_jobs[0].creation_time #=> Time
-    #   resp.annotation_import_jobs[0].destination_name #=> String
     #   resp.annotation_import_jobs[0].id #=> String
+    #   resp.annotation_import_jobs[0].destination_name #=> String
     #   resp.annotation_import_jobs[0].role_arn #=> String
-    #   resp.annotation_import_jobs[0].run_left_normalization #=> Boolean
     #   resp.annotation_import_jobs[0].status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED", "COMPLETED_WITH_FAILURES"
+    #   resp.annotation_import_jobs[0].creation_time #=> Time
     #   resp.annotation_import_jobs[0].update_time #=> Time
+    #   resp.annotation_import_jobs[0].completion_time #=> Time
+    #   resp.annotation_import_jobs[0].run_left_normalization #=> Boolean
+    #   resp.annotation_import_jobs[0].annotation_fields #=> Hash
+    #   resp.annotation_import_jobs[0].annotation_fields["AnnotationFieldMapKeyString"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListAnnotationImportJobs AWS API Documentation
@@ -2147,9 +2343,6 @@ module Aws::Omics
 
     # Retrieves a list of annotation stores.
     #
-    # @option params [Types::ListAnnotationStoresFilter] :filter
-    #   A filter to apply to the list.
-    #
     # @option params [Array<String>] :ids
     #   IDs of stores to list.
     #
@@ -2159,6 +2352,9 @@ module Aws::Omics
     # @option params [String] :next_token
     #   Specify the pagination token from a previous request to retrieve the
     #   next page of results.
+    #
+    # @option params [Types::ListAnnotationStoresFilter] :filter
+    #   A filter to apply to the list.
     #
     # @return [Types::ListAnnotationStoresResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2170,30 +2366,30 @@ module Aws::Omics
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_annotation_stores({
-    #     filter: {
-    #       status: "CREATING", # accepts CREATING, UPDATING, DELETING, ACTIVE, FAILED
-    #     },
     #     ids: ["ResourceIdentifier"],
     #     max_results: 1,
     #     next_token: "ListAnnotationStoresRequestNextTokenString",
+    #     filter: {
+    #       status: "CREATING", # accepts CREATING, UPDATING, DELETING, ACTIVE, FAILED
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.annotation_stores #=> Array
-    #   resp.annotation_stores[0].creation_time #=> Time
-    #   resp.annotation_stores[0].description #=> String
     #   resp.annotation_stores[0].id #=> String
-    #   resp.annotation_stores[0].name #=> String
     #   resp.annotation_stores[0].reference.reference_arn #=> String
-    #   resp.annotation_stores[0].sse_config.key_arn #=> String
-    #   resp.annotation_stores[0].sse_config.type #=> String, one of "KMS"
     #   resp.annotation_stores[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
-    #   resp.annotation_stores[0].status_message #=> String
     #   resp.annotation_stores[0].store_arn #=> String
+    #   resp.annotation_stores[0].name #=> String
     #   resp.annotation_stores[0].store_format #=> String, one of "GFF", "TSV", "VCF"
-    #   resp.annotation_stores[0].store_size_bytes #=> Integer
+    #   resp.annotation_stores[0].description #=> String
+    #   resp.annotation_stores[0].sse_config.type #=> String, one of "KMS"
+    #   resp.annotation_stores[0].sse_config.key_arn #=> String
+    #   resp.annotation_stores[0].creation_time #=> Time
     #   resp.annotation_stores[0].update_time #=> Time
+    #   resp.annotation_stores[0].status_message #=> String
+    #   resp.annotation_stores[0].store_size_bytes #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListAnnotationStores AWS API Documentation
@@ -2205,10 +2401,64 @@ module Aws::Omics
       req.send_request(options)
     end
 
+    # Lists all multipart read set uploads and their statuses.
+    #
+    # @option params [required, String] :sequence_store_id
+    #   The Sequence Store ID used for the multipart uploads.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of multipart uploads returned in a page.
+    #
+    # @option params [String] :next_token
+    #   Next token returned in the response of a previous
+    #   ListMultipartReadSetUploads call. Used to get the next page of
+    #   results.
+    #
+    # @return [Types::ListMultipartReadSetUploadsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMultipartReadSetUploadsResponse#next_token #next_token} => String
+    #   * {Types::ListMultipartReadSetUploadsResponse#uploads #uploads} => Array&lt;Types::MultipartReadSetUploadListItem&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_multipart_read_set_uploads({
+    #     sequence_store_id: "SequenceStoreId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.uploads #=> Array
+    #   resp.uploads[0].sequence_store_id #=> String
+    #   resp.uploads[0].upload_id #=> String
+    #   resp.uploads[0].source_file_type #=> String, one of "FASTQ", "BAM", "CRAM"
+    #   resp.uploads[0].subject_id #=> String
+    #   resp.uploads[0].sample_id #=> String
+    #   resp.uploads[0].generated_from #=> String
+    #   resp.uploads[0].reference_arn #=> String
+    #   resp.uploads[0].name #=> String
+    #   resp.uploads[0].description #=> String
+    #   resp.uploads[0].tags #=> Hash
+    #   resp.uploads[0].tags["TagKey"] #=> String
+    #   resp.uploads[0].creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListMultipartReadSetUploads AWS API Documentation
+    #
+    # @overload list_multipart_read_set_uploads(params = {})
+    # @param [Hash] params ({})
+    def list_multipart_read_set_uploads(params = {}, options = {})
+      req = build_request(:list_multipart_read_set_uploads, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of read set activation jobs.
     #
-    # @option params [Types::ActivateReadSetFilter] :filter
-    #   A filter to apply to the list.
+    # @option params [required, String] :sequence_store_id
+    #   The read set's sequence store ID.
     #
     # @option params [Integer] :max_results
     #   The maximum number of read set activation jobs to return in one page
@@ -2218,38 +2468,38 @@ module Aws::Omics
     #   Specify the pagination token from a previous request to retrieve the
     #   next page of results.
     #
-    # @option params [required, String] :sequence_store_id
-    #   The read set's sequence store ID.
+    # @option params [Types::ActivateReadSetFilter] :filter
+    #   A filter to apply to the list.
     #
     # @return [Types::ListReadSetActivationJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListReadSetActivationJobsResponse#activation_jobs #activation_jobs} => Array&lt;Types::ActivateReadSetJobItem&gt;
     #   * {Types::ListReadSetActivationJobsResponse#next_token #next_token} => String
+    #   * {Types::ListReadSetActivationJobsResponse#activation_jobs #activation_jobs} => Array&lt;Types::ActivateReadSetJobItem&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_read_set_activation_jobs({
-    #     filter: {
-    #       created_after: Time.now,
-    #       created_before: Time.now,
-    #       status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLING, CANCELLED, FAILED, COMPLETED, COMPLETED_WITH_FAILURES
-    #     },
+    #     sequence_store_id: "SequenceStoreId", # required
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     sequence_store_id: "SequenceStoreId", # required
+    #     filter: {
+    #       status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLING, CANCELLED, FAILED, COMPLETED, COMPLETED_WITH_FAILURES
+    #       created_after: Time.now,
+    #       created_before: Time.now,
+    #     },
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.activation_jobs #=> Array
-    #   resp.activation_jobs[0].completion_time #=> Time
-    #   resp.activation_jobs[0].creation_time #=> Time
     #   resp.activation_jobs[0].id #=> String
     #   resp.activation_jobs[0].sequence_store_id #=> String
     #   resp.activation_jobs[0].status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLING", "CANCELLED", "FAILED", "COMPLETED", "COMPLETED_WITH_FAILURES"
-    #   resp.next_token #=> String
+    #   resp.activation_jobs[0].creation_time #=> Time
+    #   resp.activation_jobs[0].completion_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListReadSetActivationJobs AWS API Documentation
     #
@@ -2262,8 +2512,8 @@ module Aws::Omics
 
     # Retrieves a list of read set export jobs.
     #
-    # @option params [Types::ExportReadSetFilter] :filter
-    #   A filter to apply to the list.
+    # @option params [required, String] :sequence_store_id
+    #   The jobs' sequence store ID.
     #
     # @option params [Integer] :max_results
     #   The maximum number of jobs to return in one page of results.
@@ -2272,39 +2522,39 @@ module Aws::Omics
     #   Specify the pagination token from a previous request to retrieve the
     #   next page of results.
     #
-    # @option params [required, String] :sequence_store_id
-    #   The jobs' sequence store ID.
+    # @option params [Types::ExportReadSetFilter] :filter
+    #   A filter to apply to the list.
     #
     # @return [Types::ListReadSetExportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListReadSetExportJobsResponse#export_jobs #export_jobs} => Array&lt;Types::ExportReadSetJobDetail&gt;
     #   * {Types::ListReadSetExportJobsResponse#next_token #next_token} => String
+    #   * {Types::ListReadSetExportJobsResponse#export_jobs #export_jobs} => Array&lt;Types::ExportReadSetJobDetail&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_read_set_export_jobs({
-    #     filter: {
-    #       created_after: Time.now,
-    #       created_before: Time.now,
-    #       status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLING, CANCELLED, FAILED, COMPLETED, COMPLETED_WITH_FAILURES
-    #     },
+    #     sequence_store_id: "SequenceStoreId", # required
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     sequence_store_id: "SequenceStoreId", # required
+    #     filter: {
+    #       status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLING, CANCELLED, FAILED, COMPLETED, COMPLETED_WITH_FAILURES
+    #       created_after: Time.now,
+    #       created_before: Time.now,
+    #     },
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.export_jobs #=> Array
-    #   resp.export_jobs[0].completion_time #=> Time
-    #   resp.export_jobs[0].creation_time #=> Time
-    #   resp.export_jobs[0].destination #=> String
     #   resp.export_jobs[0].id #=> String
     #   resp.export_jobs[0].sequence_store_id #=> String
+    #   resp.export_jobs[0].destination #=> String
     #   resp.export_jobs[0].status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLING", "CANCELLED", "FAILED", "COMPLETED", "COMPLETED_WITH_FAILURES"
-    #   resp.next_token #=> String
+    #   resp.export_jobs[0].creation_time #=> Time
+    #   resp.export_jobs[0].completion_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListReadSetExportJobs AWS API Documentation
     #
@@ -2317,9 +2567,6 @@ module Aws::Omics
 
     # Retrieves a list of read set import jobs.
     #
-    # @option params [Types::ImportReadSetFilter] :filter
-    #   A filter to apply to the list.
-    #
     # @option params [Integer] :max_results
     #   The maximum number of jobs to return in one page of results.
     #
@@ -2330,36 +2577,39 @@ module Aws::Omics
     # @option params [required, String] :sequence_store_id
     #   The jobs' sequence store ID.
     #
+    # @option params [Types::ImportReadSetFilter] :filter
+    #   A filter to apply to the list.
+    #
     # @return [Types::ListReadSetImportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListReadSetImportJobsResponse#import_jobs #import_jobs} => Array&lt;Types::ImportReadSetJobItem&gt;
     #   * {Types::ListReadSetImportJobsResponse#next_token #next_token} => String
+    #   * {Types::ListReadSetImportJobsResponse#import_jobs #import_jobs} => Array&lt;Types::ImportReadSetJobItem&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_read_set_import_jobs({
-    #     filter: {
-    #       created_after: Time.now,
-    #       created_before: Time.now,
-    #       status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLING, CANCELLED, FAILED, COMPLETED, COMPLETED_WITH_FAILURES
-    #     },
     #     max_results: 1,
     #     next_token: "NextToken",
     #     sequence_store_id: "SequenceStoreId", # required
+    #     filter: {
+    #       status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLING, CANCELLED, FAILED, COMPLETED, COMPLETED_WITH_FAILURES
+    #       created_after: Time.now,
+    #       created_before: Time.now,
+    #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.import_jobs #=> Array
-    #   resp.import_jobs[0].completion_time #=> Time
-    #   resp.import_jobs[0].creation_time #=> Time
-    #   resp.import_jobs[0].id #=> String
-    #   resp.import_jobs[0].role_arn #=> String
-    #   resp.import_jobs[0].sequence_store_id #=> String
-    #   resp.import_jobs[0].status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLING", "CANCELLED", "FAILED", "COMPLETED", "COMPLETED_WITH_FAILURES"
     #   resp.next_token #=> String
+    #   resp.import_jobs #=> Array
+    #   resp.import_jobs[0].id #=> String
+    #   resp.import_jobs[0].sequence_store_id #=> String
+    #   resp.import_jobs[0].role_arn #=> String
+    #   resp.import_jobs[0].status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLING", "CANCELLED", "FAILED", "COMPLETED", "COMPLETED_WITH_FAILURES"
+    #   resp.import_jobs[0].creation_time #=> Time
+    #   resp.import_jobs[0].completion_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListReadSetImportJobs AWS API Documentation
     #
@@ -2370,10 +2620,75 @@ module Aws::Omics
       req.send_request(options)
     end
 
+    # This operation will list all parts in a requested multipart upload for
+    # a sequence store.
+    #
+    # @option params [required, String] :sequence_store_id
+    #   The Sequence Store ID used for the multipart uploads.
+    #
+    # @option params [required, String] :upload_id
+    #   The ID for the initiated multipart upload.
+    #
+    # @option params [required, String] :part_source
+    #   The source file for the upload part.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of read set upload parts returned in a page.
+    #
+    # @option params [String] :next_token
+    #   Next token returned in the response of a previous
+    #   ListReadSetUploadPartsRequest call. Used to get the next page of
+    #   results.
+    #
+    # @option params [Types::ReadSetUploadPartListFilter] :filter
+    #   Attributes used to filter for a specific subset of read set part
+    #   uploads.
+    #
+    # @return [Types::ListReadSetUploadPartsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListReadSetUploadPartsResponse#next_token #next_token} => String
+    #   * {Types::ListReadSetUploadPartsResponse#parts #parts} => Array&lt;Types::ReadSetUploadPartListItem&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_read_set_upload_parts({
+    #     sequence_store_id: "SequenceStoreId", # required
+    #     upload_id: "UploadId", # required
+    #     part_source: "SOURCE1", # required, accepts SOURCE1, SOURCE2
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     filter: {
+    #       created_after: Time.now,
+    #       created_before: Time.now,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.parts #=> Array
+    #   resp.parts[0].part_number #=> Integer
+    #   resp.parts[0].part_size #=> Integer
+    #   resp.parts[0].part_source #=> String, one of "SOURCE1", "SOURCE2"
+    #   resp.parts[0].checksum #=> String
+    #   resp.parts[0].creation_time #=> Time
+    #   resp.parts[0].last_updated_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListReadSetUploadParts AWS API Documentation
+    #
+    # @overload list_read_set_upload_parts(params = {})
+    # @param [Hash] params ({})
+    def list_read_set_upload_parts(params = {}, options = {})
+      req = build_request(:list_read_set_upload_parts, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of read sets.
     #
-    # @option params [Types::ReadSetFilter] :filter
-    #   A filter to apply to the list.
+    # @option params [required, String] :sequence_store_id
+    #   The jobs' sequence store ID.
     #
     # @option params [Integer] :max_results
     #   The maximum number of read sets to return in one page of results.
@@ -2382,8 +2697,8 @@ module Aws::Omics
     #   Specify the pagination token from a previous request to retrieve the
     #   next page of results.
     #
-    # @option params [required, String] :sequence_store_id
-    #   The jobs' sequence store ID.
+    # @option params [Types::ReadSetFilter] :filter
+    #   A filter to apply to the list.
     #
     # @return [Types::ListReadSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2395,37 +2710,41 @@ module Aws::Omics
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_read_sets({
-    #     filter: {
-    #       created_after: Time.now,
-    #       created_before: Time.now,
-    #       name: "ReadSetName",
-    #       reference_arn: "ReferenceArn",
-    #       status: "ARCHIVED", # accepts ARCHIVED, ACTIVATING, ACTIVE, DELETING, DELETED
-    #     },
+    #     sequence_store_id: "SequenceStoreId", # required
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     sequence_store_id: "SequenceStoreId", # required
+    #     filter: {
+    #       name: "ReadSetName",
+    #       status: "ARCHIVED", # accepts ARCHIVED, ACTIVATING, ACTIVE, DELETING, DELETED, PROCESSING_UPLOAD, UPLOAD_FAILED
+    #       reference_arn: "ReferenceArn",
+    #       created_after: Time.now,
+    #       created_before: Time.now,
+    #       sample_id: "SampleId",
+    #       subject_id: "SubjectId",
+    #       generated_from: "GeneratedFrom",
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.next_token #=> String
     #   resp.read_sets #=> Array
-    #   resp.read_sets[0].arn #=> String
-    #   resp.read_sets[0].creation_time #=> Time
-    #   resp.read_sets[0].description #=> String
-    #   resp.read_sets[0].file_type #=> String, one of "FASTQ", "BAM", "CRAM"
     #   resp.read_sets[0].id #=> String
-    #   resp.read_sets[0].name #=> String
-    #   resp.read_sets[0].reference_arn #=> String
-    #   resp.read_sets[0].sample_id #=> String
-    #   resp.read_sets[0].sequence_information.alignment #=> String
-    #   resp.read_sets[0].sequence_information.generated_from #=> String
-    #   resp.read_sets[0].sequence_information.total_base_count #=> Integer
-    #   resp.read_sets[0].sequence_information.total_read_count #=> Integer
+    #   resp.read_sets[0].arn #=> String
     #   resp.read_sets[0].sequence_store_id #=> String
-    #   resp.read_sets[0].status #=> String, one of "ARCHIVED", "ACTIVATING", "ACTIVE", "DELETING", "DELETED"
     #   resp.read_sets[0].subject_id #=> String
+    #   resp.read_sets[0].sample_id #=> String
+    #   resp.read_sets[0].status #=> String, one of "ARCHIVED", "ACTIVATING", "ACTIVE", "DELETING", "DELETED", "PROCESSING_UPLOAD", "UPLOAD_FAILED"
+    #   resp.read_sets[0].name #=> String
+    #   resp.read_sets[0].description #=> String
+    #   resp.read_sets[0].reference_arn #=> String
+    #   resp.read_sets[0].file_type #=> String, one of "FASTQ", "BAM", "CRAM"
+    #   resp.read_sets[0].sequence_information.total_read_count #=> Integer
+    #   resp.read_sets[0].sequence_information.total_base_count #=> Integer
+    #   resp.read_sets[0].sequence_information.generated_from #=> String
+    #   resp.read_sets[0].sequence_information.alignment #=> String
+    #   resp.read_sets[0].creation_time #=> Time
+    #   resp.read_sets[0].status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListReadSets AWS API Documentation
     #
@@ -2438,9 +2757,6 @@ module Aws::Omics
 
     # Retrieves a list of reference import jobs.
     #
-    # @option params [Types::ImportReferenceFilter] :filter
-    #   A filter to apply to the list.
-    #
     # @option params [Integer] :max_results
     #   The maximum number of jobs to return in one page of results.
     #
@@ -2451,36 +2767,39 @@ module Aws::Omics
     # @option params [required, String] :reference_store_id
     #   The job's reference store ID.
     #
+    # @option params [Types::ImportReferenceFilter] :filter
+    #   A filter to apply to the list.
+    #
     # @return [Types::ListReferenceImportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListReferenceImportJobsResponse#import_jobs #import_jobs} => Array&lt;Types::ImportReferenceJobItem&gt;
     #   * {Types::ListReferenceImportJobsResponse#next_token #next_token} => String
+    #   * {Types::ListReferenceImportJobsResponse#import_jobs #import_jobs} => Array&lt;Types::ImportReferenceJobItem&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_reference_import_jobs({
-    #     filter: {
-    #       created_after: Time.now,
-    #       created_before: Time.now,
-    #       status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLING, CANCELLED, FAILED, COMPLETED, COMPLETED_WITH_FAILURES
-    #     },
     #     max_results: 1,
     #     next_token: "NextToken",
     #     reference_store_id: "ReferenceStoreId", # required
+    #     filter: {
+    #       status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLING, CANCELLED, FAILED, COMPLETED, COMPLETED_WITH_FAILURES
+    #       created_after: Time.now,
+    #       created_before: Time.now,
+    #     },
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.import_jobs #=> Array
-    #   resp.import_jobs[0].completion_time #=> Time
-    #   resp.import_jobs[0].creation_time #=> Time
     #   resp.import_jobs[0].id #=> String
     #   resp.import_jobs[0].reference_store_id #=> String
     #   resp.import_jobs[0].role_arn #=> String
     #   resp.import_jobs[0].status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLING", "CANCELLED", "FAILED", "COMPLETED", "COMPLETED_WITH_FAILURES"
-    #   resp.next_token #=> String
+    #   resp.import_jobs[0].creation_time #=> Time
+    #   resp.import_jobs[0].completion_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListReferenceImportJobs AWS API Documentation
     #
@@ -2493,15 +2812,15 @@ module Aws::Omics
 
     # Retrieves a list of reference stores.
     #
-    # @option params [Types::ReferenceStoreFilter] :filter
-    #   A filter to apply to the list.
-    #
     # @option params [Integer] :max_results
     #   The maximum number of stores to return in one page of results.
     #
     # @option params [String] :next_token
     #   Specify the pagination token from a previous request to retrieve the
     #   next page of results.
+    #
+    # @option params [Types::ReferenceStoreFilter] :filter
+    #   A filter to apply to the list.
     #
     # @return [Types::ListReferenceStoresResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2513,13 +2832,13 @@ module Aws::Omics
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_reference_stores({
-    #     filter: {
-    #       created_after: Time.now,
-    #       created_before: Time.now,
-    #       name: "ReferenceStoreName",
-    #     },
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     filter: {
+    #       name: "ReferenceStoreName",
+    #       created_after: Time.now,
+    #       created_before: Time.now,
+    #     },
     #   })
     #
     # @example Response structure
@@ -2527,12 +2846,12 @@ module Aws::Omics
     #   resp.next_token #=> String
     #   resp.reference_stores #=> Array
     #   resp.reference_stores[0].arn #=> String
-    #   resp.reference_stores[0].creation_time #=> Time
-    #   resp.reference_stores[0].description #=> String
     #   resp.reference_stores[0].id #=> String
     #   resp.reference_stores[0].name #=> String
-    #   resp.reference_stores[0].sse_config.key_arn #=> String
+    #   resp.reference_stores[0].description #=> String
     #   resp.reference_stores[0].sse_config.type #=> String, one of "KMS"
+    #   resp.reference_stores[0].sse_config.key_arn #=> String
+    #   resp.reference_stores[0].creation_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListReferenceStores AWS API Documentation
     #
@@ -2545,8 +2864,8 @@ module Aws::Omics
 
     # Retrieves a list of references.
     #
-    # @option params [Types::ReferenceFilter] :filter
-    #   A filter to apply to the list.
+    # @option params [required, String] :reference_store_id
+    #   The references' reference store ID.
     #
     # @option params [Integer] :max_results
     #   The maximum number of references to return in one page of results.
@@ -2555,8 +2874,8 @@ module Aws::Omics
     #   Specify the pagination token from a previous request to retrieve the
     #   next page of results.
     #
-    # @option params [required, String] :reference_store_id
-    #   The references' reference store ID.
+    # @option params [Types::ReferenceFilter] :filter
+    #   A filter to apply to the list.
     #
     # @return [Types::ListReferencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2568,29 +2887,29 @@ module Aws::Omics
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_references({
-    #     filter: {
-    #       created_after: Time.now,
-    #       created_before: Time.now,
-    #       md5: "Md5",
-    #       name: "ReferenceName",
-    #     },
+    #     reference_store_id: "ReferenceStoreId", # required
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     reference_store_id: "ReferenceStoreId", # required
+    #     filter: {
+    #       name: "ReferenceName",
+    #       md5: "Md5",
+    #       created_after: Time.now,
+    #       created_before: Time.now,
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.next_token #=> String
     #   resp.references #=> Array
-    #   resp.references[0].arn #=> String
-    #   resp.references[0].creation_time #=> Time
-    #   resp.references[0].description #=> String
     #   resp.references[0].id #=> String
-    #   resp.references[0].md5 #=> String
-    #   resp.references[0].name #=> String
+    #   resp.references[0].arn #=> String
     #   resp.references[0].reference_store_id #=> String
+    #   resp.references[0].md5 #=> String
     #   resp.references[0].status #=> String, one of "ACTIVE", "DELETING", "DELETED"
+    #   resp.references[0].name #=> String
+    #   resp.references[0].description #=> String
+    #   resp.references[0].creation_time #=> Time
     #   resp.references[0].update_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListReferences AWS API Documentation
@@ -2604,15 +2923,15 @@ module Aws::Omics
 
     # Retrieves a list of run groups.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of run groups to return in one page of results.
-    #
     # @option params [String] :name
     #   The run groups' name.
     #
     # @option params [String] :starting_token
     #   Specify the pagination token from a previous request to retrieve the
     #   next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of run groups to return in one page of results.
     #
     # @return [Types::ListRunGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2624,21 +2943,22 @@ module Aws::Omics
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_run_groups({
-    #     max_results: 1,
     #     name: "RunGroupName",
     #     starting_token: "RunGroupListToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.items #=> Array
     #   resp.items[0].arn #=> String
-    #   resp.items[0].creation_time #=> Time
     #   resp.items[0].id #=> String
-    #   resp.items[0].max_cpus #=> Integer
-    #   resp.items[0].max_duration #=> Integer
-    #   resp.items[0].max_runs #=> Integer
     #   resp.items[0].name #=> String
+    #   resp.items[0].max_cpus #=> Integer
+    #   resp.items[0].max_runs #=> Integer
+    #   resp.items[0].max_duration #=> Integer
+    #   resp.items[0].creation_time #=> Time
+    #   resp.items[0].max_gpus #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListRunGroups AWS API Documentation
@@ -2655,15 +2975,15 @@ module Aws::Omics
     # @option params [required, String] :id
     #   The run's ID.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of run tasks to return in one page of results.
+    # @option params [String] :status
+    #   Filter the list by status.
     #
     # @option params [String] :starting_token
     #   Specify the pagination token from a previous request to retrieve the
     #   next page of results.
     #
-    # @option params [String] :status
-    #   Filter the list by status.
+    # @option params [Integer] :max_results
+    #   The maximum number of run tasks to return in one page of results.
     #
     # @return [Types::ListRunTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2676,22 +2996,23 @@ module Aws::Omics
     #
     #   resp = client.list_run_tasks({
     #     id: "RunId", # required
-    #     max_results: 1,
-    #     starting_token: "TaskListToken",
     #     status: "PENDING", # accepts PENDING, STARTING, RUNNING, STOPPING, COMPLETED, CANCELLED, FAILED
+    #     starting_token: "TaskListToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.items #=> Array
-    #   resp.items[0].cpus #=> Integer
-    #   resp.items[0].creation_time #=> Time
-    #   resp.items[0].memory #=> Integer
-    #   resp.items[0].name #=> String
-    #   resp.items[0].start_time #=> Time
-    #   resp.items[0].status #=> String, one of "PENDING", "STARTING", "RUNNING", "STOPPING", "COMPLETED", "CANCELLED", "FAILED"
-    #   resp.items[0].stop_time #=> Time
     #   resp.items[0].task_id #=> String
+    #   resp.items[0].status #=> String, one of "PENDING", "STARTING", "RUNNING", "STOPPING", "COMPLETED", "CANCELLED", "FAILED"
+    #   resp.items[0].name #=> String
+    #   resp.items[0].cpus #=> Integer
+    #   resp.items[0].memory #=> Integer
+    #   resp.items[0].creation_time #=> Time
+    #   resp.items[0].start_time #=> Time
+    #   resp.items[0].stop_time #=> Time
+    #   resp.items[0].gpus #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListRunTasks AWS API Documentation
@@ -2705,9 +3026,6 @@ module Aws::Omics
 
     # Retrieves a list of runs.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of runs to return in one page of results.
-    #
     # @option params [String] :name
     #   Filter the list by run name.
     #
@@ -2717,6 +3035,12 @@ module Aws::Omics
     # @option params [String] :starting_token
     #   Specify the pagination token from a previous request to retrieve the
     #   next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of runs to return in one page of results.
+    #
+    # @option params [String] :status
+    #   The status of a run.
     #
     # @return [Types::ListRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2728,25 +3052,26 @@ module Aws::Omics
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_runs({
-    #     max_results: 1,
     #     name: "RunName",
     #     run_group_id: "RunGroupId",
     #     starting_token: "RunListToken",
+    #     max_results: 1,
+    #     status: "PENDING", # accepts PENDING, STARTING, RUNNING, STOPPING, COMPLETED, DELETED, CANCELLED, FAILED
     #   })
     #
     # @example Response structure
     #
     #   resp.items #=> Array
     #   resp.items[0].arn #=> String
-    #   resp.items[0].creation_time #=> Time
     #   resp.items[0].id #=> String
+    #   resp.items[0].status #=> String, one of "PENDING", "STARTING", "RUNNING", "STOPPING", "COMPLETED", "DELETED", "CANCELLED", "FAILED"
+    #   resp.items[0].workflow_id #=> String
     #   resp.items[0].name #=> String
     #   resp.items[0].priority #=> Integer
-    #   resp.items[0].start_time #=> Time
-    #   resp.items[0].status #=> String, one of "PENDING", "STARTING", "RUNNING", "STOPPING", "COMPLETED", "DELETED", "CANCELLED", "FAILED"
-    #   resp.items[0].stop_time #=> Time
     #   resp.items[0].storage_capacity #=> Integer
-    #   resp.items[0].workflow_id #=> String
+    #   resp.items[0].creation_time #=> Time
+    #   resp.items[0].start_time #=> Time
+    #   resp.items[0].stop_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListRuns AWS API Documentation
@@ -2760,15 +3085,15 @@ module Aws::Omics
 
     # Retrieves a list of sequence stores.
     #
-    # @option params [Types::SequenceStoreFilter] :filter
-    #   A filter to apply to the list.
-    #
     # @option params [Integer] :max_results
     #   The maximum number of stores to return in one page of results.
     #
     # @option params [String] :next_token
     #   Specify the pagination token from a previous request to retrieve the
     #   next page of results.
+    #
+    # @option params [Types::SequenceStoreFilter] :filter
+    #   A filter to apply to the list.
     #
     # @return [Types::ListSequenceStoresResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2780,13 +3105,13 @@ module Aws::Omics
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_sequence_stores({
-    #     filter: {
-    #       created_after: Time.now,
-    #       created_before: Time.now,
-    #       name: "SequenceStoreName",
-    #     },
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     filter: {
+    #       name: "SequenceStoreName",
+    #       created_after: Time.now,
+    #       created_before: Time.now,
+    #     },
     #   })
     #
     # @example Response structure
@@ -2794,12 +3119,13 @@ module Aws::Omics
     #   resp.next_token #=> String
     #   resp.sequence_stores #=> Array
     #   resp.sequence_stores[0].arn #=> String
-    #   resp.sequence_stores[0].creation_time #=> Time
-    #   resp.sequence_stores[0].description #=> String
     #   resp.sequence_stores[0].id #=> String
     #   resp.sequence_stores[0].name #=> String
-    #   resp.sequence_stores[0].sse_config.key_arn #=> String
+    #   resp.sequence_stores[0].description #=> String
     #   resp.sequence_stores[0].sse_config.type #=> String, one of "KMS"
+    #   resp.sequence_stores[0].sse_config.key_arn #=> String
+    #   resp.sequence_stores[0].creation_time #=> Time
+    #   resp.sequence_stores[0].fallback_location #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListSequenceStores AWS API Documentation
     #
@@ -2841,50 +3167,52 @@ module Aws::Omics
 
     # Retrieves a list of variant import jobs.
     #
-    # @option params [Types::ListVariantImportJobsFilter] :filter
-    #   A filter to apply to the list.
+    # @option params [Integer] :max_results
+    #   The maximum number of import jobs to return in one page of results.
     #
     # @option params [Array<String>] :ids
     #   A list of job IDs.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of import jobs to return in one page of results.
     #
     # @option params [String] :next_token
     #   Specify the pagination token from a previous request to retrieve the
     #   next page of results.
     #
+    # @option params [Types::ListVariantImportJobsFilter] :filter
+    #   A filter to apply to the list.
+    #
     # @return [Types::ListVariantImportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListVariantImportJobsResponse#next_token #next_token} => String
     #   * {Types::ListVariantImportJobsResponse#variant_import_jobs #variant_import_jobs} => Array&lt;Types::VariantImportJobItem&gt;
+    #   * {Types::ListVariantImportJobsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_variant_import_jobs({
+    #     max_results: 1,
+    #     ids: ["ResourceIdentifier"],
+    #     next_token: "ListVariantImportJobsRequestNextTokenString",
     #     filter: {
     #       status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELLED, COMPLETED, FAILED, COMPLETED_WITH_FAILURES
     #       store_name: "String",
     #     },
-    #     ids: ["ResourceIdentifier"],
-    #     max_results: 1,
-    #     next_token: "ListVariantImportJobsRequestNextTokenString",
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.variant_import_jobs #=> Array
-    #   resp.variant_import_jobs[0].completion_time #=> Time
-    #   resp.variant_import_jobs[0].creation_time #=> Time
-    #   resp.variant_import_jobs[0].destination_name #=> String
     #   resp.variant_import_jobs[0].id #=> String
+    #   resp.variant_import_jobs[0].destination_name #=> String
     #   resp.variant_import_jobs[0].role_arn #=> String
-    #   resp.variant_import_jobs[0].run_left_normalization #=> Boolean
     #   resp.variant_import_jobs[0].status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED", "COMPLETED_WITH_FAILURES"
+    #   resp.variant_import_jobs[0].creation_time #=> Time
     #   resp.variant_import_jobs[0].update_time #=> Time
+    #   resp.variant_import_jobs[0].completion_time #=> Time
+    #   resp.variant_import_jobs[0].run_left_normalization #=> Boolean
+    #   resp.variant_import_jobs[0].annotation_fields #=> Hash
+    #   resp.variant_import_jobs[0].annotation_fields["AnnotationFieldMapKeyString"] #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListVariantImportJobs AWS API Documentation
     #
@@ -2897,53 +3225,53 @@ module Aws::Omics
 
     # Retrieves a list of variant stores.
     #
-    # @option params [Types::ListVariantStoresFilter] :filter
-    #   A filter to apply to the list.
+    # @option params [Integer] :max_results
+    #   The maximum number of stores to return in one page of results.
     #
     # @option params [Array<String>] :ids
     #   A list of store IDs.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of stores to return in one page of results.
     #
     # @option params [String] :next_token
     #   Specify the pagination token from a previous request to retrieve the
     #   next page of results.
     #
+    # @option params [Types::ListVariantStoresFilter] :filter
+    #   A filter to apply to the list.
+    #
     # @return [Types::ListVariantStoresResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListVariantStoresResponse#next_token #next_token} => String
     #   * {Types::ListVariantStoresResponse#variant_stores #variant_stores} => Array&lt;Types::VariantStoreItem&gt;
+    #   * {Types::ListVariantStoresResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_variant_stores({
+    #     max_results: 1,
+    #     ids: ["ResourceIdentifier"],
+    #     next_token: "ListVariantStoresRequestNextTokenString",
     #     filter: {
     #       status: "CREATING", # accepts CREATING, UPDATING, DELETING, ACTIVE, FAILED
     #     },
-    #     ids: ["ResourceIdentifier"],
-    #     max_results: 1,
-    #     next_token: "ListVariantStoresRequestNextTokenString",
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.variant_stores #=> Array
-    #   resp.variant_stores[0].creation_time #=> Time
-    #   resp.variant_stores[0].description #=> String
     #   resp.variant_stores[0].id #=> String
-    #   resp.variant_stores[0].name #=> String
     #   resp.variant_stores[0].reference.reference_arn #=> String
-    #   resp.variant_stores[0].sse_config.key_arn #=> String
-    #   resp.variant_stores[0].sse_config.type #=> String, one of "KMS"
     #   resp.variant_stores[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
-    #   resp.variant_stores[0].status_message #=> String
     #   resp.variant_stores[0].store_arn #=> String
-    #   resp.variant_stores[0].store_size_bytes #=> Integer
+    #   resp.variant_stores[0].name #=> String
+    #   resp.variant_stores[0].description #=> String
+    #   resp.variant_stores[0].sse_config.type #=> String, one of "KMS"
+    #   resp.variant_stores[0].sse_config.key_arn #=> String
+    #   resp.variant_stores[0].creation_time #=> Time
     #   resp.variant_stores[0].update_time #=> Time
+    #   resp.variant_stores[0].status_message #=> String
+    #   resp.variant_stores[0].store_size_bytes #=> Integer
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListVariantStores AWS API Documentation
     #
@@ -2956,8 +3284,8 @@ module Aws::Omics
 
     # Retrieves a list of workflows.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of workflows to return in one page of results.
+    # @option params [String] :type
+    #   The workflows' type.
     #
     # @option params [String] :name
     #   The workflows' name.
@@ -2966,8 +3294,8 @@ module Aws::Omics
     #   Specify the pagination token from a previous request to retrieve the
     #   next page of results.
     #
-    # @option params [String] :type
-    #   The workflows' type.
+    # @option params [Integer] :max_results
+    #   The maximum number of workflows to return in one page of results.
     #
     # @return [Types::ListWorkflowsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2979,22 +3307,24 @@ module Aws::Omics
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_workflows({
-    #     max_results: 1,
+    #     type: "PRIVATE", # accepts PRIVATE, READY2RUN
     #     name: "WorkflowName",
     #     starting_token: "WorkflowListToken",
-    #     type: "PRIVATE", # accepts PRIVATE
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.items #=> Array
     #   resp.items[0].arn #=> String
-    #   resp.items[0].creation_time #=> Time
-    #   resp.items[0].digest #=> String
     #   resp.items[0].id #=> String
     #   resp.items[0].name #=> String
-    #   resp.items[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETED", "FAILED"
-    #   resp.items[0].type #=> String, one of "PRIVATE"
+    #   resp.items[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETED", "FAILED", "INACTIVE"
+    #   resp.items[0].type #=> String, one of "PRIVATE", "READY2RUN"
+    #   resp.items[0].digest #=> String
+    #   resp.items[0].creation_time #=> Time
+    #   resp.items[0].metadata #=> Hash
+    #   resp.items[0].metadata["WorkflowMetadataKey"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListWorkflows AWS API Documentation
@@ -3011,17 +3341,20 @@ module Aws::Omics
     # @option params [required, String] :destination_name
     #   A destination annotation store for the job.
     #
-    # @option params [Types::FormatOptions] :format_options
-    #   Formatting options for the annotation file.
+    # @option params [required, String] :role_arn
+    #   A service role for the job.
     #
     # @option params [required, Array<Types::AnnotationImportItemSource>] :items
     #   Items to import.
     #
-    # @option params [required, String] :role_arn
-    #   A service role for the job.
+    # @option params [Types::FormatOptions] :format_options
+    #   Formatting options for the annotation file.
     #
     # @option params [Boolean] :run_left_normalization
     #   The job's left normalization setting.
+    #
+    # @option params [Hash<String,String>] :annotation_fields
+    #   The annotation schema generated by the parsed annotation data.
     #
     # @return [Types::StartAnnotationImportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3031,32 +3364,35 @@ module Aws::Omics
     #
     #   resp = client.start_annotation_import_job({
     #     destination_name: "StoreName", # required
-    #     format_options: {
-    #       tsv_options: {
-    #         read_options: {
-    #           comment: "CommentChar",
-    #           encoding: "Encoding",
-    #           escape: "EscapeChar",
-    #           escape_quotes: false,
-    #           header: false,
-    #           line_sep: "LineSep",
-    #           quote: "Quote",
-    #           quote_all: false,
-    #           sep: "Separator",
-    #         },
-    #       },
-    #       vcf_options: {
-    #         ignore_filter_field: false,
-    #         ignore_qual_field: false,
-    #       },
-    #     },
+    #     role_arn: "Arn", # required
     #     items: [ # required
     #       {
     #         source: "S3Uri", # required
     #       },
     #     ],
-    #     role_arn: "Arn", # required
+    #     format_options: {
+    #       tsv_options: {
+    #         read_options: {
+    #           sep: "Separator",
+    #           encoding: "Encoding",
+    #           quote: "Quote",
+    #           quote_all: false,
+    #           escape: "EscapeChar",
+    #           escape_quotes: false,
+    #           comment: "CommentChar",
+    #           header: false,
+    #           line_sep: "LineSep",
+    #         },
+    #       },
+    #       vcf_options: {
+    #         ignore_qual_field: false,
+    #         ignore_filter_field: false,
+    #       },
+    #     },
     #     run_left_normalization: false,
+    #     annotation_fields: {
+    #       "AnnotationFieldMapKeyString" => "AnnotationFieldMapValueString",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3075,28 +3411,28 @@ module Aws::Omics
     # Activates an archived read set. To reduce storage charges, Amazon
     # Omics archives unused read sets after 30 days.
     #
+    # @option params [required, String] :sequence_store_id
+    #   The read set's sequence store ID.
+    #
     # @option params [String] :client_token
     #   To ensure that jobs don't run multiple times, specify a unique token
     #   for each job.
-    #
-    # @option params [required, String] :sequence_store_id
-    #   The read set's sequence store ID.
     #
     # @option params [required, Array<Types::StartReadSetActivationJobSourceItem>] :sources
     #   The job's source files.
     #
     # @return [Types::StartReadSetActivationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::StartReadSetActivationJobResponse#creation_time #creation_time} => Time
     #   * {Types::StartReadSetActivationJobResponse#id #id} => String
     #   * {Types::StartReadSetActivationJobResponse#sequence_store_id #sequence_store_id} => String
     #   * {Types::StartReadSetActivationJobResponse#status #status} => String
+    #   * {Types::StartReadSetActivationJobResponse#creation_time #creation_time} => Time
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_read_set_activation_job({
-    #     client_token: "ClientToken",
     #     sequence_store_id: "SequenceStoreId", # required
+    #     client_token: "ClientToken",
     #     sources: [ # required
     #       {
     #         read_set_id: "ReadSetId", # required
@@ -3106,10 +3442,10 @@ module Aws::Omics
     #
     # @example Response structure
     #
-    #   resp.creation_time #=> Time
     #   resp.id #=> String
     #   resp.sequence_store_id #=> String
     #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLING", "CANCELLED", "FAILED", "COMPLETED", "COMPLETED_WITH_FAILURES"
+    #   resp.creation_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/StartReadSetActivationJob AWS API Documentation
     #
@@ -3122,9 +3458,8 @@ module Aws::Omics
 
     # Exports a read set to Amazon S3.
     #
-    # @option params [String] :client_token
-    #   To ensure that jobs don't run multiple times, specify a unique token
-    #   for each job.
+    # @option params [required, String] :sequence_store_id
+    #   The read set's sequence store ID.
     #
     # @option params [required, String] :destination
     #   A location for exported files in Amazon S3.
@@ -3132,27 +3467,28 @@ module Aws::Omics
     # @option params [required, String] :role_arn
     #   A service role for the job.
     #
-    # @option params [required, String] :sequence_store_id
-    #   The read set's sequence store ID.
+    # @option params [String] :client_token
+    #   To ensure that jobs don't run multiple times, specify a unique token
+    #   for each job.
     #
     # @option params [required, Array<Types::ExportReadSet>] :sources
     #   The job's source files.
     #
     # @return [Types::StartReadSetExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::StartReadSetExportJobResponse#creation_time #creation_time} => Time
-    #   * {Types::StartReadSetExportJobResponse#destination #destination} => String
     #   * {Types::StartReadSetExportJobResponse#id #id} => String
     #   * {Types::StartReadSetExportJobResponse#sequence_store_id #sequence_store_id} => String
+    #   * {Types::StartReadSetExportJobResponse#destination #destination} => String
     #   * {Types::StartReadSetExportJobResponse#status #status} => String
+    #   * {Types::StartReadSetExportJobResponse#creation_time #creation_time} => Time
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_read_set_export_job({
-    #     client_token: "ClientToken",
+    #     sequence_store_id: "SequenceStoreId", # required
     #     destination: "S3Destination", # required
     #     role_arn: "RoleArn", # required
-    #     sequence_store_id: "SequenceStoreId", # required
+    #     client_token: "ClientToken",
     #     sources: [ # required
     #       {
     #         read_set_id: "ReadSetId", # required
@@ -3162,11 +3498,11 @@ module Aws::Omics
     #
     # @example Response structure
     #
-    #   resp.creation_time #=> Time
-    #   resp.destination #=> String
     #   resp.id #=> String
     #   resp.sequence_store_id #=> String
+    #   resp.destination #=> String
     #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLING", "CANCELLED", "FAILED", "COMPLETED", "COMPLETED_WITH_FAILURES"
+    #   resp.creation_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/StartReadSetExportJob AWS API Documentation
     #
@@ -3179,46 +3515,46 @@ module Aws::Omics
 
     # Starts a read set import job.
     #
-    # @option params [String] :client_token
-    #   To ensure that jobs don't run multiple times, specify a unique token
-    #   for each job.
+    # @option params [required, String] :sequence_store_id
+    #   The read set's sequence store ID.
     #
     # @option params [required, String] :role_arn
     #   A service role for the job.
     #
-    # @option params [required, String] :sequence_store_id
-    #   The read set's sequence store ID.
+    # @option params [String] :client_token
+    #   To ensure that jobs don't run multiple times, specify a unique token
+    #   for each job.
     #
     # @option params [required, Array<Types::StartReadSetImportJobSourceItem>] :sources
     #   The job's source files.
     #
     # @return [Types::StartReadSetImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::StartReadSetImportJobResponse#creation_time #creation_time} => Time
     #   * {Types::StartReadSetImportJobResponse#id #id} => String
-    #   * {Types::StartReadSetImportJobResponse#role_arn #role_arn} => String
     #   * {Types::StartReadSetImportJobResponse#sequence_store_id #sequence_store_id} => String
+    #   * {Types::StartReadSetImportJobResponse#role_arn #role_arn} => String
     #   * {Types::StartReadSetImportJobResponse#status #status} => String
+    #   * {Types::StartReadSetImportJobResponse#creation_time #creation_time} => Time
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_read_set_import_job({
-    #     client_token: "ClientToken",
-    #     role_arn: "RoleArn", # required
     #     sequence_store_id: "SequenceStoreId", # required
+    #     role_arn: "RoleArn", # required
+    #     client_token: "ClientToken",
     #     sources: [ # required
     #       {
-    #         description: "ReadSetDescription",
-    #         generated_from: "GeneratedFrom",
-    #         name: "ReadSetName",
-    #         reference_arn: "ReferenceArn", # required
-    #         sample_id: "SampleId", # required
-    #         source_file_type: "FASTQ", # required, accepts FASTQ, BAM, CRAM
     #         source_files: { # required
     #           source1: "S3Uri", # required
     #           source2: "S3Uri",
     #         },
+    #         source_file_type: "FASTQ", # required, accepts FASTQ, BAM, CRAM
     #         subject_id: "SubjectId", # required
+    #         sample_id: "SampleId", # required
+    #         generated_from: "GeneratedFrom",
+    #         reference_arn: "ReferenceArn", # required
+    #         name: "ReadSetName",
+    #         description: "ReadSetDescription",
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -3228,11 +3564,11 @@ module Aws::Omics
     #
     # @example Response structure
     #
-    #   resp.creation_time #=> Time
     #   resp.id #=> String
-    #   resp.role_arn #=> String
     #   resp.sequence_store_id #=> String
+    #   resp.role_arn #=> String
     #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLING", "CANCELLED", "FAILED", "COMPLETED", "COMPLETED_WITH_FAILURES"
+    #   resp.creation_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/StartReadSetImportJob AWS API Documentation
     #
@@ -3245,38 +3581,38 @@ module Aws::Omics
 
     # Starts a reference import job.
     #
-    # @option params [String] :client_token
-    #   To ensure that jobs don't run multiple times, specify a unique token
-    #   for each job.
-    #
     # @option params [required, String] :reference_store_id
     #   The job's reference store ID.
     #
     # @option params [required, String] :role_arn
     #   A service role for the job.
     #
+    # @option params [String] :client_token
+    #   To ensure that jobs don't run multiple times, specify a unique token
+    #   for each job.
+    #
     # @option params [required, Array<Types::StartReferenceImportJobSourceItem>] :sources
     #   The job's source files.
     #
     # @return [Types::StartReferenceImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::StartReferenceImportJobResponse#creation_time #creation_time} => Time
     #   * {Types::StartReferenceImportJobResponse#id #id} => String
     #   * {Types::StartReferenceImportJobResponse#reference_store_id #reference_store_id} => String
     #   * {Types::StartReferenceImportJobResponse#role_arn #role_arn} => String
     #   * {Types::StartReferenceImportJobResponse#status #status} => String
+    #   * {Types::StartReferenceImportJobResponse#creation_time #creation_time} => Time
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_reference_import_job({
-    #     client_token: "ClientToken",
     #     reference_store_id: "ReferenceStoreId", # required
     #     role_arn: "RoleArn", # required
+    #     client_token: "ClientToken",
     #     sources: [ # required
     #       {
-    #         description: "ReferenceDescription",
-    #         name: "ReferenceName", # required
     #         source_file: "S3Uri", # required
+    #         name: "ReferenceName", # required
+    #         description: "ReferenceDescription",
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -3286,11 +3622,11 @@ module Aws::Omics
     #
     # @example Response structure
     #
-    #   resp.creation_time #=> Time
     #   resp.id #=> String
     #   resp.reference_store_id #=> String
     #   resp.role_arn #=> String
     #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELLING", "CANCELLED", "FAILED", "COMPLETED", "COMPLETED_WITH_FAILURES"
+    #   resp.creation_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/StartReferenceImportJob AWS API Documentation
     #
@@ -3303,14 +3639,26 @@ module Aws::Omics
 
     # Starts a run.
     #
-    # @option params [String] :log_level
-    #   A log level for the run.
+    # @option params [String] :workflow_id
+    #   The run's workflow ID.
+    #
+    # @option params [String] :workflow_type
+    #   The run's workflows type.
+    #
+    # @option params [String] :run_id
+    #   The run's ID.
+    #
+    # @option params [required, String] :role_arn
+    #   A service role for the run.
     #
     # @option params [String] :name
     #   A name for the run.
     #
-    # @option params [String] :output_uri
-    #   An output URI for the run.
+    # @option params [String] :run_group_id
+    #   The run's group ID.
+    #
+    # @option params [Integer] :priority
+    #   A priority for the run.
     #
     # @option params [Hash,Array,String,Numeric,Boolean] :parameters
     #   Parameters for the run.
@@ -3320,8 +3668,17 @@ module Aws::Omics
     #   serialized using the same format as its surroundings and requires no
     #   additional encoding or escaping.
     #
-    # @option params [Integer] :priority
-    #   A priority for the run.
+    # @option params [Integer] :storage_capacity
+    #   A storage capacity for the run in gigabytes.
+    #
+    # @option params [String] :output_uri
+    #   An output URI for the run.
+    #
+    # @option params [String] :log_level
+    #   A log level for the run.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags for the run.
     #
     # @option params [required, String] :request_id
     #   To ensure that requests don't run multiple times, specify a unique ID
@@ -3329,27 +3686,6 @@ module Aws::Omics
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
-    #
-    # @option params [required, String] :role_arn
-    #   A service role for the run.
-    #
-    # @option params [String] :run_group_id
-    #   The run's group ID.
-    #
-    # @option params [String] :run_id
-    #   The run's ID.
-    #
-    # @option params [Integer] :storage_capacity
-    #   A storage capacity for the run in gigabytes.
-    #
-    # @option params [Hash<String,String>] :tags
-    #   Tags for the run.
-    #
-    # @option params [String] :workflow_id
-    #   The run's workflow ID.
-    #
-    # @option params [String] :workflow_type
-    #   The run's workflows type.
     #
     # @return [Types::StartRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3361,22 +3697,22 @@ module Aws::Omics
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_run({
-    #     log_level: "OFF", # accepts OFF, FATAL, ERROR, ALL
+    #     workflow_id: "WorkflowId",
+    #     workflow_type: "PRIVATE", # accepts PRIVATE, READY2RUN
+    #     run_id: "RunId",
+    #     role_arn: "RunRoleArn", # required
     #     name: "RunName",
-    #     output_uri: "RunOutputUri",
+    #     run_group_id: "RunGroupId",
+    #     priority: 1,
     #     parameters: {
     #     },
-    #     priority: 1,
-    #     request_id: "RunRequestId", # required
-    #     role_arn: "RunRoleArn", # required
-    #     run_group_id: "RunGroupId",
-    #     run_id: "RunId",
     #     storage_capacity: 1,
+    #     output_uri: "RunOutputUri",
+    #     log_level: "OFF", # accepts OFF, FATAL, ERROR, ALL
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     workflow_id: "WorkflowId",
-    #     workflow_type: "PRIVATE", # accepts PRIVATE
+    #     request_id: "RunRequestId", # required
     #   })
     #
     # @example Response structure
@@ -3401,14 +3737,17 @@ module Aws::Omics
     # @option params [required, String] :destination_name
     #   The destination variant store for the job.
     #
-    # @option params [required, Array<Types::VariantImportItemSource>] :items
-    #   Items to import.
-    #
     # @option params [required, String] :role_arn
     #   A service role for the job.
     #
+    # @option params [required, Array<Types::VariantImportItemSource>] :items
+    #   Items to import.
+    #
     # @option params [Boolean] :run_left_normalization
     #   The job's left normalization setting.
+    #
+    # @option params [Hash<String,String>] :annotation_fields
+    #   The annotation schema generated by the parsed annotation data.
     #
     # @return [Types::StartVariantImportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3418,13 +3757,16 @@ module Aws::Omics
     #
     #   resp = client.start_variant_import_job({
     #     destination_name: "StoreName", # required
+    #     role_arn: "Arn", # required
     #     items: [ # required
     #       {
     #         source: "S3Uri", # required
     #       },
     #     ],
-    #     role_arn: "Arn", # required
     #     run_left_normalization: false,
+    #     annotation_fields: {
+    #       "AnnotationFieldMapKeyString" => "AnnotationFieldMapValueString",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3496,47 +3838,47 @@ module Aws::Omics
 
     # Updates an annotation store.
     #
-    # @option params [String] :description
-    #   A description for the store.
-    #
     # @option params [required, String] :name
     #   A name for the store.
     #
+    # @option params [String] :description
+    #   A description for the store.
+    #
     # @return [Types::UpdateAnnotationStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::UpdateAnnotationStoreResponse#creation_time #creation_time} => Time
-    #   * {Types::UpdateAnnotationStoreResponse#description #description} => String
     #   * {Types::UpdateAnnotationStoreResponse#id #id} => String
-    #   * {Types::UpdateAnnotationStoreResponse#name #name} => String
     #   * {Types::UpdateAnnotationStoreResponse#reference #reference} => Types::ReferenceItem
     #   * {Types::UpdateAnnotationStoreResponse#status #status} => String
-    #   * {Types::UpdateAnnotationStoreResponse#store_format #store_format} => String
-    #   * {Types::UpdateAnnotationStoreResponse#store_options #store_options} => Types::StoreOptions
+    #   * {Types::UpdateAnnotationStoreResponse#name #name} => String
+    #   * {Types::UpdateAnnotationStoreResponse#description #description} => String
+    #   * {Types::UpdateAnnotationStoreResponse#creation_time #creation_time} => Time
     #   * {Types::UpdateAnnotationStoreResponse#update_time #update_time} => Time
+    #   * {Types::UpdateAnnotationStoreResponse#store_options #store_options} => Types::StoreOptions
+    #   * {Types::UpdateAnnotationStoreResponse#store_format #store_format} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_annotation_store({
-    #     description: "StoreDescription",
     #     name: "String", # required
+    #     description: "StoreDescription",
     #   })
     #
     # @example Response structure
     #
-    #   resp.creation_time #=> Time
-    #   resp.description #=> String
     #   resp.id #=> String
-    #   resp.name #=> String
     #   resp.reference.reference_arn #=> String
     #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
-    #   resp.store_format #=> String, one of "GFF", "TSV", "VCF"
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.creation_time #=> Time
+    #   resp.update_time #=> Time
     #   resp.store_options.tsv_store_options.annotation_type #=> String, one of "GENERIC", "CHR_POS", "CHR_POS_REF_ALT", "CHR_START_END_ONE_BASE", "CHR_START_END_REF_ALT_ONE_BASE", "CHR_START_END_ZERO_BASE", "CHR_START_END_REF_ALT_ZERO_BASE"
     #   resp.store_options.tsv_store_options.format_to_header #=> Hash
     #   resp.store_options.tsv_store_options.format_to_header["FormatToHeaderKey"] #=> String
     #   resp.store_options.tsv_store_options.schema #=> Array
     #   resp.store_options.tsv_store_options.schema[0] #=> Hash
     #   resp.store_options.tsv_store_options.schema[0]["SchemaItemKeyString"] #=> String, one of "LONG", "INT", "STRING", "FLOAT", "DOUBLE", "BOOLEAN"
-    #   resp.update_time #=> Time
+    #   resp.store_format #=> String, one of "GFF", "TSV", "VCF"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/UpdateAnnotationStore AWS API Documentation
     #
@@ -3552,17 +3894,20 @@ module Aws::Omics
     # @option params [required, String] :id
     #   The group's ID.
     #
+    # @option params [String] :name
+    #   A name for the group.
+    #
     # @option params [Integer] :max_cpus
     #   The maximum number of CPUs to use.
-    #
-    # @option params [Integer] :max_duration
-    #   A maximum run time for the group in minutes.
     #
     # @option params [Integer] :max_runs
     #   The maximum number of concurrent runs for the group.
     #
-    # @option params [String] :name
-    #   A name for the group.
+    # @option params [Integer] :max_duration
+    #   A maximum run time for the group in minutes.
+    #
+    # @option params [Integer] :max_gpus
+    #   The maximum GPUs that can be used by a run group.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3570,10 +3915,11 @@ module Aws::Omics
     #
     #   resp = client.update_run_group({
     #     id: "RunGroupId", # required
-    #     max_cpus: 1,
-    #     max_duration: 1,
-    #     max_runs: 1,
     #     name: "RunGroupName",
+    #     max_cpus: 1,
+    #     max_runs: 1,
+    #     max_duration: 1,
+    #     max_gpus: 1,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/UpdateRunGroup AWS API Documentation
@@ -3587,37 +3933,37 @@ module Aws::Omics
 
     # Updates a variant store.
     #
-    # @option params [String] :description
-    #   A description for the store.
-    #
     # @option params [required, String] :name
     #   A name for the store.
     #
+    # @option params [String] :description
+    #   A description for the store.
+    #
     # @return [Types::UpdateVariantStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::UpdateVariantStoreResponse#creation_time #creation_time} => Time
-    #   * {Types::UpdateVariantStoreResponse#description #description} => String
     #   * {Types::UpdateVariantStoreResponse#id #id} => String
-    #   * {Types::UpdateVariantStoreResponse#name #name} => String
     #   * {Types::UpdateVariantStoreResponse#reference #reference} => Types::ReferenceItem
     #   * {Types::UpdateVariantStoreResponse#status #status} => String
+    #   * {Types::UpdateVariantStoreResponse#name #name} => String
+    #   * {Types::UpdateVariantStoreResponse#description #description} => String
+    #   * {Types::UpdateVariantStoreResponse#creation_time #creation_time} => Time
     #   * {Types::UpdateVariantStoreResponse#update_time #update_time} => Time
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_variant_store({
-    #     description: "StoreDescription",
     #     name: "String", # required
+    #     description: "StoreDescription",
     #   })
     #
     # @example Response structure
     #
-    #   resp.creation_time #=> Time
-    #   resp.description #=> String
     #   resp.id #=> String
-    #   resp.name #=> String
     #   resp.reference.reference_arn #=> String
     #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "FAILED"
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.creation_time #=> Time
     #   resp.update_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/UpdateVariantStore AWS API Documentation
@@ -3631,23 +3977,23 @@ module Aws::Omics
 
     # Updates a workflow.
     #
-    # @option params [String] :description
-    #   A description for the workflow.
-    #
     # @option params [required, String] :id
     #   The workflow's ID.
     #
     # @option params [String] :name
     #   A name for the workflow.
     #
+    # @option params [String] :description
+    #   A description for the workflow.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_workflow({
-    #     description: "WorkflowDescription",
     #     id: "WorkflowId", # required
     #     name: "WorkflowName",
+    #     description: "WorkflowDescription",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/UpdateWorkflow AWS API Documentation
@@ -3656,6 +4002,52 @@ module Aws::Omics
     # @param [Hash] params ({})
     def update_workflow(params = {}, options = {})
       req = build_request(:update_workflow, params)
+      req.send_request(options)
+    end
+
+    # This operation uploads a specific part of a read set. If you upload a
+    # new part using a previously used part number, the previously uploaded
+    # part will be overwritten.
+    #
+    # @option params [required, String] :sequence_store_id
+    #   The Sequence Store ID used for the multipart upload.
+    #
+    # @option params [required, String] :upload_id
+    #   The ID for the initiated multipart upload.
+    #
+    # @option params [required, String] :part_source
+    #   The source file for an upload part.
+    #
+    # @option params [required, Integer] :part_number
+    #   The number of the part being uploaded.
+    #
+    # @option params [required, String, IO] :payload
+    #   The read set data to upload for a part.
+    #
+    # @return [Types::UploadReadSetPartResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UploadReadSetPartResponse#checksum #checksum} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.upload_read_set_part({
+    #     sequence_store_id: "SequenceStoreId", # required
+    #     upload_id: "UploadId", # required
+    #     part_source: "SOURCE1", # required, accepts SOURCE1, SOURCE2
+    #     part_number: 1, # required
+    #     payload: "data", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.checksum #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/UploadReadSetPart AWS API Documentation
+    #
+    # @overload upload_read_set_part(params = {})
+    # @param [Hash] params ({})
+    def upload_read_set_part(params = {}, options = {})
+      req = build_request(:upload_read_set_part, params)
       req.send_request(options)
     end
 
@@ -3672,7 +4064,7 @@ module Aws::Omics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

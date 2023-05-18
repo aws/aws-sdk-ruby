@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2023-05-11)
+------------------
+
+* Feature - Add support for regional endpoints
+
 1.49.0 (2023-01-18)
 ------------------
 

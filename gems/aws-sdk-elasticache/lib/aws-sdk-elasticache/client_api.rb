@@ -83,6 +83,7 @@ module Aws::ElastiCache
     ChangeType = Shapes::StringShape.new(name: 'ChangeType')
     CloudWatchLogsDestinationDetails = Shapes::StructureShape.new(name: 'CloudWatchLogsDestinationDetails')
     ClusterIdList = Shapes::ListShape.new(name: 'ClusterIdList')
+    ClusterMode = Shapes::StringShape.new(name: 'ClusterMode')
     ClusterQuotaForCustomerExceededFault = Shapes::StructureShape.new(name: 'ClusterQuotaForCustomerExceededFault')
     CompleteMigrationMessage = Shapes::StructureShape.new(name: 'CompleteMigrationMessage')
     CompleteMigrationResponse = Shapes::StructureShape.new(name: 'CompleteMigrationResponse')
@@ -747,6 +748,7 @@ module Aws::ElastiCache
     CreateReplicationGroupMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     CreateReplicationGroupMessage.add_member(:ip_discovery, Shapes::ShapeRef.new(shape: IpDiscovery, location_name: "IpDiscovery"))
     CreateReplicationGroupMessage.add_member(:transit_encryption_mode, Shapes::ShapeRef.new(shape: TransitEncryptionMode, location_name: "TransitEncryptionMode"))
+    CreateReplicationGroupMessage.add_member(:cluster_mode, Shapes::ShapeRef.new(shape: ClusterMode, location_name: "ClusterMode"))
     CreateReplicationGroupMessage.struct_class = Types::CreateReplicationGroupMessage
 
     CreateReplicationGroupResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
@@ -1249,6 +1251,7 @@ module Aws::ElastiCache
     ModifyReplicationGroupMessage.add_member(:ip_discovery, Shapes::ShapeRef.new(shape: IpDiscovery, location_name: "IpDiscovery"))
     ModifyReplicationGroupMessage.add_member(:transit_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TransitEncryptionEnabled"))
     ModifyReplicationGroupMessage.add_member(:transit_encryption_mode, Shapes::ShapeRef.new(shape: TransitEncryptionMode, location_name: "TransitEncryptionMode"))
+    ModifyReplicationGroupMessage.add_member(:cluster_mode, Shapes::ShapeRef.new(shape: ClusterMode, location_name: "ClusterMode"))
     ModifyReplicationGroupMessage.struct_class = Types::ModifyReplicationGroupMessage
 
     ModifyReplicationGroupResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
@@ -1488,6 +1491,7 @@ module Aws::ElastiCache
     ReplicationGroup.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     ReplicationGroup.add_member(:ip_discovery, Shapes::ShapeRef.new(shape: IpDiscovery, location_name: "IpDiscovery"))
     ReplicationGroup.add_member(:transit_encryption_mode, Shapes::ShapeRef.new(shape: TransitEncryptionMode, location_name: "TransitEncryptionMode"))
+    ReplicationGroup.add_member(:cluster_mode, Shapes::ShapeRef.new(shape: ClusterMode, location_name: "ClusterMode"))
     ReplicationGroup.struct_class = Types::ReplicationGroup
 
     ReplicationGroupAlreadyExistsFault.struct_class = Types::ReplicationGroupAlreadyExistsFault
@@ -1516,6 +1520,7 @@ module Aws::ElastiCache
     ReplicationGroupPendingModifiedValues.add_member(:log_delivery_configurations, Shapes::ShapeRef.new(shape: PendingLogDeliveryConfigurationList, location_name: "LogDeliveryConfigurations"))
     ReplicationGroupPendingModifiedValues.add_member(:transit_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TransitEncryptionEnabled"))
     ReplicationGroupPendingModifiedValues.add_member(:transit_encryption_mode, Shapes::ShapeRef.new(shape: TransitEncryptionMode, location_name: "TransitEncryptionMode"))
+    ReplicationGroupPendingModifiedValues.add_member(:cluster_mode, Shapes::ShapeRef.new(shape: ClusterMode, location_name: "ClusterMode"))
     ReplicationGroupPendingModifiedValues.struct_class = Types::ReplicationGroupPendingModifiedValues
 
     ReservedCacheNode.add_member(:reserved_cache_node_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedCacheNodeId"))

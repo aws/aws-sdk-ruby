@@ -2098,7 +2098,7 @@ module Aws::Kafka
       req.send_request(options)
     end
 
-    # @option params [String] :cluster_arn
+    # @option params [required, String] :cluster_arn
     #
     # @option params [required, String] :vpc_connection_arn
     #
@@ -2107,7 +2107,7 @@ module Aws::Kafka
     # @example Request syntax with placeholder values
     #
     #   resp = client.reject_client_vpc_connection({
-    #     cluster_arn: "__string",
+    #     cluster_arn: "__string", # required
     #     vpc_connection_arn: "__string", # required
     #   })
     #
@@ -2809,7 +2809,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

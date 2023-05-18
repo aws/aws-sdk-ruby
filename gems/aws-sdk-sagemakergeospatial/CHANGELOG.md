@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2023-05-18)
+------------------
+
+* Feature - This release makes ExecutionRoleArn a required field in the StartEarthObservationJob API.
+
 1.2.0 (2023-03-30)
 ------------------
 

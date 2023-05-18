@@ -41,21 +41,13 @@ module Aws::RolesAnywhere
     #   @return [String]
     #
     # @!attribute [rw] require_instance_properties
-    #   Specifies whether instance properties are required in
-    #   [CreateSession][1] requests with this profile.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html
+    #   Specifies whether instance properties are required in temporary
+    #   credential requests with this profile.
     #   @return [Boolean]
     #
     # @!attribute [rw] role_arns
-    #   A list of IAM roles that this profile can assume in a
-    #   [CreateSession][1] operation.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html
+    #   A list of IAM roles that this profile can assume in a temporary
+    #   credential request.
     #   @return [Array<String>]
     #
     # @!attribute [rw] session_policy
@@ -90,6 +82,11 @@ module Aws::RolesAnywhere
     #   The name of the trust anchor.
     #   @return [String]
     #
+    # @!attribute [rw] notification_settings
+    #   A list of notification settings to be associated to the trust
+    #   anchor.
+    #   @return [Array<Types::NotificationSetting>]
+    #
     # @!attribute [rw] source
     #   The trust anchor type and its related certificate data.
     #   @return [Types::Source]
@@ -103,28 +100,22 @@ module Aws::RolesAnywhere
     class CreateTrustAnchorRequest < Struct.new(
       :enabled,
       :name,
+      :notification_settings,
       :source,
       :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # A record of a presented X509 credential to [CreateSession][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html
+    # A record of a presented X509 credential from a temporary credential
+    # request.
     #
     # @!attribute [rw] enabled
     #   Indicates whether the credential is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] failed
-    #   Indicates whether the [CreateSession][1] operation was successful.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html
+    #   Indicates whether the temporary credential request was successful.
     #   @return [Boolean]
     #
     # @!attribute [rw] issuer
@@ -134,11 +125,7 @@ module Aws::RolesAnywhere
     #
     # @!attribute [rw] seen_at
     #   The ISO-8601 time stamp of when the certificate was last used in a
-    #   [CreateSession][1] operation.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html
+    #   temporary credential request.
     #   @return [Time]
     #
     # @!attribute [rw] serial_number
@@ -230,7 +217,7 @@ module Aws::RolesAnywhere
     end
 
     # @!attribute [rw] crl_data
-    #   The x509 v3 specified certificate revocation list
+    #   The x509 v3 specified certificate revocation list (CRL).
     #   @return [String]
     #
     # @!attribute [rw] enabled
@@ -266,11 +253,7 @@ module Aws::RolesAnywhere
     # authenticating instance.
     #
     # @!attribute [rw] failed
-    #   Indicates whether the [CreateSession][1] operation was successful.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html
+    #   Indicates whether the temporary credential request was successful.
     #   @return [Boolean]
     #
     # @!attribute [rw] properties
@@ -279,11 +262,7 @@ module Aws::RolesAnywhere
     #
     # @!attribute [rw] seen_at
     #   The ISO-8601 time stamp of when the certificate was last used in a
-    #   [CreateSession][1] operation.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html
+    #   temporary credential request.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/InstanceProperty AWS API Documentation
@@ -302,8 +281,8 @@ module Aws::RolesAnywhere
     #
     # @!attribute [rw] next_token
     #   A token that indicates where the output should continue from, if a
-    #   previous operation did not show all results. To get the next
-    #   results, call the operation again with this value.
+    #   previous request did not show all results. To get the next results,
+    #   make the request again with this value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ListCrlsResponse AWS API Documentation
@@ -317,8 +296,8 @@ module Aws::RolesAnywhere
 
     # @!attribute [rw] next_token
     #   A token that indicates where the output should continue from, if a
-    #   previous operation did not show all results. To get the next
-    #   results, call the operation again with this value.
+    #   previous request did not show all results. To get the next results,
+    #   make the request again with this value.
     #   @return [String]
     #
     # @!attribute [rw] profiles
@@ -336,8 +315,8 @@ module Aws::RolesAnywhere
 
     # @!attribute [rw] next_token
     #   A token that indicates where the output should continue from, if a
-    #   previous operation did not show all results. To get the next
-    #   results, call the operation again with this value.
+    #   previous request did not show all results. To get the next results,
+    #   make the request again with this value.
     #   @return [String]
     #
     # @!attribute [rw] page_size
@@ -355,8 +334,8 @@ module Aws::RolesAnywhere
 
     # @!attribute [rw] next_token
     #   A token that indicates where the output should continue from, if a
-    #   previous operation did not show all results. To get the next
-    #   results, call the operation again with this value.
+    #   previous request did not show all results. To get the next results,
+    #   make the request again with this value.
     #   @return [String]
     #
     # @!attribute [rw] subjects
@@ -398,8 +377,8 @@ module Aws::RolesAnywhere
 
     # @!attribute [rw] next_token
     #   A token that indicates where the output should continue from, if a
-    #   previous operation did not show all results. To get the next
-    #   results, call the operation again with this value.
+    #   previous request did not show all results. To get the next results,
+    #   make the request again with this value.
     #   @return [String]
     #
     # @!attribute [rw] trust_anchors
@@ -411,6 +390,114 @@ module Aws::RolesAnywhere
     class ListTrustAnchorsResponse < Struct.new(
       :next_token,
       :trust_anchors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Customizable notification settings that will be applied to
+    # notification events. IAM Roles Anywhere consumes these settings while
+    # notifying across multiple channels - CloudWatch metrics, EventBridge,
+    # and Health Dashboard.
+    #
+    # @!attribute [rw] channel
+    #   The specified channel of notification. IAM Roles Anywhere uses
+    #   CloudWatch metrics, EventBridge, and Health Dashboard to notify for
+    #   an event.
+    #
+    #   <note markdown="1"> In the absence of a specific channel, IAM Roles Anywhere applies
+    #   this setting to 'ALL' channels.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether the notification setting is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] event
+    #   The event to which this notification setting is applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] threshold
+    #   The number of days before a notification event. This value is
+    #   required for a notification setting that is enabled.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/NotificationSetting AWS API Documentation
+    #
+    class NotificationSetting < Struct.new(
+      :channel,
+      :enabled,
+      :event,
+      :threshold)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The state of a notification setting.
+    #
+    # A notification setting includes information such as event name,
+    # threshold, status of the notification setting, and the channel to
+    # notify.
+    #
+    # @!attribute [rw] channel
+    #   The specified channel of notification. IAM Roles Anywhere uses
+    #   CloudWatch metrics, EventBridge, and Health Dashboard to notify for
+    #   an event.
+    #
+    #   <note markdown="1"> In the absence of a specific channel, IAM Roles Anywhere applies
+    #   this setting to 'ALL' channels.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_by
+    #   The principal that configured the notification setting. For default
+    #   settings configured by IAM Roles Anywhere, the value is
+    #   `rolesanywhere.amazonaws.com`, and for customized notifications
+    #   settings, it is the respective account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether the notification setting is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] event
+    #   The event to which this notification setting is applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] threshold
+    #   The number of days before a notification event.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/NotificationSettingDetail AWS API Documentation
+    #
+    class NotificationSettingDetail < Struct.new(
+      :channel,
+      :configured_by,
+      :enabled,
+      :event,
+      :threshold)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A notification setting key to reset. A notification setting key
+    # includes the event and the channel.
+    #
+    # @!attribute [rw] channel
+    #   The specified channel of notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] event
+    #   The notification setting event to reset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/NotificationSettingKey AWS API Documentation
+    #
+    class NotificationSettingKey < Struct.new(
+      :channel,
+      :event)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -451,21 +538,13 @@ module Aws::RolesAnywhere
     #   @return [String]
     #
     # @!attribute [rw] require_instance_properties
-    #   Specifies whether instance properties are required in
-    #   [CreateSession][1] requests with this profile.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html
+    #   Specifies whether instance properties are required in temporary
+    #   credential requests with this profile.
     #   @return [Boolean]
     #
     # @!attribute [rw] role_arns
-    #   A list of IAM roles that this profile can assume in a
-    #   [CreateSession][1] operation.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html
+    #   A list of IAM roles that this profile can assume in a temporary
+    #   credential request.
     #   @return [Array<String>]
     #
     # @!attribute [rw] session_policy
@@ -504,6 +583,66 @@ module Aws::RolesAnywhere
     #
     class ProfileDetailResponse < Struct.new(
       :profile)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] notification_settings
+    #   A list of notification settings to be associated to the trust
+    #   anchor.
+    #   @return [Array<Types::NotificationSetting>]
+    #
+    # @!attribute [rw] trust_anchor_id
+    #   The unique identifier of the trust anchor.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/PutNotificationSettingsRequest AWS API Documentation
+    #
+    class PutNotificationSettingsRequest < Struct.new(
+      :notification_settings,
+      :trust_anchor_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trust_anchor
+    #   The state of the trust anchor after a read or write operation.
+    #   @return [Types::TrustAnchorDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/PutNotificationSettingsResponse AWS API Documentation
+    #
+    class PutNotificationSettingsResponse < Struct.new(
+      :trust_anchor)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] notification_setting_keys
+    #   A list of notification setting keys to reset. A notification setting
+    #   key includes the event and the channel.
+    #   @return [Array<Types::NotificationSettingKey>]
+    #
+    # @!attribute [rw] trust_anchor_id
+    #   The unique identifier of the trust anchor.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ResetNotificationSettingsRequest AWS API Documentation
+    #
+    class ResetNotificationSettingsRequest < Struct.new(
+      :notification_setting_keys,
+      :trust_anchor_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trust_anchor
+    #   The state of the trust anchor after a read or write operation.
+    #   @return [Types::TrustAnchorDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ResetNotificationSettingsResponse AWS API Documentation
+    #
+    class ResetNotificationSettingsResponse < Struct.new(
+      :trust_anchor)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -595,14 +734,9 @@ module Aws::RolesAnywhere
     # @note SourceData is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SourceData corresponding to the set member.
     #
     # @!attribute [rw] acm_pca_arn
-    #   The root certificate of the Certificate Manager Private Certificate
-    #   Authority specified by this ARN is used in trust validation for
-    #   [CreateSession][1] operations. Included for trust anchors of type
-    #   `AWS_ACM_PCA`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html
+    #   The root certificate of the Private Certificate Authority specified
+    #   by this ARN is used in trust validation for temporary credential
+    #   requests. Included for trust anchors of type `AWS_ACM_PCA`.
     #   @return [String]
     #
     # @!attribute [rw] x509_certificate_data
@@ -633,7 +767,7 @@ module Aws::RolesAnywhere
     #
     # @!attribute [rw] credentials
     #   The temporary session credentials vended at the last authenticating
-    #   call with this Subject.
+    #   call with this subject.
     #   @return [Array<Types::CredentialSummary>]
     #
     # @!attribute [rw] enabled
@@ -645,7 +779,7 @@ module Aws::RolesAnywhere
     #   @return [Array<Types::InstanceProperty>]
     #
     # @!attribute [rw] last_seen_at
-    #   The ISO-8601 timestamp of the last time this Subject requested
+    #   The ISO-8601 timestamp of the last time this subject requested
     #   temporary session credentials.
     #   @return [Time]
     #
@@ -693,29 +827,20 @@ module Aws::RolesAnywhere
       include Aws::Structure
     end
 
-    # A summary representation of Subject resources returned in read
-    # operations; primarily ListSubjects.
+    # A summary representation of subjects.
     #
     # @!attribute [rw] created_at
     #   The ISO-8601 time stamp of when the certificate was first used in a
-    #   [CreateSession][1] operation.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html
+    #   temporary credential request.
     #   @return [Time]
     #
     # @!attribute [rw] enabled
-    #   The enabled status of the Subject.
+    #   The enabled status of the subject.
     #   @return [Boolean]
     #
     # @!attribute [rw] last_seen_at
     #   The ISO-8601 time stamp of when the certificate was last used in a
-    #   [CreateSession][1] operation.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html
+    #   temporary credential request.
     #   @return [Time]
     #
     # @!attribute [rw] subject_arn
@@ -815,6 +940,11 @@ module Aws::RolesAnywhere
     #   The name of the trust anchor.
     #   @return [String]
     #
+    # @!attribute [rw] notification_settings
+    #   A list of notification settings to be associated to the trust
+    #   anchor.
+    #   @return [Array<Types::NotificationSettingDetail>]
+    #
     # @!attribute [rw] source
     #   The trust anchor type and its related certificate data.
     #   @return [Types::Source]
@@ -837,6 +967,7 @@ module Aws::RolesAnywhere
       :created_at,
       :enabled,
       :name,
+      :notification_settings,
       :source,
       :trust_anchor_arn,
       :trust_anchor_id,
@@ -879,7 +1010,7 @@ module Aws::RolesAnywhere
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] crl_data
-    #   The x509 v3 specified certificate revocation list
+    #   The x509 v3 specified certificate revocation list (CRL).
     #   @return [String]
     #
     # @!attribute [rw] crl_id
@@ -918,12 +1049,8 @@ module Aws::RolesAnywhere
     #   @return [String]
     #
     # @!attribute [rw] role_arns
-    #   A list of IAM roles that this profile can assume in a
-    #   [CreateSession][1] operation.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html
+    #   A list of IAM roles that this profile can assume in a temporary
+    #   credential request.
     #   @return [Array<String>]
     #
     # @!attribute [rw] session_policy

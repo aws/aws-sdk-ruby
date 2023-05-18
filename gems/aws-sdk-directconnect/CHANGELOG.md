@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2023-05-16)
+------------------
+
+* Feature - This release includes an update to the mtu value for CreateTransitVirtualInterface from 9001 mtu to 8500 mtu.
+
 1.58.0 (2023-04-28)
 ------------------
 

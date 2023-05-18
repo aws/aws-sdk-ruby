@@ -95,6 +95,20 @@ module Aws::Support
       end
     end
 
+    class DescribeCreateCaseOptions
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Support::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DescribeServices
       def self.build(context)
         unless context.config.regional_endpoint
@@ -110,6 +124,20 @@ module Aws::Support
     end
 
     class DescribeSeverityLevels
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Support::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DescribeSupportedLanguages
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

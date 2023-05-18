@@ -249,6 +249,7 @@ module Aws::Transfer
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SessionId = Shapes::StringShape.new(name: 'SessionId')
     SetStatOption = Shapes::StringShape.new(name: 'SetStatOption')
+    SftpAuthenticationMethods = Shapes::StringShape.new(name: 'SftpAuthenticationMethods')
     SigningAlg = Shapes::StringShape.new(name: 'SigningAlg')
     SourceFileLocation = Shapes::StringShape.new(name: 'SourceFileLocation')
     SourceIp = Shapes::StringShape.new(name: 'SourceIp')
@@ -721,6 +722,7 @@ module Aws::Transfer
     IdentityProviderDetails.add_member(:invocation_role, Shapes::ShapeRef.new(shape: Role, location_name: "InvocationRole"))
     IdentityProviderDetails.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
     IdentityProviderDetails.add_member(:function, Shapes::ShapeRef.new(shape: Function, location_name: "Function"))
+    IdentityProviderDetails.add_member(:sftp_authentication_methods, Shapes::ShapeRef.new(shape: SftpAuthenticationMethods, location_name: "SftpAuthenticationMethods"))
     IdentityProviderDetails.struct_class = Types::IdentityProviderDetails
 
     ImportCertificateRequest.add_member(:usage, Shapes::ShapeRef.new(shape: CertificateUsageType, required: true, location_name: "Usage"))

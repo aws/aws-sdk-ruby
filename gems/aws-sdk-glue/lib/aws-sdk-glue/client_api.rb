@@ -1923,6 +1923,7 @@ module Aws::Glue
     CreateCustomEntityTypeRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     CreateCustomEntityTypeRequest.add_member(:regex_string, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "RegexString"))
     CreateCustomEntityTypeRequest.add_member(:context_words, Shapes::ShapeRef.new(shape: ContextWords, location_name: "ContextWords"))
+    CreateCustomEntityTypeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
     CreateCustomEntityTypeRequest.struct_class = Types::CreateCustomEntityTypeRequest
 
     CreateCustomEntityTypeResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
@@ -3794,6 +3795,7 @@ module Aws::Glue
 
     ListCustomEntityTypesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListCustomEntityTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListCustomEntityTypesRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
     ListCustomEntityTypesRequest.struct_class = Types::ListCustomEntityTypesRequest
 
     ListCustomEntityTypesResponse.add_member(:custom_entity_types, Shapes::ShapeRef.new(shape: CustomEntityTypes, location_name: "CustomEntityTypes"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.179.0 (2023-05-18)
+------------------
+
+* Feature - RDS documentation update for the EngineVersion parameter of ModifyDBSnapshot
+
 1.178.0 (2023-05-10)
 ------------------
 

@@ -164,7 +164,7 @@ module Aws::Health
     #
     # @!attribute [rw] event_scope_code
     #   This parameter specifies if the Health event is a public Amazon Web
-    #   Services service event or an account-specific event.
+    #   Service event or an account-specific event.
     #
     #   * If the `eventScopeCode` value is `PUBLIC`, then the
     #     `affectedAccounts` value is always empty.
@@ -490,6 +490,11 @@ module Aws::Health
     # @!attribute [rw] max_results
     #   The maximum number of items to return in one batch, between 10 and
     #   100, inclusive.
+    #
+    #   <note markdown="1"> If you don't specify the `maxResults` parameter, this operation
+    #   returns a maximum of 30 items by default.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventTypesRequest AWS API Documentation
@@ -769,8 +774,8 @@ module Aws::Health
     #   @return [String]
     #
     # @!attribute [rw] service
-    #   The Amazon Web Services service that is affected by the event. For
-    #   example, `EC2`, `RDS`.
+    #   The Amazon Web Service that is affected by the event. For example,
+    #   `EC2`, `RDS`.
     #   @return [String]
     #
     # @!attribute [rw] event_type_code
@@ -813,7 +818,7 @@ module Aws::Health
     #
     # @!attribute [rw] event_scope_code
     #   This parameter specifies if the Health event is a public Amazon Web
-    #   Services service event or an account-specific event.
+    #   Service event or an account-specific event.
     #
     #   * If the `eventScopeCode` value is `PUBLIC`, then the
     #     `affectedAccounts` value is always empty.
@@ -1010,8 +1015,8 @@ module Aws::Health
     #   @return [Array<String>]
     #
     # @!attribute [rw] services
-    #   The Amazon Web Services services associated with the event. For
-    #   example, `EC2`, `RDS`.
+    #   The Amazon Web Services associated with the event. For example,
+    #   `EC2`, `RDS`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] regions
@@ -1102,8 +1107,8 @@ module Aws::Health
     # [2]: https://docs.aws.amazon.com/health/latest/ug/cloudwatch-events-health.html
     #
     # @!attribute [rw] service
-    #   The Amazon Web Services service that is affected by the event. For
-    #   example, `EC2`, `RDS`.
+    #   The Amazon Web Service that is affected by the event. For example,
+    #   `EC2`, `RDS`.
     #   @return [String]
     #
     # @!attribute [rw] code
@@ -1140,8 +1145,8 @@ module Aws::Health
     #   @return [Array<String>]
     #
     # @!attribute [rw] services
-    #   The Amazon Web Services services associated with the event. For
-    #   example, `EC2`, `RDS`.
+    #   The Amazon Web Services associated with the event. For example,
+    #   `EC2`, `RDS`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] event_type_categories
@@ -1201,9 +1206,13 @@ module Aws::Health
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   The unique identifier for the event type. The format is
-    #   `AWS_SERVICE_DESCRIPTION`. For example,
-    #   `AWS_EC2_SYSTEM_MAINTENANCE_EVENT`.
+    #   A message that describes the error. Follow the error message and
+    #   retry your request.
+    #
+    #   For example, the `InvalidAccountInputError` error message appears if
+    #   you call the `DescribeAffectedEntitiesForOrganization` operation and
+    #   specify the `AccountSpecific` value for the `EventScopeCode`
+    #   parameter, but don't specify an Amazon Web Services account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/OrganizationAffectedEntitiesErrorItem AWS API Documentation
@@ -1235,8 +1244,8 @@ module Aws::Health
     #   @return [String]
     #
     # @!attribute [rw] service
-    #   The Amazon Web Services service that is affected by the event, such
-    #   as EC2 and RDS.
+    #   The Amazon Web Service that is affected by the event, such as EC2
+    #   and RDS.
     #   @return [String]
     #
     # @!attribute [rw] event_type_code
@@ -1253,7 +1262,7 @@ module Aws::Health
     #
     # @!attribute [rw] event_scope_code
     #   This parameter specifies if the Health event is a public Amazon Web
-    #   Services service event or an account-specific event.
+    #   Service event or an account-specific event.
     #
     #   * If the `eventScopeCode` value is `PUBLIC`, then the
     #     `affectedAccounts` value is always empty.
@@ -1456,8 +1465,8 @@ module Aws::Health
     #   @return [Array<String>]
     #
     # @!attribute [rw] services
-    #   The Amazon Web Services services associated with the event. For
-    #   example, `EC2`, `RDS`.
+    #   The Amazon Web Services associated with the event. For example,
+    #   `EC2`, `RDS`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] regions

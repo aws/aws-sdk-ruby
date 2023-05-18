@@ -419,11 +419,14 @@ module Aws::WAFV2
     #
     # @!attribute [rw] text_transformations
     #   Text transformations eliminate some of the unusual formatting that
-    #   attackers use in web requests in an effort to bypass detection. If
-    #   you specify one or more transformations in a rule statement, WAF
-    #   performs all transformations on the content of the request component
-    #   identified by `FieldToMatch`, starting from the lowest priority
-    #   setting, before inspecting the content for a match.
+    #   attackers use in web requests in an effort to bypass detection. Text
+    #   transformations are used in rule match statements, to transform the
+    #   `FieldToMatch` request component before inspecting it, and they're
+    #   used in rate-based rule statements, to transform request components
+    #   before using them as custom aggregation keys. If you specify one or
+    #   more transformations to apply, WAF performs all transformations on
+    #   the specified content, starting from the lowest priority setting,
+    #   and then uses the component contents.
     #   @return [Array<Types::TextTransformation>]
     #
     # @!attribute [rw] positional_constraint
@@ -5398,11 +5401,86 @@ module Aws::WAFV2
     #
     class QueryString < Aws::EmptyStructure; end
 
-    # A rate-based rule tracks the rate of requests for each originating IP
-    # address, and triggers the rule action when the rate exceeds a limit
-    # that you specify on the number of requests in any 5-minute time span.
-    # You can use this to put a temporary block on requests from an IP
-    # address that is sending excessive requests.
+    # A rate-based rule counts incoming requests and rate limits requests
+    # when they are coming at too fast a rate. The rule categorizes requests
+    # according to your aggregation criteria, collects them into aggregation
+    # instances, and counts and rate limits the requests for each instance.
+    #
+    # You can specify individual aggregation keys, like IP address or HTTP
+    # method. You can also specify aggregation key combinations, like IP
+    # address and HTTP method, or HTTP method, query argument, and cookie.
+    #
+    # Each unique set of values for the aggregation keys that you specify is
+    # a separate aggregation instance, with the value from each key
+    # contributing to the aggregation instance definition.
+    #
+    # For example, assume the rule evaluates web requests with the following
+    # IP address and HTTP method values:
+    #
+    # * IP address 10.1.1.1, HTTP method POST
+    #
+    # * IP address 10.1.1.1, HTTP method GET
+    #
+    # * IP address 127.0.0.0, HTTP method POST
+    #
+    # * IP address 10.1.1.1, HTTP method GET
+    #
+    # The rule would create different aggregation instances according to
+    # your aggregation criteria, for example:
+    #
+    # * If the aggregation criteria is just the IP address, then each
+    #   individual address is an aggregation instance, and WAF counts
+    #   requests separately for each. The aggregation instances and request
+    #   counts for our example would be the following:
+    #
+    #   * IP address 10.1.1.1: count 3
+    #
+    #   * IP address 127.0.0.0: count 1
+    #
+    # * If the aggregation criteria is HTTP method, then each individual
+    #   HTTP method is an aggregation instance. The aggregation instances
+    #   and request counts for our example would be the following:
+    #
+    #   * HTTP method POST: count 2
+    #
+    #   * HTTP method GET: count 2
+    #
+    # * If the aggregation criteria is IP address and HTTP method, then each
+    #   IP address and each HTTP method would contribute to the combined
+    #   aggregation instance. The aggregation instances and request counts
+    #   for our example would be the following:
+    #
+    #   * IP address 10.1.1.1, HTTP method POST: count 1
+    #
+    #   * IP address 10.1.1.1, HTTP method GET: count 2
+    #
+    #   * IP address 127.0.0.0, HTTP method POST: count 1
+    #
+    # For any n-tuple of aggregation keys, each unique combination of values
+    # for the keys defines a separate aggregation instance, which WAF counts
+    # and rate-limits individually.
+    #
+    # You can optionally nest another statement inside the rate-based
+    # statement, to narrow the scope of the rule so that it only counts and
+    # rate limits requests that match the nested statement. You can use this
+    # nested scope-down statement in conjunction with your aggregation key
+    # specifications or you can just count and rate limit all requests that
+    # match the scope-down statement, without additional aggregation. When
+    # you choose to just manage all requests that match a scope-down
+    # statement, the aggregation instance is singular for the rule.
+    #
+    # You cannot nest a `RateBasedStatement` inside another statement, for
+    # example inside a `NotStatement` or `OrStatement`. You can define a
+    # `RateBasedStatement` inside a web ACL and inside a rule group.
+    #
+    # For additional information about the options, see [Rate limiting web
+    # requests using rate-based rules][1] in the *WAF Developer Guide*.
+    #
+    # If you only aggregate on the individual IP address or forwarded IP
+    # address, you can retrieve the list of IP addresses that WAF is
+    # currently rate limiting for a rule through the API call
+    # `GetRateBasedStatementManagedKeys`. This option is not available for
+    # other aggregation configurations.
     #
     # WAF tracks and manages web requests separately for each instance of a
     # rate-based rule that you use. For example, if you provide the same
@@ -5413,58 +5491,80 @@ module Aws::WAFV2
     # multiple places, each use creates a separate instance of the
     # rate-based rule that gets its own tracking and management by WAF.
     #
-    # When the rule action triggers, WAF blocks additional requests from the
-    # IP address until the request rate falls below the limit.
     #
-    # You can optionally nest another statement inside the rate-based
-    # statement, to narrow the scope of the rule so that it only counts
-    # requests that match the nested statement. For example, based on recent
-    # requests that you have seen from an attacker, you might create a
-    # rate-based rule with a nested AND rule statement that contains the
-    # following nested statements:
     #
-    # * An IP match statement with an IP set that specifies the address
-    #   192.0.2.44.
-    #
-    # * A string match statement that searches in the User-Agent header for
-    #   the string BadBot.
-    #
-    # In this rate-based rule, you also define a rate limit. For this
-    # example, the rate limit is 1,000. Requests that meet the criteria of
-    # both of the nested statements are counted. If the count exceeds 1,000
-    # requests per five minutes, the rule action triggers. Requests that do
-    # not meet the criteria of both of the nested statements are not counted
-    # towards the rate limit and are not affected by this rule.
-    #
-    # You cannot nest a `RateBasedStatement` inside another statement, for
-    # example inside a `NotStatement` or `OrStatement`. You can define a
-    # `RateBasedStatement` inside a web ACL and inside a rule group.
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-rate-based-rules.html
     #
     # @!attribute [rw] limit
-    #   The limit on requests per 5-minute period for a single originating
-    #   IP address. If the statement includes a `ScopeDownStatement`, this
-    #   limit is applied only to the requests that match the statement.
+    #   The limit on requests per 5-minute period for a single aggregation
+    #   instance for the rate-based rule. If the rate-based statement
+    #   includes a `ScopeDownStatement`, this limit is applied only to the
+    #   requests that match the statement.
+    #
+    #   Examples:
+    #
+    #   * If you aggregate on just the IP address, this is the limit on
+    #     requests from any single IP address.
+    #
+    #   * If you aggregate on the HTTP method and the query argument name
+    #     "city", then this is the limit on requests for any single
+    #     method, city pair.
     #   @return [Integer]
     #
     # @!attribute [rw] aggregate_key_type
-    #   Setting that indicates how to aggregate the request counts. The
-    #   options are the following:
+    #   Setting that indicates how to aggregate the request counts.
     #
-    #   * IP - Aggregate the request counts on the IP address from the web
+    #   <note markdown="1"> Web requests that are missing any of the components specified in the
+    #   aggregation keys are omitted from the rate-based rule evaluation and
+    #   handling.
+    #
+    #    </note>
+    #
+    #   * `CONSTANT` - Count and limit the requests that match the
+    #     rate-based rule's scope-down statement. With this option, the
+    #     counted requests aren't further aggregated. The scope-down
+    #     statement is the only specification used. When the count of all
+    #     requests that satisfy the scope-down statement goes over the
+    #     limit, WAF applies the rule action to all requests that satisfy
+    #     the scope-down statement.
+    #
+    #     With this option, you must configure the `ScopeDownStatement`
+    #     property.
+    #
+    #   * `CUSTOM_KEYS` - Aggregate the request counts using one or more web
+    #     request components as the aggregate keys.
+    #
+    #     With this option, you must specify the aggregate keys in the
+    #     `CustomKeys` property.
+    #
+    #     To aggregate on only the IP address or only the forwarded IP
+    #     address, don't use custom keys. Instead, set the aggregate key
+    #     type to `IP` or `FORWARDED_IP`.
+    #
+    #   * `FORWARDED_IP` - Aggregate the request counts on the first IP
+    #     address in an HTTP header.
+    #
+    #     With this option, you must specify the header to use in the
+    #     `ForwardedIPConfig` property.
+    #
+    #     To aggregate on a combination of the forwarded IP address with
+    #     other aggregate keys, use `CUSTOM_KEYS`.
+    #
+    #   * `IP` - Aggregate the request counts on the IP address from the web
     #     request origin.
     #
-    #   * FORWARDED\_IP - Aggregate the request counts on the first IP
-    #     address in an HTTP header. If you use this, configure the
-    #     `ForwardedIPConfig`, to specify the header to use.
+    #     To aggregate on a combination of the IP address with other
+    #     aggregate keys, use `CUSTOM_KEYS`.
     #   @return [String]
     #
     # @!attribute [rw] scope_down_statement
     #   An optional nested statement that narrows the scope of the web
-    #   requests that are evaluated by the rate-based statement. Requests
-    #   are only tracked by the rate-based statement if they match the
-    #   scope-down statement. You can use any nestable Statement in the
-    #   scope-down statement, and you can nest statements at any level, the
-    #   same as you can for a rule statement.
+    #   requests that are evaluated and managed by the rate-based statement.
+    #   When you use a scope-down statement, the rate-based rule only tracks
+    #   and rate limits requests that match the scope-down statement. You
+    #   can use any nestable Statement in the scope-down statement, and you
+    #   can nest statements at any level, the same as you can for a rule
+    #   statement.
     #   @return [Types::Statement]
     #
     # @!attribute [rw] forwarded_ip_config
@@ -5478,8 +5578,13 @@ module Aws::WAFV2
     #
     #    </note>
     #
-    #   This is required if `AggregateKeyType` is set to `FORWARDED_IP`.
+    #   This is required if you specify a forwarded IP in the rule's
+    #   aggregate key settings.
     #   @return [Types::ForwardedIPConfig]
+    #
+    # @!attribute [rw] custom_keys
+    #   Specifies the aggregate keys to use in a rate-base rule.
+    #   @return [Array<Types::RateBasedStatementCustomKey>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateBasedStatement AWS API Documentation
     #
@@ -5487,13 +5592,129 @@ module Aws::WAFV2
       :limit,
       :aggregate_key_type,
       :scope_down_statement,
-      :forwarded_ip_config)
+      :forwarded_ip_config,
+      :custom_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a single custom aggregate key for a rate-base rule.
+    #
+    # <note markdown="1"> Web requests that are missing any of the components specified in the
+    # aggregation keys are omitted from the rate-based rule evaluation and
+    # handling.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] header
+    #   Use the value of a header in the request as an aggregate key. Each
+    #   distinct value in the header contributes to the aggregation
+    #   instance. If you use a single header as your custom key, then each
+    #   value fully defines an aggregation instance.
+    #   @return [Types::RateLimitHeader]
+    #
+    # @!attribute [rw] cookie
+    #   Use the value of a cookie in the request as an aggregate key. Each
+    #   distinct value in the cookie contributes to the aggregation
+    #   instance. If you use a single cookie as your custom key, then each
+    #   value fully defines an aggregation instance.
+    #   @return [Types::RateLimitCookie]
+    #
+    # @!attribute [rw] query_argument
+    #   Use the specified query argument as an aggregate key. Each distinct
+    #   value for the named query argument contributes to the aggregation
+    #   instance. If you use a single query argument as your custom key,
+    #   then each value fully defines an aggregation instance.
+    #   @return [Types::RateLimitQueryArgument]
+    #
+    # @!attribute [rw] query_string
+    #   Use the request's query string as an aggregate key. Each distinct
+    #   string contributes to the aggregation instance. If you use just the
+    #   query string as your custom key, then each string fully defines an
+    #   aggregation instance.
+    #   @return [Types::RateLimitQueryString]
+    #
+    # @!attribute [rw] http_method
+    #   Use the request's HTTP method as an aggregate key. Each distinct
+    #   HTTP method contributes to the aggregation instance. If you use just
+    #   the HTTP method as your custom key, then each method fully defines
+    #   an aggregation instance.
+    #   @return [Types::RateLimitHTTPMethod]
+    #
+    # @!attribute [rw] forwarded_ip
+    #   Use the first IP address in an HTTP header as an aggregate key. Each
+    #   distinct forwarded IP address contributes to the aggregation
+    #   instance.
+    #
+    #   When you specify an IP or forwarded IP in the custom key settings,
+    #   you must also specify at least one other key to use. You can
+    #   aggregate on only the forwarded IP address by specifying
+    #   `FORWARDED_IP` in your rate-based statement's `AggregateKeyType`.
+    #
+    #   With this option, you must specify the header to use in the
+    #   rate-based rule's `ForwardedIPConfig` property.
+    #   @return [Types::RateLimitForwardedIP]
+    #
+    # @!attribute [rw] ip
+    #   Use the request's originating IP address as an aggregate key. Each
+    #   distinct IP address contributes to the aggregation instance.
+    #
+    #   When you specify an IP or forwarded IP in the custom key settings,
+    #   you must also specify at least one other key to use. You can
+    #   aggregate on only the IP address by specifying `IP` in your
+    #   rate-based statement's `AggregateKeyType`.
+    #   @return [Types::RateLimitIP]
+    #
+    # @!attribute [rw] label_namespace
+    #   Use the specified label namespace as an aggregate key. Each distinct
+    #   fully qualified label name that has the specified label namespace
+    #   contributes to the aggregation instance. If you use just one label
+    #   namespace as your custom key, then each label name fully defines an
+    #   aggregation instance.
+    #
+    #   This uses only labels that have been added to the request by rules
+    #   that are evaluated before this rate-based rule in the web ACL.
+    #
+    #   For information about label namespaces and names, see [Label syntax
+    #   and naming requirements][1] in the *WAF Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-label-requirements.html
+    #   @return [Types::RateLimitLabelNamespace]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateBasedStatementCustomKey AWS API Documentation
+    #
+    class RateBasedStatementCustomKey < Struct.new(
+      :header,
+      :cookie,
+      :query_argument,
+      :query_string,
+      :http_method,
+      :forwarded_ip,
+      :ip,
+      :label_namespace)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The set of IP addresses that are currently blocked for a
-    # RateBasedStatement.
+    # RateBasedStatement. This is only available for rate-based rules that
+    # aggregate on just the IP address, with the `AggregateKeyType` set to
+    # `IP` or `FORWARDED_IP`.
+    #
+    # A rate-based rule applies its rule action to requests from IP
+    # addresses that are in the rule's managed keys list and that match the
+    # rule's scope-down statement. When a rule has no scope-down statement,
+    # it applies the action to all requests from the IP addresses that are
+    # in the list. The rule applies its rule action to rate limit the
+    # matching requests. The action is usually Block but it can be any valid
+    # rule action except for Allow.
+    #
+    # The maximum number of IP addresses that can be rate limited by a
+    # single rate-based rule instance is 10,000. If more than 10,000
+    # addresses exceed the rate limit, WAF limits those with the highest
+    # rates.
     #
     # @!attribute [rw] ip_address_version
     #   The version of the IP addresses, either `IPV4` or `IPV6`.
@@ -5508,6 +5729,208 @@ module Aws::WAFV2
     class RateBasedStatementManagedKeysIPSet < Struct.new(
       :ip_address_version,
       :addresses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a cookie as an aggregate key for a rate-based rule. Each
+    # distinct value in the cookie contributes to the aggregation instance.
+    # If you use a single cookie as your custom key, then each value fully
+    # defines an aggregation instance.
+    #
+    # @!attribute [rw] name
+    #   The name of the cookie to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_transformations
+    #   Text transformations eliminate some of the unusual formatting that
+    #   attackers use in web requests in an effort to bypass detection. Text
+    #   transformations are used in rule match statements, to transform the
+    #   `FieldToMatch` request component before inspecting it, and they're
+    #   used in rate-based rule statements, to transform request components
+    #   before using them as custom aggregation keys. If you specify one or
+    #   more transformations to apply, WAF performs all transformations on
+    #   the specified content, starting from the lowest priority setting,
+    #   and then uses the component contents.
+    #   @return [Array<Types::TextTransformation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitCookie AWS API Documentation
+    #
+    class RateLimitCookie < Struct.new(
+      :name,
+      :text_transformations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the first IP address in an HTTP header as an aggregate key
+    # for a rate-based rule. Each distinct forwarded IP address contributes
+    # to the aggregation instance.
+    #
+    # This setting is used only in the `RateBasedStatementCustomKey`
+    # specification of a rate-based rule statement. When you specify an IP
+    # or forwarded IP in the custom key settings, you must also specify at
+    # least one other key to use. You can aggregate on only the forwarded IP
+    # address by specifying `FORWARDED_IP` in your rate-based statement's
+    # `AggregateKeyType`.
+    #
+    # This data type supports using the forwarded IP address in the web
+    # request aggregation for a rate-based rule, in
+    # `RateBasedStatementCustomKey`. The JSON specification for using the
+    # forwarded IP address doesn't explicitly use this data type.
+    #
+    # JSON specification: `"ForwardedIP": \{\}`
+    #
+    # When you use this specification, you must also configure the forwarded
+    # IP address in the rate-based statement's `ForwardedIPConfig`.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitForwardedIP AWS API Documentation
+    #
+    class RateLimitForwardedIP < Aws::EmptyStructure; end
+
+    # Specifies the request's HTTP method as an aggregate key for a
+    # rate-based rule. Each distinct HTTP method contributes to the
+    # aggregation instance. If you use just the HTTP method as your custom
+    # key, then each method fully defines an aggregation instance.
+    #
+    # JSON specification: `"RateLimitHTTPMethod": \{\}`
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitHTTPMethod AWS API Documentation
+    #
+    class RateLimitHTTPMethod < Aws::EmptyStructure; end
+
+    # Specifies a header as an aggregate key for a rate-based rule. Each
+    # distinct value in the header contributes to the aggregation instance.
+    # If you use a single header as your custom key, then each value fully
+    # defines an aggregation instance.
+    #
+    # @!attribute [rw] name
+    #   The name of the header to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_transformations
+    #   Text transformations eliminate some of the unusual formatting that
+    #   attackers use in web requests in an effort to bypass detection. Text
+    #   transformations are used in rule match statements, to transform the
+    #   `FieldToMatch` request component before inspecting it, and they're
+    #   used in rate-based rule statements, to transform request components
+    #   before using them as custom aggregation keys. If you specify one or
+    #   more transformations to apply, WAF performs all transformations on
+    #   the specified content, starting from the lowest priority setting,
+    #   and then uses the component contents.
+    #   @return [Array<Types::TextTransformation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitHeader AWS API Documentation
+    #
+    class RateLimitHeader < Struct.new(
+      :name,
+      :text_transformations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the IP address in the web request as an aggregate key for a
+    # rate-based rule. Each distinct IP address contributes to the
+    # aggregation instance.
+    #
+    # This setting is used only in the `RateBasedStatementCustomKey`
+    # specification of a rate-based rule statement. To use this in the
+    # custom key settings, you must specify at least one other key to use,
+    # along with the IP address. To aggregate on only the IP address, in
+    # your rate-based statement's `AggregateKeyType`, specify `IP`.
+    #
+    # JSON specification: `"RateLimitIP": \{\}`
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitIP AWS API Documentation
+    #
+    class RateLimitIP < Aws::EmptyStructure; end
+
+    # Specifies a label namespace to use as an aggregate key for a
+    # rate-based rule. Each distinct fully qualified label name that has the
+    # specified label namespace contributes to the aggregation instance. If
+    # you use just one label namespace as your custom key, then each label
+    # name fully defines an aggregation instance.
+    #
+    # This uses only labels that have been added to the request by rules
+    # that are evaluated before this rate-based rule in the web ACL.
+    #
+    # For information about label namespaces and names, see [Label syntax
+    # and naming requirements][1] in the *WAF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-label-requirements.html
+    #
+    # @!attribute [rw] namespace
+    #   The namespace to use for aggregation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitLabelNamespace AWS API Documentation
+    #
+    class RateLimitLabelNamespace < Struct.new(
+      :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a query argument in the request as an aggregate key for a
+    # rate-based rule. Each distinct value for the named query argument
+    # contributes to the aggregation instance. If you use a single query
+    # argument as your custom key, then each value fully defines an
+    # aggregation instance.
+    #
+    # @!attribute [rw] name
+    #   The name of the query argument to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_transformations
+    #   Text transformations eliminate some of the unusual formatting that
+    #   attackers use in web requests in an effort to bypass detection. Text
+    #   transformations are used in rule match statements, to transform the
+    #   `FieldToMatch` request component before inspecting it, and they're
+    #   used in rate-based rule statements, to transform request components
+    #   before using them as custom aggregation keys. If you specify one or
+    #   more transformations to apply, WAF performs all transformations on
+    #   the specified content, starting from the lowest priority setting,
+    #   and then uses the component contents.
+    #   @return [Array<Types::TextTransformation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitQueryArgument AWS API Documentation
+    #
+    class RateLimitQueryArgument < Struct.new(
+      :name,
+      :text_transformations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the request's query string as an aggregate key for a
+    # rate-based rule. Each distinct string contributes to the aggregation
+    # instance. If you use just the query string as your custom key, then
+    # each string fully defines an aggregation instance.
+    #
+    # @!attribute [rw] text_transformations
+    #   Text transformations eliminate some of the unusual formatting that
+    #   attackers use in web requests in an effort to bypass detection. Text
+    #   transformations are used in rule match statements, to transform the
+    #   `FieldToMatch` request component before inspecting it, and they're
+    #   used in rate-based rule statements, to transform request components
+    #   before using them as custom aggregation keys. If you specify one or
+    #   more transformations to apply, WAF performs all transformations on
+    #   the specified content, starting from the lowest priority setting,
+    #   and then uses the component contents.
+    #   @return [Array<Types::TextTransformation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitQueryString AWS API Documentation
+    #
+    class RateLimitQueryString < Struct.new(
+      :text_transformations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5539,11 +5962,14 @@ module Aws::WAFV2
     #
     # @!attribute [rw] text_transformations
     #   Text transformations eliminate some of the unusual formatting that
-    #   attackers use in web requests in an effort to bypass detection. If
-    #   you specify one or more transformations in a rule statement, WAF
-    #   performs all transformations on the content of the request component
-    #   identified by `FieldToMatch`, starting from the lowest priority
-    #   setting, before inspecting the content for a match.
+    #   attackers use in web requests in an effort to bypass detection. Text
+    #   transformations are used in rule match statements, to transform the
+    #   `FieldToMatch` request component before inspecting it, and they're
+    #   used in rate-based rule statements, to transform request components
+    #   before using them as custom aggregation keys. If you specify one or
+    #   more transformations to apply, WAF performs all transformations on
+    #   the specified content, starting from the lowest priority setting,
+    #   and then uses the component contents.
     #   @return [Array<Types::TextTransformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RegexMatchStatement AWS API Documentation
@@ -5620,11 +6046,14 @@ module Aws::WAFV2
     #
     # @!attribute [rw] text_transformations
     #   Text transformations eliminate some of the unusual formatting that
-    #   attackers use in web requests in an effort to bypass detection. If
-    #   you specify one or more transformations in a rule statement, WAF
-    #   performs all transformations on the content of the request component
-    #   identified by `FieldToMatch`, starting from the lowest priority
-    #   setting, before inspecting the content for a match.
+    #   attackers use in web requests in an effort to bypass detection. Text
+    #   transformations are used in rule match statements, to transform the
+    #   `FieldToMatch` request component before inspecting it, and they're
+    #   used in rate-based rule statements, to transform request components
+    #   before using them as custom aggregation keys. If you specify one or
+    #   more transformations to apply, WAF performs all transformations on
+    #   the specified content, starting from the lowest priority setting,
+    #   and then uses the component contents.
     #   @return [Array<Types::TextTransformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RegexPatternSetReferenceStatement AWS API Documentation
@@ -6622,11 +7051,14 @@ module Aws::WAFV2
     #
     # @!attribute [rw] text_transformations
     #   Text transformations eliminate some of the unusual formatting that
-    #   attackers use in web requests in an effort to bypass detection. If
-    #   you specify one or more transformations in a rule statement, WAF
-    #   performs all transformations on the content of the request component
-    #   identified by `FieldToMatch`, starting from the lowest priority
-    #   setting, before inspecting the content for a match.
+    #   attackers use in web requests in an effort to bypass detection. Text
+    #   transformations are used in rule match statements, to transform the
+    #   `FieldToMatch` request component before inspecting it, and they're
+    #   used in rate-based rule statements, to transform request components
+    #   before using them as custom aggregation keys. If you specify one or
+    #   more transformations to apply, WAF performs all transformations on
+    #   the specified content, starting from the lowest priority setting,
+    #   and then uses the component contents.
     #   @return [Array<Types::TextTransformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/SizeConstraintStatement AWS API Documentation
@@ -6650,11 +7082,14 @@ module Aws::WAFV2
     #
     # @!attribute [rw] text_transformations
     #   Text transformations eliminate some of the unusual formatting that
-    #   attackers use in web requests in an effort to bypass detection. If
-    #   you specify one or more transformations in a rule statement, WAF
-    #   performs all transformations on the content of the request component
-    #   identified by `FieldToMatch`, starting from the lowest priority
-    #   setting, before inspecting the content for a match.
+    #   attackers use in web requests in an effort to bypass detection. Text
+    #   transformations are used in rule match statements, to transform the
+    #   `FieldToMatch` request component before inspecting it, and they're
+    #   used in rate-based rule statements, to transform request components
+    #   before using them as custom aggregation keys. If you specify one or
+    #   more transformations to apply, WAF performs all transformations on
+    #   the specified content, starting from the lowest priority setting,
+    #   and then uses the component contents.
     #   @return [Array<Types::TextTransformation>]
     #
     # @!attribute [rw] sensitivity_level
@@ -6814,11 +7249,88 @@ module Aws::WAFV2
     #   @return [Types::RegexPatternSetReferenceStatement]
     #
     # @!attribute [rw] rate_based_statement
-    #   A rate-based rule tracks the rate of requests for each originating
-    #   IP address, and triggers the rule action when the rate exceeds a
-    #   limit that you specify on the number of requests in any 5-minute
-    #   time span. You can use this to put a temporary block on requests
-    #   from an IP address that is sending excessive requests.
+    #   A rate-based rule counts incoming requests and rate limits requests
+    #   when they are coming at too fast a rate. The rule categorizes
+    #   requests according to your aggregation criteria, collects them into
+    #   aggregation instances, and counts and rate limits the requests for
+    #   each instance.
+    #
+    #   You can specify individual aggregation keys, like IP address or HTTP
+    #   method. You can also specify aggregation key combinations, like IP
+    #   address and HTTP method, or HTTP method, query argument, and cookie.
+    #
+    #   Each unique set of values for the aggregation keys that you specify
+    #   is a separate aggregation instance, with the value from each key
+    #   contributing to the aggregation instance definition.
+    #
+    #   For example, assume the rule evaluates web requests with the
+    #   following IP address and HTTP method values:
+    #
+    #   * IP address 10.1.1.1, HTTP method POST
+    #
+    #   * IP address 10.1.1.1, HTTP method GET
+    #
+    #   * IP address 127.0.0.0, HTTP method POST
+    #
+    #   * IP address 10.1.1.1, HTTP method GET
+    #
+    #   The rule would create different aggregation instances according to
+    #   your aggregation criteria, for example:
+    #
+    #   * If the aggregation criteria is just the IP address, then each
+    #     individual address is an aggregation instance, and WAF counts
+    #     requests separately for each. The aggregation instances and
+    #     request counts for our example would be the following:
+    #
+    #     * IP address 10.1.1.1: count 3
+    #
+    #     * IP address 127.0.0.0: count 1
+    #
+    #   * If the aggregation criteria is HTTP method, then each individual
+    #     HTTP method is an aggregation instance. The aggregation instances
+    #     and request counts for our example would be the following:
+    #
+    #     * HTTP method POST: count 2
+    #
+    #     * HTTP method GET: count 2
+    #
+    #   * If the aggregation criteria is IP address and HTTP method, then
+    #     each IP address and each HTTP method would contribute to the
+    #     combined aggregation instance. The aggregation instances and
+    #     request counts for our example would be the following:
+    #
+    #     * IP address 10.1.1.1, HTTP method POST: count 1
+    #
+    #     * IP address 10.1.1.1, HTTP method GET: count 2
+    #
+    #     * IP address 127.0.0.0, HTTP method POST: count 1
+    #
+    #   For any n-tuple of aggregation keys, each unique combination of
+    #   values for the keys defines a separate aggregation instance, which
+    #   WAF counts and rate-limits individually.
+    #
+    #   You can optionally nest another statement inside the rate-based
+    #   statement, to narrow the scope of the rule so that it only counts
+    #   and rate limits requests that match the nested statement. You can
+    #   use this nested scope-down statement in conjunction with your
+    #   aggregation key specifications or you can just count and rate limit
+    #   all requests that match the scope-down statement, without additional
+    #   aggregation. When you choose to just manage all requests that match
+    #   a scope-down statement, the aggregation instance is singular for the
+    #   rule.
+    #
+    #   You cannot nest a `RateBasedStatement` inside another statement, for
+    #   example inside a `NotStatement` or `OrStatement`. You can define a
+    #   `RateBasedStatement` inside a web ACL and inside a rule group.
+    #
+    #   For additional information about the options, see [Rate limiting web
+    #   requests using rate-based rules][1] in the *WAF Developer Guide*.
+    #
+    #   If you only aggregate on the individual IP address or forwarded IP
+    #   address, you can retrieve the list of IP addresses that WAF is
+    #   currently rate limiting for a rule through the API call
+    #   `GetRateBasedStatementManagedKeys`. This option is not available for
+    #   other aggregation configurations.
     #
     #   WAF tracks and manages web requests separately for each instance of
     #   a rate-based rule that you use. For example, if you provide the same
@@ -6829,33 +7341,9 @@ module Aws::WAFV2
     #   multiple places, each use creates a separate instance of the
     #   rate-based rule that gets its own tracking and management by WAF.
     #
-    #   When the rule action triggers, WAF blocks additional requests from
-    #   the IP address until the request rate falls below the limit.
     #
-    #   You can optionally nest another statement inside the rate-based
-    #   statement, to narrow the scope of the rule so that it only counts
-    #   requests that match the nested statement. For example, based on
-    #   recent requests that you have seen from an attacker, you might
-    #   create a rate-based rule with a nested AND rule statement that
-    #   contains the following nested statements:
     #
-    #   * An IP match statement with an IP set that specifies the address
-    #     192.0.2.44.
-    #
-    #   * A string match statement that searches in the User-Agent header
-    #     for the string BadBot.
-    #
-    #   In this rate-based rule, you also define a rate limit. For this
-    #   example, the rate limit is 1,000. Requests that meet the criteria of
-    #   both of the nested statements are counted. If the count exceeds
-    #   1,000 requests per five minutes, the rule action triggers. Requests
-    #   that do not meet the criteria of both of the nested statements are
-    #   not counted towards the rate limit and are not affected by this
-    #   rule.
-    #
-    #   You cannot nest a `RateBasedStatement` inside another statement, for
-    #   example inside a `NotStatement` or `OrStatement`. You can define a
-    #   `RateBasedStatement` inside a web ACL and inside a rule group.
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-rate-based-rules.html
     #   @return [Types::RateBasedStatement]
     #
     # @!attribute [rw] and_statement
@@ -7030,11 +7518,10 @@ module Aws::WAFV2
     # attackers use in web requests in an effort to bypass detection.
     #
     # @!attribute [rw] priority
-    #   Sets the relative processing order for multiple transformations that
-    #   are defined for a rule statement. WAF processes all transformations,
-    #   from lowest priority to highest, before inspecting the transformed
-    #   content. The priorities don't need to be consecutive, but they must
-    #   all be different.
+    #   Sets the relative processing order for multiple transformations. WAF
+    #   processes all transformations, from lowest priority to highest,
+    #   before inspecting the transformed content. The priorities don't
+    #   need to be consecutive, but they must all be different.
     #   @return [Integer]
     #
     # @!attribute [rw] type
@@ -8231,6 +8718,22 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # The rule that you've named doesn't aggregate solely on the IP
+    # address or solely on the forwarded IP address. This call is only
+    # available for rate-based rules with an `AggregateKeyType` setting of
+    # `IP` or `FORWARDED_IP`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WAFUnsupportedAggregateKeyTypeException AWS API Documentation
+    #
+    class WAFUnsupportedAggregateKeyTypeException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A web ACL defines a collection of rules to use to inspect and control
     # web requests. Each rule has an action defined (allow, block, or count)
     # for requests that match the statement of the rule. In the web ACL, you
@@ -8493,11 +8996,14 @@ module Aws::WAFV2
     #
     # @!attribute [rw] text_transformations
     #   Text transformations eliminate some of the unusual formatting that
-    #   attackers use in web requests in an effort to bypass detection. If
-    #   you specify one or more transformations in a rule statement, WAF
-    #   performs all transformations on the content of the request component
-    #   identified by `FieldToMatch`, starting from the lowest priority
-    #   setting, before inspecting the content for a match.
+    #   attackers use in web requests in an effort to bypass detection. Text
+    #   transformations are used in rule match statements, to transform the
+    #   `FieldToMatch` request component before inspecting it, and they're
+    #   used in rate-based rule statements, to transform request components
+    #   before using them as custom aggregation keys. If you specify one or
+    #   more transformations to apply, WAF performs all transformations on
+    #   the specified content, starting from the lowest priority setting,
+    #   and then uses the component contents.
     #   @return [Array<Types::TextTransformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/XssMatchStatement AWS API Documentation

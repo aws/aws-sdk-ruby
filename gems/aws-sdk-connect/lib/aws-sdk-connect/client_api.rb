@@ -139,6 +139,8 @@ module Aws::Connect
     CreateIntegrationAssociationResponse = Shapes::StructureShape.new(name: 'CreateIntegrationAssociationResponse')
     CreateParticipantRequest = Shapes::StructureShape.new(name: 'CreateParticipantRequest')
     CreateParticipantResponse = Shapes::StructureShape.new(name: 'CreateParticipantResponse')
+    CreatePromptRequest = Shapes::StructureShape.new(name: 'CreatePromptRequest')
+    CreatePromptResponse = Shapes::StructureShape.new(name: 'CreatePromptResponse')
     CreateQueueRequest = Shapes::StructureShape.new(name: 'CreateQueueRequest')
     CreateQueueResponse = Shapes::StructureShape.new(name: 'CreateQueueResponse')
     CreateQuickConnectRequest = Shapes::StructureShape.new(name: 'CreateQuickConnectRequest')
@@ -188,6 +190,7 @@ module Aws::Connect
     DeleteHoursOfOperationRequest = Shapes::StructureShape.new(name: 'DeleteHoursOfOperationRequest')
     DeleteInstanceRequest = Shapes::StructureShape.new(name: 'DeleteInstanceRequest')
     DeleteIntegrationAssociationRequest = Shapes::StructureShape.new(name: 'DeleteIntegrationAssociationRequest')
+    DeletePromptRequest = Shapes::StructureShape.new(name: 'DeletePromptRequest')
     DeleteQuickConnectRequest = Shapes::StructureShape.new(name: 'DeleteQuickConnectRequest')
     DeleteRuleRequest = Shapes::StructureShape.new(name: 'DeleteRuleRequest')
     DeleteSecurityProfileRequest = Shapes::StructureShape.new(name: 'DeleteSecurityProfileRequest')
@@ -222,6 +225,8 @@ module Aws::Connect
     DescribeInstanceStorageConfigResponse = Shapes::StructureShape.new(name: 'DescribeInstanceStorageConfigResponse')
     DescribePhoneNumberRequest = Shapes::StructureShape.new(name: 'DescribePhoneNumberRequest')
     DescribePhoneNumberResponse = Shapes::StructureShape.new(name: 'DescribePhoneNumberResponse')
+    DescribePromptRequest = Shapes::StructureShape.new(name: 'DescribePromptRequest')
+    DescribePromptResponse = Shapes::StructureShape.new(name: 'DescribePromptResponse')
     DescribeQueueRequest = Shapes::StructureShape.new(name: 'DescribeQueueRequest')
     DescribeQueueResponse = Shapes::StructureShape.new(name: 'DescribeQueueResponse')
     DescribeQuickConnectRequest = Shapes::StructureShape.new(name: 'DescribeQuickConnectRequest')
@@ -347,6 +352,8 @@ module Aws::Connect
     GetMetricDataResponse = Shapes::StructureShape.new(name: 'GetMetricDataResponse')
     GetMetricDataV2Request = Shapes::StructureShape.new(name: 'GetMetricDataV2Request')
     GetMetricDataV2Response = Shapes::StructureShape.new(name: 'GetMetricDataV2Response')
+    GetPromptFileRequest = Shapes::StructureShape.new(name: 'GetPromptFileRequest')
+    GetPromptFileResponse = Shapes::StructureShape.new(name: 'GetPromptFileResponse')
     GetTaskTemplateRequest = Shapes::StructureShape.new(name: 'GetTaskTemplateRequest')
     GetTaskTemplateResponse = Shapes::StructureShape.new(name: 'GetTaskTemplateResponse')
     GetTrafficDistributionRequest = Shapes::StructureShape.new(name: 'GetTrafficDistributionRequest')
@@ -582,8 +589,11 @@ module Aws::Connect
     ProblemDetail = Shapes::StructureShape.new(name: 'ProblemDetail')
     ProblemMessageString = Shapes::StringShape.new(name: 'ProblemMessageString')
     Problems = Shapes::ListShape.new(name: 'Problems')
+    Prompt = Shapes::StructureShape.new(name: 'Prompt')
+    PromptDescription = Shapes::StringShape.new(name: 'PromptDescription')
     PromptId = Shapes::StringShape.new(name: 'PromptId')
     PromptName = Shapes::StringShape.new(name: 'PromptName')
+    PromptPresignedUrl = Shapes::StringShape.new(name: 'PromptPresignedUrl')
     PromptSummary = Shapes::StructureShape.new(name: 'PromptSummary')
     PromptSummaryList = Shapes::ListShape.new(name: 'PromptSummaryList')
     PropertyValidationException = Shapes::StructureShape.new(name: 'PropertyValidationException')
@@ -675,6 +685,7 @@ module Aws::Connect
     RuleSummaryList = Shapes::ListShape.new(name: 'RuleSummaryList')
     RuleTriggerEventSource = Shapes::StructureShape.new(name: 'RuleTriggerEventSource')
     S3Config = Shapes::StructureShape.new(name: 'S3Config')
+    S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SearchAvailablePhoneNumbersRequest = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersRequest')
     SearchAvailablePhoneNumbersResponse = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersResponse')
     SearchQueuesRequest = Shapes::StructureShape.new(name: 'SearchQueuesRequest')
@@ -833,6 +844,8 @@ module Aws::Connect
     UpdateParticipantRoleConfigResponse = Shapes::StructureShape.new(name: 'UpdateParticipantRoleConfigResponse')
     UpdatePhoneNumberRequest = Shapes::StructureShape.new(name: 'UpdatePhoneNumberRequest')
     UpdatePhoneNumberResponse = Shapes::StructureShape.new(name: 'UpdatePhoneNumberResponse')
+    UpdatePromptRequest = Shapes::StructureShape.new(name: 'UpdatePromptRequest')
+    UpdatePromptResponse = Shapes::StructureShape.new(name: 'UpdatePromptResponse')
     UpdateQueueHoursOfOperationRequest = Shapes::StructureShape.new(name: 'UpdateQueueHoursOfOperationRequest')
     UpdateQueueMaxContactsRequest = Shapes::StructureShape.new(name: 'UpdateQueueMaxContactsRequest')
     UpdateQueueNameRequest = Shapes::StructureShape.new(name: 'UpdateQueueNameRequest')
@@ -1257,6 +1270,17 @@ module Aws::Connect
     CreateParticipantResponse.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, location_name: "ParticipantId"))
     CreateParticipantResponse.struct_class = Types::CreateParticipantResponse
 
+    CreatePromptRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    CreatePromptRequest.add_member(:name, Shapes::ShapeRef.new(shape: CommonNameLength127, required: true, location_name: "Name"))
+    CreatePromptRequest.add_member(:description, Shapes::ShapeRef.new(shape: PromptDescription, location_name: "Description"))
+    CreatePromptRequest.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
+    CreatePromptRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreatePromptRequest.struct_class = Types::CreatePromptRequest
+
+    CreatePromptResponse.add_member(:prompt_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "PromptARN"))
+    CreatePromptResponse.add_member(:prompt_id, Shapes::ShapeRef.new(shape: PromptId, location_name: "PromptId"))
+    CreatePromptResponse.struct_class = Types::CreatePromptResponse
+
     CreateQueueRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     CreateQueueRequest.add_member(:name, Shapes::ShapeRef.new(shape: CommonNameLength127, required: true, location_name: "Name"))
     CreateQueueRequest.add_member(:description, Shapes::ShapeRef.new(shape: QueueDescription, location_name: "Description"))
@@ -1483,6 +1507,10 @@ module Aws::Connect
     DeleteIntegrationAssociationRequest.add_member(:integration_association_id, Shapes::ShapeRef.new(shape: IntegrationAssociationId, required: true, location: "uri", location_name: "IntegrationAssociationId"))
     DeleteIntegrationAssociationRequest.struct_class = Types::DeleteIntegrationAssociationRequest
 
+    DeletePromptRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DeletePromptRequest.add_member(:prompt_id, Shapes::ShapeRef.new(shape: PromptId, required: true, location: "uri", location_name: "PromptId"))
+    DeletePromptRequest.struct_class = Types::DeletePromptRequest
+
     DeleteQuickConnectRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteQuickConnectRequest.add_member(:quick_connect_id, Shapes::ShapeRef.new(shape: QuickConnectId, required: true, location: "uri", location_name: "QuickConnectId"))
     DeleteQuickConnectRequest.struct_class = Types::DeleteQuickConnectRequest
@@ -1605,6 +1633,13 @@ module Aws::Connect
 
     DescribePhoneNumberResponse.add_member(:claimed_phone_number_summary, Shapes::ShapeRef.new(shape: ClaimedPhoneNumberSummary, location_name: "ClaimedPhoneNumberSummary"))
     DescribePhoneNumberResponse.struct_class = Types::DescribePhoneNumberResponse
+
+    DescribePromptRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DescribePromptRequest.add_member(:prompt_id, Shapes::ShapeRef.new(shape: PromptId, required: true, location: "uri", location_name: "PromptId"))
+    DescribePromptRequest.struct_class = Types::DescribePromptRequest
+
+    DescribePromptResponse.add_member(:prompt, Shapes::ShapeRef.new(shape: Prompt, location_name: "Prompt"))
+    DescribePromptResponse.struct_class = Types::DescribePromptResponse
 
     DescribeQueueRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DescribeQueueRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "QueueId"))
@@ -2041,6 +2076,13 @@ module Aws::Connect
     GetMetricDataV2Response.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
     GetMetricDataV2Response.add_member(:metric_results, Shapes::ShapeRef.new(shape: MetricResultsV2, location_name: "MetricResults"))
     GetMetricDataV2Response.struct_class = Types::GetMetricDataV2Response
+
+    GetPromptFileRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    GetPromptFileRequest.add_member(:prompt_id, Shapes::ShapeRef.new(shape: PromptId, required: true, location: "uri", location_name: "PromptId"))
+    GetPromptFileRequest.struct_class = Types::GetPromptFileRequest
+
+    GetPromptFileResponse.add_member(:prompt_presigned_url, Shapes::ShapeRef.new(shape: PromptPresignedUrl, location_name: "PromptPresignedUrl"))
+    GetPromptFileResponse.struct_class = Types::GetPromptFileResponse
 
     GetTaskTemplateRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     GetTaskTemplateRequest.add_member(:task_template_id, Shapes::ShapeRef.new(shape: TaskTemplateId, required: true, location: "uri", location_name: "TaskTemplateId"))
@@ -2749,6 +2791,13 @@ module Aws::Connect
     ProblemDetail.struct_class = Types::ProblemDetail
 
     Problems.member = Shapes::ShapeRef.new(shape: ProblemDetail)
+
+    Prompt.add_member(:prompt_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "PromptARN"))
+    Prompt.add_member(:prompt_id, Shapes::ShapeRef.new(shape: PromptId, location_name: "PromptId"))
+    Prompt.add_member(:name, Shapes::ShapeRef.new(shape: CommonNameLength127, location_name: "Name"))
+    Prompt.add_member(:description, Shapes::ShapeRef.new(shape: PromptDescription, location_name: "Description"))
+    Prompt.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    Prompt.struct_class = Types::Prompt
 
     PromptSummary.add_member(:id, Shapes::ShapeRef.new(shape: PromptId, location_name: "Id"))
     PromptSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
@@ -3531,6 +3580,17 @@ module Aws::Connect
     UpdatePhoneNumberResponse.add_member(:phone_number_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "PhoneNumberArn"))
     UpdatePhoneNumberResponse.struct_class = Types::UpdatePhoneNumberResponse
 
+    UpdatePromptRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdatePromptRequest.add_member(:prompt_id, Shapes::ShapeRef.new(shape: PromptId, required: true, location: "uri", location_name: "PromptId"))
+    UpdatePromptRequest.add_member(:name, Shapes::ShapeRef.new(shape: CommonNameLength127, location_name: "Name"))
+    UpdatePromptRequest.add_member(:description, Shapes::ShapeRef.new(shape: PromptDescription, location_name: "Description"))
+    UpdatePromptRequest.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri"))
+    UpdatePromptRequest.struct_class = Types::UpdatePromptRequest
+
+    UpdatePromptResponse.add_member(:prompt_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "PromptARN"))
+    UpdatePromptResponse.add_member(:prompt_id, Shapes::ShapeRef.new(shape: PromptId, location_name: "PromptId"))
+    UpdatePromptResponse.struct_class = Types::UpdatePromptResponse
+
     UpdateQueueHoursOfOperationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     UpdateQueueHoursOfOperationRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "QueueId"))
     UpdateQueueHoursOfOperationRequest.add_member(:hours_of_operation_id, Shapes::ShapeRef.new(shape: HoursOfOperationId, required: true, location_name: "HoursOfOperationId"))
@@ -4113,6 +4173,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:create_prompt, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePrompt"
+        o.http_method = "PUT"
+        o.http_request_uri = "/prompts/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: CreatePromptRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreatePromptResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:create_queue, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateQueue"
         o.http_method = "PUT"
@@ -4379,6 +4453,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:delete_prompt, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePrompt"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/prompts/{InstanceId}/{PromptId}"
+        o.input = Shapes::ShapeRef.new(shape: DeletePromptRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:delete_quick_connect, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteQuickConnect"
         o.http_method = "DELETE"
@@ -4638,6 +4725,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:describe_prompt, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribePrompt"
+        o.http_method = "GET"
+        o.http_request_uri = "/prompts/{InstanceId}/{PromptId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribePromptRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribePromptResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:describe_queue, Seahorse::Model::Operation.new.tap do |o|
@@ -4999,6 +5099,19 @@ module Aws::Connect
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_prompt_file, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPromptFile"
+        o.http_method = "GET"
+        o.http_request_uri = "/prompts/{InstanceId}/{PromptId}/file"
+        o.input = Shapes::ShapeRef.new(shape: GetPromptFileRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPromptFileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:get_task_template, Seahorse::Model::Operation.new.tap do |o|
@@ -6258,6 +6371,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: IdempotencyException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_prompt, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePrompt"
+        o.http_method = "POST"
+        o.http_request_uri = "/prompts/{InstanceId}/{PromptId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePromptRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePromptResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:update_queue_hours_of_operation, Seahorse::Model::Operation.new.tap do |o|

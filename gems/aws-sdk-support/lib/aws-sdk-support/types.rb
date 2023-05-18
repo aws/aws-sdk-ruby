@@ -255,9 +255,9 @@ module Aws::Support
     #
     # * **language** - The language in which Amazon Web Services Support
     #   handles the case. Amazon Web Services Support currently supports
-    #   English ("en") and Japanese ("ja"). You must specify the ISO
-    #   639-1 code for the `language` parameter if you want support in that
-    #   language.
+    #   Chinese (“zh”), English ("en"), Japanese ("ja") and Korean
+    #   (“ko”). You must specify the ISO 639-1 code for the `language`
+    #   parameter if you want support in that language.
     #
     # * **nextToken** - A resumption point for pagination.
     #
@@ -368,9 +368,10 @@ module Aws::Support
     #
     # @!attribute [rw] language
     #   The language in which Amazon Web Services Support handles the case.
-    #   Amazon Web Services Support currently supports English ("en") and
-    #   Japanese ("ja"). You must specify the ISO 639-1 code for the
-    #   `language` parameter if you want support in that language.
+    #   Amazon Web Services Support currently supports Chinese (“zh”),
+    #   English ("en"), Japanese ("ja") and Korean (“ko”). You must
+    #   specify the ISO 639-1 code for the `language` parameter if you want
+    #   support in that language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CaseDetails AWS API Documentation
@@ -445,9 +446,9 @@ module Aws::Support
     #
     # @!attribute [rw] submitted_by
     #   The identity of the account that submitted, or responded to, the
-    #   support case. Customer entries include the role or IAM user as well
-    #   as the email address. For example, "AdminRole (Role)
-    #   &lt;janedoe@example.com&gt;. Entries from the Amazon Web Services
+    #   support case. Customer entries include the IAM role as well as the
+    #   email address (for example, "AdminRole (Role)
+    #   &lt;janedoe@example.com&gt;). Entries from the Amazon Web Services
     #   Support team display "Amazon Web Services," and don't show an
     #   email address.
     #   @return [String]
@@ -468,6 +469,49 @@ module Aws::Support
       :submitted_by,
       :time_created,
       :attachment_set)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A JSON-formatted object that contains the CommunicationTypeOptions for
+    # creating a case for a certain communication channel. It is contained
+    # in the response from a DescribeCreateCaseOptions request.
+    # **CommunicationTypeOptions** contains the following fields:
+    #
+    # * **datesWithoutSupport** - A JSON-formatted list containing date and
+    #   time ranges for periods without support in UTC time. Date and time
+    #   format is RFC 3339 : 'yyyy-MM-dd'T'HH:mm:ss.SSSZZ'.
+    #
+    # * **supportedHours** - A JSON-formatted list containing time ranges
+    #   when support are available. Time format is RFC 3339 :
+    #   'HH:mm:ss.SSS'.
+    #
+    # * **type** - A string value indicating the communication type that the
+    #   aforementioned rules apply to. At the moment the type value can
+    #   assume one of 3 values at the moment `chat`, `web` and `call`.
+    #
+    # @!attribute [rw] type
+    #   A string value indicating the communication type. At the moment the
+    #   type value can assume one of 3 values at the moment chat, web and
+    #   call.
+    #   @return [String]
+    #
+    # @!attribute [rw] supported_hours
+    #   A JSON-formatted list containing time ranges when support is
+    #   available.
+    #   @return [Array<Types::SupportedHour>]
+    #
+    # @!attribute [rw] dates_without_support
+    #   A JSON-formatted list containing date and time ranges for periods
+    #   without support
+    #   @return [Array<Types::DateInterval>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CommunicationTypeOptions AWS API Documentation
+    #
+    class CommunicationTypeOptions < Struct.new(
+      :type,
+      :supported_hours,
+      :dates_without_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -538,9 +582,10 @@ module Aws::Support
     #
     # @!attribute [rw] language
     #   The language in which Amazon Web Services Support handles the case.
-    #   Amazon Web Services Support currently supports English ("en") and
-    #   Japanese ("ja"). You must specify the ISO 639-1 code for the
-    #   `language` parameter if you want support in that language.
+    #   Amazon Web Services Support currently supports Chinese (“zh”),
+    #   English ("en"), Japanese ("ja") and Korean (“ko”). You must
+    #   specify the ISO 639-1 code for the `language` parameter if you want
+    #   support in that language.
     #   @return [String]
     #
     # @!attribute [rw] issue_type
@@ -583,6 +628,28 @@ module Aws::Support
     #
     class CreateCaseResponse < Struct.new(
       :case_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Date and time (UTC) format in RFC 3339 :
+    # 'yyyy-MM-dd'T'HH:mm:ss.SSSZZ'.
+    #
+    # @!attribute [rw] start_date_time
+    #   A JSON object containing start and date time (UTC). Date and time
+    #   format is RFC 3339 : 'yyyy-MM-dd'T'HH:mm:ss.SSSZZ'.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_date_time
+    #   End Date Time (UTC). RFC 3339 format :
+    #   'yyyy-MM-dd'T'HH:mm:ss.SSSZZ'.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DateInterval AWS API Documentation
+    #
+    class DateInterval < Struct.new(
+      :start_date_time,
+      :end_date_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -674,9 +741,10 @@ module Aws::Support
     #
     # @!attribute [rw] language
     #   The language in which Amazon Web Services Support handles the case.
-    #   Amazon Web Services Support currently supports English ("en") and
-    #   Japanese ("ja"). You must specify the ISO 639-1 code for the
-    #   `language` parameter if you want support in that language.
+    #   Amazon Web Services Support currently supports Chinese (“zh”),
+    #   English ("en"), Japanese ("ja") and Korean (“ko”). You must
+    #   specify the ISO 639-1 code for the `language` parameter if you want
+    #   support in that language.
     #   @return [String]
     #
     # @!attribute [rw] include_communications
@@ -781,6 +849,68 @@ module Aws::Support
       include Aws::Structure
     end
 
+    # @!attribute [rw] issue_type
+    #   The type of issue for the case. You can specify `customer-service`
+    #   or `technical`. If you don't specify a value, the default is
+    #   `technical`.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   The code for the Amazon Web Services service. You can use the
+    #   DescribeServices operation to get the possible `serviceCode` values.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The language in which Amazon Web Services Support handles the case.
+    #   Amazon Web Services Support currently supports Chinese (“zh”),
+    #   English ("en"), Japanese ("ja") and Korean (“ko”). You must
+    #   specify the ISO 639-1 code for the `language` parameter if you want
+    #   support in that language.
+    #   @return [String]
+    #
+    # @!attribute [rw] category_code
+    #   The category of problem for the support case. You also use the
+    #   DescribeServices operation to get the category code for a service.
+    #   Each Amazon Web Services service defines its own set of category
+    #   codes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCreateCaseOptionsRequest AWS API Documentation
+    #
+    class DescribeCreateCaseOptionsRequest < Struct.new(
+      :issue_type,
+      :service_code,
+      :language,
+      :category_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] language_availability
+    #   Language availability can be any of the following:
+    #
+    #   * available
+    #
+    #   * best\_effort
+    #
+    #   * unavailable
+    #   @return [String]
+    #
+    # @!attribute [rw] communication_types
+    #   A JSON-formatted array that contains the available communication
+    #   type options, along with the available support timeframes for the
+    #   given inputs.
+    #   @return [Array<Types::CommunicationTypeOptions>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCreateCaseOptionsResponse AWS API Documentation
+    #
+    class DescribeCreateCaseOptionsResponse < Struct.new(
+      :language_availability,
+      :communication_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] service_code_list
     #   A JSON-formatted list of service codes available for Amazon Web
     #   Services services.
@@ -788,9 +918,10 @@ module Aws::Support
     #
     # @!attribute [rw] language
     #   The language in which Amazon Web Services Support handles the case.
-    #   Amazon Web Services Support currently supports English ("en") and
-    #   Japanese ("ja"). You must specify the ISO 639-1 code for the
-    #   `language` parameter if you want support in that language.
+    #   Amazon Web Services Support currently supports Chinese (“zh”),
+    #   English ("en"), Japanese ("ja") and Korean (“ko”). You must
+    #   specify the ISO 639-1 code for the `language` parameter if you want
+    #   support in that language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeServicesRequest AWS API Documentation
@@ -819,9 +950,10 @@ module Aws::Support
 
     # @!attribute [rw] language
     #   The language in which Amazon Web Services Support handles the case.
-    #   Amazon Web Services Support currently supports English ("en") and
-    #   Japanese ("ja"). You must specify the ISO 639-1 code for the
-    #   `language` parameter if you want support in that language.
+    #   Amazon Web Services Support currently supports Chinese (“zh”),
+    #   English ("en"), Japanese ("ja") and Korean (“ko”). You must
+    #   specify the ISO 639-1 code for the `language` parameter if you want
+    #   support in that language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeSeverityLevelsRequest AWS API Documentation
@@ -845,6 +977,46 @@ module Aws::Support
     #
     class DescribeSeverityLevelsResponse < Struct.new(
       :severity_levels)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] issue_type
+    #   The type of issue for the case. You can specify `customer-service`
+    #   or `technical`.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   The code for the Amazon Web Services service. You can use the
+    #   DescribeServices operation to get the possible `serviceCode` values.
+    #   @return [String]
+    #
+    # @!attribute [rw] category_code
+    #   The category of problem for the support case. You also use the
+    #   DescribeServices operation to get the category code for a service.
+    #   Each Amazon Web Services service defines its own set of category
+    #   codes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeSupportedLanguagesRequest AWS API Documentation
+    #
+    class DescribeSupportedLanguagesRequest < Struct.new(
+      :issue_type,
+      :service_code,
+      :category_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] supported_languages
+    #   A JSON-formatted array that contains the available ISO 639-1
+    #   language codes.
+    #   @return [Array<Types::SupportedLanguage>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeSupportedLanguagesResponse AWS API Documentation
+    #
+    class DescribeSupportedLanguagesResponse < Struct.new(
+      :supported_languages)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1200,6 +1372,66 @@ module Aws::Support
     class SeverityLevel < Struct.new(
       :code,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Time range object with `startTime` and `endTime` range in RFC 3339
+    # format. `'HH:mm:ss.SSS'`.
+    #
+    # @!attribute [rw] start_time
+    #   Start Time. RFC 3339 format `'HH:mm:ss.SSS'`.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   End Time. RFC 3339 format `'HH:mm:ss.SSS'`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/SupportedHour AWS API Documentation
+    #
+    class SupportedHour < Struct.new(
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A JSON-formatted object that contains the available ISO 639-1 language
+    # `code`, `language` name and langauge `display` value. The language
+    # code is what should be used in the CreateCase call.
+    #
+    # @!attribute [rw] code
+    #   2 digit ISO 639-1 code. e.g. `en`
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   Full language description e.g. `ENGLISH`
+    #   @return [String]
+    #
+    # @!attribute [rw] display
+    #   Language display value e.g. `ENGLISH`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/SupportedLanguage AWS API Documentation
+    #
+    class SupportedLanguage < Struct.new(
+      :code,
+      :language,
+      :display)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You have exceeded the maximum allowed TPS (Transactions Per Second)
+    # for the operations.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

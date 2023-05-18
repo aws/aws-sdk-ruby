@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2023-05-11)
+------------------
+
+* Feature - Added support to modify the cluster mode configuration for the existing ElastiCache ReplicationGroups. Customers can now modify the configuration from cluster mode disabled to cluster mode enabled.
+
 1.84.0 (2023-01-18)
 ------------------
 
