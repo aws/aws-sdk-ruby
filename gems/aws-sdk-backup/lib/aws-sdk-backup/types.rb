@@ -447,6 +447,15 @@ module Aws::Backup
     #   canceled if it doesn't start successfully. This value is optional.
     #   If this value is included, it must be at least 60 minutes to avoid
     #   errors.
+    #
+    #   During the start window, the backup job status remains in `CREATED`
+    #   status until it has successfully begun or until the start window
+    #   time has run out. If within the start window time Backup receives an
+    #   error that allows the job to be retried, Backup will automatically
+    #   retry to begin the job at least every 10 minutes until the backup
+    #   successfully begins (the job status changes to `RUNNING`) or until
+    #   the job status changes to `EXPIRED` (which is expected to occur when
+    #   the start window time is over).
     #   @return [Integer]
     #
     # @!attribute [rw] completion_window_minutes
@@ -539,6 +548,15 @@ module Aws::Backup
     #   canceled if it doesn't start successfully. This value is optional.
     #   If this value is included, it must be at least 60 minutes to avoid
     #   errors.
+    #
+    #   During the start window, the backup job status remains in `CREATED`
+    #   status until it has successfully begun or until the start window
+    #   time has run out. If within the start window time Backup receives an
+    #   error that allows the job to be retried, Backup will automatically
+    #   retry to begin the job at least every 10 minutes until the backup
+    #   successfully begins (the job status changes to `RUNNING`) or until
+    #   the job status changes to `EXPIRED` (which is expected to occur when
+    #   the start window time is over).
     #   @return [Integer]
     #
     # @!attribute [rw] completion_window_minutes
@@ -5178,10 +5196,28 @@ module Aws::Backup
     #   recovery point.
     #   @return [String]
     #
+    # @!attribute [rw] resource_arn
+    #   This is the Amazon Resource Name (ARN) that uniquely identifies a
+    #   saved resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   This is the Amazon Web Services resource type that is saved as a
+    #   recovery point.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_vault_name
+    #   This is the name of the backup vault (the logical container in which
+    #   backups are stored).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RecoveryPointMember AWS API Documentation
     #
     class RecoveryPointMember < Struct.new(
-      :recovery_point_arn)
+      :recovery_point_arn,
+      :resource_arn,
+      :resource_type,
+      :backup_vault_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5637,6 +5673,15 @@ module Aws::Backup
     #   canceled if it doesn't start successfully. This value is optional,
     #   and the default is 8 hours. If this value is included, it must be at
     #   least 60 minutes to avoid errors.
+    #
+    #   During the start window, the backup job status remains in `CREATED`
+    #   status until it has successfully begun or until the start window
+    #   time has run out. If within the start window time Backup receives an
+    #   error that allows the job to be retried, Backup will automatically
+    #   retry to begin the job at least every 10 minutes until the backup
+    #   successfully begins (the job status changes to `RUNNING`) or until
+    #   the job status changes to `EXPIRED` (which is expected to occur when
+    #   the start window time is over).
     #   @return [Integer]
     #
     # @!attribute [rw] complete_window_minutes
@@ -5933,6 +5978,8 @@ module Aws::Backup
     #
     #   * `DocumentDB` for Amazon DocumentDB (with MongoDB compatibility)
     #
+    #   * `CloudFormation` for CloudFormation
+    #
     #   * `DynamoDB` for Amazon DynamoDB
     #
     #   * `EBS` for Amazon Elastic Block Store
@@ -5947,9 +5994,13 @@ module Aws::Backup
     #
     #   * `RDS` for Amazon Relational Database Service
     #
+    #   * `Redshift` for Amazon Redshift
+    #
     #   * `Storage Gateway` for Storage Gateway
     #
     #   * `S3` for Amazon S3
+    #
+    #   * `Timestream` for Amazon Timestream
     #
     #   * `VirtualMachine` for virtual machines
     #   @return [String]

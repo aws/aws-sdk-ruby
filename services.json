@@ -701,6 +701,9 @@
   "MediaPackage": {
     "models": "mediapackage/2017-10-12"
   },
+  "MediaPackageV2": {
+    "models": "mediapackagev2/2022-12-25"
+  },
   "MediaPackageVod": {
     "models": "mediapackage-vod/2018-11-07"
   },

@@ -3063,6 +3063,9 @@ module Aws::Backup
     #
     #   resp.recovery_points #=> Array
     #   resp.recovery_points[0].recovery_point_arn #=> String
+    #   resp.recovery_points[0].resource_arn #=> String
+    #   resp.recovery_points[0].resource_type #=> String
+    #   resp.recovery_points[0].backup_vault_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRecoveryPointsByLegalHold AWS API Documentation
@@ -3632,6 +3635,15 @@ module Aws::Backup
     #   and the default is 8 hours. If this value is included, it must be at
     #   least 60 minutes to avoid errors.
     #
+    #   During the start window, the backup job status remains in `CREATED`
+    #   status until it has successfully begun or until the start window time
+    #   has run out. If within the start window time Backup receives an error
+    #   that allows the job to be retried, Backup will automatically retry to
+    #   begin the job at least every 10 minutes until the backup successfully
+    #   begins (the job status changes to `RUNNING`) or until the job status
+    #   changes to `EXPIRED` (which is expected to occur when the start window
+    #   time is over).
+    #
     # @option params [Integer] :complete_window_minutes
     #   A value in minutes during which a successfully started backup must
     #   complete, or else Backup will cancel the job. This value is optional.
@@ -3904,6 +3916,8 @@ module Aws::Backup
     #
     #   * `DocumentDB` for Amazon DocumentDB (with MongoDB compatibility)
     #
+    #   * `CloudFormation` for CloudFormation
+    #
     #   * `DynamoDB` for Amazon DynamoDB
     #
     #   * `EBS` for Amazon Elastic Block Store
@@ -3918,9 +3932,13 @@ module Aws::Backup
     #
     #   * `RDS` for Amazon Relational Database Service
     #
+    #   * `Redshift` for Amazon Redshift
+    #
     #   * `Storage Gateway` for Storage Gateway
     #
     #   * `S3` for Amazon S3
+    #
+    #   * `Timestream` for Amazon Timestream
     #
     #   * `VirtualMachine` for virtual machines
     #
@@ -4443,7 +4461,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

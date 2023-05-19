@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.767.0 (2023-05-19)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MediaPackageV2`.
+
 1.766.0 (2023-05-18)
 ------------------
 

@@ -1175,6 +1175,9 @@ module Aws::Backup
     RecoveryPointCreator.struct_class = Types::RecoveryPointCreator
 
     RecoveryPointMember.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RecoveryPointArn"))
+    RecoveryPointMember.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ResourceArn"))
+    RecoveryPointMember.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    RecoveryPointMember.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, location_name: "BackupVaultName"))
     RecoveryPointMember.struct_class = Types::RecoveryPointMember
 
     RecoveryPointSelection.add_member(:vault_names, Shapes::ShapeRef.new(shape: VaultNames, location_name: "VaultNames"))
