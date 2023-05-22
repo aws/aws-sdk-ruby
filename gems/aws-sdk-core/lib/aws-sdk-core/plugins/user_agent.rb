@@ -39,6 +39,10 @@ maximum length of 50.
         end
 
         class UserAgent
+          # Supported 1P frameworks to capture
+          FRAMEWORK_REGEX =
+            /gems\/(?<name>aws-sdk-rails|aws-record|aws-sessionstore-dynamodb)-(?<version>\d+\.\d+\.\d+)/.freeze
+
           def initialize(context)
             @context = context
           end
@@ -123,10 +127,8 @@ maximum length of 50.
 
           def framework_metadata
             frameworks = {}
-            # supported frameworks
-            regex = /gems\/(?<name>aws-sdk-rails|aws-record|aws-sessionstore-dynamodb)-(?<version>\d+\.\d+\.\d+)/
-            caller.each do |line|
-              match = line.match(regex)
+            Kernel.caller.each do |line|
+              match = line.match(FRAMEWORK_REGEX)
               next unless match
 
               frameworks[match[:name]] = match[:version]
