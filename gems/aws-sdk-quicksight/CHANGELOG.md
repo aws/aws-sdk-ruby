@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2023-05-22)
+------------------
+
+* Feature - Add support for Asset Bundle, Geospatial Heatmaps.
+
 1.79.0 (2023-05-04)
 ------------------
 

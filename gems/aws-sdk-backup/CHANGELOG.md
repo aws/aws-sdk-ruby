@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2023-05-22)
+------------------
+
+* Feature - Added support for tags on restore.
+
 1.50.0 (2023-05-19)
 ------------------
 

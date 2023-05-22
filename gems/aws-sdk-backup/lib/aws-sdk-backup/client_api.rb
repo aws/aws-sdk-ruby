@@ -1314,6 +1314,7 @@ module Aws::Backup
     StartRestoreJobInput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "IamRoleArn"))
     StartRestoreJobInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken"))
     StartRestoreJobInput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    StartRestoreJobInput.add_member(:copy_source_tags_to_restored_resource, Shapes::ShapeRef.new(shape: boolean, location_name: "CopySourceTagsToRestoredResource"))
     StartRestoreJobInput.struct_class = Types::StartRestoreJobInput
 
     StartRestoreJobOutput.add_member(:restore_job_id, Shapes::ShapeRef.new(shape: RestoreJobId, location_name: "RestoreJobId"))
@@ -2268,6 +2269,7 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
       api.add_operation(:stop_backup_job, Seahorse::Model::Operation.new.tap do |o|

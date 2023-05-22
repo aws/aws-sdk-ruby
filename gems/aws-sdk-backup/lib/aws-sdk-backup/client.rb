@@ -3942,6 +3942,12 @@ module Aws::Backup
     #
     #   * `VirtualMachine` for virtual machines
     #
+    # @option params [Boolean] :copy_source_tags_to_restored_resource
+    #   This is an optional parameter. If this equals `True`, tags included in
+    #   the backup will be copied to the restored resource.
+    #
+    #   This can only be applied to backups created through Backup.
+    #
     # @return [Types::StartRestoreJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartRestoreJobOutput#restore_job_id #restore_job_id} => String
@@ -3956,6 +3962,7 @@ module Aws::Backup
     #     iam_role_arn: "IAMRoleArn",
     #     idempotency_token: "string",
     #     resource_type: "ResourceType",
+    #     copy_source_tags_to_restored_resource: false,
     #   })
     #
     # @example Response structure
@@ -4461,7 +4468,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

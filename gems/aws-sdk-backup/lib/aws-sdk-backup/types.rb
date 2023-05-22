@@ -2543,6 +2543,11 @@ module Aws::Backup
     #   will result in a new continuous recovery point being created. The
     #   recovery points with STOPPED status do not need to be deleted.
     #
+    #   For SAP HANA on Amazon EC2 `STOPPED` status occurs due to user
+    #   action, application misconfiguration, or backup failure. To ensure
+    #   that future continuous backups succeed, refer to the recovery point
+    #   status and check SAP HANA for details.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UpdateBackupPlan.html
@@ -2550,8 +2555,7 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] status_message
-    #   A status message explaining the reason for the recovery point
-    #   deletion failure.
+    #   A status message explaining the status of the recovery point.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -6005,6 +6009,13 @@ module Aws::Backup
     #   * `VirtualMachine` for virtual machines
     #   @return [String]
     #
+    # @!attribute [rw] copy_source_tags_to_restored_resource
+    #   This is an optional parameter. If this equals `True`, tags included
+    #   in the backup will be copied to the restored resource.
+    #
+    #   This can only be applied to backups created through Backup.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartRestoreJobInput AWS API Documentation
     #
     class StartRestoreJobInput < Struct.new(
@@ -6012,7 +6023,8 @@ module Aws::Backup
       :metadata,
       :iam_role_arn,
       :idempotency_token,
-      :resource_type)
+      :resource_type,
+      :copy_source_tags_to_restored_resource)
       SENSITIVE = [:metadata]
       include Aws::Structure
     end

@@ -158,6 +158,10 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::DescribeAnalysisDefinition.build(context)
           when :describe_analysis_permissions
             Aws::QuickSight::Endpoints::DescribeAnalysisPermissions.build(context)
+          when :describe_asset_bundle_export_job
+            Aws::QuickSight::Endpoints::DescribeAssetBundleExportJob.build(context)
+          when :describe_asset_bundle_import_job
+            Aws::QuickSight::Endpoints::DescribeAssetBundleImportJob.build(context)
           when :describe_dashboard
             Aws::QuickSight::Endpoints::DescribeDashboard.build(context)
           when :describe_dashboard_definition
@@ -230,6 +234,10 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::GetSessionEmbedUrl.build(context)
           when :list_analyses
             Aws::QuickSight::Endpoints::ListAnalyses.build(context)
+          when :list_asset_bundle_export_jobs
+            Aws::QuickSight::Endpoints::ListAssetBundleExportJobs.build(context)
+          when :list_asset_bundle_import_jobs
+            Aws::QuickSight::Endpoints::ListAssetBundleImportJobs.build(context)
           when :list_dashboard_versions
             Aws::QuickSight::Endpoints::ListDashboardVersions.build(context)
           when :list_dashboards
@@ -298,6 +306,10 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::SearchFolders.build(context)
           when :search_groups
             Aws::QuickSight::Endpoints::SearchGroups.build(context)
+          when :start_asset_bundle_export_job
+            Aws::QuickSight::Endpoints::StartAssetBundleExportJob.build(context)
+          when :start_asset_bundle_import_job
+            Aws::QuickSight::Endpoints::StartAssetBundleImportJob.build(context)
           when :tag_resource
             Aws::QuickSight::Endpoints::TagResource.build(context)
           when :untag_resource
