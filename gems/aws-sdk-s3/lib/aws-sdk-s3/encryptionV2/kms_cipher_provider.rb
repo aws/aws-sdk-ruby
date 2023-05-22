@@ -24,7 +24,7 @@ module Aws
         def encryption_cipher(options = {})
           validate_key_for_encryption
           encryption_context = build_encryption_context(@content_encryption_schema, options)
-          key_data = Aws::Plugins::UserAgent.feature('s3-encrypt#2') do
+          key_data = Aws::Plugins::UserAgent.feature('S3CryptoV2') do
             @kms_client.generate_data_key(
               key_id: @kms_key_id,
               encryption_context: encryption_context,
@@ -85,7 +85,7 @@ module Aws
             decrypt_options[:key_id] = @kms_key_id
           end
 
-          key = Aws::Plugins::UserAgent.feature('s3-encrypt#2') do
+          key = Aws::Plugins::UserAgent.feature('S3CryptoV2') do
             @kms_client.decrypt(decrypt_options).plaintext
           end
           iv = decode64(envelope['x-amz-iv'])

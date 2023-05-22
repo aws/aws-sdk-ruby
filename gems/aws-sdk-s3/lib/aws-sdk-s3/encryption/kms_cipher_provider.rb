@@ -17,7 +17,7 @@ module Aws
         #   envelope and encryption cipher.
         def encryption_cipher
           encryption_context = { "kms_cmk_id" => @kms_key_id }
-          key_data = Aws::Plugins::UserAgent.feature('s3-encrypt#1') do
+          key_data = Aws::Plugins::UserAgent.feature('S3CryptoV1n') do
             @kms_client.generate_data_key(
               key_id: @kms_key_id,
               encryption_context: encryption_context,
@@ -60,7 +60,7 @@ module Aws
                 "#{envelope['x-amz-wrap-alg']}"
           end
 
-          key = Aws::Plugins::UserAgent.feature('s3-encrypt#1') do
+          key = Aws::Plugins::UserAgent.feature('S3CryptoV1n') do
             @kms_client.decrypt(
               ciphertext_blob: decode64(envelope['x-amz-key-v2']),
               encryption_context: encryption_context

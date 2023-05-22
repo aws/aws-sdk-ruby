@@ -16,9 +16,6 @@ maximum length of 50.
         DOCS
         app_id = ENV['AWS_SDK_UA_APP_ID']
         app_id ||= Aws.shared_config.sdk_ua_app_id(profile: cfg.profile)
-        if app_id && app_id.length > 50
-          warn 'sdk_ua_app_id should not be longer than 50 characters'
-        end
         app_id
       end
 
@@ -28,14 +25,6 @@ maximum length of 50.
         block.call
       ensure
         Thread.current[:aws_sdk_core_user_agent_feature].pop
-      end
-
-      def self.framework(framework, &block)
-        Thread.current[:aws_sdk_core_user_agent_framework] ||= []
-        Thread.current[:aws_sdk_core_user_agent_framework] << "lib/#{framework}"
-        block.call
-      ensure
-        Thread.current[:aws_sdk_core_user_agent_framework].pop
       end
 
       # @api private
@@ -58,11 +47,8 @@ maximum length of 50.
             ua = "aws-sdk-ruby3/#{CORE_GEM_VERSION}"
             ua += ' ua/2.0'
             ua += " #{api_metadata}" if api_metadata
-            ua += " #{legacy_api_metadata}"
             ua += " #{os_metadata}"
-            ua += " #{legacy_os_metadata}"
             ua += " #{language_metadata}"
-            ua += " #{legacy_language_metadata}"
             ua += " #{env_metadata}" if env_metadata
             ua += " #{config_metadata}" if config_metadata
             ua += " #{app_id}" if app_id
@@ -76,6 +62,7 @@ maximum length of 50.
 
           private
 
+          # Used to be gem_name/gem_version
           def api_metadata
             service_id = @context.config.api.metadata['serviceId']
             return unless service_id
@@ -85,10 +72,7 @@ maximum length of 50.
             "api/#{service_id}##{gem_version}"
           end
 
-          def legacy_api_metadata
-            "#{@context[:gem_name]}/#{@context[:gem_version]}"
-          end
-
+          # Used to be RUBY_PLATFORM
           def os_metadata
             local = Gem::Platform.local
             os =
@@ -108,18 +92,9 @@ maximum length of 50.
             metadata
           end
 
-          def legacy_os_metadata
-            RUBY_PLATFORM
-          end
-
+          # Used to be RUBY_ENGINE/RUBY_VERSION
           def language_metadata
             "lang/#{RUBY_ENGINE}##{RUBY_ENGINE_VERSION} md/#{RUBY_VERSION}"
-          end
-
-          def legacy_language_metadata
-            "#{RUBY_ENGINE}/#{RUBY_VERSION}"
-          rescue
-            "RUBY_ENGINE_NA/#{RUBY_VERSION}"
           end
 
           def env_metadata
@@ -147,9 +122,17 @@ maximum length of 50.
           end
 
           def framework_metadata
-            return unless Thread.current[:aws_sdk_core_user_agent_framework]
+            frameworks = {}
+            # supported frameworks
+            regex = /gems\/(?<name>aws-sdk-rails|aws-record|aws-sessionstore-dynamodb)-(?<version>\d+\.\d+\.\d+)/
+            caller.each do |line|
+              match = line.match(regex)
+              next unless match
 
-            Thread.current[:aws_sdk_core_user_agent_framework].join(' ')
+              frameworks[match[:name]] = match[:version]
+            end
+
+            frameworks.map { |name, version| "lib/#{name}##{version}" }.join(' ')
           end
         end
       end

@@ -361,7 +361,7 @@ module Aws
             instruction_file_suffix: @instruction_file_suffix,
             kms_encryption_context: kms_encryption_context
           }
-          Aws::Plugins::UserAgent.feature('s3-encrypt#2') do
+          Aws::Plugins::UserAgent.feature('S3CryptoV2') do
             req.send_request
           end
         end
@@ -416,7 +416,7 @@ module Aws
             kms_allow_decrypt_with_any_cmk: kms_any_cmk_mode,
             security_profile: security_profile
           }
-          Aws::Plugins::UserAgent.feature('s3-encrypt#2') do
+          Aws::Plugins::UserAgent.feature('S3CryptoV2') do
             req.send_request(target: block)
           end
         end
