@@ -132,14 +132,13 @@ maximum length of 50.
             # Frameworks may be aws-record, aws-sdk-rails, etc.
             regex = /gems\/(?<name>#{frameworks_cfg.join('|')})-(?<version>\d+\.\d+\.\d+)/.freeze
             frameworks = {}
-            # Capture the name and version and check if the caller uses the framework.
             Kernel.caller.each do |line|
               match = line.match(regex)
               next unless match
 
               frameworks[match[:name]] = match[:version]
             end
-            frameworks.map { |name, version| "lib/#{name}##{version}" }.join(' ')
+            frameworks.map { |n, v| "lib/#{n}##{v}" }.join(' ')
           end
         end
       end
