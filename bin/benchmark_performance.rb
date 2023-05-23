@@ -84,7 +84,7 @@ def benchmark_client(gem, module_name, data)
   data.merge!(fork_run do |out|
     require gem
     client_klass = Aws.const_get(module_name).const_get(:Client)
-    r = ::MemoryProfiler.report { client_klass.new }
+    r = ::MemoryProfiler.report { client_klass.new(stub_responses: true) }
     out[:client_mem_retained] = r.total_retained_memsize
 
     r = benchmark(1000) do
