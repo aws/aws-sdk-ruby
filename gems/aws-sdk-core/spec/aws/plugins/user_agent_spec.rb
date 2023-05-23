@@ -10,8 +10,7 @@ module Aws
 
       def setup(given)
         feature_callable = nil
-        # framework_callable = nil
-        caller = []
+        framework_callable = nil
 
         given.keys.each do |key|
           case key
@@ -45,25 +44,17 @@ module Aws
             end
           when 'framework'
             version = given['framework']['version']
-            version = '1.2.3' if version.empty?
-            name = given['framework']['name']
-            # old approach - keeping around until decision
-            # framework += "##{version}" unless version.empty?
-            # framework_callable = proc do |callable|
-            #   Aws::Plugins::UserAgent.framework(framework) do
-            #     callable.call
-            #   end
-            # end
-            framework = "#{name}-#{version}"
-            caller << "gems/#{framework}/lib/file.rb"
-            # also stub the regex
-            regex = Aws::Plugins::UserAgent::Handler::UserAgent::FRAMEWORK_REGEX
-            regex = Regexp.new(regex.to_s.gsub('<name>', "<name>#{name}|"))
-            stub_const('Aws::Plugins::UserAgent::Handler::UserAgent::FRAMEWORK_REGEX', regex)
+            framework = given['framework']['name']
+            framework += "##{version}" unless version.empty?
+            framework_callable = proc do |callable|
+              Aws::Plugins::UserAgent.framework(framework) do
+                callable.call
+              end
+            end
           end
         end
 
-        [feature_callable, caller]
+        [feature_callable, framework_callable]
       end
 
       def assert_header(expected, actual)
@@ -104,16 +95,15 @@ module Aws
           it "passes test #{index + 1}: #{test['description']}" do
             given = test['given']
             expected_header = test['expectedRequestHeaders']['user-agent']
-            feature_callable, caller = setup(given)
-            allow(Kernel).to receive(:caller).and_return(caller)
+            feature_callable, framework_callable = setup(given)
 
             callable1 = proc { client.example_operation }
             callable2 = callable1
             callable2 = proc { feature_callable.call(callable1) } if feature_callable
-            #callable3 = callable2
-            #callable3 = proc { framework_callable.call(callable2) } if framework_callable
+            callable3 = callable2
+            callable3 = proc { framework_callable.call(callable2) } if framework_callable
 
-            resp = callable2.call
+            resp = callable3.call
             actual_header = resp.context.http_request.headers['User-Agent']
 
             assert_header(expected_header, actual_header)

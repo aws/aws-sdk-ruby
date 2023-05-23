@@ -27,6 +27,14 @@ maximum length of 50.
         Thread.current[:aws_sdk_core_user_agent_feature].pop
       end
 
+      def self.framework(framework, &block)
+        Thread.current[:aws_sdk_core_user_agent_framework] ||= []
+        Thread.current[:aws_sdk_core_user_agent_framework] << "lib/#{framework}"
+        block.call
+      ensure
+        Thread.current[:aws_sdk_core_user_agent_framework].pop
+      end
+
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
@@ -39,10 +47,6 @@ maximum length of 50.
         end
 
         class UserAgent
-          # Supported 1P frameworks to capture
-          FRAMEWORK_REGEX =
-            /gems\/(?<name>aws-sdk-rails|aws-record|aws-sessionstore-dynamodb)-(?<version>\d+\.\d+\.\d+)/.freeze
-
           def initialize(context)
             @context = context
           end
@@ -126,15 +130,9 @@ maximum length of 50.
           end
 
           def framework_metadata
-            frameworks = {}
-            Kernel.caller.each do |line|
-              match = line.match(FRAMEWORK_REGEX)
-              next unless match
+            return unless Thread.current[:aws_sdk_core_user_agent_framework]
 
-              frameworks[match[:name]] = match[:version]
-            end
-
-            frameworks.map { |name, version| "lib/#{name}##{version}" }.join(' ')
+            Thread.current[:aws_sdk_core_user_agent_framework].join(' ')
           end
         end
       end
