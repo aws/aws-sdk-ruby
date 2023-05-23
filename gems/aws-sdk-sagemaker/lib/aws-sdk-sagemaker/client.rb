@@ -7052,6 +7052,9 @@ module Aws::SageMaker
     #   example, if you specify an EFS location, input data files are
     #   available as input streams. They do not need to be downloaded.
     #
+    #   Your input must be in the same Amazon Web Services region as your
+    #   training job.
+    #
     # @option params [required, Types::OutputDataConfig] :output_data_config
     #   Specifies the path to the S3 location where you want to store model
     #   artifacts. SageMaker creates subfolders for the artifacts.
@@ -12069,6 +12072,8 @@ module Aws::SageMaker
     #   resp.inference_recommendations[0].model_configuration.environment_parameters[0].value #=> String
     #   resp.inference_recommendations[0].model_configuration.compilation_job_name #=> String
     #   resp.inference_recommendations[0].recommendation_id #=> String
+    #   resp.inference_recommendations[0].invocation_end_time #=> Time
+    #   resp.inference_recommendations[0].invocation_start_time #=> Time
     #   resp.endpoint_performances #=> Array
     #   resp.endpoint_performances[0].metrics.max_invocations #=> Integer
     #   resp.endpoint_performances[0].metrics.model_latency #=> Integer
@@ -17073,6 +17078,8 @@ module Aws::SageMaker
     #   resp.steps[0].inference_benchmark.failure_reason #=> String
     #   resp.steps[0].inference_benchmark.endpoint_metrics.max_invocations #=> Integer
     #   resp.steps[0].inference_benchmark.endpoint_metrics.model_latency #=> Integer
+    #   resp.steps[0].inference_benchmark.invocation_end_time #=> Time
+    #   resp.steps[0].inference_benchmark.invocation_start_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListInferenceRecommendationsJobSteps AWS API Documentation
@@ -17125,6 +17132,13 @@ module Aws::SageMaker
     # @option params [Integer] :max_results
     #   The maximum number of recommendations to return in the response.
     #
+    # @option params [String] :model_name_equals
+    #   A filter that returns only jobs that were created for this model.
+    #
+    # @option params [String] :model_package_version_arn_equals
+    #   A filter that returns only jobs that were created for this versioned
+    #   model package.
+    #
     # @return [Types::ListInferenceRecommendationsJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListInferenceRecommendationsJobsResponse#inference_recommendations_jobs #inference_recommendations_jobs} => Array&lt;Types::InferenceRecommendationsJob&gt;
@@ -17145,6 +17159,8 @@ module Aws::SageMaker
     #     sort_order: "Ascending", # accepts Ascending, Descending
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     model_name_equals: "ModelName",
+    #     model_package_version_arn_equals: "ModelPackageArn",
     #   })
     #
     # @example Response structure
@@ -17160,6 +17176,9 @@ module Aws::SageMaker
     #   resp.inference_recommendations_jobs[0].role_arn #=> String
     #   resp.inference_recommendations_jobs[0].last_modified_time #=> Time
     #   resp.inference_recommendations_jobs[0].failure_reason #=> String
+    #   resp.inference_recommendations_jobs[0].model_name #=> String
+    #   resp.inference_recommendations_jobs[0].sample_payload_url #=> String
+    #   resp.inference_recommendations_jobs[0].model_package_version_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListInferenceRecommendationsJobs AWS API Documentation
@@ -23490,7 +23509,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.178.0'
+      context[:gem_version] = '1.179.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

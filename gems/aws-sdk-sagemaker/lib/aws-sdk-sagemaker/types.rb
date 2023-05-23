@@ -7805,6 +7805,9 @@ module Aws::SageMaker
     #   streams. For example, if you specify an EFS location, input data
     #   files are available as input streams. They do not need to be
     #   downloaded.
+    #
+    #   Your input must be in the same Amazon Web Services region as your
+    #   training job.
     #   @return [Array<Types::Channel>]
     #
     # @!attribute [rw] output_data_config
@@ -20922,13 +20925,23 @@ module Aws::SageMaker
     #   The recommendation ID which uniquely identifies each recommendation.
     #   @return [String]
     #
+    # @!attribute [rw] invocation_end_time
+    #   A timestamp that shows when the benchmark completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] invocation_start_time
+    #   A timestamp that shows when the benchmark started.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceRecommendation AWS API Documentation
     #
     class InferenceRecommendation < Struct.new(
       :metrics,
       :endpoint_configuration,
       :model_configuration,
-      :recommendation_id)
+      :recommendation_id,
+      :invocation_end_time,
+      :invocation_start_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20976,6 +20989,20 @@ module Aws::SageMaker
     #   If the job fails, provides information why the job failed.
     #   @return [String]
     #
+    # @!attribute [rw] model_name
+    #   The name of the created model.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_payload_url
+    #   The Amazon Simple Storage Service (Amazon S3) path where the sample
+    #   payload is stored. This path must point to a single gzip compressed
+    #   tar archive (.tar.gz suffix).
+    #   @return [String]
+    #
+    # @!attribute [rw] model_package_version_arn
+    #   The Amazon Resource Name (ARN) of a versioned model package.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceRecommendationsJob AWS API Documentation
     #
     class InferenceRecommendationsJob < Struct.new(
@@ -20988,7 +21015,10 @@ module Aws::SageMaker
       :completion_time,
       :role_arn,
       :last_modified_time,
-      :failure_reason)
+      :failure_reason,
+      :model_name,
+      :sample_payload_url,
+      :model_package_version_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24476,6 +24506,15 @@ module Aws::SageMaker
     #   The maximum number of recommendations to return in the response.
     #   @return [Integer]
     #
+    # @!attribute [rw] model_name_equals
+    #   A filter that returns only jobs that were created for this model.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_package_version_arn_equals
+    #   A filter that returns only jobs that were created for this versioned
+    #   model package.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListInferenceRecommendationsJobsRequest AWS API Documentation
     #
     class ListInferenceRecommendationsJobsRequest < Struct.new(
@@ -24488,7 +24527,9 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       :next_token,
-      :max_results)
+      :max_results,
+      :model_name_equals,
+      :model_package_version_arn_equals)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33611,6 +33652,14 @@ module Aws::SageMaker
     #   Recommender job.
     #   @return [Types::InferenceMetrics]
     #
+    # @!attribute [rw] invocation_end_time
+    #   A timestamp that shows when the benchmark completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] invocation_start_time
+    #   A timestamp that shows when the benchmark started.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobInferenceBenchmark AWS API Documentation
     #
     class RecommendationJobInferenceBenchmark < Struct.new(
@@ -33618,7 +33667,9 @@ module Aws::SageMaker
       :endpoint_configuration,
       :model_configuration,
       :failure_reason,
-      :endpoint_metrics)
+      :endpoint_metrics,
+      :invocation_end_time,
+      :invocation_start_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34483,6 +34534,9 @@ module Aws::SageMaker
 
     # Describes the S3 data source.
     #
+    # Your input bucket must be in the same Amazon Web Services region as
+    # your training job.
+    #
     # @!attribute [rw] s3_data_type
     #   If you choose `S3Prefix`, `S3Uri` identifies a key name prefix.
     #   SageMaker uses all objects that match the specified key name prefix
@@ -34545,6 +34599,9 @@ module Aws::SageMaker
     #     the channel for this data source. The object that each `S3Uri`
     #     points to must be readable by the IAM role that SageMaker uses to
     #     perform tasks on your behalf.
+    #
+    #   Your input bucket must be located in same Amazon Web Services region
+    #   as your training job.
     #   @return [String]
     #
     # @!attribute [rw] s3_data_distribution_type
@@ -35331,7 +35388,7 @@ module Aws::SageMaker
     #   compressed tar archive (`.tar.gz` suffix).
     #
     #   <note markdown="1"> The model artifacts must be in an S3 bucket that is in the same
-    #   region as the algorithm.
+    #   Amazon Web Services region as the algorithm.
     #
     #    </note>
     #   @return [String]
@@ -36369,6 +36426,9 @@ module Aws::SageMaker
     # @!attribute [rw] input_data_config
     #   An array of `Channel` objects that describes each data input
     #   channel.
+    #
+    #   Your input must be in the same Amazon Web Services region as your
+    #   training job.
     #   @return [Array<Types::Channel>]
     #
     # @!attribute [rw] output_data_config

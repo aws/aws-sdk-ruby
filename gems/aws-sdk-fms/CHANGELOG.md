@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2023-05-23)
+------------------
+
+* Feature - Fixes issue that could cause calls to GetAdminScope and ListAdminAccountsForOrganization to return a 500 Internal Server error.
+
 1.56.0 (2023-04-21)
 ------------------
 

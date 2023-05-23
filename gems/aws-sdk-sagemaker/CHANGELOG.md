@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.179.0 (2023-05-23)
+------------------
+
+* Feature - Added ModelNameEquals, ModelPackageVersionArnEquals in request and ModelName, SamplePayloadUrl, ModelPackageVersionArn in response of ListInferenceRecommendationsJobs API. Added Invocation timestamps in response of DescribeInferenceRecommendationsJob API & ListInferenceRecommendationsJobSteps API.
+
 1.178.0 (2023-05-09)
 ------------------
 

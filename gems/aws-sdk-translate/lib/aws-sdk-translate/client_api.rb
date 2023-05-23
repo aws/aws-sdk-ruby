@@ -31,6 +31,8 @@ module Aws::Translate
     DetectedLanguageLowConfidenceException = Shapes::StructureShape.new(name: 'DetectedLanguageLowConfidenceException')
     Directionality = Shapes::StringShape.new(name: 'Directionality')
     DisplayLanguageCode = Shapes::StringShape.new(name: 'DisplayLanguageCode')
+    Document = Shapes::StructureShape.new(name: 'Document')
+    DocumentContent = Shapes::BlobShape.new(name: 'DocumentContent')
     EncryptionKey = Shapes::StructureShape.new(name: 'EncryptionKey')
     EncryptionKeyID = Shapes::StringShape.new(name: 'EncryptionKeyID')
     EncryptionKeyType = Shapes::StringShape.new(name: 'EncryptionKeyType')
@@ -116,8 +118,12 @@ module Aws::Translate
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
+    TranslateDocumentRequest = Shapes::StructureShape.new(name: 'TranslateDocumentRequest')
+    TranslateDocumentResponse = Shapes::StructureShape.new(name: 'TranslateDocumentResponse')
     TranslateTextRequest = Shapes::StructureShape.new(name: 'TranslateTextRequest')
     TranslateTextResponse = Shapes::StructureShape.new(name: 'TranslateTextResponse')
+    TranslatedDocument = Shapes::StructureShape.new(name: 'TranslatedDocument')
+    TranslatedDocumentContent = Shapes::BlobShape.new(name: 'TranslatedDocumentContent')
     TranslatedTextString = Shapes::StringShape.new(name: 'TranslatedTextString')
     TranslationSettings = Shapes::StructureShape.new(name: 'TranslationSettings')
     UnboundedLengthString = Shapes::StringShape.new(name: 'UnboundedLengthString')
@@ -171,6 +177,10 @@ module Aws::Translate
     DetectedLanguageLowConfidenceException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     DetectedLanguageLowConfidenceException.add_member(:detected_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "DetectedLanguageCode"))
     DetectedLanguageLowConfidenceException.struct_class = Types::DetectedLanguageLowConfidenceException
+
+    Document.add_member(:content, Shapes::ShapeRef.new(shape: DocumentContent, required: true, location_name: "Content"))
+    Document.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, required: true, location_name: "ContentType"))
+    Document.struct_class = Types::Document
 
     EncryptionKey.add_member(:type, Shapes::ShapeRef.new(shape: EncryptionKeyType, required: true, location_name: "Type"))
     EncryptionKey.add_member(:id, Shapes::ShapeRef.new(shape: EncryptionKeyID, required: true, location_name: "Id"))
@@ -427,6 +437,20 @@ module Aws::Translate
     TooManyTagsException.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
     TooManyTagsException.struct_class = Types::TooManyTagsException
 
+    TranslateDocumentRequest.add_member(:document, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "Document"))
+    TranslateDocumentRequest.add_member(:terminology_names, Shapes::ShapeRef.new(shape: ResourceNameList, location_name: "TerminologyNames"))
+    TranslateDocumentRequest.add_member(:source_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, required: true, location_name: "SourceLanguageCode"))
+    TranslateDocumentRequest.add_member(:target_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, required: true, location_name: "TargetLanguageCode"))
+    TranslateDocumentRequest.add_member(:settings, Shapes::ShapeRef.new(shape: TranslationSettings, location_name: "Settings"))
+    TranslateDocumentRequest.struct_class = Types::TranslateDocumentRequest
+
+    TranslateDocumentResponse.add_member(:translated_document, Shapes::ShapeRef.new(shape: TranslatedDocument, required: true, location_name: "TranslatedDocument"))
+    TranslateDocumentResponse.add_member(:source_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, required: true, location_name: "SourceLanguageCode"))
+    TranslateDocumentResponse.add_member(:target_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, required: true, location_name: "TargetLanguageCode"))
+    TranslateDocumentResponse.add_member(:applied_terminologies, Shapes::ShapeRef.new(shape: AppliedTerminologyList, location_name: "AppliedTerminologies"))
+    TranslateDocumentResponse.add_member(:applied_settings, Shapes::ShapeRef.new(shape: TranslationSettings, location_name: "AppliedSettings"))
+    TranslateDocumentResponse.struct_class = Types::TranslateDocumentResponse
+
     TranslateTextRequest.add_member(:text, Shapes::ShapeRef.new(shape: BoundedLengthString, required: true, location_name: "Text"))
     TranslateTextRequest.add_member(:terminology_names, Shapes::ShapeRef.new(shape: ResourceNameList, location_name: "TerminologyNames"))
     TranslateTextRequest.add_member(:source_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, required: true, location_name: "SourceLanguageCode"))
@@ -440,6 +464,9 @@ module Aws::Translate
     TranslateTextResponse.add_member(:applied_terminologies, Shapes::ShapeRef.new(shape: AppliedTerminologyList, location_name: "AppliedTerminologies"))
     TranslateTextResponse.add_member(:applied_settings, Shapes::ShapeRef.new(shape: TranslationSettings, location_name: "AppliedSettings"))
     TranslateTextResponse.struct_class = Types::TranslateTextResponse
+
+    TranslatedDocument.add_member(:content, Shapes::ShapeRef.new(shape: TranslatedDocumentContent, required: true, location_name: "Content"))
+    TranslatedDocument.struct_class = Types::TranslatedDocument
 
     TranslationSettings.add_member(:formality, Shapes::ShapeRef.new(shape: Formality, location_name: "Formality"))
     TranslationSettings.add_member(:profanity, Shapes::ShapeRef.new(shape: Profanity, location_name: "Profanity"))
@@ -697,6 +724,21 @@ module Aws::Translate
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:translate_document, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TranslateDocument"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TranslateDocumentRequest)
+        o.output = Shapes::ShapeRef.new(shape: TranslateDocumentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedLanguagePairException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:translate_text, Seahorse::Model::Operation.new.tap do |o|

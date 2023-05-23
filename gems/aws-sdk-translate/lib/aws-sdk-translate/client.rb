@@ -1289,6 +1289,112 @@ module Aws::Translate
       req.send_request(options)
     end
 
+    # Translates the input document from the source language to the target
+    # language. This synchronous operation supports plain text or HTML for
+    # the input document. `TranslateDocument` supports translations from
+    # English to any supported language, and from any supported language to
+    # English. Therefore, specify either the source language code or the
+    # target language code as “en” (English).
+    #
+    # `TranslateDocument` does not support language auto-detection.
+    #
+    # If you set the `Formality` parameter, the request will fail if the
+    # target language does not support formality. For a list of target
+    # languages that support formality, see [Setting formality][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-formality.html
+    #
+    # @option params [required, Types::Document] :document
+    #   The content and content type for the document to be translated. The
+    #   document size must not exceed 100 KB.
+    #
+    # @option params [Array<String>] :terminology_names
+    #   The name of a terminology list file to add to the translation job.
+    #   This file provides source terms and the desired translation for each
+    #   term. A terminology list can contain a maximum of 256 terms. You can
+    #   use one custom terminology resource in your translation request.
+    #
+    #   Use the ListTerminologies operation to get the available terminology
+    #   lists.
+    #
+    #   For more information about custom terminology lists, see [Custom
+    #   terminology][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/how-custom-terminology.html
+    #
+    # @option params [required, String] :source_language_code
+    #   The language code for the language of the source text. Do not use
+    #   `auto`, because `TranslateDocument` does not support language
+    #   auto-detection. For a list of supported language codes, see [Supported
+    #   languages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html
+    #
+    # @option params [required, String] :target_language_code
+    #   The language code requested for the translated document. For a list of
+    #   supported language codes, see [Supported languages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html
+    #
+    # @option params [Types::TranslationSettings] :settings
+    #   Settings to configure your translation output, including the option to
+    #   set the formality level of the output text and the option to mask
+    #   profane words and phrases.
+    #
+    # @return [Types::TranslateDocumentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TranslateDocumentResponse#translated_document #translated_document} => Types::TranslatedDocument
+    #   * {Types::TranslateDocumentResponse#source_language_code #source_language_code} => String
+    #   * {Types::TranslateDocumentResponse#target_language_code #target_language_code} => String
+    #   * {Types::TranslateDocumentResponse#applied_terminologies #applied_terminologies} => Array&lt;Types::AppliedTerminology&gt;
+    #   * {Types::TranslateDocumentResponse#applied_settings #applied_settings} => Types::TranslationSettings
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.translate_document({
+    #     document: { # required
+    #       content: "data", # required
+    #       content_type: "ContentType", # required
+    #     },
+    #     terminology_names: ["ResourceName"],
+    #     source_language_code: "LanguageCodeString", # required
+    #     target_language_code: "LanguageCodeString", # required
+    #     settings: {
+    #       formality: "FORMAL", # accepts FORMAL, INFORMAL
+    #       profanity: "MASK", # accepts MASK
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.translated_document.content #=> String
+    #   resp.source_language_code #=> String
+    #   resp.target_language_code #=> String
+    #   resp.applied_terminologies #=> Array
+    #   resp.applied_terminologies[0].name #=> String
+    #   resp.applied_terminologies[0].terms #=> Array
+    #   resp.applied_terminologies[0].terms[0].source_text #=> String
+    #   resp.applied_terminologies[0].terms[0].target_text #=> String
+    #   resp.applied_settings.formality #=> String, one of "FORMAL", "INFORMAL"
+    #   resp.applied_settings.profanity #=> String, one of "MASK"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TranslateDocument AWS API Documentation
+    #
+    # @overload translate_document(params = {})
+    # @param [Hash] params ({})
+    def translate_document(params = {}, options = {})
+      req = build_request(:translate_document, params)
+      req.send_request(options)
+    end
+
     # Translates input text from the source language to the target language.
     # For a list of available languages and language codes, see [Supported
     # languages][1].
@@ -1303,13 +1409,23 @@ module Aws::Translate
     #   10,000 characters.
     #
     # @option params [Array<String>] :terminology_names
-    #   The name of the terminology list file to be used in the TranslateText
-    #   request. You can use 1 terminology list at most in a `TranslateText`
-    #   request. Terminology lists can contain a maximum of 256 terms.
+    #   The name of a terminology list file to add to the translation job.
+    #   This file provides source terms and the desired translation for each
+    #   term. A terminology list can contain a maximum of 256 terms. You can
+    #   use one custom terminology resource in your translation request.
+    #
+    #   Use the ListTerminologies operation to get the available terminology
+    #   lists.
+    #
+    #   For more information about custom terminology lists, see [Custom
+    #   terminology][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/how-custom-terminology.html
     #
     # @option params [required, String] :source_language_code
-    #   The language code for the language of the source text. The language
-    #   must be a language supported by Amazon Translate. For a list of
+    #   The language code for the language of the source text. For a list of
     #   language codes, see [Supported languages][1].
     #
     #   To have Amazon Translate determine the source language of your text,
@@ -1329,8 +1445,12 @@ module Aws::Translate
     #   [2]: https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html
     #
     # @option params [required, String] :target_language_code
-    #   The language code requested for the language of the target text. The
-    #   language must be a language supported by Amazon Translate.
+    #   The language code requested for the language of the target text. For a
+    #   list of language codes, see [Supported languages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html
     #
     # @option params [Types::TranslationSettings] :settings
     #   Settings to configure your translation output, including the option to
@@ -1482,7 +1602,7 @@ module Aws::Translate
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-translate'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

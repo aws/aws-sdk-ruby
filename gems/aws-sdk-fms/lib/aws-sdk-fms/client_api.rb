@@ -1363,6 +1363,7 @@ module Aws::FMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:get_apps_list, Seahorse::Model::Operation.new.tap do |o|
@@ -1477,6 +1478,7 @@ module Aws::FMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

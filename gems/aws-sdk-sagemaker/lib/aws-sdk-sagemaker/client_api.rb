@@ -958,6 +958,8 @@ module Aws::SageMaker
     IntegerParameterRangeSpecification = Shapes::StructureShape.new(name: 'IntegerParameterRangeSpecification')
     IntegerParameterRanges = Shapes::ListShape.new(name: 'IntegerParameterRanges')
     IntegerValue = Shapes::IntegerShape.new(name: 'IntegerValue')
+    InvocationEndTime = Shapes::TimestampShape.new(name: 'InvocationEndTime')
+    InvocationStartTime = Shapes::TimestampShape.new(name: 'InvocationStartTime')
     InvocationsMaxRetries = Shapes::IntegerShape.new(name: 'InvocationsMaxRetries')
     InvocationsTimeoutInSeconds = Shapes::IntegerShape.new(name: 'InvocationsTimeoutInSeconds')
     IotRoleAlias = Shapes::StringShape.new(name: 'IotRoleAlias')
@@ -5433,6 +5435,8 @@ module Aws::SageMaker
     InferenceRecommendation.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: EndpointOutputConfiguration, required: true, location_name: "EndpointConfiguration"))
     InferenceRecommendation.add_member(:model_configuration, Shapes::ShapeRef.new(shape: ModelConfiguration, required: true, location_name: "ModelConfiguration"))
     InferenceRecommendation.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: String, location_name: "RecommendationId"))
+    InferenceRecommendation.add_member(:invocation_end_time, Shapes::ShapeRef.new(shape: InvocationEndTime, location_name: "InvocationEndTime"))
+    InferenceRecommendation.add_member(:invocation_start_time, Shapes::ShapeRef.new(shape: InvocationStartTime, location_name: "InvocationStartTime"))
     InferenceRecommendation.struct_class = Types::InferenceRecommendation
 
     InferenceRecommendations.member = Shapes::ShapeRef.new(shape: InferenceRecommendation)
@@ -5447,6 +5451,9 @@ module Aws::SageMaker
     InferenceRecommendationsJob.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     InferenceRecommendationsJob.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastModifiedTime, required: true, location_name: "LastModifiedTime"))
     InferenceRecommendationsJob.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    InferenceRecommendationsJob.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
+    InferenceRecommendationsJob.add_member(:sample_payload_url, Shapes::ShapeRef.new(shape: S3Uri, location_name: "SamplePayloadUrl"))
+    InferenceRecommendationsJob.add_member(:model_package_version_arn, Shapes::ShapeRef.new(shape: ModelPackageArn, location_name: "ModelPackageVersionArn"))
     InferenceRecommendationsJob.struct_class = Types::InferenceRecommendationsJob
 
     InferenceRecommendationsJobStep.add_member(:step_type, Shapes::ShapeRef.new(shape: RecommendationStepType, required: true, location_name: "StepType"))
@@ -6083,6 +6090,8 @@ module Aws::SageMaker
     ListInferenceRecommendationsJobsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
     ListInferenceRecommendationsJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListInferenceRecommendationsJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListInferenceRecommendationsJobsRequest.add_member(:model_name_equals, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelNameEquals"))
+    ListInferenceRecommendationsJobsRequest.add_member(:model_package_version_arn_equals, Shapes::ShapeRef.new(shape: ModelPackageArn, location_name: "ModelPackageVersionArnEquals"))
     ListInferenceRecommendationsJobsRequest.struct_class = Types::ListInferenceRecommendationsJobsRequest
 
     ListInferenceRecommendationsJobsResponse.add_member(:inference_recommendations_jobs, Shapes::ShapeRef.new(shape: InferenceRecommendationsJobs, required: true, location_name: "InferenceRecommendationsJobs"))
@@ -7743,6 +7752,8 @@ module Aws::SageMaker
     RecommendationJobInferenceBenchmark.add_member(:model_configuration, Shapes::ShapeRef.new(shape: ModelConfiguration, required: true, location_name: "ModelConfiguration"))
     RecommendationJobInferenceBenchmark.add_member(:failure_reason, Shapes::ShapeRef.new(shape: RecommendationFailureReason, location_name: "FailureReason"))
     RecommendationJobInferenceBenchmark.add_member(:endpoint_metrics, Shapes::ShapeRef.new(shape: InferenceMetrics, location_name: "EndpointMetrics"))
+    RecommendationJobInferenceBenchmark.add_member(:invocation_end_time, Shapes::ShapeRef.new(shape: InvocationEndTime, location_name: "InvocationEndTime"))
+    RecommendationJobInferenceBenchmark.add_member(:invocation_start_time, Shapes::ShapeRef.new(shape: InvocationStartTime, location_name: "InvocationStartTime"))
     RecommendationJobInferenceBenchmark.struct_class = Types::RecommendationJobInferenceBenchmark
 
     RecommendationJobInputConfig.add_member(:model_package_version_arn, Shapes::ShapeRef.new(shape: ModelPackageArn, location_name: "ModelPackageVersionArn"))
