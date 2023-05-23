@@ -77,9 +77,8 @@ maximum length of 50.
 
           # Used to be RUBY_PLATFORM
           def os_metadata
-            local = Gem::Platform.local
             os =
-              case local.os
+              case RbConfig::CONFIG['host_os']
               when /mac|darwin/
                 'macos'
               when /linux|cygwin/
@@ -90,8 +89,9 @@ maximum length of 50.
                 'other'
               end
             metadata = "os/#{os}"
-            metadata += "##{local.version}" if local.version
-            metadata += " md/#{local.cpu}" if local.cpu
+            local_version = Gem::Platform.local.version
+            metadata += "##{local_version}" if local_version
+            metadata += " md/#{RbConfig::CONFIG['host_cpu']}"
             metadata
           end
 
