@@ -13,7 +13,10 @@ begin
 rescue
   # unable to get a commit, maybe run outside of a git repo.  Skip
 end
+benchmark_data['ruby_engine'] = RUBY_ENGINE
+benchmark_data['ruby_engine_version'] = RUBY_ENGINE_VERSION
 benchmark_data['ruby_version'] = RUBY_VERSION
+
 benchmark_data['host_cpu'] = RbConfig::CONFIG['host_cpu']
 benchmark_data['host_os'] = RbConfig::CONFIG['host_os']
 
