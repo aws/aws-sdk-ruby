@@ -14,7 +14,7 @@ permissions:
   contents: read
 
 jobs:
-  test:
+  benchmark:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -50,4 +50,4 @@ jobs:
 
       - name: Archive benchmark report
         run: |
-          aws s3 cp ./benchmark_report.json s3://aws-sdk-ruby-performance-benchmark-archive/
+          GH_REF=${{github.ref_name}} GH_EVENT=${{github.event}} bundle exec rake benchmark:archive
