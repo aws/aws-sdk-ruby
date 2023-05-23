@@ -1,0 +1,44 @@
+name: Benchmark
+
+on:
+  push:
+    branches:
+      - version-3
+
+  pull_request:
+    branches:
+      - version-3
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: [3.1, 3.2]
+
+    steps:
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+
+      - uses: actions/checkout@v3
+
+      - name: Setup environment
+        run: echo "${{ matrix.env }}=1" >> $GITHUB_ENV
+
+      - name: Install gems
+        run: |
+          bundle install --without docs repl development --with benchmark
+
+      - name: SDK Build
+        run: bundle exec rake build
+
+      - name: Benchmark
+        env:
+          JRUBY_OPTS: -J-Xmx4g
+        run: bundle exec rake benchmark
