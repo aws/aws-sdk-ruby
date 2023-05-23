@@ -4,7 +4,10 @@ module Aws
   module Plugins
     # @api private
     class UserAgent < Seahorse::Client::Plugin
+      # @api private
       option(:user_agent_suffix)
+      # @api private
+      option(:user_agent_frameworks, default: [])
 
       option(
         :sdk_ua_app_id,
@@ -25,14 +28,6 @@ maximum length of 50.
         block.call
       ensure
         Thread.current[:aws_sdk_core_user_agent_feature].pop
-      end
-
-      def self.framework(framework, &block)
-        Thread.current[:aws_sdk_core_user_agent_framework] ||= []
-        Thread.current[:aws_sdk_core_user_agent_framework] << "lib/#{framework}"
-        block.call
-      ensure
-        Thread.current[:aws_sdk_core_user_agent_framework].pop
       end
 
       # @api private
@@ -130,9 +125,21 @@ maximum length of 50.
           end
 
           def framework_metadata
-            return unless Thread.current[:aws_sdk_core_user_agent_framework]
+            if (frameworks_cfg = @context.config.user_agent_frameworks).empty?
+              return
+            end
 
-            Thread.current[:aws_sdk_core_user_agent_framework].join(' ')
+            # Frameworks may be aws-record, aws-sdk-rails, etc.
+            regex = /gems\/(?<name>#{frameworks_cfg.join('|')})-(?<version>\d+\.\d+\.\d+)/.freeze
+            frameworks = {}
+            # Capture the name and version and check if the caller uses the framework.
+            Kernel.caller.each do |line|
+              match = line.match(regex)
+              next unless match
+
+              frameworks[match[:name]] = match[:version]
+            end
+            frameworks.map { |name, version| "lib/#{name}##{version}" }.join(' ')
           end
         end
       end

@@ -10,7 +10,8 @@ module Aws
 
       def setup(given)
         feature_callable = nil
-        framework_callable = nil
+        caller = []
+        config_frameworks = []
 
         given.keys.each do |key|
           case key
@@ -44,17 +45,15 @@ module Aws
             end
           when 'framework'
             version = given['framework']['version']
+            version = '1.2.3' if version.empty?
             framework = given['framework']['name']
-            framework += "##{version}" unless version.empty?
-            framework_callable = proc do |callable|
-              Aws::Plugins::UserAgent.framework(framework) do
-                callable.call
-              end
-            end
+            config_frameworks << framework
+            framework += "-#{version}" unless version.empty?
+            caller << "gems/#{framework}/some_file.rb"
           end
         end
 
-        [feature_callable, framework_callable]
+        [feature_callable, caller, config_frameworks]
       end
 
       def assert_header(expected, actual)
@@ -95,17 +94,16 @@ module Aws
           it "passes test #{index + 1}: #{test['description']}" do
             given = test['given']
             expected_header = test['expectedRequestHeaders']['user-agent']
-            feature_callable, framework_callable = setup(given)
+            feature_callable, caller, config_frameworks = setup(given)
+            allow(Kernel).to receive(:caller).and_return(caller)
+            client.config.user_agent_frameworks = config_frameworks
 
             callable1 = proc { client.example_operation }
             callable2 = callable1
             callable2 = proc { feature_callable.call(callable1) } if feature_callable
-            callable3 = callable2
-            callable3 = proc { framework_callable.call(callable2) } if framework_callable
+            resp = callable2.call
 
-            resp = callable3.call
             actual_header = resp.context.http_request.headers['User-Agent']
-
             assert_header(expected_header, actual_header)
           end
         end
