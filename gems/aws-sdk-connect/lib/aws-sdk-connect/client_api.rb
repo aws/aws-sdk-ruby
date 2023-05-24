@@ -1899,7 +1899,7 @@ module Aws::Connect
     EvaluationFormSection.add_member(:title, Shapes::ShapeRef.new(shape: EvaluationFormSectionTitle, required: true, location_name: "Title"))
     EvaluationFormSection.add_member(:ref_id, Shapes::ShapeRef.new(shape: ReferenceId, required: true, location_name: "RefId"))
     EvaluationFormSection.add_member(:instructions, Shapes::ShapeRef.new(shape: EvaluationFormQuestionInstructions, location_name: "Instructions"))
-    EvaluationFormSection.add_member(:items, Shapes::ShapeRef.new(shape: EvaluationFormItemsList, location_name: "Items"))
+    EvaluationFormSection.add_member(:items, Shapes::ShapeRef.new(shape: EvaluationFormItemsList, required: true, location_name: "Items"))
     EvaluationFormSection.add_member(:weight, Shapes::ShapeRef.new(shape: EvaluationFormItemWeight, location_name: "Weight"))
     EvaluationFormSection.struct_class = Types::EvaluationFormSection
 

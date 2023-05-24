@@ -58,6 +58,10 @@ module Aws::AppSync
           case context.operation_name
           when :associate_api
             Aws::AppSync::Endpoints::AssociateApi.build(context)
+          when :associate_merged_graphql_api
+            Aws::AppSync::Endpoints::AssociateMergedGraphqlApi.build(context)
+          when :associate_source_graphql_api
+            Aws::AppSync::Endpoints::AssociateSourceGraphqlApi.build(context)
           when :create_api_cache
             Aws::AppSync::Endpoints::CreateApiCache.build(context)
           when :create_api_key
@@ -92,6 +96,10 @@ module Aws::AppSync
             Aws::AppSync::Endpoints::DeleteType.build(context)
           when :disassociate_api
             Aws::AppSync::Endpoints::DisassociateApi.build(context)
+          when :disassociate_merged_graphql_api
+            Aws::AppSync::Endpoints::DisassociateMergedGraphqlApi.build(context)
+          when :disassociate_source_graphql_api
+            Aws::AppSync::Endpoints::DisassociateSourceGraphqlApi.build(context)
           when :evaluate_code
             Aws::AppSync::Endpoints::EvaluateCode.build(context)
           when :evaluate_mapping_template
@@ -116,6 +124,8 @@ module Aws::AppSync
             Aws::AppSync::Endpoints::GetResolver.build(context)
           when :get_schema_creation_status
             Aws::AppSync::Endpoints::GetSchemaCreationStatus.build(context)
+          when :get_source_api_association
+            Aws::AppSync::Endpoints::GetSourceApiAssociation.build(context)
           when :get_type
             Aws::AppSync::Endpoints::GetType.build(context)
           when :list_api_keys
@@ -132,12 +142,18 @@ module Aws::AppSync
             Aws::AppSync::Endpoints::ListResolvers.build(context)
           when :list_resolvers_by_function
             Aws::AppSync::Endpoints::ListResolversByFunction.build(context)
+          when :list_source_api_associations
+            Aws::AppSync::Endpoints::ListSourceApiAssociations.build(context)
           when :list_tags_for_resource
             Aws::AppSync::Endpoints::ListTagsForResource.build(context)
           when :list_types
             Aws::AppSync::Endpoints::ListTypes.build(context)
+          when :list_types_by_association
+            Aws::AppSync::Endpoints::ListTypesByAssociation.build(context)
           when :start_schema_creation
             Aws::AppSync::Endpoints::StartSchemaCreation.build(context)
+          when :start_schema_merge
+            Aws::AppSync::Endpoints::StartSchemaMerge.build(context)
           when :tag_resource
             Aws::AppSync::Endpoints::TagResource.build(context)
           when :untag_resource
@@ -156,6 +172,8 @@ module Aws::AppSync
             Aws::AppSync::Endpoints::UpdateGraphqlApi.build(context)
           when :update_resolver
             Aws::AppSync::Endpoints::UpdateResolver.build(context)
+          when :update_source_api_association
+            Aws::AppSync::Endpoints::UpdateSourceApiAssociation.build(context)
           when :update_type
             Aws::AppSync::Endpoints::UpdateType.build(context)
           end

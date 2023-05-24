@@ -9940,6 +9940,31 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A set of recommended deployment configurations for the model.
+    #
+    # @!attribute [rw] recommendation_status
+    #   Status of the deployment recommendation. `NOT_APPLICABLE` means that
+    #   SageMaker is unable to provide a default recommendation for the
+    #   model using the information provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] real_time_inference_recommendations
+    #   A list of [RealTimeInferenceRecommendation][1] items.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_RealTimeInferenceRecommendation.html
+    #   @return [Array<Types::RealTimeInferenceRecommendation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeploymentRecommendation AWS API Documentation
+    #
+    class DeploymentRecommendation < Struct.new(
+      :recommendation_status,
+      :real_time_inference_recommendations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a stage in an edge deployment plan.
     #
     # @!attribute [rw] stage_name
@@ -13515,6 +13540,10 @@ module Aws::SageMaker
     #   from the model container.
     #   @return [Boolean]
     #
+    # @!attribute [rw] deployment_recommendation
+    #   A set of recommended deployment configurations for the model.
+    #   @return [Types::DeploymentRecommendation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelOutput AWS API Documentation
     #
     class DescribeModelOutput < Struct.new(
@@ -13526,7 +13555,8 @@ module Aws::SageMaker
       :vpc_config,
       :creation_time,
       :model_arn,
-      :enable_network_isolation)
+      :enable_network_isolation,
+      :deployment_recommendation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27477,6 +27507,10 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] deployment_recommendation
+    #   A set of recommended deployment configurations for the model.
+    #   @return [Types::DeploymentRecommendation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Model AWS API Documentation
     #
     class Model < Struct.new(
@@ -27489,7 +27523,8 @@ module Aws::SageMaker
       :creation_time,
       :model_arn,
       :enable_network_isolation,
-      :tags)
+      :tags,
+      :deployment_recommendation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33522,6 +33557,31 @@ module Aws::SageMaker
     class RealTimeInferenceConfig < Struct.new(
       :instance_type,
       :instance_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The recommended configuration to use for Real-Time Inference.
+    #
+    # @!attribute [rw] recommendation_id
+    #   The recommendation ID which uniquely identifies each recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The recommended instance type for Real-Time Inference.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment
+    #   The recommended environment variables to set in the model container
+    #   for Real-Time Inference.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RealTimeInferenceRecommendation AWS API Documentation
+    #
+    class RealTimeInferenceRecommendation < Struct.new(
+      :recommendation_id,
+      :instance_type,
+      :environment)
       SENSITIVE = []
       include Aws::Structure
     end

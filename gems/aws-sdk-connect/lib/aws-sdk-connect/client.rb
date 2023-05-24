@@ -1199,7 +1199,7 @@ module Aws::Connect
     #           title: "EvaluationFormSectionTitle", # required
     #           ref_id: "ReferenceId", # required
     #           instructions: "EvaluationFormQuestionInstructions",
-    #           items: {
+    #           items: { # required
     #             # recursive EvaluationFormItemsList
     #           },
     #           weight: 1.0,
@@ -10567,7 +10567,7 @@ module Aws::Connect
     #           title: "EvaluationFormSectionTitle", # required
     #           ref_id: "ReferenceId", # required
     #           instructions: "EvaluationFormQuestionInstructions",
-    #           items: {
+    #           items: { # required
     #             # recursive EvaluationFormItemsList
     #           },
     #           weight: 1.0,
@@ -12111,7 +12111,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.107.0'
+      context[:gem_version] = '1.108.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

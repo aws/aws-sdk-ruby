@@ -29,6 +29,10 @@ module Aws::AppSync
     AppSyncRuntime = Shapes::StructureShape.new(name: 'AppSyncRuntime')
     AssociateApiRequest = Shapes::StructureShape.new(name: 'AssociateApiRequest')
     AssociateApiResponse = Shapes::StructureShape.new(name: 'AssociateApiResponse')
+    AssociateMergedGraphqlApiRequest = Shapes::StructureShape.new(name: 'AssociateMergedGraphqlApiRequest')
+    AssociateMergedGraphqlApiResponse = Shapes::StructureShape.new(name: 'AssociateMergedGraphqlApiResponse')
+    AssociateSourceGraphqlApiRequest = Shapes::StructureShape.new(name: 'AssociateSourceGraphqlApiRequest')
+    AssociateSourceGraphqlApiResponse = Shapes::StructureShape.new(name: 'AssociateSourceGraphqlApiResponse')
     AssociationStatus = Shapes::StringShape.new(name: 'AssociationStatus')
     AuthenticationType = Shapes::StringShape.new(name: 'AuthenticationType')
     AuthorizationConfig = Shapes::StructureShape.new(name: 'AuthorizationConfig')
@@ -74,6 +78,7 @@ module Aws::AppSync
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
     DataSourceType = Shapes::StringShape.new(name: 'DataSourceType')
     DataSources = Shapes::ListShape.new(name: 'DataSources')
+    Date = Shapes::TimestampShape.new(name: 'Date')
     DefaultAction = Shapes::StringShape.new(name: 'DefaultAction')
     DeleteApiCacheRequest = Shapes::StructureShape.new(name: 'DeleteApiCacheRequest')
     DeleteApiCacheResponse = Shapes::StructureShape.new(name: 'DeleteApiCacheResponse')
@@ -95,6 +100,10 @@ module Aws::AppSync
     Description = Shapes::StringShape.new(name: 'Description')
     DisassociateApiRequest = Shapes::StructureShape.new(name: 'DisassociateApiRequest')
     DisassociateApiResponse = Shapes::StructureShape.new(name: 'DisassociateApiResponse')
+    DisassociateMergedGraphqlApiRequest = Shapes::StructureShape.new(name: 'DisassociateMergedGraphqlApiRequest')
+    DisassociateMergedGraphqlApiResponse = Shapes::StructureShape.new(name: 'DisassociateMergedGraphqlApiResponse')
+    DisassociateSourceGraphqlApiRequest = Shapes::StructureShape.new(name: 'DisassociateSourceGraphqlApiRequest')
+    DisassociateSourceGraphqlApiResponse = Shapes::StructureShape.new(name: 'DisassociateSourceGraphqlApiResponse')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
     DomainNameConfig = Shapes::StructureShape.new(name: 'DomainNameConfig')
     DomainNameConfigs = Shapes::ListShape.new(name: 'DomainNameConfigs')
@@ -133,8 +142,11 @@ module Aws::AppSync
     GetResolverResponse = Shapes::StructureShape.new(name: 'GetResolverResponse')
     GetSchemaCreationStatusRequest = Shapes::StructureShape.new(name: 'GetSchemaCreationStatusRequest')
     GetSchemaCreationStatusResponse = Shapes::StructureShape.new(name: 'GetSchemaCreationStatusResponse')
+    GetSourceApiAssociationRequest = Shapes::StructureShape.new(name: 'GetSourceApiAssociationRequest')
+    GetSourceApiAssociationResponse = Shapes::StructureShape.new(name: 'GetSourceApiAssociationResponse')
     GetTypeRequest = Shapes::StructureShape.new(name: 'GetTypeRequest')
     GetTypeResponse = Shapes::StructureShape.new(name: 'GetTypeResponse')
+    GraphQLApiType = Shapes::StringShape.new(name: 'GraphQLApiType')
     GraphQLApiVisibility = Shapes::StringShape.new(name: 'GraphQLApiVisibility')
     GraphQLSchemaException = Shapes::StructureShape.new(name: 'GraphQLSchemaException')
     GraphqlApi = Shapes::StructureShape.new(name: 'GraphqlApi')
@@ -159,8 +171,12 @@ module Aws::AppSync
     ListResolversByFunctionResponse = Shapes::StructureShape.new(name: 'ListResolversByFunctionResponse')
     ListResolversRequest = Shapes::StructureShape.new(name: 'ListResolversRequest')
     ListResolversResponse = Shapes::StructureShape.new(name: 'ListResolversResponse')
+    ListSourceApiAssociationsRequest = Shapes::StructureShape.new(name: 'ListSourceApiAssociationsRequest')
+    ListSourceApiAssociationsResponse = Shapes::StructureShape.new(name: 'ListSourceApiAssociationsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListTypesByAssociationRequest = Shapes::StructureShape.new(name: 'ListTypesByAssociationRequest')
+    ListTypesByAssociationResponse = Shapes::StructureShape.new(name: 'ListTypesByAssociationResponse')
     ListTypesRequest = Shapes::StructureShape.new(name: 'ListTypesRequest')
     ListTypesResponse = Shapes::StructureShape.new(name: 'ListTypesResponse')
     LogConfig = Shapes::StructureShape.new(name: 'LogConfig')
@@ -170,10 +186,12 @@ module Aws::AppSync
     MappingTemplate = Shapes::StringShape.new(name: 'MappingTemplate')
     MaxBatchSize = Shapes::IntegerShape.new(name: 'MaxBatchSize')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MergeType = Shapes::StringShape.new(name: 'MergeType')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     OpenIDConnectConfig = Shapes::StructureShape.new(name: 'OpenIDConnectConfig')
     OpenSearchServiceDataSourceConfig = Shapes::StructureShape.new(name: 'OpenSearchServiceDataSourceConfig')
     OutputType = Shapes::StringShape.new(name: 'OutputType')
+    Ownership = Shapes::StringShape.new(name: 'Ownership')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PipelineConfig = Shapes::StructureShape.new(name: 'PipelineConfig')
     RdsHttpEndpointConfig = Shapes::StructureShape.new(name: 'RdsHttpEndpointConfig')
@@ -186,8 +204,15 @@ module Aws::AppSync
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     RuntimeName = Shapes::StringShape.new(name: 'RuntimeName')
     SchemaStatus = Shapes::StringShape.new(name: 'SchemaStatus')
+    SourceApiAssociation = Shapes::StructureShape.new(name: 'SourceApiAssociation')
+    SourceApiAssociationConfig = Shapes::StructureShape.new(name: 'SourceApiAssociationConfig')
+    SourceApiAssociationStatus = Shapes::StringShape.new(name: 'SourceApiAssociationStatus')
+    SourceApiAssociationSummary = Shapes::StructureShape.new(name: 'SourceApiAssociationSummary')
+    SourceApiAssociationSummaryList = Shapes::ListShape.new(name: 'SourceApiAssociationSummaryList')
     StartSchemaCreationRequest = Shapes::StructureShape.new(name: 'StartSchemaCreationRequest')
     StartSchemaCreationResponse = Shapes::StructureShape.new(name: 'StartSchemaCreationResponse')
+    StartSchemaMergeRequest = Shapes::StructureShape.new(name: 'StartSchemaMergeRequest')
+    StartSchemaMergeResponse = Shapes::StructureShape.new(name: 'StartSchemaMergeResponse')
     String = Shapes::StringShape.new(name: 'String')
     SyncConfig = Shapes::StructureShape.new(name: 'SyncConfig')
     TTL = Shapes::IntegerShape.new(name: 'TTL')
@@ -218,6 +243,8 @@ module Aws::AppSync
     UpdateGraphqlApiResponse = Shapes::StructureShape.new(name: 'UpdateGraphqlApiResponse')
     UpdateResolverRequest = Shapes::StructureShape.new(name: 'UpdateResolverRequest')
     UpdateResolverResponse = Shapes::StructureShape.new(name: 'UpdateResolverResponse')
+    UpdateSourceApiAssociationRequest = Shapes::StructureShape.new(name: 'UpdateSourceApiAssociationRequest')
+    UpdateSourceApiAssociationResponse = Shapes::StructureShape.new(name: 'UpdateSourceApiAssociationResponse')
     UpdateTypeRequest = Shapes::StructureShape.new(name: 'UpdateTypeRequest')
     UpdateTypeResponse = Shapes::StructureShape.new(name: 'UpdateTypeResponse')
     UserPoolConfig = Shapes::StructureShape.new(name: 'UserPoolConfig')
@@ -274,6 +301,24 @@ module Aws::AppSync
 
     AssociateApiResponse.add_member(:api_association, Shapes::ShapeRef.new(shape: ApiAssociation, location_name: "apiAssociation"))
     AssociateApiResponse.struct_class = Types::AssociateApiResponse
+
+    AssociateMergedGraphqlApiRequest.add_member(:source_api_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "sourceApiIdentifier"))
+    AssociateMergedGraphqlApiRequest.add_member(:merged_api_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "mergedApiIdentifier"))
+    AssociateMergedGraphqlApiRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    AssociateMergedGraphqlApiRequest.add_member(:source_api_association_config, Shapes::ShapeRef.new(shape: SourceApiAssociationConfig, location_name: "sourceApiAssociationConfig"))
+    AssociateMergedGraphqlApiRequest.struct_class = Types::AssociateMergedGraphqlApiRequest
+
+    AssociateMergedGraphqlApiResponse.add_member(:source_api_association, Shapes::ShapeRef.new(shape: SourceApiAssociation, location_name: "sourceApiAssociation"))
+    AssociateMergedGraphqlApiResponse.struct_class = Types::AssociateMergedGraphqlApiResponse
+
+    AssociateSourceGraphqlApiRequest.add_member(:merged_api_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "mergedApiIdentifier"))
+    AssociateSourceGraphqlApiRequest.add_member(:source_api_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "sourceApiIdentifier"))
+    AssociateSourceGraphqlApiRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    AssociateSourceGraphqlApiRequest.add_member(:source_api_association_config, Shapes::ShapeRef.new(shape: SourceApiAssociationConfig, location_name: "sourceApiAssociationConfig"))
+    AssociateSourceGraphqlApiRequest.struct_class = Types::AssociateSourceGraphqlApiRequest
+
+    AssociateSourceGraphqlApiResponse.add_member(:source_api_association, Shapes::ShapeRef.new(shape: SourceApiAssociation, location_name: "sourceApiAssociation"))
+    AssociateSourceGraphqlApiResponse.struct_class = Types::AssociateSourceGraphqlApiResponse
 
     AuthorizationConfig.add_member(:authorization_type, Shapes::ShapeRef.new(shape: AuthorizationType, required: true, location_name: "authorizationType"))
     AuthorizationConfig.add_member(:aws_iam_config, Shapes::ShapeRef.new(shape: AwsIamConfig, location_name: "awsIamConfig"))
@@ -387,6 +432,9 @@ module Aws::AppSync
     CreateGraphqlApiRequest.add_member(:xray_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "xrayEnabled"))
     CreateGraphqlApiRequest.add_member(:lambda_authorizer_config, Shapes::ShapeRef.new(shape: LambdaAuthorizerConfig, location_name: "lambdaAuthorizerConfig"))
     CreateGraphqlApiRequest.add_member(:visibility, Shapes::ShapeRef.new(shape: GraphQLApiVisibility, location_name: "visibility"))
+    CreateGraphqlApiRequest.add_member(:api_type, Shapes::ShapeRef.new(shape: GraphQLApiType, location_name: "apiType"))
+    CreateGraphqlApiRequest.add_member(:merged_api_execution_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "mergedApiExecutionRoleArn"))
+    CreateGraphqlApiRequest.add_member(:owner_contact, Shapes::ShapeRef.new(shape: String, location_name: "ownerContact"))
     CreateGraphqlApiRequest.struct_class = Types::CreateGraphqlApiRequest
 
     CreateGraphqlApiResponse.add_member(:graphql_api, Shapes::ShapeRef.new(shape: GraphqlApi, location_name: "graphqlApi"))
@@ -489,6 +537,20 @@ module Aws::AppSync
     DisassociateApiRequest.struct_class = Types::DisassociateApiRequest
 
     DisassociateApiResponse.struct_class = Types::DisassociateApiResponse
+
+    DisassociateMergedGraphqlApiRequest.add_member(:source_api_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "sourceApiIdentifier"))
+    DisassociateMergedGraphqlApiRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "associationId"))
+    DisassociateMergedGraphqlApiRequest.struct_class = Types::DisassociateMergedGraphqlApiRequest
+
+    DisassociateMergedGraphqlApiResponse.add_member(:source_api_association_status, Shapes::ShapeRef.new(shape: SourceApiAssociationStatus, location_name: "sourceApiAssociationStatus"))
+    DisassociateMergedGraphqlApiResponse.struct_class = Types::DisassociateMergedGraphqlApiResponse
+
+    DisassociateSourceGraphqlApiRequest.add_member(:merged_api_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "mergedApiIdentifier"))
+    DisassociateSourceGraphqlApiRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "associationId"))
+    DisassociateSourceGraphqlApiRequest.struct_class = Types::DisassociateSourceGraphqlApiRequest
+
+    DisassociateSourceGraphqlApiResponse.add_member(:source_api_association_status, Shapes::ShapeRef.new(shape: SourceApiAssociationStatus, location_name: "sourceApiAssociationStatus"))
+    DisassociateSourceGraphqlApiResponse.struct_class = Types::DisassociateSourceGraphqlApiResponse
 
     DomainNameConfig.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "domainName"))
     DomainNameConfig.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -626,6 +688,13 @@ module Aws::AppSync
     GetSchemaCreationStatusResponse.add_member(:details, Shapes::ShapeRef.new(shape: String, location_name: "details"))
     GetSchemaCreationStatusResponse.struct_class = Types::GetSchemaCreationStatusResponse
 
+    GetSourceApiAssociationRequest.add_member(:merged_api_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "mergedApiIdentifier"))
+    GetSourceApiAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "associationId"))
+    GetSourceApiAssociationRequest.struct_class = Types::GetSourceApiAssociationRequest
+
+    GetSourceApiAssociationResponse.add_member(:source_api_association, Shapes::ShapeRef.new(shape: SourceApiAssociation, location_name: "sourceApiAssociation"))
+    GetSourceApiAssociationResponse.struct_class = Types::GetSourceApiAssociationResponse
+
     GetTypeRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     GetTypeRequest.add_member(:type_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "typeName"))
     GetTypeRequest.add_member(:format, Shapes::ShapeRef.new(shape: TypeDefinitionFormat, required: true, location: "querystring", location_name: "format"))
@@ -652,6 +721,10 @@ module Aws::AppSync
     GraphqlApi.add_member(:lambda_authorizer_config, Shapes::ShapeRef.new(shape: LambdaAuthorizerConfig, location_name: "lambdaAuthorizerConfig"))
     GraphqlApi.add_member(:dns, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "dns"))
     GraphqlApi.add_member(:visibility, Shapes::ShapeRef.new(shape: GraphQLApiVisibility, location_name: "visibility"))
+    GraphqlApi.add_member(:api_type, Shapes::ShapeRef.new(shape: GraphQLApiType, location_name: "apiType"))
+    GraphqlApi.add_member(:merged_api_execution_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "mergedApiExecutionRoleArn"))
+    GraphqlApi.add_member(:owner, Shapes::ShapeRef.new(shape: String, location_name: "owner"))
+    GraphqlApi.add_member(:owner_contact, Shapes::ShapeRef.new(shape: String, location_name: "ownerContact"))
     GraphqlApi.struct_class = Types::GraphqlApi
 
     GraphqlApis.member = Shapes::ShapeRef.new(shape: GraphqlApi)
@@ -714,6 +787,8 @@ module Aws::AppSync
 
     ListGraphqlApisRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListGraphqlApisRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListGraphqlApisRequest.add_member(:api_type, Shapes::ShapeRef.new(shape: GraphQLApiType, location: "querystring", location_name: "apiType"))
+    ListGraphqlApisRequest.add_member(:owner, Shapes::ShapeRef.new(shape: Ownership, location: "querystring", location_name: "owner"))
     ListGraphqlApisRequest.struct_class = Types::ListGraphqlApisRequest
 
     ListGraphqlApisResponse.add_member(:graphql_apis, Shapes::ShapeRef.new(shape: GraphqlApis, location_name: "graphqlApis"))
@@ -740,11 +815,31 @@ module Aws::AppSync
     ListResolversResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListResolversResponse.struct_class = Types::ListResolversResponse
 
+    ListSourceApiAssociationsRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
+    ListSourceApiAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListSourceApiAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListSourceApiAssociationsRequest.struct_class = Types::ListSourceApiAssociationsRequest
+
+    ListSourceApiAssociationsResponse.add_member(:source_api_association_summaries, Shapes::ShapeRef.new(shape: SourceApiAssociationSummaryList, location_name: "sourceApiAssociationSummaries"))
+    ListSourceApiAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListSourceApiAssociationsResponse.struct_class = Types::ListSourceApiAssociationsResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    ListTypesByAssociationRequest.add_member(:merged_api_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "mergedApiIdentifier"))
+    ListTypesByAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "associationId"))
+    ListTypesByAssociationRequest.add_member(:format, Shapes::ShapeRef.new(shape: TypeDefinitionFormat, required: true, location: "querystring", location_name: "format"))
+    ListTypesByAssociationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListTypesByAssociationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListTypesByAssociationRequest.struct_class = Types::ListTypesByAssociationRequest
+
+    ListTypesByAssociationResponse.add_member(:types, Shapes::ShapeRef.new(shape: TypeList, location_name: "types"))
+    ListTypesByAssociationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListTypesByAssociationResponse.struct_class = Types::ListTypesByAssociationResponse
 
     ListTypesRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     ListTypesRequest.add_member(:format, Shapes::ShapeRef.new(shape: TypeDefinitionFormat, required: true, location: "querystring", location_name: "format"))
@@ -810,12 +905,46 @@ module Aws::AppSync
 
     Resolvers.member = Shapes::ShapeRef.new(shape: Resolver)
 
+    SourceApiAssociation.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "associationId"))
+    SourceApiAssociation.add_member(:association_arn, Shapes::ShapeRef.new(shape: String, location_name: "associationArn"))
+    SourceApiAssociation.add_member(:source_api_id, Shapes::ShapeRef.new(shape: String, location_name: "sourceApiId"))
+    SourceApiAssociation.add_member(:source_api_arn, Shapes::ShapeRef.new(shape: String, location_name: "sourceApiArn"))
+    SourceApiAssociation.add_member(:merged_api_arn, Shapes::ShapeRef.new(shape: String, location_name: "mergedApiArn"))
+    SourceApiAssociation.add_member(:merged_api_id, Shapes::ShapeRef.new(shape: String, location_name: "mergedApiId"))
+    SourceApiAssociation.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    SourceApiAssociation.add_member(:source_api_association_config, Shapes::ShapeRef.new(shape: SourceApiAssociationConfig, location_name: "sourceApiAssociationConfig"))
+    SourceApiAssociation.add_member(:source_api_association_status, Shapes::ShapeRef.new(shape: SourceApiAssociationStatus, location_name: "sourceApiAssociationStatus"))
+    SourceApiAssociation.add_member(:source_api_association_status_detail, Shapes::ShapeRef.new(shape: String, location_name: "sourceApiAssociationStatusDetail"))
+    SourceApiAssociation.add_member(:last_successful_merge_date, Shapes::ShapeRef.new(shape: Date, location_name: "lastSuccessfulMergeDate"))
+    SourceApiAssociation.struct_class = Types::SourceApiAssociation
+
+    SourceApiAssociationConfig.add_member(:merge_type, Shapes::ShapeRef.new(shape: MergeType, location_name: "mergeType"))
+    SourceApiAssociationConfig.struct_class = Types::SourceApiAssociationConfig
+
+    SourceApiAssociationSummary.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "associationId"))
+    SourceApiAssociationSummary.add_member(:association_arn, Shapes::ShapeRef.new(shape: String, location_name: "associationArn"))
+    SourceApiAssociationSummary.add_member(:source_api_id, Shapes::ShapeRef.new(shape: String, location_name: "sourceApiId"))
+    SourceApiAssociationSummary.add_member(:source_api_arn, Shapes::ShapeRef.new(shape: String, location_name: "sourceApiArn"))
+    SourceApiAssociationSummary.add_member(:merged_api_id, Shapes::ShapeRef.new(shape: String, location_name: "mergedApiId"))
+    SourceApiAssociationSummary.add_member(:merged_api_arn, Shapes::ShapeRef.new(shape: String, location_name: "mergedApiArn"))
+    SourceApiAssociationSummary.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    SourceApiAssociationSummary.struct_class = Types::SourceApiAssociationSummary
+
+    SourceApiAssociationSummaryList.member = Shapes::ShapeRef.new(shape: SourceApiAssociationSummary)
+
     StartSchemaCreationRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     StartSchemaCreationRequest.add_member(:definition, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "definition"))
     StartSchemaCreationRequest.struct_class = Types::StartSchemaCreationRequest
 
     StartSchemaCreationResponse.add_member(:status, Shapes::ShapeRef.new(shape: SchemaStatus, location_name: "status"))
     StartSchemaCreationResponse.struct_class = Types::StartSchemaCreationResponse
+
+    StartSchemaMergeRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "associationId"))
+    StartSchemaMergeRequest.add_member(:merged_api_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "mergedApiIdentifier"))
+    StartSchemaMergeRequest.struct_class = Types::StartSchemaMergeRequest
+
+    StartSchemaMergeResponse.add_member(:source_api_association_status, Shapes::ShapeRef.new(shape: SourceApiAssociationStatus, location_name: "sourceApiAssociationStatus"))
+    StartSchemaMergeResponse.struct_class = Types::StartSchemaMergeResponse
 
     SyncConfig.add_member(:conflict_handler, Shapes::ShapeRef.new(shape: ConflictHandlerType, location_name: "conflictHandler"))
     SyncConfig.add_member(:conflict_detection, Shapes::ShapeRef.new(shape: ConflictDetectionType, location_name: "conflictDetection"))
@@ -919,6 +1048,8 @@ module Aws::AppSync
     UpdateGraphqlApiRequest.add_member(:additional_authentication_providers, Shapes::ShapeRef.new(shape: AdditionalAuthenticationProviders, location_name: "additionalAuthenticationProviders"))
     UpdateGraphqlApiRequest.add_member(:xray_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "xrayEnabled"))
     UpdateGraphqlApiRequest.add_member(:lambda_authorizer_config, Shapes::ShapeRef.new(shape: LambdaAuthorizerConfig, location_name: "lambdaAuthorizerConfig"))
+    UpdateGraphqlApiRequest.add_member(:merged_api_execution_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "mergedApiExecutionRoleArn"))
+    UpdateGraphqlApiRequest.add_member(:owner_contact, Shapes::ShapeRef.new(shape: String, location_name: "ownerContact"))
     UpdateGraphqlApiRequest.struct_class = Types::UpdateGraphqlApiRequest
 
     UpdateGraphqlApiResponse.add_member(:graphql_api, Shapes::ShapeRef.new(shape: GraphqlApi, location_name: "graphqlApi"))
@@ -941,6 +1072,15 @@ module Aws::AppSync
 
     UpdateResolverResponse.add_member(:resolver, Shapes::ShapeRef.new(shape: Resolver, location_name: "resolver"))
     UpdateResolverResponse.struct_class = Types::UpdateResolverResponse
+
+    UpdateSourceApiAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "associationId"))
+    UpdateSourceApiAssociationRequest.add_member(:merged_api_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "mergedApiIdentifier"))
+    UpdateSourceApiAssociationRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    UpdateSourceApiAssociationRequest.add_member(:source_api_association_config, Shapes::ShapeRef.new(shape: SourceApiAssociationConfig, location_name: "sourceApiAssociationConfig"))
+    UpdateSourceApiAssociationRequest.struct_class = Types::UpdateSourceApiAssociationRequest
+
+    UpdateSourceApiAssociationResponse.add_member(:source_api_association, Shapes::ShapeRef.new(shape: SourceApiAssociation, location_name: "sourceApiAssociation"))
+    UpdateSourceApiAssociationResponse.struct_class = Types::UpdateSourceApiAssociationResponse
 
     UpdateTypeRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     UpdateTypeRequest.add_member(:type_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "typeName"))
@@ -986,6 +1126,34 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:associate_merged_graphql_api, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateMergedGraphqlApi"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/sourceApis/{sourceApiIdentifier}/mergedApiAssociations"
+        o.input = Shapes::ShapeRef.new(shape: AssociateMergedGraphqlApiRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateMergedGraphqlApiResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:associate_source_graphql_api, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateSourceGraphqlApi"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/mergedApis/{mergedApiIdentifier}/sourceApiAssociations"
+        o.input = Shapes::ShapeRef.new(shape: AssociateSourceGraphqlApiRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateSourceGraphqlApiResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:create_api_cache, Seahorse::Model::Operation.new.tap do |o|
@@ -1209,6 +1377,32 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
+      api.add_operation(:disassociate_merged_graphql_api, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateMergedGraphqlApi"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/sourceApis/{sourceApiIdentifier}/mergedApiAssociations/{associationId}"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateMergedGraphqlApiRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateMergedGraphqlApiResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:disassociate_source_graphql_api, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateSourceGraphqlApi"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/mergedApis/{mergedApiIdentifier}/sourceApiAssociations/{associationId}"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateSourceGraphqlApiRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateSourceGraphqlApiResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
       api.add_operation(:evaluate_code, Seahorse::Model::Operation.new.tap do |o|
         o.name = "EvaluateCode"
         o.http_method = "POST"
@@ -1353,6 +1547,18 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:get_source_api_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSourceApiAssociation"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/mergedApis/{mergedApiIdentifier}/sourceApiAssociations/{associationId}"
+        o.input = Shapes::ShapeRef.new(shape: GetSourceApiAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSourceApiAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
       api.add_operation(:get_type, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetType"
         o.http_method = "GET"
@@ -1448,6 +1654,18 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:list_source_api_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSourceApiAssociations"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/apis/{apiId}/sourceApiAssociations"
+        o.input = Shapes::ShapeRef.new(shape: ListSourceApiAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSourceApiAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -1475,6 +1693,19 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:list_types_by_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTypesByAssociation"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/mergedApis/{mergedApiIdentifier}/sourceApiAssociations/{associationId}/types"
+        o.input = Shapes::ShapeRef.new(shape: ListTypesByAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTypesByAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:start_schema_creation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartSchemaCreation"
         o.http_method = "POST"
@@ -1486,6 +1717,19 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:start_schema_merge, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartSchemaMerge"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/mergedApis/{mergedApiIdentifier}/sourceApiAssociations/{associationId}/merge"
+        o.input = Shapes::ShapeRef.new(shape: StartSchemaMergeRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartSchemaMergeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1606,6 +1850,19 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:update_source_api_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSourceApiAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/mergedApis/{mergedApiIdentifier}/sourceApiAssociations/{associationId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSourceApiAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSourceApiAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:update_type, Seahorse::Model::Operation.new.tap do |o|

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.180.0 (2023-05-24)
+------------------
+
+* Feature - SageMaker now provides an instantaneous deployment recommendation through the DescribeModel API
+
 1.179.0 (2023-05-23)
 ------------------
 
