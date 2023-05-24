@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Updated `checksum_algorithm` plugin with a permanent fix to pass JRuby CI.
+* Issue - Updated `checksum_algorithm` plugin to use IO.copy_stream for JRuby.
 
 3.173.0 (2023-05-18)
 ------------------
