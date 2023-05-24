@@ -181,6 +181,7 @@ module Aws
             expect(headers['x-amz-decoded-content-length']).to eq('11')
             # capture the body by reading it into a new IO object
             body = StringIO.new
+            # IO.copy_stream is the same method used by Net::Http to write our body to the socket
             IO.copy_stream(context.http_request.body, body)
             body.rewind
             expect(body.read).to eq "b\r\nHello World\r\n0\r\nx-amz-checksum-sha256:pZGm1Av0IEBKARczz7exkNYsZb8LzaMrV7J32a2fFG4=\r\n\r\n"
