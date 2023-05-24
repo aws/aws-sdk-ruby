@@ -50,4 +50,8 @@ jobs:
 
       - name: Archive benchmark report
         run: |
-          GH_REF=${{github.ref_name}} GH_EVENT=${{github.event}} bundle exec rake benchmark:archive
+          GH_REF=${{github.head_ref}} GH_EVENT=${{github.event_name}} bundle exec rake benchmark:archive
+
+      - name: Upload benchmark metrics
+        run: |
+          GH_REF=${{github.head_ref}} GH_EVENT=${{github.event_name}} bundle exec rake benchmark:put-metrics

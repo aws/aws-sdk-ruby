@@ -7,19 +7,6 @@ Dir.glob("gems/*/lib") do |gem_path|
   $LOAD_PATH.unshift(File.expand_path(gem_path))
 end
 
-benchmark_data = {'version' => '1.0'}
-begin
-  benchmark_data['commit_id'] = `git rev-parse HEAD`.strip
-rescue
-  # unable to get a commit, maybe run outside of a git repo.  Skip
-end
-benchmark_data['ruby_engine'] = RUBY_ENGINE
-benchmark_data['ruby_engine_version'] = RUBY_ENGINE_VERSION
-benchmark_data['ruby_version'] = RUBY_VERSION
-
-benchmark_data['host_cpu'] = RbConfig::CONFIG['host_cpu']
-benchmark_data['host_os'] = RbConfig::CONFIG['host_os']
-
 def monotonic_milliseconds
   if defined?(Process::CLOCK_MONOTONIC)
     Process.clock_gettime(Process::CLOCK_MONOTONIC, :microsecond) / 1000.0
@@ -76,8 +63,8 @@ def benchmark_require(gem, data)
 
   data.merge!(fork_run do |out|
     r = ::MemoryProfiler.report { require gem }
-    out[:require_mem_retained] = r.total_retained_memsize
-    out[:require_mem_allocated] = r.total_allocated_memsize
+    out[:require_mem_retained_kb] = r.total_retained_memsize / 1024.0
+    out[:require_mem_allocated_kb] = r.total_allocated_memsize / 1024.0
   end)
 end
 
@@ -86,13 +73,12 @@ def benchmark_client(gem, module_name, data)
     require gem
     client_klass = Aws.const_get(module_name).const_get(:Client)
     r = ::MemoryProfiler.report { client_klass.new(stub_responses: true) }
-    out[:client_mem_retained] = r.total_retained_memsize
-    out[:client_mem_allocated] = r.total_allocated_memsize
+    out[:client_mem_retained_kb] = r.total_retained_memsize / 1024.0
+    out[:client_mem_allocated_kb] = r.total_allocated_memsize / 1024.0
 
-    r = benchmark(1000) do
+    out[:client_init_ms] = benchmark(150) do
       client_klass.new(stub_responses: true)
     end
-    out[:client_init_p90_ms] = percentile(r, 90)
   end)
 end
 
@@ -100,16 +86,16 @@ end
 # It MUST be done after ALL testing of gem loads/client creates
 def run_benchmarks(gem, module_name, benchmarks, data)
   require gem
-  data['benchmarks'] ||= {}
   benchmarks.each do |test_name, test_def|
     client_klass = Aws.const_get(module_name).const_get(:Client)
     client = client_klass.new(stub_responses: true)
     req = test_def[:setup].call(client)
-    n = test_def[:n] || 1000
-    values = benchmark(n) do
+    n = test_def[:n] || 150
+    # cloudwatch has a values limit of 150
+    values = benchmark([150, n].min) do
       test_def[:test].call(client, req)
     end
-    data['benchmarks']["#{test_name}_p90_ms"] = percentile(values, 90)
+    data["#{test_name}_ms"] = values
   end
 end
 
@@ -161,6 +147,24 @@ benchmark_gems = {
   }
 }
 
+report_data = {'version' => '1.0'}
+begin
+  report_data['commit_id'] = `git rev-parse HEAD`.strip
+rescue
+  # unable to get a commit, maybe run outside of a git repo.  Skip
+end
+report_data['ruby_engine'] = RUBY_ENGINE
+report_data['ruby_engine_version'] = RUBY_ENGINE_VERSION
+report_data['ruby_version'] = RUBY_VERSION
+
+report_data['host_cpu'] = RbConfig::CONFIG['host_cpu']
+report_data['host_os'] = RbConfig::CONFIG['host_os']
+
+report_data['timestamp'] = Time.now.to_i
+
+report_data["benchmark"] = {}
+benchmark_data = report_data["benchmark"]
+
 puts "Benchmarking gem size/requires/client initialization"
 Dir.mktmpdir("ruby-sdk-benchmark") do |tmpdir|
   benchmark_gems.each do |gem, benchmark_def|
@@ -168,7 +172,7 @@ Dir.mktmpdir("ruby-sdk-benchmark") do |tmpdir|
     benchmark_data[gem] ||= {}
     Dir.chdir("gems/#{gem}") do
       `gem build #{gem}.gemspec -o #{tmpdir}/#{gem}.gem`
-      benchmark_data[gem]['gem_size'] = File.size("#{tmpdir}/#{gem}.gem")
+      benchmark_data[gem]['gem_size_kb'] = File.size("#{tmpdir}/#{gem}.gem") / 1024.0
       benchmark_data[gem]['gem_version'] = File.read("VERSION").strip
     end
     benchmark_require(gem, benchmark_data[gem])
@@ -190,6 +194,6 @@ benchmark_gems.each do |gem, benchmark_def|
   end
 end
 
-puts benchmark_data
-File.write("benchmark_report.json", JSON.pretty_generate(benchmark_data))
+puts report_data
+File.write("benchmark_report.json", JSON.pretty_generate(report_data))
 
