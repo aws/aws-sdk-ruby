@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Updated `checksum_algorithm` plugin with a permanent fix to pass JRuby CI.
+
 3.173.0 (2023-05-18)
 ------------------
 
