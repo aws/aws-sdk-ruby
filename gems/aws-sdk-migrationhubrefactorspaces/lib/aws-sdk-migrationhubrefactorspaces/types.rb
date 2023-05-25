@@ -79,8 +79,16 @@ module Aws::MigrationHubRefactorSpaces
     #   If the value is set to `PRIVATE` in the request, this creates a
     #   private API endpoint that is isolated from the public internet. The
     #   private endpoint can only be accessed by using Amazon Virtual
-    #   Private Cloud (Amazon VPC) endpoints for Amazon API Gateway that
-    #   have been granted access.
+    #   Private Cloud (Amazon VPC) interface endpoints for the Amazon API
+    #   Gateway that has been granted access. For more information about
+    #   creating a private connection with Refactor Spaces and interface
+    #   endpoint (Amazon Web Services PrivateLink) availability, see [Access
+    #   Refactor Spaces using an interface endpoint (Amazon Web Services
+    #   PrivateLink)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/userguide/vpc-interface-endpoints.html
     #   @return [String]
     #
     # @!attribute [rw] stage_name
@@ -1414,6 +1422,11 @@ module Aws::MigrationHubRefactorSpaces
       include Aws::Structure
     end
 
+    # @!attribute [rw] append_source_path
+    #   If set to `true`, this option appends the source path to the service
+    #   URL endpoint.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] application_id
     #   The ID of the application that the route belongs to.
     #   @return [String]
@@ -1481,8 +1494,11 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [String]
     #
     # @!attribute [rw] source_path
-    #   The path to use to match traffic. Paths must start with `/` and are
-    #   relative to the base of the application.
+    #   This is the path that Refactor Spaces uses to match traffic. Paths
+    #   must start with `/` and are relative to the base of the application.
+    #   To use path parameters in the source path, add a variable in curly
+    #   braces. For example, the resource path \\\{user\\} represents a path
+    #   parameter called 'user'.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -1498,6 +1514,7 @@ module Aws::MigrationHubRefactorSpaces
     # @see http://docs.aws.amazon.com/goto/WebAPI/migration-hub-refactor-spaces-2021-10-26/GetRouteResponse AWS API Documentation
     #
     class GetRouteResponse < Struct.new(
+      :append_source_path,
       :application_id,
       :arn,
       :created_by_account_id,
@@ -1992,6 +2009,11 @@ module Aws::MigrationHubRefactorSpaces
 
     # The summary information for the routes as a response to `ListRoutes`.
     #
+    # @!attribute [rw] append_source_path
+    #   If set to `true`, this option appends the source path to the service
+    #   URL endpoint.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] application_id
     #   The unique identifier of the application.
     #   @return [String]
@@ -2053,8 +2075,11 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [String]
     #
     # @!attribute [rw] source_path
-    #   The path to use to match traffic. Paths must start with `/` and are
-    #   relative to the base of the application.
+    #   This is the path that Refactor Spaces uses to match traffic. Paths
+    #   must start with `/` and are relative to the base of the application.
+    #   To use path parameters in the source path, add a variable in curly
+    #   braces. For example, the resource path \\\{user\\} represents a path
+    #   parameter called 'user'.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -2068,6 +2093,7 @@ module Aws::MigrationHubRefactorSpaces
     # @see http://docs.aws.amazon.com/goto/WebAPI/migration-hub-refactor-spaces-2021-10-26/RouteSummary AWS API Documentation
     #
     class RouteSummary < Struct.new(
+      :append_source_path,
       :application_id,
       :arn,
       :created_by_account_id,
@@ -2371,6 +2397,11 @@ module Aws::MigrationHubRefactorSpaces
     #   after the route is created.
     #   @return [String]
     #
+    # @!attribute [rw] append_source_path
+    #   If set to `true`, this option appends the source path to the service
+    #   URL endpoint.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] include_child_paths
     #   Indicates whether to match all subpaths of the given source path. If
     #   this value is `false`, requests must match the source path exactly
@@ -2384,14 +2415,18 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [Array<String>]
     #
     # @!attribute [rw] source_path
-    #   The path to use to match traffic. Paths must start with `/` and are
-    #   relative to the base of the application.
+    #   This is the path that Refactor Spaces uses to match traffic. Paths
+    #   must start with `/` and are relative to the base of the application.
+    #   To use path parameters in the source path, add a variable in curly
+    #   braces. For example, the resource path \\\{user\\} represents a path
+    #   parameter called 'user'.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/migration-hub-refactor-spaces-2021-10-26/UriPathRouteInput AWS API Documentation
     #
     class UriPathRouteInput < Struct.new(
       :activation_state,
+      :append_source_path,
       :include_child_paths,
       :methods,
       :source_path)

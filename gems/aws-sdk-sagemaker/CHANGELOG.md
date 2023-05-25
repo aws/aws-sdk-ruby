@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.181.0 (2023-05-25)
+------------------
+
+* Feature - Amazon SageMaker Automatic Model Tuning now supports enabling Autotune for tuning jobs which can choose tuning job configurations.
+
 1.180.0 (2023-05-24)
 ------------------
 

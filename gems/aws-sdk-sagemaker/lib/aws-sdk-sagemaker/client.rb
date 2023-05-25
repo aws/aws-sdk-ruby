@@ -3510,6 +3510,40 @@ module Aws::SageMaker
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
+    # @option params [Types::Autotune] :autotune
+    #   Configures SageMaker Automatic model tuning (AMT) to automatically
+    #   find optimal parameters for the following fields:
+    #
+    #   * [ParameterRanges][1]: The names and ranges of parameters that a
+    #     hyperparameter tuning job can optimize.
+    #
+    #   * [ResourceLimits][2]: The maximum resources that can be used for a
+    #     training job. These resources include the maximum number of training
+    #     jobs, the maximum runtime of a tuning job, and the maximum number of
+    #     training jobs to run at the same time.
+    #
+    #   * [TrainingJobEarlyStoppingType][3]: A flag that specifies whether or
+    #     not to use early stopping for training jobs launched by a
+    #     hyperparameter tuning job.
+    #
+    #   * [RetryStrategy][4]: The number of times to retry a training job.
+    #
+    #   * [Strategy][5]: Specifies how hyperparameter tuning chooses the
+    #     combinations of hyperparameter values to use for the training jobs
+    #     that it launches.
+    #
+    #   * [ConvergenceDetected][6]: A flag to indicate that Automatic model
+    #     tuning (AMT) has detected model convergence.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html#sagemaker-Type-HyperParameterTuningJobConfig-ParameterRanges
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ResourceLimits.html
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html#sagemaker-Type-HyperParameterTuningJobConfig-TrainingJobEarlyStoppingType
+    #   [4]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-RetryStrategy
+    #   [5]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html
+    #   [6]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ConvergenceDetected.html
+    #
     # @return [Types::CreateHyperParameterTuningJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateHyperParameterTuningJobResponse#hyper_parameter_tuning_job_arn #hyper_parameter_tuning_job_arn} => String
@@ -3558,6 +3592,12 @@ module Aws::SageMaker
     #             values: ["ParameterValue"], # required
     #           },
     #         ],
+    #         auto_parameters: [
+    #           {
+    #             name: "ParameterKey", # required
+    #             value_hint: "ParameterValue", # required
+    #           },
+    #         ],
     #       },
     #       training_job_early_stopping_type: "Off", # accepts Off, Auto
     #       tuning_job_completion_criteria: {
@@ -3598,6 +3638,12 @@ module Aws::SageMaker
     #           {
     #             name: "ParameterKey", # required
     #             values: ["ParameterValue"], # required
+    #           },
+    #         ],
+    #         auto_parameters: [
+    #           {
+    #             name: "ParameterKey", # required
+    #             value_hint: "ParameterValue", # required
     #           },
     #         ],
     #       },
@@ -3727,6 +3773,12 @@ module Aws::SageMaker
     #               values: ["ParameterValue"], # required
     #             },
     #           ],
+    #           auto_parameters: [
+    #             {
+    #               name: "ParameterKey", # required
+    #               value_hint: "ParameterValue", # required
+    #             },
+    #           ],
     #         },
     #         static_hyper_parameters: {
     #           "HyperParameterKey" => "HyperParameterValue",
@@ -3839,6 +3891,9 @@ module Aws::SageMaker
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     autotune: {
+    #       mode: "Enabled", # required, accepts Enabled
+    #     },
     #   })
     #
     # @example Response structure
@@ -11495,7 +11550,9 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Gets a description of a hyperparameter tuning job.
+    # Returns a description of a hyperparameter tuning job, depending on the
+    # fields selected. These fields can include the name, Amazon Resource
+    # Name (ARN), job status of your tuning job and more.
     #
     # @option params [required, String] :hyper_parameter_tuning_job_name
     #   The name of the tuning job.
@@ -11519,6 +11576,7 @@ module Aws::SageMaker
     #   * {Types::DescribeHyperParameterTuningJobResponse#failure_reason #failure_reason} => String
     #   * {Types::DescribeHyperParameterTuningJobResponse#tuning_job_completion_details #tuning_job_completion_details} => Types::HyperParameterTuningJobCompletionDetails
     #   * {Types::DescribeHyperParameterTuningJobResponse#consumed_resources #consumed_resources} => Types::HyperParameterTuningJobConsumedResources
+    #   * {Types::DescribeHyperParameterTuningJobResponse#autotune #autotune} => Types::Autotune
     #
     # @example Request syntax with placeholder values
     #
@@ -11552,6 +11610,9 @@ module Aws::SageMaker
     #   resp.hyper_parameter_tuning_job_config.parameter_ranges.categorical_parameter_ranges[0].name #=> String
     #   resp.hyper_parameter_tuning_job_config.parameter_ranges.categorical_parameter_ranges[0].values #=> Array
     #   resp.hyper_parameter_tuning_job_config.parameter_ranges.categorical_parameter_ranges[0].values[0] #=> String
+    #   resp.hyper_parameter_tuning_job_config.parameter_ranges.auto_parameters #=> Array
+    #   resp.hyper_parameter_tuning_job_config.parameter_ranges.auto_parameters[0].name #=> String
+    #   resp.hyper_parameter_tuning_job_config.parameter_ranges.auto_parameters[0].value_hint #=> String
     #   resp.hyper_parameter_tuning_job_config.training_job_early_stopping_type #=> String, one of "Off", "Auto"
     #   resp.hyper_parameter_tuning_job_config.tuning_job_completion_criteria.target_objective_metric_value #=> Float
     #   resp.hyper_parameter_tuning_job_config.tuning_job_completion_criteria.best_objective_not_improving.max_number_of_training_jobs_not_improving #=> Integer
@@ -11574,6 +11635,9 @@ module Aws::SageMaker
     #   resp.training_job_definition.hyper_parameter_ranges.categorical_parameter_ranges[0].name #=> String
     #   resp.training_job_definition.hyper_parameter_ranges.categorical_parameter_ranges[0].values #=> Array
     #   resp.training_job_definition.hyper_parameter_ranges.categorical_parameter_ranges[0].values[0] #=> String
+    #   resp.training_job_definition.hyper_parameter_ranges.auto_parameters #=> Array
+    #   resp.training_job_definition.hyper_parameter_ranges.auto_parameters[0].name #=> String
+    #   resp.training_job_definition.hyper_parameter_ranges.auto_parameters[0].value_hint #=> String
     #   resp.training_job_definition.static_hyper_parameters #=> Hash
     #   resp.training_job_definition.static_hyper_parameters["HyperParameterKey"] #=> String
     #   resp.training_job_definition.algorithm_specification.training_image #=> String
@@ -11653,6 +11717,9 @@ module Aws::SageMaker
     #   resp.training_job_definitions[0].hyper_parameter_ranges.categorical_parameter_ranges[0].name #=> String
     #   resp.training_job_definitions[0].hyper_parameter_ranges.categorical_parameter_ranges[0].values #=> Array
     #   resp.training_job_definitions[0].hyper_parameter_ranges.categorical_parameter_ranges[0].values[0] #=> String
+    #   resp.training_job_definitions[0].hyper_parameter_ranges.auto_parameters #=> Array
+    #   resp.training_job_definitions[0].hyper_parameter_ranges.auto_parameters[0].name #=> String
+    #   resp.training_job_definitions[0].hyper_parameter_ranges.auto_parameters[0].value_hint #=> String
     #   resp.training_job_definitions[0].static_hyper_parameters #=> Hash
     #   resp.training_job_definitions[0].static_hyper_parameters["HyperParameterKey"] #=> String
     #   resp.training_job_definitions[0].algorithm_specification.training_image #=> String
@@ -11763,6 +11830,7 @@ module Aws::SageMaker
     #   resp.tuning_job_completion_details.number_of_training_jobs_objective_not_improving #=> Integer
     #   resp.tuning_job_completion_details.convergence_detected_time #=> Time
     #   resp.consumed_resources.runtime_in_seconds #=> Integer
+    #   resp.autotune.mode #=> String, one of "Enabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHyperParameterTuningJob AWS API Documentation
     #
@@ -23516,7 +23584,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.180.0'
+      context[:gem_version] = '1.181.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

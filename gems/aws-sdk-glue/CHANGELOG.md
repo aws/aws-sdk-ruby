@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.138.0 (2023-05-25)
+------------------
+
+* Feature - Added ability to create data quality rulesets for shared, cross-account Glue Data Catalog tables. Added support for dataset comparison rules through a new parameter called AdditionalDataSources. Enhanced the data quality results with a map containing profiled metric values.
+
 1.137.0 (2023-05-16)
 ------------------
 

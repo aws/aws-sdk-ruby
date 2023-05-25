@@ -155,14 +155,14 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Specifies an Amazon Redshift data store.
+    # Specifies an optional value when connecting to the Redshift cluster.
     #
     # @!attribute [rw] key
-    #   The key when specifying a key-value pair.
+    #   The key for the additional connection option.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value when specifying a key-value pair.
+    #   The value for the additional connection option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AmazonRedshiftAdvancedOption AWS API Documentation
@@ -2214,6 +2214,11 @@ module Aws::Glue
     #   Specifies a target that writes to a data target in Amazon Redshift.
     #   @return [Types::AmazonRedshiftTarget]
     #
+    # @!attribute [rw] evaluate_data_quality_multi_frame
+    #   Specifies your data quality evaluation criteria. Allows multiple
+    #   input data and returns a collection of Dynamic Frames.
+    #   @return [Types::EvaluateDataQualityMultiFrame]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CodeGenConfigurationNode AWS API Documentation
     #
     class CodeGenConfigurationNode < Struct.new(
@@ -2281,7 +2286,8 @@ module Aws::Glue
       :s3_delta_catalog_target,
       :s3_delta_direct_target,
       :amazon_redshift_source,
-      :amazon_redshift_target)
+      :amazon_redshift_target,
+      :evaluate_data_quality_multi_frame)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5851,13 +5857,18 @@ module Aws::Glue
     #   A pass or fail status for the rule.
     #   @return [String]
     #
+    # @!attribute [rw] evaluated_metrics
+    #   A map of metrics associated with the evaluation of the rule.
+    #   @return [Hash<String,Float>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityRuleResult AWS API Documentation
     #
     class DataQualityRuleResult < Struct.new(
       :name,
       :description,
       :evaluation_message,
-      :result)
+      :result,
+      :evaluated_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6015,11 +6026,16 @@ module Aws::Glue
     #   The name of the database where the Glue table exists.
     #   @return [String]
     #
+    # @!attribute [rw] catalog_id
+    #   The catalog id where the Glue table exists.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityTargetTable AWS API Documentation
     #
     class DataQualityTargetTable < Struct.new(
       :table_name,
-      :database_name)
+      :database_name,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7759,6 +7775,52 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies your data quality evaluation criteria.
+    #
+    # @!attribute [rw] name
+    #   The name of the data quality evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The inputs of your data quality evaluation. The first input in this
+    #   list is the primary data source.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] additional_data_sources
+    #   The aliases of all data sources except primary.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] ruleset
+    #   The ruleset for your data quality evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] publishing_options
+    #   Options to configure how your results are published.
+    #   @return [Types::DQResultsPublishingOptions]
+    #
+    # @!attribute [rw] additional_options
+    #   Options to configure runtime behavior of the transform.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] stop_job_on_failure_options
+    #   Options to configure how your job will stop if your data quality
+    #   evaluation fails.
+    #   @return [Types::DQStopJobOnFailureOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/EvaluateDataQualityMultiFrame AWS API Documentation
+    #
+    class EvaluateDataQualityMultiFrame < Struct.new(
+      :name,
+      :inputs,
+      :additional_data_sources,
+      :ruleset,
+      :publishing_options,
+      :additional_options,
+      :stop_job_on_failure_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Evaluation metrics provide an estimate of the quality of your machine
     # learning transform.
     #
@@ -9008,6 +9070,11 @@ module Aws::Glue
     #   A list of result IDs for the data quality results for the run.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] additional_data_sources
+    #   A map of reference strings to additional data sources you can
+    #   specify for an evaluation run.
+    #   @return [Hash<String,Types::DataSource>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRulesetEvaluationRunResponse AWS API Documentation
     #
     class GetDataQualityRulesetEvaluationRunResponse < Struct.new(
@@ -9024,7 +9091,8 @@ module Aws::Glue
       :completed_on,
       :execution_time,
       :ruleset_names,
-      :result_ids)
+      :result_ids,
+      :additional_data_sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18167,6 +18235,11 @@ module Aws::Glue
     #   A list of ruleset names.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] additional_data_sources
+    #   A map of reference strings to additional data sources you can
+    #   specify for an evaluation run.
+    #   @return [Hash<String,Types::DataSource>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartDataQualityRulesetEvaluationRunRequest AWS API Documentation
     #
     class StartDataQualityRulesetEvaluationRunRequest < Struct.new(
@@ -18176,7 +18249,8 @@ module Aws::Glue
       :timeout,
       :client_token,
       :additional_run_options,
-      :ruleset_names)
+      :ruleset_names,
+      :additional_data_sources)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -912,6 +912,8 @@ module Aws::Glue
     #   resp.results[0].rule_results[0].description #=> String
     #   resp.results[0].rule_results[0].evaluation_message #=> String
     #   resp.results[0].rule_results[0].result #=> String, one of "PASS", "FAIL", "ERROR"
+    #   resp.results[0].rule_results[0].evaluated_metrics #=> Hash
+    #   resp.results[0].rule_results[0].evaluated_metrics["NameString"] #=> Float
     #   resp.results_not_found #=> Array
     #   resp.results_not_found[0] #=> String
     #
@@ -1775,6 +1777,19 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.selected_columns[0].description #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.inputs #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_data_sources #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_data_sources["NodeName"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.ruleset #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.evaluation_context #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.results_s3_prefix #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.cloud_watch_metrics_enabled #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.results_publishing_enabled #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_options["AdditionalOptionKeys"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.stop_job_on_failure_options.stop_job_on_failure_timing #=> String, one of "Immediate", "AfterDataLoad"
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.jobs[0].source_control_details.repository #=> String
@@ -2871,6 +2886,7 @@ module Aws::Glue
     #     target_table: {
     #       table_name: "NameString", # required
     #       database_name: "NameString", # required
+    #       catalog_id: "NameString",
     #     },
     #     client_token: "HashString",
     #   })
@@ -6247,6 +6263,8 @@ module Aws::Glue
     #   resp.rule_results[0].description #=> String
     #   resp.rule_results[0].evaluation_message #=> String
     #   resp.rule_results[0].result #=> String, one of "PASS", "FAIL", "ERROR"
+    #   resp.rule_results[0].evaluated_metrics #=> Hash
+    #   resp.rule_results[0].evaluated_metrics["NameString"] #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityResult AWS API Documentation
     #
@@ -6342,6 +6360,7 @@ module Aws::Glue
     #   resp.ruleset #=> String
     #   resp.target_table.table_name #=> String
     #   resp.target_table.database_name #=> String
+    #   resp.target_table.catalog_id #=> String
     #   resp.created_on #=> Time
     #   resp.last_modified_on #=> Time
     #   resp.recommendation_run_id #=> String
@@ -6377,6 +6396,7 @@ module Aws::Glue
     #   * {Types::GetDataQualityRulesetEvaluationRunResponse#execution_time #execution_time} => Integer
     #   * {Types::GetDataQualityRulesetEvaluationRunResponse#ruleset_names #ruleset_names} => Array&lt;String&gt;
     #   * {Types::GetDataQualityRulesetEvaluationRunResponse#result_ids #result_ids} => Array&lt;String&gt;
+    #   * {Types::GetDataQualityRulesetEvaluationRunResponse#additional_data_sources #additional_data_sources} => Hash&lt;String,Types::DataSource&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -6408,6 +6428,13 @@ module Aws::Glue
     #   resp.ruleset_names[0] #=> String
     #   resp.result_ids #=> Array
     #   resp.result_ids[0] #=> String
+    #   resp.additional_data_sources #=> Hash
+    #   resp.additional_data_sources["NameString"].glue_table.database_name #=> String
+    #   resp.additional_data_sources["NameString"].glue_table.table_name #=> String
+    #   resp.additional_data_sources["NameString"].glue_table.catalog_id #=> String
+    #   resp.additional_data_sources["NameString"].glue_table.connection_name #=> String
+    #   resp.additional_data_sources["NameString"].glue_table.additional_options #=> Hash
+    #   resp.additional_data_sources["NameString"].glue_table.additional_options["NameString"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRulesetEvaluationRun AWS API Documentation
     #
@@ -7491,6 +7518,19 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.selected_columns[0].description #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.inputs #=> Array
     #   resp.job.code_gen_configuration_nodes["NodeId"].amazon_redshift_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_data_sources #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_data_sources["NodeName"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.ruleset #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.evaluation_context #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.results_s3_prefix #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.cloud_watch_metrics_enabled #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.results_publishing_enabled #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_options #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_options["AdditionalOptionKeys"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.stop_job_on_failure_options.stop_job_on_failure_timing #=> String, one of "Immediate", "AfterDataLoad"
     #   resp.job.execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.job.source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.job.source_control_details.repository #=> String
@@ -8479,6 +8519,19 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.data.selected_columns[0].description #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.inputs #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].amazon_redshift_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_data_sources #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_data_sources["NodeName"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.ruleset #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.evaluation_context #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.results_s3_prefix #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.cloud_watch_metrics_enabled #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.publishing_options.results_publishing_enabled #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.additional_options["AdditionalOptionKeys"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].evaluate_data_quality_multi_frame.stop_job_on_failure_options.stop_job_on_failure_timing #=> String, one of "Immediate", "AfterDataLoad"
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.jobs[0].source_control_details.repository #=> String
@@ -12046,6 +12099,7 @@ module Aws::Glue
     #       target_table: {
     #         table_name: "NameString", # required
     #         database_name: "NameString", # required
+    #         catalog_id: "NameString",
     #       },
     #     },
     #     tags: {
@@ -12062,6 +12116,7 @@ module Aws::Glue
     #   resp.rulesets[0].last_modified_on #=> Time
     #   resp.rulesets[0].target_table.table_name #=> String
     #   resp.rulesets[0].target_table.database_name #=> String
+    #   resp.rulesets[0].target_table.catalog_id #=> String
     #   resp.rulesets[0].recommendation_run_id #=> String
     #   resp.rulesets[0].rule_count #=> Integer
     #   resp.next_token #=> String
@@ -13510,6 +13565,10 @@ module Aws::Glue
     # @option params [required, Array<String>] :ruleset_names
     #   A list of ruleset names.
     #
+    # @option params [Hash<String,Types::DataSource>] :additional_data_sources
+    #   A map of reference strings to additional data sources you can specify
+    #   for an evaluation run.
+    #
     # @return [Types::StartDataQualityRulesetEvaluationRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDataQualityRulesetEvaluationRunResponse#run_id #run_id} => String
@@ -13537,6 +13596,19 @@ module Aws::Glue
     #       results_s3_prefix: "UriString",
     #     },
     #     ruleset_names: ["NameString"], # required
+    #     additional_data_sources: {
+    #       "NameString" => {
+    #         glue_table: { # required
+    #           database_name: "NameString", # required
+    #           table_name: "NameString", # required
+    #           catalog_id: "NameString",
+    #           connection_name: "NameString",
+    #           additional_options: {
+    #             "NameString" => "DescriptionString",
+    #           },
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -15752,7 +15824,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.137.0'
+      context[:gem_version] = '1.138.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

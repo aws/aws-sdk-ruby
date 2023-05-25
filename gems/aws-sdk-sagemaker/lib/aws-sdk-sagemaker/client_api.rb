@@ -143,7 +143,11 @@ module Aws::SageMaker
     AutoMLSecurityConfig = Shapes::StructureShape.new(name: 'AutoMLSecurityConfig')
     AutoMLSortBy = Shapes::StringShape.new(name: 'AutoMLSortBy')
     AutoMLSortOrder = Shapes::StringShape.new(name: 'AutoMLSortOrder')
+    AutoParameter = Shapes::StructureShape.new(name: 'AutoParameter')
+    AutoParameters = Shapes::ListShape.new(name: 'AutoParameters')
     AutoRollbackConfig = Shapes::StructureShape.new(name: 'AutoRollbackConfig')
+    Autotune = Shapes::StructureShape.new(name: 'Autotune')
+    AutotuneMode = Shapes::StringShape.new(name: 'AutotuneMode')
     AwsManagedHumanLoopRequestSource = Shapes::StringShape.new(name: 'AwsManagedHumanLoopRequestSource')
     BatchDataCaptureConfig = Shapes::StructureShape.new(name: 'BatchDataCaptureConfig')
     BatchDescribeModelPackageError = Shapes::StructureShape.new(name: 'BatchDescribeModelPackageError')
@@ -2334,8 +2338,17 @@ module Aws::SageMaker
     AutoMLSecurityConfig.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     AutoMLSecurityConfig.struct_class = Types::AutoMLSecurityConfig
 
+    AutoParameter.add_member(:name, Shapes::ShapeRef.new(shape: ParameterKey, required: true, location_name: "Name"))
+    AutoParameter.add_member(:value_hint, Shapes::ShapeRef.new(shape: ParameterValue, required: true, location_name: "ValueHint"))
+    AutoParameter.struct_class = Types::AutoParameter
+
+    AutoParameters.member = Shapes::ShapeRef.new(shape: AutoParameter)
+
     AutoRollbackConfig.add_member(:alarms, Shapes::ShapeRef.new(shape: AlarmList, location_name: "Alarms"))
     AutoRollbackConfig.struct_class = Types::AutoRollbackConfig
+
+    Autotune.add_member(:mode, Shapes::ShapeRef.new(shape: AutotuneMode, required: true, location_name: "Mode"))
+    Autotune.struct_class = Types::Autotune
 
     BatchDataCaptureConfig.add_member(:destination_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "DestinationS3Uri"))
     BatchDataCaptureConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
@@ -2890,6 +2903,7 @@ module Aws::SageMaker
     CreateHyperParameterTuningJobRequest.add_member(:training_job_definitions, Shapes::ShapeRef.new(shape: HyperParameterTrainingJobDefinitions, location_name: "TrainingJobDefinitions"))
     CreateHyperParameterTuningJobRequest.add_member(:warm_start_config, Shapes::ShapeRef.new(shape: HyperParameterTuningJobWarmStartConfig, location_name: "WarmStartConfig"))
     CreateHyperParameterTuningJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateHyperParameterTuningJobRequest.add_member(:autotune, Shapes::ShapeRef.new(shape: Autotune, location_name: "Autotune"))
     CreateHyperParameterTuningJobRequest.struct_class = Types::CreateHyperParameterTuningJobRequest
 
     CreateHyperParameterTuningJobResponse.add_member(:hyper_parameter_tuning_job_arn, Shapes::ShapeRef.new(shape: HyperParameterTuningJobArn, required: true, location_name: "HyperParameterTuningJobArn"))
@@ -4075,6 +4089,7 @@ module Aws::SageMaker
     DescribeHyperParameterTuningJobResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     DescribeHyperParameterTuningJobResponse.add_member(:tuning_job_completion_details, Shapes::ShapeRef.new(shape: HyperParameterTuningJobCompletionDetails, location_name: "TuningJobCompletionDetails"))
     DescribeHyperParameterTuningJobResponse.add_member(:consumed_resources, Shapes::ShapeRef.new(shape: HyperParameterTuningJobConsumedResources, location_name: "ConsumedResources"))
+    DescribeHyperParameterTuningJobResponse.add_member(:autotune, Shapes::ShapeRef.new(shape: Autotune, location_name: "Autotune"))
     DescribeHyperParameterTuningJobResponse.struct_class = Types::DescribeHyperParameterTuningJobResponse
 
     DescribeImageRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: ImageName, required: true, location_name: "ImageName"))
@@ -7316,6 +7331,7 @@ module Aws::SageMaker
     ParameterRanges.add_member(:integer_parameter_ranges, Shapes::ShapeRef.new(shape: IntegerParameterRanges, location_name: "IntegerParameterRanges"))
     ParameterRanges.add_member(:continuous_parameter_ranges, Shapes::ShapeRef.new(shape: ContinuousParameterRanges, location_name: "ContinuousParameterRanges"))
     ParameterRanges.add_member(:categorical_parameter_ranges, Shapes::ShapeRef.new(shape: CategoricalParameterRanges, location_name: "CategoricalParameterRanges"))
+    ParameterRanges.add_member(:auto_parameters, Shapes::ShapeRef.new(shape: AutoParameters, location_name: "AutoParameters"))
     ParameterRanges.struct_class = Types::ParameterRanges
 
     ParameterValues.member = Shapes::ShapeRef.new(shape: ParameterValue)
