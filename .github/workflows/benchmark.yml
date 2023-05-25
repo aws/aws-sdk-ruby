@@ -39,7 +39,7 @@ jobs:
       - name: Benchmark
         env:
           JRUBY_OPTS: -J-Xmx4g
-        run: bundle exec rake benchmark
+        run: EXECUTION_ENV=github-action bundle exec rake benchmark
 
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v2

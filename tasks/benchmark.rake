@@ -32,12 +32,15 @@ task 'benchmark:put-metrics' do
 
   event = ENV['GH_EVENT'] == 'pull_request' ? 'pr' : 'release'
   report = JSON.parse(File.read('benchmark_report.json'))
-  target = report['ruby_version'] # TODO: How do we want to capture the environment
+  target = report['ruby_engine'] + "-" + report['ruby_version'].split('.').first(2).join('.') # TODO: How do we want to capture the environment
 
   # common dimensions
   report_dims = {
     event: event,
-    target: target
+    target: target,
+    os: report['os'],
+    cpu: report['cpu'],
+    env: report['execution_env']
   }
 
   def put_metric(client, dims, timestamp, k, v)
@@ -59,14 +62,18 @@ task 'benchmark:put-metrics' do
     }
 
     case v
-    when Numeric then metric_data[:value] = v
-    when Array then metric_data[:values] = v
+    when Numeric
+      metric_data[:value] = v
+      client.put_metric_data(namespace: "sdk-performance", metric_data: [metric_data])
+    when Array
+      # cloudwatch has a limit of 150 values
+      v.each_slice(150) do |values|
+        metric_data[:values] = values
+        client.put_metric_data(namespace: "sdk-performance", metric_data: [metric_data])
+      end
     else
       raise 'Unknown type for metric value'
     end
-
-
-    client.put_metric_data(namespace: "sdk-performance", metric_data: [metric_data])
   end
 
   puts "Uploading benchmarking metrics"
@@ -80,4 +87,5 @@ task 'benchmark:put-metrics' do
       put_metric(client, dims, report['timestamp'] || Time.now, k, v)
     end
   end
+  puts "Benchmarking metrics uploaded"
 end
