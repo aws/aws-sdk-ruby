@@ -1,5 +1,5 @@
 require 'tmpdir'
-require 'memory_profiler'
+require 'memory_profiler' # MemoryProfiler does not work for JRuby
 require 'json'
 
 # Modify load path to include all of our gems from local repo
@@ -70,9 +70,11 @@ def benchmark_require(gem, data)
   end)
 
   data.merge!(fork_run do |out|
-    r = ::MemoryProfiler.report { require gem }
-    out[:require_mem_retained_kb] = r.total_retained_memsize / 1024.0
-    out[:require_mem_allocated_kb] = r.total_allocated_memsize / 1024.0
+    unless defined?(JRUBY_VERSION)
+      r = ::MemoryProfiler.report { require gem }
+      out[:require_mem_retained_kb] = r.total_retained_memsize / 1024.0
+      out[:require_mem_allocated_kb] = r.total_allocated_memsize / 1024.0
+    end
   end)
 end
 
@@ -80,9 +82,11 @@ def benchmark_client(gem, module_name, data)
   data.merge!(fork_run do |out|
     require gem
     client_klass = Aws.const_get(module_name).const_get(:Client)
-    r = ::MemoryProfiler.report { client_klass.new(stub_responses: true) }
-    out[:client_mem_retained_kb] = r.total_retained_memsize / 1024.0
-    out[:client_mem_allocated_kb] = r.total_allocated_memsize / 1024.0
+    unless defined?(JRUBY_VERSION)
+      r = ::MemoryProfiler.report { client_klass.new(stub_responses: true) }
+      out[:client_mem_retained_kb] = r.total_retained_memsize / 1024.0
+      out[:client_mem_allocated_kb] = r.total_allocated_memsize / 1024.0
+    end
 
     out[:client_init_ms] = benchmark(150) do
       client_klass.new(stub_responses: true)
