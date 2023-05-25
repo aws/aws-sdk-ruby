@@ -40,6 +40,14 @@ end
 # the block must take a single argument and will be called with an empty hash
 # any data that should be communicated back to the parent process can be written to that hash
 def fork_run(&block)
+  # fork is not supported in JRuby, for now, just run this in the same process
+  # data collected will not be as useful, but still valid for relative comparisons over time
+  if defined?(JRUBY_VERSION)
+    h = {}
+    block.call(h)
+    return h
+  end
+
   rd, wr = IO.pipe
   p1 = fork do
     h = {}
