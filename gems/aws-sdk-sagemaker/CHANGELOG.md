@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.182.0 (2023-05-26)
+------------------
+
+* Feature - Added ml.p4d and ml.inf1 as supported instance type families for SageMaker Notebook Instances.
+
 1.181.0 (2023-05-25)
 ------------------
 

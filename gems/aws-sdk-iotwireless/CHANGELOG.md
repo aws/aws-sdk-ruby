@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2023-05-26)
+------------------
+
+* Feature - Add Multicast Group support in Network Analyzer Configuration.
+
 1.32.0 (2023-04-17)
 ------------------
 
