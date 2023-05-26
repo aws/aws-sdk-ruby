@@ -87,12 +87,6 @@ def benchmark_client(gem, module_name, data)
       out[:client_mem_retained_kb] = r.total_retained_memsize / 1024.0
       out[:client_mem_allocated_kb] = r.total_allocated_memsize / 1024.0
     end
-
-    out[:client_init_ms] = benchmark(150) do
-      client_klass.new(stub_responses: true)
-    end
-    values = out[:client_init_ms]
-    puts "\t\t#{gem} client init avg: #{'%.2f' % (values.sum(0.0) / values.size)} ms"
   end)
 end
 
@@ -100,8 +94,15 @@ end
 # It MUST be done after ALL testing of gem loads/client creates
 def run_benchmarks(gem, module_name, benchmarks, data)
   require gem
+  client_klass = Aws.const_get(module_name).const_get(:Client)
+
+  data[:client_init_ms] = benchmark(300) do
+    client_klass.new(stub_responses: true)
+  end
+  values = out[:client_init_ms]
+  puts "\t\t#{gem} client init avg: #{'%.2f' % (values.sum(0.0) / values.size)} ms"
+
   benchmarks.each do |test_name, test_def|
-    client_klass = Aws.const_get(module_name).const_get(:Client)
     client = client_klass.new(stub_responses: true)
     req = test_def[:setup].call(client)
     n = test_def[:n] || 300
