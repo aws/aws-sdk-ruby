@@ -99,7 +99,7 @@ def run_benchmarks(gem, module_name, benchmarks, data)
   data[:client_init_ms] = benchmark(300) do
     client_klass.new(stub_responses: true)
   end
-  values = out[:client_init_ms]
+  values = data[:client_init_ms]
   puts "\t\t#{gem} client init avg: #{'%.2f' % (values.sum(0.0) / values.size)} ms"
 
   benchmarks.each do |test_name, test_def|
