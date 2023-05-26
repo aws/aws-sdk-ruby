@@ -127,6 +127,15 @@ def host_os
   end
 end
 
+# polyfill random_number for older versions of Ruby.
+unless Random.new.respond_to?(:random_number)
+  class Random
+    def random_number(n)
+      (rand*n).floor
+    end
+  end
+end
+
 def random_value(i=0, seed=0)
   r = Random.new(i+seed) # use the index as the seed for predictable results
   case r.random_number(5)
