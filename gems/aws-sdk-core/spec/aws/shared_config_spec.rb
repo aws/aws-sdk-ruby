@@ -338,5 +338,16 @@ module Aws
         expect(config.defaults_mode).to eq('standard')
       end
     end
+
+    context 'sdk_ua_app_id' do
+      it 'can resolve sdk_ua_app_id from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'sdk_ua_app_id'
+        )
+        expect(config.sdk_ua_app_id).to eq('peccy-service')
+      end
+    end
   end
 end

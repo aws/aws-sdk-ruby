@@ -24,11 +24,13 @@ module Aws
         def encryption_cipher(options = {})
           validate_key_for_encryption
           encryption_context = build_encryption_context(@content_encryption_schema, options)
-          key_data = @kms_client.generate_data_key(
-            key_id: @kms_key_id,
-            encryption_context: encryption_context,
-            key_spec: 'AES_256'
-          )
+          key_data = Aws::Plugins::UserAgent.feature('S3CryptoV2') do
+            @kms_client.generate_data_key(
+              key_id: @kms_key_id,
+              encryption_context: encryption_context,
+              key_spec: 'AES_256'
+            )
+          end
           cipher = Utils.aes_encryption_cipher(:GCM)
           cipher.key = key_data.plaintext
           envelope = {
@@ -83,7 +85,9 @@ module Aws
             decrypt_options[:key_id] = @kms_key_id
           end
 
-          key = @kms_client.decrypt(decrypt_options).plaintext
+          key = Aws::Plugins::UserAgent.feature('S3CryptoV2') do
+            @kms_client.decrypt(decrypt_options).plaintext
+          end
           iv = decode64(envelope['x-amz-iv'])
           block_mode =
             case cek_alg

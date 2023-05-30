@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Improve User-Agent metrics tracking.
+
 3.173.1 (2023-05-24)
 ------------------
 
