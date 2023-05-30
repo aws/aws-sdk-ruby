@@ -30,7 +30,7 @@ task 'benchmark:put-metrics' do
   $:.unshift("#{$GEMS_DIR}/aws-sdk-cloudwatch/lib")
   require 'aws-sdk-cloudwatch'
 
-  event = 'release' # ENV['GH_EVENT'] == 'pull_request' ? 'pr' : 'release'
+  event = ENV['GH_EVENT'] == 'pull_request' ? 'pr' : 'release'
   report = JSON.parse(File.read('benchmark_report.json'))
   target = report['ruby_engine'] + "-" + report['ruby_version'].split('.').first(2).join('.') # TODO: How do we want to capture the environment
 
