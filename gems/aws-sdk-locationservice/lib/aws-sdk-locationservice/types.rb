@@ -3091,7 +3091,14 @@ module Aws::LocationService
     #     Bold,Noto Sans Bold` \| `Amazon Ember Medium,Noto Sans Medium` \|
     #     `Amazon Ember Regular Italic,Noto Sans Italic` \| `Amazon Ember
     #     Condensed RC Regular,Noto Sans Regular` \| `Amazon Ember Condensed
-    #     RC Bold,Noto Sans Bold`
+    #     RC Bold,Noto Sans Bold` \| `Amazon Ember Regular,Noto Sans
+    #     Regular,Noto Sans Arabic Regular` \| `Amazon Ember Condensed RC
+    #     Bold,Noto Sans Bold,Noto Sans Arabic Condensed Bold` \| `Amazon
+    #     Ember Bold,Noto Sans Bold,Noto Sans Arabic Bold` \| `Amazon Ember
+    #     Regular Italic,Noto Sans Italic,Noto Sans Arabic Regular` \|
+    #     `Amazon Ember Condensed RC Regular,Noto Sans Regular,Noto Sans
+    #     Arabic Condensed Regular` \| `Amazon Ember Medium,Noto Sans
+    #     Medium,Noto Sans Arabic Medium`
     #
     #   ^
     #
@@ -4401,6 +4408,23 @@ module Aws::LocationService
 
     # Specifies the map tile style selected from an available provider.
     #
+    # @!attribute [rw] political_view
+    #   Specifies the political view for the style. Leave unset to not use a
+    #   political view, or, for styles that support specific political
+    #   views, you can choose a view, such as `IND` for the Indian view.
+    #
+    #   Default is unset.
+    #
+    #   <note markdown="1"> Not all map resources or styles support political view styles. See
+    #   [Political views][1] for more information.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#political-views
+    #   @return [String]
+    #
     # @!attribute [rw] style
     #   Specifies the map style selected from an available data provider.
     #
@@ -4424,15 +4448,15 @@ module Aws::LocationService
     #   * `VectorEsriTopographic` – The Esri Light map style, which provides
     #     a detailed vector basemap with a classic Esri map style.
     #
-    #   * `VectorEsriStreets` – The Esri World Streets map style, which
-    #     provides a detailed vector basemap for the world symbolized with a
-    #     classic Esri street map style. The vector tile layer is similar in
-    #     content and style to the World Street Map raster map.
+    #   * `VectorEsriStreets` – The Esri Street Map style, which provides a
+    #     detailed vector basemap for the world symbolized with a classic
+    #     Esri street map style. The vector tile layer is similar in content
+    #     and style to the World Street Map raster map.
     #
-    #   * `VectorEsriNavigation` – The Esri World Navigation map style,
-    #     which provides a detailed basemap for the world symbolized with a
-    #     custom navigation map style that's designed for use during the
-    #     day in mobile devices.
+    #   * `VectorEsriNavigation` – The Esri Navigation map style, which
+    #     provides a detailed basemap for the world symbolized with a custom
+    #     navigation map style that's designed for use during the day in
+    #     mobile devices.
     #
     #   Valid [HERE Technologies map styles][2]:
     #
@@ -4522,7 +4546,34 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/MapConfiguration AWS API Documentation
     #
     class MapConfiguration < Struct.new(
+      :political_view,
       :style)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the political view for the style.
+    #
+    # @!attribute [rw] political_view
+    #   Specifies the political view for the style. Set to an empty string
+    #   to not use a political view, or, for styles that support specific
+    #   political views, you can choose a view, such as `IND` for the Indian
+    #   view.
+    #
+    #   <note markdown="1"> Not all map resources or styles support political view styles. See
+    #   [Political views][1] for more information.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#political-views
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/MapConfigurationUpdate AWS API Documentation
+    #
+    class MapConfigurationUpdate < Struct.new(
+      :political_view)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5907,6 +5958,11 @@ module Aws::LocationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] configuration_update
+    #   Updates the parts of the map configuration that can be updated,
+    #   including the political view.
+    #   @return [Types::MapConfigurationUpdate]
+    #
     # @!attribute [rw] description
     #   Updates the description for the map resource.
     #   @return [String]
@@ -5923,6 +5979,7 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateMapRequest AWS API Documentation
     #
     class UpdateMapRequest < Struct.new(
+      :configuration_update,
       :description,
       :map_name,
       :pricing_plan)

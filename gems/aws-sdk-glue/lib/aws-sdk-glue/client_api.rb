@@ -881,6 +881,7 @@ module Aws::Glue
     RunId = Shapes::StringShape.new(name: 'RunId')
     RunStatementRequest = Shapes::StructureShape.new(name: 'RunStatementRequest')
     RunStatementResponse = Shapes::StructureShape.new(name: 'RunStatementResponse')
+    RuntimeNameString = Shapes::StringShape.new(name: 'RuntimeNameString')
     S3CatalogDeltaSource = Shapes::StructureShape.new(name: 'S3CatalogDeltaSource')
     S3CatalogHudiSource = Shapes::StructureShape.new(name: 'S3CatalogHudiSource')
     S3CatalogSource = Shapes::StructureShape.new(name: 'S3CatalogSource')
@@ -3639,6 +3640,7 @@ module Aws::Glue
     JobCommand.add_member(:name, Shapes::ShapeRef.new(shape: GenericString, location_name: "Name"))
     JobCommand.add_member(:script_location, Shapes::ShapeRef.new(shape: ScriptLocationString, location_name: "ScriptLocation"))
     JobCommand.add_member(:python_version, Shapes::ShapeRef.new(shape: PythonVersionString, location_name: "PythonVersion"))
+    JobCommand.add_member(:runtime, Shapes::ShapeRef.new(shape: RuntimeNameString, location_name: "Runtime"))
     JobCommand.struct_class = Types::JobCommand
 
     JobList.member = Shapes::ShapeRef.new(shape: Job)

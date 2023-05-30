@@ -372,64 +372,39 @@ module Aws::SecurityLake
     # Lake source. Enables source types for member accounts in required
     # Amazon Web Services Regions, based on the parameters you specify. You
     # can choose any source type in any Region for either accounts that are
-    # part of a trusted organization or standalone accounts. At least one of
-    # the three dimensions is a mandatory input to this API. However, you
-    # can supply any combination of the three dimensions to this API.
-    #
-    # By default, a dimension refers to the entire set. When you don't
-    # provide a dimension, Security Lake assumes that the missing dimension
-    # refers to the entire set. This is overridden when you supply any one
-    # of the inputs. For instance, when you do not specify members, the API
-    # enables all Security Lake member accounts for all sources. Similarly,
-    # when you do not specify Regions, Security Lake is enabled for all the
-    # Regions where Security Lake is available as a service.
+    # part of a trusted organization or standalone accounts. Once you add an
+    # Amazon Web Service as a source, Security Lake starts collecting logs
+    # and events from it,
     #
     # You can use this API only to enable natively supported Amazon Web
     # Services as a source. Use `CreateCustomLogSource` to enable data
     # collection from a custom source.
     #
-    # @option params [Hash<String,Hash>] :enable_all_dimensions
-    #   Enables data collection from specific Amazon Web Services sources in
-    #   all specific accounts and specific Regions.
-    #
-    # @option params [Array<String>] :enable_single_dimension
-    #   Enables data collection from all Amazon Web Services sources in
-    #   specific accounts or Regions.
-    #
-    # @option params [Hash<String,Array>] :enable_two_dimensions
-    #   Enables data collection from specific Amazon Web Services sources in
-    #   specific accounts or Regions.
-    #
-    # @option params [required, Array<String>] :input_order
-    #   Specifies the input order to enable dimensions in Security Lake,
-    #   namely Region, source type, and member account.
+    # @option params [required, Array<Types::AwsLogSourceConfiguration>] :sources
+    #   Specify the natively-supported Amazon Web Services service to add as a
+    #   source in Security Lake.
     #
     # @return [Types::CreateAwsLogSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAwsLogSourceResponse#failed #failed} => Array&lt;String&gt;
-    #   * {Types::CreateAwsLogSourceResponse#processing #processing} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_aws_log_source({
-    #     enable_all_dimensions: {
-    #       "String" => {
-    #         "String" => ["String"],
+    #     sources: [ # required
+    #       {
+    #         accounts: ["AwsAccountId"],
+    #         regions: ["Region"], # required
+    #         source_name: "ROUTE53", # required, accepts ROUTE53, VPC_FLOW, SH_FINDINGS, CLOUD_TRAIL_MGMT, LAMBDA_EXECUTION, S3_DATA
+    #         source_version: "AwsLogSourceVersion",
     #       },
-    #     },
-    #     enable_single_dimension: ["SafeString"],
-    #     enable_two_dimensions: {
-    #       "String" => ["String"],
-    #     },
-    #     input_order: ["REGION"], # required, accepts REGION, SOURCE_TYPE, MEMBER
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.failed #=> Array
     #   resp.failed[0] #=> String
-    #   resp.processing #=> Array
-    #   resp.processing[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateAwsLogSource AWS API Documentation
     #
@@ -447,54 +422,113 @@ module Aws::SecurityLake
     # crawler, use this API to add a custom source name in Security Lake.
     # This operation creates a partition in the Amazon S3 bucket for
     # Security Lake as the target location for log files from the custom
-    # source in addition to an associated Glue table and an Glue crawler.
+    # source. In addition, this operation also creates an associated Glue
+    # table and an Glue crawler.
     #
-    # @option params [required, String] :custom_source_name
-    #   The name for a third-party custom source. This must be a Regionally
-    #   unique value.
+    # @option params [Types::CustomLogSourceConfiguration] :configuration
+    #   The configuration for the third-party custom source.
     #
-    # @option params [required, String] :event_class
-    #   The Open Cybersecurity Schema Framework (OCSF) event class which
+    # @option params [Array<String>] :event_classes
+    #   The Open Cybersecurity Schema Framework (OCSF) event classes which
     #   describes the type of data that the custom source will send to
-    #   Security Lake.
+    #   Security Lake. The supported event classes are:
     #
-    # @option params [required, String] :glue_invocation_role_arn
-    #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) role to be used by the Glue crawler. The recommended IAM
-    #   policies are:
+    #   * `ACCESS_ACTIVITY`
     #
-    #   * The managed policy `AWSGlueServiceRole`
+    #   * `FILE_ACTIVITY`
     #
-    #   * A custom policy granting access to your Amazon S3 Data Lake
+    #   * `KERNEL_ACTIVITY`
     #
-    # @option params [required, String] :log_provider_account_id
-    #   The Amazon Web Services account ID of the custom source that will
-    #   write logs and events into the Amazon S3 Data Lake.
+    #   * `KERNEL_EXTENSION`
+    #
+    #   * `MEMORY_ACTIVITY`
+    #
+    #   * `MODULE_ACTIVITY`
+    #
+    #   * `PROCESS_ACTIVITY`
+    #
+    #   * `REGISTRY_KEY_ACTIVITY`
+    #
+    #   * `REGISTRY_VALUE_ACTIVITY`
+    #
+    #   * `RESOURCE_ACTIVITY`
+    #
+    #   * `SCHEDULED_JOB_ACTIVITY`
+    #
+    #   * `SECURITY_FINDING`
+    #
+    #   * `ACCOUNT_CHANGE`
+    #
+    #   * `AUTHENTICATION`
+    #
+    #   * `AUTHORIZATION`
+    #
+    #   * `ENTITY_MANAGEMENT_AUDIT`
+    #
+    #   * `DHCP_ACTIVITY`
+    #
+    #   * `NETWORK_ACTIVITY`
+    #
+    #   * `DNS_ACTIVITY`
+    #
+    #   * `FTP_ACTIVITY`
+    #
+    #   * `HTTP_ACTIVITY`
+    #
+    #   * `RDP_ACTIVITY`
+    #
+    #   * `SMB_ACTIVITY`
+    #
+    #   * `SSH_ACTIVITY`
+    #
+    #   * `CONFIG_STATE`
+    #
+    #   * `INVENTORY_INFO`
+    #
+    #   * `EMAIL_ACTIVITY`
+    #
+    #   * `API_ACTIVITY`
+    #
+    #   * `CLOUD_API`
+    #
+    # @option params [required, String] :source_name
+    #   Specify the name for a third-party custom source. This must be a
+    #   Regionally unique value.
+    #
+    # @option params [String] :source_version
+    #   Specify the source version for the third-party custom source, to limit
+    #   log collection to a specific version of custom data source.
     #
     # @return [Types::CreateCustomLogSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateCustomLogSourceResponse#custom_data_location #custom_data_location} => String
-    #   * {Types::CreateCustomLogSourceResponse#glue_crawler_name #glue_crawler_name} => String
-    #   * {Types::CreateCustomLogSourceResponse#glue_database_name #glue_database_name} => String
-    #   * {Types::CreateCustomLogSourceResponse#glue_table_name #glue_table_name} => String
-    #   * {Types::CreateCustomLogSourceResponse#log_provider_access_role_arn #log_provider_access_role_arn} => String
+    #   * {Types::CreateCustomLogSourceResponse#source #source} => Types::CustomLogSourceResource
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_custom_log_source({
-    #     custom_source_name: "CustomSourceType", # required
-    #     event_class: "ACCESS_ACTIVITY", # required, accepts ACCESS_ACTIVITY, FILE_ACTIVITY, KERNEL_ACTIVITY, KERNEL_EXTENSION, MEMORY_ACTIVITY, MODULE_ACTIVITY, PROCESS_ACTIVITY, REGISTRY_KEY_ACTIVITY, REGISTRY_VALUE_ACTIVITY, RESOURCE_ACTIVITY, SCHEDULED_JOB_ACTIVITY, SECURITY_FINDING, ACCOUNT_CHANGE, AUTHENTICATION, AUTHORIZATION, ENTITY_MANAGEMENT_AUDIT, DHCP_ACTIVITY, NETWORK_ACTIVITY, DNS_ACTIVITY, FTP_ACTIVITY, HTTP_ACTIVITY, RDP_ACTIVITY, SMB_ACTIVITY, SSH_ACTIVITY, CLOUD_API, CONTAINER_LIFECYCLE, DATABASE_LIFECYCLE, CONFIG_STATE, CLOUD_STORAGE, INVENTORY_INFO, RFB_ACTIVITY, SMTP_ACTIVITY, VIRTUAL_MACHINE_ACTIVITY
-    #     glue_invocation_role_arn: "RoleArn", # required
-    #     log_provider_account_id: "AwsAccountId", # required
+    #     configuration: {
+    #       crawler_configuration: { # required
+    #         role_arn: "RoleArn", # required
+    #       },
+    #       provider_identity: { # required
+    #         external_id: "ExternalId", # required
+    #         principal: "AwsPrincipal", # required
+    #       },
+    #     },
+    #     event_classes: ["OcsfEventClass"],
+    #     source_name: "CustomLogSourceName", # required
+    #     source_version: "CustomLogSourceVersion",
     #   })
     #
     # @example Response structure
     #
-    #   resp.custom_data_location #=> String
-    #   resp.glue_crawler_name #=> String
-    #   resp.glue_database_name #=> String
-    #   resp.glue_table_name #=> String
-    #   resp.log_provider_access_role_arn #=> String
+    #   resp.source.attributes.crawler_arn #=> String
+    #   resp.source.attributes.database_arn #=> String
+    #   resp.source.attributes.table_arn #=> String
+    #   resp.source.provider.location #=> String
+    #   resp.source.provider.role_arn #=> String
+    #   resp.source.source_name #=> String
+    #   resp.source.source_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateCustomLogSource AWS API Documentation
     #
@@ -508,15 +542,14 @@ module Aws::SecurityLake
     # Initializes an Amazon Security Lake instance with the provided (or
     # default) configuration. You can enable Security Lake in Amazon Web
     # Services Regions with customized settings before enabling log
-    # collection in Regions. You can either use the `enableAll` parameter to
-    # specify all Regions or specify the Regions where you want to enable
-    # Security Lake. To specify particular Regions, use the `Regions`
-    # parameter and then configure these Regions using the `configurations`
-    # parameter. If you have already enabled Security Lake in a Region when
-    # you call this command, the command will update the Region if you
-    # provide new configuration parameters. If you have not already enabled
-    # Security Lake in the Region when you call this API, it will set up the
-    # data lake in the Region with the specified configurations.
+    # collection in Regions. By default, the `CreateDataLake` Security Lake
+    # in all Regions. To specify particular Regions, configure these Regions
+    # using the `configurations` parameter. If you have already enabled
+    # Security Lake in a Region when you call this command, the command will
+    # update the Region if you provide new configuration parameters. If you
+    # have not already enabled Security Lake in the Region when you call
+    # this API, it will set up the data lake in the Region with the
+    # specified configurations.
     #
     # When you enable Security Lake, it starts ingesting security data after
     # the `CreateAwsLogSource` call. This includes ingesting security data
@@ -530,122 +563,82 @@ module Aws::SecurityLake
     #
     # [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/what-is-security-lake.html
     #
-    # @option params [Hash<String,Types::LakeConfigurationRequest>] :configurations
+    # @option params [required, Array<Types::DataLakeConfiguration>] :configurations
     #   Specify the Region or Regions that will contribute data to the rollup
     #   region.
     #
-    # @option params [Boolean] :enable_all
-    #   Enable Security Lake in all Regions.
-    #
-    # @option params [String] :meta_store_manager_role_arn
+    # @option params [required, String] :meta_store_manager_role_arn
     #   The Amazon Resource Name (ARN) used to create and update the Glue
     #   table. This table contains partitions generated by the ingestion and
     #   normalization of Amazon Web Services log sources and custom sources.
     #
-    # @option params [Array<String>] :regions
-    #   Enable Security Lake in the specified Regions. To enable Security Lake
-    #   in specific Amazon Web Services Regions, such as us-east-1 or
-    #   ap-northeast-3, provide the Region codes. For a list of Region codes,
-    #   see [Amazon Security Lake endpoints][1] in the Amazon Web Services
-    #   General Reference.
+    # @return [Types::CreateDataLakeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/securitylake.html
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #   * {Types::CreateDataLakeResponse#data_lakes #data_lakes} => Array&lt;Types::DataLakeResource&gt;
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.create_datalake({
-    #     configurations: {
-    #       "us-east-1" => {
-    #         encryption_key: "String",
-    #         replication_destination_regions: ["us-east-1"], # accepts us-east-1, us-west-2, eu-central-1, us-east-2, eu-west-1, ap-northeast-1, ap-southeast-2
-    #         replication_role_arn: "RoleArn",
-    #         retention_settings: [
-    #           {
-    #             retention_period: 1,
-    #             storage_class: "STANDARD_IA", # accepts STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, DEEP_ARCHIVE, EXPIRE
+    #   resp = client.create_data_lake({
+    #     configurations: [ # required
+    #       {
+    #         encryption_configuration: {
+    #           kms_key_id: "String",
+    #         },
+    #         lifecycle_configuration: {
+    #           expiration: {
+    #             days: 1,
     #           },
-    #         ],
-    #         tags_map: {
-    #           "String" => "String",
+    #           transitions: [
+    #             {
+    #               days: 1,
+    #               storage_class: "DataLakeStorageClass",
+    #             },
+    #           ],
+    #         },
+    #         region: "Region", # required
+    #         replication_configuration: {
+    #           regions: ["Region"],
+    #           role_arn: "RoleArn",
     #         },
     #       },
-    #     },
-    #     enable_all: false,
-    #     meta_store_manager_role_arn: "RoleArn",
-    #     regions: ["us-east-1"], # accepts us-east-1, us-west-2, eu-central-1, us-east-2, eu-west-1, ap-northeast-1, ap-southeast-2
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateDatalake AWS API Documentation
-    #
-    # @overload create_datalake(params = {})
-    # @param [Hash] params ({})
-    def create_datalake(params = {}, options = {})
-      req = build_request(:create_datalake, params)
-      req.send_request(options)
-    end
-
-    # Automatically enables Amazon Security Lake for new member accounts in
-    # your organization. Security Lake is not automatically enabled for any
-    # existing member accounts in your organization.
-    #
-    # @option params [required, Array<Types::AutoEnableNewRegionConfiguration>] :configuration_for_new_accounts
-    #   Enable Security Lake with the specified configuration settings to
-    #   begin collecting security data for new accounts in your organization.
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.create_datalake_auto_enable({
-    #     configuration_for_new_accounts: [ # required
-    #       {
-    #         region: "us-east-1", # required, accepts us-east-1, us-west-2, eu-central-1, us-east-2, eu-west-1, ap-northeast-1, ap-southeast-2
-    #         sources: ["ROUTE53"], # required, accepts ROUTE53, VPC_FLOW, CLOUD_TRAIL, SH_FINDINGS
-    #       },
     #     ],
+    #     meta_store_manager_role_arn: "RoleArn", # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateDatalakeAutoEnable AWS API Documentation
+    # @example Response structure
     #
-    # @overload create_datalake_auto_enable(params = {})
+    #   resp.data_lakes #=> Array
+    #   resp.data_lakes[0].create_status #=> String, one of "INITIALIZED", "PENDING", "COMPLETED", "FAILED"
+    #   resp.data_lakes[0].data_lake_arn #=> String
+    #   resp.data_lakes[0].encryption_configuration.kms_key_id #=> String
+    #   resp.data_lakes[0].lifecycle_configuration.expiration.days #=> Integer
+    #   resp.data_lakes[0].lifecycle_configuration.transitions #=> Array
+    #   resp.data_lakes[0].lifecycle_configuration.transitions[0].days #=> Integer
+    #   resp.data_lakes[0].lifecycle_configuration.transitions[0].storage_class #=> String
+    #   resp.data_lakes[0].region #=> String
+    #   resp.data_lakes[0].replication_configuration.regions #=> Array
+    #   resp.data_lakes[0].replication_configuration.regions[0] #=> String
+    #   resp.data_lakes[0].replication_configuration.role_arn #=> String
+    #   resp.data_lakes[0].s3_bucket_arn #=> String
+    #   resp.data_lakes[0].update_status.exception.code #=> String
+    #   resp.data_lakes[0].update_status.exception.reason #=> String
+    #   resp.data_lakes[0].update_status.request_id #=> String
+    #   resp.data_lakes[0].update_status.status #=> String, one of "INITIALIZED", "PENDING", "COMPLETED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateDataLake AWS API Documentation
+    #
+    # @overload create_data_lake(params = {})
     # @param [Hash] params ({})
-    def create_datalake_auto_enable(params = {}, options = {})
-      req = build_request(:create_datalake_auto_enable, params)
-      req.send_request(options)
-    end
-
-    # Designates the Amazon Security Lake delegated administrator account
-    # for the organization. This API can only be called by the organization
-    # management account. The organization management account cannot be the
-    # delegated administrator account.
-    #
-    # @option params [required, String] :account
-    #   The Amazon Web Services account ID of the Security Lake delegated
-    #   administrator.
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.create_datalake_delegated_admin({
-    #     account: "SafeString", # required
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateDatalakeDelegatedAdmin AWS API Documentation
-    #
-    # @overload create_datalake_delegated_admin(params = {})
-    # @param [Hash] params ({})
-    def create_datalake_delegated_admin(params = {}, options = {})
-      req = build_request(:create_datalake_delegated_admin, params)
+    def create_data_lake(params = {}, options = {})
+      req = build_request(:create_data_lake, params)
       req.send_request(options)
     end
 
     # Creates the specified notification subscription in Amazon Security
     # Lake for the organization you specify.
+    #
+    # @option params [Integer] :exception_time_to_live
+    #   The expiration period and time-to-live (TTL).
     #
     # @option params [required, String] :notification_endpoint
     #   The Amazon Web Services account where you want to receive exception
@@ -658,17 +651,53 @@ module Aws::SecurityLake
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.create_datalake_exceptions_subscription({
+    #   resp = client.create_data_lake_exception_subscription({
+    #     exception_time_to_live: 1,
     #     notification_endpoint: "SafeString", # required
-    #     subscription_protocol: "HTTP", # required, accepts HTTP, HTTPS, EMAIL, EMAIL_JSON, SMS, SQS, LAMBDA, APP, FIREHOSE
+    #     subscription_protocol: "SubscriptionProtocol", # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateDatalakeExceptionsSubscription AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateDataLakeExceptionSubscription AWS API Documentation
     #
-    # @overload create_datalake_exceptions_subscription(params = {})
+    # @overload create_data_lake_exception_subscription(params = {})
     # @param [Hash] params ({})
-    def create_datalake_exceptions_subscription(params = {}, options = {})
-      req = build_request(:create_datalake_exceptions_subscription, params)
+    def create_data_lake_exception_subscription(params = {}, options = {})
+      req = build_request(:create_data_lake_exception_subscription, params)
+      req.send_request(options)
+    end
+
+    # Automatically enables Amazon Security Lake for new member accounts in
+    # your organization. Security Lake is not automatically enabled for any
+    # existing member accounts in your organization.
+    #
+    # @option params [required, Array<Types::DataLakeAutoEnableNewAccountConfiguration>] :auto_enable_new_account
+    #   Enable Security Lake with the specified configuration settings, to
+    #   begin collecting security data for new accounts in your organization.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_lake_organization_configuration({
+    #     auto_enable_new_account: [ # required
+    #       {
+    #         region: "Region", # required
+    #         sources: [ # required
+    #           {
+    #             source_name: "ROUTE53", # accepts ROUTE53, VPC_FLOW, SH_FINDINGS, CLOUD_TRAIL_MGMT, LAMBDA_EXECUTION, S3_DATA
+    #             source_version: "AwsLogSourceVersion",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateDataLakeOrganizationConfiguration AWS API Documentation
+    #
+    # @overload create_data_lake_organization_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_data_lake_organization_configuration(params = {}, options = {})
+      req = build_request(:create_data_lake_organization_configuration, params)
       req.send_request(options)
     end
 
@@ -679,16 +708,7 @@ module Aws::SecurityLake
     # @option params [Array<String>] :access_types
     #   The Amazon S3 or Lake Formation access type.
     #
-    # @option params [required, String] :account_id
-    #   The Amazon Web Services account ID used to access your data.
-    #
-    # @option params [required, String] :external_id
-    #   The external ID of the subscriber. This lets the user that is assuming
-    #   the role assert the circumstances in which they are operating. It also
-    #   provides a way for the account owner to permit the role to be assumed
-    #   only under specific circumstances.
-    #
-    # @option params [required, Array<Types::SourceType>] :source_types
+    # @option params [required, Array<Types::LogSourceResource>] :sources
     #   The supported Amazon Web Services from which logs and events are
     #   collected. Security Lake supports log and event collection for
     #   natively supported Amazon Web Services.
@@ -696,42 +716,77 @@ module Aws::SecurityLake
     # @option params [String] :subscriber_description
     #   The description for your subscriber account in Security Lake.
     #
+    # @option params [required, Types::AwsIdentity] :subscriber_identity
+    #   The AWS identity used to access your data.
+    #
     # @option params [required, String] :subscriber_name
     #   The name of your Security Lake subscriber account.
     #
     # @return [Types::CreateSubscriberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateSubscriberResponse#resource_share_arn #resource_share_arn} => String
-    #   * {Types::CreateSubscriberResponse#resource_share_name #resource_share_name} => String
-    #   * {Types::CreateSubscriberResponse#role_arn #role_arn} => String
-    #   * {Types::CreateSubscriberResponse#s3_bucket_arn #s3_bucket_arn} => String
-    #   * {Types::CreateSubscriberResponse#sns_arn #sns_arn} => String
-    #   * {Types::CreateSubscriberResponse#subscription_id #subscription_id} => String
+    #   * {Types::CreateSubscriberResponse#subscriber #subscriber} => Types::SubscriberResource
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_subscriber({
     #     access_types: ["LAKEFORMATION"], # accepts LAKEFORMATION, S3
-    #     account_id: "AwsAccountId", # required
-    #     external_id: "SafeString", # required
-    #     source_types: [ # required
+    #     sources: [ # required
     #       {
-    #         aws_source_type: "ROUTE53", # accepts ROUTE53, VPC_FLOW, CLOUD_TRAIL, SH_FINDINGS
-    #         custom_source_type: "CustomSourceType",
+    #         aws_log_source: {
+    #           source_name: "ROUTE53", # accepts ROUTE53, VPC_FLOW, SH_FINDINGS, CLOUD_TRAIL_MGMT, LAMBDA_EXECUTION, S3_DATA
+    #           source_version: "AwsLogSourceVersion",
+    #         },
+    #         custom_log_source: {
+    #           attributes: {
+    #             crawler_arn: "AmazonResourceName",
+    #             database_arn: "AmazonResourceName",
+    #             table_arn: "AmazonResourceName",
+    #           },
+    #           provider: {
+    #             location: "S3URI",
+    #             role_arn: "RoleArn",
+    #           },
+    #           source_name: "CustomLogSourceName",
+    #           source_version: "CustomLogSourceVersion",
+    #         },
     #       },
     #     ],
     #     subscriber_description: "DescriptionString",
+    #     subscriber_identity: { # required
+    #       external_id: "ExternalId", # required
+    #       principal: "AwsPrincipal", # required
+    #     },
     #     subscriber_name: "CreateSubscriberRequestSubscriberNameString", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.resource_share_arn #=> String
-    #   resp.resource_share_name #=> String
-    #   resp.role_arn #=> String
-    #   resp.s3_bucket_arn #=> String
-    #   resp.sns_arn #=> String
-    #   resp.subscription_id #=> String
+    #   resp.subscriber.access_types #=> Array
+    #   resp.subscriber.access_types[0] #=> String, one of "LAKEFORMATION", "S3"
+    #   resp.subscriber.created_at #=> Time
+    #   resp.subscriber.resource_share_arn #=> String
+    #   resp.subscriber.resource_share_name #=> String
+    #   resp.subscriber.role_arn #=> String
+    #   resp.subscriber.s3_bucket_arn #=> String
+    #   resp.subscriber.sources #=> Array
+    #   resp.subscriber.sources[0].aws_log_source.source_name #=> String, one of "ROUTE53", "VPC_FLOW", "SH_FINDINGS", "CLOUD_TRAIL_MGMT", "LAMBDA_EXECUTION", "S3_DATA"
+    #   resp.subscriber.sources[0].aws_log_source.source_version #=> String
+    #   resp.subscriber.sources[0].custom_log_source.attributes.crawler_arn #=> String
+    #   resp.subscriber.sources[0].custom_log_source.attributes.database_arn #=> String
+    #   resp.subscriber.sources[0].custom_log_source.attributes.table_arn #=> String
+    #   resp.subscriber.sources[0].custom_log_source.provider.location #=> String
+    #   resp.subscriber.sources[0].custom_log_source.provider.role_arn #=> String
+    #   resp.subscriber.sources[0].custom_log_source.source_name #=> String
+    #   resp.subscriber.sources[0].custom_log_source.source_version #=> String
+    #   resp.subscriber.subscriber_arn #=> String
+    #   resp.subscriber.subscriber_description #=> String
+    #   resp.subscriber.subscriber_endpoint #=> String
+    #   resp.subscriber.subscriber_id #=> String
+    #   resp.subscriber.subscriber_identity.external_id #=> String
+    #   resp.subscriber.subscriber_identity.principal #=> String
+    #   resp.subscriber.subscriber_name #=> String
+    #   resp.subscriber.subscriber_status #=> String, one of "ACTIVE", "DEACTIVATED", "PENDING", "READY"
+    #   resp.subscriber.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateSubscriber AWS API Documentation
     #
@@ -746,133 +801,84 @@ module Aws::SecurityLake
     # the sources that the subscriber consumes in Security Lake. You can
     # create only one subscriber notification per subscriber.
     #
-    # @option params [Boolean] :create_sqs
-    #   Create an Amazon Simple Queue Service queue.
+    # @option params [required, Types::NotificationConfiguration] :configuration
+    #   Specify the configuration using which you want to create the
+    #   subscriber notification.
     #
-    # @option params [String] :https_api_key_name
-    #   The key name for the notification subscription.
+    # @option params [required, String] :subscriber_id
+    #   The subscriber ID for the notification subscription.
     #
-    # @option params [String] :https_api_key_value
-    #   The key value for the notification subscription.
+    # @return [Types::CreateSubscriberNotificationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    # @option params [String] :https_method
-    #   The HTTPS method used for the notification subscription.
-    #
-    # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of the EventBridge API destinations IAM
-    #   role that you created. For more information about ARNs and how to use
-    #   them in policies, see [Managing data access][1] and [Amazon Web
-    #   Services Managed Policies][2] in the Amazon Security Lake User Guide.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com//security-lake/latest/userguide/subscriber-data-access.html
-    #   [2]: https://docs.aws.amazon.com/security-lake/latest/userguide/security-iam-awsmanpol.html
-    #
-    # @option params [String] :subscription_endpoint
-    #   The subscription endpoint in Security Lake. If you prefer notification
-    #   with an HTTPs endpoint, populate this field.
-    #
-    # @option params [required, String] :subscription_id
-    #   The subscription ID for the notification subscription.
-    #
-    # @return [Types::CreateSubscriptionNotificationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::CreateSubscriptionNotificationConfigurationResponse#queue_arn #queue_arn} => String
+    #   * {Types::CreateSubscriberNotificationResponse#subscriber_endpoint #subscriber_endpoint} => String
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.create_subscription_notification_configuration({
-    #     create_sqs: false,
-    #     https_api_key_name: "String",
-    #     https_api_key_value: "String",
-    #     https_method: "POST", # accepts POST, PUT
-    #     role_arn: "RoleArn",
-    #     subscription_endpoint: "CreateSubscriptionNotificationConfigurationRequestSubscriptionEndpointString",
-    #     subscription_id: "UUID", # required
+    #   resp = client.create_subscriber_notification({
+    #     configuration: { # required
+    #       https_notification_configuration: {
+    #         authorization_api_key_name: "String",
+    #         authorization_api_key_value: "String",
+    #         endpoint: "HttpsNotificationConfigurationEndpointString", # required
+    #         http_method: "POST", # accepts POST, PUT
+    #         target_role_arn: "RoleArn", # required
+    #       },
+    #       sqs_notification_configuration: {
+    #       },
+    #     },
+    #     subscriber_id: "UUID", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.queue_arn #=> String
+    #   resp.subscriber_endpoint #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateSubscriptionNotificationConfiguration AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/CreateSubscriberNotification AWS API Documentation
     #
-    # @overload create_subscription_notification_configuration(params = {})
+    # @overload create_subscriber_notification(params = {})
     # @param [Hash] params ({})
-    def create_subscription_notification_configuration(params = {}, options = {})
-      req = build_request(:create_subscription_notification_configuration, params)
+    def create_subscriber_notification(params = {}, options = {})
+      req = build_request(:create_subscriber_notification, params)
       req.send_request(options)
     end
 
     # Removes a natively supported Amazon Web Service as an Amazon Security
-    # Lake source. When you remove the source, Security Lake stops
-    # collecting data from that source, and subscribers can no longer
-    # consume new data from the source. Subscribers can still consume data
-    # that Security Lake collected from the source before disablement.
+    # Lake source. You can remove a source for one or more Regions. When you
+    # remove the source, Security Lake stops collecting data from that
+    # source in the specified Regions and accounts, and subscribers can no
+    # longer consume new data from the source. However, subscribers can
+    # still consume data that Security Lake collected from the source before
+    # removal.
     #
     # You can choose any source type in any Amazon Web Services Region for
     # either accounts that are part of a trusted organization or standalone
-    # accounts. At least one of the three dimensions is a mandatory input to
-    # this API. However, you can supply any combination of the three
-    # dimensions to this API.
+    # accounts.
     #
-    # By default, a dimension refers to the entire set. This is overridden
-    # when you supply any one of the inputs. For instance, when you do not
-    # specify members, the API disables all Security Lake member accounts
-    # for sources. Similarly, when you do not specify Regions, Security Lake
-    # is disabled for all the Regions where Security Lake is available as a
-    # service.
-    #
-    # When you don't provide a dimension, Security Lake assumes that the
-    # missing dimension refers to the entire set. For example, if you don't
-    # provide specific accounts, the API applies to the entire set of
-    # accounts in your organization.
-    #
-    # @option params [Hash<String,Hash>] :disable_all_dimensions
-    #   Removes the specific Amazon Web Services sources from specific
-    #   accounts and specific Regions.
-    #
-    # @option params [Array<String>] :disable_single_dimension
-    #   Removes all Amazon Web Services sources from specific accounts or
-    #   Regions.
-    #
-    # @option params [Hash<String,Array>] :disable_two_dimensions
-    #   Remove a specific Amazon Web Services source from specific accounts or
-    #   Regions.
-    #
-    # @option params [required, Array<String>] :input_order
-    #   This is a mandatory input. Specify the input order to disable
-    #   dimensions in Security Lake, namely Region (Amazon Web Services Region
-    #   code, source type, and member (account ID of a specific Amazon Web
-    #   Services account).
+    # @option params [required, Array<Types::AwsLogSourceConfiguration>] :sources
+    #   Specify the natively-supported Amazon Web Services service to remove
+    #   as a source in Security Lake.
     #
     # @return [Types::DeleteAwsLogSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteAwsLogSourceResponse#failed #failed} => Array&lt;String&gt;
-    #   * {Types::DeleteAwsLogSourceResponse#processing #processing} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_aws_log_source({
-    #     disable_all_dimensions: {
-    #       "String" => {
-    #         "String" => ["String"],
+    #     sources: [ # required
+    #       {
+    #         accounts: ["AwsAccountId"],
+    #         regions: ["Region"], # required
+    #         source_name: "ROUTE53", # required, accepts ROUTE53, VPC_FLOW, SH_FINDINGS, CLOUD_TRAIL_MGMT, LAMBDA_EXECUTION, S3_DATA
+    #         source_version: "AwsLogSourceVersion",
     #       },
-    #     },
-    #     disable_single_dimension: ["SafeString"],
-    #     disable_two_dimensions: {
-    #       "String" => ["String"],
-    #     },
-    #     input_order: ["REGION"], # required, accepts REGION, SOURCE_TYPE, MEMBER
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.failed #=> Array
     #   resp.failed[0] #=> String
-    #   resp.processing #=> Array
-    #   resp.processing[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteAwsLogSource AWS API Documentation
     #
@@ -883,24 +889,24 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # Removes a custom log source from Amazon Security Lake.
+    # Removes a custom log source from Amazon Security Lake, to stop sending
+    # data from the custom source to Security Lake.
     #
-    # @option params [required, String] :custom_source_name
-    #   The custom source name for the custom log source.
+    # @option params [required, String] :source_name
+    #   The source name of custom log source that you want to delete.
     #
-    # @return [Types::DeleteCustomLogSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    # @option params [String] :source_version
+    #   The source version for the third-party custom source. You can limit
+    #   the custom source removal to the specified source version.
     #
-    #   * {Types::DeleteCustomLogSourceResponse#custom_data_location #custom_data_location} => String
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_custom_log_source({
-    #     custom_source_name: "String", # required
+    #     source_name: "CustomLogSourceName", # required
+    #     source_version: "CustomLogSourceVersion",
     #   })
-    #
-    # @example Response structure
-    #
-    #   resp.custom_data_location #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteCustomLogSource AWS API Documentation
     #
@@ -911,117 +917,103 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
-    # When you delete Amazon Security Lake from your account, Security Lake
-    # is disabled in all Amazon Web Services Regions. Also, this API
-    # automatically takes steps to remove the account from Security Lake .
+    # When you disable Amazon Security Lake from your account, Security Lake
+    # is disabled in all Amazon Web Services Regions and it stops collecting
+    # data from your sources. Also, this API automatically takes steps to
+    # remove the account from Security Lake. However, Security Lake retains
+    # all of your existing settings and the resources that it created in
+    # your Amazon Web Services account in the current Amazon Web Services
+    # Region.
     #
-    # This operation disables security data collection from sources, deletes
-    # data stored, and stops making data accessible to subscribers. Security
-    # Lake also deletes all the existing settings and resources that it
-    # stores or maintains for your Amazon Web Services account in the
-    # current Region, including security log and event data. The
-    # `DeleteDatalake` operation does not delete the Amazon S3 bucket, which
-    # is owned by your Amazon Web Services account. For more information,
-    # see the [Amazon Security Lake User Guide][1].
+    # The `DeleteDataLake` operation does not delete the data that is stored
+    # in your Amazon S3 bucket, which is owned by your Amazon Web Services
+    # account. For more information, see the [Amazon Security Lake User
+    # Guide][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/disable-security-lake.html
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteDatalake AWS API Documentation
-    #
-    # @overload delete_datalake(params = {})
-    # @param [Hash] params ({})
-    def delete_datalake(params = {}, options = {})
-      req = build_request(:delete_datalake, params)
-      req.send_request(options)
-    end
-
-    # `DeleteDatalakeAutoEnable` removes automatic enablement of
-    # configuration settings for new member accounts (but keeps settings for
-    # the delegated administrator) from Amazon Security Lake. You must run
-    # this API using credentials of the delegated administrator. When you
-    # run this API, new member accounts that are added after the
-    # organization enables Security Lake won't contribute to the data lake.
-    #
-    # @option params [required, Array<Types::AutoEnableNewRegionConfiguration>] :remove_from_configuration_for_new_accounts
-    #   Remove automatic enablement of configuration settings for new member
-    #   accounts in Security Lake.
+    # @option params [required, Array<String>] :regions
+    #   The list of Regions where Security Lake is enabled.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.delete_datalake_auto_enable({
-    #     remove_from_configuration_for_new_accounts: [ # required
-    #       {
-    #         region: "us-east-1", # required, accepts us-east-1, us-west-2, eu-central-1, us-east-2, eu-west-1, ap-northeast-1, ap-southeast-2
-    #         sources: ["ROUTE53"], # required, accepts ROUTE53, VPC_FLOW, CLOUD_TRAIL, SH_FINDINGS
-    #       },
-    #     ],
+    #   resp = client.delete_data_lake({
+    #     regions: ["Region"], # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteDatalakeAutoEnable AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteDataLake AWS API Documentation
     #
-    # @overload delete_datalake_auto_enable(params = {})
+    # @overload delete_data_lake(params = {})
     # @param [Hash] params ({})
-    def delete_datalake_auto_enable(params = {}, options = {})
-      req = build_request(:delete_datalake_auto_enable, params)
-      req.send_request(options)
-    end
-
-    # Deletes the Amazon Security Lake delegated administrator account for
-    # the organization. This API can only be called by the organization
-    # management account. The organization management account cannot be the
-    # delegated administrator account.
-    #
-    # @option params [required, String] :account
-    #   The account ID the Security Lake delegated administrator.
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.delete_datalake_delegated_admin({
-    #     account: "SafeString", # required
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteDatalakeDelegatedAdmin AWS API Documentation
-    #
-    # @overload delete_datalake_delegated_admin(params = {})
-    # @param [Hash] params ({})
-    def delete_datalake_delegated_admin(params = {}, options = {})
-      req = build_request(:delete_datalake_delegated_admin, params)
+    def delete_data_lake(params = {}, options = {})
+      req = build_request(:delete_data_lake, params)
       req.send_request(options)
     end
 
     # Deletes the specified notification subscription in Amazon Security
     # Lake for the organization you specify.
     #
-    # @return [Types::DeleteDatalakeExceptionsSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
-    #   * {Types::DeleteDatalakeExceptionsSubscriptionResponse#status #status} => String
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteDataLakeExceptionSubscription AWS API Documentation
     #
-    # @example Response structure
-    #
-    #   resp.status #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteDatalakeExceptionsSubscription AWS API Documentation
-    #
-    # @overload delete_datalake_exceptions_subscription(params = {})
+    # @overload delete_data_lake_exception_subscription(params = {})
     # @param [Hash] params ({})
-    def delete_datalake_exceptions_subscription(params = {}, options = {})
-      req = build_request(:delete_datalake_exceptions_subscription, params)
+    def delete_data_lake_exception_subscription(params = {}, options = {})
+      req = build_request(:delete_data_lake_exception_subscription, params)
       req.send_request(options)
     end
 
-    # Deletes the subscription permission for accounts that are already
-    # enabled in Amazon Security Lake. You can delete a subscriber and
-    # remove access to data in the current Amazon Web Services Region.
+    # Removes automatic the enablement of configuration settings for new
+    # member accounts (but retains the settings for the delegated
+    # administrator) from Amazon Security Lake. You must run this API using
+    # the credentials of the delegated administrator. When you run this API,
+    # new member accounts that are added after the organization enables
+    # Security Lake won't contribute to the data lake.
     #
-    # @option params [required, String] :id
+    # @option params [required, Array<Types::DataLakeAutoEnableNewAccountConfiguration>] :auto_enable_new_account
+    #   Removes the automatic enablement of configuration settings for new
+    #   member accounts in Security Lake.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_data_lake_organization_configuration({
+    #     auto_enable_new_account: [ # required
+    #       {
+    #         region: "Region", # required
+    #         sources: [ # required
+    #           {
+    #             source_name: "ROUTE53", # accepts ROUTE53, VPC_FLOW, SH_FINDINGS, CLOUD_TRAIL_MGMT, LAMBDA_EXECUTION, S3_DATA
+    #             source_version: "AwsLogSourceVersion",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteDataLakeOrganizationConfiguration AWS API Documentation
+    #
+    # @overload delete_data_lake_organization_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_data_lake_organization_configuration(params = {}, options = {})
+      req = build_request(:delete_data_lake_organization_configuration, params)
+      req.send_request(options)
+    end
+
+    # Deletes the subscription permission and all notification settings for
+    # accounts that are already enabled in Amazon Security Lake. When you
+    # run `DeleteSubscriber`, the subscriber will no longer consume data
+    # from Security Lake and the subscriber is removed. This operation
+    # deletes the subscriber and removes access to data in the current
+    # Amazon Web Services Region.
+    #
+    # @option params [required, String] :subscriber_id
     #   A value created by Security Lake that uniquely identifies your
     #   `DeleteSubscriber` API request.
     #
@@ -1030,7 +1022,7 @@ module Aws::SecurityLake
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_subscriber({
-    #     id: "String", # required
+    #     subscriber_id: "UUID", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteSubscriber AWS API Documentation
@@ -1045,60 +1037,63 @@ module Aws::SecurityLake
     # Deletes the specified notification subscription in Amazon Security
     # Lake for the organization you specify.
     #
-    # @option params [required, String] :subscription_id
+    # @option params [required, String] :subscriber_id
     #   The ID of the Security Lake subscriber account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.delete_subscription_notification_configuration({
-    #     subscription_id: "UUID", # required
+    #   resp = client.delete_subscriber_notification({
+    #     subscriber_id: "UUID", # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteSubscriptionNotificationConfiguration AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeleteSubscriberNotification AWS API Documentation
     #
-    # @overload delete_subscription_notification_configuration(params = {})
+    # @overload delete_subscriber_notification(params = {})
     # @param [Hash] params ({})
-    def delete_subscription_notification_configuration(params = {}, options = {})
-      req = build_request(:delete_subscription_notification_configuration, params)
+    def delete_subscriber_notification(params = {}, options = {})
+      req = build_request(:delete_subscriber_notification, params)
       req.send_request(options)
     end
 
-    # Retrieves the Amazon Security Lake configuration object for the
-    # specified Amazon Web Services account ID. You can use the
-    # `GetDatalake` API to know whether Security Lake is enabled for the
-    # current Region. This API does not take input parameters.
+    # Deletes the Amazon Security Lake delegated administrator account for
+    # the organization. This API can only be called by the organization
+    # management account. The organization management account cannot be the
+    # delegated administrator account.
     #
-    # @return [Types::GetDatalakeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
-    #   * {Types::GetDatalakeResponse#configurations #configurations} => Hash&lt;String,Types::LakeConfigurationResponse&gt;
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/DeregisterDataLakeDelegatedAdministrator AWS API Documentation
+    #
+    # @overload deregister_data_lake_delegated_administrator(params = {})
+    # @param [Hash] params ({})
+    def deregister_data_lake_delegated_administrator(params = {}, options = {})
+      req = build_request(:deregister_data_lake_delegated_administrator, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of exception notifications for the account in
+    # Amazon Security Lake.
+    #
+    # @return [Types::GetDataLakeExceptionSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataLakeExceptionSubscriptionResponse#exception_time_to_live #exception_time_to_live} => Integer
+    #   * {Types::GetDataLakeExceptionSubscriptionResponse#notification_endpoint #notification_endpoint} => String
+    #   * {Types::GetDataLakeExceptionSubscriptionResponse#subscription_protocol #subscription_protocol} => String
     #
     # @example Response structure
     #
-    #   resp.configurations #=> Hash
-    #   resp.configurations["Region"].encryption_key #=> String
-    #   resp.configurations["Region"].replication_destination_regions #=> Array
-    #   resp.configurations["Region"].replication_destination_regions[0] #=> String, one of "us-east-1", "us-west-2", "eu-central-1", "us-east-2", "eu-west-1", "ap-northeast-1", "ap-southeast-2"
-    #   resp.configurations["Region"].replication_role_arn #=> String
-    #   resp.configurations["Region"].retention_settings #=> Array
-    #   resp.configurations["Region"].retention_settings[0].retention_period #=> Integer
-    #   resp.configurations["Region"].retention_settings[0].storage_class #=> String, one of "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER_IR", "GLACIER", "DEEP_ARCHIVE", "EXPIRE"
-    #   resp.configurations["Region"].s3_bucket_arn #=> String
-    #   resp.configurations["Region"].status #=> String, one of "INITIALIZED", "PENDING", "COMPLETED", "FAILED"
-    #   resp.configurations["Region"].tags_map #=> Hash
-    #   resp.configurations["Region"].tags_map["String"] #=> String
-    #   resp.configurations["Region"].update_status.last_update_failure.code #=> String
-    #   resp.configurations["Region"].update_status.last_update_failure.reason #=> String
-    #   resp.configurations["Region"].update_status.last_update_request_id #=> String
-    #   resp.configurations["Region"].update_status.last_update_status #=> String, one of "INITIALIZED", "PENDING", "COMPLETED", "FAILED"
+    #   resp.exception_time_to_live #=> Integer
+    #   resp.notification_endpoint #=> String
+    #   resp.subscription_protocol #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/GetDatalake AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/GetDataLakeExceptionSubscription AWS API Documentation
     #
-    # @overload get_datalake(params = {})
+    # @overload get_data_lake_exception_subscription(params = {})
     # @param [Hash] params ({})
-    def get_datalake(params = {}, options = {})
-      req = build_request(:get_datalake, params)
+    def get_data_lake_exception_subscription(params = {}, options = {})
+      req = build_request(:get_data_lake_exception_subscription, params)
       req.send_request(options)
     end
 
@@ -1107,66 +1102,24 @@ module Aws::SecurityLake
     # onboarded to Amazon Security Lake. This API does not take input
     # parameters.
     #
-    # @return [Types::GetDatalakeAutoEnableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    # @return [Types::GetDataLakeOrganizationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetDatalakeAutoEnableResponse#auto_enable_new_accounts #auto_enable_new_accounts} => Array&lt;Types::AutoEnableNewRegionConfiguration&gt;
-    #
-    # @example Response structure
-    #
-    #   resp.auto_enable_new_accounts #=> Array
-    #   resp.auto_enable_new_accounts[0].region #=> String, one of "us-east-1", "us-west-2", "eu-central-1", "us-east-2", "eu-west-1", "ap-northeast-1", "ap-southeast-2"
-    #   resp.auto_enable_new_accounts[0].sources #=> Array
-    #   resp.auto_enable_new_accounts[0].sources[0] #=> String, one of "ROUTE53", "VPC_FLOW", "CLOUD_TRAIL", "SH_FINDINGS"
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/GetDatalakeAutoEnable AWS API Documentation
-    #
-    # @overload get_datalake_auto_enable(params = {})
-    # @param [Hash] params ({})
-    def get_datalake_auto_enable(params = {}, options = {})
-      req = build_request(:get_datalake_auto_enable, params)
-      req.send_request(options)
-    end
-
-    # Retrieves the expiration period and time-to-live (TTL) for which the
-    # exception message will remain. Exceptions are stored by default, for 2
-    # weeks from when a record was created in Amazon Security Lake. This API
-    # does not take input parameters.
-    #
-    # @return [Types::GetDatalakeExceptionsExpiryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::GetDatalakeExceptionsExpiryResponse#exception_message_expiry #exception_message_expiry} => Integer
+    #   * {Types::GetDataLakeOrganizationConfigurationResponse#auto_enable_new_account #auto_enable_new_account} => Array&lt;Types::DataLakeAutoEnableNewAccountConfiguration&gt;
     #
     # @example Response structure
     #
-    #   resp.exception_message_expiry #=> Integer
+    #   resp.auto_enable_new_account #=> Array
+    #   resp.auto_enable_new_account[0].region #=> String
+    #   resp.auto_enable_new_account[0].sources #=> Array
+    #   resp.auto_enable_new_account[0].sources[0].source_name #=> String, one of "ROUTE53", "VPC_FLOW", "SH_FINDINGS", "CLOUD_TRAIL_MGMT", "LAMBDA_EXECUTION", "S3_DATA"
+    #   resp.auto_enable_new_account[0].sources[0].source_version #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/GetDatalakeExceptionsExpiry AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/GetDataLakeOrganizationConfiguration AWS API Documentation
     #
-    # @overload get_datalake_exceptions_expiry(params = {})
+    # @overload get_data_lake_organization_configuration(params = {})
     # @param [Hash] params ({})
-    def get_datalake_exceptions_expiry(params = {}, options = {})
-      req = build_request(:get_datalake_exceptions_expiry, params)
-      req.send_request(options)
-    end
-
-    # Retrieves the details of exception notifications for the account in
-    # Amazon Security Lake.
-    #
-    # @return [Types::GetDatalakeExceptionsSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::GetDatalakeExceptionsSubscriptionResponse#protocol_and_notification_endpoint #protocol_and_notification_endpoint} => Types::ProtocolAndNotificationEndpoint
-    #
-    # @example Response structure
-    #
-    #   resp.protocol_and_notification_endpoint.endpoint #=> String
-    #   resp.protocol_and_notification_endpoint.protocol #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/GetDatalakeExceptionsSubscription AWS API Documentation
-    #
-    # @overload get_datalake_exceptions_subscription(params = {})
-    # @param [Hash] params ({})
-    def get_datalake_exceptions_subscription(params = {}, options = {})
-      req = build_request(:get_datalake_exceptions_subscription, params)
+    def get_data_lake_organization_configuration(params = {}, options = {})
+      req = build_request(:get_data_lake_organization_configuration, params)
       req.send_request(options)
     end
 
@@ -1174,12 +1127,12 @@ module Aws::SecurityLake
     # Security Lake is enabled for those accounts and which sources Security
     # Lake is collecting data from.
     #
-    # @option params [Array<String>] :account_set
+    # @option params [Array<String>] :accounts
     #   The Amazon Web Services account ID for which a static snapshot of the
     #   current Amazon Web Services Region, including enabled accounts and log
     #   sources, is retrieved.
     #
-    # @option params [Integer] :max_account_results
+    # @option params [Integer] :max_results
     #   The maximum limit of accounts for which the static snapshot of the
     #   current Region, including enabled accounts and log sources, is
     #   retrieved.
@@ -1193,45 +1146,48 @@ module Aws::SecurityLake
     #   Each pagination token expires after 24 hours. Using an expired
     #   pagination token will return an HTTP 400 InvalidToken error.
     #
-    # @return [Types::GetDatalakeStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    # @return [Types::GetDataLakeSourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetDatalakeStatusResponse#account_sources_list #account_sources_list} => Array&lt;Types::AccountSources&gt;
-    #   * {Types::GetDatalakeStatusResponse#next_token #next_token} => String
+    #   * {Types::GetDataLakeSourcesResponse#data_lake_arn #data_lake_arn} => String
+    #   * {Types::GetDataLakeSourcesResponse#data_lake_sources #data_lake_sources} => Array&lt;Types::DataLakeSource&gt;
+    #   * {Types::GetDataLakeSourcesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.get_datalake_status({
-    #     account_set: ["SafeString"],
-    #     max_account_results: 1,
-    #     next_token: "SafeString",
+    #   resp = client.get_data_lake_sources({
+    #     accounts: ["AwsAccountId"],
+    #     max_results: 1,
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.account_sources_list #=> Array
-    #   resp.account_sources_list[0].account #=> String
-    #   resp.account_sources_list[0].event_class #=> String, one of "ACCESS_ACTIVITY", "FILE_ACTIVITY", "KERNEL_ACTIVITY", "KERNEL_EXTENSION", "MEMORY_ACTIVITY", "MODULE_ACTIVITY", "PROCESS_ACTIVITY", "REGISTRY_KEY_ACTIVITY", "REGISTRY_VALUE_ACTIVITY", "RESOURCE_ACTIVITY", "SCHEDULED_JOB_ACTIVITY", "SECURITY_FINDING", "ACCOUNT_CHANGE", "AUTHENTICATION", "AUTHORIZATION", "ENTITY_MANAGEMENT_AUDIT", "DHCP_ACTIVITY", "NETWORK_ACTIVITY", "DNS_ACTIVITY", "FTP_ACTIVITY", "HTTP_ACTIVITY", "RDP_ACTIVITY", "SMB_ACTIVITY", "SSH_ACTIVITY", "CLOUD_API", "CONTAINER_LIFECYCLE", "DATABASE_LIFECYCLE", "CONFIG_STATE", "CLOUD_STORAGE", "INVENTORY_INFO", "RFB_ACTIVITY", "SMTP_ACTIVITY", "VIRTUAL_MACHINE_ACTIVITY"
-    #   resp.account_sources_list[0].logs_status #=> Array
-    #   resp.account_sources_list[0].logs_status[0].health_status #=> String, one of "ACTIVE", "DEACTIVATED", "PENDING"
-    #   resp.account_sources_list[0].logs_status[0].path_to_logs #=> String
-    #   resp.account_sources_list[0].source_type #=> String
+    #   resp.data_lake_arn #=> String
+    #   resp.data_lake_sources #=> Array
+    #   resp.data_lake_sources[0].account #=> String
+    #   resp.data_lake_sources[0].event_classes #=> Array
+    #   resp.data_lake_sources[0].event_classes[0] #=> String
+    #   resp.data_lake_sources[0].source_name #=> String
+    #   resp.data_lake_sources[0].source_statuses #=> Array
+    #   resp.data_lake_sources[0].source_statuses[0].resource #=> String
+    #   resp.data_lake_sources[0].source_statuses[0].status #=> String, one of "COLLECTING", "MISCONFIGURED", "NOT_COLLECTING"
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/GetDatalakeStatus AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/GetDataLakeSources AWS API Documentation
     #
-    # @overload get_datalake_status(params = {})
+    # @overload get_data_lake_sources(params = {})
     # @param [Hash] params ({})
-    def get_datalake_status(params = {}, options = {})
-      req = build_request(:get_datalake_status, params)
+    def get_data_lake_sources(params = {}, options = {})
+      req = build_request(:get_data_lake_sources, params)
       req.send_request(options)
     end
 
     # Retrieves the subscription information for the specified subscription
     # ID. You can get information about a specific subscriber.
     #
-    # @option params [required, String] :id
+    # @option params [required, String] :subscriber_id
     #   A value created by Amazon Security Lake that uniquely identifies your
     #   `GetSubscriber` API request.
     #
@@ -1242,30 +1198,36 @@ module Aws::SecurityLake
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_subscriber({
-    #     id: "String", # required
+    #     subscriber_id: "UUID", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.subscriber.access_types #=> Array
     #   resp.subscriber.access_types[0] #=> String, one of "LAKEFORMATION", "S3"
-    #   resp.subscriber.account_id #=> String
     #   resp.subscriber.created_at #=> Time
-    #   resp.subscriber.external_id #=> String
     #   resp.subscriber.resource_share_arn #=> String
     #   resp.subscriber.resource_share_name #=> String
     #   resp.subscriber.role_arn #=> String
     #   resp.subscriber.s3_bucket_arn #=> String
-    #   resp.subscriber.sns_arn #=> String
-    #   resp.subscriber.source_types #=> Array
-    #   resp.subscriber.source_types[0].aws_source_type #=> String, one of "ROUTE53", "VPC_FLOW", "CLOUD_TRAIL", "SH_FINDINGS"
-    #   resp.subscriber.source_types[0].custom_source_type #=> String
+    #   resp.subscriber.sources #=> Array
+    #   resp.subscriber.sources[0].aws_log_source.source_name #=> String, one of "ROUTE53", "VPC_FLOW", "SH_FINDINGS", "CLOUD_TRAIL_MGMT", "LAMBDA_EXECUTION", "S3_DATA"
+    #   resp.subscriber.sources[0].aws_log_source.source_version #=> String
+    #   resp.subscriber.sources[0].custom_log_source.attributes.crawler_arn #=> String
+    #   resp.subscriber.sources[0].custom_log_source.attributes.database_arn #=> String
+    #   resp.subscriber.sources[0].custom_log_source.attributes.table_arn #=> String
+    #   resp.subscriber.sources[0].custom_log_source.provider.location #=> String
+    #   resp.subscriber.sources[0].custom_log_source.provider.role_arn #=> String
+    #   resp.subscriber.sources[0].custom_log_source.source_name #=> String
+    #   resp.subscriber.sources[0].custom_log_source.source_version #=> String
+    #   resp.subscriber.subscriber_arn #=> String
     #   resp.subscriber.subscriber_description #=> String
+    #   resp.subscriber.subscriber_endpoint #=> String
+    #   resp.subscriber.subscriber_id #=> String
+    #   resp.subscriber.subscriber_identity.external_id #=> String
+    #   resp.subscriber.subscriber_identity.principal #=> String
     #   resp.subscriber.subscriber_name #=> String
-    #   resp.subscriber.subscription_endpoint #=> String
-    #   resp.subscriber.subscription_id #=> String
-    #   resp.subscriber.subscription_protocol #=> String, one of "HTTPS", "SQS"
-    #   resp.subscriber.subscription_status #=> String, one of "ACTIVE", "DEACTIVATED", "PENDING", "READY"
+    #   resp.subscriber.subscriber_status #=> String, one of "ACTIVE", "DEACTIVATED", "PENDING", "READY"
     #   resp.subscriber.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/GetSubscriber AWS API Documentation
@@ -1280,7 +1242,7 @@ module Aws::SecurityLake
     # Lists the Amazon Security Lake exceptions that you can use to find the
     # source of problems and fix them.
     #
-    # @option params [Integer] :max_failures
+    # @option params [Integer] :max_results
     #   List the maximum number of failures in Security Lake.
     #
     # @option params [String] :next_token
@@ -1292,64 +1254,95 @@ module Aws::SecurityLake
     #   Each pagination token expires after 24 hours. Using an expired
     #   pagination token will return an HTTP 400 InvalidToken error.
     #
-    # @option params [Array<String>] :region_set
+    # @option params [Array<String>] :regions
     #   List the Amazon Web Services Regions from which exceptions are
     #   retrieved.
     #
-    # @return [Types::ListDatalakeExceptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    # @return [Types::ListDataLakeExceptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListDatalakeExceptionsResponse#next_token #next_token} => String
-    #   * {Types::ListDatalakeExceptionsResponse#non_retryable_failures #non_retryable_failures} => Array&lt;Types::FailuresResponse&gt;
+    #   * {Types::ListDataLakeExceptionsResponse#exceptions #exceptions} => Array&lt;Types::DataLakeException&gt;
+    #   * {Types::ListDataLakeExceptionsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.list_datalake_exceptions({
-    #     max_failures: 1,
-    #     next_token: "SafeString",
-    #     region_set: ["us-east-1"], # accepts us-east-1, us-west-2, eu-central-1, us-east-2, eu-west-1, ap-northeast-1, ap-southeast-2
+    #   resp = client.list_data_lake_exceptions({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     regions: ["Region"],
     #   })
     #
     # @example Response structure
     #
+    #   resp.exceptions #=> Array
+    #   resp.exceptions[0].exception #=> String
+    #   resp.exceptions[0].region #=> String
+    #   resp.exceptions[0].remediation #=> String
+    #   resp.exceptions[0].timestamp #=> Time
     #   resp.next_token #=> String
-    #   resp.non_retryable_failures #=> Array
-    #   resp.non_retryable_failures[0].failures #=> Array
-    #   resp.non_retryable_failures[0].failures[0].exception_message #=> String
-    #   resp.non_retryable_failures[0].failures[0].remediation #=> String
-    #   resp.non_retryable_failures[0].failures[0].timestamp #=> Time
-    #   resp.non_retryable_failures[0].region #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/ListDatalakeExceptions AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/ListDataLakeExceptions AWS API Documentation
     #
-    # @overload list_datalake_exceptions(params = {})
+    # @overload list_data_lake_exceptions(params = {})
     # @param [Hash] params ({})
-    def list_datalake_exceptions(params = {}, options = {})
-      req = build_request(:list_datalake_exceptions, params)
+    def list_data_lake_exceptions(params = {}, options = {})
+      req = build_request(:list_data_lake_exceptions, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the Amazon Security Lake configuration object for the
+    # specified Amazon Web Services account ID. You can use the
+    # `ListDataLakes` API to know whether Security Lake is enabled for any
+    # region.
+    #
+    # @option params [Array<String>] :regions
+    #   The list of regions where Security Lake is enabled.
+    #
+    # @return [Types::ListDataLakesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataLakesResponse#data_lakes #data_lakes} => Array&lt;Types::DataLakeResource&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_lakes({
+    #     regions: ["Region"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_lakes #=> Array
+    #   resp.data_lakes[0].create_status #=> String, one of "INITIALIZED", "PENDING", "COMPLETED", "FAILED"
+    #   resp.data_lakes[0].data_lake_arn #=> String
+    #   resp.data_lakes[0].encryption_configuration.kms_key_id #=> String
+    #   resp.data_lakes[0].lifecycle_configuration.expiration.days #=> Integer
+    #   resp.data_lakes[0].lifecycle_configuration.transitions #=> Array
+    #   resp.data_lakes[0].lifecycle_configuration.transitions[0].days #=> Integer
+    #   resp.data_lakes[0].lifecycle_configuration.transitions[0].storage_class #=> String
+    #   resp.data_lakes[0].region #=> String
+    #   resp.data_lakes[0].replication_configuration.regions #=> Array
+    #   resp.data_lakes[0].replication_configuration.regions[0] #=> String
+    #   resp.data_lakes[0].replication_configuration.role_arn #=> String
+    #   resp.data_lakes[0].s3_bucket_arn #=> String
+    #   resp.data_lakes[0].update_status.exception.code #=> String
+    #   resp.data_lakes[0].update_status.exception.reason #=> String
+    #   resp.data_lakes[0].update_status.request_id #=> String
+    #   resp.data_lakes[0].update_status.status #=> String, one of "INITIALIZED", "PENDING", "COMPLETED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/ListDataLakes AWS API Documentation
+    #
+    # @overload list_data_lakes(params = {})
+    # @param [Hash] params ({})
+    def list_data_lakes(params = {}, options = {})
+      req = build_request(:list_data_lakes, params)
       req.send_request(options)
     end
 
     # Retrieves the log sources in the current Amazon Web Services Region.
     #
-    # @option params [Array<String>] :input_order
-    #   Lists the log sources in input order, namely Region, source type, and
-    #   member account.
-    #
-    # @option params [Hash<String,Hash>] :list_all_dimensions
-    #   List the view of log sources for enabled Amazon Security Lake accounts
-    #   for specific Amazon Web Services sources from specific accounts and
-    #   specific Regions.
-    #
-    # @option params [Array<String>] :list_single_dimension
-    #   List the view of log sources for enabled Security Lake accounts for
-    #   all Amazon Web Services sources from specific accounts or specific
-    #   Regions.
-    #
-    # @option params [Hash<String,Array>] :list_two_dimensions
-    #   Lists the view of log sources for enabled Security Lake accounts for
-    #   specific Amazon Web Services sources from specific accounts or
-    #   specific Regions.
+    # @option params [Array<String>] :accounts
+    #   The list of Amazon Web Services accounts for which log sources are
+    #   displayed.
     #
     # @option params [Integer] :max_results
     #   The maximum number of accounts for which the log sources are
@@ -1359,38 +1352,65 @@ module Aws::SecurityLake
     #   If nextToken is returned, there are more results available. You can
     #   repeat the call using the returned token to retrieve the next page.
     #
+    # @option params [Array<String>] :regions
+    #   The list of regions for which log sources are displayed.
+    #
+    # @option params [Array<Types::LogSourceResource>] :sources
+    #   The list of sources for which log sources are displayed.
+    #
     # @return [Types::ListLogSourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListLogSourcesResponse#next_token #next_token} => String
-    #   * {Types::ListLogSourcesResponse#region_source_types_accounts_list #region_source_types_accounts_list} => Array&lt;Hash&lt;String,Hash&lt;String,Array&lt;String&gt;&gt;&gt;&gt;
+    #   * {Types::ListLogSourcesResponse#sources #sources} => Array&lt;Types::LogSource&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_log_sources({
-    #     input_order: ["REGION"], # accepts REGION, SOURCE_TYPE, MEMBER
-    #     list_all_dimensions: {
-    #       "String" => {
-    #         "String" => ["String"],
-    #       },
-    #     },
-    #     list_single_dimension: ["SafeString"],
-    #     list_two_dimensions: {
-    #       "String" => ["String"],
-    #     },
+    #     accounts: ["AwsAccountId"],
     #     max_results: 1,
-    #     next_token: "SafeString",
+    #     next_token: "NextToken",
+    #     regions: ["Region"],
+    #     sources: [
+    #       {
+    #         aws_log_source: {
+    #           source_name: "ROUTE53", # accepts ROUTE53, VPC_FLOW, SH_FINDINGS, CLOUD_TRAIL_MGMT, LAMBDA_EXECUTION, S3_DATA
+    #           source_version: "AwsLogSourceVersion",
+    #         },
+    #         custom_log_source: {
+    #           attributes: {
+    #             crawler_arn: "AmazonResourceName",
+    #             database_arn: "AmazonResourceName",
+    #             table_arn: "AmazonResourceName",
+    #           },
+    #           provider: {
+    #             location: "S3URI",
+    #             role_arn: "RoleArn",
+    #           },
+    #           source_name: "CustomLogSourceName",
+    #           source_version: "CustomLogSourceVersion",
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.next_token #=> String
-    #   resp.region_source_types_accounts_list #=> Array
-    #   resp.region_source_types_accounts_list[0] #=> Hash
-    #   resp.region_source_types_accounts_list[0]["String"] #=> Hash
-    #   resp.region_source_types_accounts_list[0]["String"]["String"] #=> Array
-    #   resp.region_source_types_accounts_list[0]["String"]["String"][0] #=> String
+    #   resp.sources #=> Array
+    #   resp.sources[0].account #=> String
+    #   resp.sources[0].region #=> String
+    #   resp.sources[0].sources #=> Array
+    #   resp.sources[0].sources[0].aws_log_source.source_name #=> String, one of "ROUTE53", "VPC_FLOW", "SH_FINDINGS", "CLOUD_TRAIL_MGMT", "LAMBDA_EXECUTION", "S3_DATA"
+    #   resp.sources[0].sources[0].aws_log_source.source_version #=> String
+    #   resp.sources[0].sources[0].custom_log_source.attributes.crawler_arn #=> String
+    #   resp.sources[0].sources[0].custom_log_source.attributes.database_arn #=> String
+    #   resp.sources[0].sources[0].custom_log_source.attributes.table_arn #=> String
+    #   resp.sources[0].sources[0].custom_log_source.provider.location #=> String
+    #   resp.sources[0].sources[0].custom_log_source.provider.role_arn #=> String
+    #   resp.sources[0].sources[0].custom_log_source.source_name #=> String
+    #   resp.sources[0].sources[0].custom_log_source.source_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/ListLogSources AWS API Documentation
     #
@@ -1424,7 +1444,7 @@ module Aws::SecurityLake
     #
     #   resp = client.list_subscribers({
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
@@ -1433,23 +1453,29 @@ module Aws::SecurityLake
     #   resp.subscribers #=> Array
     #   resp.subscribers[0].access_types #=> Array
     #   resp.subscribers[0].access_types[0] #=> String, one of "LAKEFORMATION", "S3"
-    #   resp.subscribers[0].account_id #=> String
     #   resp.subscribers[0].created_at #=> Time
-    #   resp.subscribers[0].external_id #=> String
     #   resp.subscribers[0].resource_share_arn #=> String
     #   resp.subscribers[0].resource_share_name #=> String
     #   resp.subscribers[0].role_arn #=> String
     #   resp.subscribers[0].s3_bucket_arn #=> String
-    #   resp.subscribers[0].sns_arn #=> String
-    #   resp.subscribers[0].source_types #=> Array
-    #   resp.subscribers[0].source_types[0].aws_source_type #=> String, one of "ROUTE53", "VPC_FLOW", "CLOUD_TRAIL", "SH_FINDINGS"
-    #   resp.subscribers[0].source_types[0].custom_source_type #=> String
+    #   resp.subscribers[0].sources #=> Array
+    #   resp.subscribers[0].sources[0].aws_log_source.source_name #=> String, one of "ROUTE53", "VPC_FLOW", "SH_FINDINGS", "CLOUD_TRAIL_MGMT", "LAMBDA_EXECUTION", "S3_DATA"
+    #   resp.subscribers[0].sources[0].aws_log_source.source_version #=> String
+    #   resp.subscribers[0].sources[0].custom_log_source.attributes.crawler_arn #=> String
+    #   resp.subscribers[0].sources[0].custom_log_source.attributes.database_arn #=> String
+    #   resp.subscribers[0].sources[0].custom_log_source.attributes.table_arn #=> String
+    #   resp.subscribers[0].sources[0].custom_log_source.provider.location #=> String
+    #   resp.subscribers[0].sources[0].custom_log_source.provider.role_arn #=> String
+    #   resp.subscribers[0].sources[0].custom_log_source.source_name #=> String
+    #   resp.subscribers[0].sources[0].custom_log_source.source_version #=> String
+    #   resp.subscribers[0].subscriber_arn #=> String
     #   resp.subscribers[0].subscriber_description #=> String
+    #   resp.subscribers[0].subscriber_endpoint #=> String
+    #   resp.subscribers[0].subscriber_id #=> String
+    #   resp.subscribers[0].subscriber_identity.external_id #=> String
+    #   resp.subscribers[0].subscriber_identity.principal #=> String
     #   resp.subscribers[0].subscriber_name #=> String
-    #   resp.subscribers[0].subscription_endpoint #=> String
-    #   resp.subscribers[0].subscription_id #=> String
-    #   resp.subscribers[0].subscription_protocol #=> String, one of "HTTPS", "SQS"
-    #   resp.subscribers[0].subscription_status #=> String, one of "ACTIVE", "DEACTIVATED", "PENDING", "READY"
+    #   resp.subscribers[0].subscriber_status #=> String, one of "ACTIVE", "DEACTIVATED", "PENDING", "READY"
     #   resp.subscribers[0].updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/ListSubscribers AWS API Documentation
@@ -1461,73 +1487,106 @@ module Aws::SecurityLake
       req.send_request(options)
     end
 
+    # Designates the Amazon Security Lake delegated administrator account
+    # for the organization. This API can only be called by the organization
+    # management account. The organization management account cannot be the
+    # delegated administrator account.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Web Services account ID of the Security Lake delegated
+    #   administrator.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_data_lake_delegated_administrator({
+    #     account_id: "SafeString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/RegisterDataLakeDelegatedAdministrator AWS API Documentation
+    #
+    # @overload register_data_lake_delegated_administrator(params = {})
+    # @param [Hash] params ({})
+    def register_data_lake_delegated_administrator(params = {}, options = {})
+      req = build_request(:register_data_lake_delegated_administrator, params)
+      req.send_request(options)
+    end
+
     # Specifies where to store your security data and for how long. You can
     # add a rollup Region to consolidate data from multiple Amazon Web
     # Services Regions.
     #
-    # @option params [required, Hash<String,Types::LakeConfigurationRequest>] :configurations
+    # @option params [required, Array<Types::DataLakeConfiguration>] :configurations
     #   Specify the Region or Regions that will contribute data to the rollup
     #   region.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::UpdateDataLakeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDataLakeResponse#data_lakes #data_lakes} => Array&lt;Types::DataLakeResource&gt;
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.update_datalake({
-    #     configurations: { # required
-    #       "us-east-1" => {
-    #         encryption_key: "String",
-    #         replication_destination_regions: ["us-east-1"], # accepts us-east-1, us-west-2, eu-central-1, us-east-2, eu-west-1, ap-northeast-1, ap-southeast-2
-    #         replication_role_arn: "RoleArn",
-    #         retention_settings: [
-    #           {
-    #             retention_period: 1,
-    #             storage_class: "STANDARD_IA", # accepts STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, DEEP_ARCHIVE, EXPIRE
+    #   resp = client.update_data_lake({
+    #     configurations: [ # required
+    #       {
+    #         encryption_configuration: {
+    #           kms_key_id: "String",
+    #         },
+    #         lifecycle_configuration: {
+    #           expiration: {
+    #             days: 1,
     #           },
-    #         ],
-    #         tags_map: {
-    #           "String" => "String",
+    #           transitions: [
+    #             {
+    #               days: 1,
+    #               storage_class: "DataLakeStorageClass",
+    #             },
+    #           ],
+    #         },
+    #         region: "Region", # required
+    #         replication_configuration: {
+    #           regions: ["Region"],
+    #           role_arn: "RoleArn",
     #         },
     #       },
-    #     },
+    #     ],
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/UpdateDatalake AWS API Documentation
+    # @example Response structure
     #
-    # @overload update_datalake(params = {})
+    #   resp.data_lakes #=> Array
+    #   resp.data_lakes[0].create_status #=> String, one of "INITIALIZED", "PENDING", "COMPLETED", "FAILED"
+    #   resp.data_lakes[0].data_lake_arn #=> String
+    #   resp.data_lakes[0].encryption_configuration.kms_key_id #=> String
+    #   resp.data_lakes[0].lifecycle_configuration.expiration.days #=> Integer
+    #   resp.data_lakes[0].lifecycle_configuration.transitions #=> Array
+    #   resp.data_lakes[0].lifecycle_configuration.transitions[0].days #=> Integer
+    #   resp.data_lakes[0].lifecycle_configuration.transitions[0].storage_class #=> String
+    #   resp.data_lakes[0].region #=> String
+    #   resp.data_lakes[0].replication_configuration.regions #=> Array
+    #   resp.data_lakes[0].replication_configuration.regions[0] #=> String
+    #   resp.data_lakes[0].replication_configuration.role_arn #=> String
+    #   resp.data_lakes[0].s3_bucket_arn #=> String
+    #   resp.data_lakes[0].update_status.exception.code #=> String
+    #   resp.data_lakes[0].update_status.exception.reason #=> String
+    #   resp.data_lakes[0].update_status.request_id #=> String
+    #   resp.data_lakes[0].update_status.status #=> String, one of "INITIALIZED", "PENDING", "COMPLETED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/UpdateDataLake AWS API Documentation
+    #
+    # @overload update_data_lake(params = {})
     # @param [Hash] params ({})
-    def update_datalake(params = {}, options = {})
-      req = build_request(:update_datalake, params)
-      req.send_request(options)
-    end
-
-    # Update the expiration period for the exception message to your
-    # preferred time, and control the time-to-live (TTL) for the exception
-    # message to remain. Exceptions are stored by default for 2 weeks from
-    # when a record was created in Amazon Security Lake.
-    #
-    # @option params [required, Integer] :exception_message_expiry
-    #   The time-to-live (TTL) for the exception message to remain.
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.update_datalake_exceptions_expiry({
-    #     exception_message_expiry: 1, # required
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/UpdateDatalakeExceptionsExpiry AWS API Documentation
-    #
-    # @overload update_datalake_exceptions_expiry(params = {})
-    # @param [Hash] params ({})
-    def update_datalake_exceptions_expiry(params = {}, options = {})
-      req = build_request(:update_datalake_exceptions_expiry, params)
+    def update_data_lake(params = {}, options = {})
+      req = build_request(:update_data_lake, params)
       req.send_request(options)
     end
 
     # Updates the specified notification subscription in Amazon Security
     # Lake for the organization you specify.
+    #
+    # @option params [Integer] :exception_time_to_live
+    #   The time-to-live (TTL) for the exception message to remain.
     #
     # @option params [required, String] :notification_endpoint
     #   The account that is subscribed to receive exception notifications.
@@ -1539,17 +1598,18 @@ module Aws::SecurityLake
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.update_datalake_exceptions_subscription({
+    #   resp = client.update_data_lake_exception_subscription({
+    #     exception_time_to_live: 1,
     #     notification_endpoint: "SafeString", # required
-    #     subscription_protocol: "HTTP", # required, accepts HTTP, HTTPS, EMAIL, EMAIL_JSON, SMS, SQS, LAMBDA, APP, FIREHOSE
+    #     subscription_protocol: "SubscriptionProtocol", # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/UpdateDatalakeExceptionsSubscription AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/UpdateDataLakeExceptionSubscription AWS API Documentation
     #
-    # @overload update_datalake_exceptions_subscription(params = {})
+    # @overload update_data_lake_exception_subscription(params = {})
     # @param [Hash] params ({})
-    def update_datalake_exceptions_subscription(params = {}, options = {})
-      req = build_request(:update_datalake_exceptions_subscription, params)
+    def update_data_lake_exception_subscription(params = {}, options = {})
+      req = build_request(:update_data_lake_exception_subscription, params)
       req.send_request(options)
     end
 
@@ -1557,14 +1617,7 @@ module Aws::SecurityLake
     # account ID. You can update a subscriber by changing the sources that
     # the subscriber consumes data from.
     #
-    # @option params [String] :external_id
-    #   The external ID of the Security Lake account.
-    #
-    # @option params [required, String] :id
-    #   A value created by Security Lake that uniquely identifies your
-    #   subscription.
-    #
-    # @option params [required, Array<Types::SourceType>] :source_types
+    # @option params [Array<Types::LogSourceResource>] :sources
     #   The supported Amazon Web Services from which logs and events are
     #   collected. For the list of supported Amazon Web Services, see the
     #   [Amazon Security Lake User Guide][1].
@@ -1576,6 +1629,13 @@ module Aws::SecurityLake
     # @option params [String] :subscriber_description
     #   The description of the Security Lake account subscriber.
     #
+    # @option params [required, String] :subscriber_id
+    #   A value created by Security Lake that uniquely identifies your
+    #   subscription.
+    #
+    # @option params [Types::AwsIdentity] :subscriber_identity
+    #   The AWS identity used to access your data.
+    #
     # @option params [String] :subscriber_name
     #   The name of the Security Lake account subscriber.
     #
@@ -1586,15 +1646,33 @@ module Aws::SecurityLake
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_subscriber({
-    #     external_id: "SafeString",
-    #     id: "String", # required
-    #     source_types: [ # required
+    #     sources: [
     #       {
-    #         aws_source_type: "ROUTE53", # accepts ROUTE53, VPC_FLOW, CLOUD_TRAIL, SH_FINDINGS
-    #         custom_source_type: "CustomSourceType",
+    #         aws_log_source: {
+    #           source_name: "ROUTE53", # accepts ROUTE53, VPC_FLOW, SH_FINDINGS, CLOUD_TRAIL_MGMT, LAMBDA_EXECUTION, S3_DATA
+    #           source_version: "AwsLogSourceVersion",
+    #         },
+    #         custom_log_source: {
+    #           attributes: {
+    #             crawler_arn: "AmazonResourceName",
+    #             database_arn: "AmazonResourceName",
+    #             table_arn: "AmazonResourceName",
+    #           },
+    #           provider: {
+    #             location: "S3URI",
+    #             role_arn: "RoleArn",
+    #           },
+    #           source_name: "CustomLogSourceName",
+    #           source_version: "CustomLogSourceVersion",
+    #         },
     #       },
     #     ],
     #     subscriber_description: "DescriptionString",
+    #     subscriber_id: "UUID", # required
+    #     subscriber_identity: {
+    #       external_id: "ExternalId", # required
+    #       principal: "AwsPrincipal", # required
+    #     },
     #     subscriber_name: "UpdateSubscriberRequestSubscriberNameString",
     #   })
     #
@@ -1602,23 +1680,29 @@ module Aws::SecurityLake
     #
     #   resp.subscriber.access_types #=> Array
     #   resp.subscriber.access_types[0] #=> String, one of "LAKEFORMATION", "S3"
-    #   resp.subscriber.account_id #=> String
     #   resp.subscriber.created_at #=> Time
-    #   resp.subscriber.external_id #=> String
     #   resp.subscriber.resource_share_arn #=> String
     #   resp.subscriber.resource_share_name #=> String
     #   resp.subscriber.role_arn #=> String
     #   resp.subscriber.s3_bucket_arn #=> String
-    #   resp.subscriber.sns_arn #=> String
-    #   resp.subscriber.source_types #=> Array
-    #   resp.subscriber.source_types[0].aws_source_type #=> String, one of "ROUTE53", "VPC_FLOW", "CLOUD_TRAIL", "SH_FINDINGS"
-    #   resp.subscriber.source_types[0].custom_source_type #=> String
+    #   resp.subscriber.sources #=> Array
+    #   resp.subscriber.sources[0].aws_log_source.source_name #=> String, one of "ROUTE53", "VPC_FLOW", "SH_FINDINGS", "CLOUD_TRAIL_MGMT", "LAMBDA_EXECUTION", "S3_DATA"
+    #   resp.subscriber.sources[0].aws_log_source.source_version #=> String
+    #   resp.subscriber.sources[0].custom_log_source.attributes.crawler_arn #=> String
+    #   resp.subscriber.sources[0].custom_log_source.attributes.database_arn #=> String
+    #   resp.subscriber.sources[0].custom_log_source.attributes.table_arn #=> String
+    #   resp.subscriber.sources[0].custom_log_source.provider.location #=> String
+    #   resp.subscriber.sources[0].custom_log_source.provider.role_arn #=> String
+    #   resp.subscriber.sources[0].custom_log_source.source_name #=> String
+    #   resp.subscriber.sources[0].custom_log_source.source_version #=> String
+    #   resp.subscriber.subscriber_arn #=> String
     #   resp.subscriber.subscriber_description #=> String
+    #   resp.subscriber.subscriber_endpoint #=> String
+    #   resp.subscriber.subscriber_id #=> String
+    #   resp.subscriber.subscriber_identity.external_id #=> String
+    #   resp.subscriber.subscriber_identity.principal #=> String
     #   resp.subscriber.subscriber_name #=> String
-    #   resp.subscriber.subscription_endpoint #=> String
-    #   resp.subscriber.subscription_id #=> String
-    #   resp.subscriber.subscription_protocol #=> String, one of "HTTPS", "SQS"
-    #   resp.subscriber.subscription_status #=> String, one of "ACTIVE", "DEACTIVATED", "PENDING", "READY"
+    #   resp.subscriber.subscriber_status #=> String, one of "ACTIVE", "DEACTIVATED", "PENDING", "READY"
     #   resp.subscriber.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/UpdateSubscriber AWS API Documentation
@@ -1634,63 +1718,44 @@ module Aws::SecurityLake
     # HTTPs endpoint) or switches the notification subscription endpoint for
     # a subscriber.
     #
-    # @option params [Boolean] :create_sqs
-    #   Create a new subscription notification for the specified subscription
-    #   ID in Amazon Security Lake.
+    # @option params [required, Types::NotificationConfiguration] :configuration
+    #   The configuration for subscriber notification.
     #
-    # @option params [String] :https_api_key_name
-    #   The key name for the subscription notification.
-    #
-    # @option params [String] :https_api_key_value
-    #   The key value for the subscription notification.
-    #
-    # @option params [String] :https_method
-    #   The HTTPS method used for the subscription notification.
-    #
-    # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) specifying the role of the subscriber.
-    #   For more information about ARNs and how to use them in policies, see,
-    #   see the [Managing data access][1] and [Amazon Web Services Managed
-    #   Policies][2]in the Amazon Security Lake User Guide.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com//security-lake/latest/userguide/subscriber-data-access.html
-    #   [2]: https://docs.aws.amazon.com/security-lake/latest/userguide/security-iam-awsmanpol.html
-    #
-    # @option params [String] :subscription_endpoint
-    #   The subscription endpoint in Security Lake.
-    #
-    # @option params [required, String] :subscription_id
+    # @option params [required, String] :subscriber_id
     #   The subscription ID for which the subscription notification is
     #   specified.
     #
-    # @return [Types::UpdateSubscriptionNotificationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    # @return [Types::UpdateSubscriberNotificationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::UpdateSubscriptionNotificationConfigurationResponse#queue_arn #queue_arn} => String
+    #   * {Types::UpdateSubscriberNotificationResponse#subscriber_endpoint #subscriber_endpoint} => String
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.update_subscription_notification_configuration({
-    #     create_sqs: false,
-    #     https_api_key_name: "String",
-    #     https_api_key_value: "String",
-    #     https_method: "POST", # accepts POST, PUT
-    #     role_arn: "RoleArn",
-    #     subscription_endpoint: "UpdateSubscriptionNotificationConfigurationRequestSubscriptionEndpointString",
-    #     subscription_id: "UUID", # required
+    #   resp = client.update_subscriber_notification({
+    #     configuration: { # required
+    #       https_notification_configuration: {
+    #         authorization_api_key_name: "String",
+    #         authorization_api_key_value: "String",
+    #         endpoint: "HttpsNotificationConfigurationEndpointString", # required
+    #         http_method: "POST", # accepts POST, PUT
+    #         target_role_arn: "RoleArn", # required
+    #       },
+    #       sqs_notification_configuration: {
+    #       },
+    #     },
+    #     subscriber_id: "UUID", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.queue_arn #=> String
+    #   resp.subscriber_endpoint #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/UpdateSubscriptionNotificationConfiguration AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/UpdateSubscriberNotification AWS API Documentation
     #
-    # @overload update_subscription_notification_configuration(params = {})
+    # @overload update_subscriber_notification(params = {})
     # @param [Hash] params ({})
-    def update_subscription_notification_configuration(params = {}, options = {})
-      req = build_request(:update_subscription_notification_configuration, params)
+    def update_subscriber_notification(params = {}, options = {})
+      req = build_request(:update_subscriber_notification, params)
       req.send_request(options)
     end
 
@@ -1707,7 +1772,7 @@ module Aws::SecurityLake
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securitylake'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

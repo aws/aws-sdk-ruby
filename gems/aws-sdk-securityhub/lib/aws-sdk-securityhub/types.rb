@@ -411,6 +411,319 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides details about an Amazon MQ message broker. A message broker
+    # allows software applications and components to communicate using
+    # various programming languages, operating systems, and formal messaging
+    # protocols.
+    #
+    # @!attribute [rw] authentication_strategy
+    #   The authentication strategy used to secure the broker. The default
+    #   is `SIMPLE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_minor_version_upgrade
+    #   Whether automatically upgrade new minor versions for brokers, as new
+    #   versions are released and supported by Amazon MQ. Automatic upgrades
+    #   occur during the scheduled maintenance window of the broker or after
+    #   a manual broker reboot.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] broker_arn
+    #   The Amazon Resource Name (ARN) of the broker.
+    #   @return [String]
+    #
+    # @!attribute [rw] broker_name
+    #   The broker's name.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_mode
+    #   The broker's deployment mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_options
+    #   Encryption options for the broker. Doesn’t apply to RabbitMQ
+    #   brokers.
+    #   @return [Types::AwsAmazonMqBrokerEncryptionOptionsDetails]
+    #
+    # @!attribute [rw] engine_type
+    #   The type of broker engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The version of the broker engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_instance_type
+    #   The broker's instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] broker_id
+    #   The unique ID that Amazon MQ generates for the broker.
+    #   @return [String]
+    #
+    # @!attribute [rw] ldap_server_metadata
+    #   The metadata of the Lightweight Directory Access Protocol (LDAP)
+    #   server used to authenticate and authorize connections to the broker.
+    #   This is an optional failover server.
+    #   @return [Types::AwsAmazonMqBrokerLdapServerMetadataDetails]
+    #
+    # @!attribute [rw] logs
+    #   Turns on Amazon CloudWatch logging for brokers.
+    #   @return [Types::AwsAmazonMqBrokerLogsDetails]
+    #
+    # @!attribute [rw] maintenance_window_start_time
+    #   The scheduled time period (UTC) during which Amazon MQ begins to
+    #   apply pending updates or patches to the broker.
+    #   @return [Types::AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails]
+    #
+    # @!attribute [rw] publicly_accessible
+    #   Permits connections from applications outside of the VPC that hosts
+    #   the broker's subnets.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] security_groups
+    #   The list of rules (one minimum, 125 maximum) that authorize
+    #   connections to brokers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] storage_type
+    #   The broker's storage type.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   The list of groups that define which subnets and IP ranges the
+    #   broker can use from different Availability Zones.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] users
+    #   The list of all broker usernames for the specified broker. Doesn't
+    #   apply to RabbitMQ brokers.
+    #   @return [Array<Types::AwsAmazonMqBrokerUsersDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAmazonMqBrokerDetails AWS API Documentation
+    #
+    class AwsAmazonMqBrokerDetails < Struct.new(
+      :authentication_strategy,
+      :auto_minor_version_upgrade,
+      :broker_arn,
+      :broker_name,
+      :deployment_mode,
+      :encryption_options,
+      :engine_type,
+      :engine_version,
+      :host_instance_type,
+      :broker_id,
+      :ldap_server_metadata,
+      :logs,
+      :maintenance_window_start_time,
+      :publicly_accessible,
+      :security_groups,
+      :storage_type,
+      :subnet_ids,
+      :users)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about broker encryption options.
+    #
+    # @!attribute [rw] kms_key_id
+    #   The KMS key that’s used to encrypt your data at rest. If not
+    #   provided, Amazon MQ will use a default KMS key to encrypt your data.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_aws_owned_key
+    #   Specifies that an KMS key should be used for at-rest encryption. Set
+    #   to `true` by default if no value is provided (for example, for
+    #   RabbitMQ brokers).
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAmazonMqBrokerEncryptionOptionsDetails AWS API Documentation
+    #
+    class AwsAmazonMqBrokerEncryptionOptionsDetails < Struct.new(
+      :kms_key_id,
+      :use_aws_owned_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata of the Lightweight Directory Access Protocol (LDAP)
+    # server used to authenticate and authorize connections to the broker.
+    # This is an optional failover server.
+    #
+    # @!attribute [rw] hosts
+    #   Specifies the location of the LDAP server, such as Amazon Web
+    #   Services Directory Service for Microsoft Active Directory.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] role_base
+    #   The distinguished name of the node in the directory information tree
+    #   (DIT) to search for roles or groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_name
+    #   The group name attribute in a role entry whose value is the name of
+    #   that role.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_search_matching
+    #   The LDAP search filter used to find roles within the `roleBase`.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_search_subtree
+    #   The directory search scope for the role. If set to `true`, the scope
+    #   is to search the entire subtree.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] service_account_username
+    #   A username for the service account, which is an account in your LDAP
+    #   server that has access to initiate a connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_base
+    #   Selects a particular subtree of the directory information tree (DIT)
+    #   to search for user entries.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_role_name
+    #   The name of the LDAP attribute in the user's directory entry for
+    #   the user's group membership.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_search_matching
+    #   The LDAP search filter used to find users within the `userBase`.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_search_subtree
+    #   The directory search scope for the user. If set to true, the scope
+    #   is to search the entire subtree.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAmazonMqBrokerLdapServerMetadataDetails AWS API Documentation
+    #
+    class AwsAmazonMqBrokerLdapServerMetadataDetails < Struct.new(
+      :hosts,
+      :role_base,
+      :role_name,
+      :role_search_matching,
+      :role_search_subtree,
+      :service_account_username,
+      :user_base,
+      :user_role_name,
+      :user_search_matching,
+      :user_search_subtree)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about logs to be activated for the specified
+    # broker.
+    #
+    # @!attribute [rw] audit
+    #   Activates audit logging. Every user management action made using JMX
+    #   or the ActiveMQ Web Console is logged. Doesn't apply to RabbitMQ
+    #   brokers.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] general
+    #   Activates general logging.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] audit_log_group
+    #   The location of the CloudWatch Logs log group where audit logs are
+    #   sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] general_log_group
+    #   The location of the CloudWatch Logs log group where general logs are
+    #   sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] pending
+    #   The list of information about logs that are to be turned on for the
+    #   specified broker.
+    #   @return [Types::AwsAmazonMqBrokerLogsPendingDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAmazonMqBrokerLogsDetails AWS API Documentation
+    #
+    class AwsAmazonMqBrokerLogsDetails < Struct.new(
+      :audit,
+      :general,
+      :audit_log_group,
+      :general_log_group,
+      :pending)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about logs to be activated for the specified
+    # broker.
+    #
+    # @!attribute [rw] audit
+    #   Activates audit logging. Every user management action made using JMX
+    #   or the ActiveMQ Web Console is logged. Doesn't apply to RabbitMQ
+    #   brokers.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] general
+    #   Activates general logging.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAmazonMqBrokerLogsPendingDetails AWS API Documentation
+    #
+    class AwsAmazonMqBrokerLogsPendingDetails < Struct.new(
+      :audit,
+      :general)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scheduled time period (UTC) during which Amazon MQ begins to apply
+    # pending updates or patches to the broker.
+    #
+    # @!attribute [rw] day_of_week
+    #   The day of the week on which the maintenance window falls.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_of_day
+    #   The time, in 24-hour format, on which the maintenance window falls.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_zone
+    #   The time zone in either the Country/City format or the UTC offset
+    #   format. UTC is the default format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails AWS API Documentation
+    #
+    class AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails < Struct.new(
+      :day_of_week,
+      :time_of_day,
+      :time_zone)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the broker usernames for the specified broker.
+    # Doesn't apply to RabbitMQ brokers.
+    #
+    # @!attribute [rw] pending_change
+    #   The type of change pending for the broker user.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The username of the broker user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAmazonMqBrokerUsersDetails AWS API Documentation
+    #
+    class AwsAmazonMqBrokerUsersDetails < Struct.new(
+      :pending_change,
+      :username)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provided if `ActionType` is `AWS_API_CALL`. It provides details about
     # the API call that was detected.
     #
@@ -1094,6 +1407,240 @@ module Aws::SecurityHub
       :auto_deploy,
       :last_deployment_status_message,
       :api_gateway_managed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of additional authentication providers for the GraphqlApi API.
+    #
+    # @!attribute [rw] authentication_type
+    #   The type of security configuration for your GraphQL API: API key,
+    #   Identity and Access Management (IAM), OpenID Connect (OIDC), Amazon
+    #   Cognito user pools, or Lambda.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_authorizer_config
+    #   The configuration for Lambda function authorization.
+    #   @return [Types::AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails]
+    #
+    # @!attribute [rw] open_id_connect_config
+    #   The OpenID Connect configuration.
+    #   @return [Types::AwsAppSyncGraphQlApiOpenIdConnectConfigDetails]
+    #
+    # @!attribute [rw] user_pool_config
+    #   The Amazon Cognito user pools configuration.
+    #   @return [Types::AwsAppSyncGraphQlApiUserPoolConfigDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails AWS API Documentation
+    #
+    class AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails < Struct.new(
+      :authentication_type,
+      :lambda_authorizer_config,
+      :open_id_connect_config,
+      :user_pool_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about an AppSync Graph QL API, which lets you query
+    # multiple databases, microservices, and APIs from a single GraphQL
+    # endpoint.
+    #
+    # @!attribute [rw] api_id
+    #   The unique identifier for the API.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the API.
+    #   @return [String]
+    #
+    # @!attribute [rw] open_id_connect_config
+    #   Specifies the authorization configuration for using an OpenID
+    #   Connect compliant service with an AppSync GraphQL API endpoint.
+    #   @return [Types::AwsAppSyncGraphQlApiOpenIdConnectConfigDetails]
+    #
+    # @!attribute [rw] name
+    #   The API name.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_authorizer_config
+    #   Specifies the configuration for Lambda function authorization.
+    #   @return [Types::AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails]
+    #
+    # @!attribute [rw] xray_enabled
+    #   Indicates whether to use X-Ray tracing for the GraphQL API.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the API.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_pool_config
+    #   The Amazon Cognito user pools configuration.
+    #   @return [Types::AwsAppSyncGraphQlApiUserPoolConfigDetails]
+    #
+    # @!attribute [rw] authentication_type
+    #   The type of security configuration for your GraphQL API: API key,
+    #   Identity and Access Management (IAM), OpenID Connect (OIDC), Amazon
+    #   Cognito user pools, or Lambda.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_config
+    #   The Amazon CloudWatch Logs configuration.
+    #   @return [Types::AwsAppSyncGraphQlApiLogConfigDetails]
+    #
+    # @!attribute [rw] additional_authentication_providers
+    #   A list of additional authentication providers for the GraphQL API.
+    #   @return [Array<Types::AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails>]
+    #
+    # @!attribute [rw] waf_web_acl_arn
+    #   The Amazon Resource Name (ARN) of the WAF web access control list
+    #   (web ACL) associated with this GraphQL API, if one exists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAppSyncGraphQlApiDetails AWS API Documentation
+    #
+    class AwsAppSyncGraphQlApiDetails < Struct.new(
+      :api_id,
+      :id,
+      :open_id_connect_config,
+      :name,
+      :lambda_authorizer_config,
+      :xray_enabled,
+      :arn,
+      :user_pool_config,
+      :authentication_type,
+      :log_config,
+      :additional_authentication_providers,
+      :waf_web_acl_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the authorization configuration for using an Lambda function
+    # with your AppSync GraphQL API endpoint.
+    #
+    # @!attribute [rw] authorizer_result_ttl_in_seconds
+    #   The number of seconds a response should be cached for. The default
+    #   is 5 minutes (300 seconds).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] authorizer_uri
+    #   The Amazon Resource Name (ARN) of the Lambda function to be called
+    #   for authorization. This can be a standard Lambda ARN, a version ARN
+    #   (.../v3), or an alias ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_validation_expression
+    #   A regular expression for validation of tokens before the Lambda
+    #   function is called.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails AWS API Documentation
+    #
+    class AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails < Struct.new(
+      :authorizer_result_ttl_in_seconds,
+      :authorizer_uri,
+      :identity_validation_expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the logging configuration when writing GraphQL operations
+    # and tracing to Amazon CloudWatch for an AppSync GraphQL API.
+    #
+    # @!attribute [rw] cloud_watch_logs_role_arn
+    #   The Amazon Resource Name (ARN) of the service role that AppSync
+    #   assumes to publish to CloudWatch Logs in your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] exclude_verbose_content
+    #   Set to `TRUE` to exclude sections that contain information such as
+    #   headers, context, and evaluated mapping templates, regardless of
+    #   logging level.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] field_log_level
+    #   The field logging level.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAppSyncGraphQlApiLogConfigDetails AWS API Documentation
+    #
+    class AwsAppSyncGraphQlApiLogConfigDetails < Struct.new(
+      :cloud_watch_logs_role_arn,
+      :exclude_verbose_content,
+      :field_log_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the authorization configuration for using an OpenID Connect
+    # compliant service with your AppSync GraphQL API endpoint.
+    #
+    # @!attribute [rw] auth_tt_l
+    #   The number of milliseconds that a token is valid after being
+    #   authenticated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_id
+    #   The client identifier of the relying party at the OpenID identity
+    #   provider. This identifier is typically obtained when the relying
+    #   party is registered with the OpenID identity provider. You can
+    #   specify a regular expression so that AppSync can validate against
+    #   multiple client identifiers at a time.
+    #   @return [String]
+    #
+    # @!attribute [rw] iat_tt_l
+    #   The number of milliseconds that a token is valid after it's issued
+    #   to a user.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] issuer
+    #   The issuer for the OIDC configuration. The issuer returned by
+    #   discovery must exactly match the value of `iss` in the ID token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAppSyncGraphQlApiOpenIdConnectConfigDetails AWS API Documentation
+    #
+    class AwsAppSyncGraphQlApiOpenIdConnectConfigDetails < Struct.new(
+      :auth_tt_l,
+      :client_id,
+      :iat_tt_l,
+      :issuer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the authorization configuration for using Amazon Cognito
+    # user pools with your AppSync GraphQL API endpoint.
+    #
+    # @!attribute [rw] app_id_client_regex
+    #   A regular expression for validating the incoming Amazon Cognito user
+    #   pools app client ID. If this value isn't set, no filtering is
+    #   applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_region
+    #   The Amazon Web Services Region in which the user pool was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_action
+    #   The action that you want your GraphQL API to take when a request
+    #   that uses Amazon Cognito user pools authentication doesn't match
+    #   the Amazon Cognito user pools configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAppSyncGraphQlApiUserPoolConfigDetails AWS API Documentation
+    #
+    class AwsAppSyncGraphQlApiUserPoolConfigDetails < Struct.new(
+      :app_id_client_regex,
+      :aws_region,
+      :default_action,
+      :user_pool_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10729,6 +11276,290 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # A schema defines the structure of events that are sent to Amazon
+    # EventBridge. Schema registries are containers for schemas. They
+    # collect and organize schemas so that your schemas are in logical
+    # groups.
+    #
+    # @!attribute [rw] description
+    #   A description of the registry to be created.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_arn
+    #   The Amazon Resource Name (ARN) of the registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_name
+    #   The name of the schema registry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEventSchemasRegistryDetails AWS API Documentation
+    #
+    class AwsEventSchemasRegistryDetails < Struct.new(
+      :description,
+      :registry_arn,
+      :registry_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on the status of CloudTrail as a
+    # data source for the detector.
+    #
+    # @!attribute [rw] status
+    #   Specifies whether CloudTrail is activated as a data source for the
+    #   detector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorDataSourcesCloudTrailDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorDataSourcesCloudTrailDetails < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes which data sources are activated for the detector.
+    #
+    # @!attribute [rw] cloud_trail
+    #   An object that contains information on the status of CloudTrail as a
+    #   data source for the detector.
+    #   @return [Types::AwsGuardDutyDetectorDataSourcesCloudTrailDetails]
+    #
+    # @!attribute [rw] dns_logs
+    #   An object that contains information on the status of DNS logs as a
+    #   data source for the detector.
+    #   @return [Types::AwsGuardDutyDetectorDataSourcesDnsLogsDetails]
+    #
+    # @!attribute [rw] flow_logs
+    #   An object that contains information on the status of VPC Flow Logs
+    #   as a data source for the detector.
+    #   @return [Types::AwsGuardDutyDetectorDataSourcesFlowLogsDetails]
+    #
+    # @!attribute [rw] kubernetes
+    #   An object that contains information on the status of Kubernetes data
+    #   sources for the detector.
+    #   @return [Types::AwsGuardDutyDetectorDataSourcesKubernetesDetails]
+    #
+    # @!attribute [rw] malware_protection
+    #   An object that contains information on the status of Malware
+    #   Protection as a data source for the detector.
+    #   @return [Types::AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails]
+    #
+    # @!attribute [rw] s3_logs
+    #   An object that contains information on the status of S3 Data event
+    #   logs as a data source for the detector.
+    #   @return [Types::AwsGuardDutyDetectorDataSourcesS3LogsDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorDataSourcesDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorDataSourcesDetails < Struct.new(
+      :cloud_trail,
+      :dns_logs,
+      :flow_logs,
+      :kubernetes,
+      :malware_protection,
+      :s3_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on the status of DNS logs as a
+    # data source for the detector.
+    #
+    # @!attribute [rw] status
+    #   Describes whether DNS logs is enabled as a data source for the
+    #   detector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorDataSourcesDnsLogsDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorDataSourcesDnsLogsDetails < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on the status of VPC Flow Logs as
+    # a data source for the detector.
+    #
+    # @!attribute [rw] status
+    #   Describes whether VPC Flow Logs are activated as a data source for
+    #   the detector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorDataSourcesFlowLogsDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorDataSourcesFlowLogsDetails < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on the status of Kubernetes audit
+    # logs as a data source for the detector.
+    #
+    # @!attribute [rw] status
+    #   Describes whether Kubernetes audit logs are activated as a data
+    #   source for the detector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on the status of Kubernetes data
+    # sources for the detector.
+    #
+    # @!attribute [rw] audit_logs
+    #   Describes whether Kubernetes audit logs are activated as a data
+    #   source for the detector.
+    #   @return [Types::AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorDataSourcesKubernetesDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorDataSourcesKubernetesDetails < Struct.new(
+      :audit_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on the status of Malware
+    # Protection as a data source for the detector.
+    #
+    # @!attribute [rw] scan_ec2_instance_with_findings
+    #   Describes the configuration of Malware Protection for EC2 instances
+    #   with findings.
+    #   @return [Types::AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsDetails]
+    #
+    # @!attribute [rw] service_role
+    #   The GuardDuty Malware Protection service role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails < Struct.new(
+      :scan_ec2_instance_with_findings,
+      :service_role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration of Malware Protection for EC2 instances
+    # with findings.
+    #
+    # @!attribute [rw] ebs_volumes
+    #   Describes the configuration of scanning EBS volumes (Malware
+    #   Protection) as a data source.
+    #   @return [Types::AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsDetails < Struct.new(
+      :ebs_volumes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration of scanning EBS volumes (Malware
+    # Protection) as a data source.
+    #
+    # @!attribute [rw] reason
+    #   Specifies the reason why scanning EBS volumes (Malware Protection)
+    #   isn’t activated as a data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Describes whether scanning EBS volumes is activated as a data source
+    #   for the detector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails < Struct.new(
+      :reason,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information on the status of S3 data event
+    # logs as a data source for the detector.
+    #
+    # @!attribute [rw] status
+    #   A value that describes whether S3 data event logs are automatically
+    #   enabled for new members of an organization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorDataSourcesS3LogsDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorDataSourcesS3LogsDetails < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about an Amazon GuardDuty detector. A detector is an
+    # object that represents the GuardDuty service. A detector is required
+    # for GuardDuty to become operational.
+    #
+    # @!attribute [rw] data_sources
+    #   Describes which data sources are activated for the detector.
+    #   @return [Types::AwsGuardDutyDetectorDataSourcesDetails]
+    #
+    # @!attribute [rw] features
+    #   Describes which features are activated for the detector.
+    #   @return [Array<Types::AwsGuardDutyDetectorFeaturesDetails>]
+    #
+    # @!attribute [rw] finding_publishing_frequency
+    #   The publishing frequency of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_role
+    #   The GuardDuty service role.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The activation status of the detector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorDetails < Struct.new(
+      :data_sources,
+      :features,
+      :finding_publishing_frequency,
+      :service_role,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes which features are activated for the detector.
+    #
+    # @!attribute [rw] name
+    #   Indicates the name of the feature that is activated for the
+    #   detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Indicates the status of the feature that is activated for the
+    #   detector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsGuardDutyDetectorFeaturesDetails AWS API Documentation
+    #
+    class AwsGuardDutyDetectorFeaturesDetails < Struct.new(
+      :name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # IAM access key details related to a finding.
     #
     # @!attribute [rw] user_name
@@ -17250,6 +18081,142 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides details about an Step Functions state machine, which is a
+    # workflow consisting of a series of event- driven steps.
+    #
+    # @!attribute [rw] label
+    #   A user-defined or an auto-generated string that identifies a `Map`
+    #   state. This parameter is present only if the `stateMachineArn`
+    #   specified in input is a qualified state machine ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] logging_configuration
+    #   Used to set CloudWatch Logs options.
+    #   @return [Types::AwsStepFunctionStateMachineLoggingConfigurationDetails]
+    #
+    # @!attribute [rw] name
+    #   The name of the state machine.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role used when creating
+    #   this state machine.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_machine_arn
+    #   The ARN that identifies the state machine.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the state machine.
+    #   @return [String]
+    #
+    # @!attribute [rw] tracing_configuration
+    #   Specifies whether X-Ray tracing is enabled.
+    #   @return [Types::AwsStepFunctionStateMachineTracingConfigurationDetails]
+    #
+    # @!attribute [rw] type
+    #   The type of the state machine (STANDARD or EXPRESS).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsStepFunctionStateMachineDetails AWS API Documentation
+    #
+    class AwsStepFunctionStateMachineDetails < Struct.new(
+      :label,
+      :logging_configuration,
+      :name,
+      :role_arn,
+      :state_machine_arn,
+      :status,
+      :tracing_configuration,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object describing a CloudWatch log group. For more information, see
+    # [ Amazon Web Services::Logs::LogGroup][1] in the *CloudFormation User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html
+    #
+    # @!attribute [rw] log_group_arn
+    #   The ARN (ends with `:*`) of the CloudWatch Logs log group to which
+    #   you want your logs emitted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails AWS API Documentation
+    #
+    class AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails < Struct.new(
+      :log_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An array of objects that describes where your execution history events
+    # will be logged.
+    #
+    # @!attribute [rw] cloud_watch_logs_log_group
+    #   An object describing a CloudWatch Logs log group. For more
+    #   information, see [ Amazon Web Services::Logs::LogGroup][1] in the
+    #   *CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html
+    #   @return [Types::AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails AWS API Documentation
+    #
+    class AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails < Struct.new(
+      :cloud_watch_logs_log_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The `LoggingConfiguration` data type is used to set CloudWatch Logs
+    # options.
+    #
+    # @!attribute [rw] destinations
+    #   An array of objects that describes where your execution history
+    #   events will be logged.
+    #   @return [Array<Types::AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails>]
+    #
+    # @!attribute [rw] include_execution_data
+    #   Determines whether execution data is included in your log. When set
+    #   to false, data is excluded.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] level
+    #   Defines which category of execution history events are logged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsStepFunctionStateMachineLoggingConfigurationDetails AWS API Documentation
+    #
+    class AwsStepFunctionStateMachineLoggingConfigurationDetails < Struct.new(
+      :destinations,
+      :include_execution_data,
+      :level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies whether X-Ray tracing is enabled.
+    #
+    # @!attribute [rw] enabled
+    #   When set to true, X-Ray tracing is enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsStepFunctionStateMachineTracingConfigurationDetails AWS API Documentation
+    #
+    class AwsStepFunctionStateMachineTracingConfigurationDetails < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about a rate-based rule for global resources. A rate-based
     # rule provides settings to indicate when to allow, block, or count a
     # request. Rate-based rules include the number of requests that arrive
@@ -20075,12 +21042,13 @@ module Aws::SecurityHub
     #   @return [Types::AwsSecurityFindingIdentifier]
     #
     # @!attribute [rw] update_time
-    #   An ISO 8601-formatted timestamp that indicates when the security
-    #   findings provider last updated the finding record. A correctly
-    #   formatted example is `2020-05-21T20:16:34.724Z`. The value cannot
-    #   contain spaces, and date and time should be separated by `T`. For
-    #   more information, see [RFC 3339 section 5.6, Internet Date/Time
-    #   Format][1].
+    #   An ISO 8601-formatted timestamp that indicates when Security Hub
+    #   processed the updated finding record.
+    #
+    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
+    #   value cannot contain spaces, and date and time should be separated
+    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
+    #   Date/Time Format][1].
     #
     #
     #
@@ -22885,6 +23853,37 @@ module Aws::SecurityHub
     #   traffic from your subnet or gateway.
     #   @return [Types::AwsEc2RouteTableDetails]
     #
+    # @!attribute [rw] aws_amazon_mq_broker
+    #   Provides details about AppSync message broker. A message broker
+    #   allows software applications and components to communicate using
+    #   various programming languages, operating systems, and formal
+    #   messaging protocols.
+    #   @return [Types::AwsAmazonMqBrokerDetails]
+    #
+    # @!attribute [rw] aws_app_sync_graph_ql_api
+    #   Provides details about an AppSync Graph QL API, which lets you query
+    #   multiple databases, microservices, and APIs from a single GraphQL
+    #   endpoint.
+    #   @return [Types::AwsAppSyncGraphQlApiDetails]
+    #
+    # @!attribute [rw] aws_event_schemas_registry
+    #   A schema defines the structure of events that are sent to Amazon
+    #   EventBridge. Schema registries are containers for schemas. They
+    #   collect and organize schemas so that your schemas are in logical
+    #   groups.
+    #   @return [Types::AwsEventSchemasRegistryDetails]
+    #
+    # @!attribute [rw] aws_guard_duty_detector
+    #   Provides details about an Amazon GuardDuty detector. A detector is
+    #   an object that represents the GuardDuty service. A detector is
+    #   required for GuardDuty to become operational.
+    #   @return [Types::AwsGuardDutyDetectorDetails]
+    #
+    # @!attribute [rw] aws_step_function_state_machine
+    #   Provides details about an Step Functions state machine, which is a
+    #   workflow consisting of a series of event-driven steps.
+    #   @return [Types::AwsStepFunctionStateMachineDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceDetails AWS API Documentation
     #
     class ResourceDetails < Struct.new(
@@ -22971,7 +23970,12 @@ module Aws::SecurityHub
       :aws_sage_maker_notebook_instance,
       :aws_wafv_2_web_acl,
       :aws_wafv_2_rule_group,
-      :aws_ec2_route_table)
+      :aws_ec2_route_table,
+      :aws_amazon_mq_broker,
+      :aws_app_sync_graph_ql_api,
+      :aws_event_schemas_registry,
+      :aws_guard_duty_detector,
+      :aws_step_function_state_machine)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.139.0 (2023-05-30)
+------------------
+
+* Feature - Added Runtime parameter to allow selection of Ray Runtime
+
 1.138.0 (2023-05-25)
 ------------------
 

@@ -28,20 +28,11 @@ module Aws::SecurityLake
   #
   # ## Error Classes
   # * {AccessDeniedException}
-  # * {AccountNotFoundException}
-  # * {BucketNotFoundException}
-  # * {ConcurrentModificationException}
+  # * {BadRequestException}
   # * {ConflictException}
-  # * {ConflictSourceNamesException}
-  # * {ConflictSubscriptionException}
-  # * {EventBridgeException}
   # * {InternalServerException}
-  # * {InvalidInputException}
   # * {ResourceNotFoundException}
-  # * {S3Exception}
-  # * {ServiceQuotaExceededException}
   # * {ThrottlingException}
-  # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -69,11 +60,11 @@ module Aws::SecurityLake
       end
     end
 
-    class AccountNotFoundException < ServiceError
+    class BadRequestException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
-      # @param [Aws::SecurityLake::Types::AccountNotFoundException] data
+      # @param [Aws::SecurityLake::Types::BadRequestException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -81,40 +72,6 @@ module Aws::SecurityLake
       # @return [String]
       def message
         @message || @data[:message]
-      end
-    end
-
-    class BucketNotFoundException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SecurityLake::Types::BucketNotFoundException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
-    class ConcurrentModificationException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SecurityLake::Types::ConcurrentModificationException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-
-      def retryable?
-        true
       end
     end
 
@@ -133,58 +90,13 @@ module Aws::SecurityLake
       end
 
       # @return [String]
-      def resource_id
-        @data[:resource_id]
+      def resource_name
+        @data[:resource_name]
       end
 
       # @return [String]
       def resource_type
         @data[:resource_type]
-      end
-    end
-
-    class ConflictSourceNamesException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SecurityLake::Types::ConflictSourceNamesException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
-    class ConflictSubscriptionException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SecurityLake::Types::ConflictSubscriptionException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
-    class EventBridgeException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SecurityLake::Types::EventBridgeException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
       end
     end
 
@@ -202,28 +114,8 @@ module Aws::SecurityLake
         @message || @data[:message]
       end
 
-      # @return [String]
-      def retry_after_seconds
-        @data[:retry_after_seconds]
-      end
-
       def retryable?
         true
-      end
-    end
-
-    class InvalidInputException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SecurityLake::Types::InvalidInputException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
       end
     end
 
@@ -242,63 +134,13 @@ module Aws::SecurityLake
       end
 
       # @return [String]
-      def resource_id
-        @data[:resource_id]
+      def resource_name
+        @data[:resource_name]
       end
 
       # @return [String]
       def resource_type
         @data[:resource_type]
-      end
-    end
-
-    class S3Exception < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SecurityLake::Types::S3Exception] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
-    class ServiceQuotaExceededException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SecurityLake::Types::ServiceQuotaExceededException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-
-      # @return [String]
-      def quota_code
-        @data[:quota_code]
-      end
-
-      # @return [String]
-      def resource_id
-        @data[:resource_id]
-      end
-
-      # @return [String]
-      def resource_type
-        @data[:resource_type]
-      end
-
-      # @return [String]
-      def service_code
-        @data[:service_code]
       end
     end
 
@@ -337,31 +179,6 @@ module Aws::SecurityLake
 
       def throttling?
         true
-      end
-    end
-
-    class ValidationException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SecurityLake::Types::ValidationException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def field_list
-        @data[:field_list]
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-
-      # @return [String]
-      def reason
-        @data[:reason]
       end
     end
 

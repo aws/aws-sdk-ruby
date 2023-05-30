@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2023-05-30)
+------------------
+
+* Feature - Amazon Polly adds 2 new voices - Sofie (da-DK) and Niamh (en-IE)
+
 1.66.0 (2023-02-10)
 ------------------
 

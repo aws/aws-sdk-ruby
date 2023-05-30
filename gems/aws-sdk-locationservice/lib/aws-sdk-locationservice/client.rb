@@ -1530,6 +1530,7 @@ module Aws::LocationService
     #
     #   resp = client.create_map({
     #     configuration: { # required
+    #       political_view: "CountryCode3",
     #       style: "MapStyle", # required
     #     },
     #     description: "ResourceDescription",
@@ -2239,6 +2240,7 @@ module Aws::LocationService
     #
     # @example Response structure
     #
+    #   resp.configuration.political_view #=> String
     #   resp.configuration.style #=> String
     #   resp.create_time #=> Time
     #   resp.data_source #=> String
@@ -2675,7 +2677,14 @@ module Aws::LocationService
     #     Sans Bold` \| `Amazon Ember Medium,Noto Sans Medium` \| `Amazon
     #     Ember Regular Italic,Noto Sans Italic` \| `Amazon Ember Condensed RC
     #     Regular,Noto Sans Regular` \| `Amazon Ember Condensed RC Bold,Noto
-    #     Sans Bold`
+    #     Sans Bold` \| `Amazon Ember Regular,Noto Sans Regular,Noto Sans
+    #     Arabic Regular` \| `Amazon Ember Condensed RC Bold,Noto Sans
+    #     Bold,Noto Sans Arabic Condensed Bold` \| `Amazon Ember Bold,Noto
+    #     Sans Bold,Noto Sans Arabic Bold` \| `Amazon Ember Regular
+    #     Italic,Noto Sans Italic,Noto Sans Arabic Regular` \| `Amazon Ember
+    #     Condensed RC Regular,Noto Sans Regular,Noto Sans Arabic Condensed
+    #     Regular` \| `Amazon Ember Medium,Noto Sans Medium,Noto Sans Arabic
+    #     Medium`
     #
     #   ^
     #
@@ -4173,6 +4182,10 @@ module Aws::LocationService
 
     # Updates the specified properties of a given map resource.
     #
+    # @option params [Types::MapConfigurationUpdate] :configuration_update
+    #   Updates the parts of the map configuration that can be updated,
+    #   including the political view.
+    #
     # @option params [String] :description
     #   Updates the description for the map resource.
     #
@@ -4192,6 +4205,9 @@ module Aws::LocationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_map({
+    #     configuration_update: {
+    #       political_view: "CountryCode3OrEmpty",
+    #     },
     #     description: "ResourceDescription",
     #     map_name: "ResourceName", # required
     #     pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
@@ -4388,7 +4404,7 @@ module Aws::LocationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-locationservice'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
