@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.182.0 (2023-05-26)
+------------------
+
+* Feature - Added ml.p4d and ml.inf1 as supported instance type families for SageMaker Notebook Instances.
+
+1.181.0 (2023-05-25)
+------------------
+
+* Feature - Amazon SageMaker Automatic Model Tuning now supports enabling Autotune for tuning jobs which can choose tuning job configurations.
+
+1.180.0 (2023-05-24)
+------------------
+
+* Feature - SageMaker now provides an instantaneous deployment recommendation through the DescribeModel API
+
+1.179.0 (2023-05-23)
+------------------
+
+* Feature - Added ModelNameEquals, ModelPackageVersionArnEquals in request and ModelName, SamplePayloadUrl, ModelPackageVersionArn in response of ListInferenceRecommendationsJobs API. Added Invocation timestamps in response of DescribeInferenceRecommendationsJob API & ListInferenceRecommendationsJobSteps API.
+
 1.178.0 (2023-05-09)
 ------------------
 

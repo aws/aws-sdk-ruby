@@ -3346,6 +3346,9 @@ module Aws::ChimeSDKVoice
     #   The unique identifier for the client request. Use a different token
     #   for different speaker search tasks.
     #
+    # @option params [String] :call_leg
+    #   Specifies which call leg to stream for speaker search.
+    #
     # @return [Types::StartSpeakerSearchTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartSpeakerSearchTaskResponse#speaker_search_task #speaker_search_task} => Types::SpeakerSearchTask
@@ -3357,6 +3360,7 @@ module Aws::ChimeSDKVoice
     #     transaction_id: "NonEmptyString256", # required
     #     voice_profile_domain_id: "NonEmptyString256", # required
     #     client_request_token: "ClientRequestId",
+    #     call_leg: "Caller", # accepts Caller, Callee
     #   })
     #
     # @example Response structure
@@ -4149,7 +4153,7 @@ module Aws::ChimeSDKVoice
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkvoice'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

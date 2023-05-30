@@ -547,9 +547,10 @@ module Aws::SecurityHub
     #   * {Types::BatchEnableStandardsResponse#standards_subscriptions #standards_subscriptions} => Array&lt;Types::StandardsSubscription&gt;
     #
     #
-    # @example Example: To import security findings from a third party provider to Security Hub
+    # @example Example: To enable security standards
     #
-    #   # The following example imports findings from a third party provider to Security Hub.
+    #   # The following example enables the security standard specified by the StandardArn. You can use this operation to enable
+    #   # one or more Security Hub standards.
     #
     #   resp = client.batch_enable_standards({
     #     standards_subscription_requests: [
@@ -617,6 +618,42 @@ module Aws::SecurityHub
     #   * {Types::BatchGetSecurityControlsResponse#security_controls #security_controls} => Array&lt;Types::SecurityControl&gt;
     #   * {Types::BatchGetSecurityControlsResponse#unprocessed_ids #unprocessed_ids} => Array&lt;Types::UnprocessedSecurityControl&gt;
     #
+    #
+    # @example Example: To get security control details 
+    #
+    #   # The following example gets details for the specified controls in the current AWS account and AWS Region.
+    #
+    #   resp = client.batch_get_security_controls({
+    #     security_control_ids: [
+    #       "ACM.1", 
+    #       "APIGateway.1", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     security_controls: [
+    #       {
+    #         description: "This AWS control checks whether ACM Certificates in your account are marked for expiration within a specified time period. Certificates provided by ACM are automatically renewed. ACM does not automatically renew certificates that you import.", 
+    #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/ACM.1/remediation", 
+    #         security_control_arn: "arn:aws:securityhub:us-west-2:123456789012:security-control/ACM.1", 
+    #         security_control_id: "ACM.1", 
+    #         security_control_status: "ENABLED", 
+    #         severity_rating: "MEDIUM", 
+    #         title: "Imported and ACM-issued certificates should be renewed after a specified time period", 
+    #       }, 
+    #       {
+    #         description: "This control checks whether all stages of Amazon API Gateway REST and WebSocket APIs have logging enabled. The control fails if logging is not enabled for all methods of a stage or if loggingLevel is neither ERROR nor INFO.", 
+    #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/APIGateway.1/remediation", 
+    #         security_control_arn: "arn:aws:securityhub:us-west-2:123456789012:security-control/APIGateway.1", 
+    #         security_control_id: "APIGateway.1", 
+    #         security_control_status: "ENABLED", 
+    #         severity_rating: "MEDIUM", 
+    #         title: "API Gateway REST and WebSocket API execution logging should be enabled", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_get_security_controls({
@@ -662,6 +699,54 @@ module Aws::SecurityHub
     #
     #   * {Types::BatchGetStandardsControlAssociationsResponse#standards_control_association_details #standards_control_association_details} => Array&lt;Types::StandardsControlAssociationDetail&gt;
     #   * {Types::BatchGetStandardsControlAssociationsResponse#unprocessed_associations #unprocessed_associations} => Array&lt;Types::UnprocessedStandardsControlAssociation&gt;
+    #
+    #
+    # @example Example: To get enablement status of a batch of controls
+    #
+    #   # The following example retrieves the enablement status of the specified controls in the specified standards.
+    #
+    #   resp = client.batch_get_standards_control_associations({
+    #     standards_control_association_ids: [
+    #       {
+    #         security_control_id: "CloudTrail.1", 
+    #         standards_arn: "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0", 
+    #       }, 
+    #       {
+    #         security_control_id: "CloudWatch.12", 
+    #         standards_arn: "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     standards_control_association_details: [
+    #       {
+    #         association_status: "ENABLED", 
+    #         related_requirements: [
+    #           "CIS AWS Foundations 2.1", 
+    #         ], 
+    #         security_control_arn: "arn:aws:securityhub:us-west-2:110479873537:security-control/CloudTrail.1", 
+    #         security_control_id: "CloudTrail.1", 
+    #         standards_arn: "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0", 
+    #         standards_control_description: "AWS CloudTrail is a web service that records AWS API calls for your account and delivers log files to you. The recorded information includes the identity of the API caller, the time of the API call, the source IP address of the API caller, the request parameters, and the response elements returned by the AWS service.", 
+    #         standards_control_title: "Ensure CloudTrail is enabled in all regions", 
+    #         updated_at: Time.parse("2022-01-13T18:52:29.539000+00:00"), 
+    #       }, 
+    #       {
+    #         association_status: "ENABLED", 
+    #         related_requirements: [
+    #           "CIS AWS Foundations 3.12", 
+    #         ], 
+    #         security_control_arn: "arn:aws:securityhub:us-west-2:110479873537:security-control/CloudWatch.12", 
+    #         security_control_id: "CloudWatch.12", 
+    #         standards_arn: "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0", 
+    #         standards_control_description: "Real-time monitoring of API calls can be achieved by directing CloudTrail Logs to CloudWatch Logs and establishing corresponding metric filters and alarms. Network gateways are required to send/receive traffic to a destination outside of a VPC. It is recommended that a metric filter and alarm be established for changes to network gateways.", 
+    #         standards_control_title: "Ensure a log metric filter and alarm exist for changes to network gateways", 
+    #         updated_at: Time.parse("2022-01-13T18:52:29.686000+00:00"), 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1078,6 +1163,45 @@ module Aws::SecurityHub
     # @return [Types::BatchUpdateStandardsControlAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::BatchUpdateStandardsControlAssociationsResponse#unprocessed_association_updates #unprocessed_association_updates} => Array&lt;Types::UnprocessedStandardsControlAssociationUpdate&gt;
+    #
+    #
+    # @example Example: To update enablement status of a batch of controls
+    #
+    #   # The following example disables CloudWatch.12 in CIS AWS Foundations Benchmark v1.2.0. The example returns an error for
+    #   # CloudTrail.1 because an invalid standard ARN is provided.
+    #
+    #   resp = client.batch_update_standards_control_associations({
+    #     standards_control_association_updates: [
+    #       {
+    #         association_status: "DISABLED", 
+    #         security_control_id: "CloudTrail.1", 
+    #         standards_arn: "arn:aws:securityhub:::ruleset/sample-standard/v/1.1.0", 
+    #         updated_reason: "Not relevant to environment", 
+    #       }, 
+    #       {
+    #         association_status: "DISABLED", 
+    #         security_control_id: "CloudWatch.12", 
+    #         standards_arn: "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0", 
+    #         updated_reason: "Not relevant to environment", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     unprocessed_association_updates: [
+    #       {
+    #         error_code: "INVALID_INPUT", 
+    #         error_reason: "Invalid Standards Arn: 'arn:aws:securityhub:::ruleset/sample-standard/v/1.1.0'", 
+    #         standards_control_association_update: {
+    #           association_status: "DISABLED", 
+    #           security_control_id: "CloudTrail.1", 
+    #           standards_arn: "arn:aws:securityhub:::ruleset/sample-standard/v/1.1.0", 
+    #           updated_reason: "Test Reason", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -7386,7 +7510,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

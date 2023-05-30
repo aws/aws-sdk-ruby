@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2023-05-30)
+------------------
+
+* Feature - Added optional CallLeg field to StartSpeakerSearchTask API request
+
 1.5.0 (2023-04-13)
 ------------------
 

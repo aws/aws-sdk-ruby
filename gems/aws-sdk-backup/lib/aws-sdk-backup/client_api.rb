@@ -1175,6 +1175,9 @@ module Aws::Backup
     RecoveryPointCreator.struct_class = Types::RecoveryPointCreator
 
     RecoveryPointMember.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RecoveryPointArn"))
+    RecoveryPointMember.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ResourceArn"))
+    RecoveryPointMember.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    RecoveryPointMember.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, location_name: "BackupVaultName"))
     RecoveryPointMember.struct_class = Types::RecoveryPointMember
 
     RecoveryPointSelection.add_member(:vault_names, Shapes::ShapeRef.new(shape: VaultNames, location_name: "VaultNames"))
@@ -1311,6 +1314,7 @@ module Aws::Backup
     StartRestoreJobInput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "IamRoleArn"))
     StartRestoreJobInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken"))
     StartRestoreJobInput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    StartRestoreJobInput.add_member(:copy_source_tags_to_restored_resource, Shapes::ShapeRef.new(shape: boolean, location_name: "CopySourceTagsToRestoredResource"))
     StartRestoreJobInput.struct_class = Types::StartRestoreJobInput
 
     StartRestoreJobOutput.add_member(:restore_job_id, Shapes::ShapeRef.new(shape: RestoreJobId, location_name: "RestoreJobId"))
@@ -2265,6 +2269,7 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
       api.add_operation(:stop_backup_job, Seahorse::Model::Operation.new.tap do |o|

@@ -376,6 +376,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Elemental MediaLive                               | Aws::MediaLive                           | aws-sdk-medialive                           | 2017-10-14  |
 | AWS Elemental MediaPackage                            | Aws::MediaPackage                        | aws-sdk-mediapackage                        | 2017-10-12  |
 | AWS Elemental MediaPackage VOD                        | Aws::MediaPackageVod                     | aws-sdk-mediapackagevod                     | 2018-11-07  |
+| AWS Elemental MediaPackage v2                         | Aws::MediaPackageV2                      | aws-sdk-mediapackagev2                      | 2022-12-25  |
 | AWS Elemental MediaStore                              | Aws::MediaStore                          | aws-sdk-mediastore                          | 2017-09-01  |
 | AWS Elemental MediaStore Data Plane                   | Aws::MediaStoreData                      | aws-sdk-mediastoredata                      | 2017-09-01  |
 | AWS Fault Injection Simulator                         | Aws::FIS                                 | aws-sdk-fis                                 | 2020-12-01  |

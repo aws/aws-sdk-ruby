@@ -314,7 +314,7 @@ module Aws
           @io.rewind
         end
 
-        def read(length, buf)
+        def read(length, buf = nil)
           # account for possible leftover bytes at the end, if we have trailer bytes, send them
           if @trailer_io
             return @trailer_io.read(length, buf)

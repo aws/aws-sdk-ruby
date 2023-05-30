@@ -228,6 +228,35 @@ module Aws::Translate
       include Aws::Structure
     end
 
+    # The content and content type of a document.
+    #
+    # @!attribute [rw] content
+    #   The `Content`field type is Binary large object (blob). This object
+    #   contains the document content converted into base64-encoded binary
+    #   data. If you use one of the AWS SDKs, the SDK performs the
+    #   Base64-encoding on this field before sending the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   Describes the format of the document. You can specify one of the
+    #   following:
+    #
+    #   * text/html - The input data consists of HTML content. Amazon
+    #     Translate translates only the text in the HTML element.
+    #
+    #   * text/plain - The input data consists of unformatted text. Amazon
+    #     Translate translates every character in the content.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/Document AWS API Documentation
+    #
+    class Document < Struct.new(
+      :content,
+      :content_type)
+      SENSITIVE = [:content]
+      include Aws::Structure
+    end
+
     # The encryption key used to encrypt this object.
     #
     # @!attribute [rw] type
@@ -1598,7 +1627,7 @@ module Aws::Translate
     #   @return [String]
     #
     # @!attribute [rw] settings
-    #   Settings that configure the translation output.
+    #   Settings that modify the translation output.
     #   @return [Types::TranslationSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TextTranslationJobProperties AWS API Documentation
@@ -1654,6 +1683,102 @@ module Aws::Translate
       include Aws::Structure
     end
 
+    # @!attribute [rw] document
+    #   The content and content type for the document to be translated. The
+    #   document size must not exceed 100 KB.
+    #   @return [Types::Document]
+    #
+    # @!attribute [rw] terminology_names
+    #   The name of a terminology list file to add to the translation job.
+    #   This file provides source terms and the desired translation for each
+    #   term. A terminology list can contain a maximum of 256 terms. You can
+    #   use one custom terminology resource in your translation request.
+    #
+    #   Use the ListTerminologies operation to get the available terminology
+    #   lists.
+    #
+    #   For more information about custom terminology lists, see [Custom
+    #   terminology][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/how-custom-terminology.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source_language_code
+    #   The language code for the language of the source text. Do not use
+    #   `auto`, because `TranslateDocument` does not support language
+    #   auto-detection. For a list of supported language codes, see
+    #   [Supported languages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html
+    #   @return [String]
+    #
+    # @!attribute [rw] target_language_code
+    #   The language code requested for the translated document. For a list
+    #   of supported language codes, see [Supported languages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html
+    #   @return [String]
+    #
+    # @!attribute [rw] settings
+    #   Settings to configure your translation output, including the option
+    #   to set the formality level of the output text and the option to mask
+    #   profane words and phrases.
+    #   @return [Types::TranslationSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TranslateDocumentRequest AWS API Documentation
+    #
+    class TranslateDocumentRequest < Struct.new(
+      :document,
+      :terminology_names,
+      :source_language_code,
+      :target_language_code,
+      :settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] translated_document
+    #   The document containing the translated content. The document format
+    #   matches the source document format.
+    #   @return [Types::TranslatedDocument]
+    #
+    # @!attribute [rw] source_language_code
+    #   The language code of the source document.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_language_code
+    #   The language code of the translated document.
+    #   @return [String]
+    #
+    # @!attribute [rw] applied_terminologies
+    #   The names of the custom terminologies applied to the input text by
+    #   Amazon Translate to produce the translated text document.
+    #   @return [Array<Types::AppliedTerminology>]
+    #
+    # @!attribute [rw] applied_settings
+    #   Settings to configure your translation output, including the option
+    #   to set the formality level of the output text and the option to mask
+    #   profane words and phrases.
+    #   @return [Types::TranslationSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TranslateDocumentResponse AWS API Documentation
+    #
+    class TranslateDocumentResponse < Struct.new(
+      :translated_document,
+      :source_language_code,
+      :target_language_code,
+      :applied_terminologies,
+      :applied_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] text
     #   The text to translate. The text string can be a maximum of 10,000
     #   bytes long. Depending on your character set, this may be fewer than
@@ -1661,15 +1786,24 @@ module Aws::Translate
     #   @return [String]
     #
     # @!attribute [rw] terminology_names
-    #   The name of the terminology list file to be used in the
-    #   TranslateText request. You can use 1 terminology list at most in a
-    #   `TranslateText` request. Terminology lists can contain a maximum of
-    #   256 terms.
+    #   The name of a terminology list file to add to the translation job.
+    #   This file provides source terms and the desired translation for each
+    #   term. A terminology list can contain a maximum of 256 terms. You can
+    #   use one custom terminology resource in your translation request.
+    #
+    #   Use the ListTerminologies operation to get the available terminology
+    #   lists.
+    #
+    #   For more information about custom terminology lists, see [Custom
+    #   terminology][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/how-custom-terminology.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] source_language_code
-    #   The language code for the language of the source text. The language
-    #   must be a language supported by Amazon Translate. For a list of
+    #   The language code for the language of the source text. For a list of
     #   language codes, see [Supported languages][1].
     #
     #   To have Amazon Translate determine the source language of your text,
@@ -1690,8 +1824,12 @@ module Aws::Translate
     #   @return [String]
     #
     # @!attribute [rw] target_language_code
-    #   The language code requested for the language of the target text. The
-    #   language must be a language supported by Amazon Translate.
+    #   The language code requested for the language of the target text. For
+    #   a list of language codes, see [Supported languages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html
     #   @return [String]
     #
     # @!attribute [rw] settings
@@ -1730,7 +1868,7 @@ module Aws::Translate
     #   @return [Array<Types::AppliedTerminology>]
     #
     # @!attribute [rw] applied_settings
-    #   Settings that configure the translation output.
+    #   Optional settings that modify the translation output.
     #   @return [Types::TranslationSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TranslateTextResponse AWS API Documentation
@@ -1745,8 +1883,23 @@ module Aws::Translate
       include Aws::Structure
     end
 
-    # Optional settings that configure the translation output. Use these
-    # settings for real time translations and asynchronous translation jobs.
+    # The translated content.
+    #
+    # @!attribute [rw] content
+    #   The document containing the translated content.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TranslatedDocument AWS API Documentation
+    #
+    class TranslatedDocument < Struct.new(
+      :content)
+      SENSITIVE = [:content]
+      include Aws::Structure
+    end
+
+    # Settings to configure your translation output, including the option to
+    # set the formality level of the output text and the option to mask
+    # profane words and phrases.
     #
     # @!attribute [rw] formality
     #   You can optionally specify the desired level of formality for
@@ -1822,11 +1975,11 @@ module Aws::Translate
 
     # Amazon Translate does not support translation from the language of the
     # source text into the requested target language. For more information,
-    # see [Error messages][1].
+    # see [Supported languages][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/translate/latest/dg/how-to-error-msg.html
+    # [1]: https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html
     #
     # @!attribute [rw] message
     #   @return [String]

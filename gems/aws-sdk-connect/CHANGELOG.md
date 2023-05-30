@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2023-05-26)
+------------------
+
+* Feature - Documentation update for a new Initiation Method value in DescribeContact API
+
+1.108.0 (2023-05-24)
+------------------
+
+* Feature - Amazon Connect Evaluation Capabilities: validation improvements
+
 1.107.0 (2023-05-18)
 ------------------
 

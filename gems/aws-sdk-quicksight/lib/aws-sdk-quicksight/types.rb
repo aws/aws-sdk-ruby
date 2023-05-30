@@ -788,6 +788,729 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # An optional collection of CloudFormation property configurations that
+    # control how the export job is generated.
+    #
+    # @!attribute [rw] resource_id_override_configuration
+    #   An optional list of structures that control how resource IDs are
+    #   parameterized in the returned CloudFormation template.
+    #   @return [Types::AssetBundleExportJobResourceIdOverrideConfiguration]
+    #
+    # @!attribute [rw] vpc_connections
+    #   An optional list of structures that control how `VPCConnection`
+    #   resources are parameterized in the returned CloudFormation template.
+    #   @return [Array<Types::AssetBundleExportJobVPCConnectionOverrideProperties>]
+    #
+    # @!attribute [rw] refresh_schedules
+    #   An optional list of structures that control how `RefreshSchedule`
+    #   resources are parameterized in the returned CloudFormation template.
+    #   @return [Array<Types::AssetBundleExportJobRefreshScheduleOverrideProperties>]
+    #
+    # @!attribute [rw] data_sources
+    #   An optional list of structures that control how `DataSource`
+    #   resources are parameterized in the returned CloudFormation template.
+    #   @return [Array<Types::AssetBundleExportJobDataSourceOverrideProperties>]
+    #
+    # @!attribute [rw] data_sets
+    #   An optional list of structures that control how `DataSet` resources
+    #   are parameterized in the returned CloudFormation template.
+    #   @return [Array<Types::AssetBundleExportJobDataSetOverrideProperties>]
+    #
+    # @!attribute [rw] themes
+    #   An optional list of structures that control how `Theme` resources
+    #   are parameterized in the returned CloudFormation template.
+    #   @return [Array<Types::AssetBundleExportJobThemeOverrideProperties>]
+    #
+    # @!attribute [rw] analyses
+    #   An optional list of structures that control how `Analysis` resources
+    #   are parameterized in the returned CloudFormation template.
+    #   @return [Array<Types::AssetBundleExportJobAnalysisOverrideProperties>]
+    #
+    # @!attribute [rw] dashboards
+    #   An optional list of structures that control how `Dashboard`
+    #   resources are parameterized in the returned CloudFormation template.
+    #   @return [Array<Types::AssetBundleExportJobDashboardOverrideProperties>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleCloudFormationOverridePropertyConfiguration AWS API Documentation
+    #
+    class AssetBundleCloudFormationOverridePropertyConfiguration < Struct.new(
+      :resource_id_override_configuration,
+      :vpc_connections,
+      :refresh_schedules,
+      :data_sources,
+      :data_sets,
+      :themes,
+      :analyses,
+      :dashboards)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Controls how a specific `Analysis` resource is parameterized in the
+    # returned CloudFormation template.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the specific `Analysis` resource whose override
+    #   properties are configured in this structure.
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   A list of `Analysis` resource properties to generate variables for
+    #   in the returned CloudFormation template.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleExportJobAnalysisOverrideProperties AWS API Documentation
+    #
+    class AssetBundleExportJobAnalysisOverrideProperties < Struct.new(
+      :arn,
+      :properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Controls how a specific `Dashboard` resource is parameterized in the
+    # returned CloudFormation template.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the specific `Dashboard` resource whose override
+    #   properties are configured in this structure.
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   A list of `Dashboard` resource properties to generate variables for
+    #   in the returned CloudFormation template.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleExportJobDashboardOverrideProperties AWS API Documentation
+    #
+    class AssetBundleExportJobDashboardOverrideProperties < Struct.new(
+      :arn,
+      :properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Controls how a specific `DataSet` resource is parameterized in the
+    # returned CloudFormation template.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the specific `DataSet` resource whose override properties
+    #   are configured in this structure.
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   A list of `DataSet` resource properties to generate variables for in
+    #   the returned CloudFormation template.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleExportJobDataSetOverrideProperties AWS API Documentation
+    #
+    class AssetBundleExportJobDataSetOverrideProperties < Struct.new(
+      :arn,
+      :properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Controls how a specific `DataSource` resource is parameterized in the
+    # returned CloudFormation template.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the specific `DataSource` resource whose override
+    #   properties are configured in this structure.
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   A list of `DataSource` resource properties to generate variables for
+    #   in the returned CloudFormation template.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleExportJobDataSourceOverrideProperties AWS API Documentation
+    #
+    class AssetBundleExportJobDataSourceOverrideProperties < Struct.new(
+      :arn,
+      :properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an error that occurred during an Asset Bundle export job.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the resource whose processing caused an error.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The specific error type of the error that occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleExportJobError AWS API Documentation
+    #
+    class AssetBundleExportJobError < Struct.new(
+      :arn,
+      :type,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Controls how a specific `RefreshSchedule` resource is parameterized in
+    # the returned CloudFormation template.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the specific `RefreshSchedule` resource whose override
+    #   properties are configured in this structure.
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   A list of `RefreshSchedule` resource properties to generate
+    #   variables for in the returned CloudFormation template.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleExportJobRefreshScheduleOverrideProperties AWS API Documentation
+    #
+    class AssetBundleExportJobRefreshScheduleOverrideProperties < Struct.new(
+      :arn,
+      :properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An optional structure that configures resource ID overrides for the
+    # export job.
+    #
+    # @!attribute [rw] prefix_for_all_resources
+    #   An option to request a CloudFormation variable for a prefix to be
+    #   prepended to each resource's ID before import. The prefix is only
+    #   added to the asset IDs and does not change the name of the asset.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleExportJobResourceIdOverrideConfiguration AWS API Documentation
+    #
+    class AssetBundleExportJobResourceIdOverrideConfiguration < Struct.new(
+      :prefix_for_all_resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the export job that includes details of the job's
+    # configuration and its current status.
+    #
+    # @!attribute [rw] job_status
+    #   The current status of the export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time that the export job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] asset_bundle_export_job_id
+    #   The ID of the export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_all_dependencies
+    #   The flag that determines the inclusion of resource dependencies in
+    #   the returned asset bundle.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] export_format
+    #   The format for the export job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleExportJobSummary AWS API Documentation
+    #
+    class AssetBundleExportJobSummary < Struct.new(
+      :job_status,
+      :arn,
+      :created_time,
+      :asset_bundle_export_job_id,
+      :include_all_dependencies,
+      :export_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Controls how a specific `Theme` resource is parameterized in the
+    # returned CloudFormation template.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the specific `Theme` resource whose override properties
+    #   are configured in this structure.
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   A list of `Theme` resource properties to generate variables for in
+    #   the returned CloudFormation template.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleExportJobThemeOverrideProperties AWS API Documentation
+    #
+    class AssetBundleExportJobThemeOverrideProperties < Struct.new(
+      :arn,
+      :properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Controls how a specific `VPCConnection` resource is parameterized in
+    # the outputted CloudFormation template.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the specific `VPCConnection` resource whose override
+    #   properties are configured in this structure.
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   A list of `VPCConnection` resource properties to generate variables
+    #   for in the returned CloudFormation template.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleExportJobVPCConnectionOverrideProperties AWS API Documentation
+    #
+    class AssetBundleExportJobVPCConnectionOverrideProperties < Struct.new(
+      :arn,
+      :properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The override parameters for a single analysis that is being imported.
+    #
+    # @!attribute [rw] analysis_id
+    #   The ID of the analysis that you ant to apply overrides to.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A new name for the analysis.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobAnalysisOverrideParameters AWS API Documentation
+    #
+    class AssetBundleImportJobAnalysisOverrideParameters < Struct.new(
+      :analysis_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The override parameters for a single dashboard that is being imported.
+    #
+    # @!attribute [rw] dashboard_id
+    #   The ID of the dashboard that you want to apply overrides to.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A new name for the dashboard.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobDashboardOverrideParameters AWS API Documentation
+    #
+    class AssetBundleImportJobDashboardOverrideParameters < Struct.new(
+      :dashboard_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The override parameters for a single dataset that is being imported.
+    #
+    # @!attribute [rw] data_set_id
+    #   The ID of the dataset to apply overrides to.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A new name for the dataset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobDataSetOverrideParameters AWS API Documentation
+    #
+    class AssetBundleImportJobDataSetOverrideParameters < Struct.new(
+      :data_set_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A username and password credential pair to use to import a data source
+    # resource.
+    #
+    # @!attribute [rw] username
+    #   The username for the data source connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   The password for the data source connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobDataSourceCredentialPair AWS API Documentation
+    #
+    class AssetBundleImportJobDataSourceCredentialPair < Struct.new(
+      :username,
+      :password)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The login credentials to use to import a data source resource.
+    #
+    # @!attribute [rw] credential_pair
+    #   A username and password credential pair to be used to create the
+    #   imported data source. Leave this field blank if you are using an
+    #   Secrets Manager Secret to provide credentials.
+    #   @return [Types::AssetBundleImportJobDataSourceCredentialPair]
+    #
+    # @!attribute [rw] secret_arn
+    #   The ARN of the Secrets Manager Secret to be used to create the
+    #   imported data source leave this field blank if you aren't using a
+    #   Secret in place of a credential pair.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobDataSourceCredentials AWS API Documentation
+    #
+    class AssetBundleImportJobDataSourceCredentials < Struct.new(
+      :credential_pair,
+      :secret_arn)
+      SENSITIVE = [:credential_pair]
+      include Aws::Structure
+    end
+
+    # The override parameters for a single data source that is being
+    # imported.
+    #
+    # @!attribute [rw] data_source_id
+    #   The ID of the data source to apply overrides to.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A new name for the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_parameters
+    #   The parameters that Amazon QuickSight uses to connect to your
+    #   underlying data source. This is a variant type structure. For this
+    #   structure to be valid, only one of the attributes can be non-null.
+    #   @return [Types::DataSourceParameters]
+    #
+    # @!attribute [rw] vpc_connection_properties
+    #   VPC connection properties.
+    #   @return [Types::VpcConnectionProperties]
+    #
+    # @!attribute [rw] ssl_properties
+    #   Secure Socket Layer (SSL) properties that apply when Amazon
+    #   QuickSight connects to your underlying data source.
+    #   @return [Types::SslProperties]
+    #
+    # @!attribute [rw] credentials
+    #   An optional structure that provides the credentials to be used to
+    #   create the imported data source.
+    #   @return [Types::AssetBundleImportJobDataSourceCredentials]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobDataSourceOverrideParameters AWS API Documentation
+    #
+    class AssetBundleImportJobDataSourceOverrideParameters < Struct.new(
+      :data_source_id,
+      :name,
+      :data_source_parameters,
+      :vpc_connection_properties,
+      :ssl_properties,
+      :credentials)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an error that occurred within an Asset Bundle import
+    # execution.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the resource whose processing caused an error.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The specific error type or the error that occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobError AWS API Documentation
+    #
+    class AssetBundleImportJobError < Struct.new(
+      :arn,
+      :type,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of overrides that modify the asset bundle resource
+    # configuration before the resource is imported.
+    #
+    # @!attribute [rw] resource_id_override_configuration
+    #   An optional structure that configures resource ID overrides to be
+    #   applied within the import job.
+    #   @return [Types::AssetBundleImportJobResourceIdOverrideConfiguration]
+    #
+    # @!attribute [rw] vpc_connections
+    #   A list of overrides for any `VPCConnection` resources that are
+    #   present in the asset bundle that is imported.
+    #   @return [Array<Types::AssetBundleImportJobVPCConnectionOverrideParameters>]
+    #
+    # @!attribute [rw] refresh_schedules
+    #   A list of overrides for any `RefreshSchedule` resources that are
+    #   present in the asset bundle that is imported.
+    #   @return [Array<Types::AssetBundleImportJobRefreshScheduleOverrideParameters>]
+    #
+    # @!attribute [rw] data_sources
+    #   A list of overrides for any `DataSource` resources that are present
+    #   in the asset bundle that is imported.
+    #   @return [Array<Types::AssetBundleImportJobDataSourceOverrideParameters>]
+    #
+    # @!attribute [rw] data_sets
+    #   A list of overrides for any `DataSet` resources that are present in
+    #   the asset bundle that is imported.
+    #   @return [Array<Types::AssetBundleImportJobDataSetOverrideParameters>]
+    #
+    # @!attribute [rw] themes
+    #   A list of overrides for any `Theme` resources that are present in
+    #   the asset bundle that is imported.
+    #   @return [Array<Types::AssetBundleImportJobThemeOverrideParameters>]
+    #
+    # @!attribute [rw] analyses
+    #   A list of overrides for any `Analysis` resources that are present in
+    #   the asset bundle that is imported.
+    #   @return [Array<Types::AssetBundleImportJobAnalysisOverrideParameters>]
+    #
+    # @!attribute [rw] dashboards
+    #   A list of overrides for any `Dashboard` resources that are present
+    #   in the asset bundle that is imported.
+    #   @return [Array<Types::AssetBundleImportJobDashboardOverrideParameters>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobOverrideParameters AWS API Documentation
+    #
+    class AssetBundleImportJobOverrideParameters < Struct.new(
+      :resource_id_override_configuration,
+      :vpc_connections,
+      :refresh_schedules,
+      :data_sources,
+      :data_sets,
+      :themes,
+      :analyses,
+      :dashboards)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of overrides for a specific `RefreshsSchedule` resource that is
+    # present in the asset bundle that is imported.
+    #
+    # @!attribute [rw] data_set_id
+    #   A partial identifier for the specific `RefreshSchedule` resource
+    #   that is being overridden. This structure is used together with the
+    #   `ScheduleID` structure.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_id
+    #   A partial identifier for the specific `RefreshSchedule` resource
+    #   being overridden. This structure is used together with the
+    #   `DataSetId` structure.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_after_date_time
+    #   An override for the `StartAfterDateTime` of a `RefreshSchedule` to
+    #   ensure that the `StartAfterDateTime` is set to a time that takes
+    #   place in the future.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobRefreshScheduleOverrideParameters AWS API Documentation
+    #
+    class AssetBundleImportJobRefreshScheduleOverrideParameters < Struct.new(
+      :data_set_id,
+      :schedule_id,
+      :start_after_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An optional structure that configures resource ID overrides for the
+    # import job
+    #
+    # @!attribute [rw] prefix_for_all_resources
+    #   An option to request a CloudFormation variable for a prefix to be
+    #   prepended to each resource's ID before import. The prefix is only
+    #   added to the asset IDs and does not change the name of the asset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobResourceIdOverrideConfiguration AWS API Documentation
+    #
+    class AssetBundleImportJobResourceIdOverrideConfiguration < Struct.new(
+      :prefix_for_all_resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the import job that includes details of the requested
+    # job's configuration and its current status.
+    #
+    # @!attribute [rw] job_status
+    #   The current status of the import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time that the import job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] asset_bundle_import_job_id
+    #   The ID of the job. This ID is unique while the job is running. After
+    #   the job is completed, you can reuse this ID for another job.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_action
+    #   The failure action for the import job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobSummary AWS API Documentation
+    #
+    class AssetBundleImportJobSummary < Struct.new(
+      :job_status,
+      :arn,
+      :created_time,
+      :asset_bundle_import_job_id,
+      :failure_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The override parameters for a single theme that is imported.
+    #
+    # @!attribute [rw] theme_id
+    #   The ID of the theme to apply overrides to.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A new name for the theme.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobThemeOverrideParameters AWS API Documentation
+    #
+    class AssetBundleImportJobThemeOverrideParameters < Struct.new(
+      :theme_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The override parameters for a single VPC connection that is imported.
+    #
+    # @!attribute [rw] vpc_connection_id
+    #   The ID of the VPC Connection to apply overrides to.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A new name for the VPC connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of new subnet IDs for the VPC connection you are importing.
+    #   This field is required if you are importing the VPC connection from
+    #   another Amazon Web Services account or region.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_ids
+    #   A new security group ID for the VPC connection you are importing.
+    #   This field is required if you are importing the VPC connection from
+    #   another Amazon Web Services account or region.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dns_resolvers
+    #   An optional override of dns resolvers to be used by the VPC
+    #   connection.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] role_arn
+    #   An optional override of the role ARN to be used by the VPC
+    #   connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobVPCConnectionOverrideParameters AWS API Documentation
+    #
+    class AssetBundleImportJobVPCConnectionOverrideParameters < Struct.new(
+      :vpc_connection_id,
+      :name,
+      :subnet_ids,
+      :security_group_ids,
+      :dns_resolvers,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source of the asset bundle zip file that contains the data that
+    # you want to import.
+    #
+    # @!attribute [rw] body
+    #   The bytes of the Base64 encoded asset bundle import zip file. This
+    #   file can't exceed 20MB.
+    #
+    #   If you are calling the APIs from the Amazon Web Services Java,
+    #   JavaScript, Python, or PHP SDKs, the SDK encodes Base64
+    #   automatically to allow the direct setting of the zip file's bytes.
+    #   If you are using a SDK of a different language or are receiving
+    #   related errors, try to Base64 encode your data.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_uri
+    #   The Amazon S3 uri for an asset bundle import file that exists in an
+    #   Amazon S3 bucket that the caller has read access to. The file must
+    #   be a zip format file and can't exceed 20MB.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportSource AWS API Documentation
+    #
+    class AssetBundleImportSource < Struct.new(
+      :body,
+      :s3_uri)
+      SENSITIVE = [:body]
+      include Aws::Structure
+    end
+
+    # A description of the import source that you provide at the start of an
+    # import job. This value is set to either `Body` or `S3Uri` depending on
+    # how the `StartAssetBundleImportJobRequest` is configured.
+    #
+    # @!attribute [rw] body
+    #   A HTTPS download URL for the provided asset bundle that you
+    #   optionally provided at the start of the import job. This URL is
+    #   valid for 5 minutes after issuance. Call
+    #   `DescribeAssetBundleExportJob` again for a fresh URL if needed. The
+    #   downloaded asset bundle is a `.qs` zip file.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_uri
+    #   The Amazon S3 uri that you provided at the start of the import job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportSourceDescription AWS API Documentation
+    #
+    class AssetBundleImportSourceDescription < Struct.new(
+      :body,
+      :s3_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Parameters for Amazon Athena.
     #
     # @!attribute [rw] work_group
@@ -2073,7 +2796,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] cluster_marker
     #   The cluster marker that is a part of the cluster marker
-    #   configuration
+    #   configuration.
     #   @return [Types::ClusterMarker]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ClusterMarkerConfiguration AWS API Documentation
@@ -8919,6 +9642,228 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account the export job is executed
+    #   in.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_bundle_export_job_id
+    #   The ID of the job that you want described. The job ID is set when
+    #   you start a new job with a `StartAssetBundleExportJob` API call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAssetBundleExportJobRequest AWS API Documentation
+    #
+    class DescribeAssetBundleExportJobRequest < Struct.new(
+      :aws_account_id,
+      :asset_bundle_export_job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_status
+    #   Indicates tha status of a job through its queueing and execution.
+    #
+    #   Poll this `DescribeAssetBundleExportApi` until `JobStatus` is either
+    #   `SUCCESSFUL` or `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] download_url
+    #   The URL to download the exported asset bundle data from.
+    #
+    #   This URL is available only after the job has succeeded. This URL is
+    #   valid for 5 minutes after issuance. Call
+    #   `DescribeAssetBundleExportJob` again for a fresh URL if needed.
+    #
+    #   The downloaded asset bundle is a zip file named
+    #   `assetbundle-\{jobId\}.qs`. The file has a `.qs` extension.
+    #
+    #   This URL can't be used in a `StartAssetBundleImportJob` API call
+    #   and should only be used for download purposes.
+    #   @return [String]
+    #
+    # @!attribute [rw] errors
+    #   An array of error records that describes any failures that occurred
+    #   during the export job processing.
+    #
+    #   Error records accumulate while the job runs. The complete set of
+    #   error records is available after the job has completed and failed.
+    #   @return [Array<Types::AssetBundleExportJobError>]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time that the export job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] asset_bundle_export_job_id
+    #   The ID of the job. The job ID is set when you start a new job with a
+    #   `StartAssetBundleExportJob` API call.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that the export job was
+    #   executed in.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arns
+    #   A list of resource ARNs that exported with the job.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] include_all_dependencies
+    #   The include dependencies flag.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] export_format
+    #   The format of the export.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_formation_override_property_configuration
+    #   The CloudFormation override property configuration for the export
+    #   job.
+    #   @return [Types::AssetBundleCloudFormationOverridePropertyConfiguration]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAssetBundleExportJobResponse AWS API Documentation
+    #
+    class DescribeAssetBundleExportJobResponse < Struct.new(
+      :job_status,
+      :download_url,
+      :errors,
+      :arn,
+      :created_time,
+      :asset_bundle_export_job_id,
+      :aws_account_id,
+      :resource_arns,
+      :include_all_dependencies,
+      :export_format,
+      :cloud_formation_override_property_configuration,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account the import job was
+    #   executed in.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_bundle_import_job_id
+    #   The ID of the job. The job ID is set when you start a new job with a
+    #   `StartAssetBundleImportJob` API call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAssetBundleImportJobRequest AWS API Documentation
+    #
+    class DescribeAssetBundleImportJobRequest < Struct.new(
+      :aws_account_id,
+      :asset_bundle_import_job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_status
+    #   Indicates tha status of a job through its queueing and execution.
+    #
+    #   Poll this `DescribeAssetBundleImport` API until `JobStatus` returns
+    #   one of the following values.
+    #
+    #   * `SUCCESSFUL`
+    #
+    #   * `FAILED`
+    #
+    #   * `FAILED_ROLLBACK_COMPLETED`
+    #
+    #   * `FAILED_ROLLBACK_ERROR`
+    #   @return [String]
+    #
+    # @!attribute [rw] errors
+    #   An array of error records that describes any failures that occurred
+    #   during the export job processing.
+    #
+    #   Error records accumulate while the job is still running. The
+    #   complete set of error records is available after the job has
+    #   completed and failed.
+    #   @return [Array<Types::AssetBundleImportJobError>]
+    #
+    # @!attribute [rw] rollback_errors
+    #   An array of error records that describes any failures that occurred
+    #   while an import job was attempting a rollback.
+    #
+    #   Error records accumulate while the job is still running. The
+    #   complete set of error records is available after the job has
+    #   completed and failed.
+    #   @return [Array<Types::AssetBundleImportJobError>]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time that the import job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] asset_bundle_import_job_id
+    #   The ID of the job. The job ID is set when you start a new job with a
+    #   `StartAssetBundleImportJob` API call.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account the import job was
+    #   executed in.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_bundle_import_source
+    #   The source of the asset bundle zip file that contains the data that
+    #   is imported by the job.
+    #   @return [Types::AssetBundleImportSourceDescription]
+    #
+    # @!attribute [rw] override_parameters
+    #   Optional overrides to be applied to the resource configuration
+    #   before import.
+    #   @return [Types::AssetBundleImportJobOverrideParameters]
+    #
+    # @!attribute [rw] failure_action
+    #   The failure action for the import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAssetBundleImportJobResponse AWS API Documentation
+    #
+    class DescribeAssetBundleImportJobResponse < Struct.new(
+      :job_status,
+      :errors,
+      :rollback_errors,
+      :arn,
+      :created_time,
+      :asset_bundle_import_job_id,
+      :aws_account_id,
+      :asset_bundle_import_source,
+      :override_parameters,
+      :failure_action,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
     #   The ID of the Amazon Web Services account that contains the
     #   dashboard that you're describing.
     #   @return [String]
@@ -13130,6 +14075,48 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The color scale specification for the heatmap point style.
+    #
+    # @!attribute [rw] colors
+    #   The list of colors to be used in heatmap point style.
+    #   @return [Array<Types::GeospatialHeatmapDataColor>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GeospatialHeatmapColorScale AWS API Documentation
+    #
+    class GeospatialHeatmapColorScale < Struct.new(
+      :colors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The heatmap configuration of the geospatial point style.
+    #
+    # @!attribute [rw] heatmap_color
+    #   The color scale specification for the heatmap point style.
+    #   @return [Types::GeospatialHeatmapColorScale]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GeospatialHeatmapConfiguration AWS API Documentation
+    #
+    class GeospatialHeatmapConfiguration < Struct.new(
+      :heatmap_color)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The color to be used in the heatmap point style.
+    #
+    # @!attribute [rw] color
+    #   The hex color to be used in the heatmap point style.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GeospatialHeatmapDataColor AWS API Documentation
+    #
+    class GeospatialHeatmapDataColor < Struct.new(
+      :color)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The aggregated field wells for a geospatial map.
     #
     # @!attribute [rw] geospatial
@@ -13290,11 +14277,16 @@ module Aws::QuickSight
     #   The cluster marker configuration of the geospatial point style.
     #   @return [Types::ClusterMarkerConfiguration]
     #
+    # @!attribute [rw] heatmap_configuration
+    #   The heatmap configuration of the geospatial point style.
+    #   @return [Types::GeospatialHeatmapConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GeospatialPointStyleOptions AWS API Documentation
     #
     class GeospatialPointStyleOptions < Struct.new(
       :selected_point_style,
-      :cluster_marker_configuration)
+      :cluster_marker_configuration,
+      :heatmap_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15543,6 +16535,110 @@ module Aws::QuickSight
       :next_token,
       :status,
       :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that the export jobs were
+    #   executed in.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListAssetBundleExportJobsRequest AWS API Documentation
+    #
+    class ListAssetBundleExportJobsRequest < Struct.new(
+      :aws_account_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] asset_bundle_export_job_summary_list
+    #   A list of export job summaries.
+    #   @return [Array<Types::AssetBundleExportJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListAssetBundleExportJobsResponse AWS API Documentation
+    #
+    class ListAssetBundleExportJobsResponse < Struct.new(
+      :asset_bundle_export_job_summary_list,
+      :next_token,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that the import jobs were
+    #   executed in.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListAssetBundleImportJobsRequest AWS API Documentation
+    #
+    class ListAssetBundleImportJobsRequest < Struct.new(
+      :aws_account_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] asset_bundle_import_job_summary_list
+    #   A list of import job summaries.
+    #   @return [Array<Types::AssetBundleImportJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListAssetBundleImportJobsResponse AWS API Documentation
+    #
+    class ListAssetBundleImportJobsResponse < Struct.new(
+      :asset_bundle_import_job_summary_list,
+      :next_token,
+      :request_id,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22812,6 +23908,171 @@ module Aws::QuickSight
     #
     class SslProperties < Struct.new(
       :disable_ssl)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account to export assets from.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_bundle_export_job_id
+    #   The ID of the job. This ID is unique while the job is running. After
+    #   the job is completed, you can reuse this ID for another job.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arns
+    #   An array of resource ARNs to export. The following resources are
+    #   supported.
+    #
+    #   * `Analysis`
+    #
+    #   * `Dashboard`
+    #
+    #   * `DataSet`
+    #
+    #   * `DataSource`
+    #
+    #   * `RefreshSchedule`
+    #
+    #   * `Theme`
+    #
+    #   * `VPCConnection`
+    #
+    #   The API caller must have the necessary permissions in their IAM role
+    #   to access each resource before the resources can be exported.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] include_all_dependencies
+    #   A Boolean that determines whether all dependencies of each resource
+    #   ARN are recursively exported with the job. For example, say you
+    #   provided a Dashboard ARN to the `ResourceArns` parameter. If you set
+    #   `IncludeAllDependencies` to `TRUE`, any theme, dataset, and
+    #   dataource resource that is a dependency of the dashboard is also
+    #   exported.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] export_format
+    #   The export data format.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_formation_override_property_configuration
+    #   An optional collection of structures that generate CloudFormation
+    #   parameters to override the existing resource property values when
+    #   the resource is exported to a new CloudFormation template.
+    #
+    #   Use this field if the `ExportFormat` field of a
+    #   `StartAssetBundleExportJobRequest` API call is set to
+    #   `CLOUDFORMATION_JSON`.
+    #   @return [Types::AssetBundleCloudFormationOverridePropertyConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StartAssetBundleExportJobRequest AWS API Documentation
+    #
+    class StartAssetBundleExportJobRequest < Struct.new(
+      :aws_account_id,
+      :asset_bundle_export_job_id,
+      :resource_arns,
+      :include_all_dependencies,
+      :export_format,
+      :cloud_formation_override_property_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_bundle_export_job_id
+    #   The ID of the job. This ID is unique while the job is running. After
+    #   the job is completed, you can reuse this ID for another job.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services response ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StartAssetBundleExportJobResponse AWS API Documentation
+    #
+    class StartAssetBundleExportJobResponse < Struct.new(
+      :arn,
+      :asset_bundle_export_job_id,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account to import assets into.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_bundle_import_job_id
+    #   The ID of the job. This ID is unique while the job is running. After
+    #   the job is completed, you can reuse this ID for another job.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_bundle_import_source
+    #   The source of the asset bundle zip file that contains the data that
+    #   you want to import.
+    #   @return [Types::AssetBundleImportSource]
+    #
+    # @!attribute [rw] override_parameters
+    #   Optional overrides to be applied to the resource configuration
+    #   before import.
+    #   @return [Types::AssetBundleImportJobOverrideParameters]
+    #
+    # @!attribute [rw] failure_action
+    #   The failure action for the import job.
+    #
+    #   If you choose `ROLLBACK`, failed import jobs will attempt to undo
+    #   any asset changes caused by the failed job.
+    #
+    #   If you choose `DO_NOTHING`, failed import jobs will not attempt to
+    #   roll back any asset changes caused by the failed job, possibly
+    #   leaving the Amazon QuickSight account in an inconsistent state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StartAssetBundleImportJobRequest AWS API Documentation
+    #
+    class StartAssetBundleImportJobRequest < Struct.new(
+      :aws_account_id,
+      :asset_bundle_import_job_id,
+      :asset_bundle_import_source,
+      :override_parameters,
+      :failure_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_bundle_import_job_id
+    #   The ID of the job. This ID is unique while the job is running. After
+    #   the job is completed, you can reuse this ID for another job.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services response ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StartAssetBundleImportJobResponse AWS API Documentation
+    #
+    class StartAssetBundleImportJobResponse < Struct.new(
+      :arn,
+      :asset_bundle_import_job_id,
+      :request_id,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

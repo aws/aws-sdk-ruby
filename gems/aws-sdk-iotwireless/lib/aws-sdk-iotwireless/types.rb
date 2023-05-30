@@ -655,23 +655,28 @@ module Aws::IoTWireless
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] redundancy_percent
-    #   The percentage of added redundant fragments. For example, if
-    #   firmware file is 100 bytes and fragment size is 10 bytes, with
-    #   `RedundancyPercent` set to 50(%), the final number of encoded
-    #   fragments is (100 / 10) + (100 / 10 * 50%) = 15.
+    #   The percentage of the added fragments that are redundant. For
+    #   example, if the size of the firmware image file is 100 bytes and the
+    #   fragment size is 10 bytes, with `RedundancyPercent` set to 50(%),
+    #   the final number of encoded fragments is (100 / 10) + (100 / 10 *
+    #   50%) = 15.
     #   @return [Integer]
     #
     # @!attribute [rw] fragment_size_bytes
-    #   The size of each fragment in bytes. Currently only supported in
-    #   fuota tasks with multicast groups.
+    #   The size of each fragment in bytes. This parameter is supported only
+    #   for FUOTA tasks with multicast groups.
     #   @return [Integer]
     #
     # @!attribute [rw] fragment_interval_ms
-    #   The interval of sending fragments in milliseconds. Currently the
-    #   interval will be rounded to the nearest second. Note that this
-    #   interval only controls the timing when the cloud sends the fragments
-    #   down. The actual delay of receiving fragments at device side depends
-    #   on the device's class and the communication delay with the cloud.
+    #   The interval for sending fragments in milliseconds, rounded to the
+    #   nearest second.
+    #
+    #   <note markdown="1"> This interval only determines the timing for when the Cloud sends
+    #   down the fragments to yor device. There can be a delay for when your
+    #   device will receive these fragments. This delay depends on the
+    #   device's class and the communication delay with the cloud.
+    #
+    #    </note>
     #   @return [Integer]
     #
     class CreateFuotaTaskRequest < Struct.new(
@@ -796,6 +801,12 @@ module Aws::IoTWireless
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] multicast_groups
+    #   Multicast Group resources to add to the network analyzer
+    #   configruation. Provide the `MulticastGroupId` of the resource to add
+    #   in the input array.
+    #   @return [Array<String>]
+    #
     class CreateNetworkAnalyzerConfigurationRequest < Struct.new(
       :name,
       :trace_content,
@@ -803,7 +814,8 @@ module Aws::IoTWireless
       :wireless_gateways,
       :description,
       :tags,
-      :client_request_token)
+      :client_request_token,
+      :multicast_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1831,23 +1843,28 @@ module Aws::IoTWireless
     #   @return [Time]
     #
     # @!attribute [rw] redundancy_percent
-    #   The percentage of added redundant fragments. For example, if
-    #   firmware file is 100 bytes and fragment size is 10 bytes, with
-    #   `RedundancyPercent` set to 50(%), the final number of encoded
-    #   fragments is (100 / 10) + (100 / 10 * 50%) = 15.
+    #   The percentage of the added fragments that are redundant. For
+    #   example, if the size of the firmware image file is 100 bytes and the
+    #   fragment size is 10 bytes, with `RedundancyPercent` set to 50(%),
+    #   the final number of encoded fragments is (100 / 10) + (100 / 10 *
+    #   50%) = 15.
     #   @return [Integer]
     #
     # @!attribute [rw] fragment_size_bytes
-    #   The size of each fragment in bytes. Currently only supported in
-    #   fuota tasks with multicast groups.
+    #   The size of each fragment in bytes. This parameter is supported only
+    #   for FUOTA tasks with multicast groups.
     #   @return [Integer]
     #
     # @!attribute [rw] fragment_interval_ms
-    #   The interval of sending fragments in milliseconds. Currently the
-    #   interval will be rounded to the nearest second. Note that this
-    #   interval only controls the timing when the cloud sends the fragments
-    #   down. The actual delay of receiving fragments at device side depends
-    #   on the device's class and the communication delay with the cloud.
+    #   The interval for sending fragments in milliseconds, rounded to the
+    #   nearest second.
+    #
+    #   <note markdown="1"> This interval only determines the timing for when the Cloud sends
+    #   down the fragments to yor device. There can be a delay for when your
+    #   device will receive these fragments. This delay depends on the
+    #   device's class and the communication delay with the cloud.
+    #
+    #    </note>
     #   @return [Integer]
     #
     class GetFuotaTaskResponse < Struct.new(
@@ -2001,13 +2018,19 @@ module Aws::IoTWireless
     #   Name of the network analyzer configuration.
     #   @return [String]
     #
+    # @!attribute [rw] multicast_groups
+    #   List of multicast group resources that have been added to the
+    #   network analyzer configuration.
+    #   @return [Array<String>]
+    #
     class GetNetworkAnalyzerConfigurationResponse < Struct.new(
       :trace_content,
       :wireless_devices,
       :wireless_gateways,
       :description,
       :arn,
-      :name)
+      :name,
+      :multicast_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2543,6 +2566,10 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] last_uplink_received_at
     #   The date and time when the most recent uplink was received.
+    #
+    #   <note markdown="1"> This value is only valid for 3 months.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] lo_ra_wan
@@ -2680,6 +2707,10 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] last_uplink_received_at
     #   The date and time when the most recent uplink was received.
+    #
+    #   <note markdown="1"> This value is only valid for 3 months.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] connection_status
@@ -2751,6 +2782,10 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] last_uplink_received_at
     #   The date and time when the most recent uplink was received.
+    #
+    #   <note markdown="1"> This value is only valid for 3 months.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] task_created_at
@@ -5787,9 +5822,16 @@ module Aws::IoTWireless
     #   information, or to `INFO` for more detailed logs.
     #   @return [String]
     #
+    # @!attribute [rw] multicast_frame_info
+    #   `FrameInfo` of your multicast group resources for the trace content.
+    #   Use FrameInfo to debug the multicast communication between your
+    #   LoRaWAN end devices and the network server.
+    #   @return [String]
+    #
     class TraceContent < Struct.new(
       :wireless_device_frame_info,
-      :log_level)
+      :log_level,
+      :multicast_frame_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5948,23 +5990,28 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] redundancy_percent
-    #   The percentage of added redundant fragments. For example, if
-    #   firmware file is 100 bytes and fragment size is 10 bytes, with
-    #   `RedundancyPercent` set to 50(%), the final number of encoded
-    #   fragments is (100 / 10) + (100 / 10 * 50%) = 15.
+    #   The percentage of the added fragments that are redundant. For
+    #   example, if the size of the firmware image file is 100 bytes and the
+    #   fragment size is 10 bytes, with `RedundancyPercent` set to 50(%),
+    #   the final number of encoded fragments is (100 / 10) + (100 / 10 *
+    #   50%) = 15.
     #   @return [Integer]
     #
     # @!attribute [rw] fragment_size_bytes
-    #   The size of each fragment in bytes. Currently only supported in
-    #   fuota tasks with multicast groups.
+    #   The size of each fragment in bytes. This parameter is supported only
+    #   for FUOTA tasks with multicast groups.
     #   @return [Integer]
     #
     # @!attribute [rw] fragment_interval_ms
-    #   The interval of sending fragments in milliseconds. Currently the
-    #   interval will be rounded to the nearest second. Note that this
-    #   interval only controls the timing when the cloud sends the fragments
-    #   down. The actual delay of receiving fragments at device side depends
-    #   on the device's class and the communication delay with the cloud.
+    #   The interval for sending fragments in milliseconds, rounded to the
+    #   nearest second.
+    #
+    #   <note markdown="1"> This interval only determines the timing for when the Cloud sends
+    #   down the fragments to yor device. There can be a delay for when your
+    #   device will receive these fragments. This delay depends on the
+    #   device's class and the communication delay with the cloud.
+    #
+    #    </note>
     #   @return [Integer]
     #
     class UpdateFuotaTaskRequest < Struct.new(
@@ -6071,6 +6118,18 @@ module Aws::IoTWireless
     #   The description of the new resource.
     #   @return [String]
     #
+    # @!attribute [rw] multicast_groups_to_add
+    #   Multicast group resources to add to the network analyzer
+    #   configuration. Provide the `MulticastGroupId` of the resource to add
+    #   in the input array.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] multicast_groups_to_remove
+    #   Multicast group resources to remove from the network analyzer
+    #   configuration. Provide the `MulticastGroupId` of the resource to
+    #   remove in the input array.
+    #   @return [Array<String>]
+    #
     class UpdateNetworkAnalyzerConfigurationRequest < Struct.new(
       :configuration_name,
       :trace_content,
@@ -6078,7 +6137,9 @@ module Aws::IoTWireless
       :wireless_devices_to_remove,
       :wireless_gateways_to_add,
       :wireless_gateways_to_remove,
-      :description)
+      :description,
+      :multicast_groups_to_add,
+      :multicast_groups_to_remove)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6619,6 +6680,10 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] last_uplink_received_at
     #   The date and time when the most recent uplink was received.
+    #
+    #   <note markdown="1"> Theis value is only valid for 3 months.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] lo_ra_wan
@@ -6730,6 +6795,10 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] last_uplink_received_at
     #   The date and time when the most recent uplink was received.
+    #
+    #   <note markdown="1"> This value is only valid for 3 months.
+    #
+    #    </note>
     #   @return [String]
     #
     class WirelessGatewayStatistics < Struct.new(

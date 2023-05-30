@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2023-05-23)
+------------------
+
+* Feature - Added support for calling TranslateDocument API.
+
 1.50.0 (2023-01-18)
 ------------------
 

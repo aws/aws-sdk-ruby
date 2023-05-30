@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Feature - Improve User-Agent metrics tracking.
 
+3.173.1 (2023-05-24)
+------------------
+
+* Issue - Updated `checksum_algorithm` plugin to use IO.copy_stream for JRuby.
+
 3.173.0 (2023-05-18)
 ------------------
 

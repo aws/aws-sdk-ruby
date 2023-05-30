@@ -181,12 +181,8 @@ module Aws
             expect(headers['x-amz-decoded-content-length']).to eq('11')
             # capture the body by reading it into a new IO object
             body = StringIO.new
-            if (defined?(JRUBY_VERSION))
-              body <<  context.http_request.body.read(1000, String.new) + context.http_request.body.read(1000, String.new)
-            else
-              # IO.copy_stream is the same method used by Net::Http to write our body to the socket
-              IO.copy_stream(context.http_request.body, body)
-            end
+            # IO.copy_stream is the same method used by Net::Http to write our body to the socket
+            IO.copy_stream(context.http_request.body, body)
             body.rewind
             expect(body.read).to eq "b\r\nHello World\r\n0\r\nx-amz-checksum-sha256:pZGm1Av0IEBKARczz7exkNYsZb8LzaMrV7J32a2fFG4=\r\n\r\n"
           end)
@@ -195,11 +191,11 @@ module Aws
         end
 
         it 'handles header-based auth with checksum in header' do
-            client.stub_responses(:some_operation, -> (context) do
-              expect(context.http_request.headers['x-amz-checksum-sha256']).to eq('pZGm1Av0IEBKARczz7exkNYsZb8LzaMrV7J32a2fFG4=')
-              expect(context.http_request.body.read).to eq('Hello World')
-            end)
-            client.some_operation(checksum_algorithm: 'sha256', body: 'Hello World')
+          client.stub_responses(:some_operation, -> (context) do
+            expect(context.http_request.headers['x-amz-checksum-sha256']).to eq('pZGm1Av0IEBKARczz7exkNYsZb8LzaMrV7J32a2fFG4=')
+            expect(context.http_request.body.read).to eq('Hello World')
+          end)
+          client.some_operation(checksum_algorithm: 'sha256', body: 'Hello World')
         end
 
         it 'handles sigv4-streaming auth with checksum in trailer' do

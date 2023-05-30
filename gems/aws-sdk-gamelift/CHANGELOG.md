@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2023-05-25)
+------------------
+
+* Feature - GameLift FleetIQ users can now filter game server claim requests to exclude servers on instances that are draining.
+
 1.62.0 (2023-04-20)
 ------------------
 

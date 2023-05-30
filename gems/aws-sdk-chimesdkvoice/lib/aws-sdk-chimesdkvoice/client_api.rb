@@ -32,6 +32,7 @@ module Aws::ChimeSDKVoice
     BatchUpdatePhoneNumberResponse = Shapes::StructureShape.new(name: 'BatchUpdatePhoneNumberResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CallDetails = Shapes::StructureShape.new(name: 'CallDetails')
+    CallLegType = Shapes::StringShape.new(name: 'CallLegType')
     CallingName = Shapes::StringShape.new(name: 'CallingName')
     CallingNameStatus = Shapes::StringShape.new(name: 'CallingNameStatus')
     CallingRegion = Shapes::StringShape.new(name: 'CallingRegion')
@@ -1099,6 +1100,7 @@ module Aws::ChimeSDKVoice
     StartSpeakerSearchTaskRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location_name: "TransactionId"))
     StartSpeakerSearchTaskRequest.add_member(:voice_profile_domain_id, Shapes::ShapeRef.new(shape: NonEmptyString256, required: true, location_name: "VoiceProfileDomainId"))
     StartSpeakerSearchTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestId, location_name: "ClientRequestToken"))
+    StartSpeakerSearchTaskRequest.add_member(:call_leg, Shapes::ShapeRef.new(shape: CallLegType, location_name: "CallLeg"))
     StartSpeakerSearchTaskRequest.struct_class = Types::StartSpeakerSearchTaskRequest
 
     StartSpeakerSearchTaskResponse.add_member(:speaker_search_task, Shapes::ShapeRef.new(shape: SpeakerSearchTask, location_name: "SpeakerSearchTask"))

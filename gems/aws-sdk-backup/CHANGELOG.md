@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2023-05-22)
+------------------
+
+* Feature - Added support for tags on restore.
+
+1.50.0 (2023-05-19)
+------------------
+
+* Feature - Add  ResourceArn, ResourceType, and BackupVaultName to ListRecoveryPointsByLegalHold API response.
+
 1.49.0 (2023-02-08)
 ------------------
 

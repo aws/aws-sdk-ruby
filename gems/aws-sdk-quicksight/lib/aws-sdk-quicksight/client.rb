@@ -1368,7 +1368,7 @@ module Aws::QuickSight
     #     },
     #     credentials: {
     #       credential_pair: {
-    #         username: "Username", # required
+    #         username: "DbUsername", # required
     #         password: "Password", # required
     #         alternate_data_source_parameters: [
     #           {
@@ -4093,6 +4093,260 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Describes an existing export job.
+    #
+    # Poll job descriptions after a job starts to know the status of the
+    # job. When a job succeeds, a URL is provided to download the exported
+    # assets' data from. Download URLs are valid for five minutes after
+    # they are generated. You can call the `DescribeAssetBundleExportJob`
+    # API for a new download URL as needed.
+    #
+    # Job descriptions are available for 14 days after the job starts.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account the export job is executed
+    #   in.
+    #
+    # @option params [required, String] :asset_bundle_export_job_id
+    #   The ID of the job that you want described. The job ID is set when you
+    #   start a new job with a `StartAssetBundleExportJob` API call.
+    #
+    # @return [Types::DescribeAssetBundleExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAssetBundleExportJobResponse#job_status #job_status} => String
+    #   * {Types::DescribeAssetBundleExportJobResponse#download_url #download_url} => String
+    #   * {Types::DescribeAssetBundleExportJobResponse#errors #errors} => Array&lt;Types::AssetBundleExportJobError&gt;
+    #   * {Types::DescribeAssetBundleExportJobResponse#arn #arn} => String
+    #   * {Types::DescribeAssetBundleExportJobResponse#created_time #created_time} => Time
+    #   * {Types::DescribeAssetBundleExportJobResponse#asset_bundle_export_job_id #asset_bundle_export_job_id} => String
+    #   * {Types::DescribeAssetBundleExportJobResponse#aws_account_id #aws_account_id} => String
+    #   * {Types::DescribeAssetBundleExportJobResponse#resource_arns #resource_arns} => Array&lt;String&gt;
+    #   * {Types::DescribeAssetBundleExportJobResponse#include_all_dependencies #include_all_dependencies} => Boolean
+    #   * {Types::DescribeAssetBundleExportJobResponse#export_format #export_format} => String
+    #   * {Types::DescribeAssetBundleExportJobResponse#cloud_formation_override_property_configuration #cloud_formation_override_property_configuration} => Types::AssetBundleCloudFormationOverridePropertyConfiguration
+    #   * {Types::DescribeAssetBundleExportJobResponse#request_id #request_id} => String
+    #   * {Types::DescribeAssetBundleExportJobResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_asset_bundle_export_job({
+    #     aws_account_id: "AwsAccountId", # required
+    #     asset_bundle_export_job_id: "ShortRestrictiveResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_status #=> String, one of "QUEUED_FOR_IMMEDIATE_EXECUTION", "IN_PROGRESS", "SUCCESSFUL", "FAILED"
+    #   resp.download_url #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].arn #=> String
+    #   resp.errors[0].type #=> String
+    #   resp.errors[0].message #=> String
+    #   resp.arn #=> String
+    #   resp.created_time #=> Time
+    #   resp.asset_bundle_export_job_id #=> String
+    #   resp.aws_account_id #=> String
+    #   resp.resource_arns #=> Array
+    #   resp.resource_arns[0] #=> String
+    #   resp.include_all_dependencies #=> Boolean
+    #   resp.export_format #=> String, one of "CLOUDFORMATION_JSON", "QUICKSIGHT_JSON"
+    #   resp.cloud_formation_override_property_configuration.resource_id_override_configuration.prefix_for_all_resources #=> Boolean
+    #   resp.cloud_formation_override_property_configuration.vpc_connections #=> Array
+    #   resp.cloud_formation_override_property_configuration.vpc_connections[0].arn #=> String
+    #   resp.cloud_formation_override_property_configuration.vpc_connections[0].properties #=> Array
+    #   resp.cloud_formation_override_property_configuration.vpc_connections[0].properties[0] #=> String, one of "Name", "DnsResolvers", "RoleArn"
+    #   resp.cloud_formation_override_property_configuration.refresh_schedules #=> Array
+    #   resp.cloud_formation_override_property_configuration.refresh_schedules[0].arn #=> String
+    #   resp.cloud_formation_override_property_configuration.refresh_schedules[0].properties #=> Array
+    #   resp.cloud_formation_override_property_configuration.refresh_schedules[0].properties[0] #=> String, one of "StartAfterDateTime"
+    #   resp.cloud_formation_override_property_configuration.data_sources #=> Array
+    #   resp.cloud_formation_override_property_configuration.data_sources[0].arn #=> String
+    #   resp.cloud_formation_override_property_configuration.data_sources[0].properties #=> Array
+    #   resp.cloud_formation_override_property_configuration.data_sources[0].properties[0] #=> String, one of "Name", "DisableSsl", "SecretArn", "Username", "Password", "Domain", "WorkGroup", "Host", "Port", "Database", "DataSetName", "Catalog", "InstanceId", "ClusterId", "ManifestFileLocation", "Warehouse", "RoleArn"
+    #   resp.cloud_formation_override_property_configuration.data_sets #=> Array
+    #   resp.cloud_formation_override_property_configuration.data_sets[0].arn #=> String
+    #   resp.cloud_formation_override_property_configuration.data_sets[0].properties #=> Array
+    #   resp.cloud_formation_override_property_configuration.data_sets[0].properties[0] #=> String, one of "Name"
+    #   resp.cloud_formation_override_property_configuration.themes #=> Array
+    #   resp.cloud_formation_override_property_configuration.themes[0].arn #=> String
+    #   resp.cloud_formation_override_property_configuration.themes[0].properties #=> Array
+    #   resp.cloud_formation_override_property_configuration.themes[0].properties[0] #=> String, one of "Name"
+    #   resp.cloud_formation_override_property_configuration.analyses #=> Array
+    #   resp.cloud_formation_override_property_configuration.analyses[0].arn #=> String
+    #   resp.cloud_formation_override_property_configuration.analyses[0].properties #=> Array
+    #   resp.cloud_formation_override_property_configuration.analyses[0].properties[0] #=> String, one of "Name"
+    #   resp.cloud_formation_override_property_configuration.dashboards #=> Array
+    #   resp.cloud_formation_override_property_configuration.dashboards[0].arn #=> String
+    #   resp.cloud_formation_override_property_configuration.dashboards[0].properties #=> Array
+    #   resp.cloud_formation_override_property_configuration.dashboards[0].properties[0] #=> String, one of "Name"
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAssetBundleExportJob AWS API Documentation
+    #
+    # @overload describe_asset_bundle_export_job(params = {})
+    # @param [Hash] params ({})
+    def describe_asset_bundle_export_job(params = {}, options = {})
+      req = build_request(:describe_asset_bundle_export_job, params)
+      req.send_request(options)
+    end
+
+    # Describes an existing import job.
+    #
+    # Poll job descriptions after starting a job to know when it has
+    # succeeded or failed. Job descriptions are available for 14 days after
+    # job starts.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account the import job was executed
+    #   in.
+    #
+    # @option params [required, String] :asset_bundle_import_job_id
+    #   The ID of the job. The job ID is set when you start a new job with a
+    #   `StartAssetBundleImportJob` API call.
+    #
+    # @return [Types::DescribeAssetBundleImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAssetBundleImportJobResponse#job_status #job_status} => String
+    #   * {Types::DescribeAssetBundleImportJobResponse#errors #errors} => Array&lt;Types::AssetBundleImportJobError&gt;
+    #   * {Types::DescribeAssetBundleImportJobResponse#rollback_errors #rollback_errors} => Array&lt;Types::AssetBundleImportJobError&gt;
+    #   * {Types::DescribeAssetBundleImportJobResponse#arn #arn} => String
+    #   * {Types::DescribeAssetBundleImportJobResponse#created_time #created_time} => Time
+    #   * {Types::DescribeAssetBundleImportJobResponse#asset_bundle_import_job_id #asset_bundle_import_job_id} => String
+    #   * {Types::DescribeAssetBundleImportJobResponse#aws_account_id #aws_account_id} => String
+    #   * {Types::DescribeAssetBundleImportJobResponse#asset_bundle_import_source #asset_bundle_import_source} => Types::AssetBundleImportSourceDescription
+    #   * {Types::DescribeAssetBundleImportJobResponse#override_parameters #override_parameters} => Types::AssetBundleImportJobOverrideParameters
+    #   * {Types::DescribeAssetBundleImportJobResponse#failure_action #failure_action} => String
+    #   * {Types::DescribeAssetBundleImportJobResponse#request_id #request_id} => String
+    #   * {Types::DescribeAssetBundleImportJobResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_asset_bundle_import_job({
+    #     aws_account_id: "AwsAccountId", # required
+    #     asset_bundle_import_job_id: "ShortRestrictiveResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_status #=> String, one of "QUEUED_FOR_IMMEDIATE_EXECUTION", "IN_PROGRESS", "SUCCESSFUL", "FAILED", "FAILED_ROLLBACK_IN_PROGRESS", "FAILED_ROLLBACK_COMPLETED", "FAILED_ROLLBACK_ERROR"
+    #   resp.errors #=> Array
+    #   resp.errors[0].arn #=> String
+    #   resp.errors[0].type #=> String
+    #   resp.errors[0].message #=> String
+    #   resp.rollback_errors #=> Array
+    #   resp.rollback_errors[0].arn #=> String
+    #   resp.rollback_errors[0].type #=> String
+    #   resp.rollback_errors[0].message #=> String
+    #   resp.arn #=> String
+    #   resp.created_time #=> Time
+    #   resp.asset_bundle_import_job_id #=> String
+    #   resp.aws_account_id #=> String
+    #   resp.asset_bundle_import_source.body #=> String
+    #   resp.asset_bundle_import_source.s3_uri #=> String
+    #   resp.override_parameters.resource_id_override_configuration.prefix_for_all_resources #=> String
+    #   resp.override_parameters.vpc_connections #=> Array
+    #   resp.override_parameters.vpc_connections[0].vpc_connection_id #=> String
+    #   resp.override_parameters.vpc_connections[0].name #=> String
+    #   resp.override_parameters.vpc_connections[0].subnet_ids #=> Array
+    #   resp.override_parameters.vpc_connections[0].subnet_ids[0] #=> String
+    #   resp.override_parameters.vpc_connections[0].security_group_ids #=> Array
+    #   resp.override_parameters.vpc_connections[0].security_group_ids[0] #=> String
+    #   resp.override_parameters.vpc_connections[0].dns_resolvers #=> Array
+    #   resp.override_parameters.vpc_connections[0].dns_resolvers[0] #=> String
+    #   resp.override_parameters.vpc_connections[0].role_arn #=> String
+    #   resp.override_parameters.refresh_schedules #=> Array
+    #   resp.override_parameters.refresh_schedules[0].data_set_id #=> String
+    #   resp.override_parameters.refresh_schedules[0].schedule_id #=> String
+    #   resp.override_parameters.refresh_schedules[0].start_after_date_time #=> Time
+    #   resp.override_parameters.data_sources #=> Array
+    #   resp.override_parameters.data_sources[0].data_source_id #=> String
+    #   resp.override_parameters.data_sources[0].name #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.amazon_elasticsearch_parameters.domain #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.athena_parameters.work_group #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.athena_parameters.role_arn #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.aurora_parameters.host #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.aurora_parameters.port #=> Integer
+    #   resp.override_parameters.data_sources[0].data_source_parameters.aurora_parameters.database #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.aurora_postgre_sql_parameters.host #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.aurora_postgre_sql_parameters.port #=> Integer
+    #   resp.override_parameters.data_sources[0].data_source_parameters.aurora_postgre_sql_parameters.database #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.aws_iot_analytics_parameters.data_set_name #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.jira_parameters.site_base_url #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.maria_db_parameters.host #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.maria_db_parameters.port #=> Integer
+    #   resp.override_parameters.data_sources[0].data_source_parameters.maria_db_parameters.database #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.my_sql_parameters.host #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.my_sql_parameters.port #=> Integer
+    #   resp.override_parameters.data_sources[0].data_source_parameters.my_sql_parameters.database #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.oracle_parameters.host #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.oracle_parameters.port #=> Integer
+    #   resp.override_parameters.data_sources[0].data_source_parameters.oracle_parameters.database #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.postgre_sql_parameters.host #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.postgre_sql_parameters.port #=> Integer
+    #   resp.override_parameters.data_sources[0].data_source_parameters.postgre_sql_parameters.database #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.presto_parameters.host #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.presto_parameters.port #=> Integer
+    #   resp.override_parameters.data_sources[0].data_source_parameters.presto_parameters.catalog #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.rds_parameters.instance_id #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.rds_parameters.database #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.host #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.port #=> Integer
+    #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.database #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.cluster_id #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.s3_parameters.manifest_file_location.bucket #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.s3_parameters.manifest_file_location.key #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.s3_parameters.role_arn #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.service_now_parameters.site_base_url #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.host #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.database #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.warehouse #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.spark_parameters.host #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.spark_parameters.port #=> Integer
+    #   resp.override_parameters.data_sources[0].data_source_parameters.sql_server_parameters.host #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.sql_server_parameters.port #=> Integer
+    #   resp.override_parameters.data_sources[0].data_source_parameters.sql_server_parameters.database #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.teradata_parameters.host #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.teradata_parameters.port #=> Integer
+    #   resp.override_parameters.data_sources[0].data_source_parameters.teradata_parameters.database #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.twitter_parameters.query #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.twitter_parameters.max_rows #=> Integer
+    #   resp.override_parameters.data_sources[0].data_source_parameters.amazon_open_search_parameters.domain #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.exasol_parameters.host #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.exasol_parameters.port #=> Integer
+    #   resp.override_parameters.data_sources[0].data_source_parameters.databricks_parameters.host #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.databricks_parameters.port #=> Integer
+    #   resp.override_parameters.data_sources[0].data_source_parameters.databricks_parameters.sql_endpoint_path #=> String
+    #   resp.override_parameters.data_sources[0].vpc_connection_properties.vpc_connection_arn #=> String
+    #   resp.override_parameters.data_sources[0].ssl_properties.disable_ssl #=> Boolean
+    #   resp.override_parameters.data_sources[0].credentials.credential_pair.username #=> String
+    #   resp.override_parameters.data_sources[0].credentials.credential_pair.password #=> String
+    #   resp.override_parameters.data_sources[0].credentials.secret_arn #=> String
+    #   resp.override_parameters.data_sets #=> Array
+    #   resp.override_parameters.data_sets[0].data_set_id #=> String
+    #   resp.override_parameters.data_sets[0].name #=> String
+    #   resp.override_parameters.themes #=> Array
+    #   resp.override_parameters.themes[0].theme_id #=> String
+    #   resp.override_parameters.themes[0].name #=> String
+    #   resp.override_parameters.analyses #=> Array
+    #   resp.override_parameters.analyses[0].analysis_id #=> String
+    #   resp.override_parameters.analyses[0].name #=> String
+    #   resp.override_parameters.dashboards #=> Array
+    #   resp.override_parameters.dashboards[0].dashboard_id #=> String
+    #   resp.override_parameters.dashboards[0].name #=> String
+    #   resp.failure_action #=> String, one of "DO_NOTHING", "ROLLBACK"
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAssetBundleImportJob AWS API Documentation
+    #
+    # @overload describe_asset_bundle_import_job(params = {})
+    # @param [Hash] params ({})
+    def describe_asset_bundle_import_job(params = {}, options = {})
+      req = build_request(:describe_asset_bundle_import_job, params)
+      req.send_request(options)
+    end
+
     # Provides a summary for a dashboard.
     #
     # @option params [required, String] :aws_account_id
@@ -6567,6 +6821,117 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Lists all asset bundle export jobs that have been taken place in the
+    # last 14 days. Jobs created more than 14 days ago are deleted forever
+    # and are not returned. If you are using the same job ID for multiple
+    # jobs, `ListAssetBundleExportJobs` only returns the most recent job
+    # that uses the repeated job ID.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that the export jobs were
+    #   executed in.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request.
+    #
+    # @return [Types::ListAssetBundleExportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAssetBundleExportJobsResponse#asset_bundle_export_job_summary_list #asset_bundle_export_job_summary_list} => Array&lt;Types::AssetBundleExportJobSummary&gt;
+    #   * {Types::ListAssetBundleExportJobsResponse#next_token #next_token} => String
+    #   * {Types::ListAssetBundleExportJobsResponse#request_id #request_id} => String
+    #   * {Types::ListAssetBundleExportJobsResponse#status #status} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_asset_bundle_export_jobs({
+    #     aws_account_id: "AwsAccountId", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.asset_bundle_export_job_summary_list #=> Array
+    #   resp.asset_bundle_export_job_summary_list[0].job_status #=> String, one of "QUEUED_FOR_IMMEDIATE_EXECUTION", "IN_PROGRESS", "SUCCESSFUL", "FAILED"
+    #   resp.asset_bundle_export_job_summary_list[0].arn #=> String
+    #   resp.asset_bundle_export_job_summary_list[0].created_time #=> Time
+    #   resp.asset_bundle_export_job_summary_list[0].asset_bundle_export_job_id #=> String
+    #   resp.asset_bundle_export_job_summary_list[0].include_all_dependencies #=> Boolean
+    #   resp.asset_bundle_export_job_summary_list[0].export_format #=> String, one of "CLOUDFORMATION_JSON", "QUICKSIGHT_JSON"
+    #   resp.next_token #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListAssetBundleExportJobs AWS API Documentation
+    #
+    # @overload list_asset_bundle_export_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_asset_bundle_export_jobs(params = {}, options = {})
+      req = build_request(:list_asset_bundle_export_jobs, params)
+      req.send_request(options)
+    end
+
+    # Lists all asset bundle import jobs that have taken place in the last
+    # 14 days. Jobs created more than 14 days ago are deleted forever and
+    # are not returned. If you are using the same job ID for multiple jobs,
+    # `ListAssetBundleImportJobs` only returns the most recent job that uses
+    # the repeated job ID.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that the import jobs were
+    #   executed in.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request.
+    #
+    # @return [Types::ListAssetBundleImportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAssetBundleImportJobsResponse#asset_bundle_import_job_summary_list #asset_bundle_import_job_summary_list} => Array&lt;Types::AssetBundleImportJobSummary&gt;
+    #   * {Types::ListAssetBundleImportJobsResponse#next_token #next_token} => String
+    #   * {Types::ListAssetBundleImportJobsResponse#request_id #request_id} => String
+    #   * {Types::ListAssetBundleImportJobsResponse#status #status} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_asset_bundle_import_jobs({
+    #     aws_account_id: "AwsAccountId", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.asset_bundle_import_job_summary_list #=> Array
+    #   resp.asset_bundle_import_job_summary_list[0].job_status #=> String, one of "QUEUED_FOR_IMMEDIATE_EXECUTION", "IN_PROGRESS", "SUCCESSFUL", "FAILED", "FAILED_ROLLBACK_IN_PROGRESS", "FAILED_ROLLBACK_COMPLETED", "FAILED_ROLLBACK_ERROR"
+    #   resp.asset_bundle_import_job_summary_list[0].arn #=> String
+    #   resp.asset_bundle_import_job_summary_list[0].created_time #=> Time
+    #   resp.asset_bundle_import_job_summary_list[0].asset_bundle_import_job_id #=> String
+    #   resp.asset_bundle_import_job_summary_list[0].failure_action #=> String, one of "DO_NOTHING", "ROLLBACK"
+    #   resp.next_token #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListAssetBundleImportJobs AWS API Documentation
+    #
+    # @overload list_asset_bundle_import_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_asset_bundle_import_jobs(params = {}, options = {})
+      req = build_request(:list_asset_bundle_import_jobs, params)
+      req.send_request(options)
+    end
+
     # Lists all the versions of the dashboards in the Amazon QuickSight
     # subscription.
     #
@@ -8703,6 +9068,392 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Starts an Asset Bundle export job.
+    #
+    # An Asset Bundle export job exports specified Amazon QuickSight assets.
+    # You can also choose to export any asset dependencies in the same job.
+    # Export jobs run asynchronously and can be polled with a
+    # `DescribeAssetBundleExportJob` API call. When a job is successfully
+    # completed, a download URL that contains the exported assets is
+    # returned. The URL is valid for 5 minutes and can be refreshed with a
+    # `DescribeAssetBundleExportJob` API call. Each Amazon QuickSight
+    # account can run up to 10 export jobs concurrently.
+    #
+    # The API caller must have the necessary permissions in their IAM role
+    # to access each resource before the resources can be exported.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account to export assets from.
+    #
+    # @option params [required, String] :asset_bundle_export_job_id
+    #   The ID of the job. This ID is unique while the job is running. After
+    #   the job is completed, you can reuse this ID for another job.
+    #
+    # @option params [required, Array<String>] :resource_arns
+    #   An array of resource ARNs to export. The following resources are
+    #   supported.
+    #
+    #   * `Analysis`
+    #
+    #   * `Dashboard`
+    #
+    #   * `DataSet`
+    #
+    #   * `DataSource`
+    #
+    #   * `RefreshSchedule`
+    #
+    #   * `Theme`
+    #
+    #   * `VPCConnection`
+    #
+    #   The API caller must have the necessary permissions in their IAM role
+    #   to access each resource before the resources can be exported.
+    #
+    # @option params [Boolean] :include_all_dependencies
+    #   A Boolean that determines whether all dependencies of each resource
+    #   ARN are recursively exported with the job. For example, say you
+    #   provided a Dashboard ARN to the `ResourceArns` parameter. If you set
+    #   `IncludeAllDependencies` to `TRUE`, any theme, dataset, and dataource
+    #   resource that is a dependency of the dashboard is also exported.
+    #
+    # @option params [required, String] :export_format
+    #   The export data format.
+    #
+    # @option params [Types::AssetBundleCloudFormationOverridePropertyConfiguration] :cloud_formation_override_property_configuration
+    #   An optional collection of structures that generate CloudFormation
+    #   parameters to override the existing resource property values when the
+    #   resource is exported to a new CloudFormation template.
+    #
+    #   Use this field if the `ExportFormat` field of a
+    #   `StartAssetBundleExportJobRequest` API call is set to
+    #   `CLOUDFORMATION_JSON`.
+    #
+    # @return [Types::StartAssetBundleExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartAssetBundleExportJobResponse#arn #arn} => String
+    #   * {Types::StartAssetBundleExportJobResponse#asset_bundle_export_job_id #asset_bundle_export_job_id} => String
+    #   * {Types::StartAssetBundleExportJobResponse#request_id #request_id} => String
+    #   * {Types::StartAssetBundleExportJobResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_asset_bundle_export_job({
+    #     aws_account_id: "AwsAccountId", # required
+    #     asset_bundle_export_job_id: "ShortRestrictiveResourceId", # required
+    #     resource_arns: ["Arn"], # required
+    #     include_all_dependencies: false,
+    #     export_format: "CLOUDFORMATION_JSON", # required, accepts CLOUDFORMATION_JSON, QUICKSIGHT_JSON
+    #     cloud_formation_override_property_configuration: {
+    #       resource_id_override_configuration: {
+    #         prefix_for_all_resources: false,
+    #       },
+    #       vpc_connections: [
+    #         {
+    #           arn: "Arn",
+    #           properties: ["Name"], # required, accepts Name, DnsResolvers, RoleArn
+    #         },
+    #       ],
+    #       refresh_schedules: [
+    #         {
+    #           arn: "Arn",
+    #           properties: ["StartAfterDateTime"], # required, accepts StartAfterDateTime
+    #         },
+    #       ],
+    #       data_sources: [
+    #         {
+    #           arn: "Arn",
+    #           properties: ["Name"], # required, accepts Name, DisableSsl, SecretArn, Username, Password, Domain, WorkGroup, Host, Port, Database, DataSetName, Catalog, InstanceId, ClusterId, ManifestFileLocation, Warehouse, RoleArn
+    #         },
+    #       ],
+    #       data_sets: [
+    #         {
+    #           arn: "Arn",
+    #           properties: ["Name"], # required, accepts Name
+    #         },
+    #       ],
+    #       themes: [
+    #         {
+    #           arn: "Arn",
+    #           properties: ["Name"], # required, accepts Name
+    #         },
+    #       ],
+    #       analyses: [
+    #         {
+    #           arn: "Arn",
+    #           properties: ["Name"], # required, accepts Name
+    #         },
+    #       ],
+    #       dashboards: [
+    #         {
+    #           arn: "Arn",
+    #           properties: ["Name"], # required, accepts Name
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.asset_bundle_export_job_id #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StartAssetBundleExportJob AWS API Documentation
+    #
+    # @overload start_asset_bundle_export_job(params = {})
+    # @param [Hash] params ({})
+    def start_asset_bundle_export_job(params = {}, options = {})
+      req = build_request(:start_asset_bundle_export_job, params)
+      req.send_request(options)
+    end
+
+    # Starts an Asset Bundle import job.
+    #
+    # An Asset Bundle import job imports specified Amazon QuickSight assets
+    # into an Amazon QuickSight account. You can also choose to import a
+    # naming prefix and specified configuration overrides. The assets that
+    # are contained in the bundle file that you provide are used to create
+    # or update a new or existing asset in your Amazon QuickSight account.
+    # Each Amazon QuickSight account can run up to 10 import jobs
+    # concurrently.
+    #
+    # The API caller must have the necessary `"create"`, `"describe"`, and
+    # `"update"` permissions in their IAM role to access each resource type
+    # that is contained in the bundle file before the resources can be
+    # imported.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account to import assets into.
+    #
+    # @option params [required, String] :asset_bundle_import_job_id
+    #   The ID of the job. This ID is unique while the job is running. After
+    #   the job is completed, you can reuse this ID for another job.
+    #
+    # @option params [required, Types::AssetBundleImportSource] :asset_bundle_import_source
+    #   The source of the asset bundle zip file that contains the data that
+    #   you want to import.
+    #
+    # @option params [Types::AssetBundleImportJobOverrideParameters] :override_parameters
+    #   Optional overrides to be applied to the resource configuration before
+    #   import.
+    #
+    # @option params [String] :failure_action
+    #   The failure action for the import job.
+    #
+    #   If you choose `ROLLBACK`, failed import jobs will attempt to undo any
+    #   asset changes caused by the failed job.
+    #
+    #   If you choose `DO_NOTHING`, failed import jobs will not attempt to
+    #   roll back any asset changes caused by the failed job, possibly leaving
+    #   the Amazon QuickSight account in an inconsistent state.
+    #
+    # @return [Types::StartAssetBundleImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartAssetBundleImportJobResponse#arn #arn} => String
+    #   * {Types::StartAssetBundleImportJobResponse#asset_bundle_import_job_id #asset_bundle_import_job_id} => String
+    #   * {Types::StartAssetBundleImportJobResponse#request_id #request_id} => String
+    #   * {Types::StartAssetBundleImportJobResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_asset_bundle_import_job({
+    #     aws_account_id: "AwsAccountId", # required
+    #     asset_bundle_import_job_id: "ShortRestrictiveResourceId", # required
+    #     asset_bundle_import_source: { # required
+    #       body: "data",
+    #       s3_uri: "S3Uri",
+    #     },
+    #     override_parameters: {
+    #       resource_id_override_configuration: {
+    #         prefix_for_all_resources: "String",
+    #       },
+    #       vpc_connections: [
+    #         {
+    #           vpc_connection_id: "VPCConnectionResourceIdUnrestricted", # required
+    #           name: "ResourceName",
+    #           subnet_ids: ["SubnetId"],
+    #           security_group_ids: ["SecurityGroupId"],
+    #           dns_resolvers: ["IPv4Address"],
+    #           role_arn: "RoleArn",
+    #         },
+    #       ],
+    #       refresh_schedules: [
+    #         {
+    #           data_set_id: "ResourceId", # required
+    #           schedule_id: "String", # required
+    #           start_after_date_time: Time.now,
+    #         },
+    #       ],
+    #       data_sources: [
+    #         {
+    #           data_source_id: "ResourceId", # required
+    #           name: "ResourceName",
+    #           data_source_parameters: {
+    #             amazon_elasticsearch_parameters: {
+    #               domain: "Domain", # required
+    #             },
+    #             athena_parameters: {
+    #               work_group: "WorkGroup",
+    #               role_arn: "RoleArn",
+    #             },
+    #             aurora_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
+    #             aurora_postgre_sql_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
+    #             aws_iot_analytics_parameters: {
+    #               data_set_name: "DataSetName", # required
+    #             },
+    #             jira_parameters: {
+    #               site_base_url: "SiteBaseUrl", # required
+    #             },
+    #             maria_db_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
+    #             my_sql_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
+    #             oracle_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
+    #             postgre_sql_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
+    #             presto_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               catalog: "Catalog", # required
+    #             },
+    #             rds_parameters: {
+    #               instance_id: "InstanceId", # required
+    #               database: "Database", # required
+    #             },
+    #             redshift_parameters: {
+    #               host: "Host",
+    #               port: 1,
+    #               database: "Database", # required
+    #               cluster_id: "ClusterId",
+    #             },
+    #             s3_parameters: {
+    #               manifest_file_location: { # required
+    #                 bucket: "S3Bucket", # required
+    #                 key: "S3Key", # required
+    #               },
+    #               role_arn: "RoleArn",
+    #             },
+    #             service_now_parameters: {
+    #               site_base_url: "SiteBaseUrl", # required
+    #             },
+    #             snowflake_parameters: {
+    #               host: "Host", # required
+    #               database: "Database", # required
+    #               warehouse: "Warehouse", # required
+    #             },
+    #             spark_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #             },
+    #             sql_server_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
+    #             teradata_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
+    #             twitter_parameters: {
+    #               query: "Query", # required
+    #               max_rows: 1, # required
+    #             },
+    #             amazon_open_search_parameters: {
+    #               domain: "Domain", # required
+    #             },
+    #             exasol_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #             },
+    #             databricks_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               sql_endpoint_path: "SqlEndpointPath", # required
+    #             },
+    #           },
+    #           vpc_connection_properties: {
+    #             vpc_connection_arn: "Arn", # required
+    #           },
+    #           ssl_properties: {
+    #             disable_ssl: false,
+    #           },
+    #           credentials: {
+    #             credential_pair: {
+    #               username: "DbUsername", # required
+    #               password: "Password", # required
+    #             },
+    #             secret_arn: "SecretArn",
+    #           },
+    #         },
+    #       ],
+    #       data_sets: [
+    #         {
+    #           data_set_id: "ResourceId", # required
+    #           name: "ResourceName",
+    #         },
+    #       ],
+    #       themes: [
+    #         {
+    #           theme_id: "ResourceId", # required
+    #           name: "ResourceName",
+    #         },
+    #       ],
+    #       analyses: [
+    #         {
+    #           analysis_id: "ResourceId", # required
+    #           name: "ResourceName",
+    #         },
+    #       ],
+    #       dashboards: [
+    #         {
+    #           dashboard_id: "ResourceId", # required
+    #           name: "ResourceName",
+    #         },
+    #       ],
+    #     },
+    #     failure_action: "DO_NOTHING", # accepts DO_NOTHING, ROLLBACK
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.asset_bundle_import_job_id #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StartAssetBundleImportJob AWS API Documentation
+    #
+    # @overload start_asset_bundle_import_job(params = {})
+    # @param [Hash] params ({})
+    def start_asset_bundle_import_job(params = {}, options = {})
+      req = build_request(:start_asset_bundle_import_job, params)
+      req.send_request(options)
+    end
+
     # Assigns one or more tags (key-value pairs) to the specified Amazon
     # QuickSight resource.
     #
@@ -9770,7 +10521,7 @@ module Aws::QuickSight
     #     },
     #     credentials: {
     #       credential_pair: {
-    #         username: "Username", # required
+    #         username: "DbUsername", # required
     #         password: "Password", # required
     #         alternate_data_source_parameters: [
     #           {
@@ -11392,7 +12143,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

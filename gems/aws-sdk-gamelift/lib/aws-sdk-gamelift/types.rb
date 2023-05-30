@@ -322,6 +322,25 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # **This data type is used with the Amazon GameLift FleetIQ and game
+    # server groups.**
+    #
+    # Filters which game servers may be claimed when calling
+    # `ClaimGameServer`.
+    #
+    # @!attribute [rw] instance_statuses
+    #   List of instance statuses that game servers may be claimed on. If
+    #   provided, the list must contain the `ACTIVE` status.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ClaimFilterOption AWS API Documentation
+    #
+    class ClaimFilterOption < Struct.new(
+      :instance_statuses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] game_server_group_name
     #   A unique identifier for the game server group where the game server
     #   is running. If you are not specifying a game server to claim, this
@@ -341,12 +360,17 @@ module Aws::GameLift
     #   requests information on game servers.
     #   @return [String]
     #
+    # @!attribute [rw] filter_option
+    #   Object that restricts how a claimed game server is chosen.
+    #   @return [Types::ClaimFilterOption]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ClaimGameServerInput AWS API Documentation
     #
     class ClaimGameServerInput < Struct.new(
       :game_server_group_name,
       :game_server_id,
-      :game_server_data)
+      :game_server_data,
+      :filter_option)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -534,13 +558,19 @@ module Aws::GameLift
     #   @return [Types::S3Location]
     #
     # @!attribute [rw] operating_system
-    #   The operating system that you built the game server binaries to run
-    #   on. This value determines the type of fleet resources that you can
-    #   use for this build. If your game build contains multiple
-    #   executables, they all must run on the same operating system. If an
-    #   operating system isn't specified when creating a build, Amazon
-    #   GameLift uses the default value (WINDOWS\_2012). This value can't
-    #   be changed later.
+    #   The operating system that your game server binaries run on. This
+    #   value determines the type of fleet resources that you use for this
+    #   build. If your game build contains multiple executables, they all
+    #   must run on the same operating system. You must specify a valid
+    #   operating system in this request. There is no default value. You
+    #   can't change a build's operating system later.
+    #
+    #   <note markdown="1"> If you have active fleets using the Windows Server 2012 operating
+    #   system, you can continue to create new builds using this OS until
+    #   October 10, 2023, when Microsoft ends its support. All others must
+    #   use Windows Server 2016 when creating new Windows-based builds.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1257,7 +1287,8 @@ module Aws::GameLift
     # @!attribute [rw] timeout_in_seconds
     #   The maximum time, in seconds, that a new game session placement
     #   request remains in the queue. When a request exceeds this time, the
-    #   game session placement changes to a `TIMED_OUT` status.
+    #   game session placement changes to a `TIMED_OUT` status. By default,
+    #   this property is set to `600`.
     #   @return [Integer]
     #
     # @!attribute [rw] player_latency_policies
@@ -5106,7 +5137,8 @@ module Aws::GameLift
     # @!attribute [rw] timeout_in_seconds
     #   The maximum time, in seconds, that a new game session placement
     #   request remains in the queue. When a request exceeds this time, the
-    #   game session placement changes to a `TIMED_OUT` status.
+    #   game session placement changes to a `TIMED_OUT` status. By default,
+    #   this property is set to `600`.
     #   @return [Integer]
     #
     # @!attribute [rw] player_latency_policies
@@ -9074,7 +9106,8 @@ module Aws::GameLift
     # @!attribute [rw] timeout_in_seconds
     #   The maximum time, in seconds, that a new game session placement
     #   request remains in the queue. When a request exceeds this time, the
-    #   game session placement changes to a `TIMED_OUT` status.
+    #   game session placement changes to a `TIMED_OUT` status. By default,
+    #   this property is set to `600`.
     #   @return [Integer]
     #
     # @!attribute [rw] player_latency_policies

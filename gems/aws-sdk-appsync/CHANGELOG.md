@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2023-05-24)
+------------------
+
+* Feature - This release introduces AppSync Merged APIs, which provide the ability to compose multiple source APIs into a single federated/merged API.
+
 1.59.0 (2023-05-03)
 ------------------
 

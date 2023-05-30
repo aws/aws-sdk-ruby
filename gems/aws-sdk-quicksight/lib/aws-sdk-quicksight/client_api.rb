@@ -57,6 +57,70 @@ module Aws::QuickSight
     ArcThicknessOptions = Shapes::StringShape.new(name: 'ArcThicknessOptions')
     Arn = Shapes::StringShape.new(name: 'Arn')
     ArnList = Shapes::ListShape.new(name: 'ArnList')
+    AssetBundleCloudFormationOverridePropertyConfiguration = Shapes::StructureShape.new(name: 'AssetBundleCloudFormationOverridePropertyConfiguration')
+    AssetBundleExportFormat = Shapes::StringShape.new(name: 'AssetBundleExportFormat')
+    AssetBundleExportJobAnalysisOverrideProperties = Shapes::StructureShape.new(name: 'AssetBundleExportJobAnalysisOverrideProperties')
+    AssetBundleExportJobAnalysisOverridePropertiesList = Shapes::ListShape.new(name: 'AssetBundleExportJobAnalysisOverridePropertiesList')
+    AssetBundleExportJobAnalysisPropertyToOverride = Shapes::StringShape.new(name: 'AssetBundleExportJobAnalysisPropertyToOverride')
+    AssetBundleExportJobAnalysisPropertyToOverrideList = Shapes::ListShape.new(name: 'AssetBundleExportJobAnalysisPropertyToOverrideList')
+    AssetBundleExportJobDashboardOverrideProperties = Shapes::StructureShape.new(name: 'AssetBundleExportJobDashboardOverrideProperties')
+    AssetBundleExportJobDashboardOverridePropertiesList = Shapes::ListShape.new(name: 'AssetBundleExportJobDashboardOverridePropertiesList')
+    AssetBundleExportJobDashboardPropertyToOverride = Shapes::StringShape.new(name: 'AssetBundleExportJobDashboardPropertyToOverride')
+    AssetBundleExportJobDashboardPropertyToOverrideList = Shapes::ListShape.new(name: 'AssetBundleExportJobDashboardPropertyToOverrideList')
+    AssetBundleExportJobDataSetOverrideProperties = Shapes::StructureShape.new(name: 'AssetBundleExportJobDataSetOverrideProperties')
+    AssetBundleExportJobDataSetOverridePropertiesList = Shapes::ListShape.new(name: 'AssetBundleExportJobDataSetOverridePropertiesList')
+    AssetBundleExportJobDataSetPropertyToOverride = Shapes::StringShape.new(name: 'AssetBundleExportJobDataSetPropertyToOverride')
+    AssetBundleExportJobDataSetPropertyToOverrideList = Shapes::ListShape.new(name: 'AssetBundleExportJobDataSetPropertyToOverrideList')
+    AssetBundleExportJobDataSourceOverrideProperties = Shapes::StructureShape.new(name: 'AssetBundleExportJobDataSourceOverrideProperties')
+    AssetBundleExportJobDataSourceOverridePropertiesList = Shapes::ListShape.new(name: 'AssetBundleExportJobDataSourceOverridePropertiesList')
+    AssetBundleExportJobDataSourcePropertyToOverride = Shapes::StringShape.new(name: 'AssetBundleExportJobDataSourcePropertyToOverride')
+    AssetBundleExportJobDataSourcePropertyToOverrideList = Shapes::ListShape.new(name: 'AssetBundleExportJobDataSourcePropertyToOverrideList')
+    AssetBundleExportJobError = Shapes::StructureShape.new(name: 'AssetBundleExportJobError')
+    AssetBundleExportJobErrorList = Shapes::ListShape.new(name: 'AssetBundleExportJobErrorList')
+    AssetBundleExportJobRefreshScheduleOverrideProperties = Shapes::StructureShape.new(name: 'AssetBundleExportJobRefreshScheduleOverrideProperties')
+    AssetBundleExportJobRefreshScheduleOverridePropertiesList = Shapes::ListShape.new(name: 'AssetBundleExportJobRefreshScheduleOverridePropertiesList')
+    AssetBundleExportJobRefreshSchedulePropertyToOverride = Shapes::StringShape.new(name: 'AssetBundleExportJobRefreshSchedulePropertyToOverride')
+    AssetBundleExportJobRefreshSchedulePropertyToOverrideList = Shapes::ListShape.new(name: 'AssetBundleExportJobRefreshSchedulePropertyToOverrideList')
+    AssetBundleExportJobResourceIdOverrideConfiguration = Shapes::StructureShape.new(name: 'AssetBundleExportJobResourceIdOverrideConfiguration')
+    AssetBundleExportJobStatus = Shapes::StringShape.new(name: 'AssetBundleExportJobStatus')
+    AssetBundleExportJobSummary = Shapes::StructureShape.new(name: 'AssetBundleExportJobSummary')
+    AssetBundleExportJobSummaryList = Shapes::ListShape.new(name: 'AssetBundleExportJobSummaryList')
+    AssetBundleExportJobThemeOverrideProperties = Shapes::StructureShape.new(name: 'AssetBundleExportJobThemeOverrideProperties')
+    AssetBundleExportJobThemeOverridePropertiesList = Shapes::ListShape.new(name: 'AssetBundleExportJobThemeOverridePropertiesList')
+    AssetBundleExportJobThemePropertyToOverride = Shapes::StringShape.new(name: 'AssetBundleExportJobThemePropertyToOverride')
+    AssetBundleExportJobThemePropertyToOverrideList = Shapes::ListShape.new(name: 'AssetBundleExportJobThemePropertyToOverrideList')
+    AssetBundleExportJobVPCConnectionOverrideProperties = Shapes::StructureShape.new(name: 'AssetBundleExportJobVPCConnectionOverrideProperties')
+    AssetBundleExportJobVPCConnectionOverridePropertiesList = Shapes::ListShape.new(name: 'AssetBundleExportJobVPCConnectionOverridePropertiesList')
+    AssetBundleExportJobVPCConnectionPropertyToOverride = Shapes::StringShape.new(name: 'AssetBundleExportJobVPCConnectionPropertyToOverride')
+    AssetBundleExportJobVPCConnectionPropertyToOverrideList = Shapes::ListShape.new(name: 'AssetBundleExportJobVPCConnectionPropertyToOverrideList')
+    AssetBundleImportBodyBlob = Shapes::BlobShape.new(name: 'AssetBundleImportBodyBlob')
+    AssetBundleImportFailureAction = Shapes::StringShape.new(name: 'AssetBundleImportFailureAction')
+    AssetBundleImportJobAnalysisOverrideParameters = Shapes::StructureShape.new(name: 'AssetBundleImportJobAnalysisOverrideParameters')
+    AssetBundleImportJobAnalysisOverrideParametersList = Shapes::ListShape.new(name: 'AssetBundleImportJobAnalysisOverrideParametersList')
+    AssetBundleImportJobDashboardOverrideParameters = Shapes::StructureShape.new(name: 'AssetBundleImportJobDashboardOverrideParameters')
+    AssetBundleImportJobDashboardOverrideParametersList = Shapes::ListShape.new(name: 'AssetBundleImportJobDashboardOverrideParametersList')
+    AssetBundleImportJobDataSetOverrideParameters = Shapes::StructureShape.new(name: 'AssetBundleImportJobDataSetOverrideParameters')
+    AssetBundleImportJobDataSetOverrideParametersList = Shapes::ListShape.new(name: 'AssetBundleImportJobDataSetOverrideParametersList')
+    AssetBundleImportJobDataSourceCredentialPair = Shapes::StructureShape.new(name: 'AssetBundleImportJobDataSourceCredentialPair')
+    AssetBundleImportJobDataSourceCredentials = Shapes::StructureShape.new(name: 'AssetBundleImportJobDataSourceCredentials')
+    AssetBundleImportJobDataSourceOverrideParameters = Shapes::StructureShape.new(name: 'AssetBundleImportJobDataSourceOverrideParameters')
+    AssetBundleImportJobDataSourceOverrideParametersList = Shapes::ListShape.new(name: 'AssetBundleImportJobDataSourceOverrideParametersList')
+    AssetBundleImportJobError = Shapes::StructureShape.new(name: 'AssetBundleImportJobError')
+    AssetBundleImportJobErrorList = Shapes::ListShape.new(name: 'AssetBundleImportJobErrorList')
+    AssetBundleImportJobOverrideParameters = Shapes::StructureShape.new(name: 'AssetBundleImportJobOverrideParameters')
+    AssetBundleImportJobRefreshScheduleOverrideParameters = Shapes::StructureShape.new(name: 'AssetBundleImportJobRefreshScheduleOverrideParameters')
+    AssetBundleImportJobRefreshScheduleOverrideParametersList = Shapes::ListShape.new(name: 'AssetBundleImportJobRefreshScheduleOverrideParametersList')
+    AssetBundleImportJobResourceIdOverrideConfiguration = Shapes::StructureShape.new(name: 'AssetBundleImportJobResourceIdOverrideConfiguration')
+    AssetBundleImportJobStatus = Shapes::StringShape.new(name: 'AssetBundleImportJobStatus')
+    AssetBundleImportJobSummary = Shapes::StructureShape.new(name: 'AssetBundleImportJobSummary')
+    AssetBundleImportJobSummaryList = Shapes::ListShape.new(name: 'AssetBundleImportJobSummaryList')
+    AssetBundleImportJobThemeOverrideParameters = Shapes::StructureShape.new(name: 'AssetBundleImportJobThemeOverrideParameters')
+    AssetBundleImportJobThemeOverrideParametersList = Shapes::ListShape.new(name: 'AssetBundleImportJobThemeOverrideParametersList')
+    AssetBundleImportJobVPCConnectionOverrideParameters = Shapes::StructureShape.new(name: 'AssetBundleImportJobVPCConnectionOverrideParameters')
+    AssetBundleImportJobVPCConnectionOverrideParametersList = Shapes::ListShape.new(name: 'AssetBundleImportJobVPCConnectionOverrideParametersList')
+    AssetBundleImportSource = Shapes::StructureShape.new(name: 'AssetBundleImportSource')
+    AssetBundleImportSourceDescription = Shapes::StructureShape.new(name: 'AssetBundleImportSourceDescription')
+    AssetBundleResourceArns = Shapes::ListShape.new(name: 'AssetBundleResourceArns')
     AssignmentStatus = Shapes::StringShape.new(name: 'AssignmentStatus')
     AthenaParameters = Shapes::StructureShape.new(name: 'AthenaParameters')
     AuroraParameters = Shapes::StructureShape.new(name: 'AuroraParameters')
@@ -373,6 +437,7 @@ module Aws::QuickSight
     DateTimeValueWhenUnsetConfiguration = Shapes::StructureShape.new(name: 'DateTimeValueWhenUnsetConfiguration')
     DayOfMonth = Shapes::StringShape.new(name: 'DayOfMonth')
     DayOfWeek = Shapes::StringShape.new(name: 'DayOfWeek')
+    DbUsername = Shapes::StringShape.new(name: 'DbUsername')
     DecimalDatasetParameter = Shapes::StructureShape.new(name: 'DecimalDatasetParameter')
     DecimalDatasetParameterDefaultValue = Shapes::FloatShape.new(name: 'DecimalDatasetParameterDefaultValue')
     DecimalDatasetParameterDefaultValues = Shapes::StructureShape.new(name: 'DecimalDatasetParameterDefaultValues')
@@ -452,6 +517,10 @@ module Aws::QuickSight
     DescribeAnalysisPermissionsResponse = Shapes::StructureShape.new(name: 'DescribeAnalysisPermissionsResponse')
     DescribeAnalysisRequest = Shapes::StructureShape.new(name: 'DescribeAnalysisRequest')
     DescribeAnalysisResponse = Shapes::StructureShape.new(name: 'DescribeAnalysisResponse')
+    DescribeAssetBundleExportJobRequest = Shapes::StructureShape.new(name: 'DescribeAssetBundleExportJobRequest')
+    DescribeAssetBundleExportJobResponse = Shapes::StructureShape.new(name: 'DescribeAssetBundleExportJobResponse')
+    DescribeAssetBundleImportJobRequest = Shapes::StructureShape.new(name: 'DescribeAssetBundleImportJobRequest')
+    DescribeAssetBundleImportJobResponse = Shapes::StructureShape.new(name: 'DescribeAssetBundleImportJobResponse')
     DescribeDashboardDefinitionRequest = Shapes::StructureShape.new(name: 'DescribeDashboardDefinitionRequest')
     DescribeDashboardDefinitionResponse = Shapes::StructureShape.new(name: 'DescribeDashboardDefinitionResponse')
     DescribeDashboardPermissionsRequest = Shapes::StructureShape.new(name: 'DescribeDashboardPermissionsRequest')
@@ -657,6 +726,10 @@ module Aws::QuickSight
     GeoSpatialCountryCode = Shapes::StringShape.new(name: 'GeoSpatialCountryCode')
     GeoSpatialDataRole = Shapes::StringShape.new(name: 'GeoSpatialDataRole')
     GeospatialCoordinateBounds = Shapes::StructureShape.new(name: 'GeospatialCoordinateBounds')
+    GeospatialHeatmapColorScale = Shapes::StructureShape.new(name: 'GeospatialHeatmapColorScale')
+    GeospatialHeatmapConfiguration = Shapes::StructureShape.new(name: 'GeospatialHeatmapConfiguration')
+    GeospatialHeatmapDataColor = Shapes::StructureShape.new(name: 'GeospatialHeatmapDataColor')
+    GeospatialHeatmapDataColorList = Shapes::ListShape.new(name: 'GeospatialHeatmapDataColorList')
     GeospatialMapAggregatedFieldWells = Shapes::StructureShape.new(name: 'GeospatialMapAggregatedFieldWells')
     GeospatialMapConfiguration = Shapes::StructureShape.new(name: 'GeospatialMapConfiguration')
     GeospatialMapFieldWells = Shapes::StructureShape.new(name: 'GeospatialMapFieldWells')
@@ -806,6 +879,10 @@ module Aws::QuickSight
     LinkSharingConfiguration = Shapes::StructureShape.new(name: 'LinkSharingConfiguration')
     ListAnalysesRequest = Shapes::StructureShape.new(name: 'ListAnalysesRequest')
     ListAnalysesResponse = Shapes::StructureShape.new(name: 'ListAnalysesResponse')
+    ListAssetBundleExportJobsRequest = Shapes::StructureShape.new(name: 'ListAssetBundleExportJobsRequest')
+    ListAssetBundleExportJobsResponse = Shapes::StructureShape.new(name: 'ListAssetBundleExportJobsResponse')
+    ListAssetBundleImportJobsRequest = Shapes::StructureShape.new(name: 'ListAssetBundleImportJobsRequest')
+    ListAssetBundleImportJobsResponse = Shapes::StructureShape.new(name: 'ListAssetBundleImportJobsResponse')
     ListControlDisplayOptions = Shapes::StructureShape.new(name: 'ListControlDisplayOptions')
     ListControlSearchOptions = Shapes::StructureShape.new(name: 'ListControlSearchOptions')
     ListControlSelectAllOptions = Shapes::StructureShape.new(name: 'ListControlSelectAllOptions')
@@ -1121,6 +1198,7 @@ module Aws::QuickSight
     S3Key = Shapes::StringShape.new(name: 'S3Key')
     S3Parameters = Shapes::StructureShape.new(name: 'S3Parameters')
     S3Source = Shapes::StructureShape.new(name: 'S3Source')
+    S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SameSheetTargetVisualConfiguration = Shapes::StructureShape.new(name: 'SameSheetTargetVisualConfiguration')
     SankeyDiagramAggregatedFieldWells = Shapes::StructureShape.new(name: 'SankeyDiagramAggregatedFieldWells')
     SankeyDiagramChartConfiguration = Shapes::StructureShape.new(name: 'SankeyDiagramChartConfiguration')
@@ -1234,6 +1312,10 @@ module Aws::QuickSight
     SqlQuery = Shapes::StringShape.new(name: 'SqlQuery')
     SqlServerParameters = Shapes::StructureShape.new(name: 'SqlServerParameters')
     SslProperties = Shapes::StructureShape.new(name: 'SslProperties')
+    StartAssetBundleExportJobRequest = Shapes::StructureShape.new(name: 'StartAssetBundleExportJobRequest')
+    StartAssetBundleExportJobResponse = Shapes::StructureShape.new(name: 'StartAssetBundleExportJobResponse')
+    StartAssetBundleImportJobRequest = Shapes::StructureShape.new(name: 'StartAssetBundleImportJobRequest')
+    StartAssetBundleImportJobResponse = Shapes::StructureShape.new(name: 'StartAssetBundleImportJobResponse')
     StatePersistenceConfigurations = Shapes::StructureShape.new(name: 'StatePersistenceConfigurations')
     Status = Shapes::StringShape.new(name: 'Status')
     StatusCode = Shapes::IntegerShape.new(name: 'StatusCode')
@@ -1485,7 +1567,6 @@ module Aws::QuickSight
     UserList = Shapes::ListShape.new(name: 'UserList')
     UserName = Shapes::StringShape.new(name: 'UserName')
     UserRole = Shapes::StringShape.new(name: 'UserRole')
-    Username = Shapes::StringShape.new(name: 'Username')
     VPCConnection = Shapes::StructureShape.new(name: 'VPCConnection')
     VPCConnectionAvailabilityStatus = Shapes::StringShape.new(name: 'VPCConnectionAvailabilityStatus')
     VPCConnectionResourceIdRestricted = Shapes::StringShape.new(name: 'VPCConnectionResourceIdRestricted')
@@ -1688,6 +1769,190 @@ module Aws::QuickSight
     ArcOptions.struct_class = Types::ArcOptions
 
     ArnList.member = Shapes::ShapeRef.new(shape: Arn)
+
+    AssetBundleCloudFormationOverridePropertyConfiguration.add_member(:resource_id_override_configuration, Shapes::ShapeRef.new(shape: AssetBundleExportJobResourceIdOverrideConfiguration, location_name: "ResourceIdOverrideConfiguration"))
+    AssetBundleCloudFormationOverridePropertyConfiguration.add_member(:vpc_connections, Shapes::ShapeRef.new(shape: AssetBundleExportJobVPCConnectionOverridePropertiesList, location_name: "VPCConnections"))
+    AssetBundleCloudFormationOverridePropertyConfiguration.add_member(:refresh_schedules, Shapes::ShapeRef.new(shape: AssetBundleExportJobRefreshScheduleOverridePropertiesList, location_name: "RefreshSchedules"))
+    AssetBundleCloudFormationOverridePropertyConfiguration.add_member(:data_sources, Shapes::ShapeRef.new(shape: AssetBundleExportJobDataSourceOverridePropertiesList, location_name: "DataSources"))
+    AssetBundleCloudFormationOverridePropertyConfiguration.add_member(:data_sets, Shapes::ShapeRef.new(shape: AssetBundleExportJobDataSetOverridePropertiesList, location_name: "DataSets"))
+    AssetBundleCloudFormationOverridePropertyConfiguration.add_member(:themes, Shapes::ShapeRef.new(shape: AssetBundleExportJobThemeOverridePropertiesList, location_name: "Themes"))
+    AssetBundleCloudFormationOverridePropertyConfiguration.add_member(:analyses, Shapes::ShapeRef.new(shape: AssetBundleExportJobAnalysisOverridePropertiesList, location_name: "Analyses"))
+    AssetBundleCloudFormationOverridePropertyConfiguration.add_member(:dashboards, Shapes::ShapeRef.new(shape: AssetBundleExportJobDashboardOverridePropertiesList, location_name: "Dashboards"))
+    AssetBundleCloudFormationOverridePropertyConfiguration.struct_class = Types::AssetBundleCloudFormationOverridePropertyConfiguration
+
+    AssetBundleExportJobAnalysisOverrideProperties.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    AssetBundleExportJobAnalysisOverrideProperties.add_member(:properties, Shapes::ShapeRef.new(shape: AssetBundleExportJobAnalysisPropertyToOverrideList, required: true, location_name: "Properties"))
+    AssetBundleExportJobAnalysisOverrideProperties.struct_class = Types::AssetBundleExportJobAnalysisOverrideProperties
+
+    AssetBundleExportJobAnalysisOverridePropertiesList.member = Shapes::ShapeRef.new(shape: AssetBundleExportJobAnalysisOverrideProperties)
+
+    AssetBundleExportJobAnalysisPropertyToOverrideList.member = Shapes::ShapeRef.new(shape: AssetBundleExportJobAnalysisPropertyToOverride)
+
+    AssetBundleExportJobDashboardOverrideProperties.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    AssetBundleExportJobDashboardOverrideProperties.add_member(:properties, Shapes::ShapeRef.new(shape: AssetBundleExportJobDashboardPropertyToOverrideList, required: true, location_name: "Properties"))
+    AssetBundleExportJobDashboardOverrideProperties.struct_class = Types::AssetBundleExportJobDashboardOverrideProperties
+
+    AssetBundleExportJobDashboardOverridePropertiesList.member = Shapes::ShapeRef.new(shape: AssetBundleExportJobDashboardOverrideProperties)
+
+    AssetBundleExportJobDashboardPropertyToOverrideList.member = Shapes::ShapeRef.new(shape: AssetBundleExportJobDashboardPropertyToOverride)
+
+    AssetBundleExportJobDataSetOverrideProperties.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    AssetBundleExportJobDataSetOverrideProperties.add_member(:properties, Shapes::ShapeRef.new(shape: AssetBundleExportJobDataSetPropertyToOverrideList, required: true, location_name: "Properties"))
+    AssetBundleExportJobDataSetOverrideProperties.struct_class = Types::AssetBundleExportJobDataSetOverrideProperties
+
+    AssetBundleExportJobDataSetOverridePropertiesList.member = Shapes::ShapeRef.new(shape: AssetBundleExportJobDataSetOverrideProperties)
+
+    AssetBundleExportJobDataSetPropertyToOverrideList.member = Shapes::ShapeRef.new(shape: AssetBundleExportJobDataSetPropertyToOverride)
+
+    AssetBundleExportJobDataSourceOverrideProperties.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    AssetBundleExportJobDataSourceOverrideProperties.add_member(:properties, Shapes::ShapeRef.new(shape: AssetBundleExportJobDataSourcePropertyToOverrideList, required: true, location_name: "Properties"))
+    AssetBundleExportJobDataSourceOverrideProperties.struct_class = Types::AssetBundleExportJobDataSourceOverrideProperties
+
+    AssetBundleExportJobDataSourceOverridePropertiesList.member = Shapes::ShapeRef.new(shape: AssetBundleExportJobDataSourceOverrideProperties)
+
+    AssetBundleExportJobDataSourcePropertyToOverrideList.member = Shapes::ShapeRef.new(shape: AssetBundleExportJobDataSourcePropertyToOverride)
+
+    AssetBundleExportJobError.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    AssetBundleExportJobError.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AssetBundleExportJobError.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    AssetBundleExportJobError.struct_class = Types::AssetBundleExportJobError
+
+    AssetBundleExportJobErrorList.member = Shapes::ShapeRef.new(shape: AssetBundleExportJobError)
+
+    AssetBundleExportJobRefreshScheduleOverrideProperties.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    AssetBundleExportJobRefreshScheduleOverrideProperties.add_member(:properties, Shapes::ShapeRef.new(shape: AssetBundleExportJobRefreshSchedulePropertyToOverrideList, required: true, location_name: "Properties"))
+    AssetBundleExportJobRefreshScheduleOverrideProperties.struct_class = Types::AssetBundleExportJobRefreshScheduleOverrideProperties
+
+    AssetBundleExportJobRefreshScheduleOverridePropertiesList.member = Shapes::ShapeRef.new(shape: AssetBundleExportJobRefreshScheduleOverrideProperties)
+
+    AssetBundleExportJobRefreshSchedulePropertyToOverrideList.member = Shapes::ShapeRef.new(shape: AssetBundleExportJobRefreshSchedulePropertyToOverride)
+
+    AssetBundleExportJobResourceIdOverrideConfiguration.add_member(:prefix_for_all_resources, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrefixForAllResources"))
+    AssetBundleExportJobResourceIdOverrideConfiguration.struct_class = Types::AssetBundleExportJobResourceIdOverrideConfiguration
+
+    AssetBundleExportJobSummary.add_member(:job_status, Shapes::ShapeRef.new(shape: AssetBundleExportJobStatus, location_name: "JobStatus"))
+    AssetBundleExportJobSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    AssetBundleExportJobSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    AssetBundleExportJobSummary.add_member(:asset_bundle_export_job_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "AssetBundleExportJobId"))
+    AssetBundleExportJobSummary.add_member(:include_all_dependencies, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeAllDependencies"))
+    AssetBundleExportJobSummary.add_member(:export_format, Shapes::ShapeRef.new(shape: AssetBundleExportFormat, location_name: "ExportFormat"))
+    AssetBundleExportJobSummary.struct_class = Types::AssetBundleExportJobSummary
+
+    AssetBundleExportJobSummaryList.member = Shapes::ShapeRef.new(shape: AssetBundleExportJobSummary)
+
+    AssetBundleExportJobThemeOverrideProperties.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    AssetBundleExportJobThemeOverrideProperties.add_member(:properties, Shapes::ShapeRef.new(shape: AssetBundleExportJobThemePropertyToOverrideList, required: true, location_name: "Properties"))
+    AssetBundleExportJobThemeOverrideProperties.struct_class = Types::AssetBundleExportJobThemeOverrideProperties
+
+    AssetBundleExportJobThemeOverridePropertiesList.member = Shapes::ShapeRef.new(shape: AssetBundleExportJobThemeOverrideProperties)
+
+    AssetBundleExportJobThemePropertyToOverrideList.member = Shapes::ShapeRef.new(shape: AssetBundleExportJobThemePropertyToOverride)
+
+    AssetBundleExportJobVPCConnectionOverrideProperties.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    AssetBundleExportJobVPCConnectionOverrideProperties.add_member(:properties, Shapes::ShapeRef.new(shape: AssetBundleExportJobVPCConnectionPropertyToOverrideList, required: true, location_name: "Properties"))
+    AssetBundleExportJobVPCConnectionOverrideProperties.struct_class = Types::AssetBundleExportJobVPCConnectionOverrideProperties
+
+    AssetBundleExportJobVPCConnectionOverridePropertiesList.member = Shapes::ShapeRef.new(shape: AssetBundleExportJobVPCConnectionOverrideProperties)
+
+    AssetBundleExportJobVPCConnectionPropertyToOverrideList.member = Shapes::ShapeRef.new(shape: AssetBundleExportJobVPCConnectionPropertyToOverride)
+
+    AssetBundleImportJobAnalysisOverrideParameters.add_member(:analysis_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "AnalysisId"))
+    AssetBundleImportJobAnalysisOverrideParameters.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    AssetBundleImportJobAnalysisOverrideParameters.struct_class = Types::AssetBundleImportJobAnalysisOverrideParameters
+
+    AssetBundleImportJobAnalysisOverrideParametersList.member = Shapes::ShapeRef.new(shape: AssetBundleImportJobAnalysisOverrideParameters)
+
+    AssetBundleImportJobDashboardOverrideParameters.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "DashboardId"))
+    AssetBundleImportJobDashboardOverrideParameters.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    AssetBundleImportJobDashboardOverrideParameters.struct_class = Types::AssetBundleImportJobDashboardOverrideParameters
+
+    AssetBundleImportJobDashboardOverrideParametersList.member = Shapes::ShapeRef.new(shape: AssetBundleImportJobDashboardOverrideParameters)
+
+    AssetBundleImportJobDataSetOverrideParameters.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "DataSetId"))
+    AssetBundleImportJobDataSetOverrideParameters.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    AssetBundleImportJobDataSetOverrideParameters.struct_class = Types::AssetBundleImportJobDataSetOverrideParameters
+
+    AssetBundleImportJobDataSetOverrideParametersList.member = Shapes::ShapeRef.new(shape: AssetBundleImportJobDataSetOverrideParameters)
+
+    AssetBundleImportJobDataSourceCredentialPair.add_member(:username, Shapes::ShapeRef.new(shape: DbUsername, required: true, location_name: "Username"))
+    AssetBundleImportJobDataSourceCredentialPair.add_member(:password, Shapes::ShapeRef.new(shape: Password, required: true, location_name: "Password"))
+    AssetBundleImportJobDataSourceCredentialPair.struct_class = Types::AssetBundleImportJobDataSourceCredentialPair
+
+    AssetBundleImportJobDataSourceCredentials.add_member(:credential_pair, Shapes::ShapeRef.new(shape: AssetBundleImportJobDataSourceCredentialPair, location_name: "CredentialPair"))
+    AssetBundleImportJobDataSourceCredentials.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
+    AssetBundleImportJobDataSourceCredentials.struct_class = Types::AssetBundleImportJobDataSourceCredentials
+
+    AssetBundleImportJobDataSourceOverrideParameters.add_member(:data_source_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "DataSourceId"))
+    AssetBundleImportJobDataSourceOverrideParameters.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    AssetBundleImportJobDataSourceOverrideParameters.add_member(:data_source_parameters, Shapes::ShapeRef.new(shape: DataSourceParameters, location_name: "DataSourceParameters"))
+    AssetBundleImportJobDataSourceOverrideParameters.add_member(:vpc_connection_properties, Shapes::ShapeRef.new(shape: VpcConnectionProperties, location_name: "VpcConnectionProperties"))
+    AssetBundleImportJobDataSourceOverrideParameters.add_member(:ssl_properties, Shapes::ShapeRef.new(shape: SslProperties, location_name: "SslProperties"))
+    AssetBundleImportJobDataSourceOverrideParameters.add_member(:credentials, Shapes::ShapeRef.new(shape: AssetBundleImportJobDataSourceCredentials, location_name: "Credentials"))
+    AssetBundleImportJobDataSourceOverrideParameters.struct_class = Types::AssetBundleImportJobDataSourceOverrideParameters
+
+    AssetBundleImportJobDataSourceOverrideParametersList.member = Shapes::ShapeRef.new(shape: AssetBundleImportJobDataSourceOverrideParameters)
+
+    AssetBundleImportJobError.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    AssetBundleImportJobError.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AssetBundleImportJobError.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    AssetBundleImportJobError.struct_class = Types::AssetBundleImportJobError
+
+    AssetBundleImportJobErrorList.member = Shapes::ShapeRef.new(shape: AssetBundleImportJobError)
+
+    AssetBundleImportJobOverrideParameters.add_member(:resource_id_override_configuration, Shapes::ShapeRef.new(shape: AssetBundleImportJobResourceIdOverrideConfiguration, location_name: "ResourceIdOverrideConfiguration"))
+    AssetBundleImportJobOverrideParameters.add_member(:vpc_connections, Shapes::ShapeRef.new(shape: AssetBundleImportJobVPCConnectionOverrideParametersList, location_name: "VPCConnections"))
+    AssetBundleImportJobOverrideParameters.add_member(:refresh_schedules, Shapes::ShapeRef.new(shape: AssetBundleImportJobRefreshScheduleOverrideParametersList, location_name: "RefreshSchedules"))
+    AssetBundleImportJobOverrideParameters.add_member(:data_sources, Shapes::ShapeRef.new(shape: AssetBundleImportJobDataSourceOverrideParametersList, location_name: "DataSources"))
+    AssetBundleImportJobOverrideParameters.add_member(:data_sets, Shapes::ShapeRef.new(shape: AssetBundleImportJobDataSetOverrideParametersList, location_name: "DataSets"))
+    AssetBundleImportJobOverrideParameters.add_member(:themes, Shapes::ShapeRef.new(shape: AssetBundleImportJobThemeOverrideParametersList, location_name: "Themes"))
+    AssetBundleImportJobOverrideParameters.add_member(:analyses, Shapes::ShapeRef.new(shape: AssetBundleImportJobAnalysisOverrideParametersList, location_name: "Analyses"))
+    AssetBundleImportJobOverrideParameters.add_member(:dashboards, Shapes::ShapeRef.new(shape: AssetBundleImportJobDashboardOverrideParametersList, location_name: "Dashboards"))
+    AssetBundleImportJobOverrideParameters.struct_class = Types::AssetBundleImportJobOverrideParameters
+
+    AssetBundleImportJobRefreshScheduleOverrideParameters.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "DataSetId"))
+    AssetBundleImportJobRefreshScheduleOverrideParameters.add_member(:schedule_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ScheduleId"))
+    AssetBundleImportJobRefreshScheduleOverrideParameters.add_member(:start_after_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartAfterDateTime"))
+    AssetBundleImportJobRefreshScheduleOverrideParameters.struct_class = Types::AssetBundleImportJobRefreshScheduleOverrideParameters
+
+    AssetBundleImportJobRefreshScheduleOverrideParametersList.member = Shapes::ShapeRef.new(shape: AssetBundleImportJobRefreshScheduleOverrideParameters)
+
+    AssetBundleImportJobResourceIdOverrideConfiguration.add_member(:prefix_for_all_resources, Shapes::ShapeRef.new(shape: String, location_name: "PrefixForAllResources"))
+    AssetBundleImportJobResourceIdOverrideConfiguration.struct_class = Types::AssetBundleImportJobResourceIdOverrideConfiguration
+
+    AssetBundleImportJobSummary.add_member(:job_status, Shapes::ShapeRef.new(shape: AssetBundleImportJobStatus, location_name: "JobStatus"))
+    AssetBundleImportJobSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    AssetBundleImportJobSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    AssetBundleImportJobSummary.add_member(:asset_bundle_import_job_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "AssetBundleImportJobId"))
+    AssetBundleImportJobSummary.add_member(:failure_action, Shapes::ShapeRef.new(shape: AssetBundleImportFailureAction, location_name: "FailureAction"))
+    AssetBundleImportJobSummary.struct_class = Types::AssetBundleImportJobSummary
+
+    AssetBundleImportJobSummaryList.member = Shapes::ShapeRef.new(shape: AssetBundleImportJobSummary)
+
+    AssetBundleImportJobThemeOverrideParameters.add_member(:theme_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ThemeId"))
+    AssetBundleImportJobThemeOverrideParameters.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    AssetBundleImportJobThemeOverrideParameters.struct_class = Types::AssetBundleImportJobThemeOverrideParameters
+
+    AssetBundleImportJobThemeOverrideParametersList.member = Shapes::ShapeRef.new(shape: AssetBundleImportJobThemeOverrideParameters)
+
+    AssetBundleImportJobVPCConnectionOverrideParameters.add_member(:vpc_connection_id, Shapes::ShapeRef.new(shape: VPCConnectionResourceIdUnrestricted, required: true, location_name: "VPCConnectionId"))
+    AssetBundleImportJobVPCConnectionOverrideParameters.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    AssetBundleImportJobVPCConnectionOverrideParameters.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "SubnetIds"))
+    AssetBundleImportJobVPCConnectionOverrideParameters.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "SecurityGroupIds"))
+    AssetBundleImportJobVPCConnectionOverrideParameters.add_member(:dns_resolvers, Shapes::ShapeRef.new(shape: DnsResolverList, location_name: "DnsResolvers"))
+    AssetBundleImportJobVPCConnectionOverrideParameters.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    AssetBundleImportJobVPCConnectionOverrideParameters.struct_class = Types::AssetBundleImportJobVPCConnectionOverrideParameters
+
+    AssetBundleImportJobVPCConnectionOverrideParametersList.member = Shapes::ShapeRef.new(shape: AssetBundleImportJobVPCConnectionOverrideParameters)
+
+    AssetBundleImportSource.add_member(:body, Shapes::ShapeRef.new(shape: AssetBundleImportBodyBlob, location_name: "Body"))
+    AssetBundleImportSource.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri"))
+    AssetBundleImportSource.struct_class = Types::AssetBundleImportSource
+
+    AssetBundleImportSourceDescription.add_member(:body, Shapes::ShapeRef.new(shape: String, location_name: "Body"))
+    AssetBundleImportSourceDescription.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri"))
+    AssetBundleImportSourceDescription.struct_class = Types::AssetBundleImportSourceDescription
+
+    AssetBundleResourceArns.member = Shapes::ShapeRef.new(shape: Arn)
 
     AthenaParameters.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroup, location_name: "WorkGroup"))
     AthenaParameters.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
@@ -2486,7 +2751,7 @@ module Aws::QuickSight
     CreateVPCConnectionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     CreateVPCConnectionResponse.struct_class = Types::CreateVPCConnectionResponse
 
-    CredentialPair.add_member(:username, Shapes::ShapeRef.new(shape: Username, required: true, location_name: "Username"))
+    CredentialPair.add_member(:username, Shapes::ShapeRef.new(shape: DbUsername, required: true, location_name: "Username"))
     CredentialPair.add_member(:password, Shapes::ShapeRef.new(shape: Password, required: true, location_name: "Password"))
     CredentialPair.add_member(:alternate_data_source_parameters, Shapes::ShapeRef.new(shape: DataSourceParametersList, location_name: "AlternateDataSourceParameters"))
     CredentialPair.struct_class = Types::CredentialPair
@@ -3318,6 +3583,43 @@ module Aws::QuickSight
     DescribeAnalysisResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DescribeAnalysisResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DescribeAnalysisResponse.struct_class = Types::DescribeAnalysisResponse
+
+    DescribeAssetBundleExportJobRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeAssetBundleExportJobRequest.add_member(:asset_bundle_export_job_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "AssetBundleExportJobId"))
+    DescribeAssetBundleExportJobRequest.struct_class = Types::DescribeAssetBundleExportJobRequest
+
+    DescribeAssetBundleExportJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: AssetBundleExportJobStatus, location_name: "JobStatus"))
+    DescribeAssetBundleExportJobResponse.add_member(:download_url, Shapes::ShapeRef.new(shape: String, location_name: "DownloadUrl"))
+    DescribeAssetBundleExportJobResponse.add_member(:errors, Shapes::ShapeRef.new(shape: AssetBundleExportJobErrorList, location_name: "Errors"))
+    DescribeAssetBundleExportJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    DescribeAssetBundleExportJobResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    DescribeAssetBundleExportJobResponse.add_member(:asset_bundle_export_job_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "AssetBundleExportJobId"))
+    DescribeAssetBundleExportJobResponse.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AwsAccountId"))
+    DescribeAssetBundleExportJobResponse.add_member(:resource_arns, Shapes::ShapeRef.new(shape: AssetBundleResourceArns, location_name: "ResourceArns"))
+    DescribeAssetBundleExportJobResponse.add_member(:include_all_dependencies, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeAllDependencies"))
+    DescribeAssetBundleExportJobResponse.add_member(:export_format, Shapes::ShapeRef.new(shape: AssetBundleExportFormat, location_name: "ExportFormat"))
+    DescribeAssetBundleExportJobResponse.add_member(:cloud_formation_override_property_configuration, Shapes::ShapeRef.new(shape: AssetBundleCloudFormationOverridePropertyConfiguration, location_name: "CloudFormationOverridePropertyConfiguration"))
+    DescribeAssetBundleExportJobResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RequestId"))
+    DescribeAssetBundleExportJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeAssetBundleExportJobResponse.struct_class = Types::DescribeAssetBundleExportJobResponse
+
+    DescribeAssetBundleImportJobRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeAssetBundleImportJobRequest.add_member(:asset_bundle_import_job_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "AssetBundleImportJobId"))
+    DescribeAssetBundleImportJobRequest.struct_class = Types::DescribeAssetBundleImportJobRequest
+
+    DescribeAssetBundleImportJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: AssetBundleImportJobStatus, location_name: "JobStatus"))
+    DescribeAssetBundleImportJobResponse.add_member(:errors, Shapes::ShapeRef.new(shape: AssetBundleImportJobErrorList, location_name: "Errors"))
+    DescribeAssetBundleImportJobResponse.add_member(:rollback_errors, Shapes::ShapeRef.new(shape: AssetBundleImportJobErrorList, location_name: "RollbackErrors"))
+    DescribeAssetBundleImportJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    DescribeAssetBundleImportJobResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    DescribeAssetBundleImportJobResponse.add_member(:asset_bundle_import_job_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "AssetBundleImportJobId"))
+    DescribeAssetBundleImportJobResponse.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AwsAccountId"))
+    DescribeAssetBundleImportJobResponse.add_member(:asset_bundle_import_source, Shapes::ShapeRef.new(shape: AssetBundleImportSourceDescription, location_name: "AssetBundleImportSource"))
+    DescribeAssetBundleImportJobResponse.add_member(:override_parameters, Shapes::ShapeRef.new(shape: AssetBundleImportJobOverrideParameters, location_name: "OverrideParameters"))
+    DescribeAssetBundleImportJobResponse.add_member(:failure_action, Shapes::ShapeRef.new(shape: AssetBundleImportFailureAction, location_name: "FailureAction"))
+    DescribeAssetBundleImportJobResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RequestId"))
+    DescribeAssetBundleImportJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeAssetBundleImportJobResponse.struct_class = Types::DescribeAssetBundleImportJobResponse
 
     DescribeDashboardDefinitionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DescribeDashboardDefinitionRequest.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "DashboardId"))
@@ -4178,6 +4480,17 @@ module Aws::QuickSight
     GeospatialCoordinateBounds.add_member(:east, Shapes::ShapeRef.new(shape: Longitude, required: true, location_name: "East"))
     GeospatialCoordinateBounds.struct_class = Types::GeospatialCoordinateBounds
 
+    GeospatialHeatmapColorScale.add_member(:colors, Shapes::ShapeRef.new(shape: GeospatialHeatmapDataColorList, location_name: "Colors"))
+    GeospatialHeatmapColorScale.struct_class = Types::GeospatialHeatmapColorScale
+
+    GeospatialHeatmapConfiguration.add_member(:heatmap_color, Shapes::ShapeRef.new(shape: GeospatialHeatmapColorScale, location_name: "HeatmapColor"))
+    GeospatialHeatmapConfiguration.struct_class = Types::GeospatialHeatmapConfiguration
+
+    GeospatialHeatmapDataColor.add_member(:color, Shapes::ShapeRef.new(shape: HexColor, required: true, location_name: "Color"))
+    GeospatialHeatmapDataColor.struct_class = Types::GeospatialHeatmapDataColor
+
+    GeospatialHeatmapDataColorList.member = Shapes::ShapeRef.new(shape: GeospatialHeatmapDataColor)
+
     GeospatialMapAggregatedFieldWells.add_member(:geospatial, Shapes::ShapeRef.new(shape: DimensionFieldList, location_name: "Geospatial"))
     GeospatialMapAggregatedFieldWells.add_member(:values, Shapes::ShapeRef.new(shape: MeasureFieldList, location_name: "Values"))
     GeospatialMapAggregatedFieldWells.add_member(:colors, Shapes::ShapeRef.new(shape: DimensionFieldList, location_name: "Colors"))
@@ -4208,6 +4521,7 @@ module Aws::QuickSight
 
     GeospatialPointStyleOptions.add_member(:selected_point_style, Shapes::ShapeRef.new(shape: GeospatialSelectedPointStyle, location_name: "SelectedPointStyle"))
     GeospatialPointStyleOptions.add_member(:cluster_marker_configuration, Shapes::ShapeRef.new(shape: ClusterMarkerConfiguration, location_name: "ClusterMarkerConfiguration"))
+    GeospatialPointStyleOptions.add_member(:heatmap_configuration, Shapes::ShapeRef.new(shape: GeospatialHeatmapConfiguration, location_name: "HeatmapConfiguration"))
     GeospatialPointStyleOptions.struct_class = Types::GeospatialPointStyleOptions
 
     GeospatialWindowOptions.add_member(:bounds, Shapes::ShapeRef.new(shape: GeospatialCoordinateBounds, location_name: "Bounds"))
@@ -4671,6 +4985,28 @@ module Aws::QuickSight
     ListAnalysesResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     ListAnalysesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     ListAnalysesResponse.struct_class = Types::ListAnalysesResponse
+
+    ListAssetBundleExportJobsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    ListAssetBundleExportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListAssetBundleExportJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListAssetBundleExportJobsRequest.struct_class = Types::ListAssetBundleExportJobsRequest
+
+    ListAssetBundleExportJobsResponse.add_member(:asset_bundle_export_job_summary_list, Shapes::ShapeRef.new(shape: AssetBundleExportJobSummaryList, location_name: "AssetBundleExportJobSummaryList"))
+    ListAssetBundleExportJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListAssetBundleExportJobsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RequestId"))
+    ListAssetBundleExportJobsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    ListAssetBundleExportJobsResponse.struct_class = Types::ListAssetBundleExportJobsResponse
+
+    ListAssetBundleImportJobsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    ListAssetBundleImportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListAssetBundleImportJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListAssetBundleImportJobsRequest.struct_class = Types::ListAssetBundleImportJobsRequest
+
+    ListAssetBundleImportJobsResponse.add_member(:asset_bundle_import_job_summary_list, Shapes::ShapeRef.new(shape: AssetBundleImportJobSummaryList, location_name: "AssetBundleImportJobSummaryList"))
+    ListAssetBundleImportJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListAssetBundleImportJobsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RequestId"))
+    ListAssetBundleImportJobsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    ListAssetBundleImportJobsResponse.struct_class = Types::ListAssetBundleImportJobsResponse
 
     ListControlDisplayOptions.add_member(:search_options, Shapes::ShapeRef.new(shape: ListControlSearchOptions, location_name: "SearchOptions"))
     ListControlDisplayOptions.add_member(:select_all_options, Shapes::ShapeRef.new(shape: ListControlSelectAllOptions, location_name: "SelectAllOptions"))
@@ -6146,6 +6482,33 @@ module Aws::QuickSight
 
     SslProperties.add_member(:disable_ssl, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableSsl"))
     SslProperties.struct_class = Types::SslProperties
+
+    StartAssetBundleExportJobRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    StartAssetBundleExportJobRequest.add_member(:asset_bundle_export_job_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "AssetBundleExportJobId"))
+    StartAssetBundleExportJobRequest.add_member(:resource_arns, Shapes::ShapeRef.new(shape: AssetBundleResourceArns, required: true, location_name: "ResourceArns"))
+    StartAssetBundleExportJobRequest.add_member(:include_all_dependencies, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeAllDependencies"))
+    StartAssetBundleExportJobRequest.add_member(:export_format, Shapes::ShapeRef.new(shape: AssetBundleExportFormat, required: true, location_name: "ExportFormat"))
+    StartAssetBundleExportJobRequest.add_member(:cloud_formation_override_property_configuration, Shapes::ShapeRef.new(shape: AssetBundleCloudFormationOverridePropertyConfiguration, location_name: "CloudFormationOverridePropertyConfiguration"))
+    StartAssetBundleExportJobRequest.struct_class = Types::StartAssetBundleExportJobRequest
+
+    StartAssetBundleExportJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    StartAssetBundleExportJobResponse.add_member(:asset_bundle_export_job_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "AssetBundleExportJobId"))
+    StartAssetBundleExportJobResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RequestId"))
+    StartAssetBundleExportJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    StartAssetBundleExportJobResponse.struct_class = Types::StartAssetBundleExportJobResponse
+
+    StartAssetBundleImportJobRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    StartAssetBundleImportJobRequest.add_member(:asset_bundle_import_job_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "AssetBundleImportJobId"))
+    StartAssetBundleImportJobRequest.add_member(:asset_bundle_import_source, Shapes::ShapeRef.new(shape: AssetBundleImportSource, required: true, location_name: "AssetBundleImportSource"))
+    StartAssetBundleImportJobRequest.add_member(:override_parameters, Shapes::ShapeRef.new(shape: AssetBundleImportJobOverrideParameters, location_name: "OverrideParameters"))
+    StartAssetBundleImportJobRequest.add_member(:failure_action, Shapes::ShapeRef.new(shape: AssetBundleImportFailureAction, location_name: "FailureAction"))
+    StartAssetBundleImportJobRequest.struct_class = Types::StartAssetBundleImportJobRequest
+
+    StartAssetBundleImportJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    StartAssetBundleImportJobResponse.add_member(:asset_bundle_import_job_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "AssetBundleImportJobId"))
+    StartAssetBundleImportJobResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RequestId"))
+    StartAssetBundleImportJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    StartAssetBundleImportJobResponse.struct_class = Types::StartAssetBundleImportJobResponse
 
     StatePersistenceConfigurations.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
     StatePersistenceConfigurations.struct_class = Types::StatePersistenceConfigurations
@@ -8235,6 +8598,28 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:describe_asset_bundle_export_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAssetBundleExportJob"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/asset-bundle-export-jobs/{AssetBundleExportJobId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAssetBundleExportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAssetBundleExportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:describe_asset_bundle_import_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAssetBundleImportJob"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/asset-bundle-import-jobs/{AssetBundleImportJobId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAssetBundleImportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAssetBundleImportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:describe_dashboard, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeDashboard"
         o.http_method = "GET"
@@ -8751,6 +9136,44 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_asset_bundle_export_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAssetBundleExportJobs"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/asset-bundle-export-jobs"
+        o.input = Shapes::ShapeRef.new(shape: ListAssetBundleExportJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAssetBundleExportJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_asset_bundle_import_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAssetBundleImportJobs"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/asset-bundle-import-jobs"
+        o.input = Shapes::ShapeRef.new(shape: ListAssetBundleImportJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAssetBundleImportJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -9355,6 +9778,36 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
+      api.add_operation(:start_asset_bundle_export_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartAssetBundleExportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/asset-bundle-export-jobs/export"
+        o.input = Shapes::ShapeRef.new(shape: StartAssetBundleExportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartAssetBundleExportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:start_asset_bundle_import_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartAssetBundleImportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/asset-bundle-import-jobs/import"
+        o.input = Shapes::ShapeRef.new(shape: StartAssetBundleImportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartAssetBundleImportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

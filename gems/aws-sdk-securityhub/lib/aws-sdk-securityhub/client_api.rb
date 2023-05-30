@@ -45,6 +45,14 @@ module Aws::SecurityHub
     AutoEnableStandards = Shapes::StringShape.new(name: 'AutoEnableStandards')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     AvailabilityZones = Shapes::ListShape.new(name: 'AvailabilityZones')
+    AwsAmazonMqBrokerDetails = Shapes::StructureShape.new(name: 'AwsAmazonMqBrokerDetails')
+    AwsAmazonMqBrokerEncryptionOptionsDetails = Shapes::StructureShape.new(name: 'AwsAmazonMqBrokerEncryptionOptionsDetails')
+    AwsAmazonMqBrokerLdapServerMetadataDetails = Shapes::StructureShape.new(name: 'AwsAmazonMqBrokerLdapServerMetadataDetails')
+    AwsAmazonMqBrokerLogsDetails = Shapes::StructureShape.new(name: 'AwsAmazonMqBrokerLogsDetails')
+    AwsAmazonMqBrokerLogsPendingDetails = Shapes::StructureShape.new(name: 'AwsAmazonMqBrokerLogsPendingDetails')
+    AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails = Shapes::StructureShape.new(name: 'AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails')
+    AwsAmazonMqBrokerUsersDetails = Shapes::StructureShape.new(name: 'AwsAmazonMqBrokerUsersDetails')
+    AwsAmazonMqBrokerUsersList = Shapes::ListShape.new(name: 'AwsAmazonMqBrokerUsersList')
     AwsApiCallAction = Shapes::StructureShape.new(name: 'AwsApiCallAction')
     AwsApiCallActionDomainDetails = Shapes::StructureShape.new(name: 'AwsApiCallActionDomainDetails')
     AwsApiGatewayAccessLogSettings = Shapes::StructureShape.new(name: 'AwsApiGatewayAccessLogSettings')
@@ -57,6 +65,13 @@ module Aws::SecurityHub
     AwsApiGatewayV2ApiDetails = Shapes::StructureShape.new(name: 'AwsApiGatewayV2ApiDetails')
     AwsApiGatewayV2RouteSettings = Shapes::StructureShape.new(name: 'AwsApiGatewayV2RouteSettings')
     AwsApiGatewayV2StageDetails = Shapes::StructureShape.new(name: 'AwsApiGatewayV2StageDetails')
+    AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails = Shapes::StructureShape.new(name: 'AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails')
+    AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersList = Shapes::ListShape.new(name: 'AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersList')
+    AwsAppSyncGraphQlApiDetails = Shapes::StructureShape.new(name: 'AwsAppSyncGraphQlApiDetails')
+    AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails = Shapes::StructureShape.new(name: 'AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails')
+    AwsAppSyncGraphQlApiLogConfigDetails = Shapes::StructureShape.new(name: 'AwsAppSyncGraphQlApiLogConfigDetails')
+    AwsAppSyncGraphQlApiOpenIdConnectConfigDetails = Shapes::StructureShape.new(name: 'AwsAppSyncGraphQlApiOpenIdConnectConfigDetails')
+    AwsAppSyncGraphQlApiUserPoolConfigDetails = Shapes::StructureShape.new(name: 'AwsAppSyncGraphQlApiUserPoolConfigDetails')
     AwsAutoScalingAutoScalingGroupAvailabilityZonesList = Shapes::ListShape.new(name: 'AwsAutoScalingAutoScalingGroupAvailabilityZonesList')
     AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails = Shapes::StructureShape.new(name: 'AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails')
     AwsAutoScalingAutoScalingGroupDetails = Shapes::StructureShape.new(name: 'AwsAutoScalingAutoScalingGroupDetails')
@@ -387,6 +402,20 @@ module Aws::SecurityHub
     AwsElbv2LoadBalancerAttribute = Shapes::StructureShape.new(name: 'AwsElbv2LoadBalancerAttribute')
     AwsElbv2LoadBalancerAttributes = Shapes::ListShape.new(name: 'AwsElbv2LoadBalancerAttributes')
     AwsElbv2LoadBalancerDetails = Shapes::StructureShape.new(name: 'AwsElbv2LoadBalancerDetails')
+    AwsEventSchemasRegistryDetails = Shapes::StructureShape.new(name: 'AwsEventSchemasRegistryDetails')
+    AwsGuardDutyDetectorDataSourcesCloudTrailDetails = Shapes::StructureShape.new(name: 'AwsGuardDutyDetectorDataSourcesCloudTrailDetails')
+    AwsGuardDutyDetectorDataSourcesDetails = Shapes::StructureShape.new(name: 'AwsGuardDutyDetectorDataSourcesDetails')
+    AwsGuardDutyDetectorDataSourcesDnsLogsDetails = Shapes::StructureShape.new(name: 'AwsGuardDutyDetectorDataSourcesDnsLogsDetails')
+    AwsGuardDutyDetectorDataSourcesFlowLogsDetails = Shapes::StructureShape.new(name: 'AwsGuardDutyDetectorDataSourcesFlowLogsDetails')
+    AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails = Shapes::StructureShape.new(name: 'AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails')
+    AwsGuardDutyDetectorDataSourcesKubernetesDetails = Shapes::StructureShape.new(name: 'AwsGuardDutyDetectorDataSourcesKubernetesDetails')
+    AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails = Shapes::StructureShape.new(name: 'AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails')
+    AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsDetails = Shapes::StructureShape.new(name: 'AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsDetails')
+    AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails = Shapes::StructureShape.new(name: 'AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails')
+    AwsGuardDutyDetectorDataSourcesS3LogsDetails = Shapes::StructureShape.new(name: 'AwsGuardDutyDetectorDataSourcesS3LogsDetails')
+    AwsGuardDutyDetectorDetails = Shapes::StructureShape.new(name: 'AwsGuardDutyDetectorDetails')
+    AwsGuardDutyDetectorFeaturesDetails = Shapes::StructureShape.new(name: 'AwsGuardDutyDetectorFeaturesDetails')
+    AwsGuardDutyDetectorFeaturesList = Shapes::ListShape.new(name: 'AwsGuardDutyDetectorFeaturesList')
     AwsIamAccessKeyDetails = Shapes::StructureShape.new(name: 'AwsIamAccessKeyDetails')
     AwsIamAccessKeySessionContext = Shapes::StructureShape.new(name: 'AwsIamAccessKeySessionContext')
     AwsIamAccessKeySessionContextAttributes = Shapes::StructureShape.new(name: 'AwsIamAccessKeySessionContextAttributes')
@@ -562,6 +591,12 @@ module Aws::SecurityHub
     AwsSsmComplianceSummary = Shapes::StructureShape.new(name: 'AwsSsmComplianceSummary')
     AwsSsmPatch = Shapes::StructureShape.new(name: 'AwsSsmPatch')
     AwsSsmPatchComplianceDetails = Shapes::StructureShape.new(name: 'AwsSsmPatchComplianceDetails')
+    AwsStepFunctionStateMachineDetails = Shapes::StructureShape.new(name: 'AwsStepFunctionStateMachineDetails')
+    AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails = Shapes::StructureShape.new(name: 'AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails')
+    AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails = Shapes::StructureShape.new(name: 'AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails')
+    AwsStepFunctionStateMachineLoggingConfigurationDestinationsList = Shapes::ListShape.new(name: 'AwsStepFunctionStateMachineLoggingConfigurationDestinationsList')
+    AwsStepFunctionStateMachineLoggingConfigurationDetails = Shapes::StructureShape.new(name: 'AwsStepFunctionStateMachineLoggingConfigurationDetails')
+    AwsStepFunctionStateMachineTracingConfigurationDetails = Shapes::StructureShape.new(name: 'AwsStepFunctionStateMachineTracingConfigurationDetails')
     AwsWafRateBasedRuleDetails = Shapes::StructureShape.new(name: 'AwsWafRateBasedRuleDetails')
     AwsWafRateBasedRuleMatchPredicate = Shapes::StructureShape.new(name: 'AwsWafRateBasedRuleMatchPredicate')
     AwsWafRateBasedRuleMatchPredicateList = Shapes::ListShape.new(name: 'AwsWafRateBasedRuleMatchPredicateList')
@@ -1089,6 +1124,64 @@ module Aws::SecurityHub
 
     AvailabilityZones.member = Shapes::ShapeRef.new(shape: AvailabilityZone)
 
+    AwsAmazonMqBrokerDetails.add_member(:authentication_strategy, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AuthenticationStrategy"))
+    AwsAmazonMqBrokerDetails.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoMinorVersionUpgrade"))
+    AwsAmazonMqBrokerDetails.add_member(:broker_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "BrokerArn"))
+    AwsAmazonMqBrokerDetails.add_member(:broker_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "BrokerName"))
+    AwsAmazonMqBrokerDetails.add_member(:deployment_mode, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DeploymentMode"))
+    AwsAmazonMqBrokerDetails.add_member(:encryption_options, Shapes::ShapeRef.new(shape: AwsAmazonMqBrokerEncryptionOptionsDetails, location_name: "EncryptionOptions"))
+    AwsAmazonMqBrokerDetails.add_member(:engine_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "EngineType"))
+    AwsAmazonMqBrokerDetails.add_member(:engine_version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "EngineVersion"))
+    AwsAmazonMqBrokerDetails.add_member(:host_instance_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HostInstanceType"))
+    AwsAmazonMqBrokerDetails.add_member(:broker_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "BrokerId"))
+    AwsAmazonMqBrokerDetails.add_member(:ldap_server_metadata, Shapes::ShapeRef.new(shape: AwsAmazonMqBrokerLdapServerMetadataDetails, location_name: "LdapServerMetadata"))
+    AwsAmazonMqBrokerDetails.add_member(:logs, Shapes::ShapeRef.new(shape: AwsAmazonMqBrokerLogsDetails, location_name: "Logs"))
+    AwsAmazonMqBrokerDetails.add_member(:maintenance_window_start_time, Shapes::ShapeRef.new(shape: AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails, location_name: "MaintenanceWindowStartTime"))
+    AwsAmazonMqBrokerDetails.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "PubliclyAccessible"))
+    AwsAmazonMqBrokerDetails.add_member(:security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "SecurityGroups"))
+    AwsAmazonMqBrokerDetails.add_member(:storage_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StorageType"))
+    AwsAmazonMqBrokerDetails.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "SubnetIds"))
+    AwsAmazonMqBrokerDetails.add_member(:users, Shapes::ShapeRef.new(shape: AwsAmazonMqBrokerUsersList, location_name: "Users"))
+    AwsAmazonMqBrokerDetails.struct_class = Types::AwsAmazonMqBrokerDetails
+
+    AwsAmazonMqBrokerEncryptionOptionsDetails.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "KmsKeyId"))
+    AwsAmazonMqBrokerEncryptionOptionsDetails.add_member(:use_aws_owned_key, Shapes::ShapeRef.new(shape: Boolean, location_name: "UseAwsOwnedKey"))
+    AwsAmazonMqBrokerEncryptionOptionsDetails.struct_class = Types::AwsAmazonMqBrokerEncryptionOptionsDetails
+
+    AwsAmazonMqBrokerLdapServerMetadataDetails.add_member(:hosts, Shapes::ShapeRef.new(shape: StringList, location_name: "Hosts"))
+    AwsAmazonMqBrokerLdapServerMetadataDetails.add_member(:role_base, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RoleBase"))
+    AwsAmazonMqBrokerLdapServerMetadataDetails.add_member(:role_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RoleName"))
+    AwsAmazonMqBrokerLdapServerMetadataDetails.add_member(:role_search_matching, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RoleSearchMatching"))
+    AwsAmazonMqBrokerLdapServerMetadataDetails.add_member(:role_search_subtree, Shapes::ShapeRef.new(shape: Boolean, location_name: "RoleSearchSubtree"))
+    AwsAmazonMqBrokerLdapServerMetadataDetails.add_member(:service_account_username, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ServiceAccountUsername"))
+    AwsAmazonMqBrokerLdapServerMetadataDetails.add_member(:user_base, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "UserBase"))
+    AwsAmazonMqBrokerLdapServerMetadataDetails.add_member(:user_role_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "UserRoleName"))
+    AwsAmazonMqBrokerLdapServerMetadataDetails.add_member(:user_search_matching, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "UserSearchMatching"))
+    AwsAmazonMqBrokerLdapServerMetadataDetails.add_member(:user_search_subtree, Shapes::ShapeRef.new(shape: Boolean, location_name: "UserSearchSubtree"))
+    AwsAmazonMqBrokerLdapServerMetadataDetails.struct_class = Types::AwsAmazonMqBrokerLdapServerMetadataDetails
+
+    AwsAmazonMqBrokerLogsDetails.add_member(:audit, Shapes::ShapeRef.new(shape: Boolean, location_name: "Audit"))
+    AwsAmazonMqBrokerLogsDetails.add_member(:general, Shapes::ShapeRef.new(shape: Boolean, location_name: "General"))
+    AwsAmazonMqBrokerLogsDetails.add_member(:audit_log_group, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AuditLogGroup"))
+    AwsAmazonMqBrokerLogsDetails.add_member(:general_log_group, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "GeneralLogGroup"))
+    AwsAmazonMqBrokerLogsDetails.add_member(:pending, Shapes::ShapeRef.new(shape: AwsAmazonMqBrokerLogsPendingDetails, location_name: "Pending"))
+    AwsAmazonMqBrokerLogsDetails.struct_class = Types::AwsAmazonMqBrokerLogsDetails
+
+    AwsAmazonMqBrokerLogsPendingDetails.add_member(:audit, Shapes::ShapeRef.new(shape: Boolean, location_name: "Audit"))
+    AwsAmazonMqBrokerLogsPendingDetails.add_member(:general, Shapes::ShapeRef.new(shape: Boolean, location_name: "General"))
+    AwsAmazonMqBrokerLogsPendingDetails.struct_class = Types::AwsAmazonMqBrokerLogsPendingDetails
+
+    AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails.add_member(:day_of_week, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DayOfWeek"))
+    AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails.add_member(:time_of_day, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "TimeOfDay"))
+    AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails.add_member(:time_zone, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "TimeZone"))
+    AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails.struct_class = Types::AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails
+
+    AwsAmazonMqBrokerUsersDetails.add_member(:pending_change, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PendingChange"))
+    AwsAmazonMqBrokerUsersDetails.add_member(:username, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Username"))
+    AwsAmazonMqBrokerUsersDetails.struct_class = Types::AwsAmazonMqBrokerUsersDetails
+
+    AwsAmazonMqBrokerUsersList.member = Shapes::ShapeRef.new(shape: AwsAmazonMqBrokerUsersDetails)
+
     AwsApiCallAction.add_member(:api, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Api"))
     AwsApiCallAction.add_member(:service_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ServiceName"))
     AwsApiCallAction.add_member(:caller_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CallerType"))
@@ -1193,6 +1286,50 @@ module Aws::SecurityHub
     AwsApiGatewayV2StageDetails.add_member(:last_deployment_status_message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LastDeploymentStatusMessage"))
     AwsApiGatewayV2StageDetails.add_member(:api_gateway_managed, Shapes::ShapeRef.new(shape: Boolean, location_name: "ApiGatewayManaged"))
     AwsApiGatewayV2StageDetails.struct_class = Types::AwsApiGatewayV2StageDetails
+
+    AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails.add_member(:authentication_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AuthenticationType"))
+    AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails.add_member(:lambda_authorizer_config, Shapes::ShapeRef.new(shape: AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails, location_name: "LambdaAuthorizerConfig"))
+    AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails.add_member(:open_id_connect_config, Shapes::ShapeRef.new(shape: AwsAppSyncGraphQlApiOpenIdConnectConfigDetails, location_name: "OpenIdConnectConfig"))
+    AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails.add_member(:user_pool_config, Shapes::ShapeRef.new(shape: AwsAppSyncGraphQlApiUserPoolConfigDetails, location_name: "UserPoolConfig"))
+    AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails.struct_class = Types::AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails
+
+    AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersList.member = Shapes::ShapeRef.new(shape: AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails)
+
+    AwsAppSyncGraphQlApiDetails.add_member(:api_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ApiId"))
+    AwsAppSyncGraphQlApiDetails.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Id"))
+    AwsAppSyncGraphQlApiDetails.add_member(:open_id_connect_config, Shapes::ShapeRef.new(shape: AwsAppSyncGraphQlApiOpenIdConnectConfigDetails, location_name: "OpenIdConnectConfig"))
+    AwsAppSyncGraphQlApiDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsAppSyncGraphQlApiDetails.add_member(:lambda_authorizer_config, Shapes::ShapeRef.new(shape: AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails, location_name: "LambdaAuthorizerConfig"))
+    AwsAppSyncGraphQlApiDetails.add_member(:xray_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "XrayEnabled"))
+    AwsAppSyncGraphQlApiDetails.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Arn"))
+    AwsAppSyncGraphQlApiDetails.add_member(:user_pool_config, Shapes::ShapeRef.new(shape: AwsAppSyncGraphQlApiUserPoolConfigDetails, location_name: "UserPoolConfig"))
+    AwsAppSyncGraphQlApiDetails.add_member(:authentication_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AuthenticationType"))
+    AwsAppSyncGraphQlApiDetails.add_member(:log_config, Shapes::ShapeRef.new(shape: AwsAppSyncGraphQlApiLogConfigDetails, location_name: "LogConfig"))
+    AwsAppSyncGraphQlApiDetails.add_member(:additional_authentication_providers, Shapes::ShapeRef.new(shape: AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersList, location_name: "AdditionalAuthenticationProviders"))
+    AwsAppSyncGraphQlApiDetails.add_member(:waf_web_acl_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "WafWebAclArn"))
+    AwsAppSyncGraphQlApiDetails.struct_class = Types::AwsAppSyncGraphQlApiDetails
+
+    AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails.add_member(:authorizer_result_ttl_in_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "AuthorizerResultTtlInSeconds"))
+    AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails.add_member(:authorizer_uri, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AuthorizerUri"))
+    AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails.add_member(:identity_validation_expression, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "IdentityValidationExpression"))
+    AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails.struct_class = Types::AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails
+
+    AwsAppSyncGraphQlApiLogConfigDetails.add_member(:cloud_watch_logs_role_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CloudWatchLogsRoleArn"))
+    AwsAppSyncGraphQlApiLogConfigDetails.add_member(:exclude_verbose_content, Shapes::ShapeRef.new(shape: Boolean, location_name: "ExcludeVerboseContent"))
+    AwsAppSyncGraphQlApiLogConfigDetails.add_member(:field_log_level, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FieldLogLevel"))
+    AwsAppSyncGraphQlApiLogConfigDetails.struct_class = Types::AwsAppSyncGraphQlApiLogConfigDetails
+
+    AwsAppSyncGraphQlApiOpenIdConnectConfigDetails.add_member(:auth_tt_l, Shapes::ShapeRef.new(shape: Long, location_name: "AuthTtL"))
+    AwsAppSyncGraphQlApiOpenIdConnectConfigDetails.add_member(:client_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClientId"))
+    AwsAppSyncGraphQlApiOpenIdConnectConfigDetails.add_member(:iat_tt_l, Shapes::ShapeRef.new(shape: Long, location_name: "IatTtL"))
+    AwsAppSyncGraphQlApiOpenIdConnectConfigDetails.add_member(:issuer, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Issuer"))
+    AwsAppSyncGraphQlApiOpenIdConnectConfigDetails.struct_class = Types::AwsAppSyncGraphQlApiOpenIdConnectConfigDetails
+
+    AwsAppSyncGraphQlApiUserPoolConfigDetails.add_member(:app_id_client_regex, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AppIdClientRegex"))
+    AwsAppSyncGraphQlApiUserPoolConfigDetails.add_member(:aws_region, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AwsRegion"))
+    AwsAppSyncGraphQlApiUserPoolConfigDetails.add_member(:default_action, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DefaultAction"))
+    AwsAppSyncGraphQlApiUserPoolConfigDetails.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "UserPoolId"))
+    AwsAppSyncGraphQlApiUserPoolConfigDetails.struct_class = Types::AwsAppSyncGraphQlApiUserPoolConfigDetails
 
     AwsAutoScalingAutoScalingGroupAvailabilityZonesList.member = Shapes::ShapeRef.new(shape: AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails)
 
@@ -2978,6 +3115,61 @@ module Aws::SecurityHub
     AwsElbv2LoadBalancerDetails.add_member(:load_balancer_attributes, Shapes::ShapeRef.new(shape: AwsElbv2LoadBalancerAttributes, location_name: "LoadBalancerAttributes"))
     AwsElbv2LoadBalancerDetails.struct_class = Types::AwsElbv2LoadBalancerDetails
 
+    AwsEventSchemasRegistryDetails.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    AwsEventSchemasRegistryDetails.add_member(:registry_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RegistryArn"))
+    AwsEventSchemasRegistryDetails.add_member(:registry_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RegistryName"))
+    AwsEventSchemasRegistryDetails.struct_class = Types::AwsEventSchemasRegistryDetails
+
+    AwsGuardDutyDetectorDataSourcesCloudTrailDetails.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
+    AwsGuardDutyDetectorDataSourcesCloudTrailDetails.struct_class = Types::AwsGuardDutyDetectorDataSourcesCloudTrailDetails
+
+    AwsGuardDutyDetectorDataSourcesDetails.add_member(:cloud_trail, Shapes::ShapeRef.new(shape: AwsGuardDutyDetectorDataSourcesCloudTrailDetails, location_name: "CloudTrail"))
+    AwsGuardDutyDetectorDataSourcesDetails.add_member(:dns_logs, Shapes::ShapeRef.new(shape: AwsGuardDutyDetectorDataSourcesDnsLogsDetails, location_name: "DnsLogs"))
+    AwsGuardDutyDetectorDataSourcesDetails.add_member(:flow_logs, Shapes::ShapeRef.new(shape: AwsGuardDutyDetectorDataSourcesFlowLogsDetails, location_name: "FlowLogs"))
+    AwsGuardDutyDetectorDataSourcesDetails.add_member(:kubernetes, Shapes::ShapeRef.new(shape: AwsGuardDutyDetectorDataSourcesKubernetesDetails, location_name: "Kubernetes"))
+    AwsGuardDutyDetectorDataSourcesDetails.add_member(:malware_protection, Shapes::ShapeRef.new(shape: AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails, location_name: "MalwareProtection"))
+    AwsGuardDutyDetectorDataSourcesDetails.add_member(:s3_logs, Shapes::ShapeRef.new(shape: AwsGuardDutyDetectorDataSourcesS3LogsDetails, location_name: "S3Logs"))
+    AwsGuardDutyDetectorDataSourcesDetails.struct_class = Types::AwsGuardDutyDetectorDataSourcesDetails
+
+    AwsGuardDutyDetectorDataSourcesDnsLogsDetails.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
+    AwsGuardDutyDetectorDataSourcesDnsLogsDetails.struct_class = Types::AwsGuardDutyDetectorDataSourcesDnsLogsDetails
+
+    AwsGuardDutyDetectorDataSourcesFlowLogsDetails.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
+    AwsGuardDutyDetectorDataSourcesFlowLogsDetails.struct_class = Types::AwsGuardDutyDetectorDataSourcesFlowLogsDetails
+
+    AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
+    AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails.struct_class = Types::AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails
+
+    AwsGuardDutyDetectorDataSourcesKubernetesDetails.add_member(:audit_logs, Shapes::ShapeRef.new(shape: AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails, location_name: "AuditLogs"))
+    AwsGuardDutyDetectorDataSourcesKubernetesDetails.struct_class = Types::AwsGuardDutyDetectorDataSourcesKubernetesDetails
+
+    AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails.add_member(:scan_ec2_instance_with_findings, Shapes::ShapeRef.new(shape: AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsDetails, location_name: "ScanEc2InstanceWithFindings"))
+    AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails.add_member(:service_role, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ServiceRole"))
+    AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails.struct_class = Types::AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails
+
+    AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsDetails.add_member(:ebs_volumes, Shapes::ShapeRef.new(shape: AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails, location_name: "EbsVolumes"))
+    AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsDetails.struct_class = Types::AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsDetails
+
+    AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails.add_member(:reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Reason"))
+    AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
+    AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails.struct_class = Types::AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails
+
+    AwsGuardDutyDetectorDataSourcesS3LogsDetails.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
+    AwsGuardDutyDetectorDataSourcesS3LogsDetails.struct_class = Types::AwsGuardDutyDetectorDataSourcesS3LogsDetails
+
+    AwsGuardDutyDetectorDetails.add_member(:data_sources, Shapes::ShapeRef.new(shape: AwsGuardDutyDetectorDataSourcesDetails, location_name: "DataSources"))
+    AwsGuardDutyDetectorDetails.add_member(:features, Shapes::ShapeRef.new(shape: AwsGuardDutyDetectorFeaturesList, location_name: "Features"))
+    AwsGuardDutyDetectorDetails.add_member(:finding_publishing_frequency, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FindingPublishingFrequency"))
+    AwsGuardDutyDetectorDetails.add_member(:service_role, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ServiceRole"))
+    AwsGuardDutyDetectorDetails.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
+    AwsGuardDutyDetectorDetails.struct_class = Types::AwsGuardDutyDetectorDetails
+
+    AwsGuardDutyDetectorFeaturesDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsGuardDutyDetectorFeaturesDetails.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
+    AwsGuardDutyDetectorFeaturesDetails.struct_class = Types::AwsGuardDutyDetectorFeaturesDetails
+
+    AwsGuardDutyDetectorFeaturesList.member = Shapes::ShapeRef.new(shape: AwsGuardDutyDetectorFeaturesDetails)
+
     AwsIamAccessKeyDetails.add_member(:user_name, Shapes::ShapeRef.new(shape: NonEmptyString, deprecated: true, location_name: "UserName", metadata: {"deprecatedMessage"=>"This filter is deprecated. Instead, use PrincipalName."}))
     AwsIamAccessKeyDetails.add_member(:status, Shapes::ShapeRef.new(shape: AwsIamAccessKeyStatus, location_name: "Status"))
     AwsIamAccessKeyDetails.add_member(:created_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreatedAt"))
@@ -4143,6 +4335,32 @@ module Aws::SecurityHub
     AwsSsmPatchComplianceDetails.add_member(:patch, Shapes::ShapeRef.new(shape: AwsSsmPatch, location_name: "Patch"))
     AwsSsmPatchComplianceDetails.struct_class = Types::AwsSsmPatchComplianceDetails
 
+    AwsStepFunctionStateMachineDetails.add_member(:label, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Label"))
+    AwsStepFunctionStateMachineDetails.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: AwsStepFunctionStateMachineLoggingConfigurationDetails, location_name: "LoggingConfiguration"))
+    AwsStepFunctionStateMachineDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    AwsStepFunctionStateMachineDetails.add_member(:role_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RoleArn"))
+    AwsStepFunctionStateMachineDetails.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StateMachineArn"))
+    AwsStepFunctionStateMachineDetails.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
+    AwsStepFunctionStateMachineDetails.add_member(:tracing_configuration, Shapes::ShapeRef.new(shape: AwsStepFunctionStateMachineTracingConfigurationDetails, location_name: "TracingConfiguration"))
+    AwsStepFunctionStateMachineDetails.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsStepFunctionStateMachineDetails.struct_class = Types::AwsStepFunctionStateMachineDetails
+
+    AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LogGroupArn"))
+    AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails.struct_class = Types::AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails
+
+    AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails.add_member(:cloud_watch_logs_log_group, Shapes::ShapeRef.new(shape: AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails, location_name: "CloudWatchLogsLogGroup"))
+    AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails.struct_class = Types::AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails
+
+    AwsStepFunctionStateMachineLoggingConfigurationDestinationsList.member = Shapes::ShapeRef.new(shape: AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails)
+
+    AwsStepFunctionStateMachineLoggingConfigurationDetails.add_member(:destinations, Shapes::ShapeRef.new(shape: AwsStepFunctionStateMachineLoggingConfigurationDestinationsList, location_name: "Destinations"))
+    AwsStepFunctionStateMachineLoggingConfigurationDetails.add_member(:include_execution_data, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeExecutionData"))
+    AwsStepFunctionStateMachineLoggingConfigurationDetails.add_member(:level, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Level"))
+    AwsStepFunctionStateMachineLoggingConfigurationDetails.struct_class = Types::AwsStepFunctionStateMachineLoggingConfigurationDetails
+
+    AwsStepFunctionStateMachineTracingConfigurationDetails.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    AwsStepFunctionStateMachineTracingConfigurationDetails.struct_class = Types::AwsStepFunctionStateMachineTracingConfigurationDetails
+
     AwsWafRateBasedRuleDetails.add_member(:metric_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MetricName"))
     AwsWafRateBasedRuleDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
     AwsWafRateBasedRuleDetails.add_member(:rate_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RateKey"))
@@ -5273,6 +5491,11 @@ module Aws::SecurityHub
     ResourceDetails.add_member(:aws_wafv_2_web_acl, Shapes::ShapeRef.new(shape: AwsWafv2WebAclDetails, location_name: "AwsWafv2WebAcl"))
     ResourceDetails.add_member(:aws_wafv_2_rule_group, Shapes::ShapeRef.new(shape: AwsWafv2RuleGroupDetails, location_name: "AwsWafv2RuleGroup"))
     ResourceDetails.add_member(:aws_ec2_route_table, Shapes::ShapeRef.new(shape: AwsEc2RouteTableDetails, location_name: "AwsEc2RouteTable"))
+    ResourceDetails.add_member(:aws_amazon_mq_broker, Shapes::ShapeRef.new(shape: AwsAmazonMqBrokerDetails, location_name: "AwsAmazonMqBroker"))
+    ResourceDetails.add_member(:aws_app_sync_graph_ql_api, Shapes::ShapeRef.new(shape: AwsAppSyncGraphQlApiDetails, location_name: "AwsAppSyncGraphQlApi"))
+    ResourceDetails.add_member(:aws_event_schemas_registry, Shapes::ShapeRef.new(shape: AwsEventSchemasRegistryDetails, location_name: "AwsEventSchemasRegistry"))
+    ResourceDetails.add_member(:aws_guard_duty_detector, Shapes::ShapeRef.new(shape: AwsGuardDutyDetectorDetails, location_name: "AwsGuardDutyDetector"))
+    ResourceDetails.add_member(:aws_step_function_state_machine, Shapes::ShapeRef.new(shape: AwsStepFunctionStateMachineDetails, location_name: "AwsStepFunctionStateMachine"))
     ResourceDetails.struct_class = Types::ResourceDetails
 
     ResourceList.member = Shapes::ShapeRef.new(shape: Resource)

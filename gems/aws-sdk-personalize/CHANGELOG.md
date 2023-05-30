@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2023-05-30)
+------------------
+
+* Feature - This release provides support for the exclusion of certain columns for training when creating a solution and creating or updating a recommender with Amazon Personalize.
+
 1.46.0 (2023-01-18)
 ------------------
 

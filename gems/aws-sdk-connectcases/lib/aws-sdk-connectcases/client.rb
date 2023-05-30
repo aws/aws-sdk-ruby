@@ -407,7 +407,7 @@ module Aws::ConnectCases
     #   resp.fields[0].namespace #=> String, one of "System", "Custom"
     #   resp.fields[0].tags #=> Hash
     #   resp.fields[0].tags["String"] #=> String
-    #   resp.fields[0].type #=> String, one of "Text", "Number", "Boolean", "DateTime", "SingleSelect"
+    #   resp.fields[0].type #=> String, one of "Text", "Number", "Boolean", "DateTime", "SingleSelect", "Url"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/BatchGetField AWS API Documentation
     #
@@ -607,7 +607,7 @@ module Aws::ConnectCases
     #     description: "FieldDescription",
     #     domain_id: "DomainId", # required
     #     name: "FieldName", # required
-    #     type: "Text", # required, accepts Text, Number, Boolean, DateTime, SingleSelect
+    #     type: "Text", # required, accepts Text, Number, Boolean, DateTime, SingleSelect, Url
     #   })
     #
     # @example Response structure
@@ -1253,7 +1253,7 @@ module Aws::ConnectCases
     #   resp.fields[0].field_id #=> String
     #   resp.fields[0].name #=> String
     #   resp.fields[0].namespace #=> String, one of "System", "Custom"
-    #   resp.fields[0].type #=> String, one of "Text", "Number", "Boolean", "DateTime", "SingleSelect"
+    #   resp.fields[0].type #=> String, one of "Text", "Number", "Boolean", "DateTime", "SingleSelect", "Url"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/ListFields AWS API Documentation
@@ -1934,7 +1934,7 @@ module Aws::ConnectCases
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

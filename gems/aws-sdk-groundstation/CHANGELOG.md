@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2023-05-30)
+------------------
+
+* Feature - Updating description of GetMinuteUsage to be clearer.
+
 1.33.0 (2023-04-12)
 ------------------
 
