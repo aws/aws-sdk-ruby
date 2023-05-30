@@ -1,0 +1,58 @@
+# frozen_string_literal: true
+
+module Benchmark
+  module Service
+    module CloudWatchLogs
+      GEM_NAME = 'aws-sdk-cloudwatchlogs'.freeze
+
+      BENCHMARKS = {
+        module: :CloudWatchLogs,
+        benchmarks: {
+          put_log_events_small: {
+            setup: proc do |client|
+              {log_group_name: 'log_group', log_stream_name: 'log_stream', log_events: (0...5).map { |i| { timestamp: Time.now.to_i, message: "test log event #{i}"}}}
+            end,
+            test: proc do |client, req|
+              client.put_log_events(req)
+            end
+          },
+          put_log_events_large: {
+            setup: proc do |client|
+              {log_group_name: 'log_group', log_stream_name: 'log_stream', log_events: (0...5000).map { |i| { timestamp: Time.now.to_i, message: "test log event #{i} - #{random_value(i)}"}}}
+            end,
+            test: proc do |client, req|
+              client.put_log_events(req)
+            end
+          },
+          get_log_events_small: {
+            setup: proc do |client|
+              client.stub_responses(:get_log_events, [{events: (0...5).map { |i| { timestamp: Time.now.to_i, message: "test log event #{i} - #{random_value(i)}"}}}])
+              {log_group_name: 'log_group', log_stream_name: 'log_stream'}
+            end,
+            test: proc do |client, req|
+              client.get_log_events(req)
+            end
+          },
+          get_log_events_large: {
+            setup: proc do |client|
+              client.stub_responses(:get_log_events, [{events: (0...5000).map { |i| { timestamp: Time.now.to_i, message: "test log event #{i} - #{random_value(i)}"}}}])
+              {log_group_name: 'log_group', log_stream_name: 'log_stream'}
+            end,
+            test: proc do |client, req|
+              client.get_log_events(req)
+            end
+          },
+          filter_log_events_large: {
+            setup: proc do |client|
+              client.stub_responses(:filter_log_events, [{events: (0...5000).map { |i| { timestamp: Time.now.to_i, message: "test log event #{i} - #{random_value(i)}"}}}])
+              {log_group_name: 'log_group', log_stream_names: ['log_stream'], start_time: 1, end_time: 1000}
+            end,
+            test: proc do |client, req|
+              client.filter_log_events(req)
+            end
+          }
+        }
+      }
+    end
+  end
+end

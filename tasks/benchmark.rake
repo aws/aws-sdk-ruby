@@ -3,7 +3,7 @@
 
 desc 'Runs a performance benchmark on the SDK'
 task 'benchmark' do
-  sh('bundle exec ruby bin/benchmark_performance.rb')
+  sh('bundle exec ruby benchmark/run_benchmark.rb')
 end
 
 desc 'Upload/archive the benchmark report'
@@ -29,6 +29,7 @@ desc 'Upload benchmarking data to cloudwatch'
 task 'benchmark:put-metrics' do
   $:.unshift("#{$GEMS_DIR}/aws-sdk-cloudwatch/lib")
   require 'aws-sdk-cloudwatch'
+  require_relative '../benchmark/metrics'
 
   event = ENV['GH_EVENT'] == 'pull_request' ? 'pr' : 'release'
   report = JSON.parse(File.read('benchmark_report.json'))
@@ -42,39 +43,6 @@ task 'benchmark:put-metrics' do
     cpu: report['cpu'],
     env: report['execution_env']
   }
-
-  def put_metric(client, dims, timestamp, k, v)
-    return unless v.is_a?(Numeric) || v.is_a?(Array)
-    # attempt to determine unit
-    unit_suffix = k.split("_").last
-    unit = {
-      'kb' => 'Kilobytes',
-      'b' => 'Bytes',
-      's' => 'Seconds',
-      'ms' => 'Milliseconds'
-    }.fetch(unit_suffix, 'None')
-
-    metric_data = {
-      metric_name: k,
-      timestamp: timestamp,
-      unit: unit,
-      dimensions: dims.map { |k,v| {name: k.to_s, value: v} }
-    }
-
-    case v
-    when Numeric
-      metric_data[:value] = v
-      client.put_metric_data(namespace: "sdk-performance", metric_data: [metric_data])
-    when Array
-      # cloudwatch has a limit of 150 values
-      v.each_slice(150) do |values|
-        metric_data[:values] = values
-        client.put_metric_data(namespace: "sdk-performance", metric_data: [metric_data])
-      end
-    else
-      raise 'Unknown type for metric value'
-    end
-  end
 
   puts "Uploading benchmarking metrics"
 
