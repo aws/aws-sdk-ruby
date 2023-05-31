@@ -1,13 +1,19 @@
 # frozen_string_literal: true
 
 module Benchmark
-  module Service
-    module CloudWatch
-      GEM_NAME = 'aws-sdk-cloudwatch'.freeze
+  module Gems
+    class CloudWatch < Benchmark::Gem
 
-      BENCHMARKS = {
-        module: :CloudWatch,
-        benchmarks: {
+      def gem_name
+        'aws-sdk-cloudwatch'
+      end
+
+      def client_module_name
+        :CloudWatch
+      end
+
+      def operation_benchmarks
+        {
           put_metric_data_small: {
             setup: proc do |client|
               {namespace: 'namespace', metric_data: [{metric_name: "metric", timestamp: Time.now, value: 1.0, unit: "Seconds"}]}
@@ -28,7 +34,8 @@ module Benchmark
             end
           },
         }
-      }
+      end
+
     end
   end
 end

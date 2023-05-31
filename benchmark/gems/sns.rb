@@ -1,13 +1,19 @@
 # frozen_string_literal: true
 
 module Benchmark
-  module Service
-    module SNS
-      GEM_NAME = 'aws-sdk-sns'.freeze
+  module Gems
+    class SNS < Benchmark::Gem
 
-      BENCHMARKS = {
-        module: :SNS,
-        benchmarks: {
+      def gem_name
+        'aws-sdk-sns'
+      end
+
+      def client_module_name
+        :SNS
+      end
+
+      def operation_benchmarks
+        {
           publish_small: {
             setup: proc do |client|
               {topic_arn: 'topic', subject: "subject", message: 'message'}
@@ -25,7 +31,7 @@ module Benchmark
             end
           },
         }
-      }
+      end
     end
   end
 end

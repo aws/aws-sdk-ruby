@@ -1,13 +1,19 @@
 # frozen_string_literal: true
 
 module Benchmark
-  module Service
-    module Kinesis
-      GEM_NAME = 'aws-sdk-kinesis'.freeze
+  module Gems
+    class Kinesis < Benchmark::Gem
 
-      BENCHMARKS = {
-        module: :Kinesis,
-        benchmarks: {
+      def gem_name
+        'aws-sdk-kinesis'
+      end
+
+      def client_module_name
+        :Kinesis
+      end
+
+      def operation_benchmarks
+        {
           put_record_small: {
             setup: proc do |client|
               {stream_name: 'stream', partition_key: "pk", data: 'data'}
@@ -25,7 +31,7 @@ module Benchmark
             end
           },
         }
-      }
+      end
     end
   end
 end
