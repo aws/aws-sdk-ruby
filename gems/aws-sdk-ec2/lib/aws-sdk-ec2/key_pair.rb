@@ -188,7 +188,9 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -210,7 +212,9 @@ module Aws::EC2
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(key_name: @name)
-      resp = @client.delete_key_pair(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_key_pair(options)
+      end
       resp.data
     end
 

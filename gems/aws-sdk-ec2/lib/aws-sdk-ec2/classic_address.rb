@@ -134,7 +134,9 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = @client.describe_addresses(public_ips: [@public_ip])
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_addresses(public_ips: [@public_ip])
+      end
       @data = resp.addresses[0]
       self
     end
@@ -249,7 +251,9 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -299,7 +303,9 @@ module Aws::EC2
     # @return [Types::AssociateAddressResult]
     def associate(options = {})
       options = options.merge(public_ip: @public_ip)
-      resp = @client.associate_address(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.associate_address(options)
+      end
       resp.data
     end
 
@@ -320,7 +326,9 @@ module Aws::EC2
     # @return [EmptyStructure]
     def disassociate(options = {})
       options = options.merge(public_ip: data[:public_ip])
-      resp = @client.disassociate_address(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.disassociate_address(options)
+      end
       resp.data
     end
 
@@ -352,7 +360,9 @@ module Aws::EC2
     # @return [EmptyStructure]
     def release(options = {})
       options = options.merge(public_ip: data[:public_ip])
-      resp = @client.release_address(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.release_address(options)
+      end
       resp.data
     end
 

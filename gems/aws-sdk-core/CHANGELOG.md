@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.174.0 (2023-05-31)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 * Feature - Improve User-Agent metrics tracking.
 
 3.173.1 (2023-05-24)

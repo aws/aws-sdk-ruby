@@ -792,7 +792,9 @@ module Aws::RDS
     #
     # @return [self]
     def load
-      resp = @client.describe_db_instances(db_instance_identifier: @id)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_db_instances(db_instance_identifier: @id)
+      end
       @data = resp.db_instances[0]
       self
     end
@@ -907,7 +909,9 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -2080,7 +2084,9 @@ module Aws::RDS
     # @return [DBInstance]
     def create(options = {})
       options = options.merge(db_instance_identifier: @id)
-      resp = @client.create_db_instance(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_db_instance(options)
+      end
       DBInstance.new(
         id: resp.data.db_instance.db_instance_identifier,
         data: resp.data.db_instance,
@@ -2657,7 +2663,9 @@ module Aws::RDS
     # @return [DBInstance]
     def create_read_replica(options = {})
       options = options.merge(source_db_instance_identifier: @id)
-      resp = @client.create_db_instance_read_replica(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_db_instance_read_replica(options)
+      end
       DBInstance.new(
         id: resp.data.db_instance.db_instance_identifier,
         data: resp.data.db_instance,
@@ -2701,7 +2709,9 @@ module Aws::RDS
     # @return [DBSnapshot]
     def create_snapshot(options = {})
       options = options.merge(db_instance_identifier: @id)
-      resp = @client.create_db_snapshot(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_db_snapshot(options)
+      end
       DBSnapshot.new(
         instance_id: resp.data.db_snapshot.db_instance_identifier,
         snapshot_id: resp.data.db_snapshot.db_snapshot_identifier,
@@ -2767,7 +2777,9 @@ module Aws::RDS
     # @return [DBInstance]
     def delete(options = {})
       options = options.merge(db_instance_identifier: @id)
-      resp = @client.delete_db_instance(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_db_instance(options)
+      end
       DBInstance.new(
         id: resp.data.db_instance.db_instance_identifier,
         data: resp.data.db_instance,
@@ -2837,6 +2849,7 @@ module Aws::RDS
     #     manage_master_user_password: false,
     #     rotate_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
+    #     engine: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :allocated_storage
@@ -3711,10 +3724,39 @@ module Aws::RDS
     #   There is a default KMS key for your Amazon Web Services account. Your
     #   Amazon Web Services account has a different default KMS key for each
     #   Amazon Web Services Region.
+    # @option options [String] :engine
+    #   The target Oracle DB engine when you convert a non-CDB to a CDB. This
+    #   intermediate step is necessary to upgrade an Oracle Database 19c
+    #   non-CDB to an Oracle Database 21c CDB.
+    #
+    #   Note the following requirements:
+    #
+    #   * Make sure that you specify `oracle-ee-cdb` or `oracle-se2-cdb`.
+    #
+    #   * Make sure that your DB engine runs Oracle Database 19c with an April
+    #     2021 or later RU.
+    #
+    #   Note the following limitations:
+    #
+    #   * You can't convert a CDB to a non-CDB.
+    #
+    #   * You can't convert a replica database.
+    #
+    #   * You can't convert a non-CDB to a CDB and upgrade the engine version
+    #     in the same command.
+    #
+    #   * You can't convert the existing custom parameter or option group
+    #     when it has options or parameters that are permanent or persistent.
+    #     In this situation, the DB instance reverts to the default option and
+    #     parameter group. To avoid reverting to the default, specify a new
+    #     parameter group with `--db-parameter-group-name` and a new option
+    #     group with `--option-group-name`.
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)
-      resp = @client.modify_db_instance(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.modify_db_instance(options)
+      end
       DBInstance.new(
         id: resp.data.db_instance.db_instance_identifier,
         data: resp.data.db_instance,
@@ -3767,7 +3809,9 @@ module Aws::RDS
     # @return [DBInstance]
     def promote(options = {})
       options = options.merge(db_instance_identifier: @id)
-      resp = @client.promote_read_replica(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.promote_read_replica(options)
+      end
       DBInstance.new(
         id: resp.data.db_instance.db_instance_identifier,
         data: resp.data.db_instance,
@@ -3790,7 +3834,9 @@ module Aws::RDS
     # @return [DBInstance]
     def reboot(options = {})
       options = options.merge(db_instance_identifier: @id)
-      resp = @client.reboot_db_instance(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.reboot_db_instance(options)
+      end
       DBInstance.new(
         id: resp.data.db_instance.db_instance_identifier,
         data: resp.data.db_instance,
@@ -4238,7 +4284,9 @@ module Aws::RDS
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(source_db_instance_identifier: @id)
-      resp = @client.restore_db_instance_to_point_in_time(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.restore_db_instance_to_point_in_time(options)
+      end
       DBInstance.new(
         id: resp.data.db_instance.db_instance_identifier,
         data: resp.data.db_instance,
@@ -4258,7 +4306,9 @@ module Aws::RDS
     # @return [EventSubscription]
     def subscribe_to(options = {})
       options = options.merge(source_identifier: @id)
-      resp = @client.add_source_identifier_to_subscription(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.add_source_identifier_to_subscription(options)
+      end
       EventSubscription.new(
         name: resp.data.event_subscription.cust_subscription_id,
         data: resp.data.event_subscription,
@@ -4278,7 +4328,9 @@ module Aws::RDS
     # @return [EventSubscription]
     def unsubscribe_from(options = {})
       options = options.merge(source_identifier: @id)
-      resp = @client.remove_source_identifier_from_subscription(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.remove_source_identifier_from_subscription(options)
+      end
       EventSubscription.new(
         name: resp.data.event_subscription.cust_subscription_id,
         data: resp.data.event_subscription,
@@ -4363,7 +4415,9 @@ module Aws::RDS
           source_type: "db-instance",
           source_identifier: @id
         )
-        resp = @client.describe_events(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_events(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.events.each do |e|
@@ -4409,7 +4463,9 @@ module Aws::RDS
     def log_files(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(db_instance_identifier: @id)
-        resp = @client.describe_db_log_files(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_db_log_files(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.describe_db_log_files.each do |d|
@@ -4484,7 +4540,9 @@ module Aws::RDS
           name: "db-instance-id",
           values: [@id]
         }])
-        resp = @client.describe_pending_maintenance_actions(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_pending_maintenance_actions(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.pending_maintenance_actions_0.pending_maintenance_action_details.each do |p|
@@ -4631,7 +4689,9 @@ module Aws::RDS
     def snapshots(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(db_instance_identifier: @id)
-        resp = @client.describe_db_snapshots(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_db_snapshots(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.db_snapshots.each do |d|

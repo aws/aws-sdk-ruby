@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2023-05-31)
+------------------
+
+* Feature - Resource Types Exclusion feature launch by AWS Config
+
 1.90.0 (2023-05-04)
 ------------------
 

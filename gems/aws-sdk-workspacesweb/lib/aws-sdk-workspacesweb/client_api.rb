@@ -18,6 +18,8 @@ module Aws::WorkSpacesWeb
     ArnList = Shapes::ListShape.new(name: 'ArnList')
     AssociateBrowserSettingsRequest = Shapes::StructureShape.new(name: 'AssociateBrowserSettingsRequest')
     AssociateBrowserSettingsResponse = Shapes::StructureShape.new(name: 'AssociateBrowserSettingsResponse')
+    AssociateIpAccessSettingsRequest = Shapes::StructureShape.new(name: 'AssociateIpAccessSettingsRequest')
+    AssociateIpAccessSettingsResponse = Shapes::StructureShape.new(name: 'AssociateIpAccessSettingsResponse')
     AssociateNetworkSettingsRequest = Shapes::StructureShape.new(name: 'AssociateNetworkSettingsRequest')
     AssociateNetworkSettingsResponse = Shapes::StructureShape.new(name: 'AssociateNetworkSettingsResponse')
     AssociateTrustStoreRequest = Shapes::StructureShape.new(name: 'AssociateTrustStoreRequest')
@@ -46,6 +48,8 @@ module Aws::WorkSpacesWeb
     CreateBrowserSettingsResponse = Shapes::StructureShape.new(name: 'CreateBrowserSettingsResponse')
     CreateIdentityProviderRequest = Shapes::StructureShape.new(name: 'CreateIdentityProviderRequest')
     CreateIdentityProviderResponse = Shapes::StructureShape.new(name: 'CreateIdentityProviderResponse')
+    CreateIpAccessSettingsRequest = Shapes::StructureShape.new(name: 'CreateIpAccessSettingsRequest')
+    CreateIpAccessSettingsResponse = Shapes::StructureShape.new(name: 'CreateIpAccessSettingsResponse')
     CreateNetworkSettingsRequest = Shapes::StructureShape.new(name: 'CreateNetworkSettingsRequest')
     CreateNetworkSettingsResponse = Shapes::StructureShape.new(name: 'CreateNetworkSettingsResponse')
     CreatePortalRequest = Shapes::StructureShape.new(name: 'CreatePortalRequest')
@@ -60,6 +64,8 @@ module Aws::WorkSpacesWeb
     DeleteBrowserSettingsResponse = Shapes::StructureShape.new(name: 'DeleteBrowserSettingsResponse')
     DeleteIdentityProviderRequest = Shapes::StructureShape.new(name: 'DeleteIdentityProviderRequest')
     DeleteIdentityProviderResponse = Shapes::StructureShape.new(name: 'DeleteIdentityProviderResponse')
+    DeleteIpAccessSettingsRequest = Shapes::StructureShape.new(name: 'DeleteIpAccessSettingsRequest')
+    DeleteIpAccessSettingsResponse = Shapes::StructureShape.new(name: 'DeleteIpAccessSettingsResponse')
     DeleteNetworkSettingsRequest = Shapes::StructureShape.new(name: 'DeleteNetworkSettingsRequest')
     DeleteNetworkSettingsResponse = Shapes::StructureShape.new(name: 'DeleteNetworkSettingsResponse')
     DeletePortalRequest = Shapes::StructureShape.new(name: 'DeletePortalRequest')
@@ -70,8 +76,11 @@ module Aws::WorkSpacesWeb
     DeleteUserAccessLoggingSettingsResponse = Shapes::StructureShape.new(name: 'DeleteUserAccessLoggingSettingsResponse')
     DeleteUserSettingsRequest = Shapes::StructureShape.new(name: 'DeleteUserSettingsRequest')
     DeleteUserSettingsResponse = Shapes::StructureShape.new(name: 'DeleteUserSettingsResponse')
+    Description = Shapes::StringShape.new(name: 'Description')
     DisassociateBrowserSettingsRequest = Shapes::StructureShape.new(name: 'DisassociateBrowserSettingsRequest')
     DisassociateBrowserSettingsResponse = Shapes::StructureShape.new(name: 'DisassociateBrowserSettingsResponse')
+    DisassociateIpAccessSettingsRequest = Shapes::StructureShape.new(name: 'DisassociateIpAccessSettingsRequest')
+    DisassociateIpAccessSettingsResponse = Shapes::StructureShape.new(name: 'DisassociateIpAccessSettingsResponse')
     DisassociateNetworkSettingsRequest = Shapes::StructureShape.new(name: 'DisassociateNetworkSettingsRequest')
     DisassociateNetworkSettingsResponse = Shapes::StructureShape.new(name: 'DisassociateNetworkSettingsResponse')
     DisassociateTrustStoreRequest = Shapes::StructureShape.new(name: 'DisassociateTrustStoreRequest')
@@ -90,6 +99,8 @@ module Aws::WorkSpacesWeb
     GetBrowserSettingsResponse = Shapes::StructureShape.new(name: 'GetBrowserSettingsResponse')
     GetIdentityProviderRequest = Shapes::StructureShape.new(name: 'GetIdentityProviderRequest')
     GetIdentityProviderResponse = Shapes::StructureShape.new(name: 'GetIdentityProviderResponse')
+    GetIpAccessSettingsRequest = Shapes::StructureShape.new(name: 'GetIpAccessSettingsRequest')
+    GetIpAccessSettingsResponse = Shapes::StructureShape.new(name: 'GetIpAccessSettingsResponse')
     GetNetworkSettingsRequest = Shapes::StructureShape.new(name: 'GetNetworkSettingsRequest')
     GetNetworkSettingsResponse = Shapes::StructureShape.new(name: 'GetNetworkSettingsResponse')
     GetPortalRequest = Shapes::StructureShape.new(name: 'GetPortalRequest')
@@ -112,11 +123,19 @@ module Aws::WorkSpacesWeb
     IdentityProviderType = Shapes::StringShape.new(name: 'IdentityProviderType')
     IdleDisconnectTimeoutInMinutes = Shapes::IntegerShape.new(name: 'IdleDisconnectTimeoutInMinutes')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    IpAccessSettings = Shapes::StructureShape.new(name: 'IpAccessSettings')
+    IpAccessSettingsList = Shapes::ListShape.new(name: 'IpAccessSettingsList')
+    IpAccessSettingsSummary = Shapes::StructureShape.new(name: 'IpAccessSettingsSummary')
+    IpRange = Shapes::StringShape.new(name: 'IpRange')
+    IpRule = Shapes::StructureShape.new(name: 'IpRule')
+    IpRuleList = Shapes::ListShape.new(name: 'IpRuleList')
     KinesisStreamArn = Shapes::StringShape.new(name: 'KinesisStreamArn')
     ListBrowserSettingsRequest = Shapes::StructureShape.new(name: 'ListBrowserSettingsRequest')
     ListBrowserSettingsResponse = Shapes::StructureShape.new(name: 'ListBrowserSettingsResponse')
     ListIdentityProvidersRequest = Shapes::StructureShape.new(name: 'ListIdentityProvidersRequest')
     ListIdentityProvidersResponse = Shapes::StructureShape.new(name: 'ListIdentityProvidersResponse')
+    ListIpAccessSettingsRequest = Shapes::StructureShape.new(name: 'ListIpAccessSettingsRequest')
+    ListIpAccessSettingsResponse = Shapes::StructureShape.new(name: 'ListIpAccessSettingsResponse')
     ListNetworkSettingsRequest = Shapes::StructureShape.new(name: 'ListNetworkSettingsRequest')
     ListNetworkSettingsResponse = Shapes::StructureShape.new(name: 'ListNetworkSettingsResponse')
     ListPortalsRequest = Shapes::StructureShape.new(name: 'ListPortalsRequest')
@@ -176,6 +195,8 @@ module Aws::WorkSpacesWeb
     UpdateBrowserSettingsResponse = Shapes::StructureShape.new(name: 'UpdateBrowserSettingsResponse')
     UpdateIdentityProviderRequest = Shapes::StructureShape.new(name: 'UpdateIdentityProviderRequest')
     UpdateIdentityProviderResponse = Shapes::StructureShape.new(name: 'UpdateIdentityProviderResponse')
+    UpdateIpAccessSettingsRequest = Shapes::StructureShape.new(name: 'UpdateIpAccessSettingsRequest')
+    UpdateIpAccessSettingsResponse = Shapes::StructureShape.new(name: 'UpdateIpAccessSettingsResponse')
     UpdateNetworkSettingsRequest = Shapes::StructureShape.new(name: 'UpdateNetworkSettingsRequest')
     UpdateNetworkSettingsResponse = Shapes::StructureShape.new(name: 'UpdateNetworkSettingsResponse')
     UpdatePortalRequest = Shapes::StructureShape.new(name: 'UpdatePortalRequest')
@@ -211,6 +232,14 @@ module Aws::WorkSpacesWeb
     AssociateBrowserSettingsResponse.add_member(:browser_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "browserSettingsArn"))
     AssociateBrowserSettingsResponse.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "portalArn"))
     AssociateBrowserSettingsResponse.struct_class = Types::AssociateBrowserSettingsResponse
+
+    AssociateIpAccessSettingsRequest.add_member(:ip_access_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "querystring", location_name: "ipAccessSettingsArn"))
+    AssociateIpAccessSettingsRequest.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "portalArn"))
+    AssociateIpAccessSettingsRequest.struct_class = Types::AssociateIpAccessSettingsRequest
+
+    AssociateIpAccessSettingsResponse.add_member(:ip_access_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "ipAccessSettingsArn"))
+    AssociateIpAccessSettingsResponse.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "portalArn"))
+    AssociateIpAccessSettingsResponse.struct_class = Types::AssociateIpAccessSettingsResponse
 
     AssociateNetworkSettingsRequest.add_member(:network_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "querystring", location_name: "networkSettingsArn"))
     AssociateNetworkSettingsRequest.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "portalArn"))
@@ -300,6 +329,18 @@ module Aws::WorkSpacesWeb
     CreateIdentityProviderResponse.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "identityProviderArn"))
     CreateIdentityProviderResponse.struct_class = Types::CreateIdentityProviderResponse
 
+    CreateIpAccessSettingsRequest.add_member(:additional_encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: "additionalEncryptionContext"))
+    CreateIpAccessSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateIpAccessSettingsRequest.add_member(:customer_managed_key, Shapes::ShapeRef.new(shape: keyArn, location_name: "customerManagedKey"))
+    CreateIpAccessSettingsRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateIpAccessSettingsRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
+    CreateIpAccessSettingsRequest.add_member(:ip_rules, Shapes::ShapeRef.new(shape: IpRuleList, required: true, location_name: "ipRules"))
+    CreateIpAccessSettingsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateIpAccessSettingsRequest.struct_class = Types::CreateIpAccessSettingsRequest
+
+    CreateIpAccessSettingsResponse.add_member(:ip_access_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "ipAccessSettingsArn"))
+    CreateIpAccessSettingsResponse.struct_class = Types::CreateIpAccessSettingsResponse
+
     CreateNetworkSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateNetworkSettingsRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, required: true, location_name: "securityGroupIds"))
     CreateNetworkSettingsRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, required: true, location_name: "subnetIds"))
@@ -362,6 +403,11 @@ module Aws::WorkSpacesWeb
 
     DeleteIdentityProviderResponse.struct_class = Types::DeleteIdentityProviderResponse
 
+    DeleteIpAccessSettingsRequest.add_member(:ip_access_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "ipAccessSettingsArn"))
+    DeleteIpAccessSettingsRequest.struct_class = Types::DeleteIpAccessSettingsRequest
+
+    DeleteIpAccessSettingsResponse.struct_class = Types::DeleteIpAccessSettingsResponse
+
     DeleteNetworkSettingsRequest.add_member(:network_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "networkSettingsArn"))
     DeleteNetworkSettingsRequest.struct_class = Types::DeleteNetworkSettingsRequest
 
@@ -391,6 +437,11 @@ module Aws::WorkSpacesWeb
     DisassociateBrowserSettingsRequest.struct_class = Types::DisassociateBrowserSettingsRequest
 
     DisassociateBrowserSettingsResponse.struct_class = Types::DisassociateBrowserSettingsResponse
+
+    DisassociateIpAccessSettingsRequest.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "portalArn"))
+    DisassociateIpAccessSettingsRequest.struct_class = Types::DisassociateIpAccessSettingsRequest
+
+    DisassociateIpAccessSettingsResponse.struct_class = Types::DisassociateIpAccessSettingsResponse
 
     DisassociateNetworkSettingsRequest.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "portalArn"))
     DisassociateNetworkSettingsRequest.struct_class = Types::DisassociateNetworkSettingsRequest
@@ -426,6 +477,12 @@ module Aws::WorkSpacesWeb
 
     GetIdentityProviderResponse.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, location_name: "identityProvider"))
     GetIdentityProviderResponse.struct_class = Types::GetIdentityProviderResponse
+
+    GetIpAccessSettingsRequest.add_member(:ip_access_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "ipAccessSettingsArn"))
+    GetIpAccessSettingsRequest.struct_class = Types::GetIpAccessSettingsRequest
+
+    GetIpAccessSettingsResponse.add_member(:ip_access_settings, Shapes::ShapeRef.new(shape: IpAccessSettings, location_name: "ipAccessSettings"))
+    GetIpAccessSettingsResponse.struct_class = Types::GetIpAccessSettingsResponse
 
     GetNetworkSettingsRequest.add_member(:network_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "networkSettingsArn"))
     GetNetworkSettingsRequest.struct_class = Types::GetNetworkSettingsRequest
@@ -492,6 +549,28 @@ module Aws::WorkSpacesWeb
     InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: RetryAfterSeconds, location: "header", location_name: "Retry-After"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    IpAccessSettings.add_member(:associated_portal_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "associatedPortalArns"))
+    IpAccessSettings.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDate"))
+    IpAccessSettings.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    IpAccessSettings.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
+    IpAccessSettings.add_member(:ip_access_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "ipAccessSettingsArn"))
+    IpAccessSettings.add_member(:ip_rules, Shapes::ShapeRef.new(shape: IpRuleList, location_name: "ipRules"))
+    IpAccessSettings.struct_class = Types::IpAccessSettings
+
+    IpAccessSettingsList.member = Shapes::ShapeRef.new(shape: IpAccessSettingsSummary)
+
+    IpAccessSettingsSummary.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDate"))
+    IpAccessSettingsSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    IpAccessSettingsSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
+    IpAccessSettingsSummary.add_member(:ip_access_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ipAccessSettingsArn"))
+    IpAccessSettingsSummary.struct_class = Types::IpAccessSettingsSummary
+
+    IpRule.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    IpRule.add_member(:ip_range, Shapes::ShapeRef.new(shape: IpRange, required: true, location_name: "ipRange"))
+    IpRule.struct_class = Types::IpRule
+
+    IpRuleList.member = Shapes::ShapeRef.new(shape: IpRule)
+
     ListBrowserSettingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListBrowserSettingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListBrowserSettingsRequest.struct_class = Types::ListBrowserSettingsRequest
@@ -508,6 +587,14 @@ module Aws::WorkSpacesWeb
     ListIdentityProvidersResponse.add_member(:identity_providers, Shapes::ShapeRef.new(shape: IdentityProviderList, location_name: "identityProviders"))
     ListIdentityProvidersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListIdentityProvidersResponse.struct_class = Types::ListIdentityProvidersResponse
+
+    ListIpAccessSettingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListIpAccessSettingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListIpAccessSettingsRequest.struct_class = Types::ListIpAccessSettingsRequest
+
+    ListIpAccessSettingsResponse.add_member(:ip_access_settings, Shapes::ShapeRef.new(shape: IpAccessSettingsList, location_name: "ipAccessSettings"))
+    ListIpAccessSettingsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListIpAccessSettingsResponse.struct_class = Types::ListIpAccessSettingsResponse
 
     ListNetworkSettingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListNetworkSettingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
@@ -583,6 +670,7 @@ module Aws::WorkSpacesWeb
     Portal.add_member(:browser_type, Shapes::ShapeRef.new(shape: BrowserType, location_name: "browserType"))
     Portal.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDate"))
     Portal.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
+    Portal.add_member(:ip_access_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ipAccessSettingsArn"))
     Portal.add_member(:network_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "networkSettingsArn"))
     Portal.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "portalArn"))
     Portal.add_member(:portal_endpoint, Shapes::ShapeRef.new(shape: PortalEndpoint, location_name: "portalEndpoint"))
@@ -601,6 +689,7 @@ module Aws::WorkSpacesWeb
     PortalSummary.add_member(:browser_type, Shapes::ShapeRef.new(shape: BrowserType, location_name: "browserType"))
     PortalSummary.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDate"))
     PortalSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
+    PortalSummary.add_member(:ip_access_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ipAccessSettingsArn"))
     PortalSummary.add_member(:network_settings_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "networkSettingsArn"))
     PortalSummary.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "portalArn"))
     PortalSummary.add_member(:portal_endpoint, Shapes::ShapeRef.new(shape: PortalEndpoint, location_name: "portalEndpoint"))
@@ -684,6 +773,16 @@ module Aws::WorkSpacesWeb
 
     UpdateIdentityProviderResponse.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, required: true, location_name: "identityProvider"))
     UpdateIdentityProviderResponse.struct_class = Types::UpdateIdentityProviderResponse
+
+    UpdateIpAccessSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateIpAccessSettingsRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateIpAccessSettingsRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
+    UpdateIpAccessSettingsRequest.add_member(:ip_access_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "ipAccessSettingsArn"))
+    UpdateIpAccessSettingsRequest.add_member(:ip_rules, Shapes::ShapeRef.new(shape: IpRuleList, location_name: "ipRules"))
+    UpdateIpAccessSettingsRequest.struct_class = Types::UpdateIpAccessSettingsRequest
+
+    UpdateIpAccessSettingsResponse.add_member(:ip_access_settings, Shapes::ShapeRef.new(shape: IpAccessSettings, required: true, location_name: "ipAccessSettings"))
+    UpdateIpAccessSettingsResponse.struct_class = Types::UpdateIpAccessSettingsResponse
 
     UpdateNetworkSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateNetworkSettingsRequest.add_member(:network_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "networkSettingsArn"))
@@ -811,6 +910,20 @@ module Aws::WorkSpacesWeb
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:associate_ip_access_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateIpAccessSettings"
+        o.http_method = "PUT"
+        o.http_request_uri = "/portals/{portalArn+}/ipAccessSettings"
+        o.input = Shapes::ShapeRef.new(shape: AssociateIpAccessSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateIpAccessSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:associate_network_settings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateNetworkSettings"
         o.http_method = "PUT"
@@ -889,6 +1002,20 @@ module Aws::WorkSpacesWeb
         o.output = Shapes::ShapeRef.new(shape: CreateIdentityProviderResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:create_ip_access_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateIpAccessSettings"
+        o.http_method = "POST"
+        o.http_request_uri = "/ipAccessSettings"
+        o.input = Shapes::ShapeRef.new(shape: CreateIpAccessSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateIpAccessSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -993,6 +1120,19 @@ module Aws::WorkSpacesWeb
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:delete_ip_access_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteIpAccessSettings"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/ipAccessSettings/{ipAccessSettingsArn+}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteIpAccessSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteIpAccessSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:delete_network_settings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteNetworkSettings"
         o.http_method = "DELETE"
@@ -1071,6 +1211,19 @@ module Aws::WorkSpacesWeb
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:disassociate_ip_access_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateIpAccessSettings"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/portals/{portalArn+}/ipAccessSettings"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateIpAccessSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateIpAccessSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:disassociate_network_settings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateNetworkSettings"
         o.http_method = "DELETE"
@@ -1142,6 +1295,19 @@ module Aws::WorkSpacesWeb
         o.http_request_uri = "/identityProviders/{identityProviderArn+}"
         o.input = Shapes::ShapeRef.new(shape: GetIdentityProviderRequest)
         o.output = Shapes::ShapeRef.new(shape: GetIdentityProviderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:get_ip_access_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetIpAccessSettings"
+        o.http_method = "GET"
+        o.http_request_uri = "/ipAccessSettings/{ipAccessSettingsArn+}"
+        o.input = Shapes::ShapeRef.new(shape: GetIpAccessSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetIpAccessSettingsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1264,6 +1430,24 @@ module Aws::WorkSpacesWeb
         o.http_request_uri = "/portals/{portalArn+}/identityProviders"
         o.input = Shapes::ShapeRef.new(shape: ListIdentityProvidersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListIdentityProvidersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_ip_access_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListIpAccessSettings"
+        o.http_method = "GET"
+        o.http_request_uri = "/ipAccessSettings"
+        o.input = Shapes::ShapeRef.new(shape: ListIpAccessSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListIpAccessSettingsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1451,6 +1635,19 @@ module Aws::WorkSpacesWeb
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:update_ip_access_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateIpAccessSettings"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/ipAccessSettings/{ipAccessSettingsArn+}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateIpAccessSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateIpAccessSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:update_network_settings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateNetworkSettings"
         o.http_method = "PATCH"
@@ -1475,6 +1672,7 @@ module Aws::WorkSpacesWeb
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_trust_store, Seahorse::Model::Operation.new.tap do |o|

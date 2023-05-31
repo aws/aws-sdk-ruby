@@ -86,7 +86,9 @@ module Aws::RDS
     #
     # @return [self]
     def load
-      resp = @client.describe_db_security_groups(db_security_group_name: @name)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_db_security_groups(db_security_group_name: @name)
+      end
       @data = resp.db_security_groups[0]
       self
     end
@@ -201,7 +203,9 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -237,7 +241,9 @@ module Aws::RDS
     # @return [DBSecurityGroup]
     def authorize_ingress(options = {})
       options = options.merge(db_security_group_name: @name)
-      resp = @client.authorize_db_security_group_ingress(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.authorize_db_security_group_ingress(options)
+      end
       DBSecurityGroup.new(
         name: resp.data.db_security_group.db_security_group_name,
         data: resp.data.db_security_group,
@@ -264,7 +270,9 @@ module Aws::RDS
     # @return [DBSecurityGroup]
     def create(options = {})
       options = options.merge(db_security_group_name: @name)
-      resp = @client.create_db_security_group(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_db_security_group(options)
+      end
       DBSecurityGroup.new(
         name: resp.data.db_security_group.db_security_group_name,
         data: resp.data.db_security_group,
@@ -279,7 +287,9 @@ module Aws::RDS
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(db_security_group_name: @name)
-      resp = @client.delete_db_security_group(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_db_security_group(options)
+      end
       resp.data
     end
 
@@ -316,7 +326,9 @@ module Aws::RDS
     # @return [DBSecurityGroup]
     def revoke_ingress(options = {})
       options = options.merge(db_security_group_name: @name)
-      resp = @client.revoke_db_security_group_ingress(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.revoke_db_security_group_ingress(options)
+      end
       DBSecurityGroup.new(
         name: resp.data.db_security_group.db_security_group_name,
         data: resp.data.db_security_group,
@@ -336,7 +348,9 @@ module Aws::RDS
     # @return [EventSubscription]
     def subscribe_to(options = {})
       options = options.merge(source_identifier: @name)
-      resp = @client.add_source_identifier_to_subscription(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.add_source_identifier_to_subscription(options)
+      end
       EventSubscription.new(
         name: resp.data.event_subscription.cust_subscription_id,
         data: resp.data.event_subscription,
@@ -356,7 +370,9 @@ module Aws::RDS
     # @return [EventSubscription]
     def unsubscribe_from(options = {})
       options = options.merge(source_identifier: @name)
-      resp = @client.remove_source_identifier_from_subscription(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.remove_source_identifier_from_subscription(options)
+      end
       EventSubscription.new(
         name: resp.data.event_subscription.cust_subscription_id,
         data: resp.data.event_subscription,
@@ -417,7 +433,9 @@ module Aws::RDS
           source_type: "db-security-group",
           source_identifier: @name
         )
-        resp = @client.describe_events(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_events(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.events.each do |e|

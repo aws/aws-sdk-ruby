@@ -54,10 +54,12 @@ module Aws::SQS
     #
     # @return [self]
     def load
-      resp = @client.get_queue_attributes(
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.get_queue_attributes(
         queue_url: @url,
         attribute_names: ["All"]
       )
+      end
       @data = resp.data
       self
     end
@@ -123,7 +125,9 @@ module Aws::SQS
     # @return [EmptyStructure]
     def add_permission(options = {})
       options = options.merge(queue_url: @url)
-      resp = @client.add_permission(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.add_permission(options)
+      end
       resp.data
     end
 
@@ -145,7 +149,9 @@ module Aws::SQS
     # @return [Types::ChangeMessageVisibilityBatchResult]
     def change_message_visibility_batch(options = {})
       options = options.merge(queue_url: @url)
-      resp = @client.change_message_visibility_batch(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.change_message_visibility_batch(options)
+      end
       resp.data
     end
 
@@ -156,7 +162,9 @@ module Aws::SQS
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(queue_url: @url)
-      resp = @client.delete_queue(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_queue(options)
+      end
       resp.data
     end
 
@@ -176,7 +184,9 @@ module Aws::SQS
     # @return [Types::DeleteMessageBatchResult]
     def delete_messages(options = {})
       options = options.merge(queue_url: @url)
-      resp = @client.delete_message_batch(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_message_batch(options)
+      end
       resp.data
     end
 
@@ -187,7 +197,9 @@ module Aws::SQS
     # @return [EmptyStructure]
     def purge(options = {})
       options = options.merge(queue_url: @url)
-      resp = @client.purge_queue(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.purge_queue(options)
+      end
       resp.data
     end
 
@@ -359,7 +371,9 @@ module Aws::SQS
     def receive_messages(options = {})
       batch = []
       options = options.merge(queue_url: @url)
-      resp = @client.receive_message(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.receive_message(options)
+      end
       resp.data.messages.each do |m|
         batch << Message.new(
           queue_url: @url,
@@ -383,7 +397,9 @@ module Aws::SQS
     # @return [EmptyStructure]
     def remove_permission(options = {})
       options = options.merge(queue_url: @url)
-      resp = @client.remove_permission(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.remove_permission(options)
+      end
       resp.data
     end
 
@@ -555,7 +571,9 @@ module Aws::SQS
     # @return [Types::SendMessageResult]
     def send_message(options = {})
       options = options.merge(queue_url: @url)
-      resp = @client.send_message(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.send_message(options)
+      end
       resp.data
     end
 
@@ -596,7 +614,9 @@ module Aws::SQS
     # @return [Types::SendMessageBatchResult]
     def send_messages(options = {})
       options = options.merge(queue_url: @url)
-      resp = @client.send_message_batch(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.send_message_batch(options)
+      end
       resp.data
     end
 
@@ -765,7 +785,9 @@ module Aws::SQS
     # @return [EmptyStructure]
     def set_attributes(options = {})
       options = options.merge(queue_url: @url)
-      resp = @client.set_queue_attributes(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.set_queue_attributes(options)
+      end
       resp.data
     end
 
@@ -779,7 +801,9 @@ module Aws::SQS
     def dead_letter_source_queues(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(queue_url: @url)
-        resp = @client.list_dead_letter_source_queues(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.list_dead_letter_source_queues(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.queue_urls.each do |q|

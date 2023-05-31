@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.180.0 (2023-05-31)
+------------------
+
+* Feature - This release adds support for changing the engine for Oracle using the ModifyDbInstance API
+
 1.179.0 (2023-05-18)
 ------------------
 

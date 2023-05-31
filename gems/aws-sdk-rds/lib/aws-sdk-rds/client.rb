@@ -277,6 +277,11 @@ module Aws::RDS
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -2989,6 +2994,16 @@ module Aws::RDS
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
+    #   For more information on storage types for Aurora DB clusters, see
+    #   [Storage configurations for Amazon Aurora DB clusters][1]. For more
+    #   information on storage types for Multi-AZ DB clusters, see [Settings
+    #   for creating Multi-AZ DB clusters][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.StorageReliability.html#aurora-storage-type
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/create-multi-az-db-cluster.html#create-multi-az-db-cluster-settings
+    #
     # @option params [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
     #   be initially allocated for each DB instance in the Multi-AZ DB
@@ -5401,6 +5416,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -6255,6 +6271,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -8533,6 +8550,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -11720,6 +11738,7 @@ module Aws::RDS
     #   resp.db_instances[0].pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instances[0].pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instances[0].pending_modified_values.storage_throughput #=> Integer
+    #   resp.db_instances[0].pending_modified_values.engine #=> String
     #   resp.db_instances[0].latest_restorable_time #=> Time
     #   resp.db_instances[0].multi_az #=> Boolean
     #   resp.db_instances[0].engine_version #=> String
@@ -18402,6 +18421,34 @@ module Aws::RDS
     #   Amazon Web Services account has a different default KMS key for each
     #   Amazon Web Services Region.
     #
+    # @option params [String] :engine
+    #   The target Oracle DB engine when you convert a non-CDB to a CDB. This
+    #   intermediate step is necessary to upgrade an Oracle Database 19c
+    #   non-CDB to an Oracle Database 21c CDB.
+    #
+    #   Note the following requirements:
+    #
+    #   * Make sure that you specify `oracle-ee-cdb` or `oracle-se2-cdb`.
+    #
+    #   * Make sure that your DB engine runs Oracle Database 19c with an April
+    #     2021 or later RU.
+    #
+    #   Note the following limitations:
+    #
+    #   * You can't convert a CDB to a non-CDB.
+    #
+    #   * You can't convert a replica database.
+    #
+    #   * You can't convert a non-CDB to a CDB and upgrade the engine version
+    #     in the same command.
+    #
+    #   * You can't convert the existing custom parameter or option group
+    #     when it has options or parameters that are permanent or persistent.
+    #     In this situation, the DB instance reverts to the default option and
+    #     parameter group. To avoid reverting to the default, specify a new
+    #     parameter group with `--db-parameter-group-name` and a new option
+    #     group with `--option-group-name`.
+    #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -18520,6 +18567,7 @@ module Aws::RDS
     #     manage_master_user_password: false,
     #     rotate_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
+    #     engine: "String",
     #   })
     #
     # @example Response structure
@@ -18585,6 +18633,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -19047,12 +19096,6 @@ module Aws::RDS
     #   ^
     #
     #   **Oracle**
-    #
-    #   * `19.0.0.0.ru-2022-01.rur-2022-01.r1` (supported for 12.2.0.1 DB
-    #     snapshots)
-    #
-    #   * `19.0.0.0.ru-2022-07.rur-2022-07.r1` (supported for 12.1.0.2 DB
-    #     snapshots)
     #
     #   * `12.1.0.2.v8` (supported for 12.1.0.1 DB snapshots)
     #
@@ -19990,6 +20033,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -20644,6 +20688,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -23924,6 +23969,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -24651,6 +24697,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -25417,6 +25464,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -25999,6 +26047,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -26808,6 +26857,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -27307,6 +27357,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.engine #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -27418,7 +27469,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.179.0'
+      context[:gem_version] = '1.180.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

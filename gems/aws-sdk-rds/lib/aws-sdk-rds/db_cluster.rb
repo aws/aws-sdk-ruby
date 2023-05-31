@@ -687,7 +687,9 @@ module Aws::RDS
     #
     # @return [self]
     def load
-      resp = @client.describe_db_clusters(db_cluster_identifier: @id)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_db_clusters(db_cluster_identifier: @id)
+      end
       @data = resp.db_clusters[0]
       self
     end
@@ -802,7 +804,9 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -1393,6 +1397,16 @@ module Aws::RDS
     #   Default: `aurora` (Aurora DB clusters); `io1` (Multi-AZ DB clusters)
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   For more information on storage types for Aurora DB clusters, see
+    #   [Storage configurations for Amazon Aurora DB clusters][1]. For more
+    #   information on storage types for Multi-AZ DB clusters, see [Settings
+    #   for creating Multi-AZ DB clusters][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.StorageReliability.html#aurora-storage-type
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/create-multi-az-db-cluster.html#create-multi-az-db-cluster-settings
     # @option options [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
     #   be initially allocated for each DB instance in the Multi-AZ DB
@@ -1613,7 +1627,9 @@ module Aws::RDS
     # @return [DBCluster]
     def create(options = {})
       options = options.merge(db_cluster_identifier: @id)
-      resp = @client.create_db_cluster(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_db_cluster(options)
+      end
       DBCluster.new(
         id: resp.data.db_cluster.db_cluster_identifier,
         data: resp.data.db_cluster,
@@ -1651,7 +1667,9 @@ module Aws::RDS
     # @return [DBClusterSnapshot]
     def create_snapshot(options = {})
       options = options.merge(db_cluster_identifier: @id)
-      resp = @client.create_db_cluster_snapshot(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_db_cluster_snapshot(options)
+      end
       DBClusterSnapshot.new(
         cluster_id: resp.data.db_cluster_snapshot.db_cluster_identifier,
         snapshot_id: resp.data.db_cluster_snapshot.db_cluster_snapshot_identifier,
@@ -1699,7 +1717,9 @@ module Aws::RDS
     # @return [DBCluster]
     def delete(options = {})
       options = options.merge(db_cluster_identifier: @id)
-      resp = @client.delete_db_cluster(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_db_cluster(options)
+      end
       DBCluster.new(
         id: resp.data.db_cluster.db_cluster_identifier,
         data: resp.data.db_cluster,
@@ -1724,7 +1744,9 @@ module Aws::RDS
     # @return [DBCluster]
     def failover(options = {})
       options = options.merge(db_cluster_identifier: @id)
-      resp = @client.failover_db_cluster(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.failover_db_cluster(options)
+      end
       DBCluster.new(
         id: resp.data.db_cluster.db_cluster_identifier,
         data: resp.data.db_cluster,
@@ -2382,7 +2404,9 @@ module Aws::RDS
     # @return [DBCluster]
     def modify(options = {})
       options = options.merge(db_cluster_identifier: @id)
-      resp = @client.modify_db_cluster(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.modify_db_cluster(options)
+      end
       DBCluster.new(
         id: resp.data.db_cluster.db_cluster_identifier,
         data: resp.data.db_cluster,
@@ -2791,7 +2815,9 @@ module Aws::RDS
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(source_db_cluster_identifier: @id)
-      resp = @client.restore_db_cluster_to_point_in_time(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.restore_db_cluster_to_point_in_time(options)
+      end
       DBCluster.new(
         id: resp.data.db_cluster.db_cluster_identifier,
         data: resp.data.db_cluster,
@@ -2852,7 +2878,9 @@ module Aws::RDS
           source_type: "db-cluster",
           source_identifier: @id
         )
-        resp = @client.describe_events(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_events(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.events.each do |e|
@@ -2995,7 +3023,9 @@ module Aws::RDS
     def snapshots(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(db_cluster_identifier: @id)
-        resp = @client.describe_db_cluster_snapshots(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_db_cluster_snapshots(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.db_cluster_snapshots.each do |d|

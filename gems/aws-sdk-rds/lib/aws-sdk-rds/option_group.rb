@@ -119,7 +119,9 @@ module Aws::RDS
     #
     # @return [self]
     def load
-      resp = @client.describe_option_groups(option_group_name: @name)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_option_groups(option_group_name: @name)
+      end
       @data = resp.option_groups_list[0]
       self
     end
@@ -234,7 +236,9 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -290,7 +294,9 @@ module Aws::RDS
     # @return [OptionGroup]
     def create(options = {})
       options = options.merge(option_group_name: @name)
-      resp = @client.create_option_group(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_option_group(options)
+      end
       OptionGroup.new(
         name: resp.data.option_group.option_group_name,
         data: resp.data.option_group,
@@ -337,7 +343,9 @@ module Aws::RDS
     # @return [OptionGroup]
     def copy(options = {})
       options = options.merge(source_option_group_identifier: @name)
-      resp = @client.copy_option_group(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.copy_option_group(options)
+      end
       OptionGroup.new(
         name: resp.data.option_group.option_group_name,
         data: resp.data.option_group,
@@ -352,7 +360,9 @@ module Aws::RDS
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(option_group_name: @name)
-      resp = @client.delete_option_group(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_option_group(options)
+      end
       resp.data
     end
 
@@ -398,7 +408,9 @@ module Aws::RDS
     # @return [OptionGroup]
     def modify(options = {})
       options = options.merge(option_group_name: @name)
-      resp = @client.modify_option_group(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.modify_option_group(options)
+      end
       OptionGroup.new(
         name: resp.data.option_group.option_group_name,
         data: resp.data.option_group,

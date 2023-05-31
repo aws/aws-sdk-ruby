@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2023-05-31)
+------------------
+
+* Feature - WorkSpaces Web now allows you to control which IP addresses your WorkSpaces Web portal may be accessed from.
+
 1.8.0 (2023-01-18)
 ------------------
 

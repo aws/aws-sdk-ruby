@@ -115,10 +115,12 @@ module Aws::AutoScaling
     #
     # @return [self]
     def load
-      resp = @client.describe_lifecycle_hooks(
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_lifecycle_hooks(
         auto_scaling_group_name: @group_name,
         lifecycle_hook_names: [@name]
       )
+      end
       @data = resp.lifecycle_hooks[0]
       self
     end
@@ -233,7 +235,9 @@ module Aws::AutoScaling
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -262,7 +266,9 @@ module Aws::AutoScaling
         auto_scaling_group_name: @group_name,
         lifecycle_hook_name: @name
       )
-      resp = @client.complete_lifecycle_action(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.complete_lifecycle_action(options)
+      end
       resp.data
     end
 
@@ -276,7 +282,9 @@ module Aws::AutoScaling
         auto_scaling_group_name: @group_name,
         lifecycle_hook_name: @name
       )
-      resp = @client.delete_lifecycle_hook(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_lifecycle_hook(options)
+      end
       resp.data
     end
 
@@ -344,7 +352,9 @@ module Aws::AutoScaling
         auto_scaling_group_name: @group_name,
         lifecycle_hook_name: @name
       )
-      resp = @client.put_lifecycle_hook(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.put_lifecycle_hook(options)
+      end
       resp.data
     end
 
@@ -368,7 +378,9 @@ module Aws::AutoScaling
         auto_scaling_group_name: @group_name,
         lifecycle_hook_name: @name
       )
-      resp = @client.record_lifecycle_action_heartbeat(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.record_lifecycle_action_heartbeat(options)
+      end
       resp.data
     end
 

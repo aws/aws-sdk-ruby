@@ -133,7 +133,9 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = @client.describe_addresses(allocation_ids: [@allocation_id])
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_addresses(allocation_ids: [@allocation_id])
+      end
       @data = resp.addresses[0]
       self
     end
@@ -248,7 +250,9 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -299,7 +303,9 @@ module Aws::EC2
     # @return [Types::AssociateAddressResult]
     def associate(options = {})
       options = options.merge(allocation_id: @allocation_id)
-      resp = @client.associate_address(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.associate_address(options)
+      end
       resp.data
     end
 
@@ -331,7 +337,9 @@ module Aws::EC2
     # @return [EmptyStructure]
     def release(options = {})
       options = options.merge(allocation_id: data[:allocation_id])
-      resp = @client.release_address(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.release_address(options)
+      end
       resp.data
     end
 

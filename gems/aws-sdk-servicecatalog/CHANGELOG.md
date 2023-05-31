@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2023-05-31)
+------------------
+
+* Feature - Documentation updates for ServiceCatalog.
+
 1.79.0 (2023-04-07)
 ------------------
 

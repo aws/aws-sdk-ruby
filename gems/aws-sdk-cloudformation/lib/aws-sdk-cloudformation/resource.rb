@@ -317,7 +317,9 @@ module Aws::CloudFormation
     #   [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
     # @return [Stack]
     def create_stack(options = {})
-      @client.create_stack(options)
+      Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_stack(options)
+      end
       Stack.new(
         name: options[:stack_name],
         client: @client
@@ -363,7 +365,9 @@ module Aws::CloudFormation
     # @return [Stack::Collection]
     def stacks(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_stacks(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_stacks(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.stacks.each do |s|

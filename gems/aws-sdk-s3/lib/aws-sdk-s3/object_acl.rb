@@ -75,10 +75,12 @@ module Aws::S3
     #
     # @return [self]
     def load
-      resp = @client.get_object_acl(
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.get_object_acl(
         bucket: @bucket_name,
         key: @object_key
       )
+      end
       @data = resp.data
       self
     end
@@ -193,7 +195,9 @@ module Aws::S3
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -314,7 +318,9 @@ module Aws::S3
         bucket: @bucket_name,
         key: @object_key
       )
-      resp = @client.put_object_acl(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.put_object_acl(options)
+      end
       resp.data
     end
 

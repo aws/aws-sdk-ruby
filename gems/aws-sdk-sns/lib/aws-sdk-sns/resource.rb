@@ -61,7 +61,9 @@ module Aws::SNS
     #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html
     # @return [PlatformApplication]
     def create_platform_application(options = {})
-      resp = @client.create_platform_application(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_platform_application(options)
+      end
       PlatformApplication.new(
         arn: resp.data.platform_application_arn,
         client: @client
@@ -176,7 +178,9 @@ module Aws::SNS
     #   Length Constraints: Maximum length of 30,720.
     # @return [Topic]
     def create_topic(options = {})
-      resp = @client.create_topic(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_topic(options)
+      end
       Topic.new(
         arn: resp.data.topic_arn,
         client: @client
@@ -201,7 +205,9 @@ module Aws::SNS
     # @return [PlatformApplication::Collection]
     def platform_applications(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.list_platform_applications(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.list_platform_applications(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.platform_applications.each do |p|
@@ -241,7 +247,9 @@ module Aws::SNS
     # @return [Subscription::Collection]
     def subscriptions(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.list_subscriptions(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.list_subscriptions(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.subscriptions.each do |s|
@@ -272,7 +280,9 @@ module Aws::SNS
     # @return [Topic::Collection]
     def topics(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.list_topics(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.list_topics(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.topics.each do |t|

@@ -45,7 +45,9 @@ module Aws::IAM
     #
     # @return [self]
     def load
-      resp = @client.get_account_summary
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.get_account_summary
+      end
       @data = resp.data
       self
     end
@@ -160,7 +162,9 @@ module Aws::IAM
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @deprecated

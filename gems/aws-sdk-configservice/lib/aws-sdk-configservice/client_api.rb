@@ -238,6 +238,7 @@ module Aws::ConfigService
     Evaluations = Shapes::ListShape.new(name: 'Evaluations')
     EventSource = Shapes::StringShape.new(name: 'EventSource')
     ExcludedAccounts = Shapes::ListShape.new(name: 'ExcludedAccounts')
+    ExclusionByResourceTypes = Shapes::StructureShape.new(name: 'ExclusionByResourceTypes')
     ExecutionControls = Shapes::StructureShape.new(name: 'ExecutionControls')
     Expression = Shapes::StringShape.new(name: 'Expression')
     ExternalEvaluation = Shapes::StructureShape.new(name: 'ExternalEvaluation')
@@ -435,6 +436,8 @@ module Aws::ConfigService
     RecorderName = Shapes::StringShape.new(name: 'RecorderName')
     RecorderStatus = Shapes::StringShape.new(name: 'RecorderStatus')
     RecordingGroup = Shapes::StructureShape.new(name: 'RecordingGroup')
+    RecordingStrategy = Shapes::StructureShape.new(name: 'RecordingStrategy')
+    RecordingStrategyType = Shapes::StringShape.new(name: 'RecordingStrategyType')
     ReevaluateConfigRuleNames = Shapes::ListShape.new(name: 'ReevaluateConfigRuleNames')
     RelatedEvent = Shapes::StringShape.new(name: 'RelatedEvent')
     RelatedEventList = Shapes::ListShape.new(name: 'RelatedEventList')
@@ -1287,6 +1290,9 @@ module Aws::ConfigService
 
     ExcludedAccounts.member = Shapes::ShapeRef.new(shape: AccountId)
 
+    ExclusionByResourceTypes.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypeList, location_name: "resourceTypes"))
+    ExclusionByResourceTypes.struct_class = Types::ExclusionByResourceTypes
+
     ExecutionControls.add_member(:ssm_controls, Shapes::ShapeRef.new(shape: SsmControls, location_name: "SsmControls"))
     ExecutionControls.struct_class = Types::ExecutionControls
 
@@ -1905,7 +1911,12 @@ module Aws::ConfigService
     RecordingGroup.add_member(:all_supported, Shapes::ShapeRef.new(shape: AllSupported, location_name: "allSupported"))
     RecordingGroup.add_member(:include_global_resource_types, Shapes::ShapeRef.new(shape: IncludeGlobalResourceTypes, location_name: "includeGlobalResourceTypes"))
     RecordingGroup.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypeList, location_name: "resourceTypes"))
+    RecordingGroup.add_member(:exclusion_by_resource_types, Shapes::ShapeRef.new(shape: ExclusionByResourceTypes, location_name: "exclusionByResourceTypes"))
+    RecordingGroup.add_member(:recording_strategy, Shapes::ShapeRef.new(shape: RecordingStrategy, location_name: "recordingStrategy"))
     RecordingGroup.struct_class = Types::RecordingGroup
+
+    RecordingStrategy.add_member(:use_only, Shapes::ShapeRef.new(shape: RecordingStrategyType, location_name: "useOnly"))
+    RecordingStrategy.struct_class = Types::RecordingStrategy
 
     ReevaluateConfigRuleNames.member = Shapes::ShapeRef.new(shape: ConfigRuleName)
 

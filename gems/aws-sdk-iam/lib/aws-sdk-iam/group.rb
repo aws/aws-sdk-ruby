@@ -95,7 +95,9 @@ module Aws::IAM
     #
     # @return [self]
     def load
-      resp = @client.get_group(group_name: @name)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.get_group(group_name: @name)
+      end
       @data = resp.group
       self
     end
@@ -210,7 +212,9 @@ module Aws::IAM
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -235,7 +239,9 @@ module Aws::IAM
     # @return [EmptyStructure]
     def add_user(options = {})
       options = options.merge(group_name: @name)
-      resp = @client.add_user_to_group(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.add_user_to_group(options)
+      end
       resp.data
     end
 
@@ -257,7 +263,9 @@ module Aws::IAM
     # @return [EmptyStructure]
     def attach_policy(options = {})
       options = options.merge(group_name: @name)
-      resp = @client.attach_group_policy(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.attach_group_policy(options)
+      end
       resp.data
     end
 
@@ -288,7 +296,9 @@ module Aws::IAM
     # @return [Group]
     def create(options = {})
       options = options.merge(group_name: @name)
-      resp = @client.create_group(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_group(options)
+      end
       Group.new(
         name: options[:group_name],
         data: resp.data.group,
@@ -340,7 +350,9 @@ module Aws::IAM
     # @return [GroupPolicy]
     def create_policy(options = {})
       options = options.merge(group_name: @name)
-      @client.put_group_policy(options)
+      Aws::Plugins::UserAgent.feature('resource') do
+        @client.put_group_policy(options)
+      end
       GroupPolicy.new(
         group_name: @name,
         name: options[:policy_name],
@@ -355,7 +367,9 @@ module Aws::IAM
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(group_name: @name)
-      resp = @client.delete_group(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_group(options)
+      end
       resp.data
     end
 
@@ -377,7 +391,9 @@ module Aws::IAM
     # @return [EmptyStructure]
     def detach_policy(options = {})
       options = options.merge(group_name: @name)
-      resp = @client.detach_group_policy(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.detach_group_policy(options)
+      end
       resp.data
     end
 
@@ -401,7 +417,9 @@ module Aws::IAM
     # @return [EmptyStructure]
     def remove_user(options = {})
       options = options.merge(group_name: @name)
-      resp = @client.remove_user_from_group(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.remove_user_from_group(options)
+      end
       resp.data
     end
 
@@ -436,7 +454,9 @@ module Aws::IAM
     # @return [Group]
     def update(options = {})
       options = options.merge(group_name: @name)
-      @client.update_group(options)
+      Aws::Plugins::UserAgent.feature('resource') do
+        @client.update_group(options)
+      end
       Group.new(
         name: options[:new_group_name],
         client: @client
@@ -470,7 +490,9 @@ module Aws::IAM
     def attached_policies(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(group_name: @name)
-        resp = @client.list_attached_group_policies(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.list_attached_group_policies(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.attached_policies.each do |a|
@@ -493,7 +515,9 @@ module Aws::IAM
     def policies(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(group_name: @name)
-        resp = @client.list_group_policies(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.list_group_policies(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.policy_names.each do |p|
@@ -527,7 +551,9 @@ module Aws::IAM
     def users(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(group_name: @name)
-        resp = @client.get_group(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.get_group(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.users.each do |u|

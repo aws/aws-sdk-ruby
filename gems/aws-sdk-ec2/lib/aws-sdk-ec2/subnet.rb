@@ -182,7 +182,9 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = @client.describe_subnets(subnet_ids: [@id])
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_subnets(subnet_ids: [@id])
+      end
       @data = resp.subnets[0]
       self
     end
@@ -297,7 +299,9 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -821,7 +825,9 @@ module Aws::EC2
     def create_instances(options = {})
       batch = []
       options = options.merge(subnet_id: @id)
-      resp = @client.run_instances(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.run_instances(options)
+      end
       resp.data.instances.each do |i|
         batch << Instance.new(
           id: i.instance_id,
@@ -970,7 +976,9 @@ module Aws::EC2
     # @return [NetworkInterface]
     def create_network_interface(options = {})
       options = options.merge(subnet_id: @id)
-      resp = @client.create_network_interface(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_network_interface(options)
+      end
       NetworkInterface.new(
         id: resp.data.network_interface.network_interface_id,
         data: resp.data.network_interface,
@@ -1003,7 +1011,9 @@ module Aws::EC2
     def create_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = @client.create_tags(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_tags(options)
+      end
       options[:tags].each do |t|
         batch << Tag.new(
           resource_id: @id,
@@ -1048,7 +1058,9 @@ module Aws::EC2
     def delete_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = @client.delete_tags(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_tags(options)
+      end
       options[:tags].each do |t|
         batch << Tag.new(
           resource_id: @id,
@@ -1074,7 +1086,9 @@ module Aws::EC2
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(subnet_id: @id)
-      resp = @client.delete_subnet(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_subnet(options)
+      end
       resp.data
     end
 
@@ -1389,7 +1403,9 @@ module Aws::EC2
           name: "subnet-id",
           values: [@id]
         }])
-        resp = @client.describe_instances(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_instances(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.reservations.each do |r|
@@ -1455,7 +1471,9 @@ module Aws::EC2
           name: "subnet-id",
           values: [@id]
         }])
-        resp = @client.describe_nat_gateways(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_nat_gateways(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.nat_gateways.each do |n|
@@ -1617,7 +1635,9 @@ module Aws::EC2
           name: "subnet-id",
           values: [@id]
         }])
-        resp = @client.describe_network_interfaces(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_network_interfaces(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.network_interfaces.each do |n|

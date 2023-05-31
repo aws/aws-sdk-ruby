@@ -92,7 +92,9 @@ module Aws::RDS
     #
     # @return [self]
     def load
-      resp = @client.describe_certificates(certificate_identifier: @id)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_certificates(certificate_identifier: @id)
+      end
       @data = resp.certificates[0]
       self
     end
@@ -207,7 +209,9 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @deprecated

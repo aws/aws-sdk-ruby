@@ -69,6 +69,11 @@ module Aws::HealthLake
     #   Resource tags that are applied to a Data Store when it is created.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] identity_provider_configuration
+    #   The configuration of the identity provider that you want to use for
+    #   your Data Store.
+    #   @return [Types::IdentityProviderConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/CreateFHIRDatastoreRequest AWS API Documentation
     #
     class CreateFHIRDatastoreRequest < Struct.new(
@@ -77,7 +82,8 @@ module Aws::HealthLake
       :sse_configuration,
       :preload_data_config,
       :client_token,
-      :tags)
+      :tags,
+      :identity_provider_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -88,9 +94,9 @@ module Aws::HealthLake
     #   @return [String]
     #
     # @!attribute [rw] datastore_arn
-    #   The datastore ARN is generated during the creation of the Data Store
-    #   and can be found in the output from the initial Data Store creation
-    #   call.
+    #   The Data Store ARN is generated during the creation of the Data
+    #   Store and can be found in the output from the initial Data Store
+    #   creation call.
     #   @return [String]
     #
     # @!attribute [rw] datastore_status
@@ -99,8 +105,7 @@ module Aws::HealthLake
     #   @return [String]
     #
     # @!attribute [rw] datastore_endpoint
-    #   The AWS endpoint for the created Data Store. For preview, only
-    #   US-east-1 endpoints are supported.
+    #   The AWS endpoint for the created Data Store.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/CreateFHIRDatastoreResponse AWS API Documentation
@@ -147,7 +152,7 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # Displays the properties of the Data Store, including the ID, Arn,
+    # Displays the properties of the Data Store, including the ID, ARN,
     # name, and the status of the Data Store.
     #
     # @!attribute [rw] datastore_id
@@ -190,6 +195,11 @@ module Aws::HealthLake
     #   preloaded from Synthea is supported.
     #   @return [Types::PreloadDataConfig]
     #
+    # @!attribute [rw] identity_provider_configuration
+    #   The identity provider that you selected when you created the Data
+    #   Store.
+    #   @return [Types::IdentityProviderConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DatastoreProperties AWS API Documentation
     #
     class DatastoreProperties < Struct.new(
@@ -201,7 +211,8 @@ module Aws::HealthLake
       :datastore_type_version,
       :datastore_endpoint,
       :sse_configuration,
-      :preload_data_config)
+      :preload_data_config,
+      :identity_provider_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -249,8 +260,7 @@ module Aws::HealthLake
     end
 
     # @!attribute [rw] datastore_id
-    #   The AWS-generated Data Store id. This is part of the
-    #   ‘CreateFHIRDatastore’ output.
+    #   The AWS-generated Data Store ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DescribeFHIRDatastoreRequest AWS API Documentation
@@ -395,6 +405,65 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
+    # The identity provider configuration that you gave when the Data Store
+    # was created.
+    #
+    # @!attribute [rw] authorization_strategy
+    #   The authorization strategy that you selected when you created the
+    #   Data Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] fine_grained_authorization_enabled
+    #   If you enabled fine-grained authorization when you created the Data
+    #   Store.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] metadata
+    #   The JSON metadata elements that you want to use in your identity
+    #   provider configuration. Required elements are listed based on the
+    #   launch specification of the SMART application. For more information
+    #   on all possible elements, see [Metadata][1] in SMART's App Launch
+    #   specification.
+    #
+    #   `authorization_endpoint`: The URL to the OAuth2 authorization
+    #   endpoint.
+    #
+    #   `grant_types_supported`: An array of grant types that are supported
+    #   at the token endpoint. You must provide at least one grant type
+    #   option. Valid options are `authorization_code` and
+    #   `client_credentials`.
+    #
+    #   `token_endpoint`: The URL to the OAuth2 token endpoint.
+    #
+    #   `capabilities`: An array of strings of the SMART capabilities that
+    #   the authorization server supports.
+    #
+    #   `code_challenge_methods_supported`: An array of strings of supported
+    #   PKCE code challenge methods. You must include the `S256` method in
+    #   the array of PKCE code challenge methods.
+    #
+    #
+    #
+    #   [1]: https://build.fhir.org/ig/HL7/smart-app-launch/conformance.html#metadata
+    #   @return [String]
+    #
+    # @!attribute [rw] idp_lambda_arn
+    #   The Amazon Resource Name (ARN) of the Lambda function that you want
+    #   to use to decode the access token created by the authorization
+    #   server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/IdentityProviderConfiguration AWS API Documentation
+    #
+    class IdentityProviderConfiguration < Struct.new(
+      :authorization_strategy,
+      :fine_grained_authorization_enabled,
+      :metadata,
+      :idp_lambda_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Displays the properties of the import job, including the ID, Arn,
     # Name, and the status of the Data Store.
     #
@@ -408,7 +477,7 @@ module Aws::HealthLake
     #
     # @!attribute [rw] job_status
     #   The job status for an Import job. Possible statuses are SUBMITTED,
-    #   IN\_PROGRESS, COMPLETED, FAILED.
+    #   IN\_PROGRESS, COMPLETED\_WITH\_ERRORS, COMPLETED, FAILED.
     #   @return [String]
     #
     # @!attribute [rw] submit_time
@@ -947,7 +1016,7 @@ module Aws::HealthLake
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value portion of tag. Tag values are case sensitive.
+    #   The value portion of a tag. Tag values are case sensitive.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/Tag AWS API Documentation

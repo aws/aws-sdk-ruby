@@ -166,7 +166,9 @@ module Aws::AutoScaling
     #
     # @return [self]
     def load
-      resp = @client.describe_policies(policy_names: [@name])
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_policies(policy_names: [@name])
+      end
       @data = resp.scaling_policies[0]
       self
     end
@@ -281,7 +283,9 @@ module Aws::AutoScaling
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -297,7 +301,9 @@ module Aws::AutoScaling
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(policy_name: @name)
-      resp = @client.delete_policy(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_policy(options)
+      end
       resp.data
     end
 
@@ -343,7 +349,9 @@ module Aws::AutoScaling
     # @return [EmptyStructure]
     def execute(options = {})
       options = options.merge(policy_name: @name)
-      resp = @client.execute_policy(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.execute_policy(options)
+      end
       resp.data
     end
 

@@ -267,7 +267,9 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -296,7 +298,9 @@ module Aws::EC2
         route_table_id: @route_table_id,
         destination_cidr_block: @destination_cidr_block
       )
-      resp = @client.delete_route(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_route(options)
+      end
       resp.data
     end
 
@@ -363,7 +367,9 @@ module Aws::EC2
         route_table_id: @route_table_id,
         destination_cidr_block: @destination_cidr_block
       )
-      resp = @client.replace_route(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.replace_route(options)
+      end
       resp.data
     end
 

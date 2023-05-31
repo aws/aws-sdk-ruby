@@ -1704,6 +1704,21 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
+    # The event orchestration status.
+    #
+    # @!attribute [rw] event_bridge_enabled
+    #   Specifies if event orchestration is enabled through Amazon
+    #   EventBridge.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/EventOrchestration AWS API Documentation
+    #
+    class EventOrchestration < Struct.new(
+      :event_bridge_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the summary of an event prediction.
     #
     # @!attribute [rw] event_id
@@ -1789,6 +1804,10 @@ module Aws::FraudDetector
     #   The entity type ARN.
     #   @return [String]
     #
+    # @!attribute [rw] event_orchestration
+    #   The event orchestration status.
+    #   @return [Types::EventOrchestration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/EventType AWS API Documentation
     #
     class EventType < Struct.new(
@@ -1801,7 +1820,8 @@ module Aws::FraudDetector
       :ingested_event_statistics,
       :last_updated_time,
       :created_time,
-      :arn)
+      :arn,
+      :event_orchestration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3178,7 +3198,7 @@ module Aws::FraudDetector
     #     “Fraud”. This is recommended when most of the events in your
     #     dataset are fraudulent.
     #
-    #   * Use `LEGIT` f you want to categorize all unlabeled events as
+    #   * Use `LEGIT` if you want to categorize all unlabeled events as
     #     “Legit”. This is recommended when most of the events in your
     #     dataset are legitimate.
     #
@@ -3886,12 +3906,18 @@ module Aws::FraudDetector
     #   @return [Array<String>]
     #
     # @!attribute [rw] event_ingestion
-    #   Specifies if ingenstion is enabled or disabled.
+    #   Specifies if ingestion is enabled or disabled.
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   A collection of key and value pairs.
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] event_orchestration
+    #   Enables or disables event orchestration. If enabled, you can send
+    #   event predictions to select AWS services for downstream processing
+    #   of the events.
+    #   @return [Types::EventOrchestration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/PutEventTypeRequest AWS API Documentation
     #
@@ -3902,7 +3928,8 @@ module Aws::FraudDetector
       :labels,
       :entity_types,
       :event_ingestion,
-      :tags)
+      :tags,
+      :event_orchestration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3985,6 +4012,7 @@ module Aws::FraudDetector
     #   @return [String]
     #
     # @!attribute [rw] tags
+    #   A collection of key and value pairs.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/PutLabelRequest AWS API Documentation
@@ -4470,7 +4498,7 @@ module Aws::FraudDetector
     #   @return [Float]
     #
     # @!attribute [rw] upper_bound_value
-    #   The lower bound value of the area under curve (auc).
+    #   The upper bound value of the area under curve (auc).
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/UncertaintyRange AWS API Documentation

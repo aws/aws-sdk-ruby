@@ -232,7 +232,9 @@ module Aws::OpsWorks
     #
     # @return [self]
     def load
-      resp = @client.describe_stacks(stack_ids: [@id])
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_stacks(stack_ids: [@id])
+      end
       @data = resp.stacks[0]
       self
     end
@@ -347,7 +349,9 @@ module Aws::OpsWorks
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -508,7 +512,9 @@ module Aws::OpsWorks
     # @return [Layer]
     def create_layer(options = {})
       options = options.merge(stack_id: @id)
-      resp = @client.create_layer(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_layer(options)
+      end
       Layer.new(
         id: resp.data.layer_id,
         client: @client
@@ -522,7 +528,9 @@ module Aws::OpsWorks
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(stack_id: @id)
-      resp = @client.delete_stack(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_stack(options)
+      end
       resp.data
     end
 
@@ -543,7 +551,9 @@ module Aws::OpsWorks
       batches = Enumerator.new do |y|
         batch = []
         options = options.merge(stack_id: @id)
-        resp = @client.describe_layers(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_layers(options)
+        end
         resp.data.layers.each do |l|
           batch << Layer.new(
             id: l.layer_id,

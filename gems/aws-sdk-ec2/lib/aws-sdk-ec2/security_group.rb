@@ -91,7 +91,9 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = @client.describe_security_groups(group_ids: [@id])
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_security_groups(group_ids: [@id])
+      end
       @data = resp.security_groups[0]
       self
     end
@@ -206,7 +208,9 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -298,7 +302,9 @@ module Aws::EC2
     # @return [Types::AuthorizeSecurityGroupEgressResult]
     def authorize_egress(options = {})
       options = options.merge(group_id: @id)
-      resp = @client.authorize_security_group_egress(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.authorize_security_group_egress(options)
+      end
       resp.data
     end
 
@@ -433,7 +439,9 @@ module Aws::EC2
     # @return [Types::AuthorizeSecurityGroupIngressResult]
     def authorize_ingress(options = {})
       options = options.merge(group_id: @id)
-      resp = @client.authorize_security_group_ingress(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.authorize_security_group_ingress(options)
+      end
       resp.data
     end
 
@@ -462,7 +470,9 @@ module Aws::EC2
     def create_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = @client.create_tags(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_tags(options)
+      end
       options[:tags].each do |t|
         batch << Tag.new(
           resource_id: @id,
@@ -507,7 +517,9 @@ module Aws::EC2
     def delete_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = @client.delete_tags(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_tags(options)
+      end
       options[:tags].each do |t|
         batch << Tag.new(
           resource_id: @id,
@@ -539,7 +551,9 @@ module Aws::EC2
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(group_id: @id)
-      resp = @client.delete_security_group(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_security_group(options)
+      end
       resp.data
     end
 
@@ -620,7 +634,9 @@ module Aws::EC2
     # @return [Types::RevokeSecurityGroupEgressResult]
     def revoke_egress(options = {})
       options = options.merge(group_id: @id)
-      resp = @client.revoke_security_group_egress(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.revoke_security_group_egress(options)
+      end
       resp.data
     end
 
@@ -726,7 +742,9 @@ module Aws::EC2
     # @return [Types::RevokeSecurityGroupIngressResult]
     def revoke_ingress(options = {})
       options = options.merge(group_id: @id)
-      resp = @client.revoke_security_group_ingress(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.revoke_security_group_ingress(options)
+      end
       resp.data
     end
 

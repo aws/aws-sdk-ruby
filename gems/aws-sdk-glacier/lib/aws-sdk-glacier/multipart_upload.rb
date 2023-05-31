@@ -202,7 +202,9 @@ module Aws::Glacier
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -218,7 +220,9 @@ module Aws::Glacier
         vault_name: @vault_name,
         upload_id: @id
       )
-      resp = @client.abort_multipart_upload(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.abort_multipart_upload(options)
+      end
       resp.data
     end
 
@@ -245,7 +249,9 @@ module Aws::Glacier
         vault_name: @vault_name,
         upload_id: @id
       )
-      resp = @client.complete_multipart_upload(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.complete_multipart_upload(options)
+      end
       resp.data
     end
 
@@ -273,7 +279,9 @@ module Aws::Glacier
         vault_name: @vault_name,
         upload_id: @id
       )
-      resp = @client.list_parts(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.list_parts(options)
+      end
       resp.data
     end
 
@@ -302,7 +310,9 @@ module Aws::Glacier
         vault_name: @vault_name,
         upload_id: @id
       )
-      resp = @client.upload_multipart_part(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.upload_multipart_part(options)
+      end
       resp.data
     end
 

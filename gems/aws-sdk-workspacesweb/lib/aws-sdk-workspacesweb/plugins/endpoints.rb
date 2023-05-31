@@ -58,6 +58,8 @@ module Aws::WorkSpacesWeb
           case context.operation_name
           when :associate_browser_settings
             Aws::WorkSpacesWeb::Endpoints::AssociateBrowserSettings.build(context)
+          when :associate_ip_access_settings
+            Aws::WorkSpacesWeb::Endpoints::AssociateIpAccessSettings.build(context)
           when :associate_network_settings
             Aws::WorkSpacesWeb::Endpoints::AssociateNetworkSettings.build(context)
           when :associate_trust_store
@@ -70,6 +72,8 @@ module Aws::WorkSpacesWeb
             Aws::WorkSpacesWeb::Endpoints::CreateBrowserSettings.build(context)
           when :create_identity_provider
             Aws::WorkSpacesWeb::Endpoints::CreateIdentityProvider.build(context)
+          when :create_ip_access_settings
+            Aws::WorkSpacesWeb::Endpoints::CreateIpAccessSettings.build(context)
           when :create_network_settings
             Aws::WorkSpacesWeb::Endpoints::CreateNetworkSettings.build(context)
           when :create_portal
@@ -84,6 +88,8 @@ module Aws::WorkSpacesWeb
             Aws::WorkSpacesWeb::Endpoints::DeleteBrowserSettings.build(context)
           when :delete_identity_provider
             Aws::WorkSpacesWeb::Endpoints::DeleteIdentityProvider.build(context)
+          when :delete_ip_access_settings
+            Aws::WorkSpacesWeb::Endpoints::DeleteIpAccessSettings.build(context)
           when :delete_network_settings
             Aws::WorkSpacesWeb::Endpoints::DeleteNetworkSettings.build(context)
           when :delete_portal
@@ -96,6 +102,8 @@ module Aws::WorkSpacesWeb
             Aws::WorkSpacesWeb::Endpoints::DeleteUserSettings.build(context)
           when :disassociate_browser_settings
             Aws::WorkSpacesWeb::Endpoints::DisassociateBrowserSettings.build(context)
+          when :disassociate_ip_access_settings
+            Aws::WorkSpacesWeb::Endpoints::DisassociateIpAccessSettings.build(context)
           when :disassociate_network_settings
             Aws::WorkSpacesWeb::Endpoints::DisassociateNetworkSettings.build(context)
           when :disassociate_trust_store
@@ -108,6 +116,8 @@ module Aws::WorkSpacesWeb
             Aws::WorkSpacesWeb::Endpoints::GetBrowserSettings.build(context)
           when :get_identity_provider
             Aws::WorkSpacesWeb::Endpoints::GetIdentityProvider.build(context)
+          when :get_ip_access_settings
+            Aws::WorkSpacesWeb::Endpoints::GetIpAccessSettings.build(context)
           when :get_network_settings
             Aws::WorkSpacesWeb::Endpoints::GetNetworkSettings.build(context)
           when :get_portal
@@ -126,6 +136,8 @@ module Aws::WorkSpacesWeb
             Aws::WorkSpacesWeb::Endpoints::ListBrowserSettings.build(context)
           when :list_identity_providers
             Aws::WorkSpacesWeb::Endpoints::ListIdentityProviders.build(context)
+          when :list_ip_access_settings
+            Aws::WorkSpacesWeb::Endpoints::ListIpAccessSettings.build(context)
           when :list_network_settings
             Aws::WorkSpacesWeb::Endpoints::ListNetworkSettings.build(context)
           when :list_portals
@@ -148,6 +160,8 @@ module Aws::WorkSpacesWeb
             Aws::WorkSpacesWeb::Endpoints::UpdateBrowserSettings.build(context)
           when :update_identity_provider
             Aws::WorkSpacesWeb::Endpoints::UpdateIdentityProvider.build(context)
+          when :update_ip_access_settings
+            Aws::WorkSpacesWeb::Endpoints::UpdateIpAccessSettings.build(context)
           when :update_network_settings
             Aws::WorkSpacesWeb::Endpoints::UpdateNetworkSettings.build(context)
           when :update_portal

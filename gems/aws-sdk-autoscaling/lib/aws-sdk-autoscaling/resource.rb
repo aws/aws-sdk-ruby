@@ -455,7 +455,9 @@ module Aws::AutoScaling
     #   Balancer, Network Load Balancer, and VPC Lattice.
     # @return [AutoScalingGroup]
     def create_group(options = {})
-      @client.create_auto_scaling_group(options)
+      Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_auto_scaling_group(options)
+      end
       AutoScalingGroup.new(
         name: options[:auto_scaling_group_name],
         client: @client
@@ -719,7 +721,9 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-config.html#launch-configurations-imds
     # @return [LaunchConfiguration]
     def create_launch_configuration(options = {})
-      @client.create_launch_configuration(options)
+      Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_launch_configuration(options)
+      end
       LaunchConfiguration.new(
         name: options[:launch_configuration_name],
         client: @client
@@ -752,7 +756,9 @@ module Aws::AutoScaling
     # @return [Activity::Collection]
     def activities(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_scaling_activities(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_scaling_activities(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.activities.each do |a|
@@ -809,7 +815,9 @@ module Aws::AutoScaling
     # @return [AutoScalingGroup::Collection]
     def groups(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_auto_scaling_groups(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_auto_scaling_groups(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.auto_scaling_groups.each do |a|
@@ -840,7 +848,9 @@ module Aws::AutoScaling
     # @return [Instance::Collection]
     def instances(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_auto_scaling_instances(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_auto_scaling_instances(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.auto_scaling_instances.each do |a|
@@ -880,7 +890,9 @@ module Aws::AutoScaling
     # @return [LaunchConfiguration::Collection]
     def launch_configurations(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_launch_configurations(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_launch_configurations(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.launch_configurations.each do |l|
@@ -919,7 +931,9 @@ module Aws::AutoScaling
     # @return [ScalingPolicy::Collection]
     def policies(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_policies(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_policies(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.scaling_policies.each do |s|
@@ -979,7 +993,9 @@ module Aws::AutoScaling
     # @return [ScheduledAction::Collection]
     def scheduled_actions(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_scheduled_actions(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_scheduled_actions(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.scheduled_update_group_actions.each do |s|
@@ -1012,7 +1028,9 @@ module Aws::AutoScaling
     # @return [Tag::Collection]
     def tags(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_tags(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_tags(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.tags.each do |t|

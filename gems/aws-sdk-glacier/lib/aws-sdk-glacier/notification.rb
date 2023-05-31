@@ -70,10 +70,12 @@ module Aws::Glacier
     #
     # @return [self]
     def load
-      resp = @client.get_vault_notifications(
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.get_vault_notifications(
         account_id: @account_id,
         vault_name: @vault_name
       )
+      end
       @data = resp.vault_notification_config
       self
     end
@@ -188,7 +190,9 @@ module Aws::Glacier
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -203,7 +207,9 @@ module Aws::Glacier
         account_id: @account_id,
         vault_name: @vault_name
       )
-      resp = @client.delete_vault_notifications(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_vault_notifications(options)
+      end
       resp.data
     end
 
@@ -224,7 +230,9 @@ module Aws::Glacier
         account_id: @account_id,
         vault_name: @vault_name
       )
-      resp = @client.set_vault_notifications(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.set_vault_notifications(options)
+      end
       resp.data
     end
 

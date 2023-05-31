@@ -180,7 +180,9 @@ module Aws::IAM
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -196,7 +198,9 @@ module Aws::IAM
         access_key_id: @id,
         status: "Active"
       )
-      resp = @client.update_access_key(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.update_access_key(options)
+      end
       resp.data
     end
 
@@ -211,7 +215,9 @@ module Aws::IAM
         access_key_id: @id,
         status: "Inactive"
       )
-      resp = @client.update_access_key(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.update_access_key(options)
+      end
       resp.data
     end
 
@@ -225,7 +231,9 @@ module Aws::IAM
         user_name: @user_name,
         access_key_id: @id
       )
-      resp = @client.delete_access_key(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_access_key(options)
+      end
       resp.data
     end
 

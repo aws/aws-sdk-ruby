@@ -15,9 +15,12 @@ module Aws::HealthLake
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
+    AuthorizationStrategy = Shapes::StringShape.new(name: 'AuthorizationStrategy')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoundedLengthString = Shapes::StringShape.new(name: 'BoundedLengthString')
     ClientTokenString = Shapes::StringShape.new(name: 'ClientTokenString')
     CmkType = Shapes::StringShape.new(name: 'CmkType')
+    ConfigurationMetadata = Shapes::StringShape.new(name: 'ConfigurationMetadata')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateFHIRDatastoreRequest = Shapes::StructureShape.new(name: 'CreateFHIRDatastoreRequest')
     CreateFHIRDatastoreResponse = Shapes::StructureShape.new(name: 'CreateFHIRDatastoreResponse')
@@ -41,6 +44,7 @@ module Aws::HealthLake
     ExportJobPropertiesList = Shapes::ListShape.new(name: 'ExportJobPropertiesList')
     FHIRVersion = Shapes::StringShape.new(name: 'FHIRVersion')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
+    IdentityProviderConfiguration = Shapes::StructureShape.new(name: 'IdentityProviderConfiguration')
     ImportJobProperties = Shapes::StructureShape.new(name: 'ImportJobProperties')
     ImportJobPropertiesList = Shapes::ListShape.new(name: 'ImportJobPropertiesList')
     InputDataConfig = Shapes::UnionShape.new(name: 'InputDataConfig')
@@ -49,6 +53,7 @@ module Aws::HealthLake
     JobName = Shapes::StringShape.new(name: 'JobName')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
     KmsEncryptionConfig = Shapes::StructureShape.new(name: 'KmsEncryptionConfig')
+    LambdaArn = Shapes::StringShape.new(name: 'LambdaArn')
     ListFHIRDatastoresRequest = Shapes::StructureShape.new(name: 'ListFHIRDatastoresRequest')
     ListFHIRDatastoresResponse = Shapes::StructureShape.new(name: 'ListFHIRDatastoresResponse')
     ListFHIRExportJobsRequest = Shapes::StructureShape.new(name: 'ListFHIRExportJobsRequest')
@@ -97,6 +102,7 @@ module Aws::HealthLake
     CreateFHIRDatastoreRequest.add_member(:preload_data_config, Shapes::ShapeRef.new(shape: PreloadDataConfig, location_name: "PreloadDataConfig"))
     CreateFHIRDatastoreRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateFHIRDatastoreRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateFHIRDatastoreRequest.add_member(:identity_provider_configuration, Shapes::ShapeRef.new(shape: IdentityProviderConfiguration, location_name: "IdentityProviderConfiguration"))
     CreateFHIRDatastoreRequest.struct_class = Types::CreateFHIRDatastoreRequest
 
     CreateFHIRDatastoreResponse.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location_name: "DatastoreId"))
@@ -120,11 +126,12 @@ module Aws::HealthLake
     DatastoreProperties.add_member(:datastore_endpoint, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DatastoreEndpoint"))
     DatastoreProperties.add_member(:sse_configuration, Shapes::ShapeRef.new(shape: SseConfiguration, location_name: "SseConfiguration"))
     DatastoreProperties.add_member(:preload_data_config, Shapes::ShapeRef.new(shape: PreloadDataConfig, location_name: "PreloadDataConfig"))
+    DatastoreProperties.add_member(:identity_provider_configuration, Shapes::ShapeRef.new(shape: IdentityProviderConfiguration, location_name: "IdentityProviderConfiguration"))
     DatastoreProperties.struct_class = Types::DatastoreProperties
 
     DatastorePropertiesList.member = Shapes::ShapeRef.new(shape: DatastoreProperties)
 
-    DeleteFHIRDatastoreRequest.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, location_name: "DatastoreId"))
+    DeleteFHIRDatastoreRequest.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location_name: "DatastoreId"))
     DeleteFHIRDatastoreRequest.struct_class = Types::DeleteFHIRDatastoreRequest
 
     DeleteFHIRDatastoreResponse.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location_name: "DatastoreId"))
@@ -133,7 +140,7 @@ module Aws::HealthLake
     DeleteFHIRDatastoreResponse.add_member(:datastore_endpoint, Shapes::ShapeRef.new(shape: BoundedLengthString, required: true, location_name: "DatastoreEndpoint"))
     DeleteFHIRDatastoreResponse.struct_class = Types::DeleteFHIRDatastoreResponse
 
-    DescribeFHIRDatastoreRequest.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, location_name: "DatastoreId"))
+    DescribeFHIRDatastoreRequest.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location_name: "DatastoreId"))
     DescribeFHIRDatastoreRequest.struct_class = Types::DescribeFHIRDatastoreRequest
 
     DescribeFHIRDatastoreResponse.add_member(:datastore_properties, Shapes::ShapeRef.new(shape: DatastoreProperties, required: true, location_name: "DatastoreProperties"))
@@ -165,6 +172,12 @@ module Aws::HealthLake
     ExportJobProperties.struct_class = Types::ExportJobProperties
 
     ExportJobPropertiesList.member = Shapes::ShapeRef.new(shape: ExportJobProperties)
+
+    IdentityProviderConfiguration.add_member(:authorization_strategy, Shapes::ShapeRef.new(shape: AuthorizationStrategy, required: true, location_name: "AuthorizationStrategy"))
+    IdentityProviderConfiguration.add_member(:fine_grained_authorization_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "FineGrainedAuthorizationEnabled"))
+    IdentityProviderConfiguration.add_member(:metadata, Shapes::ShapeRef.new(shape: ConfigurationMetadata, location_name: "Metadata"))
+    IdentityProviderConfiguration.add_member(:idp_lambda_arn, Shapes::ShapeRef.new(shape: LambdaArn, location_name: "IdpLambdaArn"))
+    IdentityProviderConfiguration.struct_class = Types::IdentityProviderConfiguration
 
     ImportJobProperties.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     ImportJobProperties.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))

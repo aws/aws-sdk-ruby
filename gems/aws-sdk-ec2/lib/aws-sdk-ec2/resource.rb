@@ -69,7 +69,9 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [DhcpOptions]
     def create_dhcp_options(options = {})
-      resp = @client.create_dhcp_options(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_dhcp_options(options)
+      end
       DhcpOptions.new(
         id: resp.data.dhcp_options.dhcp_options_id,
         data: resp.data.dhcp_options,
@@ -601,7 +603,9 @@ module Aws::EC2
     # @return [Instance::Collection]
     def create_instances(options = {})
       batch = []
-      resp = @client.run_instances(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.run_instances(options)
+      end
       resp.data.instances.each do |i|
         batch << Instance.new(
           id: i.instance_id,
@@ -638,7 +642,9 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [InternetGateway]
     def create_internet_gateway(options = {})
-      resp = @client.create_internet_gateway(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_internet_gateway(options)
+      end
       InternetGateway.new(
         id: resp.data.internet_gateway.internet_gateway_id,
         data: resp.data.internet_gateway,
@@ -688,7 +694,9 @@ module Aws::EC2
     #   Default: `pem`
     # @return [KeyPair]
     def create_key_pair(options = {})
-      resp = @client.create_key_pair(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_key_pair(options)
+      end
       KeyPair.new(
         name: resp.data.key_name,
         data: resp.data,
@@ -780,7 +788,9 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating
     # @return [NatGateway]
     def create_nat_gateway(options = {})
-      resp = @client.create_nat_gateway(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_nat_gateway(options)
+      end
       NatGateway.new(
         id: resp.data.nat_gateway.nat_gateway_id,
         data: resp.data.nat_gateway,
@@ -817,7 +827,9 @@ module Aws::EC2
     #   The tags to assign to the network ACL.
     # @return [NetworkAcl]
     def create_network_acl(options = {})
-      resp = @client.create_network_acl(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_network_acl(options)
+      end
       NetworkAcl.new(
         id: resp.data.network_acl.network_acl_id,
         data: resp.data.network_acl,
@@ -965,7 +977,9 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     # @return [NetworkInterface]
     def create_network_interface(options = {})
-      resp = @client.create_network_interface(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_network_interface(options)
+      end
       NetworkInterface.new(
         id: resp.data.network_interface.network_interface_id,
         data: resp.data.network_interface,
@@ -1019,7 +1033,9 @@ module Aws::EC2
     #   * Rack – No usage restrictions.
     # @return [PlacementGroup]
     def create_placement_group(options = {})
-      @client.create_placement_group(options)
+      Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_placement_group(options)
+      end
       PlacementGroup.new(
         name: options[:group_name],
         client: @client
@@ -1055,7 +1071,9 @@ module Aws::EC2
     #   The tags to assign to the route table.
     # @return [RouteTable]
     def create_route_table(options = {})
-      resp = @client.create_route_table(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_route_table(options)
+      end
       RouteTable.new(
         id: resp.data.route_table.route_table_id,
         data: resp.data.route_table,
@@ -1112,7 +1130,9 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [SecurityGroup]
     def create_security_group(options = {})
-      resp = @client.create_security_group(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_security_group(options)
+      end
       SecurityGroup.new(
         id: resp.data.group_id,
         client: @client
@@ -1173,7 +1193,9 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [Snapshot]
     def create_snapshot(options = {})
-      resp = @client.create_snapshot(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_snapshot(options)
+      end
       Snapshot.new(
         id: resp.data.snapshot_id,
         data: resp.data,
@@ -1254,7 +1276,9 @@ module Aws::EC2
     #   Indicates whether to create an IPv6 only subnet.
     # @return [Subnet]
     def create_subnet(options = {})
-      resp = @client.create_subnet(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_subnet(options)
+      end
       Subnet.new(
         id: resp.data.subnet.subnet_id,
         data: resp.data.subnet,
@@ -1291,7 +1315,9 @@ module Aws::EC2
     #   set the value to an empty string.
     # @return [EmptyStructure]
     def create_tags(options = {})
-      resp = @client.create_tags(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_tags(options)
+      end
       resp.data
     end
 
@@ -1332,7 +1358,9 @@ module Aws::EC2
     #   Constraints: Up to 1000 tags.
     # @return [EmptyStructure]
     def delete_tags(options = {})
-      resp = @client.delete_tags(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_tags(options)
+      end
       resp.data
     end
 
@@ -1509,7 +1537,9 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     # @return [Volume]
     def create_volume(options = {})
-      resp = @client.create_volume(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_volume(options)
+      end
       Volume.new(
         id: resp.data.volume_id,
         data: resp.data,
@@ -1626,7 +1656,9 @@ module Aws::EC2
     #   The tags to assign to the VPC.
     # @return [Vpc]
     def create_vpc(options = {})
-      resp = @client.create_vpc(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_vpc(options)
+      end
       Vpc.new(
         id: resp.data.vpc.vpc_id,
         data: resp.data.vpc,
@@ -1679,7 +1711,9 @@ module Aws::EC2
     #   The tags to assign to the peering connection.
     # @return [VpcPeeringConnection]
     def create_vpc_peering_connection(options = {})
-      resp = @client.create_vpc_peering_connection(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_vpc_peering_connection(options)
+      end
       VpcPeeringConnection.new(
         id: resp.data.vpc_peering_connection.vpc_peering_connection_id,
         data: resp.data.vpc_peering_connection,
@@ -1704,7 +1738,9 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [EmptyStructure]
     def disassociate_route_table(options = {})
-      resp = @client.disassociate_route_table(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.disassociate_route_table(options)
+      end
       resp.data
     end
 
@@ -1741,7 +1777,9 @@ module Aws::EC2
     #   The tags to apply to the imported key pair.
     # @return [KeyPairInfo]
     def import_key_pair(options = {})
-      resp = @client.import_key_pair(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.import_key_pair(options)
+      end
       KeyPairInfo.new(
         name: resp.data.key_name,
         client: @client
@@ -1921,7 +1959,9 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration
     # @return [Image]
     def register_image(options = {})
-      resp = @client.register_image(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.register_image(options)
+      end
       Image.new(
         id: resp.data.image_id,
         client: @client
@@ -2000,7 +2040,9 @@ module Aws::EC2
           name: "domain",
           values: ["standard"]
         }])
-        resp = @client.describe_addresses(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_addresses(options)
+        end
         resp.data.addresses.each do |a|
           batch << ClassicAddress.new(
             public_ip: a.public_ip,
@@ -2068,7 +2110,9 @@ module Aws::EC2
     # @return [DhcpOptions::Collection]
     def dhcp_options_sets(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_dhcp_options(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_dhcp_options(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.dhcp_options.each do |d|
@@ -2249,7 +2293,9 @@ module Aws::EC2
     # @return [Image::Collection]
     def images(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_images(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_images(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.images.each do |i|
@@ -2579,7 +2625,9 @@ module Aws::EC2
     # @return [Instance::Collection]
     def instances(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_instances(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_instances(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.reservations.each do |r|
@@ -2654,7 +2702,9 @@ module Aws::EC2
     # @return [InternetGateway::Collection]
     def internet_gateways(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_internet_gateways(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_internet_gateways(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.internet_gateways.each do |i|
@@ -2731,7 +2781,9 @@ module Aws::EC2
     def key_pairs(options = {})
       batches = Enumerator.new do |y|
         batch = []
-        resp = @client.describe_key_pairs(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_key_pairs(options)
+        end
         resp.data.key_pairs.each do |k|
           batch << KeyPairInfo.new(
             name: k.key_name,
@@ -2797,7 +2849,9 @@ module Aws::EC2
     # @return [NatGateway::Collection]
     def nat_gateways(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_nat_gateways(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_nat_gateways(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.nat_gateways.each do |n|
@@ -2904,7 +2958,9 @@ module Aws::EC2
     # @return [NetworkAcl::Collection]
     def network_acls(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_network_acls(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_network_acls(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.network_acls.each do |n|
@@ -3071,7 +3127,9 @@ module Aws::EC2
     # @return [NetworkInterface::Collection]
     def network_interfaces(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_network_interfaces(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_network_interfaces(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.network_interfaces.each do |n|
@@ -3151,7 +3209,9 @@ module Aws::EC2
     def placement_groups(options = {})
       batches = Enumerator.new do |y|
         batch = []
-        resp = @client.describe_placement_groups(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_placement_groups(options)
+        end
         resp.data.placement_groups.each do |p|
           batch << PlacementGroup.new(
             name: p.group_name,
@@ -3277,7 +3337,9 @@ module Aws::EC2
     # @return [RouteTable::Collection]
     def route_tables(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_route_tables(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_route_tables(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.route_tables.each do |r|
@@ -3418,7 +3480,9 @@ module Aws::EC2
     # @return [SecurityGroup::Collection]
     def security_groups(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_security_groups(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_security_groups(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.security_groups.each do |s|
@@ -3520,7 +3584,9 @@ module Aws::EC2
     # @return [Snapshot::Collection]
     def snapshots(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_snapshots(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_snapshots(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.snapshots.each do |s|
@@ -3659,7 +3725,9 @@ module Aws::EC2
     # @return [Subnet::Collection]
     def subnets(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_subnets(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_subnets(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.subnets.each do |s|
@@ -3761,7 +3829,9 @@ module Aws::EC2
     # @return [Volume::Collection]
     def volumes(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_volumes(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_volumes(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.volumes.each do |v|
@@ -3856,7 +3926,9 @@ module Aws::EC2
           name: "domain",
           values: ["vpc"]
         }])
-        resp = @client.describe_addresses(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_addresses(options)
+        end
         resp.data.addresses.each do |a|
           batch << VpcAddress.new(
             allocation_id: a.allocation_id,
@@ -3943,7 +4015,9 @@ module Aws::EC2
     # @return [VpcPeeringConnection::Collection]
     def vpc_peering_connections(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_vpc_peering_connections(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_vpc_peering_connections(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.vpc_peering_connections.each do |v|
@@ -4033,7 +4107,9 @@ module Aws::EC2
     # @return [Vpc::Collection]
     def vpcs(options = {})
       batches = Enumerator.new do |y|
-        resp = @client.describe_vpcs(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_vpcs(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.vpcs.each do |v|

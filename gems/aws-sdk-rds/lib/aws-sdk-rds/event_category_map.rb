@@ -54,7 +54,9 @@ module Aws::RDS
     #
     # @return [self]
     def load
-      resp = @client.describe_event_categories(source_type: @name)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_event_categories(source_type: @name)
+      end
       @data = resp.event_categories_map_list[0]
       self
     end
@@ -169,7 +171,9 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @deprecated

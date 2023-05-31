@@ -54,7 +54,9 @@ module Aws::S3
     #
     # @return [self]
     def load
-      resp = @client.get_bucket_policy(bucket: @bucket_name)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.get_bucket_policy(bucket: @bucket_name)
+      end
       @data = resp.data
       self
     end
@@ -169,7 +171,9 @@ module Aws::S3
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -187,7 +191,9 @@ module Aws::S3
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(bucket: @bucket_name)
-      resp = @client.delete_bucket_policy(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_bucket_policy(options)
+      end
       resp.data
     end
 
@@ -234,7 +240,9 @@ module Aws::S3
     # @return [EmptyStructure]
     def put(options = {})
       options = options.merge(bucket: @bucket_name)
-      resp = @client.put_bucket_policy(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.put_bucket_policy(options)
+      end
       resp.data
     end
 
