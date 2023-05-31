@@ -6,4 +6,4 @@
 --hide-api private
 --plugin sitemap
 --exclude \/client_api.rb$
-gems/**/lib/**/*.rb
+gems/aws-sdk-core/lib/**/*.rb
