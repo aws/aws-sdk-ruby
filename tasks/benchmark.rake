@@ -33,7 +33,7 @@ task 'benchmark:put-metrics' do
 
   event = ENV['GH_EVENT'] == 'pull_request' ? 'pr' : 'release'
   report = JSON.parse(File.read('benchmark_report.json'))
-  target = report['ruby_engine'] + "-" + report['ruby_version'].split('.').first(2).join('.') # TODO: How do we want to capture the environment
+  target = report['ruby_engine'] + "-" + report['ruby_version'].split('.').first(2).join('.')
 
   # common dimensions
   report_dims = {
@@ -52,7 +52,7 @@ task 'benchmark:put-metrics' do
   benchmark_data.each do |gem_name, gem_data|
     dims = report_dims.merge(gem: gem_name)
     gem_data.each do |k,v|
-      Benchmark.put_metric(client, dims, report['timestamp'] || Time.now, k, v)
+      Benchmark::Metrics.put_metric(client, dims, report['timestamp'] || Time.now, k, v)
     end
   end
   puts "Benchmarking metrics uploaded"

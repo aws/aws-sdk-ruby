@@ -175,12 +175,23 @@ module Benchmark
       operation_benchmarks.each do |test_name, test_def|
         client = client_klass.new(stub_responses: true)
         req = test_def[:setup].call(client)
+
+
+        # warmup (run a few iterations without measurement)
+        2.times { test_def[:test].call(client, req) }
+
+        mem_allocated = 0
+        unless defined?(JRUBY_VERSION)
+          r = ::MemoryProfiler.report { test_def[:test].call(client, req) }
+          mem_allocated = report_data["#{test_name}_allocated_kb"] = r.total_allocated_memsize / 1024.0
+        end
+
         n = test_def[:n] || 300
         values = Benchmark.measure_time(n) do
           test_def[:test].call(client, req)
         end
         report_data["#{test_name}_ms"] = values
-        puts "\t\t#{test_name} avg: #{ '%.2f' % (values.sum(0.0) / values.size)} ms"
+        puts "\t\t#{test_name} avg: #{ '%.2f' % (values.sum(0.0) / values.size)} ms\tmem_allocated: #{'%.2f' % mem_allocated} kb"
       end
     end
 
