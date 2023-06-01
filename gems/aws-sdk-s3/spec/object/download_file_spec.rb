@@ -170,6 +170,16 @@ module Aws
               ":chunk_size shouldn't exceed total file size."
             )
         end
+
+        it 'downloads the file in range chunks' do
+          client.stub_responses(:get_object, ->(context) {
+            ranges = context.params[:range].split('=').last.split('-')
+            expect(ranges[1].to_i - ranges[0].to_i + 1).to eq(one_meg)
+            { content_range: "bytes #{ranges[0]}-#{ranges[1]}/#{20 * one_meg}" }
+          })
+
+          large_obj.download_file(path, chunk_size: one_meg)
+        end
       end
     end
   end
