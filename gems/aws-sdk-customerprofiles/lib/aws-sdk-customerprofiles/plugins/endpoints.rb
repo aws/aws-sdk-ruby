@@ -58,12 +58,16 @@ module Aws::CustomerProfiles
           case context.operation_name
           when :add_profile_key
             Aws::CustomerProfiles::Endpoints::AddProfileKey.build(context)
+          when :create_calculated_attribute_definition
+            Aws::CustomerProfiles::Endpoints::CreateCalculatedAttributeDefinition.build(context)
           when :create_domain
             Aws::CustomerProfiles::Endpoints::CreateDomain.build(context)
           when :create_integration_workflow
             Aws::CustomerProfiles::Endpoints::CreateIntegrationWorkflow.build(context)
           when :create_profile
             Aws::CustomerProfiles::Endpoints::CreateProfile.build(context)
+          when :delete_calculated_attribute_definition
+            Aws::CustomerProfiles::Endpoints::DeleteCalculatedAttributeDefinition.build(context)
           when :delete_domain
             Aws::CustomerProfiles::Endpoints::DeleteDomain.build(context)
           when :delete_integration
@@ -80,6 +84,10 @@ module Aws::CustomerProfiles
             Aws::CustomerProfiles::Endpoints::DeleteWorkflow.build(context)
           when :get_auto_merging_preview
             Aws::CustomerProfiles::Endpoints::GetAutoMergingPreview.build(context)
+          when :get_calculated_attribute_definition
+            Aws::CustomerProfiles::Endpoints::GetCalculatedAttributeDefinition.build(context)
+          when :get_calculated_attribute_for_profile
+            Aws::CustomerProfiles::Endpoints::GetCalculatedAttributeForProfile.build(context)
           when :get_domain
             Aws::CustomerProfiles::Endpoints::GetDomain.build(context)
           when :get_identity_resolution_job
@@ -98,6 +106,10 @@ module Aws::CustomerProfiles
             Aws::CustomerProfiles::Endpoints::GetWorkflowSteps.build(context)
           when :list_account_integrations
             Aws::CustomerProfiles::Endpoints::ListAccountIntegrations.build(context)
+          when :list_calculated_attribute_definitions
+            Aws::CustomerProfiles::Endpoints::ListCalculatedAttributeDefinitions.build(context)
+          when :list_calculated_attributes_for_profile
+            Aws::CustomerProfiles::Endpoints::ListCalculatedAttributesForProfile.build(context)
           when :list_domains
             Aws::CustomerProfiles::Endpoints::ListDomains.build(context)
           when :list_identity_resolution_jobs
@@ -128,6 +140,8 @@ module Aws::CustomerProfiles
             Aws::CustomerProfiles::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::CustomerProfiles::Endpoints::UntagResource.build(context)
+          when :update_calculated_attribute_definition
+            Aws::CustomerProfiles::Endpoints::UpdateCalculatedAttributeDefinition.build(context)
           when :update_domain
             Aws::CustomerProfiles::Endpoints::UpdateDomain.build(context)
           when :update_profile

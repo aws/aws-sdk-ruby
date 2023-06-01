@@ -145,6 +145,7 @@ module Aws::IVS
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     ThumbnailConfiguration = Shapes::StructureShape.new(name: 'ThumbnailConfiguration')
     Time = Shapes::TimestampShape.new(name: 'Time', timestampFormat: "iso8601")
+    TranscodePreset = Shapes::StringShape.new(name: 'TranscodePreset')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateChannelRequest = Shapes::StructureShape.new(name: 'UpdateChannelRequest')
@@ -191,6 +192,7 @@ module Aws::IVS
     Channel.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
     Channel.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
     Channel.add_member(:playback_url, Shapes::ShapeRef.new(shape: PlaybackURL, location_name: "playbackUrl"))
+    Channel.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
     Channel.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
     Channel.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     Channel.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
@@ -208,8 +210,10 @@ module Aws::IVS
     ChannelSummary.add_member(:insecure_ingest, Shapes::ShapeRef.new(shape: InsecureIngest, location_name: "insecureIngest"))
     ChannelSummary.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
     ChannelSummary.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
+    ChannelSummary.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
     ChannelSummary.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
     ChannelSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ChannelSummary.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
     ChannelSummary.struct_class = Types::ChannelSummary
 
     Channels.member = Shapes::ShapeRef.new(shape: Channel)
@@ -221,6 +225,7 @@ module Aws::IVS
     CreateChannelRequest.add_member(:insecure_ingest, Shapes::ShapeRef.new(shape: Boolean, location_name: "insecureIngest"))
     CreateChannelRequest.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
     CreateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
+    CreateChannelRequest.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
     CreateChannelRequest.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
     CreateChannelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateChannelRequest.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
@@ -522,6 +527,7 @@ module Aws::IVS
     UpdateChannelRequest.add_member(:insecure_ingest, Shapes::ShapeRef.new(shape: Boolean, location_name: "insecureIngest"))
     UpdateChannelRequest.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
     UpdateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
+    UpdateChannelRequest.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
     UpdateChannelRequest.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
     UpdateChannelRequest.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
     UpdateChannelRequest.struct_class = Types::UpdateChannelRequest

@@ -2096,9 +2096,12 @@ module Aws::SageMaker
     #   The content type of the data from the input source. The following
     #   are the allowed content types for different problems:
     #
-    #   * ImageClassification: `image/png`, `image/jpeg`, `image/*`
+    #   * ImageClassification: `image/png`, `image/jpeg`, or `image/*`. The
+    #     default value is `image/*`.
     #
-    #   * TextClassification: `text/csv;header=present`
+    #   * TextClassification: `text/csv;header=present` or
+    #     `x-application/vnd.amazon+parquet`. The default value is
+    #     `text/csv;header=present`.
     #   @return [String]
     #
     # @!attribute [rw] compression_type
@@ -10043,12 +10046,21 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # A set of recommended deployment configurations for the model.
+    # A set of recommended deployment configurations for the model. To get
+    # more advanced recommendations, see
+    # [CreateInferenceRecommendationsJob][1] to create an inference
+    # recommendation job.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html
     #
     # @!attribute [rw] recommendation_status
-    #   Status of the deployment recommendation. `NOT_APPLICABLE` means that
-    #   SageMaker is unable to provide a default recommendation for the
-    #   model using the information provided.
+    #   Status of the deployment recommendation. The status `NOT_APPLICABLE`
+    #   means that SageMaker is unable to provide a default recommendation
+    #   for the model using the information provided. If the deployment
+    #   status is `IN_PROGRESS`, retry your API call after a few seconds to
+    #   get a `COMPLETED` deployment recommendation.
     #   @return [String]
     #
     # @!attribute [rw] real_time_inference_recommendations
@@ -33568,9 +33580,7 @@ module Aws::SageMaker
     end
 
     # A collection of settings that configure user interaction with the
-    # `RStudioServerPro` app. `RStudioServerProAppSettings` cannot be
-    # updated. The `RStudioServerPro` app must be deleted and a new one
-    # created to make any changes.
+    # `RStudioServerPro` app.
     #
     # @!attribute [rw] access_status
     #   Indicates whether the current user has access to the

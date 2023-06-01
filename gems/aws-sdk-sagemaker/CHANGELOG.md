@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.184.0 (2023-06-01)
+------------------
+
+* Feature - Amazon Sagemaker Autopilot adds support for Parquet file input to NLP text classification jobs.
+
 1.183.0 (2023-05-31)
 ------------------
 

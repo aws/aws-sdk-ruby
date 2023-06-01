@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2023-06-01)
+------------------
+
+* Feature - This release introduces calculated attribute related APIs.
+
 1.28.0 (2023-05-31)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2023-06-01)
+------------------
+
+* Feature - Corrected the information for the header order FieldToMatch setting
+
 1.59.0 (2023-05-31)
 ------------------
 

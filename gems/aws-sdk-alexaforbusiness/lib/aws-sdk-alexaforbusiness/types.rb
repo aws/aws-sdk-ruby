@@ -952,13 +952,17 @@ module Aws::AlexaForBusiness
     #   Alexa or an AVS device, or by saying “Alexa, check in.”
     #   @return [Types::CreateRequireCheckIn]
     #
+    # @!attribute [rw] proactive_join
+    #   @return [Types::CreateProactiveJoin]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateMeetingRoomConfiguration AWS API Documentation
     #
     class CreateMeetingRoomConfiguration < Struct.new(
       :room_utilization_metrics_enabled,
       :end_of_meeting_reminder,
       :instant_booking,
-      :require_check_in)
+      :require_check_in,
+      :proactive_join)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1046,6 +1050,17 @@ module Aws::AlexaForBusiness
     #
     class CreateNetworkProfileResponse < Struct.new(
       :network_profile_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] enabled_by_motion
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateProactiveJoin AWS API Documentation
+    #
+    class CreateProactiveJoin < Struct.new(
+      :enabled_by_motion)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3005,13 +3020,17 @@ module Aws::AlexaForBusiness
     #   with Alexa or an AVS device, or by saying “Alexa, check in.”
     #   @return [Types::RequireCheckIn]
     #
+    # @!attribute [rw] proactive_join
+    #   @return [Types::ProactiveJoin]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/MeetingRoomConfiguration AWS API Documentation
     #
     class MeetingRoomConfiguration < Struct.new(
       :room_utilization_metrics_enabled,
       :end_of_meeting_reminder,
       :instant_booking,
-      :require_check_in)
+      :require_check_in,
+      :proactive_join)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3232,6 +3251,17 @@ module Aws::AlexaForBusiness
       :number,
       :type)
       SENSITIVE = [:number, :type]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] enabled_by_motion
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ProactiveJoin AWS API Documentation
+    #
+    class ProactiveJoin < Struct.new(
+      :enabled_by_motion)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5041,13 +5071,17 @@ module Aws::AlexaForBusiness
     #   Alexa or an AVS device, or by saying “Alexa, check in.”
     #   @return [Types::UpdateRequireCheckIn]
     #
+    # @!attribute [rw] proactive_join
+    #   @return [Types::UpdateProactiveJoin]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateMeetingRoomConfiguration AWS API Documentation
     #
     class UpdateMeetingRoomConfiguration < Struct.new(
       :room_utilization_metrics_enabled,
       :end_of_meeting_reminder,
       :instant_booking,
-      :require_check_in)
+      :require_check_in,
+      :proactive_join)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5103,6 +5137,17 @@ module Aws::AlexaForBusiness
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateNetworkProfileResponse AWS API Documentation
     #
     class UpdateNetworkProfileResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] enabled_by_motion
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateProactiveJoin AWS API Documentation
+    #
+    class UpdateProactiveJoin < Struct.new(
+      :enabled_by_motion)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] profile_arn
     #   The ARN of the room profile to update. Required.

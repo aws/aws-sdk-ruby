@@ -120,6 +120,9 @@ module Aws::Appflow
     CustomerProfilesMetadata = Shapes::StructureShape.new(name: 'CustomerProfilesMetadata')
     DataApiRoleArn = Shapes::StringShape.new(name: 'DataApiRoleArn')
     DataPullMode = Shapes::StringShape.new(name: 'DataPullMode')
+    DataTransferApi = Shapes::StructureShape.new(name: 'DataTransferApi')
+    DataTransferApiType = Shapes::StringShape.new(name: 'DataTransferApiType')
+    DataTransferApiTypeName = Shapes::StringShape.new(name: 'DataTransferApiTypeName')
     DatabaseName = Shapes::StringShape.new(name: 'DatabaseName')
     DatabaseUrl = Shapes::StringShape.new(name: 'DatabaseUrl')
     DatadogConnectorOperator = Shapes::StringShape.new(name: 'DatadogConnectorOperator')
@@ -355,6 +358,9 @@ module Aws::Appflow
     SuccessResponseHandlingConfig = Shapes::StructureShape.new(name: 'SuccessResponseHandlingConfig')
     SupportedApiVersion = Shapes::StringShape.new(name: 'SupportedApiVersion')
     SupportedApiVersionList = Shapes::ListShape.new(name: 'SupportedApiVersionList')
+    SupportedDataTransferApis = Shapes::ListShape.new(name: 'SupportedDataTransferApis')
+    SupportedDataTransferType = Shapes::StringShape.new(name: 'SupportedDataTransferType')
+    SupportedDataTransferTypeList = Shapes::ListShape.new(name: 'SupportedDataTransferTypeList')
     SupportedFieldTypeDetails = Shapes::StructureShape.new(name: 'SupportedFieldTypeDetails')
     SupportedOperatorList = Shapes::ListShape.new(name: 'SupportedOperatorList')
     SupportedValueList = Shapes::ListShape.new(name: 'SupportedValueList')
@@ -502,6 +508,8 @@ module Aws::Appflow
     ConnectorConfiguration.add_member(:logo_url, Shapes::ShapeRef.new(shape: LogoURL, location_name: "logoURL"))
     ConnectorConfiguration.add_member(:registered_at, Shapes::ShapeRef.new(shape: Date, location_name: "registeredAt"))
     ConnectorConfiguration.add_member(:registered_by, Shapes::ShapeRef.new(shape: RegisteredBy, location_name: "registeredBy"))
+    ConnectorConfiguration.add_member(:supported_data_transfer_types, Shapes::ShapeRef.new(shape: SupportedDataTransferTypeList, location_name: "supportedDataTransferTypes"))
+    ConnectorConfiguration.add_member(:supported_data_transfer_apis, Shapes::ShapeRef.new(shape: SupportedDataTransferApis, location_name: "supportedDataTransferApis"))
     ConnectorConfiguration.struct_class = Types::ConnectorConfiguration
 
     ConnectorConfigurationsMap.key = Shapes::ShapeRef.new(shape: ConnectorType)
@@ -518,6 +526,7 @@ module Aws::Appflow
     ConnectorDetail.add_member(:registered_by, Shapes::ShapeRef.new(shape: RegisteredBy, location_name: "registeredBy"))
     ConnectorDetail.add_member(:connector_provisioning_type, Shapes::ShapeRef.new(shape: ConnectorProvisioningType, location_name: "connectorProvisioningType"))
     ConnectorDetail.add_member(:connector_modes, Shapes::ShapeRef.new(shape: ConnectorModeList, location_name: "connectorModes"))
+    ConnectorDetail.add_member(:supported_data_transfer_types, Shapes::ShapeRef.new(shape: SupportedDataTransferTypeList, location_name: "supportedDataTransferTypes"))
     ConnectorDetail.struct_class = Types::ConnectorDetail
 
     ConnectorEntity.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
@@ -742,6 +751,7 @@ module Aws::Appflow
 
     CustomConnectorSourceProperties.add_member(:entity_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "entityName"))
     CustomConnectorSourceProperties.add_member(:custom_properties, Shapes::ShapeRef.new(shape: CustomProperties, location_name: "customProperties"))
+    CustomConnectorSourceProperties.add_member(:data_transfer_api, Shapes::ShapeRef.new(shape: DataTransferApi, location_name: "dataTransferApi"))
     CustomConnectorSourceProperties.struct_class = Types::CustomConnectorSourceProperties
 
     CustomProperties.key = Shapes::ShapeRef.new(shape: CustomPropertyKey)
@@ -752,6 +762,10 @@ module Aws::Appflow
     CustomerProfilesDestinationProperties.struct_class = Types::CustomerProfilesDestinationProperties
 
     CustomerProfilesMetadata.struct_class = Types::CustomerProfilesMetadata
+
+    DataTransferApi.add_member(:name, Shapes::ShapeRef.new(shape: DataTransferApiTypeName, location_name: "Name"))
+    DataTransferApi.add_member(:type, Shapes::ShapeRef.new(shape: DataTransferApiType, location_name: "Type"))
+    DataTransferApi.struct_class = Types::DataTransferApi
 
     DatadogConnectorProfileCredentials.add_member(:api_key, Shapes::ShapeRef.new(shape: ApiKey, required: true, location_name: "apiKey"))
     DatadogConnectorProfileCredentials.add_member(:application_key, Shapes::ShapeRef.new(shape: ApplicationKey, required: true, location_name: "applicationKey"))
@@ -1414,6 +1428,10 @@ module Aws::Appflow
     SuccessResponseHandlingConfig.struct_class = Types::SuccessResponseHandlingConfig
 
     SupportedApiVersionList.member = Shapes::ShapeRef.new(shape: SupportedApiVersion)
+
+    SupportedDataTransferApis.member = Shapes::ShapeRef.new(shape: DataTransferApi)
+
+    SupportedDataTransferTypeList.member = Shapes::ShapeRef.new(shape: SupportedDataTransferType)
 
     SupportedFieldTypeDetails.add_member(:v1, Shapes::ShapeRef.new(shape: FieldTypeDetails, required: true, location_name: "v1"))
     SupportedFieldTypeDetails.struct_class = Types::SupportedFieldTypeDetails

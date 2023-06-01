@@ -97,6 +97,7 @@ module Aws::AlexaForBusiness
     CreateMeetingRoomConfiguration = Shapes::StructureShape.new(name: 'CreateMeetingRoomConfiguration')
     CreateNetworkProfileRequest = Shapes::StructureShape.new(name: 'CreateNetworkProfileRequest')
     CreateNetworkProfileResponse = Shapes::StructureShape.new(name: 'CreateNetworkProfileResponse')
+    CreateProactiveJoin = Shapes::StructureShape.new(name: 'CreateProactiveJoin')
     CreateProfileRequest = Shapes::StructureShape.new(name: 'CreateProfileRequest')
     CreateProfileResponse = Shapes::StructureShape.new(name: 'CreateProfileResponse')
     CreateRequireCheckIn = Shapes::StructureShape.new(name: 'CreateRequireCheckIn')
@@ -292,6 +293,7 @@ module Aws::AlexaForBusiness
     PhoneNumberList = Shapes::ListShape.new(name: 'PhoneNumberList')
     PhoneNumberType = Shapes::StringShape.new(name: 'PhoneNumberType')
     PrivacyPolicy = Shapes::StringShape.new(name: 'PrivacyPolicy')
+    ProactiveJoin = Shapes::StructureShape.new(name: 'ProactiveJoin')
     ProductDescription = Shapes::StringShape.new(name: 'ProductDescription')
     ProductId = Shapes::StringShape.new(name: 'ProductId')
     Profile = Shapes::StructureShape.new(name: 'Profile')
@@ -431,6 +433,7 @@ module Aws::AlexaForBusiness
     UpdateMeetingRoomConfiguration = Shapes::StructureShape.new(name: 'UpdateMeetingRoomConfiguration')
     UpdateNetworkProfileRequest = Shapes::StructureShape.new(name: 'UpdateNetworkProfileRequest')
     UpdateNetworkProfileResponse = Shapes::StructureShape.new(name: 'UpdateNetworkProfileResponse')
+    UpdateProactiveJoin = Shapes::StructureShape.new(name: 'UpdateProactiveJoin')
     UpdateProfileRequest = Shapes::StructureShape.new(name: 'UpdateProfileRequest')
     UpdateProfileResponse = Shapes::StructureShape.new(name: 'UpdateProfileResponse')
     UpdateRequireCheckIn = Shapes::StructureShape.new(name: 'UpdateRequireCheckIn')
@@ -662,6 +665,7 @@ module Aws::AlexaForBusiness
     CreateMeetingRoomConfiguration.add_member(:end_of_meeting_reminder, Shapes::ShapeRef.new(shape: CreateEndOfMeetingReminder, location_name: "EndOfMeetingReminder"))
     CreateMeetingRoomConfiguration.add_member(:instant_booking, Shapes::ShapeRef.new(shape: CreateInstantBooking, location_name: "InstantBooking"))
     CreateMeetingRoomConfiguration.add_member(:require_check_in, Shapes::ShapeRef.new(shape: CreateRequireCheckIn, location_name: "RequireCheckIn"))
+    CreateMeetingRoomConfiguration.add_member(:proactive_join, Shapes::ShapeRef.new(shape: CreateProactiveJoin, location_name: "ProactiveJoin"))
     CreateMeetingRoomConfiguration.struct_class = Types::CreateMeetingRoomConfiguration
 
     CreateNetworkProfileRequest.add_member(:network_profile_name, Shapes::ShapeRef.new(shape: NetworkProfileName, required: true, location_name: "NetworkProfileName"))
@@ -679,6 +683,9 @@ module Aws::AlexaForBusiness
 
     CreateNetworkProfileResponse.add_member(:network_profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "NetworkProfileArn"))
     CreateNetworkProfileResponse.struct_class = Types::CreateNetworkProfileResponse
+
+    CreateProactiveJoin.add_member(:enabled_by_motion, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "EnabledByMotion"))
+    CreateProactiveJoin.struct_class = Types::CreateProactiveJoin
 
     CreateProfileRequest.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, required: true, location_name: "ProfileName"))
     CreateProfileRequest.add_member(:timezone, Shapes::ShapeRef.new(shape: Timezone, required: true, location_name: "Timezone"))
@@ -1149,6 +1156,7 @@ module Aws::AlexaForBusiness
     MeetingRoomConfiguration.add_member(:end_of_meeting_reminder, Shapes::ShapeRef.new(shape: EndOfMeetingReminder, location_name: "EndOfMeetingReminder"))
     MeetingRoomConfiguration.add_member(:instant_booking, Shapes::ShapeRef.new(shape: InstantBooking, location_name: "InstantBooking"))
     MeetingRoomConfiguration.add_member(:require_check_in, Shapes::ShapeRef.new(shape: RequireCheckIn, location_name: "RequireCheckIn"))
+    MeetingRoomConfiguration.add_member(:proactive_join, Shapes::ShapeRef.new(shape: ProactiveJoin, location_name: "ProactiveJoin"))
     MeetingRoomConfiguration.struct_class = Types::MeetingRoomConfiguration
 
     MeetingSetting.add_member(:require_pin, Shapes::ShapeRef.new(shape: RequirePin, required: true, location_name: "RequirePin"))
@@ -1196,6 +1204,9 @@ module Aws::AlexaForBusiness
     PhoneNumber.struct_class = Types::PhoneNumber
 
     PhoneNumberList.member = Shapes::ShapeRef.new(shape: PhoneNumber)
+
+    ProactiveJoin.add_member(:enabled_by_motion, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnabledByMotion"))
+    ProactiveJoin.struct_class = Types::ProactiveJoin
 
     Profile.add_member(:profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ProfileArn"))
     Profile.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, location_name: "ProfileName"))
@@ -1616,6 +1627,7 @@ module Aws::AlexaForBusiness
     UpdateMeetingRoomConfiguration.add_member(:end_of_meeting_reminder, Shapes::ShapeRef.new(shape: UpdateEndOfMeetingReminder, location_name: "EndOfMeetingReminder"))
     UpdateMeetingRoomConfiguration.add_member(:instant_booking, Shapes::ShapeRef.new(shape: UpdateInstantBooking, location_name: "InstantBooking"))
     UpdateMeetingRoomConfiguration.add_member(:require_check_in, Shapes::ShapeRef.new(shape: UpdateRequireCheckIn, location_name: "RequireCheckIn"))
+    UpdateMeetingRoomConfiguration.add_member(:proactive_join, Shapes::ShapeRef.new(shape: UpdateProactiveJoin, location_name: "ProactiveJoin"))
     UpdateMeetingRoomConfiguration.struct_class = Types::UpdateMeetingRoomConfiguration
 
     UpdateNetworkProfileRequest.add_member(:network_profile_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "NetworkProfileArn"))
@@ -1628,6 +1640,9 @@ module Aws::AlexaForBusiness
     UpdateNetworkProfileRequest.struct_class = Types::UpdateNetworkProfileRequest
 
     UpdateNetworkProfileResponse.struct_class = Types::UpdateNetworkProfileResponse
+
+    UpdateProactiveJoin.add_member(:enabled_by_motion, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "EnabledByMotion"))
+    UpdateProactiveJoin.struct_class = Types::UpdateProactiveJoin
 
     UpdateProfileRequest.add_member(:profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ProfileArn"))
     UpdateProfileRequest.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, location_name: "ProfileName"))
@@ -1699,6 +1714,7 @@ module Aws::AlexaForBusiness
         o.name = "ApproveSkill"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ApproveSkillRequest)
         o.output = Shapes::ShapeRef.new(shape: ApproveSkillResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1710,6 +1726,7 @@ module Aws::AlexaForBusiness
         o.name = "AssociateContactWithAddressBook"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: AssociateContactWithAddressBookRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateContactWithAddressBookResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1719,6 +1736,7 @@ module Aws::AlexaForBusiness
         o.name = "AssociateDeviceWithNetworkProfile"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: AssociateDeviceWithNetworkProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateDeviceWithNetworkProfileResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1730,6 +1748,7 @@ module Aws::AlexaForBusiness
         o.name = "AssociateDeviceWithRoom"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: AssociateDeviceWithRoomRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateDeviceWithRoomResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1741,6 +1760,7 @@ module Aws::AlexaForBusiness
         o.name = "AssociateSkillGroupWithRoom"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: AssociateSkillGroupWithRoomRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateSkillGroupWithRoomResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
@@ -1750,6 +1770,7 @@ module Aws::AlexaForBusiness
         o.name = "AssociateSkillWithSkillGroup"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: AssociateSkillWithSkillGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateSkillWithSkillGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
@@ -1761,6 +1782,7 @@ module Aws::AlexaForBusiness
         o.name = "AssociateSkillWithUsers"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: AssociateSkillWithUsersRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateSkillWithUsersResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
@@ -1771,6 +1793,7 @@ module Aws::AlexaForBusiness
         o.name = "CreateAddressBook"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateAddressBookRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateAddressBookResponse)
         o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
@@ -1781,6 +1804,7 @@ module Aws::AlexaForBusiness
         o.name = "CreateBusinessReportSchedule"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateBusinessReportScheduleRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateBusinessReportScheduleResponse)
         o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
@@ -1790,6 +1814,7 @@ module Aws::AlexaForBusiness
         o.name = "CreateConferenceProvider"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateConferenceProviderRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateConferenceProviderResponse)
         o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
@@ -1799,6 +1824,7 @@ module Aws::AlexaForBusiness
         o.name = "CreateContact"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateContactRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateContactResponse)
         o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
@@ -1809,6 +1835,7 @@ module Aws::AlexaForBusiness
         o.name = "CreateGatewayGroup"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateGatewayGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateGatewayGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
@@ -1819,6 +1846,7 @@ module Aws::AlexaForBusiness
         o.name = "CreateNetworkProfile"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateNetworkProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateNetworkProfileResponse)
         o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
@@ -1832,6 +1860,7 @@ module Aws::AlexaForBusiness
         o.name = "CreateProfile"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateProfileResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1843,6 +1872,7 @@ module Aws::AlexaForBusiness
         o.name = "CreateRoom"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateRoomRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateRoomResponse)
         o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
@@ -1853,6 +1883,7 @@ module Aws::AlexaForBusiness
         o.name = "CreateSkillGroup"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateSkillGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateSkillGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
@@ -1864,6 +1895,7 @@ module Aws::AlexaForBusiness
         o.name = "CreateUser"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateUserRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateUserResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
@@ -1875,6 +1907,7 @@ module Aws::AlexaForBusiness
         o.name = "DeleteAddressBook"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteAddressBookRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteAddressBookResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1885,6 +1918,7 @@ module Aws::AlexaForBusiness
         o.name = "DeleteBusinessReportSchedule"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteBusinessReportScheduleRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteBusinessReportScheduleResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1895,6 +1929,7 @@ module Aws::AlexaForBusiness
         o.name = "DeleteConferenceProvider"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteConferenceProviderRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteConferenceProviderResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1904,6 +1939,7 @@ module Aws::AlexaForBusiness
         o.name = "DeleteContact"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteContactRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteContactResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1914,6 +1950,7 @@ module Aws::AlexaForBusiness
         o.name = "DeleteDevice"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteDeviceRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteDeviceResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1925,6 +1962,7 @@ module Aws::AlexaForBusiness
         o.name = "DeleteDeviceUsageData"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteDeviceUsageDataRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteDeviceUsageDataResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1936,6 +1974,7 @@ module Aws::AlexaForBusiness
         o.name = "DeleteGatewayGroup"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteGatewayGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteGatewayGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAssociatedException)
@@ -1945,6 +1984,7 @@ module Aws::AlexaForBusiness
         o.name = "DeleteNetworkProfile"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteNetworkProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteNetworkProfileResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
@@ -1956,6 +1996,7 @@ module Aws::AlexaForBusiness
         o.name = "DeleteProfile"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteProfileResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1966,6 +2007,7 @@ module Aws::AlexaForBusiness
         o.name = "DeleteRoom"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteRoomRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteRoomResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1976,6 +2018,7 @@ module Aws::AlexaForBusiness
         o.name = "DeleteRoomSkillParameter"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteRoomSkillParameterRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteRoomSkillParameterResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
@@ -1985,6 +2028,7 @@ module Aws::AlexaForBusiness
         o.name = "DeleteSkillAuthorization"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteSkillAuthorizationRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteSkillAuthorizationResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1995,6 +2039,7 @@ module Aws::AlexaForBusiness
         o.name = "DeleteSkillGroup"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteSkillGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteSkillGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2005,6 +2050,7 @@ module Aws::AlexaForBusiness
         o.name = "DeleteUser"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteUserRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteUserResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2015,6 +2061,7 @@ module Aws::AlexaForBusiness
         o.name = "DisassociateContactFromAddressBook"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DisassociateContactFromAddressBookRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateContactFromAddressBookResponse)
       end)
@@ -2023,6 +2070,7 @@ module Aws::AlexaForBusiness
         o.name = "DisassociateDeviceFromRoom"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DisassociateDeviceFromRoomRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateDeviceFromRoomResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
@@ -2033,6 +2081,7 @@ module Aws::AlexaForBusiness
         o.name = "DisassociateSkillFromSkillGroup"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DisassociateSkillFromSkillGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateSkillFromSkillGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
@@ -2043,6 +2092,7 @@ module Aws::AlexaForBusiness
         o.name = "DisassociateSkillFromUsers"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DisassociateSkillFromUsersRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateSkillFromUsersResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
@@ -2053,6 +2103,7 @@ module Aws::AlexaForBusiness
         o.name = "DisassociateSkillGroupFromRoom"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DisassociateSkillGroupFromRoomRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateSkillGroupFromRoomResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
@@ -2062,6 +2113,7 @@ module Aws::AlexaForBusiness
         o.name = "ForgetSmartHomeAppliances"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ForgetSmartHomeAppliancesRequest)
         o.output = Shapes::ShapeRef.new(shape: ForgetSmartHomeAppliancesResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2071,6 +2123,7 @@ module Aws::AlexaForBusiness
         o.name = "GetAddressBook"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetAddressBookRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAddressBookResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2080,6 +2133,7 @@ module Aws::AlexaForBusiness
         o.name = "GetConferencePreference"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetConferencePreferenceRequest)
         o.output = Shapes::ShapeRef.new(shape: GetConferencePreferenceResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2089,6 +2143,7 @@ module Aws::AlexaForBusiness
         o.name = "GetConferenceProvider"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetConferenceProviderRequest)
         o.output = Shapes::ShapeRef.new(shape: GetConferenceProviderResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2098,6 +2153,7 @@ module Aws::AlexaForBusiness
         o.name = "GetContact"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetContactRequest)
         o.output = Shapes::ShapeRef.new(shape: GetContactResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2107,6 +2163,7 @@ module Aws::AlexaForBusiness
         o.name = "GetDevice"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetDeviceRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDeviceResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2116,6 +2173,7 @@ module Aws::AlexaForBusiness
         o.name = "GetGateway"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetGatewayRequest)
         o.output = Shapes::ShapeRef.new(shape: GetGatewayResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2125,6 +2183,7 @@ module Aws::AlexaForBusiness
         o.name = "GetGatewayGroup"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetGatewayGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: GetGatewayGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2134,6 +2193,7 @@ module Aws::AlexaForBusiness
         o.name = "GetInvitationConfiguration"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetInvitationConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetInvitationConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2143,6 +2203,7 @@ module Aws::AlexaForBusiness
         o.name = "GetNetworkProfile"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetNetworkProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: GetNetworkProfileResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2153,6 +2214,7 @@ module Aws::AlexaForBusiness
         o.name = "GetProfile"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: GetProfileResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2162,6 +2224,7 @@ module Aws::AlexaForBusiness
         o.name = "GetRoom"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetRoomRequest)
         o.output = Shapes::ShapeRef.new(shape: GetRoomResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2171,6 +2234,7 @@ module Aws::AlexaForBusiness
         o.name = "GetRoomSkillParameter"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetRoomSkillParameterRequest)
         o.output = Shapes::ShapeRef.new(shape: GetRoomSkillParameterResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2180,6 +2244,7 @@ module Aws::AlexaForBusiness
         o.name = "GetSkillGroup"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetSkillGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSkillGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2189,6 +2254,7 @@ module Aws::AlexaForBusiness
         o.name = "ListBusinessReportSchedules"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListBusinessReportSchedulesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListBusinessReportSchedulesResponse)
         o[:pager] = Aws::Pager.new(
@@ -2203,6 +2269,7 @@ module Aws::AlexaForBusiness
         o.name = "ListConferenceProviders"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListConferenceProvidersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListConferenceProvidersResponse)
         o[:pager] = Aws::Pager.new(
@@ -2217,6 +2284,7 @@ module Aws::AlexaForBusiness
         o.name = "ListDeviceEvents"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListDeviceEventsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDeviceEventsResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2232,6 +2300,7 @@ module Aws::AlexaForBusiness
         o.name = "ListGatewayGroups"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListGatewayGroupsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListGatewayGroupsResponse)
         o[:pager] = Aws::Pager.new(
@@ -2246,6 +2315,7 @@ module Aws::AlexaForBusiness
         o.name = "ListGateways"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListGatewaysRequest)
         o.output = Shapes::ShapeRef.new(shape: ListGatewaysResponse)
         o[:pager] = Aws::Pager.new(
@@ -2260,6 +2330,7 @@ module Aws::AlexaForBusiness
         o.name = "ListSkills"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListSkillsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListSkillsResponse)
         o[:pager] = Aws::Pager.new(
@@ -2274,6 +2345,7 @@ module Aws::AlexaForBusiness
         o.name = "ListSkillsStoreCategories"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListSkillsStoreCategoriesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListSkillsStoreCategoriesResponse)
         o[:pager] = Aws::Pager.new(
@@ -2288,6 +2360,7 @@ module Aws::AlexaForBusiness
         o.name = "ListSkillsStoreSkillsByCategory"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListSkillsStoreSkillsByCategoryRequest)
         o.output = Shapes::ShapeRef.new(shape: ListSkillsStoreSkillsByCategoryResponse)
         o[:pager] = Aws::Pager.new(
@@ -2302,6 +2375,7 @@ module Aws::AlexaForBusiness
         o.name = "ListSmartHomeAppliances"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListSmartHomeAppliancesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListSmartHomeAppliancesResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2317,6 +2391,7 @@ module Aws::AlexaForBusiness
         o.name = "ListTags"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListTagsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2332,6 +2407,7 @@ module Aws::AlexaForBusiness
         o.name = "PutConferencePreference"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutConferencePreferenceRequest)
         o.output = Shapes::ShapeRef.new(shape: PutConferencePreferenceResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2341,6 +2417,7 @@ module Aws::AlexaForBusiness
         o.name = "PutInvitationConfiguration"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutInvitationConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: PutInvitationConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2351,6 +2428,7 @@ module Aws::AlexaForBusiness
         o.name = "PutRoomSkillParameter"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutRoomSkillParameterRequest)
         o.output = Shapes::ShapeRef.new(shape: PutRoomSkillParameterResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
@@ -2360,6 +2438,7 @@ module Aws::AlexaForBusiness
         o.name = "PutSkillAuthorization"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutSkillAuthorizationRequest)
         o.output = Shapes::ShapeRef.new(shape: PutSkillAuthorizationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -2370,6 +2449,7 @@ module Aws::AlexaForBusiness
         o.name = "RegisterAVSDevice"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: RegisterAVSDeviceRequest)
         o.output = Shapes::ShapeRef.new(shape: RegisterAVSDeviceResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -2382,6 +2462,7 @@ module Aws::AlexaForBusiness
         o.name = "RejectSkill"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: RejectSkillRequest)
         o.output = Shapes::ShapeRef.new(shape: RejectSkillResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
@@ -2392,6 +2473,7 @@ module Aws::AlexaForBusiness
         o.name = "ResolveRoom"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ResolveRoomRequest)
         o.output = Shapes::ShapeRef.new(shape: ResolveRoomResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2401,6 +2483,7 @@ module Aws::AlexaForBusiness
         o.name = "RevokeInvitation"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: RevokeInvitationRequest)
         o.output = Shapes::ShapeRef.new(shape: RevokeInvitationResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2411,6 +2494,7 @@ module Aws::AlexaForBusiness
         o.name = "SearchAddressBooks"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: SearchAddressBooksRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchAddressBooksResponse)
         o[:pager] = Aws::Pager.new(
@@ -2425,6 +2509,7 @@ module Aws::AlexaForBusiness
         o.name = "SearchContacts"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: SearchContactsRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchContactsResponse)
         o[:pager] = Aws::Pager.new(
@@ -2439,6 +2524,7 @@ module Aws::AlexaForBusiness
         o.name = "SearchDevices"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: SearchDevicesRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchDevicesResponse)
         o[:pager] = Aws::Pager.new(
@@ -2453,6 +2539,7 @@ module Aws::AlexaForBusiness
         o.name = "SearchNetworkProfiles"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: SearchNetworkProfilesRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchNetworkProfilesResponse)
         o[:pager] = Aws::Pager.new(
@@ -2467,6 +2554,7 @@ module Aws::AlexaForBusiness
         o.name = "SearchProfiles"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: SearchProfilesRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchProfilesResponse)
         o[:pager] = Aws::Pager.new(
@@ -2481,6 +2569,7 @@ module Aws::AlexaForBusiness
         o.name = "SearchRooms"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: SearchRoomsRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchRoomsResponse)
         o[:pager] = Aws::Pager.new(
@@ -2495,6 +2584,7 @@ module Aws::AlexaForBusiness
         o.name = "SearchSkillGroups"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: SearchSkillGroupsRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchSkillGroupsResponse)
         o[:pager] = Aws::Pager.new(
@@ -2509,6 +2599,7 @@ module Aws::AlexaForBusiness
         o.name = "SearchUsers"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: SearchUsersRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchUsersResponse)
         o[:pager] = Aws::Pager.new(
@@ -2533,6 +2624,7 @@ module Aws::AlexaForBusiness
         o.name = "SendInvitation"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: SendInvitationRequest)
         o.output = Shapes::ShapeRef.new(shape: SendInvitationResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2544,6 +2636,7 @@ module Aws::AlexaForBusiness
         o.name = "StartDeviceSync"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: StartDeviceSyncRequest)
         o.output = Shapes::ShapeRef.new(shape: StartDeviceSyncResponse)
         o.errors << Shapes::ShapeRef.new(shape: DeviceNotRegisteredException)
@@ -2553,6 +2646,7 @@ module Aws::AlexaForBusiness
         o.name = "StartSmartHomeApplianceDiscovery"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: StartSmartHomeApplianceDiscoveryRequest)
         o.output = Shapes::ShapeRef.new(shape: StartSmartHomeApplianceDiscoveryResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2562,6 +2656,7 @@ module Aws::AlexaForBusiness
         o.name = "TagResource"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2571,6 +2666,7 @@ module Aws::AlexaForBusiness
         o.name = "UntagResource"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2580,6 +2676,7 @@ module Aws::AlexaForBusiness
         o.name = "UpdateAddressBook"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateAddressBookRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateAddressBookResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2591,6 +2688,7 @@ module Aws::AlexaForBusiness
         o.name = "UpdateBusinessReportSchedule"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateBusinessReportScheduleRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateBusinessReportScheduleResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2601,6 +2699,7 @@ module Aws::AlexaForBusiness
         o.name = "UpdateConferenceProvider"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateConferenceProviderRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateConferenceProviderResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2610,6 +2709,7 @@ module Aws::AlexaForBusiness
         o.name = "UpdateContact"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateContactRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateContactResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2620,6 +2720,7 @@ module Aws::AlexaForBusiness
         o.name = "UpdateDevice"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateDeviceRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDeviceResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2631,6 +2732,7 @@ module Aws::AlexaForBusiness
         o.name = "UpdateGateway"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateGatewayRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateGatewayResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2641,6 +2743,7 @@ module Aws::AlexaForBusiness
         o.name = "UpdateGatewayGroup"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateGatewayGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateGatewayGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2651,6 +2754,7 @@ module Aws::AlexaForBusiness
         o.name = "UpdateNetworkProfile"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateNetworkProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateNetworkProfileResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2664,6 +2768,7 @@ module Aws::AlexaForBusiness
         o.name = "UpdateProfile"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateProfileResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2675,6 +2780,7 @@ module Aws::AlexaForBusiness
         o.name = "UpdateRoom"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateRoomRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateRoomResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -2685,6 +2791,7 @@ module Aws::AlexaForBusiness
         o.name = "UpdateSkillGroup"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateSkillGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateSkillGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)

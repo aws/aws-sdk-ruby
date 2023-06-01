@@ -399,10 +399,11 @@ module Aws::IVS
     #   resp.channels[0].latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.channels[0].name #=> String
     #   resp.channels[0].playback_url #=> String
+    #   resp.channels[0].preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
     #   resp.channels[0].recording_configuration_arn #=> String
     #   resp.channels[0].tags #=> Hash
     #   resp.channels[0].tags["TagKey"] #=> String
-    #   resp.channels[0].type #=> String, one of "BASIC", "STANDARD"
+    #   resp.channels[0].type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
     #   resp.errors #=> Array
     #   resp.errors[0].arn #=> String
     #   resp.errors[0].code #=> String
@@ -473,6 +474,13 @@ module Aws::IVS
     # @option params [String] :name
     #   Channel name.
     #
+    # @option params [String] :preset
+    #   Optional transcode preset for the channel. This is selectable only for
+    #   `ADVANCED_HD` and `ADVANCED_SD` channel types. For those channel
+    #   types, the default `preset` is `HIGHER_BANDWIDTH_DELIVERY`. For other
+    #   channel types (`BASIC` and `STANDARD`), `preset` is the empty string
+    #   (`""`).
+    #
     # @option params [String] :recording_configuration_arn
     #   Recording-configuration ARN. Default: "" (empty string, recording is
     #   disabled).
@@ -490,9 +498,19 @@ module Aws::IVS
     #
     # @option params [String] :type
     #   Channel type, which determines the allowable resolution and bitrate.
-    #   *If you exceed the allowable resolution or bitrate, the stream
-    #   probably will disconnect immediately.* Default: `STANDARD`. Valid
-    #   values:
+    #   *If you exceed the allowable input resolution or bitrate, the stream
+    #   probably will disconnect immediately.* Some types generate multiple
+    #   qualities (renditions) from the original input; this automatically
+    #   gives viewers the best experience for their devices and network
+    #   conditions. Some types provide transcoded video; transcoding allows
+    #   higher playback quality across a range of download speeds. Default:
+    #   `STANDARD`. Valid values:
+    #
+    #   * `BASIC`: Video is transmuxed: Amazon IVS delivers the original input
+    #     quality to viewers. The viewer’s video-quality choice is limited to
+    #     the original input. Input resolution can be up to 1080p and bitrate
+    #     can be up to 1.5 Mbps for 480p and up to 3.5 Mbps for resolutions
+    #     between 480p and 1080p. Original audio is passed through.
     #
     #   * `STANDARD`: Video is transcoded: multiple qualities are generated
     #     from the original input, to automatically give viewers the best
@@ -500,13 +518,36 @@ module Aws::IVS
     #     allows higher playback quality across a range of download speeds.
     #     Resolution can be up to 1080p and bitrate can be up to 8.5 Mbps.
     #     Audio is transcoded only for renditions 360p and below; above that,
-    #     audio is passed through. This is the default.
+    #     audio is passed through. This is the default when you create a
+    #     channel.
     #
-    #   * `BASIC`: Video is transmuxed: Amazon IVS delivers the original input
-    #     to viewers. The viewer’s video-quality choice is limited to the
-    #     original input. Resolution can be up to 1080p and bitrate can be up
-    #     to 1.5 Mbps for 480p and up to 3.5 Mbps for resolutions between 480p
-    #     and 1080p.
+    #   * `ADVANCED_SD`: Video is transcoded; multiple qualities are generated
+    #     from the original input, to automatically give viewers the best
+    #     experience for their devices and network conditions. Input
+    #     resolution can be up to 1080p and bitrate can be up to 8.5 Mbps;
+    #     output is capped at SD quality (480p). You can select an optional
+    #     transcode preset (see below). Audio for all renditions is
+    #     transcoded, and an audio-only rendition is available.
+    #
+    #   * `ADVANCED_HD`: Video is transcoded; multiple qualities are generated
+    #     from the original input, to automatically give viewers the best
+    #     experience for their devices and network conditions. Input
+    #     resolution can be up to 1080p and bitrate can be up to 8.5 Mbps;
+    #     output is capped at HD quality (720p). You can select an optional
+    #     transcode preset (see below). Audio for all renditions is
+    #     transcoded, and an audio-only rendition is available.
+    #
+    #   Optional *transcode presets* (available for the `ADVANCED` types)
+    #   allow you to trade off available download bandwidth and video quality,
+    #   to optimize the viewing experience. There are two presets:
+    #
+    #   * *Constrained bandwidth delivery* uses a lower bitrate for each
+    #     quality level. Use it if you have low download bandwidth and/or
+    #     simple video content (e.g., talking heads)
+    #
+    #   * *Higher bandwidth delivery* uses a higher bitrate for each quality
+    #     level. Use it if you have high download bandwidth and/or complex
+    #     video content (e.g., flashes and quick scene changes).
     #
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -520,11 +561,12 @@ module Aws::IVS
     #     insecure_ingest: false,
     #     latency_mode: "NORMAL", # accepts NORMAL, LOW
     #     name: "ChannelName",
+    #     preset: "HIGHER_BANDWIDTH_DELIVERY", # accepts HIGHER_BANDWIDTH_DELIVERY, CONSTRAINED_BANDWIDTH_DELIVERY
     #     recording_configuration_arn: "ChannelRecordingConfigurationArn",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     type: "BASIC", # accepts BASIC, STANDARD
+    #     type: "BASIC", # accepts BASIC, STANDARD, ADVANCED_SD, ADVANCED_HD
     #   })
     #
     # @example Response structure
@@ -536,10 +578,11 @@ module Aws::IVS
     #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.channel.name #=> String
     #   resp.channel.playback_url #=> String
+    #   resp.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
     #   resp.channel.recording_configuration_arn #=> String
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["TagKey"] #=> String
-    #   resp.channel.type #=> String, one of "BASIC", "STANDARD"
+    #   resp.channel.type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
     #   resp.stream_key.arn #=> String
     #   resp.stream_key.channel_arn #=> String
     #   resp.stream_key.tags #=> Hash
@@ -833,10 +876,11 @@ module Aws::IVS
     #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.channel.name #=> String
     #   resp.channel.playback_url #=> String
+    #   resp.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
     #   resp.channel.recording_configuration_arn #=> String
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["TagKey"] #=> String
-    #   resp.channel.type #=> String, one of "BASIC", "STANDARD"
+    #   resp.channel.type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetChannel AWS API Documentation
     #
@@ -1020,10 +1064,11 @@ module Aws::IVS
     #   resp.stream_session.channel.latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.stream_session.channel.name #=> String
     #   resp.stream_session.channel.playback_url #=> String
+    #   resp.stream_session.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
     #   resp.stream_session.channel.recording_configuration_arn #=> String
     #   resp.stream_session.channel.tags #=> Hash
     #   resp.stream_session.channel.tags["TagKey"] #=> String
-    #   resp.stream_session.channel.type #=> String, one of "BASIC", "STANDARD"
+    #   resp.stream_session.channel.type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
     #   resp.stream_session.end_time #=> Time
     #   resp.stream_session.ingest_configuration.audio.channels #=> Integer
     #   resp.stream_session.ingest_configuration.audio.codec #=> String
@@ -1165,9 +1210,11 @@ module Aws::IVS
     #   resp.channels[0].insecure_ingest #=> Boolean
     #   resp.channels[0].latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.channels[0].name #=> String
+    #   resp.channels[0].preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
     #   resp.channels[0].recording_configuration_arn #=> String
     #   resp.channels[0].tags #=> Hash
     #   resp.channels[0].tags["TagKey"] #=> String
+    #   resp.channels[0].type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListChannels AWS API Documentation
@@ -1582,9 +1629,9 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Updates a channel's configuration. This does not affect an ongoing
-    # stream of this channel. You must stop and restart the stream for the
-    # changes to take effect.
+    # Updates a channel's configuration. Live channels cannot be updated.
+    # You must stop the ongoing stream, update the channel, and restart the
+    # stream for the changes to take effect.
     #
     # @option params [required, String] :arn
     #   ARN of the channel to be updated.
@@ -1604,6 +1651,13 @@ module Aws::IVS
     # @option params [String] :name
     #   Channel name.
     #
+    # @option params [String] :preset
+    #   Optional transcode preset for the channel. This is selectable only for
+    #   `ADVANCED_HD` and `ADVANCED_SD` channel types. For those channel
+    #   types, the default `preset` is `HIGHER_BANDWIDTH_DELIVERY`. For other
+    #   channel types (`BASIC` and `STANDARD`), `preset` is the empty string
+    #   (`""`).
+    #
     # @option params [String] :recording_configuration_arn
     #   Recording-configuration ARN. If this is set to an empty string,
     #   recording is disabled. A value other than an empty string indicates
@@ -1611,8 +1665,19 @@ module Aws::IVS
     #
     # @option params [String] :type
     #   Channel type, which determines the allowable resolution and bitrate.
-    #   *If you exceed the allowable resolution or bitrate, the stream
-    #   probably will disconnect immediately*. Valid values:
+    #   *If you exceed the allowable input resolution or bitrate, the stream
+    #   probably will disconnect immediately.* Some types generate multiple
+    #   qualities (renditions) from the original input; this automatically
+    #   gives viewers the best experience for their devices and network
+    #   conditions. Some types provide transcoded video; transcoding allows
+    #   higher playback quality across a range of download speeds. Default:
+    #   `STANDARD`. Valid values:
+    #
+    #   * `BASIC`: Video is transmuxed: Amazon IVS delivers the original input
+    #     quality to viewers. The viewer’s video-quality choice is limited to
+    #     the original input. Input resolution can be up to 1080p and bitrate
+    #     can be up to 1.5 Mbps for 480p and up to 3.5 Mbps for resolutions
+    #     between 480p and 1080p. Original audio is passed through.
     #
     #   * `STANDARD`: Video is transcoded: multiple qualities are generated
     #     from the original input, to automatically give viewers the best
@@ -1620,13 +1685,36 @@ module Aws::IVS
     #     allows higher playback quality across a range of download speeds.
     #     Resolution can be up to 1080p and bitrate can be up to 8.5 Mbps.
     #     Audio is transcoded only for renditions 360p and below; above that,
-    #     audio is passed through. This is the default.
+    #     audio is passed through. This is the default when you create a
+    #     channel.
     #
-    #   * `BASIC`: Video is transmuxed: Amazon IVS delivers the original input
-    #     to viewers. The viewer’s video-quality choice is limited to the
-    #     original input. Resolution can be up to 1080p and bitrate can be up
-    #     to 1.5 Mbps for 480p and up to 3.5 Mbps for resolutions between 480p
-    #     and 1080p.
+    #   * `ADVANCED_SD`: Video is transcoded; multiple qualities are generated
+    #     from the original input, to automatically give viewers the best
+    #     experience for their devices and network conditions. Input
+    #     resolution can be up to 1080p and bitrate can be up to 8.5 Mbps;
+    #     output is capped at SD quality (480p). You can select an optional
+    #     transcode preset (see below). Audio for all renditions is
+    #     transcoded, and an audio-only rendition is available.
+    #
+    #   * `ADVANCED_HD`: Video is transcoded; multiple qualities are generated
+    #     from the original input, to automatically give viewers the best
+    #     experience for their devices and network conditions. Input
+    #     resolution can be up to 1080p and bitrate can be up to 8.5 Mbps;
+    #     output is capped at HD quality (720p). You can select an optional
+    #     transcode preset (see below). Audio for all renditions is
+    #     transcoded, and an audio-only rendition is available.
+    #
+    #   Optional *transcode presets* (available for the `ADVANCED` types)
+    #   allow you to trade off available download bandwidth and video quality,
+    #   to optimize the viewing experience. There are two presets:
+    #
+    #   * *Constrained bandwidth delivery* uses a lower bitrate for each
+    #     quality level. Use it if you have low download bandwidth and/or
+    #     simple video content (e.g., talking heads)
+    #
+    #   * *Higher bandwidth delivery* uses a higher bitrate for each quality
+    #     level. Use it if you have high download bandwidth and/or complex
+    #     video content (e.g., flashes and quick scene changes).
     #
     # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1640,8 +1728,9 @@ module Aws::IVS
     #     insecure_ingest: false,
     #     latency_mode: "NORMAL", # accepts NORMAL, LOW
     #     name: "ChannelName",
+    #     preset: "HIGHER_BANDWIDTH_DELIVERY", # accepts HIGHER_BANDWIDTH_DELIVERY, CONSTRAINED_BANDWIDTH_DELIVERY
     #     recording_configuration_arn: "ChannelRecordingConfigurationArn",
-    #     type: "BASIC", # accepts BASIC, STANDARD
+    #     type: "BASIC", # accepts BASIC, STANDARD, ADVANCED_SD, ADVANCED_HD
     #   })
     #
     # @example Response structure
@@ -1653,10 +1742,11 @@ module Aws::IVS
     #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.channel.name #=> String
     #   resp.channel.playback_url #=> String
+    #   resp.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
     #   resp.channel.recording_configuration_arn #=> String
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["TagKey"] #=> String
-    #   resp.channel.type #=> String, one of "BASIC", "STANDARD"
+    #   resp.channel.type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UpdateChannel AWS API Documentation
     #
@@ -1680,7 +1770,7 @@ module Aws::IVS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
