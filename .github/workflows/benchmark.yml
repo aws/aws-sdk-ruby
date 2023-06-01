@@ -1,0 +1,57 @@
+name: Benchmark
+
+on:
+  push:
+    branches:
+      - version-3
+
+  pull_request:
+    branches:
+      - version-3
+
+permissions:
+  id-token: write # required for OIDC
+  contents: read
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: [jruby-9.2, 2.6, 2.7, 3.2]
+
+    steps:
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+
+      - uses: actions/checkout@v3
+
+      - name: Install gems
+        run: |
+          bundle install --without docs repl development
+
+      - name: SDK Build
+        run: bundle exec rake build
+
+      - name: Benchmark
+        env:
+          JRUBY_OPTS: -J-Xmx4g
+        run: EXECUTION_ENV=github-action bundle exec rake benchmark
+
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::469596866844:role/aws-sdk-ruby-performance-reporter
+          role-session-name: benchmark-report
+          aws-region: us-west-2
+
+      - name: Archive benchmark report
+        run: |
+          GH_REF=${{github.head_ref}} GH_EVENT=${{github.event_name}} bundle exec rake benchmark:archive
+
+      - name: Upload benchmark metrics
+        run: |
+          GH_REF=${{github.head_ref}} GH_EVENT=${{github.event_name}} bundle exec rake benchmark:put-metrics
