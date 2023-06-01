@@ -1751,6 +1751,28 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # Describes Compute Optimizer's integration status with your chosen
+    # external metric provider. For example, Datadog.
+    #
+    # @!attribute [rw] status_code
+    #   The status code for Compute Optimizer's integration with an
+    #   external metrics provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for Compute Optimizer's integration status with your
+    #   external metric provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExternalMetricStatus AWS API Documentation
+    #
+    class ExternalMetricStatus < Struct.new(
+      :status_code,
+      :status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the external metrics preferences for EC2 rightsizing
     # recommendations.
     #
@@ -3045,6 +3067,11 @@ module Aws::ComputeOptimizer
     #   A list of tags assigned to your Amazon EC2 instance recommendations.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] external_metric_status
+    #   An object that describes Compute Optimizer's integration status
+    #   with your external metrics provider.
+    #   @return [Types::ExternalMetricStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/InstanceRecommendation AWS API Documentation
     #
     class InstanceRecommendation < Struct.new(
@@ -3063,7 +3090,8 @@ module Aws::ComputeOptimizer
       :effective_recommendation_preferences,
       :inferred_workload_types,
       :instance_state,
-      :tags)
+      :tags,
+      :external_metric_status)
       SENSITIVE = []
       include Aws::Structure
     end

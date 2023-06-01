@@ -38,6 +38,7 @@ module Aws::GameLift
     BuildStatus = Shapes::StringShape.new(name: 'BuildStatus')
     CertificateConfiguration = Shapes::StructureShape.new(name: 'CertificateConfiguration')
     CertificateType = Shapes::StringShape.new(name: 'CertificateType')
+    ClaimFilterOption = Shapes::StructureShape.new(name: 'ClaimFilterOption')
     ClaimGameServerInput = Shapes::StructureShape.new(name: 'ClaimGameServerInput')
     ClaimGameServerOutput = Shapes::StructureShape.new(name: 'ClaimGameServerOutput')
     ComparisonOperatorType = Shapes::StringShape.new(name: 'ComparisonOperatorType')
@@ -179,6 +180,8 @@ module Aws::GameLift
     EventCode = Shapes::StringShape.new(name: 'EventCode')
     EventList = Shapes::ListShape.new(name: 'EventList')
     FilterConfiguration = Shapes::StructureShape.new(name: 'FilterConfiguration')
+    FilterInstanceStatus = Shapes::StringShape.new(name: 'FilterInstanceStatus')
+    FilterInstanceStatuses = Shapes::ListShape.new(name: 'FilterInstanceStatuses')
     FleetAction = Shapes::StringShape.new(name: 'FleetAction')
     FleetActionList = Shapes::ListShape.new(name: 'FleetActionList')
     FleetArn = Shapes::StringShape.new(name: 'FleetArn')
@@ -536,9 +539,13 @@ module Aws::GameLift
     CertificateConfiguration.add_member(:certificate_type, Shapes::ShapeRef.new(shape: CertificateType, required: true, location_name: "CertificateType"))
     CertificateConfiguration.struct_class = Types::CertificateConfiguration
 
+    ClaimFilterOption.add_member(:instance_statuses, Shapes::ShapeRef.new(shape: FilterInstanceStatuses, location_name: "InstanceStatuses"))
+    ClaimFilterOption.struct_class = Types::ClaimFilterOption
+
     ClaimGameServerInput.add_member(:game_server_group_name, Shapes::ShapeRef.new(shape: GameServerGroupNameOrArn, required: true, location_name: "GameServerGroupName"))
     ClaimGameServerInput.add_member(:game_server_id, Shapes::ShapeRef.new(shape: GameServerId, location_name: "GameServerId"))
     ClaimGameServerInput.add_member(:game_server_data, Shapes::ShapeRef.new(shape: GameServerData, location_name: "GameServerData"))
+    ClaimGameServerInput.add_member(:filter_option, Shapes::ShapeRef.new(shape: ClaimFilterOption, location_name: "FilterOption"))
     ClaimGameServerInput.struct_class = Types::ClaimGameServerInput
 
     ClaimGameServerOutput.add_member(:game_server, Shapes::ShapeRef.new(shape: GameServer, location_name: "GameServer"))
@@ -1098,6 +1105,8 @@ module Aws::GameLift
 
     FilterConfiguration.add_member(:allowed_locations, Shapes::ShapeRef.new(shape: LocationList, location_name: "AllowedLocations"))
     FilterConfiguration.struct_class = Types::FilterConfiguration
+
+    FilterInstanceStatuses.member = Shapes::ShapeRef.new(shape: FilterInstanceStatus)
 
     FleetActionList.member = Shapes::ShapeRef.new(shape: FleetAction)
 

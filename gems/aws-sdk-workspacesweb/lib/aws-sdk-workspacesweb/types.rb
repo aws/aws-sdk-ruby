@@ -57,6 +57,40 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
+    # @!attribute [rw] ip_access_settings_arn
+    #   The ARN of the IP access settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_arn
+    #   The ARN of the web portal.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/AssociateIpAccessSettingsRequest AWS API Documentation
+    #
+    class AssociateIpAccessSettingsRequest < Struct.new(
+      :ip_access_settings_arn,
+      :portal_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ip_access_settings_arn
+    #   The ARN of the IP access settings resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_arn
+    #   The ARN of the web portal.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/AssociateIpAccessSettingsResponse AWS API Documentation
+    #
+    class AssociateIpAccessSettingsResponse < Struct.new(
+      :ip_access_settings_arn,
+      :portal_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] network_settings_arn
     #   The ARN of the network settings.
     #   @return [String]
@@ -505,6 +539,72 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
+    # @!attribute [rw] additional_encryption_context
+    #   Additional encryption context of the IP access settings.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes only once. With an idempotent request, if the original
+    #   request completes successfully, subsequent retries with the same
+    #   client token returns the result from the original successful
+    #   request.
+    #
+    #   If you do not specify a client token, one is automatically generated
+    #   by the AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_managed_key
+    #   The custom managed key of the IP access settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the IP access settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the IP access settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_rules
+    #   The IP rules of the IP access settings.
+    #   @return [Array<Types::IpRule>]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the browser settings resource. A tag is a
+    #   key-value pair.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/CreateIpAccessSettingsRequest AWS API Documentation
+    #
+    class CreateIpAccessSettingsRequest < Struct.new(
+      :additional_encryption_context,
+      :client_token,
+      :customer_managed_key,
+      :description,
+      :display_name,
+      :ip_rules,
+      :tags)
+      SENSITIVE = [:description, :display_name, :ip_rules]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ip_access_settings_arn
+    #   The ARN of the IP access settings resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/CreateIpAccessSettingsResponse AWS API Documentation
+    #
+    class CreateIpAccessSettingsResponse < Struct.new(
+      :ip_access_settings_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -851,6 +951,22 @@ module Aws::WorkSpacesWeb
     #
     class DeleteIdentityProviderResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] ip_access_settings_arn
+    #   The ARN of the IP access settings.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/DeleteIpAccessSettingsRequest AWS API Documentation
+    #
+    class DeleteIpAccessSettingsRequest < Struct.new(
+      :ip_access_settings_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/DeleteIpAccessSettingsResponse AWS API Documentation
+    #
+    class DeleteIpAccessSettingsResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] network_settings_arn
     #   The ARN of the network settings.
     #   @return [String]
@@ -946,6 +1062,22 @@ module Aws::WorkSpacesWeb
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/DisassociateBrowserSettingsResponse AWS API Documentation
     #
     class DisassociateBrowserSettingsResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] portal_arn
+    #   The ARN of the web portal.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/DisassociateIpAccessSettingsRequest AWS API Documentation
+    #
+    class DisassociateIpAccessSettingsRequest < Struct.new(
+      :portal_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/DisassociateIpAccessSettingsResponse AWS API Documentation
+    #
+    class DisassociateIpAccessSettingsResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] portal_arn
     #   The ARN of the web portal.
@@ -1055,6 +1187,30 @@ module Aws::WorkSpacesWeb
     #
     class GetIdentityProviderResponse < Struct.new(
       :identity_provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ip_access_settings_arn
+    #   The ARN of the IP access settings.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetIpAccessSettingsRequest AWS API Documentation
+    #
+    class GetIpAccessSettingsRequest < Struct.new(
+      :ip_access_settings_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ip_access_settings
+    #   The IP access settings.
+    #   @return [Types::IpAccessSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetIpAccessSettingsResponse AWS API Documentation
+    #
+    class GetIpAccessSettingsResponse < Struct.new(
+      :ip_access_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1374,6 +1530,95 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
+    # The IP access settings resource that can be associated with a web
+    # portal.
+    #
+    # @!attribute [rw] associated_portal_arns
+    #   A list of web portal ARNs that this IP access settings resource is
+    #   associated with.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] creation_date
+    #   The creation date timestamp of the IP access settings.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the IP access settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the IP access settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_access_settings_arn
+    #   The ARN of the IP access settings resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_rules
+    #   The IP rules of the IP access settings.
+    #   @return [Array<Types::IpRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/IpAccessSettings AWS API Documentation
+    #
+    class IpAccessSettings < Struct.new(
+      :associated_portal_arns,
+      :creation_date,
+      :description,
+      :display_name,
+      :ip_access_settings_arn,
+      :ip_rules)
+      SENSITIVE = [:description, :display_name, :ip_rules]
+      include Aws::Structure
+    end
+
+    # The summary of IP access settings.
+    #
+    # @!attribute [rw] creation_date
+    #   The creation date timestamp of the IP access settings.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the IP access settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the IP access settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_access_settings_arn
+    #   The ARN of IP access settings.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/IpAccessSettingsSummary AWS API Documentation
+    #
+    class IpAccessSettingsSummary < Struct.new(
+      :creation_date,
+      :description,
+      :display_name,
+      :ip_access_settings_arn)
+      SENSITIVE = [:description, :display_name]
+      include Aws::Structure
+    end
+
+    # The IP rules of the IP access settings.
+    #
+    # @!attribute [rw] description
+    #   The description of the IP rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_range
+    #   The IP range of the IP rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/IpRule AWS API Documentation
+    #
+    class IpRule < Struct.new(
+      :description,
+      :ip_range)
+      SENSITIVE = [:description, :ip_range]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   The maximum number of results to be included in the next page.
     #   @return [Integer]
@@ -1446,6 +1691,42 @@ module Aws::WorkSpacesWeb
     #
     class ListIdentityProvidersResponse < Struct.new(
       :identity_providers,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be included in the next page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListIpAccessSettingsRequest AWS API Documentation
+    #
+    class ListIpAccessSettingsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ip_access_settings
+    #   The IP access settings.
+    #   @return [Array<Types::IpAccessSettingsSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListIpAccessSettingsResponse AWS API Documentation
+    #
+    class ListIpAccessSettingsResponse < Struct.new(
+      :ip_access_settings,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1797,6 +2078,10 @@ module Aws::WorkSpacesWeb
     #   The name of the web portal.
     #   @return [String]
     #
+    # @!attribute [rw] ip_access_settings_arn
+    #   The ARN of the IP access settings.
+    #   @return [String]
+    #
     # @!attribute [rw] network_settings_arn
     #   The ARN of the network settings that is associated with the web
     #   portal.
@@ -1844,6 +2129,7 @@ module Aws::WorkSpacesWeb
       :browser_type,
       :creation_date,
       :display_name,
+      :ip_access_settings_arn,
       :network_settings_arn,
       :portal_arn,
       :portal_endpoint,
@@ -1894,6 +2180,10 @@ module Aws::WorkSpacesWeb
     #   The name of the web portal.
     #   @return [String]
     #
+    # @!attribute [rw] ip_access_settings_arn
+    #   The ARN of the IP access settings.
+    #   @return [String]
+    #
     # @!attribute [rw] network_settings_arn
     #   The ARN of the network settings that is associated with the web
     #   portal.
@@ -1937,6 +2227,7 @@ module Aws::WorkSpacesWeb
       :browser_type,
       :creation_date,
       :display_name,
+      :ip_access_settings_arn,
       :network_settings_arn,
       :portal_arn,
       :portal_endpoint,
@@ -2323,6 +2614,60 @@ module Aws::WorkSpacesWeb
     #
     class UpdateIdentityProviderResponse < Struct.new(
       :identity_provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes only once. With an idempotent request, if the original
+    #   request completes successfully, subsequent retries with the same
+    #   client token return the result from the original successful request.
+    #
+    #   If you do not specify a client token, one is automatically generated
+    #   by the AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the IP access settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the IP access settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_access_settings_arn
+    #   The ARN of the IP access settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_rules
+    #   The updated IP rules of the IP access settings.
+    #   @return [Array<Types::IpRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateIpAccessSettingsRequest AWS API Documentation
+    #
+    class UpdateIpAccessSettingsRequest < Struct.new(
+      :client_token,
+      :description,
+      :display_name,
+      :ip_access_settings_arn,
+      :ip_rules)
+      SENSITIVE = [:description, :display_name, :ip_rules]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ip_access_settings
+    #   The IP access settings.
+    #   @return [Types::IpAccessSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateIpAccessSettingsResponse AWS API Documentation
+    #
+    class UpdateIpAccessSettingsResponse < Struct.new(
+      :ip_access_settings)
       SENSITIVE = []
       include Aws::Structure
     end

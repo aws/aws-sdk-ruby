@@ -202,7 +202,9 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = @client.describe_network_interfaces(network_interface_ids: [@id])
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_network_interfaces(network_interface_ids: [@id])
+      end
       @data = resp.network_interfaces[0]
       self
     end
@@ -317,7 +319,9 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -357,7 +361,9 @@ module Aws::EC2
     # @return [Types::AssignPrivateIpAddressesResult]
     def assign_private_ip_addresses(options = {})
       options = options.merge(network_interface_id: @id)
-      resp = @client.assign_private_ip_addresses(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.assign_private_ip_addresses(options)
+      end
       resp.data
     end
 
@@ -395,7 +401,9 @@ module Aws::EC2
     # @return [Types::AttachNetworkInterfaceResult]
     def attach(options = {})
       options = options.merge(network_interface_id: @id)
-      resp = @client.attach_network_interface(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.attach_network_interface(options)
+      end
       resp.data
     end
 
@@ -424,7 +432,9 @@ module Aws::EC2
     def create_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = @client.create_tags(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_tags(options)
+      end
       options[:tags].each do |t|
         batch << Tag.new(
           resource_id: @id,
@@ -469,7 +479,9 @@ module Aws::EC2
     def delete_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = @client.delete_tags(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_tags(options)
+      end
       options[:tags].each do |t|
         batch << Tag.new(
           resource_id: @id,
@@ -495,7 +507,9 @@ module Aws::EC2
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(network_interface_id: @id)
-      resp = @client.delete_network_interface(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_network_interface(options)
+      end
       resp.data
     end
 
@@ -516,7 +530,9 @@ module Aws::EC2
     # @return [Types::DescribeNetworkInterfaceAttributeResult]
     def describe_attribute(options = {})
       options = options.merge(network_interface_id: @id)
-      resp = @client.describe_network_interface_attribute(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_network_interface_attribute(options)
+      end
       resp.data
     end
 
@@ -557,7 +573,9 @@ module Aws::EC2
     # @return [EmptyStructure]
     def detach(options = {})
       options = options.merge(attachment_id: data[:attachment][:attachment_id])
-      resp = @client.detach_network_interface(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.detach_network_interface(options)
+      end
       resp.data
     end
 
@@ -611,7 +629,9 @@ module Aws::EC2
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(network_interface_id: @id)
-      resp = @client.modify_network_interface_attribute(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.modify_network_interface_attribute(options)
+      end
       resp.data
     end
 
@@ -632,7 +652,9 @@ module Aws::EC2
     # @return [EmptyStructure]
     def reset_attribute(options = {})
       options = options.merge(network_interface_id: @id)
-      resp = @client.reset_network_interface_attribute(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.reset_network_interface_attribute(options)
+      end
       resp.data
     end
 
@@ -652,7 +674,9 @@ module Aws::EC2
     # @return [EmptyStructure]
     def unassign_private_ip_addresses(options = {})
       options = options.merge(network_interface_id: @id)
-      resp = @client.unassign_private_ip_addresses(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.unassign_private_ip_addresses(options)
+      end
       resp.data
     end
 

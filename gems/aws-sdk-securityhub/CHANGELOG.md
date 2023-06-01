@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.82.0 (2023-05-30)
+------------------
+
+* Feature - Added new resource detail objects to ASFF, including resources for AwsGuardDutyDetector, AwsAmazonMqBroker, AwsEventSchemasRegistry, AwsAppSyncGraphQlApi and AwsStepFunctionStateMachine.
+
 1.81.0 (2023-05-04)
 ------------------
 

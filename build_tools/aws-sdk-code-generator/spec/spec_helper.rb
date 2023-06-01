@@ -96,6 +96,7 @@ module SpecHelper
       apig_opts = shared_opts.merge({
         api: model_path(:service, api_dir),
         default_endpoint: "https://foobar.us-west-2.amazonaws.com/test",
+        remove_plugins: ['Aws::Plugins::UserAgent']
       })
 
       svc_opts = options[:custom] ? apig_opts : service_opts

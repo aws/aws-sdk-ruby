@@ -95,7 +95,9 @@ module Aws::S3
       options, params = separate_params_and_options(options)
       waiter = Waiters::BucketExists.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      waiter.wait(params.merge(bucket: @name))
+      Aws::Plugins::UserAgent.feature('resource') do
+        waiter.wait(params.merge(bucket: @name))
+      end
       Bucket.new({
         name: @name,
         client: @client
@@ -112,7 +114,9 @@ module Aws::S3
       options, params = separate_params_and_options(options)
       waiter = Waiters::BucketNotExists.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      waiter.wait(params.merge(bucket: @name))
+      Aws::Plugins::UserAgent.feature('resource') do
+        waiter.wait(params.merge(bucket: @name))
+      end
       Bucket.new({
         name: @name,
         client: @client
@@ -213,7 +217,9 @@ module Aws::S3
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -275,7 +281,9 @@ module Aws::S3
     # @return [Types::CreateBucketOutput]
     def create(options = {})
       options = options.merge(bucket: @name)
-      resp = @client.create_bucket(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_bucket(options)
+      end
       resp.data
     end
 
@@ -292,7 +300,9 @@ module Aws::S3
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(bucket: @name)
-      resp = @client.delete_bucket(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_bucket(options)
+      end
       resp.data
     end
 
@@ -361,7 +371,9 @@ module Aws::S3
     # @return [Types::DeleteObjectsOutput]
     def delete_objects(options = {})
       options = options.merge(bucket: @name)
-      resp = @client.delete_objects(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_objects(options)
+      end
       resp.data
     end
 
@@ -667,7 +679,9 @@ module Aws::S3
     # @return [Object]
     def put_object(options = {})
       options = options.merge(bucket: @name)
-      @client.put_object(options)
+      Aws::Plugins::UserAgent.feature('resource') do
+        @client.put_object(options)
+      end
       Object.new(
         bucket_name: @name,
         key: options[:key],
@@ -776,7 +790,9 @@ module Aws::S3
     def multipart_uploads(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(bucket: @name)
-        resp = @client.list_multipart_uploads(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.list_multipart_uploads(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.uploads.each do |u|
@@ -856,7 +872,9 @@ module Aws::S3
     def object_versions(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(bucket: @name)
-        resp = @client.list_object_versions(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.list_object_versions(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.versions_delete_markers.each do |v|
@@ -912,7 +930,9 @@ module Aws::S3
     def objects(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(bucket: @name)
-        resp = @client.list_objects_v2(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.list_objects_v2(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.contents.each do |c|

@@ -1244,11 +1244,11 @@ module Aws::SESV2
     # @!attribute [rw] scaling_mode
     #   The type of the dedicated IP pool.
     #
-    #   * `STANDARD` – A dedicated IP pool where the customer can control
-    #     which IPs are part of the pool.
+    #   * `STANDARD` – A dedicated IP pool where you can control which IPs
+    #     are part of the pool.
     #
     #   * `MANAGED` – A dedicated IP pool where the reputation and number of
-    #     IPs is automatically managed by Amazon SES.
+    #     IPs are automatically managed by Amazon SES.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DedicatedIpPool AWS API Documentation
@@ -2513,7 +2513,7 @@ module Aws::SESV2
     #   @return [String]
     #
     # @!attribute [rw] email_address
-    #   The contact's email addres.
+    #   The contact's email address.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetContactRequest AWS API Documentation
@@ -2530,7 +2530,7 @@ module Aws::SESV2
     #   @return [String]
     #
     # @!attribute [rw] email_address
-    #   The contact's email addres.
+    #   The contact's email address.
     #   @return [String]
     #
     # @!attribute [rw] topic_preferences
@@ -4867,6 +4867,37 @@ module Aws::SESV2
     #
     class PutDedicatedIpInPoolResponse < Aws::EmptyStructure; end
 
+    # A request to convert a dedicated IP pool to a different scaling mode.
+    #
+    # @!attribute [rw] pool_name
+    #   The name of the dedicated IP pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_mode
+    #   The scaling mode to apply to the dedicated IP pool.
+    #
+    #   <note markdown="1"> Changing the scaling mode from `MANAGED` to `STANDARD` is not
+    #   supported.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutDedicatedIpPoolScalingAttributesRequest AWS API Documentation
+    #
+    class PutDedicatedIpPoolScalingAttributesRequest < Struct.new(
+      :pool_name,
+      :scaling_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An HTTP 200 response if the request succeeds, or an error message if
+    # the request fails.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutDedicatedIpPoolScalingAttributesResponse AWS API Documentation
+    #
+    class PutDedicatedIpPoolScalingAttributesResponse < Aws::EmptyStructure; end
+
     # A request to change the warm-up attributes for a dedicated IP address.
     # This operation is useful when you want to resume the warm-up process
     # for an existing IP address.
@@ -6272,7 +6303,7 @@ module Aws::SESV2
     #   @return [String]
     #
     # @!attribute [rw] email_address
-    #   The contact's email addres.
+    #   The contact's email address.
     #   @return [String]
     #
     # @!attribute [rw] topic_preferences

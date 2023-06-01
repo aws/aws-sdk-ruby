@@ -105,6 +105,11 @@ module Aws::MainframeModernization
     #   The name of the application.
     #   @return [String]
     #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the role associated with the
+    #   application.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The status of the application.
     #   @return [String]
@@ -126,6 +131,7 @@ module Aws::MainframeModernization
       :environment_id,
       :last_start_time,
       :name,
+      :role_arn,
       :status,
       :version_status)
       SENSITIVE = []
@@ -196,7 +202,7 @@ module Aws::MainframeModernization
     #   @return [String]
     #
     # @!attribute [rw] batch_job_identifier
-    #   Identifies a specific batch job.
+    #   The unique identifier of this batch job.
     #   @return [Types::BatchJobIdentifier]
     #
     # @!attribute [rw] end_time
@@ -220,6 +226,13 @@ module Aws::MainframeModernization
     #   @return [String]
     #
     # @!attribute [rw] return_code
+    #   The batch job return code from either the Blu Age or Micro Focus
+    #   runtime engines. For more information, see [Batch return codes][1]
+    #   in the *IBM WebSphere Application Server* documentation.
+    #
+    #
+    #
+    #   [1]: https://www.ibm.com/docs/en/was/8.5.5?topic=model-batch-return-codes
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -355,6 +368,11 @@ module Aws::MainframeModernization
     #   The unique identifier of the application.
     #   @return [String]
     #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the role associated with the
+    #   application.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of tags to apply to the application.
     #   @return [Hash<String,String>]
@@ -368,6 +386,7 @@ module Aws::MainframeModernization
       :engine_type,
       :kms_key_id,
       :name,
+      :role_arn,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -784,6 +803,14 @@ module Aws::MainframeModernization
     #   The generation data group of the data set.
     #   @return [Types::GdgDetailAttributes]
     #
+    # @!attribute [rw] po
+    #   The details of a PO type data set.
+    #   @return [Types::PoDetailAttributes]
+    #
+    # @!attribute [rw] ps
+    #   The details of a PS type data set.
+    #   @return [Types::PsDetailAttributes]
+    #
     # @!attribute [rw] vsam
     #   The details of a VSAM data set.
     #   @return [Types::VsamDetailAttributes]
@@ -792,6 +819,8 @@ module Aws::MainframeModernization
     #
     class DatasetDetailOrgAttributes < Struct.new(
       :gdg,
+      :po,
+      :ps,
       :vsam,
       :unknown)
       SENSITIVE = []
@@ -799,6 +828,8 @@ module Aws::MainframeModernization
       include Aws::Structure::Union
 
       class Gdg < DatasetDetailOrgAttributes; end
+      class Po < DatasetDetailOrgAttributes; end
+      class Ps < DatasetDetailOrgAttributes; end
       class Vsam < DatasetDetailOrgAttributes; end
       class Unknown < DatasetDetailOrgAttributes; end
     end
@@ -813,6 +844,14 @@ module Aws::MainframeModernization
     #   The generation data group of the data set.
     #   @return [Types::GdgAttributes]
     #
+    # @!attribute [rw] po
+    #   The details of a PO type data set.
+    #   @return [Types::PoAttributes]
+    #
+    # @!attribute [rw] ps
+    #   The details of a PS type data set.
+    #   @return [Types::PsAttributes]
+    #
     # @!attribute [rw] vsam
     #   The details of a VSAM data set.
     #   @return [Types::VsamAttributes]
@@ -821,6 +860,8 @@ module Aws::MainframeModernization
     #
     class DatasetOrgAttributes < Struct.new(
       :gdg,
+      :po,
+      :ps,
       :vsam,
       :unknown)
       SENSITIVE = []
@@ -828,6 +869,8 @@ module Aws::MainframeModernization
       include Aws::Structure::Union
 
       class Gdg < DatasetOrgAttributes; end
+      class Po < DatasetOrgAttributes; end
+      class Ps < DatasetOrgAttributes; end
       class Vsam < DatasetOrgAttributes; end
       class Unknown < DatasetOrgAttributes; end
     end
@@ -1287,6 +1330,11 @@ module Aws::MainframeModernization
     #   The unique identifier of the application.
     #   @return [String]
     #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the role associated with the
+    #   application.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The status of the application.
     #   @return [String]
@@ -1322,6 +1370,7 @@ module Aws::MainframeModernization
       :load_balancer_dns_name,
       :log_groups,
       :name,
+      :role_arn,
       :status,
       :status_reason,
       :tags,
@@ -1413,7 +1462,7 @@ module Aws::MainframeModernization
     #   @return [String]
     #
     # @!attribute [rw] batch_job_identifier
-    #   Identifies a specific batch job.
+    #   The unique identifier of this batch job.
     #   @return [Types::BatchJobIdentifier]
     #
     # @!attribute [rw] end_time
@@ -1441,6 +1490,13 @@ module Aws::MainframeModernization
     #   @return [String]
     #
     # @!attribute [rw] return_code
+    #   The batch job return code from either the Blu Age or Micro Focus
+    #   runtime engines. For more information, see [Batch return codes][1]
+    #   in the *IBM WebSphere Application Server* documentation.
+    #
+    #
+    #
+    #   [1]: https://www.ibm.com/docs/en/was/8.5.5?topic=model-batch-return-codes
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -2330,6 +2386,50 @@ module Aws::MainframeModernization
       include Aws::Structure
     end
 
+    # The supported properties for a PO type data set.
+    #
+    # @!attribute [rw] encoding
+    #   The character set encoding of the data set.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   The format of the data set records.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_file_extensions
+    #   An array containing one or more filename extensions, allowing you to
+    #   specify which files to be included as PDS member.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/PoAttributes AWS API Documentation
+    #
+    class PoAttributes < Struct.new(
+      :encoding,
+      :format,
+      :member_file_extensions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The supported properties for a PO type data set.
+    #
+    # @!attribute [rw] encoding
+    #   The character set encoding of the data set.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   The format of the data set records.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/PoDetailAttributes AWS API Documentation
+    #
+    class PoDetailAttributes < Struct.new(
+      :encoding,
+      :format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The primary key for a KSDS data set.
     #
     # @!attribute [rw] length
@@ -2352,6 +2452,44 @@ module Aws::MainframeModernization
       :length,
       :name,
       :offset)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The supported properties for a PS type data set.
+    #
+    # @!attribute [rw] encoding
+    #   The character set encoding of the data set.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   The format of the data set records.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/PsAttributes AWS API Documentation
+    #
+    class PsAttributes < Struct.new(
+      :encoding,
+      :format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The supported properties for a PS type data set.
+    #
+    # @!attribute [rw] encoding
+    #   The character set encoding of the data set.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   The format of the data set records.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/PsDetailAttributes AWS API Documentation
+    #
+    class PsDetailAttributes < Struct.new(
+      :encoding,
+      :format)
       SENSITIVE = []
       include Aws::Structure
     end

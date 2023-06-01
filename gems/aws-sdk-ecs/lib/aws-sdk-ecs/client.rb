@@ -275,6 +275,11 @@ module Aws::ECS
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -946,7 +951,7 @@ module Aws::ECS
     #
     # @option params [Integer] :desired_count
     #   The number of instantiations of the specified task definition to place
-    #   and keep running on your cluster.
+    #   and keep running in your service.
     #
     #   This is required if `schedulingStrategy` is `REPLICA` or isn't
     #   specified. If `schedulingStrategy` is `DAEMON` then this isn't
@@ -9704,7 +9709,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.118.0'
+      context[:gem_version] = '1.120.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

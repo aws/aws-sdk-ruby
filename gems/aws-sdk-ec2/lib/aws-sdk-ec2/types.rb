@@ -8402,7 +8402,7 @@ module Aws::EC2
       :version_description,
       :launch_template_data,
       :tag_specifications)
-      SENSITIVE = [:launch_template_data]
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -8499,7 +8499,7 @@ module Aws::EC2
       :version_description,
       :launch_template_data,
       :resolve_alias)
-      SENSITIVE = [:launch_template_data]
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -35362,7 +35362,7 @@ module Aws::EC2
       :snapshot_id,
       :url,
       :user_bucket)
-      SENSITIVE = []
+      SENSITIVE = [:url]
       include Aws::Structure
     end
 
@@ -52731,7 +52731,7 @@ module Aws::EC2
       :private_dns_name_options,
       :maintenance_options,
       :disable_api_stop)
-      SENSITIVE = []
+      SENSITIVE = [:user_data]
       include Aws::Structure
     end
 
@@ -57074,7 +57074,7 @@ module Aws::EC2
       :status_message,
       :url,
       :user_bucket)
-      SENSITIVE = []
+      SENSITIVE = [:url]
       include Aws::Structure
     end
 
@@ -57106,7 +57106,7 @@ module Aws::EC2
       :format,
       :url,
       :user_bucket)
-      SENSITIVE = []
+      SENSITIVE = [:url]
       include Aws::Structure
     end
 
@@ -57278,7 +57278,7 @@ module Aws::EC2
       :status_message,
       :url,
       :user_bucket)
-      SENSITIVE = []
+      SENSITIVE = [:url]
       include Aws::Structure
     end
 

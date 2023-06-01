@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.381.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.380.0 (2023-05-18)
+------------------
+
+* Feature - Add support for i4g.large, i4g.xlarge, i4g.2xlarge, i4g.4xlarge, i4g.8xlarge and i4g.16xlarge instances powered by AWS Graviton2 processors that deliver up to 15% better compute performance than our other storage-optimized instances.
+
 1.379.0 (2023-05-05)
 ------------------
 

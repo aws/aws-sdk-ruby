@@ -79,7 +79,9 @@ module Aws::IAM
     #
     # @return [self]
     def load
-      resp = @client.get_server_certificate(server_certificate_name: @name)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.get_server_certificate(server_certificate_name: @name)
+      end
       @data = resp.server_certificate
       self
     end
@@ -194,7 +196,9 @@ module Aws::IAM
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -206,7 +210,9 @@ module Aws::IAM
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(server_certificate_name: @name)
-      resp = @client.delete_server_certificate(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_server_certificate(options)
+      end
       resp.data
     end
 
@@ -247,7 +253,9 @@ module Aws::IAM
     # @return [ServerCertificate]
     def update(options = {})
       options = options.merge(server_certificate_name: @name)
-      @client.update_server_certificate(options)
+      Aws::Plugins::UserAgent.feature('resource') do
+        @client.update_server_certificate(options)
+      end
       ServerCertificate.new(
         name: options[:new_server_certificate_name],
         client: @client

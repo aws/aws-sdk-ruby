@@ -275,6 +275,11 @@ module Aws::SageMakerGeospatial
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -585,9 +590,6 @@ module Aws::SageMakerGeospatial
     #   resp.export_error_details.export_source_images.message #=> String
     #   resp.export_error_details.export_source_images.type #=> String, one of "CLIENT_ERROR", "SERVER_ERROR"
     #   resp.export_status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
-    #   resp.input_config.data_source_config.s3_data.kms_key_id #=> String
-    #   resp.input_config.data_source_config.s3_data.metadata_provider #=> String, one of "PLANET_ORDER"
-    #   resp.input_config.data_source_config.s3_data.s3_uri #=> String
     #   resp.input_config.previous_earth_observation_job_arn #=> String
     #   resp.input_config.raster_data_collection_query.area_of_interest.area_of_interest_geometry.multi_polygon_geometry.coordinates #=> Array
     #   resp.input_config.raster_data_collection_query.area_of_interest.area_of_interest_geometry.multi_polygon_geometry.coordinates[0] #=> Array
@@ -1187,7 +1189,7 @@ module Aws::SageMakerGeospatial
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [String] :execution_role_arn
+    # @option params [required, String] :execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that you specified for
     #   the job.
     #
@@ -1223,15 +1225,8 @@ module Aws::SageMakerGeospatial
     #
     #   resp = client.start_earth_observation_job({
     #     client_token: "StartEarthObservationJobInputClientTokenString",
-    #     execution_role_arn: "ExecutionRoleArn",
+    #     execution_role_arn: "ExecutionRoleArn", # required
     #     input_config: { # required
-    #       data_source_config: {
-    #         s3_data: {
-    #           kms_key_id: "KmsKey",
-    #           metadata_provider: "PLANET_ORDER", # required, accepts PLANET_ORDER
-    #           s3_uri: "S3Uri", # required
-    #         },
-    #       },
     #       previous_earth_observation_job_arn: "EarthObservationJobArn",
     #       raster_data_collection_query: {
     #         area_of_interest: {
@@ -1365,9 +1360,6 @@ module Aws::SageMakerGeospatial
     #   resp.creation_time #=> Time
     #   resp.duration_in_seconds #=> Integer
     #   resp.execution_role_arn #=> String
-    #   resp.input_config.data_source_config.s3_data.kms_key_id #=> String
-    #   resp.input_config.data_source_config.s3_data.metadata_provider #=> String, one of "PLANET_ORDER"
-    #   resp.input_config.data_source_config.s3_data.s3_uri #=> String
     #   resp.input_config.previous_earth_observation_job_arn #=> String
     #   resp.input_config.raster_data_collection_query.area_of_interest.area_of_interest_geometry.multi_polygon_geometry.coordinates #=> Array
     #   resp.input_config.raster_data_collection_query.area_of_interest.area_of_interest_geometry.multi_polygon_geometry.coordinates[0] #=> Array
@@ -1664,7 +1656,7 @@ module Aws::SageMakerGeospatial
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakergeospatial'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

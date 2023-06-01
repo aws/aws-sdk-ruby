@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.58.0 (2023-05-30)
+------------------
+
+* Feature - This SDK release provides customers the ability to use Header Order as a field to match.
+
 1.57.0 (2023-05-16)
 ------------------
 

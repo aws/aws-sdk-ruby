@@ -391,6 +391,7 @@ module Aws::IoTWireless
     MinGwDiversity = Shapes::IntegerShape.new(name: 'MinGwDiversity')
     Model = Shapes::StringShape.new(name: 'Model')
     MulticastDeviceStatus = Shapes::StringShape.new(name: 'MulticastDeviceStatus')
+    MulticastFrameInfo = Shapes::StringShape.new(name: 'MulticastFrameInfo')
     MulticastGroup = Shapes::StructureShape.new(name: 'MulticastGroup')
     MulticastGroupArn = Shapes::StringShape.new(name: 'MulticastGroupArn')
     MulticastGroupByFuotaTask = Shapes::StructureShape.new(name: 'MulticastGroupByFuotaTask')
@@ -408,6 +409,7 @@ module Aws::IoTWireless
     NetworkAnalyzerConfigurationList = Shapes::ListShape.new(name: 'NetworkAnalyzerConfigurationList')
     NetworkAnalyzerConfigurationName = Shapes::StringShape.new(name: 'NetworkAnalyzerConfigurationName')
     NetworkAnalyzerConfigurations = Shapes::StructureShape.new(name: 'NetworkAnalyzerConfigurations')
+    NetworkAnalyzerMulticastGroupList = Shapes::ListShape.new(name: 'NetworkAnalyzerMulticastGroupList')
     NetworkId = Shapes::IntegerShape.new(name: 'NetworkId')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NumberOfDevicesInGroup = Shapes::IntegerShape.new(name: 'NumberOfDevicesInGroup')
@@ -850,6 +852,7 @@ module Aws::IoTWireless
     CreateNetworkAnalyzerConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateNetworkAnalyzerConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateNetworkAnalyzerConfigurationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateNetworkAnalyzerConfigurationRequest.add_member(:multicast_groups, Shapes::ShapeRef.new(shape: NetworkAnalyzerMulticastGroupList, location_name: "MulticastGroups"))
     CreateNetworkAnalyzerConfigurationRequest.struct_class = Types::CreateNetworkAnalyzerConfigurationRequest
 
     CreateNetworkAnalyzerConfigurationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: NetworkAnalyzerConfigurationArn, location_name: "Arn"))
@@ -1181,6 +1184,7 @@ module Aws::IoTWireless
     GetNetworkAnalyzerConfigurationResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     GetNetworkAnalyzerConfigurationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: NetworkAnalyzerConfigurationArn, location_name: "Arn"))
     GetNetworkAnalyzerConfigurationResponse.add_member(:name, Shapes::ShapeRef.new(shape: NetworkAnalyzerConfigurationName, location_name: "Name"))
+    GetNetworkAnalyzerConfigurationResponse.add_member(:multicast_groups, Shapes::ShapeRef.new(shape: NetworkAnalyzerMulticastGroupList, location_name: "MulticastGroups"))
     GetNetworkAnalyzerConfigurationResponse.struct_class = Types::GetNetworkAnalyzerConfigurationResponse
 
     GetPartnerAccountRequest.add_member(:partner_account_id, Shapes::ShapeRef.new(shape: PartnerAccountId, required: true, location: "uri", location_name: "PartnerAccountId"))
@@ -1791,6 +1795,8 @@ module Aws::IoTWireless
     NetworkAnalyzerConfigurations.add_member(:name, Shapes::ShapeRef.new(shape: NetworkAnalyzerConfigurationName, location_name: "Name"))
     NetworkAnalyzerConfigurations.struct_class = Types::NetworkAnalyzerConfigurations
 
+    NetworkAnalyzerMulticastGroupList.member = Shapes::ShapeRef.new(shape: MulticastGroupId)
+
     OtaaV1_0_x.add_member(:app_key, Shapes::ShapeRef.new(shape: AppKey, location_name: "AppKey"))
     OtaaV1_0_x.add_member(:app_eui, Shapes::ShapeRef.new(shape: AppEui, location_name: "AppEui"))
     OtaaV1_0_x.add_member(:gen_app_key, Shapes::ShapeRef.new(shape: GenAppKey, location_name: "GenAppKey"))
@@ -2087,6 +2093,7 @@ module Aws::IoTWireless
 
     TraceContent.add_member(:wireless_device_frame_info, Shapes::ShapeRef.new(shape: WirelessDeviceFrameInfo, location_name: "WirelessDeviceFrameInfo"))
     TraceContent.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "LogLevel"))
+    TraceContent.add_member(:multicast_frame_info, Shapes::ShapeRef.new(shape: MulticastFrameInfo, location_name: "MulticastFrameInfo"))
     TraceContent.struct_class = Types::TraceContent
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "querystring", location_name: "resourceArn"))
@@ -2158,6 +2165,8 @@ module Aws::IoTWireless
     UpdateNetworkAnalyzerConfigurationRequest.add_member(:wireless_gateways_to_add, Shapes::ShapeRef.new(shape: WirelessGatewayList, location_name: "WirelessGatewaysToAdd"))
     UpdateNetworkAnalyzerConfigurationRequest.add_member(:wireless_gateways_to_remove, Shapes::ShapeRef.new(shape: WirelessGatewayList, location_name: "WirelessGatewaysToRemove"))
     UpdateNetworkAnalyzerConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    UpdateNetworkAnalyzerConfigurationRequest.add_member(:multicast_groups_to_add, Shapes::ShapeRef.new(shape: NetworkAnalyzerMulticastGroupList, location_name: "MulticastGroupsToAdd"))
+    UpdateNetworkAnalyzerConfigurationRequest.add_member(:multicast_groups_to_remove, Shapes::ShapeRef.new(shape: NetworkAnalyzerMulticastGroupList, location_name: "MulticastGroupsToRemove"))
     UpdateNetworkAnalyzerConfigurationRequest.struct_class = Types::UpdateNetworkAnalyzerConfigurationRequest
 
     UpdateNetworkAnalyzerConfigurationResponse.struct_class = Types::UpdateNetworkAnalyzerConfigurationResponse

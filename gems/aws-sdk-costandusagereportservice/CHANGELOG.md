@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.44.0 (2023-05-24)
+------------------
+
+* Feature - Add support for split cost allocation data on a report.
+
 1.43.0 (2023-01-18)
 ------------------
 

@@ -384,7 +384,9 @@ module Aws::DynamoDB
     #
     # @return [self]
     def load
-      resp = @client.describe_table(table_name: @name)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_table(table_name: @name)
+      end
       @data = resp.table
       self
     end
@@ -499,7 +501,9 @@ module Aws::DynamoDB
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -511,7 +515,9 @@ module Aws::DynamoDB
     # @return [Types::DeleteTableOutput]
     def delete(options = {})
       options = options.merge(table_name: @name)
-      resp = @client.delete_table(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_table(options)
+      end
       resp.data
     end
 
@@ -705,7 +711,9 @@ module Aws::DynamoDB
     # @return [Types::DeleteItemOutput]
     def delete_item(options = {})
       options = options.merge(table_name: @name)
-      resp = @client.delete_item(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_item(options)
+      end
       resp.data
     end
 
@@ -828,7 +836,9 @@ module Aws::DynamoDB
     # @return [Types::GetItemOutput]
     def get_item(options = {})
       options = options.merge(table_name: @name)
-      resp = @client.get_item(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.get_item(options)
+      end
       resp.data
     end
 
@@ -1043,7 +1053,9 @@ module Aws::DynamoDB
     # @return [Types::PutItemOutput]
     def put_item(options = {})
       options = options.merge(table_name: @name)
-      resp = @client.put_item(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.put_item(options)
+      end
       resp.data
     end
 
@@ -1431,7 +1443,9 @@ module Aws::DynamoDB
     # @return [Types::QueryOutput]
     def query(options = {})
       options = options.merge(table_name: @name)
-      resp = @client.query(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.query(options)
+      end
       resp.data
     end
 
@@ -1746,7 +1760,9 @@ module Aws::DynamoDB
     # @return [Types::ScanOutput]
     def scan(options = {})
       options = options.merge(table_name: @name)
-      resp = @client.scan(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.scan(options)
+      end
       resp.data
     end
 
@@ -1926,7 +1942,9 @@ module Aws::DynamoDB
     # @return [Table]
     def update(options = {})
       options = options.merge(table_name: @name)
-      resp = @client.update_table(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.update_table(options)
+      end
       Table.new(
         name: @name,
         data: resp.data.table_description,
@@ -2232,7 +2250,9 @@ module Aws::DynamoDB
     # @return [Types::UpdateItemOutput]
     def update_item(options = {})
       options = options.merge(table_name: @name)
-      resp = @client.update_item(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.update_item(options)
+      end
       resp.data
     end
 

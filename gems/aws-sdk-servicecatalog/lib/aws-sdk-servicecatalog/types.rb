@@ -114,18 +114,74 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] principal_arn
-    #   The ARN of the principal (user, role, or group). This field allows
-    #   an ARN with no `accountID` if `PrincipalType` is `IAM_PATTERN`.
+    #   The ARN of the principal (user, role, or group). The supported value
+    #   is a fully defined [ `IAM` ARN][1] if the `PrincipalType` is `IAM`.
+    #   If the `PrincipalType` is `IAM_PATTERN`, the supported value is an
+    #   `IAM` ARN without an AccountID in the following format:
     #
-    #   You can associate multiple `IAM` patterns even if the account has no
-    #   principal with that name. This is useful in Principal Name Sharing
-    #   if you want to share a principal without creating it in the account
-    #   that owns the portfolio.
+    #   *arn:partition:iam:::resource-type/resource-id*
+    #
+    #   The resource-id can be either of the following:
+    #
+    #   * Fully formed, for example *arn:aws:iam:::role/resource-name* or
+    #     *arn:aws:iam:::role/resource-path/resource-name*
+    #
+    #   * A wildcard ARN. The wildcard ARN accepts `IAM_PATTERN` values with
+    #     a "*" or "?" in the resource-id segment of the ARN, for
+    #     example
+    #     *arn:partition:service:::resource-type/resource-path/resource-name*.
+    #     The new symbols are exclusive to the **resource-path** and
+    #     **resource-name** and cannot be used to replace the
+    #     **resource-type** or other ARN values.
+    #
+    #   Examples of an **acceptable** wildcard ARN:
+    #
+    #   * arn:aws:iam:::role/ResourceName\_*
+    #
+    #   * arn:aws:iam:::role/*/ResourceName\_?
+    #
+    #   Examples of an **unacceptable** wildcard ARN:
+    #
+    #   * arn:aws:iam:::*/ResourceName
+    #
+    #   ^
+    #
+    #   You can associate multiple `IAM_PATTERN`s even if the account has no
+    #   principal with that name.
+    #
+    #   <note markdown="1"> * The ARN path and principal name allow unlimited wildcard
+    #     characters.
+    #
+    #   * The "?" wildcard character matches zero or one of any character.
+    #     This is similar to ".?" in regular regex context.
+    #
+    #   * The "*" wildcard character matches any number of any
+    #     characters. This is similar ".*" in regular regex context.
+    #
+    #   * In the IAM Principal ARNs format
+    #     (arn:partition:iam:::resource-type/resource-path/resource-name),
+    #     valid **resource-type** values include user/, group/, or role/.
+    #     The "?" and "*" are allowed only after the **resource-type**,
+    #     in the resource-id segment. You can use special characters
+    #     anywhere within the **resource-id**.
+    #
+    #   * The "*" also matches the "/" character, allowing paths to be
+    #     formed within the **resource-id**. For example,
+    #     arn:aws:iam:::role/*/ResourceName\_? matches both
+    #     arn:aws:iam:::role/pathA/pathB/ResourceName\_1 and
+    #     arn:aws:iam:::role/pathA/ResourceName\_1.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
     #   @return [String]
     #
     # @!attribute [rw] principal_type
     #   The principal type. The supported value is `IAM` if you use a fully
-    #   defined ARN, or `IAM_PATTERN` if you use an ARN with no `accountID`.
+    #   defined ARN, or `IAM_PATTERN` if you use an ARN with no `accountID`,
+    #   with or without wildcard characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociatePrincipalWithPortfolioInput AWS API Documentation
@@ -2320,12 +2376,14 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] principal_arn
     #   The ARN of the principal (user, role, or group). This field allows
-    #   an ARN with no `accountID` if `PrincipalType` is `IAM_PATTERN`.
+    #   an ARN with no `accountID` with or without wildcard characters if
+    #   `PrincipalType` is `IAM_PATTERN`.
     #   @return [String]
     #
     # @!attribute [rw] principal_type
     #   The supported value is `IAM` if you use a fully defined ARN, or
-    #   `IAM_PATTERN` if you use no `accountID`.
+    #   `IAM_PATTERN` if you specify an `IAM` ARN with no AccountId, with or
+    #   without wildcard characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociatePrincipalFromPortfolioInput AWS API Documentation
@@ -4187,13 +4245,21 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] principal_arn
     #   The ARN of the principal (user, role, or group). This field allows
-    #   for an ARN with no `accountID` if the `PrincipalType` is an
-    #   `IAM_PATTERN`.
+    #   for an ARN with no `accountID`, with or without wildcard characters
+    #   if the `PrincipalType` is an `IAM_PATTERN`.
+    #
+    #   For more information, review [associate-principal-with-portfolio][1]
+    #   in the Amazon Web Services CLI Command Reference.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/servicecatalog/associate-principal-with-portfolio.html#options
     #   @return [String]
     #
     # @!attribute [rw] principal_type
     #   The principal type. The supported value is `IAM` if you use a fully
-    #   defined ARN, or `IAM_PATTERN` if you use an ARN with no `accountID`.
+    #   defined ARN, or `IAM_PATTERN` if you use an ARN with no `accountID`,
+    #   with or without wildcard characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/Principal AWS API Documentation

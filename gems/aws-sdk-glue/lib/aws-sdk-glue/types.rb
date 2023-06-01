@@ -155,14 +155,14 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Specifies an Amazon Redshift data store.
+    # Specifies an optional value when connecting to the Redshift cluster.
     #
     # @!attribute [rw] key
-    #   The key when specifying a key-value pair.
+    #   The key for the additional connection option.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value when specifying a key-value pair.
+    #   The value for the additional connection option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AmazonRedshiftAdvancedOption AWS API Documentation
@@ -2214,6 +2214,11 @@ module Aws::Glue
     #   Specifies a target that writes to a data target in Amazon Redshift.
     #   @return [Types::AmazonRedshiftTarget]
     #
+    # @!attribute [rw] evaluate_data_quality_multi_frame
+    #   Specifies your data quality evaluation criteria. Allows multiple
+    #   input data and returns a collection of Dynamic Frames.
+    #   @return [Types::EvaluateDataQualityMultiFrame]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CodeGenConfigurationNode AWS API Documentation
     #
     class CodeGenConfigurationNode < Struct.new(
@@ -2281,7 +2286,8 @@ module Aws::Glue
       :s3_delta_catalog_target,
       :s3_delta_direct_target,
       :amazon_redshift_source,
-      :amazon_redshift_target)
+      :amazon_redshift_target,
+      :evaluate_data_quality_multi_frame)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4245,7 +4251,8 @@ module Aws::Glue
     #   @return [Types::JobCommand]
     #
     # @!attribute [rw] default_arguments
-    #   The default arguments for this job.
+    #   The default arguments for every run of this job, specified as
+    #   name-value pairs.
     #
     #   You can specify arguments here that your own job-execution script
     #   consumes, as well as arguments that Glue itself consumes.
@@ -4259,19 +4266,24 @@ module Aws::Glue
     #   arguments, see the [Calling Glue APIs in Python][1] topic in the
     #   developer guide.
     #
-    #   For information about the key-value pairs that Glue consumes to set
-    #   up your job, see the [Special Parameters Used by Glue][2] topic in
-    #   the developer guide.
+    #   For information about the arguments you can provide to this field
+    #   when configuring Spark jobs, see the [Special Parameters Used by
+    #   Glue][2] topic in the developer guide.
+    #
+    #   For information about the arguments you can provide to this field
+    #   when configuring Ray jobs, see [Using job parameters in Ray jobs][3]
+    #   in the developer guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
     #   [2]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
+    #   [3]: https://docs.aws.amazon.com/glue/latest/dg/author-job-ray-job-parameters.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] non_overridable_arguments
-    #   Non-overridable arguments for this job, specified as name-value
-    #   pairs.
+    #   Arguments for this job that are not overridden when providing job
+    #   arguments in a job run, specified as name-value pairs.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] connections
@@ -4307,13 +4319,18 @@ module Aws::Glue
     #   type, the number of Glue data processing units (DPUs) that can be
     #   allocated when this job runs. A DPU is a relative measure of
     #   processing power that consists of 4 vCPUs of compute capacity and 16
-    #   GB of memory. For more information, see the [Glue pricing page][1].
+    #   GB of memory. For more information, see the [ Glue pricing page][1].
     #
-    #   Do not set `Max Capacity` if using `WorkerType` and
+    #   For Glue version 2.0+ jobs, you cannot specify a `Maximum capacity`.
+    #   Instead, you should specify a `Worker type` and the `Number of
+    #   workers`.
+    #
+    #   Do not set `MaxCapacity` if using `WorkerType` and
     #   `NumberOfWorkers`.
     #
     #   The value that can be allocated for `MaxCapacity` depends on whether
-    #   you are running a Python shell job or an Apache Spark ETL job:
+    #   you are running a Python shell job, an Apache Spark ETL job, or an
+    #   Apache Spark streaming ETL job:
     #
     #   * When you specify a Python shell job
     #     (`JobCommand.Name`="pythonshell"), you can allocate either
@@ -4321,13 +4338,9 @@ module Aws::Glue
     #
     #   * When you specify an Apache Spark ETL job
     #     (`JobCommand.Name`="glueetl") or Apache Spark streaming ETL job
-    #     (`JobCommand.Name`="gluestreaming"), you can allocate a minimum
-    #     of 2 DPUs. The default is 10 DPUs. This job type cannot have a
+    #     (`JobCommand.Name`="gluestreaming"), you can allocate from 2 to
+    #     100 DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
-    #
-    #   For Glue version 2.0 jobs, you cannot instead specify a `Maximum
-    #   capacity`. Instead, you should specify a `Worker type` and the
-    #   `Number of workers`.
     #
     #
     #
@@ -4354,9 +4367,14 @@ module Aws::Glue
     #   @return [Types::NotificationProperty]
     #
     # @!attribute [rw] glue_version
-    #   Glue version determines the versions of Apache Spark and Python that
-    #   Glue supports. The Python version indicates the version supported
-    #   for jobs of type Spark.
+    #   In Spark jobs, `GlueVersion` determines the versions of Apache Spark
+    #   and Python that Glue available in a job. The Python version
+    #   indicates the version supported for jobs of type Spark.
+    #
+    #   Ray jobs should set `GlueVersion` to `4.0` or greater. However, the
+    #   versions of Ray, Python and additional libraries available in your
+    #   Ray job are determined by the `Runtime` parameter of the Job
+    #   command.
     #
     #   For more information about the available Glue versions and
     #   corresponding Spark and Python versions, see [Glue version][1] in
@@ -4377,7 +4395,8 @@ module Aws::Glue
     #
     # @!attribute [rw] worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of Standard, G.1X, G.2X, or G.025X.
+    #   Accepts a value of Standard, G.1X, G.2X, or G.025X for Spark jobs.
+    #   Accepts the value Z.2X for Ray jobs.
     #
     #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
     #     of memory and a 50GB disk, and 2 executors per worker.
@@ -4395,6 +4414,10 @@ module Aws::Glue
     #     worker. We recommend this worker type for low volume streaming
     #     jobs. This worker type is only available for Glue version 3.0
     #     streaming jobs.
+    #
+    #   * For the `Z.2X` worker type, each worker maps to 2 M-DPU (8vCPU, 64
+    #     GB of m emory, 128 GB disk), and provides up to 8 Ray workers
+    #     based on the autoscaler.
     #   @return [String]
     #
     # @!attribute [rw] code_gen_configuration_nodes
@@ -5851,13 +5874,18 @@ module Aws::Glue
     #   A pass or fail status for the rule.
     #   @return [String]
     #
+    # @!attribute [rw] evaluated_metrics
+    #   A map of metrics associated with the evaluation of the rule.
+    #   @return [Hash<String,Float>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityRuleResult AWS API Documentation
     #
     class DataQualityRuleResult < Struct.new(
       :name,
       :description,
       :evaluation_message,
-      :result)
+      :result,
+      :evaluated_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6015,11 +6043,16 @@ module Aws::Glue
     #   The name of the database where the Glue table exists.
     #   @return [String]
     #
+    # @!attribute [rw] catalog_id
+    #   The catalog id where the Glue table exists.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityTargetTable AWS API Documentation
     #
     class DataQualityTargetTable < Struct.new(
       :table_name,
-      :database_name)
+      :database_name,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7759,6 +7792,52 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies your data quality evaluation criteria.
+    #
+    # @!attribute [rw] name
+    #   The name of the data quality evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The inputs of your data quality evaluation. The first input in this
+    #   list is the primary data source.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] additional_data_sources
+    #   The aliases of all data sources except primary.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] ruleset
+    #   The ruleset for your data quality evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] publishing_options
+    #   Options to configure how your results are published.
+    #   @return [Types::DQResultsPublishingOptions]
+    #
+    # @!attribute [rw] additional_options
+    #   Options to configure runtime behavior of the transform.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] stop_job_on_failure_options
+    #   Options to configure how your job will stop if your data quality
+    #   evaluation fails.
+    #   @return [Types::DQStopJobOnFailureOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/EvaluateDataQualityMultiFrame AWS API Documentation
+    #
+    class EvaluateDataQualityMultiFrame < Struct.new(
+      :name,
+      :inputs,
+      :additional_data_sources,
+      :ruleset,
+      :publishing_options,
+      :additional_options,
+      :stop_job_on_failure_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Evaluation metrics provide an estimate of the quality of your machine
     # learning transform.
     #
@@ -9008,6 +9087,11 @@ module Aws::Glue
     #   A list of result IDs for the data quality results for the run.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] additional_data_sources
+    #   A map of reference strings to additional data sources you can
+    #   specify for an evaluation run.
+    #   @return [Hash<String,Types::DataSource>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRulesetEvaluationRunResponse AWS API Documentation
     #
     class GetDataQualityRulesetEvaluationRunResponse < Struct.new(
@@ -9024,7 +9108,8 @@ module Aws::Glue
       :completed_on,
       :execution_time,
       :ruleset_names,
-      :result_ids)
+      :result_ids,
+      :additional_data_sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12097,28 +12182,39 @@ module Aws::Glue
     #   @return [Types::JobCommand]
     #
     # @!attribute [rw] default_arguments
-    #   The default arguments for this job, specified as name-value pairs.
+    #   The default arguments for every run of this job, specified as
+    #   name-value pairs.
     #
     #   You can specify arguments here that your own job-execution script
     #   consumes, as well as arguments that Glue itself consumes.
+    #
+    #   Job arguments may be logged. Do not pass plaintext secrets as
+    #   arguments. Retrieve secrets from a Glue Connection, Secrets Manager
+    #   or other secret management mechanism if you intend to keep them
+    #   within the Job.
     #
     #   For information about how to specify and consume your own Job
     #   arguments, see the [Calling Glue APIs in Python][1] topic in the
     #   developer guide.
     #
-    #   For information about the key-value pairs that Glue consumes to set
-    #   up your job, see the [Special Parameters Used by Glue][2] topic in
-    #   the developer guide.
+    #   For information about the arguments you can provide to this field
+    #   when configuring Spark jobs, see the [Special Parameters Used by
+    #   Glue][2] topic in the developer guide.
+    #
+    #   For information about the arguments you can provide to this field
+    #   when configuring Ray jobs, see [Using job parameters in Ray jobs][3]
+    #   in the developer guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
     #   [2]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
+    #   [3]: https://docs.aws.amazon.com/glue/latest/dg/author-job-ray-job-parameters.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] non_overridable_arguments
-    #   Non-overridable arguments for this job, specified as name-value
-    #   pairs.
+    #   Arguments for this job that are not overridden when providing job
+    #   arguments in a job run, specified as name-value pairs.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] connections
@@ -12156,7 +12252,7 @@ module Aws::Glue
     #   type, the number of Glue data processing units (DPUs) that can be
     #   allocated when this job runs. A DPU is a relative measure of
     #   processing power that consists of 4 vCPUs of compute capacity and 16
-    #   GB of memory. For more information, see the [Glue pricing page][1].
+    #   GB of memory. For more information, see the [ Glue pricing page][1].
     #
     #   For Glue version 2.0 or later jobs, you cannot specify a `Maximum
     #   capacity`. Instead, you should specify a `Worker type` and the
@@ -12186,7 +12282,8 @@ module Aws::Glue
     #
     # @!attribute [rw] worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of Standard, G.1X, G.2X, or G.025X.
+    #   Accepts a value of Standard, G.1X, G.2X, G.4X, G.8X, or G.025X for
+    #   Spark jobs. Accepts the value Z.2X for Ray jobs.
     #
     #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
     #     of memory and a 50GB disk, and 2 executors per worker.
@@ -12207,20 +12304,30 @@ module Aws::Glue
     #     GB of memory, 256 GB disk), and provides 1 executor per worker. We
     #     recommend this worker type for jobs whose workloads contain your
     #     most demanding transforms, aggregations, joins, and queries. This
-    #     worker type is available only for Glue version 3.0 or later jobs.
+    #     worker type is available only for Glue version 3.0 or later Spark
+    #     ETL jobs in the following Amazon Web Services Regions: US East
+    #     (Ohio), US East (N. Virginia), US West (Oregon), Asia Pacific
+    #     (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo), Canada
+    #     (Central), Europe (Frankfurt), Europe (Ireland), and Europe
+    #     (Stockholm).
     #
     #   * For the `G.8X` worker type, each worker maps to 8 DPU (32 vCPU,
     #     128 GB of memory, 512 GB disk), and provides 1 executor per
     #     worker. We recommend this worker type for jobs whose workloads
     #     contain your most demanding transforms, aggregations, joins, and
     #     queries. This worker type is available only for Glue version 3.0
-    #     or later jobs.
+    #     or later Spark ETL jobs, in the same Amazon Web Services Regions
+    #     as supported for the `G.4X` worker type.
     #
     #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2
     #     vCPU, 4 GB of memory, 64 GB disk), and provides 1 executor per
     #     worker. We recommend this worker type for low volume streaming
     #     jobs. This worker type is only available for Glue version 3.0
     #     streaming jobs.
+    #
+    #   * For the `Z.2X` worker type, each worker maps to 2 M-DPU (8vCPU, 64
+    #     GB of m emory, 128 GB disk), and provides a default of 8 Ray
+    #     workers (1 per vCPU).
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
@@ -12238,9 +12345,14 @@ module Aws::Glue
     #   @return [Types::NotificationProperty]
     #
     # @!attribute [rw] glue_version
-    #   Glue version determines the versions of Apache Spark and Python that
-    #   Glue supports. The Python version indicates the version supported
-    #   for jobs of type Spark.
+    #   In Spark jobs, `GlueVersion` determines the versions of Apache Spark
+    #   and Python that Glue available in a job. The Python version
+    #   indicates the version supported for jobs of type Spark.
+    #
+    #   Ray jobs should set `GlueVersion` to `4.0` or greater. However, the
+    #   versions of Ray, Python and additional libraries available in your
+    #   Ray job are determined by the `Runtime` parameter of the Job
+    #   command.
     #
     #   For more information about the available Glue versions and
     #   corresponding Spark and Python versions, see [Glue version][1] in
@@ -12378,7 +12490,8 @@ module Aws::Glue
     # @!attribute [rw] name
     #   The name of the job command. For an Apache Spark ETL job, this must
     #   be `glueetl`. For a Python shell job, it must be `pythonshell`. For
-    #   an Apache Spark streaming ETL job, this must be `gluestreaming`.
+    #   an Apache Spark streaming ETL job, this must be `gluestreaming`. For
+    #   a Ray job, this must be `glueray`.
     #   @return [String]
     #
     # @!attribute [rw] script_location
@@ -12391,12 +12504,24 @@ module Aws::Glue
     #   values are 2 or 3.
     #   @return [String]
     #
+    # @!attribute [rw] runtime
+    #   In Ray jobs, Runtime is used to specify the versions of Ray, Python
+    #   and additional libraries available in your environment. This field
+    #   is not used in other job types. For supported runtime environment
+    #   values, see [Working with Ray jobs][1] in the Glue Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/author-job-ray-runtimes.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobCommand AWS API Documentation
     #
     class JobCommand < Struct.new(
       :name,
       :script_location,
-      :python_version)
+      :python_version,
+      :runtime)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12467,18 +12592,28 @@ module Aws::Glue
     #   You can specify arguments here that your own job-execution script
     #   consumes, as well as arguments that Glue itself consumes.
     #
-    #   For information about how to specify and consume your own job
+    #   Job arguments may be logged. Do not pass plaintext secrets as
+    #   arguments. Retrieve secrets from a Glue Connection, Secrets Manager
+    #   or other secret management mechanism if you intend to keep them
+    #   within the Job.
+    #
+    #   For information about how to specify and consume your own Job
     #   arguments, see the [Calling Glue APIs in Python][1] topic in the
     #   developer guide.
     #
-    #   For information about the key-value pairs that Glue consumes to set
-    #   up your job, see the [Special Parameters Used by Glue][2] topic in
-    #   the developer guide.
+    #   For information about the arguments you can provide to this field
+    #   when configuring Spark jobs, see the [Special Parameters Used by
+    #   Glue][2] topic in the developer guide.
+    #
+    #   For information about the arguments you can provide to this field
+    #   when configuring Ray jobs, see [Using job parameters in Ray jobs][3]
+    #   in the developer guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
     #   [2]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
+    #   [3]: https://docs.aws.amazon.com/glue/latest/dg/author-job-ray-job-parameters.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] error_message
@@ -12518,24 +12653,31 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity
-    #   The number of Glue data processing units (DPUs) that can be
+    #   For Glue version 1.0 or earlier jobs, using the standard worker
+    #   type, the number of Glue data processing units (DPUs) that can be
     #   allocated when this job runs. A DPU is a relative measure of
     #   processing power that consists of 4 vCPUs of compute capacity and 16
-    #   GB of memory. For more information, see the [Glue pricing page][1].
+    #   GB of memory. For more information, see the [ Glue pricing page][1].
     #
-    #   Do not set `Max Capacity` if using `WorkerType` and
+    #   For Glue version 2.0+ jobs, you cannot specify a `Maximum capacity`.
+    #   Instead, you should specify a `Worker type` and the `Number of
+    #   workers`.
+    #
+    #   Do not set `MaxCapacity` if using `WorkerType` and
     #   `NumberOfWorkers`.
     #
     #   The value that can be allocated for `MaxCapacity` depends on whether
-    #   you are running a Python shell job or an Apache Spark ETL job:
+    #   you are running a Python shell job, an Apache Spark ETL job, or an
+    #   Apache Spark streaming ETL job:
     #
     #   * When you specify a Python shell job
     #     (`JobCommand.Name`="pythonshell"), you can allocate either
     #     0.0625 or 1 DPU. The default is 0.0625 DPU.
     #
     #   * When you specify an Apache Spark ETL job
-    #     (`JobCommand.Name`="glueetl"), you can allocate a minimum of 2
-    #     DPUs. The default is 10 DPUs. This job type cannot have a
+    #     (`JobCommand.Name`="glueetl") or Apache Spark streaming ETL job
+    #     (`JobCommand.Name`="gluestreaming"), you can allocate from 2 to
+    #     100 DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
     #
     #
@@ -12545,22 +12687,29 @@ module Aws::Glue
     #
     # @!attribute [rw] worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of Standard, G.1X, G.2X, or G.025X.
+    #   Accepts a value of Standard, G.1X, G.2X, or G.025X for Spark jobs.
+    #   Accepts the value Z.2X for Ray jobs.
     #
     #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
     #     of memory and a 50GB disk, and 2 executors per worker.
     #
-    #   * For the `G.1X` worker type, each worker provides 4 vCPU, 16 GB of
-    #     memory and a 64GB disk, and 1 executor per worker.
+    #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPU, 16
+    #     GB of memory, 64 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
     #
-    #   * For the `G.2X` worker type, each worker provides 8 vCPU, 32 GB of
-    #     memory and a 128GB disk, and 1 executor per worker.
+    #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPU, 32
+    #     GB of memory, 128 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
     #
     #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2
     #     vCPU, 4 GB of memory, 64 GB disk), and provides 1 executor per
     #     worker. We recommend this worker type for low volume streaming
     #     jobs. This worker type is only available for Glue version 3.0
     #     streaming jobs.
+    #
+    #   * For the `Z.2X` worker type, each worker maps to 2 M-DPU (8vCPU, 64
+    #     GB of m emory, 128 GB disk), and provides up to 8 Ray workers (one
+    #     per vCPU) based on the autoscaler.
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
@@ -12588,9 +12737,14 @@ module Aws::Glue
     #   @return [Types::NotificationProperty]
     #
     # @!attribute [rw] glue_version
-    #   Glue version determines the versions of Apache Spark and Python that
-    #   Glue supports. The Python version indicates the version supported
-    #   for jobs of type Spark.
+    #   In Spark jobs, `GlueVersion` determines the versions of Apache Spark
+    #   and Python that Glue available in a job. The Python version
+    #   indicates the version supported for jobs of type Spark.
+    #
+    #   Ray jobs should set `GlueVersion` to `4.0` or greater. However, the
+    #   versions of Ray, Python and additional libraries available in your
+    #   Ray job are determined by the `Runtime` parameter of the Job
+    #   command.
     #
     #   For more information about the available Glue versions and
     #   corresponding Spark and Python versions, see [Glue version][1] in
@@ -12687,28 +12841,39 @@ module Aws::Glue
     #   @return [Types::JobCommand]
     #
     # @!attribute [rw] default_arguments
-    #   The default arguments for this job.
+    #   The default arguments for every run of this job, specified as
+    #   name-value pairs.
     #
     #   You can specify arguments here that your own job-execution script
     #   consumes, as well as arguments that Glue itself consumes.
+    #
+    #   Job arguments may be logged. Do not pass plaintext secrets as
+    #   arguments. Retrieve secrets from a Glue Connection, Secrets Manager
+    #   or other secret management mechanism if you intend to keep them
+    #   within the Job.
     #
     #   For information about how to specify and consume your own Job
     #   arguments, see the [Calling Glue APIs in Python][1] topic in the
     #   developer guide.
     #
-    #   For information about the key-value pairs that Glue consumes to set
-    #   up your job, see the [Special Parameters Used by Glue][2] topic in
-    #   the developer guide.
+    #   For information about the arguments you can provide to this field
+    #   when configuring Spark jobs, see the [Special Parameters Used by
+    #   Glue][2] topic in the developer guide.
+    #
+    #   For information about the arguments you can provide to this field
+    #   when configuring Ray jobs, see [Using job parameters in Ray jobs][3]
+    #   in the developer guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
     #   [2]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
+    #   [3]: https://docs.aws.amazon.com/glue/latest/dg/author-job-ray-job-parameters.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] non_overridable_arguments
-    #   Non-overridable arguments for this job, specified as name-value
-    #   pairs.
+    #   Arguments for this job that are not overridden when providing job
+    #   arguments in a job run, specified as name-value pairs.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] connections
@@ -12744,13 +12909,18 @@ module Aws::Glue
     #   type, the number of Glue data processing units (DPUs) that can be
     #   allocated when this job runs. A DPU is a relative measure of
     #   processing power that consists of 4 vCPUs of compute capacity and 16
-    #   GB of memory. For more information, see the [Glue pricing page][1].
+    #   GB of memory. For more information, see the [ Glue pricing page][1].
     #
-    #   Do not set `Max Capacity` if using `WorkerType` and
+    #   For Glue version 2.0+ jobs, you cannot specify a `Maximum capacity`.
+    #   Instead, you should specify a `Worker type` and the `Number of
+    #   workers`.
+    #
+    #   Do not set `MaxCapacity` if using `WorkerType` and
     #   `NumberOfWorkers`.
     #
     #   The value that can be allocated for `MaxCapacity` depends on whether
-    #   you are running a Python shell job or an Apache Spark ETL job:
+    #   you are running a Python shell job, an Apache Spark ETL job, or an
+    #   Apache Spark streaming ETL job:
     #
     #   * When you specify a Python shell job
     #     (`JobCommand.Name`="pythonshell"), you can allocate either
@@ -12758,13 +12928,9 @@ module Aws::Glue
     #
     #   * When you specify an Apache Spark ETL job
     #     (`JobCommand.Name`="glueetl") or Apache Spark streaming ETL job
-    #     (`JobCommand.Name`="gluestreaming"), you can allocate a minimum
-    #     of 2 DPUs. The default is 10 DPUs. This job type cannot have a
+    #     (`JobCommand.Name`="gluestreaming"), you can allocate from 2 to
+    #     100 DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
-    #
-    #   For Glue version 2.0 jobs, you cannot instead specify a `Maximum
-    #   capacity`. Instead, you should specify a `Worker type` and the
-    #   `Number of workers`.
     #
     #
     #
@@ -12773,7 +12939,8 @@ module Aws::Glue
     #
     # @!attribute [rw] worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of Standard, G.1X, G.2X, or G.025X.
+    #   Accepts a value of Standard, G.1X, G.2X, or G.025X for Spark jobs.
+    #   Accepts the value Z.2X for Ray jobs.
     #
     #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
     #     of memory and a 50GB disk, and 2 executors per worker.
@@ -12791,6 +12958,10 @@ module Aws::Glue
     #     worker. We recommend this worker type for low volume streaming
     #     jobs. This worker type is only available for Glue version 3.0
     #     streaming jobs.
+    #
+    #   * For the `Z.2X` worker type, each worker maps to 2 M-DPU (8vCPU, 64
+    #     GB of m emory, 128 GB disk), and provides up to 8 Ray workers
+    #     based on the autoscaler.
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
@@ -12808,13 +12979,21 @@ module Aws::Glue
     #   @return [Types::NotificationProperty]
     #
     # @!attribute [rw] glue_version
-    #   Glue version determines the versions of Apache Spark and Python that
-    #   Glue supports. The Python version indicates the version supported
-    #   for jobs of type Spark.
+    #   In Spark jobs, `GlueVersion` determines the versions of Apache Spark
+    #   and Python that Glue available in a job. The Python version
+    #   indicates the version supported for jobs of type Spark.
+    #
+    #   Ray jobs should set `GlueVersion` to `4.0` or greater. However, the
+    #   versions of Ray, Python and additional libraries available in your
+    #   Ray job are determined by the `Runtime` parameter of the Job
+    #   command.
     #
     #   For more information about the available Glue versions and
     #   corresponding Spark and Python versions, see [Glue version][1] in
     #   the developer guide.
+    #
+    #   Jobs that are created without specifying a Glue version default to
+    #   Glue 0.9.
     #
     #
     #
@@ -18167,6 +18346,11 @@ module Aws::Glue
     #   A list of ruleset names.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] additional_data_sources
+    #   A map of reference strings to additional data sources you can
+    #   specify for an evaluation run.
+    #   @return [Hash<String,Types::DataSource>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartDataQualityRulesetEvaluationRunRequest AWS API Documentation
     #
     class StartDataQualityRulesetEvaluationRunRequest < Struct.new(
@@ -18176,7 +18360,8 @@ module Aws::Glue
       :timeout,
       :client_token,
       :additional_run_options,
-      :ruleset_names)
+      :ruleset_names,
+      :additional_data_sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18266,7 +18451,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] arguments
-    #   The job arguments specifically for this run. For this job run, they
+    #   The job arguments associated with this run. For this job run, they
     #   replace the default arguments set in the job definition itself.
     #
     #   You can specify arguments here that your own job-execution script
@@ -18281,14 +18466,19 @@ module Aws::Glue
     #   arguments, see the [Calling Glue APIs in Python][1] topic in the
     #   developer guide.
     #
-    #   For information about the key-value pairs that Glue consumes to set
-    #   up your job, see the [Special Parameters Used by Glue][2] topic in
-    #   the developer guide.
+    #   For information about the arguments you can provide to this field
+    #   when configuring Spark jobs, see the [Special Parameters Used by
+    #   Glue][2] topic in the developer guide.
+    #
+    #   For information about the arguments you can provide to this field
+    #   when configuring Ray jobs, see [Using job parameters in Ray jobs][3]
+    #   in the developer guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
     #   [2]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
+    #   [3]: https://docs.aws.amazon.com/glue/latest/dg/author-job-ray-job-parameters.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] allocated_capacity
@@ -18316,24 +18506,31 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity
-    #   The number of Glue data processing units (DPUs) that can be
+    #   For Glue version 1.0 or earlier jobs, using the standard worker
+    #   type, the number of Glue data processing units (DPUs) that can be
     #   allocated when this job runs. A DPU is a relative measure of
     #   processing power that consists of 4 vCPUs of compute capacity and 16
-    #   GB of memory. For more information, see the [Glue pricing page][1].
+    #   GB of memory. For more information, see the [ Glue pricing page][1].
     #
-    #   Do not set `Max Capacity` if using `WorkerType` and
+    #   For Glue version 2.0+ jobs, you cannot specify a `Maximum capacity`.
+    #   Instead, you should specify a `Worker type` and the `Number of
+    #   workers`.
+    #
+    #   Do not set `MaxCapacity` if using `WorkerType` and
     #   `NumberOfWorkers`.
     #
     #   The value that can be allocated for `MaxCapacity` depends on whether
-    #   you are running a Python shell job, or an Apache Spark ETL job:
+    #   you are running a Python shell job, an Apache Spark ETL job, or an
+    #   Apache Spark streaming ETL job:
     #
     #   * When you specify a Python shell job
     #     (`JobCommand.Name`="pythonshell"), you can allocate either
     #     0.0625 or 1 DPU. The default is 0.0625 DPU.
     #
     #   * When you specify an Apache Spark ETL job
-    #     (`JobCommand.Name`="glueetl"), you can allocate a minimum of 2
-    #     DPUs. The default is 10 DPUs. This job type cannot have a
+    #     (`JobCommand.Name`="glueetl") or Apache Spark streaming ETL job
+    #     (`JobCommand.Name`="gluestreaming"), you can allocate from 2 to
+    #     100 DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
     #
     #
@@ -18352,22 +18549,29 @@ module Aws::Glue
     #
     # @!attribute [rw] worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of Standard, G.1X, G.2X, or G.025X.
+    #   Accepts a value of Standard, G.1X, G.2X, or G.025X for Spark jobs.
+    #   Accepts the value Z.2X for Ray jobs.
     #
     #   * For the `Standard` worker type, each worker provides 4 vCPU, 16 GB
     #     of memory and a 50GB disk, and 2 executors per worker.
     #
-    #   * For the `G.1X` worker type, each worker provides 4 vCPU, 16 GB of
-    #     memory and a 64GB disk, and 1 executor per worker.
+    #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPU, 16
+    #     GB of memory, 64 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
     #
-    #   * For the `G.2X` worker type, each worker provides 8 vCPU, 32 GB of
-    #     memory and a 128GB disk, and 1 executor per worker.
+    #   * For the `G.2X` worker type, each worker maps to 2 DPU (8 vCPU, 32
+    #     GB of memory, 128 GB disk), and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive jobs.
     #
     #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2
     #     vCPU, 4 GB of memory, 64 GB disk), and provides 1 executor per
     #     worker. We recommend this worker type for low volume streaming
     #     jobs. This worker type is only available for Glue version 3.0
     #     streaming jobs.
+    #
+    #   * For the `Z.2X` worker type, each worker maps to 2 DPU (8vCPU, 64
+    #     GB of m emory, 128 GB disk), and provides up to 8 Ray workers (one
+    #     per vCPU) based on the autoscaler.
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers

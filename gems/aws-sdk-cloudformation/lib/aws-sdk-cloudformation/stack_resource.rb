@@ -139,10 +139,12 @@ module Aws::CloudFormation
     #
     # @return [self]
     def load
-      resp = @client.describe_stack_resource(
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_stack_resource(
         logical_resource_id: @logical_id,
         stack_name: @stack_name
       )
+      end
       @data = resp.stack_resource_detail
       self
     end
@@ -257,7 +259,9 @@ module Aws::CloudFormation
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Associations

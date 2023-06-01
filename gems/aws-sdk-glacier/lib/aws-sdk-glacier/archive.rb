@@ -172,7 +172,9 @@ module Aws::Glacier
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -188,7 +190,9 @@ module Aws::Glacier
         vault_name: @vault_name,
         archive_id: @id
       )
-      resp = @client.delete_archive(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_archive(options)
+      end
       resp.data
     end
 
@@ -206,7 +210,9 @@ module Aws::Glacier
           archive_id: @id
         }
       )
-      resp = @client.initiate_job(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.initiate_job(options)
+      end
       Job.new(
         id: resp.data.job_id,
         account_id: @account_id,

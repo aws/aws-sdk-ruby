@@ -460,6 +460,7 @@ module Aws
             'MediaConvert' => 'mediaconvert',
             'MediaLive' => 'medialive',
             'MediaPackage' => 'mediapackage',
+            'MediaPackageV2' => 'mediapackagev2',
             'MediaPackageVod' => 'mediapackage-vod',
             'MediaStore' => 'mediastore',
             'MediaStoreData' => 'data.mediastore',

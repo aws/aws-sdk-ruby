@@ -105,6 +105,9 @@ module Aws::ComputeOptimizer
     ExportableLambdaFunctionFields = Shapes::ListShape.new(name: 'ExportableLambdaFunctionFields')
     ExportableVolumeField = Shapes::StringShape.new(name: 'ExportableVolumeField')
     ExportableVolumeFields = Shapes::ListShape.new(name: 'ExportableVolumeFields')
+    ExternalMetricStatus = Shapes::StructureShape.new(name: 'ExternalMetricStatus')
+    ExternalMetricStatusCode = Shapes::StringShape.new(name: 'ExternalMetricStatusCode')
+    ExternalMetricStatusReason = Shapes::StringShape.new(name: 'ExternalMetricStatusReason')
     ExternalMetricsPreference = Shapes::StructureShape.new(name: 'ExternalMetricsPreference')
     ExternalMetricsSource = Shapes::StringShape.new(name: 'ExternalMetricsSource')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
@@ -548,6 +551,10 @@ module Aws::ComputeOptimizer
 
     ExportableVolumeFields.member = Shapes::ShapeRef.new(shape: ExportableVolumeField)
 
+    ExternalMetricStatus.add_member(:status_code, Shapes::ShapeRef.new(shape: ExternalMetricStatusCode, location_name: "statusCode"))
+    ExternalMetricStatus.add_member(:status_reason, Shapes::ShapeRef.new(shape: ExternalMetricStatusReason, location_name: "statusReason"))
+    ExternalMetricStatus.struct_class = Types::ExternalMetricStatus
+
     ExternalMetricsPreference.add_member(:source, Shapes::ShapeRef.new(shape: ExternalMetricsSource, location_name: "source"))
     ExternalMetricsPreference.struct_class = Types::ExternalMetricsPreference
 
@@ -720,6 +727,7 @@ module Aws::ComputeOptimizer
     InstanceRecommendation.add_member(:inferred_workload_types, Shapes::ShapeRef.new(shape: InferredWorkloadTypes, location_name: "inferredWorkloadTypes"))
     InstanceRecommendation.add_member(:instance_state, Shapes::ShapeRef.new(shape: InstanceState, location_name: "instanceState"))
     InstanceRecommendation.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    InstanceRecommendation.add_member(:external_metric_status, Shapes::ShapeRef.new(shape: ExternalMetricStatus, location_name: "externalMetricStatus"))
     InstanceRecommendation.struct_class = Types::InstanceRecommendation
 
     InstanceRecommendationFindingReasonCodes.member = Shapes::ShapeRef.new(shape: InstanceRecommendationFindingReasonCode)

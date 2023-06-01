@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.41.0 (2023-05-18)
+------------------
+
+* Feature - In this launch, we add support for showing integration status with external metric providers such as Instana, Datadog ...etc in GetEC2InstanceRecommendations and ExportEC2InstanceRecommendations apis
+
 1.40.0 (2023-05-01)
 ------------------
 

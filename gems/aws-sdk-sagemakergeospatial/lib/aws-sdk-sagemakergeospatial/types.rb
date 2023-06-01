@@ -249,31 +249,6 @@ module Aws::SageMakerGeospatial
       include Aws::Structure
     end
 
-    # Union representing different data sources to be used as input for an
-    # Earth Observation job.
-    #
-    # @note EojDataSourceConfigInput is a union - when making an API calls you must set exactly one of the members.
-    #
-    # @note EojDataSourceConfigInput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of EojDataSourceConfigInput corresponding to the set member.
-    #
-    # @!attribute [rw] s3_data
-    #   The input structure for S3Data; representing the Amazon S3 location
-    #   of the input data objects.
-    #   @return [Types::S3DataInput]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/EojDataSourceConfigInput AWS API Documentation
-    #
-    class EojDataSourceConfigInput < Struct.new(
-      :s3_data,
-      :unknown)
-      SENSITIVE = []
-      include Aws::Structure
-      include Aws::Structure::Union
-
-      class S3Data < EojDataSourceConfigInput; end
-      class Unknown < EojDataSourceConfigInput; end
-    end
-
     # @!attribute [rw] arn
     #   The input Amazon Resource Name (ARN) of the Earth Observation job
     #   being exported.
@@ -892,10 +867,6 @@ module Aws::SageMakerGeospatial
 
     # Input configuration information.
     #
-    # @!attribute [rw] data_source_config
-    #   The location of the input data.&gt;
-    #   @return [Types::EojDataSourceConfigInput]
-    #
     # @!attribute [rw] previous_earth_observation_job_arn
     #   The Amazon Resource Name (ARN) of the previous Earth Observation
     #   job.
@@ -910,7 +881,6 @@ module Aws::SageMakerGeospatial
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/InputConfigInput AWS API Documentation
     #
     class InputConfigInput < Struct.new(
-      :data_source_config,
       :previous_earth_observation_job_arn,
       :raster_data_collection_query)
       SENSITIVE = []
@@ -918,10 +888,6 @@ module Aws::SageMakerGeospatial
     end
 
     # The InputConfig for an EarthObservationJob response.
-    #
-    # @!attribute [rw] data_source_config
-    #   The location of the input data.
-    #   @return [Types::EojDataSourceConfigInput]
     #
     # @!attribute [rw] previous_earth_observation_job_arn
     #   The Amazon Resource Name (ARN) of the previous Earth Observation
@@ -937,7 +903,6 @@ module Aws::SageMakerGeospatial
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/InputConfigOutput AWS API Documentation
     #
     class InputConfigOutput < Struct.new(
-      :data_source_config,
       :previous_earth_observation_job_arn,
       :raster_data_collection_query)
       SENSITIVE = []
@@ -1907,30 +1872,6 @@ module Aws::SageMakerGeospatial
     class ReverseGeocodingConfig < Struct.new(
       :x_attribute_name,
       :y_attribute_name)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Path to Amazon S3 storage location for input data.
-    #
-    # @!attribute [rw] kms_key_id
-    #   The Key Management Service key ID for server-side encryption.
-    #   @return [String]
-    #
-    # @!attribute [rw] metadata_provider
-    #   Metadata provider from whom the Amazon S3 data has been acquired.
-    #   @return [String]
-    #
-    # @!attribute [rw] s3_uri
-    #   The URL to the Amazon S3 input.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-geospatial-2020-05-27/S3DataInput AWS API Documentation
-    #
-    class S3DataInput < Struct.new(
-      :kms_key_id,
-      :metadata_provider,
-      :s3_uri)
       SENSITIVE = []
       include Aws::Structure
     end

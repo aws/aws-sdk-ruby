@@ -188,6 +188,8 @@ module Aws::SESV2
             Aws::SESV2::Endpoints::PutConfigurationSetVdmOptions.build(context)
           when :put_dedicated_ip_in_pool
             Aws::SESV2::Endpoints::PutDedicatedIpInPool.build(context)
+          when :put_dedicated_ip_pool_scaling_attributes
+            Aws::SESV2::Endpoints::PutDedicatedIpPoolScalingAttributes.build(context)
           when :put_dedicated_ip_warmup_attributes
             Aws::SESV2::Endpoints::PutDedicatedIpWarmupAttributes.build(context)
           when :put_deliverability_dashboard_option

@@ -156,7 +156,9 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Associations
@@ -195,7 +197,9 @@ module Aws::RDS
       batches = Enumerator.new do |y|
         batch = []
         options = options.merge(db_parameter_group_family: @name)
-        resp = @client.describe_engine_default_cluster_parameters(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_engine_default_cluster_parameters(options)
+        end
         resp.data.engine_defaults.parameters.each do |p|
           batch << Parameter.new(
             name: p.parameter_name,
@@ -225,7 +229,9 @@ module Aws::RDS
     def engine_default_parameters(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(db_parameter_group_family: @name)
-        resp = @client.describe_engine_default_parameters(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_engine_default_parameters(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.engine_defaults.parameters.each do |p|

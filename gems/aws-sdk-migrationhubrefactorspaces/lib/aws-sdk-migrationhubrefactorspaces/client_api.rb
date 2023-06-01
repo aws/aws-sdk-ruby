@@ -440,6 +440,7 @@ module Aws::MigrationHubRefactorSpaces
     GetRouteRequest.add_member(:route_identifier, Shapes::ShapeRef.new(shape: RouteId, required: true, location: "uri", location_name: "RouteIdentifier"))
     GetRouteRequest.struct_class = Types::GetRouteRequest
 
+    GetRouteResponse.add_member(:append_source_path, Shapes::ShapeRef.new(shape: Boolean, location_name: "AppendSourcePath"))
     GetRouteResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, location_name: "ApplicationId"))
     GetRouteResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "Arn"))
     GetRouteResponse.add_member(:created_by_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "CreatedByAccountId"))
@@ -568,6 +569,7 @@ module Aws::MigrationHubRefactorSpaces
 
     RouteSummaries.member = Shapes::ShapeRef.new(shape: RouteSummary)
 
+    RouteSummary.add_member(:append_source_path, Shapes::ShapeRef.new(shape: Boolean, location_name: "AppendSourcePath"))
     RouteSummary.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, location_name: "ApplicationId"))
     RouteSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "Arn"))
     RouteSummary.add_member(:created_by_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "CreatedByAccountId"))
@@ -653,6 +655,7 @@ module Aws::MigrationHubRefactorSpaces
     UpdateRouteResponse.struct_class = Types::UpdateRouteResponse
 
     UriPathRouteInput.add_member(:activation_state, Shapes::ShapeRef.new(shape: RouteActivationState, required: true, location_name: "ActivationState"))
+    UriPathRouteInput.add_member(:append_source_path, Shapes::ShapeRef.new(shape: Boolean, location_name: "AppendSourcePath"))
     UriPathRouteInput.add_member(:include_child_paths, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeChildPaths"))
     UriPathRouteInput.add_member(:methods, Shapes::ShapeRef.new(shape: HttpMethods, location_name: "Methods"))
     UriPathRouteInput.add_member(:source_path, Shapes::ShapeRef.new(shape: UriPath, required: true, location_name: "SourcePath"))

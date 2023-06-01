@@ -1,6 +1,27 @@
 Unreleased Changes
 ------------------
 
+3.174.0 (2023-05-31)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Improve User-Agent metrics tracking.
+
+3.173.1 (2023-05-24)
+------------------
+
+* Issue - Updated `checksum_algorithm` plugin to use IO.copy_stream for JRuby.
+
+3.173.0 (2023-05-18)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
 3.172.0 (2023-05-08)
 ------------------
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.106.0 (2023-05-18)
+------------------
+
+* Feature - This release introduces a new MXF Profile for XDCAM which is strictly compliant with the SMPTE RDD 9 standard and improved handling of output name modifiers.
+
 1.105.0 (2023-04-24)
 ------------------
 

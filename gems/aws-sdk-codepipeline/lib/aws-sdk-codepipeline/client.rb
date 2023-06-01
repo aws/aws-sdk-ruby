@@ -275,6 +275,11 @@ module Aws::CodePipeline
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -386,10 +391,9 @@ module Aws::CodePipeline
     #   confirm receipt.
     #
     # @option params [required, String] :nonce
-    #   A system-generated random number that AWS CodePipeline uses to ensure
-    #   that the job is being worked on by only one job worker. Get this
-    #   number from the response of the PollForJobs request that returned this
-    #   job.
+    #   A system-generated random number that CodePipeline uses to ensure that
+    #   the job is being worked on by only one job worker. Get this number
+    #   from the response of the PollForJobs request that returned this job.
     #
     # @return [Types::AcknowledgeJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -422,9 +426,9 @@ module Aws::CodePipeline
     #   The unique system-generated ID of the job.
     #
     # @option params [required, String] :nonce
-    #   A system-generated random number that AWS CodePipeline uses to ensure
-    #   that the job is being worked on by only one job worker. Get this
-    #   number from the response to a GetThirdPartyJobDetails request.
+    #   A system-generated random number that CodePipeline uses to ensure that
+    #   the job is being worked on by only one job worker. Get this number
+    #   from the response to a GetThirdPartyJobDetails request.
     #
     # @option params [required, String] :client_token
     #   The clientToken portion of the clientId and clientToken pair used to
@@ -457,14 +461,15 @@ module Aws::CodePipeline
     end
 
     # Creates a new custom action that can be used in all pipelines
-    # associated with the AWS account. Only used for custom actions.
+    # associated with the Amazon Web Services account. Only used for custom
+    # actions.
     #
     # @option params [required, String] :category
     #   The category of the custom action, such as a build action or a test
     #   action.
     #
     # @option params [required, String] :provider
-    #   The provider of the service used in the custom action, such as AWS
+    #   The provider of the service used in the custom action, such as
     #   CodeDeploy.
     #
     # @option params [required, String] :version
@@ -735,7 +740,7 @@ module Aws::CodePipeline
     #   source or deploy.
     #
     # @option params [required, String] :provider
-    #   The provider of the service used in the custom action, such as AWS
+    #   The provider of the service used in the custom action, such as
     #   CodeDeploy.
     #
     # @option params [required, String] :version
@@ -783,7 +788,7 @@ module Aws::CodePipeline
     end
 
     # Deletes a previously created webhook by name. Deleting the webhook
-    # stops AWS CodePipeline from starting a pipeline every time an external
+    # stops CodePipeline from starting a pipeline every time an external
     # event occurs. The API returns successfully when trying to delete a
     # webhook that is already deleted. If a deleted webhook is re-created by
     # calling PutWebhook with the same name, it will have a different URL.
@@ -1001,11 +1006,11 @@ module Aws::CodePipeline
 
     # Returns information about a job. Used for custom actions only.
     #
-    # When this API is called, AWS CodePipeline returns temporary
-    # credentials for the S3 bucket used to store artifacts for the
-    # pipeline, if the action requires access to that S3 bucket for input or
-    # output artifacts. This API also returns any secret values defined for
-    # the action.
+    # When this API is called, CodePipeline returns temporary credentials
+    # for the S3 bucket used to store artifacts for the pipeline, if the
+    # action requires access to that S3 bucket for input or output
+    # artifacts. This API also returns any secret values defined for the
+    # action.
     #
     # @option params [required, String] :job_id
     #   The unique system-generated ID for the job.
@@ -1071,7 +1076,7 @@ module Aws::CodePipeline
     #
     # @option params [required, String] :name
     #   The name of the pipeline for which you want to get information.
-    #   Pipeline names must be unique under an AWS user account.
+    #   Pipeline names must be unique in an Amazon Web Services account.
     #
     # @option params [Integer] :version
     #   The version number of the pipeline. If you do not specify a version,
@@ -1127,6 +1132,7 @@ module Aws::CodePipeline
     #   resp.metadata.pipeline_arn #=> String
     #   resp.metadata.created #=> Time
     #   resp.metadata.updated #=> Time
+    #   resp.metadata.polling_disabled_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipeline AWS API Documentation
     #
@@ -1257,11 +1263,11 @@ module Aws::CodePipeline
     # Requests the details of a job for a third party action. Used for
     # partner actions only.
     #
-    # When this API is called, AWS CodePipeline returns temporary
-    # credentials for the S3 bucket used to store artifacts for the
-    # pipeline, if the action requires access to that S3 bucket for input or
-    # output artifacts. This API also returns any secret values defined for
-    # the action.
+    # When this API is called, CodePipeline returns temporary credentials
+    # for the S3 bucket used to store artifacts for the pipeline, if the
+    # action requires access to that S3 bucket for input or output
+    # artifacts. This API also returns any secret values defined for the
+    # action.
     #
     # @option params [required, String] :job_id
     #   The unique system-generated ID used for identifying the job.
@@ -1415,8 +1421,8 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
-    # Gets a summary of all AWS CodePipeline action types associated with
-    # your account.
+    # Gets a summary of all CodePipeline action types associated with your
+    # account.
     #
     # @option params [String] :action_owner_filter
     #   Filters the list of action types to those created by a specified
@@ -1626,9 +1632,9 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
-    # Gets a listing of all the webhooks in this AWS Region for this
-    # account. The output lists all webhooks and includes the webhook URL
-    # and ARN and the configuration for each webhook.
+    # Gets a listing of all the webhooks in this Amazon Web Services Region
+    # for this account. The output lists all webhooks and includes the
+    # webhook URL and ARN and the configuration for each webhook.
     #
     # @option params [String] :next_token
     #   The token that was returned from the previous ListWebhooks call, which
@@ -1684,16 +1690,16 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
-    # Returns information about any jobs for AWS CodePipeline to act on.
+    # Returns information about any jobs for CodePipeline to act on.
     # `PollForJobs` is valid only for action types with "Custom" in the
-    # owner field. If the action type contains "AWS" or "ThirdParty" in
-    # the owner field, the `PollForJobs` action returns an error.
+    # owner field. If the action type contains `AWS` or `ThirdParty` in the
+    # owner field, the `PollForJobs` action returns an error.
     #
-    # When this API is called, AWS CodePipeline returns temporary
-    # credentials for the S3 bucket used to store artifacts for the
-    # pipeline, if the action requires access to that S3 bucket for input or
-    # output artifacts. This API also returns any secret values defined for
-    # the action.
+    # When this API is called, CodePipeline returns temporary credentials
+    # for the S3 bucket used to store artifacts for the pipeline, if the
+    # action requires access to that S3 bucket for input or output
+    # artifacts. This API also returns any secret values defined for the
+    # action.
     #
     # @option params [required, Types::ActionTypeId] :action_type_id
     #   Represents information about an action type.
@@ -1776,10 +1782,10 @@ module Aws::CodePipeline
     # Determines whether there are any third party jobs for a job worker to
     # act on. Used for partner actions only.
     #
-    # When this API is called, AWS CodePipeline returns temporary
-    # credentials for the S3 bucket used to store artifacts for the
-    # pipeline, if the action requires access to that S3 bucket for input or
-    # output artifacts.
+    # When this API is called, CodePipeline returns temporary credentials
+    # for the S3 bucket used to store artifacts for the pipeline, if the
+    # action requires access to that S3 bucket for input or output
+    # artifacts.
     #
     # @option params [required, Types::ActionTypeId] :action_type_id
     #   Represents information about an action type.
@@ -1818,8 +1824,7 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
-    # Provides information to AWS CodePipeline about new revisions to a
-    # source.
+    # Provides information to CodePipeline about new revisions to a source.
     #
     # @option params [required, String] :pipeline_name
     #   The name of the pipeline that starts processing the revision to the
@@ -1867,8 +1872,8 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
-    # Provides the response to a manual approval request to AWS
-    # CodePipeline. Valid responses include Approved and Rejected.
+    # Provides the response to a manual approval request to CodePipeline.
+    # Valid responses include Approved and Rejected.
     #
     # @option params [required, String] :pipeline_name
     #   The name of the pipeline that contains the action.
@@ -1962,12 +1967,12 @@ module Aws::CodePipeline
     #   by the job.
     #
     # @option params [String] :continuation_token
-    #   A token generated by a job worker, such as an AWS CodeDeploy
-    #   deployment ID, that a successful job provides to identify a custom
-    #   action in progress. Future jobs use this token to identify the running
-    #   instance of the action. It can be reused to return more information
-    #   about the progress of the custom action. When the action is complete,
-    #   no continuation token should be supplied.
+    #   A token generated by a job worker, such as a CodeDeploy deployment ID,
+    #   that a successful job provides to identify a custom action in
+    #   progress. Future jobs use this token to identify the running instance
+    #   of the action. It can be reused to return more information about the
+    #   progress of the custom action. When the action is complete, no
+    #   continuation token should be supplied.
     #
     # @option params [Types::ExecutionDetails] :execution_details
     #   The execution details of the successful job, such as the actions taken
@@ -2064,12 +2069,12 @@ module Aws::CodePipeline
     #   Represents information about a current revision.
     #
     # @option params [String] :continuation_token
-    #   A token generated by a job worker, such as an AWS CodeDeploy
-    #   deployment ID, that a successful job provides to identify a partner
-    #   action in progress. Future jobs use this token to identify the running
-    #   instance of the action. It can be reused to return more information
-    #   about the progress of the partner action. When the action is complete,
-    #   no continuation token should be supplied.
+    #   A token generated by a job worker, such as a CodeDeploy deployment ID,
+    #   that a successful job provides to identify a partner action in
+    #   progress. Future jobs use this token to identify the running instance
+    #   of the action. It can be reused to return more information about the
+    #   progress of the partner action. When the action is complete, no
+    #   continuation token should be supplied.
     #
     # @option params [Types::ExecutionDetails] :execution_details
     #   The details of the actions taken and results produced on an artifact
@@ -2379,7 +2384,7 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
-    # Removes tags from an AWS resource.
+    # Removes tags from an Amazon Web Services resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource to remove tags from.
@@ -2616,7 +2621,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

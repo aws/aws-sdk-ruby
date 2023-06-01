@@ -2532,6 +2532,7 @@ module Aws::EC2
     SecurityGroupStringList = Shapes::ListShape.new(name: 'SecurityGroupStringList')
     SelfServicePortal = Shapes::StringShape.new(name: 'SelfServicePortal')
     SendDiagnosticInterruptRequest = Shapes::StructureShape.new(name: 'SendDiagnosticInterruptRequest')
+    SensitiveUrl = Shapes::StringShape.new(name: 'SensitiveUrl')
     SensitiveUserData = Shapes::StringShape.new(name: 'SensitiveUserData')
     ServiceConfiguration = Shapes::StructureShape.new(name: 'ServiceConfiguration')
     ServiceConfigurationSet = Shapes::ListShape.new(name: 'ServiceConfigurationSet')
@@ -9142,7 +9143,7 @@ module Aws::EC2
     ImageDiskContainer.add_member(:device_name, Shapes::ShapeRef.new(shape: String, location_name: "DeviceName"))
     ImageDiskContainer.add_member(:format, Shapes::ShapeRef.new(shape: String, location_name: "Format"))
     ImageDiskContainer.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
-    ImageDiskContainer.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "Url"))
+    ImageDiskContainer.add_member(:url, Shapes::ShapeRef.new(shape: SensitiveUrl, location_name: "Url"))
     ImageDiskContainer.add_member(:user_bucket, Shapes::ShapeRef.new(shape: UserBucket, location_name: "UserBucket"))
     ImageDiskContainer.struct_class = Types::ImageDiskContainer
 
@@ -12421,7 +12422,7 @@ module Aws::EC2
     RequestLaunchTemplateData.add_member(:ram_disk_id, Shapes::ShapeRef.new(shape: RamdiskId, location_name: "RamDiskId"))
     RequestLaunchTemplateData.add_member(:disable_api_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableApiTermination"))
     RequestLaunchTemplateData.add_member(:instance_initiated_shutdown_behavior, Shapes::ShapeRef.new(shape: ShutdownBehavior, location_name: "InstanceInitiatedShutdownBehavior"))
-    RequestLaunchTemplateData.add_member(:user_data, Shapes::ShapeRef.new(shape: String, location_name: "UserData"))
+    RequestLaunchTemplateData.add_member(:user_data, Shapes::ShapeRef.new(shape: SensitiveUserData, location_name: "UserData"))
     RequestLaunchTemplateData.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: LaunchTemplateTagSpecificationRequestList, location_name: "TagSpecification"))
     RequestLaunchTemplateData.add_member(:elastic_gpu_specifications, Shapes::ShapeRef.new(shape: ElasticGpuSpecificationList, location_name: "ElasticGpuSpecification"))
     RequestLaunchTemplateData.add_member(:elastic_inference_accelerators, Shapes::ShapeRef.new(shape: LaunchTemplateElasticInferenceAcceleratorList, location_name: "ElasticInferenceAccelerator"))
@@ -13252,7 +13253,7 @@ module Aws::EC2
     SnapshotDetail.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
     SnapshotDetail.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
     SnapshotDetail.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
-    SnapshotDetail.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "url"))
+    SnapshotDetail.add_member(:url, Shapes::ShapeRef.new(shape: SensitiveUrl, location_name: "url"))
     SnapshotDetail.add_member(:user_bucket, Shapes::ShapeRef.new(shape: UserBucketDetails, location_name: "userBucket"))
     SnapshotDetail.struct_class = Types::SnapshotDetail
 
@@ -13260,7 +13261,7 @@ module Aws::EC2
 
     SnapshotDiskContainer.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     SnapshotDiskContainer.add_member(:format, Shapes::ShapeRef.new(shape: String, location_name: "Format"))
-    SnapshotDiskContainer.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "Url"))
+    SnapshotDiskContainer.add_member(:url, Shapes::ShapeRef.new(shape: SensitiveUrl, location_name: "Url"))
     SnapshotDiskContainer.add_member(:user_bucket, Shapes::ShapeRef.new(shape: UserBucket, location_name: "UserBucket"))
     SnapshotDiskContainer.struct_class = Types::SnapshotDiskContainer
 
@@ -13301,7 +13302,7 @@ module Aws::EC2
     SnapshotTaskDetail.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
     SnapshotTaskDetail.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
     SnapshotTaskDetail.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
-    SnapshotTaskDetail.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "url"))
+    SnapshotTaskDetail.add_member(:url, Shapes::ShapeRef.new(shape: SensitiveUrl, location_name: "url"))
     SnapshotTaskDetail.add_member(:user_bucket, Shapes::ShapeRef.new(shape: UserBucketDetails, location_name: "userBucket"))
     SnapshotTaskDetail.struct_class = Types::SnapshotTaskDetail
 

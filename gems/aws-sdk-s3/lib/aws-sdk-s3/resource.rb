@@ -94,7 +94,9 @@ module Aws::S3
     #   equivalent form of this ACL expressed in the XML format.
     # @return [Bucket]
     def create_bucket(options = {})
-      @client.create_bucket(options)
+      Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_bucket(options)
+      end
       Bucket.new(
         name: options[:bucket],
         client: @client
@@ -120,7 +122,9 @@ module Aws::S3
     def buckets(options = {})
       batches = Enumerator.new do |y|
         batch = []
-        resp = @client.list_buckets(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.list_buckets(options)
+        end
         resp.data.buckets.each do |b|
           batch << Bucket.new(
             name: b.name,

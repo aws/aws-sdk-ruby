@@ -153,6 +153,7 @@ module Aws::WAFV2
     HeaderMatchPattern = Shapes::StructureShape.new(name: 'HeaderMatchPattern')
     HeaderName = Shapes::StringShape.new(name: 'HeaderName')
     HeaderNames = Shapes::ListShape.new(name: 'HeaderNames')
+    HeaderOrder = Shapes::StructureShape.new(name: 'HeaderOrder')
     HeaderValue = Shapes::StringShape.new(name: 'HeaderValue')
     Headers = Shapes::StructureShape.new(name: 'Headers')
     IPAddress = Shapes::StringShape.new(name: 'IPAddress')
@@ -665,6 +666,7 @@ module Aws::WAFV2
     FieldToMatch.add_member(:json_body, Shapes::ShapeRef.new(shape: JsonBody, location_name: "JsonBody"))
     FieldToMatch.add_member(:headers, Shapes::ShapeRef.new(shape: Headers, location_name: "Headers"))
     FieldToMatch.add_member(:cookies, Shapes::ShapeRef.new(shape: Cookies, location_name: "Cookies"))
+    FieldToMatch.add_member(:header_order, Shapes::ShapeRef.new(shape: HeaderOrder, location_name: "HeaderOrder"))
     FieldToMatch.struct_class = Types::FieldToMatch
 
     Filter.add_member(:behavior, Shapes::ShapeRef.new(shape: FilterBehavior, required: true, location_name: "Behavior"))
@@ -825,6 +827,9 @@ module Aws::WAFV2
     HeaderMatchPattern.struct_class = Types::HeaderMatchPattern
 
     HeaderNames.member = Shapes::ShapeRef.new(shape: FieldToMatchData)
+
+    HeaderOrder.add_member(:oversize_handling, Shapes::ShapeRef.new(shape: OversizeHandling, required: true, location_name: "OversizeHandling"))
+    HeaderOrder.struct_class = Types::HeaderOrder
 
     Headers.add_member(:match_pattern, Shapes::ShapeRef.new(shape: HeaderMatchPattern, required: true, location_name: "MatchPattern"))
     Headers.add_member(:match_scope, Shapes::ShapeRef.new(shape: MapMatchScope, required: true, location_name: "MatchScope"))

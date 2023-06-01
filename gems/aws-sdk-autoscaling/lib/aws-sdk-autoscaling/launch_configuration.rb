@@ -264,7 +264,9 @@ module Aws::AutoScaling
     #
     # @return [self]
     def load
-      resp = @client.describe_launch_configurations(launch_configuration_names: [@name])
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_launch_configurations(launch_configuration_names: [@name])
+      end
       @data = resp.launch_configurations[0]
       self
     end
@@ -379,7 +381,9 @@ module Aws::AutoScaling
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -391,7 +395,9 @@ module Aws::AutoScaling
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(launch_configuration_name: @name)
-      resp = @client.delete_launch_configuration(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_launch_configuration(options)
+      end
       resp.data
     end
 

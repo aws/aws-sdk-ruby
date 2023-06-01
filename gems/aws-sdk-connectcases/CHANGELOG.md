@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.5.0 (2023-05-19)
+------------------
+
+* Feature - This release adds the ability to create fields with type Url through the CreateField API. For more information see https://docs.aws.amazon.com/cases/latest/APIReference/Welcome.html
+
 1.4.0 (2023-02-24)
 ------------------
 

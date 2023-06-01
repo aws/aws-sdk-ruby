@@ -275,6 +275,11 @@ module Aws::MediaConvert
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -1195,7 +1200,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
-    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.xavc_profile_settings.max_anc_data_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].extension #=> String
@@ -1919,7 +1924,7 @@ module Aws::MediaConvert
     #         },
     #         mxf_settings: {
     #           afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
-    #           profile: "D_10", # accepts D_10, XDCAM, OP1A, XAVC
+    #           profile: "D_10", # accepts D_10, XDCAM, OP1A, XAVC, XDCAM_RDD9
     #           xavc_profile_settings: {
     #             duration_mode: "ALLOW_ANY_DURATION", # accepts ALLOW_ANY_DURATION, DROP_FRAMES_FOR_COMPLIANCE
     #             max_anc_data_size: 1,
@@ -2609,7 +2614,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.preset.settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
-    #   resp.preset.settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
+    #   resp.preset.settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"
     #   resp.preset.settings.container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
     #   resp.preset.settings.container_settings.mxf_settings.xavc_profile_settings.max_anc_data_size #=> Integer
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
@@ -3836,7 +3841,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
-    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.xavc_profile_settings.max_anc_data_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].extension #=> String
@@ -4496,7 +4501,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.preset.settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
-    #   resp.preset.settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
+    #   resp.preset.settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"
     #   resp.preset.settings.container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
     #   resp.preset.settings.container_settings.mxf_settings.xavc_profile_settings.max_anc_data_size #=> Integer
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
@@ -5541,7 +5546,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mxf_settings.xavc_profile_settings.max_anc_data_size #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].extension #=> String
@@ -6264,7 +6269,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
     #   resp.presets[0].settings.container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.presets[0].settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
-    #   resp.presets[0].settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
+    #   resp.presets[0].settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"
     #   resp.presets[0].settings.container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
     #   resp.presets[0].settings.container_settings.mxf_settings.xavc_profile_settings.max_anc_data_size #=> Integer
     #   resp.presets[0].settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
@@ -7465,7 +7470,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
-    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.xavc_profile_settings.max_anc_data_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].extension #=> String
@@ -8183,7 +8188,7 @@ module Aws::MediaConvert
     #         },
     #         mxf_settings: {
     #           afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
-    #           profile: "D_10", # accepts D_10, XDCAM, OP1A, XAVC
+    #           profile: "D_10", # accepts D_10, XDCAM, OP1A, XAVC, XDCAM_RDD9
     #           xavc_profile_settings: {
     #             duration_mode: "ALLOW_ANY_DURATION", # accepts ALLOW_ANY_DURATION, DROP_FRAMES_FOR_COMPLIANCE
     #             max_anc_data_size: 1,
@@ -8870,7 +8875,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_scheme_id_uri #=> String
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_value #=> String
     #   resp.preset.settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
-    #   resp.preset.settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC"
+    #   resp.preset.settings.container_settings.mxf_settings.profile #=> String, one of "D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"
     #   resp.preset.settings.container_settings.mxf_settings.xavc_profile_settings.duration_mode #=> String, one of "ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"
     #   resp.preset.settings.container_settings.mxf_settings.xavc_profile_settings.max_anc_data_size #=> Integer
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
@@ -9276,7 +9281,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

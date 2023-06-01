@@ -103,7 +103,9 @@ module Aws::RDS
     #
     # @return [self]
     def load
-      resp = @client.describe_reserved_db_instances_offerings(reserved_db_instances_offering_id: @id)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_reserved_db_instances_offerings(reserved_db_instances_offering_id: @id)
+      end
       @data = resp.reserved_db_instances_offerings[0]
       self
     end
@@ -218,7 +220,9 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -254,7 +258,9 @@ module Aws::RDS
     # @return [ReservedDBInstance]
     def purchase(options = {})
       options = options.merge(reserved_db_instances_offering_id: @id)
-      resp = @client.purchase_reserved_db_instances_offering(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.purchase_reserved_db_instances_offering(options)
+      end
       ReservedDBInstance.new(
         id: resp.data.reserved_db_instance.reserved_db_instance_id,
         data: resp.data.reserved_db_instance,

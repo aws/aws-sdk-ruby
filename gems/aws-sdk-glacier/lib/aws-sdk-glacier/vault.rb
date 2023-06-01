@@ -95,10 +95,12 @@ module Aws::Glacier
     #
     # @return [self]
     def load
-      resp = @client.describe_vault(
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_vault(
         vault_name: @name,
         account_id: @account_id
       )
+      end
       @data = resp.data
       self
     end
@@ -213,7 +215,9 @@ module Aws::Glacier
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -228,7 +232,9 @@ module Aws::Glacier
         vault_name: @name,
         account_id: @account_id
       )
-      resp = @client.create_vault(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_vault(options)
+      end
       resp.data
     end
 
@@ -242,7 +248,9 @@ module Aws::Glacier
         vault_name: @name,
         account_id: @account_id
       )
-      resp = @client.delete_vault(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_vault(options)
+      end
       resp.data
     end
 
@@ -259,7 +267,9 @@ module Aws::Glacier
           type: "inventory-retrieval"
         }
       )
-      resp = @client.initiate_job(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.initiate_job(options)
+      end
       Job.new(
         id: resp.data.job_id,
         account_id: @account_id,
@@ -291,7 +301,9 @@ module Aws::Glacier
         vault_name: @name,
         account_id: @account_id
       )
-      resp = @client.initiate_multipart_upload(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.initiate_multipart_upload(options)
+      end
       MultipartUpload.new(
         id: resp.data.upload_id,
         account_id: @account_id,
@@ -320,7 +332,9 @@ module Aws::Glacier
         vault_name: @name,
         account_id: @account_id
       )
-      resp = @client.upload_archive(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.upload_archive(options)
+      end
       Archive.new(
         id: resp.data.archive_id,
         account_id: @account_id,
@@ -367,7 +381,9 @@ module Aws::Glacier
           vault_name: @name,
           completed: "true"
         )
-        resp = @client.list_jobs(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.list_jobs(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.job_list.each do |j|
@@ -401,7 +417,9 @@ module Aws::Glacier
           vault_name: @name,
           statuscode: "Failed"
         )
-        resp = @client.list_jobs(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.list_jobs(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.job_list.each do |j|
@@ -449,7 +467,9 @@ module Aws::Glacier
           account_id: @account_id,
           vault_name: @name
         )
-        resp = @client.list_jobs(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.list_jobs(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.job_list.each do |j|
@@ -483,7 +503,9 @@ module Aws::Glacier
           vault_name: @name,
           statuscode: "InProgress"
         )
-        resp = @client.list_jobs(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.list_jobs(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.job_list.each do |j|
@@ -512,7 +534,9 @@ module Aws::Glacier
           vault_name: @name,
           account_id: @account_id
         )
-        resp = @client.list_multipart_uploads(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.list_multipart_uploads(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.uploads_list.each do |u|
@@ -566,7 +590,9 @@ module Aws::Glacier
           vault_name: @name,
           statuscode: "Succeeded"
         )
-        resp = @client.list_jobs(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.list_jobs(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.job_list.each do |j|

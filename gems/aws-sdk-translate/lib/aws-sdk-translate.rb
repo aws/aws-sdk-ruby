@@ -52,6 +52,6 @@ require_relative 'aws-sdk-translate/customizations'
 # @!group service
 module Aws::Translate
 
-  GEM_VERSION = '1.50.0'
+  GEM_VERSION = '1.52.0'
 
 end

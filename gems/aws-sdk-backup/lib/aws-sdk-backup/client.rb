@@ -275,6 +275,11 @@ module Aws::Backup
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -3063,6 +3068,9 @@ module Aws::Backup
     #
     #   resp.recovery_points #=> Array
     #   resp.recovery_points[0].recovery_point_arn #=> String
+    #   resp.recovery_points[0].resource_arn #=> String
+    #   resp.recovery_points[0].resource_type #=> String
+    #   resp.recovery_points[0].backup_vault_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRecoveryPointsByLegalHold AWS API Documentation
@@ -3632,6 +3640,15 @@ module Aws::Backup
     #   and the default is 8 hours. If this value is included, it must be at
     #   least 60 minutes to avoid errors.
     #
+    #   During the start window, the backup job status remains in `CREATED`
+    #   status until it has successfully begun or until the start window time
+    #   has run out. If within the start window time Backup receives an error
+    #   that allows the job to be retried, Backup will automatically retry to
+    #   begin the job at least every 10 minutes until the backup successfully
+    #   begins (the job status changes to `RUNNING`) or until the job status
+    #   changes to `EXPIRED` (which is expected to occur when the start window
+    #   time is over).
+    #
     # @option params [Integer] :complete_window_minutes
     #   A value in minutes during which a successfully started backup must
     #   complete, or else Backup will cancel the job. This value is optional.
@@ -3904,6 +3921,8 @@ module Aws::Backup
     #
     #   * `DocumentDB` for Amazon DocumentDB (with MongoDB compatibility)
     #
+    #   * `CloudFormation` for CloudFormation
+    #
     #   * `DynamoDB` for Amazon DynamoDB
     #
     #   * `EBS` for Amazon Elastic Block Store
@@ -3918,11 +3937,21 @@ module Aws::Backup
     #
     #   * `RDS` for Amazon Relational Database Service
     #
+    #   * `Redshift` for Amazon Redshift
+    #
     #   * `Storage Gateway` for Storage Gateway
     #
     #   * `S3` for Amazon S3
     #
+    #   * `Timestream` for Amazon Timestream
+    #
     #   * `VirtualMachine` for virtual machines
+    #
+    # @option params [Boolean] :copy_source_tags_to_restored_resource
+    #   This is an optional parameter. If this equals `True`, tags included in
+    #   the backup will be copied to the restored resource.
+    #
+    #   This can only be applied to backups created through Backup.
     #
     # @return [Types::StartRestoreJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3938,6 +3967,7 @@ module Aws::Backup
     #     iam_role_arn: "IAMRoleArn",
     #     idempotency_token: "string",
     #     resource_type: "ResourceType",
+    #     copy_source_tags_to_restored_resource: false,
     #   })
     #
     # @example Response structure
@@ -4443,7 +4473,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -68,10 +68,12 @@ module Aws::IAM
     #
     # @return [self]
     def load
-      resp = @client.get_group_policy(
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.get_group_policy(
         group_name: @group_name,
         policy_name: @name
       )
+      end
       @data = resp.data
       self
     end
@@ -186,7 +188,9 @@ module Aws::IAM
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -201,7 +205,9 @@ module Aws::IAM
         group_name: @group_name,
         policy_name: @name
       )
-      resp = @client.delete_group_policy(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_group_policy(options)
+      end
       resp.data
     end
 
@@ -240,7 +246,9 @@ module Aws::IAM
         group_name: @group_name,
         policy_name: @name
       )
-      resp = @client.put_group_policy(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.put_group_policy(options)
+      end
       resp.data
     end
 

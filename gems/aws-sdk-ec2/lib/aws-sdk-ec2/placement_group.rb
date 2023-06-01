@@ -93,7 +93,9 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = @client.describe_placement_groups(group_names: [@name])
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_placement_groups(group_names: [@name])
+      end
       @data = resp.placement_groups[0]
       self
     end
@@ -208,7 +210,9 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -227,7 +231,9 @@ module Aws::EC2
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(group_name: @name)
-      resp = @client.delete_placement_group(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_placement_group(options)
+      end
       resp.data
     end
 
@@ -542,7 +548,9 @@ module Aws::EC2
           name: "placement-group-name",
           values: [@name]
         }])
-        resp = @client.describe_instances(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.describe_instances(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.reservations.each do |r|

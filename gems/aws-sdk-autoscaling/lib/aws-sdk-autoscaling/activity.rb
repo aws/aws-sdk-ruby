@@ -116,7 +116,9 @@ module Aws::AutoScaling
     #
     # @return [self]
     def load
-      resp = @client.describe_scaling_activities(activity_ids: [@id])
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_scaling_activities(activity_ids: [@id])
+      end
       @data = resp.activities[0]
       self
     end
@@ -231,7 +233,9 @@ module Aws::AutoScaling
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Associations

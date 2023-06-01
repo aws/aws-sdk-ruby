@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2023-05-26)
+------------------
+
+* Feature - Add Multicast Group support in Network Analyzer Configuration.
+
 1.32.0 (2023-04-17)
 ------------------
 

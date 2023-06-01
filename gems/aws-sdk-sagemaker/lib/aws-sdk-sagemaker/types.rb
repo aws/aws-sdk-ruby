@@ -2494,6 +2494,28 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The name and an example value of the hyperparameter that you want to
+    # use in Autotune. If Automatic model tuning (AMT) determines that your
+    # hyperparameter is eligible for Autotune, an optimal hyperparameter
+    # range is selected for you.
+    #
+    # @!attribute [rw] name
+    #   The name of the hyperparameter to optimize using Autotune.
+    #   @return [String]
+    #
+    # @!attribute [rw] value_hint
+    #   An example value of the hyperparameter to optimize using Autotune.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoParameter AWS API Documentation
+    #
+    class AutoParameter < Struct.new(
+      :name,
+      :value_hint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Automatic rollback configuration for handling endpoint deployment
     # failures and recovery.
     #
@@ -2507,6 +2529,51 @@ module Aws::SageMaker
     #
     class AutoRollbackConfig < Struct.new(
       :alarms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A flag to indicate if you want to use Autotune to automatically find
+    # optimal values for the following fields:
+    #
+    # * [ParameterRanges][1]: The names and ranges of parameters that a
+    #   hyperparameter tuning job can optimize.
+    #
+    # * [ResourceLimits][2]: The maximum resources that can be used for a
+    #   training job. These resources include the maximum number of training
+    #   jobs, the maximum runtime of a tuning job, and the maximum number of
+    #   training jobs to run at the same time.
+    #
+    # * [TrainingJobEarlyStoppingType][3]: A flag that specifies whether or
+    #   not to use early stopping for training jobs launched by a
+    #   hyperparameter tuning job.
+    #
+    # * [RetryStrategy][4]: The number of times to retry a training job.
+    #
+    # * [Strategy][5]: Specifies how hyperparameter tuning chooses the
+    #   combinations of hyperparameter values to use for the training jobs
+    #   that it launches.
+    #
+    # * [ConvergenceDetected][6]: A flag to indicate that Automatic model
+    #   tuning (AMT) has detected model convergence.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html#sagemaker-Type-HyperParameterTuningJobConfig-ParameterRanges
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ResourceLimits.html
+    # [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html#sagemaker-Type-HyperParameterTuningJobConfig-TrainingJobEarlyStoppingType
+    # [4]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-RetryStrategy
+    # [5]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html
+    # [6]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ConvergenceDetected.html
+    #
+    # @!attribute [rw] mode
+    #   Set `Mode` to `Enabled` if you want to use Autotune.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Autotune AWS API Documentation
+    #
+    class Autotune < Struct.new(
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5790,6 +5857,41 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] autotune
+    #   Configures SageMaker Automatic model tuning (AMT) to automatically
+    #   find optimal parameters for the following fields:
+    #
+    #   * [ParameterRanges][1]: The names and ranges of parameters that a
+    #     hyperparameter tuning job can optimize.
+    #
+    #   * [ResourceLimits][2]: The maximum resources that can be used for a
+    #     training job. These resources include the maximum number of
+    #     training jobs, the maximum runtime of a tuning job, and the
+    #     maximum number of training jobs to run at the same time.
+    #
+    #   * [TrainingJobEarlyStoppingType][3]: A flag that specifies whether
+    #     or not to use early stopping for training jobs launched by a
+    #     hyperparameter tuning job.
+    #
+    #   * [RetryStrategy][4]: The number of times to retry a training job.
+    #
+    #   * [Strategy][5]: Specifies how hyperparameter tuning chooses the
+    #     combinations of hyperparameter values to use for the training jobs
+    #     that it launches.
+    #
+    #   * [ConvergenceDetected][6]: A flag to indicate that Automatic model
+    #     tuning (AMT) has detected model convergence.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html#sagemaker-Type-HyperParameterTuningJobConfig-ParameterRanges
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ResourceLimits.html
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html#sagemaker-Type-HyperParameterTuningJobConfig-TrainingJobEarlyStoppingType
+    #   [4]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-RetryStrategy
+    #   [5]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html
+    #   [6]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ConvergenceDetected.html
+    #   @return [Types::Autotune]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateHyperParameterTuningJobRequest AWS API Documentation
     #
     class CreateHyperParameterTuningJobRequest < Struct.new(
@@ -5798,7 +5900,8 @@ module Aws::SageMaker
       :training_job_definition,
       :training_job_definitions,
       :warm_start_config,
-      :tags)
+      :tags,
+      :autotune)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7805,6 +7908,9 @@ module Aws::SageMaker
     #   streams. For example, if you specify an EFS location, input data
     #   files are available as input streams. They do not need to be
     #   downloaded.
+    #
+    #   Your input must be in the same Amazon Web Services region as your
+    #   training job.
     #   @return [Array<Types::Channel>]
     #
     # @!attribute [rw] output_data_config
@@ -9933,6 +10039,31 @@ module Aws::SageMaker
     class DeploymentConfig < Struct.new(
       :blue_green_update_policy,
       :auto_rollback_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A set of recommended deployment configurations for the model.
+    #
+    # @!attribute [rw] recommendation_status
+    #   Status of the deployment recommendation. `NOT_APPLICABLE` means that
+    #   SageMaker is unable to provide a default recommendation for the
+    #   model using the information provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] real_time_inference_recommendations
+    #   A list of [RealTimeInferenceRecommendation][1] items.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_RealTimeInferenceRecommendation.html
+    #   @return [Array<Types::RealTimeInferenceRecommendation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeploymentRecommendation AWS API Documentation
+    #
+    class DeploymentRecommendation < Struct.new(
+      :recommendation_status,
+      :real_time_inference_recommendations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12286,7 +12417,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] hyper_parameter_tuning_job_name
-    #   The name of the tuning job.
+    #   The name of the hyperparameter tuning job.
     #   @return [String]
     #
     # @!attribute [rw] hyper_parameter_tuning_job_arn
@@ -12404,6 +12535,11 @@ module Aws::SageMaker
     #   The total resources consumed by your hyperparameter tuning job.
     #   @return [Types::HyperParameterTuningJobConsumedResources]
     #
+    # @!attribute [rw] autotune
+    #   A flag to indicate if autotune is enabled for the hyperparameter
+    #   tuning job.
+    #   @return [Types::Autotune]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHyperParameterTuningJobResponse AWS API Documentation
     #
     class DescribeHyperParameterTuningJobResponse < Struct.new(
@@ -12423,7 +12559,8 @@ module Aws::SageMaker
       :warm_start_config,
       :failure_reason,
       :tuning_job_completion_details,
-      :consumed_resources)
+      :consumed_resources,
+      :autotune)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13512,6 +13649,10 @@ module Aws::SageMaker
     #   from the model container.
     #   @return [Boolean]
     #
+    # @!attribute [rw] deployment_recommendation
+    #   A set of recommended deployment configurations for the model.
+    #   @return [Types::DeploymentRecommendation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelOutput AWS API Documentation
     #
     class DescribeModelOutput < Struct.new(
@@ -13523,7 +13664,8 @@ module Aws::SageMaker
       :vpc_config,
       :creation_time,
       :model_arn,
-      :enable_network_isolation)
+      :enable_network_isolation,
+      :deployment_recommendation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20922,13 +21064,23 @@ module Aws::SageMaker
     #   The recommendation ID which uniquely identifies each recommendation.
     #   @return [String]
     #
+    # @!attribute [rw] invocation_end_time
+    #   A timestamp that shows when the benchmark completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] invocation_start_time
+    #   A timestamp that shows when the benchmark started.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceRecommendation AWS API Documentation
     #
     class InferenceRecommendation < Struct.new(
       :metrics,
       :endpoint_configuration,
       :model_configuration,
-      :recommendation_id)
+      :recommendation_id,
+      :invocation_end_time,
+      :invocation_start_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20976,6 +21128,20 @@ module Aws::SageMaker
     #   If the job fails, provides information why the job failed.
     #   @return [String]
     #
+    # @!attribute [rw] model_name
+    #   The name of the created model.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_payload_url
+    #   The Amazon Simple Storage Service (Amazon S3) path where the sample
+    #   payload is stored. This path must point to a single gzip compressed
+    #   tar archive (.tar.gz suffix).
+    #   @return [String]
+    #
+    # @!attribute [rw] model_package_version_arn
+    #   The Amazon Resource Name (ARN) of a versioned model package.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceRecommendationsJob AWS API Documentation
     #
     class InferenceRecommendationsJob < Struct.new(
@@ -20988,7 +21154,10 @@ module Aws::SageMaker
       :completion_time,
       :role_arn,
       :last_modified_time,
-      :failure_reason)
+      :failure_reason,
+      :model_name,
+      :sample_payload_url,
+      :model_package_version_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24476,6 +24645,15 @@ module Aws::SageMaker
     #   The maximum number of recommendations to return in the response.
     #   @return [Integer]
     #
+    # @!attribute [rw] model_name_equals
+    #   A filter that returns only jobs that were created for this model.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_package_version_arn_equals
+    #   A filter that returns only jobs that were created for this versioned
+    #   model package.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListInferenceRecommendationsJobsRequest AWS API Documentation
     #
     class ListInferenceRecommendationsJobsRequest < Struct.new(
@@ -24488,7 +24666,9 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       :next_token,
-      :max_results)
+      :max_results,
+      :model_name_equals,
+      :model_package_version_arn_equals)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27436,6 +27616,10 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] deployment_recommendation
+    #   A set of recommended deployment configurations for the model.
+    #   @return [Types::DeploymentRecommendation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Model AWS API Documentation
     #
     class Model < Struct.new(
@@ -27448,7 +27632,8 @@ module Aws::SageMaker
       :creation_time,
       :model_arn,
       :enable_network_isolation,
-      :tags)
+      :tags,
+      :deployment_recommendation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30981,12 +31166,18 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CategoricalParameterRange.html
     #   @return [Array<Types::CategoricalParameterRange>]
     #
+    # @!attribute [rw] auto_parameters
+    #   A list containing hyperparameter names and example values to be used
+    #   by Autotune to determine optimal ranges for your tuning job.
+    #   @return [Array<Types::AutoParameter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ParameterRanges AWS API Documentation
     #
     class ParameterRanges < Struct.new(
       :integer_parameter_ranges,
       :continuous_parameter_ranges,
-      :categorical_parameter_ranges)
+      :categorical_parameter_ranges,
+      :auto_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33485,6 +33676,31 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The recommended configuration to use for Real-Time Inference.
+    #
+    # @!attribute [rw] recommendation_id
+    #   The recommendation ID which uniquely identifies each recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The recommended instance type for Real-Time Inference.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment
+    #   The recommended environment variables to set in the model container
+    #   for Real-Time Inference.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RealTimeInferenceRecommendation AWS API Documentation
+    #
+    class RealTimeInferenceRecommendation < Struct.new(
+      :recommendation_id,
+      :instance_type,
+      :environment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about the output configuration for the compiled
     # model.
     #
@@ -33611,6 +33827,14 @@ module Aws::SageMaker
     #   Recommender job.
     #   @return [Types::InferenceMetrics]
     #
+    # @!attribute [rw] invocation_end_time
+    #   A timestamp that shows when the benchmark completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] invocation_start_time
+    #   A timestamp that shows when the benchmark started.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobInferenceBenchmark AWS API Documentation
     #
     class RecommendationJobInferenceBenchmark < Struct.new(
@@ -33618,7 +33842,9 @@ module Aws::SageMaker
       :endpoint_configuration,
       :model_configuration,
       :failure_reason,
-      :endpoint_metrics)
+      :endpoint_metrics,
+      :invocation_end_time,
+      :invocation_start_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34483,6 +34709,9 @@ module Aws::SageMaker
 
     # Describes the S3 data source.
     #
+    # Your input bucket must be in the same Amazon Web Services region as
+    # your training job.
+    #
     # @!attribute [rw] s3_data_type
     #   If you choose `S3Prefix`, `S3Uri` identifies a key name prefix.
     #   SageMaker uses all objects that match the specified key name prefix
@@ -34545,6 +34774,9 @@ module Aws::SageMaker
     #     the channel for this data source. The object that each `S3Uri`
     #     points to must be readable by the IAM role that SageMaker uses to
     #     perform tasks on your behalf.
+    #
+    #   Your input bucket must be located in same Amazon Web Services region
+    #   as your training job.
     #   @return [String]
     #
     # @!attribute [rw] s3_data_distribution_type
@@ -35331,7 +35563,7 @@ module Aws::SageMaker
     #   compressed tar archive (`.tar.gz` suffix).
     #
     #   <note markdown="1"> The model artifacts must be in an S3 bucket that is in the same
-    #   region as the algorithm.
+    #   Amazon Web Services region as the algorithm.
     #
     #    </note>
     #   @return [String]
@@ -36369,6 +36601,9 @@ module Aws::SageMaker
     # @!attribute [rw] input_data_config
     #   An array of `Channel` objects that describes each data input
     #   channel.
+    #
+    #   Your input must be in the same Amazon Web Services region as your
+    #   training job.
     #   @return [Array<Types::Channel>]
     #
     # @!attribute [rw] output_data_config

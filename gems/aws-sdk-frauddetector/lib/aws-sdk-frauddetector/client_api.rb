@@ -117,6 +117,7 @@ module Aws::FraudDetector
     Event = Shapes::StructureShape.new(name: 'Event')
     EventAttributeMap = Shapes::MapShape.new(name: 'EventAttributeMap')
     EventIngestion = Shapes::StringShape.new(name: 'EventIngestion')
+    EventOrchestration = Shapes::StructureShape.new(name: 'EventOrchestration')
     EventPredictionSummary = Shapes::StructureShape.new(name: 'EventPredictionSummary')
     EventPredictionsMaxResults = Shapes::IntegerShape.new(name: 'EventPredictionsMaxResults')
     EventType = Shapes::StructureShape.new(name: 'EventType')
@@ -750,6 +751,9 @@ module Aws::FraudDetector
     EventAttributeMap.key = Shapes::ShapeRef.new(shape: attributeKey)
     EventAttributeMap.value = Shapes::ShapeRef.new(shape: attributeValue)
 
+    EventOrchestration.add_member(:event_bridge_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "eventBridgeEnabled"))
+    EventOrchestration.struct_class = Types::EventOrchestration
+
     EventPredictionSummary.add_member(:event_id, Shapes::ShapeRef.new(shape: identifier, location_name: "eventId"))
     EventPredictionSummary.add_member(:event_type_name, Shapes::ShapeRef.new(shape: identifier, location_name: "eventTypeName"))
     EventPredictionSummary.add_member(:event_timestamp, Shapes::ShapeRef.new(shape: time, location_name: "eventTimestamp"))
@@ -768,6 +772,7 @@ module Aws::FraudDetector
     EventType.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: time, location_name: "lastUpdatedTime"))
     EventType.add_member(:created_time, Shapes::ShapeRef.new(shape: time, location_name: "createdTime"))
     EventType.add_member(:arn, Shapes::ShapeRef.new(shape: fraudDetectorArn, location_name: "arn"))
+    EventType.add_member(:event_orchestration, Shapes::ShapeRef.new(shape: EventOrchestration, location_name: "eventOrchestration"))
     EventType.struct_class = Types::EventType
 
     EventVariableMap.key = Shapes::ShapeRef.new(shape: variableName)
@@ -1246,6 +1251,7 @@ module Aws::FraudDetector
     PutEventTypeRequest.add_member(:entity_types, Shapes::ShapeRef.new(shape: NonEmptyListOfStrings, required: true, location_name: "entityTypes"))
     PutEventTypeRequest.add_member(:event_ingestion, Shapes::ShapeRef.new(shape: EventIngestion, location_name: "eventIngestion"))
     PutEventTypeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagList, location_name: "tags"))
+    PutEventTypeRequest.add_member(:event_orchestration, Shapes::ShapeRef.new(shape: EventOrchestration, location_name: "eventOrchestration"))
     PutEventTypeRequest.struct_class = Types::PutEventTypeRequest
 
     PutEventTypeResult.struct_class = Types::PutEventTypeResult

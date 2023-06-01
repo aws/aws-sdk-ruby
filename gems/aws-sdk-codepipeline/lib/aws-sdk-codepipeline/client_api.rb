@@ -895,6 +895,7 @@ module Aws::CodePipeline
     PipelineMetadata.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "pipelineArn"))
     PipelineMetadata.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "created"))
     PipelineMetadata.add_member(:updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updated"))
+    PipelineMetadata.add_member(:polling_disabled_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "pollingDisabledAt"))
     PipelineMetadata.struct_class = Types::PipelineMetadata
 
     PipelineNameInUseException.struct_class = Types::PipelineNameInUseException

@@ -76,7 +76,9 @@ module Aws::SNS
     #
     # @return [self]
     def load
-      resp = @client.get_platform_application_attributes(platform_application_arn: @arn)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.get_platform_application_attributes(platform_application_arn: @arn)
+      end
       @data = resp.data
       self
     end
@@ -128,7 +130,9 @@ module Aws::SNS
     # @return [PlatformEndpoint]
     def create_platform_endpoint(options = {})
       options = options.merge(platform_application_arn: @arn)
-      resp = @client.create_platform_endpoint(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_platform_endpoint(options)
+      end
       PlatformEndpoint.new(
         arn: resp.data.endpoint_arn,
         client: @client
@@ -142,7 +146,9 @@ module Aws::SNS
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(platform_application_arn: @arn)
-      resp = @client.delete_platform_application(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_platform_application(options)
+      end
       resp.data
     end
 
@@ -221,7 +227,9 @@ module Aws::SNS
     # @return [EmptyStructure]
     def set_attributes(options = {})
       options = options.merge(platform_application_arn: @arn)
-      resp = @client.set_platform_application_attributes(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.set_platform_application_attributes(options)
+      end
       resp.data
     end
 
@@ -235,7 +243,9 @@ module Aws::SNS
     def endpoints(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(platform_application_arn: @arn)
-        resp = @client.list_endpoints_by_platform_application(options)
+        resp = Aws::Plugins::UserAgent.feature('resource') do
+          @client.list_endpoints_by_platform_application(options)
+        end
         resp.each_page do |page|
           batch = []
           page.data.endpoints.each do |e|

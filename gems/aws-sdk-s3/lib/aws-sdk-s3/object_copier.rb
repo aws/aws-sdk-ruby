@@ -28,11 +28,13 @@ module Aws
         options[:bucket] = target_bucket
         options[:key] = target_key
         options[:copy_source] = copy_source(source)
-        if options.delete(:multipart_copy)
-          apply_source_client(source, options)
-          ObjectMultipartCopier.new(@options).copy(options)
-        else
-          @object.client.copy_object(options)
+        Aws::Plugins::UserAgent.feature('s3-transfer') do
+          if options.delete(:multipart_copy)
+            apply_source_client(source, options)
+            ObjectMultipartCopier.new(@options).copy(options)
+          else
+            @object.client.copy_object(options)
+          end
         end
       end
 

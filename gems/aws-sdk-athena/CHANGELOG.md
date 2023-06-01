@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.67.0 (2023-05-18)
+------------------
+
+* Feature - Removing SparkProperties from EngineConfiguration object for StartSession API call
+
 1.66.0 (2023-05-15)
 ------------------
 

@@ -213,7 +213,9 @@ module {{module_name}}
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
     {{/wait_until}}
     {{#actions?}}

@@ -275,6 +275,11 @@ module Aws::WorkSpacesWeb
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -399,6 +404,40 @@ module Aws::WorkSpacesWeb
     # @param [Hash] params ({})
     def associate_browser_settings(params = {}, options = {})
       req = build_request(:associate_browser_settings, params)
+      req.send_request(options)
+    end
+
+    # Associates an IP access settings resource with a web portal.
+    #
+    # @option params [required, String] :ip_access_settings_arn
+    #   The ARN of the IP access settings.
+    #
+    # @option params [required, String] :portal_arn
+    #   The ARN of the web portal.
+    #
+    # @return [Types::AssociateIpAccessSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateIpAccessSettingsResponse#ip_access_settings_arn #ip_access_settings_arn} => String
+    #   * {Types::AssociateIpAccessSettingsResponse#portal_arn #portal_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_ip_access_settings({
+    #     ip_access_settings_arn: "ARN", # required
+    #     portal_arn: "ARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ip_access_settings_arn #=> String
+    #   resp.portal_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/AssociateIpAccessSettings AWS API Documentation
+    #
+    # @overload associate_ip_access_settings(params = {})
+    # @param [Hash] params ({})
+    def associate_ip_access_settings(params = {}, options = {})
+      req = build_request(:associate_ip_access_settings, params)
       req.send_request(options)
     end
 
@@ -719,6 +758,82 @@ module Aws::WorkSpacesWeb
     # @param [Hash] params ({})
     def create_identity_provider(params = {}, options = {})
       req = build_request(:create_identity_provider, params)
+      req.send_request(options)
+    end
+
+    # Creates an IP access settings resource that can be associated with a
+    # web portal.
+    #
+    # @option params [Hash<String,String>] :additional_encryption_context
+    #   Additional encryption context of the IP access settings.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes only once. With an idempotent request, if the original
+    #   request completes successfully, subsequent retries with the same
+    #   client token returns the result from the original successful request.
+    #
+    #   If you do not specify a client token, one is automatically generated
+    #   by the AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :customer_managed_key
+    #   The custom managed key of the IP access settings.
+    #
+    # @option params [String] :description
+    #   The description of the IP access settings.
+    #
+    # @option params [String] :display_name
+    #   The display name of the IP access settings.
+    #
+    # @option params [required, Array<Types::IpRule>] :ip_rules
+    #   The IP rules of the IP access settings.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to add to the browser settings resource. A tag is a key-value
+    #   pair.
+    #
+    # @return [Types::CreateIpAccessSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateIpAccessSettingsResponse#ip_access_settings_arn #ip_access_settings_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_ip_access_settings({
+    #     additional_encryption_context: {
+    #       "StringType" => "StringType",
+    #     },
+    #     client_token: "ClientToken",
+    #     customer_managed_key: "keyArn",
+    #     description: "Description",
+    #     display_name: "DisplayName",
+    #     ip_rules: [ # required
+    #       {
+    #         description: "Description",
+    #         ip_range: "IpRange", # required
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ip_access_settings_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/CreateIpAccessSettings AWS API Documentation
+    #
+    # @overload create_ip_access_settings(params = {})
+    # @param [Hash] params ({})
+    def create_ip_access_settings(params = {}, options = {})
+      req = build_request(:create_ip_access_settings, params)
       req.send_request(options)
     end
 
@@ -1109,6 +1224,28 @@ module Aws::WorkSpacesWeb
       req.send_request(options)
     end
 
+    # Deletes IP access settings.
+    #
+    # @option params [required, String] :ip_access_settings_arn
+    #   The ARN of the IP access settings.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_ip_access_settings({
+    #     ip_access_settings_arn: "ARN", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/DeleteIpAccessSettings AWS API Documentation
+    #
+    # @overload delete_ip_access_settings(params = {})
+    # @param [Hash] params ({})
+    def delete_ip_access_settings(params = {}, options = {})
+      req = build_request(:delete_ip_access_settings, params)
+      req.send_request(options)
+    end
+
     # Deletes network settings.
     #
     # @option params [required, String] :network_settings_arn
@@ -1238,6 +1375,28 @@ module Aws::WorkSpacesWeb
     # @param [Hash] params ({})
     def disassociate_browser_settings(params = {}, options = {})
       req = build_request(:disassociate_browser_settings, params)
+      req.send_request(options)
+    end
+
+    # Disassociates IP access settings from a web portal.
+    #
+    # @option params [required, String] :portal_arn
+    #   The ARN of the web portal.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_ip_access_settings({
+    #     portal_arn: "ARN", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/DisassociateIpAccessSettings AWS API Documentation
+    #
+    # @overload disassociate_ip_access_settings(params = {})
+    # @param [Hash] params ({})
+    def disassociate_ip_access_settings(params = {}, options = {})
+      req = build_request(:disassociate_ip_access_settings, params)
       req.send_request(options)
     end
 
@@ -1392,6 +1551,42 @@ module Aws::WorkSpacesWeb
       req.send_request(options)
     end
 
+    # Gets the IP access settings.
+    #
+    # @option params [required, String] :ip_access_settings_arn
+    #   The ARN of the IP access settings.
+    #
+    # @return [Types::GetIpAccessSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetIpAccessSettingsResponse#ip_access_settings #ip_access_settings} => Types::IpAccessSettings
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_ip_access_settings({
+    #     ip_access_settings_arn: "ARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ip_access_settings.associated_portal_arns #=> Array
+    #   resp.ip_access_settings.associated_portal_arns[0] #=> String
+    #   resp.ip_access_settings.creation_date #=> Time
+    #   resp.ip_access_settings.description #=> String
+    #   resp.ip_access_settings.display_name #=> String
+    #   resp.ip_access_settings.ip_access_settings_arn #=> String
+    #   resp.ip_access_settings.ip_rules #=> Array
+    #   resp.ip_access_settings.ip_rules[0].description #=> String
+    #   resp.ip_access_settings.ip_rules[0].ip_range #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetIpAccessSettings AWS API Documentation
+    #
+    # @overload get_ip_access_settings(params = {})
+    # @param [Hash] params ({})
+    def get_ip_access_settings(params = {}, options = {})
+      req = build_request(:get_ip_access_settings, params)
+      req.send_request(options)
+    end
+
     # Gets the network settings.
     #
     # @option params [required, String] :network_settings_arn
@@ -1449,6 +1644,7 @@ module Aws::WorkSpacesWeb
     #   resp.portal.browser_type #=> String, one of "Chrome"
     #   resp.portal.creation_date #=> Time
     #   resp.portal.display_name #=> String
+    #   resp.portal.ip_access_settings_arn #=> String
     #   resp.portal.network_settings_arn #=> String
     #   resp.portal.portal_arn #=> String
     #   resp.portal.portal_endpoint #=> String
@@ -1717,6 +1913,47 @@ module Aws::WorkSpacesWeb
       req.send_request(options)
     end
 
+    # Retrieves a list of IP access settings.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be included in the next page.
+    #
+    # @option params [String] :next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation.
+    #
+    # @return [Types::ListIpAccessSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIpAccessSettingsResponse#ip_access_settings #ip_access_settings} => Array&lt;Types::IpAccessSettingsSummary&gt;
+    #   * {Types::ListIpAccessSettingsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_ip_access_settings({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ip_access_settings #=> Array
+    #   resp.ip_access_settings[0].creation_date #=> Time
+    #   resp.ip_access_settings[0].description #=> String
+    #   resp.ip_access_settings[0].display_name #=> String
+    #   resp.ip_access_settings[0].ip_access_settings_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListIpAccessSettings AWS API Documentation
+    #
+    # @overload list_ip_access_settings(params = {})
+    # @param [Hash] params ({})
+    def list_ip_access_settings(params = {}, options = {})
+      req = build_request(:list_ip_access_settings, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of network settings.
     #
     # @option params [Integer] :max_results
@@ -1788,6 +2025,7 @@ module Aws::WorkSpacesWeb
     #   resp.portals[0].browser_type #=> String, one of "Chrome"
     #   resp.portals[0].creation_date #=> Time
     #   resp.portals[0].display_name #=> String
+    #   resp.portals[0].ip_access_settings_arn #=> String
     #   resp.portals[0].network_settings_arn #=> String
     #   resp.portals[0].portal_arn #=> String
     #   resp.portals[0].portal_endpoint #=> String
@@ -2248,6 +2486,73 @@ module Aws::WorkSpacesWeb
       req.send_request(options)
     end
 
+    # Updates IP access settings.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes only once. With an idempotent request, if the original
+    #   request completes successfully, subsequent retries with the same
+    #   client token return the result from the original successful request.
+    #
+    #   If you do not specify a client token, one is automatically generated
+    #   by the AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :description
+    #   The description of the IP access settings.
+    #
+    # @option params [String] :display_name
+    #   The display name of the IP access settings.
+    #
+    # @option params [required, String] :ip_access_settings_arn
+    #   The ARN of the IP access settings.
+    #
+    # @option params [Array<Types::IpRule>] :ip_rules
+    #   The updated IP rules of the IP access settings.
+    #
+    # @return [Types::UpdateIpAccessSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateIpAccessSettingsResponse#ip_access_settings #ip_access_settings} => Types::IpAccessSettings
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_ip_access_settings({
+    #     client_token: "ClientToken",
+    #     description: "Description",
+    #     display_name: "DisplayName",
+    #     ip_access_settings_arn: "ARN", # required
+    #     ip_rules: [
+    #       {
+    #         description: "Description",
+    #         ip_range: "IpRange", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ip_access_settings.associated_portal_arns #=> Array
+    #   resp.ip_access_settings.associated_portal_arns[0] #=> String
+    #   resp.ip_access_settings.creation_date #=> Time
+    #   resp.ip_access_settings.description #=> String
+    #   resp.ip_access_settings.display_name #=> String
+    #   resp.ip_access_settings.ip_access_settings_arn #=> String
+    #   resp.ip_access_settings.ip_rules #=> Array
+    #   resp.ip_access_settings.ip_rules[0].description #=> String
+    #   resp.ip_access_settings.ip_rules[0].ip_range #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateIpAccessSettings AWS API Documentation
+    #
+    # @overload update_ip_access_settings(params = {})
+    # @param [Hash] params ({})
+    def update_ip_access_settings(params = {}, options = {})
+      req = build_request(:update_ip_access_settings, params)
+      req.send_request(options)
+    end
+
     # Updates network settings.
     #
     # @option params [String] :client_token
@@ -2357,6 +2662,7 @@ module Aws::WorkSpacesWeb
     #   resp.portal.browser_type #=> String, one of "Chrome"
     #   resp.portal.creation_date #=> Time
     #   resp.portal.display_name #=> String
+    #   resp.portal.ip_access_settings_arn #=> String
     #   resp.portal.network_settings_arn #=> String
     #   resp.portal.portal_arn #=> String
     #   resp.portal.portal_endpoint #=> String
@@ -2574,7 +2880,7 @@ module Aws::WorkSpacesWeb
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspacesweb'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

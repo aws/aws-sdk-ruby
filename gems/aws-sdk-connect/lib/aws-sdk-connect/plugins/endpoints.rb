@@ -96,6 +96,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::CreateIntegrationAssociation.build(context)
           when :create_participant
             Aws::Connect::Endpoints::CreateParticipant.build(context)
+          when :create_prompt
+            Aws::Connect::Endpoints::CreatePrompt.build(context)
           when :create_queue
             Aws::Connect::Endpoints::CreateQueue.build(context)
           when :create_quick_connect
@@ -134,6 +136,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::DeleteInstance.build(context)
           when :delete_integration_association
             Aws::Connect::Endpoints::DeleteIntegrationAssociation.build(context)
+          when :delete_prompt
+            Aws::Connect::Endpoints::DeletePrompt.build(context)
           when :delete_quick_connect
             Aws::Connect::Endpoints::DeleteQuickConnect.build(context)
           when :delete_rule
@@ -174,6 +178,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::DescribeInstanceStorageConfig.build(context)
           when :describe_phone_number
             Aws::Connect::Endpoints::DescribePhoneNumber.build(context)
+          when :describe_prompt
+            Aws::Connect::Endpoints::DescribePrompt.build(context)
           when :describe_queue
             Aws::Connect::Endpoints::DescribeQueue.build(context)
           when :describe_quick_connect
@@ -226,6 +232,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::GetMetricData.build(context)
           when :get_metric_data_v2
             Aws::Connect::Endpoints::GetMetricDataV2.build(context)
+          when :get_prompt_file
+            Aws::Connect::Endpoints::GetPromptFile.build(context)
           when :get_task_template
             Aws::Connect::Endpoints::GetTaskTemplate.build(context)
           when :get_traffic_distribution
@@ -382,6 +390,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::UpdateParticipantRoleConfig.build(context)
           when :update_phone_number
             Aws::Connect::Endpoints::UpdatePhoneNumber.build(context)
+          when :update_prompt
+            Aws::Connect::Endpoints::UpdatePrompt.build(context)
           when :update_queue_hours_of_operation
             Aws::Connect::Endpoints::UpdateQueueHoursOfOperation.build(context)
           when :update_queue_max_contacts

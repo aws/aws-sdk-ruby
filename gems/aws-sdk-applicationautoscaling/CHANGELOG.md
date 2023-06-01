@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.70.0 (2023-05-25)
+------------------
+
+* Feature - With this release, ElastiCache customers will be able to use predefined metricType "ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage" for their ElastiCache instances.
+
 1.69.0 (2023-05-09)
 ------------------
 

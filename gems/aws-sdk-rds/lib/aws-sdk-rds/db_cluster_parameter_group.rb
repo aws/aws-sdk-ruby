@@ -69,7 +69,9 @@ module Aws::RDS
     #
     # @return [self]
     def load
-      resp = @client.describe_db_cluster_parameter_groups(db_cluster_parameter_group_name: @name)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.describe_db_cluster_parameter_groups(db_cluster_parameter_group_name: @name)
+      end
       @data = resp.db_cluster_parameter_groups[0]
       self
     end
@@ -184,7 +186,9 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Waiters::Waiter.new(options).wait({})
+      Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Waiters::Waiter.new(options).wait({})
+      end
     end
 
     # @!group Actions
@@ -258,7 +262,9 @@ module Aws::RDS
     # @return [DBClusterParameterGroup]
     def create(options = {})
       options = options.merge(db_cluster_parameter_group_name: @name)
-      resp = @client.create_db_cluster_parameter_group(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.create_db_cluster_parameter_group(options)
+      end
       DBClusterParameterGroup.new(
         name: resp.data.db_cluster_parameter_group.db_cluster_parameter_group_name,
         data: resp.data.db_cluster_parameter_group,
@@ -273,7 +279,9 @@ module Aws::RDS
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(db_cluster_parameter_group_name: @name)
-      resp = @client.delete_db_cluster_parameter_group(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.delete_db_cluster_parameter_group(options)
+      end
       resp.data
     end
 
@@ -318,7 +326,9 @@ module Aws::RDS
     # @return [DBClusterParameterGroup]
     def modify(options = {})
       options = options.merge(db_cluster_parameter_group_name: @name)
-      resp = @client.modify_db_cluster_parameter_group(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.modify_db_cluster_parameter_group(options)
+      end
       DBClusterParameterGroup.new(
         name: resp.data.db_cluster_parameter_group_name,
         client: @client
@@ -358,7 +368,9 @@ module Aws::RDS
     # @return [DBClusterParameterGroup]
     def reset(options = {})
       options = options.merge(db_cluster_parameter_group_name: @name)
-      resp = @client.reset_db_cluster_parameter_group(options)
+      resp = Aws::Plugins::UserAgent.feature('resource') do
+        @client.reset_db_cluster_parameter_group(options)
+      end
       DBClusterParameterGroup.new(
         name: resp.data.db_cluster_parameter_group_name,
         client: @client

@@ -145,8 +145,8 @@ module Aws::WAFV2
     # web request component that you've identified in your FieldToMatch
     # specifications.
     #
-    # This is used only in the FieldToMatch specification for some web
-    # request component types.
+    # This is used in the FieldToMatch specification for some web request
+    # component types.
     #
     # JSON specification: `"All": \{\}`
     #
@@ -158,8 +158,8 @@ module Aws::WAFV2
 
     # Inspect all query arguments of the web request.
     #
-    # This is used only in the FieldToMatch specification for some web
-    # request component types.
+    # This is used in the FieldToMatch specification for some web request
+    # component types.
     #
     # JSON specification: `"AllQueryArguments": \{\}`
     #
@@ -348,8 +348,8 @@ module Aws::WAFV2
     #
     #   The options for oversize handling are the following:
     #
-    #   * `CONTINUE` - Inspect the body normally, according to the rule
-    #     inspection criteria.
+    #   * `CONTINUE` - Inspect the available body contents normally,
+    #     according to the rule inspection criteria.
     #
     #   * `MATCH` - Treat the web request as matching the rule statement.
     #     WAF applies the rule action to the request.
@@ -392,6 +392,11 @@ module Aws::WAFV2
     #
     #   * `UriPath`: The value that you want WAF to search for in the URI
     #     path, for example, `/images/daily-ad.jpg`.
+    #
+    #   * `HeaderOrder`: The comma-separated list of header names to match
+    #     for. WAF creates a string that contains the ordered list of header
+    #     names, from the headers in the web request, and then matches
+    #     against that string.
     #
     #   If `SearchString` includes alphabetic characters A-Z and a-z, note
     #   that the value is case sensitive.
@@ -812,16 +817,16 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] oversize_handling
-    #   What WAF should do if the cookies of the request are larger than WAF
-    #   can inspect. WAF does not support inspecting the entire contents of
-    #   request cookies when they exceed 8 KB (8192 bytes) or 200 total
-    #   cookies. The underlying host service forwards a maximum of 200
-    #   cookies and at most 8 KB of cookie contents to WAF.
+    #   What WAF should do if the cookies of the request are more numerous
+    #   or larger than WAF can inspect. WAF does not support inspecting the
+    #   entire contents of request cookies when they exceed 8 KB (8192
+    #   bytes) or 200 total cookies. The underlying host service forwards a
+    #   maximum of 200 cookies and at most 8 KB of cookie contents to WAF.
     #
     #   The options for oversize handling are the following:
     #
-    #   * `CONTINUE` - Inspect the cookies normally, according to the rule
-    #     inspection criteria.
+    #   * `CONTINUE` - Inspect the available cookies normally, according to
+    #     the rule inspection criteria.
     #
     #   * `MATCH` - Treat the web request as matching the rule statement.
     #     WAF applies the rule action to the request.
@@ -2113,6 +2118,16 @@ module Aws::WAFV2
     #   underlying host service.
     #   @return [Types::Cookies]
     #
+    # @!attribute [rw] header_order
+    #   Inspect a string containing the list of the request's header names,
+    #   ordered as they appear in the web request that WAF receives for
+    #   inspection. WAF generates the string and then uses that as the field
+    #   to match component in its inspection. WAF separates the header names
+    #   in the string using commas and no added spaces.
+    #
+    #   Matches against the header order string are case insensitive.
+    #   @return [Types::HeaderOrder]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/FieldToMatch AWS API Documentation
     #
     class FieldToMatch < Struct.new(
@@ -2125,7 +2140,8 @@ module Aws::WAFV2
       :method,
       :json_body,
       :headers,
-      :cookies)
+      :cookies,
+      :header_order)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3173,6 +3189,41 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # Inspect a string containing the list of the request's header names,
+    # ordered as they appear in the web request that WAF receives for
+    # inspection. WAF generates the string and then uses that as the field
+    # to match component in its inspection. WAF separates the header names
+    # in the string using commas and no added spaces.
+    #
+    # Matches against the header order string are case insensitive.
+    #
+    # @!attribute [rw] oversize_handling
+    #   What WAF should do if the headers of the request are more numerous
+    #   or larger than WAF can inspect. WAF does not support inspecting the
+    #   entire contents of request headers when they exceed 8 KB (8192
+    #   bytes) or 200 total headers. The underlying host service forwards a
+    #   maximum of 200 headers and at most 8 KB of header contents to WAF.
+    #
+    #   The options for oversize handling are the following:
+    #
+    #   * `CONTINUE` - Inspect the available headers normally, according to
+    #     the rule inspection criteria.
+    #
+    #   * `MATCH` - Treat the web request as matching the rule statement.
+    #     WAF applies the rule action to the request.
+    #
+    #   * `NO_MATCH` - Treat the web request as not matching the rule
+    #     statement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/HeaderOrder AWS API Documentation
+    #
+    class HeaderOrder < Struct.new(
+      :oversize_handling)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Inspect all headers in the web request. You can specify the parts of
     # the headers to inspect and you can narrow the set of headers to
     # inspect by including or excluding specific keys.
@@ -3203,16 +3254,16 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] oversize_handling
-    #   What WAF should do if the headers of the request are larger than WAF
-    #   can inspect. WAF does not support inspecting the entire contents of
-    #   request headers when they exceed 8 KB (8192 bytes) or 200 total
-    #   headers. The underlying host service forwards a maximum of 200
-    #   headers and at most 8 KB of header contents to WAF.
+    #   What WAF should do if the headers of the request are more numerous
+    #   or larger than WAF can inspect. WAF does not support inspecting the
+    #   entire contents of request headers when they exceed 8 KB (8192
+    #   bytes) or 200 total headers. The underlying host service forwards a
+    #   maximum of 200 headers and at most 8 KB of header contents to WAF.
     #
     #   The options for oversize handling are the following:
     #
-    #   * `CONTINUE` - Inspect the headers normally, according to the rule
-    #     inspection criteria.
+    #   * `CONTINUE` - Inspect the available headers normally, according to
+    #     the rule inspection criteria.
     #
     #   * `MATCH` - Treat the web request as matching the rule statement.
     #     WAF applies the rule action to the request.
@@ -3573,8 +3624,8 @@ module Aws::WAFV2
     #
     #   The options for oversize handling are the following:
     #
-    #   * `CONTINUE` - Inspect the body normally, according to the rule
-    #     inspection criteria.
+    #   * `CONTINUE` - Inspect the available body contents normally,
+    #     according to the rule inspection criteria.
     #
     #   * `MATCH` - Treat the web request as matching the rule statement.
     #     WAF applies the rule action to the request.
@@ -5080,8 +5131,8 @@ module Aws::WAFV2
     # Inspect the HTTP method of the web request. The method indicates the
     # type of operation that the request is asking the origin to perform.
     #
-    # This is used only in the FieldToMatch specification for some web
-    # request component types.
+    # This is used in the FieldToMatch specification for some web request
+    # component types.
     #
     # JSON specification: `"Method": \{\}`
     #
@@ -5390,8 +5441,8 @@ module Aws::WAFV2
     # Inspect the query string of the web request. This is the part of a URL
     # that appears after a `?` character, if any.
     #
-    # This is used only in the FieldToMatch specification for some web
-    # request component types.
+    # This is used in the FieldToMatch specification for some web request
+    # component types.
     #
     # JSON specification: `"QueryString": \{\}`
     #
@@ -8284,8 +8335,8 @@ module Aws::WAFV2
     # part of the web request that identifies a resource. For example,
     # `/images/daily-ad.jpg`.
     #
-    # This is used only in the FieldToMatch specification for some web
-    # request component types.
+    # This is used in the FieldToMatch specification for some web request
+    # component types.
     #
     # JSON specification: `"UriPath": \{\}`
     #
@@ -8358,9 +8409,16 @@ module Aws::WAFV2
     #   to Amazon CloudWatch. For the list of available metrics, see [WAF
     #   Metrics][1] in the *WAF Developer Guide*.
     #
+    #   For web ACLs, the metrics are for web requests that have the web ACL
+    #   default action applied. WAF applies the default action to web
+    #   requests that pass the inspection of all rules in the web ACL
+    #   without being either allowed or blocked. For more information, see
+    #   [The web ACL default action][2] in the *WAF Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#waf-metrics
+    #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-default-action.html
     #   @return [Boolean]
     #
     # @!attribute [rw] metric_name

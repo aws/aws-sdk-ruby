@@ -17,566 +17,537 @@ module Aws::SecurityLake
     AccessType = Shapes::StringShape.new(name: 'AccessType')
     AccessTypeList = Shapes::ListShape.new(name: 'AccessTypeList')
     AccountList = Shapes::ListShape.new(name: 'AccountList')
-    AccountNotFoundException = Shapes::StructureShape.new(name: 'AccountNotFoundException')
-    AccountSources = Shapes::StructureShape.new(name: 'AccountSources')
-    AccountSourcesList = Shapes::ListShape.new(name: 'AccountSourcesList')
-    AllDimensionsMap = Shapes::MapShape.new(name: 'AllDimensionsMap')
-    AutoEnableNewRegionConfiguration = Shapes::StructureShape.new(name: 'AutoEnableNewRegionConfiguration')
-    AutoEnableNewRegionConfigurationList = Shapes::ListShape.new(name: 'AutoEnableNewRegionConfigurationList')
+    AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
-    AwsLogSourceType = Shapes::StringShape.new(name: 'AwsLogSourceType')
-    AwsSourceTypeList = Shapes::ListShape.new(name: 'AwsSourceTypeList')
-    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
-    BucketNotFoundException = Shapes::StructureShape.new(name: 'BucketNotFoundException')
-    ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
+    AwsIdentity = Shapes::StructureShape.new(name: 'AwsIdentity')
+    AwsLogSourceConfiguration = Shapes::StructureShape.new(name: 'AwsLogSourceConfiguration')
+    AwsLogSourceConfigurationList = Shapes::ListShape.new(name: 'AwsLogSourceConfigurationList')
+    AwsLogSourceName = Shapes::StringShape.new(name: 'AwsLogSourceName')
+    AwsLogSourceResource = Shapes::StructureShape.new(name: 'AwsLogSourceResource')
+    AwsLogSourceResourceList = Shapes::ListShape.new(name: 'AwsLogSourceResourceList')
+    AwsLogSourceVersion = Shapes::StringShape.new(name: 'AwsLogSourceVersion')
+    AwsPrincipal = Shapes::StringShape.new(name: 'AwsPrincipal')
+    BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
-    ConflictSourceNamesException = Shapes::StructureShape.new(name: 'ConflictSourceNamesException')
-    ConflictSubscriptionException = Shapes::StructureShape.new(name: 'ConflictSubscriptionException')
     CreateAwsLogSourceRequest = Shapes::StructureShape.new(name: 'CreateAwsLogSourceRequest')
     CreateAwsLogSourceResponse = Shapes::StructureShape.new(name: 'CreateAwsLogSourceResponse')
     CreateCustomLogSourceRequest = Shapes::StructureShape.new(name: 'CreateCustomLogSourceRequest')
     CreateCustomLogSourceResponse = Shapes::StructureShape.new(name: 'CreateCustomLogSourceResponse')
-    CreateDatalakeAutoEnableRequest = Shapes::StructureShape.new(name: 'CreateDatalakeAutoEnableRequest')
-    CreateDatalakeAutoEnableResponse = Shapes::StructureShape.new(name: 'CreateDatalakeAutoEnableResponse')
-    CreateDatalakeDelegatedAdminRequest = Shapes::StructureShape.new(name: 'CreateDatalakeDelegatedAdminRequest')
-    CreateDatalakeDelegatedAdminResponse = Shapes::StructureShape.new(name: 'CreateDatalakeDelegatedAdminResponse')
-    CreateDatalakeExceptionsSubscriptionRequest = Shapes::StructureShape.new(name: 'CreateDatalakeExceptionsSubscriptionRequest')
-    CreateDatalakeExceptionsSubscriptionResponse = Shapes::StructureShape.new(name: 'CreateDatalakeExceptionsSubscriptionResponse')
-    CreateDatalakeRequest = Shapes::StructureShape.new(name: 'CreateDatalakeRequest')
-    CreateDatalakeResponse = Shapes::StructureShape.new(name: 'CreateDatalakeResponse')
+    CreateDataLakeExceptionSubscriptionRequest = Shapes::StructureShape.new(name: 'CreateDataLakeExceptionSubscriptionRequest')
+    CreateDataLakeExceptionSubscriptionRequestExceptionTimeToLiveLong = Shapes::IntegerShape.new(name: 'CreateDataLakeExceptionSubscriptionRequestExceptionTimeToLiveLong')
+    CreateDataLakeExceptionSubscriptionResponse = Shapes::StructureShape.new(name: 'CreateDataLakeExceptionSubscriptionResponse')
+    CreateDataLakeOrganizationConfigurationRequest = Shapes::StructureShape.new(name: 'CreateDataLakeOrganizationConfigurationRequest')
+    CreateDataLakeOrganizationConfigurationResponse = Shapes::StructureShape.new(name: 'CreateDataLakeOrganizationConfigurationResponse')
+    CreateDataLakeRequest = Shapes::StructureShape.new(name: 'CreateDataLakeRequest')
+    CreateDataLakeResponse = Shapes::StructureShape.new(name: 'CreateDataLakeResponse')
+    CreateSubscriberNotificationRequest = Shapes::StructureShape.new(name: 'CreateSubscriberNotificationRequest')
+    CreateSubscriberNotificationResponse = Shapes::StructureShape.new(name: 'CreateSubscriberNotificationResponse')
     CreateSubscriberRequest = Shapes::StructureShape.new(name: 'CreateSubscriberRequest')
     CreateSubscriberRequestSubscriberNameString = Shapes::StringShape.new(name: 'CreateSubscriberRequestSubscriberNameString')
     CreateSubscriberResponse = Shapes::StructureShape.new(name: 'CreateSubscriberResponse')
-    CreateSubscriptionNotificationConfigurationRequest = Shapes::StructureShape.new(name: 'CreateSubscriptionNotificationConfigurationRequest')
-    CreateSubscriptionNotificationConfigurationRequestSubscriptionEndpointString = Shapes::StringShape.new(name: 'CreateSubscriptionNotificationConfigurationRequestSubscriptionEndpointString')
-    CreateSubscriptionNotificationConfigurationResponse = Shapes::StructureShape.new(name: 'CreateSubscriptionNotificationConfigurationResponse')
-    CustomSourceType = Shapes::StringShape.new(name: 'CustomSourceType')
+    CustomLogSourceAttributes = Shapes::StructureShape.new(name: 'CustomLogSourceAttributes')
+    CustomLogSourceConfiguration = Shapes::StructureShape.new(name: 'CustomLogSourceConfiguration')
+    CustomLogSourceCrawlerConfiguration = Shapes::StructureShape.new(name: 'CustomLogSourceCrawlerConfiguration')
+    CustomLogSourceName = Shapes::StringShape.new(name: 'CustomLogSourceName')
+    CustomLogSourceProvider = Shapes::StructureShape.new(name: 'CustomLogSourceProvider')
+    CustomLogSourceResource = Shapes::StructureShape.new(name: 'CustomLogSourceResource')
+    CustomLogSourceVersion = Shapes::StringShape.new(name: 'CustomLogSourceVersion')
+    DataLakeAutoEnableNewAccountConfiguration = Shapes::StructureShape.new(name: 'DataLakeAutoEnableNewAccountConfiguration')
+    DataLakeAutoEnableNewAccountConfigurationList = Shapes::ListShape.new(name: 'DataLakeAutoEnableNewAccountConfigurationList')
+    DataLakeConfiguration = Shapes::StructureShape.new(name: 'DataLakeConfiguration')
+    DataLakeConfigurationList = Shapes::ListShape.new(name: 'DataLakeConfigurationList')
+    DataLakeEncryptionConfiguration = Shapes::StructureShape.new(name: 'DataLakeEncryptionConfiguration')
+    DataLakeException = Shapes::StructureShape.new(name: 'DataLakeException')
+    DataLakeExceptionList = Shapes::ListShape.new(name: 'DataLakeExceptionList')
+    DataLakeLifecycleConfiguration = Shapes::StructureShape.new(name: 'DataLakeLifecycleConfiguration')
+    DataLakeLifecycleExpiration = Shapes::StructureShape.new(name: 'DataLakeLifecycleExpiration')
+    DataLakeLifecycleExpirationDaysInteger = Shapes::IntegerShape.new(name: 'DataLakeLifecycleExpirationDaysInteger')
+    DataLakeLifecycleTransition = Shapes::StructureShape.new(name: 'DataLakeLifecycleTransition')
+    DataLakeLifecycleTransitionDaysInteger = Shapes::IntegerShape.new(name: 'DataLakeLifecycleTransitionDaysInteger')
+    DataLakeLifecycleTransitionList = Shapes::ListShape.new(name: 'DataLakeLifecycleTransitionList')
+    DataLakeReplicationConfiguration = Shapes::StructureShape.new(name: 'DataLakeReplicationConfiguration')
+    DataLakeResource = Shapes::StructureShape.new(name: 'DataLakeResource')
+    DataLakeResourceList = Shapes::ListShape.new(name: 'DataLakeResourceList')
+    DataLakeSource = Shapes::StructureShape.new(name: 'DataLakeSource')
+    DataLakeSourceList = Shapes::ListShape.new(name: 'DataLakeSourceList')
+    DataLakeSourceStatus = Shapes::StructureShape.new(name: 'DataLakeSourceStatus')
+    DataLakeSourceStatusList = Shapes::ListShape.new(name: 'DataLakeSourceStatusList')
+    DataLakeStatus = Shapes::StringShape.new(name: 'DataLakeStatus')
+    DataLakeStorageClass = Shapes::StringShape.new(name: 'DataLakeStorageClass')
+    DataLakeUpdateException = Shapes::StructureShape.new(name: 'DataLakeUpdateException')
+    DataLakeUpdateStatus = Shapes::StructureShape.new(name: 'DataLakeUpdateStatus')
     DeleteAwsLogSourceRequest = Shapes::StructureShape.new(name: 'DeleteAwsLogSourceRequest')
     DeleteAwsLogSourceResponse = Shapes::StructureShape.new(name: 'DeleteAwsLogSourceResponse')
     DeleteCustomLogSourceRequest = Shapes::StructureShape.new(name: 'DeleteCustomLogSourceRequest')
     DeleteCustomLogSourceResponse = Shapes::StructureShape.new(name: 'DeleteCustomLogSourceResponse')
-    DeleteDatalakeAutoEnableRequest = Shapes::StructureShape.new(name: 'DeleteDatalakeAutoEnableRequest')
-    DeleteDatalakeAutoEnableResponse = Shapes::StructureShape.new(name: 'DeleteDatalakeAutoEnableResponse')
-    DeleteDatalakeDelegatedAdminRequest = Shapes::StructureShape.new(name: 'DeleteDatalakeDelegatedAdminRequest')
-    DeleteDatalakeDelegatedAdminResponse = Shapes::StructureShape.new(name: 'DeleteDatalakeDelegatedAdminResponse')
-    DeleteDatalakeExceptionsSubscriptionRequest = Shapes::StructureShape.new(name: 'DeleteDatalakeExceptionsSubscriptionRequest')
-    DeleteDatalakeExceptionsSubscriptionResponse = Shapes::StructureShape.new(name: 'DeleteDatalakeExceptionsSubscriptionResponse')
-    DeleteDatalakeRequest = Shapes::StructureShape.new(name: 'DeleteDatalakeRequest')
-    DeleteDatalakeResponse = Shapes::StructureShape.new(name: 'DeleteDatalakeResponse')
+    DeleteDataLakeExceptionSubscriptionRequest = Shapes::StructureShape.new(name: 'DeleteDataLakeExceptionSubscriptionRequest')
+    DeleteDataLakeExceptionSubscriptionResponse = Shapes::StructureShape.new(name: 'DeleteDataLakeExceptionSubscriptionResponse')
+    DeleteDataLakeOrganizationConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteDataLakeOrganizationConfigurationRequest')
+    DeleteDataLakeOrganizationConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteDataLakeOrganizationConfigurationResponse')
+    DeleteDataLakeRequest = Shapes::StructureShape.new(name: 'DeleteDataLakeRequest')
+    DeleteDataLakeResponse = Shapes::StructureShape.new(name: 'DeleteDataLakeResponse')
+    DeleteSubscriberNotificationRequest = Shapes::StructureShape.new(name: 'DeleteSubscriberNotificationRequest')
+    DeleteSubscriberNotificationResponse = Shapes::StructureShape.new(name: 'DeleteSubscriberNotificationResponse')
     DeleteSubscriberRequest = Shapes::StructureShape.new(name: 'DeleteSubscriberRequest')
     DeleteSubscriberResponse = Shapes::StructureShape.new(name: 'DeleteSubscriberResponse')
-    DeleteSubscriptionNotificationConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteSubscriptionNotificationConfigurationRequest')
-    DeleteSubscriptionNotificationConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteSubscriptionNotificationConfigurationResponse')
+    DeregisterDataLakeDelegatedAdministratorRequest = Shapes::StructureShape.new(name: 'DeregisterDataLakeDelegatedAdministratorRequest')
+    DeregisterDataLakeDelegatedAdministratorResponse = Shapes::StructureShape.new(name: 'DeregisterDataLakeDelegatedAdministratorResponse')
     DescriptionString = Shapes::StringShape.new(name: 'DescriptionString')
-    Dimension = Shapes::StringShape.new(name: 'Dimension')
-    DimensionSet = Shapes::ListShape.new(name: 'DimensionSet')
-    EndpointProtocol = Shapes::StringShape.new(name: 'EndpointProtocol')
-    EventBridgeException = Shapes::StructureShape.new(name: 'EventBridgeException')
-    Failures = Shapes::StructureShape.new(name: 'Failures')
-    FailuresResponse = Shapes::StructureShape.new(name: 'FailuresResponse')
-    FailuresResponseList = Shapes::ListShape.new(name: 'FailuresResponseList')
-    Failureslist = Shapes::ListShape.new(name: 'Failureslist')
-    GetDatalakeAutoEnableRequest = Shapes::StructureShape.new(name: 'GetDatalakeAutoEnableRequest')
-    GetDatalakeAutoEnableResponse = Shapes::StructureShape.new(name: 'GetDatalakeAutoEnableResponse')
-    GetDatalakeExceptionsExpiryRequest = Shapes::StructureShape.new(name: 'GetDatalakeExceptionsExpiryRequest')
-    GetDatalakeExceptionsExpiryResponse = Shapes::StructureShape.new(name: 'GetDatalakeExceptionsExpiryResponse')
-    GetDatalakeExceptionsSubscriptionRequest = Shapes::StructureShape.new(name: 'GetDatalakeExceptionsSubscriptionRequest')
-    GetDatalakeExceptionsSubscriptionResponse = Shapes::StructureShape.new(name: 'GetDatalakeExceptionsSubscriptionResponse')
-    GetDatalakeRequest = Shapes::StructureShape.new(name: 'GetDatalakeRequest')
-    GetDatalakeResponse = Shapes::StructureShape.new(name: 'GetDatalakeResponse')
-    GetDatalakeStatusRequest = Shapes::StructureShape.new(name: 'GetDatalakeStatusRequest')
-    GetDatalakeStatusResponse = Shapes::StructureShape.new(name: 'GetDatalakeStatusResponse')
+    ExternalId = Shapes::StringShape.new(name: 'ExternalId')
+    GetDataLakeExceptionSubscriptionRequest = Shapes::StructureShape.new(name: 'GetDataLakeExceptionSubscriptionRequest')
+    GetDataLakeExceptionSubscriptionResponse = Shapes::StructureShape.new(name: 'GetDataLakeExceptionSubscriptionResponse')
+    GetDataLakeOrganizationConfigurationRequest = Shapes::StructureShape.new(name: 'GetDataLakeOrganizationConfigurationRequest')
+    GetDataLakeOrganizationConfigurationResponse = Shapes::StructureShape.new(name: 'GetDataLakeOrganizationConfigurationResponse')
+    GetDataLakeSourcesRequest = Shapes::StructureShape.new(name: 'GetDataLakeSourcesRequest')
+    GetDataLakeSourcesResponse = Shapes::StructureShape.new(name: 'GetDataLakeSourcesResponse')
     GetSubscriberRequest = Shapes::StructureShape.new(name: 'GetSubscriberRequest')
     GetSubscriberResponse = Shapes::StructureShape.new(name: 'GetSubscriberResponse')
-    HttpsMethod = Shapes::StringShape.new(name: 'HttpsMethod')
-    InputSet = Shapes::ListShape.new(name: 'InputSet')
+    HttpMethod = Shapes::StringShape.new(name: 'HttpMethod')
+    HttpsNotificationConfiguration = Shapes::StructureShape.new(name: 'HttpsNotificationConfiguration')
+    HttpsNotificationConfigurationEndpointString = Shapes::StringShape.new(name: 'HttpsNotificationConfigurationEndpointString')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
-    InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
-    LakeConfigurationRequest = Shapes::StructureShape.new(name: 'LakeConfigurationRequest')
-    LakeConfigurationRequestMap = Shapes::MapShape.new(name: 'LakeConfigurationRequestMap')
-    LakeConfigurationResponse = Shapes::StructureShape.new(name: 'LakeConfigurationResponse')
-    LakeConfigurationResponseMap = Shapes::MapShape.new(name: 'LakeConfigurationResponseMap')
-    LastUpdateFailure = Shapes::StructureShape.new(name: 'LastUpdateFailure')
-    ListDatalakeExceptionsRequest = Shapes::StructureShape.new(name: 'ListDatalakeExceptionsRequest')
-    ListDatalakeExceptionsResponse = Shapes::StructureShape.new(name: 'ListDatalakeExceptionsResponse')
+    ListDataLakeExceptionsRequest = Shapes::StructureShape.new(name: 'ListDataLakeExceptionsRequest')
+    ListDataLakeExceptionsResponse = Shapes::StructureShape.new(name: 'ListDataLakeExceptionsResponse')
+    ListDataLakesRequest = Shapes::StructureShape.new(name: 'ListDataLakesRequest')
+    ListDataLakesResponse = Shapes::StructureShape.new(name: 'ListDataLakesResponse')
     ListLogSourcesRequest = Shapes::StructureShape.new(name: 'ListLogSourcesRequest')
     ListLogSourcesResponse = Shapes::StructureShape.new(name: 'ListLogSourcesResponse')
     ListSubscribersRequest = Shapes::StructureShape.new(name: 'ListSubscribersRequest')
     ListSubscribersResponse = Shapes::StructureShape.new(name: 'ListSubscribersResponse')
-    LogsStatus = Shapes::StructureShape.new(name: 'LogsStatus')
-    LogsStatusList = Shapes::ListShape.new(name: 'LogsStatusList')
+    LogSource = Shapes::StructureShape.new(name: 'LogSource')
+    LogSourceList = Shapes::ListShape.new(name: 'LogSourceList')
+    LogSourceResource = Shapes::UnionShape.new(name: 'LogSourceResource')
+    LogSourceResourceList = Shapes::ListShape.new(name: 'LogSourceResourceList')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NotificationConfiguration = Shapes::UnionShape.new(name: 'NotificationConfiguration')
     OcsfEventClass = Shapes::StringShape.new(name: 'OcsfEventClass')
-    ProtocolAndNotificationEndpoint = Shapes::StructureShape.new(name: 'ProtocolAndNotificationEndpoint')
+    OcsfEventClassList = Shapes::ListShape.new(name: 'OcsfEventClassList')
     Region = Shapes::StringShape.new(name: 'Region')
-    RegionSet = Shapes::ListShape.new(name: 'RegionSet')
-    RegionSourceTypesAccountsList = Shapes::ListShape.new(name: 'RegionSourceTypesAccountsList')
+    RegionList = Shapes::ListShape.new(name: 'RegionList')
+    RegisterDataLakeDelegatedAdministratorRequest = Shapes::StructureShape.new(name: 'RegisterDataLakeDelegatedAdministratorRequest')
+    RegisterDataLakeDelegatedAdministratorResponse = Shapes::StructureShape.new(name: 'RegisterDataLakeDelegatedAdministratorResponse')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceShareArn = Shapes::StringShape.new(name: 'ResourceShareArn')
     ResourceShareName = Shapes::StringShape.new(name: 'ResourceShareName')
-    RetentionSetting = Shapes::StructureShape.new(name: 'RetentionSetting')
-    RetentionSettingList = Shapes::ListShape.new(name: 'RetentionSettingList')
-    RetentionSettingRetentionPeriodInteger = Shapes::IntegerShape.new(name: 'RetentionSettingRetentionPeriodInteger')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3BucketArn = Shapes::StringShape.new(name: 'S3BucketArn')
-    S3Exception = Shapes::StructureShape.new(name: 'S3Exception')
+    S3URI = Shapes::StringShape.new(name: 'S3URI')
     SafeString = Shapes::StringShape.new(name: 'SafeString')
-    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
-    SnsTopicArn = Shapes::StringShape.new(name: 'SnsTopicArn')
-    SourceStatus = Shapes::StringShape.new(name: 'SourceStatus')
-    SourceType = Shapes::UnionShape.new(name: 'SourceType')
-    SourceTypeList = Shapes::ListShape.new(name: 'SourceTypeList')
-    StorageClass = Shapes::StringShape.new(name: 'StorageClass')
+    SourceCollectionStatus = Shapes::StringShape.new(name: 'SourceCollectionStatus')
+    SqsNotificationConfiguration = Shapes::StructureShape.new(name: 'SqsNotificationConfiguration')
     String = Shapes::StringShape.new(name: 'String')
-    SubscriberList = Shapes::ListShape.new(name: 'SubscriberList')
     SubscriberResource = Shapes::StructureShape.new(name: 'SubscriberResource')
-    SubscriptionProtocolType = Shapes::StringShape.new(name: 'SubscriptionProtocolType')
-    SubscriptionStatus = Shapes::StringShape.new(name: 'SubscriptionStatus')
+    SubscriberResourceList = Shapes::ListShape.new(name: 'SubscriberResourceList')
+    SubscriberStatus = Shapes::StringShape.new(name: 'SubscriberStatus')
+    SubscriptionProtocol = Shapes::StringShape.new(name: 'SubscriptionProtocol')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
-    TagsMap = Shapes::MapShape.new(name: 'TagsMap')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
-    TwoDimensionsMap = Shapes::MapShape.new(name: 'TwoDimensionsMap')
     UUID = Shapes::StringShape.new(name: 'UUID')
-    UpdateDatalakeExceptionsExpiryRequest = Shapes::StructureShape.new(name: 'UpdateDatalakeExceptionsExpiryRequest')
-    UpdateDatalakeExceptionsExpiryRequestExceptionMessageExpiryLong = Shapes::IntegerShape.new(name: 'UpdateDatalakeExceptionsExpiryRequestExceptionMessageExpiryLong')
-    UpdateDatalakeExceptionsExpiryResponse = Shapes::StructureShape.new(name: 'UpdateDatalakeExceptionsExpiryResponse')
-    UpdateDatalakeExceptionsSubscriptionRequest = Shapes::StructureShape.new(name: 'UpdateDatalakeExceptionsSubscriptionRequest')
-    UpdateDatalakeExceptionsSubscriptionResponse = Shapes::StructureShape.new(name: 'UpdateDatalakeExceptionsSubscriptionResponse')
-    UpdateDatalakeRequest = Shapes::StructureShape.new(name: 'UpdateDatalakeRequest')
-    UpdateDatalakeResponse = Shapes::StructureShape.new(name: 'UpdateDatalakeResponse')
-    UpdateStatus = Shapes::StructureShape.new(name: 'UpdateStatus')
+    UpdateDataLakeExceptionSubscriptionRequest = Shapes::StructureShape.new(name: 'UpdateDataLakeExceptionSubscriptionRequest')
+    UpdateDataLakeExceptionSubscriptionRequestExceptionTimeToLiveLong = Shapes::IntegerShape.new(name: 'UpdateDataLakeExceptionSubscriptionRequestExceptionTimeToLiveLong')
+    UpdateDataLakeExceptionSubscriptionResponse = Shapes::StructureShape.new(name: 'UpdateDataLakeExceptionSubscriptionResponse')
+    UpdateDataLakeRequest = Shapes::StructureShape.new(name: 'UpdateDataLakeRequest')
+    UpdateDataLakeResponse = Shapes::StructureShape.new(name: 'UpdateDataLakeResponse')
+    UpdateSubscriberNotificationRequest = Shapes::StructureShape.new(name: 'UpdateSubscriberNotificationRequest')
+    UpdateSubscriberNotificationResponse = Shapes::StructureShape.new(name: 'UpdateSubscriberNotificationResponse')
     UpdateSubscriberRequest = Shapes::StructureShape.new(name: 'UpdateSubscriberRequest')
     UpdateSubscriberRequestSubscriberNameString = Shapes::StringShape.new(name: 'UpdateSubscriberRequestSubscriberNameString')
     UpdateSubscriberResponse = Shapes::StructureShape.new(name: 'UpdateSubscriberResponse')
-    UpdateSubscriptionNotificationConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateSubscriptionNotificationConfigurationRequest')
-    UpdateSubscriptionNotificationConfigurationRequestSubscriptionEndpointString = Shapes::StringShape.new(name: 'UpdateSubscriptionNotificationConfigurationRequestSubscriptionEndpointString')
-    UpdateSubscriptionNotificationConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateSubscriptionNotificationConfigurationResponse')
-    ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
-    ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
-    ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
-    ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
-    ValueSet = Shapes::ListShape.new(name: 'ValueSet')
-    settingsStatus = Shapes::StringShape.new(name: 'settingsStatus')
 
     AccessDeniedException.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "errorCode"))
-    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
     AccessTypeList.member = Shapes::ShapeRef.new(shape: AccessType)
 
-    AccountList.member = Shapes::ShapeRef.new(shape: String)
+    AccountList.member = Shapes::ShapeRef.new(shape: AwsAccountId)
 
-    AccountNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
-    AccountNotFoundException.struct_class = Types::AccountNotFoundException
+    AwsIdentity.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, required: true, location_name: "externalId"))
+    AwsIdentity.add_member(:principal, Shapes::ShapeRef.new(shape: AwsPrincipal, required: true, location_name: "principal"))
+    AwsIdentity.struct_class = Types::AwsIdentity
 
-    AccountSources.add_member(:account, Shapes::ShapeRef.new(shape: String, required: true, location_name: "account"))
-    AccountSources.add_member(:event_class, Shapes::ShapeRef.new(shape: OcsfEventClass, location_name: "eventClass"))
-    AccountSources.add_member(:logs_status, Shapes::ShapeRef.new(shape: LogsStatusList, location_name: "logsStatus"))
-    AccountSources.add_member(:source_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "sourceType"))
-    AccountSources.struct_class = Types::AccountSources
+    AwsLogSourceConfiguration.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, location_name: "accounts"))
+    AwsLogSourceConfiguration.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, required: true, location_name: "regions"))
+    AwsLogSourceConfiguration.add_member(:source_name, Shapes::ShapeRef.new(shape: AwsLogSourceName, required: true, location_name: "sourceName"))
+    AwsLogSourceConfiguration.add_member(:source_version, Shapes::ShapeRef.new(shape: AwsLogSourceVersion, location_name: "sourceVersion"))
+    AwsLogSourceConfiguration.struct_class = Types::AwsLogSourceConfiguration
 
-    AccountSourcesList.member = Shapes::ShapeRef.new(shape: AccountSources)
+    AwsLogSourceConfigurationList.member = Shapes::ShapeRef.new(shape: AwsLogSourceConfiguration)
 
-    AllDimensionsMap.key = Shapes::ShapeRef.new(shape: String)
-    AllDimensionsMap.value = Shapes::ShapeRef.new(shape: TwoDimensionsMap)
+    AwsLogSourceResource.add_member(:source_name, Shapes::ShapeRef.new(shape: AwsLogSourceName, location_name: "sourceName"))
+    AwsLogSourceResource.add_member(:source_version, Shapes::ShapeRef.new(shape: AwsLogSourceVersion, location_name: "sourceVersion"))
+    AwsLogSourceResource.struct_class = Types::AwsLogSourceResource
 
-    AutoEnableNewRegionConfiguration.add_member(:region, Shapes::ShapeRef.new(shape: Region, required: true, location_name: "region"))
-    AutoEnableNewRegionConfiguration.add_member(:sources, Shapes::ShapeRef.new(shape: AwsSourceTypeList, required: true, location_name: "sources"))
-    AutoEnableNewRegionConfiguration.struct_class = Types::AutoEnableNewRegionConfiguration
+    AwsLogSourceResourceList.member = Shapes::ShapeRef.new(shape: AwsLogSourceResource)
 
-    AutoEnableNewRegionConfigurationList.member = Shapes::ShapeRef.new(shape: AutoEnableNewRegionConfiguration)
+    BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    BadRequestException.struct_class = Types::BadRequestException
 
-    AwsSourceTypeList.member = Shapes::ShapeRef.new(shape: AwsLogSourceType)
-
-    BucketNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
-    BucketNotFoundException.struct_class = Types::BucketNotFoundException
-
-    ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
-    ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
-
-    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
-    ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
-    ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ConflictException.add_member(:resource_name, Shapes::ShapeRef.new(shape: String, location_name: "resourceName"))
+    ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
     ConflictException.struct_class = Types::ConflictException
 
-    ConflictSourceNamesException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
-    ConflictSourceNamesException.struct_class = Types::ConflictSourceNamesException
-
-    ConflictSubscriptionException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
-    ConflictSubscriptionException.struct_class = Types::ConflictSubscriptionException
-
-    CreateAwsLogSourceRequest.add_member(:enable_all_dimensions, Shapes::ShapeRef.new(shape: AllDimensionsMap, location_name: "enableAllDimensions"))
-    CreateAwsLogSourceRequest.add_member(:enable_single_dimension, Shapes::ShapeRef.new(shape: InputSet, location_name: "enableSingleDimension"))
-    CreateAwsLogSourceRequest.add_member(:enable_two_dimensions, Shapes::ShapeRef.new(shape: TwoDimensionsMap, location_name: "enableTwoDimensions"))
-    CreateAwsLogSourceRequest.add_member(:input_order, Shapes::ShapeRef.new(shape: DimensionSet, required: true, location_name: "inputOrder"))
+    CreateAwsLogSourceRequest.add_member(:sources, Shapes::ShapeRef.new(shape: AwsLogSourceConfigurationList, required: true, location_name: "sources"))
     CreateAwsLogSourceRequest.struct_class = Types::CreateAwsLogSourceRequest
 
     CreateAwsLogSourceResponse.add_member(:failed, Shapes::ShapeRef.new(shape: AccountList, location_name: "failed"))
-    CreateAwsLogSourceResponse.add_member(:processing, Shapes::ShapeRef.new(shape: AccountList, location_name: "processing"))
     CreateAwsLogSourceResponse.struct_class = Types::CreateAwsLogSourceResponse
 
-    CreateCustomLogSourceRequest.add_member(:custom_source_name, Shapes::ShapeRef.new(shape: CustomSourceType, required: true, location_name: "customSourceName"))
-    CreateCustomLogSourceRequest.add_member(:event_class, Shapes::ShapeRef.new(shape: OcsfEventClass, required: true, location_name: "eventClass"))
-    CreateCustomLogSourceRequest.add_member(:glue_invocation_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "glueInvocationRoleArn"))
-    CreateCustomLogSourceRequest.add_member(:log_provider_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "logProviderAccountId"))
+    CreateCustomLogSourceRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: CustomLogSourceConfiguration, location_name: "configuration"))
+    CreateCustomLogSourceRequest.add_member(:event_classes, Shapes::ShapeRef.new(shape: OcsfEventClassList, location_name: "eventClasses"))
+    CreateCustomLogSourceRequest.add_member(:source_name, Shapes::ShapeRef.new(shape: CustomLogSourceName, required: true, location_name: "sourceName"))
+    CreateCustomLogSourceRequest.add_member(:source_version, Shapes::ShapeRef.new(shape: CustomLogSourceVersion, location_name: "sourceVersion"))
     CreateCustomLogSourceRequest.struct_class = Types::CreateCustomLogSourceRequest
 
-    CreateCustomLogSourceResponse.add_member(:custom_data_location, Shapes::ShapeRef.new(shape: String, required: true, location_name: "customDataLocation"))
-    CreateCustomLogSourceResponse.add_member(:glue_crawler_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "glueCrawlerName"))
-    CreateCustomLogSourceResponse.add_member(:glue_database_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "glueDatabaseName"))
-    CreateCustomLogSourceResponse.add_member(:glue_table_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "glueTableName"))
-    CreateCustomLogSourceResponse.add_member(:log_provider_access_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "logProviderAccessRoleArn"))
+    CreateCustomLogSourceResponse.add_member(:source, Shapes::ShapeRef.new(shape: CustomLogSourceResource, location_name: "source"))
     CreateCustomLogSourceResponse.struct_class = Types::CreateCustomLogSourceResponse
 
-    CreateDatalakeAutoEnableRequest.add_member(:configuration_for_new_accounts, Shapes::ShapeRef.new(shape: AutoEnableNewRegionConfigurationList, required: true, location_name: "configurationForNewAccounts"))
-    CreateDatalakeAutoEnableRequest.struct_class = Types::CreateDatalakeAutoEnableRequest
+    CreateDataLakeExceptionSubscriptionRequest.add_member(:exception_time_to_live, Shapes::ShapeRef.new(shape: CreateDataLakeExceptionSubscriptionRequestExceptionTimeToLiveLong, location_name: "exceptionTimeToLive"))
+    CreateDataLakeExceptionSubscriptionRequest.add_member(:notification_endpoint, Shapes::ShapeRef.new(shape: SafeString, required: true, location_name: "notificationEndpoint"))
+    CreateDataLakeExceptionSubscriptionRequest.add_member(:subscription_protocol, Shapes::ShapeRef.new(shape: SubscriptionProtocol, required: true, location_name: "subscriptionProtocol"))
+    CreateDataLakeExceptionSubscriptionRequest.struct_class = Types::CreateDataLakeExceptionSubscriptionRequest
 
-    CreateDatalakeAutoEnableResponse.struct_class = Types::CreateDatalakeAutoEnableResponse
+    CreateDataLakeExceptionSubscriptionResponse.struct_class = Types::CreateDataLakeExceptionSubscriptionResponse
 
-    CreateDatalakeDelegatedAdminRequest.add_member(:account, Shapes::ShapeRef.new(shape: SafeString, required: true, location_name: "account"))
-    CreateDatalakeDelegatedAdminRequest.struct_class = Types::CreateDatalakeDelegatedAdminRequest
+    CreateDataLakeOrganizationConfigurationRequest.add_member(:auto_enable_new_account, Shapes::ShapeRef.new(shape: DataLakeAutoEnableNewAccountConfigurationList, required: true, location_name: "autoEnableNewAccount"))
+    CreateDataLakeOrganizationConfigurationRequest.struct_class = Types::CreateDataLakeOrganizationConfigurationRequest
 
-    CreateDatalakeDelegatedAdminResponse.struct_class = Types::CreateDatalakeDelegatedAdminResponse
+    CreateDataLakeOrganizationConfigurationResponse.struct_class = Types::CreateDataLakeOrganizationConfigurationResponse
 
-    CreateDatalakeExceptionsSubscriptionRequest.add_member(:notification_endpoint, Shapes::ShapeRef.new(shape: SafeString, required: true, location_name: "notificationEndpoint"))
-    CreateDatalakeExceptionsSubscriptionRequest.add_member(:subscription_protocol, Shapes::ShapeRef.new(shape: SubscriptionProtocolType, required: true, location_name: "subscriptionProtocol"))
-    CreateDatalakeExceptionsSubscriptionRequest.struct_class = Types::CreateDatalakeExceptionsSubscriptionRequest
+    CreateDataLakeRequest.add_member(:configurations, Shapes::ShapeRef.new(shape: DataLakeConfigurationList, required: true, location_name: "configurations"))
+    CreateDataLakeRequest.add_member(:meta_store_manager_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "metaStoreManagerRoleArn"))
+    CreateDataLakeRequest.struct_class = Types::CreateDataLakeRequest
 
-    CreateDatalakeExceptionsSubscriptionResponse.struct_class = Types::CreateDatalakeExceptionsSubscriptionResponse
+    CreateDataLakeResponse.add_member(:data_lakes, Shapes::ShapeRef.new(shape: DataLakeResourceList, location_name: "dataLakes"))
+    CreateDataLakeResponse.struct_class = Types::CreateDataLakeResponse
 
-    CreateDatalakeRequest.add_member(:configurations, Shapes::ShapeRef.new(shape: LakeConfigurationRequestMap, location_name: "configurations"))
-    CreateDatalakeRequest.add_member(:enable_all, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableAll"))
-    CreateDatalakeRequest.add_member(:meta_store_manager_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "metaStoreManagerRoleArn"))
-    CreateDatalakeRequest.add_member(:regions, Shapes::ShapeRef.new(shape: RegionSet, location_name: "regions"))
-    CreateDatalakeRequest.struct_class = Types::CreateDatalakeRequest
+    CreateSubscriberNotificationRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: NotificationConfiguration, required: true, location_name: "configuration"))
+    CreateSubscriberNotificationRequest.add_member(:subscriber_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "subscriberId"))
+    CreateSubscriberNotificationRequest.struct_class = Types::CreateSubscriberNotificationRequest
 
-    CreateDatalakeResponse.struct_class = Types::CreateDatalakeResponse
+    CreateSubscriberNotificationResponse.add_member(:subscriber_endpoint, Shapes::ShapeRef.new(shape: SafeString, location_name: "subscriberEndpoint"))
+    CreateSubscriberNotificationResponse.struct_class = Types::CreateSubscriberNotificationResponse
 
     CreateSubscriberRequest.add_member(:access_types, Shapes::ShapeRef.new(shape: AccessTypeList, location_name: "accessTypes"))
-    CreateSubscriberRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "accountId"))
-    CreateSubscriberRequest.add_member(:external_id, Shapes::ShapeRef.new(shape: SafeString, required: true, location_name: "externalId"))
-    CreateSubscriberRequest.add_member(:source_types, Shapes::ShapeRef.new(shape: SourceTypeList, required: true, location_name: "sourceTypes"))
+    CreateSubscriberRequest.add_member(:sources, Shapes::ShapeRef.new(shape: LogSourceResourceList, required: true, location_name: "sources"))
     CreateSubscriberRequest.add_member(:subscriber_description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "subscriberDescription"))
+    CreateSubscriberRequest.add_member(:subscriber_identity, Shapes::ShapeRef.new(shape: AwsIdentity, required: true, location_name: "subscriberIdentity"))
     CreateSubscriberRequest.add_member(:subscriber_name, Shapes::ShapeRef.new(shape: CreateSubscriberRequestSubscriberNameString, required: true, location_name: "subscriberName"))
     CreateSubscriberRequest.struct_class = Types::CreateSubscriberRequest
 
-    CreateSubscriberResponse.add_member(:resource_share_arn, Shapes::ShapeRef.new(shape: ResourceShareArn, location_name: "resourceShareArn"))
-    CreateSubscriberResponse.add_member(:resource_share_name, Shapes::ShapeRef.new(shape: ResourceShareName, location_name: "resourceShareName"))
-    CreateSubscriberResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
-    CreateSubscriberResponse.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, location_name: "s3BucketArn"))
-    CreateSubscriberResponse.add_member(:sns_arn, Shapes::ShapeRef.new(shape: SnsTopicArn, location_name: "snsArn"))
-    CreateSubscriberResponse.add_member(:subscription_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "subscriptionId"))
+    CreateSubscriberResponse.add_member(:subscriber, Shapes::ShapeRef.new(shape: SubscriberResource, location_name: "subscriber"))
     CreateSubscriberResponse.struct_class = Types::CreateSubscriberResponse
 
-    CreateSubscriptionNotificationConfigurationRequest.add_member(:create_sqs, Shapes::ShapeRef.new(shape: Boolean, location_name: "createSqs"))
-    CreateSubscriptionNotificationConfigurationRequest.add_member(:https_api_key_name, Shapes::ShapeRef.new(shape: String, location_name: "httpsApiKeyName"))
-    CreateSubscriptionNotificationConfigurationRequest.add_member(:https_api_key_value, Shapes::ShapeRef.new(shape: String, location_name: "httpsApiKeyValue"))
-    CreateSubscriptionNotificationConfigurationRequest.add_member(:https_method, Shapes::ShapeRef.new(shape: HttpsMethod, location_name: "httpsMethod"))
-    CreateSubscriptionNotificationConfigurationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
-    CreateSubscriptionNotificationConfigurationRequest.add_member(:subscription_endpoint, Shapes::ShapeRef.new(shape: CreateSubscriptionNotificationConfigurationRequestSubscriptionEndpointString, location_name: "subscriptionEndpoint"))
-    CreateSubscriptionNotificationConfigurationRequest.add_member(:subscription_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "subscriptionId"))
-    CreateSubscriptionNotificationConfigurationRequest.struct_class = Types::CreateSubscriptionNotificationConfigurationRequest
+    CustomLogSourceAttributes.add_member(:crawler_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "crawlerArn"))
+    CustomLogSourceAttributes.add_member(:database_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "databaseArn"))
+    CustomLogSourceAttributes.add_member(:table_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "tableArn"))
+    CustomLogSourceAttributes.struct_class = Types::CustomLogSourceAttributes
 
-    CreateSubscriptionNotificationConfigurationResponse.add_member(:queue_arn, Shapes::ShapeRef.new(shape: SafeString, location_name: "queueArn"))
-    CreateSubscriptionNotificationConfigurationResponse.struct_class = Types::CreateSubscriptionNotificationConfigurationResponse
+    CustomLogSourceConfiguration.add_member(:crawler_configuration, Shapes::ShapeRef.new(shape: CustomLogSourceCrawlerConfiguration, required: true, location_name: "crawlerConfiguration"))
+    CustomLogSourceConfiguration.add_member(:provider_identity, Shapes::ShapeRef.new(shape: AwsIdentity, required: true, location_name: "providerIdentity"))
+    CustomLogSourceConfiguration.struct_class = Types::CustomLogSourceConfiguration
 
-    DeleteAwsLogSourceRequest.add_member(:disable_all_dimensions, Shapes::ShapeRef.new(shape: AllDimensionsMap, location_name: "disableAllDimensions"))
-    DeleteAwsLogSourceRequest.add_member(:disable_single_dimension, Shapes::ShapeRef.new(shape: InputSet, location_name: "disableSingleDimension"))
-    DeleteAwsLogSourceRequest.add_member(:disable_two_dimensions, Shapes::ShapeRef.new(shape: TwoDimensionsMap, location_name: "disableTwoDimensions"))
-    DeleteAwsLogSourceRequest.add_member(:input_order, Shapes::ShapeRef.new(shape: DimensionSet, required: true, location_name: "inputOrder"))
+    CustomLogSourceCrawlerConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    CustomLogSourceCrawlerConfiguration.struct_class = Types::CustomLogSourceCrawlerConfiguration
+
+    CustomLogSourceProvider.add_member(:location, Shapes::ShapeRef.new(shape: S3URI, location_name: "location"))
+    CustomLogSourceProvider.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    CustomLogSourceProvider.struct_class = Types::CustomLogSourceProvider
+
+    CustomLogSourceResource.add_member(:attributes, Shapes::ShapeRef.new(shape: CustomLogSourceAttributes, location_name: "attributes"))
+    CustomLogSourceResource.add_member(:provider, Shapes::ShapeRef.new(shape: CustomLogSourceProvider, location_name: "provider"))
+    CustomLogSourceResource.add_member(:source_name, Shapes::ShapeRef.new(shape: CustomLogSourceName, location_name: "sourceName"))
+    CustomLogSourceResource.add_member(:source_version, Shapes::ShapeRef.new(shape: CustomLogSourceVersion, location_name: "sourceVersion"))
+    CustomLogSourceResource.struct_class = Types::CustomLogSourceResource
+
+    DataLakeAutoEnableNewAccountConfiguration.add_member(:region, Shapes::ShapeRef.new(shape: Region, required: true, location_name: "region"))
+    DataLakeAutoEnableNewAccountConfiguration.add_member(:sources, Shapes::ShapeRef.new(shape: AwsLogSourceResourceList, required: true, location_name: "sources"))
+    DataLakeAutoEnableNewAccountConfiguration.struct_class = Types::DataLakeAutoEnableNewAccountConfiguration
+
+    DataLakeAutoEnableNewAccountConfigurationList.member = Shapes::ShapeRef.new(shape: DataLakeAutoEnableNewAccountConfiguration)
+
+    DataLakeConfiguration.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: DataLakeEncryptionConfiguration, location_name: "encryptionConfiguration"))
+    DataLakeConfiguration.add_member(:lifecycle_configuration, Shapes::ShapeRef.new(shape: DataLakeLifecycleConfiguration, location_name: "lifecycleConfiguration"))
+    DataLakeConfiguration.add_member(:region, Shapes::ShapeRef.new(shape: Region, required: true, location_name: "region"))
+    DataLakeConfiguration.add_member(:replication_configuration, Shapes::ShapeRef.new(shape: DataLakeReplicationConfiguration, location_name: "replicationConfiguration"))
+    DataLakeConfiguration.struct_class = Types::DataLakeConfiguration
+
+    DataLakeConfigurationList.member = Shapes::ShapeRef.new(shape: DataLakeConfiguration)
+
+    DataLakeEncryptionConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
+    DataLakeEncryptionConfiguration.struct_class = Types::DataLakeEncryptionConfiguration
+
+    DataLakeException.add_member(:exception, Shapes::ShapeRef.new(shape: SafeString, location_name: "exception"))
+    DataLakeException.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "region"))
+    DataLakeException.add_member(:remediation, Shapes::ShapeRef.new(shape: SafeString, location_name: "remediation"))
+    DataLakeException.add_member(:timestamp, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "timestamp"))
+    DataLakeException.struct_class = Types::DataLakeException
+
+    DataLakeExceptionList.member = Shapes::ShapeRef.new(shape: DataLakeException)
+
+    DataLakeLifecycleConfiguration.add_member(:expiration, Shapes::ShapeRef.new(shape: DataLakeLifecycleExpiration, location_name: "expiration"))
+    DataLakeLifecycleConfiguration.add_member(:transitions, Shapes::ShapeRef.new(shape: DataLakeLifecycleTransitionList, location_name: "transitions"))
+    DataLakeLifecycleConfiguration.struct_class = Types::DataLakeLifecycleConfiguration
+
+    DataLakeLifecycleExpiration.add_member(:days, Shapes::ShapeRef.new(shape: DataLakeLifecycleExpirationDaysInteger, location_name: "days"))
+    DataLakeLifecycleExpiration.struct_class = Types::DataLakeLifecycleExpiration
+
+    DataLakeLifecycleTransition.add_member(:days, Shapes::ShapeRef.new(shape: DataLakeLifecycleTransitionDaysInteger, location_name: "days"))
+    DataLakeLifecycleTransition.add_member(:storage_class, Shapes::ShapeRef.new(shape: DataLakeStorageClass, location_name: "storageClass"))
+    DataLakeLifecycleTransition.struct_class = Types::DataLakeLifecycleTransition
+
+    DataLakeLifecycleTransitionList.member = Shapes::ShapeRef.new(shape: DataLakeLifecycleTransition)
+
+    DataLakeReplicationConfiguration.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "regions"))
+    DataLakeReplicationConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    DataLakeReplicationConfiguration.struct_class = Types::DataLakeReplicationConfiguration
+
+    DataLakeResource.add_member(:create_status, Shapes::ShapeRef.new(shape: DataLakeStatus, location_name: "createStatus"))
+    DataLakeResource.add_member(:data_lake_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "dataLakeArn"))
+    DataLakeResource.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: DataLakeEncryptionConfiguration, location_name: "encryptionConfiguration"))
+    DataLakeResource.add_member(:lifecycle_configuration, Shapes::ShapeRef.new(shape: DataLakeLifecycleConfiguration, location_name: "lifecycleConfiguration"))
+    DataLakeResource.add_member(:region, Shapes::ShapeRef.new(shape: Region, required: true, location_name: "region"))
+    DataLakeResource.add_member(:replication_configuration, Shapes::ShapeRef.new(shape: DataLakeReplicationConfiguration, location_name: "replicationConfiguration"))
+    DataLakeResource.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, location_name: "s3BucketArn"))
+    DataLakeResource.add_member(:update_status, Shapes::ShapeRef.new(shape: DataLakeUpdateStatus, location_name: "updateStatus"))
+    DataLakeResource.struct_class = Types::DataLakeResource
+
+    DataLakeResourceList.member = Shapes::ShapeRef.new(shape: DataLakeResource)
+
+    DataLakeSource.add_member(:account, Shapes::ShapeRef.new(shape: String, location_name: "account"))
+    DataLakeSource.add_member(:event_classes, Shapes::ShapeRef.new(shape: OcsfEventClassList, location_name: "eventClasses"))
+    DataLakeSource.add_member(:source_name, Shapes::ShapeRef.new(shape: String, location_name: "sourceName"))
+    DataLakeSource.add_member(:source_statuses, Shapes::ShapeRef.new(shape: DataLakeSourceStatusList, location_name: "sourceStatuses"))
+    DataLakeSource.struct_class = Types::DataLakeSource
+
+    DataLakeSourceList.member = Shapes::ShapeRef.new(shape: DataLakeSource)
+
+    DataLakeSourceStatus.add_member(:resource, Shapes::ShapeRef.new(shape: String, location_name: "resource"))
+    DataLakeSourceStatus.add_member(:status, Shapes::ShapeRef.new(shape: SourceCollectionStatus, location_name: "status"))
+    DataLakeSourceStatus.struct_class = Types::DataLakeSourceStatus
+
+    DataLakeSourceStatusList.member = Shapes::ShapeRef.new(shape: DataLakeSourceStatus)
+
+    DataLakeUpdateException.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
+    DataLakeUpdateException.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
+    DataLakeUpdateException.struct_class = Types::DataLakeUpdateException
+
+    DataLakeUpdateStatus.add_member(:exception, Shapes::ShapeRef.new(shape: DataLakeUpdateException, location_name: "exception"))
+    DataLakeUpdateStatus.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "requestId"))
+    DataLakeUpdateStatus.add_member(:status, Shapes::ShapeRef.new(shape: DataLakeStatus, location_name: "status"))
+    DataLakeUpdateStatus.struct_class = Types::DataLakeUpdateStatus
+
+    DeleteAwsLogSourceRequest.add_member(:sources, Shapes::ShapeRef.new(shape: AwsLogSourceConfigurationList, required: true, location_name: "sources"))
     DeleteAwsLogSourceRequest.struct_class = Types::DeleteAwsLogSourceRequest
 
     DeleteAwsLogSourceResponse.add_member(:failed, Shapes::ShapeRef.new(shape: AccountList, location_name: "failed"))
-    DeleteAwsLogSourceResponse.add_member(:processing, Shapes::ShapeRef.new(shape: AccountList, location_name: "processing"))
     DeleteAwsLogSourceResponse.struct_class = Types::DeleteAwsLogSourceResponse
 
-    DeleteCustomLogSourceRequest.add_member(:custom_source_name, Shapes::ShapeRef.new(shape: String, required: true, location: "querystring", location_name: "customSourceName"))
+    DeleteCustomLogSourceRequest.add_member(:source_name, Shapes::ShapeRef.new(shape: CustomLogSourceName, required: true, location: "uri", location_name: "sourceName"))
+    DeleteCustomLogSourceRequest.add_member(:source_version, Shapes::ShapeRef.new(shape: CustomLogSourceVersion, location: "querystring", location_name: "sourceVersion"))
     DeleteCustomLogSourceRequest.struct_class = Types::DeleteCustomLogSourceRequest
 
-    DeleteCustomLogSourceResponse.add_member(:custom_data_location, Shapes::ShapeRef.new(shape: String, required: true, location_name: "customDataLocation"))
     DeleteCustomLogSourceResponse.struct_class = Types::DeleteCustomLogSourceResponse
 
-    DeleteDatalakeAutoEnableRequest.add_member(:remove_from_configuration_for_new_accounts, Shapes::ShapeRef.new(shape: AutoEnableNewRegionConfigurationList, required: true, location_name: "removeFromConfigurationForNewAccounts"))
-    DeleteDatalakeAutoEnableRequest.struct_class = Types::DeleteDatalakeAutoEnableRequest
+    DeleteDataLakeExceptionSubscriptionRequest.struct_class = Types::DeleteDataLakeExceptionSubscriptionRequest
 
-    DeleteDatalakeAutoEnableResponse.struct_class = Types::DeleteDatalakeAutoEnableResponse
+    DeleteDataLakeExceptionSubscriptionResponse.struct_class = Types::DeleteDataLakeExceptionSubscriptionResponse
 
-    DeleteDatalakeDelegatedAdminRequest.add_member(:account, Shapes::ShapeRef.new(shape: SafeString, required: true, location: "uri", location_name: "account"))
-    DeleteDatalakeDelegatedAdminRequest.struct_class = Types::DeleteDatalakeDelegatedAdminRequest
+    DeleteDataLakeOrganizationConfigurationRequest.add_member(:auto_enable_new_account, Shapes::ShapeRef.new(shape: DataLakeAutoEnableNewAccountConfigurationList, required: true, location_name: "autoEnableNewAccount"))
+    DeleteDataLakeOrganizationConfigurationRequest.struct_class = Types::DeleteDataLakeOrganizationConfigurationRequest
 
-    DeleteDatalakeDelegatedAdminResponse.struct_class = Types::DeleteDatalakeDelegatedAdminResponse
+    DeleteDataLakeOrganizationConfigurationResponse.struct_class = Types::DeleteDataLakeOrganizationConfigurationResponse
 
-    DeleteDatalakeExceptionsSubscriptionRequest.struct_class = Types::DeleteDatalakeExceptionsSubscriptionRequest
+    DeleteDataLakeRequest.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, required: true, location_name: "regions"))
+    DeleteDataLakeRequest.struct_class = Types::DeleteDataLakeRequest
 
-    DeleteDatalakeExceptionsSubscriptionResponse.add_member(:status, Shapes::ShapeRef.new(shape: SafeString, required: true, location_name: "status"))
-    DeleteDatalakeExceptionsSubscriptionResponse.struct_class = Types::DeleteDatalakeExceptionsSubscriptionResponse
+    DeleteDataLakeResponse.struct_class = Types::DeleteDataLakeResponse
 
-    DeleteDatalakeRequest.struct_class = Types::DeleteDatalakeRequest
+    DeleteSubscriberNotificationRequest.add_member(:subscriber_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "subscriberId"))
+    DeleteSubscriberNotificationRequest.struct_class = Types::DeleteSubscriberNotificationRequest
 
-    DeleteDatalakeResponse.struct_class = Types::DeleteDatalakeResponse
+    DeleteSubscriberNotificationResponse.struct_class = Types::DeleteSubscriberNotificationResponse
 
-    DeleteSubscriberRequest.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location: "querystring", location_name: "id"))
+    DeleteSubscriberRequest.add_member(:subscriber_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "subscriberId"))
     DeleteSubscriberRequest.struct_class = Types::DeleteSubscriberRequest
 
     DeleteSubscriberResponse.struct_class = Types::DeleteSubscriberResponse
 
-    DeleteSubscriptionNotificationConfigurationRequest.add_member(:subscription_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "subscriptionId"))
-    DeleteSubscriptionNotificationConfigurationRequest.struct_class = Types::DeleteSubscriptionNotificationConfigurationRequest
+    DeregisterDataLakeDelegatedAdministratorRequest.struct_class = Types::DeregisterDataLakeDelegatedAdministratorRequest
 
-    DeleteSubscriptionNotificationConfigurationResponse.struct_class = Types::DeleteSubscriptionNotificationConfigurationResponse
+    DeregisterDataLakeDelegatedAdministratorResponse.struct_class = Types::DeregisterDataLakeDelegatedAdministratorResponse
 
-    DimensionSet.member = Shapes::ShapeRef.new(shape: Dimension)
+    GetDataLakeExceptionSubscriptionRequest.struct_class = Types::GetDataLakeExceptionSubscriptionRequest
 
-    EventBridgeException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
-    EventBridgeException.struct_class = Types::EventBridgeException
+    GetDataLakeExceptionSubscriptionResponse.add_member(:exception_time_to_live, Shapes::ShapeRef.new(shape: Long, location_name: "exceptionTimeToLive"))
+    GetDataLakeExceptionSubscriptionResponse.add_member(:notification_endpoint, Shapes::ShapeRef.new(shape: SafeString, location_name: "notificationEndpoint"))
+    GetDataLakeExceptionSubscriptionResponse.add_member(:subscription_protocol, Shapes::ShapeRef.new(shape: SubscriptionProtocol, location_name: "subscriptionProtocol"))
+    GetDataLakeExceptionSubscriptionResponse.struct_class = Types::GetDataLakeExceptionSubscriptionResponse
 
-    Failures.add_member(:exception_message, Shapes::ShapeRef.new(shape: SafeString, required: true, location_name: "exceptionMessage"))
-    Failures.add_member(:remediation, Shapes::ShapeRef.new(shape: SafeString, required: true, location_name: "remediation"))
-    Failures.add_member(:timestamp, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "timestamp"))
-    Failures.struct_class = Types::Failures
+    GetDataLakeOrganizationConfigurationRequest.struct_class = Types::GetDataLakeOrganizationConfigurationRequest
 
-    FailuresResponse.add_member(:failures, Shapes::ShapeRef.new(shape: Failureslist, location_name: "failures"))
-    FailuresResponse.add_member(:region, Shapes::ShapeRef.new(shape: SafeString, location_name: "region"))
-    FailuresResponse.struct_class = Types::FailuresResponse
+    GetDataLakeOrganizationConfigurationResponse.add_member(:auto_enable_new_account, Shapes::ShapeRef.new(shape: DataLakeAutoEnableNewAccountConfigurationList, location_name: "autoEnableNewAccount"))
+    GetDataLakeOrganizationConfigurationResponse.struct_class = Types::GetDataLakeOrganizationConfigurationResponse
 
-    FailuresResponseList.member = Shapes::ShapeRef.new(shape: FailuresResponse)
+    GetDataLakeSourcesRequest.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, location_name: "accounts"))
+    GetDataLakeSourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    GetDataLakeSourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetDataLakeSourcesRequest.struct_class = Types::GetDataLakeSourcesRequest
 
-    Failureslist.member = Shapes::ShapeRef.new(shape: Failures)
+    GetDataLakeSourcesResponse.add_member(:data_lake_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "dataLakeArn"))
+    GetDataLakeSourcesResponse.add_member(:data_lake_sources, Shapes::ShapeRef.new(shape: DataLakeSourceList, location_name: "dataLakeSources"))
+    GetDataLakeSourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetDataLakeSourcesResponse.struct_class = Types::GetDataLakeSourcesResponse
 
-    GetDatalakeAutoEnableRequest.struct_class = Types::GetDatalakeAutoEnableRequest
-
-    GetDatalakeAutoEnableResponse.add_member(:auto_enable_new_accounts, Shapes::ShapeRef.new(shape: AutoEnableNewRegionConfigurationList, required: true, location_name: "autoEnableNewAccounts"))
-    GetDatalakeAutoEnableResponse.struct_class = Types::GetDatalakeAutoEnableResponse
-
-    GetDatalakeExceptionsExpiryRequest.struct_class = Types::GetDatalakeExceptionsExpiryRequest
-
-    GetDatalakeExceptionsExpiryResponse.add_member(:exception_message_expiry, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "exceptionMessageExpiry"))
-    GetDatalakeExceptionsExpiryResponse.struct_class = Types::GetDatalakeExceptionsExpiryResponse
-
-    GetDatalakeExceptionsSubscriptionRequest.struct_class = Types::GetDatalakeExceptionsSubscriptionRequest
-
-    GetDatalakeExceptionsSubscriptionResponse.add_member(:protocol_and_notification_endpoint, Shapes::ShapeRef.new(shape: ProtocolAndNotificationEndpoint, required: true, location_name: "protocolAndNotificationEndpoint"))
-    GetDatalakeExceptionsSubscriptionResponse.struct_class = Types::GetDatalakeExceptionsSubscriptionResponse
-
-    GetDatalakeRequest.struct_class = Types::GetDatalakeRequest
-
-    GetDatalakeResponse.add_member(:configurations, Shapes::ShapeRef.new(shape: LakeConfigurationResponseMap, required: true, location_name: "configurations"))
-    GetDatalakeResponse.struct_class = Types::GetDatalakeResponse
-
-    GetDatalakeStatusRequest.add_member(:account_set, Shapes::ShapeRef.new(shape: InputSet, location_name: "accountSet"))
-    GetDatalakeStatusRequest.add_member(:max_account_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxAccountResults"))
-    GetDatalakeStatusRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: SafeString, location_name: "nextToken"))
-    GetDatalakeStatusRequest.struct_class = Types::GetDatalakeStatusRequest
-
-    GetDatalakeStatusResponse.add_member(:account_sources_list, Shapes::ShapeRef.new(shape: AccountSourcesList, required: true, location_name: "accountSourcesList"))
-    GetDatalakeStatusResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: SafeString, location_name: "nextToken"))
-    GetDatalakeStatusResponse.struct_class = Types::GetDatalakeStatusResponse
-
-    GetSubscriberRequest.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "id"))
+    GetSubscriberRequest.add_member(:subscriber_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "subscriberId"))
     GetSubscriberRequest.struct_class = Types::GetSubscriberRequest
 
     GetSubscriberResponse.add_member(:subscriber, Shapes::ShapeRef.new(shape: SubscriberResource, location_name: "subscriber"))
     GetSubscriberResponse.struct_class = Types::GetSubscriberResponse
 
-    InputSet.member = Shapes::ShapeRef.new(shape: SafeString)
+    HttpsNotificationConfiguration.add_member(:authorization_api_key_name, Shapes::ShapeRef.new(shape: String, location_name: "authorizationApiKeyName"))
+    HttpsNotificationConfiguration.add_member(:authorization_api_key_value, Shapes::ShapeRef.new(shape: String, location_name: "authorizationApiKeyValue"))
+    HttpsNotificationConfiguration.add_member(:endpoint, Shapes::ShapeRef.new(shape: HttpsNotificationConfigurationEndpointString, required: true, location_name: "endpoint"))
+    HttpsNotificationConfiguration.add_member(:http_method, Shapes::ShapeRef.new(shape: HttpMethod, location_name: "httpMethod"))
+    HttpsNotificationConfiguration.add_member(:target_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "targetRoleArn"))
+    HttpsNotificationConfiguration.struct_class = Types::HttpsNotificationConfiguration
 
-    InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
-    InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
+    InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
-    InvalidInputException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
-    InvalidInputException.struct_class = Types::InvalidInputException
+    ListDataLakeExceptionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListDataLakeExceptionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListDataLakeExceptionsRequest.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "regions"))
+    ListDataLakeExceptionsRequest.struct_class = Types::ListDataLakeExceptionsRequest
 
-    LakeConfigurationRequest.add_member(:encryption_key, Shapes::ShapeRef.new(shape: String, location_name: "encryptionKey"))
-    LakeConfigurationRequest.add_member(:replication_destination_regions, Shapes::ShapeRef.new(shape: RegionSet, location_name: "replicationDestinationRegions"))
-    LakeConfigurationRequest.add_member(:replication_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "replicationRoleArn"))
-    LakeConfigurationRequest.add_member(:retention_settings, Shapes::ShapeRef.new(shape: RetentionSettingList, location_name: "retentionSettings"))
-    LakeConfigurationRequest.add_member(:tags_map, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tagsMap"))
-    LakeConfigurationRequest.struct_class = Types::LakeConfigurationRequest
+    ListDataLakeExceptionsResponse.add_member(:exceptions, Shapes::ShapeRef.new(shape: DataLakeExceptionList, location_name: "exceptions"))
+    ListDataLakeExceptionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListDataLakeExceptionsResponse.struct_class = Types::ListDataLakeExceptionsResponse
 
-    LakeConfigurationRequestMap.key = Shapes::ShapeRef.new(shape: Region)
-    LakeConfigurationRequestMap.value = Shapes::ShapeRef.new(shape: LakeConfigurationRequest)
+    ListDataLakesRequest.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location: "querystring", location_name: "regions"))
+    ListDataLakesRequest.struct_class = Types::ListDataLakesRequest
 
-    LakeConfigurationResponse.add_member(:encryption_key, Shapes::ShapeRef.new(shape: String, location_name: "encryptionKey"))
-    LakeConfigurationResponse.add_member(:replication_destination_regions, Shapes::ShapeRef.new(shape: RegionSet, location_name: "replicationDestinationRegions"))
-    LakeConfigurationResponse.add_member(:replication_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "replicationRoleArn"))
-    LakeConfigurationResponse.add_member(:retention_settings, Shapes::ShapeRef.new(shape: RetentionSettingList, location_name: "retentionSettings"))
-    LakeConfigurationResponse.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, location_name: "s3BucketArn"))
-    LakeConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: settingsStatus, location_name: "status"))
-    LakeConfigurationResponse.add_member(:tags_map, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tagsMap"))
-    LakeConfigurationResponse.add_member(:update_status, Shapes::ShapeRef.new(shape: UpdateStatus, location_name: "updateStatus"))
-    LakeConfigurationResponse.struct_class = Types::LakeConfigurationResponse
+    ListDataLakesResponse.add_member(:data_lakes, Shapes::ShapeRef.new(shape: DataLakeResourceList, location_name: "dataLakes"))
+    ListDataLakesResponse.struct_class = Types::ListDataLakesResponse
 
-    LakeConfigurationResponseMap.key = Shapes::ShapeRef.new(shape: Region)
-    LakeConfigurationResponseMap.value = Shapes::ShapeRef.new(shape: LakeConfigurationResponse)
-
-    LastUpdateFailure.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
-    LastUpdateFailure.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
-    LastUpdateFailure.struct_class = Types::LastUpdateFailure
-
-    ListDatalakeExceptionsRequest.add_member(:max_failures, Shapes::ShapeRef.new(shape: Integer, location_name: "maxFailures"))
-    ListDatalakeExceptionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: SafeString, location_name: "nextToken"))
-    ListDatalakeExceptionsRequest.add_member(:region_set, Shapes::ShapeRef.new(shape: RegionSet, location_name: "regionSet"))
-    ListDatalakeExceptionsRequest.struct_class = Types::ListDatalakeExceptionsRequest
-
-    ListDatalakeExceptionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: SafeString, location_name: "nextToken"))
-    ListDatalakeExceptionsResponse.add_member(:non_retryable_failures, Shapes::ShapeRef.new(shape: FailuresResponseList, required: true, location_name: "nonRetryableFailures"))
-    ListDatalakeExceptionsResponse.struct_class = Types::ListDatalakeExceptionsResponse
-
-    ListLogSourcesRequest.add_member(:input_order, Shapes::ShapeRef.new(shape: DimensionSet, location_name: "inputOrder"))
-    ListLogSourcesRequest.add_member(:list_all_dimensions, Shapes::ShapeRef.new(shape: AllDimensionsMap, location_name: "listAllDimensions"))
-    ListLogSourcesRequest.add_member(:list_single_dimension, Shapes::ShapeRef.new(shape: InputSet, location_name: "listSingleDimension"))
-    ListLogSourcesRequest.add_member(:list_two_dimensions, Shapes::ShapeRef.new(shape: TwoDimensionsMap, location_name: "listTwoDimensions"))
-    ListLogSourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
-    ListLogSourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: SafeString, location_name: "nextToken"))
+    ListLogSourcesRequest.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, location_name: "accounts"))
+    ListLogSourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListLogSourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListLogSourcesRequest.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "regions"))
+    ListLogSourcesRequest.add_member(:sources, Shapes::ShapeRef.new(shape: LogSourceResourceList, location_name: "sources"))
     ListLogSourcesRequest.struct_class = Types::ListLogSourcesRequest
 
-    ListLogSourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
-    ListLogSourcesResponse.add_member(:region_source_types_accounts_list, Shapes::ShapeRef.new(shape: RegionSourceTypesAccountsList, required: true, location_name: "regionSourceTypesAccountsList"))
+    ListLogSourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListLogSourcesResponse.add_member(:sources, Shapes::ShapeRef.new(shape: LogSourceList, location_name: "sources"))
     ListLogSourcesResponse.struct_class = Types::ListLogSourcesResponse
 
-    ListSubscribersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location: "querystring", location_name: "maxResults"))
-    ListSubscribersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListSubscribersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListSubscribersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListSubscribersRequest.struct_class = Types::ListSubscribersRequest
 
-    ListSubscribersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
-    ListSubscribersResponse.add_member(:subscribers, Shapes::ShapeRef.new(shape: SubscriberList, required: true, location_name: "subscribers"))
+    ListSubscribersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListSubscribersResponse.add_member(:subscribers, Shapes::ShapeRef.new(shape: SubscriberResourceList, location_name: "subscribers"))
     ListSubscribersResponse.struct_class = Types::ListSubscribersResponse
 
-    LogsStatus.add_member(:health_status, Shapes::ShapeRef.new(shape: SourceStatus, required: true, location_name: "healthStatus"))
-    LogsStatus.add_member(:path_to_logs, Shapes::ShapeRef.new(shape: String, required: true, location_name: "pathToLogs"))
-    LogsStatus.struct_class = Types::LogsStatus
+    LogSource.add_member(:account, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "account"))
+    LogSource.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "region"))
+    LogSource.add_member(:sources, Shapes::ShapeRef.new(shape: LogSourceResourceList, location_name: "sources"))
+    LogSource.struct_class = Types::LogSource
 
-    LogsStatusList.member = Shapes::ShapeRef.new(shape: LogsStatus)
+    LogSourceList.member = Shapes::ShapeRef.new(shape: LogSource)
 
-    ProtocolAndNotificationEndpoint.add_member(:endpoint, Shapes::ShapeRef.new(shape: SafeString, location_name: "endpoint"))
-    ProtocolAndNotificationEndpoint.add_member(:protocol, Shapes::ShapeRef.new(shape: SafeString, location_name: "protocol"))
-    ProtocolAndNotificationEndpoint.struct_class = Types::ProtocolAndNotificationEndpoint
+    LogSourceResource.add_member(:aws_log_source, Shapes::ShapeRef.new(shape: AwsLogSourceResource, location_name: "awsLogSource"))
+    LogSourceResource.add_member(:custom_log_source, Shapes::ShapeRef.new(shape: CustomLogSourceResource, location_name: "customLogSource"))
+    LogSourceResource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    LogSourceResource.add_member_subclass(:aws_log_source, Types::LogSourceResource::AwsLogSource)
+    LogSourceResource.add_member_subclass(:custom_log_source, Types::LogSourceResource::CustomLogSource)
+    LogSourceResource.add_member_subclass(:unknown, Types::LogSourceResource::Unknown)
+    LogSourceResource.struct_class = Types::LogSourceResource
 
-    RegionSet.member = Shapes::ShapeRef.new(shape: Region)
+    LogSourceResourceList.member = Shapes::ShapeRef.new(shape: LogSourceResource)
 
-    RegionSourceTypesAccountsList.member = Shapes::ShapeRef.new(shape: AllDimensionsMap)
+    NotificationConfiguration.add_member(:https_notification_configuration, Shapes::ShapeRef.new(shape: HttpsNotificationConfiguration, location_name: "httpsNotificationConfiguration"))
+    NotificationConfiguration.add_member(:sqs_notification_configuration, Shapes::ShapeRef.new(shape: SqsNotificationConfiguration, location_name: "sqsNotificationConfiguration"))
+    NotificationConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    NotificationConfiguration.add_member_subclass(:https_notification_configuration, Types::NotificationConfiguration::HttpsNotificationConfiguration)
+    NotificationConfiguration.add_member_subclass(:sqs_notification_configuration, Types::NotificationConfiguration::SqsNotificationConfiguration)
+    NotificationConfiguration.add_member_subclass(:unknown, Types::NotificationConfiguration::Unknown)
+    NotificationConfiguration.struct_class = Types::NotificationConfiguration
 
-    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
-    ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
-    ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
+    OcsfEventClassList.member = Shapes::ShapeRef.new(shape: OcsfEventClass)
+
+    RegionList.member = Shapes::ShapeRef.new(shape: Region)
+
+    RegisterDataLakeDelegatedAdministratorRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: SafeString, required: true, location_name: "accountId"))
+    RegisterDataLakeDelegatedAdministratorRequest.struct_class = Types::RegisterDataLakeDelegatedAdministratorRequest
+
+    RegisterDataLakeDelegatedAdministratorResponse.struct_class = Types::RegisterDataLakeDelegatedAdministratorResponse
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ResourceNotFoundException.add_member(:resource_name, Shapes::ShapeRef.new(shape: String, location_name: "resourceName"))
+    ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
-    RetentionSetting.add_member(:retention_period, Shapes::ShapeRef.new(shape: RetentionSettingRetentionPeriodInteger, location_name: "retentionPeriod"))
-    RetentionSetting.add_member(:storage_class, Shapes::ShapeRef.new(shape: StorageClass, location_name: "storageClass"))
-    RetentionSetting.struct_class = Types::RetentionSetting
-
-    RetentionSettingList.member = Shapes::ShapeRef.new(shape: RetentionSetting)
-
-    S3Exception.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
-    S3Exception.struct_class = Types::S3Exception
-
-    ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
-    ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "quotaCode"))
-    ServiceQuotaExceededException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
-    ServiceQuotaExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
-    ServiceQuotaExceededException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceCode"))
-    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
-
-    SourceType.add_member(:aws_source_type, Shapes::ShapeRef.new(shape: AwsLogSourceType, location_name: "awsSourceType"))
-    SourceType.add_member(:custom_source_type, Shapes::ShapeRef.new(shape: CustomSourceType, location_name: "customSourceType"))
-    SourceType.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    SourceType.add_member_subclass(:aws_source_type, Types::SourceType::AwsSourceType)
-    SourceType.add_member_subclass(:custom_source_type, Types::SourceType::CustomSourceType)
-    SourceType.add_member_subclass(:unknown, Types::SourceType::Unknown)
-    SourceType.struct_class = Types::SourceType
-
-    SourceTypeList.member = Shapes::ShapeRef.new(shape: SourceType)
-
-    SubscriberList.member = Shapes::ShapeRef.new(shape: SubscriberResource)
+    SqsNotificationConfiguration.struct_class = Types::SqsNotificationConfiguration
 
     SubscriberResource.add_member(:access_types, Shapes::ShapeRef.new(shape: AccessTypeList, location_name: "accessTypes"))
-    SubscriberResource.add_member(:account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "accountId"))
     SubscriberResource.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
-    SubscriberResource.add_member(:external_id, Shapes::ShapeRef.new(shape: SafeString, location_name: "externalId"))
     SubscriberResource.add_member(:resource_share_arn, Shapes::ShapeRef.new(shape: ResourceShareArn, location_name: "resourceShareArn"))
     SubscriberResource.add_member(:resource_share_name, Shapes::ShapeRef.new(shape: ResourceShareName, location_name: "resourceShareName"))
     SubscriberResource.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     SubscriberResource.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, location_name: "s3BucketArn"))
-    SubscriberResource.add_member(:sns_arn, Shapes::ShapeRef.new(shape: SnsTopicArn, location_name: "snsArn"))
-    SubscriberResource.add_member(:source_types, Shapes::ShapeRef.new(shape: SourceTypeList, required: true, location_name: "sourceTypes"))
+    SubscriberResource.add_member(:sources, Shapes::ShapeRef.new(shape: LogSourceResourceList, required: true, location_name: "sources"))
+    SubscriberResource.add_member(:subscriber_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "subscriberArn"))
     SubscriberResource.add_member(:subscriber_description, Shapes::ShapeRef.new(shape: SafeString, location_name: "subscriberDescription"))
-    SubscriberResource.add_member(:subscriber_name, Shapes::ShapeRef.new(shape: SafeString, location_name: "subscriberName"))
-    SubscriberResource.add_member(:subscription_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "subscriptionEndpoint"))
-    SubscriberResource.add_member(:subscription_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "subscriptionId"))
-    SubscriberResource.add_member(:subscription_protocol, Shapes::ShapeRef.new(shape: EndpointProtocol, location_name: "subscriptionProtocol"))
-    SubscriberResource.add_member(:subscription_status, Shapes::ShapeRef.new(shape: SubscriptionStatus, location_name: "subscriptionStatus"))
+    SubscriberResource.add_member(:subscriber_endpoint, Shapes::ShapeRef.new(shape: SafeString, location_name: "subscriberEndpoint"))
+    SubscriberResource.add_member(:subscriber_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "subscriberId"))
+    SubscriberResource.add_member(:subscriber_identity, Shapes::ShapeRef.new(shape: AwsIdentity, required: true, location_name: "subscriberIdentity"))
+    SubscriberResource.add_member(:subscriber_name, Shapes::ShapeRef.new(shape: SafeString, required: true, location_name: "subscriberName"))
+    SubscriberResource.add_member(:subscriber_status, Shapes::ShapeRef.new(shape: SubscriberStatus, location_name: "subscriberStatus"))
     SubscriberResource.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     SubscriberResource.struct_class = Types::SubscriberResource
 
-    TagsMap.key = Shapes::ShapeRef.new(shape: String)
-    TagsMap.value = Shapes::ShapeRef.new(shape: String)
+    SubscriberResourceList.member = Shapes::ShapeRef.new(shape: SubscriberResource)
 
-    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ThrottlingException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, location_name: "quotaCode"))
     ThrottlingException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
     ThrottlingException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "serviceCode"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
-    TwoDimensionsMap.key = Shapes::ShapeRef.new(shape: String)
-    TwoDimensionsMap.value = Shapes::ShapeRef.new(shape: ValueSet)
+    UpdateDataLakeExceptionSubscriptionRequest.add_member(:exception_time_to_live, Shapes::ShapeRef.new(shape: UpdateDataLakeExceptionSubscriptionRequestExceptionTimeToLiveLong, location_name: "exceptionTimeToLive"))
+    UpdateDataLakeExceptionSubscriptionRequest.add_member(:notification_endpoint, Shapes::ShapeRef.new(shape: SafeString, required: true, location_name: "notificationEndpoint"))
+    UpdateDataLakeExceptionSubscriptionRequest.add_member(:subscription_protocol, Shapes::ShapeRef.new(shape: SubscriptionProtocol, required: true, location_name: "subscriptionProtocol"))
+    UpdateDataLakeExceptionSubscriptionRequest.struct_class = Types::UpdateDataLakeExceptionSubscriptionRequest
 
-    UpdateDatalakeExceptionsExpiryRequest.add_member(:exception_message_expiry, Shapes::ShapeRef.new(shape: UpdateDatalakeExceptionsExpiryRequestExceptionMessageExpiryLong, required: true, location_name: "exceptionMessageExpiry"))
-    UpdateDatalakeExceptionsExpiryRequest.struct_class = Types::UpdateDatalakeExceptionsExpiryRequest
+    UpdateDataLakeExceptionSubscriptionResponse.struct_class = Types::UpdateDataLakeExceptionSubscriptionResponse
 
-    UpdateDatalakeExceptionsExpiryResponse.struct_class = Types::UpdateDatalakeExceptionsExpiryResponse
+    UpdateDataLakeRequest.add_member(:configurations, Shapes::ShapeRef.new(shape: DataLakeConfigurationList, required: true, location_name: "configurations"))
+    UpdateDataLakeRequest.struct_class = Types::UpdateDataLakeRequest
 
-    UpdateDatalakeExceptionsSubscriptionRequest.add_member(:notification_endpoint, Shapes::ShapeRef.new(shape: SafeString, required: true, location_name: "notificationEndpoint"))
-    UpdateDatalakeExceptionsSubscriptionRequest.add_member(:subscription_protocol, Shapes::ShapeRef.new(shape: SubscriptionProtocolType, required: true, location_name: "subscriptionProtocol"))
-    UpdateDatalakeExceptionsSubscriptionRequest.struct_class = Types::UpdateDatalakeExceptionsSubscriptionRequest
+    UpdateDataLakeResponse.add_member(:data_lakes, Shapes::ShapeRef.new(shape: DataLakeResourceList, location_name: "dataLakes"))
+    UpdateDataLakeResponse.struct_class = Types::UpdateDataLakeResponse
 
-    UpdateDatalakeExceptionsSubscriptionResponse.struct_class = Types::UpdateDatalakeExceptionsSubscriptionResponse
+    UpdateSubscriberNotificationRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: NotificationConfiguration, required: true, location_name: "configuration"))
+    UpdateSubscriberNotificationRequest.add_member(:subscriber_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "subscriberId"))
+    UpdateSubscriberNotificationRequest.struct_class = Types::UpdateSubscriberNotificationRequest
 
-    UpdateDatalakeRequest.add_member(:configurations, Shapes::ShapeRef.new(shape: LakeConfigurationRequestMap, required: true, location_name: "configurations"))
-    UpdateDatalakeRequest.struct_class = Types::UpdateDatalakeRequest
+    UpdateSubscriberNotificationResponse.add_member(:subscriber_endpoint, Shapes::ShapeRef.new(shape: SafeString, location_name: "subscriberEndpoint"))
+    UpdateSubscriberNotificationResponse.struct_class = Types::UpdateSubscriberNotificationResponse
 
-    UpdateDatalakeResponse.struct_class = Types::UpdateDatalakeResponse
-
-    UpdateStatus.add_member(:last_update_failure, Shapes::ShapeRef.new(shape: LastUpdateFailure, location_name: "lastUpdateFailure"))
-    UpdateStatus.add_member(:last_update_request_id, Shapes::ShapeRef.new(shape: String, location_name: "lastUpdateRequestId"))
-    UpdateStatus.add_member(:last_update_status, Shapes::ShapeRef.new(shape: settingsStatus, location_name: "lastUpdateStatus"))
-    UpdateStatus.struct_class = Types::UpdateStatus
-
-    UpdateSubscriberRequest.add_member(:external_id, Shapes::ShapeRef.new(shape: SafeString, location_name: "externalId"))
-    UpdateSubscriberRequest.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "id"))
-    UpdateSubscriberRequest.add_member(:source_types, Shapes::ShapeRef.new(shape: SourceTypeList, required: true, location_name: "sourceTypes"))
+    UpdateSubscriberRequest.add_member(:sources, Shapes::ShapeRef.new(shape: LogSourceResourceList, location_name: "sources"))
     UpdateSubscriberRequest.add_member(:subscriber_description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "subscriberDescription"))
+    UpdateSubscriberRequest.add_member(:subscriber_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "subscriberId"))
+    UpdateSubscriberRequest.add_member(:subscriber_identity, Shapes::ShapeRef.new(shape: AwsIdentity, location_name: "subscriberIdentity"))
     UpdateSubscriberRequest.add_member(:subscriber_name, Shapes::ShapeRef.new(shape: UpdateSubscriberRequestSubscriberNameString, location_name: "subscriberName"))
     UpdateSubscriberRequest.struct_class = Types::UpdateSubscriberRequest
 
     UpdateSubscriberResponse.add_member(:subscriber, Shapes::ShapeRef.new(shape: SubscriberResource, location_name: "subscriber"))
     UpdateSubscriberResponse.struct_class = Types::UpdateSubscriberResponse
-
-    UpdateSubscriptionNotificationConfigurationRequest.add_member(:create_sqs, Shapes::ShapeRef.new(shape: Boolean, location_name: "createSqs"))
-    UpdateSubscriptionNotificationConfigurationRequest.add_member(:https_api_key_name, Shapes::ShapeRef.new(shape: String, location_name: "httpsApiKeyName"))
-    UpdateSubscriptionNotificationConfigurationRequest.add_member(:https_api_key_value, Shapes::ShapeRef.new(shape: String, location_name: "httpsApiKeyValue"))
-    UpdateSubscriptionNotificationConfigurationRequest.add_member(:https_method, Shapes::ShapeRef.new(shape: HttpsMethod, location_name: "httpsMethod"))
-    UpdateSubscriptionNotificationConfigurationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
-    UpdateSubscriptionNotificationConfigurationRequest.add_member(:subscription_endpoint, Shapes::ShapeRef.new(shape: UpdateSubscriptionNotificationConfigurationRequestSubscriptionEndpointString, location_name: "subscriptionEndpoint"))
-    UpdateSubscriptionNotificationConfigurationRequest.add_member(:subscription_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "subscriptionId"))
-    UpdateSubscriptionNotificationConfigurationRequest.struct_class = Types::UpdateSubscriptionNotificationConfigurationRequest
-
-    UpdateSubscriptionNotificationConfigurationResponse.add_member(:queue_arn, Shapes::ShapeRef.new(shape: SafeString, location_name: "queueArn"))
-    UpdateSubscriptionNotificationConfigurationResponse.struct_class = Types::UpdateSubscriptionNotificationConfigurationResponse
-
-    ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
-    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
-    ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, required: true, location_name: "reason"))
-    ValidationException.struct_class = Types::ValidationException
-
-    ValidationExceptionField.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
-    ValidationExceptionField.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
-    ValidationExceptionField.struct_class = Types::ValidationExceptionField
-
-    ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
-
-    ValueSet.member = Shapes::ShapeRef.new(shape: String)
 
 
     # @api private
@@ -599,81 +570,71 @@ module Aws::SecurityLake
       api.add_operation(:create_aws_log_source, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateAwsLogSource"
         o.http_method = "POST"
-        o.http_request_uri = "/v1/logsources/aws"
+        o.http_request_uri = "/v1/datalake/logsources/aws"
         o.input = Shapes::ShapeRef.new(shape: CreateAwsLogSourceRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateAwsLogSourceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: S3Exception)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_custom_log_source, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateCustomLogSource"
         o.http_method = "POST"
-        o.http_request_uri = "/v1/logsources/custom"
+        o.http_request_uri = "/v1/datalake/logsources/custom"
         o.input = Shapes::ShapeRef.new(shape: CreateCustomLogSourceRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateCustomLogSourceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictSourceNamesException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: BucketNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
-      api.add_operation(:create_datalake, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateDatalake"
+      api.add_operation(:create_data_lake, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDataLake"
         o.http_method = "POST"
         o.http_request_uri = "/v1/datalake"
-        o.input = Shapes::ShapeRef.new(shape: CreateDatalakeRequest)
-        o.output = Shapes::ShapeRef.new(shape: CreateDatalakeResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.input = Shapes::ShapeRef.new(shape: CreateDataLakeRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDataLakeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-      end)
-
-      api.add_operation(:create_datalake_auto_enable, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateDatalakeAutoEnable"
-        o.http_method = "POST"
-        o.http_request_uri = "/v1/datalake/autoenable"
-        o.input = Shapes::ShapeRef.new(shape: CreateDatalakeAutoEnableRequest)
-        o.output = Shapes::ShapeRef.new(shape: CreateDatalakeAutoEnableResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
-      end)
-
-      api.add_operation(:create_datalake_delegated_admin, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateDatalakeDelegatedAdmin"
-        o.http_method = "POST"
-        o.http_request_uri = "/v1/datalake/delegate"
-        o.input = Shapes::ShapeRef.new(shape: CreateDatalakeDelegatedAdminRequest)
-        o.output = Shapes::ShapeRef.new(shape: CreateDatalakeDelegatedAdminResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
-      api.add_operation(:create_datalake_exceptions_subscription, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateDatalakeExceptionsSubscription"
+      api.add_operation(:create_data_lake_exception_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDataLakeExceptionSubscription"
         o.http_method = "POST"
         o.http_request_uri = "/v1/datalake/exceptions/subscription"
-        o.input = Shapes::ShapeRef.new(shape: CreateDatalakeExceptionsSubscriptionRequest)
-        o.output = Shapes::ShapeRef.new(shape: CreateDatalakeExceptionsSubscriptionResponse)
+        o.input = Shapes::ShapeRef.new(shape: CreateDataLakeExceptionSubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDataLakeExceptionSubscriptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_data_lake_organization_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDataLakeOrganizationConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/datalake/organization/configuration"
+        o.input = Shapes::ShapeRef.new(shape: CreateDataLakeOrganizationConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDataLakeOrganizationConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_subscriber, Seahorse::Model::Operation.new.tap do |o|
@@ -682,201 +643,182 @@ module Aws::SecurityLake
         o.http_request_uri = "/v1/subscribers"
         o.input = Shapes::ShapeRef.new(shape: CreateSubscriberRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateSubscriberResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictSubscriptionException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: BucketNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
-      api.add_operation(:create_subscription_notification_configuration, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateSubscriptionNotificationConfiguration"
+      api.add_operation(:create_subscriber_notification, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSubscriberNotification"
         o.http_method = "POST"
-        o.http_request_uri = "/subscription-notifications/{subscriptionId}"
-        o.input = Shapes::ShapeRef.new(shape: CreateSubscriptionNotificationConfigurationRequest)
-        o.output = Shapes::ShapeRef.new(shape: CreateSubscriptionNotificationConfigurationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.http_request_uri = "/v1/subscribers/{subscriberId}/notification"
+        o.input = Shapes::ShapeRef.new(shape: CreateSubscriberNotificationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSubscriberNotificationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_aws_log_source, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteAwsLogSource"
         o.http_method = "POST"
-        o.http_request_uri = "/v1/logsources/aws/delete"
+        o.http_request_uri = "/v1/datalake/logsources/aws/delete"
         o.input = Shapes::ShapeRef.new(shape: DeleteAwsLogSourceRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteAwsLogSourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_custom_log_source, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteCustomLogSource"
         o.http_method = "DELETE"
-        o.http_request_uri = "/v1/logsources/custom"
+        o.http_request_uri = "/v1/datalake/logsources/custom/{sourceName}"
         o.input = Shapes::ShapeRef.new(shape: DeleteCustomLogSourceRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteCustomLogSourceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictSourceNamesException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: BucketNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
-      end)
-
-      api.add_operation(:delete_datalake, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteDatalake"
-        o.http_method = "DELETE"
-        o.http_request_uri = "/v1/datalake"
-        o.input = Shapes::ShapeRef.new(shape: DeleteDatalakeRequest)
-        o.output = Shapes::ShapeRef.new(shape: DeleteDatalakeResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
-      api.add_operation(:delete_datalake_auto_enable, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteDatalakeAutoEnable"
+      api.add_operation(:delete_data_lake, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDataLake"
         o.http_method = "POST"
-        o.http_request_uri = "/v1/datalake/autoenable/delete"
-        o.input = Shapes::ShapeRef.new(shape: DeleteDatalakeAutoEnableRequest)
-        o.output = Shapes::ShapeRef.new(shape: DeleteDatalakeAutoEnableResponse)
+        o.http_request_uri = "/v1/datalake/delete"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDataLakeRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDataLakeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
-      end)
-
-      api.add_operation(:delete_datalake_delegated_admin, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteDatalakeDelegatedAdmin"
-        o.http_method = "DELETE"
-        o.http_request_uri = "/v1/datalake/delegate/{account}"
-        o.input = Shapes::ShapeRef.new(shape: DeleteDatalakeDelegatedAdminRequest)
-        o.output = Shapes::ShapeRef.new(shape: DeleteDatalakeDelegatedAdminResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
-      api.add_operation(:delete_datalake_exceptions_subscription, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteDatalakeExceptionsSubscription"
+      api.add_operation(:delete_data_lake_exception_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDataLakeExceptionSubscription"
         o.http_method = "DELETE"
         o.http_request_uri = "/v1/datalake/exceptions/subscription"
-        o.input = Shapes::ShapeRef.new(shape: DeleteDatalakeExceptionsSubscriptionRequest)
-        o.output = Shapes::ShapeRef.new(shape: DeleteDatalakeExceptionsSubscriptionResponse)
+        o.input = Shapes::ShapeRef.new(shape: DeleteDataLakeExceptionSubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDataLakeExceptionSubscriptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_data_lake_organization_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDataLakeOrganizationConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/datalake/organization/configuration/delete"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDataLakeOrganizationConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDataLakeOrganizationConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_subscriber, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteSubscriber"
         o.http_method = "DELETE"
-        o.http_request_uri = "/v1/subscribers"
+        o.http_request_uri = "/v1/subscribers/{subscriberId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteSubscriberRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteSubscriberResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: BucketNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
-      api.add_operation(:delete_subscription_notification_configuration, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteSubscriptionNotificationConfiguration"
+      api.add_operation(:delete_subscriber_notification, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSubscriberNotification"
         o.http_method = "DELETE"
-        o.http_request_uri = "/subscription-notifications/{subscriptionId}"
-        o.input = Shapes::ShapeRef.new(shape: DeleteSubscriptionNotificationConfigurationRequest)
-        o.output = Shapes::ShapeRef.new(shape: DeleteSubscriptionNotificationConfigurationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.http_request_uri = "/v1/subscribers/{subscriberId}/notification"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSubscriberNotificationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSubscriberNotificationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
-      api.add_operation(:get_datalake, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetDatalake"
-        o.http_method = "GET"
-        o.http_request_uri = "/v1/datalake"
-        o.input = Shapes::ShapeRef.new(shape: GetDatalakeRequest)
-        o.output = Shapes::ShapeRef.new(shape: GetDatalakeResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      api.add_operation(:deregister_data_lake_delegated_administrator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeregisterDataLakeDelegatedAdministrator"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/datalake/delegate"
+        o.input = Shapes::ShapeRef.new(shape: DeregisterDataLakeDelegatedAdministratorRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeregisterDataLakeDelegatedAdministratorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
-      end)
-
-      api.add_operation(:get_datalake_auto_enable, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetDatalakeAutoEnable"
-        o.http_method = "GET"
-        o.http_request_uri = "/v1/datalake/autoenable"
-        o.input = Shapes::ShapeRef.new(shape: GetDatalakeAutoEnableRequest)
-        o.output = Shapes::ShapeRef.new(shape: GetDatalakeAutoEnableResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
-      api.add_operation(:get_datalake_exceptions_expiry, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetDatalakeExceptionsExpiry"
-        o.http_method = "GET"
-        o.http_request_uri = "/v1/datalake/exceptions/expiry"
-        o.input = Shapes::ShapeRef.new(shape: GetDatalakeExceptionsExpiryRequest)
-        o.output = Shapes::ShapeRef.new(shape: GetDatalakeExceptionsExpiryResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
-      end)
-
-      api.add_operation(:get_datalake_exceptions_subscription, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetDatalakeExceptionsSubscription"
+      api.add_operation(:get_data_lake_exception_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDataLakeExceptionSubscription"
         o.http_method = "GET"
         o.http_request_uri = "/v1/datalake/exceptions/subscription"
-        o.input = Shapes::ShapeRef.new(shape: GetDatalakeExceptionsSubscriptionRequest)
-        o.output = Shapes::ShapeRef.new(shape: GetDatalakeExceptionsSubscriptionResponse)
+        o.input = Shapes::ShapeRef.new(shape: GetDataLakeExceptionSubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDataLakeExceptionSubscriptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
-      api.add_operation(:get_datalake_status, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetDatalakeStatus"
-        o.http_method = "POST"
-        o.http_request_uri = "/v1/datalake/status"
-        o.input = Shapes::ShapeRef.new(shape: GetDatalakeStatusRequest)
-        o.output = Shapes::ShapeRef.new(shape: GetDatalakeStatusResponse)
+      api.add_operation(:get_data_lake_organization_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDataLakeOrganizationConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/datalake/organization/configuration"
+        o.input = Shapes::ShapeRef.new(shape: GetDataLakeOrganizationConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDataLakeOrganizationConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_data_lake_sources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDataLakeSources"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/datalake/sources"
+        o.input = Shapes::ShapeRef.new(shape: GetDataLakeSourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDataLakeSourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
-          limit_key: "max_account_results",
+          limit_key: "max_results",
           tokens: {
             "next_token" => "next_token"
           }
@@ -886,45 +828,63 @@ module Aws::SecurityLake
       api.add_operation(:get_subscriber, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetSubscriber"
         o.http_method = "GET"
-        o.http_request_uri = "/v1/subscribers/{id}"
+        o.http_request_uri = "/v1/subscribers/{subscriberId}"
         o.input = Shapes::ShapeRef.new(shape: GetSubscriberRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSubscriberResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
-      api.add_operation(:list_datalake_exceptions, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListDatalakeExceptions"
+      api.add_operation(:list_data_lake_exceptions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDataLakeExceptions"
         o.http_method = "POST"
         o.http_request_uri = "/v1/datalake/exceptions"
-        o.input = Shapes::ShapeRef.new(shape: ListDatalakeExceptionsRequest)
-        o.output = Shapes::ShapeRef.new(shape: ListDatalakeExceptionsResponse)
+        o.input = Shapes::ShapeRef.new(shape: ListDataLakeExceptionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDataLakeExceptionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
-          limit_key: "max_failures",
+          limit_key: "max_results",
           tokens: {
             "next_token" => "next_token"
           }
         )
       end)
 
+      api.add_operation(:list_data_lakes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDataLakes"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/datalakes"
+        o.input = Shapes::ShapeRef.new(shape: ListDataLakesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDataLakesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:list_log_sources, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListLogSources"
         o.http_method = "POST"
-        o.http_request_uri = "/v1/logsources/list"
+        o.http_request_uri = "/v1/datalake/logsources/list"
         o.input = Shapes::ShapeRef.new(shape: ListLogSourcesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListLogSourcesResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -939,12 +899,12 @@ module Aws::SecurityLake
         o.http_request_uri = "/v1/subscribers"
         o.input = Shapes::ShapeRef.new(shape: ListSubscribersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListSubscribersResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -953,71 +913,74 @@ module Aws::SecurityLake
         )
       end)
 
-      api.add_operation(:update_datalake, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateDatalake"
+      api.add_operation(:register_data_lake_delegated_administrator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterDataLakeDelegatedAdministrator"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/datalake/delegate"
+        o.input = Shapes::ShapeRef.new(shape: RegisterDataLakeDelegatedAdministratorRequest)
+        o.output = Shapes::ShapeRef.new(shape: RegisterDataLakeDelegatedAdministratorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_data_lake, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateDataLake"
         o.http_method = "PUT"
         o.http_request_uri = "/v1/datalake"
-        o.input = Shapes::ShapeRef.new(shape: UpdateDatalakeRequest)
-        o.output = Shapes::ShapeRef.new(shape: UpdateDatalakeResponse)
-        o.errors << Shapes::ShapeRef.new(shape: EventBridgeException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.input = Shapes::ShapeRef.new(shape: UpdateDataLakeRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateDataLakeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-      end)
-
-      api.add_operation(:update_datalake_exceptions_expiry, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateDatalakeExceptionsExpiry"
-        o.http_method = "PUT"
-        o.http_request_uri = "/v1/datalake/exceptions/expiry"
-        o.input = Shapes::ShapeRef.new(shape: UpdateDatalakeExceptionsExpiryRequest)
-        o.output = Shapes::ShapeRef.new(shape: UpdateDatalakeExceptionsExpiryResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
-      api.add_operation(:update_datalake_exceptions_subscription, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateDatalakeExceptionsSubscription"
+      api.add_operation(:update_data_lake_exception_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateDataLakeExceptionSubscription"
         o.http_method = "PUT"
         o.http_request_uri = "/v1/datalake/exceptions/subscription"
-        o.input = Shapes::ShapeRef.new(shape: UpdateDatalakeExceptionsSubscriptionRequest)
-        o.output = Shapes::ShapeRef.new(shape: UpdateDatalakeExceptionsSubscriptionResponse)
+        o.input = Shapes::ShapeRef.new(shape: UpdateDataLakeExceptionSubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateDataLakeExceptionSubscriptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_subscriber, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateSubscriber"
         o.http_method = "PUT"
-        o.http_request_uri = "/v1/subscribers/{id}"
+        o.http_request_uri = "/v1/subscribers/{subscriberId}"
         o.input = Shapes::ShapeRef.new(shape: UpdateSubscriberRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateSubscriberResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictSubscriptionException)
-        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
-      api.add_operation(:update_subscription_notification_configuration, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateSubscriptionNotificationConfiguration"
+      api.add_operation(:update_subscriber_notification, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSubscriberNotification"
         o.http_method = "PUT"
-        o.http_request_uri = "/subscription-notifications/{subscriptionId}"
-        o.input = Shapes::ShapeRef.new(shape: UpdateSubscriptionNotificationConfigurationRequest)
-        o.output = Shapes::ShapeRef.new(shape: UpdateSubscriptionNotificationConfigurationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.http_request_uri = "/v1/subscribers/{subscriberId}/notification"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSubscriberNotificationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSubscriberNotificationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
     end
 

@@ -361,7 +361,9 @@ module Aws
             instruction_file_suffix: @instruction_file_suffix,
             kms_encryption_context: kms_encryption_context
           }
-          req.send_request
+          Aws::Plugins::UserAgent.feature('S3CryptoV2') do
+            req.send_request
+          end
         end
 
         # Gets an object from Amazon S3, decrypting data locally.
@@ -414,7 +416,9 @@ module Aws
             kms_allow_decrypt_with_any_cmk: kms_any_cmk_mode,
             security_profile: security_profile
           }
-          req.send_request(target: block)
+          Aws::Plugins::UserAgent.feature('S3CryptoV2') do
+            req.send_request(target: block)
+          end
         end
 
         private

@@ -275,6 +275,11 @@ module Aws::MemoryDB
     #       in the future.
     #
     #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -1044,7 +1049,7 @@ module Aws::MemoryDB
     #   resp = client.create_user({
     #     user_name: "UserName", # required
     #     authentication_mode: { # required
-    #       type: "password", # accepts password
+    #       type: "password", # accepts password, iam
     #       passwords: ["String"],
     #     },
     #     access_string: "AccessString", # required
@@ -1064,7 +1069,7 @@ module Aws::MemoryDB
     #   resp.user.acl_names #=> Array
     #   resp.user.acl_names[0] #=> String
     #   resp.user.minimum_engine_version #=> String
-    #   resp.user.authentication.type #=> String, one of "password", "no-password"
+    #   resp.user.authentication.type #=> String, one of "password", "no-password", "iam"
     #   resp.user.authentication.password_count #=> Integer
     #   resp.user.arn #=> String
     #
@@ -1346,7 +1351,7 @@ module Aws::MemoryDB
     #   resp.user.acl_names #=> Array
     #   resp.user.acl_names[0] #=> String
     #   resp.user.minimum_engine_version #=> String
-    #   resp.user.authentication.type #=> String, one of "password", "no-password"
+    #   resp.user.authentication.type #=> String, one of "password", "no-password", "iam"
     #   resp.user.authentication.password_count #=> Integer
     #   resp.user.arn #=> String
     #
@@ -2172,7 +2177,7 @@ module Aws::MemoryDB
     #   resp.users[0].acl_names #=> Array
     #   resp.users[0].acl_names[0] #=> String
     #   resp.users[0].minimum_engine_version #=> String
-    #   resp.users[0].authentication.type #=> String, one of "password", "no-password"
+    #   resp.users[0].authentication.type #=> String, one of "password", "no-password", "iam"
     #   resp.users[0].authentication.password_count #=> Integer
     #   resp.users[0].arn #=> String
     #   resp.next_token #=> String
@@ -2860,7 +2865,7 @@ module Aws::MemoryDB
     #   resp = client.update_user({
     #     user_name: "UserName", # required
     #     authentication_mode: {
-    #       type: "password", # accepts password
+    #       type: "password", # accepts password, iam
     #       passwords: ["String"],
     #     },
     #     access_string: "AccessString",
@@ -2874,7 +2879,7 @@ module Aws::MemoryDB
     #   resp.user.acl_names #=> Array
     #   resp.user.acl_names[0] #=> String
     #   resp.user.minimum_engine_version #=> String
-    #   resp.user.authentication.type #=> String, one of "password", "no-password"
+    #   resp.user.authentication.type #=> String, one of "password", "no-password", "iam"
     #   resp.user.authentication.password_count #=> Integer
     #   resp.user.arn #=> String
     #
@@ -2900,7 +2905,7 @@ module Aws::MemoryDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-memorydb'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

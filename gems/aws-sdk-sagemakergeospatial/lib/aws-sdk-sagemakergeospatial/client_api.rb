@@ -46,7 +46,6 @@ module Aws::SageMakerGeospatial
     EarthObservationJobOutputBands = Shapes::ListShape.new(name: 'EarthObservationJobOutputBands')
     EarthObservationJobStatus = Shapes::StringShape.new(name: 'EarthObservationJobStatus')
     EoCloudCoverInput = Shapes::StructureShape.new(name: 'EoCloudCoverInput')
-    EojDataSourceConfigInput = Shapes::UnionShape.new(name: 'EojDataSourceConfigInput')
     ExecutionRoleArn = Shapes::StringShape.new(name: 'ExecutionRoleArn')
     ExportEarthObservationJobInput = Shapes::StructureShape.new(name: 'ExportEarthObservationJobInput')
     ExportEarthObservationJobInputClientTokenString = Shapes::StringShape.new(name: 'ExportEarthObservationJobInputClientTokenString')
@@ -102,7 +101,6 @@ module Aws::SageMakerGeospatial
     ListVectorEnrichmentJobOutputConfig = Shapes::StructureShape.new(name: 'ListVectorEnrichmentJobOutputConfig')
     LogicalOperator = Shapes::StringShape.new(name: 'LogicalOperator')
     MapMatchingConfig = Shapes::StructureShape.new(name: 'MapMatchingConfig')
-    MetadataProvider = Shapes::StringShape.new(name: 'MetadataProvider')
     MultiPolygonGeometryInput = Shapes::StructureShape.new(name: 'MultiPolygonGeometryInput')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     Operation = Shapes::StructureShape.new(name: 'Operation')
@@ -128,7 +126,6 @@ module Aws::SageMakerGeospatial
     ResamplingConfigInput = Shapes::StructureShape.new(name: 'ResamplingConfigInput')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ReverseGeocodingConfig = Shapes::StructureShape.new(name: 'ReverseGeocodingConfig')
-    S3DataInput = Shapes::StructureShape.new(name: 'S3DataInput')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SearchRasterDataCollectionInput = Shapes::StructureShape.new(name: 'SearchRasterDataCollectionInput')
     SearchRasterDataCollectionOutput = Shapes::StructureShape.new(name: 'SearchRasterDataCollectionOutput')
@@ -252,12 +249,6 @@ module Aws::SageMakerGeospatial
     EoCloudCoverInput.add_member(:lower_bound, Shapes::ShapeRef.new(shape: Float, required: true, location_name: "LowerBound"))
     EoCloudCoverInput.add_member(:upper_bound, Shapes::ShapeRef.new(shape: Float, required: true, location_name: "UpperBound"))
     EoCloudCoverInput.struct_class = Types::EoCloudCoverInput
-
-    EojDataSourceConfigInput.add_member(:s3_data, Shapes::ShapeRef.new(shape: S3DataInput, location_name: "S3Data"))
-    EojDataSourceConfigInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    EojDataSourceConfigInput.add_member_subclass(:s3_data, Types::EojDataSourceConfigInput::S3Data)
-    EojDataSourceConfigInput.add_member_subclass(:unknown, Types::EojDataSourceConfigInput::Unknown)
-    EojDataSourceConfigInput.struct_class = Types::EojDataSourceConfigInput
 
     ExportEarthObservationJobInput.add_member(:arn, Shapes::ShapeRef.new(shape: EarthObservationJobArn, required: true, location_name: "Arn"))
     ExportEarthObservationJobInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ExportEarthObservationJobInputClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
@@ -390,12 +381,10 @@ module Aws::SageMakerGeospatial
 
     ImageSourceBandList.member = Shapes::ShapeRef.new(shape: String)
 
-    InputConfigInput.add_member(:data_source_config, Shapes::ShapeRef.new(shape: EojDataSourceConfigInput, location_name: "DataSourceConfig"))
     InputConfigInput.add_member(:previous_earth_observation_job_arn, Shapes::ShapeRef.new(shape: EarthObservationJobArn, location_name: "PreviousEarthObservationJobArn"))
     InputConfigInput.add_member(:raster_data_collection_query, Shapes::ShapeRef.new(shape: RasterDataCollectionQueryInput, location_name: "RasterDataCollectionQuery"))
     InputConfigInput.struct_class = Types::InputConfigInput
 
-    InputConfigOutput.add_member(:data_source_config, Shapes::ShapeRef.new(shape: EojDataSourceConfigInput, location_name: "DataSourceConfig"))
     InputConfigOutput.add_member(:previous_earth_observation_job_arn, Shapes::ShapeRef.new(shape: EarthObservationJobArn, location_name: "PreviousEarthObservationJobArn"))
     InputConfigOutput.add_member(:raster_data_collection_query, Shapes::ShapeRef.new(shape: RasterDataCollectionQueryOutput, location_name: "RasterDataCollectionQuery"))
     InputConfigOutput.struct_class = Types::InputConfigOutput
@@ -614,11 +603,6 @@ module Aws::SageMakerGeospatial
     ReverseGeocodingConfig.add_member(:y_attribute_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "YAttributeName"))
     ReverseGeocodingConfig.struct_class = Types::ReverseGeocodingConfig
 
-    S3DataInput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKeyId"))
-    S3DataInput.add_member(:metadata_provider, Shapes::ShapeRef.new(shape: MetadataProvider, required: true, location_name: "MetadataProvider"))
-    S3DataInput.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
-    S3DataInput.struct_class = Types::S3DataInput
-
     SearchRasterDataCollectionInput.add_member(:arn, Shapes::ShapeRef.new(shape: DataCollectionArn, required: true, location_name: "Arn"))
     SearchRasterDataCollectionInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     SearchRasterDataCollectionInput.add_member(:raster_data_collection_query, Shapes::ShapeRef.new(shape: RasterDataCollectionQueryWithBandFilterInput, required: true, location_name: "RasterDataCollectionQuery"))
@@ -638,7 +622,7 @@ module Aws::SageMakerGeospatial
     StackConfigInput.struct_class = Types::StackConfigInput
 
     StartEarthObservationJobInput.add_member(:client_token, Shapes::ShapeRef.new(shape: StartEarthObservationJobInputClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
-    StartEarthObservationJobInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, location_name: "ExecutionRoleArn"))
+    StartEarthObservationJobInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, required: true, location_name: "ExecutionRoleArn"))
     StartEarthObservationJobInput.add_member(:input_config, Shapes::ShapeRef.new(shape: InputConfigInput, required: true, location_name: "InputConfig"))
     StartEarthObservationJobInput.add_member(:job_config, Shapes::ShapeRef.new(shape: JobConfigInput, required: true, location_name: "JobConfig"))
     StartEarthObservationJobInput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKeyId"))
@@ -649,7 +633,7 @@ module Aws::SageMakerGeospatial
     StartEarthObservationJobOutput.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
     StartEarthObservationJobOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "CreationTime"))
     StartEarthObservationJobOutput.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "DurationInSeconds"))
-    StartEarthObservationJobOutput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, location_name: "ExecutionRoleArn"))
+    StartEarthObservationJobOutput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, required: true, location_name: "ExecutionRoleArn"))
     StartEarthObservationJobOutput.add_member(:input_config, Shapes::ShapeRef.new(shape: InputConfigOutput, location_name: "InputConfig"))
     StartEarthObservationJobOutput.add_member(:job_config, Shapes::ShapeRef.new(shape: JobConfigInput, required: true, location_name: "JobConfig"))
     StartEarthObservationJobOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKeyId"))

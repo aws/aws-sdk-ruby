@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2023-05-31)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.13.0 (2023-05-30)
+------------------
+
+* Feature - Amazon MemoryDB for Redis now supports AWS Identity and Access Management authentication access to Redis clusters starting with redis-engine version 7.0
+
 1.12.0 (2023-01-18)
 ------------------
 

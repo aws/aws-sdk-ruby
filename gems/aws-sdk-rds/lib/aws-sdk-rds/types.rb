@@ -2551,6 +2551,16 @@ module Aws::RDS
     #   Default: `aurora` (Aurora DB clusters); `io1` (Multi-AZ DB clusters)
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   For more information on storage types for Aurora DB clusters, see
+    #   [Storage configurations for Amazon Aurora DB clusters][1]. For more
+    #   information on storage types for Multi-AZ DB clusters, see [Settings
+    #   for creating Multi-AZ DB clusters][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.StorageReliability.html#aurora-storage-type
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/create-multi-az-db-cluster.html#create-multi-az-db-cluster-settings
     #   @return [String]
     #
     # @!attribute [rw] iops
@@ -16255,6 +16265,36 @@ module Aws::RDS
     #   each Amazon Web Services Region.
     #   @return [String]
     #
+    # @!attribute [rw] engine
+    #   The target Oracle DB engine when you convert a non-CDB to a CDB.
+    #   This intermediate step is necessary to upgrade an Oracle Database
+    #   19c non-CDB to an Oracle Database 21c CDB.
+    #
+    #   Note the following requirements:
+    #
+    #   * Make sure that you specify `oracle-ee-cdb` or `oracle-se2-cdb`.
+    #
+    #   * Make sure that your DB engine runs Oracle Database 19c with an
+    #     April 2021 or later RU.
+    #
+    #   Note the following limitations:
+    #
+    #   * You can't convert a CDB to a non-CDB.
+    #
+    #   * You can't convert a replica database.
+    #
+    #   * You can't convert a non-CDB to a CDB and upgrade the engine
+    #     version in the same command.
+    #
+    #   * You can't convert the existing custom parameter or option group
+    #     when it has options or parameters that are permanent or
+    #     persistent. In this situation, the DB instance reverts to the
+    #     default option and parameter group. To avoid reverting to the
+    #     default, specify a new parameter group with
+    #     `--db-parameter-group-name` and a new option group with
+    #     `--option-group-name`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
     #
     class ModifyDBInstanceMessage < Struct.new(
@@ -16309,7 +16349,8 @@ module Aws::RDS
       :storage_throughput,
       :manage_master_user_password,
       :rotate_master_user_password,
-      :master_user_secret_kms_key_id)
+      :master_user_secret_kms_key_id,
+      :engine)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17977,6 +18018,10 @@ module Aws::RDS
     #   The storage throughput of the DB instance.
     #   @return [Integer]
     #
+    # @!attribute [rw] engine
+    #   The database engine of the DB instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PendingModifiedValues AWS API Documentation
     #
     class PendingModifiedValues < Struct.new(
@@ -17998,7 +18043,8 @@ module Aws::RDS
       :iam_database_authentication_enabled,
       :automation_mode,
       :resume_full_automation_mode_time,
-      :storage_throughput)
+      :storage_throughput,
+      :engine)
       SENSITIVE = []
       include Aws::Structure
     end
