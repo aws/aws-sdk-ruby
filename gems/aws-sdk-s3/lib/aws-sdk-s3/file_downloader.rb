@@ -58,7 +58,7 @@ module Aws
         resp = @client.head_object(@params.merge(part_number: 1))
         count = resp.parts_count
         if count.nil? || count <= 1
-          if resp.content_length < MIN_CHUNK_SIZE
+          if resp.content_length <= MIN_CHUNK_SIZE
             single_request
           else
             multithreaded_get_by_ranges(construct_chunks(resp.content_length))
@@ -66,7 +66,7 @@ module Aws
         else
           # partNumber is an option
           resp = @client.head_object(@params)
-          if resp.content_length < MIN_CHUNK_SIZE
+          if resp.content_length <= MIN_CHUNK_SIZE
             single_request
           else
             compute_mode(resp.content_length, count)
