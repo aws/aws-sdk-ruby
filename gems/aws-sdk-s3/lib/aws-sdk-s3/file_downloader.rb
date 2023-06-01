@@ -58,7 +58,7 @@ module Aws
         resp = @client.head_object(@params.merge(part_number: 1))
         count = resp.parts_count
         if count.nil? || count <= 1
-          if resp.content_length <= MIN_CHUNK_SIZE
+          if resp.content_length < MIN_CHUNK_SIZE
             single_request
           else
             multithreaded_get_by_ranges(construct_chunks(resp.content_length))
@@ -66,7 +66,7 @@ module Aws
         else
           # partNumber is an option
           resp = @client.head_object(@params)
-          if resp.content_length <= MIN_CHUNK_SIZE
+          if resp.content_length < MIN_CHUNK_SIZE
             single_request
           else
             compute_mode(resp.content_length, count)
@@ -88,10 +88,11 @@ module Aws
         offset = 0
         default_chunk_size = compute_chunk(file_size)
         chunks = []
-        while offset <= file_size
-          progress = offset + default_chunk_size - 1
-          chunks << "bytes=#{offset}-#{progress < file_size ? progress : file_size}"
-          offset = progress + 1
+        while offset < file_size
+          progress = offset + default_chunk_size
+          progress = file_size if progress > file_size
+          chunks << "bytes=#{offset}-#{progress - 1}"
+          offset = progress
         end
         chunks
       end
@@ -100,11 +101,9 @@ module Aws
         if @chunk_size && @chunk_size > file_size
           raise ArgumentError, ":chunk_size shouldn't exceed total file size."
         else
-          chunk_size = @chunk_size || [
+          @chunk_size || [
             (file_size.to_f / MAX_PARTS).ceil, MIN_CHUNK_SIZE
           ].max.to_i
-          chunk_size -= 1 if file_size % chunk_size == 0
-          chunk_size
         end
       end
 

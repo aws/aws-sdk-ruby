@@ -103,18 +103,6 @@ module Aws
               parts_count: nil
             )
           )
-
-          client.stub_responses(:get_object, ->(context) {
-            if context.params[:range]
-              ranges = context.params[:range].split('=')[1].split('-')
-              # S3 does not allow 1 byte ranges. This shouldn't be raised.
-              raise 'InvalidRange' if ranges[0] == ranges[1]
-
-              { content_range: "bytes #{ranges[0]}-#{ranges[1]}/123" }
-            else
-              {}
-            end
-          })
         end
 
         it 'downloads single part files in Client#get_object' do
