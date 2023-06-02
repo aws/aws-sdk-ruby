@@ -1044,6 +1044,22 @@ module Aws::Athena
     end
 
     # @!attribute [rw] name
+    #   The name of the capacity reservation to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteCapacityReservationInput AWS API Documentation
+    #
+    class DeleteCapacityReservationInput < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteCapacityReservationOutput AWS API Documentation
+    #
+    class DeleteCapacityReservationOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] name
     #   The name of the data catalog to delete.
     #   @return [String]
     #
@@ -2996,7 +3012,8 @@ module Aws::Athena
     # @!attribute [rw] execution_parameters
     #   A list of values for the parameters in a query. The values are
     #   applied sequentially to the parameters in the query in the order in
-    #   which the parameters occur.
+    #   which the parameters occur. The list of parameters is not returned
+    #   in the response.
     #   @return [Array<String>]
     #
     # @!attribute [rw] substatement_type

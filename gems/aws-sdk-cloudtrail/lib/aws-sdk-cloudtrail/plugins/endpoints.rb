@@ -128,12 +128,16 @@ module Aws::CloudTrail
             Aws::CloudTrail::Endpoints::RemoveTags.build(context)
           when :restore_event_data_store
             Aws::CloudTrail::Endpoints::RestoreEventDataStore.build(context)
+          when :start_event_data_store_ingestion
+            Aws::CloudTrail::Endpoints::StartEventDataStoreIngestion.build(context)
           when :start_import
             Aws::CloudTrail::Endpoints::StartImport.build(context)
           when :start_logging
             Aws::CloudTrail::Endpoints::StartLogging.build(context)
           when :start_query
             Aws::CloudTrail::Endpoints::StartQuery.build(context)
+          when :stop_event_data_store_ingestion
+            Aws::CloudTrail::Endpoints::StopEventDataStoreIngestion.build(context)
           when :stop_import
             Aws::CloudTrail::Endpoints::StopImport.build(context)
           when :stop_logging

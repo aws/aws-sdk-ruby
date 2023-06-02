@@ -2096,12 +2096,9 @@ module Aws::SageMaker
     #   The content type of the data from the input source. The following
     #   are the allowed content types for different problems:
     #
-    #   * ImageClassification: `image/png`, `image/jpeg`, or `image/*`. The
-    #     default value is `image/*`.
+    #   * ImageClassification: `image/png`, `image/jpeg`, `image/*`
     #
-    #   * TextClassification: `text/csv;header=present` or
-    #     `x-application/vnd.amazon+parquet`. The default value is
-    #     `text/csv;header=present`.
+    #   * TextClassification: `text/csv;header=present`
     #   @return [String]
     #
     # @!attribute [rw] compression_type
@@ -14403,6 +14400,10 @@ module Aws::SageMaker
     #   The parallelism configuration applied to the pipeline.
     #   @return [Types::ParallelismConfiguration]
     #
+    # @!attribute [rw] selective_execution_config
+    #   The selective execution configuration applied to the pipeline run.
+    #   @return [Types::SelectiveExecutionConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineExecutionResponse AWS API Documentation
     #
     class DescribePipelineExecutionResponse < Struct.new(
@@ -14417,7 +14418,8 @@ module Aws::SageMaker
       :last_modified_time,
       :created_by,
       :last_modified_by,
-      :parallelism_configuration)
+      :parallelism_configuration,
+      :selective_execution_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31554,6 +31556,10 @@ module Aws::SageMaker
     #   Contains a list of pipeline parameters. This list can be empty.
     #   @return [Array<Types::Parameter>]
     #
+    # @!attribute [rw] selective_execution_config
+    #   The selective execution configuration applied to the pipeline run.
+    #   @return [Types::SelectiveExecutionConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExecution AWS API Documentation
     #
     class PipelineExecution < Struct.new(
@@ -31569,7 +31575,8 @@ module Aws::SageMaker
       :created_by,
       :last_modified_by,
       :parallelism_configuration,
-      :pipeline_parameters)
+      :pipeline_parameters,
+      :selective_execution_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31623,6 +31630,11 @@ module Aws::SageMaker
     #   Metadata to run the pipeline step.
     #   @return [Types::PipelineExecutionStepMetadata]
     #
+    # @!attribute [rw] selective_execution_result
+    #   The ARN from an execution of the current pipeline from which results
+    #   are reused for this step.
+    #   @return [Types::SelectiveExecutionResult]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExecutionStep AWS API Documentation
     #
     class PipelineExecutionStep < Struct.new(
@@ -31635,7 +31647,8 @@ module Aws::SageMaker
       :cache_hit_result,
       :attempt_count,
       :failure_reason,
-      :metadata)
+      :metadata,
+      :selective_execution_result)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35267,6 +35280,57 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A step selected to run in selective execution mode.
+    #
+    # @!attribute [rw] step_name
+    #   The name of the pipeline step.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SelectedStep AWS API Documentation
+    #
+    class SelectedStep < Struct.new(
+      :step_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The selective execution configuration applied to the pipeline run.
+    #
+    # @!attribute [rw] source_pipeline_execution_arn
+    #   The ARN from a reference execution of the current pipeline. Used to
+    #   copy input collaterals needed for the selected steps to run. The
+    #   execution status of the pipeline can be either `Failed` or
+    #   `Success`.
+    #   @return [String]
+    #
+    # @!attribute [rw] selected_steps
+    #   A list of pipeline steps to run. All step(s) in all path(s) between
+    #   two selected steps should be included.
+    #   @return [Array<Types::SelectedStep>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SelectiveExecutionConfig AWS API Documentation
+    #
+    class SelectiveExecutionConfig < Struct.new(
+      :source_pipeline_execution_arn,
+      :selected_steps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The ARN from an execution of the current pipeline.
+    #
+    # @!attribute [rw] source_pipeline_execution_arn
+    #   The ARN from an execution of the current pipeline.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SelectiveExecutionResult AWS API Documentation
+    #
+    class SelectiveExecutionResult < Struct.new(
+      :source_pipeline_execution_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] callback_token
     #   The pipeline generated token from the Amazon SQS queue.
     #   @return [String]
@@ -35789,6 +35853,10 @@ module Aws::SageMaker
     #   configuration of the parent pipeline for this specific run.
     #   @return [Types::ParallelismConfiguration]
     #
+    # @!attribute [rw] selective_execution_config
+    #   The selective execution configuration applied to the pipeline run.
+    #   @return [Types::SelectiveExecutionConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartPipelineExecutionRequest AWS API Documentation
     #
     class StartPipelineExecutionRequest < Struct.new(
@@ -35797,7 +35865,8 @@ module Aws::SageMaker
       :pipeline_parameters,
       :pipeline_execution_description,
       :client_request_token,
-      :parallelism_configuration)
+      :parallelism_configuration,
+      :selective_execution_config)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.185.0 (2023-06-02)
+------------------
+
+* Feature - This release adds Selective Execution feature that allows SageMaker Pipelines users to run selected steps in a pipeline.
+
 1.184.0 (2023-06-01)
 ------------------
 

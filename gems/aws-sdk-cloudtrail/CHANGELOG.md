@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2023-06-02)
+------------------
+
+* Feature - This feature allows users to start and stop event ingestion on a CloudTrail Lake event data store.
+
 1.60.0 (2023-05-31)
 ------------------
 

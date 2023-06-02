@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2023-06-02)
+------------------
+
+* Feature - This release introduces the DeleteCapacityReservation API and the ability to manage capacity reservations using CloudFormation
+
 1.68.0 (2023-05-31)
 ------------------
 

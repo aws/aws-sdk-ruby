@@ -13376,6 +13376,7 @@ module Aws::SageMaker
     #   * {Types::DescribePipelineExecutionResponse#created_by #created_by} => Types::UserContext
     #   * {Types::DescribePipelineExecutionResponse#last_modified_by #last_modified_by} => Types::UserContext
     #   * {Types::DescribePipelineExecutionResponse#parallelism_configuration #parallelism_configuration} => Types::ParallelismConfiguration
+    #   * {Types::DescribePipelineExecutionResponse#selective_execution_config #selective_execution_config} => Types::SelectiveExecutionConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -13408,6 +13409,9 @@ module Aws::SageMaker
     #   resp.last_modified_by.iam_identity.principal_id #=> String
     #   resp.last_modified_by.iam_identity.source_identity #=> String
     #   resp.parallelism_configuration.max_parallel_execution_steps #=> Integer
+    #   resp.selective_execution_config.source_pipeline_execution_arn #=> String
+    #   resp.selective_execution_config.selected_steps #=> Array
+    #   resp.selective_execution_config.selected_steps[0].step_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineExecution AWS API Documentation
     #
@@ -18832,6 +18836,7 @@ module Aws::SageMaker
     #   resp.pipeline_execution_steps[0].metadata.emr.log_file_path #=> String
     #   resp.pipeline_execution_steps[0].metadata.fail.error_message #=> String
     #   resp.pipeline_execution_steps[0].metadata.auto_ml_job.arn #=> String
+    #   resp.pipeline_execution_steps[0].selective_execution_result.source_pipeline_execution_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListPipelineExecutionSteps AWS API Documentation
@@ -20747,6 +20752,9 @@ module Aws::SageMaker
     #   This configuration, if specified, overrides the parallelism
     #   configuration of the parent pipeline for this specific run.
     #
+    # @option params [Types::SelectiveExecutionConfig] :selective_execution_config
+    #   The selective execution configuration applied to the pipeline run.
+    #
     # @return [Types::StartPipelineExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartPipelineExecutionResponse#pipeline_execution_arn #pipeline_execution_arn} => String
@@ -20766,6 +20774,14 @@ module Aws::SageMaker
     #     client_request_token: "IdempotencyToken", # required
     #     parallelism_configuration: {
     #       max_parallel_execution_steps: 1, # required
+    #     },
+    #     selective_execution_config: {
+    #       source_pipeline_execution_arn: "PipelineExecutionArn", # required
+    #       selected_steps: [ # required
+    #         {
+    #           step_name: "String256", # required
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -23589,7 +23605,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.184.0'
+      context[:gem_version] = '1.185.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

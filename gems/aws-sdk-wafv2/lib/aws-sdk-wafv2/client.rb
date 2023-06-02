@@ -3689,12 +3689,118 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
+    # Provides high-level information for the Amazon Web Services Managed
+    # Rules rule groups and Amazon Web Services Marketplace managed rule
+    # groups.
+    #
+    # @option params [required, String] :scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or for
+    #   a regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
+    #
+    #   To work with CloudFront, you must also specify the Region US East (N.
+    #   Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #
+    # @return [Types::DescribeAllManagedProductsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAllManagedProductsResponse#managed_products #managed_products} => Array&lt;Types::ManagedProductDescriptor&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_all_managed_products({
+    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.managed_products #=> Array
+    #   resp.managed_products[0].vendor_name #=> String
+    #   resp.managed_products[0].managed_rule_set_name #=> String
+    #   resp.managed_products[0].product_id #=> String
+    #   resp.managed_products[0].product_link #=> String
+    #   resp.managed_products[0].product_title #=> String
+    #   resp.managed_products[0].product_description #=> String
+    #   resp.managed_products[0].sns_topic_arn #=> String
+    #   resp.managed_products[0].is_versioning_supported #=> Boolean
+    #   resp.managed_products[0].is_advanced_managed_rule_set #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DescribeAllManagedProducts AWS API Documentation
+    #
+    # @overload describe_all_managed_products(params = {})
+    # @param [Hash] params ({})
+    def describe_all_managed_products(params = {}, options = {})
+      req = build_request(:describe_all_managed_products, params)
+      req.send_request(options)
+    end
+
+    # Provides high-level information for the managed rule groups owned by a
+    # specific vendor.
+    #
+    # @option params [required, String] :vendor_name
+    #   The name of the managed rule group vendor. You use this, along with
+    #   the rule group name, to identify a rule group.
+    #
+    # @option params [required, String] :scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or for
+    #   a regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
+    #
+    #   To work with CloudFront, you must also specify the Region US East (N.
+    #   Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #
+    # @return [Types::DescribeManagedProductsByVendorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeManagedProductsByVendorResponse#managed_products #managed_products} => Array&lt;Types::ManagedProductDescriptor&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_managed_products_by_vendor({
+    #     vendor_name: "VendorName", # required
+    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.managed_products #=> Array
+    #   resp.managed_products[0].vendor_name #=> String
+    #   resp.managed_products[0].managed_rule_set_name #=> String
+    #   resp.managed_products[0].product_id #=> String
+    #   resp.managed_products[0].product_link #=> String
+    #   resp.managed_products[0].product_title #=> String
+    #   resp.managed_products[0].product_description #=> String
+    #   resp.managed_products[0].sns_topic_arn #=> String
+    #   resp.managed_products[0].is_versioning_supported #=> Boolean
+    #   resp.managed_products[0].is_advanced_managed_rule_set #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DescribeManagedProductsByVendor AWS API Documentation
+    #
+    # @overload describe_managed_products_by_vendor(params = {})
+    # @param [Hash] params ({})
+    def describe_managed_products_by_vendor(params = {}, options = {})
+      req = build_request(:describe_managed_products_by_vendor, params)
+      req.send_request(options)
+    end
+
     # Provides high-level information for a managed rule group, including
     # descriptions of the rules.
     #
     # @option params [required, String] :vendor_name
     #   The name of the managed rule group vendor. You use this, along with
-    #   the rule group name, to identify the rule group.
+    #   the rule group name, to identify a rule group.
     #
     # @option params [required, String] :name
     #   The name of the managed rule group. You use this, along with the
@@ -6849,7 +6955,7 @@ module Aws::WAFV2
     #
     # @option params [required, String] :vendor_name
     #   The name of the managed rule group vendor. You use this, along with
-    #   the rule group name, to identify the rule group.
+    #   the rule group name, to identify a rule group.
     #
     # @option params [required, String] :name
     #   The name of the managed rule group. You use this, along with the
@@ -10202,7 +10308,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.123.1 (2023-06-02)
+------------------
+
 * Issue - Fix multipart `download_file` so that it does not download bytes out of range (#2859).
 
 1.123.0 (2023-05-31)
