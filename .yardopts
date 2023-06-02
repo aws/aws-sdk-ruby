@@ -7,3 +7,4 @@
 --plugin sitemap
 --exclude \/client_api.rb$
 gems/aws-sdk-core/lib/**/*.rb
+gems/aws-sdk-s3/lib/**/*.rb
