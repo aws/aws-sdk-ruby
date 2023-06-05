@@ -37,7 +37,7 @@ require_relative 'aws-sdk-cloudformation/customizations'
 # structure.
 #
 #     cloud_formation = Aws::CloudFormation::Client.new
-#     resp = cloud_formation.activate_type(params)
+#     resp = cloud_formation.activate_organizations_access(params)
 #
 # See {Client} for more information.
 #
@@ -57,6 +57,6 @@ require_relative 'aws-sdk-cloudformation/customizations'
 # @!group service
 module Aws::CloudFormation
 
-  GEM_VERSION = '1.78.0'
+  GEM_VERSION = '1.79.0'
 
 end

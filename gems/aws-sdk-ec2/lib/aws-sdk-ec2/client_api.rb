@@ -5862,7 +5862,7 @@ module Aws::EC2
     DeregisterImageRequest.struct_class = Types::DeregisterImageRequest
 
     DeregisterInstanceEventNotificationAttributesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
-    DeregisterInstanceEventNotificationAttributesRequest.add_member(:instance_tag_attribute, Shapes::ShapeRef.new(shape: DeregisterInstanceTagAttributeRequest, location_name: "InstanceTagAttribute"))
+    DeregisterInstanceEventNotificationAttributesRequest.add_member(:instance_tag_attribute, Shapes::ShapeRef.new(shape: DeregisterInstanceTagAttributeRequest, required: true, location_name: "InstanceTagAttribute"))
     DeregisterInstanceEventNotificationAttributesRequest.struct_class = Types::DeregisterInstanceEventNotificationAttributesRequest
 
     DeregisterInstanceEventNotificationAttributesResult.add_member(:instance_tag_attribute, Shapes::ShapeRef.new(shape: InstanceTagNotificationAttribute, location_name: "instanceTagAttribute"))
@@ -12197,7 +12197,7 @@ module Aws::EC2
     RegisterImageResult.struct_class = Types::RegisterImageResult
 
     RegisterInstanceEventNotificationAttributesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
-    RegisterInstanceEventNotificationAttributesRequest.add_member(:instance_tag_attribute, Shapes::ShapeRef.new(shape: RegisterInstanceTagAttributeRequest, location_name: "InstanceTagAttribute"))
+    RegisterInstanceEventNotificationAttributesRequest.add_member(:instance_tag_attribute, Shapes::ShapeRef.new(shape: RegisterInstanceTagAttributeRequest, required: true, location_name: "InstanceTagAttribute"))
     RegisterInstanceEventNotificationAttributesRequest.struct_class = Types::RegisterInstanceEventNotificationAttributesRequest
 
     RegisterInstanceEventNotificationAttributesResult.add_member(:instance_tag_attribute, Shapes::ShapeRef.new(shape: InstanceTagNotificationAttribute, location_name: "instanceTagAttribute"))

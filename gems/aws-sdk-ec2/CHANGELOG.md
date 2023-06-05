@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.382.0 (2023-06-05)
+------------------
+
+* Feature - Making InstanceTagAttribute as the required parameter for the DeregisterInstanceEventNotificationAttributes and RegisterInstanceEventNotificationAttributes APIs.
+
 1.381.0 (2023-05-31)
 ------------------
 

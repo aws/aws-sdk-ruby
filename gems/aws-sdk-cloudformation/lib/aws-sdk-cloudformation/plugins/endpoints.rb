@@ -56,6 +56,8 @@ module Aws::CloudFormation
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :activate_organizations_access
+            Aws::CloudFormation::Endpoints::ActivateOrganizationsAccess.build(context)
           when :activate_type
             Aws::CloudFormation::Endpoints::ActivateType.build(context)
           when :batch_describe_type_configurations
@@ -72,6 +74,8 @@ module Aws::CloudFormation
             Aws::CloudFormation::Endpoints::CreateStackInstances.build(context)
           when :create_stack_set
             Aws::CloudFormation::Endpoints::CreateStackSet.build(context)
+          when :deactivate_organizations_access
+            Aws::CloudFormation::Endpoints::DeactivateOrganizationsAccess.build(context)
           when :deactivate_type
             Aws::CloudFormation::Endpoints::DeactivateType.build(context)
           when :delete_change_set
@@ -90,6 +94,8 @@ module Aws::CloudFormation
             Aws::CloudFormation::Endpoints::DescribeChangeSet.build(context)
           when :describe_change_set_hooks
             Aws::CloudFormation::Endpoints::DescribeChangeSetHooks.build(context)
+          when :describe_organizations_access
+            Aws::CloudFormation::Endpoints::DescribeOrganizationsAccess.build(context)
           when :describe_publisher
             Aws::CloudFormation::Endpoints::DescribePublisher.build(context)
           when :describe_stack_drift_detection_status

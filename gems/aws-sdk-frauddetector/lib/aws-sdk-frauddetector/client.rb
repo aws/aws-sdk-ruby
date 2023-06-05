@@ -452,7 +452,7 @@ module Aws::FraudDetector
     #
     #   resp.variables #=> Array
     #   resp.variables[0].name #=> String
-    #   resp.variables[0].data_type #=> String, one of "STRING", "INTEGER", "FLOAT", "BOOLEAN"
+    #   resp.variables[0].data_type #=> String, one of "STRING", "INTEGER", "FLOAT", "BOOLEAN", "DATETIME"
     #   resp.variables[0].data_source #=> String, one of "EVENT", "MODEL_SCORE", "EXTERNAL_MODEL_SCORE"
     #   resp.variables[0].default_value #=> String
     #   resp.variables[0].description #=> String
@@ -985,7 +985,7 @@ module Aws::FraudDetector
     #   The name of the variable.
     #
     # @option params [required, String] :data_type
-    #   The data type.
+    #   The data type of the variable.
     #
     # @option params [required, String] :data_source
     #   The source of the data.
@@ -1021,7 +1021,7 @@ module Aws::FraudDetector
     #
     #   resp = client.create_variable({
     #     name: "string", # required
-    #     data_type: "STRING", # required, accepts STRING, INTEGER, FLOAT, BOOLEAN
+    #     data_type: "STRING", # required, accepts STRING, INTEGER, FLOAT, BOOLEAN, DATETIME
     #     data_source: "EVENT", # required, accepts EVENT, MODEL_SCORE, EXTERNAL_MODEL_SCORE
     #     default_value: "string", # required
     #     description: "string",
@@ -1179,7 +1179,9 @@ module Aws::FraudDetector
     #
     # When you delete an event, Amazon Fraud Detector permanently deletes
     # that event and the event data is no longer stored in Amazon Fraud
-    # Detector.
+    # Detector. If `deleteAuditHistory` is `True`, event data is available
+    # through search for up to 30 seconds after the delete operation is
+    # completed.
     #
     # @option params [required, String] :event_id
     #   The ID of the event to delete.
@@ -1189,7 +1191,7 @@ module Aws::FraudDetector
     #
     # @option params [Boolean] :delete_audit_history
     #   Specifies whether or not to delete any predictions associated with the
-    #   event.
+    #   event. If set to `True`,
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2829,7 +2831,7 @@ module Aws::FraudDetector
     #
     #   resp.variables #=> Array
     #   resp.variables[0].name #=> String
-    #   resp.variables[0].data_type #=> String, one of "STRING", "INTEGER", "FLOAT", "BOOLEAN"
+    #   resp.variables[0].data_type #=> String, one of "STRING", "INTEGER", "FLOAT", "BOOLEAN", "DATETIME"
     #   resp.variables[0].data_source #=> String, one of "EVENT", "MODEL_SCORE", "EXTERNAL_MODEL_SCORE"
     #   resp.variables[0].default_value #=> String
     #   resp.variables[0].description #=> String
@@ -3925,7 +3927,7 @@ module Aws::FraudDetector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-frauddetector'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

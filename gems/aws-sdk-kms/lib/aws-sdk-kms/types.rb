@@ -2994,9 +2994,13 @@ module Aws::KMS
     end
 
     # @!attribute [rw] key_id
-    #   The identifier of the symmetric encryption KMS key into which you
-    #   will import key material. The `Origin` of the KMS key must be
+    #   The identifier of the KMS key that will be associated with the
+    #   imported key material. The `Origin` of the KMS key must be
     #   `EXTERNAL`.
+    #
+    #   All KMS key types are supported, including multi-Region keys.
+    #   However, you cannot import key material into a KMS key in a custom
+    #   key store.
     #
     #   Specify the key ID or key ARN of the KMS key.
     #
@@ -3012,26 +3016,54 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] wrapping_algorithm
-    #   The algorithm you will use to encrypt the key material before using
-    #   the ImportKeyMaterial operation to import it. For more information,
-    #   see [Encrypt the key material][1] in the *Key Management Service
-    #   Developer Guide*.
+    #   The algorithm you will use with the RSA public key (`PublicKey`) in
+    #   the response to protect your key material during import. For more
+    #   information, see [Select a wrapping
+    #   algorithm](kms/latest/developerguide/importing-keys-get-public-key-and-token.html#select-wrapping-algorithm)
+    #   in the *Key Management Service Developer Guide*.
     #
-    #   The `RSAES_PKCS1_V1_5` wrapping algorithm is deprecated. We
-    #   recommend that you begin using a different wrapping algorithm
-    #   immediately. KMS will end support for `RSAES_PKCS1_V1_5` by October
-    #   1, 2023 pursuant to [cryptographic key management guidance][2] from
-    #   the National Institute of Standards and Technology (NIST).
+    #   For RSA\_AES wrapping algorithms, you encrypt your key material with
+    #   an AES key that you generate, then encrypt your AES key with the RSA
+    #   public key from KMS. For RSAES wrapping algorithms, you encrypt your
+    #   key material directly with the RSA public key from KMS.
     #
+    #   The wrapping algorithms that you can use depend on the type of key
+    #   material that you are importing. To import an RSA private key, you
+    #   must use an RSA\_AES wrapping algorithm.
     #
+    #   * **RSA\_AES\_KEY\_WRAP\_SHA\_256** — Supported for wrapping RSA and
+    #     ECC key material.
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-encrypt-key-material.html
-    #   [2]: https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf
+    #   * **RSA\_AES\_KEY\_WRAP\_SHA\_1** — Supported for wrapping RSA and
+    #     ECC key material.
+    #
+    #   * **RSAES\_OAEP\_SHA\_256** — Supported for all types of key
+    #     material, except RSA key material (private key).
+    #
+    #     You cannot use the RSAES\_OAEP\_SHA\_256 wrapping algorithm with
+    #     the RSA\_2048 wrapping key spec to wrap ECC\_NIST\_P521 key
+    #     material.
+    #
+    #   * **RSAES\_OAEP\_SHA\_1** — Supported for all types of key material,
+    #     except RSA key material (private key).
+    #
+    #     You cannot use the RSAES\_OAEP\_SHA\_1 wrapping algorithm with the
+    #     RSA\_2048 wrapping key spec to wrap ECC\_NIST\_P521 key material.
+    #
+    #   * **RSAES\_PKCS1\_V1\_5** (Deprecated) — Supported only for
+    #     symmetric encryption key material (and only in legacy mode).
     #   @return [String]
     #
     # @!attribute [rw] wrapping_key_spec
-    #   The type of wrapping key (public key) to return in the response.
-    #   Only 2048-bit RSA public keys are supported.
+    #   The type of RSA public key to return in the response. You will use
+    #   this wrapping key with the specified wrapping algorithm to protect
+    #   your key material during import.
+    #
+    #   Use the longest RSA wrapping key that is practical.
+    #
+    #   You cannot use an RSA\_2048 public key to directly wrap an
+    #   ECC\_NIST\_P521 private key. Instead, use an RSA\_AES wrapping
+    #   algorithm or choose a longer RSA public key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetParametersForImportRequest AWS API Documentation
@@ -3338,13 +3370,19 @@ module Aws::KMS
     end
 
     # @!attribute [rw] key_id
-    #   The identifier of the symmetric encryption KMS key that receives the
+    #   The identifier of the KMS key that will be associated with the
     #   imported key material. This must be the same KMS key specified in
     #   the `KeyID` parameter of the corresponding GetParametersForImport
-    #   request. The `Origin` of the KMS key must be `EXTERNAL`. You cannot
-    #   perform this operation on an asymmetric KMS key, an HMAC KMS key, a
-    #   KMS key in a custom key store, or on a KMS key in a different Amazon
-    #   Web Services account
+    #   request. The `Origin` of the KMS key must be `EXTERNAL` and its
+    #   `KeyState` must be `PendingImport`.
+    #
+    #   The KMS key can be a symmetric encryption KMS key, HMAC KMS key,
+    #   asymmetric encryption KMS key, or asymmetric signing KMS key,
+    #   including a [multi-Region
+    #   key](kms/latest/developerguide/multi-region-keys-overview.html) of
+    #   any supported type. You cannot perform this operation on a KMS key
+    #   in a custom key store, or on a KMS key in a different Amazon Web
+    #   Services account.
     #
     #   Specify the key ID or key ARN of the KMS key.
     #
@@ -3368,7 +3406,7 @@ module Aws::KMS
     #
     # @!attribute [rw] encrypted_key_material
     #   The encrypted key material to import. The key material must be
-    #   encrypted with the public wrapping key that GetParametersForImport
+    #   encrypted under the public wrapping key that GetParametersForImport
     #   returned, using the wrapping algorithm that you specified in the
     #   same `GetParametersForImport` request.
     #   @return [String]
@@ -3394,7 +3432,8 @@ module Aws::KMS
     #
     # @!attribute [rw] expiration_model
     #   Specifies whether the key material expires. The default is
-    #   `KEY_MATERIAL_EXPIRES`.
+    #   `KEY_MATERIAL_EXPIRES`. For help with this choice, see [Setting an
+    #   expiration time][1] in the *Key Management Service Developer Guide*.
     #
     #   When the value of `ExpirationModel` is `KEY_MATERIAL_EXPIRES`, you
     #   must specify a value for the `ValidTo` parameter. When value is
@@ -3403,8 +3442,11 @@ module Aws::KMS
     #
     #   You cannot change the `ExpirationModel` or `ValidTo` values for the
     #   current import after the request completes. To change either value,
-    #   you must delete (DeleteImportedKeyMaterial) and reimport the key
-    #   material.
+    #   you must reimport the key material.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/en_us/kms/latest/developerguide/importing-keys.html#importing-keys-expiration
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ImportKeyMaterialRequest AWS API Documentation
@@ -5145,6 +5187,13 @@ module Aws::KMS
     #
     #   This value is optional. If you include a value, it must be between 7
     #   and 30, inclusive. If you do not include a value, it defaults to 30.
+    #   You can use the [ `kms:ScheduleKeyDeletionPendingWindowInDays` ][1]
+    #   condition key to further constrain the values that principals can
+    #   specify in the `PendingWindowInDays` parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-pending-deletion-window
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ScheduleKeyDeletionRequest AWS API Documentation
@@ -5335,7 +5384,7 @@ module Aws::KMS
     #
     #   * When used with the `ECDSA_SHA_256`, `ECDSA_SHA_384`, or
     #     `ECDSA_SHA_512` signing algorithms, this value is a DER-encoded
-    #     object as defined by ANS X9.62–2005 and [RFC 3279 Section
+    #     object as defined by ANSI X9.62–2005 and [RFC 3279 Section
     #     2.2.3][2]. This is the most commonly used signature format and is
     #     appropriate for most uses.
     #
