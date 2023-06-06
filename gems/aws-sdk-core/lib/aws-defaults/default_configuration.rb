@@ -20,7 +20,7 @@ module Aws
   #  * Globally via the "AWS_DEFAULTS_MODE" environment variable.
   #
   #
-  # @code_generation START - documentation
+  # #defaults START - documentation
   # The following `:default_mode` values are supported:
   #
   # * `'standard'` -
@@ -105,10 +105,10 @@ module Aws
   # [2]: https://docs.aws.amazon.com/sdkref/latest/guide/setting-global-retry_mode.html
   # [3]: https://docs.aws.amazon.com/sdkref/latest/guide/setting-global-sts_regional_endpoints.html
   #
-  # @code_generation END - documentation
+  # #defaults END - documentation
   module DefaultsModeConfiguration
     # @api private
-    # @code_generation START - configuration
+    # #defaults START - configuration
     SDK_DEFAULT_CONFIGURATION = 
     {
       "version" => 1,
@@ -148,6 +148,6 @@ module Aws
         }
       }
     }
-    # @code_generation END - configuration
+    # #defaults END - configuration
   end
 end
