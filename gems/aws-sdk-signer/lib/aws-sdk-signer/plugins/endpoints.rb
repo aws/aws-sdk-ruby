@@ -62,6 +62,8 @@ module Aws::Signer
             Aws::Signer::Endpoints::CancelSigningProfile.build(context)
           when :describe_signing_job
             Aws::Signer::Endpoints::DescribeSigningJob.build(context)
+          when :get_revocation_status
+            Aws::Signer::Endpoints::GetRevocationStatus.build(context)
           when :get_signing_platform
             Aws::Signer::Endpoints::GetSigningPlatform.build(context)
           when :get_signing_profile
@@ -84,6 +86,8 @@ module Aws::Signer
             Aws::Signer::Endpoints::RevokeSignature.build(context)
           when :revoke_signing_profile
             Aws::Signer::Endpoints::RevokeSigningProfile.build(context)
+          when :sign_payload
+            Aws::Signer::Endpoints::SignPayload.build(context)
           when :start_signing_job
             Aws::Signer::Endpoints::StartSigningJob.build(context)
           when :tag_resource

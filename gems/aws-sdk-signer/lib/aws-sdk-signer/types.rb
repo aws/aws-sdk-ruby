@@ -285,6 +285,57 @@ module Aws::Signer
       include Aws::Structure
     end
 
+    # @!attribute [rw] signature_timestamp
+    #   The timestamp of the signature that validates the profile or job.
+    #   @return [Time]
+    #
+    # @!attribute [rw] platform_id
+    #   The ID of a signing platform.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_version_arn
+    #   The version of a signing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_arn
+    #   The ARN of a signing job.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_hashes
+    #   A list of composite signed hashes that identify certificates.
+    #
+    #   A certificate identifier consists of a subject certificate TBS hash
+    #   (signed by the parent CA) combined with a parent CA TBS hash (signed
+    #   by the parent CA’s CA). Root certificates are defined as their own
+    #   CA.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/GetRevocationStatusRequest AWS API Documentation
+    #
+    class GetRevocationStatusRequest < Struct.new(
+      :signature_timestamp,
+      :platform_id,
+      :profile_version_arn,
+      :job_arn,
+      :certificate_hashes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] revoked_entities
+    #   A list of revoked entities (including one or more of the signing
+    #   profile ARN, signing job ID, and certificate hash) supplied as input
+    #   to the API.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/GetRevocationStatusResponse AWS API Documentation
+    #
+    class GetRevocationStatusResponse < Struct.new(
+      :revoked_entities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] platform_id
     #   The ID of the target signing platform.
     #   @return [String]
@@ -1048,6 +1099,62 @@ module Aws::Signer
       include Aws::Structure
     end
 
+    # @!attribute [rw] profile_name
+    #   The name of the signing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_owner
+    #   The AWS account ID of the profile owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload
+    #   Specifies the object digest (hash) to sign.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload_format
+    #   Payload content type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/SignPayloadRequest AWS API Documentation
+    #
+    class SignPayloadRequest < Struct.new(
+      :profile_name,
+      :profile_owner,
+      :payload,
+      :payload_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   Unique identifier of the signing job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_owner
+    #   The AWS account ID of the job owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   Information including the signing profile ARN and the signing job
+    #   ID. Clients use metadata to signature records, for example, as
+    #   annotations added to the signature manifest inside an OCI registry.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] signature
+    #   A cryptographic signature.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/SignPayloadResponse AWS API Documentation
+    #
+    class SignPayloadResponse < Struct.new(
+      :job_id,
+      :job_owner,
+      :metadata,
+      :signature)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The validity period for a signing job.
     #
     # @!attribute [rw] value
@@ -1269,7 +1376,7 @@ module Aws::Signer
     # that are used to perform a code signing job.
     #
     # @!attribute [rw] platform_id
-    #   The ID of a code signing; platform.
+    #   The ID of a code signing platform.
     #   @return [String]
     #
     # @!attribute [rw] display_name

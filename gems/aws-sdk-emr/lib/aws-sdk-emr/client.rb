@@ -450,7 +450,7 @@ module Aws::EMR
     #           timeout_duration_minutes: 1, # required
     #           timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
     #           block_duration_minutes: 1,
-    #           allocation_strategy: "capacity-optimized", # accepts capacity-optimized
+    #           allocation_strategy: "capacity-optimized", # accepts capacity-optimized, price-capacity-optimized, lowest-price, diversified
     #         },
     #         on_demand_specification: {
     #           allocation_strategy: "lowest-price", # required, accepts lowest-price
@@ -1944,7 +1944,7 @@ module Aws::EMR
     #   resp.instance_fleets[0].launch_specifications.spot_specification.timeout_duration_minutes #=> Integer
     #   resp.instance_fleets[0].launch_specifications.spot_specification.timeout_action #=> String, one of "SWITCH_TO_ON_DEMAND", "TERMINATE_CLUSTER"
     #   resp.instance_fleets[0].launch_specifications.spot_specification.block_duration_minutes #=> Integer
-    #   resp.instance_fleets[0].launch_specifications.spot_specification.allocation_strategy #=> String, one of "capacity-optimized"
+    #   resp.instance_fleets[0].launch_specifications.spot_specification.allocation_strategy #=> String, one of "capacity-optimized", "price-capacity-optimized", "lowest-price", "diversified"
     #   resp.instance_fleets[0].launch_specifications.on_demand_specification.allocation_strategy #=> String, one of "lowest-price"
     #   resp.instance_fleets[0].launch_specifications.on_demand_specification.capacity_reservation_options.usage_strategy #=> String, one of "use-capacity-reservations-first"
     #   resp.instance_fleets[0].launch_specifications.on_demand_specification.capacity_reservation_options.capacity_reservation_preference #=> String, one of "open", "none"
@@ -3403,7 +3403,7 @@ module Aws::EMR
     #               timeout_duration_minutes: 1, # required
     #               timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
     #               block_duration_minutes: 1,
-    #               allocation_strategy: "capacity-optimized", # accepts capacity-optimized
+    #               allocation_strategy: "capacity-optimized", # accepts capacity-optimized, price-capacity-optimized, lowest-price, diversified
     #             },
     #             on_demand_specification: {
     #               allocation_strategy: "lowest-price", # required, accepts lowest-price
@@ -3931,7 +3931,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

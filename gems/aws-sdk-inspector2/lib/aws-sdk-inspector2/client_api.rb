@@ -70,6 +70,8 @@ module Aws::Inspector2
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     Counts = Shapes::StructureShape.new(name: 'Counts')
     CountsList = Shapes::ListShape.new(name: 'CountsList')
+    CoverageDateFilter = Shapes::StructureShape.new(name: 'CoverageDateFilter')
+    CoverageDateFilterList = Shapes::ListShape.new(name: 'CoverageDateFilterList')
     CoverageFilterCriteria = Shapes::StructureShape.new(name: 'CoverageFilterCriteria')
     CoverageMapComparison = Shapes::StringShape.new(name: 'CoverageMapComparison')
     CoverageMapFilter = Shapes::StructureShape.new(name: 'CoverageMapFilter')
@@ -624,6 +626,12 @@ module Aws::Inspector2
 
     CountsList.member = Shapes::ShapeRef.new(shape: Counts)
 
+    CoverageDateFilter.add_member(:end_inclusive, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "endInclusive"))
+    CoverageDateFilter.add_member(:start_inclusive, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "startInclusive"))
+    CoverageDateFilter.struct_class = Types::CoverageDateFilter
+
+    CoverageDateFilterList.member = Shapes::ShapeRef.new(shape: CoverageDateFilter)
+
     CoverageFilterCriteria.add_member(:account_id, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "accountId"))
     CoverageFilterCriteria.add_member(:ec2_instance_tags, Shapes::ShapeRef.new(shape: CoverageMapFilterList, location_name: "ec2InstanceTags"))
     CoverageFilterCriteria.add_member(:ecr_image_tags, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "ecrImageTags"))
@@ -631,6 +639,7 @@ module Aws::Inspector2
     CoverageFilterCriteria.add_member(:lambda_function_name, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "lambdaFunctionName"))
     CoverageFilterCriteria.add_member(:lambda_function_runtime, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "lambdaFunctionRuntime"))
     CoverageFilterCriteria.add_member(:lambda_function_tags, Shapes::ShapeRef.new(shape: CoverageMapFilterList, location_name: "lambdaFunctionTags"))
+    CoverageFilterCriteria.add_member(:last_scanned_at, Shapes::ShapeRef.new(shape: CoverageDateFilterList, location_name: "lastScannedAt"))
     CoverageFilterCriteria.add_member(:resource_id, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "resourceId"))
     CoverageFilterCriteria.add_member(:resource_type, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "resourceType"))
     CoverageFilterCriteria.add_member(:scan_status_code, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "scanStatusCode"))
@@ -652,6 +661,7 @@ module Aws::Inspector2
     CoverageStringFilterList.member = Shapes::ShapeRef.new(shape: CoverageStringFilter)
 
     CoveredResource.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    CoveredResource.add_member(:last_scanned_at, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "lastScannedAt"))
     CoveredResource.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
     CoveredResource.add_member(:resource_metadata, Shapes::ShapeRef.new(shape: ResourceScanMetadata, location_name: "resourceMetadata"))
     CoveredResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: CoverageResourceType, required: true, location_name: "resourceType"))

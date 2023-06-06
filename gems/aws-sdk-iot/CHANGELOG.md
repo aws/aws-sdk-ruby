@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2023-06-06)
+------------------
+
+* Feature - Adding IoT Device Management Software Package Catalog APIs to register, store, and report system software packages, along with their versions and metadata in a centralized location.
+
 1.105.0 (2023-05-31)
 ------------------
 

@@ -906,12 +906,13 @@ module Aws::IAM
     end
 
     # Creates an alias for your Amazon Web Services account. For information
-    # about using an Amazon Web Services account alias, see [Using an alias
-    # for your Amazon Web Services account ID][1] in the *IAM User Guide*.
+    # about using an Amazon Web Services account alias, see [Creating,
+    # deleting, and listing an Amazon Web Services account alias][1] in the
+    # *Amazon Web Services Sign-In User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html
+    # [1]: https://docs.aws.amazon.com/signin/latest/userguide/CreateAccountAlias.html
     #
     # @option params [required, String] :account_alias
     #   The account alias to create.
@@ -2541,12 +2542,12 @@ module Aws::IAM
 
     # Deletes the specified Amazon Web Services account alias. For
     # information about using an Amazon Web Services account alias, see
-    # [Using an alias for your Amazon Web Services account ID][1] in the
-    # *IAM User Guide*.
+    # [Creating, deleting, and listing an Amazon Web Services account
+    # alias][1] in the *Amazon Web Services Sign-In User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html
+    # [1]: https://docs.aws.amazon.com/signin/latest/userguide/CreateAccountAlias.html
     #
     # @option params [required, String] :account_alias
     #   The name of the account alias to delete.
@@ -6359,12 +6360,13 @@ module Aws::IAM
 
     # Lists the account alias associated with the Amazon Web Services
     # account (Note: you can have only one). For information about using an
-    # Amazon Web Services account alias, see [Using an alias for your Amazon
-    # Web Services account ID][1] in the *IAM User Guide*.
+    # Amazon Web Services account alias, see [Creating, deleting, and
+    # listing an Amazon Web Services account alias][1] in the *Amazon Web
+    # Services Sign-In User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html
+    # [1]: https://docs.aws.amazon.com/signin/latest/userguide/CreateAccountAlias.html
     #
     # @option params [String] :marker
     #   Use this parameter only when paginating results and only after you
@@ -13353,7 +13355,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

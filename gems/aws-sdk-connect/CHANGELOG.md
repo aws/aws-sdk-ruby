@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2023-06-06)
+------------------
+
+* Feature - GetMetricDataV2 API is now available in AWS GovCloud(US) region.
+
 1.110.0 (2023-05-31)
 ------------------
 

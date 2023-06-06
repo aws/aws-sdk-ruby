@@ -11835,7 +11835,7 @@ module Aws::IAM
     #
     # @!attribute [rw] base_32_string_seed
     #   The base32 seed defined as specified in [RFC3548][1]. The
-    #   `Base32StringSeed` is base64-encoded.
+    #   `Base32StringSeed` is base32-encoded.
     #
     #
     #

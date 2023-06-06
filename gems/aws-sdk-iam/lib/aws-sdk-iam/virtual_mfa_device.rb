@@ -35,7 +35,7 @@ module Aws::IAM
     end
 
     # The base32 seed defined as specified in [RFC3548][1]. The
-    # `Base32StringSeed` is base64-encoded.
+    # `Base32StringSeed` is base32-encoded.
     #
     #
     #

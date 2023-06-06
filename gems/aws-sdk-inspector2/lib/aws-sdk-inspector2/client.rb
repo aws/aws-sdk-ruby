@@ -1861,6 +1861,12 @@ module Aws::Inspector2
     #           value: "NonEmptyString",
     #         },
     #       ],
+    #       last_scanned_at: [
+    #         {
+    #           end_inclusive: Time.now,
+    #           start_inclusive: Time.now,
+    #         },
+    #       ],
     #       resource_id: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
@@ -1900,6 +1906,7 @@ module Aws::Inspector2
     #
     #   resp.covered_resources #=> Array
     #   resp.covered_resources[0].account_id #=> String
+    #   resp.covered_resources[0].last_scanned_at #=> Time
     #   resp.covered_resources[0].resource_id #=> String
     #   resp.covered_resources[0].resource_metadata.ec2.ami_id #=> String
     #   resp.covered_resources[0].resource_metadata.ec2.platform #=> String, one of "WINDOWS", "LINUX", "UNKNOWN"
@@ -2000,6 +2007,12 @@ module Aws::Inspector2
     #           comparison: "EQUALS", # required, accepts EQUALS
     #           key: "NonEmptyString", # required
     #           value: "NonEmptyString",
+    #         },
+    #       ],
+    #       last_scanned_at: [
+    #         {
+    #           end_inclusive: Time.now,
+    #           start_inclusive: Time.now,
     #         },
     #       ],
     #       resource_id: [
@@ -3747,7 +3760,7 @@ module Aws::Inspector2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

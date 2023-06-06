@@ -526,6 +526,56 @@ module Aws::Signer
       req.send_request(options)
     end
 
+    # Retrieves the revocation status of one or more of the signing profile,
+    # signing job, and signing certificate.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :signature_timestamp
+    #   The timestamp of the signature that validates the profile or job.
+    #
+    # @option params [required, String] :platform_id
+    #   The ID of a signing platform.
+    #
+    # @option params [required, String] :profile_version_arn
+    #   The version of a signing profile.
+    #
+    # @option params [required, String] :job_arn
+    #   The ARN of a signing job.
+    #
+    # @option params [required, Array<String>] :certificate_hashes
+    #   A list of composite signed hashes that identify certificates.
+    #
+    #   A certificate identifier consists of a subject certificate TBS hash
+    #   (signed by the parent CA) combined with a parent CA TBS hash (signed
+    #   by the parent CA’s CA). Root certificates are defined as their own CA.
+    #
+    # @return [Types::GetRevocationStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRevocationStatusResponse#revoked_entities #revoked_entities} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_revocation_status({
+    #     signature_timestamp: Time.now, # required
+    #     platform_id: "PlatformId", # required
+    #     profile_version_arn: "Arn", # required
+    #     job_arn: "Arn", # required
+    #     certificate_hashes: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.revoked_entities #=> Array
+    #   resp.revoked_entities[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/GetRevocationStatus AWS API Documentation
+    #
+    # @overload get_revocation_status(params = {})
+    # @param [Hash] params ({})
+    def get_revocation_status(params = {}, options = {})
+      req = build_request(:get_revocation_status, params)
+      req.send_request(options)
+    end
+
     # Returns information on a specific signing platform.
     #
     # @option params [required, String] :platform_id
@@ -960,13 +1010,7 @@ module Aws::Signer
     end
 
     # Creates a signing profile. A signing profile is a code signing
-    # template that can be used to carry out a pre-defined signing job. For
-    # more information, see
-    # [http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html][1]
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html
+    # template that can be used to carry out a pre-defined signing job.
     #
     # @option params [required, String] :profile_name
     #   The name of the signing profile to be created.
@@ -1149,12 +1193,59 @@ module Aws::Signer
       req.send_request(options)
     end
 
+    # Signs a binary payload and returns a signature envelope.
+    #
+    # @option params [required, String] :profile_name
+    #   The name of the signing profile.
+    #
+    # @option params [String] :profile_owner
+    #   The AWS account ID of the profile owner.
+    #
+    # @option params [required, String, StringIO, File] :payload
+    #   Specifies the object digest (hash) to sign.
+    #
+    # @option params [required, String] :payload_format
+    #   Payload content type
+    #
+    # @return [Types::SignPayloadResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SignPayloadResponse#job_id #job_id} => String
+    #   * {Types::SignPayloadResponse#job_owner #job_owner} => String
+    #   * {Types::SignPayloadResponse#metadata #metadata} => Hash&lt;String,String&gt;
+    #   * {Types::SignPayloadResponse#signature #signature} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.sign_payload({
+    #     profile_name: "ProfileName", # required
+    #     profile_owner: "AccountId",
+    #     payload: "data", # required
+    #     payload_format: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_owner #=> String
+    #   resp.metadata #=> Hash
+    #   resp.metadata["String"] #=> String
+    #   resp.signature #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/SignPayload AWS API Documentation
+    #
+    # @overload sign_payload(params = {})
+    # @param [Hash] params ({})
+    def sign_payload(params = {}, options = {})
+      req = build_request(:sign_payload, params)
+      req.send_request(options)
+    end
+
     # Initiates a signing job to be performed on the code provided. Signing
     # jobs are viewable by the `ListSigningJobs` operation for two years
     # after they are performed. Note the following requirements:
     #
     # * You must create an Amazon S3 source bucket. For more information,
-    #   see [Create a Bucket][1] in the *Amazon S3 Getting Started Guide*.
+    #   see [Creating a Bucket][1] in the *Amazon S3 Getting Started Guide*.
     #
     # * Your S3 source bucket must be version enabled.
     #
@@ -1171,12 +1262,12 @@ module Aws::Signer
     # after you call `StartSigningJob`.
     #
     # For a Java example that shows how to use this action, see
-    # [http://docs.aws.amazon.com/acm/latest/userguide/][2]
+    # [StartSigningJob][2].
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html
-    # [2]: http://docs.aws.amazon.com/acm/latest/userguide/
+    # [2]: https://docs.aws.amazon.com/signer/latest/developerguide/api-startsigningjob.html
     #
     # @option params [required, Types::Source] :source
     #   The S3 bucket that contains the object to sign or a BLOB that contains
@@ -1311,7 +1402,7 @@ module Aws::Signer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-signer'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -5527,9 +5527,6 @@ module Aws::Connect
     # `GetMetricDataV2` and `GetMetricData`, see [Historical metrics
     # definitions][2] in the *Amazon Connect Administrator's Guide*.
     #
-    # This API is not available in the Amazon Web Services GovCloud (US)
-    # Regions.
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricData.html
@@ -12116,7 +12113,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

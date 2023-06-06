@@ -108,6 +108,31 @@ module Aws::SQS
       include Aws::Structure
     end
 
+    # @!attribute [rw] task_handle
+    #   An identifier associated with a message movement task.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/CancelMessageMoveTaskRequest AWS API Documentation
+    #
+    class CancelMessageMoveTaskRequest < Struct.new(
+      :task_handle)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] approximate_number_of_messages_moved
+    #   The approximate number of messages already moved to the destination
+    #   queue.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/CancelMessageMoveTaskResult AWS API Documentation
+    #
+    class CancelMessageMoveTaskResult < Struct.new(
+      :approximate_number_of_messages_moved)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue whose messages' visibility is
     #   changed.
@@ -116,7 +141,7 @@ module Aws::SQS
     #   @return [String]
     #
     # @!attribute [rw] entries
-    #   A list of receipt handles of the messages for which the visibility
+    #   Lists the receipt handles of the messages for which the visibility
     #   timeout must be changed.
     #   @return [Array<Types::ChangeMessageVisibilityBatchRequestEntry>]
     #
@@ -129,19 +154,8 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    # Encloses a receipt handle and an entry id for each message in `
+    # Encloses a receipt handle and an entry ID for each message in `
     # ChangeMessageVisibilityBatch.`
-    #
-    # All of the following list parameters must be prefixed with
-    # `ChangeMessageVisibilityBatchRequestEntry.n`, where `n` is an integer
-    # value starting with `1`. For example, a parameter list for this action
-    # might look like this:
-    #
-    # `&ChangeMessageVisibilityBatchRequestEntry.1.Id=change_visibility_msg_2`
-    #
-    # `&ChangeMessageVisibilityBatchRequestEntry.1.ReceiptHandle=your_receipt_handle`
-    #
-    # `&ChangeMessageVisibilityBatchRequestEntry.1.VisibilityTimeout=45`
     #
     # @!attribute [rw] id
     #   An identifier for this particular receipt handle used to communicate
@@ -218,7 +232,7 @@ module Aws::SQS
     #   @return [String]
     #
     # @!attribute [rw] receipt_handle
-    #   The receipt handle associated with the message whose visibility
+    #   The receipt handle associated with the message, whose visibility
     #   timeout is changed. This parameter is returned by the `
     #   ReceiveMessage ` action.
     #   @return [String]
@@ -269,23 +283,33 @@ module Aws::SQS
     #   * `MessageRetentionPeriod` – The length of time, in seconds, for
     #     which Amazon SQS retains a message. Valid values: An integer from
     #     60 seconds (1 minute) to 1,209,600 seconds (14 days). Default:
-    #     345,600 (4 days).
+    #     345,600 (4 days). When you change a queue's attributes, the
+    #     change can take up to 60 seconds for most of the attributes to
+    #     propagate throughout the Amazon SQS system. Changes made to the
+    #     `MessageRetentionPeriod` attribute can take up to 15 minutes and
+    #     will impact existing messages in the queue potentially causing
+    #     them to be expired and deleted if the `MessageRetentionPeriod` is
+    #     reduced below the age of existing messages.
     #
     #   * `Policy` – The queue's policy. A valid Amazon Web Services
     #     policy. For more information about policy structure, see [Overview
-    #     of Amazon Web Services IAM Policies][1] in the *Amazon IAM User
-    #     Guide*.
+    #     of Amazon Web Services IAM Policies][1] in the *IAM User Guide*.
     #
     #   * `ReceiveMessageWaitTimeSeconds` – The length of time, in seconds,
     #     for which a ` ReceiveMessage ` action waits for a message to
     #     arrive. Valid values: An integer from 0 to 20 (seconds). Default:
     #     0.
     #
+    #   * `VisibilityTimeout` – The visibility timeout for the queue, in
+    #     seconds. Valid values: An integer from 0 to 43,200 (12 hours).
+    #     Default: 30. For more information about the visibility timeout,
+    #     see [Visibility Timeout][2] in the *Amazon SQS Developer Guide*.
+    #
+    #   The following attributes apply only to [dead-letter queues:][3]
+    #
     #   * `RedrivePolicy` – The string that includes the parameters for the
     #     dead-letter queue functionality of the source queue as a JSON
-    #     object. For more information about the redrive policy and
-    #     dead-letter queues, see [Using Amazon SQS Dead-Letter Queues][2]
-    #     in the *Amazon SQS Developer Guide*.
+    #     object. The parameters are as follows:
     #
     #     * `deadLetterTargetArn` – The Amazon Resource Name (ARN) of the
     #       dead-letter queue to which Amazon SQS moves messages after the
@@ -293,20 +317,42 @@ module Aws::SQS
     #
     #     * `maxReceiveCount` – The number of times a message is delivered
     #       to the source queue before being moved to the dead-letter queue.
-    #       When the `ReceiveCount` for a message exceeds the
+    #       Default: 10. When the `ReceiveCount` for a message exceeds the
     #       `maxReceiveCount` for a queue, Amazon SQS moves the message to
     #       the dead-letter-queue.
     #
-    #     <note markdown="1"> The dead-letter queue of a FIFO queue must also be a FIFO queue.
-    #     Similarly, the dead-letter queue of a standard queue must also be
-    #     a standard queue.
+    #   * `RedriveAllowPolicy` – The string that includes the parameters for
+    #     the permissions for the dead-letter queue redrive permission and
+    #     which source queues can specify dead-letter queues as a JSON
+    #     object. The parameters are as follows:
     #
-    #      </note>
+    #     * `redrivePermission` – The permission type that defines which
+    #       source queues can specify the current queue as the dead-letter
+    #       queue. Valid values are:
     #
-    #   * `VisibilityTimeout` – The visibility timeout for the queue, in
-    #     seconds. Valid values: An integer from 0 to 43,200 (12 hours).
-    #     Default: 30. For more information about the visibility timeout,
-    #     see [Visibility Timeout][3] in the *Amazon SQS Developer Guide*.
+    #       * `allowAll` – (Default) Any source queues in this Amazon Web
+    #         Services account in the same Region can specify this queue as
+    #         the dead-letter queue.
+    #
+    #       * `denyAll` – No source queues can specify this queue as the
+    #         dead-letter queue.
+    #
+    #       * `byQueue` – Only queues specified by the `sourceQueueArns`
+    #         parameter can specify this queue as the dead-letter queue.
+    #
+    #     * `sourceQueueArns` – The Amazon Resource Names (ARN)s of the
+    #       source queues that can specify this queue as the dead-letter
+    #       queue and redrive messages. You can specify this parameter only
+    #       when the `redrivePermission` parameter is set to `byQueue`. You
+    #       can specify up to 10 source queue ARNs. To allow more than 10
+    #       source queues to specify dead-letter queues, set the
+    #       `redrivePermission` parameter to `allowAll`.
+    #
+    #   <note markdown="1"> The dead-letter queue of a FIFO queue must also be a FIFO queue.
+    #   Similarly, the dead-letter queue of a standard queue must also be a
+    #   standard queue.
+    #
+    #    </note>
     #
     #   The following attributes apply only to [server-side-encryption][4]:
     #
@@ -325,11 +371,11 @@ module Aws::SQS
     #     hours). Default: 300 (5 minutes). A shorter time period provides
     #     better security but results in more calls to KMS which might incur
     #     charges after Free Tier. For more information, see [How Does the
-    #     Data Key Reuse Period Work?][8].
+    #     Data Key Reuse Period Work?][8]
     #
     #   * `SqsManagedSseEnabled` – Enables server-side queue encryption
     #     using SQS owned encryption keys. Only one server-side encryption
-    #     option is supported per queue (e.g. [SSE-KMS][9] or
+    #     option is supported per queue (for example, [SSE-KMS][9] or
     #     [SSE-SQS][10]).
     #
     #   The following attributes apply only to [FIFO (first-in-first-out)
@@ -407,8 +453,8 @@ module Aws::SQS
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html
-    #   [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
-    #   [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
+    #   [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
+    #   [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
     #   [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html
     #   [5]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms
     #   [6]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
@@ -448,7 +494,7 @@ module Aws::SQS
     #
     #    Cross-account permissions don't apply to this action. For more
     #   information, see [Grant cross-account permissions to a role and a
-    #   user name][3] in the *Amazon SQS Developer Guide*.
+    #   username][3] in the *Amazon SQS Developer Guide*.
     #
     #    </note>
     #
@@ -490,7 +536,7 @@ module Aws::SQS
     #   @return [String]
     #
     # @!attribute [rw] entries
-    #   A list of receipt handles for the messages to be deleted.
+    #   Lists the receipt handles for the messages to be deleted.
     #   @return [Array<Types::DeleteMessageBatchRequestEntry>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageBatchRequest AWS API Documentation
@@ -505,7 +551,7 @@ module Aws::SQS
     # Encloses a receipt handle and an identifier for it.
     #
     # @!attribute [rw] id
-    #   An identifier for this particular receipt handle. This is used to
+    #   The identifier for this particular receipt handle. This is used to
     #   communicate the result.
     #
     #   <note markdown="1"> The `Id`s of a batch request need to be unique within a request.
@@ -614,7 +660,7 @@ module Aws::SQS
     # @!attribute [rw] attribute_names
     #   A list of attributes for which to retrieve information.
     #
-    #   The `AttributeName.N` parameter is optional, but if you don't
+    #   The `AttributeNames` parameter is optional, but if you don't
     #   specify values for this parameter, the request returns empty
     #   results.
     #
@@ -628,10 +674,10 @@ module Aws::SQS
     #
     #   The `ApproximateNumberOfMessagesDelayed`,
     #   `ApproximateNumberOfMessagesNotVisible`, and
-    #   `ApproximateNumberOfMessagesVisible` metrics may not achieve
-    #   consistency until at least 1 minute after the producers stop sending
-    #   messages. This period is required for the queue metadata to reach
-    #   eventual consistency.
+    #   `ApproximateNumberOfMessages` metrics may not achieve consistency
+    #   until at least 1 minute after the producers stop sending messages.
+    #   This period is required for the queue metadata to reach eventual
+    #   consistency.
     #
     #   * `All` – Returns all values.
     #
@@ -663,7 +709,14 @@ module Aws::SQS
     #     message can contain before Amazon SQS rejects it.
     #
     #   * `MessageRetentionPeriod` – Returns the length of time, in seconds,
-    #     for which Amazon SQS retains a message.
+    #     for which Amazon SQS retains a message. When you change a queue's
+    #     attributes, the change can take up to 60 seconds for most of the
+    #     attributes to propagate throughout the Amazon SQS system. Changes
+    #     made to the `MessageRetentionPeriod` attribute can take up to 15
+    #     minutes and will impact existing messages in the queue potentially
+    #     causing them to be expired and deleted if the
+    #     `MessageRetentionPeriod` is reduced below the age of existing
+    #     messages.
     #
     #   * `Policy` – Returns the policy of the queue.
     #
@@ -673,11 +726,15 @@ module Aws::SQS
     #     seconds, for which the `ReceiveMessage` action waits for a message
     #     to arrive.
     #
+    #   * `VisibilityTimeout` – Returns the visibility timeout for the
+    #     queue. For more information about the visibility timeout, see
+    #     [Visibility Timeout][2] in the *Amazon SQS Developer Guide*.
+    #
+    #   The following attributes apply only to [dead-letter queues:][3]
+    #
     #   * `RedrivePolicy` – The string that includes the parameters for the
     #     dead-letter queue functionality of the source queue as a JSON
-    #     object. For more information about the redrive policy and
-    #     dead-letter queues, see [Using Amazon SQS Dead-Letter Queues][2]
-    #     in the *Amazon SQS Developer Guide*.
+    #     object. The parameters are as follows:
     #
     #     * `deadLetterTargetArn` – The Amazon Resource Name (ARN) of the
     #       dead-letter queue to which Amazon SQS moves messages after the
@@ -685,13 +742,42 @@ module Aws::SQS
     #
     #     * `maxReceiveCount` – The number of times a message is delivered
     #       to the source queue before being moved to the dead-letter queue.
-    #       When the `ReceiveCount` for a message exceeds the
+    #       Default: 10. When the `ReceiveCount` for a message exceeds the
     #       `maxReceiveCount` for a queue, Amazon SQS moves the message to
     #       the dead-letter-queue.
     #
-    #   * `VisibilityTimeout` – Returns the visibility timeout for the
-    #     queue. For more information about the visibility timeout, see
-    #     [Visibility Timeout][3] in the *Amazon SQS Developer Guide*.
+    #   * `RedriveAllowPolicy` – The string that includes the parameters for
+    #     the permissions for the dead-letter queue redrive permission and
+    #     which source queues can specify dead-letter queues as a JSON
+    #     object. The parameters are as follows:
+    #
+    #     * `redrivePermission` – The permission type that defines which
+    #       source queues can specify the current queue as the dead-letter
+    #       queue. Valid values are:
+    #
+    #       * `allowAll` – (Default) Any source queues in this Amazon Web
+    #         Services account in the same Region can specify this queue as
+    #         the dead-letter queue.
+    #
+    #       * `denyAll` – No source queues can specify this queue as the
+    #         dead-letter queue.
+    #
+    #       * `byQueue` – Only queues specified by the `sourceQueueArns`
+    #         parameter can specify this queue as the dead-letter queue.
+    #
+    #     * `sourceQueueArns` – The Amazon Resource Names (ARN)s of the
+    #       source queues that can specify this queue as the dead-letter
+    #       queue and redrive messages. You can specify this parameter only
+    #       when the `redrivePermission` parameter is set to `byQueue`. You
+    #       can specify up to 10 source queue ARNs. To allow more than 10
+    #       source queues to specify dead-letter queues, set the
+    #       `redrivePermission` parameter to `allowAll`.
+    #
+    #   <note markdown="1"> The dead-letter queue of a FIFO queue must also be a FIFO queue.
+    #   Similarly, the dead-letter queue of a standard queue must also be a
+    #   standard queue.
+    #
+    #    </note>
     #
     #   The following attributes apply only to [server-side-encryption][4]:
     #
@@ -706,8 +792,8 @@ module Aws::SQS
     #
     #   * `SqsManagedSseEnabled` – Returns information about whether the
     #     queue is using SSE-SQS encryption using SQS owned encryption keys.
-    #     Only one server-side encryption option is supported per queue
-    #     (e.g. [SSE-KMS][7] or [SSE-SQS][8]).
+    #     Only one server-side encryption option is supported per queue (for
+    #     example, [SSE-KMS][7] or [SSE-SQS][8]).
     #
     #   The following attributes apply only to [FIFO (first-in-first-out)
     #   queues][9]:
@@ -754,8 +840,8 @@ module Aws::SQS
     #
     #
     #   [1]: http://en.wikipedia.org/wiki/Unix_time
-    #   [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
-    #   [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
+    #   [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
+    #   [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
     #   [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html
     #   [5]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms
     #   [6]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-how-does-the-data-key-reuse-period-work
@@ -905,6 +991,106 @@ module Aws::SQS
       include Aws::Structure
     end
 
+    # @!attribute [rw] source_arn
+    #   The ARN of the queue whose message movement tasks are to be listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to include in the response. The
+    #   default is 1, which provides the most recent message movement task.
+    #   The upper limit is 10.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListMessageMoveTasksRequest AWS API Documentation
+    #
+    class ListMessageMoveTasksRequest < Struct.new(
+      :source_arn,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] results
+    #   A list of message movement tasks and their attributes.
+    #   @return [Array<Types::ListMessageMoveTasksResultEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListMessageMoveTasksResult AWS API Documentation
+    #
+    class ListMessageMoveTasksResult < Struct.new(
+      :results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the details of a message movement task.
+    #
+    # @!attribute [rw] task_handle
+    #   An identifier associated with a message movement task. When this
+    #   field is returned in the response of the `ListMessageMoveTasks`
+    #   action, it is only populated for tasks that are in RUNNING status.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the message movement task. Possible values are:
+    #   RUNNING, COMPLETED, CANCELLING, CANCELLED, and FAILED.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_arn
+    #   The ARN of the queue that contains the messages to be moved to
+    #   another queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_arn
+    #   The ARN of the destination queue if it has been specified in the
+    #   `StartMessageMoveTask` request. If a `DestinationArn` has not been
+    #   specified in the `StartMessageMoveTask` request, this field value
+    #   will be NULL.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_number_of_messages_per_second
+    #   The number of messages to be moved per second (the message movement
+    #   rate), if it has been specified in the `StartMessageMoveTask`
+    #   request. If a `MaxNumberOfMessagesPerSecond` has not been specified
+    #   in the `StartMessageMoveTask` request, this field value will be
+    #   NULL.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] approximate_number_of_messages_moved
+    #   The approximate number of messages already moved to the destination
+    #   queue.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] approximate_number_of_messages_to_move
+    #   The number of messages to be moved from the source queue. This
+    #   number is obtained at the time of starting the message movement
+    #   task.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failure_reason
+    #   The task failure reason (only included if the task status is
+    #   FAILED).
+    #   @return [String]
+    #
+    # @!attribute [rw] started_timestamp
+    #   The timestamp of starting the message movement task.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListMessageMoveTasksResultEntry AWS API Documentation
+    #
+    class ListMessageMoveTasksResultEntry < Struct.new(
+      :task_handle,
+      :status,
+      :source_arn,
+      :destination_arn,
+      :max_number_of_messages_per_second,
+      :approximate_number_of_messages_moved,
+      :approximate_number_of_messages_to_move,
+      :failure_reason,
+      :started_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] queue_url
     #   The URL of the queue.
     #   @return [String]
@@ -960,7 +1146,7 @@ module Aws::SQS
     #
     # @!attribute [rw] queue_urls
     #   A list of queue URLs, up to 1,000 entries, or the value of
-    #   MaxResults that you sent in the request.
+    #   `MaxResults` that you sent in the request.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -1070,7 +1256,7 @@ module Aws::SQS
     #
     # `Name`, `type`, `value` and the message body must not be empty or
     # null. All parts of the message attribute, including `Name`, `Type`,
-    # and `Value`, are part of the message size restriction (256 KB or
+    # and `Value`, are part of the message size restriction (256 KiB or
     # 262,144 bytes).
     #
     # @!attribute [rw] string_value
@@ -1181,7 +1367,7 @@ module Aws::SQS
     end
 
     # The specified action violates a limit. For example, `ReceiveMessage`
-    # returns this error if the maximum number of inflight messages is
+    # returns this error if the maximum number of in flight messages is
     # reached and `AddPermission` returns this error if the maximum number
     # of permissions for the queue is reached.
     #
@@ -1262,7 +1448,7 @@ module Aws::SQS
     #
     #   * `SenderId`
     #
-    #     * For an IAM user, returns the IAM user ID, for example
+    #     * For a user, returns the user ID, for example
     #       `ABCDEFGHI1JKLMNOPQ23R`.
     #
     #     * For an IAM role, returns the IAM role ID, for example
@@ -1273,7 +1459,8 @@ module Aws::SQS
     #
     #   * `SqsManagedSseEnabled` – Enables server-side queue encryption
     #     using SQS owned encryption keys. Only one server-side encryption
-    #     option is supported per queue (e.g. [SSE-KMS][2] or [SSE-SQS][3]).
+    #     option is supported per queue (for example, [SSE-KMS][2] or
+    #     [SSE-SQS][3]).
     #
     #   * `MessageDeduplicationId` – Returns the value provided by the
     #     producer that calls the ` SendMessage ` action.
@@ -1461,6 +1648,12 @@ module Aws::SQS
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # One or more specified resources don't exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
 
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue to which batched messages are sent.
@@ -1750,7 +1943,7 @@ module Aws::SQS
     #
     # @!attribute [rw] message_body
     #   The message to send. The minimum size is one character. The maximum
-    #   size is 256 KB.
+    #   size is 256 KiB.
     #
     #   A message can include only XML, JSON, and unformatted text. The
     #   following Unicode characters are allowed:
@@ -2005,7 +2198,13 @@ module Aws::SQS
     #   * `MessageRetentionPeriod` – The length of time, in seconds, for
     #     which Amazon SQS retains a message. Valid values: An integer
     #     representing seconds, from 60 (1 minute) to 1,209,600 (14 days).
-    #     Default: 345,600 (4 days).
+    #     Default: 345,600 (4 days). When you change a queue's attributes,
+    #     the change can take up to 60 seconds for most of the attributes to
+    #     propagate throughout the Amazon SQS system. Changes made to the
+    #     `MessageRetentionPeriod` attribute can take up to 15 minutes and
+    #     will impact existing messages in the queue potentially causing
+    #     them to be expired and deleted if the `MessageRetentionPeriod` is
+    #     reduced below the age of existing messages.
     #
     #   * `Policy` – The queue's policy. A valid Amazon Web Services
     #     policy. For more information about policy structure, see [Overview
@@ -2017,11 +2216,16 @@ module Aws::SQS
     #     arrive. Valid values: An integer from 0 to 20 (seconds). Default:
     #     0.
     #
+    #   * `VisibilityTimeout` – The visibility timeout for the queue, in
+    #     seconds. Valid values: An integer from 0 to 43,200 (12 hours).
+    #     Default: 30. For more information about the visibility timeout,
+    #     see [Visibility Timeout][2] in the *Amazon SQS Developer Guide*.
+    #
+    #   The following attributes apply only to [dead-letter queues:][3]
+    #
     #   * `RedrivePolicy` – The string that includes the parameters for the
     #     dead-letter queue functionality of the source queue as a JSON
-    #     object. For more information about the redrive policy and
-    #     dead-letter queues, see [Using Amazon SQS Dead-Letter Queues][2]
-    #     in the *Amazon SQS Developer Guide*.
+    #     object. The parameters are as follows:
     #
     #     * `deadLetterTargetArn` – The Amazon Resource Name (ARN) of the
     #       dead-letter queue to which Amazon SQS moves messages after the
@@ -2029,20 +2233,42 @@ module Aws::SQS
     #
     #     * `maxReceiveCount` – The number of times a message is delivered
     #       to the source queue before being moved to the dead-letter queue.
-    #       When the `ReceiveCount` for a message exceeds the
+    #       Default: 10. When the `ReceiveCount` for a message exceeds the
     #       `maxReceiveCount` for a queue, Amazon SQS moves the message to
     #       the dead-letter-queue.
     #
-    #     <note markdown="1"> The dead-letter queue of a FIFO queue must also be a FIFO queue.
-    #     Similarly, the dead-letter queue of a standard queue must also be
-    #     a standard queue.
+    #   * `RedriveAllowPolicy` – The string that includes the parameters for
+    #     the permissions for the dead-letter queue redrive permission and
+    #     which source queues can specify dead-letter queues as a JSON
+    #     object. The parameters are as follows:
     #
-    #      </note>
+    #     * `redrivePermission` – The permission type that defines which
+    #       source queues can specify the current queue as the dead-letter
+    #       queue. Valid values are:
     #
-    #   * `VisibilityTimeout` – The visibility timeout for the queue, in
-    #     seconds. Valid values: An integer from 0 to 43,200 (12 hours).
-    #     Default: 30. For more information about the visibility timeout,
-    #     see [Visibility Timeout][3] in the *Amazon SQS Developer Guide*.
+    #       * `allowAll` – (Default) Any source queues in this Amazon Web
+    #         Services account in the same Region can specify this queue as
+    #         the dead-letter queue.
+    #
+    #       * `denyAll` – No source queues can specify this queue as the
+    #         dead-letter queue.
+    #
+    #       * `byQueue` – Only queues specified by the `sourceQueueArns`
+    #         parameter can specify this queue as the dead-letter queue.
+    #
+    #     * `sourceQueueArns` – The Amazon Resource Names (ARN)s of the
+    #       source queues that can specify this queue as the dead-letter
+    #       queue and redrive messages. You can specify this parameter only
+    #       when the `redrivePermission` parameter is set to `byQueue`. You
+    #       can specify up to 10 source queue ARNs. To allow more than 10
+    #       source queues to specify dead-letter queues, set the
+    #       `redrivePermission` parameter to `allowAll`.
+    #
+    #   <note markdown="1"> The dead-letter queue of a FIFO queue must also be a FIFO queue.
+    #   Similarly, the dead-letter queue of a standard queue must also be a
+    #   standard queue.
+    #
+    #    </note>
     #
     #   The following attributes apply only to [server-side-encryption][4]:
     #
@@ -2065,7 +2291,7 @@ module Aws::SQS
     #
     #   * `SqsManagedSseEnabled` – Enables server-side queue encryption
     #     using SQS owned encryption keys. Only one server-side encryption
-    #     option is supported per queue (e.g. [SSE-KMS][9] or
+    #     option is supported per queue (for example, [SSE-KMS][9] or
     #     [SSE-SQS][10]).
     #
     #   The following attribute applies only to [FIFO (first-in-first-out)
@@ -2132,8 +2358,8 @@ module Aws::SQS
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html
-    #   [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
-    #   [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
+    #   [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
+    #   [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
     #   [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html
     #   [5]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms
     #   [6]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
@@ -2152,6 +2378,52 @@ module Aws::SQS
     class SetQueueAttributesRequest < Struct.new(
       :queue_url,
       :attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_arn
+    #   The ARN of the queue that contains the messages to be moved to
+    #   another queue. Currently, only dead-letter queue (DLQ) ARNs are
+    #   accepted.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_arn
+    #   The ARN of the queue that receives the moved messages. You can use
+    #   this field to specify the destination queue where you would like to
+    #   redrive messages. If this field is left blank, the messages will be
+    #   redriven back to their respective original source queues.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_number_of_messages_per_second
+    #   The number of messages to be moved per second (the message movement
+    #   rate). You can use this field to define a fixed message movement
+    #   rate. The maximum value for messages per second is 500. If this
+    #   field is left blank, the system will optimize the rate based on the
+    #   queue message backlog size, which may vary throughout the duration
+    #   of the message movement task.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/StartMessageMoveTaskRequest AWS API Documentation
+    #
+    class StartMessageMoveTaskRequest < Struct.new(
+      :source_arn,
+      :destination_arn,
+      :max_number_of_messages_per_second)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task_handle
+    #   An identifier associated with a message movement task. You can use
+    #   this identifier to cancel a specified message movement task using
+    #   the `CancelMessageMoveTask` action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/StartMessageMoveTaskResult AWS API Documentation
+    #
+    class StartMessageMoveTaskResult < Struct.new(
+      :task_handle)
       SENSITIVE = []
       include Aws::Structure
     end

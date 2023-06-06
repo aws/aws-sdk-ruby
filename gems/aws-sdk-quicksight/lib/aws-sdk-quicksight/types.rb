@@ -1163,14 +1163,14 @@ module Aws::QuickSight
     #
     # @!attribute [rw] credential_pair
     #   A username and password credential pair to be used to create the
-    #   imported data source. Leave this field blank if you are using an
-    #   Secrets Manager Secret to provide credentials.
+    #   imported data source. Keep this field blank if you are using a
+    #   Secrets Manager secret to provide credentials.
     #   @return [Types::AssetBundleImportJobDataSourceCredentialPair]
     #
     # @!attribute [rw] secret_arn
-    #   The ARN of the Secrets Manager Secret to be used to create the
-    #   imported data source leave this field blank if you aren't using a
-    #   Secret in place of a credential pair.
+    #   The ARN of the Secrets Manager secret that's used to create the
+    #   imported data source. Keep this field blank, unless you are using a
+    #   secret in place of a credential pair.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobDataSourceCredentials AWS API Documentation
@@ -1325,8 +1325,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] start_after_date_time
-    #   An override for the `StartAfterDateTime` of a `RefreshSchedule` to
-    #   ensure that the `StartAfterDateTime` is set to a time that takes
+    #   An override for the `StartAfterDateTime` of a `RefreshSchedule`.
+    #   Make sure that the `StartAfterDateTime` is set to a time that takes
     #   place in the future.
     #   @return [Time]
     #
@@ -1341,7 +1341,7 @@ module Aws::QuickSight
     end
 
     # An optional structure that configures resource ID overrides for the
-    # import job
+    # import job.
     #
     # @!attribute [rw] prefix_for_all_resources
     #   An option to request a CloudFormation variable for a prefix to be
@@ -1425,17 +1425,17 @@ module Aws::QuickSight
     # @!attribute [rw] subnet_ids
     #   A list of new subnet IDs for the VPC connection you are importing.
     #   This field is required if you are importing the VPC connection from
-    #   another Amazon Web Services account or region.
+    #   another Amazon Web Services account or Region.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
     #   A new security group ID for the VPC connection you are importing.
     #   This field is required if you are importing the VPC connection from
-    #   another Amazon Web Services account or region.
+    #   another Amazon Web Services account or Region.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dns_resolvers
-    #   An optional override of dns resolvers to be used by the VPC
+    #   An optional override of DNS resolvers to be used by the VPC
     #   connection.
     #   @return [Array<String>]
     #
@@ -1461,20 +1461,20 @@ module Aws::QuickSight
     # you want to import.
     #
     # @!attribute [rw] body
-    #   The bytes of the Base64 encoded asset bundle import zip file. This
-    #   file can't exceed 20MB.
+    #   The bytes of the base64 encoded asset bundle import zip file. This
+    #   file can't exceed 20 MB.
     #
-    #   If you are calling the APIs from the Amazon Web Services Java,
-    #   JavaScript, Python, or PHP SDKs, the SDK encodes Base64
+    #   If you are calling the API operations from the Amazon Web Services
+    #   SDK for Java, JavaScript, Python, or PHP, the SDK encodes base64
     #   automatically to allow the direct setting of the zip file's bytes.
-    #   If you are using a SDK of a different language or are receiving
-    #   related errors, try to Base64 encode your data.
+    #   If you are using an SDK for a different language or receiving
+    #   related errors, try to base64 encode your data.
     #   @return [String]
     #
     # @!attribute [rw] s3_uri
-    #   The Amazon S3 uri for an asset bundle import file that exists in an
+    #   The Amazon S3 URI for an asset bundle import file that exists in an
     #   Amazon S3 bucket that the caller has read access to. The file must
-    #   be a zip format file and can't exceed 20MB.
+    #   be a zip format file and can't exceed 20 MB.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportSource AWS API Documentation
@@ -1487,19 +1487,19 @@ module Aws::QuickSight
     end
 
     # A description of the import source that you provide at the start of an
-    # import job. This value is set to either `Body` or `S3Uri` depending on
-    # how the `StartAssetBundleImportJobRequest` is configured.
+    # import job. This value is set to either `Body` or `S3Uri`, depending
+    # on how the `StartAssetBundleImportJobRequest` is configured.
     #
     # @!attribute [rw] body
-    #   A HTTPS download URL for the provided asset bundle that you
+    #   An HTTPS download URL for the provided asset bundle that you
     #   optionally provided at the start of the import job. This URL is
-    #   valid for 5 minutes after issuance. Call
+    #   valid for five minutes after issuance. Call
     #   `DescribeAssetBundleExportJob` again for a fresh URL if needed. The
     #   downloaded asset bundle is a `.qs` zip file.
     #   @return [String]
     #
     # @!attribute [rw] s3_uri
-    #   The Amazon S3 uri that you provided at the start of the import job.
+    #   The Amazon S3 URI that you provided at the start of the import job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportSourceDescription AWS API Documentation
@@ -9661,7 +9661,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] job_status
-    #   Indicates tha status of a job through its queueing and execution.
+    #   Indicates the status of a job through its queuing and execution.
     #
     #   Poll this `DescribeAssetBundleExportApi` until `JobStatus` is either
     #   `SUCCESSFUL` or `FAILED`.
@@ -9772,10 +9772,10 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] job_status
-    #   Indicates tha status of a job through its queueing and execution.
+    #   Indicates the status of a job through its queuing and execution.
     #
-    #   Poll this `DescribeAssetBundleImport` API until `JobStatus` returns
-    #   one of the following values.
+    #   Poll the `DescribeAssetBundleImport` API until `JobStatus` returns
+    #   one of the following values:
     #
     #   * `SUCCESSFUL`
     #
@@ -20089,12 +20089,17 @@ module Aws::QuickSight
     #   The scope of the cell for conditional formatting.
     #   @return [Types::PivotTableConditionalFormattingScope]
     #
+    # @!attribute [rw] scopes
+    #   A list of cell scopes for conditional formatting.
+    #   @return [Array<Types::PivotTableConditionalFormattingScope>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PivotTableCellConditionalFormatting AWS API Documentation
     #
     class PivotTableCellConditionalFormatting < Struct.new(
       :field_id,
       :text_format,
-      :scope)
+      :scope,
+      :scopes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20200,6 +20205,51 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The collapse state options for the pivot table field options.
+    #
+    # @!attribute [rw] target
+    #   A tagged-union object that sets the collapse state.
+    #   @return [Types::PivotTableFieldCollapseStateTarget]
+    #
+    # @!attribute [rw] state
+    #   The state of the field target of a pivot table. Choose one of the
+    #   following options:
+    #
+    #   * `COLLAPSED`
+    #
+    #   * `EXPANDED`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PivotTableFieldCollapseStateOption AWS API Documentation
+    #
+    class PivotTableFieldCollapseStateOption < Struct.new(
+      :target,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The target of a pivot table field collapse state.
+    #
+    # @!attribute [rw] field_id
+    #   The field ID of the pivot table that the collapse state needs to be
+    #   set to.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_data_path_values
+    #   The data path of the pivot table's header. Used to set the collapse
+    #   state.
+    #   @return [Array<Types::DataPathValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PivotTableFieldCollapseStateTarget AWS API Documentation
+    #
+    class PivotTableFieldCollapseStateTarget < Struct.new(
+      :field_id,
+      :field_data_path_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The selected field options for the pivot table field options.
     #
     # @!attribute [rw] field_id
@@ -20234,11 +20284,16 @@ module Aws::QuickSight
     #   The data path options for the pivot table field options.
     #   @return [Array<Types::PivotTableDataPathOption>]
     #
+    # @!attribute [rw] collapse_state_options
+    #   The collapse state options for the pivot table field options.
+    #   @return [Array<Types::PivotTableFieldCollapseStateOption>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PivotTableFieldOptions AWS API Documentation
     #
     class PivotTableFieldOptions < Struct.new(
       :selected_field_options,
-      :data_path_options)
+      :data_path_options,
+      :collapse_state_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20820,6 +20875,10 @@ module Aws::QuickSight
     #   The legend display setup of the visual.
     #   @return [Types::LegendOptions]
     #
+    # @!attribute [rw] axes_range_scale
+    #   The axis behavior options of a radar chart.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RadarChartConfiguration AWS API Documentation
     #
     class RadarChartConfiguration < Struct.new(
@@ -20836,7 +20895,8 @@ module Aws::QuickSight
       :category_label_options,
       :color_axis,
       :color_label_options,
-      :legend)
+      :legend,
+      :axes_range_scale)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23947,8 +24007,8 @@ module Aws::QuickSight
     #   A Boolean that determines whether all dependencies of each resource
     #   ARN are recursively exported with the job. For example, say you
     #   provided a Dashboard ARN to the `ResourceArns` parameter. If you set
-    #   `IncludeAllDependencies` to `TRUE`, any theme, dataset, and
-    #   dataource resource that is a dependency of the dashboard is also
+    #   `IncludeAllDependencies` to `TRUE`, any theme, dataset, and data
+    #   source resource that is a dependency of the dashboard is also
     #   exported.
     #   @return [Boolean]
     #
@@ -24034,7 +24094,7 @@ module Aws::QuickSight
     #
     #   If you choose `DO_NOTHING`, failed import jobs will not attempt to
     #   roll back any asset changes caused by the failed job, possibly
-    #   leaving the Amazon QuickSight account in an inconsistent state.
+    #   keeping the Amazon QuickSight account in an inconsistent state.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StartAssetBundleImportJobRequest AWS API Documentation

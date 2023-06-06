@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2023-06-06)
+------------------
+
+* Feature - AWS Signer is launching Container Image Signing, a new feature that enables you to sign and verify container images. This feature enables you to validate that only container images you approve are used in your enterprise.
+
 1.41.0 (2023-05-31)
 ------------------
 

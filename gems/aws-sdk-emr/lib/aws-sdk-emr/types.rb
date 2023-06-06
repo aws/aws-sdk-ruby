@@ -5939,10 +5939,21 @@ module Aws::EMR
     #   @return [Integer]
     #
     # @!attribute [rw] allocation_strategy
-    #   Specifies the strategy to use in launching Spot Instance fleets.
-    #   Currently, the only option is capacity-optimized (the default),
-    #   which launches instances from Spot Instance pools with optimal
-    #   capacity for the number of instances that are launching.
+    #   Specifies one of the following strategies to launch Spot Instance
+    #   fleets: `price-capacity-optimized`, `capacity-optimized`,
+    #   `lowest-price`, or `diversified`. For more information on the
+    #   provisioning strategies, see [Allocation strategies for Spot
+    #   Instances][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    #
+    #   <note markdown="1"> When you launch a Spot Instance fleet with the old console, it
+    #   automatically launches with the `capacity-optimized` strategy. You
+    #   can't change the allocation strategy from the old console.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-allocation-strategy.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SpotProvisioningSpecification AWS API Documentation

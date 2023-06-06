@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2023-06-06)
+------------------
+
+* Feature - QuickSight support for pivot table field collapse state, radar chart range scale and multiple scope options in conditional formatting.
+
 1.81.0 (2023-05-31)
 ------------------
 
