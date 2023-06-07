@@ -676,6 +676,58 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # Creates an event stream, which is a subscription to real-time events,
+    # such as when profiles are created and updated through Amazon Connect
+    # Customer Profiles.
+    #
+    # Each event stream can be associated with only one Kinesis Data Stream
+    # destination in the same region and Amazon Web Services account as the
+    # customer profiles domain
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :uri
+    #   The StreamARN of the destination to deliver profile events to. For
+    #   example, arn:aws:kinesis:region:account-id:stream/stream-name
+    #
+    # @option params [required, String] :event_stream_name
+    #   The name of the event stream.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    # @return [Types::CreateEventStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateEventStreamResponse#event_stream_arn #event_stream_arn} => String
+    #   * {Types::CreateEventStreamResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_event_stream({
+    #     domain_name: "name", # required
+    #     uri: "string1To255", # required
+    #     event_stream_name: "name", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_stream_arn #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateEventStream AWS API Documentation
+    #
+    # @overload create_event_stream(params = {})
+    # @param [Hash] params ({})
+    def create_event_stream(params = {}, options = {})
+      req = build_request(:create_event_stream, params)
+      req.send_request(options)
+    end
+
     # Creates an integration workflow. An integration workflow is an async
     # process which ingests historic data and sets up an integration for
     # ongoing updates. The supported Amazon AppFlow sources are Salesforce,
@@ -1034,6 +1086,32 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def delete_domain(params = {}, options = {})
       req = build_request(:delete_domain, params)
+      req.send_request(options)
+    end
+
+    # Disables and deletes the specified event stream.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :event_stream_name
+    #   The name of the event stream
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_event_stream({
+    #     domain_name: "name", # required
+    #     event_stream_name: "name", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteEventStream AWS API Documentation
+    #
+    # @overload delete_event_stream(params = {})
+    # @param [Hash] params ({})
+    def delete_event_stream(params = {}, options = {})
+      req = build_request(:delete_event_stream, params)
       req.send_request(options)
     end
 
@@ -1470,6 +1548,55 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def get_domain(params = {}, options = {})
       req = build_request(:get_domain, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the specified event stream in a specific
+    # domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :event_stream_name
+    #   The name of the event stream provided during create operations.
+    #
+    # @return [Types::GetEventStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEventStreamResponse#domain_name #domain_name} => String
+    #   * {Types::GetEventStreamResponse#event_stream_arn #event_stream_arn} => String
+    #   * {Types::GetEventStreamResponse#created_at #created_at} => Time
+    #   * {Types::GetEventStreamResponse#state #state} => String
+    #   * {Types::GetEventStreamResponse#stopped_since #stopped_since} => Time
+    #   * {Types::GetEventStreamResponse#destination_details #destination_details} => Types::EventStreamDestinationDetails
+    #   * {Types::GetEventStreamResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_event_stream({
+    #     domain_name: "name", # required
+    #     event_stream_name: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_name #=> String
+    #   resp.event_stream_arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.state #=> String, one of "RUNNING", "STOPPED"
+    #   resp.stopped_since #=> Time
+    #   resp.destination_details.uri #=> String
+    #   resp.destination_details.status #=> String, one of "HEALTHY", "UNHEALTHY"
+    #   resp.destination_details.unhealthy_since #=> Time
+    #   resp.destination_details.message #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetEventStream AWS API Documentation
+    #
+    # @overload get_event_stream(params = {})
+    # @param [Hash] params ({})
+    def get_event_stream(params = {}, options = {})
+      req = build_request(:get_event_stream, params)
       req.send_request(options)
     end
 
@@ -2098,6 +2225,56 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def list_domains(params = {}, options = {})
       req = build_request(:list_domains, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of all the event streams in a specific domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects returned per page.
+    #
+    # @return [Types::ListEventStreamsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEventStreamsResponse#items #items} => Array&lt;Types::EventStreamSummary&gt;
+    #   * {Types::ListEventStreamsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_event_streams({
+    #     domain_name: "name", # required
+    #     next_token: "token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].domain_name #=> String
+    #   resp.items[0].event_stream_name #=> String
+    #   resp.items[0].event_stream_arn #=> String
+    #   resp.items[0].state #=> String, one of "RUNNING", "STOPPED"
+    #   resp.items[0].stopped_since #=> Time
+    #   resp.items[0].destination_summary.uri #=> String
+    #   resp.items[0].destination_summary.status #=> String, one of "HEALTHY", "UNHEALTHY"
+    #   resp.items[0].destination_summary.unhealthy_since #=> Time
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListEventStreams AWS API Documentation
+    #
+    # @overload list_event_streams(params = {})
+    # @param [Hash] params ({})
+    def list_event_streams(params = {}, options = {})
+      req = build_request(:list_event_streams, params)
       req.send_request(options)
     end
 
@@ -3523,7 +3700,7 @@ module Aws::CustomerProfiles
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

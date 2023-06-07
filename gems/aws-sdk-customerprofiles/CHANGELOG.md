@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2023-06-07)
+------------------
+
+* Feature - This release introduces event stream related APIs.
+
 1.29.0 (2023-06-01)
 ------------------
 

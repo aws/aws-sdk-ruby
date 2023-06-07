@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2023-06-07)
+------------------
+
+* Feature - AWS CloudFormation StackSets is updating the deployment experience for all stackset operations to skip suspended AWS accounts during deployments. StackSets will skip target AWS accounts that are suspended and set the Detailed Status of the corresponding stack instances as SKIPPED_SUSPENDED_ACCOUNT
+
 1.79.0 (2023-06-05)
 ------------------
 

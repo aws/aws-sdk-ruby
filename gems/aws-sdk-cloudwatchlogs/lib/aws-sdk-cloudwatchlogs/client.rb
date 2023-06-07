@@ -582,7 +582,7 @@ module Aws::CloudWatchLogs
     # enables CloudWatch Logs to decrypt this data whenever it is requested.
     #
     # If you attempt to associate a KMS key with the log group but the KMS
-    # keydoes not exist or the KMS key is disabled, you receive an
+    # key does not exist or the KMS key is disabled, you receive an
     # `InvalidParameterException` error.
     #
     # CloudWatch Logs supports only symmetric KMS keys. Do not associate an
@@ -680,6 +680,37 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def create_log_stream(params = {}, options = {})
       req = build_request(:create_log_stream, params)
+      req.send_request(options)
+    end
+
+    # Deletes a CloudWatch Logs account policy.
+    #
+    # To use this operation, you must be signed on with the
+    # `logs:DeleteDataProtectionPolicy` and `logs:DeleteAccountPolicy`
+    # permissions.
+    #
+    # @option params [required, String] :policy_name
+    #   The name of the policy to delete.
+    #
+    # @option params [required, String] :policy_type
+    #   The type of policy to delete. Currently, the only valid value is
+    #   `DATA_PROTECTION_POLICY`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_account_policy({
+    #     policy_name: "PolicyName", # required
+    #     policy_type: "DATA_PROTECTION_POLICY", # required, accepts DATA_PROTECTION_POLICY
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteAccountPolicy AWS API Documentation
+    #
+    # @overload delete_account_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_account_policy(params = {}, options = {})
+      req = build_request(:delete_account_policy, params)
       req.send_request(options)
     end
 
@@ -929,6 +960,58 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Returns a list of all CloudWatch Logs account policies in the account.
+    #
+    # @option params [required, String] :policy_type
+    #   Use this parameter to limit the returned policies to only the policies
+    #   that match the policy type that you specify. Currently, the only valid
+    #   value is `DATA_PROTECTION_POLICY`.
+    #
+    # @option params [String] :policy_name
+    #   Use this parameter to limit the returned policies to only the policy
+    #   with the name that you specify.
+    #
+    # @option params [Array<String>] :account_identifiers
+    #   If you are using an account that is set up as a monitoring account for
+    #   CloudWatch unified cross-account observability, you can use this to
+    #   specify the account ID of a source account. If you do, the operation
+    #   returns the account policy for the specified account. Currently, you
+    #   can specify only one account ID in this parameter.
+    #
+    #   If you omit this parameter, only the policy in the current account is
+    #   returned.
+    #
+    # @return [Types::DescribeAccountPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAccountPoliciesResponse#account_policies #account_policies} => Array&lt;Types::AccountPolicy&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_account_policies({
+    #     policy_type: "DATA_PROTECTION_POLICY", # required, accepts DATA_PROTECTION_POLICY
+    #     policy_name: "PolicyName",
+    #     account_identifiers: ["AccountId"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_policies #=> Array
+    #   resp.account_policies[0].policy_name #=> String
+    #   resp.account_policies[0].policy_document #=> String
+    #   resp.account_policies[0].last_updated_time #=> Integer
+    #   resp.account_policies[0].policy_type #=> String, one of "DATA_PROTECTION_POLICY"
+    #   resp.account_policies[0].scope #=> String, one of "ALL"
+    #   resp.account_policies[0].account_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeAccountPolicies AWS API Documentation
+    #
+    # @overload describe_account_policies(params = {})
+    # @param [Hash] params ({})
+    def describe_account_policies(params = {}, options = {})
+      req = build_request(:describe_account_policies, params)
+      req.send_request(options)
+    end
+
     # Lists all your destinations. The results are ASCII-sorted by
     # destination name.
     #
@@ -1078,6 +1161,9 @@ module Aws::CloudWatchLogs
     #   log groups named `FooBar`, `aws/Foo`, and `GroupFoo` would match, but
     #   `foo`, `F/o/o` and `Froo` would not match.
     #
+    #   If you specify `logGroupNamePattern` in your request, then only `arn`,
+    #   `creationTime`, and `logGroupName` are included in the response.
+    #
     #   <note markdown="1"> `logGroupNamePattern` and `logGroupNamePrefix` are mutually exclusive.
     #   Only one of these parameters can be passed.
     #
@@ -1100,12 +1186,6 @@ module Aws::CloudWatchLogs
     #   null value, the operation returns all log groups in the monitoring
     #   account and all log groups in all source accounts that are linked to
     #   the monitoring account.
-    #
-    #   <note markdown="1"> If you specify `includeLinkedAccounts` in your request, then
-    #   `metricFilterCount`, `retentionInDays`, and `storedBytes` are not
-    #   included in the response.
-    #
-    #    </note>
     #
     # @return [Types::DescribeLogGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1136,6 +1216,8 @@ module Aws::CloudWatchLogs
     #   resp.log_groups[0].stored_bytes #=> Integer
     #   resp.log_groups[0].kms_key_id #=> String
     #   resp.log_groups[0].data_protection_status #=> String, one of "ACTIVATED", "DELETED", "ARCHIVED", "DISABLED"
+    #   resp.log_groups[0].inherited_properties #=> Array
+    #   resp.log_groups[0].inherited_properties[0] #=> String, one of "ACCOUNT_DATA_PROTECTION"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogGroups AWS API Documentation
@@ -1566,7 +1648,7 @@ module Aws::CloudWatchLogs
     # log events or filter the results using a filter pattern, a time range,
     # and the name of the log stream.
     #
-    # You must have the `logs;FilterLogEvents` permission to perform this
+    # You must have the `logs:FilterLogEvents` permission to perform this
     # operation.
     #
     # You can specify the log group to search by using either
@@ -2137,6 +2219,141 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Creates an account-level data protection policy that applies to all
+    # log groups in the account. A data protection policy can help safeguard
+    # sensitive data that's ingested by your log groups by auditing and
+    # masking the sensitive log data. Each account can have only one
+    # account-level policy.
+    #
+    # Sensitive data is detected and masked when it is ingested into a log
+    # group. When you set a data protection policy, log events ingested into
+    # the log groups before that time are not masked.
+    #
+    # If you use `PutAccountPolicy` to create a data protection policy for
+    # your whole account, it applies to both existing log groups and all log
+    # groups that are created later in this account. The account policy is
+    # applied to existing log groups with eventual consistency. It might
+    # take up to 5 minutes before sensitive data in existing log groups
+    # begins to be masked.
+    #
+    # By default, when a user views a log event that includes masked data,
+    # the sensitive data is replaced by asterisks. A user who has the
+    # `logs:Unmask` permission can use a [GetLogEvents][1] or
+    # [FilterLogEvents][2] operation with the `unmask` parameter set to
+    # `true` to view the unmasked log events. Users with the `logs:Unmask`
+    # can also view unmasked data in the CloudWatch Logs console by running
+    # a CloudWatch Logs Insights query with the `unmask` query command.
+    #
+    # For more information, including a list of types of data that can be
+    # audited and masked, see [Protect sensitive log data with masking][3].
+    #
+    # To use the `PutAccountPolicy` operation, you must be signed on with
+    # the `logs:PutDataProtectionPolicy` and `logs:PutAccountPolicy`
+    # permissions.
+    #
+    # The `PutAccountPolicy` operation applies to all log groups in the
+    # account. You can also use [PutDataProtectionPolicy][4] to create a
+    # data protection policy that applies to just one log group. If a log
+    # group has its own data protection policy and the account also has an
+    # account-level data protection policy, then the two policies are
+    # cumulative. Any sensitive term specified in either policy is masked.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogEvents.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_FilterLogEvents.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data.html
+    # [4]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDataProtectionPolicy.html
+    #
+    # @option params [required, String] :policy_name
+    #   A name for the policy. This must be unique within the account.
+    #
+    # @option params [required, String] :policy_document
+    #   Specify the data protection policy, in JSON.
+    #
+    #   This policy must include two JSON blocks:
+    #
+    #   * The first block must include both a `DataIdentifer` array and an
+    #     `Operation` property with an `Audit` action. The `DataIdentifer`
+    #     array lists the types of sensitive data that you want to mask. For
+    #     more information about the available options, see [Types of data
+    #     that you can mask][1].
+    #
+    #     The `Operation` property with an `Audit` action is required to find
+    #     the sensitive data terms. This `Audit` action must contain a
+    #     `FindingsDestination` object. You can optionally use that
+    #     `FindingsDestination` object to list one or more destinations to
+    #     send audit findings to. If you specify destinations such as log
+    #     groups, Kinesis Data Firehose streams, and S3 buckets, they must
+    #     already exist.
+    #
+    #   * The second block must include both a `DataIdentifer` array and an
+    #     `Operation` property with an `Deidentify` action. The
+    #     `DataIdentifer` array must exactly match the `DataIdentifer` array
+    #     in the first block of the policy.
+    #
+    #     The `Operation` property with the `Deidentify` action is what
+    #     actually masks the data, and it must contain the ` "MaskConfig":
+    #     \{\}` object. The ` "MaskConfig": \{\}` object must be empty.
+    #
+    #   For an example data protection policy, see the **Examples** section on
+    #   this page.
+    #
+    #   The contents of the two `DataIdentifer` arrays must match exactly.
+    #
+    #   In addition to the two JSON blocks, the `policyDocument` can also
+    #   include `Name`, `Description`, and `Version` fields. The `Name` is
+    #   different than the operation's `policyName` parameter, and is used as
+    #   a dimension when CloudWatch Logs reports audit findings metrics to
+    #   CloudWatch.
+    #
+    #   The JSON specified in `policyDocument` can be up to 30,720 characters.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data-types.html
+    #
+    # @option params [required, String] :policy_type
+    #   Currently the only valid value for this parameter is
+    #   `DATA_PROTECTION_POLICY`.
+    #
+    # @option params [String] :scope
+    #   Currently the only valid value for this parameter is `GLOBAL`, which
+    #   specifies that the data protection policy applies to all log groups in
+    #   the account. If you omit this parameter, the default of `GLOBAL` is
+    #   used.
+    #
+    # @return [Types::PutAccountPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutAccountPolicyResponse#account_policy #account_policy} => Types::AccountPolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_account_policy({
+    #     policy_name: "PolicyName", # required
+    #     policy_document: "AccountPolicyDocument", # required
+    #     policy_type: "DATA_PROTECTION_POLICY", # required, accepts DATA_PROTECTION_POLICY
+    #     scope: "ALL", # accepts ALL
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_policy.policy_name #=> String
+    #   resp.account_policy.policy_document #=> String
+    #   resp.account_policy.last_updated_time #=> Integer
+    #   resp.account_policy.policy_type #=> String, one of "DATA_PROTECTION_POLICY"
+    #   resp.account_policy.scope #=> String, one of "ALL"
+    #   resp.account_policy.account_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutAccountPolicy AWS API Documentation
+    #
+    # @overload put_account_policy(params = {})
+    # @param [Hash] params ({})
+    def put_account_policy(params = {}, options = {})
+      req = build_request(:put_account_policy, params)
+      req.send_request(options)
+    end
+
     # Creates a data protection policy for the specified log group. A data
     # protection policy can help safeguard sensitive data that's ingested
     # by the log group by auditing and masking the sensitive log data.
@@ -2156,11 +2373,21 @@ module Aws::CloudWatchLogs
     # For more information, including a list of types of data that can be
     # audited and masked, see [Protect sensitive log data with masking][3].
     #
+    # The `PutDataProtectionPolicy` operation applies to only the specified
+    # log group. You can also use [PutAccountPolicy][4] to create an
+    # account-level data protection policy that applies to all log groups in
+    # the account, including both existing log groups and log groups that
+    # are created level. If a log group has its own data protection policy
+    # and the account also has an account-level data protection policy, then
+    # the two policies are cumulative. Any sensitive term specified in
+    # either policy is masked.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogEvents.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_FilterLogEvents.html
     # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data.html
+    # [4]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutAccountPolicy.html
     #
     # @option params [required, String] :log_group_identifier
     #   Specify either the log group name or log group ARN.
@@ -2196,7 +2423,14 @@ module Aws::CloudWatchLogs
     #   For an example data protection policy, see the **Examples** section on
     #   this page.
     #
-    #   The contents of two `DataIdentifer` arrays must match exactly.
+    #   The contents of the two `DataIdentifer` arrays must match exactly.
+    #
+    #   In addition to the two JSON blocks, the `policyDocument` can also
+    #   include `Name`, `Description`, and `Version` fields. The `Name` is
+    #   used as a dimension when CloudWatch Logs reports audit findings
+    #   metrics to CloudWatch.
+    #
+    #   The JSON specified in `policyDocument` can be up to 30,720 characters.
     #
     #
     #
@@ -2328,11 +2562,11 @@ module Aws::CloudWatchLogs
     # @option params [Boolean] :force_update
     #   Specify true if you are updating an existing destination policy to
     #   grant permission to an organization ID instead of granting permission
-    #   to individual AWS accounts. Before you update a destination policy
-    #   this way, you must first update the subscription filters in the
-    #   accounts that send logs to this destination. If you do not, the
-    #   subscription filters might stop working. By specifying `true` for
-    #   `forceUpdate`, you are affirming that you have already updated the
+    #   to individual Amazon Web Services accounts. Before you update a
+    #   destination policy this way, you must first update the subscription
+    #   filters in the accounts that send logs to this destination. If you do
+    #   not, the subscription filters might stop working. By specifying `true`
+    #   for `forceUpdate`, you are affirming that you have already updated the
     #   subscription filters. For more information, see [ Updating an existing
     #   cross-account subscription][1]
     #
@@ -2391,6 +2625,8 @@ module Aws::CloudWatchLogs
     #
     # * A batch of log events in a single request cannot span more than 24
     #   hours. Otherwise, the operation fails.
+    #
+    # * Each log event can be no larger than 256 KB.
     #
     # * The maximum number of log events in a batch is 10,000.
     #
@@ -2708,7 +2944,7 @@ module Aws::CloudWatchLogs
     # @option params [required, Integer] :retention_in_days
     #   The number of days to retain the log events in the specified log
     #   group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180,
-    #   365, 400, 545, 731, 1827, 2192, 2557, 2922, 3288, and 3653.
+    #   365, 400, 545, 731, 1096, 1827, 2192, 2557, 2922, 3288, and 3653.
     #
     #   To set a log group so that its log events do not expire, use
     #   [DeleteRetentionPolicy][1].
@@ -2760,8 +2996,9 @@ module Aws::CloudWatchLogs
     # it. If you are updating an existing filter, you must specify the
     # correct name in `filterName`.
     #
-    # To perform a `PutSubscriptionFilter` operation, you must also have the
-    # `iam:PassRole` permission.
+    # To perform a `PutSubscriptionFilter` operation for any destination
+    # except a Lambda function, you must also have the `iam:PassRole`
+    # permission.
     #
     #
     #
@@ -2848,7 +3085,7 @@ module Aws::CloudWatchLogs
     #
     # For more information, see [CloudWatch Logs Insights Query Syntax][1].
     #
-    # Queries time out after 15 minutes of runtime. If your queries are
+    # Queries time out after 60 minutes of runtime. If your queries are
     # timing out, reduce the time range being searched or partition your
     # query into a number of queries.
     #
@@ -2858,7 +3095,7 @@ module Aws::CloudWatchLogs
     # observability][2]. For a cross-account `StartQuery` operation, the
     # query definition must be defined in the monitoring account.
     #
-    # You can have up to 20 concurrent CloudWatch Logs insights queries,
+    # You can have up to 30 concurrent CloudWatch Logs insights queries,
     # including queries that have been added to dashboards.
     #
     #
@@ -3224,7 +3461,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

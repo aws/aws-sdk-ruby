@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2023-06-07)
+------------------
+
+* Feature - EMR on EKS adds support for log rotation of Spark container logs with EMR-6.11.0 onwards, to the StartJobRun API.
+
 1.21.0 (2023-05-31)
 ------------------
 

@@ -53,6 +53,20 @@ module Aws::CustomerProfiles
       end
     end
 
+    class CreateEventStream
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CustomerProfiles::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateIntegrationWorkflow
       def self.build(context)
         unless context.config.regional_endpoint
@@ -96,6 +110,20 @@ module Aws::CustomerProfiles
     end
 
     class DeleteDomain
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CustomerProfiles::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DeleteEventStream
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -236,6 +264,20 @@ module Aws::CustomerProfiles
     end
 
     class GetDomain
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CustomerProfiles::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetEventStream
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -390,6 +432,20 @@ module Aws::CustomerProfiles
     end
 
     class ListDomains
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CustomerProfiles::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListEventStreams
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2023-06-07)
+------------------
+
+* Feature - This change adds support for account level data protection policies using 3 new APIs, PutAccountPolicy, DeleteAccountPolicy and DescribeAccountPolicy. DescribeLogGroup API has been modified to indicate if account level policy is applied to the LogGroup via "inheritedProperties" list in the response.
+
 1.63.0 (2023-05-31)
 ------------------
 

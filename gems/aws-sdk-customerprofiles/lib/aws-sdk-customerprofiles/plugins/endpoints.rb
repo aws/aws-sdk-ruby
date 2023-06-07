@@ -62,6 +62,8 @@ module Aws::CustomerProfiles
             Aws::CustomerProfiles::Endpoints::CreateCalculatedAttributeDefinition.build(context)
           when :create_domain
             Aws::CustomerProfiles::Endpoints::CreateDomain.build(context)
+          when :create_event_stream
+            Aws::CustomerProfiles::Endpoints::CreateEventStream.build(context)
           when :create_integration_workflow
             Aws::CustomerProfiles::Endpoints::CreateIntegrationWorkflow.build(context)
           when :create_profile
@@ -70,6 +72,8 @@ module Aws::CustomerProfiles
             Aws::CustomerProfiles::Endpoints::DeleteCalculatedAttributeDefinition.build(context)
           when :delete_domain
             Aws::CustomerProfiles::Endpoints::DeleteDomain.build(context)
+          when :delete_event_stream
+            Aws::CustomerProfiles::Endpoints::DeleteEventStream.build(context)
           when :delete_integration
             Aws::CustomerProfiles::Endpoints::DeleteIntegration.build(context)
           when :delete_profile
@@ -90,6 +94,8 @@ module Aws::CustomerProfiles
             Aws::CustomerProfiles::Endpoints::GetCalculatedAttributeForProfile.build(context)
           when :get_domain
             Aws::CustomerProfiles::Endpoints::GetDomain.build(context)
+          when :get_event_stream
+            Aws::CustomerProfiles::Endpoints::GetEventStream.build(context)
           when :get_identity_resolution_job
             Aws::CustomerProfiles::Endpoints::GetIdentityResolutionJob.build(context)
           when :get_integration
@@ -112,6 +118,8 @@ module Aws::CustomerProfiles
             Aws::CustomerProfiles::Endpoints::ListCalculatedAttributesForProfile.build(context)
           when :list_domains
             Aws::CustomerProfiles::Endpoints::ListDomains.build(context)
+          when :list_event_streams
+            Aws::CustomerProfiles::Endpoints::ListEventStreams.build(context)
           when :list_identity_resolution_jobs
             Aws::CustomerProfiles::Endpoints::ListIdentityResolutionJobs.build(context)
           when :list_integrations

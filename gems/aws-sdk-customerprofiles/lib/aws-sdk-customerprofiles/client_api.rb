@@ -45,6 +45,8 @@ module Aws::CustomerProfiles
     CreateCalculatedAttributeDefinitionResponse = Shapes::StructureShape.new(name: 'CreateCalculatedAttributeDefinitionResponse')
     CreateDomainRequest = Shapes::StructureShape.new(name: 'CreateDomainRequest')
     CreateDomainResponse = Shapes::StructureShape.new(name: 'CreateDomainResponse')
+    CreateEventStreamRequest = Shapes::StructureShape.new(name: 'CreateEventStreamRequest')
+    CreateEventStreamResponse = Shapes::StructureShape.new(name: 'CreateEventStreamResponse')
     CreateIntegrationWorkflowRequest = Shapes::StructureShape.new(name: 'CreateIntegrationWorkflowRequest')
     CreateIntegrationWorkflowResponse = Shapes::StructureShape.new(name: 'CreateIntegrationWorkflowResponse')
     CreateProfileRequest = Shapes::StructureShape.new(name: 'CreateProfileRequest')
@@ -56,6 +58,8 @@ module Aws::CustomerProfiles
     DeleteCalculatedAttributeDefinitionResponse = Shapes::StructureShape.new(name: 'DeleteCalculatedAttributeDefinitionResponse')
     DeleteDomainRequest = Shapes::StructureShape.new(name: 'DeleteDomainRequest')
     DeleteDomainResponse = Shapes::StructureShape.new(name: 'DeleteDomainResponse')
+    DeleteEventStreamRequest = Shapes::StructureShape.new(name: 'DeleteEventStreamRequest')
+    DeleteEventStreamResponse = Shapes::StructureShape.new(name: 'DeleteEventStreamResponse')
     DeleteIntegrationRequest = Shapes::StructureShape.new(name: 'DeleteIntegrationRequest')
     DeleteIntegrationResponse = Shapes::StructureShape.new(name: 'DeleteIntegrationResponse')
     DeleteProfileKeyRequest = Shapes::StructureShape.new(name: 'DeleteProfileKeyRequest')
@@ -69,10 +73,16 @@ module Aws::CustomerProfiles
     DeleteWorkflowRequest = Shapes::StructureShape.new(name: 'DeleteWorkflowRequest')
     DeleteWorkflowResponse = Shapes::StructureShape.new(name: 'DeleteWorkflowResponse')
     DestinationField = Shapes::StringShape.new(name: 'DestinationField')
+    DestinationSummary = Shapes::StructureShape.new(name: 'DestinationSummary')
     DomainList = Shapes::ListShape.new(name: 'DomainList')
     DomainStats = Shapes::StructureShape.new(name: 'DomainStats')
     Double = Shapes::FloatShape.new(name: 'Double')
     Double0To1 = Shapes::FloatShape.new(name: 'Double0To1')
+    EventStreamDestinationDetails = Shapes::StructureShape.new(name: 'EventStreamDestinationDetails')
+    EventStreamDestinationStatus = Shapes::StringShape.new(name: 'EventStreamDestinationStatus')
+    EventStreamState = Shapes::StringShape.new(name: 'EventStreamState')
+    EventStreamSummary = Shapes::StructureShape.new(name: 'EventStreamSummary')
+    EventStreamSummaryList = Shapes::ListShape.new(name: 'EventStreamSummaryList')
     ExportingConfig = Shapes::StructureShape.new(name: 'ExportingConfig')
     ExportingLocation = Shapes::StructureShape.new(name: 'ExportingLocation')
     FieldContentType = Shapes::StringShape.new(name: 'FieldContentType')
@@ -92,6 +102,8 @@ module Aws::CustomerProfiles
     GetCalculatedAttributeForProfileResponse = Shapes::StructureShape.new(name: 'GetCalculatedAttributeForProfileResponse')
     GetDomainRequest = Shapes::StructureShape.new(name: 'GetDomainRequest')
     GetDomainResponse = Shapes::StructureShape.new(name: 'GetDomainResponse')
+    GetEventStreamRequest = Shapes::StructureShape.new(name: 'GetEventStreamRequest')
+    GetEventStreamResponse = Shapes::StructureShape.new(name: 'GetEventStreamResponse')
     GetIdentityResolutionJobRequest = Shapes::StructureShape.new(name: 'GetIdentityResolutionJobRequest')
     GetIdentityResolutionJobResponse = Shapes::StructureShape.new(name: 'GetIdentityResolutionJobResponse')
     GetIntegrationRequest = Shapes::StructureShape.new(name: 'GetIntegrationRequest')
@@ -130,6 +142,8 @@ module Aws::CustomerProfiles
     ListDomainItem = Shapes::StructureShape.new(name: 'ListDomainItem')
     ListDomainsRequest = Shapes::StructureShape.new(name: 'ListDomainsRequest')
     ListDomainsResponse = Shapes::StructureShape.new(name: 'ListDomainsResponse')
+    ListEventStreamsRequest = Shapes::StructureShape.new(name: 'ListEventStreamsRequest')
+    ListEventStreamsResponse = Shapes::StructureShape.new(name: 'ListEventStreamsResponse')
     ListIdentityResolutionJobsRequest = Shapes::StructureShape.new(name: 'ListIdentityResolutionJobsRequest')
     ListIdentityResolutionJobsResponse = Shapes::StructureShape.new(name: 'ListIdentityResolutionJobsResponse')
     ListIntegrationItem = Shapes::StructureShape.new(name: 'ListIntegrationItem')
@@ -420,6 +434,16 @@ module Aws::CustomerProfiles
     CreateDomainResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateDomainResponse.struct_class = Types::CreateDomainResponse
 
+    CreateEventStreamRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    CreateEventStreamRequest.add_member(:uri, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "Uri"))
+    CreateEventStreamRequest.add_member(:event_stream_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "EventStreamName"))
+    CreateEventStreamRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateEventStreamRequest.struct_class = Types::CreateEventStreamRequest
+
+    CreateEventStreamResponse.add_member(:event_stream_arn, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "EventStreamArn"))
+    CreateEventStreamResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateEventStreamResponse.struct_class = Types::CreateEventStreamResponse
+
     CreateIntegrationWorkflowRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     CreateIntegrationWorkflowRequest.add_member(:workflow_type, Shapes::ShapeRef.new(shape: WorkflowType, required: true, location_name: "WorkflowType"))
     CreateIntegrationWorkflowRequest.add_member(:integration_config, Shapes::ShapeRef.new(shape: IntegrationConfig, required: true, location_name: "IntegrationConfig"))
@@ -473,6 +497,12 @@ module Aws::CustomerProfiles
     DeleteDomainResponse.add_member(:message, Shapes::ShapeRef.new(shape: message, required: true, location_name: "Message"))
     DeleteDomainResponse.struct_class = Types::DeleteDomainResponse
 
+    DeleteEventStreamRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    DeleteEventStreamRequest.add_member(:event_stream_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "EventStreamName"))
+    DeleteEventStreamRequest.struct_class = Types::DeleteEventStreamRequest
+
+    DeleteEventStreamResponse.struct_class = Types::DeleteEventStreamResponse
+
     DeleteIntegrationRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     DeleteIntegrationRequest.add_member(:uri, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "Uri"))
     DeleteIntegrationRequest.struct_class = Types::DeleteIntegrationRequest
@@ -518,6 +548,11 @@ module Aws::CustomerProfiles
 
     DeleteWorkflowResponse.struct_class = Types::DeleteWorkflowResponse
 
+    DestinationSummary.add_member(:uri, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "Uri"))
+    DestinationSummary.add_member(:status, Shapes::ShapeRef.new(shape: EventStreamDestinationStatus, required: true, location_name: "Status"))
+    DestinationSummary.add_member(:unhealthy_since, Shapes::ShapeRef.new(shape: timestamp, location_name: "UnhealthySince"))
+    DestinationSummary.struct_class = Types::DestinationSummary
+
     DomainList.member = Shapes::ShapeRef.new(shape: ListDomainItem)
 
     DomainStats.add_member(:profile_count, Shapes::ShapeRef.new(shape: long, location_name: "ProfileCount"))
@@ -525,6 +560,23 @@ module Aws::CustomerProfiles
     DomainStats.add_member(:object_count, Shapes::ShapeRef.new(shape: long, location_name: "ObjectCount"))
     DomainStats.add_member(:total_size, Shapes::ShapeRef.new(shape: long, location_name: "TotalSize"))
     DomainStats.struct_class = Types::DomainStats
+
+    EventStreamDestinationDetails.add_member(:uri, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "Uri"))
+    EventStreamDestinationDetails.add_member(:status, Shapes::ShapeRef.new(shape: EventStreamDestinationStatus, required: true, location_name: "Status"))
+    EventStreamDestinationDetails.add_member(:unhealthy_since, Shapes::ShapeRef.new(shape: timestamp, location_name: "UnhealthySince"))
+    EventStreamDestinationDetails.add_member(:message, Shapes::ShapeRef.new(shape: string1To1000, location_name: "Message"))
+    EventStreamDestinationDetails.struct_class = Types::EventStreamDestinationDetails
+
+    EventStreamSummary.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "DomainName"))
+    EventStreamSummary.add_member(:event_stream_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "EventStreamName"))
+    EventStreamSummary.add_member(:event_stream_arn, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "EventStreamArn"))
+    EventStreamSummary.add_member(:state, Shapes::ShapeRef.new(shape: EventStreamState, required: true, location_name: "State"))
+    EventStreamSummary.add_member(:stopped_since, Shapes::ShapeRef.new(shape: timestamp, location_name: "StoppedSince"))
+    EventStreamSummary.add_member(:destination_summary, Shapes::ShapeRef.new(shape: DestinationSummary, location_name: "DestinationSummary"))
+    EventStreamSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    EventStreamSummary.struct_class = Types::EventStreamSummary
+
+    EventStreamSummaryList.member = Shapes::ShapeRef.new(shape: EventStreamSummary)
 
     ExportingConfig.add_member(:s3_exporting, Shapes::ShapeRef.new(shape: S3ExportingConfig, location_name: "S3Exporting"))
     ExportingConfig.struct_class = Types::ExportingConfig
@@ -623,6 +675,19 @@ module Aws::CustomerProfiles
     GetDomainResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastUpdatedAt"))
     GetDomainResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     GetDomainResponse.struct_class = Types::GetDomainResponse
+
+    GetEventStreamRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    GetEventStreamRequest.add_member(:event_stream_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "EventStreamName"))
+    GetEventStreamRequest.struct_class = Types::GetEventStreamRequest
+
+    GetEventStreamResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "DomainName"))
+    GetEventStreamResponse.add_member(:event_stream_arn, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "EventStreamArn"))
+    GetEventStreamResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "CreatedAt"))
+    GetEventStreamResponse.add_member(:state, Shapes::ShapeRef.new(shape: EventStreamState, required: true, location_name: "State"))
+    GetEventStreamResponse.add_member(:stopped_since, Shapes::ShapeRef.new(shape: timestamp, location_name: "StoppedSince"))
+    GetEventStreamResponse.add_member(:destination_details, Shapes::ShapeRef.new(shape: EventStreamDestinationDetails, required: true, location_name: "DestinationDetails"))
+    GetEventStreamResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    GetEventStreamResponse.struct_class = Types::GetEventStreamResponse
 
     GetIdentityResolutionJobRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     GetIdentityResolutionJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: uuid, required: true, location: "uri", location_name: "JobId"))
@@ -814,6 +879,15 @@ module Aws::CustomerProfiles
     ListDomainsResponse.add_member(:items, Shapes::ShapeRef.new(shape: DomainList, location_name: "Items"))
     ListDomainsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
     ListDomainsResponse.struct_class = Types::ListDomainsResponse
+
+    ListEventStreamsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    ListEventStreamsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
+    ListEventStreamsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxSize100, location: "querystring", location_name: "max-results"))
+    ListEventStreamsRequest.struct_class = Types::ListEventStreamsRequest
+
+    ListEventStreamsResponse.add_member(:items, Shapes::ShapeRef.new(shape: EventStreamSummaryList, location_name: "Items"))
+    ListEventStreamsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
+    ListEventStreamsResponse.struct_class = Types::ListEventStreamsResponse
 
     ListIdentityResolutionJobsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     ListIdentityResolutionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
@@ -1334,6 +1408,19 @@ module Aws::CustomerProfiles
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:create_event_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateEventStream"
+        o.http_method = "POST"
+        o.http_request_uri = "/domains/{DomainName}/event-streams/{EventStreamName}"
+        o.input = Shapes::ShapeRef.new(shape: CreateEventStreamRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateEventStreamResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_integration_workflow, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateIntegrationWorkflow"
         o.http_method = "POST"
@@ -1379,6 +1466,19 @@ module Aws::CustomerProfiles
         o.http_request_uri = "/domains/{DomainName}"
         o.input = Shapes::ShapeRef.new(shape: DeleteDomainRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_event_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEventStream"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/domains/{DomainName}/event-streams/{EventStreamName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEventStreamRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteEventStreamResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1509,6 +1609,19 @@ module Aws::CustomerProfiles
         o.http_request_uri = "/domains/{DomainName}"
         o.input = Shapes::ShapeRef.new(shape: GetDomainRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_event_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEventStream"
+        o.http_method = "GET"
+        o.http_request_uri = "/domains/{DomainName}/event-streams/{EventStreamName}"
+        o.input = Shapes::ShapeRef.new(shape: GetEventStreamRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEventStreamResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1657,6 +1770,25 @@ module Aws::CustomerProfiles
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_event_streams, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEventStreams"
+        o.http_method = "GET"
+        o.http_request_uri = "/domains/{DomainName}/event-streams"
+        o.input = Shapes::ShapeRef.new(shape: ListEventStreamsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListEventStreamsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_identity_resolution_jobs, Seahorse::Model::Operation.new.tap do |o|

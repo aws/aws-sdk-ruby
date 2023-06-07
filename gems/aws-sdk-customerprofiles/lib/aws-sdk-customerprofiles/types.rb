@@ -741,6 +741,53 @@ module Aws::CustomerProfiles
     #   The unique name of the domain.
     #   @return [String]
     #
+    # @!attribute [rw] uri
+    #   The StreamARN of the destination to deliver profile events to. For
+    #   example, arn:aws:kinesis:region:account-id:stream/stream-name
+    #   @return [String]
+    #
+    # @!attribute [rw] event_stream_name
+    #   The name of the event stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateEventStreamRequest AWS API Documentation
+    #
+    class CreateEventStreamRequest < Struct.new(
+      :domain_name,
+      :uri,
+      :event_stream_name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_stream_arn
+    #   A unique identifier for the event stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateEventStreamResponse AWS API Documentation
+    #
+    class CreateEventStreamResponse < Struct.new(
+      :event_stream_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
     # @!attribute [rw] workflow_type
     #   The type of workflow. The only supported value is
     #   APPFLOW\_INTEGRATION.
@@ -986,6 +1033,27 @@ module Aws::CustomerProfiles
     #   The unique name of the domain.
     #   @return [String]
     #
+    # @!attribute [rw] event_stream_name
+    #   The name of the event stream
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteEventStreamRequest AWS API Documentation
+    #
+    class DeleteEventStreamRequest < Struct.new(
+      :domain_name,
+      :event_stream_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteEventStreamResponse AWS API Documentation
+    #
+    class DeleteEventStreamResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
     # @!attribute [rw] uri
     #   The URI of the S3 bucket or any other type of data source.
     #   @return [String]
@@ -1169,6 +1237,32 @@ module Aws::CustomerProfiles
     #
     class DeleteWorkflowResponse < Aws::EmptyStructure; end
 
+    # Summary information about the Kinesis data stream
+    #
+    # @!attribute [rw] uri
+    #   The StreamARN of the destination to deliver profile events to. For
+    #   example, arn:aws:kinesis:region:account-id:stream/stream-name.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of enabling the Kinesis stream as a destination for
+    #   export.
+    #   @return [String]
+    #
+    # @!attribute [rw] unhealthy_since
+    #   The timestamp when the status last changed to `UNHEALHY`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DestinationSummary AWS API Documentation
+    #
+    class DestinationSummary < Struct.new(
+      :uri,
+      :status,
+      :unhealthy_since)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Usage-specific statistics about the domain.
     #
     # @!attribute [rw] profile_count
@@ -1197,6 +1291,83 @@ module Aws::CustomerProfiles
       :metering_profile_count,
       :object_count,
       :total_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of the destination being used for the EventStream.
+    #
+    # @!attribute [rw] uri
+    #   The StreamARN of the destination to deliver profile events to. For
+    #   example, arn:aws:kinesis:region:account-id:stream/stream-name.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of enabling the Kinesis stream as a destination for
+    #   export.
+    #   @return [String]
+    #
+    # @!attribute [rw] unhealthy_since
+    #   The timestamp when the status last changed to `UNHEALHY`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] message
+    #   The human-readable string that corresponds to the error or success
+    #   while enabling the streaming destination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/EventStreamDestinationDetails AWS API Documentation
+    #
+    class EventStreamDestinationDetails < Struct.new(
+      :uri,
+      :status,
+      :unhealthy_since,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An instance of EventStream in a list of EventStreams.
+    #
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_stream_name
+    #   The name of the event stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_stream_arn
+    #   A unique identifier for the event stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The operational state of destination stream for export.
+    #   @return [String]
+    #
+    # @!attribute [rw] stopped_since
+    #   The timestamp when the `State` changed to `STOPPED`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] destination_summary
+    #   Summary information about the Kinesis data stream.
+    #   @return [Types::DestinationSummary]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/EventStreamSummary AWS API Documentation
+    #
+    class EventStreamSummary < Struct.new(
+      :domain_name,
+      :event_stream_name,
+      :event_stream_arn,
+      :state,
+      :stopped_since,
+      :destination_summary,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1688,6 +1859,66 @@ module Aws::CustomerProfiles
       :matching,
       :created_at,
       :last_updated_at,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_stream_name
+    #   The name of the event stream provided during create operations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetEventStreamRequest AWS API Documentation
+    #
+    class GetEventStreamRequest < Struct.new(
+      :domain_name,
+      :event_stream_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_stream_arn
+    #   A unique identifier for the event stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the export was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The operational state of destination stream for export.
+    #   @return [String]
+    #
+    # @!attribute [rw] stopped_since
+    #   The timestamp when the `State` changed to `STOPPED`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] destination_details
+    #   Details regarding the Kinesis stream.
+    #   @return [Types::EventStreamDestinationDetails]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetEventStreamResponse AWS API Documentation
+    #
+    class GetEventStreamResponse < Struct.new(
+      :domain_name,
+      :event_stream_arn,
+      :created_at,
+      :state,
+      :stopped_since,
+      :destination_details,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2628,6 +2859,45 @@ module Aws::CustomerProfiles
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListDomainsResponse AWS API Documentation
     #
     class ListDomainsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects returned per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListEventStreamsRequest AWS API Documentation
+    #
+    class ListEventStreamsRequest < Struct.new(
+      :domain_name,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   Contains summary information about an EventStream.
+    #   @return [Array<Types::EventStreamSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListEventStreamsResponse AWS API Documentation
+    #
+    class ListEventStreamsResponse < Struct.new(
       :items,
       :next_token)
       SENSITIVE = []

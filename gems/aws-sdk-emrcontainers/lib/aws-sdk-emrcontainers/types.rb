@@ -161,6 +161,26 @@ module Aws::EMRContainers
       class Unknown < ContainerInfo; end
     end
 
+    # The settings for container log rotation.
+    #
+    # @!attribute [rw] rotation_size
+    #   The file size at which to rotate logs. Minimum of 2KB, Maximum of
+    #   2GB.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_files_to_keep
+    #   The number of files to keep in container after rotation.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ContainerLogRotationConfiguration AWS API Documentation
+    #
+    class ContainerLogRotationConfiguration < Struct.new(
+      :rotation_size,
+      :max_files_to_keep)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The information about the container provider.
     #
     # @!attribute [rw] type
@@ -1282,12 +1302,17 @@ module Aws::EMRContainers
     #   Amazon S3 configuration for monitoring log publishing.
     #   @return [Types::S3MonitoringConfiguration]
     #
+    # @!attribute [rw] container_log_rotation_configuration
+    #   Enable or disable container log rotation.
+    #   @return [Types::ContainerLogRotationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/MonitoringConfiguration AWS API Documentation
     #
     class MonitoringConfiguration < Struct.new(
       :persistent_app_ui,
       :cloud_watch_monitoring_configuration,
-      :s3_monitoring_configuration)
+      :s3_monitoring_configuration,
+      :container_log_rotation_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
