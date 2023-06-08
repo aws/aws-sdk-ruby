@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2023-06-08)
+------------------
+
+* Feature - This release supports a new set of entities and traits.
+
 1.40.0 (2023-05-31)
 ------------------
 

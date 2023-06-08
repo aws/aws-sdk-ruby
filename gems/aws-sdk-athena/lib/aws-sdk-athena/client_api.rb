@@ -581,6 +581,7 @@ module Aws::Athena
     EngineConfiguration.add_member(:max_concurrent_dpus, Shapes::ShapeRef.new(shape: MaxConcurrentDpus, required: true, location_name: "MaxConcurrentDpus"))
     EngineConfiguration.add_member(:default_executor_dpu_size, Shapes::ShapeRef.new(shape: DefaultExecutorDpuSize, location_name: "DefaultExecutorDpuSize"))
     EngineConfiguration.add_member(:additional_configs, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "AdditionalConfigs"))
+    EngineConfiguration.add_member(:spark_properties, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "SparkProperties"))
     EngineConfiguration.struct_class = Types::EngineConfiguration
 
     EngineVersion.add_member(:selected_engine_version, Shapes::ShapeRef.new(shape: NameString, location_name: "SelectedEngineVersion"))

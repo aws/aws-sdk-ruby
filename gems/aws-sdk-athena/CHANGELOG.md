@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2023-06-08)
+------------------
+
+* Feature - You can now define custom spark properties at start of the session for use cases like cluster encryption, table formats, and general Spark tuning.
+
 1.69.0 (2023-06-02)
 ------------------
 

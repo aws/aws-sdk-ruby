@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.777.0 (2023-06-08)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::PaymentCryptographyData`.
+
+* Feature - Added support for enumerating regions for `Aws::PaymentCryptography`.
+
 1.776.0 (2023-06-06)
 ------------------
 

@@ -114,25 +114,30 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] principal_arn
-    #   The ARN of the principal (user, role, or group). The supported value
-    #   is a fully defined [ `IAM` ARN][1] if the `PrincipalType` is `IAM`.
-    #   If the `PrincipalType` is `IAM_PATTERN`, the supported value is an
-    #   `IAM` ARN without an AccountID in the following format:
+    #   The ARN of the principal (user, role, or group). If the
+    #   `PrincipalType` is `IAM`, the supported value is a fully defined
+    #   [IAM Amazon Resource Name (ARN)][1]. If the `PrincipalType` is
+    #   `IAM_PATTERN`, the supported value is an `IAM` ARN *without an
+    #   AccountID* in the following format:
     #
     #   *arn:partition:iam:::resource-type/resource-id*
     #
-    #   The resource-id can be either of the following:
+    #   The ARN resource-id can be either:
     #
-    #   * Fully formed, for example *arn:aws:iam:::role/resource-name* or
+    #   * A fully formed resource-id. For example,
+    #     *arn:aws:iam:::role/resource-name* or
     #     *arn:aws:iam:::role/resource-path/resource-name*
     #
     #   * A wildcard ARN. The wildcard ARN accepts `IAM_PATTERN` values with
-    #     a "*" or "?" in the resource-id segment of the ARN, for
+    #     a "*" or "?" in the resource-id segment of the ARN. For
     #     example
     #     *arn:partition:service:::resource-type/resource-path/resource-name*.
     #     The new symbols are exclusive to the **resource-path** and
-    #     **resource-name** and cannot be used to replace the
-    #     **resource-type** or other ARN values.
+    #     **resource-name** and cannot replace the **resource-type** or
+    #     other ARN values.
+    #
+    #     The ARN path and principal name allow unlimited wildcard
+    #     characters.
     #
     #   Examples of an **acceptable** wildcard ARN:
     #
@@ -149,29 +154,23 @@ module Aws::ServiceCatalog
     #   You can associate multiple `IAM_PATTERN`s even if the account has no
     #   principal with that name.
     #
-    #   <note markdown="1"> * The ARN path and principal name allow unlimited wildcard
-    #     characters.
+    #   The "?" wildcard character matches zero or one of any character.
+    #   This is similar to ".?" in regular regex context. The "*"
+    #   wildcard character matches any number of any characters. This is
+    #   similar to ".*" in regular regex context.
     #
-    #   * The "?" wildcard character matches zero or one of any character.
-    #     This is similar to ".?" in regular regex context.
+    #   In the IAM Principal ARN format
+    #   (*arn:partition:iam:::resource-type/resource-path/resource-name*),
+    #   valid resource-type values include **user/**, **group/**, or
+    #   **role/**. The "?" and "*" characters are allowed only after
+    #   the resource-type in the resource-id segment. You can use special
+    #   characters anywhere within the resource-id.
     #
-    #   * The "*" wildcard character matches any number of any
-    #     characters. This is similar ".*" in regular regex context.
-    #
-    #   * In the IAM Principal ARNs format
-    #     (arn:partition:iam:::resource-type/resource-path/resource-name),
-    #     valid **resource-type** values include user/, group/, or role/.
-    #     The "?" and "*" are allowed only after the **resource-type**,
-    #     in the resource-id segment. You can use special characters
-    #     anywhere within the **resource-id**.
-    #
-    #   * The "*" also matches the "/" character, allowing paths to be
-    #     formed within the **resource-id**. For example,
-    #     arn:aws:iam:::role/*/ResourceName\_? matches both
-    #     arn:aws:iam:::role/pathA/pathB/ResourceName\_1 and
-    #     arn:aws:iam:::role/pathA/ResourceName\_1.
-    #
-    #    </note>
+    #   The "*" character also matches the "/" character, allowing
+    #   paths to be formed *within* the resource-id. For example,
+    #   *arn:aws:iam:::role/*****/ResourceName\_?* matches both
+    #   *arn:aws:iam:::role/pathA/pathB/ResourceName\_1* and
+    #   *arn:aws:iam:::role/pathA/ResourceName\_1*.
     #
     #
     #
@@ -180,8 +179,8 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] principal_type
     #   The principal type. The supported value is `IAM` if you use a fully
-    #   defined ARN, or `IAM_PATTERN` if you use an ARN with no `accountID`,
-    #   with or without wildcard characters.
+    #   defined Amazon Resource Name (ARN), or `IAM_PATTERN` if you use an
+    #   ARN with no `accountID`, with or without wildcard characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociatePrincipalWithPortfolioInput AWS API Documentation
@@ -2041,6 +2040,11 @@ module Aws::ServiceCatalog
     #   Indicates whether a verbose level of detail is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] include_provisioning_artifact_parameters
+    #   Indicates if the API call response does or does not include
+    #   additional details about the provisioning parameters.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningArtifactInput AWS API Documentation
     #
     class DescribeProvisioningArtifactInput < Struct.new(
@@ -2049,7 +2053,8 @@ module Aws::ServiceCatalog
       :product_id,
       :provisioning_artifact_name,
       :product_name,
-      :verbose)
+      :verbose,
+      :include_provisioning_artifact_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2067,12 +2072,17 @@ module Aws::ServiceCatalog
     #   The status of the current request.
     #   @return [String]
     #
+    # @!attribute [rw] provisioning_artifact_parameters
+    #   Information about the parameters used to provision the product.
+    #   @return [Array<Types::ProvisioningArtifactParameter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningArtifactOutput AWS API Documentation
     #
     class DescribeProvisioningArtifactOutput < Struct.new(
       :provisioning_artifact_detail,
       :info,
-      :status)
+      :status,
+      :provisioning_artifact_parameters)
       SENSITIVE = []
       include Aws::Structure
     end

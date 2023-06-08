@@ -1752,6 +1752,8 @@ module Aws::Athena
     #   resp.engine_configuration.default_executor_dpu_size #=> Integer
     #   resp.engine_configuration.additional_configs #=> Hash
     #   resp.engine_configuration.additional_configs["KeyString"] #=> String
+    #   resp.engine_configuration.spark_properties #=> Hash
+    #   resp.engine_configuration.spark_properties["KeyString"] #=> String
     #   resp.notebook_version #=> String
     #   resp.session_configuration.execution_role #=> String
     #   resp.session_configuration.working_directory #=> String
@@ -3069,6 +3071,9 @@ module Aws::Athena
     #       additional_configs: {
     #         "KeyString" => "ParametersMapValue",
     #       },
+    #       spark_properties: {
+    #         "KeyString" => "ParametersMapValue",
+    #       },
     #     },
     #     notebook_version: "NameString",
     #     session_idle_timeout_in_minutes: 1,
@@ -3593,7 +3598,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

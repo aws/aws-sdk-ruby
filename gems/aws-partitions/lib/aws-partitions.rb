@@ -488,6 +488,8 @@ module Aws
             'Outposts' => 'outposts',
             'PI' => 'pi',
             'Panorama' => 'panorama',
+            'PaymentCryptography' => 'controlplane.payment-cryptography',
+            'PaymentCryptographyData' => 'dataplane.payment-cryptography',
             'Personalize' => 'personalize',
             'PersonalizeEvents' => 'personalize-events',
             'PersonalizeRuntime' => 'personalize-runtime',

@@ -491,24 +491,28 @@ module Aws::ServiceCatalog
     #   The portfolio identifier.
     #
     # @option params [required, String] :principal_arn
-    #   The ARN of the principal (user, role, or group). The supported value
-    #   is a fully defined [ `IAM` ARN][1] if the `PrincipalType` is `IAM`. If
-    #   the `PrincipalType` is `IAM_PATTERN`, the supported value is an `IAM`
-    #   ARN without an AccountID in the following format:
+    #   The ARN of the principal (user, role, or group). If the
+    #   `PrincipalType` is `IAM`, the supported value is a fully defined [IAM
+    #   Amazon Resource Name (ARN)][1]. If the `PrincipalType` is
+    #   `IAM_PATTERN`, the supported value is an `IAM` ARN *without an
+    #   AccountID* in the following format:
     #
     #   *arn:partition:iam:::resource-type/resource-id*
     #
-    #   The resource-id can be either of the following:
+    #   The ARN resource-id can be either:
     #
-    #   * Fully formed, for example *arn:aws:iam:::role/resource-name* or
+    #   * A fully formed resource-id. For example,
+    #     *arn:aws:iam:::role/resource-name* or
     #     *arn:aws:iam:::role/resource-path/resource-name*
     #
     #   * A wildcard ARN. The wildcard ARN accepts `IAM_PATTERN` values with a
-    #     "*" or "?" in the resource-id segment of the ARN, for example
+    #     "*" or "?" in the resource-id segment of the ARN. For example
     #     *arn:partition:service:::resource-type/resource-path/resource-name*.
     #     The new symbols are exclusive to the **resource-path** and
-    #     **resource-name** and cannot be used to replace the
-    #     **resource-type** or other ARN values.
+    #     **resource-name** and cannot replace the **resource-type** or other
+    #     ARN values.
+    #
+    #     The ARN path and principal name allow unlimited wildcard characters.
     #
     #   Examples of an **acceptable** wildcard ARN:
     #
@@ -525,28 +529,23 @@ module Aws::ServiceCatalog
     #   You can associate multiple `IAM_PATTERN`s even if the account has no
     #   principal with that name.
     #
-    #   <note markdown="1"> * The ARN path and principal name allow unlimited wildcard characters.
+    #   The "?" wildcard character matches zero or one of any character.
+    #   This is similar to ".?" in regular regex context. The "*"
+    #   wildcard character matches any number of any characters. This is
+    #   similar to ".*" in regular regex context.
     #
-    #   * The "?" wildcard character matches zero or one of any character.
-    #     This is similar to ".?" in regular regex context.
+    #   In the IAM Principal ARN format
+    #   (*arn:partition:iam:::resource-type/resource-path/resource-name*),
+    #   valid resource-type values include **user/**, **group/**, or
+    #   **role/**. The "?" and "*" characters are allowed only after the
+    #   resource-type in the resource-id segment. You can use special
+    #   characters anywhere within the resource-id.
     #
-    #   * The "*" wildcard character matches any number of any characters.
-    #     This is similar ".*" in regular regex context.
-    #
-    #   * In the IAM Principal ARNs format
-    #     (arn:partition:iam:::resource-type/resource-path/resource-name),
-    #     valid **resource-type** values include user/, group/, or role/. The
-    #     "?" and "*" are allowed only after the **resource-type**, in
-    #     the resource-id segment. You can use special characters anywhere
-    #     within the **resource-id**.
-    #
-    #   * The "*" also matches the "/" character, allowing paths to be
-    #     formed within the **resource-id**. For example,
-    #     arn:aws:iam:::role/*/ResourceName\_? matches both
-    #     arn:aws:iam:::role/pathA/pathB/ResourceName\_1 and
-    #     arn:aws:iam:::role/pathA/ResourceName\_1.
-    #
-    #    </note>
+    #   The "*" character also matches the "/" character, allowing paths
+    #   to be formed *within* the resource-id. For example,
+    #   *arn:aws:iam:::role/*****/ResourceName\_?* matches both
+    #   *arn:aws:iam:::role/pathA/pathB/ResourceName\_1* and
+    #   *arn:aws:iam:::role/pathA/ResourceName\_1*.
     #
     #
     #
@@ -554,8 +553,8 @@ module Aws::ServiceCatalog
     #
     # @option params [required, String] :principal_type
     #   The principal type. The supported value is `IAM` if you use a fully
-    #   defined ARN, or `IAM_PATTERN` if you use an ARN with no `accountID`,
-    #   with or without wildcard characters.
+    #   defined Amazon Resource Name (ARN), or `IAM_PATTERN` if you use an ARN
+    #   with no `accountID`, with or without wildcard characters.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2608,11 +2607,16 @@ module Aws::ServiceCatalog
     # @option params [Boolean] :verbose
     #   Indicates whether a verbose level of detail is enabled.
     #
+    # @option params [Boolean] :include_provisioning_artifact_parameters
+    #   Indicates if the API call response does or does not include additional
+    #   details about the provisioning parameters.
+    #
     # @return [Types::DescribeProvisioningArtifactOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeProvisioningArtifactOutput#provisioning_artifact_detail #provisioning_artifact_detail} => Types::ProvisioningArtifactDetail
     #   * {Types::DescribeProvisioningArtifactOutput#info #info} => Hash&lt;String,String&gt;
     #   * {Types::DescribeProvisioningArtifactOutput#status #status} => String
+    #   * {Types::DescribeProvisioningArtifactOutput#provisioning_artifact_parameters #provisioning_artifact_parameters} => Array&lt;Types::ProvisioningArtifactParameter&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2623,6 +2627,7 @@ module Aws::ServiceCatalog
     #     provisioning_artifact_name: "ProvisioningArtifactName",
     #     product_name: "ProductViewName",
     #     verbose: false,
+    #     include_provisioning_artifact_parameters: false,
     #   })
     #
     # @example Response structure
@@ -2638,6 +2643,20 @@ module Aws::ServiceCatalog
     #   resp.info #=> Hash
     #   resp.info["ProvisioningArtifactInfoKey"] #=> String
     #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
+    #   resp.provisioning_artifact_parameters #=> Array
+    #   resp.provisioning_artifact_parameters[0].parameter_key #=> String
+    #   resp.provisioning_artifact_parameters[0].default_value #=> String
+    #   resp.provisioning_artifact_parameters[0].parameter_type #=> String
+    #   resp.provisioning_artifact_parameters[0].is_no_echo #=> Boolean
+    #   resp.provisioning_artifact_parameters[0].description #=> String
+    #   resp.provisioning_artifact_parameters[0].parameter_constraints.allowed_values #=> Array
+    #   resp.provisioning_artifact_parameters[0].parameter_constraints.allowed_values[0] #=> String
+    #   resp.provisioning_artifact_parameters[0].parameter_constraints.allowed_pattern #=> String
+    #   resp.provisioning_artifact_parameters[0].parameter_constraints.constraint_description #=> String
+    #   resp.provisioning_artifact_parameters[0].parameter_constraints.max_length #=> String
+    #   resp.provisioning_artifact_parameters[0].parameter_constraints.min_length #=> String
+    #   resp.provisioning_artifact_parameters[0].parameter_constraints.max_value #=> String
+    #   resp.provisioning_artifact_parameters[0].parameter_constraints.min_value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningArtifact AWS API Documentation
     #
@@ -6216,7 +6235,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

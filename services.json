@@ -788,6 +788,12 @@
   "Panorama": {
     "models": "panorama/2019-07-24"
   },
+  "PaymentCryptography": {
+    "models": "payment-cryptography/2021-09-14"
+  },
+  "PaymentCryptographyData": {
+    "models": "payment-cryptography-data/2022-02-03"
+  },
   "Personalize": {
     "models": "personalize/2018-05-22"
   },

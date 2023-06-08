@@ -387,11 +387,11 @@ module Aws::TimestreamWrite
     # data from a CSV source in an S3 location and writes to a Timestream
     # table. A mapping from source to target is defined in a batch load
     # task. Errors and events are written to a report at an S3 location. For
-    # the report, if the KMS key is not specified, the batch load task will
-    # be encrypted with a Timestream managed KMS key located in your
-    # account. For more information, see [Amazon Web Services managed
-    # keys][1]. [Service quotas apply][2]. For details, see [code
-    # sample][3].
+    # the report, if the KMS key is not specified, the report will be
+    # encrypted with an S3 managed key when `SSE_S3` is the option.
+    # Otherwise an error is thrown. For more information, see [Amazon Web
+    # Services managed keys][1]. [Service quotas apply][2]. For details, see
+    # [code sample][3].
     #
     #
     #
@@ -604,6 +604,9 @@ module Aws::TimestreamWrite
     #   Contains properties to set on the table when enabling magnetic store
     #   writes.
     #
+    # @option params [Types::Schema] :schema
+    #   The schema of the table.
+    #
     # @return [Types::CreateTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTableResponse#table #table} => Types::Table
@@ -634,6 +637,15 @@ module Aws::TimestreamWrite
     #         },
     #       },
     #     },
+    #     schema: {
+    #       composite_partition_key: [
+    #         {
+    #           type: "DIMENSION", # required, accepts DIMENSION, MEASURE
+    #           name: "SchemaName",
+    #           enforcement_in_record: "REQUIRED", # accepts REQUIRED, OPTIONAL
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -651,6 +663,10 @@ module Aws::TimestreamWrite
     #   resp.table.magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.object_key_prefix #=> String
     #   resp.table.magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS"
     #   resp.table.magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.kms_key_id #=> String
+    #   resp.table.schema.composite_partition_key #=> Array
+    #   resp.table.schema.composite_partition_key[0].type #=> String, one of "DIMENSION", "MEASURE"
+    #   resp.table.schema.composite_partition_key[0].name #=> String
+    #   resp.table.schema.composite_partition_key[0].enforcement_in_record #=> String, one of "REQUIRED", "OPTIONAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/CreateTable AWS API Documentation
     #
@@ -950,6 +966,10 @@ module Aws::TimestreamWrite
     #   resp.table.magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.object_key_prefix #=> String
     #   resp.table.magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS"
     #   resp.table.magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.kms_key_id #=> String
+    #   resp.table.schema.composite_partition_key #=> Array
+    #   resp.table.schema.composite_partition_key[0].type #=> String, one of "DIMENSION", "MEASURE"
+    #   resp.table.schema.composite_partition_key[0].name #=> String
+    #   resp.table.schema.composite_partition_key[0].enforcement_in_record #=> String, one of "REQUIRED", "OPTIONAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/DescribeTable AWS API Documentation
     #
@@ -1120,6 +1140,10 @@ module Aws::TimestreamWrite
     #   resp.tables[0].magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.object_key_prefix #=> String
     #   resp.tables[0].magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS"
     #   resp.tables[0].magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.kms_key_id #=> String
+    #   resp.tables[0].schema.composite_partition_key #=> Array
+    #   resp.tables[0].schema.composite_partition_key[0].type #=> String, one of "DIMENSION", "MEASURE"
+    #   resp.tables[0].schema.composite_partition_key[0].name #=> String
+    #   resp.tables[0].schema.composite_partition_key[0].enforcement_in_record #=> String, one of "REQUIRED", "OPTIONAL"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/ListTables AWS API Documentation
@@ -1332,6 +1356,9 @@ module Aws::TimestreamWrite
     #   Contains properties to set on the table when enabling magnetic store
     #   writes.
     #
+    # @option params [Types::Schema] :schema
+    #   The schema of the table.
+    #
     # @return [Types::UpdateTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateTableResponse#table #table} => Types::Table
@@ -1356,6 +1383,15 @@ module Aws::TimestreamWrite
     #         },
     #       },
     #     },
+    #     schema: {
+    #       composite_partition_key: [
+    #         {
+    #           type: "DIMENSION", # required, accepts DIMENSION, MEASURE
+    #           name: "SchemaName",
+    #           enforcement_in_record: "REQUIRED", # accepts REQUIRED, OPTIONAL
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -1373,6 +1409,10 @@ module Aws::TimestreamWrite
     #   resp.table.magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.object_key_prefix #=> String
     #   resp.table.magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS"
     #   resp.table.magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.kms_key_id #=> String
+    #   resp.table.schema.composite_partition_key #=> Array
+    #   resp.table.schema.composite_partition_key[0].type #=> String, one of "DIMENSION", "MEASURE"
+    #   resp.table.schema.composite_partition_key[0].name #=> String
+    #   resp.table.schema.composite_partition_key[0].enforcement_in_record #=> String, one of "REQUIRED", "OPTIONAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/UpdateTable AWS API Documentation
     #
@@ -1539,7 +1579,7 @@ module Aws::TimestreamWrite
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-timestreamwrite'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

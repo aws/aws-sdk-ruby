@@ -889,7 +889,7 @@ module Aws::Athena
     class CreateWorkGroupOutput < Aws::EmptyStructure; end
 
     # Specifies the KMS key that is used to encrypt the user's data stores
-    # in Athena.
+    # in Athena. This setting does not apply to Athena SQL workgroups.
     #
     # @!attribute [rw] kms_key
     #   The KMS key that is used to encrypt the user's data stores in
@@ -1211,13 +1211,19 @@ module Aws::Athena
     #   value of the Athena notebook ID.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] spark_properties
+    #   Specifies custom jar files and Spark properties for use cases like
+    #   cluster encryption, table formats, and general Spark tuning.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/EngineConfiguration AWS API Documentation
     #
     class EngineConfiguration < Struct.new(
       :coordinator_dpu_size,
       :max_concurrent_dpus,
       :default_executor_dpu_size,
-      :additional_configs)
+      :additional_configs,
+      :spark_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4823,7 +4829,8 @@ module Aws::Athena
     #
     # @!attribute [rw] customer_content_encryption_configuration
     #   Specifies the KMS key that is used to encrypt the user's data
-    #   stores in Athena.
+    #   stores in Athena. This setting does not apply to Athena SQL
+    #   workgroups.
     #   @return [Types::CustomerContentEncryptionConfiguration]
     #
     # @!attribute [rw] enable_minimum_encryption_configuration
@@ -4919,7 +4926,8 @@ module Aws::Athena
     #   @return [Types::EngineVersion]
     #
     # @!attribute [rw] remove_customer_content_encryption_configuration
-    #   Removes content encryption configuration for a workgroup.
+    #   Removes content encryption configuration from an Apache
+    #   Spark-enabled Athena workgroup.
     #   @return [Boolean]
     #
     # @!attribute [rw] additional_configuration
@@ -4933,7 +4941,8 @@ module Aws::Athena
     #
     # @!attribute [rw] customer_content_encryption_configuration
     #   Specifies the KMS key that is used to encrypt the user's data
-    #   stores in Athena.
+    #   stores in Athena. This setting does not apply to Athena SQL
+    #   workgroups.
     #   @return [Types::CustomerContentEncryptionConfiguration]
     #
     # @!attribute [rw] enable_minimum_encryption_configuration
