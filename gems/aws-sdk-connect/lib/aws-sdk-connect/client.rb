@@ -8458,6 +8458,215 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Searches the hours of operation in an Amazon Connect instance, with
+    # optional filtering.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [Types::HoursOfOperationSearchFilter] :search_filter
+    #   Filters to be applied to search results.
+    #
+    # @option params [Types::HoursOfOperationSearchCriteria] :search_criteria
+    #   The search criteria to be used to return hours of operations.
+    #
+    # @return [Types::SearchHoursOfOperationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchHoursOfOperationsResponse#hours_of_operations #hours_of_operations} => Array&lt;Types::HoursOfOperation&gt;
+    #   * {Types::SearchHoursOfOperationsResponse#next_token #next_token} => String
+    #   * {Types::SearchHoursOfOperationsResponse#approximate_total_count #approximate_total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_hours_of_operations({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken2500",
+    #     max_results: 1,
+    #     search_filter: {
+    #       tag_filter: {
+    #         or_conditions: [
+    #           [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #         ],
+    #         and_conditions: [
+    #           {
+    #             tag_key: "String",
+    #             tag_value: "String",
+    #           },
+    #         ],
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #       },
+    #     },
+    #     search_criteria: {
+    #       or_conditions: [
+    #         {
+    #           # recursive HoursOfOperationSearchCriteria
+    #         },
+    #       ],
+    #       and_conditions: [
+    #         {
+    #           # recursive HoursOfOperationSearchCriteria
+    #         },
+    #       ],
+    #       string_condition: {
+    #         field_name: "String",
+    #         value: "String",
+    #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hours_of_operations #=> Array
+    #   resp.hours_of_operations[0].hours_of_operation_id #=> String
+    #   resp.hours_of_operations[0].hours_of_operation_arn #=> String
+    #   resp.hours_of_operations[0].name #=> String
+    #   resp.hours_of_operations[0].description #=> String
+    #   resp.hours_of_operations[0].time_zone #=> String
+    #   resp.hours_of_operations[0].config #=> Array
+    #   resp.hours_of_operations[0].config[0].day #=> String, one of "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"
+    #   resp.hours_of_operations[0].config[0].start_time.hours #=> Integer
+    #   resp.hours_of_operations[0].config[0].start_time.minutes #=> Integer
+    #   resp.hours_of_operations[0].config[0].end_time.hours #=> Integer
+    #   resp.hours_of_operations[0].config[0].end_time.minutes #=> Integer
+    #   resp.hours_of_operations[0].tags #=> Hash
+    #   resp.hours_of_operations[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #   resp.approximate_total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchHoursOfOperations AWS API Documentation
+    #
+    # @overload search_hours_of_operations(params = {})
+    # @param [Hash] params ({})
+    def search_hours_of_operations(params = {}, options = {})
+      req = build_request(:search_hours_of_operations, params)
+      req.send_request(options)
+    end
+
+    # Searches prompts in an Amazon Connect instance, with optional
+    # filtering.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [Types::PromptSearchFilter] :search_filter
+    #   Filters to be applied to search results.
+    #
+    # @option params [Types::PromptSearchCriteria] :search_criteria
+    #   The search criteria to be used to return prompts.
+    #
+    # @return [Types::SearchPromptsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchPromptsResponse#prompts #prompts} => Array&lt;Types::Prompt&gt;
+    #   * {Types::SearchPromptsResponse#next_token #next_token} => String
+    #   * {Types::SearchPromptsResponse#approximate_total_count #approximate_total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_prompts({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken2500",
+    #     max_results: 1,
+    #     search_filter: {
+    #       tag_filter: {
+    #         or_conditions: [
+    #           [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #         ],
+    #         and_conditions: [
+    #           {
+    #             tag_key: "String",
+    #             tag_value: "String",
+    #           },
+    #         ],
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #       },
+    #     },
+    #     search_criteria: {
+    #       or_conditions: [
+    #         {
+    #           # recursive PromptSearchCriteria
+    #         },
+    #       ],
+    #       and_conditions: [
+    #         {
+    #           # recursive PromptSearchCriteria
+    #         },
+    #       ],
+    #       string_condition: {
+    #         field_name: "String",
+    #         value: "String",
+    #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.prompts #=> Array
+    #   resp.prompts[0].prompt_arn #=> String
+    #   resp.prompts[0].prompt_id #=> String
+    #   resp.prompts[0].name #=> String
+    #   resp.prompts[0].description #=> String
+    #   resp.prompts[0].tags #=> Hash
+    #   resp.prompts[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #   resp.approximate_total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchPrompts AWS API Documentation
+    #
+    # @overload search_prompts(params = {})
+    # @param [Hash] params ({})
+    def search_prompts(params = {}, options = {})
+      req = build_request(:search_prompts, params)
+      req.send_request(options)
+    end
+
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
@@ -8573,6 +8782,113 @@ module Aws::Connect
     # @param [Hash] params ({})
     def search_queues(params = {}, options = {})
       req = build_request(:search_queues, params)
+      req.send_request(options)
+    end
+
+    # Searches quick connects in an Amazon Connect instance, with optional
+    # filtering.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [Types::QuickConnectSearchFilter] :search_filter
+    #   Filters to be applied to search results.
+    #
+    # @option params [Types::QuickConnectSearchCriteria] :search_criteria
+    #   The search criteria to be used to return quick connects.
+    #
+    # @return [Types::SearchQuickConnectsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchQuickConnectsResponse#quick_connects #quick_connects} => Array&lt;Types::QuickConnect&gt;
+    #   * {Types::SearchQuickConnectsResponse#next_token #next_token} => String
+    #   * {Types::SearchQuickConnectsResponse#approximate_total_count #approximate_total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_quick_connects({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken2500",
+    #     max_results: 1,
+    #     search_filter: {
+    #       tag_filter: {
+    #         or_conditions: [
+    #           [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #         ],
+    #         and_conditions: [
+    #           {
+    #             tag_key: "String",
+    #             tag_value: "String",
+    #           },
+    #         ],
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #       },
+    #     },
+    #     search_criteria: {
+    #       or_conditions: [
+    #         {
+    #           # recursive QuickConnectSearchCriteria
+    #         },
+    #       ],
+    #       and_conditions: [
+    #         {
+    #           # recursive QuickConnectSearchCriteria
+    #         },
+    #       ],
+    #       string_condition: {
+    #         field_name: "String",
+    #         value: "String",
+    #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.quick_connects #=> Array
+    #   resp.quick_connects[0].quick_connect_arn #=> String
+    #   resp.quick_connects[0].quick_connect_id #=> String
+    #   resp.quick_connects[0].name #=> String
+    #   resp.quick_connects[0].description #=> String
+    #   resp.quick_connects[0].quick_connect_config.quick_connect_type #=> String, one of "USER", "QUEUE", "PHONE_NUMBER"
+    #   resp.quick_connects[0].quick_connect_config.user_config.user_id #=> String
+    #   resp.quick_connects[0].quick_connect_config.user_config.contact_flow_id #=> String
+    #   resp.quick_connects[0].quick_connect_config.queue_config.queue_id #=> String
+    #   resp.quick_connects[0].quick_connect_config.queue_config.contact_flow_id #=> String
+    #   resp.quick_connects[0].quick_connect_config.phone_config.phone_number #=> String
+    #   resp.quick_connects[0].tags #=> Hash
+    #   resp.quick_connects[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #   resp.approximate_total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchQuickConnects AWS API Documentation
+    #
+    # @overload search_quick_connects(params = {})
+    # @param [Hash] params ({})
+    def search_quick_connects(params = {}, options = {})
+      req = build_request(:search_quick_connects, params)
       req.send_request(options)
     end
 
@@ -12113,7 +12429,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.111.0'
+      context[:gem_version] = '1.112.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
