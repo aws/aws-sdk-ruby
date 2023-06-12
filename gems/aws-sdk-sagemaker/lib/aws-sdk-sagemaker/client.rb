@@ -1710,7 +1710,7 @@ module Aws::SageMaker
     #     },
     #     output_config: { # required
     #       s3_output_location: "S3Uri", # required
-    #       target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv2, amba_cv22, amba_cv25, x86_win32, x86_win64, coreml, jacinto_tda4vm, imx8mplus
+    #       target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_inf2, ml_trn1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv2, amba_cv22, amba_cv25, x86_win32, x86_win64, coreml, jacinto_tda4vm, imx8mplus
     #       target_platform: {
     #         os: "ANDROID", # required, accepts ANDROID, LINUX
     #         arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
@@ -10300,7 +10300,7 @@ module Aws::SageMaker
     #   resp.input_config.framework #=> String, one of "TENSORFLOW", "KERAS", "MXNET", "ONNX", "PYTORCH", "XGBOOST", "TFLITE", "DARKNET", "SKLEARN"
     #   resp.input_config.framework_version #=> String
     #   resp.output_config.s3_output_location #=> String
-    #   resp.output_config.target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_g4dn", "ml_inf1", "ml_eia2", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "sitara_am57x", "amba_cv2", "amba_cv22", "amba_cv25", "x86_win32", "x86_win64", "coreml", "jacinto_tda4vm", "imx8mplus"
+    #   resp.output_config.target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_g4dn", "ml_inf1", "ml_inf2", "ml_trn1", "ml_eia2", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "sitara_am57x", "amba_cv2", "amba_cv22", "amba_cv25", "x86_win32", "x86_win64", "coreml", "jacinto_tda4vm", "imx8mplus"
     #   resp.output_config.target_platform.os #=> String, one of "ANDROID", "LINUX"
     #   resp.output_config.target_platform.arch #=> String, one of "X86_64", "X86", "ARM64", "ARM_EABI", "ARM_EABIHF"
     #   resp.output_config.target_platform.accelerator #=> String, one of "INTEL_GRAPHICS", "MALI", "NVIDIA", "NNA"
@@ -13268,7 +13268,7 @@ module Aws::SageMaker
     # Describes the details of a pipeline.
     #
     # @option params [required, String] :pipeline_name
-    #   The name of the pipeline to describe.
+    #   The name or Amazon Resource Name (ARN) of the pipeline to describe.
     #
     # @return [Types::DescribePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -14943,8 +14943,11 @@ module Aws::SageMaker
     # the AppImageConfig name contains a specified string.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of AppImageConfigs to return in the response. The
-    #   default value is 10.
+    #   The total number of items to return in the response. If the total
+    #   number of items available is more than the value specified, a
+    #   `NextToken` is provided in the response. To resume pagination, provide
+    #   the `NextToken` value in the as part of a subsequent call. The default
+    #   value is 10.
     #
     # @option params [String] :next_token
     #   If the previous call to `ListImages` didn't return the full set of
@@ -15030,7 +15033,11 @@ module Aws::SageMaker
     #   Use it in your next request to receive the next set of results.
     #
     # @option params [Integer] :max_results
-    #   Returns a list up to a specified limit.
+    #   The total number of items to return in the response. If the total
+    #   number of items available is more than the value specified, a
+    #   `NextToken` is provided in the response. To resume pagination, provide
+    #   the `NextToken` value in the as part of a subsequent call. The default
+    #   value is 10.
     #
     # @option params [String] :sort_order
     #   The sort order for the results. The default is Ascending.
@@ -15588,7 +15595,7 @@ module Aws::SageMaker
     #   resp.compilation_job_summaries[0].creation_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_start_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_end_time #=> Time
-    #   resp.compilation_job_summaries[0].compilation_target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_g4dn", "ml_inf1", "ml_eia2", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "sitara_am57x", "amba_cv2", "amba_cv22", "amba_cv25", "x86_win32", "x86_win64", "coreml", "jacinto_tda4vm", "imx8mplus"
+    #   resp.compilation_job_summaries[0].compilation_target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_g4dn", "ml_inf1", "ml_inf2", "ml_trn1", "ml_eia2", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "sitara_am57x", "amba_cv2", "amba_cv22", "amba_cv25", "x86_win32", "x86_win64", "coreml", "jacinto_tda4vm", "imx8mplus"
     #   resp.compilation_job_summaries[0].compilation_target_platform_os #=> String, one of "ANDROID", "LINUX"
     #   resp.compilation_job_summaries[0].compilation_target_platform_arch #=> String, one of "X86_64", "X86", "ARM64", "ARM_EABI", "ARM_EABIHF"
     #   resp.compilation_job_summaries[0].compilation_target_platform_accelerator #=> String, one of "INTEL_GRAPHICS", "MALI", "NVIDIA", "NNA"
@@ -15889,7 +15896,11 @@ module Aws::SageMaker
     #   Use it in your next request to receive the next set of results.
     #
     # @option params [Integer] :max_results
-    #   Returns a list up to a specified limit.
+    #   The total number of items to return in the response. If the total
+    #   number of items available is more than the value specified, a
+    #   `NextToken` is provided in the response. To resume pagination, provide
+    #   the `NextToken` value in the as part of a subsequent call. The default
+    #   value is 10.
     #
     # @return [Types::ListDomainsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -18851,7 +18862,7 @@ module Aws::SageMaker
     # Gets a list of the pipeline executions.
     #
     # @option params [required, String] :pipeline_name
-    #   The name of the pipeline.
+    #   The name or Amazon Resource Name (ARN) of the pipeline.
     #
     # @option params [Time,DateTime,Date,Integer,String] :created_after
     #   A filter that returns the pipeline executions that were created after
@@ -19184,7 +19195,11 @@ module Aws::SageMaker
     #   Use it in your next request to receive the next set of results.
     #
     # @option params [Integer] :max_results
-    #   Returns a list up to a specified limit.
+    #   The total number of items to return in the response. If the total
+    #   number of items available is more than the value specified, a
+    #   `NextToken` is provided in the response. To resume pagination, provide
+    #   the `NextToken` value in the as part of a subsequent call. The default
+    #   value is 10.
     #
     # @option params [String] :sort_order
     #   The sort order for the results. The default is `Ascending`.
@@ -19301,8 +19316,11 @@ module Aws::SageMaker
     # Account.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of Studio Lifecycle Configurations to return in the
-    #   response. The default value is 10.
+    #   The total number of items to return in the response. If the total
+    #   number of items available is more than the value specified, a
+    #   `NextToken` is provided in the response. To resume pagination, provide
+    #   the `NextToken` value in the as part of a subsequent call. The default
+    #   value is 10.
     #
     # @option params [String] :next_token
     #   If the previous call to ListStudioLifecycleConfigs didn't return the
@@ -19942,7 +19960,11 @@ module Aws::SageMaker
     #   Use it in your next request to receive the next set of results.
     #
     # @option params [Integer] :max_results
-    #   Returns a list up to a specified limit.
+    #   The total number of items to return in the response. If the total
+    #   number of items available is more than the value specified, a
+    #   `NextToken` is provided in the response. To resume pagination, provide
+    #   the `NextToken` value in the as part of a subsequent call. The default
+    #   value is 10.
     #
     # @option params [String] :sort_order
     #   The sort order for the results. The default is Ascending.
@@ -20729,7 +20751,7 @@ module Aws::SageMaker
     # Starts a pipeline execution.
     #
     # @option params [required, String] :pipeline_name
-    #   The name of the pipeline.
+    #   The name or Amazon Resource Name (ARN) of the pipeline.
     #
     # @option params [String] :pipeline_execution_display_name
     #   The display name of the pipeline execution.
@@ -23605,7 +23627,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.185.0'
+      context[:gem_version] = '1.186.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

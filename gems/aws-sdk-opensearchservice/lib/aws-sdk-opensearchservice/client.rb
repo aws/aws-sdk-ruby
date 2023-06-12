@@ -945,6 +945,9 @@ module Aws::OpenSearchService
     # @option params [String] :connection_mode
     #   The connection mode.
     #
+    # @option params [Types::ConnectionProperties] :connection_properties
+    #   The `ConnectionProperties` for the outbound connection.
+    #
     # @return [Types::CreateOutboundConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateOutboundConnectionResponse#local_domain_info #local_domain_info} => Types::DomainInformationContainer
@@ -974,6 +977,12 @@ module Aws::OpenSearchService
     #     },
     #     connection_alias: "ConnectionAlias", # required
     #     connection_mode: "DIRECT", # accepts DIRECT, VPC_ENDPOINT
+    #     connection_properties: {
+    #       endpoint: "Endpoint",
+    #       cross_cluster_search: {
+    #         skip_unavailable: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -990,6 +999,7 @@ module Aws::OpenSearchService
     #   resp.connection_id #=> String
     #   resp.connection_mode #=> String, one of "DIRECT", "VPC_ENDPOINT"
     #   resp.connection_properties.endpoint #=> String
+    #   resp.connection_properties.cross_cluster_search.skip_unavailable #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateOutboundConnection AWS API Documentation
     #
@@ -1299,6 +1309,7 @@ module Aws::OpenSearchService
     #   resp.connection.connection_status.message #=> String
     #   resp.connection.connection_mode #=> String, one of "DIRECT", "VPC_ENDPOINT"
     #   resp.connection.connection_properties.endpoint #=> String
+    #   resp.connection.connection_properties.cross_cluster_search.skip_unavailable #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteOutboundConnection AWS API Documentation
     #
@@ -2300,6 +2311,7 @@ module Aws::OpenSearchService
     #   resp.connections[0].connection_status.message #=> String
     #   resp.connections[0].connection_mode #=> String, one of "DIRECT", "VPC_ENDPOINT"
     #   resp.connections[0].connection_properties.endpoint #=> String
+    #   resp.connections[0].connection_properties.cross_cluster_search.skip_unavailable #=> String, one of "ENABLED", "DISABLED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeOutboundConnections AWS API Documentation
@@ -4125,7 +4137,7 @@ module Aws::OpenSearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

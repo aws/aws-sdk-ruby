@@ -51,6 +51,81 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @!attribute [rw] collection_id
+    #   The ID of an existing collection containing the UserID.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The ID for the existing UserID.
+    #   @return [String]
+    #
+    # @!attribute [rw] face_ids
+    #   An array of FaceIDs to associate with the UserID.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] user_match_threshold
+    #   An optional value specifying the minimum confidence in the UserID
+    #   match to return. The default value is 75.
+    #   @return [Float]
+    #
+    # @!attribute [rw] client_request_token
+    #   Idempotent token used to identify the request to `AssociateFaces`.
+    #   If you use the same token with multiple `AssociateFaces` requests,
+    #   the same response is returned. Use ClientRequestToken to prevent the
+    #   same request from being processed more than once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class AssociateFacesRequest < Struct.new(
+      :collection_id,
+      :user_id,
+      :face_ids,
+      :user_match_threshold,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] associated_faces
+    #   An array of AssociatedFace objects containing FaceIDs that are
+    #   successfully associated with the UserID is returned. Returned if the
+    #   AssociateFaces action is successful.
+    #   @return [Array<Types::AssociatedFace>]
+    #
+    # @!attribute [rw] unsuccessful_face_associations
+    #   An array of UnsuccessfulAssociation objects containing FaceIDs that
+    #   are not successfully associated along with the reasons. Returned if
+    #   the AssociateFaces action is successful.
+    #   @return [Array<Types::UnsuccessfulFaceAssociation>]
+    #
+    # @!attribute [rw] user_status
+    #   The status of an update made to a UserID. Reflects if the UserID has
+    #   been updated for every requested change.
+    #   @return [String]
+    #
+    class AssociateFacesResponse < Struct.new(
+      :associated_faces,
+      :unsuccessful_face_associations,
+      :user_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides face metadata for the faces that are associated to a specific
+    # UserID.
+    #
+    # @!attribute [rw] face_id
+    #   Unique identifier assigned to the face.
+    #   @return [String]
+    #
+    class AssociatedFace < Struct.new(
+      :face_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Metadata information about an audio stream. An array of
     # `AudioMetadata` objects for the audio streams found in a stored video
     # is returned by GetSegmentDetection.
@@ -560,6 +635,11 @@ module Aws::Rekognition
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # A User with the same Id already exists within the collection, or the
+    # update or deletion of the User caused an inconsistent state. **
+    #
+    class ConflictException < Aws::EmptyStructure; end
 
     # Label detection settings to use on a streaming video. Defining the
     # settings is required in the request parameter for
@@ -1092,6 +1172,36 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @!attribute [rw] collection_id
+    #   The ID of an existing collection to which the new UserID needs to be
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   ID for the UserID to be created. This ID needs to be unique within
+    #   the collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   Idempotent token used to identify the request to `CreateUser`. If
+    #   you use the same token with multiple `CreateUser` requests, the same
+    #   response is returned. Use ClientRequestToken to prevent the same
+    #   request from being processed more than once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class CreateUserRequest < Struct.new(
+      :collection_id,
+      :user_id,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class CreateUserResponse < Aws::EmptyStructure; end
+
     # A custom label detected in an image by a call to DetectCustomLabels.
     #
     # @!attribute [rw] name
@@ -1379,8 +1489,13 @@ module Aws::Rekognition
     #   An array of strings (face IDs) of the faces that were deleted.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] unsuccessful_face_deletions
+    #   An array of any faces that weren't deleted.
+    #   @return [Array<Types::UnsuccessfulFaceDeletion>]
+    #
     class DeleteFacesResponse < Struct.new(
-      :deleted_faces)
+      :deleted_faces,
+      :unsuccessful_face_deletions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1463,6 +1578,35 @@ module Aws::Rekognition
     class DeleteStreamProcessorResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] collection_id
+    #   The ID of an existing collection from which the UserID needs to be
+    #   deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   ID for the UserID to be deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   Idempotent token used to identify the request to `DeleteUser`. If
+    #   you use the same token with multiple `DeleteUser `requests, the same
+    #   response is returned. Use ClientRequestToken to prevent the same
+    #   request from being processed more than once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class DeleteUserRequest < Struct.new(
+      :collection_id,
+      :user_id,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class DeleteUserResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] collection_id
     #   The ID of the collection to describe.
     #   @return [String]
     #
@@ -1495,11 +1639,16 @@ module Aws::Rekognition
     #   Coordinated Universal Time (UTC), Thursday, 1 January 1970.
     #   @return [Time]
     #
+    # @!attribute [rw] user_count
+    #   The number of UserIDs assigned to the specified colleciton.
+    #   @return [Integer]
+    #
     class DescribeCollectionResponse < Struct.new(
       :face_count,
       :face_model_version,
       :collection_arn,
-      :creation_timestamp)
+      :creation_timestamp,
+      :user_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2290,6 +2439,77 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @!attribute [rw] collection_id
+    #   The ID of an existing collection containing the UserID.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   ID for the existing UserID.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   Idempotent token used to identify the request to
+    #   `DisassociateFaces`. If you use the same token with multiple
+    #   `DisassociateFaces` requests, the same response is returned. Use
+    #   ClientRequestToken to prevent the same request from being processed
+    #   more than once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] face_ids
+    #   An array of face IDs to disassociate from the UserID.
+    #   @return [Array<String>]
+    #
+    class DisassociateFacesRequest < Struct.new(
+      :collection_id,
+      :user_id,
+      :client_request_token,
+      :face_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] disassociated_faces
+    #   An array of DissociatedFace objects containing FaceIds that are
+    #   successfully disassociated with the UserID is returned. Returned if
+    #   the DisassociatedFaces action is successful.
+    #   @return [Array<Types::DisassociatedFace>]
+    #
+    # @!attribute [rw] unsuccessful_face_disassociations
+    #   An array of UnsuccessfulDisassociation objects containing FaceIds
+    #   that are not successfully associated, along with the reasons for the
+    #   failure to associate. Returned if the DisassociateFaces action is
+    #   successful.
+    #   @return [Array<Types::UnsuccessfulFaceDisassociation>]
+    #
+    # @!attribute [rw] user_status
+    #   The status of an update made to a User. Reflects if the User has
+    #   been updated for every requested change.
+    #   @return [String]
+    #
+    class DisassociateFacesResponse < Struct.new(
+      :disassociated_faces,
+      :unsuccessful_face_disassociations,
+      :user_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides face metadata for the faces that are disassociated from a
+    # specific UserID.
+    #
+    # @!attribute [rw] face_id
+    #   Unique identifier assigned to the face.
+    #   @return [String]
+    #
+    class DisassociatedFace < Struct.new(
+      :face_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A training dataset or a test dataset used in a dataset distribution
     # operation. For more information, see DistributeDatasetEntries.
     #
@@ -2522,13 +2742,18 @@ module Aws::Rekognition
     #   indexing the face vector.
     #   @return [String]
     #
+    # @!attribute [rw] user_id
+    #   Unique identifier assigned to the user.
+    #   @return [String]
+    #
     class Face < Struct.new(
       :face_id,
       :bounding_box,
       :image_id,
       :external_image_id,
       :confidence,
-      :index_faces_model_version)
+      :index_faces_model_version,
+      :user_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4585,10 +4810,20 @@ module Aws::Rekognition
     #   Maximum number of faces to return.
     #   @return [Integer]
     #
+    # @!attribute [rw] user_id
+    #   An array of user IDs to match when listing faces in a collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] face_ids
+    #   An array of face IDs to match when listing faces in a collection.
+    #   @return [Array<String>]
+    #
     class ListFacesRequest < Struct.new(
       :collection_id,
       :next_token,
-      :max_results)
+      :max_results,
+      :user_id,
+      :face_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4716,6 +4951,42 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @!attribute [rw] collection_id
+    #   The ID of an existing collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of UsersID to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagingation token to receive the next set of UsersID.
+    #   @return [String]
+    #
+    class ListUsersRequest < Struct.new(
+      :collection_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] users
+    #   List of UsersID associated with the specified collection.
+    #   @return [Array<Types::User>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to be used with the subsequent request if the
+    #   response is truncated.
+    #   @return [String]
+    #
+    class ListUsersResponse < Struct.new(
+      :users,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains settings that specify the location of an Amazon S3 bucket
     # used to store the output of a Face Liveness session. Note that the S3
     # bucket must be located in the caller's AWS account and in the same
@@ -4743,6 +5014,23 @@ module Aws::Rekognition
     # `PutProjectPolicy` is incorrect.
     #
     class MalformedPolicyDocumentException < Aws::EmptyStructure; end
+
+    # Contains metadata for a UserID matched with a given face.
+    #
+    # @!attribute [rw] user_id
+    #   A provided ID for the UserID. Unique within the collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_status
+    #   The status of the user matched to a provided FaceID.
+    #   @return [String]
+    #
+    class MatchedUser < Struct.new(
+      :user_id,
+      :user_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Provides information about a single type of inappropriate, unwanted,
     # or offensive content found in an image or video. Each type of
@@ -5649,6 +5937,224 @@ module Aws::Rekognition
       :searched_face_id,
       :face_matches,
       :face_model_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collection_id
+    #   The ID of an existing collection containing the UserID.
+    #   @return [String]
+    #
+    # @!attribute [rw] image
+    #   Provides the input image either as bytes or an S3 object.
+    #
+    #   You pass image bytes to an Amazon Rekognition API operation by using
+    #   the `Bytes` property. For example, you would use the `Bytes`
+    #   property to pass an image loaded from a local file system. Image
+    #   bytes passed by using the `Bytes` property must be base64-encoded.
+    #   Your code may not need to encode image bytes if you are using an AWS
+    #   SDK to call Amazon Rekognition API operations.
+    #
+    #   For more information, see Analyzing an Image Loaded from a Local
+    #   File System in the Amazon Rekognition Developer Guide.
+    #
+    #   You pass images stored in an S3 bucket to an Amazon Rekognition API
+    #   operation by using the `S3Object` property. Images stored in an S3
+    #   bucket do not need to be base64-encoded.
+    #
+    #   The region for the S3 bucket containing the S3 object must match the
+    #   region you use for Amazon Rekognition operations.
+    #
+    #   If you use the AWS CLI to call Amazon Rekognition operations,
+    #   passing image bytes using the Bytes property is not supported. You
+    #   must first upload the image to an Amazon S3 bucket and then call the
+    #   operation using the S3Object property.
+    #
+    #   For Amazon Rekognition to process an S3 object, the user must have
+    #   permission to access the S3 object. For more information, see How
+    #   Amazon Rekognition works with IAM in the Amazon Rekognition
+    #   Developer Guide.
+    #   @return [Types::Image]
+    #
+    # @!attribute [rw] user_match_threshold
+    #   Specifies the minimum confidence in the UserID match to return.
+    #   Default value is 80.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_users
+    #   Maximum number of UserIDs to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] quality_filter
+    #   A filter that specifies a quality bar for how much filtering is done
+    #   to identify faces. Filtered faces aren't searched for in the
+    #   collection. The default value is NONE.
+    #   @return [String]
+    #
+    class SearchUsersByImageRequest < Struct.new(
+      :collection_id,
+      :image,
+      :user_match_threshold,
+      :max_users,
+      :quality_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_matches
+    #   An array of UserID objects that matched the input face, along with
+    #   the confidence in the match. The returned structure will be empty if
+    #   there are no matches. Returned if the SearchUsersByImageResponse
+    #   action is successful.
+    #   @return [Array<Types::UserMatch>]
+    #
+    # @!attribute [rw] face_model_version
+    #   Version number of the face detection model associated with the input
+    #   collection CollectionId.
+    #   @return [String]
+    #
+    # @!attribute [rw] searched_face
+    #   A list of FaceDetail objects containing the BoundingBox for the
+    #   largest face in image, as well as the confidence in the bounding
+    #   box, that was searched for matches. If no valid face is detected in
+    #   the image the response will contain no SearchedFace object.
+    #   @return [Types::SearchedFaceDetails]
+    #
+    # @!attribute [rw] unsearched_faces
+    #   List of UnsearchedFace objects. Contains the face details infered
+    #   from the specified image but not used for search. Contains reasons
+    #   that describe why a face wasn't used for Search.
+    #   @return [Array<Types::UnsearchedFace>]
+    #
+    class SearchUsersByImageResponse < Struct.new(
+      :user_matches,
+      :face_model_version,
+      :searched_face,
+      :unsearched_faces)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collection_id
+    #   The ID of an existing collection containing the UserID, used with a
+    #   UserId or FaceId. If a FaceId is provided, UserId isn’t required to
+    #   be present in the Collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   ID for the existing User.
+    #   @return [String]
+    #
+    # @!attribute [rw] face_id
+    #   ID for the existing face.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_match_threshold
+    #   Optional value that specifies the minimum confidence in the matched
+    #   UserID to return. Default value of 80.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_users
+    #   Maximum number of identities to return.
+    #   @return [Integer]
+    #
+    class SearchUsersRequest < Struct.new(
+      :collection_id,
+      :user_id,
+      :face_id,
+      :user_match_threshold,
+      :max_users)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_matches
+    #   An array of UserMatch objects that matched the input face along with
+    #   the confidence in the match. Array will be empty if there are no
+    #   matches.
+    #   @return [Array<Types::UserMatch>]
+    #
+    # @!attribute [rw] face_model_version
+    #   Version number of the face detection model associated with the input
+    #   CollectionId.
+    #   @return [String]
+    #
+    # @!attribute [rw] searched_face
+    #   Contains the ID of a face that was used to search for matches in a
+    #   collection.
+    #   @return [Types::SearchedFace]
+    #
+    # @!attribute [rw] searched_user
+    #   Contains the ID of the UserID that was used to search for matches in
+    #   a collection.
+    #   @return [Types::SearchedUser]
+    #
+    class SearchUsersResponse < Struct.new(
+      :user_matches,
+      :face_model_version,
+      :searched_face,
+      :searched_user)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides face metadata such as FaceId, BoundingBox, Confidence of the
+    # input face used for search.
+    #
+    # @!attribute [rw] face_id
+    #   Unique identifier assigned to the face.
+    #   @return [String]
+    #
+    class SearchedFace < Struct.new(
+      :face_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains data regarding the input face used for a search.
+    #
+    # @!attribute [rw] face_detail
+    #   Structure containing attributes of the face that the algorithm
+    #   detected.
+    #
+    #   A `FaceDetail` object contains either the default facial attributes
+    #   or all facial attributes. The default attributes are `BoundingBox`,
+    #   `Confidence`, `Landmarks`, `Pose`, and `Quality`.
+    #
+    #   GetFaceDetection is the only Amazon Rekognition Video stored video
+    #   operation that can return a `FaceDetail` object with all attributes.
+    #   To specify which attributes to return, use the `FaceAttributes`
+    #   input parameter for StartFaceDetection. The following Amazon
+    #   Rekognition Video operations return only the default attributes. The
+    #   corresponding Start operations don't have a `FaceAttributes` input
+    #   parameter:
+    #
+    #   * GetCelebrityRecognition
+    #
+    #   * GetPersonTracking
+    #
+    #   * GetFaceSearch
+    #
+    #   The Amazon Rekognition Image DetectFaces and IndexFaces operations
+    #   can return all facial attributes. To specify which attributes to
+    #   return, use the `Attributes` input parameter for `DetectFaces`. For
+    #   `IndexFaces`, use the `DetectAttributes` input parameter.
+    #   @return [Types::FaceDetail]
+    #
+    class SearchedFaceDetails < Struct.new(
+      :face_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata about a User searched for within a collection.
+    #
+    # @!attribute [rw] user_id
+    #   A provided ID for the UserID. Unique within the collection.
+    #   @return [String]
+    #
+    class SearchedUser < Struct.new(
+      :user_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6944,6 +7450,125 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # Face details inferred from the image but not used for search. The
+    # response attribute contains reasons for why a face wasn't used for
+    # Search.
+    #
+    # @!attribute [rw] face_details
+    #   Structure containing attributes of the face that the algorithm
+    #   detected.
+    #
+    #   A `FaceDetail` object contains either the default facial attributes
+    #   or all facial attributes. The default attributes are `BoundingBox`,
+    #   `Confidence`, `Landmarks`, `Pose`, and `Quality`.
+    #
+    #   GetFaceDetection is the only Amazon Rekognition Video stored video
+    #   operation that can return a `FaceDetail` object with all attributes.
+    #   To specify which attributes to return, use the `FaceAttributes`
+    #   input parameter for StartFaceDetection. The following Amazon
+    #   Rekognition Video operations return only the default attributes. The
+    #   corresponding Start operations don't have a `FaceAttributes` input
+    #   parameter:
+    #
+    #   * GetCelebrityRecognition
+    #
+    #   * GetPersonTracking
+    #
+    #   * GetFaceSearch
+    #
+    #   The Amazon Rekognition Image DetectFaces and IndexFaces operations
+    #   can return all facial attributes. To specify which attributes to
+    #   return, use the `Attributes` input parameter for `DetectFaces`. For
+    #   `IndexFaces`, use the `DetectAttributes` input parameter.
+    #   @return [Types::FaceDetail]
+    #
+    # @!attribute [rw] reasons
+    #   Reasons why a face wasn't used for Search.
+    #   @return [Array<String>]
+    #
+    class UnsearchedFace < Struct.new(
+      :face_details,
+      :reasons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata like FaceId, UserID, and Reasons, for a face that
+    # was unsuccessfully associated.
+    #
+    # @!attribute [rw] face_id
+    #   A unique identifier assigned to the face.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   A provided ID for the UserID. Unique within the collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   Match confidence with the UserID, provides information regarding if
+    #   a face association was unsuccessful because it didn't meet
+    #   UserMatchThreshold.
+    #   @return [Float]
+    #
+    # @!attribute [rw] reasons
+    #   The reason why the association was unsuccessful.
+    #   @return [Array<String>]
+    #
+    class UnsuccessfulFaceAssociation < Struct.new(
+      :face_id,
+      :user_id,
+      :confidence,
+      :reasons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata like FaceId, UserID, and Reasons, for a face that
+    # was unsuccessfully deleted.
+    #
+    # @!attribute [rw] face_id
+    #   A unique identifier assigned to the face.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   A provided ID for the UserID. Unique within the collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] reasons
+    #   The reason why the deletion was unsuccessful.
+    #   @return [Array<String>]
+    #
+    class UnsuccessfulFaceDeletion < Struct.new(
+      :face_id,
+      :user_id,
+      :reasons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata like FaceId, UserID, and Reasons, for a face that
+    # was unsuccessfully disassociated.
+    #
+    # @!attribute [rw] face_id
+    #   A unique identifier assigned to the face.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   A provided ID for the UserID. Unique within the collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] reasons
+    #   The reason why the deletion was unsuccessful.
+    #   @return [Array<String>]
+    #
+    class UnsuccessfulFaceDisassociation < Struct.new(
+      :face_id,
+      :user_id,
+      :reasons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   Amazon Resource Name (ARN) of the model, collection, or stream
     #   processor that you want to remove the tags from.
@@ -7018,6 +7643,42 @@ module Aws::Rekognition
     end
 
     class UpdateStreamProcessorResponse < Aws::EmptyStructure; end
+
+    # Metadata of the user stored in a collection.
+    #
+    # @!attribute [rw] user_id
+    #   A provided ID for the User. Unique within the collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_status
+    #   Communicates if the UserID has been updated with latest set of faces
+    #   to be associated with the UserID.
+    #   @return [String]
+    #
+    class User < Struct.new(
+      :user_id,
+      :user_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides UserID metadata along with the confidence in the match of
+    # this UserID with the input face.
+    #
+    # @!attribute [rw] similarity
+    #   Describes the UserID metadata.
+    #   @return [Float]
+    #
+    # @!attribute [rw] user
+    #   Confidence in the match of this UserID with the input face.
+    #   @return [Types::MatchedUser]
+    #
+    class UserMatch < Struct.new(
+      :similarity,
+      :user)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains the Amazon S3 bucket location of the validation data for a
     # model training job.

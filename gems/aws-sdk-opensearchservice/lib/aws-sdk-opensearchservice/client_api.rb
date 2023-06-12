@@ -91,6 +91,7 @@ module Aws::OpenSearchService
     CreateVpcEndpointRequest = Shapes::StructureShape.new(name: 'CreateVpcEndpointRequest')
     CreateVpcEndpointResponse = Shapes::StructureShape.new(name: 'CreateVpcEndpointResponse')
     CreatedAt = Shapes::TimestampShape.new(name: 'CreatedAt')
+    CrossClusterSearchConnectionProperties = Shapes::StructureShape.new(name: 'CrossClusterSearchConnectionProperties')
     DeleteDomainRequest = Shapes::StructureShape.new(name: 'DeleteDomainRequest')
     DeleteDomainResponse = Shapes::StructureShape.new(name: 'DeleteDomainResponse')
     DeleteInboundConnectionRequest = Shapes::StructureShape.new(name: 'DeleteInboundConnectionRequest')
@@ -329,6 +330,7 @@ module Aws::OpenSearchService
     ScheduledBy = Shapes::StringShape.new(name: 'ScheduledBy')
     ServiceSoftwareOptions = Shapes::StructureShape.new(name: 'ServiceSoftwareOptions')
     ServiceUrl = Shapes::StringShape.new(name: 'ServiceUrl')
+    SkipUnavailableStatus = Shapes::StringShape.new(name: 'SkipUnavailableStatus')
     SlotList = Shapes::ListShape.new(name: 'SlotList')
     SlotNotAvailableException = Shapes::StructureShape.new(name: 'SlotNotAvailableException')
     SnapshotOptions = Shapes::StructureShape.new(name: 'SnapshotOptions')
@@ -601,6 +603,7 @@ module Aws::OpenSearchService
     ConflictException.struct_class = Types::ConflictException
 
     ConnectionProperties.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
+    ConnectionProperties.add_member(:cross_cluster_search, Shapes::ShapeRef.new(shape: CrossClusterSearchConnectionProperties, location_name: "CrossClusterSearch"))
     ConnectionProperties.struct_class = Types::ConnectionProperties
 
     CreateDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
@@ -630,6 +633,7 @@ module Aws::OpenSearchService
     CreateOutboundConnectionRequest.add_member(:remote_domain_info, Shapes::ShapeRef.new(shape: DomainInformationContainer, required: true, location_name: "RemoteDomainInfo"))
     CreateOutboundConnectionRequest.add_member(:connection_alias, Shapes::ShapeRef.new(shape: ConnectionAlias, required: true, location_name: "ConnectionAlias"))
     CreateOutboundConnectionRequest.add_member(:connection_mode, Shapes::ShapeRef.new(shape: ConnectionMode, location_name: "ConnectionMode"))
+    CreateOutboundConnectionRequest.add_member(:connection_properties, Shapes::ShapeRef.new(shape: ConnectionProperties, location_name: "ConnectionProperties"))
     CreateOutboundConnectionRequest.struct_class = Types::CreateOutboundConnectionRequest
 
     CreateOutboundConnectionResponse.add_member(:local_domain_info, Shapes::ShapeRef.new(shape: DomainInformationContainer, location_name: "LocalDomainInfo"))
@@ -657,6 +661,9 @@ module Aws::OpenSearchService
 
     CreateVpcEndpointResponse.add_member(:vpc_endpoint, Shapes::ShapeRef.new(shape: VpcEndpoint, required: true, location_name: "VpcEndpoint"))
     CreateVpcEndpointResponse.struct_class = Types::CreateVpcEndpointResponse
+
+    CrossClusterSearchConnectionProperties.add_member(:skip_unavailable, Shapes::ShapeRef.new(shape: SkipUnavailableStatus, location_name: "SkipUnavailable"))
+    CrossClusterSearchConnectionProperties.struct_class = Types::CrossClusterSearchConnectionProperties
 
     DeleteDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     DeleteDomainRequest.struct_class = Types::DeleteDomainRequest

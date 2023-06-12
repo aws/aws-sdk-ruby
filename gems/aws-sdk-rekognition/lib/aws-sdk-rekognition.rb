@@ -33,7 +33,7 @@ require_relative 'aws-sdk-rekognition/customizations'
 # structure.
 #
 #     rekognition = Aws::Rekognition::Client.new
-#     resp = rekognition.compare_faces(params)
+#     resp = rekognition.associate_faces(params)
 #
 # See {Client} for more information.
 #
@@ -53,6 +53,6 @@ require_relative 'aws-sdk-rekognition/customizations'
 # @!group service
 module Aws::Rekognition
 
-  GEM_VERSION = '1.80.0'
+  GEM_VERSION = '1.81.0'
 
 end

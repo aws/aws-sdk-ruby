@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2023-06-12)
+------------------
+
+* Feature - Documentation updates for DynamoDB Streams
+
 1.44.0 (2023-05-31)
 ------------------
 

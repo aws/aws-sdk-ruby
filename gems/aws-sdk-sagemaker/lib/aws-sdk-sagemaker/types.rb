@@ -2096,9 +2096,12 @@ module Aws::SageMaker
     #   The content type of the data from the input source. The following
     #   are the allowed content types for different problems:
     #
-    #   * ImageClassification: `image/png`, `image/jpeg`, `image/*`
+    #   * ImageClassification: `image/png`, `image/jpeg`, or `image/*`. The
+    #     default value is `image/*`.
     #
-    #   * TextClassification: `text/csv;header=present`
+    #   * TextClassification: `text/csv;header=present` or
+    #     `x-application/vnd.amazon+parquet`. The default value is
+    #     `text/csv;header=present`.
     #   @return [String]
     #
     # @!attribute [rw] compression_type
@@ -14425,7 +14428,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] pipeline_name
-    #   The name of the pipeline to describe.
+    #   The name or Amazon Resource Name (ARN) of the pipeline to describe.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineRequest AWS API Documentation
@@ -19975,12 +19978,12 @@ module Aws::SageMaker
     # @!attribute [rw] instance_count
     #   The number of instances of the type specified by `InstanceType`.
     #   Choose an instance count larger than 1 for distributed training
-    #   algorithms. See [SageMaker distributed training jobs][1] for more
-    #   information.
+    #   algorithms. See [Step 2: Launch a SageMaker Distributed Training Job
+    #   Using the SageMaker Python SDK][1] for more information.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/data-parallel-use-api.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/data-parallel-use-api.html
     #   @return [Integer]
     #
     # @!attribute [rw] volume_size_in_gb
@@ -20492,7 +20495,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/notebooks-available-instance-types.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebooks-available-instance-types.html
     #   @return [String]
     #
     # @!attribute [rw] instance_count
@@ -22501,8 +22504,11 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] max_results
-    #   The maximum number of AppImageConfigs to return in the response. The
-    #   default value is 10.
+    #   The total number of items to return in the response. If the total
+    #   number of items available is more than the value specified, a
+    #   `NextToken` is provided in the response. To resume pagination,
+    #   provide the `NextToken` value in the as part of a subsequent call.
+    #   The default value is 10.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -22585,7 +22591,11 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Returns a list up to a specified limit.
+    #   The total number of items to return in the response. If the total
+    #   number of items available is more than the value specified, a
+    #   `NextToken` is provided in the response. To resume pagination,
+    #   provide the `NextToken` value in the as part of a subsequent call.
+    #   The default value is 10.
     #   @return [Integer]
     #
     # @!attribute [rw] sort_order
@@ -23399,7 +23409,11 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Returns a list up to a specified limit.
+    #   The total number of items to return in the response. If the total
+    #   number of items available is more than the value specified, a
+    #   `NextToken` is provided in the response. To resume pagination,
+    #   provide the `NextToken` value in the as part of a subsequent call.
+    #   The default value is 10.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListDomainsRequest AWS API Documentation
@@ -26219,7 +26233,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] pipeline_name
-    #   The name of the pipeline.
+    #   The name or Amazon Resource Name (ARN) of the pipeline.
     #   @return [String]
     #
     # @!attribute [rw] created_after
@@ -26555,7 +26569,11 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Returns a list up to a specified limit.
+    #   The total number of items to return in the response. If the total
+    #   number of items available is more than the value specified, a
+    #   `NextToken` is provided in the response. To resume pagination,
+    #   provide the `NextToken` value in the as part of a subsequent call.
+    #   The default value is 10.
     #   @return [Integer]
     #
     # @!attribute [rw] sort_order
@@ -26657,8 +26675,11 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] max_results
-    #   The maximum number of Studio Lifecycle Configurations to return in
-    #   the response. The default value is 10.
+    #   The total number of items to return in the response. If the total
+    #   number of items available is more than the value specified, a
+    #   `NextToken` is provided in the response. To resume pagination,
+    #   provide the `NextToken` value in the as part of a subsequent call.
+    #   The default value is 10.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -26725,7 +26746,8 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] next_token
-    #   A token for getting the next set of actions, if there are any.
+    #   If the previous response was truncated, you will receive this token.
+    #   Use it in your next request to receive the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] studio_lifecycle_configs
@@ -27231,7 +27253,11 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Returns a list up to a specified limit.
+    #   The total number of items to return in the response. If the total
+    #   number of items available is more than the value specified, a
+    #   `NextToken` is provided in the response. To resume pagination,
+    #   provide the `NextToken` value in the as part of a subsequent call.
+    #   The default value is 10.
     #   @return [Integer]
     #
     # @!attribute [rw] sort_order
@@ -35824,7 +35850,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] pipeline_name
-    #   The name of the pipeline.
+    #   The name or Amazon Resource Name (ARN) of the pipeline.
     #   @return [String]
     #
     # @!attribute [rw] pipeline_execution_display_name

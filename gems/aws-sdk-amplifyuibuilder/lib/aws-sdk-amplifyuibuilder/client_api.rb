@@ -14,7 +14,31 @@ module Aws::AmplifyUIBuilder
     include Seahorse::Model
 
     ActionParameters = Shapes::StructureShape.new(name: 'ActionParameters')
+    AppId = Shapes::StringShape.new(name: 'AppId')
+    AssociatedFieldsList = Shapes::ListShape.new(name: 'AssociatedFieldsList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CodegenFeatureFlags = Shapes::StructureShape.new(name: 'CodegenFeatureFlags')
+    CodegenGenericDataEnum = Shapes::StructureShape.new(name: 'CodegenGenericDataEnum')
+    CodegenGenericDataEnumValuesList = Shapes::ListShape.new(name: 'CodegenGenericDataEnumValuesList')
+    CodegenGenericDataEnums = Shapes::MapShape.new(name: 'CodegenGenericDataEnums')
+    CodegenGenericDataField = Shapes::StructureShape.new(name: 'CodegenGenericDataField')
+    CodegenGenericDataFieldDataType = Shapes::StringShape.new(name: 'CodegenGenericDataFieldDataType')
+    CodegenGenericDataFields = Shapes::MapShape.new(name: 'CodegenGenericDataFields')
+    CodegenGenericDataModel = Shapes::StructureShape.new(name: 'CodegenGenericDataModel')
+    CodegenGenericDataModels = Shapes::MapShape.new(name: 'CodegenGenericDataModels')
+    CodegenGenericDataNonModel = Shapes::StructureShape.new(name: 'CodegenGenericDataNonModel')
+    CodegenGenericDataNonModelFields = Shapes::MapShape.new(name: 'CodegenGenericDataNonModelFields')
+    CodegenGenericDataNonModels = Shapes::MapShape.new(name: 'CodegenGenericDataNonModels')
+    CodegenGenericDataRelationshipType = Shapes::StructureShape.new(name: 'CodegenGenericDataRelationshipType')
+    CodegenJob = Shapes::StructureShape.new(name: 'CodegenJob')
+    CodegenJobAsset = Shapes::StructureShape.new(name: 'CodegenJobAsset')
+    CodegenJobGenericDataSchema = Shapes::StructureShape.new(name: 'CodegenJobGenericDataSchema')
+    CodegenJobGenericDataSourceType = Shapes::StringShape.new(name: 'CodegenJobGenericDataSourceType')
+    CodegenJobRenderConfig = Shapes::UnionShape.new(name: 'CodegenJobRenderConfig')
+    CodegenJobStatus = Shapes::StringShape.new(name: 'CodegenJobStatus')
+    CodegenJobSummary = Shapes::StructureShape.new(name: 'CodegenJobSummary')
+    CodegenJobSummaryList = Shapes::ListShape.new(name: 'CodegenJobSummaryList')
+    CodegenPrimaryKeysList = Shapes::ListShape.new(name: 'CodegenPrimaryKeysList')
     Component = Shapes::StructureShape.new(name: 'Component')
     ComponentBindingProperties = Shapes::MapShape.new(name: 'ComponentBindingProperties')
     ComponentBindingPropertiesValue = Shapes::StructureShape.new(name: 'ComponentBindingPropertiesValue')
@@ -91,6 +115,9 @@ module Aws::AmplifyUIBuilder
     FormStyleConfig = Shapes::UnionShape.new(name: 'FormStyleConfig')
     FormSummary = Shapes::StructureShape.new(name: 'FormSummary')
     FormSummaryList = Shapes::ListShape.new(name: 'FormSummaryList')
+    GenericDataRelationshipType = Shapes::StringShape.new(name: 'GenericDataRelationshipType')
+    GetCodegenJobRequest = Shapes::StructureShape.new(name: 'GetCodegenJobRequest')
+    GetCodegenJobResponse = Shapes::StructureShape.new(name: 'GetCodegenJobResponse')
     GetComponentRequest = Shapes::StructureShape.new(name: 'GetComponentRequest')
     GetComponentResponse = Shapes::StructureShape.new(name: 'GetComponentResponse')
     GetFormRequest = Shapes::StructureShape.new(name: 'GetFormRequest')
@@ -103,7 +130,13 @@ module Aws::AmplifyUIBuilder
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
+    JSModule = Shapes::StringShape.new(name: 'JSModule')
+    JSScript = Shapes::StringShape.new(name: 'JSScript')
+    JSTarget = Shapes::StringShape.new(name: 'JSTarget')
     LabelDecorator = Shapes::StringShape.new(name: 'LabelDecorator')
+    ListCodegenJobsLimit = Shapes::IntegerShape.new(name: 'ListCodegenJobsLimit')
+    ListCodegenJobsRequest = Shapes::StructureShape.new(name: 'ListCodegenJobsRequest')
+    ListCodegenJobsResponse = Shapes::StructureShape.new(name: 'ListCodegenJobsResponse')
     ListComponentsLimit = Shapes::IntegerShape.new(name: 'ListComponentsLimit')
     ListComponentsRequest = Shapes::StructureShape.new(name: 'ListComponentsRequest')
     ListComponentsResponse = Shapes::StructureShape.new(name: 'ListComponentsResponse')
@@ -120,9 +153,11 @@ module Aws::AmplifyUIBuilder
     PredicateList = Shapes::ListShape.new(name: 'PredicateList')
     PutMetadataFlagBody = Shapes::StructureShape.new(name: 'PutMetadataFlagBody')
     PutMetadataFlagRequest = Shapes::StructureShape.new(name: 'PutMetadataFlagRequest')
+    ReactStartCodegenJobData = Shapes::StructureShape.new(name: 'ReactStartCodegenJobData')
     RefreshTokenRequest = Shapes::StructureShape.new(name: 'RefreshTokenRequest')
     RefreshTokenRequestBody = Shapes::StructureShape.new(name: 'RefreshTokenRequestBody')
     RefreshTokenResponse = Shapes::StructureShape.new(name: 'RefreshTokenResponse')
+    RelatedModelFieldsList = Shapes::ListShape.new(name: 'RelatedModelFieldsList')
     ResourceConflictException = Shapes::StructureShape.new(name: 'ResourceConflictException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     SectionalElement = Shapes::StructureShape.new(name: 'SectionalElement')
@@ -132,6 +167,9 @@ module Aws::AmplifyUIBuilder
     SortDirection = Shapes::StringShape.new(name: 'SortDirection')
     SortProperty = Shapes::StructureShape.new(name: 'SortProperty')
     SortPropertyList = Shapes::ListShape.new(name: 'SortPropertyList')
+    StartCodegenJobData = Shapes::StructureShape.new(name: 'StartCodegenJobData')
+    StartCodegenJobRequest = Shapes::StructureShape.new(name: 'StartCodegenJobRequest')
+    StartCodegenJobResponse = Shapes::StructureShape.new(name: 'StartCodegenJobResponse')
     StorageAccessLevel = Shapes::StringShape.new(name: 'StorageAccessLevel')
     StrValues = Shapes::ListShape.new(name: 'StrValues')
     String = Shapes::StringShape.new(name: 'String')
@@ -147,6 +185,7 @@ module Aws::AmplifyUIBuilder
     ThemeValue = Shapes::StructureShape.new(name: 'ThemeValue')
     ThemeValues = Shapes::StructureShape.new(name: 'ThemeValues')
     ThemeValuesList = Shapes::ListShape.new(name: 'ThemeValuesList')
+    ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TokenProviders = Shapes::StringShape.new(name: 'TokenProviders')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     UpdateComponentData = Shapes::StructureShape.new(name: 'UpdateComponentData')
@@ -174,6 +213,100 @@ module Aws::AmplifyUIBuilder
     ActionParameters.add_member(:fields, Shapes::ShapeRef.new(shape: ComponentProperties, location_name: "fields"))
     ActionParameters.add_member(:state, Shapes::ShapeRef.new(shape: MutationActionSetStateParameter, location_name: "state"))
     ActionParameters.struct_class = Types::ActionParameters
+
+    AssociatedFieldsList.member = Shapes::ShapeRef.new(shape: String)
+
+    CodegenFeatureFlags.add_member(:is_relationship_supported, Shapes::ShapeRef.new(shape: Boolean, location_name: "isRelationshipSupported"))
+    CodegenFeatureFlags.add_member(:is_non_model_supported, Shapes::ShapeRef.new(shape: Boolean, location_name: "isNonModelSupported"))
+    CodegenFeatureFlags.struct_class = Types::CodegenFeatureFlags
+
+    CodegenGenericDataEnum.add_member(:values, Shapes::ShapeRef.new(shape: CodegenGenericDataEnumValuesList, required: true, location_name: "values"))
+    CodegenGenericDataEnum.struct_class = Types::CodegenGenericDataEnum
+
+    CodegenGenericDataEnumValuesList.member = Shapes::ShapeRef.new(shape: String)
+
+    CodegenGenericDataEnums.key = Shapes::ShapeRef.new(shape: String)
+    CodegenGenericDataEnums.value = Shapes::ShapeRef.new(shape: CodegenGenericDataEnum)
+
+    CodegenGenericDataField.add_member(:data_type, Shapes::ShapeRef.new(shape: CodegenGenericDataFieldDataType, required: true, location_name: "dataType"))
+    CodegenGenericDataField.add_member(:data_type_value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "dataTypeValue"))
+    CodegenGenericDataField.add_member(:required, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "required"))
+    CodegenGenericDataField.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "readOnly"))
+    CodegenGenericDataField.add_member(:is_array, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isArray"))
+    CodegenGenericDataField.add_member(:relationship, Shapes::ShapeRef.new(shape: CodegenGenericDataRelationshipType, location_name: "relationship"))
+    CodegenGenericDataField.struct_class = Types::CodegenGenericDataField
+
+    CodegenGenericDataFields.key = Shapes::ShapeRef.new(shape: String)
+    CodegenGenericDataFields.value = Shapes::ShapeRef.new(shape: CodegenGenericDataField)
+
+    CodegenGenericDataModel.add_member(:fields, Shapes::ShapeRef.new(shape: CodegenGenericDataFields, required: true, location_name: "fields"))
+    CodegenGenericDataModel.add_member(:is_join_table, Shapes::ShapeRef.new(shape: Boolean, location_name: "isJoinTable"))
+    CodegenGenericDataModel.add_member(:primary_keys, Shapes::ShapeRef.new(shape: CodegenPrimaryKeysList, required: true, location_name: "primaryKeys"))
+    CodegenGenericDataModel.struct_class = Types::CodegenGenericDataModel
+
+    CodegenGenericDataModels.key = Shapes::ShapeRef.new(shape: String)
+    CodegenGenericDataModels.value = Shapes::ShapeRef.new(shape: CodegenGenericDataModel)
+
+    CodegenGenericDataNonModel.add_member(:fields, Shapes::ShapeRef.new(shape: CodegenGenericDataNonModelFields, required: true, location_name: "fields"))
+    CodegenGenericDataNonModel.struct_class = Types::CodegenGenericDataNonModel
+
+    CodegenGenericDataNonModelFields.key = Shapes::ShapeRef.new(shape: String)
+    CodegenGenericDataNonModelFields.value = Shapes::ShapeRef.new(shape: CodegenGenericDataField)
+
+    CodegenGenericDataNonModels.key = Shapes::ShapeRef.new(shape: String)
+    CodegenGenericDataNonModels.value = Shapes::ShapeRef.new(shape: CodegenGenericDataNonModel)
+
+    CodegenGenericDataRelationshipType.add_member(:type, Shapes::ShapeRef.new(shape: GenericDataRelationshipType, required: true, location_name: "type"))
+    CodegenGenericDataRelationshipType.add_member(:related_model_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "relatedModelName"))
+    CodegenGenericDataRelationshipType.add_member(:related_model_fields, Shapes::ShapeRef.new(shape: RelatedModelFieldsList, location_name: "relatedModelFields"))
+    CodegenGenericDataRelationshipType.add_member(:can_unlink_associated_model, Shapes::ShapeRef.new(shape: Boolean, location_name: "canUnlinkAssociatedModel"))
+    CodegenGenericDataRelationshipType.add_member(:related_join_field_name, Shapes::ShapeRef.new(shape: String, location_name: "relatedJoinFieldName"))
+    CodegenGenericDataRelationshipType.add_member(:related_join_table_name, Shapes::ShapeRef.new(shape: String, location_name: "relatedJoinTableName"))
+    CodegenGenericDataRelationshipType.add_member(:belongs_to_field_on_related_model, Shapes::ShapeRef.new(shape: String, location_name: "belongsToFieldOnRelatedModel"))
+    CodegenGenericDataRelationshipType.add_member(:associated_fields, Shapes::ShapeRef.new(shape: AssociatedFieldsList, location_name: "associatedFields"))
+    CodegenGenericDataRelationshipType.add_member(:is_has_many_index, Shapes::ShapeRef.new(shape: Boolean, location_name: "isHasManyIndex"))
+    CodegenGenericDataRelationshipType.struct_class = Types::CodegenGenericDataRelationshipType
+
+    CodegenJob.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "id"))
+    CodegenJob.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location_name: "appId"))
+    CodegenJob.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "environmentName"))
+    CodegenJob.add_member(:render_config, Shapes::ShapeRef.new(shape: CodegenJobRenderConfig, location_name: "renderConfig"))
+    CodegenJob.add_member(:generic_data_schema, Shapes::ShapeRef.new(shape: CodegenJobGenericDataSchema, location_name: "genericDataSchema"))
+    CodegenJob.add_member(:auto_generate_forms, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoGenerateForms"))
+    CodegenJob.add_member(:features, Shapes::ShapeRef.new(shape: CodegenFeatureFlags, location_name: "features"))
+    CodegenJob.add_member(:status, Shapes::ShapeRef.new(shape: CodegenJobStatus, location_name: "status"))
+    CodegenJob.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    CodegenJob.add_member(:asset, Shapes::ShapeRef.new(shape: CodegenJobAsset, location_name: "asset"))
+    CodegenJob.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CodegenJob.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    CodegenJob.add_member(:modified_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "modifiedAt"))
+    CodegenJob.struct_class = Types::CodegenJob
+
+    CodegenJobAsset.add_member(:download_url, Shapes::ShapeRef.new(shape: String, location_name: "downloadUrl"))
+    CodegenJobAsset.struct_class = Types::CodegenJobAsset
+
+    CodegenJobGenericDataSchema.add_member(:data_source_type, Shapes::ShapeRef.new(shape: CodegenJobGenericDataSourceType, required: true, location_name: "dataSourceType"))
+    CodegenJobGenericDataSchema.add_member(:models, Shapes::ShapeRef.new(shape: CodegenGenericDataModels, required: true, location_name: "models"))
+    CodegenJobGenericDataSchema.add_member(:enums, Shapes::ShapeRef.new(shape: CodegenGenericDataEnums, required: true, location_name: "enums"))
+    CodegenJobGenericDataSchema.add_member(:non_models, Shapes::ShapeRef.new(shape: CodegenGenericDataNonModels, required: true, location_name: "nonModels"))
+    CodegenJobGenericDataSchema.struct_class = Types::CodegenJobGenericDataSchema
+
+    CodegenJobRenderConfig.add_member(:react, Shapes::ShapeRef.new(shape: ReactStartCodegenJobData, location_name: "react"))
+    CodegenJobRenderConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CodegenJobRenderConfig.add_member_subclass(:react, Types::CodegenJobRenderConfig::React)
+    CodegenJobRenderConfig.add_member_subclass(:unknown, Types::CodegenJobRenderConfig::Unknown)
+    CodegenJobRenderConfig.struct_class = Types::CodegenJobRenderConfig
+
+    CodegenJobSummary.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location_name: "appId"))
+    CodegenJobSummary.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "environmentName"))
+    CodegenJobSummary.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "id"))
+    CodegenJobSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    CodegenJobSummary.add_member(:modified_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "modifiedAt"))
+    CodegenJobSummary.struct_class = Types::CodegenJobSummary
+
+    CodegenJobSummaryList.member = Shapes::ShapeRef.new(shape: CodegenJobSummary)
+
+    CodegenPrimaryKeysList.member = Shapes::ShapeRef.new(shape: String)
 
     Component.add_member(:app_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "appId"))
     Component.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "environmentName"))
@@ -567,6 +700,16 @@ module Aws::AmplifyUIBuilder
 
     FormSummaryList.member = Shapes::ShapeRef.new(shape: FormSummary)
 
+    GetCodegenJobRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "appId"))
+    GetCodegenJobRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "environmentName"))
+    GetCodegenJobRequest.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "id"))
+    GetCodegenJobRequest.struct_class = Types::GetCodegenJobRequest
+
+    GetCodegenJobResponse.add_member(:job, Shapes::ShapeRef.new(shape: CodegenJob, location_name: "job"))
+    GetCodegenJobResponse.struct_class = Types::GetCodegenJobResponse
+    GetCodegenJobResponse[:payload] = :job
+    GetCodegenJobResponse[:payload_member] = GetCodegenJobResponse.member(:job)
+
     GetComponentRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "appId"))
     GetComponentRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "environmentName"))
     GetComponentRequest.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "id"))
@@ -611,6 +754,16 @@ module Aws::AmplifyUIBuilder
 
     InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    ListCodegenJobsRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "appId"))
+    ListCodegenJobsRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "environmentName"))
+    ListCodegenJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListCodegenJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListCodegenJobsLimit, location: "querystring", location_name: "maxResults"))
+    ListCodegenJobsRequest.struct_class = Types::ListCodegenJobsRequest
+
+    ListCodegenJobsResponse.add_member(:entities, Shapes::ShapeRef.new(shape: CodegenJobSummaryList, required: true, location_name: "entities"))
+    ListCodegenJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListCodegenJobsResponse.struct_class = Types::ListCodegenJobsResponse
 
     ListComponentsRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "appId"))
     ListComponentsRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "environmentName"))
@@ -670,6 +823,13 @@ module Aws::AmplifyUIBuilder
     PutMetadataFlagRequest[:payload] = :body
     PutMetadataFlagRequest[:payload_member] = PutMetadataFlagRequest.member(:body)
 
+    ReactStartCodegenJobData.add_member(:module, Shapes::ShapeRef.new(shape: JSModule, location_name: "module"))
+    ReactStartCodegenJobData.add_member(:target, Shapes::ShapeRef.new(shape: JSTarget, location_name: "target"))
+    ReactStartCodegenJobData.add_member(:script, Shapes::ShapeRef.new(shape: JSScript, location_name: "script"))
+    ReactStartCodegenJobData.add_member(:render_type_declarations, Shapes::ShapeRef.new(shape: Boolean, location_name: "renderTypeDeclarations"))
+    ReactStartCodegenJobData.add_member(:inline_source_map, Shapes::ShapeRef.new(shape: Boolean, location_name: "inlineSourceMap"))
+    ReactStartCodegenJobData.struct_class = Types::ReactStartCodegenJobData
+
     RefreshTokenRequest.add_member(:provider, Shapes::ShapeRef.new(shape: TokenProviders, required: true, location: "uri", location_name: "provider"))
     RefreshTokenRequest.add_member(:refresh_token_body, Shapes::ShapeRef.new(shape: RefreshTokenRequestBody, required: true, location_name: "refreshTokenBody"))
     RefreshTokenRequest.struct_class = Types::RefreshTokenRequest
@@ -683,6 +843,8 @@ module Aws::AmplifyUIBuilder
     RefreshTokenResponse.add_member(:access_token, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "accessToken"))
     RefreshTokenResponse.add_member(:expires_in, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "expiresIn"))
     RefreshTokenResponse.struct_class = Types::RefreshTokenResponse
+
+    RelatedModelFieldsList.member = Shapes::ShapeRef.new(shape: String)
 
     ResourceConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceConflictException.struct_class = Types::ResourceConflictException
@@ -709,6 +871,26 @@ module Aws::AmplifyUIBuilder
     SortProperty.struct_class = Types::SortProperty
 
     SortPropertyList.member = Shapes::ShapeRef.new(shape: SortProperty)
+
+    StartCodegenJobData.add_member(:render_config, Shapes::ShapeRef.new(shape: CodegenJobRenderConfig, required: true, location_name: "renderConfig"))
+    StartCodegenJobData.add_member(:generic_data_schema, Shapes::ShapeRef.new(shape: CodegenJobGenericDataSchema, location_name: "genericDataSchema"))
+    StartCodegenJobData.add_member(:auto_generate_forms, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoGenerateForms"))
+    StartCodegenJobData.add_member(:features, Shapes::ShapeRef.new(shape: CodegenFeatureFlags, location_name: "features"))
+    StartCodegenJobData.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    StartCodegenJobData.struct_class = Types::StartCodegenJobData
+
+    StartCodegenJobRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "appId"))
+    StartCodegenJobRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "environmentName"))
+    StartCodegenJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartCodegenJobRequest.add_member(:codegen_job_to_create, Shapes::ShapeRef.new(shape: StartCodegenJobData, required: true, location_name: "codegenJobToCreate"))
+    StartCodegenJobRequest.struct_class = Types::StartCodegenJobRequest
+    StartCodegenJobRequest[:payload] = :codegen_job_to_create
+    StartCodegenJobRequest[:payload_member] = StartCodegenJobRequest.member(:codegen_job_to_create)
+
+    StartCodegenJobResponse.add_member(:entity, Shapes::ShapeRef.new(shape: CodegenJob, location_name: "entity"))
+    StartCodegenJobResponse.struct_class = Types::StartCodegenJobResponse
+    StartCodegenJobResponse[:payload] = :entity
+    StartCodegenJobResponse[:payload_member] = StartCodegenJobResponse.member(:entity)
 
     StrValues.member = Shapes::ShapeRef.new(shape: String)
 
@@ -745,6 +927,9 @@ module Aws::AmplifyUIBuilder
     ThemeValues.struct_class = Types::ThemeValues
 
     ThemeValuesList.member = Shapes::ShapeRef.new(shape: ThemeValues)
+
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
 
     UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     UnauthorizedException.struct_class = Types::UnauthorizedException
@@ -975,6 +1160,18 @@ module Aws::AmplifyUIBuilder
         )
       end)
 
+      api.add_operation(:get_codegen_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCodegenJob"
+        o.http_method = "GET"
+        o.http_request_uri = "/app/{appId}/environment/{environmentName}/codegen-jobs/{id}"
+        o.input = Shapes::ShapeRef.new(shape: GetCodegenJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCodegenJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:get_component, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetComponent"
         o.http_method = "GET"
@@ -1016,6 +1213,23 @@ module Aws::AmplifyUIBuilder
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:list_codegen_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCodegenJobs"
+        o.http_method = "GET"
+        o.http_request_uri = "/app/{appId}/environment/{environmentName}/codegen-jobs"
+        o.input = Shapes::ShapeRef.new(shape: ListCodegenJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCodegenJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_components, Seahorse::Model::Operation.new.tap do |o|
@@ -1083,6 +1297,17 @@ module Aws::AmplifyUIBuilder
         o.input = Shapes::ShapeRef.new(shape: RefreshTokenRequest)
         o.output = Shapes::ShapeRef.new(shape: RefreshTokenResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
+      api.add_operation(:start_codegen_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartCodegenJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/app/{appId}/environment/{environmentName}/codegen-jobs"
+        o.input = Shapes::ShapeRef.new(shape: StartCodegenJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartCodegenJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_component, Seahorse::Model::Operation.new.tap do |o|

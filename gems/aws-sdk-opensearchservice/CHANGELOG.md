@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2023-06-12)
+------------------
+
+* Feature - This release adds support for SkipUnavailable connection property for cross cluster search
+
 1.21.0 (2023-05-31)
 ------------------
 

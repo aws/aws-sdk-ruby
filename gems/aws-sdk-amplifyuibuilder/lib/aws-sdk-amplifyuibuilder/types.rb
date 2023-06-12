@@ -77,6 +77,355 @@ module Aws::AmplifyUIBuilder
       include Aws::Structure
     end
 
+    # Describes the feature flags that you can specify for a code generation
+    # job.
+    #
+    # @!attribute [rw] is_relationship_supported
+    #   Specifes whether a code generation job supports data relationships.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_non_model_supported
+    #   Specifies whether a code generation job supports non models.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CodegenFeatureFlags AWS API Documentation
+    #
+    class CodegenFeatureFlags < Struct.new(
+      :is_relationship_supported,
+      :is_non_model_supported)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the enums in a generic data schema.
+    #
+    # @!attribute [rw] values
+    #   The list of enum values in the generic data schema.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CodegenGenericDataEnum AWS API Documentation
+    #
+    class CodegenGenericDataEnum < Struct.new(
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a field in a generic data schema.
+    #
+    # @!attribute [rw] data_type
+    #   The data type for the generic data field.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_type_value
+    #   The value of the data type for the generic data field.
+    #   @return [String]
+    #
+    # @!attribute [rw] required
+    #   Specifies whether the generic data field is required.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] read_only
+    #   Specifies whether the generic data field is read-only.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_array
+    #   Specifies whether the generic data field is an array.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] relationship
+    #   The relationship of the generic data schema.
+    #   @return [Types::CodegenGenericDataRelationshipType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CodegenGenericDataField AWS API Documentation
+    #
+    class CodegenGenericDataField < Struct.new(
+      :data_type,
+      :data_type_value,
+      :required,
+      :read_only,
+      :is_array,
+      :relationship)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a model in a generic data schema.
+    #
+    # @!attribute [rw] fields
+    #   The fields in the generic data model.
+    #   @return [Hash<String,Types::CodegenGenericDataField>]
+    #
+    # @!attribute [rw] is_join_table
+    #   Specifies whether the generic data model is a join table.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] primary_keys
+    #   The primary keys of the generic data model.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CodegenGenericDataModel AWS API Documentation
+    #
+    class CodegenGenericDataModel < Struct.new(
+      :fields,
+      :is_join_table,
+      :primary_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a non-model in a generic data schema.
+    #
+    # @!attribute [rw] fields
+    #   The fields in a generic data schema non model.
+    #   @return [Hash<String,Types::CodegenGenericDataField>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CodegenGenericDataNonModel AWS API Documentation
+    #
+    class CodegenGenericDataNonModel < Struct.new(
+      :fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the relationship between generic data models.
+    #
+    # @!attribute [rw] type
+    #   The data relationship type.
+    #   @return [String]
+    #
+    # @!attribute [rw] related_model_name
+    #   The name of the related model in the data relationship.
+    #   @return [String]
+    #
+    # @!attribute [rw] related_model_fields
+    #   The related model fields in the data relationship.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] can_unlink_associated_model
+    #   Specifies whether the relationship can unlink the associated model.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] related_join_field_name
+    #   The name of the related join field in the data relationship.
+    #   @return [String]
+    #
+    # @!attribute [rw] related_join_table_name
+    #   The name of the related join table in the data relationship.
+    #   @return [String]
+    #
+    # @!attribute [rw] belongs_to_field_on_related_model
+    #   The value of the `belongsTo` field on the related data model.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_fields
+    #   The associated fields of the data relationship.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] is_has_many_index
+    #   Specifies whether the `@index` directive is supported for a
+    #   `hasMany` data relationship.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CodegenGenericDataRelationshipType AWS API Documentation
+    #
+    class CodegenGenericDataRelationshipType < Struct.new(
+      :type,
+      :related_model_name,
+      :related_model_fields,
+      :can_unlink_associated_model,
+      :related_join_field_name,
+      :related_join_table_name,
+      :belongs_to_field_on_related_model,
+      :associated_fields,
+      :is_has_many_index)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration for a code generation job that is
+    # associated with an Amplify app.
+    #
+    # @!attribute [rw] id
+    #   The unique ID for the code generation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_id
+    #   The ID of the Amplify app associated with the code generation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_name
+    #   The name of the backend environment associated with the code
+    #   generation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] render_config
+    #   Describes the configuration information for rendering the UI
+    #   component associated the code generation job.
+    #   @return [Types::CodegenJobRenderConfig]
+    #
+    # @!attribute [rw] generic_data_schema
+    #   Describes the data schema for a code generation job.
+    #   @return [Types::CodegenJobGenericDataSchema]
+    #
+    # @!attribute [rw] auto_generate_forms
+    #   Specifies whether to autogenerate forms in the code generation job.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] features
+    #   Describes the feature flags that you can specify for a code
+    #   generation job.
+    #   @return [Types::CodegenFeatureFlags]
+    #
+    # @!attribute [rw] status
+    #   The status of the code generation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The customized status message for the code generation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset
+    #   The `CodegenJobAsset` to use for the code generation job.
+    #   @return [Types::CodegenJobAsset]
+    #
+    # @!attribute [rw] tags
+    #   One or more key-value pairs to use when tagging the code generation
+    #   job.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] created_at
+    #   The time that the code generation job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   The time that the code generation job was modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CodegenJob AWS API Documentation
+    #
+    class CodegenJob < Struct.new(
+      :id,
+      :app_id,
+      :environment_name,
+      :render_config,
+      :generic_data_schema,
+      :auto_generate_forms,
+      :features,
+      :status,
+      :status_message,
+      :asset,
+      :tags,
+      :created_at,
+      :modified_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an asset for a code generation job.
+    #
+    # @!attribute [rw] download_url
+    #   The URL to use to access the asset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CodegenJobAsset AWS API Documentation
+    #
+    class CodegenJobAsset < Struct.new(
+      :download_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the data schema for a code generation job.
+    #
+    # @!attribute [rw] data_source_type
+    #   The type of the data source for the schema. Currently, the only
+    #   valid value is an Amplify `DataStore`.
+    #   @return [String]
+    #
+    # @!attribute [rw] models
+    #   The name of a `CodegenGenericDataModel`.
+    #   @return [Hash<String,Types::CodegenGenericDataModel>]
+    #
+    # @!attribute [rw] enums
+    #   The name of a `CodegenGenericDataEnum`.
+    #   @return [Hash<String,Types::CodegenGenericDataEnum>]
+    #
+    # @!attribute [rw] non_models
+    #   The name of a `CodegenGenericDataNonModel`.
+    #   @return [Hash<String,Types::CodegenGenericDataNonModel>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CodegenJobGenericDataSchema AWS API Documentation
+    #
+    class CodegenJobGenericDataSchema < Struct.new(
+      :data_source_type,
+      :models,
+      :enums,
+      :non_models)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration information for rendering the UI component
+    # associated the code generation job.
+    #
+    # @note CodegenJobRenderConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note CodegenJobRenderConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CodegenJobRenderConfig corresponding to the set member.
+    #
+    # @!attribute [rw] react
+    #   The name of the `ReactStartCodegenJobData` object.
+    #   @return [Types::ReactStartCodegenJobData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CodegenJobRenderConfig AWS API Documentation
+    #
+    class CodegenJobRenderConfig < Struct.new(
+      :react,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class React < CodegenJobRenderConfig; end
+      class Unknown < CodegenJobRenderConfig; end
+    end
+
+    # A summary of the basic information about the code generation job.
+    #
+    # @!attribute [rw] app_id
+    #   The unique ID of the Amplify app associated with the code generation
+    #   job.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_name
+    #   The name of the backend environment associated with the code
+    #   generation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique ID for the code generation job summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time that the code generation job summary was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   The time that the code generation job summary was modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/CodegenJobSummary AWS API Documentation
+    #
+    class CodegenJobSummary < Struct.new(
+      :app_id,
+      :environment_name,
+      :id,
+      :created_at,
+      :modified_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the configuration settings for a user interface (UI) element
     # for an Amplify app. A component is configured as a primary,
     # stand-alone UI element. Use `ComponentChild` to configure an instance
@@ -1751,6 +2100,42 @@ module Aws::AmplifyUIBuilder
     end
 
     # @!attribute [rw] app_id
+    #   The unique ID of the Amplify app associated with the code generation
+    #   job.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_name
+    #   The name of the backend environment that is a part of the Amplify
+    #   app associated with the code generation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the code generation job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/GetCodegenJobRequest AWS API Documentation
+    #
+    class GetCodegenJobRequest < Struct.new(
+      :app_id,
+      :environment_name,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job
+    #   The configuration settings for the code generation job.
+    #   @return [Types::CodegenJob]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/GetCodegenJobResponse AWS API Documentation
+    #
+    class GetCodegenJobResponse < Struct.new(
+      :job)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_id
     #   The unique ID of the Amplify app.
     #   @return [String]
     #
@@ -1903,6 +2288,51 @@ module Aws::AmplifyUIBuilder
     #
     class InvalidParameterException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_id
+    #   The unique ID for the Amplify app.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_name
+    #   The name of the backend environment that is a part of the Amplify
+    #   app.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to request the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of jobs to retrieve.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ListCodegenJobsRequest AWS API Documentation
+    #
+    class ListCodegenJobsRequest < Struct.new(
+      :app_id,
+      :environment_name,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entities
+    #   The list of code generation jobs for the Amplify app.
+    #   @return [Array<Types::CodegenJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's included if more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ListCodegenJobsResponse AWS API Documentation
+    #
+    class ListCodegenJobsResponse < Struct.new(
+      :entities,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2149,6 +2579,42 @@ module Aws::AmplifyUIBuilder
       include Aws::Structure
     end
 
+    # Describes the code generation job configuration for a React project.
+    #
+    # @!attribute [rw] module
+    #   The JavaScript module type.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The ECMAScript specification to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] script
+    #   The file type to use for a JavaScript project.
+    #   @return [String]
+    #
+    # @!attribute [rw] render_type_declarations
+    #   Specifies whether the code generation job should render type
+    #   declaration files.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] inline_source_map
+    #   Specifies whether the code generation job should render inline
+    #   source maps.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ReactStartCodegenJobData AWS API Documentation
+    #
+    class ReactStartCodegenJobData < Struct.new(
+      :module,
+      :target,
+      :script,
+      :render_type_declarations,
+      :inline_source_map)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] provider
     #   The third-party provider for the token. The only valid value is
     #   `figma`.
@@ -2311,6 +2777,86 @@ module Aws::AmplifyUIBuilder
       include Aws::Structure
     end
 
+    # The code generation job resource configuration.
+    #
+    # @!attribute [rw] render_config
+    #   The code generation configuration for the codegen job.
+    #   @return [Types::CodegenJobRenderConfig]
+    #
+    # @!attribute [rw] generic_data_schema
+    #   The data schema to use for a code generation job.
+    #   @return [Types::CodegenJobGenericDataSchema]
+    #
+    # @!attribute [rw] auto_generate_forms
+    #   Specifies whether to autogenerate forms in the code generation job.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] features
+    #   The feature flags for a code generation job.
+    #   @return [Types::CodegenFeatureFlags]
+    #
+    # @!attribute [rw] tags
+    #   One or more key-value pairs to use when tagging the code generation
+    #   job data.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/StartCodegenJobData AWS API Documentation
+    #
+    class StartCodegenJobData < Struct.new(
+      :render_config,
+      :generic_data_schema,
+      :auto_generate_forms,
+      :features,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_id
+    #   The unique ID for the Amplify app.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_name
+    #   The name of the backend environment that is a part of the Amplify
+    #   app.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token used to ensure that the code generation job
+    #   request completes only once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] codegen_job_to_create
+    #   The code generation job resource configuration.
+    #   @return [Types::StartCodegenJobData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/StartCodegenJobRequest AWS API Documentation
+    #
+    class StartCodegenJobRequest < Struct.new(
+      :app_id,
+      :environment_name,
+      :client_token,
+      :codegen_job_to_create)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entity
+    #   The code generation job for a UI component that is associated with
+    #   an Amplify app.
+    #   @return [Types::CodegenJob]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/StartCodegenJobResponse AWS API Documentation
+    #
+    class StartCodegenJobResponse < Struct.new(
+      :entity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A theme is a collection of style settings that apply globally to the
     # components associated with an Amplify application.
     #
@@ -2430,6 +2976,19 @@ module Aws::AmplifyUIBuilder
     class ThemeValues < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was denied due to request throttling.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

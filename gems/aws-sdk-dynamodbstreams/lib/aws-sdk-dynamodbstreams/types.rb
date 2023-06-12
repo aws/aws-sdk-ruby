@@ -377,6 +377,12 @@ module Aws::DynamoDBStreams
     #
     # There is a soft account quota of 2,500 tables.
     #
+    # GetRecords was called with a value of more than 1000 for the limit
+    # request parameter.
+    #
+    # More than 2 processes are reading from the same streams shard at the
+    # same time. Exceeding this limit may result in request throttling.
+    #
     # @!attribute [rw] message
     #   Too many operations for a given subscriber.
     #   @return [String]
@@ -477,8 +483,8 @@ module Aws::DynamoDBStreams
     #   @return [String]
     #
     # @!attribute [rw] event_source
-    #   The AWS service from which the stream record originated. For
-    #   DynamoDB Streams, this is `aws:dynamodb`.
+    #   The Amazon Web Services service from which the stream record
+    #   originated. For DynamoDB Streams, this is `aws:dynamodb`.
     #   @return [String]
     #
     # @!attribute [rw] aws_region
@@ -597,7 +603,7 @@ module Aws::DynamoDBStreams
     #   might have the same timestamp. However, the combination of the
     #   following three elements is guaranteed to be unique:
     #
-    #   * the AWS customer ID.
+    #   * the Amazon Web Services customer ID.
     #
     #   * the table name
     #
@@ -628,7 +634,7 @@ module Aws::DynamoDBStreams
     #   might have the same timestamp. However, the combination of the
     #   following three elements is guaranteed to be unique:
     #
-    #   * the AWS customer ID.
+    #   * the Amazon Web Services customer ID.
     #
     #   * the table name
     #
@@ -717,7 +723,7 @@ module Aws::DynamoDBStreams
     #
     # @!attribute [rw] approximate_creation_date_time
     #   The approximate date and time when the stream record was created, in
-    #   [UNIX epoch time][1] format.
+    #   [UNIX epoch time][1] format and rounded down to the closest second.
     #
     #
     #
