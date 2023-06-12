@@ -25,6 +25,7 @@ module Aws::EMRContainers
     ConfigurationList = Shapes::ListShape.new(name: 'ConfigurationList')
     ConfigurationOverrides = Shapes::StructureShape.new(name: 'ConfigurationOverrides')
     ContainerInfo = Shapes::UnionShape.new(name: 'ContainerInfo')
+    ContainerLogRotationConfiguration = Shapes::StructureShape.new(name: 'ContainerLogRotationConfiguration')
     ContainerProvider = Shapes::StructureShape.new(name: 'ContainerProvider')
     ContainerProviderType = Shapes::StringShape.new(name: 'ContainerProviderType')
     CreateJobTemplateRequest = Shapes::StructureShape.new(name: 'CreateJobTemplateRequest')
@@ -91,6 +92,7 @@ module Aws::EMRContainers
     ListVirtualClustersResponse = Shapes::StructureShape.new(name: 'ListVirtualClustersResponse')
     LogContext = Shapes::StringShape.new(name: 'LogContext')
     LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
+    MaxFilesToKeep = Shapes::IntegerShape.new(name: 'MaxFilesToKeep')
     MonitoringConfiguration = Shapes::StructureShape.new(name: 'MonitoringConfiguration')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     ParametricCloudWatchMonitoringConfiguration = Shapes::StructureShape.new(name: 'ParametricCloudWatchMonitoringConfiguration')
@@ -108,6 +110,7 @@ module Aws::EMRContainers
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RetryPolicyConfiguration = Shapes::StructureShape.new(name: 'RetryPolicyConfiguration')
     RetryPolicyExecution = Shapes::StructureShape.new(name: 'RetryPolicyExecution')
+    RotationSize = Shapes::StringShape.new(name: 'RotationSize')
     RsiArn = Shapes::StringShape.new(name: 'RsiArn')
     S3MonitoringConfiguration = Shapes::StructureShape.new(name: 'S3MonitoringConfiguration')
     SensitivePropertiesMap = Shapes::MapShape.new(name: 'SensitivePropertiesMap')
@@ -176,6 +179,10 @@ module Aws::EMRContainers
     ContainerInfo.add_member_subclass(:eks_info, Types::ContainerInfo::EksInfo)
     ContainerInfo.add_member_subclass(:unknown, Types::ContainerInfo::Unknown)
     ContainerInfo.struct_class = Types::ContainerInfo
+
+    ContainerLogRotationConfiguration.add_member(:rotation_size, Shapes::ShapeRef.new(shape: RotationSize, required: true, location_name: "rotationSize"))
+    ContainerLogRotationConfiguration.add_member(:max_files_to_keep, Shapes::ShapeRef.new(shape: MaxFilesToKeep, required: true, location_name: "maxFilesToKeep"))
+    ContainerLogRotationConfiguration.struct_class = Types::ContainerLogRotationConfiguration
 
     ContainerProvider.add_member(:type, Shapes::ShapeRef.new(shape: ContainerProviderType, required: true, location_name: "type"))
     ContainerProvider.add_member(:id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "id"))
@@ -430,6 +437,7 @@ module Aws::EMRContainers
     MonitoringConfiguration.add_member(:persistent_app_ui, Shapes::ShapeRef.new(shape: PersistentAppUI, location_name: "persistentAppUI"))
     MonitoringConfiguration.add_member(:cloud_watch_monitoring_configuration, Shapes::ShapeRef.new(shape: CloudWatchMonitoringConfiguration, location_name: "cloudWatchMonitoringConfiguration"))
     MonitoringConfiguration.add_member(:s3_monitoring_configuration, Shapes::ShapeRef.new(shape: S3MonitoringConfiguration, location_name: "s3MonitoringConfiguration"))
+    MonitoringConfiguration.add_member(:container_log_rotation_configuration, Shapes::ShapeRef.new(shape: ContainerLogRotationConfiguration, location_name: "containerLogRotationConfiguration"))
     MonitoringConfiguration.struct_class = Types::MonitoringConfiguration
 
     ParametricCloudWatchMonitoringConfiguration.add_member(:log_group_name, Shapes::ShapeRef.new(shape: TemplateParameter, location_name: "logGroupName"))

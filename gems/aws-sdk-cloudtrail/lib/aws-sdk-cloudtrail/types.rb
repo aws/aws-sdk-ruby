@@ -48,7 +48,7 @@ module Aws::CloudTrail
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
     #   The format of an event data store ARN is:
-    #   `arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
     #
     #   The format of a channel ARN is:
     #   `arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890`
@@ -510,7 +510,7 @@ module Aws::CloudTrail
     # not valid.
     #
     # The following is the format of an event data store ARN:
-    # `arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
+    # `arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
     #
     # The following is the format of a channel ARN:
     # `arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890`
@@ -542,7 +542,7 @@ module Aws::CloudTrail
     #
     class CloudTrailInvalidClientTokenIdException < Aws::EmptyStructure; end
 
-    # Cannot set a CloudWatch Logs delivery for this region.
+    # Cannot set a CloudWatch Logs delivery for this Region.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CloudWatchLogsDeliveryUnavailableException AWS API Documentation
     #
@@ -663,7 +663,7 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] multi_region_enabled
     #   Specifies whether the event data store includes events from all
-    #   regions, or only from the region in which the event data store is
+    #   Regions, or only from the Region in which the event data store is
     #   created.
     #   @return [Boolean]
     #
@@ -721,6 +721,11 @@ module Aws::CloudTrail
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
     #   @return [String]
     #
+    # @!attribute [rw] start_ingestion
+    #   Specifies whether the event data store should start ingesting live
+    #   events. The default is true.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateEventDataStoreRequest AWS API Documentation
     #
     class CreateEventDataStoreRequest < Struct.new(
@@ -731,7 +736,8 @@ module Aws::CloudTrail
       :retention_period,
       :termination_protection_enabled,
       :tags_list,
-      :kms_key_id)
+      :kms_key_id,
+      :start_ingestion)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -755,7 +761,7 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] multi_region_enabled
     #   Indicates whether the event data store collects events from all
-    #   regions, or only from the region in which it was created.
+    #   Regions, or only from the Region in which it was created.
     #   @return [Boolean]
     #
     # @!attribute [rw] organization_enabled
@@ -863,10 +869,10 @@ module Aws::CloudTrail
     #   @return [Boolean]
     #
     # @!attribute [rw] is_multi_region_trail
-    #   Specifies whether the trail is created in the current region or in
-    #   all regions. The default is false, which creates a trail only in the
-    #   region where you are signed in. As a best practice, consider
-    #   creating trails that log events in all regions.
+    #   Specifies whether the trail is created in the current Region or in
+    #   all Regions. The default is false, which creates a trail only in the
+    #   Region where you are signed in. As a best practice, consider
+    #   creating trails that log events in all Regions.
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_log_file_validation
@@ -998,7 +1004,7 @@ module Aws::CloudTrail
     #   @return [Boolean]
     #
     # @!attribute [rw] is_multi_region_trail
-    #   Specifies whether the trail exists in one region or in all regions.
+    #   Specifies whether the trail exists in one Region or in all Regions.
     #   @return [Boolean]
     #
     # @!attribute [rw] trail_arn
@@ -1396,30 +1402,30 @@ module Aws::CloudTrail
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
     #   If an empty list is specified, information for the trail in the
-    #   current region is returned.
+    #   current Region is returned.
     #
     #   * If an empty list is specified and `IncludeShadowTrails` is false,
-    #     then information for all trails in the current region is returned.
+    #     then information for all trails in the current Region is returned.
     #
     #   * If an empty list is specified and IncludeShadowTrails is null or
-    #     true, then information for all trails in the current region and
-    #     any associated shadow trails in other regions is returned.
+    #     true, then information for all trails in the current Region and
+    #     any associated shadow trails in other Regions is returned.
     #
     #   <note markdown="1"> If one or more trail names are specified, information is returned
     #   only if the names match the names of trails belonging only to the
-    #   current region and current account. To return information about a
-    #   trail in another region, you must specify its trail ARN.
+    #   current Region and current account. To return information about a
+    #   trail in another Region, you must specify its trail ARN.
     #
     #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] include_shadow_trails
     #   Specifies whether to include shadow trails in the response. A shadow
-    #   trail is the replication in a region of a trail that was created in
-    #   a different region, or in the case of an organization trail, the
+    #   trail is the replication in a Region of a trail that was created in
+    #   a different Region, or in the case of an organization trail, the
     #   replication of an organization trail in member accounts. If you do
     #   not include shadow trails, organization trails in a member account
-    #   and region replication trails will not be returned. The default is
+    #   and Region replication trails will not be returned. The default is
     #   true.
     #   @return [Boolean]
     #
@@ -1560,8 +1566,7 @@ module Aws::CloudTrail
     #   @return [Boolean]
     #
     # @!attribute [rw] status
-    #   The status of an event data store. Values are `ENABLED` and
-    #   `PENDING_DELETION`.
+    #   The status of an event data store.
     #   @return [String]
     #
     # @!attribute [rw] advanced_event_selectors
@@ -1571,7 +1576,7 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] multi_region_enabled
     #   Indicates whether the event data store includes events from all
-    #   regions, or only from the region in which it was created.
+    #   Regions, or only from the Region in which it was created.
     #   @return [Boolean]
     #
     # @!attribute [rw] organization_enabled
@@ -1683,7 +1688,7 @@ module Aws::CloudTrail
     #
     #   The first copy of management events is free. You are charged for
     #   additional copies of management events that you are logging on any
-    #   subsequent trail in the same region. For more information about
+    #   subsequent trail in the same Region. For more information about
     #   CloudTrail pricing, see [CloudTrail Pricing][2].
     #
     #
@@ -1717,7 +1722,7 @@ module Aws::CloudTrail
     #   `kms.amazonaws.com` or `rdsdata.amazonaws.com`. By default,
     #   `ExcludeManagementEventSources` is empty, and KMS and Amazon RDS
     #   Data API events are logged to your trail. You can exclude management
-    #   event sources only in regions that support the event source.
+    #   event sources only in Regions that support the event source.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EventSelector AWS API Documentation
@@ -1761,8 +1766,8 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] source_config
     #   Provides information about the advanced event selectors configured
-    #   for the channel, and whether the channel applies to all regions or a
-    #   single region.
+    #   for the channel, and whether the channel applies to all Regions or a
+    #   single Region.
     #   @return [Types::SourceConfig]
     #
     # @!attribute [rw] destinations
@@ -1813,8 +1818,7 @@ module Aws::CloudTrail
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of an event data store. Values can be `ENABLED` and
-    #   `PENDING_DELETION`.
+    #   The status of an event data store.
     #   @return [String]
     #
     # @!attribute [rw] advanced_event_selectors
@@ -1824,7 +1828,7 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] multi_region_enabled
     #   Indicates whether the event data store includes events from all
-    #   regions, or only from the region in which it was created.
+    #   Regions, or only from the Region in which it was created.
     #   @return [Boolean]
     #
     # @!attribute [rw] organization_enabled
@@ -2172,7 +2176,7 @@ module Aws::CloudTrail
     # @!attribute [rw] name
     #   Specifies the name or the CloudTrail ARN of the trail for which you
     #   are requesting status. To get the status of a shadow trail (a
-    #   replication of the trail in another region), you must specify its
+    #   replication of the trail in another Region), you must specify its
     #   ARN. The following is the format of a trail ARN.
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
@@ -2641,7 +2645,7 @@ module Aws::CloudTrail
     class InvalidEventSelectorsException < Aws::EmptyStructure; end
 
     # This exception is thrown when an operation is called on a trail from a
-    # region other than the region in which the trail was created.
+    # Region other than the Region in which the trail was created.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidHomeRegionException AWS API Documentation
     #
@@ -2802,9 +2806,9 @@ module Aws::CloudTrail
     class KmsKeyDisabledException < Aws::EmptyStructure; end
 
     # This exception is thrown when the KMS key does not exist, when the S3
-    # bucket and the KMS key are not in the same region, or when the KMS key
+    # bucket and the KMS key are not in the same Region, or when the KMS key
     # associated with the Amazon SNS topic either does not exist or is not
-    # in the same region.
+    # in the same Region.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/KmsKeyNotFoundException AWS API Documentation
     #
@@ -2871,7 +2875,7 @@ module Aws::CloudTrail
 
     # @!attribute [rw] event_data_stores
     #   Contains information about event data stores in the account, in the
-    #   current region.
+    #   current Region.
     #   @return [Array<Types::EventDataStore>]
     #
     # @!attribute [rw] next_token
@@ -3087,6 +3091,15 @@ module Aws::CloudTrail
     # @!attribute [rw] resource_id_list
     #   Specifies a list of trail, event data store, or channel ARNs whose
     #   tags will be listed. The list has a limit of 20 ARNs.
+    #
+    #   Example trail ARN format:
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
+    #
+    #   Example event data store ARN format:
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
+    #
+    #   Example channel ARN format:
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890`
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -3140,7 +3153,7 @@ module Aws::CloudTrail
     end
 
     # @!attribute [rw] trails
-    #   Returns the name, ARN, and home region of trails in the current
+    #   Returns the name, ARN, and home Region of trails in the current
     #   account.
     #   @return [Array<Types::TrailInfo>]
     #
@@ -3663,7 +3676,7 @@ module Aws::CloudTrail
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
     #   Example event data store ARN format:
-    #   `arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
+    #   `arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
     #
     #   Example channel ARN format:
     #   `arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890`
@@ -3817,7 +3830,7 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] multi_region_enabled
     #   Indicates whether the event data store is collecting events from all
-    #   regions, or only from the region in which the event data store was
+    #   Regions, or only from the Region in which the event data store was
     #   created.
     #   @return [Boolean]
     #
@@ -3884,7 +3897,7 @@ module Aws::CloudTrail
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_region
-    #   The region associated with the source S3 bucket.
+    #   The Region associated with the source S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_access_role_arn
@@ -3904,8 +3917,8 @@ module Aws::CloudTrail
     # Contains configuration information about the channel.
     #
     # @!attribute [rw] apply_to_all_regions
-    #   Specifies whether the channel applies to a single region or to all
-    #   regions.
+    #   Specifies whether the channel applies to a single Region or to all
+    #   Regions.
     #   @return [Boolean]
     #
     # @!attribute [rw] advanced_event_selectors
@@ -3920,6 +3933,23 @@ module Aws::CloudTrail
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] event_data_store
+    #   The ARN (or ID suffix of the ARN) of the event data store for which
+    #   you want to start ingestion.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StartEventDataStoreIngestionRequest AWS API Documentation
+    #
+    class StartEventDataStoreIngestionRequest < Struct.new(
+      :event_data_store)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StartEventDataStoreIngestionResponse AWS API Documentation
+    #
+    class StartEventDataStoreIngestionResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] destinations
     #   The ARN of the destination event data store. Use this parameter for
@@ -4074,6 +4104,23 @@ module Aws::CloudTrail
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] event_data_store
+    #   The ARN (or ID suffix of the ARN) of the event data store for which
+    #   you want to stop ingestion.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StopEventDataStoreIngestionRequest AWS API Documentation
+    #
+    class StopEventDataStoreIngestionRequest < Struct.new(
+      :event_data_store)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StopEventDataStoreIngestionResponse AWS API Documentation
+    #
+    class StopEventDataStoreIngestionResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] import_id
     #   The ID of the import.
@@ -4244,12 +4291,12 @@ module Aws::CloudTrail
     #   @return [Boolean]
     #
     # @!attribute [rw] is_multi_region_trail
-    #   Specifies whether the trail exists only in one region or exists in
-    #   all regions.
+    #   Specifies whether the trail exists only in one Region or exists in
+    #   all Regions.
     #   @return [Boolean]
     #
     # @!attribute [rw] home_region
-    #   The region in which the trail was created.
+    #   The Region in which the trail was created.
     #   @return [String]
     #
     # @!attribute [rw] trail_arn
@@ -4324,7 +4371,7 @@ module Aws::CloudTrail
     class TrailAlreadyExistsException < Aws::EmptyStructure; end
 
     # Information about a CloudTrail trail, including the trail's name,
-    # home region, and Amazon Resource Name (ARN).
+    # home Region, and Amazon Resource Name (ARN).
     #
     # @!attribute [rw] trail_arn
     #   The ARN of a trail.
@@ -4436,7 +4483,7 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] multi_region_enabled
     #   Specifies whether an event data store collects events from all
-    #   regions, or only from the region in which it was created.
+    #   Regions, or only from the Region in which it was created.
     #   @return [Boolean]
     #
     # @!attribute [rw] organization_enabled
@@ -4511,8 +4558,7 @@ module Aws::CloudTrail
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of an event data store. Values can be `ENABLED` and
-    #   `PENDING_DELETION`.
+    #   The status of an event data store.
     #   @return [String]
     #
     # @!attribute [rw] advanced_event_selectors
@@ -4522,7 +4568,7 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] multi_region_enabled
     #   Indicates whether the event data store includes events from all
-    #   regions, or only from the region in which it was created.
+    #   Regions, or only from the Region in which it was created.
     #   @return [Boolean]
     #
     # @!attribute [rw] organization_enabled
@@ -4629,14 +4675,14 @@ module Aws::CloudTrail
     #   @return [Boolean]
     #
     # @!attribute [rw] is_multi_region_trail
-    #   Specifies whether the trail applies only to the current region or to
-    #   all regions. The default is false. If the trail exists only in the
-    #   current region and this value is set to true, shadow trails
-    #   (replications of the trail) will be created in the other regions. If
-    #   the trail exists in all regions and this value is set to false, the
-    #   trail will remain in the region where it was created, and its shadow
-    #   trails in other regions will be deleted. As a best practice,
-    #   consider using trails that log events in all regions.
+    #   Specifies whether the trail applies only to the current Region or to
+    #   all Regions. The default is false. If the trail exists only in the
+    #   current Region and this value is set to true, shadow trails
+    #   (replications of the trail) will be created in the other Regions. If
+    #   the trail exists in all Regions and this value is set to false, the
+    #   trail will remain in the Region where it was created, and its shadow
+    #   trails in other Regions will be deleted. As a best practice,
+    #   consider using trails that log events in all Regions.
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_log_file_validation
@@ -4768,7 +4814,7 @@ module Aws::CloudTrail
     #   @return [Boolean]
     #
     # @!attribute [rw] is_multi_region_trail
-    #   Specifies whether the trail exists in one region or in all regions.
+    #   Specifies whether the trail exists in one Region or in all Regions.
     #   @return [Boolean]
     #
     # @!attribute [rw] trail_arn

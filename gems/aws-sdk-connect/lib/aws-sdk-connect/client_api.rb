@@ -393,7 +393,11 @@ module Aws::Connect
     HoursOfOperationDays = Shapes::StringShape.new(name: 'HoursOfOperationDays')
     HoursOfOperationDescription = Shapes::StringShape.new(name: 'HoursOfOperationDescription')
     HoursOfOperationId = Shapes::StringShape.new(name: 'HoursOfOperationId')
+    HoursOfOperationList = Shapes::ListShape.new(name: 'HoursOfOperationList')
     HoursOfOperationName = Shapes::StringShape.new(name: 'HoursOfOperationName')
+    HoursOfOperationSearchConditionList = Shapes::ListShape.new(name: 'HoursOfOperationSearchConditionList')
+    HoursOfOperationSearchCriteria = Shapes::StructureShape.new(name: 'HoursOfOperationSearchCriteria')
+    HoursOfOperationSearchFilter = Shapes::StructureShape.new(name: 'HoursOfOperationSearchFilter')
     HoursOfOperationSummary = Shapes::StructureShape.new(name: 'HoursOfOperationSummary')
     HoursOfOperationSummaryList = Shapes::ListShape.new(name: 'HoursOfOperationSummaryList')
     HoursOfOperationTimeSlice = Shapes::StructureShape.new(name: 'HoursOfOperationTimeSlice')
@@ -592,8 +596,12 @@ module Aws::Connect
     Prompt = Shapes::StructureShape.new(name: 'Prompt')
     PromptDescription = Shapes::StringShape.new(name: 'PromptDescription')
     PromptId = Shapes::StringShape.new(name: 'PromptId')
+    PromptList = Shapes::ListShape.new(name: 'PromptList')
     PromptName = Shapes::StringShape.new(name: 'PromptName')
     PromptPresignedUrl = Shapes::StringShape.new(name: 'PromptPresignedUrl')
+    PromptSearchConditionList = Shapes::ListShape.new(name: 'PromptSearchConditionList')
+    PromptSearchCriteria = Shapes::StructureShape.new(name: 'PromptSearchCriteria')
+    PromptSearchFilter = Shapes::StructureShape.new(name: 'PromptSearchFilter')
     PromptSummary = Shapes::StructureShape.new(name: 'PromptSummary')
     PromptSummaryList = Shapes::ListShape.new(name: 'PromptSummaryList')
     PropertyValidationException = Shapes::StructureShape.new(name: 'PropertyValidationException')
@@ -625,6 +633,10 @@ module Aws::Connect
     QuickConnectDescription = Shapes::StringShape.new(name: 'QuickConnectDescription')
     QuickConnectId = Shapes::StringShape.new(name: 'QuickConnectId')
     QuickConnectName = Shapes::StringShape.new(name: 'QuickConnectName')
+    QuickConnectSearchConditionList = Shapes::ListShape.new(name: 'QuickConnectSearchConditionList')
+    QuickConnectSearchCriteria = Shapes::StructureShape.new(name: 'QuickConnectSearchCriteria')
+    QuickConnectSearchFilter = Shapes::StructureShape.new(name: 'QuickConnectSearchFilter')
+    QuickConnectSearchSummaryList = Shapes::ListShape.new(name: 'QuickConnectSearchSummaryList')
     QuickConnectSummary = Shapes::StructureShape.new(name: 'QuickConnectSummary')
     QuickConnectSummaryList = Shapes::ListShape.new(name: 'QuickConnectSummaryList')
     QuickConnectType = Shapes::StringShape.new(name: 'QuickConnectType')
@@ -688,8 +700,14 @@ module Aws::Connect
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SearchAvailablePhoneNumbersRequest = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersRequest')
     SearchAvailablePhoneNumbersResponse = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersResponse')
+    SearchHoursOfOperationsRequest = Shapes::StructureShape.new(name: 'SearchHoursOfOperationsRequest')
+    SearchHoursOfOperationsResponse = Shapes::StructureShape.new(name: 'SearchHoursOfOperationsResponse')
+    SearchPromptsRequest = Shapes::StructureShape.new(name: 'SearchPromptsRequest')
+    SearchPromptsResponse = Shapes::StructureShape.new(name: 'SearchPromptsResponse')
     SearchQueuesRequest = Shapes::StructureShape.new(name: 'SearchQueuesRequest')
     SearchQueuesResponse = Shapes::StructureShape.new(name: 'SearchQueuesResponse')
+    SearchQuickConnectsRequest = Shapes::StructureShape.new(name: 'SearchQuickConnectsRequest')
+    SearchQuickConnectsResponse = Shapes::StructureShape.new(name: 'SearchQuickConnectsResponse')
     SearchRoutingProfilesRequest = Shapes::StructureShape.new(name: 'SearchRoutingProfilesRequest')
     SearchRoutingProfilesResponse = Shapes::StructureShape.new(name: 'SearchRoutingProfilesResponse')
     SearchSecurityProfilesRequest = Shapes::StructureShape.new(name: 'SearchSecurityProfilesRequest')
@@ -2211,6 +2229,18 @@ module Aws::Connect
 
     HoursOfOperationConfigList.member = Shapes::ShapeRef.new(shape: HoursOfOperationConfig)
 
+    HoursOfOperationList.member = Shapes::ShapeRef.new(shape: HoursOfOperation)
+
+    HoursOfOperationSearchConditionList.member = Shapes::ShapeRef.new(shape: HoursOfOperationSearchCriteria)
+
+    HoursOfOperationSearchCriteria.add_member(:or_conditions, Shapes::ShapeRef.new(shape: HoursOfOperationSearchConditionList, location_name: "OrConditions"))
+    HoursOfOperationSearchCriteria.add_member(:and_conditions, Shapes::ShapeRef.new(shape: HoursOfOperationSearchConditionList, location_name: "AndConditions"))
+    HoursOfOperationSearchCriteria.add_member(:string_condition, Shapes::ShapeRef.new(shape: StringCondition, location_name: "StringCondition"))
+    HoursOfOperationSearchCriteria.struct_class = Types::HoursOfOperationSearchCriteria
+
+    HoursOfOperationSearchFilter.add_member(:tag_filter, Shapes::ShapeRef.new(shape: ControlPlaneTagFilter, location_name: "TagFilter"))
+    HoursOfOperationSearchFilter.struct_class = Types::HoursOfOperationSearchFilter
+
     HoursOfOperationSummary.add_member(:id, Shapes::ShapeRef.new(shape: HoursOfOperationId, location_name: "Id"))
     HoursOfOperationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     HoursOfOperationSummary.add_member(:name, Shapes::ShapeRef.new(shape: HoursOfOperationName, location_name: "Name"))
@@ -2799,6 +2829,18 @@ module Aws::Connect
     Prompt.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     Prompt.struct_class = Types::Prompt
 
+    PromptList.member = Shapes::ShapeRef.new(shape: Prompt)
+
+    PromptSearchConditionList.member = Shapes::ShapeRef.new(shape: PromptSearchCriteria)
+
+    PromptSearchCriteria.add_member(:or_conditions, Shapes::ShapeRef.new(shape: PromptSearchConditionList, location_name: "OrConditions"))
+    PromptSearchCriteria.add_member(:and_conditions, Shapes::ShapeRef.new(shape: PromptSearchConditionList, location_name: "AndConditions"))
+    PromptSearchCriteria.add_member(:string_condition, Shapes::ShapeRef.new(shape: StringCondition, location_name: "StringCondition"))
+    PromptSearchCriteria.struct_class = Types::PromptSearchCriteria
+
+    PromptSearchFilter.add_member(:tag_filter, Shapes::ShapeRef.new(shape: ControlPlaneTagFilter, location_name: "TagFilter"))
+    PromptSearchFilter.struct_class = Types::PromptSearchFilter
+
     PromptSummary.add_member(:id, Shapes::ShapeRef.new(shape: PromptId, location_name: "Id"))
     PromptSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     PromptSummary.add_member(:name, Shapes::ShapeRef.new(shape: PromptName, location_name: "Name"))
@@ -2885,6 +2927,18 @@ module Aws::Connect
     QuickConnectConfig.add_member(:queue_config, Shapes::ShapeRef.new(shape: QueueQuickConnectConfig, location_name: "QueueConfig"))
     QuickConnectConfig.add_member(:phone_config, Shapes::ShapeRef.new(shape: PhoneNumberQuickConnectConfig, location_name: "PhoneConfig"))
     QuickConnectConfig.struct_class = Types::QuickConnectConfig
+
+    QuickConnectSearchConditionList.member = Shapes::ShapeRef.new(shape: QuickConnectSearchCriteria)
+
+    QuickConnectSearchCriteria.add_member(:or_conditions, Shapes::ShapeRef.new(shape: QuickConnectSearchConditionList, location_name: "OrConditions"))
+    QuickConnectSearchCriteria.add_member(:and_conditions, Shapes::ShapeRef.new(shape: QuickConnectSearchConditionList, location_name: "AndConditions"))
+    QuickConnectSearchCriteria.add_member(:string_condition, Shapes::ShapeRef.new(shape: StringCondition, location_name: "StringCondition"))
+    QuickConnectSearchCriteria.struct_class = Types::QuickConnectSearchCriteria
+
+    QuickConnectSearchFilter.add_member(:tag_filter, Shapes::ShapeRef.new(shape: ControlPlaneTagFilter, location_name: "TagFilter"))
+    QuickConnectSearchFilter.struct_class = Types::QuickConnectSearchFilter
+
+    QuickConnectSearchSummaryList.member = Shapes::ShapeRef.new(shape: QuickConnect)
 
     QuickConnectSummary.add_member(:id, Shapes::ShapeRef.new(shape: QuickConnectId, location_name: "Id"))
     QuickConnectSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
@@ -3082,6 +3136,30 @@ module Aws::Connect
     SearchAvailablePhoneNumbersResponse.add_member(:available_numbers_list, Shapes::ShapeRef.new(shape: AvailableNumbersList, location_name: "AvailableNumbersList"))
     SearchAvailablePhoneNumbersResponse.struct_class = Types::SearchAvailablePhoneNumbersResponse
 
+    SearchHoursOfOperationsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    SearchHoursOfOperationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchHoursOfOperationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchHoursOfOperationsRequest.add_member(:search_filter, Shapes::ShapeRef.new(shape: HoursOfOperationSearchFilter, location_name: "SearchFilter"))
+    SearchHoursOfOperationsRequest.add_member(:search_criteria, Shapes::ShapeRef.new(shape: HoursOfOperationSearchCriteria, location_name: "SearchCriteria"))
+    SearchHoursOfOperationsRequest.struct_class = Types::SearchHoursOfOperationsRequest
+
+    SearchHoursOfOperationsResponse.add_member(:hours_of_operations, Shapes::ShapeRef.new(shape: HoursOfOperationList, location_name: "HoursOfOperations"))
+    SearchHoursOfOperationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchHoursOfOperationsResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
+    SearchHoursOfOperationsResponse.struct_class = Types::SearchHoursOfOperationsResponse
+
+    SearchPromptsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    SearchPromptsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchPromptsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchPromptsRequest.add_member(:search_filter, Shapes::ShapeRef.new(shape: PromptSearchFilter, location_name: "SearchFilter"))
+    SearchPromptsRequest.add_member(:search_criteria, Shapes::ShapeRef.new(shape: PromptSearchCriteria, location_name: "SearchCriteria"))
+    SearchPromptsRequest.struct_class = Types::SearchPromptsRequest
+
+    SearchPromptsResponse.add_member(:prompts, Shapes::ShapeRef.new(shape: PromptList, location_name: "Prompts"))
+    SearchPromptsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchPromptsResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
+    SearchPromptsResponse.struct_class = Types::SearchPromptsResponse
+
     SearchQueuesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     SearchQueuesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
     SearchQueuesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
@@ -3093,6 +3171,18 @@ module Aws::Connect
     SearchQueuesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
     SearchQueuesResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
     SearchQueuesResponse.struct_class = Types::SearchQueuesResponse
+
+    SearchQuickConnectsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    SearchQuickConnectsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchQuickConnectsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchQuickConnectsRequest.add_member(:search_filter, Shapes::ShapeRef.new(shape: QuickConnectSearchFilter, location_name: "SearchFilter"))
+    SearchQuickConnectsRequest.add_member(:search_criteria, Shapes::ShapeRef.new(shape: QuickConnectSearchCriteria, location_name: "SearchCriteria"))
+    SearchQuickConnectsRequest.struct_class = Types::SearchQuickConnectsRequest
+
+    SearchQuickConnectsResponse.add_member(:quick_connects, Shapes::ShapeRef.new(shape: QuickConnectSearchSummaryList, location_name: "QuickConnects"))
+    SearchQuickConnectsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchQuickConnectsResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
+    SearchQuickConnectsResponse.struct_class = Types::SearchQuickConnectsResponse
 
     SearchRoutingProfilesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     SearchRoutingProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
@@ -5876,12 +5966,69 @@ module Aws::Connect
         )
       end)
 
+      api.add_operation(:search_hours_of_operations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchHoursOfOperations"
+        o.http_method = "POST"
+        o.http_request_uri = "/search-hours-of-operations"
+        o.input = Shapes::ShapeRef.new(shape: SearchHoursOfOperationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchHoursOfOperationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:search_prompts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchPrompts"
+        o.http_method = "POST"
+        o.http_request_uri = "/search-prompts"
+        o.input = Shapes::ShapeRef.new(shape: SearchPromptsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchPromptsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:search_queues, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SearchQueues"
         o.http_method = "POST"
         o.http_request_uri = "/search-queues"
         o.input = Shapes::ShapeRef.new(shape: SearchQueuesRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchQueuesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:search_quick_connects, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchQuickConnects"
+        o.http_method = "POST"
+        o.http_request_uri = "/search-quick-connects"
+        o.input = Shapes::ShapeRef.new(shape: SearchQuickConnectsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchQuickConnectsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

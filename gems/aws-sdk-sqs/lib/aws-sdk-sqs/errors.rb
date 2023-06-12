@@ -41,6 +41,7 @@ module Aws::SQS
   # * {QueueDoesNotExist}
   # * {QueueNameExists}
   # * {ReceiptHandleIsInvalid}
+  # * {ResourceNotFoundException}
   # * {TooManyEntriesInBatchRequest}
   # * {UnsupportedOperation}
   #
@@ -185,6 +186,16 @@ module Aws::SQS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::SQS::Types::ReceiptHandleIsInvalid] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ResourceNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SQS::Types::ResourceNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

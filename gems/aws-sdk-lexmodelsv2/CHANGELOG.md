@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2023-06-06)
+------------------
+
+* Feature - This release adds support for Lex Developers to create test sets and to execute those test-sets against their bots.
+
 1.33.0 (2023-05-31)
 ------------------
 

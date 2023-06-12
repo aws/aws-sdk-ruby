@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2023-06-09)
+------------------
+
+* Feature - Document-only update to refresh CLI  documentation for AWS Private CA. No change to the service.
+
 1.54.0 (2023-05-31)
 ------------------
 

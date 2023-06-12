@@ -86,6 +86,8 @@ module Aws::Athena
     Date = Shapes::TimestampShape.new(name: 'Date')
     Datum = Shapes::StructureShape.new(name: 'Datum')
     DefaultExecutorDpuSize = Shapes::IntegerShape.new(name: 'DefaultExecutorDpuSize')
+    DeleteCapacityReservationInput = Shapes::StructureShape.new(name: 'DeleteCapacityReservationInput')
+    DeleteCapacityReservationOutput = Shapes::StructureShape.new(name: 'DeleteCapacityReservationOutput')
     DeleteDataCatalogInput = Shapes::StructureShape.new(name: 'DeleteDataCatalogInput')
     DeleteDataCatalogOutput = Shapes::StructureShape.new(name: 'DeleteDataCatalogOutput')
     DeleteNamedQueryInput = Shapes::StructureShape.new(name: 'DeleteNamedQueryInput')
@@ -539,6 +541,11 @@ module Aws::Athena
     Datum.add_member(:var_char_value, Shapes::ShapeRef.new(shape: datumString, location_name: "VarCharValue"))
     Datum.struct_class = Types::Datum
 
+    DeleteCapacityReservationInput.add_member(:name, Shapes::ShapeRef.new(shape: CapacityReservationName, required: true, location_name: "Name"))
+    DeleteCapacityReservationInput.struct_class = Types::DeleteCapacityReservationInput
+
+    DeleteCapacityReservationOutput.struct_class = Types::DeleteCapacityReservationOutput
+
     DeleteDataCatalogInput.add_member(:name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "Name"))
     DeleteDataCatalogInput.struct_class = Types::DeleteDataCatalogInput
 
@@ -574,6 +581,7 @@ module Aws::Athena
     EngineConfiguration.add_member(:max_concurrent_dpus, Shapes::ShapeRef.new(shape: MaxConcurrentDpus, required: true, location_name: "MaxConcurrentDpus"))
     EngineConfiguration.add_member(:default_executor_dpu_size, Shapes::ShapeRef.new(shape: DefaultExecutorDpuSize, location_name: "DefaultExecutorDpuSize"))
     EngineConfiguration.add_member(:additional_configs, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "AdditionalConfigs"))
+    EngineConfiguration.add_member(:spark_properties, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "SparkProperties"))
     EngineConfiguration.struct_class = Types::EngineConfiguration
 
     EngineVersion.add_member(:selected_engine_version, Shapes::ShapeRef.new(shape: NameString, location_name: "SelectedEngineVersion"))
@@ -1439,6 +1447,16 @@ module Aws::Athena
         o.output = Shapes::ShapeRef.new(shape: CreateWorkGroupOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:delete_capacity_reservation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCapacityReservation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCapacityReservationInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCapacityReservationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:delete_data_catalog, Seahorse::Model::Operation.new.tap do |o|

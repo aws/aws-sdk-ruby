@@ -58,6 +58,8 @@ module Aws::SQS
           case context.operation_name
           when :add_permission
             Aws::SQS::Endpoints::AddPermission.build(context)
+          when :cancel_message_move_task
+            Aws::SQS::Endpoints::CancelMessageMoveTask.build(context)
           when :change_message_visibility
             Aws::SQS::Endpoints::ChangeMessageVisibility.build(context)
           when :change_message_visibility_batch
@@ -76,6 +78,8 @@ module Aws::SQS
             Aws::SQS::Endpoints::GetQueueUrl.build(context)
           when :list_dead_letter_source_queues
             Aws::SQS::Endpoints::ListDeadLetterSourceQueues.build(context)
+          when :list_message_move_tasks
+            Aws::SQS::Endpoints::ListMessageMoveTasks.build(context)
           when :list_queue_tags
             Aws::SQS::Endpoints::ListQueueTags.build(context)
           when :list_queues
@@ -92,6 +96,8 @@ module Aws::SQS
             Aws::SQS::Endpoints::SendMessageBatch.build(context)
           when :set_queue_attributes
             Aws::SQS::Endpoints::SetQueueAttributes.build(context)
+          when :start_message_move_task
+            Aws::SQS::Endpoints::StartMessageMoveTask.build(context)
           when :tag_queue
             Aws::SQS::Endpoints::TagQueue.build(context)
           when :untag_queue

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2023-06-06)
+------------------
+
+* Feature - Amazon SQS adds three new APIs - StartMessageMoveTask, CancelMessageMoveTask, and ListMessageMoveTasks to automate redriving messages from dead-letter queues to source queues or a custom destination.
+
 1.56.0 (2023-05-31)
 ------------------
 

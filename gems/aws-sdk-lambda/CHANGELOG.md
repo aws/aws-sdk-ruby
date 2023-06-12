@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2023-06-05)
+------------------
+
+* Feature - Add Ruby 3.2 (ruby3.2) Runtime support to AWS Lambda.
+
 1.97.0 (2023-05-31)
 ------------------
 

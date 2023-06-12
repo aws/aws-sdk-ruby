@@ -53,3 +53,8 @@ end
 group :development do
   gem 'rubocop', '0.81.0'
 end
+
+group :benchmark do
+  gem 'benchmark'
+  gem 'memory_profiler'
+end

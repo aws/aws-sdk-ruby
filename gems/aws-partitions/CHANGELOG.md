@@ -1,6 +1,33 @@
 Unreleased Changes
 ------------------
 
+1.777.0 (2023-06-08)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::PaymentCryptographyData`.
+
+* Feature - Added support for enumerating regions for `Aws::PaymentCryptography`.
+
+1.776.0 (2023-06-06)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.775.0 (2023-06-05)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.774.0 (2023-06-02)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.773.0 (2023-06-01)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.772.0 (2023-05-30)
 ------------------
 

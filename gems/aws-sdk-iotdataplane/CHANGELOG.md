@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2023-06-06)
+------------------
+
+* Feature - Update thing shadow name regex to allow '$' character
+
 1.45.0 (2023-05-31)
 ------------------
 

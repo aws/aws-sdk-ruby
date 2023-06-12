@@ -2213,6 +2213,7 @@
           "ap-southeast-1" : { },
           "ap-southeast-2" : { },
           "ap-southeast-3" : { },
+          "ap-southeast-4" : { },
           "ca-central-1" : { },
           "eu-central-1" : { },
           "eu-central-2" : { },
@@ -8634,6 +8635,7 @@
           "ap-southeast-2" : { },
           "ca-central-1" : { },
           "eu-west-1" : { },
+          "eu-west-2" : { },
           "fips-us-east-1" : {
             "credentialScope" : {
               "region" : "us-east-1"
@@ -8719,7 +8721,11 @@
             "hostname" : "kendra-ranking.ap-southeast-4.api.aws"
           },
           "ca-central-1" : {
-            "hostname" : "kendra-ranking.ca-central-1.api.aws"
+            "hostname" : "kendra-ranking.ca-central-1.api.aws",
+            "variants" : [ {
+              "hostname" : "kendra-ranking-fips.ca-central-1.api.aws",
+              "tags" : [ "fips" ]
+            } ]
           },
           "eu-central-2" : {
             "hostname" : "kendra-ranking.eu-central-2.api.aws"
@@ -8749,16 +8755,28 @@
             "hostname" : "kendra-ranking.sa-east-1.api.aws"
           },
           "us-east-1" : {
-            "hostname" : "kendra-ranking.us-east-1.api.aws"
+            "hostname" : "kendra-ranking.us-east-1.api.aws",
+            "variants" : [ {
+              "hostname" : "kendra-ranking-fips.us-east-1.api.aws",
+              "tags" : [ "fips" ]
+            } ]
           },
           "us-east-2" : {
-            "hostname" : "kendra-ranking.us-east-2.api.aws"
+            "hostname" : "kendra-ranking.us-east-2.api.aws",
+            "variants" : [ {
+              "hostname" : "kendra-ranking-fips.us-east-2.api.aws",
+              "tags" : [ "fips" ]
+            } ]
           },
           "us-west-1" : {
             "hostname" : "kendra-ranking.us-west-1.api.aws"
           },
           "us-west-2" : {
-            "hostname" : "kendra-ranking.us-west-2.api.aws"
+            "hostname" : "kendra-ranking.us-west-2.api.aws",
+            "variants" : [ {
+              "hostname" : "kendra-ranking-fips.us-west-2.api.aws",
+              "tags" : [ "fips" ]
+            } ]
           }
         }
       },
@@ -10495,13 +10513,17 @@
           "ap-northeast-2" : { },
           "ap-northeast-3" : { },
           "ap-south-1" : { },
+          "ap-south-2" : { },
           "ap-southeast-1" : { },
           "ap-southeast-2" : { },
           "ap-southeast-3" : { },
+          "ap-southeast-4" : { },
           "ca-central-1" : { },
           "eu-central-1" : { },
+          "eu-central-2" : { },
           "eu-north-1" : { },
           "eu-south-1" : { },
+          "eu-south-2" : { },
           "eu-west-1" : { },
           "eu-west-2" : { },
           "eu-west-3" : { },
@@ -13997,6 +14019,8 @@
       "securitylake" : {
         "endpoints" : {
           "ap-northeast-1" : { },
+          "ap-northeast-2" : { },
+          "ap-south-1" : { },
           "ap-southeast-1" : { },
           "ap-southeast-2" : { },
           "eu-central-1" : { },
@@ -14005,6 +14029,7 @@
           "sa-east-1" : { },
           "us-east-1" : { },
           "us-east-2" : { },
+          "us-west-1" : { },
           "us-west-2" : { }
         }
       },
@@ -21529,6 +21554,36 @@
           "us-gov-west-1" : { }
         }
       },
+      "mgn" : {
+        "endpoints" : {
+          "fips-us-gov-east-1" : {
+            "credentialScope" : {
+              "region" : "us-gov-east-1"
+            },
+            "deprecated" : true,
+            "hostname" : "mgn-fips.us-gov-east-1.amazonaws.com"
+          },
+          "fips-us-gov-west-1" : {
+            "credentialScope" : {
+              "region" : "us-gov-west-1"
+            },
+            "deprecated" : true,
+            "hostname" : "mgn-fips.us-gov-west-1.amazonaws.com"
+          },
+          "us-gov-east-1" : {
+            "variants" : [ {
+              "hostname" : "mgn-fips.us-gov-east-1.amazonaws.com",
+              "tags" : [ "fips" ]
+            } ]
+          },
+          "us-gov-west-1" : {
+            "variants" : [ {
+              "hostname" : "mgn-fips.us-gov-west-1.amazonaws.com",
+              "tags" : [ "fips" ]
+            } ]
+          }
+        }
+      },
       "models.lex" : {
         "defaults" : {
           "credentialScope" : {
@@ -22526,6 +22581,12 @@
           }
         }
       },
+      "simspaceweaver" : {
+        "endpoints" : {
+          "us-gov-east-1" : { },
+          "us-gov-west-1" : { }
+        }
+      },
       "sms" : {
         "endpoints" : {
           "fips-us-gov-east-1" : {
@@ -23161,6 +23222,13 @@
       },
       "workspaces" : {
         "endpoints" : {
+          "fips-us-gov-east-1" : {
+            "credentialScope" : {
+              "region" : "us-gov-east-1"
+            },
+            "deprecated" : true,
+            "hostname" : "workspaces-fips.us-gov-east-1.amazonaws.com"
+          },
           "fips-us-gov-west-1" : {
             "credentialScope" : {
               "region" : "us-gov-west-1"
@@ -23168,7 +23236,12 @@
             "deprecated" : true,
             "hostname" : "workspaces-fips.us-gov-west-1.amazonaws.com"
           },
-          "us-gov-east-1" : { },
+          "us-gov-east-1" : {
+            "variants" : [ {
+              "hostname" : "workspaces-fips.us-gov-east-1.amazonaws.com",
+              "tags" : [ "fips" ]
+            } ]
+          },
           "us-gov-west-1" : {
             "variants" : [ {
               "hostname" : "workspaces-fips.us-gov-west-1.amazonaws.com",
@@ -23669,7 +23742,8 @@
       },
       "route53resolver" : {
         "endpoints" : {
-          "us-iso-east-1" : { }
+          "us-iso-east-1" : { },
+          "us-iso-west-1" : { }
         }
       },
       "runtime.sagemaker" : {
@@ -23770,7 +23844,8 @@
       },
       "tagging" : {
         "endpoints" : {
-          "us-iso-east-1" : { }
+          "us-iso-east-1" : { },
+          "us-iso-west-1" : { }
         }
       },
       "transcribe" : {

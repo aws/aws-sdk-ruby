@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2023-06-01)
+------------------
+
+* Feature - Alexa for Business has been deprecated and is no longer supported.
+
 1.59.0 (2023-05-31)
 ------------------
 

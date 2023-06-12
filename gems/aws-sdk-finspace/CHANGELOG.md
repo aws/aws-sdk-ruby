@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2023-06-05)
+------------------
+
+* Feature - Releasing new Managed kdb Insights APIs
+
 1.14.0 (2023-05-31)
 ------------------
 

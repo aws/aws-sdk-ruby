@@ -66,6 +66,8 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::CreateLogGroup.build(context)
           when :create_log_stream
             Aws::CloudWatchLogs::Endpoints::CreateLogStream.build(context)
+          when :delete_account_policy
+            Aws::CloudWatchLogs::Endpoints::DeleteAccountPolicy.build(context)
           when :delete_data_protection_policy
             Aws::CloudWatchLogs::Endpoints::DeleteDataProtectionPolicy.build(context)
           when :delete_destination
@@ -84,6 +86,8 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::DeleteRetentionPolicy.build(context)
           when :delete_subscription_filter
             Aws::CloudWatchLogs::Endpoints::DeleteSubscriptionFilter.build(context)
+          when :describe_account_policies
+            Aws::CloudWatchLogs::Endpoints::DescribeAccountPolicies.build(context)
           when :describe_destinations
             Aws::CloudWatchLogs::Endpoints::DescribeDestinations.build(context)
           when :describe_export_tasks
@@ -120,6 +124,8 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::ListTagsForResource.build(context)
           when :list_tags_log_group
             Aws::CloudWatchLogs::Endpoints::ListTagsLogGroup.build(context)
+          when :put_account_policy
+            Aws::CloudWatchLogs::Endpoints::PutAccountPolicy.build(context)
           when :put_data_protection_policy
             Aws::CloudWatchLogs::Endpoints::PutDataProtectionPolicy.build(context)
           when :put_destination

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2023-06-01)
+------------------
+
+* Feature - API Update for IVS Advanced Channel type
+
 1.30.0 (2023-05-31)
 ------------------
 

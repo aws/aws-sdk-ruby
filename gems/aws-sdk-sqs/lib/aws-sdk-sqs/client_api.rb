@@ -25,6 +25,8 @@ module Aws::SQS
     BinaryList = Shapes::ListShape.new(name: 'BinaryList', flattened: true)
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoxedInteger = Shapes::IntegerShape.new(name: 'BoxedInteger')
+    CancelMessageMoveTaskRequest = Shapes::StructureShape.new(name: 'CancelMessageMoveTaskRequest')
+    CancelMessageMoveTaskResult = Shapes::StructureShape.new(name: 'CancelMessageMoveTaskResult')
     ChangeMessageVisibilityBatchRequest = Shapes::StructureShape.new(name: 'ChangeMessageVisibilityBatchRequest')
     ChangeMessageVisibilityBatchRequestEntry = Shapes::StructureShape.new(name: 'ChangeMessageVisibilityBatchRequestEntry')
     ChangeMessageVisibilityBatchRequestEntryList = Shapes::ListShape.new(name: 'ChangeMessageVisibilityBatchRequestEntryList', flattened: true)
@@ -54,10 +56,15 @@ module Aws::SQS
     InvalidMessageContents = Shapes::StructureShape.new(name: 'InvalidMessageContents')
     ListDeadLetterSourceQueuesRequest = Shapes::StructureShape.new(name: 'ListDeadLetterSourceQueuesRequest')
     ListDeadLetterSourceQueuesResult = Shapes::StructureShape.new(name: 'ListDeadLetterSourceQueuesResult')
+    ListMessageMoveTasksRequest = Shapes::StructureShape.new(name: 'ListMessageMoveTasksRequest')
+    ListMessageMoveTasksResult = Shapes::StructureShape.new(name: 'ListMessageMoveTasksResult')
+    ListMessageMoveTasksResultEntry = Shapes::StructureShape.new(name: 'ListMessageMoveTasksResultEntry')
+    ListMessageMoveTasksResultEntryList = Shapes::ListShape.new(name: 'ListMessageMoveTasksResultEntryList', flattened: true)
     ListQueueTagsRequest = Shapes::StructureShape.new(name: 'ListQueueTagsRequest')
     ListQueueTagsResult = Shapes::StructureShape.new(name: 'ListQueueTagsResult')
     ListQueuesRequest = Shapes::StructureShape.new(name: 'ListQueuesRequest')
     ListQueuesResult = Shapes::StructureShape.new(name: 'ListQueuesResult')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     Message = Shapes::StructureShape.new(name: 'Message')
     MessageAttributeName = Shapes::StringShape.new(name: 'MessageAttributeName')
     MessageAttributeNameList = Shapes::ListShape.new(name: 'MessageAttributeNameList', flattened: true)
@@ -83,6 +90,7 @@ module Aws::SQS
     ReceiveMessageRequest = Shapes::StructureShape.new(name: 'ReceiveMessageRequest')
     ReceiveMessageResult = Shapes::StructureShape.new(name: 'ReceiveMessageResult')
     RemovePermissionRequest = Shapes::StructureShape.new(name: 'RemovePermissionRequest')
+    ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     SendMessageBatchRequest = Shapes::StructureShape.new(name: 'SendMessageBatchRequest')
     SendMessageBatchRequestEntry = Shapes::StructureShape.new(name: 'SendMessageBatchRequestEntry')
     SendMessageBatchRequestEntryList = Shapes::ListShape.new(name: 'SendMessageBatchRequestEntryList', flattened: true)
@@ -92,6 +100,8 @@ module Aws::SQS
     SendMessageRequest = Shapes::StructureShape.new(name: 'SendMessageRequest')
     SendMessageResult = Shapes::StructureShape.new(name: 'SendMessageResult')
     SetQueueAttributesRequest = Shapes::StructureShape.new(name: 'SetQueueAttributesRequest')
+    StartMessageMoveTaskRequest = Shapes::StructureShape.new(name: 'StartMessageMoveTaskRequest')
+    StartMessageMoveTaskResult = Shapes::StructureShape.new(name: 'StartMessageMoveTaskResult')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList', flattened: true)
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -129,6 +139,12 @@ module Aws::SQS
     BatchResultErrorEntryList.member = Shapes::ShapeRef.new(shape: BatchResultErrorEntry, location_name: "BatchResultErrorEntry")
 
     BinaryList.member = Shapes::ShapeRef.new(shape: Binary, location_name: "BinaryListValue")
+
+    CancelMessageMoveTaskRequest.add_member(:task_handle, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TaskHandle"))
+    CancelMessageMoveTaskRequest.struct_class = Types::CancelMessageMoveTaskRequest
+
+    CancelMessageMoveTaskResult.add_member(:approximate_number_of_messages_moved, Shapes::ShapeRef.new(shape: Long, location_name: "ApproximateNumberOfMessagesMoved"))
+    CancelMessageMoveTaskResult.struct_class = Types::CancelMessageMoveTaskResult
 
     ChangeMessageVisibilityBatchRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     ChangeMessageVisibilityBatchRequest.add_member(:entries, Shapes::ShapeRef.new(shape: ChangeMessageVisibilityBatchRequestEntryList, required: true, location_name: "Entries"))
@@ -222,6 +238,26 @@ module Aws::SQS
     ListDeadLetterSourceQueuesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListDeadLetterSourceQueuesResult.struct_class = Types::ListDeadLetterSourceQueuesResult
 
+    ListMessageMoveTasksRequest.add_member(:source_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceArn"))
+    ListMessageMoveTasksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    ListMessageMoveTasksRequest.struct_class = Types::ListMessageMoveTasksRequest
+
+    ListMessageMoveTasksResult.add_member(:results, Shapes::ShapeRef.new(shape: ListMessageMoveTasksResultEntryList, location_name: "Results"))
+    ListMessageMoveTasksResult.struct_class = Types::ListMessageMoveTasksResult
+
+    ListMessageMoveTasksResultEntry.add_member(:task_handle, Shapes::ShapeRef.new(shape: String, location_name: "TaskHandle"))
+    ListMessageMoveTasksResultEntry.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    ListMessageMoveTasksResultEntry.add_member(:source_arn, Shapes::ShapeRef.new(shape: String, location_name: "SourceArn"))
+    ListMessageMoveTasksResultEntry.add_member(:destination_arn, Shapes::ShapeRef.new(shape: String, location_name: "DestinationArn"))
+    ListMessageMoveTasksResultEntry.add_member(:max_number_of_messages_per_second, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxNumberOfMessagesPerSecond"))
+    ListMessageMoveTasksResultEntry.add_member(:approximate_number_of_messages_moved, Shapes::ShapeRef.new(shape: Long, location_name: "ApproximateNumberOfMessagesMoved"))
+    ListMessageMoveTasksResultEntry.add_member(:approximate_number_of_messages_to_move, Shapes::ShapeRef.new(shape: Long, location_name: "ApproximateNumberOfMessagesToMove"))
+    ListMessageMoveTasksResultEntry.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "FailureReason"))
+    ListMessageMoveTasksResultEntry.add_member(:started_timestamp, Shapes::ShapeRef.new(shape: Long, location_name: "StartedTimestamp"))
+    ListMessageMoveTasksResultEntry.struct_class = Types::ListMessageMoveTasksResultEntry
+
+    ListMessageMoveTasksResultEntryList.member = Shapes::ShapeRef.new(shape: ListMessageMoveTasksResultEntry, location_name: "ListMessageMoveTasksResultEntry")
+
     ListQueueTagsRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     ListQueueTagsRequest.struct_class = Types::ListQueueTagsRequest
 
@@ -311,6 +347,8 @@ module Aws::SQS
     RemovePermissionRequest.add_member(:label, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Label"))
     RemovePermissionRequest.struct_class = Types::RemovePermissionRequest
 
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     SendMessageBatchRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     SendMessageBatchRequest.add_member(:entries, Shapes::ShapeRef.new(shape: SendMessageBatchRequestEntryList, required: true, location_name: "Entries"))
     SendMessageBatchRequest.struct_class = Types::SendMessageBatchRequest
@@ -360,6 +398,14 @@ module Aws::SQS
     SetQueueAttributesRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: QueueAttributeMap, required: true, location_name: "Attribute"))
     SetQueueAttributesRequest.struct_class = Types::SetQueueAttributesRequest
 
+    StartMessageMoveTaskRequest.add_member(:source_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceArn"))
+    StartMessageMoveTaskRequest.add_member(:destination_arn, Shapes::ShapeRef.new(shape: String, location_name: "DestinationArn"))
+    StartMessageMoveTaskRequest.add_member(:max_number_of_messages_per_second, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxNumberOfMessagesPerSecond"))
+    StartMessageMoveTaskRequest.struct_class = Types::StartMessageMoveTaskRequest
+
+    StartMessageMoveTaskResult.add_member(:task_handle, Shapes::ShapeRef.new(shape: String, location_name: "TaskHandle"))
+    StartMessageMoveTaskResult.struct_class = Types::StartMessageMoveTaskResult
+
     StringList.member = Shapes::ShapeRef.new(shape: String, location_name: "StringListValue")
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey, location_name: "TagKey")
@@ -405,6 +451,16 @@ module Aws::SQS
         o.input = Shapes::ShapeRef.new(shape: AddPermissionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: OverLimit)
+      end)
+
+      api.add_operation(:cancel_message_move_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelMessageMoveTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelMessageMoveTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelMessageMoveTaskResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
 
       api.add_operation(:change_message_visibility, Seahorse::Model::Operation.new.tap do |o|
@@ -502,6 +558,16 @@ module Aws::SQS
         )
       end)
 
+      api.add_operation(:list_message_move_tasks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMessageMoveTasks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListMessageMoveTasksRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMessageMoveTasksResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+      end)
+
       api.add_operation(:list_queue_tags, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListQueueTags"
         o.http_method = "POST"
@@ -582,6 +648,16 @@ module Aws::SQS
         o.input = Shapes::ShapeRef.new(shape: SetQueueAttributesRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidAttributeName)
+      end)
+
+      api.add_operation(:start_message_move_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMessageMoveTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartMessageMoveTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartMessageMoveTaskResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
       end)
 
       api.add_operation(:tag_queue, Seahorse::Model::Operation.new.tap do |o|

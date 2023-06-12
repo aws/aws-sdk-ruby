@@ -373,21 +373,36 @@ module Aws::CloudFormation
 
     # @!group API Operations
 
+    # Activate trusted access with Organizations. With trusted access
+    # between StackSets and Organizations activated, the management account
+    # has permissions to create and manage StackSets for your organization.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ActivateOrganizationsAccess AWS API Documentation
+    #
+    # @overload activate_organizations_access(params = {})
+    # @param [Hash] params ({})
+    def activate_organizations_access(params = {}, options = {})
+      req = build_request(:activate_organizations_access, params)
+      req.send_request(options)
+    end
+
     # Activates a public third-party extension, making it available for use
     # in stack templates. For more information, see [Using public
     # extensions][1] in the *CloudFormation User Guide*.
     #
     # Once you have activated a public third-party extension in your account
-    # and region, use
-    # [SetTypeConfiguration](AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html)
-    # to specify configuration properties for the extension. For more
-    # information, see [Configuring extensions at the account level][2] in
-    # the *CloudFormation User Guide*.
+    # and Region, use [SetTypeConfiguration][2] to specify configuration
+    # properties for the extension. For more information, see [Configuring
+    # extensions at the account level][3] in the *CloudFormation User
+    # Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html
-    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
+    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html
+    # [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
     #
     # @option params [String] :type
     #   The extension type.
@@ -415,18 +430,18 @@ module Aws::CloudFormation
     #
     # @option params [String] :type_name_alias
     #   An alias to assign to the public extension, in this account and
-    #   region. If you specify an alias for the extension, CloudFormation
+    #   Region. If you specify an alias for the extension, CloudFormation
     #   treats the alias as the extension type name within this account and
-    #   region. You must use the alias to refer to the extension in your
+    #   Region. You must use the alias to refer to the extension in your
     #   templates, API calls, and CloudFormation console.
     #
-    #   An extension alias must be unique within a given account and region.
+    #   An extension alias must be unique within a given account and Region.
     #   You can activate the same public resource multiple times in the same
-    #   account and region, using different type name aliases.
+    #   account and Region, using different type name aliases.
     #
     # @option params [Boolean] :auto_update
     #   Whether to automatically update the extension in this account and
-    #   region when a new *minor* version is published by the extension
+    #   Region when a new *minor* version is published by the extension
     #   publisher. Major versions released by the publisher must be manually
     #   updated.
     #
@@ -494,7 +509,7 @@ module Aws::CloudFormation
 
     # Returns configuration data for the specified CloudFormation
     # extensions, from the CloudFormation registry for the account and
-    # region.
+    # Region.
     #
     # For more information, see [Configuring extensions at the account
     # level][1] in the *CloudFormation User Guide*.
@@ -569,6 +584,19 @@ module Aws::CloudFormation
     #  </note>
     #
     # @option params [required, String] :stack_name
+    #   <note markdown="1"> If you don't pass a parameter to `StackName`, the API returns a
+    #   response that describes all resources in the account.
+    #
+    #    The IAM policy below can be added to IAM policies when you want to
+    #   limit resource-level permissions and avoid returning a response when
+    #   no parameter is sent in the request:
+    #
+    #    `\{ "Version": "2012-10-17", "Statement": [\{ "Effect": "Deny",
+    #   "Action": "cloudformation:DescribeStacks", "NotResource":
+    #   "arn:aws:cloudformation:*:*:stack/*/*" \}] \}`
+    #
+    #    </note>
+    #
     #   The name or the unique stack ID that's associated with the stack.
     #
     # @option params [String] :client_request_token
@@ -687,7 +715,7 @@ module Aws::CloudFormation
     #
     # @option params [String] :client_request_token
     #   A unique identifier for this `ContinueUpdateRollback` request. Specify
-    #   this token if you plan to retry requests so that CloudFormationknows
+    #   this token if you plan to retry requests so that CloudFormation knows
     #   that you're not attempting to continue the rollback to a stack with
     #   the same name. You might retry `ContinueUpdateRollback` requests to
     #   ensure that CloudFormation successfully received them.
@@ -930,7 +958,7 @@ module Aws::CloudFormation
     #
     #   If you create a change set for a new stack, CloudFormation creates a
     #   stack with a unique stack ID, but no template or resources. The stack
-    #   will be in the [ `REVIEW_IN_PROGRESS` ][1] state until you execute the
+    #   will be in the [REVIEW\_IN\_PROGRESS][1] state until you execute the
     #   change set.
     #
     #   By default, CloudFormation specifies `UPDATE`. You can't use the
@@ -1020,7 +1048,7 @@ module Aws::CloudFormation
 
     # Creates a stack as specified in the template. After the call completes
     # successfully, the stack creation starts. You can check the status of
-    # the stack through the DescribeStacksoperation.
+    # the stack through the DescribeStacks operation.
     #
     # @option params [required, String] :stack_name
     #   The name that's associated with the stack. The name must be unique in
@@ -1772,8 +1800,23 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
+    # Deactivates trusted access with Organizations. If trusted access is
+    # deactivated, the management account does not have permissions to
+    # create and manage service-managed StackSets for your organization.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeactivateOrganizationsAccess AWS API Documentation
+    #
+    # @overload deactivate_organizations_access(params = {})
+    # @param [Hash] params ({})
+    def deactivate_organizations_access(params = {}, options = {})
+      req = build_request(:deactivate_organizations_access, params)
+      req.send_request(options)
+    end
+
     # Deactivates a public extension that was previously activated in this
-    # account and region.
+    # account and Region.
     #
     # Once deactivated, an extension can't be used in any CloudFormation
     # operation. This includes stack update operations where the stack
@@ -1782,7 +1825,7 @@ module Aws::CloudFormation
     # automatically updated if a new version of the extension is released.
     #
     # @option params [String] :type_name
-    #   The type name of the extension, in this account and region. If you
+    #   The type name of the extension, in this account and Region. If you
     #   specified a type name alias when enabling the extension, use the type
     #   name alias.
     #
@@ -1795,7 +1838,7 @@ module Aws::CloudFormation
     #
     # @option params [String] :arn
     #   The Amazon Resource Name (ARN) for the extension, in this account and
-    #   region.
+    #   Region.
     #
     #   Conditional: You must specify either `Arn`, or `TypeName` and `Type`.
     #
@@ -2379,6 +2422,56 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
+    # Retrieves information about the account's `OrganizationAccess`
+    # status. This API can be called either by the management account or the
+    # delegated administrator by using the `CallAs` parameter. This API can
+    # also be called without the `CallAs` parameter by the management
+    # account.
+    #
+    # @option params [String] :call_as
+    #   \[Service-managed permissions\] Specifies whether you are acting as an
+    #   account administrator in the organization's management account or as
+    #   a delegated administrator in a member account.
+    #
+    #   By default, `SELF` is specified.
+    #
+    #   * If you are signed in to the management account, specify `SELF`.
+    #
+    #   * If you are signed in to a delegated administrator account, specify
+    #     `DELEGATED_ADMIN`.
+    #
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation User
+    #     Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html
+    #
+    # @return [Types::DescribeOrganizationsAccessOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeOrganizationsAccessOutput#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_organizations_access({
+    #     call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "ENABLED", "DISABLED", "DISABLED_PERMANENTLY"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeOrganizationsAccess AWS API Documentation
+    #
+    # @overload describe_organizations_access(params = {})
+    # @param [Hash] params ({})
+    def describe_organizations_access(params = {}, options = {})
+      req = build_request(:describe_organizations_access, params)
+      req.send_request(options)
+    end
+
     # Returns information about a CloudFormation extension publisher.
     #
     # If you don't supply a `PublisherId`, and you have registered as an
@@ -2435,7 +2528,7 @@ module Aws::CloudFormation
 
     # Returns information about a stack drift detection operation. A stack
     # drift detection operation detects whether a stack's actual
-    # configuration differs, or has *drifted*, from it's expected
+    # configuration differs, or has *drifted*, from its expected
     # configuration, as defined in the stack template and any values
     # specified as template parameters. A stack is considered to have
     # drifted if one or more of its resources have drifted. For more
@@ -2568,11 +2661,11 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
-    # Returns the stack instance that's associated with the specified stack
-    # set, Amazon Web Services account, and Region.
+    # Returns the stack instance that's associated with the specified
+    # StackSet, Amazon Web Services account, and Amazon Web Services Region.
     #
     # For a list of stack instances that are associated with a specific
-    # stack set, use ListStackInstances.
+    # StackSet, use ListStackInstances.
     #
     # @option params [required, String] :stack_set_name
     #   The name or the unique stack ID of the stack set that you want to get
@@ -2632,7 +2725,7 @@ module Aws::CloudFormation
     #   resp.stack_instance.parameter_overrides[0].use_previous_value #=> Boolean
     #   resp.stack_instance.parameter_overrides[0].resolved_value #=> String
     #   resp.stack_instance.status #=> String, one of "CURRENT", "OUTDATED", "INOPERABLE"
-    #   resp.stack_instance.stack_instance_status.detailed_status #=> String, one of "PENDING", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED", "INOPERABLE"
+    #   resp.stack_instance.stack_instance_status.detailed_status #=> String, one of "PENDING", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED", "INOPERABLE", "SKIPPED_SUSPENDED_ACCOUNT"
     #   resp.stack_instance.status_reason #=> String
     #   resp.stack_instance.organizational_unit_id #=> String
     #   resp.stack_instance.drift_status #=> String, one of "DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"
@@ -2903,7 +2996,7 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
-    # Returns the description of the specified stack set.
+    # Returns the description of the specified StackSet.
     #
     # @option params [required, String] :stack_set_name
     #   The name or unique ID of the stack set whose description you want.
@@ -2987,7 +3080,7 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
-    # Returns the description of the specified stack set operation.
+    # Returns the description of the specified StackSet operation.
     #
     # @option params [required, String] :stack_set_name
     #   The name or the unique stack ID of the stack set for the stack
@@ -3082,6 +3175,21 @@ module Aws::CloudFormation
     #  </note>
     #
     # @option params [String] :stack_name
+    #   <note markdown="1"> If you don't pass a parameter to `StackName`, the API returns a
+    #   response that describes all resources in the account. This requires
+    #   `ListStacks` and `DescribeStacks` permissions.
+    #
+    #    The IAM policy below can be added to IAM policies when you want to
+    #   limit resource-level permissions and avoid returning a response when
+    #   no parameter is sent in the request:
+    #
+    #    \\\{ "Version": "2012-10-17", "Statement": \[\\\{ "Effect":
+    #   "Deny", "Action": "cloudformation:DescribeStacks",
+    #   "NotResource": "arn:aws:cloudformation:*:*:stack/*/*" \\}\]
+    #   \\}
+    #
+    #    </note>
+    #
     #   The name or the unique stack ID that's associated with the stack,
     #   which aren't always interchangeable:
     #
@@ -3301,18 +3409,18 @@ module Aws::CloudFormation
     # Returns information about an extension's registration, including its
     # current status and type and version identifiers.
     #
-    # When you initiate a registration request using ` RegisterType `, you
-    # can then use ` DescribeTypeRegistration ` to monitor the progress of
-    # that registration request.
+    # When you initiate a registration request using RegisterType, you can
+    # then use DescribeTypeRegistration to monitor the progress of that
+    # registration request.
     #
-    # Once the registration request has completed, use ` DescribeType ` to
+    # Once the registration request has completed, use DescribeType to
     # return detailed information about an extension.
     #
     # @option params [required, String] :registration_token
     #   The identifier for this registration request.
     #
     #   This registration token is generated by CloudFormation when you
-    #   initiate a registration request using ` RegisterType `.
+    #   initiate a registration request using RegisterType.
     #
     # @return [Types::DescribeTypeRegistrationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3349,7 +3457,7 @@ module Aws::CloudFormation
     end
 
     # Detects whether a stack's actual configuration differs, or has
-    # *drifted*, from it's expected configuration, as defined in the stack
+    # *drifted*, from its expected configuration, as defined in the stack
     # template and any values specified as template parameters. For each
     # resource in the stack that supports drift detection, CloudFormation
     # compares the actual configuration of the resource with its expected
@@ -3413,13 +3521,13 @@ module Aws::CloudFormation
     end
 
     # Returns information about whether a resource's actual configuration
-    # differs, or has *drifted*, from it's expected configuration, as
-    # defined in the stack template and any values specified as template
-    # parameters. This information includes actual and expected property
-    # values for resources in which CloudFormation detects drift. Only
-    # resource properties explicitly defined in the stack template are
-    # checked for drift. For more information about stack and resource
-    # drift, see [Detecting Unregulated Configuration Changes to Stacks and
+    # differs, or has *drifted*, from its expected configuration, as defined
+    # in the stack template and any values specified as template parameters.
+    # This information includes actual and expected property values for
+    # resources in which CloudFormation detects drift. Only resource
+    # properties explicitly defined in the stack template are checked for
+    # drift. For more information about stack and resource drift, see
+    # [Detecting Unregulated Configuration Changes to Stacks and
     # Resources][1].
     #
     # Use `DetectStackResourceDrift` to detect drift on individual
@@ -3490,8 +3598,8 @@ module Aws::CloudFormation
     # stack set][1].
     #
     # `DetectStackSetDrift` returns the `OperationId` of the stack set drift
-    # detection operation. Use this operation id with `
-    # DescribeStackSetOperation ` to monitor the progress of the drift
+    # detection operation. Use this operation id with
+    # DescribeStackSetOperation to monitor the progress of the drift
     # detection operation. The drift detection operation may take some time,
     # depending on the number of stack instances included in the stack set,
     # in addition to the number of resources included in each stack.
@@ -3499,16 +3607,16 @@ module Aws::CloudFormation
     # Once the operation has completed, use the following actions to return
     # drift information:
     #
-    # * Use ` DescribeStackSet ` to return detailed information about the
-    #   stack set, including detailed information about the last *completed*
-    #   drift operation performed on the stack set. (Information about drift
+    # * Use DescribeStackSet to return detailed information about the stack
+    #   set, including detailed information about the last *completed* drift
+    #   operation performed on the stack set. (Information about drift
     #   operations that are in progress isn't included.)
     #
-    # * Use ` ListStackInstances ` to return a list of stack instances
-    #   belonging to the stack set, including the drift status and last
-    #   drift time checked of each instance.
+    # * Use ListStackInstances to return a list of stack instances belonging
+    #   to the stack set, including the drift status and last drift time
+    #   checked of each instance.
     #
-    # * Use ` DescribeStackInstance ` to return detailed information about a
+    # * Use DescribeStackInstance to return detailed information about a
     #   specific stack instance, including its drift status and last drift
     #   time checked.
     #
@@ -3518,8 +3626,8 @@ module Aws::CloudFormation
     # You can only run a single drift detection operation on a given stack
     # set at one time.
     #
-    # To stop a drift detection stack set operation, use `
-    # StopStackSetOperation `.
+    # To stop a drift detection stack set operation, use
+    # StopStackSetOperation.
     #
     #
     #
@@ -3957,11 +4065,6 @@ module Aws::CloudFormation
     # and Region, by specifying the stack ID of the stack you intend to
     # import.
     #
-    # <note markdown="1"> `ImportStacksToStackSet` is only supported by self-managed
-    # permissions.
-    #
-    #  </note>
-    #
     # @option params [required, String] :stack_set_name
     #   The name of the stack set. The name must be unique in the Region where
     #   you create your stack set.
@@ -4097,7 +4200,7 @@ module Aws::CloudFormation
     # Lists all exported output values in the account and Region in which
     # you call this action. Use this action to see the exported output
     # values that you can import into other stacks. To import values, use
-    # the [ `Fn::ImportValue` ][1] function.
+    # the [ Fn::ImportValue][1] function.
     #
     # For more information, see [ CloudFormation export stack output
     # values][2].
@@ -4147,7 +4250,7 @@ module Aws::CloudFormation
     # your account, see ListExports.
     #
     # For more information about importing an exported output value, see the
-    # [ `Fn::ImportValue` ][1] function.
+    # [Fn::ImportValue][1] function.
     #
     #
     #
@@ -4279,7 +4382,7 @@ module Aws::CloudFormation
     #   resp.summaries[0].stack_id #=> String
     #   resp.summaries[0].status #=> String, one of "CURRENT", "OUTDATED", "INOPERABLE"
     #   resp.summaries[0].status_reason #=> String
-    #   resp.summaries[0].stack_instance_status.detailed_status #=> String, one of "PENDING", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED", "INOPERABLE"
+    #   resp.summaries[0].stack_instance_status.detailed_status #=> String, one of "PENDING", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED", "INOPERABLE", "SKIPPED_SUSPENDED_ACCOUNT"
     #   resp.summaries[0].organizational_unit_id #=> String
     #   resp.summaries[0].drift_status #=> String, one of "DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"
     #   resp.summaries[0].last_drift_check_timestamp #=> Time
@@ -4860,12 +4963,12 @@ module Aws::CloudFormation
     #   Valid values include:
     #
     #   * `PRIVATE`: Extensions that are visible and usable within this
-    #     account and region. This includes:
+    #     account and Region. This includes:
     #
-    #     * Private extensions you have registered in this account and region.
+    #     * Private extensions you have registered in this account and Region.
     #
     #     * Public extensions that you have activated in this account and
-    #       region.
+    #       Region.
     #
     #   * `PUBLIC`: Extensions that are publicly visible and available to be
     #     activated within any Amazon Web Services account. This includes
@@ -4983,7 +5086,7 @@ module Aws::CloudFormation
     end
 
     # Publishes the specified extension to the CloudFormation registry as a
-    # public extension in this region. Public extensions are available for
+    # public extension in this Region. Public extensions are available for
     # use by all CloudFormation users. For more information about publishing
     # extensions, see [Publishing extensions to make them available for
     # public use][1] in the *CloudFormation CLI User Guide*.
@@ -5218,25 +5321,26 @@ module Aws::CloudFormation
     # *CloudFormation CLI User Guide*.
     #
     # You can have a maximum of 50 resource extension versions registered at
-    # a time. This maximum is per account and per region. Use
-    # [DeregisterType](AWSCloudFormation/latest/APIReference/API_DeregisterType.html)
-    # to deregister specific extension versions if necessary.
+    # a time. This maximum is per account and per Region. Use
+    # [DeregisterType][2] to deregister specific extension versions if
+    # necessary.
     #
-    # Once you have initiated a registration request using ` RegisterType `,
-    # you can use ` DescribeTypeRegistration ` to monitor the progress of
-    # the registration request.
+    # Once you have initiated a registration request using RegisterType, you
+    # can use DescribeTypeRegistration to monitor the progress of the
+    # registration request.
     #
     # Once you have registered a private extension in your account and
-    # region, use
-    # [SetTypeConfiguration](AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html)
-    # to specify configuration properties for the extension. For more
-    # information, see [Configuring extensions at the account level][2] in
-    # the *CloudFormation User Guide*.
+    # Region, use [SetTypeConfiguration][3] to specify configuration
+    # properties for the extension. For more information, see [Configuring
+    # extensions at the account level][4] in the *CloudFormation User
+    # Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html
-    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
+    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeregisterType.html
+    # [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html
+    # [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
     #
     # @option params [String] :type
     #   The kind of extension.
@@ -5302,9 +5406,7 @@ module Aws::CloudFormation
     #   must contain a trust relationship with the CloudFormation service
     #   principle (`resources.cloudformation.amazonaws.com`). For more
     #   information about adding trust relationships, see [Modifying a role
-    #   trust
-    #   policy](IAM/latest/UserGuide/roles-managingrole-editing-console.html#roles-managingrole_edit-trust-policy)
-    #   in the *Identity and Access Management User Guide*.
+    #   trust policy][1] in the *Identity and Access Management User Guide*.
     #
     #   If your extension calls Amazon Web Services APIs in any of its
     #   handlers, you must create an <i> <a
@@ -5316,6 +5418,10 @@ module Aws::CloudFormation
     #   temporary session token, which it then passes to the resource type
     #   handler, thereby supplying your resource type with the appropriate
     #   credentials.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-managingrole-editing-console.html#roles-managingrole_edit-trust-policy
     #
     # @option params [String] :client_request_token
     #   A unique identifier that acts as an idempotency key for this
@@ -5452,32 +5558,32 @@ module Aws::CloudFormation
     end
 
     # Specifies the configuration data for a registered CloudFormation
-    # extension, in the given account and region.
+    # extension, in the given account and Region.
     #
     # To view the current configuration data for an extension, refer to the
-    # `ConfigurationSchema` element of
-    # [DescribeType](AWSCloudFormation/latest/APIReference/API_DescribeType.html).
-    # For more information, see [Configuring extensions at the account
-    # level][1] in the *CloudFormation User Guide*.
+    # `ConfigurationSchema` element of [DescribeType][1]. For more
+    # information, see [Configuring extensions at the account level][2] in
+    # the *CloudFormation User Guide*.
     #
     # It's strongly recommended that you use dynamic references to restrict
     # sensitive configuration definitions, such as third-party credentials.
     # For more details on dynamic references, see [Using dynamic references
-    # to specify template values][2] in the *CloudFormation User Guide*.
+    # to specify template values][3] in the *CloudFormation User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
-    # [2]: https://docs.aws.amazon.com/
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
+    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
+    # [3]: https://docs.aws.amazon.com/
     #
     # @option params [String] :type_arn
     #   The Amazon Resource Name (ARN) for the extension, in this account and
-    #   region.
+    #   Region.
     #
     #   For public extensions, this will be the ARN assigned when you
-    #   [activate the type][1] in this account and region. For private
+    #   [activate the type][1] in this account and Region. For private
     #   extensions, this will be the ARN assigned when you [register the
-    #   type][2] in this account and region.
+    #   type][2] in this account and Region.
     #
     #   Do not include the extension versions suffix at the end of the ARN.
     #   You can set the configuration for an extension, but not for a specific
@@ -5489,17 +5595,18 @@ module Aws::CloudFormation
     #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html
     #
     # @option params [required, String] :configuration
-    #   The configuration data for the extension, in this account and region.
+    #   The configuration data for the extension, in this account and Region.
     #
     #   The configuration data must be formatted as JSON, and validate against
     #   the schema returned in the `ConfigurationSchema` response element of
-    #   [API\_DescribeType](AWSCloudFormation/latest/APIReference/API_DescribeType.html).
-    #   For more information, see [Defining account-level configuration data
-    #   for an extension][1] in the *CloudFormation CLI User Guide*.
+    #   [DescribeType][1]. For more information, see [Defining account-level
+    #   configuration data for an extension][2] in the *CloudFormation CLI
+    #   User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
+    #   [2]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration
     #
     # @option params [String] :configuration_alias
     #   An alias by which to refer to this extension configuration data.
@@ -5703,27 +5810,28 @@ module Aws::CloudFormation
     # publishing][1] in the *CloudFormation CLI User Guide*.
     #
     # If you don't specify a version, CloudFormation uses the default
-    # version of the extension in your account and region for testing.
+    # version of the extension in your account and Region for testing.
     #
     # To perform testing, CloudFormation assumes the execution role
     # specified when the type was registered. For more information, see
-    # [RegisterType](AWSCloudFormation/latest/APIReference/API_RegisterType.html).
+    # [RegisterType][2].
     #
     # Once you've initiated testing on an extension using `TestType`, you
-    # can pass the returned `TypeVersionArn` into [DescribeType][2] to
+    # can pass the returned `TypeVersionArn` into [DescribeType][3] to
     # monitor the current test status and test status description for the
     # extension.
     #
     # An extension must have a test status of `PASSED` before it can be
     # published. For more information, see [Publishing extensions to make
-    # them available for public use][3] in the *CloudFormation CLI User
+    # them available for public use][4] in the *CloudFormation CLI User
     # Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-testing
-    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
-    # [3]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-publish.html
+    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html
+    # [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
+    # [4]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-publish.html
     #
     # @option params [String] :arn
     #   The Amazon Resource Name (ARN) of the extension.
@@ -5747,7 +5855,7 @@ module Aws::CloudFormation
     #   and `Type`.
     #
     #   If you don't specify a version, CloudFormation uses the default
-    #   version of the extension in this account and region for testing.
+    #   version of the extension in this account and Region for testing.
     #
     # @option params [String] :log_delivery_bucket
     #   The S3 bucket to which CloudFormation delivers the contract test
@@ -6828,7 +6936,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

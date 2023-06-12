@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2023-06-07)
+------------------
+
+* Feature - This update corrects the jumbo frames mtu values from 9100 to 8500 for transit virtual interfaces.
+
 1.60.0 (2023-05-31)
 ------------------
 

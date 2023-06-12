@@ -49,6 +49,7 @@ module Aws::IoT
   # * {ResourceAlreadyExistsException}
   # * {ResourceNotFoundException}
   # * {ResourceRegistrationFailureException}
+  # * {ServiceQuotaExceededException}
   # * {ServiceUnavailableException}
   # * {SqlParseException}
   # * {TaskAlreadyExistsException}
@@ -56,6 +57,7 @@ module Aws::IoT
   # * {TransferAlreadyCompletedException}
   # * {TransferConflictException}
   # * {UnauthorizedException}
+  # * {ValidationException}
   # * {VersionConflictException}
   # * {VersionsLimitExceededException}
   #
@@ -122,6 +124,11 @@ module Aws::IoT
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+      # @return [String]
+      def resource_id
+        @data[:resource_id]
       end
     end
 
@@ -405,6 +412,21 @@ module Aws::IoT
       end
     end
 
+    class ServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IoT::Types::ServiceQuotaExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class ServiceUnavailableException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -500,6 +522,21 @@ module Aws::IoT
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::IoT::Types::UnauthorizedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ValidationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IoT::Types::ValidationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

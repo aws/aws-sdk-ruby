@@ -1818,9 +1818,89 @@ module Aws::WAFV2
     #
     class DeleteWebACLResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, an Amazon Cognito user pool, an App Runner
+    #   service, or an Amazon Web Services Verified Access instance.
+    #
+    #   To work with CloudFront, you must also specify the Region US East
+    #   (N. Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DescribeAllManagedProductsRequest AWS API Documentation
+    #
+    class DescribeAllManagedProductsRequest < Struct.new(
+      :scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] managed_products
+    #   High-level information for the Amazon Web Services Managed Rules
+    #   rule groups and Amazon Web Services Marketplace managed rule groups.
+    #   @return [Array<Types::ManagedProductDescriptor>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DescribeAllManagedProductsResponse AWS API Documentation
+    #
+    class DescribeAllManagedProductsResponse < Struct.new(
+      :managed_products)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] vendor_name
     #   The name of the managed rule group vendor. You use this, along with
-    #   the rule group name, to identify the rule group.
+    #   the rule group name, to identify a rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, an Amazon Cognito user pool, an App Runner
+    #   service, or an Amazon Web Services Verified Access instance.
+    #
+    #   To work with CloudFront, you must also specify the Region US East
+    #   (N. Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DescribeManagedProductsByVendorRequest AWS API Documentation
+    #
+    class DescribeManagedProductsByVendorRequest < Struct.new(
+      :vendor_name,
+      :scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] managed_products
+    #   High-level information for the managed rule groups owned by the
+    #   specified vendor.
+    #   @return [Array<Types::ManagedProductDescriptor>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DescribeManagedProductsByVendorResponse AWS API Documentation
+    #
+    class DescribeManagedProductsByVendorResponse < Struct.new(
+      :managed_products)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vendor_name
+    #   The name of the managed rule group vendor. You use this, along with
+    #   the rule group name, to identify a rule group.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1867,11 +1947,12 @@ module Aws::WAFV2
     #
     # @!attribute [rw] sns_topic_arn
     #   The Amazon resource name (ARN) of the Amazon Simple Notification
-    #   Service SNS topic that's used to record changes to the managed rule
-    #   group. You can subscribe to the SNS topic to receive notifications
-    #   when the managed rule group is modified, such as for new versions
-    #   and for version expiration. For more information, see the [Amazon
-    #   Simple Notification Service Developer Guide][1].
+    #   Service SNS topic that's used to provide notification of changes to
+    #   the managed rule group. You can subscribe to the SNS topic to
+    #   receive notifications when the managed rule group is modified, such
+    #   as for new versions and for version expiration. For more
+    #   information, see the [Amazon Simple Notification Service Developer
+    #   Guide][1].
     #
     #
     #
@@ -3864,7 +3945,7 @@ module Aws::WAFV2
 
     # @!attribute [rw] vendor_name
     #   The name of the managed rule group vendor. You use this, along with
-    #   the rule group name, to identify the rule group.
+    #   the rule group name, to identify a rule group.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4645,6 +4726,80 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # The properties of a managed product, such as an Amazon Web Services
+    # Managed Rules rule group or an Amazon Web Services Marketplace managed
+    # rule group.
+    #
+    # @!attribute [rw] vendor_name
+    #   The name of the managed rule group vendor. You use this, along with
+    #   the rule group name, to identify a rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_rule_set_name
+    #   The name of the managed rule group. For example,
+    #   `AWSManagedRulesAnonymousIpList` or `AWSManagedRulesATPRuleSet`.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_id
+    #   A unique identifier for the rule group. This ID is returned in the
+    #   responses to create and list commands. You provide it to operations
+    #   like update and delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_link
+    #   For Amazon Web Services Marketplace managed rule groups only, the
+    #   link to the rule group product page.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_title
+    #   The display name for the managed rule group. For example, `Anonymous
+    #   IP list` or `Account takeover prevention`.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_description
+    #   A short description of the managed rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] sns_topic_arn
+    #   The Amazon resource name (ARN) of the Amazon Simple Notification
+    #   Service SNS topic that's used to provide notification of changes to
+    #   the managed rule group. You can subscribe to the SNS topic to
+    #   receive notifications when the managed rule group is modified, such
+    #   as for new versions and for version expiration. For more
+    #   information, see the [Amazon Simple Notification Service Developer
+    #   Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/welcome.html
+    #   @return [String]
+    #
+    # @!attribute [rw] is_versioning_supported
+    #   Indicates whether the rule group is versioned.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_advanced_managed_rule_set
+    #   Indicates whether the rule group provides an advanced set of
+    #   protections, such as the the Amazon Web Services Managed Rules rule
+    #   groups that are used for WAF intelligent threat mitigation.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ManagedProductDescriptor AWS API Documentation
+    #
+    class ManagedProductDescriptor < Struct.new(
+      :vendor_name,
+      :managed_rule_set_name,
+      :product_id,
+      :product_link,
+      :product_title,
+      :product_description,
+      :sns_topic_arn,
+      :is_versioning_supported,
+      :is_advanced_managed_rule_set)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Additional information that's used by a managed rule group. Many
     # managed rule groups don't require this.
     #
@@ -4758,7 +4913,7 @@ module Aws::WAFV2
     #
     # @!attribute [rw] vendor_name
     #   The name of the managed rule group vendor. You use this, along with
-    #   the rule group name, to identify the rule group.
+    #   the rule group name, to identify a rule group.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4836,14 +4991,14 @@ module Aws::WAFV2
     # ListAvailableManagedRuleGroups. This provides information like the
     # name and vendor name, that you provide when you add a
     # ManagedRuleGroupStatement to a web ACL. Managed rule groups include
-    # Amazon Web Services Managed Rules rule groups, which are free of
-    # charge to WAF customers, and Amazon Web Services Marketplace managed
-    # rule groups, which you can subscribe to through Amazon Web Services
-    # Marketplace.
+    # Amazon Web Services Managed Rules rule groups and Amazon Web Services
+    # Marketplace managed rule groups. To use any Amazon Web Services
+    # Marketplace managed rule group, first subscribe to the rule group
+    # through Amazon Web Services Marketplace.
     #
     # @!attribute [rw] vendor_name
     #   The name of the managed rule group vendor. You use this, along with
-    #   the rule group name, to identify the rule group.
+    #   the rule group name, to identify a rule group.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -8399,15 +8554,15 @@ module Aws::WAFV2
     # collection.
     #
     # @!attribute [rw] sampled_requests_enabled
-    #   A boolean indicating whether WAF should store a sampling of the web
-    #   requests that match the rules. You can view the sampled requests
-    #   through the WAF console.
+    #   Indicates whether WAF should store a sampling of the web requests
+    #   that match the rules. You can view the sampled requests through the
+    #   WAF console.
     #   @return [Boolean]
     #
     # @!attribute [rw] cloud_watch_metrics_enabled
-    #   A boolean indicating whether the associated resource sends metrics
-    #   to Amazon CloudWatch. For the list of available metrics, see [WAF
-    #   Metrics][1] in the *WAF Developer Guide*.
+    #   Indicates whether the associated resource sends metrics to Amazon
+    #   CloudWatch. For the list of available metrics, see [WAF Metrics][1]
+    #   in the *WAF Developer Guide*.
     #
     #   For web ACLs, the metrics are for web requests that have the web ACL
     #   default action applied. WAF applies the default action to web

@@ -924,7 +924,9 @@ module Aws::Connect
     #   when the agent began dialing. For `CALLBACK`, this is when the
     #   callback contact was created. For `TRANSFER` and `QUEUE_TRANSFER`,
     #   this is when the transfer was initiated. For `API`, this is when the
-    #   request arrived.
+    #   request arrived. For `EXTERNAL_OUTBOUND`, this is when the agent
+    #   started dialing the external participant. For `MONITOR`, this is
+    #   when the supervisor started listening to a contact.
     #   @return [Time]
     #
     # @!attribute [rw] disconnect_timestamp
@@ -6929,6 +6931,60 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The search criteria to be used to return hours of operations.
+    #
+    # @!attribute [rw] or_conditions
+    #   A list of conditions which would be applied together with an OR
+    #   condition.
+    #   @return [Array<Types::HoursOfOperationSearchCriteria>]
+    #
+    # @!attribute [rw] and_conditions
+    #   A list of conditions which would be applied together with an AND
+    #   condition.
+    #   @return [Array<Types::HoursOfOperationSearchCriteria>]
+    #
+    # @!attribute [rw] string_condition
+    #   A leaf node condition which can be used to specify a string
+    #   condition.
+    #
+    #   <note markdown="1"> The currently supported values for `FieldName` are `name`,
+    #   `description`, `timezone`, and `resourceID`.
+    #
+    #    </note>
+    #   @return [Types::StringCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HoursOfOperationSearchCriteria AWS API Documentation
+    #
+    class HoursOfOperationSearchCriteria < Struct.new(
+      :or_conditions,
+      :and_conditions,
+      :string_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters to be applied to search results.
+    #
+    # @!attribute [rw] tag_filter
+    #   An object that can be used to specify Tag conditions inside the
+    #   `SearchFilter`. This accepts an `OR` of `AND` (List of List) input
+    #   where:
+    #
+    #   * Top level list specifies conditions that need to be applied with
+    #     `OR` operator
+    #
+    #   * Inner list specifies conditions that need to be applied with `AND`
+    #     operator.
+    #   @return [Types::ControlPlaneTagFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HoursOfOperationSearchFilter AWS API Documentation
+    #
+    class HoursOfOperationSearchFilter < Struct.new(
+      :tag_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains summary information about hours of operation for a contact
     # center.
     #
@@ -9858,7 +9914,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description for the prompt.
+    #   The description of the prompt.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -9875,6 +9931,60 @@ module Aws::Connect
       :name,
       :description,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The search criteria to be used to return prompts.
+    #
+    # @!attribute [rw] or_conditions
+    #   A list of conditions which would be applied together with an OR
+    #   condition.
+    #   @return [Array<Types::PromptSearchCriteria>]
+    #
+    # @!attribute [rw] and_conditions
+    #   A list of conditions which would be applied together with an AND
+    #   condition.
+    #   @return [Array<Types::PromptSearchCriteria>]
+    #
+    # @!attribute [rw] string_condition
+    #   A leaf node condition which can be used to specify a string
+    #   condition.
+    #
+    #   <note markdown="1"> The currently supported values for `FieldName` are `name`,
+    #   `description`, and `resourceID`.
+    #
+    #    </note>
+    #   @return [Types::StringCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PromptSearchCriteria AWS API Documentation
+    #
+    class PromptSearchCriteria < Struct.new(
+      :or_conditions,
+      :and_conditions,
+      :string_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters to be applied to search results.
+    #
+    # @!attribute [rw] tag_filter
+    #   An object that can be used to specify Tag conditions inside the
+    #   `SearchFilter`. This accepts an `OR` of `AND` (List of List) input
+    #   where:
+    #
+    #   * Top level list specifies conditions that need to be applied with
+    #     `OR` operator
+    #
+    #   * Inner list specifies conditions that need to be applied with `AND`
+    #     operator.
+    #   @return [Types::ControlPlaneTagFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PromptSearchFilter AWS API Documentation
+    #
+    class PromptSearchFilter < Struct.new(
+      :tag_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10114,7 +10224,8 @@ module Aws::Connect
     #   A leaf node condition which can be used to specify a string
     #   condition.
     #
-    #   <note markdown="1"> The currently supported value for `FieldName`: `name`
+    #   <note markdown="1"> The currently supported values for `FieldName` are `name`,
+    #   `description`, and `resourceID`.
     #
     #    </note>
     #   @return [Types::StringCondition]
@@ -10257,6 +10368,60 @@ module Aws::Connect
       :user_config,
       :queue_config,
       :phone_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The search criteria to be used to return quick connects.
+    #
+    # @!attribute [rw] or_conditions
+    #   A list of conditions which would be applied together with an OR
+    #   condition.
+    #   @return [Array<Types::QuickConnectSearchCriteria>]
+    #
+    # @!attribute [rw] and_conditions
+    #   A list of conditions which would be applied together with an AND
+    #   condition.
+    #   @return [Array<Types::QuickConnectSearchCriteria>]
+    #
+    # @!attribute [rw] string_condition
+    #   A leaf node condition which can be used to specify a string
+    #   condition.
+    #
+    #   <note markdown="1"> The currently supported values for `FieldName` are `name`,
+    #   `description`, and `resourceID`.
+    #
+    #    </note>
+    #   @return [Types::StringCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QuickConnectSearchCriteria AWS API Documentation
+    #
+    class QuickConnectSearchCriteria < Struct.new(
+      :or_conditions,
+      :and_conditions,
+      :string_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters to be applied to search results.
+    #
+    # @!attribute [rw] tag_filter
+    #   An object that can be used to specify Tag conditions inside the
+    #   `SearchFilter`. This accepts an `OR` of `AND` (List of List) input
+    #   where:
+    #
+    #   * Top level list specifies conditions that need to be applied with
+    #     `OR` operator
+    #
+    #   * Inner list specifies conditions that need to be applied with `AND`
+    #     operator.
+    #   @return [Types::ControlPlaneTagFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QuickConnectSearchFilter AWS API Documentation
+    #
+    class QuickConnectSearchFilter < Struct.new(
+      :tag_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10806,7 +10971,8 @@ module Aws::Connect
     #   A leaf node condition which can be used to specify a string
     #   condition.
     #
-    #   <note markdown="1"> The currently supported value for `FieldName`: `name`
+    #   <note markdown="1"> The currently supported values for `FieldName` are `name`,
+    #   `description`, and `resourceID`.
     #
     #    </note>
     #   @return [Types::StringCondition]
@@ -11148,6 +11314,131 @@ module Aws::Connect
     #
     # @!attribute [rw] search_filter
     #   Filters to be applied to search results.
+    #   @return [Types::HoursOfOperationSearchFilter]
+    #
+    # @!attribute [rw] search_criteria
+    #   The search criteria to be used to return hours of operations.
+    #   @return [Types::HoursOfOperationSearchCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchHoursOfOperationsRequest AWS API Documentation
+    #
+    class SearchHoursOfOperationsRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results,
+      :search_filter,
+      :search_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hours_of_operations
+    #   Information about the hours of operations.
+    #   @return [Array<Types::HoursOfOperation>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] approximate_total_count
+    #   The total number of hours of operations which matched your search
+    #   query.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchHoursOfOperationsResponse AWS API Documentation
+    #
+    class SearchHoursOfOperationsResponse < Struct.new(
+      :hours_of_operations,
+      :next_token,
+      :approximate_total_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] search_filter
+    #   Filters to be applied to search results.
+    #   @return [Types::PromptSearchFilter]
+    #
+    # @!attribute [rw] search_criteria
+    #   The search criteria to be used to return prompts.
+    #   @return [Types::PromptSearchCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchPromptsRequest AWS API Documentation
+    #
+    class SearchPromptsRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results,
+      :search_filter,
+      :search_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] prompts
+    #   Information about the prompts.
+    #   @return [Array<Types::Prompt>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] approximate_total_count
+    #   The total number of quick connects which matched your search query.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchPromptsResponse AWS API Documentation
+    #
+    class SearchPromptsResponse < Struct.new(
+      :prompts,
+      :next_token,
+      :approximate_total_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] search_filter
+    #   Filters to be applied to search results.
     #   @return [Types::QueueSearchFilter]
     #
     # @!attribute [rw] search_criteria
@@ -11190,6 +11481,68 @@ module Aws::Connect
     #
     class SearchQueuesResponse < Struct.new(
       :queues,
+      :next_token,
+      :approximate_total_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] search_filter
+    #   Filters to be applied to search results.
+    #   @return [Types::QuickConnectSearchFilter]
+    #
+    # @!attribute [rw] search_criteria
+    #   The search criteria to be used to return quick connects.
+    #   @return [Types::QuickConnectSearchCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchQuickConnectsRequest AWS API Documentation
+    #
+    class SearchQuickConnectsRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results,
+      :search_filter,
+      :search_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] quick_connects
+    #   Information about the quick connects.
+    #   @return [Array<Types::QuickConnect>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] approximate_total_count
+    #   The total number of quick connects which matched your search query.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchQuickConnectsResponse AWS API Documentation
+    #
+    class SearchQuickConnectsResponse < Struct.new(
+      :quick_connects,
       :next_token,
       :approximate_total_count)
       SENSITIVE = []
@@ -11575,10 +11928,6 @@ module Aws::Connect
     # @!attribute [rw] string_condition
     #   A leaf node condition which can be used to specify a string
     #   condition.
-    #
-    #   <note markdown="1"> The currently supported value for `FieldName`: `name`
-    #
-    #    </note>
     #   @return [Types::StringCondition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfileSearchCriteria AWS API Documentation
@@ -12388,10 +12737,6 @@ module Aws::Connect
     class StopContactStreamingResponse < Aws::EmptyStructure; end
 
     # A leaf node condition which can be used to specify a string condition.
-    #
-    # <note markdown="1"> The currently supported value for `FieldName`: `name`
-    #
-    #  </note>
     #
     # @!attribute [rw] field_name
     #   The name of the field in the string condition.
@@ -14917,6 +15262,11 @@ module Aws::Connect
     # @!attribute [rw] string_condition
     #   A leaf node condition which can be used to specify a string
     #   condition.
+    #
+    #   <note markdown="1"> The currently supported values for `FieldName` are `name`,
+    #   `description`, and `resourceID`.
+    #
+    #    </note>
     #   @return [Types::StringCondition]
     #
     # @!attribute [rw] hierarchy_group_condition

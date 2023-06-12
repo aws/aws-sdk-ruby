@@ -84,6 +84,10 @@ module Aws::WAFV2
             Aws::WAFV2::Endpoints::DeleteRuleGroup.build(context)
           when :delete_web_acl
             Aws::WAFV2::Endpoints::DeleteWebACL.build(context)
+          when :describe_all_managed_products
+            Aws::WAFV2::Endpoints::DescribeAllManagedProducts.build(context)
+          when :describe_managed_products_by_vendor
+            Aws::WAFV2::Endpoints::DescribeManagedProductsByVendor.build(context)
           when :describe_managed_rule_group
             Aws::WAFV2::Endpoints::DescribeManagedRuleGroup.build(context)
           when :disassociate_web_acl

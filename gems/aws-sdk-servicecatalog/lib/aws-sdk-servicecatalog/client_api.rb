@@ -876,11 +876,13 @@ module Aws::ServiceCatalog
     DescribeProvisioningArtifactInput.add_member(:provisioning_artifact_name, Shapes::ShapeRef.new(shape: ProvisioningArtifactName, location_name: "ProvisioningArtifactName"))
     DescribeProvisioningArtifactInput.add_member(:product_name, Shapes::ShapeRef.new(shape: ProductViewName, location_name: "ProductName"))
     DescribeProvisioningArtifactInput.add_member(:verbose, Shapes::ShapeRef.new(shape: Verbose, location_name: "Verbose"))
+    DescribeProvisioningArtifactInput.add_member(:include_provisioning_artifact_parameters, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeProvisioningArtifactParameters"))
     DescribeProvisioningArtifactInput.struct_class = Types::DescribeProvisioningArtifactInput
 
     DescribeProvisioningArtifactOutput.add_member(:provisioning_artifact_detail, Shapes::ShapeRef.new(shape: ProvisioningArtifactDetail, location_name: "ProvisioningArtifactDetail"))
     DescribeProvisioningArtifactOutput.add_member(:info, Shapes::ShapeRef.new(shape: ProvisioningArtifactInfo, location_name: "Info"))
     DescribeProvisioningArtifactOutput.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
+    DescribeProvisioningArtifactOutput.add_member(:provisioning_artifact_parameters, Shapes::ShapeRef.new(shape: ProvisioningArtifactParameters, location_name: "ProvisioningArtifactParameters"))
     DescribeProvisioningArtifactOutput.struct_class = Types::DescribeProvisioningArtifactOutput
 
     DescribeProvisioningParametersInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))

@@ -320,8 +320,14 @@ module Aws::Connect
             Aws::Connect::Endpoints::ResumeContactRecording.build(context)
           when :search_available_phone_numbers
             Aws::Connect::Endpoints::SearchAvailablePhoneNumbers.build(context)
+          when :search_hours_of_operations
+            Aws::Connect::Endpoints::SearchHoursOfOperations.build(context)
+          when :search_prompts
+            Aws::Connect::Endpoints::SearchPrompts.build(context)
           when :search_queues
             Aws::Connect::Endpoints::SearchQueues.build(context)
+          when :search_quick_connects
+            Aws::Connect::Endpoints::SearchQuickConnects.build(context)
           when :search_routing_profiles
             Aws::Connect::Endpoints::SearchRoutingProfiles.build(context)
           when :search_security_profiles

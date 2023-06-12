@@ -10,6 +10,20 @@
 module Aws::LexModelsV2
   module Types
 
+    # The active context used in the test execution.
+    #
+    # @!attribute [rw] name
+    #   The name of active context.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ActiveContext AWS API Documentation
+    #
+    class ActiveContext < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides settings that enable advanced recognition settings for slot
     # values.
     #
@@ -22,6 +36,55 @@ module Aws::LexModelsV2
     #
     class AdvancedRecognitionSetting < Struct.new(
       :audio_recognition_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The information about the agent turn in a test set execution.
+    #
+    # @!attribute [rw] expected_agent_prompt
+    #   The expected agent prompt for the agent turn in a test set
+    #   execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] actual_agent_prompt
+    #   The actual agent prompt for the agent turn in a test set execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_details
+    #   Details about an error in an execution of a test set.
+    #   @return [Types::ExecutionErrorDetails]
+    #
+    # @!attribute [rw] actual_elicited_slot
+    #   The actual elicited slot for the agent turn in a test set execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] actual_intent
+    #   The actual intent for the agent turn in a test set execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AgentTurnResult AWS API Documentation
+    #
+    class AgentTurnResult < Struct.new(
+      :expected_agent_prompt,
+      :actual_agent_prompt,
+      :error_details,
+      :actual_elicited_slot,
+      :actual_intent)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specification of an agent turn.
+    #
+    # @!attribute [rw] agent_prompt
+    #   The agent prompt for the agent turn in a test set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AgentTurnSpecification AWS API Documentation
+    #
+    class AgentTurnSpecification < Struct.new(
+      :agent_prompt)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -606,6 +669,31 @@ module Aws::LexModelsV2
       :bot_alias_status,
       :creation_date_time,
       :last_updated_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The target Amazon S3 location for the test set execution using a bot
+    # alias.
+    #
+    # @!attribute [rw] bot_id
+    #   The bot Id of the bot alias used in the test set execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_alias_id
+    #   The bot alias Id of the bot alias used in the test set execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale Id of the bot alias used in the test set execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BotAliasTestExecutionTarget AWS API Documentation
+    #
+    class BotAliasTestExecutionTarget < Struct.new(
+      :bot_id,
+      :bot_alias_id,
+      :locale_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1508,6 +1596,140 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # The item listing the evaluation of intent level success or failure.
+    #
+    # @!attribute [rw] intent_name
+    #   The intent name used in the evaluation of intent level success or
+    #   failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] match_result
+    #   The number of times the specific intent is used in the evaluation of
+    #   intent level success or failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ConversationLevelIntentClassificationResultItem AWS API Documentation
+    #
+    class ConversationLevelIntentClassificationResultItem < Struct.new(
+      :intent_name,
+      :match_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The conversation level details of the conversation used in the test
+    # set.
+    #
+    # @!attribute [rw] end_to_end_result
+    #   The success or failure of the streaming of the conversation.
+    #   @return [String]
+    #
+    # @!attribute [rw] speech_transcription_result
+    #   The speech transcription success or failure details of the
+    #   conversation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ConversationLevelResultDetail AWS API Documentation
+    #
+    class ConversationLevelResultDetail < Struct.new(
+      :end_to_end_result,
+      :speech_transcription_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The slots used for the slot resolution in the conversation.
+    #
+    # @!attribute [rw] intent_name
+    #   The intents used in the slots list for the slot resolution details.
+    #   @return [String]
+    #
+    # @!attribute [rw] slot_name
+    #   The slot name in the slots list for the slot resolution details.
+    #   @return [String]
+    #
+    # @!attribute [rw] match_result
+    #   The number of matching slots used in the slots listings for the slot
+    #   resolution evaluation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ConversationLevelSlotResolutionResultItem AWS API Documentation
+    #
+    class ConversationLevelSlotResolutionResultItem < Struct.new(
+      :intent_name,
+      :slot_name,
+      :match_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The test result evaluation item at the conversation level.
+    #
+    # @!attribute [rw] conversation_id
+    #   The conversation Id of the test result evaluation item.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_to_end_result
+    #   The end-to-end success or failure of the test result evaluation
+    #   item.
+    #   @return [String]
+    #
+    # @!attribute [rw] speech_transcription_result
+    #   The speech transcription success or failure of the test result
+    #   evaluation item.
+    #   @return [String]
+    #
+    # @!attribute [rw] intent_classification_results
+    #   The intent classification of the test result evaluation item.
+    #   @return [Array<Types::ConversationLevelIntentClassificationResultItem>]
+    #
+    # @!attribute [rw] slot_resolution_results
+    #   The slot success or failure of the test result evaluation item.
+    #   @return [Array<Types::ConversationLevelSlotResolutionResultItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ConversationLevelTestResultItem AWS API Documentation
+    #
+    class ConversationLevelTestResultItem < Struct.new(
+      :conversation_id,
+      :end_to_end_result,
+      :speech_transcription_result,
+      :intent_classification_results,
+      :slot_resolution_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The test set results data at the conversation level.
+    #
+    # @!attribute [rw] items
+    #   The item list in the test set results data at the conversation
+    #   level.
+    #   @return [Array<Types::ConversationLevelTestResultItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ConversationLevelTestResults AWS API Documentation
+    #
+    class ConversationLevelTestResults < Struct.new(
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The selection to filter the test set results data at the conversation
+    # level.
+    #
+    # @!attribute [rw] end_to_end_result
+    #   The selection of matched or mismatched end-to-end status to filter
+    #   test set results data at the conversation level.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ConversationLevelTestResultsFilterBy AWS API Documentation
+    #
+    class ConversationLevelTestResultsFilterBy < Struct.new(
+      :end_to_end_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configures conversation logging that saves audio, text, and metadata
     # for the conversations with your users.
     #
@@ -1524,6 +1746,59 @@ module Aws::LexModelsV2
     class ConversationLogSettings < Struct.new(
       :text_log_settings,
       :audio_log_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The data source that uses conversation logs.
+    #
+    # @!attribute [rw] bot_id
+    #   The bot Id from the conversation logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_alias_id
+    #   The bot alias Id from the conversation logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale Id of the conversation log.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   The filter for the data source of the conversation log.
+    #   @return [Types::ConversationLogsDataSourceFilterBy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ConversationLogsDataSource AWS API Documentation
+    #
+    class ConversationLogsDataSource < Struct.new(
+      :bot_id,
+      :bot_alias_id,
+      :locale_id,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The selected data source to filter the conversation log.
+    #
+    # @!attribute [rw] start_time
+    #   The start time for the conversation log.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time for the conversation log.
+    #   @return [Time]
+    #
+    # @!attribute [rw] input_mode
+    #   The selection to filter by input mode for the conversation logs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ConversationLogsDataSourceFilterBy AWS API Documentation
+    #
+    class ConversationLogsDataSourceFilterBy < Struct.new(
+      :start_time,
+      :end_time,
+      :input_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2166,8 +2441,7 @@ module Aws::LexModelsV2
     #   @return [String]
     #
     # @!attribute [rw] bot_version
-    #   The identifier of the version of the bot associated with this
-    #   intent.
+    #   The version of the bot associated with this intent.
     #   @return [String]
     #
     # @!attribute [rw] locale_id
@@ -2261,7 +2535,7 @@ module Aws::LexModelsV2
     #   @return [String]
     #
     # @!attribute [rw] bot_version
-    #   The identifier of the version of the bot associated with the intent.
+    #   The version of the bot associated with the intent.
     #   @return [String]
     #
     # @!attribute [rw] locale_id
@@ -2372,9 +2646,10 @@ module Aws::LexModelsV2
     #   @return [String]
     #
     # @!attribute [rw] principal
-    #   An IAM principal, such as an IAM users, IAM roles, or AWS services
-    #   that is allowed or denied access to a resource. For more
-    #   information, see [AWS JSON policy elements: Principal][1].
+    #   An IAM principal, such as an IAM user, IAM role, or Amazon Web
+    #   Services services that is allowed or denied access to a resource.
+    #   For more information, see [Amazon Web Services JSON policy elements:
+    #   Principal][1].
     #
     #
     #
@@ -2505,8 +2780,8 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] multiple_values_setting
     #   Indicates whether the slot returns multiple values in one response.
-    #   Multi-value slots are only available in the en-US locale. If you set
-    #   this value to `true` in any other locale, Amazon Lex throws a
+    #   Multi-value slots are only available in the `en-US` locale. If you
+    #   set this value to `true` in any other locale, Amazon Lex throws a
     #   `ValidationException`.
     #
     #   If the `multipleValuesSetting` is not set, the default value is
@@ -2613,7 +2888,7 @@ module Aws::LexModelsV2
 
     # @!attribute [rw] slot_type_name
     #   The name for the slot. A slot type name must be unique within the
-    #   account.
+    #   intent.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2633,15 +2908,15 @@ module Aws::LexModelsV2
     #   the list of possible values. The field can be set to one of the
     #   following values:
     #
-    #   * `OriginalValue` - Returns the value entered by the user, if the
+    #   * `ORIGINAL_VALUE` - Returns the value entered by the user, if the
     #     user value is similar to the slot value.
     #
-    #   * `TopResolution` - If there is a resolution list for the slot,
+    #   * `TOP_RESOLUTION` - If there is a resolution list for the slot,
     #     return the first value in the resolution list. If there is no
     #     resolution list, return null.
     #
     #   If you don't specify the `valueSelectionSetting` parameter, the
-    #   default is `OriginalValue`.
+    #   default is `ORIGINAL_VALUE`.
     #   @return [Types::SlotValueSelectionSetting]
     #
     # @!attribute [rw] parent_slot_type_signature
@@ -2762,6 +3037,51 @@ module Aws::LexModelsV2
       :creation_date_time,
       :external_source_setting,
       :composite_slot_type_setting)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_set_id
+    #   The test set Id for the test set discrepancy report.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The target bot for the test set discrepancy report.
+    #   @return [Types::TestSetDiscrepancyReportResourceTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateTestSetDiscrepancyReportRequest AWS API Documentation
+    #
+    class CreateTestSetDiscrepancyReportRequest < Struct.new(
+      :test_set_id,
+      :target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_set_discrepancy_report_id
+    #   The unique identifier of the test set discrepancy report to
+    #   describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The creation date and time for the test set discrepancy report.
+    #   @return [Time]
+    #
+    # @!attribute [rw] test_set_id
+    #   The test set Id for the test set discrepancy report.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The target bot for the test set discrepancy report.
+    #   @return [Types::TestSetDiscrepancyReportResourceTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateTestSetDiscrepancyReportResponse AWS API Documentation
+    #
+    class CreateTestSetDiscrepancyReportResponse < Struct.new(
+      :test_set_discrepancy_report_id,
+      :creation_date_time,
+      :test_set_id,
+      :target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2973,7 +3293,7 @@ module Aws::LexModelsV2
     #
     #
     #
-    #   [1]: https://aws.amazon.com/lex/faqs#data-security
+    #   [1]: http://aws.amazon.com/lex/faqs#data-security
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DataPrivacy AWS API Documentation
@@ -3554,6 +3874,18 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] test_set_id
+    #   The test set Id of the test set to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteTestSetRequest AWS API Documentation
+    #
+    class DeleteTestSetRequest < Struct.new(
+      :test_set_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] bot_id
     #   The unique identifier of the bot that contains the utterances.
     #   @return [String]
@@ -3691,7 +4023,7 @@ module Aws::LexModelsV2
     #   @return [String]
     #
     # @!attribute [rw] bot_version
-    #   The identifier of the version of the bot associated with the locale.
+    #   The version of the bot associated with the locale.
     #   @return [String]
     #
     # @!attribute [rw] locale_id
@@ -3719,7 +4051,7 @@ module Aws::LexModelsV2
     #   @return [String]
     #
     # @!attribute [rw] bot_version
-    #   The identifier of the version of the bot associated with the locale.
+    #   The version of the bot associated with the locale.
     #   @return [String]
     #
     # @!attribute [rw] locale_id
@@ -4401,6 +4733,8 @@ module Aws::LexModelsV2
     #   @return [Time]
     #
     # @!attribute [rw] initial_response_setting
+    #   Configuration setting for a response sent to the user before Amazon
+    #   Lex starts eliciting slots.
     #   @return [Types::InitialResponseSetting]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeIntentResponse AWS API Documentation
@@ -4705,6 +5039,292 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] test_execution_id
+    #   The execution Id of the test set execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeTestExecutionRequest AWS API Documentation
+    #
+    class DescribeTestExecutionRequest < Struct.new(
+      :test_execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_execution_id
+    #   The execution Id for the test set execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The execution creation date and time for the test set execution.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time of the last update for the execution.
+    #   @return [Time]
+    #
+    # @!attribute [rw] test_execution_status
+    #   The test execution status for the test execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_set_id
+    #   The test set Id for the test set execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_set_name
+    #   The test set name of the test set execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The target bot for the test set execution details.
+    #   @return [Types::TestExecutionTarget]
+    #
+    # @!attribute [rw] api_mode
+    #   Indicates whether we use streaming or non-streaming APIs are used
+    #   for the test set execution. For streaming, `StartConversation`
+    #   Amazon Lex Runtime API is used. Whereas for non-streaming,
+    #   `RecognizeUtterance` and `RecognizeText` Amazon Lex Runtime API is
+    #   used.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_execution_modality
+    #   Indicates whether test set is audio or text.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reasons
+    #   Reasons for the failure of the test set execution.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeTestExecutionResponse AWS API Documentation
+    #
+    class DescribeTestExecutionResponse < Struct.new(
+      :test_execution_id,
+      :creation_date_time,
+      :last_updated_date_time,
+      :test_execution_status,
+      :test_set_id,
+      :test_set_name,
+      :target,
+      :api_mode,
+      :test_execution_modality,
+      :failure_reasons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_set_discrepancy_report_id
+    #   The unique identifier of the test set discrepancy report.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeTestSetDiscrepancyReportRequest AWS API Documentation
+    #
+    class DescribeTestSetDiscrepancyReportRequest < Struct.new(
+      :test_set_discrepancy_report_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_set_discrepancy_report_id
+    #   The unique identifier of the test set discrepancy report to
+    #   describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_set_id
+    #   The test set Id for the test set discrepancy report.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The time and date of creation for the test set discrepancy report.
+    #   @return [Time]
+    #
+    # @!attribute [rw] target
+    #   The target bot location for the test set discrepancy report.
+    #   @return [Types::TestSetDiscrepancyReportResourceTarget]
+    #
+    # @!attribute [rw] test_set_discrepancy_report_status
+    #   The status for the test set discrepancy report.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_data_time
+    #   The date and time of the last update for the test set discrepancy
+    #   report.
+    #   @return [Time]
+    #
+    # @!attribute [rw] test_set_discrepancy_top_errors
+    #   The top 200 error results from the test set discrepancy report.
+    #   @return [Types::TestSetDiscrepancyErrors]
+    #
+    # @!attribute [rw] test_set_discrepancy_raw_output_url
+    #   Pre-signed Amazon S3 URL to download the test set discrepancy
+    #   report.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reasons
+    #   The failure report for the test set discrepancy report generation
+    #   action.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeTestSetDiscrepancyReportResponse AWS API Documentation
+    #
+    class DescribeTestSetDiscrepancyReportResponse < Struct.new(
+      :test_set_discrepancy_report_id,
+      :test_set_id,
+      :creation_date_time,
+      :target,
+      :test_set_discrepancy_report_status,
+      :last_updated_data_time,
+      :test_set_discrepancy_top_errors,
+      :test_set_discrepancy_raw_output_url,
+      :failure_reasons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_set_generation_id
+    #   The unique identifier of the test set generation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeTestSetGenerationRequest AWS API Documentation
+    #
+    class DescribeTestSetGenerationRequest < Struct.new(
+      :test_set_generation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_set_generation_id
+    #   The unique identifier of the test set generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_set_generation_status
+    #   The status for the test set generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reasons
+    #   The reasons the test set generation failed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] test_set_id
+    #   The unique identifier for the test set created for the generated
+    #   test set.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_set_name
+    #   The test set name for the generated test set.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The test set description for the test set generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_location
+    #   The Amazon S3 storage location for the test set generation.
+    #   @return [Types::TestSetStorageLocation]
+    #
+    # @!attribute [rw] generation_data_source
+    #   The data source of the test set used for the test set generation.
+    #   @return [Types::TestSetGenerationDataSource]
+    #
+    # @!attribute [rw] role_arn
+    #   The roleARN of the test set used for the test set generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The creation date and time for the test set generation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time of the last update for the test set generation.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeTestSetGenerationResponse AWS API Documentation
+    #
+    class DescribeTestSetGenerationResponse < Struct.new(
+      :test_set_generation_id,
+      :test_set_generation_status,
+      :failure_reasons,
+      :test_set_id,
+      :test_set_name,
+      :description,
+      :storage_location,
+      :generation_data_source,
+      :role_arn,
+      :creation_date_time,
+      :last_updated_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_set_id
+    #   The test set Id for the test set request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeTestSetRequest AWS API Documentation
+    #
+    class DescribeTestSetRequest < Struct.new(
+      :test_set_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_set_id
+    #   The test set Id for the test set response.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_set_name
+    #   The test set name of the test set.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the test set.
+    #   @return [String]
+    #
+    # @!attribute [rw] modality
+    #   Indicates whether the test set is audio or text data.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the test set.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The roleARN used for any operation in the test set to access
+    #   resources in the Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] num_turns
+    #   The total number of agent and user turn in the test set.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_location
+    #   The Amazon S3 storage location for the test set data.
+    #   @return [Types::TestSetStorageLocation]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The creation date and time for the test set data.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time for the last update of the test set data.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeTestSetResponse AWS API Documentation
+    #
+    class DescribeTestSetResponse < Struct.new(
+      :test_set_id,
+      :test_set_name,
+      :description,
+      :modality,
+      :status,
+      :role_arn,
+      :num_turns,
+      :storage_location,
+      :creation_date_time,
+      :last_updated_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines the action that the bot executes at runtime when the
     # conversation reaches this step.
     #
@@ -4857,6 +5477,25 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Details about an error in an execution of a test set.
+    #
+    # @!attribute [rw] error_code
+    #   The error code for the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The message describing the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ExecutionErrorDetails AWS API Documentation
+    #
+    class ExecutionErrorDetails < Struct.new(
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Filters the response form the [ListExports][1] operation
     #
     #
@@ -4905,12 +5544,17 @@ module Aws::LexModelsV2
     #   The parameters required to export a custom vocabulary.
     #   @return [Types::CustomVocabularyExportSpecification]
     #
+    # @!attribute [rw] test_set_export_specification
+    #   Specifications for the test set that is exported as a resource.
+    #   @return [Types::TestSetExportSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ExportResourceSpecification AWS API Documentation
     #
     class ExportResourceSpecification < Struct.new(
       :bot_export_specification,
       :bot_locale_export_specification,
-      :custom_vocabulary_export_specification)
+      :custom_vocabulary_export_specification,
+      :test_set_export_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5064,8 +5708,8 @@ module Aws::LexModelsV2
     #   @return [Integer]
     #
     # @!attribute [rw] message_groups
-    #   One to 5 message groups that contain start messages. Amazon Lex
-    #   chooses one of the messages to play to the user.
+    #   1 - 5 message groups that contain start messages. Amazon Lex chooses
+    #   one of the messages to play to the user.
     #   @return [Array<Types::MessageGroup>]
     #
     # @!attribute [rw] allow_interrupt
@@ -5094,7 +5738,7 @@ module Aws::LexModelsV2
     #   @return [Integer]
     #
     # @!attribute [rw] message_groups
-    #   One to 5 message groups that contain update messages. Amazon Lex
+    #   1 - 5 message groups that contain update messages. Amazon Lex
     #   chooses one of the messages to play to the user.
     #   @return [Array<Types::MessageGroup>]
     #
@@ -5150,6 +5794,35 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] test_execution_id
+    #   The unique identifier of the completed test execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/GetTestExecutionArtifactsUrlRequest AWS API Documentation
+    #
+    class GetTestExecutionArtifactsUrlRequest < Struct.new(
+      :test_execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_execution_id
+    #   The unique identifier of the completed test execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] download_artifacts_url
+    #   The pre-signed Amazon S3 URL to download completed test execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/GetTestExecutionArtifactsUrlResponse AWS API Documentation
+    #
+    class GetTestExecutionArtifactsUrlResponse < Struct.new(
+      :test_execution_id,
+      :download_artifacts_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Settings requried for a slot type based on a grammar that you provide.
     #
     # @!attribute [rw] source
@@ -5168,16 +5841,15 @@ module Aws::LexModelsV2
     # is the source for the slot type.
     #
     # @!attribute [rw] s3_bucket_name
-    #   The name of the S3 bucket that contains the grammar source.
+    #   The name of the Amazon S3 bucket that contains the grammar source.
     #   @return [String]
     #
     # @!attribute [rw] s3_object_key
-    #   The path to the grammar in the S3 bucket.
+    #   The path to the grammar in the Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon KMS key required to decrypt the contents of the grammar,
-    #   if any.
+    #   The KMS key required to decrypt the contents of the grammar, if any.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/GrammarSlotTypeSource AWS API Documentation
@@ -5277,12 +5949,17 @@ module Aws::LexModelsV2
     #   Provides the parameters required for importing a custom vocabulary.
     #   @return [Types::CustomVocabularyImportSpecification]
     #
+    # @!attribute [rw] test_set_import_resource_specification
+    #   Specifications for the test set that is imported.
+    #   @return [Types::TestSetImportResourceSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ImportResourceSpecification AWS API Documentation
     #
     class ImportResourceSpecification < Struct.new(
       :bot_import_specification,
       :bot_locale_import_specification,
-      :custom_vocabulary_import_specification)
+      :custom_vocabulary_import_specification,
+      :test_set_import_resource_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5395,8 +6072,8 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
-    # The name of a context that must be active for an intent to be selected
-    # by Amazon Lex.
+    # A context that must be active for an intent to be selected by Amazon
+    # Lex.
     #
     # @!attribute [rw] name
     #   The name of the context.
@@ -5406,6 +6083,95 @@ module Aws::LexModelsV2
     #
     class InputContext < Struct.new(
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifications for the current state of the dialog between the user
+    # and the bot in the test set.
+    #
+    # @!attribute [rw] session_attributes
+    #   Session attributes for the session state.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] active_contexts
+    #   Active contexts for the session state.
+    #   @return [Array<Types::ActiveContext>]
+    #
+    # @!attribute [rw] runtime_hints
+    #   Runtime hints for the session state.
+    #   @return [Types::RuntimeHints]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/InputSessionStateSpecification AWS API Documentation
+    #
+    class InputSessionStateSpecification < Struct.new(
+      :session_attributes,
+      :active_contexts,
+      :runtime_hints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information for an intent that is classified by the test workbench.
+    #
+    # @!attribute [rw] intent_name
+    #   The name of the intent.
+    #   @return [String]
+    #
+    # @!attribute [rw] multi_turn_conversation
+    #   Indicates whether the conversation involves multiple turns or not.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] result_counts
+    #   The result of the intent classification test.
+    #   @return [Types::IntentClassificationTestResultItemCounts]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/IntentClassificationTestResultItem AWS API Documentation
+    #
+    class IntentClassificationTestResultItem < Struct.new(
+      :intent_name,
+      :multi_turn_conversation,
+      :result_counts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of items in the intent classification test.
+    #
+    # @!attribute [rw] total_result_count
+    #   The total number of results in the intent classification test.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] speech_transcription_result_counts
+    #   The number of matched, mismatched, and execution error results for
+    #   speech transcription for the intent.
+    #   @return [Hash<String,Integer>]
+    #
+    # @!attribute [rw] intent_match_result_counts
+    #   The number of matched and mismatched results for intent recognition
+    #   for the intent.
+    #   @return [Hash<String,Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/IntentClassificationTestResultItemCounts AWS API Documentation
+    #
+    class IntentClassificationTestResultItemCounts < Struct.new(
+      :total_result_count,
+      :speech_transcription_result_counts,
+      :intent_match_result_counts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information for the results of the intent classification test.
+    #
+    # @!attribute [rw] items
+    #   A list of the results for the intent classification test.
+    #   @return [Array<Types::IntentClassificationTestResultItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/IntentClassificationTestResults AWS API Documentation
+    #
+    class IntentClassificationTestResults < Struct.new(
+      :items)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5578,6 +6344,44 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Information about intent-level slot resolution in a test result.
+    #
+    # @!attribute [rw] intent_name
+    #   The name of the intent that was recognized.
+    #   @return [String]
+    #
+    # @!attribute [rw] multi_turn_conversation
+    #   Indicates whether the conversation involves multiple turns or not.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] slot_resolution_results
+    #   The results for the slot resolution in the test execution result.
+    #   @return [Array<Types::SlotResolutionTestResultItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/IntentLevelSlotResolutionTestResultItem AWS API Documentation
+    #
+    class IntentLevelSlotResolutionTestResultItem < Struct.new(
+      :intent_name,
+      :multi_turn_conversation,
+      :slot_resolution_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Indicates the success or failure of slots at the intent level.
+    #
+    # @!attribute [rw] items
+    #   Indicates the items for the slot level resolution for the intents.
+    #   @return [Array<Types::IntentLevelSlotResolutionTestResultItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/IntentLevelSlotResolutionTestResults AWS API Documentation
+    #
+    class IntentLevelSlotResolutionTestResults < Struct.new(
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Override settings to configure the intent state.
     #
     # @!attribute [rw] name
@@ -5588,7 +6392,7 @@ module Aws::LexModelsV2
     # @!attribute [rw] slots
     #   A map of all of the slot value overrides for the intent. The name of
     #   the slot maps to the value of the slot. Slots that are not included
-    #   in the map aren't overridden.,
+    #   in the map aren't overridden.
     #   @return [Hash<String,Types::SlotValueOverride>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/IntentOverride AWS API Documentation
@@ -5699,19 +6503,19 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
-    # Provides configuration information for the AMAZON.KendraSearchIntent
+    # Provides configuration information for the `AMAZON.KendraSearchIntent`
     # intent. When you use this intent, Amazon Lex searches the specified
     # Amazon Kendra index and returns documents from the index that match
     # the user's utterance.
     #
     # @!attribute [rw] kendra_index
     #   The Amazon Resource Name (ARN) of the Amazon Kendra index that you
-    #   want the AMAZON.KendraSearchIntent intent to search. The index must
-    #   be in the same account and Region as the Amazon Lex bot.
+    #   want the `AMAZON.KendraSearchIntent` intent to search. The index
+    #   must be in the same account and Region as the Amazon Lex bot.
     #   @return [String]
     #
     # @!attribute [rw] query_filter_string_enabled
-    #   Determines whether the AMAZON.KendraSearchIntent intent uses a
+    #   Determines whether the `AMAZON.KendraSearchIntent` intent uses a
     #   custom query string to query the Amazon Kendra index.
     #   @return [Boolean]
     #
@@ -7097,7 +7901,204 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
-    # The object that provides message text and it's type.
+    # @!attribute [rw] test_execution_id
+    #   The unique identifier of the test execution to list the result
+    #   items.
+    #   @return [String]
+    #
+    # @!attribute [rw] result_filter_by
+    #   The filter for the list of results from the test set execution.
+    #   @return [Types::TestExecutionResultFilterBy]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of test execution result items to return in each
+    #   page. If there are fewer results than the max page size, only the
+    #   actual number of results are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the response from the `ListTestExecutionResultItems` operation
+    #   contains more results than specified in the `maxResults` parameter,
+    #   a token is returned in the response. Use that token in the
+    #   `nextToken` parameter to return the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListTestExecutionResultItemsRequest AWS API Documentation
+    #
+    class ListTestExecutionResultItemsRequest < Struct.new(
+      :test_execution_id,
+      :result_filter_by,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_execution_results
+    #   The list of results from the test execution.
+    #   @return [Types::TestExecutionResultItems]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates whether there are more results to return in a
+    #   response to the `ListTestExecutionResultItems` operation. If the
+    #   `nextToken` field is present, you send the contents as the
+    #   `nextToken` parameter of a `ListTestExecutionResultItems` operation
+    #   request to get the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListTestExecutionResultItemsResponse AWS API Documentation
+    #
+    class ListTestExecutionResultItemsResponse < Struct.new(
+      :test_execution_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sort_by
+    #   The sort order of the test set executions.
+    #   @return [Types::TestExecutionSortBy]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of test executions to return in each page. If
+    #   there are fewer results than the max page size, only the actual
+    #   number of results are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the response from the ListTestExecutions operation contains more
+    #   results than specified in the maxResults parameter, a token is
+    #   returned in the response. Use that token in the nextToken parameter
+    #   to return the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListTestExecutionsRequest AWS API Documentation
+    #
+    class ListTestExecutionsRequest < Struct.new(
+      :sort_by,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_executions
+    #   The list of test executions.
+    #   @return [Array<Types::TestExecutionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates whether there are more results to return in a
+    #   response to the ListTestExecutions operation. If the nextToken field
+    #   is present, you send the contents as the nextToken parameter of a
+    #   ListTestExecutions operation request to get the next page of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListTestExecutionsResponse AWS API Documentation
+    #
+    class ListTestExecutionsResponse < Struct.new(
+      :test_executions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_set_id
+    #   The identifier of the test set to list its test set records.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of test set records to return in each page. If
+    #   there are fewer records than the max page size, only the actual
+    #   number of records are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the response from the ListTestSetRecords operation contains more
+    #   results than specified in the maxResults parameter, a token is
+    #   returned in the response. Use that token in the nextToken parameter
+    #   to return the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListTestSetRecordsRequest AWS API Documentation
+    #
+    class ListTestSetRecordsRequest < Struct.new(
+      :test_set_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_set_records
+    #   The list of records from the test set.
+    #   @return [Array<Types::TestSetTurnRecord>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates whether there are more records to return in a
+    #   response to the ListTestSetRecords operation. If the nextToken field
+    #   is present, you send the contents as the nextToken parameter of a
+    #   ListTestSetRecords operation request to get the next page of
+    #   records.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListTestSetRecordsResponse AWS API Documentation
+    #
+    class ListTestSetRecordsResponse < Struct.new(
+      :test_set_records,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sort_by
+    #   The sort order for the list of test sets.
+    #   @return [Types::TestSetSortBy]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of test sets to return in each page. If there are
+    #   fewer results than the max page size, only the actual number of
+    #   results are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the response from the ListTestSets operation contains more
+    #   results than specified in the maxResults parameter, a token is
+    #   returned in the response. Use that token in the nextToken parameter
+    #   to return the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListTestSetsRequest AWS API Documentation
+    #
+    class ListTestSetsRequest < Struct.new(
+      :sort_by,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_sets
+    #   The selected test sets in a list of test sets.
+    #   @return [Array<Types::TestSetSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates whether there are more results to return in a
+    #   response to the ListTestSets operation. If the nextToken field is
+    #   present, you send the contents as the nextToken parameter of a
+    #   ListTestSets operation request to get the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListTestSetsResponse AWS API Documentation
+    #
+    class ListTestSetsResponse < Struct.new(
+      :test_sets,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The object that provides message text and its type.
     #
     # @!attribute [rw] plain_text_message
     #   A message in plain text format.
@@ -7239,6 +8240,50 @@ module Aws::LexModelsV2
       :name,
       :time_to_live_in_seconds,
       :turns_to_live)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the overall results for a test execution result.
+    #
+    # @!attribute [rw] multi_turn_conversation
+    #   Indicates whether the conversation contains multiple turns or not.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] total_result_count
+    #   The total number of overall results in the result of the test
+    #   execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] speech_transcription_result_counts
+    #   The number of speech transcription results in the overall test.
+    #   @return [Hash<String,Integer>]
+    #
+    # @!attribute [rw] end_to_end_result_counts
+    #   The number of results that succeeded.
+    #   @return [Hash<String,Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/OverallTestResultItem AWS API Documentation
+    #
+    class OverallTestResultItem < Struct.new(
+      :multi_turn_conversation,
+      :total_result_count,
+      :speech_transcription_result_counts,
+      :end_to_end_result_counts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the overall test results.
+    #
+    # @!attribute [rw] items
+    #   A list of the overall test results.
+    #   @return [Array<Types::OverallTestResultItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/OverallTestResults AWS API Documentation
+    #
+    class OverallTestResults < Struct.new(
+      :items)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7455,8 +8500,8 @@ module Aws::LexModelsV2
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html
     #
     # @!attribute [rw] service
-    #   The name of the AWS service that should allowed or denied access to
-    #   an Amazon Lex action.
+    #   The name of the Amazon Web Services service that should allowed or
+    #   denied access to an Amazon Lex action.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -7648,11 +8693,94 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Provides an array of phrases that should be given preference when
+    # resolving values for a slot.
+    #
+    # @!attribute [rw] runtime_hint_values
+    #   One or more strings that Amazon Lex should look for in the input to
+    #   the bot. Each phrase is given preference when deciding on slot
+    #   values.
+    #   @return [Array<Types::RuntimeHintValue>]
+    #
+    # @!attribute [rw] sub_slot_hints
+    #   A map of constituent sub slot names inside a composite slot in the
+    #   intent and the phrases that should be added for each sub slot.
+    #   Inside each composite slot hints, this structure provides a
+    #   mechanism to add granular sub slot phrases. Only sub slot hints are
+    #   supported for composite slots. The intent name, composite slot name
+    #   and the constituent sub slot names must exist.
+    #   @return [Hash<String,Types::RuntimeHintDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/RuntimeHintDetails AWS API Documentation
+    #
+    class RuntimeHintDetails < Struct.new(
+      :runtime_hint_values,
+      :sub_slot_hints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the phrase that Amazon Lex should look for in the user's
+    # input to the bot.
+    #
+    # @!attribute [rw] phrase
+    #   The phrase that Amazon Lex should look for in the user's input to
+    #   the bot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/RuntimeHintValue AWS API Documentation
+    #
+    class RuntimeHintValue < Struct.new(
+      :phrase)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You can provide Amazon Lex with hints to the phrases that a customer
+    # is likely to use for a slot. When a slot with hints is resolved, the
+    # phrases in the runtime hints are preferred in the resolution. You can
+    # provide hints for a maximum of 100 intents. You can provide a maximum
+    # of 100 slots.
+    #
+    # Before you can use runtime hints with an existing bot, you must first
+    # rebuild the bot.
+    #
+    # For more information, see [Using runtime hints to improve recognition
+    # of slot values][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html
+    #
+    # @!attribute [rw] slot_hints
+    #   A list of the slots in the intent that should have runtime hints
+    #   added, and the phrases that should be added for each slot.
+    #
+    #   The first level of the `slotHints` map is the name of the intent.
+    #   The second level is the name of the slot within the intent. For more
+    #   information, see [Using hints to improve accuracy][1].
+    #
+    #   The intent name and slot name must exist.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html
+    #   @return [Hash<String,Hash<String,Types::RuntimeHintDetails>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/RuntimeHints AWS API Documentation
+    #
+    class RuntimeHints < Struct.new(
+      :slot_hints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies an Amazon S3 bucket for logging audio conversations
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) of an AWS Key Management Service
-    #   (KMS) key for encrypting audio log files stored in an S3 bucket.
+    #   The Amazon Resource Name (ARN) of an Amazon Web Services Key
+    #   Management Service (KMS) key for encrypting audio log files stored
+    #   in an S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_arn
@@ -8030,7 +9158,7 @@ module Aws::LexModelsV2
     # values from a user.
     #
     # @!attribute [rw] priority
-    #   The priority that a slot should be elicited.
+    #   The priority that Amazon Lex should apply to the slot.
     #   @return [Integer]
     #
     # @!attribute [rw] slot_id
@@ -8042,6 +9170,53 @@ module Aws::LexModelsV2
     class SlotPriority < Struct.new(
       :priority,
       :slot_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the success and failure rate of slot resolution in
+    # the results of a test execution.
+    #
+    # @!attribute [rw] slot_name
+    #   The name of the slot.
+    #   @return [String]
+    #
+    # @!attribute [rw] result_counts
+    #   A result for slot resolution in the results of a test execution.
+    #   @return [Types::SlotResolutionTestResultItemCounts]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SlotResolutionTestResultItem AWS API Documentation
+    #
+    class SlotResolutionTestResultItem < Struct.new(
+      :slot_name,
+      :result_counts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the counts for a slot resolution in the results of a
+    # test execution.
+    #
+    # @!attribute [rw] total_result_count
+    #   The total number of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] speech_transcription_result_counts
+    #   The number of matched, mismatched and execution error results for
+    #   speech transcription for the slot.
+    #   @return [Hash<String,Integer>]
+    #
+    # @!attribute [rw] slot_match_result_counts
+    #   The number of matched and mismatched results for slot resolution for
+    #   the slot.
+    #   @return [Hash<String,Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SlotResolutionTestResultItemCounts AWS API Documentation
+    #
+    class SlotResolutionTestResultItemCounts < Struct.new(
+      :total_result_count,
+      :speech_transcription_result_counts,
+      :slot_match_result_counts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8205,8 +9380,8 @@ module Aws::LexModelsV2
     #     more information, see [Creating custom slot types][1].
     #
     #   * `Extended` - A slot type created by extending the
-    #     AMAZON.AlphaNumeric built-in slot type. For more information, see
-    #     [AMAZON.AlphaNumeric][2].
+    #     `AMAZON.AlphaNumeric` built-in slot type. For more information,
+    #     see [ `AMAZON.AlphaNumeric` ][2].
     #
     #   * `ExternalGrammar` - A slot type using a custom GRXML grammar to
     #     define values. For more information, see [Using a custom grammar
@@ -8269,8 +9444,7 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
-    # Specifies the elicitation setting details for constituent sub slots of
-    # a composite slot.
+    # Specifies the elicitation setting details eliciting a slot.
     #
     # @!attribute [rw] default_value_specification
     #   A list of default values for a slot. Default values are used when
@@ -8359,10 +9533,10 @@ module Aws::LexModelsV2
     #
     #   * 0-9
     #
-    #   * Unicode characters ("\\ u&lt;Unicode&gt;")
+    #   * Unicode characters ("\\⁠u&lt;Unicode&gt;")
     #
     #   Represent Unicode characters with four digits, for example
-    #   "\\u0041" or "\\u005A".
+    #   "\\⁠u0041" or "\\⁠u005A".
     #
     #   The following regular expression operators are not supported:
     #
@@ -8386,15 +9560,15 @@ module Aws::LexModelsV2
     #   return slot type values. The field can be set to one of the
     #   following values:
     #
-    #   * OriginalValue - Returns the value entered by the user, if the user
-    #     value is similar to the slot value.
+    #   * `ORIGINAL_VALUE` - Returns the value entered by the user, if the
+    #     user value is similar to the slot value.
     #
-    #   * TopResolution - If there is a resolution list for the slot, return
-    #     the first value in the resolution list as the slot type value. If
-    #     there is no resolution list, null is returned.
+    #   * `TOP_RESOLUTION` - If there is a resolution list for the slot,
+    #     return the first value in the resolution list as the slot type
+    #     value. If there is no resolution list, null is returned.
     #
-    #   If you don't specify the valueSelectionStrategy, the default is
-    #   OriginalValue.
+    #   If you don't specify the `valueSelectionStrategy`, the default is
+    #   `ORIGINAL_VALUE`.
     #   @return [String]
     #
     # @!attribute [rw] regex_filter
@@ -8403,7 +9577,8 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] advanced_recognition_setting
     #   Provides settings that enable advanced recognition settings for slot
-    #   values.
+    #   values. You can use this to enable using slot values as a custom
+    #   vocabulary for recognizing user utterances.
     #   @return [Types::AdvancedRecognitionSetting]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SlotValueSelectionSetting AWS API Documentation
@@ -8606,6 +9781,171 @@ module Aws::LexModelsV2
       :merge_strategy,
       :import_status,
       :creation_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_set_id
+    #   The test set Id for the test set execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The target bot for the test set execution.
+    #   @return [Types::TestExecutionTarget]
+    #
+    # @!attribute [rw] api_mode
+    #   Indicates whether we use streaming or non-streaming APIs for the
+    #   test set execution. For streaming, StartConversation Runtime API is
+    #   used. Whereas, for non-streaming, RecognizeUtterance and
+    #   RecognizeText Amazon Lex Runtime API are used.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_execution_modality
+    #   Indicates whether audio or text is used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StartTestExecutionRequest AWS API Documentation
+    #
+    class StartTestExecutionRequest < Struct.new(
+      :test_set_id,
+      :target,
+      :api_mode,
+      :test_execution_modality)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_execution_id
+    #   The unique identifier of the test set execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The creation date and time for the test set execution.
+    #   @return [Time]
+    #
+    # @!attribute [rw] test_set_id
+    #   The test set Id for the test set execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The target bot for the test set execution.
+    #   @return [Types::TestExecutionTarget]
+    #
+    # @!attribute [rw] api_mode
+    #   Indicates whether we use streaming or non-streaming APIs for the
+    #   test set execution. For streaming, StartConversation Amazon Lex
+    #   Runtime API is used. Whereas for non-streaming, RecognizeUtterance
+    #   and RecognizeText Amazon Lex Runtime API are used.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_execution_modality
+    #   Indicates whether audio or text is used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StartTestExecutionResponse AWS API Documentation
+    #
+    class StartTestExecutionResponse < Struct.new(
+      :test_execution_id,
+      :creation_date_time,
+      :test_set_id,
+      :target,
+      :api_mode,
+      :test_execution_modality)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_set_name
+    #   The test set name for the test set generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The test set description for the test set generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_location
+    #   The Amazon S3 storage location for the test set generation.
+    #   @return [Types::TestSetStorageLocation]
+    #
+    # @!attribute [rw] generation_data_source
+    #   The data source for the test set generation.
+    #   @return [Types::TestSetGenerationDataSource]
+    #
+    # @!attribute [rw] role_arn
+    #   The roleARN used for any operation in the test set to access
+    #   resources in the Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_set_tags
+    #   A list of tags to add to the test set. You can only add tags when
+    #   you import/generate a new test set. You can't use the
+    #   `UpdateTestSet` operation to update tags. To update tags, use the
+    #   `TagResource` operation.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StartTestSetGenerationRequest AWS API Documentation
+    #
+    class StartTestSetGenerationRequest < Struct.new(
+      :test_set_name,
+      :description,
+      :storage_location,
+      :generation_data_source,
+      :role_arn,
+      :test_set_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_set_generation_id
+    #   The unique identifier of the test set generation to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The creation date and time for the test set generation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] test_set_generation_status
+    #   The status for the test set generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_set_name
+    #   The test set name used for the test set generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description used for the test set generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_location
+    #   The Amazon S3 storage location for the test set generation.
+    #   @return [Types::TestSetStorageLocation]
+    #
+    # @!attribute [rw] generation_data_source
+    #   The data source for the test set generation.
+    #   @return [Types::TestSetGenerationDataSource]
+    #
+    # @!attribute [rw] role_arn
+    #   The roleARN used for any operation in the test set to access
+    #   resources in the Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_set_tags
+    #   A list of tags that was used for the test set that is being
+    #   generated.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StartTestSetGenerationResponse AWS API Documentation
+    #
+    class StartTestSetGenerationResponse < Struct.new(
+      :test_set_generation_id,
+      :creation_date_time,
+      :test_set_generation_status,
+      :test_set_name,
+      :description,
+      :storage_location,
+      :generation_data_source,
+      :role_arn,
+      :test_set_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8830,6 +10170,541 @@ module Aws::LexModelsV2
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # Contains information about the method by which to filter the results
+    # of the test execution.
+    #
+    # @!attribute [rw] result_type_filter
+    #   Specifies which results to filter. See [Test result
+    #   details"&gt;Test results details][1] for details about different
+    #   types of results.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/test-results-details-test-set.html
+    #   @return [String]
+    #
+    # @!attribute [rw] conversation_level_test_results_filter_by
+    #   Contains information about the method for filtering Conversation
+    #   level test results.
+    #   @return [Types::ConversationLevelTestResultsFilterBy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TestExecutionResultFilterBy AWS API Documentation
+    #
+    class TestExecutionResultFilterBy < Struct.new(
+      :result_type_filter,
+      :conversation_level_test_results_filter_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the results of the test execution, grouped by type of
+    # results. See [Test result details"&gt;Test results details][1] for
+    # details about different types of results.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/test-results-details-test-set.html
+    #
+    # @!attribute [rw] overall_test_results
+    #   Overall results for the test execution, including the breakdown of
+    #   conversations and single-input utterances.
+    #   @return [Types::OverallTestResults]
+    #
+    # @!attribute [rw] conversation_level_test_results
+    #   Results related to conversations in the test set, including metrics
+    #   about success and failure of conversations and intent and slot
+    #   failures.
+    #   @return [Types::ConversationLevelTestResults]
+    #
+    # @!attribute [rw] intent_classification_test_results
+    #   Intent recognition results aggregated by intent name. The aggregated
+    #   results contain success and failure rates of intent recognition,
+    #   speech transcriptions, and end-to-end conversations.
+    #   @return [Types::IntentClassificationTestResults]
+    #
+    # @!attribute [rw] intent_level_slot_resolution_test_results
+    #   Slot resolution results aggregated by intent and slot name. The
+    #   aggregated results contain success and failure rates of slot
+    #   resolution, speech transcriptions, and end-to-end conversations
+    #   @return [Types::IntentLevelSlotResolutionTestResults]
+    #
+    # @!attribute [rw] utterance_level_test_results
+    #   Results related to utterances in the test set.
+    #   @return [Types::UtteranceLevelTestResults]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TestExecutionResultItems AWS API Documentation
+    #
+    class TestExecutionResultItems < Struct.new(
+      :overall_test_results,
+      :conversation_level_test_results,
+      :intent_classification_test_results,
+      :intent_level_slot_resolution_test_results,
+      :utterance_level_test_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the method by which to sort the instances
+    # of test executions you have carried out.
+    #
+    # @!attribute [rw] attribute
+    #   Specifies whether to sort the test set executions by the date and
+    #   time at which the test sets were created.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   Specifies whether to sort in ascending or descending order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TestExecutionSortBy AWS API Documentation
+    #
+    class TestExecutionSortBy < Struct.new(
+      :attribute,
+      :order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summarizes metadata about the test execution.
+    #
+    # @!attribute [rw] test_execution_id
+    #   The unique identifier of the test execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The date and time at which the test execution was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time at which the test execution was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] test_execution_status
+    #   The current status of the test execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_set_id
+    #   The unique identifier of the test set used in the test execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_set_name
+    #   The name of the test set used in the test execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   Contains information about the bot used for the test execution..
+    #   @return [Types::TestExecutionTarget]
+    #
+    # @!attribute [rw] api_mode
+    #   Specifies whether the API mode for the test execution is streaming
+    #   or non-streaming.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_execution_modality
+    #   Specifies whether the data used for the test execution is written or
+    #   spoken.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TestExecutionSummary AWS API Documentation
+    #
+    class TestExecutionSummary < Struct.new(
+      :test_execution_id,
+      :creation_date_time,
+      :last_updated_date_time,
+      :test_execution_status,
+      :test_set_id,
+      :test_set_name,
+      :target,
+      :api_mode,
+      :test_execution_modality)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the bot used for the test execution.
+    #
+    # @!attribute [rw] bot_alias_target
+    #   Contains information about the bot alias used for the test
+    #   execution.
+    #   @return [Types::BotAliasTestExecutionTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TestExecutionTarget AWS API Documentation
+    #
+    class TestExecutionTarget < Struct.new(
+      :bot_alias_target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the errors in the test set discrepancy report
+    #
+    # @!attribute [rw] intent_discrepancies
+    #   Contains information about discrepancies found for intents between
+    #   the test set and the bot.
+    #   @return [Array<Types::TestSetIntentDiscrepancyItem>]
+    #
+    # @!attribute [rw] slot_discrepancies
+    #   Contains information about discrepancies found for slots between the
+    #   test set and the bot.
+    #   @return [Array<Types::TestSetSlotDiscrepancyItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TestSetDiscrepancyErrors AWS API Documentation
+    #
+    class TestSetDiscrepancyErrors < Struct.new(
+      :intent_discrepancies,
+      :slot_discrepancies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the bot alias used for the test set
+    # discrepancy report.
+    #
+    # @!attribute [rw] bot_id
+    #   The unique identifier for the bot alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_alias_id
+    #   The unique identifier for the bot associated with the bot alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The unique identifier of the locale associated with the bot alias.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TestSetDiscrepancyReportBotAliasTarget AWS API Documentation
+    #
+    class TestSetDiscrepancyReportBotAliasTarget < Struct.new(
+      :bot_id,
+      :bot_alias_id,
+      :locale_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the resource used for the test set
+    # discrepancy report.
+    #
+    # @!attribute [rw] bot_alias_target
+    #   Contains information about the bot alias used as the resource for
+    #   the test set discrepancy report.
+    #   @return [Types::TestSetDiscrepancyReportBotAliasTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TestSetDiscrepancyReportResourceTarget AWS API Documentation
+    #
+    class TestSetDiscrepancyReportResourceTarget < Struct.new(
+      :bot_alias_target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the test set that is exported.
+    #
+    # @!attribute [rw] test_set_id
+    #   The unique identifier of the test set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TestSetExportSpecification AWS API Documentation
+    #
+    class TestSetExportSpecification < Struct.new(
+      :test_set_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the data source from which the test set is
+    # generated.
+    #
+    # @!attribute [rw] conversation_logs_data_source
+    #   Contains information about the bot from which the conversation logs
+    #   are sourced.
+    #   @return [Types::ConversationLogsDataSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TestSetGenerationDataSource AWS API Documentation
+    #
+    class TestSetGenerationDataSource < Struct.new(
+      :conversation_logs_data_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the Amazon S3 location from which the test
+    # set is imported.
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The name of the Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_path
+    #   The path inside the Amazon S3 bucket pointing to the test-set CSV
+    #   file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TestSetImportInputLocation AWS API Documentation
+    #
+    class TestSetImportInputLocation < Struct.new(
+      :s3_bucket_name,
+      :s3_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the test set that is imported.
+    #
+    # @!attribute [rw] test_set_name
+    #   The name of the test set.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the test set.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that has permission to
+    #   access the test set.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_location
+    #   Contains information about the location that Amazon Lex uses to
+    #   store the test-set.
+    #   @return [Types::TestSetStorageLocation]
+    #
+    # @!attribute [rw] import_input_location
+    #   Contains information about the input location from where test-set
+    #   should be imported.
+    #   @return [Types::TestSetImportInputLocation]
+    #
+    # @!attribute [rw] modality
+    #   Specifies whether the test-set being imported contains written or
+    #   spoken data.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_set_tags
+    #   A list of tags to add to the test set. You can only add tags when
+    #   you import/generate a new test set. You can't use the
+    #   `UpdateTestSet` operation to update tags. To update tags, use the
+    #   `TagResource` operation.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TestSetImportResourceSpecification AWS API Documentation
+    #
+    class TestSetImportResourceSpecification < Struct.new(
+      :test_set_name,
+      :description,
+      :role_arn,
+      :storage_location,
+      :import_input_location,
+      :modality,
+      :test_set_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about discrepancy in an intent information
+    # between the test set and the bot.
+    #
+    # @!attribute [rw] intent_name
+    #   The name of the intent in the discrepancy report.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message for a discrepancy for an intent between the test
+    #   set and the bot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TestSetIntentDiscrepancyItem AWS API Documentation
+    #
+    class TestSetIntentDiscrepancyItem < Struct.new(
+      :intent_name,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about discrepancy in a slot information between
+    # the test set and the bot.
+    #
+    # @!attribute [rw] intent_name
+    #   The name of the intent associated with the slot in the discrepancy
+    #   report.
+    #   @return [String]
+    #
+    # @!attribute [rw] slot_name
+    #   The name of the slot in the discrepancy report.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message for a discrepancy for an intent between the test
+    #   set and the bot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TestSetSlotDiscrepancyItem AWS API Documentation
+    #
+    class TestSetSlotDiscrepancyItem < Struct.new(
+      :intent_name,
+      :slot_name,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the methods by which to sort the test set.
+    #
+    # @!attribute [rw] attribute
+    #   Specifies whether to sort the test sets by name or by the time they
+    #   were last updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   Specifies whether to sort in ascending or descending order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TestSetSortBy AWS API Documentation
+    #
+    class TestSetSortBy < Struct.new(
+      :attribute,
+      :order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the location in which the test set is
+    # stored.
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The name of the Amazon S3 bucket in which the test set is stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_path
+    #   The path inside the Amazon S3 bucket where the test set is stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of an Amazon Web Services Key
+    #   Management Service (KMS) key for encrypting the test set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TestSetStorageLocation AWS API Documentation
+    #
+    class TestSetStorageLocation < Struct.new(
+      :s3_bucket_name,
+      :s3_path,
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about the test set.
+    #
+    # @!attribute [rw] test_set_id
+    #   The unique identifier of the test set.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_set_name
+    #   The name of the test set.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the test set.
+    #   @return [String]
+    #
+    # @!attribute [rw] modality
+    #   Specifies whether the test set contains written or spoken data.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the test set.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that has permission to
+    #   access the test set.
+    #   @return [String]
+    #
+    # @!attribute [rw] num_turns
+    #   The number of turns in the test set.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_location
+    #   Contains information about the location at which the test set is
+    #   stored.
+    #   @return [Types::TestSetStorageLocation]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The date and time at which the test set was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time at which the test set was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TestSetSummary AWS API Documentation
+    #
+    class TestSetSummary < Struct.new(
+      :test_set_id,
+      :test_set_name,
+      :description,
+      :modality,
+      :status,
+      :role_arn,
+      :num_turns,
+      :storage_location,
+      :creation_date_time,
+      :last_updated_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a turn in a test set.
+    #
+    # @!attribute [rw] record_number
+    #   The record number associated with the turn.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] conversation_id
+    #   The unique identifier for the conversation associated with the turn.
+    #   @return [String]
+    #
+    # @!attribute [rw] turn_number
+    #   The number of turns that has elapsed up to that turn.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] turn_specification
+    #   Contains information about the agent or user turn depending upon
+    #   type of turn.
+    #   @return [Types::TurnSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TestSetTurnRecord AWS API Documentation
+    #
+    class TestSetTurnRecord < Struct.new(
+      :record_number,
+      :conversation_id,
+      :turn_number,
+      :turn_specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the results of the analysis of a turn in
+    # the test set.
+    #
+    # @!attribute [rw] agent
+    #   Contains information about the agent messages in the turn.
+    #   @return [Types::AgentTurnResult]
+    #
+    # @!attribute [rw] user
+    #   Contains information about the user messages in the turn.
+    #   @return [Types::UserTurnResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TestSetTurnResult AWS API Documentation
+    #
+    class TestSetTurnResult < Struct.new(
+      :agent,
+      :user)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the text input specifications.
     #
     # @!attribute [rw] start_timeout_ms
@@ -8927,6 +10802,25 @@ module Aws::LexModelsV2
     #
     class TranscriptSourceSetting < Struct.new(
       :s3_bucket_transcript_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the messages in the turn.
+    #
+    # @!attribute [rw] agent_turn
+    #   Contains information about the agent messages in the turn.
+    #   @return [Types::AgentTurnSpecification]
+    #
+    # @!attribute [rw] user_turn
+    #   Contains information about the user messages in the turn.
+    #   @return [Types::UserTurnSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TurnSpecification AWS API Documentation
+    #
+    class TurnSpecification < Struct.new(
+      :agent_turn,
+      :user_turn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9565,6 +11459,8 @@ module Aws::LexModelsV2
     #   @return [String]
     #
     # @!attribute [rw] initial_response_setting
+    #   Configuration settings for a response sent to the user before Amazon
+    #   Lex starts eliciting slots.
     #   @return [Types::InitialResponseSetting]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateIntentRequest AWS API Documentation
@@ -9673,6 +11569,8 @@ module Aws::LexModelsV2
     #   @return [Time]
     #
     # @!attribute [rw] initial_response_setting
+    #   Configuration settings for a response sent to the user before Amazon
+    #   Lex starts eliciting slots.
     #   @return [Types::InitialResponseSetting]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateIntentResponse AWS API Documentation
@@ -9877,8 +11775,8 @@ module Aws::LexModelsV2
     #   @return [String]
     #
     # @!attribute [rw] bot_version
-    #   The identifier of the slot version that contains the slot. Will
-    #   always be `DRAFT`.
+    #   The version of the bot that contains the slot. Will always be
+    #   `DRAFT`.
     #   @return [String]
     #
     # @!attribute [rw] locale_id
@@ -10076,6 +11974,260 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] test_set_id
+    #   The test set Id for which update test operation to be performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_set_name
+    #   The new test set name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The new test set description.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateTestSetRequest AWS API Documentation
+    #
+    class UpdateTestSetRequest < Struct.new(
+      :test_set_id,
+      :test_set_name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_set_id
+    #   The test set Id for which update test operation to be performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_set_name
+    #   The test set name for the updated test set.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The test set description for the updated test set.
+    #   @return [String]
+    #
+    # @!attribute [rw] modality
+    #   Indicates whether audio or text is used for the updated test set.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status for the updated test set.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The roleARN used for any operation in the test set to access
+    #   resources in the Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] num_turns
+    #   The number of conversation turns from the updated test set.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_location
+    #   The Amazon S3 storage location for the updated test set.
+    #   @return [Types::TestSetStorageLocation]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The creation date and time for the updated test set.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time of the last update for the updated test set.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateTestSetResponse AWS API Documentation
+    #
+    class UpdateTestSetResponse < Struct.new(
+      :test_set_id,
+      :test_set_name,
+      :description,
+      :modality,
+      :status,
+      :role_arn,
+      :num_turns,
+      :storage_location,
+      :creation_date_time,
+      :last_updated_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the user messages in the turn in the input.
+    #
+    # @!attribute [rw] utterance_input
+    #   The utterance input in the user turn.
+    #   @return [Types::UtteranceInputSpecification]
+    #
+    # @!attribute [rw] request_attributes
+    #   Request attributes of the user turn.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] session_state
+    #   Contains information about the session state in the input.
+    #   @return [Types::InputSessionStateSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UserTurnInputSpecification AWS API Documentation
+    #
+    class UserTurnInputSpecification < Struct.new(
+      :utterance_input,
+      :request_attributes,
+      :session_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the intent that is output for the turn by
+    # the test execution.
+    #
+    # @!attribute [rw] name
+    #   The name of the intent.
+    #   @return [String]
+    #
+    # @!attribute [rw] slots
+    #   The slots associated with the intent.
+    #   @return [Hash<String,Types::UserTurnSlotOutput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UserTurnIntentOutput AWS API Documentation
+    #
+    class UserTurnIntentOutput < Struct.new(
+      :name,
+      :slots)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains results that are output for the user turn by the test
+    # execution.
+    #
+    # @!attribute [rw] intent
+    #   Contains information about the intent.
+    #   @return [Types::UserTurnIntentOutput]
+    #
+    # @!attribute [rw] active_contexts
+    #   The contexts that are active in the turn.
+    #   @return [Array<Types::ActiveContext>]
+    #
+    # @!attribute [rw] transcript
+    #   The transcript that is output for the user turn by the test
+    #   execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UserTurnOutputSpecification AWS API Documentation
+    #
+    class UserTurnOutputSpecification < Struct.new(
+      :intent,
+      :active_contexts,
+      :transcript)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the results for the user turn by the test execution.
+    #
+    # @!attribute [rw] input
+    #   Contains information about the user messages in the turn in the
+    #   input.
+    #   @return [Types::UserTurnInputSpecification]
+    #
+    # @!attribute [rw] expected_output
+    #   Contains information about the expected output for the user turn.
+    #   @return [Types::UserTurnOutputSpecification]
+    #
+    # @!attribute [rw] actual_output
+    #   Contains information about the actual output for the user turn.
+    #   @return [Types::UserTurnOutputSpecification]
+    #
+    # @!attribute [rw] error_details
+    #   Details about an error in an execution of a test set.
+    #   @return [Types::ExecutionErrorDetails]
+    #
+    # @!attribute [rw] end_to_end_result
+    #   Specifies whether the expected and actual outputs match or not, or
+    #   if there is an error in execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] intent_match_result
+    #   Specifies whether the expected and actual intents match or not.
+    #   @return [String]
+    #
+    # @!attribute [rw] slot_match_result
+    #   Specifies whether the expected and actual slots match or not.
+    #   @return [String]
+    #
+    # @!attribute [rw] speech_transcription_result
+    #   Specifies whether the expected and actual speech transcriptions
+    #   match or not, or if there is an error in execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] conversation_level_result
+    #   Contains information about the results related to the conversation
+    #   associated with the user turn.
+    #   @return [Types::ConversationLevelResultDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UserTurnResult AWS API Documentation
+    #
+    class UserTurnResult < Struct.new(
+      :input,
+      :expected_output,
+      :actual_output,
+      :error_details,
+      :end_to_end_result,
+      :intent_match_result,
+      :slot_match_result,
+      :speech_transcription_result,
+      :conversation_level_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a slot output by the test set execution.
+    #
+    # @!attribute [rw] value
+    #   The value output by the slot recognition.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   Values that are output by the slot recognition.
+    #   @return [Array<Types::UserTurnSlotOutput>]
+    #
+    # @!attribute [rw] sub_slots
+    #   A list of items mapping the name of the subslots to information
+    #   about those subslots.
+    #   @return [Hash<String,Types::UserTurnSlotOutput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UserTurnSlotOutput AWS API Documentation
+    #
+    class UserTurnSlotOutput < Struct.new(
+      :value,
+      :values,
+      :sub_slots)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the expected and input values for the user
+    # turn.
+    #
+    # @!attribute [rw] input
+    #   Contains information about the user messages in the turn in the
+    #   input.
+    #   @return [Types::UserTurnInputSpecification]
+    #
+    # @!attribute [rw] expected
+    #   Contains results about the expected output for the user turn.
+    #   @return [Types::UserTurnOutputSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UserTurnSpecification AWS API Documentation
+    #
+    class UserTurnSpecification < Struct.new(
+      :input,
+      :expected)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides parameters for setting the time window and duration for
     # aggregating utterance data.
     #
@@ -10087,6 +12239,82 @@ module Aws::LexModelsV2
     #
     class UtteranceAggregationDuration < Struct.new(
       :relative_aggregation_duration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the audio for an utterance.
+    #
+    # @!attribute [rw] audio_file_s3_location
+    #   Amazon S3 file pointing to the audio.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UtteranceAudioInputSpecification AWS API Documentation
+    #
+    class UtteranceAudioInputSpecification < Struct.new(
+      :audio_file_s3_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about input of an utterance.
+    #
+    # @!attribute [rw] text_input
+    #   A text input transcription of the utterance. It is only applicable
+    #   for test-sets containing text data.
+    #   @return [String]
+    #
+    # @!attribute [rw] audio_input
+    #   Contains information about the audio input for an utterance.
+    #   @return [Types::UtteranceAudioInputSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UtteranceInputSpecification AWS API Documentation
+    #
+    class UtteranceInputSpecification < Struct.new(
+      :text_input,
+      :audio_input)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about multiple utterances in the results of a
+    # test set execution.
+    #
+    # @!attribute [rw] record_number
+    #   The record number of the result.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] conversation_id
+    #   The unique identifier for the conversation associated with the
+    #   result.
+    #   @return [String]
+    #
+    # @!attribute [rw] turn_result
+    #   Contains information about the turn associated with the result.
+    #   @return [Types::TestSetTurnResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UtteranceLevelTestResultItem AWS API Documentation
+    #
+    class UtteranceLevelTestResultItem < Struct.new(
+      :record_number,
+      :conversation_id,
+      :turn_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the utterances in the results of the test
+    # set execution.
+    #
+    # @!attribute [rw] items
+    #   Contains information about an utterance in the results of the test
+    #   set execution.
+    #   @return [Array<Types::UtteranceLevelTestResultItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UtteranceLevelTestResults AWS API Documentation
+    #
+    class UtteranceLevelTestResults < Struct.new(
+      :items)
       SENSITIVE = []
       include Aws::Structure
     end

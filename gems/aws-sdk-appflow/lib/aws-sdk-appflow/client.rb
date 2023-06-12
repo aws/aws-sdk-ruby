@@ -921,6 +921,10 @@ module Aws::Appflow
     #           custom_properties: {
     #             "CustomPropertyKey" => "CustomPropertyValue",
     #           },
+    #           data_transfer_api: {
+    #             name: "DataTransferApiTypeName",
+    #             type: "SYNC", # accepts SYNC, ASYNC, AUTOMATIC
+    #           },
     #         },
     #         pardot: {
     #           object: "Object", # required
@@ -1296,6 +1300,11 @@ module Aws::Appflow
     #   resp.connector_configuration.logo_url #=> String
     #   resp.connector_configuration.registered_at #=> Time
     #   resp.connector_configuration.registered_by #=> String
+    #   resp.connector_configuration.supported_data_transfer_types #=> Array
+    #   resp.connector_configuration.supported_data_transfer_types[0] #=> String, one of "RECORD", "FILE"
+    #   resp.connector_configuration.supported_data_transfer_apis #=> Array
+    #   resp.connector_configuration.supported_data_transfer_apis[0].name #=> String
+    #   resp.connector_configuration.supported_data_transfer_apis[0].type #=> String, one of "SYNC", "ASYNC", "AUTOMATIC"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DescribeConnector AWS API Documentation
     #
@@ -1618,6 +1627,11 @@ module Aws::Appflow
     #   resp.connector_configurations["ConnectorType"].logo_url #=> String
     #   resp.connector_configurations["ConnectorType"].registered_at #=> Time
     #   resp.connector_configurations["ConnectorType"].registered_by #=> String
+    #   resp.connector_configurations["ConnectorType"].supported_data_transfer_types #=> Array
+    #   resp.connector_configurations["ConnectorType"].supported_data_transfer_types[0] #=> String, one of "RECORD", "FILE"
+    #   resp.connector_configurations["ConnectorType"].supported_data_transfer_apis #=> Array
+    #   resp.connector_configurations["ConnectorType"].supported_data_transfer_apis[0].name #=> String
+    #   resp.connector_configurations["ConnectorType"].supported_data_transfer_apis[0].type #=> String, one of "SYNC", "ASYNC", "AUTOMATIC"
     #   resp.connectors #=> Array
     #   resp.connectors[0].connector_description #=> String
     #   resp.connectors[0].connector_name #=> String
@@ -1631,6 +1645,8 @@ module Aws::Appflow
     #   resp.connectors[0].connector_provisioning_type #=> String, one of "LAMBDA"
     #   resp.connectors[0].connector_modes #=> Array
     #   resp.connectors[0].connector_modes[0] #=> String
+    #   resp.connectors[0].supported_data_transfer_types #=> Array
+    #   resp.connectors[0].supported_data_transfer_types[0] #=> String, one of "RECORD", "FILE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DescribeConnectors AWS API Documentation
@@ -1714,6 +1730,8 @@ module Aws::Appflow
     #   resp.source_flow_config.source_connector_properties.custom_connector.entity_name #=> String
     #   resp.source_flow_config.source_connector_properties.custom_connector.custom_properties #=> Hash
     #   resp.source_flow_config.source_connector_properties.custom_connector.custom_properties["CustomPropertyKey"] #=> String
+    #   resp.source_flow_config.source_connector_properties.custom_connector.data_transfer_api.name #=> String
+    #   resp.source_flow_config.source_connector_properties.custom_connector.data_transfer_api.type #=> String, one of "SYNC", "ASYNC", "AUTOMATIC"
     #   resp.source_flow_config.source_connector_properties.pardot.object #=> String
     #   resp.source_flow_config.incremental_pull_config.datetime_type_field_name #=> String
     #   resp.destination_flow_config_list #=> Array
@@ -2034,6 +2052,8 @@ module Aws::Appflow
     #   resp.connectors[0].connector_provisioning_type #=> String, one of "LAMBDA"
     #   resp.connectors[0].connector_modes #=> Array
     #   resp.connectors[0].connector_modes[0] #=> String
+    #   resp.connectors[0].supported_data_transfer_types #=> Array
+    #   resp.connectors[0].supported_data_transfer_types[0] #=> String, one of "RECORD", "FILE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ListConnectors AWS API Documentation
@@ -2886,6 +2906,10 @@ module Aws::Appflow
     #           custom_properties: {
     #             "CustomPropertyKey" => "CustomPropertyValue",
     #           },
+    #           data_transfer_api: {
+    #             name: "DataTransferApiTypeName",
+    #             type: "SYNC", # accepts SYNC, ASYNC, AUTOMATIC
+    #           },
     #         },
     #         pardot: {
     #           object: "Object", # required
@@ -3100,7 +3124,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

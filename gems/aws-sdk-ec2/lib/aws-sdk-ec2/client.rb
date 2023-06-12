@@ -18698,7 +18698,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
-    # @option params [Types::DeregisterInstanceTagAttributeRequest] :instance_tag_attribute
+    # @option params [required, Types::DeregisterInstanceTagAttributeRequest] :instance_tag_attribute
     #   Information about the tag keys to deregister.
     #
     # @return [Types::DeregisterInstanceEventNotificationAttributesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -18709,7 +18709,7 @@ module Aws::EC2
     #
     #   resp = client.deregister_instance_event_notification_attributes({
     #     dry_run: false,
-    #     instance_tag_attribute: {
+    #     instance_tag_attribute: { # required
     #       include_all_tags_of_instance: false,
     #       instance_tag_keys: ["String"],
     #     },
@@ -50387,7 +50387,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
-    # @option params [Types::RegisterInstanceTagAttributeRequest] :instance_tag_attribute
+    # @option params [required, Types::RegisterInstanceTagAttributeRequest] :instance_tag_attribute
     #   Information about the tag keys to register.
     #
     # @return [Types::RegisterInstanceEventNotificationAttributesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -50398,7 +50398,7 @@ module Aws::EC2
     #
     #   resp = client.register_instance_event_notification_attributes({
     #     dry_run: false,
-    #     instance_tag_attribute: {
+    #     instance_tag_attribute: { # required
     #       include_all_tags_of_instance: false,
     #       instance_tag_keys: ["String"],
     #     },
@@ -56786,7 +56786,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.381.0'
+      context[:gem_version] = '1.382.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

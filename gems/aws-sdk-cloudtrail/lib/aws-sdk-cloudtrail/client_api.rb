@@ -250,12 +250,16 @@ module Aws::CloudTrail
     SelectorName = Shapes::StringShape.new(name: 'SelectorName')
     Source = Shapes::StringShape.new(name: 'Source')
     SourceConfig = Shapes::StructureShape.new(name: 'SourceConfig')
+    StartEventDataStoreIngestionRequest = Shapes::StructureShape.new(name: 'StartEventDataStoreIngestionRequest')
+    StartEventDataStoreIngestionResponse = Shapes::StructureShape.new(name: 'StartEventDataStoreIngestionResponse')
     StartImportRequest = Shapes::StructureShape.new(name: 'StartImportRequest')
     StartImportResponse = Shapes::StructureShape.new(name: 'StartImportResponse')
     StartLoggingRequest = Shapes::StructureShape.new(name: 'StartLoggingRequest')
     StartLoggingResponse = Shapes::StructureShape.new(name: 'StartLoggingResponse')
     StartQueryRequest = Shapes::StructureShape.new(name: 'StartQueryRequest')
     StartQueryResponse = Shapes::StructureShape.new(name: 'StartQueryResponse')
+    StopEventDataStoreIngestionRequest = Shapes::StructureShape.new(name: 'StopEventDataStoreIngestionRequest')
+    StopEventDataStoreIngestionResponse = Shapes::StructureShape.new(name: 'StopEventDataStoreIngestionResponse')
     StopImportRequest = Shapes::StructureShape.new(name: 'StopImportRequest')
     StopImportResponse = Shapes::StructureShape.new(name: 'StopImportResponse')
     StopLoggingRequest = Shapes::StructureShape.new(name: 'StopLoggingRequest')
@@ -372,6 +376,7 @@ module Aws::CloudTrail
     CreateEventDataStoreRequest.add_member(:termination_protection_enabled, Shapes::ShapeRef.new(shape: TerminationProtectionEnabled, location_name: "TerminationProtectionEnabled"))
     CreateEventDataStoreRequest.add_member(:tags_list, Shapes::ShapeRef.new(shape: TagsList, location_name: "TagsList"))
     CreateEventDataStoreRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: EventDataStoreKmsKeyId, location_name: "KmsKeyId"))
+    CreateEventDataStoreRequest.add_member(:start_ingestion, Shapes::ShapeRef.new(shape: Boolean, location_name: "StartIngestion"))
     CreateEventDataStoreRequest.struct_class = Types::CreateEventDataStoreRequest
 
     CreateEventDataStoreResponse.add_member(:event_data_store_arn, Shapes::ShapeRef.new(shape: EventDataStoreArn, location_name: "EventDataStoreArn"))
@@ -978,6 +983,11 @@ module Aws::CloudTrail
     SourceConfig.add_member(:advanced_event_selectors, Shapes::ShapeRef.new(shape: AdvancedEventSelectors, location_name: "AdvancedEventSelectors"))
     SourceConfig.struct_class = Types::SourceConfig
 
+    StartEventDataStoreIngestionRequest.add_member(:event_data_store, Shapes::ShapeRef.new(shape: EventDataStoreArn, required: true, location_name: "EventDataStore"))
+    StartEventDataStoreIngestionRequest.struct_class = Types::StartEventDataStoreIngestionRequest
+
+    StartEventDataStoreIngestionResponse.struct_class = Types::StartEventDataStoreIngestionResponse
+
     StartImportRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: ImportDestinations, location_name: "Destinations"))
     StartImportRequest.add_member(:import_source, Shapes::ShapeRef.new(shape: ImportSource, location_name: "ImportSource"))
     StartImportRequest.add_member(:start_event_time, Shapes::ShapeRef.new(shape: Date, location_name: "StartEventTime"))
@@ -1006,6 +1016,11 @@ module Aws::CloudTrail
 
     StartQueryResponse.add_member(:query_id, Shapes::ShapeRef.new(shape: UUID, location_name: "QueryId"))
     StartQueryResponse.struct_class = Types::StartQueryResponse
+
+    StopEventDataStoreIngestionRequest.add_member(:event_data_store, Shapes::ShapeRef.new(shape: EventDataStoreArn, required: true, location_name: "EventDataStore"))
+    StopEventDataStoreIngestionRequest.struct_class = Types::StopEventDataStoreIngestionRequest
+
+    StopEventDataStoreIngestionResponse.struct_class = Types::StopEventDataStoreIngestionResponse
 
     StopImportRequest.add_member(:import_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "ImportId"))
     StopImportRequest.struct_class = Types::StopImportRequest
@@ -1814,6 +1829,24 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotInAllFeaturesModeException)
       end)
 
+      api.add_operation(:start_event_data_store_ingestion, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartEventDataStoreIngestion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartEventDataStoreIngestionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartEventDataStoreIngestionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EventDataStoreARNInvalidException)
+        o.errors << Shapes::ShapeRef.new(shape: EventDataStoreNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEventDataStoreStatusException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEventDataStoreCategoryException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: NoManagementAccountSLRExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDependencyServiceAccessPermissionException)
+      end)
+
       api.add_operation(:start_import, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartImport"
         o.http_method = "POST"
@@ -1874,6 +1907,24 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: NoManagementAccountSLRExistsException)
+      end)
+
+      api.add_operation(:stop_event_data_store_ingestion, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopEventDataStoreIngestion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopEventDataStoreIngestionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopEventDataStoreIngestionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EventDataStoreARNInvalidException)
+        o.errors << Shapes::ShapeRef.new(shape: EventDataStoreNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEventDataStoreStatusException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEventDataStoreCategoryException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: NoManagementAccountSLRExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDependencyServiceAccessPermissionException)
       end)
 
       api.add_operation(:stop_import, Seahorse::Model::Operation.new.tap do |o|

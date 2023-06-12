@@ -956,7 +956,7 @@ module Aws::FraudDetector
     #   @return [String]
     #
     # @!attribute [rw] data_type
-    #   The data type.
+    #   The data type of the variable.
     #   @return [String]
     #
     # @!attribute [rw] data_source
@@ -1125,7 +1125,7 @@ module Aws::FraudDetector
     #
     # @!attribute [rw] delete_audit_history
     #   Specifies whether or not to delete any predictions associated with
-    #   the event.
+    #   the event. If set to `True`,
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteEventRequest AWS API Documentation

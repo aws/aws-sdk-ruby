@@ -89,6 +89,10 @@ module Aws::WAFV2
     DeleteRuleGroupResponse = Shapes::StructureShape.new(name: 'DeleteRuleGroupResponse')
     DeleteWebACLRequest = Shapes::StructureShape.new(name: 'DeleteWebACLRequest')
     DeleteWebACLResponse = Shapes::StructureShape.new(name: 'DeleteWebACLResponse')
+    DescribeAllManagedProductsRequest = Shapes::StructureShape.new(name: 'DescribeAllManagedProductsRequest')
+    DescribeAllManagedProductsResponse = Shapes::StructureShape.new(name: 'DescribeAllManagedProductsResponse')
+    DescribeManagedProductsByVendorRequest = Shapes::StructureShape.new(name: 'DescribeManagedProductsByVendorRequest')
+    DescribeManagedProductsByVendorResponse = Shapes::StructureShape.new(name: 'DescribeManagedProductsByVendorResponse')
     DescribeManagedRuleGroupRequest = Shapes::StructureShape.new(name: 'DescribeManagedRuleGroupRequest')
     DescribeManagedRuleGroupResponse = Shapes::StructureShape.new(name: 'DescribeManagedRuleGroupResponse')
     DisassociateWebACLRequest = Shapes::StructureShape.new(name: 'DisassociateWebACLRequest')
@@ -213,6 +217,8 @@ module Aws::WAFV2
     LoggingConfigurations = Shapes::ListShape.new(name: 'LoggingConfigurations')
     LoggingFilter = Shapes::StructureShape.new(name: 'LoggingFilter')
     LoginPathString = Shapes::StringShape.new(name: 'LoginPathString')
+    ManagedProductDescriptor = Shapes::StructureShape.new(name: 'ManagedProductDescriptor')
+    ManagedProductDescriptors = Shapes::ListShape.new(name: 'ManagedProductDescriptors')
     ManagedRuleGroupConfig = Shapes::StructureShape.new(name: 'ManagedRuleGroupConfig')
     ManagedRuleGroupConfigs = Shapes::ListShape.new(name: 'ManagedRuleGroupConfigs')
     ManagedRuleGroupStatement = Shapes::StructureShape.new(name: 'ManagedRuleGroupStatement')
@@ -244,6 +250,10 @@ module Aws::WAFV2
     PolicyString = Shapes::StringShape.new(name: 'PolicyString')
     PopulationSize = Shapes::IntegerShape.new(name: 'PopulationSize')
     PositionalConstraint = Shapes::StringShape.new(name: 'PositionalConstraint')
+    ProductDescription = Shapes::StringShape.new(name: 'ProductDescription')
+    ProductId = Shapes::StringShape.new(name: 'ProductId')
+    ProductLink = Shapes::StringShape.new(name: 'ProductLink')
+    ProductTitle = Shapes::StringShape.new(name: 'ProductTitle')
     PublishedVersions = Shapes::MapShape.new(name: 'PublishedVersions')
     PutLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'PutLoggingConfigurationRequest')
     PutLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'PutLoggingConfigurationResponse')
@@ -630,6 +640,19 @@ module Aws::WAFV2
     DeleteWebACLRequest.struct_class = Types::DeleteWebACLRequest
 
     DeleteWebACLResponse.struct_class = Types::DeleteWebACLResponse
+
+    DescribeAllManagedProductsRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
+    DescribeAllManagedProductsRequest.struct_class = Types::DescribeAllManagedProductsRequest
+
+    DescribeAllManagedProductsResponse.add_member(:managed_products, Shapes::ShapeRef.new(shape: ManagedProductDescriptors, location_name: "ManagedProducts"))
+    DescribeAllManagedProductsResponse.struct_class = Types::DescribeAllManagedProductsResponse
+
+    DescribeManagedProductsByVendorRequest.add_member(:vendor_name, Shapes::ShapeRef.new(shape: VendorName, required: true, location_name: "VendorName"))
+    DescribeManagedProductsByVendorRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
+    DescribeManagedProductsByVendorRequest.struct_class = Types::DescribeManagedProductsByVendorRequest
+
+    DescribeManagedProductsByVendorResponse.add_member(:managed_products, Shapes::ShapeRef.new(shape: ManagedProductDescriptors, location_name: "ManagedProducts"))
+    DescribeManagedProductsByVendorResponse.struct_class = Types::DescribeManagedProductsByVendorResponse
 
     DescribeManagedRuleGroupRequest.add_member(:vendor_name, Shapes::ShapeRef.new(shape: VendorName, required: true, location_name: "VendorName"))
     DescribeManagedRuleGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
@@ -1020,6 +1043,19 @@ module Aws::WAFV2
     LoggingFilter.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, required: true, location_name: "Filters"))
     LoggingFilter.add_member(:default_behavior, Shapes::ShapeRef.new(shape: FilterBehavior, required: true, location_name: "DefaultBehavior"))
     LoggingFilter.struct_class = Types::LoggingFilter
+
+    ManagedProductDescriptor.add_member(:vendor_name, Shapes::ShapeRef.new(shape: VendorName, location_name: "VendorName"))
+    ManagedProductDescriptor.add_member(:managed_rule_set_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "ManagedRuleSetName"))
+    ManagedProductDescriptor.add_member(:product_id, Shapes::ShapeRef.new(shape: ProductId, location_name: "ProductId"))
+    ManagedProductDescriptor.add_member(:product_link, Shapes::ShapeRef.new(shape: ProductLink, location_name: "ProductLink"))
+    ManagedProductDescriptor.add_member(:product_title, Shapes::ShapeRef.new(shape: ProductTitle, location_name: "ProductTitle"))
+    ManagedProductDescriptor.add_member(:product_description, Shapes::ShapeRef.new(shape: ProductDescription, location_name: "ProductDescription"))
+    ManagedProductDescriptor.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "SnsTopicArn"))
+    ManagedProductDescriptor.add_member(:is_versioning_supported, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsVersioningSupported"))
+    ManagedProductDescriptor.add_member(:is_advanced_managed_rule_set, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsAdvancedManagedRuleSet"))
+    ManagedProductDescriptor.struct_class = Types::ManagedProductDescriptor
+
+    ManagedProductDescriptors.member = Shapes::ShapeRef.new(shape: ManagedProductDescriptor)
 
     ManagedRuleGroupConfig.add_member(:login_path, Shapes::ShapeRef.new(shape: LoginPathString, deprecated: true, location_name: "LoginPath", metadata: {"deprecatedMessage"=>"Deprecated. Use AWSManagedRulesATPRuleSet LoginPath"}))
     ManagedRuleGroupConfig.add_member(:payload_type, Shapes::ShapeRef.new(shape: PayloadType, deprecated: true, location_name: "PayloadType", metadata: {"deprecatedMessage"=>"Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection PayloadType"}))
@@ -1825,6 +1861,27 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+      end)
+
+      api.add_operation(:describe_all_managed_products, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAllManagedProducts"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAllManagedProductsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAllManagedProductsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+      end)
+
+      api.add_operation(:describe_managed_products_by_vendor, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeManagedProductsByVendor"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeManagedProductsByVendorRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeManagedProductsByVendorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
       end)
 
       api.add_operation(:describe_managed_rule_group, Seahorse::Model::Operation.new.tap do |o|

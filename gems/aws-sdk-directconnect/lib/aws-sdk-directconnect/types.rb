@@ -799,7 +799,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] jumbo_frame_capable
-    #   Indicates whether jumbo frames (9001 MTU) are supported.
+    #   Indicates whether jumbo frames are supported.
     #   @return [Boolean]
     #
     # @!attribute [rw] aws_device_v2
@@ -2420,7 +2420,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] jumbo_frame_capable
-    #   Indicates whether jumbo frames (9001 MTU) are supported.
+    #   Indicates whether jumbo frames are supported.
     #   @return [Boolean]
     #
     # @!attribute [rw] aws_device_v2
@@ -2561,7 +2561,7 @@ module Aws::DirectConnect
     #   @return [Boolean]
     #
     # @!attribute [rw] jumbo_frame_capable
-    #   Indicates whether jumbo frames (9001 MTU) are supported.
+    #   Indicates whether jumbo frames are supported.
     #   @return [Boolean]
     #
     # @!attribute [rw] has_logical_redundancy
@@ -3762,7 +3762,7 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] jumbo_frame_capable
-    #   Indicates whether jumbo frames (9001 MTU) are supported.
+    #   Indicates whether jumbo frames are supported.
     #   @return [Boolean]
     #
     # @!attribute [rw] virtual_gateway_id

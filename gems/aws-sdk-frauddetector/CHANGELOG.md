@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2023-06-05)
+------------------
+
+* Feature - Added new variable types, new DateTime data type, and new rules engine functions for interacting and working with DateTime data types.
+
 1.40.0 (2023-05-31)
 ------------------
 

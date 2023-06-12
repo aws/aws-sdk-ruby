@@ -2111,8 +2111,13 @@ module Aws::IoT
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] resource_id
+    #   A resource with the same name already exists.
+    #   @return [String]
+    #
     class ConflictException < Struct.new(
-      :message)
+      :message,
+      :resource_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2717,7 +2722,7 @@ module Aws::IoT
     #   for `document`.
     #
     #   For example, `--document-source
-    #   https://s3.region-code.amazonaws.com/example-firmware/device-firmware.1.0`.
+    #   https://s3.region-code.amazonaws.com/example-firmware/device-firmware.1.0`
     #
     #   For more information, see [Methods for accessing a bucket][1].
     #
@@ -2814,6 +2819,14 @@ module Aws::IoT
     #   job execution.
     #   @return [Types::SchedulingConfig]
     #
+    # @!attribute [rw] destination_package_versions
+    #   The package version Amazon Resource Names (ARNs) that are installed
+    #   on the device when the job successfully completes.
+    #
+    #   **Note:**The following Length Constraints relates to a single
+    #   string. Up to five strings are allowed.
+    #   @return [Array<String>]
+    #
     class CreateJobRequest < Struct.new(
       :job_id,
       :targets,
@@ -2830,7 +2843,8 @@ module Aws::IoT
       :job_template_arn,
       :job_executions_retry_config,
       :document_parameters,
-      :scheduling_config)
+      :scheduling_config,
+      :destination_package_versions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2924,6 +2938,14 @@ module Aws::IoT
     #   job.
     #   @return [Array<Types::MaintenanceWindow>]
     #
+    # @!attribute [rw] destination_package_versions
+    #   The package version Amazon Resource Names (ARNs) that are installed
+    #   on the device when the job successfully completes.
+    #
+    #   **Note:**The following Length Constraints relates to a single
+    #   string. Up to five strings are allowed.
+    #   @return [Array<String>]
+    #
     class CreateJobTemplateRequest < Struct.new(
       :job_template_id,
       :job_arn,
@@ -2936,7 +2958,8 @@ module Aws::IoT
       :timeout_config,
       :tags,
       :job_executions_retry_config,
-      :maintenance_windows)
+      :maintenance_windows,
+      :destination_package_versions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3157,6 +3180,150 @@ module Aws::IoT
       :aws_iot_job_arn,
       :ota_update_status)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] package_name
+    #   The name of the new package.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A summary of the package being created. This can be used to outline
+    #   the package's contents or purpose.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Metadata that can be used to manage the package.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique case-sensitive identifier that you can provide to ensure
+    #   the idempotency of the request. Don't reuse this client token if a
+    #   new idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class CreatePackageRequest < Struct.new(
+      :package_name,
+      :description,
+      :tags,
+      :client_token)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] package_name
+    #   The name of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_arn
+    #   The Amazon Resource Name (ARN) for the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The package description.
+    #   @return [String]
+    #
+    class CreatePackageResponse < Struct.new(
+      :package_name,
+      :package_arn,
+      :description)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] package_name
+    #   The name of the associated package.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The name of the new package version.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A summary of the package version being created. This can be used to
+    #   outline the package's contents or purpose.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   Metadata that can be used to define a package version’s
+    #   configuration. For example, the S3 file location, configuration
+    #   options that are being sent to the device or fleet.
+    #
+    #   The combined size of all the attributes on a package version is
+    #   limited to 3KB.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   Metadata that can be used to manage the package version.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique case-sensitive identifier that you can provide to ensure
+    #   the idempotency of the request. Don't reuse this client token if a
+    #   new idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class CreatePackageVersionRequest < Struct.new(
+      :package_name,
+      :version_name,
+      :description,
+      :attributes,
+      :tags,
+      :client_token)
+      SENSITIVE = [:description, :attributes]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] package_version_arn
+    #   The Amazon Resource Name (ARN) for the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_name
+    #   The name of the associated package.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The name of the new package version.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The package version description.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   Metadata that were added to the package version that can be used to
+    #   define a package version’s configuration.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] status
+    #   The status of the package version. For more information, see
+    #   [Package version lifecycle][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
+    #   @return [String]
+    #
+    # @!attribute [rw] error_reason
+    #   Error reason for a package version failure during creation or
+    #   update.
+    #   @return [String]
+    #
+    class CreatePackageVersionResponse < Struct.new(
+      :package_version_arn,
+      :package_name,
+      :version_name,
+      :description,
+      :attributes,
+      :status,
+      :error_reason)
+      SENSITIVE = [:description, :attributes]
       include Aws::Structure
     end
 
@@ -4254,6 +4421,55 @@ module Aws::IoT
     end
 
     class DeleteOTAUpdateResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] package_name
+    #   The name of the target package.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique case-sensitive identifier that you can provide to ensure
+    #   the idempotency of the request. Don't reuse this client token if a
+    #   new idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class DeletePackageRequest < Struct.new(
+      :package_name,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class DeletePackageResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] package_name
+    #   The name of the associated package.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The name of the target package version.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique case-sensitive identifier that you can provide to ensure
+    #   the idempotency of the request. Don't reuse this client token if a
+    #   new idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class DeletePackageVersionRequest < Struct.new(
+      :package_name,
+      :version_name,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class DeletePackageVersionResponse < Aws::EmptyStructure; end
 
     # The input for the DeletePolicy operation.
     #
@@ -5375,6 +5591,14 @@ module Aws::IoT
     #   job.
     #   @return [Array<Types::MaintenanceWindow>]
     #
+    # @!attribute [rw] destination_package_versions
+    #   The package version Amazon Resource Names (ARNs) that are installed
+    #   on the device when the job successfully completes.
+    #
+    #   **Note:**The following Length Constraints relates to a single
+    #   string. Up to five strings are allowed.
+    #   @return [Array<String>]
+    #
     class DescribeJobTemplateResponse < Struct.new(
       :job_template_arn,
       :job_template_id,
@@ -5387,7 +5611,8 @@ module Aws::IoT
       :abort_config,
       :timeout_config,
       :job_executions_retry_config,
-      :maintenance_windows)
+      :maintenance_windows,
+      :destination_package_versions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6992,6 +7217,137 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @api private
+    #
+    class GetPackageConfigurationRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] version_update_by_jobs_config
+    #   The version that is associated to a specific job.
+    #   @return [Types::VersionUpdateByJobsConfig]
+    #
+    class GetPackageConfigurationResponse < Struct.new(
+      :version_update_by_jobs_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] package_name
+    #   The name of the target package.
+    #   @return [String]
+    #
+    class GetPackageRequest < Struct.new(
+      :package_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] package_name
+    #   The name of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_arn
+    #   The ARN for the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The package description.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_version_name
+    #   The name of the default package version.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date the package was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date when the package was last updated.
+    #   @return [Time]
+    #
+    class GetPackageResponse < Struct.new(
+      :package_name,
+      :package_arn,
+      :description,
+      :default_version_name,
+      :creation_date,
+      :last_modified_date)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] package_name
+    #   The name of the associated package.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The name of the target package version.
+    #   @return [String]
+    #
+    class GetPackageVersionRequest < Struct.new(
+      :package_name,
+      :version_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] package_version_arn
+    #   The ARN for the package version.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_name
+    #   The name of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The name of the package version.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The package version description.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   Metadata that were added to the package version that can be used to
+    #   define a package version’s configuration.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] status
+    #   The status associated to the package version. For more information,
+    #   see [Package version lifecycle][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
+    #   @return [String]
+    #
+    # @!attribute [rw] error_reason
+    #   Error reason for a package version failure during creation or
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date when the package version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date when the package version was last updated.
+    #   @return [Time]
+    #
+    class GetPackageVersionResponse < Struct.new(
+      :package_version_arn,
+      :package_name,
+      :version_name,
+      :description,
+      :attributes,
+      :status,
+      :error_reason,
+      :creation_date,
+      :last_modified_date)
+      SENSITIVE = [:description, :attributes]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] index_name
     #   The name of the index to search.
     #   @return [String]
@@ -7843,6 +8199,14 @@ module Aws::IoT
     #   start times.
     #   @return [Array<Types::ScheduledJobRollout>]
     #
+    # @!attribute [rw] destination_package_versions
+    #   The package version Amazon Resource Names (ARNs) that are installed
+    #   on the device when the job successfully completes.
+    #
+    #   **Note:**The following Length Constraints relates to a single
+    #   string. Up to five strings are allowed.
+    #   @return [Array<String>]
+    #
     class Job < Struct.new(
       :job_arn,
       :job_id,
@@ -7867,7 +8231,8 @@ module Aws::IoT
       :document_parameters,
       :is_concurrent,
       :scheduling_config,
-      :scheduled_job_rollouts)
+      :scheduled_job_rollouts,
+      :destination_package_versions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9626,6 +9991,81 @@ module Aws::IoT
     class ListOutgoingCertificatesResponse < Struct.new(
       :outgoing_certificates,
       :next_marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] package_name
+    #   The name of the target package.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the package version. For more information, see
+    #   [Package version lifecycle][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    class ListPackageVersionsRequest < Struct.new(
+      :package_name,
+      :status,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] package_version_summaries
+    #   Lists the package versions associated to the package.
+    #   @return [Array<Types::PackageVersionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    class ListPackageVersionsResponse < Struct.new(
+      :package_version_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results returned at one time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    class ListPackagesRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] package_summaries
+    #   The software package summary.
+    #   @return [Array<Types::PackageSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    class ListPackagesResponse < Struct.new(
+      :package_summaries,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11598,6 +12038,70 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # A summary of information about a software package.
+    #
+    # @!attribute [rw] package_name
+    #   The name for the target package.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_version_name
+    #   The name of the default package version.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date that the package was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date that the package was last updated.
+    #   @return [Time]
+    #
+    class PackageSummary < Struct.new(
+      :package_name,
+      :default_version_name,
+      :creation_date,
+      :last_modified_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of information about a package version.
+    #
+    # @!attribute [rw] package_name
+    #   The name of the associated software package.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The name of the target package version.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the package version. For more information, see
+    #   [Package version lifecycle][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date that the package version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date that the package version was last updated.
+    #   @return [Time]
+    #
+    class PackageVersionSummary < Struct.new(
+      :package_name,
+      :version_name,
+      :status,
+      :creation_date,
+      :last_modified_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the percentile and percentile value.
     #
     # @!attribute [rw] percent
@@ -12788,6 +13292,17 @@ module Aws::IoT
       :server_certificate_arn,
       :server_certificate_status,
       :server_certificate_status_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A limit has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15285,6 +15800,129 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @!attribute [rw] version_update_by_jobs_config
+    #   Configuration to manage job's package version reporting. This
+    #   updates the thing's reserved named shadow that the job targets.
+    #   @return [Types::VersionUpdateByJobsConfig]
+    #
+    # @!attribute [rw] client_token
+    #   A unique case-sensitive identifier that you can provide to ensure
+    #   the idempotency of the request. Don't reuse this client token if a
+    #   new idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class UpdatePackageConfigurationRequest < Struct.new(
+      :version_update_by_jobs_config,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class UpdatePackageConfigurationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] package_name
+    #   The name of the target package.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The package description.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_version_name
+    #   The name of the default package version.
+    #
+    #   **Note:** You cannot name a `defaultVersion` and set
+    #   `unsetDefaultVersion` equal to `true` at the same time.
+    #   @return [String]
+    #
+    # @!attribute [rw] unset_default_version
+    #   Indicates whether you want to remove the named default package
+    #   version from the software package. Set as `true` to remove the
+    #   default package version.
+    #
+    #   **Note:** You cannot name a `defaultVersion` and set
+    #   `unsetDefaultVersion` equal to `true` at the same time.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   A unique case-sensitive identifier that you can provide to ensure
+    #   the idempotency of the request. Don't reuse this client token if a
+    #   new idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class UpdatePackageRequest < Struct.new(
+      :package_name,
+      :description,
+      :default_version_name,
+      :unset_default_version,
+      :client_token)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    class UpdatePackageResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] package_name
+    #   The name of the associated software package.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The name of the target package version.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The package version description.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   Metadata that can be used to define a package version’s
+    #   configuration. For example, the S3 file location, configuration
+    #   options that are being sent to the device or fleet.
+    #
+    #   **Note:** Attributes can be updated only when the package version is
+    #   in a draft state.
+    #
+    #   The combined size of all the attributes on a package version is
+    #   limited to 3KB.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] action
+    #   The status that the package version should be assigned. For more
+    #   information, see [Package version lifecycle][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique case-sensitive identifier that you can provide to ensure
+    #   the idempotency of the request. Don't reuse this client token if a
+    #   new idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class UpdatePackageVersionRequest < Struct.new(
+      :package_name,
+      :version_name,
+      :description,
+      :attributes,
+      :action,
+      :client_token)
+      SENSITIVE = [:description, :attributes]
+      include Aws::Structure
+    end
+
+    class UpdatePackageVersionResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] template_name
     #   The name of the provisioning template.
     #   @return [String]
@@ -15832,6 +16470,17 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The request is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ValidationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An exception thrown when the version of an entity specified with the
     # `expectedVersion` parameter does not match the latest version in the
     # system.
@@ -15842,6 +16491,31 @@ module Aws::IoT
     #
     class VersionConflictException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration to manage IoT Job's package version reporting. If
+    # configured, Jobs updates the thing's reserved named shadow with the
+    # package version information up on successful job completion.
+    #
+    # **Note:** For each job, the destinationPackageVersions attribute has
+    # to be set with the correct data for Jobs to report to the thing
+    # shadow.
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether the Job is enabled or not.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the role that grants permission to
+    #   the IoT jobs service to update the reserved named shadow when the
+    #   job successfully completes.
+    #   @return [String]
+    #
+    class VersionUpdateByJobsConfig < Struct.new(
+      :enabled,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end

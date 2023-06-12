@@ -84,6 +84,8 @@ module Aws::LexModelsV2
             Aws::LexModelsV2::Endpoints::CreateSlot.build(context)
           when :create_slot_type
             Aws::LexModelsV2::Endpoints::CreateSlotType.build(context)
+          when :create_test_set_discrepancy_report
+            Aws::LexModelsV2::Endpoints::CreateTestSetDiscrepancyReport.build(context)
           when :create_upload_url
             Aws::LexModelsV2::Endpoints::CreateUploadUrl.build(context)
           when :delete_bot
@@ -110,6 +112,8 @@ module Aws::LexModelsV2
             Aws::LexModelsV2::Endpoints::DeleteSlot.build(context)
           when :delete_slot_type
             Aws::LexModelsV2::Endpoints::DeleteSlotType.build(context)
+          when :delete_test_set
+            Aws::LexModelsV2::Endpoints::DeleteTestSet.build(context)
           when :delete_utterances
             Aws::LexModelsV2::Endpoints::DeleteUtterances.build(context)
           when :describe_bot
@@ -136,6 +140,16 @@ module Aws::LexModelsV2
             Aws::LexModelsV2::Endpoints::DescribeSlot.build(context)
           when :describe_slot_type
             Aws::LexModelsV2::Endpoints::DescribeSlotType.build(context)
+          when :describe_test_execution
+            Aws::LexModelsV2::Endpoints::DescribeTestExecution.build(context)
+          when :describe_test_set
+            Aws::LexModelsV2::Endpoints::DescribeTestSet.build(context)
+          when :describe_test_set_discrepancy_report
+            Aws::LexModelsV2::Endpoints::DescribeTestSetDiscrepancyReport.build(context)
+          when :describe_test_set_generation
+            Aws::LexModelsV2::Endpoints::DescribeTestSetGeneration.build(context)
+          when :get_test_execution_artifacts_url
+            Aws::LexModelsV2::Endpoints::GetTestExecutionArtifactsUrl.build(context)
           when :list_aggregated_utterances
             Aws::LexModelsV2::Endpoints::ListAggregatedUtterances.build(context)
           when :list_bot_aliases
@@ -168,12 +182,24 @@ module Aws::LexModelsV2
             Aws::LexModelsV2::Endpoints::ListSlots.build(context)
           when :list_tags_for_resource
             Aws::LexModelsV2::Endpoints::ListTagsForResource.build(context)
+          when :list_test_execution_result_items
+            Aws::LexModelsV2::Endpoints::ListTestExecutionResultItems.build(context)
+          when :list_test_executions
+            Aws::LexModelsV2::Endpoints::ListTestExecutions.build(context)
+          when :list_test_set_records
+            Aws::LexModelsV2::Endpoints::ListTestSetRecords.build(context)
+          when :list_test_sets
+            Aws::LexModelsV2::Endpoints::ListTestSets.build(context)
           when :search_associated_transcripts
             Aws::LexModelsV2::Endpoints::SearchAssociatedTranscripts.build(context)
           when :start_bot_recommendation
             Aws::LexModelsV2::Endpoints::StartBotRecommendation.build(context)
           when :start_import
             Aws::LexModelsV2::Endpoints::StartImport.build(context)
+          when :start_test_execution
+            Aws::LexModelsV2::Endpoints::StartTestExecution.build(context)
+          when :start_test_set_generation
+            Aws::LexModelsV2::Endpoints::StartTestSetGeneration.build(context)
           when :stop_bot_recommendation
             Aws::LexModelsV2::Endpoints::StopBotRecommendation.build(context)
           when :tag_resource
@@ -198,6 +224,8 @@ module Aws::LexModelsV2
             Aws::LexModelsV2::Endpoints::UpdateSlot.build(context)
           when :update_slot_type
             Aws::LexModelsV2::Endpoints::UpdateSlotType.build(context)
+          when :update_test_set
+            Aws::LexModelsV2::Endpoints::UpdateTestSet.build(context)
           end
         end
       end

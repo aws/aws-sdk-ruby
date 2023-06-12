@@ -9119,8 +9119,9 @@ module Aws::QuickSight
     #   A Boolean that determines whether all dependencies of each resource
     #   ARN are recursively exported with the job. For example, say you
     #   provided a Dashboard ARN to the `ResourceArns` parameter. If you set
-    #   `IncludeAllDependencies` to `TRUE`, any theme, dataset, and dataource
-    #   resource that is a dependency of the dashboard is also exported.
+    #   `IncludeAllDependencies` to `TRUE`, any theme, dataset, and data
+    #   source resource that is a dependency of the dashboard is also
+    #   exported.
     #
     # @option params [required, String] :export_format
     #   The export data format.
@@ -9251,7 +9252,7 @@ module Aws::QuickSight
     #   asset changes caused by the failed job.
     #
     #   If you choose `DO_NOTHING`, failed import jobs will not attempt to
-    #   roll back any asset changes caused by the failed job, possibly leaving
+    #   roll back any asset changes caused by the failed job, possibly keeping
     #   the Amazon QuickSight account in an inconsistent state.
     #
     # @return [Types::StartAssetBundleImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -12148,7 +12149,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

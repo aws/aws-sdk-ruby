@@ -4794,7 +4794,7 @@ module Aws::DirectConnect
     # network connectivity for all virtual interfaces associated with the
     # connection for up to 30 seconds. To check whether your connection
     # supports jumbo frames, call DescribeConnections. To check whether your
-    # virtual q interface supports jumbo frames, call
+    # virtual interface supports jumbo frames, call
     # DescribeVirtualInterfaces.
     #
     # @option params [required, String] :virtual_interface_id
@@ -4912,7 +4912,7 @@ module Aws::DirectConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

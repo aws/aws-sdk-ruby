@@ -438,7 +438,7 @@ module Aws::Finspace
     #       federation_urn: "urn",
     #       federation_provider_name: "FederationProviderName",
     #       attribute_map: {
-    #         "FederationAttributeKey" => "url",
+    #         "FederationAttributeKey" => "FederationAttributeValue",
     #       },
     #     },
     #     superuser_parameters: {
@@ -464,6 +464,525 @@ module Aws::Finspace
       req.send_request(options)
     end
 
+    # Creates a changeset for a kdb database. A changeset allows you to add
+    # and delete existing files by using an ordered list of change requests.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier of the kdb environment.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the kdb database.
+    #
+    # @option params [required, Array<Types::ChangeRequest>] :change_requests
+    #   A list of change request objects that are run in order. A change
+    #   request object consists of changeType , s3Path, and a dbPath. A
+    #   changeType can has the following values:
+    #
+    #   * PUT – Adds or updates files in a database.
+    #
+    #   * DELETE – Deletes files in a database.
+    #
+    #   All the change requests require a mandatory *dbPath* attribute that
+    #   defines the path within the database directory. The *s3Path* attribute
+    #   defines the s3 source file path and is required for a PUT change type.
+    #
+    #   Here is an example of how you can use the change request object:
+    #
+    #   `[ \{ "changeType": "PUT", "s3Path":"s3://bucket/db/2020.01.02/",
+    #   "dbPath":"/2020.01.02/"\}, \{ "changeType": "PUT",
+    #   "s3Path":"s3://bucket/db/sym", "dbPath":"/"\}, \{ "changeType":
+    #   "DELETE", "dbPath": "/2020.01.01/"\} ]`
+    #
+    #   In this example, the first request with *PUT* change type allows you
+    #   to add files in the given s3Path under the *2020.01.02* partition of
+    #   the database. The second request with *PUT* change type allows you to
+    #   add a single sym file at database root location. The last request with
+    #   *DELETE* change type allows you to delete the files under the
+    #   *2020.01.01* partition of the database.
+    #
+    # @option params [required, String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateKxChangesetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateKxChangesetResponse#changeset_id #changeset_id} => String
+    #   * {Types::CreateKxChangesetResponse#database_name #database_name} => String
+    #   * {Types::CreateKxChangesetResponse#environment_id #environment_id} => String
+    #   * {Types::CreateKxChangesetResponse#change_requests #change_requests} => Array&lt;Types::ChangeRequest&gt;
+    #   * {Types::CreateKxChangesetResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::CreateKxChangesetResponse#last_modified_timestamp #last_modified_timestamp} => Time
+    #   * {Types::CreateKxChangesetResponse#status #status} => String
+    #   * {Types::CreateKxChangesetResponse#error_info #error_info} => Types::ErrorInfo
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_kx_changeset({
+    #     environment_id: "EnvironmentId", # required
+    #     database_name: "DatabaseName", # required
+    #     change_requests: [ # required
+    #       {
+    #         change_type: "PUT", # required, accepts PUT, DELETE
+    #         s3_path: "S3Path",
+    #         db_path: "DbPath", # required
+    #       },
+    #     ],
+    #     client_token: "ClientTokenString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.changeset_id #=> String
+    #   resp.database_name #=> String
+    #   resp.environment_id #=> String
+    #   resp.change_requests #=> Array
+    #   resp.change_requests[0].change_type #=> String, one of "PUT", "DELETE"
+    #   resp.change_requests[0].s3_path #=> String
+    #   resp.change_requests[0].db_path #=> String
+    #   resp.created_timestamp #=> Time
+    #   resp.last_modified_timestamp #=> Time
+    #   resp.status #=> String, one of "PENDING", "PROCESSING", "FAILED", "COMPLETED"
+    #   resp.error_info.error_message #=> String
+    #   resp.error_info.error_type #=> String, one of "The inputs to this request are invalid.", "Service limits have been exceeded.", "Missing required permission to perform this request.", "One or more inputs to this request were not found.", "The system temporarily lacks sufficient resources to process the request.", "An internal error has occurred.", "Cancelled", "A user recoverable error has occurred"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/CreateKxChangeset AWS API Documentation
+    #
+    # @overload create_kx_changeset(params = {})
+    # @param [Hash] params ({})
+    def create_kx_changeset(params = {}, options = {})
+      req = build_request(:create_kx_changeset, params)
+      req.send_request(options)
+    end
+
+    # Creates a new kdb cluster.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @option params [required, String] :cluster_name
+    #   A unique name for the cluster that you want to create.
+    #
+    # @option params [required, String] :cluster_type
+    #   Specifies the type of KDB database that is being created. The
+    #   following types are available:
+    #
+    #   * HDB – A Historical Database. The data is only accessible with
+    #     read-only permissions from one of the FinSpace managed kdb databases
+    #     mounted to the cluster.
+    #
+    #   * RDB – A Realtime Database. This type of database captures all the
+    #     data from a ticker plant and stores it in memory until the end of
+    #     day, after which it writes all of its data to a disk and reloads the
+    #     HDB. This cluster type requires local storage for temporary storage
+    #     of data during the savedown process. If you specify this field in
+    #     your request, you must provide the `savedownStorageConfiguration`
+    #     parameter.
+    #
+    #   * GATEWAY – A gateway cluster allows you to access data across
+    #     processes in kdb systems. It allows you to create your own routing
+    #     logic using the initialization scripts and custom code. This type of
+    #     cluster does not require a writable local storage.
+    #
+    # @option params [Array<Types::KxDatabaseConfiguration>] :databases
+    #   A list of databases that will be available for querying.
+    #
+    # @option params [Array<Types::KxCacheStorageConfiguration>] :cache_storage_configurations
+    #   The configurations for a read only cache storage associated with a
+    #   cluster. This cache will be stored as an FSx Lustre that reads from
+    #   the S3 store.
+    #
+    # @option params [Types::AutoScalingConfiguration] :auto_scaling_configuration
+    #   The configuration based on which FinSpace will scale in or scale out
+    #   nodes in your cluster.
+    #
+    # @option params [String] :cluster_description
+    #   A description of the cluster.
+    #
+    # @option params [required, Types::CapacityConfiguration] :capacity_configuration
+    #   A structure for the metadata of a cluster. It includes information
+    #   about like the CPUs needed, memory of instances, number of instances,
+    #   and the port used while establishing a connection.
+    #
+    # @option params [required, String] :release_label
+    #   The version of FinSpace managed kdb to run.
+    #
+    # @option params [Types::VpcConfiguration] :vpc_configuration
+    #   Configuration details about the network where the Privatelink endpoint
+    #   of the cluster resides.
+    #
+    # @option params [String] :initialization_script
+    #   Specifies a Q program that will be run at launch of a cluster. It is a
+    #   relative path within *.zip* file that contains the custom code, which
+    #   will be loaded on the cluster. It must include the file name itself.
+    #   For example, `somedir/init.q`.
+    #
+    # @option params [Array<Types::KxCommandLineArgument>] :command_line_arguments
+    #   Defines the key-value pairs to make them available inside the cluster.
+    #
+    # @option params [Types::CodeConfiguration] :code
+    #   The details of the custom code that you want to use inside a cluster
+    #   when analyzing a data. It consists of the S3 source bucket, location,
+    #   S3 object version, and the relative path from where the custom code is
+    #   loaded into the cluster.
+    #
+    # @option params [String] :execution_role
+    #   An IAM role that defines a set of permissions associated with a
+    #   cluster. These permissions are assumed when a cluster attempts to
+    #   access another cluster.
+    #
+    # @option params [Types::KxSavedownStorageConfiguration] :savedown_storage_configuration
+    #   The size and type of the temporary storage that is used to hold data
+    #   during the savedown process. This parameter is required when you
+    #   choose `clusterType` as RDB. All the data written to this storage
+    #   space is lost when the cluster node is restarted.
+    #
+    # @option params [required, String] :az_mode
+    #   The number of availability zones you want to assign per cluster. This
+    #   can be one of the following
+    #
+    #   * `SINGLE` – Assigns one availability zone per cluster.
+    #
+    #   * `MULTI` – Assigns all the availability zones per cluster.
+    #
+    # @option params [String] :availability_zone_id
+    #   The availability zone identifiers for the requested regions.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of key-value pairs to label the cluster. You can add up to 50
+    #   tags to a cluster.
+    #
+    # @return [Types::CreateKxClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateKxClusterResponse#environment_id #environment_id} => String
+    #   * {Types::CreateKxClusterResponse#status #status} => String
+    #   * {Types::CreateKxClusterResponse#status_reason #status_reason} => String
+    #   * {Types::CreateKxClusterResponse#cluster_name #cluster_name} => String
+    #   * {Types::CreateKxClusterResponse#cluster_type #cluster_type} => String
+    #   * {Types::CreateKxClusterResponse#databases #databases} => Array&lt;Types::KxDatabaseConfiguration&gt;
+    #   * {Types::CreateKxClusterResponse#cache_storage_configurations #cache_storage_configurations} => Array&lt;Types::KxCacheStorageConfiguration&gt;
+    #   * {Types::CreateKxClusterResponse#auto_scaling_configuration #auto_scaling_configuration} => Types::AutoScalingConfiguration
+    #   * {Types::CreateKxClusterResponse#cluster_description #cluster_description} => String
+    #   * {Types::CreateKxClusterResponse#capacity_configuration #capacity_configuration} => Types::CapacityConfiguration
+    #   * {Types::CreateKxClusterResponse#release_label #release_label} => String
+    #   * {Types::CreateKxClusterResponse#vpc_configuration #vpc_configuration} => Types::VpcConfiguration
+    #   * {Types::CreateKxClusterResponse#initialization_script #initialization_script} => String
+    #   * {Types::CreateKxClusterResponse#command_line_arguments #command_line_arguments} => Array&lt;Types::KxCommandLineArgument&gt;
+    #   * {Types::CreateKxClusterResponse#code #code} => Types::CodeConfiguration
+    #   * {Types::CreateKxClusterResponse#execution_role #execution_role} => String
+    #   * {Types::CreateKxClusterResponse#last_modified_timestamp #last_modified_timestamp} => Time
+    #   * {Types::CreateKxClusterResponse#savedown_storage_configuration #savedown_storage_configuration} => Types::KxSavedownStorageConfiguration
+    #   * {Types::CreateKxClusterResponse#az_mode #az_mode} => String
+    #   * {Types::CreateKxClusterResponse#availability_zone_id #availability_zone_id} => String
+    #   * {Types::CreateKxClusterResponse#created_timestamp #created_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_kx_cluster({
+    #     client_token: "ClientToken",
+    #     environment_id: "KxEnvironmentId", # required
+    #     cluster_name: "KxClusterName", # required
+    #     cluster_type: "HDB", # required, accepts HDB, RDB, GATEWAY
+    #     databases: [
+    #       {
+    #         database_name: "DatabaseName", # required
+    #         cache_configurations: [
+    #           {
+    #             cache_type: "KxCacheStorageType", # required
+    #             db_paths: ["DbPath"], # required
+    #           },
+    #         ],
+    #         changeset_id: "ChangesetId",
+    #       },
+    #     ],
+    #     cache_storage_configurations: [
+    #       {
+    #         type: "KxCacheStorageType", # required
+    #         size: 1, # required
+    #       },
+    #     ],
+    #     auto_scaling_configuration: {
+    #       min_node_count: 1,
+    #       max_node_count: 1,
+    #       auto_scaling_metric: "CPU_UTILIZATION_PERCENTAGE", # accepts CPU_UTILIZATION_PERCENTAGE
+    #       metric_target: 1.0,
+    #       scale_in_cooldown_seconds: 1.0,
+    #       scale_out_cooldown_seconds: 1.0,
+    #     },
+    #     cluster_description: "KxClusterDescription",
+    #     capacity_configuration: { # required
+    #       node_type: "NodeType",
+    #       node_count: 1,
+    #     },
+    #     release_label: "ReleaseLabel", # required
+    #     vpc_configuration: {
+    #       vpc_id: "VpcIdString",
+    #       security_group_ids: ["SecurityGroupIdString"],
+    #       subnet_ids: ["SubnetIdString"],
+    #       ip_address_type: "IP_V4", # accepts IP_V4
+    #     },
+    #     initialization_script: "InitializationScriptFilePath",
+    #     command_line_arguments: [
+    #       {
+    #         key: "KxCommandLineArgumentKey",
+    #         value: "KxCommandLineArgumentValue",
+    #       },
+    #     ],
+    #     code: {
+    #       s3_bucket: "S3Bucket",
+    #       s3_key: "S3Key",
+    #       s3_object_version: "S3ObjectVersion",
+    #     },
+    #     execution_role: "ExecutionRoleArn",
+    #     savedown_storage_configuration: {
+    #       type: "SDS01", # required, accepts SDS01
+    #       size: 1, # required
+    #     },
+    #     az_mode: "SINGLE", # required, accepts SINGLE, MULTI
+    #     availability_zone_id: "AvailabilityZoneId",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.environment_id #=> String
+    #   resp.status #=> String, one of "PENDING", "CREATING", "CREATE_FAILED", "RUNNING", "UPDATING", "DELETING", "DELETED", "DELETE_FAILED"
+    #   resp.status_reason #=> String
+    #   resp.cluster_name #=> String
+    #   resp.cluster_type #=> String, one of "HDB", "RDB", "GATEWAY"
+    #   resp.databases #=> Array
+    #   resp.databases[0].database_name #=> String
+    #   resp.databases[0].cache_configurations #=> Array
+    #   resp.databases[0].cache_configurations[0].cache_type #=> String
+    #   resp.databases[0].cache_configurations[0].db_paths #=> Array
+    #   resp.databases[0].cache_configurations[0].db_paths[0] #=> String
+    #   resp.databases[0].changeset_id #=> String
+    #   resp.cache_storage_configurations #=> Array
+    #   resp.cache_storage_configurations[0].type #=> String
+    #   resp.cache_storage_configurations[0].size #=> Integer
+    #   resp.auto_scaling_configuration.min_node_count #=> Integer
+    #   resp.auto_scaling_configuration.max_node_count #=> Integer
+    #   resp.auto_scaling_configuration.auto_scaling_metric #=> String, one of "CPU_UTILIZATION_PERCENTAGE"
+    #   resp.auto_scaling_configuration.metric_target #=> Float
+    #   resp.auto_scaling_configuration.scale_in_cooldown_seconds #=> Float
+    #   resp.auto_scaling_configuration.scale_out_cooldown_seconds #=> Float
+    #   resp.cluster_description #=> String
+    #   resp.capacity_configuration.node_type #=> String
+    #   resp.capacity_configuration.node_count #=> Integer
+    #   resp.release_label #=> String
+    #   resp.vpc_configuration.vpc_id #=> String
+    #   resp.vpc_configuration.security_group_ids #=> Array
+    #   resp.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.vpc_configuration.subnet_ids #=> Array
+    #   resp.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.vpc_configuration.ip_address_type #=> String, one of "IP_V4"
+    #   resp.initialization_script #=> String
+    #   resp.command_line_arguments #=> Array
+    #   resp.command_line_arguments[0].key #=> String
+    #   resp.command_line_arguments[0].value #=> String
+    #   resp.code.s3_bucket #=> String
+    #   resp.code.s3_key #=> String
+    #   resp.code.s3_object_version #=> String
+    #   resp.execution_role #=> String
+    #   resp.last_modified_timestamp #=> Time
+    #   resp.savedown_storage_configuration.type #=> String, one of "SDS01"
+    #   resp.savedown_storage_configuration.size #=> Integer
+    #   resp.az_mode #=> String, one of "SINGLE", "MULTI"
+    #   resp.availability_zone_id #=> String
+    #   resp.created_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/CreateKxCluster AWS API Documentation
+    #
+    # @overload create_kx_cluster(params = {})
+    # @param [Hash] params ({})
+    def create_kx_cluster(params = {}, options = {})
+      req = build_request(:create_kx_cluster, params)
+      req.send_request(options)
+    end
+
+    # Creates a new kdb database in the environment.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the kdb database.
+    #
+    # @option params [String] :description
+    #   A description of the database.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of key-value pairs to label the kdb database. You can add up to
+    #   50 tags to your kdb database
+    #
+    # @option params [required, String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateKxDatabaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateKxDatabaseResponse#database_name #database_name} => String
+    #   * {Types::CreateKxDatabaseResponse#database_arn #database_arn} => String
+    #   * {Types::CreateKxDatabaseResponse#environment_id #environment_id} => String
+    #   * {Types::CreateKxDatabaseResponse#description #description} => String
+    #   * {Types::CreateKxDatabaseResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::CreateKxDatabaseResponse#last_modified_timestamp #last_modified_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_kx_database({
+    #     environment_id: "EnvironmentId", # required
+    #     database_name: "DatabaseName", # required
+    #     description: "Description",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientTokenString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.database_name #=> String
+    #   resp.database_arn #=> String
+    #   resp.environment_id #=> String
+    #   resp.description #=> String
+    #   resp.created_timestamp #=> Time
+    #   resp.last_modified_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/CreateKxDatabase AWS API Documentation
+    #
+    # @overload create_kx_database(params = {})
+    # @param [Hash] params ({})
+    def create_kx_database(params = {}, options = {})
+      req = build_request(:create_kx_database, params)
+      req.send_request(options)
+    end
+
+    # Creates a managed kdb environment for the account.
+    #
+    # @option params [required, String] :name
+    #   The name of the kdb environment that you want to create.
+    #
+    # @option params [String] :description
+    #   A description for the kdb environment.
+    #
+    # @option params [required, String] :kms_key_id
+    #   The KMS key ID to encrypt your data in the FinSpace environment.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of key-value pairs to label the kdb environment. You can add up
+    #   to 50 tags to your kdb environment.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    # @return [Types::CreateKxEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateKxEnvironmentResponse#name #name} => String
+    #   * {Types::CreateKxEnvironmentResponse#status #status} => String
+    #   * {Types::CreateKxEnvironmentResponse#environment_id #environment_id} => String
+    #   * {Types::CreateKxEnvironmentResponse#description #description} => String
+    #   * {Types::CreateKxEnvironmentResponse#environment_arn #environment_arn} => String
+    #   * {Types::CreateKxEnvironmentResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::CreateKxEnvironmentResponse#creation_timestamp #creation_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_kx_environment({
+    #     name: "KxEnvironmentName", # required
+    #     description: "Description",
+    #     kms_key_id: "KmsKeyARN", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATE_REQUESTED", "CREATING", "CREATED", "DELETE_REQUESTED", "DELETING", "DELETED", "FAILED_CREATION", "RETRY_DELETION", "FAILED_DELETION", "UPDATE_NETWORK_REQUESTED", "UPDATING_NETWORK", "FAILED_UPDATING_NETWORK", "SUSPENDED"
+    #   resp.environment_id #=> String
+    #   resp.description #=> String
+    #   resp.environment_arn #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.creation_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/CreateKxEnvironment AWS API Documentation
+    #
+    # @overload create_kx_environment(params = {})
+    # @param [Hash] params ({})
+    def create_kx_environment(params = {}, options = {})
+      req = build_request(:create_kx_environment, params)
+      req.send_request(options)
+    end
+
+    # Creates a user in FinSpace kdb environment with an associated IAM
+    # role.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment where you want to create a
+    #   user.
+    #
+    # @option params [required, String] :user_name
+    #   A unique identifier for the user.
+    #
+    # @option params [required, String] :iam_role
+    #   The IAM role ARN that will be associated with the user.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of key-value pairs to label the user. You can add up to 50 tags
+    #   to a user.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    # @return [Types::CreateKxUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateKxUserResponse#user_name #user_name} => String
+    #   * {Types::CreateKxUserResponse#user_arn #user_arn} => String
+    #   * {Types::CreateKxUserResponse#environment_id #environment_id} => String
+    #   * {Types::CreateKxUserResponse#iam_role #iam_role} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_kx_user({
+    #     environment_id: "IdType", # required
+    #     user_name: "KxUserNameString", # required
+    #     iam_role: "RoleArn", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_name #=> String
+    #   resp.user_arn #=> String
+    #   resp.environment_id #=> String
+    #   resp.iam_role #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/CreateKxUser AWS API Documentation
+    #
+    # @overload create_kx_user(params = {})
+    # @param [Hash] params ({})
+    def create_kx_user(params = {}, options = {})
+      req = build_request(:create_kx_user, params)
+      req.send_request(options)
+    end
+
     # Delete an FinSpace environment.
     #
     # @option params [required, String] :environment_id
@@ -483,6 +1002,124 @@ module Aws::Finspace
     # @param [Hash] params ({})
     def delete_environment(params = {}, options = {})
       req = build_request(:delete_environment, params)
+      req.send_request(options)
+    end
+
+    # Deletes a kdb cluster.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the cluster that you want to delete.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_kx_cluster({
+    #     environment_id: "KxEnvironmentId", # required
+    #     cluster_name: "KxClusterName", # required
+    #     client_token: "ClientTokenString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteKxCluster AWS API Documentation
+    #
+    # @overload delete_kx_cluster(params = {})
+    # @param [Hash] params ({})
+    def delete_kx_cluster(params = {}, options = {})
+      req = build_request(:delete_kx_cluster, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified database and all of its associated data. This
+    # action is irreversible. You must copy any data out of the database
+    # before deleting it if the data is to be retained.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the kdb database that you want to delete.
+    #
+    # @option params [required, String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_kx_database({
+    #     environment_id: "EnvironmentId", # required
+    #     database_name: "DatabaseName", # required
+    #     client_token: "ClientTokenString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteKxDatabase AWS API Documentation
+    #
+    # @overload delete_kx_database(params = {})
+    # @param [Hash] params ({})
+    def delete_kx_database(params = {}, options = {})
+      req = build_request(:delete_kx_database, params)
+      req.send_request(options)
+    end
+
+    # Deletes the kdb environment. This action is irreversible. Deleting a
+    # kdb environment will remove all the associated data and any services
+    # running in it.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_kx_environment({
+    #     environment_id: "IdType", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteKxEnvironment AWS API Documentation
+    #
+    # @overload delete_kx_environment(params = {})
+    # @param [Hash] params ({})
+    def delete_kx_environment(params = {}, options = {})
+      req = build_request(:delete_kx_environment, params)
+      req.send_request(options)
+    end
+
+    # Deletes a user in the specified kdb environment.
+    #
+    # @option params [required, String] :user_name
+    #   A unique identifier for the user that you want to delete.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_kx_user({
+    #     user_name: "KxUserNameString", # required
+    #     environment_id: "IdType", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteKxUser AWS API Documentation
+    #
+    # @overload delete_kx_user(params = {})
+    # @param [Hash] params ({})
+    def delete_kx_user(params = {}, options = {})
+      req = build_request(:delete_kx_user, params)
       req.send_request(options)
     end
 
@@ -506,7 +1143,7 @@ module Aws::Finspace
     #   resp.environment.name #=> String
     #   resp.environment.environment_id #=> String
     #   resp.environment.aws_account_id #=> String
-    #   resp.environment.status #=> String, one of "CREATE_REQUESTED", "CREATING", "CREATED", "DELETE_REQUESTED", "DELETING", "DELETED", "FAILED_CREATION", "RETRY_DELETION", "FAILED_DELETION", "SUSPENDED"
+    #   resp.environment.status #=> String, one of "CREATE_REQUESTED", "CREATING", "CREATED", "DELETE_REQUESTED", "DELETING", "DELETED", "FAILED_CREATION", "RETRY_DELETION", "FAILED_DELETION", "UPDATE_NETWORK_REQUESTED", "UPDATING_NETWORK", "FAILED_UPDATING_NETWORK", "SUSPENDED"
     #   resp.environment.environment_url #=> String
     #   resp.environment.description #=> String
     #   resp.environment.environment_arn #=> String
@@ -531,13 +1168,357 @@ module Aws::Finspace
       req.send_request(options)
     end
 
+    # Returns information about a kdb changeset.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the kdb database.
+    #
+    # @option params [required, String] :changeset_id
+    #   A unique identifier of the changeset for which you want to retrieve
+    #   data.
+    #
+    # @return [Types::GetKxChangesetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetKxChangesetResponse#changeset_id #changeset_id} => String
+    #   * {Types::GetKxChangesetResponse#database_name #database_name} => String
+    #   * {Types::GetKxChangesetResponse#environment_id #environment_id} => String
+    #   * {Types::GetKxChangesetResponse#change_requests #change_requests} => Array&lt;Types::ChangeRequest&gt;
+    #   * {Types::GetKxChangesetResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::GetKxChangesetResponse#active_from_timestamp #active_from_timestamp} => Time
+    #   * {Types::GetKxChangesetResponse#last_modified_timestamp #last_modified_timestamp} => Time
+    #   * {Types::GetKxChangesetResponse#status #status} => String
+    #   * {Types::GetKxChangesetResponse#error_info #error_info} => Types::ErrorInfo
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_kx_changeset({
+    #     environment_id: "EnvironmentId", # required
+    #     database_name: "DatabaseName", # required
+    #     changeset_id: "ChangesetId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.changeset_id #=> String
+    #   resp.database_name #=> String
+    #   resp.environment_id #=> String
+    #   resp.change_requests #=> Array
+    #   resp.change_requests[0].change_type #=> String, one of "PUT", "DELETE"
+    #   resp.change_requests[0].s3_path #=> String
+    #   resp.change_requests[0].db_path #=> String
+    #   resp.created_timestamp #=> Time
+    #   resp.active_from_timestamp #=> Time
+    #   resp.last_modified_timestamp #=> Time
+    #   resp.status #=> String, one of "PENDING", "PROCESSING", "FAILED", "COMPLETED"
+    #   resp.error_info.error_message #=> String
+    #   resp.error_info.error_type #=> String, one of "The inputs to this request are invalid.", "Service limits have been exceeded.", "Missing required permission to perform this request.", "One or more inputs to this request were not found.", "The system temporarily lacks sufficient resources to process the request.", "An internal error has occurred.", "Cancelled", "A user recoverable error has occurred"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/GetKxChangeset AWS API Documentation
+    #
+    # @overload get_kx_changeset(params = {})
+    # @param [Hash] params ({})
+    def get_kx_changeset(params = {}, options = {})
+      req = build_request(:get_kx_changeset, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a kdb cluster.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the cluster that you want to retrieve.
+    #
+    # @return [Types::GetKxClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetKxClusterResponse#status #status} => String
+    #   * {Types::GetKxClusterResponse#status_reason #status_reason} => String
+    #   * {Types::GetKxClusterResponse#cluster_name #cluster_name} => String
+    #   * {Types::GetKxClusterResponse#cluster_type #cluster_type} => String
+    #   * {Types::GetKxClusterResponse#databases #databases} => Array&lt;Types::KxDatabaseConfiguration&gt;
+    #   * {Types::GetKxClusterResponse#cache_storage_configurations #cache_storage_configurations} => Array&lt;Types::KxCacheStorageConfiguration&gt;
+    #   * {Types::GetKxClusterResponse#auto_scaling_configuration #auto_scaling_configuration} => Types::AutoScalingConfiguration
+    #   * {Types::GetKxClusterResponse#cluster_description #cluster_description} => String
+    #   * {Types::GetKxClusterResponse#capacity_configuration #capacity_configuration} => Types::CapacityConfiguration
+    #   * {Types::GetKxClusterResponse#release_label #release_label} => String
+    #   * {Types::GetKxClusterResponse#vpc_configuration #vpc_configuration} => Types::VpcConfiguration
+    #   * {Types::GetKxClusterResponse#initialization_script #initialization_script} => String
+    #   * {Types::GetKxClusterResponse#command_line_arguments #command_line_arguments} => Array&lt;Types::KxCommandLineArgument&gt;
+    #   * {Types::GetKxClusterResponse#code #code} => Types::CodeConfiguration
+    #   * {Types::GetKxClusterResponse#execution_role #execution_role} => String
+    #   * {Types::GetKxClusterResponse#last_modified_timestamp #last_modified_timestamp} => Time
+    #   * {Types::GetKxClusterResponse#savedown_storage_configuration #savedown_storage_configuration} => Types::KxSavedownStorageConfiguration
+    #   * {Types::GetKxClusterResponse#az_mode #az_mode} => String
+    #   * {Types::GetKxClusterResponse#availability_zone_id #availability_zone_id} => String
+    #   * {Types::GetKxClusterResponse#created_timestamp #created_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_kx_cluster({
+    #     environment_id: "KxEnvironmentId", # required
+    #     cluster_name: "KxClusterName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "PENDING", "CREATING", "CREATE_FAILED", "RUNNING", "UPDATING", "DELETING", "DELETED", "DELETE_FAILED"
+    #   resp.status_reason #=> String
+    #   resp.cluster_name #=> String
+    #   resp.cluster_type #=> String, one of "HDB", "RDB", "GATEWAY"
+    #   resp.databases #=> Array
+    #   resp.databases[0].database_name #=> String
+    #   resp.databases[0].cache_configurations #=> Array
+    #   resp.databases[0].cache_configurations[0].cache_type #=> String
+    #   resp.databases[0].cache_configurations[0].db_paths #=> Array
+    #   resp.databases[0].cache_configurations[0].db_paths[0] #=> String
+    #   resp.databases[0].changeset_id #=> String
+    #   resp.cache_storage_configurations #=> Array
+    #   resp.cache_storage_configurations[0].type #=> String
+    #   resp.cache_storage_configurations[0].size #=> Integer
+    #   resp.auto_scaling_configuration.min_node_count #=> Integer
+    #   resp.auto_scaling_configuration.max_node_count #=> Integer
+    #   resp.auto_scaling_configuration.auto_scaling_metric #=> String, one of "CPU_UTILIZATION_PERCENTAGE"
+    #   resp.auto_scaling_configuration.metric_target #=> Float
+    #   resp.auto_scaling_configuration.scale_in_cooldown_seconds #=> Float
+    #   resp.auto_scaling_configuration.scale_out_cooldown_seconds #=> Float
+    #   resp.cluster_description #=> String
+    #   resp.capacity_configuration.node_type #=> String
+    #   resp.capacity_configuration.node_count #=> Integer
+    #   resp.release_label #=> String
+    #   resp.vpc_configuration.vpc_id #=> String
+    #   resp.vpc_configuration.security_group_ids #=> Array
+    #   resp.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.vpc_configuration.subnet_ids #=> Array
+    #   resp.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.vpc_configuration.ip_address_type #=> String, one of "IP_V4"
+    #   resp.initialization_script #=> String
+    #   resp.command_line_arguments #=> Array
+    #   resp.command_line_arguments[0].key #=> String
+    #   resp.command_line_arguments[0].value #=> String
+    #   resp.code.s3_bucket #=> String
+    #   resp.code.s3_key #=> String
+    #   resp.code.s3_object_version #=> String
+    #   resp.execution_role #=> String
+    #   resp.last_modified_timestamp #=> Time
+    #   resp.savedown_storage_configuration.type #=> String, one of "SDS01"
+    #   resp.savedown_storage_configuration.size #=> Integer
+    #   resp.az_mode #=> String, one of "SINGLE", "MULTI"
+    #   resp.availability_zone_id #=> String
+    #   resp.created_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/GetKxCluster AWS API Documentation
+    #
+    # @overload get_kx_cluster(params = {})
+    # @param [Hash] params ({})
+    def get_kx_cluster(params = {}, options = {})
+      req = build_request(:get_kx_cluster, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a connection string for a user to connect to a kdb cluster.
+    # You must call this API using the same role that you have defined while
+    # creating a user.
+    #
+    # @option params [required, String] :user_arn
+    #   The Amazon Resource Name (ARN) that identifies the user. For more
+    #   information about ARNs and how to use ARNs in policies, see [IAM
+    #   Identifiers](IAM/latest/UserGuide/reference_identifiers.html) in the
+    #   *IAM User Guide*.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @option params [required, String] :cluster_name
+    #   A name of the kdb cluster.
+    #
+    # @return [Types::GetKxConnectionStringResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetKxConnectionStringResponse#signed_connection_string #signed_connection_string} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_kx_connection_string({
+    #     user_arn: "KxUserArn", # required
+    #     environment_id: "IdType", # required
+    #     cluster_name: "KxClusterName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.signed_connection_string #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/GetKxConnectionString AWS API Documentation
+    #
+    # @overload get_kx_connection_string(params = {})
+    # @param [Hash] params ({})
+    def get_kx_connection_string(params = {}, options = {})
+      req = build_request(:get_kx_connection_string, params)
+      req.send_request(options)
+    end
+
+    # Returns database information for the specified environment ID.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the kdb database.
+    #
+    # @return [Types::GetKxDatabaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetKxDatabaseResponse#database_name #database_name} => String
+    #   * {Types::GetKxDatabaseResponse#database_arn #database_arn} => String
+    #   * {Types::GetKxDatabaseResponse#environment_id #environment_id} => String
+    #   * {Types::GetKxDatabaseResponse#description #description} => String
+    #   * {Types::GetKxDatabaseResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::GetKxDatabaseResponse#last_modified_timestamp #last_modified_timestamp} => Time
+    #   * {Types::GetKxDatabaseResponse#last_completed_changeset_id #last_completed_changeset_id} => String
+    #   * {Types::GetKxDatabaseResponse#num_bytes #num_bytes} => Integer
+    #   * {Types::GetKxDatabaseResponse#num_changesets #num_changesets} => Integer
+    #   * {Types::GetKxDatabaseResponse#num_files #num_files} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_kx_database({
+    #     environment_id: "EnvironmentId", # required
+    #     database_name: "DatabaseName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.database_name #=> String
+    #   resp.database_arn #=> String
+    #   resp.environment_id #=> String
+    #   resp.description #=> String
+    #   resp.created_timestamp #=> Time
+    #   resp.last_modified_timestamp #=> Time
+    #   resp.last_completed_changeset_id #=> String
+    #   resp.num_bytes #=> Integer
+    #   resp.num_changesets #=> Integer
+    #   resp.num_files #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/GetKxDatabase AWS API Documentation
+    #
+    # @overload get_kx_database(params = {})
+    # @param [Hash] params ({})
+    def get_kx_database(params = {}, options = {})
+      req = build_request(:get_kx_database, params)
+      req.send_request(options)
+    end
+
+    # Retrieves all the information for the specified kdb environment.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @return [Types::GetKxEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetKxEnvironmentResponse#name #name} => String
+    #   * {Types::GetKxEnvironmentResponse#environment_id #environment_id} => String
+    #   * {Types::GetKxEnvironmentResponse#aws_account_id #aws_account_id} => String
+    #   * {Types::GetKxEnvironmentResponse#status #status} => String
+    #   * {Types::GetKxEnvironmentResponse#tgw_status #tgw_status} => String
+    #   * {Types::GetKxEnvironmentResponse#dns_status #dns_status} => String
+    #   * {Types::GetKxEnvironmentResponse#error_message #error_message} => String
+    #   * {Types::GetKxEnvironmentResponse#description #description} => String
+    #   * {Types::GetKxEnvironmentResponse#environment_arn #environment_arn} => String
+    #   * {Types::GetKxEnvironmentResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::GetKxEnvironmentResponse#dedicated_service_account_id #dedicated_service_account_id} => String
+    #   * {Types::GetKxEnvironmentResponse#transit_gateway_configuration #transit_gateway_configuration} => Types::TransitGatewayConfiguration
+    #   * {Types::GetKxEnvironmentResponse#custom_dns_configuration #custom_dns_configuration} => Array&lt;Types::CustomDNSServer&gt;
+    #   * {Types::GetKxEnvironmentResponse#creation_timestamp #creation_timestamp} => Time
+    #   * {Types::GetKxEnvironmentResponse#update_timestamp #update_timestamp} => Time
+    #   * {Types::GetKxEnvironmentResponse#availability_zone_ids #availability_zone_ids} => Array&lt;String&gt;
+    #   * {Types::GetKxEnvironmentResponse#certificate_authority_arn #certificate_authority_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_kx_environment({
+    #     environment_id: "IdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.environment_id #=> String
+    #   resp.aws_account_id #=> String
+    #   resp.status #=> String, one of "CREATE_REQUESTED", "CREATING", "CREATED", "DELETE_REQUESTED", "DELETING", "DELETED", "FAILED_CREATION", "RETRY_DELETION", "FAILED_DELETION", "UPDATE_NETWORK_REQUESTED", "UPDATING_NETWORK", "FAILED_UPDATING_NETWORK", "SUSPENDED"
+    #   resp.tgw_status #=> String, one of "NONE", "UPDATE_REQUESTED", "UPDATING", "FAILED_UPDATE", "SUCCESSFULLY_UPDATED"
+    #   resp.dns_status #=> String, one of "NONE", "UPDATE_REQUESTED", "UPDATING", "FAILED_UPDATE", "SUCCESSFULLY_UPDATED"
+    #   resp.error_message #=> String
+    #   resp.description #=> String
+    #   resp.environment_arn #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.dedicated_service_account_id #=> String
+    #   resp.transit_gateway_configuration.transit_gateway_id #=> String
+    #   resp.transit_gateway_configuration.routable_cidr_space #=> String
+    #   resp.custom_dns_configuration #=> Array
+    #   resp.custom_dns_configuration[0].custom_dns_server_name #=> String
+    #   resp.custom_dns_configuration[0].custom_dns_server_ip #=> String
+    #   resp.creation_timestamp #=> Time
+    #   resp.update_timestamp #=> Time
+    #   resp.availability_zone_ids #=> Array
+    #   resp.availability_zone_ids[0] #=> String
+    #   resp.certificate_authority_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/GetKxEnvironment AWS API Documentation
+    #
+    # @overload get_kx_environment(params = {})
+    # @param [Hash] params ({})
+    def get_kx_environment(params = {}, options = {})
+      req = build_request(:get_kx_environment, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about the specified kdb user.
+    #
+    # @option params [required, String] :user_name
+    #   A unique identifier for the user.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @return [Types::GetKxUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetKxUserResponse#user_name #user_name} => String
+    #   * {Types::GetKxUserResponse#user_arn #user_arn} => String
+    #   * {Types::GetKxUserResponse#environment_id #environment_id} => String
+    #   * {Types::GetKxUserResponse#iam_role #iam_role} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_kx_user({
+    #     user_name: "KxUserNameString", # required
+    #     environment_id: "IdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_name #=> String
+    #   resp.user_arn #=> String
+    #   resp.environment_id #=> String
+    #   resp.iam_role #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/GetKxUser AWS API Documentation
+    #
+    # @overload get_kx_user(params = {})
+    # @param [Hash] params ({})
+    def get_kx_user(params = {}, options = {})
+      req = build_request(:get_kx_user, params)
+      req.send_request(options)
+    end
+
     # A list of all of your FinSpace environments.
     #
     # @option params [String] :next_token
     #   A token generated by FinSpace that specifies where to continue
     #   pagination if a previous request was truncated. To get the next set of
-    #   pages, pass in the nextToken value from the response object of the
-    #   previous page call.
+    #   pages, pass in the `nextToken`nextToken value from the response object
+    #   of the previous page call.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in this request.
@@ -560,7 +1541,7 @@ module Aws::Finspace
     #   resp.environments[0].name #=> String
     #   resp.environments[0].environment_id #=> String
     #   resp.environments[0].aws_account_id #=> String
-    #   resp.environments[0].status #=> String, one of "CREATE_REQUESTED", "CREATING", "CREATED", "DELETE_REQUESTED", "DELETING", "DELETED", "FAILED_CREATION", "RETRY_DELETION", "FAILED_DELETION", "SUSPENDED"
+    #   resp.environments[0].status #=> String, one of "CREATE_REQUESTED", "CREATING", "CREATED", "DELETE_REQUESTED", "DELETING", "DELETED", "FAILED_CREATION", "RETRY_DELETION", "FAILED_DELETION", "UPDATE_NETWORK_REQUESTED", "UPDATING_NETWORK", "FAILED_UPDATING_NETWORK", "SUSPENDED"
     #   resp.environments[0].environment_url #=> String
     #   resp.environments[0].description #=> String
     #   resp.environments[0].environment_arn #=> String
@@ -586,6 +1567,317 @@ module Aws::Finspace
       req.send_request(options)
     end
 
+    # Returns a list of all the changesets for a database.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the kdb database.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates where a results page should begin.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this request.
+    #
+    # @return [Types::ListKxChangesetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListKxChangesetsResponse#kx_changesets #kx_changesets} => Array&lt;Types::KxChangesetListEntry&gt;
+    #   * {Types::ListKxChangesetsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_kx_changesets({
+    #     environment_id: "EnvironmentId", # required
+    #     database_name: "DatabaseName", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.kx_changesets #=> Array
+    #   resp.kx_changesets[0].changeset_id #=> String
+    #   resp.kx_changesets[0].created_timestamp #=> Time
+    #   resp.kx_changesets[0].active_from_timestamp #=> Time
+    #   resp.kx_changesets[0].last_modified_timestamp #=> Time
+    #   resp.kx_changesets[0].status #=> String, one of "PENDING", "PROCESSING", "FAILED", "COMPLETED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/ListKxChangesets AWS API Documentation
+    #
+    # @overload list_kx_changesets(params = {})
+    # @param [Hash] params ({})
+    def list_kx_changesets(params = {}, options = {})
+      req = build_request(:list_kx_changesets, params)
+      req.send_request(options)
+    end
+
+    # Lists all the nodes in a kdb cluster.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @option params [required, String] :cluster_name
+    #   A unique name for the cluster.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates where a results page should begin.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this request.
+    #
+    # @return [Types::ListKxClusterNodesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListKxClusterNodesResponse#nodes #nodes} => Array&lt;Types::KxNode&gt;
+    #   * {Types::ListKxClusterNodesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_kx_cluster_nodes({
+    #     environment_id: "KxEnvironmentId", # required
+    #     cluster_name: "KxClusterName", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.nodes #=> Array
+    #   resp.nodes[0].node_id #=> String
+    #   resp.nodes[0].availability_zone_id #=> String
+    #   resp.nodes[0].launch_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/ListKxClusterNodes AWS API Documentation
+    #
+    # @overload list_kx_cluster_nodes(params = {})
+    # @param [Hash] params ({})
+    def list_kx_cluster_nodes(params = {}, options = {})
+      req = build_request(:list_kx_cluster_nodes, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of clusters.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @option params [String] :cluster_type
+    #   Specifies the type of KDB database that is being created. The
+    #   following types are available:
+    #
+    #   * HDB – A Historical Database. The data is only accessible with
+    #     read-only permissions from one of the FinSpace managed kdb databases
+    #     mounted to the cluster.
+    #
+    #   * RDB – A Realtime Database. This type of database captures all the
+    #     data from a ticker plant and stores it in memory until the end of
+    #     day, after which it writes all of its data to a disk and reloads the
+    #     HDB. This cluster type requires local storage for temporary storage
+    #     of data during the savedown process. If you specify this field in
+    #     your request, you must provide the `savedownStorageConfiguration`
+    #     parameter.
+    #
+    #   * GATEWAY – A gateway cluster allows you to access data across
+    #     processes in kdb systems. It allows you to create your own routing
+    #     logic using the initialization scripts and custom code. This type of
+    #     cluster does not require a writable local storage.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this request.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates where a results page should begin.
+    #
+    # @return [Types::ListKxClustersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListKxClustersResponse#kx_cluster_summaries #kx_cluster_summaries} => Array&lt;Types::KxCluster&gt;
+    #   * {Types::ListKxClustersResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_kx_clusters({
+    #     environment_id: "KxEnvironmentId", # required
+    #     cluster_type: "HDB", # accepts HDB, RDB, GATEWAY
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.kx_cluster_summaries #=> Array
+    #   resp.kx_cluster_summaries[0].status #=> String, one of "PENDING", "CREATING", "CREATE_FAILED", "RUNNING", "UPDATING", "DELETING", "DELETED", "DELETE_FAILED"
+    #   resp.kx_cluster_summaries[0].status_reason #=> String
+    #   resp.kx_cluster_summaries[0].cluster_name #=> String
+    #   resp.kx_cluster_summaries[0].cluster_type #=> String, one of "HDB", "RDB", "GATEWAY"
+    #   resp.kx_cluster_summaries[0].cluster_description #=> String
+    #   resp.kx_cluster_summaries[0].release_label #=> String
+    #   resp.kx_cluster_summaries[0].initialization_script #=> String
+    #   resp.kx_cluster_summaries[0].execution_role #=> String
+    #   resp.kx_cluster_summaries[0].az_mode #=> String, one of "SINGLE", "MULTI"
+    #   resp.kx_cluster_summaries[0].availability_zone_id #=> String
+    #   resp.kx_cluster_summaries[0].last_modified_timestamp #=> Time
+    #   resp.kx_cluster_summaries[0].created_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/ListKxClusters AWS API Documentation
+    #
+    # @overload list_kx_clusters(params = {})
+    # @param [Hash] params ({})
+    def list_kx_clusters(params = {}, options = {})
+      req = build_request(:list_kx_clusters, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of all the databases in the kdb environment.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates where a results page should begin.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this request.
+    #
+    # @return [Types::ListKxDatabasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListKxDatabasesResponse#kx_databases #kx_databases} => Array&lt;Types::KxDatabaseListEntry&gt;
+    #   * {Types::ListKxDatabasesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_kx_databases({
+    #     environment_id: "EnvironmentId", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.kx_databases #=> Array
+    #   resp.kx_databases[0].database_name #=> String
+    #   resp.kx_databases[0].created_timestamp #=> Time
+    #   resp.kx_databases[0].last_modified_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/ListKxDatabases AWS API Documentation
+    #
+    # @overload list_kx_databases(params = {})
+    # @param [Hash] params ({})
+    def list_kx_databases(params = {}, options = {})
+      req = build_request(:list_kx_databases, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of kdb environments created in an account.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates where a results page should begin.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this request.
+    #
+    # @return [Types::ListKxEnvironmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListKxEnvironmentsResponse#environments #environments} => Array&lt;Types::KxEnvironment&gt;
+    #   * {Types::ListKxEnvironmentsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_kx_environments({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.environments #=> Array
+    #   resp.environments[0].name #=> String
+    #   resp.environments[0].environment_id #=> String
+    #   resp.environments[0].aws_account_id #=> String
+    #   resp.environments[0].status #=> String, one of "CREATE_REQUESTED", "CREATING", "CREATED", "DELETE_REQUESTED", "DELETING", "DELETED", "FAILED_CREATION", "RETRY_DELETION", "FAILED_DELETION", "UPDATE_NETWORK_REQUESTED", "UPDATING_NETWORK", "FAILED_UPDATING_NETWORK", "SUSPENDED"
+    #   resp.environments[0].tgw_status #=> String, one of "NONE", "UPDATE_REQUESTED", "UPDATING", "FAILED_UPDATE", "SUCCESSFULLY_UPDATED"
+    #   resp.environments[0].dns_status #=> String, one of "NONE", "UPDATE_REQUESTED", "UPDATING", "FAILED_UPDATE", "SUCCESSFULLY_UPDATED"
+    #   resp.environments[0].error_message #=> String
+    #   resp.environments[0].description #=> String
+    #   resp.environments[0].environment_arn #=> String
+    #   resp.environments[0].kms_key_id #=> String
+    #   resp.environments[0].dedicated_service_account_id #=> String
+    #   resp.environments[0].transit_gateway_configuration.transit_gateway_id #=> String
+    #   resp.environments[0].transit_gateway_configuration.routable_cidr_space #=> String
+    #   resp.environments[0].custom_dns_configuration #=> Array
+    #   resp.environments[0].custom_dns_configuration[0].custom_dns_server_name #=> String
+    #   resp.environments[0].custom_dns_configuration[0].custom_dns_server_ip #=> String
+    #   resp.environments[0].creation_timestamp #=> Time
+    #   resp.environments[0].update_timestamp #=> Time
+    #   resp.environments[0].availability_zone_ids #=> Array
+    #   resp.environments[0].availability_zone_ids[0] #=> String
+    #   resp.environments[0].certificate_authority_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/ListKxEnvironments AWS API Documentation
+    #
+    # @overload list_kx_environments(params = {})
+    # @param [Hash] params ({})
+    def list_kx_environments(params = {}, options = {})
+      req = build_request(:list_kx_environments, params)
+      req.send_request(options)
+    end
+
+    # Lists all the users in a kdb environment.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates where a results page should begin.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this request.
+    #
+    # @return [Types::ListKxUsersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListKxUsersResponse#users #users} => Array&lt;Types::KxUser&gt;
+    #   * {Types::ListKxUsersResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_kx_users({
+    #     environment_id: "IdType", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.users #=> Array
+    #   resp.users[0].user_arn #=> String
+    #   resp.users[0].user_name #=> String
+    #   resp.users[0].iam_role #=> String
+    #   resp.users[0].create_timestamp #=> Time
+    #   resp.users[0].update_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/ListKxUsers AWS API Documentation
+    #
+    # @overload list_kx_users(params = {})
+    # @param [Hash] params ({})
+    def list_kx_users(params = {}, options = {})
+      req = build_request(:list_kx_users, params)
+      req.send_request(options)
+    end
+
     # A list of all tags for a resource.
     #
     # @option params [required, String] :resource_arn
@@ -598,7 +1890,7 @@ module Aws::Finspace
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
-    #     resource_arn: "EnvironmentArn", # required
+    #     resource_arn: "FinSpaceTaggableArn", # required
     #   })
     #
     # @example Response structure
@@ -628,7 +1920,7 @@ module Aws::Finspace
     # @example Request syntax with placeholder values
     #
     #   resp = client.tag_resource({
-    #     resource_arn: "EnvironmentArn", # required
+    #     resource_arn: "FinSpaceTaggableArn", # required
     #     tags: { # required
     #       "TagKey" => "TagValue",
     #     },
@@ -657,7 +1949,7 @@ module Aws::Finspace
     # @example Request syntax with placeholder values
     #
     #   resp = client.untag_resource({
-    #     resource_arn: "EnvironmentArn", # required
+    #     resource_arn: "FinSpaceTaggableArn", # required
     #     tag_keys: ["TagKey"], # required
     #   })
     #
@@ -711,7 +2003,7 @@ module Aws::Finspace
     #       federation_urn: "urn",
     #       federation_provider_name: "FederationProviderName",
     #       attribute_map: {
-    #         "FederationAttributeKey" => "url",
+    #         "FederationAttributeKey" => "FederationAttributeValue",
     #       },
     #     },
     #   })
@@ -721,7 +2013,7 @@ module Aws::Finspace
     #   resp.environment.name #=> String
     #   resp.environment.environment_id #=> String
     #   resp.environment.aws_account_id #=> String
-    #   resp.environment.status #=> String, one of "CREATE_REQUESTED", "CREATING", "CREATED", "DELETE_REQUESTED", "DELETING", "DELETED", "FAILED_CREATION", "RETRY_DELETION", "FAILED_DELETION", "SUSPENDED"
+    #   resp.environment.status #=> String, one of "CREATE_REQUESTED", "CREATING", "CREATED", "DELETE_REQUESTED", "DELETING", "DELETED", "FAILED_CREATION", "RETRY_DELETION", "FAILED_DELETION", "UPDATE_NETWORK_REQUESTED", "UPDATING_NETWORK", "FAILED_UPDATING_NETWORK", "SUSPENDED"
     #   resp.environment.environment_url #=> String
     #   resp.environment.description #=> String
     #   resp.environment.environment_arn #=> String
@@ -746,6 +2038,318 @@ module Aws::Finspace
       req.send_request(options)
     end
 
+    # Updates the databases mounted on a kdb cluster, which includes the
+    # `changesetId` and all the dbPaths to be cached. This API does not
+    # allow you to change a database name or add a database if you created a
+    # cluster without one.
+    #
+    # Using this API you can point a cluster to a different changeset and
+    # modify a list of partitions being cached.
+    #
+    # @option params [required, String] :environment_id
+    #   The unique identifier of a kdb environment.
+    #
+    # @option params [required, String] :cluster_name
+    #   A unique name for the cluster that you want to modify.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    # @option params [required, Array<Types::KxDatabaseConfiguration>] :databases
+    #   The structure of databases mounted on the cluster.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_kx_cluster_databases({
+    #     environment_id: "KxEnvironmentId", # required
+    #     cluster_name: "KxClusterName", # required
+    #     client_token: "ClientTokenString",
+    #     databases: [ # required
+    #       {
+    #         database_name: "DatabaseName", # required
+    #         cache_configurations: [
+    #           {
+    #             cache_type: "KxCacheStorageType", # required
+    #             db_paths: ["DbPath"], # required
+    #           },
+    #         ],
+    #         changeset_id: "ChangesetId",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateKxClusterDatabases AWS API Documentation
+    #
+    # @overload update_kx_cluster_databases(params = {})
+    # @param [Hash] params ({})
+    def update_kx_cluster_databases(params = {}, options = {})
+      req = build_request(:update_kx_cluster_databases, params)
+      req.send_request(options)
+    end
+
+    # Updates information for the given kdb database.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the kdb database.
+    #
+    # @option params [String] :description
+    #   A description of the database.
+    #
+    # @option params [required, String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateKxDatabaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateKxDatabaseResponse#database_name #database_name} => String
+    #   * {Types::UpdateKxDatabaseResponse#environment_id #environment_id} => String
+    #   * {Types::UpdateKxDatabaseResponse#description #description} => String
+    #   * {Types::UpdateKxDatabaseResponse#last_modified_timestamp #last_modified_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_kx_database({
+    #     environment_id: "EnvironmentId", # required
+    #     database_name: "DatabaseName", # required
+    #     description: "Description",
+    #     client_token: "ClientTokenString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.database_name #=> String
+    #   resp.environment_id #=> String
+    #   resp.description #=> String
+    #   resp.last_modified_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateKxDatabase AWS API Documentation
+    #
+    # @overload update_kx_database(params = {})
+    # @param [Hash] params ({})
+    def update_kx_database(params = {}, options = {})
+      req = build_request(:update_kx_database, params)
+      req.send_request(options)
+    end
+
+    # Updates information for the given kdb environment.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @option params [String] :name
+    #   The name of the kdb environment.
+    #
+    # @option params [String] :description
+    #   A description of the kdb environment.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    # @return [Types::UpdateKxEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateKxEnvironmentResponse#name #name} => String
+    #   * {Types::UpdateKxEnvironmentResponse#environment_id #environment_id} => String
+    #   * {Types::UpdateKxEnvironmentResponse#aws_account_id #aws_account_id} => String
+    #   * {Types::UpdateKxEnvironmentResponse#status #status} => String
+    #   * {Types::UpdateKxEnvironmentResponse#tgw_status #tgw_status} => String
+    #   * {Types::UpdateKxEnvironmentResponse#dns_status #dns_status} => String
+    #   * {Types::UpdateKxEnvironmentResponse#error_message #error_message} => String
+    #   * {Types::UpdateKxEnvironmentResponse#description #description} => String
+    #   * {Types::UpdateKxEnvironmentResponse#environment_arn #environment_arn} => String
+    #   * {Types::UpdateKxEnvironmentResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::UpdateKxEnvironmentResponse#dedicated_service_account_id #dedicated_service_account_id} => String
+    #   * {Types::UpdateKxEnvironmentResponse#transit_gateway_configuration #transit_gateway_configuration} => Types::TransitGatewayConfiguration
+    #   * {Types::UpdateKxEnvironmentResponse#custom_dns_configuration #custom_dns_configuration} => Array&lt;Types::CustomDNSServer&gt;
+    #   * {Types::UpdateKxEnvironmentResponse#creation_timestamp #creation_timestamp} => Time
+    #   * {Types::UpdateKxEnvironmentResponse#update_timestamp #update_timestamp} => Time
+    #   * {Types::UpdateKxEnvironmentResponse#availability_zone_ids #availability_zone_ids} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_kx_environment({
+    #     environment_id: "IdType", # required
+    #     name: "KxEnvironmentName",
+    #     description: "Description",
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.environment_id #=> String
+    #   resp.aws_account_id #=> String
+    #   resp.status #=> String, one of "CREATE_REQUESTED", "CREATING", "CREATED", "DELETE_REQUESTED", "DELETING", "DELETED", "FAILED_CREATION", "RETRY_DELETION", "FAILED_DELETION", "UPDATE_NETWORK_REQUESTED", "UPDATING_NETWORK", "FAILED_UPDATING_NETWORK", "SUSPENDED"
+    #   resp.tgw_status #=> String, one of "NONE", "UPDATE_REQUESTED", "UPDATING", "FAILED_UPDATE", "SUCCESSFULLY_UPDATED"
+    #   resp.dns_status #=> String, one of "NONE", "UPDATE_REQUESTED", "UPDATING", "FAILED_UPDATE", "SUCCESSFULLY_UPDATED"
+    #   resp.error_message #=> String
+    #   resp.description #=> String
+    #   resp.environment_arn #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.dedicated_service_account_id #=> String
+    #   resp.transit_gateway_configuration.transit_gateway_id #=> String
+    #   resp.transit_gateway_configuration.routable_cidr_space #=> String
+    #   resp.custom_dns_configuration #=> Array
+    #   resp.custom_dns_configuration[0].custom_dns_server_name #=> String
+    #   resp.custom_dns_configuration[0].custom_dns_server_ip #=> String
+    #   resp.creation_timestamp #=> Time
+    #   resp.update_timestamp #=> Time
+    #   resp.availability_zone_ids #=> Array
+    #   resp.availability_zone_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateKxEnvironment AWS API Documentation
+    #
+    # @overload update_kx_environment(params = {})
+    # @param [Hash] params ({})
+    def update_kx_environment(params = {}, options = {})
+      req = build_request(:update_kx_environment, params)
+      req.send_request(options)
+    end
+
+    # Updates environment network to connect to your internal network by
+    # using a transit gateway. This API supports request to create a transit
+    # gateway attachment from FinSpace VPC to your transit gateway ID and
+    # create a custom Route-53 outbound resolvers.
+    #
+    # Once you send a request to update a network, you cannot change it
+    # again. Network update might require termination of any clusters that
+    # are running in the existing network.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @option params [Types::TransitGatewayConfiguration] :transit_gateway_configuration
+    #   Specifies the transit gateway and network configuration to connect the
+    #   kdb environment to an internal network.
+    #
+    # @option params [Array<Types::CustomDNSServer>] :custom_dns_configuration
+    #   A list of DNS server name and server IP. This is used to set up
+    #   Route-53 outbound resolvers.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    # @return [Types::UpdateKxEnvironmentNetworkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateKxEnvironmentNetworkResponse#name #name} => String
+    #   * {Types::UpdateKxEnvironmentNetworkResponse#environment_id #environment_id} => String
+    #   * {Types::UpdateKxEnvironmentNetworkResponse#aws_account_id #aws_account_id} => String
+    #   * {Types::UpdateKxEnvironmentNetworkResponse#status #status} => String
+    #   * {Types::UpdateKxEnvironmentNetworkResponse#tgw_status #tgw_status} => String
+    #   * {Types::UpdateKxEnvironmentNetworkResponse#dns_status #dns_status} => String
+    #   * {Types::UpdateKxEnvironmentNetworkResponse#error_message #error_message} => String
+    #   * {Types::UpdateKxEnvironmentNetworkResponse#description #description} => String
+    #   * {Types::UpdateKxEnvironmentNetworkResponse#environment_arn #environment_arn} => String
+    #   * {Types::UpdateKxEnvironmentNetworkResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::UpdateKxEnvironmentNetworkResponse#dedicated_service_account_id #dedicated_service_account_id} => String
+    #   * {Types::UpdateKxEnvironmentNetworkResponse#transit_gateway_configuration #transit_gateway_configuration} => Types::TransitGatewayConfiguration
+    #   * {Types::UpdateKxEnvironmentNetworkResponse#custom_dns_configuration #custom_dns_configuration} => Array&lt;Types::CustomDNSServer&gt;
+    #   * {Types::UpdateKxEnvironmentNetworkResponse#creation_timestamp #creation_timestamp} => Time
+    #   * {Types::UpdateKxEnvironmentNetworkResponse#update_timestamp #update_timestamp} => Time
+    #   * {Types::UpdateKxEnvironmentNetworkResponse#availability_zone_ids #availability_zone_ids} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_kx_environment_network({
+    #     environment_id: "IdType", # required
+    #     transit_gateway_configuration: {
+    #       transit_gateway_id: "TransitGatewayID", # required
+    #       routable_cidr_space: "ValidCIDRSpace", # required
+    #     },
+    #     custom_dns_configuration: [
+    #       {
+    #         custom_dns_server_name: "ValidHostname", # required
+    #         custom_dns_server_ip: "ValidIPAddress", # required
+    #       },
+    #     ],
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.environment_id #=> String
+    #   resp.aws_account_id #=> String
+    #   resp.status #=> String, one of "CREATE_REQUESTED", "CREATING", "CREATED", "DELETE_REQUESTED", "DELETING", "DELETED", "FAILED_CREATION", "RETRY_DELETION", "FAILED_DELETION", "UPDATE_NETWORK_REQUESTED", "UPDATING_NETWORK", "FAILED_UPDATING_NETWORK", "SUSPENDED"
+    #   resp.tgw_status #=> String, one of "NONE", "UPDATE_REQUESTED", "UPDATING", "FAILED_UPDATE", "SUCCESSFULLY_UPDATED"
+    #   resp.dns_status #=> String, one of "NONE", "UPDATE_REQUESTED", "UPDATING", "FAILED_UPDATE", "SUCCESSFULLY_UPDATED"
+    #   resp.error_message #=> String
+    #   resp.description #=> String
+    #   resp.environment_arn #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.dedicated_service_account_id #=> String
+    #   resp.transit_gateway_configuration.transit_gateway_id #=> String
+    #   resp.transit_gateway_configuration.routable_cidr_space #=> String
+    #   resp.custom_dns_configuration #=> Array
+    #   resp.custom_dns_configuration[0].custom_dns_server_name #=> String
+    #   resp.custom_dns_configuration[0].custom_dns_server_ip #=> String
+    #   resp.creation_timestamp #=> Time
+    #   resp.update_timestamp #=> Time
+    #   resp.availability_zone_ids #=> Array
+    #   resp.availability_zone_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateKxEnvironmentNetwork AWS API Documentation
+    #
+    # @overload update_kx_environment_network(params = {})
+    # @param [Hash] params ({})
+    def update_kx_environment_network(params = {}, options = {})
+      req = build_request(:update_kx_environment_network, params)
+      req.send_request(options)
+    end
+
+    # Updates the user details. You can only update the IAM role associated
+    # with a user.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @option params [required, String] :user_name
+    #   A unique identifier for the user.
+    #
+    # @option params [required, String] :iam_role
+    #   The IAM role ARN that is associated with the user.
+    #
+    # @option params [String] :client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    # @return [Types::UpdateKxUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateKxUserResponse#user_name #user_name} => String
+    #   * {Types::UpdateKxUserResponse#user_arn #user_arn} => String
+    #   * {Types::UpdateKxUserResponse#environment_id #environment_id} => String
+    #   * {Types::UpdateKxUserResponse#iam_role #iam_role} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_kx_user({
+    #     environment_id: "IdType", # required
+    #     user_name: "KxUserNameString", # required
+    #     iam_role: "RoleArn", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_name #=> String
+    #   resp.user_arn #=> String
+    #   resp.environment_id #=> String
+    #   resp.iam_role #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateKxUser AWS API Documentation
+    #
+    # @overload update_kx_user(params = {})
+    # @param [Hash] params ({})
+    def update_kx_user(params = {}, options = {})
+      req = build_request(:update_kx_user, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -759,7 +2363,7 @@ module Aws::Finspace
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-finspace'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -391,6 +391,23 @@ module Aws::Appflow
     #   Information about who registered the connector.
     #   @return [String]
     #
+    # @!attribute [rw] supported_data_transfer_types
+    #   The data transfer types that the connector supports.
+    #
+    #   RECORD
+    #
+    #   : Structured records.
+    #
+    #   FILE
+    #
+    #   : Files or binary data.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] supported_data_transfer_apis
+    #   The APIs of the connector application that Amazon AppFlow can use to
+    #   transfer your data.
+    #   @return [Array<Types::DataTransferApi>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ConnectorConfiguration AWS API Documentation
     #
     class ConnectorConfiguration < Struct.new(
@@ -419,7 +436,9 @@ module Aws::Appflow
       :connector_provisioning_config,
       :logo_url,
       :registered_at,
-      :registered_by)
+      :registered_by,
+      :supported_data_transfer_types,
+      :supported_data_transfer_apis)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -470,6 +489,18 @@ module Aws::Appflow
     #   The connection mode that the connector supports.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] supported_data_transfer_types
+    #   The data transfer types that the connector supports.
+    #
+    #   RECORD
+    #
+    #   : Structured records.
+    #
+    #   FILE
+    #
+    #   : Files or binary data.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ConnectorDetail AWS API Documentation
     #
     class ConnectorDetail < Struct.new(
@@ -483,7 +514,8 @@ module Aws::Appflow
       :registered_at,
       :registered_by,
       :connector_provisioning_type,
-      :connector_modes)
+      :connector_modes,
+      :supported_data_transfer_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1547,11 +1579,17 @@ module Aws::Appflow
     #   source.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] data_transfer_api
+    #   The API of the connector application that Amazon AppFlow uses to
+    #   transfer your data.
+    #   @return [Types::DataTransferApi]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/CustomConnectorSourceProperties AWS API Documentation
     #
     class CustomConnectorSourceProperties < Struct.new(
       :entity_name,
-      :custom_properties)
+      :custom_properties,
+      :data_transfer_api)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1582,6 +1620,43 @@ module Aws::Appflow
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/CustomerProfilesMetadata AWS API Documentation
     #
     class CustomerProfilesMetadata < Aws::EmptyStructure; end
+
+    # The API of the connector application that Amazon AppFlow uses to
+    # transfer your data.
+    #
+    # @!attribute [rw] name
+    #   The name of the connector application API.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   You can specify one of the following types:
+    #
+    #   AUTOMATIC
+    #
+    #   : The default. Optimizes a flow for datasets that fluctuate in size
+    #     from small to large. For each flow run, Amazon AppFlow chooses to
+    #     use the SYNC or ASYNC API type based on the amount of data that
+    #     the run transfers.
+    #
+    #   SYNC
+    #
+    #   : A synchronous API. This type of API optimizes a flow for small to
+    #     medium-sized datasets.
+    #
+    #   ASYNC
+    #
+    #   : An asynchronous API. This type of API optimizes a flow for large
+    #     datasets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DataTransferApi AWS API Documentation
+    #
+    class DataTransferApi < Struct.new(
+      :name,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The connector-specific credentials required by Datadog.
     #

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.112.0 (2023-06-09)
+------------------
+
+* Feature - This release adds search APIs for Prompts, Quick Connects and Hours of Operations, which can be used to search for those resources within a Connect Instance.
+
+1.111.0 (2023-06-06)
+------------------
+
+* Feature - GetMetricDataV2 API is now available in AWS GovCloud(US) region.
+
 1.110.0 (2023-05-31)
 ------------------
 

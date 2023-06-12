@@ -1068,11 +1068,16 @@ module Aws::QuickSight
     PivotTableConditionalFormattingOption = Shapes::StructureShape.new(name: 'PivotTableConditionalFormattingOption')
     PivotTableConditionalFormattingOptionList = Shapes::ListShape.new(name: 'PivotTableConditionalFormattingOptionList')
     PivotTableConditionalFormattingScope = Shapes::StructureShape.new(name: 'PivotTableConditionalFormattingScope')
+    PivotTableConditionalFormattingScopeList = Shapes::ListShape.new(name: 'PivotTableConditionalFormattingScopeList')
     PivotTableConditionalFormattingScopeRole = Shapes::StringShape.new(name: 'PivotTableConditionalFormattingScopeRole')
     PivotTableConfiguration = Shapes::StructureShape.new(name: 'PivotTableConfiguration')
     PivotTableDataPathOption = Shapes::StructureShape.new(name: 'PivotTableDataPathOption')
     PivotTableDataPathOptionList = Shapes::ListShape.new(name: 'PivotTableDataPathOptionList')
     PivotTableDimensionList = Shapes::ListShape.new(name: 'PivotTableDimensionList')
+    PivotTableFieldCollapseState = Shapes::StringShape.new(name: 'PivotTableFieldCollapseState')
+    PivotTableFieldCollapseStateOption = Shapes::StructureShape.new(name: 'PivotTableFieldCollapseStateOption')
+    PivotTableFieldCollapseStateOptionList = Shapes::ListShape.new(name: 'PivotTableFieldCollapseStateOptionList')
+    PivotTableFieldCollapseStateTarget = Shapes::StructureShape.new(name: 'PivotTableFieldCollapseStateTarget')
     PivotTableFieldOption = Shapes::StructureShape.new(name: 'PivotTableFieldOption')
     PivotTableFieldOptionList = Shapes::ListShape.new(name: 'PivotTableFieldOptionList')
     PivotTableFieldOptions = Shapes::StructureShape.new(name: 'PivotTableFieldOptions')
@@ -1114,6 +1119,7 @@ module Aws::QuickSight
     QuickSightUserNotFoundException = Shapes::StructureShape.new(name: 'QuickSightUserNotFoundException')
     RadarChartAggregatedFieldWells = Shapes::StructureShape.new(name: 'RadarChartAggregatedFieldWells')
     RadarChartAreaStyleSettings = Shapes::StructureShape.new(name: 'RadarChartAreaStyleSettings')
+    RadarChartAxesRangeScale = Shapes::StringShape.new(name: 'RadarChartAxesRangeScale')
     RadarChartCategoryFieldList = Shapes::ListShape.new(name: 'RadarChartCategoryFieldList')
     RadarChartColorFieldList = Shapes::ListShape.new(name: 'RadarChartColorFieldList')
     RadarChartConfiguration = Shapes::StructureShape.new(name: 'RadarChartConfiguration')
@@ -5719,6 +5725,7 @@ module Aws::QuickSight
     PivotTableCellConditionalFormatting.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "FieldId"))
     PivotTableCellConditionalFormatting.add_member(:text_format, Shapes::ShapeRef.new(shape: TextConditionalFormat, location_name: "TextFormat"))
     PivotTableCellConditionalFormatting.add_member(:scope, Shapes::ShapeRef.new(shape: PivotTableConditionalFormattingScope, location_name: "Scope"))
+    PivotTableCellConditionalFormatting.add_member(:scopes, Shapes::ShapeRef.new(shape: PivotTableConditionalFormattingScopeList, location_name: "Scopes"))
     PivotTableCellConditionalFormatting.struct_class = Types::PivotTableCellConditionalFormatting
 
     PivotTableConditionalFormatting.add_member(:conditional_formatting_options, Shapes::ShapeRef.new(shape: PivotTableConditionalFormattingOptionList, location_name: "ConditionalFormattingOptions"))
@@ -5731,6 +5738,8 @@ module Aws::QuickSight
 
     PivotTableConditionalFormattingScope.add_member(:role, Shapes::ShapeRef.new(shape: PivotTableConditionalFormattingScopeRole, location_name: "Role"))
     PivotTableConditionalFormattingScope.struct_class = Types::PivotTableConditionalFormattingScope
+
+    PivotTableConditionalFormattingScopeList.member = Shapes::ShapeRef.new(shape: PivotTableConditionalFormattingScope)
 
     PivotTableConfiguration.add_member(:field_wells, Shapes::ShapeRef.new(shape: PivotTableFieldWells, location_name: "FieldWells"))
     PivotTableConfiguration.add_member(:sort_configuration, Shapes::ShapeRef.new(shape: PivotTableSortConfiguration, location_name: "SortConfiguration"))
@@ -5748,6 +5757,16 @@ module Aws::QuickSight
 
     PivotTableDimensionList.member = Shapes::ShapeRef.new(shape: DimensionField)
 
+    PivotTableFieldCollapseStateOption.add_member(:target, Shapes::ShapeRef.new(shape: PivotTableFieldCollapseStateTarget, required: true, location_name: "Target"))
+    PivotTableFieldCollapseStateOption.add_member(:state, Shapes::ShapeRef.new(shape: PivotTableFieldCollapseState, location_name: "State"))
+    PivotTableFieldCollapseStateOption.struct_class = Types::PivotTableFieldCollapseStateOption
+
+    PivotTableFieldCollapseStateOptionList.member = Shapes::ShapeRef.new(shape: PivotTableFieldCollapseStateOption)
+
+    PivotTableFieldCollapseStateTarget.add_member(:field_id, Shapes::ShapeRef.new(shape: String, location_name: "FieldId"))
+    PivotTableFieldCollapseStateTarget.add_member(:field_data_path_values, Shapes::ShapeRef.new(shape: DataPathValueList, location_name: "FieldDataPathValues"))
+    PivotTableFieldCollapseStateTarget.struct_class = Types::PivotTableFieldCollapseStateTarget
+
     PivotTableFieldOption.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "FieldId"))
     PivotTableFieldOption.add_member(:custom_label, Shapes::ShapeRef.new(shape: CustomLabel, location_name: "CustomLabel"))
     PivotTableFieldOption.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
@@ -5757,6 +5776,7 @@ module Aws::QuickSight
 
     PivotTableFieldOptions.add_member(:selected_field_options, Shapes::ShapeRef.new(shape: PivotTableFieldOptionList, location_name: "SelectedFieldOptions"))
     PivotTableFieldOptions.add_member(:data_path_options, Shapes::ShapeRef.new(shape: PivotTableDataPathOptionList, location_name: "DataPathOptions"))
+    PivotTableFieldOptions.add_member(:collapse_state_options, Shapes::ShapeRef.new(shape: PivotTableFieldCollapseStateOptionList, location_name: "CollapseStateOptions"))
     PivotTableFieldOptions.struct_class = Types::PivotTableFieldOptions
 
     PivotTableFieldSubtotalOptions.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, location_name: "FieldId"))
@@ -5888,6 +5908,7 @@ module Aws::QuickSight
     RadarChartConfiguration.add_member(:color_axis, Shapes::ShapeRef.new(shape: AxisDisplayOptions, location_name: "ColorAxis"))
     RadarChartConfiguration.add_member(:color_label_options, Shapes::ShapeRef.new(shape: ChartAxisLabelOptions, location_name: "ColorLabelOptions"))
     RadarChartConfiguration.add_member(:legend, Shapes::ShapeRef.new(shape: LegendOptions, location_name: "Legend"))
+    RadarChartConfiguration.add_member(:axes_range_scale, Shapes::ShapeRef.new(shape: RadarChartAxesRangeScale, location_name: "AxesRangeScale"))
     RadarChartConfiguration.struct_class = Types::RadarChartConfiguration
 
     RadarChartFieldWells.add_member(:radar_chart_aggregated_field_wells, Shapes::ShapeRef.new(shape: RadarChartAggregatedFieldWells, location_name: "RadarChartAggregatedFieldWells"))

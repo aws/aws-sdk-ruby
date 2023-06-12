@@ -954,6 +954,27 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # Contains details of a coverage date filter.
+    #
+    # @!attribute [rw] end_inclusive
+    #   A timestamp representing the end of the time period to filter
+    #   results by.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_inclusive
+    #   A timestamp representing the start of the time period to filter
+    #   results by.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CoverageDateFilter AWS API Documentation
+    #
+    class CoverageDateFilter < Struct.new(
+      :end_inclusive,
+      :start_inclusive)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure that identifies filter criteria for
     # `GetCoverageStatistics`.
     #
@@ -989,6 +1010,12 @@ module Aws::Inspector2
     #   tag.
     #   @return [Array<Types::CoverageMapFilter>]
     #
+    # @!attribute [rw] last_scanned_at
+    #   Filters Amazon Web Services resources based on whether Amazon
+    #   Inspector has checked them for vulnerabilities within the specified
+    #   time range.
+    #   @return [Array<Types::CoverageDateFilter>]
+    #
     # @!attribute [rw] resource_id
     #   An array of Amazon Web Services resource IDs to return coverage
     #   statistics for.
@@ -996,8 +1023,8 @@ module Aws::Inspector2
     #
     # @!attribute [rw] resource_type
     #   An array of Amazon Web Services resource types to return coverage
-    #   statistics for. The values can be `AWS_EC2_INSTANCE` or
-    #   `AWS_ECR_REPOSITORY`.
+    #   statistics for. The values can be `AWS_EC2_INSTANCE`,
+    #   `AWS_LAMBDA_FUNCTION` or `AWS_ECR_REPOSITORY`.
     #   @return [Array<Types::CoverageStringFilter>]
     #
     # @!attribute [rw] scan_status_code
@@ -1023,6 +1050,7 @@ module Aws::Inspector2
       :lambda_function_name,
       :lambda_function_runtime,
       :lambda_function_tags,
+      :last_scanned_at,
       :resource_id,
       :resource_type,
       :scan_status_code,
@@ -1082,6 +1110,10 @@ module Aws::Inspector2
     #   The Amazon Web Services account ID of the covered resource.
     #   @return [String]
     #
+    # @!attribute [rw] last_scanned_at
+    #   The date and time the resource was last checked for vulnerabilities.
+    #   @return [Time]
+    #
     # @!attribute [rw] resource_id
     #   The ID of the covered resource.
     #   @return [String]
@@ -1106,6 +1138,7 @@ module Aws::Inspector2
     #
     class CoveredResource < Struct.new(
       :account_id,
+      :last_scanned_at,
       :resource_id,
       :resource_metadata,
       :resource_type,

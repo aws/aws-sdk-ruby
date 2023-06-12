@@ -1058,6 +1058,9 @@ module Aws::AlexaForBusiness
     #         release_after_minutes: 1, # required
     #         enabled: false, # required
     #       },
+    #       proactive_join: {
+    #         enabled_by_motion: false, # required
+    #       },
     #     },
     #     tags: [
     #       {
@@ -2059,6 +2062,7 @@ module Aws::AlexaForBusiness
     #   resp.profile.meeting_room_configuration.instant_booking.enabled #=> Boolean
     #   resp.profile.meeting_room_configuration.require_check_in.release_after_minutes #=> Integer
     #   resp.profile.meeting_room_configuration.require_check_in.enabled #=> Boolean
+    #   resp.profile.meeting_room_configuration.proactive_join.enabled_by_motion #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetProfile AWS API Documentation
     #
@@ -4190,6 +4194,9 @@ module Aws::AlexaForBusiness
     #         release_after_minutes: 1,
     #         enabled: false,
     #       },
+    #       proactive_join: {
+    #         enabled_by_motion: false, # required
+    #       },
     #     },
     #   })
     #
@@ -4283,7 +4290,7 @@ module Aws::AlexaForBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-alexaforbusiness'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

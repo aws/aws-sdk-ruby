@@ -979,8 +979,12 @@ module Aws::Lambda
     # @!attribute [rw] kms_key_arn
     #   The ARN of the Key Management Service (KMS) customer managed key
     #   that's used to encrypt your function's [environment variables][1].
-    #   When [Lambda SnapStart][2] is activated, this key is also used to
-    #   encrypt your function's snapshot. If you don't provide a customer
+    #   When [Lambda SnapStart][2] is activated, Lambda also uses this key
+    #   is to encrypt your function's snapshot. If you deploy your function
+    #   using a container image, Lambda also uses this key to encrypt your
+    #   function when it's deployed. Note that this is not the same key
+    #   that's used to protect your container image in the Amazon Elastic
+    #   Container Registry (Amazon ECR). If you don't provide a customer
     #   managed key, Lambda uses a default service key.
     #
     #
@@ -1892,7 +1896,9 @@ module Aws::Lambda
     #   to infinite. When the value is set to infinite, Lambda never
     #   discards old records.
     #
-    #   <note markdown="1"> The minimum value that can be set is 60 seconds.
+    #   <note markdown="1"> The minimum valid value for maximum record age is 60s. Although
+    #   values less than 60 and greater than -1 fall within the parameter's
+    #   absolute range, they are not allowed
     #
     #    </note>
     #   @return [Integer]
@@ -2988,6 +2994,13 @@ module Aws::Lambda
     #
     # @!attribute [rw] compatible_runtimes
     #   The layer's compatible runtimes.
+    #
+    #   The following list includes deprecated runtimes. For more
+    #   information, see [Runtime deprecation policy][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
     #   @return [Array<String>]
     #
     # @!attribute [rw] license_info
@@ -3886,6 +3899,13 @@ module Aws::Lambda
     #
     # @!attribute [rw] compatible_runtimes
     #   The layer's compatible runtimes.
+    #
+    #   The following list includes deprecated runtimes. For more
+    #   information, see [Runtime deprecation policy][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
     #   @return [Array<String>]
     #
     # @!attribute [rw] license_info
@@ -4314,6 +4334,13 @@ module Aws::Lambda
 
     # @!attribute [rw] compatible_runtime
     #   A runtime identifier. For example, `go1.x`.
+    #
+    #   The following list includes deprecated runtimes. For more
+    #   information, see [Runtime deprecation policy][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
     #   @return [String]
     #
     # @!attribute [rw] layer_name
@@ -4368,6 +4395,13 @@ module Aws::Lambda
 
     # @!attribute [rw] compatible_runtime
     #   A runtime identifier. For example, `go1.x`.
+    #
+    #   The following list includes deprecated runtimes. For more
+    #   information, see [Runtime deprecation policy][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
     #   @return [String]
     #
     # @!attribute [rw] marker
@@ -4704,9 +4738,13 @@ module Aws::Lambda
     #   A list of compatible [function runtimes][1]. Used for filtering with
     #   ListLayers and ListLayerVersions.
     #
+    #   The following list includes deprecated runtimes. For more
+    #   information, see [Runtime deprecation policy][2].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
     #   @return [Array<String>]
     #
     # @!attribute [rw] license_info
@@ -4776,6 +4814,13 @@ module Aws::Lambda
     #
     # @!attribute [rw] compatible_runtimes
     #   The layer's compatible runtimes.
+    #
+    #   The following list includes deprecated runtimes. For more
+    #   information, see [Runtime deprecation policy][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
     #   @return [Array<String>]
     #
     # @!attribute [rw] license_info
@@ -6214,8 +6259,12 @@ module Aws::Lambda
     # @!attribute [rw] kms_key_arn
     #   The ARN of the Key Management Service (KMS) customer managed key
     #   that's used to encrypt your function's [environment variables][1].
-    #   When [Lambda SnapStart][2] is activated, this key is also used to
-    #   encrypt your function's snapshot. If you don't provide a customer
+    #   When [Lambda SnapStart][2] is activated, Lambda also uses this key
+    #   is to encrypt your function's snapshot. If you deploy your function
+    #   using a container image, Lambda also uses this key to encrypt your
+    #   function when it's deployed. Note that this is not the same key
+    #   that's used to protect your container image in the Amazon Elastic
+    #   Container Registry (Amazon ECR). If you don't provide a customer
     #   managed key, Lambda uses a default service key.
     #
     #
