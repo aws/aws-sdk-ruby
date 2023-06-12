@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix issue when decrypting noncurrent versions of objects when using client side encryption (#2866). 
+
 1.123.1 (2023-06-02)
 ------------------
 

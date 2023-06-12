@@ -434,6 +434,41 @@ module Aws
             expect(decrypted).to eq(plaintext)
           end
 
+          it 'can encrypt and decrypt non-current versions' do
+            client = Aws::S3::EncryptionV2::Client.new(options)
+
+            data = stub_put(s3_client)
+
+            kms_client.stub_responses(
+              :generate_data_key,
+              {
+                key_id: kms_key_id,
+                ciphertext_blob: kms_ciphertext_blob,
+                plaintext: kms_plaintext
+              }
+            )
+            client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+            expect(data[:metadata]['x-amz-cek-alg']).to eq('AES/GCM/NoPadding')
+            expect(data[:metadata]['x-amz-wrap-alg']).to eq('kms+context')
+
+            stub_get(s3_client, data, true)
+
+            stub_decrypt(kms_client, any_kms_key: false, response:
+              {
+                key_id: kms_key_id,
+                plaintext: kms_plaintext,
+                encryption_algorithm: "SYMMETRIC_DEFAULT"
+              })
+
+            expect(s3_client).to receive(:get_object)
+                                   .with(hash_including(version_id: 'version_id'))
+                                   .and_call_original
+
+            decrypted = client.get_object(bucket: test_bucket, key: test_object,
+                                          version_id: 'version_id').body.read
+            expect(decrypted).to eq(plaintext)
+          end
+
           context 'security_profile: v2' do
             it 'raises a DecryptionError when reading a legacy object' do
               client_v1 = Aws::S3::Encryption::Client.new(
