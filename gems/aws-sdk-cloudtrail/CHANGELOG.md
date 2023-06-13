@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2023-06-13)
+------------------
+
+* Feature - This feature allows users to view dashboards for CloudTrail Lake event data stores.
+
 1.61.0 (2023-06-02)
 ------------------
 

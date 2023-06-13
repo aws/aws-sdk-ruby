@@ -174,11 +174,15 @@ module Aws::CloudTrail
     #
     #     * `AWS::CloudTrail::Channel`
     #
+    #     * `AWS::CodeWhisperer::Profile`
+    #
     #     * `AWS::Cognito::IdentityPool`
     #
     #     * `AWS::DynamoDB::Stream`
     #
     #     * `AWS::EC2::Snapshot`
+    #
+    #     * `AWS::EMRWAL::Workspace`
     #
     #     * `AWS::FinSpace::Environment`
     #
@@ -244,6 +248,14 @@ module Aws::CloudTrail
     #
     #     ^
     #
+    #     When resources.type equals `AWS::CodeWhisperer::Profile`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:codewhisperer:<region>:<account_ID>:profile/<profile_ID>`
+    #
+    #     ^
+    #
     #     When resources.type equals `AWS::Cognito::IdentityPool`, and the
     #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
     #     following format:
@@ -265,6 +277,14 @@ module Aws::CloudTrail
     #     following format:
     #
     #     * `arn:<partition>:ec2:<region>::snapshot/<snapshot_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::EMRWAL::Workspace`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:emrwal:<region>::workspace/<workspace_name>`
     #
     #     ^
     #
@@ -987,7 +1007,7 @@ module Aws::CloudTrail
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_name
-    #   This field is no longer in use. Use SnsTopicARN.
+    #   This field is no longer in use. Use `SnsTopicARN`.
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arn
@@ -1131,15 +1151,19 @@ module Aws::CloudTrail
     #   event selectors. Basic event selector resource types are valid in
     #   advanced event selectors, but advanced event selector resource types
     #   are not valid in basic event selectors. For more information, see
-    #   AdvancedFieldSelector$Field.
+    #   [AdvancedFieldSelector][1].
     #
     #   * `AWS::CloudTrail::Channel`
+    #
+    #   * `AWS::CodeWhisperer::Profile`
     #
     #   * `AWS::Cognito::IdentityPool`
     #
     #   * `AWS::DynamoDB::Stream`
     #
     #   * `AWS::EC2::Snapshot`
+    #
+    #   * `AWS::EMRWAL::Workspace`
     #
     #   * `AWS::FinSpace::Environment`
     #
@@ -1160,6 +1184,10 @@ module Aws::CloudTrail
     #   * `AWS::S3ObjectLambda::AccessPoint`
     #
     #   * `AWS::S3Outposts::Object`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedFieldSelector.html
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -1338,11 +1366,16 @@ module Aws::CloudTrail
     #   The query ID.
     #   @return [String]
     #
+    # @!attribute [rw] query_alias
+    #   The alias that identifies a query template.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeQueryRequest AWS API Documentation
     #
     class DescribeQueryRequest < Struct.new(
       :event_data_store,
-      :query_id)
+      :query_id,
+      :query_alias)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4084,11 +4117,21 @@ module Aws::CloudTrail
     #   results.
     #   @return [String]
     #
+    # @!attribute [rw] query_alias
+    #   The alias that identifies a query template.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_parameters
+    #   The query parameters for the specified `QueryAlias`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StartQueryRequest AWS API Documentation
     #
     class StartQueryRequest < Struct.new(
       :query_statement,
-      :delivery_s3_uri)
+      :delivery_s3_uri,
+      :query_alias,
+      :query_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4274,7 +4317,7 @@ module Aws::CloudTrail
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_name
-    #   This field is no longer in use. Use SnsTopicARN.
+    #   This field is no longer in use. Use `SnsTopicARN`.
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arn
@@ -4797,7 +4840,7 @@ module Aws::CloudTrail
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_name
-    #   This field is no longer in use. Use UpdateTrailResponse$SnsTopicARN.
+    #   This field is no longer in use. Use `SnsTopicARN`.
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arn

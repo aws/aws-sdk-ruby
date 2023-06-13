@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2023-06-13)
+------------------
+
+* Feature - AWS Well-Architected now supports Profiles that help customers prioritize which questions to focus on first by providing a list of prioritized questions that are better aligned with their business goals and outcomes.
+
 1.23.0 (2023-05-31)
 ------------------
 

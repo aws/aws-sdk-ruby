@@ -767,7 +767,7 @@ module Aws::EC2
     #     no_reboot: false,
     #     tag_specifications: [
     #       {
-    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint
     #         tags: [
     #           {
     #             key: "String",
@@ -1693,12 +1693,9 @@ module Aws::EC2
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters. Filter names and values are case-sensitive.
     #
-    #   * `allocation-id` - \[EC2-VPC\] The allocation ID for the address.
+    #   * `allocation-id` - The allocation ID for the address.
     #
-    #   * `association-id` - \[EC2-VPC\] The association ID for the address.
-    #
-    #   * `domain` - Indicates whether the address is for use in EC2-Classic
-    #     (`standard`) or in a VPC (`vpc`).
+    #   * `association-id` - The association ID for the address.
     #
     #   * `instance-id` - The ID of the instance the address is associated
     #     with, if any.
@@ -1707,14 +1704,14 @@ module Aws::EC2
     #     Zones, or Wavelength Zones from where Amazon Web Services advertises
     #     IP addresses.
     #
-    #   * `network-interface-id` - \[EC2-VPC\] The ID of the network interface
-    #     that the address is associated with, if any.
+    #   * `network-interface-id` - The ID of the network interface that the
+    #     address is associated with, if any.
     #
     #   * `network-interface-owner-id` - The Amazon Web Services account ID of
     #     the owner.
     #
-    #   * `private-ip-address` - \[EC2-VPC\] The private IP address associated
-    #     with the Elastic IP address.
+    #   * `private-ip-address` - The private IP address associated with the
+    #     Elastic IP address.
     #
     #   * `public-ip` - The Elastic IP address, or the carrier IP address.
     #
@@ -1732,7 +1729,7 @@ module Aws::EC2
     #
     #   Default: Describes all your Elastic IP addresses.
     # @option options [Array<String>] :allocation_ids
-    #   \[EC2-VPC\] Information about the allocation IDs.
+    #   Information about the allocation IDs.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

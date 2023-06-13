@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2023-06-13)
+------------------
+
+* Feature - This release fixes using aws-us-gov ARNs in API calls and adds documentation for snapshot APIs.
+
 1.3.0 (2023-05-31)
 ------------------
 

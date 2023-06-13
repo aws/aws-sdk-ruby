@@ -39,6 +39,20 @@ module Aws::SecurityHub
       end
     end
 
+    class BatchDeleteAutomationRules
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::SecurityHub::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class BatchDisableStandards
       def self.build(context)
         unless context.config.regional_endpoint
@@ -54,6 +68,20 @@ module Aws::SecurityHub
     end
 
     class BatchEnableStandards
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::SecurityHub::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class BatchGetAutomationRules
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -109,6 +137,20 @@ module Aws::SecurityHub
       end
     end
 
+    class BatchUpdateAutomationRules
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::SecurityHub::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class BatchUpdateFindings
       def self.build(context)
         unless context.config.regional_endpoint
@@ -138,6 +180,20 @@ module Aws::SecurityHub
     end
 
     class CreateActionTarget
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::SecurityHub::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class CreateAutomationRule
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -628,6 +684,20 @@ module Aws::SecurityHub
     end
 
     class InviteMembers
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::SecurityHub::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListAutomationRules
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

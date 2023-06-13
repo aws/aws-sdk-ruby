@@ -5921,7 +5921,7 @@ module Aws::Lightsail
     # Returns information about one or more Amazon Lightsail SSL/TLS
     # certificates.
     #
-    # <note markdown="1"> To get a summary of a certificate, ommit `includeCertificateDetails`
+    # <note markdown="1"> To get a summary of a certificate, omit `includeCertificateDetails`
     # from your request. The response will include only the certificate
     # Amazon Resource Name (ARN), certificate name, domain name, and tags.
     #
@@ -5950,9 +5950,17 @@ module Aws::Lightsail
     #   When omitted, the response includes all of your certificates in the
     #   Amazon Web Services Region where the request is made.
     #
+    # @option params [String] :page_token
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetCertificates` request. If
+    #   your results are paginated, the response will return a next page token
+    #   that you can specify as the page token in a subsequent request.
+    #
     # @return [Types::GetCertificatesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetCertificatesResult#certificates #certificates} => Array&lt;Types::CertificateSummary&gt;
+    #   * {Types::GetCertificatesResult#next_page_token #next_page_token} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -5960,6 +5968,7 @@ module Aws::Lightsail
     #     certificate_statuses: ["PENDING_VALIDATION"], # accepts PENDING_VALIDATION, ISSUED, INACTIVE, EXPIRED, VALIDATION_TIMED_OUT, REVOKED, FAILED
     #     include_certificate_details: false,
     #     certificate_name: "CertificateName",
+    #     page_token: "string",
     #   })
     #
     # @example Response structure
@@ -6012,6 +6021,7 @@ module Aws::Lightsail
     #   resp.certificates[0].tags #=> Array
     #   resp.certificates[0].tags[0].key #=> String
     #   resp.certificates[0].tags[0].value #=> String
+    #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetCertificates AWS API Documentation
     #
@@ -6629,7 +6639,7 @@ module Aws::Lightsail
     #
     #   * Specified in the Unix time format.
     #
-    #     For example, if you wish to use a start time of October 1, 2018, at
+    #     For example, if you want to use a start time of October 1, 2018, at
     #     8 PM UTC, specify `1538424000` as the start time.
     #
     #   You can convert a human-friendly time to Unix time format using a
@@ -6648,7 +6658,7 @@ module Aws::Lightsail
     #
     #   * Specified in the Unix time format.
     #
-    #     For example, if you wish to use an end time of October 1, 2018, at 9
+    #     For example, if you want to use an end time of October 1, 2018, at 9
     #     PM UTC, specify `1538427600` as the end time.
     #
     #   You can convert a human-friendly time to Unix time format using a
@@ -12164,7 +12174,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

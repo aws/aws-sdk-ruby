@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2023-06-13)
+------------------
+
+* Feature - This release adds pagination for the Get Certificates API operation.
+
 1.76.0 (2023-05-31)
 ------------------
 

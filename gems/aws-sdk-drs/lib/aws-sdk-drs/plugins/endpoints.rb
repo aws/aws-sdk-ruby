@@ -56,12 +56,16 @@ module Aws::Drs
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :associate_source_network_stack
+            Aws::Drs::Endpoints::AssociateSourceNetworkStack.build(context)
           when :create_extended_source_server
             Aws::Drs::Endpoints::CreateExtendedSourceServer.build(context)
           when :create_launch_configuration_template
             Aws::Drs::Endpoints::CreateLaunchConfigurationTemplate.build(context)
           when :create_replication_configuration_template
             Aws::Drs::Endpoints::CreateReplicationConfigurationTemplate.build(context)
+          when :create_source_network
+            Aws::Drs::Endpoints::CreateSourceNetwork.build(context)
           when :delete_job
             Aws::Drs::Endpoints::DeleteJob.build(context)
           when :delete_launch_configuration_template
@@ -70,6 +74,8 @@ module Aws::Drs
             Aws::Drs::Endpoints::DeleteRecoveryInstance.build(context)
           when :delete_replication_configuration_template
             Aws::Drs::Endpoints::DeleteReplicationConfigurationTemplate.build(context)
+          when :delete_source_network
+            Aws::Drs::Endpoints::DeleteSourceNetwork.build(context)
           when :delete_source_server
             Aws::Drs::Endpoints::DeleteSourceServer.build(context)
           when :describe_job_log_items
@@ -84,12 +90,16 @@ module Aws::Drs
             Aws::Drs::Endpoints::DescribeRecoverySnapshots.build(context)
           when :describe_replication_configuration_templates
             Aws::Drs::Endpoints::DescribeReplicationConfigurationTemplates.build(context)
+          when :describe_source_networks
+            Aws::Drs::Endpoints::DescribeSourceNetworks.build(context)
           when :describe_source_servers
             Aws::Drs::Endpoints::DescribeSourceServers.build(context)
           when :disconnect_recovery_instance
             Aws::Drs::Endpoints::DisconnectRecoveryInstance.build(context)
           when :disconnect_source_server
             Aws::Drs::Endpoints::DisconnectSourceServer.build(context)
+          when :export_source_network_cfn_template
+            Aws::Drs::Endpoints::ExportSourceNetworkCfnTemplate.build(context)
           when :get_failback_replication_configuration
             Aws::Drs::Endpoints::GetFailbackReplicationConfiguration.build(context)
           when :get_launch_configuration
@@ -114,10 +124,16 @@ module Aws::Drs
             Aws::Drs::Endpoints::StartRecovery.build(context)
           when :start_replication
             Aws::Drs::Endpoints::StartReplication.build(context)
+          when :start_source_network_recovery
+            Aws::Drs::Endpoints::StartSourceNetworkRecovery.build(context)
+          when :start_source_network_replication
+            Aws::Drs::Endpoints::StartSourceNetworkReplication.build(context)
           when :stop_failback
             Aws::Drs::Endpoints::StopFailback.build(context)
           when :stop_replication
             Aws::Drs::Endpoints::StopReplication.build(context)
+          when :stop_source_network_replication
+            Aws::Drs::Endpoints::StopSourceNetworkReplication.build(context)
           when :tag_resource
             Aws::Drs::Endpoints::TagResource.build(context)
           when :terminate_recovery_instances

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2023-06-13)
+------------------
+
+* Feature - Added APIs to support network replication and recovery using AWS Elastic Disaster Recovery.
+
 1.14.0 (2023-05-31)
 ------------------
 

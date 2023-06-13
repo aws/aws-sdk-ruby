@@ -214,7 +214,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [String] :public_ip
-    #   \[EC2-Classic\] The Elastic IP address. Required for EC2-Classic.
+    #   Deprecated.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

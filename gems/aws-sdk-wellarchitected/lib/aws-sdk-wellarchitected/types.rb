@@ -187,6 +187,10 @@ module Aws::WellArchitected
     #   workload.
     #   @return [String]
     #
+    # @!attribute [rw] question_type
+    #   The type of the question.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/AnswerSummary AWS API Documentation
     #
     class AnswerSummary < Struct.new(
@@ -198,7 +202,8 @@ module Aws::WellArchitected
       :choice_answer_summaries,
       :is_applicable,
       :risk,
-      :reason)
+      :reason,
+      :question_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -222,6 +227,24 @@ module Aws::WellArchitected
     class AssociateLensesInput < Struct.new(
       :workload_id,
       :lens_aliases)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workload_id
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arns
+    #   The list of profile ARNs to associate with the workload.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/AssociateProfilesInput AWS API Documentation
+    #
+    class AssociateProfilesInput < Struct.new(
+      :workload_id,
+      :profile_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -663,7 +686,8 @@ module Aws::WellArchitected
     #
     # @!attribute [rw] shared_with
     #   The Amazon Web Services account ID, IAM role, organization ID, or
-    #   organizational unit (OU) ID with which the workload is shared.
+    #   organizational unit (OU) ID with which the workload, lens, or
+    #   profile is shared.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -695,7 +719,7 @@ module Aws::WellArchitected
     end
 
     # @!attribute [rw] share_id
-    #   The ID associated with the workload share.
+    #   The ID associated with the share.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateLensShareOutput AWS API Documentation
@@ -834,6 +858,124 @@ module Aws::WellArchitected
     class CreateMilestoneOutput < Struct.new(
       :workload_id,
       :milestone_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_name
+    #   Name of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_description
+    #   The profile description.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_questions
+    #   The profile questions.
+    #   @return [Array<Types::ProfileQuestionUpdate>]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique case-sensitive string used to ensure that this request is
+    #   idempotent (executes only once).
+    #
+    #   You should not reuse the same token for other requests. If you retry
+    #   a request with the same client request token and the same parameters
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
+    #
+    #   This token is listed as required, however, if you do not specify it,
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the profile.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateProfileInput AWS API Documentation
+    #
+    class CreateProfileInput < Struct.new(
+      :profile_name,
+      :profile_description,
+      :profile_questions,
+      :client_request_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_arn
+    #   The profile ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_version
+    #   Version of the profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateProfileOutput AWS API Documentation
+    #
+    class CreateProfileOutput < Struct.new(
+      :profile_arn,
+      :profile_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_arn
+    #   The profile ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] shared_with
+    #   The Amazon Web Services account ID, IAM role, organization ID, or
+    #   organizational unit (OU) ID with which the workload, lens, or
+    #   profile is shared.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique case-sensitive string used to ensure that this request is
+    #   idempotent (executes only once).
+    #
+    #   You should not reuse the same token for other requests. If you retry
+    #   a request with the same client request token and the same parameters
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
+    #
+    #   This token is listed as required, however, if you do not specify it,
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateProfileShareInput AWS API Documentation
+    #
+    class CreateProfileShareInput < Struct.new(
+      :profile_arn,
+      :shared_with,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] share_id
+    #   The ID associated with the share.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
+    #   The profile ARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateProfileShareOutput AWS API Documentation
+    #
+    class CreateProfileShareOutput < Struct.new(
+      :share_id,
+      :profile_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -991,6 +1133,10 @@ module Aws::WellArchitected
     #   List of AppRegistry application ARNs associated to the workload.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] profile_arns
+    #   The list of profile ARNs associated with the workload.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateWorkloadInput AWS API Documentation
     #
     class CreateWorkloadInput < Struct.new(
@@ -1010,7 +1156,8 @@ module Aws::WellArchitected
       :client_request_token,
       :tags,
       :discovery_config,
-      :applications)
+      :applications,
+      :profile_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1044,11 +1191,12 @@ module Aws::WellArchitected
     #
     # @!attribute [rw] shared_with
     #   The Amazon Web Services account ID, IAM role, organization ID, or
-    #   organizational unit (OU) ID with which the workload is shared.
+    #   organizational unit (OU) ID with which the workload, lens, or
+    #   profile is shared.
     #   @return [String]
     #
     # @!attribute [rw] permission_type
-    #   Permission granted on a workload share.
+    #   Permission granted on a share request.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -1088,7 +1236,7 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] share_id
-    #   The ID associated with the workload share.
+    #   The ID associated with the share.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateWorkloadShareOutput AWS API Documentation
@@ -1148,7 +1296,7 @@ module Aws::WellArchitected
     end
 
     # @!attribute [rw] share_id
-    #   The ID associated with the workload share.
+    #   The ID associated with the share.
     #   @return [String]
     #
     # @!attribute [rw] lens_alias
@@ -1194,6 +1342,73 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # @!attribute [rw] profile_arn
+    #   The profile ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique case-sensitive string used to ensure that this request is
+    #   idempotent (executes only once).
+    #
+    #   You should not reuse the same token for other requests. If you retry
+    #   a request with the same client request token and the same parameters
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
+    #
+    #   This token is listed as required, however, if you do not specify it,
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteProfileInput AWS API Documentation
+    #
+    class DeleteProfileInput < Struct.new(
+      :profile_arn,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] share_id
+    #   The ID associated with the share.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
+    #   The profile ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique case-sensitive string used to ensure that this request is
+    #   idempotent (executes only once).
+    #
+    #   You should not reuse the same token for other requests. If you retry
+    #   a request with the same client request token and the same parameters
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
+    #
+    #   This token is listed as required, however, if you do not specify it,
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteProfileShareInput AWS API Documentation
+    #
+    class DeleteProfileShareInput < Struct.new(
+      :share_id,
+      :profile_arn,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Input for workload deletion.
     #
     # @!attribute [rw] workload_id
@@ -1231,7 +1446,7 @@ module Aws::WellArchitected
     # Input for Delete Workload Share
     #
     # @!attribute [rw] share_id
-    #   The ID associated with the workload share.
+    #   The ID associated with the share.
     #   @return [String]
     #
     # @!attribute [rw] workload_id
@@ -1286,6 +1501,24 @@ module Aws::WellArchitected
     class DisassociateLensesInput < Struct.new(
       :workload_id,
       :lens_aliases)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workload_id
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arns
+    #   The list of profile ARNs to disassociate from the workload.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DisassociateProfilesInput AWS API Documentation
+    #
+    class DisassociateProfilesInput < Struct.new(
+      :workload_id,
+      :profile_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1773,6 +2006,53 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # @!attribute [rw] profile_arn
+    #   The profile ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_version
+    #   The profile version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetProfileInput AWS API Documentation
+    #
+    class GetProfileInput < Struct.new(
+      :profile_arn,
+      :profile_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile
+    #   The profile.
+    #   @return [Types::Profile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetProfileOutput AWS API Documentation
+    #
+    class GetProfileOutput < Struct.new(
+      :profile)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetProfileTemplateInput AWS API Documentation
+    #
+    class GetProfileTemplateInput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] profile_template
+    #   The profile template.
+    #   @return [Types::ProfileTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetProfileTemplateOutput AWS API Documentation
+    #
+    class GetProfileTemplateOutput < Struct.new(
+      :profile_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Input to get a workload.
     #
     # @!attribute [rw] workload_id
@@ -2054,6 +2334,15 @@ module Aws::WellArchitected
     #   The token to use to retrieve the next set of results.
     #   @return [String]
     #
+    # @!attribute [rw] profiles
+    #   The profiles associated with the workload.
+    #   @return [Array<Types::WorkloadProfile>]
+    #
+    # @!attribute [rw] prioritized_risk_counts
+    #   A map from risk names to the count of how many questions have that
+    #   rating.
+    #   @return [Hash<String,Integer>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/LensReview AWS API Documentation
     #
     class LensReview < Struct.new(
@@ -2066,7 +2355,9 @@ module Aws::WellArchitected
       :updated_at,
       :notes,
       :risk_counts,
-      :next_token)
+      :next_token,
+      :profiles,
+      :prioritized_risk_counts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2153,6 +2444,15 @@ module Aws::WellArchitected
     #   rating.
     #   @return [Hash<String,Integer>]
     #
+    # @!attribute [rw] profiles
+    #   The profiles associated with the workload.
+    #   @return [Array<Types::WorkloadProfile>]
+    #
+    # @!attribute [rw] prioritized_risk_counts
+    #   A map from risk names to the count of how many questions have that
+    #   rating.
+    #   @return [Hash<String,Integer>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/LensReviewSummary AWS API Documentation
     #
     class LensReviewSummary < Struct.new(
@@ -2162,7 +2462,9 @@ module Aws::WellArchitected
       :lens_name,
       :lens_status,
       :updated_at,
-      :risk_counts)
+      :risk_counts,
+      :profiles,
+      :prioritized_risk_counts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2170,16 +2472,17 @@ module Aws::WellArchitected
     # A lens share summary return object.
     #
     # @!attribute [rw] share_id
-    #   The ID associated with the workload share.
+    #   The ID associated with the share.
     #   @return [String]
     #
     # @!attribute [rw] shared_with
     #   The Amazon Web Services account ID, IAM role, organization ID, or
-    #   organizational unit (OU) ID with which the workload is shared.
+    #   organizational unit (OU) ID with which the workload, lens, or
+    #   profile is shared.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of a workload share.
+    #   The status of the share request.
     #   @return [String]
     #
     # @!attribute [rw] status_message
@@ -2364,6 +2667,10 @@ module Aws::WellArchitected
     #   The maximum number of results to return for this request.
     #   @return [Integer]
     #
+    # @!attribute [rw] question_priority
+    #   The priority of the question.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAnswersInput AWS API Documentation
     #
     class ListAnswersInput < Struct.new(
@@ -2372,7 +2679,8 @@ module Aws::WellArchitected
       :pillar_id,
       :milestone_number,
       :next_token,
-      :max_results)
+      :max_results,
+      :question_priority)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2598,6 +2906,10 @@ module Aws::WellArchitected
     #   The maximum number of results to return for this request.
     #   @return [Integer]
     #
+    # @!attribute [rw] question_priority
+    #   The priority of the question.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListLensReviewImprovementsInput AWS API Documentation
     #
     class ListLensReviewImprovementsInput < Struct.new(
@@ -2606,7 +2918,8 @@ module Aws::WellArchitected
       :pillar_id,
       :milestone_number,
       :next_token,
-      :max_results)
+      :max_results,
+      :question_priority)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2757,7 +3070,7 @@ module Aws::WellArchitected
     #   @return [Integer]
     #
     # @!attribute [rw] status
-    #   The status of a workload share.
+    #   The status of the share request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListLensSharesInput AWS API Documentation
@@ -2932,6 +3245,140 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # @!attribute [rw] workload_id
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for this request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListProfileNotificationsInput AWS API Documentation
+    #
+    class ListProfileNotificationsInput < Struct.new(
+      :workload_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] notification_summaries
+    #   Notification summaries.
+    #   @return [Array<Types::ProfileNotificationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListProfileNotificationsOutput AWS API Documentation
+    #
+    class ListProfileNotificationsOutput < Struct.new(
+      :notification_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_arn
+    #   The profile ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] shared_with_prefix
+    #   The Amazon Web Services account ID, IAM role, organization ID, or
+    #   organizational unit (OU) ID with which the profile is shared.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for this request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the share request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListProfileSharesInput AWS API Documentation
+    #
+    class ListProfileSharesInput < Struct.new(
+      :profile_arn,
+      :shared_with_prefix,
+      :next_token,
+      :max_results,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_share_summaries
+    #   Profile share summaries.
+    #   @return [Array<Types::ProfileShareSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListProfileSharesOutput AWS API Documentation
+    #
+    class ListProfileSharesOutput < Struct.new(
+      :profile_share_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_name_prefix
+    #   Prefix for profile name.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_owner_type
+    #   Profile owner type.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for this request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListProfilesInput AWS API Documentation
+    #
+    class ListProfilesInput < Struct.new(
+      :profile_name_prefix,
+      :profile_owner_type,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_summaries
+    #   Profile summaries.
+    #   @return [Array<Types::ProfileSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListProfilesOutput AWS API Documentation
+    #
+    class ListProfilesOutput < Struct.new(
+      :profile_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Input for List Share Invitations
     #
     # @!attribute [rw] workload_name_prefix
@@ -2956,6 +3403,10 @@ module Aws::WellArchitected
     #   The maximum number of results to return for this request.
     #   @return [Integer]
     #
+    # @!attribute [rw] profile_name_prefix
+    #   Profile name prefix.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListShareInvitationsInput AWS API Documentation
     #
     class ListShareInvitationsInput < Struct.new(
@@ -2963,7 +3414,8 @@ module Aws::WellArchitected
       :lens_name_prefix,
       :share_resource_type,
       :next_token,
-      :max_results)
+      :max_results,
+      :profile_name_prefix)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3032,7 +3484,7 @@ module Aws::WellArchitected
     #   @return [Integer]
     #
     # @!attribute [rw] status
-    #   The status of a workload share.
+    #   The status of the share request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListWorkloadSharesInput AWS API Documentation
@@ -3280,13 +3732,381 @@ module Aws::WellArchitected
     #   rating.
     #   @return [Hash<String,Integer>]
     #
+    # @!attribute [rw] prioritized_risk_counts
+    #   A map from risk names to the count of how many questions have that
+    #   rating.
+    #   @return [Hash<String,Integer>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/PillarReviewSummary AWS API Documentation
     #
     class PillarReviewSummary < Struct.new(
       :pillar_id,
       :pillar_name,
       :notes,
-      :risk_counts)
+      :risk_counts,
+      :prioritized_risk_counts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A profile.
+    #
+    # @!attribute [rw] profile_arn
+    #   The profile ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_version
+    #   The profile version.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_name
+    #   The profile name.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_description
+    #   The profile description.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_questions
+    #   Profile questions.
+    #   @return [Array<Types::ProfileQuestion>]
+    #
+    # @!attribute [rw] owner
+    #   An Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time recorded.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time recorded.
+    #   @return [Time]
+    #
+    # @!attribute [rw] share_invitation_id
+    #   The ID assigned to the share invitation.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the profile.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/Profile AWS API Documentation
+    #
+    class Profile < Struct.new(
+      :profile_arn,
+      :profile_version,
+      :profile_name,
+      :profile_description,
+      :profile_questions,
+      :owner,
+      :created_at,
+      :updated_at,
+      :share_invitation_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The profile choice.
+    #
+    # @!attribute [rw] choice_id
+    #   The ID of a choice.
+    #   @return [String]
+    #
+    # @!attribute [rw] choice_title
+    #   The title of a choice.
+    #   @return [String]
+    #
+    # @!attribute [rw] choice_description
+    #   The description of a choice.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ProfileChoice AWS API Documentation
+    #
+    class ProfileChoice < Struct.new(
+      :choice_id,
+      :choice_title,
+      :choice_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The profile notification summary.
+    #
+    # @!attribute [rw] current_profile_version
+    #   The current profile version.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_profile_version
+    #   The latest profile version.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Type of notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
+    #   The profile ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_name
+    #   The profile name.
+    #   @return [String]
+    #
+    # @!attribute [rw] workload_id
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] workload_name
+    #   The name of the workload.
+    #
+    #   The name must be unique within an account within an Amazon Web
+    #   Services Region. Spaces and capitalization are ignored when checking
+    #   for uniqueness.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ProfileNotificationSummary AWS API Documentation
+    #
+    class ProfileNotificationSummary < Struct.new(
+      :current_profile_version,
+      :latest_profile_version,
+      :type,
+      :profile_arn,
+      :profile_name,
+      :workload_id,
+      :workload_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A profile question.
+    #
+    # @!attribute [rw] question_id
+    #   The ID of the question.
+    #   @return [String]
+    #
+    # @!attribute [rw] question_title
+    #   The title of the question.
+    #   @return [String]
+    #
+    # @!attribute [rw] question_description
+    #   The description of the question.
+    #   @return [String]
+    #
+    # @!attribute [rw] question_choices
+    #   The question choices.
+    #   @return [Array<Types::ProfileChoice>]
+    #
+    # @!attribute [rw] selected_choice_ids
+    #   The selected choices.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] min_selected_choices
+    #   The minimum number of selected choices.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_selected_choices
+    #   The maximum number of selected choices.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ProfileQuestion AWS API Documentation
+    #
+    class ProfileQuestion < Struct.new(
+      :question_id,
+      :question_title,
+      :question_description,
+      :question_choices,
+      :selected_choice_ids,
+      :min_selected_choices,
+      :max_selected_choices)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An update to a profile question.
+    #
+    # @!attribute [rw] question_id
+    #   The ID of the question.
+    #   @return [String]
+    #
+    # @!attribute [rw] selected_choice_ids
+    #   The selected choices.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ProfileQuestionUpdate AWS API Documentation
+    #
+    class ProfileQuestionUpdate < Struct.new(
+      :question_id,
+      :selected_choice_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary of a profile share.
+    #
+    # @!attribute [rw] share_id
+    #   The ID associated with the share.
+    #   @return [String]
+    #
+    # @!attribute [rw] shared_with
+    #   The Amazon Web Services account ID, IAM role, organization ID, or
+    #   organizational unit (OU) ID with which the workload, lens, or
+    #   profile is shared.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the share request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Profile share invitation status message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ProfileShareSummary AWS API Documentation
+    #
+    class ProfileShareSummary < Struct.new(
+      :share_id,
+      :shared_with,
+      :status,
+      :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary of a profile.
+    #
+    # @!attribute [rw] profile_arn
+    #   The profile ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_version
+    #   The profile version.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_name
+    #   The profile name.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_description
+    #   The profile description.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   An Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time recorded.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time recorded.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ProfileSummary AWS API Documentation
+    #
+    class ProfileSummary < Struct.new(
+      :profile_arn,
+      :profile_version,
+      :profile_name,
+      :profile_description,
+      :owner,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The profile template.
+    #
+    # @!attribute [rw] template_name
+    #   The name of the profile template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_questions
+    #   Profile template questions.
+    #   @return [Array<Types::ProfileTemplateQuestion>]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time recorded.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time recorded.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ProfileTemplate AWS API Documentation
+    #
+    class ProfileTemplate < Struct.new(
+      :template_name,
+      :template_questions,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A profile template choice.
+    #
+    # @!attribute [rw] choice_id
+    #   The ID of a choice.
+    #   @return [String]
+    #
+    # @!attribute [rw] choice_title
+    #   The title of a choice.
+    #   @return [String]
+    #
+    # @!attribute [rw] choice_description
+    #   The description of a choice.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ProfileTemplateChoice AWS API Documentation
+    #
+    class ProfileTemplateChoice < Struct.new(
+      :choice_id,
+      :choice_title,
+      :choice_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A profile template question.
+    #
+    # @!attribute [rw] question_id
+    #   The ID of the question.
+    #   @return [String]
+    #
+    # @!attribute [rw] question_title
+    #   The title of the question.
+    #   @return [String]
+    #
+    # @!attribute [rw] question_description
+    #   The description of the question.
+    #   @return [String]
+    #
+    # @!attribute [rw] question_choices
+    #   The question choices.
+    #   @return [Array<Types::ProfileTemplateChoice>]
+    #
+    # @!attribute [rw] min_selected_choices
+    #   The minimum number of choices selected.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_selected_choices
+    #   The maximum number of choices selected.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ProfileTemplateQuestion AWS API Documentation
+    #
+    class ProfileTemplateQuestion < Struct.new(
+      :question_id,
+      :question_title,
+      :question_description,
+      :question_choices,
+      :min_selected_choices,
+      :max_selected_choices)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3432,6 +4252,10 @@ module Aws::WellArchitected
     #   The ARN for the lens.
     #   @return [String]
     #
+    # @!attribute [rw] profile_arn
+    #   The profile ARN.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ShareInvitation AWS API Documentation
     #
     class ShareInvitation < Struct.new(
@@ -3439,7 +4263,8 @@ module Aws::WellArchitected
       :share_resource_type,
       :workload_id,
       :lens_alias,
-      :lens_arn)
+      :lens_arn,
+      :profile_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3456,11 +4281,12 @@ module Aws::WellArchitected
     #
     # @!attribute [rw] shared_with
     #   The Amazon Web Services account ID, IAM role, organization ID, or
-    #   organizational unit (OU) ID with which the workload is shared.
+    #   organizational unit (OU) ID with which the workload, lens, or
+    #   profile is shared.
     #   @return [String]
     #
     # @!attribute [rw] permission_type
-    #   Permission granted on a workload share.
+    #   Permission granted on a share request.
     #   @return [String]
     #
     # @!attribute [rw] share_resource_type
@@ -3488,6 +4314,14 @@ module Aws::WellArchitected
     #   The ARN for the lens.
     #   @return [String]
     #
+    # @!attribute [rw] profile_name
+    #   The profile name.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
+    #   The profile ARN.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ShareInvitationSummary AWS API Documentation
     #
     class ShareInvitationSummary < Struct.new(
@@ -3499,7 +4333,9 @@ module Aws::WellArchitected
       :workload_name,
       :workload_id,
       :lens_name,
-      :lens_arn)
+      :lens_arn,
+      :profile_name,
+      :profile_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3754,6 +4590,40 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # @!attribute [rw] profile_arn
+    #   The profile ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_description
+    #   The profile description.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_questions
+    #   Profile questions.
+    #   @return [Array<Types::ProfileQuestionUpdate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateProfileInput AWS API Documentation
+    #
+    class UpdateProfileInput < Struct.new(
+      :profile_arn,
+      :profile_description,
+      :profile_questions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile
+    #   The profile.
+    #   @return [Types::Profile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateProfileOutput AWS API Documentation
+    #
+    class UpdateProfileOutput < Struct.new(
+      :profile)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Input for Update Share Invitation
     #
     # @!attribute [rw] share_invitation_id
@@ -3970,7 +4840,7 @@ module Aws::WellArchitected
     # Input for Update Workload Share
     #
     # @!attribute [rw] share_id
-    #   The ID associated with the workload share.
+    #   The ID associated with the share.
     #   @return [String]
     #
     # @!attribute [rw] workload_id
@@ -3979,7 +4849,7 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] permission_type
-    #   Permission granted on a workload share.
+    #   Permission granted on a share request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateWorkloadShareInput AWS API Documentation
@@ -4058,6 +4928,50 @@ module Aws::WellArchitected
     class UpgradeLensReviewInput < Struct.new(
       :workload_id,
       :lens_alias,
+      :milestone_name,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workload_id
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
+    #   The profile ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] milestone_name
+    #   The name of the milestone in a workload.
+    #
+    #   Milestone names must be unique within a workload.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique case-sensitive string used to ensure that this request is
+    #   idempotent (executes only once).
+    #
+    #   You should not reuse the same token for other requests. If you retry
+    #   a request with the same client request token and the same parameters
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
+    #
+    #   This token is listed as required, however, if you do not specify it,
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpgradeProfileVersionInput AWS API Documentation
+    #
+    class UpgradeProfileVersionInput < Struct.new(
+      :workload_id,
+      :profile_arn,
       :milestone_name,
       :client_request_token)
       SENSITIVE = []
@@ -4299,6 +5213,15 @@ module Aws::WellArchitected
     #   List of AppRegistry application ARNs associated to the workload.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] profiles
+    #   Profile associated with a workload.
+    #   @return [Array<Types::WorkloadProfile>]
+    #
+    # @!attribute [rw] prioritized_risk_counts
+    #   A map from risk names to the count of how many questions have that
+    #   rating.
+    #   @return [Hash<String,Integer>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/Workload AWS API Documentation
     #
     class Workload < Struct.new(
@@ -4326,7 +5249,9 @@ module Aws::WellArchitected
       :share_invitation_id,
       :tags,
       :discovery_config,
-      :applications)
+      :applications,
+      :profiles,
+      :prioritized_risk_counts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4354,10 +5279,29 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # The profile associated with a workload.
+    #
+    # @!attribute [rw] profile_arn
+    #   The profile ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_version
+    #   The profile version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/WorkloadProfile AWS API Documentation
+    #
+    class WorkloadProfile < Struct.new(
+      :profile_arn,
+      :profile_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A workload share return object.
     #
     # @!attribute [rw] share_id
-    #   The ID associated with the workload share.
+    #   The ID associated with the share.
     #   @return [String]
     #
     # @!attribute [rw] shared_by
@@ -4366,15 +5310,16 @@ module Aws::WellArchitected
     #
     # @!attribute [rw] shared_with
     #   The Amazon Web Services account ID, IAM role, organization ID, or
-    #   organizational unit (OU) ID with which the workload is shared.
+    #   organizational unit (OU) ID with which the workload, lens, or
+    #   profile is shared.
     #   @return [String]
     #
     # @!attribute [rw] permission_type
-    #   Permission granted on a workload share.
+    #   Permission granted on a share request.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of a workload share.
+    #   The status of the share request.
     #   @return [String]
     #
     # @!attribute [rw] workload_name
@@ -4407,20 +5352,21 @@ module Aws::WellArchitected
     # A workload share summary return object.
     #
     # @!attribute [rw] share_id
-    #   The ID associated with the workload share.
+    #   The ID associated with the share.
     #   @return [String]
     #
     # @!attribute [rw] shared_with
     #   The Amazon Web Services account ID, IAM role, organization ID, or
-    #   organizational unit (OU) ID with which the workload is shared.
+    #   organizational unit (OU) ID with which the workload, lens, or
+    #   profile is shared.
     #   @return [String]
     #
     # @!attribute [rw] permission_type
-    #   Permission granted on a workload share.
+    #   Permission granted on a share request.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of a workload share.
+    #   The status of the share request.
     #   @return [String]
     #
     # @!attribute [rw] status_message
@@ -4480,6 +5426,15 @@ module Aws::WellArchitected
     #   The improvement status for a workload.
     #   @return [String]
     #
+    # @!attribute [rw] profiles
+    #   Profile associated with a workload.
+    #   @return [Array<Types::WorkloadProfile>]
+    #
+    # @!attribute [rw] prioritized_risk_counts
+    #   A map from risk names to the count of how many questions have that
+    #   rating.
+    #   @return [Hash<String,Integer>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/WorkloadSummary AWS API Documentation
     #
     class WorkloadSummary < Struct.new(
@@ -4490,7 +5445,9 @@ module Aws::WellArchitected
       :updated_at,
       :lenses,
       :risk_counts,
-      :improvement_status)
+      :improvement_status,
+      :profiles,
+      :prioritized_risk_counts)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -507,6 +507,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon CodeCatalyst                                   | Aws::CodeCatalyst                        | aws-sdk-codecatalyst                        | 2022-09-28  |
 | Amazon CodeGuru Profiler                              | Aws::CodeGuruProfiler                    | aws-sdk-codeguruprofiler                    | 2019-07-18  |
 | Amazon CodeGuru Reviewer                              | Aws::CodeGuruReviewer                    | aws-sdk-codegurureviewer                    | 2019-09-19  |
+| Amazon CodeGuru Security                              | Aws::CodeGuruSecurity                    | aws-sdk-codegurusecurity                    | 2018-05-10  |
 | Amazon Cognito Identity                               | Aws::CognitoIdentity                     | aws-sdk-cognitoidentity                     | 2014-06-30  |
 | Amazon Cognito Identity Provider                      | Aws::CognitoIdentityProvider             | aws-sdk-cognitoidentityprovider             | 2016-04-18  |
 | Amazon Cognito Sync                                   | Aws::CognitoSync                         | aws-sdk-cognitosync                         | 2014-06-30  |
@@ -628,6 +629,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Transcribe Streaming Service                   | Aws::TranscribeStreamingService          | aws-sdk-transcribestreamingservice          | 2017-10-26  |
 | Amazon Translate                                      | Aws::Translate                           | aws-sdk-translate                           | 2017-07-01  |
 | Amazon VPC Lattice                                    | Aws::VPCLattice                          | aws-sdk-vpclattice                          | 2022-11-30  |
+| Amazon Verified Permissions                           | Aws::VerifiedPermissions                 | aws-sdk-verifiedpermissions                 | 2021-12-01  |
 | Amazon Voice ID                                       | Aws::VoiceID                             | aws-sdk-voiceid                             | 2021-09-27  |
 | Amazon WorkDocs                                       | Aws::WorkDocs                            | aws-sdk-workdocs                            | 2016-05-01  |
 | Amazon WorkLink                                       | Aws::WorkLink                            | aws-sdk-worklink                            | 2018-09-25  |

@@ -1781,9 +1781,11 @@ module Aws::Lightsail
     GetCertificatesRequest.add_member(:certificate_statuses, Shapes::ShapeRef.new(shape: CertificateStatusList, location_name: "certificateStatuses"))
     GetCertificatesRequest.add_member(:include_certificate_details, Shapes::ShapeRef.new(shape: IncludeCertificateDetails, location_name: "includeCertificateDetails"))
     GetCertificatesRequest.add_member(:certificate_name, Shapes::ShapeRef.new(shape: CertificateName, location_name: "certificateName"))
+    GetCertificatesRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
     GetCertificatesRequest.struct_class = Types::GetCertificatesRequest
 
     GetCertificatesResult.add_member(:certificates, Shapes::ShapeRef.new(shape: CertificateSummaryList, location_name: "certificates"))
+    GetCertificatesResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
     GetCertificatesResult.struct_class = Types::GetCertificatesResult
 
     GetCloudFormationStackRecordsRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))

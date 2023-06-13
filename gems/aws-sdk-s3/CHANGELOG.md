@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.124.0 (2023-06-13)
+------------------
+
+* Feature - Integrate double encryption feature to SDKs.
+
 1.123.2 (2023-06-12)
 ------------------
 

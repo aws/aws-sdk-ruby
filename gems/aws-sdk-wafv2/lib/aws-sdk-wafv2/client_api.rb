@@ -18,11 +18,14 @@ module Aws::WAFV2
     APIKeySummary = Shapes::StructureShape.new(name: 'APIKeySummary')
     APIKeyTokenDomains = Shapes::ListShape.new(name: 'APIKeyTokenDomains')
     APIKeyVersion = Shapes::IntegerShape.new(name: 'APIKeyVersion')
+    AWSManagedRulesACFPRuleSet = Shapes::StructureShape.new(name: 'AWSManagedRulesACFPRuleSet')
     AWSManagedRulesATPRuleSet = Shapes::StructureShape.new(name: 'AWSManagedRulesATPRuleSet')
     AWSManagedRulesBotControlRuleSet = Shapes::StructureShape.new(name: 'AWSManagedRulesBotControlRuleSet')
     Action = Shapes::StringShape.new(name: 'Action')
     ActionCondition = Shapes::StructureShape.new(name: 'ActionCondition')
     ActionValue = Shapes::StringShape.new(name: 'ActionValue')
+    AddressField = Shapes::StructureShape.new(name: 'AddressField')
+    AddressFields = Shapes::ListShape.new(name: 'AddressFields')
     All = Shapes::StructureShape.new(name: 'All')
     AllQueryArguments = Shapes::StructureShape.new(name: 'AllQueryArguments')
     AllowAction = Shapes::StructureShape.new(name: 'AllowAction')
@@ -66,6 +69,7 @@ module Aws::WAFV2
     CreateRuleGroupResponse = Shapes::StructureShape.new(name: 'CreateRuleGroupResponse')
     CreateWebACLRequest = Shapes::StructureShape.new(name: 'CreateWebACLRequest')
     CreateWebACLResponse = Shapes::StructureShape.new(name: 'CreateWebACLResponse')
+    CreationPathString = Shapes::StringShape.new(name: 'CreationPathString')
     CustomHTTPHeader = Shapes::StructureShape.new(name: 'CustomHTTPHeader')
     CustomHTTPHeaderName = Shapes::StringShape.new(name: 'CustomHTTPHeaderName')
     CustomHTTPHeaderValue = Shapes::StringShape.new(name: 'CustomHTTPHeaderValue')
@@ -98,6 +102,7 @@ module Aws::WAFV2
     DisassociateWebACLRequest = Shapes::StructureShape.new(name: 'DisassociateWebACLRequest')
     DisassociateWebACLResponse = Shapes::StructureShape.new(name: 'DisassociateWebACLResponse')
     DownloadUrl = Shapes::StringShape.new(name: 'DownloadUrl')
+    EmailField = Shapes::StructureShape.new(name: 'EmailField')
     EntityDescription = Shapes::StringShape.new(name: 'EntityDescription')
     EntityId = Shapes::StringShape.new(name: 'EntityId')
     EntityName = Shapes::StringShape.new(name: 'EntityName')
@@ -246,6 +251,8 @@ module Aws::WAFV2
     ParameterExceptionParameter = Shapes::StringShape.new(name: 'ParameterExceptionParameter')
     PasswordField = Shapes::StructureShape.new(name: 'PasswordField')
     PayloadType = Shapes::StringShape.new(name: 'PayloadType')
+    PhoneNumberField = Shapes::StructureShape.new(name: 'PhoneNumberField')
+    PhoneNumberFields = Shapes::ListShape.new(name: 'PhoneNumberFields')
     Platform = Shapes::StringShape.new(name: 'Platform')
     PolicyString = Shapes::StringShape.new(name: 'PolicyString')
     PopulationSize = Shapes::IntegerShape.new(name: 'PopulationSize')
@@ -284,6 +291,7 @@ module Aws::WAFV2
     RegexPatternSetSummaries = Shapes::ListShape.new(name: 'RegexPatternSetSummaries')
     RegexPatternSetSummary = Shapes::StructureShape.new(name: 'RegexPatternSetSummary')
     RegexPatternString = Shapes::StringShape.new(name: 'RegexPatternString')
+    RegistrationPagePathString = Shapes::StringShape.new(name: 'RegistrationPagePathString')
     RegularExpressionList = Shapes::ListShape.new(name: 'RegularExpressionList')
     ReleaseNotes = Shapes::StringShape.new(name: 'ReleaseNotes')
     ReleaseSummaries = Shapes::ListShape.new(name: 'ReleaseSummaries')
@@ -291,6 +299,7 @@ module Aws::WAFV2
     RequestBody = Shapes::MapShape.new(name: 'RequestBody')
     RequestBodyAssociatedResourceTypeConfig = Shapes::StructureShape.new(name: 'RequestBodyAssociatedResourceTypeConfig')
     RequestInspection = Shapes::StructureShape.new(name: 'RequestInspection')
+    RequestInspectionACFP = Shapes::StructureShape.new(name: 'RequestInspectionACFP')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceArns = Shapes::ListShape.new(name: 'ResourceArns')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
@@ -415,9 +424,17 @@ module Aws::WAFV2
 
     APIKeyTokenDomains.member = Shapes::ShapeRef.new(shape: TokenDomain)
 
+    AWSManagedRulesACFPRuleSet.add_member(:creation_path, Shapes::ShapeRef.new(shape: CreationPathString, required: true, location_name: "CreationPath"))
+    AWSManagedRulesACFPRuleSet.add_member(:registration_page_path, Shapes::ShapeRef.new(shape: RegistrationPagePathString, required: true, location_name: "RegistrationPagePath"))
+    AWSManagedRulesACFPRuleSet.add_member(:request_inspection, Shapes::ShapeRef.new(shape: RequestInspectionACFP, required: true, location_name: "RequestInspection"))
+    AWSManagedRulesACFPRuleSet.add_member(:response_inspection, Shapes::ShapeRef.new(shape: ResponseInspection, location_name: "ResponseInspection"))
+    AWSManagedRulesACFPRuleSet.add_member(:enable_regex_in_path, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableRegexInPath"))
+    AWSManagedRulesACFPRuleSet.struct_class = Types::AWSManagedRulesACFPRuleSet
+
     AWSManagedRulesATPRuleSet.add_member(:login_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "LoginPath"))
     AWSManagedRulesATPRuleSet.add_member(:request_inspection, Shapes::ShapeRef.new(shape: RequestInspection, location_name: "RequestInspection"))
     AWSManagedRulesATPRuleSet.add_member(:response_inspection, Shapes::ShapeRef.new(shape: ResponseInspection, location_name: "ResponseInspection"))
+    AWSManagedRulesATPRuleSet.add_member(:enable_regex_in_path, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableRegexInPath"))
     AWSManagedRulesATPRuleSet.struct_class = Types::AWSManagedRulesATPRuleSet
 
     AWSManagedRulesBotControlRuleSet.add_member(:inspection_level, Shapes::ShapeRef.new(shape: InspectionLevel, required: true, location_name: "InspectionLevel"))
@@ -425,6 +442,11 @@ module Aws::WAFV2
 
     ActionCondition.add_member(:action, Shapes::ShapeRef.new(shape: ActionValue, required: true, location_name: "Action"))
     ActionCondition.struct_class = Types::ActionCondition
+
+    AddressField.add_member(:identifier, Shapes::ShapeRef.new(shape: FieldIdentifier, required: true, location_name: "Identifier"))
+    AddressField.struct_class = Types::AddressField
+
+    AddressFields.member = Shapes::ShapeRef.new(shape: AddressField)
 
     All.struct_class = Types::All
 
@@ -673,6 +695,9 @@ module Aws::WAFV2
     DisassociateWebACLRequest.struct_class = Types::DisassociateWebACLRequest
 
     DisassociateWebACLResponse.struct_class = Types::DisassociateWebACLResponse
+
+    EmailField.add_member(:identifier, Shapes::ShapeRef.new(shape: FieldIdentifier, required: true, location_name: "Identifier"))
+    EmailField.struct_class = Types::EmailField
 
     ExcludedRule.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
     ExcludedRule.struct_class = Types::ExcludedRule
@@ -1063,6 +1088,7 @@ module Aws::WAFV2
     ManagedRuleGroupConfig.add_member(:password_field, Shapes::ShapeRef.new(shape: PasswordField, deprecated: true, location_name: "PasswordField", metadata: {"deprecatedMessage"=>"Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection PasswordField"}))
     ManagedRuleGroupConfig.add_member(:aws_managed_rules_bot_control_rule_set, Shapes::ShapeRef.new(shape: AWSManagedRulesBotControlRuleSet, location_name: "AWSManagedRulesBotControlRuleSet"))
     ManagedRuleGroupConfig.add_member(:aws_managed_rules_atp_rule_set, Shapes::ShapeRef.new(shape: AWSManagedRulesATPRuleSet, location_name: "AWSManagedRulesATPRuleSet"))
+    ManagedRuleGroupConfig.add_member(:aws_managed_rules_acfp_rule_set, Shapes::ShapeRef.new(shape: AWSManagedRulesACFPRuleSet, location_name: "AWSManagedRulesACFPRuleSet"))
     ManagedRuleGroupConfig.struct_class = Types::ManagedRuleGroupConfig
 
     ManagedRuleGroupConfigs.member = Shapes::ShapeRef.new(shape: ManagedRuleGroupConfig)
@@ -1139,6 +1165,11 @@ module Aws::WAFV2
 
     PasswordField.add_member(:identifier, Shapes::ShapeRef.new(shape: FieldIdentifier, required: true, location_name: "Identifier"))
     PasswordField.struct_class = Types::PasswordField
+
+    PhoneNumberField.add_member(:identifier, Shapes::ShapeRef.new(shape: FieldIdentifier, required: true, location_name: "Identifier"))
+    PhoneNumberField.struct_class = Types::PhoneNumberField
+
+    PhoneNumberFields.member = Shapes::ShapeRef.new(shape: PhoneNumberField)
 
     PublishedVersions.key = Shapes::ShapeRef.new(shape: VersionKeyString)
     PublishedVersions.value = Shapes::ShapeRef.new(shape: ManagedRuleSetVersion)
@@ -1264,6 +1295,14 @@ module Aws::WAFV2
     RequestInspection.add_member(:username_field, Shapes::ShapeRef.new(shape: UsernameField, required: true, location_name: "UsernameField"))
     RequestInspection.add_member(:password_field, Shapes::ShapeRef.new(shape: PasswordField, required: true, location_name: "PasswordField"))
     RequestInspection.struct_class = Types::RequestInspection
+
+    RequestInspectionACFP.add_member(:payload_type, Shapes::ShapeRef.new(shape: PayloadType, required: true, location_name: "PayloadType"))
+    RequestInspectionACFP.add_member(:username_field, Shapes::ShapeRef.new(shape: UsernameField, location_name: "UsernameField"))
+    RequestInspectionACFP.add_member(:password_field, Shapes::ShapeRef.new(shape: PasswordField, location_name: "PasswordField"))
+    RequestInspectionACFP.add_member(:email_field, Shapes::ShapeRef.new(shape: EmailField, location_name: "EmailField"))
+    RequestInspectionACFP.add_member(:phone_number_fields, Shapes::ShapeRef.new(shape: PhoneNumberFields, location_name: "PhoneNumberFields"))
+    RequestInspectionACFP.add_member(:address_fields, Shapes::ShapeRef.new(shape: AddressFields, location_name: "AddressFields"))
+    RequestInspectionACFP.struct_class = Types::RequestInspectionACFP
 
     ResourceArns.member = Shapes::ShapeRef.new(shape: ResourceArn)
 

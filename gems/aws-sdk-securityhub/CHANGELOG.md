@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2023-06-13)
+------------------
+
+* Feature - Add support for Security Hub Automation Rules
+
 1.83.0 (2023-05-31)
 ------------------
 

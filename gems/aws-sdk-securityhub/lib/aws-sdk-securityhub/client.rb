@@ -468,6 +468,67 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Deletes one or more automation rules.
+    #
+    # @option params [required, Array<String>] :automation_rules_arns
+    #   A list of Amazon Resource Names (ARNs) for the rules that are to be
+    #   deleted.
+    #
+    # @return [Types::BatchDeleteAutomationRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeleteAutomationRulesResponse#processed_automation_rules #processed_automation_rules} => Array&lt;String&gt;
+    #   * {Types::BatchDeleteAutomationRulesResponse#unprocessed_automation_rules #unprocessed_automation_rules} => Array&lt;Types::UnprocessedAutomationRule&gt;
+    #
+    #
+    # @example Example: To delete one or more automation rules
+    #
+    #   # The following example deletes the specified automation rules.
+    #
+    #   resp = client.batch_delete_automation_rules({
+    #     automation_rules_arns: [
+    #       "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #       "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     processed_automation_rules: [
+    #       "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     ], 
+    #     unprocessed_automation_rules: [
+    #       {
+    #         error_code: 500, 
+    #         error_message: "InternalException", 
+    #         rule_arn: "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_automation_rules({
+    #     automation_rules_arns: ["NonEmptyString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.processed_automation_rules #=> Array
+    #   resp.processed_automation_rules[0] #=> String
+    #   resp.unprocessed_automation_rules #=> Array
+    #   resp.unprocessed_automation_rules[0].rule_arn #=> String
+    #   resp.unprocessed_automation_rules[0].error_code #=> Integer
+    #   resp.unprocessed_automation_rules[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchDeleteAutomationRules AWS API Documentation
+    #
+    # @overload batch_delete_automation_rules(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_automation_rules(params = {}, options = {})
+      req = build_request(:batch_delete_automation_rules, params)
+      req.send_request(options)
+    end
+
     # Disables the standards specified by the provided
     # `StandardsSubscriptionArns`.
     #
@@ -607,6 +668,281 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def batch_enable_standards(params = {}, options = {})
       req = build_request(:batch_enable_standards, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of details for automation rules based on rule Amazon
+    # Resource Names (ARNs).
+    #
+    # @option params [required, Array<String>] :automation_rules_arns
+    #   A list of rule ARNs to get details for.
+    #
+    # @return [Types::BatchGetAutomationRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetAutomationRulesResponse#rules #rules} => Array&lt;Types::AutomationRulesConfig&gt;
+    #   * {Types::BatchGetAutomationRulesResponse#unprocessed_automation_rules #unprocessed_automation_rules} => Array&lt;Types::UnprocessedAutomationRule&gt;
+    #
+    #
+    # @example Example: To update one ore more automation rules
+    #
+    #   # The following example updates the specified automation rules.
+    #
+    #   resp = client.batch_get_automation_rules({
+    #     automation_rules_arns: [
+    #       "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #       "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     rules: [
+    #       {
+    #         actions: [
+    #           {
+    #             finding_fields_update: {
+    #               workflow: {
+    #                 status: "RESOLVED", 
+    #               }, 
+    #             }, 
+    #             type: "FINDING_FIELDS_UPDATE", 
+    #           }, 
+    #         ], 
+    #         created_at: Time.parse("2022-08-31T01:52:33.250Z"), 
+    #         created_by: "AROAJURBUYQQNL5OL2TIM:TEST-16MJ75L9VBK14", 
+    #         criteria: {
+    #           aws_account_id: [
+    #             {
+    #               comparison: "EQUALS", 
+    #               value: "111122223333", 
+    #             }, 
+    #           ], 
+    #           first_observed_at: [
+    #             {
+    #               date_range: {
+    #                 unit: "DAYS", 
+    #                 value: 5, 
+    #               }, 
+    #             }, 
+    #           ], 
+    #           type: [
+    #             {
+    #               comparison: "EQUALS", 
+    #               value: "Software and Configuration Checks/Industry and Regulatory Standards", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         description: "sample rule description 1", 
+    #         rule_arn: "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #         rule_name: "sample-rule-name-1", 
+    #         rule_order: 1, 
+    #         rule_status: "ENABLED", 
+    #         updated_at: Time.parse("2022-08-31T01:52:33.250Z"), 
+    #       }, 
+    #       {
+    #         actions: [
+    #           {
+    #             finding_fields_update: {
+    #               workflow: {
+    #                 status: "RESOLVED", 
+    #               }, 
+    #             }, 
+    #             type: "FINDING_FIELDS_UPDATE", 
+    #           }, 
+    #         ], 
+    #         created_at: Time.parse("2022-08-31T01:52:33.250Z"), 
+    #         created_by: "AROAJURBUYQQNL5OL2TIM:TEST-16MJ75L9VBK14", 
+    #         criteria: {
+    #           resource_type: [
+    #             {
+    #               comparison: "EQUALS", 
+    #               value: "Ec2Instance", 
+    #             }, 
+    #           ], 
+    #           severity_label: [
+    #             {
+    #               comparison: "EQUALS", 
+    #               value: "INFORMATIONAL", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         description: "Sample rule description 2", 
+    #         rule_arn: "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222", 
+    #         rule_name: "sample-rule-name-2", 
+    #         rule_order: 2, 
+    #         rule_status: "ENABLED", 
+    #         updated_at: Time.parse("2022-08-31T01:52:33.250Z"), 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_automation_rules({
+    #     automation_rules_arns: ["NonEmptyString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rules #=> Array
+    #   resp.rules[0].rule_arn #=> String
+    #   resp.rules[0].rule_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.rules[0].rule_order #=> Integer
+    #   resp.rules[0].rule_name #=> String
+    #   resp.rules[0].description #=> String
+    #   resp.rules[0].is_terminal #=> Boolean
+    #   resp.rules[0].criteria.product_arn #=> Array
+    #   resp.rules[0].criteria.product_arn[0].value #=> String
+    #   resp.rules[0].criteria.product_arn[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.aws_account_id #=> Array
+    #   resp.rules[0].criteria.aws_account_id[0].value #=> String
+    #   resp.rules[0].criteria.aws_account_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.id #=> Array
+    #   resp.rules[0].criteria.id[0].value #=> String
+    #   resp.rules[0].criteria.id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.generator_id #=> Array
+    #   resp.rules[0].criteria.generator_id[0].value #=> String
+    #   resp.rules[0].criteria.generator_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.type #=> Array
+    #   resp.rules[0].criteria.type[0].value #=> String
+    #   resp.rules[0].criteria.type[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.first_observed_at #=> Array
+    #   resp.rules[0].criteria.first_observed_at[0].start #=> String
+    #   resp.rules[0].criteria.first_observed_at[0].end #=> String
+    #   resp.rules[0].criteria.first_observed_at[0].date_range.value #=> Integer
+    #   resp.rules[0].criteria.first_observed_at[0].date_range.unit #=> String, one of "DAYS"
+    #   resp.rules[0].criteria.last_observed_at #=> Array
+    #   resp.rules[0].criteria.last_observed_at[0].start #=> String
+    #   resp.rules[0].criteria.last_observed_at[0].end #=> String
+    #   resp.rules[0].criteria.last_observed_at[0].date_range.value #=> Integer
+    #   resp.rules[0].criteria.last_observed_at[0].date_range.unit #=> String, one of "DAYS"
+    #   resp.rules[0].criteria.created_at #=> Array
+    #   resp.rules[0].criteria.created_at[0].start #=> String
+    #   resp.rules[0].criteria.created_at[0].end #=> String
+    #   resp.rules[0].criteria.created_at[0].date_range.value #=> Integer
+    #   resp.rules[0].criteria.created_at[0].date_range.unit #=> String, one of "DAYS"
+    #   resp.rules[0].criteria.updated_at #=> Array
+    #   resp.rules[0].criteria.updated_at[0].start #=> String
+    #   resp.rules[0].criteria.updated_at[0].end #=> String
+    #   resp.rules[0].criteria.updated_at[0].date_range.value #=> Integer
+    #   resp.rules[0].criteria.updated_at[0].date_range.unit #=> String, one of "DAYS"
+    #   resp.rules[0].criteria.confidence #=> Array
+    #   resp.rules[0].criteria.confidence[0].gte #=> Float
+    #   resp.rules[0].criteria.confidence[0].lte #=> Float
+    #   resp.rules[0].criteria.confidence[0].eq #=> Float
+    #   resp.rules[0].criteria.criticality #=> Array
+    #   resp.rules[0].criteria.criticality[0].gte #=> Float
+    #   resp.rules[0].criteria.criticality[0].lte #=> Float
+    #   resp.rules[0].criteria.criticality[0].eq #=> Float
+    #   resp.rules[0].criteria.title #=> Array
+    #   resp.rules[0].criteria.title[0].value #=> String
+    #   resp.rules[0].criteria.title[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.description #=> Array
+    #   resp.rules[0].criteria.description[0].value #=> String
+    #   resp.rules[0].criteria.description[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.source_url #=> Array
+    #   resp.rules[0].criteria.source_url[0].value #=> String
+    #   resp.rules[0].criteria.source_url[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.product_name #=> Array
+    #   resp.rules[0].criteria.product_name[0].value #=> String
+    #   resp.rules[0].criteria.product_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.company_name #=> Array
+    #   resp.rules[0].criteria.company_name[0].value #=> String
+    #   resp.rules[0].criteria.company_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.severity_label #=> Array
+    #   resp.rules[0].criteria.severity_label[0].value #=> String
+    #   resp.rules[0].criteria.severity_label[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.resource_type #=> Array
+    #   resp.rules[0].criteria.resource_type[0].value #=> String
+    #   resp.rules[0].criteria.resource_type[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.resource_id #=> Array
+    #   resp.rules[0].criteria.resource_id[0].value #=> String
+    #   resp.rules[0].criteria.resource_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.resource_partition #=> Array
+    #   resp.rules[0].criteria.resource_partition[0].value #=> String
+    #   resp.rules[0].criteria.resource_partition[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.resource_region #=> Array
+    #   resp.rules[0].criteria.resource_region[0].value #=> String
+    #   resp.rules[0].criteria.resource_region[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.resource_tags #=> Array
+    #   resp.rules[0].criteria.resource_tags[0].key #=> String
+    #   resp.rules[0].criteria.resource_tags[0].value #=> String
+    #   resp.rules[0].criteria.resource_tags[0].comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.rules[0].criteria.resource_details_other #=> Array
+    #   resp.rules[0].criteria.resource_details_other[0].key #=> String
+    #   resp.rules[0].criteria.resource_details_other[0].value #=> String
+    #   resp.rules[0].criteria.resource_details_other[0].comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.rules[0].criteria.compliance_status #=> Array
+    #   resp.rules[0].criteria.compliance_status[0].value #=> String
+    #   resp.rules[0].criteria.compliance_status[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.compliance_security_control_id #=> Array
+    #   resp.rules[0].criteria.compliance_security_control_id[0].value #=> String
+    #   resp.rules[0].criteria.compliance_security_control_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.compliance_associated_standards_id #=> Array
+    #   resp.rules[0].criteria.compliance_associated_standards_id[0].value #=> String
+    #   resp.rules[0].criteria.compliance_associated_standards_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.verification_state #=> Array
+    #   resp.rules[0].criteria.verification_state[0].value #=> String
+    #   resp.rules[0].criteria.verification_state[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.workflow_status #=> Array
+    #   resp.rules[0].criteria.workflow_status[0].value #=> String
+    #   resp.rules[0].criteria.workflow_status[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.record_state #=> Array
+    #   resp.rules[0].criteria.record_state[0].value #=> String
+    #   resp.rules[0].criteria.record_state[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.related_findings_product_arn #=> Array
+    #   resp.rules[0].criteria.related_findings_product_arn[0].value #=> String
+    #   resp.rules[0].criteria.related_findings_product_arn[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.related_findings_id #=> Array
+    #   resp.rules[0].criteria.related_findings_id[0].value #=> String
+    #   resp.rules[0].criteria.related_findings_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.note_text #=> Array
+    #   resp.rules[0].criteria.note_text[0].value #=> String
+    #   resp.rules[0].criteria.note_text[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.note_updated_at #=> Array
+    #   resp.rules[0].criteria.note_updated_at[0].start #=> String
+    #   resp.rules[0].criteria.note_updated_at[0].end #=> String
+    #   resp.rules[0].criteria.note_updated_at[0].date_range.value #=> Integer
+    #   resp.rules[0].criteria.note_updated_at[0].date_range.unit #=> String, one of "DAYS"
+    #   resp.rules[0].criteria.note_updated_by #=> Array
+    #   resp.rules[0].criteria.note_updated_by[0].value #=> String
+    #   resp.rules[0].criteria.note_updated_by[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.rules[0].criteria.user_defined_fields #=> Array
+    #   resp.rules[0].criteria.user_defined_fields[0].key #=> String
+    #   resp.rules[0].criteria.user_defined_fields[0].value #=> String
+    #   resp.rules[0].criteria.user_defined_fields[0].comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.rules[0].actions #=> Array
+    #   resp.rules[0].actions[0].type #=> String, one of "FINDING_FIELDS_UPDATE"
+    #   resp.rules[0].actions[0].finding_fields_update.note.text #=> String
+    #   resp.rules[0].actions[0].finding_fields_update.note.updated_by #=> String
+    #   resp.rules[0].actions[0].finding_fields_update.severity.normalized #=> Integer
+    #   resp.rules[0].actions[0].finding_fields_update.severity.product #=> Float
+    #   resp.rules[0].actions[0].finding_fields_update.severity.label #=> String, one of "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.rules[0].actions[0].finding_fields_update.verification_state #=> String, one of "UNKNOWN", "TRUE_POSITIVE", "FALSE_POSITIVE", "BENIGN_POSITIVE"
+    #   resp.rules[0].actions[0].finding_fields_update.confidence #=> Integer
+    #   resp.rules[0].actions[0].finding_fields_update.criticality #=> Integer
+    #   resp.rules[0].actions[0].finding_fields_update.types #=> Array
+    #   resp.rules[0].actions[0].finding_fields_update.types[0] #=> String
+    #   resp.rules[0].actions[0].finding_fields_update.user_defined_fields #=> Hash
+    #   resp.rules[0].actions[0].finding_fields_update.user_defined_fields["NonEmptyString"] #=> String
+    #   resp.rules[0].actions[0].finding_fields_update.workflow.status #=> String, one of "NEW", "NOTIFIED", "RESOLVED", "SUPPRESSED"
+    #   resp.rules[0].actions[0].finding_fields_update.related_findings #=> Array
+    #   resp.rules[0].actions[0].finding_fields_update.related_findings[0].product_arn #=> String
+    #   resp.rules[0].actions[0].finding_fields_update.related_findings[0].id #=> String
+    #   resp.rules[0].created_at #=> Time
+    #   resp.rules[0].updated_at #=> Time
+    #   resp.rules[0].created_by #=> String
+    #   resp.unprocessed_automation_rules #=> Array
+    #   resp.unprocessed_automation_rules[0].rule_arn #=> String
+    #   resp.unprocessed_automation_rules[0].error_code #=> Integer
+    #   resp.unprocessed_automation_rules[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchGetAutomationRules AWS API Documentation
+    #
+    # @overload batch_get_automation_rules(params = {})
+    # @param [Hash] params ({})
+    def batch_get_automation_rules(params = {}, options = {})
+      req = build_request(:batch_get_automation_rules, params)
       req.send_request(options)
     end
 
@@ -923,6 +1259,347 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def batch_import_findings(params = {}, options = {})
       req = build_request(:batch_import_findings, params)
+      req.send_request(options)
+    end
+
+    # Updates one or more automation rules based on rule Amazon Resource
+    # Names (ARNs) and input parameters.
+    #
+    # @option params [required, Array<Types::UpdateAutomationRulesRequestItem>] :update_automation_rules_request_items
+    #   An array of ARNs for the rules that are to be updated. Optionally, you
+    #   can also include `RuleStatus` and `RuleOrder`.
+    #
+    # @return [Types::BatchUpdateAutomationRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchUpdateAutomationRulesResponse#processed_automation_rules #processed_automation_rules} => Array&lt;String&gt;
+    #   * {Types::BatchUpdateAutomationRulesResponse#unprocessed_automation_rules #unprocessed_automation_rules} => Array&lt;Types::UnprocessedAutomationRule&gt;
+    #
+    #
+    # @example Example: To update one ore more automation rules
+    #
+    #   # The following example updates the specified automation rules.
+    #
+    #   resp = client.batch_update_automation_rules({
+    #     update_automation_rules_request_items: [
+    #       {
+    #         rule_arn: "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #         rule_order: 15, 
+    #         rule_status: "ENABLED", 
+    #       }, 
+    #       {
+    #         rule_arn: "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222", 
+    #         rule_status: "DISABLED", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     processed_automation_rules: [
+    #       "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #       "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222", 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_update_automation_rules({
+    #     update_automation_rules_request_items: [ # required
+    #       {
+    #         rule_arn: "NonEmptyString", # required
+    #         rule_status: "ENABLED", # accepts ENABLED, DISABLED
+    #         rule_order: 1,
+    #         description: "NonEmptyString",
+    #         rule_name: "NonEmptyString",
+    #         is_terminal: false,
+    #         criteria: {
+    #           product_arn: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           aws_account_id: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           id: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           generator_id: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           type: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           first_observed_at: [
+    #             {
+    #               start: "NonEmptyString",
+    #               end: "NonEmptyString",
+    #               date_range: {
+    #                 value: 1,
+    #                 unit: "DAYS", # accepts DAYS
+    #               },
+    #             },
+    #           ],
+    #           last_observed_at: [
+    #             {
+    #               start: "NonEmptyString",
+    #               end: "NonEmptyString",
+    #               date_range: {
+    #                 value: 1,
+    #                 unit: "DAYS", # accepts DAYS
+    #               },
+    #             },
+    #           ],
+    #           created_at: [
+    #             {
+    #               start: "NonEmptyString",
+    #               end: "NonEmptyString",
+    #               date_range: {
+    #                 value: 1,
+    #                 unit: "DAYS", # accepts DAYS
+    #               },
+    #             },
+    #           ],
+    #           updated_at: [
+    #             {
+    #               start: "NonEmptyString",
+    #               end: "NonEmptyString",
+    #               date_range: {
+    #                 value: 1,
+    #                 unit: "DAYS", # accepts DAYS
+    #               },
+    #             },
+    #           ],
+    #           confidence: [
+    #             {
+    #               gte: 1.0,
+    #               lte: 1.0,
+    #               eq: 1.0,
+    #             },
+    #           ],
+    #           criticality: [
+    #             {
+    #               gte: 1.0,
+    #               lte: 1.0,
+    #               eq: 1.0,
+    #             },
+    #           ],
+    #           title: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           description: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           source_url: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           product_name: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           company_name: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           severity_label: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           resource_type: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           resource_id: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           resource_partition: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           resource_region: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           resource_tags: [
+    #             {
+    #               key: "NonEmptyString",
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
+    #             },
+    #           ],
+    #           resource_details_other: [
+    #             {
+    #               key: "NonEmptyString",
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
+    #             },
+    #           ],
+    #           compliance_status: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           compliance_security_control_id: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           compliance_associated_standards_id: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           verification_state: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           workflow_status: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           record_state: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           related_findings_product_arn: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           related_findings_id: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           note_text: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           note_updated_at: [
+    #             {
+    #               start: "NonEmptyString",
+    #               end: "NonEmptyString",
+    #               date_range: {
+    #                 value: 1,
+    #                 unit: "DAYS", # accepts DAYS
+    #               },
+    #             },
+    #           ],
+    #           note_updated_by: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           user_defined_fields: [
+    #             {
+    #               key: "NonEmptyString",
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
+    #             },
+    #           ],
+    #         },
+    #         actions: [
+    #           {
+    #             type: "FINDING_FIELDS_UPDATE", # accepts FINDING_FIELDS_UPDATE
+    #             finding_fields_update: {
+    #               note: {
+    #                 text: "NonEmptyString", # required
+    #                 updated_by: "NonEmptyString", # required
+    #               },
+    #               severity: {
+    #                 normalized: 1,
+    #                 product: 1.0,
+    #                 label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #               },
+    #               verification_state: "UNKNOWN", # accepts UNKNOWN, TRUE_POSITIVE, FALSE_POSITIVE, BENIGN_POSITIVE
+    #               confidence: 1,
+    #               criticality: 1,
+    #               types: ["NonEmptyString"],
+    #               user_defined_fields: {
+    #                 "NonEmptyString" => "NonEmptyString",
+    #               },
+    #               workflow: {
+    #                 status: "NEW", # accepts NEW, NOTIFIED, RESOLVED, SUPPRESSED
+    #               },
+    #               related_findings: [
+    #                 {
+    #                   product_arn: "NonEmptyString", # required
+    #                   id: "NonEmptyString", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.processed_automation_rules #=> Array
+    #   resp.processed_automation_rules[0] #=> String
+    #   resp.unprocessed_automation_rules #=> Array
+    #   resp.unprocessed_automation_rules[0].rule_arn #=> String
+    #   resp.unprocessed_automation_rules[0].error_code #=> Integer
+    #   resp.unprocessed_automation_rules[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchUpdateAutomationRules AWS API Documentation
+    #
+    # @overload batch_update_automation_rules(params = {})
+    # @param [Hash] params ({})
+    def batch_update_automation_rules(params = {}, options = {})
+      req = build_request(:batch_update_automation_rules, params)
       req.send_request(options)
     end
 
@@ -1294,6 +1971,413 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def create_action_target(params = {}, options = {})
       req = build_request(:create_action_target, params)
+      req.send_request(options)
+    end
+
+    # Creates an automation rule based on input parameters.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   User-defined tags that help you label the purpose of a rule.
+    #
+    # @option params [String] :rule_status
+    #   Whether the rule is active after it is created. If this parameter is
+    #   equal to `Enabled`, Security Hub will apply the rule to findings and
+    #   finding updates after the rule is created. To change the value of this
+    #   parameter after creating a rule, use `BatchUpdateAutomationRules`.
+    #
+    # @option params [required, Integer] :rule_order
+    #   An integer ranging from 1 to 1000 that represents the order in which
+    #   the rule action is applied to findings. Security Hub applies rules
+    #   with lower values for this parameter first.
+    #
+    # @option params [required, String] :rule_name
+    #   The name of the rule.
+    #
+    # @option params [required, String] :description
+    #   A description of the rule.
+    #
+    # @option params [Boolean] :is_terminal
+    #   Specifies whether a rule is the last to be applied with respect to a
+    #   finding that matches the rule criteria. This is useful when a finding
+    #   matches the criteria for multiple rules, and each rule has different
+    #   actions. If the value of this field is set to `true` for a rule,
+    #   Security Hub applies the rule action to a finding that matches the
+    #   rule criteria and won't evaluate other rules for the finding. The
+    #   default value of this field is `false`.
+    #
+    # @option params [required, Types::AutomationRulesFindingFilters] :criteria
+    #   A set of ASFF finding field attributes and corresponding expected
+    #   values that Security Hub uses to filter findings. If a finding matches
+    #   the conditions specified in this parameter, Security Hub applies the
+    #   rule action to the finding.
+    #
+    # @option params [required, Array<Types::AutomationRulesAction>] :actions
+    #   One or more actions to update finding fields if a finding matches the
+    #   conditions specified in `Criteria`.
+    #
+    # @return [Types::CreateAutomationRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAutomationRuleResponse#rule_arn #rule_arn} => String
+    #
+    #
+    # @example Example: To create an automation rule
+    #
+    #   # The following example creates an automation rule.
+    #
+    #   resp = client.create_automation_rule({
+    #     actions: [
+    #       {
+    #         finding_fields_update: {
+    #           note: {
+    #             text: "This is a critical S3 bucket, please look into this ASAP", 
+    #             updated_by: "test-user", 
+    #           }, 
+    #           severity: {
+    #             label: "CRITICAL", 
+    #           }, 
+    #         }, 
+    #         type: "FINDING_FIELDS_UPDATE", 
+    #       }, 
+    #     ], 
+    #     criteria: {
+    #       compliance_status: [
+    #         {
+    #           comparison: "EQUALS", 
+    #           value: "FAILED", 
+    #         }, 
+    #       ], 
+    #       product_name: [
+    #         {
+    #           comparison: "EQUALS", 
+    #           value: "Security Hub", 
+    #         }, 
+    #       ], 
+    #       record_state: [
+    #         {
+    #           comparison: "EQUALS", 
+    #           value: "ACTIVE", 
+    #         }, 
+    #       ], 
+    #       resource_id: [
+    #         {
+    #           comparison: "EQUALS", 
+    #           value: "arn:aws:s3:::examplebucket/developers/design_info.doc", 
+    #         }, 
+    #       ], 
+    #       workflow_status: [
+    #         {
+    #           comparison: "EQUALS", 
+    #           value: "NEW", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     description: "Elevate finding severity to Critical for important resources", 
+    #     is_terminal: false, 
+    #     rule_name: "Elevate severity for important resources", 
+    #     rule_order: 1, 
+    #     rule_status: "ENABLED", 
+    #     tags: {
+    #       "important-resources-rule" => "s3-bucket", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     rule_arn: "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_automation_rule({
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     rule_status: "ENABLED", # accepts ENABLED, DISABLED
+    #     rule_order: 1, # required
+    #     rule_name: "NonEmptyString", # required
+    #     description: "NonEmptyString", # required
+    #     is_terminal: false,
+    #     criteria: { # required
+    #       product_arn: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       aws_account_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       generator_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       type: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       first_observed_at: [
+    #         {
+    #           start: "NonEmptyString",
+    #           end: "NonEmptyString",
+    #           date_range: {
+    #             value: 1,
+    #             unit: "DAYS", # accepts DAYS
+    #           },
+    #         },
+    #       ],
+    #       last_observed_at: [
+    #         {
+    #           start: "NonEmptyString",
+    #           end: "NonEmptyString",
+    #           date_range: {
+    #             value: 1,
+    #             unit: "DAYS", # accepts DAYS
+    #           },
+    #         },
+    #       ],
+    #       created_at: [
+    #         {
+    #           start: "NonEmptyString",
+    #           end: "NonEmptyString",
+    #           date_range: {
+    #             value: 1,
+    #             unit: "DAYS", # accepts DAYS
+    #           },
+    #         },
+    #       ],
+    #       updated_at: [
+    #         {
+    #           start: "NonEmptyString",
+    #           end: "NonEmptyString",
+    #           date_range: {
+    #             value: 1,
+    #             unit: "DAYS", # accepts DAYS
+    #           },
+    #         },
+    #       ],
+    #       confidence: [
+    #         {
+    #           gte: 1.0,
+    #           lte: 1.0,
+    #           eq: 1.0,
+    #         },
+    #       ],
+    #       criticality: [
+    #         {
+    #           gte: 1.0,
+    #           lte: 1.0,
+    #           eq: 1.0,
+    #         },
+    #       ],
+    #       title: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       description: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       source_url: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       product_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       company_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       severity_label: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       resource_type: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       resource_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       resource_partition: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       resource_region: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       resource_tags: [
+    #         {
+    #           key: "NonEmptyString",
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
+    #         },
+    #       ],
+    #       resource_details_other: [
+    #         {
+    #           key: "NonEmptyString",
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
+    #         },
+    #       ],
+    #       compliance_status: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       compliance_security_control_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       compliance_associated_standards_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       verification_state: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       workflow_status: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       record_state: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       related_findings_product_arn: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       related_findings_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       note_text: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       note_updated_at: [
+    #         {
+    #           start: "NonEmptyString",
+    #           end: "NonEmptyString",
+    #           date_range: {
+    #             value: 1,
+    #             unit: "DAYS", # accepts DAYS
+    #           },
+    #         },
+    #       ],
+    #       note_updated_by: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       user_defined_fields: [
+    #         {
+    #           key: "NonEmptyString",
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS
+    #         },
+    #       ],
+    #     },
+    #     actions: [ # required
+    #       {
+    #         type: "FINDING_FIELDS_UPDATE", # accepts FINDING_FIELDS_UPDATE
+    #         finding_fields_update: {
+    #           note: {
+    #             text: "NonEmptyString", # required
+    #             updated_by: "NonEmptyString", # required
+    #           },
+    #           severity: {
+    #             normalized: 1,
+    #             product: 1.0,
+    #             label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #           },
+    #           verification_state: "UNKNOWN", # accepts UNKNOWN, TRUE_POSITIVE, FALSE_POSITIVE, BENIGN_POSITIVE
+    #           confidence: 1,
+    #           criticality: 1,
+    #           types: ["NonEmptyString"],
+    #           user_defined_fields: {
+    #             "NonEmptyString" => "NonEmptyString",
+    #           },
+    #           workflow: {
+    #             status: "NEW", # accepts NEW, NOTIFIED, RESOLVED, SUPPRESSED
+    #           },
+    #           related_findings: [
+    #             {
+    #               product_arn: "NonEmptyString", # required
+    #               id: "NonEmptyString", # required
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateAutomationRule AWS API Documentation
+    #
+    # @overload create_automation_rule(params = {})
+    # @param [Hash] params ({})
+    def create_automation_rule(params = {}, options = {})
+      req = build_request(:create_automation_rule, params)
       req.send_request(options)
     end
 
@@ -5161,6 +6245,90 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # A list of automation rules and their metadata for the calling account.
+    #
+    # @option params [String] :next_token
+    #   A token to specify where to start paginating the response. This is the
+    #   `NextToken` from a previously truncated response. On your first call
+    #   to the `ListAutomationRules` API, set the value of this parameter to
+    #   `NULL`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of rules to return in the response. This currently
+    #   ranges from 1 to 100.
+    #
+    # @return [Types::ListAutomationRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAutomationRulesResponse#automation_rules_metadata #automation_rules_metadata} => Array&lt;Types::AutomationRulesMetadata&gt;
+    #   * {Types::ListAutomationRulesResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To list automation rules
+    #
+    #   # The following example lists automation rules and rule metadata in the calling account.
+    #
+    #   resp = client.list_automation_rules({
+    #     max_results: 2, 
+    #     next_token: "example-token", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     automation_rules_metadata: [
+    #       {
+    #         created_at: Time.parse("2022-08-31T01:52:33.250Z"), 
+    #         created_by: "AROAJURBUYQQNL5OL2TIM:TEST-16MJ75L9VBK14", 
+    #         description: "IAM.8 is a known issue and can be resolved", 
+    #         rule_arn: "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #         rule_name: "sample-rule-name-1", 
+    #         rule_order: 1, 
+    #         rule_status: "ENABLED", 
+    #         updated_at: Time.parse("2022-08-31T01:52:33.250Z"), 
+    #       }, 
+    #       {
+    #         created_at: Time.parse("2022-08-31T01:52:33.250Z"), 
+    #         created_by: "AROAJURBUYQQNL5OL2TIM:TEST-16MJ75L9VBK14", 
+    #         description: "Lambda.2 is a known issue and can be resolved", 
+    #         rule_arn: "arn:aws:securityhub:us-east-1:123456789012:automation-rule/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222", 
+    #         rule_name: "sample-rule-name-2", 
+    #         rule_order: 2, 
+    #         rule_status: "ENABLED", 
+    #         updated_at: Time.parse("2022-08-31T01:52:33.250Z"), 
+    #       }, 
+    #     ], 
+    #     next_token: "example-token", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_automation_rules({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.automation_rules_metadata #=> Array
+    #   resp.automation_rules_metadata[0].rule_arn #=> String
+    #   resp.automation_rules_metadata[0].rule_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.automation_rules_metadata[0].rule_order #=> Integer
+    #   resp.automation_rules_metadata[0].rule_name #=> String
+    #   resp.automation_rules_metadata[0].description #=> String
+    #   resp.automation_rules_metadata[0].is_terminal #=> Boolean
+    #   resp.automation_rules_metadata[0].created_at #=> Time
+    #   resp.automation_rules_metadata[0].updated_at #=> Time
+    #   resp.automation_rules_metadata[0].created_by #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListAutomationRules AWS API Documentation
+    #
+    # @overload list_automation_rules(params = {})
+    # @param [Hash] params ({})
+    def list_automation_rules(params = {}, options = {})
+      req = build_request(:list_automation_rules, params)
+      req.send_request(options)
+    end
+
     # Lists all findings-generating solutions (products) that you are
     # subscribed to receive findings from in Security Hub.
     #
@@ -7515,7 +8683,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

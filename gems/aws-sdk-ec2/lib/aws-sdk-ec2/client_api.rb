@@ -414,6 +414,8 @@ module Aws::EC2
     CreateFpgaImageResult = Shapes::StructureShape.new(name: 'CreateFpgaImageResult')
     CreateImageRequest = Shapes::StructureShape.new(name: 'CreateImageRequest')
     CreateImageResult = Shapes::StructureShape.new(name: 'CreateImageResult')
+    CreateInstanceConnectEndpointRequest = Shapes::StructureShape.new(name: 'CreateInstanceConnectEndpointRequest')
+    CreateInstanceConnectEndpointResult = Shapes::StructureShape.new(name: 'CreateInstanceConnectEndpointResult')
     CreateInstanceEventWindowRequest = Shapes::StructureShape.new(name: 'CreateInstanceEventWindowRequest')
     CreateInstanceEventWindowResult = Shapes::StructureShape.new(name: 'CreateInstanceEventWindowResult')
     CreateInstanceExportTaskRequest = Shapes::StructureShape.new(name: 'CreateInstanceExportTaskRequest')
@@ -600,6 +602,8 @@ module Aws::EC2
     DeleteFlowLogsResult = Shapes::StructureShape.new(name: 'DeleteFlowLogsResult')
     DeleteFpgaImageRequest = Shapes::StructureShape.new(name: 'DeleteFpgaImageRequest')
     DeleteFpgaImageResult = Shapes::StructureShape.new(name: 'DeleteFpgaImageResult')
+    DeleteInstanceConnectEndpointRequest = Shapes::StructureShape.new(name: 'DeleteInstanceConnectEndpointRequest')
+    DeleteInstanceConnectEndpointResult = Shapes::StructureShape.new(name: 'DeleteInstanceConnectEndpointResult')
     DeleteInstanceEventWindowRequest = Shapes::StructureShape.new(name: 'DeleteInstanceEventWindowRequest')
     DeleteInstanceEventWindowResult = Shapes::StructureShape.new(name: 'DeleteInstanceEventWindowResult')
     DeleteInternetGatewayRequest = Shapes::StructureShape.new(name: 'DeleteInternetGatewayRequest')
@@ -844,6 +848,8 @@ module Aws::EC2
     DescribeImportSnapshotTasksRequest = Shapes::StructureShape.new(name: 'DescribeImportSnapshotTasksRequest')
     DescribeImportSnapshotTasksResult = Shapes::StructureShape.new(name: 'DescribeImportSnapshotTasksResult')
     DescribeInstanceAttributeRequest = Shapes::StructureShape.new(name: 'DescribeInstanceAttributeRequest')
+    DescribeInstanceConnectEndpointsRequest = Shapes::StructureShape.new(name: 'DescribeInstanceConnectEndpointsRequest')
+    DescribeInstanceConnectEndpointsResult = Shapes::StructureShape.new(name: 'DescribeInstanceConnectEndpointsResult')
     DescribeInstanceCreditSpecificationsMaxResults = Shapes::IntegerShape.new(name: 'DescribeInstanceCreditSpecificationsMaxResults')
     DescribeInstanceCreditSpecificationsRequest = Shapes::StructureShape.new(name: 'DescribeInstanceCreditSpecificationsRequest')
     DescribeInstanceCreditSpecificationsResult = Shapes::StructureShape.new(name: 'DescribeInstanceCreditSpecificationsResult')
@@ -1184,6 +1190,8 @@ module Aws::EC2
     EbsNvmeSupport = Shapes::StringShape.new(name: 'EbsNvmeSupport')
     EbsOptimizedInfo = Shapes::StructureShape.new(name: 'EbsOptimizedInfo')
     EbsOptimizedSupport = Shapes::StringShape.new(name: 'EbsOptimizedSupport')
+    Ec2InstanceConnectEndpoint = Shapes::StructureShape.new(name: 'Ec2InstanceConnectEndpoint')
+    Ec2InstanceConnectEndpointState = Shapes::StringShape.new(name: 'Ec2InstanceConnectEndpointState')
     EfaInfo = Shapes::StructureShape.new(name: 'EfaInfo')
     EfaSupportedFlag = Shapes::BooleanShape.new(name: 'EfaSupportedFlag')
     EgressOnlyInternetGateway = Shapes::StructureShape.new(name: 'EgressOnlyInternetGateway')
@@ -1571,6 +1579,9 @@ module Aws::EC2
     InstanceBlockDeviceMappingSpecificationList = Shapes::ListShape.new(name: 'InstanceBlockDeviceMappingSpecificationList')
     InstanceBootModeValues = Shapes::StringShape.new(name: 'InstanceBootModeValues')
     InstanceCapacity = Shapes::StructureShape.new(name: 'InstanceCapacity')
+    InstanceConnectEndpointId = Shapes::StringShape.new(name: 'InstanceConnectEndpointId')
+    InstanceConnectEndpointMaxResults = Shapes::IntegerShape.new(name: 'InstanceConnectEndpointMaxResults')
+    InstanceConnectEndpointSet = Shapes::ListShape.new(name: 'InstanceConnectEndpointSet')
     InstanceCount = Shapes::StructureShape.new(name: 'InstanceCount')
     InstanceCountList = Shapes::ListShape.new(name: 'InstanceCountList')
     InstanceCreditSpecification = Shapes::StructureShape.new(name: 'InstanceCreditSpecification')
@@ -2136,6 +2147,7 @@ module Aws::EC2
     NetworkInterfaceCreationType = Shapes::StringShape.new(name: 'NetworkInterfaceCreationType')
     NetworkInterfaceId = Shapes::StringShape.new(name: 'NetworkInterfaceId')
     NetworkInterfaceIdList = Shapes::ListShape.new(name: 'NetworkInterfaceIdList')
+    NetworkInterfaceIdSet = Shapes::ListShape.new(name: 'NetworkInterfaceIdSet')
     NetworkInterfaceIpv6Address = Shapes::StructureShape.new(name: 'NetworkInterfaceIpv6Address')
     NetworkInterfaceIpv6AddressesList = Shapes::ListShape.new(name: 'NetworkInterfaceIpv6AddressesList')
     NetworkInterfaceList = Shapes::ListShape.new(name: 'NetworkInterfaceList')
@@ -2514,7 +2526,9 @@ module Aws::EC2
     SecurityGroup = Shapes::StructureShape.new(name: 'SecurityGroup')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
+    SecurityGroupIdSet = Shapes::ListShape.new(name: 'SecurityGroupIdSet')
     SecurityGroupIdStringList = Shapes::ListShape.new(name: 'SecurityGroupIdStringList')
+    SecurityGroupIdStringListRequest = Shapes::ListShape.new(name: 'SecurityGroupIdStringListRequest')
     SecurityGroupIdentifier = Shapes::StructureShape.new(name: 'SecurityGroupIdentifier')
     SecurityGroupList = Shapes::ListShape.new(name: 'SecurityGroupList')
     SecurityGroupName = Shapes::StringShape.new(name: 'SecurityGroupName')
@@ -4478,6 +4492,18 @@ module Aws::EC2
     CreateImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
     CreateImageResult.struct_class = Types::CreateImageResult
 
+    CreateInstanceConnectEndpointRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateInstanceConnectEndpointRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "SubnetId"))
+    CreateInstanceConnectEndpointRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdStringListRequest, location_name: "SecurityGroupId"))
+    CreateInstanceConnectEndpointRequest.add_member(:preserve_client_ip, Shapes::ShapeRef.new(shape: Boolean, location_name: "PreserveClientIp"))
+    CreateInstanceConnectEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateInstanceConnectEndpointRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateInstanceConnectEndpointRequest.struct_class = Types::CreateInstanceConnectEndpointRequest
+
+    CreateInstanceConnectEndpointResult.add_member(:instance_connect_endpoint, Shapes::ShapeRef.new(shape: Ec2InstanceConnectEndpoint, location_name: "instanceConnectEndpoint"))
+    CreateInstanceConnectEndpointResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
+    CreateInstanceConnectEndpointResult.struct_class = Types::CreateInstanceConnectEndpointResult
+
     CreateInstanceEventWindowRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateInstanceEventWindowRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     CreateInstanceEventWindowRequest.add_member(:time_ranges, Shapes::ShapeRef.new(shape: InstanceEventWindowTimeRangeRequestSet, location_name: "TimeRange"))
@@ -5406,6 +5432,13 @@ module Aws::EC2
 
     DeleteFpgaImageResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     DeleteFpgaImageResult.struct_class = Types::DeleteFpgaImageResult
+
+    DeleteInstanceConnectEndpointRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteInstanceConnectEndpointRequest.add_member(:instance_connect_endpoint_id, Shapes::ShapeRef.new(shape: InstanceConnectEndpointId, required: true, location_name: "InstanceConnectEndpointId"))
+    DeleteInstanceConnectEndpointRequest.struct_class = Types::DeleteInstanceConnectEndpointRequest
+
+    DeleteInstanceConnectEndpointResult.add_member(:instance_connect_endpoint, Shapes::ShapeRef.new(shape: Ec2InstanceConnectEndpoint, location_name: "instanceConnectEndpoint"))
+    DeleteInstanceConnectEndpointResult.struct_class = Types::DeleteInstanceConnectEndpointResult
 
     DeleteInstanceEventWindowRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DeleteInstanceEventWindowRequest.add_member(:force_delete, Shapes::ShapeRef.new(shape: Boolean, location_name: "ForceDelete"))
@@ -6386,6 +6419,17 @@ module Aws::EC2
     DescribeInstanceAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DescribeInstanceAttributeRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "instanceId"))
     DescribeInstanceAttributeRequest.struct_class = Types::DescribeInstanceAttributeRequest
+
+    DescribeInstanceConnectEndpointsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeInstanceConnectEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: InstanceConnectEndpointMaxResults, location_name: "MaxResults"))
+    DescribeInstanceConnectEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeInstanceConnectEndpointsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeInstanceConnectEndpointsRequest.add_member(:instance_connect_endpoint_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "InstanceConnectEndpointId"))
+    DescribeInstanceConnectEndpointsRequest.struct_class = Types::DescribeInstanceConnectEndpointsRequest
+
+    DescribeInstanceConnectEndpointsResult.add_member(:instance_connect_endpoints, Shapes::ShapeRef.new(shape: InstanceConnectEndpointSet, location_name: "instanceConnectEndpointSet"))
+    DescribeInstanceConnectEndpointsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeInstanceConnectEndpointsResult.struct_class = Types::DescribeInstanceConnectEndpointsResult
 
     DescribeInstanceCreditSpecificationsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DescribeInstanceCreditSpecificationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
@@ -7863,6 +7907,23 @@ module Aws::EC2
     EbsOptimizedInfo.add_member(:maximum_throughput_in_m_bps, Shapes::ShapeRef.new(shape: MaximumThroughputInMBps, location_name: "maximumThroughputInMBps"))
     EbsOptimizedInfo.add_member(:maximum_iops, Shapes::ShapeRef.new(shape: MaximumIops, location_name: "maximumIops"))
     EbsOptimizedInfo.struct_class = Types::EbsOptimizedInfo
+
+    Ec2InstanceConnectEndpoint.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    Ec2InstanceConnectEndpoint.add_member(:instance_connect_endpoint_id, Shapes::ShapeRef.new(shape: InstanceConnectEndpointId, location_name: "instanceConnectEndpointId"))
+    Ec2InstanceConnectEndpoint.add_member(:instance_connect_endpoint_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "instanceConnectEndpointArn"))
+    Ec2InstanceConnectEndpoint.add_member(:state, Shapes::ShapeRef.new(shape: Ec2InstanceConnectEndpointState, location_name: "state"))
+    Ec2InstanceConnectEndpoint.add_member(:state_message, Shapes::ShapeRef.new(shape: String, location_name: "stateMessage"))
+    Ec2InstanceConnectEndpoint.add_member(:dns_name, Shapes::ShapeRef.new(shape: String, location_name: "dnsName"))
+    Ec2InstanceConnectEndpoint.add_member(:fips_dns_name, Shapes::ShapeRef.new(shape: String, location_name: "fipsDnsName"))
+    Ec2InstanceConnectEndpoint.add_member(:network_interface_ids, Shapes::ShapeRef.new(shape: NetworkInterfaceIdSet, location_name: "networkInterfaceIdSet"))
+    Ec2InstanceConnectEndpoint.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
+    Ec2InstanceConnectEndpoint.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    Ec2InstanceConnectEndpoint.add_member(:created_at, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "createdAt"))
+    Ec2InstanceConnectEndpoint.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "subnetId"))
+    Ec2InstanceConnectEndpoint.add_member(:preserve_client_ip, Shapes::ShapeRef.new(shape: Boolean, location_name: "preserveClientIp"))
+    Ec2InstanceConnectEndpoint.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdSet, location_name: "securityGroupIdSet"))
+    Ec2InstanceConnectEndpoint.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    Ec2InstanceConnectEndpoint.struct_class = Types::Ec2InstanceConnectEndpoint
 
     EfaInfo.add_member(:maximum_efa_interfaces, Shapes::ShapeRef.new(shape: MaximumEfaInterfaces, location_name: "maximumEfaInterfaces"))
     EfaInfo.struct_class = Types::EfaInfo
@@ -9445,6 +9506,8 @@ module Aws::EC2
     InstanceCapacity.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
     InstanceCapacity.add_member(:total_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "totalCapacity"))
     InstanceCapacity.struct_class = Types::InstanceCapacity
+
+    InstanceConnectEndpointSet.member = Shapes::ShapeRef.new(shape: Ec2InstanceConnectEndpoint, location_name: "item")
 
     InstanceCount.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "instanceCount"))
     InstanceCount.add_member(:state, Shapes::ShapeRef.new(shape: ListingState, location_name: "state"))
@@ -11641,6 +11704,8 @@ module Aws::EC2
 
     NetworkInterfaceIdList.member = Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "item")
 
+    NetworkInterfaceIdSet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
     NetworkInterfaceIpv6Address.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Address"))
     NetworkInterfaceIpv6Address.struct_class = Types::NetworkInterfaceIpv6Address
 
@@ -13113,7 +13178,11 @@ module Aws::EC2
 
     SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "item")
 
+    SecurityGroupIdSet.member = Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "item")
+
     SecurityGroupIdStringList.member = Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "SecurityGroupId")
+
+    SecurityGroupIdStringListRequest.member = Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "SecurityGroupId")
 
     SecurityGroupIdentifier.add_member(:group_id, Shapes::ShapeRef.new(shape: String, location_name: "groupId"))
     SecurityGroupIdentifier.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
@@ -15446,6 +15515,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: CreateImageResult)
       end)
 
+      api.add_operation(:create_instance_connect_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateInstanceConnectEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateInstanceConnectEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateInstanceConnectEndpointResult)
+      end)
+
       api.add_operation(:create_instance_event_window, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateInstanceEventWindow"
         o.http_method = "POST"
@@ -16052,6 +16129,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteFpgaImageRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteFpgaImageResult)
+      end)
+
+      api.add_operation(:delete_instance_connect_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteInstanceConnectEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteInstanceConnectEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteInstanceConnectEndpointResult)
       end)
 
       api.add_operation(:delete_instance_event_window, Seahorse::Model::Operation.new.tap do |o|
@@ -17138,6 +17223,20 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeInstanceAttributeRequest)
         o.output = Shapes::ShapeRef.new(shape: InstanceAttribute)
+      end)
+
+      api.add_operation(:describe_instance_connect_endpoints, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInstanceConnectEndpoints"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInstanceConnectEndpointsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeInstanceConnectEndpointsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_instance_credit_specifications, Seahorse::Model::Operation.new.tap do |o|

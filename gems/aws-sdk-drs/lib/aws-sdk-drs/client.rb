@@ -373,6 +373,55 @@ module Aws::Drs
 
     # @!group API Operations
 
+    # Associate a Source Network to an existing CloudFormation Stack and
+    # modify launch templates to use this network. Can be used for reverting
+    # to previously deployed CloudFormation stacks.
+    #
+    # @option params [required, String] :cfn_stack_name
+    #   CloudFormation template to associate with a Source Network.
+    #
+    # @option params [required, String] :source_network_id
+    #   The Source Network ID to associate with CloudFormation template.
+    #
+    # @return [Types::AssociateSourceNetworkStackResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateSourceNetworkStackResponse#job #job} => Types::Job
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_source_network_stack({
+    #     cfn_stack_name: "CfnStackName", # required
+    #     source_network_id: "SourceNetworkID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job.arn #=> String
+    #   resp.job.creation_date_time #=> String
+    #   resp.job.end_date_time #=> String
+    #   resp.job.initiated_by #=> String, one of "START_RECOVERY", "START_DRILL", "FAILBACK", "DIAGNOSTIC", "TERMINATE_RECOVERY_INSTANCES", "TARGET_ACCOUNT", "CREATE_NETWORK_RECOVERY", "UPDATE_NETWORK_RECOVERY", "ASSOCIATE_NETWORK_RECOVERY"
+    #   resp.job.job_id #=> String
+    #   resp.job.participating_resources #=> Array
+    #   resp.job.participating_resources[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
+    #   resp.job.participating_resources[0].participating_resource_id.source_network_id #=> String
+    #   resp.job.participating_servers #=> Array
+    #   resp.job.participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
+    #   resp.job.participating_servers[0].recovery_instance_id #=> String
+    #   resp.job.participating_servers[0].source_server_id #=> String
+    #   resp.job.status #=> String, one of "PENDING", "STARTED", "COMPLETED"
+    #   resp.job.tags #=> Hash
+    #   resp.job.tags["TagKey"] #=> String
+    #   resp.job.type #=> String, one of "LAUNCH", "TERMINATE", "CREATE_CONVERTED_SNAPSHOT"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/AssociateSourceNetworkStack AWS API Documentation
+    #
+    # @overload associate_source_network_stack(params = {})
+    # @param [Hash] params ({})
+    def associate_source_network_stack(params = {}, options = {})
+      req = build_request(:associate_source_network_stack, params)
+      req.send_request(options)
+    end
+
     # Create an extended source server in the target Account based on the
     # source server in staging account.
     #
@@ -431,6 +480,7 @@ module Aws::Drs
     #   resp.source_server.source_cloud_properties.origin_account_id #=> String
     #   resp.source_server.source_cloud_properties.origin_availability_zone #=> String
     #   resp.source_server.source_cloud_properties.origin_region #=> String
+    #   resp.source_server.source_network_id #=> String
     #   resp.source_server.source_properties.cpus #=> Array
     #   resp.source_server.source_properties.cpus[0].cores #=> Integer
     #   resp.source_server.source_properties.cpus[0].model_name #=> String
@@ -476,6 +526,9 @@ module Aws::Drs
     # @option params [Boolean] :copy_tags
     #   Copy tags.
     #
+    # @option params [String] :export_bucket_arn
+    #   S3 bucket ARN to export Source Network templates.
+    #
     # @option params [String] :launch_disposition
     #   Launch disposition.
     #
@@ -498,6 +551,7 @@ module Aws::Drs
     #   resp = client.create_launch_configuration_template({
     #     copy_private_ip: false,
     #     copy_tags: false,
+    #     export_bucket_arn: "ARN",
     #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
     #     licensing: {
     #       os_byol: false,
@@ -513,6 +567,7 @@ module Aws::Drs
     #   resp.launch_configuration_template.arn #=> String
     #   resp.launch_configuration_template.copy_private_ip #=> Boolean
     #   resp.launch_configuration_template.copy_tags #=> Boolean
+    #   resp.launch_configuration_template.export_bucket_arn #=> String
     #   resp.launch_configuration_template.launch_configuration_template_id #=> String
     #   resp.launch_configuration_template.launch_disposition #=> String, one of "STOPPED", "STARTED"
     #   resp.launch_configuration_template.licensing.os_byol #=> Boolean
@@ -613,7 +668,7 @@ module Aws::Drs
     #     create_public_ip: false, # required
     #     data_plane_routing: "PRIVATE_IP", # required, accepts PRIVATE_IP, PUBLIC_IP
     #     default_large_staging_disk_type: "GP2", # required, accepts GP2, GP3, ST1, AUTO
-    #     ebs_encryption: "DEFAULT", # required, accepts DEFAULT, CUSTOM
+    #     ebs_encryption: "DEFAULT", # required, accepts DEFAULT, CUSTOM, NONE
     #     ebs_encryption_key_arn: "ARN",
     #     pit_policy: [ # required
     #       {
@@ -645,7 +700,7 @@ module Aws::Drs
     #   resp.create_public_ip #=> Boolean
     #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
     #   resp.default_large_staging_disk_type #=> String, one of "GP2", "GP3", "ST1", "AUTO"
-    #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
+    #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM", "NONE"
     #   resp.ebs_encryption_key_arn #=> String
     #   resp.pit_policy #=> Array
     #   resp.pit_policy[0].enabled #=> Boolean
@@ -670,6 +725,48 @@ module Aws::Drs
     # @param [Hash] params ({})
     def create_replication_configuration_template(params = {}, options = {})
       req = build_request(:create_replication_configuration_template, params)
+      req.send_request(options)
+    end
+
+    # Create a new Source Network resource for a provided VPC ID.
+    #
+    # @option params [required, String] :origin_account_id
+    #   Account containing the VPC to protect.
+    #
+    # @option params [required, String] :origin_region
+    #   Region containing the VPC to protect.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A set of tags to be associated with the Source Network resource.
+    #
+    # @option params [required, String] :vpc_id
+    #   Which VPC ID to protect.
+    #
+    # @return [Types::CreateSourceNetworkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSourceNetworkResponse#source_network_id #source_network_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_source_network({
+    #     origin_account_id: "AccountID", # required
+    #     origin_region: "AwsRegion", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     vpc_id: "VpcID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_network_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/CreateSourceNetwork AWS API Documentation
+    #
+    # @overload create_source_network(params = {})
+    # @param [Hash] params ({})
+    def create_source_network(params = {}, options = {})
+      req = build_request(:create_source_network, params)
       req.send_request(options)
     end
 
@@ -763,6 +860,28 @@ module Aws::Drs
       req.send_request(options)
     end
 
+    # Delete Source Network resource.
+    #
+    # @option params [required, String] :source_network_id
+    #   ID of the Source Network to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_source_network({
+    #     source_network_id: "SourceNetworkID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DeleteSourceNetwork AWS API Documentation
+    #
+    # @overload delete_source_network(params = {})
+    # @param [Hash] params ({})
+    def delete_source_network(params = {}, options = {})
+      req = build_request(:delete_source_network, params)
+      req.send_request(options)
+    end
+
     # Deletes a single Source Server by ID. The Source Server must be
     # disconnected first.
     #
@@ -815,7 +934,7 @@ module Aws::Drs
     # @example Response structure
     #
     #   resp.items #=> Array
-    #   resp.items[0].event #=> String, one of "JOB_START", "SERVER_SKIPPED", "CLEANUP_START", "CLEANUP_END", "CLEANUP_FAIL", "SNAPSHOT_START", "SNAPSHOT_END", "SNAPSHOT_FAIL", "USING_PREVIOUS_SNAPSHOT", "USING_PREVIOUS_SNAPSHOT_FAILED", "CONVERSION_START", "CONVERSION_END", "CONVERSION_FAIL", "LAUNCH_START", "LAUNCH_FAILED", "JOB_CANCEL", "JOB_END"
+    #   resp.items[0].event #=> String, one of "JOB_START", "SERVER_SKIPPED", "CLEANUP_START", "CLEANUP_END", "CLEANUP_FAIL", "SNAPSHOT_START", "SNAPSHOT_END", "SNAPSHOT_FAIL", "USING_PREVIOUS_SNAPSHOT", "USING_PREVIOUS_SNAPSHOT_FAILED", "CONVERSION_START", "CONVERSION_END", "CONVERSION_FAIL", "LAUNCH_START", "LAUNCH_FAILED", "JOB_CANCEL", "JOB_END", "DEPLOY_NETWORK_CONFIGURATION_START", "DEPLOY_NETWORK_CONFIGURATION_END", "DEPLOY_NETWORK_CONFIGURATION_FAILED", "UPDATE_NETWORK_CONFIGURATION_START", "UPDATE_NETWORK_CONFIGURATION_END", "UPDATE_NETWORK_CONFIGURATION_FAILED", "UPDATE_LAUNCH_TEMPLATE_START", "UPDATE_LAUNCH_TEMPLATE_END", "UPDATE_LAUNCH_TEMPLATE_FAILED", "NETWORK_RECOVERY_FAIL"
     #   resp.items[0].event_data.conversion_properties.data_timestamp #=> String
     #   resp.items[0].event_data.conversion_properties.force_uefi #=> Boolean
     #   resp.items[0].event_data.conversion_properties.root_volume_name #=> String
@@ -825,6 +944,10 @@ module Aws::Drs
     #   resp.items[0].event_data.conversion_properties.volume_to_volume_size #=> Hash
     #   resp.items[0].event_data.conversion_properties.volume_to_volume_size["LargeBoundedString"] #=> Integer
     #   resp.items[0].event_data.conversion_server_id #=> String
+    #   resp.items[0].event_data.event_resource_data.source_network_data.source_network_id #=> String
+    #   resp.items[0].event_data.event_resource_data.source_network_data.source_vpc #=> String
+    #   resp.items[0].event_data.event_resource_data.source_network_data.stack_name #=> String
+    #   resp.items[0].event_data.event_resource_data.source_network_data.target_vpc #=> String
     #   resp.items[0].event_data.raw_error #=> String
     #   resp.items[0].event_data.source_server_id #=> String
     #   resp.items[0].event_data.target_instance_id #=> String
@@ -882,8 +1005,11 @@ module Aws::Drs
     #   resp.items[0].arn #=> String
     #   resp.items[0].creation_date_time #=> String
     #   resp.items[0].end_date_time #=> String
-    #   resp.items[0].initiated_by #=> String, one of "START_RECOVERY", "START_DRILL", "FAILBACK", "DIAGNOSTIC", "TERMINATE_RECOVERY_INSTANCES", "TARGET_ACCOUNT"
+    #   resp.items[0].initiated_by #=> String, one of "START_RECOVERY", "START_DRILL", "FAILBACK", "DIAGNOSTIC", "TERMINATE_RECOVERY_INSTANCES", "TARGET_ACCOUNT", "CREATE_NETWORK_RECOVERY", "UPDATE_NETWORK_RECOVERY", "ASSOCIATE_NETWORK_RECOVERY"
     #   resp.items[0].job_id #=> String
+    #   resp.items[0].participating_resources #=> Array
+    #   resp.items[0].participating_resources[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
+    #   resp.items[0].participating_resources[0].participating_resource_id.source_network_id #=> String
     #   resp.items[0].participating_servers #=> Array
     #   resp.items[0].participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.items[0].participating_servers[0].recovery_instance_id #=> String
@@ -938,6 +1064,7 @@ module Aws::Drs
     #   resp.items[0].arn #=> String
     #   resp.items[0].copy_private_ip #=> Boolean
     #   resp.items[0].copy_tags #=> Boolean
+    #   resp.items[0].export_bucket_arn #=> String
     #   resp.items[0].launch_configuration_template_id #=> String
     #   resp.items[0].launch_disposition #=> String, one of "STOPPED", "STARTED"
     #   resp.items[0].licensing.os_byol #=> Boolean
@@ -1150,7 +1277,7 @@ module Aws::Drs
     #   resp.items[0].create_public_ip #=> Boolean
     #   resp.items[0].data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
     #   resp.items[0].default_large_staging_disk_type #=> String, one of "GP2", "GP3", "ST1", "AUTO"
-    #   resp.items[0].ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
+    #   resp.items[0].ebs_encryption #=> String, one of "DEFAULT", "CUSTOM", "NONE"
     #   resp.items[0].ebs_encryption_key_arn #=> String
     #   resp.items[0].pit_policy #=> Array
     #   resp.items[0].pit_policy[0].enabled #=> Boolean
@@ -1176,6 +1303,64 @@ module Aws::Drs
     # @param [Hash] params ({})
     def describe_replication_configuration_templates(params = {}, options = {})
       req = build_request(:describe_replication_configuration_templates, params)
+      req.send_request(options)
+    end
+
+    # Lists all Source Networks or multiple Source Networks filtered by ID.
+    #
+    # @option params [Types::DescribeSourceNetworksRequestFilters] :filters
+    #   A set of filters by which to return Source Networks.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of Source Networks to retrieve.
+    #
+    # @option params [String] :next_token
+    #   The token of the next Source Networks to retrieve.
+    #
+    # @return [Types::DescribeSourceNetworksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSourceNetworksResponse#items #items} => Array&lt;Types::SourceNetwork&gt;
+    #   * {Types::DescribeSourceNetworksResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_source_networks({
+    #     filters: {
+    #       origin_account_id: "AccountID",
+    #       origin_region: "AwsRegion",
+    #       source_network_i_ds: ["SourceNetworkID"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].cfn_stack_name #=> String
+    #   resp.items[0].last_recovery.api_call_date_time #=> Time
+    #   resp.items[0].last_recovery.job_id #=> String
+    #   resp.items[0].last_recovery.last_recovery_result #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCESS", "FAIL", "PARTIAL_SUCCESS", "ASSOCIATE_SUCCESS", "ASSOCIATE_FAIL"
+    #   resp.items[0].launched_vpc_id #=> String
+    #   resp.items[0].replication_status #=> String, one of "STOPPED", "IN_PROGRESS", "PROTECTED", "ERROR"
+    #   resp.items[0].replication_status_details #=> String
+    #   resp.items[0].source_account_id #=> String
+    #   resp.items[0].source_network_id #=> String
+    #   resp.items[0].source_region #=> String
+    #   resp.items[0].source_vpc_id #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DescribeSourceNetworks AWS API Documentation
+    #
+    # @overload describe_source_networks(params = {})
+    # @param [Hash] params ({})
+    def describe_source_networks(params = {}, options = {})
+      req = build_request(:describe_source_networks, params)
       req.send_request(options)
     end
 
@@ -1245,6 +1430,7 @@ module Aws::Drs
     #   resp.items[0].source_cloud_properties.origin_account_id #=> String
     #   resp.items[0].source_cloud_properties.origin_availability_zone #=> String
     #   resp.items[0].source_cloud_properties.origin_region #=> String
+    #   resp.items[0].source_network_id #=> String
     #   resp.items[0].source_properties.cpus #=> Array
     #   resp.items[0].source_properties.cpus[0].cores #=> Integer
     #   resp.items[0].source_properties.cpus[0].model_name #=> String
@@ -1345,6 +1531,7 @@ module Aws::Drs
     #   * {Types::SourceServer#replication_direction #replication_direction} => String
     #   * {Types::SourceServer#reversed_direction_source_server_arn #reversed_direction_source_server_arn} => String
     #   * {Types::SourceServer#source_cloud_properties #source_cloud_properties} => Types::SourceCloudProperties
+    #   * {Types::SourceServer#source_network_id #source_network_id} => String
     #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
     #   * {Types::SourceServer#staging_area #staging_area} => Types::StagingArea
@@ -1391,6 +1578,7 @@ module Aws::Drs
     #   resp.source_cloud_properties.origin_account_id #=> String
     #   resp.source_cloud_properties.origin_availability_zone #=> String
     #   resp.source_cloud_properties.origin_region #=> String
+    #   resp.source_network_id #=> String
     #   resp.source_properties.cpus #=> Array
     #   resp.source_properties.cpus[0].cores #=> Integer
     #   resp.source_properties.cpus[0].model_name #=> String
@@ -1425,6 +1613,35 @@ module Aws::Drs
     # @param [Hash] params ({})
     def disconnect_source_server(params = {}, options = {})
       req = build_request(:disconnect_source_server, params)
+      req.send_request(options)
+    end
+
+    # Export the Source Network CloudFormation template to an S3 bucket.
+    #
+    # @option params [required, String] :source_network_id
+    #   The Source Network ID to export its CloudFormation template to an S3
+    #   bucket.
+    #
+    # @return [Types::ExportSourceNetworkCfnTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportSourceNetworkCfnTemplateResponse#s3_destination_url #s3_destination_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_source_network_cfn_template({
+    #     source_network_id: "SourceNetworkID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.s3_destination_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ExportSourceNetworkCfnTemplate AWS API Documentation
+    #
+    # @overload export_source_network_cfn_template(params = {})
+    # @param [Hash] params ({})
+    def export_source_network_cfn_template(params = {}, options = {})
+      req = build_request(:export_source_network_cfn_template, params)
       req.send_request(options)
     end
 
@@ -1546,7 +1763,7 @@ module Aws::Drs
     #   resp.create_public_ip #=> Boolean
     #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
     #   resp.default_large_staging_disk_type #=> String, one of "GP2", "GP3", "ST1", "AUTO"
-    #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
+    #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM", "NONE"
     #   resp.ebs_encryption_key_arn #=> String
     #   resp.name #=> String
     #   resp.pit_policy #=> Array
@@ -1727,6 +1944,7 @@ module Aws::Drs
     #   * {Types::SourceServer#replication_direction #replication_direction} => String
     #   * {Types::SourceServer#reversed_direction_source_server_arn #reversed_direction_source_server_arn} => String
     #   * {Types::SourceServer#source_cloud_properties #source_cloud_properties} => Types::SourceCloudProperties
+    #   * {Types::SourceServer#source_network_id #source_network_id} => String
     #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
     #   * {Types::SourceServer#staging_area #staging_area} => Types::StagingArea
@@ -1773,6 +1991,7 @@ module Aws::Drs
     #   resp.source_cloud_properties.origin_account_id #=> String
     #   resp.source_cloud_properties.origin_availability_zone #=> String
     #   resp.source_cloud_properties.origin_region #=> String
+    #   resp.source_network_id #=> String
     #   resp.source_properties.cpus #=> Array
     #   resp.source_properties.cpus[0].cores #=> Integer
     #   resp.source_properties.cpus[0].model_name #=> String
@@ -1873,8 +2092,11 @@ module Aws::Drs
     #   resp.job.arn #=> String
     #   resp.job.creation_date_time #=> String
     #   resp.job.end_date_time #=> String
-    #   resp.job.initiated_by #=> String, one of "START_RECOVERY", "START_DRILL", "FAILBACK", "DIAGNOSTIC", "TERMINATE_RECOVERY_INSTANCES", "TARGET_ACCOUNT"
+    #   resp.job.initiated_by #=> String, one of "START_RECOVERY", "START_DRILL", "FAILBACK", "DIAGNOSTIC", "TERMINATE_RECOVERY_INSTANCES", "TARGET_ACCOUNT", "CREATE_NETWORK_RECOVERY", "UPDATE_NETWORK_RECOVERY", "ASSOCIATE_NETWORK_RECOVERY"
     #   resp.job.job_id #=> String
+    #   resp.job.participating_resources #=> Array
+    #   resp.job.participating_resources[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
+    #   resp.job.participating_resources[0].participating_resource_id.source_network_id #=> String
     #   resp.job.participating_servers #=> Array
     #   resp.job.participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.job.participating_servers[0].recovery_instance_id #=> String
@@ -1930,8 +2152,11 @@ module Aws::Drs
     #   resp.job.arn #=> String
     #   resp.job.creation_date_time #=> String
     #   resp.job.end_date_time #=> String
-    #   resp.job.initiated_by #=> String, one of "START_RECOVERY", "START_DRILL", "FAILBACK", "DIAGNOSTIC", "TERMINATE_RECOVERY_INSTANCES", "TARGET_ACCOUNT"
+    #   resp.job.initiated_by #=> String, one of "START_RECOVERY", "START_DRILL", "FAILBACK", "DIAGNOSTIC", "TERMINATE_RECOVERY_INSTANCES", "TARGET_ACCOUNT", "CREATE_NETWORK_RECOVERY", "UPDATE_NETWORK_RECOVERY", "ASSOCIATE_NETWORK_RECOVERY"
     #   resp.job.job_id #=> String
+    #   resp.job.participating_resources #=> Array
+    #   resp.job.participating_resources[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
+    #   resp.job.participating_resources[0].participating_resource_id.source_network_id #=> String
     #   resp.job.participating_servers #=> Array
     #   resp.job.participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.job.participating_servers[0].recovery_instance_id #=> String
@@ -2001,6 +2226,7 @@ module Aws::Drs
     #   resp.source_server.source_cloud_properties.origin_account_id #=> String
     #   resp.source_server.source_cloud_properties.origin_availability_zone #=> String
     #   resp.source_server.source_cloud_properties.origin_region #=> String
+    #   resp.source_server.source_network_id #=> String
     #   resp.source_server.source_properties.cpus #=> Array
     #   resp.source_server.source_properties.cpus[0].cores #=> Integer
     #   resp.source_server.source_properties.cpus[0].model_name #=> String
@@ -2035,6 +2261,109 @@ module Aws::Drs
     # @param [Hash] params ({})
     def start_replication(params = {}, options = {})
       req = build_request(:start_replication, params)
+      req.send_request(options)
+    end
+
+    # Deploy VPC for the specified Source Network and modify launch
+    # templates to use this network. The VPC will be deployed using a
+    # dedicated CloudFormation stack.
+    #
+    # @option params [Boolean] :deploy_as_new
+    #   Don't update existing CloudFormation Stack, recover the network using
+    #   a new stack.
+    #
+    # @option params [required, Array<Types::StartSourceNetworkRecoveryRequestNetworkEntry>] :source_networks
+    #   The Source Networks that we want to start a Recovery Job for.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to be associated with the Source Network recovery Job.
+    #
+    # @return [Types::StartSourceNetworkRecoveryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartSourceNetworkRecoveryResponse#job #job} => Types::Job
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_source_network_recovery({
+    #     deploy_as_new: false,
+    #     source_networks: [ # required
+    #       {
+    #         cfn_stack_name: "CfnStackName",
+    #         source_network_id: "SourceNetworkID", # required
+    #       },
+    #     ],
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job.arn #=> String
+    #   resp.job.creation_date_time #=> String
+    #   resp.job.end_date_time #=> String
+    #   resp.job.initiated_by #=> String, one of "START_RECOVERY", "START_DRILL", "FAILBACK", "DIAGNOSTIC", "TERMINATE_RECOVERY_INSTANCES", "TARGET_ACCOUNT", "CREATE_NETWORK_RECOVERY", "UPDATE_NETWORK_RECOVERY", "ASSOCIATE_NETWORK_RECOVERY"
+    #   resp.job.job_id #=> String
+    #   resp.job.participating_resources #=> Array
+    #   resp.job.participating_resources[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
+    #   resp.job.participating_resources[0].participating_resource_id.source_network_id #=> String
+    #   resp.job.participating_servers #=> Array
+    #   resp.job.participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
+    #   resp.job.participating_servers[0].recovery_instance_id #=> String
+    #   resp.job.participating_servers[0].source_server_id #=> String
+    #   resp.job.status #=> String, one of "PENDING", "STARTED", "COMPLETED"
+    #   resp.job.tags #=> Hash
+    #   resp.job.tags["TagKey"] #=> String
+    #   resp.job.type #=> String, one of "LAUNCH", "TERMINATE", "CREATE_CONVERTED_SNAPSHOT"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/StartSourceNetworkRecovery AWS API Documentation
+    #
+    # @overload start_source_network_recovery(params = {})
+    # @param [Hash] params ({})
+    def start_source_network_recovery(params = {}, options = {})
+      req = build_request(:start_source_network_recovery, params)
+      req.send_request(options)
+    end
+
+    # Starts replication for a Source Network. This action would make the
+    # Source Network protected.
+    #
+    # @option params [required, String] :source_network_id
+    #   ID of the Source Network to replicate.
+    #
+    # @return [Types::StartSourceNetworkReplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartSourceNetworkReplicationResponse#source_network #source_network} => Types::SourceNetwork
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_source_network_replication({
+    #     source_network_id: "SourceNetworkID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_network.arn #=> String
+    #   resp.source_network.cfn_stack_name #=> String
+    #   resp.source_network.last_recovery.api_call_date_time #=> Time
+    #   resp.source_network.last_recovery.job_id #=> String
+    #   resp.source_network.last_recovery.last_recovery_result #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCESS", "FAIL", "PARTIAL_SUCCESS", "ASSOCIATE_SUCCESS", "ASSOCIATE_FAIL"
+    #   resp.source_network.launched_vpc_id #=> String
+    #   resp.source_network.replication_status #=> String, one of "STOPPED", "IN_PROGRESS", "PROTECTED", "ERROR"
+    #   resp.source_network.replication_status_details #=> String
+    #   resp.source_network.source_account_id #=> String
+    #   resp.source_network.source_network_id #=> String
+    #   resp.source_network.source_region #=> String
+    #   resp.source_network.source_vpc_id #=> String
+    #   resp.source_network.tags #=> Hash
+    #   resp.source_network.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/StartSourceNetworkReplication AWS API Documentation
+    #
+    # @overload start_source_network_replication(params = {})
+    # @param [Hash] params ({})
+    def start_source_network_replication(params = {}, options = {})
+      req = build_request(:start_source_network_replication, params)
       req.send_request(options)
     end
 
@@ -2114,6 +2443,7 @@ module Aws::Drs
     #   resp.source_server.source_cloud_properties.origin_account_id #=> String
     #   resp.source_server.source_cloud_properties.origin_availability_zone #=> String
     #   resp.source_server.source_cloud_properties.origin_region #=> String
+    #   resp.source_server.source_network_id #=> String
     #   resp.source_server.source_properties.cpus #=> Array
     #   resp.source_server.source_properties.cpus[0].cores #=> Integer
     #   resp.source_server.source_properties.cpus[0].model_name #=> String
@@ -2148,6 +2478,48 @@ module Aws::Drs
     # @param [Hash] params ({})
     def stop_replication(params = {}, options = {})
       req = build_request(:stop_replication, params)
+      req.send_request(options)
+    end
+
+    # Stops replication for a Source Network. This action would make the
+    # Source Network unprotected.
+    #
+    # @option params [required, String] :source_network_id
+    #   ID of the Source Network to stop replication.
+    #
+    # @return [Types::StopSourceNetworkReplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopSourceNetworkReplicationResponse#source_network #source_network} => Types::SourceNetwork
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_source_network_replication({
+    #     source_network_id: "SourceNetworkID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_network.arn #=> String
+    #   resp.source_network.cfn_stack_name #=> String
+    #   resp.source_network.last_recovery.api_call_date_time #=> Time
+    #   resp.source_network.last_recovery.job_id #=> String
+    #   resp.source_network.last_recovery.last_recovery_result #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCESS", "FAIL", "PARTIAL_SUCCESS", "ASSOCIATE_SUCCESS", "ASSOCIATE_FAIL"
+    #   resp.source_network.launched_vpc_id #=> String
+    #   resp.source_network.replication_status #=> String, one of "STOPPED", "IN_PROGRESS", "PROTECTED", "ERROR"
+    #   resp.source_network.replication_status_details #=> String
+    #   resp.source_network.source_account_id #=> String
+    #   resp.source_network.source_network_id #=> String
+    #   resp.source_network.source_region #=> String
+    #   resp.source_network.source_vpc_id #=> String
+    #   resp.source_network.tags #=> Hash
+    #   resp.source_network.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/StopSourceNetworkReplication AWS API Documentation
+    #
+    # @overload stop_source_network_replication(params = {})
+    # @param [Hash] params ({})
+    def stop_source_network_replication(params = {}, options = {})
+      req = build_request(:stop_source_network_replication, params)
       req.send_request(options)
     end
 
@@ -2205,8 +2577,11 @@ module Aws::Drs
     #   resp.job.arn #=> String
     #   resp.job.creation_date_time #=> String
     #   resp.job.end_date_time #=> String
-    #   resp.job.initiated_by #=> String, one of "START_RECOVERY", "START_DRILL", "FAILBACK", "DIAGNOSTIC", "TERMINATE_RECOVERY_INSTANCES", "TARGET_ACCOUNT"
+    #   resp.job.initiated_by #=> String, one of "START_RECOVERY", "START_DRILL", "FAILBACK", "DIAGNOSTIC", "TERMINATE_RECOVERY_INSTANCES", "TARGET_ACCOUNT", "CREATE_NETWORK_RECOVERY", "UPDATE_NETWORK_RECOVERY", "ASSOCIATE_NETWORK_RECOVERY"
     #   resp.job.job_id #=> String
+    #   resp.job.participating_resources #=> Array
+    #   resp.job.participating_resources[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
+    #   resp.job.participating_resources[0].participating_resource_id.source_network_id #=> String
     #   resp.job.participating_servers #=> Array
     #   resp.job.participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.job.participating_servers[0].recovery_instance_id #=> String
@@ -2371,6 +2746,9 @@ module Aws::Drs
     # @option params [Boolean] :copy_tags
     #   Copy tags.
     #
+    # @option params [String] :export_bucket_arn
+    #   S3 bucket ARN to export Source Network templates.
+    #
     # @option params [required, String] :launch_configuration_template_id
     #   Launch Configuration Template ID.
     #
@@ -2392,6 +2770,7 @@ module Aws::Drs
     #   resp = client.update_launch_configuration_template({
     #     copy_private_ip: false,
     #     copy_tags: false,
+    #     export_bucket_arn: "ARN",
     #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
     #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
     #     licensing: {
@@ -2405,6 +2784,7 @@ module Aws::Drs
     #   resp.launch_configuration_template.arn #=> String
     #   resp.launch_configuration_template.copy_private_ip #=> Boolean
     #   resp.launch_configuration_template.copy_tags #=> Boolean
+    #   resp.launch_configuration_template.export_bucket_arn #=> String
     #   resp.launch_configuration_template.launch_configuration_template_id #=> String
     #   resp.launch_configuration_template.launch_disposition #=> String, one of "STOPPED", "STARTED"
     #   resp.launch_configuration_template.licensing.os_byol #=> Boolean
@@ -2510,7 +2890,7 @@ module Aws::Drs
     #     create_public_ip: false,
     #     data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
     #     default_large_staging_disk_type: "GP2", # accepts GP2, GP3, ST1, AUTO
-    #     ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
+    #     ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM, NONE
     #     ebs_encryption_key_arn: "ARN",
     #     name: "SmallBoundedString",
     #     pit_policy: [
@@ -2550,7 +2930,7 @@ module Aws::Drs
     #   resp.create_public_ip #=> Boolean
     #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
     #   resp.default_large_staging_disk_type #=> String, one of "GP2", "GP3", "ST1", "AUTO"
-    #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
+    #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM", "NONE"
     #   resp.ebs_encryption_key_arn #=> String
     #   resp.name #=> String
     #   resp.pit_policy #=> Array
@@ -2671,7 +3051,7 @@ module Aws::Drs
     #     create_public_ip: false,
     #     data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
     #     default_large_staging_disk_type: "GP2", # accepts GP2, GP3, ST1, AUTO
-    #     ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
+    #     ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM, NONE
     #     ebs_encryption_key_arn: "ARN",
     #     pit_policy: [
     #       {
@@ -2701,7 +3081,7 @@ module Aws::Drs
     #   resp.create_public_ip #=> Boolean
     #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
     #   resp.default_large_staging_disk_type #=> String, one of "GP2", "GP3", "ST1", "AUTO"
-    #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
+    #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM", "NONE"
     #   resp.ebs_encryption_key_arn #=> String
     #   resp.pit_policy #=> Array
     #   resp.pit_policy[0].enabled #=> Boolean
@@ -2742,7 +3122,7 @@ module Aws::Drs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-drs'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

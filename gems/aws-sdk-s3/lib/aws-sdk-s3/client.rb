@@ -896,7 +896,7 @@ module Aws::S3
     #   resp.checksum_crc32c #=> String
     #   resp.checksum_sha1 #=> String
     #   resp.checksum_sha256 #=> String
-    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms"
+    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms", "aws:kms:dsse"
     #   resp.version_id #=> String
     #   resp.ssekms_key_id #=> String
     #   resp.bucket_key_enabled #=> Boolean
@@ -1477,7 +1477,7 @@ module Aws::S3
     #     },
     #     metadata_directive: "COPY", # accepts COPY, REPLACE
     #     tagging_directive: "COPY", # accepts COPY, REPLACE
-    #     server_side_encryption: "AES256", # accepts AES256, aws:kms
+    #     server_side_encryption: "AES256", # accepts AES256, aws:kms, aws:kms:dsse
     #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
@@ -1509,7 +1509,7 @@ module Aws::S3
     #   resp.expiration #=> String
     #   resp.copy_source_version_id #=> String
     #   resp.version_id #=> String
-    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms"
+    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms", "aws:kms:dsse"
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
@@ -1726,19 +1726,6 @@ module Aws::S3
     #   * {Types::CreateBucketOutput#location #location} => String
     #
     #
-    # @example Example: To create a bucket 
-    #
-    #   # The following example creates a bucket.
-    #
-    #   resp = client.create_bucket({
-    #     bucket: "examplebucket", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     location: "/examplebucket", 
-    #   }
-    #
     # @example Example: To create a bucket in a specific region
     #
     #   # The following example creates a bucket. The request specifies an AWS region where to create the bucket.
@@ -1753,6 +1740,19 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #     location: "http://examplebucket.<Region>.s3.amazonaws.com/", 
+    #   }
+    #
+    # @example Example: To create a bucket 
+    #
+    #   # The following example creates a bucket.
+    #
+    #   resp = client.create_bucket({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     location: "/examplebucket", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -2282,7 +2282,7 @@ module Aws::S3
     #     metadata: {
     #       "MetadataKey" => "MetadataValue",
     #     },
-    #     server_side_encryption: "AES256", # accepts AES256, aws:kms
+    #     server_side_encryption: "AES256", # accepts AES256, aws:kms, aws:kms:dsse
     #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
@@ -2307,7 +2307,7 @@ module Aws::S3
     #   resp.bucket #=> String
     #   resp.key #=> String
     #   resp.upload_id #=> String
-    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms"
+    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms", "aws:kms:dsse"
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
@@ -3317,6 +3317,21 @@ module Aws::S3
     #   * {Types::DeleteObjectTaggingOutput#version_id #version_id} => String
     #
     #
+    # @example Example: To remove tag set from an object
+    #
+    #   # The following example removes tag set associated with the specified object. If the bucket is versioning enabled, the
+    #   # operation removes tag set from the latest object version.
+    #
+    #   resp = client.delete_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     version_id: "null", 
+    #   }
+    #
     # @example Example: To remove tag set from an object version
     #
     #   # The following example removes tag set associated with the specified object version. The request specifies both the
@@ -3331,21 +3346,6 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   }
-    #
-    # @example Example: To remove tag set from an object
-    #
-    #   # The following example removes tag set associated with the specified object. If the bucket is versioning enabled, the
-    #   # operation removes tag set from the latest object version.
-    #
-    #   resp = client.delete_object_tagging({
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     version_id: "null", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -3504,42 +3504,6 @@ module Aws::S3
     #   * {Types::DeleteObjectsOutput#errors #errors} => Array&lt;Types::Error&gt;
     #
     #
-    # @example Example: To delete multiple object versions from a versioned bucket
-    #
-    #   # The following example deletes objects from a bucket. The request specifies object versions. S3 deletes specific object
-    #   # versions and returns the key and versions of deleted objects in the response.
-    #
-    #   resp = client.delete_objects({
-    #     bucket: "examplebucket", 
-    #     delete: {
-    #       objects: [
-    #         {
-    #           key: "HappyFace.jpg", 
-    #           version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
-    #         }, 
-    #         {
-    #           key: "HappyFace.jpg", 
-    #           version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
-    #         }, 
-    #       ], 
-    #       quiet: false, 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     deleted: [
-    #       {
-    #         key: "HappyFace.jpg", 
-    #         version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
-    #       }, 
-    #       {
-    #         key: "HappyFace.jpg", 
-    #         version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
-    #       }, 
-    #     ], 
-    #   }
-    #
     # @example Example: To delete multiple objects from a versioned bucket
     #
     #   # The following example deletes objects from a bucket. The bucket is versioned, and the request does not specify the
@@ -3572,6 +3536,42 @@ module Aws::S3
     #         delete_marker: true, 
     #         delete_marker_version_id: "iOd_ORxhkKe_e8G8_oSGxt2PjsCZKlkt", 
     #         key: "objectkey2", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To delete multiple object versions from a versioned bucket
+    #
+    #   # The following example deletes objects from a bucket. The request specifies object versions. S3 deletes specific object
+    #   # versions and returns the key and versions of deleted objects in the response.
+    #
+    #   resp = client.delete_objects({
+    #     bucket: "examplebucket", 
+    #     delete: {
+    #       objects: [
+    #         {
+    #           key: "HappyFace.jpg", 
+    #           version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
+    #         }, 
+    #         {
+    #           key: "HappyFace.jpg", 
+    #           version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
+    #         }, 
+    #       ], 
+    #       quiet: false, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deleted: [
+    #       {
+    #         key: "HappyFace.jpg", 
+    #         version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
+    #       }, 
+    #       {
+    #         key: "HappyFace.jpg", 
+    #         version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
     #       }, 
     #     ], 
     #   }
@@ -4084,7 +4084,7 @@ module Aws::S3
     # @example Response structure
     #
     #   resp.server_side_encryption_configuration.rules #=> Array
-    #   resp.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.sse_algorithm #=> String, one of "AES256", "aws:kms"
+    #   resp.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.sse_algorithm #=> String, one of "AES256", "aws:kms", "aws:kms:dsse"
     #   resp.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.kms_master_key_id #=> String
     #   resp.server_side_encryption_configuration.rules[0].bucket_key_enabled #=> Boolean
     #
@@ -5942,28 +5942,6 @@ module Aws::S3
     #   * {Types::GetObjectOutput#object_lock_legal_hold_status #object_lock_legal_hold_status} => String
     #
     #
-    # @example Example: To retrieve an object
-    #
-    #   # The following example retrieves an object for an S3 bucket.
-    #
-    #   resp = client.get_object({
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     accept_ranges: "bytes", 
-    #     content_length: 3191, 
-    #     content_type: "image/jpeg", 
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
-    #     metadata: {
-    #     }, 
-    #     tag_count: 2, 
-    #     version_id: "null", 
-    #   }
-    #
     # @example Example: To retrieve a byte range of an object 
     #
     #   # The following example retrieves an object for an S3 bucket. The request specifies the range header to retrieve a
@@ -5985,6 +5963,28 @@ module Aws::S3
     #     last_modified: Time.parse("Thu, 09 Oct 2014 22:57:28 GMT"), 
     #     metadata: {
     #     }, 
+    #     version_id: "null", 
+    #   }
+    #
+    # @example Example: To retrieve an object
+    #
+    #   # The following example retrieves an object for an S3 bucket.
+    #
+    #   resp = client.get_object({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     accept_ranges: "bytes", 
+    #     content_length: 3191, 
+    #     content_type: "image/jpeg", 
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
+    #     metadata: {
+    #     }, 
+    #     tag_count: 2, 
     #     version_id: "null", 
     #   }
     #
@@ -6068,7 +6068,7 @@ module Aws::S3
     #   resp.expires #=> Time
     #   resp.expires_string #=> String
     #   resp.website_redirect_location #=> String
-    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms"
+    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms", "aws:kms:dsse"
     #   resp.metadata #=> Hash
     #   resp.metadata["MetadataKey"] #=> String
     #   resp.sse_customer_algorithm #=> String
@@ -7459,7 +7459,7 @@ module Aws::S3
     #   resp.expires #=> Time
     #   resp.expires_string #=> String
     #   resp.website_redirect_location #=> String
-    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms"
+    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms", "aws:kms:dsse"
     #   resp.metadata #=> Hash
     #   resp.metadata["MetadataKey"] #=> String
     #   resp.sse_customer_algorithm #=> String
@@ -9854,7 +9854,7 @@ module Aws::S3
     #       rules: [ # required
     #         {
     #           apply_server_side_encryption_by_default: {
-    #             sse_algorithm: "AES256", # required, accepts AES256, aws:kms
+    #             sse_algorithm: "AES256", # required, accepts AES256, aws:kms, aws:kms:dsse
     #             kms_master_key_id: "SSEKMSKeyId",
     #           },
     #           bucket_key_enabled: false,
@@ -12449,6 +12449,100 @@ module Aws::S3
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
     #
+    # @example Example: To upload an object
+    #
+    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
+    #   # syntax. S3 returns VersionId of the newly created object.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
+    #   }
+    #
+    # @example Example: To upload object and specify user-defined metadata
+    #
+    #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
+    #   # enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     metadata: {
+    #       "metadata1" => "value1", 
+    #       "metadata2" => "value2", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
+    #   }
+    #
+    # @example Example: To upload an object (specify optional headers)
+    #
+    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
+    #   # storage class and use server-side encryption.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #     server_side_encryption: "AES256", 
+    #     storage_class: "STANDARD_IA", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     server_side_encryption: "AES256", 
+    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
+    #   }
+    #
+    # @example Example: To create an object.
+    #
+    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "objectkey", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
+    #   }
+    #
+    # @example Example: To upload an object and specify server-side encryption and object tags
+    #
+    #   # The following example uploads an object. The request specifies the optional server-side encryption option. The request
+    #   # also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     server_side_encryption: "AES256", 
+    #     tagging: "key1=value1&key2=value2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     server_side_encryption: "AES256", 
+    #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
+    #   }
+    #
     # @example Example: To upload an object and specify optional tags
     #
     #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
@@ -12485,100 +12579,6 @@ module Aws::S3
     #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
     #   }
     #
-    # @example Example: To upload an object and specify server-side encryption and object tags
-    #
-    #   # The following example uploads an object. The request specifies the optional server-side encryption option. The request
-    #   # also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     server_side_encryption: "AES256", 
-    #     tagging: "key1=value1&key2=value2", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     server_side_encryption: "AES256", 
-    #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
-    #   }
-    #
-    # @example Example: To create an object.
-    #
-    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "objectkey", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
-    #   }
-    #
-    # @example Example: To upload an object
-    #
-    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
-    #   # syntax. S3 returns VersionId of the newly created object.
-    #
-    #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
-    #   }
-    #
-    # @example Example: To upload an object (specify optional headers)
-    #
-    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
-    #   # storage class and use server-side encryption.
-    #
-    #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #     server_side_encryption: "AES256", 
-    #     storage_class: "STANDARD_IA", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     server_side_encryption: "AES256", 
-    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
-    #   }
-    #
-    # @example Example: To upload object and specify user-defined metadata
-    #
-    #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
-    #   # enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     metadata: {
-    #       "metadata1" => "value1", 
-    #       "metadata2" => "value2", 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
-    #   }
-    #
     # @example Streaming a file from disk
     #   # upload file from disk in a single request, may not exceed 5GB
     #   File.open('/source/file/path', 'rb') do |file|
@@ -12612,7 +12612,7 @@ module Aws::S3
     #     metadata: {
     #       "MetadataKey" => "MetadataValue",
     #     },
-    #     server_side_encryption: "AES256", # accepts AES256, aws:kms
+    #     server_side_encryption: "AES256", # accepts AES256, aws:kms, aws:kms:dsse
     #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
@@ -12637,7 +12637,7 @@ module Aws::S3
     #   resp.checksum_crc32c #=> String
     #   resp.checksum_sha1 #=> String
     #   resp.checksum_sha256 #=> String
-    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms"
+    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms", "aws:kms:dsse"
     #   resp.version_id #=> String
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
@@ -14011,7 +14011,7 @@ module Aws::S3
     #           bucket_name: "BucketName", # required
     #           prefix: "LocationPrefix", # required
     #           encryption: {
-    #             encryption_type: "AES256", # required, accepts AES256, aws:kms
+    #             encryption_type: "AES256", # required, accepts AES256, aws:kms, aws:kms:dsse
     #             kms_key_id: "SSEKMSKeyId",
     #             kms_context: "KMSContext",
     #           },
@@ -14797,7 +14797,7 @@ module Aws::S3
     #
     # @example Response structure
     #
-    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms"
+    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms", "aws:kms:dsse"
     #   resp.etag #=> String
     #   resp.checksum_crc32 #=> String
     #   resp.checksum_crc32c #=> String
@@ -15115,26 +15115,6 @@ module Aws::S3
     #   * {Types::UploadPartCopyOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To upload a part by copying data from an existing object as data source
-    #
-    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
-    #
-    #   resp = client.upload_part_copy({
-    #     bucket: "examplebucket", 
-    #     copy_source: "/bucketname/sourceobjectkey", 
-    #     key: "examplelargeobject", 
-    #     part_number: 1, 
-    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     copy_part_result: {
-    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
-    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
-    #     }, 
-    #   }
-    #
     # @example Example: To upload a part by copying byte range from an existing object as data source
     #
     #   # The following example uploads a part of a multipart upload by copying a specified byte range from an existing object as
@@ -15154,6 +15134,26 @@ module Aws::S3
     #     copy_part_result: {
     #       etag: "\"65d16d19e65a7508a51f043180edcc36\"", 
     #       last_modified: Time.parse("2016-12-29T21:44:28.000Z"), 
+    #     }, 
+    #   }
+    #
+    # @example Example: To upload a part by copying data from an existing object as data source
+    #
+    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
+    #
+    #   resp = client.upload_part_copy({
+    #     bucket: "examplebucket", 
+    #     copy_source: "/bucketname/sourceobjectkey", 
+    #     key: "examplelargeobject", 
+    #     part_number: 1, 
+    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     copy_part_result: {
+    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
+    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
     #     }, 
     #   }
     #
@@ -15190,7 +15190,7 @@ module Aws::S3
     #   resp.copy_part_result.checksum_crc32c #=> String
     #   resp.copy_part_result.checksum_sha1 #=> String
     #   resp.copy_part_result.checksum_sha256 #=> String
-    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms"
+    #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms", "aws:kms:dsse"
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
@@ -15569,7 +15569,7 @@ module Aws::S3
     #     replication_status: "COMPLETE", # accepts COMPLETE, PENDING, FAILED, REPLICA
     #     request_charged: "requester", # accepts requester
     #     restore: "Restore",
-    #     server_side_encryption: "AES256", # accepts AES256, aws:kms
+    #     server_side_encryption: "AES256", # accepts AES256, aws:kms, aws:kms:dsse
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     ssekms_key_id: "SSEKMSKeyId",
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
@@ -15601,7 +15601,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.123.2'
+      context[:gem_version] = '1.124.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

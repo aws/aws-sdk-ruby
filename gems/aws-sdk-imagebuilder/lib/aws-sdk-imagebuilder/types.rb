@@ -3105,7 +3105,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] date_next_run
-    #   This is no longer supported, and does not return a value.
+    #   The next date when the pipeline is scheduled to run.
     #   @return [String]
     #
     # @!attribute [rw] tags

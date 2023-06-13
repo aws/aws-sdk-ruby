@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2023-06-13)
+------------------
+
+* Feature - Change the Image Builder ImagePipeline dateNextRun field to more accurately describe the data.
+
 1.46.0 (2023-05-31)
 ------------------
 

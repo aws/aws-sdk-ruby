@@ -196,6 +196,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::CreateFpgaImage.build(context)
           when :create_image
             Aws::EC2::Endpoints::CreateImage.build(context)
+          when :create_instance_connect_endpoint
+            Aws::EC2::Endpoints::CreateInstanceConnectEndpoint.build(context)
           when :create_instance_event_window
             Aws::EC2::Endpoints::CreateInstanceEventWindow.build(context)
           when :create_instance_export_task
@@ -348,6 +350,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DeleteFlowLogs.build(context)
           when :delete_fpga_image
             Aws::EC2::Endpoints::DeleteFpgaImage.build(context)
+          when :delete_instance_connect_endpoint
+            Aws::EC2::Endpoints::DeleteInstanceConnectEndpoint.build(context)
           when :delete_instance_event_window
             Aws::EC2::Endpoints::DeleteInstanceEventWindow.build(context)
           when :delete_internet_gateway
@@ -576,6 +580,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DescribeImportSnapshotTasks.build(context)
           when :describe_instance_attribute
             Aws::EC2::Endpoints::DescribeInstanceAttribute.build(context)
+          when :describe_instance_connect_endpoints
+            Aws::EC2::Endpoints::DescribeInstanceConnectEndpoints.build(context)
           when :describe_instance_credit_specifications
             Aws::EC2::Endpoints::DescribeInstanceCreditSpecifications.build(context)
           when :describe_instance_event_notification_attributes

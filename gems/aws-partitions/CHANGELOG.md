@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.779.0 (2023-06-13)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::VerifiedPermissions`.
+
+* Feature - Added support for enumerating regions for `Aws::CodeGuruSecurity`.
+
 1.778.0 (2023-06-12)
 ------------------
 

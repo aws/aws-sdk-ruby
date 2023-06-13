@@ -641,18 +641,15 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] allocation_id
-    #   The ID representing the allocation of the address for use with
-    #   EC2-VPC.
+    #   The ID representing the allocation of the address.
     #   @return [String]
     #
     # @!attribute [rw] association_id
-    #   The ID representing the association of the address with an instance
-    #   in a VPC.
+    #   The ID representing the association of the address with an instance.
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   Indicates whether this Elastic IP address is for use with instances
-    #   in EC2-Classic (`standard`) or instances in a VPC (`vpc`).
+    #   The network (`vpc`).
     #   @return [String]
     #
     # @!attribute [rw] network_interface_id
@@ -830,16 +827,12 @@ module Aws::EC2
     end
 
     # @!attribute [rw] domain
-    #   Indicates whether the Elastic IP address is for use with instances
-    #   in a VPC or instances in EC2-Classic.
-    #
-    #   Default: If the Region supports EC2-Classic, the default is
-    #   `standard`. Otherwise, the default is `vpc`.
+    #   The network (`vpc`).
     #   @return [String]
     #
     # @!attribute [rw] address
-    #   \[EC2-VPC\] The Elastic IP address to recover or an IPv4 address
-    #   from an address pool.
+    #   The Elastic IP address to recover or an IPv4 address from an address
+    #   pool.
     #   @return [String]
     #
     # @!attribute [rw] public_ipv_4_pool
@@ -903,9 +896,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] allocation_id
-    #   \[EC2-VPC\] The ID that Amazon Web Services assigns to represent the
-    #   allocation of the Elastic IP address for use with instances in a
-    #   VPC.
+    #   The ID that represents the allocation of the Elastic IP address.
     #   @return [String]
     #
     # @!attribute [rw] public_ipv_4_pool
@@ -918,8 +909,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   Indicates whether the Elastic IP address is for use with instances
-    #   in a VPC (`vpc`) or instances in EC2-Classic (`standard`).
+    #   The network (`vpc`).
     #   @return [String]
     #
     # @!attribute [rw] customer_owned_ip
@@ -932,8 +922,7 @@ module Aws::EC2
     #
     # @!attribute [rw] carrier_ip
     #   The carrier IP address. This option is only available for network
-    #   interfaces which reside in a subnet in a Wavelength Zone (for
-    #   example an EC2 instance).
+    #   interfaces that reside in a subnet in a Wavelength Zone.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateAddressResult AWS API Documentation
@@ -1748,30 +1737,23 @@ module Aws::EC2
     end
 
     # @!attribute [rw] allocation_id
-    #   \[EC2-VPC\] The allocation ID. This is required for EC2-VPC.
+    #   The allocation ID. This is required.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
     #   The ID of the instance. The instance must have exactly one attached
-    #   network interface. For EC2-VPC, you can specify either the instance
-    #   ID or the network interface ID, but not both. For EC2-Classic, you
-    #   must specify an instance ID and the instance must be in the running
-    #   state.
+    #   network interface. You can specify either the instance ID or the
+    #   network interface ID, but not both.
     #   @return [String]
     #
     # @!attribute [rw] public_ip
-    #   \[EC2-Classic\] The Elastic IP address to associate with the
-    #   instance. This is required for EC2-Classic.
+    #   Deprecated.
     #   @return [String]
     #
     # @!attribute [rw] allow_reassociation
-    #   \[EC2-VPC\] For a VPC in an EC2-Classic account, specify true to
-    #   allow an Elastic IP address that is already associated with an
-    #   instance or network interface to be reassociated with the specified
-    #   instance or network interface. Otherwise, the operation fails. In a
-    #   VPC in an EC2-VPC-only account, reassociation is automatic,
-    #   therefore you can specify false to ensure the operation fails if the
-    #   Elastic IP address is already associated with another resource.
+    #   Reassociation is automatic, but you can specify false to ensure the
+    #   operation fails if the Elastic IP address is already associated with
+    #   another resource.
     #   @return [Boolean]
     #
     # @!attribute [rw] dry_run
@@ -1782,18 +1764,17 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] network_interface_id
-    #   \[EC2-VPC\] The ID of the network interface. If the instance has
-    #   more than one network interface, you must specify a network
-    #   interface ID.
+    #   The ID of the network interface. If the instance has more than one
+    #   network interface, you must specify a network interface ID.
     #
-    #   For EC2-VPC, you can specify either the instance ID or the network
-    #   interface ID, but not both.
+    #   You can specify either the instance ID or the network interface ID,
+    #   but not both.
     #   @return [String]
     #
     # @!attribute [rw] private_ip_address
-    #   \[EC2-VPC\] The primary or secondary private IP address to associate
-    #   with the Elastic IP address. If no private IP address is specified,
-    #   the Elastic IP address is associated with the primary private IP
+    #   The primary or secondary private IP address to associate with the
+    #   Elastic IP address. If no private IP address is specified, the
+    #   Elastic IP address is associated with the primary private IP
     #   address.
     #   @return [String]
     #
@@ -1812,8 +1793,8 @@ module Aws::EC2
     end
 
     # @!attribute [rw] association_id
-    #   \[EC2-VPC\] The ID that represents the association of the Elastic IP
-    #   address with an instance.
+    #   The ID that represents the association of the Elastic IP address
+    #   with an instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateAddressResult AWS API Documentation
@@ -7808,6 +7789,81 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet in which to create the EC2 Instance Connect
+    #   Endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   One or more security groups to associate with the endpoint. If you
+    #   don't specify a security group, the default security group for your
+    #   VPC will be associated with the endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] preserve_client_ip
+    #   Indicates whether your client's IP address is preserved as the
+    #   source. The value is `true` or `false`.
+    #
+    #   * If `true`, your client's IP address is used when you connect to a
+    #     resource.
+    #
+    #   * If `false`, the elastic network interface IP address is used when
+    #     you connect to a resource.
+    #
+    #   Default: `true`
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the EC2 Instance Connect Endpoint during
+    #   creation.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInstanceConnectEndpointRequest AWS API Documentation
+    #
+    class CreateInstanceConnectEndpointRequest < Struct.new(
+      :dry_run,
+      :subnet_id,
+      :security_group_ids,
+      :preserve_client_ip,
+      :client_token,
+      :tag_specifications)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_connect_endpoint
+    #   Information about the EC2 Instance Connect Endpoint.
+    #   @return [Types::Ec2InstanceConnectEndpoint]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive idempotency token provided by the client in
+    #   the the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInstanceConnectEndpointResult AWS API Documentation
+    #
+    class CreateInstanceConnectEndpointResult < Struct.new(
+      :instance_connect_endpoint,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] name
     #   The name of the event window.
     #   @return [String]
@@ -9318,7 +9374,7 @@ module Aws::EC2
     # @!attribute [rw] interface_type
     #   The type of network interface. The default is `interface`.
     #
-    #   The only supported values are `efa` and `trunk`.
+    #   The only supported values are `interface`, `efa`, and `trunk`.
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
@@ -13141,6 +13197,38 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] instance_connect_endpoint_id
+    #   The ID of the EC2 Instance Connect Endpoint to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteInstanceConnectEndpointRequest AWS API Documentation
+    #
+    class DeleteInstanceConnectEndpointRequest < Struct.new(
+      :dry_run,
+      :instance_connect_endpoint_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_connect_endpoint
+    #   Information about the EC2 Instance Connect Endpoint.
+    #   @return [Types::Ec2InstanceConnectEndpoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteInstanceConnectEndpointResult AWS API Documentation
+    #
+    class DeleteInstanceConnectEndpointResult < Struct.new(
+      :instance_connect_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] force_delete
     #   Specify `true` to force delete the event window. Use the force
     #   delete parameter if the event window is currently associated with
@@ -15622,12 +15710,9 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters. Filter names and values are case-sensitive.
     #
-    #   * `allocation-id` - \[EC2-VPC\] The allocation ID for the address.
+    #   * `allocation-id` - The allocation ID for the address.
     #
-    #   * `association-id` - \[EC2-VPC\] The association ID for the address.
-    #
-    #   * `domain` - Indicates whether the address is for use in EC2-Classic
-    #     (`standard`) or in a VPC (`vpc`).
+    #   * `association-id` - The association ID for the address.
     #
     #   * `instance-id` - The ID of the instance the address is associated
     #     with, if any.
@@ -15636,14 +15721,14 @@ module Aws::EC2
     #     Zones, or Wavelength Zones from where Amazon Web Services
     #     advertises IP addresses.
     #
-    #   * `network-interface-id` - \[EC2-VPC\] The ID of the network
-    #     interface that the address is associated with, if any.
+    #   * `network-interface-id` - The ID of the network interface that the
+    #     address is associated with, if any.
     #
     #   * `network-interface-owner-id` - The Amazon Web Services account ID
     #     of the owner.
     #
-    #   * `private-ip-address` - \[EC2-VPC\] The private IP address
-    #     associated with the Elastic IP address.
+    #   * `private-ip-address` - The private IP address associated with the
+    #     Elastic IP address.
     #
     #   * `public-ip` - The Elastic IP address, or the carrier IP address.
     #
@@ -15665,7 +15750,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] allocation_ids
-    #   \[EC2-VPC\] Information about the allocation IDs.
+    #   Information about the allocation IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
@@ -18672,6 +18757,94 @@ module Aws::EC2
       :attribute,
       :dry_run,
       :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #
+    #   * `instance-connect-endpoint-id` - The ID of the EC2 Instance
+    #     Connect Endpoint.
+    #
+    #   * `state` - The state of the EC2 Instance Connect Endpoint
+    #     (`create-in-progress` \| `create-complete` \| `create-failed` \|
+    #     `delete-in-progress` \| `delete-complete` \| `delete-failed`).
+    #
+    #   * `subnet-id` - The ID of the subnet in which the EC2 Instance
+    #     Connect Endpoint was created.
+    #
+    #   * `tag`:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have
+    #     a tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #
+    #   * `tag-value` - The value of a tag assigned to the resource. Use
+    #     this filter to find all resources that have a tag with a specific
+    #     value, regardless of tag key.
+    #
+    #   * `vpc-id` - The ID of the VPC in which the EC2 Instance Connect
+    #     Endpoint was created.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] instance_connect_endpoint_ids
+    #   One or more EC2 Instance Connect Endpoint IDs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceConnectEndpointsRequest AWS API Documentation
+    #
+    class DescribeInstanceConnectEndpointsRequest < Struct.new(
+      :dry_run,
+      :max_results,
+      :next_token,
+      :filters,
+      :instance_connect_endpoint_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_connect_endpoints
+    #   Information about the EC2 Instance Connect Endpoints.
+    #   @return [Array<Types::Ec2InstanceConnectEndpoint>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceConnectEndpointsResult AWS API Documentation
+    #
+    class DescribeInstanceConnectEndpointsResult < Struct.new(
+      :instance_connect_endpoints,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27708,11 +27881,11 @@ module Aws::EC2
     end
 
     # @!attribute [rw] association_id
-    #   \[EC2-VPC\] The association ID. Required for EC2-VPC.
+    #   The association ID. This parameter is required.
     #   @return [String]
     #
     # @!attribute [rw] public_ip
-    #   \[EC2-Classic\] The Elastic IP address. Required for EC2-Classic.
+    #   Deprecated.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -28741,6 +28914,107 @@ module Aws::EC2
       :maximum_bandwidth_in_mbps,
       :maximum_throughput_in_m_bps,
       :maximum_iops)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The EC2 Instance Connect Endpoint.
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the Amazon Web Services account that created the EC2
+    #   Instance Connect Endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_connect_endpoint_id
+    #   The ID of the EC2 Instance Connect Endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_connect_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the EC2 Instance Connect Endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the EC2 Instance Connect Endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_message
+    #   The message for the current state of the EC2 Instance Connect
+    #   Endpoint. Can include a failure message.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_name
+    #   The DNS name of the EC2 Instance Connect Endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] fips_dns_name
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_ids
+    #   The ID of the elastic network interface that Amazon EC2
+    #   automatically created when creating the EC2 Instance Connect
+    #   Endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC in which the EC2 Instance Connect Endpoint was
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone of the EC2 Instance Connect Endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that the EC2 Instance Connect Endpoint was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet in which the EC2 Instance Connect Endpoint was
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] preserve_client_ip
+    #   Indicates whether your client's IP address is preserved as the
+    #   source. The value is `true` or `false`.
+    #
+    #   * If `true`, your client's IP address is used when you connect to a
+    #     resource.
+    #
+    #   * If `false`, the elastic network interface IP address is used when
+    #     you connect to a resource.
+    #
+    #   Default: `true`
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The security groups associated with the endpoint. If you didn't
+    #   specify a security group, the default security group for your VPC is
+    #   associated with the endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the EC2 Instance Connect Endpoint.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Ec2InstanceConnectEndpoint AWS API Documentation
+    #
+    class Ec2InstanceConnectEndpoint < Struct.new(
+      :owner_id,
+      :instance_connect_endpoint_id,
+      :instance_connect_endpoint_arn,
+      :state,
+      :state_message,
+      :dns_name,
+      :fips_dns_name,
+      :network_interface_ids,
+      :vpc_id,
+      :availability_zone,
+      :created_at,
+      :subnet_id,
+      :preserve_client_ip,
+      :security_group_ids,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47767,22 +48041,15 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the status of a moving Elastic IP address.
-    #
-    # <note markdown="1"> We are retiring EC2-Classic. We recommend that you migrate from
-    # EC2-Classic to a VPC. For more information, see [Migrate from
-    # EC2-Classic to a VPC][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # <note markdown="1"> This action is deprecated.
     #
     #  </note>
     #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
+    # Describes the status of a moving Elastic IP address.
     #
     # @!attribute [rw] move_status
-    #   The status of the Elastic IP address that's being moved to the
-    #   EC2-VPC platform, or restored to the EC2-Classic platform.
+    #   The status of the Elastic IP address that's being moved or
+    #   restored.
     #   @return [String]
     #
     # @!attribute [rw] public_ip
@@ -51681,11 +51948,11 @@ module Aws::EC2
     end
 
     # @!attribute [rw] allocation_id
-    #   \[EC2-VPC\] The allocation ID. Required for EC2-VPC.
+    #   The allocation ID. This parameter is required.
     #   @return [String]
     #
     # @!attribute [rw] public_ip
-    #   \[EC2-Classic\] The Elastic IP address. Required for EC2-Classic.
+    #   Deprecated.
     #   @return [String]
     #
     # @!attribute [rw] network_border_group

@@ -1039,15 +1039,22 @@ module Aws::CloudTrail
 
     # Returns metadata about a query, including query run time in
     # milliseconds, number of events scanned and matched, and query status.
-    # You must specify an ARN for `EventDataStore`, and a value for
-    # `QueryID`.
+    # If the query results were delivered to an S3 bucket, the response also
+    # provides the S3 URI and the delivery status.
+    #
+    # You must specify either a `QueryID` or a `QueryAlias`. Specifying the
+    # `QueryAlias` parameter returns information about the last query run
+    # for the alias.
     #
     # @option params [String] :event_data_store
     #   The ARN (or the ID suffix of the ARN) of an event data store on which
     #   the specified query was run.
     #
-    # @option params [required, String] :query_id
+    # @option params [String] :query_id
     #   The query ID.
+    #
+    # @option params [String] :query_alias
+    #   The alias that identifies a query template.
     #
     # @return [Types::DescribeQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1063,7 +1070,8 @@ module Aws::CloudTrail
     #
     #   resp = client.describe_query({
     #     event_data_store: "EventDataStoreArn",
-    #     query_id: "UUID", # required
+    #     query_id: "UUID",
+    #     query_alias: "QueryAlias",
     #   })
     #
     # @example Response structure
@@ -1495,8 +1503,7 @@ module Aws::CloudTrail
     end
 
     # Gets event data results of a query. You must specify the `QueryID`
-    # value returned by the `StartQuery` operation, and an ARN for
-    # `EventDataStore`.
+    # value returned by the `StartQuery` operation.
     #
     # @option params [String] :event_data_store
     #   The ARN (or ID suffix of the ARN) of the event data store against
@@ -2821,16 +2828,27 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Starts a CloudTrail Lake query. The required `QueryStatement`
-    # parameter provides your SQL query, enclosed in single quotation marks.
-    # Use the optional `DeliveryS3Uri` parameter to deliver the query
-    # results to an S3 bucket.
+    # Starts a CloudTrail Lake query. Use the `QueryStatement` parameter to
+    # provide your SQL query, enclosed in single quotation marks. Use the
+    # optional `DeliveryS3Uri` parameter to deliver the query results to an
+    # S3 bucket.
     #
-    # @option params [required, String] :query_statement
+    # `StartQuery` requires you specify either the `QueryStatement`
+    # parameter, or a `QueryAlias` and any `QueryParameters`. In the current
+    # release, the `QueryAlias` and `QueryParameters` parameters are used
+    # only for the queries that populate the CloudTrail Lake dashboards.
+    #
+    # @option params [String] :query_statement
     #   The SQL code of your query.
     #
     # @option params [String] :delivery_s3_uri
     #   The URI for the S3 bucket where CloudTrail delivers the query results.
+    #
+    # @option params [String] :query_alias
+    #   The alias that identifies a query template.
+    #
+    # @option params [Array<String>] :query_parameters
+    #   The query parameters for the specified `QueryAlias`.
     #
     # @return [Types::StartQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2839,8 +2857,10 @@ module Aws::CloudTrail
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_query({
-    #     query_statement: "QueryStatement", # required
+    #     query_statement: "QueryStatement",
     #     delivery_s3_uri: "DeliveryS3Uri",
+    #     query_alias: "QueryAlias",
+    #     query_parameters: ["QueryParameter"],
     #   })
     #
     # @example Response structure
@@ -3027,11 +3047,15 @@ module Aws::CloudTrail
     # For event data stores for CloudTrail events, `AdvancedEventSelectors`
     # includes or excludes management and data events in your event data
     # store. For more information about `AdvancedEventSelectors`, see
-    # PutEventSelectorsRequest$AdvancedEventSelectors.
+    # [AdvancedEventSelectors][1].
     #
     # For event data stores for Config configuration items, Audit Manager
     # evidence, or non-Amazon Web Services events, `AdvancedEventSelectors`
     # includes events of that type in your event data store.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html
     #
     # @option params [required, String] :event_data_store
     #   The ARN (or the ID suffix of the ARN) of the event data store that you
@@ -3372,7 +3396,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

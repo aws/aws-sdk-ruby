@@ -215,6 +215,9 @@
   "CodeGuruReviewer": {
     "models": "codeguru-reviewer/2019-09-19"
   },
+  "CodeGuruSecurity": {
+    "models": "codeguru-security/2018-05-10"
+  },
   "CodePipeline": {
     "models": "codepipeline/2015-07-09"
   },
@@ -1115,6 +1118,9 @@
   },
   "VPCLattice": {
     "models": "vpc-lattice/2022-11-30"
+  },
+  "VerifiedPermissions": {
+    "models": "verifiedpermissions/2021-12-01"
   },
   "VoiceID": {
     "models": "voice-id/2021-09-27"

@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.166.0 (2023-06-13)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-verifiedpermissions` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-codegurusecurity` gem.
+
 3.165.0 (2023-06-08)
 ------------------
 

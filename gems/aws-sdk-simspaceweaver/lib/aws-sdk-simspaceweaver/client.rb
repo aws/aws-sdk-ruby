@@ -411,6 +411,9 @@ module Aws::SimSpaceWeaver
     #   The Amazon S3 bucket and optional folder (object key prefix) where
     #   SimSpace Weaver creates the snapshot file.
     #
+    #   The Amazon S3 bucket must be in the same Amazon Web Services Region as
+    #   the simulation.
+    #
     # @option params [required, String] :simulation
     #   The name of the simulation.
     #
@@ -903,6 +906,9 @@ module Aws::SimSpaceWeaver
     #   Provide a `SnapshotS3Location` to start your simulation from a
     #   snapshot.
     #
+    #   The Amazon S3 bucket must be in the same Amazon Web Services Region as
+    #   the simulation.
+    #
     #   If you provide a `SnapshotS3Location` then you can't provide a
     #   `SchemaS3Location`.
     #
@@ -1131,7 +1137,7 @@ module Aws::SimSpaceWeaver
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-simspaceweaver'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

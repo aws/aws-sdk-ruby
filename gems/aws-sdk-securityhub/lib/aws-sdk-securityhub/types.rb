@@ -391,6 +391,555 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # One or more actions to update finding fields if a finding matches the
+    # defined criteria of the rule.
+    #
+    # @!attribute [rw] type
+    #   Specifies that the rule action should update the `Types` finding
+    #   field. The `Types` finding field provides one or more finding types
+    #   in the format of namespace/category/classifier that classify a
+    #   finding. For more information, see [Types taxonomy for ASFF][1] in
+    #   the *Security Hub User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format-type-taxonomy.html
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_fields_update
+    #   Specifies that the automation rule action is an update to a finding
+    #   field.
+    #   @return [Types::AutomationRulesFindingFieldsUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AutomationRulesAction AWS API Documentation
+    #
+    class AutomationRulesAction < Struct.new(
+      :type,
+      :finding_fields_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the configuration of an automation rule.
+    #
+    # @!attribute [rw] rule_arn
+    #   The Amazon Resource Name (ARN) of a rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_status
+    #   Whether the rule is active after it is created. If this parameter is
+    #   equal to `>ENABLED`, Security Hub will apply the rule to findings
+    #   and finding updates after the rule is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_order
+    #   An integer ranging from 1 to 1000 that represents the order in which
+    #   the rule action is applied to findings. Security Hub applies rules
+    #   with lower values for this parameter first.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_terminal
+    #   Specifies whether a rule is the last to be applied with respect to a
+    #   finding that matches the rule criteria. This is useful when a
+    #   finding matches the criteria for multiple rules, and each rule has
+    #   different actions. If the value of this field is set to `true` for a
+    #   rule, Security Hub applies the rule action to a finding that matches
+    #   the rule criteria and won't evaluate other rules for the finding. 
+    #   The default value of this field is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] criteria
+    #   A set of [Amazon Web Services Security Finding Format][1] finding
+    #   field attributes and corresponding expected values that Security Hub
+    #   uses to filter findings. If a finding matches the conditions
+    #   specified in this parameter, Security Hub applies the rule action to
+    #   the finding.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html
+    #   @return [Types::AutomationRulesFindingFilters]
+    #
+    # @!attribute [rw] actions
+    #   One or more actions to update finding fields if a finding matches
+    #   the defined criteria of the rule.
+    #   @return [Array<Types::AutomationRulesAction>]
+    #
+    # @!attribute [rw] created_at
+    #   A timestamp that indicates when the rule was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   A timestamp that indicates when the rule was most recently updated.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The principal that created a rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AutomationRulesConfig AWS API Documentation
+    #
+    class AutomationRulesConfig < Struct.new(
+      :rule_arn,
+      :rule_status,
+      :rule_order,
+      :rule_name,
+      :description,
+      :is_terminal,
+      :criteria,
+      :actions,
+      :created_at,
+      :updated_at,
+      :created_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the finding fields that the automation rule action will
+    # update when a finding matches the defined criteria.
+    #
+    # @!attribute [rw] note
+    #   The updated note.
+    #   @return [Types::NoteUpdate]
+    #
+    # @!attribute [rw] severity
+    #   Updates to the severity information for a finding.
+    #   @return [Types::SeverityUpdate]
+    #
+    # @!attribute [rw] verification_state
+    #   The rule action will update the `VerificationState` field of a
+    #   finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   The rule action will update the `Confidence` field of a finding.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] criticality
+    #   The rule action will update the `Criticality` field of a finding.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] types
+    #   The rule action will update the `Types` field of a finding.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] user_defined_fields
+    #   The rule action will update the `UserDefinedFields` field of a
+    #   finding.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] workflow
+    #   Used to update information about the investigation into the finding.
+    #   @return [Types::WorkflowUpdate]
+    #
+    # @!attribute [rw] related_findings
+    #   A list of findings that are related to a finding.
+    #   @return [Array<Types::RelatedFinding>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AutomationRulesFindingFieldsUpdate AWS API Documentation
+    #
+    class AutomationRulesFindingFieldsUpdate < Struct.new(
+      :note,
+      :severity,
+      :verification_state,
+      :confidence,
+      :criticality,
+      :types,
+      :user_defined_fields,
+      :workflow,
+      :related_findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The criteria that determine which findings a rule applies to.
+    #
+    # @!attribute [rw] product_arn
+    #   The Amazon Resource Name (ARN) for a third-party product that
+    #   generated a finding in Security Hub.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID in which a finding was generated.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] id
+    #   The product-specific identifier for a finding.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] generator_id
+    #   The identifier for the solution-specific component that generated a
+    #   finding.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] type
+    #   One or more finding types in the format of
+    #   namespace/category/classifier that classify a finding. For a list of
+    #   namespaces, classifiers, and categories, see [Types taxonomy for
+    #   ASFF][1] in the *Security Hub User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format-type-taxonomy.html
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] first_observed_at
+    #   A timestamp that indicates when the potential security issue
+    #   captured by a finding was first observed by the security findings
+    #   product.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [Array<Types::DateFilter>]
+    #
+    # @!attribute [rw] last_observed_at
+    #   A timestamp that indicates when the potential security issue
+    #   captured by a finding was most recently observed by the security
+    #   findings product.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [Array<Types::DateFilter>]
+    #
+    # @!attribute [rw] created_at
+    #   A timestamp that indicates when this finding record was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [Array<Types::DateFilter>]
+    #
+    # @!attribute [rw] updated_at
+    #   A timestamp that indicates when the finding record was most recently
+    #   updated.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [Array<Types::DateFilter>]
+    #
+    # @!attribute [rw] confidence
+    #   The likelihood that a finding accurately identifies the behavior or
+    #   issue that it was intended to identify. `Confidence` is scored on a
+    #   0–100 basis using a ratio scale. A value of `0` means 0 percent
+    #   confidence, and a value of `100` means 100 percent confidence. For
+    #   example, a data exfiltration detection based on a statistical
+    #   deviation of network traffic has low confidence because an actual
+    #   exfiltration hasn't been verified. For more information, see
+    #   [Confidence][1] in the *Security Hub User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-confidence
+    #   @return [Array<Types::NumberFilter>]
+    #
+    # @!attribute [rw] criticality
+    #   The level of importance that is assigned to the resources that are
+    #   associated with a finding. `Criticality` is scored on a 0–100 basis,
+    #   using a ratio scale that supports only full integers. A score of `0`
+    #   means that the underlying resources have no criticality, and a score
+    #   of `100` is reserved for the most critical resources. For more
+    #   information, see [Criticality][1] in the *Security Hub User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-criticality
+    #   @return [Array<Types::NumberFilter>]
+    #
+    # @!attribute [rw] title
+    #   A finding's title.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] description
+    #   A finding's description.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] source_url
+    #   Provides a URL that links to a page about the current finding in the
+    #   finding product.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] product_name
+    #   Provides the name of the product that generated the finding. For
+    #   control-based findings, the product name is Security Hub.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] company_name
+    #   The name of the company for the product that generated the finding.
+    #   For control-based findings, the company is Amazon Web Services.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] severity_label
+    #   The severity value of the finding.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource that the finding pertains to.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] resource_id
+    #   The identifier for the given resource type. For Amazon Web Services
+    #   resources that are identified by Amazon Resource Names (ARNs), this
+    #   is the ARN. For Amazon Web Services resources that lack ARNs, this
+    #   is the identifier as defined by the Amazon Web Service that created
+    #   the resource. For non-Amazon Web Services resources, this is a
+    #   unique identifier that is associated with the resource.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] resource_partition
+    #   The partition in which the resource that the finding pertains to is
+    #   located. A partition is a group of Amazon Web Services Regions. Each
+    #   Amazon Web Services account is scoped to one partition.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] resource_region
+    #   The Amazon Web Services Region where the resource that a finding
+    #   pertains to is located.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] resource_tags
+    #   A list of Amazon Web Services tags associated with a resource at the
+    #   time the finding was processed.
+    #   @return [Array<Types::MapFilter>]
+    #
+    # @!attribute [rw] resource_details_other
+    #   Custom fields and values about the resource that a finding pertains
+    #   to.
+    #   @return [Array<Types::MapFilter>]
+    #
+    # @!attribute [rw] compliance_status
+    #   The result of a security check. This field is only used for findings
+    #   generated from controls.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] compliance_security_control_id
+    #   The security control ID for which a finding was generated. Security
+    #   control IDs are the same across standards.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] compliance_associated_standards_id
+    #   The unique identifier of a standard in which a control is enabled.
+    #   This field consists of the resource portion of the Amazon Resource
+    #   Name (ARN) returned for a standard in the [DescribeStandards][1] API
+    #   response.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] verification_state
+    #   Provides the veracity of a finding.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] workflow_status
+    #   Provides information about the status of the investigation into a
+    #   finding.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] record_state
+    #   Provides the current state of a finding.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] related_findings_product_arn
+    #   The ARN for the product that generated a related finding.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] related_findings_id
+    #   The product-generated identifier for a related finding.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] note_text
+    #   The text of a user-defined note that's added to a finding.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] note_updated_at
+    #   The timestamp of when the note was updated. Uses the date-time
+    #   format specified in [RFC 3339 section 5.6, Internet Date/Time
+    #   Format][1]. The value cannot contain spaces. For example,
+    #   `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   @return [Array<Types::DateFilter>]
+    #
+    # @!attribute [rw] note_updated_by
+    #   The principal that created a note.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] user_defined_fields
+    #   A list of user-defined name and value string pairs added to a
+    #   finding.
+    #   @return [Array<Types::MapFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AutomationRulesFindingFilters AWS API Documentation
+    #
+    class AutomationRulesFindingFilters < Struct.new(
+      :product_arn,
+      :aws_account_id,
+      :id,
+      :generator_id,
+      :type,
+      :first_observed_at,
+      :last_observed_at,
+      :created_at,
+      :updated_at,
+      :confidence,
+      :criticality,
+      :title,
+      :description,
+      :source_url,
+      :product_name,
+      :company_name,
+      :severity_label,
+      :resource_type,
+      :resource_id,
+      :resource_partition,
+      :resource_region,
+      :resource_tags,
+      :resource_details_other,
+      :compliance_status,
+      :compliance_security_control_id,
+      :compliance_associated_standards_id,
+      :verification_state,
+      :workflow_status,
+      :record_state,
+      :related_findings_product_arn,
+      :related_findings_id,
+      :note_text,
+      :note_updated_at,
+      :note_updated_by,
+      :user_defined_fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata for automation rules in the calling account. The response
+    # includes rules with a `RuleStatus` of `ENABLED` and `DISABLED`.
+    #
+    # @!attribute [rw] rule_arn
+    #   The Amazon Resource Name (ARN) for the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_status
+    #   Whether the rule is active after it is created. If this parameter is
+    #   equal to `ENABLED`, Security Hub will apply the rule to findings and
+    #   finding updates after the rule is created. To change the value of
+    #   this parameter after creating a rule, use
+    #   `BatchUpdateAutomationRules`.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_order
+    #   An integer ranging from 1 to 1000 that represents the order in which
+    #   the rule action is applied to findings. Security Hub applies rules
+    #   with lower values for this parameter first.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_terminal
+    #   Specifies whether a rule is the last to be applied with respect to a
+    #   finding that matches the rule criteria. This is useful when a
+    #   finding matches the criteria for multiple rules, and each rule has
+    #   different actions. If the value of this field is set to `true` for a
+    #   rule, Security Hub applies the rule action to a finding that matches
+    #   the rule criteria and won't evaluate other rules for the finding. 
+    #   The default value of this field is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] created_at
+    #   A timestamp that indicates when the rule was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   A timestamp that indicates when the rule was most recently updated.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The principal that created a rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AutomationRulesMetadata AWS API Documentation
+    #
+    class AutomationRulesMetadata < Struct.new(
+      :rule_arn,
+      :rule_status,
+      :rule_order,
+      :rule_name,
+      :description,
+      :is_terminal,
+      :created_at,
+      :updated_at,
+      :created_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an Availability Zone.
     #
     # @!attribute [rw] zone_name
@@ -19359,6 +19908,38 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] automation_rules_arns
+    #   A list of Amazon Resource Names (ARNs) for the rules that are to be
+    #   deleted.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchDeleteAutomationRulesRequest AWS API Documentation
+    #
+    class BatchDeleteAutomationRulesRequest < Struct.new(
+      :automation_rules_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] processed_automation_rules
+    #   A list of properly processed rule ARNs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] unprocessed_automation_rules
+    #   A list of objects containing `RuleArn`, `ErrorCode`, and
+    #   `ErrorMessage`. This parameter tells you which automation rules the
+    #   request didn't delete and why.
+    #   @return [Array<Types::UnprocessedAutomationRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchDeleteAutomationRulesResponse AWS API Documentation
+    #
+    class BatchDeleteAutomationRulesResponse < Struct.new(
+      :processed_automation_rules,
+      :unprocessed_automation_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] standards_subscription_arns
     #   The ARNs of the standards subscriptions to disable.
     #   @return [Array<String>]
@@ -19403,6 +19984,37 @@ module Aws::SecurityHub
     #
     class BatchEnableStandardsResponse < Struct.new(
       :standards_subscriptions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] automation_rules_arns
+    #   A list of rule ARNs to get details for.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchGetAutomationRulesRequest AWS API Documentation
+    #
+    class BatchGetAutomationRulesRequest < Struct.new(
+      :automation_rules_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rules
+    #   A list of rule details for the provided rule ARNs.
+    #   @return [Array<Types::AutomationRulesConfig>]
+    #
+    # @!attribute [rw] unprocessed_automation_rules
+    #   A list of objects containing `RuleArn`, `ErrorCode`, and
+    #   `ErrorMessage`. This parameter tells you which automation rules the
+    #   request didn't retrieve and why.
+    #   @return [Array<Types::UnprocessedAutomationRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchGetAutomationRulesResponse AWS API Documentation
+    #
+    class BatchGetAutomationRulesResponse < Struct.new(
+      :rules,
+      :unprocessed_automation_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19518,6 +20130,38 @@ module Aws::SecurityHub
       :failed_count,
       :success_count,
       :failed_findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update_automation_rules_request_items
+    #   An array of ARNs for the rules that are to be updated. Optionally,
+    #   you can also include `RuleStatus` and `RuleOrder`.
+    #   @return [Array<Types::UpdateAutomationRulesRequestItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchUpdateAutomationRulesRequest AWS API Documentation
+    #
+    class BatchUpdateAutomationRulesRequest < Struct.new(
+      :update_automation_rules_request_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] processed_automation_rules
+    #   A list of properly processed rule ARNs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] unprocessed_automation_rules
+    #   A list of objects containing `RuleArn`, `ErrorCode`, and
+    #   `ErrorMessage`. This parameter tells you which automation rules the
+    #   request didn't update and why.
+    #   @return [Array<Types::UnprocessedAutomationRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchUpdateAutomationRulesResponse AWS API Documentation
+    #
+    class BatchUpdateAutomationRulesResponse < Struct.new(
+      :processed_automation_rules,
+      :unprocessed_automation_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20051,6 +20695,82 @@ module Aws::SecurityHub
     #
     class CreateActionTargetResponse < Struct.new(
       :action_target_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   User-defined tags that help you label the purpose of a rule.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] rule_status
+    #   Whether the rule is active after it is created. If this parameter is
+    #   equal to `Enabled`, Security Hub will apply the rule to findings and
+    #   finding updates after the rule is created. To change the value of
+    #   this parameter after creating a rule, use
+    #   `BatchUpdateAutomationRules`.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_order
+    #   An integer ranging from 1 to 1000 that represents the order in which
+    #   the rule action is applied to findings. Security Hub applies rules
+    #   with lower values for this parameter first.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_terminal
+    #   Specifies whether a rule is the last to be applied with respect to a
+    #   finding that matches the rule criteria. This is useful when a
+    #   finding matches the criteria for multiple rules, and each rule has
+    #   different actions. If the value of this field is set to `true` for a
+    #   rule, Security Hub applies the rule action to a finding that matches
+    #   the rule criteria and won't evaluate other rules for the finding.
+    #   The default value of this field is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] criteria
+    #   A set of ASFF finding field attributes and corresponding expected
+    #   values that Security Hub uses to filter findings. If a finding
+    #   matches the conditions specified in this parameter, Security Hub
+    #   applies the rule action to the finding.
+    #   @return [Types::AutomationRulesFindingFilters]
+    #
+    # @!attribute [rw] actions
+    #   One or more actions to update finding fields if a finding matches
+    #   the conditions specified in `Criteria`.
+    #   @return [Array<Types::AutomationRulesAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateAutomationRuleRequest AWS API Documentation
+    #
+    class CreateAutomationRuleRequest < Struct.new(
+      :tags,
+      :rule_status,
+      :rule_order,
+      :rule_name,
+      :description,
+      :is_terminal,
+      :criteria,
+      :actions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_arn
+    #   The Amazon Resource Name (ARN) of the automation rule that you
+    #   created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateAutomationRuleResponse AWS API Documentation
+    #
+    class CreateAutomationRuleResponse < Struct.new(
+      :rule_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22108,6 +22828,45 @@ module Aws::SecurityHub
     class LimitExceededException < Struct.new(
       :message,
       :code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token to specify where to start paginating the response. This is
+    #   the `NextToken` from a previously truncated response. On your first
+    #   call to the `ListAutomationRules` API, set the value of this
+    #   parameter to `NULL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of rules to return in the response. This
+    #   currently ranges from 1 to 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListAutomationRulesRequest AWS API Documentation
+    #
+    class ListAutomationRulesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] automation_rules_metadata
+    #   Metadata for rules in the calling account. The response includes
+    #   rules with a `RuleStatus` of `ENABLED` and `DISABLED`.
+    #   @return [Array<Types::AutomationRulesMetadata>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token for the response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListAutomationRulesResponse AWS API Documentation
+    #
+    class ListAutomationRulesResponse < Struct.new(
+      :automation_rules_metadata,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25625,6 +26384,33 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # A list of objects containing `RuleArn`, `ErrorCode`, and
+    # `ErrorMessage`. This parameter tells you which automation rules the
+    # request didn't process and why.
+    #
+    # @!attribute [rw] rule_arn
+    #   The Amazon Resource Name (ARN) for the unprocessed automation rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code associated with the unprocessed automation rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error_message
+    #   An error message describing why a request didn't process a specific
+    #   rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UnprocessedAutomationRule AWS API Documentation
+    #
+    class UnprocessedAutomationRule < Struct.new(
+      :rule_arn,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides details about a security control for which a response
     # couldn't be returned.
     #
@@ -25777,6 +26563,71 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateActionTargetResponse AWS API Documentation
     #
     class UpdateActionTargetResponse < Aws::EmptyStructure; end
+
+    # Specifies the parameters to update in an existing automation rule.
+    #
+    # @!attribute [rw] rule_arn
+    #   The Amazon Resource Name (ARN) for the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_status
+    #   Whether the rule is active after it is created. If this parameter is
+    #   equal to `ENABLED`, Security Hub will apply the rule to findings and
+    #   finding updates after the rule is created. To change the value of
+    #   this parameter after creating a rule, use
+    #   `BatchUpdateAutomationRules`.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_order
+    #   An integer ranging from 1 to 1000 that represents the order in which
+    #   the rule action is applied to findings. Security Hub applies rules
+    #   with lower values for this parameter first.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   A description of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_terminal
+    #   Specifies whether a rule is the last to be applied with respect to a
+    #   finding that matches the rule criteria. This is useful when a
+    #   finding matches the criteria for multiple rules, and each rule has
+    #   different actions. If the value of this field is set to `true` for a
+    #   rule, Security Hub applies the rule action to a finding that matches
+    #   the rule criteria and won't evaluate other rules for the finding. 
+    #   The default value of this field is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] criteria
+    #   A set of ASFF finding field attributes and corresponding expected
+    #   values that Security Hub uses to filter findings. If a finding
+    #   matches the conditions specified in this parameter, Security Hub
+    #   applies the rule action to the finding.
+    #   @return [Types::AutomationRulesFindingFilters]
+    #
+    # @!attribute [rw] actions
+    #   One or more actions to update finding fields if a finding matches
+    #   the conditions specified in `Criteria`.
+    #   @return [Array<Types::AutomationRulesAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateAutomationRulesRequestItem AWS API Documentation
+    #
+    class UpdateAutomationRulesRequestItem < Struct.new(
+      :rule_arn,
+      :rule_status,
+      :rule_order,
+      :description,
+      :rule_name,
+      :is_terminal,
+      :criteria,
+      :actions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] finding_aggregator_arn
     #   The ARN of the finding aggregator. To obtain the ARN, use
