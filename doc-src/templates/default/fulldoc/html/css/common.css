@@ -9,5 +9,5 @@ li.collapsed a.toggle {
     background-position: top left;
 }
 
-/* Make all links underlined */
-a { text-decoration: underline !important; }
+/* Make all links bolder. 400 is normal, 700 is bold  */
+a { font-weight: 550; }
