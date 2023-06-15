@@ -9,6 +9,7 @@
 
 
 module Aws::SecurityLake
+  # @api private
   module Endpoints
 
     class CreateAwsLogSource

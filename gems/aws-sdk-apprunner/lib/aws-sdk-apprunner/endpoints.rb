@@ -9,6 +9,7 @@
 
 
 module Aws::AppRunner
+  # @api private
   module Endpoints
 
     class AssociateCustomDomain

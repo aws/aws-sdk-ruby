@@ -9,6 +9,7 @@
 
 
 module Aws::CloudFormation
+  # @api private
   module Endpoints
 
     class ActivateOrganizationsAccess

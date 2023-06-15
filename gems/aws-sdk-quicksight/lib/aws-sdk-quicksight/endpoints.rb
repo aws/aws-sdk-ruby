@@ -9,6 +9,7 @@
 
 
 module Aws::QuickSight
+  # @api private
   module Endpoints
 
     class CancelIngestion

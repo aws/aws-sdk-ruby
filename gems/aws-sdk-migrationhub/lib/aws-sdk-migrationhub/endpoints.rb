@@ -9,6 +9,7 @@
 
 
 module Aws::MigrationHub
+  # @api private
   module Endpoints
 
     class AssociateCreatedArtifact

@@ -9,6 +9,7 @@
 
 
 module Aws::IoTSiteWise
+  # @api private
   module Endpoints
 
     class AssociateAssets

@@ -9,6 +9,7 @@
 
 
 module Aws::ElasticLoadBalancing
+  # @api private
   module Endpoints
 
     class AddTags

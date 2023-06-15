@@ -9,6 +9,7 @@
 
 
 module Aws::EMR
+  # @api private
   module Endpoints
 
     class AddInstanceFleet

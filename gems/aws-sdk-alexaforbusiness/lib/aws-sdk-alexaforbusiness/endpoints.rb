@@ -9,6 +9,7 @@
 
 
 module Aws::AlexaForBusiness
+  # @api private
   module Endpoints
 
     class ApproveSkill

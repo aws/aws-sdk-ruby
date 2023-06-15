@@ -9,6 +9,7 @@
 
 
 module Aws::Scheduler
+  # @api private
   module Endpoints
 
     class CreateSchedule

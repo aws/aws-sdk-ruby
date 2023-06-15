@@ -9,6 +9,7 @@
 
 
 module Aws::IoTDeviceAdvisor
+  # @api private
   module Endpoints
 
     class CreateSuiteDefinition

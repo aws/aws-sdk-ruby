@@ -1100,11 +1100,27 @@ module Aws::EFS
     # configuration.
     #
     # @!attribute [rw] status
-    #   Describes the status of the destination Amazon EFS file system. If
-    #   the status is `ERROR`, the destination file system in the
-    #   replication configuration is in a failed state and is unrecoverable.
-    #   To access the file system data, restore a backup of the failed file
-    #   system to a new file system.
+    #   Describes the status of the destination Amazon EFS file system.
+    #
+    #   * The `Paused` state occurs as a result of opting out of the source
+    #     or destination Region after the replication configuration was
+    #     created. To resume replication for the file system, you need to
+    #     again opt in to the Amazon Web Services Region. For more
+    #     information, see [Managing Amazon Web Services Regions][1] in the
+    #     *Amazon Web Services General Reference Guide*.
+    #
+    #   * The `Error` state occurs when either the source or the destination
+    #     file system (or both) is in a failed state and is unrecoverable.
+    #     For more information, see [Monitoring replication status][2] in
+    #     the *Amazon EFS User Guide*. You must delete the replication
+    #     configuration, and then restore the most recent backup of the
+    #     failed file system (either the source or the destination) to a new
+    #     file system.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable
+    #   [2]: https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#restoring-backup-efsmonitoring-replication-status.html
     #   @return [String]
     #
     # @!attribute [rw] file_system_id

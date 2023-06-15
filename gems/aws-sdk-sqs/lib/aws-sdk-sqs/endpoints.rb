@@ -9,6 +9,7 @@
 
 
 module Aws::SQS
+  # @api private
   module Endpoints
 
     class AddPermission

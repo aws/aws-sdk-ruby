@@ -9,6 +9,7 @@
 
 
 module Aws::FraudDetector
+  # @api private
   module Endpoints
 
     class BatchCreateVariable

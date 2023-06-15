@@ -9,6 +9,7 @@
 
 
 module Aws::ElasticInference
+  # @api private
   module Endpoints
 
     class DescribeAcceleratorOfferings

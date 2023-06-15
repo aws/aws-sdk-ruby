@@ -9,6 +9,7 @@
 
 
 module Aws::AppRegistry
+  # @api private
   module Endpoints
 
     class AssociateAttributeGroup

@@ -9,6 +9,7 @@
 
 
 module Aws::WAFV2
+  # @api private
   module Endpoints
 
     class AssociateWebACL

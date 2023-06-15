@@ -9,6 +9,7 @@
 
 
 module Aws::Detective
+  # @api private
   module Endpoints
 
     class AcceptInvitation

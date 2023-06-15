@@ -9,6 +9,7 @@
 
 
 module Aws::Imagebuilder
+  # @api private
   module Endpoints
 
     class CancelImageCreation

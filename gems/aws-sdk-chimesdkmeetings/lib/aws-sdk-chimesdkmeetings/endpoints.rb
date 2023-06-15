@@ -9,6 +9,7 @@
 
 
 module Aws::ChimeSDKMeetings
+  # @api private
   module Endpoints
 
     class BatchCreateAttendee

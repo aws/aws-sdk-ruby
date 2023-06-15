@@ -9,6 +9,7 @@
 
 
 module Aws::PaymentCryptographyData
+  # @api private
   module Endpoints
 
     class DecryptData

@@ -9,6 +9,7 @@
 
 
 module Aws::DirectoryService
+  # @api private
   module Endpoints
 
     class AcceptSharedDirectory

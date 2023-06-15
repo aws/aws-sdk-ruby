@@ -9,6 +9,7 @@
 
 
 module Aws::MachineLearning
+  # @api private
   module Endpoints
 
     class AddTags

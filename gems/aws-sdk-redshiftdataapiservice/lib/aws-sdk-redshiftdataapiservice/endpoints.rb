@@ -9,6 +9,7 @@
 
 
 module Aws::RedshiftDataAPIService
+  # @api private
   module Endpoints
 
     class BatchExecuteStatement

@@ -9,6 +9,7 @@
 
 
 module Aws::RecycleBin
+  # @api private
   module Endpoints
 
     class CreateRule

@@ -9,6 +9,7 @@
 
 
 module Aws::OpsWorksCM
+  # @api private
   module Endpoints
 
     class AssociateNode

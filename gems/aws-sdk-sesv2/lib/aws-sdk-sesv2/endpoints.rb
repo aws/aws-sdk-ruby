@@ -9,6 +9,7 @@
 
 
 module Aws::SESV2
+  # @api private
   module Endpoints
 
     class BatchGetMetricData

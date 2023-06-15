@@ -9,6 +9,7 @@
 
 
 module Aws::CloudSearch
+  # @api private
   module Endpoints
 
     class BuildSuggesters

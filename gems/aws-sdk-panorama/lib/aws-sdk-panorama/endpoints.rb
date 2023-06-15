@@ -9,6 +9,7 @@
 
 
 module Aws::Panorama
+  # @api private
   module Endpoints
 
     class CreateApplicationInstance

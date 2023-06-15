@@ -9,6 +9,7 @@
 
 
 module Aws::Greengrass
+  # @api private
   module Endpoints
 
     class AssociateRoleToGroup

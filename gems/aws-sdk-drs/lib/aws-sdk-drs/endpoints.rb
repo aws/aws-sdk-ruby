@@ -9,6 +9,7 @@
 
 
 module Aws::Drs
+  # @api private
   module Endpoints
 
     class AssociateSourceNetworkStack

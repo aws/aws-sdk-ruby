@@ -9,6 +9,7 @@
 
 
 module Aws::DAX
+  # @api private
   module Endpoints
 
     class CreateCluster

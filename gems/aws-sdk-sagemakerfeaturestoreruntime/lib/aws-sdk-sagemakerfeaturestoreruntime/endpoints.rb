@@ -9,6 +9,7 @@
 
 
 module Aws::SageMakerFeatureStoreRuntime
+  # @api private
   module Endpoints
 
     class BatchGetRecord

@@ -9,6 +9,7 @@
 
 
 module Aws::Connect
+  # @api private
   module Endpoints
 
     class ActivateEvaluationForm

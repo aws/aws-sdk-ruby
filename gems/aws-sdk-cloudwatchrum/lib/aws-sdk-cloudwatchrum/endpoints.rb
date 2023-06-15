@@ -9,6 +9,7 @@
 
 
 module Aws::CloudWatchRUM
+  # @api private
   module Endpoints
 
     class BatchCreateRumMetricDefinitions

@@ -9,6 +9,7 @@
 
 
 module Aws::Inspector2
+  # @api private
   module Endpoints
 
     class AssociateMember

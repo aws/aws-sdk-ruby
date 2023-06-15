@@ -9,6 +9,7 @@
 
 
 module Aws::CleanRooms
+  # @api private
   module Endpoints
 
     class BatchGetSchema

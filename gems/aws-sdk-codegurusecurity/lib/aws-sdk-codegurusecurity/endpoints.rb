@@ -9,6 +9,7 @@
 
 
 module Aws::CodeGuruSecurity
+  # @api private
   module Endpoints
 
     class BatchGetFindings

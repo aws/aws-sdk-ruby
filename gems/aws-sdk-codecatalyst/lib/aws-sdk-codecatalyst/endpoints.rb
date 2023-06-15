@@ -9,6 +9,7 @@
 
 
 module Aws::CodeCatalyst
+  # @api private
   module Endpoints
 
     class CreateAccessToken

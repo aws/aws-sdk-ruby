@@ -9,6 +9,7 @@
 
 
 module Aws::ComputeOptimizer
+  # @api private
   module Endpoints
 
     class DeleteRecommendationPreferences

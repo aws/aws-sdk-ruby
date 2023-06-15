@@ -9,6 +9,7 @@
 
 
 module Aws::Kendra
+  # @api private
   module Endpoints
 
     class AssociateEntitiesToExperience

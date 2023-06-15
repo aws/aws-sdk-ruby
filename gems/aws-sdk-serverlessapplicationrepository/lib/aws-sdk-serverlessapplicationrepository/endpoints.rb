@@ -9,6 +9,7 @@
 
 
 module Aws::ServerlessApplicationRepository
+  # @api private
   module Endpoints
 
     class CreateApplication

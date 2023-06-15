@@ -9,6 +9,7 @@
 
 
 module Aws::Mgn
+  # @api private
   module Endpoints
 
     class ArchiveApplication

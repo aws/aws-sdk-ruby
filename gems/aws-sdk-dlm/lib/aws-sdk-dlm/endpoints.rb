@@ -9,6 +9,7 @@
 
 
 module Aws::DLM
+  # @api private
   module Endpoints
 
     class CreateLifecyclePolicy

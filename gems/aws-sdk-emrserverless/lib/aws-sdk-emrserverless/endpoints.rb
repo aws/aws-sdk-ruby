@@ -9,6 +9,7 @@
 
 
 module Aws::EMRServerless
+  # @api private
   module Endpoints
 
     class CancelJobRun

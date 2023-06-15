@@ -9,6 +9,7 @@
 
 
 module Aws::OAM
+  # @api private
   module Endpoints
 
     class CreateLink

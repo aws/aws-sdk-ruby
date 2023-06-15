@@ -9,6 +9,7 @@
 
 
 module Aws::CloudWatch
+  # @api private
   module Endpoints
 
     class DeleteAlarms

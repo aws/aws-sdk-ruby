@@ -9,6 +9,7 @@
 
 
 module Aws::SSO
+  # @api private
   module Endpoints
 
     class GetRoleCredentials

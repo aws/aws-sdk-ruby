@@ -9,6 +9,7 @@
 
 
 module Aws::CustomerProfiles
+  # @api private
   module Endpoints
 
     class AddProfileKey

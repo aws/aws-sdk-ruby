@@ -52,6 +52,6 @@ require_relative 'aws-sdk-lexmodelbuildingservice/customizations'
 # @!group service
 module Aws::LexModelBuildingService
 
-  GEM_VERSION = '1.60.0'
+  GEM_VERSION = '1.61.0'
 
 end

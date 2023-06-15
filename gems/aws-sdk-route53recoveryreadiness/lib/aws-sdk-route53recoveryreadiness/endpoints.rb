@@ -9,6 +9,7 @@
 
 
 module Aws::Route53RecoveryReadiness
+  # @api private
   module Endpoints
 
     class CreateCell

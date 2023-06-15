@@ -9,6 +9,7 @@
 
 
 module Aws::ElasticBeanstalk
+  # @api private
   module Endpoints
 
     class AbortEnvironmentUpdate

@@ -9,6 +9,7 @@
 
 
 module Aws::MigrationHubStrategyRecommendations
+  # @api private
   module Endpoints
 
     class GetApplicationComponentDetails

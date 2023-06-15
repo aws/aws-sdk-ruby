@@ -9,6 +9,7 @@
 
 
 module Aws::IAM
+  # @api private
   module Endpoints
 
     class AddClientIDToOpenIDConnectProvider

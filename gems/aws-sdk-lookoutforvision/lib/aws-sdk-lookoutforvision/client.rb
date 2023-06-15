@@ -1820,7 +1820,7 @@ module Aws::LookoutforVision
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutforvision'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

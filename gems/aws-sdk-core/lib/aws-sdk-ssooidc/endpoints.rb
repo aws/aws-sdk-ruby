@@ -9,6 +9,7 @@
 
 
 module Aws::SSOOIDC
+  # @api private
   module Endpoints
 
     class CreateToken

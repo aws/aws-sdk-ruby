@@ -9,6 +9,7 @@
 
 
 module Aws::Glue
+  # @api private
   module Endpoints
 
     class BatchCreatePartition

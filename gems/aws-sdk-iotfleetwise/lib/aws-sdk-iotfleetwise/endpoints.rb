@@ -9,6 +9,7 @@
 
 
 module Aws::IoTFleetWise
+  # @api private
   module Endpoints
 
     class AssociateVehicleFleet

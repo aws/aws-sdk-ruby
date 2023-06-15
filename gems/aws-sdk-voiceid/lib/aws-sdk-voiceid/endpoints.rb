@@ -9,6 +9,7 @@
 
 
 module Aws::VoiceID
+  # @api private
   module Endpoints
 
     class AssociateFraudster

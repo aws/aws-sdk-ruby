@@ -52,6 +52,6 @@ require_relative 'aws-sdk-apigatewaymanagementapi/customizations'
 # @!group service
 module Aws::ApiGatewayManagementApi
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end

@@ -9,6 +9,7 @@
 
 
 module Aws::ARCZonalShift
+  # @api private
   module Endpoints
 
     class CancelZonalShift

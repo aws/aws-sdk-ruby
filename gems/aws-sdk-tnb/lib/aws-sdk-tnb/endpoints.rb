@@ -9,6 +9,7 @@
 
 
 module Aws::Tnb
+  # @api private
   module Endpoints
 
     class CancelSolNetworkOperation

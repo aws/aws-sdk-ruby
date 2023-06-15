@@ -1976,7 +1976,7 @@ module Aws::KinesisAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisanalytics'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

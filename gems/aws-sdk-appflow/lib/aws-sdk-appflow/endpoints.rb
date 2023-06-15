@@ -9,6 +9,7 @@
 
 
 module Aws::Appflow
+  # @api private
   module Endpoints
 
     class CancelFlowExecutions

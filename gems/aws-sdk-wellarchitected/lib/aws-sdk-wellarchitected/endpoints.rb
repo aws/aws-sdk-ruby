@@ -9,6 +9,7 @@
 
 
 module Aws::WellArchitected
+  # @api private
   module Endpoints
 
     class AssociateLenses

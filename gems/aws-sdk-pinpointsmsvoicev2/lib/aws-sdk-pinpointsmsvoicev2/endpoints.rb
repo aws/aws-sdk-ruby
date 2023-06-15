@@ -9,6 +9,7 @@
 
 
 module Aws::PinpointSMSVoiceV2
+  # @api private
   module Endpoints
 
     class AssociateOriginationIdentity

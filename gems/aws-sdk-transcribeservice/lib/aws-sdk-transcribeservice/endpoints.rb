@@ -9,6 +9,7 @@
 
 
 module Aws::TranscribeService
+  # @api private
   module Endpoints
 
     class CreateCallAnalyticsCategory

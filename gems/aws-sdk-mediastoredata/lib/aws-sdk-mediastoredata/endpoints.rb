@@ -9,6 +9,7 @@
 
 
 module Aws::MediaStoreData
+  # @api private
   module Endpoints
 
     class DeleteObject

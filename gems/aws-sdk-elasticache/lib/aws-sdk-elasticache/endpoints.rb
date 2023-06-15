@@ -9,6 +9,7 @@
 
 
 module Aws::ElastiCache
+  # @api private
   module Endpoints
 
     class AddTagsToResource

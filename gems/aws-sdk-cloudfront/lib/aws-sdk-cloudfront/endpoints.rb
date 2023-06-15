@@ -9,6 +9,7 @@
 
 
 module Aws::CloudFront
+  # @api private
   module Endpoints
 
     class AssociateAlias

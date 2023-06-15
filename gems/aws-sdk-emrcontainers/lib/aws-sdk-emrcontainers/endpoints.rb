@@ -9,6 +9,7 @@
 
 
 module Aws::EMRContainers
+  # @api private
   module Endpoints
 
     class CancelJobRun

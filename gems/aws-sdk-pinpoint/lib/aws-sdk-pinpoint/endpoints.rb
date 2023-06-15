@@ -9,6 +9,7 @@
 
 
 module Aws::Pinpoint
+  # @api private
   module Endpoints
 
     class CreateApp

@@ -9,6 +9,7 @@
 
 
 module Aws::Pricing
+  # @api private
   module Endpoints
 
     class DescribeServices

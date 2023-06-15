@@ -9,6 +9,7 @@
 
 
 module Aws::Cloud9
+  # @api private
   module Endpoints
 
     class CreateEnvironmentEC2

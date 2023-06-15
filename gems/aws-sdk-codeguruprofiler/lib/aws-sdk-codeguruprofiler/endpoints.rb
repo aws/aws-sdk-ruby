@@ -9,6 +9,7 @@
 
 
 module Aws::CodeGuruProfiler
+  # @api private
   module Endpoints
 
     class AddNotificationChannels

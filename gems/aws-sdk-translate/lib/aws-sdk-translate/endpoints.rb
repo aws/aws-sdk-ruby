@@ -9,6 +9,7 @@
 
 
 module Aws::Translate
+  # @api private
   module Endpoints
 
     class CreateParallelData

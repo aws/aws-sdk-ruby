@@ -9,6 +9,7 @@
 
 
 module Aws::KMS
+  # @api private
   module Endpoints
 
     class CancelKeyDeletion

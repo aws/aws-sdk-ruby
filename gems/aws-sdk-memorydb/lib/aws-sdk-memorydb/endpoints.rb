@@ -9,6 +9,7 @@
 
 
 module Aws::MemoryDB
+  # @api private
   module Endpoints
 
     class BatchUpdateCluster

@@ -9,6 +9,7 @@
 
 
 module Aws::ConnectCampaignService
+  # @api private
   module Endpoints
 
     class CreateCampaign

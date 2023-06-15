@@ -9,6 +9,7 @@
 
 
 module Aws::Rekognition
+  # @api private
   module Endpoints
 
     class AssociateFaces

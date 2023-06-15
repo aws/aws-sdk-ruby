@@ -9,6 +9,7 @@
 
 
 module Aws::QLDBSession
+  # @api private
   module Endpoints
 
     class SendCommand

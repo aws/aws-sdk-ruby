@@ -9,6 +9,7 @@
 
 
 module Aws::Budgets
+  # @api private
   module Endpoints
 
     class CreateBudget

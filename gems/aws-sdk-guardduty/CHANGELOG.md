@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2023-06-15)
+------------------
+
+* Feature - Updated descriptions for some APIs.
+
 1.71.0 (2023-05-31)
 ------------------
 

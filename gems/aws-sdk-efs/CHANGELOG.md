@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2023-06-15)
+------------------
+
+* Feature - Documentation updates for EFS.
+
 1.61.0 (2023-05-31)
 ------------------
 

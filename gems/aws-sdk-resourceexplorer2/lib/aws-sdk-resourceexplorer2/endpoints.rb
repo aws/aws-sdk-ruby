@@ -9,6 +9,7 @@
 
 
 module Aws::ResourceExplorer2
+  # @api private
   module Endpoints
 
     class AssociateDefaultView

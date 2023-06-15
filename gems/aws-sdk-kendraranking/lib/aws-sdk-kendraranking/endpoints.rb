@@ -9,6 +9,7 @@
 
 
 module Aws::KendraRanking
+  # @api private
   module Endpoints
 
     class CreateRescoreExecutionPlan

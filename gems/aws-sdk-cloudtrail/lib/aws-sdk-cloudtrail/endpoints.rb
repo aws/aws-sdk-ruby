@@ -9,6 +9,7 @@
 
 
 module Aws::CloudTrail
+  # @api private
   module Endpoints
 
     class AddTags

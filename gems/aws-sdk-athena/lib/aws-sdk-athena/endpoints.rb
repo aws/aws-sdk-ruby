@@ -9,6 +9,7 @@
 
 
 module Aws::Athena
+  # @api private
   module Endpoints
 
     class BatchGetNamedQuery

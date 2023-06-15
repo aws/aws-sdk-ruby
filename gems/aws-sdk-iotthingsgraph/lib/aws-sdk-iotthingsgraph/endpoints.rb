@@ -9,6 +9,7 @@
 
 
 module Aws::IoTThingsGraph
+  # @api private
   module Endpoints
 
     class AssociateEntityToThing

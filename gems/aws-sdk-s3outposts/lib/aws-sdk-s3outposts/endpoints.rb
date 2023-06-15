@@ -9,6 +9,7 @@
 
 
 module Aws::S3Outposts
+  # @api private
   module Endpoints
 
     class CreateEndpoint

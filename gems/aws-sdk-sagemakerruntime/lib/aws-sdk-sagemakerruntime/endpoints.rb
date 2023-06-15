@@ -9,6 +9,7 @@
 
 
 module Aws::SageMakerRuntime
+  # @api private
   module Endpoints
 
     class InvokeEndpoint

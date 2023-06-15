@@ -9,6 +9,7 @@
 
 
 module Aws::FinSpaceData
+  # @api private
   module Endpoints
 
     class AssociateUserToPermissionGroup

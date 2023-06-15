@@ -9,6 +9,7 @@
 
 
 module Aws::KafkaConnect
+  # @api private
   module Endpoints
 
     class CreateConnector

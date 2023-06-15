@@ -9,6 +9,7 @@
 
 
 module Aws::AppSync
+  # @api private
   module Endpoints
 
     class AssociateApi

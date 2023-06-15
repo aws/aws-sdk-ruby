@@ -9,6 +9,7 @@
 
 
 module Aws::GlobalAccelerator
+  # @api private
   module Endpoints
 
     class AddCustomRoutingEndpoints

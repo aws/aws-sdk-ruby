@@ -9,6 +9,7 @@
 
 
 module Aws::CloudWatchLogs
+  # @api private
   module Endpoints
 
     class AssociateKmsKey

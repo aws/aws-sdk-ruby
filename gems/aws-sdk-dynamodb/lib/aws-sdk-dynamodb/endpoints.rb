@@ -9,6 +9,7 @@
 
 
 module Aws::DynamoDB
+  # @api private
   module Endpoints
 
     class BatchExecuteStatement

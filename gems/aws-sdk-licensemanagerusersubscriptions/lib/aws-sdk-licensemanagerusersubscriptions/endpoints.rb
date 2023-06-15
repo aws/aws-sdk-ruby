@@ -9,6 +9,7 @@
 
 
 module Aws::LicenseManagerUserSubscriptions
+  # @api private
   module Endpoints
 
     class AssociateUser

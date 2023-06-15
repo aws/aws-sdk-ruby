@@ -9,6 +9,7 @@
 
 
 module Aws::SSOAdmin
+  # @api private
   module Endpoints
 
     class AttachCustomerManagedPolicyReferenceToPermissionSet

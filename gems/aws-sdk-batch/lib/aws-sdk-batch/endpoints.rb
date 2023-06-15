@@ -9,6 +9,7 @@
 
 
 module Aws::Batch
+  # @api private
   module Endpoints
 
     class CancelJob

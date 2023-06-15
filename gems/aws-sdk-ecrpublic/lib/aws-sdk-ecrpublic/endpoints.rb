@@ -9,6 +9,7 @@
 
 
 module Aws::ECRPublic
+  # @api private
   module Endpoints
 
     class BatchCheckLayerAvailability

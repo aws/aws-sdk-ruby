@@ -9,6 +9,7 @@
 
 
 module Aws::SSM
+  # @api private
   module Endpoints
 
     class AddTagsToResource

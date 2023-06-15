@@ -9,6 +9,7 @@
 
 
 module Aws::XRay
+  # @api private
   module Endpoints
 
     class BatchGetTraces

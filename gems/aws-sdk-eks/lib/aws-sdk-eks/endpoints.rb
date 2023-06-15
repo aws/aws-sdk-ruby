@@ -9,6 +9,7 @@
 
 
 module Aws::EKS
+  # @api private
   module Endpoints
 
     class AssociateEncryptionConfig

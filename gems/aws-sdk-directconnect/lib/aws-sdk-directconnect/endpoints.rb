@@ -9,6 +9,7 @@
 
 
 module Aws::DirectConnect
+  # @api private
   module Endpoints
 
     class AcceptDirectConnectGatewayAssociationProposal

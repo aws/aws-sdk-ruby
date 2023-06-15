@@ -9,6 +9,7 @@
 
 
 module Aws::PrometheusService
+  # @api private
   module Endpoints
 
     class CreateAlertManagerDefinition

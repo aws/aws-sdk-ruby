@@ -9,6 +9,7 @@
 
 
 module Aws::OpsWorks
+  # @api private
   module Endpoints
 
     class AssignInstance

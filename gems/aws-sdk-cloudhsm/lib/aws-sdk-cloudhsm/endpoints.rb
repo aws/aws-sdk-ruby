@@ -9,6 +9,7 @@
 
 
 module Aws::CloudHSM
+  # @api private
   module Endpoints
 
     class AddTagsToResource

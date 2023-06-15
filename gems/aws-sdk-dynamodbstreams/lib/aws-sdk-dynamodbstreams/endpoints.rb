@@ -9,6 +9,7 @@
 
 
 module Aws::DynamoDBStreams
+  # @api private
   module Endpoints
 
     class DescribeStream

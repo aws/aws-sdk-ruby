@@ -9,6 +9,7 @@
 
 
 module Aws::WorkDocs
+  # @api private
   module Endpoints
 
     class AbortDocumentVersionUpload

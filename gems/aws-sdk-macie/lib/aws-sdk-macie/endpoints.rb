@@ -9,6 +9,7 @@
 
 
 module Aws::Macie
+  # @api private
   module Endpoints
 
     class AssociateMemberAccount

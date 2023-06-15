@@ -9,6 +9,7 @@
 
 
 module Aws::AppMesh
+  # @api private
   module Endpoints
 
     class CreateGatewayRoute

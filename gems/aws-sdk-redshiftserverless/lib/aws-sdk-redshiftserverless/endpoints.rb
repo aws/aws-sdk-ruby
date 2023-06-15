@@ -9,6 +9,7 @@
 
 
 module Aws::RedshiftServerless
+  # @api private
   module Endpoints
 
     class ConvertRecoveryPointToSnapshot

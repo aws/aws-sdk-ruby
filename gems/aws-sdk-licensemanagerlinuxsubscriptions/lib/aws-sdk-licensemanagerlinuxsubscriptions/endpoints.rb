@@ -9,6 +9,7 @@
 
 
 module Aws::LicenseManagerLinuxSubscriptions
+  # @api private
   module Endpoints
 
     class GetServiceSettings

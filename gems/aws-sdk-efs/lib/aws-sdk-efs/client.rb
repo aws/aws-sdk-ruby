@@ -385,18 +385,27 @@ module Aws::EFS
     #
     # <note markdown="1"> If multiple requests to create access points on the same file system
     # are sent in quick succession, and the file system is near the limit of
-    # 1000 access points, you may experience a throttling response for these
-    # requests. This is to ensure that the file system does not exceed the
-    # stated access point limit.
+    # 1,000 access points, you may experience a throttling response for
+    # these requests. This is to ensure that the file system does not exceed
+    # the stated access point limit.
     #
     #  </note>
     #
     # This operation requires permissions for the
     # `elasticfilesystem:CreateAccessPoint` action.
     #
+    # Access points can be tagged on creation. If tags are specified in the
+    # creation action, IAM performs additional authorization on the
+    # `elasticfilesystem:TagResource` action to verify if users have
+    # permissions to create tags. Therefore, you must grant explicit
+    # permissions to use the `elasticfilesystem:TagResource` action. For
+    # more information, see [Granting permissions to tag resources during
+    # creation][2].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html
+    # [2]: https://docs.aws.amazon.com/efs/latest/ug/using-tags-efs.html#supported-iam-actions-tagging.html
     #
     # @option params [required, String] :client_token
     #   A string of up to 64 ASCII characters that Amazon EFS uses to ensure
@@ -569,11 +578,20 @@ module Aws::EFS
     # This operation requires permissions for the
     # `elasticfilesystem:CreateFileSystem` action.
     #
+    # File systems can be tagged on creation. If tags are specified in the
+    # creation action, IAM performs additional authorization on the
+    # `elasticfilesystem:TagResource` action to verify if users have
+    # permissions to create tags. Therefore, you must grant explicit
+    # permissions to use the `elasticfilesystem:TagResource` action. For
+    # more information, see [Granting permissions to tag resources during
+    # creation][4].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/efs/latest/ug/creating-using-create-fs.html#creating-using-create-fs-part1
     # [2]: https://docs.aws.amazon.com/efs/latest/ug/performance.html#performancemodes.html
     # [3]: https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html
+    # [4]: https://docs.aws.amazon.com/efs/latest/ug/using-tags-efs.html#supported-iam-actions-tagging.html
     #
     # @option params [required, String] :creation_token
     #   A string of up to 64 ASCII characters. Amazon EFS uses this to ensure
@@ -2708,7 +2726,7 @@ module Aws::EFS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

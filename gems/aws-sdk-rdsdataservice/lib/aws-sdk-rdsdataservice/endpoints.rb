@@ -9,6 +9,7 @@
 
 
 module Aws::RDSDataService
+  # @api private
   module Endpoints
 
     class BatchExecuteStatement

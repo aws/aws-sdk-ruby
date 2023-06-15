@@ -9,6 +9,7 @@
 
 
 module Aws::CostExplorer
+  # @api private
   module Endpoints
 
     class CreateAnomalyMonitor

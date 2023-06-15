@@ -9,6 +9,7 @@
 
 
 module Aws::HealthLake
+  # @api private
   module Endpoints
 
     class CreateFHIRDatastore

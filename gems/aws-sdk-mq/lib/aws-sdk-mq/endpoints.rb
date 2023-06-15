@@ -9,6 +9,7 @@
 
 
 module Aws::MQ
+  # @api private
   module Endpoints
 
     class CreateBroker

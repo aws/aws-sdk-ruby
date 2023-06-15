@@ -9,6 +9,7 @@
 
 
 module Aws::Account
+  # @api private
   module Endpoints
 
     class DeleteAlternateContact

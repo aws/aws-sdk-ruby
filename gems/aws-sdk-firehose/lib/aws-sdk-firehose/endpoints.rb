@@ -9,6 +9,7 @@
 
 
 module Aws::Firehose
+  # @api private
   module Endpoints
 
     class CreateDeliveryStream

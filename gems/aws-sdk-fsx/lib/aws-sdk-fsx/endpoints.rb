@@ -9,6 +9,7 @@
 
 
 module Aws::FSx
+  # @api private
   module Endpoints
 
     class AssociateFileSystemAliases

@@ -9,6 +9,7 @@
 
 
 module Aws::AutoScalingPlans
+  # @api private
   module Endpoints
 
     class CreateScalingPlan

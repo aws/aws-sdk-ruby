@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2023-06-15)
+------------------
+
+* Feature - Amazon Location Service adds categories to places, including filtering on those categories in searches. Also, you can now add metadata properties to your geofences.
+
 1.32.0 (2023-05-31)
 ------------------
 

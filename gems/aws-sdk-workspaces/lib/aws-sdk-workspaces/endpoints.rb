@@ -9,6 +9,7 @@
 
 
 module Aws::WorkSpaces
+  # @api private
   module Endpoints
 
     class AssociateConnectionAlias

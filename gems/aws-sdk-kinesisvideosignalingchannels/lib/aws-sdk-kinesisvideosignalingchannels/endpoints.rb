@@ -9,6 +9,7 @@
 
 
 module Aws::KinesisVideoSignalingChannels
+  # @api private
   module Endpoints
 
     class GetIceServerConfig

@@ -9,6 +9,7 @@
 
 
 module Aws::RolesAnywhere
+  # @api private
   module Endpoints
 
     class CreateProfile

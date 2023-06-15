@@ -9,6 +9,7 @@
 
 
 module Aws::SecretsManager
+  # @api private
   module Endpoints
 
     class CancelRotateSecret

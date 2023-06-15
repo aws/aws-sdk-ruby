@@ -9,6 +9,7 @@
 
 
 module Aws::IoTEventsData
+  # @api private
   module Endpoints
 
     class BatchAcknowledgeAlarm

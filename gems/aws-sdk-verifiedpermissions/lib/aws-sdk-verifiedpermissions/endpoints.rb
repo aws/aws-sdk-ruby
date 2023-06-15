@@ -9,6 +9,7 @@
 
 
 module Aws::VerifiedPermissions
+  # @api private
   module Endpoints
 
     class CreateIdentitySource

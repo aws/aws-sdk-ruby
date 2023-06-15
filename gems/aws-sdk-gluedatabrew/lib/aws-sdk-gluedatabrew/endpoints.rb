@@ -9,6 +9,7 @@
 
 
 module Aws::GlueDataBrew
+  # @api private
   module Endpoints
 
     class BatchDeleteRecipeVersion

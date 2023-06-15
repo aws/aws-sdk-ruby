@@ -9,6 +9,7 @@
 
 
 module Aws::Omics
+  # @api private
   module Endpoints
 
     class AbortMultipartReadSetUpload

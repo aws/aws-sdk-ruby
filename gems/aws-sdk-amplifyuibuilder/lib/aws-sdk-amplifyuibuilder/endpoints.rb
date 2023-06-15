@@ -9,6 +9,7 @@
 
 
 module Aws::AmplifyUIBuilder
+  # @api private
   module Endpoints
 
     class CreateComponent

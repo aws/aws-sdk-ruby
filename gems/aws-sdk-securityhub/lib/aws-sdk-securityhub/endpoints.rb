@@ -9,6 +9,7 @@
 
 
 module Aws::SecurityHub
+  # @api private
   module Endpoints
 
     class AcceptAdministratorInvitation

@@ -9,6 +9,7 @@
 
 
 module Aws::IoT
+  # @api private
   module Endpoints
 
     class AcceptCertificateTransfer

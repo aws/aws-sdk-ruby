@@ -9,6 +9,7 @@
 
 
 module Aws::LexModelsV2
+  # @api private
   module Endpoints
 
     class BatchCreateCustomVocabularyItem

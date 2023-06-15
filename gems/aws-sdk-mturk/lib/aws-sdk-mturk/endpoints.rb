@@ -9,6 +9,7 @@
 
 
 module Aws::MTurk
+  # @api private
   module Endpoints
 
     class AcceptQualificationRequest

@@ -9,6 +9,7 @@
 
 
 module Aws::KinesisVideoWebRTCStorage
+  # @api private
   module Endpoints
 
     class JoinStorageSession

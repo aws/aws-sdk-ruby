@@ -9,6 +9,7 @@
 
 
 module Aws::NetworkManager
+  # @api private
   module Endpoints
 
     class AcceptAttachment

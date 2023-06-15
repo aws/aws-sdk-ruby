@@ -9,6 +9,7 @@
 
 
 module Aws::IoT1ClickProjects
+  # @api private
   module Endpoints
 
     class AssociateDeviceWithPlacement

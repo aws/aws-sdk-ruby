@@ -9,6 +9,7 @@
 
 
 module Aws::Ivschat
+  # @api private
   module Endpoints
 
     class CreateChatToken

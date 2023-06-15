@@ -9,6 +9,7 @@
 
 
 module Aws::WorkSpacesWeb
+  # @api private
   module Endpoints
 
     class AssociateBrowserSettings

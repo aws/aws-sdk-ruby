@@ -9,6 +9,7 @@
 
 
 module Aws::Signer
+  # @api private
   module Endpoints
 
     class AddProfilePermission

@@ -9,6 +9,7 @@
 
 
 module Aws::MediaPackageV2
+  # @api private
   module Endpoints
 
     class CreateChannel

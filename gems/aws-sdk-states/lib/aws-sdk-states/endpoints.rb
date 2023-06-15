@@ -9,6 +9,7 @@
 
 
 module Aws::States
+  # @api private
   module Endpoints
 
     class CreateActivity

@@ -9,6 +9,7 @@
 
 
 module Aws::ACMPCA
+  # @api private
   module Endpoints
 
     class CreateCertificateAuthority

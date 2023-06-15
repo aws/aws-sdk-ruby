@@ -9,6 +9,7 @@
 
 
 module Aws::KinesisVideoMedia
+  # @api private
   module Endpoints
 
     class GetMedia

@@ -9,6 +9,7 @@
 
 
 module Aws::Amplify
+  # @api private
   module Endpoints
 
     class CreateApp

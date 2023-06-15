@@ -9,6 +9,7 @@
 
 
 module Aws::Keyspaces
+  # @api private
   module Endpoints
 
     class CreateKeyspace

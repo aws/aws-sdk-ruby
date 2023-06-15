@@ -9,6 +9,7 @@
 
 
 module Aws::CodeGuruReviewer
+  # @api private
   module Endpoints
 
     class AssociateRepository

@@ -9,6 +9,7 @@
 
 
 module Aws::Synthetics
+  # @api private
   module Endpoints
 
     class AssociateResource

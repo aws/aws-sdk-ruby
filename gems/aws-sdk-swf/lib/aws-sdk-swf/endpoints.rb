@@ -9,6 +9,7 @@
 
 
 module Aws::SWF
+  # @api private
   module Endpoints
 
     class CountClosedWorkflowExecutions

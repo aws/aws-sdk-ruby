@@ -9,6 +9,7 @@
 
 
 module Aws::APIGateway
+  # @api private
   module Endpoints
 
     class CreateApiKey

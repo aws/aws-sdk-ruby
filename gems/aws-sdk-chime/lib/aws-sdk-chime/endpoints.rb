@@ -9,6 +9,7 @@
 
 
 module Aws::Chime
+  # @api private
   module Endpoints
 
     class AssociatePhoneNumberWithUser

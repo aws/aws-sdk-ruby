@@ -9,6 +9,7 @@
 
 
 module Aws::NetworkFirewall
+  # @api private
   module Endpoints
 
     class AssociateFirewallPolicy

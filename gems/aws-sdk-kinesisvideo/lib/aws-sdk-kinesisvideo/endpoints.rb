@@ -9,6 +9,7 @@
 
 
 module Aws::KinesisVideo
+  # @api private
   module Endpoints
 
     class CreateSignalingChannel

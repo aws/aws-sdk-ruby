@@ -9,6 +9,7 @@
 
 
 module Aws::VPCLattice
+  # @api private
   module Endpoints
 
     class BatchUpdateRule

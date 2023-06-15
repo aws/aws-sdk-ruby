@@ -9,6 +9,7 @@
 
 
 module Aws::PersonalizeRuntime
+  # @api private
   module Endpoints
 
     class GetPersonalizedRanking

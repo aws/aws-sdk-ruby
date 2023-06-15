@@ -9,6 +9,7 @@
 
 
 module Aws::SageMakerGeospatial
+  # @api private
   module Endpoints
 
     class DeleteEarthObservationJob

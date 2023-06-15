@@ -9,6 +9,7 @@
 
 
 module Aws::BillingConductor
+  # @api private
   module Endpoints
 
     class AssociateAccounts

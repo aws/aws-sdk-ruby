@@ -9,6 +9,7 @@
 
 
 module Aws::MediaStore
+  # @api private
   module Endpoints
 
     class CreateContainer

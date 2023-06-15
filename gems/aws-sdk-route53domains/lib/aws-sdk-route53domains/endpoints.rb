@@ -9,6 +9,7 @@
 
 
 module Aws::Route53Domains
+  # @api private
   module Endpoints
 
     class AcceptDomainTransferFromAnotherAwsAccount

@@ -9,6 +9,7 @@
 
 
 module Aws::SavingsPlans
+  # @api private
   module Endpoints
 
     class CreateSavingsPlan

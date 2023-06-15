@@ -9,6 +9,7 @@
 
 
 module Aws::DataPipeline
+  # @api private
   module Endpoints
 
     class ActivatePipeline

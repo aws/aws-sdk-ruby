@@ -9,6 +9,7 @@
 
 
 module Aws::QLDB
+  # @api private
   module Endpoints
 
     class CancelJournalKinesisStream

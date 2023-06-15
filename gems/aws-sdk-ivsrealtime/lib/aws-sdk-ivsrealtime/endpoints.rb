@@ -9,6 +9,7 @@
 
 
 module Aws::IVSRealTime
+  # @api private
   module Endpoints
 
     class CreateParticipantToken

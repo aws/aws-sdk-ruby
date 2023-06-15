@@ -9,6 +9,7 @@
 
 
 module Aws::ApplicationInsights
+  # @api private
   module Endpoints
 
     class CreateApplication

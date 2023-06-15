@@ -9,6 +9,7 @@
 
 
 module Aws::GameSparks
+  # @api private
   module Endpoints
 
     class CreateGame

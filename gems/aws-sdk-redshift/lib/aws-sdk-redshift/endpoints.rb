@@ -9,6 +9,7 @@
 
 
 module Aws::Redshift
+  # @api private
   module Endpoints
 
     class AcceptReservedNodeExchange

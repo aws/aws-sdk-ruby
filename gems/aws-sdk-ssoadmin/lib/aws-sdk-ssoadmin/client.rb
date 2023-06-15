@@ -2095,7 +2095,7 @@ module Aws::SSOAdmin
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssoadmin'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

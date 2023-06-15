@@ -9,6 +9,7 @@
 
 
 module Aws::EC2
+  # @api private
   module Endpoints
 
     class AcceptAddressTransfer

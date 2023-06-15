@@ -9,6 +9,7 @@
 
 
 module Aws::PrivateNetworks
+  # @api private
   module Endpoints
 
     class AcknowledgeOrderReceipt

@@ -9,6 +9,7 @@
 
 
 module Aws::Shield
+  # @api private
   module Endpoints
 
     class AssociateDRTLogBucket

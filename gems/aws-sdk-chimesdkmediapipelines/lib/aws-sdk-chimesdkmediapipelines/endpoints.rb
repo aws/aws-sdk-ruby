@@ -9,6 +9,7 @@
 
 
 module Aws::ChimeSDKMediaPipelines
+  # @api private
   module Endpoints
 
     class CreateMediaCapturePipeline

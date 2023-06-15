@@ -9,6 +9,7 @@
 
 
 module Aws::LookoutMetrics
+  # @api private
   module Endpoints
 
     class ActivateAnomalyDetector

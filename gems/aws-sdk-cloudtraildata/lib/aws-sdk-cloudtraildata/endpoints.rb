@@ -9,6 +9,7 @@
 
 
 module Aws::CloudTrailData
+  # @api private
   module Endpoints
 
     class PutAuditEvents

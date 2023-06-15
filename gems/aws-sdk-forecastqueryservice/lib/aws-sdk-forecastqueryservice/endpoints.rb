@@ -9,6 +9,7 @@
 
 
 module Aws::ForecastQueryService
+  # @api private
   module Endpoints
 
     class QueryForecast

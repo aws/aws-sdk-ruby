@@ -9,6 +9,7 @@
 
 
 module Aws::PaymentCryptography
+  # @api private
   module Endpoints
 
     class CreateAlias

@@ -9,6 +9,7 @@
 
 
 module Aws::DeviceFarm
+  # @api private
   module Endpoints
 
     class CreateDevicePool

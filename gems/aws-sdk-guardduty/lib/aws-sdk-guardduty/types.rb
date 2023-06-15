@@ -2158,7 +2158,7 @@ module Aws::GuardDuty
     # finding.
     #
     # @!attribute [rw] domain
-    #   The domain information for the API request.
+    #   The domain information for the DNS query.
     #   @return [String]
     #
     # @!attribute [rw] protocol

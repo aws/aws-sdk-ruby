@@ -9,6 +9,7 @@
 
 
 module Aws::IoTWireless
+  # @api private
   module Endpoints
 
     class AssociateAwsAccountWithPartnerAccount

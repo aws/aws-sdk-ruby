@@ -9,6 +9,7 @@
 
 
 module Aws::SNS
+  # @api private
   module Endpoints
 
     class AddPermission

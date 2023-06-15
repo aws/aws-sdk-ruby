@@ -9,6 +9,7 @@
 
 
 module Aws::Health
+  # @api private
   module Endpoints
 
     class DescribeAffectedAccountsForOrganization

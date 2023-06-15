@@ -9,6 +9,7 @@
 
 
 module Aws::ComprehendMedical
+  # @api private
   module Endpoints
 
     class DescribeEntitiesDetectionV2Job

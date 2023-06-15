@@ -9,6 +9,7 @@
 
 
 module Aws::CodePipeline
+  # @api private
   module Endpoints
 
     class AcknowledgeJob

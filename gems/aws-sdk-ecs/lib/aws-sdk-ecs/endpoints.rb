@@ -9,6 +9,7 @@
 
 
 module Aws::ECS
+  # @api private
   module Endpoints
 
     class CreateCapacityProvider

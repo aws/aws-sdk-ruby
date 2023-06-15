@@ -9,6 +9,7 @@
 
 
 module Aws::ElasticLoadBalancingV2
+  # @api private
   module Endpoints
 
     class AddListenerCertificates

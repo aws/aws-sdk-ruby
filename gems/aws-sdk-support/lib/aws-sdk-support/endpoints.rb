@@ -9,6 +9,7 @@
 
 
 module Aws::Support
+  # @api private
   module Endpoints
 
     class AddAttachmentsToSet

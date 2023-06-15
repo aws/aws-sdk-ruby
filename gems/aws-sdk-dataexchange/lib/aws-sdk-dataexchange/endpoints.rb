@@ -9,6 +9,7 @@
 
 
 module Aws::DataExchange
+  # @api private
   module Endpoints
 
     class CancelJob

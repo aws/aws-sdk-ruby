@@ -9,6 +9,7 @@
 
 
 module Aws::CodeStarconnections
+  # @api private
   module Endpoints
 
     class CreateConnection

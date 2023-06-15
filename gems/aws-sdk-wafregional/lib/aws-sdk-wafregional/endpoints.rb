@@ -9,6 +9,7 @@
 
 
 module Aws::WAFRegional
+  # @api private
   module Endpoints
 
     class AssociateWebACL

@@ -9,6 +9,7 @@
 
 
 module Aws::Finspace
+  # @api private
   module Endpoints
 
     class CreateEnvironment

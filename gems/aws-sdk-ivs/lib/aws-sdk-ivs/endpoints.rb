@@ -9,6 +9,7 @@
 
 
 module Aws::IVS
+  # @api private
   module Endpoints
 
     class BatchGetChannel

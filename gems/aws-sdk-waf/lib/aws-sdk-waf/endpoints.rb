@@ -9,6 +9,7 @@
 
 
 module Aws::WAF
+  # @api private
   module Endpoints
 
     class CreateByteMatchSet

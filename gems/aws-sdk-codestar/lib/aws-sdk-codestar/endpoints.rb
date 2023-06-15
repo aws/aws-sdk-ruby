@@ -9,6 +9,7 @@
 
 
 module Aws::CodeStar
+  # @api private
   module Endpoints
 
     class AssociateTeamMember

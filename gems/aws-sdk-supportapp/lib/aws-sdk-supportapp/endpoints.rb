@@ -9,6 +9,7 @@
 
 
 module Aws::SupportApp
+  # @api private
   module Endpoints
 
     class CreateSlackChannelConfiguration

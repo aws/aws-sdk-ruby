@@ -9,6 +9,7 @@
 
 
 module Aws::MigrationHubOrchestrator
+  # @api private
   module Endpoints
 
     class CreateWorkflow
