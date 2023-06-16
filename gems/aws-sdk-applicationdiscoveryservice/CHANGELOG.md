@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2023-06-16)
+------------------
+
+* Feature - Add Amazon EC2 instance recommendations export
+
 1.51.0 (2023-06-15)
 ------------------
 

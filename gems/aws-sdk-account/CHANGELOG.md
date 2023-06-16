@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2023-06-16)
+------------------
+
+* Feature - Improve pagination support for ListRegions
+
 1.13.0 (2023-06-15)
 ------------------
 

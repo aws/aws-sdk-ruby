@@ -570,15 +570,14 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Lists agents or connectors as specified by ID or other filters. All
-    # agents/connectors associated with your user account can be listed if
-    # you call `DescribeAgents` as is without passing any parameters.
+    # Lists agents or collectors as specified by ID or other filters. All
+    # agents/collectors associated with your user can be listed if you call
+    # `DescribeAgents` as is without passing any parameters.
     #
     # @option params [Array<String>] :agent_ids
-    #   The agent or the Connector IDs for which you want information. If you
+    #   The agent or the collector IDs for which you want information. If you
     #   specify no IDs, the system returns information about all
-    #   agents/Connectors associated with your Amazon Web Services user
-    #   account.
+    #   agents/collectors associated with your user.
     #
     # @option params [Array<Types::Filter>] :filters
     #   You can filter the request using various logical operators and a
@@ -587,7 +586,7 @@ module Aws::ApplicationDiscoveryService
     #   `\{"key": "collectionStatus", "value": "STARTED"\}`
     #
     # @option params [Integer] :max_results
-    #   The total number of agents/Connectors to return in a single page of
+    #   The total number of agents/collectors to return in a single page of
     #   output. The maximum value is 100.
     #
     # @option params [String] :next_token
@@ -696,8 +695,8 @@ module Aws::ApplicationDiscoveryService
     end
 
     # Lists exports as specified by ID. All continuous exports associated
-    # with your user account can be listed if you call
-    # `DescribeContinuousExports` as is without passing any parameters.
+    # with your user can be listed if you call `DescribeContinuousExports`
+    # as is without passing any parameters.
     #
     # @option params [Array<String>] :export_ids
     #   The unique IDs assigned to the exports.
@@ -935,9 +934,9 @@ module Aws::ApplicationDiscoveryService
     #
     # * configurationId
     #
-    # Also, all configuration items associated with your user account that
-    # have tags can be listed if you call `DescribeTags` as is without
-    # passing any parameters.
+    # Also, all configuration items associated with your user that have tags
+    # can be listed if you call `DescribeTags` as is without passing any
+    # parameters.
     #
     # @option params [Array<Types::TagFilter>] :filters
     #   You can filter the list using a *key*-*value* format. You can separate
@@ -1260,17 +1259,16 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Instructs the specified agents or connectors to start collecting data.
+    # Instructs the specified agents to start collecting data.
     #
     # @option params [required, Array<String>] :agent_ids
-    #   The IDs of the agents or connectors from which to start collecting
-    #   data. If you send a request to an agent/connector ID that you do not
-    #   have permission to contact, according to your Amazon Web Services
-    #   account, the service does not throw an exception. Instead, it returns
-    #   the error in the *Description* field. If you send a request to
-    #   multiple agents/connectors and you do not have permission to contact
-    #   some of those agents/connectors, the system does not throw an
-    #   exception. Instead, the system shows `Failed` in the *Description*
+    #   The IDs of the agents from which to start collecting data. If you send
+    #   a request to an agent ID that you do not have permission to contact,
+    #   according to your Amazon Web Services account, the service does not
+    #   throw an exception. Instead, it returns the error in the *Description*
+    #   field. If you send a request to multiple agents and you do not have
+    #   permission to contact some of those agents, the system does not throw
+    #   an exception. Instead, the system shows `Failed` in the *Description*
     #   field.
     #
     # @return [Types::StartDataCollectionByAgentIdsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1297,19 +1295,36 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Begins the export of discovered data to an S3 bucket.
+    # Begins the export of a discovered data report to an Amazon S3 bucket
+    # managed by Amazon Web Services.
+    #
+    # <note markdown="1"> Exports might provide an estimate of fees and savings based on certain
+    # information that you provide. Fee estimates do not include any taxes
+    # that might apply. Your actual fees and savings depend on a variety of
+    # factors, including your actual usage of Amazon Web Services services,
+    # which might vary from the estimates provided in this report.
+    #
+    #  </note>
+    #
+    # If you do not specify `preferences` or `agentIds` in the filter, a
+    # summary of all servers, applications, tags, and performance is
+    # generated. This data is an aggregation of all server data collected
+    # through on-premises tooling, file import, application grouping and
+    # applying tags.
     #
     # If you specify `agentIds` in a filter, the task exports up to 72 hours
     # of detailed data collected by the identified Application Discovery
     # Agent, including network, process, and performance details. A time
     # range for exported agent data may be set by using `startTime` and
     # `endTime`. Export of detailed agent data is limited to five
-    # concurrently running exports.
+    # concurrently running exports. Export of detailed agent data is limited
+    # to two exports per day.
     #
-    # If you do not include an `agentIds` filter, summary data is exported
-    # that includes both Amazon Web Services Agentless Discovery Connector
-    # data and summary data from Amazon Web Services Discovery Agents.
-    # Export of summary data is limited to two exports per day.
+    # If you enable `ec2RecommendationsPreferences` in `preferences` , an
+    # Amazon EC2 instance matching the characteristics of each server in
+    # Application Discovery Service is generated. Changing the attributes of
+    # the `ec2RecommendationsPreferences` changes the criteria of the
+    # recommendation.
     #
     # @option params [Array<String>] :export_data_format
     #   The file format for the returned export data. Default value is `CSV`.
@@ -1320,8 +1335,9 @@ module Aws::ApplicationDiscoveryService
     #   Application Discovery Agent for which data is exported. The `agentId`
     #   can be found in the results of the `DescribeAgents` API or CLI. If no
     #   filter is present, `startTime` and `endTime` are ignored and exported
-    #   data includes both Agentless Discovery Connector data and summary data
-    #   from Application Discovery agents.
+    #   data includes both Amazon Web Services Application Discovery Service
+    #   Agentless Collector collectors data and summary data from Application
+    #   Discovery Agent agents.
     #
     # @option params [Time,DateTime,Date,Integer,String] :start_time
     #   The start timestamp for exported data from the single Application
@@ -1333,6 +1349,14 @@ module Aws::ApplicationDiscoveryService
     #   Discovery Agent selected in the filters. If no value is specified,
     #   exported data includes the most recent data collected by the agent.
     #
+    # @option params [Types::ExportPreferences] :preferences
+    #   Indicates the type of data that needs to be exported. Only one
+    #   [ExportPreferences][1] can be enabled at any time.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/application-discovery/latest/APIReference/API_ExportPreferences.html
+    #
     # @return [Types::StartExportTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartExportTaskResponse#export_id #export_id} => String
@@ -1340,7 +1364,7 @@ module Aws::ApplicationDiscoveryService
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_export_task({
-    #     export_data_format: ["CSV"], # accepts CSV, GRAPHML
+    #     export_data_format: ["CSV"], # accepts CSV
     #     filters: [
     #       {
     #         name: "FilterName", # required
@@ -1350,6 +1374,27 @@ module Aws::ApplicationDiscoveryService
     #     ],
     #     start_time: Time.now,
     #     end_time: Time.now,
+    #     preferences: {
+    #       ec2_recommendations_preferences: {
+    #         enabled: false,
+    #         cpu_performance_metric_basis: {
+    #           name: "UsageMetricBasisName",
+    #           percentage_adjust: 1.0,
+    #         },
+    #         ram_performance_metric_basis: {
+    #           name: "UsageMetricBasisName",
+    #           percentage_adjust: 1.0,
+    #         },
+    #         tenancy: "DEDICATED", # accepts DEDICATED, SHARED
+    #         excluded_instance_types: ["EC2InstanceType"],
+    #         preferred_region: "UserPreferredRegion",
+    #         reserved_instance_options: {
+    #           purchasing_option: "ALL_UPFRONT", # required, accepts ALL_UPFRONT, PARTIAL_UPFRONT, NO_UPFRONT
+    #           offering_class: "STANDARD", # required, accepts STANDARD, CONVERTIBLE
+    #           term_length: "ONE_YEAR", # required, accepts ONE_YEAR, THREE_YEAR
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1365,11 +1410,13 @@ module Aws::ApplicationDiscoveryService
 
     # Starts an import task, which allows you to import details of your
     # on-premises environment directly into Amazon Web Services Migration
-    # Hub without having to use the Application Discovery Service (ADS)
-    # tools such as the Discovery Connector or Discovery Agent. This gives
-    # you the option to perform migration assessment and planning directly
-    # from your imported data, including the ability to group your devices
-    # as applications and track their migration status.
+    # Hub without having to use the Amazon Web Services Application
+    # Discovery Service (Application Discovery Service) tools such as the
+    # Amazon Web Services Application Discovery Service Agentless Collector
+    # or Application Discovery Agent. This gives you the option to perform
+    # migration assessment and planning directly from your imported data,
+    # including the ability to group your devices as applications and track
+    # their migration status.
     #
     # To start an import request, do this:
     #
@@ -1493,11 +1540,10 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Instructs the specified agents or connectors to stop collecting data.
+    # Instructs the specified agents to stop collecting data.
     #
     # @option params [required, Array<String>] :agent_ids
-    #   The IDs of the agents or connectors from which to stop collecting
-    #   data.
+    #   The IDs of the agents from which to stop collecting data.
     #
     # @return [Types::StopDataCollectionByAgentIdsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1564,7 +1610,7 @@ module Aws::ApplicationDiscoveryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationdiscoveryservice'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

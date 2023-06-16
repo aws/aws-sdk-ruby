@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2023-06-16)
+------------------
+
+* Feature - Documentation updates for AWS Identity and Access Management (IAM).
+
 1.80.0 (2023-06-15)
 ------------------
 

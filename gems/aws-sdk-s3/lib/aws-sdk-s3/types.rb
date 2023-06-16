@@ -806,7 +806,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, `aws:kms`).
+    #   in Amazon S3 (for example, `AES256`, `aws:kms`).
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -815,14 +815,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric encryption
-    #   customer managed key that was used for the object.
+    #   If present, specifies the ID of the Key Management Service (KMS)
+    #   symmetric encryption customer managed key that was used for the
+    #   object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the multipart upload uses an S3 Bucket Key for
-    #   server-side encryption with Amazon Web Services KMS (SSE-KMS).
+    #   server-side encryption with Key Management Service (KMS) keys
+    #   (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] request_charged
@@ -1172,7 +1173,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, `aws:kms`).
+    #   in Amazon S3 (for example, `AES256`, `aws:kms`, `aws:kms:dsse`).
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
@@ -1189,9 +1190,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric encryption
-    #   customer managed key that was used for the object.
+    #   If present, specifies the ID of the Key Management Service (KMS)
+    #   symmetric encryption customer managed key that was used for the
+    #   object.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -1203,7 +1204,8 @@ module Aws::S3
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the copied object uses an S3 Bucket Key for
-    #   server-side encryption with Amazon Web Services KMS (SSE-KMS).
+    #   server-side encryption with Key Management Service (KMS) keys
+    #   (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] request_charged
@@ -1410,7 +1412,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, `aws:kms`).
+    #   in Amazon S3 (for example, `AES256`, `aws:kms`, `aws:kms:dsse`).
     #   @return [String]
     #
     # @!attribute [rw] storage_class
@@ -1455,13 +1457,12 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   Specifies the Amazon Web Services KMS key ID to use for object
-    #   encryption. All GET and PUT requests for an object protected by
-    #   Amazon Web Services KMS will fail if not made via SSL or using
-    #   SigV4. For information about configuring using any of the officially
-    #   supported Amazon Web Services SDKs and Amazon Web Services CLI, see
-    #   [Specifying the Signature Version in Request Authentication][1] in
-    #   the *Amazon S3 User Guide*.
+    #   Specifies the KMS key ID to use for object encryption. All GET and
+    #   PUT requests for an object protected by KMS will fail if they're
+    #   not made via SSL or using SigV4. For information about configuring
+    #   any of the officially supported Amazon Web Services SDKs and Amazon
+    #   Web Services CLI, see [Specifying the Signature Version in Request
+    #   Authentication][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1477,9 +1478,9 @@ module Aws::S3
     #
     # @!attribute [rw] bucket_key_enabled
     #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
-    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
-    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket
-    #   Key for object encryption with SSE-KMS.
+    #   encryption with server-side encryption using Key Management Service
+    #   (KMS) keys (SSE-KMS). Setting this header to `true` causes Amazon S3
+    #   to use an S3 Bucket Key for object encryption with SSE-KMS.
     #
     #   Specifying this header with a COPY action doesn’t affect
     #   bucket-level settings for S3 Bucket Key.
@@ -1912,7 +1913,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, `aws:kms`).
+    #   in Amazon S3 (for example, `AES256`, `aws:kms`).
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
@@ -1929,9 +1930,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric encryption
-    #   customer managed key that was used for the object.
+    #   If present, specifies the ID of the Key Management Service (KMS)
+    #   symmetric encryption customer managed key that was used for the
+    #   object.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -1943,7 +1944,8 @@ module Aws::S3
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the multipart upload uses an S3 Bucket Key for
-    #   server-side encryption with Amazon Web Services KMS (SSE-KMS).
+    #   server-side encryption with Key Management Service (KMS) keys
+    #   (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] request_charged
@@ -2069,7 +2071,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, `aws:kms`).
+    #   in Amazon S3 (for example, `AES256`, `aws:kms`).
     #   @return [String]
     #
     # @!attribute [rw] storage_class
@@ -2114,11 +2116,11 @@ module Aws::S3
     # @!attribute [rw] ssekms_key_id
     #   Specifies the ID of the symmetric encryption customer managed key to
     #   use for object encryption. All GET and PUT requests for an object
-    #   protected by Amazon Web Services KMS will fail if not made via SSL
-    #   or using SigV4. For information about configuring using any of the
-    #   officially supported Amazon Web Services SDKs and Amazon Web
-    #   Services CLI, see [Specifying the Signature Version in Request
-    #   Authentication][1] in the *Amazon S3 User Guide*.
+    #   protected by KMS will fail if they're not made via SSL or using
+    #   SigV4. For information about configuring any of the officially
+    #   supported Amazon Web Services SDKs and Amazon Web Services CLI, see
+    #   [Specifying the Signature Version in Request Authentication][1] in
+    #   the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2134,9 +2136,9 @@ module Aws::S3
     #
     # @!attribute [rw] bucket_key_enabled
     #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
-    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
-    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket
-    #   Key for object encryption with SSE-KMS.
+    #   encryption with server-side encryption using Key Management Service
+    #   (KMS) keys (SSE-KMS). Setting this header to `true` causes Amazon S3
+    #   to use an S3 Bucket Key for object encryption with SSE-KMS.
     #
     #   Specifying this header with an object action doesn’t affect
     #   bucket-level settings for S3 Bucket Key.
@@ -2266,7 +2268,7 @@ module Aws::S3
     # Container for the objects to delete.
     #
     # @!attribute [rw] objects
-    #   The objects to delete.
+    #   The object to delete.
     #   @return [Array<Types::ObjectIdentifier>]
     #
     # @!attribute [rw] quiet
@@ -3061,8 +3063,8 @@ module Aws::S3
     #   the ID of the symmetric encryption customer managed key to use for
     #   encryption of job results. Amazon S3 only supports symmetric
     #   encryption KMS keys. For more information, see [Asymmetric keys in
-    #   Amazon Web Services KMS][1] in the *Amazon Web Services Key
-    #   Management Service Developer Guide*.
+    #   KMS][1] in the *Amazon Web Services Key Management Service Developer
+    #   Guide*.
     #
     #
     #
@@ -4040,10 +4042,16 @@ module Aws::S3
     #   The accelerate configuration of the bucket.
     #   @return [String]
     #
+    # @!attribute [rw] request_charged
+    #   If present, indicates that the requester was successfully charged
+    #   for the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAccelerateConfigurationOutput AWS API Documentation
     #
     class GetBucketAccelerateConfigurationOutput < Struct.new(
-      :status)
+      :status,
+      :request_charged)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4059,11 +4067,24 @@ module Aws::S3
     #   `403 Forbidden` (access denied).
     #   @return [String]
     #
+    # @!attribute [rw] request_payer
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAccelerateConfigurationRequest AWS API Documentation
     #
     class GetBucketAccelerateConfigurationRequest < Struct.new(
       :bucket,
-      :expected_bucket_owner)
+      :expected_bucket_owner,
+      :request_payer)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5370,7 +5391,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, `aws:kms`).
+    #   in Amazon S3 (for example, `AES256`, `aws:kms`, `aws:kms:dsse`).
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -5391,14 +5412,14 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric encryption
-    #   customer managed key that was used for the object.
+    #   If present, specifies the ID of the Key Management Service (KMS)
+    #   symmetric encryption customer managed key that was used for the
+    #   object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the object uses an S3 Bucket Key for server-side
-    #   encryption with Amazon Web Services KMS (SSE-KMS).
+    #   encryption with Key Management Service (KMS) keys (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] storage_class
@@ -6208,7 +6229,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, `aws:kms`).
+    #   in Amazon S3 (for example, `AES256`, `aws:kms`, `aws:kms:dsse`).
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -6229,14 +6250,14 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric encryption
-    #   customer managed key that was used for the object.
+    #   If present, specifies the ID of the Key Management Service (KMS)
+    #   symmetric encryption customer managed key that was used for the
+    #   object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the object uses an S3 Bucket Key for server-side
-    #   encryption with Amazon Web Services KMS (SSE-KMS).
+    #   encryption with Key Management Service (KMS) keys (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] storage_class
@@ -7507,6 +7528,11 @@ module Aws::S3
     #   `Delimiter`, `KeyMarker`, `Prefix`, `NextKeyMarker`, `Key`.
     #   @return [String]
     #
+    # @!attribute [rw] request_charged
+    #   If present, indicates that the requester was successfully charged
+    #   for the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListMultipartUploadsOutput AWS API Documentation
     #
     class ListMultipartUploadsOutput < Struct.new(
@@ -7521,7 +7547,8 @@ module Aws::S3
       :is_truncated,
       :uploads,
       :common_prefixes,
-      :encoding_type)
+      :encoding_type,
+      :request_charged)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7616,6 +7643,18 @@ module Aws::S3
     #   `403 Forbidden` (access denied).
     #   @return [String]
     #
+    # @!attribute [rw] request_payer
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListMultipartUploadsRequest AWS API Documentation
     #
     class ListMultipartUploadsRequest < Struct.new(
@@ -7626,7 +7665,8 @@ module Aws::S3
       :max_uploads,
       :prefix,
       :upload_id_marker,
-      :expected_bucket_owner)
+      :expected_bucket_owner,
+      :request_payer)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7707,6 +7747,11 @@ module Aws::S3
     #   `KeyMarker, NextKeyMarker, Prefix, Key`, and `Delimiter`.
     #   @return [String]
     #
+    # @!attribute [rw] request_charged
+    #   If present, indicates that the requester was successfully charged
+    #   for the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectVersionsOutput AWS API Documentation
     #
     class ListObjectVersionsOutput < Struct.new(
@@ -7722,7 +7767,8 @@ module Aws::S3
       :delimiter,
       :max_keys,
       :common_prefixes,
-      :encoding_type)
+      :encoding_type,
+      :request_charged)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7782,6 +7828,18 @@ module Aws::S3
     #   `403 Forbidden` (access denied).
     #   @return [String]
     #
+    # @!attribute [rw] request_payer
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectVersionsRequest AWS API Documentation
     #
     class ListObjectVersionsRequest < Struct.new(
@@ -7792,7 +7850,8 @@ module Aws::S3
       :max_keys,
       :prefix,
       :version_id_marker,
-      :expected_bucket_owner)
+      :expected_bucket_owner,
+      :request_payer)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7866,6 +7925,11 @@ module Aws::S3
     #   response.
     #   @return [String]
     #
+    # @!attribute [rw] request_charged
+    #   If present, indicates that the requester was successfully charged
+    #   for the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsOutput AWS API Documentation
     #
     class ListObjectsOutput < Struct.new(
@@ -7878,7 +7942,8 @@ module Aws::S3
       :delimiter,
       :max_keys,
       :common_prefixes,
-      :encoding_type)
+      :encoding_type,
+      :request_charged)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8076,6 +8141,11 @@ module Aws::S3
     #   response.
     #   @return [String]
     #
+    # @!attribute [rw] request_charged
+    #   If present, indicates that the requester was successfully charged
+    #   for the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsV2Output AWS API Documentation
     #
     class ListObjectsV2Output < Struct.new(
@@ -8090,7 +8160,8 @@ module Aws::S3
       :key_count,
       :continuation_token,
       :next_continuation_token,
-      :start_after)
+      :start_after,
+      :request_charged)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10904,7 +10975,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, `aws:kms`).
+    #   in Amazon S3 (for example, `AES256`, `aws:kms`, `aws:kms:dsse`).
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -10925,10 +10996,10 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If `x-amz-server-side-encryption` is has a valid value of `aws:kms`,
-    #   this header specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric encryption
-    #   customer managed key that was used for the object.
+    #   If `x-amz-server-side-encryption` has a valid value of `aws:kms` or
+    #   `aws:kms:dsse`, this header specifies the ID of the Key Management
+    #   Service (KMS) symmetric encryption customer managed key that was
+    #   used for the object.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -10942,7 +11013,8 @@ module Aws::S3
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the uploaded object uses an S3 Bucket Key for
-    #   server-side encryption with Amazon Web Services KMS (SSE-KMS).
+    #   server-side encryption with Key Management Service (KMS) keys
+    #   (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] request_charged
@@ -11194,7 +11266,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, `aws:kms`).
+    #   in Amazon S3 (for example, `AES256`, `aws:kms`, `aws:kms:dsse`).
     #   @return [String]
     #
     # @!attribute [rw] storage_class
@@ -11258,15 +11330,16 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If `x-amz-server-side-encryption` has a valid value of `aws:kms`,
-    #   this header specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric encryption
-    #   customer managed key that was used for the object. If you specify
-    #   `x-amz-server-side-encryption:aws:kms`, but do not provide`
+    #   If `x-amz-server-side-encryption` has a valid value of `aws:kms` or
+    #   `aws:kms:dsse`, this header specifies the ID of the Key Management
+    #   Service (KMS) symmetric encryption customer managed key that was
+    #   used for the object. If you specify
+    #   `x-amz-server-side-encryption:aws:kms` or
+    #   `x-amz-server-side-encryption:aws:kms:dsse`, but do not provide`
     #   x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the
-    #   Amazon Web Services managed key to protect the data. If the KMS key
-    #   does not exist in the same account issuing the command, you must use
-    #   the full ARN and not just the ID.
+    #   Amazon Web Services managed key (`aws/s3`) to protect the data. If
+    #   the KMS key does not exist in the same account that's issuing the
+    #   command, you must use the full ARN and not just the ID.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -11280,9 +11353,9 @@ module Aws::S3
     #
     # @!attribute [rw] bucket_key_enabled
     #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
-    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
-    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket
-    #   Key for object encryption with SSE-KMS.
+    #   encryption with server-side encryption using Key Management Service
+    #   (KMS) keys (SSE-KMS). Setting this header to `true` causes Amazon S3
+    #   to use an S3 Bucket Key for object encryption with SSE-KMS.
     #
     #   Specifying this header with a PUT action doesn’t affect bucket-level
     #   settings for S3 Bucket Key.
@@ -12495,9 +12568,9 @@ module Aws::S3
     # Specifies the use of SSE-KMS to encrypt delivered inventory reports.
     #
     # @!attribute [rw] key_id
-    #   Specifies the ID of the Amazon Web Services Key Management Service
-    #   (Amazon Web Services KMS) symmetric encryption customer managed key
-    #   to use for encrypting inventory reports.
+    #   Specifies the ID of the Key Management Service (KMS) symmetric
+    #   encryption customer managed key to use for encrypting inventory
+    #   reports.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SSEKMS AWS API Documentation
@@ -13171,7 +13244,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, `aws:kms`).
+    #   in Amazon S3 (for example, `AES256`, `aws:kms`).
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
@@ -13188,14 +13261,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric encryption
-    #   customer managed key that was used for the object.
+    #   If present, specifies the ID of the Key Management Service (KMS)
+    #   symmetric encryption customer managed key that was used for the
+    #   object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the multipart upload uses an S3 Bucket Key for
-    #   server-side encryption with Amazon Web Services KMS (SSE-KMS).
+    #   server-side encryption with Key Management Service (KMS) keys
+    #   (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] request_charged
@@ -13424,7 +13498,7 @@ module Aws::S3
 
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, AES256, `aws:kms`).
+    #   in Amazon S3 (for example, `AES256`, `aws:kms`).
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -13497,14 +13571,14 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the Amazon Web Services Key
-    #   Management Service (Amazon Web Services KMS) symmetric encryption
-    #   customer managed key was used for the object.
+    #   If present, specifies the ID of the Key Management Service (KMS)
+    #   symmetric encryption customer managed key was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the multipart upload uses an S3 Bucket Key for
-    #   server-side encryption with Amazon Web Services KMS (SSE-KMS).
+    #   server-side encryption with Key Management Service (KMS) keys
+    #   (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] request_charged

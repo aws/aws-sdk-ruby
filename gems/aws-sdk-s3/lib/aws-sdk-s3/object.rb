@@ -240,7 +240,7 @@ module Aws::S3
     end
 
     # The server-side encryption algorithm used when storing this object in
-    # Amazon S3 (for example, AES256, `aws:kms`).
+    # Amazon S3 (for example, `AES256`, `aws:kms`, `aws:kms:dsse`).
     # @return [String]
     def server_side_encryption
       data[:server_side_encryption]
@@ -269,16 +269,16 @@ module Aws::S3
       data[:sse_customer_key_md5]
     end
 
-    # If present, specifies the ID of the Amazon Web Services Key Management
-    # Service (Amazon Web Services KMS) symmetric encryption customer
-    # managed key that was used for the object.
+    # If present, specifies the ID of the Key Management Service (KMS)
+    # symmetric encryption customer managed key that was used for the
+    # object.
     # @return [String]
     def ssekms_key_id
       data[:ssekms_key_id]
     end
 
     # Indicates whether the object uses an S3 Bucket Key for server-side
-    # encryption with Amazon Web Services KMS (SSE-KMS).
+    # encryption with Key Management Service (KMS) keys (SSE-KMS).
     # @return [Boolean]
     def bucket_key_enabled
       data[:bucket_key_enabled]
@@ -745,7 +745,7 @@ module Aws::S3
     #   or replaced with tag-set provided in the request.
     # @option options [String] :server_side_encryption
     #   The server-side encryption algorithm used when storing this object in
-    #   Amazon S3 (for example, AES256, `aws:kms`).
+    #   Amazon S3 (for example, `AES256`, `aws:kms`, `aws:kms:dsse`).
     # @option options [String] :storage_class
     #   By default, Amazon S3 uses the STANDARD Storage Class to store newly
     #   created objects. The STANDARD storage class provides high durability
@@ -778,13 +778,12 @@ module Aws::S3
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
     #   ensure that the encryption key was transmitted without error.
     # @option options [String] :ssekms_key_id
-    #   Specifies the Amazon Web Services KMS key ID to use for object
-    #   encryption. All GET and PUT requests for an object protected by Amazon
-    #   Web Services KMS will fail if not made via SSL or using SigV4. For
-    #   information about configuring using any of the officially supported
-    #   Amazon Web Services SDKs and Amazon Web Services CLI, see [Specifying
-    #   the Signature Version in Request Authentication][1] in the *Amazon S3
-    #   User Guide*.
+    #   Specifies the KMS key ID to use for object encryption. All GET and PUT
+    #   requests for an object protected by KMS will fail if they're not made
+    #   via SSL or using SigV4. For information about configuring any of the
+    #   officially supported Amazon Web Services SDKs and Amazon Web Services
+    #   CLI, see [Specifying the Signature Version in Request
+    #   Authentication][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -795,9 +794,9 @@ module Aws::S3
     #   string holding JSON with the encryption context key-value pairs.
     # @option options [Boolean] :bucket_key_enabled
     #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
-    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
-    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
-    #   for object encryption with SSE-KMS.
+    #   encryption with server-side encryption using Key Management Service
+    #   (KMS) keys (SSE-KMS). Setting this header to `true` causes Amazon S3
+    #   to use an S3 Bucket Key for object encryption with SSE-KMS.
     #
     #   Specifying this header with a COPY action doesn’t affect bucket-level
     #   settings for S3 Bucket Key.
@@ -1083,7 +1082,7 @@ module Aws::S3
     #   A map of metadata to store with the object in S3.
     # @option options [String] :server_side_encryption
     #   The server-side encryption algorithm used when storing this object in
-    #   Amazon S3 (for example, AES256, `aws:kms`).
+    #   Amazon S3 (for example, `AES256`, `aws:kms`).
     # @option options [String] :storage_class
     #   By default, Amazon S3 uses the STANDARD Storage Class to store newly
     #   created objects. The STANDARD storage class provides high durability
@@ -1115,11 +1114,11 @@ module Aws::S3
     # @option options [String] :ssekms_key_id
     #   Specifies the ID of the symmetric encryption customer managed key to
     #   use for object encryption. All GET and PUT requests for an object
-    #   protected by Amazon Web Services KMS will fail if not made via SSL or
-    #   using SigV4. For information about configuring using any of the
-    #   officially supported Amazon Web Services SDKs and Amazon Web Services
-    #   CLI, see [Specifying the Signature Version in Request
-    #   Authentication][1] in the *Amazon S3 User Guide*.
+    #   protected by KMS will fail if they're not made via SSL or using
+    #   SigV4. For information about configuring any of the officially
+    #   supported Amazon Web Services SDKs and Amazon Web Services CLI, see
+    #   [Specifying the Signature Version in Request Authentication][1] in the
+    #   *Amazon S3 User Guide*.
     #
     #
     #
@@ -1130,9 +1129,9 @@ module Aws::S3
     #   string holding JSON with the encryption context key-value pairs.
     # @option options [Boolean] :bucket_key_enabled
     #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
-    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
-    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
-    #   for object encryption with SSE-KMS.
+    #   encryption with server-side encryption using Key Management Service
+    #   (KMS) keys (SSE-KMS). Setting this header to `true` causes Amazon S3
+    #   to use an S3 Bucket Key for object encryption with SSE-KMS.
     #
     #   Specifying this header with an object action doesn’t affect
     #   bucket-level settings for S3 Bucket Key.
@@ -1378,7 +1377,7 @@ module Aws::S3
     #   A map of metadata to store with the object in S3.
     # @option options [String] :server_side_encryption
     #   The server-side encryption algorithm used when storing this object in
-    #   Amazon S3 (for example, AES256, `aws:kms`).
+    #   Amazon S3 (for example, `AES256`, `aws:kms`, `aws:kms:dsse`).
     # @option options [String] :storage_class
     #   By default, Amazon S3 uses the STANDARD Storage Class to store newly
     #   created objects. The STANDARD storage class provides high durability
@@ -1429,15 +1428,15 @@ module Aws::S3
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
     #   ensure that the encryption key was transmitted without error.
     # @option options [String] :ssekms_key_id
-    #   If `x-amz-server-side-encryption` has a valid value of `aws:kms`, this
-    #   header specifies the ID of the Amazon Web Services Key Management
-    #   Service (Amazon Web Services KMS) symmetric encryption customer
-    #   managed key that was used for the object. If you specify
-    #   `x-amz-server-side-encryption:aws:kms`, but do not provide`
+    #   If `x-amz-server-side-encryption` has a valid value of `aws:kms` or
+    #   `aws:kms:dsse`, this header specifies the ID of the Key Management
+    #   Service (KMS) symmetric encryption customer managed key that was used
+    #   for the object. If you specify `x-amz-server-side-encryption:aws:kms`
+    #   or `x-amz-server-side-encryption:aws:kms:dsse`, but do not provide`
     #   x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the
-    #   Amazon Web Services managed key to protect the data. If the KMS key
-    #   does not exist in the same account issuing the command, you must use
-    #   the full ARN and not just the ID.
+    #   Amazon Web Services managed key (`aws/s3`) to protect the data. If the
+    #   KMS key does not exist in the same account that's issuing the
+    #   command, you must use the full ARN and not just the ID.
     # @option options [String] :ssekms_encryption_context
     #   Specifies the Amazon Web Services KMS Encryption Context to use for
     #   object encryption. The value of this header is a base64-encoded UTF-8
@@ -1447,9 +1446,9 @@ module Aws::S3
     #   operations on this object.
     # @option options [Boolean] :bucket_key_enabled
     #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
-    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
-    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
-    #   for object encryption with SSE-KMS.
+    #   encryption with server-side encryption using Key Management Service
+    #   (KMS) keys (SSE-KMS). Setting this header to `true` causes Amazon S3
+    #   to use an S3 Bucket Key for object encryption with SSE-KMS.
     #
     #   Specifying this header with a PUT action doesn’t affect bucket-level
     #   settings for S3 Bucket Key.

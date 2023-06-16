@@ -7089,6 +7089,11 @@ module Aws::Connect
     #   Whether outbound calls are enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] instance_access_url
+    #   This URL allows contact center users to access Amazon Connect admin
+    #   website.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Instance AWS API Documentation
     #
     class Instance < Struct.new(
@@ -7101,7 +7106,8 @@ module Aws::Connect
       :instance_status,
       :status_reason,
       :inbound_calls_enabled,
-      :outbound_calls_enabled)
+      :outbound_calls_enabled,
+      :instance_access_url)
       SENSITIVE = [:instance_alias]
       include Aws::Structure
     end
@@ -7198,6 +7204,11 @@ module Aws::Connect
     #   Whether outbound calls are enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] instance_access_url
+    #   This URL allows contact center users to access Amazon Connect admin
+    #   website.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InstanceSummary AWS API Documentation
     #
     class InstanceSummary < Struct.new(
@@ -7209,7 +7220,8 @@ module Aws::Connect
       :service_role,
       :instance_status,
       :inbound_calls_enabled,
-      :outbound_calls_enabled)
+      :outbound_calls_enabled,
+      :instance_access_url)
       SENSITIVE = [:instance_alias]
       include Aws::Structure
     end

@@ -8272,9 +8272,17 @@ module Aws::IAM
     # roles, see [Working with roles][1].
     #
     # <note markdown="1"> IAM resource-listing operations return a subset of the available
-    # attributes for the resource. For example, this operation does not
-    # return tags, even though they are an attribute of the returned object.
-    # To view all of the information for a role, see GetRole.
+    # attributes for the resource. This operation does not return the
+    # following attributes, even though they are an attribute of the
+    # returned object:
+    #
+    #  * PermissionsBoundary
+    #
+    # * RoleLastUsed
+    #
+    # * Tags
+    #
+    #  To view all of the information for a role, see GetRole.
     #
     #  </note>
     #
@@ -9069,9 +9077,15 @@ module Aws::IAM
     # list.
     #
     # <note markdown="1"> IAM resource-listing operations return a subset of the available
-    # attributes for the resource. For example, this operation does not
-    # return tags, even though they are an attribute of the returned object.
-    # To view all of the information for a user, see GetUser.
+    # attributes for the resource. This operation does not return the
+    # following attributes, even though they are an attribute of the
+    # returned object:
+    #
+    #  * PermissionsBoundary
+    #
+    # * Tags
+    #
+    #  To view all of the information for a user, see GetUser.
     #
     #  </note>
     #
@@ -13355,7 +13369,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
