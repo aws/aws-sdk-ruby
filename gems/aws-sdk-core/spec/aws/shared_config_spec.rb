@@ -349,5 +349,35 @@ module Aws
         expect(config.sdk_ua_app_id).to eq('peccy-service')
       end
     end
+
+    context 'disable_request_compression' do
+      it 'can resolve disable_request_compression from the config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'disable_request_compression'
+        )
+        expect(config.disable_request_compression). to eq('true')
+
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'do_not_disable_request_compression'
+        )
+        expect(config.disable_request_compression). to eq('false')
+      end
+    end
+
+    context 'request_min_compression_size_bytes' do
+      it 'can resolve request_min_compression_size_bytes from the config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'request_min_compression_size_bytes'
+        )
+        expect(config.request_min_compression_size_bytes). to eq('100')
+      end
+    end
+
   end
 end

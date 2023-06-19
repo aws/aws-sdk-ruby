@@ -28,6 +28,9 @@ module Seahorse
       # @return [Hash]
       attr_accessor :http_checksum
 
+      # @return [Hash]
+      attr_accessor :request_compression
+
       # @return [Boolean]
       attr_accessor :deprecated
 

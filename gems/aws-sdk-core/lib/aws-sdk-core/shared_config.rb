@@ -198,7 +198,9 @@ module Aws
       :s3_us_east_1_regional_endpoint,
       :s3_disable_multiregion_access_points,
       :defaults_mode,
-      :sdk_ua_app_id
+      :sdk_ua_app_id,
+      :disable_request_compression,
+      :request_min_compression_size_bytes
     )
 
     private
