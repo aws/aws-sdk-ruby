@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.122.0 (2023-06-19)
+------------------
+
+* Feature - Documentation only update to address various tickets.
+
 1.121.0 (2023-06-15)
 ------------------
 

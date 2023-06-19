@@ -903,32 +903,20 @@ module Aws::EC2
     #   * {Types::AllocateAddressResult#carrier_ip #carrier_ip} => String
     #
     #
-    # @example Example: To allocate an Elastic IP address for EC2-VPC
+    # @example Example: To allocate an Elastic IP address
     #
-    #   # This example allocates an Elastic IP address to use with an instance in a VPC.
+    #   # This example allocates an Elastic IP address.
     #
     #   resp = client.allocate_address({
-    #     domain: "vpc", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     allocation_id: "eipalloc-64d5890a", 
     #     domain: "vpc", 
+    #     network_border_group: "us-east-1", 
     #     public_ip: "203.0.113.0", 
-    #   }
-    #
-    # @example Example: To allocate an Elastic IP address for EC2-Classic
-    #
-    #   # This example allocates an Elastic IP address to use with an instance in EC2-Classic.
-    #
-    #   resp = client.allocate_address({
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     domain: "standard", 
-    #     public_ip: "198.51.100.0", 
+    #     public_ipv_4_pool: "amazon", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -1589,9 +1577,9 @@ module Aws::EC2
     #   * {Types::AssociateAddressResult#association_id #association_id} => String
     #
     #
-    # @example Example: To associate an Elastic IP address in EC2-VPC
+    # @example Example: To associate an Elastic IP address
     #
-    #   # This example associates the specified Elastic IP address with the specified instance in a VPC.
+    #   # This example associates the specified Elastic IP address with the specified instance.
     #
     #   resp = client.associate_address({
     #     allocation_id: "eipalloc-64d5890a", 
@@ -1616,15 +1604,6 @@ module Aws::EC2
     #   {
     #     association_id: "eipassoc-2bebb745", 
     #   }
-    #
-    # @example Example: To associate an Elastic IP address in EC2-Classic
-    #
-    #   # This example associates an Elastic IP address with an instance in EC2-Classic.
-    #
-    #   resp = client.associate_address({
-    #     instance_id: "i-07ffe74c7330ebf53", 
-    #     public_ip: "198.51.100.0", 
-    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -4898,8 +4877,8 @@ module Aws::EC2
     #     client_token: "String",
     #     instance_type: "String", # required
     #     instance_platform: "Linux/UNIX", # required, accepts Linux/UNIX, Red Hat Enterprise Linux, SUSE Linux, Windows, Windows with SQL Server, Windows with SQL Server Enterprise, Windows with SQL Server Standard, Windows with SQL Server Web, Linux with SQL Server Standard, Linux with SQL Server Web, Linux with SQL Server Enterprise, RHEL with SQL Server Standard, RHEL with SQL Server Enterprise, RHEL with SQL Server Web, RHEL with HA, RHEL with HA and SQL Server Standard, RHEL with HA and SQL Server Enterprise
-    #     availability_zone: "String",
-    #     availability_zone_id: "String",
+    #     availability_zone: "AvailabilityZoneName",
+    #     availability_zone_id: "AvailabilityZoneId",
     #     tenancy: "default", # accepts default, dedicated
     #     instance_count: 1, # required
     #     ebs_optimized: false,
@@ -18944,9 +18923,6 @@ module Aws::EC2
     # Describes attributes of your Amazon Web Services account. The
     # following are the supported account attributes:
     #
-    # * `supported-platforms`: Indicates whether your account can launch
-    #   instances into EC2-Classic and EC2-VPC, or only into EC2-VPC.
-    #
     # * `default-vpc`: The ID of the default VPC for your account, or
     #   `none`.
     #
@@ -18955,25 +18931,20 @@ module Aws::EC2
     #   Instances. For more information, see [On-Demand Instance Limits][1]
     #   in the *Amazon Elastic Compute Cloud User Guide*.
     #
-    # * `vpc-max-security-groups-per-interface`: The maximum number of
-    #   security groups that you can assign to a network interface.
-    #
     # * `max-elastic-ips`: The maximum number of Elastic IP addresses that
-    #   you can allocate for use with EC2-Classic.
+    #   you can allocate.
+    #
+    # * `supported-platforms`: This attribute is deprecated.
     #
     # * `vpc-max-elastic-ips`: The maximum number of Elastic IP addresses
-    #   that you can allocate for use with EC2-VPC.
+    #   that you can allocate.
     #
-    # <note markdown="1"> We are retiring EC2-Classic on August 15, 2022. We recommend that you
-    # migrate from EC2-Classic to a VPC. For more information, see [Migrate
-    # from EC2-Classic to a VPC][2] in the *Amazon EC2 User Guide*.
-    #
-    #  </note>
+    # * `vpc-max-security-groups-per-interface`: The maximum number of
+    #   security groups that you can assign to a network interface.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-on-demand-instances.html#ec2-on-demand-instances-limits
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
     #
     # @option params [Array<String>] :attribute_names
     #   The account attribute names.
@@ -19255,63 +19226,6 @@ module Aws::EC2
     #         network_interface_owner_id: "123456789012", 
     #         private_ip_address: "10.0.1.241", 
     #         public_ip: "203.0.113.0", 
-    #       }, 
-    #     ], 
-    #   }
-    #
-    # @example Example: To describe your Elastic IP addresses for EC2-VPC
-    #
-    #   # This example describes your Elastic IP addresses for use with instances in a VPC.
-    #
-    #   resp = client.describe_addresses({
-    #     filters: [
-    #       {
-    #         name: "domain", 
-    #         values: [
-    #           "vpc", 
-    #         ], 
-    #       }, 
-    #     ], 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     addresses: [
-    #       {
-    #         allocation_id: "eipalloc-12345678", 
-    #         association_id: "eipassoc-12345678", 
-    #         domain: "vpc", 
-    #         instance_id: "i-1234567890abcdef0", 
-    #         network_interface_id: "eni-12345678", 
-    #         network_interface_owner_id: "123456789012", 
-    #         private_ip_address: "10.0.1.241", 
-    #         public_ip: "203.0.113.0", 
-    #       }, 
-    #     ], 
-    #   }
-    #
-    # @example Example: To describe your Elastic IP addresses for EC2-Classic
-    #
-    #   # This example describes your Elastic IP addresses for use with instances in EC2-Classic.
-    #
-    #   resp = client.describe_addresses({
-    #     filters: [
-    #       {
-    #         name: "domain", 
-    #         values: [
-    #           "standard", 
-    #         ], 
-    #       }, 
-    #     ], 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     addresses: [
-    #       {
-    #         domain: "standard", 
-    #         instance_id: "i-1234567890abcdef0", 
-    #         public_ip: "198.51.100.0", 
     #       }, 
     #     ], 
     #   }
@@ -25208,7 +25122,7 @@ module Aws::EC2
     #       {
     #         attachments: [
     #           {
-    #             state: "available", 
+    #             state: "attached", 
     #             vpc_id: "vpc-a01106c2", 
     #           }, 
     #         ], 
@@ -26953,7 +26867,7 @@ module Aws::EC2
     #   {
     #     moving_address_statuses: [
     #       {
-    #         move_status: "MovingToVpc", 
+    #         move_status: "movingToVpc", 
     #         public_ip: "198.51.100.0", 
     #       }, 
     #     ], 
@@ -30385,54 +30299,6 @@ module Aws::EC2
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
-    #
-    # @example Example: To describe an available schedule
-    #
-    #   # This example describes a schedule that occurs every week on Sunday, starting on the specified date. Note that the output
-    #   # contains a single schedule as an example.
-    #
-    #   resp = client.describe_scheduled_instance_availability({
-    #     first_slot_start_time_range: {
-    #       earliest_time: Time.parse("2016-01-31T00:00:00Z"), 
-    #       latest_time: Time.parse("2016-01-31T04:00:00Z"), 
-    #     }, 
-    #     recurrence: {
-    #       frequency: "Weekly", 
-    #       interval: 1, 
-    #       occurrence_days: [
-    #         1, 
-    #       ], 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     scheduled_instance_availability_set: [
-    #       {
-    #         availability_zone: "us-west-2b", 
-    #         available_instance_count: 20, 
-    #         first_slot_start_time: Time.parse("2016-01-31T00:00:00Z"), 
-    #         hourly_price: "0.095", 
-    #         instance_type: "c4.large", 
-    #         max_term_duration_in_days: 366, 
-    #         min_term_duration_in_days: 366, 
-    #         network_platform: "EC2-VPC", 
-    #         platform: "Linux/UNIX", 
-    #         purchase_token: "eyJ2IjoiMSIsInMiOjEsImMiOi...", 
-    #         recurrence: {
-    #           frequency: "Weekly", 
-    #           interval: 1, 
-    #           occurrence_day_set: [
-    #             1, 
-    #           ], 
-    #           occurrence_relative_to_end: false, 
-    #         }, 
-    #         slot_duration_in_hours: 23, 
-    #         total_scheduled_instance_hours: 1219, 
-    #       }, 
-    #     ], 
-    #   }
-    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_scheduled_instance_availability({
@@ -30532,47 +30398,6 @@ module Aws::EC2
     #   * {Types::DescribeScheduledInstancesResult#scheduled_instance_set #scheduled_instance_set} => Array&lt;Types::ScheduledInstance&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
-    #
-    #
-    # @example Example: To describe your Scheduled Instances
-    #
-    #   # This example describes the specified Scheduled Instance.
-    #
-    #   resp = client.describe_scheduled_instances({
-    #     scheduled_instance_ids: [
-    #       "sci-1234-1234-1234-1234-123456789012", 
-    #     ], 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     scheduled_instance_set: [
-    #       {
-    #         availability_zone: "us-west-2b", 
-    #         create_date: Time.parse("2016-01-25T21:43:38.612Z"), 
-    #         hourly_price: "0.095", 
-    #         instance_count: 1, 
-    #         instance_type: "c4.large", 
-    #         network_platform: "EC2-VPC", 
-    #         next_slot_start_time: Time.parse("2016-01-31T09:00:00Z"), 
-    #         platform: "Linux/UNIX", 
-    #         recurrence: {
-    #           frequency: "Weekly", 
-    #           interval: 1, 
-    #           occurrence_day_set: [
-    #             1, 
-    #           ], 
-    #           occurrence_relative_to_end: false, 
-    #           occurrence_unit: "", 
-    #         }, 
-    #         scheduled_instance_id: "sci-1234-1234-1234-1234-123456789012", 
-    #         slot_duration_in_hours: 32, 
-    #         term_end_date: Time.parse("2017-01-31T09:00:00Z"), 
-    #         term_start_date: Time.parse("2016-01-31T09:00:00Z"), 
-    #         total_scheduled_instance_hours: 1696, 
-    #       }, 
-    #     ], 
-    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -32480,14 +32305,14 @@ module Aws::EC2
     #   # January.
     #
     #   resp = client.describe_spot_price_history({
-    #     end_time: Time.parse("2014-01-06T08:09:10"), 
+    #     end_time: Time.parse("2014-01-06T08:09:10.05Z"), 
     #     instance_types: [
     #       "m1.xlarge", 
     #     ], 
     #     product_descriptions: [
     #       "Linux/UNIX (Amazon VPC)", 
     #     ], 
-    #     start_time: Time.parse("2014-01-06T07:08:09"), 
+    #     start_time: Time.parse("2014-01-06T07:08:09.05Z"), 
     #   })
     #
     #   resp.to_h outputs the following:
@@ -34533,6 +34358,8 @@ module Aws::EC2
     #   resp.logging_configurations[0].access_logs.kinesis_data_firehose.delivery_status.code #=> String, one of "success", "failed"
     #   resp.logging_configurations[0].access_logs.kinesis_data_firehose.delivery_status.message #=> String
     #   resp.logging_configurations[0].access_logs.kinesis_data_firehose.delivery_stream #=> String
+    #   resp.logging_configurations[0].access_logs.log_version #=> String
+    #   resp.logging_configurations[0].access_logs.include_trust_context #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVerifiedAccessInstanceLoggingConfigurations AWS API Documentation
@@ -37709,20 +37536,12 @@ module Aws::EC2
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
-    # @example Example: To disassociate an Elastic IP address in EC2-VPC
+    # @example Example: To disassociate an Elastic IP address
     #
-    #   # This example disassociates an Elastic IP address from an instance in a VPC.
+    #   # This example disassociates an Elastic IP address from an instance.
     #
     #   resp = client.disassociate_address({
     #     association_id: "eipassoc-2bebb745", 
-    #   })
-    #
-    # @example Example: To disassociate an Elastic IP addresses in EC2-Classic
-    #
-    #   # This example disassociates an Elastic IP address from an instance in EC2-Classic.
-    #
-    #   resp = client.disassociate_address({
-    #     public_ip: "198.51.100.0", 
     #   })
     #
     # @example Request syntax with placeholder values
@@ -48078,6 +47897,8 @@ module Aws::EC2
     #         enabled: false, # required
     #         delivery_stream: "String",
     #       },
+    #       log_version: "String",
+    #       include_trust_context: false,
     #     },
     #     dry_run: false,
     #     client_token: "String",
@@ -48100,6 +47921,8 @@ module Aws::EC2
     #   resp.logging_configuration.access_logs.kinesis_data_firehose.delivery_status.code #=> String, one of "success", "failed"
     #   resp.logging_configuration.access_logs.kinesis_data_firehose.delivery_status.message #=> String
     #   resp.logging_configuration.access_logs.kinesis_data_firehose.delivery_stream #=> String
+    #   resp.logging_configuration.access_logs.log_version #=> String
+    #   resp.logging_configuration.access_logs.include_trust_context #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessInstanceLoggingConfiguration AWS API Documentation
     #
@@ -50154,50 +49977,6 @@ module Aws::EC2
     #
     #   * {Types::PurchaseScheduledInstancesResult#scheduled_instance_set #scheduled_instance_set} => Array&lt;Types::ScheduledInstance&gt;
     #
-    #
-    # @example Example: To purchase a Scheduled Instance
-    #
-    #   # This example purchases a Scheduled Instance.
-    #
-    #   resp = client.purchase_scheduled_instances({
-    #     purchase_requests: [
-    #       {
-    #         instance_count: 1, 
-    #         purchase_token: "eyJ2IjoiMSIsInMiOjEsImMiOi...", 
-    #       }, 
-    #     ], 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     scheduled_instance_set: [
-    #       {
-    #         availability_zone: "us-west-2b", 
-    #         create_date: Time.parse("2016-01-25T21:43:38.612Z"), 
-    #         hourly_price: "0.095", 
-    #         instance_count: 1, 
-    #         instance_type: "c4.large", 
-    #         network_platform: "EC2-VPC", 
-    #         next_slot_start_time: Time.parse("2016-01-31T09:00:00Z"), 
-    #         platform: "Linux/UNIX", 
-    #         recurrence: {
-    #           frequency: "Weekly", 
-    #           interval: 1, 
-    #           occurrence_day_set: [
-    #             1, 
-    #           ], 
-    #           occurrence_relative_to_end: false, 
-    #           occurrence_unit: "", 
-    #         }, 
-    #         scheduled_instance_id: "sci-1234-1234-1234-1234-123456789012", 
-    #         slot_duration_in_hours: 32, 
-    #         term_end_date: Time.parse("2017-01-31T09:00:00Z"), 
-    #         term_start_date: Time.parse("2016-01-31T09:00:00Z"), 
-    #         total_scheduled_instance_hours: 1696, 
-    #       }, 
-    #     ], 
-    #   }
-    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.purchase_scheduled_instances({
@@ -51026,20 +50805,12 @@ module Aws::EC2
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
-    # @example Example: To release an Elastic IP address for EC2-VPC
+    # @example Example: To release an Elastic IP address
     #
-    #   # This example releases an Elastic IP address for use with instances in a VPC.
+    #   # This example releases the specified Elastic IP address.
     #
     #   resp = client.release_address({
     #     allocation_id: "eipalloc-64d5890a", 
-    #   })
-    #
-    # @example Example: To release an Elastic IP addresses for EC2-Classic
-    #
-    #   # This example releases an Elastic IP address for use with instances in EC2-Classic.
-    #
-    #   resp = client.release_address({
-    #     public_ip: "198.51.100.0", 
     #   })
     #
     # @example Request syntax with placeholder values
@@ -51844,8 +51615,7 @@ module Aws::EC2
     #
     #   # This example creates a Spot fleet request with two launch specifications that differ only by Availability Zone. The Spot
     #   # fleet launches the instances in the specified Availability Zone with the lowest price. If your account supports EC2-VPC
-    #   # only, Amazon EC2 launches the Spot instances in the default subnet of the Availability Zone. If your account supports
-    #   # EC2-Classic, Amazon EC2 launches the instances in EC2-Classic in the Availability Zone.
+    #   # only, Amazon EC2 launches the Spot instances in the default subnet of the Availability Zone.
     #
     #   resp = client.request_spot_fleet({
     #     spot_fleet_request_config: {
@@ -52384,8 +52154,7 @@ module Aws::EC2
     #
     #   # This example creates a one-time Spot Instance request for five instances in the specified Availability Zone. If your
     #   # account supports EC2-VPC only, Amazon EC2 launches the instances in the default subnet of the specified Availability
-    #   # Zone. If your account supports EC2-Classic, Amazon EC2 launches the instances in EC2-Classic in the specified
-    #   # Availability Zone.
+    #   # Zone.
     #
     #   resp = client.request_spot_instances({
     #     instance_count: 5, 
@@ -52989,21 +52758,6 @@ module Aws::EC2
     #
     #   * {Types::RestoreAddressToClassicResult#public_ip #public_ip} => String
     #   * {Types::RestoreAddressToClassicResult#status #status} => String
-    #
-    #
-    # @example Example: To restore an address to EC2-Classic
-    #
-    #   # This example restores the specified Elastic IP address to the EC2-Classic platform.
-    #
-    #   resp = client.restore_address_to_classic({
-    #     public_ip: "198.51.100.0", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     public_ip: "198.51.100.0", 
-    #     status: "MoveInProgress", 
-    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -54510,71 +54264,6 @@ module Aws::EC2
     # @return [Types::RunScheduledInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RunScheduledInstancesResult#instance_id_set #instance_id_set} => Array&lt;String&gt;
-    #
-    #
-    # @example Example: To launch a Scheduled Instance in a VPC
-    #
-    #   # This example launches the specified Scheduled Instance in a VPC.
-    #
-    #   resp = client.run_scheduled_instances({
-    #     instance_count: 1, 
-    #     launch_specification: {
-    #       iam_instance_profile: {
-    #         name: "my-iam-role", 
-    #       }, 
-    #       image_id: "ami-12345678", 
-    #       instance_type: "c4.large", 
-    #       key_name: "my-key-pair", 
-    #       network_interfaces: [
-    #         {
-    #           associate_public_ip_address: true, 
-    #           device_index: 0, 
-    #           groups: [
-    #             "sg-12345678", 
-    #           ], 
-    #           subnet_id: "subnet-12345678", 
-    #         }, 
-    #       ], 
-    #     }, 
-    #     scheduled_instance_id: "sci-1234-1234-1234-1234-123456789012", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     instance_id_set: [
-    #       "i-1234567890abcdef0", 
-    #     ], 
-    #   }
-    #
-    # @example Example: To launch a Scheduled Instance in EC2-Classic
-    #
-    #   # This example launches the specified Scheduled Instance in EC2-Classic.
-    #
-    #   resp = client.run_scheduled_instances({
-    #     instance_count: 1, 
-    #     launch_specification: {
-    #       iam_instance_profile: {
-    #         name: "my-iam-role", 
-    #       }, 
-    #       image_id: "ami-12345678", 
-    #       instance_type: "c4.large", 
-    #       key_name: "my-key-pair", 
-    #       placement: {
-    #         availability_zone: "us-west-2b", 
-    #       }, 
-    #       security_group_ids: [
-    #         "sg-12345678", 
-    #       ], 
-    #     }, 
-    #     scheduled_instance_id: "sci-1234-1234-1234-1234-123456789012", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     instance_id_set: [
-    #       "i-1234567890abcdef0", 
-    #     ], 
-    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -56965,7 +56654,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.384.0'
+      context[:gem_version] = '1.385.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

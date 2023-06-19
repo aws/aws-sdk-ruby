@@ -63149,7 +63149,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the destinations for Verified Access logs.
+    # Options for Verified Access logs.
     #
     # @!attribute [rw] s3
     #   Sends Verified Access logs to Amazon S3.
@@ -63163,12 +63163,24 @@ module Aws::EC2
     #   Sends Verified Access logs to Kinesis.
     #   @return [Types::VerifiedAccessLogKinesisDataFirehoseDestinationOptions]
     #
+    # @!attribute [rw] log_version
+    #   The logging version to use.
+    #
+    #   Valid values: `ocsf-0.1` \| `ocsf-1.0.0-rc.2`
+    #   @return [String]
+    #
+    # @!attribute [rw] include_trust_context
+    #   Include trust data sent by trust providers into the logs.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VerifiedAccessLogOptions AWS API Documentation
     #
     class VerifiedAccessLogOptions < Struct.new(
       :s3,
       :cloud_watch_logs,
-      :kinesis_data_firehose)
+      :kinesis_data_firehose,
+      :log_version,
+      :include_trust_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -63237,7 +63249,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the destinations for Verified Access logs.
+    # Describes the options for Verified Access logs.
     #
     # @!attribute [rw] s3
     #   Amazon S3 logging options.
@@ -63251,12 +63263,22 @@ module Aws::EC2
     #   Kinesis logging destination.
     #   @return [Types::VerifiedAccessLogKinesisDataFirehoseDestination]
     #
+    # @!attribute [rw] log_version
+    #   Describes current setting for the logging version.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_trust_context
+    #   Describes current setting for including trust data into the logs.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VerifiedAccessLogs AWS API Documentation
     #
     class VerifiedAccessLogs < Struct.new(
       :s3,
       :cloud_watch_logs,
-      :kinesis_data_firehose)
+      :kinesis_data_firehose,
+      :log_version,
+      :include_trust_context)
       SENSITIVE = []
       include Aws::Structure
     end

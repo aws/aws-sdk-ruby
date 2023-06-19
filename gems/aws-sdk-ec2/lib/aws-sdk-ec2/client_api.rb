@@ -185,6 +185,7 @@ module Aws::EC2
     AutoPlacement = Shapes::StringShape.new(name: 'AutoPlacement')
     AutoRecoveryFlag = Shapes::BooleanShape.new(name: 'AutoRecoveryFlag')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
+    AvailabilityZoneId = Shapes::StringShape.new(name: 'AvailabilityZoneId')
     AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
     AvailabilityZoneMessage = Shapes::StructureShape.new(name: 'AvailabilityZoneMessage')
     AvailabilityZoneMessageList = Shapes::ListShape.new(name: 'AvailabilityZoneMessageList')
@@ -4284,8 +4285,8 @@ module Aws::EC2
     CreateCapacityReservationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
     CreateCapacityReservationRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceType"))
     CreateCapacityReservationRequest.add_member(:instance_platform, Shapes::ShapeRef.new(shape: CapacityReservationInstancePlatform, required: true, location_name: "InstancePlatform"))
-    CreateCapacityReservationRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
-    CreateCapacityReservationRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZoneId"))
+    CreateCapacityReservationRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneName, location_name: "AvailabilityZone"))
+    CreateCapacityReservationRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     CreateCapacityReservationRequest.add_member(:tenancy, Shapes::ShapeRef.new(shape: CapacityReservationTenancy, location_name: "Tenancy"))
     CreateCapacityReservationRequest.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "InstanceCount"))
     CreateCapacityReservationRequest.add_member(:ebs_optimized, Shapes::ShapeRef.new(shape: Boolean, location_name: "EbsOptimized"))
@@ -14530,6 +14531,8 @@ module Aws::EC2
     VerifiedAccessLogOptions.add_member(:s3, Shapes::ShapeRef.new(shape: VerifiedAccessLogS3DestinationOptions, location_name: "S3"))
     VerifiedAccessLogOptions.add_member(:cloud_watch_logs, Shapes::ShapeRef.new(shape: VerifiedAccessLogCloudWatchLogsDestinationOptions, location_name: "CloudWatchLogs"))
     VerifiedAccessLogOptions.add_member(:kinesis_data_firehose, Shapes::ShapeRef.new(shape: VerifiedAccessLogKinesisDataFirehoseDestinationOptions, location_name: "KinesisDataFirehose"))
+    VerifiedAccessLogOptions.add_member(:log_version, Shapes::ShapeRef.new(shape: String, location_name: "LogVersion"))
+    VerifiedAccessLogOptions.add_member(:include_trust_context, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeTrustContext"))
     VerifiedAccessLogOptions.struct_class = Types::VerifiedAccessLogOptions
 
     VerifiedAccessLogS3Destination.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
@@ -14548,6 +14551,8 @@ module Aws::EC2
     VerifiedAccessLogs.add_member(:s3, Shapes::ShapeRef.new(shape: VerifiedAccessLogS3Destination, location_name: "s3"))
     VerifiedAccessLogs.add_member(:cloud_watch_logs, Shapes::ShapeRef.new(shape: VerifiedAccessLogCloudWatchLogsDestination, location_name: "cloudWatchLogs"))
     VerifiedAccessLogs.add_member(:kinesis_data_firehose, Shapes::ShapeRef.new(shape: VerifiedAccessLogKinesisDataFirehoseDestination, location_name: "kinesisDataFirehose"))
+    VerifiedAccessLogs.add_member(:log_version, Shapes::ShapeRef.new(shape: String, location_name: "logVersion"))
+    VerifiedAccessLogs.add_member(:include_trust_context, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeTrustContext"))
     VerifiedAccessLogs.struct_class = Types::VerifiedAccessLogs
 
     VerifiedAccessTrustProvider.add_member(:verified_access_trust_provider_id, Shapes::ShapeRef.new(shape: String, location_name: "verifiedAccessTrustProviderId"))

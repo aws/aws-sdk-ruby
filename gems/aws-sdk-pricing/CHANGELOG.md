@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2023-06-19)
+------------------
+
+* Feature - This release updates the PriceListArn regex pattern.
+
 1.45.0 (2023-06-15)
 ------------------
 

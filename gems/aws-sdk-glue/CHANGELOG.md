@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.142.0 (2023-06-19)
+------------------
+
+* Feature - This release adds support for creating cross region table/database resource links
+
 1.141.0 (2023-06-15)
 ------------------
 

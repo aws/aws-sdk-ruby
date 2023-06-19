@@ -1184,18 +1184,30 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates an Autopilot job.
+    # Creates an Autopilot job also referred to as Autopilot experiment or
+    # AutoML job.
     #
-    # Find the best-performing model after you run an Autopilot job by
-    # calling [DescribeAutoMLJob][1].
+    # Find the best-performing model after you run an AutoML job by calling
+    # [DescribeAutoMLJobV2][1] (recommended) or [DescribeAutoMLJob][2].
     #
-    # For information about how to use Autopilot, see [Automate Model
-    # Development with Amazon SageMaker Autopilot][2].
+    # <note markdown="1"> `CreateAutoMLJob` only accepts tabular input data. We recommend using
+    # [CreateAutoMLJobV2][3] for all problem types. `CreateAutoMLJobV2` can
+    # process the same tabular data as its previous version
+    # `CreateAutoMLJob`, as well as non-tabular data for problem types such
+    # as image or text classification.
+    #
+    #  Find guidelines about how to migrate `CreateAutoMLJob` to
+    # `CreateAutoMLJobV2` in [Migrate a CreateAutoMLJob to
+    # CreateAutoMLJobV2][4].
+    #
+    #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html
-    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html
+    # [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
+    # [4]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2
     #
     # @option params [required, String] :auto_ml_job_name
     #   Identifies an Autopilot job. The name must be unique to your account
@@ -1229,15 +1241,13 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types
     #
     # @option params [Types::AutoMLJobObjective] :auto_ml_job_objective
-    #   Defines the objective metric used to measure the predictive quality of
-    #   an AutoML job. You provide an [AutoMLJobObjective$MetricName][1] and
-    #   Autopilot infers whether to minimize or maximize it. For
-    #   [CreateAutoMLJobV2][2], only `Accuracy` is supported.
+    #   Specifies a metric to minimize or maximize as the objective of a job.
+    #   If not specified, the default objective metric depends on the problem
+    #   type. See [AutoMLJobObjective][1] for the default values.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html
-    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
     #
     # @option params [Types::AutoMLJobConfig] :auto_ml_job_config
     #   A collection of settings used to configure an AutoML job.
@@ -1350,24 +1360,32 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates an Amazon SageMaker AutoML job that uses non-tabular data such
-    # as images or text for Computer Vision or Natural Language Processing
-    # problems.
+    # Creates an Autopilot job also referred to as Autopilot experiment or
+    # AutoML job V2.
     #
-    # Find the resulting model after you run an AutoML job V2 by calling
-    # [DescribeAutoMLJobV2][1].
+    # We recommend using [CreateAutoMLJobV2][1] for all problem types.
+    # `CreateAutoMLJobV2` can process the same tabular data as its previous
+    # version `CreateAutoMLJob`, as well as non-tabular data for problem
+    # types such as image or text classification.
     #
-    # To create an `AutoMLJob` using tabular data, see [CreateAutoMLJob][2].
+    # Find guidelines about how to migrate `CreateAutoMLJob` to
+    # `CreateAutoMLJobV2` in [Migrate a CreateAutoMLJob to
+    # CreateAutoMLJobV2][2].
     #
-    # <note markdown="1"> This API action is callable through SageMaker Canvas only. Calling it
-    # directly from the CLI or an SDK results in an error.
+    # For the list of available problem types supported by
+    # `CreateAutoMLJobV2`, see [AutoMLProblemTypeConfig][3].
     #
-    #  </note>
+    # Find the best-performing model after you run an AutoML job V2 by
+    # calling [DescribeAutoMLJobV2][4]. Calling [DescribeAutoMLJob][5] on a
+    # AutoML job V2 results in an error.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html
-    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2
+    # [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLProblemTypeConfig.html
+    # [4]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html
+    # [5]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html
     #
     # @option params [required, String] :auto_ml_job_name
     #   Identifies an Autopilot job. The name must be unique to your account
@@ -1379,10 +1397,12 @@ module Aws::SageMaker
     #   [InputDataConfig][1] supported by `CreateAutoMLJob`. The supported
     #   formats depend on the problem type:
     #
-    #   * ImageClassification: S3Prefix, `ManifestFile`,
-    #     `AugmentedManifestFile`
+    #   * For Tabular problem types: `S3Prefix`, `ManifestFile`.
     #
-    #   * TextClassification: S3Prefix
+    #   * For ImageClassification: `S3Prefix`, `ManifestFile`,
+    #     `AugmentedManifestFile`.
+    #
+    #   * For TextClassification: `S3Prefix`.
     #
     #
     #
@@ -1395,6 +1415,13 @@ module Aws::SageMaker
     # @option params [required, Types::AutoMLProblemTypeConfig] :auto_ml_problem_type_config
     #   Defines the configuration settings of one of the supported problem
     #   types.
+    #
+    #   <note markdown="1"> For tabular problem types, you must either specify the type of
+    #   supervised learning problem in `AutoMLProblemTypeConfig`
+    #   (`TabularJobConfig.ProblemType`) and provide the `AutoMLJobObjective`,
+    #   or none at all.
+    #
+    #    </note>
     #
     # @option params [required, String] :role_arn
     #   The ARN of the role that is used to access the data.
@@ -1415,11 +1442,20 @@ module Aws::SageMaker
     #
     # @option params [Types::AutoMLJobObjective] :auto_ml_job_objective
     #   Specifies a metric to minimize or maximize as the objective of a job.
-    #   For [CreateAutoMLJobV2][1], only `Accuracy` is supported.
+    #   If not specified, the default objective metric depends on the problem
+    #   type. For the list of default values per problem type, see
+    #   [AutoMLJobObjective][1].
+    #
+    #   <note markdown="1"> For tabular problem types, you must either provide the
+    #   `AutoMLJobObjective` and indicate the type of supervised learning
+    #   problem in `AutoMLProblemTypeConfig` (`TabularJobConfig.ProblemType`),
+    #   or none.
+    #
+    #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html
     #
     # @option params [Types::ModelDeployConfig] :model_deploy_config
     #   Specifies how to generate the endpoint name for an automatic one-click
@@ -1429,12 +1465,9 @@ module Aws::SageMaker
     #   This structure specifies how to split the data into train and
     #   validation datasets.
     #
-    #   If you are using the V1 API (for example `CreateAutoMLJob`) or the V2
-    #   API for Natural Language Processing problems (for example
-    #   `CreateAutoMLJobV2` with a `TextClassificationJobConfig` problem
-    #   type), the validation and training datasets must contain the same
-    #   headers. Also, for V1 API jobs, the validation dataset must be less
-    #   than 2 GB in size.
+    #   The validation and training datasets must contain the same headers.
+    #   For jobs created by calling `CreateAutoMLJob`, the validation dataset
+    #   must be less than 2 GB in size.
     #
     # @return [Types::CreateAutoMLJobV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1477,6 +1510,26 @@ module Aws::SageMaker
     #         },
     #         content_column: "ContentColumn",
     #         target_label_column: "TargetLabelColumn",
+    #       },
+    #       tabular_job_config: {
+    #         candidate_generation_config: {
+    #           algorithms_config: [
+    #             {
+    #               auto_ml_algorithms: ["xgboost"], # required, accepts xgboost, linear-learner, mlp, lightgbm, catboost, randomforest, extra-trees, nn-torch, fastai
+    #             },
+    #           ],
+    #         },
+    #         completion_criteria: {
+    #           max_candidates: 1,
+    #           max_runtime_per_training_job_in_seconds: 1,
+    #           max_auto_ml_job_runtime_in_seconds: 1,
+    #         },
+    #         feature_specification_s3_uri: "S3Uri",
+    #         mode: "AUTO", # accepts AUTO, ENSEMBLING, HYPERPARAMETER_TUNING
+    #         generate_candidate_definitions_only: false,
+    #         problem_type: "BinaryClassification", # accepts BinaryClassification, MulticlassClassification, Regression
+    #         target_attribute_name: "TargetAttributeName", # required
+    #         sample_weight_attribute_name: "SampleWeightAttributeName",
     #       },
     #     },
     #     role_arn: "RoleArn", # required
@@ -9950,7 +10003,12 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Returns information about an Amazon SageMaker AutoML job.
+    # Returns information about an AutoML job created by calling
+    # [CreateAutoMLJob][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html
     #
     # @option params [required, String] :auto_ml_job_name
     #   Requests information about an AutoML job using its unique name.
@@ -10079,15 +10137,15 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Returns information about an Amazon SageMaker AutoML V2 job.
+    # Returns information about an AutoML job V2 created by calling
+    # [CreateAutoMLJobV2][1].
     #
-    # <note markdown="1"> This API action is callable through SageMaker Canvas only. Calling it
-    # directly from the CLI or an SDK results in an error.
     #
-    #  </note>
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
     #
     # @option params [required, String] :auto_ml_job_name
-    #   Requests information about an AutoML V2 job using its unique name.
+    #   Requests information about an AutoML job V2 using its unique name.
     #
     # @return [Types::DescribeAutoMLJobV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10110,6 +10168,9 @@ module Aws::SageMaker
     #   * {Types::DescribeAutoMLJobV2Response#model_deploy_result #model_deploy_result} => Types::ModelDeployResult
     #   * {Types::DescribeAutoMLJobV2Response#data_split_config #data_split_config} => Types::AutoMLDataSplitConfig
     #   * {Types::DescribeAutoMLJobV2Response#security_config #security_config} => Types::AutoMLSecurityConfig
+    #   * {Types::DescribeAutoMLJobV2Response#auto_ml_job_artifacts #auto_ml_job_artifacts} => Types::AutoMLJobArtifacts
+    #   * {Types::DescribeAutoMLJobV2Response#resolved_attributes #resolved_attributes} => Types::AutoMLResolvedAttributes
+    #   * {Types::DescribeAutoMLJobV2Response#auto_ml_problem_type_config_name #auto_ml_problem_type_config_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -10139,6 +10200,18 @@ module Aws::SageMaker
     #   resp.auto_ml_problem_type_config.text_classification_job_config.completion_criteria.max_auto_ml_job_runtime_in_seconds #=> Integer
     #   resp.auto_ml_problem_type_config.text_classification_job_config.content_column #=> String
     #   resp.auto_ml_problem_type_config.text_classification_job_config.target_label_column #=> String
+    #   resp.auto_ml_problem_type_config.tabular_job_config.candidate_generation_config.algorithms_config #=> Array
+    #   resp.auto_ml_problem_type_config.tabular_job_config.candidate_generation_config.algorithms_config[0].auto_ml_algorithms #=> Array
+    #   resp.auto_ml_problem_type_config.tabular_job_config.candidate_generation_config.algorithms_config[0].auto_ml_algorithms[0] #=> String, one of "xgboost", "linear-learner", "mlp", "lightgbm", "catboost", "randomforest", "extra-trees", "nn-torch", "fastai"
+    #   resp.auto_ml_problem_type_config.tabular_job_config.completion_criteria.max_candidates #=> Integer
+    #   resp.auto_ml_problem_type_config.tabular_job_config.completion_criteria.max_runtime_per_training_job_in_seconds #=> Integer
+    #   resp.auto_ml_problem_type_config.tabular_job_config.completion_criteria.max_auto_ml_job_runtime_in_seconds #=> Integer
+    #   resp.auto_ml_problem_type_config.tabular_job_config.feature_specification_s3_uri #=> String
+    #   resp.auto_ml_problem_type_config.tabular_job_config.mode #=> String, one of "AUTO", "ENSEMBLING", "HYPERPARAMETER_TUNING"
+    #   resp.auto_ml_problem_type_config.tabular_job_config.generate_candidate_definitions_only #=> Boolean
+    #   resp.auto_ml_problem_type_config.tabular_job_config.problem_type #=> String, one of "BinaryClassification", "MulticlassClassification", "Regression"
+    #   resp.auto_ml_problem_type_config.tabular_job_config.target_attribute_name #=> String
+    #   resp.auto_ml_problem_type_config.tabular_job_config.sample_weight_attribute_name #=> String
     #   resp.creation_time #=> Time
     #   resp.end_time #=> Time
     #   resp.last_modified_time #=> Time
@@ -10190,6 +10263,14 @@ module Aws::SageMaker
     #   resp.security_config.vpc_config.security_group_ids[0] #=> String
     #   resp.security_config.vpc_config.subnets #=> Array
     #   resp.security_config.vpc_config.subnets[0] #=> String
+    #   resp.auto_ml_job_artifacts.candidate_definition_notebook_location #=> String
+    #   resp.auto_ml_job_artifacts.data_exploration_notebook_location #=> String
+    #   resp.resolved_attributes.auto_ml_job_objective.metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC", "RMSE", "MAE", "R2", "BalancedAccuracy", "Precision", "PrecisionMacro", "Recall", "RecallMacro"
+    #   resp.resolved_attributes.completion_criteria.max_candidates #=> Integer
+    #   resp.resolved_attributes.completion_criteria.max_runtime_per_training_job_in_seconds #=> Integer
+    #   resp.resolved_attributes.completion_criteria.max_auto_ml_job_runtime_in_seconds #=> Integer
+    #   resp.resolved_attributes.auto_ml_problem_type_resolved_attributes.tabular_resolved_attributes.problem_type #=> String, one of "BinaryClassification", "MulticlassClassification", "Regression"
+    #   resp.auto_ml_problem_type_config_name #=> String, one of "ImageClassification", "TextClassification", "Tabular"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAutoMLJobV2 AWS API Documentation
     #
@@ -23627,7 +23708,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.187.0'
+      context[:gem_version] = '1.188.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

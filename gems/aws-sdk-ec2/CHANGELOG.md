@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.385.0 (2023-06-19)
+------------------
+
+* Feature - API changes to AWS Verified Access to include data from trust providers in logs
+
 1.384.0 (2023-06-15)
 ------------------
 

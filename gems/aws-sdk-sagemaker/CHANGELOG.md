@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.188.0 (2023-06-19)
+------------------
+
+* Feature - Amazon Sagemaker Autopilot releases CreateAutoMLJobV2 and DescribeAutoMLJobV2 for Autopilot customers with ImageClassification, TextClassification and Tabular problem type config support.
+
 1.187.0 (2023-06-15)
 ------------------
 

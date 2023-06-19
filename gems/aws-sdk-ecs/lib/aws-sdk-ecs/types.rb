@@ -2828,6 +2828,9 @@ module Aws::ECS
     #   ECS resources][1] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
+    #   When you use Amazon ECS managed tags, you need to set the
+    #   `propagateTags` request parameter.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
@@ -2839,6 +2842,8 @@ module Aws::ECS
     #   Tags can only be propagated to the task during task creation. To add
     #   tags to a task after task creation, use the [TagResource][1] API
     #   action.
+    #
+    #   The default is `NONE`.
     #
     #
     #

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2023-06-19)
+------------------
+
+* Feature - Update MaxItems upper bound to 1000 for ListPricesRequest
+
 1.45.0 (2023-06-15)
 ------------------
 

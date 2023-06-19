@@ -2946,6 +2946,7 @@ module Aws::Glue
     #       target_database: {
     #         catalog_id: "CatalogIdString",
     #         database_name: "NameString",
+    #         region: "NameString",
     #       },
     #       federated_database: {
     #         identifier: "FederationIdentifier",
@@ -4280,6 +4281,7 @@ module Aws::Glue
     #         catalog_id: "CatalogIdString",
     #         database_name: "NameString",
     #         name: "NameString",
+    #         region: "NameString",
     #       },
     #     },
     #     partition_indexes: [
@@ -6503,6 +6505,7 @@ module Aws::Glue
     #   resp.database.create_table_default_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
     #   resp.database.target_database.catalog_id #=> String
     #   resp.database.target_database.database_name #=> String
+    #   resp.database.target_database.region #=> String
     #   resp.database.catalog_id #=> String
     #   resp.database.federated_database.identifier #=> String
     #   resp.database.federated_database.connection_name #=> String
@@ -6573,6 +6576,7 @@ module Aws::Glue
     #   resp.database_list[0].create_table_default_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
     #   resp.database_list[0].target_database.catalog_id #=> String
     #   resp.database_list[0].target_database.database_name #=> String
+    #   resp.database_list[0].target_database.region #=> String
     #   resp.database_list[0].catalog_id #=> String
     #   resp.database_list[0].federated_database.identifier #=> String
     #   resp.database_list[0].federated_database.connection_name #=> String
@@ -10108,6 +10112,7 @@ module Aws::Glue
     #   resp.table.target_table.catalog_id #=> String
     #   resp.table.target_table.database_name #=> String
     #   resp.table.target_table.name #=> String
+    #   resp.table.target_table.region #=> String
     #   resp.table.catalog_id #=> String
     #   resp.table.version_id #=> String
     #   resp.table.federated_table.identifier #=> String
@@ -10217,6 +10222,7 @@ module Aws::Glue
     #   resp.table_version.table.target_table.catalog_id #=> String
     #   resp.table_version.table.target_table.database_name #=> String
     #   resp.table_version.table.target_table.name #=> String
+    #   resp.table_version.table.target_table.region #=> String
     #   resp.table_version.table.catalog_id #=> String
     #   resp.table_version.table.version_id #=> String
     #   resp.table_version.table.federated_table.identifier #=> String
@@ -10335,6 +10341,7 @@ module Aws::Glue
     #   resp.table_versions[0].table.target_table.catalog_id #=> String
     #   resp.table_versions[0].table.target_table.database_name #=> String
     #   resp.table_versions[0].table.target_table.name #=> String
+    #   resp.table_versions[0].table.target_table.region #=> String
     #   resp.table_versions[0].table.catalog_id #=> String
     #   resp.table_versions[0].table.version_id #=> String
     #   resp.table_versions[0].table.federated_table.identifier #=> String
@@ -10464,6 +10471,7 @@ module Aws::Glue
     #   resp.table_list[0].target_table.catalog_id #=> String
     #   resp.table_list[0].target_table.database_name #=> String
     #   resp.table_list[0].target_table.name #=> String
+    #   resp.table_list[0].target_table.region #=> String
     #   resp.table_list[0].catalog_id #=> String
     #   resp.table_list[0].version_id #=> String
     #   resp.table_list[0].federated_table.identifier #=> String
@@ -11050,6 +11058,7 @@ module Aws::Glue
     #   resp.table.target_table.catalog_id #=> String
     #   resp.table.target_table.database_name #=> String
     #   resp.table.target_table.name #=> String
+    #   resp.table.target_table.region #=> String
     #   resp.table.catalog_id #=> String
     #   resp.table.version_id #=> String
     #   resp.table.federated_table.identifier #=> String
@@ -13391,6 +13400,7 @@ module Aws::Glue
     #   resp.table_list[0].target_table.catalog_id #=> String
     #   resp.table_list[0].target_table.database_name #=> String
     #   resp.table_list[0].target_table.name #=> String
+    #   resp.table_list[0].target_table.region #=> String
     #   resp.table_list[0].catalog_id #=> String
     #   resp.table_list[0].version_id #=> String
     #   resp.table_list[0].federated_table.identifier #=> String
@@ -14959,6 +14969,7 @@ module Aws::Glue
     #       target_database: {
     #         catalog_id: "CatalogIdString",
     #         database_name: "NameString",
+    #         region: "NameString",
     #       },
     #       federated_database: {
     #         identifier: "FederationIdentifier",
@@ -15654,6 +15665,7 @@ module Aws::Glue
     #         catalog_id: "CatalogIdString",
     #         database_name: "NameString",
     #         name: "NameString",
+    #         region: "NameString",
     #       },
     #     },
     #     skip_archive: false,
@@ -15868,7 +15880,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.141.0'
+      context[:gem_version] = '1.142.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

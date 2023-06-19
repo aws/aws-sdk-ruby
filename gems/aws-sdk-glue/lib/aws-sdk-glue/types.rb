@@ -6142,11 +6142,16 @@ module Aws::Glue
     #   The name of the catalog database.
     #   @return [String]
     #
+    # @!attribute [rw] region
+    #   Region of the target database.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DatabaseIdentifier AWS API Documentation
     #
     class DatabaseIdentifier < Struct.new(
       :catalog_id,
-      :database_name)
+      :database_name,
+      :region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19274,12 +19279,17 @@ module Aws::Glue
     #   The name of the target table.
     #   @return [String]
     #
+    # @!attribute [rw] region
+    #   Region of the target table.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TableIdentifier AWS API Documentation
     #
     class TableIdentifier < Struct.new(
       :catalog_id,
       :database_name,
-      :name)
+      :name,
+      :region)
       SENSITIVE = []
       include Aws::Structure
     end
