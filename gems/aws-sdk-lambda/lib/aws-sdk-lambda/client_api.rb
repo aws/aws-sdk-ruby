@@ -280,6 +280,7 @@ module Aws::Lambda
     Qualifier = Shapes::StringShape.new(name: 'Qualifier')
     Queue = Shapes::StringShape.new(name: 'Queue')
     Queues = Shapes::ListShape.new(name: 'Queues')
+    RecursiveInvocationException = Shapes::StructureShape.new(name: 'RecursiveInvocationException')
     RemoveLayerVersionPermissionRequest = Shapes::StructureShape.new(name: 'RemoveLayerVersionPermissionRequest')
     RemovePermissionRequest = Shapes::StructureShape.new(name: 'RemovePermissionRequest')
     RequestTooLargeException = Shapes::StructureShape.new(name: 'RequestTooLargeException')
@@ -1261,6 +1262,10 @@ module Aws::Lambda
 
     Queues.member = Shapes::ShapeRef.new(shape: Queue)
 
+    RecursiveInvocationException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    RecursiveInvocationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    RecursiveInvocationException.struct_class = Types::RecursiveInvocationException
+
     RemoveLayerVersionPermissionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
     RemoveLayerVersionPermissionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: LayerVersionNumber, required: true, location: "uri", location_name: "VersionNumber"))
     RemoveLayerVersionPermissionRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: StatementId, required: true, location: "uri", location_name: "StatementId"))
@@ -1943,6 +1948,7 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: InvalidRuntimeException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
+        o.errors << Shapes::ShapeRef.new(shape: RecursiveInvocationException)
       end)
 
       api.add_operation(:invoke_async, Seahorse::Model::Operation.new.tap do |o|
@@ -1994,6 +2000,7 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: InvalidRuntimeException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
+        o.errors << Shapes::ShapeRef.new(shape: RecursiveInvocationException)
       end)
 
       api.add_operation(:list_aliases, Seahorse::Model::Operation.new.tap do |o|

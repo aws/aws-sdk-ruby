@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.386.0 (2023-06-20)
+------------------
+
+* Feature - Adds support for targeting Dedicated Host allocations by assetIds in AWS Outposts
+
 1.385.0 (2023-06-19)
 ------------------
 

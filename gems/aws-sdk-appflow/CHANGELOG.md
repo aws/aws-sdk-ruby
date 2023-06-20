@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2023-06-20)
+------------------
+
+* Feature - This release adds new API to reset connector metadata cache
+
 1.43.0 (2023-06-15)
 ------------------
 

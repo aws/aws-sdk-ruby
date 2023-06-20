@@ -740,8 +740,8 @@ module Aws::Redshift
     #
     # @option params [String] :snapshot_cluster_identifier
     #   The identifier of the cluster the snapshot was created from. This
-    #   parameter is required if your IAM user or role has a policy containing
-    #   a snapshot resource element that specifies anything other than * for
+    #   parameter is required if your IAM user has a policy containing a
+    #   snapshot resource element that specifies anything other than * for
     #   the cluster name.
     #
     # @option params [required, String] :account_with_restore_access
@@ -1000,9 +1000,9 @@ module Aws::Redshift
     #
     # @option params [String] :source_snapshot_cluster_identifier
     #   The identifier of the cluster the source snapshot was created from.
-    #   This parameter is required if your IAM user or role has a policy
-    #   containing a snapshot resource element that specifies anything other
-    #   than * for the cluster name.
+    #   This parameter is required if your IAM user has a policy containing a
+    #   snapshot resource element that specifies anything other than * for
+    #   the cluster name.
     #
     #   Constraints:
     #
@@ -1218,8 +1218,8 @@ module Aws::Redshift
     #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes
     #
     # @option params [required, String] :master_username
-    #   The user name associated with the admin user for the cluster that is
-    #   being created.
+    #   The user name associated with the admin user account for the cluster
+    #   that is being created.
     #
     #   Constraints:
     #
@@ -1241,8 +1241,8 @@ module Aws::Redshift
     #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
     #
     # @option params [required, String] :master_user_password
-    #   The password associated with the admin user for the cluster that is
-    #   being created.
+    #   The password associated with the admin user account for the cluster
+    #   that is being created.
     #
     #   Constraints:
     #
@@ -1663,6 +1663,9 @@ module Aws::Redshift
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
+    #   resp.cluster.custom_domain_name #=> String
+    #   resp.cluster.custom_domain_certificate_arn #=> String
+    #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCluster AWS API Documentation
     #
@@ -2028,6 +2031,51 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def create_cluster_subnet_group(params = {}, options = {})
       req = build_request(:create_cluster_subnet_group, params)
+      req.send_request(options)
+    end
+
+    # Used to create a custom domain name for a cluster. Properties include
+    # the custom domain name, the cluster the custom domain is associated
+    # with, and the certificate Amazon Resource Name (ARN).
+    #
+    # @option params [required, String] :custom_domain_name
+    #   The custom domain name for a custom domain association.
+    #
+    # @option params [required, String] :custom_domain_certificate_arn
+    #   The certificate Amazon Resource Name (ARN) for the custom domain name
+    #   association.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The cluster identifier that the custom domain is associated with.
+    #
+    # @return [Types::CreateCustomDomainAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCustomDomainAssociationResult#custom_domain_name #custom_domain_name} => String
+    #   * {Types::CreateCustomDomainAssociationResult#custom_domain_certificate_arn #custom_domain_certificate_arn} => String
+    #   * {Types::CreateCustomDomainAssociationResult#cluster_identifier #cluster_identifier} => String
+    #   * {Types::CreateCustomDomainAssociationResult#custom_domain_cert_expiry_time #custom_domain_cert_expiry_time} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_custom_domain_association({
+    #     custom_domain_name: "CustomDomainNameString", # required
+    #     custom_domain_certificate_arn: "CustomDomainCertificateArnString", # required
+    #     cluster_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_domain_name #=> String
+    #   resp.custom_domain_certificate_arn #=> String
+    #   resp.cluster_identifier #=> String
+    #   resp.custom_domain_cert_expiry_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCustomDomainAssociation AWS API Documentation
+    #
+    # @overload create_custom_domain_association(params = {})
+    # @param [Hash] params ({})
+    def create_custom_domain_association(params = {}, options = {})
+      req = build_request(:create_custom_domain_association, params)
       req.send_request(options)
     end
 
@@ -3043,6 +3091,9 @@ module Aws::Redshift
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
+    #   resp.cluster.custom_domain_name #=> String
+    #   resp.cluster.custom_domain_certificate_arn #=> String
+    #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCluster AWS API Documentation
     #
@@ -3140,9 +3191,9 @@ module Aws::Redshift
     #
     # @option params [String] :snapshot_cluster_identifier
     #   The unique identifier of the cluster the snapshot was created from.
-    #   This parameter is required if your IAM user or role has a policy
-    #   containing a snapshot resource element that specifies anything other
-    #   than * for the cluster name.
+    #   This parameter is required if your IAM user has a policy containing a
+    #   snapshot resource element that specifies anything other than * for
+    #   the cluster name.
     #
     #   Constraints: Must be the name of valid cluster.
     #
@@ -3227,6 +3278,30 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def delete_cluster_subnet_group(params = {}, options = {})
       req = build_request(:delete_cluster_subnet_group, params)
+      req.send_request(options)
+    end
+
+    # Contains information about deleting a custom domain association for a
+    # cluster.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The identifier of the cluster to delete a custom domain association
+    #   for.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_custom_domain_association({
+    #     cluster_identifier: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCustomDomainAssociation AWS API Documentation
+    #
+    # @overload delete_custom_domain_association(params = {})
+    # @param [Hash] params ({})
+    def delete_custom_domain_association(params = {}, options = {})
+      req = build_request(:delete_custom_domain_association, params)
       req.send_request(options)
     end
 
@@ -4024,7 +4099,7 @@ module Aws::Redshift
     #
     #   Default: `100`
     #
-    #   Constraints: minimum 20, maximum 500.
+    #   Constraints: minimum 20, maximum 100.
     #
     # @option params [String] :marker
     #   An optional parameter that specifies the starting point to return a
@@ -4609,6 +4684,9 @@ module Aws::Redshift
     #   resp.clusters[0].reserved_node_exchange_status.target_reserved_node_offering_id #=> String
     #   resp.clusters[0].reserved_node_exchange_status.target_reserved_node_type #=> String
     #   resp.clusters[0].reserved_node_exchange_status.target_reserved_node_count #=> Integer
+    #   resp.clusters[0].custom_domain_name #=> String
+    #   resp.clusters[0].custom_domain_certificate_arn #=> String
+    #   resp.clusters[0].custom_domain_certificate_expiry_date #=> Time
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4623,6 +4701,56 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def describe_clusters(params = {}, options = {})
       req = build_request(:describe_clusters, params)
+      req.send_request(options)
+    end
+
+    # Contains information for custom domain associations for a cluster.
+    #
+    # @option params [String] :custom_domain_name
+    #   The custom domain name for the custom domain association.
+    #
+    # @option params [String] :custom_domain_certificate_arn
+    #   The certificate Amazon Resource Name (ARN) for the custom domain
+    #   association.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum records setting for the associated custom domain.
+    #
+    # @option params [String] :marker
+    #   The marker for the custom domain association.
+    #
+    # @return [Types::CustomDomainAssociationsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CustomDomainAssociationsMessage#marker #marker} => String
+    #   * {Types::CustomDomainAssociationsMessage#associations #associations} => Array&lt;Types::Association&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_custom_domain_associations({
+    #     custom_domain_name: "CustomDomainNameString",
+    #     custom_domain_certificate_arn: "CustomDomainCertificateArnString",
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.associations #=> Array
+    #   resp.associations[0].custom_domain_certificate_arn #=> String
+    #   resp.associations[0].custom_domain_certificate_expiry_date #=> Time
+    #   resp.associations[0].certificate_associations #=> Array
+    #   resp.associations[0].certificate_associations[0].custom_domain_name #=> String
+    #   resp.associations[0].certificate_associations[0].cluster_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeCustomDomainAssociations AWS API Documentation
+    #
+    # @overload describe_custom_domain_associations(params = {})
+    # @param [Hash] params ({})
+    def describe_custom_domain_associations(params = {}, options = {})
+      req = build_request(:describe_custom_domain_associations, params)
       req.send_request(options)
     end
 
@@ -6866,6 +6994,9 @@ module Aws::Redshift
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
+    #   resp.cluster.custom_domain_name #=> String
+    #   resp.cluster.custom_domain_certificate_arn #=> String
+    #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopy AWS API Documentation
     #
@@ -7200,6 +7331,9 @@ module Aws::Redshift
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
+    #   resp.cluster.custom_domain_name #=> String
+    #   resp.cluster.custom_domain_certificate_arn #=> String
+    #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopy AWS API Documentation
     #
@@ -7298,7 +7432,7 @@ module Aws::Redshift
     #
     #   [1]: http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
     #
-    # @option params [required, String] :cluster_identifier
+    # @option params [String] :cluster_identifier
     #   The unique identifier of the cluster that contains the database for
     #   which you are requesting credentials. This parameter is case
     #   sensitive.
@@ -7338,6 +7472,9 @@ module Aws::Redshift
     #
     #   [1]: http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
     #
+    # @option params [String] :custom_domain_name
+    #   The custom domain name for the cluster credentials.
+    #
     # @return [Types::ClusterCredentials] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ClusterCredentials#db_user #db_user} => String
@@ -7349,10 +7486,11 @@ module Aws::Redshift
     #   resp = client.get_cluster_credentials({
     #     db_user: "String", # required
     #     db_name: "String",
-    #     cluster_identifier: "String", # required
+    #     cluster_identifier: "String",
     #     duration_seconds: 1,
     #     auto_create: false,
     #     db_groups: ["String"],
+    #     custom_domain_name: "String",
     #   })
     #
     # @example Response structure
@@ -7394,7 +7532,7 @@ module Aws::Redshift
     #   the resource `dbname` for the specified database name. If the database
     #   name is not specified, access to all databases is allowed.
     #
-    # @option params [required, String] :cluster_identifier
+    # @option params [String] :cluster_identifier
     #   The unique identifier of the cluster that contains the database for
     #   which you are requesting credentials.
     #
@@ -7402,6 +7540,9 @@ module Aws::Redshift
     #   The number of seconds until the returned temporary password expires.
     #
     #   Range: 900-3600. Default: 900.
+    #
+    # @option params [String] :custom_domain_name
+    #   The custom domain name for the IAM message cluster credentials.
     #
     # @return [Types::ClusterExtendedCredentials] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7414,8 +7555,9 @@ module Aws::Redshift
     #
     #   resp = client.get_cluster_credentials_with_iam({
     #     db_name: "String",
-    #     cluster_identifier: "String", # required
+    #     cluster_identifier: "String",
     #     duration_seconds: 1,
+    #     custom_domain_name: "String",
     #   })
     #
     # @example Response structure
@@ -7746,8 +7888,8 @@ module Aws::Redshift
     #   response.
     #
     #   <note markdown="1"> Operations never return the password, so this operation provides a way
-    #   to regain access to the admin user for a cluster if the password is
-    #   lost.
+    #   to regain access to the admin user account for a cluster if the
+    #   password is lost.
     #
     #    </note>
     #
@@ -8088,6 +8230,9 @@ module Aws::Redshift
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
+    #   resp.cluster.custom_domain_name #=> String
+    #   resp.cluster.custom_domain_certificate_arn #=> String
+    #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCluster AWS API Documentation
     #
@@ -8242,6 +8387,9 @@ module Aws::Redshift
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
+    #   resp.cluster.custom_domain_name #=> String
+    #   resp.cluster.custom_domain_certificate_arn #=> String
+    #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevision AWS API Documentation
     #
@@ -8412,6 +8560,9 @@ module Aws::Redshift
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
+    #   resp.cluster.custom_domain_name #=> String
+    #   resp.cluster.custom_domain_certificate_arn #=> String
+    #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRoles AWS API Documentation
     #
@@ -8582,6 +8733,9 @@ module Aws::Redshift
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
+    #   resp.cluster.custom_domain_name #=> String
+    #   resp.cluster.custom_domain_certificate_arn #=> String
+    #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenance AWS API Documentation
     #
@@ -8820,6 +8974,50 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def modify_cluster_subnet_group(params = {}, options = {})
       req = build_request(:modify_cluster_subnet_group, params)
+      req.send_request(options)
+    end
+
+    # Contains information for changing a custom domain association.
+    #
+    # @option params [String] :custom_domain_name
+    #   The custom domain name for a changed custom domain association.
+    #
+    # @option params [String] :custom_domain_certificate_arn
+    #   The certificate Amazon Resource Name (ARN) for the changed custom
+    #   domain association.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The identifier of the cluster to change a custom domain association
+    #   for.
+    #
+    # @return [Types::ModifyCustomDomainAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyCustomDomainAssociationResult#custom_domain_name #custom_domain_name} => String
+    #   * {Types::ModifyCustomDomainAssociationResult#custom_domain_certificate_arn #custom_domain_certificate_arn} => String
+    #   * {Types::ModifyCustomDomainAssociationResult#cluster_identifier #cluster_identifier} => String
+    #   * {Types::ModifyCustomDomainAssociationResult#custom_domain_cert_expiry_time #custom_domain_cert_expiry_time} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_custom_domain_association({
+    #     custom_domain_name: "CustomDomainNameString",
+    #     custom_domain_certificate_arn: "CustomDomainCertificateArnString",
+    #     cluster_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_domain_name #=> String
+    #   resp.custom_domain_certificate_arn #=> String
+    #   resp.cluster_identifier #=> String
+    #   resp.custom_domain_cert_expiry_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCustomDomainAssociation AWS API Documentation
+    #
+    # @overload modify_custom_domain_association(params = {})
+    # @param [Hash] params ({})
+    def modify_custom_domain_association(params = {}, options = {})
+      req = build_request(:modify_custom_domain_association, params)
       req.send_request(options)
     end
 
@@ -9256,6 +9454,9 @@ module Aws::Redshift
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
+    #   resp.cluster.custom_domain_name #=> String
+    #   resp.cluster.custom_domain_certificate_arn #=> String
+    #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriod AWS API Documentation
     #
@@ -9509,6 +9710,9 @@ module Aws::Redshift
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
+    #   resp.cluster.custom_domain_name #=> String
+    #   resp.cluster.custom_domain_certificate_arn #=> String
+    #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PauseCluster AWS API Documentation
     #
@@ -9725,6 +9929,9 @@ module Aws::Redshift
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
+    #   resp.cluster.custom_domain_name #=> String
+    #   resp.cluster.custom_domain_certificate_arn #=> String
+    #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootCluster AWS API Documentation
     #
@@ -10029,6 +10236,9 @@ module Aws::Redshift
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
+    #   resp.cluster.custom_domain_name #=> String
+    #   resp.cluster.custom_domain_certificate_arn #=> String
+    #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeCluster AWS API Documentation
     #
@@ -10091,8 +10301,8 @@ module Aws::Redshift
     #
     # @option params [String] :snapshot_cluster_identifier
     #   The name of the cluster the source snapshot was created from. This
-    #   parameter is required if your IAM user or role has a policy containing
-    #   a snapshot resource element that specifies anything other than * for
+    #   parameter is required if your IAM user has a policy containing a
+    #   snapshot resource element that specifies anything other than * for
     #   the cluster name.
     #
     # @option params [Integer] :port
@@ -10482,6 +10692,9 @@ module Aws::Redshift
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
+    #   resp.cluster.custom_domain_name #=> String
+    #   resp.cluster.custom_domain_certificate_arn #=> String
+    #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshot AWS API Documentation
     #
@@ -10727,6 +10940,9 @@ module Aws::Redshift
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
+    #   resp.cluster.custom_domain_name #=> String
+    #   resp.cluster.custom_domain_certificate_arn #=> String
+    #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResumeCluster AWS API Documentation
     #
@@ -10895,8 +11111,8 @@ module Aws::Redshift
     #
     # @option params [String] :snapshot_cluster_identifier
     #   The identifier of the cluster the snapshot was created from. This
-    #   parameter is required if your IAM user or role has a policy containing
-    #   a snapshot resource element that specifies anything other than * for
+    #   parameter is required if your IAM user has a policy containing a
+    #   snapshot resource element that specifies anything other than * for
     #   the cluster name.
     #
     # @option params [required, String] :account_with_restore_access
@@ -11106,6 +11322,9 @@ module Aws::Redshift
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
     #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
+    #   resp.cluster.custom_domain_name #=> String
+    #   resp.cluster.custom_domain_certificate_arn #=> String
+    #   resp.cluster.custom_domain_certificate_expiry_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKey AWS API Documentation
     #
@@ -11181,7 +11400,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

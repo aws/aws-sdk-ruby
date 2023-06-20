@@ -56,6 +56,8 @@ module Aws::Redshift
   # * {ClusterSubnetGroupQuotaExceededFault}
   # * {ClusterSubnetQuotaExceededFault}
   # * {CopyToRegionDisabledFault}
+  # * {CustomCnameAssociationFault}
+  # * {CustomDomainAssociationNotFoundFault}
   # * {DependentServiceRequestThrottlingFault}
   # * {DependentServiceUnavailableFault}
   # * {EndpointAlreadyExistsFault}
@@ -445,6 +447,26 @@ module Aws::Redshift
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Redshift::Types::CopyToRegionDisabledFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class CustomCnameAssociationFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::CustomCnameAssociationFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class CustomDomainAssociationNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::CustomDomainAssociationNotFoundFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

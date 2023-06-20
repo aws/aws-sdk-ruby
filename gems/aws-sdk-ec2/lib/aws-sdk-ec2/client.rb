@@ -1010,9 +1010,14 @@ module Aws::EC2
     #   cannot specify **InstanceFamily** and **InstanceType** in the same
     #   request.
     #
-    # @option params [required, Integer] :quantity
+    # @option params [Integer] :quantity
     #   The number of Dedicated Hosts to allocate to your account with these
-    #   parameters.
+    #   parameters. If you are allocating the Dedicated Hosts on an Outpost,
+    #   and you specify **AssetIds**, you can omit this parameter. In this
+    #   case, Amazon EC2 allocates a Dedicated Host on each specified hardware
+    #   asset. If you specify both **AssetIds** and **Quantity**, then the
+    #   value that you specify for **Quantity** must be equal to the number of
+    #   asset IDs specified.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the Dedicated Host during creation.
@@ -1030,7 +1035,11 @@ module Aws::EC2
     #
     # @option params [String] :outpost_arn
     #   The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on
-    #   which to allocate the Dedicated Host.
+    #   which to allocate the Dedicated Host. If you specify **OutpostArn**,
+    #   you can optionally specify **AssetIds**.
+    #
+    #   If you are allocating the Dedicated Host in a Region, omit this
+    #   parameter.
     #
     # @option params [String] :host_maintenance
     #   Indicates whether to enable or disable host maintenance for the
@@ -1040,6 +1049,20 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-maintenance.html
+    #
+    # @option params [Array<String>] :asset_ids
+    #   The IDs of the Outpost hardware assets on which to allocate the
+    #   Dedicated Hosts. Targeting specific hardware assets on an Outpost can
+    #   help to minimize latency between your workloads. This parameter is
+    #   supported only if you specify **OutpostArn**. If you are allocating
+    #   the Dedicated Hosts in a Region, omit this parameter.
+    #
+    #   * If you specify this parameter, you can omit **Quantity**. In this
+    #     case, Amazon EC2 allocates a Dedicated Host on each specified
+    #     hardware asset.
+    #
+    #   * If you specify both **AssetIds** and **Quantity**, then the value
+    #     for **Quantity** must be equal to the number of asset IDs specified.
     #
     # @return [Types::AllocateHostsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1053,7 +1076,7 @@ module Aws::EC2
     #     client_token: "String",
     #     instance_type: "String",
     #     instance_family: "String",
-    #     quantity: 1, # required
+    #     quantity: 1,
     #     tag_specifications: [
     #       {
     #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint
@@ -1068,6 +1091,7 @@ module Aws::EC2
     #     host_recovery: "on", # accepts on, off
     #     outpost_arn: "String",
     #     host_maintenance: "on", # accepts on, off
+    #     asset_ids: ["AssetId"],
     #   })
     #
     # @example Response structure
@@ -6076,11 +6100,12 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Launches an EC2 Fleet.
+    # Creates an EC2 Fleet that contains the configuration information for
+    # On-Demand Instances and Spot Instances. Instances are launched
+    # immediately if there is available capacity.
     #
-    # You can create a single EC2 Fleet that includes multiple launch
-    # specifications that vary by instance type, AMI, Availability Zone, or
-    # subnet.
+    # A single EC2 Fleet can include multiple launch specifications that
+    # vary by instance type, AMI, Availability Zone, or subnet.
     #
     # For more information, see [EC2 Fleet][1] in the *Amazon EC2 User
     # Guide*.
@@ -14779,7 +14804,7 @@ module Aws::EC2
     #         {
     #           tunnel_inside_cidr: "String",
     #           tunnel_inside_ipv_6_cidr: "String",
-    #           pre_shared_key: "String",
+    #           pre_shared_key: "preSharedKey",
     #           phase_1_lifetime_seconds: 1,
     #           phase_2_lifetime_seconds: 1,
     #           rekey_margin_time_seconds: 1,
@@ -22517,6 +22542,7 @@ module Aws::EC2
     #   resp.hosts[0].member_of_service_linked_resource_group #=> Boolean
     #   resp.hosts[0].outpost_arn #=> String
     #   resp.hosts[0].host_maintenance #=> String, one of "on", "off"
+    #   resp.hosts[0].asset_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHosts AWS API Documentation
@@ -24302,6 +24328,9 @@ module Aws::EC2
     #
     #   * `processor-info.sustained-clock-speed-in-ghz` - The CPU clock speed,
     #     in GHz.
+    #
+    #   * `processor-info.supported-features` - The supported CPU features
+    #     (`amd-sev-snp`).
     #
     #   * `supported-boot-mode` - The boot mode (`legacy-bios` \| `uefi`).
     #
@@ -45523,10 +45552,10 @@ module Aws::EC2
     # @option params [String] :tenancy
     #   The tenancy for the instance.
     #
-    #   <note markdown="1"> For T3 instances, you can't change the tenancy from `dedicated` to
-    #   `host`, or from `host` to `dedicated`. Attempting to make one of these
-    #   unsupported tenancy changes results in the `InvalidTenancy` error
-    #   code.
+    #   <note markdown="1"> For T3 instances, you must launch the instance on a Dedicated Host to
+    #   use a tenancy of `host`. You can't change the tenancy from `host` to
+    #   `dedicated` or `default`. Attempting to make one of these unsupported
+    #   tenancy changes results in an `InvalidRequest` error code.
     #
     #    </note>
     #
@@ -45535,7 +45564,8 @@ module Aws::EC2
     #   if the placement group strategy is set to `partition`.
     #
     # @option params [String] :host_resource_group_arn
-    #   The ARN of the host resource group in which to place the instance.
+    #   The ARN of the host resource group in which to place the instance. The
+    #   instance must have a tenancy of `host` to specify this parameter.
     #
     # @option params [String] :group_id
     #   The Group Id of a placement group. You must specify the Placement
@@ -49231,7 +49261,7 @@ module Aws::EC2
     #     tunnel_options: { # required
     #       tunnel_inside_cidr: "String",
     #       tunnel_inside_ipv_6_cidr: "String",
-    #       pre_shared_key: "String",
+    #       pre_shared_key: "preSharedKey",
     #       phase_1_lifetime_seconds: 1,
     #       phase_2_lifetime_seconds: 1,
     #       rekey_margin_time_seconds: 1,
@@ -53462,11 +53492,18 @@ module Aws::EC2
     #   The instance type. For more information, see [Instance types][1] in
     #   the *Amazon EC2 User Guide*.
     #
+    #   When you change your EBS-backed instance type, instance restart or
+    #   replacement behavior depends on the instance type compatibility
+    #   between the old and new types. An instance that's backed by an
+    #   instance store volume is always replaced. For more information, see
+    #   [Change the instance type][2] in the *Amazon EC2 User Guide*.
+    #
     #   Default: `m1.small`
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html
     #
     # @option params [Integer] :ipv_6_address_count
     #   The number of IPv6 addresses to associate with the primary network
@@ -56654,7 +56691,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.385.0'
+      context[:gem_version] = '1.386.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

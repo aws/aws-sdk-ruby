@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2023-06-20)
+------------------
+
+* Feature - This release adds RecursiveInvocationException to the Invoke API and InvokeWithResponseStream API.
+
 1.99.0 (2023-06-15)
 ------------------
 

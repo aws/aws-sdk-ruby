@@ -2219,6 +2219,96 @@ module Aws::Appflow
       req.send_request(options)
     end
 
+    # Resets metadata about your connector entities that Amazon AppFlow
+    # stored in its cache. Use this action when you want Amazon AppFlow to
+    # return the latest information about the data that you have in a source
+    # application.
+    #
+    # Amazon AppFlow returns metadata about your entities when you use the
+    # ListConnectorEntities or DescribeConnectorEntities actions. Following
+    # these actions, Amazon AppFlow caches the metadata to reduce the number
+    # of API requests that it must send to the source application. Amazon
+    # AppFlow automatically resets the cache once every hour, but you can
+    # use this action when you want to get the latest metadata right away.
+    #
+    # @option params [String] :connector_profile_name
+    #   The name of the connector profile that you want to reset cached
+    #   metadata for.
+    #
+    #   You can omit this parameter if you're resetting the cache for any of
+    #   the following connectors: Amazon Connect, Amazon EventBridge, Amazon
+    #   Lookout for Metrics, Amazon S3, or Upsolver. If you're resetting the
+    #   cache for any other connector, you must include this parameter in your
+    #   request.
+    #
+    # @option params [String] :connector_type
+    #   The type of connector to reset cached metadata for.
+    #
+    #   You must include this parameter in your request if you're resetting
+    #   the cache for any of the following connectors: Amazon Connect, Amazon
+    #   EventBridge, Amazon Lookout for Metrics, Amazon S3, or Upsolver. If
+    #   you're resetting the cache for any other connector, you can omit this
+    #   parameter from your request.
+    #
+    # @option params [String] :connector_entity_name
+    #   Use this parameter if you want to reset cached metadata about the
+    #   details for an individual entity.
+    #
+    #   If you don't include this parameter in your request, Amazon AppFlow
+    #   only resets cached metadata about entity names, not entity details.
+    #
+    # @option params [String] :entities_path
+    #   Use this parameter only if you’re resetting the cached metadata about
+    #   a nested entity. Only some connectors support nested entities. A
+    #   nested entity is one that has another entity as a parent. To use this
+    #   parameter, specify the name of the parent entity.
+    #
+    #   To look up the parent-child relationship of entities, you can send a
+    #   ListConnectorEntities request that omits the entitiesPath parameter.
+    #   Amazon AppFlow will return a list of top-level entities. For each one,
+    #   it indicates whether the entity has nested entities. Then, in a
+    #   subsequent ListConnectorEntities request, you can specify a parent
+    #   entity name for the entitiesPath parameter. Amazon AppFlow will return
+    #   a list of the child entities for that parent.
+    #
+    # @option params [String] :api_version
+    #   The API version that you specified in the connector profile that
+    #   you’re resetting cached metadata for. You must use this parameter only
+    #   if the connector supports multiple API versions or if the connector
+    #   type is CustomConnector.
+    #
+    #   To look up how many versions a connector supports, use the
+    #   DescribeConnectors action. In the response, find the value that Amazon
+    #   AppFlow returns for the connectorVersion parameter.
+    #
+    #   To look up the connector type, use the DescribeConnectorProfiles
+    #   action. In the response, find the value that Amazon AppFlow returns
+    #   for the connectorType parameter.
+    #
+    #   To look up the API version that you specified in a connector profile,
+    #   use the DescribeConnectorProfiles action.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reset_connector_metadata_cache({
+    #     connector_profile_name: "ConnectorProfileName",
+    #     connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector, Pardot
+    #     connector_entity_name: "EntityName",
+    #     entities_path: "EntitiesPath",
+    #     api_version: "ApiVersion",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ResetConnectorMetadataCache AWS API Documentation
+    #
+    # @overload reset_connector_metadata_cache(params = {})
+    # @param [Hash] params ({})
+    def reset_connector_metadata_cache(params = {}, options = {})
+      req = build_request(:reset_connector_metadata_cache, params)
+      req.send_request(options)
+    end
+
     # Activates an existing flow. For on-demand flows, this operation runs
     # the flow immediately. For schedule and event-triggered flows, this
     # operation activates the flow.
@@ -3124,7 +3214,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

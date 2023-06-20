@@ -5223,6 +5223,27 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # Lambda has detected your function being invoked in a recursive loop
+    # with other Amazon Web Services resources and stopped your function's
+    # invocation.
+    #
+    # @!attribute [rw] type
+    #   The exception type.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The exception message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RecursiveInvocationException AWS API Documentation
+    #
+    class RecursiveInvocationException < Struct.new(
+      :type,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] layer_name
     #   The name or Amazon Resource Name (ARN) of the layer.
     #   @return [String]
