@@ -4099,6 +4099,16 @@ module Aws::SageMaker
     #   Specifies additional configuration for multi-model endpoints.
     #   @return [Types::MultiModelConfig]
     #
+    # @!attribute [rw] model_data_source
+    #   Specifies the location of ML model data to deploy.
+    #
+    #   <note markdown="1"> Currently you cannot use `ModelDataSource` in conjuction with
+    #   SageMaker batch transform, SageMaker serverless endpoints, SageMaker
+    #   multi-model endpoints, and SageMaker Marketplace.
+    #
+    #    </note>
+    #   @return [Types::ModelDataSource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ContainerDefinition AWS API Documentation
     #
     class ContainerDefinition < Struct.new(
@@ -4110,7 +4120,8 @@ module Aws::SageMaker
       :environment,
       :model_package_name,
       :inference_specification_name,
-      :multi_model_config)
+      :multi_model_config,
+      :model_data_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4702,9 +4713,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] auto_ml_job_input_data_config
     #   An array of channel objects describing the input data and their
-    #   location. Each channel is a named input source. Similar to
-    #   [InputDataConfig][1] supported by `CreateAutoMLJob`. The supported
-    #   formats depend on the problem type:
+    #   location. Each channel is a named input source. Similar to the
+    #   [InputDataConfig][1] attribute in the `CreateAutoMLJob` input
+    #   parameters. The supported formats depend on the problem type:
     #
     #   * For Tabular problem types: `S3Prefix`, `ManifestFile`.
     #
@@ -4726,13 +4737,6 @@ module Aws::SageMaker
     # @!attribute [rw] auto_ml_problem_type_config
     #   Defines the configuration settings of one of the supported problem
     #   types.
-    #
-    #   <note markdown="1"> For tabular problem types, you must either specify the type of
-    #   supervised learning problem in `AutoMLProblemTypeConfig`
-    #   (`TabularJobConfig.ProblemType`) and provide the
-    #   `AutoMLJobObjective`, or none at all.
-    #
-    #    </note>
     #   @return [Types::AutoMLProblemTypeConfig]
     #
     # @!attribute [rw] role_arn
@@ -4761,10 +4765,10 @@ module Aws::SageMaker
     #   problem type. For the list of default values per problem type, see
     #   [AutoMLJobObjective][1].
     #
-    #   <note markdown="1"> For tabular problem types, you must either provide the
+    #   <note markdown="1"> For tabular problem types, you must either provide both the
     #   `AutoMLJobObjective` and indicate the type of supervised learning
     #   problem in `AutoMLProblemTypeConfig`
-    #   (`TabularJobConfig.ProblemType`), or none.
+    #   (`TabularJobConfig.ProblemType`), or none at all.
     #
     #    </note>
     #
@@ -28483,6 +28487,21 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Specifies the location of ML model data to deploy. If specified, you
+    # must specify one and only one of the available data sources.
+    #
+    # @!attribute [rw] s3_data_source
+    #   Specifies the S3 location of ML model data to deploy.
+    #   @return [Types::S3ModelDataSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelDataSource AWS API Documentation
+    #
+    class ModelDataSource < Struct.new(
+      :s3_data_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies how to generate the endpoint name for an automatic one-click
     # Autopilot model deployment.
     #
@@ -31203,11 +31222,18 @@ module Aws::SageMaker
     #   artifacts. For example, `s3://bucket-name/key-name-prefix`.
     #   @return [String]
     #
+    # @!attribute [rw] compression_type
+    #   The model output compression type. Select `None` to output an
+    #   uncompressed model, recommended for large model outputs. Defaults to
+    #   gzip.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OutputDataConfig AWS API Documentation
     #
     class OutputDataConfig < Struct.new(
       :kms_key_id,
-      :s3_output_path)
+      :s3_output_path,
+      :compression_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35008,6 +35034,101 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Specifies the S3 location of ML model data to deploy.
+    #
+    # @!attribute [rw] s3_uri
+    #   Specifies the S3 path of ML model data to deploy.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_data_type
+    #   Specifies the type of ML model data to deploy.
+    #
+    #   If you choose `S3Prefix`, `S3Uri` identifies a key name prefix.
+    #   SageMaker uses all objects that match the specified key name prefix
+    #   as part of the ML model data to deploy. A valid key name prefix
+    #   identified by `S3Uri` always ends with a forward slash (/).
+    #
+    #   If you choose S3Object, S3Uri identifies an object that is the ML
+    #   model data to deploy.
+    #   @return [String]
+    #
+    # @!attribute [rw] compression_type
+    #   Specifies how the ML model data is prepared.
+    #
+    #   If you choose `Gzip` and choose `S3Object` as the value of
+    #   `S3DataType`, `S3Uri` identifies an object that is a gzip-compressed
+    #   TAR archive. SageMaker will attempt to decompress and untar the
+    #   object during model deployment.
+    #
+    #   If you choose `None` and chooose `S3Object` as the value of
+    #   `S3DataType`, `S3Uri` identifies an object that represents an
+    #   uncompressed ML model to deploy.
+    #
+    #   If you choose None and choose `S3Prefix` as the value of
+    #   `S3DataType`, `S3Uri` identifies a key name prefix, under which all
+    #   objects represents the uncompressed ML model to deploy.
+    #
+    #   If you choose None, then SageMaker will follow rules below when
+    #   creating model data files under /opt/ml/model directory for use by
+    #   your inference code:
+    #
+    #   * If you choose `S3Object` as the value of `S3DataType`, then
+    #     SageMaker will split the key of the S3 object referenced by
+    #     `S3Uri` by slash (/), and use the last part as the filename of the
+    #     file holding the content of the S3 object.
+    #
+    #   * If you choose `S3Prefix` as the value of `S3DataType`, then for
+    #     each S3 object under the key name pefix referenced by `S3Uri`,
+    #     SageMaker will trim its key by the prefix, and use the remainder
+    #     as the path (relative to `/opt/ml/model`) of the file holding the
+    #     content of the S3 object. SageMaker will split the remainder by
+    #     slash (/), using intermediate parts as directory names and the
+    #     last part as filename of the file holding the content of the S3
+    #     object.
+    #
+    #   * Do not use any of the following as file names or directory names:
+    #
+    #     * An empty or blank string
+    #
+    #     * A string which contains null bytes
+    #
+    #     * A string longer than 255 bytes
+    #
+    #     * A single dot (`.`)
+    #
+    #     * A double dot (`..`)
+    #
+    #   * Ambiguous file names will result in model deployment failure. For
+    #     example, if your uncompressed ML model consists of two S3 objects
+    #     `s3://mybucket/model/weights` and
+    #     `s3://mybucket/model/weights/part1` and you specify
+    #     `s3://mybucket/model/` as the value of `S3Uri` and `S3Prefix` as
+    #     the value of S3DataType, then it will result in name clash between
+    #     `/opt/ml/model/weights` (a regular file) and
+    #     `/opt/ml/model/weights/` (a directory).
+    #
+    #   * Do not organize the model artifacts in [S3 console using
+    #     folders][1]. When you create a folder in S3 console, S3 creates a
+    #     0-byte object with a key set to the folder name you provide. They
+    #     key of the 0-byte object ends with a slash (/) which violates
+    #     SageMaker restrictions on model artifact file names, leading to
+    #     model deployment failure.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/S3ModelDataSource AWS API Documentation
+    #
+    class S3ModelDataSource < Struct.new(
+      :s3_uri,
+      :s3_data_type,
+      :compression_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Amazon Simple Storage (Amazon S3) location and and security
     # configuration for `OfflineStore`.
     #
@@ -36528,9 +36649,16 @@ module Aws::SageMaker
     #   candidates of the AutoML job V2. For more information, see [ Amazon
     #   SageMaker Autopilot problem types][1].
     #
+    #   <note markdown="1"> You must either specify the type of supervised learning problem in
+    #   `ProblemType` and provide the [AutoMLJobObjective][2] metric, or
+    #   none at all.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html#sagemaker-CreateAutoMLJobV2-request-AutoMLJobObjective
     #   @return [String]
     #
     # @!attribute [rw] target_attribute_name

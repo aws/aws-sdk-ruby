@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.189.0 (2023-06-21)
+------------------
+
+* Feature - This release provides support in SageMaker for output files in training jobs to be uploaded without compression and enable customer to deploy uncompressed model from S3 to real-time inference Endpoints. In addition, ml.trn1n.32xlarge is added to supported instance type list in training job.
+
 1.188.0 (2023-06-19)
 ------------------
 

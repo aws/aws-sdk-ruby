@@ -789,6 +789,26 @@ module Aws::Transfer
     #   file is still being uploaded.
     #   @return [Types::WorkflowDetails]
     #
+    # @!attribute [rw] structured_log_destinations
+    #   Specifies the log groups to which your server logs are sent.
+    #
+    #   To specify a log group, you must provide the ARN for an existing log
+    #   group. In this case, the format of the log group is as follows:
+    #
+    #   `arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #
+    #   For example,
+    #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
+    #
+    #   If you have previously specified a log group for a server, you can
+    #   clear it, and in effect turn off structured logging, by providing an
+    #   empty value for this parameter in an `update-server` call. For
+    #   example:
+    #
+    #   `update-server --server-id s-1234567890abcdef0
+    #   --structured-log-destinations`
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateServerRequest AWS API Documentation
     #
     class CreateServerRequest < Struct.new(
@@ -806,7 +826,8 @@ module Aws::Transfer
       :protocol_details,
       :security_policy_name,
       :tags,
-      :workflow_details)
+      :workflow_details,
+      :structured_log_destinations)
       SENSITIVE = [:host_key]
       include Aws::Structure
     end
@@ -2440,6 +2461,26 @@ module Aws::Transfer
     #   file is still being uploaded.
     #   @return [Types::WorkflowDetails]
     #
+    # @!attribute [rw] structured_log_destinations
+    #   Specifies the log groups to which your server logs are sent.
+    #
+    #   To specify a log group, you must provide the ARN for an existing log
+    #   group. In this case, the format of the log group is as follows:
+    #
+    #   `arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #
+    #   For example,
+    #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
+    #
+    #   If you have previously specified a log group for a server, you can
+    #   clear it, and in effect turn off structured logging, by providing an
+    #   empty value for this parameter in an `update-server` call. For
+    #   example:
+    #
+    #   `update-server --server-id s-1234567890abcdef0
+    #   --structured-log-destinations`
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedServer AWS API Documentation
     #
     class DescribedServer < Struct.new(
@@ -2461,7 +2502,8 @@ module Aws::Transfer
       :state,
       :tags,
       :user_count,
-      :workflow_details)
+      :workflow_details,
+      :structured_log_destinations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5520,6 +5562,26 @@ module Aws::Transfer
     #   --workflow-details '\{"OnUpload":[]\}'`
     #   @return [Types::WorkflowDetails]
     #
+    # @!attribute [rw] structured_log_destinations
+    #   Specifies the log groups to which your server logs are sent.
+    #
+    #   To specify a log group, you must provide the ARN for an existing log
+    #   group. In this case, the format of the log group is as follows:
+    #
+    #   `arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #
+    #   For example,
+    #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
+    #
+    #   If you have previously specified a log group for a server, you can
+    #   clear it, and in effect turn off structured logging, by providing an
+    #   empty value for this parameter in an `update-server` call. For
+    #   example:
+    #
+    #   `update-server --server-id s-1234567890abcdef0
+    #   --structured-log-destinations`
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateServerRequest AWS API Documentation
     #
     class UpdateServerRequest < Struct.new(
@@ -5535,7 +5597,8 @@ module Aws::Transfer
       :protocols,
       :security_policy_name,
       :server_id,
-      :workflow_details)
+      :workflow_details,
+      :structured_log_destinations)
       SENSITIVE = [:host_key]
       include Aws::Structure
     end

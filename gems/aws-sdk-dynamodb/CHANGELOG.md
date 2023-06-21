@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2023-06-21)
+------------------
+
+* Feature - Documentation updates for DynamoDB
+
 1.87.0 (2023-06-15)
 ------------------
 

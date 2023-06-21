@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2023-06-21)
+------------------
+
+* Feature - This release adds a new parameter StructuredLogDestinations to CreateServer, UpdateServer APIs.
+
 1.70.0 (2023-06-15)
 ------------------
 

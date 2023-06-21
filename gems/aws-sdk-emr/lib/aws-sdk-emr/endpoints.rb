@@ -488,6 +488,20 @@ module Aws::EMR
       end
     end
 
+    class ListSupportedInstanceTypes
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::EMR::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ModifyCluster
       def self.build(context)
         unless context.config.regional_endpoint

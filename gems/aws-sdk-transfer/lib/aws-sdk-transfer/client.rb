@@ -1026,6 +1026,25 @@ module Aws::Transfer
     #   upload occurs when the server session disconnects while the file is
     #   still being uploaded.
     #
+    # @option params [Array<String>] :structured_log_destinations
+    #   Specifies the log groups to which your server logs are sent.
+    #
+    #   To specify a log group, you must provide the ARN for an existing log
+    #   group. In this case, the format of the log group is as follows:
+    #
+    #   `arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #
+    #   For example,
+    #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
+    #
+    #   If you have previously specified a log group for a server, you can
+    #   clear it, and in effect turn off structured logging, by providing an
+    #   empty value for this parameter in an `update-server` call. For
+    #   example:
+    #
+    #   `update-server --server-id s-1234567890abcdef0
+    #   --structured-log-destinations`
+    #
     # @return [Types::CreateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateServerResponse#server_id #server_id} => String
@@ -1083,6 +1102,7 @@ module Aws::Transfer
     #         },
     #       ],
     #     },
+    #     structured_log_destinations: ["Arn"],
     #   })
     #
     # @example Response structure
@@ -2198,6 +2218,8 @@ module Aws::Transfer
     #   resp.server.workflow_details.on_partial_upload #=> Array
     #   resp.server.workflow_details.on_partial_upload[0].workflow_id #=> String
     #   resp.server.workflow_details.on_partial_upload[0].execution_role #=> String
+    #   resp.server.structured_log_destinations #=> Array
+    #   resp.server.structured_log_destinations[0] #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4114,6 +4136,25 @@ module Aws::Transfer
     #   `aws transfer update-server --server-id s-01234567890abcdef
     #   --workflow-details '\{"OnUpload":[]\}'`
     #
+    # @option params [Array<String>] :structured_log_destinations
+    #   Specifies the log groups to which your server logs are sent.
+    #
+    #   To specify a log group, you must provide the ARN for an existing log
+    #   group. In this case, the format of the log group is as follows:
+    #
+    #   `arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #
+    #   For example,
+    #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
+    #
+    #   If you have previously specified a log group for a server, you can
+    #   clear it, and in effect turn off structured logging, by providing an
+    #   empty value for this parameter in an `update-server` call. For
+    #   example:
+    #
+    #   `update-server --server-id s-1234567890abcdef0
+    #   --structured-log-destinations`
+    #
     # @return [Types::UpdateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateServerResponse#server_id #server_id} => String
@@ -4164,6 +4205,7 @@ module Aws::Transfer
     #         },
     #       ],
     #     },
+    #     structured_log_destinations: ["Arn"],
     #   })
     #
     # @example Response structure
@@ -4337,7 +4379,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

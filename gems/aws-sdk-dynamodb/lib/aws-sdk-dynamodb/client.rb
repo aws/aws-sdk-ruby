@@ -2357,10 +2357,8 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
-    # Returns the regional endpoint information. This action must be
-    # included in your VPC endpoint policies, or access to the
-    # DescribeEndpoints API will be denied. For more information on policy
-    # permissions, please see [Internetwork traffic privacy][1].
+    # Returns the regional endpoint information. For more information on
+    # policy permissions, please see [Internetwork traffic privacy][1].
     #
     #
     #
@@ -7753,7 +7751,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

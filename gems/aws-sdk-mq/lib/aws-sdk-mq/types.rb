@@ -10,25 +10,15 @@
 module Aws::MQ
   module Types
 
-    # The action required to resolve a broker issue when the broker is in a
-    # CRITICAL\_ACTION\_REQUIRED state.
+    # Action required for a broker.
     #
     # @!attribute [rw] action_required_code
-    #   The code you can use to resolve your broker issue when the broker is
-    #   in a CRITICAL\_ACTION\_REQUIRED state. You can find instructions by
-    #   choosing the link for your code from the list of action required
-    #   codes in [Amazon MQ action required codes][1]. Each code references
-    #   a topic with detailed information, instructions, and recommendations
-    #   for how to resolve the issue and prevent future occurrences.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com//latest/developer-guide/troubleshooting-action-required-codes.html
+    #   The code you can use to find instructions on the action required to
+    #   resolve your broker issue.
     #   @return [String]
     #
     # @!attribute [rw] action_required_info
-    #   Information about the action required to resolve your broker issue
-    #   when the broker is in a CRITICAL\_ACTION\_REQUIRED state.
+    #   Information about the action required to resolve your broker issue.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ActionRequired AWS API Documentation
@@ -219,10 +209,10 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] broker_name
-    #   The broker's name. This value is unique in your AWS account, 1-50
-    #   characters long, and containing only letters, numbers, dashes, and
-    #   underscores, and must not contain white spaces, brackets, wildcard
-    #   characters, or special characters.
+    #   The broker's name. This value is unique in your Amazon Web Services
+    #   account, 1-50 characters long, and containing only letters, numbers,
+    #   dashes, and underscores, and must not contain white spaces,
+    #   brackets, wildcard characters, or special characters.
     #   @return [String]
     #
     # @!attribute [rw] broker_state
@@ -331,8 +321,6 @@ module Aws::MQ
 
     # A list of information about the configuration.
     #
-    # Does not apply to RabbitMQ brokers.
-    #
     # @!attribute [rw] id
     #   Required. The unique ID that Amazon MQ generates for the
     #   configuration.
@@ -432,10 +420,16 @@ module Aws::MQ
     #   @return [Boolean]
     #
     # @!attribute [rw] broker_name
-    #   Required. The broker's name. This value must be unique in your AWS
-    #   account, 1-50 characters long, must contain only letters, numbers,
-    #   dashes, and underscores, and must not contain white spaces,
-    #   brackets, wildcard characters, or special characters.
+    #   Required. The broker's name. This value must be unique in your
+    #   Amazon Web Services account, 1-50 characters long, must contain only
+    #   letters, numbers, dashes, and underscores, and must not contain
+    #   white spaces, brackets, wildcard characters, or special characters.
+    #
+    #   Do not add personally identifiable information (PII) or other
+    #   confidential or sensitive information in broker names. Broker names
+    #   are accessible to other Amazon Web Services services, including
+    #   CloudWatch Logs. Broker names are not intended to be used for
+    #   private or sensitive data.
     #   @return [String]
     #
     # @!attribute [rw] configuration
@@ -444,10 +438,13 @@ module Aws::MQ
     #
     # @!attribute [rw] creator_request_id
     #   The unique ID that the requester receives for the created broker.
-    #   Amazon MQ passes your ID with the API action. Note: We recommend
-    #   using a Universally Unique Identifier (UUID) for the
+    #   Amazon MQ passes your ID with the API action.
+    #
+    #   <note markdown="1">We recommend using a Universally Unique Identifier (UUID) for the
     #   creatorRequestId. You may omit the creatorRequestId if your
     #   application doesn't require idempotency.
+    #
+    #   </note>
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -457,9 +454,19 @@ module Aws::MQ
     #   Required. The broker's deployment mode.
     #   @return [String]
     #
+    # @!attribute [rw] data_replication_mode
+    #   Defines whether this broker is a part of a data replication pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_replication_primary_broker_arn
+    #   The Amazon Resource Name (ARN) of the primary broker that is used to
+    #   replicate data from in a data replication pair, and is applied to
+    #   the replica broker. Must be set when dataReplicationMode is set to
+    #   CRDR.
+    #   @return [String]
+    #
     # @!attribute [rw] encryption_options
-    #   Encryption options for the broker. Does not apply to RabbitMQ
-    #   brokers.
+    #   Encryption options for the broker.
     #   @return [Types::EncryptionOptions]
     #
     # @!attribute [rw] engine_type
@@ -524,8 +531,9 @@ module Aws::MQ
     #
     #   If you specify subnets in a [shared VPC][1] for a RabbitMQ broker,
     #   the associated VPC to which the specified subnets belong must be
-    #   owned by your AWS account. Amazon MQ will not be able to create VPC
-    #   endpoints in VPCs that are not owned by your AWS account.
+    #   owned by your Amazon Web Services account. Amazon MQ will not be
+    #   able to create VPC endpoints in VPCs that are not owned by your
+    #   Amazon Web Services account.
     #
     #
     #
@@ -537,16 +545,10 @@ module Aws::MQ
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] users
-    #   Required. The list of broker users (persons or applications) who can
-    #   access queues and topics. This value can contain only alphanumeric
-    #   characters, dashes, periods, underscores, and tildes (- . \_ ~).
-    #   This value must be 2-100 characters long.
-    #
-    #   <title>Amazon MQ for RabbitMQ</title>
-    #
-    #    When you create an Amazon MQ for RabbitMQ broker, one and only one
-    #   administrative user is accepted and created when a broker is first
-    #   provisioned. All subsequent broker users are created by making
+    #   The list of broker users (persons or applications) who can access
+    #   queues and topics. For Amazon MQ for RabbitMQ brokers, one and only
+    #   one administrative user is accepted and created when a broker is
+    #   first provisioned. All subsequent broker users are created by making
     #   RabbitMQ API calls directly to brokers or via the RabbitMQ web
     #   console.
     #   @return [Array<Types::User>]
@@ -560,6 +562,8 @@ module Aws::MQ
       :configuration,
       :creator_request_id,
       :deployment_mode,
+      :data_replication_mode,
+      :data_replication_primary_broker_arn,
       :encryption_options,
       :engine_type,
       :engine_version,
@@ -609,8 +613,6 @@ module Aws::MQ
     #
     # @!attribute [rw] configuration
     #   A list of information about the configuration.
-    #
-    #   Does not apply to RabbitMQ brokers.
     #   @return [Types::ConfigurationId]
     #
     # @!attribute [rw] creator_request_id
@@ -623,8 +625,6 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] encryption_options
-    #   Does not apply to RabbitMQ brokers.
-    #
     #   Encryption options for the broker.
     #   @return [Types::EncryptionOptions]
     #
@@ -676,6 +676,13 @@ module Aws::MQ
     # @!attribute [rw] users
     #   @return [Array<Types::User>]
     #
+    # @!attribute [rw] data_replication_mode
+    #   Specifies whether a broker is a part of a data replication pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_replication_primary_broker_arn
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateBrokerRequest AWS API Documentation
     #
     class CreateBrokerRequest < Struct.new(
@@ -697,7 +704,9 @@ module Aws::MQ
       :storage_type,
       :subnet_ids,
       :tags,
-      :users)
+      :users,
+      :data_replication_mode,
+      :data_replication_primary_broker_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -903,12 +912,17 @@ module Aws::MQ
     #   not contain commas, colons, or equal signs (,:=).
     #   @return [String]
     #
+    # @!attribute [rw] replication_user
+    #   Defines if this user is intended for CRDR replication purposes.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateUserInput AWS API Documentation
     #
     class CreateUserInput < Struct.new(
       :console_access,
       :groups,
-      :password)
+      :password,
+      :replication_user)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -928,6 +942,9 @@ module Aws::MQ
     # @!attribute [rw] username
     #   @return [String]
     #
+    # @!attribute [rw] replication_user
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateUserRequest AWS API Documentation
     #
     class CreateUserRequest < Struct.new(
@@ -935,7 +952,8 @@ module Aws::MQ
       :console_access,
       :groups,
       :password,
-      :username)
+      :username,
+      :replication_user)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -943,6 +961,49 @@ module Aws::MQ
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateUserResponse AWS API Documentation
     #
     class CreateUserResponse < Aws::EmptyStructure; end
+
+    # Specifies a broker in a data replication pair.
+    #
+    # @!attribute [rw] broker_id
+    #   Required. The unique broker id generated by Amazon MQ.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   Required. The region of the broker.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DataReplicationCounterpart AWS API Documentation
+    #
+    class DataReplicationCounterpart < Struct.new(
+      :broker_id,
+      :region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The replication details of the data replication-enabled broker. Only
+    # returned if dataReplicationMode or pendingDataReplicationMode is set
+    # to CRDR.
+    #
+    # @!attribute [rw] data_replication_counterpart
+    #   Describes the replica/primary broker. Only returned if this broker
+    #   is currently set as a primary or replica in the broker's
+    #   dataReplicationRole property.
+    #   @return [Types::DataReplicationCounterpart]
+    #
+    # @!attribute [rw] data_replication_role
+    #   Defines the role of this broker in a data replication pair. When a
+    #   replica broker is promoted to primary, this role is interchanged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DataReplicationMetadataOutput AWS API Documentation
+    #
+    class DataReplicationMetadataOutput < Struct.new(
+      :data_replication_counterpart,
+      :data_replication_role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Returns information about the deleted broker.
     #
@@ -1101,7 +1162,7 @@ module Aws::MQ
     # Returns information about the specified broker.
     #
     # @!attribute [rw] actions_required
-    #   A list of actions required for a broker.
+    #   Actions required for a broker.
     #   @return [Array<Types::ActionRequired>]
     #
     # @!attribute [rw] authentication_strategy
@@ -1129,10 +1190,10 @@ module Aws::MQ
     #   @return [Array<Types::BrokerInstance>]
     #
     # @!attribute [rw] broker_name
-    #   The broker's name. This value must be unique in your AWS account,
-    #   1-50 characters long, must contain only letters, numbers, dashes,
-    #   and underscores, and must not contain white spaces, brackets,
-    #   wildcard characters, or special characters.
+    #   The broker's name. This value must be unique in your Amazon Web
+    #   Services account account, 1-50 characters long, must contain only
+    #   letters, numbers, dashes, and underscores, and must not contain
+    #   white spaces, brackets, wildcard characters, or special characters.
     #   @return [String]
     #
     # @!attribute [rw] broker_state
@@ -1151,9 +1212,17 @@ module Aws::MQ
     #   The broker's deployment mode.
     #   @return [String]
     #
+    # @!attribute [rw] data_replication_metadata
+    #   The replication details of the data replication-enabled broker. Only
+    #   returned if dataReplicationMode is set to CRDR.
+    #   @return [Types::DataReplicationMetadataOutput]
+    #
+    # @!attribute [rw] data_replication_mode
+    #   Describes whether this broker is a part of a data replication pair.
+    #   @return [String]
+    #
     # @!attribute [rw] encryption_options
-    #   Encryption options for the broker. Does not apply to RabbitMQ
-    #   brokers.
+    #   Encryption options for the broker.
     #   @return [Types::EncryptionOptions]
     #
     # @!attribute [rw] engine_type
@@ -1191,6 +1260,16 @@ module Aws::MQ
     # @!attribute [rw] pending_authentication_strategy
     #   The authentication strategy that will be applied when the broker is
     #   rebooted. The default is SIMPLE.
+    #   @return [String]
+    #
+    # @!attribute [rw] pending_data_replication_metadata
+    #   The pending replication details of the data replication-enabled
+    #   broker. Only returned if pendingDataReplicationMode is set to CRDR.
+    #   @return [Types::DataReplicationMetadataOutput]
+    #
+    # @!attribute [rw] pending_data_replication_mode
+    #   Describes whether this broker will be a part of a data replication
+    #   pair after reboot.
     #   @return [String]
     #
     # @!attribute [rw] pending_engine_version
@@ -1262,6 +1341,8 @@ module Aws::MQ
       :configurations,
       :created,
       :deployment_mode,
+      :data_replication_metadata,
+      :data_replication_mode,
       :encryption_options,
       :engine_type,
       :engine_version,
@@ -1270,6 +1351,8 @@ module Aws::MQ
       :logs,
       :maintenance_window_start_time,
       :pending_authentication_strategy,
+      :pending_data_replication_metadata,
+      :pending_data_replication_mode,
       :pending_engine_version,
       :pending_host_instance_type,
       :pending_ldap_server_metadata,
@@ -1334,8 +1417,6 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] encryption_options
-    #   Does not apply to RabbitMQ brokers.
-    #
     #   Encryption options for the broker.
     #   @return [Types::EncryptionOptions]
     #
@@ -1404,6 +1485,26 @@ module Aws::MQ
     # @!attribute [rw] users
     #   @return [Array<Types::UserSummary>]
     #
+    # @!attribute [rw] data_replication_metadata
+    #   The replication details of the data replication-enabled broker. Only
+    #   returned if dataReplicationMode or pendingDataReplicationMode is set
+    #   to CRDR.
+    #   @return [Types::DataReplicationMetadataOutput]
+    #
+    # @!attribute [rw] data_replication_mode
+    #   Specifies whether a broker is a part of a data replication pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] pending_data_replication_metadata
+    #   The replication details of the data replication-enabled broker. Only
+    #   returned if dataReplicationMode or pendingDataReplicationMode is set
+    #   to CRDR.
+    #   @return [Types::DataReplicationMetadataOutput]
+    #
+    # @!attribute [rw] pending_data_replication_mode
+    #   Specifies whether a broker is a part of a data replication pair.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerResponse AWS API Documentation
     #
     class DescribeBrokerResponse < Struct.new(
@@ -1435,7 +1536,11 @@ module Aws::MQ
       :storage_type,
       :subnet_ids,
       :tags,
-      :users)
+      :users,
+      :data_replication_metadata,
+      :data_replication_mode,
+      :pending_data_replication_metadata,
+      :pending_data_replication_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1515,7 +1620,8 @@ module Aws::MQ
     #   @return [Time]
     #
     # @!attribute [rw] data
-    #   Required. The base64-encoded XML configuration.
+    #   Amazon MQ for ActiveMQ: the base64-encoded XML configuration. Amazon
+    #   MQ for RabbitMQ: base64-encoded Cuttlefish.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1593,6 +1699,10 @@ module Aws::MQ
     #   The status of the changes pending for the ActiveMQ user.
     #   @return [Types::UserPendingChanges]
     #
+    # @!attribute [rw] replication_user
+    #   Describes whether the user is intended for data replication
+    #   @return [Boolean]
+    #
     # @!attribute [rw] username
     #   Required. The username of the ActiveMQ user. This value can contain
     #   only alphanumeric characters, dashes, periods, underscores, and
@@ -1606,6 +1716,7 @@ module Aws::MQ
       :console_access,
       :groups,
       :pending,
+      :replication_user,
       :username)
       SENSITIVE = []
       include Aws::Structure
@@ -1643,6 +1754,9 @@ module Aws::MQ
     # @!attribute [rw] username
     #   @return [String]
     #
+    # @!attribute [rw] replication_user
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeUserResponse AWS API Documentation
     #
     class DescribeUserResponse < Struct.new(
@@ -1650,25 +1764,24 @@ module Aws::MQ
       :console_access,
       :groups,
       :pending,
-      :username)
+      :username,
+      :replication_user)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Does not apply to RabbitMQ brokers.
-    #
     # Encryption options for the broker.
     #
     # @!attribute [rw] kms_key_id
-    #   The customer master key (CMK) to use for the AWS Key Management
-    #   Service (KMS). This key is used to encrypt your data at rest. If not
-    #   provided, Amazon MQ will use a default CMK to encrypt your data.
+    #   The customer master key (CMK) to use for the A KMS (KMS). This key
+    #   is used to encrypt your data at rest. If not provided, Amazon MQ
+    #   will use a default CMK to encrypt your data.
     #   @return [String]
     #
     # @!attribute [rw] use_aws_owned_key
-    #   Enables the use of an AWS owned CMK using AWS Key Management Service
-    #   (KMS). Set to true by default, if no value is provided, for example,
-    #   for RabbitMQ brokers.
+    #   Enables the use of an Amazon Web Services owned CMK using KMS (KMS).
+    #   Set to true by default, if no value is provided, for example, for
+    #   RabbitMQ brokers.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/EncryptionOptions AWS API Documentation
@@ -1753,8 +1866,8 @@ module Aws::MQ
     # Does not apply to RabbitMQ brokers.
     #
     # @!attribute [rw] hosts
-    #   Specifies the location of the LDAP server such as AWS Directory
-    #   Service for Microsoft Active Directory . Optional failover server.
+    #   Specifies the location of the LDAP server such as Directory Service
+    #   for Microsoft Active Directory. Optional failover server.
     #   @return [Array<String>]
     #
     # @!attribute [rw] role_base
@@ -1848,8 +1961,8 @@ module Aws::MQ
     # authorize connections to the broker.
     #
     # @!attribute [rw] hosts
-    #   Specifies the location of the LDAP server such as AWS Directory
-    #   Service for Microsoft Active Directory . Optional failover server.
+    #   Specifies the location of the LDAP server such as Directory Service
+    #   for Microsoft Active Directory. Optional failover server.
     #   @return [Array<String>]
     #
     # @!attribute [rw] role_base
@@ -1932,6 +2045,8 @@ module Aws::MQ
       include Aws::Structure
     end
 
+    # A list of information about all brokers.
+    #
     # @!attribute [rw] broker_summaries
     #   A list of information about all brokers.
     #   @return [Array<Types::BrokerSummary>]
@@ -2310,6 +2425,62 @@ module Aws::MQ
       include Aws::Structure
     end
 
+    # Creates a Promote request with the properties specified.
+    #
+    # @!attribute [rw] mode
+    #   The Promote mode requested. Note: Valid values for the parameter are
+    #   SWITCHOVER, FAILOVER.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/PromoteInput AWS API Documentation
+    #
+    class PromoteInput < Struct.new(
+      :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about the updated broker.
+    #
+    # @!attribute [rw] broker_id
+    #   The unique ID that Amazon MQ generates for the broker.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/PromoteOutput AWS API Documentation
+    #
+    class PromoteOutput < Struct.new(
+      :broker_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] broker_id
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The Promote mode requested.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/PromoteRequest AWS API Documentation
+    #
+    class PromoteRequest < Struct.new(
+      :broker_id,
+      :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] broker_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/PromoteResponse AWS API Documentation
+    #
+    class PromoteResponse < Struct.new(
+      :broker_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] broker_id
     #   @return [String]
     #
@@ -2325,19 +2496,19 @@ module Aws::MQ
     #
     class RebootBrokerResponse < Aws::EmptyStructure; end
 
-    # Returns information about the XML element or attribute that was
-    # sanitized in the configuration.
+    # Returns information about the configuration element or attribute that
+    # was sanitized in the configuration.
     #
     # @!attribute [rw] attribute_name
-    #   The name of the XML attribute that has been sanitized.
+    #   The name of the configuration attribute that has been sanitized.
     #   @return [String]
     #
     # @!attribute [rw] element_name
-    #   The name of the XML element that has been sanitized.
+    #   The name of the configuration element that has been sanitized.
     #   @return [String]
     #
     # @!attribute [rw] reason
-    #   Required. The reason for which the XML elements or attributes were
+    #   The reason for which the configuration elements or attributes were
     #   sanitized.
     #   @return [String]
     #
@@ -2400,6 +2571,10 @@ module Aws::MQ
     #   A list of information about the configuration.
     #   @return [Types::ConfigurationId]
     #
+    # @!attribute [rw] data_replication_mode
+    #   Defines whether this broker is a part of a data replication pair.
+    #   @return [String]
+    #
     # @!attribute [rw] engine_version
     #   The broker engine version. For a list of supported engine versions,
     #   see [Supported engines][1].
@@ -2443,6 +2618,7 @@ module Aws::MQ
       :authentication_strategy,
       :auto_minor_version_upgrade,
       :configuration,
+      :data_replication_mode,
       :engine_version,
       :host_instance_type,
       :ldap_server_metadata,
@@ -2473,6 +2649,15 @@ module Aws::MQ
     # @!attribute [rw] configuration
     #   The ID of the updated configuration.
     #   @return [Types::ConfigurationId]
+    #
+    # @!attribute [rw] data_replication_metadata
+    #   The replication details of the data replication-enabled broker. Only
+    #   returned if dataReplicationMode is set to CRDR.
+    #   @return [Types::DataReplicationMetadataOutput]
+    #
+    # @!attribute [rw] data_replication_mode
+    #   Describes whether this broker is a part of a data replication pair.
+    #   @return [String]
     #
     # @!attribute [rw] engine_version
     #   The broker engine version to upgrade to. For a list of supported
@@ -2507,6 +2692,16 @@ module Aws::MQ
     #   The parameters that determine the WeeklyStartTime.
     #   @return [Types::WeeklyStartTime]
     #
+    # @!attribute [rw] pending_data_replication_metadata
+    #   The pending replication details of the data replication-enabled
+    #   broker. Only returned if pendingDataReplicationMode is set to CRDR.
+    #   @return [Types::DataReplicationMetadataOutput]
+    #
+    # @!attribute [rw] pending_data_replication_mode
+    #   Describes whether this broker will be a part of a data replication
+    #   pair after reboot.
+    #   @return [String]
+    #
     # @!attribute [rw] security_groups
     #   The list of security groups (1 minimum, 5 maximum) that authorizes
     #   connections to brokers.
@@ -2519,11 +2714,15 @@ module Aws::MQ
       :auto_minor_version_upgrade,
       :broker_id,
       :configuration,
+      :data_replication_metadata,
+      :data_replication_mode,
       :engine_version,
       :host_instance_type,
       :ldap_server_metadata,
       :logs,
       :maintenance_window_start_time,
+      :pending_data_replication_metadata,
+      :pending_data_replication_mode,
       :security_groups)
       SENSITIVE = []
       include Aws::Structure
@@ -2542,8 +2741,6 @@ module Aws::MQ
     #
     # @!attribute [rw] configuration
     #   A list of information about the configuration.
-    #
-    #   Does not apply to RabbitMQ brokers.
     #   @return [Types::ConfigurationId]
     #
     # @!attribute [rw] engine_version
@@ -2572,6 +2769,10 @@ module Aws::MQ
     # @!attribute [rw] security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] data_replication_mode
+    #   Specifies whether a broker is a part of a data replication pair.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerRequest AWS API Documentation
     #
     class UpdateBrokerRequest < Struct.new(
@@ -2584,7 +2785,8 @@ module Aws::MQ
       :ldap_server_metadata,
       :logs,
       :maintenance_window_start_time,
-      :security_groups)
+      :security_groups,
+      :data_replication_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2602,8 +2804,6 @@ module Aws::MQ
     #
     # @!attribute [rw] configuration
     #   A list of information about the configuration.
-    #
-    #   Does not apply to RabbitMQ brokers.
     #   @return [Types::ConfigurationId]
     #
     # @!attribute [rw] engine_version
@@ -2630,6 +2830,26 @@ module Aws::MQ
     # @!attribute [rw] security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] data_replication_metadata
+    #   The replication details of the data replication-enabled broker. Only
+    #   returned if dataReplicationMode or pendingDataReplicationMode is set
+    #   to CRDR.
+    #   @return [Types::DataReplicationMetadataOutput]
+    #
+    # @!attribute [rw] data_replication_mode
+    #   Specifies whether a broker is a part of a data replication pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] pending_data_replication_metadata
+    #   The replication details of the data replication-enabled broker. Only
+    #   returned if dataReplicationMode or pendingDataReplicationMode is set
+    #   to CRDR.
+    #   @return [Types::DataReplicationMetadataOutput]
+    #
+    # @!attribute [rw] pending_data_replication_mode
+    #   Specifies whether a broker is a part of a data replication pair.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerResponse AWS API Documentation
     #
     class UpdateBrokerResponse < Struct.new(
@@ -2642,7 +2862,11 @@ module Aws::MQ
       :ldap_server_metadata,
       :logs,
       :maintenance_window_start_time,
-      :security_groups)
+      :security_groups,
+      :data_replication_metadata,
+      :data_replication_mode,
+      :pending_data_replication_metadata,
+      :pending_data_replication_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2650,7 +2874,8 @@ module Aws::MQ
     # Updates the specified configuration.
     #
     # @!attribute [rw] data
-    #   Required. The base64-encoded XML configuration.
+    #   Amazon MQ for Active MQ: The base64-encoded XML configuration.
+    #   Amazon MQ for RabbitMQ: the base64-encoded Cuttlefish configuration.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2669,7 +2894,7 @@ module Aws::MQ
     # Returns information about the updated configuration.
     #
     # @!attribute [rw] arn
-    #   Required. The Amazon Resource Name (ARN) of the configuration.
+    #   The Amazon Resource Name (ARN) of the configuration.
     #   @return [String]
     #
     # @!attribute [rw] created
@@ -2677,8 +2902,7 @@ module Aws::MQ
     #   @return [Time]
     #
     # @!attribute [rw] id
-    #   Required. The unique ID that Amazon MQ generates for the
-    #   configuration.
+    #   The unique ID that Amazon MQ generates for the configuration.
     #   @return [String]
     #
     # @!attribute [rw] latest_revision
@@ -2686,14 +2910,14 @@ module Aws::MQ
     #   @return [Types::ConfigurationRevision]
     #
     # @!attribute [rw] name
-    #   Required. The name of the configuration. This value can contain only
+    #   The name of the configuration. This value can contain only
     #   alphanumeric characters, dashes, periods, underscores, and tildes (-
     #   . \_ ~). This value must be 1-150 characters long.
     #   @return [String]
     #
     # @!attribute [rw] warnings
-    #   The list of the first 20 warnings about the configuration XML
-    #   elements or attributes that were sanitized.
+    #   The list of the first 20 warnings about the configuration elements
+    #   or attributes that were sanitized.
     #   @return [Array<Types::SanitizationWarning>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateConfigurationOutput AWS API Documentation
@@ -2780,12 +3004,17 @@ module Aws::MQ
     #   contain commas, colons, or equal signs (,:=).
     #   @return [String]
     #
+    # @!attribute [rw] replication_user
+    #   Defines whether the user is intended for data replication.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateUserInput AWS API Documentation
     #
     class UpdateUserInput < Struct.new(
       :console_access,
       :groups,
-      :password)
+      :password,
+      :replication_user)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2805,6 +3034,9 @@ module Aws::MQ
     # @!attribute [rw] username
     #   @return [String]
     #
+    # @!attribute [rw] replication_user
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateUserRequest AWS API Documentation
     #
     class UpdateUserRequest < Struct.new(
@@ -2812,7 +3044,8 @@ module Aws::MQ
       :console_access,
       :groups,
       :password,
-      :username)
+      :username,
+      :replication_user)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2821,11 +3054,11 @@ module Aws::MQ
     #
     class UpdateUserResponse < Aws::EmptyStructure; end
 
-    # A user associated with the broker. For RabbitMQ brokers, one and only
-    # one administrative user is accepted and created when a broker is first
-    # provisioned. All subsequent broker users are created by making
-    # RabbitMQ API calls directly to brokers or via the RabbitMQ web
-    # console.
+    # A user associated with the broker. For Amazon MQ for RabbitMQ brokers,
+    # one and only one administrative user is accepted and created when a
+    # broker is first provisioned. All subsequent broker users are created
+    # by making RabbitMQ API calls directly to brokers or via the RabbitMQ
+    # web console.
     #
     # @!attribute [rw] console_access
     #   Enables access to the ActiveMQ Web Console for the ActiveMQ user.
@@ -2846,20 +3079,31 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   important><title>Amazon MQ for ActiveMQ</title>
+    #   The username of the broker user. The following restrictions apply to
+    #   broker usernames:
     #
-    #    <para markdown="1">For ActiveMQ brokers, this value can contain
-    #   only alphanumeric characters, dashes, periods, underscores, and
-    #   tildes (- . \_ ~). This value must be 2-100 characters
-    #   long.</p>/important> <title>Amazon MQ for RabbitMQ</title>
+    #   * For Amazon MQ for ActiveMQ brokers, this value can contain only
+    #     alphanumeric characters, dashes, periods, underscores, and tildes
+    #     (- . \_ ~). This value must be 2-100 characters long.
     #
-    #    For RabbitMQ brokers, this value can contain only alphanumeric
-    #   characters, dashes, periods, underscores (- . \_). This value must
-    #   not contain a tilde (~) character. Amazon MQ prohibts using guest as
-    #   a valid usename. This value must be 2-100 characters long.
+    #   * para>For Amazon MQ for RabbitMQ brokers, this value can contain
+    #     only alphanumeric characters, dashes, periods, underscores (- .
+    #     \_). This value must not contain a tilde (~) character. Amazon MQ
+    #     prohibts using guest as a valid usename. This value must be 2-100
+    #     characters long.
     #
-    #   </para>
+    #     </para>
+    #
+    #   Do not add personally identifiable information (PII) or other
+    #   confidential or sensitive information in broker usernames. Broker
+    #   usernames are accessible to other Amazon Web Services services,
+    #   including CloudWatch Logs. Broker usernames are not intended to be
+    #   used for private or sensitive data.
     #   @return [String]
+    #
+    # @!attribute [rw] replication_user
+    #   Defines if this user is intended for CRDR replication purposes.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/User AWS API Documentation
     #
@@ -2867,7 +3111,8 @@ module Aws::MQ
       :console_access,
       :groups,
       :password,
-      :username)
+      :username,
+      :replication_user)
       SENSITIVE = []
       include Aws::Structure
     end

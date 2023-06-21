@@ -92,6 +92,8 @@ module Aws::MQ
             Aws::MQ::Endpoints::ListTags.build(context)
           when :list_users
             Aws::MQ::Endpoints::ListUsers.build(context)
+          when :promote
+            Aws::MQ::Endpoints::Promote.build(context)
           when :reboot_broker
             Aws::MQ::Endpoints::RebootBroker.build(context)
           when :update_broker

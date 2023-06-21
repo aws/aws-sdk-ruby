@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2023-06-21)
+------------------
+
+* Feature - This release introduces the bandwidth reduction filter for the HEVC encoder, increases the limits of outputs per job, and updates support for the Nagra SDK to version 1.14.7.
+
 1.108.0 (2023-06-15)
 ------------------
 
