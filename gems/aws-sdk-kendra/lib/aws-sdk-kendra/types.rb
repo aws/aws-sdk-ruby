@@ -119,15 +119,15 @@ module Aws::Kendra
     # Provides the configuration information to connect to Alfresco as your
     # data source.
     #
-    # <note markdown="1"> Alfresco data source connector is currently in preview mode. Basic
-    # authentication is currently supported. If you would like to use
-    # Alfresco connector in production, contact [Support][1].
+    # <note markdown="1"> Support for `AlfrescoConfiguration` ended May 2023. We recommend
+    # migrating to or using the Alfresco data source template schema /
+    # [TemplateConfiguration][1] API.
     #
     #  </note>
     #
     #
     #
-    # [1]: http://aws.amazon.com/contact-us/
+    # [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html
     #
     # @!attribute [rw] site_url
     #   The URL of the Alfresco site. For example, *https://hostname:8080*.
@@ -2066,6 +2066,8 @@ module Aws::Kendra
     #   format, a CSV format that includes customs attributes in a header,
     #   and a JSON format that includes custom attributes.
     #
+    #   The default format is CSV.
+    #
     #   The format must match the format of the file stored in the S3 bucket
     #   identified in the `S3Path` parameter.
     #
@@ -2634,6 +2636,14 @@ module Aws::Kendra
     # @!attribute [rw] alfresco_configuration
     #   Provides the configuration information to connect to Alfresco as
     #   your data source.
+    #
+    #   Support for `AlfrescoConfiguration` ended May 2023. We recommend
+    #   migrating to or using the Alfresco data source template schema /
+    #   [TemplateConfiguration][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html
     #   @return [Types::AlfrescoConfiguration]
     #
     # @!attribute [rw] template_configuration
@@ -4246,6 +4256,10 @@ module Aws::Kendra
     #
     # @!attribute [rw] content_type
     #   The file type of the document in the `Blob` field.
+    #
+    #   If you want to index snippets or subsets of HTML documents instead
+    #   of the entirety of the HTML documents, you must add the `HTML` start
+    #   and closing tags (`<HTML>content</HTML>`) around the content.
     #   @return [String]
     #
     # @!attribute [rw] access_control_configuration_id
@@ -7487,8 +7501,7 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] index_id
-    #   The identifier of the index to search. The identifier is returned in
-    #   the response from the `CreateIndex` API.
+    #   The identifier of the index for the search.
     #   @return [String]
     #
     # @!attribute [rw] query_text
@@ -7499,48 +7512,43 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] attribute_filter
-    #   Enables filtered searches based on document attributes. You can only
+    #   Filters search results by document fields/attributes. You can only
     #   provide one attribute filter; however, the `AndAllFilters`,
     #   `NotFilter`, and `OrAllFilters` parameters contain a list of other
     #   filters.
     #
-    #   The `AttributeFilter` parameter enables you to create a set of
+    #   The `AttributeFilter` parameter means you can create a set of
     #   filtering rules that a document must satisfy to be included in the
     #   query results.
     #   @return [Types::AttributeFilter]
     #
     # @!attribute [rw] facets
-    #   An array of documents attributes. Amazon Kendra returns a count for
-    #   each attribute key specified. This helps your users narrow their
-    #   search.
+    #   An array of documents fields/attributes for faceted search. Amazon
+    #   Kendra returns a count for each field key specified. This helps your
+    #   users narrow their search.
     #   @return [Array<Types::Facet>]
     #
     # @!attribute [rw] requested_document_attributes
-    #   An array of document attributes to include in the response. You can
-    #   limit the response to include certain document attributes. By
-    #   default all document attributes are included in the response.
+    #   An array of document fields/attributes to include in the response.
+    #   You can limit the response to include certain document fields. By
+    #   default, all document attributes are included in the response.
     #   @return [Array<String>]
     #
     # @!attribute [rw] query_result_type_filter
-    #   Sets the type of query. Only results for the specified query type
-    #   are returned.
+    #   Sets the type of query result or response. Only results for the
+    #   specified type are returned.
     #   @return [String]
     #
     # @!attribute [rw] document_relevance_override_configurations
-    #   Overrides relevance tuning configurations of fields or attributes
-    #   set at the index level.
+    #   Overrides relevance tuning configurations of fields/attributes set
+    #   at the index level.
     #
     #   If you use this API to override the relevance tuning configured at
     #   the index level, but there is no relevance tuning configured at the
     #   index level, then Amazon Kendra does not apply any relevance tuning.
     #
-    #   If there is relevance tuning configured at the index level, but you
-    #   do not use this API to override any relevance tuning in the index,
-    #   then Amazon Kendra uses the relevance tuning that is configured at
-    #   the index level.
-    #
     #   If there is relevance tuning configured for fields at the index
-    #   level, but you use this API to override only some of these fields,
+    #   level, and you use this API to override only some of these fields,
     #   then for the fields you did not override, the importance is set to
     #   1.
     #   @return [Array<Types::DocumentRelevanceConfiguration>]
@@ -7605,8 +7613,12 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] query_id
-    #   The identifier for the search. You use `QueryId` to identify the
-    #   search when using the feedback API.
+    #   The identifier for the search. You also use `QueryId` to identify
+    #   the search when using the [SubmitFeedback][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_SubmitFeedback.html
     #   @return [String]
     #
     # @!attribute [rw] result_items
@@ -7615,12 +7627,12 @@ module Aws::Kendra
     #
     # @!attribute [rw] facet_results
     #   Contains the facet results. A `FacetResult` contains the counts for
-    #   each attribute key that was specified in the `Facets` input
+    #   each field/attribute key that was specified in the `Facets` input
     #   parameter.
     #   @return [Array<Types::FacetResult>]
     #
     # @!attribute [rw] total_number_of_results
-    #   The total number of items found by the search; however, you can only
+    #   The total number of items found by the search. However, you can only
     #   retrieve up to 100 items. For example, if the search found 192
     #   items, you can only retrieve the first 100 of the items.
     #   @return [Integer]
@@ -7688,7 +7700,8 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] additional_attributes
-    #   One or more additional attributes associated with the query result.
+    #   One or more additional fields/attributes associated with the query
+    #   result.
     #   @return [Array<Types::AdditionalResultAttribute>]
     #
     # @!attribute [rw] document_id
@@ -7710,27 +7723,27 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] document_attributes
-    #   An array of document attributes assigned to a document in the search
-    #   results. For example, the document author (`_author`) or the source
-    #   URI (`_source_uri`) of the document.
+    #   An array of document fields/attributes assigned to a document in the
+    #   search results. For example, the document author (`_author`) or the
+    #   source URI (`_source_uri`) of the document.
     #   @return [Array<Types::DocumentAttribute>]
     #
     # @!attribute [rw] score_attributes
-    #   Indicates the confidence that Amazon Kendra has that a result
-    #   matches the query that you provided. Each result is placed into a
-    #   bin that indicates the confidence, `VERY_HIGH`, `HIGH`, `MEDIUM` and
-    #   `LOW`. You can use the score to determine if a response meets the
+    #   Indicates the confidence level of Amazon Kendra providing a relevant
+    #   result for the query. Each result is placed into a bin that
+    #   indicates the confidence, `VERY_HIGH`, `HIGH`, `MEDIUM` and `LOW`.
+    #   You can use the score to determine if a response meets the
     #   confidence needed for your application.
     #
     #   The field is only set to `LOW` when the `Type` field is set to
-    #   `DOCUMENT` and Amazon Kendra is not confident that the result
-    #   matches the query.
+    #   `DOCUMENT` and Amazon Kendra is not confident that the result is
+    #   relevant to the query.
     #   @return [Types::ScoreAttributes]
     #
     # @!attribute [rw] feedback_token
     #   A token that identifies a particular result from a particular query.
     #   Use this token to provide click-through feedback for the result. For
-    #   more information, see [Submitting feedback ][1].
+    #   more information, see [Submitting feedback][1].
     #
     #
     #
@@ -8085,6 +8098,145 @@ module Aws::Kendra
     #
     class ResourceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] index_id
+    #   The identifier of the index to retrieve relevant passages for the
+    #   search.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_text
+    #   The input query text to retrieve relevant passages for the search.
+    #   Amazon Kendra truncates queries at 30 token words, which excludes
+    #   punctuation and stop words. Truncation still applies if you use
+    #   Boolean or more advanced, complex queries.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_filter
+    #   Filters search results by document fields/attributes. You can only
+    #   provide one attribute filter; however, the `AndAllFilters`,
+    #   `NotFilter`, and `OrAllFilters` parameters contain a list of other
+    #   filters.
+    #
+    #   The `AttributeFilter` parameter means you can create a set of
+    #   filtering rules that a document must satisfy to be included in the
+    #   query results.
+    #   @return [Types::AttributeFilter]
+    #
+    # @!attribute [rw] requested_document_attributes
+    #   A list of document fields/attributes to include in the response. You
+    #   can limit the response to include certain document fields. By
+    #   default, all document fields are included in the response.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] document_relevance_override_configurations
+    #   Overrides relevance tuning configurations of fields/attributes set
+    #   at the index level.
+    #
+    #   If you use this API to override the relevance tuning configured at
+    #   the index level, but there is no relevance tuning configured at the
+    #   index level, then Amazon Kendra does not apply any relevance tuning.
+    #
+    #   If there is relevance tuning configured for fields at the index
+    #   level, and you use this API to override only some of these fields,
+    #   then for the fields you did not override, the importance is set to
+    #   1.
+    #   @return [Array<Types::DocumentRelevanceConfiguration>]
+    #
+    # @!attribute [rw] page_number
+    #   Retrieved relevant passages are returned in pages the size of the
+    #   `PageSize` parameter. By default, Amazon Kendra returns the first
+    #   page of results. Use this parameter to get result pages after the
+    #   first one.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] page_size
+    #   Sets the number of retrieved relevant passages that are returned in
+    #   each page of results. The default page size is 10. The maximum
+    #   number of results returned is 100. If you ask for more than 100
+    #   results, only 100 are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] user_context
+    #   The user context token or user and group information.
+    #   @return [Types::UserContext]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/RetrieveRequest AWS API Documentation
+    #
+    class RetrieveRequest < Struct.new(
+      :index_id,
+      :query_text,
+      :attribute_filter,
+      :requested_document_attributes,
+      :document_relevance_override_configurations,
+      :page_number,
+      :page_size,
+      :user_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] query_id
+    #   The identifier of query used for the search. You also use `QueryId`
+    #   to identify the search when using the [Submitfeedback][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/APIReference/API_SubmitFeedback.html
+    #   @return [String]
+    #
+    # @!attribute [rw] result_items
+    #   The results of the retrieved relevant passages for the search.
+    #   @return [Array<Types::RetrieveResultItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/RetrieveResult AWS API Documentation
+    #
+    class RetrieveResult < Struct.new(
+      :query_id,
+      :result_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single retrieved relevant passage result.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the relevant passage result.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_id
+    #   The identifier of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_title
+    #   The title of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The contents of the relevant passage.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_uri
+    #   The URI of the original location of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_attributes
+    #   An array of document fields/attributes assigned to a document in the
+    #   search results. For example, the document author (`_author`) or the
+    #   source URI (`_source_uri`) of the document.
+    #   @return [Array<Types::DocumentAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/RetrieveResultItem AWS API Documentation
+    #
+    class RetrieveResultItem < Struct.new(
+      :id,
+      :document_id,
+      :document_title,
+      :content,
+      :document_uri,
+      :document_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8520,10 +8672,10 @@ module Aws::Kendra
     end
 
     # Provides a relative ranking that indicates how confident Amazon Kendra
-    # is that the response matches the query.
+    # is that the response is relevant to the query.
     #
     # @!attribute [rw] score_confidence
-    #   A relative ranking for how well the response matches the query.
+    #   A relative ranking for how relevant the response is to the query.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ScoreAttributes AWS API Documentation
@@ -8596,15 +8748,15 @@ module Aws::Kendra
     # @!attribute [rw] web_crawler_mode
     #   You can choose one of the following modes:
     #
-    #   * `HOST_ONLY` – crawl only the website host names. For example, if
-    #     the seed URL is "abc.example.com", then only URLs with host name
+    #   * `HOST_ONLY`—crawl only the website host names. For example, if the
+    #     seed URL is "abc.example.com", then only URLs with host name
     #     "abc.example.com" are crawled.
     #
-    #   * `SUBDOMAINS` – crawl the website host names with subdomains. For
+    #   * `SUBDOMAINS`—crawl the website host names with subdomains. For
     #     example, if the seed URL is "abc.example.com", then
     #     "a.abc.example.com" and "b.abc.example.com" are also crawled.
     #
-    #   * `EVERYTHING` – crawl the website host names with subdomains and
+    #   * `EVERYTHING`—crawl the website host names with subdomains and
     #     other domains that the web pages link to.
     #
     #   The default mode is set to `HOST_ONLY`.
@@ -8709,27 +8861,21 @@ module Aws::Kendra
     #   @return [Boolean]
     #
     # @!attribute [rw] include_attachment_file_patterns
-    #   A list of regular expression patterns to include certain attachments
-    #   of knowledge articles in your ServiceNow. Item that match the
-    #   patterns are included in the index. Items that don't match the
-    #   patterns are excluded from the index. If an item matches both an
-    #   inclusion and exclusion pattern, the exclusion pattern takes
-    #   precedence and the item isn't included in the index.
-    #
-    #   The regex is applied to the field specified in the
-    #   `PatternTargetField`.
+    #   A list of regular expression patterns applied to include knowledge
+    #   article attachments. Attachments that match the patterns are
+    #   included in the index. Items that don't match the patterns are
+    #   excluded from the index. If an item matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   item isn't included in the index.
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclude_attachment_file_patterns
-    #   A list of regular expression patterns to exclude certain attachments
-    #   of knowledge articles in your ServiceNow. Item that match the
-    #   patterns are excluded from the index. Items that don't match the
-    #   patterns are included in the index. If an item matches both an
-    #   inclusion and exclusion pattern, the exclusion pattern takes
-    #   precedence and the item isn't included in the index.
-    #
-    #   The regex is applied to the field specified in the
-    #   `PatternTargetField`.
+    #   A list of regular expression patterns applied to exclude certain
+    #   knowledge article attachments. Attachments that match the patterns
+    #   are excluded from the index. Items that don't match the patterns
+    #   are included in the index. If an item matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   item isn't included in the index.
     #   @return [Array<String>]
     #
     # @!attribute [rw] document_data_field_name
@@ -10564,15 +10710,9 @@ module Aws::Kendra
     #   @return [Types::Urls]
     #
     # @!attribute [rw] crawl_depth
-    #   Specifies the number of levels in a website that you want to crawl.
-    #
-    #   The first level begins from the website seed or starting point URL.
-    #   For example, if a website has three levels—index level (the seed in
-    #   this example), sections level, and subsections level—and you are
-    #   only interested in crawling information up to the sections level
-    #   (levels 0-1), you can set your depth to 1.
-    #
-    #   The default crawl depth is set to 2.
+    #   The 'depth' or number of levels from the seed level to crawl. For
+    #   example, the seed URL page is depth 1 and any hyperlinks on this
+    #   page that are also crawled are depth 2.
     #   @return [Integer]
     #
     # @!attribute [rw] max_links_per_page

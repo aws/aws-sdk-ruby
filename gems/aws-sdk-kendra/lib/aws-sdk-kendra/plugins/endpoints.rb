@@ -160,6 +160,8 @@ module Aws::Kendra
             Aws::Kendra::Endpoints::PutPrincipalMapping.build(context)
           when :query
             Aws::Kendra::Endpoints::Query.build(context)
+          when :retrieve
+            Aws::Kendra::Endpoints::Retrieve.build(context)
           when :start_data_source_sync_job
             Aws::Kendra::Endpoints::StartDataSourceSyncJob.build(context)
           when :stop_data_source_sync_job

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2023-06-22)
+------------------
+
+* Feature - Introducing Amazon Kendra Retrieve API that can be used to retrieve relevant passages or text excerpts given an input query.
+
 1.67.0 (2023-06-15)
 ------------------
 

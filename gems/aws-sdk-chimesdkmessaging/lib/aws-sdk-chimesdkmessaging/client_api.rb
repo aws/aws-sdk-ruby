@@ -207,6 +207,8 @@ module Aws::ChimeSDKMessaging
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    Target = Shapes::StructureShape.new(name: 'Target')
+    TargetList = Shapes::ListShape.new(name: 'TargetList')
     TargetMembershipsPerSubChannel = Shapes::IntegerShape.new(name: 'TargetMembershipsPerSubChannel')
     ThrottledClientException = Shapes::StructureShape.new(name: 'ThrottledClientException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -359,6 +361,7 @@ module Aws::ChimeSDKMessaging
     ChannelMessage.add_member(:message_attributes, Shapes::ShapeRef.new(shape: MessageAttributeMap, location_name: "MessageAttributes"))
     ChannelMessage.add_member(:sub_channel_id, Shapes::ShapeRef.new(shape: SubChannelId, location_name: "SubChannelId"))
     ChannelMessage.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType"))
+    ChannelMessage.add_member(:target, Shapes::ShapeRef.new(shape: TargetList, location_name: "Target"))
     ChannelMessage.struct_class = Types::ChannelMessage
 
     ChannelMessageCallback.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, required: true, location_name: "MessageId"))
@@ -386,6 +389,7 @@ module Aws::ChimeSDKMessaging
     ChannelMessageSummary.add_member(:status, Shapes::ShapeRef.new(shape: ChannelMessageStatusStructure, location_name: "Status"))
     ChannelMessageSummary.add_member(:message_attributes, Shapes::ShapeRef.new(shape: MessageAttributeMap, location_name: "MessageAttributes"))
     ChannelMessageSummary.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType"))
+    ChannelMessageSummary.add_member(:target, Shapes::ShapeRef.new(shape: TargetList, location_name: "Target"))
     ChannelMessageSummary.struct_class = Types::ChannelMessageSummary
 
     ChannelMessageSummaryList.member = Shapes::ShapeRef.new(shape: ChannelMessageSummary)
@@ -859,6 +863,7 @@ module Aws::ChimeSDKMessaging
     SendChannelMessageRequest.add_member(:message_attributes, Shapes::ShapeRef.new(shape: MessageAttributeMap, location_name: "MessageAttributes"))
     SendChannelMessageRequest.add_member(:sub_channel_id, Shapes::ShapeRef.new(shape: SubChannelId, location_name: "SubChannelId"))
     SendChannelMessageRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType"))
+    SendChannelMessageRequest.add_member(:target, Shapes::ShapeRef.new(shape: TargetList, location_name: "Target"))
     SendChannelMessageRequest.struct_class = Types::SendChannelMessageRequest
 
     SendChannelMessageResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
@@ -898,6 +903,11 @@ module Aws::ChimeSDKMessaging
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location_name: "ResourceARN"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    Target.add_member(:member_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "MemberArn"))
+    Target.struct_class = Types::Target
+
+    TargetList.member = Shapes::ShapeRef.new(shape: Target)
 
     ThrottledClientException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
     ThrottledClientException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))

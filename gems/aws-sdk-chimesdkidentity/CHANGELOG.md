@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2023-06-22)
+------------------
+
+* Feature - AppInstanceBots can be configured to be invoked or not using the Target or the CHIME.mentions attribute for ChannelMessages
+
 1.14.0 (2023-06-15)
 ------------------
 
