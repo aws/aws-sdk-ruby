@@ -423,7 +423,7 @@ module Aws
         params['X-Amz-Algorithm'] = 'AWS4-HMAC-SHA256'
         params['X-Amz-Credential'] = credential(creds, date)
         params['X-Amz-Date'] = datetime
-        params['X-Amz-Expires'] = extract_expires_in(options)
+        params['X-Amz-Expires'] = presigned_url_expiration(options, creds).to_s
         params['X-Amz-Security-Token'] = creds.session_token if creds.session_token
         params['X-Amz-SignedHeaders'] = signed_headers(headers)
 
@@ -525,7 +525,6 @@ module Aws
         k_credentials = hmac(k_service, 'aws4_request')
         hmac(k_credentials, string_to_sign)
       end
-
 
       def path(url)
         path = url.path
@@ -682,8 +681,8 @@ module Aws
 
       def extract_expires_in(options)
         case options[:expires_in]
-        when nil then 900.to_s
-        when Integer then options[:expires_in].to_s
+        when nil then 900
+        when Integer then options[:expires_in]
         else
           msg = "expected :expires_in to be a number of seconds"
           raise ArgumentError, msg
@@ -697,7 +696,6 @@ module Aws
       def uri_escape_path(string)
         self.class.uri_escape_path(string)
       end
-
 
       def fetch_credentials
         credentials = @credentials_provider.credentials
@@ -720,21 +718,30 @@ module Aws
           !credentials.secret_access_key.empty?
       end
 
+      def presigned_url_expiration(options, creds)
+        expires_in = extract_expires_in(options)
+        return expires_in unless creds.respond_to?(:expiration)
+
+        creds_expiration_seconds = (creds.expiration - Time.now).to_i
+        [expires_in, creds_expiration_seconds].min
+      end
+
       ### CRT Code
 
       # the credentials used by CRT must be a
       # CRT StaticCredentialsProvider object
       def crt_fetch_credentials
         creds = fetch_credentials
-        Aws::Crt::Auth::StaticCredentialsProvider.new(
+        crt_creds = Aws::Crt::Auth::StaticCredentialsProvider.new(
           creds.access_key_id,
           creds.secret_access_key,
           creds.session_token
         )
+        [crt_creds, creds]
       end
 
       def crt_sign_request(request)
-        creds = crt_fetch_credentials
+        creds, _ = crt_fetch_credentials
         http_method = extract_http_method(request)
         url = extract_url(request)
         headers = downcase_headers(request[:headers])
@@ -793,7 +800,7 @@ module Aws
       end
 
       def crt_presign_url(options)
-        creds = crt_fetch_credentials
+        creds, ruby_creds = crt_fetch_credentials
 
         http_method = extract_http_method(options)
         url = extract_url(options)
@@ -821,7 +828,7 @@ module Aws
           use_double_uri_encode: @uri_escape_path,
           should_normalize_uri_path: @normalize_path,
           omit_session_token: @omit_session_token,
-          expiration_in_seconds: options.fetch(:expires_in, 900)
+          expiration_in_seconds: presigned_url_expiration(options, ruby_creds)
         )
         http_request = Aws::Crt::Http::Message.new(
           http_method, url.to_s, headers

@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Select the minimum expiration time for presigned urls between
+  the expiration time option and the credential expiration time.
+
 1.5.2 (2022-09-30)
 ------------------
 
