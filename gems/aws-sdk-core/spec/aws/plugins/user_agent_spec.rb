@@ -19,9 +19,12 @@ module Aws
           when 'os' then
             os_family = given['os']['family'].downcase
             version = given['os']['version']
-            allow(Gem::Platform).to receive(:local).and_return(
-              double('platform', os: os_family, version: version, cpu: nil)
-            )
+            allow(RbConfig::CONFIG).to receive(:[])
+              .with('host_os').and_return(os_family)
+            allow(RbConfig::CONFIG).to receive(:[])
+              .with('host_cpu').and_return('x86_64')
+            allow(Gem::Platform).to receive(:local)
+              .and_return(double(version: version))
           when 'language'
             name = given['language']['name']
             version = given['language']['version']
