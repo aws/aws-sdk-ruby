@@ -1672,7 +1672,7 @@ module Aws::FSx
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this
     #   property to `0` disables automatic backups. You can retain automatic
-    #   backups for a maximum of 90 days. The default is `0`.
+    #   backups for a maximum of 90 days. The default is `30`.
     #   @return [Integer]
     #
     # @!attribute [rw] daily_automatic_backup_start_time
@@ -1780,7 +1780,7 @@ module Aws::FSx
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this
     #   property to `0` disables automatic backups. You can retain automatic
-    #   backups for a maximum of 90 days. The default is `0`.
+    #   backups for a maximum of 90 days. The default is `30`.
     #   @return [Integer]
     #
     # @!attribute [rw] copy_tags_to_backups
@@ -1819,10 +1819,10 @@ module Aws::FSx
     #   * `SINGLE_AZ_1`- (Default) Creates file systems with throughput
     #     capacities of 64 - 4,096 MBps. `Single_AZ_1` is available in all
     #     Amazon Web Services Regions where Amazon FSx for OpenZFS is
-    #     available, except US West (Oregon).
+    #     available.
     #
     #   * `SINGLE_AZ_2`- Creates file systems with throughput capacities of
-    #     160 - 10,240 MBps using an NVMe L2ARC cache. `Single_AZ_2` is
+    #     160 - 10,240 MB/s using an NVMe L2ARC cache. `Single_AZ_2` is
     #     available only in the US East (N. Virginia), US East (Ohio), US
     #     West (Oregon), and Europe (Ireland) Amazon Web Services Regions.
     #
@@ -2193,10 +2193,9 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] automatic_backup_retention_days
-    #   The number of days to retain automatic backups. The default is to
-    #   retain backups for 7 days. Setting this value to 0 disables the
-    #   creation of automatic backups. The maximum retention period for
-    #   backups is 90 days.
+    #   The number of days to retain automatic backups. Setting this
+    #   property to `0` disables automatic backups. You can retain automatic
+    #   backups for a maximum of 90 days. The default is `30`.
     #   @return [Integer]
     #
     # @!attribute [rw] copy_tags_to_backups
@@ -5723,7 +5722,7 @@ module Aws::FSx
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this
     #   property to `0` disables automatic backups. You can retain automatic
-    #   backups for a maximum of 90 days. The default is `0`.
+    #   backups for a maximum of 90 days. The default is `30`.
     #   @return [Integer]
     #
     # @!attribute [rw] copy_tags_to_backups
@@ -6038,7 +6037,7 @@ module Aws::FSx
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this
     #   property to `0` disables automatic backups. You can retain automatic
-    #   backups for a maximum of 90 days. The default is `0`.
+    #   backups for a maximum of 90 days. The default is `30`.
     #   @return [Integer]
     #
     # @!attribute [rw] daily_automatic_backup_start_time
@@ -6401,7 +6400,7 @@ module Aws::FSx
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this
     #   property to `0` disables automatic backups. You can retain automatic
-    #   backups for a maximum of 90 days. The default is `0`.
+    #   backups for a maximum of 90 days. The default is `30`.
     #   @return [Integer]
     #
     # @!attribute [rw] copy_tags_to_backups
@@ -7783,7 +7782,7 @@ module Aws::FSx
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this
     #   property to `0` disables automatic backups. You can retain automatic
-    #   backups for a maximum of 90 days. The default is `0`.
+    #   backups for a maximum of 90 days. The default is `30`.
     #   @return [Integer]
     #
     # @!attribute [rw] daily_automatic_backup_start_time
@@ -7880,7 +7879,7 @@ module Aws::FSx
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this
     #   property to `0` disables automatic backups. You can retain automatic
-    #   backups for a maximum of 90 days. The default is `0`.
+    #   backups for a maximum of 90 days. The default is `30`.
     #   @return [Integer]
     #
     # @!attribute [rw] copy_tags_to_backups
@@ -8097,9 +8096,9 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] automatic_backup_retention_days
-    #   The number of days to retain automatic daily backups. Setting this
-    #   to zero (0) disables automatic daily backups. You can retain
-    #   automatic daily backups for a maximum of 90 days. For more
+    #   The number of days to retain automatic backups. Setting this
+    #   property to `0` disables automatic backups. You can retain automatic
+    #   backups for a maximum of 90 days. The default is `30`. For more
     #   information, see [Working with Automatic Daily Backups][1].
     #
     #

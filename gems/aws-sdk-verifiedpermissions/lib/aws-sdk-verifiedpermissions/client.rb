@@ -611,6 +611,15 @@ module Aws::VerifiedPermissions
     # Creates a policy store. A policy store is a container for policy
     # resources.
     #
+    # <note markdown="1"> Although [Cedar supports multiple namespaces][1], Verified Permissions
+    # currently supports only one namespace per policy store.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.cedarpolicy.com/schema.html#namespace
+    #
     # @option params [String] :client_token
     #   Specifies a unique, case-sensitive ID that you provide to ensure the
     #   idempotency of the request. This lets you safely retry the request
@@ -1125,8 +1134,15 @@ module Aws::VerifiedPermissions
     #   authorization decisions.
     #
     # @option params [Types::EntitiesDefinition] :entities
-    #   Specifies the list of entities and their associated attributes that
-    #   Verified Permissions can examine when evaluating the policies.
+    #   Specifies the list of resources and principals and their associated
+    #   attributes that Verified Permissions can examine when evaluating the
+    #   policies.
+    #
+    #   <note markdown="1"> You can include only principal and resource entities in this
+    #   parameter; you can't include actions. You must specify actions in the
+    #   schema.
+    #
+    #    </note>
     #
     # @return [Types::IsAuthorizedOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1236,8 +1252,15 @@ module Aws::VerifiedPermissions
     #   authorization decisions.
     #
     # @option params [Types::EntitiesDefinition] :entities
-    #   Specifies the list of entities and their associated attributes that
-    #   Verified Permissions can examine when evaluating the policies.
+    #   Specifies the list of resources and principals and their associated
+    #   attributes that Verified Permissions can examine when evaluating the
+    #   policies.
+    #
+    #   <note markdown="1"> You can include only principal and resource entities in this
+    #   parameter; you can't include actions. You must specify actions in the
+    #   schema.
+    #
+    #    </note>
     #
     # @return [Types::IsAuthorizedWithTokenOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1913,7 +1936,7 @@ module Aws::VerifiedPermissions
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-verifiedpermissions'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

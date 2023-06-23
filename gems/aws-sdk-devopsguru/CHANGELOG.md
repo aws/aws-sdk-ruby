@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2023-06-23)
+------------------
+
+* Feature - This release adds support for encryption via customer managed keys.
+
 1.32.0 (2023-06-15)
 ------------------
 

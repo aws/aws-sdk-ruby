@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.182.0 (2023-06-23)
+------------------
+
+* Feature - Documentation improvements for create, describe, and modify DB clusters and DB instances.
+
 1.181.0 (2023-06-15)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2023-06-23)
+------------------
+
+* Feature - Added improved descriptions and new code samples to SDK documentation.
+
 1.1.0 (2023-06-15)
 ------------------
 

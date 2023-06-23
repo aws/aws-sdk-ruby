@@ -152,7 +152,7 @@ module Aws::VerifiedPermissions
     # [Configuration][1] structure that is used as a parameter to the
     # [Configuration][1].
     #
-    # Example:`"CognitoUserPoolConfiguration":\{"UserPoolArn":"cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
+    # Example:`"CognitoUserPoolConfiguration":\{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
     # ["a1b2c3d4e5f6g7h8i9j0kalbmc"]\}`
     #
     #
@@ -164,7 +164,7 @@ module Aws::VerifiedPermissions
     #   that contains the identities to be authorized.
     #
     #   Example: `"UserPoolArn":
-    #   "cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5"`
+    #   "arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5"`
     #
     #
     #
@@ -213,7 +213,7 @@ module Aws::VerifiedPermissions
     #   Amazon Cognito user pool and one or more application client IDs.
     #
     #   Example:
-    #   `"configuration":\{"cognitoUserPoolConfiguration":\{"userPoolArn":"cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
+    #   `"configuration":\{"cognitoUserPoolConfiguration":\{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
     #   ["a1b2c3d4e5f6g7h8i9j0kalbmc"]\}\}`
     #
     #
@@ -1375,8 +1375,15 @@ module Aws::VerifiedPermissions
     #   @return [Types::ContextDefinition]
     #
     # @!attribute [rw] entities
-    #   Specifies the list of entities and their associated attributes that
-    #   Verified Permissions can examine when evaluating the policies.
+    #   Specifies the list of resources and principals and their associated
+    #   attributes that Verified Permissions can examine when evaluating the
+    #   policies.
+    #
+    #   <note markdown="1"> You can include only principal and resource entities in this
+    #   parameter; you can't include actions. You must specify actions in
+    #   the schema.
+    #
+    #    </note>
     #   @return [Types::EntitiesDefinition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/IsAuthorizedInput AWS API Documentation
@@ -1460,8 +1467,15 @@ module Aws::VerifiedPermissions
     #   @return [Types::ContextDefinition]
     #
     # @!attribute [rw] entities
-    #   Specifies the list of entities and their associated attributes that
-    #   Verified Permissions can examine when evaluating the policies.
+    #   Specifies the list of resources and principals and their associated
+    #   attributes that Verified Permissions can examine when evaluating the
+    #   policies.
+    #
+    #   <note markdown="1"> You can include only principal and resource entities in this
+    #   parameter; you can't include actions. You must specify actions in
+    #   the schema.
+    #
+    #    </note>
     #   @return [Types::EntitiesDefinition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/IsAuthorizedWithTokenInput AWS API Documentation
