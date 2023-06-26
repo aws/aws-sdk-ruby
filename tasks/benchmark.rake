@@ -19,11 +19,16 @@ task 'benchmark:archive' do
   ref = ENV['GH_REF'] || 'version-3'
   event = ENV['GH_EVENT'] || 'push'
 
-  folder = 'release'
-  if event == 'pull_request'
-    folder = "pr/#{ref}"
-    folder = "staging-#{folder}" if repo == 'aws/aws-sdk-ruby-staging'
-  end
+  folder =
+    if event == 'pull_request'
+      if repo == 'aws/aws-sdk-ruby-staging'
+        "staging-pr/#{ref}"
+      else
+        "pr/#{ref}"
+      end
+    else
+      'release'
+    end
   key = "#{folder}/#{Time.now.strftime('%Y-%m-%d')}/benchmark_#{SecureRandom.uuid}.json"
 
   puts "Uploading report to: #{key}"
