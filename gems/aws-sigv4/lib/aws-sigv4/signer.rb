@@ -235,7 +235,7 @@ module Aws
 
         return crt_sign_request(request) if Signer.use_crt?
 
-        creds = fetch_credentials
+        creds, _ = fetch_credentials
 
         http_method = extract_http_method(request)
         url = extract_url(request)
@@ -314,7 +314,7 @@ module Aws
       #   hex-encoded string using #unpack
       def sign_event(prior_signature, payload, encoder)
         # Note: CRT does not currently provide event stream signing, so we always use the ruby implementation.
-        creds = fetch_credentials
+        creds, _ = fetch_credentials
         time = Time.now
         headers = {}
 
@@ -403,7 +403,7 @@ module Aws
 
         return crt_presign_url(options) if Signer.use_crt?
 
-        creds = fetch_credentials
+        creds, expiration = fetch_credentials
 
         http_method = extract_http_method(options)
         url = extract_url(options)
@@ -423,7 +423,7 @@ module Aws
         params['X-Amz-Algorithm'] = 'AWS4-HMAC-SHA256'
         params['X-Amz-Credential'] = credential(creds, date)
         params['X-Amz-Date'] = datetime
-        params['X-Amz-Expires'] = presigned_url_expiration(options, creds).to_s
+        params['X-Amz-Expires'] = presigned_url_expiration(options, expiration).to_s
         params['X-Amz-Security-Token'] = creds.session_token if creds.session_token
         params['X-Amz-SignedHeaders'] = signed_headers(headers)
 
@@ -700,7 +700,11 @@ module Aws
       def fetch_credentials
         credentials = @credentials_provider.credentials
         if credentials_set?(credentials)
-          credentials
+          expiration = nil
+          if @credentials_provider.respond_to?(:expiration)
+            expiration = @credentials_provider.expiration
+          end
+          [credentials, expiration]
         else
           raise Errors::MissingCredentialsError,
           'unable to sign request without credentials set'
@@ -718,12 +722,12 @@ module Aws
           !credentials.secret_access_key.empty?
       end
 
-      def presigned_url_expiration(options, creds)
+      def presigned_url_expiration(options, expiration)
         expires_in = extract_expires_in(options)
-        return expires_in unless creds.respond_to?(:expiration)
+        return expires_in unless expiration
 
-        creds_expiration_seconds = (creds.expiration - Time.now).to_i
-        [expires_in, creds_expiration_seconds].min
+        expiration_seconds = (expiration - Time.now).to_i
+        [expires_in, expiration_seconds].min
       end
 
       ### CRT Code
@@ -731,13 +735,13 @@ module Aws
       # the credentials used by CRT must be a
       # CRT StaticCredentialsProvider object
       def crt_fetch_credentials
-        creds = fetch_credentials
+        creds, expiration = fetch_credentials
         crt_creds = Aws::Crt::Auth::StaticCredentialsProvider.new(
           creds.access_key_id,
           creds.secret_access_key,
           creds.session_token
         )
-        [crt_creds, creds]
+        [crt_creds, expiration]
       end
 
       def crt_sign_request(request)
@@ -800,7 +804,7 @@ module Aws
       end
 
       def crt_presign_url(options)
-        creds, ruby_creds = crt_fetch_credentials
+        creds, expiration = crt_fetch_credentials
 
         http_method = extract_http_method(options)
         url = extract_url(options)
@@ -828,7 +832,7 @@ module Aws
           use_double_uri_encode: @uri_escape_path,
           should_normalize_uri_path: @normalize_path,
           omit_session_token: @omit_session_token,
-          expiration_in_seconds: presigned_url_expiration(options, ruby_creds)
+          expiration_in_seconds: presigned_url_expiration(options, expiration)
         )
         http_request = Aws::Crt::Http::Message.new(
           http_method, url.to_s, headers
