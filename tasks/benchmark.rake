@@ -15,13 +15,10 @@ task 'benchmark:archive' do
 
   puts 'Archiving benchmark report from GH with '\
        "repo: #{ENV['GH_REPO']}, ref: #{ENV['GH_REF']}, event: #{ENV['GH_EVENT']}"
-  repo = ENV['GH_REPO'] || 'aws/aws-sdk-ruby'
-  ref = ENV['GH_REF'] || 'version-3'
-  event = ENV['GH_EVENT'] || 'push'
-
   folder =
-    if event == 'pull_request'
-      if repo == 'aws/aws-sdk-ruby-staging'
+    if ENV['GH_EVENT'] == 'pull_request'
+      ref = ENV['GH_REF']
+      if ENV['GH_REPO'] == 'aws/aws-sdk-ruby-staging'
         "staging-pr/#{ref}"
       else
         "pr/#{ref}"
