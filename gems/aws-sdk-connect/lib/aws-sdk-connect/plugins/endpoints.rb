@@ -328,6 +328,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::SearchQueues.build(context)
           when :search_quick_connects
             Aws::Connect::Endpoints::SearchQuickConnects.build(context)
+          when :search_resource_tags
+            Aws::Connect::Endpoints::SearchResourceTags.build(context)
           when :search_routing_profiles
             Aws::Connect::Endpoints::SearchRoutingProfiles.build(context)
           when :search_security_profiles

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2023-06-26)
+------------------
+
+* Feature - Support for a new API "GetMFADevice" to present MFA device metadata such as device certifications
+
 1.81.0 (2023-06-16)
 ------------------
 

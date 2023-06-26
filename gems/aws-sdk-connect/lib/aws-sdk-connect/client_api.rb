@@ -523,6 +523,7 @@ module Aws::Connect
     MaxResult200 = Shapes::IntegerShape.new(name: 'MaxResult200')
     MaxResult25 = Shapes::IntegerShape.new(name: 'MaxResult25')
     MaxResult7 = Shapes::IntegerShape.new(name: 'MaxResult7')
+    MaximumResultReturnedException = Shapes::StructureShape.new(name: 'MaximumResultReturnedException')
     MediaConcurrencies = Shapes::ListShape.new(name: 'MediaConcurrencies')
     MediaConcurrency = Shapes::StructureShape.new(name: 'MediaConcurrency')
     Message = Shapes::StringShape.new(name: 'Message')
@@ -665,7 +666,9 @@ module Aws::Connect
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceNotReadyException = Shapes::StructureShape.new(name: 'ResourceNotReadyException')
+    ResourceTagsSearchCriteria = Shapes::StructureShape.new(name: 'ResourceTagsSearchCriteria')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    ResourceTypeList = Shapes::ListShape.new(name: 'ResourceTypeList')
     ResumeContactRecordingRequest = Shapes::StructureShape.new(name: 'ResumeContactRecordingRequest')
     ResumeContactRecordingResponse = Shapes::StructureShape.new(name: 'ResumeContactRecordingResponse')
     RoutingProfile = Shapes::StructureShape.new(name: 'RoutingProfile')
@@ -708,6 +711,8 @@ module Aws::Connect
     SearchQueuesResponse = Shapes::StructureShape.new(name: 'SearchQueuesResponse')
     SearchQuickConnectsRequest = Shapes::StructureShape.new(name: 'SearchQuickConnectsRequest')
     SearchQuickConnectsResponse = Shapes::StructureShape.new(name: 'SearchQuickConnectsResponse')
+    SearchResourceTagsRequest = Shapes::StructureShape.new(name: 'SearchResourceTagsRequest')
+    SearchResourceTagsResponse = Shapes::StructureShape.new(name: 'SearchResourceTagsResponse')
     SearchRoutingProfilesRequest = Shapes::StructureShape.new(name: 'SearchRoutingProfilesRequest')
     SearchRoutingProfilesResponse = Shapes::StructureShape.new(name: 'SearchRoutingProfilesResponse')
     SearchSecurityProfilesRequest = Shapes::StructureShape.new(name: 'SearchSecurityProfilesRequest')
@@ -781,12 +786,17 @@ module Aws::Connect
     TagCondition = Shapes::StructureShape.new(name: 'TagCondition')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagKeyString = Shapes::StringShape.new(name: 'TagKeyString')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
     TagOrConditionList = Shapes::ListShape.new(name: 'TagOrConditionList')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagRestrictedResourceList = Shapes::ListShape.new(name: 'TagRestrictedResourceList')
     TagRestrictedResourceName = Shapes::StringShape.new(name: 'TagRestrictedResourceName')
+    TagSearchCondition = Shapes::StructureShape.new(name: 'TagSearchCondition')
+    TagSet = Shapes::StructureShape.new(name: 'TagSet')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TagValueString = Shapes::StringShape.new(name: 'TagValueString')
+    TagsList = Shapes::ListShape.new(name: 'TagsList')
     TaskActionDefinition = Shapes::StructureShape.new(name: 'TaskActionDefinition')
     TaskDescriptionExpression = Shapes::StringShape.new(name: 'TaskDescriptionExpression')
     TaskNameExpression = Shapes::StringShape.new(name: 'TaskNameExpression')
@@ -2701,6 +2711,9 @@ module Aws::Connect
     ListUsersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListUsersResponse.struct_class = Types::ListUsersResponse
 
+    MaximumResultReturnedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    MaximumResultReturnedException.struct_class = Types::MaximumResultReturnedException
+
     MediaConcurrencies.member = Shapes::ShapeRef.new(shape: MediaConcurrency)
 
     MediaConcurrency.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, required: true, location_name: "Channel"))
@@ -3016,6 +3029,11 @@ module Aws::Connect
     ResourceNotReadyException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ResourceNotReadyException.struct_class = Types::ResourceNotReadyException
 
+    ResourceTagsSearchCriteria.add_member(:tag_search_condition, Shapes::ShapeRef.new(shape: TagSearchCondition, location_name: "TagSearchCondition"))
+    ResourceTagsSearchCriteria.struct_class = Types::ResourceTagsSearchCriteria
+
+    ResourceTypeList.member = Shapes::ShapeRef.new(shape: String)
+
     ResumeContactRecordingRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     ResumeContactRecordingRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
     ResumeContactRecordingRequest.add_member(:initial_contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "InitialContactId"))
@@ -3185,6 +3203,17 @@ module Aws::Connect
     SearchQuickConnectsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
     SearchQuickConnectsResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
     SearchQuickConnectsResponse.struct_class = Types::SearchQuickConnectsResponse
+
+    SearchResourceTagsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceIdOrArn, required: true, location_name: "InstanceId"))
+    SearchResourceTagsRequest.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypeList, location_name: "ResourceTypes"))
+    SearchResourceTagsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchResourceTagsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchResourceTagsRequest.add_member(:search_criteria, Shapes::ShapeRef.new(shape: ResourceTagsSearchCriteria, location_name: "SearchCriteria"))
+    SearchResourceTagsRequest.struct_class = Types::SearchResourceTagsRequest
+
+    SearchResourceTagsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
+    SearchResourceTagsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchResourceTagsResponse.struct_class = Types::SearchResourceTagsResponse
 
     SearchRoutingProfilesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     SearchRoutingProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
@@ -3440,6 +3469,18 @@ module Aws::Connect
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagRestrictedResourceList.member = Shapes::ShapeRef.new(shape: TagRestrictedResourceName)
+
+    TagSearchCondition.add_member(:tag_key, Shapes::ShapeRef.new(shape: TagKeyString, location_name: "tagKey"))
+    TagSearchCondition.add_member(:tag_value, Shapes::ShapeRef.new(shape: TagValueString, location_name: "tagValue"))
+    TagSearchCondition.add_member(:tag_key_comparison_type, Shapes::ShapeRef.new(shape: StringComparisonType, location_name: "tagKeyComparisonType"))
+    TagSearchCondition.add_member(:tag_value_comparison_type, Shapes::ShapeRef.new(shape: StringComparisonType, location_name: "tagValueComparisonType"))
+    TagSearchCondition.struct_class = Types::TagSearchCondition
+
+    TagSet.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "key"))
+    TagSet.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "value"))
+    TagSet.struct_class = Types::TagSet
+
+    TagsList.member = Shapes::ShapeRef.new(shape: TagSet)
 
     TaskActionDefinition.add_member(:name, Shapes::ShapeRef.new(shape: TaskNameExpression, required: true, location_name: "Name"))
     TaskActionDefinition.add_member(:description, Shapes::ShapeRef.new(shape: TaskDescriptionExpression, location_name: "Description"))
@@ -6036,6 +6077,26 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:search_resource_tags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchResourceTags"
+        o.http_method = "POST"
+        o.http_request_uri = "/search-resource-tags"
+        o.input = Shapes::ShapeRef.new(shape: SearchResourceTagsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchResourceTagsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: MaximumResultReturnedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

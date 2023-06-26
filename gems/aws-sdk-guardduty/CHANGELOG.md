@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2023-06-26)
+------------------
+
+* Feature - Add support for user.extra.sessionName in Kubernetes Audit Logs Findings.
+
 1.72.0 (2023-06-15)
 ------------------
 

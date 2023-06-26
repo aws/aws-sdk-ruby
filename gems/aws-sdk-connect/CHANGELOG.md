@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2023-06-26)
+------------------
+
+* Feature - This release provides a way to search for existing tags within an instance. Before tagging a resource, ensure consistency by searching for pre-existing key:value pairs.
+
 1.114.0 (2023-06-16)
 ------------------
 

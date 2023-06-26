@@ -39,6 +39,7 @@ module Aws::Connect
   # * {InvalidParameterException}
   # * {InvalidRequestException}
   # * {LimitExceededException}
+  # * {MaximumResultReturnedException}
   # * {OutboundContactNotPermittedException}
   # * {PropertyValidationException}
   # * {ResourceConflictException}
@@ -225,6 +226,21 @@ module Aws::Connect
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Connect::Types::LimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class MaximumResultReturnedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Connect::Types::MaximumResultReturnedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

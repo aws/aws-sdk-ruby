@@ -13255,6 +13255,16 @@ module Aws::Glue
     #   4.0 or later.
     #   @return [String]
     #
+    # @!attribute [rw] starting_timestamp
+    #   The timestamp of the record in the Kafka topic to start reading data
+    #   from. The possible values are a timestamp string in UTC format of
+    #   the pattern `yyyy-mm-ddTHH:MM:SSZ` (where Z represents a UTC
+    #   timezone offset with a +/-. For example:
+    #   "2023-04-04T08:00:00+08:00").
+    #
+    #   Only one of `StartingTimestamp` or `StartingOffsets` must be set.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/KafkaStreamingSourceOptions AWS API Documentation
     #
     class KafkaStreamingSourceOptions < Struct.new(
@@ -13275,7 +13285,8 @@ module Aws::Glue
       :min_partitions,
       :include_headers,
       :add_record_timestamp,
-      :emit_consumer_lag_metrics)
+      :emit_consumer_lag_metrics,
+      :starting_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13319,8 +13330,15 @@ module Aws::Glue
     #
     # @!attribute [rw] starting_position
     #   The starting position in the Kinesis data stream to read data from.
-    #   The possible values are `"latest"`, `"trim_horizon"`, or
-    #   `"earliest"`. The default value is `"latest"`.
+    #   The possible values are `"latest"`, `"trim_horizon"`, `"earliest"`,
+    #   or a timestamp string in UTC format in the pattern
+    #   `yyyy-mm-ddTHH:MM:SSZ` (where `Z` represents a UTC timezone offset
+    #   with a +/-. For example: "2023-04-04T08:00:00-04:00"). The default
+    #   value is `"latest"`.
+    #
+    #   Note: Using a value that is a timestamp string in UTC format for
+    #   "startingPosition" is supported only for Glue version 4.0 or
+    #   later.
     #   @return [String]
     #
     # @!attribute [rw] max_fetch_time_in_ms
@@ -13413,6 +13431,14 @@ module Aws::Glue
     #   4.0 or later.
     #   @return [String]
     #
+    # @!attribute [rw] starting_timestamp
+    #   The timestamp of the record in the Kinesis data stream to start
+    #   reading data from. The possible values are a timestamp string in UTC
+    #   format of the pattern `yyyy-mm-ddTHH:MM:SSZ` (where Z represents a
+    #   UTC timezone offset with a +/-. For example:
+    #   "2023-04-04T08:00:00+08:00").
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/KinesisStreamingSourceOptions AWS API Documentation
     #
     class KinesisStreamingSourceOptions < Struct.new(
@@ -13435,7 +13461,8 @@ module Aws::Glue
       :role_arn,
       :role_session_name,
       :add_record_timestamp,
-      :emit_consumer_lag_metrics)
+      :emit_consumer_lag_metrics,
+      :starting_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end

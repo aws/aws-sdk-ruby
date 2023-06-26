@@ -879,6 +879,24 @@ module Aws::Connect
     # API to verify the status of a previous [ClaimPhoneNumber][5]
     # operation.
     #
+    # If you plan to claim and release numbers frequently during a 30 day
+    # period, contact us for a service quota exception. Otherwise, it is
+    # possible you will be blocked from claiming and releasing any more
+    # numbers until 30 days past the oldest number released has expired.
+    #
+    # By default you can claim and release up to 200% of your maximum number
+    # of active phone numbers during any 30 day period. If you claim and
+    # release phone numbers using the UI or API during a rolling 30 day
+    # cycle that exceeds 200% of your phone number service level quota, you
+    # will be blocked from claiming any more numbers until 30 days past the
+    # oldest number released has expired.
+    #
+    # For example, if you already have 99 claimed numbers and a service
+    # level quota of 99 phone numbers, and in any 30 day period you release
+    # 99, claim 99, and then release 99, you will have exceeded the 200%
+    # limit. At that point you are blocked from claiming any more numbers
+    # until you open an Amazon Web Services support ticket.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-number.html
@@ -8255,6 +8273,24 @@ module Aws::Connect
     # until the period has ended. If you accidentally release a phone
     # number, contact Amazon Web Services Support.
     #
+    # If you plan to claim and release numbers frequently during a 30 day
+    # period, contact us for a service quota exception. Otherwise, it is
+    # possible you will be blocked from claiming and releasing any more
+    # numbers until 30 days past the oldest number released has expired.
+    #
+    # By default you can claim and release up to 200% of your maximum number
+    # of active phone numbers during any 30 day period. If you claim and
+    # release phone numbers using the UI or API during a rolling 30 day
+    # cycle that exceeds 200% of your phone number service level quota, you
+    # will be blocked from claiming any more numbers until 30 days past the
+    # oldest number released has expired.
+    #
+    # For example, if you already have 99 claimed numbers and a service
+    # level quota of 99 phone numbers, and in any 30 day period you release
+    # 99, claim 99, and then release 99, you will have exceeded the 200%
+    # limit. At that point you are blocked from claiming any more numbers
+    # until you open an Amazon Web Services support ticket.
+    #
     # @option params [required, String] :phone_number_id
     #   A unique identifier for the phone number.
     #
@@ -8892,6 +8928,69 @@ module Aws::Connect
     # @param [Hash] params ({})
     def search_quick_connects(params = {}, options = {})
       req = build_request(:search_quick_connects, params)
+      req.send_request(options)
+    end
+
+    # Searches tags used in an Amazon Connect instance using optional search
+    # criteria.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [Array<String>] :resource_types
+    #   The list of resource types to be used to search tags from. If not
+    #   provided or if any empty list is provided, this API will search from
+    #   all supported resource types.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [Types::ResourceTagsSearchCriteria] :search_criteria
+    #   The search criteria to be used to return tags.
+    #
+    # @return [Types::SearchResourceTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchResourceTagsResponse#tags #tags} => Array&lt;Types::TagSet&gt;
+    #   * {Types::SearchResourceTagsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_resource_tags({
+    #     instance_id: "InstanceIdOrArn", # required
+    #     resource_types: ["String"],
+    #     next_token: "NextToken2500",
+    #     max_results: 1,
+    #     search_criteria: {
+    #       tag_search_condition: {
+    #         tag_key: "TagKeyString",
+    #         tag_value: "TagValueString",
+    #         tag_key_comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #         tag_value_comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchResourceTags AWS API Documentation
+    #
+    # @overload search_resource_tags(params = {})
+    # @param [Hash] params ({})
+    def search_resource_tags(params = {}, options = {})
+      req = build_request(:search_resource_tags, params)
       req.send_request(options)
     end
 
@@ -12432,7 +12531,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.114.0'
+      context[:gem_version] = '1.115.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

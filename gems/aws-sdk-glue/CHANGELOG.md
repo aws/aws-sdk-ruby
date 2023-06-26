@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.143.0 (2023-06-26)
+------------------
+
+* Feature - Timestamp Starting Position For Kinesis and Kafka Data Sources in a Glue Streaming Job
+
 1.142.0 (2023-06-19)
 ------------------
 

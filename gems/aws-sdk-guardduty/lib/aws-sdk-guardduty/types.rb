@@ -3672,12 +3672,18 @@ module Aws::GuardDuty
     #   The groups that include the user who called the Kubernetes API.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] session_name
+    #   Entity that assumes the IAM role when Kubernetes RBAC permissions
+    #   are assigned to that role.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesUserDetails AWS API Documentation
     #
     class KubernetesUserDetails < Struct.new(
       :username,
       :uid,
-      :groups)
+      :groups,
+      :session_name)
       SENSITIVE = []
       include Aws::Structure
     end

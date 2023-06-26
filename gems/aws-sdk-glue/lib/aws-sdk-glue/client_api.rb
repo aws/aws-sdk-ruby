@@ -625,6 +625,7 @@ module Aws::Glue
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
     InvalidStateException = Shapes::StructureShape.new(name: 'InvalidStateException')
     IsVersionValid = Shapes::BooleanShape.new(name: 'IsVersionValid')
+    Iso8601DateTime = Shapes::TimestampShape.new(name: 'Iso8601DateTime', timestampFormat: "iso8601")
     JDBCConnectionType = Shapes::StringShape.new(name: 'JDBCConnectionType')
     JDBCConnectorOptions = Shapes::StructureShape.new(name: 'JDBCConnectorOptions')
     JDBCConnectorSource = Shapes::StructureShape.new(name: 'JDBCConnectorSource')
@@ -3738,6 +3739,7 @@ module Aws::Glue
     KafkaStreamingSourceOptions.add_member(:include_headers, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "IncludeHeaders"))
     KafkaStreamingSourceOptions.add_member(:add_record_timestamp, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "AddRecordTimestamp"))
     KafkaStreamingSourceOptions.add_member(:emit_consumer_lag_metrics, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "EmitConsumerLagMetrics"))
+    KafkaStreamingSourceOptions.add_member(:starting_timestamp, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "StartingTimestamp"))
     KafkaStreamingSourceOptions.struct_class = Types::KafkaStreamingSourceOptions
 
     KeyList.member = Shapes::ShapeRef.new(shape: NameString)
@@ -3768,6 +3770,7 @@ module Aws::Glue
     KinesisStreamingSourceOptions.add_member(:role_session_name, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "RoleSessionName"))
     KinesisStreamingSourceOptions.add_member(:add_record_timestamp, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "AddRecordTimestamp"))
     KinesisStreamingSourceOptions.add_member(:emit_consumer_lag_metrics, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "EmitConsumerLagMetrics"))
+    KinesisStreamingSourceOptions.add_member(:starting_timestamp, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "StartingTimestamp"))
     KinesisStreamingSourceOptions.struct_class = Types::KinesisStreamingSourceOptions
 
     LabelingSetGenerationTaskRunProperties.add_member(:output_s3_path, Shapes::ShapeRef.new(shape: UriString, location_name: "OutputS3Path"))

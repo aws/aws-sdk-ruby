@@ -382,6 +382,7 @@ module Aws::GuardDuty
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
     Service = Shapes::StructureShape.new(name: 'Service')
     ServiceAdditionalInfo = Shapes::StructureShape.new(name: 'ServiceAdditionalInfo')
+    SessionNameList = Shapes::ListShape.new(name: 'SessionNameList')
     SortCriteria = Shapes::StructureShape.new(name: 'SortCriteria')
     SourceIps = Shapes::ListShape.new(name: 'SourceIps')
     Sources = Shapes::ListShape.new(name: 'Sources')
@@ -1260,6 +1261,7 @@ module Aws::GuardDuty
     KubernetesUserDetails.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "username"))
     KubernetesUserDetails.add_member(:uid, Shapes::ShapeRef.new(shape: String, location_name: "uid"))
     KubernetesUserDetails.add_member(:groups, Shapes::ShapeRef.new(shape: Groups, location_name: "groups"))
+    KubernetesUserDetails.add_member(:session_name, Shapes::ShapeRef.new(shape: SessionNameList, location_name: "sessionName"))
     KubernetesUserDetails.struct_class = Types::KubernetesUserDetails
 
     KubernetesWorkloadDetails.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
@@ -1821,6 +1823,8 @@ module Aws::GuardDuty
     ServiceAdditionalInfo.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     ServiceAdditionalInfo.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
     ServiceAdditionalInfo.struct_class = Types::ServiceAdditionalInfo
+
+    SessionNameList.member = Shapes::ShapeRef.new(shape: String)
 
     SortCriteria.add_member(:attribute_name, Shapes::ShapeRef.new(shape: String, location_name: "attributeName"))
     SortCriteria.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderBy, location_name: "orderBy"))

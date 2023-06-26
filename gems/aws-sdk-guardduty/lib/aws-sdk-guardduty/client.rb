@@ -2028,6 +2028,8 @@ module Aws::GuardDuty
     #   resp.findings[0].resource.kubernetes_details.kubernetes_user_details.uid #=> String
     #   resp.findings[0].resource.kubernetes_details.kubernetes_user_details.groups #=> Array
     #   resp.findings[0].resource.kubernetes_details.kubernetes_user_details.groups[0] #=> String
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_user_details.session_name #=> Array
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_user_details.session_name[0] #=> String
     #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.name #=> String
     #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.type #=> String
     #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.uid #=> String
@@ -3538,9 +3540,9 @@ module Aws::GuardDuty
     end
 
     # Lists tags for a resource. Tagging is currently supported for
-    # detectors, finding filters, IP sets, and threat intel sets, with a
-    # limit of 50 tags per resource. When invoked, this operation returns
-    # all assigned tags for a given resource.
+    # detectors, finding filters, IP sets, threat intel sets, publishing
+    # destination, with a limit of 50 tags per resource. When invoked, this
+    # operation returns all assigned tags for a given resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) for the given GuardDuty resource.
@@ -4372,7 +4374,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
