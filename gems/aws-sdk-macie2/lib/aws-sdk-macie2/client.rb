@@ -551,7 +551,7 @@ module Aws::Macie2
     #     initial_run: false,
     #     job_type: "ONE_TIME", # required, accepts ONE_TIME, SCHEDULED
     #     managed_data_identifier_ids: ["__string"],
-    #     managed_data_identifier_selector: "ALL", # accepts ALL, EXCLUDE, INCLUDE, NONE
+    #     managed_data_identifier_selector: "ALL", # accepts ALL, EXCLUDE, INCLUDE, NONE, RECOMMENDED
     #     name: "__string", # required
     #     s3_job_definition: { # required
     #       bucket_criteria: {
@@ -1239,7 +1239,7 @@ module Aws::Macie2
     #   resp.last_run_time #=> Time
     #   resp.managed_data_identifier_ids #=> Array
     #   resp.managed_data_identifier_ids[0] #=> String
-    #   resp.managed_data_identifier_selector #=> String, one of "ALL", "EXCLUDE", "INCLUDE", "NONE"
+    #   resp.managed_data_identifier_selector #=> String, one of "ALL", "EXCLUDE", "INCLUDE", "NONE", "RECOMMENDED"
     #   resp.name #=> String
     #   resp.s3_job_definition.bucket_criteria.excludes.and #=> Array
     #   resp.s3_job_definition.bucket_criteria.excludes.and[0].simple_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
@@ -3847,7 +3847,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

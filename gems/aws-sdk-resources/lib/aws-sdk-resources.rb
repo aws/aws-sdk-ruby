@@ -19,6 +19,7 @@ module Aws
   autoload :ApiGatewayV2, 'aws-sdk-apigatewayv2'
   autoload :AppConfig, 'aws-sdk-appconfig'
   autoload :AppConfigData, 'aws-sdk-appconfigdata'
+  autoload :AppFabric, 'aws-sdk-appfabric'
   autoload :AppIntegrationsService, 'aws-sdk-appintegrationsservice'
   autoload :AppMesh, 'aws-sdk-appmesh'
   autoload :AppRegistry, 'aws-sdk-appregistry'

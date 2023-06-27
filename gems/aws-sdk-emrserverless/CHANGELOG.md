@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2023-06-27)
+------------------
+
+* Feature - This release adds support to update the release label of an EMR Serverless application to upgrade it to a different version of Amazon EMR via UpdateApplication API.
+
 1.9.0 (2023-06-15)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2023-06-27)
+------------------
+
+* Feature - This release adds support to bypass SSO with the SAPOData connector when connecting to an SAP instance.
+
 1.44.0 (2023-06-20)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.782.0 (2023-06-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::AppFabric`.
+
 1.781.0 (2023-06-20)
 ------------------
 

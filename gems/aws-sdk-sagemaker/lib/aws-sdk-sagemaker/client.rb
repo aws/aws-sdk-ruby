@@ -3240,6 +3240,10 @@ module Aws::SageMaker
     #         kms_key_id: "KmsKeyId",
     #       },
     #       enable_online_store: false,
+    #       ttl_duration: {
+    #         unit: "Seconds", # accepts Seconds, Minutes, Hours, Days, Weeks
+    #         value: 1,
+    #       },
     #     },
     #     offline_store_config: {
     #       s3_storage_config: { # required
@@ -11361,6 +11365,8 @@ module Aws::SageMaker
     #   resp.last_modified_time #=> Time
     #   resp.online_store_config.security_config.kms_key_id #=> String
     #   resp.online_store_config.enable_online_store #=> Boolean
+    #   resp.online_store_config.ttl_duration.unit #=> String, one of "Seconds", "Minutes", "Hours", "Days", "Weeks"
+    #   resp.online_store_config.ttl_duration.value #=> Integer
     #   resp.offline_store_config.s3_storage_config.s3_uri #=> String
     #   resp.offline_store_config.s3_storage_config.kms_key_id #=> String
     #   resp.offline_store_config.s3_storage_config.resolved_output_s3_uri #=> String
@@ -22069,6 +22075,9 @@ module Aws::SageMaker
     #   request. It takes some time after you've made a valid request for
     #   Feature Store to update the feature group.
     #
+    # @option params [Types::OnlineStoreConfigUpdate] :online_store_config
+    #   Updates the feature group online store configuration.
+    #
     # @return [Types::UpdateFeatureGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFeatureGroupResponse#feature_group_arn #feature_group_arn} => String
@@ -22083,6 +22092,12 @@ module Aws::SageMaker
     #         feature_type: "Integral", # accepts Integral, Fractional, String
     #       },
     #     ],
+    #     online_store_config: {
+    #       ttl_duration: {
+    #         unit: "Seconds", # accepts Seconds, Minutes, Hours, Days, Weeks
+    #         value: 1,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -23743,7 +23758,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.189.0'
+      context[:gem_version] = '1.190.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2023-06-27)
+------------------
+
+* Feature - Introducing TTL for online store records for feature groups.
+
 1.18.0 (2023-06-15)
 ------------------
 

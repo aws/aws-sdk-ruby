@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2023-06-27)
+------------------
+
+* Feature - IVS customers can now revoke the viewer session associated with an auth token, to prevent and stop playback using that token.
+
 1.32.0 (2023-06-15)
 ------------------
 

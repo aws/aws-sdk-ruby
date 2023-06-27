@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.153.0 (2023-06-27)
+------------------
+
+* Feature - Systems Manager doc-only update for June 2023.
+
 1.152.0 (2023-06-15)
 ------------------
 

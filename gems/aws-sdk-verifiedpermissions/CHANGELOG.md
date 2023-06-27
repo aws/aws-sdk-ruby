@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2023-06-27)
+------------------
+
+* Feature - This update fixes several broken links to the Cedar documentation.
+
 1.2.0 (2023-06-23)
 ------------------
 

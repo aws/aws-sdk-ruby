@@ -4102,7 +4102,7 @@ module Aws::SageMaker
     # @!attribute [rw] model_data_source
     #   Specifies the location of ML model data to deploy.
     #
-    #   <note markdown="1"> Currently you cannot use `ModelDataSource` in conjuction with
+    #   <note markdown="1"> Currently you cannot use `ModelDataSource` in conjunction with
     #   SageMaker batch transform, SageMaker serverless endpoints, SageMaker
     #   multi-model endpoints, and SageMaker Marketplace.
     #
@@ -30896,11 +30896,44 @@ module Aws::SageMaker
     #   The default value is `False`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] ttl_duration
+    #   Time to live duration, where the record is hard deleted after the
+    #   expiration time is reached; `ExpiresAt` = `EventTime` +
+    #   `TtlDuration`. For information on HardDelete, see the
+    #   [DeleteRecord][1] API in the Amazon SageMaker API Reference guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html
+    #   @return [Types::TtlDuration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OnlineStoreConfig AWS API Documentation
     #
     class OnlineStoreConfig < Struct.new(
       :security_config,
-      :enable_online_store)
+      :enable_online_store,
+      :ttl_duration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates the feature group online store configuration.
+    #
+    # @!attribute [rw] ttl_duration
+    #   Time to live duration, where the record is hard deleted after the
+    #   expiration time is reached; `ExpiresAt` = `EventTime` +
+    #   `TtlDuration`. For information on HardDelete, see the
+    #   [DeleteRecord][1] API in the Amazon SageMaker API Reference guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html
+    #   @return [Types::TtlDuration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OnlineStoreConfigUpdate AWS API Documentation
+    #
+    class OnlineStoreConfigUpdate < Struct.new(
+      :ttl_duration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35048,8 +35081,8 @@ module Aws::SageMaker
     #   as part of the ML model data to deploy. A valid key name prefix
     #   identified by `S3Uri` always ends with a forward slash (/).
     #
-    #   If you choose S3Object, S3Uri identifies an object that is the ML
-    #   model data to deploy.
+    #   If you choose `S3Object`, `S3Uri` identifies an object that is the
+    #   ML model data to deploy.
     #   @return [String]
     #
     # @!attribute [rw] compression_type
@@ -35103,8 +35136,8 @@ module Aws::SageMaker
     #     `s3://mybucket/model/weights` and
     #     `s3://mybucket/model/weights/part1` and you specify
     #     `s3://mybucket/model/` as the value of `S3Uri` and `S3Prefix` as
-    #     the value of S3DataType, then it will result in name clash between
-    #     `/opt/ml/model/weights` (a regular file) and
+    #     the value of `S3DataType`, then it will result in name clash
+    #     between `/opt/ml/model/weights` (a regular file) and
     #     `/opt/ml/model/weights/` (a directory).
     #
     #   * Do not organize the model artifacts in [S3 console using
@@ -38802,6 +38835,32 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Time to live duration, where the record is hard deleted after the
+    # expiration time is reached; `ExpiresAt` = `EventTime` + `TtlDuration`.
+    # For information on HardDelete, see the [DeleteRecord][1] API in the
+    # Amazon SageMaker API Reference guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html
+    #
+    # @!attribute [rw] unit
+    #   `TtlDuration` time unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   `TtlDuration` time value.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TtlDuration AWS API Documentation
+    #
+    class TtlDuration < Struct.new(
+      :unit,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The job completion criteria.
     #
     # @!attribute [rw] target_objective_metric_value
@@ -39429,11 +39488,16 @@ module Aws::SageMaker
     #   request for Feature Store to update the feature group.
     #   @return [Array<Types::FeatureDefinition>]
     #
+    # @!attribute [rw] online_store_config
+    #   Updates the feature group online store configuration.
+    #   @return [Types::OnlineStoreConfigUpdate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateFeatureGroupRequest AWS API Documentation
     #
     class UpdateFeatureGroupRequest < Struct.new(
       :feature_group_name,
-      :feature_additions)
+      :feature_additions,
+      :online_store_config)
       SENSITIVE = []
       include Aws::Structure
     end

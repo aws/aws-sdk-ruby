@@ -24,6 +24,8 @@ module Aws::SageMakerFeatureStoreRuntime
     BatchGetRecordResultDetails = Shapes::ListShape.new(name: 'BatchGetRecordResultDetails')
     DeleteRecordRequest = Shapes::StructureShape.new(name: 'DeleteRecordRequest')
     DeletionMode = Shapes::StringShape.new(name: 'DeletionMode')
+    ExpirationTimeResponse = Shapes::StringShape.new(name: 'ExpirationTimeResponse')
+    ExpiresAt = Shapes::StringShape.new(name: 'ExpiresAt')
     FeatureGroupName = Shapes::StringShape.new(name: 'FeatureGroupName')
     FeatureName = Shapes::StringShape.new(name: 'FeatureName')
     FeatureNames = Shapes::ListShape.new(name: 'FeatureNames')
@@ -39,6 +41,9 @@ module Aws::SageMakerFeatureStoreRuntime
     ServiceUnavailable = Shapes::StructureShape.new(name: 'ServiceUnavailable')
     TargetStore = Shapes::StringShape.new(name: 'TargetStore')
     TargetStores = Shapes::ListShape.new(name: 'TargetStores')
+    TtlDuration = Shapes::StructureShape.new(name: 'TtlDuration')
+    TtlDurationUnit = Shapes::StringShape.new(name: 'TtlDurationUnit')
+    TtlDurationValue = Shapes::IntegerShape.new(name: 'TtlDurationValue')
     UnprocessedIdentifiers = Shapes::ListShape.new(name: 'UnprocessedIdentifiers')
     ValidationError = Shapes::StructureShape.new(name: 'ValidationError')
     ValueAsString = Shapes::StringShape.new(name: 'ValueAsString')
@@ -62,6 +67,7 @@ module Aws::SageMakerFeatureStoreRuntime
     BatchGetRecordIdentifiers.member = Shapes::ShapeRef.new(shape: BatchGetRecordIdentifier)
 
     BatchGetRecordRequest.add_member(:identifiers, Shapes::ShapeRef.new(shape: BatchGetRecordIdentifiers, required: true, location_name: "Identifiers"))
+    BatchGetRecordRequest.add_member(:expiration_time_response, Shapes::ShapeRef.new(shape: ExpirationTimeResponse, location_name: "ExpirationTimeResponse"))
     BatchGetRecordRequest.struct_class = Types::BatchGetRecordRequest
 
     BatchGetRecordResponse.add_member(:records, Shapes::ShapeRef.new(shape: BatchGetRecordResultDetails, required: true, location_name: "Records"))
@@ -72,6 +78,7 @@ module Aws::SageMakerFeatureStoreRuntime
     BatchGetRecordResultDetail.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: ValueAsString, required: true, location_name: "FeatureGroupName"))
     BatchGetRecordResultDetail.add_member(:record_identifier_value_as_string, Shapes::ShapeRef.new(shape: ValueAsString, required: true, location_name: "RecordIdentifierValueAsString"))
     BatchGetRecordResultDetail.add_member(:record, Shapes::ShapeRef.new(shape: Record, required: true, location_name: "Record"))
+    BatchGetRecordResultDetail.add_member(:expires_at, Shapes::ShapeRef.new(shape: ExpiresAt, location_name: "ExpiresAt"))
     BatchGetRecordResultDetail.struct_class = Types::BatchGetRecordResultDetail
 
     BatchGetRecordResultDetails.member = Shapes::ShapeRef.new(shape: BatchGetRecordResultDetail)
@@ -92,9 +99,11 @@ module Aws::SageMakerFeatureStoreRuntime
     GetRecordRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupName, required: true, location: "uri", location_name: "FeatureGroupName"))
     GetRecordRequest.add_member(:record_identifier_value_as_string, Shapes::ShapeRef.new(shape: ValueAsString, required: true, location: "querystring", location_name: "RecordIdentifierValueAsString"))
     GetRecordRequest.add_member(:feature_names, Shapes::ShapeRef.new(shape: FeatureNames, location: "querystring", location_name: "FeatureName"))
+    GetRecordRequest.add_member(:expiration_time_response, Shapes::ShapeRef.new(shape: ExpirationTimeResponse, location: "querystring", location_name: "ExpirationTimeResponse"))
     GetRecordRequest.struct_class = Types::GetRecordRequest
 
     GetRecordResponse.add_member(:record, Shapes::ShapeRef.new(shape: Record, location_name: "Record"))
+    GetRecordResponse.add_member(:expires_at, Shapes::ShapeRef.new(shape: ExpiresAt, location_name: "ExpiresAt"))
     GetRecordResponse.struct_class = Types::GetRecordResponse
 
     InternalFailure.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
@@ -103,6 +112,7 @@ module Aws::SageMakerFeatureStoreRuntime
     PutRecordRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupName, required: true, location: "uri", location_name: "FeatureGroupName"))
     PutRecordRequest.add_member(:record, Shapes::ShapeRef.new(shape: Record, required: true, location_name: "Record"))
     PutRecordRequest.add_member(:target_stores, Shapes::ShapeRef.new(shape: TargetStores, location_name: "TargetStores"))
+    PutRecordRequest.add_member(:ttl_duration, Shapes::ShapeRef.new(shape: TtlDuration, location_name: "TtlDuration"))
     PutRecordRequest.struct_class = Types::PutRecordRequest
 
     Record.member = Shapes::ShapeRef.new(shape: FeatureValue)
@@ -116,6 +126,10 @@ module Aws::SageMakerFeatureStoreRuntime
     ServiceUnavailable.struct_class = Types::ServiceUnavailable
 
     TargetStores.member = Shapes::ShapeRef.new(shape: TargetStore)
+
+    TtlDuration.add_member(:unit, Shapes::ShapeRef.new(shape: TtlDurationUnit, required: true, location_name: "Unit"))
+    TtlDuration.add_member(:value, Shapes::ShapeRef.new(shape: TtlDurationValue, required: true, location_name: "Value"))
+    TtlDuration.struct_class = Types::TtlDuration
 
     UnprocessedIdentifiers.member = Shapes::ShapeRef.new(shape: BatchGetRecordIdentifier)
 

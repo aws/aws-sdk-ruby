@@ -1264,6 +1264,7 @@ module Aws::Appflow
     SAPODataConnectorProfileProperties.add_member(:logon_language, Shapes::ShapeRef.new(shape: LogonLanguage, location_name: "logonLanguage"))
     SAPODataConnectorProfileProperties.add_member(:private_link_service_name, Shapes::ShapeRef.new(shape: PrivateLinkServiceName, location_name: "privateLinkServiceName"))
     SAPODataConnectorProfileProperties.add_member(:o_auth_properties, Shapes::ShapeRef.new(shape: OAuthProperties, location_name: "oAuthProperties"))
+    SAPODataConnectorProfileProperties.add_member(:disable_sso, Shapes::ShapeRef.new(shape: Boolean, location_name: "disableSSO"))
     SAPODataConnectorProfileProperties.struct_class = Types::SAPODataConnectorProfileProperties
 
     SAPODataDestinationProperties.add_member(:object_path, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "objectPath"))

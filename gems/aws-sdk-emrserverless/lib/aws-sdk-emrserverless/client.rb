@@ -413,7 +413,7 @@ module Aws::EMRServerless
     #   The name of the application.
     #
     # @option params [required, String] :release_label
-    #   The EMR release associated with the application.
+    #   The Amazon EMR release associated with the application.
     #
     # @option params [required, String] :type
     #   The type of application you want to start, such as Spark or Hive.
@@ -1133,6 +1133,10 @@ module Aws::EMRServerless
     #   image details in this parameter for each worker type, or in
     #   `imageConfiguration` for all worker types.
     #
+    # @option params [String] :release_label
+    #   The Amazon EMR release label for the application. You can change the
+    #   release label to use a different release of Amazon EMR.
+    #
     # @return [Types::UpdateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateApplicationResponse#application #application} => Types::Application
@@ -1179,6 +1183,7 @@ module Aws::EMRServerless
     #         },
     #       },
     #     },
+    #     release_label: "ReleaseLabel",
     #   })
     #
     # @example Response structure
@@ -1238,7 +1243,7 @@ module Aws::EMRServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emrserverless'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

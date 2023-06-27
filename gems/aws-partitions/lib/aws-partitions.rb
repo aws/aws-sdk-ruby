@@ -258,6 +258,7 @@ module Aws
             'ApiGatewayV2' => 'apigateway',
             'AppConfig' => 'appconfig',
             'AppConfigData' => 'appconfigdata',
+            'AppFabric' => 'appfabric',
             'AppIntegrationsService' => 'app-integrations',
             'AppMesh' => 'appmesh',
             'AppRegistry' => 'servicecatalog-appregistry',

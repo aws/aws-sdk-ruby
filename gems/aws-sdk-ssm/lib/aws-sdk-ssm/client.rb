@@ -451,7 +451,8 @@ module Aws::SSM
     #   `/aws/ssm/MyGroup/appmanager`.
     #
     #   For the `Document` and `Parameter` values, use the name of the
-    #   resource.
+    #   resource. If you're tagging a shared document, you must use the full
+    #   ARN of the document.
     #
     #   `ManagedInstance`: `mi-012345abcde`
     #
@@ -1637,8 +1638,8 @@ module Aws::SSM
 
     # Creates a new OpsItem. You must have permission in Identity and Access
     # Management (IAM) to create a new OpsItem. For more information, see
-    # [Getting started with OpsCenter][1] in the *Amazon Web Services
-    # Systems Manager User Guide*.
+    # [Set up OpsCenter][1] in the *Amazon Web Services Systems Manager User
+    # Guide*.
     #
     # Operations engineers and IT professionals use Amazon Web Services
     # Systems Manager OpsCenter to view, investigate, and remediate
@@ -1649,7 +1650,7 @@ module Aws::SSM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setup.html
     # [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html
     #
     # @option params [required, String] :description
@@ -1701,7 +1702,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-manually-create-OpsItems.html
     #
     # @option params [Array<Types::OpsItemNotification>] :notifications
     #   The Amazon Resource Name (ARN) of an SNS topic where notifications are
@@ -1730,10 +1731,7 @@ module Aws::SSM
     #   impacted resource.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Optional metadata that you assign to a resource. You can restrict
-    #   access to OpsItems by using an inline IAM policy that specifies tags.
-    #   For more information, see [Getting started with OpsCenter][1] in the
-    #   *Amazon Web Services Systems Manager User Guide*.
+    #   Optional metadata that you assign to a resource.
     #
     #   Tags use a key-value pair. For example:
     #
@@ -1743,10 +1741,6 @@ module Aws::SSM
     #   both the `ssm:CreateOpsItems` operation and the
     #   `ssm:AddTagsToResource` operation. To add tags to an existing OpsItem,
     #   use the AddTagsToResource operation.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html#OpsCenter-getting-started-user-permissions
     #
     # @option params [String] :category
     #   Specify a category to assign to an OpsItem.
@@ -1774,13 +1768,12 @@ module Aws::SSM
     # @option params [String] :account_id
     #   The target Amazon Web Services account where you want to create an
     #   OpsItem. To make this call, your account must be configured to work
-    #   with OpsItems across accounts. For more information, see [Setting up
-    #   OpsCenter to work with OpsItems across accounts][1] in the *Amazon Web
-    #   Services Systems Manager User Guide*.
+    #   with OpsItems across accounts. For more information, see [Set up
+    #   OpsCenter][1] in the *Amazon Web Services Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-OpsCenter-multiple-accounts.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setup.html
     #
     # @return [Types::CreateOpsItemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3718,18 +3711,19 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Describes one or more of your managed nodes, including information
-    # about the operating system platform, the version of SSM Agent
-    # installed on the managed node, node status, and so on.
+    # Provides information about one or more of your managed nodes,
+    # including the operating system platform, SSM Agent version,
+    # association status, and IP address. This operation does not return
+    # information for nodes that are either Stopped or Terminated.
     #
-    # If you specify one or more managed node IDs, it returns information
+    # If you specify one or more node IDs, the operation returns information
     # for those managed nodes. If you don't specify node IDs, it returns
     # information for all your managed nodes. If you specify a node ID that
     # isn't valid or a node that you don't own, you receive an error.
     #
-    # <note markdown="1"> The `IamRole` field for this API operation is the Identity and Access
-    # Management (IAM) role assigned to on-premises managed nodes. This call
-    # doesn't return the IAM role for EC2 instances.
+    # <note markdown="1"> The `IamRole` field returned for this API operation is the Identity
+    # and Access Management (IAM) role assigned to on-premises managed
+    # nodes. This operation does not return the IAM role for EC2 instances.
     #
     #  </note>
     #
@@ -3746,13 +3740,14 @@ module Aws::SSM
     # @option params [Array<Types::InstanceInformationStringFilter>] :filters
     #   One or more filters. Use a filter to return a more specific list of
     #   managed nodes. You can filter based on tags applied to your managed
-    #   nodes. Use this `Filters` data type instead of
-    #   `InstanceInformationFilterList`, which is deprecated.
+    #   nodes. Tag filters can't be combined with other filter types. Use
+    #   this `Filters` data type instead of `InstanceInformationFilterList`,
+    #   which is deprecated.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
     #   returns a token that you can specify in a subsequent call to get the
-    #   next set of results.
+    #   next set of results. The default value is 10 items.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -4655,8 +4650,8 @@ module Aws::SSM
 
     # Query a set of OpsItems. You must have permission in Identity and
     # Access Management (IAM) to query a list of OpsItems. For more
-    # information, see [Getting started with OpsCenter][1] in the *Amazon
-    # Web Services Systems Manager User Guide*.
+    # information, see [Set up OpsCenter][1] in the *Amazon Web Services
+    # Systems Manager User Guide*.
     #
     # Operations engineers and IT professionals use Amazon Web Services
     # Systems Manager OpsCenter to view, investigate, and remediate
@@ -4667,7 +4662,7 @@ module Aws::SSM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setup.html
     # [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html
     #
     # @option params [Array<Types::OpsItemFilter>] :ops_item_filters
@@ -4722,6 +4717,10 @@ module Aws::SSM
     #     Operations: Contains
     #
     #   * Key: AutomationId
+    #
+    #     Operations: Equals
+    #
+    #   * Key: AccountId
     #
     #     Operations: Equals
     #
@@ -6321,8 +6320,8 @@ module Aws::SSM
 
     # Get information about an OpsItem by using the ID. You must have
     # permission in Identity and Access Management (IAM) to view information
-    # about an OpsItem. For more information, see [Getting started with
-    # OpsCenter][1] in the *Amazon Web Services Systems Manager User Guide*.
+    # about an OpsItem. For more information, see [Set up OpsCenter][1] in
+    # the *Amazon Web Services Systems Manager User Guide*.
     #
     # Operations engineers and IT professionals use Amazon Web Services
     # Systems Manager OpsCenter to view, investigate, and remediate
@@ -6333,7 +6332,7 @@ module Aws::SSM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setup.html
     # [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html
     #
     # @option params [required, String] :ops_item_id
@@ -11620,8 +11619,8 @@ module Aws::SSM
 
     # Edit or change an OpsItem. You must have permission in Identity and
     # Access Management (IAM) to update an OpsItem. For more information,
-    # see [Getting started with OpsCenter][1] in the *Amazon Web Services
-    # Systems Manager User Guide*.
+    # see [Set up OpsCenter][1] in the *Amazon Web Services Systems Manager
+    # User Guide*.
     #
     # Operations engineers and IT professionals use Amazon Web Services
     # Systems Manager OpsCenter to view, investigate, and remediate
@@ -11632,7 +11631,7 @@ module Aws::SSM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setup.html
     # [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html
     #
     # @option params [String] :description
@@ -11670,7 +11669,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-manually-create-OpsItems.html
     #
     # @option params [Array<String>] :operational_data_to_delete
     #   Keys that you want to remove from the OperationalData map.
@@ -11696,7 +11695,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems.html#OpsCenter-working-with-OpsItems-editing-details
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html
     #
     # @option params [required, String] :ops_item_id
     #   The ID of the OpsItem.
@@ -12165,7 +12164,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.152.0'
+      context[:gem_version] = '1.153.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

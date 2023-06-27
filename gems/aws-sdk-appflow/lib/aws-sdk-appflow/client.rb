@@ -580,6 +580,7 @@ module Aws::Appflow
     #             auth_code_url: "AuthCodeUrl", # required
     #             o_auth_scopes: ["OAuthScope"], # required
     #           },
+    #           disable_sso: false,
     #         },
     #         custom_connector: {
     #           profile_properties: {
@@ -1479,6 +1480,7 @@ module Aws::Appflow
     #   resp.connector_profile_details[0].connector_profile_properties.sapo_data.o_auth_properties.auth_code_url #=> String
     #   resp.connector_profile_details[0].connector_profile_properties.sapo_data.o_auth_properties.o_auth_scopes #=> Array
     #   resp.connector_profile_details[0].connector_profile_properties.sapo_data.o_auth_properties.o_auth_scopes[0] #=> String
+    #   resp.connector_profile_details[0].connector_profile_properties.sapo_data.disable_sso #=> Boolean
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.profile_properties #=> Hash
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.profile_properties["ProfilePropertyKey"] #=> String
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.o_auth_2_properties.token_url #=> String
@@ -2602,6 +2604,7 @@ module Aws::Appflow
     #             auth_code_url: "AuthCodeUrl", # required
     #             o_auth_scopes: ["OAuthScope"], # required
     #           },
+    #           disable_sso: false,
     #         },
     #         custom_connector: {
     #           profile_properties: {
@@ -3214,7 +3217,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

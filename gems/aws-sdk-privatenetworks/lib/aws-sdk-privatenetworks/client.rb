@@ -395,9 +395,15 @@ module Aws::PrivateNetworks
     #   resp.order.network_arn #=> String
     #   resp.order.network_site_arn #=> String
     #   resp.order.order_arn #=> String
+    #   resp.order.ordered_resources #=> Array
+    #   resp.order.ordered_resources[0].commitment_configuration.automatic_renewal #=> Boolean
+    #   resp.order.ordered_resources[0].commitment_configuration.commitment_length #=> String, one of "SIXTY_DAYS", "ONE_YEAR", "THREE_YEARS"
+    #   resp.order.ordered_resources[0].count #=> Integer
+    #   resp.order.ordered_resources[0].type #=> String, one of "RADIO_UNIT", "DEVICE_IDENTIFIER"
     #   resp.order.shipping_address.city #=> String
     #   resp.order.shipping_address.company #=> String
     #   resp.order.shipping_address.country #=> String
+    #   resp.order.shipping_address.email_address #=> String
     #   resp.order.shipping_address.name #=> String
     #   resp.order.shipping_address.phone_number #=> String
     #   resp.order.shipping_address.postal_code #=> String
@@ -477,6 +483,29 @@ module Aws::PrivateNetworks
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #
+    # @option params [Types::CommitmentConfiguration] :commitment_configuration
+    #   Determines the duration and renewal status of the commitment period
+    #   for all pending radio units.
+    #
+    #   If you include `commitmentConfiguration` in the
+    #   `ActivateNetworkSiteRequest` action, you must specify the following:
+    #
+    #   * The commitment period for the radio unit. You can choose a 60-day,
+    #     1-year, or 3-year period.
+    #
+    #   * Whether you want your commitment period to automatically renew for
+    #     one more year after your current commitment period expires.
+    #
+    #   For pricing, see [Amazon Web Services Private 5G Pricing][1].
+    #
+    #   If you do not include `commitmentConfiguration` in the
+    #   `ActivateNetworkSiteRequest` action, the commitment period is set to
+    #   60-days.
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/private5g/pricing
+    #
     # @option params [required, String] :network_site_arn
     #   The Amazon Resource Name (ARN) of the network site.
     #
@@ -491,11 +520,16 @@ module Aws::PrivateNetworks
     #
     #   resp = client.activate_network_site({
     #     client_token: "ClientToken",
+    #     commitment_configuration: {
+    #       automatic_renewal: false, # required
+    #       commitment_length: "SIXTY_DAYS", # required, accepts SIXTY_DAYS, ONE_YEAR, THREE_YEARS
+    #     },
     #     network_site_arn: "Arn", # required
     #     shipping_address: { # required
     #       city: "AddressContent", # required
     #       company: "AddressContent",
     #       country: "AddressContent", # required
+    #       email_address: "AddressContent",
     #       name: "AddressContent", # required
     #       phone_number: "AddressContent",
     #       postal_code: "AddressContent", # required
@@ -605,6 +639,10 @@ module Aws::PrivateNetworks
     #   resp.access_point.attributes #=> Array
     #   resp.access_point.attributes[0].name #=> String
     #   resp.access_point.attributes[0].value #=> String
+    #   resp.access_point.commitment_information.commitment_configuration.automatic_renewal #=> Boolean
+    #   resp.access_point.commitment_information.commitment_configuration.commitment_length #=> String, one of "SIXTY_DAYS", "ONE_YEAR", "THREE_YEARS"
+    #   resp.access_point.commitment_information.expires_on #=> Time
+    #   resp.access_point.commitment_information.start_at #=> Time
     #   resp.access_point.created_at #=> Time
     #   resp.access_point.description #=> String
     #   resp.access_point.health #=> String, one of "INITIAL", "HEALTHY", "UNHEALTHY"
@@ -623,6 +661,7 @@ module Aws::PrivateNetworks
     #   resp.access_point.return_information.shipping_address.city #=> String
     #   resp.access_point.return_information.shipping_address.company #=> String
     #   resp.access_point.return_information.shipping_address.country #=> String
+    #   resp.access_point.return_information.shipping_address.email_address #=> String
     #   resp.access_point.return_information.shipping_address.name #=> String
     #   resp.access_point.return_information.shipping_address.phone_number #=> String
     #   resp.access_point.return_information.shipping_address.postal_code #=> String
@@ -1081,6 +1120,10 @@ module Aws::PrivateNetworks
     #   resp.network_resource.attributes #=> Array
     #   resp.network_resource.attributes[0].name #=> String
     #   resp.network_resource.attributes[0].value #=> String
+    #   resp.network_resource.commitment_information.commitment_configuration.automatic_renewal #=> Boolean
+    #   resp.network_resource.commitment_information.commitment_configuration.commitment_length #=> String, one of "SIXTY_DAYS", "ONE_YEAR", "THREE_YEARS"
+    #   resp.network_resource.commitment_information.expires_on #=> Time
+    #   resp.network_resource.commitment_information.start_at #=> Time
     #   resp.network_resource.created_at #=> Time
     #   resp.network_resource.description #=> String
     #   resp.network_resource.health #=> String, one of "INITIAL", "HEALTHY", "UNHEALTHY"
@@ -1099,6 +1142,7 @@ module Aws::PrivateNetworks
     #   resp.network_resource.return_information.shipping_address.city #=> String
     #   resp.network_resource.return_information.shipping_address.company #=> String
     #   resp.network_resource.return_information.shipping_address.country #=> String
+    #   resp.network_resource.return_information.shipping_address.email_address #=> String
     #   resp.network_resource.return_information.shipping_address.name #=> String
     #   resp.network_resource.return_information.shipping_address.phone_number #=> String
     #   resp.network_resource.return_information.shipping_address.postal_code #=> String
@@ -1204,9 +1248,15 @@ module Aws::PrivateNetworks
     #   resp.order.network_arn #=> String
     #   resp.order.network_site_arn #=> String
     #   resp.order.order_arn #=> String
+    #   resp.order.ordered_resources #=> Array
+    #   resp.order.ordered_resources[0].commitment_configuration.automatic_renewal #=> Boolean
+    #   resp.order.ordered_resources[0].commitment_configuration.commitment_length #=> String, one of "SIXTY_DAYS", "ONE_YEAR", "THREE_YEARS"
+    #   resp.order.ordered_resources[0].count #=> Integer
+    #   resp.order.ordered_resources[0].type #=> String, one of "RADIO_UNIT", "DEVICE_IDENTIFIER"
     #   resp.order.shipping_address.city #=> String
     #   resp.order.shipping_address.company #=> String
     #   resp.order.shipping_address.country #=> String
+    #   resp.order.shipping_address.email_address #=> String
     #   resp.order.shipping_address.name #=> String
     #   resp.order.shipping_address.phone_number #=> String
     #   resp.order.shipping_address.postal_code #=> String
@@ -1352,6 +1402,10 @@ module Aws::PrivateNetworks
     #   resp.network_resources[0].attributes #=> Array
     #   resp.network_resources[0].attributes[0].name #=> String
     #   resp.network_resources[0].attributes[0].value #=> String
+    #   resp.network_resources[0].commitment_information.commitment_configuration.automatic_renewal #=> Boolean
+    #   resp.network_resources[0].commitment_information.commitment_configuration.commitment_length #=> String, one of "SIXTY_DAYS", "ONE_YEAR", "THREE_YEARS"
+    #   resp.network_resources[0].commitment_information.expires_on #=> Time
+    #   resp.network_resources[0].commitment_information.start_at #=> Time
     #   resp.network_resources[0].created_at #=> Time
     #   resp.network_resources[0].description #=> String
     #   resp.network_resources[0].health #=> String, one of "INITIAL", "HEALTHY", "UNHEALTHY"
@@ -1370,6 +1424,7 @@ module Aws::PrivateNetworks
     #   resp.network_resources[0].return_information.shipping_address.city #=> String
     #   resp.network_resources[0].return_information.shipping_address.company #=> String
     #   resp.network_resources[0].return_information.shipping_address.country #=> String
+    #   resp.network_resources[0].return_information.shipping_address.email_address #=> String
     #   resp.network_resources[0].return_information.shipping_address.name #=> String
     #   resp.network_resources[0].return_information.shipping_address.phone_number #=> String
     #   resp.network_resources[0].return_information.shipping_address.postal_code #=> String
@@ -1592,9 +1647,15 @@ module Aws::PrivateNetworks
     #   resp.orders[0].network_arn #=> String
     #   resp.orders[0].network_site_arn #=> String
     #   resp.orders[0].order_arn #=> String
+    #   resp.orders[0].ordered_resources #=> Array
+    #   resp.orders[0].ordered_resources[0].commitment_configuration.automatic_renewal #=> Boolean
+    #   resp.orders[0].ordered_resources[0].commitment_configuration.commitment_length #=> String, one of "SIXTY_DAYS", "ONE_YEAR", "THREE_YEARS"
+    #   resp.orders[0].ordered_resources[0].count #=> Integer
+    #   resp.orders[0].ordered_resources[0].type #=> String, one of "RADIO_UNIT", "DEVICE_IDENTIFIER"
     #   resp.orders[0].shipping_address.city #=> String
     #   resp.orders[0].shipping_address.company #=> String
     #   resp.orders[0].shipping_address.country #=> String
+    #   resp.orders[0].shipping_address.email_address #=> String
     #   resp.orders[0].shipping_address.name #=> String
     #   resp.orders[0].shipping_address.phone_number #=> String
     #   resp.orders[0].shipping_address.postal_code #=> String
@@ -1662,18 +1723,55 @@ module Aws::PrivateNetworks
       req.send_request(options)
     end
 
-    # Starts an update of the specified network resource.
+    # Use this action to do the following tasks:
+    #
+    # * Update the duration and renewal status of the commitment period for
+    #   a radio unit. The update goes into effect immediately.
+    #
+    # * Request a replacement for a network resource.
+    #
+    # * Request that you return a network resource.
     #
     # After you submit a request to replace or return a network resource,
-    # the status of the network resource is `CREATING_SHIPPING_LABEL`. The
-    # shipping label is available when the status of the network resource is
-    # `PENDING_RETURN`. After the network resource is successfully returned,
-    # its status is `DELETED`. For more information, see [Return a radio
-    # unit][1].
+    # the status of the network resource changes to
+    # `CREATING_SHIPPING_LABEL`. The shipping label is available when the
+    # status of the network resource is `PENDING_RETURN`. After the network
+    # resource is successfully returned, its status changes to `DELETED`.
+    # For more information, see [Return a radio unit][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html#return-radio-unit
+    #
+    # @option params [Types::CommitmentConfiguration] :commitment_configuration
+    #   Use this action to extend and automatically renew the commitment
+    #   period for the radio unit. You can do the following:
+    #
+    #   * Change a 60-day commitment to a 1-year or 3-year commitment. The
+    #     change is immediate and the hourly rate decreases to the rate for
+    #     the new commitment period.
+    #
+    #   * Change a 1-year commitment to a 3-year commitment. The change is
+    #     immediate and the hourly rate decreases to the rate for the 3-year
+    #     commitment period.
+    #
+    #   * Set a 1-year commitment to automatically renew for an additional 1
+    #     year. The hourly rate for the additional year will continue to be
+    #     the same as your existing 1-year rate.
+    #
+    #   * Set a 3-year commitment to automatically renew for an additional 1
+    #     year. The hourly rate for the additional year will continue to be
+    #     the same as your existing 3-year rate.
+    #
+    #   * Turn off a previously-enabled automatic renewal on a 1-year or
+    #     3-year commitment. You cannot use the automatic-renewal option for a
+    #     60-day commitment.
+    #
+    #   For pricing, see [Amazon Web Services Private 5G Pricing][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/private5g/pricing
     #
     # @option params [required, String] :network_resource_arn
     #   The Amazon Resource Name (ARN) of the network resource.
@@ -1694,9 +1792,17 @@ module Aws::PrivateNetworks
     #     provide a shipping label that you can use for the return process and
     #     we ship a replacement radio unit to you.
     #
-    #   * `RETURN` - Submits a request to replace a radio unit that you no
+    #   * `RETURN` - Submits a request to return a radio unit that you no
     #     longer need. We provide a shipping label that you can use for the
     #     return process.
+    #
+    #   * `COMMITMENT` - Submits a request to change or renew the commitment
+    #     period. If you choose this value, then you must set [
+    #     `commitmentConfiguration` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/private-networks/latest/APIReference/API_StartNetworkResourceUpdate.html#privatenetworks-StartNetworkResourceUpdate-request-commitmentConfiguration
     #
     # @return [Types::StartNetworkResourceUpdateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1705,12 +1811,17 @@ module Aws::PrivateNetworks
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_network_resource_update({
+    #     commitment_configuration: {
+    #       automatic_renewal: false, # required
+    #       commitment_length: "SIXTY_DAYS", # required, accepts SIXTY_DAYS, ONE_YEAR, THREE_YEARS
+    #     },
     #     network_resource_arn: "Arn", # required
     #     return_reason: "StartNetworkResourceUpdateRequestReturnReasonString",
     #     shipping_address: {
     #       city: "AddressContent", # required
     #       company: "AddressContent",
     #       country: "AddressContent", # required
+    #       email_address: "AddressContent",
     #       name: "AddressContent", # required
     #       phone_number: "AddressContent",
     #       postal_code: "AddressContent", # required
@@ -1719,7 +1830,7 @@ module Aws::PrivateNetworks
     #       street2: "AddressContent",
     #       street3: "AddressContent",
     #     },
-    #     update_type: "REPLACE", # required, accepts REPLACE, RETURN
+    #     update_type: "REPLACE", # required, accepts REPLACE, RETURN, COMMITMENT
     #   })
     #
     # @example Response structure
@@ -1727,6 +1838,10 @@ module Aws::PrivateNetworks
     #   resp.network_resource.attributes #=> Array
     #   resp.network_resource.attributes[0].name #=> String
     #   resp.network_resource.attributes[0].value #=> String
+    #   resp.network_resource.commitment_information.commitment_configuration.automatic_renewal #=> Boolean
+    #   resp.network_resource.commitment_information.commitment_configuration.commitment_length #=> String, one of "SIXTY_DAYS", "ONE_YEAR", "THREE_YEARS"
+    #   resp.network_resource.commitment_information.expires_on #=> Time
+    #   resp.network_resource.commitment_information.start_at #=> Time
     #   resp.network_resource.created_at #=> Time
     #   resp.network_resource.description #=> String
     #   resp.network_resource.health #=> String, one of "INITIAL", "HEALTHY", "UNHEALTHY"
@@ -1745,6 +1860,7 @@ module Aws::PrivateNetworks
     #   resp.network_resource.return_information.shipping_address.city #=> String
     #   resp.network_resource.return_information.shipping_address.company #=> String
     #   resp.network_resource.return_information.shipping_address.country #=> String
+    #   resp.network_resource.return_information.shipping_address.email_address #=> String
     #   resp.network_resource.return_information.shipping_address.name #=> String
     #   resp.network_resource.return_information.shipping_address.phone_number #=> String
     #   resp.network_resource.return_information.shipping_address.postal_code #=> String
@@ -1996,7 +2112,7 @@ module Aws::PrivateNetworks
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-privatenetworks'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1423,6 +1423,7 @@ module Aws::SageMaker
     OidcEndpoint = Shapes::StringShape.new(name: 'OidcEndpoint')
     OidcMemberDefinition = Shapes::StructureShape.new(name: 'OidcMemberDefinition')
     OnlineStoreConfig = Shapes::StructureShape.new(name: 'OnlineStoreConfig')
+    OnlineStoreConfigUpdate = Shapes::StructureShape.new(name: 'OnlineStoreConfigUpdate')
     OnlineStoreSecurityConfig = Shapes::StructureShape.new(name: 'OnlineStoreSecurityConfig')
     OnlineStoreTotalSizeBytes = Shapes::IntegerShape.new(name: 'OnlineStoreTotalSizeBytes')
     Operator = Shapes::StringShape.new(name: 'Operator')
@@ -1911,6 +1912,9 @@ module Aws::SageMaker
     TrialSourceArn = Shapes::StringShape.new(name: 'TrialSourceArn')
     TrialSummaries = Shapes::ListShape.new(name: 'TrialSummaries')
     TrialSummary = Shapes::StructureShape.new(name: 'TrialSummary')
+    TtlDuration = Shapes::StructureShape.new(name: 'TtlDuration')
+    TtlDurationUnit = Shapes::StringShape.new(name: 'TtlDurationUnit')
+    TtlDurationValue = Shapes::IntegerShape.new(name: 'TtlDurationValue')
     TuningJobCompletionCriteria = Shapes::StructureShape.new(name: 'TuningJobCompletionCriteria')
     TuningJobStepMetaData = Shapes::StructureShape.new(name: 'TuningJobStepMetaData')
     USD = Shapes::StructureShape.new(name: 'USD')
@@ -7332,7 +7336,11 @@ module Aws::SageMaker
 
     OnlineStoreConfig.add_member(:security_config, Shapes::ShapeRef.new(shape: OnlineStoreSecurityConfig, location_name: "SecurityConfig"))
     OnlineStoreConfig.add_member(:enable_online_store, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableOnlineStore"))
+    OnlineStoreConfig.add_member(:ttl_duration, Shapes::ShapeRef.new(shape: TtlDuration, location_name: "TtlDuration"))
     OnlineStoreConfig.struct_class = Types::OnlineStoreConfig
+
+    OnlineStoreConfigUpdate.add_member(:ttl_duration, Shapes::ShapeRef.new(shape: TtlDuration, location_name: "TtlDuration"))
+    OnlineStoreConfigUpdate.struct_class = Types::OnlineStoreConfigUpdate
 
     OnlineStoreSecurityConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     OnlineStoreSecurityConfig.struct_class = Types::OnlineStoreSecurityConfig
@@ -8582,6 +8590,10 @@ module Aws::SageMaker
     TrialSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     TrialSummary.struct_class = Types::TrialSummary
 
+    TtlDuration.add_member(:unit, Shapes::ShapeRef.new(shape: TtlDurationUnit, location_name: "Unit"))
+    TtlDuration.add_member(:value, Shapes::ShapeRef.new(shape: TtlDurationValue, location_name: "Value"))
+    TtlDuration.struct_class = Types::TtlDuration
+
     TuningJobCompletionCriteria.add_member(:target_objective_metric_value, Shapes::ShapeRef.new(shape: TargetObjectiveMetricValue, location_name: "TargetObjectiveMetricValue"))
     TuningJobCompletionCriteria.add_member(:best_objective_not_improving, Shapes::ShapeRef.new(shape: BestObjectiveNotImproving, location_name: "BestObjectiveNotImproving"))
     TuningJobCompletionCriteria.add_member(:convergence_detected, Shapes::ShapeRef.new(shape: ConvergenceDetected, location_name: "ConvergenceDetected"))
@@ -8697,6 +8709,7 @@ module Aws::SageMaker
 
     UpdateFeatureGroupRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupName, required: true, location_name: "FeatureGroupName"))
     UpdateFeatureGroupRequest.add_member(:feature_additions, Shapes::ShapeRef.new(shape: FeatureAdditions, location_name: "FeatureAdditions"))
+    UpdateFeatureGroupRequest.add_member(:online_store_config, Shapes::ShapeRef.new(shape: OnlineStoreConfigUpdate, location_name: "OnlineStoreConfig"))
     UpdateFeatureGroupRequest.struct_class = Types::UpdateFeatureGroupRequest
 
     UpdateFeatureGroupResponse.add_member(:feature_group_arn, Shapes::ShapeRef.new(shape: FeatureGroupArn, required: true, location_name: "FeatureGroupArn"))
