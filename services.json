@@ -921,7 +921,7 @@
     "models": "s3/2006-03-01",
     "dependencies": {
       "aws-sdk-kms": "~> 1",
-      "aws-sigv4": "~> 1.4"
+      "aws-sigv4": "~> 1.6"
     },
     "addPlugins": [
       "Aws::S3::Plugins::Accelerate",

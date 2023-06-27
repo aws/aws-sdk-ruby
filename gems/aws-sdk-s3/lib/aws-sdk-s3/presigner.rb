@@ -49,7 +49,8 @@ module Aws
       #   before the presigned URL expires. Defaults to 15 minutes. As signature
       #   version 4 has a maximum expiry time of one week for presigned URLs,
       #   attempts to set this value to greater than one week (604800) will
-      #   raise an exception.
+      #   raise an exception. The min value of this option and the credentials
+      #   expiration time is used in the presigned URL.
       #
       # @option params [Time] :time (Time.now) The starting time for when the
       #   presigned url becomes active.
@@ -96,7 +97,8 @@ module Aws
       #   before the presigned URL expires. Defaults to 15 minutes. As signature
       #   version 4 has a maximum expiry time of one week for presigned URLs,
       #   attempts to set this value to greater than one week (604800) will
-      #   raise an exception.
+      #   raise an exception. The min value of this option and the credentials
+      #   expiration time is used in the presigned URL.
       #
       # @option params [Time] :time (Time.now) The starting time for when the
       #   presigned url becomes active.

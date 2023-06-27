@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add :expiration accessor to `CredentialProvider` and do not refresh credentials when checking expiration.
+
 3.175.0 (2023-06-15)
 ------------------
 

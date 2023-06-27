@@ -7,20 +7,40 @@ module Aws
     describe Presigner do
       let(:client) { Aws::S3::Client.new(**client_opts) }
 
+      let(:credentials) do
+        Credentials.new(
+          'ACCESS_KEY_ID',
+          'SECRET_ACCESS_KEY'
+        )
+      end
       let(:client_opts) do
         {
           region: 'us-east-1',
-          credentials: Credentials.new(
-            'ACCESS_KEY_ID',
-            'SECRET_ACCESS_KEY'
-          ),
+          credentials: credentials,
           stub_responses: true
         }
       end
 
       subject { Presigner.new(client: client) }
 
-      before { allow(Time).to receive(:now).and_return(Time.utc(2021, 8, 27)) }
+      let(:time) { Time.utc(2021, 8, 27) }
+      before { allow(Time).to receive(:now).and_return(time) }
+
+      let(:expiration_time) { time + 180 }
+      let(:credentials_provider_class) do
+        Class.new do
+          include CredentialProvider
+
+          def initialize(expiration_time)
+            @credentials = Credentials.new(
+              'akid',
+              'secret',
+              'session'
+            )
+            @expiration = expiration_time
+          end
+        end
+      end
 
       describe '#initialize' do
         it 'accepts an injected S3 client' do
@@ -170,6 +190,22 @@ module Aws
           )
           expect(url).to match(/x-amz-acl=public-read/)
         end
+
+        context 'credential expiration' do
+          let(:credentials) do
+            credentials_provider_class.new(expiration_time)
+          end
+
+          it 'picks the minimum time between expires_in and credential expiration' do
+            url = subject.presigned_url(
+              :get_object,
+              bucket: 'aws-sdk',
+              key: 'foo',
+              expires_in: 3600
+            )
+            expect(url).to match(/X-Amz-Expires=180/)
+          end
+        end
       end
 
       describe '#presigned_request' do
@@ -305,6 +341,22 @@ module Aws
           )
           expect(url).to match(/X-Amz-SignedHeaders=host%3Bx-amz-acl/)
           expect(headers).to eq('x-amz-acl' => 'public-read')
+        end
+
+        context 'credential expiration' do
+          let(:credentials) do
+            credentials_provider_class.new(expiration_time)
+          end
+
+          it 'picks the minimum time between expires_in and credential expiration' do
+            url, = subject.presigned_request(
+              :get_object,
+              bucket: 'aws-sdk',
+              key: 'foo',
+              expires_in: 3600
+            )
+            expect(url).to match(/X-Amz-Expires=180/)
+          end
         end
       end
 

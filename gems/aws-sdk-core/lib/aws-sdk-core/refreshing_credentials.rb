@@ -36,12 +36,6 @@ module Aws
       @credentials
     end
 
-    # @return [Time,nil]
-    def expiration
-      refresh_if_near_expiration!
-      @expiration
-    end
-
     # Refresh credentials.
     # @return [void]
     def refresh!
