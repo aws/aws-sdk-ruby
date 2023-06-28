@@ -52,6 +52,6 @@ require_relative 'aws-sdk-resourceexplorer2/customizations'
 # @!group service
 module Aws::ResourceExplorer2
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.7.0'
 
 end

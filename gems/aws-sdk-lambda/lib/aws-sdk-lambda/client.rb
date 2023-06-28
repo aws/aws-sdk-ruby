@@ -898,13 +898,13 @@ module Aws::Lambda
     #
     # @option params [String] :starting_position
     #   The position in a stream from which to start reading. Required for
-    #   Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources.
-    #   `AT_TIMESTAMP` is supported only for Amazon Kinesis streams and Amazon
-    #   DocumentDB.
+    #   Amazon Kinesis and Amazon DynamoDB Stream event sources.
+    #   `AT_TIMESTAMP` is supported only for Amazon Kinesis streams, Amazon
+    #   DocumentDB, Amazon MSK, and self-managed Apache Kafka.
     #
     # @option params [Time,DateTime,Date,Integer,String] :starting_position_timestamp
     #   With `StartingPosition` set to `AT_TIMESTAMP`, the time from which to
-    #   start reading.
+    #   start reading. `StartingPositionTimestamp` cannot be in the future.
     #
     # @option params [Types::DestinationConfig] :destination_config
     #   (Kinesis and DynamoDB Streams only) A standard Amazon SQS queue or
@@ -1794,7 +1794,8 @@ module Aws::Lambda
 
     # Deletes a Lambda function. To delete a specific function version, use
     # the `Qualifier` parameter. Otherwise, all versions and aliases are
-    # deleted.
+    # deleted. This doesn't require the user to have explicit permissions
+    # for DeleteAlias.
     #
     # To delete Lambda event source mappings that invoke a function, use
     # DeleteEventSourceMapping. For Amazon Web Services and resources that
@@ -6393,7 +6394,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.100.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

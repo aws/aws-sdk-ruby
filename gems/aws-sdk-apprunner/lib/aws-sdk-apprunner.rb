@@ -52,6 +52,6 @@ require_relative 'aws-sdk-apprunner/customizations'
 # @!group service
 module Aws::AppRunner
 
-  GEM_VERSION = '1.24.0'
+  GEM_VERSION = '1.25.0'
 
 end

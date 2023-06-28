@@ -513,7 +513,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -702,7 +702,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1170,7 +1170,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2026,7 +2026,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -3111,7 +3111,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -3247,7 +3247,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -3395,7 +3395,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5770,7 +5770,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -6357,7 +6357,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -6410,9 +6410,8 @@ module Aws::S3
     #   Forbidden` (access denied).
     #
     # @option params [required, Array<String>] :object_attributes
-    #   An XML header that specifies the fields at the root level that you
-    #   want returned in the response. Fields that you do not specify are not
-    #   returned.
+    #   Specifies the fields at the root level that you want returned in the
+    #   response. Fields that you do not specify are not returned.
     #
     # @return [Types::GetObjectAttributesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6757,7 +6756,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -6792,6 +6791,27 @@ module Aws::S3
     #   * {Types::GetObjectTaggingOutput#tag_set #tag_set} => Array&lt;Types::Tag&gt;
     #
     #
+    # @example Example: To retrieve tag set of a specific object version
+    #
+    #   # The following example retrieves tag set of an object. The request specifies object version.
+    #
+    #   resp = client.get_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tag_set: [
+    #       {
+    #         key: "Key1", 
+    #         value: "Value1", 
+    #       }, 
+    #     ], 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   }
+    #
     # @example Example: To retrieve tag set of an object
     #
     #   # The following example retrieves tag set of an object.
@@ -6814,27 +6834,6 @@ module Aws::S3
     #       }, 
     #     ], 
     #     version_id: "null", 
-    #   }
-    #
-    # @example Example: To retrieve tag set of a specific object version
-    #
-    #   # The following example retrieves tag set of an object. The request specifies object version.
-    #
-    #   resp = client.get_object_tagging({
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     tag_set: [
-    #       {
-    #         key: "Key1", 
-    #         value: "Value1", 
-    #       }, 
-    #     ], 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -7090,7 +7089,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][3] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][3] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -7247,7 +7246,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -7507,7 +7506,7 @@ module Aws::S3
     #   retrieved.
     #
     # @option params [String] :continuation_token
-    #   The ContinuationToken that represents a placeholder from where this
+    #   The `ContinuationToken` that represents a placeholder from where this
     #   request should begin.
     #
     # @option params [String] :expected_bucket_owner
@@ -7693,7 +7692,7 @@ module Aws::S3
     #
     # @option params [String] :continuation_token
     #   The marker used to continue an inventory configuration listing that
-    #   has been truncated. Use the NextContinuationToken from a previously
+    #   has been truncated. Use the `NextContinuationToken` from a previously
     #   truncated list response to continue the listing. The continuation
     #   token is an opaque value that Amazon S3 understands.
     #
@@ -7793,7 +7792,7 @@ module Aws::S3
     #
     # @option params [String] :continuation_token
     #   The marker that is used to continue a metrics configuration listing
-    #   that has been truncated. Use the NextContinuationToken from a
+    #   that has been truncated. Use the `NextContinuationToken` from a
     #   previously truncated list response to continue the listing. The
     #   continuation token is an opaque value that Amazon S3 understands.
     #
@@ -7972,7 +7971,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -7991,15 +7990,15 @@ module Aws::S3
     #
     # @option params [String] :encoding_type
     #   Requests Amazon S3 to encode the object keys in the response and
-    #   specifies the encoding method to use. An object key may contain any
-    #   Unicode character; however, XML 1.0 parser cannot parse some
+    #   specifies the encoding method to use. An object key can contain any
+    #   Unicode character; however, the XML 1.0 parser cannot parse some
     #   characters, such as characters with an ASCII value from 0 to 10. For
     #   characters that are not supported in XML 1.0, you can add this
     #   parameter to request that Amazon S3 encode the keys in the response.
     #
     # @option params [String] :key_marker
-    #   Together with upload-id-marker, this parameter specifies the multipart
-    #   upload after which listing should begin.
+    #   Together with `upload-id-marker`, this parameter specifies the
+    #   multipart upload after which listing should begin.
     #
     #   If `upload-id-marker` is not specified, only the keys
     #   lexicographically greater than the specified `key-marker` will be
@@ -8018,8 +8017,8 @@ module Aws::S3
     # @option params [String] :prefix
     #   Lists in-progress uploads only for those keys that begin with the
     #   specified prefix. You can use prefixes to separate a bucket into
-    #   different grouping of keys. (You can think of using prefix to make
-    #   groups in the same way you'd use a folder in a file system.)
+    #   different grouping of keys. (You can think of using `prefix` to make
+    #   groups in the same way that you'd use a folder in a file system.)
     #
     # @option params [String] :upload_id_marker
     #   Together with key-marker, specifies the multipart upload after which
@@ -8063,6 +8062,48 @@ module Aws::S3
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To list in-progress multipart uploads on a bucket
+    #
+    #   # The following example lists in-progress multipart uploads on a specific bucket.
+    #
+    #   resp = client.list_multipart_uploads({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     uploads: [
+    #       {
+    #         initiated: Time.parse("2014-05-01T05:40:58.000Z"), 
+    #         initiator: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         key: "JavaFile", 
+    #         owner: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         storage_class: "STANDARD", 
+    #         upload_id: "examplelUa.CInXklLQtSMJITdUnoZ1Y5GACB5UckOtspm5zbDMCkPF_qkfZzMiFZ6dksmcnqxJyIBvQMG9X9Q--", 
+    #       }, 
+    #       {
+    #         initiated: Time.parse("2014-05-01T05:41:27.000Z"), 
+    #         initiator: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         key: "JavaFile", 
+    #         owner: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         storage_class: "STANDARD", 
+    #         upload_id: "examplelo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Example: List next set of multipart uploads when previous result is truncated
     #
@@ -8113,48 +8154,6 @@ module Aws::S3
     #         }, 
     #         storage_class: "STANDARD", 
     #         upload_id: "b7tZSqIlo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--", 
-    #       }, 
-    #     ], 
-    #   }
-    #
-    # @example Example: To list in-progress multipart uploads on a bucket
-    #
-    #   # The following example lists in-progress multipart uploads on a specific bucket.
-    #
-    #   resp = client.list_multipart_uploads({
-    #     bucket: "examplebucket", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     uploads: [
-    #       {
-    #         initiated: Time.parse("2014-05-01T05:40:58.000Z"), 
-    #         initiator: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         key: "JavaFile", 
-    #         owner: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         storage_class: "STANDARD", 
-    #         upload_id: "examplelUa.CInXklLQtSMJITdUnoZ1Y5GACB5UckOtspm5zbDMCkPF_qkfZzMiFZ6dksmcnqxJyIBvQMG9X9Q--", 
-    #       }, 
-    #       {
-    #         initiated: Time.parse("2014-05-01T05:41:27.000Z"), 
-    #         initiator: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         key: "JavaFile", 
-    #         owner: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         storage_class: "STANDARD", 
-    #         upload_id: "examplelo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--", 
     #       }, 
     #     ], 
     #   }
@@ -8212,10 +8211,10 @@ module Aws::S3
     # can also use request parameters as selection criteria to return
     # metadata about a subset of all the object versions.
     #
-    # To use this operation, you must have permissions to perform the
+    # To use this operation, you must have permission to perform the
     # `s3:ListBucketVersions` action. Be aware of the name difference.
     #
-    # <note markdown="1"> A 200 OK response can contain valid or invalid XML. Make sure to
+    # <note markdown="1"> A `200 OK` response can contain valid or invalid XML. Make sure to
     # design your application to parse the contents of the response and
     # handle it appropriately.
     #
@@ -8249,14 +8248,14 @@ module Aws::S3
     #   A delimiter is a character that you specify to group keys. All keys
     #   that contain the same string between the `prefix` and the first
     #   occurrence of the delimiter are grouped under a single result element
-    #   in CommonPrefixes. These groups are counted as one result against the
-    #   max-keys limitation. These keys are not returned elsewhere in the
-    #   response.
+    #   in `CommonPrefixes`. These groups are counted as one result against
+    #   the `max-keys` limitation. These keys are not returned elsewhere in
+    #   the response.
     #
     # @option params [String] :encoding_type
     #   Requests Amazon S3 to encode the object keys in the response and
-    #   specifies the encoding method to use. An object key may contain any
-    #   Unicode character; however, XML 1.0 parser cannot parse some
+    #   specifies the encoding method to use. An object key can contain any
+    #   Unicode character; however, the XML 1.0 parser cannot parse some
     #   characters, such as characters with an ASCII value from 0 to 10. For
     #   characters that are not supported in XML 1.0, you can add this
     #   parameter to request that Amazon S3 encode the keys in the response.
@@ -8265,20 +8264,20 @@ module Aws::S3
     #   Specifies the key to start with when listing objects in a bucket.
     #
     # @option params [Integer] :max_keys
-    #   Sets the maximum number of keys returned in the response. By default
+    #   Sets the maximum number of keys returned in the response. By default,
     #   the action returns up to 1,000 key names. The response might contain
     #   fewer keys but will never contain more. If additional keys satisfy the
-    #   search criteria, but were not returned because max-keys was exceeded,
-    #   the response contains &lt;isTruncated&gt;true&lt;/isTruncated&gt;. To
-    #   return the additional keys, see key-marker and version-id-marker.
+    #   search criteria, but were not returned because `max-keys` was
+    #   exceeded, the response contains `<isTruncated>true</isTruncated>`. To
+    #   return the additional keys, see `key-marker` and `version-id-marker`.
     #
     # @option params [String] :prefix
     #   Use this parameter to select only those keys that begin with the
     #   specified prefix. You can use prefixes to separate a bucket into
-    #   different groupings of keys. (You can think of using prefix to make
-    #   groups in the same way you'd use a folder in a file system.) You can
-    #   use prefix with delimiter to roll up numerous objects into a single
-    #   result under CommonPrefixes.
+    #   different groupings of keys. (You can think of using `prefix` to make
+    #   groups in the same way that you'd use a folder in a file system.) You
+    #   can use `prefix` with `delimiter` to roll up numerous objects into a
+    #   single result under `CommonPrefixes`.
     #
     # @option params [String] :version_id_marker
     #   Specifies the object version you want to start listing from.
@@ -8298,6 +8297,10 @@ module Aws::S3
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #
+    # @option params [Array<String>] :optional_object_attributes
+    #   Specifies the optional fields that you want returned in the response.
+    #   Fields that you do not specify are not returned.
     #
     # @return [Types::ListObjectVersionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8374,6 +8377,7 @@ module Aws::S3
     #     version_id_marker: "VersionIdMarker",
     #     expected_bucket_owner: "AccountId",
     #     request_payer: "requester", # accepts requester
+    #     optional_object_attributes: ["RestoreStatus"], # accepts RestoreStatus
     #   })
     #
     # @example Response structure
@@ -8395,6 +8399,8 @@ module Aws::S3
     #   resp.versions[0].last_modified #=> Time
     #   resp.versions[0].owner.display_name #=> String
     #   resp.versions[0].owner.id #=> String
+    #   resp.versions[0].restore_status.is_restore_in_progress #=> Boolean
+    #   resp.versions[0].restore_status.restore_expiry_date #=> Time
     #   resp.delete_markers #=> Array
     #   resp.delete_markers[0].owner.display_name #=> String
     #   resp.delete_markers[0].owner.id #=> String
@@ -8468,7 +8474,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -8476,12 +8482,12 @@ module Aws::S3
     #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #
     # @option params [String] :delimiter
-    #   A delimiter is a character you use to group keys.
+    #   A delimiter is a character that you use to group keys.
     #
     # @option params [String] :encoding_type
     #   Requests Amazon S3 to encode the object keys in the response and
-    #   specifies the encoding method to use. An object key may contain any
-    #   Unicode character; however, XML 1.0 parser cannot parse some
+    #   specifies the encoding method to use. An object key can contain any
+    #   Unicode character; however, the XML 1.0 parser cannot parse some
     #   characters, such as characters with an ASCII value from 0 to 10. For
     #   characters that are not supported in XML 1.0, you can add this
     #   parameter to request that Amazon S3 encode the keys in the response.
@@ -8492,7 +8498,7 @@ module Aws::S3
     #   bucket.
     #
     # @option params [Integer] :max_keys
-    #   Sets the maximum number of keys returned in the response. By default
+    #   Sets the maximum number of keys returned in the response. By default,
     #   the action returns up to 1,000 key names. The response might contain
     #   fewer keys but will never contain more.
     #
@@ -8508,6 +8514,10 @@ module Aws::S3
     #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request fails with the HTTP status code `403
     #   Forbidden` (access denied).
+    #
+    # @option params [Array<String>] :optional_object_attributes
+    #   Specifies the optional fields that you want returned in the response.
+    #   Fields that you do not specify are not returned.
     #
     # @return [Types::ListObjectsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8575,6 +8585,7 @@ module Aws::S3
     #     prefix: "Prefix",
     #     request_payer: "requester", # accepts requester
     #     expected_bucket_owner: "AccountId",
+    #     optional_object_attributes: ["RestoreStatus"], # accepts RestoreStatus
     #   })
     #
     # @example Response structure
@@ -8592,6 +8603,8 @@ module Aws::S3
     #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW"
     #   resp.contents[0].owner.display_name #=> String
     #   resp.contents[0].owner.id #=> String
+    #   resp.contents[0].restore_status.is_restore_in_progress #=> Boolean
+    #   resp.contents[0].restore_status.restore_expiry_date #=> Time
     #   resp.name #=> String
     #   resp.prefix #=> String
     #   resp.delimiter #=> String
@@ -8617,21 +8630,23 @@ module Aws::S3
     # parse the contents of the response and handle it appropriately.
     # Objects are returned sorted in an ascending order of the respective
     # key names in the list. For more information about listing objects, see
-    # [Listing object keys programmatically][1]
+    # [Listing object keys programmatically][1] in the *Amazon S3 User
+    # Guide*.
     #
     # To use this operation, you must have READ access to the bucket.
     #
     # To use this action in an Identity and Access Management (IAM) policy,
-    # you must have permissions to perform the `s3:ListBucket` action. The
+    # you must have permission to perform the `s3:ListBucket` action. The
     # bucket owner has this permission by default and can grant this
     # permission to others. For more information about permissions, see
     # [Permissions Related to Bucket Subresource Operations][2] and
-    # [Managing Access Permissions to Your Amazon S3 Resources][3].
+    # [Managing Access Permissions to Your Amazon S3 Resources][3] in the
+    # *Amazon S3 User Guide*.
     #
     # This section describes the latest revision of this action. We
-    # recommend that you use this revised API for application development.
-    # For backward compatibility, Amazon S3 continues to support the prior
-    # version of this API, [ListObjects][4].
+    # recommend that you use this revised API operation for application
+    # development. For backward compatibility, Amazon S3 continues to
+    # support the prior version of this API operation, [ListObjects][4].
     #
     # To get a list of your buckets, see [ListBuckets][5].
     #
@@ -8672,7 +8687,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -8680,13 +8695,13 @@ module Aws::S3
     #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #
     # @option params [String] :delimiter
-    #   A delimiter is a character you use to group keys.
+    #   A delimiter is a character that you use to group keys.
     #
     # @option params [String] :encoding_type
     #   Encoding type used by Amazon S3 to encode object keys in the response.
     #
     # @option params [Integer] :max_keys
-    #   Sets the maximum number of keys returned in the response. By default
+    #   Sets the maximum number of keys returned in the response. By default,
     #   the action returns up to 1,000 key names. The response might contain
     #   fewer keys but will never contain more.
     #
@@ -8694,14 +8709,14 @@ module Aws::S3
     #   Limits the response to keys that begin with the specified prefix.
     #
     # @option params [String] :continuation_token
-    #   ContinuationToken indicates Amazon S3 that the list is being continued
-    #   on this bucket with a token. ContinuationToken is obfuscated and is
-    #   not a real key.
+    #   `ContinuationToken` indicates to Amazon S3 that the list is being
+    #   continued on this bucket with a token. `ContinuationToken` is
+    #   obfuscated and is not a real key.
     #
     # @option params [Boolean] :fetch_owner
-    #   The owner field is not present in listV2 by default, if you want to
-    #   return owner field with each key in the result then set the fetch
-    #   owner field to true.
+    #   The owner field is not present in `ListObjectsV2` by default. If you
+    #   want to return the owner field with each key in the result, then set
+    #   the `FetchOwner` field to `true`.
     #
     # @option params [String] :start_after
     #   StartAfter is where you want Amazon S3 to start listing from. Amazon
@@ -8717,6 +8732,10 @@ module Aws::S3
     #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request fails with the HTTP status code `403
     #   Forbidden` (access denied).
+    #
+    # @option params [Array<String>] :optional_object_attributes
+    #   Specifies the optional fields that you want returned in the response.
+    #   Fields that you do not specify are not returned.
     #
     # @return [Types::ListObjectsV2Output] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8786,6 +8805,7 @@ module Aws::S3
     #     start_after: "StartAfter",
     #     request_payer: "requester", # accepts requester
     #     expected_bucket_owner: "AccountId",
+    #     optional_object_attributes: ["RestoreStatus"], # accepts RestoreStatus
     #   })
     #
     # @example Response structure
@@ -8801,6 +8821,8 @@ module Aws::S3
     #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW"
     #   resp.contents[0].owner.display_name #=> String
     #   resp.contents[0].owner.id #=> String
+    #   resp.contents[0].restore_status.is_restore_in_progress #=> Boolean
+    #   resp.contents[0].restore_status.restore_expiry_date #=> Time
     #   resp.name #=> String
     #   resp.prefix #=> String
     #   resp.delimiter #=> String
@@ -8889,7 +8911,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -12152,7 +12174,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -12456,22 +12478,61 @@ module Aws::S3
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To upload an object and specify optional tags
+    # @example Example: To upload object and specify user-defined metadata
     #
-    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
-    #   # S3 returns version ID of the newly created object.
+    #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
+    #   # enabled, S3 returns version ID in response.
     #
     #   resp = client.put_object({
-    #     body: "c:\\HappyFace.jpg", 
+    #     body: "filetoupload", 
     #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #     tagging: "key1=value1&key2=value2", 
+    #     key: "exampleobject", 
+    #     metadata: {
+    #       "metadata1" => "value1", 
+    #       "metadata2" => "value2", 
+    #     }, 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
+    #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
+    #   }
+    #
+    # @example Example: To upload an object (specify optional headers)
+    #
+    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
+    #   # storage class and use server-side encryption.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #     server_side_encryption: "AES256", 
+    #     storage_class: "STANDARD_IA", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     server_side_encryption: "AES256", 
+    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
+    #   }
+    #
+    # @example Example: To create an object.
+    #
+    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "objectkey", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
     #   }
     #
     # @example Example: To upload an object and specify canned ACL.
@@ -12492,20 +12553,21 @@ module Aws::S3
     #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
     #   }
     #
-    # @example Example: To create an object.
+    # @example Example: To upload an object
     #
-    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
+    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
+    #   # syntax. S3 returns VersionId of the newly created object.
     #
     #   resp = client.put_object({
-    #     body: "filetoupload", 
+    #     body: "HappyFace.jpg", 
     #     bucket: "examplebucket", 
-    #     key: "objectkey", 
+    #     key: "HappyFace.jpg", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
+    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
     #   }
     #
     # @example Example: To upload an object and specify server-side encryption and object tags
@@ -12528,62 +12590,22 @@ module Aws::S3
     #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
     #   }
     #
-    # @example Example: To upload object and specify user-defined metadata
+    # @example Example: To upload an object and specify optional tags
     #
-    #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
-    #   # enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     metadata: {
-    #       "metadata1" => "value1", 
-    #       "metadata2" => "value2", 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
-    #   }
-    #
-    # @example Example: To upload an object
-    #
-    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
-    #   # syntax. S3 returns VersionId of the newly created object.
+    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
+    #   # S3 returns version ID of the newly created object.
     #
     #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
+    #     body: "c:\\HappyFace.jpg", 
     #     bucket: "examplebucket", 
     #     key: "HappyFace.jpg", 
+    #     tagging: "key1=value1&key2=value2", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
-    #   }
-    #
-    # @example Example: To upload an object (specify optional headers)
-    #
-    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
-    #   # storage class and use server-side encryption.
-    #
-    #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #     server_side_encryption: "AES256", 
-    #     storage_class: "STANDARD_IA", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     server_side_encryption: "AES256", 
-    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
+    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
     #   }
     #
     # @example Streaming a file from disk
@@ -12929,7 +12951,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -13433,7 +13455,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -13895,7 +13917,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -14629,7 +14651,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -14978,7 +15000,7 @@ module Aws::S3
     #   When you use this action with S3 on Outposts through the Amazon Web
     #   Services SDKs, you provide the Outposts access point ARN in place of
     #   the bucket name. For more information about S3 on Outposts ARNs, see
-    #   [What is S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #   [What is S3 on Outposts?][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -15128,6 +15150,26 @@ module Aws::S3
     #   * {Types::UploadPartCopyOutput#request_charged #request_charged} => String
     #
     #
+    # @example Example: To upload a part by copying data from an existing object as data source
+    #
+    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
+    #
+    #   resp = client.upload_part_copy({
+    #     bucket: "examplebucket", 
+    #     copy_source: "/bucketname/sourceobjectkey", 
+    #     key: "examplelargeobject", 
+    #     part_number: 1, 
+    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     copy_part_result: {
+    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
+    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
+    #     }, 
+    #   }
+    #
     # @example Example: To upload a part by copying byte range from an existing object as data source
     #
     #   # The following example uploads a part of a multipart upload by copying a specified byte range from an existing object as
@@ -15147,26 +15189,6 @@ module Aws::S3
     #     copy_part_result: {
     #       etag: "\"65d16d19e65a7508a51f043180edcc36\"", 
     #       last_modified: Time.parse("2016-12-29T21:44:28.000Z"), 
-    #     }, 
-    #   }
-    #
-    # @example Example: To upload a part by copying data from an existing object as data source
-    #
-    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
-    #
-    #   resp = client.upload_part_copy({
-    #     bucket: "examplebucket", 
-    #     copy_source: "/bucketname/sourceobjectkey", 
-    #     key: "examplelargeobject", 
-    #     part_number: 1, 
-    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     copy_part_result: {
-    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
-    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
     #     }, 
     #   }
     #
@@ -15614,7 +15636,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.126.0'
+      context[:gem_version] = '1.127.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

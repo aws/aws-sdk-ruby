@@ -991,6 +991,10 @@ module Aws::RDS
     #     storage_encrypted: false,
     #     kms_key_id: "String",
     #     domain: "String",
+    #     domain_fqdn: "String",
+    #     domain_ou: "String",
+    #     domain_auth_secret_arn: "String",
+    #     domain_dns_ips: ["String"],
     #     copy_tags_to_snapshot: false,
     #     monitoring_interval: 1,
     #     monitoring_role_arn: "String",
@@ -1733,6 +1737,47 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
+    # @option options [String] :domain_fqdn
+    #   Specifies the fully qualified domain name of an Active Directory
+    #   domain.
+    #
+    #   Constraints:
+    #
+    #   * Cannot be greater than 64 characters.
+    #
+    #   ^
+    #
+    #   Example: `mymanagedADtest.mymanagedAD.mydomain`
+    # @option options [String] :domain_ou
+    #   The Active Directory organizational unit for your DB instance to join.
+    #
+    #   Constraints:
+    #
+    #   * Must be in the distinguished name format.
+    #
+    #   * Cannot be greater than 64 characters.
+    #
+    #   Example:
+    #   `OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain`
+    # @option options [String] :domain_auth_secret_arn
+    #   The ARN for the Secrets Manager secret that contains the credentials
+    #   for the user performing the domain join.
+    #
+    #   Example:
+    #   `arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456`
+    # @option options [Array<String>] :domain_dns_ips
+    #   The IPv4 DNS IP addresses of your primary and secondary Active
+    #   Directory domain controllers.
+    #
+    #   Constraints:
+    #
+    #   * Two IP addresses must be provided. If there isn't a secondary
+    #     domain controller, use the IP address of the primary domain
+    #     controller for both entries in the list.
+    #
+    #   ^
+    #
+    #   Example: `123.124.125.126,234.235.236.237`
     # @option options [Boolean] :copy_tags_to_snapshot
     #   Spcifies whether to copy tags from the DB instance to snapshots of the
     #   DB instance. By default, tags are not copied.

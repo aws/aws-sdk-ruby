@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.191.0 (2023-06-28)
+------------------
+
+* Feature - This release adds support for Model Cards Model Registry integration.
+
 1.190.0 (2023-06-27)
 ------------------
 

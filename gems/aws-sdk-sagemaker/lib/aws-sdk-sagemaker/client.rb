@@ -6459,7 +6459,11 @@ module Aws::SageMaker
     #   The display name of the pipeline.
     #
     # @option params [String] :pipeline_definition
-    #   The JSON pipeline definition of the pipeline.
+    #   The [JSON pipeline definition][1] of the pipeline.
+    #
+    #
+    #
+    #   [1]: https://aws-sagemaker-mlops.github.io/sagemaker-model-building-pipeline-definition-JSON-schema/
     #
     # @option params [Types::PipelineDefinitionS3Location] :pipeline_definition_s3_location
     #   The location of the pipeline definition stored in Amazon S3. If
@@ -23758,7 +23762,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.190.0'
+      context[:gem_version] = '1.191.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

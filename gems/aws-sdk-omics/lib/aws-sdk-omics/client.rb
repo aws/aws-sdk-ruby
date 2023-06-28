@@ -1022,7 +1022,7 @@ module Aws::Omics
     #   resp = client.create_workflow({
     #     name: "WorkflowName",
     #     description: "WorkflowDescription",
-    #     engine: "WDL", # accepts WDL, NEXTFLOW
+    #     engine: "WDL", # accepts WDL, NEXTFLOW, CWL
     #     definition_zip: "data",
     #     definition_uri: "WorkflowDefinition",
     #     main: "WorkflowMain",
@@ -2258,7 +2258,7 @@ module Aws::Omics
     #   resp.type #=> String, one of "PRIVATE", "READY2RUN"
     #   resp.name #=> String
     #   resp.description #=> String
-    #   resp.engine #=> String, one of "WDL", "NEXTFLOW"
+    #   resp.engine #=> String, one of "WDL", "NEXTFLOW", "CWL"
     #   resp.definition #=> String
     #   resp.main #=> String
     #   resp.digest #=> String
@@ -4069,7 +4069,7 @@ module Aws::Omics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

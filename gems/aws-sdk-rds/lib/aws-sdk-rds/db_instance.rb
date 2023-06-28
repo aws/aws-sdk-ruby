@@ -936,6 +936,10 @@ module Aws::RDS
     #     storage_encrypted: false,
     #     kms_key_id: "String",
     #     domain: "String",
+    #     domain_fqdn: "String",
+    #     domain_ou: "String",
+    #     domain_auth_secret_arn: "String",
+    #     domain_dns_ips: ["String"],
     #     copy_tags_to_snapshot: false,
     #     monitoring_interval: 1,
     #     monitoring_role_arn: "String",
@@ -1665,6 +1669,47 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
+    # @option options [String] :domain_fqdn
+    #   Specifies the fully qualified domain name of an Active Directory
+    #   domain.
+    #
+    #   Constraints:
+    #
+    #   * Cannot be greater than 64 characters.
+    #
+    #   ^
+    #
+    #   Example: `mymanagedADtest.mymanagedAD.mydomain`
+    # @option options [String] :domain_ou
+    #   The Active Directory organizational unit for your DB instance to join.
+    #
+    #   Constraints:
+    #
+    #   * Must be in the distinguished name format.
+    #
+    #   * Cannot be greater than 64 characters.
+    #
+    #   Example:
+    #   `OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain`
+    # @option options [String] :domain_auth_secret_arn
+    #   The ARN for the Secrets Manager secret that contains the credentials
+    #   for the user performing the domain join.
+    #
+    #   Example:
+    #   `arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456`
+    # @option options [Array<String>] :domain_dns_ips
+    #   The IPv4 DNS IP addresses of your primary and secondary Active
+    #   Directory domain controllers.
+    #
+    #   Constraints:
+    #
+    #   * Two IP addresses must be provided. If there isn't a secondary
+    #     domain controller, use the IP address of the primary domain
+    #     controller for both entries in the list.
+    #
+    #   ^
+    #
+    #   Example: `123.124.125.126,234.235.236.237`
     # @option options [Boolean] :copy_tags_to_snapshot
     #   Spcifies whether to copy tags from the DB instance to snapshots of the
     #   DB instance. By default, tags are not copied.
@@ -2046,6 +2091,10 @@ module Aws::RDS
     #     deletion_protection: false,
     #     domain: "String",
     #     domain_iam_role_name: "String",
+    #     domain_fqdn: "String",
+    #     domain_ou: "String",
+    #     domain_auth_secret_arn: "String",
+    #     domain_dns_ips: ["String"],
     #     replica_mode: "open-read-only", # accepts open-read-only, mounted
     #     max_allocated_storage: 1,
     #     custom_iam_instance_profile: "String",
@@ -2440,6 +2489,47 @@ module Aws::RDS
     #   Directory Service.
     #
     #   This setting doesn't apply to RDS Custom.
+    # @option options [String] :domain_fqdn
+    #   Specifies the fully qualified domain name of an Active Directory
+    #   domain.
+    #
+    #   Constraints:
+    #
+    #   * Cannot be greater than 64 characters.
+    #
+    #   ^
+    #
+    #   Example: `mymanagedADtest.mymanagedAD.mydomain`
+    # @option options [String] :domain_ou
+    #   The Active Directory organizational unit for your DB instance to join.
+    #
+    #   Constraints:
+    #
+    #   * Must be in the distinguished name format.
+    #
+    #   * Cannot be greater than 64 characters.
+    #
+    #   Example:
+    #   `OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain`
+    # @option options [String] :domain_auth_secret_arn
+    #   The ARN for the Secrets Manager secret that contains the credentials
+    #   for the user performing the domain join.
+    #
+    #   Example:
+    #   `arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456`
+    # @option options [Array<String>] :domain_dns_ips
+    #   The IPv4 DNS IP addresses of your primary and secondary Active
+    #   Directory domain controllers.
+    #
+    #   Constraints:
+    #
+    #   * Two IP addresses must be provided. If there isn't a secondary
+    #     domain controller, use the IP address of the primary domain
+    #     controller for both entries in the list.
+    #
+    #   ^
+    #
+    #   Example: `123.124.125.126,234.235.236.237`
     # @option options [String] :replica_mode
     #   The open mode of the replica database: mounted or read-only.
     #
@@ -2724,12 +2814,17 @@ module Aws::RDS
     #     tde_credential_password: "String",
     #     ca_certificate_identifier: "String",
     #     domain: "String",
+    #     domain_fqdn: "String",
+    #     domain_ou: "String",
+    #     domain_auth_secret_arn: "String",
+    #     domain_dns_ips: ["String"],
     #     copy_tags_to_snapshot: false,
     #     monitoring_interval: 1,
     #     db_port_number: 1,
     #     publicly_accessible: false,
     #     monitoring_role_arn: "String",
     #     domain_iam_role_name: "String",
+    #     disable_domain: false,
     #     promotion_tier: 1,
     #     enable_iam_database_authentication: false,
     #     enable_performance_insights: false,
@@ -3231,6 +3326,47 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
+    # @option options [String] :domain_fqdn
+    #   Specifies the fully qualified domain name of an Active Directory
+    #   domain.
+    #
+    #   Constraints:
+    #
+    #   * Cannot be greater than 64 characters.
+    #
+    #   ^
+    #
+    #   Example: `mymanagedADtest.mymanagedAD.mydomain`
+    # @option options [String] :domain_ou
+    #   The Active Directory organizational unit for your DB instance to join.
+    #
+    #   Constraints:
+    #
+    #   * Must be in the distinguished name format.
+    #
+    #   * Cannot be greater than 64 characters.
+    #
+    #   Example:
+    #   `OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain`
+    # @option options [String] :domain_auth_secret_arn
+    #   The ARN for the Secrets Manager secret that contains the credentials
+    #   for the user performing the domain join.
+    #
+    #   Example:
+    #   `arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456`
+    # @option options [Array<String>] :domain_dns_ips
+    #   The IPv4 DNS IP addresses of your primary and secondary Active
+    #   Directory domain controllers.
+    #
+    #   Constraints:
+    #
+    #   * Two IP addresses must be provided. If there isn't a secondary
+    #     domain controller, use the IP address of the primary domain
+    #     controller for both entries in the list.
+    #
+    #   ^
+    #
+    #   Example: `123.124.125.126,234.235.236.237`
     # @option options [Boolean] :copy_tags_to_snapshot
     #   Specifies whether to copy all tags from the DB instance to snapshots
     #   of the DB instance. By default, tags aren't copied.
@@ -3326,6 +3462,9 @@ module Aws::RDS
     #   Service.
     #
     #   This setting doesn't apply to RDS Custom DB instances.
+    # @option options [Boolean] :disable_domain
+    #   Boolean. If present, removes the instance from the Active Directory
+    #   domain.
     # @option options [Integer] :promotion_tier
     #   The order of priority in which an Aurora Replica is promoted to the
     #   primary instance after a failure of the existing primary instance. For
@@ -3789,6 +3928,10 @@ module Aws::RDS
     #     vpc_security_group_ids: ["String"],
     #     domain: "String",
     #     domain_iam_role_name: "String",
+    #     domain_fqdn: "String",
+    #     domain_ou: "String",
+    #     domain_auth_secret_arn: "String",
+    #     domain_dns_ips: ["String"],
     #     enable_iam_database_authentication: false,
     #     enable_cloudwatch_logs_exports: ["String"],
     #     processor_features: [
@@ -4025,6 +4168,53 @@ module Aws::RDS
     #   the Directory Service.
     #
     #   This setting doesn't apply to RDS Custom.
+    # @option options [String] :domain_fqdn
+    #   Specifies the fully qualified domain name of an Active Directory
+    #   domain.
+    #
+    #   Constraints:
+    #
+    #   * Cannot be greater than 64 characters.
+    #
+    #   ^
+    #
+    #   Example: `mymanagedADtest.mymanagedAD.mydomain`
+    # @option options [String] :domain_ou
+    #   The Active Directory organizational unit for your DB instance to join.
+    #
+    #   Constraints:
+    #
+    #   * Must be in the distinguished name format.
+    #
+    #   * Cannot be greater than 64 characters.
+    #
+    #   Example:
+    #   `OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain`
+    # @option options [String] :domain_auth_secret_arn
+    #   The ARN for the Secrets Manager secret that contains the credentials
+    #   for the user performing the domain join.
+    #
+    #   Constraints:
+    #
+    #   * Cannot be greater than 64 characters.
+    #
+    #   ^
+    #
+    #   Example:
+    #   `arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456`
+    # @option options [Array<String>] :domain_dns_ips
+    #   The IPv4 DNS IP addresses of your primary and secondary Active
+    #   Directory domain controllers.
+    #
+    #   Constraints:
+    #
+    #   * Two IP addresses must be provided. If there isn't a secondary
+    #     domain controller, use the IP address of the primary domain
+    #     controller for both entries in the list.
+    #
+    #   ^
+    #
+    #   Example: `123.124.125.126,234.235.236.237`
     # @option options [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of Amazon Web
     #   Services Identity and Access Management (IAM) accounts to database

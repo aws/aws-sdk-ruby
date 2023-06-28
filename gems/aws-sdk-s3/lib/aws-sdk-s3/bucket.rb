@@ -754,14 +754,14 @@ module Aws::S3
     #   result element are not returned elsewhere in the response.
     # @option options [String] :encoding_type
     #   Requests Amazon S3 to encode the object keys in the response and
-    #   specifies the encoding method to use. An object key may contain any
-    #   Unicode character; however, XML 1.0 parser cannot parse some
+    #   specifies the encoding method to use. An object key can contain any
+    #   Unicode character; however, the XML 1.0 parser cannot parse some
     #   characters, such as characters with an ASCII value from 0 to 10. For
     #   characters that are not supported in XML 1.0, you can add this
     #   parameter to request that Amazon S3 encode the keys in the response.
     # @option options [String] :key_marker
-    #   Together with upload-id-marker, this parameter specifies the multipart
-    #   upload after which listing should begin.
+    #   Together with `upload-id-marker`, this parameter specifies the
+    #   multipart upload after which listing should begin.
     #
     #   If `upload-id-marker` is not specified, only the keys
     #   lexicographically greater than the specified `key-marker` will be
@@ -774,8 +774,8 @@ module Aws::S3
     # @option options [String] :prefix
     #   Lists in-progress uploads only for those keys that begin with the
     #   specified prefix. You can use prefixes to separate a bucket into
-    #   different grouping of keys. (You can think of using prefix to make
-    #   groups in the same way you'd use a folder in a file system.)
+    #   different grouping of keys. (You can think of using `prefix` to make
+    #   groups in the same way that you'd use a folder in a file system.)
     # @option options [String] :upload_id_marker
     #   Together with key-marker, specifies the multipart upload after which
     #   listing should begin. If key-marker is not specified, the
@@ -849,19 +849,20 @@ module Aws::S3
     #     version_id_marker: "VersionIdMarker",
     #     expected_bucket_owner: "AccountId",
     #     request_payer: "requester", # accepts requester
+    #     optional_object_attributes: ["RestoreStatus"], # accepts RestoreStatus
     #   })
     # @param [Hash] options ({})
     # @option options [String] :delimiter
     #   A delimiter is a character that you specify to group keys. All keys
     #   that contain the same string between the `prefix` and the first
     #   occurrence of the delimiter are grouped under a single result element
-    #   in CommonPrefixes. These groups are counted as one result against the
-    #   max-keys limitation. These keys are not returned elsewhere in the
-    #   response.
+    #   in `CommonPrefixes`. These groups are counted as one result against
+    #   the `max-keys` limitation. These keys are not returned elsewhere in
+    #   the response.
     # @option options [String] :encoding_type
     #   Requests Amazon S3 to encode the object keys in the response and
-    #   specifies the encoding method to use. An object key may contain any
-    #   Unicode character; however, XML 1.0 parser cannot parse some
+    #   specifies the encoding method to use. An object key can contain any
+    #   Unicode character; however, the XML 1.0 parser cannot parse some
     #   characters, such as characters with an ASCII value from 0 to 10. For
     #   characters that are not supported in XML 1.0, you can add this
     #   parameter to request that Amazon S3 encode the keys in the response.
@@ -870,10 +871,10 @@ module Aws::S3
     # @option options [String] :prefix
     #   Use this parameter to select only those keys that begin with the
     #   specified prefix. You can use prefixes to separate a bucket into
-    #   different groupings of keys. (You can think of using prefix to make
-    #   groups in the same way you'd use a folder in a file system.) You can
-    #   use prefix with delimiter to roll up numerous objects into a single
-    #   result under CommonPrefixes.
+    #   different groupings of keys. (You can think of using `prefix` to make
+    #   groups in the same way that you'd use a folder in a file system.) You
+    #   can use `prefix` with `delimiter` to roll up numerous objects into a
+    #   single result under `CommonPrefixes`.
     # @option options [String] :version_id_marker
     #   Specifies the object version you want to start listing from.
     # @option options [String] :expected_bucket_owner
@@ -890,6 +891,9 @@ module Aws::S3
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    # @option options [Array<String>] :optional_object_attributes
+    #   Specifies the optional fields that you want returned in the response.
+    #   Fields that you do not specify are not returned.
     # @return [ObjectVersion::Collection]
     def object_versions(options = {})
       batches = Enumerator.new do |y|
@@ -924,18 +928,19 @@ module Aws::S3
     #     start_after: "StartAfter",
     #     request_payer: "requester", # accepts requester
     #     expected_bucket_owner: "AccountId",
+    #     optional_object_attributes: ["RestoreStatus"], # accepts RestoreStatus
     #   })
     # @param [Hash] options ({})
     # @option options [String] :delimiter
-    #   A delimiter is a character you use to group keys.
+    #   A delimiter is a character that you use to group keys.
     # @option options [String] :encoding_type
     #   Encoding type used by Amazon S3 to encode object keys in the response.
     # @option options [String] :prefix
     #   Limits the response to keys that begin with the specified prefix.
     # @option options [Boolean] :fetch_owner
-    #   The owner field is not present in listV2 by default, if you want to
-    #   return owner field with each key in the result then set the fetch
-    #   owner field to true.
+    #   The owner field is not present in `ListObjectsV2` by default. If you
+    #   want to return the owner field with each key in the result, then set
+    #   the `FetchOwner` field to `true`.
     # @option options [String] :start_after
     #   StartAfter is where you want Amazon S3 to start listing from. Amazon
     #   S3 starts listing after this specified key. StartAfter can be any key
@@ -948,6 +953,9 @@ module Aws::S3
     #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request fails with the HTTP status code `403
     #   Forbidden` (access denied).
+    # @option options [Array<String>] :optional_object_attributes
+    #   Specifies the optional fields that you want returned in the response.
+    #   Fields that you do not specify are not returned.
     # @return [ObjectSummary::Collection]
     def objects(options = {})
       batches = Enumerator.new do |y|

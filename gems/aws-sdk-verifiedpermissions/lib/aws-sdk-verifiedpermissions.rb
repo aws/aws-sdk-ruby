@@ -53,6 +53,6 @@ require_relative 'aws-sdk-verifiedpermissions/customizations'
 # @!group service
 module Aws::VerifiedPermissions
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.4.0'
 
 end

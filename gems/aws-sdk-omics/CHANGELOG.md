@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2023-06-28)
+------------------
+
+* Feature - Add Common Workflow Language (CWL) as a supported language for Omics workflows
+
 1.6.0 (2023-06-15)
 ------------------
 

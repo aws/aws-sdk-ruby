@@ -7566,7 +7566,11 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] pipeline_definition
-    #   The JSON pipeline definition of the pipeline.
+    #   The [JSON pipeline definition][1] of the pipeline.
+    #
+    #
+    #
+    #   [1]: https://aws-sagemaker-mlops.github.io/sagemaker-model-building-pipeline-definition-JSON-schema/
     #   @return [String]
     #
     # @!attribute [rw] pipeline_definition_s3_location
@@ -27982,6 +27986,12 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-risk-rating.html
     #   @return [String]
     #
+    # @!attribute [rw] model_package_group_name
+    #   The model package group that contains the model package. Only
+    #   relevant for model cards created for model packages in the Amazon
+    #   SageMaker Model Registry.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelCard AWS API Documentation
     #
     class ModelCard < Struct.new(
@@ -27997,7 +28007,8 @@ module Aws::SageMaker
       :last_modified_by,
       :tags,
       :model_id,
-      :risk_rating)
+      :risk_rating,
+      :model_package_group_name)
       SENSITIVE = [:content]
       include Aws::Structure
     end

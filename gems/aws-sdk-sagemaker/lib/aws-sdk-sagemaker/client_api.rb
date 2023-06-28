@@ -6762,6 +6762,7 @@ module Aws::SageMaker
     ModelCard.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ModelCard.add_member(:model_id, Shapes::ShapeRef.new(shape: String, location_name: "ModelId"))
     ModelCard.add_member(:risk_rating, Shapes::ShapeRef.new(shape: String, location_name: "RiskRating"))
+    ModelCard.add_member(:model_package_group_name, Shapes::ShapeRef.new(shape: String, location_name: "ModelPackageGroupName"))
     ModelCard.struct_class = Types::ModelCard
 
     ModelCardExportArtifacts.add_member(:s3_export_artifacts, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3ExportArtifacts"))

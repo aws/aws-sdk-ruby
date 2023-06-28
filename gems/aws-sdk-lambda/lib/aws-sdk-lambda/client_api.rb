@@ -1632,6 +1632,7 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 

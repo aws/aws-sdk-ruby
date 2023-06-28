@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.183.0 (2023-06-28)
+------------------
+
+* Feature - Amazon Relational Database Service (RDS) now supports joining a RDS for SQL Server instance to a self-managed Active Directory.
+
 1.182.0 (2023-06-23)
 ------------------
 

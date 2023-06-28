@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2023-06-28)
+------------------
+
+* Feature - Surface ResourceConflictException in DeleteEventSourceMapping
+
 1.100.0 (2023-06-20)
 ------------------
 
