@@ -12,17 +12,18 @@ module Aws
       )
     end
 
-    let(:in_one_hour) { Time.now + 60 * 60 }
-    let(:one_hour_ago) { Time.now - 60 * 60 }
+    let(:time) { Time.at(Time.now.to_i) }
+    let(:in_one_hour) { time + 60 * 60 }
+    let(:one_hour_ago) { time - 60 * 60 }
     let(:expiration) { in_one_hour }
 
     let(:sso_resp) do
       {
         role_credentials: {
-        access_key_id: 'akid',
-        secret_access_key: 'secret',
-        session_token: 'session',
-        expiration: expiration.to_i
+          access_key_id: 'akid',
+          secret_access_key: 'secret',
+          session_token: 'session',
+          expiration: expiration.to_i * 1000
         }
       }
     end
@@ -133,6 +134,14 @@ module Aws
           ).and_call_original
 
           sso_creds.credentials
+        end
+      end
+
+      describe '#expiration' do
+        it 'parses expiration as Time' do
+          sso_creds = SSOCredentials.new(sso_opts)
+          expect(sso_creds.expiration).to be_a(Time)
+          expect(sso_creds.expiration).to eq(expiration)
         end
       end
     end

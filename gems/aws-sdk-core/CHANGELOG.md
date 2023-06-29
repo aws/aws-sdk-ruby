@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Ensure `SSOCredentials` `#expiration` is a `Time` (#2874)
+
 3.176.0 (2023-06-28)
 ------------------
 
