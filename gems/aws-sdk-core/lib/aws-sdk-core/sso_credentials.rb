@@ -158,7 +158,7 @@ module Aws
         c.secret_access_key,
         c.session_token
       )
-      @expiration = c.expiration
+      @expiration = Time.at(c.expiration / 1000.0)
     end
 
     def sso_cache_file
