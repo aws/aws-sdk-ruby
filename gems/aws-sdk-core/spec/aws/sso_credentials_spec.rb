@@ -135,6 +135,13 @@ module Aws
           sso_creds.credentials
         end
       end
+
+      describe '#expiration' do
+        it 'is a time' do
+          sso_creds = SSOCredentials.new(sso_opts)
+          expect(sso_creds.expiration).to be_a(Time)
+        end
+      end
     end
 
     context 'legacy profile' do

@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Ensure SSO Credential `expiration` is a `Time` (#2874)
+
 3.176.0 (2023-06-28)
 ------------------
 
